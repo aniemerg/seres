@@ -1,16 +1,31 @@
 # Project Onboarding
 
-## Read First
-- `design/memos/memo_a.md` (spec)
-- `design/memos/memo_b.md` (knowledge acquisition)
+## REQUIRED READING (Before Working on Queue)
+
+**You MUST read these documents before working on the queue:**
+
+1. **`design/meta-memo.md`** — Project overview and high-level goals
+2. **`design/memo_a.md`** — Formal specification and design principles
+3. **`design/memo_b.md`** — Knowledge acquisition methodology and constraints
+
+These three documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
+
+## Additional Required Reading
 - `design/build_v0.md` (pipeline/queue/index design)
 - `design/memos/parts_and_labor_guidelines.md` (parts/BOM/labor rules)
 - `README.md` (repo layout + commands)
 
-## How to Work the Queue
-- Queue file: `out/work_queue.jsonl`. Each line is a task with `id`, `kind`, `reason`, `context`.
-- Do not assume the queue is empty; pruning only happens for items marked `resolved`/`superseded`.
-- Sources of queue items (indexer):
+## How to Work the Queue (multi-agent)
+- Queue file: `out/work_queue.jsonl`. IDs are stable: `id = "<gap_type>:<item_id>"` with fields `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.
+- Lease next task: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
+  - Status becomes `leased`; expires to `pending` if TTL lapses.
+- Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name>`
+- Release: `.venv/bin/python -m kbtool queue release --id <gap_type:item_id> --agent <name>`
+- GC (revert expired leases, optionally prune old done): `.venv/bin/python -m kbtool queue gc [--prune-done-older-than N]`
+- List counts: `.venv/bin/python -m kbtool queue ls`
+- Do not edit `work_queue.jsonl` by hand; use the CLI.
+- Pruning: only removes items marked `resolved`/`superseded`; gaps persist until fixes land.
+- Sources of queue items (indexer rebuilds on each run):
   - `referenced_only`: IDs referenced but not defined.
   - `unresolved_ref`: free-text refs.
   - `import_stub`: recipes with empty steps/import variants.
@@ -115,4 +130,5 @@ time_model:
 - Do not hide work: placeholders/imports should queue follow-ups.
 - Prefer consolidation over proliferation (shared parts/process IDs).
 - Estimate masses and times (within 5× is acceptable); avoid nulls.
-- Reference missing processes/items explicitly to surface work.***
+- Reference missing processes/items explicitly to surface work.
+- Avoid collisions: always lease a task before editing; do not modify items you haven’t leased. If two agents touch the same item, reconcile (merge components/notes) rather than overwrite, and leave context in `notes`.

@@ -1,0 +1,23 @@
+id: crushing_and_screening_basic_v0
+kind: process
+name: Crushing and screening (basic)
+layer_tags:
+  - layer_3
+inputs: []
+outputs: []
+requires_ids:
+  - rock_crusher_basic
+  - vibrating_screen_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.4
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: "Crusher and screen energy per kg"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.05
+  notes: "Throughput including loading/screening"
+notes: Size reduction and screening of rock feedstocks to aggregate fractions.

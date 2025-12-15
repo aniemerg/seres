@@ -1,0 +1,28 @@
+id: heat_treatment_cycle_basic_v0
+kind: process
+name: Heat treatment cycle (basic)
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: metal_casting_finished
+    qty: null
+    unit: unit
+outputs:
+  - item_id: metal_casting_finished
+    qty: null
+    unit: unit
+requires_ids:
+  - heat_treatment_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "furnace heating to treatment temperature, soak time, and controlled cooling"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+  notes: "heat-up, soak at temperature, and cool-down cycle time"
+notes: Placeholder heat cycle for metal parts; details (temperature/time) TBD.

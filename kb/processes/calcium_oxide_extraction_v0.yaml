@@ -1,0 +1,28 @@
+id: calcium_oxide_extraction_v0
+kind: process
+name: Calcium oxide extraction (basic)
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: regolith_powder
+    qty: null
+    unit: kg
+outputs:
+  - item_id: calcium_oxide
+    qty: null
+    unit: kg
+requires_ids:
+  - high_temp_furnace
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: "high temperature calcination to decompose calcium-bearing minerals and drive off CO2"
+time_model:
+  type: linear_rate
+  hr_per_kg: 3.0
+  notes: "heating to calcination temperature, soak time, and cool-down"
+notes: Placeholder CaO extraction process; chemistry/energy/time TBD.

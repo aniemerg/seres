@@ -12,6 +12,7 @@ and emits:
 from __future__ import annotations
 
 import json
+import time
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
@@ -21,10 +22,12 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 from . import models
+from .queue_tool import _locked_queue
 
 KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
 WORK_QUEUE = OUT_DIR / "work_queue.jsonl"
+WORK_QUEUE_LOCK = OUT_DIR / "work_queue.lock"
 
 
 def _infer_kind(path: Path, data: dict) -> Optional[str]:
@@ -183,6 +186,7 @@ def build_index() -> Dict[str, dict]:
     referenced_only: Set[str] = set()
     machine_capabilities: Dict[str, List[str]] = {}  # machine_id -> capabilities
     recipe_targets: Set[str] = set()  # items that have recipes
+    invalid_recipes: List[dict] = []
     kb_files = sorted(KB_ROOT.glob("**/*.yaml"))
 
     for path in kb_files:
@@ -361,26 +365,37 @@ def _update_work_queue(
     for ref in unresolved_refs:
         gap_items.append(
             {
-                "id": ref["ref_string"],
+                "id": f"unresolved_ref:{ref['ref_string']}",
                 "kind": "gap",
                 "reason": "unresolved_ref",
                 "context": {"owner_id": ref["owner_id"], "field_path": ref["field_path"]},
+                "item_id": ref["ref_string"],
+                "gap_type": "unresolved_ref",
             }
         )
 
     # Referenced but not defined
     for ref_id in sorted(referenced_only):
         gap_items.append(
-            {"id": ref_id, "kind": "gap", "reason": "referenced_only", "context": {}}
+            {
+                "id": f"referenced_only:{ref_id}",
+                "kind": "gap",
+                "reason": "referenced_only",
+                "context": {},
+                "item_id": ref_id,
+                "gap_type": "referenced_only",
+            }
         )
 
     # Import stubs needing real manufacturing routes
     for stub in import_stubs:
         gap_items.append(
             {
-                "id": stub.get("target_item_id") or stub.get("recipe_id"),
+                "id": f"import_stub:{stub.get('target_item_id') or stub.get('recipe_id')}",
                 "kind": "recipe",
                 "reason": "import_stub",
+                "gap_type": "import_stub",
+                "item_id": stub.get("target_item_id") or stub.get("recipe_id"),
                 "context": {"recipe_id": stub.get("recipe_id"), "variant": stub.get("variant_id")},
             }
         )
@@ -389,9 +404,11 @@ def _update_work_queue(
     for item in items_without_recipes:
         gap_items.append(
             {
-                "id": item["id"],
+                "id": f"no_recipe:{item['id']}",
                 "kind": item["kind"],
                 "reason": "no_recipe",
+                "gap_type": "no_recipe",
+                "item_id": item["id"],
                 "context": {"file": item["file"]},
             }
         )
@@ -400,9 +417,11 @@ def _update_work_queue(
     for mf in missing_fields:
         gap_items.append(
             {
-                "id": mf["owner_id"],
+                "id": f"missing_field:{mf['owner_id']}:{mf['field']}",
                 "kind": mf["owner_kind"],
                 "reason": "missing_field",
+                "gap_type": "missing_field",
+                "item_id": mf["owner_id"],
                 "context": {"field": mf["field"], "file": mf["file"]},
             }
         )
@@ -411,9 +430,11 @@ def _update_work_queue(
     for orph in orphan_resources:
         gap_items.append(
             {
-                "id": orph["id"],
+                "id": f"no_provider_machine:{orph['id']}",
                 "kind": "resource_type",
                 "reason": "no_provider_machine",
+                "gap_type": "no_provider_machine",
+                "item_id": orph["id"],
                 "context": {"needed_by": orph["refs_in"], "file": orph["file"]},
             }
         )
@@ -422,16 +443,57 @@ def _update_work_queue(
     for inv in invalid_recipes:
         gap_items.append(
             {
-                "id": inv.get("id"),
+                "id": f"invalid_recipe_schema:{inv.get('id')}",
                 "kind": "recipe",
                 "reason": "invalid_recipe_schema",
+                "gap_type": "invalid_recipe_schema",
+                "item_id": inv.get("id"),
                 "context": {"file": inv.get("file")},
             }
         )
 
-    with WORK_QUEUE.open("w", encoding="utf-8") as wf:
+    # Merge with existing queue to preserve leases/status
+    # Use file lock to prevent race conditions with concurrent lease operations
+    with _locked_queue():
+        existing: Dict[str, dict] = {}
+        if WORK_QUEUE.exists():
+            with WORK_QUEUE.open("r", encoding="utf-8") as f:
+                for line in f:
+                    try:
+                        obj = json.loads(line)
+                        existing[obj.get("id")] = obj
+                    except Exception:
+                        continue
+
+        merged: List[dict] = []
+        # Track existing leases by item_id to avoid duplicate leasing of related gaps
+        leased_item_ids: Set[str] = set()
+        for obj in existing.values():
+            if obj.get("status") == "leased":
+                iid = obj.get("item_id") or obj.get("id")
+                if iid:
+                    leased_item_ids.add(str(iid))
+        now = time.time()
         for obj in gap_items:
-            wf.write(json.dumps(obj) + "\n")
+            eid = obj["id"]
+            if eid in existing:
+                prev = existing[eid]
+                # Resurface done items if gap persists
+                if prev.get("status") == "done":
+                    obj.update({"status": "pending"})
+                else:
+                    # preserve lease/status if not expired
+                    if prev.get("status") == "leased" and prev.get("lease_expires_at", 0) < now:
+                        prev["status"] = "pending"
+                        prev.pop("lease_id", None)
+                        prev.pop("lease_expires_at", None)
+                    obj = {**obj, **prev}
+            merged.append(obj)
+
+        WORK_QUEUE.parent.mkdir(parents=True, exist_ok=True)
+        with WORK_QUEUE.open("w", encoding="utf-8") as wf:
+            for obj in merged:
+                wf.write(json.dumps(obj) + "\n")
 
 
 def _write_report(

@@ -1,0 +1,26 @@
+id: surface_finishing_v0
+kind: process
+name: Surface finishing
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: rough_part
+    qty: null
+    unit: kg
+outputs:
+  - item_id: finished_part
+    qty: null
+    unit: kg
+requires_ids:
+  - surface_grinder
+  - polishing_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 1.0
+time_model:
+  total_time_hr: 2.0
+notes: "Surface finishing operations to achieve desired surface quality, roughness, and appearance. Includes grinding, polishing, buffing, honing, and lapping. Removes machining marks, improves surface roughness, and achieves dimensional tolerances. Critical for precision mating surfaces, optical components, and aesthetic finishes."

@@ -1,0 +1,24 @@
+id: recipe_glass_raw_materials_v0
+target_item_id: glass_raw_materials
+variant_id: v0
+steps:
+  - process_id: mineral_processing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Process anorthite ore to concentrate silica and calcium minerals"
+  - process_id: crushing_and_grinding_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.8
+    notes: "Crush and grind minerals to fine powder"
+  - process_id: mixing_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Mix glass-forming oxides in desired proportions for glass production"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Verify composition and particle size"
+assumptions: "Glass raw materials from lunar anorthite (CaAl2Si2O8). Provides silica, calcium, and aluminum for glass production. Used for fused silica glass in thermionic vacuum tubes. See design/solar_thermionics_report.md for lunar glass sourcing."
+notes: "Preparation of glass raw materials from anorthite. Total processing time ~4.3 hours. Critical feedstock for thermionic converter glass envelopes."

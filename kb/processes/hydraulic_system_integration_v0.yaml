@@ -1,0 +1,22 @@
+id: hydraulic_system_integration_v0
+kind: process
+name: Hydraulic system integration
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - hydraulic_assembly_tools
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.1
+  notes: "minimal energy for assembly and pressure testing"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+  notes: "install pump, cylinders, valves, hoses, fittings; fill and bleed system; pressure test"
+notes: Install and integrate hydraulic systems including pumps, cylinders, valves, hoses, and controls. Includes fluid filling, bleeding, and pressure testing.

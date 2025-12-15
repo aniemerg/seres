@@ -1,0 +1,19 @@
+id: recipe_tracking_control_unit_v0
+target_item_id: tracking_control_unit
+variant_id: v0
+steps:
+  - process_id: control_panel_assembly_v0
+    est_time_hr: 1.5
+    machine_hours: 0.5
+    labor_hours: 1.5
+    notes: "Assemble enclosure, wiring, and connectors for tracking controller."
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Install control electronics, sun/position sensors, and power distribution."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Bench test tracking functions, sensor feedback, and actuator outputs."
+assumptions: Compute module imported; sensors available; enclosure fabricated locally.
+notes: Control unit for solar tracking with integrated sensors and power/control electronics.

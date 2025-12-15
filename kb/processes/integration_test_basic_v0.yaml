@@ -1,0 +1,20 @@
+id: integration_test_basic_v0
+kind: process
+name: Integration test (basic)
+layer_tags:
+  - layer_7
+inputs: []
+outputs: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.15
+  notes: "testing equipment, instrumentation, and powered test loads"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.6
+  notes: "functional testing, load testing, and verification of integrated systems"
+notes: Simple functional check after assembly/import; placeholder timing.

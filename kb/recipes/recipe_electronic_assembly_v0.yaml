@@ -1,0 +1,22 @@
+id: recipe_electronic_assembly_v0
+target_item_id: electronic_assembly
+variant_id: v0
+steps:
+  - process_id: pcb_assembly_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Populate PCB with electronic components via soldering or surface mount"
+  - process_id: soldering_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Solder components and wire connections"
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Install PCB in enclosure with connectors and mounting hardware"
+  - process_id: electrical_testing_and_burn_in_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Functional test and burn-in to verify operation and screen for early failures"
+assumptions: Electronic assembly from populated PCB and enclosure. Components (ICs, resistors, capacitors) are imported initially. Local PCB fabrication and assembly capability develops over time.
+notes: Generic electronic assembly placeholder for control boards, power supplies, and electronic modules. Critical for automation and process control systems.

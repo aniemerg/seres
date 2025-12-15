@@ -1,0 +1,25 @@
+id: recipe_nickel_anode_plate_v0
+target_item_id: nickel_anode_plate
+variant_id: v0
+steps:
+  - process_id: sheet_metal_fabrication_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Cut and form nickel sheet to anode plate dimensions"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.5
+    notes: "Machine electrical connection points and mounting holes, ensure flat surface for electron collection"
+  - process_id: surface_finishing_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Polish nickel surface to improve electron collection efficiency and reduce resistance"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Verify surface finish, dimensions, and electrical connectivity"
+assumptions: "Nickel anode for thermionic converter. Sourced from NiFe meteorite material using Mond carbonyl process. High-purity nickel provides good electron collection with low work function. See: design/solar_thermionics_report.md"
+notes: "Nickel anode plate for thermionic power conversion. Collects thermionically emitted electrons from heated tungsten cathode in vacuum tube converter. Total fabrication time ~4 hours."

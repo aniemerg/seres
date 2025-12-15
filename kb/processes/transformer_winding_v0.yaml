@@ -1,0 +1,32 @@
+id: transformer_winding_v0
+kind: process
+name: Transformer winding
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: transformer_core
+    qty: 1
+    unit: unit
+  - item_id: magnet_wire_copper
+    qty: null
+    unit: kg
+outputs:
+  - item_id: wound_transformer
+    qty: 1
+    unit: unit
+requires_ids:
+  - coil_winding_machine
+  - turn_counter_module
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.5
+  notes: "Winding machine motor power"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Wind primary and secondary coils, layer insulation, test"
+notes: Transformer winding process. Wind copper wire coils onto laminated core with precise turn counts and layer insulation for voltage transformation.

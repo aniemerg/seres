@@ -1,0 +1,29 @@
+id: potting_and_encapsulation_v0
+kind: process
+name: Potting and encapsulation
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: kg
+  - item_id: potting_compound
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: potted_electronic_assembly
+    qty: 1.5
+    unit: kg
+requires_ids:
+  - encapsulation_station
+  - curing_oven
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 1.5
+time_model:
+  total_time_hr: 4.0
+notes: "Potting and encapsulation of electronic assemblies for environmental protection. Process: (1) Place electronics in mold or housing, (2) Mix two-part epoxy, polyurethane, or silicone potting compound, (3) Pour or inject compound to fully encapsulate components, (4) Degas in vacuum to remove air bubbles, (5) Cure at room temperature or elevated temperature (50-100°C). Provides moisture protection, vibration damping, electrical insulation, and thermal management. Used for sensors, power supplies, motor controllers, and harsh environment electronics. Curing time 2-24 hours depending on compound type."

@@ -1,0 +1,24 @@
+id: recipe_sintered_tungsten_part_v0
+target_item_id: sintered_tungsten_part
+variant_id: v0
+steps:
+  - process_id: pressing_operations_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 0.8
+    notes: "Press tungsten powder into desired part shape (green compact)"
+  - process_id: tungsten_sintering_high_temp_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    labor_hours: 1.0
+    notes: "Sinter tungsten compact at 2700-3000°C under inert atmosphere to achieve high density"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Machine sintered part to final dimensions if needed"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Verify part density and dimensions"
+assumptions: "Sintered tungsten part for thermionic cathodes and high-temperature applications. Manufactured via powder metallurgy and high-temperature sintering at 2700-3000°C. Critical for thermionic power converter production. See design/solar_thermionics_report.md for specifications."
+notes: "Manufacturing of sintered tungsten part. Total processing time ~11.5 hours. Critical component for thermionic cathode production in solar power system."

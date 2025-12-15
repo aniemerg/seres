@@ -1,0 +1,22 @@
+id: recipe_spinneret_heating_module_v0
+target_item_id: spinneret_heating_module
+variant_id: v0
+steps:
+  - process_id: spool_winding_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Wind resistance wire heating elements"
+  - process_id: ceramic_coating_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Apply ceramic insulation to heating elements"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Machine metal housing and mounting brackets"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Mount heating elements in housing, wire temperature controller, test"
+assumptions: Resistance wire elements with ceramic insulation in machined metal housing. Includes temperature control electronics. Total mass ~8 kg.
+notes: Heating module for spinneret fiber extrusion systems. Provides controlled heating for polymer melting.

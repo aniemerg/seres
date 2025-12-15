@@ -1,0 +1,24 @@
+id: welding_basic_v0
+kind: process
+name: Basic welding
+layer_tags:
+  - layer_6
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - welding_power_supply
+  - welding_tools_set
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "welding arc power and wire feed for structural welding"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.0
+  notes: "setup, tack welding, full welding passes, cleanup"
+notes: Basic arc welding process for joining steel components. Includes GMAW (MIG) or SMAW (stick) welding for structural fabrication and assembly.

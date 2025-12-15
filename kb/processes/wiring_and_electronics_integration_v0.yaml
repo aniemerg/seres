@@ -1,0 +1,23 @@
+id: wiring_and_electronics_integration_v0
+kind: process
+name: Wiring and electronics integration
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - soldering_station
+  - wire_crimping_tools
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: "soldering irons, crimping tools, and testing equipment"
+time_model:
+  type: linear_rate
+  hr_per_kg: 3.0
+  notes: "labor-intensive wiring, termination, routing, and connectivity testing"
+notes: Install and integrate electronic components, sensors, wiring harnesses, and control systems into mechanical assemblies.

@@ -2,13 +2,25 @@
 
 Minimal setup to run the KB indexer and iterate on YAML data.
 
+## ⚠️ REQUIRED READING BEFORE WORKING ON QUEUE
+
+**Before working on the work queue, you MUST read these documents:**
+1. `design/meta-memo.md` — Project overview and high-level goals
+2. `design/memo_a.md` — Formal specification and design principles
+3. `design/memo_b.md` — Knowledge acquisition methodology and constraints
+
+See `docs/README.md` for complete onboarding documentation.
+
 ## Quick start
 - Install deps with uv: `uv sync` (creates `.venv`).
 - Run indexer: `.venv/bin/python -m kbtool index`
   - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
 - Queue helpers:
-  - Prune (only explicit resolved/superseded): `.venv/bin/python -m kbtool queue prune`
-  - Pop next item: `.venv/bin/python -m kbtool queue pop`
+  - Lease next item: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900]`
+  - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name>`
+  - GC expired leases: `queue gc`
+  - Prune explicit resolved/superseded: `queue prune`
+  - List counts: `queue ls`
 - See `docs/` for onboarding and workflow details.
 
 ## Repo layout (current)

@@ -1,0 +1,31 @@
+id: seal_installation_v0
+kind: process
+name: Seal installation
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: hydraulic_seals_set
+    qty: null
+    unit: unit
+  - item_id: component_to_seal
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: sealed_component
+    qty: 1
+    unit: unit
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Minimal energy for hand tools"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "Install O-rings, seals, and gaskets"
+notes: Installation of hydraulic seals, O-rings, and gaskets in cylinders, pumps, and other hydraulic components.

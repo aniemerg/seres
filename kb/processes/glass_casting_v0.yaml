@@ -1,0 +1,32 @@
+id: glass_casting_v0
+kind: process
+name: Glass casting
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: glass_raw_materials
+    qty: null
+    unit: kg
+outputs:
+  - item_id: cast_glass_parts
+    qty: null
+    unit: kg
+requires_ids:
+  - furnace_high_temp
+  - casting_mold_set
+  - crucible_graphite
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: "Melting glass at 1400-1600°C plus holding time"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+  setup_hr: 1.0
+  notes: "Heat-up, melting, pouring, annealing cycle"
+notes: Glass casting process for making lenses, windows, and glass components. Melt glass in crucible, pour into molds, controlled cooling to prevent cracking.

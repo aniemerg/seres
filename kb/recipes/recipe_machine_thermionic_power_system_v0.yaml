@@ -1,0 +1,39 @@
+id: recipe_machine_thermionic_power_system_v0
+target_item_id: thermionic_power_system_v0
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    machine_hours: 3.0
+    notes: "Assemble concentrator frame structure and install 4x Fresnel lens segments with proper spacing"
+  - process_id: assembly_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Mount thermal receiver assembly at focal point of concentrator"
+  - process_id: concentrator_alignment_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Align Fresnel lens segments and thermal receiver for optimal solar concentration"
+  - process_id: assembly_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Install thermionic converter unit at thermal receiver output"
+  - process_id: assembly_basic_v0
+    est_time_hr: 5.0
+    labor_hours: 5.0
+    notes: "Integrate heat pipes and thermal management system for waste heat rejection"
+  - process_id: wiring_and_electronics_integration_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Install power conditioning equipment and electrical connections from converter to output terminals"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Test concentrator focusing, verify thermionic converter operation, and measure power output"
+  - process_id: inspection_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Verify system alignment, thermal performance, and electrical safety"
+assumptions: "Complete solar thermionic power system integrating concentrator, converter, and thermal management. 10-30% solar-to-electric efficiency depending on optimization level. See: design/solar_thermionics_report.md"
+notes: "Full system assembly for solar thermionic power generation. Integrates Fresnel lens concentrator (2700°C), vacuum tube thermionic converter, heat rejection, and power conditioning. Total assembly time ~35-40 hours. Dual-use concentrator can also serve foundry operations. See: design/solar_thermionics_report.md for complete technical specifications."

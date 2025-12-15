@@ -1,0 +1,22 @@
+id: glass_refining_basic_v0
+kind: process
+name: Glass refining (basic)
+layer_tags:
+  - layer_5
+inputs: []
+outputs: []
+requires_ids:
+  - glass_furnace
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.3
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: "Fining/refining energy for degassing and clarification"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Refining hold time"
+notes: Basic glass/basalt melt refining to remove bubbles and homogenize melt before forming.

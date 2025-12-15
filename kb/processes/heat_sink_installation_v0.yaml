@@ -1,0 +1,31 @@
+id: heat_sink_installation_v0
+kind: process
+name: Heat sink installation
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: electronic_component_or_module
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink
+    qty: 1.0
+    unit: unit
+  - item_id: thermal_interface_material
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: component_with_heat_sink
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.3
+    unit: hr
+energy_model:
+  total_energy_kwh: 0.1
+time_model:
+  total_time_hr: 0.3
+notes: "Installation of heat sink for thermal management of electronic components. Process: (1) Clean component and heat sink mating surfaces, (2) Apply thermal interface material (thermal paste, thermal pad, or phase-change material), (3) Mount heat sink using spring clips, screws, or adhesive, (4) Verify good thermal contact and mechanical retention. Thermal interface fills microscopic air gaps to improve heat transfer. Used for power transistors, voltage regulators, CPUs, power supplies, and motor controllers. Reduces junction temperature and increases component reliability. Proper installation critical for thermal performance."

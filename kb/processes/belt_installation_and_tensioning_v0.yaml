@@ -1,0 +1,28 @@
+id: belt_installation_and_tensioning_v0
+kind: process
+name: Belt installation and tensioning
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: belt_and_pulley_set
+    qty: null
+    unit: unit
+outputs:
+  - item_id: installed_belt_drive
+    qty: null
+    unit: unit
+requires_ids:
+  - hand_tools_mechanical
+  - tension_gauge
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: boundary
+  notes: "Manual assembly process, negligible energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Mount pulleys, install belt, adjust motor position or idler for proper tension, check alignment"
+notes: Install and tension drive belts on machinery. Mount pulleys on shafts, install V-belt or flat belt, adjust tension by moving motor or idler pulley, verify alignment to prevent premature wear. Used for power transmission in lathes, mills, fans, and other rotating equipment.

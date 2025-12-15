@@ -1,0 +1,33 @@
+id: electronics_assembly_v0
+kind: process
+name: Electronics assembly
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: pcb_populated
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: null
+    unit: unit
+outputs:
+  - item_id: assembled_electronics
+    qty: 1
+    unit: unit
+requires_ids:
+  - soldering_station
+  - assembly_tools_basic
+  - test_equipment_electronics
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.5
+  notes: "Soldering and testing equipment power"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "Mount components, solder, inspect joints, functional test"
+notes: General electronics assembly process. Mounts components on PCB, solders connections, inspects quality, and performs functional testing.

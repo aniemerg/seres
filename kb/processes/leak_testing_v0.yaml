@@ -1,0 +1,22 @@
+id: leak_testing_v0
+kind: process
+name: Leak testing
+layer_tags:
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - leak_test_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: "pressure testing equipment, leak detection sensors, and compressors"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.8
+  notes: "pressurization, soak time, leak detection, and depressurization"
+notes: Pressure testing and leak detection for assembled systems. Tests connections, valves, and sealed joints for leak-tight operation using pressure or vacuum methods.

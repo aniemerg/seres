@@ -1,0 +1,22 @@
+id: recipe_circulation_pump_coolant_v0
+target_item_id: circulation_pump_coolant
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Cast pump housing and impeller"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Machine pump internals, impeller bore, shaft, and bearing surfaces"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble motor, impeller, shaft, seals, and housing"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Test pump flow rate, pressure, and check for leaks"
+assumptions: Centrifugal pump with small electric motor. For coolant circulation in thermal management systems.
+notes: Coolant circulation pump for heat transport loops. Maintains coolant flow for heat rejection.

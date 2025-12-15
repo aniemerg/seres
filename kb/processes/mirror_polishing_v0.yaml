@@ -1,0 +1,31 @@
+id: mirror_polishing_v0
+kind: process
+name: Mirror polishing
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: metal_sheet
+    qty: null
+    unit: kg
+outputs:
+  - item_id: parabolic_mirror_segment
+    qty: null
+    unit: unit
+requires_ids:
+  - surface_grinder
+  - polishing_station
+  - optical_metrology_tools
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 3.0
+  notes: "Grinding and polishing operations for optical surface"
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: "Progressive grinding and polishing to achieve optical surface finish and parabolic shape"
+notes: "Mirror polishing process for solar concentrator segments. Achieves 90% reflectivity for nickel, 75% for steel. Parabolic shape formed through precision grinding and optical metrology. Alternative to Fresnel lenses for solar concentration. Used in thermionic power systems. See: design/solar_thermionics_report.md"

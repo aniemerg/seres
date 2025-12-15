@@ -1,0 +1,23 @@
+id: coil_winding_motor_v0
+kind: process
+name: Motorized coil winding
+layer_tags:
+  - layer_6
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - coil_winding_machine
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.3
+  notes: "motor drive for automated wire tensioning and winding with turn counter"
+time_model:
+  type: linear_rate
+  hr_per_kg: 3.0
+  notes: "automated winding with tension control for consistent coil quality"
+notes: Automated coil winding process using motorized winding machine. Provides consistent wire tension, precise turn count, and layer control. Used for transformer coils, motor windings, inductors, and solenoids. Much faster and more consistent than manual winding.

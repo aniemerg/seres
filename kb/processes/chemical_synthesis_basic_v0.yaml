@@ -1,0 +1,23 @@
+id: chemical_synthesis_basic_v0
+kind: process
+name: Chemical synthesis (basic)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs: []
+outputs: []
+requires_ids:
+  - chemical_reactor_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "reactor heating, mixing, and temperature control for chemical reactions"
+time_model:
+  type: linear_rate
+  hr_per_kg: 4.0
+  notes: "batch reaction time including reagent addition, reaction, and product recovery"
+notes: Basic chemical synthesis process for producing industrial chemicals, reagents, and materials. Includes mixing, heating, reaction control, and product separation. Used for producing acids, bases, salts, solvents, and intermediate chemicals.

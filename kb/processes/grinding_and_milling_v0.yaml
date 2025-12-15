@@ -1,0 +1,22 @@
+id: grinding_and_milling_v0
+kind: process
+name: Grinding and milling (basic)
+layer_tags:
+  - layer_3
+inputs: []
+outputs: []
+requires_ids:
+  - ball_mill
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.25
+  notes: "Grinding/milling energy per kg"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.08
+  notes: "Throughput rate including load/unload"
+notes: General grinding/milling process for reducing particle size of feedstocks.

@@ -1,0 +1,27 @@
+id: alignment_and_testing_basic_v0
+kind: process
+name: Alignment and testing (basic)
+layer_tags:
+  - layer_7
+  - layer_8
+inputs:
+  - item_id: assembled_equipment
+    qty: null
+    unit: unit
+outputs:
+  - item_id: aligned_tested_equipment
+    qty: null
+    unit: unit
+requires_ids:
+  - alignment_tools
+  - test_equipment_electronics
+  - measurement_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 3.0
+notes: "Basic alignment and functional testing of assembled equipment. Includes mechanical alignment, electrical testing, and performance verification. Ensures equipment meets specifications before deployment. Used in final assembly and commissioning of machines and systems."

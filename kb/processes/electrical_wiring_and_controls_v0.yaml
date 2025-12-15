@@ -1,0 +1,29 @@
+id: electrical_wiring_and_controls_v0
+kind: process
+name: Electrical wiring and controls
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: electrical_wire_and_connectors
+    qty: null
+    unit: kg
+  - item_id: control_components
+    qty: null
+    unit: unit
+outputs:
+  - item_id: wired_electrical_system
+    qty: null
+    unit: unit
+requires_ids:
+  - hand_tools_electrical
+  - test_equipment_electronics
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 3.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 4.0
+notes: "Electrical wiring and control system installation. Includes running wires, installing conduit, mounting control panels, connecting switches and sensors, and testing circuits. Used in machine assembly, building electrical, and equipment integration. Follows electrical codes and safety practices."

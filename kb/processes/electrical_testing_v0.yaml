@@ -1,0 +1,29 @@
+id: electrical_testing_v0
+kind: process
+name: Electrical testing
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: assembled_electrical_system
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: tested_electrical_system
+    qty: 1
+    unit: unit
+requires_ids:
+  - electrical_test_equipment
+  - multimeter_set
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.2
+  notes: "Test equipment power consumption"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Continuity checks, insulation testing, functional verification"
+notes: Electrical testing and verification process. Checks wiring continuity, insulation resistance, proper grounding, and functional operation.

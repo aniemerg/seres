@@ -1,0 +1,28 @@
+id: glass_melting_v0
+kind: process
+name: Glass melting (basic)
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: glass_batch_mix
+    qty: null
+    unit: kg
+outputs:
+  - item_id: molten_glass
+    qty: null
+    unit: kg
+requires_ids:
+  - glass_furnace
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "Melting and refining energy per kg of batch"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+  notes: "Heat-up, melt/refine, and hold"
+notes: Basic glass melting/refining step to produce molten glass for casting or forming processes.

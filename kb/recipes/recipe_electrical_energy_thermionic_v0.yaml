@@ -1,0 +1,18 @@
+id: recipe_electrical_energy_thermionic_v0
+target_item_id: electrical_energy
+variant_id: thermionic_v0
+steps:
+  - process_id: solar_power_generation_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Generate thermal input
+  - process_id: power_conditioning_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Condition thermionic output
+  - process_id: power_distribution_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Distribute electrical output
+assumptions: Thermionic variant placeholder leveraging existing processes; specific thermionic converter not modeled.
+notes: Placeholder variant; replace with detailed thermionic converter process when available.

@@ -1,0 +1,30 @@
+id: electrical_testing_basic_v0
+kind: process
+name: Electrical testing (basic)
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: assembled_electrical_equipment
+    qty: null
+    unit: unit
+outputs:
+  - item_id: tested_electrical_equipment
+    qty: null
+    unit: unit
+requires_ids:
+  - multimeter_set
+  - power_supply_benchtop
+  - oscilloscope_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Test equipment and power supply energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Continuity test, resistance measurement, voltage/current verification, functional test"
+notes: Basic electrical testing of assembled equipment. Verify continuity, measure resistance and voltage, check polarity, functional testing. Used for quality control of electrical assemblies, motors, transformers, and control systems.

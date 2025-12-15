@@ -1,0 +1,33 @@
+id: recipe_lathe_bed_and_headstock_v0
+target_item_id: lathe_bed_and_headstock
+variant_id: v0
+steps:
+  - process_id: casting_basic_v0
+    est_time_hr: 30.0
+    machine_hours: 25.0
+    labor_hours: 20.0
+    notes: "Cast lathe bed from cast iron (~400-450 kg) with integral ways and headstock mounting area; allow extended cooling and stress relieving (days to weeks)"
+  - process_id: welding_structural_v0
+    est_time_hr: 15.0
+    machine_hours: 12.0
+    labor_hours: 12.0
+    notes: "Weld steel reinforcements to bed if fabricated design; fabricate and weld headstock housing from steel plate"
+  - process_id: machining_precision_v0
+    est_time_hr: 60.0
+    machine_hours: 60.0
+    labor_hours: 40.0
+    notes: "Precision machine bed ways (V-ways and flat ways) to extremely tight tolerances (±0.01 mm), machine headstock bore for spindle bearings, drill/tap mounting holes"
+  - process_id: precision_alignment_and_leveling_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Scrape ways by hand to achieve final precision and straightness (±0.005 mm over full length), verify parallelism of ways"
+  - process_id: surface_finishing_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 3.0
+    notes: "Grind and polish critical surfaces, apply protective coating (paint or oil) to prevent rust"
+  - process_id: inspection_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Verify straightness, flatness, and parallelism of ways using precision straight edge and autocollimator; check headstock bore concentricity"
+assumptions: "Precision lathe bed and headstock assembly. 500 kg cast iron bed with precision-ground ways and integrated or mounted headstock housing. Bed length typically 1-2 meters with V-ways and flat ways for carriage and tailstock travel. Headstock houses spindle bearings and drive system. Requires extreme precision - way straightness and flatness within ±0.005-0.01 mm over full length, parallelism between ways within ±0.01 mm. Critical component determining lathe accuracy. Cast iron chosen for vibration damping and dimensional stability."
+notes: "Manufacturing of lathe bed and headstock. Total fabrication time ~120 hours. Extremely demanding precision machining and hand scraping required for machine tool accuracy. Casting must be stress-relieved for dimensional stability. Final precision achieved by hand scraping ways - traditional machine tool building technique. Most time-consuming and skill-intensive component of lathe construction. Accuracy of this component determines turning precision of entire lathe."

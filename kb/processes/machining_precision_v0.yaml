@@ -1,0 +1,37 @@
+id: machining_precision_v0
+kind: process
+name: Precision machining
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: steel_stock
+    qty: null
+    unit: kg
+outputs:
+  - item_id: machined_steel_part_precision
+    qty: null
+    unit: kg
+    waste_fraction: 0.3
+requires_ids:
+  - precision_lathe
+  - milling_machine_cnc
+  - surface_grinder
+  - coordinate_measuring_machine
+  - precision_tooling_set
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+  - resource_type: cutting_fluid
+    amount: null
+    unit: L
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: "Higher power and longer cycle times for precision cuts and surface finishes"
+time_model:
+  type: linear_rate
+  hr_per_kg: 3.0
+  setup_hr: 1.0
+  notes: "Slower feeds/speeds for tight tolerances (±0.005 mm), multiple finishing passes, CMM inspection"
+notes: Precision machining for tight tolerance parts (±0.005 mm). Includes CNC turning, milling, grinding, and dimensional inspection. Used for bearing surfaces, mating components, and precision mechanisms.

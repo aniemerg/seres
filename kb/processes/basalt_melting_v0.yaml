@@ -1,0 +1,28 @@
+id: basalt_melting_v0
+kind: process
+name: Basalt melting (basic)
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: basalt_aggregate
+    qty: null
+    unit: kg
+outputs:
+  - item_id: molten_basalt
+    qty: null
+    unit: kg
+requires_ids:
+  - glass_furnace
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: "Melting basalt batch energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "Heat-up and melt cycle"
+notes: Melts basalt aggregate for casting or fiberizing processes.

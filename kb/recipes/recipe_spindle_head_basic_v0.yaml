@@ -1,0 +1,30 @@
+id: recipe_spindle_head_basic_v0
+target_item_id: spindle_head_basic
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Cast spindle housing from steel (approx 70 kg raw for 60 kg finished)"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Machine bearing journals, taper bore, mounting faces to precision tolerances"
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Grind critical bearing surfaces and taper to final tolerance"
+  - process_id: bearing_installation_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Install precision spindle bearings with thermal fit or press fit"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble drive pulley, seals, and mounting hardware"
+  - process_id: balancing_dynamic_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Dynamic balance spindle assembly to minimize runout"
+assumptions: Precision spindle with R8 or MT taper. Bearings installed with thermal/press fit.
+notes: Precision machining spindle for general milling. Requires tight bearing tolerances and dynamic balancing.

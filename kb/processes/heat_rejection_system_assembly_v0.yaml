@@ -1,0 +1,34 @@
+id: heat_rejection_system_assembly_v0
+kind: process
+name: Heat rejection system assembly
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: radiator_panel
+    qty: null
+    unit: unit
+  - item_id: coolant_piping
+    qty: null
+    unit: kg
+outputs:
+  - item_id: heat_rejection_system
+    qty: 1
+    unit: unit
+requires_ids:
+  - welding_power_supply
+  - assembly_tools_basic
+  - leak_test_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 2.0
+  notes: "Assembly and welding operations, leak testing"
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: "Assembly of radiator panels, piping, pumps, leak testing"
+notes: Assembly of radiative cooling system for heat rejection. Includes radiator panels, coolant loops, and thermal management components.

@@ -1,0 +1,33 @@
+id: welding_and_fabrication_v0
+kind: process
+name: Welding and fabrication
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: null
+    unit: kg
+outputs:
+  - item_id: welded_fabrications
+    qty: null
+    unit: kg
+requires_ids:
+  - welding_power_supply
+  - metal_shear_or_saw
+  - press_brake_or_roller
+  - filler_material
+  - fixturing_table
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: "Combined cutting, forming, and welding operations"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.5
+  notes: "Includes cutting, bending, fitting, welding, and cleanup"
+notes: Combined sheet metal fabrication and welding process for creating structural assemblies, tanks, frames, and enclosures.

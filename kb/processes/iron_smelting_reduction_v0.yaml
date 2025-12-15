@@ -1,0 +1,32 @@
+id: iron_smelting_reduction_v0
+kind: process
+name: Iron smelting (reduction)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 2.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: iron_pig_or_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: slag
+    qty: 0.8
+    unit: kg
+requires_ids:
+  - blast_furnace_or_smelter
+  - crucible_refractory
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 8.0
+time_model:
+  total_time_hr: 4.0
+notes: "Iron smelting via carbothermic reduction. Reduces iron oxide (Fe2O3/FeO) or ilmenite (FeTiO3) using carbon at 1200-1600°C. Produces molten iron and slag. Typical reaction: Fe2O3 + 3C → 2Fe + 3CO. On Moon, can use ilmenite from regolith or iron from meteorites. Recovery ~50% by mass."

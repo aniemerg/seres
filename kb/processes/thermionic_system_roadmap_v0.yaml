@@ -1,0 +1,231 @@
+id: thermionic_system_roadmap_v0
+kind: process
+name: "Solar Thermionic Power System - Implementation Roadmap"
+layer_tags:
+  - layer_8
+
+# IMPORTANT: This is a roadmap/stub file to seed the work queue.
+# Technical specifications in: design/solar_thermionics_report.md
+# Implementation plan in: .claude/plans/bright-wondering-pearl.md
+
+inputs:
+  - item_id: solar_irradiance
+    qty: null
+    unit: kWh
+
+outputs:
+  - item_id: electrical_energy
+    qty: null
+    unit: kWh
+
+# All items needed for complete thermionic power system
+# When indexer runs, these will create work queue items for workers to complete
+requires_ids:
+  # === MATERIALS (Layer 0) ===
+  # Source: design/solar_thermionics_report.md - "Lunar Materials & Manufacturing" section
+  - calcium_oxide                    # CaO from anorthite for cathode coatings
+  - fused_silica_glass               # Glass from anorthite for vacuum envelopes
+  - tungsten_powder                  # From NiFe meteorites for cathodes
+  - nickel_sheet                     # From meteorites for anodes/reflectors
+  - concentrated_solar_thermal       # Intermediate thermal energy from concentrator
+
+  # === SOLAR CONCENTRATOR PARTS (Layer 0) ===
+  # Source: design/solar_thermionics_report.md - "Solar Concentrator Options" section
+  - fresnel_lens_segment             # Cast glass lens, 2700°C concentration capability
+  - parabolic_mirror_segment         # Alternative: polished Ni/steel, 1600°C capability
+  - concentrator_frame_structure     # Steel/aluminum mount structure
+  - concentrator_tracking_mechanism  # Optional dual-axis tracker
+  - thermal_receiver_assembly        # Heat collection and focusing structure
+
+  # === THERMIONIC CONVERTER PARTS (Layer 0) ===
+  # Source: design/solar_thermionics_report.md - "All Materials Available from Lunar Resources"
+  - tungsten_cathode_coated          # Sintered tungsten with CaO coating
+  - nickel_anode_plate               # Electron collector
+  - fused_silica_envelope            # Vacuum tube glass shell
+  - vacuum_seal_assembly             # Hermetic seals and feedthroughs
+  - cathode_heating_element          # Optional pre-heater for startup
+  - converter_housing_assembly       # Thermal insulation and mounting
+  - heat_rejection_radiator          # Radiator panels for waste heat
+  - power_output_terminals           # Electrical connections and conditioning
+
+  # === MACHINES (Layer 1) ===
+  # Source: design/solar_thermionics_report.md - "System Architecture" section
+  - solar_concentrator_fresnel_v0    # Fresnel lens concentrator (dual-use: power + foundry)
+  - thermionic_converter_v0          # Vacuum tube converter array, 10-30% efficiency
+  - thermionic_power_system_v0       # Complete integrated power system
+
+  # === MATERIAL EXTRACTION PROCESSES ===
+  # Source: design/solar_thermionics_report.md - "Chemical Processing for Materials"
+  - calcium_oxide_extraction_v0      # Carbothermal reduction from anorthite
+  - fused_silica_production_v0       # Acid leaching + fusion from anorthite
+  - tungsten_extraction_meteorite_v0 # Magnetic separation + sintering from meteorites
+  - nickel_extraction_meteorite_v0   # Mond carbonyl process from meteorites
+
+  # === COMPONENT MANUFACTURING PROCESSES ===
+  # Source: design/solar_thermionics_report.md - multiple sections
+  - fresnel_lens_casting_v0          # Precision glass casting with grinding
+  - mirror_polishing_v0              # Polishing for 90% Ni or 75% steel reflectivity
+  - vacuum_tube_assembly_v0          # Hermetic sealing under vacuum
+  - cathode_coating_application_v0   # Sinter tungsten + apply CaO coating
+  - concentrator_alignment_v0        # Stewart platform calibration
+  - heat_rejection_system_assembly_v0 # Radiative cooling system assembly
+
+  # === POWER GENERATION PROCESSES ===
+  # Source: design/solar_thermionics_report.md - "Operating Principle"
+  - solar_thermal_concentration_v0   # 1600-2700°C solar concentration
+  - thermionic_power_generation_v0   # Thermionic emission → electrical power
+
+  # === RECIPES: MATERIALS ===
+  - recipe_calcium_oxide_v0
+  - recipe_fused_silica_glass_v0
+  - recipe_tungsten_powder_v0
+  - recipe_nickel_sheet_v0
+  - recipe_concentrated_solar_thermal_v0
+
+  # === RECIPES: CONCENTRATOR PARTS ===
+  - recipe_fresnel_lens_segment_v0
+  - recipe_parabolic_mirror_segment_v0
+  - recipe_concentrator_frame_structure_v0
+  - recipe_concentrator_tracking_mechanism_v0
+  - recipe_thermal_receiver_assembly_v0
+
+  # === RECIPES: CONVERTER PARTS ===
+  - recipe_tungsten_cathode_coated_v0
+  - recipe_nickel_anode_plate_v0
+  - recipe_fused_silica_envelope_v0
+  - recipe_vacuum_seal_assembly_v0
+  - recipe_cathode_heating_element_v0
+  - recipe_converter_housing_assembly_v0
+  - recipe_heat_rejection_radiator_v0
+  - recipe_power_output_terminals_v0
+
+  # === RECIPES: MACHINES ===
+  - recipe_machine_solar_concentrator_fresnel_v0
+  - recipe_machine_thermionic_converter_v0
+  - recipe_machine_thermionic_power_system_v0
+
+  # === RECIPES: POWER GENERATION ===
+  - recipe_electrical_energy_thermionic_v0
+
+  # === BOMS ===
+  - bom_solar_concentrator_fresnel_v0
+  - bom_thermionic_converter_v0
+  - bom_thermionic_power_system_v0
+
+  # === RESOURCES ===
+  - solar_concentrator_fresnel
+  - thermionic_converter
+  - thermionic_power_generation
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.0
+  notes: "Net energy producer - this is a roadmap file, not a real process"
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.0
+  notes: "Roadmap stub - no actual time model"
+
+notes: |
+  ═══════════════════════════════════════════════════════════════════════════
+  THERMIONIC POWER SYSTEM IMPLEMENTATION ROADMAP
+  ═══════════════════════════════════════════════════════════════════════════
+
+  PURPOSE: This file seeds the work queue with all items needed for the
+  complete solar thermionic power generation system. When the indexer runs,
+  all items listed in requires_ids will appear as "referenced_only" gaps,
+  creating work queue items for workers to complete.
+
+  ═══════════════════════════════════════════════════════════════════════════
+  CRITICAL DOCUMENTS FOR WORKERS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  📋 TECHNICAL SPECIFICATIONS:
+     → design/solar_thermionics_report.md
+
+     This comprehensive report contains:
+     - Technology overview and operating principles
+     - Performance characteristics (10-30% conversion efficiency)
+     - Complete materials list with lunar sources
+     - Chemical processing equations
+     - Manufacturing procedures
+     - System architecture
+     - References to source papers
+
+  📋 IMPLEMENTATION PLAN:
+     → .claude/plans/bright-wondering-pearl.md
+
+     This detailed plan contains:
+     - All 67 files to create (broken down by phase)
+     - Dependency layers for parallel work
+     - Queue workflow instructions
+     - File structure patterns and examples
+     - Design decisions and rationale
+     - Success criteria
+
+  ═══════════════════════════════════════════════════════════════════════════
+  SYSTEM OVERVIEW
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Solar thermionic power generation uses concentrated sunlight to heat a
+  cathode in a vacuum tube, causing thermionic emission. Electrons flow from
+  cathode to anode, generating DC electrical power directly - no intermediate
+  conversion steps.
+
+  KEY ADVANTAGES OVER PHOTOVOLTAICS:
+  • 100% manufacturable from lunar materials (anorthite + NiFe meteorites)
+  • 10-30% efficiency (vs 1-5% for lunar PV without dopants)
+  • Dual-use concentrators (power generation + foundry operations)
+  • Same vacuum tube technology used for computing and communications
+  • Proven in space nuclear reactors (5-20% efficiency)
+
+  ENERGY FLOW:
+  Solar Irradiance → Concentrated Thermal (1600-2700°C) → Thermionic Emission
+  → Electrical Power (10-30%) + Waste Heat (70-90%)
+
+  ═══════════════════════════════════════════════════════════════════════════
+  IMPLEMENTATION STATUS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Total items to implement: 67 files
+  - Materials: 6
+  - Parts: 13
+  - Machines: 3
+  - BOMs: 3
+  - Processes: 12
+  - Recipes: 27
+  - Resources: 3
+
+  Current status: Roadmap created, awaiting indexer run and worker deployment
+
+  ═══════════════════════════════════════════════════════════════════════════
+  WORKER INSTRUCTIONS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  1. LEASE a work item from the queue:
+     .venv/bin/python -m kbtool queue lease --agent <your-name>
+
+  2. READ the technical specifications:
+     - design/solar_thermionics_report.md (for technical details)
+     - .claude/plans/bright-wondering-pearl.md (for file structure patterns)
+
+  3. CREATE the file according to specifications:
+     - Follow YAML patterns from existing files
+     - Use lowercase_snake_case for IDs
+     - Base units: kg (mass), kWh (energy), hr (time)
+     - Include detailed notes with sources
+
+  4. COMPLETE the work item:
+     .venv/bin/python -m kbtool queue complete --id <item-id> --agent <your-name>
+
+  5. COORDINATE via indexer:
+     - After layer completion, someone runs: .venv/bin/python -m kbtool index
+     - This creates next layer's work items
+     - Continue until all 67 files created
+
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Questions? Check the docs above or ask the user for clarification.
+
+  Let's build a lunar power system! 🌙⚡

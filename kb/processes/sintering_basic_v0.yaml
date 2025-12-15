@@ -1,0 +1,32 @@
+id: sintering_basic_v0
+kind: process
+name: Basic sintering
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: powder_metal_or_ceramic
+    qty: null
+    unit: kg
+outputs:
+  - item_id: sintered_parts
+    qty: null
+    unit: kg
+requires_ids:
+  - furnace_high_temp
+  - controlled_atmosphere_chamber
+  - pressing_tools
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: "High temperature heating below melting point, typically 800-1400°C depending on material"
+time_model:
+  type: linear_rate
+  hr_per_kg: 3.0
+  setup_hr: 1.0
+  notes: "Pressing, furnace heat-up, sintering hold time, controlled cooling"
+notes: Sintering process for consolidating powder materials (metal, ceramic) into solid parts by heating below melting point. Diffusion bonding creates strong structures.

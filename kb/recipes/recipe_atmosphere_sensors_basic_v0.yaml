@@ -1,0 +1,22 @@
+id: recipe_atmosphere_sensors_basic_v0
+target_item_id: atmosphere_sensors_basic
+variant_id: v0
+steps:
+  - process_id: pcb_assembly_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Assemble circuit board with sensor interface electronics"
+  - process_id: sensor_integration_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Install pressure sensors, gas composition sensors (imported components)"
+  - process_id: sensor_calibration_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Calibrate sensors against known pressure and gas standards"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Mount in protective enclosure, wire connections, final testing"
+assumptions: Electronic sensor assembly with imported sensing elements. PCB for signal conditioning and interface. Calibrated for accurate measurements. Mass ~5 kg.
+notes: Basic atmosphere sensor package for monitoring pressure and gas composition in controlled atmosphere chambers.

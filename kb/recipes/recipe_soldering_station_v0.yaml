@@ -1,0 +1,22 @@
+id: recipe_soldering_station_v0
+target_item_id: soldering_station
+variant_id: v0
+steps:
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Machine base, iron holder, tip cleaning station"
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Wind heating element coil for soldering iron tip"
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Assemble soldering iron, heating element, tip holder, base"
+  - process_id: wiring_and_electronics_integration_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Install temperature controller, power supply, thermocouple"
+assumptions: Temperature controller electronics fabricated or imported.
+notes: Temperature-controlled soldering station for electronics assembly.

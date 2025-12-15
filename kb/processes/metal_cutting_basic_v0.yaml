@@ -1,0 +1,23 @@
+id: metal_cutting_basic_v0
+kind: process
+name: Metal cutting (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - milling_machine_general
+  - cutting_tools_general
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "bandsaw or abrasive cutoff saw, ~2-3 kW motor for cutting stock to length"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.0
+  notes: "cutting bar stock, tubing, or plate to length with setup time"
+notes: Basic metal cutting process for preparing stock material. Includes sawing, shearing, or abrasive cutting to length.

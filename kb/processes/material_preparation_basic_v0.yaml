@@ -1,0 +1,25 @@
+id: material_preparation_basic_v0
+kind: process
+name: Material preparation (basic)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: raw_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: prepared_material
+    qty: 0.95
+    unit: kg
+requires_ids:
+  - material_preparation_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 0.8
+notes: "Basic material preparation operations to ready raw materials for processing. Includes cleaning (removing dirt, scale, oxidation), sizing (crushing, cutting to length), drying (moisture removal), and sorting (grading by size or quality). Methods vary by material: wire brushing for metals, washing for minerals, cutting for stock materials, drying for wet feedstocks. 5% material loss typical from cleaning waste and sizing operations. Used as preliminary step before melting, forming, machining, or chemical processing. Critical for consistent material quality in manufacturing."

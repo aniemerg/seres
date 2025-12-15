@@ -1,0 +1,18 @@
+id: recipe_power_supply_bench_v0
+target_item_id: power_supply_bench
+variant_id: v0
+steps:
+  - process_id: control_panel_assembly_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Prepare chassis, mount transformer, cooling, and power electronics."
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Wire control PCB, power electronics, and output terminals; add protection."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Bench-test voltage/current regulation and protection features."
+assumptions: Uses imported control electronics; transformer locally wound or imported.
+notes: Bench power supply assembly for lab/electronics use.

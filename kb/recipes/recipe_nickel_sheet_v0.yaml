@@ -1,0 +1,26 @@
+id: recipe_nickel_sheet_v0
+target_item_id: nickel_sheet
+variant_id: v0
+steps:
+  - process_id: nickel_extraction_meteorite_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    labor_hours: 2.0
+    notes: "Extract nickel from NiFe meteorite material using Mond carbonyl process (Ni + 4CO ↔ Ni(CO)4)"
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Cast nickel ingot from extracted nickel"
+  - process_id: rolling_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Hot roll nickel ingot into sheet metal"
+  - process_id: surface_finishing_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Clean and finish nickel sheet surface"
+assumptions: "Nickel sourced from NiFe meteorite material abundant on lunar surface. Mond carbonyl process (Ni + 4CO ↔ Ni(CO)4) at 40-80°C extraction, 230°C decomposition. 100% lunar-manufacturable for thermionic converter anodes. See: design/solar_thermionics_report.md"
+notes: "Production of nickel sheet from meteoritic iron-nickel material. Critical material for thermionic converter anodes (electron collectors). Mond process enables pure nickel extraction. Total processing time ~10 hours."

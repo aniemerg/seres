@@ -1,0 +1,28 @@
+id: molding_press_operation_v0
+kind: process
+name: Molding press operation (basic)
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: powder_feedstock
+    qty: null
+    unit: kg
+outputs:
+  - item_id: pressed_component
+    qty: null
+    unit: kg
+requires_ids:
+  - molding_press_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.4
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: "Press cycle energy per kg"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.1
+  notes: "Press cycle time including load/unload"
+notes: Operating a molding press to form powder/ceramic feedstock into green parts.

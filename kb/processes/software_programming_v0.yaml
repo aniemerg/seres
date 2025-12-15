@@ -1,0 +1,22 @@
+id: software_programming_v0
+kind: process
+name: Software programming and testing
+layer_tags:
+  - layer_7
+  - layer_8
+inputs: []
+outputs: []
+requires_ids:
+  - computer_workstation
+resource_requirements:
+  - resource_type: labor_bot_specialist
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: boundary
+  notes: "software development requires computer workstation power (~100W), considered negligible per kg of hardware output"
+time_model:
+  type: fixed_time
+  hr_per_batch: 40.0
+  notes: "software development, testing, and validation for control systems and embedded applications"
+notes: Software development process for control systems, embedded firmware, automation scripts, and user interfaces. Includes programming, debugging, testing, and documentation. Critical for all automated equipment, robotics, and process control systems. Labor-intensive intellectual work.

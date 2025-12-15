@@ -1,0 +1,22 @@
+id: wire_drawing_basic_v0
+kind: process
+name: Wire drawing (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - drawing_die_set_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: "drawing bench motors and tensioning systems for cold working metal through dies"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.5
+  notes: "multiple drawing passes through progressively smaller dies"
+notes: Placeholder for drawing wire to smaller diameter; tooling/process params TBD.

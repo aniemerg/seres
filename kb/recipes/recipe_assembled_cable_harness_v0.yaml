@@ -1,0 +1,23 @@
+id: recipe_assembled_cable_harness_v0
+target_item_id: assembled_cable_harness
+variant_id: v0
+steps:
+  - process_id: wire_cutting_and_stripping_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Cut power cables and signal wires to specified lengths (typically 10-50 meters total), strip insulation from conductor ends"
+  - process_id: crimping_and_termination_v0
+    est_time_hr: 4.0
+    machine_hours: 2.0
+    labor_hours: 3.5
+    notes: "Crimp connectors onto cable ends (ring terminals, spade terminals, Anderson connectors, D-sub connectors), solder signal wire connections"
+  - process_id: assembly_basic_v0
+    est_time_hr: 5.0
+    labor_hours: 5.0
+    notes: "Route cables in harness layout, install strain relief components, bundle cables with cable ties or braided sleeving, label all connections"
+  - process_id: inspection_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Continuity testing of all conductors, insulation resistance testing, verify connector integrity and proper mating"
+assumptions: "Assembled cable harness for equipment power and signal distribution. 5 kg harness includes power cables (typically 8-12 AWG for 10-40A circuits), signal wires (18-22 AWG), connectors (power and signal types), strain relief components, protective sheathing, and cable management. Heavier duty than wire harnesses. Used in industrial equipment, machinery power distribution, and control systems."
+notes: "Manufacturing of assembled cable harness. Total fabrication time ~12.5 hours. Includes cable cutting and stripping, connector crimping and soldering, routing and bundling, labeling, and electrical testing. More robust than wire harness due to larger conductors and higher current capacity. Critical for equipment power distribution."

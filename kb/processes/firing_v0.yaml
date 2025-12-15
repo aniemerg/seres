@@ -1,0 +1,23 @@
+id: firing_v0
+kind: process
+name: Firing (kiln)
+layer_tags:
+  - layer_5
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - kiln_ceramic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.5
+  notes: "high-temperature kiln firing to vitrify and harden ceramic/refractory materials"
+time_model:
+  type: linear_rate
+  hr_per_kg: 6.0
+  notes: "gradual heating, soak at peak temperature, controlled cooling to prevent thermal shock"
+notes: High-temperature kiln firing process for ceramic and refractory materials. Brings parts to final hardness, strength, and temperature resistance through controlled heating and cooling cycles.

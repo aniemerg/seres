@@ -1,0 +1,22 @@
+id: pcb_assembly_basic_v0
+kind: process
+name: PCB assembly (basic)
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.3
+  notes: "Hand tools/small reflow equipment usage"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Populate small PCB with through-hole/SMD components and reflow/solder"
+notes: Basic PCB population and soldering for control boards and small electronics.

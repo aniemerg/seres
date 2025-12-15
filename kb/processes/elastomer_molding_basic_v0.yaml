@@ -1,0 +1,22 @@
+id: elastomer_molding_basic_v0
+kind: process
+name: Elastomer molding (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - molding_press_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.2
+  notes: "heated mold press with temperature control for vulcanization"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.5
+  notes: "mold loading, heating/curing cycle, cooling, and demolding"
+notes: Placeholder process for molding elastomer components; materials/molds TBD.

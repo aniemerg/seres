@@ -1,0 +1,30 @@
+id: pcb_fabrication_v0
+kind: process
+name: PCB fabrication
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: etching_chemicals
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: bare_pcb
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - pcb_fab_equipment
+  - drill_press
+  - chemical_bath_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 2.0
+time_model:
+  total_time_hr: 3.0
+notes: "Printed circuit board fabrication process. Includes photoresist application, UV exposure, developing, etching, drilling, and through-hole plating. Produces bare PCB ready for component assembly. Subtractive process removes unwanted copper to create circuit traces. Multi-layer boards require lamination and additional processing."

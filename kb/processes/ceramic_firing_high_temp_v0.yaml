@@ -1,0 +1,23 @@
+id: ceramic_firing_high_temp_v0
+kind: process
+name: Ceramic firing (high temperature)
+layer_tags:
+  - layer_5
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - furnace_high_temp
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: "high-temperature kiln firing to 1400-1600°C for refractory ceramics"
+time_model:
+  type: linear_rate
+  hr_per_kg: 8.0
+  notes: "extended heating ramp, high-temperature soak, and controlled cooling for vitrification"
+notes: High-temperature ceramic firing for refractory materials. Brings parts to 1400-1600°C for full vitrification and maximum strength. Used for crucibles, kiln linings, and high-temperature components.

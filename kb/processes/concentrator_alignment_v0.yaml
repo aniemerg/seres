@@ -1,0 +1,31 @@
+id: concentrator_alignment_v0
+kind: process
+name: Solar concentrator alignment
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: solar_concentrator_assembly
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: aligned_solar_concentrator
+    qty: 1
+    unit: unit
+requires_ids:
+  - alignment_tools
+  - optical_metrology_tools
+  - stewart_platform_calibrator
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.5
+  notes: "Metrology equipment and positioning system power"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "Stewart platform calibration, optical alignment verification, focal point adjustment"
+notes: Precision alignment of solar concentrators using Stewart platform and optical metrology. Ensures optimal focusing for thermionic or thermal applications.

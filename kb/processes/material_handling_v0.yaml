@@ -1,0 +1,25 @@
+id: material_handling_v0
+kind: process
+name: Material handling
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: positioned_material_or_parts
+    qty: 100.0
+    unit: kg
+requires_ids:
+  - material_handling_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 1.0
+notes: "Material handling operations including loading, unloading, positioning, and transporting materials and parts within manufacturing facility. Methods include forklifts, cranes, conveyors, carts, and manual handling. Moves raw materials to processing stations, work-in-progress between operations, and finished goods to storage. Critical support operation for production flow. Minimal material loss (primarily from spillage prevention). Used in all manufacturing operations requiring material movement."

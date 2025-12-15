@@ -1,0 +1,23 @@
+id: calibration_basic_v0
+kind: process
+name: Calibration (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - calibration_standards
+  - measurement_equipment
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.1
+  notes: "minimal energy for measurement electronics and data acquisition"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+  notes: "iterative calibration cycles with known references and adjustments"
+notes: Calibrate measurement systems, sensors, and precision instruments using calibration standards and reference artifacts.
