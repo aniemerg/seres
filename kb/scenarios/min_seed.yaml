@@ -1,0 +1,85 @@
+id: min_seed
+kind: scenario
+name: Minimal Seed Factory
+description: >
+  A minimal set of machines representing a self-replicating lunar factory seed.
+  This scenario is used to test the accounting pipeline and identify gaps.
+
+# Target machines to replicate (one of each)
+target_seed_factory:
+  - machine_id: ball_mill_v0
+    qty: 1
+  - machine_id: jaw_crusher_v0
+    qty: 1
+  - machine_id: magnetic_separator_drum_v0
+    qty: 1
+  - machine_id: mre_reactor_v0
+    qty: 1
+  - machine_id: reduction_furnace_v0
+    qty: 1
+  - machine_id: casting_furnace_v0
+    qty: 1
+  - machine_id: glass_furnace_v0
+    qty: 1
+  - machine_id: sintering_furnace_v0
+    qty: 1
+  - machine_id: hot_press_v0
+    qty: 1
+  - machine_id: welding_power_supply_v0
+    qty: 1
+  - machine_id: solar_array_v0
+    qty: 1
+  - machine_id: power_storage_bank_v0
+    qty: 1
+  - machine_id: radiator_panels_v0
+    qty: 1
+  - machine_id: labor_bot_general_v0
+    qty: 2
+  - machine_id: vibratory_feeder_v0
+    qty: 1
+  - machine_id: high_temp_furnace_v0
+    qty: 1
+  - machine_id: high_temperature_power_supply_v0
+    qty: 1
+
+# Available resources (machines available for work during replication)
+# Same as target but represents "what we have" vs "what we're building"
+available_resources:
+  - resource_type: ball_mill
+    count: 1
+  - resource_type: jaw_crusher
+    count: 1
+  - resource_type: magnetic_separator_drum
+    count: 1
+  - resource_type: mre_reactor
+    count: 1
+  - resource_type: reduction_furnace
+    count: 1
+  - resource_type: casting_furnace
+    count: 1
+  - resource_type: glass_furnace
+    count: 1
+  - resource_type: sintering_furnace
+    count: 1
+  - resource_type: hot_press
+    count: 1
+  - resource_type: welding_power_supply
+    count: 1
+  - resource_type: solar_array
+    count: 1
+  - resource_type: labor_bot_general
+    count: 2
+  - resource_type: hauler
+    count: 1
+
+policy:
+  # If true, items with no recipe are treated as imports
+  import_if_no_recipe: true
+  # Max recursion depth for BOM expansion
+  max_recursion_depth: 10
+
+objective: min_import_mass
+
+notes: >
+  This is a v0 minimal seed. Many machines lack recipes and will be counted
+  as imports. The goal is to exercise the pipeline and surface gaps.

@@ -1,0 +1,3293 @@
+{
+  "entries": {
+    "array_mount_structure": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/array_mount_structure.yaml",
+      "id": "array_mount_structure",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Array mount structure",
+      "refs_in": [
+        "bom_solar_array_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "ball_mill": {
+      "aliases": [],
+      "defined_in": "kb/resources/ball_mill.yaml",
+      "id": "ball_mill",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "regolith_crushing_grinding_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "ball_mill_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/ball_mill_v0.yaml",
+      "id": "ball_mill_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Ball mill v0",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "recipe_machine_ball_mill_v0_import"
+      ],
+      "refs_out": [
+        "bom_ball_mill_v0"
+      ],
+      "status": "defined"
+    },
+    "basalt_fiber": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/basalt_fiber.yaml",
+      "id": "basalt_fiber",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Basalt fiber",
+      "refs_in": [
+        "basalt_fiber_production_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "basalt_fiber_production_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/basalt_fiber_production_v0.yaml",
+      "id": "basalt_fiber_production_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5"
+      ],
+      "name": "Basalt fiber production",
+      "refs_in": [],
+      "refs_out": [
+        "basalt_fiber",
+        "controlled_cooling",
+        "fiber_spinneret",
+        "glass_bulk",
+        "winding_drums"
+      ],
+      "status": "defined"
+    },
+    "bearing_cage_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/bearing_cage_set.yaml",
+      "id": "bearing_cage_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Bearing cage set",
+      "refs_in": [
+        "bom_bearing_set_heavy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "bearing_race_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/bearing_race_set.yaml",
+      "id": "bearing_race_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Bearing race set",
+      "refs_in": [
+        "bom_bearing_set_heavy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "bearing_set_heavy": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/bearing_set_heavy.yaml",
+      "id": "bearing_set_heavy",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Bearing set (heavy-duty)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "bom_bearing_set_heavy_v0",
+        "bom_drive_motor_medium_v0",
+        "bom_gearbox_reducer_medium_v0",
+        "bom_jaw_crusher_v0",
+        "bom_labor_bot_general_v0",
+        "bom_magnetic_separator_drum_v0",
+        "recipe_part_bearing_set_heavy_v0"
+      ],
+      "refs_out": [
+        "bom_bearing_set_heavy_v0"
+      ],
+      "status": "defined"
+    },
+    "beneficiate_regolith_magnetic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/beneficiate_regolith_magnetic_v0.yaml",
+      "id": "beneficiate_regolith_magnetic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_2"
+      ],
+      "name": "Magnetic beneficiation of regolith",
+      "refs_in": [],
+      "refs_out": [
+        "labor_bot_general",
+        "magnetic_concentrate",
+        "magnetic_separator_drum",
+        "non_magnetic_tailings",
+        "regolith_powder",
+        "vibratory_feeder"
+      ],
+      "status": "defined"
+    },
+    "bom_ball_mill_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_ball_mill_v0.yaml",
+      "id": "bom_ball_mill_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "ball_mill_v0"
+      ],
+      "refs_out": [
+        "ball_mill_v0",
+        "bearing_set_heavy",
+        "drive_motor_medium",
+        "fastener_kit_medium",
+        "gearbox_reducer_medium",
+        "liner_set_abrasion_resistant",
+        "mill_shell_generic",
+        "support_frame_welded",
+        "trunnion_supports"
+      ],
+      "status": "defined"
+    },
+    "bom_bearing_set_heavy_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_bearing_set_heavy_v0.yaml",
+      "id": "bom_bearing_set_heavy_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "bearing_set_heavy"
+      ],
+      "refs_out": [
+        "bearing_cage_set",
+        "bearing_race_set",
+        "bearing_set_heavy",
+        "fastener_kit_medium",
+        "lubrication_pack_basic",
+        "rolling_elements_set"
+      ],
+      "status": "defined"
+    },
+    "bom_casting_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_casting_furnace_v0.yaml",
+      "id": "bom_casting_furnace_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "casting_furnace_v0"
+      ],
+      "refs_out": [
+        "burner_or_heater_casting",
+        "casting_furnace_shell",
+        "casting_furnace_v0",
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "insulation_pack_high_temp",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_drive_motor_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_drive_motor_medium_v0.yaml",
+      "id": "bom_drive_motor_medium_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "drive_motor_medium"
+      ],
+      "refs_out": [
+        "bearing_set_heavy",
+        "coil_pack_basic",
+        "drive_motor_medium",
+        "endplate_set_motor",
+        "fastener_kit_medium",
+        "motor_housing_cast",
+        "rotor_shaft_medium"
+      ],
+      "status": "defined"
+    },
+    "bom_gearbox_reducer_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_gearbox_reducer_medium_v0.yaml",
+      "id": "bom_gearbox_reducer_medium_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "gearbox_reducer_medium"
+      ],
+      "refs_out": [
+        "bearing_set_heavy",
+        "fastener_kit_medium",
+        "gear_set_medium",
+        "gearbox_housing_cast",
+        "gearbox_reducer_medium",
+        "lubrication_pack_basic",
+        "shaft_set_medium"
+      ],
+      "status": "defined"
+    },
+    "bom_glass_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_glass_furnace_v0.yaml",
+      "id": "bom_glass_furnace_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "glass_furnace_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "furnace_shell_refractory",
+        "glass_furnace_v0",
+        "heating_element_set_high_temp",
+        "insulation_pack_high_temp",
+        "power_bus_high_current",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_high_temp_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_high_temp_furnace_v0.yaml",
+      "id": "bom_high_temp_furnace_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "high_temp_furnace_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "furnace_shell_refractory",
+        "gas_handling_system",
+        "heating_element_set_high_temp",
+        "high_temp_furnace_v0",
+        "insulation_pack_high_temp",
+        "offgas_manifold",
+        "power_bus_high_current",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_high_temperature_power_supply_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_high_temperature_power_supply_v0.yaml",
+      "id": "bom_high_temperature_power_supply_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "high_temperature_power_supply_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "high_temp_power_supply_unit",
+        "high_temperature_power_supply_v0",
+        "power_bus_high_current",
+        "power_conditioning_module",
+        "sensor_suite_general"
+      ],
+      "status": "defined"
+    },
+    "bom_hot_press_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_hot_press_v0.yaml",
+      "id": "bom_hot_press_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "hot_press_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "heated_platen_set",
+        "heating_element_set_high_temp",
+        "hot_press_frame",
+        "hot_press_v0",
+        "hydraulic_system_medium",
+        "insulation_pack_high_temp",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_jaw_crusher_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_jaw_crusher_v0.yaml",
+      "id": "bom_jaw_crusher_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "jaw_crusher_v0"
+      ],
+      "refs_out": [
+        "bearing_set_heavy",
+        "crusher_frame_medium",
+        "drive_motor_medium",
+        "fastener_kit_medium",
+        "flywheel_medium",
+        "gearbox_reducer_medium",
+        "jaw_crusher_v0",
+        "jaw_plates_set",
+        "support_frame_welded",
+        "toggle_mechanism_set"
+      ],
+      "status": "defined"
+    },
+    "bom_labor_bot_general_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_labor_bot_general_v0.yaml",
+      "id": "bom_labor_bot_general_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "labor_bot_general_v0"
+      ],
+      "refs_out": [
+        "bearing_set_heavy",
+        "control_compute_module_imported",
+        "drive_motor_medium",
+        "fastener_kit_medium",
+        "labor_bot_general_v0",
+        "power_conditioning_module",
+        "power_storage_pack",
+        "sensor_suite_general",
+        "support_frame_welded"
+      ],
+      "status": "defined"
+    },
+    "bom_magnetic_separator_drum_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_magnetic_separator_drum_v0.yaml",
+      "id": "bom_magnetic_separator_drum_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "magnetic_separator_drum_v0"
+      ],
+      "refs_out": [
+        "bearing_set_heavy",
+        "control_compute_module_imported",
+        "drive_motor_medium",
+        "fastener_kit_medium",
+        "magnet_assembly",
+        "magnetic_separator_drum_body",
+        "magnetic_separator_drum_v0",
+        "sensor_suite_general",
+        "separator_frame",
+        "vibratory_feeder"
+      ],
+      "status": "defined"
+    },
+    "bom_mre_reactor_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_mre_reactor_v0.yaml",
+      "id": "bom_mre_reactor_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "mre_reactor_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "electrode_set_mre",
+        "fastener_kit_medium",
+        "heat_transport_loop_assembly",
+        "heating_element_set_high_temp",
+        "insulation_pack_high_temp",
+        "mre_reactor_v0",
+        "offgas_manifold",
+        "power_bus_high_current",
+        "reactor_vessel_mre",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_power_storage_bank_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_power_storage_bank_v0.yaml",
+      "id": "bom_power_storage_bank_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "power_storage_bank_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "power_conditioning_module",
+        "power_storage_bank_v0",
+        "power_storage_pack",
+        "sensor_suite_general",
+        "storage_enclosure"
+      ],
+      "status": "defined"
+    },
+    "bom_radiator_panels_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_radiator_panels_v0.yaml",
+      "id": "bom_radiator_panels_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "radiator_panels_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "heat_pipes_or_loop",
+        "heat_transport_loop_assembly",
+        "radiator_panel_set",
+        "radiator_panels_v0",
+        "sensor_suite_general"
+      ],
+      "status": "defined"
+    },
+    "bom_reduction_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_reduction_furnace_v0.yaml",
+      "id": "bom_reduction_furnace_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "reduction_furnace_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "gas_handling_system",
+        "heating_element_set_high_temp",
+        "insulation_pack_high_temp",
+        "offgas_manifold",
+        "power_bus_high_current",
+        "reduction_furnace_shell",
+        "reduction_furnace_v0",
+        "sensor_suite_general",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_sintering_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_sintering_furnace_v0.yaml",
+      "id": "bom_sintering_furnace_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "sintering_furnace_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "cooling_loop_basic",
+        "fastener_kit_medium",
+        "heating_element_set_high_temp",
+        "insulation_pack_high_temp",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "sintering_furnace_shell",
+        "sintering_furnace_v0",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "bom_solar_array_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_solar_array_v0.yaml",
+      "id": "bom_solar_array_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "solar_array_v0"
+      ],
+      "refs_out": [
+        "array_mount_structure",
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "power_conditioning_module",
+        "pv_module_imported",
+        "sensor_suite_general",
+        "solar_array_v0"
+      ],
+      "status": "defined"
+    },
+    "bom_vibratory_feeder_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_vibratory_feeder_v0.yaml",
+      "id": "bom_vibratory_feeder_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "vibratory_feeder_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "feeder_trough",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "support_frame_welded",
+        "vibration_motor_set",
+        "vibratory_feeder_v0"
+      ],
+      "status": "defined"
+    },
+    "bom_welding_power_supply_v0": {
+      "aliases": [],
+      "defined_in": "kb/boms/bom_welding_power_supply_v0.yaml",
+      "id": "bom_welding_power_supply_v0",
+      "kind": "bom",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "welding_power_supply_v0"
+      ],
+      "refs_out": [
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "ground_clamp_and_cables",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "torch_assembly",
+        "welding_power_supply_unit",
+        "welding_power_supply_v0"
+      ],
+      "status": "defined"
+    },
+    "burner_or_heater_casting": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/burner_or_heater_casting.yaml",
+      "id": "burner_or_heater_casting",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Burner or heater assembly (casting)",
+      "refs_in": [
+        "bom_casting_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "carbon_feed_system": {
+      "aliases": [],
+      "defined_in": "kb/resources/carbon_feed_system.yaml",
+      "id": "carbon_feed_system",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_carbothermal_reduction_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "carbon_reductant": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/carbon_reductant.yaml",
+      "id": "carbon_reductant",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Carbon reductant",
+      "refs_in": [
+        "oxygen_extraction_carbothermal_reduction_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "cast_metal_parts": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/cast_metal_parts.yaml",
+      "id": "cast_metal_parts",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Cast metal parts",
+      "refs_in": [
+        "metal_casting_basic_v0",
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "casting_furnace": {
+      "aliases": [],
+      "defined_in": "kb/resources/casting_furnace.yaml",
+      "id": "casting_furnace",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "metal_casting_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "casting_furnace_shell": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/casting_furnace_shell.yaml",
+      "id": "casting_furnace_shell",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Casting furnace shell",
+      "refs_in": [
+        "bom_casting_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "casting_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/casting_furnace_v0.yaml",
+      "id": "casting_furnace_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Casting furnace v0",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "recipe_machine_casting_furnace_v0_import"
+      ],
+      "refs_out": [
+        "bom_casting_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "coil_pack_basic": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/coil_pack_basic.yaml",
+      "id": "coil_pack_basic",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Coil pack (basic)",
+      "refs_in": [
+        "bom_drive_motor_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "control_compute_module_imported": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/control_compute_module_imported.yaml",
+      "id": "control_compute_module_imported",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Control compute module (imported)",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_hot_press_v0",
+        "bom_labor_bot_general_v0",
+        "bom_magnetic_separator_drum_v0",
+        "bom_mre_reactor_v0",
+        "bom_power_storage_bank_v0",
+        "bom_radiator_panels_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0",
+        "bom_solar_array_v0",
+        "bom_vibratory_feeder_v0",
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "controlled_cooling": {
+      "aliases": [],
+      "defined_in": "kb/resources/controlled_cooling.yaml",
+      "id": "controlled_cooling",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "basalt_fiber_production_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "cooling_loop_basic": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/cooling_loop_basic.yaml",
+      "id": "cooling_loop_basic",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Cooling loop (basic)",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "crucible": {
+      "aliases": [],
+      "defined_in": "kb/resources/crucible.yaml",
+      "id": "crucible",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "metal_casting_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "crusher_frame_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/crusher_frame_medium.yaml",
+      "id": "crusher_frame_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Crusher frame (medium)",
+      "refs_in": [
+        "bom_jaw_crusher_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "cutting_tools_general": {
+      "aliases": [],
+      "defined_in": "kb/resources/cutting_tools_general.yaml",
+      "id": "cutting_tools_general",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "gear_cutting_basic_v0",
+        "machining_finish_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "dies": {
+      "aliases": [],
+      "defined_in": "kb/resources/dies.yaml",
+      "id": "dies",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "sintering_and_hot_pressing_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "drive_motor_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/drive_motor_medium.yaml",
+      "id": "drive_motor_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Drive motor (medium)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "bom_drive_motor_medium_v0",
+        "bom_jaw_crusher_v0",
+        "bom_labor_bot_general_v0",
+        "bom_magnetic_separator_drum_v0",
+        "recipe_part_drive_motor_medium_v0"
+      ],
+      "refs_out": [
+        "bom_drive_motor_medium_v0"
+      ],
+      "status": "defined"
+    },
+    "dust_control": {
+      "aliases": [],
+      "defined_in": "kb/resources/dust_control.yaml",
+      "id": "dust_control",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "regolith_crushing_grinding_v0",
+        "regolith_screening_sieving_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "electrical_energy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/electrical_energy.yaml",
+      "id": "electrical_energy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Electrical energy",
+      "refs_in": [
+        "power_storage_basic_v0",
+        "solar_power_generation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "electrode_set_mre": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/electrode_set_mre.yaml",
+      "id": "electrode_set_mre",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Electrode set (MRE)",
+      "refs_in": [
+        "bom_mre_reactor_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "electrodes": {
+      "aliases": [],
+      "defined_in": "kb/resources/electrodes.yaml",
+      "id": "electrodes",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "endplate_set_motor": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/endplate_set_motor.yaml",
+      "id": "endplate_set_motor",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Endplate set (motor)",
+      "refs_in": [
+        "bom_drive_motor_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "excavate_regolith_surface_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/excavate_regolith_surface_v0.yaml",
+      "id": "excavate_regolith_surface_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_0"
+      ],
+      "name": "Regolith excavation (surface scoop)",
+      "refs_in": [
+        "recipe_regolith_powder_v0"
+      ],
+      "refs_out": [
+        "hauler",
+        "labor_bot_general",
+        "loader_small",
+        "lunar_regolith_in_situ",
+        "power_distribution",
+        "regolith_excavated"
+      ],
+      "status": "defined"
+    },
+    "fastener_kit_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/fastener_kit_medium.yaml",
+      "id": "fastener_kit_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Fastener kit (medium)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "bom_bearing_set_heavy_v0",
+        "bom_casting_furnace_v0",
+        "bom_drive_motor_medium_v0",
+        "bom_gearbox_reducer_medium_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_hot_press_v0",
+        "bom_jaw_crusher_v0",
+        "bom_labor_bot_general_v0",
+        "bom_magnetic_separator_drum_v0",
+        "bom_mre_reactor_v0",
+        "bom_power_storage_bank_v0",
+        "bom_radiator_panels_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0",
+        "bom_solar_array_v0",
+        "bom_vibratory_feeder_v0",
+        "bom_welding_power_supply_v0",
+        "recipe_part_fastener_kit_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "feeder_trough": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/feeder_trough.yaml",
+      "id": "feeder_trough",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Feeder trough",
+      "refs_in": [
+        "bom_vibratory_feeder_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "fiber_spinneret": {
+      "aliases": [],
+      "defined_in": "kb/resources/fiber_spinneret.yaml",
+      "id": "fiber_spinneret",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "basalt_fiber_production_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "filler_material": {
+      "aliases": [],
+      "defined_in": "kb/resources/filler_material.yaml",
+      "id": "filler_material",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "fixturing_table": {
+      "aliases": [],
+      "defined_in": "kb/resources/fixturing_table.yaml",
+      "id": "fixturing_table",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "flywheel_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/flywheel_medium.yaml",
+      "id": "flywheel_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Flywheel (medium)",
+      "refs_in": [
+        "bom_jaw_crusher_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "furnace_shell_refractory": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/furnace_shell_refractory.yaml",
+      "id": "furnace_shell_refractory",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Furnace shell (refractory lined)",
+      "refs_in": [
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gas_handling_loop": {
+      "aliases": [],
+      "defined_in": "kb/resources/gas_handling_loop.yaml",
+      "id": "gas_handling_loop",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gas_handling_system": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/gas_handling_system.yaml",
+      "id": "gas_handling_system",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Gas handling system",
+      "refs_in": [
+        "bom_high_temp_furnace_v0",
+        "bom_reduction_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gear_cutting_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/gear_cutting_basic_v0.yaml",
+      "id": "gear_cutting_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "Basic gear cutting and finishing",
+      "refs_in": [
+        "recipe_gear_set_medium_v0"
+      ],
+      "refs_out": [
+        "cutting_tools_general",
+        "gear_set_medium",
+        "labor_bot_general",
+        "milling_machine_general"
+      ],
+      "status": "defined"
+    },
+    "gear_set_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/gear_set_medium.yaml",
+      "id": "gear_set_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Gear set (medium)",
+      "refs_in": [
+        "bom_gearbox_reducer_medium_v0",
+        "gear_cutting_basic_v0",
+        "recipe_gear_set_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gearbox_housing_cast": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/gearbox_housing_cast.yaml",
+      "id": "gearbox_housing_cast",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Gearbox housing (cast)",
+      "refs_in": [
+        "bom_gearbox_reducer_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gearbox_reducer_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/gearbox_reducer_medium.yaml",
+      "id": "gearbox_reducer_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Gearbox reducer (medium)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "bom_gearbox_reducer_medium_v0",
+        "bom_jaw_crusher_v0",
+        "recipe_part_gearbox_reducer_medium_v0"
+      ],
+      "refs_out": [
+        "bom_gearbox_reducer_medium_v0"
+      ],
+      "status": "defined"
+    },
+    "glass_bulk": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/glass_bulk.yaml",
+      "id": "glass_bulk",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Glass bulk",
+      "refs_in": [
+        "basalt_fiber_production_v0",
+        "glass_melting_and_forming_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "glass_furnace": {
+      "aliases": [],
+      "defined_in": "kb/resources/glass_furnace.yaml",
+      "id": "glass_furnace",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "glass_melting_and_forming_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "glass_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/glass_furnace_v0.yaml",
+      "id": "glass_furnace_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Glass furnace v0",
+      "refs_in": [
+        "bom_glass_furnace_v0",
+        "recipe_machine_glass_furnace_v0_import"
+      ],
+      "refs_out": [
+        "bom_glass_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "glass_melting_and_forming_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/glass_melting_and_forming_v0.yaml",
+      "id": "glass_melting_and_forming_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5"
+      ],
+      "name": "Glass melting and forming",
+      "refs_in": [],
+      "refs_out": [
+        "glass_bulk",
+        "glass_furnace",
+        "molds",
+        "regolith_fine_fraction",
+        "temperature_sensing"
+      ],
+      "status": "defined"
+    },
+    "ground_clamp_and_cables": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/ground_clamp_and_cables.yaml",
+      "id": "ground_clamp_and_cables",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Ground clamp and cables",
+      "refs_in": [
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "hauler": {
+      "aliases": [],
+      "defined_in": "kb/resources/hauler.yaml",
+      "id": "hauler",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "excavate_regolith_surface_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "heat_pipes_or_loop": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/heat_pipes_or_loop.yaml",
+      "id": "heat_pipes_or_loop",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Heat pipes or loop",
+      "refs_in": [
+        "bom_radiator_panels_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "heat_transport_loop": {
+      "aliases": [],
+      "defined_in": "kb/resources/heat_transport_loop.yaml",
+      "id": "heat_transport_loop",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "thermal_management_radiators_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "heat_transport_loop_assembly": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/heat_transport_loop_assembly.yaml",
+      "id": "heat_transport_loop_assembly",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Heat transport loop assembly",
+      "refs_in": [
+        "bom_mre_reactor_v0",
+        "bom_radiator_panels_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "heated_platen_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/heated_platen_set.yaml",
+      "id": "heated_platen_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Heated platen set",
+      "refs_in": [
+        "bom_hot_press_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "heating_element_set_high_temp": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/heating_element_set_high_temp.yaml",
+      "id": "heating_element_set_high_temp",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Heating element set (high temp)",
+      "refs_in": [
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_hot_press_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "high_temp_furnace": {
+      "aliases": [],
+      "defined_in": "kb/resources/high_temp_furnace.yaml",
+      "id": "high_temp_furnace",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_carbothermal_reduction_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "high_temp_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/high_temp_furnace_v0.yaml",
+      "id": "high_temp_furnace_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "High-temperature furnace v0",
+      "refs_in": [
+        "bom_high_temp_furnace_v0",
+        "recipe_machine_high_temp_furnace_v0_import"
+      ],
+      "refs_out": [
+        "bom_high_temp_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "high_temp_power_supply_unit": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/high_temp_power_supply_unit.yaml",
+      "id": "high_temp_power_supply_unit",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "High-temperature power supply unit",
+      "refs_in": [
+        "bom_high_temperature_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "high_temperature_power_supply": {
+      "aliases": [],
+      "defined_in": "kb/resources/high_temperature_power_supply.yaml",
+      "id": "high_temperature_power_supply",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "high_temperature_power_supply_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/high_temperature_power_supply_v0.yaml",
+      "id": "high_temperature_power_supply_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "High-temperature power supply v0",
+      "refs_in": [
+        "bom_high_temperature_power_supply_v0",
+        "recipe_machine_high_temperature_power_supply_v0_import"
+      ],
+      "refs_out": [
+        "bom_high_temperature_power_supply_v0"
+      ],
+      "status": "defined"
+    },
+    "hot_press": {
+      "aliases": [],
+      "defined_in": "kb/resources/hot_press.yaml",
+      "id": "hot_press",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "sintering_and_hot_pressing_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "hot_press_frame": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/hot_press_frame.yaml",
+      "id": "hot_press_frame",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Hot press frame",
+      "refs_in": [
+        "bom_hot_press_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "hot_press_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/hot_press_v0.yaml",
+      "id": "hot_press_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Hot press v0",
+      "refs_in": [
+        "bom_hot_press_v0",
+        "recipe_machine_hot_press_v0_import"
+      ],
+      "refs_out": [
+        "bom_hot_press_v0"
+      ],
+      "status": "defined"
+    },
+    "hydraulic_system_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/hydraulic_system_medium.yaml",
+      "id": "hydraulic_system_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Hydraulic system (medium)",
+      "refs_in": [
+        "bom_hot_press_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "ilmenite_concentrate": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/ilmenite_concentrate.yaml",
+      "id": "ilmenite_concentrate",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Ilmenite concentrate",
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "insulation_pack_high_temp": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/insulation_pack_high_temp.yaml",
+      "id": "insulation_pack_high_temp",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Insulation pack (high temp)",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_hot_press_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "iron_product": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/iron_product.yaml",
+      "id": "iron_product",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Iron product",
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0",
+        "recipe_iron_product_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "iron_reduction_from_ilmenite_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/iron_reduction_from_ilmenite_v0.yaml",
+      "id": "iron_reduction_from_ilmenite_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4",
+        "layer_5"
+      ],
+      "name": "Iron reduction from ilmenite concentrate",
+      "refs_in": [
+        "recipe_iron_product_v0"
+      ],
+      "refs_out": [
+        "gas_handling_loop",
+        "ilmenite_concentrate",
+        "iron_product",
+        "oxygen_gas",
+        "reductant_gas",
+        "reduction_furnace"
+      ],
+      "status": "defined"
+    },
+    "jaw_crusher": {
+      "aliases": [],
+      "defined_in": "kb/resources/jaw_crusher.yaml",
+      "id": "jaw_crusher",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "regolith_crushing_grinding_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "jaw_crusher_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/jaw_crusher_v0.yaml",
+      "id": "jaw_crusher_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Jaw crusher v0",
+      "refs_in": [
+        "bom_jaw_crusher_v0",
+        "recipe_machine_jaw_crusher_v0_import"
+      ],
+      "refs_out": [
+        "bom_jaw_crusher_v0"
+      ],
+      "status": "defined"
+    },
+    "jaw_plates_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/jaw_plates_set.yaml",
+      "id": "jaw_plates_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Jaw plates set",
+      "refs_in": [
+        "bom_jaw_crusher_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "labor_bot_general": {
+      "aliases": [],
+      "defined_in": "kb/resources/labor_bot_general.yaml",
+      "id": "labor_bot_general",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "beneficiate_regolith_magnetic_v0",
+        "excavate_regolith_surface_v0",
+        "gear_cutting_basic_v0",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0",
+        "regolith_crushing_grinding_v0",
+        "regolith_screening_sieving_v0",
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "labor_bot_general_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/labor_bot_general_v0.yaml",
+      "id": "labor_bot_general_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "General-purpose labor bot v0",
+      "refs_in": [
+        "bom_labor_bot_general_v0",
+        "recipe_machine_labor_bot_general_v0_import"
+      ],
+      "refs_out": [
+        "bom_labor_bot_general_v0"
+      ],
+      "status": "defined"
+    },
+    "liner_set_abrasion_resistant": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/liner_set_abrasion_resistant.yaml",
+      "id": "liner_set_abrasion_resistant",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Liner set (abrasion-resistant)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "recipe_part_liner_set_abrasion_resistant_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "loader_small": {
+      "aliases": [],
+      "defined_in": "kb/resources/loader_small.yaml",
+      "id": "loader_small",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "excavate_regolith_surface_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "lubrication_pack_basic": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/lubrication_pack_basic.yaml",
+      "id": "lubrication_pack_basic",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Lubrication pack (basic)",
+      "refs_in": [
+        "bom_bearing_set_heavy_v0",
+        "bom_gearbox_reducer_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "lunar_regolith_in_situ": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/lunar_regolith_in_situ.yaml",
+      "id": "lunar_regolith_in_situ",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Lunar regolith in situ",
+      "refs_in": [
+        "excavate_regolith_surface_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "machining_finish_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/machining_finish_basic_v0.yaml",
+      "id": "machining_finish_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "Basic machining and finishing",
+      "refs_in": [],
+      "refs_out": [
+        "cutting_tools_general",
+        "labor_bot_general",
+        "metal_casting_blank",
+        "metal_casting_finished",
+        "milling_machine_general"
+      ],
+      "status": "defined"
+    },
+    "magnet_assembly": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/magnet_assembly.yaml",
+      "id": "magnet_assembly",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Magnet assembly",
+      "refs_in": [
+        "bom_magnetic_separator_drum_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnetic_concentrate": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/magnetic_concentrate.yaml",
+      "id": "magnetic_concentrate",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnetic concentrate",
+      "refs_in": [
+        "beneficiate_regolith_magnetic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnetic_separator_drum": {
+      "aliases": [],
+      "defined_in": "kb/resources/magnetic_separator_drum.yaml",
+      "id": "magnetic_separator_drum",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "beneficiate_regolith_magnetic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnetic_separator_drum_body": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/magnetic_separator_drum_body.yaml",
+      "id": "magnetic_separator_drum_body",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Magnetic separator drum body",
+      "refs_in": [
+        "bom_magnetic_separator_drum_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnetic_separator_drum_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/magnetic_separator_drum_v0.yaml",
+      "id": "magnetic_separator_drum_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Magnetic separator drum v0",
+      "refs_in": [
+        "bom_magnetic_separator_drum_v0",
+        "recipe_machine_magnetic_separator_drum_v0_import"
+      ],
+      "refs_out": [
+        "bom_magnetic_separator_drum_v0"
+      ],
+      "status": "defined"
+    },
+    "metal_alloy_bulk": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/metal_alloy_bulk.yaml",
+      "id": "metal_alloy_bulk",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Metal alloy bulk",
+      "refs_in": [
+        "metal_casting_basic_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "metal_casting_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/metal_casting_basic_v0.yaml",
+      "id": "metal_casting_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "Basic metal casting",
+      "refs_in": [
+        "recipe_part_bearing_set_heavy_v0",
+        "recipe_part_drive_motor_medium_v0",
+        "recipe_part_fastener_kit_medium_v0",
+        "recipe_part_gearbox_reducer_medium_v0",
+        "recipe_part_mill_shell_generic_v0",
+        "recipe_part_support_frame_welded_v0",
+        "recipe_part_trunnion_supports_v0",
+        "recipe_gear_set_medium_v0"
+      ],
+      "refs_out": [
+        "cast_metal_parts",
+        "casting_furnace",
+        "crucible",
+        "labor_bot_general",
+        "metal_alloy_bulk",
+        "molds"
+      ],
+      "status": "defined"
+    },
+    "metal_casting_blank": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/metal_casting_blank.yaml",
+      "id": "metal_casting_blank",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Metal casting blank",
+      "refs_in": [
+        "machining_finish_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "metal_casting_finished": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/metal_casting_finished.yaml",
+      "id": "metal_casting_finished",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Metal casting finished",
+      "refs_in": [
+        "machining_finish_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "mill_shell_generic": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/mill_shell_generic.yaml",
+      "id": "mill_shell_generic",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Mill shell (generic)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "recipe_part_mill_shell_generic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "milling_machine_general": {
+      "aliases": [],
+      "defined_in": "kb/resources/milling_machine_general.yaml",
+      "id": "milling_machine_general",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "gear_cutting_basic_v0",
+        "machining_finish_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "min_seed": {
+      "aliases": [],
+      "defined_in": "kb/scenarios/min_seed.yaml",
+      "id": "min_seed",
+      "kind": "scenario",
+      "layer_tags": [],
+      "name": "Minimal Seed Factory",
+      "refs_in": [],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "molds": {
+      "aliases": [],
+      "defined_in": "kb/resources/molds.yaml",
+      "id": "molds",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "glass_melting_and_forming_v0",
+        "metal_casting_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "motor_housing_cast": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/motor_housing_cast.yaml",
+      "id": "motor_housing_cast",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Motor housing (cast)",
+      "refs_in": [
+        "bom_drive_motor_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "mre_reactor": {
+      "aliases": [],
+      "defined_in": "kb/resources/mre_reactor.yaml",
+      "id": "mre_reactor",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "mre_reactor_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/mre_reactor_v0.yaml",
+      "id": "mre_reactor_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "MRE reactor v0",
+      "refs_in": [
+        "bom_mre_reactor_v0",
+        "recipe_machine_mre_reactor_v0_import"
+      ],
+      "refs_out": [
+        "bom_mre_reactor_v0"
+      ],
+      "status": "defined"
+    },
+    "non_magnetic_tailings": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/non_magnetic_tailings.yaml",
+      "id": "non_magnetic_tailings",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Non-magnetic tailings",
+      "refs_in": [
+        "beneficiate_regolith_magnetic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "offgas_handling": {
+      "aliases": [],
+      "defined_in": "kb/resources/offgas_handling.yaml",
+      "id": "offgas_handling",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "oxygen_extraction_carbothermal_reduction_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "offgas_manifold": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/offgas_manifold.yaml",
+      "id": "offgas_manifold",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Offgas manifold",
+      "refs_in": [
+        "bom_high_temp_furnace_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "oxygen_extraction_carbothermal_reduction_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/oxygen_extraction_carbothermal_reduction_v0.yaml",
+      "id": "oxygen_extraction_carbothermal_reduction_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_3",
+        "layer_4"
+      ],
+      "name": "Carbothermal reduction of regolith",
+      "refs_in": [],
+      "refs_out": [
+        "carbon_feed_system",
+        "carbon_reductant",
+        "high_temp_furnace",
+        "offgas_handling",
+        "oxygen_gas",
+        "reduced_metal_oxides",
+        "regolith_powder"
+      ],
+      "status": "defined"
+    },
+    "oxygen_extraction_molten_regolith_electrolysis_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/oxygen_extraction_molten_regolith_electrolysis_v0.yaml",
+      "id": "oxygen_extraction_molten_regolith_electrolysis_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_3",
+        "layer_4"
+      ],
+      "name": "Molten regolith electrolysis (oxygen extraction)",
+      "refs_in": [],
+      "refs_out": [
+        "electrodes",
+        "high_temperature_power_supply",
+        "labor_bot_general",
+        "metal_alloy_bulk",
+        "mre_reactor",
+        "oxygen_gas",
+        "process_power",
+        "regolith_powder"
+      ],
+      "status": "defined"
+    },
+    "oxygen_gas": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/oxygen_gas.yaml",
+      "id": "oxygen_gas",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Oxygen gas",
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0",
+        "oxygen_extraction_carbothermal_reduction_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_bus_high_current": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/power_bus_high_current.yaml",
+      "id": "power_bus_high_current",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Power bus (high current)",
+      "refs_in": [
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_conditioning_module": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/power_conditioning_module.yaml",
+      "id": "power_conditioning_module",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Power conditioning module",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_hot_press_v0",
+        "bom_labor_bot_general_v0",
+        "bom_power_storage_bank_v0",
+        "bom_sintering_furnace_v0",
+        "bom_solar_array_v0",
+        "bom_vibratory_feeder_v0",
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_conditioning_unit": {
+      "aliases": [],
+      "defined_in": "kb/resources/power_conditioning_unit.yaml",
+      "id": "power_conditioning_unit",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "solar_power_generation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_distribution": {
+      "aliases": [],
+      "defined_in": "kb/resources/power_distribution.yaml",
+      "id": "power_distribution",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "excavate_regolith_surface_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_management": {
+      "aliases": [],
+      "defined_in": "kb/resources/power_management.yaml",
+      "id": "power_management",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "power_storage_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_storage_bank": {
+      "aliases": [],
+      "defined_in": "kb/resources/power_storage_bank.yaml",
+      "id": "power_storage_bank",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "power_storage_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "power_storage_bank_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/power_storage_bank_v0.yaml",
+      "id": "power_storage_bank_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Power storage bank v0",
+      "refs_in": [
+        "bom_power_storage_bank_v0",
+        "recipe_machine_power_storage_bank_v0_import"
+      ],
+      "refs_out": [
+        "bom_power_storage_bank_v0"
+      ],
+      "status": "defined"
+    },
+    "power_storage_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/power_storage_basic_v0.yaml",
+      "id": "power_storage_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_8"
+      ],
+      "name": "Basic power storage",
+      "refs_in": [],
+      "refs_out": [
+        "electrical_energy",
+        "power_management",
+        "power_storage_bank",
+        "stored_energy"
+      ],
+      "status": "defined"
+    },
+    "power_storage_pack": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/power_storage_pack.yaml",
+      "id": "power_storage_pack",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Power storage pack",
+      "refs_in": [
+        "bom_labor_bot_general_v0",
+        "bom_power_storage_bank_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "process_power": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/process_power.yaml",
+      "id": "process_power",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Process power",
+      "refs_in": [
+        "oxygen_extraction_molten_regolith_electrolysis_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "pv_module_imported": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/pv_module_imported.yaml",
+      "id": "pv_module_imported",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "PV module (imported)",
+      "refs_in": [
+        "bom_solar_array_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "radiator_panel_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/radiator_panel_set.yaml",
+      "id": "radiator_panel_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Radiator panel set",
+      "refs_in": [
+        "bom_radiator_panels_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "radiator_panels": {
+      "aliases": [],
+      "defined_in": "kb/resources/radiator_panels.yaml",
+      "id": "radiator_panels",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "thermal_management_radiators_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "radiator_panels_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/radiator_panels_v0.yaml",
+      "id": "radiator_panels_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Radiator panels v0",
+      "refs_in": [
+        "bom_radiator_panels_v0",
+        "recipe_machine_radiator_panels_v0_import"
+      ],
+      "refs_out": [
+        "bom_radiator_panels_v0"
+      ],
+      "status": "defined"
+    },
+    "reactor_vessel_mre": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/reactor_vessel_mre.yaml",
+      "id": "reactor_vessel_mre",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Reactor vessel (MRE)",
+      "refs_in": [
+        "bom_mre_reactor_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "recipe_gear_set_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_gear_set_medium_v0.yaml",
+      "id": "recipe_gear_set_medium_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "gear_cutting_basic_v0",
+        "gear_set_medium",
+        "metal_casting_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_iron_product_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/iron_product_v0.yaml",
+      "id": "recipe_iron_product_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "iron_product",
+        "iron_reduction_from_ilmenite_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_ball_mill_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_ball_mill_v0_import.yaml",
+      "id": "recipe_machine_ball_mill_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "ball_mill_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_casting_furnace_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_casting_furnace_v0_import.yaml",
+      "id": "recipe_machine_casting_furnace_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "casting_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_glass_furnace_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_glass_furnace_v0_import.yaml",
+      "id": "recipe_machine_glass_furnace_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "glass_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_high_temp_furnace_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_high_temp_furnace_v0_import.yaml",
+      "id": "recipe_machine_high_temp_furnace_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "high_temp_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_high_temperature_power_supply_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_high_temperature_power_supply_v0_import.yaml",
+      "id": "recipe_machine_high_temperature_power_supply_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "high_temperature_power_supply_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_hot_press_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_hot_press_v0_import.yaml",
+      "id": "recipe_machine_hot_press_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "hot_press_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_jaw_crusher_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_jaw_crusher_v0_import.yaml",
+      "id": "recipe_machine_jaw_crusher_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "jaw_crusher_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_labor_bot_general_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_labor_bot_general_v0_import.yaml",
+      "id": "recipe_machine_labor_bot_general_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "labor_bot_general_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_magnetic_separator_drum_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_magnetic_separator_drum_v0_import.yaml",
+      "id": "recipe_machine_magnetic_separator_drum_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "magnetic_separator_drum_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_mre_reactor_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_mre_reactor_v0_import.yaml",
+      "id": "recipe_machine_mre_reactor_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "mre_reactor_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_power_storage_bank_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_power_storage_bank_v0_import.yaml",
+      "id": "recipe_machine_power_storage_bank_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "power_storage_bank_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_radiator_panels_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_radiator_panels_v0_import.yaml",
+      "id": "recipe_machine_radiator_panels_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "radiator_panels_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_reduction_furnace_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_reduction_furnace_v0_import.yaml",
+      "id": "recipe_machine_reduction_furnace_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "reduction_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_sintering_furnace_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_sintering_furnace_v0_import.yaml",
+      "id": "recipe_machine_sintering_furnace_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "sintering_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_solar_array_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_solar_array_v0_import.yaml",
+      "id": "recipe_machine_solar_array_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "solar_array_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_vibratory_feeder_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_vibratory_feeder_v0_import.yaml",
+      "id": "recipe_machine_vibratory_feeder_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "vibratory_feeder_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_machine_welding_power_supply_v0_import": {
+      "aliases": [],
+      "defined_in": "kb/recipes/machine_welding_power_supply_v0_import.yaml",
+      "id": "recipe_machine_welding_power_supply_v0_import",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "welding_power_supply_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_bearing_set_heavy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_bearing_set_heavy_v0.yaml",
+      "id": "recipe_part_bearing_set_heavy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "bearing_set_heavy",
+        "metal_casting_basic_v0",
+        "sintering_and_hot_pressing_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_drive_motor_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_drive_motor_medium_import.yaml",
+      "id": "recipe_part_drive_motor_medium_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "drive_motor_medium",
+        "metal_casting_basic_v0",
+        "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_fastener_kit_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_fastener_kit_medium_import.yaml",
+      "id": "recipe_part_fastener_kit_medium_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "fastener_kit_medium",
+        "metal_casting_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_gearbox_reducer_medium_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_gearbox_reducer_medium_import.yaml",
+      "id": "recipe_part_gearbox_reducer_medium_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "gearbox_reducer_medium",
+        "metal_casting_basic_v0",
+        "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_liner_set_abrasion_resistant_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_liner_set_abrasion_resistant_v0.yaml",
+      "id": "recipe_part_liner_set_abrasion_resistant_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "liner_set_abrasion_resistant",
+        "sintering_and_hot_pressing_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_mill_shell_generic_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_mill_shell_generic_v0.yaml",
+      "id": "recipe_part_mill_shell_generic_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "metal_casting_basic_v0",
+        "mill_shell_generic"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_support_frame_welded_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_support_frame_welded_v0.yaml",
+      "id": "recipe_part_support_frame_welded_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "metal_casting_basic_v0",
+        "support_frame_welded",
+        "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_part_trunnion_supports_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/part_trunnion_supports_v0.yaml",
+      "id": "recipe_part_trunnion_supports_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "metal_casting_basic_v0",
+        "trunnion_supports"
+      ],
+      "status": "defined"
+    },
+    "recipe_regolith_powder_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/regolith_powder_v0.yaml",
+      "id": "recipe_regolith_powder_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "excavate_regolith_surface_v0",
+        "regolith_crushing_grinding_v0",
+        "regolith_powder",
+        "regolith_screening_sieving_v0"
+      ],
+      "status": "defined"
+    },
+    "reduced_metal_oxides": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/reduced_metal_oxides.yaml",
+      "id": "reduced_metal_oxides",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Reduced metal oxides",
+      "refs_in": [
+        "oxygen_extraction_carbothermal_reduction_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "reductant_gas": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/reductant_gas.yaml",
+      "id": "reductant_gas",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Reductant gas",
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "reduction_furnace": {
+      "aliases": [],
+      "defined_in": "kb/resources/reduction_furnace.yaml",
+      "id": "reduction_furnace",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "iron_reduction_from_ilmenite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "reduction_furnace_shell": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/reduction_furnace_shell.yaml",
+      "id": "reduction_furnace_shell",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Reduction furnace shell",
+      "refs_in": [
+        "bom_reduction_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "reduction_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/reduction_furnace_v0.yaml",
+      "id": "reduction_furnace_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Reduction furnace v0",
+      "refs_in": [
+        "bom_reduction_furnace_v0",
+        "recipe_machine_reduction_furnace_v0_import"
+      ],
+      "refs_out": [
+        "bom_reduction_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "regolith_coarse_fraction": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/regolith_coarse_fraction.yaml",
+      "id": "regolith_coarse_fraction",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Regolith coarse fraction",
+      "refs_in": [
+        "regolith_crushing_grinding_v0",
+        "regolith_screening_sieving_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_crushing_grinding_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/regolith_crushing_grinding_v0.yaml",
+      "id": "regolith_crushing_grinding_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_1"
+      ],
+      "name": "Regolith crushing and grinding",
+      "refs_in": [
+        "recipe_regolith_powder_v0"
+      ],
+      "refs_out": [
+        "ball_mill",
+        "dust_control",
+        "jaw_crusher",
+        "labor_bot_general",
+        "regolith_coarse_fraction",
+        "regolith_powder"
+      ],
+      "status": "defined"
+    },
+    "regolith_excavated": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/regolith_excavated.yaml",
+      "id": "regolith_excavated",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Excavated regolith",
+      "refs_in": [
+        "excavate_regolith_surface_v0",
+        "regolith_screening_sieving_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_fine_fraction": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/regolith_fine_fraction.yaml",
+      "id": "regolith_fine_fraction",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Regolith fine fraction",
+      "refs_in": [
+        "glass_melting_and_forming_v0",
+        "regolith_screening_sieving_v0",
+        "sintering_and_hot_pressing_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_powder": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/regolith_powder.yaml",
+      "id": "regolith_powder",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Regolith powder",
+      "refs_in": [
+        "beneficiate_regolith_magnetic_v0",
+        "oxygen_extraction_carbothermal_reduction_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0",
+        "regolith_crushing_grinding_v0",
+        "recipe_regolith_powder_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_screening_sieving_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/regolith_screening_sieving_v0.yaml",
+      "id": "regolith_screening_sieving_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_1"
+      ],
+      "name": "Regolith screening and sieving",
+      "refs_in": [
+        "recipe_regolith_powder_v0"
+      ],
+      "refs_out": [
+        "dust_control",
+        "labor_bot_general",
+        "regolith_coarse_fraction",
+        "regolith_excavated",
+        "regolith_fine_fraction",
+        "vibrating_screen"
+      ],
+      "status": "defined"
+    },
+    "rejected_heat": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/rejected_heat.yaml",
+      "id": "rejected_heat",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Rejected heat",
+      "refs_in": [
+        "thermal_management_radiators_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "rolling_elements_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/rolling_elements_set.yaml",
+      "id": "rolling_elements_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Rolling elements set",
+      "refs_in": [
+        "bom_bearing_set_heavy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "rotor_shaft_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/rotor_shaft_medium.yaml",
+      "id": "rotor_shaft_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Rotor shaft (medium)",
+      "refs_in": [
+        "bom_drive_motor_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sensor_suite_general": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/sensor_suite_general.yaml",
+      "id": "sensor_suite_general",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Sensor suite (general)",
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_high_temperature_power_supply_v0",
+        "bom_hot_press_v0",
+        "bom_labor_bot_general_v0",
+        "bom_magnetic_separator_drum_v0",
+        "bom_mre_reactor_v0",
+        "bom_power_storage_bank_v0",
+        "bom_radiator_panels_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0",
+        "bom_solar_array_v0",
+        "bom_vibratory_feeder_v0",
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "separator_frame": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/separator_frame.yaml",
+      "id": "separator_frame",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Separator frame",
+      "refs_in": [
+        "bom_magnetic_separator_drum_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "shaft_set_medium": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/shaft_set_medium.yaml",
+      "id": "shaft_set_medium",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Shaft set (medium)",
+      "refs_in": [
+        "bom_gearbox_reducer_medium_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sintered_shapes": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/sintered_shapes.yaml",
+      "id": "sintered_shapes",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Sintered shapes",
+      "refs_in": [
+        "sintering_and_hot_pressing_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sintering_and_hot_pressing_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/sintering_and_hot_pressing_v0.yaml",
+      "id": "sintering_and_hot_pressing_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "Sintering and hot pressing",
+      "refs_in": [
+        "recipe_part_bearing_set_heavy_v0",
+        "recipe_part_liner_set_abrasion_resistant_v0"
+      ],
+      "refs_out": [
+        "dies",
+        "hot_press",
+        "regolith_fine_fraction",
+        "sintered_shapes",
+        "sintering_furnace"
+      ],
+      "status": "defined"
+    },
+    "sintering_furnace": {
+      "aliases": [],
+      "defined_in": "kb/resources/sintering_furnace.yaml",
+      "id": "sintering_furnace",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "sintering_and_hot_pressing_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sintering_furnace_shell": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/sintering_furnace_shell.yaml",
+      "id": "sintering_furnace_shell",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Sintering furnace shell",
+      "refs_in": [
+        "bom_sintering_furnace_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sintering_furnace_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/sintering_furnace_v0.yaml",
+      "id": "sintering_furnace_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Sintering furnace v0",
+      "refs_in": [
+        "bom_sintering_furnace_v0",
+        "recipe_machine_sintering_furnace_v0_import"
+      ],
+      "refs_out": [
+        "bom_sintering_furnace_v0"
+      ],
+      "status": "defined"
+    },
+    "solar_array": {
+      "aliases": [],
+      "defined_in": "kb/resources/solar_array.yaml",
+      "id": "solar_array",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "solar_power_generation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "solar_array_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/solar_array_v0.yaml",
+      "id": "solar_array_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Solar array v0",
+      "refs_in": [
+        "bom_solar_array_v0",
+        "recipe_machine_solar_array_v0_import"
+      ],
+      "refs_out": [
+        "bom_solar_array_v0"
+      ],
+      "status": "defined"
+    },
+    "solar_irradiance": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/solar_irradiance.yaml",
+      "id": "solar_irradiance",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Solar irradiance",
+      "refs_in": [
+        "solar_power_generation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "solar_power_generation_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/solar_power_generation_basic_v0.yaml",
+      "id": "solar_power_generation_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_8"
+      ],
+      "name": "Basic solar power generation",
+      "refs_in": [],
+      "refs_out": [
+        "electrical_energy",
+        "power_conditioning_unit",
+        "solar_array",
+        "solar_irradiance",
+        "solar_tracking_optional"
+      ],
+      "status": "defined"
+    },
+    "solar_tracking_optional": {
+      "aliases": [],
+      "defined_in": "kb/resources/solar_tracking_optional.yaml",
+      "id": "solar_tracking_optional",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "solar_power_generation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "storage_enclosure": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/storage_enclosure.yaml",
+      "id": "storage_enclosure",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Storage enclosure",
+      "refs_in": [
+        "bom_power_storage_bank_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "stored_energy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/stored_energy.yaml",
+      "id": "stored_energy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Stored energy",
+      "refs_in": [
+        "power_storage_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "support_frame_welded": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/support_frame_welded.yaml",
+      "id": "support_frame_welded",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Support frame (welded)",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "bom_jaw_crusher_v0",
+        "bom_labor_bot_general_v0",
+        "bom_vibratory_feeder_v0",
+        "recipe_part_support_frame_welded_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "temperature_sensing": {
+      "aliases": [],
+      "defined_in": "kb/resources/temperature_sensing.yaml",
+      "id": "temperature_sensing",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "bom_casting_furnace_v0",
+        "bom_glass_furnace_v0",
+        "bom_high_temp_furnace_v0",
+        "bom_hot_press_v0",
+        "bom_mre_reactor_v0",
+        "bom_reduction_furnace_v0",
+        "bom_sintering_furnace_v0",
+        "glass_melting_and_forming_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "thermal_control_valves": {
+      "aliases": [],
+      "defined_in": "kb/resources/thermal_control_valves.yaml",
+      "id": "thermal_control_valves",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "thermal_management_radiators_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "thermal_management_radiators_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/thermal_management_radiators_basic_v0.yaml",
+      "id": "thermal_management_radiators_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_8"
+      ],
+      "name": "Thermal management via radiators",
+      "refs_in": [],
+      "refs_out": [
+        "heat_transport_loop",
+        "radiator_panels",
+        "rejected_heat",
+        "thermal_control_valves",
+        "waste_heat"
+      ],
+      "status": "defined"
+    },
+    "toggle_mechanism_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/toggle_mechanism_set.yaml",
+      "id": "toggle_mechanism_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Toggle mechanism set",
+      "refs_in": [
+        "bom_jaw_crusher_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "torch_assembly": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/torch_assembly.yaml",
+      "id": "torch_assembly",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Torch assembly",
+      "refs_in": [
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "trunnion_supports": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/trunnion_supports.yaml",
+      "id": "trunnion_supports",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Trunnion supports",
+      "refs_in": [
+        "bom_ball_mill_v0",
+        "recipe_part_trunnion_supports_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "vibrating_screen": {
+      "aliases": [],
+      "defined_in": "kb/resources/vibrating_screen.yaml",
+      "id": "vibrating_screen",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "regolith_screening_sieving_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "vibration_motor_set": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/vibration_motor_set.yaml",
+      "id": "vibration_motor_set",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Vibration motor set",
+      "refs_in": [
+        "bom_vibratory_feeder_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "vibratory_feeder": {
+      "aliases": [],
+      "defined_in": "kb/resources/vibratory_feeder.yaml",
+      "id": "vibratory_feeder",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "bom_magnetic_separator_drum_v0",
+        "beneficiate_regolith_magnetic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "vibratory_feeder_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/vibratory_feeder_v0.yaml",
+      "id": "vibratory_feeder_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Vibratory feeder v0",
+      "refs_in": [
+        "bom_vibratory_feeder_v0",
+        "recipe_machine_vibratory_feeder_v0_import"
+      ],
+      "refs_out": [
+        "bom_vibratory_feeder_v0"
+      ],
+      "status": "defined"
+    },
+    "waste_heat": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/waste_heat.yaml",
+      "id": "waste_heat",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Waste heat",
+      "refs_in": [
+        "thermal_management_radiators_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "welded_assemblies": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/welded_assemblies.yaml",
+      "id": "welded_assemblies",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Welded assemblies",
+      "refs_in": [
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "welding_brazing_basic_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/welding_brazing_basic_v0.yaml",
+      "id": "welding_brazing_basic_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6",
+        "layer_7"
+      ],
+      "name": "Basic welding and brazing",
+      "refs_in": [
+        "recipe_part_drive_motor_medium_v0",
+        "recipe_part_gearbox_reducer_medium_v0",
+        "recipe_part_support_frame_welded_v0"
+      ],
+      "refs_out": [
+        "cast_metal_parts",
+        "filler_material",
+        "fixturing_table",
+        "labor_bot_general",
+        "welded_assemblies",
+        "welding_power_supply"
+      ],
+      "status": "defined"
+    },
+    "welding_power_supply": {
+      "aliases": [],
+      "defined_in": "kb/resources/welding_power_supply.yaml",
+      "id": "welding_power_supply",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "welding_brazing_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "welding_power_supply_unit": {
+      "aliases": [],
+      "defined_in": "kb/items/parts/welding_power_supply_unit.yaml",
+      "id": "welding_power_supply_unit",
+      "kind": "part",
+      "layer_tags": [],
+      "name": "Welding power supply unit",
+      "refs_in": [
+        "bom_welding_power_supply_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "welding_power_supply_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/machines/welding_power_supply_v0.yaml",
+      "id": "welding_power_supply_v0",
+      "kind": "machine",
+      "layer_tags": [],
+      "name": "Welding power supply v0",
+      "refs_in": [
+        "bom_welding_power_supply_v0",
+        "recipe_machine_welding_power_supply_v0_import"
+      ],
+      "refs_out": [
+        "bom_welding_power_supply_v0"
+      ],
+      "status": "defined"
+    },
+    "winding_drums": {
+      "aliases": [],
+      "defined_in": "kb/resources/winding_drums.yaml",
+      "id": "winding_drums",
+      "kind": "resource_type",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "basalt_fiber_production_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    }
+  }
+}

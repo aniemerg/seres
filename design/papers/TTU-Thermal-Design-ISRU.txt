@@ -1,0 +1,929 @@
+50th International Conference on Environmental Systems
+12-15 July 2021
+
+ICES-2021-180
+
+Thermal design challenges for lunar ISRU payloads
+Philipp B. Hager1, David Binns2
+European Space Agency, European Research and Technology Centre, Noordwijk, 2200 AG, The Netherlands
+
+Several Concurrent Design Facility (CDF) studies were performed at ESA ESTEC to
+investigate different lunar in-situ resource utilization (ISRU) payload concepts. There are
+numerous technological challenges mainly associated with the maturity of the different
+processes and associated components, but also regarding thermal design aspects. A wide range
+of dissipated powers, high process temperatures, batch processes, and the thermal lunar
+surface environment have proven to be major design drivers for the ISRU payloads.
+
+Carbothermal reduction with methane, ilmenite reduction with hydrogen, and molten salt
+electrolysis were investigated. The ISRU processes are characterized by process temperatures
+from 850°C to 1300°C and downstream process units of up to 500°C. The investigated concepts
+required from 150 W to 900 W of heating power over several hours per batch, for multiple
+batches over the course of a lunar day. A further challenge is the thermal process control for
+thermally inert ovens with regolith. The limitations of payloads, regarding dimensions, mass,
+accommodation and allowable heat fluxes at the interfaces to the lander, restrict the thermal
+control possibilities further. All this is placed in a challenging lunar surface thermal
+environment.
+
+In this paper the thermal designs for two ISRU payloads are described along with the
+respective results. Eventually potential thermal control technologies are sketched to overcome
+the shortcomings of the current design limitations for lunar ISRU payloads.
+
+Nomenclature
+CDF
+FFC
+ISRU
+MLI
+MMO
+SINPA
+
+=
+=
+=
+=
+=
+=
+
+Concurrent Design Facility
+Fray, Farthing & Chen
+In-situ resource utilization
+Multi-Layer-Insulation
+Moon Mission of Opportunity
+Sintering Payload
+
+I. Introduction
+
+I
+
+N 2017 and 2018 several studies were conducted on lunar in-situ resource utilization (ISRU) at the European Space
+Research and Technology Centre (ESTEC) Concurrent Design Facility (CDF). The CDF is mainly used for Phase
+0 level studies. It is based on model based system engineering approaches 1. In general, the objective of these CDF
+studies is to derive a preliminary design but more importantly to identify design drivers, need for technology
+developments and derive requirements for subsequent project phases. An objective of these early phase ESA ISRU
+assessment studies was to build a knowledge base to inform future decision making, which was of particular
+importance for a novel field.
+
+1
+
+Thermal Engineer, Thermal Control Section (ESA-TEC-MTT), Keplerlaan 1, 2200 AG, Noordwijk, The
+Netherlands, philipp.hager@esa.int.
+2
+Systems Engineer, Systems and Concurrent Engineering Section (ESA-TEC-SYE), Keplerlaan 1, 2200 AG,
+Noordwijk, The Netherlands, david.binns@esa.int
+Copyright © 2021 European Space Agency
+
+The ISRU related studies were ISRU-MMO (Moon Mission of Opportunity) and ISRU-FFC (Fray, Farthing &
+Chen), ISRU-Pilot Plant and SINPA (Sintering Payload). The present document focuses on the thermal design of the
+ISRU-MMO and ISRU-FFC studies. Both were conceived as payloads for commercial landers. As such, the lander
+designs are not addressed in this paper. Yet, the challenges are addressed, arising from the unknown and uncertainties
+related to the thermal interface to the commercial landers.
+The processes for the extraction of oxygen or water from lunar regolith were considered to minimize the
+temperatures required. This paper does not go into the detail of the physics, general principles, system level
+implications and holistic advantages/disadvantages of these reductions processes for reasons of brevity. Only the flow
+down of system level requirement intrinsic to them relevant to thermal design are described. A useful review of ISRU
+processes can be found in Ref. 2.
+Thermal aspects were significant design drivers for all of these ISRU studies. ISRU-MMO and ISRU-FFC focused
+on the exploitation of regolith to gain resources from lunar soil. In the ISRU-MMO study carbothermal reduction of
+silicates3,4 and ilmenite reduction of hydrogen5 were investigated. The ISRU-FFC study focused on molten salt
+electrolysis, based on the FFC metalysis process6,7.
+In the following, first the boundary conditions of thermal design for lunar surface payloads are summarized, then
+ISRU payload relevant trade-offs are shown and finally first order thermal models and analysis of the two ISRU
+studies are presented. The conclusions from both studies are synthesized and common problems are highlighted.
+Finally some potential technology solutions are sketched for the thermal design and control of ISRU payloads 3.
+
+II. Boundary Conditions for Lunar Surface ISRU Payloads
+In this section the main boundary conditions are presented which impact the thermal design of lunar surface
+payloads in general, and ISRU payloads in particular. They will be discussed following the operational timeline.
+No specific aspects were identified for the launch or low Earth orbit, from the thermal engineering perspective.
+During transfer, the orientation of the lander and of the payload towards the Sun and deep space is a thermal design
+driver. If the lander is not spinning, the transit can be the worst cold case. Furthermore, sun trapping during transit
+might become problematic for payloads with highly reflective outer surface coatings, sized to cope with high lunar
+surface temperatures. The lunar orbit can pose additional thermal constraints on the payload, especially if the periselen is low and on the dayside of the Moon. This can cause high IR loads from the lunar surface. During the landing
+phase, the heat from the thrusters can impact the payload and has to be taken into account. For the breaking manoeuvers
+and final landing a dedicated time line is necessary, accompanied by the to-be-expected heat fluxes from the lander
+and the environment, as well as the temperature at the interface to the lander.
+In lunar surface missions a number of uncertainties impact the thermal design of payloads. These uncertainties
+originate from the landing site selection, the orientation of the lander on the surface, the location of the payload on the
+lander, and the local surface topography. The landing site impacts the local temperature extremes on the lunar surface,
+i.e. temperature amplitude depends on latitude and local slopes. The orientation of the lander on the lunar surface with
+regard to local North or South, determines the payloads exposure to the Sun and the albedo and IR received from
+ground. Commercial lander providers with no flight heritage at the time of the studies, either specified a wide range
+of possible orientations due to guidance navigation and control system limitations, or they did not guarantee any
+orientation at all. The location of the payload on the lander depends on the lander and might change in the course of a
+project. Depending on the shape of the lander this might mean exposure to radiators or heat exchange with other
+payloads. And of course it impacts the heat exchange with deep space, the lunar surface or the Sun. A last uncertainty
+is the local small scale topography. Local topography is governed by crater slopes and rims or nearby boulders. These
+local surface features can vary in temperature significantly from the average surrounding lunar surface, which might
+lead to additional heat fluxes or lower sink temperatures.
+A further difficulty with regard to lunar regolith properties is the danger of degradation of optical surface
+properties8. This means oversizing of radiators and insulations, to account for degradation by lunar dust over the course
+of the mission duration.
+On top of the challenges mentioned above there is also the lunar night-time survival aspect. Surviving a lunar night
+essentially means to survive an ‘eclipse’ of 14 days. This period can even be longer at the lunar poles. The lunar
+surface temperature decreases over the course of the lunar night from 150 K to 100 K around the equator or from 100
+K to 60 K at high lunar latitudes, excluding even colder temperatures in permanently shadowed craters. In this
+3
+
+The technology needs identified and presented in this paper are the view of the author only. They are no officially
+fostered by ESA or part of an official roadmap.
+2
+International Conference on Environmental Systems
+
+temperature range the heat received from the lunar surface becomes very small. Lunar night time survival requires a
+number of thermal control mechanisms which make the thermal control system complex. In combination with the
+associated heater power demand and the subsequent size of the power subsystem, lunar night survival is often
+discarded. The current first generation of commercial lunar surface landers often does not foresee to survive a lunar
+night at all.
+
+III. Thermal Design related Trade-offs
+The main trade-offs which were performed in the scope of the ISRU-MMO and ISRU-FFC studies regarding the
+thermal design, focuses on four aspects: heat application, heat distribution, thermal insulation and heat rejection.
+A. Heat Application
+Several ways of applying heat to a Regolith sample can be envisioned and can be found in literature. Table 1
+summarizes the basic concepts for heat application in ISRU systems and their major benefits and shortcomings, purely
+from thermal engineering point of view. Table 1 focuses on the main mechanism and does not claim to be exhaustive.
+In the ISRU-MMO and ISRU-FFC studies, electric heating was selected as baseline as it provides less design
+restrictions than other options, is a high TRL technology, a proven concept, and allows the implementation of
+relatively simple and well established heater control.
+Heat Distribution
+There are many ways conceivable to
+distribute heat in a porous media such as a
+regolith sample in an ISRU reactor. Table 2
+summarizes different heat distribution
+methods considered in the scope of the ISRUMMO study. Table 2 is qualitative and does
+not claim to be exhaustive. There are many
+different technical solutions or combinations
+of the presented methods thinkable to achieve
+heat distribution in a regolith sample.
+The low thermal conductivity of regolith
+inhibits an effective heat transfer inside a solid
+and static regolith sample. Mixing of regolith
+allows an increased heat transfer. Mixing can
+be achieved for example via stirring
+mechanisms (augers), rotation or vibration of
+the entire reactor. A further increase of heat
+transfer can be created by using convective
+heat transfer by a gas, or theoretically a fluid.
+The gas can either be injected actively with
+high pressure to create movement of the
+regolith or the (reactant) gases can be injected
+at low pressure and their presence will allow
+for the convective heat transfer. The later
+concept is also referred to as residual flow.
+In the scope of the ISRU-MMO study a
+concept was selected which combines a
+moving / stirred regolith sample and a
+conductive and radiative heat input from the
+reactor walls with the convective heat
+exchange by the pre-heated reactant gas.
+For ISRU-FFC heat distribution not re-visited due to the given principle of the FFC-metalysis process. In the scope
+of the ISRU-FFC study the CaCl2 salt bath was pre-selected. In a salt bath the regolith sample does not require active
+heating. It is heated by the salt bath.
+Table 1. Heat application methods with benefits and
+drawbacks.
+Heat
+application
+Benefits & Drawbacks
+method
++ Direct, no energy conversion losses;
+availability; no reaction products
+Solar- Implementation in overall design; requires
+thermal
+optical path; concentrated energy; difficult
+heating3
+to adjust intensity; requires large collector
+areas for up-scaling;
++ High thermal efficiency; landing site
+‘Radioindependent
+isotope
+- Difficult in implementation; safety
+heating’ –
+aspects; requires cooling during assembly,
+radio
+integration and test (AIT); - not adjustable;
+isotope
+no switching capabilities; contamination
+decay9
+and waste
++ Widely used; simple implementation;
+design flexibility regarding dimensions,
+Electric
+shapes, power densities; controllable heat
+heating
+output
+- Inefficient, i.e. conversion losses from
+energy source.
++ Direct and efficient heat application inside
+the sample
+Microwave
+- Design limitations; requires beneficiation of
+heating10
+samples; possible local hot spots in sample due
+to different reaction to microwaves; low TRL
+for regolith heating.
+
+3
+International Conference on Environmental Systems
+
+B.
+
+C. Thermal Insulation
+An efficient thermal insulation is paramount to achieving the required temperature ranges in the regolith inside
+Table 2. Heat distribution methods with benefits and drawbacks.
+Heat
+distribut
+Sketch
+Benefits & Drawbacks
+ion
+Single bed
++ Simple design; easy to implement
+or
+- Large gradients due to low conductivity of Regolith; Local hot spots at
+multiple/sp
+the conductive interface between heater and sample -> danger of sintering
+lit beds11
+of Regolith; uses only conductive heat transfer; gas penetration is
+questionable; thermal control difficult because of delayed feedback
+between temperature measurement and heat input; filling and draining of
+reactor difficult
+Falling
++ continuous or batched process possible; homogeneous heating possible
+curtain12
+- short exposure time; can be increased by a counter movement (e.g.
+gaseous counter flow, Archimedes spiral), or the fall velocity can be
+reduced (e.g. chevrons); requires direct view from a radiation source to the
+g
+sample; difficult gas extraction / sealing
+Fluidized
++ high heat transfer by constant mixing of Regolith (behavior similar to a
+beds13
+fluid); pre-heated gas increases heat transfer; homogenous
+- requires gas injection porous for gas but blocking regolith; high pressure
+constant gas feed necessary; levitated finest particles and distributes them
+downstream
+Vibro+ high heat transfer by constant mixing of Regolith (behavior similar to a
+fluidizatio
+fluid)
+n14
+- requires mechanical agitation; challenging decoupling of vibration
+mechanism from seals, regolith filling & removing and gas connections
+Residual
+flow13
+g
+
+Salt bath15
++
+
+-
+
++ conductive, radiative and convective heat transport combined;
+- requires a mechanism for constant rotation, challenging gas feed and
+drain connections for process gas; challenging filling & removing of
+Regolith sample
++ sample enclosed by a medium; salt can be transported and handled as solid;
+becomes fluid at higher temperatures leading to convective heat transport;
+- batch process; salt losses; challenging sample filling and draining;
+
+ISRU reactors. The thermal insulation necessary for ISRU reactors is more akin to terrestrial high vacuum ovens than
+to typical aerospace applications. This is mainly because of the required process temperatures of 850°C to 1300°C for
+the potential processes discussed in this paper4. Yet, the terrestrial applications usually do not have the strict
+requirements in terms of allowable mass, available power, presence of ultra-high vacuum also outside the oven, and
+the complex and challenging lunar surface thermal environment.
+Table 3 summarizes thermal insulation possibilities which were considered for the ISRU-MMO and ISRU-FFC
+studies. The main aspects in the selection of a suitable thermal insulation for ISRU payloads are the insulation
+properties, but also the area specific mass, the suitability for the space environment, temperature extremes, launch and
+landing loads, the machine-ability, and its handling.
+In the scope of the ISRU-MMO and ISRU-FFC study a combination of several insulation mechanisms was
+selected. The baseline insulation design uses a metallic radiative shield next to the outer surface of the oven, followed
+by a solid alumina (Al2O3) insulation. The outermost insulation layer is a high temperature MLI.
+
+4
+
+It should be noted at this point that other processes, not considered in the ESA studies presented here, could require
+temperatures up to 2000°C
+4
+International Conference on Environmental Systems
+
+D. Heat Removal and Rejection
+Classical thermal design relies on the sizing of a radiator for a hot case and subsequent sizing of heating power for
+the cold case. For spacecraft operating on the lunar surface this common approach has only limited applicability. This
+is especially true for ISRU payloads. Factors impacting radiator sizing are its orientation towards the lunar surface
+and the Sun angle of incidence, the high temperature of the ISRU reactor, its heat losses and its mode of operation.
+Table 3. Insulation methods with benefits and drawbacks.
+Insulation
+Examples
+Benefits & Drawbacks
+Method
+Ceramics: e.g.
++ solid; known material properties; reliable and well proven in earth
+- Al2O3 Silica
+applications; machinability
+Solid
+- Chamotte
+- ceramics: mass; potentially sensitive to shock; particular
+Insulation
+- Graphite based
+contamination
+Felts and plates
+- graphite: mass; particular contamination
++ very good insulation properties; similar to Regolith, i.e. ISRU
+- Fumed silica
+insulation demonstration
+Porous
+flexible panels
+- possible contamination issues; gravitation specific deformation
+Insulation
+possible
+Open &
++ Light weight (low density)
+Polyimid foams
+closed cell
+- restricted temperature range; less efficient insulation
+foams
++ Very light weight; Superior insulation properties
+Aerogel (Silica)
+Aerogel
+- brittle / sensitive to shocks
+Metal for high
+Radiation
++ light weight; very good insulation properties
+temperature,
+Shield
+- surfaces are sensitive to contamination with lunar dust -> reduces
+surface
+finish
+(Dewar
+performance; support structure is necessary which introduces heat bridges
+with low epsilon
+flask)
++ very good insulation properties for large blankets; vast heritage in
+spaceflight applications;
+Titanium
+foil
+- reduced performance for small dimensions or complex blanket shapes;
+Multi-Layer
+with glass fiber
+sensitive to contamination (covering with dust or abrasion of surface
+Insulation
+spacer
+coating); limited temperature range (high temperature MLI up to
+~500°C
+This section rather discusses theoretically the applicability of heat rejection methods to ISRU payloads as a
+combination of current and to-be-developed technologies. The mode of operation of common heat rejection methods
+for spaceflight can be found in standard text books16 and will not be repeated here.
+The main driving factors for heat rejection for ISRU payloads are external heat loads and the length of the lunar
+day, the high internal dissipation, different operation modes and durations, high reaction chamber temperature, the
+challenges stemming from heat input during different mission phases, and the interface to the lander. In order to cope
+with these driving factors and allow for the operation of the ISRU payloads, there are three main approaches. These
+are a) a variable heat rejection of the radiator or b) a switch-able heat transport between heat source and radiator, and
+c) a reduction of the radiator temperature in cold case.
+
+IV. Thermal Design and Analysis of Lunar ISRU Payloads
+An important aspect of the CDF studies is to identify the driving design parameters and to perform trade-offs
+which then are used on system level to conclude on the overall design. The presented concepts do not claim to be the
+best solution. There are common aspects, which were a consequence of system level decisions and not only motivated
+by thermal design aspects. It goes beyond the scope of this paper to also address and justify these individually.
+For none of the presented CDF studies dedicated geometrical mathematical models (GMM) were created. The
+thermal analyses are based on thermal mathematical models (TMM) with a low number of thermal nodes, supported
+by spread-sheet based calculations. The nature of the CDF leads to a continuously changing design and hence there is
+not enough time to prepare, debug and run elaborate thermal models.
+The investigation of the thermal control in the scope of the ISRU-MMO and ISRU-FFC study was focused on the
+heat application, heat distribution, thermal insulation and to a lesser extent the heat rejection of the ISRU reactors.
+5
+International Conference on Environmental Systems
+
+1
+2
+7
+3
+
+Classic thermal design aspects are not reported in this
+paper, such as temperature range, stability and gradient
+requirement
+compliance
+for
+the
+individual
+components.
+
+A. ISRU-MMO and ISRU-FFC Study Thermal
+Designs
+The main thermal requirements for the ISRU-MMO
+4
+reactor were to heat up a sample of 0.9 kg Regolith to
+temperatures of 850 °C for the ilmenite concept 5 and a
+5
+sample of 0.5 kg Regolith to temperatures of 1300 °C
+for the carbo-thermal concept. The reactor was
+a)
+Spacecraft structure
+assumed to work in a batched mode. One batch was
+5
+1 Radiation gap (vacuum)
+Heating element
+required to last less than 20 hours as an initial
+6 Structural support
+2 Metallic shield
+assumption. The total mass of the alumina insulation is
+7 High temperature MLI
+approx. 1.75 kg. No power restrictions were defined for
+3 Solid Insulation
+the ISRU-MMO study.
+8 Gas filled (pre heated)
+4 Sample
+The main requirements relevant for the thermal
+design
+of the ISRU-FFC process are to heat up 4 kg of
+1
+CaCl2 to the operating temperature of 950 °C. In
+2
+principle different amount of regolith can be added but
+in the ISRU-FFC study 250 g of regolith was used for
+3
+7
+the computations. The reactor was assumed to work in
+a batched mode. One batch was required to require a
+heat-up of less than 6 hours and the subsequent process
+was required to last less than 6 hours, too. It was
+4
+6
+required that the ISRU-FFC reactor requires less than
+500 W during heat-up and to maintain the process
+5
+during operation. Temperature stability in the reactor
+was assumed to be ± 5 °C/min and the temperature
+gradient less than 30 °C/m. The total mass of the
+alumina insulation was approx. 7.6 kg.
+b)
+Spacecraft structure
+Figure 1a shows a schematic of the ISRU-MMO
+Figure 1. Schematic representation of thermal
+reactor and Figure 1b shows a schematic of the ISRUbaseline designs; a) ISRU-MMO study and b) ISRUFFC reactor from a thermal engineering perspective.
+FFC study. Not to scale.
+The main components relevant for the thermal engineer
+are a heater element (6) attached to the reactor chamber
+(4), a vacuum gap (1) between the reactor and the solid ceramic insulation (3), a metallic radiation shield (2) as a first
+insulating barrier, and a high temperature MLI (7). The MLI would be composed of metallic layers for the inner layers
+and high performance polymers for the outer layers. There are conductive heat losses, caused by mechanisms in case
+of ISRU-MMO or the crucible and cathode which have to be submerged in the CaCl2 bath in case of ISRU-FFC. Both
+concepts have heat losses through connected pipe-work, the insulation and structural supports (8). In the ISRU-MMO
+study a thermal decoupling between lander and payload was assumed. Commercial landers usually do require
+negligible amounts of heat to be transferred to the lander. In the ISRU-FFC study a total conductive interface of 0.4
+W/K to the lander was assumed. Feedthroughs or holes in the solid insulation were not accounted for which leads to
+optimistic results. Also in both concepts there are radiative heat losses from the outermost MLI layer to the lunar
+surface and deep space.
+The lander interface was assumed to be a fixed boundary condition, under the assumption that the lander would
+provide the thermal control of the interface. No temperature dependent material properties were considered. In case
+of ISRU-FFC a simplified convective heat transfer was assumed between crucible and salt. Temperature dependent
+thermal conductivity of CaCl2 was used together with latent heat during phase transition from solid to liquid.
+8
+
+5
+
+6
+
+Note that the feasibility for a ilmenite reduction process at a temperature of 850°C is controversial. At the time of
+the study this process temperature was used as baseline for the thermal design and thus is used in this paper.
+6
+International Conference on Environmental Systems
+
+The thermal design concept of the ISRU-MMO system is derived from the trade-offs on thermal insulation, heat
+application and distribution briefly described in section III. In the case of ISRU-FFC, the insulation strategy was
+derived in a similar way as for the ISRU-MMO concept but it started off with lower available heater power and the
+requirement of shorter batch times. In both studies additional units were included, such as electronic control units or
+mechanisms. These units were grouped according to their temperature ranges to foresee compartments of high
+(additional process chambers), medium (electronic control units, mechanisms), or low (condensation plates, analysis
+unit cold fingers) temperatures. These compartments are not further detailed in this paper as they were not studied in
+significant detail in the course of the ISRU CDF studies.
+
+V. ISRU Study Thermal Analysis Results
+
+1000
+
+The initial condition of all components was set
+to -100°C in the ISRU-MMO study. The regolith
+sample temperature is controlled by a simple
+600
+thermostatic control, i.e. full heater power is applied
+whenever the regolith sample temperature is below
+400
+the target temperature. This assumption is justified
+by the fact that the approach uses as rotation to stir
+200
+the regolith (moving bed) and that a process gas is
+300 W
+used. The stirring of the regolith and the process gas
+600 W
+0
+will allow for a equilibration of the temperature
+900 W
+inside the process chamber. The ISRU-MMO
+-200
+0
+5
+10
+15
+20
+25
+30
+results are optimistic because conductive heat
+Time, h
+losses to the lander are neglected. There are no
+conductive links between the reactor, the radiation
+Figure 2. ISRU-MMO heat-up time for process
+shield and the solid insulation, as well as between
+temperature of 850°C and input powers of 300 W, 600 W
+the entire ISRU-MMO payload to the lander
+and 900 W
+structure. Only calculated temperatures are shown,
+i.e. they do not contain any modeling uncertainty.
+Table 4: Time to stabilization and average heater power
+Furthermore the heater power does not contain any
+after stabilization for three target temperatures and three
+margin.
+installed heater powers.
+The graphs in Figure 2 and Table 4 show the
+Target
+300
+600
+900
+results from simulation runs with the ISRU-MMO
+Temp.
+Unit
+W
+W
+W
+thermal model. Figure 2 shows the heat-up time for
+[h]
+20.1
+8.1
+4.9
+Time to stabilization
+cases with 300 W, 600 W, and 900 W of heater
+850 °C
+Average power after
+power for a target temperature of 850°C. Table 4
+[W]
+274.1 318.8 327.0
+stabilization
+summarizes the required time until stabilization and
+[h]
+inf
+9.0
+5.4
+Time to stabilization
+average power after stabilization for three different
+1000 °C
+Average power after
+[W]
+n.a. 390.2 405.3
+target temperatures 850°C, 1000°C, and 1300°C
+stabilization
+[h]
+inf
+12.2
+6.6
+Time to stabilization
+and three heater power levels. The average heater
+1300 °C
+Average power after
+power after stabilization is the power that has to be
+[W]
+n.a. 533.8 576.9
+stabilization
+provided continuously after the target temperature
+is reached. Figure 2 indicates that for the analyzed
+configuration, increasing the heater power by a factor of two, will reduce the time to stabilization by 60%, i.e. from
+20.1 hours to 8.1 hours. A further increase to 900 W leads to another decrease by 24% to 4.9 hours. The average power
+after stabilization increases from 274.1 W for 300 W to 327 W for 900 W. Table 4 also shows the same results for
+target temperature of 1000°C, and 1300°C. These target temperatures cannot be reached for heater powers of 300 W.
+The heat losses through the insulation are too high. In the analyzed configuration, the requirement of a heating time
+of less than 20 hours can be achieved with 600 W and 900 W.
+Figure 3 shows results from the simulation runs with the ISRU-FFC thermal model, in particular the heat-up time
+for the ISRU-FFC process for different combinations of applied heater powers and CaCl2 masses. The initial condition
+was set to 0 °C and the target temperature was 950 °C. Different from the ISRU-MMO case in the ISRU-FFC case
+conductive heat losses were accounted for. The assumed conductive link between the reactor and the structure was
+0.1 W/K and between the alumina insulation and the structure was 0.3 W/K. For the ISRU-FFC study also different
+height/diameter ratios were investigated for the reactor, to reduce insulation material mass.
+Sample temperature, C
+
+800
+
+7
+International Conference on Environmental Systems
+
+1000
+900
+800
+
+Temperature, C
+
+700
+600
+500
+400
+500 W / 4 kg
+300
+
+500 W / 1.5 kg
+
+200
+
+500 W / 0.5 kg
+500 W / 4 kg var.
+
+100
+
+150 W / 1.5 kg
+
+0
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+9
+
+10
+
+Time, h
+
+Figure 3. ISRU-FFC heat-up time for different
+combinations of heater power and CaCl2 masses.
+Table 5. Time to stabilization and average heater power
+after stabilization for different CaCl2 masses.
+Installed heater
+power
+
+[W]
+
+CaCl2 mass
+
+[kg]
+
+0.5
+
+1.5
+
+Regolith mass
+
+[kg]
+
+0.01
+
+Time to
+stabilization
+
+[h]
+
+0.5
+
+500
+
+500*
+
+150
+
+4.0
+
+4.0
+
+1.5
+
+0.031
+
+0.083
+
+0.083
+
+0.031
+
+1.3
+
+3.6
+
+4.6
+
+9.4
+
+The different cases were 500 W heating power
+with 0.5 kg, 1.5 kg and 4 kg of CaCl2 respectively
+and one case with 150 W heating power and 1.5 kg
+of CaCl2. The respective regolith sample masses are
+0.01 kg of regolith for 0.5 kg of CaCl2, 0.031 kg of
+regolith for 1.5 kg of CaCl2, and 0.083 kg for 4 kg
+of CaCl2. One additional case (dotted line) is
+showing the impact of the phase transition of the
+CaCl2 from solid to liquid. The required heat-up
+time of 6 hours was achieved for all simulation runs
+with 500 W heater power but not for the case with
+150 W heater power. For the same amount of CaCl2
+and regolith in the reaction chamber, the heat-up
+time decreases from 9.4 hours with 150 W to 14%,
+i.e. 1.3 hours with 500 W heating power. The
+average power after stabilization remains approx.
+the same. The deviation shown in the table is due to
+the used time step in the model and subsequent
+computation errors. Introducing temperature
+dependent material properties of the CaCl2 as well
+as taking into account the latent heat for the phase
+transition from solid to liquid starting at 772°C,
+yields in an increase of time to stabilization of 30%.
+Also here the average power after stabilization is
+similar and the difference in the shown values is due
+to the step width of the model.
+
+VI.
+
+Discussion
+
+The two concepts should not be compared
+Average power
+[W]
+54.8
+77.2
+125.6
+136.4
+80.0
+after stabilization
+directly as the initial and boundary conditions of
+both studies and hence the technical solutions were
+* variable CaCl2 material properties
+different. The ISRU-MMO concept has a higher
+mass of regolith with a poor thermal conductivity, less insulation but higher available heater powers. In case of the
+ISRU-FFC mass of regolith is only a fraction of the amount in ISRU-MMO and the heater power was restricted to a
+maximum of 500 W.
+In both cases a thermostatic thermal control is assumed, i.e. the current temperature of the sample is measured and
+the heating power can be applied at the reactor body without delay. In reality there will be a delay between temperature
+measurement and heat application. The location of the temperature sensor is not trivial especially for a rotating reactor
+as in case of ISRU-MMO. Furthermore, it is assumed that the temperature is homogenous inside the reactor. This
+assumption is justified as in case of the ISRU-MMO a carrier gas is used once the reactor is closed. In the ISRU-FFC
+process the CaCl2 is first in its solid and later in its liquid state. In a real ISRU application the thermal control will
+most likely be PID controlled. It will be one of the major challenges of the characterization of such ISRU payloads to
+identify and fine-tune the appropriate control parameters.
+The presented results from the ISRU-MMO and ISRU-FFC thermal models are based on a very preliminary design
+on system and thermal subsystem level. The main design drivers for the thermal control system with regard to ISRU
+payloads are the ISRU process, available heater power, the ISRU component temperature ranges, the lifetime of the
+ISRU payload, the accommodation on the lander, and the landing site characteristics. Design drivers with a lower
+impact are the transfer and landing phases of the mission.
+1) The ISRU process: The ISRU process defines the required temperatures in the reaction chamber and in any
+downstream process step. The target temperature of the sample in the ISRU reaction chamber together with
+limitations on available power governs the need for thermal insulation. Different methods for heating and heat
+distribution also impact the thermal design (see also section III).
+2) Available heating power: Due to the dimensions and capabilities of the potential commercial lunar landers,
+only low levels of heating power might be available for the ISRU process. This requires efficient thermal
+8
+International Conference on Environmental Systems
+
+3)
+
+4)
+
+5)
+
+6)
+
+7)
+
+8)
+9)
+
+insulations. The drawback of efficient thermal insulations is that it also takes long to cool down the ISRU
+process chamber in between batches, in case of batch processes. This leads to operational constraints.
+Temperature range of components: The absolute temperature of the process has implications on the usable
+components inside (if any) and attached to the process chamber. Internal to an ISRU processes chamber, there
+could be stirrers, augers, or crucibles. Attached to the entry and exit are for example valves, sealing,
+membranes or bearings. Their respective maximum operational and storage temperature ranges lead to
+restrictions. A pertinent point if the assessment of processes is extended to those beyond the regolith melting
+points such as molten oxide electolysis and vapour phase pyrolysis.
+Adjacent process steps: The process gases exiting the process chamber of the ISRU payload have a
+temperature of several hundred degrees and some of the sub-sequent steps require also process temperatures
+higher than 500°C. This impacts the designs of the attached piping and its insulation. In some cases pre-heating
+of gases might be necessary and heat exchanges might be used to increase thermal efficiency.
+Interface to the lander: The commercial landers usually require that no or only very limited heat is exchanged
+at the interface between lander and payload. This is explicitly challenging for ISRU payloads which per
+definition are operated at high temperatures. In addition, the lander restricts the view factor between the
+payload and the environment and between payload and deep space as heat sink. Unfavorable accommodation
+for ISRU payloads are those with increased view factor to the surface of the Moon or the lander, with
+subsequent restrictions in rejecting heat.
+Lunar thermal environment: Depending on latitude and time of lunar day the surface of the Moon can vary in
+temperature between 30 K to almost 400 K. The temperature depends mostly on the angle of incidence from
+the Sun and the duration of this exposure. Simplified approaches to compute the lunar daytime temperature
+are presented for example in Ref. 17-20. Locally high lunar surface temperatures severely impacts the heat
+rejection capability and as such the thermal design of any lunar spacecraft in general and ISRU payloads in
+particular. On the other hand the absence of Sun, i.e. lunar night time or local shadow effects cools down the
+environment to 100K and less, leading to an increase in heater power demand.
+ISRU process thermal model and regolith material properties: The heat transfer between the process chamber
+and the regolith is difficult to model accurately. The boundaries between thermal modelling and process
+modelling become blurry.
+Lunar regolith material properties: The properties of regolith are those of a thermal insulator. Heating regolith
+is not trivial.
+ISRU process thermal control: The poor thermal conductivity of regolith leads also to challenges in the control
+of the heating process.
+
+VII. Summary & Conclusion
+In this paper the thermal design challenges, design options, possible implementation and first order thermal
+analysis results for two high level ISRU payload missions are presented. The missions were investigated in a
+concurrent design approach over the course of several weeks each. In the ISRU-MMO study it was concluded that it
+is possible to reach temperatures of up to 1300°C in regolith samples of 0.5 kg with 600 W to 900 W. This was
+achieved for heat-up times of less than 13 hours, although optimistic interface temperatures were used. In the ISRUFFC study general feasibility was shown for a concept with not more than 500 W heater power and up to 4 kg of CaCl2
+and 0.083 g of regolith. For the ISRU-FFC study heat-up times of less than 5 hours were achieved with the selected
+thermal design. The ISRU-FFC thermal analysis also included heat losses to the lander. In both cases the insulation
+was composed of a combination of radiative shields, solid insulation and high temperature MLI.
+Common thermal control techniques only have limited applicability, as already pointed out in section III-D. In the
+following, some heat rejection systems are sketched, from which ISRU processes would benefit. A central aspect is
+to vary the heat rejection. Varying the heat rejection allows to remove heat in hot cases whilst reducing the heat losses
+in cold cases, such as for example non-operational phases, lunar night time/hibernation or during change of regolith
+sample batches. Such a variation in heat rejection can be achieved by a change in emissivity, a change in view factor
+to cold or hot sinks, a change in radiator surface temperature, or a combination thereof. Possible methods to reduce
+the emissivity are: louvered radiators, radiators with fins against lunar IR, in-plane radiators, thermo-chromatics or
+electro-chromatics. The options to alter the view factor to cold or warm sink requires mechanism to change orientation
+of the radiator. A change in radiator surface temperature requires either a thermal decoupling from the interior via
+some heat switching device or components with thermal diode function, or it requires the interior to survive very low
+temperatures, too. Loop heat pipes or pumped fluid loops are options to actively reduce the conductive interface
+9
+International Conference on Environmental Systems
+
+between heat source (ISRU reactor) and radiator. In case of fluid loops or two phase systems their respective allowable
+temperature ranges are relevant. This is because on the lunar surface the temperature range can span over several
+hundred degrees over the course of a lunar day, or even locally between sun illuminated and shadowed areas. For
+ISRU payloads with short but intense heat dissipation peaks, buffering methods with phase change material (PCM)
+can be an option.
+In a nutshell, managing the thermal control of high temperature ISRU processes on the surface of the Moon is
+challenging. On top of the normal challenges for thermal engineers, there are numerous aspects to be considered in
+conjunction with the lander interface, the transit, the challenging lunar surface environment and mostly the extreme
+operation mode of an ISRU unit. The requirement of high temperatures combined with usual low power and mass
+demands, but also with operational constraints for heat-up and potentially cool down requires also an adapted set of
+thermal control means to implement successful ISRU on the surface of the Moon.
+
+Acknowledgments
+The authors would like to thank the colleagues involved in the ISRU-MMO and ISRU-FFC CDF studies at ESA
+ESTEC, in particular A. Cipriano, A. Makaya, A. Borggraefe, B. Lomax, F. Romera, J. Carpenter, L. Gerdes, M.
+Landgraf, R. Lindner, T. Strous, T. Haefner, P. Rebeyre, D. de Wilde, A. Meurisse, and M. Conti.
+
+References
+1J. Lorenzo Alvarez, H. P. de Koning, D. Fisher, M. Wallum, H. Metselaar, and M. Kretzenbacher, “Towards a definition of
+
+best practices for model based systems engineering in European space agency projects,” 2018 AIAA Sp. Astronaut. Forum Expo.,
+no. September, 2018.
+2L. Schlüter, A. Cowley, “Review of techniques for In-Situ oxygen extraction on the moon,” Planetary and Space Science, vol.
+181, https://doi.org/10.1016/j.pss.2019.104753, 2020.
+3H. Lee et al., “A simulation study on the direct carbothermal reduction of SiO2 for Si metal,” Curr. Appl. Phys., vol. 10, pp.
+S218–S221, 2010.
+4Gustafson, R. J., White, B. C., and Fidler, M. J., “Oxygen Production via Carbothermal Reduction of Lunar Regolith”,
+Warrendale, PA: SAE International, 2009
+5H. M. Sargeant et al., “Hydrogen reduction of ilmenite: Towards an in situ resource utilization demonstration on the surface
+of the Moon,” Planet. Space Sci., vol. 180, , https://doi.org/10.1016/j.pss.2019.104751, 2020.
+6C. Schwandt, J. A. Hamilton, D. J. Fray, and I. A. Crawford, “The production of oxygen and metal from lunar regolith,”
+Planet. Space Sci., vol. 74, no. 1, pp. 49–56, 2012.
+7B. A. Lomax, M. Conti, N. Khan, N.S. Bennett, A. Y. Ganin, M. D. Symes, “Proving the viability of an electrochemical
+process for the simultaneous extraction of oxygen and production of metal alloys from lunar regolith”, Planetary and Space Science,
+vol. 180, https://doi.org/10.1016/j.pss.2019.104748, 2020.
+8 Gaier, J. R.; Jaworske, D. A., “Lunar Dust on Heat Rejection System Surfaces: Problems and Prospects”, Space Technology
+and applications international forum 2007, New Mexico, Feb. 11-15, NASA/TM—2007-214814, 2007.
+9Radioisotope Power Systems to Enable Extended Lunar Science and In-Situ Resource Utilization MissionsRobert Cataldo,
+Kris Zacny, and Paul Schmitz, ANS NETS 2018 –Nuclear and Emerging Technologies for SpaceLas Vegas, NV, February 26 –
+March 1, 2018, on CD-ROM, American Nuclear Society, LaGrange Park, IL (2018)
+10Numerical modelling of the microwave heating behaviour of lunar regolith, Sungwoo Lim*, Mahesh Anand, Planetary and
+Space Science, Volume 179, December 2019, 104723
+11Technische Universität München, Institute of Astronautics, “LUISE - Lunares In-Situ Experiment – Schlussbericht”,
+Förderkennzahl DLR: 50 JR 0902, , https://www.tib.eu/en/search/id/TIBKAT%3A729848760/
+12Buck, R., DLR presentation, “Solar tower systems based on particle technology”, SFERA-II Summer School, 2016 ‘Lunar
+In-Situ Resource Utilization,
+13Sanders, J., Larson, B., Sacksteder, K., Mclemore, C., Johnson, K., “Development and Implementation”,
+http://www.frc.ri.cmu.edu/project/lri/scarab/isru.pdf, 2007
+14Kleinhenz J. E., Sacksteder, K.R., Nayagam, V., “Lunar Resource Utilization: Development of a Reactor for Volatile
+Extraction from Regolith”, AIAA, https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/20080006459.pdf, 2007
+15K. C. Tripuraneni Kilby, L. Centeno, G. Doughty, S. Muckejohn, and D. J. Fray, “The Electrochemical Production of Oxygen
+and Metal via the FFC-Cambridge Process,” pp. 2–3, 2007.
+16Gilmore, D.G.,2002-c2003(Ed.).Spacecraft Thermal Control Handbook: vol.1: Fundamental Technologies. Aerospace Press,
+1, second ed., ElSegundo,California 90245-4691. isbn:1-884989-11-X (v.1).
+17Dallas, T., Diaguila, A. J., Saltsman, J. F., “Design studies on the effects of orientation, lunation, and location on the performance of lunar radiators” National Aeronautics and Space Administration, Cleveland, Ohio, USA, NASA TM X-1846, 1971.
+18Racca,
+G.D.,1995.Moon surface thermal characteristics for moon orbiting space-craft thermal analysis.
+Planet.SpaceSci.43/6,835–842, http://dx.doi.org/10.1016/0032-0633(95)00067-F.
+
+10
+International Conference on Environmental Systems
+
+19Lawson, S.L., Jakosky, B.M, Park, H.-S., Mellon, M. T., “Brightness temperatures of the lunar surface: Calibration and global
+analysis of the Clementine long-wave infrared camera data”, Jour. Geop. Res., vol 105, no. E2, p. 4273-4290, 2000
+20Hager, P.B., Klaus, D.M., Walter, U. “Characterizing transient thermal interactions between lunar regolith
+and surface spacecraft”, Planetary and Space Science, 92, 101–116, 2014, ttp://dx.doi.org/10.1016/j.pss.2014.01.011
+
+11
+International Conference on Environmental Systems
+
+

@@ -1,0 +1,24 @@
+id: beneficiate_regolith_magnetic_v0
+kind: process
+name: Magnetic beneficiation of regolith
+layer_tags:
+  - layer_2
+inputs:
+  - item_id: regolith_powder
+    qty: null
+    unit: kg
+outputs:
+  - item_id: magnetic_concentrate
+    qty: null
+    unit: kg
+  - item_id: non_magnetic_tailings
+    qty: null
+    unit: kg
+requires_ids:
+  - magnetic_separator_drum
+  - vibratory_feeder
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Placeholder beneficiation split; capture process presence before numbers.

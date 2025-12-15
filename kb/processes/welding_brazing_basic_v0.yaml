@@ -1,0 +1,23 @@
+id: welding_brazing_basic_v0
+kind: process
+name: Basic welding and brazing
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: cast_metal_parts
+    qty: null
+    unit: kg
+outputs:
+  - item_id: welded_assemblies
+    qty: null
+    unit: kg
+requires_ids:
+  - welding_power_supply
+  - filler_material
+  - fixturing_table
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Joining anchor; detailed joint types and gas choices TBD.

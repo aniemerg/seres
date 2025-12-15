@@ -1,0 +1,1521 @@
+Integrated Modeling and Optimization of
+Lunar In-Situ Resource Utilization Systems
+Samuel S. Schreiner
+Massachusetts Institute
+of Technology
+Cambridge, MA 02139
+sschrein@mit.edu
+
+Gerald B. Sanders
+Johnson Space Center
+Houston, TX 77058
+
+Jeffrey A. Hoffman
+Massachusetts Institute
+of Technology
+Cambridge, MA 02139
+
+Kristopher A. Lee
+Johnson Space Center
+Houston, TX 77058
+
+(lunar soil is ∼44% oxygen by weight) [3]. The production
+of this valuable resource outside of Earth’s gravity well can
+support lunar surface activities or enable orbital refueling to
+drastically reduce mission cost. The 1993 “LUNOX” study
+by Johnson Space Center investigated the possible benefits of
+producing oxygen on the Moon for early lunar exploration
+missions and found an associated reduction in launch vehicle
+mass and a 50% reduction program cost.
+
+Abstract—The production of oxygen from lunar regolith, a form
+of In-Situ Resource Utilization (ISRU), is a mission-enabling
+technology that can break the supply logistics chain from Earth
+to support sustained, affordable space exploration. We present
+the development of an integrated ISRU system model to study
+and optimize the system mass and power requirements, a
+critical development in understanding the proper application
+of ISRU systems. The integrated model includes subsystem
+models for a Molten Regolith Electrolysis (MRE) reactor, an
+excavator, a hopper and feed system, the power system, and
+an oxygen liquefaction and storage system. A hybrid geneticalgorithm/gradient-based optimization scheme is implemented
+to optimize the ISRU system design across a range of production
+levels. Lower oxygen production levels (<1500 kg/yr) are best
+managed with a single reactor operating at a traditional temperature of 1900K and a batch time of 2-3 hrs. Larger oxygen
+production levels are best met with multiple reactors that each
+produce ∼2500 kg/yr, operate at 2200K, and have a batch time
+around 1 hr. It is found that an MRE reactor can generate the
+entire ISRU system’s mass worth of oxygen in as little as 52 days
+at a rate of 7 kg of oxygen annually per kilogram system mass.
+
+Sherwood and Woodcock [2] conducted an economic analysis of producing oxygen on the lunar surface to supply
+lander ascent propellant. They determined that lunar ISRU
+has great potential to be economically feasible, but “the
+sensitivities [of their economic model] are modest, except for
+the mass of production hardware” [2]. Thus, it is imperative
+to accurately model the mass and performance of ISRU systems to determine economic feasibility. Furthermore, ISRU
+system models can provide guidance for both the hardware
+development and mission applications of such systems [4].
+The oxygen in lunar soil is primarily bound up in oxides and
+there are over twenty different oxygen extraction methods
+proposed in the literature [1, 5, 6]. In the past decade,
+three of these methods have undergone dramatic technology
+maturation: Hydrogen Reduction of Ilmenite (HRI), Carbothermal Reduction of Silicates (CRS), and Molten Regolith
+Electrolysis (MRE) [7]. Previous research has extensively
+modeled HRI and CRS reactors [4, 8, 9, 10, 11] but a
+suitably mature model for an MRE reactor has only recently
+been developed [12]. MRE is an electrochemical processing
+technique that performs direct electrolysis on molten lunar
+regolith to produce gaseous oxygen at the anode and liquid
+metals at the cathode.
+
+TABLE OF C ONTENTS
+1 I NTRODUCTION . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+2 S YSTEM M ODEL D ESCRIPTION . . . . . . . . . . . . . . . . . 2
+3 ISRU S YSTEM I NTEGRATION . . . . . . . . . . . . . . . . . . . 5
+4 O PTIMIZATION T ECHNIQUE . . . . . . . . . . . . . . . . . . . . 6
+5 ISRU S YSTEM O PTIMIZATION . . . . . . . . . . . . . . . . . . 6
+6 C ONCLUSIONS . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+ACKNOWLEDGMENTS . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+B IOGRAPHY . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+There is a strong impetus to explore the feasibility of an ISRU
+system with an MRE reactor, as there are many potential
+benefits to such a system. Utilizing MRE may result in
+considerable mass savings compared to the other two primary
+techniques (HRI and CRS), as it can theoretically extract
+all of the oxygen from lunar regolith [13]. MRE does not
+require either a gas recycling system or a water electrolyzer,
+which may also reduce system mass. Other benefits include
+the synergistic production of materials such as iron, silicon,
+aluminum and glassy materials. These byproducts of oxygen
+production can be used to construct spare parts, buildings and
+solar arrays on the lunar surface [14]. Conversely, MRE may
+require more power due to the high operating temperature
+compared to HRI or CRS. Additionally, MRE is at a lower
+technology readiness level (TRL) and thus requires more
+technology development.
+
+1. I NTRODUCTION
+One of the most significant barriers to space exploration is the
+burden of bringing all of the material resources from Earth
+required for a mission. To enable sustainable, affordable
+space exploration, the reliance on Earth’s resources must be
+reduced. In-situ resource utilization (ISRU), or leveraging
+extraterrestrial resources to support space missions, can significantly reduce the required launch mass and cost for a
+given mission [1, 2].
+One avenue for utilizing space resources is producing oxygen on the lunar surface. The production of oxygen from
+lunar regolith is a architecture-enabling technology that can
+significantly reduce the supply logistics chain from Earth.
+Oxygen is a major component of launch vehicle, spacecraft,
+and lander masses (∼70% of launch vehicle mass) and at
+the same time is one of the most abundant lunar resources
+
+In light of the recent evidence in support of water in the polar
+lunar craters [15], there remain many potential benefits to
+using MRE on the lunar surface, perhaps even in parallel
+with a water extraction scheme. First, there is significant
+
+978-1-4799-5380-6/15/$31.00 c 2015 IEEE.
+
+1
+
+Molten-Regolith-Core
+wcurrent-streamlines-in-redI
+
+uncertainty as to the state and concentration of the water
+in lunar craters [15]. A resource prospecting mission is
+necessary to ascertain ground truth and is currently planned
+to launch in 2019 [16]. MRE may be concurrently developed using composition data from the Apollo lunar samples.
+Technical challenges associated with feedstock excavation
+on the poles, especially excavation from within permanently
+shadowed craters, can also be avoided with the MRE process.
+
+Anode
+wO2-I-→-2e--+-1/2O2wgI
+Temp-wKI
+
+-
+
+-
+
+Power
+Source
+
+This work integrates an MRE reactor model [12] into an
+ISRU system model. Previous work in integrated ISRU
+system modeling provided a foundation for this analysis, but
+did not include a power system, and suitable models for an
+MRE reactor and excavation system were not available at
+the time [9, 17]. The system model presented in this work
+expands upon previous work to encapsulate a more complete
+system by including subsystem models of the reactor, power
+system, excavation system, oxygen storage and liquefaction
+system, as well as a hopper and regolith feed system. By
+evaluating the integrated ISRU system, the holistic system
+performance may be studied and optimized, rather than just
+the reactor subsystem. A hybrid genetic algorithm/gradientbased optimization routine is developed, validated, and exercised to minimize the ISRU system mass over a range of
+oxygen production levels.
+
+-
+
+Phase-Boundary
+w1500KI
+
+Cathode
+wFe I+2e--→-FewlI
+wSi4+I+4e--→-SiwlI
+2+
+
+Structure
+Insulation
+Refractory
+
+Figure 1. The anatomy of a Molten Regolith Electrolysis
+(MRE) reactor. Also shown are the temperature and current
+profiles from a multiphysics simulation that was used to
+predict reactor performance and tune reactor design.
+
+be dependent upon lunar location. For example, the higher
+iron concentration in the mare regions will result in a lower
+average current efficiency [12].
+
+Section 2 provides an overview of the subsystem models.
+In Section 3, the integrated system model is presented and
+the details of the subsystem connections are presented with
+an N2 diagram. Section 4 provides an overview of the
+optimization technique implemented on the ISRU system
+model. In Section 5, the optimized system design over a range
+of oxygen production levels is explored. Section 6 concludes
+with some key aspects of the optimized system and provides
+recommendations for future work.
+
+The reactor model translates the oxygen production rate into
+the required regolith processing rate using the fraction of
+oxygen that can be extracted from regolith. Due to the fact
+that an MRE reactor can extract oxygen from all oxide species
+in lunar regolith, the contribution from each oxide specie
+must be summed together:
+
+X
+M WO2
+moxygen
+=
+(wi )
+(rmol,i )(ef rac,i )
+mregolith
+M
+Woxide,i
+i
+
+2. S YSTEM M ODEL D ESCRIPTION
+Reactor
+Although a variety of reactor models can be integrated into
+the system model, this work utilized a Molten Regolith
+Electrolysis (MRE) reactor model [12] to better understand
+the system-level implications of that processing technique.
+As shown in Figure 1, the reactor modeled includes an outer
+cylindrical shell with three layers: an outer structural layer,
+a middle insulation layer, and an inner refractory layer for
+managing the corrosive molten metals produced. The anode
+and cathode, composed of a shaft and plate, extend into the
+molten region from the top and bottom, respectively. The red
+lines depict current streamlines through the inner molten core
+of the reactor.
+
+(2)
+
+where wi is the weight percent of oxide i in lunar regolith,
+M W is the molar weight (of oxygen or an oxide), rmol,i is
+molO2
+the number of moles of oxygen per mole of oxide i ( mol
+),
+oxide
+and ef rac,i is the fraction of oxide i that is electrolyzed in
+each batch. The fraction of each oxide specie that can be electrolyzed is strongly dependent upon operating temperature,
+because the solidification temperature of the melt generally
+increases throughout electrolysis. In the MRE reactor model,
+the electrolysis process is allowed to progress until the melt
+solidification temperature is within 50 K of the operating temperature to allow for a safety margin. Thus, higher operating
+temperatures allow the reactor to extract more oxygen per
+kilogram regolith, but also results in a higher heat loss to the
+environment. This is one tradeoff that is optimized using the
+system model.
+
+The reactor model uses electrochemistry to estimate the current and voltage. The current is directly related to the oxygen
+production rate:
+nF
+I = (ṅO2 )
+,
+(1)
+η̄
+
+One key factor in the design of an MRE reactor is the
+containment of molten regolith. Molten lunar regolith is
+extremely corrosive and cannot be contained for extended
+periods of time by traditional crucible materials [13]. A jouleheated, cold-wall reactor, similar to the Hall-Heroult cells
+in the aluminum production industry, is an elegant solution
+to the challenge of molten regolith containment. In this
+concept, the reactor maintains a molten regolith core via the
+heat generated by the current passing through the resistive
+melt, while the molten region is surrounded by solid regolith
+that insulates and protects the side walls of the reactor from
+corrosion [19].
+
+where ṅO2 is the desired molar oxygen production rate
+(mol/s), n is the number of electrons required per diatomic
+oxygen (4), F is Faraday’s constant, and η̄ is the average
+current efficiency over an entire batch. The instantaneous
+current efficiency depends upon which oxide is currently
+being electrolyzed and can range from 30-60% for iron
+oxides and is near 100% for melts once the iron oxide has
+been depleted [18]. This means that the average efficiency
+depends upon the composition of regolith and will therefore
+2
+
+To facilitate this complex electrothermodynamic process, the
+diameter, electrode separation, and thermal characteristics of
+the reactor must be carefully designed. To address this design
+challenge, a multiphysics simulation of an MRE reactor was
+utilized to create a tradespace of over 40,000 unique reactor
+designs. Multivariate nonlinear regression equations were
+fit to this tradespace to create a parametric sizing model for
+an MRE reactor. The regression equations are used to tune
+the reactor diameter, electrode separation, and reactor wall
+thermal conductivity to meet the required average current
+from Equation 1, the molten mass from Equation 2, and the
+operating temperature (set as a reactor model input), while
+also ensuring that no molten material touches the reactor
+wall [12]. Figure 2 shows the behavior of these three design
+variables over a range of oxygen production levels for two
+different operating temperatures, as detailed in [12]. Figure 1
+shows one feasible design generated using this novel design
+methodology.
+10
+
+0
+
+8
+Reactor
+DiameterT(m)
+
+0.5
+
+1
+
+Margin=1.0
+Margin=2.0
+
+1.5
+
+2
+
+2.5
+
+3
+
+Acceptable
+Diameter
+Range
+
+3.5
+
+reactor design. The plots in Figure 2 show how varying
+the design margin affects the required diameter, electrode
+separation, and wall thermal conductivity.
+In this work, the primary reactor design variables that are
+optimized include the number of reactors, operating temperature and design margin. Future work can address optimizing
+additional parameters, but these three variables were chosen
+because they are the primary drivers of MRE reactor design.
+YSZ Separator
+A Yttria-Stabilized Zirconia separator is included in the system model to separate oxygen from the MRE reactor exhaust
+gas. Although the molten electrolysis process produces pure
+oxygen by electrolyzing oxides into oxygen gas and liquid
+metals, certain species (Na2 O, P2 O5 , K2 O and MgO) will
+evaporate after electrolysis and will likely become entrained
+in the oxygen flow as contaminants. Additionally, trace gases
+such as H2 , N2 , CO2 , and Helium will also be released as
+fresh regolith is heated up to a molten state [20].
+
+4
+
+T = 1900K
+T = 2200K
+
+Yttria-Stabilized Zirconia (YSZ) is a ceramic material composed of zirconimum dioxide (ZrO2 ) stabilized by the addition of yttrium oxide (Y2 O3 ). YSZ is commonly used as an
+electroceramic to measure oxygen content by monitoring the
+voltage across conductive platings on each side of the solid
+YSZ electrolyte. As shown in Figure 3, to act as a separator,
+an active voltage is applied across the electrodes while the
+gas flow encounters the cathode. At the cathode, oxygen gas
+(O2 ) is ionized to O2− and then transported through the YSZ
+electrolyte via the electric field between the plates.
+
+6
+4
+2
+10
+Margin=1.0
+Margin=2.0
+
+Electrode
+SeparationT(cm)
+
+8
+6
+
+T = 1900K
+T = 2200K
+Electrode
+Separation
+Bounds
+
+4
+
+The power demand of the separator is estimated by determining the required current and voltage. The current is
+directly proportional to the amount of oxygen that needs to
+be transported through the separator and was calculated using
+Equation 1 with a current efficiency of one (assuming no
+other species are transported through the separator). To estimate the voltage, the electrical conductivity of YSZ needed to
+be modeled. Data on the temperature-dependent conductivity
+(σ) of YSZ [21] was fit with the equation:
+
+2
+0
+T = 1900K
+T = 2200K
+
+WallTThermal
+ConductivityT(W/m-K)
+
+Margin=1.0
+Margin=2.0
+
+103
+
+100
+10-2
+
+10-5
+
+0
+
+0.5
+
+1
+1.5
+2
+2.5
+3
+ReactorTCurrentT(kA) ~ OxygenTProductionTLevel
+
+3.5
+
+4
+
+ln(σ(T )) = a ∗ exp(b ∗ T ) [S/cm]
+
+Figure 2. The required reactor diameter, electrode
+separation, and wall thermal conductivity (bottom) plotted
+over a range of reactor currents. Note: The molten mass in
+the reactor is also scaled up with current to make the x-axis
+a surrogate for oxygen production level.
+
+(3)
+
+where the fit coefficients are a = −23.4 ± 4.8 and b =
+−0.00259 ± 0.0003 and the temperature, T , is in Kelvin. The
+temperature dependence in the YSZ conductivity couples the
+separator model and the reactor model: a higher operating
+temperature in the reactor results in a higher electrical conductivity of the YSZ separator which decreases the power
+required for the separator. For simplicity, temperature of
+the YSZ was taken to be 75% of the reactor operating
+temperature. This was intended as a preliminary estimate
+to couple reactor temperature and YSZ temperature, while
+also accounting for some heat loss between the reactor and
+separator. Future work can generate a more accurate model
+of the expected temperature at the separator as a function
+of reactor temperature. The electrical conductivity was then
+used to calculate the resistance of the YSZ separator (RY SZ ):
+
+As detailed in [12], the reactor design methodology includes a
+design variable called the “design margin”, which describes
+the flexibility in the reactor design. There is a maximum
+reactor diameter that satisfies the operating temperature and a
+minimum diameter that satisfies the required mass of molten
+regolith in the reactor. These two bounds on reactor diameter
+can be varied by changing wall thermal conductivity, and
+the design margin describes the ratio of these two diameter
+bounds. A design margin of 1.0 results in the minimum and
+maximum diameter bounds being equal, while a margin of
+2.0 results in a maximum diameter bound that is twice the
+minimum. Having a range of acceptable reactor diameters
+results in an acceptable range of electrode separations, which
+enables a variable electrode separation during operation to
+control operating voltage and heat production. Design margin
+can be considered as a surrogate for traversing the design
+space between the optimality and flexibility of an MRE
+
+RY SZ =
+
+∆x
+,
+σ(T ) S
+
+(4)
+
+where ∆x is the thickness of the YSZ separator (assumed to
+be 0.5 cm), σ(T ) is the YSZ electrical conductivity calculated
+from Equation 3, and S is the required cross-sectional area of
+3
+
+AnodegPlating
+
+O2gGas
+
+An excavator speed of 0.5 m/s and a plant distance of 100 m
+are used to properly size themobility platform for the excavator. Information on the excavator operating duty cycle
+based on the power system charge/recharge cycle is also
+incorporated into the model. The excavator model utilizes
+all of this information to generate an excavator design that
+can meet the regolith delivery requirements from the reactor
+while withstanding the excavation forces and regolith load
+requirements.
+
+YSZgFilter
+Driving
+Powerg
+Source
+
+O2-
+
+CathodegPlating
+
+Hopper and Feed System
+The main driver in the hopper model is the buffer capacity, or
+the amount of regolith the hopper had to hold in terms of days
+of reactor operation. A buffer capacity of 2 days was chosen
+to ensure that the hopper could hold enough regolith for
+continual reactor operation if the excavator needed repairs.
+Furthermore, a buffer capacity of 2 days effectively decouples
+the excavation system scheduling from reactor batch mode
+operation (i.e. although the reactor may operate on a 1 hour
+batch time, the excavator can deliver regolith with a lower
+frequency).
+
+Gaseous
+O2,gNa,gK,gP,getc.g
+fromgReactor
+
+Figure 3. A diagram of the proposed YSZ schematic for use
+with the Molten Regolith Electrolysis reactor.
+
+The feed system model calculates the mass and power of the
+system required to insert fresh regolith from the hopper into
+the reactor. An auger was chosen for this design iteration,
+but other methods, such as a pneumatic feed system, can be
+modeled in the future. The feed system model sizes an auger
+that extends from the reactor through a cylindrical sleeve and
+into the hopper. Using estimates of the cohesion, internal
+and external friction angles, and soil-tool adhesion values for
+lunar regolith, the feed system model estimates the expected
+torque on the auger and the resultant power consumption. The
+number of feed systems is set equal to the number of reactors,
+as each reactor will likely require its own feed system. The
+sleeve and auger are made out of Hastelloy C-276, due to the
+interface with the high-temperature reactor.
+
+the YSZ separator calculated as:
+S=
+
+IY SZ
+,
+j
+
+(5)
+
+where IY SZ is the required current through the YSZ separator and j, the limiting current density, was taken to be
+0.4 A/cm2 [22]. The power of the YSZ ceramic was estimated
+using the current and resistance (I2 R). The dimensions of
+the separator and a 304 Stainless Steel casing are used to
+calculate the YSZ separator mass.
+It should be noted that the YSZ separator model is a simplified version with the intention of determining the power
+needed for oxygen separation with only first-order estimates
+of mass and volume. It is believed that the power requirement
+of the YSZ separator will play a much more significant role
+than its mass in the ISRU system optimization. YSZ oxygen separators are commonly composed of multiple packed
+tubes or stacked wafers, which could reduce the mass and
+volume estimates, but not significantly change the power
+requirement, compared to this simplified YSZ model. A more
+realistic mass model will be created in a future iteration.
+
+One assumption built into the feed system model is that a
+5 cm diameter auger rotating at 5 rpm would be adequate to
+insert a full batch of regolith in the feed time set as an input
+in the reactor model. That is, for larger amounts of regolith
+per batch, the feed system was not parametrically sized up,
+due to limitations in the model design. Future work can
+expand the feed system model to dynamically size the radius
+and rotational rate of the auger system to meet the required
+regolith mass flowrate.
+Oxygen Liquefaction and Storage
+The oxygen liquefaction and storage system utilizes oxygen
+production data from the reactor to size both the liquefaction
+and storage systems. The liquefaction system determines
+the mass and power of the system required to liquefy the
+oxygen coming from the reactor, as well as the cooling power
+required to re-liquefy oxygen that has boiled off in the storage
+system.
+
+Excavator
+The excavator system, developed at the Glenn Research Center [23], predicts the mass of a mobile excavation platform
+sized to deliver the regolith throughput requirement to the
+reactor. A force module utilizes the Balovnev force equations
+to generate estimates of the force and torque involved in excavating lunar regolith. A hole depth of 25 cm with cut depths
+of 2.5 cm was used to size a front-end loader in this system
+model. The excavation force estimates are used to size the
+excavation actuators using commercial off-the-shelf (COTS)
+actuators and controllers from Danaher2 . The force module
+also determines the vehicle reaction and traction forces. A
+mass module conducts a structural analysis to ensure that the
+excavator chassis can support the regolith weight and that
+the digging mechanism can support the expected excavation
+stresses. The locomotion motors are modeled after the Maxon
+motors used on the Mars Exploration Rover [24].
+
+For the storage system, a capacity of 6 months was chosen
+to allow for sufficient propellant production to support two
+refueling missions per year. The number of layers of MLI can
+be chosen to balance heat loss with system mass. Based off
+of a user material selection, the storage system is sized such
+that the yield stress is less than the hoop stress with a factor
+of safety of 2. The tank size and number of layers of MLI
+directly impact the boiloff rate due to expected heat leakage
+into the tank.
+
+2 http://www.danahermotion.com
+
+4
+
+is one avenue for reducing reactor mass. But this reduction
+in reactor mass comes at the cost of an increase in reactor
+power due to the increase in total down time between batches
+which reduces total operational time. The integrated model
+enables a more complete study of the optimal batch time, as
+one example, by including the mass of both the power and
+reactor subsystems.
+
+Power System
+The power subsystem is parametrically sized from the total
+power requirement summed over all of the other subsystems,
+as shown in Figure 4. A number of options are available in
+the power model, including solar arrays without energy storage (day-only operation), solar arrays with fuel-cell energy
+storage to enable lunar night operation, a Stirling radioisotope
+generator, and a fission surface power system. To reduce the
+design tradespace, this study restricted the power system to
+be solar cells that provide power to the ISRU system for dayonly operation. From a prior NASA study, using this type
+of power system in the Shackleton crater rim area resulted
+in an approximate duty cycle of at least 0.7 (>70% of the
+year with continuous uninterrupted solar power), due to the
+longer day duration near the lunar poles. Other locations
+have a corresponding duty cycle of 0.5. The specific mass
+of the solar array power system without energy storage was
+taken to be 20 kg/kWe [25]. Future work can evaluate the
+effectiveness of other power systems in the context of a lunar
+ISRU system.
+
+Another important design variable to optimize is the reactor
+operating temperature. Higher operating temperatures intuitively result in more radiative heat loss and increase the
+heating power per kilogram regolith. Conversely, higher
+temperatures decrease the regolith throughput requirement
+by increasing the amount of oxygen extracted per kilogram
+regolith. From an electrochemical point of view, higher
+temperatures result in a more endothermic reaction. The
+integrated ISRU system model provides a framework to study
+the optimal operating temperature.
+Figure 4 depicts an N2 diagram of the ISRU system. The primary subsystem couplings are shown, with some secondary
+connections left out for clarity. It is evident that the reactor,
+described in detail in [12], is a strong driver of many other
+system designs, as one would expect. It is a large driver of
+the power requirement and also sets the regolith processing
+requirement which directly affects the excavator, hopper and
+feed systems. The power requirement from each subsystem
+is summed together and used to size the power system. After
+the power system is sized, the mass of all of the subsystems,
+including the power system, are summed together to generate
+an estimate of the total ISRU system mass.
+
+3. ISRU S YSTEM I NTEGRATION
+The subsystem models described in the preceding section are
+integrated together into a holistic system model. By linking
+the subsystems (reactor, excavator, power, etc.) together into
+a self-consistent model, the entire mass and power of an ISRU
+system can be estimated. The self-consistency of the model
+allows the tradeoffs between subsystem designs to be studied.
+For instance, shortening the batch time of an MRE reactor
+
+Optimiziation
+Variables
+
+=
+
+{
+
+•lOperatinglTemperature
+•lBatchlTime
+•lOperatinglMargin
+•lflReactors
+
+Constant
+Missiong
+Inputs
+
+{
+
+OxygenlProductionlRate
+
+= LunarlLocation
+PowerlSource/availability
+
+Reactorbs=g
+
+Regolithl
+Requirement
+Excavator
+
+Regolithl
+Requirement
+flof
+Reactors
+
+Oxygen
+Production
+Rate
+OxygenlGas
+Temperature
+
+Powerl
+Req.
+
+Hopper/FeedgSys.
+
+O2gLiq.gzgStorageg
+
+Totalg
+System
+Power
+PowergSystem
+
+Massl&
+Volume
+
+Totalg
+System
+Massgz
+Volume
+
+Figure 4. An N2 diagram of the ISRU system model within the optimization routine, showing how the subsystems are
+interconnected to generate a self-consistent estimate of system mass, which is then optimized.
+
+5
+
+4. O PTIMIZATION T ECHNIQUE
+
+1400
+
+A genetic algorithm (GA) optimization routine was used
+with the holistic system model to optimize the ISRU system
+design by varying subsystem design variables. A genetic
+algorithm method was implemented, rather than traditional
+gradient-based optimization techniques, due to the mixedinteger nature of the system: although some parameters were
+continuous, such as operating temperature, the majority of
+parameters were discrete, such as number of reactors or
+excavators and material selections. A genetic algorithm is
+a heuristic search method that attempts to mimic natural
+selection by generating a population of candidate designs in
+what is called a generation. The fitness (or goodness) of
+each generation is evaluated and the characteristics of the
+top-performing candidates are recombined/mutated to form
+the subsequent generation. The genetic solver terminates
+when the fitness function does not significantly change over a
+number of generations.
+
+Best penalty value
+Mean penalty value
+
+ISRU System Mass (kg)
+
+1200
+1000
+800
+600
+400
+200
+0
+0
+
+1
+
+2
+
+3
+
+4
+
+5
+6
+Generation
+
+7
+
+8
+
+9
+
+10
+
+Figure 5. A sample output from the genetic algorithm
+optimizer used on the ISRU system model, where the
+penalty value is the mass of the ISRU system (kg). The
+downwards trend in the blue data shows the effectiveness of
+the “natural selection” of better performing candidates from
+generation to generation.
+
+A sample output from the genetic algorithm solver is shown
+in Figure 5. The “Mean penalty value” markers depict the
+mean system mass within the entire population of systems
+designs in a given generation. The “Best penalty value”
+shows the lowest mass ISRU system in a given generation.
+
+duction levels. The most significant mass drivers are the
+oxygen liquefaction/storage system and power system, which
+comprise 26% and 54% of the system mass at a production
+level of 10,000 kg/yr, respectively. As mentioned in the
+model description, the oxygen storage system was designed
+to hold 6 months of oxygen production at any given time,
+and this requirement may be relaxed depending upon the
+mission needs. The reactor and YSZ separator compose
+approximately 6% of the entire ISRU system mass at an
+oxygen production level of 10,000 kg/year. The total system
+mass curve was fit with the following power-law curve:
+
+Although GA is a suitable technique for optimization over
+discrete variables, it is not particularly well suited to optimized a large number of continuous parameters. To enable a
+more efficient optimization, a gradient-based optimizer was
+implemented that used the final GA solution as a starting
+point with the integer variables fixed. The ISRU system
+model is nonlinear and contains no analytical gradient, so the
+solver used finite difference approximations for the gradient.
+In this manner, the GA optimizer was used to find the general
+global minimum region while avoiding local minimums, and
+the gradient-based optimizer was used to hone in on the true
+minimum.
+
+M = 0.52 ∗ N 0.86 ,
+
+Many of the subsystem models contained error flags that
+identified infeasible reactor designs, vehicle slippage, and a
+number of other system model errors. A set of soft constraints
+were implemented by penalizing the mass of systems with
+error flags by a factor of 5. In this manner the hybrid optimization scheme selectively removed system designs with
+error flags due to the system mass penalty.
+
+(6)
+
+where M is the ISRU system mass and N is the annual
+oxygen production level. The fact that the power coefficient
+is less than one implies that the ISRU system exhibits an
+economy of scale. That is, the ISRU system produces higher
+quantities of oxygen more efficiently.
+A number of interesting trends exist in the optimized system
+parameters shown in the lower plots of Figure 6. The optimal
+number of reactors (Plot a in Figure 6) behaves as one
+would expect. At low production levels a single reactor is
+preferable, but as production level increases, more reactors
+are selected to meet the production demand. This indicates
+that there is an maximum optimal oxygen production for a
+single reactor. That is, for MRE, there is an optimal reactor
+design for somewhere near 2500 kg/yr and increasing oxygen
+production rate significantly beyond this threshold can best
+be met by increasing the number of reactors rather than by
+tuning reactor design.
+
+5. ISRU S YSTEM O PTIMIZATION
+Tradespace Optimization
+This study looked at optimizing the batch time, number
+of reactors, MRE reactor operating temperature, and MRE
+design margin (described in Section 2) to minimize the integrated ISRU system mass. Figure 6 shows the the growth
+of the ISRU system mass and power over a range of oxygen
+production levels in the top two plots. The remaining graphs
+(with labels) depict the optimized system design tradespace,
+including the number of reactors (a), operating temperature
+(b), reactor diameter (c), molten mass per batch (d), average
+reactor current (e), operating voltage (f), batch time (g) and
+the MRE design margin (h). It should be emphasized that the
+operating current and molten mass per batch are both for a
+single reactor, not for the combined reactors when multiple
+are present.
+
+The optimal operating temperature (Plot b in Figure 6) also
+displays some interesting behavior. In the optimization
+routine, operating temperature was given hard bounds between 1873 k and 2200 K (illustrated by the black dotted
+lines). Below 1873 K, the reactor comes dangerous close
+to the solidification temperature of iron and runs the risk
+of producing solid iron and “freezing” the reactor. Above
+2200 K, the MRE model was not sufficiently tested to produce
+reliable results. The optimal operating temperature begins
+around 1900 K at 500 kg/yr, and rises to the 2200 K ceiling
+
+The top left plot in Figure 6 examines the growth in the
+ISRU system mass breakdown over a range of oxygen pro6
+
+1500
+
+35
+Reactor
+
+Chemical Electrolysis (∆G)
+
+YSZ Separator
+
+Regolith Heating + Phase Change
+
+30
+
+ISRU System Power (kW)
+
+ISRU System Mass (kg)
+
+Excavator
+Feed System
+Hopper
+
+1000
+
+Power System
+Liquefaction & Storage
+
+500
+
+Radiative Heat Loss
+Endothermic Makeup (T∆S)
+YSZ Separator
+
+25
+
+Feed System
+Liquefaction & Storage
+
+20
+
+15
+
+10
+
+Operating Temperature (K)
+
+5
+
+0
+
+# Reactors
+
+a
+4
+
+2
+
+b
+
+2200
+2100
+2000
+1900
+1800
+
+Molten Mass (kg)
+
+0.8
+
+c
+
+0.6
+
+0.4
+
+1.85
+
+d
+
+1.8
+1.75
+1.7
+1.65
+
+Avg Voltage (V)
+
+e
+2000
+
+1000
+
+0
+
+f
+
+6
+
+4
+
+2
+
+0
+
+g
+
+h
+
+3
+
+MRE Margin
+
+Batch Time (hr)
+
+Single Reactor Current (A)
+
+Reactor Diam (m)
+
+0
+
+0
+
+2
+
+1
+
+0
+
+1.0125
+
+1
+
+0.9875
+
+0.975
+1000
+
+2000
+
+3000
+
+4000
+
+5000
+
+6000
+
+7000
+
+8000
+
+9000 10000
+
+1000
+
+Annual Oxygen Production (kg/yr)
+
+2000
+
+3000
+
+4000
+
+5000
+
+6000
+
+7000
+
+8000
+
+9000 10000
+
+Annual Oxygen Production (kg/yr)
+
+Figure 6. (Top) The system mass and power breakdowns over a range of oxygen production levels. The optimized variables
+in the system design, with an emphasis on the reactor design that results from the optimized holistic ISRU system.
+
+7
+
+for higher production levels. A small decrease in operating
+temperature occurs when the second reactor is added to the
+system to meet the production level of 3000 kg/year. The
+rise to higher temperatures is likely due to the fact that
+electrolyzing at higher temperatures allows more oxygen to
+be extracted per kilogram regolith, which reduces regolith
+throughput requirements and reactor size [12]. Prior to this
+analysis, it was unclear whether or not these benefits would
+be outweighed by the increased heat loss, increased regolith
+heating requirement (per kilogram regolith), and resultant
+power system increase. The integrated system model showed
+that operating temperatures higher than the traditional 1873 K
+do indeed result in a lower total system mass at high production levels.
+
+worth noting that margin increases away from 1.0 prior to
+the addition of another reactor to the system, indicating that
+the reactor design is being stretched away from the optimal
+reactor production level. The MRE margin always returns to
+a value of 1.0 at higher production levels with the addition of
+another reactor.
+The top right plot in Figure 6 examines the the growth in
+the ISRU system power breakdown in more detail. The
+“Chemical Electrolysis (∆G)” section represents the power
+required to break the chemical bonds in the oxides in lunar
+regolith. The “Regolith Heating + Phase Change” section
+represents the power required to heat the regolith up from
+the ambient temperature of ∼400K to the operating temperature (∼2000K), including the latent heat of melting in the
+phase change. “Radiative Heat Loss” is predicted by the
+regression equations discussed in Section 2. The “Endothermic Makeup” slice depicts the amount of power required
+to maintain thermal equilibrium throughout the endothermic
+electrolysis reaction. “YSZ Separator”, “Feed System”, and
+“Liquefaction and Storage” power demands are discussed in
+Section 2.
+
+The reactor diameter (plot c) appears to grow with oxygen
+production level, and then decreases each time the number
+of reactors increases. This shows that at certain oxygen
+production levels, in order to increase production it is optimal to incorporate an additional reactor rather than increase
+reactor size. The reactor diameter appears to have a minimum
+of approximately 0.45 m and does not grow larger than
+0.8 m for the oxygen production levels studied in this work
+(<10,000 kg/yr).
+
+Optimization Method Comparison
+Figure 7 shows the mass the ISRU system optimized by the
+genetic-algorithm (GA) routine and by the hybrid method
+described in Section 4. As one would expect, the hybrid
+method results in system masses that are the same or lower
+compared to those found using the GA routine. On average, the ISRU system mass from the hybrid optimizer was
+11.4 kg less than the GA method alone. The maximum mass
+difference between the two optimized systems was 45.9 kg.
+Although not shown, similar trends were observed in the
+ISRU system power. The hybrid-optimized system had a
+power consumption of 0.29 kW less, on average. The largest
+difference observed was when the hybrid optimized system
+had a power consumption of 1.0 kW less than the system
+generated by the GA optimization alone.
+
+The molten mass per batch (plot d) appears to have an optimal
+value of around 1.87 kg/batch. Deviations from the optimal
+value occur only at low production levels. Future work will
+have to further analyze the source of this optimal value.
+The current per reactor (plot e) intuitively increases with oxygen production level, and then decreases each time the number of reactors increases. It would appear that a maximum
+current of around 2000 A per reactor is optimal. Above this
+limit the reactor must grow exponentially to accommodate
+the additional heat load. Note that the current line is roughly
+linear with a slope that is inversely proportional to the number
+of reactors. Deviations from linearity occur due to the change
+in current efficiency with operating temperature, as detailed
+in [12].
+The average reactor voltage (plot f ) decreases asymptotically
+from a value of approximately 6 volts at a production level
+of 500 kg/yr to around 3.25 volts at higher production levels.
+This is a result of increased current per reactor as shown in
+plot e. As the current in each reactor increases, the voltage
+can decrease while still generating enough heat to maintain
+the molten core. Each time a reactor is added to the system,
+we observe a slight increase in voltage which then returns
+towards the asymptote.
+
+1800
+
+ISRU System Mass (kg)
+
+1600
+
+The optimal batch time (plot g) appears to decrease in a
+piecewise asymptotic manner from approximately 3.5 hours
+at a production level of 500 kg/yr to slightly more than 1 hour
+at higher production levels. A small increase in batch time
+occurs when the number of reactors increases.
+
+Genetic Alg. Optimizer
+Hybrid Optimizer
+
+1400
+1200
+1000
+800
+600
+400
+200
+
+The MRE reactor design margin (plot h in Figure 6) also
+exhibits interesting behavior. It stays reasonably close to 1.0
+across all oxygen production levels, with the most significant
+deviation of less than 1.01 occurring at 2500 kg/yr. A margin
+of close to 1.0 is certainly intuitive, as the margin describes
+the tradeoff between minimal power consumption (margin=1)
+and increased reactor design flexibility (margin>1). Although margin was bounded between 1.0 and 10.0 in the
+optimization, the GA-optimizer would often select optimal
+margin values between 1.0 and 2.0 and the gradient-optimizer
+would then find optimal values within 1% of 1.0. It is
+
+0
+
+1000 2000 3000 4000 5000 6000 7000 8000 9000 10000
+Annual Oxygen Production (kg/year)
+
+Figure 7. The mass of the optimized ISRU system across a
+range of production levels. The system designs generated by
+the hybrid optimization scheme are compared to those
+generated by the genetic algorithm alone.
+
+8
+
+320
+
+6.5
+
+300
+
+6
+
+280
+
+5.5
+
+260
+
+5
+
+240
+
+4.5
+
+220
+
+4
+
+200
+
+3.5
+
+180
+
+3
+0
+
+2000
+4000
+6000
+8000
+Annual Oxygen Production (kg/year)
+
+The trends in the ISRU system mass (shown in Figure 6) exhibited an economy of scale, indicating that higher production
+levels can be met more efficiently. At a production level of
+10,000 kg/year, the ISRU system can produce 7 kg of oxygen
+annually per kilogram system mass. This translates to the
+ISRU system being able to produce the entire system mass in
+oxygen in 52 days at a production level of 10,000 kg/year. At
+low production levels (∼500 kg/yr), it would take approximately 120 days. If the Molten Regolith Electrolysis process
+is also leveraged to produce molten metals for manufacturing,
+the number of days till mass payoff would be significantly
+reduced.
+
+(kg O2/yr)/(kW plant power)
+
+(kg O2/yr)/(kg plant mass)
+
+7
+
+The power system plays the largest role in system mass, comprising 54% of the holistic system mass. The power system
+mass could be reduced by better limiting heat loss from the
+reactor, which is a primary driver of total system power.
+Although MRE reactors need to lose a certain amount of heat
+through the side walls to enable a molten core surrounded by
+solid regolith, the top and bottom of the reactor could possibly
+be better insulated to reduce heat loss.
+
+160
+10000
+
+Figure 8. The oxygen production level normalized by
+holistic ISRU system mass (blue) and holistic ISRU system
+power (green).
+
+The oxygen liquefaction and storage system was also a major
+mass driver, comprising 26% of the holistic system mass. The
+system was sized to hold 6 months of oxygen production,
+which results in significant amount of stored oxygen at higher
+production levels. The 6 month storage requirement may not
+be necessary at higher production levels, as oxygen may also
+be used more frequently.
+
+ISRU System Utility
+With any ISRU system, it is important to compare the utility
+of the system to a baseline concept of simply bringing along
+the resources from Earth. Figure 8 shows the annual oxygen
+production normalized by the mass (blue) and power (green)
+of the complete ISRU plant, which are measures of the plant
+efficiency. It is clear that at higher production levels an
+MRE-based ISRU system is able to produce more oxygen
+per unit plant mass and power. The oxygen production level
+normalized by system mass increases with production level,
+indicating that the ISRU system utilizing an MRE reactor can
+meet higher production levels more efficiently. Within the
+production levels studied in this work, the maximum efficiency of ∼7 kg oxygen per kilogram ISRU system mass was
+observed at the maximum production level of 10,000 kg/year.
+
+The optimization confirmed that an MRE reactor design
+margin close to 1.0 is indeed optimal for minimizing the
+combination of reactor mass and power system mass. This
+was previously somewhat uncertain [12], as a margin of 1.0
+corresponds to the lowest reactor power consumption, but at
+the cost of a larger reactor design. Future designs may use a
+design margin of slightly higher than 1.0 to incorporate some
+flexibility in the electrode separation during operation.
+It was shown that operating temperatures above the traditional paradigm of ∼1900 K are optimal for oxygen production levels above 500 kg/yr. Initially, it was unclear
+whether or not the benefits of a higher operating temperature would outweigh the drawbacks. Operating at a higher
+temperature allows the reactor to extract more oxygen per
+kilogram regolith and marginally decreases the total energy
+required for the chemical reactor (∆H), while the drawbacks
+include increased heat loss and regolith heating power per
+kilogram regolith. The integrated model optimization results
+showed that operating temperatures closer to 2200 K result in
+a smaller holistic system mass.
+
+To further understand the utility of an ISRU system, the number of days until the plant produces its mass in oxygen was
+also calculated. Using the data in Figure 8, it was determined
+that at an oxygen production level of 10,000 kg/year, it takes
+around 52 days for the ISRU system to “pay off” and produce
+its mass in oxygen. At a production level of 500 kg/yr, it
+will take 120 days to “pay off”. It should be noted that
+this analysis does not include economic considerations, future
+work will investigate the price of oxygen produced and the
+cost of developing and emplacing the ISRU system. For this
+analysis, examining the mass “pay off” point provides a firstorder surrogate for determining the tipping point in system
+utility.
+
+The power breakdown shown in the top right of Figure 6 can
+also inform future designs. The bottom three sections in the
+graph (chemical and regolith heat up power) are somewhat
+immutable, but the radiative heat loss may be reduced via
+more complex insulation topologies. One elegant solution
+would be to place new regolith on the sides of the reactor
+prior to insertion, such that the heat that exits through the
+sides of the reactor goes directly into preheating the regolith.
+In this way, some portion of the “Radiative Heat Loss” power
+slice may go towards “Regolith Heating”, thus reducing total
+power demand. Further power reduction may be achieved by
+recycling the heat generated by the oxygen liquefaction and
+storage system to preheat the regolith or supply some portion
+of the endothermic makeup requirement.
+
+6. C ONCLUSIONS
+Optimal System Design
+This paper presents estimates of the mass and power of an
+optimized ISRU system to extract oxygen from lunar regolith.
+To accomplish this, a Molten Regolith Electrolysis reactor
+model is integrated with models for a power system, excavator, hopper, regolith feed system, and oxygen liquefaction
+and storage systems. This integrated model is leveraged
+in a hybrid genetic-algorithm/gradient-based optimization
+scheme to generate optimized system performance and design
+estimates across a range of oxygen production levels.
+9
+
+Technical Research and Development Project Job, no.
+90634-002, 1990. 1
+[7] G. B. Sanders and W. E. Larson, “Progress made in
+lunar in situ resource utilization under nasas exploration technology and development program,” Journal
+of Aerospace Engineering, vol. 26, no. 1, pp. 5–17,
+2012. 1, 10
+[8] C. J. Steffen, J. E. Freeh, D. L. Linne, E. W. Faykus,
+C. A. Gallo, and R. D. Green, “System modeling of
+lunar oxygen production: Mass and power requirements,” in Proceedings of Space Nuclear Conference
+2007, 2007. 1
+[9] A. Chepko, “Technology selection and architecture
+optimization of in-situ resource utilization systems,”
+Ph.D. dissertation, Massachusetts Institute of Technology, 2009. 1, 2
+[10] U. Hegde, R. Balasubramaniam, and S. Gokoglu,
+“Heating-rate-coupled model for hydrogen reduction
+of,” AIAA Proceedings, 2010. 1
+[11] R. Balasubramaniam, S. Gokoglu, and U. Hegde, “The
+reduction of lunar regolith by carbothermal processing
+using methane,” International Journal of Mineral Processing, vol. 96, no. 1, pp. 54–61, 2010. 1
+[12] S. S. Schreiner, L. Sibille, J. A. Dominguez, and A. H.
+Sirk, “A molten regolith electrolysis model for lunar
+in-situ resource utilization,” AIAA SciTech 2015: 8th
+Symposium on Space Resource Utilization, 2015. 1, 2,
+3, 5, 8, 9
+[13] A. H. Sirk, D. R. Sadoway, and L. Sibille, “Direct
+electrolysis of molten lunar regolith for the production
+of oxygen and metals on the moon,” ECS Transactions,
+vol. 28, no. 6, pp. 367–373, 2010. 1, 2
+[14] P. Curreri, E. Ethridge, S. Hudson, T. Miller, R. Grugel,
+S. Sen, and D. Sadoway, “Process demonstration for
+lunar in situ resource utilizationmolten oxide electrolysis,” NASA Marshall Space Flight Center. MSFC Independent Research and Development Project, no. 5-81,
+2006. 1
+[15] A. Colaprete, P. Schultz, J. Heldmann, D. Wooden,
+M. Shirley, K. Ennico, B. Hermalyn, W. Marshall,
+A. Ricco, R. C. Elphic et al., “Detection of water in the
+lcross ejecta plume,” Science, vol. 330, no. 6003, pp.
+463–468, 2010. 1, 2
+[16] D. Andrews, A. Colaprete, J. Quinn, D. Chavers, and
+M. Picard, “Introducing the resource prospector (rp)
+mission,” in AIAA Space 2014 Conference, 2014. 2
+[17] A. Chepko, O. de Weck, D. Linne, E. SantiagoMaldonado, and W. Crossley, “Architecture modeling
+of in-situ oxygen production and its impacts on lunar
+campaigns,” in AIAA SPACE 2008 Conference & Exposition, 2008. 2
+[18] L. Sibille, D. Sadoway, P. Tripathy, E. Standish, A. Sirk,
+O. Melendez, and D. Stefanescu, “Performance testing
+of molten regolith electrolysis with transfer of molten
+material for the production of oxygen and metals on
+the moon,” AIAA: 3rd Symposium on Space Resource
+Utilization, 2010. 2
+[19] L. Sibille and J. A. Dominguez, “Joule-heated molten
+regolith electrolysis reactor concepts for oxygen and
+metals production on the moon and mars,” 50th AIAA
+Aerospace Sciences Meeting including the New Horizons Forum and Aerospace Exposition, 2012. 2, 10
+[20] D. A. O’Handley, E. E. Rice, and R. J. Gustafson, “Isru
+support for a self-sustaining lunar colony (sslc),” 39th
+AIAA Aerospace Sciences Meeting and Exhibit, January
+2001. 3
+[21] S. Heiroth, T. Lippert, A. Wokaun et al., “Microstructure and electrical conductivity of ysz thin films pre-
+
+Future Work
+There are a number of items that can be addressed in future
+work. The excavator system model currently does not produce an estimate of the energy consumed by the excavator,
+which would be an important addition to future models. Since
+the model’s creation, newer excavation theory and models
+have also been developed [7, 26, 27], which can be integrated
+into the excavation model.
+As mentioned in Section 2, the auger model is not yet
+parametrically sized to meet a given regolith insertion mass
+and time. Future work can dynamically size the radius and
+rotation rate of the auger to meet a specified insertion time
+that is compatible with the reactor model. This subsystem
+coupling would better inform an optimal reactor fill time and
+batch time.
+One function that was not modeled in this work was the
+extraction of molten metals from the Molten Regolith Electrolysis reactor. Although a molten metal withdrawal system
+has been developed [19], the mass of the system and the
+interface between the withdrawal system and the reactor
+are uncertain. Future work can investigate incorporating a
+molten metal withdrawal model into the ISRU system model.
+By incorporating a withdrawal system model, future work
+will also examine the impact of MRE operating temperature
+with respect to metal and silicon product availability and
+production rate.
+Future design iterations can also focus on including a spare
+parts analysis to more accurately determine the holistic mass
+of a less-than-ideal ISRU system.
+
+ACKNOWLEDGMENTS
+The authors would also like to thank Diane Linne, Juan
+Agui, Chris Gallo, and Greg Galloway for providing some
+of the subsystem models for the lunar ISRU system. We
+also thank Jesus Dominguez for his guidance on the theory
+behind the YSZ separator model and for providing some of
+the subsystem models. The authors thank Ariane Chepko
+for her advice concerning ISRU system model integration
+and Laurent Sibille for his guidance on the system-level
+considerations of Molten Regolith Electrolysis. This work
+was supported by a NASA Space Technology Research Fellowship (NASA Grant #NNX13AL76H).
+
+R EFERENCES
+[1]
+[2]
+[3]
+[4]
+
+[5]
+[6]
+
+L. A. Taylor and W. D. Carrier III, “Oxygen production
+on the moon: An overview and evaluation,” Resources
+of near earth space, p. 69, 1993. 1
+B. Sherwood and G. R. Woodcock, “Cost and benefits
+of lunar oxygen: Economics, engineering, and operations,” 1993. 1
+V. Badescu, Moon: Prospective Energy and Material
+Resources. Springer, 2012. 1
+D. L. Linne, “Employing isru models to improve hardware design,” in Proc., 48th AIAA Aerospace Sciences Meeting Including the New Horizons Forum and
+Aerospace Exposition, 2010. 1
+E. Christiansen, C. H. Simonds, and K. Fairchild,
+“Conceptual design of a lunar oxygen pilot plant,” LPI
+Contributions, vol. 652, p. 52, 1988. 1
+B. Altenberg, “Processing lunar in-situ resources,”
+10
+
+Gerald Sanders received his B.S. degree in Aerospace Engineering from the
+University of Cincinnati in 1987. He
+currently works in the Propulsion and
+Power Division at the NASA Johnson
+Space Center, in Houston Texas. Mr.
+Sanders has worked in the area of InSitu Resource Utilization (ISRU) for
+over 19 years, and currently serves as
+ISRU Chief Engineer.
+
+pared by pulsed laser deposition,” Applied Physics A,
+vol. 93, no. 3, pp. 639–643, 2008. 3
+[22] J. Wang, Z. Lü, X. Huang, K. Chen, N. Ai, J. Hu,
+and W. Su, “Ysz films fabricated by a spin smoothing
+technique and its application in solid oxide fuel cell,”
+Journal of power sources, vol. 163, no. 2, pp. 957–959,
+2007. 4
+[23] C. A. Gallo, R. A. Wilkinson, R. P. Mueller, J. Schuler,
+and A. Nick, “Comparison of isru excavation system
+model blade force methodology and experimental results,” American Institute of Aeronautics and Astronautics (AIAA), 2009. 4
+[24] R. Lindemann and C. Voorhees, “Mars exploration
+rover mobility assembly design, test and performance,”
+in 2005 IEEE International Conference on Systems,
+Man and Cybernetics, vol. 1, Oct 2005, pp. 450–455
+Vol. 1. 4
+[25] A. J. Hanford, “Advanced life support baseline values
+and assumptions document,” 2006. 5
+[26] K. Zacny, R. Mueller, G. Galloway, J. Craft, G. Mungas,
+M. Hedlund, and P. Fink, “Novel approaches to drilling
+and excavation on the moon,” in AIAA SPACE Conference & Exposition, 2009, pp. 6431–6443. 10
+[27] K. Zacny, P. Chu, G. Paulsen, J. Spring, M. Hedlund,
+J. Craft, P. van Susante, R. Mueller, G. Galloway, and
+J. Mantovani10, “Parametric optimization and prediction software for excavation and prospecting tasks,”
+2013. 10
+
+Kristopher A. Lee received his B.S.
+degree in Mechanical Engineering in
+1995 and a M.S. degree in Electrical
+Engineering from Texas A&M Universtiy in 1998. He currently works in the
+Propulsion and Power Division at the
+NASA Johnson Space Center where he
+designs and develops embedded control
+and monitoring applications for hardware in support of In-Situ Resource Utilization research and development.
+
+B IOGRAPHY [
+
+Samuel S. Schreiner is a NASA Space
+Technology Research Fellow in the Department of Aeronautics and Astronautics at MIT and is pursuing a Masters in
+Aerospace Engineering with a focus on
+space systems engineering. He received
+a Bachelors of Aerospace Engineering
+and Mechanics from the University of
+Minnesota (summa cum laude) in 2013.
+He conducts research at MIT modeling
+In-Situ Resource Utilization technology to produce oxygen
+and other resources from planetary regolith.
+
+Dr. Jeffrey Hoffman is a professor in
+MITs Aeronautics and Astronautics Department. He received a BA in Astronomy (summa cum laude) from Amherst
+College (1966); a PhD in Astrophysics
+from Harvard University (1971); and
+an MSc in Materials Science from Rice
+University (1988). As a NASA astronaut
+(1978-1997) Dr. Hoffman made five
+space flights, becoming the first astronaut to log 1000 hours of flight time aboard the Space Shuttle.
+His primary research interests are in improving the technology of space suits and designing innovative space systems
+for human and robotic space exploration. Dr. Hoffman is
+director of the Massachusetts Space Grant Consortium. In
+2007, Dr. Hoffman was elected to the US Astronaut Hall of
+Fame.
+11
+
+

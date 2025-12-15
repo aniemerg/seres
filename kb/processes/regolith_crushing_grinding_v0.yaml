@@ -1,0 +1,22 @@
+id: regolith_crushing_grinding_v0
+kind: process
+name: Regolith crushing and grinding
+layer_tags:
+  - layer_1
+inputs:
+  - item_id: regolith_coarse_fraction
+    qty: null
+    unit: kg
+outputs:
+  - item_id: regolith_powder
+    qty: null
+    unit: kg
+requires_ids:
+  - jaw_crusher
+  - ball_mill
+  - dust_control
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Anchor process to force comminution equipment into the graph.

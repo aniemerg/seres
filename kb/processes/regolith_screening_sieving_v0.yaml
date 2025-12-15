@@ -1,0 +1,24 @@
+id: regolith_screening_sieving_v0
+kind: process
+name: Regolith screening and sieving
+layer_tags:
+  - layer_1
+inputs:
+  - item_id: regolith_excavated
+    qty: null
+    unit: kg
+outputs:
+  - item_id: regolith_coarse_fraction
+    qty: null
+    unit: kg
+  - item_id: regolith_fine_fraction
+    qty: null
+    unit: kg
+requires_ids:
+  - vibrating_screen
+  - dust_control
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Placeholder split; yields and throughput TBD.

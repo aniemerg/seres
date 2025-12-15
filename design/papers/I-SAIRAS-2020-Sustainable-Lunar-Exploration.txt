@@ -1,0 +1,887 @@
+i-SAIRAS2020-Papers (2020)
+
+5006.pdf
+
+SUSTAINABLE LUNAR EXPLORATION THROUGH SELF-REPLICATING ROBOTS
+Virtual Conference 19–23 October 2020
+Alex Ellery1
+1
+
+Department of Mechanical & Aerospace Engineering, Carleton University, 1125 Colonel By Drive, Ottawa, ON.
+K1S 5B6, Canada, E-mail: alexellery@cunet.carleton.ca
+
+ABSTRACT
+Self-replicating robots on the Moon require a lunar industrial ecology which by virtue of its recycling loops represents a sustainable approach to in-situ resource utilisation
+(ISRU). However, the industrial ecology has only been
+implemented piecemeal on Earth yet it is required to function as an integrated entity on the Moon. To that end, we
+explore some approaches to manufacturing architectures
+anticipating their application through the processing chain
+from raw material mining through to chemical processing
+to 3D printing of the self-replicating machine’s constituent
+parts such as electric motors and electronics.
+1
+
+INTRODUCTION
+
+Current plans to explore the Moon are destined to be unsustainable because sustainability is regarded as an addendum
+rather than a central plank in lunar in-situ resource utilisation (ISRU). Sustainability is premised on ensuring that
+future generations are not faced with a barren wasteland
+through the reckless abandon of current generations. Implicit in this definition is the need to plan our ISRU practices over the long-term to ensure [1]: (a) we do not consume
+and waste scarce resources; (b) we employ renewable technologies as far as is feasible; (c) we adopt processes that do
+not yield toxic material; (d) we minimise waste through
+recycling loops. To observe this, we need to design a longterm approach to lunar ISRU that adopts the philosophy of
+indigenous peoples – exploit that which is abundant and
+waste nothing. We must live off the land as much as possible to minimise our reliance on an Earth-based supply
+chain. Rather than focusing on building specific products
+from lunar material, we have adopted to build the means of
+production; in the case of a self-replicating robot [2], this
+constitutes a universal constructor that can build all its own
+components – and all such components will serve general
+utility. The self-replicating robot imposes severe sustainability constraints including a lunar industrial ecology supported by high energy return-on-investment (EROI). The
+first step in defining our self-replicating robot is to determine our lunar resource availability in terms of required
+resource functionality. Our demandite list incorporates all
+the basic functional materials derived from lunar materials
+required to construct mining robots, unit chemical processors, manufacturing robots and assembly robots.
+
+All robotic machines comprise a specific configuration of
+actuators controlled by a system of electronic logic. Hence,
+we have selected two key components to be manufactured
+from lunar material – electric motors for actuation and
+vacuum tubes for computing machines (specifically, analogue neural network architectures). We have adopted 3D
+printing as our universal manufacturing technique inspired
+by the RepRap 3D printer [3]. We have demonstrated 3D
+printing of a suite of electric motor parts. Vacuum tubes
+also provide the basis for electrical energy generation
+(thermionic conversion of Fresnel lens-based thermal energy) and while motors provide the basis for energy storage
+(motorized flywheels). The former can potentially yield
+high conversion efficiencies exceeding 30% sourced from
+lunar materials [4]. These fundamental components define
+the composition of the demandite list. From the demandite
+list, the industrial ecology adopts a small number of chemical processing procedures with recycling loops in conjunction with 3D printing to minimise material wastage. This is
+a perquisite for minimising energy consumption both contributing to sustainability. In conjunction with high energy
+conversion efficiency, this suggests that energy return on
+investment (EROI) can be attained, a condition of selfreplication - the self-replicating robot approach is essential
+if ISRU is to be sustainable.
+2
+
+LUNAR INDUSTRIAL ECOLOGY
+
+The basic unit of the lunar industrial ecology is the unit
+chemical processor. A chemical plant comprises a set of
+large vessels for using chemical reactions to produce chemical products. Chemical processes are divided into steps
+(unit operations) defined by a process that occurs within a
+single reactor vessel. Unit operation is a basic analytical
+approach in chemical processing – it involves a physical or
+chemical transformation of a set of reagents into a set of
+products, e.g. mixing, separation or distillation, cooling,
+redox reactions, de(hydrogenation), (de)hydration reactions, (de)alkylation reactions, halogenation, ammoniation,
+alkaline fusion, polymerization, etc. It typically involves
+fluid flow, heat transfer and mass transfer resulting in
+thermodynamic and mechanical processes. The vessels are
+typically cylindrical with rounded ends suitable for high
+pressures or vacuums. Each reactor comprises a unit operation defined with a quantified input feed and a quantified
+output product. Within a single reactor, a unit operation
+constitutes the chemical process which converts one com-
+
+i-SAIRAS2020-Papers (2020)
+
+pound (the input reagents) into another compound (the
+output products). The chemical processes may be run in
+continuous or batch mode – in either case, catalysts and
+packed beds that have been poisoned by deposits may have
+to be regenerated periodically. Mass transfer rate of fluids
+through a reactor is defined through dimensionless numbers:
+where
+=Sherwood number,
+=Reynolds number,
+=Schmidt
+number, C=empirical constant, k=mass transfer coefficient
+(dimensions of velocity), A=cross sectional area,
+L=characteristic length, D=mass diffusivity, v=fluid flow
+velocity, =fluid dynamic viscosity and =fluid density.
+The obvious way to increase mass flow rate is to increase
+the pressure difference between the input and output ports
+of the reactor. Material and energy balances must be analysed based on chemical analysis. This forms the basis of
+the design of the controllers to regulate flows and monitor
+temperatures, pressures, fluid flows, etc by controlling the
+motorised pumps and valves. Note the centrality of motors.
+Material composition management (MCM) is the core
+problem in chemical and manufacturing processes [5].
+Conservation of mass requires that all material entering the
+chemical process either accumulates or exits the process as
+product or waste (material balance). The reactants are injected into the reaction chamber within which the operating
+conditions (temperature and pressure) determine the reaction progress. Furthermore, the reaction itself influences
+those operating conditions which must be measured continuously. The reaction is also determined by the composition
+of the reagents and their physical properties. The controller
+must optimize the conditions and reagent flows to maximize the product yield whilst minimizing waste. Complexity
+is introduced by chemical instabilities, uncertain and incomplete measurement data, limited predictive and diagnostic models, and time delays in chemical dynamics which
+requires intelligent control with process monitoring based
+on noisy data to deal with event-driven situations. An example of a single unit chemical processor is the Metalysis
+FFC process reactor [6] that is central to the lunar industrial
+ecology. Our lunar industrial ecology processes lunar minerals and volatiles into our demandite list. The most important lunar minerals for metal extraction include ilmenite
+(Fe and Ti), anorthite (Al, Si and Ca) and orthoclase (K and
+Si). The only material required from Earth is NaCl as a
+recycled reagent of the ecosystem (it is not consumed). We
+require Ni-Fe-Co meteoritic material available in lunar
+craters from which these and other elements may be extracted through the carbonyl process. Lunar volatiles of
+interest include hydrogen (from water), carbon compounds
+and small amounts of nitrogen which can be extracted
+thermally and fractionally condensed. The carbon provides
+the basis for silicone plastic manufacture. The adoption of
+mineral preprocessing with HCl acid permits the Metalysis
+FFC process to reduce pure metal oxides into metal powder
+
+5006.pdf
+
+with >99% purity. The CaCl2 electrolyte may be resupplied as a byproduct of metal extraction.
+The lunar industrial ecology (Appendix 1) is an approach to
+in-situ resource utilisation that is sustainable by linking
+many different chemical processes together into an ecological system in which the waste of one process becomes the
+feedstock for another. The lunar industrial ecology constitutes multiple unit chemical processors – this is unique to
+the lunar environment as most terrestrial chemical processing systems involve only a small number of single
+throughput processors. The lunar industrial ecology essentially constitutes a fan-in to a suite of 3D printing facilities
+forming the core of a bow-tie configuration from which
+manufactured products fan out [7,8]. We must now address
+how our lunar ecology might be architected to operate in a
+coordinated fashion to honour recycling loops between
+processes with maximum efficiency. Lessons may be applied from the manufacturing factory into which the lunar
+industrial ecology must be integrated. For example, a traditional functional factory layout arranges machines into
+functional sections – milling, grinding, drilling, etc. Unfortunately, in such layouts, around 95% of total throughput
+time is spent in transport or queuing for processing. A material flow network connecting modules of machines represents the most efficient production layout [9]. It combines
+the adaptability of the distributed layout with high efficiency transport of compact layouts. Physical transport networks must adapt to local conditions. The Zipf inverse
+distance law quantifies the volume of material N as inversely proportional to the distance D travelled:
+.A
+more sophisticated gravitational model that declares that
+distance travelled is dependent on the strength of attraction
+imposed by additional factors such a relief, obstacles, etc:
+where pi=demand at location i
+pj=demand at location j, dij=distance between locations i
+and j, a=exponent of distance that determines the sharpness
+of attraction, wi,j=weighting factors that quantify other
+factors such as relief, obstacles, etc. This can be modelled
+readily by a potential field representation to minimise distance for the transport of material.
+An automated factory requires several functions: (i) product specification of complete product; (ii) production planner to schedule and coordinate manufacturing; (iii) parts
+production – in this case through 3D printing technologies;
+(iv) material handling and transport by mobile robots and
+conveyors; (v) parts assembly by manipulators including
+jigs; (vi) parts inspection by sensors through self-diagnosis;
+(vii) computer coordination of the production process. An
+example of an automated lights-out factory is the Fanuc
+system of two-armed industrial robots equipped with vision
+and force/torque sensors that assemble robots. The Fanuc
+has not yet expanded throughout the manufacturing industry. Most industrial processes can be operated without hu-
+
+i-SAIRAS2020-Papers (2020)
+
+5006.pdf
+
+man intervention, the human aspect being reserved primarily for setup, reprogramming and servicing. These can similarly be automated. Setup and servicing require sophisticated manual dexterity which is the preserve of manipulator
+robotics which has applications to space debris mitigation
+and on-orbit servicing [10,11]. The axiomatic approach to
+manufacturing factory design flows down from its top-level
+functional requirements to the design parameters. There are
+two axioms of manufacturing [12-14]: (i) Maintain independence of a minimum number of functional requirements
+of a product (independence axiom); (ii) Minimise information content (cost) of a product consistent with (i) (information axiom). This may be formalised as:
+{FR}=[A]{DP} where FR=functional requirements vector,
+DP=design parameters, A=design matrix=diagonal matrix
+when axiom (i) is observed. A critical aspect is the decomposition of higher level system requirements (what) into
+lower level components of that system to achieve the requirements (how) [15]. Effective design for manufacturing
+can reduce manufacturing costs by 80% [16]. The methodology has subsequently been widened to design for manufacturing and assembly including logistics to minimise
+production costs [17]. 3D printing is an approach that effectively minimises costs consistent with these principles and
+indeed offers a more versatile mode of manufacture than
+subtractive modes. It can also be legitimately be widened to
+incorporate the (electro)chemical processing of raw materials and the mining chain, i.e. from raw material mining
+through to final product – in the case of the self-replicating
+system, this forms a closed loop. As a conjecture, it is conceivable that self-replication may introduce problems for
+the axiomatic approach in a similar manner that Godel’s
+theorems on self-reference introduced incompleteness
+and/or inconsistency to axiomatic mathematics.
+3
+FLEXIBLE
+(FMS)
+
+MANUFACTURING
+
+SYSTEMS
+
+If a self-replicating machine serves only to replicate itself, a
+relatively fixed throughput system would suffice for its
+manufacture. A self-replicating system per se is of little
+utility. Its power lies in its universal construction capabilities which require the ability to reconfigure itself with high
+flexibility to adapt to manufacturing any other product –
+this requires a flexible manufacturing systems (FMS) approach. FMS has been enabled by integration of computer
+aided design (CAD), computer aided manufacturing
+(CAM), computerised numerically controlled (CNC) machining and robots to collectively form computer integrated
+manufacturing (CIM) systems [18,19]. CIM is the key element in FMS in which distributed workstations are linked
+by computer-controlled material handling systems. Material
+handling processes are an essential part of designing the
+material flow structure in any distributed manufacturing
+system. Automation implies a reduction (towards elimina-
+
+tion) of human labour with higher throughput at higher
+quality at lower cost. CIM includes CNC machines and
+robots, production control through just-in-time manufacture, and transport vehicle control that are part of FMS. The
+manufacturing cell with a highly automated compact footprint is the basic unit of FMS [20]. FMS comprise multiple
+cells of robots, CNC machines and material handling linked
+by a computer network to maximise its autonomous capabilities [21]. It is a multicell system interconnected by selfdriving transport vehicles on guide rails between cells. A
+cellular manufacturing system is a type of FMS based
+around groups of machines (cell) that are specialised for a
+specific function [22,23]. Cellular manufacturing groups all
+related activities together into a CNC machining centre
+tended by a central robot to minimise human intervention.
+A robot can select a workpiece and emplace it onto a conveyor to transport it to a CNC machine. Another robot
+picks up the workpiece and emplaces it into the CNC machine. Finished parts are removed, emplaced onto another
+conveyor and picked up by another robot for assembly with
+other parts. A typical manufacturing cell includes five functions overseen by a centralised cell supervisor – manufacturing operations, machining planning, workpiece preparation, supplementary operations and inventory stocking [24].
+The cell supervisor controls and co-ordinates machine
+tools, robots, sequencing tasks, production processes, parts
+and instigate quality control. In the automated lights-out
+manufacturing system, the intelligent cell provides automated manufacturing, planning and stocking functions with
+zero manual preparation and supplementary functions.
+Only manufacturing operations add value to the workpiece
+through the input of energy, information and material so all
+other aspects of manufacture must be minimised. Traditionally, the cost of raw material is only a small fraction of
+total product cost but for a self-replicating machine, the
+capital costs of machinery are derived directly from the
+constituent material costs. An FMS specification may be
+transformed automatically into a coloured Petri net model
+[25]. An FMS may be defined as a 7-tuple FMS={M, B, H,
+Op, C, Mob, T} where M=set of machines, B=set of buffers, H=set of material handling systems, Op=set of operations for each machine, C=storage capacity for each buffer,
+Mob=mobility of position range of handling system;
+T=transportation capacity of handling system. This may be
+transformed into a manufacturing model P={G,P} where
+G=set of manufacturing processes, P=set of finished products. Cellular manufacturing reduces work-in-progress
+allowing a just-in-time approach [26]. Deadlocks can occur
+when two or more parts require the same resources at the
+same time. This can invoke a freezing behaviour unless the
+deadlock is resolved through detection and recovery methods.
+
+i-SAIRAS2020-Papers (2020)
+
+The manufacturing cell concept provides a balance between
+flexibility and efficiency. Mass production maximises efficiency at the expense of flexibility while small lot production of complex systems requires high flexibility at a cost
+of decreased efficiency. The need is to provide a balance
+between these two factors which allows frequent redesign.
+In the self-replicating machine, economies of scale are not
+enabled through mass production but through exponential
+production [27]. Universal construction requires the ability
+to rapidly develop and manufacture new products with
+quality, reliability and diversity in response to rapidly
+changing market demands. FMS offer the advantages of
+mass production with the flexibility of customisation.
+Product variants can be accommodated readily from raw
+materials to parts to assemblies. This flexibility has several
+components – organisational flexibility to adapt to changes,
+machine flexibility to implement different machining operations, material handling flexibility to move different part
+types efficiently, operational flexibility to produce different
+parts in different ways, process flexibility to maximise
+parts types without major setup, product flexibility to create
+new parts, routing flexibility to produce parts through alternate routes through the production process, volume flexibility to adjust output levels, expansion flexibility to adjust
+capacity and capability as needed, program flexibility to
+run autonomously for long periods, production flexibility to
+manufacture a multitude of parts without new capital
+equipment, and market flexibility to adapt to market changes [28]. Maximum flexibility implies the ability for rearrangement, change in materials and machining, machining
+more complex geometries to increase the product range and
+variation, and the ability to integrate new machining technologies – 3D printing offers these capabilities if it can be
+proven that it can manufacture complex systems such as
+robotic machines. These requirements are exactly those
+required of a universal constructor which is a logical extension of the FMS which must be extended through the manufacturing chain from raw material mining through the
+industrial ecology to the final product systems. Recently,
+lean production has emphasised a reduction in inventory
+stock (production to demand rather than stock for supply),
+rational sequencing of operations and the elimination of
+waste – indeed, the lunar industrial ecology implements
+this through recycling. Lean manufacturing combines the
+high-quality customisation of craft production with the high
+quantity cheapness of mass production, a task to which 3D
+printing is eminently suited. Examples of this include justin-time manufacturing (minimise excess inventory by
+matching production rate to demand) and total quality management (minimise product waste through continuous quality control). Just-in-time manufacturing bears similarities to
+generalised assembly line balancing along a conveyor to
+consecutively distribute the total manufacturing workload
+along the flow line. A variation of total quality manage-
+
+5006.pdf
+
+ment is 6 sigma quality which aims to reduce tolerance
+deviance beyond the traditional 3 sigma levels at every
+stage of the production process. All are effectively concerned with the minimisation of waste.
+4
+
+MANUFACTURING ARCHITECTURES
+
+Control architectures in manufacturing have evolved from
+centralised hierarchies into distributed heterarchies [29].
+Centralised architectures offer complete global control
+effort but are slow to respond to perturbations due to high
+overheads. This may be modified into a top-down hierarchy
+which overcomes the overhead problem through task decomposition but the response problem remains. The hierarchy is the most traditional organisational form with its treelike structure where fewer higher agents have more global
+views than more numerous lower agents in the hierarchy.
+Complex systems often form hierarchies of interrelated
+subsystems in which the interactions between subsystems
+are suppressed with respect to those within subsystems –
+they are nearly decomposable such that subsystems can be
+treated as if they are almost independent of each other. This
+is the principle of decomposition of increasing precision
+with decreasing intelligence [30]. An example applied to
+FMS is a three-layer hierarchy of an organisation level for
+scheduling integrated sets of machines (factory level), coordination level for coordinating machines (cell or job shop
+level) and execution level for controlling each machine task
+(machine level) [31]. The hierarchy may or may not have
+same level interactions through internal links. Hierarchies
+implement a divide-and-conquer strategy but are brittle.
+Hierarchies may be modified by allowing some same level
+interactions in a more distributed approach. The heterarchical architecture is a flexible distributed multi-agent approach to problem solving in which no single agent has a
+global view of the problem, only a partial view. Blackboards such as the NASREM architecture are of this nature
+[32]. The heterarchical structure is flat characterised by
+entirely same level interactions in a distributed fashion
+without any central or global control. Decentralised control
+with localised intelligence linked with adaptive communications will be essential. In biological systems, distributed
+control of modules operating on the basis of local information only without centralized arbitration is ubiquitous.
+As long as communications exist between these subunits,
+coordination through a higher level self-organised centralised controller is possible [33]. Fully autonomous mining
+and manufacturing will require self-learning and selfoptimisation to adapt flexibly and rapidly to a variable
+demand environment, i.e. reconfigurability is essential [34].
+There are certain design principles required for reconfigurability that goes beyond traditional flexible manufacturing
+systems (FMS) [35]. They are based on flexibility, convertibility, scalability and modularity and the key element is the
+
+i-SAIRAS2020-Papers (2020)
+
+implementation of actuators for multiple degrees of freedom. The distributed heterarchy is highly fault tolerant to
+perturbations but is difficult to predict. Decentralised approaches may be combined with supervisory control.
+Complex multi-agent manufacturing systems may be configured several different ways. The object-oriented paradigm has given way to agent-based design. Agent-based
+systems are ideally suited to distributed architectures.
+Agents are a development of this concept involving autonomous well-defined entities with well-defined boundaries
+and interfaces [36]. Agents are objects in the objectoriented paradigm – it comprises a set of tasks which interact through message passing. However, whereas objectoriented approaches are built around passive objects, agentbased approaches place emphasis on active agent interactions. Swarm-based approaches using multiple agents with
+simple local behaviours to generate complex behaviours is
+the most robust approach to multi-robot coordination.
+Agent-based distributed architectures comprise a set of
+agents – cooperating autonomous entities that can selforganise into a population without any global controller.
+Each agent has knowledge for its task; each agent has an
+interface to interact with other agents and/or the environment; each agent is hierarchically constructed. There are
+many applications of agent-based computing [37]. CORBA
+(common object request broker architecture) is an industrial
+middleware agent-based protocol applied to an intelligent
+machine cell to coordinate its subsystems [38]. An open
+systems architecture can partition the FMS into autonomous entities (modules) that communicate and coordinate
+with each other [39]. Agents must learn from their environments to adapt - with multiple agents, this is complex
+requiring mechanisms of coordination. There are several
+market-based approaches to multi-agent mechanisms [40].
+The bucket brigade algorithm optimises work allocation
+between resources to maintain load balance without supervision. The contract net protocol is a market-based technique that involves agents competing for subtasks through
+the submission of bids [41]. However, optimisation-based
+allocation of tasks among agents is superior to marketbased approaches in multi-robot task allocation [42,43].
+Optimisation generally implies linear programming with
+respect to utility, fitness value or resource cost of a task
+[44]. The evolutionary algorithm is an optimisation procedure that is suited to manufacturing schedules [47]. Similarly, it has been proposed that an information-theoretic
+measure – generalised correlation entropy - of spatiotemporal coordination of multiple modules of a distributed
+robotic system be employed as the fitness function of a
+genetic algorithm to evolve the system [46]. Selforganisation can be applied to multi-agent manufacturing in
+which multiple agents form a society of agents to solve
+problems beyond any individual agent’s capacity [47].
+
+5006.pdf
+
+Agents have only local interactions and interact with each
+other through a coordination model. Local interactions
+between components result in emergent global properties
+without any central control or supervision. For selforganisation, a critical threshold must be exceeded for the
+emergence of global order to occur. It is the multiplicity of
+short-range interactions that yield complex “emergent”
+global behaviours that are not reducible to the behaviour of
+its parts. The commonest example is the collective behaviours of insect colonies of ants, termites, bees and wasps.
+The ant colony is a self-organising system in which
+stigmergy provides the mechanism for implicit rather than
+explicit coordination [48]. Each ant observes cues from its
+environment independently to invoke simple behaviours
+individually. By depositing pheromones, some fluctuations
+grow while others fade. These accumulating pheromones
+drive individual agents that appear coordinated. Communication between insects is indirect and mediated through the
+environment – stigmergy. Individual insects mark their
+environment using volatile chemicals – pheromones –
+which collectively coordinate them. Ants modify their environment by depositing pheromones locally and the pheromones propagate spatially as a global dissipation field. It is
+these local modifications that communication to other foraging ants. A specific sign in the environment triggers specific actions by the agents. This can be directly applicable
+to ant agents in a mine, processing and manufacturing environment. Life is a complex system in that it is characterised
+by multiply interacting agents which themselves may be
+simple with nonlinear interactions subject to simple shortrange laws. Biological complex systems operate far-fromequilibrium and open to external energy and information
+with a self-organised hierarchical internal structure with
+internal feedback loops. Emergent global properties have
+their own causal rules irreducible to component causal
+effects.
+Reconfigurability reduces the complexity and cost of FMS
+by adaptively matching capacity to need [49,50]. Reconfigurable manufacturing systems are designed to accommodate rapid changes in manufacturing architecture in response to new demands in productive function. They minimise unused capacity but can adjust rapidly to new demands [51]. This rapid response to changing demands is the
+hallmark of agile manufacturing (itself similar to lean manufacturing except that agile manufacturing is proactive
+while lean manufacturing is reactive) [52,53]. Reconfigurable systems are distinct from FMS in that they are rapid but
+limited in flexibility to part diversity whereas FMS has
+maximum flexibility in part range. We need both. There are
+six principles of reconfigurability: (i) modularity; (ii) integrability of interfaces; (iii) customised flexibility; (iv)
+scalability of factory; (v) convertibility of factory to different production requirements; (vi) diagnosability of abnor-
+
+i-SAIRAS2020-Papers (2020)
+
+mal behaviour [54,55]. Modules can be reconfigured rapidly into an integrated system which can be readily modified
+with new modules to adjust both product and capacity.
+Modular design of products permits agile manufacturing by
+configuring modules into different products, the configurations of which can be searched using tabu search [56]. Tabu
+search is suitable for solving NP-hard problems by starting
+from an initially feasible solution to search for better solutions subject to minimum cost. Genetic programming also
+may be employed to evolve the self-organisation of parts
+into a final self-assembly [57]. The genetic program has a
+hierarchical structure with components for assembly that
+can be randomly selected subject to assembly constraints
+defined by fitness. Reconfigurable manufacturing allows
+ready flexibility to perturbations that can affect throughput
+without re-design of the manufacturing plant. Many reconfigurable systems employ material transport systems such
+as gantries and conveyors that form the backbone of the
+system with an emphasis on CNC machining. The flows of
+service or goods in such a transport network are controlled
+by demand and supply in a market economy system forming a network topology. The volume of service or goods
+through the transport network may be quantified by
+Kirchoff’s circuit laws. Petri nets may also be used to model concurrent manufacturing activities as noted earlier.
+There are several types of reconfigurable manufacturing
+architecture in providing dynamic flexibility of distributed
+cells – fractal, holonic and bionic [58]. The units in each
+case are slightly different. The fractal manufacturing architecture is a reconfigurable system whose chief characteristic is that its autonomous agents are self-similar and reconfigurable and these agents cooperate through message passing to solve problems [59,60]. They are self-similar at all
+levels of their hierarchy, the configuration of which is controlled by a system agent. It can autonomously selforganise its organisational structure (but not its physical
+structure) in response to a dynamic environment through
+reinforcement learning [61]. Reinforcement learning lies
+between the exact feedback of supervised learning and the
+lack of feedback of unsupervised learning. It is unclear how
+the fractal architecture might be implemented practically.
+The holonic architecture is the most popular agent-based
+approach to manufacturing systems control as it combines
+hierarchical and heterarchical architectures [62]. The holonic system has been adopted in automotive factories
+based on Arthur Koestler’s concepts on the material basis
+of mind-brain duality in his “Ghost in the Machine” (1967)
+[63]. Biological cells are comprised of organelles while
+also being part of tissues (holonic architecture). Inspired by
+organelles of the biological cell, the holonic factory model
+comprises a hierarchy of tissue holons comprised of multiple cell holons. Each cell holon comprises a nucleus holon
+(for decision-making), a golgi complex holon (for invento-
+
+5006.pdf
+
+ry), a lysosome holon (for reprocessing and recycling), an
+endoplasmic reticulum holon (for transport) and ribosome
+holons (for production) in which mRNA act as a messaging
+system and tRNA as a negotiation system. The holarchy is
+a system of holons that permits a heterarchical system implement a nested hierarchical structure to provide conflict
+resolution with the holon representing a hybrid character of
+both whole and part [64]. A holon is simultaneously both a
+subordinate agent comprised of parts from a lower level
+and part of a larger superordinate agent. The holonic architecture self-regulates in response to perturbations from the
+environment modelled as a social system [65]. It is based
+on cooperating holons forming an integrative holarchy
+based on functional decomposition. The holarchy combines
+the static stability of the hierarchy with the dynamic flexibility of the heterarchy through the dual nature of the holon
+[66]. The holon is an autonomous, self-contained, selfregulating module yet it is part of higher order holons and
+itself is comprised of lower order holons, smearing the
+difference between part and whole, i.e. holons may be aggregated (exhibiting emergent complex behaviours from
+interactive simple behaviours) or specialised (exhibiting the
+inheritance of agents). The holarchy comprises different
+sets of alliances – short-lived coalitions, task-oriented
+teams, long-lived congregations, long-lived societies governed by social laws, loosely bound federations. Holons
+interact through broadcast messaging and contract net protocol. Metamorphic control of holonic systems is an approach for real time operation [67]. The holarchy can be
+augmented with stigmergy to enhance clustering through
+self-organisation [68]. Stigmergy is a bio-inspired approach
+that implements communication between components
+through modification of the local environment.
+PROSA (product-resource-order-staff architecture) is an
+agent-based holonic manufacturing reference architecture
+based on four types of holonic agents [69,70]: (i) order
+holons (agents for workpiece tasking, logistics and its control and timing); (ii) product holons (agents for product
+functionality such as process planning and quality assurance); (iii) resource holons (agents for physical and information resource handling such as machine or factory); and
+(iv) staff holons (agents for global centralised supervision).
+Software agents acting as virtual ants coordinate between
+physical agents so they can aggregate multiple agents to
+form holonic systems. PROSA has a self-similarity aspect
+incorporating a fractal architecture. An example of an holonic system is the plug-and-produce software reconfiguration facility of an holonic robot assembly system comprising three manipulators, one belt conveyor and two warehouses [71,72]. Stigmergy has been demonstrated within
+the context of PROSA as an indirect mechanism of coordination in multi-agent holonic manufacturing system [73,74]
+in which PROSA agents were coordinated for adaptability
+
+i-SAIRAS2020-Papers (2020)
+
+5006.pdf
+
+to changes in the environment. Termite-inspired robots
+using only very simple behavioural rules could build structures from magnetically-connected bricks through emergence. PROSA may be extended ontologically into the
+bionic architecture based on a hierarchy of biological cell
+analogues (modelons) including the possibility of biological morphogenesis. A cell may be differentiated into different functions but all are based on the same underlying architecture.
+
+plements biochemical homeostasis. NEIMS implements
+hierarchical neural control under nominal conditions but
+switches to hormone regulation for agile adaptation under
+off-nominal conditions with a reorganisation of resources.
+Hormonal secretion quantity is given by [79]
+
+The Biological Manufacturing Systems is a bio-inspired
+approach to manufacturing for coping with internal and
+external environmental perturbations during the product
+lifecycle. In this paradigm, manufacturing machines breed
+products in which potential fields attract dynamically jobs
+to machines [75]. A classifier system with if-then production rules with bucket brigade credit assignment was adopted to implement genetic learning [76]. Genetic algorithms
+have also been applied to finding a minimum cost machine
+layout for a factory floor based on interaction forces between different manufacturing activities [77]. A neuroendocrine-inspired manufacturing system (NEIMS) emulates
+the biological neurocontrol-hormonal regulation system
+and its characteristic adaptability [78]. The endocrine system releases hormone signalling molecules through the
+hypothalamus-pituitary-adrenal axis to the bloodstream in
+response to neural stimulus – hypothalamic neurons stimulate pituitary CRH (ACTH-releasing hormone) to stimulate
+adrenal ACTH (adrenocorticotropic hormone) synthesis
+which in turn stimulates biosynthesis of cortisol which
+inhibits CRH/ACTH production. The nervous system implements adaptive control while the endocrine system im-
+
+5
+
+ij = ca (1 +  )t −1
+
+where
+
+a=constant,
+
+cij=position-
+
+ij
+
+dependent cost for task, t=duration of job, λ=control parameter. This latter is particularly analogous to the lunar
+industrial ecology of chemical processors.
+CONCLUSIONS
+
+Our lunar industrial ecology represents a sustainable approach to ISRU which feeds into a manufacturing system
+based on 3D printing to constitute a self-replicating machine. Although multiple machines that must be coordinated are characteristic of manufacturing, this is not so in
+chemical processing plants. The lunar industrial ecology
+however involves multiple chemical processors that must
+be coordinated with extensive recycling loops. The design
+and architecture of manufacturing factories may be applied
+to the lunar industrial ecology and these approaches have
+been reviewed. Although these approaches are appropriate
+throughout the processing chain from mining to final product, a central facet of any ISRU system will involve exploration of the planetary environment and acquire physical
+resources [80]. This will require complex strategies involving coordination of multiple roving robots.
+
+Appendix. Near closed loop lunar industrial ecology (emboldened materials are pure metal oxides for direct reduction
+using the FFC Cambridge process)
+Lunar Ilmenite
+Fe0 + H2O → ferrofluidic sealing
+FeTiO3 + H2 → TiO2 + H2O + Fe
+2H2O→2H2+O2
+2Fe + 1.5O2 → Fe2O3/Fe2O3.CoO - ferrite magnets
+3Fe2O3 + H2 ↔ Fe3O4 + H2O) – formation of magnetite at 350-750oC/1-2 kbar
+4Fe2O3 + Fe ↔ 3Fe3O4
+)
+Nickel-Iron Meteorites
+W inclusions – high density of 19.3
+→
+Thermionic cathodic material
+Mond process:
+Alloy
+Ni Co Si C W
+.
+W(CO)6 ↔ 6CO + W
+Fe(CO)5 ↔ 5CO + Fe (175oC/100 bar)
+→
+Tool steel
+2% 9-18%
+Ni(CO)4 ↔ 4CO + Ni (55oC/1 bar)
+→
+Electrical steel
+3%
+Co2(CO)8 ↔ 8CO + 2Co (150oC/35 bar)
+→
+Permalloy
+80%
+S catalyst
+Kovar
+29% 17% 0.2% 0.01%
+.
+4FeS + 7O2 → 2Fe2O3 + 4SO2
+(Troilite)
+SO2 + H2S → 3S + H2O
+FeSe + Na2CO3 + 1.5O2 → FeO + Na2SeO3 + CO2
+KNO3 catalyst
+Na2SeO3 + H2SO4 → Na2O + H2SO4 + Se → photosensitive Se
+↑____________|
+Na2O + H2O → 2NaOH
+NaOH + HCl → NaCl + H2O
+Lunar Orthoclase
+3KAlSi3O8 + 2HCl + 12H2O → KAl3Si3O10(OH)2 + 6H4SiO4 + 2KCl
+orthoclase
+illite
+silicic acid (soluble silica)
+2KAl3Si3O10(OH)2 + 2HCl + 3H2O → 3Al2Si2O5(OH)4 + 2KCl
+
+i-SAIRAS2020-Papers (2020)
+
+5006.pdf
+
+kaolinite
+[2KAlSi3O8 + 2HCl + 2H2O → Al2Si2O5(OH)4 + 2KCl + SiO2 + H2O]
+KCl + NaNO3 → NaCl + KNO3
+2KCl + Na2SO4 → 2NaCl + K2SO4
+Lunar Olivine
+3Fe2SiO4 + 2H2O → 2Fe3O4 + 3SiO2 + 2H2O
+fayalite
+magnetite
+Mg2SiO4 + 4H2O→ 2MgO + SiO2 + 4H2O
+→ 3D Shaping binder
+forsterite
+MgO + HCl → MgCl2 + H2O
+→ 3D Shaping binder
+Lunar Anorthite
+CaAl2SiO8 + 4C → CO + CaO + Al2O3 + 2Si at 1650oC
+→ CaO cathode coatings
+CaO + H2O → Ca(OH)2
+Ca(OH)2 + CO2 → CaCO3 + H2O
+CaAl2SiO8 + 5HCl + H2O → CaCl2 + 2AlCl3.6H2O + SiO2
+→ fused silica glass + FFC electrolyte
+AlCl3.6H2O → Al(OH)3 + 3HCl + H2O at 100oC
+↑___________________________________|
+Al(OH)3 → Al2O3 + 3H2O at 400oC → 2Al + Fe2O3 → 2Fe + Al2O3 (thermite)
+AlNiCo hard magnets
+Lunar Pyroxene
+Al solar sail
+Ca(Fe,Al)Si2O6 + HCl + H2O → Ca0.33(Al)2(Si4O10)(OH)2.nH2O + H4SiO4 + CaCl2 + Fe(OH)3
+Augite
+montmorillonite
+silicic acid
+iron hydroxide
+Lunar Volatiles
+CO + 0.5 O2 → CO2
+CO2 + 4H2 → CH4 + 2H2O at 300oC (Sabatier reaction) → CH4 → C + 2H2 at 1400oC for steel/anode regeneration
+Ni catalyst
+850oC
+250oC
+CH4 + H2O → CO + 3H2 → CH3OH
+350oC
+Ni catalyst Al2O3
+CH3OH + HCl → CH3Cl + H2O
+370oC
++nH2O
+Al2O3
+CH3Cl + Si → (CH3)2SiCl2 → ((CH3)2SiO)n + 2nHCl → silicone plastics/oils
+↑______________________________________________|
+N2 + 3H2 → 2NH3 (Haber-Bosch process)
+Fe on CaO+SiO2+Al2O3
+4NH3 + 5O2 → 4NO + 6H2O
+WC on Ni
+3NO + H2O → 2HNO3 + NO (Ostwald process)
+↑__________________|
+2SO2 + O2 ↔ 2SO3 (low temp)
+SO3 + H2O → H2SO4
+Salt of the Earth
+2NaCl + CaCO3 ↔ Na2CO3 + CaCl2 (Solvay process) → FFC electrolyte
+350oC/150 MPa
+Na2CO3 + SiO2(i) ↔ Na2SiO3 + CO2 → piezoelectric quartz crystal growth (40-80 days)
+1000-1100oC
+CaCO3 → CaO + CO2 (calcination)
+NaCl(s) + HNO3(g) → HCl(g) + NaNO3(s)
+2NaCl(s) + H2SO4(g) → 2HCl(g) + Na2SO4(s)
+Metalysis FFC Process (CaCl2 electrolyte)
+MOx + xCa → M + xCaO → M + xCa + ½xO2 where M=Fe, Ti, Al, Mg, Si, etc
+CO + 0.5 O2 → CO2
+CO2 + 4H2 → CH4 + 2H2O at 300oC (Sabatier reaction) → CH4 → C + 2H2 at 1400oC
+Ni catalyst
+→ steel/cathode regeneration
+[5] D’Ambrosio B, Fehlung M, Forrest S, Paulefs P, Wilbur B
+References
+(1987) “Real-time process management for materials compoosition
+[1] Ellery A (2020) “Sustainable in-situ resource utilisation on the
+in chemical manufacturing” IEEE Expert (Summer), 80-93
+Moon” Planetary & Space Science 184, 104870
+[6] Ellery A, Lowing P, Wanjara P, Kirby M, Mellor I, Doughty G
+[2] Ellery A (2016) “Are self-replicating machines feasible?” AIAA
+(2017) “FFC Cambridge process and metallic 3D printing for deep
+J Spacecraft & Rockets 53 (2), 317-327
+in-situ resource utilisation – a match made on the Moon” Proc Int
+[3] Jones R, Haufe P, Sells E, Iravani P (2011) “RepRap- the repliAstronautics Congress, Adelaide, Australia, IAC-17-D4.5.4x39364
+cating rapid prototyper” Robotica 29 (1), 177-191
+[7] Csete M, Doyle J (2004) “Bow ties, metabolism and disease”
+[4] Ellery A (2019) “In-situ resourced solar power generation and
+Trends in Biotechnology 22 (9), 446-450
+storage for a sustainable Moon Village” Int Astronautics Congress,
+Washington DC, IAC-19,C3.4.4.x49639
+
+i-SAIRAS2020-Papers (2020)
+
+[8] Ellery A (2020) “How to build a biological machine using
+engineering materials and methods” Biomimetics J 5 (3), 35
+[9] Benjaafar S, Heragu S, Irani S (2002) “Next generation factory
+layouts: research challenges and recent progress” Interfaces 32 (6),
+58-76
+[10] Ellery A (2019) “Tutorial review on space manipulators for
+space debris mitigation” Robotics 8 (2), 8020034
+[11] Ellery A (2020) “Tutorial review of bio-inspired approaches
+to robotic manipulation for space debris salvage” Biomimetics J 5
+(2), E19
+[12] Suh N, Bell A, Gossard D (1978) “On an axiomatic approach
+to manufacturing and manufacturing systems” ASME J Engineering in Industry 100 (2), 127-130
+[13] Sohlenius G (1984) “Scientific and structural base of manufacturing” Robotics & Computer-Integrated Manufacturing 1
+(3/4), 389-396
+[14] Babic B (1999) “Axiomatic design of flexible manufacturing
+systems” Int J Product Research 37 (5), 1159-1173
+[15] Cochrane D, Arinez J, Duda J, Linck J (2002) “Decomposition approach for manufacturing system design” J Manufacturing
+Systems 20 (6), 371-389
+[16] O’Driscoll M (2002) “Design for manufacture” J Materials
+Processing Technology 122, 318-321
+[17] Taylor D (1997) “Design for global manufacturing and assembly” IIE Trans 29, 585-597
+[18] Fjermestad J & Chakrabarti A (1993) “Survey of the computer-integrated manufacturing literature: a framework for strategy,
+implementation and innovation” Technology Analysis & Strategic
+Management 5 (3), 251-271
+[19] Gunasekaran A (1997) “Implementation of computerintegrated manufacturing: a survey of integration and adaptability
+issues” Int J Computer Integrated Manufacturing 10 (1-4), 266280
+[20] Chan C-Y, Redford A, Lam F-W (1997) “Cell control architecture for manufacturing applications” J Materials Processing
+Technology 66, 137-145
+[21] Ayres R, Butcher D (1993) “Flexible factory revisited” American Scientist 81 (Sep/Oct), 448-459
+[22] Alqattan I (1989) “Systematic approach to cellular manufacturing systems design” J Mechanical Working Technology 20, 415424
+[23] Heragu S (1994) “Group technology and cellular manufacturing” IEEE Trans Systems Man & Cybernetics 24 (2), 203-215
+[24] Bjorke O (1984) “Towards integrated manufacturing systems
+– manufacturing cells and their subsystems” Robotics & Computer
+Integrated Manufacturing 1 (1), 1-19
+[25] Zairi S, Zouari B, Pietrac L (2007) “Formal approach for the
+specification, verification and control of flexible manufacturing
+systems” IEEE Conf Emerging Technologies & Factory Automation, paper no. 4416897
+[26] Chan C-Y, Lam F-W, Lee C-P (1999) “Considerations for
+using cellular manufacturing” J Materials Processing Technology
+96, 182-187
+[27] Ellery A (2017) “Space exploration through self-replication
+technology compensates for discounting in NPV cost-benefit analysis – a business case?” New Space J 5 (3), 141-154
+[28] Sethi A, Sethi S (1990) “Flexibility in manufacturing: a survey” Int J Flexible Manufacturing Systems 2, 289-328
+[29] Dilts D, Boyd N, Whorms H (1991) “Evolution of control
+architectures for automated manufacturing systems” J Manufacturing Systems 10 (1), 79-93
+[30] Saridis G (1988) “Intelligent machines: distributed vs hierarchical intelligence” IFAC Proc 21 (19), 29-34
+[31] Varvatsoulakis M, Saridis G (2000) “Intelligent organisation
+for flexible manufacturing” IEEE Trans Robotics & Automation 16
+(2), 180-189
+[32] Liumia R, Fiala J, Wavering A (1989) “NASREM robot control system standard” Robotics & CIM 6 (4), 303-308
+[33] Seleley T (2002) “When is self-organisation used in biological
+systems?” Biology Bulletin 202, 314-318
+
+5006.pdf
+
+[34] Bannat A, Bautze T, Beetz M,Blume J, Diepold K, Ertelt C,
+Geiger F, Gmeiner T, Gyger T, Knoll A, Lau C, Lenz C, Ostgathe
+M, Reinhart G, Roesel W, Ruehr T, Scuboe A, Shea K, Wersborg
+G, Stork S, Tekouo W, Wallhoff F, Wiesbeck M, Zadeh M (2011)
+“Artificial cognition in production systems” IEEE Trans Automation Science & Engineering 8 (1), 148-173
+[35] Katz R (2007) “Design principles of reconfigurable machines”
+Int J Advanced Manufacturing Technology 34, 430-439
+[36] Jennings N (2001) “Agent-based approach for building complex software systems” Communications of the ACM 44 (4), 35-41
+[37] Luck M, McBurney P, Priest C (2004) “Manifesto for agent
+technology: towards next generation computing” Autonomous
+Agents & Multi-Agent Systems 9, 203-252
+[38] Lei M, Yang X, Tseng M, Yang S (1998) “Design an intelligent machine centre – strategy and practice” Mechatronics 8, 271285
+[39] Kaula R (1998) “Modular approach toward flexible manufacturing” Integrated Manufacturing Systems 9 (2), 77-86
+[40] Horling B, Lesser V (2005) “Survey of multi-agent organisational paradigms” Knowledge Engineering Review 19 (4), 281-316
+[41] Smith R (1980) “Contract net protocol: high level communication and control in a distributed problem solver” IEEE Trans
+Computers 29 (12), 1104-1113
+[42] Badreldin M, Hussein A, Khamis A (2013) “Comparative
+study between optimisation and market-based approaches to multirobot task allocation” Advances in Artificial Intelligence 2013,
+paper no 256524
+[43] Khamis A, Hussein A, Elmogy A (2015) “Multi-robot task
+allocation: review of the state-of-the-art” in Cooperative Robots &
+Sensor Networks (ed. Koubaa A & Martinex-de Dios, Studies in
+Computational Intelligence 605, 31-51
+[44] Gerkey B, Mataric M (2004) ‘Formal analysis and taxonomy
+of task allocation in multi-robot systems” Int J Robotics Research
+23 (9), 939-954
+[45] Gen M, Lin L (2014) “Multiobjective evolutionary algorithm
+for manufacturing scheduling problems: state-of-the-art survey” J
+Intelligent Manufacturing 25, 849-866
+[46] Prokopenko M, Gerasimov V, Tanev I (2006) “Evolving
+spatiotemporal coordination in a modular robotic system” Lecture
+Notes in Artificial Intelligence 4095, 558-569
+[47] Di Marzo Sergendo G, Fleizes M-P, Karageorgos A (2011)
+“Self-organising systems” in Self-Organising Software: From
+Natural to Artificial Adaptation (ed. Di Marzo Serunngendo G,
+Fleizes M-P, Karageorgos A), Springer-Verlag, Berlin, 7-32
+[48] Valckenaers P, van Brussel H, Bochmann O, Germain S,
+Zamfirescu C (2003) “On the design of emergent systems: an
+investigation of integration and interoperability issues” Engineering Applications of Artificial Intelligence 16, 377-393
+[49] Mehrabi M, Ulsoy A, Koren Y, Heytler P (2002) “Trends and
+perspectives in flexible and reconfigurable manudfacturing systems” J Intelligent Manufacturing 13, 135-146
+[50] Mehrabi M, Ulsoy A, Koren Y (2000) “Reconfigurable manufacturing systems: key to future manufacturing” J Intelligent Manufacturing 11, 403-419
+[51] Malhotra V, Raj T, Arora A (2009) “Reconfigurable manufacturing: an overview” Int J Machine Intelligence 1 (2), 38-46
+[52] Schmenner R, Tatikonda M (2005) “Manufacturing process
+flexibility revisited” Int J Operations & Production Management
+25 (12), 1183-1189
+[53] Sanchez L, Nagi R (2001) “Review of agile manufacturing
+systems” Int J Product Research 39 (16), 3561-3600
+[54] Setchi R, Lagos N (2004) “Reconfigurability and reconfigurable manufacturing systems – state-of-the-art review” Proc 2nd
+IEEE Int Conf Industrial Informatics, 529-535
+[55] Bi Z, Lang S, Shen W, Wang L (2008) “Reconfigurable manufacturing systems: the state of the art” Int J Production Research
+46 (4)
+[56] He D, Kusiak A (1997) “Design of assembly systems for
+modular products” IEEE Trans Robotics & Automation 13 (5),
+646-655
+
+i-SAIRAS2020-Papers (2020)
+
+[57] Brezocnik M, Balic J (2001) “Genetics-based approach to
+simulation of self-organising assembly” Robotics & Computer
+Integrated Manufacturing 17, 113-120
+[58] Tharumarajah A, Wells A, Nemes L (1998) “Comparison of
+emerging manufacturing concepts” IEEE Int Conf Systems Man &
+Cybernetics, paper no. 725430
+[59] Ryu K, Jung M (2003) “Agent-based fractal architecture and
+modelling for developing distributed manufacturing systems” Int J
+Product Research 41 (17), 4233-4255
+[60] Mun J, Shin M, Jung M (2004) “Architecture for the fractal
+generation and evolution process in the fractal manufacturing
+system” Proc 5th Asia Pacific Industrial Engineering & Management Systems Conf, 3.2.1-3.2.10
+[61] Shin M, Mun J, Jung M (2009) “Self-evolution framework of
+manufacturing systems based on fractal organisation” Computers
+& Industrial Engineering 56, 1029-1039
+[62] Heragu S, Graves R, Kim B-I, St Onge A (2002) “Intelligent
+agent-based framework for manufacturing systems control” IEEE
+Trans Systems Man & Cybernetics A: Systems & Humans 32 (5),
+560-577
+[63] Simek B, Albayrak S (2003) “Living factory: back to Koestler
+in holonic manufacturing” Proc IEEE Int Conf Industrial Informatics, paper no. 1300277
+[64] Leitao P (2009) “Agent-based distributed manufacturing
+control: a state-of-the-art survey” Engineering Applications of
+Artificial Intelligence 22, 979-991
+[65] Giret A, Botti V (2009) “Engineering holonic manufacturing
+systems” Computers in Industry 60, 428-440
+[66] Van Brussel H, Bongaerts L, Wyne J, Valckenaers P, van
+Ginderschter T (1999) “Conceptual framework for holonic manufacturing: identification of manufacturing holons” J Manufacturing
+Systems 18 (1), 35-52
+[67] Balasubramanian S, Brennan R, Norrie D (2001) “Architecture for metamorphic control of holonic manufacturing systems”
+Computers in Industry 46, 13-31
+[68] Grobellar S, Ulieru M (2006) “Holonic stigmergy as a mechanism for engineering self-organising applications” Proc 3rd Int
+Conf Informatics in Control, Automation & Robotics, Intelligent
+Control Systems & Optimisation, Setubal, Portugal
+[69] Van Brussel H, Wyns J, Valckenaers P, Bongaerts L, Peeters
+P (1998) “Reference architecture for holonic manufacturing systems: PROSA” Computers in Industry 37 (3), 255-274
+[70] Valckenaers P, van Brussel H (2005) “Holonic manufacturing
+execution system” CIRP Annals – Manufacturing Technology 54
+(1), 427-432
+[71] Sugi M, Maeda Y, Aiyama Y, Arai T (2001) “Holonic robot
+system: a flexible assembly system with high reconfigurability”
+Proc IEEE Int Conf Robotics & Automation, 799-805
+[72] Sugi M, Maeda Y, Aiyama Y, Harada T, Arai T (2003) “Holonic architecture for easy reconfiguration of robotic assembly
+system” IEEE Trans Robotics & Automation 19 (3), 457-464
+[73] Valckenaers P, van Brussel H, Hadelu, Kollingaum M,
+Bochmann O (2002) “Multi-agent manufacturing control using
+stigmergy” Proc 15th Triennial IFAC World Congress, Barcelona,
+Spain
+[74] Hadeli, Valckenaers P, Kollingbaum M, van Brussel H (2004)
+“Multi-agent coordination and control using stigmergy” Computers
+in Industry 53, 75-96
+[75] Ueda K, Hatono I, Fujii N, Vaario J (2000) “Reinforcement
+learning approaches to biological manufacturing systems” CIRP
+Annals 49 (1), 343-346
+[76] Ueda K, Vaario J, Ohkura K (1997) “Modelling of biological
+manufacturing systems for dynamic reconfiguration” CIRP Annals
+46 (1), 343-346
+[77] Gero J, Kazakov V (1997) “Learning and reusing information
+in space layout planning problems using genetic engineering”
+Artificial Intelligence in Engineering 11, 329-334
+[78] Gu W, Tang D, Zgeng K, Wang L (2011) “Neuroendocrineinspired bionic manufacturing system” J Systems Science & Engineering 20 (3), 275-293
+
+5006.pdf
+
+[79] Wenbin G, Dengyang W, Yi W (2016) “Novel adaptive manufacturing system based on artificial intelligence approach” IEEE
+Information Technology, Networking, Electronic and Automation
+Control Conf, paper no 7560525
+[80] Jones A, Straub J (2017) “Concepts for 3D printing-based
+self-replicating robot command and coordination techniques”
+Machines 5 (12), 10.3390/machines5020012
+
+

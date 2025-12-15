@@ -1,0 +1,209 @@
+Self-Replicating Robots for Space Utilization
+J. Suthakorn, Y. Zhou, G. Chirikjian*
+Department of Mechanical Engineering,
+Johns Hopkins University,
+Baltimore, Maryland, USA
+
+1.
+
+Motivation
+Space is a potentially limitless source of materials and energy that is available for mankind's use.
+Unfortunately, the launch costs and environmental impact of directly sending significant numbers of
+humans and massive structures into outer space are prohibitive. The development of lunar resources has the
+potential to change this relatively grim picture. If significant portions of the lunar surface can be used for
+solar energy collection, and it's regolith can be effectively strip-mined and processed, then the resulting
+energy and materials can be transported to low-earth orbit or elsewhere in the solar system at relatively low
+energetic cost. This circumvents much of the energetic cost of transporting massive amounts of materials
+from the Earth's surface, and saves the Earth's atmosphere from the pollution resulting from unnecessary
+launches. The key to unlocking space resources is the autonomous development of the moon using selfreplicating robotic systems that propagate over the lunar surface.
+When self-replicating robotic factories take hold, the moon will be transformed into an industrial
+dynamo. The resulting refined materials and energy that will be produced on the moon will then provide
+capabilities for the exploration and colonization of space that could never exist otherwise. Equipped with
+refined materials and propellant derived from the moon, cultivation of other space resources will be made
+much easier.
+The concept of artificial self-replicating systems originated with John von Neumann in the 1950's in
+his theory of automata. His theoretical concepts built on those of Alan Turing's “universal computer” put
+forth in the 1930s. The main difference was that instead of being able to read and write data, a selfreplicating system reads instructions and converts these into assembly commands that result in the
+assembly of replicas of the original machine. The history of these ideas is discussed in [1], along with other
+efforts at self-replication. The vast majority of work in this area is in the form of non-physical selfreplicating automata (e.g., computer viruses, the “game of life'' computer program, etc.). The only
+physically-realized concepts that have been explored related to true physical self-replication pertain to selfassembling systems [2 - 4]. These interesting systems are collections of passive elements that self-assemble
+under external agitation or naturally occurring physical forces. There is no directed intention of a system to
+deterministically assemble a copy of itself from passive components in these physical systems, and the
+structures that are assembled are themselves passive. Notable concept papers on self-replicating system for
+space applications were put forth in the late 1970's and early 1980's [5, 6]. They proposed self-replicating
+factories that would weight 100 tons each, but gave no concrete architecture, system or prototype to
+demonstrate the feasibility of the concept.
+Our study is motivated by these conceptual studies. However, it is important to note that to our
+knowledge no physically realized self-replicating robotic system has ever been built by anyone else, and to
+do so is one of the contributions of our research. Our vision of the central role of self-replicating robotic
+factories in the development of outer space is illustrated in Figure 1.
+We have taken a two-pronged approach to studying self-replicating robotic systems. On the one hand,
+we have begun to develop robotic hardware capable of demonstrating remote controlled and autonomous
+self-replication in a highly structured laboratory setting. An example of our initial results is presented in the
+last part of Section 2. On the other hand, we have performed an analysis of how self-replicating factory
+systems would propagate over the lunar surface. This is summarized in Section 3. For more details of both
+aspects of our studies see [7, 8].
+
+*To whom all correspondence should be addressed. Email: gregc@jhu.edu
+
+Figure 1: The Impact of Self-Replicating Lunar Factories on the Utilization of Space
+
+2. Principle of Self-Replicating Robots
+In this section self-replicating robots are categorized into two primary divisions according to their behavior.
+The two divisions are denoted as “directly replicating” and “indirectly replicating,” respectively. The
+detailed principles of these two divisions are described below. Figure 2 illustrates a diagram of how we
+categorize self-replicating robots.
+Basically, a robot capable of producing an exact replica of itself in one generation is what we call
+“directly replicating”. A robot capable of producing one or more intermediate robots that are in turn
+capable of producing replicas of the original are called “indirectly replicating”.
+2.1 Directly Replicating Robots
+We classify self-replicating robots in this division into four groups according to the characteristics of their
+self-replication processes. The following are explanations of each self-replicating robot group.
+2.1.1Fixture-Based Group
+The self-replicating robots in this group depend on external fixtures in order to complete the self-replication
+process. Passive fixtures are able to assist in this because of the shape constraints that they impose. In some
+other cases, to unify subsystems, push-pull fixtures are helpful as well.
+2.1.2 Operating-Subsystem-in-Process Group
+In this group one or several subsystems of the replica can operate before the replica itself is fully
+assembled. These subsystems are able to assist the original self-replicating robot during the assembly of the
+replica.
+2.1.3 Single-Robot-Without-Fixture Group
+In this group only one robot is used to finish the self-replication process. Thus, the robot in this group
+depends only on the available environment. Usually, the complexity of the subsystems or the number of
+subsystems in the replica is very low for this group.
+2.1.4 Multi-Robot-Without-Fixture Group
+In this group more than one robot works together in the self-replication process without the assistance of
+fixtures. A major advantage is the reduction of the time required for self-replication. A disadvantage is that
+there may be interference problems among robots.
+There are several possible ways that a self-replicating robot can be categorized in two or three groups
+mentioned above. The combination of two or three different concepts can be incorporated in a potential
+design, such as a combining operating-subsystems-in-process with fixture-based robots. More categories
+are likely to be developed in the subsequent stages of our research in the area of self-replicating robots.
+
+2.2 Indirectly Replicating Robots
+The primary characteristic of the robots in this division is that the original robot or group of robots works
+together to build a robot-producing factory or some type of intermediate robot which is able to produce
+replicas of the original robot. However, the original robots lack the ability to directly assemble copies of
+themselves.
+
+Figure 2: The Block diagram of the categorization of self-replicating robots.
+
+A number of prototype robots is implemented by using Lego Mindstorm Kits and additional Lego
+parts. One example of a prototype robot is shown in Figure 3.
+3. The Proliferation of Self-Replicating Robots on the Moon
+Because of its significant impact on the utilization of space, we studied the proliferation of self-replicating
+robots on the surface of the moon. In our model, each self-replicating robotic factory consists of robots,
+materials processing capabilities, solar energy production, and electromagnetic railguns for transporation of
+replicas and materials to new locations. The proliferation process is modeled as a degenerated diffusion that
+evolves on the rotation group SO(3). By measuring distance in units of lunar radius, the moon is
+approximated as a unit sphere, and the equation that describes the proliferation of self-replicating robotic
+systems over the surface of the moon is then [7]:
+
+D
+D
+∂f
+= [d1 X 1R + 11 ( X 1R ) 2 + 33 ( X 3R ) 2 ] f .
+∂t
+2
+2
+
+(1)
+
+where f(α,β,γ;t) is a probability density function with α, β and γ denoting the ZYZ Euler angles
+respectively, d1 is the drift coefficient denoting the shooting distance per shot of the railgun, D11 the
+diffusion coefficient denoting the shooting distance error per shot in the shooting direction, D33 the
+diffusion coefficient denoting the angular shooting error per shot perpendicular to the shooting direction in
+the plane tangent to the lunar surface, and the time t is normalized so that t=1 corresponds to one shot. Here
+X1R and X3R are the differential operators
+
+∂ cos γ ∂
+∂
+;
+−
++ sin γ
+∂γ sin β ∂α
+∂β
+∂
+X 3R =
+.
+∂γ
+
+X 1R = cot β cos γ
+
+(2)
+(3)
+
+The initial condition for (1) is
+
+f (α , β , γ ;0) = δ ( R(α , β , γ ))
+
+(4)
+
+Figure 3 (a): The Exploded View of the Robot 1.
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Figure 3 (b): The Self-Replicating Process of the Robot 1. Robot 1 consists of five subsystems. Two fixtures are used: a ramp with
+constrained shape which is fitted to the controller and the connector; and a tunnel-like cave with an attached wedge on the ceiling used
+to physically force the connector in place. The process begins with the original robot dragging the right part (which consists of half of
+the chassis, the right wheel and the right motor) to a wall. Then the left part (which consists of half of the chassis, the left wheel and
+the left motor) is pushed to connect with this right part. The left and right parts of the replica are securely merged by adding the
+bumper which has interlocks to both subsystems. The combined subsystems are moved and oriented to a desired position and
+orientation next to the ramp. The original robot then pushes the controller up to the ramp, and gently drops and inserts the controller
+on the top of the previous combination of subsystems. The connector is fixed in its place in the same fashion. The last step is to
+physically force the connector to be in contact with the controller by pushing the replica in the tunnel-like area with a wedge on the
+ceiling. This will force the connector to be in place. After pushing the replica several times, the electronic connectors on the replica
+finally make contact. The replica is able to operate in the same way as the original does.
+
+where δ(R) is the Dirac delta function of SO(3) indicating that the probability density at time zero is
+concentrated at the initial landing site. To study the time evolution of the probability distribution, we
+calculate
+
+g (α , β ; t ) =
+
+1 2π
+f (α , β , γ ; t )dγ ,
+2π ∫0
+
+(5)
+
+which denotes the evolution of position of self-replicating robots on the surface of the moon without regard
+to railgun orientation. The variables α and β serves as spherical coordinates. The following figure reflects
+the general process of the proliferation of self-replicating robots on the moon.
+
+Figure 5: Evolution of Probability Distribution on the moon when D11=0.01, D33=0.01 and d1=0.1. a) Probability Distribution at t=1; b)
+Probability Distribution at t=5; c) Probability Distribution at t=20.
+
+4. Conclusions
+Space is a domain of unlimited resources. Unfortunately, the cost of reaching space is very high. Selfreplicating autonomous factories will be vital if man is to exploit space resources. Self-replicating robotic
+systems are a necessary ingredient for self-replicating robotic factories to become a reality.
+Acknowledgments
+The following is the list of students in the Mechatronics course who designed and constructed the example
+prototype described in this paper. The teaching assistants for the course were Jackrit Suthakorn and Yu
+Zhou. Example 1: Jim Bankard, Oprema Ganesan, Oleg Gerovichev, Masaya Kitagawa.
+References
+[1] Sipper M., “Fifty Years Of Research On Self-Replication: An Overview”, Artificial Life, 4 (3): 237257, 1998.
+[2] Penrose L.S., “Self-Reproducing Machines”, Scientific American, 200 (6), 1959, pp. 105.
+[3] Saitou K., “Conformational Switching In Self-Assembling Mechanical Systems”, IEEE Trans. on
+Robotics and Automation, 15 (3): 510-520, 1999.
+[4] Whitesides G.M., ``Self-Assembling Materials", Scientific American, 273 (3): 146-149, SEP 1995
+[5] Freitas R.A. Jr., Zachary W., “A Self-Replicating, Growing Lunar Factory”, Princeton/AIAA/SSI
+Conference on Space Manufacturing: 35, Princeton NJ, May 18-21 1981.
+[6] Von Tiesenhausen G., Darbro W.A., “Self-Replicating Systems - A Systems Engineering Approach”,
+NASA TM-78304, July 1980.
+[7] Chirikjian, G.S., Zhou, Y., and Suthakorn, J., “Self-Replicating Robots for Lunar Development”, JHU
+Tech Report RMS-1-2002
+[8] Chirikjian, G.S., and Suthakorn, J., “Toward Self-Replicating Robots”, The 8th International
+Symposium on Experimental Robotics (ISER), Italy, July 2002.
+
+

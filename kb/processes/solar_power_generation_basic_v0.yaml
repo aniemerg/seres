@@ -1,0 +1,18 @@
+id: solar_power_generation_basic_v0
+kind: process
+name: Basic solar power generation
+layer_tags:
+  - layer_8
+inputs:
+  - item_id: solar_irradiance
+    qty: null
+    unit: kWh
+outputs:
+  - item_id: electrical_energy
+    qty: null
+    unit: kWh
+requires_ids:
+  - solar_array
+  - power_conditioning_unit
+  - solar_tracking_optional
+notes: Treats PV as imported initially; introduces power accounting node.

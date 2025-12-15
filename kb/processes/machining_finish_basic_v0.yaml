@@ -1,0 +1,21 @@
+id: machining_finish_basic_v0
+kind: process
+name: Basic machining and finishing
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: metal_casting_blank
+    qty: null
+    unit: unit
+outputs:
+  - item_id: metal_casting_finished
+    qty: null
+    unit: unit
+requires_ids:
+  - milling_machine_general
+  - cutting_tools_general
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Generic machining/finishing placeholder for cast parts; replaces conceptual finishing steps.

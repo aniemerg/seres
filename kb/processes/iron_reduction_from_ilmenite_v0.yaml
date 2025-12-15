@@ -1,0 +1,24 @@
+id: iron_reduction_from_ilmenite_v0
+kind: process
+name: Iron reduction from ilmenite concentrate
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: null
+    unit: kg
+  - item_id: reductant_gas
+    qty: null
+    unit: kg
+outputs:
+  - item_id: iron_product
+    qty: null
+    unit: kg
+  - item_id: oxygen_gas
+    qty: null
+    unit: kg
+requires_ids:
+  - reduction_furnace
+  - gas_handling_loop
+notes: Captures metals path; distinguishes from generic carbothermal oxygen step.

@@ -1,0 +1,22 @@
+id: metal_casting_basic_v0
+kind: process
+name: Basic metal casting
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: null
+    unit: kg
+outputs:
+  - item_id: cast_metal_parts
+    qty: null
+    unit: kg
+requires_ids:
+  - crucible
+  - casting_furnace
+  - molds
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+notes: Casting anchor; drives crucible, furnace, and mold requirements.

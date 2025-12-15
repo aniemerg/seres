@@ -1,0 +1,25 @@
+id: oxygen_extraction_carbothermal_reduction_v0
+kind: process
+name: Carbothermal reduction of regolith
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: regolith_powder
+    qty: null
+    unit: kg
+  - item_id: carbon_reductant
+    qty: null
+    unit: kg
+outputs:
+  - item_id: oxygen_gas
+    qty: null
+    unit: kg
+  - item_id: reduced_metal_oxides
+    qty: null
+    unit: kg
+requires_ids:
+  - high_temp_furnace
+  - offgas_handling
+  - carbon_feed_system
+notes: Alternative oxygen path; temperature, yield, and rates TBD.

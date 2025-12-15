@@ -1,0 +1,1469 @@
+JOURNAL OF SPACECRAFT AND ROCKETS
+Vol. 53, No. 2, March-April 2016
+
+Are Self-Replicating Machines Feasible?
+Alex Ellery∗
+Carleton University, Ottawa, Ontario K1S 5B6, Canada
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+DOI: 10.2514/1.A33409
+Recent developments in three-dimensional printing technology have introduced the prospect of self-replication in
+the context of robotic in situ resource utilization on the moon. The value of three-dimensional printing lies in its
+potential to implement universal construction. A universal constructor is a machine capable of fabricating any
+physical product given an appropriate program of instructions, suitable raw materials, and a source of energy in an
+appropriate form. Such physical products include a copy of itself; a universal constructor is by definition a selfreplicating machine. A step in this direction is represented by the RepRap three-dimensional printer that can print
+copies of its own plastic components. The three-dimensional printing of actuators and associated control electronics
+would represent an existence proof that an appropriately designed robotic three-dimensional printer system would
+constitute a universal constructor. In this paper, preliminary attempts have been outlined to develop self-replicating
+machines by addressing the three-dimensional-printable actuator and electronics aspects within the materials limits
+imposed by the moon. It is concluded that physical self-replicating machines are within reach. This lunar
+infrastructure offers space-based geoengineering solutions in the short term and solar power satellite solutions in the
+long term to the global climate crisis.
+
+recently [8,9]. Here, we explore this lunar self-replicating machine
+concept with regard to material closure. We do not consider certain
+practical issues such as dust mitigation at this stage, which is a generic
+lunar problem rather than specific to self-replication [10].
+The power of a self-replicating machine is obvious. It can construct
+any number of copies of itself extremely rapidly; its population grows
+as ∼x  1n , where x is the number of offspring per generation, and
+n is the generation number (Table 1).
+Once sufficient numbers of self-replicating machines have been
+manufactured, they can then be programmed to manufacture the desired
+products in parallel, demonstrating exponential productive capacity, an
+economic exponentiator. Consider a typical launch cost of $20,000 per
+kilogram to low Earth orbit (LEO); we may assume that this increases
+by two orders of magnitude to $2 million per kilogram to the surface of
+the moon. A 1 t “seed factory” launched to the moon would thus cost
+$2 billion. If it self-replicates 1000 copies of itself (in under seven
+generations), the cost drops to $2000 per kilogram, which drops further
+to only $20 per kilogram for 100,000 copies and $2 per kilogram for 1
+million copies (in under 13 generations). This dwarfs projected launch
+cost savings (∼90%) expected from single-stage-to-orbit launch
+technology to LEO such as the Skylon spaceplane concept. Full selfreplication offers not just parallel processing throughput but exponential
+processing throughput. Hence, self-replication acts as a matter
+exponentiator rather than a mere multiplier, offering many orders of
+magnitude enhancement in productive capacity.
+Self-replicating machines are premised on the ability to use raw
+materials to bootstrap themselves. In situ resource utilization (ISRU),
+the exploitation of extraterrestrial resources, has become topical with
+the proposed lunar Resource Prospector Mission (RPM) to demonstrate fundamental ISRU technologies in 2020. It comprises three
+main elements. A 72 kg payload package RESOLVE (from “regolith
+and environment science and oxygen and lunar volatiles extraction”)
+is to demonstrate the extraction of water ice from the lunar surface
+and to generate oxygen through hydrogen reduction of ilmenite in
+recovered regolith. A lunar rover will carry this package to locations
+at the lunar South Pole and extract subsurface samples using a drill.
+This provides us with a starting point from which to explore a selfreplicating machine concept later.
+The most critical issue for self-replication is the necessity for near
+100% matter, energy, and information closure to ensure that the
+system’s functionality exceeds its structure [3,7,11,12]. For 100%
+closure, the self-replicating factory needs to manufacture every
+component part of itself and all the tools necessary to manufacture
+those components. The parts list grows exponentially with the
+number of unique parts, and so standardization will be essential.
+Furthermore, each component has associated with it a portfolio of
+processes involved in its creation. It is desirable to minimize the
+
+Nomenclature
+ac
+f·
+t
+wij
+xi
+yi
+β
+ρ
+σ
+
+=
+=
+=
+=
+=
+=
+=
+=
+=
+
+solar-sail acceleration, mm∕s2
+nonlinear neural squashing function
+solar-sail thickness
+synaptic weight between neuron i and neuron j
+neural input to neuron i
+neural output of neuron i
+solar-sail lightness factor
+solar-sail volume density, g∕m3
+solar-sail mass/unit area, g∕m2
+
+I.
+
+Introduction
+
+S
+
+ELF-REPLICATION as a concept dates back to von Neumann,
+who developed the concept of the universal constructor [1]. Such
+a universal constructor by definition can construct anything,
+including a copy of itself, given the appropriate programming, energy
+supplies, and availability of parts. It comprises an idealized robotic
+arm that picks parts from its environment to build a copy of itself, its
+control system, and its program of instructions. It was subsequently
+discovered that DNA replication follows precisely this same logic
+[2]. The reader is referred to the remarkable “bunny book” [3] for
+further information of the development of self-replication theory.
+Most theory was developed from cellular automata models from
+which self-replicating programs (without universal construction
+capability) as the basis of artificial life were derived [4,5]. These
+theoretical models do not concern us here. Von Neumann’s original
+kinematic models were discarded in favor of cellular automata
+models but more recently have been revived [6]. Rather than review
+the extensive literature on the theory of self-replication, we present
+only the few engineering-based efforts toward practical realization of
+self-replicating systems. It is worth mentioning, in particular, the
+landmark NASA study on self-replication applied to lunar exploration [7], aspects of which have been developed further more
+
+Presented as Paper 2015-4653 at the AIAA Space 2015 Conference and
+Exposition, Pasadena, CA, 31 August 2015–2 September 2015; received 5
+August 2015; revision received 28 October 2015; accepted for publication 7
+December 2015; published online 26 February 2016. Copyright © 2015 by
+Alex Ellery. Published by the American Institute of Aeronautics and
+Astronautics, Inc., with permission. Copies of this paper may be made for
+personal and internal use, on condition that the copier pay the per-copy fee to the
+Copyright Clearance Center (CCC). All requests for copying and permission to
+reprint should be submitted to CCC at www.copyright.com; employ the ISSN
+0022-4650 (print) or 1533-6794 (online) to initiate your request.
+*Associate Professor, Department of Mechanical and Aerospace
+Engineering, 1125 Colonel By Drive.
+317
+
+318
+
+ELLERY
+
+Table 1
+
+Self-replication as a matter amplifier
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+Number of offspring
+Number of
+per generation (x)
+generations (n)
+1
+10
+2
+7
+2
+13
+
+Resultant
+population
+1024
+2187
+1,594,323
+
+amount of imported material (vitamins). The composition of every
+component imposes a demandite requirement while in situ resources
+offer only limited satisfaction of those requirements. The only way to
+achieve closure is to minimize the diversity of material, diversity of
+parts, and diversity of manufacturing processes. That is what is
+addressed here.
+The self-replicating machine is premised on a high degree of
+automation and robotics [13,14]. This of course is a critical question
+that cannot be addressed in detail here, but robotics has advanced
+enormously over the years. One means to enhance automation is to
+control the local environment to reduce the incidence of “surprises”;
+this is how automated factories (lights-out automation) and
+biological cells implement their complex processes. Another critical
+issue concerns human–machine interfacing and the division of labor
+between humans and robotics [15,16]. Although there is no question
+of astronaut involvement on the moon, telesupervisory control/
+monitoring from Earth (or the vicinity of the moon) is feasible.
+Robotic on-orbit servicing involving complex manipulation tasks has
+been addressing issues regarding teleoperation from Earth by ground
+controllers [17]. However, human–machine interfaces must cope
+with time delays inherent in signal transmission [18–20]. Nevertheless, the degree of telesupervisory human intervention must be
+minimized as the rapid growth of the machine population on the lunar
+surface makes human intervention impractical.
+
+II.
+
+Three-Dimensional Printer as Universal Constructor
+
+Recently, three-dimensional (3-D) printing has emerged as a
+generalized manufacturing capability. It is a layered/additive
+manufacturing technique with wide versatility for printing organic
+tissue, food, pharmaceuticals, etc. The recent delivery of a glovebox
+thermoplastic extrusion 3-D printer to the International Space Station
+is testament to the application of 3-D printing to space exploration
+[21]. 3-D printing manufactures raw material powder into structural
+products by fusing the powder layer by layer. There are several
+additive manufacturing methods, the most common being fused
+deposition modeling (FDM), selective laser sintering (SLS), and
+stereolithography [22,23]. SLS is particularly versatile in that it can
+process metals, plastics, and ceramics, but they do require different
+environmental conditions, making integrated multimaterial structures infeasible currently. Furthermore, for self-replication, the
+construction of a laser presents certain difficulties. Although metal
+can be processed through laser sintering [24,25], electron beam
+freeform fabrication (EBF3) is another option for metal printing [26].
+The great advantage of EBF3 is that it works on the principle of the
+electron gun, a high-powered high-voltage vacuum tube (introduced
+later for electronic applications). Demonstration of metal powdering
+would be a critical capability for handling metal with any 3-D metal
+printer. A thermal lance may be used to process ceramics in casts
+(using 3-D printed molds), whereas plastic products may be
+manufactured through FDM; this eliminates the need for complex
+inefficient lasers. The primary limitation of 3-D printing technology,
+however, resides in its serial nature, which has prevented it from
+growing beyond prototyping functions [27].
+An important inspiration was the development of the opensource RepRap (from “replicating rapid” prototyper) 3-D printer
+(Fig. 1) [28].
+The RepRap is based on plastic FDM for constructing complex
+geometries, including its own plastic parts. This a first step toward the
+development of self-replication capability. Currently, RepRap can
+replicate only its plastic parts that comprise its simplest structural
+parts. To close the self-replication loop, the 3-D printer must be able
+
+to 3-D print its other parts: 1) threaded metal rods that provide
+structural rigidity, 2) joining (that may be replaced with cement/
+adhesive, 3) electric motors, 4) electronics and computer controller,
+and 5) sensors. To enhance its self-replication capability, RepRap
+requires additional functions. To include self-assembly of its parts
+into its repertoire, it must possess an assembling wrist/hand
+constructed from multiple motors. To search and extract its own raw
+materials, it must include a mobility system constructed from motors
+and associated rover capabilities in prospecting to acquire and mine
+raw materials. To be fully autonomous, it must include an energy
+generation system. Thus, the motor provides the central linchpin for
+self-replication capability.
+
+III.
+
+Three-Dimensional Printable Electric Motor
+
+3-D printing is currently limited to printing structures, although it
+can print complex structures that cannot be manufactured through
+any other means. However, printing only structures significantly
+limits the repertoire of 3-D printing. In terms of mechanisms, only
+kinematic joints have been successfully printed but not motors per se
+[29] (e.g., Fig. 2), though there have been a few attempts to 3-D print
+plastic components for motors by hobbyists.
+All 3-D printers are in essence Cartesian robots comprising a
+deposition table and a printing head with three degrees of freedom
+(DOFs) relative movement. Further DOFs may be added by
+reconfiguring joints as serial manipulators, adding wheels for
+mobility, etc. All these mechanisms involve motors. Any selfreplicating 3-D printer must be able to manufacture not only all its
+structural members but also its actuators, sensors, and electronics.
+We have been developing several electric motor system concepts
+as our proof of principle of self-replication using 3-D printing as a
+universal constructor mechanism. A complete motor system
+comprises the actuator, control electronics, and sensors as well as
+the structural material in a complex configuration. Electric motors are
+often performance-limited by thermal limits, and so any viable
+electric motor must incorporate thermal control considerations. We
+present the corollary that if it is possible to 3-D print a complete motor
+system, it is possible to print almost any physical machine (defined as
+a mechanism) to realize almost any arbitrary function we may wish to
+impose. Although 3-D printing under reduced gravity has not been
+addressed specifically here, pumps will be required to address this
+issue in which the motor will constitute the core component. The
+motor (and the nature of the printing head) determines the resolution
+of layering of 3-D printing; for instance, the MakerBot Replicator
+offers 100 μm resolution.
+Following a review of different approaches to actuation to attempt
+to minimize design complexity, we initially prototyped a shape
+memory alloy (SMA) actuated motor design based on our previous
+experience with continuous control of SMA actuators [30]. Another
+desirable characteristic is the ability to implement zero-delay
+
+Fig. 1 Fully constructed RepRap 3-D printer.
+
+ELLERY
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+Fig. 2
+
+319
+
+3-D printed a) one-third size model, and b) actual Kapvik microrover chassis.
+
+Fig. 3 Prototype 3-D-printable plastic-based electric motor concept.
+
+“preflexes,” nonlinear physical viscoelastic behavior for robust
+compliance useful for assembly manipulation tasks traditionally
+implemented passively using remote center compliance mechanisms.
+SMA wire “muscles” of Nitinol yield practical strains of 4% through
+self-resistance heating. The first prototype used Nitinol wires
+operating in antagonistic pairs through a cam-based rotor to convert
+linear contraction into rotary motion (Fig. 3). The plastic parts were
+3-D printed in-house.
+This design was hampered by the first lesson in the limitations of
+3-D printing; the coarse layering yielded excessive friction between
+the working plastic parts. To circumvent this problem to demonstrate
+the motor principle, a second design (Fig. 4) was constructed from
+aluminium/steel to eliminate the friction problem. It successfully
+demonstrated rotary motion.
+Although the torque output was excellent, the heating/cooling
+cycle limited the angular speed to around 1 Hz. This would be further
+exacerbated in a vacuum environment where convective heat
+rejection by air would not be available. Furthermore, the limited 4%
+stroke of the SMAwire required a significant wire length, making the
+assembly too complex. A third design based on piezoelectric
+“fingers” was discarded due to the brittleness of quartz; we are
+restricted to quartz, which is more readily manufactured from lunar
+resources than the more elastic polyvinylide fluoride.
+
+Fig. 4
+
+Prototype 3-D-printable metal-based electric motor concept.
+
+We have adopted a more conventional concept initially with a dc
+motor configuration to test the motor core construction. A motor core
+comprises layers of silicon steel laminated with an insulator material:
+in our case, plastic (Fig. 5). The operation of the motor is far superior
+to the SMA versions, offering very high rotation frequency (which
+can be geared for high torque), illustrating the reasons why smart
+materials have yet to supplant traditional motors in most applications [31].
+The alternated layering construction lends itself to 3-D printing;
+this is in progress. There are, however, considerable hurdles to
+overcome that highlight many of the limitations of 3-D printing. In
+particular, the limitation of constructing a complex moving part that
+comprises several different materials. We have used a Renishaw
+selective laser sinterer (SLS) to print the steel layers of the motor core
+with spacing for the plastic insulation (Fig. 6) but printed it as a
+monolithic unit using interlayer struts (constraint imposed by the
+high cost of setup).
+This is hot off the press, but this configuration will introduce eddy
+current pathways into the core. This is the first of many prototypes
+with which we shall be experimenting and testing. We are in the
+process of experimenting with iron particles dispersed in a plastic
+matrix, though this approach is expected to yield limited magnetic
+field threading compared with a traditional laminated core. We are
+also examining the possibility of printed wiring configurations based
+on disk-based motor designs. This is an attempt to minimize
+assembly; each core module currently involves winding of the
+previously extruded insulated wire around a plastic bobbin, which
+must be then sheathed over the core. This must be followed by the
+assembly of each wire-wound core unit into the final central rotor
+within the surrounding stator configuration. There are many practical
+considerations that make 3-D printing motors quite the challenge. We
+expect this to be a lengthy process; nevertheless, we see no
+fundamental hindrances. A carousel or belt-mounted EBF3–FDM
+system may manufacture the multiple interleaved metal/plastic
+layers, thereby demonstrating multimaterial 3-D printing. Once a
+wire-wound core can be constructed, it opens up the possibility of
+3-D printing universal motor designs based entirely on electromagnetics. The universal motor is favored over the use of permanent
+magnets for versatility and modularity of the motor design.
+Furthermore, lunar potassium-rare earth element-phosphorus
+(KREEP) soils are only slightly enhanced over baseline terrestrial
+
+320
+
+ELLERY
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+Fig. 5
+
+Photographs of a) wire-wound laminated motor core, and b) in dc motor configuration.
+
+excavation in mining. Without motors, none of these functions can be
+achieved.
+
+V.
+
+Fig. 6
+
+SLS-printed steel layers for a motor core.
+
+concentrations of Nd (460 ppm) and Sm (127 ppm) required for
+NdSm permanent magnets, making high-performance magnets
+unrealistic from lunar material. In the universal motor, coils are used
+to energize both the rotor and the stator poles; both sets of cores are
+constructed from plastic laminated layers of silicon electrical steel.
+
+IV.
+
+Universal Robots
+
+The electric motor provides the basis for a 3-DOF wrist assembly
+that could replace the printing head of a 3-D printer. This would
+enable a 3-D printer such as RepRap to be adapted to perform 6-DOF
+assembly operations of parts within its workspace. Avariation on this
+theme might be a Stewart platform for precision manipulation.
+Compliant operation can be achieved with the remote center
+compliance mechanism for peg-in-hole tasks that is commonly used
+for assembly tasks. Assembly operations may be supported by
+printed jigs to hold components in place for assembly; this is part of
+the “controlled” environment alluded to earlier. A specific complex
+assembly sequence must be followed for the construction of the 3-D
+printed electric motor; this currently represents a complex set of
+assembly tasks, but in principle, assembly is a variation of a 3-D
+printing head.
+Motors are essential for the construction of additional
+manufacturing tools such as lathes, milling stations, drill presses,
+bending presses, extruders, and any other motorized tool necessary
+for a fabrication laboratory. From a 3-D printable electric motor,
+lathes, milling machines, drill presses, brake presses, and other
+machines may be constructed because these machines are simply
+kinematic configurations of motors. There is little doubt that 3-D
+printers themselves, versatile as they are, do not eliminate the need for
+further machine tools, though they do minimize their use. The
+extrusion of metal wire will be a critical capability for the motor coils
+(if they cannot be printed); an extruder is essentially a motor-driven
+press. Indeed, plastic extruders are already part of the printing head of
+FDM-type printers. Furthermore, motors provide the basis for pumps
+and stirrers for driving throughput in unit chemical processes,
+beneficiation with jaw crushers, postprocessing through ball milling
+and shot peening, mobility for surveying, and drilling/trenching/
+
+Printable Electronics
+
+Modern digital electronics manufacture requires a foundry costing
+around ∼10 billion, which employs around 30 different complex
+physical and chemical processes (such as vapor deposition,
+molecular beam epitaxy, etc.) to create solid-state transistors and
+other solid-state devices. They require extensive reagent inventories
+for such processing. Even solar cell-grade silicon requires significant
+processing [32]. Such solid-state electronics foundries would be
+prohibitively expensive and totally infeasible as part of a selfreplicating system. This restriction denies us present-day computer
+technology, software, and high-efficiency solar cells within our selfreplication scheme. Although there has been much progress in
+developing printed plastic electronics, there are significant hurdles
+such as stability, especially with organic thin film transistors, and
+they are generally proposed for limited applications such as radiofrequency identification tags due to their modest performance
+[33,34]. Furthermore, manufacture of the active organic materials
+(such as pentacene) and solutions (such as chloroflorm) using lunar
+materials would be highly complex and difficult effectively ruling
+this out from consideration here. We have focused on the use of
+resistor-capacitor-inductor (RCL) circuits that involve simple,
+potentially printable components (though we have yet to demonstrate
+such 3-D printed circuitry); resistors are conducting wires of various
+cross sections, capacitors are conducting parallel plates between a
+dielectric, and inductors are coils of conducting wire of relatively
+simple construction. From resistor-capacitor filters and inductorcapacitor oscillators, a large range of electronic circuits can be
+constructed including filters for signal processing.
+For computing systems, we considered mechanical systems (such
+as the Globus indicator of position navigation instrument in service
+on Soyuz spacecraft until 2002), electromagnetic relays (such as
+Turing’s “bombes” at Bletchley Park that cracked the Enigma code),
+and vacuum tubes (first programmable electronic computer,
+Colossus at Bletchley Park comprised of 2400 vacuum tubes).
+Traveling-wave tube amplifiers (TWTAs) are vacuum tube amplifiers
+with radio-frequency amplification of ∼70 dB that are still used in
+high-power communications satellites. The klystron and cavity
+magnetron are also microwave amplifier vacuum tube derivatives that
+may be used in high-power radiofrequency applications. Vacuum
+tubes are thermionic diodes that use a resistance wire to heat a cathode
+to 800–1200°C in an evacuated glass or ceramic envelope (which
+may not be necessary in a vacuum but is desirable to mitigate against
+dust contamination). The cathode comprises a Ni coat within which is
+a sintered tungsten filament with a high melting point. Tungsten’s
+very high melting point at 3422°C (the highest of all metals) means
+that it must be sintered rather than melted during manufacture. It may
+be coated with alkaline earth oxide such as CaO to reduce its work
+function to operate at lower temperature (∼600°C), but this is not
+essential and would impose a requirement for the extraction of Ca
+from lunar material, an unnecessary complication. Vacuum tubes
+
+321
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+ELLERY
+
+offer superior performance to solid-state electronics in being less
+susceptible to radiation. Furthermore, if vacuum tubes are maintained
+in the power-on state in a thermally stable environment (such as
+buried in lunar regolith), they are highly reliable; a British Broadcasting Corporation pentode transmitter operated for 232,592 h from
+1935 to 1961. The first differential amplifier was based on a pair of
+vacuum tubes, and subsequently operational amplifiers were based
+on vacuum tubes through 1941–1961. The greater instability of
+vacuum tubes over solid-state devices may be offset through the use
+of instrumentation amplifier configurations. Furthermore, it is
+plausible (though yet to be demonstrated) that vacuum tubes’ simple
+construction offers opportunities for miniaturization.
+Op-amps as active devices are highly versatile in providing
+sophisticated capabilities in relatively simple circuitry. Electric motor
+systems include a motor controller board that incorporates H-bridge
+and proportional-integral-differential (PID) controller circuits that
+can be constructed from op-amp circuits and feedback sensors. A
+simple PID analog controller circuit for a motor would represent a
+simple implementation of op-amp circuits. Op-amps can be
+employed for bandwidth filters, PID controllers, differential equation
+modeling, electronic mixers, Braitenburg control [35] architectures
+for robot behavior control, shifter circuits for optic flow hardware
+(Reichardt detectors [36]), Hasslacher and Tilden’s nervous nets [37],
+Reynolds’s boids-type swarm control [38], Buffon’s needle
+algorithm (useful for surveying) [39], etc. Hence, simple op-amp
+circuits can implement highly sophisticated functions without the use
+of general-purpose computers.
+
+VI.
+
+Printable Computers
+
+Beyond the control circuitry that is readily implementable in
+traditional analog electronics, computing architectures with stored
+memory are required. Rather than opting for traditional generalpupose computer architectures, we have adopted simple electronic
+neurons as universal computing elements. A McCulloch–Pitts
+version of such electronic neurons can implement logic gates,
+exhibiting its potential for both digital and analog circuitry. Although
+the artificial neural network has been used for nonlinear mapping of
+input–output data sets for pattern recognition (by a generalization of
+the Stone–Weierstrass theorem), it is far more powerful than that. The
+universal Turing machine has been shown to be implementable on
+recurrent neural nets of sigmoid neurons [40]. Neural networks can
+implement logic programs such as expert systems or any type of
+symbolic artificial intelligence [41]. They offer significantly reduced
+physical footoprint over general-pupose architectures by virtue of the
+high information compression in their hidden nodes [42]. The neural
+network represents a powerful computational medium for robotics; it
+can map complex control decisions that would be difficult through
+
+Fig. 7
+
+traditional means. Indeed, the backpropagation algorithm can
+implement a Bayesian classifier [43] and a degenerate form of the
+extended Kalman filter [44]. The robotics functions will be critical in
+providing the adaptability in dealing with complex environments
+during surveying and mining phases of the self-replication process.
+Three rover-specific applications illustrating the versatility of neural
+nets are 1) feedback control systems [45] for manipulators [46], their
+supplementation with feedforward models [47], and their application
+to predictive active vision [48]; 2) complex signal processing through
+Gabor-based processing of visual textures for biomimetic vision
+[49]; and 3) autonomous navigation of rovers through RatSLAM
+(from “self-localization and mapping”) [50] and neural field path
+planning [51].
+Neural networks of reconfigurable neurons can exploit the
+hardware-on-demand capability of 3-D printing. In this case, the 3-D
+printer becomes part of the general computer architecture similar to
+the original Turing machine concept [52]. In our case, the input tape is
+represented by a magnetic core memory (broadly similar in construction to a motor core) for storing software programs. The 3-D printer
+constitutes the read/write head. The output is the specific neural
+circuit that realizes the selected input program, in this case, a
+configuration of printed electronic neurons. Rather than building a
+complex general-pupose computing architecture, the entire assembly
+constitutes the general-pupose computing architecture, but the output
+circuits have a relatively small physical footprint.
+The electronic neuron models the nonlinear input–output relation
+with the output yi given by
+yi  f
+
+X
+n
+
+
+wij xi
+
+(1)
+
+j0
+
+where xi is the input, wij is the weighting factor, and f· is the
+nonlinear squashing function.
+A suitable analog neuron (the Yamashida–Nakaruma neuron),
+comprising a summing integrator, sigmoid output, and a comparator,
+has been described that is constructable from simple op-amp-based
+circuits [53]. We modified the design by replacing the sigmoid with
+a signum function for more stable response. We implemented a
+two-neuron circuit on a desktop mobile robot platform (Fig. 7). It
+successfully performed obstacle avoidance tasks in following routes
+(reactively) through multiple obstacle configurations. This demonstrates the viability of the hardware analog neural network approach
+in a robotic task.
+There is no requirement for online learning in this concept, though
+inevitably, because of limitations in printed circuit fidelity, tuning
+may be required.
+
+Circuit representations of a simple hardware two-neuron neural controller.
+
+322
+
+ELLERY
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+VII.
+
+Printable Sensors
+
+To create a full motor system, we need sensors. There are three
+fundamental types of sensor, all of which are required in a motor
+control system: displacement, force/pressure, and light detection.
+Displacement is the most fundamental of sensing modalities from
+which most other mechanical properties are derived. Displacement
+may be measured through rotary potentiometers (variable resistors)
+or optical encoders. Displacement and force/pressure may be
+measured using piezoelectric quartz; unfortunately, quartz does not
+occur naturally on the moon but may be grown from silica. Silica is
+melted at 2000°C and subjected to hydrothermal synthesis below
+573°C followed by seeding in sodium silicate at 350°C and 150 bar.
+Sodium silicate is a catalyst; Na must be imported from Earth. This is
+the counterpart to the salt contingency discussed later. If desired,
+vapor phase pyrolysis may be employed to decompose SiO2 to Si in a
+vacuum at 1250°C without the need for catalysts imported from
+Earth [54].
+For optical sensitivity for image sensing and/or Reichardt
+detectors, rather than using pn junction materials, which require
+precisely doped silicon, we have chosen the simplest light-sensitive
+material: p-type semiconductor selenium that was used in the
+Victorian photophone. Indeed, the first semiconductor junction solar
+cells were constructed from selenium and gold film, offering 1%
+efficiency. Photocathodes and photomultipliers coated with Se offer
+light sensitivity. Both types of devices are derived from vacuum
+tubes. Other simple photocathode materials include K and Na alkali
+metals, which are sensitive to visible photons, but these would be
+complex to extract from KREEP soils. We have yet to identify a
+suitable potential ultraviolet-sensitive material that would be useful
+in detecting ilmenite that exhibits characteristic spectral responses in
+this waveband (see later) [55].
+We have developed a novel rover-based surveying technique to
+measure physical soil properties that are important in geotechnics
+(cohesion and friction) without using complex spectrometers. We use
+simple load sensors above each wheel of the rover to “feel” the terrain
+over which the rover traverses. Changes in cohesion and friction
+caused by icy soil for instance can be readily detected. Such sensors
+were implemented on our Kapvik microrover and field-tested to
+demonstrate the proof of principle. Rover trials were conducted at
+Petrie Island near Ottawa, a well-known sandy “beach” of reasonably
+consolidated sand. A multilayer perceptron neural network was
+trained on sample load-cohesion/friction angle input–output pairs
+created from a Bekker–Wong terramechanics model. Once trained,
+this was used to extract soil cohesion and friction angle from the
+empirical load cell data. As expected, the data gave consistent results
+of 3.7 kPa cohesion and 28 deg friction angle over the traverse
+indicative of sandy loam as expected [56]. This technique may be
+readily applied to detect surface water ice and fluffy soil, indicating
+evaporated ice in the search for lunar volatiles. This demonstrates that
+simple sensors in conjunction with neural nets can provide a powerful
+signal analysis tool for basic surveying in support of surface mining
+of regolith. More sophisticated instruments for identifying elements
+may be feasible with neural network signal processing such as
+microwave-induced breakdown spectroscopy [57]. X-ray reflectance
+spectroscopy may also be feasible for mineralogy; x-ray tubes are
+vacuum tubes that generate x rays that evolved from the Crookes
+tube. The anode in this case is also tungsten like the cathode. The
+150 kV electrons from the hot cathode strike the anode releasing
+x rays through Bremsstrahlung effects.
+
+VIII.
+
+Chemical Processing of Raw Materials
+
+ISRU is based on the concept of reducing reliance on transported
+cargo to support space missions; it is typically regarded as an adjunct
+to support human missions rather than as an enabling critical technology. It was the linchpin in Mars Direct concept [58]. The most
+basic lunar resource is regolith, and it is the scooping of surface
+regolith by the rover that provides the raw materials for ISRU presented here; no trenching or underground mining is necessary (except
+in the case presented later for drilling). Note that beneficiation of
+
+regolith is not implemented on the RPM demonstrator, which will
+process unsorted soil samples.
+Material processing requires a foundry: in its simplest form, a
+heated crucible [59]. A lunar version would be a solar-furnace-based
+foundry based either on printed parabolic mirror segments or on cast
+Fresnel lens concentrators to create temperatures of 1600 and 2700°C
+respectively, more than required for metal extraction. The reflectivity
+of polished nickel reflectors is 90%, whereas that of polished steel is
+75%. The chief challenge will be accurate mirror grinding and the
+alignment of the mirrors (which may be calibrated using a Stewart
+platform). The Fresnel lens is much favored in terms of performance,
+but precision casting is essential. A tungsten rather than ceramic
+crucible would be required for the higher temperatures.
+A smelting-casting system with 3-D printing demonstrates the
+principle of bootstrapping machine shop facilities and tooling from
+raw materials. The solar concentrators enable layered sintering of
+regolith into ceramic structures built layer by layer; this will be
+essential for ceramic casting [60]. Lunar glass is abundant in lunar
+regolith, but its properties are variable, and so the production of lunar
+glass on demand involves heating basalt in a furnace until it melts as
+fused silicate/oxide at 1300°C. Glass from the melt requires high
+cooling rates (∼20 °C∕s) to prevent its crystallization. Lunar glass
+will comprise 40–45% SiO2 , 15–25% Al2 O3 , 5–15% FeO, 11–15%
+CaO, 0.5–8% TiO, and smaller amounts of other metal oxides. It is
+expected that lunar glass manufactured under vacuum conditions will
+offer superior mechanical properties to terrestrial glass due to the
+paucity of water vapor. Glass may be used as electrical and thermal
+insulation material especially as glass wool.
+ISRU has concentrated on the extraction of consumables (oxygen,
+hydrogen, and water) because these are viewed as the major logistics
+commodities in human spaceflight. Indeed, RPM will acquire lunar
+regolith to extract water ice and to demonstrate oxygen production by
+hydrogen reduction of ilmenite at 900°C:
+FeTiO3  H2 → Fe  TiO2  H2 O 2H2 O → H2  O2
+Hydrogen is recycled. Although oxygen is generally the desired
+component from the reduction of ilmenite, iron is the main resource
+material that underlies the entire infrastructure required to support
+self-replication: an iron-based extraterrestrial industry. Ti is too
+difficult to extract from titania, but titania may be extruded as fibers
+for thermal and/or electrical insulation. Iron is an extremely versatile
+material; before the advent of aluminium in the 1950s, iron had beem
+the primary structural metal since 1200 B.C.E. Its range of alloys with
+tailorable properties is vast, but even just a small number of alloys can
+serve a wide range of functions. Wrought (pure) iron is tough but
+malleable, suitable for tensile structures. Steel includes low amounts
+of less than 2% C, which hardens it considerably. The addition of
+9–18% tungsten creates tool steel for cutting tools that are resistant to
+wear. Cast iron with ∼2–4 C and 1–2% is more brittle, but it is still
+suitable as a structural material; the Iron Bridge at Coalbrookdale has
+withstood the English climate since 1781. Silicon electrical steel
+comprises up to 3% Si and 97% Fe for high electrical resistivity for
+use in motors to reduce eddy currents and minimize core losses.
+Fernico is a family of alloys of Fe, Ni, and Co; of particular note is
+Kovar, a high electrically and thermally conductive iron alloy (53%
+Fe, 29% Ni, and 17% Co with minor constituents 0.3% Mn, 0.2% Si,
+and less than 0.01% C) that provides electrical conducting wires
+(such as motor coils) and high thermal conduction paths for
+conducting heat away from hot spots (such as motors). The good
+electrical properties are imparted by the Ni. This eliminates the
+requirement for electrolytic extraction of aluminium and/or calcium
+from anorthite for electrical or structural applications; see later for
+extraction of Ni, Co, and W.
+RPM will demonstrate the extraction of volatile from the lunar
+regolith, particularly water ice, implanted by solar wind. Solar wind
+has impregnated regolith with 96% hydrogen (∼120 ppm), almost
+4% He, and trace amounts of H2 O, CO, CO2 , CH4 , N2 , NH3 , H2 S,
+SO2 , and noble gas Ar. Apart from water, hydrogen, and oxygen,
+carbon compounds will be of high value due to their scarcity.
+Volatiles will comprise an important part of any resource utilization
+
+323
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+ELLERY
+
+infrastructure [61]. The gases are preferentially absorbed onto small
+particles of ilmenite favoring beneficiation of ilmenite specifically.
+Selection of smaller particles with the highest concentrations of
+volatiles favors sieving, but this would be wasteful of ilmenite. To
+enhance extraction of purer ilmenite fractions and reduce energy
+consumption, beneficiation may be implemented through physical
+crushing [62] or more speculatively through microwave heating.
+Differences in the magnetic susceptibilities of anorthite, pyroxene,
+and ilmenite allow the separation of ferromagnetic ilmenite magnetically [63]. Heating the regolith to 700°C would release 90% of the
+adsorbed volatiles. These can be separated out through fractional
+distillation: He at 4.2 K, H2 at 20 K, N2 at 77 K, CO at 81 K, CH4 at
+109 K, CO2 at 194 K, and H2 O at 373 K.
+Plastic is a highly useful material, too valuable to waste on
+structural applications. Given the severe limitation in carbon
+resources on the moon, we restrict plastic purely for flexible wire
+insulation applications, laminations of electrical steel in motor cores,
+and bobbins. Motor coils may be insulated or embedded in the bobbin
+to ensure that short circuits do not occur. Bobbins for wire coils in
+motors may constructed from cast basalt [64,65] or other ceramics,
+but its brittleness presents concerns for high-speed rotating machinery. Furthermore, we have selected silicone plastics as manufacturable from lunar resources to minimize carbon use. Silicones are
+synthetic polymerized organic-silicon compounds (siloxanes) with
+repeating R2 SiO units, where R is an organic group (typically methyl
+or ethyl group) linked by Si-O-Si backbones. This also opens the
+possibility of using plastic binder in mixing combinations of regolith
+or metal particles with a plastic binder, but this would be wasteful of a
+scarce resource that may readily substituted by other structural
+material. Methane and water vapor, both of which may be extracted
+from lunar volatiles, may be reacted to form syngas at 850°C and
+4 MPa with a recyclable Ni catalyst:
+CH4  H2 O → CO  3H2
+Methanol is produced from CO and H2 (syngas) reacted over an
+alumina (Al2 O3 ) catalyst at 250°C and 5–10 MPa:
+CO  H2 → CH3 OH
+Chloromethane is manufactured by reacting the alcohol (methanol
+in this case) with HCl over an alumina catalyst at 350°C:
+CH3 OH  HCl → CH3 Cl  H2 O
+CH3 Cl is reacted with Si at 370°C in the presence of a Cu catalyst
+to form dialkyl dichlorosilanes (R2 SiCl2 ):
+2CH3 Cl  Si → CH3 2 SiCl2
+This is then hydrolyzed:
+nCH3 2 SiCl2  nH2 O → CH3 2 SiOn  2nHCl
+This yields the most common siloxane, polydimethylsiloxane, a
+silicone oil, but other silicone plastics are manufactured in a similar
+manner. Silicone oil may be employed in motor lubrication as well as
+hot isostatic pressing of metal powders (in power metallurgy).
+Silicones are highly versatile plastics; they are radiation tolerant and
+tolerant to high temperatures up to 350°C (even 500°C for short
+periods). Silicone elastomers offer superior performance as dielectrics in capacitors for their high dielectric constant with low
+elastic moduli. RepRap can, in fact, print in silicone plastics. The HCl
+is recycled. The apparent limitation of requiring Cl (in the form of
+HCl as a recyclable reagent) that requires importation from Earth can
+be exploited to advantage: a “salt contingency” that supplies NaCl as
+recycled reagents. Sodium is more abundant in lunar highland than
+the mare but is highly depleted by an order of magnitude in
+comparison to Earth. It appears in bytownite, a minor plagioclase
+mineral on the moon. Chlorine is depleted almost as much where
+apatite (calcium phosphate with halogen constituents) is a trace
+
+mineral. Hence, the salt contingency imposes a powerful means of
+control over the self-replication process to eliminate the possibility of
+uncontrolled replication.
+An essential requirement for the self-replicator will be electrical
+energy. Amorphous silicon extracted from the regolith silicates for
+photovoltaic power generation is limited to ∼1–5% efficiencies
+unless dopants are used to create pn junction cells. Although it is
+possible using microwave methods to create p-type silicon using Al
+dopant [66], it is unlikely to be consistently repeatable and requires
+the extraction of Al, which is not in the current inventory. For ISRU,
+we require dominantly thermal energy for heating, sintering
+ceramics, casting basalt, smelting minerals, etc., using solar concentrators. The foundry provides the key to electrical power generation
+implementing a solar furnace without using solar cells. Radioisotopethermoelectric-generator-based power conversion involves banks of
+high-temperature-tolerant SiGe thermoelectric converters, but Ge is
+rare on the moon. Mg2 Si is a potential thermoelectric converter based
+on lunar materials, but thermoelectric conversion is less efficient as
+well as imposing significant chemical processing requirements.
+Dynamic power conversion as used in nucear reactors requires highthermal-capacity liquids such as Na(K) (e.g., alkali metal thermal-toelectric converters), high-pressure water (e.g., pressurized water
+reactor), or gas cooling with He (e.g., advanced gas-cooled reactor).
+None of these are viable. However, thermionic emission is often used
+in high-temperature applications such as space-based nuclear
+reactors to pick off electrical power with 5–20% conversion efficiencies [67] (∼10% should be achievable with even a fairly primitive
+arrangement); it is based on vacuum tube technology, thus offering
+multiple use of the same product technology. Similarly, for energy
+storage, motorized flywheels are ideal over long periods during the
+two-week lunar night. Hence, vacuum tubes and motors are the
+critical components in both energy generation and energy storage.
+
+IX.
+
+Mining of Exotic Materials
+
+Certain materials such as Ni, Co, etc., are scarce on the moon and
+require access to asteroidal material; the moon has been bombarded
+for aeons as indicated by its cratering record. Mass concentrations
+(mascons) on the moon at impact craters induce changes in the local
+gravity field, indicating massive asteroid impact [68]. They are
+detectable from their gravity field pattern due to a central gravity
+excess (due to increased density) surrounded by an inner ring of
+gravity deficit and another outer ring of gravity excess. Remnants of
+some of these asteroid strikes are also indicated by magnetic
+anomalies caused by iron-rich magnetic rock. Metal (NiFe)
+meteorites constitute around 6% of falls originating from M-type
+asteroids. Iron asteroids constitute an Ni source from the NiFe alloy.
+Much of the lunar magnetic anomalies are located around the rim of
+the South Pole–Aitken basin crater. In any case, there is evidence that
+there are iron-rich deposits on the moon that originated from asteroid
+impacts. Ni is a hard ferromagnetic metal primarily found as NiFe
+alloy (kamacite and taenite) in NiFe meteoritic material as found
+in the Sudbury astrobleme in Canada. Kamacite is an FeNi (90∶10 to
+95∶5) alloy often with Co contaminant. Kamacite is found
+intermixed with taenite in NiFe meteorites; taenite is an FeNi
+(35-80∶65-20) alloy. The Mond process may be employed for
+purifying Ni by reacting with CO at 40–80°C with an S catalyst to
+form nickel carbonyl. This may be reversed to yield Ni powder at
+230°C and 60 bar with the CO recycled: NiCO4 ↔ Ni  4CO.
+Inclusions of troilite are also common as the source of the S catalyst.
+The Mond process allows separation of Ni from Fe and Co
+contaminant [69,70]. Cobalt is commonly found in astroblemes on
+Earth such as the Sudbury crater. Cobalt is a ferromagnetic metal with
+a high melting point of 1495°C found in natural alloys with iron in
+NiFi meteoritic material. Both Co and Ni may be extracted
+magnetically and are used in steel production, in superalloys, and as
+powdered catalysts in the Fischer–Tropsch process to hydrogenate
+CO into hydrocarbons. NiFe asteroids are also expected to possess
+significant amounts of siderophile elements such as Pt (useful as a
+potential catalyst as well as a precious metal) and rare earth metals.
+The extraction of pure Ni from the Mond process, a separate source of
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+324
+
+ELLERY
+
+Fe from ilmenite, and FeCo alloy offers the opportunity to tailor a
+range of fernico alloys using simple density measures.
+Lunar rock and regolith contain variable amounts of tungsten; Nb,
+Ta, and W are trace elements less than 1%. High Ta concentrations
+occur in lunar granites and telsites, and high Nb concentrations occur
+in ilmenite (2%) in lunar granite [71]. Highland rock is more enriched
+in tungsten than lunar basalt at an average of 0.3 μg∕g. Tungsten may
+be recovered from wolframite Fe; MnWO4 , scheelite CaWO4 ,
+ferberite FeWO4 , and hubnerite MnWO4 . The ore is converted to
+oxide WO3 , which is heated and reduced with hydrogen to produce
+powdered tungsten [72]: WO3  3H2 → W  3H2 O. Hydrogen can
+be recycled and oxygen recovered. The low incidence of tungsten
+makes this approach unattractive. However, NiFe asteroids are often
+enriched in tungsten microparticle inclusions. Tungsten’s very high
+density of 19.3 times that of water, close to uranium and gold,
+presents a means for its separation from other elements as Fe, Ni,
+and Co.
+Selenide (such as Cu2 Se, PbSe, ZnSe, etc.) and selenite (such as
+Na2 SeO3 ) minerals are rare, and so Se is mostly commonly found in
+impure form associated with metal sulphide ores, where it partly
+replaces sulphur. Sulphides of copper, zinc, selenium, etc., are
+hydrous minerals and so are absent from lunar rock. Lunar regolith,
+however, is enriched in chalcopyrite (copper iron sulphide) deposits
+compared with lunar rock due to the existence of volatile compounds
+resulting from bolide impacts permeating the regolith. Sulphur has a
+relatively high abundance in lunar soils averaging 700 ppm by mass.
+Troilite (FeS) is a minor component ∼1% of mare basalt and is
+typically associated with ilmenite, though it cannot be separated
+magnetically. Sulphides including FeS are enriched in impact craters,
+indicating that there are enriched sulphur sources in asteroids. The
+Se/S ratio tends to be fairly constant in chondrites. Selenium
+microinclusions in NiFe meteorites makes them the primary ore for
+Se. Se is manufactured as a byproduct of mining nickel or copper
+from copper sulphides on Earth. Electrolytic refining of metal
+sulphide yields Se at the anode. This makes asteroidal material highly
+desirable as a source of selenium.
+It cannot be guaranteed that these materials will occur in adequate
+form in surface regolith in the locale of mascons. Accessing these
+resources may be altogether more challenging than surface strip
+mining of regolith. Fortunately, these materials will be required in
+only relatively modest amounts. Nevertheless, drilling methods will
+be required, and perhaps there is scope for some novel approaches
+[73]. I would anticipate that subsurface asteroid mining may be
+centrally administered with telesupervisory control as a service to the
+self-replicating machines, thereby providing a safeguard against
+uncontrolled replication.
+
+X.
+
+Spacecraft Manufacture from Lunar Resources
+
+We have outlined a case that indicates that a complete mechatronic
+system could be manufactured from lunar resources using 3-D
+printing technology. If so, it is a short step to show that we have
+instituted what amounts to a universal constructor (and selfreplicator). All the component technologies required for the construction of a spacecraft are present. To be sure, the spacecraft subsystems
+may be primitive, but parallel manufacture from a vast population of
+self-replicating factories opens possibilities hitherto regarded as
+impossible. Once we have manufactured the desired population of
+self-replicating factories, they may be programmed to manufacture
+spacecraft en masse.
+Electromagnetic launchers may be constructed to launch spacecraft
+units into lunar orbit. The mass driver comprises a magnetically
+levitated vehicle accelerated by a linear synchronous electric motor. A
+coil-based electromagnetic mass driver constitutes the same basic
+components as an electric motor but in a linear configuration (of larger
+scale, of course) [74]. The cylindrical armature carries an armature
+current and resides within a long solenoid (stator) comprising separate
+coils. The armature is suspended by magnetic induction from the
+energized coils to eliminate friction. The coils are energized sequentially like a stepper motor so that the armature accelerates along the
+solenoid axis. Spacecraft-containing buckets are accelerated to launch
+
+speeds. From the moon, an electromagnetic launcher must launch into
+Lagrangian point 1 (L1) transfer orbit at 3 km∕s, easily within reach of
+modest electromagnetic launchers compared with 12 km∕s required
+from Earth. On the moon, a 10 km track can provide 30g continuous
+acceleration using 2 Telectromagnets (within the capacity of soft iron).
+Large amounts of electrical energy must be stored for release during
+launches; flywheels are ideal for high power densities and the ability to
+supply high power over short release times.
+A spacecraft onboard propulsion system requires fuel oxidizer or a
+nonfuel form of propulsion. Compressed propellant H2 and oxidizer
+O2 may be manufactured from lunar volatiles and subjected to
+passive cooling. Tankage and thrusters of iron and steel, respectively,
+may be lined with tungsten. Solar sails would be highly desirable for
+some applications. For a perfectly reflecting solar sail, the performance is determined by the lightness parameter [75]:
+β
+
+1.53
+σ
+
+(2)
+
+where σ is the sail mass/unit area (in grams per square meter). Sail
+acceleration has a lower useful bound of greater than 0.1 mm∕s2 at 1
+astronomical unit given by
+ac 
+
+β
+9.11
+
+mm∕s2
+0.168
+ρt
+
+(3)
+
+Hence, for iron with a density of ρ  7.87 × 106 g∕m3 , the
+minimum thickness is given by
+t
+
+9.11
+< 12 μm
+ac ρ
+
+(4)
+
+This is a best case scenario; more useful accelerations require
+thinner sails. It is not currently clear whether solar sails can be
+manufactured to such tolerances on the moon, and so chemical
+propulsion will likely be the propulsion system of choice, at least for a
+first-generation infrastructure.
+Wrought iron (and steel where necessary) may be used for the
+primary and secondary structures. 3-D printing offers greater
+flexibility in structural design such as isogrid and truss designs.
+Motorized mechanisms for deployables may employ the electric
+motors as described. Attitude control may employ reaction wheels,
+momentum wheels, or control moment gyroscopes driven by the
+electric motors as described. Thermal control may be based on
+passive systems such as thermally conductive thermal straps and
+glass thermal insulation or active methods that rely on resistance
+heaters and electric motors such as louvres, etc.
+Data handling may be implemented through the vacuum-tubebased logic circuits and neural network controllers [76]. The
+communications subsystem is similar in concept to the data handling
+subsystem (Fig. 8). Quartz is ideal as a radiofrequency oscillator; the
+Pierce oscillator may be constructed with a minimum number of
+components: one inverter, two resistors, two capacitors, and one
+quartz crystal. The mixer is a transistor/diode circuit, the filter is an
+RCL circuit, the amplifier is a TWTA, and the demodulator is a diode.
+Convolutional codes for channel coding may be implemented using
+Ex-OR gates, whereas Viterbi decoding may be implemented
+
+Fig. 8 Communications system hardware chain (RF, radiofrequency;
+IF, intermediate frequency).
+
+325
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+ELLERY
+
+neurally [77]. Hence, a simple communications system may be
+implemented using vacuum tube technology.
+Power generation in space may derive from the lunar approach
+outlined previously; solar concentrators concentrate light to high
+heat, which is converted to electrical energy through thermionic
+emission with a conversion efficiency of ∼10%. There is thus no
+requirement for photovoltaic cells. For short-duration eclipsing,
+rechargeable NiFe batteries using a KOH electrolyte (extracted from
+KREEP basalts) are a robust form of energy storage, though with low
+specific energy of 25 W · h∕kg; they were used to power the German
+V2 rockets. Long-duration power storage may use flywheels
+if necessary, possibly combining power storage with attitude
+control [78].
+Optical sensors using arrays of selenium pixels may be employed
+as a generalized camera payload (and/or sun/star cameras).
+All the major spacecraft subsystems can be manufactured from
+lunar resources. To be sure, the spacecraft concept presented will be
+simple in nature and certainly suboptimal. Given that they will be
+designed and constructed according to very different constraints from
+current spacecraft under very different conditions, it is likely that
+spacecraft design will develop in unforeseen ways. In particular, large
+constellations will become feasible.
+
+XI.
+
+Space-Based Solutions to Global Problems
+
+In 2013, CO2 levels in the atmosphere passed 400 ppm compared
+to 280 ppm preindustrial levels for the first time in human history, and
+there are no signs of abatement (Fig. 9); it is projected to reach
+450 ppm around 2020 generating a 2°C rise in average temperature
+globally.
+In reality, little is being achieved to solve the problem for many
+political, economic, and technical reasons. Indeed, over the last few
+years, the tone of speech has resignedly shifted from combatting
+climate change to enduring and accommodating its worst excesses.
+There is a solution to this human-generated geophysiological disease.
+The treatment involves treatment of symptoms (painkiller) and
+treatment of aetiology (antibiotic). For our geophysiological ailment
+of atmospheric carbon excess, the painkiller involves climate
+intervention, whereas the antibiotic involves clean energy generation,
+both from space.
+Geoengineering approaches to climate change mitigation are
+unpopular and regarded with suspicion. It involves intervention in the
+climate to reduce global temperatures; it includes sulphate aerosol
+injection into the stratosphere and the seeding of oceans with Fe
+particles to create algal blooms (like El Niño). These methods are not
+reversible, though they dissipate over time; for this reason, they
+require annual application. Until now, space-based approaches have
+been regarded as unworkable and enormously costly. Space-based
+geoengineering involves the construction of a solar shield at L1 with
+an equivalent radius of 1824 km to reduce incident radiation by 1.6%
+corresponding to a temperature drop of 1.75°C [79]. Alternatively, it
+
+Fig. 9 Mean CO2 levels in the Earth’s atmosphere (credit National
+Oceanic and Atmospheric Administration).
+
+has been proposed to deliver 1012 60-cm-diam discs to L1 by 20
+railguns on Earth launching 106 silicon disks every 5 min for 10 years
+[80]. Both approaches are impractical. Self-replication technology
+offers the potential for constructing large numbers of small solar
+shield units from lunar resources at low cost. Each unit is a small,
+fully controllable 3-D printed spacecraft using solar petals supplemented by propellant to maintain their mean location at sun–Earth
+L1. These solar shield units may implement swarm control behaviors
+such as neural fields, potential fields, or equilibrium control
+approaches mediated by neural network controllers [81]. These
+approaches are modest in cost, fully controllable, modulatable,
+and reversible, unlike most geoengineering solutions. This is the
+painkiller.
+The same approach may be adopted to generate clean energy for
+Earth. Thus, the argument that geoengineering will discourage
+weening from fossil fuels is a nonsequitur in this case. Solar power
+satellites can beam microwave energy to rectenna arrays on Earth
+[82], the principle of which has been demonstrated. The solar power
+satellite is a spacecraft with a microwave payload. It is envisaged as a
+giant structure that uses large photovoltaic arrays to generate electric
+power, which is then fed into a klystron vacuum tube (i.e., light to
+electric to heat to electric/microwave energy thence transmitted
+through a waveguide to Earth). However, it is possible to exploit
+thermionic emission directly by using solar concentrators to
+concentrate light to heat the klystron cathode directly to generate
+microwave radiation for transmission to Earth, bypassing the
+intermediate electrical energy conversion step. Electrical energy for
+onboard services can be generated the same way by thermionic
+conversion to electrical energy independently. This should be of
+comparable efficiency as photovoltaic conversion, but it is based on
+pure vacuum tube technology constructed on the moon using a
+restricted materials inventory. A solar power satellite system could be
+constructed as a swarm of small units created via self-replication
+technology. This is the antibiotic.
+Such a productive capacity on the moon enabled by selfreplicating machines may be exploited by the private sector in ways
+currently unimagined as the space sector opens to private ingenuity.
+Much of human exploration on Earth has been driven by such
+motives. The private space sector has already been demonstrating its
+vigor in driving progress in space exploration, and I suspect that it
+would not leave fallow opportunities for the exploitation of
+extraterrestrial assets. The first step will be the RPM mission.
+
+XII.
+
+Conclusions
+
+The core capabilities necessary for this self-replication proof of
+concept have been outlined. Although there are many problems with
+which to contend, there appear to be no fundamental hurdles. The
+present focus initially is on a 3-D printable motor system, which is
+currently in progress.
+The devil, of course, is in the details; there are no illusions of the
+magnitude of the task in achieving full self-replicaton. The later steps
+toward full self-replication will be just as challenging; they will focus
+on organization, control, throughput, and logistics rather than the
+individual components as discussed thus far. Self-replication offers
+immense potential for the space sector. In the short term, selfreplication can address immediate climate mitigation issues. In the
+long term, self-replication offers the prospect for migrating the entire
+energy generation industry off Earth, relieving the Earth’s biosphere
+from the damaging effects of such industries. Space exploration may
+yet be the key to solving the most pressing global problems.
+Application of the techniques for self-replication on the moon to
+near-Earth asteroids (NEAs) will introduce additional challenges
+imposed by the microgravity conditions. Nevertheless, the foundations will be laid on the moon. The exploitation of asteroids (and
+comets in the form of spent comet nuclei) will vastly increase the
+range of materials available, relaxing some of the constraints imposed
+by lunar resources. This will introduce a maturity to space infrastructure development. Deimos and Phobos are carbonaceous chondrite
+asteroids in orbit around Mars. With NEAs and the moon, they
+provide final stepping stones to the surface of Mars. In conjunction
+
+326
+
+ELLERY
+
+with self-replication technology for exploiting in situ resources,
+human Mars exploration becomes a more practical and, more
+importantly, sustainable goal. Indeed, Mars, rather than being an end
+goal, would represent the major leap in opening the whole of the solar
+system to human exploration. But this can only be achieved in a
+sustainable manner through the leverage provided by self-replication
+technology.
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+Acknowledgments
+This work was partially supported by the National Science and
+Engineering Research Council of Canada. I would like to thank Mark
+Kirby and his team at Renishaw Mississauga for their assistance with
+selective laser sintering. I would also like to thank my students, Brian
+Lynch, Tim Setterfield, Cory Frazer, Zaid Kharoufeh, and Samantha
+Larson, for their assistance and images on this study.
+
+References
+[1] Burkes, A., Theory of Self-Reproducing Automata, Univ. of Illinois
+Press, Champaign, IL, 1966.
+[2] Watson, J., and Crick, F., “Molecular Structure of Nucleic Acids: A
+Structure for Deoxyribose Nucleic Acid,” Nature, Vol. 171, No. 4356,
+1953, pp. 737–738.
+doi:10.1038/171737a0
+[3] Freitas, R., and Merkle, R., Kinematic Self-Replicating Machines,
+Landes Bioscience, Austin, TX, 2004.
+[4] Wolfram, S., A New Kind of Science, Wolfram Media, Champaign, IL,
+2002.
+[5] Langton, C., Artificial Life: An Overview, MIT Press, Cambridge, MA,
+1998.
+[6] Zykov, V., Mytilinaios, E., Adams, B., and Lipson, H., “Self-Reproducing
+Machines,” Nature, Vol. 435, No. 7039, 2005, pp. 163–164.
+doi:10.1038/435163a
+[7] Freitas, R., and Gilbreath, W., Advanced Automation for Space
+Missions, NASA CP 2255, 1980.
+[8] Chirikjian, G., Zhou, Y., and Suthakorn, J., “Self-Replicating Robots for
+Lunar Development,” IEEE/ASME Transactions on Mechatronics,
+Vol. 7, No. 4, 2002, pp. 462–472.
+doi:10.1109/TMECH.2002.806232
+[9] Metzger, P., Muscatello, A., Mueller, R., and Mantovani, J.,
+“Affordable, Rapid Bootstrapping of Space Industry and Solar System
+Civilization,” Journal of Aerospace Engineering, Vol. 26, No. 1,
+Jan. 2013, pp. 18–29.
+doi:10.1061/(ASCE)AS.1943-5525.0000236
+[10] Kruzelecky, R. V., Wong, B., Aissa, B., Haddad, E., Jamroz, W., Cloutis,
+E., Rosca, I. D., Hoa, S. V., Therriault, D., and Ellery, A., “MoonDust
+Lunar Dust Simulation and Mitigation,” 40th International Conference
+on Environmental Systems, AIAA Paper 2010-6023, 2010.
+[11] Von Tisenhausen, G., and Darbro, W., “Self-Replicating Systems,”
+NASA TM-78304, 1980.
+[12] Moses, M., Ma, H., Wolfe, K., and Chirikjian, G., “An Architecture for
+Universal Construction via Modular Robotic Components,” Robotics
+and Autonomous Systems, Vol. 62, No. 7, 2014, pp. 945–965.
+doi:10.1016/j.robot.2013.08.005
+[13] Ellery, A., An Introduction to Space Robotics, Praxis–Springer Publ.,
+Chichester, England, U.K., 2000.
+[14] Ellery, A., Planetary Rovers: Robotic Exploration of the Solar System,
+Praxis–Springer Publ., Chichester, England, U.K., 2015.
+[15] Ellery, A., “A Robotics Perspective on Human Spaceflight,” Earth,
+Moon, and Planets, Vol. 87, No. 3, 2001, pp. 173–190.
+doi:10.1023/A:1013190908003
+[16] Ellery, A., “Humans Versus Robots for Space Exploration and
+Development,” Space Policy, Vol. 19, 2003, pp. 87–91.
+doi:10.1016/S0265-9646(03)00014-6
+[17] Ianni, J., Repperger, D., Baker, R., and Williams, R., “Human Interfaces
+for Robotic Satellite Servicing,” Soc. of Photo-Optical Instrumentation
+Engineers Paper LA4632-14, Bellingham, WA, 2002.
+[18] Arcaca, P., and Melchiorri, C., “Control Schemes for Teleoperation with
+Time Delay: A Comparative Study,” Robotics and Autonomous Systems,
+Vol. 38, No. 1, 2002, pp. 49–64.
+doi:10.1016/S0921-8890(01)00164-6
+[19] Imaida, T., Yokokohji, Y., Doi, T., Oda, M., and Yoshikawa, T.,
+“Ground-Space Bilateral Teleoperation of ETS-VII Robot Arm by
+Direct Bilateral Coupling Under 7 s Time Delay Conditions,” IEEE
+Transactions on Robotics and Automation, Vol. 20, No. 3, 2004,
+
+pp. 499–511.
+doi:10.1109/TRA.2004.825271
+[20] Ajoudani, A., Tsagarakis, N., and Bicchi, A., “Tele-Impedance:
+Teleoperation with Impedance Regulation Using a Body-Machine
+Interface,” International Journal of Robotics Research, Vol. 31, No. 13,
+2012, pp. 1642–1656.
+doi:10.1177/0278364912464668
+[21] Snyder, M., Dunn, J., and Gonzalez, E., “Effects of Microgravity on
+Extrusion Based Additive Manufacturing,” AIAA SPACE 2013
+Conference and Exposition, AIAA Paper 2013-5439, 2013.
+[22] Yan, X., and Gu, P., “Review of Rapid Prototyping Technologies and
+Systems,” Computer-Aided Design, Vol. 28, No. 4, 1996, pp. 307–318.
+doi:10.1016/0010-4485(95)00035-6
+[23] Pham, D., and Dimov, S., “Rapid Prototyping and Rapid Tooling—The
+Key Enablers for Rapid Manufacturing,” Proceedings of the Institution
+of Mechanical Engineers, Part C: Journal of Mechanical Engineering
+Science, Vol. 217, No. 1, 2003, pp. 1–23.
+doi:10.1243/095440603762554569
+[24] Simchi, A., “Direct Laser Sintering of Metal Powders: Mechanism,
+Kinetics and Microstructural Features,” Materials Science and
+Engineering: A, Vol. 428, Nos. 1–2, 2006, pp. 148–158..
+doi:10.1016/j.msea.2006.04.117
+[25] Pham, D., Dimov, S., and Lacan, F., “Selective Laser Sintering:
+Applications and Technological Capabilities,” Proceedings of the
+Institution of Mechanical Engineers, Vol. 213, No. 5, 1999, pp. 435–449.
+doi:10.1243/0954405991516912
+[26] Taminger, K., and Hafley, R., “Electron Beam Freeform Fabrication
+(EBF3) for Cost-Effective Near-Net Shape Manufacturing,” NASA
+TM-2006-214284, 2006.
+[27] Campbell, T., Williams, C., Ivanova, O., and Garrett, B., “Strategic
+Foresight Report: Could 3D Printing Change the World?” Atlantic
+Council, Oct. 2011, pp. 1–14.
+[28] Jones, R., Haufe, P., Sells, E., Iravani, P., Olliver, V., Palmer, C., and
+Bowyer, A., “RepRap—The Replicating Rapid Prototype,” Robotica,
+Vol. 29, No. 1, 2001, pp. 177–191.
+doi:10.1017/S026357471000069X
+[29] Laliberte, T., Gosselin, C., and Cote, G., “Practical Prototyping,” IEEE
+Robotics and Automation Magazine, Vol. 8, No. 3, Sept. 2001, pp. 43–52.
+doi:10.1109/100.956813
+[30] Lynch, B., Jiang, X.-X., Ellery, A., and Nitzche, F., “Characterization,
+Modelling, and Control of NiTi Shape Memory Alloy Based on
+Electrical Resistance Feedback,” Journal of Intelligent Material
+Systems and Structures, 2015.
+[31] Ellery, A., “Ultimate Smart System—Steps Towards a Self-Replicating
+Machine,” Proceedings of the 5th International Conference on Smart
+Materials and Structures, 2015, pp. 225–234.
+[32] Xakalashe, B., and Tangstad, M., “Silicon Processing: From Quartz to
+Crystalline Silicon Solar Cells,” Southern African Pyrometallurgy,
+edited by Jones, R., and den Hoed, P., Southern African Inst. of Mining
+and Metallurgy, Johannesburg, 2011.
+[33] Reese, C., Roberts, M., Ling, M.-M., and Bao, Z., “Organic Thin Film
+Transistors,” Materials Today, Sept. 2004, pp. 20–27.
+[34] Fix, W., Ullman, A., Blache, R., and Schmidt, K., “Organic Transistors
+as a Basis for Printed Electronics,” Organic Electronics: Structural and
+Electronic Properties of OFETs, edited by Woll, C., Wiley-VCH Verlag,
+Weinheim, Germany, 2009, pp. 3–15.
+[35] Braitenburg, V., Vehicles: Experiments in Synthetic Psychology, MIT
+Press, Cambridge, MA, 1984.
+[36] Srinivasan, M., “How Bees Exploit Optic Flow: Behavioural
+Experiments and Neural Network Models,” Philosophical Transactions
+Royal Society, Vol. B337, 1992, pp. 253–259.
+doi:10.1098/rstb.1992.0103
+[37] Hasslacher, B., and Tilden, M., “Living Machines,” Robotics and
+Autonomous Systems, Vol. 15, Nos. 1–2, 1995, pp. 143–169.
+doi:10.1016/0921-8890(95)00019-C
+[38] Reynolds, C., “Flocks, Herds and Schools: A Distributed Behavioural
+Model,” ACM SIGGRAPH Computer Graphics, Vol. 21, No. 4, 1987,
+pp. 25–34.
+doi:10.1145/37402
+[39] Sahin, E., and Franks, N., “Measurement of Space: From Ants to
+Robots,” Proceedings of the EPSRC/BBRC International Workshop on
+Biologically Inspired Robotics: The Legacy of W. Grey Walter, Bristol,
+Engalnd, U.K., 2002, pp. 241–247.
+[40] Siegelmann, H., and Sontag, E., “On the Computational Power of
+Neural Nets,” Journal of Computer and System Sciences, Vol. 50, No. 1,
+1995, pp. 132–150.
+doi:10.1006/jcss.1995.1013
+[41] Ellery, A., “Artificial Intelligence Through Symbolic Connectionism—
+A Biomimetic Rapprochement,” Biomimetic Technologies: Actuators,
+
+Downloaded by American Institute of Aeronautics and Astronautics on April 18, 2016 | http://arc.aiaa.org | DOI: 10.2514/1.A33409
+
+ELLERY
+
+Robotics & Integrated Systems, edited by Ngo, D., Woodhead Publ.,
+Cambridge, England, U.K., 2015.
+[42] Parberry, I., Circuit Complexity and Neural Networks, MIT Press,
+Cambridge, MA, 1994.
+[43] Ruck, D., Rogers, S., Kabrisky, M., Oxley, M., and Suter, B.,
+“Multilayer Perceptron as an Approximation to a Bayes Optimal
+Discriminant Function,” IEEE Transactions on Neural Networks,
+Vol. 1, No. 4, 1990, pp. 296–298.
+doi:10.1109/72.80266
+[44] Ruck, D., Rogers, S., Kabrisky, M., Maybeck, P., and Oxley, M.,
+“Comparative Analysis of Backpropagation and the Extended Kalman
+Filter for Training Multilayer Perceptrons,” IEEE Transactions on
+Pattern Analysis and Machine Intelligence, Vol. 14, No. 6, 1992,
+pp. 686–691.
+doi:10.1109/34.141559
+[45] Hunt, K., Sharbo, D., Zbikowski, R., and Gawthrop, P., “Neural
+Networks for Control Systems—A Survey,” Automatica, Vol. 28, No. 6,
+1992, pp. 1083–1112.
+doi:10.1016/0005-1098(92)90053-I
+[46] Alsina, P., and Gehlot, N., “Robot Inverse Kinematics: A Modular
+Neural Network Approach,” Proceedings of the IEEE International
+Symposium on Circuits and Systems, IEEE Publ., Piscataway, NJ, 1996,
+pp. 631–634.
+[47] Newton, R., and Xu, Y., “Neural Network Control of a Space
+Manipulator,” IEEE Control Systems, Dec. 1993, pp. 14–22.
+[48] Panerai, F., and Sandini, G., “Oculo-Motor Stabilisation Reflex:
+Integration of Inertial and Visual Information,” Neural Networks,
+Vol. 11, 1998, pp. 1191–1204.
+doi:10.1016/S0893-6080(98)00026-4
+[49] Daugman, J., “Complete Discrete 2D Gabor Transforms by Neural
+Networks for Image Analysis and Compression,” IEEE Transactions on
+Acoustics, Speech, and Signal Processing, Vol. 36, No. 7, 1988,
+pp. 1169–1179.
+doi:10.1109/29.1644
+[50] Milford, M., Wyeth, G., and Prasser, D., “RatSLAM: A Hippocampal
+Model for Simultaneous Localization and Mapping,” Proceedings of the
+IEEE International Conf. on Robotics and Automation, IEEE Publ.,
+Piscataway, NJ, 2004, pp. 403–408.
+[51] Quoy, M., Moga, S., and Gaussieer, P., “Dynamical Neural Networks for
+Planning and Low-Level Robot Control,” IEEE Transactions on
+Systems Man and Cybernetics, Part A: Systems and Humans, Vol. 33,
+No. 4, 2003, pp. 523–532.
+doi:10.1109/TSMCA.2003.809224
+[52] Turing, A., “On Computable Numbers, with an Application to the
+Entscheidungs Problem,” Proceedings of the London Mathematical
+Society, Vol. 42, 1936, pp. 230–265.
+[53] Yamashita, Y., and Nakamura, Y., “Neuron Circuit Model with Smooth
+Nonlinear Output Function,” Proceedings of the International
+Symposium on Nonlinear Theory and Its Applications, Vancouver,
+2007, pp. 11–14.
+[54] Sparks, D., “Vacuum Reduction of Extraterrestrial Silicates,” Journal of
+Spacecraft and Rockets, Vol. 25, No. 2, 1988, pp. 187–189.
+doi:10.2514/3.25969
+[55] Kruzelecky, R., Wong, B., Zou, J., Haddad, E., Jamroz, W., Cloutis, E.,
+Strong, K., Ellery, A., Ghafoor, N., and Ravindran, G., “LORE: Lunar
+Origins and Resource Explorer,” Proceedings of the American
+Astronautical Society Conference, American Astronautical Soc. Paper
+2010-467, Springfield, VA, 2010.
+[56] Cross, M., Ellery, A., and Qadi, A., “Estimating Terrain Parameters for a
+Rigid Wheeled Rover Using Neural Networks,” Journal of
+Terramechanics, Vol. 50, No. 3, 2013, pp. 165–174.
+doi:10.1016/j.jterra.2013.04.002
+[57] Meir, Y., and Jerby, E., “Microwave Induced Breakdown Spectroscopy
+for Material Identification Using Boltzmann-Plot Super-Resolution
+Algorithm,” Proceedings of the 8th International Workshop on
+Microwave Discharges: Fundamentals and Applications, 2012,
+pp. 227–230.
+[58] Zubrin, R., The Case for Mars, Touchstone Publ., New York, 1996.
+[59] Gingery, D., Build Your Own Metal Workshop from Scrap, David
+Gingery Publ., Kimberling City, MO, 2011.
+[60] Kalpakjian, S., and Schmid, S., Manufacturing Engineering and
+Technology, Prentice–Hall, Upper Saddle River, NJ, 2001.
+[61] Wittenburg, L., “In-Situ Extraction of Lunar Soil Volatiles,”
+Proceedings Space 94, 4th International Conference & Exposition on
+Engineering, Construction & Operations in Space, and Conference &
+Exposition/Demonstration on Robotics for Challenging Environments,
+WCSAR TR-AR3-9311-3, Albuquerque, NM, 1993.
+
+327
+[62] Hansen, C., et al., “SPADE: A Rock-Crushing and Sample-Handling
+System Developed for Mars Missions,” Journal of Geophysical
+Research, Vol. 112, No. E6, 2007, Paper E06008.
+doi:10.1029/2005JE002413
+[63] Oder, R., “Magnetic Separation of Lunar Soils,” IEEE Transactions on
+Magnetics, Vol. 27, No. 6, 1991, pp. 5367–5370.
+doi:10.1109/20.278841
+[64] Jakes, P., “Cast Basalt, Mineral Wool and Oxygen Production: Early
+Industries for Planetary (Lunar) Outposts,” Lunar and Planetary Inst.
+Rept. 77058-1113, Houston, TX, 1998.
+[65] Roedder, E., “Use of Lunar Materials in Space Construction,” Space
+Solar Power Review, Vol. 2, 1981, pp. 249–258.
+[66] Livshits, P., Dikhtyar, V., Inberg, A., Shahadi, A., and Jerby, E., “Local
+Doping of Silicon by a Point-Contact Microwave Applicator,”
+Microelectronic Engineering, Vol. 88, No. 9, 2011, pp. 2831–2836.
+doi:10.1016/j.mee.2011.04.022
+[67] Ellery, A., and Cockell, C., “Human Exploration of the Martian Pole Part
+2: Support Technologies,” Journal of the British Interplanetary Society,
+Vol. 56, Nos. 1–2, 2003, pp. 43–55.
+[68] Melosh, H., et al., “Origin of Lunar Mascon Basins,” Science, Vol. 340,
+No. 6140, 2013, pp. 1552–1555.
+doi:10.1126/science.1235768
+[69] Flett, D., “Cobalt-Nickel Separation in Hydrometallurgy: A Review,”
+Chemistry for Sustainable Development, Vol. 12, 2004, pp. 81–91.
+[70] Terekhov, D., and Emmanual, N., “Direct Extraction of Nickel and Iron
+from Laterite Ores Using the Carbonyl Process,” Minerals Engineering,
+Vol. 54, Dec. 2013, pp. 124–130.
+doi:10.1016/j.mineng.2013.07.008
+[71] Meyer, C., and Yang, S., “Tungsten-Bearing Yttrobetafite in Lunar
+Granophyres,” American Mineralogist, Vol. 73, 1988, pp. 1420–1425.
+[72] Brewer, L., “Thermodynamic Properties of the Oxides and Their
+Vaporisation Processes,” Chemical Reviews, Vol. 52, No. 1, 1953,
+pp. 1–75.
+doi:10.1021/cr60161a001
+[73] Gao, Y., Ellery, A., Sweeting, M., and Vincent, J., “Bioinspired Drill for
+Planetary Sampling: Literature Survey, Conceptual Design and
+Feasibility Study,” Journal of Spacecraft and Rockets, Vol. 44, No. 3,
+2007, pp. 703–709.
+doi:10.2514/1.23025
+[74] Levi, E., He, J., Zabar, Z., and Birenbaum, L., “Guidelines for the
+Design of Synchronous-Type Coilguns,” IEEE Transactions on
+Magnetics, Vol. 27, No. 1, 1991, pp. 628–633.
+doi:10.1109/20.101107
+[75] McInnes, C., Solar Sailing: Technology, Dynamics and Mission
+Applications, Praxis–Springer Publ., Chichester, England, U.K., 1999.
+[76] El-Madany, H., Fahmy, F., El-Rahman, A., and Dorrah, H., “Spacecraft
+Neural Network Control System Design Using FPGA,” Waset
+International Journal Computer, Electrical Automation, Control &
+Information Engineering, Vol. 5, No. 9, 2011, pp. 984–990.
+[77] Wang, X., “Artificial Neural Net Viterbi Decoder,” IEEE Transactions
+on Communications, Vol. 44, No. 2, 1996, pp. 165–171.
+doi:10.1109/26.486609
+[78] Varatharajoo, R., “Combined Energy and Attitude Control System for
+Small Satellites,” Acta Astronautica, Vol. 54, No. 10, 2004, pp. 701–
+712.
+doi:10.1016/j.actaastro.2003.12.004
+[79] McInnes, C., “Space-Based Geoengineering: Challenges and Requirements,” Proceedings of the Institution of Mechanical Engineers, Part C:
+Journal of Mechanical Engineering Science, Vol. 224, No. 3, 2010,
+pp. 571–580.
+doi:10.1243/09544062JMES1439
+[80] Angel, R., “Feasibility of Cooling the Earth with a Cloud of Small
+Spacecraft near the Inner Lagrange Point L1,” Proceedings of the
+National Academy of Sciences, Vol. 103, No. 46, 2006, pp. 17,184–
+17,189.
+doi:10.1073/pnas.0608163103
+[81] McQuade, F., Ward, R., Ortix, F., and McInnes, C., “Autonomous
+Configuration of Satellite Formations Using Generic Potential
+Functions,” Proceedings of the 3rd International Workshop on Satellite
+Constellations and Formation Flying, Pisa, Italy, 2003, pp. 1–9.
+[82] Mankins, J., “Fresh Look at Space Solar Power: New Architectures,
+Concepts and Technologies,” Proceedings of the International
+Astronautics Federation Conference, Paper IAF-97-R.2.03, 1997.
+
+R. J. Sedwick
+Associate Editor
+
+

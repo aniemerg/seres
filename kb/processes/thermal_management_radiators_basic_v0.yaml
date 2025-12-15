@@ -1,0 +1,18 @@
+id: thermal_management_radiators_basic_v0
+kind: process
+name: Thermal management via radiators
+layer_tags:
+  - layer_8
+inputs:
+  - item_id: waste_heat
+    qty: null
+    unit: kWh
+outputs:
+  - item_id: rejected_heat
+    qty: null
+    unit: kWh
+requires_ids:
+  - radiator_panels
+  - heat_transport_loop
+  - thermal_control_valves
+notes: Cooling anchor; sizing, materials, and deployment TBD.
