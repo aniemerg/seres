@@ -22,4 +22,12 @@ requires_ids:
   - high_temp_furnace
   - offgas_handling
   - carbon_feed_system
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: "high temp reduction (~1600°C), per kg O2 produced"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+  notes: "batch carbothermal reduction cycle"
 notes: Alternative oxygen path; temperature, yield, and rates TBD.

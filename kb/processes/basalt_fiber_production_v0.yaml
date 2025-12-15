@@ -15,4 +15,12 @@ requires_ids:
   - fiber_spinneret
   - winding_drums
   - controlled_cooling
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "heating glass to drawing temperature (~1300°C) plus spinneret drive"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.2
+  notes: "continuous fiber drawing ~5 kg/hr throughput"
 notes: Captures fiber path for structural materials; rates TBD.

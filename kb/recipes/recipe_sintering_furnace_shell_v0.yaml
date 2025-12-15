@@ -1,0 +1,23 @@
+id: recipe_sintering_furnace_shell_v0
+target_item_id: sintering_furnace_shell
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 5.0
+    machine_hours: 5.0
+    notes: Cast outer shell sections
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 3.5
+    machine_hours: 3.5
+    labor_hours: 3.5
+    notes: Weld shell sections together
+  - process_id: sintering_and_hot_pressing_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Apply sintered refractory lining
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: Final assembly with insulation layers
+assumptions: "380 kg sintering furnace shell with refractory lining."
+notes: "Four-step recipe for sintering furnace shell."

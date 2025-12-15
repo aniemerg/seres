@@ -4,6 +4,10 @@ and emits:
 - out/index.json (entries + refs)
 - out/validation_report.md (soft warnings)
 - out/unresolved_refs.jsonl (requires_text and other unresolved strings)
+- out/work_queue.jsonl (all gaps needing attention)
+- out/missing_recipes.jsonl (items without recipes)
+- out/missing_fields.jsonl (required fields not populated)
+- out/orphan_resources.jsonl (resource_types with no provider machine)
 """
 from __future__ import annotations
 
@@ -45,9 +49,10 @@ def _infer_kind(path: Path, data: dict) -> Optional[str]:
     return None
 
 
-def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict]]:
+def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dict]]:
     refs: Set[str] = set()
     unresolved: List[dict] = []
+    invalid: List[dict] = []
 
     def add_unresolved(text: str, field_path: str) -> None:
         if not text:
@@ -72,8 +77,21 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict]]:
         target = data.get("target_item_id")
         if target:
             refs.add(str(target))
-        for step in data.get("steps", []) or []:
-            refs.add(str(step))
+        steps = data.get("steps", []) or []
+        for step in steps:
+            if isinstance(step, dict):
+                pid = step.get("process_id")
+                if pid:
+                    refs.add(str(pid))
+                else:
+                    invalid.append({"reason": "missing_process_id", "step": step})
+            else:
+                # Old/invalid schema
+                invalid.append({"reason": "legacy_step_format", "step": step})
+                try:
+                    refs.add(str(step))
+                except Exception:
+                    pass
     elif kind in ("material", "part", "machine"):
         bom = data.get("bom")
         if bom:
@@ -89,7 +107,7 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict]]:
             item_id = comp.get("item_id") or comp.get("id")
             if item_id:
                 refs.add(str(item_id))
-    return refs, unresolved
+    return refs, unresolved, invalid
 
 
 def _collect_nulls(kind: str, data: dict) -> List[dict]:
@@ -118,6 +136,27 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
     return nulls
 
 
+def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
+    """Collect required fields that are missing (not just null, but absent)."""
+    missing: List[dict] = []
+
+    if kind == "process":
+        if not data.get("energy_model"):
+            missing.append({"field": "energy_model", "severity": "soft"})
+        if not data.get("time_model"):
+            missing.append({"field": "time_model", "severity": "soft"})
+    elif kind == "part":
+        if not data.get("material_class"):
+            missing.append({"field": "material_class", "severity": "soft"})
+    elif kind == "machine":
+        if not data.get("capabilities"):
+            missing.append({"field": "capabilities", "severity": "soft"})
+        if not data.get("bom"):
+            missing.append({"field": "bom", "severity": "soft"})
+
+    return missing
+
+
 def _load_yaml(path: Path, warnings: List[str]) -> dict:
     try:
         with path.open("r", encoding="utf-8") as f:
@@ -136,10 +175,14 @@ def build_index() -> Dict[str, dict]:
         raise SystemExit("PyYAML is required: pip install pyyaml")
     entries: Dict[str, dict] = {}
     unresolved_refs: List[dict] = []
+    invalid_recipes: List[dict] = []
     null_values: List[dict] = []
+    missing_fields: List[dict] = []
     warnings: List[str] = []
     import_stubs: List[dict] = []
     referenced_only: Set[str] = set()
+    machine_capabilities: Dict[str, List[str]] = {}  # machine_id -> capabilities
+    recipe_targets: Set[str] = set()  # items that have recipes
     kb_files = sorted(KB_ROOT.glob("**/*.yaml"))
 
     for path in kb_files:
@@ -153,26 +196,42 @@ def build_index() -> Dict[str, dict]:
         if kind == "recipe":
             steps = data.get("steps") or []
             variant_id = str(data.get("variant_id", "") or "")
+            target = data.get("target_item_id")
+            if target:
+                recipe_targets.add(str(target))
             if not steps or "import" in variant_id:
                 import_stubs.append(
                     {
                         "recipe_id": data.get("id") or path.stem,
-                        "target_item_id": data.get("target_item_id"),
+                        "target_item_id": target,
                         "variant_id": variant_id or "unknown",
                         "file": str(path),
                         "reason": "empty_steps" if not steps else "import_variant",
                     }
                 )
+        elif kind == "machine":
+            caps = data.get("capabilities", []) or []
+            if caps:
+                machine_capabilities[entry_id] = caps
 
-        refs_out, unresolved = _collect_refs(kind, data)
+        refs_out, unresolved, invalid_steps = _collect_refs(kind, data)
         for u in unresolved:
             u.update({"owner_id": entry_id, "owner_kind": kind, "file": str(path)})
         unresolved_refs.extend(unresolved)
+        if invalid_steps:
+            invalid_recipes.append({"id": entry_id, "file": str(path), "issues": invalid_steps})
+        if invalid_steps:
+            invalid_recipes.append({"id": entry_id, "file": str(path), "issues": invalid_steps})
 
         nulls = _collect_nulls(kind, data)
         for n in nulls:
             n.update({"owner_id": entry_id, "owner_kind": kind, "file": str(path)})
         null_values.extend(nulls)
+
+        mfields = _collect_missing_fields(kind, data)
+        for m in mfields:
+            m.update({"owner_id": entry_id, "owner_kind": kind, "file": str(path)})
+        missing_fields.extend(mfields)
 
         entry = {
             "id": entry_id,
@@ -210,6 +269,31 @@ def build_index() -> Dict[str, dict]:
             if ref in entries:
                 entries[ref]["refs_in"].append(entry["id"])
 
+    # Compute items without recipes (parts, materials, machines that no recipe targets)
+    items_without_recipes: List[dict] = []
+    for entry in entries.values():
+        if entry["kind"] in ("part", "material", "machine") and entry["status"] == "defined":
+            if entry["id"] not in recipe_targets:
+                items_without_recipes.append({
+                    "id": entry["id"],
+                    "kind": entry["kind"],
+                    "file": entry["defined_in"],
+                })
+
+    # Compute orphan resources (resource_types with no machine capability)
+    all_capabilities: Set[str] = set()
+    for caps in machine_capabilities.values():
+        all_capabilities.update(caps)
+    orphan_resources: List[dict] = []
+    for entry in entries.values():
+        if entry["kind"] == "resource_type" and entry["status"] == "defined":
+            if entry["id"] not in all_capabilities:
+                orphan_resources.append({
+                    "id": entry["id"],
+                    "file": entry["defined_in"],
+                    "refs_in": entry["refs_in"],  # processes that need this resource
+                })
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with (OUT_DIR / "index.json").open("w", encoding="utf-8") as f:
         json.dump({"entries": entries}, f, indent=2, sort_keys=True)
@@ -226,44 +310,54 @@ def build_index() -> Dict[str, dict]:
         for nv in null_values:
             f.write(json.dumps(nv) + "\n")
 
-    _update_work_queue(unresolved_refs, referenced_only, import_stubs)
-    _write_report(entries, warnings, null_values)
+    with (OUT_DIR / "missing_fields.jsonl").open("w", encoding="utf-8") as f:
+        for mf in missing_fields:
+            f.write(json.dumps(mf) + "\n")
+
+    with (OUT_DIR / "missing_recipes.jsonl").open("w", encoding="utf-8") as f:
+        for mr in items_without_recipes:
+            f.write(json.dumps(mr) + "\n")
+
+    with (OUT_DIR / "orphan_resources.jsonl").open("w", encoding="utf-8") as f:
+        for orph in orphan_resources:
+            f.write(json.dumps(orph) + "\n")
+
+    with (OUT_DIR / "invalid_recipes.jsonl").open("w", encoding="utf-8") as f:
+        for inv in invalid_recipes:
+            f.write(json.dumps(inv) + "\n")
+
+    _update_work_queue(
+        unresolved_refs, referenced_only, import_stubs,
+        items_without_recipes, missing_fields, orphan_resources, invalid_recipes
+    )
+    _write_report(
+        entries, warnings, null_values, missing_fields,
+        items_without_recipes, orphan_resources
+    )
     return entries
 
 
 def _update_work_queue(
-    unresolved_refs: List[dict], referenced_only: Set[str], import_stubs: List[dict]
+    unresolved_refs: List[dict],
+    referenced_only: Set[str],
+    import_stubs: List[dict],
+    items_without_recipes: List[dict],
+    missing_fields: List[dict],
+    orphan_resources: List[dict],
+    invalid_recipes: List[dict],
 ) -> None:
     """
-    Append new work items to the work queue based on gaps:
+    Rebuild work queue from current gaps (replaces previous queue).
     - unresolved_refs: free-text refs needing definition/resolution
     - referenced_only: ids referenced but not defined
     - import_stubs: recipes with empty steps/import variants needing real routes
+    - items_without_recipes: parts/materials/machines with no recipe
+    - missing_fields: required fields not populated (energy_model, time_model, etc.)
+    - orphan_resources: resource_types with no machine providing them
     """
-    existing: Set[str] = set()
-    if WORK_QUEUE.exists():
-        with WORK_QUEUE.open("r", encoding="utf-8") as f:
-            for line in f:
-                try:
-                    obj = json.loads(line)
-                    wid = obj.get("id")
-                    reason = obj.get("reason", "")
-                    existing.add(f"{wid}:{reason}")
-                except Exception:
-                    continue
-
-    def append_items(items: List[dict]) -> None:
-        if not items:
-            return
-        with WORK_QUEUE.open("a", encoding="utf-8") as wf:
-            for obj in items:
-                key = f"{obj['id']}:{obj['reason']}"
-                if key in existing:
-                    continue
-                wf.write(json.dumps(obj) + "\n")
-                existing.add(key)
-
     gap_items: List[dict] = []
+
+    # Unresolved text references
     for ref in unresolved_refs:
         gap_items.append(
             {
@@ -273,10 +367,14 @@ def _update_work_queue(
                 "context": {"owner_id": ref["owner_id"], "field_path": ref["field_path"]},
             }
         )
+
+    # Referenced but not defined
     for ref_id in sorted(referenced_only):
         gap_items.append(
             {"id": ref_id, "kind": "gap", "reason": "referenced_only", "context": {}}
         )
+
+    # Import stubs needing real manufacturing routes
     for stub in import_stubs:
         gap_items.append(
             {
@@ -286,10 +384,64 @@ def _update_work_queue(
                 "context": {"recipe_id": stub.get("recipe_id"), "variant": stub.get("variant_id")},
             }
         )
-    append_items(gap_items)
+
+    # Items without recipes (will be imports unless recipe added)
+    for item in items_without_recipes:
+        gap_items.append(
+            {
+                "id": item["id"],
+                "kind": item["kind"],
+                "reason": "no_recipe",
+                "context": {"file": item["file"]},
+            }
+        )
+
+    # Missing required fields (energy_model, time_model, material_class, etc.)
+    for mf in missing_fields:
+        gap_items.append(
+            {
+                "id": mf["owner_id"],
+                "kind": mf["owner_kind"],
+                "reason": "missing_field",
+                "context": {"field": mf["field"], "file": mf["file"]},
+            }
+        )
+
+    # Orphan resources (resource_types with no machine providing them)
+    for orph in orphan_resources:
+        gap_items.append(
+            {
+                "id": orph["id"],
+                "kind": "resource_type",
+                "reason": "no_provider_machine",
+                "context": {"needed_by": orph["refs_in"], "file": orph["file"]},
+            }
+        )
+
+    # Invalid recipes (legacy step schema or missing process_id)
+    for inv in invalid_recipes:
+        gap_items.append(
+            {
+                "id": inv.get("id"),
+                "kind": "recipe",
+                "reason": "invalid_recipe_schema",
+                "context": {"file": inv.get("file")},
+            }
+        )
+
+    with WORK_QUEUE.open("w", encoding="utf-8") as wf:
+        for obj in gap_items:
+            wf.write(json.dumps(obj) + "\n")
 
 
-def _write_report(entries: Dict[str, dict], warnings: List[str], null_values: List[dict]) -> None:
+def _write_report(
+    entries: Dict[str, dict],
+    warnings: List[str],
+    null_values: List[dict],
+    missing_fields: List[dict],
+    items_without_recipes: List[dict],
+    orphan_resources: List[dict],
+) -> None:
     counts: Dict[str, int] = {}
     for entry in entries.values():
         counts[entry["kind"]] = counts.get(entry["kind"], 0) + 1
@@ -300,6 +452,47 @@ def _write_report(entries: Dict[str, dict], warnings: List[str], null_values: Li
     ]
     for kind, count in sorted(counts.items()):
         lines.append(f"- {kind}: {count}")
+
+    # Items without recipes (major gap)
+    if items_without_recipes:
+        by_kind: Dict[str, int] = {}
+        for item in items_without_recipes:
+            k = item["kind"]
+            by_kind[k] = by_kind.get(k, 0) + 1
+        lines.append("")
+        lines.append("## Items without recipes (will be imports)")
+        lines.append(f"Total: {len(items_without_recipes)} items need recipes or import designation")
+        for kind, count in sorted(by_kind.items()):
+            lines.append(f"- {kind}: {count}")
+        lines.append("")
+        lines.append("See `out/missing_recipes.jsonl` for details.")
+
+    # Missing required fields
+    if missing_fields:
+        by_field: Dict[str, int] = {}
+        for mf in missing_fields:
+            f = mf["field"]
+            by_field[f] = by_field.get(f, 0) + 1
+        lines.append("")
+        lines.append("## Missing required fields")
+        lines.append(f"Total: {len(missing_fields)} missing fields")
+        for field, count in sorted(by_field.items()):
+            lines.append(f"- {field}: {count}")
+        lines.append("")
+        lines.append("See `out/missing_fields.jsonl` for details.")
+
+    # Orphan resources
+    if orphan_resources:
+        lines.append("")
+        lines.append("## Orphan resources (no machine provides)")
+        lines.append(f"Total: {len(orphan_resources)} resource_types have no provider machine")
+        for orph in orphan_resources[:10]:
+            needed = len(orph.get("refs_in", []))
+            lines.append(f"- {orph['id']} (needed by {needed} processes)")
+        if len(orphan_resources) > 10:
+            lines.append(f"- ... and {len(orphan_resources) - 10} more")
+        lines.append("")
+        lines.append("See `out/orphan_resources.jsonl` for details.")
 
     # Null value summary
     if null_values:
@@ -323,6 +516,15 @@ def _write_report(entries: Dict[str, dict], warnings: List[str], null_values: Li
     if not warnings:
         lines.append("")
         lines.append("No warnings.")
+
+    # Work queue summary
+    total_gaps = (
+        len(items_without_recipes) + len(missing_fields) +
+        len(orphan_resources) + len(null_values)
+    )
+    lines.append("")
+    lines.append("## Work queue summary")
+    lines.append(f"Total gaps in work queue: see `out/work_queue.jsonl`")
 
     with (OUT_DIR / "validation_report.md").open("w", encoding="utf-8") as f:
         f.write("\n".join(lines))

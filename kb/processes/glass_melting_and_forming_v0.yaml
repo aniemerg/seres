@@ -15,4 +15,12 @@ requires_ids:
   - glass_furnace
   - molds
   - temperature_sensing
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "melting regolith glass at ~1500°C plus forming"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "batch melt-pour-anneal cycle"
 notes: Anchor for thermal processing; specific glass chemistries TBD.

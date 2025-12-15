@@ -26,4 +26,12 @@ resource_requirements:
   - resource_type: labor_bot_general
     amount: null
     unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 10.0
+  notes: "electrolysis at ~1600°C, per kg O2 (~13 kWh/kg O2 theoretical)"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "batch MRE cycle with electrode maintenance"
 notes: Anchor for oxygen + metal co-production; numbers to be added later.

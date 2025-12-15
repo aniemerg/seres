@@ -1,0 +1,23 @@
+id: recipe_high_temp_power_supply_unit_v0
+target_item_id: high_temp_power_supply_unit
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Cast enclosure and heat sink components
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Machine mounting surfaces and cooling channels
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 1.5
+    notes: Braze bus bars and cooling connections
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: Assemble with imported power electronics and controls
+assumptions: "180 kg high-current power supply; includes imported electronics."
+notes: "Four-step recipe for high-temperature power supply unit."

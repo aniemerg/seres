@@ -2,7 +2,11 @@ id: recipe_gear_set_medium_v0
 target_item_id: gear_set_medium
 variant_id: v0
 steps:
-  - metal_casting_basic_v0
-  - gear_cutting_basic_v0
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+  - process_id: gear_cutting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
 assumptions: Cast gear blanks then cut/finish teeth; heat treatment not modeled.
 notes: Coarse route; add heat treatment and detailed finishing later.

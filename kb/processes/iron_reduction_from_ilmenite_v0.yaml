@@ -21,4 +21,12 @@ outputs:
 requires_ids:
   - reduction_furnace
   - gas_handling_loop
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: "hydrogen reduction at ~1200°C, per kg iron product"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "batch reduction cycle with gas recirculation"
 notes: Captures metals path; distinguishes from generic carbothermal oxygen step.

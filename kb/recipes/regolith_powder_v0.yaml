@@ -2,8 +2,14 @@ id: recipe_regolith_powder_v0
 target_item_id: regolith_powder
 variant_id: v0
 steps:
-  - excavate_regolith_surface_v0
-  - regolith_screening_sieving_v0
-  - regolith_crushing_grinding_v0
+  - process_id: excavate_regolith_surface_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+  - process_id: regolith_screening_sieving_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+  - process_id: regolith_crushing_grinding_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
 assumptions: Uses general labor bot for supervision; throughput unspecified.
 notes: Straight-line recipe chaining excavation → screening → crushing/grinding.

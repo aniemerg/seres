@@ -15,4 +15,12 @@ requires_ids:
   - hot_press
   - sintering_furnace
   - dies
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "heating to sintering temp (~1000°C) plus press hydraulics"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "batch sintering/pressing cycle with cooling"
 notes: Captures ceramic path; numbers and yields to follow.

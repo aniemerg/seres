@@ -1,0 +1,31 @@
+id: process_3d_print_motor_sma_v0
+kind: process
+name: 3D print SMA-based motor components
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: shape_memory_wire_sma
+    qty: null
+    unit: kg
+  - item_id: polymer_printing_feedstock
+    qty: null
+    unit: kg
+outputs:
+  - item_id: sma_motor_components
+    qty: null
+    unit: unit
+requires_ids:
+  - resource_3d_printer_cartesian_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: "print head heating plus motion axes, ~1 kW average"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.0
+  notes: "slow deposition rate ~1 kg/hr for polymer/SMA composite"
+notes: Placeholder for printing SMA-actuated motor structures; includes polymer body and embedded SMA wires.

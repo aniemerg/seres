@@ -323,4 +323,37 @@ Two guardrails only:
 
 ---
 
-If you want, I can also give you a **ready-to-paste “Seed Queue JSONL”** for these (layer-tagged + round-robin ordering) so you can drop it straight into `out/work_queue.jsonl`.
+If you want, I can also give you a **ready-to-paste "Seed Queue JSONL"** for these (layer-tagged + round-robin ordering) so you can drop it straight into `out/work_queue.jsonl`.
+
+---
+
+### Implementation Notes (post-v0 refinements)
+
+**Work queue behavior change:** The work queue is now **rebuilt from scratch** on each indexer run, rather than being append-only with manual pruning. This means:
+- Gaps are automatically removed when fixed (no `prune` command needed)
+- The queue always reflects the current state of the KB
+- No historical log of past gaps is maintained
+
+**Null value tracking:** The indexer now tracks fields with null values (`qty`, `amount`, `mass`) and reports them in:
+- `out/validation_report.md` (summary counts)
+- `out/null_values.jsonl` (detailed list with file paths)
+
+**BOM support:** BOMs are now properly indexed as `kind: bom` via folder-based inference (`kb/boms/`). The indexer tracks BOM component references for dependency analysis.
+
+**Scenario support:** Scenarios (`kb/scenarios/`) are indexed as `kind: scenario` for seed factory definitions.
+
+**Comprehensive gap detection (December 2024):** The indexer now detects and queues all gap types specified in Memo A:
+
+| Gap Type | Reason Code | Description |
+|----------|-------------|-------------|
+| Items without recipes | `no_recipe` | Parts/materials with no recipe targeting them (will be imports) |
+| Missing required fields | `missing_field` | `energy_model`, `time_model` (processes), `material_class` (parts) |
+| Orphan resources | `no_provider_machine` | Resource_types with no machine capability providing them |
+| Referenced only | `referenced_only` | IDs referenced but never defined |
+| Unresolved refs | `unresolved_ref` | Free-text `requires_text` entries |
+| Import stubs | `import_stub` | Recipes with empty steps or import variants |
+
+New output files:
+- `out/missing_recipes.jsonl` — Items that need recipes or explicit import designation
+- `out/missing_fields.jsonl` — Required fields not populated
+- `out/orphan_resources.jsonl` — Resource types needing machine providers

@@ -1,0 +1,14 @@
+id: recipe_stored_energy_v0
+target_item_id: stored_energy
+variant_id: v0
+steps:
+  - process_id: solar_power_generation_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Generate electrical energy from solar
+  - process_id: power_storage_basic_v0
+    est_time_hr: 0.1
+    machine_hours: 0.1
+    notes: Store electrical energy in batteries/flywheels
+assumptions: "Storage efficiency ~90%; charge/discharge cycle."
+notes: "Two-step recipe: solar generation to electrical, then storage."

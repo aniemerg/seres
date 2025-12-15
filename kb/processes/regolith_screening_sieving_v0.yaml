@@ -21,4 +21,12 @@ resource_requirements:
   - resource_type: labor_bot_general
     amount: null
     unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+  notes: "vibrating screen motor power"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.05
+  notes: "continuous screening ~20 kg/hr throughput"
 notes: Placeholder split; yields and throughput TBD.

@@ -1,0 +1,22 @@
+id: mold_preparation_basic_v0
+kind: process
+name: Mold preparation (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids:
+  - molds
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.3
+  notes: "minor heating for mold curing/coating"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.3
+  notes: "mold prep scales with casting size ~3 kg/hr"
+notes: Prepare molds/cores for casting; placeholders for materials and time.

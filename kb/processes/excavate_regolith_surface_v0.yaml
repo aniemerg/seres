@@ -22,4 +22,12 @@ resource_requirements:
   - resource_type: labor_bot_general
     amount: null
     unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+  notes: "loader bucket/scoop mechanical work plus hauler transport"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.02
+  notes: "surface excavation ~50 kg/hr throughput per loader"
 notes: Coarse placeholder; throughput and losses TBD.

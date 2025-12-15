@@ -2,7 +2,11 @@ id: recipe_part_bearing_set_heavy_v0
 target_item_id: bearing_set_heavy
 variant_id: v0
 steps:
-  - metal_casting_basic_v0
-  - sintering_and_hot_pressing_v0
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+  - process_id: sintering_and_hot_pressing_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
 assumptions: Cast races; sinter/warm-form rolling elements; assembly/finishing not modeled yet.
 notes: Coarse local route; add grinding/finishing later.

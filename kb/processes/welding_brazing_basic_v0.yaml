@@ -20,4 +20,12 @@ resource_requirements:
   - resource_type: labor_bot_general
     amount: null
     unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "arc power (~8 kW) plus wire feed and shielding"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.4
+  notes: "deposition rate ~2.5 kg/hr for GMAW"
 notes: Joining anchor; detailed joint types and gas choices TBD.

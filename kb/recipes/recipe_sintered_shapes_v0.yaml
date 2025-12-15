@@ -1,0 +1,18 @@
+id: recipe_sintered_shapes_v0
+target_item_id: sintered_shapes
+variant_id: v0
+steps:
+  - process_id: regolith_screening_sieving_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Separate fine fraction for sintering feedstock
+  - process_id: mold_preparation_basic_v0
+    est_time_hr: 0.25
+    labor_hours: 0.25
+    notes: Prepare dies and molds for pressing
+  - process_id: sintering_and_hot_pressing_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Hot press and sinter the fine regolith into shapes
+assumptions: Uses fine regolith fraction; cycle time ~2hr for sintering.
+notes: Three-step recipe for ceramic/regolith sintered parts.

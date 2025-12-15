@@ -1,0 +1,22 @@
+id: power_distribution_basic_v0
+kind: process
+name: Power distribution (basic)
+layer_tags:
+  - layer_8
+inputs: []
+outputs: []
+requires_ids:
+  - power_distribution
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.02
+  notes: "~2% distribution losses per kWh delivered"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.01
+  notes: "continuous operation, minimal time overhead"
+notes: Distribute conditioned power to loads; placeholder time/energy.

@@ -1,0 +1,19 @@
+id: recipe_welded_assemblies_v0
+target_item_id: welded_assemblies
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Cast metal parts for welding
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Prep surfaces and edges for welding
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 1.5
+    notes: Join parts via welding or brazing
+assumptions: "Assumes simple butt/fillet welds; complex joints may require more time."
+notes: "Three-step recipe: casting, surface prep, then welding/brazing."

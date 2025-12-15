@@ -14,4 +14,12 @@ outputs:
 requires_ids:
   - power_storage_bank
   - power_management
+energy_model:
+  type: kWh_per_kg
+  value: 0.15
+  notes: "~15% round-trip losses for battery storage per kWh stored"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "charge/discharge cycle time"
 notes: Placeholder for storage; chemistry/technology undecided.

@@ -1,0 +1,15 @@
+id: recipe_electrical_energy_v0
+target_item_id: electrical_energy
+variant_id: v0
+steps:
+  - process_id: solar_power_generation_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+  - process_id: power_conditioning_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+  - process_id: power_distribution_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+assumptions: Electrical output from solar array; storage not modeled here.
+notes: Coarse generation route; add storage/conditioning as needed.

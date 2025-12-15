@@ -2,7 +2,11 @@ id: recipe_part_support_frame_welded_v0
 target_item_id: support_frame_welded
 variant_id: v0
 steps:
-  - metal_casting_basic_v0
-  - welding_brazing_basic_v0
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
 assumptions: Cast structural members then weld into frame; machining/fixtures omitted.
 notes: Could be refined into cut-and-weld plate instead of casting members.

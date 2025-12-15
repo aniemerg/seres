@@ -1,5 +1,10 @@
 """
-Queue management helpers: prune completed items and pop next item.
+Queue management helpers.
+
+NOTE: The work queue is now rebuilt from scratch on each indexer run,
+so prune() is largely obsolete - gaps are automatically removed when fixed.
+The pop() function can still be used for manual task-by-task workflows,
+but popped items will reappear on next index if still unresolved.
 """
 from __future__ import annotations
 
@@ -62,34 +67,20 @@ def _load_import_stub_targets() -> Set[str]:
 
 def prune_queue() -> int:
     """
-    Remove items that are already defined (status == defined) in the index.
-    Keep unresolved refs.
-    Keep import_stub entries only if they still appear in out/import_stubs.jsonl.
-    Keep referenced_only/status!=defined items in the queue.
+    Prune only items explicitly marked resolved/superseded.
+    Retain gaps even if the corresponding id is already defined (e.g., no_recipe, missing_field).
     """
     items = _load_queue()
     if not items:
         return 0
-    index_status = _load_index_map()
-    active_import_stubs = _load_import_stub_targets()
     kept: List[dict] = []
     removed = 0
     for obj in items:
         reason = obj.get("reason", "")
-        if reason == "unresolved_ref":
+        if reason in ("resolved", "superseded"):
+            removed += 1
+        else:
             kept.append(obj)
-            continue
-        if reason == "import_stub":
-            if obj.get("id") in active_import_stubs:
-                kept.append(obj)
-                continue
-            removed += 1
-            continue
-        status = index_status.get(obj.get("id"))
-        if status == "defined":
-            removed += 1
-            continue
-        kept.append(obj)
     _save_queue(kept)
     return removed
 

@@ -1,0 +1,23 @@
+id: recipe_cooling_loop_basic_v0
+target_item_id: cooling_loop_basic
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Cast tubing sections and fittings
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Machine fitting interfaces
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Braze tube joints and fittings
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Final assembly with pump and valves
+assumptions: "60 kg cooling loop with metal tubing and brazed joints."
+notes: "Four-step recipe for thermal control cooling loop."

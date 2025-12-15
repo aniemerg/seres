@@ -1,0 +1,15 @@
+id: recipe_metal_casting_finished_v0
+target_item_id: metal_casting_finished
+variant_id: v0
+steps:
+  - process_id: mold_preparation_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+assumptions: Cast then machine/finish; mold prep not explicit yet.
+notes: Coarse route; refine with mold prep and detailed machining later.
