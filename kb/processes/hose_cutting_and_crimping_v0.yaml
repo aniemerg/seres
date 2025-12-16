@@ -1,0 +1,22 @@
+id: hose_cutting_and_crimping_v0
+kind: process
+name: Hose cutting and crimping
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.4
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Crimper and saw energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.7
+  notes: "Cut and crimp per hose batch"
+notes: Cut reinforced hydraulic hose to length and crimp fittings with ferrules.

@@ -1,0 +1,22 @@
+id: fitting_assembly_basic_v0
+kind: process
+name: Fitting assembly (basic)
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.3
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.05
+  notes: "Hand tools"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "Assemble fittings/adapters"
+notes: Assemble hydraulic adapters, quick disconnects, and thread-seal fittings.

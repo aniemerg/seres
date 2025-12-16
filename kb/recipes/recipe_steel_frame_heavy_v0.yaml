@@ -1,0 +1,21 @@
+id: recipe_steel_frame_heavy_v0
+target_item_id: steel_frame_heavy
+variant_id: v0
+steps:
+  - process_id: sheet_metal_cutting_v0
+    est_time_hr: 6.0
+    labor_hours: 5.0
+    machine_hours: 5.0
+    notes: Cut plate and tube sections for frame members and mounting points.
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 7.0
+    machine_hours: 7.0
+    notes: Weld box/tube sections into the main chassis; attach brackets and mounts.
+  - process_id: stress_relief_annealing_v0
+    est_time_hr: 4.0
+    labor_hours: 1.0
+    machine_hours: 1.0
+    notes: Stress relieve weldments to reduce distortion.
+assumptions: Uses heavy plate/tube steel feed; detailed fixturing, machining, and coating to be added later. Paint/coating not modeled yet.
+notes: Coarse fabrication route for heavy equipment frame; refine with machining/coat steps and BOM when available.

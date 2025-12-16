@@ -1,0 +1,27 @@
+id: control_panel_assembly_v0
+kind: process
+name: Control panel assembly
+layer_tags:
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+  - test_equipment_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: Bench assembly and test power draw.
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.4
+  setup_hr: 0.2
+  notes: Wiring, mounting, labeling, and functional checkout.
+notes: >
+  Assemble control panels or control units: mount switches, indicators, wiring
+  harnesses, and controllers into enclosures; includes continuity checks and
+  basic functional test.

@@ -22,10 +22,14 @@ requires_ids:
   - assembly_station
 resource_requirements:
   - resource_type: labor_bot_general
-    qty: 0.3
+    amount: 0.3
     unit: hr
 energy_model:
-  total_energy_kwh: 0.1
+  type: fixed_kWh
+  value: 0.1
+  notes: Bench-top assembly energy for fixtures, fans, and small tools.
 time_model:
-  total_time_hr: 0.3
+  type: fixed_time
+  hr_per_batch: 0.3
+  notes: Apply TIM, mount heat sink, fasten/clip, and inspect.
 notes: "Installation of heat sink for thermal management of electronic components. Process: (1) Clean component and heat sink mating surfaces, (2) Apply thermal interface material (thermal paste, thermal pad, or phase-change material), (3) Mount heat sink using spring clips, screws, or adhesive, (4) Verify good thermal contact and mechanical retention. Thermal interface fills microscopic air gaps to improve heat transfer. Used for power transistors, voltage regulators, CPUs, power supplies, and motor controllers. Reduces junction temperature and increases component reliability. Proper installation critical for thermal performance."

@@ -1,0 +1,23 @@
+id: sensor_calibration_v0
+kind: process
+name: Sensor calibration (basic)
+layer_tags:
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - test_equipment_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.2
+  notes: Bench power and signal conditioning during calibration.
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Fixture setup, calibration run, and documentation.
+notes: Calibrate basic sensors (temperature, pressure, atmosphere) using reference instruments and fixtures; includes adjustment and verification steps.
+

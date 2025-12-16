@@ -1,0 +1,23 @@
+id: recipe_machine_formation_rack_v0
+target_item_id: formation_rack
+variant_id: v0
+steps:
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Fabricate rack frame and mounts for power modules and harness routing."
+  - process_id: enclosure_assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Install power modules, harnesses, cooling, and control unit in rack."
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Wire channels, connectors, sensors, and power input/output."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Run formation cycle test on sample cells to verify current/voltage control."
+assumptions: Uses imported control electronics; power modules coarse but adequate for NiFe formation.
+notes: Battery formation rack assembly for charging/cycling cells during formation.

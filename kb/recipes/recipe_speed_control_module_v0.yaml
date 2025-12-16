@@ -1,0 +1,18 @@
+id: recipe_speed_control_module_v0
+target_item_id: speed_control_module
+variant_id: v0
+steps:
+  - process_id: pcb_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble control PCB and power stage for variable-speed drive."
+  - process_id: enclosure_assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Mount PCB, heatsink, connectors, and controls into enclosure."
+  - process_id: calibration_and_test_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Bench-test speed control, current limit, and safety features."
+assumptions: Uses imported compute; power stage assembled locally.
+notes: Speed control module for variable-speed motor applications.

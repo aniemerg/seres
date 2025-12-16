@@ -1,0 +1,28 @@
+id: temperature_control_v0
+kind: process
+name: Temperature hold and control
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: molten_material_or_preform
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: molten_material_or_preform
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - casting_furnace
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.25
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.8
+  notes: "Furnace/holding power to maintain melt temperature for ~30 minutes"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "Temperature soak/hold before forming or pouring"
+notes: Maintain molten material at target temperature to stabilize viscosity before casting or forming. Batch hold step; assumes upstream melting energy captured separately.

@@ -1,0 +1,22 @@
+id: sealing_and_assembly_basic_v0
+kind: process
+name: Sealing and assembly (basic)
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.2
+  notes: "Bench tools and checks"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+  notes: "Seal installation and assembly"
+notes: Install seals and assemble components requiring sealing (e.g., hydraulic cylinders, pumps); includes cleanliness checks.

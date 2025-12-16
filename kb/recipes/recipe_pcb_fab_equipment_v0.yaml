@@ -1,0 +1,18 @@
+id: recipe_pcb_fab_equipment_v0
+target_item_id: pcb_fab_equipment
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble exposure unit, drilling station, and mount tanks/trays with supports."
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Wire UV unit, heaters/agitation for tanks, and controls."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.8
+    labor_hours: 0.8
+    notes: "Test exposure timing, agitation/heating, and drill operation."
+assumptions: Bench-scale PCB fab; chemical bath ventilation reused; accuracy suitable for 0.2-0.5 mm traces.
+notes: Assembly of PCB fabrication equipment set (exposure, etch/develop, drill, tinning).

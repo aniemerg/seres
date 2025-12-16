@@ -1,0 +1,18 @@
+id: recipe_insulated_part_or_wire_v0
+target_item_id: insulated_part_or_wire
+variant_id: v0
+steps:
+  - process_id: wire_drawing_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Draw copper or aluminum wire to required gauge"
+  - process_id: plastic_extrusion_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Extrude polymer insulation over conductor"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Test insulation resistance and verify dimensions"
+assumptions: Insulated wire produced by extruding polymer insulation over drawn conductor. Can be single conductor or multi-conductor cable. Insulation material depends on voltage and temperature requirements.
+notes: Insulated wire and cable for electrical distribution and control wiring. Critical component for all electrical systems. Higher voltage cables require thicker insulation and better dielectric materials.

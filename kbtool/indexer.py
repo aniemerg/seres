@@ -35,6 +35,8 @@ def _infer_kind(path: Path, data: dict) -> Optional[str]:
     if kind:
         return kind
     parts = path.parts
+    if "seeds" in parts:
+        return "seed"
     if "processes" in parts:
         return "process"
     if "recipes" in parts:
@@ -62,7 +64,7 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
             return
         unresolved.append({"ref_string": text, "field_path": field_path})
 
-    if kind == "process":
+    if kind in ("process", "seed"):
         for field_name in ("inputs", "outputs", "byproducts"):
             for entry in data.get(field_name, []) or []:
                 item_id = entry.get("item_id") or entry.get("id")
@@ -187,6 +189,7 @@ def build_index() -> Dict[str, dict]:
     machine_capabilities: Dict[str, List[str]] = {}  # machine_id -> capabilities
     recipe_targets: Set[str] = set()  # items that have recipes
     invalid_recipes: List[dict] = []
+    seed_references: Dict[str, List[str]] = {}  # item_id -> list of seed file ids that reference it
     kb_files = sorted(KB_ROOT.glob("**/*.yaml"))
 
     for path in kb_files:
@@ -219,6 +222,14 @@ def build_index() -> Dict[str, dict]:
                 machine_capabilities[entry_id] = caps
 
         refs_out, unresolved, invalid_steps = _collect_refs(kind, data)
+
+        # Track seed file references for work queue
+        if kind == "seed":
+            for ref_id in refs_out:
+                if ref_id not in seed_references:
+                    seed_references[ref_id] = []
+                seed_references[ref_id].append(entry_id)
+
         for u in unresolved:
             u.update({"owner_id": entry_id, "owner_kind": kind, "file": str(path)})
         unresolved_refs.extend(unresolved)
@@ -332,7 +343,8 @@ def build_index() -> Dict[str, dict]:
 
     _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
-        items_without_recipes, missing_fields, orphan_resources, invalid_recipes
+        items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
+        seed_references
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
@@ -349,6 +361,7 @@ def _update_work_queue(
     missing_fields: List[dict],
     orphan_resources: List[dict],
     invalid_recipes: List[dict],
+    seed_references: Dict[str, List[str]],
 ) -> None:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -376,12 +389,16 @@ def _update_work_queue(
 
     # Referenced but not defined
     for ref_id in sorted(referenced_only):
+        context = {}
+        # Add seed file info if this item was referenced by a seed file
+        if ref_id in seed_references:
+            context["seed_files"] = seed_references[ref_id]
         gap_items.append(
             {
                 "id": f"referenced_only:{ref_id}",
                 "kind": "gap",
                 "reason": "referenced_only",
-                "context": {},
+                "context": context,
                 "item_id": ref_id,
                 "gap_type": "referenced_only",
             }

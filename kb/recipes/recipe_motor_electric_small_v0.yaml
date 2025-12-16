@@ -1,0 +1,20 @@
+id: recipe_motor_electric_small_v0
+target_item_id: motor_electric_small
+variant_id: v0
+steps:
+  - process_id: lamination_stamping_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Stamp stator/rotor laminations from electrical steel."
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.0
+    labor_hours: 0.8
+    notes: "Wind copper coils for stator (and rotor if wound rotor) per design."
+  - process_id: motor_final_assembly_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble laminations, shaft, bearings, housing, and terminal box; perform basic spin test."
+assumptions: Uses stamped laminations; bearings imported; motor_final_assembly_v0 to be detailed.
+notes: Small electric motor assembly (0.5-2 kW class).

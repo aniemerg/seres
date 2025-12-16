@@ -1,0 +1,22 @@
+id: recipe_glass_forming_tools_v0
+target_item_id: glass_forming_tools
+variant_id: v0
+steps:
+  - process_id: forging_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.0
+    machine_hours: 1.0
+    notes: Forge steel tool blanks for tweezers, shears, jacks, and punties from bar stock.
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 0.5
+    machine_hours: 1.0
+    notes: Grind edges, true jaws, and add threaded/bolted joints; light machining of graphite paddles/marvers.
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.75
+    labor_hours: 0.75
+    machine_hours: 0.25
+    notes: Assemble handles, fasteners, and graphite inserts; fit and align tool set as a kit.
+assumptions: |
+  Steel stock bar/billet is available for forged components; graphite paddles/blocks are supplied as blanks and lightly machined before assembly. Fasteners/grips are generic hardware. Mass target ~5 kg for the full tool set.
+notes: Coarse three-step route from steel stock to finished glass-forming hand tool kit; refine with detailed BOM and heat treatment later.

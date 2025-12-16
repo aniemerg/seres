@@ -1,29 +1,36 @@
 # Validation Report (v0)
 
 ## Counts by kind
-- bom: 101
-- machine: 110
-- material: 89
-- part: 378
-- process: 139
-- recipe: 503
+- bom: 121
+- machine: 129
+- material: 104
+- part: 450
+- process: 177
+- recipe: 642
 - resource: 2
-- resource_type: 40
+- resource_type: 43
 - scenario: 1
-- unknown: 153
+- seed: 2
+- unknown: 105
 
 ## Items without recipes (will be imports)
-Total: 80 items need recipes or import designation
-- machine: 16
-- material: 18
-- part: 46
+Total: 49 items need recipes or import designation
+- machine: 9
+- material: 10
+- part: 30
 
 See `out/missing_recipes.jsonl` for details.
 
+## Missing required fields
+Total: 10 missing fields
+- bom: 10
+
+See `out/missing_fields.jsonl` for details.
+
 ## Missing data (null values)
-Total: 236 null fields
-- bom: 25
-- process: 211
+Total: 243 null fields
+- bom: 31
+- process: 212
 
 See `out/null_values.jsonl` for details.
 

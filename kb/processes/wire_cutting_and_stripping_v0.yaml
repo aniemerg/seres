@@ -1,0 +1,30 @@
+id: wire_cutting_and_stripping_v0
+kind: process
+name: Wire cutting and stripping
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cut_wire_lengths
+    qty: 0.98
+    unit: kg
+requires_ids:
+  - wire_stripper_set
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.3
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Benchtop cutters/strippers power draw; mostly manual"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.3
+  setup_hr: 0.05
+  notes: "Measure, cut, strip, tin ends as needed"
+notes: Cutting and stripping insulated wire to length for harness and panel assembly; small losses assumed in trimming.

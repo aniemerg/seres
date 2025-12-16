@@ -77,6 +77,8 @@ class Process(_BaseModel):
     name: Optional[str] = None
     kind: str = "process"
     est_time_hr: Optional[float] = None
+    alternatives: List[str] = Field(default_factory=list)
+    dedupe_candidate: Optional[bool] = None
     inputs: List[Quantity] = Field(default_factory=list)
     outputs: List[Quantity] = Field(default_factory=list)
     byproducts: List[Quantity] = Field(default_factory=list)
@@ -98,6 +100,9 @@ class Item(_BaseModel):
     bom: Optional[str] = None
     material_class: Optional[str] = None
     density: Optional[float] = None
+    alternatives: List[str] = Field(default_factory=list)
+    dedupe_candidate: Optional[bool] = None
+    preferred_variant: Optional[str] = None  # default recipe variant hint
     notes: Optional[str] = None
     capabilities: List[str] = Field(default_factory=list)
 
@@ -117,6 +122,8 @@ class Recipe(_BaseModel):
     id: str
     target_item_id: str
     variant_id: Optional[str] = None
+    alternatives: List[str] = Field(default_factory=list)
+    dedupe_candidate: Optional[bool] = None
     steps: List["RecipeStep"] = Field(default_factory=list)
     assumptions: Optional[str] = None
     notes: Optional[str] = None

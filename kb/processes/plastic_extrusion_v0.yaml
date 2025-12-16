@@ -1,0 +1,28 @@
+id: plastic_extrusion_v0
+kind: process
+name: Plastic extrusion (basic)
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: plastic_pellets
+    qty: null
+    unit: kg
+outputs:
+  - item_id: extruded_plastic_profile
+    qty: null
+    unit: kg
+requires_ids:
+  - plastic_extruder
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "Extruder heating and drive energy per kg"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.05
+  notes: "Throughput including changeover"
+notes: Basic plastic extrusion of pellets into profiles/film; assumes simple die and cooling section.

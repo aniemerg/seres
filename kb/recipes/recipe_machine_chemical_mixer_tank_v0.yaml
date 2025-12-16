@@ -1,0 +1,22 @@
+id: recipe_machine_chemical_mixer_tank_v0
+target_item_id: chemical_mixer_tank
+variant_id: v0
+steps:
+  - process_id: sheet_metal_cutting_v0
+    est_time_hr: 2.0
+    labor_hours: 1.5
+    machine_hours: 1.5
+    notes: Cut shell and head panels plus baffles and nozzle plates.
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.2
+    machine_hours: 1.2
+    notes: Weld shell seams, nozzles, and mounting pads; attach legs/brackets.
+  - process_id: pressure_testing_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    machine_hours: 0.3
+    notes: Leak/pressure test completed tank before service.
+assumptions: Agitator motor/gearbox imported initially; focus on tank fabrication. Seals/gaskets assumed available. Replace with detailed BOM when ready.
+notes: Baseline fabrication route for a small mixer tank with welded shell and leak test; agitator and controls are out-of-scope for now.
+

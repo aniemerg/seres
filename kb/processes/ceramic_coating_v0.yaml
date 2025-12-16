@@ -1,0 +1,22 @@
+id: ceramic_coating_v0
+kind: process
+name: Ceramic coating application (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.6
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 1.0
+  notes: Spray/dip application with low-temp cure or bake.
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Surface prep, coating, flash-off, and cure.
+notes: Apply ceramic or refractory coating to parts for corrosion/heat protection; assumes low-to-moderate temperature cure in an oven or kiln. Replace with domain-specific parameters when substrate and coating are known.
+

@@ -1,0 +1,22 @@
+id: calibration_and_test_basic_v0
+kind: process
+name: Calibration and test (basic)
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - test_equipment_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.8
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.2
+  notes: "Test equipment usage"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Calibration and functional testing"
+notes: Basic calibration and functional testing for electronic instruments or assemblies.

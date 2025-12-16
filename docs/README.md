@@ -36,15 +36,69 @@ These three documents are **mandatory prerequisites** for contributing to the kn
 - Workflow loop:
   1) Pop next: `.venv/bin/python -m kbtool queue pop`.
   2) Implement one item (add YAML/recipe/process/etc.). Prefer ≥3-step recipes with time/labor/machine-hours when possible. Reference missing processes explicitly if needed so they queue.
-  3) Run index: `.venv/bin/python -m kbtool index`.
-  4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`).
-  5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+ 3) Run index: `.venv/bin/python -m kbtool index`.
+ 4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`).
+ 5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+
+## Dedupe Queue (tool consolidation workflow)
+- Separate file: `out/dedupe_queue.jsonl`; mirror commands:
+  - Lease: `.venv/bin/python -m kbtool dedupe lease --agent <name> [--ttl 900]`
+  - Complete/Release: `.venv/bin/python -m kbtool dedupe complete|release --id <id> --agent <name>`
+  - GC/list: `.venv/bin/python -m kbtool dedupe gc|ls`
+- Add tasks: `.venv/bin/python -m kbtool dedupe add --file <json_or_jsonl>` (entries need `id` and optional `kind`, `reason`, `candidate_ids`, `notes`, `hints`, `refs`, `category`).
+- Suggested staging for add files: drop JSON/JSONL under `dedupe_tasks/` and add via the CLI for auditability.
+- Seeding: manual/agent review (e.g., `out/reports/inventory.md`); no auto-population yet.
+- Decisions and precedents: log in `docs/dedupe_decisions.md`; annotate items with `alternatives`/`dedupe_candidate` (to be adopted as schema fields).
+
+## Seed Files (System-Level Roadmaps)
+
+**Seed files** are special `kind: seed` YAML files in `kb/seeds/` that define large subsystems and seed the work queue with all their required components.
+
+### What is a Seed File?
+- A seed file has `kind: seed` and lists all items needed for a complete subsystem in `requires_ids`
+- When the indexer runs, all referenced items become work queue entries
+- Seed files act as "roadmaps" that break down large systems into manageable work items
+
+### Seed File Context in Work Queue
+When you lease a work item, check the `context.seed_files` field:
+```json
+{
+  "id": "referenced_only:battery_cell_nife",
+  "context": {
+    "seed_files": ["battery_system_nife_v0", "thermionic_system_roadmap_v0"]
+  }
+}
+```
+
+**If `seed_files` is present**, read the corresponding design documents:
+- `battery_system_nife_v0` → Read `design/battery-design.md`
+- `thermionic_system_roadmap_v0` → Read `design/solar_thermionics_report.md`
+
+The seed file's `notes` section contains worker instructions and references to technical documentation.
+
+### Current Seed Files
+- **`kb/seeds/battery_system_nife_v0.yaml`** - Nickel-Iron battery manufacturing system
+  - Technical specs: `design/battery-design.md`
+  - ~40 items to implement
+- **`kb/seeds/thermionic_system_roadmap_v0.yaml`** - Solar thermionic power generation
+  - Technical specs: `design/solar_thermionics_report.md`
+  - Implementation plan: `.claude/plans/bright-wondering-pearl.md`
+  - ~67 items to implement
+
+### Why Seed Files Matter
+- They provide **context** for why an item is needed
+- They link to **technical documentation** with specifications
+- They ensure **coordinated implementation** of subsystems
+- They prevent working on orphan items disconnected from system goals
+
+**Always check `context.seed_files` when working queue items** - it tells you which design documents to consult for technical specifications.
 
 ## Recipes (breaking schema)
 - Steps must be objects per `kbtool.models.RecipeStep` (`process_id`, optional time/labor/machine fields).
 - Processes may include `est_time_hr` and `resource_requirements` with `amount`+`unit` (use `hr`).
 - Aim for ≥3 steps per recipe; include mold prep/finishing where applicable; use manual/assembly processes for glue work.
 - If a needed process does not exist, reference it anyway (it will queue as `referenced_only`).
+- Multiple variants can live in the same recipe file (e.g., `variant_id: simple`, `variant_id: additive`, `variant_id: precision`). Use a `preferred_variant` hint on the item to mark the default/simple path (schema update pending; follow convention in notes until field lands).
 
 ## Generic Processes/Resources to Reuse
 - Assembly: `assembly_basic_v0` (needs `assembly_tools_basic`, labor).

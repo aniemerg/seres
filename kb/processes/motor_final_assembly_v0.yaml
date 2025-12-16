@@ -1,0 +1,22 @@
+id: motor_final_assembly_v0
+kind: process
+name: Motor final assembly (basic)
+layer_tags:
+  - layer_5
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.8
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.2
+  notes: "Bench tools and test energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Assemble rotor/stator, bearings, housing, and test run"
+notes: Assemble electric motor components, install bearings, and perform basic spin test.

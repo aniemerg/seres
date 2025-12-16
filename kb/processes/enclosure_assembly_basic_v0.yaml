@@ -1,0 +1,22 @@
+id: enclosure_assembly_basic_v0
+kind: process
+name: Enclosure assembly (basic)
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Hand tools and small fixtures"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+  notes: "Mount components in enclosure and secure"
+notes: Basic assembly of electronic or mechanical components into enclosures.

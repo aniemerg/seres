@@ -1,0 +1,24 @@
+id: soldering_basic_v0
+kind: process
+name: Soldering (basic)
+layer_tags:
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_tools_basic
+  - test_equipment_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.6
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.3
+  notes: Soldering station power and fume extraction.
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.6
+  notes: Component prep, soldering, and inspection.
+notes: Basic soldering and rework for electronics or wiring; includes tinning, joint formation, and continuity checks. Placeholder pending detailed solder/material selection.
+

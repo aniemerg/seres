@@ -1,0 +1,36 @@
+id: welding_structural_v0
+kind: process
+name: Structural welding and frame assembly
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: cut_parts
+    qty: 1.05
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: welded_fabrications
+    qty: 1.05
+    unit: kg
+requires_ids:
+  - welding_power_supply
+  - welding_tools_set
+  - fixturing_table
+  - filler_material
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.6
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.2
+  notes: "arc welding for structural steel; mix of tack, root, and fill passes"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.6
+  setup_hr: 0.1
+  notes: "fit-up, clamping, multi-pass welding, and post-weld cleanup"
+notes: Structural welding of frames and heavy assemblies. Covers fit-up of cut steel members, tack welds, full-penetration passes, and inspection/cleanup suitable for machine bases and support structures.

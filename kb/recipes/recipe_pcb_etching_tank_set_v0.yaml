@@ -1,0 +1,22 @@
+id: recipe_pcb_etching_tank_set_v0
+target_item_id: pcb_etching_tank_set
+variant_id: v0
+steps:
+  - process_id: plastic_extrusion_v0
+    est_time_hr: 1.5
+    labor_hours: 0.5
+    machine_hours: 1.5
+    notes: Extrude or form plastic panels/tubing for tanks and plumbing.
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 0.8
+    labor_hours: 0.5
+    machine_hours: 0.8
+    notes: Cut panels, drill ports, and prep fittings/heater mounts.
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    machine_hours: 0.4
+    notes: Assemble tanks, plumbing, heater mounts, and agitation fixtures.
+assumptions: Uses plastic stock (e.g., HDPE/PP sheets) plus heaters/pumps imported; chemical compatibility and seals to be refined.
+notes: Coarse fabrication path for a PCB etching/develop/rinse tank set; refine with BOM and heater/pump selections later.
+

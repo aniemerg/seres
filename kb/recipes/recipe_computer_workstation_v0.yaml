@@ -1,0 +1,18 @@
+id: recipe_computer_workstation_v0
+target_item_id: computer_workstation
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Install computer core into enclosure, mount cooling, and wire power."
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Connect peripherals, check power delivery, and cable management."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Power-on self-test and basic I/O verification."
+assumptions: Compute imported; minimal local fabrication; enclosure generic.
+notes: Assembly of imported compute core with local peripherals into a workstation.

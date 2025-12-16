@@ -1,0 +1,26 @@
+id: crushing_and_grinding_v0
+kind: process
+name: Crushing and grinding (basic)
+layer_tags:
+  - layer_2
+  - layer_3
+inputs: []
+outputs: []
+requires_ids:
+  - crusher_basic
+  - ball_mill_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: Crushing plus milling power per kg feed.
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.4
+  setup_hr: 0.2
+  notes: Includes loading, crushing, milling, and cleanup.
+notes: Combined coarse crushing and fine grinding of feedstock (ore/regolith) to prepare for beneficiation or processing. Replace with domain-specific throughputs as data improves.
+

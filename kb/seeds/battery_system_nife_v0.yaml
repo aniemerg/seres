@@ -1,0 +1,229 @@
+id: battery_system_nife_v0
+kind: seed
+name: "Nickel-Iron Battery System - Implementation Roadmap"
+layer_tags:
+  - layer_7
+
+# IMPORTANT: This is a roadmap/stub file to seed the work queue.
+# Technical specifications in: design/battery-design.md
+# This file seeds the Ni-Fe battery manufacturing system
+
+inputs:
+  - item_id: iron_powder_or_sheet
+    qty: null
+    unit: kg
+
+outputs:
+  - item_id: battery_pack_large_nife
+    qty: null
+    unit: unit
+
+# All items needed for complete Ni-Fe battery system
+# When indexer runs, these will create work queue items for workers to complete
+requires_ids:
+  # === MATERIALS (Layer 0) ===
+  # Source: design/battery-design.md - "Material sourcing analysis" section
+  - iron_powder_or_sheet                    # Fe from ilmenite reduction (lunar-extractable)
+  - nickel_compound_active_material          # Ni(OH)2 precursor (import early)
+  - conductive_additive                      # Carbon black / graphite
+  - binder_simple                            # PTFE or similar (import early)
+  - current_collector_nickel_or_steel_mesh   # Mesh for electrode support
+  - potassium_hydroxide                      # KOH for electrolyte (import early)
+  - deionized_water                          # H2O (import until volatiles processing)
+  - separator_robust                         # Cellulose / ceramic / simple polymer
+  - battery_cell_casing_metal                # Steel/aluminum casing
+
+  # === BATTERY PARTS (Layer 0) ===
+  # Source: design/battery-design.md - "Process flow" sections
+  - electrodes_nife_set                      # Fabricated Ni/Fe electrodes
+  - electrolyte_koh_solution                 # Mixed KOH aqueous solution
+  - battery_cell_nife                        # Assembled but not formed
+  - battery_cell_nife_formed                 # Formation-cycled cell
+  - battery_pack_large_nife                  # Complete 500kg pack with BMS
+
+  # === MACHINES (Layer 1) ===
+  # Source: design/battery-design.md - "Equipment list" section
+  - powder_mill_and_mixer                    # 200 kg, 5 kg/hr, 2 kW
+  - hydraulic_press                          # 500 kg, 50 electrodes/hr, 3 kW
+  - low_temp_oven                            # 300 kg, 10 kg/batch, 5 kW
+  - chemical_mixer_tank                      # 150 kg, 20 L/hr, 1 kW
+  - cell_sealer_station                      # 250 kg, 30 cells/hr, 2 kW
+  - formation_rack                           # 400 kg, 2 kW continuous, 20 cells
+
+  # === MANUFACTURING PROCESSES ===
+  # Source: design/battery-design.md - "Process flow with quantitative data"
+  - electrode_fabrication_nife               # Ni(OH)2 cathode + Fe anode fabrication
+  - electrolyte_prep_koh                     # KOH solution mixing
+  - cell_assembly_and_seal_nife              # No dry room; pressurized shop only
+  - formation_cycle_nife                     # Conditioning cycles
+  - battery_pack_assembly_nife               # Pack-level assembly with BMS
+
+  # === RECIPES: MATERIALS ===
+  - recipe_electrodes_nife_set_v0
+  - recipe_electrolyte_koh_solution_v0
+  - recipe_battery_cell_nife_v0
+  - recipe_battery_cell_nife_formed_v0
+
+  # === RECIPES: PARTS ===
+  - recipe_battery_pack_large_nife_v0
+
+  # === RECIPES: MACHINES ===
+  - recipe_machine_powder_mill_and_mixer_v0
+  - recipe_machine_hydraulic_press_v0
+  - recipe_machine_low_temp_oven_v0
+  - recipe_machine_chemical_mixer_tank_v0
+  - recipe_machine_cell_sealer_station_v0
+  - recipe_machine_formation_rack_v0
+
+  # === BOMS ===
+  - bom_powder_mill_and_mixer_v0
+  - bom_hydraulic_press_v0
+  - bom_low_temp_oven_v0
+  - bom_chemical_mixer_tank_v0
+  - bom_cell_sealer_station_v0
+  - bom_formation_rack_v0
+
+  # === RESOURCES ===
+  - powder_milling
+  - hydraulic_pressing
+  - low_temp_heating
+  - chemical_mixing
+  - cell_sealing
+  - battery_formation
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.0
+  notes: "Net energy consumer - this is a roadmap file, not a real process"
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.0
+  notes: "Roadmap stub - no actual time model"
+
+notes: |
+  ═══════════════════════════════════════════════════════════════════════════
+  NICKEL-IRON BATTERY SYSTEM IMPLEMENTATION ROADMAP
+  ═══════════════════════════════════════════════════════════════════════════
+
+  PURPOSE: This file seeds the work queue with all items needed for the
+  complete Ni-Fe battery manufacturing system. When the indexer runs,
+  all items listed in requires_ids will appear as "referenced_only" gaps,
+  creating work queue items for workers to complete.
+
+  ═══════════════════════════════════════════════════════════════════════════
+  CRITICAL DOCUMENTS FOR WORKERS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  📋 TECHNICAL SPECIFICATIONS:
+     → design/battery-design.md
+
+     This comprehensive design document contains:
+     - Recommended battery chemistry (Ni-Fe aqueous rechargeable)
+     - Why Ni-Fe is chosen over Li-ion for lunar bootstrap
+     - Complete process flow with YAML-ready data
+     - Material sourcing analysis (lunar vs. import)
+     - Equipment list with mass estimates
+     - Provenance and confidence tags
+
+  ═══════════════════════════════════════════════════════════════════════════
+  SYSTEM OVERVIEW
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Nickel-Iron (Ni-Fe) aqueous rechargeable batteries are chosen for the
+  lunar seed factory bootstrap phase because:
+
+  • VACUUM-COMPATIBLE MANUFACTURING: Aqueous electrolyte can be handled in
+    pressurized workshop (no ultra-dry room needed like Li-ion)
+
+  • MANUFACTURING SIMPLICITY: No SEI formation complexity, no organic solvent
+    handling, no micron-perfect polymer separators
+
+  • MATERIALS PLAUSIBILITY: Fe is easy (from ilmenite); Ni is partial import
+    early but plannable; KOH requires K import early
+
+  • OPERATIONAL ROBUSTNESS: Tolerates abuse, long cycle life; lower Wh/kg is
+    acceptable for 500 kg packs on lunar haulers
+
+  TRADE-OFF: Lower energy density (~50 Wh/kg) vs. Li-ion (~150+ Wh/kg), but
+  much easier to close the manufacturing dependency loop. This aligns with
+  project goal: growth rate > performance optimization.
+
+  ENERGY FLOW:
+  Iron + Nickel Compounds + KOH Electrolyte → Ni-Fe Cell → Battery Pack
+  → Energy Storage for Mobile Equipment (excavators, haulers)
+
+  ═══════════════════════════════════════════════════════════════════════════
+  IMPLEMENTATION STATUS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Total items to implement: ~40 files
+  - Materials: 9
+  - Parts: 5
+  - Machines: 6
+  - BOMs: 6
+  - Processes: 5
+  - Recipes: ~10
+  - Resources: 6
+
+  Current status: Roadmap created, awaiting indexer run and worker deployment
+
+  ═══════════════════════════════════════════════════════════════════════════
+  WORKER INSTRUCTIONS
+  ═══════════════════════════════════════════════════════════════════════════
+
+  **BEFORE STARTING: READ design/battery-design.md COMPLETELY**
+
+  This document contains all the technical data you need:
+  - Process flow with quantitative estimates (mass, energy, time)
+  - Material sourcing decisions (what's lunar vs. import)
+  - Equipment specifications with masses
+  - Provenance and confidence tags for all numbers
+
+  1. LEASE a work item from the queue:
+     .venv/bin/python -m kbtool queue lease --agent <your-name>
+
+     Look for context.seed_files field - if it includes "battery_system_nife_v0",
+     you're working on a battery-related item!
+
+  2. READ the technical specifications:
+     - design/battery-design.md (REQUIRED - contains all technical data)
+
+  3. CREATE the file according to specifications:
+     - Follow YAML patterns from battery-design.md document
+     - Use lowercase_snake_case for IDs
+     - Base units: kg (mass), kWh (energy), hr (time)
+     - Include provenance tags: source + confidence level
+     - All numbers in battery-design.md are "educated_guess / low-medium confidence"
+       unless stated otherwise
+
+  4. KEY DESIGN DECISIONS (from battery-design.md):
+     - NO glove_box_or_dry_room required (unlike Li-ion)
+     - Manufacturing in pressurized_workshop is sufficient
+     - Atmosphere_required: "pressurized_air" (not vacuum, not inert gas)
+     - Early imports: Ni compounds, KOH, water, separators
+     - Lunar-extractable: Fe (from ilmenite reduction)
+
+  5. COMPLETE the work item:
+     .venv/bin/python -m kbtool queue complete --id <item-id> --agent <your-name>
+
+  6. COORDINATE via indexer:
+     - After completing several items, run: .venv/bin/python -m kbtool index
+     - This creates next layer's work items
+     - Continue until all ~40 files created
+
+  ═══════════════════════════════════════════════════════════════════════════
+  IMPORTANT NOTES
+  ═══════════════════════════════════════════════════════════════════════════
+
+  • This seed file represents the Ni-Fe variant (bootstrap chemistry)
+  • Li-ion variant is reserved for "growth-stage" after factory is established
+  • All quantitative data in battery-design.md should be treated as placeholders
+  • Label everything with proper provenance tags
+  • If uncertain, mark confidence as "low" and add notes explaining assumptions
+
+  ═══════════════════════════════════════════════════════════════════════════
+
+  Questions? Check design/battery-design.md or ask the user for clarification.
+
+  Let's build a lunar battery system! 🌙🔋
