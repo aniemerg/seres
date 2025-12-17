@@ -1,0 +1,29 @@
+id: roll_grinding_and_balancing_v0
+kind: process
+name: Roll grinding and balancing
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: rolling_mill_rolls_set
+    qty: 1.0
+    unit: set
+outputs:
+  - item_id: rolling_mill_rolls_set
+    qty: 1.0
+    unit: set
+requires_text:
+  - "roll-grinding lathe or cylindrical grinder"
+  - "dynamic balancing stand"
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 4.0
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 12.0
+  notes: "Motor power for heavy grinding passes on hardened rolls"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.5
+  notes: "Multiple grinding passes plus balancing checks for one roll pair"
+notes: "Precision grind roll diameters and journals, then dynamically balance the roll pair. Requires heavy grinder/lathe, dressing wheels, and balancing fixture."

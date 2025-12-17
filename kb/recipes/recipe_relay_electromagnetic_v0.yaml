@@ -1,0 +1,72 @@
+id: recipe_relay_electromagnetic_v0
+target_item_id: relay_electromagnetic_v0
+variant_id: v0
+steps:
+  - process_id: metal_stamping_process_v0
+    inputs:
+      - item_id: steel_sheet_1mm
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: relay_armature_and_frame
+        qty: 0.04
+        unit: kg
+    est_time_hr: 0.5
+    notes: Stamp armature, frame, and contact springs
+  - process_id: wire_winding_process_v0
+    inputs:
+      - item_id: wire_copper_magnet
+        qty: 0.02
+        unit: kg
+      - item_id: iron_core_laminated
+        qty: 0.03
+        unit: kg
+    outputs:
+      - item_id: relay_coil_assembly
+        qty: 0.05
+        unit: kg
+    est_time_hr: 1.0
+    notes: Wind coil on iron core for electromagnet
+  - process_id: contact_material_application_v0
+    inputs:
+      - item_id: relay_armature_and_frame
+        qty: 0.04
+        unit: kg
+      - item_id: silver_contact_material
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: contacts_with_silver
+        qty: 0.045
+        unit: kg
+    est_time_hr: 0.5
+    notes: Rivet or weld silver contact tips onto contact springs
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: relay_coil_assembly
+        qty: 0.05
+        unit: kg
+      - item_id: contacts_with_silver
+        qty: 0.045
+        unit: kg
+      - item_id: plastic_housing_molded
+        qty: 0.015
+        unit: kg
+      - item_id: spring_compression_small
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: relay_electromagnetic_v0
+        qty: 0.1
+        unit: kg
+    est_time_hr: 0.5
+    notes: Assemble coil, armature, contacts, spring into housing, test operation
+assumptions: |
+  Steel armature and frame provide magnetic path.
+  Copper wire coil on iron core generates magnetic field.
+  Silver contacts provide low resistance and resist arcing.
+  Spring returns armature when coil de-energized.
+notes: |
+  Manufacturing route for electromagnetic relay.
+  Simple electromechanical device using standard processes.
+  Suitable for control and power switching applications.

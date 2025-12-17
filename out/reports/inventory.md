@@ -4,18 +4,18 @@ Auto-generated inventory of all items in the knowledge base.
 
 ## Summary Statistics
 
-- **Total items:** 1776
+- **Total items:** 1822
 - **Bom:** 121
 - **Machine:** 129
 - **Material:** 104
-- **Part:** 450
-- **Process:** 177
-- **Recipe:** 642
+- **Part:** 451
+- **Process:** 179
+- **Recipe:** 645
 - **Resource:** 2
 - **Resource_type:** 43
 - **Scenario:** 1
-- **Seed:** 2
-- **Unknown:** 105
+- **Seed:** 3
+- **Unknown:** 144
 
 ## Bom
 
@@ -670,6 +670,7 @@ Auto-generated inventory of all items in the knowledge base.
 - Pipe threading tools (`pipe_threading_tools`)
 - Piping and fittings (thermal) (`piping_and_fittings_thermal`)
 - Piping and fittings set (`piping_and_fittings_set`)
+- Piping and valves set (`piping_and_valves_set`)
 - Plumbing system assembly (`plumbing_system_assembly`)
 - Potting curing oven (small) (`potting_curing_oven_small`)
 - Potting dispensers (`potting_dispensers`)
@@ -836,6 +837,7 @@ Auto-generated inventory of all items in the knowledge base.
 ## Process
 
 - 3D print SMA-based motor components (`process_3d_print_motor_sma_v0`)
+- Additive manufacturing (polymer) (`additive_manufacturing_polymer_v0`)
 - Alignment and testing (basic) (`alignment_and_testing_basic_v0`)
 - Annealing (basic) (`annealing_basic_v0`)
 - Annealing (basic) (`annealing_v0`)
@@ -994,6 +996,7 @@ Auto-generated inventory of all items in the knowledge base.
 - Stress relief (basic) (`stress_relief_basic_v0`)
 - Stress relief annealing (basic) (`stress_relief_annealing_v0`)
 - Structural welding and frame assembly (`welding_structural_v0`)
+- Support removal and cleanup (`support_removal_and_cleanup_v0`)
 - Surface finishing (`surface_finishing_v0`)
 - Surface finishing (basic) (`surface_finishing_basic_v0`)
 - Surface grinding (precision) (`surface_grinding_precision_v0`)
@@ -1115,6 +1118,7 @@ Auto-generated inventory of all items in the knowledge base.
 - recipe_control_circuit_board_power_v0 (`recipe_control_circuit_board_power_v0`)
 - recipe_control_components_v0 (`recipe_control_components_v0`)
 - recipe_control_compute_module_v0 (`recipe_control_compute_module_v0`)
+- recipe_control_panel_basic_additive_v0 (`recipe_control_panel_basic_additive_v0`)
 - recipe_control_panel_basic_v0 (`recipe_control_panel_basic_v0`)
 - recipe_converter_housing_assembly_v0 (`recipe_converter_housing_assembly_v0`)
 - recipe_conveyor_belt_loop_v0 (`recipe_conveyor_belt_loop_v0`)
@@ -1176,6 +1180,7 @@ Auto-generated inventory of all items in the knowledge base.
 - recipe_electronic_components_set_v0 (`recipe_electronic_components_set_v0`)
 - recipe_encapsulation_station_v0 (`recipe_encapsulation_station_v0`)
 - recipe_enclosure_electrical_medium_v0 (`recipe_enclosure_electrical_medium_v0`)
+- recipe_enclosure_small_additive_v0 (`recipe_enclosure_small_additive_v0`)
 - recipe_enclosure_small_v0 (`recipe_enclosure_small_v0`)
 - recipe_endplate_set_motor_v0 (`recipe_endplate_set_motor_v0`)
 - recipe_etching_chemicals_v0 (`recipe_etching_chemicals_v0`)
@@ -1457,6 +1462,7 @@ Auto-generated inventory of all items in the knowledge base.
 - recipe_pipe_threading_tools_v0 (`recipe_pipe_threading_tools_v0`)
 - recipe_piping_and_fittings_set_v0 (`recipe_piping_and_fittings_set_v0`)
 - recipe_piping_and_fittings_thermal_v0 (`recipe_piping_and_fittings_thermal_v0`)
+- recipe_piping_and_valves_set_import_v0 (`recipe_piping_and_valves_set_import_v0`)
 - recipe_piping_components_v0 (`recipe_piping_components_v0`)
 - recipe_polishing_station_v0 (`recipe_polishing_station_v0`)
 - recipe_polymer_printing_feedstock_v0 (`recipe_polymer_printing_feedstock_v0`)
@@ -1716,33 +1722,43 @@ Auto-generated inventory of all items in the knowledge base.
 ## Seed
 
 - Nickel-Iron Battery System - Implementation Roadmap (`battery_system_nife_v0`)
+- Paper-derived gap candidates seed (`papers_gap_seed_v0`)
 - Solar Thermionic Power System - Implementation Roadmap (`thermionic_system_roadmap_v0`)
 
 ## Unknown
 
 - air_bearing_assembly (`air_bearing_assembly`)
 - air_blower_industrial (`air_blower_industrial`)
+- analog_test_bench_neural_v0 (`analog_test_bench_neural_v0`)
 - bent_tube_sections (`bent_tube_sections`)
 - binder_simple (`binder_simple`)
 - blended_mixture (`blended_mixture`)
 - bom_cell_sealer_station_v0 (`bom_cell_sealer_station_v0`)
 - bom_vacuum_chamber_v0 (`bom_vacuum_chamber_v0`)
+- cacl2_electrolyte_recycle_v0 (`cacl2_electrolyte_recycle_v0`)
+- cartesian_gantry_assembler_v0 (`cartesian_gantry_assembler_v0`)
 - casting_or_fabrication_machine_frame_v0 (`casting_or_fabrication_machine_frame_v0`)
+- catalyst_regeneration_process_v0 (`catalyst_regeneration_process_v0`)
 - cathode_coating_application_v0 (`cathode_coating_application_v0`)
+- cathode_oxide_coating_v0 (`cathode_oxide_coating_v0`)
 - cell_assembly_and_seal_nife (`cell_assembly_and_seal_nife`)
 - cell_sealing (`cell_sealing`)
 - ceramic_press_or_mold_set (`ceramic_press_or_mold_set`)
+- ceramic_tube_socket (`ceramic_tube_socket`)
 - charging_system (`charging_system`)
 - chemical_purification_v0 (`chemical_purification_v0`)
 - chemical_reactor_basic (`chemical_reactor_basic`)
 - chemical_separation_equipment (`chemical_separation_equipment`)
 - chemical_treatment_v0 (`chemical_treatment_v0`)
+- cold_trap_module_v0 (`cold_trap_module_v0`)
 - compiled_firmware_binary (`compiled_firmware_binary`)
+- core_memory_threading_machine_v0 (`core_memory_threading_machine_v0`)
 - crimping_and_termination_v0 (`crimping_and_termination_v0`)
 - deionized_water (`deionized_water`)
 - door_hinge_assembly (`door_hinge_assembly`)
 - drilling_basic_v0 (`drilling_basic_v0`)
 - dust_collection_hood (`dust_collection_hood`)
+- dust_mitigation_coating_process_v0 (`dust_mitigation_coating_process_v0`)
 - electrode_fabrication_nife (`electrode_fabrication_nife`)
 - electrode_materials (`electrode_materials`)
 - electrodes_nife_set (`electrodes_nife_set`)
@@ -1750,6 +1766,8 @@ Auto-generated inventory of all items in the knowledge base.
 - electrolyte_prep_koh (`electrolyte_prep_koh`)
 - exhaust_gas_handling (`exhaust_gas_handling`)
 - extruded_plastic_profile (`extruded_plastic_profile`)
+- ferrite_toroid_sintering_v0 (`ferrite_toroid_sintering_v0`)
+- ffc_reactor_unit_v0 (`ffc_reactor_unit_v0`)
 - filtration_basic_v0 (`filtration_basic_v0`)
 - fine_powder (`fine_powder`)
 - finished_part (`finished_part`)
@@ -1759,38 +1777,55 @@ Auto-generated inventory of all items in the knowledge base.
 - gas_cylinder_argon_or_nitrogen (`gas_cylinder_argon_or_nitrogen`)
 - gas_flow_controller (`gas_flow_controller`)
 - gear_cutting_v0 (`gear_cutting_v0`)
+- generic_chemical_reactor_v0 (`generic_chemical_reactor_v0`)
+- getter_deposition_activation_v0 (`getter_deposition_activation_v0`)
+- glass_to_metal_seal_v0 (`glass_to_metal_seal_v0`)
 - graphite_molding_v0 (`graphite_molding_v0`)
+- hcl_regolith_preprocessing_v0 (`hcl_regolith_preprocessing_v0`)
+- heat_pipe_solar_receiver_v0 (`heat_pipe_solar_receiver_v0`)
 - heating_element_resistive (`heating_element_resistive`)
 - heating_furnace (`heating_furnace`)
+- high_temp_reactor_seal_material_v0 (`high_temp_reactor_seal_material_v0`)
 - hose_crimping_v0 (`hose_crimping_v0`)
 - humidity_sensor_set (`humidity_sensor_set`)
 - hydraulic_boom_assembly (`hydraulic_boom_assembly`)
 - hydraulic_control_valve_set (`hydraulic_control_valve_set`)
 - hydraulic_cylinder_large (`hydraulic_cylinder_large`)
 - hydraulic_pressing (`hydraulic_pressing`)
+- hydrogen_recycle_separator_v0 (`hydrogen_recycle_separator_v0`)
 - insulation_panel_high_temp (`insulation_panel_high_temp`)
 - iron_powder_or_sheet (`iron_powder_or_sheet`)
+- kovar_wiring_insulation_v0 (`kovar_wiring_insulation_v0`)
 - labor_bot_specialist (`labor_bot_specialist`)
 - lathe_headstock_simple (`lathe_headstock_simple`)
 - lathe_motor_and_drive (`lathe_motor_and_drive`)
+- lattice_builder_gantry_v0 (`lattice_builder_gantry_v0`)
 - linear_stage_xyz_precision (`linear_stage_xyz_precision`)
 - low_temp_oven (`low_temp_oven`)
+- lox_lh2_storage_tank_set (`lox_lh2_storage_tank_set`)
 - machined_part_raw (`machined_part_raw`)
 - machining_rough_v0 (`machining_rough_v0`)
+- magnetic_core_memory_tile (`magnetic_core_memory_tile`)
 - material_handling_equipment (`material_handling_equipment`)
 - material_preparation_equipment (`material_preparation_equipment`)
+- metal_powdering_process_v0 (`metal_powdering_process_v0`)
 - metal_sheet_or_plate (`metal_sheet_or_plate`)
 - metal_tubing_stock (`metal_tubing_stock`)
+- metal_wire_feed_production_v0 (`metal_wire_feed_production_v0`)
+- metalysis_ffc_reduction_v0 (`metalysis_ffc_reduction_v0`)
 - mixing_tank_medium (`mixing_tank_medium`)
 - molding_basic_v0 (`molding_basic_v0`)
 - molding_rubber_or_plastic_v0 (`molding_rubber_or_plastic_v0`)
+- nak_fill_and_seal_process_v0 (`nak_fill_and_seal_process_v0`)
+- neural_analog_tile (`neural_analog_tile`)
 - nickel_compound_active_material (`nickel_compound_active_material`)
 - oxygen_sensor_module (`oxygen_sensor_module`)
+- packed_bed_regeneration_process_v0 (`packed_bed_regeneration_process_v0`)
 - pcb_assembly_v0 (`pcb_assembly_v0`)
-- piping_and_valves_set (`piping_and_valves_set`)
 - plastic_extruder (`plastic_extruder`)
 - plastic_pellets (`plastic_pellets`)
 - polishing_head_assembly (`polishing_head_assembly`)
+- polymer_printed_part (`polymer_printed_part`)
 - position_sensor_set (`position_sensor_set`)
 - positioned_material_or_parts (`positioned_material_or_parts`)
 - potassium_hydroxide (`potassium_hydroxide`)
@@ -1815,14 +1850,25 @@ Auto-generated inventory of all items in the knowledge base.
 - recipe_machine_hydraulic_press_v0 (`recipe_machine_hydraulic_press_v0`)
 - recipe_machine_low_temp_oven_v0 (`recipe_machine_low_temp_oven_v0`)
 - recipe_machine_powder_mill_and_mixer_v0 (`recipe_machine_powder_mill_and_mixer_v0`)
+- regolith_brick_press_v0 (`regolith_brick_press_v0`)
+- regolith_sinter_block_process_v0 (`regolith_sinter_block_process_v0`)
+- robot_power_docking_coupler_v0 (`robot_power_docking_coupler_v0`)
 - sand_casting_large_v0 (`sand_casting_large_v0`)
 - sand_casting_medium_v0 (`sand_casting_medium_v0`)
 - sealing_bar_assembly (`sealing_bar_assembly`)
 - separator_robust (`separator_robust`)
 - sheet_metal_forming_v0 (`sheet_metal_forming_v0`)
+- solar_array_cleaning_brush_v0 (`solar_array_cleaning_brush_v0`)
 - spring_manufacturing_v0 (`spring_manufacturing_v0`)
 - tapping_hole_assembly (`tapping_hole_assembly`)
+- thermal_lance_ceramic_casting_v0 (`thermal_lance_ceramic_casting_v0`)
 - thermionic_vacuum_tube (`thermionic_vacuum_tube`)
+- truss_node_connector_set (`truss_node_connector_set`)
 - tube_bender (`tube_bender`)
+- tube_vacuum_sealing_v0 (`tube_vacuum_sealing_v0`)
 - ventilation_hood (`ventilation_hood`)
+- water_auger_dryer_ladi_v0 (`water_auger_dryer_ladi_v0`)
+- water_isru_train_recipe_v0 (`water_isru_train_recipe_v0`)
+- wire_arc_additive_machine_v0 (`wire_arc_additive_machine_v0`)
+- wire_arc_additive_process_v0 (`wire_arc_additive_process_v0`)
 

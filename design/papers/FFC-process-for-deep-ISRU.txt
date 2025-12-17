@@ -1,0 +1,1105 @@
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+IAC-17-D4.5.4x39364
+FFC CAMBRIDGE PROCESS AND METALLIC 3D PRINTING FOR DEEP IN-SITU RESOURCE
+UTILISATION – A MATCH MADE ON THE MOON
+A. Alex Ellerya*, Paul Lowingb, Priti Wanjarac, Mark Kirbyd, Ian Mellorb, Greg Doughtyb
+a
+
+Department of Mechanical and Aerospace Engineering, Carleton University, 1125 Colonel By Drive, Ottawa,
+Ontario, Canada, K1S 5B6, aellery@mae.carleton.ca
+b
+Metalysis Ltd, 2 Fairfield Park. Manvers Way, Wath upon Deame, Rotherham, UK, S63 5DB,
+paul.lowing@metalysis.com; ian.mellor@metalysis.com; greg.doughty@metalysis.com
+c
+National Research Council, Aerospace Structures Materials & Manufacturing, University of Montreal, 5145
+Decelles Avenue, Montreal, QC, Canada, H3T 2B2, Priti.Wanjara@cnrc-nrc.gc.ca
+d
+Renishaw Canada Ltd, 2196 Dunwin Drive, Mississauga, ON, Canada, L5L 1C7, mark.kirby@renishaw.com
+* Corresponding Author
+Abstract
+Most in-situ resource utilisation (ISRU) techniques proposed to date are focussed on the extraction of
+consumables requiring minimal processing for the support of human missions to the Moon or Mars. Water in
+particular has been the beguiling jewel to which we have been drawn. We define this as shallow ISRU to illustrate
+that its extraction requires minimal processing. We are interested in deep ISRU – investing in the hard problem of
+extraction and processing of material that permits us to create physical infrastructure on the Moon. We submit that a
+new approach to space exploration beckons in which deep ISRU permits the robotic construction of an entire
+automated infrastructure on the Moon at low cost. By leveraging the enormous resources available of the Moon, the
+cost of human lunar missions can be reduced substantially. Our hypothesis is that following resource acquisition by
+bucket wheel, comminution and electrostatic/magnetic beneficiation, lunar regolith can be subjected to the FFC
+Cambridge process followed by 3D printing using either selective laser sintering or electron beam freeform
+fabrication. The FFC Cambridge process is an electrolytic technique that can extract near pure metals from their
+oxide and silicate forms. The two lunar minerals on which we have focussed are anorthite (common in the highland
+regions) and ilmenite (common in the maria regions). From these two minerals, an entire suite of metals can be
+extracted in alloy form, or if subjected to prior purification methods, in pure form – Al, Ca, Si from anorthite and Fe
+and Ti from ilmenite in alloy forms, or pure Al from alumina, pure Ti from rutile and pure Si from silica. The CaCl 2
+electrolyte is recycled requiring only Cl import from Earth in salt form to replenish small losses. Furthermore, the
+output of the FFC Cambridge process is powder (or wire) suitable as input for powder metallurgy and metal 3D
+printing by electron beam freeform fabrication and selective laser sintering. Essentially, only two processes – FFC
+Cambridge and metal 3D printing – converts beneficiated raw material into final products. These two methods offer
+unprecedented capabilities in deep ISRU.
+Keywords: In-situ resource utilization, FFC Cambridge process, 3D printing
+1. Introduction
+For long duration life support systems, it is
+considered essential to recycle everything to maximise
+consumption efficiency and minimise waste – this is the
+closed ecological life support system (CELSS). The
+term ecology implies a closed recycling system to re-use
+consumables. For example, solid state electrolysis may
+be used to recover oxygen from carbon dioxide and
+water (artificial photosynthesis): 2CO2 → 2CO + O2 and
+2H2O → 2H2 + O2. A number of suitable solid state
+electrolytes include calcia-stabilised zirconia or yttriadoped ceria at 850oC with an electrical energy
+consumption of 250 W. However, current environment
+control and life support systems (ECLSS) do not offer
+full closed loop recycling. Both ECLSS and CELSS
+must be supplemented by in-situ resource utilisation
+(ISRU) to supply raw materials for consumption and to
+
+IAC-17-D4.5.4x39364
+
+replace inevitable losses. For this reason, most ISRU
+techniques proposed to date have been devoted to the
+supply of consumables – water and oxygen. This is
+shallow ISRU.
+Deep ISRU relates to more extensive use of space
+resources to support the in-situ construction,
+maintenance, repair and growth of infrastructure such as
+lunar habitats. Our interest is in building a selfreplicating machine on the Moon entirely from lunar
+resources. This imposes a severe objective of a near100% supply from in-situ resources. In fact, the scheme
+presented here requires the import of NaCl from Earth
+as a reagent (salt contingency). As humans begin to
+colonise the surface of the Moon and other planets, do
+we wish to bring our profligate habits with us? We have
+unfortunately begun by trailing our detritus into space
+up to GEO in the form of space debris. As we progress
+
+Page 1 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+beyond GEO to the Moon and other celestial bodies, we
+must commit to sustainable exploration.
+2. Lunar Geology
+Lunar rock and regolith is constructed from minerals
+and glasses [1]. The dominant lunar silicates are
+pyroxenes (Ca,Fe,Mg)2Si2O6, plagioclase feldspar
+(Ca,Na)(Al2Si)4O8, and olivine (Mg,Fe)2SiO4. The
+highlands are dominated by plagioclase, anorthite
+(CaAl2Si2O8) with some pyroxene (Mg,Ca,Fe)SiO3 and
+olivine (Mg,Fe)2SiO4. The mare is basaltic with varying
+proportions of plagioclase, pyroxene and olivine with up
+to 20% ilmenite FeTiO3 and/or 10% spinel
+(Fe,Mg)(Cr,Al,Fe,Ti)2O4. Many minerals exhibit a
+range of compositions which are flanked by two or
+more end members. Lunar olivine is concentrated in
+mare soil being of low abundance in highland soils.
+Lunar olivine varies from Mg2SiO4 (forsterite) to
+Fe2SiO4 (fayalite) with intermediate solid solutions
+(Mg,Fe)2SiO4 and is enriched in Cr compared to
+terrestrial olivines. Lunar plagioclase is dominated by
+the calcium end member, anorthite (CaAl2Si2O8) but
+depleted in the sodium end member, albite (NaAlSi3O8).
+The lunar highlands represent the original lunar crust of
+anorthosite rock dominated by the mineral anorthite
+CaAl2Si2O8, i.e. rich in Ca and Al. Lunar mare represent
+more recent magma outflows of basalt comprising
+plagioclase (primarily anorthite), orthopyroxene
+(Mg,Fe)SiO3, clinopyoxene Ca(Fe,Mg)Si2O6, olivine
+(Mg,Fe)2SiO4, and ilmenite FeTiO3, i.e. rich in Fe, Ti
+and Mg. Pyroxene has three end members MgSiO3
+(enstatite), CaSiO3 (wollastonite), and FeSiO3
+(ferrosilite). Orthopyroxenes have the two end
+members, enstatite and ferrosilicate. All other pyroxenes
+are clinopyroxenes. Pyroxenes are ubiquitous in lunar
+regolith – primarily, clinopyroxene in the mare regions
+but both clinopyroxene and orthopyroxenes occur in the
+highlands. Magnesium pyroxenes and enstatite are
+depleted compared to Earth. KREEP rocks are enriched
+plagioclases that occur in localised regions. Sodium
+feldspars and potassium feldspars are rare as are
+granites, silica, clays, micas and amphiboles which
+require water for their formation. Metal oxides are
+abundant especially in the mare basalts. The Fe content
+of mare basalt feldspar is much higher than highland
+anorthosite feldspar. The commonest oxide is ilmenite
+(Fe,Mg)TiO3 followed by spinels. Spinels are present
+but only as minor constituents of lunar soil. Spinel endmembers include spinel (MgAl2O4), ulvospinel
+(Fe2TiO4), chromite (FeCr2O4) and hercynite (FeAl2O4).
+Ti-rich basalts have higher than 6% TiO2 by weight in
+the form of ilmenite and are found in Oceanus
+Procellarum and Mare Tranquillitatis on the
+nearside.Iron metal occurs widely in lunar regolith but
+at low concentrations <1% as Fe or NiFe nanophase
+grains from meteoritic sources. Troilite is ubiquitous but
+
+IAC-17-D4.5.4x39364
+
+in low concentrations and is associated with ilmenite
+and spinel. This yields a characteristic elemental
+abundance in Table 1.
+Solar wind has impregnated the lunar regolith with
+volatiles. Lunar regolith comprises a repository of solar
+wind-derived volatiles in the upper 2-3 m due to
+gardening by impacts [2]. The abundance of solar wind
+volatiles in regolith is directly correlated with the
+duration of its exposure (maturity) [3]. Maturity is
+indicated by the degree of glass agglutination and
+degree of nanophase Fe0 metallicity to FeO. Carbon
+mixture comprises primarily CO and smaller but similar
+amounts of CO2 and CH4. Nitrogen is primarily in the
+form of N2 in similar amounts to CH4. Sulphur is
+released on heating as both H2S and SO2. All F and Cl
+are released as HF and HCl respectively. Noble gases
+such as Ar are in trace amounts (3.1x10-4 cm3 STP/g for
+36
+Ar). 3He enrichment in the smallest grains of high
+TiO2 (ilmenite) deposits by a factor of 100 favours prior
+separation of the <20 μm ilmenite fraction [4]. He3 is
+regarded as potentially valuable as a nuclear fusion fuel
+for D/3He reaction as it generates fewer neutrons than
+other fusion fuels. It is rare on Earth (estimated at
+around 2 x 104 kg) – the global lunar inventory is
+estimated at 6.5 x 108 kg [5]. Heating to 700oC yields
+releases almost all the volatiles. Fractional distillation
+requires a vertical fractionating column to use density as
+a means of component separation [6]. The mixture is
+heated at the bottom of the column from which vapours
+rise and condense towards the top of the column. The
+column may be packed or plated with sieve trays to
+permit vapour flow upwards but reducing liquid flow
+downwards. Although lunar gravity is one-sixth that of
+Earth, the vapour-liquid thermodynamics within the
+fractionating column is the same such that gas velocity
+is given by:
+
+v  QA  C
+
+ L  G
+G
+
+(1)
+
+where Q=volumetric gas flow rate, A=column area,
+C=flooding constant, ρL=liquid density, ρG=gas density.
+It is the column area that must be adjusted to the Moon:
+AM
+AE
+
+
+
+gE
+gM
+
+(2)
+
+Hence, the lunar cross section diameter must be 1.6
+times that of an Earth column diameter for similar
+performance.
+Table 1. Lunar resources (adapted from Taylor &
+Martel 2003 [7])
+Element
+Source
+Concentration
+(average-measured
+max)
+H
+Regolith
+50-150 μg/g
+volatile
+3
+He
+Regolith
+4-30 ng/g
+volatile
+
+Page 2 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+4
+
+He
+
+C
+N
+Fe
+Ni
+Co
+W
+Cr
+Ti
+Al
+K
+P
+
+Regolith
+volatile
+Regolith
+volatile
+Regolith
+volatile
+Mare basalt
+Regolith
+Regolith
+Regolith
+Mare basalt
+Mare basalt
+Highland
+anorthosite
+KREEP
+KREEP
+
+14-100 μg/g
+124-300 μg/g
+81-150 μg/g
+150-170 mg/g
+250-330 μg/g
+35-68 μg/g
+0.37-1.95 μg/g
+2-10 mg/g
+70-80 mg/g
+180 mg/g
+8-18 mg/g
+6-22 mg/g
+
+3. Industrial Ecology
+Sustainability must be built into human exploration
+and colonisation goals upfront as a design requirement,
+not as an ad hoc afterthought, in much the same way as
+planetary protection is built into robotic exploration
+missions [8]. Sustainability is built on two pillars: (i)
+dematerialisation through the minimisation of material
+consumption; (ii) detoxification of waste. Industrial
+ecology addresses (ii) by converting waste in resources.
+The IPAT equation quantifies the impact I to be
+minimised – it is a complex function of the cost of
+launch of assets from Earth: I=PAT where P=population
+of industrial products produced by deep ISRU,
+A=cumulative resource units consumed per product
+produced (specific mass), T=impact per resource unit
+consumed (amount of waste). To reduce A requires
+dematerialisation and to reduce T requires
+detoxification. Industrial ecology seeks to reduce impact
+T through recycling. Self-replication enforces
+minimisation of A through material and energy closure.
+Industrial ecology minimises the waste of one process
+by feeding it as input to other processes. It is of course
+highly desirable to achieve 100% closed loop recycling.
+Furthermore, there is a requirement for cradle-to-cradle
+sustainability which requires recycling at end-of-life –
+the recycling of 3D printed powder feedstock provides
+such a facility. FFC Cambridge is central to the
+minimisation/detoxification of waste by its yield of high
+purity metal.
+4. Inexorability of Electrolysis
+Electrolytic methods of mineral oxides tend to
+output higher product yields with higher purity than
+thermochemical reduction. Electrolysis is a highly
+versatile mode of chemical processing which is widely
+adopted on Earth. Aluminium production on Earth
+involves the mining of bauxite, production of alumina
+from bauxite (Bayer process) and alumina reduction to
+
+IAC-17-D4.5.4x39364
+
+Al metal electrolytically (Hall-Heroult process). Bauxite
+is typically up to 40% alumina, 10-30% Fe2O3, 5-20%
+SiO2 and around 2-5% TiO2. The Bayer process
+dissolves bauxite in NaOH solution to precipitate
+Al(OH)3 which is calcined to produce Al2O3. Molten
+NaOH could also be used to treat ilmenite to
+preferentially dissolve TiO2 leaving insoluble Fe2O3.
+Alumina is passed into a Hall-Heroult electrochemical
+cell as Al2O3 dissolved in molten Na3AlF6 (cryolite)
+solution at 960oC for electrolytic reduction using
+graphite electrodes which are consumed:
+½Al2O3 + ¾C → Al + ¾CO2
+½Al2O3 + 1½C → Al + 1½CO
+Molten Al is tapped at the bottom of the cell.
+Currently, Al production produces CO2 greenhouse
+gases (0.5 kg C per kg Al produced) resulting from
+oxygen release at graphite anodes and toxic
+perfluorocarbon (such as CF4 and C2F6) emissions due
+to reactions with molten cryolite.
+Aluminium production is highly energy intensive
+with 30% of its production cost being energy, two-thirds
+of which is used in the Hall-Heroult process [9]. The
+Hall-Heroult process consumes 14 kWh/kg accounting
+for 75% of the total energy consumption of aluminium
+production (electrolyte heating is electrical).
+Carbothermal reduction of bauxite with graphite powder
+has been proposed to reduce this energy consumption by
+30% [10]. It also eliminates F compound pollutant
+production. Carbothermal reduction is a general method
+of reducing metal oxides:
+MxOy + yC → xM + yCO
+Carbothermal reduction is the basis of blast furnace
+processing of iron ore to yield iron and steel.
+Carbothermal reduction of alumina may be represented
+as:
+Al2O3 + 3C → 2Al + 3CO
+Al2O3 + 3CH4 → 2Al + 3CO + 6H2
+This requires high temperatures of 2060oC and
+1500oC respectively due to the high stability of Al2O3.
+This approach offers poor yields due to the formation of
+metal carbide constituents. Two-stage processing
+involving the formation of Al4C3 in Al2O3 slag at
+2200oC (or 1500oC at 1000 Pa) requires subsequent
+electrolysis at 2000oC to yield Al metal. Stepped
+heating of bauxite at 1100oC and 1200oC yields metallic
+iron and ferroalloy of Al-Si (with carbides of Ti, Si and
+Al) respectively. An indirect rather than direct
+carbothermal process of alumina reduction involves the
+production of intermediate Al compounds such as AlCl3
+followed by the Alcoa electrolytic process. Intermediate
+product
+techniques
+include
+carbochlorination,
+carbonitridation
+and
+carbosulphidation
+[11].
+Carbochlorination begins at 1600oC under 150 Pa
+pressure is typical:
+Al2O3 + 3C + Cl2 → 2AlCl3 + 3CO
+Al2O3 + 3CO + 3Cl2 → 2Al + 3CO2
+
+Page 3 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+Carbochlorination of lunar anorthite follows a
+similar principle though reduction of oxides will yield
+Ca-Al-Si alloy. Prior separation of CaO may be
+warranted if cement production is implemented.
+Extraction of Al from AlCl3 may be either through low
+yield condensation or through electrolysis. AlCl3 vapour
+may be passed through Al alloy above 1000oC followed
+by condensation at 700oC:
+3AlCl3 → Al + AlCl3
+Formation of CaCl2 and SiCl4 from anorthite
+complicates the process:
+CaO-Al2O3-2SiO2 +8 C + 8Cl2
+→ 2AlCl3 + CaCl2 + 2SiCl4 + 8CO
+The Alcoa electrolytic process dissolves AlCl3 in
+NaCl-LiCl electrolyte at 730oC to generate Al (at much
+lower temperature than the Hall-Heroult process)
+without the consumption of carbon electrodes (with an
+energy consumption of 9 kWh/kg Al). Chlorine gas may
+be recycled for the carbochlorination step. Fluorination
+has been proposed as the intermediate metal compounds
+[12] but this involves more corrosive and severe
+reagents. An alternative is the use of ionic liquids organic salts that dissolve oxides into a solution at 150160oC from which electrolysis can liberate oxygen at
+the anode and metals at the cathode [13]. For example,
+alumina and bauxite can be dissolved in 1-ethyl-3methyl-imidazolium hydrogen sulphate at 210oC [14].
+Ionic liquids however are impractical for lunar
+application.
+Hence, all roads lead to the royal road of
+electrolysis. Since the development of the two-stage
+Bayer/Hall-Heroult processes, aluminium has displaced
+cast iron, steel, tin-plate, cast zinc, copper tubing,
+timber, glass and cardboard. However, for lunar
+application, it is an open question whether aluminium
+production is necessary as its functions can be
+substituted for with iron alloys (including kovar).
+Conversely, aluminium production would not eliminate
+the need for subsurface access to meteoritic material
+such as tungsten because its low concentration in
+surface regolith. Nevertheless. electrolytic processes are
+favoured for lunar application. Molten regolith
+electrolysis involves melting regolith at 1600oC and
+then applying a potential difference between the two
+electrodes. Oxygen is evolved at the anode and metals at
+the cathode (iron, silicon, etc). Molten oxide electrolysis
+is much favoured because it requires no reagents and
+yields high purity but it requires considerable energy. Pt
+group metals such as Ir for the anode exhibit potential
+long life durability.
+5. FFC Cambridge Process
+The FFC Cambridge process is an electrolytic
+process which reduces mineral oxides to 99% pure
+metal. The raw mineral oxide is pre-processed by
+powdering, compacting and sintering into a cathode rod.
+
+IAC-17-D4.5.4x39364
+
+It is inserted into an electrolytic cell with molten salt
+CaCl2 as the electrolyte at 900oC in conjunction with an
+appropriate anode. Nominally, a graphite electrode is
+employed, yielding CO/CO2 gas evolved at the anode.
+At the appropriate electrical potential (3 V being
+typical), the cathode is reduced to sintered solid pure
+metal releasing O2- ions into the electrolyte solution
+which are transported to the anode to form CO/CO2 gas
+which is released:
+Cathode: MeOx + 2xe- → Me + xO2Anode: C + O2- → CO + 2e- and C +2O2- → CO2 +4eAny metal oxide can be reduced in this manner.
+Reduction of the metal oxide occurs in the solid state
+without melting yielding reduced energy consumption.
+The electrolyte is not consumed (except through
+cathode removal due to its porosity) but the anode is,
+and must be replenished – essentially, this is an
+electrolytic version of carbothermal reduction of
+mineral oxides. Capturing and recycling the CO/CO2
+gas and reducing it to carbon will be necessary to
+conserve the carbon. To obviate against the loss of
+carbon, an inert anode would be desirable to release O2
+gas directly (2O2- → O2 +2e-) [15]. SnO2 doped with 2%
+Sb2O3 and 1% CuO was successful as an inert anode but
+it eroded rapidly; a more promising anode was a solid
+solution of calcium titanate and calcium ruthenate
+(CaTixRu1-xO3). The O2 released as a waste product may
+be stored for human consumption or as propellant
+oxidiser. Thermal heating to the modest 900oC could be
+accomplished through solar concentrators such as
+Fresnel lenses. We have demonstrated Fresnel lens
+smelting of Al alloy at 800oC under field conditions
+(Fig 1).
+
+Fig 1. Smelting of Al alloy pieces using a Fresnel
+lens-based solar concentrator
+Distribution of the thermal energy through the
+electrolytic bath however may prove challenging.
+Electrical energy may be supplied through thermionic
+conversion at 10-15% efficiency.
+6. Naïve FFC Cambridge Process
+
+Page 4 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+We investigate two options for FFC Cambridge
+process on lunar minerals. First, we discuss the
+application of the technique to raw lunar minerals to
+yield mongrel alloys. Commonly used alloys typically
+comprise a single dominant metal with the addition of
+small amounts of other metals but mongrel alloys are
+dependent on the initial constituents of the mineral.
+Nominally, the FFC Cambridge process can be used to
+reduce lunar ilmenite (FeTiO3) from mare regions to
+FeTi alloy. General FeTi alloy may be employed for
+general purpose structures; ferrotitanium alloy (45-75%
+Ti) may be used for oxidant mop-up purification, or as a
+pyrotechnic powder fuel with O2 oxidant. Its oxygenscavenging properties may not prevent its general use
+on the Moon but it should not be employed where free
+O2 is in proximity.
+The FFC Cambridge process can be used to reduce
+lunar anorthite (CaAl2Si2O3) from highland regions to
+AlCaSi alloy. AlCaSi alloy may be used for general
+purpose structures. Aluminium-silicon is a common
+filler metal used for brazing aluminum. Brazing
+involves melting a lower melting point filler to join two
+metal parts in a gas flux to prevent oxidation
+(unnecessary in a vacuum). Nickel alloy is used for
+joining steels while cobalt is used for joining
+superalloys but brazing does not have the high strength
+of a welded joint. AlSi alloys (20-50% Si) are used for
+casting and welds whereby Si provides fluidity with low
+shrinkage. As they solidify, the Si particles provide high
+wear resistance and low thermal expansion. To
+compensate for Fe contamination, Ni and Co may be
+added to improve strength. AlSi alloy exhibits lower
+viscosity than pure aluminium and is suitable for casting
+or powder metallurgy. Etching yields a hardened, highly
+wear-resistant silicon precipitate that is porous enough
+to retain oil that is suitable for linerless reciprocating
+components. Hence, silumin (3-25% Si) alloy is an AlSi
+alloy used for high durability applications such as in the
+lining of moving parts for machines such as pistons.
+The FFC Cambridge process may reduce lunar
+olivine (Mg2SiO4) from crater regions directly to MgSi
+alloy. MgSi alloys may be used for general purpose
+structures; small amounts of Mg2Si alloy are added to
+Al to produce high strength Al alloy.
+The properties of these mongrel alloys – FeTi,
+AlCaSi and MgSi - needs to be investigated further,
+particularly for general purpose structural applications.
+There is a general requirement for tensile structures to
+complement current interest in 3D printing compressive
+structures on the Moon [16,17]. The specialised
+applications of the mongrel alloys are insufficiently
+useful to justify the use of the FFC Cambridge process
+directly to unprocessed lunar minerals.
+7. Smart FFC Cambridge Process
+
+IAC-17-D4.5.4x39364
+
+The versatility of the FFC Cambridge process
+however is best realised in the reduction of pure metal
+oxides. Hence, we must employ thermochemical preprocessing to lunar minerals to reduce them to pure
+metal oxides. Lunar ilmenite may be reduced through
+hydrogen reduction at 900-1000oC:
+FeTiO3 + H2 → Fe + TiO2 + H2O
+2H2O → 2H2 + O2
+The product is a solid sponge of rutile and iron
+which could either be hammered out or ground into
+powder (such in a ball mill) to separate out the
+respective constituents. Alternatively, further heating to
+1600oC allows bleeding of molten Fe from TiO2 but the
+TiO2 sponge will retain some Fe unless further
+processed. Some residual impurities including iron may
+be useful in producing titanium alloys. The water
+vapour is electrolytically separated into H2 which is
+recycled and O2 which is stored for subsequent use.
+Ulvospinel can also be reduced in a similar manner:
+Fe2TiO4 + H2 → TiO2 + 2Fe + H2O
+CH4 can also reduce ilmenite, enstatite and
+wollastonite at 1600oC:
+FeTiO3 + CH4 → Fe + TiO2 + CO + 2H2
+MgSiO3 + 2CH4 → Si + MgO + 2CO + 4H2
+CaSiO3 + 2CH4 → Si + CaO + 2CO + 4H2
+CO + 3H2 → CH4 + H2O
+The disadvantage is that it requires CH4 but CO can
+be recycled. Reduction of metal oxides with hydrogen
+or methane is the simplest approach but the resultant
+purity is limited. Vapour phase pyrolysis involves
+decomposition and vaporisation of mineral oxides above
+2000oC:
+FeTiO3 → Fe + TiO2 + ½O2
+MgSiO3 → SiO + MgO + ½O2
+CaSiO3 → SiO + CaO + ½O2
+Vapour phase pyrolysis is more versatile requiring
+no chemical reagent but requires very high
+temperatures. Hot concentrated sulphuric acid can
+reduce ilmenite:
+FeTiO3 + 2H2SO4 → FeSO4 + TiOSO4 + 2H2O
+Iron sulphate precipitate must be dissolved and
+electrolysed:
+FeSO4 + H2O → Fe + ½O2 + H2SO4
+Titanium sulphate may be hydrolysed: TiOSO4 +
+H2O → H2SO4 + TiO2
+The acid may be recycled. The use of acids such as
+HF, HCl or H2SO4 requires import of such corrosive
+reagents from Earth and yield complex reaction
+sequences. Nevertheless, there are a host of preprocessing options.
+Iron is a versatile metal that lends itself to multiple
+applications. Wrought (pure) iron is tough and
+malleable, suitable for tensile (or compressive loads if
+designed appropriately such as I beams) in structures.
+Steel requires the addition of small amounts <2%
+carbon as the dominant additive. Tool steel (<2% C and
+
+Page 5 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+9-18% W) is durable steel used for cutting tools for low
+wear. Silicon steel (up to 3% Si) is electrical steel used
+for electromagnet and motor cores. Kovar (53.5% Fe,
+29% Ni, 17% Co, 0.3% Mn, 0.2%Si and <0.01% C) is a
+type of fernico alloy with high electrical and thermal
+conductivity as a replacement for copper and/or
+aluminum conducting wire. Permalloy (20% Fe and
+80% Ni) provides magnetic shielding around motor
+devices to protect adjacent electronics from stray
+magnetic fields. The more exotic materials may be
+sourced from impact craters exhibiting magnetic
+anomalies indicating the existence of impactor metals
+[18]. Kamacite/taenite (NiFe alloys with 4-30% Ni)
+contaminated with ~0.5% Co is the major constituent in
+nickel-iron meteorites. Ni and Fe may be extracted
+through the Mond process. For Ni, this requires reacting
+CO with an S catalyst at 40-80oC and 1 bar to form
+nickel carbonyl gas which is then reversed at 230oC and
+60 bar:
+Ni + 4CO ↔ Ni(CO)4
+Fe purification requires different conditions:
+Fe + 5CO ↔ Fe(CO)5 at 175oC and 100 bar
+The S catalyst may be recovered at 750-1100oC
+from troilite FeS in meteoritic inclusions, lunar regolith
+(~1%) or lunar volatiles. CO may be derived from lunar
+volatiles or the FFC Cambridge process if using a
+graphite anode. Removal of Ni and Fe concentrates the
+Co fraction of the residual ore. Alternatively, Co may be
+extracted by roasting with S in oxygen to convert cobalt
+into cobalt sulphate which is soluble in water. Co may
+then be extracted electrolytically. Meteoritic NiFe alloys
+are also enriched in W microparticle inclusions at a
+concentration of 0.1-5 μg/g. Following grinding, the
+high density of W at 19.3 lends itself to extraction by
+froth flotation.
+Once ilmenite has been reduced to rutile TiO2, FFC
+Cambridge process may be employed to yield near pure
+Ti (Fig 2a and b) – indeed, the FFC Cambridgr process
+was originally developed to extract Ti from rutile to
+replace the Kroll process.
+
+IAC-17-D4.5.4x39364
+
+Fig 2. (a) rutile feedstock input to FFCC; (b) Ti
+metal product output from FFCC
+Anorthite may be subjected to carbothermal
+reduction to alumina feedstock at 1650oC:
+CaAl2Si2O8 + 4C → CaO + Al2O3 + 2Si + 4CO
+The mixture of metal oxides and silicon requires
+separation after powdering – the addition of Al metal
+powder at high temperature scavenges oxygen (by
+forming further Al2O3) and reduces CaO to Ca metal
+which may be tapped off as liquid above 842oC.
+Alternatively, CaO may be reacted highly
+exothermically with HCl to yield CaCl2 electrolyte
+directly:
+CaO + 2HCl → CaCl2 + H2O
+The reaction of powdered Si with HCl at 300oC
+yields volatile trichlorosilane liquid:
+Si + 3HCl → HCl3Si + H2
+Removal of H2 allows reversal to yield purified
+polysilicon:
+HCl3Si → Si + HCl + Cl2
+Hence, chlorine is recycled. The alumina may be
+subjected to FFC Cambridge process to yield pure
+aluminium metal. An alternative treatment of anorthite
+is artificial weathering with HCl at room temperature to
+yield SiO2:
+CaAl2Si2O8 + 8HCl +2H2O
+→ CaCl2 + 2AlCl3.6H2O + 2SiO2
+SiO2 may be employed for fused silica glass
+production and for the production of quartz
+(piezoelectric sensing material). Aluminium chloride
+hexahydrate may be melted above 100oC to separate it
+from CaCl2 and SiO2 – it may subsequently be heated to
+yield alumina at 400oC:
+2AlCl3.6H2O → Al2O3 + 6HCl + 9H2O
+Silica and alumina may then be reduced separately
+through the FFC Cambridge process. Si may be
+employed as an additive to Fe for silicon steel. The
+artificial weathering reaction produces CaCl2 as a
+source of FFC Cambridge electrolyte. Soda glass cannot
+be made on the Moon due to the paucity of Na but this
+is not an issue on Mars where NaCl is abundant.
+Aluminosilicate (57% SiO2, 20% Al2O3, 12% MgO, 5%
+CaO) or fused silica glass are the only available options.
+It has been proposed that lunar aluminosilicate such as
+
+Page 6 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+anorthite be used as the basis for glass on the Moon aluminosilicates have a melt temperature of ~11001350oC which is significantly lower than the 1700oC
+required of fused silica [19]. However, the moderate to
+high FeO content causes glass darkening which is
+undesirable for transparency so it would have to be
+removed. This may be accomplished through
+purification of alumina as the basis for glass-making to
+which the other components may be added in the
+required proportions. High purity SiO2 can be enforced
+by heating in a H2-O2 flame in the presence of SiCl4
+vapour:
+SiCl4 + 2H2 + O2 → SiO2 + 4HCl
+Olivine may be subjected to aluminothermic
+reduction in the appropriate proportions at 1000oC:
+3Mg2SiO4 + 6Al
+→ 2MgAl2O4 + 4MgO + 2AlSi + Si
+The MgO can be reduced by AlSi by continuing the
+reaction at 1000oC:
+4MgO + 2AlSi → MgAl2O4 + 3Mg + 2Si
+Molten Mg above 650oC enables it to be tapped
+from the refractory oxide. The FFC Cambridge process
+may reduce the MgAl2O4 spinel to MgAl alloy (such as
+magnallum as a lightweight corrosion-resistant alloy or
+solid fuel if ground) after separating it out from Mg,
+AlSi alloy and pure Si.
+8. 3D Printing
+3D printing is a versatile method of manufacturing
+that offers considerable versatility over traditional
+subtractive methods. 3D printing is an additive
+manufacturing process in which 3D structures are built
+up sequentially layer-by-layer. The most common 3D
+printing technique is fused deposition modelling (FDM)
+exemplified by the RepRap 3D printer [20] (Fig 3).
+
+Fig 3. RepRap 3D printer
+The Moon possesses regolith volatiles that may be
+used as raw material for the manufacture of plastics –
+
+IAC-17-D4.5.4x39364
+
+organic polymers may be rigid, elastic or plastic.
+Polymer moduli of elasticity falls in the range 10 MPa
+to 4 GPa compared with 50-400 GPa for metals. Tensile
+strength of polymers is 10 – 100 MPa compared with up
+to GPa for metals. Plastics have low fracture strength
+compared to metals. Plastics have poor response to high
+temperatures due to a reduction in tensile strength and
+increased ductility. Hence, metals are better suited to
+load-bearing, stiff structures while plastics are best
+employed as elastomers. i.e. silicone plastics. To
+minimise carbon consumption, silicone plastics have a
+silicone-oxygen backbone rather than a C backbone.
+Silicone plastics have advantages over hydrocarbon
+plastic in that they are UV radiation resistant and
+possess higher operational temperature resistance (up to
+350oC). While organosilizanes are used for specialised
+protective
+coatings
+and
+adhesive
+cements,
+organosiloxanes are used more widely – motor
+lubricants, motor insulation, sealants, adhesives and
+coolant. This favours siloxanes for their wide
+functionality. Siloxane manufacture begins with the
+formation of syngas from methane and water (lunar
+volatiles) at 850oC and 4 MPa over a Ni catalyst:
+CH4 + H2O → CO + 3H2
+Syngas is converted to methanol (or higher alcohol)
+at 250oC and 5-10 MPa over an alumina catalyst:
+CO + H2 → CH3OH
+Chloromethane is formed by the action of HCl on
+methanol at 340oC over an alumina catalyst:
+CH3OH + HCl → CH3Cl + H2O
+Dialkyl dichlorosilane is formed from the reaction of
+chloromethane with Si at 320-370oC and 1-5 bar in the
+presence of a catalyst (Rochow process):
+2CH3Cl + Si → (CH3)2SiCl2
+It is an open question whether Ni could replace the
+more commonly used Cu catalyst in the Rochow
+process as copper is not available on the Moon. For
+example, the Fischer-Tropsch reaction requires a H2:CO
+ratio of 2 for a Co catalyst but an Fe catalyst can tolerate
+a lower ratio. However, Fe-based catalysts also require
+alkali metal promoter such as K and ceramic support
+such as SiO2. The most effective catalysts are
+CoFe/TiO2, Co/TiO2, CoNi/TiO2, NiFe/TiO2 and
+FeCo/SiO2 for Fischer-Tropsch reactions Intriguingly,
+lunar dust has been demonstrated as an effective catalyst
+for Fischer-Tropsch synthesis [21]. The Rochow
+process catalyst requires further investigation. Finally,
+the simplest silicone oil, polydimethylsiloxane (PDMS)
+is formed by hydrolysis:
+n(CH3)2SiCl2 + nH2O → ((CH3)2SiO)n + 2nHCl
+HCl is recycled. Hence, silicone plastics may be
+manufactured from lunar volatiles given a source of Cl
+reagent. Silicone plastic is suitable for 3D printing by
+FDM. Furthermore, silica-based ceramics (polymerderived ceramics) may be derived from pyrolysis of
+silicone polymers (organosilazanes or organosiloxanes)
+
+Page 7 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+- this permits shaping or 3D printing of the polymers
+prior to thermal conversion to ceramics which offer high
+temperature stability to 1500oC (increased by 2000oC
+with the addition of Al by the sol-gel process) [22].
+Polysiloxanes (RSiO1.5) can also be transformed into
+piezoresistive SiOC ceramics through pyrolysis in an
+inert atmosphere at or above 1400oC – the high
+temperature is necessary for piezoresistivity with an
+extremely high sensitivity of ~145 [23]. Hence, ceramic
+structures can be 3D printed in polymer form. RepRap
+represents a first step towards self-replicating machine
+in that it can print most of its plastic components (and
+potentially silica-based ceramics). However, it cannot
+print its metal components. A derivative of the RepRap
+has been developed that employs a welding head to
+print metal though its accuracy is poor [24]. Our interest
+here is in higher performance metal 3D printing.
+The product of the FFC Cambridge process is a
+metal alloy powder that may serve as feedstock for 3D
+printing such as selective laser sintering/melting
+(SLS/SLM) (Fig 4). SLS/SLM offers the ability to deal
+with multiple materials – metals, plastics, ceramics and
+glasses.
+
+Fig 4. SLS-printed structures from FFC Cambrudgederived Ti powder
+Solar concentrator-based sinterers offer an
+alternative technique more suited to lunar application
+but without the high power precision of the laser. Silica
+with a melting point of 1600oC is usually sintered in a
+high temperature furnace but the addition of Ca, Al, Mg
+and Cl lowers the melting temperature to 500-700oC to
+permit low power sintering at 200 W [25]. Metal gears
+have been constructed from moulds of sand mixed with
+sodium silicate sintered using low powered lasers.
+Sodium silicate solution permeates the sand mould for
+superior finish.
+Alternatively, the powder may be sintered into rods
+for electron beam additive manufacturing (EBAM) [26]
+(Fig 5). Most metals – steel, nickel alloys, cobalt alloys,
+copper-nickel alloys, aluminium alloys, titanium alloys,
+tantalum, and tungsten but not zinc, cadmium or
+magnesium alloys - can be electron beam processed but
+non-metals are not suited as the electron beam needs to
+couple electrically to the material.
+
+IAC-17-D4.5.4x39364
+
+Fig 5. Electron beam additive manufacturing
+EBAM is of particular interest because of its
+construction being based on the electron gun with
+implications in developing self-replicating machines
+[27]. In any case, metal printing typically requires high
+energy
+projection
+such
+as
+electron
+beam
+sintering/melting, laser sintering/melting or variants on
+these processes. The high energy deposition can cause
+residual stresses and layer warping. For example,
+EBAM imposes 2000oC peak temperatures followed by
+rapid cooling. Pre-heating of the work platform between
+the sample recrystallisation and melting temperature
+alleviates these high thermal gradients and consequent
+internal stresses.
+Of particular interest is multi-material 3D printing of
+which there have been several demonstrations using
+freeform fabrication. A zinc-air cell comprising multiple
+materials was manufactured through a similar process to
+3D printing [28]. A customized Cartesian gantry robot
+configuration of 3D printer was used to implement
+freeform deposition with different cartridges. Two
+plunger-based extruder deposition heads with integral
+heaters were dedicated to plastic/metal and liquid/pastes
+respectively. The material for each printer head was
+easily changed by substituting different syringe
+cartridges in each extruder head. The zinc-air battery
+comprised multiple layers with Zn anode particles in a
+KOH solution surrounded by a silver paste layer, carbon
+black/MnO2 cathode catalyst in KOH solution
+electrolyte, a pre-cast separator layer of insulating
+ceramic foam overlying an air (oxygen) cathode
+surrounded by a silver paste. The assembly was
+mounted within an ABS plastic casing with copper
+wiring to the electrodes. In addition, a passive flexure
+joint of silicone plastic between rigid ABS plastic
+members was fabricated. The silicone was impregnated
+with carbon black while embedded wires of
+silver/methylcellulose paste were also fabricated within
+the joint – a simple actuator.
+9. 3D Printing Motors
+As well 3D printing metal structures, it would
+considerably widen the applications of 3D printing if
+mechatronic components could be 3D printed [29] –
+indeed, such as a facility opens up the possibility of 3D
+printing robots and other kinematic machines. Other
+such kinematic machines include 3D printers, milling
+
+Page 8 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+machines, lathes, drills, etc. This effectively constitutes
+a universal construction capability – a universal
+constructor is a machine that, given the appropriate
+resources, can construct any machine, including a copy
+of itself [30]. A major leap towards such a universal
+constructor would be demonstration that motors,
+electronics and sensors can be 3D printed.
+To that end, we have been attempting to 3D print a
+number of motor designs. Initially, we 3D printed a
+variable reluctance motor because of its lack of brushes
+and simple construction – only the metal elements were
+not 3D printed (Fig 6).
+
+Fig. 7 (a) 3D printed PLA rotor with 50% iron
+powder by mass; (b) powder metallurgy-manufactured
+PLA motor with 50% iron powder by volume
+We have since replaced the iron powder with
+magnetically-soft silicon steel powder to eliminate the
+minor detent problem on startup in the motors using
+iron powder. To address printing of the current-carrying
+wire coils, we have been photolithographically printing
+coils and testing them in a pancake “air” motor
+configuration (Fig 8a and b).
+
+Fig 6. 3D printed switched reluctance motor
+We then focussed on the general purpose DC
+electric motor to tackle the magnetic and electrical
+elements rather than just the structure. Beginning with
+the rotor, we have 3D printed a motor core comprising
+50% iron filings (by mass) interspersed in a polylactic
+acid (PLA) matrix printed using the RepRap 3D printer
+from an off-the-shelf filament (Proto-Pasta magnetic
+filament) (Fig 7a). We then built a similar motor core
+with 50% iron filings (by volume) in PLA to increase
+the iron loading – this was manufactured using NRC’s
+powder metallurgy facilities (Fig 7b). Although not 3D
+printed, it could be, and demonstrates that high metal
+loadings are feasible.
+
+Fig 8. (a) Photolithographically-printed currentcarryimg coils (b) Pancake air motor test configuration
+We attempted to construct a magnetically soft stator
+pair similarly to our rotor - a 3D printed stator of iron
+filings in PLA matrix but the stator magnetic field was
+too weak (to measure) even with 800 turns of wire (Fig
+9a). A second stator pair of SLS-printed magnetically
+soft steel was constructed (Fig 9b) but its magnetic field
+of 3G was insufficient to generate torque.
+
+IAC-17-D4.5.4x39364
+
+Page 9 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+following pre-processing of raw materials to extract
+99% pure metal elements. It operates in the solid state
+so the product is a metal powder that can be 3D printed
+directly or sintered into rod form. A variety of 3D
+printing techniques are suitable including laser, electron
+beam and solar concentrator forms. These two
+technologies will be critical imparting to the Moon a
+valuable infrastructure from which to establish lunar
+colonies.
+Acknowledgements
+The author would like to thank Abdurr Elaskri for
+his assistance with constructing the motors,
+
+Fig 9. (a) Ineffective PLA-based stator (b)
+Ineffective magnetically soft steel stator
+In order to reassess the stator design, we tested an
+off-the-shelf magnetically-soft ferrite stator system
+which yielded 20 G – sufficient to generate excellent
+torque (Fig 10).
+
+Fig 10. Non-3D printed ferrite stator demonstration
+Magnetite (ferrite) may be manufactured from ferric
+olivine (fayalite) from chondritic sources on the Moon
+through oxidation at 400-700oC:
+6Fe2SiO4 + 2O2 → 3Fe3(SiO4)2 + Fe3O4
+However, native magnetite may exist in some
+meteorites. The next steps will be to have a 3D printed
+ferrite stator integrated into an entirely 3D printed DC
+motor.
+10. Conclusions
+The combination of FFC Cambridge process and 3D
+printing offer a powerful approach to deep ISRU.
+Indeed, the FFC Cambridge process is best exploited
+IAC-17-D4.5.4x39364
+
+References
+[1] Papike J, Taylor L & Simon S (1991) “Lunar
+minerals” in Lunar Sourcebook (ed. Heiken G,
+Vaniman D, French B), Cambridge University Press,
+121-155
+[2] Duke M, Gaddis L, Taylor J, Schmitt H (2006)
+“Development of the Moon” Reviews in Mineralogy
+& Geochemistry 60, 597-656
+[3] Fegley B, Swindle T (1993) “Lunar volatiles:
+implications for lunar resource utilisation” in
+Resources of Near-Earth Space (ed. Lewis J,
+Matthews M, Guerrieri M), University of Arizona
+Press, 367-426
+[4] Johnson J, Swindle T, Lucey P (1999) “Estimated
+solar-wind implanted He-3 distribution on the
+Moon” Geophysical Research Letters 26 (3), 385388
+[5] Fa W, Jin Y-Q (2007) “Quantitative estimation of
+helium 3 spatial distribution in the lunar regolith”
+Icarus 190, 15-23
+[6] Petit D (1985) “Fractional distillation in a lunar
+environment” in Lunar Bases & Space Activities of
+the 21st Century (ed. Wendell M), Lunar & Planetary
+Institute, 507-518
+[7] Taylor J, Martel L (2003) “Lunar prospecting”
+Advances in Space Research 31 (11), 2403-2412
+[8] Debus A (2001) “Planetary protection aspects for insitu
+and
+sample
+return
+exobiological
+experimentations” Proc 1st European Workshop on
+Exo- and Astr-Biology (ESA SP-406), Frascati, Italy,
+113-119
+[9] Botte G (2014) “Electrochemical manufacturing in
+the chemical industry” Electrochemical Society
+Interface (Fall), 49-55
+[10] Yeh C & Zhang G (2013) “Stepwise carbothermal
+reduction of bauxite ores” Int J Mineral Processing
+124 (Nov), 1-7
+[11] Rhamdhani M, Dewan M, Brooks G, Monaghan B,
+Prentice L (2013) “Alternative Al production
+methods: part 1 – a review of indirect carbothermal
+routes” Trans Institution of Mining & Metallurgy C:
+
+Page 10 of 11
+
+68th International Astronautical Congress (IAC), Adelaide, Australia, 25-29 September 2017.
+Copyright ©2017 by the International Astronautical Federation (IAF). All rights reserved.
+
+Mineral Processing & Extractive Metallurgy 122
+(3), 87-104
+[12] Landis G (2007) “Materials refining on the Moon”
+Acta Astronautica 60, 906-915
+[13] Marone M, Paley M, Donovan D, Karr L (2009)
+“Lunar oxygen production and metal extraction
+using ionic liquids” LEAG Annual Meeting, abstract
+no. 2034
+[14] Poulimenou N, Giannopoulou I, Panias D (2014)
+“Preliminary investigation of ionic liquids utilisation
+in primary aluminum production” Proc Int Conf
+Mining, Material & Metallurgical Engineering,
+Prague, paper no. 60
+[15] Schwandt C, Hamilton J, Fray D, Crawford I
+(2012) “Production of oxygen and metal from lunar
+regolith” Planetary & Space Science 74, 49-56
+[16] Khoshnevis B, Bodiford M, Burks K, Thridge E,
+Tucker D, Kim W, Toutanji H, Fiske M (2005)
+“Lunar contour crafting – a novel technique for
+ISRU-based habitat development” 43rd AIAA
+Aerospace Meeting & Exposition, Reno NV, paper
+no 538
+[17] Cesaretti , Dini E, De Kestellier X, Colla V,
+Pambaguian L (2014) “Building components for an
+outpost on the lunar soil by means of a novel 3D
+printing technology” Acta Astronautica 93, 430-450
+[18] Bland P, Artemieva N, Collins G, Bottke W,
+Bussey D, Joy K (2008) “Asteroids on the Moon:
+projectile survival during low velocity impacts” 39th
+Lunar & Planetary Science Conf, abstract no 2045
+[19] Landis G (2007) “Materials refining on the Moon”
+Acta Astronautica 60, 906-915
+[20] Jones R, Haufe P, Sells E, Iravani P, Olliver V,
+Palmer C, Bowyer A (2011) “RepRap – the
+replicating rapid prototyper” Robotica 29 (Jan), 177191
+
+IAC-17-D4.5.4x39364
+
+[21] Cabrera A, Maple M, Asunmaa S, Arrhenius G
+(1976) “Formation of water and methane catalysed
+by lunar dust” NASA Report N91-71212
+[22] Riedel R, Mera G, Hauser R, Klonczynski A
+(2006) “Silicon-based polymer-derived ceramics:
+synthesis properties and applications – a review” J
+Ceramic Society Japan 114, 425-444
+[23] Riedel R, Toma L, Janssen E, Nuffer J, Melz T,
+Hanselka H (2010) “Piezoresistive effect in SiOC
+ceramics for integrated pressure sensors” J
+American Ceramics Society 93 (4), 920-924
+[24] Anzalone G, Zhang C, Wijnen B, Sanders P,
+Pearce J (2013) “Low-cost open-source 3D metal
+printer” IEEE Access 1, 803-810
+[25] Wang X, Fuh J, Wong Y, Tang Y (2003) “Laser
+sintering of silica sand – mechanism and application
+to sand casting mould” Int J Advanced
+Manufacturing Technology 21, 1015-1020
+[26] Taminger K & Hafley R (2006) “Electron beam
+freeform fabrication (EBF3) for cost-effective nearnet shape manufacturing” NASA TM 2006-214284
+[27] Ellery A (2016) “Are self-replicating machines
+feasible?” AIAA J Spacecraft & Rockets 53 (2), 317327
+[28] Malone E, Rasa K, Cohen D, Isaacson T, Lashley
+H, Lipson T (2004) “Freeform fabrication of zinc-air
+batteries and electromechanical assemblies” Rapid
+Prototyping J 10 (1), 58-69
+[29] Ellery A (2016) “Progress towards 3D printed
+mechatronic systems” Proc IEEE Int Conf Industrial
+Technology with Symp on 3D Printing, Tapei,
+Taiwan, pp. 1129-1133
+[30] von Neumann J and Burks A (1966) Theory of SelfReproducing Automata, University of Illinois Press,
+Champaign, Ill
+
+Page 11 of 11
+
+

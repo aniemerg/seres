@@ -1,0 +1,74 @@
+id: recipe_backprop_circuit_hardware_v0
+target_item_id: backprop_circuit_hardware_v0
+variant_id: v0
+steps:
+  - process_id: pcb_fabrication_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: pcb_backprop_bare
+        qty: 0.45
+        unit: kg
+    est_time_hr: 4.0
+    notes: Fabricate multi-layer PCB for analog computing circuits
+  - process_id: component_placement_process_v0
+    inputs:
+      - item_id: pcb_backprop_bare
+        qty: 0.45
+        unit: kg
+      - item_id: operational_amplifier_ic
+        qty: 20.0
+        unit: each
+      - item_id: analog_multiplier_ic
+        qty: 10.0
+        unit: each
+      - item_id: capacitor_ceramic_generic
+        qty: 50.0
+        unit: each
+      - item_id: resistor_precision_metal_film
+        qty: 100.0
+        unit: each
+      - item_id: potentiometer_trim
+        qty: 20.0
+        unit: each
+    outputs:
+      - item_id: pcb_backprop_populated
+        qty: 1.5
+        unit: kg
+    est_time_hr: 3.0
+    notes: Place analog computing components
+  - process_id: soldering_process_wave_v0
+    inputs:
+      - item_id: pcb_backprop_populated
+        qty: 1.5
+        unit: kg
+      - item_id: solder_tin_lead
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: pcb_backprop_soldered
+        qty: 1.55
+        unit: kg
+    est_time_hr: 1.0
+    notes: Solder all connections
+  - process_id: testing_and_calibration_circuit_v0
+    inputs:
+      - item_id: pcb_backprop_soldered
+        qty: 1.55
+        unit: kg
+    outputs:
+      - item_id: backprop_circuit_hardware_v0
+        qty: 2.0
+        unit: kg
+    est_time_hr: 4.0
+    notes: Test gradient computation, calibrate analog circuits, verify learning
+assumptions: |
+  Analog circuit implementation using op-amps and multipliers.
+  Gradient computation performed in continuous-time analog domain.
+  Calibration critical for accurate backpropagation.
+notes: |
+  Manufacturing route for backpropagation hardware circuit.
+  Analog computing approach for energy-efficient neural network training.
+  Part of neural network computing substrate for lunar manufacturing.

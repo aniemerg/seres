@@ -1,0 +1,76 @@
+id: recipe_rtd_nickel_v0
+target_item_id: rtd_nickel_v0
+variant_id: v0
+steps:
+  - process_id: wire_drawing_process_v0
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: nickel_wire_fine
+        qty: 0.045
+        unit: kg
+    est_time_hr: 2.0
+    notes: Draw nickel to fine wire (0.05-0.1mm diameter)
+  - process_id: ceramic_sintering_process_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: ceramic_substrate_rtd
+        qty: 0.008
+        unit: kg
+    est_time_hr: 4.0
+    notes: Form and sinter alumina substrate for RTD element
+  - process_id: wire_winding_precision_v0
+    inputs:
+      - item_id: nickel_wire_fine
+        qty: 0.045
+        unit: kg
+      - item_id: ceramic_substrate_rtd
+        qty: 0.008
+        unit: kg
+    outputs:
+      - item_id: rtd_element_wound
+        qty: 0.01
+        unit: kg
+    est_time_hr: 1.0
+    notes: Wind nickel wire precisely on ceramic substrate
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: rtd_element_wound
+        qty: 0.01
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.005
+        unit: kg
+      - item_id: stainless_steel_sheath
+        qty: 0.008
+        unit: kg
+    outputs:
+      - item_id: rtd_assembled_uncalibrated
+        qty: 0.02
+        unit: kg
+    est_time_hr: 0.5
+    notes: Assemble RTD with leads and protective sheath
+  - process_id: calibration_temperature_sensor_v0
+    inputs:
+      - item_id: rtd_assembled_uncalibrated
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: rtd_nickel_v0
+        qty: 0.02
+        unit: kg
+    est_time_hr: 2.0
+    notes: Calibrate at known temperatures, record coefficients
+assumptions: |
+  Nickel wire can be drawn to required fineness.
+  Ceramic substrate provides electrical insulation and thermal stability.
+  Calibration against reference temperatures (ice point, boiling water, etc.).
+notes: |
+  Manufacturing route for nickel RTD sensors.
+  Wire-wound construction for high stability.
+  Calibration critical for accurate temperature measurement.

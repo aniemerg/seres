@@ -1,0 +1,45 @@
+id: contact_material_application_v0
+kind: process
+name: Electrical contact material application v0
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: contact_substrate_base
+    qty: 1.0
+    unit: kg
+  - item_id: silver_contact_material
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: contacts_with_applied_material
+    qty: 1.05
+    unit: kg
+requires_ids:
+  - contact_material_application_station_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: Welding or brazing energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+  notes: Application and cooling time
+notes: |
+  Process for applying contact material (silver, tungsten, etc.) to electrical contacts.
+  Source: Referenced by relay_electromagnetic_v0 recipe
+  Methods:
+    - Resistance welding (fast, good for high-volume)
+    - Brazing (stronger bond, high reliability)
+    - Riveting (mechanical attachment)
+    - Cladding (rolling or explosive bonding)
+  Contact materials:
+    - Silver: Low resistance, good for low-power contacts
+    - Silver-cadmium oxide: Arc resistant, good for medium power
+    - Tungsten: Very high temperature and arc resistance
+  Applications: Relays, switches, contactors, circuit breakers
+  Quality: Contact resistance, bond strength, arc erosion resistance
+  Critical for: Reliable electrical switching, long contact life

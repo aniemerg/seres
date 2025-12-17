@@ -1,0 +1,2101 @@
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+IAC—22.D3.2B.x68580
+THE “SENSIBLE” WAY TO CONSTRUCT ROBOTS FROM LUNAR RESOURCES
+Alex Ellery
+Carleton University, Canada, aellery@mae.carleton.ca
+We explore how one specific aspect of robotic machines – sensors – may be constructed from lunar resources.
+Sensors constitute one member of the sensors-controller-actuators backbone of robotics. We focus on two families of
+sensor – displacement sensors and their derivatives as the most fundamental of measurements and light sensor arrays
+for general measurement-at-a-distance. Terrestrial approaches may not be appropriate to accommodate the
+constraints imposed by the Moon and our projected manufacturing capabilities. Potentiometers of aluminium
+extracted from anorthite offer access to displacement sensing and strain sensing. Piezoelectric sensors may be
+constructed from quartz manufactured from silica extracted from anorthite. Elastomeric silicone plastic derived from
+lunar volatile condensates offer the potential for tactility. Light sensors may be constructed from photomultiplier
+tubes, all components of which can be derived from lunar material. Photomultiplier tube resolution is limited but
+small rather than large arrays may be employed. We can exploit biomimetic approaches - optic flow offers the visual
+capabilities of insects using simple circuitry; active vision allows us to trade the deficiencies of the visual resolution
+with that of orienting motors through micro-stepping. We also explore the possibility of simple analytical
+instrumentation constructed from lunar resources. We suggest that rudimentary sensors can be constructed in-situ
+from lunar resources as fundamental components of robotic machines essential for a sustainable extraterrestrial
+infrastructure.
+
+I. INTRODUCTION
+Most interest to date regarding in-situ resource
+utilisation (ISRU) has been in sourcing bulk material for
+structure building and consumables (especially
+propellant) because of its high cost of transport from
+Earth. Such bulk products tend to be of low complexity
+and so functionally reliable over long periods. An
+implicit assumption has always been that highly
+sophisticated items will be transported from Earth –
+however, this precludes the prospect of repair or
+replacement on site. More complex items such as
+electronics and motors tend to suffer from greater
+failure rates. It would be advantageous to pursue the
+potential exploitation of local in-situ resources for more
+sophisticated products than passive structure (such as
+regolith and/or metals like aluminium) and volatile
+consumables (such as water). Although in-situ bulk
+materials reduce the cost of lunar exploration
+dramatically, true sustainability requires lunar selfsufficiency through enhanced in-situ resource
+utilisation. Self-sufficiency requires in-situ manufacture
+of the machines of production, i.e. robotic machines.
+Indeed, sustainability of a Moon Village and any
+associated infrastructure will require the ability to
+maintain and grow itself. We submit that such enhanced
+capability should encompass the construction of the
+robotic machines that build infrastructure. In this way,
+the robotic machines of production required to construct
+lunar infrastructure, as well as the infrastructure itself,
+may be leveraged from the lunar environment. The
+characteristic backbone of robotic machines is the
+sensorimotor control system – sensors, motors and
+
+IAC-22-D3.2B.x68580
+
+computational electronics. We focus on in-situ
+manufacture of sensors from lunar resources here.
+Indeed, sensors and actuators are intimately related. For
+example, brushless electronic commutation requires
+stator windings to have Hall effect (or other
+displacement) sensors mounted to detect the position of
+the rotor for closed loop control. This effectively
+provides for the implementation of position and velocity
+feedback in a servomotor. A particularly explicit
+example of sensor-actuator coupling is apparent in
+active vision that is addressed later.
+Measurement of physical properties begins with
+dimensional analysis of sensory transduction
+mechanisms. In dimensional analysis, the fundamental
+dimensions are amount [N], mass [M], length [L], time
+[T], temperature [Θ], electric current [I] and luminosity
+[J]. All sensory measurements are derived from these
+fundamental physical properties. We focus on two
+families of sensor – displacement sensors and their
+derivatives as the most fundamental measurements and
+light sensors for general measurement-at-a-distance.
+These sensory modalities relate directly to the
+determination of internal state (displacementacceleration-force-pressure) and external state (vision).
+These are crucial to the implementation of motor control
+systems for robotic devices and/or smart lunar bases –
+imaging cameras and displacement/tactile sensing.
+These are also fundamental to 3D printing machines of
+production necessary to build lunar bases through
+contour crafting [1] or D-shaping [2]. We explore
+initially the use of electrical resistance and piezoelectric
+quartz for the measurement of fundamental mechanical
+
+Page 1 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+parameters. We then explore the prospect of sourcing
+photomultiplier tube (PMT) construction on the Moon
+as a flagship indicator that sophisticated sensors can be
+built using lunar resources. Our arguments stem directly
+from our lunar industrial ecology concept [3]
+(Appendix). We address some of the limits of lunar
+resources and how we might exploit bio-inspired
+approaches to compensate for these limitations.
+II. DISPLACEMENT & DERIVED PARAMETER
+SENSING
+Displacement is the most fundamental of
+measurements from which many others are derived. The
+simplest form of displacement sensor is the
+potentiometer, a tapped resistance wire in a voltage
+divider configuration. Of course, resistive components
+may be constructed from aluminium metal extracted
+from lunar anorthite (e.g. [4]). Derived from this is the
+measurement of temperature, strain, stress, pressure,
+acceleration and force. Humidity, temperature and strain
+sensors have been 3D printed (using inkjet and
+screenprinting) primarily based on conductive metals
+such as Ag, conductive polymers such as PEDOT:PSS
+(poly(3,4-ethylenedioxyrgophene)
+polystyrene
+sulphonate) or piezoelectrics such as PVDF
+(poly(vinylidenefluoride)) on flexible or rigid substrates
+[5]. A strain gauge comprises a meandered conductive
+strip of metal (such as aluminium or nickel) which when
+deformed through stress exhibits a change in resistance
+measured with a Wheatstone bridge. The campaniform
+sensillum in insects shows a similar approach to strain
+gauge design – it comprises an elliptical hole in a plate
+of cuticle in which chitin fibres surround the hole acting
+as strain gauges [6].
+Pressure is defined as force/unit area which forms
+the basis of tactile sensing (taction). Tactile sensors
+detect physical contact with the environment and are
+based on deformation. In mammalian biology, feedback
+from muscles is generated by the spindles (positionderivative) and Golgi tendon sensors (force) which
+provides local muscular force feedback. Tactile sensing
+is a complex sensory modality that is mediated in
+human skin by four mechanoreceptors with a spatial
+resolution of 1 mm2: (i) Pacinian corpuscles deep within
+the dermis exhibit fast adaptation to touch and vibration,
+(ii) Meissner corpuscles immediately beneath the
+epidermis exhibit moderate adaptation to touch and
+touch rate, (iii) Merkel discs exhibit slow adaptation to
+touch and (iv) Ruffini endings exhibit slow adaptation
+to pressure/temperature. Thus, pressure is the primary
+transduction mechanism in tactile sensing. Fine-scale
+textures with roughness less than 200 µm elicit fast
+responses of the Pacinian receptors (with a spectral
+resolution of 250 Hz) while coarser textures with
+roughness exceeding 200 µm elicit moderate responses
+of the Meissner receptors (with an optimal sensitivity of
+
+IAC-22-D3.2B.x68580
+
+50 Hz). Whiskers are an indirect form of tactile sensing
+- arrays of flexible elastomeric whisker contacts
+mounted onto pressure/force-sensitive load cells provide
+a mechanism for tactile sensing [7]. On contact, each
+whisker bends, the joint angles and forces of which are
+measured. This may be due to fluid flow, linear
+acceleration, gyroscopic rotation, etc. Reaction force F
+and moment N due to tip displacement Δ is given by:
+and
+[1]
+where E=whisker Young’s modulus, d=whisker
+diameter, L=whisker length. Whisker sensing represents
+a universal sensor modality in biological systems for the
+measurement of a wide range of mechanical effects that
+may be adapted for a range of applications. An example
+is a bio-inspired gyroscope based on the haltere organs
+of the blowfly [8]. Flies are dual-winged insects in
+which the hind wings comprise a pair of halteres [9].
+The halteres oscillate up and down with a frequency of a
+150 Hz in antiphase to the wings. At the base of each
+haltere are 400-500 strain receptors which detect
+coriolis forces generated by attitude changes.
+There are several types of direct tactile deformation
+sensors
+which
+exploit
+different
+transduction
+mechanisms but there are many common features. In the
+simplest form of tactile sensing, an elastomeric silicone
+rubber layer (such as PDMS - polydimethylsiloxane)
+protects an underlying array of embedded forcesensitive sensors. The force/pressure sensors may be
+formed by the intersections of an orthogonal network of
+electrically conducting (aluminium) wires. On a
+variation on this, the meander of a strain gauge may be
+sandwiched within two prestrained elastomeric silicone
+rubber substrates [10]. There are other options.
+Capacitive sensing in a deformable dielectric such as
+PDMS is given by:
+[2]
+where
+. The piezoresistive effect involves
+change in electrical resistance in an electrical conductor
+(such as aluminium) due to applied force altering the
+dimensions of the conducting element:
+[3]
+where ρ=resistivity, L=length, ν=Poisson’s ratio.
+The piezoresistive element is embedded in flexible
+polymer such as the PDMS which increases the sensor’s
+sensitivity. Polysiloxanes (RSiO1.5) can be transformed
+into piezoresistive SiOC ceramics through pyrolysis in
+an inert atmosphere at or above 1400 oC yielding an
+extremely high piezoresistive sensitivity of ~145 [11].
+The piezoresistivity of carbon black within the
+elastomeric silicone rubber gives decreasing electric
+resistance with increasing applied pressure [12]. The
+composite resistance is given by:
+
+Page 2 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+[4]
+where L=number of carbon particles in a single
+conducting path, N=number of conducting paths,
+h=Planck’s constant, s=silicone insulation thickness
+between conductive particles, a=effective crosssectional area, e=electron charge,
+,
+φ=potential barrier height, m=electron mass. Change in
+electrical resistance due to applied stress σ is given by:
+[5]
+where D=carbon black particle diameter, φ=particle
+volume fraction, M=silicone compressive modulus.
+Strain sensors may be directly fabricated within
+elastomeric silicone rubber by extruding a viscoelastic
+ink into a liquid elastomer [13]. The ink comprised
+carbon black particles suspended in silicone oil forming
+a resistance filament pattern in the liquid silicone
+elastomer matrix (ecoflex). However, these methods
+require carbon for both carbon black and silicone side
+chains. Although silicones such as PDMS may be
+manufactured on the Moon in-situ from CO2 and H2
+derived from volatiles in lunar regolith through the wellestablished Rochow process (Appendix), such volatiles
+are scarce.
+Piezoelectric materials generate an electric field
+which alters its resonant frequency in response to
+mechanical stress or vice versa. The piezoelectric effect
+involves change in electrical voltage in a piezoelectric
+element due to an applied stress:
+[6]
+where Di=electrical displacement, σij=mechanical
+stress, εii=electrical permittivity, Ei=electric field,
+Sj=mechanical strain, dij and eij=piezoelectric
+coefficients of a 3x6 piezoelectric matrix. Piezoelectric
+polymers such as PVDF or Parylene-C may be
+employed for inertial sensors (accelerometers) and
+tactile sensors offering compliance within the sensitive
+material itself [14]. PVDF-trifluoroethylene film on a
+metal oxide semiconductor field effect transistor with
+integrated temperature sensors can form tactile sensor
+arrays [15] but this requires organic piezoelectric
+materials. A similar problem afflicts the embedding of
+arrays of organic field effect transistors into elastomeric
+silicone rubber to measure pressure [16]. Organic thinfilm transistors are based primarily on low-temperature
+p-type semiconductors based on conjugated polymers
+such as pol(3-hexylthiophene-2,5diyl (P3HT) and 6,13
+bis-(trisopropylsilylethynyl) (TIPS)-pentacene but they
+cannot be 3D printed into fine structures [17. None of
+these are practically manufacturable on the Moon due to
+the paucity of carbon.
+Elastomeric silicone rubber may be impregnated
+with microfluidic channels filled with conductive fluid –
+strain applied to the sensor alters the electrical
+resistance of the fluid. The conductive fluid may
+
+IAC-22-D3.2B.x68580
+
+comprise (a) conductive solids as particles or fibres such
+as carbon black or iron nanoparticles suspended in
+silicone oil; (b) gallium-indium alloy to form circuits for
+strain or pressure sensing in artificial skin [18]; (c)
+electrorheological (ER) or magnetorheological (MR)
+fluids, i.e. conducting or ferromagnetic particles
+respectively suspended in silicone oil. Iron and other
+particles suspended in silicone oil represents a viable
+option using lunar resources – iron may be extracted
+from lunar ilmenite (iron-titanium oxide) minerals. ER
+fluids comprise small solid particles ~0.1-100 μm in
+size (such as metal oxide, aluminosilicate or silica) in
+suspension in a low-viscosity non-conducting fluid such
+as silicone oil. The application of a high electric field
+~1-5 kV/mm increases the fluid’s viscosity by
+polarising the particles to form chain like configurations
+imparting rapid and controllable actuation behaviour
+[19]. The reverse process provides force sensing
+capability. Solid particles may be manufactured from
+lunar mineral resources and silicone rubber/silicone oil
+is derived from syngas (Appendix).
+Lead zirconate titanate (PZT) is the commonest
+piezoelectric ceramic adopted in engineered systems but
+there are other ceramic options – berlinite (AlPO4),
+Rochelle
+salt
+(KNaC4H4O6.4H2O),
+topaz
+(Al2SiO4)(F,OH)2), barium titanate (BaTiO3), lead
+titanate (PbTiO3), potassium niobate (KNbO3), zinc
+oxide (ZnO), aluminium nitride (AlN), etc. All
+ferroelectric materials such as lead zirconate titanate
+(PZT) are piezoelectric but not vice versa. A
+piezoelectric material may be formed into
+semiconducting piezoceramic microwires embedded in
+an elastomeric silicone rubber to measure strain due to
+changes in Schottky barrier height at the two ends of the
+wire [20]. Piezoelectric ceramics may be substituted for
+piezoelectric polymers offering much higher
+temperature tolerances and they may be embedded in
+elastic polymer to permit flexibility. However, these
+ceramics are rare on the Moon.
+The simplest piezoelectric ceramic is quartz (SiO2).
+On Earth, quartz is the second most abundant mineral
+after feldspar as a constituent of granite and the primary
+mineral of sandstone on Earth. Quartz is however rare
+on the Moon - mare basalts incorporate only ~6% of
+relatively pure silica minerals such as cristobalite.
+However, quartz is manufacturable from lunar silicates
+as shown in our lunar industrial ecology [3] (Appendix).
+Quartz may be synthesized artificially in an autoclave
+through processes developed during World War 2 when
+Brazilian quartz resources were cut off from the Allies.
+It involves hydrothermal synthesis of crystals from hot
+aqueous solution of melted silica below 573 oC under
+very high pressure within a thick-walled steel autoclave
+pressure vessel sealed with Bridgman seals. A
+temperature gradient is maintained with the hotter end
+dissolving the quartz and the cooler end precipitating
+
+Page 3 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+the growing crystals to ensure that the quartz is in a
+supersaturated state. Quartz may be employed as a
+sensor to measure force or pressure or as an actuator to
+generate very high frequency oscillation in
+radiofrequency circuitry. Quartz is ideal as a
+radiofrequency crystal oscillator – the Pierce oscillator
+may be constructed with a minimum number of
+components – one inverter, two resistors, two capacitors
+and one quartz crystal. Piezoelectric tactile sensors in
+conjunction with pressure sensors with a feedback
+circuit can provide sensitive tactile measurements
+including differentiating between hard and soft objects
+[21]. An oscillating phase shift circuit allows extraction
+of the phase shift of the resonance. Quartz constitutes
+the sensor element to the quartz microbalance (QMB)
+for the precise and accurate measurement of mass. All
+pyroelectric materials are piezoelectric including quartz
+which is sensitive to infrared radiation in which
+polarisation change is proportional to temperature
+change [22]. Piezoelectric sensors are sensitive but they
+cannot measure static forces. Shape memory alloys such
+as NiTi introduce the possibility of shape memory
+actuation based on temperature or vice versa.
+Temperature is a fundamental measurement that is
+essential for temperature compensation as part of
+general signal processing (typically implemented
+through a bridge circuit).
+Tactility is fundamentally an actuator-driven sensory
+modality as touch is exploratory. Sliding motion
+generates ~micron amplitude vibration ~200 Hz (similar
+to Pacinian corpuscle responses) that correlate with
+textural roughness. Because this process is iterative, it is
+amenable to Bayesian treatment [23]. Complex motor
+activity is required to measure force distribution for the
+construction of tactile “image” maps (arrays of taxels).
+It is essential that the 3D location of the skin taxels are
+calibrated with respect to a central reference frame
+through maximum likelihood mapping [24]. Edge and
+line detection algorithms such as the Hough transform
+may be applied for the extraction of basic tactile
+properties - contact area, centroid estimation,
+eccentricity and principal axis determination may be
+computed using tactile moments. However, tactile data
+is noisy requiring the use of sophisticated filtering
+methods and artificial skins tend to exhibit poor wear
+and tear tolerance. A key lesson is to implement
+actuation as a key component to sensation. Actuation in
+elastomeric materials adopted in sensing offers
+distinctive actuation capabilities. The Venus flytrap is a
+carnivorous plant that snaps shut its hinged lobes to trap
+its insect prey. The flytrap can actuate faster than
+hydraulic transmission by virtue of its pre-stressed lobes
+buckling between two mechanically stable states [25].
+III. PHOTOMULTIPLIER TUBE (PMT)
+
+IAC-22-D3.2B.x68580
+
+Simple proximity sensing is feasible using a simple
+metal detector comprising an oscillator circuit that
+generates an AC through a coil generating an alternating
+magnetic field at frequencies of 5-20 kHz. Nearby
+electrically conductive metal close to the coil
+experiences eddy currents that generate their own
+magnetic field. Another coil acts as a magnetometer to
+detect this change in magnetic field. However, longrange sensing using cameras are essential in spacecraft
+and rover operations - they are versatile in their
+application. The Visual Monitoring Camera (VMC) on
+Mars Express evolved from its original role to provide
+visual feedback of the separation of the Beagle 2 lander
+from the Mars Express orbiter to imaging the Martian
+surface during the orbital mission [26]. Such VMC are
+useful for monitoring mechanical deployments on
+spacecraft rather than relying on indirect measurements
+(e.g. Galileo antenna deployment). The 16 kg 35 cm
+diameter AERCam (autonomous EVA robotic camera)
+Sprint flew on STS-87 (1997) as a freeflying camera
+teleoperated through a translational/rotational hand
+controller to support astronaut operations. The dualcamera system used 12 nitrogen gas thrusters and
+angular rate gyros for attitude control under
+microgravity. A 5 kg 19 cm diameter nanosatellite class
+version – mini-AERCam – had three CMOS imaging
+array cameras with lights supported by two GPS
+antennas to provide self-localisation with onboard
+micro-gyroscopes [27]. These cameras set a precedent
+for the implementation of mobile remote camera
+observation to support astronaut activities on the
+International Space Station. We would expect this to
+continue to support astronaut operations on the Moon.
+This extends to robotic operations including the
+construction of infrastructure - imaging cameras are
+essential for robotic operations as the main primary
+sensing-at-a-distance modality.
+Visual imaging begins with a set of radiance
+measurements at each photoreceptor of an array of
+pixels. We first consider a single pixel. There are
+several approaches to photosensitivity, the most mature
+being photovoltaics. However, the requirement for
+precise doping to form pn junctions would be
+challenging under lunar conditions [28,29]. Colloidal
+semiconducting quantum dots are fluorescent
+semiconducting nanocrystals <20 nm diameter
+comprising an inorganic core (such as CdSe/TiO2)
+surrounded by organic ligand shell (such as PMMA)
+synthesised through wet chemistry [30,31]. Quantum
+confinement within the quantum dot provides tailorable
+quantised energy levels and optical properties but
+photovoltaic efficiencies are currently low ~7% [32].
+This is not feasible on the Moon due to the challenges in
+sourcing and extracting Cd and organic material (though
+TiO2 is extractible from lunar ilmenite).
+
+Page 4 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+Photomultiplier tubes (PMT) are vacuum tubes that
+operate through the photoelectric effect rather than
+thermionic emission [33]. As vacuum tubes, PMTs are
+constructed from a glass envelope enclosing a high
+vacuum within which a photocathode and anode
+sandwich a series of dynodes (Fig 1).
+
+Fig 1. Photomultiplier tube
+The window may be transparent fused silica glass
+(derivable from lunar silicates - Appendix) which is
+transparent to UV radiation down to 160 nm
+wavelength. The glass window focusses light onto the
+photoemissive cathode which, through the photoelectric
+effect, emits electrons into the vacuum. The
+photoelectrons are accelerated by a focussing electrode
+onto the series of dynodes (nominally 9-12 stages)
+which act as electron multipliers through secondary
+electron emission. Each dynode is held at a more
+positive voltage ~100 V to attract the electrons in one
+direction and add ~100 keV of energy at each stage. By
+the time they have reached the anode over 1-2 kV, an
+avalanche current is generated. After a series of such
+electron multiplications at higher electrical potentials,
+x108 amplified electrons are collected by the anode
+positioned very close to the last dynode. The quantum
+efficiency is the ratio of output electrons to input
+photons:
+[7]
+where R=reflection coefficient, k=absorption
+coefficient of photons, Pν=probability that light
+absorption excites electrons to escape, L=mean escape
+length, Ps=probability that electrons are released from
+dynodes. Photoelectron emission occurs if incident
+photons exceed a critical energy threshold (work
+function plus valence-conduction bandgap). The key is
+the photocathode material which is typically an alkali
+metal or III-IV semiconductor and the dynode
+comprising secondary electron emitters which eject
+electrons exceeding the Fermi level and work function
+>10 eV. Commonly used photoelectric materials Cs3Sb for visible and Na-K-Sb-Cs for UV to NIR
+response – cannot be readily manufactured from lunar
+resources. Crystalline silicon cannot be employed as a
+photosensitive transducer without dopants because of its
+indirect bandgap. Photocathodes may be alkali metal
+with low work function such as a thin layer of K coated
+onto a W metal substrate – K has a work function of 2
+eV. Metallic aluminium with a work function of 4.08
+
+IAC-22-D3.2B.x68580
+
+eV in transmission mode photocathodes requires very
+thin layers ~20 nm [34]. The electron microscope is a
+PMT-based vacuum tube. An electron gun accelerates
+the electrons to ~kV directed by a magnetic focussing
+lens and a magnetic objective lens into a narrow beam
+~10 nm in diameter. A metal-coated sample is irradiated
+with an electron beam scanned over the sample surface
+using a pair of focussing magnetic lenses. The metalcoated surface generates secondary electrons which may
+be detected with the dynodes of a PMT array.
+High resolution imaging may be feasible with an
+Al/TiO2 junction, both common resources on the Moon.
+A rectenna (rectifying antenna) converts an AC input to
+a DC output using a diode clamping circuit followed by
+a DC smoothing pass filter. The antenna must be
+comparable in size to the wavelength of incident
+radiation so higher frequency requires smaller antenna.
+However, efficiency of the rectenna drops with
+increasing frequency with >90% at 2.45 GHz to 60-85%
+at 5.8 GHz reaching sub-1% efficiencies in the visible
+spectrum. This problem may be circumvented through
+the exploitation of plasmon resonance at visible
+wavelengths. The rectenna can be operated at high
+frequencies up to ~THz including visible light in which
+the antenna is an array of half-wave nanodipoles [35].
+Higher efficiency results from hot electron emission
+from plasmonic nanostructures due to surface plasmon
+resonance [36]. This is caused by confined free
+electrons oscillating with the same frequency as incident
+light
+
+due to nanostructured metal (such
+
+as Al for 400-600 nm spectral region) on an n-type TiO2
+semiconductor (ΔE=3.3 eV) substrate where n=carrier
+concentration, m=electron mass, e=electronic charge.
+Conversion efficiency is close to 50% for multispectral
+light. The metal nanostructures (such as nanorod arrays)
+act as nanoantennas that generate surface plasmons
+which decay from which the plasmon resonance energy
+is transferred to the semiconductor conduction band by
+hot electrons generating a photocurrent over the
+Schottky barrier [37]. Multiple nanoantenna arrays with
+different resonant frequencies offer the potential for
+spectroscopy. Electron beam lithography deploys an
+electron beam to pattern nano-structures with sub-10 nm
+resolution. An electron beam is generated from an
+electron emission source shaped and focussed by a
+series of electromagnetic lenses. However, it is not clear
+that electron beam lithography is feasible as an in-situ
+lunar manufacturing technology.
+For optical sensitivity, rather than using junction
+materials which will be difficult to manufacture with
+precision on the Moon (such as through the microwave
+applicator [38], we have chosen the simplest lightsensitive material – selenium – as the photocathode that
+was used in Alexander Graham Bell’s photophone.
+Amorphous selenium powder as a photocathode is a p-
+
+Page 5 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+type semiconductor with an optical energy gap of 1.99
+eV [39,40]. The photoelectric current is given by
+Fowler’s law:
+where k=constant,
+n=material exponent. On Earth, selenium is found in
+minerals eucairite (CuAgSe), crooksite (CuThSe) and
+clausthalite (PbSe) in metal sulphide ores. Most
+selenium on Earth is extracted as a byproduct of
+electrolytic refining of chalcopyrite (CuFeS) deposits
+(with Se substitution of S) which do exist on the Moon
+but are rare. Despite its name, selenium is rare on the
+Moon though it occurs in meteorites in approximately
+constant Se/Te abundance ratios of ~10-20 by weight,
+the Se content varying from 0.5-10 ppm [41]. In
+carbonaceous chondrites, Se is in found in association
+with the 2500 times more abundant S such as found in
+troilite (FeS). Troilite is common in iron meteorites and
+occurs in association with graphite grains in irons.
+Selenium may be extracted through treatment with
+HF/HNO3 digestion in the presence of alumina (Al2O3)
+followed by purification with the organic reagent
+ascorbic acid [42] but organic acids are impractical on
+the Moon. Following a similar treatment to copper
+selenide, a troilite source of FeSe may be smelted with
+soda Na2CO3 in solution using a saltpetre KNO3
+catalyst:
+FeSe + Na2CO3 + 1.5O2 → FeO + Na2SeO3 + CO2
+Saltpetre could be manufactured from KREEP
+minerals and nitrogenous lunar volatiles (it may also be
+used for blasting as saltpetre mixed with sulphur and
+charcoal forms the basis of gunpowder). Lunar
+orthoclase offers a more practical source (Appendix).
+Selenite Na2SeO3 may be acidified with H2SO4 yielding
+selenous acid (H2SeO3) from which Se may be
+precipitated:
+Na2SeO3 + 2H2SO4 →
+H2SeO3 + Na2O + 2SO2 + H2O →
+Na2O + 2H2SO4 + Se
+The sulphuric acid reagent is thus recycled.
+Treatment of troilite (FeS) in the presence of H 2S in
+aqueous solution yields iron pyrite (FeS2) with the
+evolution of hydrogen, the rate of reaction increasing
+with temperature up to 125oC [43] – indeed, the
+equivalent transformation at low temperatures have
+been invoked as part of a biotic redox couple in the
+iron-sulphur world of early Earth [44]. Iron pyrite FeS2
+offers the possibility of infrared sensitivity. Thin FeS2
+pyrite films ~μm are n-type semiconductors that exhibit
+photoconductivity with high absorption coefficient
+α>5x105/cm for λ<900 nm and bandgap Eg=0.95 eV
+[45]. The question of manufacturing thin films by
+chemical vapour deposition on the Moon however
+remain open.
+Secondary electron emitters are typically alkali
+metal oxides such as Al2O3 or MgO coatings on nickel,
+aluminium or steel dynodes [46] though any alkali metal
+oxide (e.g. CaO or K2O) will have secondary electron
+
+IAC-22-D3.2B.x68580
+
+emission properties. All these oxides are extractible
+from lunar resources as outlined in our lunar industrial
+ecology [3] (Appendix). The number of secondary
+electrons emitted per incident electron is typically ~4-6
+for a few hundred volts. Stray magnetic fields can be
+controlled using permalloy (80% nickel-20% iron alloy)
+manufacturable from lunar resources.
+PMTs are highly sensitive optical detectors with
+high signal-to-noise ratio that may be arrayed into pixels
+in a microchannel plate, a thin parallel array of glass
+channels, each acting as an electron multiplier. The
+microchannel plate comprises a regular array of tiny
+tubes ~10 μm in diameter spaced ~15 μm apart
+separated by electrically resistive walls. These glass
+walls act as continuous dynode electron multipliers onto
+which a photon strikes causing a cascade of electrons.
+They use a strong electric field to accelerate the
+electrons through each channel amplifying the incident
+signal by many orders of magnitude. The PMT may be
+deployed as a mobile camera.
+IV. LIDAR
+What about leveraging optical laser technology on
+the Moon? LIDAR has applications in depth
+measurement for visual mapping of the environment.
+The laser comprises a pumped energy source, a lasing
+medium and an optical Fabry-Perot resonator. The
+optical cavity resonator comprises two parallel mirrors,
+one fully reflective and the other partially reflective to
+amplify light intensity through stimulated emission. The
+lasing medium provides optical gain that amplifies light
+input by stimulated emission. An optical pump supplies
+the input energy and an optical feedback mechanism is
+enabled by the optical cavity formed by the pair of
+mirrors. The optical pump is typically a noble gas
+flashtube for generating population inversion in the
+lasing medium. Stimulated emission results from
+oscillating light between the two mirrors which must be
+polished and flat to within λ/4. The Townes maser
+(microwave amplification by stimulated emission of
+radiation) preceded the Maiman ruby laser (light
+amplification by stimulated emission of radiation) [47]
+illustrating that non-visible light can be amplified at a
+single wavelength. The simplest form of laser uses a
+high-pressure nitrogen (or air) gas medium which has
+such a high gain of 2 that mirrors are not required.
+However, the lasing is self-limiting - a 100 kW UV-A
+pulse at 337 nm is generated and decays within
+nanoseconds of the initiating discharge. A reflective rear
+mirror doubles its power output. It cannot be readily
+focused making it useless for material processing but it
+may be used to pump a dye laser. Dye lasers are
+relatively simple to construct using a nitrogen laser
+pump with fully reflective rear mirrors. Pulsed lasers are
+more readily built with lower reflectivity mirrors (~80%
+reflectivity is readily achievable with polished Al) than
+
+Page 6 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+continuous wave lasers which require ~99% reflective
+dielectric mirrors. However, they are based on organic
+media which are rare on the Moon as is nitrogen. A
+high-powered Hg UV discharge lamp can be substituted
+for a UV laser, useful for UV photolithography. A
+simple laser may be constructed but the discharge lamp
+requires a high voltage of 20 kVdc which can be
+achieved with a Blumlein circuit. However, Hg is not
+readily available on the Moon.
+Optical fibres are silica glass - fused silica glass is
+manufactured by melting silica (derived from lunar
+silicates) at ~2000oC in a furnace. It can then be seeded
+in sodium silicate at 350oC and 150 bar (Appendix). It is
+plausible that metallic cladding of nickel or cobalt might
+be employed to generate internal reflection within the
+glass fibre core rather than graded doping of glass
+cladding [48]. Optical fibres may replace conducting
+wires in the elastomeric silicone rubber to measure
+changes in optical transmission under strain. Optical
+fibre tactile sensing relies on modification of parameters
+of transmitted light such as intensity through an optical
+fibre due to an applied force. Amplification of light
+signals within an optical fibre may be achieved by
+doping the silica of the fibre by the rare earth element
+erbium. This can be pumped by a diode laser to emit
+stimulated photons at higher power. The use of
+chalcogenide glasses containing elements from group 16
+(such as S) allows the fibre to act as a resonating cavity.
+Application to photonic materials offers the possibility
+of switching with chalcogenides. However, most solidstate and optical fibre lasers are based on crystal or glass
+rods which are doped with rare-earth elements such as
+Nd (as in Nd:YAG) or Ti (as in Ti:sapphire) pumped by
+flash lamps or doped semiconductors (based on III-V
+junctions). Ti is available on the Moon and Al2O3 can be
+extracted from lunar minerals as corundum - synthetic
+sapphire (Co-doped corundum) may be manufactured
+through the Czochralski process, hydrothermal synthesis
+or the Verneuil flame process. Similarly, synthetic ruby
+(Cr-doped corundum) can be manufactured – ruby
+lasers are the most viable option. Rubies can be
+synthesized from a mixture of Al2O3 and Cr2O3 powder
+heated to 2000oC in a hydrogen-oxygen torch followed
+by seeding growth in sodium carbonate at 445oC and
+380 MPa [49]. Ruby lasers were the first (Maimon)
+lasers and output 1 kW power at 694.3 nm (red). The
+rod ends are polished flat and parallel within /4 and
+silvered to create the Fabry-Perot etalon. Despite its low
+efficiency and low repetition rate, ruby lasers are
+commonly used for drilling holes in diamond,
+illustrating their utility in material machining. Solidstate diode laser pumping such as Nd:YAG offers high
+efficiencies up to 50% but optical pumping with
+flashlamps or other lasers is typically inefficient ~2%.
+Nd:YAG continuous lasers are the best solid-state lasers
+at 1.06 μm but rare earth materials are difficult to
+
+IAC-22-D3.2B.x68580
+
+extract from lunar resources. The short pulse Ti-doped
+sapphire (Al2O3) laser is tunable across 660-1180 nm
+but requires diode laser pumping. Electron beam
+pumping has been applied to excited dimer (excimer)
+lasers such as KrF lasers at 259 nm but Kr and F are
+highly rarified on the Moon. Electron beam pumping
+through wiggler magnets is the basis of the free electron
+laser (FEL) tunable from microwave to X-ray but a
+powerful electron accelerator is required [50]. The CO2
+gas pulsed laser pumped by electrical discharge outputs
+25 kW power output at 10.6 μm but increased efficiency
+to 10% requires the addition of helium. Both carbon and
+helium volatiles are scarcer on the Moon than mineral
+resources. We thus conclude that lasers cannot be
+readily manufactured from lunar resources for first
+generation ISRU capabilities due to the stringent
+manufacturing techniques, required stringent tolerances
+of λ/4 and marginal accessibility of functional materials.
+V. BIOINSPIRED VISION
+Classical image processing assumes large arrays of
+pixels and is computationally intensive which is not
+suited to small PMT arrays. As explained later, we have
+adopted neural network architectures for computation.
+We shall briefly explore biological vision to determine
+if we can exploit bio-inspired approaches to robotic
+vision to compensate for the challenges imposed by
+lunar-derived imaging technology. In animals, the eye
+has been estimated to have evolved rapidly and
+independently from a lenseless patch of simple lightsensitive cells in an eyecup in Cambrian molluscs,
+arthropods and chordates into eight basic optical designs
+with graded refractive index lenses, testament to the
+importance of biological vision [51,52]. Human visual
+processing is a multi-stage process (simplified here to
+its bare essence) involving centre-surround neurons that
+is dedicated towards motor action [53]: (i) LGN (lateral
+geniculate nuclei) extracts primary colours (red, green
+and blue); (ii) V1 extracts edges at different orientations
+through Laplacian filters (good approximation of the
+stationary autocorrelation matrix of the image) while V2
+extracts texture using Gabor wavelets (a windowed
+Fourier transform); (iii) V2-V4 forms the ventral
+pathway to extract visual features generated by active
+contour (snake) models while V2-MT (middle temporal)
+forms the dorsal pathway that uses optic flow to extract
+motion; (iv) ventral pathway IT (inferior temporal)
+performs object recognition in a winner-takes-all
+process; (v) dorsal pathway MST (medial superior
+temporal) performs optic flow of global motion
+including self-motion; (vi) IP (intraparietal) receives
+both streams and integrates them into a salience map of
+the visual field for generating oculomotor commands by
+the premotor cortex. The convolutional neural network
+emulates the biological architecture by extracting simple
+
+Page 7 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+visual features that are then linked by successive layers
+to construct more complex features.
+Detection of visual motion requires detection of
+retinal slip of visual features in V1 followed by
+selective integration of those moving features through a
+correlation algorithm implemented in the MT, i.e. optic
+flow field [54,55]. The correlation algorithm is realized
+as directionally-sensitive delayed inhibition between
+neighbouring pixels. In motion sensitive neurons,
+velocity of motion is encoded in neural spike timing
+[56]. Hence, optic flow is fundamental to visual
+perception of a dynamic world. The primate visual
+cortex (around 25% of the human cortex) exhibits a
+network of feedforward, feedback and lateral
+corticocortical pathways [57,58], e.g. V1 projects to V2
+which reciprocally projects back to V1. There is
+information flow in both directions in which hypotheses
+influences data (Bayesian framework) combining
+bottom-up and top-down information flows. The
+primate visual processing system represents a deep
+hierarchy of up to 10 levels of hierarchical and parallel
+cortical processing [59]. Human motor response to
+visual stimuli takes 400-500 ms suggesting that each
+neuronal stage takes 20-30 ms per synapse [60]. V1
+response occurs at 40 ms then most of the visual cortex
+has responded by 80 ms and then at 120 ms motor
+cortex response begins. Neural discharge in a population
+of neurons - assumed to correlate with an observable
+cognitive behaviour - is often subject to a delay in
+response time ~100 ms. At each stage of the
+feedforward pathway, recurrent feedback is activated to
+modulate earlier processing. Recurrent feedback activity
+is essential for visual awareness which in turn must be
+action-oriented with respect to motor acts and general
+active exploratory behaviour [61,62].
+There are two visual processing streams in the visual
+cortex with little cross-talk between them: the ventral
+(occipitotemporal) P pathway (V1-V2-V4-IT) is
+concerned with object identification (what) while the
+dorsal (occipitoparietal) M pathway (V1-V2-V3MT/MST) is concerned with spatial and motion
+relationships of objects (where) [63]. The latter pathway
+V1-MT/MST acts as a saliency map. Visual information
+is selectively processed for the spotlight of attention
+(visual awareness) in working memory. Attention is
+directed to objects of high behavioural relevance as
+indicated by the well-known change blindness
+phenomenon. Vision involves a bottom-up stimulusdriven dorsal (where) pathway that selects targets on the
+basis of saliency dictated by centre-surround processing
+(to detect perceptual figure/ground Mexican hat
+contrast) at multiple scales (using a Gaussian pyramid
+of 2D difference-of-Gaussian filters) of basic visual
+properties (such as intensity, colour, orientation, motion,
+etc) by forming a topographic saliency map [64].
+Saliency of stimuli depends on its contrast with the
+
+IAC-22-D3.2B.x68580
+
+surrounding context. A top-down hypothesis-driven
+ventral (what) pathway provides feedback by
+modulating the visual targets on the basis of behavioral
+importance, i.e. object recognition [65]. The saliency
+map is a unique 2D map encoding saliency (or
+noticeability) of objects in the visual environment
+constructed bottom-up. The saliency map is constructed
+from information from multiple modalities which are
+combined into the saliency map. A multiresolution
+convolutional neural network can use local contrast,
+global contrast and other top-down visual factors as
+saliency cues from image inputs to predict eye fixations
+[66]. The saliency map may be represented as a
+topologically local neighbourhood map in which an
+information maximum metric predicts eye fixation
+locations [67]. There are multiple visual objects in
+visual locations encoded by integrate-and-fire neurons
+which compete through a neural winner-take-all
+algorithm to be the next visual target of saccadic eye
+movements and/or focus of attention [65]. The winning
+neurons are subsequently inhibited (inhibition of return
+which acts as a memory mechanism) so that the focus of
+attention is directed to the next most salient location.
+Selection of gaze fixation positions is effectively
+Bayesian in updating top-down (prior) hypotheses with
+new visual data. Action-directed eye movements
+provides the basis for active vision.
+The pulvinar nucleus of the thalamus may
+implement control neurons that direct attention through
+the “what” pathway on receiving input from a saliency
+map of the “where” pathway via corticocortical
+pathways [68]. A Y-shaped what-where (ventral-dorsal)
+bidirectional network has demonstrated integration of
+bottom-up visual data-driven processing and top-down
+motor-driven processing [69]. Top-down signals
+propagate motor representations through both pathways.
+Neural fields that learn through a random motor
+babbling implement rapid learning of mappings between
+retinal image space of the eye and the six-eye muscle
+motor space to control visual saccades [70]. Interaction
+with the environment provides the opportunity to learn
+mappings of visual features into actions [71]. Such a
+visual control policy can be learned through
+reinforcement preceded by a Markovian visual
+classifier, e.g. temporal difference algorithm. It appears
+that it is more efficient to extract and process different
+visual properties independently and in parallel before
+being bound by synchronous firing at higher processing
+levels. A similar division occurs in auditory cortex with
+a “what” stream and a “where” stream subsequently
+exploited in spoken language to distinguish spoken
+message from speaker [72,73]. This reinforces the
+evidence that sensory data should be partitioned into
+independent processing streams.
+We adopt a bio-inspired appoach to vision suited to
+the small PMT arrays. We separate our active vision
+
+Page 8 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+(what) pathway for object identification and our optic
+flow (where) pathway for navigation.
+VI. ACTIVE VISION
+We expect the imaging resolutions of in-situ
+manufactured imagers using small array PMT pixels to
+be poor but we can learn from biomimetics to
+compensate. Active vision exploits actuator-driven
+exploration of the visual field to minimise imaging pixel
+hardware. The human eye is characterised by a large
+concentration of 7x106 cones with a density of 5000
+cones/μm within the ±0.5-1.0o foveal region of the
+retinal array about 5o off the optic axis for high
+resolution imaging [74]. The blindspot itself ~5o in size
+where the retina feeds into the optic nerve is invisible to
+perception. Away from the fovea, the distribution of the
+other 120 x 106 visual receptors becomes more diffuse
+with lower resolution throughout the majority of the
+visual field. Around 50% of the visual cortex is devoted
+to processing foveal data.
+Gaze shifting and gaze holding movements of the
+eye provide a means to rapidly aim this narrow field of
+view (FOV) – this is central to active vision [75]. Fast
+saccadic eye movements move the fovea between
+different targets in the visual field while active gaze
+control keeps the fovea on a specific target (visual
+fixations). Between fixations, saccades direct the fovea
+onto targets in the visual field. They are point-to-point
+movements of the eyes at 900o/s which bring the highresolution fovea to visual targets at a rate of 2-3 Hz,
+each fixation being ~30 ms in duration - we make
+~100,000 searches per day. Each saccade yields
+discontinuous changes in retinal motion and alters
+retinal projection of the heading direction. The saccades
+rapidly shift gaze over the visual field under the control
+of a neural circuit involving the frontal lobe, basal
+ganglia, cerebellum and superior colliculus. Tracking is
+updated with every saccade which changes the direction
+of motion with every saccade. This is a Bayesian
+approach in which the posterior likelihood is the prior
+likelihood updated by the latest fixation [76]. Selection
+of viewpoints for gazing in active vision may follow a
+gradient
+of prediction variance σ to reduce
+uncertainty [77]. A neural integrator maintains an
+equilibrated eye position during visual fixation between
+saccades [78]. The superior colliculus represents a
+topographic map of saccade vector fields which may be
+represented by a neural network with an upper layer
+connected to the lower layer by feedforward
+connections with weights determined by a recurrent
+backpropagation algorithm [79]. Reciprocal inhibition
+of gaze-shifting neurons and gaze-holding neurons in
+the superior colliculus determines which neurons are
+active. Saccade termination is driven by the error
+between current eye position and desired eye position
+
+IAC-22-D3.2B.x68580
+
+which influences neuronal discharge rates [80].
+Discharge rates are modulated through the time delay
+inherent in reaction times [81].
+Active vision reduces the requirement for optical
+hardware by actively orienting a high-resolution fovea
+over the visual field. We may exploit such active vision
+in engineered cameras to accommodate limited FOV. In
+engineered active vision, the camera is mounted onto a
+pan-tilt unit to permit slewing of the camera illustrating
+an example of Gibsonian affordances. Gibsonian
+affordances are the potentials for action afforded by the
+properties of the environment (objects, events and
+locations) relative to the agent [82]. The effectors are
+then actuated to realize a specific affordance. Such
+slewing is implemented by electric motors with
+feedback from rotary potentiometers on motor position
+at each motorised joint. The extended Kalman filter
+augmented by iterative adaptation may be applied to the
+dynamics of this visual servoing [83].
+There are two options for feedback on camera
+slewing – optical and vestibular. Optic flow consists of
+a flowfield in which all motion is directed away from
+the focus of expansion to indicate heading. Eye
+movements with respect to the body introduce an
+additional retinal image motion which is superimposed
+on the optic flowfield. The direction of eye movement
+required to stabilize gaze on the target occurs along a
+flowline away from the heading point. Eye rotations
+shift the focus of expansion by (d/x)θ where d=distance
+of place from observer, θ=rotation of observer,
+x=translation of observer. Hence, optic flow involves
+using eye movements to track retinal motion in the
+direction of gaze. Although direct visual estimation of
+movement through optic flow is adequate for slow eye
+movements <1.5o/s (optokinetic response), at higher
+speeds, non-visual information is required, i.e.
+vestibular information through the vestibular ocular
+reflex (VOR). The unscented Kalman filter has been
+shown to be effective in implementing VOR-inspired
+visual servoing [84]. VOR is a reflex that stabilises
+images on the retina through compensatory eye
+movements during head movements detected by the
+semicircular canals. The signal from semicircular canals
+to the eye muscles is rapidly transmitted through a
+three-neuron arc with a resulting lag of only 10 ms.
+VOR (and other widespread neural functions) is a neural
+feedback system that is subject to gain adaptation
+through learning that permits integration of multiple
+information sources [125,85]. However, implementation
+of inertial measurement on the camera assembly itself is
+not commonly adopted in robotic systems. Taking a
+biomimetic stance, the only feedback we have is from
+the joints of the camera mast/pan-tilt unit. In
+mammalian biology, feedback from muscles is
+generated by the spindles (position-derivative) and
+Golgi tendon sensors (force) which provides local
+
+Page 9 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+muscular force feedback to orient the eyes. To
+compensate for this reduced observability, predictive
+feedforward control (implemented by a pre-trained
+neural network) may augment feedback to provide
+robust estimation of visual tracking (Fig 2) [86].
+
+Fig 3. 3D printed electric motor
+
+Fig 2. Error excursion for a 3 degree-of-freedom camera
+mast (a) feedback only (b) feedforward-augmented
+feedback
+This demonstrates how forward modelling using
+neural networks may be employed to enhance feedback
+from position sensors (such as rotary potentiometers) in
+camera pointing. This is also required in a threecomponent system for accurate tracking in smooth
+pursuit: a feedback controller (subject to significant
+delays), target velocity predictive controller and an
+inverse oculomotor model [87]. A feedback error
+learning controller uses the output of the PD feedback
+pathway as a teacher signal to improve the performance
+of VOR.
+Motor control of the camera is central to active
+vision. Motorised micro-stepping offers the potential for
+circumventing resolution limits in PMT arrays. We have
+demonstrated how electric motors may be potentially
+3D printed from lunar resources [88]. Our prototype 3D
+printed motor was printed using Proto-Pasta comprising
+50% iron particles embedded in a 50% PLA (polylactic
+acid) matrix by weight offering a soft magnetic medium
+(Fig 3). Both the closed magnetic circuit stator and the
+rotor were constructed from Proto-Pasta with copper
+wire windings to create a fixed electromagnet (stator)
+and alternating electromagnet (rotor). A 3D printed
+lunar variant could be replaced with either abundant
+nanophase-iron impregnated lunar glass or iron particleimpregnated fused silica glass for the stator/rotor and
+copper windings with aluminium windings.
+
+IAC-22-D3.2B.x68580
+
+Such motors would be the primary mechanism for
+implementing active vision. The feedback control of the
+joints using rotary potentiometers should offer higher
+resolution of control than the PMT pixel resolution
+allowing the camera to orient over the visual field with
+higher than pixel resolution. A stepper motor variant of
+a 3D printed motor can potentially improve this
+resolution further by implementing micro-stepping.
+VII. OPTIC FLOW VISION
+Whereas active vision is associated with object
+identification, optic flow may be associated with visual
+navigation. Optic flow is fundamental to vision - even
+during fixated visual gazing there are small involuntary
+microsaccades ~arcminutes in amplitude with ~0.6 s
+periods. This is required to maintain permanent vision –
+complete immobolisation of the eyeball causes objects
+to disappear. The eye detects intensity fluctuations over
+time measured by the retina rather than absolute
+intensity as the latter would yield visual artefacts such
+as blood vessel shadows, etc. Gibsonian ecological
+perception suggests that physical laws and ecological
+constraints of the environment limits possible
+interpretations of sensory stimuli [82]. The stimulus
+information is encoded as invariants which specify
+environmental properties. Optic flow is such an
+affordance that provides for direct motor control with
+minimal requirement for inferential processing [89].
+Honeybees have small brains (~960,000 neurons
+with a 1 mm3 volume) with a modular construction with
+independent sensorimotor functions [90]. There is
+horizontal
+(central)
+integration
+but
+visual,
+mechanosensory and olfactory information appears to
+occur in the mushroom bodies, each comprising
+~170,000 tightly-packaged neurons [91]. Insects possess
+eyes of fixed orientation and fixed focus and cannot use
+binocular stereopsis for depth estimation due to the
+small baseline between the two eyes. When an insect
+moves, optic flow generates information on the motion
+
+Page 10 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+of the animal as well as objects in the environment.
+Insects lack a visual cortex possessing a brain of only
+~106 neurons and perform only low-level visuomotor
+processing. A low pass Gaussian filter provides spatial
+filtering at the photoreceptors while predictive coding
+provides temporal high pass filtering. The eye of
+Drosophila melanogaster comprises 700 omnatidiae
+backed by three neural layers – neuropils lamina,
+medulla, and lobula complex – which perform contrast
+enhancement, signal amplification and motion
+detection. The insect compound eye comprises arrays of
+low resolution ommatidia connected to an analogue
+neural network with overlapping Gaussian receptive
+fields of view but with variable spatial acuity over the
+eye [92]. Ommatidia form groups with a central pixel
+surrounded by six neighbouring pixels and it is the
+overlapping Gaussian response of the ommatidia that
+renders its superior performance. Motion is detected by
+comparing visual signals in a small patch of the visual
+field with delayed signals in neighbouring patches.
+An elementary motion detector generates the
+strongest response when the visual pattern moves in a
+specific direction (Reichardt detector) [93]. Reichardt
+detector coincidence between adjacent pixels can be
+implemented through temporal filtering of the inputs.
+Insect-inspired
+vision
+sensor
+offers
+superior
+performance in rapid but reliable mobile object
+detection compared to a CCD camera [94]. Insects use
+image motion to estimate range - when an insect moves
+in a straight line, the image of a nearer object moves
+faster than further objects. The distance may be
+measured by integrating image motion over time (optic
+flow). Optic flow due to translation induces motion
+parallax such that optic flow is inversely proportional to
+distance. This gives a basis for recovering depth
+information in cues. Rotation generates equal angular
+motion at all distances. Hence, translation and rotation
+motion can be distinguished if a minimum of six points
+can be tracked. Thus rotation-independent, the local
+motion parallax field allows recovery of the focus of
+expansion. Optic flow speed is used to determine object
+distances. Flying insects maintain equidistance between
+obstacles by balancing the angular speeds of retinal
+images in the two eyes. Some insects invoke selfmotion for the purpose of generating optic flow
+information from the visual feedback [95,96]. Initial
+visual processing in flying insects occurs through a 2D
+array of 48,000 photoreceptors to construct 3000 pixels
+per eye with 8 receptors/pixel with coaxial receptive
+fields. This allows optic flow to implement autonomous
+navigation based on motion detection that may be
+measured using arrays of analogue elementary motion
+detectors as a model of insect compound eyes of 3000
+pixels [97]. Between neighbouring facets, object
+velocities are detected to generate a map of obstacles in
+polar coordinates in eye-centred reference frames. The
+
+IAC-22-D3.2B.x68580
+
+multi-faceted insect compound eye has been emulated
+with a 118-pixel model with a concurrent analogue
+array of 100 Reichardt detectors on a mobile robot [98].
+Motion is detected by comparing visual signals in a
+small patch of the visual field with delayed signals in
+neighbouring patches. A PI controller can emulate the
+summation process of neighbouring neurons [99]. Optic
+flow illustrates an alternative approach to visual
+navigation based on simple electronic circuitry rather
+than complex software.
+VIII. NEURAL NETWORK-BASED VISION
+Neural network architecture offers advantages of
+reduced
+physical
+footprint
+over
+CPU-based
+architectures [100] and are Turing-complete [101].
+Neural networks are highly suited to the implementation
+of both active vision and visual navigation. The pulsecoupled neural network (PCNN) can select visual
+targets for automated foveation as the key to active
+vision from a filtered image input [102]. The filtered
+image may be an optic flow field or edge-filtered image.
+PCNN divides a receptive field input into two channels
+- a linking channel that receives local stimuli and a
+feeding channel that receives external and local stimuli.
+Linking modulation feeds back the output from the
+linking channel, applies a threshold and multiplies this
+with the output of the feeding channel to determine
+neuronal internal states. A sigmoidal pulse generator
+fires if it exceeds the threshold which itself is set by a
+general exponential decay against previous firings
+which raise the threshold. It is the firings that select the
+foveation points. Neural networks may represent neural
+fields by correlating agent motion with a heading
+direction and velocity as control variables while the
+environment is characterised by multiple goal heading
+directions ψtgt and multiple obstacle heading directions
+ψobs relative to allocentric reference coordinates
+[103,104]. Coupled sets of neural fields representative
+of different neuronal populations can implement goaldirected behavior [105]. ALVINN (autonomous land
+vehicle in a neural network) adopted a fully-connected
+neural network with 30 x 32 visual input nodes feeding
+into 5 hidden nodes which projected into 30 steering
+angle output nodes [106]. It implemented a receptive
+field-based activation distribution in which neurons of a
+radial basis function respond selectively to spatial or
+angular position:
+[8]
+where
+
+=hidden neuron activation,
+
+d=Euclidean distance between neuron centre to input
+vector, bi=receptive field width. Neural network outputs
+can be correlated with sensory visual inputs to construct
+a vector flow field of the rover rφ in its environment
+[107].
+
+Page 11 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+The two processing streams may be integrated using
+noise-tolerant neural networks. by emulating the
+function of the middle temporal (MT) and medial
+superior temporal (MST) areas of the primate visual
+cortex. Neural networks may be used to transform optic
+flow and eye position information into map
+representations of heading direction, range and location
+of objects in the scene [108]. The heading network is
+embedded in the larger network encoding the
+environment. The self-organising map may then be used
+to navigate in pursuit of a moving target whilst avoiding
+obstacles. The primary problem is to separate optic flow
+generated by eye movement which corrupts the optic
+flow pattern generated by objects in the scene due to
+pure translation motion. Neural network weights were
+trained using optic flow information correlated with eye
+movements and optic flow information correlated with
+object movements. Each input neuron is sensitive to a
+specific optic flow direction given by:
+.
+Inhibitory connections from pitch and yaw eye velocity
+neurons ensure cancellation of flow field components
+due to eye movements. Weight learning is given by:
+which becomes zero when inputs are
+equal indicating eye movement compensation. The
+remaining flowfield components correlate to observer
+translational velocity. The heading map comprises a
+topographical self-organising map of cells which
+receive weighted excitatory inputs from the optic
+flowfield. The heading cells spread out in different
+heading directions – the angular separation of
+neighbouring cells being dependent on the number of
+cells in the map. Optic flow can also provide depth
+information by computation of time-to-collision to
+obstacles. Translational flow speed is logarithmically
+compressed prior to input to a retinoptically organized
+depth map of ranges to objects which affords higher
+resolution to nearby objects.
+More complex image processing tasks may be
+implemented with neural networks. The fundamental
+process for initial texture analysis is the Gabor
+transform at different orientations. The Gabor filter is
+the product of a 2D Gaussian modulated by a complex
+exponential function that captures local structure
+including both edges and texture that is invariant to
+translation, rotation and dilation [109]. Texture analysis
+proceeds beyond feature extraction – it is concerned
+with micro-features. A popular approach is to
+implement Gabor filters in a neural network. A 2D
+image is presented to the input layer of a neural network
+where it is convolved with a Gabor filter prior to
+processing with the classifier segment of the neural
+network’s hidden layer [110]. Prior application with
+principal components analysis to the image reduces the
+dimensionality of the image. Alternatively, a three-layer
+neural network can compress a 2D image into Gabor
+
+IAC-22-D3.2B.x68580
+
+filter coefficients with 20:1 compression rates [111]. For
+visual texture analysis, different neural networks may be
+implemented, e.g. probabilistically weighted neural
+network [112], cellular neural network [113] and
+convolutional neural network [114]. Neurons sensitive
+to binocular disparity for stereoscopic depth perception
+are present in the V1 and V2 regions of the visual cortex
+[115]. Displacement of a function generates a
+proportional phase shift in its Fourier transform - a
+localised Fourier transform may be approximated by a
+Gabor function which represents a sinusoidal-shaped
+Gaussian envelope. For a pair of left/right binocular
+cells, their broad receptive fields can be represented by
+transforms:
+(9)
+where , w and  are size, angular frequency and
+phases of the receptive fields. The response of the
+neuron to a stimulus is given by:
+(10)
+where I(x)=intensity of retinal image, Iright(x)=I(x),
+Ileft(x)=I(x+d), d=binocular disparity. Assuming that the
+receptive field widths are much larger than the disparity:
+(11)
+where A and θ are amplitude and phase of the
+Fourier transform of image I(x) at frequency w. The
+Fourier transform is sensitive to the phase shift.
+Robustness requires independence of Fourier phase. By
+introducing a 90o phase shift between the two neurons
+and squaring and summing the output gives a disparity
+tuned with a broader width:
+(12)
+with
+. The receptive fields may
+integrate motion with stereo sensitivity:
+(13)
+
+The images representing binocular disparity and
+motion are given by: Ileft(x,t)=I(x-vt) and Iright(x,t)=I(xvt+d). The response becomes:
+
+(14)
+Hence, neural network responses may be tuned to
+both disparity and motion detection.
+Analogue neural network hardware may be
+constructed from op-amps which in turn may be
+constructed from vacuum tubes (of which the PMT is an
+
+Page 12 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+example) which can be constructed from lunar
+resources. Although we have yet to 3D print vacuum
+tubes, we have implemented op-amp-based analogue
+neural network circuits, specifically YamashitaNakamura neurons [116] in fixed weight circuits [117]
+and with backpropagation learning circuitry [118]
+demonstrating the principle of adopting analogue neural
+networks as computational hardware potentially
+manufacturable from lunar resources.
+IX. SPECTRAL ANALYSIS
+A simple photometer may be constructed comprising
+a light emitting diode source, a light-dependent resistor
+detector and an amplifier/buffer circuit to drive a
+voltmeter [119]. The sample under study is placed
+between the source and detector to measure the light
+transmitted through it according to the Beer-Lambert
+law which defines absorbance thus:
+(15)
+where c=concentration of compound, l=sample path
+length, ε=wavelength-dependent constant, I0=incident
+light intensity, I=transmitted light intensity. A slit and
+prism may be sandwiched between the source and
+detector to select specific wavebands to analyse.
+Spectral lines in reflected light contain invaluable
+information about the sample under study. All matter
+emits electromagnetic energy characteristic of its
+material composition. They both absorb (absorption
+lines) and emit (emission lines) electromagnetic
+radiation. These lines are sharp in rarified gases but they
+become broadened into a continuous spectrum in denser
+configurations such as liquids or solids. A spectrometer
+comprises a narrow slit ~0.2 mm in width which
+projects optical energy onto the dispersive element.
+Diffraction gratings are traditionally used in
+spectrometers to split and diffract light into different
+components. Gratings comprise of surface ridges with a
+periodic structure with a characteristic space d wider
+than the wavelength of light λ. Light incident to the
+grating at angle θi is diffracted and will have a
+maximum at angle θm:
+(16)
+where m=order. For light incident normally to the
+grating, this reduces to:
+(17)
+A CD has a nominal track separation of 1.6 μm
+corresponding to a line density of 625/mm. An early
+diffraction grating was created by von Fraunhofer in
+1821 constructed from wires. Ruling engines were
+subsequently developed to manufacture diffraction
+gratings in which a highly accurate diamond cutter was
+used to shave grooves into a glass plate. This is
+potentially feasible with on the Moon using 3D printed
+geared motors. A flexible diffraction grating may be
+
+IAC-22-D3.2B.x68580
+
+formed from polydimethylsiloxane (PDMS) silicone
+elastomer with 2-20 μm lines and spacing – it can be
+used to measure pressure [120] and temperature [121].
+Replica moulding requires a photolithographically
+patterned silicon die as the master. This is not feasible
+on the Moon. Hence, spectroscopic measurement will
+require prisms as the dispersive element rather than
+diffraction gratings. The prism disperses through
+refraction rather than diffraction as in a grating. A glass
+prism (of fused silica glass derived from lunar silicates)
+comprises several flat optical surfaces oriented with
+respect to each other that refract light. Typically, the
+prism is triangular with a triangular base and rectangular
+sides. It may be used to differentially disperse different
+frequencies of light. Light incident to the prism is
+refracted and leaves the prism at different angles
+according to the frequency of its different components,
+e.g. white light consists of light across the visible
+waveband – in which blue light is refracted more than
+red light. The refraction is dependent on the refractive
+indices of the two media. Deviation angle is given by:
+(18)
+where n(λ)=refractive index, α=prism apex angle.
+Prisms disperse light over a wider frequency range than
+diffraction gratings and do not suffer from spectral order
+overlaps. For example, the Shuttle Imaging
+Spectrometer Experiment (SISEX) instrument used a
+prism rather than a grating for its dispersive optics
+[122]. Prisms may also be deployed as retroreflectors
+constructed from three mirrors forming the corners of a
+reflecting cube. 3D printing offers the capability of
+manufacturing 3D arrays of optical elements from fused
+silica glass. A Fourier series neural network (FSNN)
+may be employed as a neural network spectrum analyser
+to model complex systems with multiple variables
+[123]. The FSNN approximates the Fourier series of a
+time domain input/output to a dynamic system using
+neurons with complex harmonic activation functions of
+the form
+.
+The FSNN operates in parallel offering rapid
+computation. We suggest that simple forms of
+spectroscopy based on glass prisms may potentially be
+leveraged from lunar resources (Appendix).
+X. CONCLUSIONS
+It is plausible to manufacture from lunar resources
+sensors to measure the most fundamental parameters
+required for robotic machines. Electrical resistance of
+conducting wire of aluminium derived from lunar
+anorthite offers the measurement of displacement
+(potentiometer)
+and
+temperature
+(resistance
+thermistor/bolometer). Quartz manufactured via silica
+from lunar silicates offers the measurement of mass
+(quartz microbalance), time (quartz oscillation
+frequency),
+temperature
+(pyroelectricity).
+Photomultipliers offer the measurement of light
+
+Page 13 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+intensity (vision). There are biomimetic approaches to
+compensate for limitations in PMT light arrays such as
+active vision and optic flow navigation. Spectroscopic
+analysis using prisms rather than diffraction gratings
+also presents a possibility. One might – justly – regard
+sensor technology as the barometer of scientific
+sophistication for it has been through scientific
+instruments that we have interrogated the world. Sensor
+technology is also part of the triumvirate of robotics:
+sensors-controller-actuators. If the full spectrum of
+robotic capabilities, namely, sensor-controller-actuator,
+including vision capabilities can be manufactured from
+lunar resources, then robotic machines and machines of
+production can be constructed from lunar resources.
+REFERENCES
+[1] Khoshnevis B, Bodiford M, Burks K, Ethridge E
+(2005) “Lunar contour crafting: a novel technique for
+ISRU-based habitat development” Proc 43rd AIAA
+Aerospace Sciences Meeting & Exhibit, AIAA 2005538
+[2] Cesaretti G, Dini E, de Kestellier X, Colla V,
+Pambaguian L (2014) “Building components for an
+outpost on the lunar soil by means of a novel 3D
+printing technology” Acta Astronautica 93, 430-450
+[3] Ellery A (2020) “Sustainable in-situ resource
+utilisation on the Moon” Planetary & Space Science
+184, 104870
+[4] Pak V, Kirov S, Nalivaiko A, Ozherelkov D,
+Gromov A (2019) “Obtaining alumina from kaolin clay
+via aluminium chloride” Materials (Basel) 12 (23),
+paper no 3938
+[5] Barmpakos D, Kaltsas G (2021) “Review on
+humidity, temperature and strain printed sensors –
+current trends and future perspectives” Sensors 21, 739
+[6] Skordos A, Chan P, Vincent J, Jeronimidis G
+(2002) “Novel strain sensor based on the campaniform
+sensillum of insects” Phil Trans Royal Society London
+360, 239-253
+[7] Clements T, Rahn C (2005) “Three-dimensional
+contact imaging with an actuated whisker” Proc
+IEEE/RSJ Int Conf Intelligent Robots & Systems,
+10.1109/IROS.2005.1545213
+[8] Wicaksono D, Chen Y, French P (2007) “Design
+and modeling of a bio-inspired MEMS gyroscope” Proc
+Int Conf Electrical Engineering & Informatics,
+Indonesia, paper no. A-05, 226-229
+[9] Franceschini N (1996) “Engineering applications
+of small brains” FED J 7 (2), 38-52
+[10] Araromi O, Graule M, Dorsey K, Castellanos S,
+Foster J, Hsu W-H, Passy A, Vlassak J, Weaver J,
+Walsh C, Wood R (2020) “Ultra-sensitive and resilient
+compliant strain gauges for soft machines” Nature 587,
+219-224
+[11] Riedel R, Toma L, Janssen E, Nuffer J, Melz T,
+Hanselka H (2010) “Piezoresistive effect in SiOC
+
+IAC-22-D3.2B.x68580
+
+ceramics for integrated pressure sensors,” J American
+Ceramics Society 93 (4), 920-924
+[12] Luheng W, Tainhuai D, Peng W (2009)
+“Influence of carbon black concentration on
+piezoresistivity for carbon-black filled silicone rubber
+composite” Carbon 47, 3151-3157
+[13] Muth J, Vogt D, Truby R, Menguc Y, Kolesky
+D, Wood R, Lewis J (2014) “Embedded 3D printing of
+strain sensors within highly stretchable elastomers”
+Advanced Materials 26, 6307-6312
+[14] Ramadan K, Sameoto D, Evoy S (2014)
+“Review of piezoelectric polymers as functional
+materials for electromechanical transducers” Smart
+Materials & Structures 23, 033001
+[15] Dahiya R, Cattin D, Adami A, Collini C,
+Barboni L, Valle M, Lorenzelli L, Oboe R, Metta G,
+Brunetti F (2011) “Towards tactile sensing system on
+chip for robotic applications” IEEE Sensors J 11 (12),
+3216-3226
+[16] Someya T, Sekitani T, Iba S, Kato S,
+Kawaguchi H, Sakurai T (2004) “Large area, flexible
+pressure sensor matrix with organic field effect
+transistors for artificial skin applications” Proc National
+Academy Sciences 101 (27), 9966-9970
+[17] Guo X, Xu Y, Ogier S, Ng N, Caironi M,
+Perinot A, Li L, Zhao J, Tang W, Sporea R, Nejim A,
+Carrabina J, Cain P, Yan F (2017) “Current status and
+opportunities
+of
+organic
+thin-film
+transistor
+technologies” IEEE Trans Electron Devices 64 (5),
+1906-1921
+[18] Park Y-L, Chen B-R, Wood R (2012) “Design
+and fabrication of soft artificial skin using embedded
+microchannels and liquid conductors” IEEE Sensors J
+12 (8), 2711-2718
+[19] Gawade S, Jadhav A (2012) “Review on
+electrorheological fluids” Int J Engineering Research &
+Technology 1 (10), 2278-0181
+[20] Zhou J, Gu Y, Fei P, Mai W, Gai Y, Yang R,
+Bao G, Wang Z (2008) “Flexible piezotronic strain
+sensor” Nano Letters 8 (9), 3035-3040
+[21] Omata S, Murayama Y, Constantinou C (2004)
+“Real time robotic tactile sensor system for the
+determination of the physical properties of biomaterials”
+Sensors & Actuators A112, 278-285
+[22] Kosorotov V, Blonsky I, Shchedrina L, Levash
+L (2003) “Quartz as artificial pyroactive material” Proc
+SPIE 5065, 6th Int Conf Materials & Material Properties
+for Infrared Optoelectronics, 108-116
+[23] Fishel J, Loeb G (2012) “Bayesian exploration
+for intelligent identification of textures” Frontiers in
+Neurorobotics 6 (4), 1-20
+[24] Denei S, Mastrogiovanni F, Cannata G (2015)
+“Towards the creation of tactile maps for robots and
+their use in robot contact motion control” Robotics &
+Autonomous Systems 63, 293-308
+
+Page 14 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+[25] Rayneau-Kirkhope D (2021) “Replicating how
+plants move” Physics World (Jul), 25-29
+[26] Denis M, Ormston T, Scuka D, Jameux D,
+Witasse O (2009) “Ordinary camera, extraordinary
+places” ESA Bulletin 139 (Aug), 29-33
+[27] Frederickson S, Abbott L, Duran S, Jochim D,
+Studak B, Wagenknecht J, Williams N (2003) “Mini
+AERCam: development of a freeflying nanosatellite
+inspection robot” Proc SPIE 5088 Space Systems
+Technology & Operations, Orlando, FL
+[28] Ellery A (2022) “Is electronics fabrication
+feasible on the Moon?” in press with Proc ASCE Earth
+& Space Conf, Colorado School of Mines, Denver
+[29] Ellery A (2021) “Generating and storing power
+on the Moon using in-situ resources” Proc IMechE J
+Aerospace Engineering DOI: 10.1177/0954410021
+1029433
+[30] Zhou Y, Zhao H, Ma D, Rosei F (2018)
+“Harnessing the properties of colloidal quantum dots in
+luminescent solar concentrators” Chemical Society
+Review 47, 5866-5890
+[31] Zhao H, Rosei F (2017) “Colloidal quantum
+dots for solar technologies” Chemistry 3, 229-258
+[32] Navarro-Pardo F, Zhao H, Wang Z, Rosei F
+(2018)
+“Structure/property relations
+in
+giant
+semiconductor nanocrystals: opportunities in photonics
+and electronics” ACS Chemical Research 51, 609-618
+[33] Lubsandorzhiev B (2006) “On the history of
+photomultiplier tube invention” Nuclear Instruments &
+Methods in Physics Research A: Accelerators,
+Spectrometers, Detectors & Associated Equipment
+567(1), 236
+[34] Lee W, Attenkofer K, Walters D, Demarteau
+M, Yusof Z (2012) “Optimisation of transmission mode
+metallic (aluminium) photocathodes” Physics Procedia
+37, 757-764
+[35] Donchev E, Pang J, Gammon P, Centeno A,
+Xie F, Petrov P, Breeze J, Ryan M, Riley J, Alford N
+(2013) “Rectenna device: from theory to practice (a
+review)” MRS Energy & Sustainability: A Review J 1,
+E1
+[36] Clavero C (2014) “Plasmon-induced hot
+electron generation at nanoparticle/metal oxide
+interfaces for photovoltaic and photocatalytic devices”
+Nature Photonics 8 (Feb), 95-103
+[37] Knight M, Sobhani H, Nordlander P, Halas N
+(2011) “Photodetection with optical antennas” Science
+332 (May), 702-704
+[38] Livshits P, Dikhtyar V, Inberg A, Shahadi A,
+Jerby E (2011) “Local doping of silicon by a pointcontact microwave applicator”
+Microelectronic
+Engineering 88, 2831-2836
+[39] Bhatnagar A, Reddy V, Srivasatava V (1985)
+“Optical energy gap of amorphous selenium: effect of
+annealing” J Physics D: Applied Physics 18, L149-L153
+
+IAC-22-D3.2B.x68580
+
+[40] Woollam J, Morash K, Kuminsky M, Averbach
+B (1971) “Photoconductive and optical properties of
+amorphous selenium” NASA TN D-6500
+[41] Schindewolf U (1960) “Selenium and tellurium
+content of stony meteorites by neutron bombardment”
+Geochimica et Cosmochimica Acta 19, 134-138
+[42] Jotter R & Ott U (2011) “Selenium isotopes in
+some chondrites” 74th Annual Meteoritical Society
+Abstracts, no. 5016
+[43] Rickard D (1997) “Kinetics of pyrite formation
+by the H2S oxidation of iron (II) monosulphide in
+aqueous solutions between 25 and 125oC: the rate
+equation” Geochimica et Cosmochimica Acta 61 (1),
+115-134
+[44] Wachterhauser G (1990) “Evolution of the first
+metabolic cycles” Proc National Academy Sciences 87,
+200-204
+[45] Chatzitheodorou G, Fiechter S, Konenkamp R,
+Kunst M, Jaegermann W, Tributsch H (1986) “Thin
+photoactive FeS2 (pyrite) films” Material Research
+Bulletin 21, 1481-1487
+[46] Ta X, Chan W, van der Graaf H (2016)
+“Secondary electron emission materials for transmission
+dynodes in novel photomultipliers: a review” Materials
+9, paper no 1017
+[47] Hecht J (2010) “Short history of laser
+development” Optical Engineering 49 (9), 091002
+[48] Klainer, S, Dandge D, Butler M, Goswami K
+(1991) “Fibre optic refractive index sensor using metal
+cladding” US Patent 5026139A (expired)
+[49] Imel D (2005) “What is the procedure by which
+synthetic rubies are produced?” The Rock Collector
+(May), 6-9
+[50] Barletta W, Bisognano J, Corlett J, Emma P,
+Huang Z, Kim K-J, Lindberg R, Murphy J, Neil G,
+Nguyen D, Pellegrini C, Rimmer R, Sannibale F,
+Stupakov G, Walker R, Zholents A (2010) “Free
+electron lasers: present status and future challenges”
+Nuclear Instruments & Methods in Physics Research
+A618, 69-96
+[51] Nilsson D, Pelger S (1994) “Pessimistic
+estimate of the time required for an eye to evolve” Proc
+Royal Society B 256, 53-58
+[52] Fernald R (2000) “Evolution of eyes” Current
+Opinion in Neurobiology 10, 444-450
+[53] Rodriguez-Sanchez A, Simine E, Tsotsos J
+(2007) “Attention and visual search” Int J Neural
+Systems 17 (4), 1-14
+[54] Albright T, Stoner G (1995) “Visual motion
+perception” Proc National Academy Sciences 92, 24332440
+[55] Nowlan S, Sejnowski T (1995) “Selection
+model for motion processing in area MT of primates” J
+Neuroscience 15 (2), 1195-1214
+[56] Van Steveninck R, Borst A, Bialek W (2000)
+“Real time encoding of motion: answerable questions
+
+Page 15 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+and questionable answers from the fly’s visual system”
+arXiv:physics/0004060v1 [physics.bio-ph] 25 Apr 2000
+[57] Van Essen D, Gallant J (1994) “Neural
+mechanisms of form and motion processing in the
+primate visual system” Neuron 13 (Jul), 1-10
+[58] Van Essen D (2005) “Corticocortical and
+thalamocortical information flow in the primate visual
+cortex” Progress in Brain Research 149, 173-179
+[59] Kruger N, Janssen P, Kalkan S, Lappe M,
+Leonardis A, Piater J, Rodriguez-Sanchez A, Wiskott L
+(2013) “Deep hierarchies in the primate visual cortex:
+what can we learn for computer vision?” IEEE Trans
+Pattern Analysis & Machine Intelligence 35 (8), 18471871
+[60] Tovee M (1994) “How fast is the speed of
+thought?” Current Biology 4 (12), 1125-1127
+[61] Clark A (1999) “Visual awareness and
+visuomotor action” J Consciousness Studies 6 (11-12),
+1-18
+[62] O’Regan K, Noe A (2001) “Sensorimotor
+account of vision and visual consciousness”
+Behavioural & Brain Sciences 24, 939-1031
+[63] Ungerleider L, Haxby J (1994) “What and
+where in the human brain” Current Opinion in
+Neurobiology 4, 157-165
+[64] Itti L, Koch C (2000) “Saliency-based search
+mechanism for overt and covert shifts of visual
+attention” Vision Research 40, 1489-1506
+[65] Itti L, Koch C (2001) “Computational
+modelling of visual attention” Nature Reviews
+Neuroscience 2 (Feb), 1-11
+[66] Liu N, Han J, Liu T, Li X (2018) “Learning to
+predict eye fixations via multiresolution convolutional
+neural networks” IEEE Trans Neural Networks &
+Learning Systems 29 (2), 392-404
+[67] Bruce N, Tsotsos J (2009) “Saliency, attention
+and visual search: an information theoretic approach” J
+Vision 9 (3), 1-24
+[68] Olshausen B, Anderson C, van Essen D (1993)
+“Neurobiological model of visual attention and invariant
+pattern recognition based on dynamic routing of
+information” J Neuroscience 13 (11), 4700-4719
+[69] Ji W, Weng J (2015) “Developmental wherewhat network for concurrent and interactive visual
+attention and recognition” Robotics & Autonomous
+Systems 71, 35-48
+[70] Chao F, Lee M, Lee J (2010) “Developmental
+algorithm for ocular-motor coordination” Robotics &
+Autonomous Systems 58, 239-248
+[71] Jodogne S, Piater J (2007) “Closed loop
+learning of visual control policies” J Artificial
+Intelligence Research 28, 349-391
+[72] Rauschecker J, Tian B (2000) “Mechanisms
+and streams for processing of “what” and “where” in
+auditory cortex” Proc National Academy Sciences 97
+(22), 11800-11806
+
+IAC-22-D3.2B.x68580
+
+[73] Kraus N, Nicol T (2005) “Brainstem origins for
+cortical “what” and “where” pathways in the auditory
+cortex” Trends in Neurosciences 28 (4), 177-181
+[74]
+Sandini
+G,
+Tagliasco
+V
+(1980)
+“Anthropomorphic retina-like structure for scene
+analysis” Computer Graphics & Image Processing 14,
+365-372
+[75] Ballard D (1991) “Animate vision” Artificial
+Intelligence 48 (1), 57-86
+[76] Carpenter R, Williams M (1995) “Neural
+computation of log likelihood in control of saccadic eye
+movements” Nature 377, 59-61
+[77] Whaite P, Ferrie F (1997) “Autonomous
+exploration: driven by uncertainty” IEEE Trans Pattern
+Analysis & Machine Intelligence 19 (3), 193-205
+[78] Seung H (1996) “How the brain keeps the eyes
+open” Proc National Academy Sciences 93, 1333913344
+[79] Arai K, Keller E, Edelman J (1994) “Twodimensional neural network model of the primate
+saccadic system” Neural Networks 7 (6/7), 1115-1135
+[80] Lefevre P, Galiana H (1992) “Dynamic
+feedback to the superior colliculus in a neural network
+model of the gaze control system” Neural Networks 5,
+871-890
+[81] Schall J (2004) “On building a bridge between
+brain and behaviour” Annual Reviews Psychology 55,
+23-50
+[82] Young M, Depalma A, Garrett S (2002)
+“Situations, interaction, process and affordances: an
+ecological psychology perspective” Instructional
+Science 30, 47-63
+[83] Janabi-Sharifi F, Marey M (2010) “Kalman
+filter-based method for pose estimation in visual
+servoing” IEEE Trans Robotics 26 (5), 939-946
+[84] Anjum M, Ahmad O, Bona B, Cho D (2013)
+“Sensor data fusion using unscented Kalman filter for
+VOR-based vision tracking system for mobile robots”
+Proc Towards Autonomous Robotic Systems 14th Conf,
+Oxford, UK
+[85] Lisberger S, Sejnowski T (1992) “Motor
+learning in a recurrent network model based on the
+vestibulo-ocular reflex” Nature 360 (Nov), 159-161
+[86] Ross J & Ellery A (2017) "Panoramic camera
+tracking on planetary rovers using feedforward control"
+Int J Advanced Robotic Systems (May/Jun), 1-9
+[87] Shibata T, Vijayakumar S, Conradt J, Schaal S
+(2001) “Biomimetic oculomotor control” Adaptive
+Behaviour 9 (3/4), 189-207
+[88] Elaskri A, Ellery A (2020) “3D printed electric
+motors as a step towards self-replicating machines”
+Proc Int Symp Artificial Intelligence, Robotics and
+Automation in Space, paper no 5020
+[89] Duchon A, Warren W, Kaelbling L (1998)
+“Ecological robotics” Adaptive Behaviour 6 (3/4), 473507
+
+Page 16 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+[90] Menzel R & Giufa M (2001) “Cognitive
+architecture of a mini-brain: the honeybee” Trends in
+Cognitive Sciences 5 (2), 62-71
+[91] Wessnitzer J, Webb B (2006) “Multimodal
+sensory integration in insects – towards insect brain
+control architectures” Bioninspiration & Biomimetics 1,
+63-75
+[92] Neumann T (2002) “Modelling insect
+compound eyes: space variant spherical vision” Proc 2nd
+Int Workshop on Biologically Motivated Computer
+Vision (ed. Bulthoff H, Lee S-W, Poggio T, Wallraven
+C), LNCS 2525, 360-367
+[93] Srinivasan M (1992) “How bees exploit optic
+flow: behavioural experiments and neural network
+models” Philosophical Transactions Royal Society
+B337, 253-258
+[94] Prabhakara R, Wright C, Barrett S (2012)
+“Motion detection: a biomimetic vision sensor versus a
+CCD camera sensor” IEEE Sensors J 12 (2), 298-307
+[95] Lappe M, Bremmer F & van den Berg A (1999)
+“Perception of self-motion from visual flow” Trends in
+Cognitive Science 3 (9), 329-336
+[96] Cornilleau-Peres V & Giden C (1996)
+“Interaction between self-motion and depth perception
+in the processing of optic flow” Trends in Neuroscience
+19 (5), 196-402
+[97] Franceschini N (2009) “Towards automatic
+visual guidance of aerospace vehicles: from insects to
+robots” Acta Futura 3, 15-34
+[98] Franceschini N, Pichon J & Blanes C (1992)
+“From insect vision to robot vision” Philosophical
+Transactions Royal Society B337, 283-294
+[99] Huber S, Franz M, Buthoff H (1999) “On
+robots and flies: modelling the visual orientation
+behaviour of flies” Robotics & Autonomous Systems 29,
+227-242
+[100] Parberry I (1994) Circuit complexity and
+neural networks, MIT Press Foundations of Computing,
+Cambridge, MA
+[101] Siegelmann H & Sontag E (1995) “On the
+computational power of neural nets” J Computer &
+System Sciences 50, 132-150
+[102] Watanabe T, Tanaka M, Kurita T, Mishima T
+(2002) “Autonomous foveating system based on pulsecoupled neural network with sigmoidal pulse generator”
+Trans Society Instrument & Control Engineers 38 (8),
+762-732
+[103] Schoner G, Dose M, Engels C (1995)
+“Dynamics of behaviour: theory and applications for
+autonomous robot architectures” Robotics &
+Autonomous Systems 16, 213-245
+[104] Quoy M, Moga S, Gaussier P (2003)
+“Dynamical neural networks for planning and low-level
+robot control” IEEE Trans Systems Man & Cybernetics
+A: Systems & Humans 33 (4), 523-532
+
+IAC-22-D3.2B.x68580
+
+[105] Erlhagen W & Bicho E (2006) “Dynamic
+neural field approach to cognitive robotics” J Neural
+Engineering 3, R36-R54
+[106] Pomerleau D (1989) “ALVINN: an
+autonomous land vehicle in a neural network” Proc
+Neural Information Processing Systems, 305-313
+[107] Husbands P, Harvey I, Cliff D (1995) “Circle
+in the round: state space attractors for evolved sighted
+robots” Robotics & Autonomous Systems 15, 83-106
+[108] Cameron S, Grossberg S, Guenther F (1998)
+“Self-organizing neural network architecture for
+navigation using optic flow” Neural Computation 10,
+313-352
+[109] Tettenborn A & Ellery A (2018) “Comparison
+of Gabor filters and wavelet transform methods for
+extraction of lithological features” Proc Int Symp
+Artificial Intelligence Robotics & Automation in Space,
+paper no. P9
+[110] Kameyama K, Mori K, Kosugi Y (1997)
+“Neural network incorporating adaptive Gabor filters
+for image texture classification” Proc Int Conf Neural
+Networks, 614119
+[111] Daugman J (1988) “Complete discrete 2D
+Gabor transformation by neural networks for image
+analysis and compression” IEEE Trans Acoustics,
+Speech & Signal Processing 36 (7), 1169-1179
+[112] Kiranmayee M, Subbarao M (2012) “Texture
+classification using weighted probabilistic neural
+networks” Int J Image Processing & Vision Sciences 1
+(2), 38-40
+[113] Materka A, Strzelecki M (1998) “Texture
+analysis methods – a review” COST B11 report,
+Institute of Electronics, Technical University of Lodz,
+Brussels
+[114] Tivive C, Bouzerdoum A (2006) “Texture
+classification using convolutional neural networks”
+IEEE Region 10 Conf, Hong Kong, China
+[115] Qian N (1994) “Computing stereo disparity
+and motion with known binocular cell properties”
+Neural Computation 6, 390-404
+[116] Yamashita Y, Nakamura Y (2007) “Neuron
+circuit model with smooth nonlinear output function”
+Proc Int Symp Nonlinear Theory & its Applications,
+Vancouver, pp. 11-14
+[117] Larson S & Ellery A (2015) “Trainable
+analogue neural network with application to lunar insitu resource utilisation” Proc Int Astronautics
+Federation Congress, Jerusalem, IAC-15-D3.3.6
+[118] Prasad V, Ellery A (2020) “Analogue neural
+network architecture for in-situ resourced computing
+hardware on the Moon” Proc Int Symp Artificial
+Intelligence, Robotics and Automation in Space, paper
+no 5005
+[119] Tavener S & Thomas-Oates J (2007) “Build
+your own photometer” Education in Chemistry (Sep),
+151-154
+
+Page 17 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+[120] Hosokawa K, Hanada K, Maeda R (2002)
+“Polydimethylsiloxane (PDMS) deformable diffraction
+grating for monitoring of local pressure in microfluidic
+devices” J Micromechanics & Microengineering 12, 1-6
+[121] Rogers J, Jackman R, Schueller O, Whitesides
+G (1996) “Elastomeric diffraction gratings as
+photothermal detectors” Applied Optics 35 (34), 66416647
+[122] Herring M (1987) “Shuttle imaging
+spectrometer experiment (SISEX)” Proc SPIE 0834 –
+Imaging Spectroscopy II, San Diego, CA
+
+[123] Bouchard J, Zhu C, Paul F (1995) “Neural
+network spectrum analyser” Mechatronics 5 (6), 603622
+[124] Ellery A, Mellor I, Wanjara P, Conti M (2022)
+“Metalysis FFC process as a strategic lunar in-situ
+resource utilisation technology” New Space J 10 (2),
+224-238
+[125] Salinas E, Sejnowski T (2001) “Gain modulation
+in the central nervous system: where behaviour,
+neurophysiology and computation meet” Neuroscientist
+7 (5), 430-440
+
+APPENDIX: LUNAR INDUSTRIAL ECOLOGY
+(emboldened oxides are feedstock for the Fray Farthing Chen (FFC) process [124])
+Ilmenite
+Fe0 + H2O
+→ ferrofluidic sealing
+FeTiO3 + H2 → TiO2 + H2O + Fe and 2H2O→2H2+O2
+↑__________________________|
+2Fe + 1.5O2 → Fe2O3/Fe2O3.CoO
+→ ferrite magnets
+3Fe2O3 + H2 ↔ Fe3O4 + H2O
+)
+→ magnetite at 350-750oC/1-2 kbar
+M-type Meteorites
+4Fe2O3 + Fe ↔ 3Fe3O4
+)
+W inclusions
+→ thermionic cathodic material
+Carbonyl process:
+Iron alloy
+Ni Co Si C W
+Fe(CO)5 ↔ 5CO + Fe (175oC/100 bar)
+→ Tool steel
+2% 9-18%
+Ni(CO)4 ↔ 4CO + Ni (55oC/1 bar)
+→ Electrical steel
+3%
+Co2(CO)8 ↔ 8CO + 2Co (150oC/35 bar)
+→ Permalloy
+80%
+S catalyst
+→ Kovar
+29% 17% 0.2% 0.01%.
+4FeS + 7O2 → 2Fe2O3 + 4SO2
+Troilite
+SO2 + H2S → 3S + H2O
+FeSe + Na2CO3 + 1.5O2 → FeO + Na2SeO3 + CO2
+KNO3 catalyst
+Na2SeO3 + H2SO4 → Na2O + H2SO4 + Se
+→ photosensitive Se
+↑____________|
+Na2O + H2O → 2NaOH
+Lunar Orthoclase
+NaOH + HCl → NaCl + H2O (recycle)
+3KAlSi3O8 + 2HCl + 12H2O → KAl3Si3O10(OH)2 + 6H4SiO4 + 2KCl
+orthoclase
+illite
+silicic acid (soluble silica → SiO2 + H2O)
+2KAl3Si3O10(OH)2 + 2HCl + 3H2O → 3Al2Si2O5(OH)4 + 2KCl
+→ kaolinite binder → porcelain
+kaolinite
+KCl + NaNO3 → NaCl + KNO3 (recycled)
+Lunar Anorthite
+CaAl2SiO8 + 4C → CO + CaO + Al2O3 + 2Si at 1650oC
+→ CaO cathode coatings
+CaO + H2O → Ca(OH)2
+Ca(OH)2 + CO2 → CaCO3 + H2O
+CaAl2SiO8 + 5HCl + H2O → CaCl2 + 2AlCl3.6H2O + SiO2
+→ fused silica glass + FFC electrolyte
+AlCl3.6H2O → Al(OH)3 + 3HCl + H2O at 100oC
+↑___________________________________|
+Al(OH)3 → Al2O3 + 3H2O at 400oC → 2Al + Fe2O3
+→ 2Fe + Al2O3 (thermite)
+Lunar Olivine
+→ AlNiCo hard magnets
+3Fe2SiO4 + 2H2O → 2Fe3O4 + 3SiO2 + 2H2O
+fayalite
+magnetite
+Mg2SiO4 + 4H2O→ 2MgO + SiO2 + 4H2O
+→ 3D Shaping binder (Sorel cement)
+forsterite
+MgO + HCl → MgCl2 + H2O
+→ 3D Shaping binder (Sorel cement)
+Lunar Pyroxene
+Ca(Fe,Al)Si2O6 + HCl + H2O → Ca0.33(Al)2(Si4O10)(OH)2.nH2O + H4SiO4 + CaCl2 + Fe(OH)3
+augite
+montmorillonite
+silicic acid
+iron hydroxide
+6MgSiO3 + H2O → Mg3Si2O5(OH)4 + Mg3Si4O10(OH)2
+→ dry lubricant talc
+enstatite
+serpentine
+talc
+Lunar Volatiles
+CO + 0.5 O2 → CO2
+CO2 + 4H2 → CH4 + 2H2O at 300oC (Sabatier reaction) → CH4 → C + 2H2 at 1400oC
+→ steel additive/anode regeneration
+Ni catalyst
+850oC
+250oC
+CH4 + H2 → CO + 3H2 → CH3OH
+350oC
+Ni catalyst Al2O3 catalyst CH3OH + HCl → CH3Cl + H2O
+370oC
++nH2O
+(Rochow process)
+Al2O3 catalyst
+CH3Cl + Si → (CH3)2SiCl2 → ((CH3)2SiO)n + 2nHCl → silicone plastics/oils
+
+IAC-22-D3.2B.x68580
+
+Page 18 of 19
+
+73rd International Astronautical Congress, Paris, France. Copyright ©2022 by the International Astronautical Federation. All rights reserved.
+
+N2 + 3H2 → 2NH3 (Haber-Bosch process) ↑________________________________________________|
+Fe on CaO+SiO2+Al2O3 catalyst
+4NH3 + 5O2 → 4NO + 6H2O
+WC on Ni catalyst
+3NO + H2O → 2HNO3 + NO (Ostwald process)
+↑__________________|
+2SO2 + O2 ↔ 2SO3 (low temp)
+SO3 + H2O → H2SO4
+Earth-Supplied Salt Reagents
+2NaCl + CaCO3 ↔ Na2CO3 + CaCl2 (Solvay process)
+350oC/150 MPa
+Na2CO3 + SiO2(i) ↔ Na2SiO3 + CO2
+1000-1100oC
+CaCO3 → CaO + CO2 (calcination)
+NaCl(s) + HNO3(g) → HCl(g) + NaNO3(s)
+
+IAC-22-D3.2B.x68580
+
+→ FFC electrolyte
+→ piezoelectric quartz
+(40-80 day growth)
+→ recycled acid leach
+
+Page 19 of 19
+
+

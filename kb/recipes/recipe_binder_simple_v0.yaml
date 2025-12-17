@@ -1,0 +1,57 @@
+id: recipe_binder_simple_v0
+target_item_id: binder_simple
+variant_id: v0
+steps:
+  - process_id: chemical_synthesis_process_v0
+    inputs:
+      - item_id: cellulose_raw
+        qty: 1.0
+        unit: kg
+      - item_id: sodium_hydroxide
+        qty: 0.3
+        unit: kg
+      - item_id: monochloroacetic_acid
+        qty: 0.4
+        unit: kg
+      - item_id: water_purified
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: cmc_solution
+        qty: 6.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: Synthesize CMC (carboxymethyl cellulose) from cellulose
+  - process_id: precipitation_and_washing_v0
+    inputs:
+      - item_id: cmc_solution
+        qty: 6.0
+        unit: kg
+      - item_id: ethanol_or_isopropanol
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: cmc_precipitate_wet
+        qty: 2.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: Precipitate CMC with alcohol, wash to remove salts
+  - process_id: drying_process_oven_v0
+    inputs:
+      - item_id: cmc_precipitate_wet
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: binder_simple
+        qty: 1.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Dry CMC powder at 60-80°C
+assumptions: |
+  CMC synthesis from cellulose via etherification.
+  Cellulose sourced from imported organic materials or local plant processing.
+  Simple water-based chemistry suitable for lunar manufacturing.
+notes: |
+  Manufacturing route for simple cellulose-based binder.
+  CMC is water-soluble, non-toxic, and effective for battery electrodes.
+  Alternative: Direct use of starch-based binders for simpler process.

@@ -1,0 +1,97 @@
+id: recipe_electrodes_nife_set_v0
+target_item_id: electrodes_nife_set
+variant_id: v0
+steps:
+  - process_id: powder_milling_process_v0
+    inputs:
+      - item_id: nickel_hydroxide
+        qty: 2.0
+        unit: kg
+      - item_id: graphite_powder
+        qty: 0.1
+        unit: kg
+      - item_id: binder_simple
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: positive_active_material_mixed
+        qty: 2.1
+        unit: kg
+    est_time_hr: 4.0
+    notes: Mix and mill positive electrode materials to uniform consistency
+  - process_id: powder_milling_process_v0
+    inputs:
+      - item_id: iron_powder
+        qty: 2.0
+        unit: kg
+      - item_id: binder_simple
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: negative_active_material_mixed
+        qty: 2.05
+        unit: kg
+    est_time_hr: 4.0
+    notes: Mix negative electrode materials
+  - process_id: metal_stamping_process_v0
+    inputs:
+      - item_id: steel_sheet_perforated
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: electrode_grid_set
+        qty: 1.4
+        unit: kg
+    est_time_hr: 2.0
+    notes: Stamp perforated steel grids for electrode substrates
+  - process_id: powder_pressing_process_v0
+    inputs:
+      - item_id: positive_active_material_mixed
+        qty: 2.1
+        unit: kg
+      - item_id: electrode_grid_set
+        qty: 0.7
+        unit: kg
+    outputs:
+      - item_id: positive_electrode_pressed
+        qty: 2.7
+        unit: kg
+    est_time_hr: 2.0
+    notes: Press positive active material into grids
+  - process_id: powder_pressing_process_v0
+    inputs:
+      - item_id: negative_active_material_mixed
+        qty: 2.05
+        unit: kg
+      - item_id: electrode_grid_set
+        qty: 0.7
+        unit: kg
+    outputs:
+      - item_id: negative_electrode_pressed
+        qty: 2.7
+        unit: kg
+    est_time_hr: 2.0
+    notes: Press negative active material into grids
+  - process_id: drying_process_oven_v0
+    inputs:
+      - item_id: positive_electrode_pressed
+        qty: 2.7
+        unit: kg
+      - item_id: negative_electrode_pressed
+        qty: 2.7
+        unit: kg
+    outputs:
+      - item_id: electrodes_nife_set
+        qty: 5.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: Dry electrodes to remove moisture, binder curing
+assumptions: |
+  Nickel hydroxide and iron powder available.
+  Perforated steel grids provide mechanical support and current collection.
+  Binder holds active material to grid.
+  Drying cures binder and removes moisture.
+notes: |
+  Manufacturing route for NiFe battery electrodes.
+  Simple powder metallurgy approach.
+  Suitable for robust, long-life battery production.

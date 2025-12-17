@@ -1,0 +1,14 @@
+{
+  "id": "dedupe:rolling_mills",
+  "kind": "machine",
+  "reason": "overlap",
+  "candidate_ids": ["rolling_mill", "plate_rolling_mill", "rolling_mill_or_brake"],
+  "notes": "Consolidate rolling mills for sheet metal forming. Plate rolling is specialized for thicker material. Assess if general rolling_mill covers all cases or if plate-specific machine needed.",
+  "hints": {
+    "prefer": "plate_rolling_mill",
+    "consolidate": "rolling_mill and rolling_mill_or_brake likely overlap",
+    "note": "press_brake already handled in previous dedupe - stays separate for bending"
+  },
+  "refs": ["out/reports/inventory.md"],
+  "category": "forming"
+}

@@ -1,0 +1,56 @@
+id: recipe_focusing_mechanism_coarse_fine_v0
+target_item_id: focusing_mechanism_coarse_fine
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: focusing_screws_machined
+        qty: 1.8
+        unit: kg
+    est_time_hr: 4.0
+    notes: Machine coarse and fine focus lead screws with different pitches
+  - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: rack_and_pinion_set
+        qty: 0.9
+        unit: kg
+    est_time_hr: 3.0
+    notes: Machine rack and pinion gears
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: focusing_screws_machined
+        qty: 1.8
+        unit: kg
+      - item_id: rack_and_pinion_set
+        qty: 0.9
+        unit: kg
+      - item_id: bearing_ball_steel
+        qty: 4.0
+        unit: each
+      - item_id: knob_control_dial
+        qty: 2.0
+        unit: each
+      - item_id: spring_compression_small
+        qty: 2.0
+        unit: each
+    outputs:
+      - item_id: focusing_mechanism_coarse_fine
+        qty: 3.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: Assemble screws, gears, bearings, knobs, springs, adjust for smooth operation
+assumptions: |
+  Precision machining for smooth, backlash-free operation.
+  Bearings support lead screws.
+  Springs provide preload to eliminate play.
+notes: |
+  Manufacturing route for coarse/fine focusing mechanism.
+  Critical for microscope and precision optical instrument operation.

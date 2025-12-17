@@ -1,0 +1,32 @@
+id: getter_deposition_activation_v0
+kind: process
+name: Getter deposition and activation
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: sealed_component
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: sealed_component
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - vacuum_chamber
+  - heating_furnace_module
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+  - resource_type: high_temperature_power_supply
+    qty: 0.2
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 2.0
+  notes: "Vacuum pumpdown plus resistive heating/induction to flash getter material."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Pumpdown, deposition/flash, and cool-down for small vacuum tube assemblies."
+notes: "Deposits getter material inside sealed vacuum components and activates it (flash/evaporation) to maintain vacuum. Placeholder step for vacuum tube and detector builds derived from paper seeds."

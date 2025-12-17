@@ -1,0 +1,44 @@
+id: getter_material_activation_v0
+kind: process
+name: Getter material activation process v0
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: getter_material_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: getter_material_activated
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - vacuum_furnace_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: High-temperature activation energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+  notes: Heat-up, activation, and cool-down time
+notes: |
+  Process for activating getter materials for vacuum systems.
+  Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0
+  Purpose: Getters absorb residual gases in vacuum tubes and sealed systems
+  Common getter materials:
+    - Barium (most common): Activated by heating, absorbs O2, N2, H2O, CO2
+    - Titanium: Flash getter, sublimes onto tube walls
+    - Zirconium-aluminum alloys: Non-evaporable getters (NEG)
+  Activation process: Heat getter to 800-1200°C in high vacuum
+  Mechanism: Heating vaporizes or exposes fresh reactive surface
+  Applications:
+    - Vacuum tubes (maintain vacuum over lifetime)
+    - Sealed vacuum systems
+    - Photomultipliers
+    - X-ray tubes
+  Lunar context: Essential for vacuum tube electronics manufacturing
+  Critical for: Vacuum tube longevity, sealed system reliability

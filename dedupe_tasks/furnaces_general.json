@@ -1,0 +1,14 @@
+{
+  "id": "dedupe:furnaces_general",
+  "kind": "machine",
+  "reason": "overlap",
+  "candidate_ids": ["furnace_basic", "casting_furnace_v0", "sintering_furnace"],
+  "notes": "Consolidate general-purpose furnaces. Casting and sintering may need distinct temp/atmosphere control. Assess if furnace_basic covers both or if specialization needed.",
+  "hints": {
+    "prefer": "furnace_basic",
+    "keep_specialized": ["casting_furnace_v0 if molten metal handling", "sintering_furnace if reducing atmosphere"],
+    "assess": "temperature ranges and atmosphere requirements"
+  },
+  "refs": ["out/reports/inventory.md"],
+  "category": "furnaces"
+}

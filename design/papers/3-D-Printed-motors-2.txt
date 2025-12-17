@@ -1,0 +1,1680 @@
+iew
+ed
+
+3D Printed Motors as a Breakthrough toward
+Universal Constructors and Self-Replicating
+Machines
+A. Ellery1, A. Elaskri1, M. P. Paranthaman2, F. Bernier3
+
+1Centre for Self-Replication Research, Department of Mechanical & Aerospace Engineering, Carleton University,
+
+1125 Colonel By Drive, Ottawa, ON. K1S 5B6. Canada
+
+2Oak Ridge National Laboratory, Oak Ridge, TN. 37831-6100, USA
+
+ev
+
+3National Research Council Canada, 75 Bd de Mortagne, Boucherville, QC. J4B 6Y4
+
+er
+r
+
+Abstract—Robotic industrialisation of the Moon at minimised cost will require the exploitation of local resources through universal
+construction. Universal construction implies the automatic construction of robotic machines of production from raw material. A key
+component of universal construction is additive manufacturing (colloquially, 3D printing) which is capable of manufacturing highly
+sophisticated structures. To demonstrate that 3D printing constitutes universal construction, we must be able to 3D print the
+mechatronic triad components of robotics – actuators, sensors and controllers, i.e. 3D print robotic machines of any kinematic
+configuration. One such configuration is the cartesian robot of which the 3D printer is a type. We have demonstrated that one of these
+three basic elements of robotic machines – the electric motor – can be 3D printed. We regard this as a major step towards implementing
+universal construction and, by proxy, self-replicating machines.
+
+pe
+
+Keywords-lunar industrialisation; additive manufacturing; 3D printing; universal constructor; 3D printed motor; self-replicating machines
+
+I.
+
+INTRODUCTION
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+The Moon is the target for many nations with a common goal to support both human and robotic missions in building a
+permanent lunar infrastructure. The “Moon Village” is envisaged as a collection of government, scientific and commercial assets on
+the lunar surface. The chief barrier to space exploration has been the cost of launch from Earth to the destination, be it the Moon,
+Mars or elsewhere. To reduce the cost of launch, we can utilise resources already out there. Such in-situ resource utilisation (ISRU)
+of local resources will be essential to support human habitation on the Moon to reduce costs of supply from Earth. Most effort has
+focused on sourcing consumables such as propellant (hydrogen) and oxidiser (oxygen) from water ice condensed in the polar
+regions of the Moon. There are ethical concerns over the sustainability of burning such a scarce resource. Rather than a piecemeal
+approach to resource utilisation, we propose a principled approach to expressly pursue the construction of infrastructure on the
+Moon using the Moon to minimise the cost of transport of assets to the Moon. Such extraterrestrial industrialisation of the Moon
+will require the deployment of different robotic machines of production (Fig 1).
+
+Figure 1. Robotic lunar industrialisation infrastructure
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+To that end, we have introduced the concept of a lunar industrial ecology for efficient extraction of resources of the Moon to
+provide demandite, a list of desirable functional materials for the construction of a spacecraft that can be sourced from the Moon
+(Table 1) [1,2]. It is the embodiment of a circular economy [43]: (i) minimise the flow of material – both variety and amount required to build products (its output=itself); (ii) build products with durability and repairability for long life (self-repair is a subset
+of self-replication); (iii) recycle products at end of life by enabling separability of constituent ingredients (simple ingredients); (iv)
+regenerate material for new uses to prevent pollution by waste (recycling). As the backbone of this industrial ecology, we have
+demonstrated in the laboratory, the extraction of aluminium metal from lunar highland regolith simulant rich in anorthite [44,45].
+Table 1. Demandite list of functional materials required to build a spacecraft
+
+Lunar-Derived Material
+Wrought iron
+Aluminium
+Compressive structures (+50%) Cast iron
+Regolith + binder
+Elastic structures (trace)
+Steel springs/flexures
+Silicone elastomers
+Hard structures (3%)
+Alumina
+Thermal conductor straps (1%) Fernico (e.g. kovar)
+Nickel
+Aluminum
+Thermal radiators (3%)
+Aluminium
+Thermal insulation (3%)
+Glass (SiO2 fibre)
+Ceramics such as SiO2
+High thermal tolerance (4%)
+Tungsten
+Alumina
+Electrical conduction wire (7%) Aluminium
+Fernico (e.g. kovar)
+Nickel
+Electrical insulation (1%)
+Glass fibre
+Ceramics (SiO2, Al2O3and
+TiO2)
+Silicone plastics
+Silicon steel for motors
+Active electronics devices
+Kovar
+(vacuum tubes) (12%)
+Nickel
+Tungsten
+Fused silica glass
+
+ot
+
+pe
+
+er
+r
+
+ev
+
+Functionality (mass fraction)
+Tensile structures (25%)
+
+Magnetic materials for
+actuators (5%)
+
+tn
+
+Sensory transducers (5%)
+
+ep
+
+rin
+
+Optical structures (11%)
+
+Lubricants (trace)
+Power system (20%)
+
+Combustible fuels (+250%)
+
+Ferrite
+Silicon steel
+Permalloy
+Resistance wire
+Quartz
+Selenium
+Polished
+nickel/aluminium
+Fused silica glass lenses
+Silicone oils
+Water
+Fresnel lens + thermionic
+conversion
+Flywheels
+Oxygen
+Hydrogen
+
+Pr
+
+We are currently investigating the use of 3D printing (additive manufacturing) to convert these materials into useful products,
+demonstrating that manufactured parts can be built using a short processing sequence from raw material to final product.
+Nevertheless, we still require the launch and installation of machines of production on the Moon to build any infrastructure on the
+lunar surface. To obviate this problem, it is necessary to leverage the mining, processing and manufacture of such machines from
+lunar resources. We have the classic chicken-and-egg situation – we must launch such machines of production to the Moon to build
+such machines of production. We explore an efficient approach to robotic lunar industrialisation that circumvents the problem of
+launch costs by manufacturing its entire infrastructure from lunar resources. In this approach, we deploy self-replicating machines
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+to the Moon to build copies of themselves to grow their population. Each self-replicating machine is a lunar manufacturing factory
+capable of copying itself. In effect, we amortise the initial capital cost of launching the first self-replicating machine from Earth
+over an exponentially growing productive capacity on the Moon [6]. The Staley economic model of self-replicating machines
+assumes a Darwinian selection of businesses in which low productivity businesses are selected out yielding productivity growth –
+self-replication is thus an accounting concept rather than a physical process as presented here [46]. A self-replicating machine is a
+machine comprising capital goods but no labour that replicates its capital goods autonomously. We suggest that it can only be
+subject to obsolescence (and so depreciation) when a new improved machine is uploaded – it spawns its own successor. The idea of
+a self-replicating machine on the Moon is not new – it was first proposed (and subsequently shelved) in the 1980s [4] but new
+leveraging technologies have emerged since rendering the self-replicating machine concept feasible [5].
+
+ev
+
+A simplified version of an autonomous self-replicating Lego robot comprised of six modules in which the replicating robot selfassembles its modules into a growing structure [47]. Module 1 comprised batteries, a touch sensor and a contact sensor; module 2
+comprised a finite state machine and contact sensors; module 3 comprised a left motor and a motor drive circuit; module 4
+comprised a right motor and a barcode reader; module 5 comprised a relay circuit; and module 6 comprised a tracking sensor. The
+robot possessed three simple behaviours – forward line-tracking, reverse and left turn - to run a circular circuit guided by a black
+line around a pre-structured environment with modules placed at specific locations. It required both a complex set of modules and a
+structured environment limiting the adaptability of the self-assembly scheme. This work was akin to a physical instantiation of lowcomplexity replication without universal construction. This was a self-assembling system rather than a self-replicating system.
+
+rin
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+To that end, we are interested in building a universal constructor - a machine that, given the appropriate resources (material,
+energy and information), can construct any machine, including a copy of itself. The key to the universal constructor to exploit its
+versatility through its reconfigurability [48]. According to von Neumann [7], an abstract self-replicating machine comprises four
+functional systems: (A) a universal constructor (modelled as a robotic arm) that builds any machine specified by a program of
+instructions D; (B) a copying machine that can copy the program of instructions D; (C) a universal computing machine (modelled
+as a set of logic gates) that controls A by reading D for implementation and B for reading D for copying; (D) a program of
+instructions that may specify any machine including itself (A+B+C), i.e. a self-replicating machine. From von Neumann’s model,
+universal construction is a sufficient (but not necessary [8]) condition of self-replication. The universal constructor is in essence a
+set of robotic machines that manipulate its environment according to its instructions., i.e. the universal constructor constitutes a
+suite of robotic machines to convert raw material into specified robotic products that may include load-haul-dumpers, conveyors,
+ball mills, pumps, 3D printers, manipulators, etc. All the major physical acquisition and processing techniques required to convert
+raw material into products require actuators. Other than structure, the essence of all these robotic machines are mechatronic
+components – sensors, actuators and control systems. They are kinematic machines in that they are different kinematic
+configurations of motors each controlled by electronic circuits using feedback from sensors. The centrality of motor systems to the
+universal constructor/self-replicating machine is clear.
+
+ep
+
+Figure 2. Electric motors and computational circuitry are the core to any kinematic machine of production
+
+Pr
+
+Fig 2 is a schematic that encapsulates the critical importance of electric motors and their controllers to the self-replication
+process. The red arrows follow the same production sequence as Fig 1: a rover with a scoop to excavate lunar regolith which is then
+processed mechanically and then (electro)chemically into feedstock that is 3D-printed. From this, the 3D printer(s) prints
+mechatronic components (represented here as an electric motor and an analogue neural network circuit). In its universal
+construction capacity, these comprise crucial components of any product machine, in this case, a small spacecraft with avionics and
+reaction wheels. The yellow arrows indicate that the motor and electronics are central components to its production machines –
+rover vehicle and its outboard equipment, mechanical processing/beneficiation, pumps to drive unit chemical processors and the 3D
+printer itself.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+II.
+
+ADDITIVE MANUFACTURING
+
+pe
+
+er
+r
+
+ev
+
+iew
+ed
+
+A central component of the universal constructor (and, by implication, a self-replicator) is a generalised additive manufacturing
+facility representing a versatile, efficient and powerful technique of manufacture [9]. Additive manufacturing (colloquially, 3D
+printing) is different to traditional subtractive manufacturing such as casting, forging, turning, milling, etc. It can manufacture
+complex geometries in a single location unattainable through milling or other methods (Fig 3). 3D printing employs zero tooling
+and generates very little material waste compared with traditional subtractive machining. 3D printing technology aids in observing
+the matter, energy and information closure constraint between generations necessary for self-replicating systems [3]. To ensure
+maximum efficiency of the universal constructor, our intent is to minimise non-3D printing processes that impose significant
+infrastructure and energy costs, e.g. casting into moulds, forging using compressive dies, joining activities, etc. The RepRap 3D
+printer is an exemplar of an extrusion-based 3D printer in that it was capable of manufacturing some of its own structural (plastic)
+parts [9], i.e. partially self-replicating (Fig 3).
+
+ot
+
+Figure 3. RepRap 3D printer capable of printing its white plastic structural components
+
+tn
+
+The RepRap 3D printer, like many 3D printing machines, is in essence a cartesian robot, and, indeed, the universal constructor
+has been envisaged as a cartesian robot assembler [10]. The cartesian (or delta) form of 3D printer may be converted into such an
+assembling system by replacing the 3D printing nozzle with a three degree-of-freedom wrist. Self-replication of a 3D printer
+requires the ability to 3D print all the parts that constitute itself. All robotic machines are in essence kinematic configurations of
+feedback-controlled actuators, the 3D printer being a cartesian configuration of DC electric motors.
+
+rin
+
+Our hypothesis is that if we can 3D print an electric motor system, we have progressed significantly towards a universal
+construction capability. A major leap towards such a universal constructor would be a demonstration that motors, electronics and
+sensors can be 3D printed within a single module of a self-assembling system [11]. In-situ manufacture of robotic systems requires
+the manufacture of electric motors, electronics and sensors. The universal constructor is a robotic system implying that realisation
+of the self-replicating machine requires self-construction of mechatronic components from feedstocks. Here, we shall consider only
+electric motors – sensors and computational electronics as the second and third components of the mechatronic triumvirate are
+considered elsewhere [12,13]. We briefly review actuators and attempts to 3D print them, primarily as smart materials, and find that
+DC electric motors have yet to be 3D printed in their entirety until the work presented here.
+
+Pr
+
+ep
+
+Smart materials are programmable matter as they can behave replicably and reversibly according to different stimuli by
+executing stored programs as shape memory [63]. This includes electrorheological and magnetorheological fluids, ferrofluids and
+shape memory materials often in conjunction with elastomers. Programmable matter integrates sensing and actuation into the
+control of physical material shape as the embodiment of a computer program. Computation is thus a reversible physical process in
+programmable matter. Smart materials are artificial muscles that are the basis of soft robotics premised on variable stiffness
+actuation. A comprehensive review of artificial muscles is given in [14]. A variable impedance module with variable stiffness and
+damping may supplement a DC motor and gearing [49]. There are several artificial muscle candidates – McKibben actuators that
+use compressed air to generate high forces; shape memory materials whose small strain may be amplified by coiled spring
+geometries; dielectric elastomer (such as silicone) and ionic polymer metal composite actuators which require high voltage but offer
+low stress. The silicone PDMS (polydimethylsiloxane) is overwhelmingly the most popular elastomer for its stretchability with high
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+ev
+
+iew
+ed
+
+thermal stability and resistance to chemical and radiative insult, e.g. Ecoflex. Shape memory alloys (SMA) memorise their original
+form when thermal stimulus is applied [56]. By far the most prevalent is NiTi alloy which is more stable and higher-performing
+than iron-based or copper-based SMAs. NiTi alloy exhibits both shape memory (Ti>Ni) and superelasticity (Ni>Ti) in response to
+strains due to solid transformations between its martensitic and austenitic phases. When heated, the lower temperature martensitic
+phase transforms into the higher temperature austenitic phase. There is an austenitic-start temperature As at which contraction
+begins that is completed by the austenitic-finish temperature Af. On cooling, reversion to the martensitic phase starts at the
+martensitic start temperature Ms and is complete at the martensitic finish temperature Mf. The shape memory effect is hysteretic as
+the transition temperatures are different between heating and cooling
+~20-40oC typically. Actuation is the reversible
+transformation from martensitic to austenitic phases through the application of thermal energy. Wire can be coiled into a spring
+which increases stroke but lowers actuation force as tension is converted into shear. 4D printing refers to 3D printed structures that
+can alter their shape subsequent to printing on stimulation, i.e. 3D printed smart structures [66]. Three air-cooled SMA wires in
+series with a linear spring fixed to a cam generated rotary motion at 0.2 Hz [57]. A rotary actuator was constructed, driven by six
+SMA wires arranged radially within a flexspline. Activation of opposing pairs of SMA wires sequentially drove the flexspline
+within the outer gear wheel [57]. NiTi shape memory alloy powder mixed in thermoplastic binder has been extruded into shape
+memory functional 3D printed actuators [58]. NiTi alloy has been additively manufactured into complex structures unachievable
+through traditional powder metallurgy using powder-bed additive manufacturing (such as selective laser sintering or melting)
+and/or directed energy deposition requiring a minimum energy density of 200 J/mm3 [50]. Laser input energies of 155-292 J/mm3
+offered melting for optimal part densities with high tensile strength of 776 MP and 5% recoverable strain [59]. Selective laser
+melting of NiTi has fabricated complex trusses and lattices with controllable elasticity for vibration suppression [60]. Selective laser
+melting of NiTi alloys has created inchworm-based crawling robots actuated by an SMA spring actuator [61]. Smart polymer
+materials that can be 3D printed offer promise of 3D printed robots. PMMA (polymethyl methacrylate) is suitable for fused
+deposition modelling and has been 3D printed to form cam shafts for opening and closing of valves [64]. PEEK (poly(ether ether
+ketone)) is a high temperature-tolerant shape memory polymer that can be trained at room temperature to induce a residual strain of
+30% [65]. Smart material polymer actuators may be 3D printed within a silicone matrix. Different types of silicones can be 3D
+printed with differential properties to yield shape-shifting multimaterial bilayers [70]. A simple robotic arm with rigid PLA with
+integrated polyurethane pneumatic actuators was printed by a single multi-material fused deposition modelling printer by switching
+between printing tools [51]. Both materials were thermoplastics. A polyurethane pneumatic chamber embedded within an FDM
+printed finger measured the pressure (volume) change induced by touch contact adding touch sensing to pneumatic actuation [52].
+A PI controller used the feedback to alter actuation force in real-time. Ionic polymer metal composites may be 3D printed in
+precursor form and then electro-activated through hydrolysis in potassium hydroxide and dimethyl sulphoxide aqueous solution
+followed by metal plating. Smart materials can typically be used as actuators or sensors. For tactility, actuation is tightly correlated
+with stretchable tactile sensing for measuring actuator deformation [67]. Direct ink writing was employed using two viscoelastic
+inks – an ionically conductive hydrogel and an insulating silicone – that were extruded from separate nozzles and then
+photopolymerised into stretchable capacitive pressure sensing “skin” to measure elastomeric actuation [68]. However, hydrogels
+often suffer from slow response rates. Emerging tactile sensing technology may be combined with vision-based methods to detect
+actuator deflection [71]. Although commonly used as sensors, piezoelectric motors use piezoelectric material to generate cyclic
+mechanical motion by the application of an electric field and are magnetic field-immune. Similarly, ultrasonic motors use resonance
+to amplify the vibration of a piezoelectric stator to drive the rotor. For example, 3D printing of bidirectional (forward and inverse)
+piezoelectric systems comprised of 3D network of struts may be used to create actuating structures with proprioceptive feedback
+control [15]. High resolution microstereolithography used UV-photocurable methacrylate co-polymer networks to 3D print shape
+memory polymers with higher strains than achievable otherwise [69]. These are examples of metamaterials, synthetic architectures
+of 3D printed repeated patterns that generate specific functional properties [16]. Such approaches to soft robotics suffer from
+limited utility. Despite the promise of smart materials as actuators, they do not provide the combination of stroke and torque
+magnitude that electric motors provide. We have illustrated this limitation of poor stroke and low frequency of actuation by smart
+materials in a rotational implementation of artificial muscles using NiTi shape memory alloy wire (Fig 4). A simple three-SMA
+wire rotary motor was constructed, each wire mounted onto cams that were excited sequentially to turn the rotor (Fig 4a). The
+lengths of the SMA wires had to be long enough to provide sufficient stroke to turn the rotor limited by NiTi’s low strain capacity
+(Fig 4b). Furthermore, thermal dissipation limited the rotary frequency to ~1 Hz.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+Figure 4. (a) Nitinol wire-driven rotor based on driving cams; (b) Nitinol wire length required for sufficient stroke to drive the cams
+
+er
+r
+
+One option to increase stroke and frequency is to drive an inflatable elastomer with a 3D printed micro-internal combustion
+engine [19]. The complexity of this approach returns us to the electric motor. Electric motors are superior to both artificial and
+biological muscles due to their work capacity being multiplied by repeated rotational strokes rather than the single stroke of a linear
+motor [17,18].
+
+rin
+
+tn
+
+ot
+
+pe
+
+All so-called 3D printed motors to date, when scrutinised, have not been fully 3D printed but only partially 3D printed. The
+closest to a 3D printed motor concept was a pancake DC motor with a dual PCB layer pancake rotor with etched copper coils and
+two pancake stators with a circumferential array of permanent magnets [20]. It was constructed through conventional means but
+presented the idea of 3D printability. Structural aspects of the stator and rotor of an axial flux motor have been 3D printed before
+[34] and printed pancake motor rotors are well established [35]. Photolithographically-printed copper wiring on the epoxy-glass
+laminate stator is parallel to the rotor which carries alternating currents to generate rotor spin. Alternatively, the flat current winding
+is etched onto a flat armature of plastic/ceramic circuit board [36] (Fig 5a,b).
+
+Figure 5. Armature windings of each layer are angled to the radial direction allowing more conductors to be accommodated: (a) single layer; (b) multiple layers
+(from [36]); (c) spiral conductor pattern (from [37])
+
+Pr
+
+ep
+
+Printing of spiral coils with rhomboidal turns avoids crowding at the inner radius of the armature [37] (Fig 5c). A 3D printed
+version of a Halbach cylinder motor was based on a 3D printed structure in PLA which was tested at 5700 rpm but the magnets and
+the coils were not 3D printed [21]. This would be particularly crucial for a Halbach motor because a Halbach array comprises
+alternating main and transit permanent magnets arranged around the rotor. The magnetic configuration is crucial to the Halbach
+motor operation - the magnetic field is concentrated by almost twice as much on one side of the array and reduced to near-zero on
+the other. Similarly, a Halbach cylinder with high power-to-volume density concentrates its magnetic field toward its centre through
+its arrangement of magnets to interact with its radial ferrite coils.
+There are several approaches to 3D printing of bonded permanent magnets. Direct ink writing of elastomeric silicone rubber
+composite with embedded ferromagnetic (NdFeB) microparticles and silica nanoparticles (for viscosity control) offers patterned
+magnetic properties by applying magnetic fields ~2-3 T to the extrusion nozzle [25]. Such patterning could be exploited for 3D
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+III.
+
+3D PRINTING ELECTRIC MOTORS
+
+iew
+ed
+
+morphological reconfigurability. Binder jetting has been employed to 3D print near-net-shape Nd2Fe14B permanent magnets [26].
+The binder jetting process uses an inkjet nozzle to deposit a polymer binder over a bed of NdFeB powder (average around 70 μm
+diameter) followed by application of a heat lamp to solidify the layer. Each 0.2 mm thick layer of magnetic powder and polymer is
+successively added to form the green part which is then cured at 100-150oC for 4-6 h. The cured green part is then dip-coated with
+low viscosity urethane resin to fully saturate the porous magnet (46% resin by volume) and reduce its brittleness. Alternatively,
+infiltration by low melting point eutectic alloy (Nd3Cu0.25Co0.75 and Pr3Cu0.25Co0.75) improves densification by 46% and improves
+the mechanical strength and intrinsic coercivity [27].
+
+pe
+
+er
+r
+
+ev
+
+Smart materials as artificial muscles are the basis of soft robotics driven by variable stiffness actuators. A comprehensive review
+of artificial muscles is given in [14]. A variable impedance module with variable stiffness and damping may supplement a DC
+motor and gearing [49]. There are several artificial muscle candidates – McKibben actuators that use compressed air to generate
+high forces; shape memory materials whose small strain may be amplified by coiled spring geometries; dielectric elastomer (such
+as silicone) and ionic polymer metal composite actuators which require high voltage but offer low stress. NiTi alloy exhibits both
+shape memory (Ti>Ni) and superelasticity (Ni>Ti) in response to strains due to solid transformations between its martensitic and
+austenitic phases. NiTi alloy has been additively manufactured using powder-bed (such as SLS/M) and/or directed energy
+deposition with a minimum energy density of 200 J/mm3 into complex structures unachievable through traditional powder
+metallurgy [50]. Smart polymer materials that can be 3D printed offer promise of 3D printed robots. A simple robotic arm with
+rigid PLA with integrated polyurethane pneumatic actuators was printed by a single multi-material FDM printer by switching
+between printing tools [51]. Both materials were thermoplastics. A polyurethane pneumatic chamber embedded within an FDM
+printed finger measured pressure (volume) change induced by touch contact adding touch sensing to pneumatic actuation [52]. A PI
+controller used the feedback to alter actuation force in real-time. Such approaches to soft robotics suffer from limited utility. Ionic
+polymer metal composites may be 3D printed in precursor form and then electro-activated through hydrolysis in potassium
+hydroxide and dimethyl sulphoxide aqueous solution followed by metal plating. Smart materials can typically be used as actuators
+or sensors. For example, 3D printing of bidirectional (forward and inverse) piezoelectric systems comprised of 3D network of struts
+may be used to create actuating structures with proprioceptive feedback control [15]. This is an example of a metamaterial, a
+synthetic architecture of 3D printed repeated patterns that generate specific functional properties [16]. However, Electric motors are
+superior to both artificial and biological muscles due to their work capacity being multiplied by repeated rotational strokes rather
+than the single stroke of a linear motor [17,18]. We have illustrated this limitation of poor stroke and low frequency of actuation by
+smart materials in a rotational implementation of artificial muscles using NiTi shape memory alloy wire (Fig 5).
+Figure 5. (a) Nitinol wire-driven rotor based on driving cams; (b) Nitinol wire length required for sufficient stroke to drive the cams
+
+3.1 DC Electric Motor Construction
+
+ot
+
+Nevertheless, one option to increase stroke and frequency is to drive an inflatable elastomer with a 3D printed micro-internal
+combustion engine [19]. The complexity of this approach returns us to the electric motor.
+
+rin
+
+tn
+
+All so-called 3D printed motors to date, when scrutinised, have not been fully 3D printed but only partially 3D printed. The
+closest to a 3D printed motor concept was a pancake DC motor with a dual PCB layer pancake rotor with etched copper coils and
+two pancake stators with a circumferential array of permanent magnets [20]. It was constructed through conventional means but
+presented the idea of 3D printability. Similarly, a 3D printed version of a Halbach cylinder motor was based on a 3D printed
+structure in PLA which was tested at 5700 rpm but the magnets and the coils were not 3D printed [21]. This would be particularly
+crucial for a Halbach motor because a Halbach array comprises alternating main and transit permanent magnets arranged around the
+rotor. The magnetic configuration is crucial to the Halbach motor operation - the magnetic field is concentrated by close to two
+times on one side of the array and reduced to near-zero on the other. Similarly, a Halbach cylinder with high power-to-volume
+density concentrates its magnetic field toward its centre through its arrangement of magnets to interact with its radial ferrite coils.
+
+Pr
+
+ep
+
+We present a fully 3D printed DC electric motor which utilised several 3D printing methods. It is important to note that we are
+3D printing a DC electric motor from feedstock that is readily sourced on Earth – we discuss how this might inform the
+construction of a lunar version in section IV. A basic DC electric motor comprises a fixed stator within which spins the rotor
+controlled via a commutator assembly. Enamelled copper wire connects the commutator to the electrical power source; a
+commutator/wire brush assembly cyclically reverses the supply current to the rotor; a stator mounts permanent magnets; a coiled
+copper wire wound around a soft ferromagnetic core armature acts as an electromagnet. The interaction between the two magnet
+fields generates a Lorenz torque on the rotor. The stationary brushes connect to the commutator switches and reverse the coil
+current every half revolution through slip rings. In the brushless DC motor, the permanent magnets are in the rotor and the coils
+around wound on stator. The use of ferrites over rare earth permanent magnets results in a larger motor for the same torque. Energy
+losses in the soft magnetic material are due to: (i) hysteresis loss which can be reduced by low coercivity; (ii) eddy current loss
+which can be reduced by low electrical conductivity; (iii) anomalous losses which can be reduced by using homogeneous material
+to permit magnetic domain migration. It is essential that hysteresis in the electromagnet is minimised to ensure that no magnetic
+field is retained on removal and reversal of the electric current. This requires soft magnetic materials for the magnetic core ferromagnetic material such soft iron or ferrites. Iron’s electrical conductivity makes it susceptible to eddy currents and heating
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+losses. To suppress eddy currents, the core may be constructed from thin insulated sheets forming a laminated core, e.g. sequences
+of iron layers which are surface oxidised and sandwiched to limit eddy current transmission. Alternatively, micron-sized iron
+powder may be embedded in an insulating matrix - this minimises eddy currents while magnetic field generation and magnetic
+threading is maximised. Although eddy currents are a nuisance in electric motors, it is worth noting that they are exploited in
+induction heating furnaces, non-contact braking, metal proximity sensors and metal crack detection. Induction heating involves
+passing a current through a coil around the sample to be heated. The electric current frequency depends on the sample mass and is
+generally more efficient than resistance heating. We adopted the DC electric motor as our 3D printed motor model because all other
+motors are derived from it through reconfigurations of the same functional components. For example, synchronous AC motors
+generate torque using either permanent magnets, magnetic reluctance or a combination (they are generally more efficient than AC
+induction motors when operated at constant speed). A crucial aspect of motors is that, like all moving parts, they will be sensitive to
+pervasive lunar dust – we do not address this specifically other than to suggest the existence of potential mitigation methods [62].
+For most of our 3D printing, we used an Anet A8 3D printer based on the Prusa i3 with a 0.4 mm nozzle and 0.1-0.2 mm position
+resolution. Our 3D CAD models were built using PTC Creo CAD software which was converted to STL format for slicing into
+layers using Cura. We used a 15-18 V DC power supply for our 3D printed motors.
+
+ev
+
+3.2 Motor Testing Apparatus
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+Our motor test apparatus evolved over time. For our early tests which focused on 3D printing rotors, we adopted a simple but
+effective apparatus that involved mounting the rotors within a simple stator frame with mounted rare earth magnets. The shaft was
+connected directly to the motor holder of an off-the-shelf MiniPro R/C Car Inertia Motor V2 Dynamometer (Fig 6).
+
+Figure 6. Dynamometer test apparatus
+
+Pr
+
+ep
+
+rin
+
+As the project progressed, we adopted an increasingly sophisticated test apparatus. The dynamometer required direct
+mechanical mating of the motor shaft which was inconvenient when we worked with dual excitation and pancake motors. We
+replaced it with a B+K Precision DC Regulated Power Supply 1671A (0-30 V and 0-5 A range) with voltage/current resolution of
+0.1 V and 0.01 A respectively and an AstroAI DM6000AR Multimeter (6000 counts) with voltage/current resolution of 5 mV at 30
+V and 0.5 mA at 3 A respectively for more precise control (Fig 7a) and, for the fully printed DC motor, we supplemented this setup
+with a Siglent SDS 1104X-E digital oscilloscope (Fig 7b).
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+Figure 7. (a) Power supply and multimeter test apparatus; (b) Power supply, multimeter and oscilloscope
+
+Figure 8. Automatic wire winder
+
+rin
+
+3.3 3D Printing Rotors
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+We used an automatic wire winding system to wind high turn-number coils around stator poles that was implemented using a
+custom-modified Sherline 4410 mini-lathe (Fig 8).
+
+Pr
+
+ep
+
+Our earliest efforts concentrated on the soft magnetic rotor which was 3D printed with 8 slots to accommodate four-pole rotor
+windings of 95 turns/pole of 30 MAG copper wire. A 3D printed PLA commutator was mounted with four sets of copper sheet with
+two brushes of 20 Ga bare copper wire. For the wire-wound rotor, the commonest soft magnetic material is silicon steel (Fe-3% Si).
+Typically, it reduces the incidence of eddy currents and is either laminated with insulation material such as polymer or silicon steel
+particles are embedded with high loading in a polymer matrix. Binder jetting of magnetically soft silicon steel (Fe91Si9) yields
+potentially higher magnetic permeability than powder metallurgy of soft magnetic composite powders [22]. Other possibilities
+include new soft magnetic material with low coercivity/high electrical resistivity such as coarse particles of multicomponent alloy
+(Fe32.6-Ni27.7-Co27.7-Ta5.0-Al7.0) dispersed within a ferromagnetic matrix [23] - a lunar version must omit Ta. Our first 3D printed
+rotor cores were printed in Fe-3Si and Fe-6.5Si with 40 mm diameter by 14 mm length by NRC-Boucherville (Fig 9b and 9c
+respectively). These comprised 50% Fe-Si particles in 50% PLA matrix by volume. We 3D printed motor cores of commercial offthe-shelf ProtoPastaTM (http://www.proto-pasta.com) magnetic PLA with the same geometry through extrusion (Fig 9a). The
+ProtoPastaTM filament comprised 50% iron particles in 50% PLA by weight, i.e. considerably lighter than loading by volume.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+er
+r
+
+Figure 9. 3D printed rotors with PLA endcaps and commutators: (a) ProtoPastaTM magnetic PLA, (b) PLA with Fe-3%Si, (c) PLA with Fe-6.5%Si
+
+tn
+
+ot
+
+pe
+
+The 3D printed motor cores were wound with copper windings for the rotor and mounted into a stator structure to accommodate
+embedded permanent magnets (Fig 10). They were tested within a two-pole stator assembly using a dynamometer for measuring
+voltage, current, rpm, power and torque output.
+
+Figure 10. 3D printed Proto-PastaTM rotor
+
+Pr
+
+ep
+
+rin
+
+The bonded Fe-6.5%Si steel impregnated PLA gave superior performance over the traditional bonded Fe-3%Si steel
+impregnated PLA. However, the performance results clearly show that the ProtoPastaTM magnetic PLA rotor offers superior
+performance in terms of RPM and torque output than the silicon steel rotors (Fig 11). We attribute this to the higher weight of the
+Fe-Si particle impregnated rotors (136 g) compared to the ProtoPastaTM rotors (71 g). The increased inertia of the 50% steel particle
+rotor by volume was not offset by the increased magnetically induced torque yielding a reduction in rotation speed performance
+[24].
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+pe
+ot
+tn
+rin
+ep
+Pr
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+Figure 11. (a) rotor RPM characteristics; (b) rotor torque characteristics
+
+iew
+ed
+
+Future work might search if there an optimal cross-over between the two bookend conditions of 50:50 by mass/volume by
+systematically reducing the iron from the 50% by volume condition. We did not conduct such an investigation.
+3.4 3D Printing Dual Excitation Motors
+
+er
+r
+
+ev
+
+Reluctance motors have a rotating magnetic field around the stator concentrated at the poles (which are magnetically isolated
+from each other) and drives the rotation of a soft magnetic rotor due to magnetic reluctance. We experimented with ProtoPastaTM to
+3D print a variable reluctance motor (Fig 12) but we did not benchmark it. Our interest was to explore motors without permanent
+magnets but we anticipated that the multi-coil design of the reluctance motor would present subsequent challenges for 3D printing.
+
+Figure 12. 3D printed variable reluctance motor
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+Given the demonstrable success with ProtoPastaTM, we investigated the dual-excited DC motor using magnetic PLA material for
+both rotor and stator magnets. Dual excitation motors eliminate permanent magnets by adopting separately-excited coils on
+electromagnetic poles and the electromagnetic rotor but they still require brushes to transmit energy to the rotor. An open geometry
+stator was insufficiently powerful to generate torque so a closed magnetic loop stator was printed with ProtoPastaTM (Fig 13a,b).
+The rotor was wound with 70 turns/pole and the stator was wound with 100 turns/pole using an automatic wire winding system. An
+automatic wire winding system was implemented using a Sherline 4410 mini-lathe (Fig 9c). The only non-3D printed parts were the
+steel motor shafts and the copper coils. We also set up the 3D printed dual excitation motor with a 3D printed PLA step-down gear
+to demonstrate closing of a hinged panel (as a proxy for self-deployment of structural panels [11]) (Fig 13c).
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+pe
+ot
+tn
+rin
+ep
+Pr
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+Figure 13. (a) 3D printed dual excitation motor using only soft magnetic material; (b) its dimensions; (c) 3D printed motor in a self-deployment configuration
+
+er
+r
+
+3.5 3D Printing Permanent Magnets for Stator
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+We explored the adoption of 3D printed permanent magnets for the DC motor stator. The cheapest permanent magnetic material
+is ferrite in which dominant Fe2O3 particles are supplemented with Co additive (on the Moon, SrCO3 or BaCO3 that are the most
+common additives would be unavailable) subjected to powder metallurgy. Our 3D printed electric motor used 3D printed highstrength rare earth element (30% Nd – 66.8% Fe – 1.0% B – 0.4% Al – 0.8% Nb – 1% Dy) permanent magnets manufactured ondemand by Oak Ridge National Laboratory (Fig 10). There are several approaches to 3D printing of bonded permanent magnets.
+Direct ink writing of elastomeric silicone rubber composite with embedded ferromagnetic (NdFeB) microparticles and silica
+nanoparticles (for viscosity control) offers patterned magnetic properties by applying magnetic fields ~2-3 T to the extrusion nozzle
+[25]. Such patterning could be exploited for 3D morphological reconfigurability. Binder jetting has been employed to 3D print
+near-net-shape Nd2Fe14B permanent magnets [26]. The binder jetting process uses an inkjet nozzle to deposit a polymer binder over
+a bed of NdFeB powder (average around 70 μm diameter) followed by application of a heat lamp to solidify the layer. Each 0.2 mm
+thick layer of magnetic powder and polymer is successively added to form the green part which is then cured at 100-150oC for 4-6
+h. The cured green part is then dip-coated with low viscosity urethane resin to fully saturate the porous magnet (46% resin by
+volume) and reduce its brittleness. Alternatively, infiltration by low melting point eutectic alloy (Nd3Cu0.25Co0.75 and
+Pr3Cu0.25Co0.75) improves densification with 46% eutectic alloy, mechanical strength and intrinsic coercivity [27]. Oak Ridge
+National Laboratories’ Big area additive manufacturing (BAAM) facility uses melt extrusion of thermoplastic composite mounted
+onto a gantry system for unbounded size [28]. Extrusion from pellets of 65% NdFeB plate-shaped powder of 20-200 μm diameter
+with 35% nylon-12 binder by volume at 285oC (lower than the NdFeB Curie temperature of 360oC) onto a heated aluminium bed at
+95oC) increased the magnetic density and eliminated the porosity impregnation step. The 3D printed NdFeB permanent magnets
+from using BAAM outperform conventional injection-moulded magnets with a remanence of 0.51 T and ultimate tensile strength of
+6.60 MPa. High magnetic alignment of NdFeB particles in a polymer binder is enhanced by an applied magnetic field on the binder
+during its transition from high elasticity to lower viscosity at <100oC [29]. BAAM was used to extrude a high NdFeB loading
+fraction of 70% in 30% nylon binder into 3D printed permanent magnets with superior properties (ultimate tensile strength of 12.6
+MPa and remanence of 0.58 T) which was demonstrated in a 12 V dc electric motor assembly (not 3D printed) [30]. A silica
+ceramic coating provided thermal stability to oxidation at high temperature. Our permanent magnets were similarly 3D printed by
+Oak Ridge using the same BAAM technology (Fig 14a). These were used in several motor configurations including the fully 3D
+printed DC motor (Fig 14b).
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+Figure 14. (a) Oak Ridge 3D printed rare earth bonded permanent magnets; (b) 3D printed magnets embedded in 3D printed magnetic PLA stator
+
+er
+r
+
+Magnetisation of a permanent magnet involves applying an external magnetic field to saturation which is then slightly
+demagnetised for stabilisation. The external field is generated by a capacitor bank to yield a very short current pulse through a coil.
+After printing, our rare earth magnets were exposed to a short current pulse to generate an applied magnetic field 4-5 times its
+coercive force through a magnetising coil (Table 2):
+Table 2. Maximum magnetic energy density in airgap (BHmax) and coercive force of permanent magnets
+
+BHmax
+
+Coercive force (kA/m)
+
+10-40
+3.5
+5.5
+
+750-2000
+100-300
+37-45
+
+pe
+
+Permanent magnetic
+material
+NdFeB
+Ferrite
+Alnico 1 or 2
+
+Although rare earth elements exist on the Moon, extracting them is more appropriate to a second or third generation lunar
+infrastructure. The most appropriate permanent magnet material for the Moon would be alnico 1 (12% Al – 21% Ni – 5% Co – 3%
+Cu - 59% Fe) which have superior thermal stability but without Cu (we are currently exploring 3D printing of AlNiCo magnets).
+3.6 Challenge of 3D Printing Coils
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+The wiring and wire coils were the most challenging to address with 3D printing technologies. To investigate 3D printing of
+coils, we used a pancake (axial flux) motor configuration [31] (Fig 15).
+
+Figure 15. Pancake motor configuration
+
+We adopted a stator with embedded permanent magnets on either side of a disk-shaped double-sided PCB rotor [32,33].
+Structural aspects of the stator and rotor of an axial flux motor have been 3D printed before [34] and printed pancake motor rotors
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+are well established [35]. Photolithographically-printed copper wiring on the epoxy-glass laminate stator is parallel to the rotor
+which carries alternating currents to generate rotor spin. Alternatively, the flat current winding is etched onto a flat armature of
+plastic/ceramic circuit board [36] (Fig 12a,b).
+Figure 12. Armature windings of each layer are angled to the radial direction allowing more conductors to be accommodated: (a) single layer; (b) multiple layers
+(from [36]); (c) spiral conductor pattern (from [37])
+
+pe
+
+er
+r
+
+ev
+
+Printing of spiral coils with rhomboidal turns avoids crowding at the inner radius of the armature [37]. This is more difficult to
+manufacture, We initially etched double-sided copper-clad PCBs with a simpler geometry of octagonal spiralling coils (Fig 16). A
+600 dpi laser printer was used to print the coil schematic onto transparent film 416-T mask. Photoresist MG 416-X was used to treat
+the PCB and then exposed to UV light through the mask. The board was immersed into MG Chemical developer solution which
+removed the UV-exposed resist. The exposed copper was removed by immersion in MG 415 etchant leaving the armature winding
+pattern.
+
+ot
+
+Figure 16. (a) photolithographically-etched PCB; (b) pancake rotor comprising two double-sided PCBs
+
+tn
+
+The number of spirals per layer equates to the number of rotor poles P. Each octagon winding comprised nine turns with traces
+and spacing of 1 mm giving 18 turns/pole. A single double-sided and two double-sided PCBs were separated by 3D printed
+polymer spacing. They were mounted into a stator with embedded off-the-shelf permanent magnets yielding an increase in
+performance from 500 rpm to 700 rpm. We anticipated that this photolithographic approach would be difficult to adapt to a
+traditional DC motor configuration with orthogonal wiring.
+
+Pr
+
+ep
+
+rin
+
+Our next approach was to 3D print a pancake rotor using two filaments deployed from a single printer head. The substrate was
+printed using ProtoPastaTM and cooled followed by deposition of Electrifi conductive copper filament with a resistivity of 0.006
+Ω.cm. The copper filament comprised copper-impregnated PLA plastic to print conductive tracks (Fig 17). Printing the copperimpregnated filament required reducing the print speed to 15 mm/s and maintaining a minimum 0.2 mm gap between the nozzle
+and the printing surface. A more efficient spiral coil geometry was printed because the rotor coils lie parallel to the rotor disk.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+
+Figure 17. Copper impregnated PLA coils extruded onto a pancake rotor
+
+tn
+
+ot
+
+pe
+
+Such materials are suited to electrical conduction of data at low voltages/currents but power electronics impose high
+voltages/currents. On connecting up to a DC power supply to test its conductivity, an applied voltage of 3.4 V generated hot spots
+on contact due to increased resistance of 17 Ω with 200 mA currents. Such conductive filament is unsuited to electrical power
+applications such as motors. Our motor runs at 12 V which would melt the polymer matrix. This limitation applies to all current
+conductive polymers as well as they are developed for low-voltage data electronics. The wires and wire coils of motors cannot be
+polymer-based due to poor current-carrying capacity requiring instead conductive metals. There is the further problem of thermally
+sintering of copper-impregnated pastes without melting the substrate. One approach would be to create microchannels of silicone
+which is tolerant of significant temperatures up to ~300oC. 3D printing of microfluidic systems requires submillimetre scale
+manufacture of silicone for the enclosing channels [38]. Silicone moulds and templates may be 3D printed using SLA in the shape
+of microchannels with sub-100 nm features. The microchannels may then be filled with room temperature liquid metals such as
+mercury or gallium. However, we considered this approach to be too complex (and there are no near room temperature liquid
+metals available on the Moon). An alternative approach is to print metal directly onto a substrate: for high precision, fine channels
+may be etched to guide the metal tracks with subsequent milling. Metal conductive tracks are commonly 3D printed using
+nanoparticle conductive inks. Laser annealing is necessary to create fully metallic conductive tracks on a substrate. This has been
+the approach for 3D printing of electronic devices including conductive wiring such as conductive strips on conformal antennas.
+The difficulty with these approaches is lifting such conductive tracks to wrap them around a DC motor in the transverse direction to
+rotor printing.
+
+Pr
+
+ep
+
+rin
+
+Metal conductors were required so we adopted a variant on laminated object manufacture (LOM) for the wire and wire coils of
+the motor (Fig 18). A layer of metal foil with thin adhesive backing acting as an insulating layer (in this case, copper but could be
+substituted with aluminium foil on the Moon) was applied to a worktop and rolled flat. A Cricut Explore Air 2 cutting machine was
+programmed with the wire coil design to cut a 0.0762 mm layer of copper sheet into the desired shape (Fig 18a). The excess copper
+was removed by hand leaving only the desired shaped 2D layer. The four-quadrant design minimises the number of soldering points
+to four compared with a traditional radial pattern of pancake motors which require not far short of 100 solder points depending on
+the size of the rotor cross section. The copper winding trace was taped onto both sides of the 3D printed pancake rotor of magnetic
+PLA and mounted into a stator assembly with embedded permanent magnets for testing (Fig 18b,c). Its performance was similar to
+the PCB motor with photolithographically-printed copper as expected.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+pe
+ot
+tn
+
+rin
+
+Figure 18. (a) Criccut Explore Air 2 cutter; (b) LOM-type copper coils on pancake rotor; (c) rotor mounted into a stator with commutator
+
+ep
+
+A mounted Hall effect sensor measured the back EMF from the rotor spin to permit the control electronics synchronise pulsing
+of the coils (neither the permanent magnets nor the Hall sensor were 3D printed). In LOM, further adhesive layers are added and
+heated with the hot roller to bond the layers together to build up the 3D part. In our case, we required only a single layer of foil to
+form the conducting ribbons while retaining their thin adhesive layer. This approach is consistent with 3D fabrication of electronic
+components such as resistors, capacitors and inductors with multiple layers of conductive strips.
+3.7 Assembly of Fully 3D Printed DC Motor
+
+Pr
+
+We returned to the fully 3D printed DC electric motor configuration to combine all the earlier elements. The basic structural
+components (bracket), motor shaft, bearings and bolts were 3D printed using PLA (Fig 19a). The stator structure that holds the Oak
+Ridge-printed permanent magnets and the rotor were printed using ProtoPastaTM magnetic PLA (Fig 19a). Four 3D printed NdFeB
+bonded permanent magnets from Oak Ridge National Laboratory were embedded into the stator. Once again, the chief problem was
+the copper coils. If the ribbons were too thin, they could not be manually wound around the rotor without breaking. Hence, we
+printed wider ribbons of 5 mm width which were more durable enabling them to be wrapped around the rotor with 17 turns/pole
+after coating with silicone conformal coating for durable insulation (Fig 19b).
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+
+Figure 19. (a) 3D printed parts of the 3D printed DC motor less coils and commutator; (b) 3D printed rotor with wound copper coils and commutator.
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+The entire 3D printed DC motor was assembled manually (Fig 20).
+
+Figure 20. 3D printed DC motor
+
+Pr
+
+It operated successfully although its performance in terms of both angular speed and torque output (no-load) was significantly
+inferior to any commercial motor of similar size due to the minimal number of wiring turns [39] (Fig 21). The RPM plateaued at a
+sedentary 700 rpm but the torque curve clearly demonstrates a high degree of stiction before settling at a very low 0.1-0.2 Nm noload torque output.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+ev
+
+Figure 21. Performance characteristics of the fully 3D printed DC motor: (a) angular speed-time curve; (b) torque-time curve; (c) torque-rpm curve
+
+3.8 Benchmarking A Partly 3D Printed Motor
+
+pe
+
+er
+r
+
+This was a proof-of-concept of a 3D printed motor but too inferior for practical utility. The few-turn wire coils were the culprit
+for the poor performance as shown below in subsequent experiments. Although fully 3D printed, it required three different 3D
+printing techniques and required sophisticated assembled by hand. There have been attempts to minimise assembly operations for
+electrical machines. A functional soft magnetic core solenoid of stacked plates was printed from a single multi-material FDM
+printer extruding filaments and pellets [53]. Each plate comprised alternating spiral conductors from a central soft iron core
+separated by insulating plates. The conductive spiral was formed by introducing conductive connections through the insulator
+between the stacked plates. Three materials were printed – pure PLA for insulating structures, PLA impregnated with copper
+particles for electrical conductors and PLA or nylon impregnated with Fe or FeSiAl particles respectively for soft magnetic cores.
+The advantage of this approach is that it exploits a single 3D printer to minimise assembly but the copper-impregnated conductive
+elements were limited to 60 mA so the maximum field generable was ~1 G which is very low. The current tradeoff is between
+motor performance which requires the adoption of different 3D printing methods for different materials against the complexity of
+assembly. One can envisage adopting a single FDM approach in which Protopasta was adopted for magnetic elements and copperimpregnated PLA for conductive elements of an entirely polymer-based motor but such a motor would have such a poor
+performance that it is questionable whether it could function at all.
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+It was not possible to make direct comparison of our fully 3D-printed DC motor with a comparable commercial motor even if
+one could be sourced with a similar geometry as there would be too many variables to perform meaningful analysis. Indeed, we
+alluded to the small number of coil turns around the rotor – this presents a major limitation in the fully 3D printed motor. One way
+this could be circumvented is to supplement 3D printing with wire drawing through a series of dies. The wire may be copper, or in
+the case of the Moon, aluminium. Indeed, aluminium wiring is common in motors, generators and transformers. Insulation may be
+implemented coating with fused silica powder and cured thermally (enamelling), wrapping with fiberglass or silicone polymer tape
+or extrusion of silicone polymer or fused silica powder around the wire as it is drawn. Wire drawing is similar to extrusion except
+that it involves pulling rather than pushing through an orifice. It is not inconceivable that an extrusion nozzle of a 3D printer may be
+adapted to wire drawing. To compromise, we benchmarked a partially 3D printed motor (eliminating the problem of matching
+copper coils) against an off-the-shelf Dynamite DYN 1171 brushed permanent magnet DC motor which was disassembled to
+extract its physical parameters (Fig 22).
+
+Figure 22. Disassembled Dybamite DYN 1171 motor
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+This off-the-shelf motor was used to 3D print versions from ProtoPastaTM magnetic PLA that were as similar as possible (Fig
+23a) – this required high resolution 3D printing at a 0.15 mm setting with 100% infill at low printing speed for the 3D printed
+version. The same number of turns, copper coil gauge and core dimensions were adopted for the 3D printed version (Fig 23b).
+
+ev
+
+Figure 23 (a) 3D printed parts of motor; (b) partially assembled and wound with copper wire
+
+pe
+
+er
+r
+
+The armature employed lap winding that ensures that the number of parallel conducting paths and poles are the same. The same
+wiring configuration was adopted for the 3D printed version – this was not 3D printed but the same gauge wire was used (32 AWG)
+(Fig 24). The test equipment was the dynamometer, voltage and current sensors. Two versions were tested – a partially 3D printed
+motor (3D printed rotor only) using the off-the shelf stator and “fully” 3D printed motor using the Oak Ridge permanent magnets
+(but with conventional coils).
+
+ot
+
+Figure 24. (a) Off-the-shelf motor; (b) 3D printed version (excluding stator casing);
+
+Pr
+
+ep
+
+rin
+
+tn
+
+The 3D printed motor using the Oak Ridge magnets and ProtoPasta rotor yielded the same characteristic form (unlike the 3D
+printed rotor only motor) as the commercial motor but with diminished performance of 54% of rpm (Fig 25). The difference
+between the two 3D printed motors is interesting – the 3D printed magnets yield stabilised (though diminished) performance over
+the commercial stator magnets which showed enhanced RPM output with the 3D printed rotor over the commercial product. It is
+important to note that we were proving a concept – that 3D printed motors can be constructed rather than optimising their
+performance against a commercial grade production motor.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+er
+r
+pe
+
+Figure 25. RPM characteristics of 3D printed versions of a commercial production motor
+
+IV.
+
+FUTURE DEVELOPMENTS
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+Our approach to 3D printing the DC motor relied on multiple 3D printing approaches followed by manual assembly of the
+motor. For DC electric motors on the Moon where copper is scarce, conductive wiring of aluminium with enamel (glass) insulation
+would be adopted [54]. For operation on the Moon where temperatures can approach ~120oC, the temperature tolerance of
+hydrocarbon plastic such as PLA binder is poor so it will have to be replaced with silicone plastic or ceramic insulation which
+introduces a suite of challenges for 3D printing. The next stage would be to merge: (i) 3D printing technologies of different
+materials into a single 3D printing mechanism; (ii) incorporate non-3D printing processing technologies where appropriate such as
+wire extrusion/drawing; (iii) eliminate manual assembly with integrated manufacture and automated self-assembly. 3D printing of
+multimaterial parts represents a considerable challenge in integrating 3D printing into a more general fabrication process. Different
+3D printing methods are appropriate to different engineering materials. In general, polymers such as ABS, PEEK, etc. are printed
+through fused deposition modelling (except for photosensitive resins which are printed using ultraviolet stereolithography). Metals
+such as steels, titanium alloys, aluminium alloys, etc. may be printed using selective laser sintering/melting and electron beam
+additive manufacturing (the latter is restricted to metals only). Ceramics are typically processed as particles within a matrix material
+but they present challenges for 3D printing [55]. There are several strategies that might be employed to implement multimaterial
+fabrication using different 3D printing methods [40]. In extrusion and direct ink writing, different materials may be pre-mixed into
+a blend for extrusion. Stereolithography may implement multiple vats of different photopolymers on a carousel. Direct energy
+deposition may similarly use pre-mixed powders which can implement functionally graded materials from a single nozzle by
+gradually modifying processing parameters. Additive manufacturing of metals offers the possibility of graded metal composition
+within single parts. Metal alloy chemical composition may be tuned through laser printing into graded physical properties such as
+magnetism [41]. Such methods may be adopted to 3D print integrated and blended magnetic areas within a load-bearing structure
+designed with other favourable properties such as vibration suppression. These approaches to multimaterial 3D printing are limited
+to variations on the same type of material – polymer-polymer, metal-metal and polymer-composite. Composites with metal or
+ceramic particles embedded within a plastic matrix are a variation on multimaterial 3D printing. Hybrid 3D printing combines
+multiple 3D printing techniques to 3D print different materials. The chief problem with multi-material parts is that there are sharp
+material interfaces – typically an adhesive bond - between different materials which can exhibit high stress concentrations. One
+approach is to introduce arrays of small interlocking joints such as dovetails or similar. Further challenges for metal-ceramic and
+metal-plastic occur due to their different thermo-mechanical properties, especially differing melting points. We have been
+developing a method for 3D printing molten aluminium onto silicone plastic substrates to demonstrate simultaneous use of metal
+and plastic in a 3D printing context (Fig 26a).
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+ev
+
+Figure 26. (a) Molten aluminium track melted onto silicone substrate; (b) In-house custom multi-material 3D printer prototype under development
+
+CONCLUSIONS
+
+pe
+
+V.
+
+er
+r
+
+We are currently developing an in-house custom multi-material 3D printer that will combine silicone extrusion and aluminium
+powder bed fusion with a milling head integrated into a single unit (Fig 26b). Some non-3D printing processes may be integrated
+into 3D printing such as subtractive machining by integrating a two- or four-axis CNC milling tool (z degree of freedom is provided
+by the work platform) for surface finishing of rough 3D printed parts. This introduces a potential problem of jigs if the part is not
+bonded to the work platform. Other non-3D printing processes may be more challenging to integrate but are nonetheless necessary
+such as hot isostatic pressing to relieve internal stresses generated by lamination. Clearly, there are significant challenges to 3D
+printing multiple components comprising multiple materials – this is the holy grail of 3D printing.
+
+tn
+
+ot
+
+We have demonstrated that a functional DC electric motor may be 3D printed but there are several challenging tasks that must
+be solved to robustify and automate the process. This step is crucial. To round out the electric motor into a full motor system, we
+must incorporate integrated sensors and computational electronics. Although conductive and semiconductor polymers offer
+potential, their deployment for power distribution is debatable. Nevertheless, 3D printing all mechatronic components including
+suites of sensors and active electronics opens up the possibility of 3D printing robots and other kinematic machines on the
+assumption that the structural aspect can be 3D printed trivially. If so, other kinematic machines may be 3D printed including
+different types of 3D printers, milling machines, lathes, drills, etc. These are the machines of production. This would constitute a
+universal construction capability in building generic machines of production. By definition, universal construction implies that selfreplicating machines are implicitly realisable. This could include energy systems (that were excluded from von Neumann’s original
+analysis) – for energy storage, we can build motor-driven flywheels and for solar generation, we can construct solar concentrators
+and solar-electric converters [42]. The implementation of self-replicating machines on the Moon offers a low-cost route to massive
+lunar industrialisation and beyond. But the first step is to demonstrate 3D printing of mechatronic components including electric
+motors. To paraphrase Benjamin Franklin: “For want of a 3D printed motor, lunar industrialisation was lost….”. Perhaps not.
+ACKNOWLEDGEMENTS
+
+REFERENCES
+
+Ellery A (2020) “Sustainable in-situ resource utilisation on the Moon” Planetary & Space Science 184 (4), 104870
+Ellery A, Mellor I, Wanjara P, Conti M (2022) “Metalysis FFC process as a strategic lunar in-situ resource utilisation technology” New Space J 10 (2), 224238
+Ellery A (2024) “Vertical closure constraints on self-replicating machines” in press with Proc Living Machines Conf (Lecture Notes in AI), Chicago, USA
+
+Pr
+
+[1]
+[2]
+
+ep
+
+rin
+
+This work was partly supported by the US Department of Energy, Office of Energy Efficiency & Renewable Energy, Wind
+Energy Technologies Office Program. This manuscript has been authored in part by UT-Battelle LLC under contract DE-AXC0500OR22725 with the US Department of Energy (DOE). The United Sates Government retains and the publisher, by accepting the
+article for publication, acknowledges that the US Government retains a non-exclusive, paid-up, irrevocable, world-wide license to
+publish or reproduce the published form of this manuscript or allow others to do so, for US Government purposes. The DOE will
+provide public access to these results of federally sponsored research in accordance with the DOE Public Access Plan. All the
+authors have no competing financial interests. We wish to thank Kevin Sankar at Carleton University for running repeat
+experiments with the fully 3D printed motor.
+
+[3]
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+Freitas R, Gilbreath W (1982) “Advanced Automation for Space Missions” NASA CP-2255
+Ellery A (2016) “Are self-replicating machines feasible?” AIAA J Spacecraft & Rockets 53 (2), 317-327
+Ellery A (2017) “Space exploration through self-replication technology compensates for discounting in NPV cost-benefit analysis – a business case?” New
+Space J 5 (3), 141-154
+[7] Burkes A, von Neumann J (1966) “Theory of Self-Reproducing Automata” University of Illinois Press, Champaign, Illinois
+[8] Langton C (1984) “Self-reproduction in cellular automata” Physica 10D, 135-144
+[9] Jones R, Haufe P, Sells E, Iravani P, Olliver V, Palmer C, Bowyer A (2011) “RepRap – the replicating rapid prototyper” Robotica 29 (1), 177-191
+[10] Moses M, Ma H, Wolfe K, Chirikjian G (2014) “Architecture for universal construction via modular robotic components” Robotics & Autonomous Systems
+62 (7), 945-965
+[11] Ellery A, Elaskri A (2019) “Steps towards self-assembly of lunar structures from modules of 3D printed in-situ resources” Int Astronautics Congress,
+Washington DC, IAC-19,D4.1.4.x49787
+[12] Ellery A (2024) “Bio-inspired strategies are adaptable to sensors manufactured on the Moon” Biomimetics J 9, 496
+[13] Ellery A (2022) “Bootstrapping neural electronics from lunar resources for in-situ artificial intelligence applications” Proc 42nd SGAI Int Conf on Artificial
+Intelligence - Lecture Notes in Artificial Intelligence 13652, 83-97
+[14] Greco C, Kotak P, Pagnotta L, Lamuta C (2022) “Evolution of mechanical actuation: from conventional actuators to artificial muscles” Int Materials
+Reviews 67 (6), 575-619
+[15] Cui H, Yao D, Hensleigh R, Lu H, Calderon A, Xu Z, Davaria S, Wang Z, Mercier P, Tarazanga P, Zheng X (2022) “Design and printing of proprioceptive
+three-dimensional architected robotic metamaterials” Science 376 (Jun), 1287-1293
+[16] Rafsanjani A (2022) “Turning materials into robots” Science 376 (Jun), 1272-1273
+[17] Hawkes E, Xiao C, Peloquin R-A, Keeley C, Begley M, Pope M, Niemeyer G (2022) “Engineered jumpers overcome biological limits via work
+multiplication” Nature 604 (Apr), 657-611
+[18] Bergbreiter S (2022) “Jumping robot bests biology” Nature 604 (April), 627-629
+[19] Aubin C, Heisser R, Pretz O, Timko J, Lo J, Helbling F, Sobhani S, Gat A, Shepherd R (2023) “Powerful, soft combustion actuators for insect-scale robots”
+Science 381 (Sep), 121-1217
+[20] Moses M, Chirikjian M (2011) “Design of an electromagnetic actuator suitable for production by rapid prototyping” Proc ASME Int Design Engineering
+Technical Conf & Computers and Information in Engineering Conf, DETC2011-48602
+[21] Maamer B, Tounsi F, Kaziz S, Jaziri N, Boughamoura A (2022) “Halbach cylinder-based system for energy harvesting from rotational motion for high
+power density” Sensors & Actuators A: Physical 337, 113428
+[22] Pham T, Do T, Jwon P, Foster S (2018) “Additive manufacturing of high performance ferromagnetic materials” Proc IEEE Energy Conversion Congress &
+Exposition, Portland, 4303-4308
+[23] Han L, Maccarri F, Filho I, Peter N, Wei Y, Gault B, Gutfleisch O, Li Z, Raabe D (2022) “Mechanically strong and ductile soft magnet with extremely low
+coercivity” Nature 608 (Aug), 310-316
+[24] Elaskri A, Ellery A (2018) “Developing techniques to 3D print electric motors” Proc Int Symp Artificial Intelligence Robotics and Automation in Space,
+Madrid, Spain
+[25] Kim Y, Yuk H, Zhao R, Chester S, Zhao X (2018) “Printing ferromagnetic domains for untethered fast-transforming soft materials” Nature 558(Jun), 274279
+[26] Paranthaman P, Shafer C, Elliott A, Siddel D, McGuire M, Springfield R, Martin J, Fredette R, Ormerod J (2016) “Binder jetting: a novel NdFeB bonded
+magnet fabrication process” J Minerals, Metals & M Materials Society 68 (7), 1978-1982
+[27] Ki L, Tirado A, Conner B, Chi M, Elliott A, Rios O, Zhou H, Paranthaman P (2017) “Novel method combining additive manufacturing and alloy infiltration
+for NdFeB magnet fabrication” J Magnetism & Magnetic Materials 438, 163-167
+[28] Li L, Tirado A, Nlebedim I, Rios O, Post B, Kinc V, Lowden R, Lara-Curzio E, Fredette R, Ormerod J, Lograsso T, Paranthaman P (2016) “Big area
+additive manufacturing of high performance bonded NdFeB magnets” Nature Scientific Reports 6 (Oct), 36212
+[29] Nlebedim I, Ucar H, Hatter C, MCallum R, McCall S, Kramer M, Paranthaman P (2017) “Studies on in-situ magnetic alignment of bonded Nd-Fe-B alloy
+powders” J Magnetism & Magnetic Materials 422, 168-173 Nlebedim I, Ucar H, Hatter C, MCallum R, McCall S, Kramer M, Paranthaman P (2017)
+“Studies on in-situ magnetic alignment of bonded Nd-Fe-B alloy powders” J Magnetism & Magnetic Materials 422, 168-173
+[30] Li L, Jones K, Sales B, Pries J, Nlebedim I, Jin K, Bei H, Post B, Kesler M, Rios O, Kune V, Fredette R, Ormerod J, Williams A, Lograsso T, Paranthaman
+P (2018) “Fabrication of highly dense isotropic NdFeB nylon bonded magnets via extrusion-based additive manufacturing” Additive Manufacturing 21, 495500
+[31] Hamitsch R, Belmann R, Stephan R (1994) “Small axial flux motor with permanent magnet excitation and etched airgap winding” IEEE Trans Magnetics 30
+(2), 592-594
+[32] Moreels D, Lijnen P (2019) “Turning the electric motor inside out” IEEE Spectrum (Oct), 42-45
+[33] Guedes-Pinto P (2022) “Axial flux motor for an electrified world” IEEE Spectrum (Apr), 38-43
+[34] Bugeja C (2018) “Printable motor” IEEE Spectrum (Sep), 18-19
+[35] Burr R (1960) “Printed motor: a new approach to intermittent and continuous motion devices in data processing equipment” Proc IRE-AIEE-ACM Computer
+Conf, 6.5, 325-342
+[36] Gyani G & Parkash O (1977) “Design and technological aspects of printed motor armatures” IEE-IERE Proc – India (Mar/Apr), 64-68
+[37] Gambetta D & Ahfock A (2009) “Designing printed circuit stators for brushless permanent magnet motors” IET Electrical Power Applications 3 (5), 482490
+[38] Sochol R, Sweet E, Glick C, Wu S-Y, Yang C, Restaino M, Lin L (2018) “3D printed microfluidics and microelectronics” Microelectronic Engineering 189,
+52-68
+[39] Elaskri A, Ellery A (2020) “3D printed electric motors as a step towards self-replicating machines” Proc Int Symp Artificial Intelligence, Robotics and
+Automation in Space, paper no 5020
+[40] Hasanov S, Alkunte S, Rajeshirke M, Gupta A, Huseynov O, Fidan I, Alifui-Segbaya F, Rennie A (2022) “Review on additive manufacturing of multimaterial parts: progress and challenges” J Manufacturing & Materials Processing 6, 4
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+ev
+
+iew
+ed
+
+[4]
+[5]
+[6]
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+ev
+
+iew
+ed
+
+[41] Hofmann D, Kolodziejska J, Otis R, Liu Z-K, Borgonia J-P (2014) “Compositionally graded metals: a new frontier of additive manufacturing” J Materials
+Research 29 (17), 1899-1910
+[42] Ellery A (2021) “Generating and storing power on the Moon using in-situ resources” Proc IMechE J Aerospace Engineering 236 (6), 1045-1063
+[43] Howgego J (2022) “Waste not…want not?” New Scientist (Feb), 38-47
+[44] Thibodeau B, Walls X, Ellery A, Cousens B, Marczenko K (2024) “Extraction of silica and alumina from lunar highland simulant” in press with Proc ASCE
+Earth & Space Conf, paper 6962
+[45] Walls X, Ellery A, Marczenko K, Wanjara P (2024) “Aluminium metal extraction from lunar highland simulant using electrochemistry” in press with Proc
+ASCE Earth & Space Conf, paper 7061
+[46] Staley M (2022) “Economics of self-replicating machines” https://hdl.handle.net/11159/536969
+[47] Lee K, Moses M, Chirikjian G (2008) “Robotic self-replication in structured and adaptable environments” Int J Robotics Research 27 (3-4), 387-401
+[48] Ellery A (2021) “Are there biomimetic lessons from genetic regulatory networks for developing a lunar industrial ecology?” Biomimetics J 6 (3), 50
+[49] Exley T, Johnson D, Jafari A (2023) “Novel variable impedance actuator utilizing adjustable viscoelastic properties of thermoresponsive polycaprolactone”
+Robotics Reports 1 (1), 57-66
+[50] Elahinia M, Moghaddam S, Andani T, Amerinatanzi A, Bimber B, Hamilton R (2016) “Fabrication of NiTi through additive manufacturing: a review”
+Progress in Materials Science 83, 630-663
+[51] Conrad S, Speck T, Tauber F (2022) “Multi-material FDM 3D printed arm with integrated pneumatic actuator” Lecture Notes in AI 13548 (Living Machines
+2022), 27-31
+[52] Faris O, Tawk C, Hussain I (2024) “SoPCAS finger: a three-dimensional printed soft finger with pneumatic chambers for simultaneous actuation, sensing
+and controlled grasping” Robotics Reports 2.1, 32-42
+[53] Canada J, Kim H, Velasquez-Garcia F (2024) “Three-dimensional soft magnetic cored solenoids via multi-material extrusion” Virtual & Physical
+Prototyping 19 (1), e2310046
+[54] Ellery A (2022) “Lunar demandite – you gotta make this using nothing but that” Proc ASCE Earth & Space Conf, Colorado School of Mines, Denver, 743758
+[55] Ellery A (2024) “Are 3D printers universal constructors?” in press with Proc ASCE Earth & Space Conf, Florida International University, Miami, FL, paper
+3666
+[56] Jani M, Leary M, Subic A, Gibson M (2014) “Review of shape memory alloy research, applications and opportunities” Materials & Design 56, 1078-1113
+[57] Nespoli A, Besseghini S, Piiaccio S, Villa E, Viscuso S (2010) “High potential of shape memory alloys in developing miniature mechanical devices: a
+review in shape memory alloy mini-actuators” Sensors & Actuators A 158, 149-160
+[58] Wagner M, Ocana-Pujol J, Hadian A, Clemens F, Spolenak R (2023) “Filament extrusion-based additive manufacturing of NiTi shape memory alloys”
+Materials & Design 225, 111418
+[59] Lu H, Yang C, Luo X, Ma H, Song B, Li Y, Zhang L (2019) “Ultrahigh performance TiNi shape memory alloy by 3D printing” Materials Science &
+Engineering A 763, 138166
+[60] Haberland C, Elahinia M, Walker J, Meier H, Frenzel J (2014) “On the development of high quality NiTi shape memory and pseudoelastic parts by additive
+manufacturing” Smart Materials & Structures 23, 104002
+[61] Yao T, Wang Y, Zhu B, Wei D, Yang Y, Han X (2021) “4D printing and collaborative design of highly flexible shape memory alloy structures: a case study
+for a metallic robot prototype” Smart Materials & Structures 50, 015018
+[62] Kruzelecky R, Cloutis E, Hoa S, Therriault D, Ellery A, Xian Jiang X et al (2011) “Project MoonDust: characterisation and mitigation of lunar dust” Proc
+41st Int Conf Environmental Systems, AIAA 2011-5184
+[63] Chafik A, Gaber J, Tayane S, Ennaji M, Bourgeois J,El Ghazawi T (2024) “From conventional to programmable matter systems: a review of design,
+materials and technologies” ACM Computing Surveys 56 (8), article 210
+[64] Jaiganesh V, Christopher A, Mugilan E (2014) “Manufacturing of PMMA cam shaft by rapid prototyping” Procedia Engineering 97, 2127-2135
+[65] Wu X, Huang W, Ding Z, Tan H, Yang W, Sun K (2014) “Characterisation of the thermoresponsive shape memory effect in poly(ether ether ketone)
+(PEEK)” J Applied Polymer Science 2014, 39844
+[66] Gul Z, Sajid M, Rehman M, Siddiqui U, Shah I, Kim K-H, Lee J-W, Choi H (2018) “3D printing for soft robotics – a review” Science & Technology of
+Advanced Materials 19 (1), 243-262
+[67] Kumar S, Chen P-Y, Ren H (2019) “Review of printable flexible and stretchable tactile sensors” Research 2019, 3018568
+[68] Robinson S, O’Brien K, Zhao H, Peele B, Larson C, MacMurray B, van Meerbeek I, Dunham S, Shepherd R (2015) “Integrated soft sensors and elastomeric
+actuators for tactile machines with kinaesthetic sense” Extreme Mechanics Letters 5, 47-53
+[69] Ge O, Sakhaei H, Dunn C, Fang N, Dunn M (2016) “Multimaterial 4D printing with tailorable shape memory polymers” Scientific Reports 6, 31110
+[70] Grassi G, Sparrman B, Paoletti I, Tibbits S (2022) “4D soft materials” Proc 2021 DigitalFutures, 201-210
+[71] Othman W, Lai Z-H, Abril C, Barajas-Gamboa J, Corcelles R, Kroh M, Qasaimeh M (2022) “Tactile sensing for minimally invasive surgery: conventional
+methods and potential emerging tactile technologies” Frontiers in Robotics & AI 8 (Jan), article 705662
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+Reviewer #1:
+
+iew
+ed
+
+Reviewers' comments:
+GENERAL RESPONSE: All changes have been shown in red.
+
+GENERAL RESPONSE: I thank the reviewer for their time and effort. The reviewer did not
+appear to notice that a 3D printed motor was achieved and seemed to focus on a few lines
+about pancake rotors. We have in fact 3D printed a DC electric motor in its entirety (Fig 20).
+With the new structure of sub-sections in section III, this should be clearer.
+
+ev
+
+REVIEWER 1: The authors cite appropriate literature. What is not clear is the novelty of the
+current article given that others have published printable motor designed before, as
+acknowledged by the authors.
+
+er
+r
+
+RESPONSE: Previous “printable” motors were not fully “printed” as stated at several points in
+the text. I made a very clear statement in line 1 page 6 that was in the original document:
+“Structural aspects of the stator and rotor of an axial flux motor have been 3D printed before
+[34] and printed pancake motor rotors are well established [35].” Ref [34] employs 3D printing
+for passive structure only. In ref [35], “printing” is photolithographic printing, not 3D printing.
+Furthermore, this “printing” refers only to rotors of pancake motors. Our 3D printed pancake
+rotor is shown in Fig 19 and 20. Our final electric motor was a DC electric motor which was fully
+3D-printed using a range of 3D printing methods (Figs 14, 19 and 20).
+
+pe
+
+REVIEWER 1: From the title of the paper, it seemed that the authors would be printing motors
+from feed stock. But it turns out that this is not the case.
+
+tn
+
+ot
+
+RESPONSE: All 3D printers print from feedstock – by definition, the input material to a 3D
+printer (or any other manufacturing machine) is feedstock. If you are referring to lunar regolith
+as feedstock, the title of the paper makes no such claim (there is no reference to the Moon in
+the title). Nevertheless, we have referred to other published papers that address this issue of
+converting lunar regolith into useful feedstocks such as aluminium metal which is a
+multifunctional metal – line before Table 1 (page 2): “we have demonstrated in the laboratory,
+the extraction of aluminium metal from lunar highland regolith simulant rich in anorthite [44,45].”
+This activity is published elsewhere. If we made a fully 3D printed DC motor from lunar regolith,
+we would have to solve the holy grail of 3D printing of dealing with multimaterials – as discussed
+in Section IV. To make clear the scope of the article, the second sentence of section 3.1 is
+explicit.
+
+rin
+
+REVIEWER 1: The first set of motors presented have stator cores that are printed, but then wire
+is coiled around them. The means for producing such wires and coating them in the lunar
+setting was not explained.
+
+Pr
+
+ep
+
+RESPONSE: We described a developmental process beginning with rotors, then stators, then
+coils culminating in our 3D printed DC motor. The first set of motors were rotor cores which
+were wound with wire (Fig 9 and 10). We then progressed to magnetically soft stators (Fig 13).
+Regarding wiring, second sentence of section IV states: “For DC electric motors on the Moon
+where copper is scarce, conductive wiring of aluminium or nickel with enamel (glass) insulation
+would be adopted [54].” However, I have added a short segment in section 3.8 that discusses
+manufacture of wiring and their insulation (we have in fact drawn series 1000 aluminium wire
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+that was extracted from lunar regolith simulant but that was not as coils but as feedstock for
+electron beam additive manufacturing – to be published elsewhere).
+
+REVIEWER 1: In the pancake motors that others have published on over the past decades,
+which were acknowledged and adopted here, it is clear that the rotor can be printed but how are
+the high-field-strength rare earth magnets to be printed?
+
+ev
+
+RESPONSE: Previous pancake rotors were “printed” photolithographically – we 3D printed them
+using LOM (Fig 18). Note, our final 3D printed motor was a DC motor (Fig 20). An entire section
+- section 3.5 – which was in the original document described in detail the 3D printing of rare
+earth magnets at Oak Ridge National Laboratory that we used (some of that literature review
+material has been moved to the end of section II).
+REVIEWER 1: In short, the title over-hypes what is actually being done here.
+
+er
+r
+
+RESPONSE: The reviewer has not recognised that a fully 3D printed DC motor has been
+constructed and operated – it is shown in Figs 14, 19 and 20 – its performance in now included
+in Fig 21. A video of it operating was included. The title begins “3D Printed Motors….” which is
+exactly as described in the text.
+
+pe
+
+REVIEWER 1: As mentioned above, this could be a nice review, framing the general problem
+and citing what had come before, and pointing to the future with the authors new (yet
+preliminary) results. But as a research journal paper it seems to be lacking in completeness and
+novelty, despite the far-out (and potentially important) application domain.
+
+ot
+
+RESPONSE: The major content of the paper describes our process in building a fully 3D printed
+electric motor – that would not be suitable for a review paper. Nobody, to our knowledge, has
+built a fully 3D printed electric motor. It is complete – rotor, stator, permanent magnets, coils,
+brushes, shaft, bearings. By definition, if something hasn’t been built before, then it is novel.
+
+tn
+
+REVIEWER 1: In the lunar setting it is not clear that elastomeric actuators would make sense
+since the polymeric chains may easily break down due to radiation damage from the solar wind,
+etc.
+
+rin
+
+RESPONSE: I cannot find where I made such a suggestion – however, I have now critiqued
+smart material-based actuators in section II. Hydrocarbon polymers are sensitive to radiation but
+silicone elastomers are not because their backbones are strong O-Si-O chains rather than C-CC chains.
+REVIEWER 1: Moreover, regolith has a tendency to electrostatically cling to everything. So
+motors would need to be designed to be fully enclosed to keep clean. The authors don't seem to
+be concerned with these issues, which are significant.
+
+ep
+
+RESPONSE: There is an entire industry concerned with lunar dust mitigation – it was not our
+focus as it is peripheral. However, I have added a short statement and reference to work we
+have done on precisely this problem [62] in the third last sentence of section 3.1.
+
+Pr
+
+REVIEWER 1: It is crucial that the authors follow one of two paths: 1) Modify the manuscript to
+turn this into a review paper and point towards open issues to open up the topic to a broader
+community; or 2) Really print a full motor including coils, magnets, bearing structures, etc.,
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+rather than only selected components, and demonstrate its functionality. Option 2 seems quite
+hard, but would keep the manuscript honest to the title.
+RESPONSE: We have already really printed a full motor (option 2) and demonstrated its
+functionality – magnets, bearing structures, rotor, coils, etc were all 3D printed using different
+3D printing techniques – imaged in Fig 20, performance in Fig 21 and videoed in action.
+
+ev
+
+REVIEWER 1: To have even broader impact when pursuing option 1, perhaps the authors
+should collaborate with some subset of the authors of the prior works that they cite, and on
+which the current work is based. That would broaden the readership of a review paper if they
+decide to go that way. Alternatively, they can go back to the lab and really print a full a motor
+from feed stock to live up to the title and keep this as an original research paper rather than a
+review.
+
+er
+r
+
+RESPONSE: We have achieved option 2 which is a fully 3D printed motor from feedstock
+pictured in Fig 20 with a video of it running and its performance in Fig 21.
+
+Reviewer #2:
+
+pe
+
+In this study, the author addresses 3D printing mechatronic triad components for robotics and
+presents the design process for fabricating a DC electric motor through 3D printing. The
+reviewer believes that the manuscript requires substantial revisions. The following points should
+be addressed to improve the clarity and organization of the paper:
+GENERAL RESPONSE: I thank the reviewer for their constructive comments – their
+suggestions have enhanced the paper considerably.
+
+tn
+
+ot
+
+REVIIEWER 2: 1. The figures need to be reorganized to enhance their relevance to the
+discussion. Several figures lack sufficient explanation or are not referenced in the text, such as
+Figure 4, while Figures 2 and 5 are not discussed. Additionally, Figure 12 has missing/hard to
+see labels. The label "TEST RESULTS GRAPH" should also be removed from Figure 21.
+Overall, the figures need to be more organized.
+
+rin
+
+RESPONSE: Understood – I have been through each figure and made sure that they are
+referred to in the text with explanatory text. In particular, I have added explanatory text to Fig 2
+and referenced the components of Fig 5 (now Fig 9) in the text. I have enlarged some figures to
+render labels more legible….. Figure 12 (now Fig 5) had no labels. I cannot remove the label
+from Fig 21 (now Fig 25) as it embedded in the figure…..
+
+ep
+
+REVIEWER 2: 2. It would be great if the authors organized the text to have sections to better
+guide readers on the approach and results.
+RESPONSE: Very good idea – I have added subsections in Section III which has made it a lot
+easier to navigate.
+
+Pr
+
+REVIEWER 2: 3. The link mentioned on page 7, line 4, should be properly cited in accordance
+with the journal's citation format.
+RESPONSE: Page 9 – this is a citation to a company rather than a publication.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+RESPONSE: They have been added in the paragraph after Fig 10.
+
+iew
+ed
+
+REVIEWER 2: 4. The author attributes the poorer performance of the Fe-Si rotor to its heavier
+weight compared to the ProtoPasta rotor. However, the exact weights of each rotor are not
+provided. What are the specific weight values for each design?
+
+REVIEWER 2: Additionally, how would the performance comparison change if the total core
+weight were standardized, for example, by adjusting the infill density? The relationship between
+rotor weight and performance needs further clarification.
+
+ev
+
+RESPONSE: We bookended the two designs – off-the-shelf ProtoPasta (50:50 by mass) and
+NRC provided us with 50:50 by volume. We chose to not to find if there was an optimal
+intermediate condition for reasons of expense of many pucks from NRC. We could have
+standardised rotor mass and played around with different ratios but this would have increased
+costs with little to gain (at this stage). This might be useful for future work but here we were
+proving the 3D printed motor concept rather than detailed design which could come later.
+
+er
+r
+
+REVIEWER 2: 5. The author should present detailed specifications for the design variables and
+3D printing conditions to provide a clearer understanding of how these factors influence
+performance.
+
+pe
+
+RESPONSE: We did not vary the design variables much as we were more concerned with
+benchmarking against a commercial motor. We followed the recommended parameters for
+printing ProtoPasta. The Oak Ridge and NRC printing data is not available for IP reasons.
+Nevertheless, our benchmarking experiments clearly demonstrate the importance of wire coils
+on performance.
+
+ot
+
+REVIEWER 2: 6. The structure of the manuscript is currently unclear, with the literature review
+interspersed with the results. It is recommended that the relevant literature be moved to the
+introduction to provide a more cohesive background, and that the results be grouped into a
+dedicated section with appropriate subsections for clarity.
+
+tn
+
+RESPONSE: Thank you for suggesting this – it has been done – everything associated with
+literature review has been collected (and expanded) at the latter part of section II.
+
+rin
+
+REVIEWER 2: 7. While Figure 7 presents RPM and torque measurements for the three designs,
+there is no mention of data repeatability. Has the author conducted multiple trials for each
+design to assess measurement consistency? If so, what are the observed variations?
+
+ep
+
+RESPONSE: We did run several experiments on each and obtained consistent results – we did
+not analyse variations between experiments systematically as the observed consistency did not
+seem to require it at this stage. We presented one set of results as representative. There was
+little point in running statistically-significant numbers of experiments at this stage.
+
+Pr
+
+REVIEWER 2: 8. In addition to RPM and torque, the author should consider evaluating other
+key performance metrics such as energy efficiency and the lifetime of each motor design.
+Furthermore, have there been any observations of temperature changes during operation? Has
+the author investigated the duration the 3D-printed motors can run before exhibiting signs of
+failure?
+RESPONSE: We did not consider energy efficiency given that we were prototyping rather than
+design optimising. Although we did not measure temperature, we were however conscious of
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+iew
+ed
+
+the temperature limitations of PLA (as with most polymers) to maintain under 120oC. In all our
+experiments, there was no melting (except using copper-impregnated PLA for coils on the
+pancake motor which we subsequently discarded as an option). We did not conduct lifetime
+assessments as we did not have the resources to do so. There seemed little point as we are still
+in the prototyping stage.
+REVIEWER 2: 9. The manuscript would benefit from a more detailed description of the
+experimental setup. Specifically, the author should provide information on how the RPM and
+torque were measured and the resolution of the measurement tools used.
+
+Pr
+
+ep
+
+rin
+
+tn
+
+ot
+
+pe
+
+er
+r
+
+ev
+
+RESPONSE: Good idea. A new subsection 3.2 covers the motor testing apparatus including the
+requested information.
+
+This preprint research paper has not been peer reviewed. Electronic copy available at: https://ssrn.com/abstract=5179104
+
+

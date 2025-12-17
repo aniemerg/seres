@@ -1,0 +1,669 @@
+id: paper_reviews_dec2024_comprehensive_v0
+kind: seed
+name: "Comprehensive Missing Technologies from 23 Paper Reviews (Dec 2024)"
+notes: |
+  Seed file to enqueue missing technologies identified from comprehensive review
+  of 23 papers on lunar self-replicating systems. All items are intentional
+  placeholders to drive queue work.
+
+  Source: docs/paper_reviews/ directory (23 comprehensive markdown reviews)
+  Papers reviewed: Ellery 2021-2022, ISRU sensors/neural computing, lunar demandite,
+  NPV cost-benefit, rover prospecting, self-assembling structures, sustainable ISRU,
+  manufacturing architectures, physical self-replicating machines, and more.
+
+  Reviews completed: Dec 2024
+  Total missing technologies identified: ~300+
+
+requires_ids:
+  # ════════════════════════════════════════════════════════════════════════════
+  # SOLAR THERMAL SYSTEMS (ellery-2022-metalysis)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Solar concentrators - ESSENTIAL for both power and high-temp processing
+  - id: fresnel_lens_large_scale_v0
+    info: |
+      Large Fresnel lens for solar concentration, C~10,000, achieves 2700°C focus.
+      Source: design/papers/ellery-2022-metalysis.txt, Section 4.2, Table 3
+      Review: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md
+      Design doc: design/solar_thermionics_report.md
+      Priority: ESSENTIAL - enables both power generation and FFC process heat
+      Dependencies: glass_casting_process_v0, precision_grinding_system_v0
+      Notes: Concentration ratio determines max achievable temperature.
+      Energy efficiency: 97% thermal / 3% electrical split optimizes FFC
+
+  - id: parabolic_mirror_dish_v0
+    info: |
+      Parabolic mirror dish, 90% reflectivity polished Ni, 1600°C focus.
+      Source: design/papers/ellery-2022-metalysis.txt, Section 4.2, Figure 5
+      Review: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md
+      Priority: IMPORTANT - alternative to Fresnel lens
+      Dependencies: nickel_sheet_rolling_v0, mirror_polishing_v0
+      Notes: Lower concentration but simpler manufacturing than Fresnel
+
+  - heliostat_array_system_v0                  # Central tower receiver configuration
+  - compound_parabolic_concentrator_v0         # CPC for low-concentration applications
+  - solar_tracking_mechanism_dual_axis_v0      # Stewart platform or alt-azimuth
+  - solar_receiver_cavity_v0                   # Insulated receiver for heat collection
+  - heat_pipe_solar_receiver_advanced_v0       # Advanced NaK heat pipe receiver
+
+  # Solar thermal infrastructure
+  - solar_thermal_storage_system_v0            # Sensible or latent heat storage
+  - thermal_insulation_regolith_based_v0       # Regolith-derived insulation
+  - heat_exchanger_high_temp_v0                # 1600-2700°C rated heat exchanger
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # FFC CAMBRIDGE PROCESS (ellery-2022-metalysis, Sustainable-ISRU)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # FFC reactor components
+  - id: ffc_reactor_enhanced_v0
+    info: |
+      Enhanced FFC Cambridge reactor with molten CaCl₂ electrolysis at 900°C.
+      Source: design/papers/ellery-2022-metalysis.txt, Section 3
+      Also: design/papers/Sustainable-ISRU-on-the-Moon.txt, Section 5.2
+      Review: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md
+      Review: docs/paper_reviews/Sustainable-ISRU_missing_tech.md
+      Priority: ESSENTIAL - core technology for lunar metal extraction
+      Dependencies: molten_salt_containment_v0, graphite_anode_assembly_v0, temperature_control_system_v0
+      Notes: 97% thermal / 3% electrical energy split optimizes for solar thermal.
+      Process: CaAl₂Si₂O₈ (regolith) + heat → Ca, Al, Si metals + O₂ gas
+
+  - id: molten_cacl2_electrolyte_system_v0
+    info: |
+      Molten CaCl₂ electrolyte system maintained at 900°C with precise control.
+      Source: design/papers/ellery-2022-metalysis.txt, Section 3.1
+      Review: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md
+      Dependencies: ffc_reactor_enhanced_v0, temperature_control_system_v0
+      Notes: Temperature stability critical for process efficiency
+
+  - graphite_anode_assembly_v0                 # Consumable graphite anode
+  - cathode_basket_assembly_v0                 # Regolith pellet cathode basket
+  - ffc_power_supply_controlled_v0             # 2.8-3.2V controlled DC power supply
+  - oxygen_collection_system_ffc_v0            # O₂ gas collection from anode
+
+  # FFC process improvements
+  - regolith_pellet_pressing_process_v0        # Pelletize regolith for FFC cathode
+  - cacl2_recycling_closed_loop_v0             # Closed-loop CaCl₂ electrolyte recycling
+  - ffc_temperature_optimization_v0            # Temperature control for energy efficiency
+  - co2_co_ratio_control_ffc_v0                # Gas ratio control to prevent carbon deposition
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # METAL ADDITIVE MANUFACTURING (ellery-2022-metalysis, Self-Assembling)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # EBM (Electron Beam Melting) - preferred over laser for energy efficiency
+  - id: ebm_machine_lunar_v0
+    info: |
+      Electron Beam Melting machine for metal additive manufacturing.
+      Source: design/papers/Self-Replicating-Machines-on-the-Moon.txt, Section 4.3, Table 2
+      Review: docs/paper_reviews/Self-Replicating-Machines-Moon_missing_tech.md
+      Priority: ESSENTIAL - preferred AM technology for lunar application
+      Energy efficiency: 10-20% (vs laser 2-5%)
+      Dependencies: electron_gun_assembly_v0, ebm_vacuum_chamber_v0, ebm_powder_handling_system_v0
+      Notes: Higher efficiency comes from direct electron heating vs optical absorption.
+      Operating envelope: Vacuum, heated build platform 600-1000°C
+
+  - electron_gun_assembly_v0                   # Electron beam source
+  - ebm_vacuum_chamber_v0                      # Vacuum chamber for EBM
+  - ebm_powder_handling_system_v0              # Powder delivery and recycling
+  - ebm_build_platform_heated_v0               # Heated build platform 600-1000°C
+
+  # Laser-based AM (for comparison/alternatives)
+  - slm_machine_lunar_v0                       # Selective Laser Melting
+  - ebf3_wire_feed_machine_v0                  # Electron Beam Freeform Fabrication
+  - lens_machine_lunar_v0                      # Laser Engineered Net Shaping
+  - wire_arc_additive_manufacturing_v0         # WAAM for large structures
+
+  # AM process parameters and controls
+  - laser_power_control_system_v0              # 100-400W laser power control
+  - scanning_speed_control_system_v0           # 200-1200 mm/s scanning control
+  - layer_thickness_control_v0                 # 20-50 μm layer control
+  - hatch_spacing_optimization_v0              # Overlap control for density
+  - build_atmosphere_control_v0                # Inert gas or vacuum control
+
+  # AM feedstock production
+  - metal_powder_atomization_v0                # Gas atomization for spherical powder
+  - metal_powder_sieving_system_v0             # Particle size distribution control
+  - metal_wire_drawing_process_v0              # Wire feedstock for WAAM/EBF3
+  - powder_quality_analysis_v0                 # Particle size, morphology, composition
+
+  # Microstructure control
+  - heat_treatment_stress_relief_v0            # Post-process stress relief annealing
+  - hip_hot_isostatic_pressing_v0              # Densification and porosity elimination
+  - microstructure_analysis_system_v0          # Grain size and phase analysis
+  - surface_finishing_am_parts_v0              # Machining/polishing of AM parts
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # VON NEUMANN ARCHITECTURE (photolithoautotroph)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Universal constructor components
+  - universal_turing_machine_lunar_v0          # Computing substrate (vacuum tube or neural)
+  - universal_constructor_system_v0            # Manufacturing substrate (AM + assembly)
+  - self_description_tape_system_v0            # Information storage and transmission
+  - materials_closure_verification_v0          # System to verify materials closure
+  - energy_closure_verification_v0             # System to verify energy closure
+  - information_closure_verification_v0        # System to verify information closure
+
+  # NiFe meteorite prospecting
+  - nife_meteorite_magnetic_detection_v0       # Magnetic anomaly detection
+  - nife_meteorite_excavation_process_v0       # Excavation of buried meteorites
+  - nife_alloy_beneficiation_v0                # Magnetic separation of NiFe from regolith
+  - nife_alloy_melting_and_casting_v0          # Melting kamacite/taenite alloys
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # VACUUM TUBE ELECTRONICS (photolithoautotroph, ISRU-neural-computing)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Vacuum tube components (from existing seed but comprehensive)
+  - tungsten_cathode_oxide_coated_v0           # W cathode with oxide coating
+  - nickel_grid_electrode_v0                   # Ni control grid
+  - nickel_anode_vacuum_tube_v0                # Ni anode (electron collector)
+  - glass_envelope_vacuum_tube_v0              # Fused silica envelope
+  - glass_to_metal_seal_kovar_v0               # Kovar feedthrough seals
+  - getter_material_activation_v0              # Getter for vacuum maintenance
+  - vacuum_tube_evacuation_sealing_v0          # Tube evacuation and hermetic sealing
+  - tube_socket_ceramic_v0                     # Ceramic socket for tube mounting
+
+  # Vacuum tube manufacturing processes
+  - cathode_oxide_coating_process_v0           # BaO/SrO/CaO coating application
+  - tungsten_wire_drawing_v0                   # Fine W wire for cathodes/filaments
+  - nickel_sheet_rolling_forming_v0            # Ni sheet for grids/anodes
+  - kovar_alloy_production_v0                  # Fe-Ni-Co alloy for seals
+  - glass_envelope_forming_v0                  # Bulb forming from fused silica
+  - tube_basing_and_sealing_v0                 # Final assembly and evacuation
+
+  # Vacuum tube circuits
+  - amplifier_circuit_vacuum_tube_v0           # Audio/signal amplification
+  - oscillator_circuit_vacuum_tube_v0          # Clock generation
+  - rectifier_circuit_vacuum_tube_v0           # AC to DC conversion
+  - logic_gate_vacuum_tube_v0                  # Digital logic (AND, OR, NOT)
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # NEURAL COMPUTING (ISRU-neural-computing)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Yamashita-Nakamura neuron circuits
+  - yn_neuron_circuit_v0                       # Single Y-N neuron with resistor networks
+  - yn_neuron_differential_pair_v0             # Dual-transistor differential amplifier
+  - yn_neuron_resistor_network_v0              # Weighted input resistor array
+  - yn_neuron_bias_circuit_v0                  # Bias current source
+  - yn_mlp_network_hardware_v0                 # Multi-layer perceptron hardware
+  - backprop_circuit_hardware_v0               # Hardware backpropagation circuit
+
+  # Neural network systems
+  - ratslam_hardware_implementation_v0         # RatSLAM for rover navigation
+  - amari_neural_field_hardware_v0             # Continuous attractor neural network
+  - braitenberg_vehicle_circuit_v0             # 2-neuron reactive vehicle
+  - manipulator_neural_controller_v0           # Neural network for arm control
+  - mlp_5_4_4_4_network_v0                     # Specific MLP topology demonstrated
+
+  # Neural computing infrastructure
+  - analog_test_bench_neural_circuits_v0       # Test equipment for neural circuits
+  - neural_network_training_system_v0          # Training infrastructure
+  - weight_storage_analog_v0                   # Analog weight storage (capacitors/resistors)
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # SENSORS (ISRU-sensors)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Position/motion sensors
+  - potentiometer_wirewound_v0                 # Wire-wound variable resistor
+  - potentiometer_conductive_polymer_v0        # Polymer-based potentiometer
+  - encoder_optical_simple_v0                  # Optical encoder with slotted disk
+  - encoder_magnetic_v0                        # Magnetic encoder with ferrite
+  - inclinometer_pendulum_v0                   # Gravity-based tilt sensor
+  - accelerometer_mechanical_v0                # Spring-mass accelerometer
+
+  # Optical sensors
+  - photodiode_selenium_v0                     # Se-based photodiode
+  - photomultiplier_tube_v0                    # PMT with dynodes for low-light
+  - optic_flow_sensor_array_v0                 # Array of photodiodes for motion
+  - spectrometer_simple_prism_v0               # Prism-based spectrometer
+  - camera_vacuum_tube_vidicon_v0              # Vidicon camera tube
+
+  # Force/tactile sensors
+  - load_cell_strain_gauge_v0                  # Metal strain gauge load cell
+  - tactile_sensor_silicone_v0                 # Silicone-based tactile sensor
+  - pressure_sensor_diaphragm_v0               # Diaphragm pressure sensor
+  - force_torque_sensor_6dof_v0                # 6-DOF force/torque sensor
+
+  # Temperature sensors
+  - thermocouple_type_k_v0                     # K-type thermocouple (Ni-Cr/Ni-Al)
+  - thermocouple_type_s_v0                     # S-type thermocouple (Pt-Rh)
+  - rtd_nickel_v0                              # Ni resistance temperature detector
+  - pyrometer_optical_v0                       # Non-contact temperature measurement
+
+  # Chemical sensors
+  - oxygen_sensor_zirconia_v0                  # ZrO₂ oxygen sensor
+  - ph_sensor_glass_electrode_v0               # Glass electrode pH sensor
+  - gas_chromatograph_simple_v0                # Simple GC for gas analysis
+
+  # Sensor manufacturing processes
+  - quartz_crystal_synthesis_v0                # Quartz from silica for sensors
+  - selenium_extraction_refining_v0            # Se extraction for photodiodes
+  - silicone_polymer_synthesis_v0              # Silicone for tactile sensors
+  - strain_gauge_bonding_process_v0            # Strain gauge attachment
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # MAGNETIC MATERIALS (lunar-demandite, photolithoautotroph)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Ferrite magnets (soft and hard)
+  - nife2o4_soft_ferrite_v0                    # NiFe₂O₄ soft ferrite for transformers
+  - cofe2o4_hard_ferrite_v0                    # CoFe₂O₄ hard ferrite for permanent magnets
+  - mnzn_ferrite_v0                            # MnZn ferrite for high-frequency transformers
+  - ferrite_powder_synthesis_v0                # Coprecipitation or ceramic method
+  - ferrite_pressing_shaping_v0                # Die pressing of ferrite powder
+  - ferrite_sintering_process_v0               # High-temp sintering 1200-1400°C
+  - ball_mill_ferrite_grinding_v0              # Ball milling for fine powder
+
+  # AlNiCo permanent magnets
+  - alnico_magnet_alloy_v0                     # Al-Ni-Co permanent magnet 540°C tolerance
+  - alnico_casting_process_v0                  # Investment casting of AlNiCo
+  - alnico_heat_treatment_v0                   # Magnetic field annealing
+  - alnico_machining_grinding_v0               # Post-process machining
+
+  # Magnetic cores and components
+  - ferrite_toroid_core_v0                     # Toroidal cores for inductors/transformers
+  - laminated_silicon_steel_core_v0            # Silicon steel laminations for motors
+  - magnetic_core_memory_tile_v0               # Ferrite core memory array
+  - core_memory_threading_process_v0           # Wire threading through cores
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # MATERIALS PROCESSING (Sustainable-ISRU, lunar-demandite)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Acid leaching processes
+  - hcl_acid_production_v0                     # HCl synthesis or import
+  - hcl_regolith_leaching_v0                   # Acid attack on anorthite
+  - hcl_recovery_distillation_v0               # HCl recovery from spent solution
+  - acid_resistant_reactor_lining_v0           # Corrosion-resistant materials
+
+  # Carbonyl processes (metal purification)
+  - mond_carbonyl_process_nickel_v0            # Ni(CO)₄ synthesis and decomposition
+  - iron_carbonyl_process_v0                   # Fe(CO)₅ purification
+  - cobalt_carbonyl_process_v0                 # Co₂(CO)₈ purification
+  - tungsten_carbonyl_process_v0               # W(CO)₆ purification
+  - carbonyl_safety_system_v0                  # Toxic gas handling
+
+  # Carbon and nitrogen recovery
+  - sabatier_reactor_co2_reduction_v0          # CO₂ + 4H₂ → CH₄ + 2H₂O
+  - methane_pyrolysis_carbon_v0                # CH₄ → C + 2H₂ (carbon black)
+  - nitrogen_fixation_haber_bosch_v0           # N₂ + 3H₂ → 2NH₃
+  - ammonia_synthesis_catalyst_v0              # Iron-based catalyst for Haber-Bosch
+  - nitrogen_source_import_or_volatile_v0      # Import until lunar volatiles proven
+
+  # Silicone synthesis (Rochow process)
+  - rochow_process_reactor_v0                  # MeCl + Si → MeSiCl₃
+  - methylchloride_synthesis_v0                # CH₄ + Cl₂ → CH₃Cl
+  - silicon_purification_mgsi_v0               # Mg reduction of SiO₂
+  - silicone_polymerization_v0                 # Polymerization to silicone polymer
+  - silicone_rubber_vulcanization_v0           # Cross-linking for elastomer
+
+  # Olivine and pyroxene processing
+  - olivine_beneficiation_v0                   # Magnetic separation of olivine
+  - olivine_crushing_grinding_v0               # Size reduction for processing
+  - pyroxene_separation_v0                     # Separation from other minerals
+  - forsterite_extraction_v0                   # Mg₂SiO₄ processing
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # ENERGY SYSTEMS (NPV-cost-benefit, Power-on-the-Moon)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Thermionic conversion (already in thermionic seed, but add variants)
+  - pete_photon_enhanced_thermionic_v0         # PETE for 50% efficiency (aspirational)
+  - thermionic_topping_cycle_v0                # Combined thermionic + thermal cycle
+  - cesium_vapor_thermionic_v0                 # Cs vapor space charge neutralization
+
+  # Flywheel energy storage
+  - flywheel_energy_storage_system_v0          # 20,000-50,000 rpm, 95% efficiency
+  - flywheel_rotor_composite_v0                # High-strength rotor (or metal)
+  - magnetic_bearing_passive_v0                # Passive magnetic bearings for flywheel
+  - magnetic_bearing_active_v0                 # Active magnetic bearings with control
+  - flywheel_vacuum_housing_v0                 # Low-pressure housing for low losses
+  - flywheel_motor_generator_v0                # Bidirectional motor/generator
+
+  # Solar thermal receivers (advanced)
+  - cavity_receiver_insulated_v0               # High-efficiency cavity receiver
+  - volumetric_receiver_porous_v0              # Porous absorber for air heating
+  - liquid_sodium_receiver_v0                  # Liquid Na heat transfer
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # CHEMICAL PROCESSING EQUIPMENT (Sustainable-ISRU, sensors)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Reactor vessels
+  - generic_chemical_reactor_pressure_v0       # Pressurized reactor vessel
+  - high_temp_reactor_seal_material_v0         # High-temp gaskets and seals
+  - reactor_agitator_mixer_v0                  # Mechanical agitation
+  - reactor_heating_cooling_system_v0          # Temperature control jackets
+
+  # Separation equipment
+  - distillation_column_simple_v0              # Simple distillation for purification
+  - packed_bed_distillation_v0                 # Packed column for efficiency
+  - cold_trap_cryogenic_v0                     # Cryogenic condensation
+  - hydrogen_recycle_separator_v0              # H₂ separation from product gases
+
+  # Catalyst systems
+  - catalyst_regeneration_process_v0           # Catalyst reactivation
+  - packed_bed_regeneration_v0                 # Packed bed reactor regeneration
+  - catalyst_pellet_forming_v0                 # Pelletizing catalyst powder
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # ROVER AND AUTONOMY (Rover-Prospecting-Mining)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Rover platforms
+  - kapvik_microrover_30kg_v0                  # 30 kg Canadian microrover
+  - rover_chassis_structure_v0                 # Lightweight chassis
+  - rover_wheel_assembly_v0                    # 6-wheel rocker-bogie or similar
+  - rover_suspension_rocker_bogie_v0           # Passive suspension system
+
+  # Rover subsystems
+  - rover_power_system_battery_v0              # Battery pack for rover
+  - rover_solar_array_v0                       # Solar panels for recharging
+  - rover_thermal_control_v0                   # Heaters and radiators
+  - rover_avionics_computer_v0                 # Onboard computer
+  - rover_communication_system_v0              # Radio communication
+
+  # Autonomy and AI
+  - slam_algorithm_implementation_v0           # Simultaneous Localization and Mapping
+  - visual_odometry_system_v0                  # Camera-based dead reckoning
+  - lidar_time_of_flight_simple_v0             # LiDAR for 3D mapping
+  - terrain_analysis_ai_v0                     # Terrain classification
+  - path_planning_algorithm_v0                 # A* or similar path planning
+  - obstacle_avoidance_ai_v0                   # Real-time obstacle avoidance
+  - multi_rover_coordination_v0                # Multi-agent coordination
+  - resource_prospecting_ai_v0                 # AI for resource identification
+
+  # Terramechanics
+  - soil_parameter_estimation_v0               # Wheel sinkage and slip analysis
+  - wheel_load_cell_system_v0                  # Load cells at all 6 wheel stations
+  - traction_control_system_v0                 # Slip control for soft terrain
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # SELF-ASSEMBLING STRUCTURES (Self-Assembling-Structures)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # TRIGON self-assembling panels
+  - trigon_panel_assembly_v0                   # Triangular self-assembling panel
+  - trigon_hinge_motorized_v0                  # Motorized hinge for folding
+  - trigon_latch_mechanism_v0                  # Latching for panel connection
+  - trigon_panel_structure_v0                  # Panel substrate (composite or metal)
+
+  # 3D-printed motors
+  - 3d_printed_motor_ironpla_v0                # Motor with iron-impregnated PLA stator
+  - iron_impregnated_pla_filament_v0           # 50% Fe + 50% PLA composite
+  - photolithographic_coil_winding_v0          # Laser-etched copper coils
+  - motor_rotor_3d_printed_v0                  # 3D-printed rotor with magnets
+  - motor_stator_3d_printed_v0                 # 3D-printed stator with coils
+  - motor_bearing_3d_printed_v0                # 3D-printed bearing
+  - motor_assembly_3d_printed_v0               # Complete 3D-printed motor assembly
+
+  # Photolithography for electronics
+  - photolithography_process_simple_v0         # UV exposure and etching
+  - photoresist_application_v0                 # Spin coating or spray
+  - copper_etching_process_v0                  # Chemical etching of Cu
+  - pcb_substrate_glass_epoxy_v0               # FR-4 equivalent or simpler
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # MANUFACTURING CONTROL SYSTEMS (sustainable-lunar-exploration)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Flexible Manufacturing Systems
+  - fms_control_system_v0                      # Flexible Manufacturing System controller
+  - cellular_manufacturing_layout_v0           # Cell-based production layout
+  - manufacturing_cell_v0                      # Single manufacturing cell
+
+  # Holonic control (PROSA)
+  - holonic_control_prosa_v0                   # PROSA holonic architecture
+  - product_holon_v0                           # Product holon (knows product requirements)
+  - resource_holon_v0                          # Resource holon (machine agent)
+  - order_holon_v0                             # Order holon (task manager)
+  - staff_holon_v0                             # Staff holon (advisor/optimizer)
+
+  # Stigmergy and swarm
+  - stigmergy_coordination_system_v0           # Ant colony optimization variant
+  - pheromone_digital_system_v0                # Digital pheromone markers
+  - ant_colony_optimization_v0                 # ACO for routing/scheduling
+
+  # NEIMS neuroendocrine control
+  - neims_control_system_v0                    # Neuroendocrine Immune Manufacturing System
+  - hormone_digital_signaling_v0               # Digital hormone-like messages
+  - immune_response_manufacturing_v0           # Fault detection and response
+
+  # Reconfigurable Manufacturing Systems
+  - rms_reconfigurable_system_v0               # RMS with modular machines
+  - modular_machine_interface_v0               # Standardized machine interfaces
+  - dynamic_reconfiguration_controller_v0      # Runtime reconfiguration
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # WATER AND VOLATILES ISRU (papers_gap_seed existing + additions)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Water extraction
+  - water_auger_dryer_ladi_v0                  # Lunar Auger Drill and ISRU
+  - regolith_heating_water_extraction_v0       # Thermal extraction of adsorbed water
+  - cold_trap_module_volatiles_v0              # Cryogenic volatile capture
+  - water_purification_distillation_v0         # Water purification system
+
+  # Cryogenic storage
+  - lox_storage_tank_cryogenic_v0              # Liquid oxygen storage
+  - lh2_storage_tank_cryogenic_v0              # Liquid hydrogen storage
+  - cryocooler_active_v0                       # Active cryocooler
+  - passive_thermal_insulation_v0              # MLI or regolith insulation
+
+  # Electrolysis
+  - water_electrolysis_system_v0               # H₂O → H₂ + O₂
+  - electrolyzer_alkaline_v0                   # Alkaline electrolyzer
+  - electrolyzer_pem_v0                        # Proton exchange membrane (if feasible)
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # CONSTRUCTION AND STRUCTURES
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Truss and lattice
+  - truss_node_connector_universal_v0          # Universal truss connector
+  - lattice_builder_gantry_robot_v0            # Robotic lattice assembly
+  - space_frame_structure_v0                   # Large space frame construction
+
+  # Regolith construction
+  - regolith_brick_press_hydraulic_v0          # Hydraulic press for bricks
+  - regolith_sinter_block_process_v0           # Sintered regolith blocks
+  - regolith_concrete_polymer_v0               # Polymer-regolith composite
+  - sulfur_concrete_regolith_v0                # Sulfur-based concrete
+  - microwave_sintering_regolith_v0            # Microwave sintering
+
+  # Inflatable structures
+  - inflatable_habitat_module_v0               # Inflatable pressurized habitat
+  - kevlar_fabric_import_v0                    # High-strength fabric (import early)
+  - airlock_module_v0                          # Airlock for habitat
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # SYSTEM INTEGRATION AND SAFETY
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Interfaces and standards
+  - robot_power_docking_coupler_v0             # Standardized power/data connector
+  - robot_tool_quick_change_v0                 # Quick-change tool interface
+  - modular_robot_arm_segments_v0              # Modular arm construction
+
+  # Safety and contingency
+  - salt_contingency_nacl_import_v0            # NaCl as import gate/kill switch
+  - edac_error_correction_v0                   # Error Detection and Correction
+  - watchdog_timer_system_v0                   # Hardware watchdog for resets
+  - grey_goo_mitigation_system_v0              # Replication rate limiting
+
+  # Dust mitigation
+  - solar_array_cleaning_brush_v0              # Mechanical cleaning for solar panels
+  - dust_mitigation_coating_v0                 # Electrostatic or hydrophobic coating
+  - electrostatic_dust_shield_v0               # Active electrostatic repulsion
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # DEMONSTRATED HARDWARE (NPV-cost-benefit 2017 baseline)
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # 2017 demonstrated components (need YAML entries)
+  - demonstrated_solar_concentrator_2017_v0    # Fresnel or mirror system demonstrated
+  - demonstrated_motor_2017_v0                 # 3D-printed motor demonstrated
+  - demonstrated_vacuum_tube_2017_v0           # Vacuum tube electronics demonstrated
+  - demonstrated_ferrite_core_2017_v0          # Ferrite core demonstrated
+  - demonstrated_sensor_2017_v0                # Basic sensors demonstrated
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # ADDITIONAL MATERIALS AND ALLOYS
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Specialty alloys
+  - tool_steel_high_carbon_v0                  # High-carbon steel for tooling
+  - silicon_steel_electrical_v0                # Si steel for transformer cores
+  - kovar_alloy_fe_ni_co_v0                    # 29Ni-17Co-bal.Fe for glass seals
+  - permalloy_high_permeability_v0             # High-μ magnetic alloy
+  - invar_low_expansion_v0                     # Low thermal expansion alloy
+
+  # Ceramics
+  - alumina_ceramic_v0                         # Al₂O₃ for insulators, crucibles
+  - zirconia_ceramic_v0                        # ZrO₂ for oxygen sensors, refractories
+  - silicon_nitride_ceramic_v0                 # Si₃N₄ for bearings, cutting tools
+  - silicon_carbide_ceramic_v0                 # SiC for abrasives, electronics
+
+  # Refractories
+  - magnesia_refractory_v0                     # MgO refractory bricks
+  - chromite_refractory_v0                     # Chromite refractory
+  - graphite_crucible_v0                       # Graphite for high-temp crucibles
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # METROLOGY AND TESTING
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Dimensional metrology
+  - coordinate_measuring_machine_v0            # CMM for part inspection
+  - optical_comparator_v0                      # Optical measurement
+  - micrometer_mechanical_v0                   # Precision mechanical micrometer
+  - caliper_vernier_v0                         # Vernier caliper
+
+  # Material testing
+  - tensile_test_machine_v0                    # Tensile strength testing
+  - hardness_tester_v0                         # Hardness measurement
+  - metallography_sample_prep_v0               # Polishing and etching for microscopy
+  - optical_microscope_v0                      # Optical microscopy
+
+  # Electrical testing
+  - multimeter_analog_v0                       # Analog multimeter (moving coil)
+  - oscilloscope_analog_v0                     # Analog oscilloscope (CRT-based)
+  - signal_generator_analog_v0                 # Analog signal generator
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # POWER CONDITIONING AND DISTRIBUTION
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Transformers and inductors
+  - transformer_ferrite_core_v0                # Ferrite core transformer
+  - transformer_laminated_steel_v0             # Laminated steel transformer
+  - inductor_ferrite_toroid_v0                 # Ferrite toroidal inductor
+  - inductor_air_core_v0                       # Air core inductor
+
+  # Power conversion
+  - inverter_dc_to_ac_v0                       # DC to AC power conversion
+  - rectifier_full_bridge_v0                   # AC to DC rectification
+  - voltage_regulator_linear_v0                # Linear voltage regulation
+  - voltage_regulator_switching_v0             # Switching voltage regulation
+
+  # Power distribution
+  - circuit_breaker_thermal_v0                 # Thermal circuit breaker
+  - relay_electromagnetic_v0                   # Electromagnetic relay
+  - contactor_high_power_v0                    # High-power contactor
+  - busbar_distribution_system_v0              # Busbar for power distribution
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # MECHANICAL COMPONENTS AND MACHINES
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Bearings
+  - ball_bearing_steel_v0                      # Steel ball bearings
+  - roller_bearing_cylindrical_v0              # Cylindrical roller bearing
+  - plain_bearing_bronze_v0                    # Bronze bushing
+  - plain_bearing_graphite_v0                  # Self-lubricating graphite bearing
+
+  # Gears and transmission
+  - spur_gear_set_v0                           # Spur gears
+  - helical_gear_set_v0                        # Helical gears
+  - bevel_gear_set_v0                          # Bevel gears for right-angle drive
+  - worm_gear_set_v0                           # Worm gear for high reduction
+  - gear_hobbing_machine_v0                    # Gear cutting machine
+
+  # Fasteners
+  - bolt_and_nut_steel_v0                      # Standard threaded fasteners
+  - rivet_installation_tool_v0                 # Riveting tool
+  - welding_spot_welder_v0                     # Spot welding machine
+  - welding_arc_welder_v0                      # Arc welding machine
+
+  # Machine tools
+  - lathe_engine_v0                            # Engine lathe for turning
+  - milling_machine_v0                         # Milling machine
+  - drill_press_v0                             # Drill press
+  - grinder_surface_v0                         # Surface grinder
+  - grinder_cylindrical_v0                     # Cylindrical grinder
+  - shear_metal_cutting_v0                     # Metal shear
+  - press_brake_v0                             # Press brake for bending
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # ASSEMBLY AND MANIPULATION
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Robotic arms
+  - robot_arm_6dof_v0                          # 6-DOF manipulator arm
+  - robot_gripper_parallel_jaw_v0              # Parallel jaw gripper
+  - robot_gripper_multi_finger_v0              # Multi-finger gripper
+  - robot_end_effector_tool_v0                 # Task-specific end effector
+
+  # Assembly systems
+  - cartesian_gantry_assembler_robot_v0        # XYZ gantry robot
+  - scara_robot_v0                             # SCARA robot for assembly
+  - delta_robot_v0                             # Delta robot for pick-and-place
+  - conveyor_belt_system_v0                    # Conveyor for material flow
+
+  # Vision systems
+  - machine_vision_camera_v0                   # Camera for inspection
+  - machine_vision_lighting_v0                 # Structured lighting
+  - machine_vision_processing_v0               # Image processing for inspection
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # COMMUNICATIONS
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Radio systems
+  - radio_transmitter_vacuum_tube_v0           # Vacuum tube RF transmitter
+  - radio_receiver_vacuum_tube_v0              # Vacuum tube RF receiver
+  - antenna_dipole_v0                          # Dipole antenna
+  - antenna_parabolic_dish_v0                  # Parabolic dish antenna
+  - antenna_helix_v0                           # Helical antenna for circular polarization
+
+  # Modulation and coding
+  - amplitude_modulation_circuit_v0            # AM modulation
+  - frequency_modulation_circuit_v0            # FM modulation
+  - error_correction_coding_v0                 # FEC coding (EDAC)
+  - data_encoding_manchester_v0                # Manchester encoding
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # COMPUTING MEMORY AND STORAGE
+  # ════════════════════════════════════════════════════════════════════════════
+
+  # Magnetic core memory
+  - magnetic_core_memory_array_v0              # Ferrite core memory plane
+  - core_memory_drive_circuit_v0               # X-Y matrix drivers
+  - core_memory_sense_amplifier_v0             # Sense amplifier for readout
+  - core_memory_controller_v0                  # Memory controller logic
+
+  # Delay line memory
+  - delay_line_memory_acoustic_v0              # Acoustic delay line (mercury or fused silica)
+  - delay_line_memory_magnetic_v0              # Magnetic delay line
+
+  # Drum memory
+  - magnetic_drum_memory_v0                    # Rotating drum with magnetic coating
+  - drum_memory_read_write_head_v0             # Magnetic head for drum
+
+  # ════════════════════════════════════════════════════════════════════════════
+  # END OF COMPREHENSIVE LIST
+  # ════════════════════════════════════════════════════════════════════════════

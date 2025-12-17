@@ -1,0 +1,47 @@
+id: nife_alloy_melting_and_casting_v0
+kind: process
+name: Nickel-iron alloy melting and casting process v0
+layer_tags:
+  - layer_3
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.6
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 0.4
+    unit: kg
+outputs:
+  - item_id: nife_alloy_casting
+    qty: 0.95
+    unit: kg
+requires_ids:
+  - induction_furnace_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: Melting energy for Ni-Fe alloy
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: Melting, homogenization, and casting time
+notes: |
+  Process for melting and casting nickel-iron alloys.
+  Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0
+  Composition: Typical Ni-Fe alloys range from 30-70% Ni
+  Common alloys:
+    - FeNi36 (Invar): 36% Ni, low thermal expansion
+    - FeNi42 (42% Ni): Controlled expansion for glass sealing
+    - Permalloy (80% Ni): High magnetic permeability
+  Melting temperature: 1450-1550°C depending on composition
+  Method: Induction furnace with inert atmosphere or vacuum
+  Applications:
+    - Low-expansion components
+    - Magnetic cores
+    - Glass-to-metal seals
+    - Precision instruments
+  Lunar context: Both Ni and Fe available from meteorites and beneficiated regolith
+  Critical for: Precision components, magnetic materials, thermal control

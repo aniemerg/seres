@@ -1,0 +1,42 @@
+id: recipe_machine_vacuum_chamber_v0
+target_item_id: vacuum_chamber
+variant_id: v0
+steps:
+  - process_id: cutting_basic_v0
+    est_time_hr: 1.2
+    machine_hours: 1.2
+    labor_hours: 0.6
+    notes: "Cut shell plates/cylinders, flanges, and support brackets."
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 0.8
+    labor_hours: 0.8
+    notes: "Roll/press shell sections and flanges to shape."
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 1.5
+    labor_hours: 1.5
+    notes: "Weld shell seams, attach ports, brackets, and stiffeners."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.3
+    labor_hours: 1.0
+    notes: "Machine flange faces, port threads, and sealing surfaces."
+  - process_id: seal_installation_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Install gaskets/seals on doors and ports; assemble viewports/feedthroughs."
+  - process_id: plumbing_and_pneumatics_v0
+    est_time_hr: 0.8
+    labor_hours: 0.8
+    notes: "Install valves, gauges, and pump connections."
+  - process_id: wiring_and_electronics_integration_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Wire sensors, heaters, and interlocks."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.8
+    labor_hours: 0.6
+    notes: "Leak check, pump-down test, and basic functionality verification."
+assumptions: "Bench-scale vacuum chamber build with welded shell, machined flanges, and basic valve/gauge set; pumps handled separately."
+notes: Local fabrication route for vacuum chamber.

@@ -1,0 +1,29 @@
+id: precision_grinding_and_scraping_v0
+kind: process
+name: Precision grinding and scraping
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: finished_part
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - surface_grinder
+  - inspection_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.2
+  notes: "Surface grinder power and hand scraping effort."
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Multiple grinding passes plus hand scraping/inspection."
+notes: "Finishes precision surfaces by grinding followed by hand scraping to achieve high flatness and alignment."

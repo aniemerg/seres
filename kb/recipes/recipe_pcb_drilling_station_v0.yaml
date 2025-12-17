@@ -1,0 +1,18 @@
+id: recipe_pcb_drilling_station_v0
+target_item_id: pcb_drilling_station
+variant_id: v0
+steps:
+  - process_id: metal_parts_fabrication_v0
+    est_time_hr: 4.0
+    labor_hours: 2.0
+    notes: Fabricate table, spindle mount, fixturing system
+  - process_id: assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: Assemble spindle, table, drive system, controls
+  - process_id: alignment_and_testing_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Calibrate positioning and test drilling accuracy
+assumptions: PCB drilling station can be manual or CNC depending on control system availability. Spindle motor may use imported components initially.
+notes: Manufacturing route for PCB drilling station used in electronics manufacturing.

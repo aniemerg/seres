@@ -1,0 +1,88 @@
+id: recipe_microcontroller_or_embedded_board_v0
+target_item_id: microcontroller_or_embedded_board
+variant_id: v0
+steps:
+  - process_id: pcb_fabrication_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: pcb_bare_board
+        qty: 0.04
+        unit: kg
+    est_time_hr: 2.0
+    notes: Fabricate PCB with traces, pads, and vias
+  - process_id: solder_paste_application_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 0.04
+        unit: kg
+      - item_id: solder_paste_tin_lead
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: pcb_paste_applied
+        qty: 0.045
+        unit: kg
+    est_time_hr: 0.5
+    notes: Apply solder paste to component pads
+  - process_id: component_placement_process_v0
+    inputs:
+      - item_id: pcb_paste_applied
+        qty: 0.045
+        unit: kg
+      - item_id: microcontroller_ic_generic
+        qty: 1.0
+        unit: each
+      - item_id: capacitor_ceramic_generic
+        qty: 10.0
+        unit: each
+      - item_id: resistor_chip_smd
+        qty: 15.0
+        unit: each
+      - item_id: voltage_regulator_ic
+        qty: 1.0
+        unit: each
+      - item_id: crystal_oscillator_timing
+        qty: 1.0
+        unit: each
+      - item_id: connector_pin_header
+        qty: 4.0
+        unit: each
+    outputs:
+      - item_id: pcb_components_placed
+        qty: 0.15
+        unit: kg
+    est_time_hr: 1.0
+    notes: Place all components onto PCB
+  - process_id: reflow_soldering_process_v0
+    inputs:
+      - item_id: pcb_components_placed
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: pcb_assembled_board
+        qty: 0.145
+        unit: kg
+    est_time_hr: 0.5
+    notes: Reflow solder to attach components
+  - process_id: programming_and_test_v0
+    inputs:
+      - item_id: pcb_assembled_board
+        qty: 0.145
+        unit: kg
+    outputs:
+      - item_id: microcontroller_or_embedded_board
+        qty: 0.2
+        unit: kg
+    est_time_hr: 1.0
+    notes: Program firmware, test I/O, verify functionality
+assumptions: |
+  PCB fabrication and SMT assembly processes available.
+  Microcontroller IC and supporting components sourced or manufactured.
+  Programming/testing station with appropriate software.
+notes: |
+  Manufacturing route for embedded microcontroller board.
+  Standard SMT assembly process flow.
+  Includes programming and functional testing.

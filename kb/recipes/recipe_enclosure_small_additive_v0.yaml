@@ -1,0 +1,19 @@
+id: recipe_enclosure_small_additive_v0
+target_item_id: enclosure_small
+variant_id: additive
+steps:
+  - process_id: additive_manufacturing_polymer_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 0.5
+    notes: "Print enclosure body and cover in polymer; include mounting bosses and cable openings."
+  - process_id: support_removal_and_cleanup_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Remove supports, deburr openings, and clean up surfaces."
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Install hardware, gaskets, and terminals as needed."
+assumptions: Uses polymer printer; suitable for small/medium enclosures; not for high-heat environments.
+notes: Additive path for small enclosures; default when polymer printing available.

@@ -1,0 +1,74 @@
+id: recipe_machine_solar_thermal_storage_system_v0
+target_item_id: solar_thermal_storage_system_v0
+variant_id: v0
+steps:
+  - process_id: metal_fabrication_welding_v0
+    inputs:
+      - item_id: steel_plate_10mm
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: storage_tank_welded
+        qty: 450.0
+        unit: kg
+    est_time_hr: 20.0
+    notes: Fabricate large insulated storage tank
+  - process_id: refractory_casting_process_v0
+    inputs:
+      - item_id: refractory_cement_high_temp
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: insulation_layer_refractory
+        qty: 280.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Cast refractory insulation lining inside tank
+  - process_id: regolith_collection_and_processing_v0
+    inputs:
+      - item_id: lunar_regolith_raw
+        qty: 1000.0
+        unit: kg
+    outputs:
+      - item_id: thermal_storage_media_regolith
+        qty: 950.0
+        unit: kg
+    est_time_hr: 10.0
+    notes: Collect, sieve, and prepare regolith or basalt rock as storage medium
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: storage_tank_welded
+        qty: 450.0
+        unit: kg
+      - item_id: insulation_layer_refractory
+        qty: 280.0
+        unit: kg
+      - item_id: thermal_storage_media_regolith
+        qty: 950.0
+        unit: kg
+      - item_id: heat_exchanger_tube_bundle
+        qty: 100.0
+        unit: kg
+      - item_id: temperature_sensor_thermocouple
+        qty: 10.0
+        unit: each
+      - item_id: piping_and_valves_set
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: solar_thermal_storage_system_v0
+        qty: 2000.0
+        unit: kg
+    est_time_hr: 16.0
+    notes: Assemble tank, insulation, storage media, heat exchangers, instrumentation
+assumptions: |
+  Steel tank provides structural containment.
+  Refractory insulation minimizes heat loss.
+  Regolith or basalt rocks provide sensible heat storage.
+  Heat exchanger tubes transfer heat to/from storage medium.
+  Temperature sensors monitor storage temperature.
+notes: |
+  Manufacturing route for solar thermal storage system.
+  Uses abundant lunar regolith as storage medium.
+  Critical for continuous 24/7 operation of solar thermal systems.
+  Typical capacity: 100-1000 kWh thermal storage.

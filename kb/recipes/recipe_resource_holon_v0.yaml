@@ -1,0 +1,41 @@
+id: recipe_resource_holon_v0
+target_item_id: resource_holon_v0
+variant_id: v0
+steps:
+  - process_id: software_development_programming_v0
+    inputs:
+      - item_id: computing_time_development
+        qty: 120.0
+        unit: hr
+      - item_id: holonic_architecture_specification
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: resource_holon_software
+        qty: 1.0
+        unit: each
+    est_time_hr: 120.0
+    notes: Develop resource holon agent software (state management, negotiation, communication)
+  - process_id: software_testing_simulation_v0
+    inputs:
+      - item_id: resource_holon_software
+        qty: 1.0
+        unit: each
+      - item_id: manufacturing_simulation_testbed
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: resource_holon_v0
+        qty: 0.0
+        unit: kg
+    est_time_hr: 40.0
+    notes: Test holon in simulated manufacturing environment, validate negotiation
+assumptions: |
+  Agent-based software architecture.
+  Peer-to-peer communication between holons.
+  State machine for resource status tracking.
+  Negotiation protocols for task allocation.
+notes: |
+  Software development route for resource holon agent.
+  Critical component of holonic manufacturing system.
+  Enables self-organizing, autonomous factory operation.

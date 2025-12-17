@@ -1,0 +1,76 @@
+id: recipe_mounting_bracket_azimuth_elevation_v0
+target_item_id: mounting_bracket_azimuth_elevation
+variant_id: v0
+steps:
+  - process_id: metal_cutting_process_v0
+    inputs:
+      - item_id: steel_structural_tube
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: frame_members_cut
+        qty: 7.5
+        unit: kg
+    est_time_hr: 2.0
+    notes: Cut structural tubes for frame
+  - process_id: welding_process_general_v0
+    inputs:
+      - item_id: frame_members_cut
+        qty: 7.5
+        unit: kg
+      - item_id: steel_plate_5mm
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: mount_frame_welded
+        qty: 9.0
+        unit: kg
+    est_time_hr: 4.0
+    notes: Weld frame structure and mounting plates
+  - process_id: machining_process_boring_v0
+    inputs:
+      - item_id: mount_frame_welded
+        qty: 9.0
+        unit: kg
+    outputs:
+      - item_id: mount_frame_bearing_bores
+        qty: 8.8
+        unit: kg
+    est_time_hr: 3.0
+    notes: Bore precision holes for bearing assemblies
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: mount_frame_bearing_bores
+        qty: 8.8
+        unit: kg
+      - item_id: bearing_ball_steel
+        qty: 4.0
+        unit: each
+      - item_id: stepper_motor_v0
+        qty: 2.0
+        unit: each
+      - item_id: gear_reducer_assembly
+        qty: 2.0
+        unit: each
+      - item_id: encoder_rotary_absolute
+        qty: 2.0
+        unit: each
+      - item_id: limit_switch_mechanical
+        qty: 4.0
+        unit: each
+    outputs:
+      - item_id: mounting_bracket_azimuth_elevation
+        qty: 15.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: Install bearings, motors, gear reducers, encoders, limit switches, calibrate
+assumptions: |
+  Steel frame provides structural rigidity.
+  Ball bearings enable smooth rotation.
+  Stepper motors with gear reducers provide precise positioning.
+  Absolute encoders track position without homing.
+  Limit switches prevent over-travel damage.
+notes: |
+  Manufacturing route for azimuth-elevation mount.
+  Motorized two-axis pointing for tracking applications.
+  Critical for antenna pointing and tracking systems.

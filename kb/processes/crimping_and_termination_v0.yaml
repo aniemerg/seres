@@ -1,0 +1,32 @@
+id: crimping_and_termination_v0
+kind: process
+name: Crimping and termination
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: cut_wire_lengths
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: assembled_wire_harness
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - crimping_tool_set
+  - wire_stripper_set
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.1
+  notes: "Bench-top crimp tools and continuity tester power."
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.6
+  notes: "Cut-strip-crimp for harness leads including continuity checks."
+notes: "Crimps terminals onto pre-cut wires and performs basic termination/continuity checks. Supports downstream harness assembly."

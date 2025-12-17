@@ -1,0 +1,33 @@
+id: tube_basing_and_sealing_v0
+kind: process
+name: Vacuum tube basing and sealing v0
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: vacuum_tube_subassembly
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: vacuum_tube_sealed
+    qty: 1
+    unit: unit
+requires_ids:
+  - vacuum_pump_station
+  - tube_sealing_torch
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: Vacuum pumping and flame sealing energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Mount base, evacuate, seal-off
+notes: |
+  Final assembly step for vacuum tubes: mount tube to base (socket), evacuate envelope to high vacuum,
+  flame seal the evacuation port. Activates getter if present.
+  Source: docs/paper_reviews/photolithoautotroph_missing_tech.md
+  Critical for achieving and maintaining vacuum inside tube envelope.

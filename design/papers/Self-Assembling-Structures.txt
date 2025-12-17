@@ -1,0 +1,1861 @@
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+IAC-19-D4.1.4x49787
+Steps Toward Self-Assembly of Lunar Structures from Modules of 3D-Printed In-Situ Resources
+Alex Ellerya*, Abdurr Elaskrib
+a
+
+Department of Mechanical & Aerospace Engineering, Carleton University, 1125 Colonel By Drive, Ottawa, ON.
+K1S 5B6, Canada, aellery@mae.carleton.ca
+b
+Department of Mechanical & Aerospace Engineering, Carleton University, 1125 Colonel By Drive, Ottawa, ON.
+K1S 5B6, Canada, AbdurrazagElaskri@cmail.carleton.ca
+* Corresponding Author
+Abstract
+This paper explores the idea of 3D printing entire self-assembling robots – structure, actuators, sensors and
+electronics – from lunar-derivable material. Such a capability would effectively bootstrap the construction of lunar
+bases and other facilities from the Moon itself with the launch of minimal material from Earth. Self-assembly has
+long been viewed as a highly desirable capability for autonomous construction of large space and planetary
+structures. There are two approaches: (i) the adoption of homogeneous modular building blocks that can be
+constructed in large numbers and can configure themselves into an array of different configurations – the cellular
+approach – including self-replicating blocks; (ii) a more practical approach that defines a small set of heterogeneous
+modules that can act as building blocks for constructing more functionally diverse structures such as lunar bases. We
+have focussed on the latter but the technology presented could be readily adapted to the former. In particular, the
+common features of all self-assembling modules are that the modules constitute a structure housing a computercontrolled actuator internally and a reversible latching mechanism externally. We have made significant successful
+steps towards self-assembling systems in which the modules can be manufactured from in-situ resources. We have
+demonstrated a 3D printed DC electric motor in which the only components that were not 3D printed are the wire
+coils. We are however working on the wiring aspect and shall present the challenges in achieving this while
+restricting ourselves to lunar analogue technologies. Indeed, this aspect is crucial to realising the next stage of
+implementing 3D printed computing electronics. We have married our 3D printed motor prototype to a 3D printed
+trigon-type panel developed as part of the trigon self-assembling system concept. The trigon concept underlies a
+modular approach to self-assembling planetary structures such as bases, etc. The 3D printed motorized panel system
+demonstrates that the motor aspect and structural aspects of robotic self-assembling machines are amenable to 3D
+printing. Furthermore, motorised self-assembling systems can be leveraged from local resources. This has significant
+implications for self-assembling systems in space in general.
+Keywords: self-assembly; in-situ resource utilization; 3D-printed electric motors; flat-pack lunar bases
+1. Introduction
+It is desirable that robotic systems should
+automatically design and build other robotic systems
+enabled through the versatility of 3D printing (additive
+manufacturing). Most effort to date has focussed on the
+manufacture of structures through 3D printing. One goal
+of robotic 3D printing is to minimise assembly by 3D
+printing complex electromechanical systems such as
+robotic machines in as few steps as possible. Selfassembling systems are composed of objects that can be
+reconfigured for rapid assembly. 4D-printing introduces
+time to the 3D printing process. Hence, in the goal of
+automatic design and construction of robotic systems,
+little attention has been paid to the automatic
+manufacture of motor elements – to date,
+stereolithographically-fabricated high tolerance 3D
+structures have been printed with cavities and
+mechanical joints for the insertion of prefabricated
+sensors, electronics and actuators to build a simple
+
+IAC-19- D4.1.4x49787
+
+mobile robot [1]. These components have not been 3D
+printed. We have been focussing on the 3D printing of
+electric motors as a necessary next step in the automatic
+manufacture of robotic systems.
+The goal of this work is to 3D print entire selfassembling robots – structure, actuators, sensors and
+electronics. We have demonstrated a 3D printed DC
+electric motor in which the only components that were
+not 3D printed are the wire coils and the motor shaft
+(which shall be printed in a prototype under
+development). We have married our 3D printed motor
+with 3D printed TRIGON panels which are part of the
+TRIGON self-assembling system. The 3D printed
+motorized panel system demonstrates that the motor
+aspect of robotic self-assembling machines is amenable
+to 3D printing.
+2. 3D Printing Electric Motors
+Our electric motor was partially 3D printed by fused
+deposition modelling using a Prusa i3 3D printer.
+
+Page 1 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+Rotary electric motors for general applications offer: (i)
+good speed/torque versus stroke tradeoff; (ii) good
+volumetric compaction; (iii) robustness of performance.
+We selected a brushed DC electric motor as the test
+motor configuration as it is the most fundamental motor
+design from which all others are derived. As in all DC
+electric motors, it comprised four main components –
+rotor, stator, wiring and brush/commutator assembly.
+Both rotor and stator were 3D printed from
+commercially available ProtoPasta comprising 50% by
+mass magnetic iron particles in 50% PLA (polylactic
+acid) matrix (Fig 1). Previously built motor models
+indicated that heavier metal loading of 50% by volume
+increased the inertia of the rotor which was not offset by
+the increased magnetically induced torque yielding a
+reduction in rotation speed performance [2]. Energy
+losses in magnetic material are due to: (i) hysteresis loss
+which can be reduced by low coercivity; (ii) eddy
+current loss which can be reduced by low electrical
+conductivity and incorporating laminations; (iii)
+anomalous losses which can be reduced by using
+homogeneous material to permit magnetic domain
+migration. For these reasons, magnetic particles
+embedded in an insulating matrix ensure that eddy
+currents are minimised while magnetic field generation
+and threading is maximised. Both rotor and stator
+magnets were wire wound and the rotor windings were
+connected to the commutator through wire brushes
+using 24 MAG copper wire. This motor then constitutes
+a series wound self-excited DC motor. The commutator
+was a simple set of four thin contact copper sheets. The
+rotor was wound with 70 turns per pole while the stator
+was wound with 100 turns per pole. The main structure
+and commutator core were 3D printed from ABS
+(acrylonitrile butadiene styrene) which is more rigid
+than PLA. The only non-3D printed parts were the
+copper wire coils and the steel motor shaft (the thicker
+output shaft was 3D printed PLA). The motor was
+connected to a 30 Vdc power supply.
+
+IAC-19- D4.1.4x49787
+
+Fig. 1. DC electric motors with 3D printed stator and
+rotor electromagnets
+We have been developing a photolithographicallyprinted wiring pattern to replace the copper wire which
+has been demonstrated in a pancake “air” motor
+configuration (Fig 2) but it has yet to be integrated into
+the 3D printed DC motor model. The four-quadrant
+design minimises the number of soldering points to four
+compared with a traditional radial pattern of pancake
+motors which require not far short of 100 solder points
+depending on the size of the rotor cross section. An
+interesting question that we shall not explore here
+concerns the trade between using a wire winder against
+photolithography equipment: a simple wire coil winding
+machine can be made from a rotary knife sharpener and
+a circular piece with three right-angle brackets for
+holding the coil form in place [3]. Another simple coil
+winder can be constructed from Meccano [4]. A more
+complex universal coil winding machine can also be
+readily constructed [5].
+
+Page 2 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+Fig. 2. Printed coil pattern and its implementation in
+a pancake motor
+We have been exploring the use of 3D printed
+permanent magnets as the stators (manufactured by Oak
+Ridge National Laboratory) in our 3D printed motor,
+but they have yet to be integrated. Once this has been
+achieved, it would represent a fully 3D printed DC
+electric motor. Furthermore, to increase the volumetric
+performance of the motor, we shall be replacing the soft
+magnet closed stator with an open permanent magnet of
+3D printed NeFeB from Oak Ridge National Laboratory
+(Fig 3).
+
+Fig. 3. 3D printed permanent stator magnet
+However, these developments have yet to be
+integrated into a full motor assembly but are in progress.
+3. TRIGON Self-Assembling Panel System
+
+IAC-19- D4.1.4x49787
+
+Self-assembly is the process where components
+automatically assemble themselves into specific
+configurations. The self-reconfigurable machine
+comprises a number of mechanical units (commonly
+homogeneous) which can connect to each other to alter
+their morphology and indulge in self-repair. Selfassembly of modular components provides robustness,
+reliability, reconfigurability, reusability and ease of
+development. One thing many self-assembling and
+reconfigurable systems have in common are either
+electromagnetic joining and/or motorised actuation.
+Rather than developing a 3D printed motor in vacuo, we
+have coupled the 3D printed motor concept with
+structural panelling as an example of reconfigurability
+with an extraterrestrial application. In general, the
+determination of the minimum number of tile types that
+can be assembled into a given shape (minimum tile set
+problem) is NP-hard, there are polynomial time
+solutions under certain constraints [6]. Furthermore, the
+assembly time can be minimised through partial
+ordering. We assume here that the number of panel is
+pre-determined by design. Assembly tasks require the
+mating of parts subject to contact forces and may be
+characterised by positional entropy as a measure of
+uncertainty in part position and orientation [7]. Part
+entropy can be reduced through fixtures, grippers and
+sensing. In a self-assembling system of modules, it is
+generally assumed that the modules are homogeneous
+and interconnect with each other using actuators. In flatpack unfolding systems, the flat-pack configuration
+reduces part entropy by structuring the environment and
+acting as combined fixture/gripper with sensors are
+limited to motor sensors.
+An example of this is PETSAT, a satellite concept
+based on a number of subsystem panels – onboard
+computer panel, battery panel, communications panel,
+attitude control panel and propulsion panel – that are
+assembled through plug-in connectors to form an
+integrated spacecraft [8]. Each panel has a standardised
+structural and thermal design (heat pipe with graphite
+insulation) while the interface provides reliable
+mechanical latching, one rotational joint/panel,
+electrical (power and data) interfaces (such as CAN bus)
+and thermal coupling. Multiple panels can be assembled
+into different spacecraft configurations.
+However, we have been focussed on 3D printing the
+TRIGON (transformable robotic infrastructuregenerating object network) panel system, a modular
+robotic construction system capable of self-assembling
+into trusses, domes, habitats, vehicles, factories and a
+variety of other structures (Fig 5) [9]. It is a modular
+robotic construction system comprising an adaptable
+kit-of-parts to realise the self-assembly of multiple
+habitat, rover and hybrid mobitat designs [10,11]. The
+TRIGON system is a panel-based self-assembly system
+in which each panel has motors integrated into each
+
+Page 3 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+hinge on its edges linking it to other panels. The
+TRIGON system is a versatile self-assembly concept.
+Motors are integrated into hinges along panel edges
+with an offset so any two linked panels can be rotated
+through a full 0-360o range [12]. TRIGON panels are
+polygonal and designed to self-assemble from a stack of
+partially connected panels. The panels can
+accommodate payloads at the centre. Most selfassembling systems may be applied to a set of class 1
+mobile habitats as a transition to class 2 habitats. Here,
+we consider class 3 habitats constructed from selfassembling panels.
+There are two panel types, triangle and square
+panels, that can self-assemble into a variety of
+structures. We have been focussing on a dual set of
+linked motorised square TRIGON panels with an offset
+3D printed motor. Our TRIGON panel however are
+much smaller versions than the full-sized version for
+demonstration purposes. The 3D printed square
+TRIGON panels and 1:27 reducing gears are
+constructed from PLA (Fig 4).
+
+Fig. 4. 3D printed hinged square TRIGON panels
+and reduction gear
+The hinged TRIGON panels and reduction gear were
+connected to the motor assembly (Fig 5) and
+successfully demonstrated opening and closing of the
+panel. Although a simple demonstration, this indicates
+that a complete motorized self-deployment system can
+be 3D printed using fused deposition modelling of PLA
+and derivatives thereof (less shaft and wiring).
+
+Fig. 5. 3D printed motorized hinged TRIGON panel
+assembly
+
+IAC-19- D4.1.4x49787
+
+TRIGON panels are designed as flat-packs that can
+construct 3D enclosure in two ways: (i) unfolding from
+pre-configured linkages with other panels from a
+compact stowed configuration; (ii) self-assembly where
+an integrated manipulator picks and places panels
+together for linking. It is the latter capability that
+differentiates TRIGON from most flat-pack concepts.
+The most flexible configuration involves the adoption of
+panel connector “arms” on each edge which act as
+motorized brackets that link two panels together. A each
+edge, a pair of connector arms act as manipulators to
+grapple neighbouring panel. They also possess sensors
+and controllers to permit sophisticated motion. The
+integrated motors from each panel operate in parallel to
+lift either panel with respect to the other. These grasping
+latches at the panel edges latch onto neighbouring
+panels and roll over the existing structure edge-overedge. Hence, TRIGON panels can roll end-over-end to
+relocate into a growing structure of any arbitrary
+configuration [13]. However, the assembly of m parts
+by a manipulator of n degrees of freedom generates a
+configuration space of m+n degrees of freedom, i.e.
+assembly requires a path search through the m+n
+dimensional space.
+Further
+development
+would
+involve
+the
+incorporation of integrated connector manipulator arms
+to deploy the TRIGON panels. We have yet to
+implement these more complex and challenging
+configurations
+necessary
+for
+self-assembly.
+Nevertheless, the deployment of 3D printed drive
+motors with the panels demonstrates that these more
+complex assemblies are achievable in the near term.
+Potentially, in the long-term, TRIGON panels could be
+deployed to construct a cassette factory manufacturing
+cell implementing 3D printing [14]. This would
+represent a step towards a self-replicating machine [15]
+beyond current state-of-the-art [16].
+Our approach has implications for automated
+assembly of 3D structures from 2D flat-packs. Origami
+techniques may be employed to create 3D shapes by
+folding 2D sheets in different ways. Origami is the art
+of folding a flat sheet of paper into a 3D sculpture
+through folding but no cutting. The number of creases is
+limited and the most iconic origami model is the
+Japanese paper crane. The two basic folds are the
+valley-fold in which a sheet is folded upwards into a
+“V” with the crease at the bottom and the mountain-fold
+in a sheet is folded downwards into an “A” with the
+crease at the top [17]. All other folds are variations on
+these two. Folding in conjunction with cutting can form
+almost any sculpture. Miura-ori patterns combine valley
+and mountain folds to compress a large area sheet
+divided into parallelogram cells into a compact volume.
+The Miura map is a rigid fold that may be adopted to
+deploy large solar arrays.
+
+Page 4 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+This was demonstrated on the Japanese Space Flyer
+Unit (1995). Origami may be used to fabricate selffolding machines such as demonstrated with a crawling
+robot initially as a flat sheet with embedded resistive
+circuits to activate elastic flexures of shape memory
+polymer around thinned hinges [18]. Once folding has
+occurred, the hinge is cooled and the polymer hardens
+into position. Locomotion was enabled by two eight-bar
+linkage chassis, each driven by a single actuator to
+actuate forward and aft legs. Millimetre-scale robots are
+ideally suited to the combination of photolithographic
+(additive) printing, laser (subtractive) machining and
+origami
+construction
+methods
+[19].
+Soft
+photolithography is used to pattern a photoresist which
+acts as a mould to create features in a polymer layer.
+Pulsed UV laser machining offers spot sizes ~1-10 μm
+with minimal heating damage. Millimetre-scale circuits
+with solder dots and wires on the faces of a polyhedron
+can form the basis of self-assembling multiple
+polyhedra into 3D electrical networks [20].
+A programming language has been developed which
+generates a self-assembly process among agents
+emulating cellular morphogenesis and differentiation to
+generate a pre-defined global shape [21]. Epithelial cells
+differentiate into a wide variety of complex 3D
+structures from a 2D sheet of cells during embryonic
+growth – skin, capillaries, gut, neural tube, etc. A sheet
+of autonomous agents can execute instructions based on
+the local environment with no global coordination and
+only local communication. The 2D sheet can also form
+3D structures through a folding process determined by
+origami axioms automatically compiled from the
+predefined global shape. There are six Huzita origami
+axioms for constructing all folded Euclidean shapes
+from straight line folds: (i) between points P1 and P2,
+we can fold a line between them; (ii) perpendicular
+bisector of line P1P2 folds point P1 onto point P2; (ii)
+bisector of angle between lines L1 and L2 folds L1 onto
+L2; (iv) line perpendicular to line L1 through point P1
+folds L1 onto itself through P1; (v) for points P1 and P2
+and a line L1, we can fold P1 onto L1 passing through
+P2; (vi) for points P1 and P2 and two lines L1 and L2,
+we can fold P1 onto L1 and P2 onto L2. A set of five
+biologically-inspired local primitives defining local
+interactions can be combined to generate global shapes
+– (i) gradients emulate chemical gradients where
+concentration relates distance to the chemical source;
+(ii) neighbourhood query collects information about
+neighbouring agents; (iii) polarity inversion to alter
+initial apex-basal polarity if necessary; (iv) cell-to-cell
+contact permits communication between agents in
+physical contact; (v) flexible folding to contract its apex
+or basal fibres to change the shape of the sheet.
+Complex 3D structures can be self-assembled from
+stacks of 2D panels with motorised joints along the
+folds. The combination of direct ink write assembly
+
+IAC-19- D4.1.4x49787
+
+with wet-folding origami has demonstrated the
+construction of 3D shapes [22]. Metallic, ceramic or
+polymeric ink (in this case, TiH2 particles loaded in an
+organic solvent that is subsequently dried and
+annealled) is extruded through a nozzle with three axis
+motion capability. Partially dried ink retains elasticity
+with E~30-110 MPa permitting folding. The origami
+structure of a crane was constructed in 15 steps as a
+demonstration. Hence, complex geometries can be
+created from origami.
+A
+variation
+of
+folding/unfolding
+is
+contraction/expansion. The crystalline molecule is
+actuated by expansion and contraction of its four faces
+around a central core to simulate muscle behaviour [2325]. It is cubic with connectors to other modules at the
+middle of each face encapsulating five Li batteries for
+power, a microcontroller and support circuitry. They do
+not move or rotate with respect to each other rather than
+moving relative to the complete structure. They move
+linearly in the plane of the modules. Each crystalline
+robot expands to 4 cm on a side from its contracted state
+of 2 cm on a side. Each expansion/contraction is
+activated by three binary actuators. All four faces form
+part of the connection mechanism supported by serial IR
+communications – two faces have active connectors and
+two have passive connection slots to form rigid
+connections. It can be used to create dynamic structures
+with shape-shifting (morphogenesis) capabilities using
+its expansion/contraction mechanism and its connectors
+to bond different bonds. It can realise any 3D cellular
+grid structure and indeed, units can relocate by
+travelling through the volume of the structure. A
+distributed control algorithm based on cellular automata
+(with similarities to hormone-based control) has been
+used to reconfigure the crystal robot into different
+shapes [26]. Telecubes is a cubic module with six
+prismatic degrees of freedom whose sides can expand to
+twice its dimensions similar to the crystal robot but
+expands in all three dimensions rather than in a plane
+[27]. Each of the six faces is driven by a telescoping
+linear actuator and each face has mechanical and
+electrical connectors with magnetic attachment. The
+metamorphic robot system is an extreme version of this
+approach in which the modules were deformable planar
+six-bar linkage modules that can dynamically
+reconfigure themselves individually [28].
+4. Active Connectors Between Modules
+Self-assembly may also be implemented
+through the linking of independent modules. The ability
+to 3D print magnets and magnetic devices – soft
+electromagnets, hard permanent magnets and electric
+motors – are the key components for imparting
+mobility/manipulation/bonding in 3D printed selfassembling systems, offering the prospect for 3D
+printing entire modular robots including their
+
+Page 5 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+mechatronic components (though we do not address 3D
+printing electronics and sensors here). The advantages
+of multi-module reconfigurability from modular units
+include flexibility of implementation, robustness
+through self-repair and low cost through economies of
+scale. Self-assembly occurs at all scales with the
+common requirement that components must be
+sufficiently mobile to interact through relatively weak
+forces but there are two main processes – static selfassembly which exploits configurations with global or
+local equilibrium and dynamic self-assembly which
+dissipates energy to generate quasi-stable patterns
+[29,30]. Although the former is most commonly
+exploited in engineering self-assembly (as here), the
+latter is characteristic of biological self-assembly at the
+molecular level and will become increasingly important
+towards nanoscale miniaturisation at the molecular level
+but even at larger scales random external forcing can be
+useful.
+Assembly of modules requires the adoption of
+standardized fastener bolts in favour of moulded or
+welded structures. Robotic assembly requires grappling
+of two parts and using tools to join them with fasteners
+– in microgravity, solid fixtures are required to align
+parts prior to joining. An alternative approach to repair
+is the addition of plug-in modules. One of the key
+technologies is that each modular unit can make/break
+connections with other units, i.e. the docking interface
+in terms of mechanical strength and stiffness, precision
+of alignment and compliance requirements, power
+limitations and stability. The process of assembly and
+docking requires knowledge of tolerances in relative
+positioning and orientation with a controlled relative
+velocity vector. Most docking fixtures are variations on
+peg-in-hole tasks. Modular robotics evolved from
+quick-change automatic tooling using common
+connection mechanisms. Mechanical connectors should
+be mated/demated robotically which eliminates
+bayonet-style connectors unless a ratchet tool can be
+used. All structural connectors must possess alignment
+features such as alignment pins to ensure correct
+connector orientation with “soft-latch” prior to full
+positive
+locking.
+Robotic
+connector/interface
+mechanisms have four properties: geometry to provide
+simple and rapid self-aligning docking and release,
+latching robustness, stiffness and stability with high
+impact and load strength, power and data transfer, and
+small parts count for easy maintenance [31]. In addition,
+low mass and inertia are essential properties yet retain
+high impact and load strength. The geometry must
+support simple and rapid connection, yet the connection
+should be stiff and not buckle catastrophically with
+overload.
+In self-reconfigurable robots, each module
+should be self-contained and inter-connectable with
+other modules. Modularity and interconnectibility offers
+
+IAC-19- D4.1.4x49787
+
+the opportunity for modular, self-reconfigurable robots
+which may be configured according to their required
+tasks. Tesar & Butler (1989) provide an extensive
+review of robotic mechanical component design [32]:
+although there are six basic joint mechanisms (revolute,
+prismatic, double-revolute universal, cylindrical, balland-socket and planar), all can be represented by
+combinations of 1 DOF revolute and prismatic joints.
+Prismatic joints are rare in space systems, so revolute
+joints are the most general and common form of space
+robotic joint. Standardised joint systems (perhaps dual
+drive for redundancy) with dedicated electronics
+(including encoders, tachometers, torque sensors, motor
+controllers, brakes, signal conditioning, etc), structure
+and standardised interfaces offer the potential for
+modular off-the-shelf designs. Geared motors such as
+harmonic drive gearing are preferred over direct drive
+motors due to their higher torque-weight ratio and lack
+of power requirement at rest. Harmonic drives have
+high accuracy and repeatability, negligible backlash,
+high reduction ratio within a single stage (1:320) and
+high transmission efficiency ~90%. Links should have a
+circular cross-section to minimise biased bending
+stresses and torsional loads. A modular approach has
+been developed which integrated a motor, harmonic
+drive and encoder within a connector link [33].
+Mechanical connections between robotic modules
+should enable direct longitudinal and perpendicular
+connections - each module provided a 45o connection
+scheme relative to the module main axis to provide this
+through 180o rotation relative to the connecting
+modules. There were two forms of motor - large motors
+of near the base with high torque output and smaller
+motors near the wrist with lower torque output. Clearly,
+to reduce the loading on the outboard links, all prime
+movers should be installed at the shoulder, perhaps
+through a series of bevel geared cable drives but such
+approaches suffer from large torsional and longitudinal
+deformations. The wrist also comprised of separate RPY
+joints. A revolute jointed 6 DOF manipulator similar to
+the PUMA 560 was constructed from these modules.
+The addition of another DOF would be readily
+achieved. Such a modular reconfigurable design may be
+optimally configured for a given set of tasks determined
+by workspace, tip velocity/acceleration, maximum tip
+deflection and external forces/moments on the tip. An
+early multipurpose high load precision connector was
+for the nuclear industry (Westinghouse) to enable 6
+DOF modular maintenance robots to be built manually –
+the connector was a precision-fit quick-disconnect unit
+assembled through a single turn of a threaded collar
+with up to 20 O-ring based hydraulic seals and 100
+electrical line connectors [34].
+Active connectors are new innovations which
+provide electromechanical connections rather than
+purely mechanical connections. The latch should require
+
+Page 6 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+low power during latching and unlatching but not
+require power during its static state. The latch should be
+disconnectable from both sides which suggests a
+genderless connection scheme. The DRAGON
+connector was developed for modular self-reconfiguring
+robots has the ability to self-align and has a high
+strength-to-weight ratio [35]. It comprises of three
+components:
+(i)
+the guide shaped as two funnels and two
+mating cones to align the connectors on
+touching capable of correcting 45o offsets
+and 20% diameter offset
+(ii)
+the thin Al outer shell to take the load
+(iii)
+the steel latching spring blade inside its
+cavity within the inside of the shell to keep
+the connectors connected
+The spring expands against the inside of the shell of
+the mated connector to lock it in place. It is actuated by
+a shape memory alloy wire along the inside of the
+spring which closes the spring with a force of 0.3 N to
+release the mating connector. Delatching may also be
+achieved by inserting a screw into one of four threaded
+holes in the shell to compress the spring. Two IR
+emitters within each guiding cone can act as beacons for
+docking and two IR receivers at the vertices of the
+funnels provide the basis for optically isolated electrical
+connections. Within the connector, 12 thick springloaded copper contacts provide a power conduit. The
+spring has a shear buckling stress of:
+
+(
+
+)
+
+ = 12k(1−E) ( bt )
+s
+
+2
+
+2
+
+2
+
+where ks=buckling coefficient>5.5, t=spring
+thickness, b=spring width, E=Young’s modulus,
+=Poisson’s constant.
+The ACOR (active connector for robotic systems)
+comprises a plug and receptacle containing many
+flexible lamellae to provide the connection [36]. A
+shape memory alloy actuator moves the lamellae ends to
+control connection/disconnection. The lamellae are
+pushed together to latch. Connection can be controlled
+from both plug and/or receptacle side. ACOR can
+transmit axial/shear forces and torques. All ACOR
+connectors possess both a female receptacle and a male
+plug side-by-side which provide the mechanical and
+electrical connection. The male lamellae form a
+cylindrical ring around the male pin. A shape memory
+alloy wrapped around the lamellae when activated
+constricts the lamellae towards the centreline, thereby
+releasing the connection. The female receptacle for the
+pin also includes female lamellae in a cylindrical ring
+around the female receptacle. A shape memory alloy
+wrapped around the lamellae when activated releases
+the lamellae. When connected, the pin is surrounded by
+the female pins to provide shear strength. The male and
+female lamellae interconnect during engagement
+
+IAC-19- D4.1.4x49787
+
+through their angled shoulders at the ends of the
+lamellae. Either the male or the female actuators may be
+activated to release the connection. The male pin may
+be constructed from conductive material to provide
+electrical power connection. Alternatively, the outer
+male and inner female lamellae may be conductive to
+provide electrical data connection. A universal
+connector comprising side-by-side male and female
+components provides the basis for exact alignment of
+genderless connectors.
+5. Robotic Self-Assembling Systems
+Self-propelled macroscopic self-assembling
+systems constitute mobile robots which have higher
+potential utility such as CEBOT, PolyBot, CONRO, MTRAN, Swarm-bot, fractum and Super mechanocolony. These involve single general-purpose modules
+that can be adapted for all functions through selfassembly albeit at a cost in hardware efficiency [37].
+Reconfigurable robotic systems can be classified into
+three architecture – lattice architectures with modules
+arranged into a cubic or hexagonal grid, chain/tree
+architectures where modules are connected serially, and
+hybrid chain/lattice architectures [38]. These
+architectures
+may
+be
+reconfigured
+either
+deterministically or stochastically. Reconfigurable
+robots comprise heterogeneous modules (a small variety
+of structural link and motorised joint modules) that are
+premised on mechanical, electrical, data and power
+interfaces
+[39-42].
+For
+most
+reconfigurable
+manipulators, a heterogeneous set of modules includes
+actuator-driven and unpowered (prismatic and revolute)
+joints, (but all, like homogeneous modules, are equipped
+with
+common
+joint
+encoders,
+tachometers,
+accelerometers, microcontroller board, CAN bus
+network and electronic interfaces) [43]. The powered
+modules, in common with homogeneous modules,
+incorporate at least one DC motor, amplifier, gearing
+and brake. SMA actuators are typically used to open
+latches/connectors.
+We briefly review some select activities in the
+broad field of self-assembly with particular emphasis on
+relevant actuation mechanisms that illustrate the value
+of 3D printing electric motors and magnetic devices.
+Self-assembly of millimetre-scale components subjected
+to random shaking using magnetic forces from
+permanent micromagnets has been demonstrated in a
+liquid medium [44]. The permanent SmCo and NdFeB
+micromagnets were 50-150 μm thick square, oval stripe,
+triangle and arrowhead shaped layers embedded into
+silicon substrates. Similarly, self-assembly of 3D
+objects such as a 3D conformed electrical circuit from
+elastomeric sheets embossed with magnetic dipole
+patterns has been simulated [45]. A flat projection of a
+sphere represented by a series of linked lenticular
+shapes (like orange peels) or a radial array of lenticular
+
+Page 7 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+shapes (like a flower) magnetised into a magnetic dipole
+form a sphere. The magnets were mounted onto the
+sharp ends of the lenticules and a thin wire run between
+them to form a soft dipole magnet. The balance of
+mechanical and magnetic forces determined the shape
+and stability of the 3D structure. In general,
+macroscopic self-assembly requires external propulsion
+but this imposes a power penalty compared with
+environmentally-supplied movement in microscopic
+self-assembly [46,47]. Environment-supplied movement
+to macroscopic self-assembly tends to have limited
+practical utility such as artificially-agitated blocks, e.g.
+Penrose’s template-based tiles [48]. As a development
+of this, self-reconfiguration of PCB-based units fitted
+with electromagnets for bonding has been achieved
+passively through Brownian motion implemented
+through a shaker table [49].
+We describe only a few of the large number of
+the “yet another modular robot” systems that represent
+more sophisticated self-assembling systems. The use of
+artificial modular units which may self-reconfigure into
+larger and adaptable structures are generally of two
+types – chain/tree architectures which form serial
+topologies and lattice architectures which form cubical
+or dodecahedral grids [50,51]. They offer the
+adaptability and robustness through reconfigurability
+and self-repair [52]. There are only three regular
+polyhedral shapes that can construct arbitrary spacefilling shapes – the cube and the dodecahedron – which
+provide maximum internal volume for any given surface
+area. The metamorphic Proteo assembly uses identical
+rhombic dodecahedral modules that can assemble into
+any overall topology including branched structures for
+different tasks [53]. Each module implements a finite
+state machine with limited memory while
+communication is limited to their immediate
+neighbours. They alter shape by rolling relative to each
+other’s outer surfaces according to pheromone trails. A
+cubic structure is simpler and is commonly adopted for
+reconfigurable robotic modules from which arbitrary
+structures can be built.
+CEBOT (cellular robot) was the first modular
+reconfigurable robot to adapt its kinematic configuration
+for specific tasks connected through pairs of
+hook/receptor interfaces that attach/detach [54-57]. It
+comprised of interconnected separable robotic modules
+(cells) which could dock with each other in different
+configurations. Each heterogeneous cell type performed
+a specialised function such as mobile modules with
+wheels, rotary and telescopic joint modules for
+manipulators and a hand module for end effectors but
+all had the same dimensions of width 90 mm by height
+50 mm (mass range 1.1-1.3 kg). The mobile cell
+performed transport and alignment functions using
+infrared diode and ultrasonic sensors for module
+detection. Each module incorporated its own motor and
+
+IAC-19- D4.1.4x49787
+
+processor but could communicate across modules.
+CEBOT could dynamically configure its optimal
+morphology for a given task defined by: (i) end effector
+position/orientation coordinates; (ii) end effector
+force/torque requirements; (iii) position accuracy; (iv)
+manipulator base coordinates; (v) end effector type; (vi)
+workspace constraints. They can be dynamically
+configured autonomously using simple rules whilst
+cooperatively negotiating with each other [58]. CEBOT
+used a genetic knowledge production algorithm to
+implement its distributed intelligence of knowledge cell
+units [59]. Each knowledge cell implemented a single
+task so that a network of knowledge cells represented a
+task plan. The knowledge network implemented a
+synaptic weighting matrix connecting knowledge cells,
+so any task may be represented as a task weighting
+matrix.
+The
+rapidly
+reconfigurable
+modular
+manipulator system (RMMS) configures itself into
+different special purpose manipulators from a set of
+interchangeable link and joint modules of various sizes
+and performances [60-62]. Each module is selfcontained including DC torque motor, brake, harmonic
+drive gearing, resolver/tachometer sensors and sensor
+interface, microcontroller, motor amplifier, RS-485 and
+RS-232 drivers, ADC/DAC circuits and VME-based
+communication interface using a message-passing
+protocol. Control of both power and data is distributed
+through each module to minimise wiring connections in
+6 wires that passes through the hollow motor shaft.
+There are four types of module – manipulator base, link
+module, a set of pivot modules (for perpendicular offset
+configurations) and a rotary joint module (for parallel
+inline configurations). The base and link modules have
+no degrees of freedom while the joint modules have one
+degree of freedom. The quick-coupling mechanism
+provides secure mechanical connection between
+modules with a locking ring collar at the male end with
+keyed flanges on male/female ends for accurate
+alignment. The locking ring drives a cam to grip the
+mating flanges with gripping fingers. Within the locking
+ring is a modular male connector with 30 electrical pins
+that fit into corresponding female connectors for power
+and electronic signals. Infrared LEDs provide alignment
+feedback. A guide collar with six alignment pins
+prevented damage. From these modules, a large number
+of configurations can be constructed due to its
+integrated quick-coupling connectors. Its modular taskbased software determines the optimal kinematic
+structure defined as a joint velocity trajectory for a
+given task over a Cartesian path – transformation via the
+Moore-Penrose pseudo-inverse is subject to kinematic
+limits, singularity avoidance, collision avoidance, and
+energy minimisation. The genetic algorithm was used to
+search for solutions subject to specific design
+knowledge constraints. Assembly of the control
+
+Page 8 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+software re-uses reconfigurable software components
+from a software library based on the DenavitHartenburg matrix kinematic convention with inverse
+solutions being computed numerically. The RMMS may
+be constructed using another manipulator. RMMS was
+proposed as a fault tolerant satellite docking system
+[63].
+CONRO is a cubic homogeneous module with
+three DOF that can autonomously connect with identical
+modules with connectors on each face to form different
+configurations of metamorphic robots such as snake-like
+chains, tree-like multiple-leg locomotion, track-like
+loops and multiple sub-robots [64-66]. Each selfcontained module incorporated a microcontroller with
+ADC, four infrared LED/sensors for communication,
+onboard Li batteries, two servomotors and four
+connectors. The two motors in the main body of the
+module give two degrees of freedom for 90o pitch and
+30o yaw rotations (to act as legs). CONRO exhibited
+hermaphrodite docking pins at each end with a springloaded latch to lock the pins and receptacles with shape
+memory alloy actuators to release the pins. The docking
+pins have a lateral groove limiting connection between
+modules in the same plane. Compliance in the
+connection mechanism is essential to accommodate
+alignment uncertainties which is accommodated in the
+genderless SINGO connector for the SuperBot
+successor to CONRO [67]. CONRO exhibited
+bidirectional infrared transmitter/receiver interfaces for
+communication between modules.
+PolyBot is similar in concept to CONRO as a
+homogeneous modular approach to reconfigurable robot
+structures [68]. PolyBot is a chain-based reconfigurable
+robot system in which each cubic module has one DOF
+actuation enabling it to link up into snake-like, legged
+and tread-based locomotion systems. Each cubic
+module comprises a joint with a DC motor with
+harmonic drive for one rotary DOF with multiple
+sensors – joint encoder, force/torque sensors, contact
+and proximity sensors – and embedded PowerPC
+processor communicating over a CAN-bus. Two
+opposing connection plates either side of the joint
+include hermaphrodite mechanical/electrical connectors
+comprised of four grooved pins and four chamfered
+receptacles
+with
+LED/photodiodes
+for
+position/orientation feedback during docking. A latch of
+shape memory alloy holds modules together (passing
+current opens the latch) while pins/holes provide
+stability. Power is supplied via a tether. The G3 moduke
+is smaller than the G2 module due to the employment of
+a pancake motor with harmonic drive. Polybot has
+constructed a manipulator from 6 PolyBot G3 modules.
+Both CONRO and Polybot are chain-type selfreconfigurable robot constructed from connectable
+modules which can form snakes, hexapod legs
+emanating from a spine, and loops for locomotion
+
+IAC-19- D4.1.4x49787
+
+[69,70] with potential space applications [71]. Genetic
+algorithms may be used to search through a small
+inventory of components (power, link, joint,
+foot/gripper modules) to determine serial/parallel
+kinematic configurations to realize specific tasks using
+constraining design rules to reduce the search space
+[72,73]. The configuration search problem is NPcomplete so a hierarchical decomposition approach is
+favoured to provide further constraints [74].
+MTRAN (modular transformer) is a distributed
+reconfigurable system of homogeneous two DOF joint
+modules has been developed which can be configured as
+a hybrid modular chain and lattice system [75-78]. Each
+module is constructed from two cubic sections
+connected by a servo-motor powered link whilst
+incorporating a microprocessor, power supply circuit,
+digital bus communications and pulse generator circuit.
+Each cube can rotate by 180o about the axis joining the
+link and cube. The three cubic faces comprise passive
+connection plates using permanent rare earth magnets.
+The magnetic force acts against a nonlinear spring and
+is slightly larger than the spring force. Active
+detachment is enabled by two antagonistic shape
+memory alloy coil torsion springs for high power-toweight ratios which exceeds the force difference [79].
+Electrical connection is enabled by two pairs of
+electrodes for power and one electrode for serial
+communications. Reconfiguration is achieved by
+detaching the module, rotating the link and reconnecting
+to a neighbouring module.
+SuperBot is a set of modular 3 DOF cubical
+robots based on earlier MTRAN modules capable of
+self-reconfigurability [80]. SuperBot modules comprise
+two cubical units connected by a link with a central roll
+joint. Each cube was attached to one end of the link
+through yaw and pitch joints respectively. Each cube
+included electronics and batteries. Each cube had six
+genderless connectors, one on each side, which
+transmitted power and data – they required sensing and
+maintenance of tension while docked yet permit simple
+release. Each cube included a microcontroller for the
+sensors, motors, communications, power and docking. It
+adopted a digital hormone control system developed for
+CONRO to reconfigure itself. Robotic enzymes
+represent an alternative in which the robotic enzyme is a
+simulated module of two units linked together [81]. It
+has active sites (connectors) which it attempts to attach
+to other modules through movements in a simulated
+environment.
+Tetrabot was a modular and reconfigurable
+robotic system offering reusability and reconfiguration
+of the same modular units [82]. CORBA (common
+object request broker architecture) provided the medium
+of control for the distributed network of modules.
+Tetrabot used three basic mechanical parts in which a
+control system defined the connectivity of parts and
+
+Page 9 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+their kinematic structure. It was based on a multi-link
+spherical joint which allowed the interconnection of
+truss structures with an arbitrary number of struts.
+I-Cubes is a modular self-reconfigurable
+robotic system that comprised of cubic mechatronic
+modules with a three DOF manipulator for relative
+position/orientation
+of
+the
+modules
+for
+attachment/detachment to other modules [83]. The link
+has a handle configuration with a short length d/2
+perpendicular to one cube face which bends into a long
+length of 2d and then bends into a short length d/2
+parallel to the first short length where d=length of side
+of a cube. The actuators are at: (i) the base of the first
+link with a 360o axial rotation axis along its length, (ii) a
+270o elbow pitch halfway along the length of the middle
+long length a distance d from the inboard and outboard
+bends; (iii) the end of the final link with a 360 o axial
+rotation axis along its length. The final link permits a
+cross-shaped twist-and-lock attachment to any cube
+face. Attachment provides mechanical, electrical and
+data interfacing. Much of the mechanical elements of
+the cubes and links were 3D printed. The I-Cubes form
+a dynamic graph where the links are edges and the
+cubes are nodes.
+The 4 DOF Molecule robot unit comprises two
+atoms linked by a rigid right-angled connection (bond)
+similar to MTRAN [84,85]. Each atom has five intermolecular connection points and two motorised degrees
+of freedom, one to rotate 180o relative to its bond axis
+and one to rotate 180o perpendicular to its bond axis. A
+gripper mechanism links the molecules together to
+replace the earlier electromagnets. Each molecule
+incorporates a microprocessor and motor driver circuits
+adopting RS-485 serial connections. Although the Lshaped molecule robot cannot be packed as efficiently
+as cube designs, they can configure into 3D structures as
+well as 2D tilings (tilings can be stacked) by moving
+over each other on the 3D substrate structure. They can
+also form locomotive or manipulative structures [86].
+The basic fractum unit requires a minimum of
+three re-usable connectors, a mechanism of
+communication between neighbouring units, each unit
+must have an energy source, and for self-repair final
+configuration information must be stored in a
+distributed fashion [87,88]. Each 2D fractum comprises
+six connecting arms – three male and three female –
+each equipped with a male electromagnet and female
+permanent magnets. The fractum module housing an
+onboard microprocessor can connect and disconnect to
+other modules autonomously to self-assemble into
+different configurations. The polarity of the three
+electromagnets determines connection/disconnection so
+it can form up to six bonds with other units allowing 12
+possible connection types [89,90]. The distance between
+two connection types is defined by the number of links
+in the shortest path between two nodes. Each module
+
+IAC-19- D4.1.4x49787
+
+can connect with up to three other modules and
+coordination between modules is mediated through an
+infrared optical communications channel. The fractum
+comprised three layers, each layer comprising three
+fixed arms 120o apart mounted onto intervening
+bearings to ensure free spinning capability. Top and
+bottom layers incorporated three aligned permanent
+magnets on the arms paired together top and bottom.
+The middle layer has the same shape with three
+electromagnets mounted in each arm but oriented at a
+yaw angle of 60o with respect to the top and bottom
+layers. Control of the electromagnet polarity through Hbridge circuits determines either attractive or repulsive
+linkage to another fractum unit. Formations are changed
+by switching the electromagnets that permit morphing
+shapes.
+Programmable parts involve modules subjected
+to random perturbations on a 2D air table so that they
+can collide and stick through switchable electromagnets
+[91]. Each programmable part comprises an equilateral
+triangle chassis with an actuated magnetic latch (to
+rotate 180o to generate attractive or repulsive polarity)
+and an infrared transceiver on each side, all supported
+by a microcontroller and control circuitry.
+Reconfigurable robotics involves varying the kinematic
+configuration of motors, sensors and control electronics
+– this yields flexibility in configurations of vehicle
+chassis, manipulator kinematics, end-effector/tooling,
+onboard computing and power systems.
+6. Control of Self-Assembly
+Challenges in assembling modular components into
+kinematic structures revolve around kinematic and
+dynamic analysis to match the optimal structure to the
+required task [92]. This requires consideration of
+multiple metrics such as manipulability measure,
+kinematic error metrics, torque limits, joint excursions,
+etc [93]. Modular robotic manipulator systems comprise
+standardised link and joint modules that may be
+assembled into different kinematic configurations
+optimally designed for a specific task. Joint modules
+may be revolute, prismatic, cylindrical or screw joints
+that connect to link modules through ports to form a
+kinematic tree. A task may be represented as a series of
+end-effector positions defining a cartesian trajectory.
+Genetic algorithms may be employed to search for an
+optimal assembly configuration for that task based on an
+assembly fitness function quantified as the
+manipulability measure
+assessed
+on an inverse kinematics-based workspace check [94].
+The search space for kinematic design can be pruned
+substantially by applying physical rules to eliminate
+inappropriate solutions [95]: (i) all configurations
+require a power/control module; (ii) modules are
+assembled into serial chains only; (iii) all configurations
+terminate in an end effector; (iv) all modules do not
+
+Page 10 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+need to be used. The genetic algorithm can then be
+applied to search for feasible kinematic assemblies of
+connected modules [96]. The genetic algorithm may
+encode a tree-based representation tested within a
+dynamic simulator environment. An ontogeny – be it
+biological or artificial – constitutes an assembly plan of
+sequential procedures that prescribes how to construct
+an organism by exploiting the physics of its
+environment [97]. A two-level genetic algorithm can
+search for the optimal kinematic configuration including
+revolute/prismatic joint selection, link lengths and total
+number of degrees of freedom from a task specification
+[98]. The upper level GA determines the overall
+topology while the lower level GA determines the
+inverse kinematics solutions based on the DenavitHartenburg matrix representation. The fitness function
+may be expanded to incorporate six criteria:
+where
+wi=weights,
+=reachability of end effector to task, li=length of link i,
+dj=distance of task j from base, n=maximum number of
+DOF, m=number of subtasks,
+to
+
+goal,
+
+=linear distance
+
+=angular
+=penalty
+
+distance
+
+to
+
+goal,
+
+function,
+
+=collision penalty if obstacle exists within a safe area
+otherwise cij=0, dij=distance of link i from obstacle j,
+si=security
+distance,
+o=number of obstacles,
+=minimum complexity measure, ri=1 if
+joint i is R but 0 otherwise, e=end effector distance from
+base,
+=dexterity measure,
+=manipulability index. In CEBOT for example, the
+optimal minimised criteria for the assembled
+configuration was defined as [99]:
+
+where wi=weights, m=total number of task points j,
+ej=position error at task j as a function of link and joint
+rigidity, Tj=required end effector force/torque at task j
+to support payload and outboard links, D(j+1) drive
+function transformation from task j to j+1, C=cost
+parameter typically total joint torque or motor energy
+consumption. This acted as a performance measure for
+an optimal controller for self-assembly. Task-based
+design is an approach to the design of optimally
+configured manipulators for specific tasks such as Space
+Shuttle tile servicing on-orbit [100]. In swarm-bots,
+neural networks implemented in each s-bot module may
+be evolved to perform integrated sensorimotor
+coordination and decision making [101]. This
+implements a local behaviour-based controller that
+requires no inter-agent communication or coordination.
+Three primitive collective behaviours based on
+measuring distance to neighbours can form arbitrary
+IAC-19- D4.1.4x49787
+
+shapes [102]: (i) edge-following; (ii) gradient formation;
+(iii) localisation. A set of stigmergic if-then rules for
+automated self-assembly from bricks has been simulated
+similar to potential force fields [103]. Artificial
+gradients provide the means for coordination. Simple
+local control rules can generate emergent behaviours to
+grow different global structures according to resulting
+(scent) gradients [104]. Self-assembly may proceed
+hierarchically at multiple levels (nested hierarchy)
+through rule-based interactions of simple modules to
+generate new emergent properties at each level [105].
+Control of reconfigurable modules is generally
+distributed with limited information exchange between
+modules. Market-based communication, interaction and
+coordination of resources and scheduling are based on
+negotiation (auction) through the contract net protocol
+or a variant thereof. Agents typically interact through
+negotiation mediated by the contract net protocol based
+on a call for bid, bid submission and contract award
+[106,107]. The contract net protocol is a simple
+coordination mechanism that has been commonly
+adopted but it has been supplemented for more recent
+market mechanisms, auctions and other trading
+mechanisms. The disadvantages to a market system are
+the complexity of the bidding process and cheating
+through collusion. Vickrey’s auction in which the
+highest bidder wins but pays the second highest bid
+price promotes fairness. The multirobot task allocation
+problem – a variation on the multiple travelling
+salesman problem - is best solved using optimisation
+such as simulated annealling or genetic algorithms over
+a market-based auction approaches such as the contract
+net protocol (in which cooperation is negotiated in a
+bidding process) [108,109].
+Self-assembling robotic configurations from
+homogeneous modules may be controlled through
+several different mechanisms based on some form of
+distribution of information. In the fractum module
+system of self-assembly, diffusive communication
+between units represents the average difference between
+units which forms the basis for self-assembly and selfrepair [110]:
+where
+K=diffusion coefficient, L=leak constant. CONRO and
+SuperBot implemented an adaptive distributed control
+mechanism to provide global control of the kinematic
+configuration through hormone-inspired asynchronous
+message passing between modules for dynamic
+coordination [111,112]. Hormones are characterised by
+having no specific destination by propagating through
+the network with different effects on different receivers.
+Some organisms use hormones for morphallaxis to
+regenerate limbs through self-organisation of remaining
+cells, e.g. lobsters and hydra. The digital hormone
+model is based on the Turing reaction-diffusion
+equation as the basis for chemical morphogenesis. A set
+of differential equations model pattern formation in a
+
+Page 11 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+ring of modules (cells) which communicate through
+hormones (morphogens). The diffusion rate dynamics of
+the ring of i=1,..,n cells are given by:
+dxi
+dt
+
+= f ( xi , y i ) + u( xi +1 − 2 xi + xi −1 )
+
+dyi
+dt
+
+= g ( xi , yi ) + v ( yi +1 − 2 yi + yi −1 )
+
+where xi=concentration of hormone x in cell i,
+yi=concentration of hormone y in cell i, u,v=cell-to-cell
+diffusion
+rate
+of
+x
+and
+y
+hormones,
+f(x,y),g(x,y)=chemical reaction rate increase. According
+to this model, artificial hormones are propagated from
+module to module. The CONRO topological network
+implemented a loop of receiving and sending hormones
+between neighbours and acting on the local instructions
+based on these messages. Hormones are distributed
+messages without a specific destination and trigger
+different actions in different subsystems. It reduces the
+communications cost to O(kn) where n=number of
+modules yet maintains global synchronisation at a local
+level. There are special types of hormones such as probe
+hormones that monitor local connection topography. On
+receipt of a hormone, a module relays it to all its active
+links (except the receiving link) thereby propagating the
+hormone through the network. To ensure that each
+hormone is received only once for each module a stored
+rule-base selects and executes actions determining how
+the module reacts to hormones. Although each module
+possesses the same rule-base local action vary according
+to local topology and internal state. Hormones
+implement actions such as gait control by commanding
+actions and polling sensors. They have a finite lifetime
+after which they become inactive. The use of
+pheromones is not strictly necessary – ants successfully
+build nests from small stones without the use of
+pheromones [113]. In this case, ants respond to the
+density of small grains which act as an attractor thereby
+constructing the nest brick-by-brick. Furthermore, as
+stones accumulate, building accelerates until the nest is
+complete.
+Graph grammars have been proposed for modelling
+the motion of large numbers of particles and their
+mutual interactions – they capture local interaction rules
+for exhibiting specific behaviours for each particle but
+although useful for large numbers of particles does not
+appear to offer great advantages over alternative
+methods [114]. Cellular automata representation has
+been used to control reconfiguration by modelling
+growth from an arbitrarily selected initial seed from a
+random population of modules through a gradient
+descent of artificial chemical concentrations created
+using local communication between neighbouring
+modules [115]. The hormone control approach may be
+combined with artificial embryogenesis both of which
+exhibit diffusion processes to model growth [116].
+Programmable parts are homogeneous modules that
+self-assemble into a global configuration based on local
+
+IAC-19- D4.1.4x49787
+
+“chemical” interactions rules [117]. The interactions
+rules are defined by a graph grammar associated with
+each programmable part that models the logical physics
+of particle bonding (polymerisation) between two
+particles (particles representing each robot module):
+|a…a→b-b (rule 1 - r1– two unbounded particles
+a and a can bind together to form b-b)
+Ф=|a…b→b-c (rule 2 - r2)
+|b…b→c-c (rule 3 – r3)
+The state of the system evolves as a labelled graph
+G=(V,E,L) according to the initial assignment of labels
+a,b,c where V=vertex set of integers to index the
+particles (vertex set represents latching connectors),
+E=edge set of edge pairs from V, and L:V→Σ=labelling
+function that associates a label L(i)єΣ with each particle
+iєV where Σ={a,b,c,…}=set of labels. The final
+assembly is reachable if there a graphical trajectory
+from the initial assembly through the sequential
+application of the interaction rules:
+.
+There is a considerable range of options for controlling
+the self-assembly process in which bio-inspiration plays
+a dominant role.
+7. Applications of Self-Assembly
+A small number of reconfigurable modules can yield
+a fleet of ISRU rovers for different functions at low cost
+and enhanced system reliability but without loss of
+performance. These modules may include actuated
+joints with integrated motors, links which may be
+connected serially or in parallel, a variety of endeffector tooling compatible with a standard wrist plate,
+sensors with dedicated signal processing electronics,
+wheels with integrated motor control units, etc. These
+components may be configured into rover/manipulator
+platforms for different roles. Such configurations must
+be performed autonomously – there must be interface
+modules capable of moving to and manipulating other
+modules. This system could provide the basis of robot
+colonies to perform coordinated functions. Swarm-Bots
+are composed of modular s-bots which are unique in
+adopting two integrated differential tracks with wheels
+(treels) for rough terrain mobility [118,119]. S-bots also
+have a rotational upper chassis turret, a single DOF
+pitch arm and a gripper to attach to another s-bot’s
+turret, a suite of sensors and onboard microprocessor
+implementing a neural network controller and battery.
+An autonomous self-replicating Lego robot comprised
+of six modules in which the replicating robot selfassembles the modules into a growing structure [120].
+Module 1 comprised batteries, touch sensor and contact
+sensor; module 2 comprised state machine and contact
+sensors; module 3 comprised left motor and motor drive
+circuit; module 4 comprised right motor and barcode
+reader; module 5 comprised a relay circuit; and module
+6 comprised a tracking sensor. The robot possessed
+three simple behaviours – forward line-tracking, reverse
+
+Page 12 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+and left turn - to run a circular circuit guided by a line
+around a pre-structured environment with modules
+placed at specific locations. It required both a complex
+set of modules and a structured environment limiting the
+adaptability of the self-assembly scheme. This work was
+akin to a physical instantiation of the low-complexity
+replication without universal construction.
+Both formation flying and self-assembly of
+spacecraft requires high degrees of control. Formation
+flying is reminiscent of many types of animal groupings
+(swarming) which is commonly modelled as a diffusion
+process constrained by repulsive and attractive taxes
+(nominally modelled as a Fokker-Planck equation)
+[121]. On-orbit assembly of large composite spacecraft
+has been considered essential for large modular space
+structures [122]. One example is to employ more
+compact structurally connected versions of ESA’s
+Darwin and NASA’s Terrestrial Planet Finder without
+the need for formation flying [123,124]. Although this
+reduces the interferometric baseline achievable to ~1050m, station keeping issues are eliminated (although
+additional problems such as structural vibration become
+important). Traditionally, this has involved the use of
+astronauts to perform such operations but robotic selfassembly has become feasible using swarm control and
+self-organisation techniques of distributed robotics
+[125].
+The ultimate example of self-reconfiguring robots in
+space for self-assembly of large space structures (such
+as solar power satellites) is the freeflying intelligent
+fibre/rope (FIMER) robot concept that uses a tether
+between two robot freeflyer robots to autonomously
+dock them [126]. The two freeflyers at the ends of the
+tether can be reeled in and out. Each freeflyer unit is a
+complete spacecraft functionally including ion engines
+with a tether winch, reconfigurable connector and
+flexible robot arm for grasping as payloads. The largescale self-assembly process may be controlled through
+the digital hormone model [127]. In FIMER,
+components to be joined broadcast a docking
+requirement signal to which appropriately located
+FIMER(s) respond by grasping the components and
+reeled them together. For fine assembly tasks, positional
+entropy may be used to quantify assembly tasks in terms
+of uncertainty in position/orientation which in turn
+determines contact forces during mating of parts [128].
+Positional entropy is based on the probability
+distribution of parts position/orientation defined by an
+ensemble of repeated assembly tests. Positional entropy
+may be reduced by fine manipulation with sensory
+feedback, jigs and fixtures.
+8. Conclusions
+We have made significant headway in demonstrating
+the feasibility of 3D printed self-assembling robotic
+machines. The key to this is the development of the 3D
+
+IAC-19- D4.1.4x49787
+
+printed electric motor which is near completion. We
+have demonstrated a 3D printed system of the (near) 3D
+printed motor with the TRIGON panel which has the
+versatility to be both self-deploying and selfassembling. Although much remains to be done, we
+conclude that we are well on track without any
+significant showstoppers. The chief limitations in
+homogeneous self-assembling robot modules are in the
+strength of the intermodule bonds (typically magnetic),
+motor torque capabilities and dexterity. This limits
+number of modules that can be lifted in a serial
+configuration and so limits the practical applications of
+reconfigurable robotics. For example, M-TRAN is
+based on a lattice of cubic modules, each of which
+comprises two blocks connected through rotary joint to
+an intervening link [129]. Earlier magnetic connections
+of M-TRAN had been replaced by motor-driven
+mechanical latches. Most of these issues may be
+addressed through modular manipulator approaches by
+introducing heterogeneous modules with a range of
+motor torque capabilities. The 3D printed motor offers
+the prospect of in-situ manufacture of electric motors to
+fit the task considerably widening the applicability of
+reconfigurable robotics.
+Acknowledgements
+The authors would like to thank contributions from
+Scott Howe at the Jet Propulsion Laboratory for CAD
+drawings of TRIGON panels, and Oak Ridge National
+Laboratory, Tennessee USA and National Research
+Council of Canada, Quebec, Canada for a number of 3D
+printed components to our motors.
+References
+[1] De Laurentis K, Mavroidis C, Kong F (2004) “Rapid robot
+[2]
+[3]
+[4]
+[5]
+[6]
+
+[7]
+[8]
+
+[9]
+
+reproduction” IEEE Robotics & Automation Magazine (Jun), pp.
+86-92.
+Elaskri A, Ellery A (2018) “Developing techniques to 3D print
+electric motors” Proc Int Symp Artificial Intelligence Robotics
+and Automation in Space, Madrid, Spain.
+Erwin H (1932) “Simple coil winder: new use for a cheap knife
+sharpener”
+Radio
+World
+(Feb),
+http://www.vintageradio.net/forum/showthread.php?t=52988
+Robinson P (1960) “Simple tuning coil winder” Radio
+Constructor
+(Dec),
+http://www.vintageradio.net/forum/showthread.php?t=52988
+Gingery D (2015) “Universal Coil Winding Machine” David J
+Gingery Publishing
+Adleman L, Cheng Q, Goel A, Huang M-D, Kempe D, de
+Espanes M, Rothemund K (2002) “Combinatorial optimisation
+problems in self-assembly” Proc 34th Annual ACM Symp Theory
+of Computing, Montreal, 23-32
+Sanderson A (1984) “Parts entropy methods for robotic
+assembly system design” Proc Int Conf Robotics & Automation,
+600-608
+Nakasuka S, Sugawara Y, Sahara H, Koyama K, Okada T,
+Kobayashi C (2008) “System design and control aspects of a
+novel satellite concept “panel extension satellite (PETSAT)””
+IFAC Proc 41 (2), pp, 14048-15053.
+Howe A (2007) “Self-assembling modular robotic structures”
+IEEE Robotics & Automation Magazine 14 (4), pp. 26-33.
+
+Page 13 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+[10] Howe S, Gibson I (2006) “MOBITAT2: a mobile habitat based
+
+on the trigon construction system” Proc 2nd Int Space
+Architecture Symp, San Jose, AIAA 2006-7337
+[11] Howe S (2007) “Self-assembling modular robotic structures”
+IEEE Robotics & Automation Magazine 14 (4), 26-33
+[12] Howe A, Gibson I (2006) “Trigon robotic pairs” AIAA Space
+2006 Conference & Exhibition, San Jose, CA, AIAA 2006-7407.
+[13] Howe A, Gibson I (2006) “Trigon panel size optimization
+studies” 2nd International Space Architecture Symp. San Jose,
+CA, AIAA 2006-7328
+[14] Howe A (2006) “Cassette factories and robotic bricks: a
+roadmap for establishing deep space infrastructures” SAE Trans
+J Aerospace, SAE paper no. 2005-01-2911, pp. 330-363.
+[15] Ellery A (2016) “Are self-replicating machines feasible?” AIAA
+J Spacecraft & Rockets 53 (2), pp. 317-327.
+[16] Jones R, Haufe P, Sells E, Iravani P, Olliver V, Palmer C,
+Bowyer A (2011) “RepRap – the replicating rapid prototyper”
+Robotica 29 (Jan), pp. 177-191
+[17] Perks S (2015) “Flat-pack physics” Physics World (Dec), 21-24
+[18] Felton S, Tolley M, Demaine E, Rus D, Wood R (2014)
+“Method for building self-folding machines” Science 345, 644646
+[19] Wood R (2014) “Challenge of manufacturing between macro
+and micro” American Scientist 102 (Mar/Apr), 124-131
+[20] Gracias D, Tien J, Breen T, Hsu C, Whitesides G (2000)
+“Forming electrical networks in three dimensions by selfassembly” Science 289, 1170-1172
+[21] Nagpal R (2002) “Programmable self-assembly using
+biologically-inspired multiagent control” Proc 1st Int Conf
+Autonomous Agents & Multiagent Systems: Part 1, 418-425
+[22] Ahn Y, Shoji D, Hansen C, Hing E, Dunand D, Lewis J (2010)
+“Printed origami structures” Advanced Materials 22, 2251-2254
+[23] Rus D & Vona M (1999) “Self-reconfiguration planning with
+compressible unit modules” Proc IEEE Int Conf Robotics &
+Automation, 2513-2520
+[24] Rus D & Vona M (2000) “Physical implementation of the selfreconfiguring crystalline robot” Proc IEEE Int Conf Robotics &
+Automation, 1726-1733
+[25] Rus D & Vona M (2001) “Crystalline robots: selfreconfiguration with compressible unit modules” Autonomous
+Robots 10, 107-124
+[26] Butler Z, Fitch R, Rus D (2002) “Distributed control for unitcompressible robots: goal recognition, locomotion and splitting”
+IEEE/ASME Trans Mechatronics 7 (4), 418-430
+[27] Suh J, Homans S, Yim M (2002) “Telecubes: mechanical design
+of a module for self-reconfigurable robotics” Proc IEEE Int
+Conf Robotics & Automation, 4095-4101
+[28] Chirikjian G (1994) “Kinematics of a metamorphic robotic
+system” Proc IEEE Int Conf Robotics & Automation, 449-455
+[29] Whitesides G, Grzybowski B (2002) “Self-assembly at all
+scales” Science 295, pp. 2418-2421.
+[30] Whitesides G, Boncheva M (2002) “Beyond molecules: selfassembly of mesoscopic and macroscopic components” Proc
+National Academy Sciences 99 (8), pp. 4769-4774.
+[31] Nilsson M (2002) “Connectors for self-reconfiguring robots”
+IEEE/ASME Trans Mechatronics 7 (4), 473-474
+[32] Tesar D & Butler M (1989) “Generalised modular architectures
+for robot structures” ASME Manufacturing Review 2 (2), 91-118
+[33] Cohen R et al (1992) “Conceptual design of a modular robot”
+Trans ASME J Mechanical Design 114 (Mar), 117-125
+[34] Tesar D & Butler M (1989) “Generalised modular architectures
+for robot structures” ASME Manufacturing Review 2 (2), 91-118
+[35] Nilsson M (2002) “Heavy-duty connectors for self-reconfiguring
+robots” Proc IEEE Int Conf Robotics & Automation, 4071-4076
+[36] Badescu M & Mavroidis C (2003) “Novel active connector for
+modular robotic systems” IEEE/ASME Trans Mechatronics 8
+(3), 342-351
+
+IAC-19- D4.1.4x49787
+
+[37] Sanderson A (1996) “Modular robotics: design and examples”
+Proc IEEE Int Conf Robotics & Automation, pp. 460-466.
+
+[38] Yim M, She W-M, Salemi B, Rus D, Moll M, Lipson H, Klavins
+E, Chirikjian G (2007) “Modular self-reconfigurable robot
+systems” IEEE Robotics & Automation Magazine (Mar), pp. 4352.
+[39] Cohen R, Lipton M, Dai M & Benhabib B (1992) “Conceptual
+design of a modular robot” ASME J Mechanical Design 114
+(Mar), pp. 117-125.
+[40] Paredis C, Brown B, Khosla P (1996) “Rapidly deployable
+manipulator” Proc IEEE Int Conf Robotics & Automation, pp.
+1434-1439.
+[41] Paredis C, Brown H & Khosla P (1997) “Rapidly deployable
+manipulator system” Robotics & Autonomous Systems 21, pp.
+289-304
+[42] Farritor S, Dubowsky S (2001) “On modular design of field
+robotic systems” Autonomous Robots 10, pp. 57-65
+[43] Yim M, White P, Park M, Sastra J (2008) “Modular selfreconfigurable robots” Springer reprint, p. 19-32
+[44] Shetye S, Eskinazi I, Arnold D (2009) “Part-to-part and part-tosubstrate magnetic self-assembly of millimetre scale components
+with angular orientation” Proc 22nd IEEE Int Conf
+Microelectromechanical Systems, 669-672
+[45] Boncheva M, Andreev S, Mahadevan L, Winkleman A,
+Reichman D, Prentiss M, Whitesides S, Whitesides G (2005)
+“Magnetic self-assembly of three-dimensional surfaces from
+planar sheets” Proc National Academy Sciences 102 (11), 39243929
+[46] Esch J (2008) “Introduction to the paper by Gross and Dorigo:
+self-assembly at the macroscopic scale” Proc IEEE 96 (9), 14871489
+[47] Gross R, Dorigo M (2008) “Self-assembly at the macroscopic
+scale” Proc IEEE 96 (9), 1490-1508
+[48] Penrose L (1958) “Mechanics of self-reproduction” Annals of
+Human Genetics 23 (1), 59-72
+[49] White P, Kopanski K, Lipson H (2004) “Stochastic selfreconfigurable cellular robotics” Proc IEEE Int Conf Robotics &
+Automation, 1307499
+[50] Murata S, Kurokawa H, Yoshida E, Tomita K, Kokaji S (1998)
+“3D self-reconfigurable structure” Proc IEEE Int Conf Robotics
+& Automation, 432-439
+[51] Yim M, Shen W-M, Salemi B, Rus D, Moll M, Lipson H,
+Klavins E, Chirikjian G (2007) “Modular self-reconfigurable
+robot systems” IEEE Robotics & Automation Magazine (Mar),
+2-11
+[52] Yim M, Zhang Y, Duff D (2002) “Modular robots” IEEE
+Spectrum (Feb), 30-34
+[53] Bojinov H, Casal A, Hogg T (2002) “Multiagent control of selfreconfigurable robots” Artificial Intelligence 142, 99-120
+[54] Fukuda T & Nakagawa S (1988) “Dynamically reconfigurable
+robotic system” Proc IEEE Int Conf Robotics & Automation,
+1581-1586
+[55] Fukuda T & Kawauchi Y (1990) “Cellular robotic system
+(CEBOT) as one of the realisation of self-organising intelligent
+universal manipulator” Proc IEEE Int Conf Robotics &
+Automation, 662-667
+[56] Fukuda T, Nakagawa S, Kawauchi Y, Buss M (1989) “Structure
+decision method for self-organising robots based on cell
+structures – CEBOT” Proc IEEE Int Conf Robotics &
+Automation, 695-700
+[57] Fukuda T, Ueyama T, Kawauchi Y, Arai F (1992) “Concept of
+cellular robotic system (CEBOT) and basic strategies for its
+realisation” J Computers & Electrical Engineering 18 (1), 11-39
+[58] Ueyama T & Fukuda T (1993) “Self-organisation of cellular
+robots using random walk with simple rules” Proc IEEE Int
+Conf Robotics & Automation, 595-600
+[59] Kawauchi Y, Inaba M, Fukuda T (1992) “Self-organising
+intelligence for cellular robotic system ‘CEBOT’ with genetic
+
+Page 14 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+knowledge production algorithm” Proc IEEE Int Conf Robotics
+& Automation, 813-818
+[60] Paredis C, Brown H, Khosla P (1996) “Rapidly deployable
+manipulator system” Proc IEEE Int Conf Robotics &
+Automation, 1434-1439
+[61] Paredis Cm Brown H, Khosla P (1997) “Rapidly deployable
+manipulator system” Robotics & Autonomous Systems 21, 289304
+[62] Cohen R et al (1992) “Conceptual design of a modular robot”
+Trans ASME J Mechanical Design 114 (Mar), 117-125
+[63] Paredis C & Khosla P (1997) “Agent-based design of fault
+tolerant manipulators for satellite docking” Proc IEEE Int Conf
+Robotics & Automation, 3473-3480
+[64] Castano A, Shen W-M, Will P (2000) “CONRO: towards
+deployable robots with inter-robot metamorphic capabilities”
+Autonomous Robots 8, 309-324
+[65] Castano A & Will P (2000) “Mechanical design of a module for
+reconfigurable robots” Proc IEEE/RSJ Int Conf Intelligent
+Robots & Systems, 2203-2209
+[66] Castano A, Behar A, Will P (2002) “Conro modules for
+reconfigurable robots” IEEE/ASME Trans Mechatronics 7 (4),
+403-409
+[67] Shen W-S (2008) “Self-reconfigurable robots for adaptive and
+multifunctional tasks” Proc 26th Army Science Conf, Florida
+[68] Yim M, Duff D, Roufas K (2000) “PolyBot: a modular
+reconfigurable robot” Proc IEEE Int Conf Robotics &
+Automation, 514-520
+[69] Stoy K, Shen W-M, Will P (2003) “Simple approach to the
+control of locomotion in self-reconfigurable robots” Robotics &
+Autonomous Systems 44, 191-199
+[70] Yim M, Zhang Y, Roufas K, Duff D, Eldershaw C (2002)
+“Connecting and disconnecting for chain self-reconfiguration
+with PolyBot” IEEE/ASME Trans Mechatronics 7 (2), 442-451
+[71] Yim M, Roufas K, Duff D, Zhang Y, Eldershaw C, Homans S
+(2003) “Modular reconfigurable robots in space applications”
+Autonomous Robots 14, 225-237
+[72] Farritor S, Dubowsky S, Rutman N, Cole J (1996) “Systemslevel modular design approach to field robotics” Proc IEEE Int
+Conf Robotics & Automation, 2890-2895
+[73] Farritor S & Dubowsky S (2001) “On modular design of field
+robotic systems” Autonomous Robots 10, 57-65
+[74] Casal A & Yim M (1999) “Self-reconfiguration planning for a
+class of modular robots” Proc SPIE Conf Sensor Fusion &
+Decentralised Control in Robotic Systems II, Boston, Mass,
+3839, 246-257
+[75] Tomita K, Murata S, Yoshida E (2000) “Development of a selfreconfigurable modular robotic system” Proc SPIE Sensor
+Fusion & Decentralised Control in Robotic Systems III (ed.
+McKee G, Schenker P), 4196, 469-476
+[76] Murata S, Yoshida E, Kurokawa H, Tomita K, Kokaji S (2001)
+“Concept of self-reconfigurable modular robotic system”
+Artificial Intelligence in Engineering 15, 383-387
+[77] Murata S, Yoshida E, Kamimura A, Kurokawa H, Tomita K,
+Kokaji S (2002) “M-TRAN: self-reconfigurable modular robotic
+system” IEEE/ASME Trans Mechatronics 7 (4), 431-441
+[78] Murata S & Kurokawa H (2007) “Self-reconfigurable robots”
+IEEE Robotics & Automation Magazine (Mar), 71-78
+[79] Yoshida E, Murata S, Kokaji S, Kamimura A, Tomita K,
+Kurokawa H (2002) “Get back in shape!” IEEE Robotics &
+Automation Magazine (Dec), 54-60
+[80] Salemi B, Moll M, Shen W-M (2006) “SuperBot: a deployable,
+multifunctional modular self-reconfigurable robotic systems”
+Proc IEEE/RSJ Int Conf Intelligent Robots & Systems, 363636411
+[81] Rubenstein M, Krivokon M, Shen W-M (2004) “Robotic
+enzyme-based autonomous self-replication” Proc IEEE/RSJ Int
+Conf Intelligent Robots & Systems 3, 2661-2666
+
+IAC-19- D4.1.4x49787
+
+[82] Sanderson A (1996) “Modular robotics: design and examples”
+Proc IEEE Int Conf Robotics & Automation, 460-466
+
+[83] Unsal C, Kiliccote H, Khosla P (2001) “Modular selfreconfigurable bipartite robotic system: implementation and
+motion planning” Autonomous Robots 10, 23-40
+[84] Rus D, Butler Z, Kotay K, Vona M (2002) “Self-reconfiguring
+robots” Communications ACM 45 (3), 39-45
+[85] Kotay K, Rus D, Vona M, McGray C (1998) “Self-reconfiguring
+robotic molecule” Proc IEEE Int Conf Robotics & Automation,
+424-431
+[86] Kotay K, Rus D (1999) “Locomotion versatility through selfreconfiguration” Robotics & Autonomous Systems 26, 217-232
+[87] Murata S, Kurokawa H, Kokaji S (1994) “Self-assembling
+machine” Proc IEEE Int Conf Robotics & Automation, 441-448
+[88] Tomita K, Murata S, Kurokawa H, Yoshida E, Kokaji S (1999)
+“Self-assembly and self-repair method for a distributed
+mechanical system” IEEE Trans Robotics & Automation 15 (6),
+1035-145
+[89] Yoshida E, Murata S, Tomita K, Kurokawa H, Kokaji S (1999)
+“Experimental study on a self-repairing modular machine”
+Robotics & Autonomous Systems 29, 79-89
+[90] Murata S, Yoshida E, Kurokawa H, Tomita K, Kokaji S (2001)
+“Self-repairing mechanical systems” Autonomous Robots 10, 721
+[91] Klavins E (2007) “Programmable self-assembly” IEEE Control
+Systems Magazine (Aug), 43-56
+[92] Bi Z, Gruver W, Zhang W, Lang S (2006) “Automated
+modelling of modular robotic configurations” Robotics &
+Autonomous Systems 54, 1015-1025
+[93] Bi Z & Zhang W (2001) “Concurrent optimal design of modular
+robotic configuration” J Robotic Systems 18 (2), 77-87
+[94] Chen I-M, Burdick J (1995) “Determining task optimal modular
+robot assembly configurations” Proc IEEE Int Conf Robotics &
+Automation, 132-137
+[95] Farritor S, Dubowsky S (2001) “On modular design of field
+robotic systems” Autonomous Robots 10, 57-65
+[96] Faina A, Bellas F, Orjales F, Souto D, Duro R (2015) “Evolution
+friendly modular architecture to produce feasible robots”
+Robotics & Autonomous Systems 63, 195-205
+[97] Rieffel J, Pollack J (2005) “Automated assembly as situated
+development: using artificial ontogenies to evolve buildable 3D
+objects” Proc 7th Annual Conf Genetic & Evolutionary
+Computation, 99-106
+[98] Chocron O, Bidaud P (1997) “Genetic design of 3D modular
+manipulators” Proc IEEE Int Conf Robotics & Automation, 223228
+[99] Fukuda T, Kawauchi Y (1990) “Cellular robotic system
+(CEBOT) as one of the realisations of self-organising intelligent
+universal manipulator” Proc IEEE Int Conf Robotics &
+Automation, 662-667
+[100]
+Kim J-O, Khosla P (1993) “Design of Space Shuttle tile
+servicing robot: an application of task based kinematic design”
+Proc IEEE Int Conf Robotics & Automation, 867-874
+[101]
+Tuci E, Gross R, Trianni V, Mondada F, Bonani M,
+Dorigo M (2006) “Cooperation through self-assembly in multirobot systems” ACM Trans Autonomous & Adaptive Systems 1
+(2), 115-150
+[102]
+Rubenstein M, Cornejo A, Nagpal (2014) “Programmable
+self-assembly in a thousand-robot swarm” Science 345, 795-799
+[103]
+Grushin A, Reggia J (2008) “Automated design of
+distributed control rules for the self-assembly of prespecified
+artificial structures” Robotics & Autonomous Systems 56, 334359
+[104]
+Bojinov H, Casal A, Hogg T (2000) “Emergent structures
+in modular self-reconfigurable robots” Proc IEEE Int Conf
+Robotics & Automation, 1734-1741
+
+Page 15 of 16
+
+70th International Astronautical Congress (IAC), Washington D.C., United States, 21-25 October 2019.
+Copyright ©2019 by the International Astronautical Federation (IAF). All rights reserved.
+
+[105]
+
+Dorin A, McCormack J (2002) “Self-assembling
+dynamical hierarchies” Artificial Life VIII (ed. Standish, Abbass,
+Bedau), MIT Press, 423-428
+[106]
+Shen W, Norrie D (1999) “Agent-based systems for
+intelligent manufacturing: a state-of-the-art survey” Knowledge
+& Information Systems 1, 129-156
+[107]
+Shen W, Wang L, Hao Q (2006) “Agent-based distributed
+manufacturing process planning and scheduling: a state-of-theart survey” IEEE Trans Systems Man & Cybernetics C:
+Applications & Reviews 36 (4), 563-577
+[108]
+Badreldin M, Hussein A, Khamis A (2013) “Comparative
+study between optimisation and market-based approaches to
+multi-robot task allocation” Advances in Artificial Intelligence,
+article no 256524
+[109]
+Khamis A, Hussein A, Elmogy A (2015) “Multi-robot task
+allocation: a review of the state-of-the-art” Cooperative Robots
+& Sensor Networks (ed. Koubaa A, Martinez-de Dois J), Studies
+in Computational Intelligence 604, 31-51
+[110]
+Yoshida E, Murata S, Tomita K, Kurokawa H, Kokaji S
+(1999) “Experimental study on a self-repairing modular
+machine” Robotics & Autonomous Systems 29, 79-89
+[111]
+Salemi B, Shen W-M, Will P (2001) “Hormone-controlled
+metamorphic robots” Proc IEEE Int Conf Robotics &
+Automation, 4194-4199
+[112]
+Shen W-S, Salemi B, Will B (2002) “Hormone-inspired
+adaptive communication and distributed control for CONRO
+self-reconfigurable robots” IEEE Trans Robotics & Automation
+18 (5), 700-712
+[113]
+Franks N & Deneubourg J-L (1997) “Self-organising nest
+construction in ants: individual worker behaviour and the nest’s
+dynamics” Animal Behaviour 54, 779-796
+[114]
+Klavins E (2007) “Programmable self-assembly” IEEE
+Control Systems Magazine (Aug), 43-56
+[115]
+Stoy K (2006) “Using cellular automata and gradients to
+control self-reconfiguration” Robotics & Autonomous Systems
+54, 135-141
+[116]
+Schmickl T, Thenius R, Strader J, Hamann H, Crailsheim
+K (2011) “Robotic organisms – artificial homeostatic hormone
+system and virtual embryogenesis as examples for adaptive
+reaction-diffusion controllers” Intelligent Robotic Systems
+Workshop – Reconfigurable Modular Robotics: Challenges of
+Mechatronic & Bio-Chemo-Hybrid Systems (ed. Kernbach S,
+Fitch R)
+
+IAC-19- D4.1.4x49787
+
+[117]
+
+Klavins E (2007) “Programmable self-assembly” IEEE
+Control Systems Magazine (Aug), 43-56
+[118]
+Mondada F, Gambardella L, Floreano D, Nolfi S,
+Deneubourg J-L, Dorigo M (2005) “Cooperation of SwarmBots” IEEE Robotics & Automation (Jun), 21-28
+[119]
+Gross R, Dorigo M, Yamakita M (2006) “Self-assembly of
+mobile robots: from swarm-bot to super-mechano colony”
+Intelligent Autonomous Systems 9 (ed. Arai T), IOS Press,
+Tokyo, Japan, 487-496
+[120]
+Lee K, Moses M, Chirikjian G (2008) “Robotic selfreplication in structured and adaptable environments” Int J
+Robotics Research 27 (3-4), 387-401
+[121]
+Okubo A (1986) “Dynamical aspects of animal groupings:
+swarms, schools, flocks and herds” Advances in Biophysics 22,
+1-94
+[122]
+Donahue B (1999) “Self-assembling transfer vehicles for
+human Mars missions” J Spacecraft & Rockets 36 (4), 599-602
+[123]
+Lay O & Blackwood G (?) “Formation flying
+interferometry” reprint
+[124]
+LoBosco D, Blaurock C, Chung S-J, Miller D (2005)
+“Integrated modeling of optical performance for the Terrestrial
+Planet Finder structurally connected interferometer” reprint
+[125]
+Beni G & Wang J (1991) “Theoretical problems for the
+realization of distributed robotic systems” Proc IEEE Int Conf
+Robotics & Automation, 1914-1920
+[126]
+Shen W-M, Will P, Khoshnevis B (2003) “Self-assembly
+in space via self-reconfigurable robots” Proc IEEE Int Conf
+Robotics & Automation, pp. 2516-2521
+[127]
+Shen W-S, Salemi B, Will B (2002) “Hormone-inspired
+adaptive communication and distributed control for CONRO
+self-reconfigurable robots” IEEE Trans Robotics & Automation
+18 (5), pp. 700-712
+[128]
+Sanderson A (1984) “Parts entropy methods for robotic
+assembly system design” Proc IEEE Int Conf Robotics &
+Automation, pp. 600-608
+[129]
+Kurokawa H, Tomita K, Kamimura A, Kokaji S, Hauo T,
+Murata S (2008) “Distributed self-reconfiguration of M-TRAN
+III modular robotic system” Int J Robotics Research 27 (3-4),
+373-386
+
+Page 16 of 16
+
+

@@ -1,0 +1,60 @@
+id: recipe_wire_tensioning_system_v0
+target_item_id: wire_tensioning_system
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: tensioner_pulley_machined
+        qty: 1.8
+        unit: kg
+    est_time_hr: 2.0
+    notes: Machine pulley for wire guidance
+  - process_id: metal_fabrication_welding_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.5
+        unit: kg
+      - item_id: steel_sheet_3mm
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: tensioner_frame_welded
+        qty: 1.9
+        unit: kg
+    est_time_hr: 2.0
+    notes: Fabricate frame and mounting brackets
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: tensioner_frame_welded
+        qty: 1.9
+        unit: kg
+      - item_id: tensioner_pulley_machined
+        qty: 1.8
+        unit: kg
+      - item_id: spring_compression_medium
+        qty: 2.0
+        unit: each
+      - item_id: bearing_ball_steel
+        qty: 2.0
+        unit: each
+      - item_id: adjustment_screw_m8
+        qty: 2.0
+        unit: each
+    outputs:
+      - item_id: wire_tensioning_system
+        qty: 5.0
+        unit: kg
+    est_time_hr: 1.5
+    notes: Assemble pulley, spring, bearings, adjustment mechanism
+assumptions: |
+  Spring-loaded design provides constant tension force.
+  Adjustment screws allow tension calibration for different wire gauges.
+  Ball bearings reduce friction on pulley rotation.
+notes: |
+  Manufacturing route for wire tensioning system.
+  Spring-loaded pulley design for consistent wire tension.
+  Suitable for winding, threading, and cable manufacturing operations.

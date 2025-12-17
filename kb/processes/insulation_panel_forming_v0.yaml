@@ -1,0 +1,22 @@
+id: insulation_panel_forming_v0
+kind: process
+name: Insulation panel forming
+layer_tags:
+  - layer_4
+inputs: []
+outputs: []
+requires_ids:
+  - pressing_tools
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.5
+  notes: "Mixing, pressing energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Forming and press cycle"
+notes: Form ceramic fiber slurry into panel shape before drying and firing.

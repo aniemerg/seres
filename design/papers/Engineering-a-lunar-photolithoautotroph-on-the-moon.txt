@@ -1,0 +1,2639 @@
+International Journal of
+Astrobiology
+
+Engineering a lunar photolithoautotroph to
+thrive on the moon – life or simulacrum?
+
+cambridge.org/ija
+
+A A Ellery
+Department of Mechanical & Aerospace Engineering, Carleton University, Ottawa, ON, K1S 5B6, Canada
+
+Robotic Astrobiology
+Cite this article: Ellery AA. Engineering a lunar
+photolithoautotroph to thrive on the moon –
+life or simulacrum? International Journal of
+Astrobiology https://doi.org/10.1017/
+S1473550417000532
+Received: 1 March 2017
+Revised: 21 November 2017
+Accepted: 27 November 2017
+Key words:
+Biomimetic machines; engineered life; lunar
+environment; robotic mechanisms;
+self-replication
+Author for correspondence:
+A A Ellery, E-mail: aellery@mae.carleton.ca
+
+Abstract
+Recent work in developing self-replicating machines has approached the problem as an engineering problem, using engineering materials and methods to implement an engineering analogue of a hitherto uniquely biological function. The question is – can anything be learned
+that might be relevant to an astrobiological context in which the problem is to determine
+the general form of biology independent of the Earth. Compared with other non-terrestrial
+biology disciplines, engineered life is more demanding. Engineering a self-replicating machine
+tackles real environments unlike artificial life which avoids the problem of physical instantiation altogether by examining software models. Engineering a self-replicating machine is also
+more demanding than synthetic biology as no library of functional components exists.
+Everything must be constructed de novo. Biological systems already have the capacity to
+self-replicate but no engineered machine has yet been constructed with the same ability –
+this is our primary goal. On the basis of the von Neumann analysis of self-replication, selfreplication is a by-product of universal construction capability – a universal constructor is
+a machine that can construct anything (in a functional sense) given the appropriate instructions (DNA/RNA), energy (ATP) and materials (food). In the biological cell, the universal
+construction mechanism is the ribosome. The ribosome is a biological assembly line for constructing proteins while DNA constitutes a design specification. For a photoautotroph, the
+energy source is ambient and the food is inorganic. We submit that engineering a self-replicating machine opens up new areas of astrobiology to be explored in the limits of life.
+
+Introduction
+In this paper, I wish to explore the limits and definition of life in the context of engineered life
+(distinct from artificial and synthetic life). Life on Earth is carbon-based and limited to a narrow temperature range defined by the existence of liquid water within the constraints of biochemical sensitivity to temperature – low temperatures reduce metabolic rates while high
+temperatures degrade enzymes. This gives us a narrow perspective on what life could be. I submit that from an astrobiological perspective, exploring engineered life is a useful and instructive exercise. If we can be sure of anything, it is that nature is innovative and inventive. Taking
+lessons from extrasolar planet astronomy, the galaxy of stellar system configurations discovered
+has shown that our own Solar System configuration, rather unexpectedly, is merely one of
+many different possibilities. If and when the first discovery of extraterrestrial life occurs, we
+can be sure that it will surprise us (unless it is of a panspermia or contamination origin).
+Firstly, we will briefly discuss a few definitions of life. Thence, we shall explore an experiment
+to artificially construct a lifeform (engineered life) that tests the boundaries of life and perhaps
+give us insights into the transition from non-life to life.
+
+Part A: What is life?
+
+© Cambridge University Press 2018
+
+Although some reckon that defining life is futile because it is a folk rather than a scientific
+concept (Machery 2012), we shall explore such a definition here. Indeed, a folk-based test of
+life has been proposed similar to the Turing ‘imitation game’ test for machine intelligence
+(Cronin et al. 2006). It proposes the construction of a chemical cell (chell) – a chemoton –
+to imitate a biological cell, perhaps to ingest CO2 and excrete a more environmentally benign
+compound. The Viking biochemical experiments may be regarded as an abstraction of this
+concept (CO2 input – O2 output), suggesting that perhaps such a functional approach is
+not useful. Looking, however, to internal cellular mechanisms, a computer model of a network
+of chemical reactions as a primitive metabolism in an amphiphilic membrane has been simulated (Bersini 2010). It is not yet clear how illuminating this type of simulated biochemistry has
+been but we shall explore these approaches further. Returning for the moment to defining life,
+there have been some vague definitions:
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+2
+
+(i) Life is a unity (Chaitin 1970) – this refers to a mathematical
+unity as opposed to an autopoietic unity, the latter having
+specific and definable properties like autonomy with
+self-contained rules (Fleischaker 1989);
+(ii) Life is a supple adaptation involving ongoing adaptation to
+the environment (Bedau, 1997, 1998).
+These definitions are not particularly enlightening or conclusive. Similarly, information-theoretic definitions are purely syntactic and are devoid of semantic interpretation rendering them
+incomplete (Zuravlev & Avetisov 2006). The semantic aspect
+requires the interpretation of symbols in the context of the real
+world to understand the function of those symbols. There is, however, no obvious similarity between objects in the real world and
+the symbols to represent them (this is the correspondence problem). Hence, information defined at the level of syntax has little
+bearing on pragmatic information which based on its semantic
+value –it is at the pragmatic level (phenotype) at which evolutionary selection operates but it is at the syntactic level (genotype) that
+information is stored (Cohen & Perrault 1979). The two levels are
+both required. A biological cell is a physical biochemical machine
+(Laing 1979) – it comprises a power supply, a set of interacting
+components interconnected by a wiring system, and a regulatory
+control system to coordinate those components to perform selfreproduction as its major task (Tyson & Mackey 2001). Many
+definitions of life have listed the various properties of life
+(Koshland 2002) – genetic program of instructions, evolution
+by natural selection, cellular compartmentalization, energy capture from the environment, regeneration for self-repair and
+growth, adaptability to stimuli, and isolation of different metabolic reactions being a fairly common and inclusive list. There
+are derivative or equivalent properties that might be favoured.
+For instance, reproductive capacity is implicit in the evolutionary
+property and thermodynamic openness is implicit in the energy
+capture property. The complex interchange of matter and energy
+with its environment is implicit in defining metabolic activity.
+Futility of Linnaean Classification
+Species cannot form clear-cut categories if we admit evolution
+which imposes mutability. Of course, this pre-supposes
+Darwinian rather than Lamarckian evolution. Similarly, there
+may be no clear demarcation between non-life and life if the latter
+evolves from the former. For instance, Strecker synthesis of amino
+acids is a chemical process while the reverse Krebs cycle is a biological process. There must be intermediate processes which allow
+the evolution of the biological from the inorganic (Szostak. 2012).
+One possibility in this specific case might be through the hydrolysis of thioesters CH3–CO–SCH3 formed from CO and CH2SH
+catalysed by FeS minerals (Wachtershauser 1992). Similarly, selforganization through far-from-equilibrium thermodynamics
+exhibits increasing degrees of complexity from physical to biological manifestations – Benard cells in convecting fluids at
+Rayleigh number beyond 1760 are a physical phenomenon; the
+Belousov–Zhabotinski reaction is a chemical phenomenon of
+greater complexity; and the Kauffman NK model of autocatalysis
+is a pre-biological phenomenon of still greater complexity. Such
+self-organization involves local interactions between components
+resulting in emergent global properties without any central control or supervision. Self-organization is a commonly exploited
+property of biological systems. For example, self-organization of
+the global cytoskeletal architecture of eukaryotic cells is emergent
+
+A A Ellery
+
+from the reaction–diffusion effects of individual cytoskeletal
+filaments.
+Furthermore, lack of categorizability was manifest in early biological evolution. It is believed that the last universal common
+ancestor (LUCA) that eventually diverged into the three main
+domains of Archaea, Bacteria and Eukarya was constituted from
+a community of cellular organisms that were engaged in lateral
+gene transfer with elevated mutation rates rather than vertical
+gene inheritance (Woese 1998). RNA-based genetic translation
+was simple, acting on multiple and redundant short genetic segments, and was error-prone, limiting protein sizes. Different progenitors possessed different metabolic capabilities which would be
+shared through lateral gene transfer. This is compatible with the
+curious incidence of genes shared by archaea and bacteria simultaneously with the genetic replication mechanism shared by
+archaea and eukarya, yet there appear to be strong similarities
+in DNA polymerases across all three domains. There was thus
+no single evolutionary cell line prior to the divergence of the
+great domains whence individual evolutionary cell lines were
+established. If so, the early origins of life are shrouded - no wonder that we seek to gain insights a la Richard Feynman (‘what I
+cannot create, I do not understand’).
+The demarcation of life/non-life illustrates the limitations of
+logic classification – such limitations in logic have been well
+known in artificial intelligence because logic admits no contradiction (x and not-x cannot both be true), no change over time (x is
+true or false at all times), and no exclusion (x is either true or
+false). This was the reason for the introduction of degrees of
+truth through a veritable host of shades of grey – Bayesian,
+Dempster–Shaferian, non-monotonic, circumscriptive, modal,
+temporal and fuzzy logics – into artificial intelligence. The most
+extreme variation of this is non-well-founded (NWF) set theory
+which eschews logic almost entirely (Stepney 2012). Bruylants
+et al. (2010) favoured a fuzzy definition of life though, if pressed,
+my preference would be for a Bayesian approach for its greater
+rigour and versatility. As an example of greyness, there is debate
+over the nature of viruses which are commonly classified as nonlife. However, viruses may be controversially characterized as alive
+in the sense that they are complex evolving organisms integrated
+into their host’s molecular machinery for their own replication –
+in this phase of the viral lifecycle, the infected host cell is a viral
+cell (Forterre 2010). Viruses are highly efficient replicators
+because their host provides the replicating machinery that is
+hijacked by the virus. Viruses are an example of the difficulty
+in differentiating between life/non-life and the degrees of uncertainty involved. Indeed, from the folk perspective with which
+we opened our discussion, they are very much alive because
+they are ‘germs’ (though the pre-scientific miasma folk theory
+would not have viewed viral infections as being transmitted
+through living organisms).
+Metabolism
+All physicochemical reactions tend towards the lowest Gibbs free
+energy state according to the second law of thermodynamics.
+Living systems maintain themselves in a far-from-equilibrium
+state through the consumption of external energy. Metabolism
+is a network of chemical reactions and implies that the provision
+and consumption of energy are necessary to maintain and grow
+itself. Due to the second law of thermodynamics, this energy
+must be supplied from the environment. Such thermodynamically
+open systems form dissipative structures characterized by energy
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+dissipation through dynamically stable structures under far-fromequilibrium conditions. It has been suggested that life creates
+more entropy in the universe through dissipative processes over
+ecological timescales than non-life, essentially driven by their efficient consumption of energy (Ulanowicz & Hannon 1987). A
+high-energy gradient in the environment is limited in its dissipative capability, creating local, highly ordered complex structures
+(life) far from thermal equilibrium to increase energy dissipation
+(Schneider & Kay 1994). Biological processes exploit captured
+energy to move far away from thermodynamic equilibrium to a
+state of low entropy with respect to the environment by storing
+the maximum exergy available (the maximum exergy principle)
+(Jorgensen & Fath 2004). Exergy is defined as the energy available
+for useful work. The maximum exergy principle is a version of Le
+Chatelier’s principle that energy inputs shift equilibrium compositions of reaction systems. From this, metabolism may be defined
+as a system of self-maintenance that controls energy flows
+through the system (Moreno Bergareche & Ruiz-Mirazo 1999).
+This management of energy with precise control of energy
+flows is essential to organize the material construction of metabolic substrates. We may regard metabolism powered by energy
+sources as a fundamental ingredient of life. The most basic
+form of metabolism for the generation of energy is the physicochemical redox couple involving electron donors and electron
+acceptors, such as anoxygenic photosynthesis by green and purple
+sulphur bacteria. They reduce sulphate as the electron acceptor
+(oxidant) to release H2S as an electron donor for the reduction
+of CO2.
+Physical metabolism involving both material and energy processes is a necessary component of life (Boden 2003). This disavows artificial life which considers only informational and
+evolutionary aspects of life without consideration of physicality.
+If the autopoietic aspect of self-production is an essential component of life, then evolutionary robots are excluded because while
+their evolved behaviours are informational, their bodies are artificially pre-constructed without metabolic exchange with the environment. Furthermore, evolutionary algorithms are driven by
+user-defined fitness functions rather than the open-ended evolution of biology. Contrarily, a self-replicating machine is fundamentally self-created from its physical environment where
+self-replication is an extension of self-repair which itself is a
+form of self-maintenance. Its capability to create physical copies
+of itself from the environment is a form of self-production so
+this would admit self-replicating machines to the ranks of life.
+Encapsulation
+The autopoietic definition of life proposes that life is a cellular system capable of self-production and self-maintenance through a
+network of processes within a self-made boundary that adapts
+to its environment (Bich & Damiano 2007; Damiano & Luigi
+Luisi 2010). Self-production implies that genetic information is
+available while self-maintenance necessitates that there are metabolic processes. Autopoiesis emphasizes identity (referred to as
+autonomy) as a continuous and dynamic self-regeneration – a
+process of autopoietic self-organization (Maturana 1975).
+Structural identity and physical integrity of the lifeform – the
+cell – is derivative from the processes it encapsulates from its
+environment, i.e. metabolism. It is this metabolic activity that
+allows the entity to adapt to its environment through a continuous cycling of anabolic and catabolic processes, i.e. selfproduction and self-maintenance are the result of the same
+
+3
+
+underlying process. An autopoietic system involves homeostatic
+processes that are autocatalytic as a whole by continually producing and recycling its components. An illustrative minimal autopoietic model is based on a two-dimensional (2D) cellular array
+which may be occupied by one of three types of particles: S
+(substrate), K (catalyst) and L (link) subject to three chemical
+reactions (Varela et al. 1974):
+Production : S + S + K  L + K
+Bonding : L + L  −L = L −
+Disintegration : L  S + S (spontaneous)
+Chains of L particles can form a closed membrane that is permeable to S particles but impermeable to K and L particles, i.e. cell
+membrane structures. Initially, at least one K particle is enclosed
+within an L-membrane through which S particles permeate. These
+S particles are catalysed by K within the membrane to increase the
+concentration of L particles which cannot escape. As internal
+stresses build, the membrane ruptures due to disintegration.
+However, the high concentration of L ensures that they will seal
+the L-chain membrane. This models a continual cycle of anabolism and catabolism of the L-membrane. This cycle generates a
+steady state of the form:
+dx
+dt = kx − gx
+
+where k is growth rate and g is decay rate. Dynamic equilibrium
+occurs when k = g such that dx/dt = 0. The inhibition of bonding
+of L particles near chains of L particles is an essential feature in
+autopoietic modelling to prevent premature L-chain formation
+(McMullin & Varela 1997). This computational model and others
+(Schwegler & Tarumi 1986; Cui & Friedman 1999) prove the
+computability of autopoiesis (McMullin 2004), refuting postulations that autopoiesis is non-computable.
+Membrane-enclosed vesicles that separate self from non-self
+are an important property of life (Weber 2010). The importance
+of a cell membrane to separate an internally controlled environment from the external environment has long been recognized,
+but both the coacervate and proteinoid concepts were implausible
+in lacking continuity with biological membranes. Intriguingly,
+lipid-like amphiphilic compounds such as PAHs, pyrene and
+fluoranthene have been extracted from the Murchison meteorite
+(Deamer & Pashley 1989). Amphiphilic molecules comprise a
+polar hydrophilic tail and hydrophobic head which induces
+them to spontaneously self-assemble into vesicles as proto-cells
+(Deamer et al. 2002). Self-assembly is spontaneous with amphiphilic molecules – they form a single-layer surface membrane
+on water with hydrophobic heads oriented above the surface
+and hydrophilic tails in the water. High concentrations of phospholipids form a double layer which encloses vesicles formed by
+high surface tension. Amphiphilic molecules may form via
+Fischer–Tropsch reactions catalysed on mineral surfaces. The
+membrane must be semipermeable to allow the flow of selective
+materials and energy. Self-assembling lipid membranes are an
+obvious candidate for early biological membranes. Reverse
+micelles may represent a minimal autopoietic system (Luigi
+Luisi & Varela 1989). They spontaneously self-organize into
+cells within which host aqueous chemical reactions produce its
+boundary surfactants (comprising a polar head and aliphatic
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+4
+
+A A Ellery
+
+tail). Alternatively, proto-membranes may have been iron/
+sulphur-based, formed near hydrothermal vents (Martin &
+Russell 2003). The vesicles enclose polymers which may be
+formed in a number of plausible ways. Simple precursors to
+organic molecules that underlie biology can be synthesized into
+polymers in Miller–Urey-type reactions catalysed by clays under
+reducing conditions (such as CH4 + NH3 + H2 or CO2 + H2 + N2
+or CH4 + H2O + N2 atmospheres) with an energy source by
+Strecker condensation. Formaldehyde can be synthesized by
+photochemical reactions in Earth’s primitive atmosphere as the
+primary step towards biochemical materials (Pinto et al. 1980):
+CO2 + 2H2  H2 CO + H2 O
+From formaldehyde, many biological molecules may be
+synthesized:
+(a) Production of the pentose sugar ribose:
+5H2 CO  C5 H10 O5
+(b) HCN may be synthesized under primitive Earth conditions
+(Oro et al. 1959):
+H2 CO + NH2 OH  HCN + 2H2 O
+(c) Amino acid glycine may be produced from HCN:
+3HCN + 2H2 O  C2 H5 O2 N + CN2 H2
+(d) The purine base adenine may be produced from HCN:
+5HCN  C5 H5 N5
+Although Miller–Urey-type reactions have been questioned as
+pre-biotic processes on early Earth, similarly synthesized biochemical products may be concentrated into protocells by
+semi-permeable membranes that form spontaneously from phospholipids in water. More complex, multi-compartment lipid vesicles represent models of artificial cells in which multi-step
+biochemical reactions can be implemented (Elani et al. 2014).
+There have even been suggestions that a minimum of two membranes can implement computing functions (Paun, 2000).
+Liposomes are engineered vesicles for delivering drugs to the
+human body formed from the hydrophobic/hydrophilic properties of amphiphilic lipids in water (Mozafari 2005). Self-assembled
+membrane bilayer vesicles formed by self-assembly of lipids constitute a minimal protocell – embedded primitive pigments such
+as porphyrins can convert photonic energy into electrochemical
+proton gradients for phosphorylation (Morowitz et al. 1988).
+The cytoskeleton network of actin, microtubules and intermediate
+filaments in biological cells are fundamental in providing the basis
+for cell shape, compartmentation and intracellular traffic. The
+incorporation of hydrogel fibrillary networks self-assembled by
+hydrophobic interactions and hydrogen bonds in liposomes presents a simplified artificial analogue of a biological cell with an
+internal cytoskeleton (Brizard & van Esch 2009). Artificial cells
+must include information-laden replicating molecules, polymerases to catalyse replicating molecules, and a translation system
+to convert genetic information into protein synthesis instructions
+(Pohorille & Deamer 2002). The protocell of the RNA world is
+
+premised on two RNA replicating molecules – one as a genomic
+template and the other as a ribozyme that catalyses the synthesis
+of amphiphilic lipids for the membrane (Szostak et al. 2001).
+Vesicles can then reproduce through amphiphilic growth until
+the lipid capsule becomes unstable and fissions into two vesicles.
+These arguments suggest that encapsulation from the environment is an essential feature of life.
+Self-replication
+The autopoietic view of life does not consider self-replication specifically, so autopoiesis may be regarded as a necessary but not
+sufficient condition for life (Luigi Luisi 2003; Froese & Stewart
+2010). Indeed, according to autopoietic theory, reproduction is
+not a necessary property of living systems, but is merely a derivative property enabled by the unity of the living system for that
+unity to be multiplied (Varela et al. 1974). It is conceivable that
+a living organism could exist that was incapable of self-replication
+– such an organism would have to emerge without any evolutionary heritage through pure self-organization. It has been suggested
+that a spontaneously emerging self-replicator on Earth would not
+have possessed an overall complexity exceeding 100–200 bits over
+the background environment (Jacobson 1959). A necessary
+adjunct to autopoiesis is autogenesis which emphasizes the emergence of self-replication (Csanyi & Kampus 1985). Autopoiesis
+has been proposed to be part of a larger concept of (M, R) systems
+where M, metabolic activity and R, repair activity collectively
+imply that self-repairing metabolism is capable of replication
+(Letelier et al. 2003). This implies that not all replicating systems
+are autopoietic. Autopoietic systems are further characterized by
+operational closure where metabolic processes feed into each
+other in a circular causal network. Autopoiesis must be supplemented with an open-ended evolution property (Ruiz-Mirazo
+et al. 2004), for it is the evolutionary process that yields increased
+organismic complexity over time (Saunders & Ho, 1976).
+Evolution is a learning process whereby information is
+extracted from the environment and incorporated into the lifeform. Darwinian evolution is a universal phenomenon premised
+on the notion of stored (genetic) information for which three
+properties occur: (i) variation (errors) due to random genetic
+mutation, (ii) selection favouring fitter individuals to a specific
+environment and (iii) inheritance whereby fitter individuals
+copy their characteristics onto the next generation through their
+offspring. The last implies the ability to generate copies, i.e. selfreplication. Evolutionary capacity thus implies a self-reproductive
+capacity for mutation to operate during the copying process.
+Using λ-calculus, it has been demonstrated that self-replication
+logically precedes self-maintenance (Fontana & Buss 1994). By
+definition, autopoietic systems are to be differentiated from allopoietic systems. The latter converts raw material into a product
+(comprising an organized conjunction of those materials) other
+than itself, an example being a factory. Clearly, by definition, a
+self-replicating entity is not an allopoietic system because it yields
+products of itself. ‘The living is a factory that makes itself from
+within’ (Luigi Luisi 2003). Self-replication may thus be viewed
+as an essential ingredient of life. The so-called mule problem is
+readily dismissed in that reproductive capacity is potential rather
+than actual. Furthermore, evolutionary capacity is a property of
+populations rather than individuals – mules are part of an evolving gene pool of a population (Chodasewicz 2014).
+The earliest form of replication may have been uncoded and
+implemented through autocatalytic sets of organic polymers
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+with Lamarckian inheritance (Gabora 2006). Regardless of the
+nature of early self-replication, life may have emerged when a
+non-metabolic replicator acquired metabolism to exploit external
+energy sources. It thus acquired purposefulness (Pross 2008).
+Purposefulness as a characteristic of life has its roots in
+physicochemical reactions of metabolism during replication.
+Purposefulness arises through dynamic kinetic stability maintained by a persistent metabolism as distinct from thermodynamic stability representing a state of maximum decay.
+Kinetic stability is a unique property of persistent replicating systems and is dependent on the environment (Pross 2005a). The
+competition for finite resources imposes a trend towards increasing kinetic stability –survival of the most stable. Complex replicators are kinetically more stable than simple replicators, hence
+driving evolution towards greater complexity (Pross 2005b).
+These arguments suggest that self-replication is indeed, an essential property of life.
+The definition of life is implicit in the origin of life question of
+whether metabolism or self-replication was the first property of
+life to emerge. In terrestrial life, folded molecular chains effectively implement computational processes as program strings,
+while molecular encoding in genes acts as a blueprint for the construction of these molecular chains, and through templating, the
+molecular codes implement their self-reproduction (Laing
+1975). The two aspects of life – genotype and phenotype – appear
+inextricable.
+The RNA world attempts to circumvent the chicken-and-theegg problem of metabolism versus genetic replication (Lazcano
+2010). RNA comprises a phosphate–ribose–phosphate backbone
+with nucleotide links forming a chain polymer. Within the
+RNA world, RNA acts as both a store of genetic information
+and as an organic catalyst for metabolic activity. This RNA
+world was enabled by its possession of both genotype (as RNA
+bases) and phenotype (as ribozymes). Information is held in the
+nucleotide base sequence while its folding pattern forms the catalytic structure. It suggests that RNA polymers (ribozymes) could
+catalyse their own synthesis and self-replicate, thereby establishing
+both metabolism and self-replication, perhaps encapsulated
+within a vesicle. The rRNA of the ribosome is a type of ribozyme.
+RNA replicase is an RNA molecule that is a template for genetic
+information and acts as an RNA polymerase to replicate itself. A
+simple protocell would comprise RNA replicase within a vesicle
+using nucleoside triphosphate (NTP) for energy (Szostak et al.
+2001). As a single RNA molecule cannot simultaneously act as
+template and polymerase, two RNA molecules are required.
+Hence, molecular networks of RNA are required to sustain
+cooperative cycles of production (Pross & Pascal 2013). RNA replication requires the RNA replicase protein which begs the need
+for a supporting metabolism, i.e. an interconnected gene–metabolism–encapsulation triumvirate network (Rasmussen et al.
+2003). Autocatalysis involves the presence of a product catalysing
+the original reagents – thus RNA acts as a template for assembling
+further RNA molecules. The emergence of genetic encoding of
+metabolic and lipid reaction rates is believed to involve some
+kind of autocatalytic feedback mechanism (Hordijk 2013).
+Alternatively, peptide nucleic acid (PNA) has a hydrophobic polypeptide rather than phosphate–sugar backbone but with the same
+base pairing as DNA or RNA. PNA can act as an electron relay
+system with modifications. PNA replicates through ligation rather
+than the ribozymes that act as their own replicase required of
+RNA replication. The insertion of non-organic material into a
+proto-organism emphasizing a building blocks approach offers
+
+5
+
+one possible transition between non-living and living matter
+(Rasmussen et al. 2003). However, the existence of RNA rather
+than PNA in today’s terrestrial biology as a mediator between
+DNA and proteins favours the RNA world. RNA performs multiple functions – mRNA constitutes transportation mechanisms,
+tRNA constitutes jigs and rRNA constitutes the planner and controller for the ribosomes. However, RNA replication is more
+prone to error than DNA replication, and so subject to strong
+evolutionary processes. The DNA–protein world may have
+emerged from the RNA world through retroviral-like mechanisms. A protocell containing a self-replicating catalytic DNA
+may have represented the first living organism. Although specific
+to life on earth, the RNA world incorporated metabolism, selfreplication and encapsulation. Life then is a collective set of
+properties.
+Control systems
+Cybernetic systems are another necessary and complementary
+component of living systems involving specific sensory inputs
+triggering specific actions, i.e. its internal processes are adapted
+to its environment (Bourgine & Stewart 2004). This implies that
+control mechanisms are an essential feature of life.
+It may be instructive to examine synthetic biology in the
+Feynman tradition that creating yields understanding. To create
+artificial cells, simple biological cells may be simplified further
+(top-down) or assembled de novo from scratch from biological
+and non-biological materials (bottom-up) (Rasmussen et al.
+2004). In bottom-up synthesis, lipid vesicles may be selfassembled by amphiphilic aggregation encapsulating selfreplicating RNA or the simpler PNA. Synthetic biology is also a
+bottom-up process that blurs the distinction between naturally
+evolved living organisms whose only goal is survival and humandesigned and manufactured machines of inorganic material that
+serve human-dictated purposes (the latter being the subjectmatter of this paper). In synthetic biology, new functionality to
+biological cells (acting as a chassis) can be introduced to complement natural biological nucleic acid/protein biochemistry
+(Benner & Sismour 2005). Self-replication in biology occurs
+through molecular template copying of genetic information
+which encodes physical properties of the lifeform. This requires
+molecular pattern recognition of which Watson–Crick pairing
+of large purines with small pyramidines (A–T and G–C) through
+hydrogen bonds is an example. An indispensable part of this recognition process is the phosphate–ribose backbone with its
+repeating charge. Shuffling hydrogen bond links permits the addition of four further base pairs forming a synthetic genetic alphabet (Sismour & Benner 2005). Similarly in proteins, different
+amino acids from the standard 20 can be introduced. Amino
+acids in polypeptide chains interact with each other due to their
+folding. Artificial polypeptides can be constructed from amphiphilic side chains of amino acids that replicate specific protein
+folding (Deming 1997). This complements pre-existing biology
+within the constraints of biochemistry. Synthetic biology is
+exploring the limits of life further by attempting to re-design
+the biological realm to construct genetically engineered machines
+(Gibbs 2004). There are three main thrusts: (i) synthesis of a minimal protocell; (ii) synthesis of minimal genomes; (iii) genetically
+engineered machines. Synthetic biology applies an engineering
+philosophy to biological components to build engineering functions from those biological components. It is the complement
+to the self-replicating machine concept explored later which
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+6
+
+uses engineered components to build a (biological) selfreplication function. The major thrust of synthetic biology is
+the manufacture of a library or toolbox of logical functions
+from standardized biological genes that can yield biological components assembled to implement a specific device (McDaniel &
+Weiss 2005). These genetic segments of DNA – BioBricks –
+encode for biological components that implement known characteristics such as logic gates, sensors, actuators, etc that can be
+assembled like molecular Lego into cellular circuits such as logical
+implication and even more complex logics such as filters and
+feedback loops (Endy 2005). Bistable switches have been developed which can act as memory elements which are heritable
+from one generation to the next. Similarly, the inverter BioBrick
+implements a NOT function which, with the AND BioBrick, provides logical universality through the composite NAND operator.
+These would be expressed within synthetic cells acting as chassis
+organisms. Nevertheless, they would retain their autopoietic character including self-production and self-reproduction and so be
+subject to evolutionary pressures. Hence, it would be humandesigned in origin but will exist as a biological organism
+(Deplazes & Huppenbauer 2009). This follows a similar logic to
+the self-replicating machine. However, in the Registry of
+Standard Biological Parts, many of the synthetic biology parts
+were of poor quality and did not function reliably, did not work
+when combined into circuits, were too complex to use, induced
+complex undesired reactions in the host cell, and desired functions often operated periodically rather continuously (Kwok
+2010). These difficulties will not plague the engineered selfreplicating machine presented later. There are more severe limits
+to synthetic biology (Zakeri & Carr 2015). The chief problem in
+creating biological circuits is their long operation times compared
+with electronic circuits. Furthermore, as designed genetic circuits
+become larger and more complex, there is an increasing probability of mutation or genetic rearrangement. As manufactured functionality does not improve the fitness of the chassis organisms,
+there will be selection pressure to evolve out that functionality
+over time. Indeed, this occurs very rapidly, suggesting that fears
+of synthetic organisms escaping and engaging in damaging interactions with the outside environment are unfounded (Tucker &
+Zilinskas 2006). Building in redundancy may improve the robustness and stability of the synthetic function but it will not suppress
+evolutionary processes. If a mechanism is found to suppress evolution, then these synthetic organisms would no longer be alive
+(Schark 2012). Autopoiesis would be compromised because continuous self-regeneration would no longer operate. The organism
+would have a complex organization but no longer any selforganization capacity. However, it has been asserted that selforganization with complex global phenomena emerging from
+simple local microscopic phenomena is, in fact, a functional property of life (Bedau 1992).
+Movement in some form is implicit in biological systems in
+order to acquire and transport nutrients (see the Appendix on
+molecular motors). All molecular motors convert chemical energy
+into mechanical work. Switching between biological conformations which is fundamental to biological molecules may be
+regarded as a form of self-assembly which can be described formally as graph grammars (Klavins 2004). Molecular motors
+evolved from such molecular switches – kinesin, myosin and G
+proteins appear to have evolved from an ancestral nucleotidebinding protein while F1-ATP synthase seems to have evolved
+from a different nucleotide-binding protein (Vale 1999).
+Kinesins comprise a superfamily that has evolved a diverse set
+
+A A Ellery
+
+of functions through gene duplication while dynein molecular
+motors appear to have been conserved (Goldstein 2001). All however evolved in early eukaryotes in a wide variety of cargohandling types, sometimes with different motors recruited for
+similar functions – actin is used for membrane transport in
+plant cells while microtubules are used for the same in animal
+cells (Vale 2003). While certain motors may be dominant in different species, mitotic kinesins are common to all eukaryotes.
+Porters – such as kinesin – that walk along microtubules have
+high duty ratio while rowers – such as myosin – that operate in
+teams have low duty ratio. Kinesin is the most abundant motor
+in most eukaryotic cells and is similar to myosin insofar as they
+both comprise two heavy chains and two light chains. The
+heavy chains fold into the two globular heads each containing
+the ATPase sites. Kinesin is the smallest motor protein of ∼340
+amino acids compared with ∼850 amino acids of myosin and
+∼1000 amino acids of dynein. Kinesin and myosin motors
+respectively share a common core structure and function by
+ATP-powered conformation changes (Kull et al. 1996; Vale &
+Milligan 2000). One common feature in both motors is the almost
+identical γ-phosphate sensor to detect presence or absence of a
+single phosphate (ADP/ATP) – it comprises two loops that
+form hydrogen bonds with the γ phosphate. The relay loop
+moves like a piston with an upstroke on phosphate binding and
+downstroke on phosphate release. Kinesin and myosin appear
+to have evolved from a common ancestor with G proteins.
+Myosin V is a special myosin which transports organelles along
+actin filaments; kinesins have evolved similar mechanisms for
+multi-step motion. Motors also operate in prokaryotes. Plasmid
+and chromosome segregation in mitosing prokaryotic cells is
+undertaken by homologues of actin filaments acting as cables
+(Gerdes et al. 2004). Furthermore, these and other actin-like proteins such as MreB and ParM act like centromeres for plasmid
+segregation during mitosis (Egelman 2003). MreB cell shape proteins form large spirals in rod-shaped bacterial cells acting as a
+precursor cytoskeleton – MreB proteins are absent in spherical
+bacteria, however. MreB proteins have a similar structure to filamentous actin in eukaryotes and indicate that the eukaryotic cytoskeleton originated in the prokaryotic domain (van den Ent et al.
+2001a).
+Bacterial FtsZ (filamentous temperature-sensitive) protein
+involved in bacterial mitosis is similar to eukaryotic tubulin that
+is the basis of its cytoskeleton (van den Ent et al. 2001b). FtsZ
+is a ubiquitous and highly conserved GTPase in most eubacteria
+including chloroplasts and mitochondria and is common in
+archaea. Although there is limited amino acid homology
+(10–18%) between FtsZ and α- and β-tubulins of eukaryotes,
+they are similar in structure with common folds suggesting a common evolutionary origin. In eukaryotic cells, however, chromosome segregation during mitosis is undertaken by microtubule
+fibres fixed to the centromere which pull the chromosomes
+apart (Taylor 2001). Eukaryotic cells can form extended mitochondrial filaments forming cable networks connected by intermitochondrial junctions for the transmission of energy through
+the cell (Skulachev 2001). It has been suggested that fibres are a
+ubiquitous feature of biological material – they form the cytoskeleton as the basis for cytoplasmic streaming, cilia and flagella
+movement, chromosome migration, cytokinesis and muscle contraction (Frixione 2000). The cyclic reaction of a motor protein
+with a cytoskeletal fibre is a common architecture – the myosin
+motor on actin filaments and the dynein and kinesin motors on
+microtubule filaments. On binding with the filament, the motor
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+protein in each case undergoes a conformation change (power
+stroke) to generate a movement step. The motor then releases
+the filament before rejoining further up the filament for a
+repeated step.
+Bacterial flagella are powered by motors that can rotate in
+either direction (Blair 1995). When the bacterial motor turns
+counter-clockwise, the filaments of the flagellum form a bundle
+that propels the cell along a smooth trajectory. If a motor reverses
+direction clockwise, the bundle unfolds into an array of individual
+uncoordinated movements generating tumbling. Typical motion
+is essentially alternation between runs and tumbles, i.e. a random
+walk. Directionality involves controlling the frequency of reversals
+in response to sensory detection of stimulants. The detection of
+attractor stimulants such as glucose suppresses the clockwise tumbling. Conversely, clockwise runs in unfavourable directions are
+suppressed by repellants. When bound to a repellant, Tar protein
+receptors in the cell membrane stimulate autophosphorylation of
+CheA which transfers its phosphate group to CheY. Phosphated
+CheY then interacts with the flagellar motor to increase the probability of tumbling by clockwise rotation of its flagellar motor.
+When bound to an attractor, CheY remains unphosphorylated
+and increases the probability of straight swimming by anticlockwise rotation of the flagellar motor. In fact, it is the change in
+concentration over time that is measured, requiring a short-term
+memory capability implemented by methylation of the chemoreceptors. Hence, the bacterium propels itself in the direction of
+higher concentrations of nutrients. Bacteria can also form highly
+complex colonies with the emergent functional and cognitive
+properties of a multicellular super-organism. These bacterial communities exhibit a number of modes of inter-cell biochemical signalling such as quorum sensing and chemotactic sensing
+(Ben-Jacobs 2009).
+In prokaryotes, most movement is passive though it is essential
+as a life function nonetheless. In terrestrial water-laden environments, nutrients flow passively so that static organisms can intercept them. Once acquired, these nutrients are ingested by bacteria
+and migrate within the bacterial cell by passive diffusive processes.
+Some bacteria have invented rotary motors to drive flagella to
+move in search of nutrients more efficiently. Furthermore, in
+some bacteria, the rudiments of internal transport tracks have
+evolved. In eukaryotes, such tracks are adopted for internal movement of cargo within the cell. They are also spanned by linear
+‘legged’ motors which tend to be large in comparison with rotary
+motors. Is it not conceivable for some postulated exo-bacteria to
+have evolved proto-tracks spanned by bacterial rotary motors
+similar to a rack-and-pinion gear in, perhaps, a more hostile
+environment? My contention is that movement to acquire and
+transport nutrients is a necessary condition for life, a consideration not usually appreciated given that Earth’s environment
+often provides this facility for free at the scale of bacteria.
+Furthermore, internal/external is defined relative to an enclosing
+membrane – movement internally and externally achieves the
+same goal of accessing resources for consumption. We contend
+that movement implies a cybernetic control system as a necessary
+condition of life.
+Life as a list of properties
+Hence, we are back to a list of properties of life embedded in an
+environment from which it must consume resources. The properties of life may be ascertained from the bacterial genome and its
+coding – a typical bacterial genome comprises 30% non-protein
+
+7
+
+coding genes, 10% for energy metabolism, 17% for genetic transcription and translation, 12% for cell transport and 8% to cell
+envelope proteins such as adhesins (Bloom 1995). Our generalized list of properties is thus:
+(i) Self-maintenance and growth through metabolic processes
+through the ingestion of matter and energy and the excretion
+of waste;
+(ii) Self-boundary through cellular encapsulation from the environment by constructive metabolism;
+(iii) Self-reproduction capability and therefore capacity to evolve
+in response to environmental pressures;
+(iv) Cybernetic facility through adaptive control system mechanisms to adapt to the environment.
+The unofficial NASA definition of life attributed to Gerald
+Joyce is: ‘Life is a self-sustained chemical system capable of undergoing Darwinian evolution’. Although there are dissenters to this
+definition (Luisi 1998), it is succinct and there are a number of
+characteristics implicit in this definition. Chemical system implies
+metabolic biochemistry and Darwinian evolution requires selfreproduction. As a chemical system, it excludes artificial life but
+does not exclude engineered life. Capacity for Darwinian evolution does not require life to have an evolutionary history, only
+an evolutionary future, though an evolutionary past may be
+inferred in natural systems. All life on the Earth is carbon-based
+involving water as the fundamental biochemical solvent and
+most astrobiology work is premised on this. The lack of detection
+of organic material on Mars by Viking’s gas chromatograph mass
+spectrometer (though this result has since been contested)
+trumped the detection of labelled CO2 from its labelled release
+experiment on that basis (the overall conclusion has not changed
+even in the light of contested measurements). Hypothetical silicon-based life or liquid ammonia as a biochemical solvent has
+not been entertained seriously. For instance, Si does not form
+double sp or triple sp2 bonds but its d orbitals do permit the formation of dπ–pπ bonds. Nevertheless, there have been attempts to
+consider life from a broader perspective (Schulze-Makuch &
+Irwin 2008). The work presented here is part of an ongoing
+research programme that will explore several key open issues in
+engineered life including ‘How does life arise from the nonliving?’
+(Bedau et al. 2000). In doing so, we retain the control system
+property of life. As pointed out in (Brack & Trouble 2010),
+robotics has been emulating many of the characteristics of life
+including replicating and evolving behavioural properties through
+genetic algorithms (Eiben 2014). Evolutionary robotics involves
+using genetic algorithms to evolve neural networks to implement
+specific behaviours on physical robots. Of great interest is
+coevolution of both behaviour and bodily morphology. Robotics
+to date, however, has not yet demonstrated self-replication of bodily form. This is what we explore here.
+
+Part B: What could be life?
+Self-replicating automata
+Looking to artificial life as an exploration of non-terrestrial life,
+the key motivation is to broaden from life-as-we-know-it to lifeas-it-could-be (Umerez 2010). There are three approaches: (a)
+soft artificial life involving software simulations; (b) hard artificial
+life involving hardware implementations; (c) wet artificial life
+involving chemical implementations (Bedau 2003). Our approach
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+8
+
+is a combination of all three to form a fourth approach: (d) engineered life involving manufacturing physical resources.
+Cellular automata (CA) constitute the main modelling environment for artificial life. Indeed, there are many examples of
+CA models of different biological phenomena including developmental biology (Ermentrout & Edelatein-Keshet 1993; Calabretta
+1998). CA are highly abstract but serve to illustrate the logic of life
+divorced from the physicality of life. CA comprise a chain (1D) or
+lattice (2D) of cells, each of which can be in one of a finite number k of possible states. They are updated every discrete timestep
+with a well-defined transition rule that depends on the state of its
+R neighbours. The simplest CA is a 1D string of cells, the states
+(with two states 0 and 1) of which are dependent on the flanking
+neighbours. For 2D arrays, there are two commonly adopted
+neighbourhoods: the von Neumann neighbourhood consists of
+the R = 4 neighbouring cells to the north, south, east and west;
+the Moore neighbourhood consists of the R = 8 neighbouring
+cells to the north, south, east, west, north-east, south-east, northwest and south-west. Hence, each cell is a finite state machine
+with transition rules applied only locally based on the local neighbouring states. The CA can simulate different Wolfram universes
+of logic (Wolfram 2002): in class 1, initial configurations evolve to
+a fixed configuration; in class 2, initial configurations evolve to a
+periodic cycle of configurations; in class 3, initial configurations
+evolve into chaotic behaviour; in class 4, initial configurations
+evolve complex localized structures with global behaviours.
+Class 1 and 2 CAs exhibit only localized information transmission
+(λ = 0); in class 3 and 4 CAs, information transfer is however global (λ > 0). The dynamic Langton λ factor which varies from 0 to
+(1–1/k) – defined as the fraction of active output states in the rule
+table – attempts to quantify these classes and defines a critical
+value λc that corresponds to class 4 at the ‘edge of chaos’. It has
+been suggested that this class possesses the capacity for universal
+computation but it has been questioned whether CAs can be
+quantified in this fashion. Nevertheless, the notion of computability in CAs is an important property which defines the capacity of
+the specific CA (Mitchell 1998). Central to computability is the
+Turing machine and the limit imposed by the Turing halting
+problem that there exists no general algorithm that can predict
+whether an algorithm halts, i.e. halting is undecidable (Turing
+1937). However, halting is decidable in a two-state CA with a
+von Neumann neighbourhood. The simplest CAs that support
+universal computation have k = 18 and R = 3 in 1D and k = 3
+and R = 3 in 2D (Wolfram 1985). A 1D CA with (m + n + 2) states
+can simulate a Turing machine with n states and m alphabetic
+letters.
+Conway’s Game of ‘Life’ is a CA system of 2D cells that illustrates the phenomenon of emergence. Each cell has two (binary)
+states – it is either alive (1) or dead (0). The next state is determined by the state of its eight neighbours (Moore neighbourhood) according to specific local rules. If there are three living
+neighbours, its state is alive; if there are two or less or four or
+more living neighbours, the cell dies of loneliness or overcrowding
+respectively. From the interaction of such simple cells, highly
+ordered complex structures can emerge (Crutchfield 1994) –
+the glider is a local pattern that moves through the CA array
+diagonally as an integrated unit. The glider gun configuration
+emits regularly spaced gliders every 30 time steps. If a glider
+encounters a square block of four cells, they collide and mutually
+disintegrate – a law of physics that is not specified in the CA rule
+set. Hence, complex structures can emerge from very simple cell
+rules. Although the rules are local, they can yield globally
+
+A A Ellery
+
+emergent phenomena such as universal computation. ‘Life’ is
+capable of universal computation by exploiting glider guns and
+gliders. Logic functions are constructed by interacting streams
+of gliders. For example, a NOT gate is implemented by two perpendicular gliders colliding and annihilating each other. AND/
+OR gates can be implemented similarly while memory is implemented through circulating gliders. Of course, such implementations of universal computation are cumbersome and impractical.
+Artificial chemistry (AC) such as Squirm3 has successfully modelled the emergence of self-replicating molecules (Hutton 2002).
+AC is a form of CA that defines a triple (S,R,A) where S = set of
+all possible molecules, R = set of collision rules and A = algorithm
+defining physical rules. Unlike CAs, artificial chemistries do not
+constrain the movement of molecules to a regular grid. Bonds
+are formed between atoms on collision but bonds can be broken
+by reactions. A set of eight reactions defining how two different
+atoms combine to form molecules are sufficient to permit
+the spontaneous emergence of self-replicators from a primordial
+soup of atoms.
+The first systematic consideration of self-replicating machines
+was that of John von Neumann (von Neumann & Burks 1966).
+His 2D CA-based self-replicating machine required each cell to
+have 29 states including an inactive state. The CA model comprised five major subsystems: (i) a program of instructions; (ii)
+a sequencer; (iii) a controller; (iv) a constructor arm; and (v) a
+workspace environment. A more physically realistic kinematic
+model of the von Neumann self-replicator comprised eight different components in two major systems – four logic components
+for control signals and four mechanical elements for structure
+and mobility. The two major subsystems were: (i) a tape unit,
+itself comprising a linear memory tape and a tape control unit,
+i.e. a universal Turing machine (computer); (ii) a constructing
+unit comprises a robot arm and an arm control unit, i.e. a universal constructor. The control program is stored on the memory
+tape that instructs the robotic arm to select, acquire and assemble
+components from a sea of pre-fabricated constituent parts in the
+working environment – in effect, it was a self-assembling
+machine. The construction unit signals the tape unit and
+reads the instructions as a set of (x0, y0) start coordinates and
+(Δx, Δy) movements for the robot arm. Thus, the universal
+Turing machine and the universal constructor send sequences
+of signals to each other to control the construction of the machine
+according to the program blueprint. The robotic arm picks up a
+part from the environment and inspects it to compare it with
+the program’s specifications. If correct, it joins this new part
+with the ongoing assembly. The robotic arm model of the universal constructor is essentially a pick-and-place assembly manipulator. If the tape constitutes a description of itself, the constructor
+arm builds a copy of itself. It then copies its program and inserts
+it into the new machine. The machine (analogous to proteins) that
+is constructed is determined by the construction program stored
+on the memory tape (analogous to DNA) – it is a universal constructor comprising a universal Turing machine to store and
+interpret information on the program tape and a robotic arm to
+act on those instructions to build the phenotypic expression of
+those genetic instructions. The universal constructor can construct any machine specified on its tape given the required raw
+materials, energy and information. One such program is a selfspecification to construct a copy of itself – a self-replicating
+machine (Freitas & Merkle 2004). To pass on this self-replication
+capability, the tape must be copied into the offspring. Thus, the
+instructions on the tape are used in two ways – first, it is read
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+and interpreted (and so executed) during construction (analogous
+to biological translation) then it is read passively (uninterpreted)
+during copying (analogous to biological transcription). A computer model of the von Neumann self-replicator has been simulated (Pesavento 1995). In biology, the process is more complex.
+During transcription, the nucleotide base sequence of a strand
+of DNA is transcribed onto messenger mRNA with the complementary sequence. During translation, mRNA is associated with
+a ribosome (constructed from one large 50s and one small 30s
+ribosomal rRNA and proteins) to map to the equivalent amino
+acid sequences. The mRNA sequence is encoded into triplets,
+usually beginning AUG and ending with stop codons UAG,
+UAA or UGA. The mapping process is realized through tRNA
+and aminoacyl-synthetases with tRNA acting as an adapter molecule between mRNA and an amino acid. There are at least 64 different types of tRNA and specific types of aminoacyl-synthetase.
+mRNA is aligned with the ribosome to ensure that the ribosome
+reads the mRNA codons.
+Simplifications to von Neumann’s formulation exploit
+sheathed loops where the instruction sequence structure is surrounded by a sheath to provide a path for signal propagation.
+The sheathed loop was a modified Codd periodic emitter loop
+which implemented a time-delay/memory function which formed
+the basis of Codd’s 8-state self-replicator (Hutton 2009). Data
+sequences circulating around the instruction loop would intercept
+the origin of the constructing arm causing a copy to propagate
+along the arm and causing it to extend or bend. If the data
+sequence is a replication code, then the sheathed loop becomes
+self-replicating with the arm printing a second loop that detaches
+and replicates ad infinitum (Langton 1984). The Langton replicating sheathed loop of 86 active eight-state cells with 219 transition
+rules allowed abandonment of universal construction. The
+Langton loop is a pure self-replicator in which a closed loop transmits signals to perform the dual function of both interpreted and
+uninterpreted instructions. Replacing the sheath around the
+instruction loop with a growth cap at the tip of the constructing
+arm retains simple self-reproducing structures of 32 active eightstate cells with 177 transition rules (Reggia et al. 1993). In fact,
+even smaller self-replicating entities are permissible such as six
+active eight-state cells with 91 transition rules and 12 active sixstate cells with 46 transition rules. Hence, universal construction
+is sufficient but not necessary for self-replication. Such pure selfreplicators are not universal constructors and are highly simplified
+(analogous to prions) but cannot be considered models of life. We
+submit that universal construction is a universal feature of life.
+The self-replicating machine concept – which reads its selfdescription – can be logically extended to a machine that can selfreplicate by self-inspection, i.e. examine itself to infer a complete
+structural description of itself (Laing 1979). The key capability is
+an active cellular string in sliding contact with another passive cellular string that accesses the passive string data. Hence, a universal
+constructor can, by self-inspection, can construct a copy of itself.
+This is biologically implausible as it represents a Lamarckian evolutionary process. However, the ability to self-inspect provides a
+mechanism for self-repair with reference to pre-existing instructions. The Godel machine is a further extension which is a universal computing machine that can rewrite itself if a proof search
+embedded in the initial algorithm can prove that the rewrite yields
+rewards to a utility function, i.e. it is a learning algorithm that
+interacts with its environment (Schmidhuber 2007). Learning
+algorithms are premised on the notion that the future is a reflection of the past (as is evolution). In this way, such self-changes
+
+9
+
+through self-introspection (in essence, self-consciousness) allow
+the system to step outside of itself thereby circumventing the limits of a closed arithmetic system. Self-reproduction by selfinspection rather than a stored program of instructions has
+been demonstrated in the form of analogue control circuitry
+(Suthakorn & Chirikjian 2006). Such circuitry is 2D in nature
+so does not possess volume, thereby ensuring that the system is
+completely observable. The system observed the configuration of
+colour-coded electronic components serially using a phototransistor sensor mounted on a Cartesian gantry system. It selected a
+copy of the currently observed component from a feeder. By serially observing the circuit components, component copies were
+assembled in sequence until the entire circuit was replicated. Of
+course, self-replication by self-inspection requires complete selfobservability, a condition that in general will not be valid.
+Self-inspection illustrates that the logic of self-replication opens
+up possibilities that go far beyond the strictures of life on Earth
+and may be of interest to the astrobiological community.
+Notwithstanding all this, von Neumann’s self-replicator is
+more a self-assembling system rather than a self-replicating system as it involves assembling a series of parts or components to
+construct a complete configuration. A recent example of such a
+self-assembling system employed a set of cubes, each of which
+was divided into two halves that could rotate relative to each
+other in a diagonal plane (Zykov et al. 2005). Each face of the
+cube was equipped with an electromagnet permitting cubes to
+attach to each other. A tower of such cubes can pick up other
+cubes in its environment to construct a copy of the tower, i.e. selfreplicate after a fashion. Self-assembling structures are widespread
+in both chemistry and biology. Although molecular self-assembly
+is ubiquitous in the biological world, we shall not consider it further here. The environment in reality constitutes a soil of raw
+material rather than a sea of ready-made components. Practical
+self-replication involves extracting and processing materials into
+complete parts or components. An early example of this concept
+for the terrestrial environment was the artificial living plant concept which was to absorb air, water and soil as raw materials using
+solar energy to construct copies of itself (Moore 1956).
+For our self-replicating machine, we are attempting to demonstrate 3D printing of electric motors (the basis of the constructing
+arm) and electronic circuitry based on vacuum tubes (the basis of
+the computer) as the fundamental components of a selfreplicating machine. These critical components will provide an
+existence proof that a 3D printer-based self-replicating machine
+can be constructed. We approach our self-replicating machine
+through four major biological principles.
+Biological Principle 1: materials closure
+The first issue to consider is the materials and component inventory required to construct our self-replicating machine. Materials
+(food) must be acquired from the environment – for an autotroph, this is inorganic material for both engineered and biological organisms. In the case of the Moon, the lunar regolith
+must be transformed into elementary parts to be assembled into
+the final product – this is in-situ resource utilization (ISRU).
+Self-replicating machines on the Moon were proposed in an
+early study (Freitas & Gilbreath 1980) and subsequently developed further but the latter were self-assembling concepts based
+on Lego bricks (Chirikjian et al. 2002; Ellery 2016a,b,c). We
+begin with a raw materials list for our self-replicating machine.
+The materials ingested by the self-replicator are also the first
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+10
+
+radical departure from the materials adopted in synthetic biology.
+Engineering metals have high strength and stiffness (robust) –
+commonly metals – while biological materials have low strength
+and stiffness but high toughness and elasticity (adaptable) – commonly non-metallic elastomers – which is particularly useful for
+mechanical energy storage (Ellery et al. 2004). Biological materials
+are synthesized at moderate temperatures through the use of
+catalysts while engineering materials are manufactured at high
+temperature. An interesting question that emerges is ‘is life
+restricted to low-temperature regimes?’ Enzymes are biological
+catalysts that serve to increase the rate of biochemical reactions.
+If organic material is the elan of life, then life will be restricted
+to moderate temperature regimes. However, it is the chemical
+reaction that constitutes metabolic function, the enzyme merely
+facilitating it. If the logic of life is independent of its material substrate, then there is no reason why engineering materials cannot
+provide the basis for life. There are some precedents for such a
+notion.
+Clays are non-organic minerals that provide surfaces and
+cavities that constrain the formation of 3D conformation structures from simple precursors such as HCN, HCHO, etc. It has
+been postulated that biological catalysts evolved from inorganic catalysts such as mineral surfaces (Cairns-Smith 1990).
+Montmorillonite (Al4(Si4O10)2(OH)4.xH2O) clay may have acted
+as one of the first organic catalysts in the origin of life through
+the RNA world (Ferris 2005) and perhaps even prior to the
+RNA world as the first medium of genetic information storage
+(Cairns-Smith 1987). The clays montmorillonite and illite provide
+catalytic mineral surfaces for the polymerization of 20–50 monomer-long oligomers of nucleotides and amino acids, respectively
+(Ferris et al. 1996). Montmorillonite, in particular, can catalyse the
+polymerization of oligopeptides and oligonucleotides (Schwartz
+1996). Montmorillonite may have catalysed the synthesis of
+RNA polymers of length greater than 40 bases in length as
+required to act as both template and catalyst (Ferris et al. 2004).
+Specific catalysts for polymerization and replication could be
+implemented using clays within a protocell. The postulated
+RNA world was probably preceded by inorganic replicators
+such as crystal defects in clays, and mineral surfaces may
+have provided key metabolic processes in a protocell (Wachtershauser 1990). Inorganic metabolism such as the iron–sulphur
+world is consistent with hydrothermal vents with such protometabolism, possibly enhanced with hypercyclic feedback systems
+(Szostak et al. 2016). If a catalyst (inorganic or organic) is replaced
+or supplemented by higher thermal energy, the chemical reaction
+is still hastened. Does this absolve it of its biological character? We
+suggest not. Rather than CHONPS, we are adopting a minimal
+suite of engineering materials that can implement all the functions required of a self-replicator in its environment – we focus
+on the Moon for a number of reasons not relevant to this argument (Ellery 2016a,b,c). This approach brings to mind the
+emphasis placed on physicochemical processes on the nature of
+life (Schultze-Makuch & Irwin 2004). Our self-replicator must
+extract its restricted set of feedstock materials – iron, silicon,
+nickel, cobalt, tungsten, selenium, silica-based glass, silicone plastic (siloxanes) and water – from raw materials (mineral ores). The
+restricted range of required materials must be able to implement
+all the material functions required – compressive/tensile structures (bones/tendon), thermal insulation and conduction (fat/
+bloodstream), electrical conduction and insulation (axons/myelin), switching logic (neurons), etc. – whilst minimizing the infrastructure required to extract it (Table 1).
+
+A A Ellery
+
+This materials inventory can be readily extracted from surface
+lunar minerals and near-surface NiFe asteroid material on the
+Moon. Over the aeons, solar wind has deposited volatiles at an
+average rate of 3 × 108 particles cm−2 s−1 into the top few mm
+of soil. However, impact gardening has impregnated this material
+to a depth of a few metres. Solar wind comprises 96% H2 which
+has accumulated into a regolith concentration of 20–200 ppm
+(average ∼120 ppm) plus almost 4% He3 (with a He3/He4 ratio
+of 3 × 10−4 by mass) plus many minor constituents including carbon compounds. The common lunar mineral ilmenite (FeTiO3)
+in the 35–55 µm grain size range also preferentially adsorbs
+these volatiles compared with other minerals with the degree of
+volatile-enrichment increasing at finer grain sizes ∼10 µm.
+Loosely bound volatiles may be thermally evolved from surface
+regolith at temperatures of 600°C to release 75% of the volatile
+inventory (this increases to 86% at 700°C, 95% at 800°C and
+100% close to 1000°C). Although dominated by H2, additional
+volatiles – SO2, CO/CO2/CH4, N2, F2, Cl2, etc. will be released.
+Carbon in the form of CO, CO2 and CH4 volatiles is relatively
+scarce compared with mineral resources with an average abundance of 120 ppm (Fegley & Swindle 1993). Fractional distillation
+may be employed to separate the gas fractions due to their wellseparated condensation temperatures – He (4.2 K), H2 (20 K),
+N2 (77 K), CO (81 K), CH4 (109 K), CO2 (194 K) and H2O
+(373 K). The synthesis of silicone oils and silicone plastics
+from syngas-derived from lunar volatiles is outlined in (Ellery
+2016a,b,c). Silicones are chosen over hydrocarbons for their radiation hardness, high-temperature tolerance, functional properties
+and economic consumption of carbon.
+Heating the mineral ilmenite to ∼1000°C in the presence of H2
+reduces it to pure Fe, TiO2 and H2O: FeTiO3 + H2 → Fe + TiO2 +
+H2O. The water may be electrolysed to recycle the H2 and store
+O2: 2H2O → 2H2 + O2. Iron forms the basis of our self-replicator’s
+tissue but it requires the addition of further elements to provide a
+range of alloys for different functions – Ni, Co, Si, W and Se. In
+lunar regolith, Fe, Ni and Co particles are associated together as
+5–60 µm inclusions in troilite of meteoritic origin (Wittmann &
+Korotev 2013). However, it would be desirable to gain access to
+these materials in more concentrated form. The cobalt content
+of lunar and terrestrial mantles is similar. The Ni/Co ratio of
+the Moon’s mantle and the Earth’s mantle are similar to that of
+chondrites (Ringwood & Seifert 1986) (Table 2). This suggests
+that the Moon’s abundance of Ni should be similar to that of
+Earth’s mantle. However, Ni is depleted in the lunar mantle by
+a factor of 3 suggesting a Ni-rich metal lunar core. This constitutes evidence that the Moon was derived from the Earth’s mantle
+after the Earth’s core had formed. Nevertheless, lunar igneous
+rock often contains high Ni (up to 56%) and Co (up to 9%) content in FeNi metal inclusions, especially olivines but sometimes
+also in plagioclase. Lunar mantle olivine ((Mg,Fe)2SiO4) offers
+the highest source of associated Ni and Co favouring the lunar
+south pole Aitken basin where lunar mantle material may have
+been excavated – however, the crater shallowness suggests that
+no mantle material was in fact excavated (Wieczorek & Phillips
+1999). The two chief question marks concern the availability of
+tungsten which is a critical material for thermionic processes
+and selenium for its photosensitive response. On the Earth, tungsten has an average concentration of 1–2 mg kg−1 and is typically
+found as wolframite ((Fe,Mn)WO4) and scheelite (CaWO4). It is
+enriched in several rock-forming minerals including igneous Fe–
+Ti oxide minerals which can contain up to 10 mg kg−1 W. Its
+availability on the Moon is limited.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+11
+
+Table 1. Materials inventory required for a lunar photolithoautroph
+Functionality
+
+Traditional materials
+
+Lunar substitutes
+
+Tensile structures
+
+Aluminium alloy, iron alloys (steel),
+titanium alloy, plastic, composite
+materials
+
+Wrought iron, cast Iron, steel
+
+General structures including vehicles
+
+Compressive
+structures
+
+As above plus concrete/cement
+
+As above
+
+Buildings/fixed infrastructure
+
+Elastic structures
+
+Metal springs/flexures, Rubber
+
+Iron alloy springs/flexures,
+Silicone elastomers
+
+Compliant structures
+
+Thermal conductors
+
+Aluminium, copper, heat pipes
+
+Steel, fernico
+
+Thermal straps, radiator surfaces
+
+Thermal insulation
+
+Glass (fibre), ceramic
+
+Glass (fibre), ceramic
+
+Thermal isolation
+
+Thermal tolerance
+
+Tungsten, tantalum
+
+Tungsten
+
+Vacuum tube electrodes, high-temperature
+crucibles
+
+Electrical
+conduction
+
+Aluminium, copper, nickel
+
+Fernico (e.g. kovar), nickel
+
+Electrical wiring, resistors, capacitors, inductor
+coils, motor coils, electromagnet coils
+
+Electrical insulation
+
+Glass, ceramic, plastic, silicon steel
+
+Glass, ceramic, silicone plastic
+(to be minimized), silicon
+steel
+
+Vacuum tube enclosures, ceramic plates (motor
+cores and capacitors), plastic sheathing,
+electric motor cores
+
+Active electronics
+
+Solid state
+
+Vacuum tubes (kovar, nickel,
+tungsten, glass)
+
+Computer architectures
+
+Magnetic materials
+
+Rare earth materials (permanent
+magnets) Supermalloy
+
+Silicon steel/laminate
+(electromagnets) Permalloy
+
+Magnetic flux generation (motors)
+Magnetic shielding
+
+Sensors and
+sensory
+transduction
+
+PVDF/PZT
+PN junction semiconductors
+
+Quartz
+Selenium
+Thermionic conversion
+
+RF oscillators, electricity generation, optical
+vacuum tubes (photodiodes/
+photomultipliers)
+
+Optical structures
+
+Polished aluminium
+Glass
+
+Polished nickel
+Glass
+
+Mirrors, lenses, optical fibres
+
+Liquids
+
+Hydrocarbon oils Water
+
+Silicone oils
+Water (to be minimized)
+
+Lubricants, hydraulic force transmission
+(e.g. hot isostatic pressing), coolant
+
+Gases
+
+Air – petrol/paraffin
+
+Oxygen – hydrogen
+
+Oxidant –propellant
+
+Meteoritic material is the most likely material to contain
+high concentrations of iron, nickel, cobalt and tungsten (Ellery
+2016a,b,c). A NASA proposal to capture a small ∼1 m diameter
+asteroid and re-direct it into lunar orbit offers a potential solution.
+If a NiFe asteroid were to be selected, a ready source of Ni, Co, W
+and Se would be available although it would require orbital access.
+However, asteroidal material is available on the Moon itself.
+The three largest terrestrial impact craters on Earth are the
+250–300 km diameter Vredefort cater in South Africa (2.02 Gy
+old), the 200 km diameter Sudbury crater in Canada (1.85 Gy
+old), and the 170 km diameter Chicxulub crater in the Mexico
+Yucatan (65 My old). Large terrestrial impact craters such as the
+Vredefort South Africa and Sudbury Canada craters are sources
+of gold–uranium and nickel–cobalt–platinum, respectively
+
+Table 2. Ni and Co abundances in the lunar source material (ppm) [adapted
+from Ringwood A & Seifert S (1986)]
+Silicate
+
+Ni
+
+Co
+
+Ni/Co
+
+Lunar mantle olivine
+
+890
+
+156
+
+5.7
+
+Lunar volcanic glass
+
+185
+
+82
+
+2.3
+
+75
+
+43
+
+1.7
+
+11 100
+
+509
+
+22
+
+Average mare basalt
+C1 carbonaceous chondrites
+
+Applications
+
+(Reimold et al. 2005). The Vredefort deposits were formed from
+pre-existing archaean deposits prior to impact while the
+Sudbury Ni–Cu sulphide deposits were formed by the impactor
+itself. Most Sudbury ores are associated with a sublayer at the
+base of a 2.5 km thick elliptical igneous lens 27 × 60 km2 in extent
+with surrounding dikes. Large extraterrestrial impact craters
+might be expected to yield similar metallic sources. Mascons are
+high gravitational anomalies on the Moon which are believed to
+be formed by impact excavation (Melosh et al. 2013; Montesi
+2013). Mantle material slowly flowed into the basin causing uplift
+of the basin as it cooled and contracted, increasing its density.
+Hence, it is generally concluded that asteroid material of the
+impactor was vaporized and either escaped into space or was diffused over the lunar surface to form the 1–2% of the meteoritic
+material in the lunar regolith. However, it is possible that there
+may be asteroidal ores located within 500 m of the lunar surface
+if some of the asteroid material survived impact. Low-velocity
+impacts of small meteorites up to 3 km s−1 permits partial survival of the impactor which will have accumulated over the
+aeons (Bland et al. 2001). At high-impact angles, higher impact
+velocities of 7 km s−1 permit the survival of impactor material
+which remains localized at the centre of the resulting crater
+(Bland et al. 2008). The fraction of surviving material is directly
+related to the impact angle, however. Around 2.6% of lunar craters
+will retain more than 50% of the impacting material – this correlates with at least 600 craters exceeding 10 km in diameter in the
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+12
+
+A A Ellery
+
+highlands and 70 craters of similar dimensions in the mare
+regions. Such craters may be identified by thin breccia lens thicknesses. These offer potential sources of asteroidal material on the
+Moon. Strong magnetic anomalies in the northern rim of the
+South Pole Aitken basin on the lunar farside indicate that they
+originate from magnetic iron minerals of the impactor
+(Wieczorek et al. 2012; Collins 2012). Most of the metallic core
+of the 200 km diameter asteroid impactor which struck from
+south to north at 15 km s−1 at a 45° angle was retained in downrange ejecta. In general, most projectile material from near vertical
+impact velocities below 12 km s−1 appears to fragment but they
+survive and concentrate into the central peak of the craters created
+(Yue et al. 2013). The rest of the impactor material is dispersed in
+ejecta blanket, the crater floor and rim. The olivine in many lunar
+crater peaks is of asteroidal rather than lunar mantle origin.
+Beyond 14 km s−1 impact speeds, however, vaporization of the
+projectile material occurs. Metals appear to have the high survivability to hypervelocity impacts suggesting their incidence in crater floors, walls and ejecta blankets as metal particle fragments
+(McDermott et al. 2016). This suggests that there will be significant near-surface regions of the Moon which will host high concentrations of NiFe material and its associated Co, W and Se
+resources (Table 3).
+Both iron and nickel are plentiful in NiFe meteoritic sources.
+Cobalt is commonly found in association with Ni. If both are in
+sulphide form with troilite, they can be reduced with hydrogen
+by smelting at high temperature and pressure. Tungsten inclusions in NiFe meteoritic material represent one of the most
+accessible sources of tungsten. Forging by hammer, press, rolling
+or die is essential for tungsten. Tungsten has the highest melting
+point of all metals at 3422°C. As a structural material, it may be
+used for rocket engine linings but it is an essential ingredient in
+vacuum tube cathodes. It is processed in the non-molten state
+through powder metallurgy. Selenium is also a required resource
+for its photosensitive character necessary in light sensors and
+arrays of our engineered lifeform. Se/Te weight ratio of ∼20 is
+approximately constant in stony meteorites while the Se abundance averages ∼25 ppm Si in both stony and carbonaceous
+meteorites (Akafa 1966; Schuindewolf 1980). Meteoritic sources
+are thus favoured for both elements W and Se.
+There are material commonalities to our engineered creature
+and biological organisms. Important elements for the LUCA
+
+Table 3. Essential iron alloys
+Iron alloy
+
+Composition
+
+Functionality
+
+Wrought iron
+
+100% Fe
+
+Tensile structures
+
+Cast iron
+
+2–4% C + 1–2% Si + 94–
+97% Fe
+
+Compressive structures
+
+Tool steel
+
+9–18% W + <2% C + 80–
+91% Fe
+
+Durable cutting tools
+
+Silicon steel
+
+<3% Si + >97% Fe
+
+Soft electromagnets (motor
+cores and memory cores)
+
+Kovar
+
+29% Ni + 17% Co + 0.2% Si
++ <0.01% C + 53.5% Fe
+
+Electrically conductive wire
+
+Permalloy
+
+80% Ni + 20% Fe
+
+Magnetic shielding (μr ∼ 105)
+
+Nanophase
+iron
+
+0
+
+100% Fe
+
+Ferrofluidic sealing
+
+organism may have been Fe, Ni, Co and W metals (amongst
+others such as Mn, Mo, Cu, Zn and V) at temperatures ∼100°C
+under high pressure maintained by hydrothermal flow reactors
+(Wachtershausen 2006). These materials bear many similarities
+to our self-replicating machine’s materials, though the biological
+temperature regimes are much more modest. Pioneer ligands
+included S and S2 (sulphides) and others such as SH, H2O, OH,
+CO and CN, many of which are available as volatiles in the
+lunar regolith. Metal sulphides such as troilite/pyrite are common
+in nickel-iron meteorite material. Iron has an important role in
+ancient biochemical systems prior to oxygenation of the Earth’s
+atmosphere. Early ecosystems on Earth were driven by the anaerobic cycling of H2 and Fe2+ by phototrophs (Canfield et al. 2006).
+Banded iron formations from 3.8 By ago indicate Fe2+ was dissolved in ocean waters. Iron cycling occurred between Fe3O4
+and Fe2+ in solution in a Fe2+/Fe3+ redox couple (Weber et al.
+2006). Insoluble Fe3O4 is the electron acceptor that is produced
+through anoxygenic photosynthesis with ferrous Fe2+ in solution
+as the electron donor (Bird et al. 2011):
+4Fe2+ + CO2 + 11H2 O  CH2 O + 4Fe(OH)3 + 8H+
+Fe2+ is then recycled by iron-reducing bacteria. Mars has large
+deposits of iron oxide for which the Tinto River Basin with its
+iron-based geomicrobiology is an analogue (Amils et al. 2003).
+Its acidic waters are enriched in ferric iron and sulphates supporting iron oxidizers and iron reducers. Pyrite FeS2 is common
+under anaerobic conditions such as hydrothermal vents where it
+is a constituent of chimneys. It is formed from hydrothermal
+H2S and Fe2+ in solution: FeS + H2S → FeS2 + 2H+ + 2e−. Pyrite
+offers a powerful chemoautotrophic energy source through the
+oxidative formation of pyrite from troilite and hydrogen sulphide
+(Wachtershauser 1990). Pyrite may also act as a reduction source
+for catalysing the formation of iron–sulphur enzymes NAD(P)H
+and FADH2 (Wachtershauser 1992). Anaerobic oxidation of
+ferrous (FeII) to ferric (FeIII) iron by purple non-sulphur bacteria
+may have preceded oxygenic photosynthesis during the Archaean
+(Widdel et al. 1983). Pyrite minerals are commonly contaminated
+by FeS, CoS2 and NiS2 and have a typical Se content of 0.05% but
+may be enriched up to 0.9%. Finally, today, magnetotactic bacteria
+synthesize magnetite crystals inside magnetosomes (Rawlings
+et al. 2012). Hence, iron has an important role to play in biology.
+Likewise, it has a central role in the metabolism and tissue of our
+engineered creature.
+The natural lunar glass is ubiquitous on the Moon – typically
+20–25% of lunar regolith – caused by impact heating followed by
+rapid quenching but it is not suitable for optical applications.
+Fused quartz/silica is the best option though it is produced by
+melting and shaping high-purity silica at 2000°C (compared
+with ∼1000°C for soda lime glass). It has superior optical and
+thermal properties compared with most other types of glass and
+has a low thermal expansion coefficient (∼5.5 × 10−7/°C). This
+makes fused silica suitable for lenses, polished mirrors, vacuum
+tubes, glassware and other transparent optical components across
+the IR–ultraviolet (UV) range. As well as glass, quartz is a piezoelectric material that may be deployed for displacement sensing
+and derivative measurements (Kolesar & Dyson 1995). Silica
+and its variant quartz are rare on the Moon due to the low
+water content of the Moon. It can be manufactured by deposition
+from silicates with the action of strong acids similar to natural
+weathering. For example, acid leaching by hot hydrochloric acid
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+is a viable approach to reducing anorthite while avoiding high
+temperatures:
+CaAl2 Si2 O8 + 8HCl + 2H2 O  CaCl2 + 2AlCl3 .6H2 O + 2SiO2
+There are plastic pre-ceramic resins that can be 3D printed as a
+plastic gel into structures which are then fired into a hightemperature ceramic releasing much of its organic component
+(Wogan 2016). These pre-ceramic polymers are composed of
+mixtures of siloxanes and silazanes which are extruded. When
+pyrolized in the presence of UV light, the two polymers cross-link
+and form silicon oxycarbide ceramic structures. A simpler
+approach is to employ silicone plastics as precursors to ceramics
+without the need for silazanes (Narisawa 2010). There are two
+options: silicone may be oxidized into silica or reduced to silicon
+carbide. In all cases, it requires a post-processing thermal step following 3D printing. Silicon carbide may be created by heating silica and carbon at 2400°C for an extended period – this far in
+excess of the temperatures required for metal extraction from
+minerals. However, pyrolysis of silicone at 1100°C yields SiOxCy
+which may be converted to silicon carbide by carbothermic reduction with excess C at 1800°C:
+SiOx Cy  SiC + xCO + (y − x − 1)C
+This imposes slightly more modest temperatures though the rarity
+of carbon sources suggests SiC should be reserved for specialized
+roles such as ball milling. Alternatively, silicone may be converted
+to silica by flame combustion in oxygen:
+
+
+SiOx Cy + 1 − x + 2y O2  SiO2 + yCO2
+This would not have the hardiness of SiC but provides a mechanism for 3D printing ceramics without extreme temperatures. Silica
+is commonly used in biological systems –diatom shells, phytoliths
+in grasses, and spicules of sponges. Silicon has also been suggested
+as a replacement for carbon through its redox reactions between
+silica solid and silane (SiH4) gas. Such a silicon-based metabolism
+would require quite extreme conditions and the solidity of silica
+does present certain difficulties for its excretion.
+Biomining is simpler and less energy-intensive than pyrometallurgy, offering a biological component to engineered selfreplication. Of particular relevance is the biooxidation of sulphide
+deposits such as iron pyrite by Thiobacillus ferrooxidans in a cultured medium with ferrous iron as the energy source (Acevedo
+2000; Cockell 2011). Synthetic biology may introduce additional
+extraterrestrial applications such as enhanced biomining and biocement production, biological control systems (Menezes et al.
+2015) and photosynthetic bacteria for capturing solar energy as
+a biofuel (Way et al. 2011). However, biomining using microorganisms as catalysts are unlikely to be feasible for extraterrestrial
+processing in the near term, especially on the Moon.
+
+Biological Principle 2: solar energy for metabolism
+Energy is essential for living entities to maintain their metabolic
+activity and growth. Whereas photosynthesis in chloroplasts is
+driven by pigment molecules which operate at moderate temperatures, the self-replicating machine autotroph uses thermal energy.
+Thermosynthesis has been suggested as a plausible energy source
+for extraterrestrial biota, though it was envisaged to apply to
+
+13
+
+low-temperature gradients within ices (Muller 2003). Such thermosynthesis would offer very low-quality energy but it is plausible
+that much higher temperature gradients might occur at hydrothermal vents with temperatures of 400 + °C under high pressure.
+Industrial temperatures offer even higher energy sources clearly
+beyond the capacity for carbon-based biology.
+To extract our feedstock for the 3D printers, an intense source
+of thermal energy is required. Our self-replicator uses hearthbased chemistry to extract its restricted set of feedstocks materials.
+The primary energy source is solar energy which is captured
+and concentrated using solar concentrators – parabolic mirrors
+or Fresnel lenses. Solar furnaces using Fresnel lenses can
+provide the required temperatures for thermochemical extraction
+from minerals. Fresnel lenses concentrate sunlight onto a single
+focus – they are flat with a sculpted contour to reduce weight.
+They have not been discovered by biological evolution almost certainly because the advantage of Fresnel lenses over biconics is
+only apparent for much larger geometries than biological eyes.
+The temperature regimes our creature requires for its metabolism
+far exceed that of even Pyrolobus fumarii which like all terrestrial
+organisms is restricted by the limits of carbon-based organics. A
+silicon-based lifeform may not be so limited in temperature tolerance. The Fresnel lens-based thermal source allows us to create a
+local controlled environment for the self-replication process to be
+undertaken in a structured encapsulated environment to minimize variability in metabolic processes. This locally controlled
+environment begins with using Fresnel lenses to thermally fuse
+local lunar regolith at 1200–1500°C, thereby paving it into the
+glass to control the incidence of dust. This is the first step towards
+encapsulation.
+Thermal energy can be converted into electrical energy
+through thermionic emission (implemented in vacuum tubes)
+(Ellery 2016a,b,c). This focusses light energy onto a small volume
+as heat onto the cathode of a vacuum tube. The cathode emits
+electric current through thermionic emission with an efficiency
+of around 5–20%. This may be enhanced significantly through
+PETE (photon-enhancement of thermionic emission) using
+photosensitive coatings (such as Se) (Schwede et al. 2010).
+Thus, electric power is generated to enable the growth of the selfreplicating machine. Both forms of energy – thermal and electrical – are required for our artificial creature’s metabolism.
+Energy may be stored mechanically in motorized flywheels.
+According to Boden (2003), the first fundamental law of bioenergetics requires that a living organism must convert environmental
+energy into smaller energy currency units that can be tapped
+incrementally to power metabolic activity. In biological systems,
+it is ATP that provides this currency in discrete packages. In
+our self-replicating machine, flywheel energy storage provides a
+continuously tappable energy mechanism. It is not inconceivable
+that the bacterial flagellar motor could have evolved and been
+co-opted into a nanoscale-flywheel-type of organelle for storing
+biological energy (without the flagellum itself). Multiple flywheels
+in random orientations within the cell would sum to zero total
+angular momentum. Furthermore, as conceived in spacecraft
+(Varatharajoo 2004), flywheels could provide combined energy
+storage and angular momentum control of cellular tumbling.
+The same two components discussed later for actuation and information processing – motors and vacuum tubes respectively – provide the basis for energy generation and storage respectively for
+our self-replicator. This multifunctional aspect of component
+use is common in biology where a component evolved for one
+task (such as feathers for thermal insulation) is co-opted for
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+14
+
+another task (control surfaces for bird flight). Motors are the central component in flywheels (electromechanical batteries) which
+offer high-energy densities. They provide the basis for all motive
+machines including 3D printers, other manufacturing processes
+and for energy storage (as flywheels); vacuum tubes provide the
+basis for all active electronics and energy generation (through
+thermionic conversion) (Ellery 2016d).
+Biological Principle 3: manipulation of the environment
+The feedstock to which our creature has access is fed to our ribosome which comprises a set of 3D printers for different material
+types. In biological 3D protein construction, 1D polypeptide
+strings are constructed from amino acid modules in a ribosomal
+assembly line using tRNA coding keys. The origin of tRNA–
+amino acid encoding is unknown, whether it is an arbitrary
+frozen accident or due to a specific physicochemical interaction
+(Edwards 1998). Coevolution theory suggests that the coding
+scheme evolved from relative positioning of precursor amino
+acids and tRNA on pyrite mineral surfaces. Polypeptide strings
+automatically configure themselves into their appropriate 3D
+shape. In our artificial creature, the construction process is not
+an assembly line, rather a suite of 3D printers. The artificial 3D
+structure is constructed from a series of modular 2D layers that
+are built into their appropriate 3D shape layer-by-layer.
+Furthermore, this 3D printed structure is employed in its entire
+volume rather than localized to active regions of the surface of
+a biological protein – this, of course, is a result of the difference
+of scale between the macroscopic engineered structure and the
+molecular biological structure. Our self-replicating machine is
+based on a 3D printing concept inspired by the RepRap 3D
+printer (Jones et al. 2011). RepRap is a partially self-replicating
+3D printer that can print its own plastic parts (Fig. 1). It cannot,
+however, replicate: (i) its steel bars; (ii) its connecting metal nuts
+and bolts; (iii) its glass work platform; (iv) its electric motors;
+(v) its electronics boards; (vi) nor can it self-assemble. Such additive manufacturing is well established for constructing structures
+of different materials such as plastics (fused deposition
+
+Fig. 1. Assembled RepRap 3D printer.
+
+A A Ellery
+
+modelling), metals (electron beam freeform fabrication) and ceramics (selective laser sintering). All 3D printing involves relative
+motion between a printing head (xy-direction) and a work platform (z-direction). They are in effect Cartesian robots – all robots
+from rovers to drills to manipulators are kinematic configurations
+of electric motors. Hence, electric motors are central to our selfreplicating machine.
+The key components of the self-replicating machine are
+electric motors and electronics which can both be constructed
+from the available material set we considered earlier. These components are the fundamental components of any kinematic
+machine – 3D printers, manipulators, roving vehicles, drilling/
+milling machines, lathes, etc. The core of any robot is its actuators, sensors and controllers. Actuation involves manipulating
+the local environment – an essential pre-requisite of life. Our
+own experiments using shape memory alloys as artificial muscles
+driving a rotary shaft using cams illustrated the concept of an artificial linear bio-inspired motor but it was inferior in performance
+to the electromagnetic motor (Ellery 2015). We have been applying 3D printing methods to the construction of DC electric
+motors of different types. Although we have yet to 3D print an
+entire electric motor, we have 3D printed motor cores and are
+working in printing coils and electromagnets to complete the
+assembly (Fig. 2). In our self-replicating machine, the nature of
+the self/non-self-boundary is more fluid than in biological systems – its internal space is defined by its internal thermochemical
+processing, 3D printing, etc. Its external space is less clear as it
+must forage to acquire its nutrients for which it deploys rovers
+to perform extractive processes – they effectively extend ‘pseudopodia’ into the environment. The goal is to demonstrate 3D printing of electric motors and electronic control systems as the basic
+components of any kinematic machine. We thus next consider
+information-processing control systems.
+Biological Principle 4: information processing
+It has been proposed that the Turing machine does not constitute
+a general model of computing (Goldin & Wegner 2005). Natural
+computation is a physical process that cannot be fully described
+by a Turing machine (MacLennan 2004). Hence, there are physical machines that cannot be simulated by any Turing machine.
+The Turing machine model cannot account for interactivity
+with the environment of the real world because it is abstract
+rather than physical. Interacting computational units have emergent properties that are not algorithmic. A special Turing machine
+concept relevant to biological information processing is the
+
+Fig. 2. Polylactic acid (PLA)-based 3D printed motor core with 45% iron powder
+loading.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+interactive Turing machine. Biological organisms interact with
+their environment allowing for perpetual learning and so possess
+super-Turing capabilities (Wierdermann & van Leeuwen 2002).
+This concept may be abstracted as the interactive Turing machine
+with advice. Interactive Turing machines have perpetual exchange
+of information with their environment – essentially infinite computations. This models any cognitive system equipped with sensors to acquire information from the environment and effectors
+with which to modify that environment. This process is ongoing
+and continuous. This capacity by itself however, lies within the
+power of the universal Turing machine through its input/output
+tapes. The key to introducing super-Turing capabilities lies with
+the admission of unpredictability to its computations. This is
+introduced to the Turing machine as advice to implement noncomputable external information. The advice takes the form of
+a separate advice tape that computes the advice value on its
+tape in a single step. The Turing machine with advice models
+computability with interaction with the external environment.
+The advice tape models inputs from a social community of interactive Turing machines – the advice is non-computable within the
+Turing machine itself. Hence, the interactive Turing machine with
+advice constitutes a super-Turing machine. A corollary of this
+suggests that the physical version of the Church-Turing thesis
+(every finite physical process subject to physical laws can be simulated by a universal Turing machine operating a finite program)
+(Deutsch 1985) is incorrect and that biological neural function
+cannot be implemented by a universal Turing machine.
+Our interest in feedback control systems is reminiscent of
+a cybernetic definition of life emphasizing multiple feedback
+control systems as a major characteristic (Korzeniewski 2001).
+We need to 3D print computational control systems for those
+motors, i.e. electronics. The vacuum tube – constructed from
+our restricted suite of materials in a relatively simple geometric
+configuration – should lend itself to 3D printing (TBD). A typical
+triode has a simple construction comprising a heated tungsten
+cathode surrounded by a nickel control grid and a nickel anode
+enclosed in a glass tube. The control grid voltage controls the current between the cathode and anode. It provides the basis for electronic amplification and switching (Han & Meyyappan 2014).
+Solid state electronics requires too many specialized reagents
+and conditions to be incorporated into a practical self-replication
+scheme. The vacuum tube may potentially supersede solid-state
+transistors for unconventional applications as they have a high
+tolerance to temperature and radiation (Teuscher 2014). Selfreplication technology is one such unconventional application.
+
+15
+
+In fact, vacuum channel transistors are under development in
+which a thin layer of SiO2 insulates a gate electrode from the
+upper source and drain electrodes (Han & Meyyappan (2014)).
+The cathode and anode are sharpened into points to intensify
+the electric field at the tips emitted via field emission. The distance between the cathode and anode is less than the electron
+mean free path (200 nm in the air or 1 µm in He) – in a vacuum,
+this is not a constraint. However, the bulky nature of traditional
+vacuum tubes does not lend itself to traditional general purpose
+computational architectures.
+Digital computations require many more devices than analogue circuits for the same function – the addition of two numbers requires hundreds of transistors. It requires Boolean
+circuits of size O(n 1+e) to compute multiplications with an
+error e > 0. For this reason, we adopt neural network architectures
+over traditional computer architectures to compensate for the larger size of vacuum tubes over solid-state transistors. The complexity of a neural network increases only as the logarithm of the task
+complexity unlike the exponential increase in circuit complexity
+of digital architectures. Similarly, to train a neural network of N
+nodes and W weights,
+m random training samples are required
+
+such that m ≥ O We log Ne where 0 < e ≤ 1, e = acceptable error
+fraction (Baum & Haussler 1989). Neural net circuits can incorporate vacuum tubes rather than difficult-to-manufacture solid
+state circuitry but without the scaling problem of digital circuitry.
+To that end, we have adopted a simple analogue neuron circuit as
+our computing element modified from the Yamashita–Nakaruma
+neuron (Yamashita &Nakamura 2007; Larson & Ellery 2015)
+(Fig. 3).
+The electronic neuron models the nonlinear input–output
+relation where the output is given by:
+
+yi = f
+
+n
+
+
+
+wij xi
+
+j=0
+
+where xi = input, wij = weighting factor, f(.) = non-linear squashing function. The weight matrix of the network of neurons determines the functionality of the network. Simple reactive behaviours
+have been implemented readily using these analogue neurons.
+Braitenburg vehicles comprise two sensors, left and right, and
+two motors to drive their respective wheels, left and right. The
+connections between the sensors and the motors determine the
+vehicle’s behaviour. We have demonstrated a two-neuron circuit
+implementing a Braitenburg control architecture of BV2/BV3
+
+Fig. 3. Analogue neuron circuit – part of a two-neuron circuit for rover obstacle avoidance behaviour.
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+16
+
+class (Braitenburg 1984) performing automatic obstacle avoidance
+on a simple desktop mobile robot.
+Artificial neural networks can implement any nonlinear
+mapping function and are Turing-complete (Siegelmann &
+Sontag 1995) perhaps even offering super-Turing capabilities
+(Siegelmann 1995). Neural nets are efficient as universal Turing
+machines. Recurrent neural nets with feedback are more powerful
+than standard feedforward neural nets (Goudreau et al. 1994). A
+neural network simulator with r = m + n + 2 layers of neurons and
+two sets of recurrent connection weights with feedback can simulate in real time a Turing machine with m-symbols and n-states
+(Sun et al. 1991). The Siegelmann–Sontag universal neural
+network-based Turing machine comprised 886 neurons, though
+this has been reduced in more recent work to 96 then 25 and
+finally to just 9 switched affine neurons that implement Boolean
+functions (Siegelmann & Margenstern 1999). A recurrent neural
+network with rational weights is computationally equivalent to a
+Turing machine model of digital computing machines. The computational capacity of recurrent neural networks may be enhanced
+beyond that of the Turing machine using real-valued weights
+which offer the infinite precision of analogue information
+(Balcazar et al. 1997). This allows them to compute non-recursive
+functions. The recurrent neural network with real weights offers
+super-Turing capabilities as an interactive Turing machine
+with advice (Cabessa & Siegelmann 2012). Hence, neurons with
+rational weights yield Turing machine capability but neurons
+with real weights are more powerful than Turing machines
+(Margenstein 2000). Analogue recurrent neural networks are
+equivalent to oracle Turing machines. An oracle machine is a
+black box augmenting a Turing machine that makes a decision
+in a single step even if that decision is complex. The Turing
+machine can copy symbols onto the oracle tape. The oracle is
+not a Turing machine itself. The oracle itself has its own tape
+and read/write head but has special states – Query and
+Response. When the machine reads the Query state, the read/
+write head subsequently moves to the next square and writes
+the Response (yes/no) as a solution in a single step. State Yes
+or No depends on whether the current string is on the oracle
+tape. The oracle introduces the possibility of inputting new nondeterministic or non-computable data to the machine. An
+example of a decision is the halting problem where the oracle
+determines whether the Turing machine halts given its inputs,
+i.e. the oracle augments the Turing machine with non-computable
+capabilities. As a physical adjunct circuit, the Wheatstone bridge
+can act as an oracle to a Turing machine extending the computational powers of such a system beyond the Church-Turing limit
+(Beggs et al. 2010). It is the measurement of a physical process –
+in this case, measurement of analogue electrical resistance by
+the Wheatstone bridge – that extends the computational power
+of the abstract Turing machine. We select the analogue neural
+network (to which feedback connections can be added) as the
+computational architecture of choice yielding greater computational capabilities over traditional computational architectures.
+Evolving recurrent neural networks where synaptic weights
+change over time (i.e. learning) are equivalent to interactive
+Turing machines with advice, i.e. they are capable of superTuring computations – this is the case for both rational and
+real weights (Cabessa 2014). In rational-weighted recurrent neural
+networks, these super-Turing capabilities can only be realized if
+the synaptic weights evolve in a non-recursive manner – recursive
+learning limits such networks to Turing-computable functions.
+However, in real-weighted recurrent neural networks, there are
+
+A A Ellery
+
+no such requirements for the learning to achieve super-Turing
+capacities. Super-Turing machines include analogue recurrent
+neural networks with real-valued nonlinear squashing functions
+(Teuscher & Sipper 2002). Hence, our analogue neuron may
+offer super-Turing capabilities when in recurrent configuration.
+These circuits – based on vacuum tube active components – are
+to be 3D printed. The core of our universal Turing machine segment is a 3D printer which takes data stored in magnetic core
+memory (based on the same technology as motors) and prints
+out analogue neural net circuits that physically encapsulate programs. It is envisaged that such neural network circuits implement specific programs printed by a 3D printer (representing
+the read–write head of a universal Turing machine) according
+to information held in magnetic core memory (based on the
+same principles and materials as an electric motor). Embedded
+software interacts with its underlying hardware and is subject to
+temporal constraints on execution time, this constraint being
+undecidable for Turing machines (Lee 2005). The analogue neural
+net is an extreme version of the embedded software in that the
+software is embedded in the connection weights without the temporal undecidability problem. Although the analogue neuron is
+far simpler than the biological neuron, it nevertheless implements
+basic functions of information processing and transmission.
+Noise can be exploited to advantage – dithering is the process
+of imposing random mechanical vibrations onto motors to compensate for sticking behaviour. This is an example of stochastic
+resonance (Wiesenfeld & Moss 1995). Similarly, biological neurons, by virtue of their nonlinearity, can exploit stochastic resonance to enhance the detectability of small signals by amplifying
+the combined signal and noise to overcome the threshold for
+detection. The noise signal from broadband background entrains
+and resonates with the low signal to amplify it. Stochastic resonance requires low levels of noise otherwise excessive noise will
+swamp it – the signal-to-noise ratio rises with noise to an optimal
+value and then decreases. Analogue neurons are characterized by
+constant low levels of intrinsic noise but above a threshold they
+fire digitally, thereby amplifying a low signal. Networks of neurons provide the ability to handle signals with a range of amplitudes and noise levels. Hence, analogue neural circuits offer the
+prospect of exploiting stochastic resonance for enhanced signal
+processing.
+Biological and analogue neural systems go beyond Turing
+machines because they are self-modifying and computationally
+open so cannot be captured in an algorithm. This is precisely
+the realm of autonomic computing which emphasizes selfconfiguration, self-optimization, self-repair and self-protection
+(Kephart & Chess 2003). Hence, our adoption of analogue recurrent neural networks offers similar computational capabilities as
+biological systems.
+
+Discussion & conclusions
+Our self-replicating machine concept possesses all the primary
+elements of life. We have outlined how the elements of a selfreplicating machine might be constructed physically and how
+some fundamental components might be 3D printed. We are
+using robotics as existence proofs for physical mechanisms of selfreplication – a similar approach of using robotics in the service
+of biological sciences has been cognitive robotics and robotic
+zoology. The steps towards realization of a self-replicating
+machine are thus:
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+
+(i) 3D printing basic control system elements – actuators and
+electronic circuits – from raw material – this is the most critical step which is underway;
+(ii) 3D printing general robotic systems (essentially protein analogues) – mining vehicles, drills, crusher jaws, etc. –as different configurations of motors and their control systems;
+(iii) 3D printing 3D printers as Cartesian robot configurations of
+motors and their control systems (essentially ribosome
+analogues);
+(iv) There have been several attempts to build embryonic but
+simple self-replication architectures from Lego to exploit its
+standard blocks and mechanical interfacing (Chirikjian
+et al. 2002; Moses et al. 2014) but none consider the complexities of raw material acquisition and processing (essentially cellular networks);
+(v) Encoding a self-replicating machine into a heritable program
+of instructions (essentially genes) to be stored in magnetic
+core memory (including error detection and correction
+codes);
+(vi) Demonstrate magnetic memory-to-memory program copying through magnetic induction (similar to the two sides
+of a transformer).
+So, can building an artificial robotic lifeform using engineering
+materials provide any insight into the astrobiology quest – to
+understand the limits and scope of life beyond the Earth? It is
+worth noting that our artificial creature possesses most of the
+properties of life. There are open questions however, whether
+this self-replicating machine could be alive. In the digital ecosystems Tierra and Avida, populations of self-replicating programs
+compete for computer memory space and CPU time forming
+their computational ecosystems (Adami 2006). The code itself
+corresponds to genetic information while their execution implements the phenotypic function. Instruction processing correlates
+to energy consumption and varies in proportion to code length.
+Replication is imperfect while population pressure imposes environmental constraints. Fitness is determined by the copying efficiency and replication rate. Replication is subject to mutation
+and faster replicators tend to have more offspring (r strategy)
+but new phenotypic traits increase fitness (K-strategy). Limited
+environments cause evolutionary regression but co-evolutionary
+arms races imposed by continually changing environments overcome this (Red Queen effect). Evolvability however, requires a
+balance between exploration (plasticity) and exploitation (stability). Experiments in Avida indicate that self-replication does not
+guarantee evolvability (LaBar et al. 2015). Within Avida, a lack
+of evolvability can occur if all possible mutations to a specific genetic sequence prevent further self-replication, but this would be
+rare. Autopoietic definitions of life appear to deny the possibility
+of engineered life as they emphasize process rather than components and, in doing so, they impose evolutionary history as a
+requirement for life. A minimal Mycoplasma genitalium cell has
+been engineered to survive with only 265 genes without loss of
+biological function from its natural 475 genes (it is the smallest
+natural genome because it lacks genes for cytochrome c and the
+Krebs cycle) – it did not evolve this state, so by this definition,
+it is not alive, yet this is clearly not the case. The original precursor organism with its evolved cellular components – many of
+which were retained in the minimal organism – was alive.
+Hence, we submit that evolutionary capacity rather than evolutionary history is a property of life. This implies that the selfreplicating machine we have described would be alive in a
+
+17
+
+potential sense. If permitted to evolve, it would constitute life; if
+prevented from evolving, it would not. An important question
+then becomes whether the machine is too brittle for evolutionary
+change – this will be dependent on the architecture of its genetic
+program of instructions. We envisage that the engineered system
+will not use phylogenetic, ontogenetic and epigenetic representation schemes though these have been explored in engineered systems (Sipper et al. 1997) and indeed, 3D printing provides a
+mechanism to implement ontogenesis in self-replicating structures. This is an issue for the future. The question to the astrobiology community is whether this quest to create a self-replicating
+machine yields any insights into astrobiology questions.
+
+References
+Acevedo F (2000) Use of reactors in biomining processes. Electronic Journal of
+Biotechnology 3(3).
+Adami C (2006) Digital genetics: unravelling the genetic basis of evolution.
+Nature Genetics 7, 109–118.
+Akafa H (1966) Abundances of selenium, tellurium and indium in meteorites.
+Journal of Geophysical Research 71(7), 1919–1923.
+Amils R, Fernandez-Remolar D, Gomez F, Aguilera A, Gonzalez-Toril E,
+Rodriguez N (2003) ‘Importance of the iron cycle relevance to Mars exploration’. In Proceedings of the 3rd European Workshop on Exo-Astrobiology –
+Mars: The Search for Life (ESA SP-545), Madrid, Spain, 43–46.
+Asai D and Koonce M (2001) Dynein heavy chain: structure, mechanics and
+evolution. Trends in Cell Biology 11(5), 196–202.
+Atsum T (2001) Ultrasonic motor model for bacterial flagellar motors. Journal
+of Theoretical Biology 213, 31–51.
+Baas P, Karabay A and Qiang L (2005) Microtubules cut and run. Trends in
+Cell Biology 15(10), 518–524.
+Balcazar J, Gavalda R and Siegelmann H (1997) Computational power of
+neural networks: a characterization in terms of Kolmogorov complexity.
+IEEE Transaction of Information Theory 43(4), 1175–1183.
+Baum E and Haussler D (1989) What size net gives valid generalization?
+Journal of Neural Computation 1(1), 151–160.
+Bedau M (1992) Philosophical aspects of artificial life. In Varela F
+and Bourgine P (eds). Towards A Practice of Autonomous Systems.
+Cambridge, MA: Bradford Books/MIT Press, pp. 494–503.
+Bedau M (1997) Emergent models of supple dynamics in life and mind. Brain
+& Cognition 34, 5–27.
+Bedau M (1998) Four puzzles about life. Artificial Life 4, 125–140.
+Bedau M (2003) Artificial life: organisation, adaptation and complexity from
+the bottom up. Trends in Cognitive Sciences 7(11), 505–512.
+Bedau M, McCaskill J, Packard N, Rasmussen S, Adami C, Green D,
+Ikegami T, Kaneko K and Ray T (2000) Open problems in artificial life.
+Artificial Life 6, 363–376.
+Beggs E, Costa J and Tucker J (2010) Physical oracles: the Turing machine
+and the Wheatstone bridge. Studia Logica 94, 1–22.
+Ben-Jacobs E (2009) Learning from bacteria about natural information processing. Annals of New York Academy of Sciences 1178, 78–90.
+Benner S and Sismour M (2005) Synthetic biology. Nature Reviews Genetics 6,
+533–543.
+Berg H (1974) Dynamic properties of bacterial flagellar motors. Nature 249, 77–79.
+Berg H (1995) Torque generation by the flagellar rotary motor. Biophysical
+Journal 68, 163s–167s.
+Berg H (2003) Rotary motor of bacterial flagella. Annual Reviews Biochemistry
+72, 19–54.
+Bersini H (2010) Software replica of minimal living processes. Origins of Life
+& Evolution of Biospheres 40, 121–130.
+Bich L and Damiano L (2007) Theoretical and artificial construction of the
+living: redefining the approach from an autopoietic point of view. Origins
+of Life & Evolution of Biospheres 34, 459–464.
+Bird L, Bonnefoy V and Newman D (2011) Bioenergetic challenges of microbial iron metabolism. Trends in Microbiology 19(7), 33–340.
+Blair D (1991) Bacterial rotary motor. Nanotechnology 2, 123–133.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+18
+Blair D (1995) How bacteria sense and swim. Annual Reviews Microbiology
+49, 489–522.
+Bland P, Cintala M, Horz F and Cressey G (2001) Survivability of meteorite
+projectriles – results from impact experiments. In 32nd Lunar & Planetary
+Science Conference, abstract no 1764.
+Bland P, Artemieva N, Collins G, Bottke W, Bussey D and Joy K (2008)
+Asteroids on the Moon: projectile survival during low velocity impacts. In
+39th Lunar & Planetary Science Conference, abstract no 2045.
+Bloom B (1995) Microbial minimalist. Nature 378, 236.
+Boden M (2003) Alien life: how would we know? International Journal of
+Astrobiology 2(2), 121–129.
+Bourgine P and Stewart J (2004) Autopoiesis and cognition. Artificial Life 10,
+327–345.
+Brack A and Trouble M (2010) Defining life: connecting robotics and chemistry. Origins of Life & Evolution of Biospheres 40, 131–136.
+Braitenburg V (1984) Vehicles: Experiments in Synthetic Psychology.
+Cambridge, MA: MIT Press.
+Brizard A and van Esch J (2009) Self-assembly approaches for the construction of cell architectures mimics. Soft Matter 5, 1320–1327.
+Bruylants G, Bartik K and Reisse J (2010) Is it useful to have a clear-cut definition of life? On the use of fuzzy logic in prebiotic chemistry. Origins of
+Life & Evolution of Biospheres 40, 137–143.
+Burgess S and Knight P (2004) Is the dynein motor a winch? Current Opinion
+in Structural Biology 14, 138–146.
+Cabessa J and Villa A (2014) Interactive evolving recurrent neural networks
+are super-Turing. In Wermter S, Weber C, Duch W, Honkela T,
+Koprinkova-Hristova P, Magg S, Palm G, Villa A (eds). Lecture Notes in
+Computer Science, vol. 8681. Cham: Springer Publishers, pp. 57–64.
+Cabessa J and Siegelmann H (2012) Computational power of interactive
+recurrent neural networks. Neural Computation 24(4), 996–1019.
+Cairns-Smith A (1987) Genetic Takeover & the Mineral Origins of Life.
+Cambridge, UK: Cambridge University Press.
+Cairns-Smith A (1990) Seven Clues to the Origin of Life. Cambridge, UK:
+Cambridge University Press.
+Calabretta R (1998) Cellular automata in an artificial life perspective. In
+Bandini S, Serra R and Suggi Liverani F (eds). Cellular Automata:
+Research Towards Industry. London: Springer-Verlag, pp. 243–246.
+Canfield D, Rosing M and Bjerrum C (2006) Early anaerobic metabolisms.
+Philosophical Transactions of the Royal Society B 361, 1819–1836.
+Carter F (1984) Molcular device computer: point of departure for large scale
+cellular automata. Physica 10D, 175–194.
+Chaitin G (1970) To a mathematical definition of ‘life’. ACM SICACT News 4,
+12–18.
+Chirikjian G, Zhou Y and Suthakorn J (2002) Self-replicating robots for lunar
+development. IEEE/ASME Transactions on Mechatronics 7(4), 462–472.
+Chodasewicz K (2014) Evolution, reproduction and definition of life. Theory
+Biosciences 133, 39–45.
+Cockell C (2011) Synthetic geomicrobiology: engineering microbe-mineral
+interactions for space exploration and settlement. International Journal of
+Astrobiology 10(4), 315–324.
+Cohen P and Perrault C (1979) Elements of a plan-based theory of speech
+acts. Cognitive Science 3(3), 177–212.
+Collins G (2012) Moonstruck magnetism. Science 335, 1176–1177.
+Cordova N, Ermentrout B and Oster G (1992) Dynamics of single-motor
+molecules: the thermal ratchet model. Proceedings of the National
+Academy Sciences of the United States of America 89, 339–343.
+Cronin L, et al. (2006) Imitation game – a computational chemical approach
+to recognising life. Nature Biotechnology 24(10), 1203–1206.
+Cross R (2004) Kinetic mechanism of kinesin. Trends in Biochemical Sciences
+29(6), 301–309.
+Cross R and Carter N (2000) Molecular motors. Current Biology 10(5), R177–
+R179.
+Crutchfield J (1994) Calculi of emergence: computation, dynamics and induction. Physica D 75(1–3), 11–54.
+Csanyi V and Kampus G (1985) Autogenesis: the evolution of replicative systems. Journal of Theoretical Biology 114, 303–321.
+Cui S and Friedman A (1999) Analysis of a mathematical model of protocell.
+Journal of Mathematical Analysis & Applications 236, 171–206.
+
+A A Ellery
+Damiano L and Luigi Luisi P (2010) Towards an autopoietic redefinition of
+life. Origins of Life & Evolution of Biospheres 40, 145–149.
+Deamer D and Pashley R (1989) Amphiphilic components of the Murchison
+carbonaceous chondrite: surface properties and membrane formation.
+Origins of Life & Evolution of the Biosphere 19, 21–38.
+Deamer D, Dworkin J, Sandford S, Bernstein M and Allamandola L (2002)
+First cell membranes. Astrobiology 2(2), 371–381.
+Deming T (1997) Polypeptide materials: new synthetic methods and applications. Advanced Materials 9(4), 299–311.
+Deplazes A and Huppenbauer M (2009) Synthetic organisms and living
+machines. Systems & Synthetic Biology 3, 55–63.
+DeRosier D (1998) Turn of the screw: the bacterial flagellar motor. Cell 93,
+17–20.
+Deutsch D (1985) Quantum theory, the Church-Turing principle and the universal quantum computer. Proceedings of The Royal Society A 400, 97–117.
+Dohner K, Nagel C-H and Sodeik B (2005) Viral stop-and-go along microtubules: taking a ride with dynein and kinesin. Trends in Microbiology 13
+(7), 320–327.
+Dutcher S (1995) Flagellar assembly in two hundred and fifty easy-to-follow
+steps. Trends in Genetics 11(10), 398–404.
+Edwards M (1998) From a soup or a seed? Pyritic metabolic complexes in the
+origin of life. Trends in Ecology & Evolution 13(5), 178–181.
+Egelman E (2003) Actin’s prokaryotic homologs. Current Opinion in
+Structural Biology 13, 244–248.
+Eiben A (2014) Grand challenges for evolutionary robotics. Frontiers in
+Robotics & AI 1(Jun), 1–8.
+Elani Y, Law R and Ces O (2014) Vesicle-based artificial cells as chemical
+microreactors with spatially segregated reaction pathways. Nature
+Communications 5, 5305.
+Ellery A (2015) Ultimate smart system – steps towards a self-replicating machine.
+In Proceedings of the 5th International Conference on Smart Materials &
+Structures, pp. 225–234.
+Ellery A (2016a) Are self-replicating machines feasible? AIAA J Spacecraft &
+Rockets 53(2), 317–327.
+Ellery A (2016b) How to build a self-replicating machine on the Moon. In
+Proceedings of the ASCE Earth & Space Conference, Orlando, pp. 713–724.
+Ellery A (2016c) Solar power satellites for clean energy enabled through disruptive technologies. In Proceedings of the 23rd World Energy Congress
+(Award Winning Papers), Istanbul, Turkey, pp. 133–147.
+Ellery A (2016d) John von Neumann’s self-replicating machine – critical components required. In Proceedings of the IEEE International Conference on
+Systems Man & Cybernetics, Budapest, Hungary, pp. 314–319.
+Ellery A et al. (2004) Bionics & Space Systems Design 1 – Overview of
+Biomimetics Technology. ESA-ESTEC Technical Note 1, ESA Contract no
+18203/04/NL/PA.
+Endy D (2005) Foundations for engineering biology. Nature 438, 449–453.
+Engelborghs Y (1994) Microtubules: dissipative structures formed by selfassembly. Biosensors & Bioelectronics 9, 685–689.
+Ermentrout B and Edelatein-Keshet L (1993) Cellular automata approaches
+to biological modelling. Journal of Theoretical Biology 160, 97–133.
+Fegley B and Swindle T (1993) Lunar volatiles: implications for lunar resource
+utilization. In Lewis J, Matthews M and Gurrieri M (eds). Resources of Near
+Earth Space. Tucson, AZ: University of Arizona Press, pp. 367–426.
+Ferris H and Minamino T (2006) Flipping the switch: bringing order to flagellar assembly. Trends in Microbiology 14(12), 519–526.
+Ferris J (2005) Mineral catalysis and prebiotic synthesis: montmorillonitecatalysed formation of RNA. Elements 1, 145–149.
+Ferris J, Hill A, Liu R and Orgel L (1996) Synthesis of long prebiotic oligomers on mineral surfaces. Nature 381, 59–61.
+Ferris J, Joshi P, Wang K-J, Miyakawa S and Huang W (2004) Catalysis in
+prebiotic chemistry: application to the synthesis of RNA oligomers.
+Advances in Space Research 33, 100–105.
+Fleischaker G (1989) Autopoiesis: the status of its system logic. BioSystems 22,
+37–49.
+Fontana W and Buss L (1994) Arrival of the fittest: toward a theory of biological organisation. Bull Mathematical Biology 56(1), 1–64.
+Forterre P (2010) Defining life: the virus viewpoint. Origins of Life &
+Evolution of Biospheres 40, 151–160.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+Freitas R & Gilbreath W (1980) Advanced Automation for Space Missions. In
+Proceedings of the 1980 NASA/ASEE Summer Study, NASA CP-2255, Santa
+Clara, CA.
+Freitas R & Merkle R (2004) Kinematic Self-Replicating Machines. Austin TX:
+Landes Bioscience.
+Frixione E (2000) Recurring views on the structure and function of the cytoskeleton: a 300 year epic. Cell Motility & the Cytoskeleton 46, 73–94.
+Froese T and Stewart J (2010) Life after Ashby: ultrastability and the autopoietic foundations of biological autonomy. Cybernetics & Human Knowing
+17(4), 7–50.
+Gabora L (2006) Self-other organisation: why early life did not evolve through
+natural selection. Journal of Theoretical Biology 241, 443–450.
+Gerdes K, Meller-Jensen J, Ebersbach G, Kruse T and Nordstrom K (2004)
+Bacterial mitotic machineries. Cell 116, 359–366.
+Gibbs W (2004) Synthetic life. Scientific American 290(5), 74–81.
+Goldin D and Wegner P (2005) Church-Turing thesis: breaking the myth. In
+Cooper S, Lowe B and Torenvliet L (eds) Lecture Notes in Computer Science
+vol. 3526. Berlin/Heidelberg, Germany: Springer-Verlag, pp. 152–168.
+Goldstein L (2001) Molecular motors: from one motor many tails to one
+motor many tails. Trends in Cell Biology 11(12), 477–482.
+Goudreau M, Giles L, Chakradhar S and Chen D (1994) First order vs
+second order single layer recurrent neural networks. IEEE Transactions
+on Neural Networks 5(3), 511–513.
+Han J-W and Meyyappan M (2014) Device made of nothing: the vacuum
+transistor could one day replace silicon. IEEE Spectrum (Jul), 31–35.
+Hanczyc M (2011) Metabolism and motility in prebiotic structures.
+Philosophical Transactions of the Royal Society B 366, 2885–2893.
+Hess H and Vogel V (2001) Molecular shuttles based on motor proteins:
+active transport in synthetic environments. Reviews in Molecular
+Biotechnology 82, 67–85.
+Hordijk W (2013) Autocatalytic sets: from the origin of life to the economy.
+Bioscience 63(11), 877–881.
+Howard J, Hudspeth A and Vale R (1989) Movement of microtubules by single kinesin molecules. Nature 342, 154–158.
+Huitorel P (1988) From cilia and flagella to intracellular motility and back
+again: a review of a few aspects of microtubule-based motility. Biology of
+the Cell 63, 249–258.
+Hutton T (2002) Evolvable self-replicating molecules in an artificial chemistry.
+Artificial Life 8(4), 341–356.
+Hutton T (2009) Codd’s self-replicating computer. Artificial Life 16(2),
+99–117.
+Huxley A (2000) Mechanics and models of the myosin motor. Philosophical
+Transactions of the Royal Society B 355, 433–440.
+Huxley H (1996) Personal view of muscle and motility mechanisms. Annual
+Review of Physiology 58, 1–19.
+Itoh H, Takahashi A, Adachi K, Noji H, Yasuda R, Yoshida M and
+Kinosita K (2004) Mechanically driven ATP synthesis by F1-ATPase.
+Nature 427, 465–468.
+Jacobson H (1959) Informational content of mechanisms and circuits.
+Information & Control 2, 285–296.
+Jones R, Haufe P, Sells E, Iravani P, Olliver V, Palmer C and Bowyer A
+(2011) Reprap – the replicating rapid prototyper. Robotica 29(Jan),
+177–191.
+Jorgensen S and Fath B (2004) Application of thermodynamic principles in
+ecology. Ecological Complexity 1, 267–280.
+Karcher R, Deacon S and Gelfand V (2002) Motor-cargo interactions: the key
+to transport specificity. Trends in Cell Biology 12(1), 21–27.
+Karplus M and Gao Y (2004) Biomolecular motors: the F1-ATPase paradigm.
+Current Opinion in Structural Biology 14, 250–259.
+Kephart J and Chess D (2003) Vision of autonomic computing. IEEE
+Computer 36(1), 41–58.
+Kinosita K, Yasuda R, Noji H, Ishiwata S and Yoshida M (1998) F1-ATPase:
+a rotary motor made of a single molecule. Cell 93, 21–24.
+Klavins E (2004) Universal self-replication using graph grammars. In
+Proceedings of the International Conference on MEMS, NANO and Smart
+Systems, Banff, Canada, paper no. 1508947.
+Kolesar E and Dyson C (1995) Object imaging with a piezoelectric robotic
+tactile sensor. IEEE Journal of Microelectromechanical Systems 4(2), 87–96.
+
+19
+Koonce M and Samso M (2004) Of rings and levers: the dynein motor comes
+of age. Trends in Cell Biology 14(11), 612–619.
+Korzeniewski B (2001) Cybernetic formulation of the definition of life.
+Journal of Theoretical Biology 209, 275–286.
+Koshland D (2002) Seven pillars of life. Science 295, 2215–2216.
+Kull J, Sablin E, Lau R, Fletterick R and Vale R (1996) Crystal structure of
+the kinesin motor domain reveals a structural similarity to myosin. Nature
+380, 550–555.
+Kwok R (2010) Five hard truths for synthetic biology. Nature 463, 288–290.
+LaBar T, Adami C and Hintze A (2015) Does self-replication imply evolvability? In Proceedings of the 13th European Conference on Artificial Life,
+pp. 596–602.
+Lahoz-Beltra R (1997) Molecular automata assembly: principles and simulation of bacterial membrane construction. BioSystems 44, 209–229.
+Laing R (1975) Some alternative reproductive strategies in artificial molecular
+machines. Journal of Theoretical Biology 54, 63–84.
+Laing R (1979) Machines as organisms: an exploration of the relevance of
+recent results. BioSystems 11, 201–215.
+Langton C (1984) Self-reproduction in cellular automata. Physica D 10,
+135–144.
+Larson S & Ellery A (2015) Trainable analogue neural network with application to lunar in-situ resource utilisation. In Proceedings of the International
+Astronautics Federation Congress, Jerusalem, IAC-15-D3.3.6.
+Lazcano A (2010) Which way to life? Origins of Life & Evolution of Biospheres
+40, 161–167.
+Lee E (2005) Building unreliable systems out of reliable components: the real
+time story. Electrical Engineering & Computer Sciences University of
+California Berkeley Technical Report No. UCB/EECS-2005–5.
+Letelier J, Marin G and Mpoodoziz J (2003) Autopoietic and (M, R) systems.
+Journal of Theoretical Biology 222, 261–272.
+Luigi Luisi P (2003) Autopoiesis: a review and a reappraisal. Naturwissenschaften
+90, 49–59.
+Luigi Luisi P and Varela F (1989) Self-replicating micelles – a chemical version of a minimal autopoietic system. Origins of Life & Evolution of the
+Biosphere 19, 633–643.
+Luisi P (1998) About various definitions of life. Origins of Life & Evolution of
+Biospheres 28, 613–622.
+Machery E (2012) Why I stopped worrying about the definition of life … and
+why you should as well. Synthese 185(1), 145–164.
+MacLennan B (2004) Natural computation and non-Turing models of computation. Theoretical Computer Science 317, 115–145.
+MacNab R (2003) How bacteria assemble flagella. Annual Reviews of
+Microbiology 57, 77–100.
+Mandelkow E and Mandelkow E-M (2002) Kinesin motors and disease.
+Trends in Cell Biology 12(12), 585–590.
+Margenstein M (2000) Frontier between decidability and undecidability: a
+survey. Theoretical Computer Science 231, 217–251.
+Martin W and Russell M (2003) On the origins of cells: a hypothesis for the
+evolutionary transitions from abiotic geochemistry to chemoautotrophic
+prokaryotes, and from prokaryotes to nucleated cells. Philosophical
+Transactions of the Royal Society B 358, 59–83.
+Maturana H (1975) Organisation of the living: a theory of the living organisation. International Journal of Man-Machine Studies 7, 313–332.
+McDaniel R and Weiss R (2005) Advances in synthetic biology: on the
+path from prototypes to applications. Current Opinion in Biotechnology
+16, 476–485.
+McDermott K, Price M, Cole M and Burchell M (2016) Survivability of copper projectuiles during hypervelocity impacts in porous ice: a laboratory
+investigation of the survivability of projectiles impacting comets or other
+bodies. Icarus 268, 102–117.
+McMullin B (2004) Thirty years of computational autopoiesus: a review.
+Artificial Life 10, 277–295.
+McMullin B & Varela F (1997) Rediscovering computational autopoiesis. In
+Proceedings of the European Conference on Artificial Life, paper no.
+97-02-012.
+Melosh H, Freed A, Johnson B, Blair D, Andrews-Hanna J, Neumann G,
+Phillips R, Smith D, Solomon S, Wieczorek M and Zuber M (2013)
+Origin of lunar mascon basins. Science 340, 1552–1555.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+20
+Menezes A, Montague M, Cumbers J, Hogan J and Arkin A (2015) Grand
+challenges in space synthetic biology. Journal of the Royal Society Interface
+12, 20150803.
+Miki H, Okada Y and Hirokawa N (2005) Analysis of the kinesin superfamily:
+insights into structure and function. Trends in Cell Biology 15(10), 467–476.
+Mitchell M (1998) Computation in cellular automata: a selected review. In
+Gramss T, Bornholdt S, Gross M and Mitchell M (eds). Nonstandard
+Computation. Weinheim, Germany: VCH Publishers, pp. 95–140.
+Montesi L (2013) Solving the mascon mystery. Science 340, 1535–1536.
+Moore E (1956) Artificial Living Plants. Scientific American, 195(4), 118–126.
+Moreno Bergareche A and Ruiz-Mirazo K (1999) Metabolism and the problem of its universalisation. BioSystems 49, 45–61.
+Morowitz H, Heinz B and Deamer D (1988) Chemical logic of a minimum
+protocell. Origins of Life & Evolution of the Biosphere 18, 281–287.
+Moses M, Ma H, Wolfe K and Chirikjian G (2014) An architecture for universal
+construction via modular robotic components. Robotics & Autonomous
+Systems 62(7), 945–965.
+Mozafari R (2005) Liposomes: an overview of manufacturing techniques.
+Cellular & Molecular Biology Letters 10, 711–719.
+Muller A (2003) Finding extraterrestrial organisms living on thermosynthesis.
+Astrobiology 3(3), 555–564.
+Narisawa M (2010) Silicone resin applications for precursors and composites.
+Materials 3, 3518–3586.
+Oakley B (2000) Abundance of tubulins. Trends in Cell Biology 10(Dec),
+537–542.
+Ochman H, Lawrence J and Groisman E (2000) Lateral gene transfer and the
+nature of bacterial innovation. Nature 405, 299–304.
+Oro J, Kimball A, Fritz R and Master F (1959) Amino acid synthesis from
+formaldehyde and hydroxylamine. Archives of Biochemistry & Biophysics
+86, 115–130.
+Oster G and Wang H (2003) Rotary protein motors. Trends in Cell Biology 13
+(3), 114–121.
+Paun C (2000) Computing with membranes. J Computer & System Sciences 61,
+108–143.
+Pesavento U (1995) Implementation of von Neumann’s self-reproducing
+machine. Artificial Life 2(4), 337–354.
+Pinto J, Gladstone G and Yung Y (1980) Photochemical production of formaldehyde in Earth’s primitive atmosphere. Science 210, 183–185.
+Pohorille A and Deamer D (2002) Artificial cells: prospects for biotechnology.
+Trends in Biotechnology 20(3), 123–128.
+Pross A (2005a) Stability in chemistry and biology: life as a kinetic state of
+matter. Pure Applied Chemistry 77(11), 1905–1921.
+Pross A (2005b) On the emergence of biological complexity: life as a kinetic
+state of matter. Origins of Life & Evolution of Biospheres 35, 151–166.
+Pross A (2008) How can a chemical system act purposefully? Bridging between
+life and non-life. Journal of Physical Organic Chemistry 21, 724–730.
+Pross A and Pascal R (2013) Origin of life: what we know, what we can know
+and what we will never know. Open Biology 3, 120190.
+Rasmussen S, Chen L, Nilsson M and Abe S (2003) Bridging nonliving and
+living matter. Artificial Life 9(3), 269–316.
+Rasmussen S, Chen L, Deamer D, Krakauer D, Packard N, Stadler P and
+Bedau M (2004) Transitions from nonliving to living matter. Science 303,
+963–965.
+Rawlings A, Bramble J and Staniland S (2012) Innovation through imitation:
+biomimetic, bioninspired and biokleptic research. Soft Matter 8, 6675–6679.
+Reggia J, Armentrout S, Chou H-H and Peg Y (1993) Simple systems exhibiting self-directed replication. Science 259, 1282–1286.
+Reimold W, Koeberl C, Gibson R and Dressler B (2005) Economic mineral
+deposits in impact structures: a review. In Koebert C and Henkel H (eds).
+Impact Tectonics. Impact Studies, vol. 6. Heidelberg: Springer, pp. 479–548.
+Ringwood A & Seifert S (1986) Nickel-cobalt abundance systematics and their
+bearing on lunar origin. In Proceedings of the Origins of the Moon
+Conference, pp. 249–278.
+Ruiz-Mirazo K, Pereto J and Moreno A (2004) Universal definition of life:
+autonomy and open-ended evolution. Origins of Life & Evolution of
+Biospheres 34, 232–346.
+Saunders P and Ho M (1976) On the increase in complexity in evolution.
+Journal of Theoretical Biology 63, 375–394.
+
+A A Ellery
+Schark M (2012) Synthetic biology and the distinction between organisms and
+machines. Environmental Values 21, 19–41.
+Schmidhuber J (2007) Godel machines: fully self-referential optimal universal
+self-improvers. In Goertzel B and Pennachin C (eds). Artificial General
+Intelligence. Berlin, Heidelberg: Springer, pp. 199–226.
+Schneider E and Kay J (1994) Life as a manifestation of the second law of
+thermodynamics. Mathematical & Computer Modelling 19(6–8), 25–48.
+Schuindewolf U (1980) Selenium and tellurium content of stony meteorites by
+neutron activation. Geochimica et Cosmochimica 19, 134–136.
+Schultze-Makuch D and Irwin L (2004) Life in the Universe: expectations and
+constraints. In Springer Advances in Astrobiology & Biogeophysics. Berlin,
+Germany: Springer Publishers.
+Schulze-Makuch D and Irwin L (2008) Life in the Universe: Expectations and
+Constraints. Berlin, Germany: Springer Publishers.
+Schuster S and Khan S (1994) Bacterial flagellar motor. Annual Reviews
+Biophysics & Biomolecular Structure 23, 509–539.
+Schwartz A (1996) Did minerals perform prebiotic combinatorial chemistry?
+Chemistry & Biology 3, 515–518.
+Schwede J, Bargstin I, Riley D, Hardin B, Rosenthal S, Sun Y, Schmitt F,
+Pianetta P, Howe R, Shen Z-X and Melosh N (2010) Photon-enhanced
+thermionic emission for solar concentrator systems. Nature Materials 9,
+762–767.
+Schwegler H and Tarumi K (1986) Protocell: a mathematical model of selfmaintenance. BioSystems 19, 307–315.
+Senior A and Wise J (1983) Proton-ATPase of bacteria and mitochondria.
+Journal of Membrane Biology 73, 105–124.
+Siegelmann H. (1995) Computation beyond the Turing limit. Science 268,
+545–458.
+Siegelmann H and Margenstern M (1999) Nine switch-affine neurons suffice
+for Turing universality. Neural Networks 12, 593–600.
+Siegelmann H and Sontag E. (1995) On the computational power of neural
+nets. Journal of Computer & System Sciences 50, 132–150.
+Sipper M, Sanchez E, Mange D, Tomassini M, Perez-Uribe A and
+Stauffer A (1997) ‘Phylogenetic, ontogenetic, and epigenetic view of bioinspired hardware systems. IEEE Transactions on Evolutionary
+Computations 1(1), 83–97.
+Sismour M and Benner S (2005) Synthetic biology. Expert Opinion on
+Biological Therapy 5(11), 1409–1424.
+Skulachev V (2001) Mitochondrial filaments and clusters as intracellular
+power-transmitting cables. Trends in Biochemical Sciences 26(1), 23–29.
+Soong R, Bachand G, Neves H, Olkhovets A, Craighead H and
+Montemagno C (2000) Powering a inorganic nanodevice with a biomolecular motor. Science 290, 1555–1558.
+Stahlberg A, Schuster S, Bauer M, Baueurlein E, Zhao R, Reese T and
+Khan S (1995) Conserved machinery of the bacterial flagellar motor.
+Biophysical Journal 58(Apr), 168s–172s
+Stepney S (2012) Programming unconventional computers: dynamics, development, self-reference. Entropy 14, 1939–1952.
+Sun G-Z, Chen H-H, Lee Y-C and Giles C (1991) Turing equivalence of
+neural networks with second order connection weights. In Proceedings of
+International Joint Conference on Neural Networks, vol. 2, pp. 357–362.
+Suthakorn J and Chirikjian G (2006) Toward self-replication of robot control
+circuitry by self-inspection In Ang M and Khatib O (eds). Environmental
+Robotics IX. Berlin: Springer-Verlag, pp. 303–309.
+Svoboda K and Block S (1994) Force and velocity measured for single kinesin
+molecules. Cell 77, 773–784.
+Szostak J (2012) Attempts to define life do not help to understand the origin
+of life. Journal of Biomolecular Structure & Dynamics 29(4), 599–600.
+Szostak J, Bartel D and Luigi Luisi P (2001) Synthesising life. Nature 409,
+387–390.
+Szostak N, Wasik S, Blazewicz J (2016) Hypercycle. PLoS Computational
+Biology 12(4), e1004853.
+Tabony J, Pochon N and Papaseit C (2001) Microtubule self-organisation
+depends upon gravity. Advances in Space Research 28(4), 529–535.
+Taylor E (2001) Cell as molecular machine. Molecular Biology of the Cell 12(2),
+251–254.
+Teuscher C (2014) Unconventional computing catechism. Frontiers in
+Robotics & AI 1(Nov), 10.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+Teuscher C and Sipper M (2002) Hypercomputation’ - hype or computation?
+Communications of the ACM 45(8), 23–24.
+Thomas N, Bardy S and Jarrell K (2001) Archaeal flagellum: a different
+kind of prokaryotic motility structure. FEMS Microbiology Review 25,
+147–174.
+Tucker J and Zilinskas R (2006) Promise and perils of synthetic biology. New
+Atlantis (Spring), 25–45.
+Turing A (1937) On computable numbers with an application to the entschedungsproblem. Proceedings of London Mathematical Society, Series 2, 42,
+230–265.
+Tuszynski J, Trpisova B, Sept D and Sataric M (1997) Enigma of microtubules and their self-organising behaviour in the cytoskeleton. BioSystems
+42, 153–175.
+Tyreman M and Molloy J (2003) Molecular motors: nature’s nanomachines.
+IEE Proceedings, Nanobiotecnology 150(3), 95–102.
+Tyson J and Mackey M (2001) Molecular, metabolic and genetic control: an
+introduction. Chaos 11(1), 81–83.
+Ulanowicz R and Hannon B (1987) Life and the production of entropy.
+Proceedings of the Royal Society B 232, 181–192.
+Umerez J (2010) Artificial life: prospects of a synthetic biology. In Angelo L
+and Queiroz J (eds). Advances in Modelling Adaptive & Cognitive
+Systems. Brazil: UEFS Open Publishing, pp. 4–16.
+Vale R (1999) Millenial musings on molecular motors. Trends in Biochemical
+Science 24(12), M38–M41.
+Vale R (2003) Molecular motor toolbox for intracellular transport. Cell 112,
+467–480.
+Vale R and Milligan R (2000) The way things move: looking under the hood
+of molecular motor proteins. Science 288, 88–95.
+Vallee R and Stehman S (2005) How dynein helps the cell find its centre: a
+servomechanical model. Trends in Cell Biology 15(6), 288–294.
+van den Ent F, Amos L and Lowe J (2001a) Prokaryotic origin of the actin
+cytoskeleton. Nature 413, 39–44.
+van den Ent F, Amos L and Lowe J (2001b) Bacterial ancestry of actin and
+tubulin. Current Opinion in Microbiology 4, 634–638.
+Varatharajoo R (2004) Combined energy and attitude control system for small
+satellites. Acta Astronautica 54, 701–712.
+Varela F, Maturana H and Uribe R (1974) Autopoiesis: the organisation of
+living systems, its characterisation and a model. BioSystems 5, 187–196.
+von Neumann J & Burks A (eds) (1966) Theory of Self-Reproducing
+Automata. IL: University of Illinois Press.
+Wachtershausen G (2006) From volcanic origins of chemoautotrophic life to
+bacteria, archaea and eukarya. Philosophical Transactions of the Royal
+Society B 361, 1787–1808.
+Wachtershauser G (1990) Case for the chemoautotrophic origin of life in
+an iron-sulphur world. Origins of Life & Evolution of Biospheres 20, 173–
+176.
+Wachtershauser G (1992) Groundworks for evolutionary biochemistry: the
+iron-sulphur world. Progress in Biophysics & Molecular Biology 58, 85–201.
+Wang H and Oster G (1998) Energy transduction in the F1 motor of ATP synthase. Nature 396, 279–282.
+Way J, Silver P and Howard R (2011) Sun-driven microbial synthesis of chemicals in space. International Journal of Astrobiology 10(4), 359–364.
+Weber J (2007) ATP synthase – the structure of the stator stalk. Trends in
+Biochemical Sciences 32(2), 53–56.
+Weber B (2010) What is life? Defining life in the context of emergent complexity. Origins of Life & Evolution of Biospheres 40, 221–229.
+Weber K, Achenbach L and Coates J (2006) Microbes pumping iron: anaerobic microbial iron oxidation and reduction. Nature Reviews Microbiology 4,
+752–764.
+Wemmer K and Marshall W (2004) Flagellar mobility: all pull together.
+General Biology 14, R992–R993.
+Widdel F, Schnell S, Easing S, Ehrenreich A, Assmus B and Schink B (1983)
+Ferrous iron oxidation by anoxygenic phototrophic bacteria. Nature 362,
+834–838.
+Wieczorek M and Phillips R (1999) Lunar multiring basins and the cratering
+process. Icarus 139, 246–259.
+Wieczorek M, Weiss B and Steart S (2012) Impactor origin for lunar magnetic anomalies. Science 335, 1212–1215.
+
+21
+Wierdermann J and van Leeuwen J (2002) Emergent computational potential
+of evolving artificial living systems. Journal of AI Communications 15(4),
+205–215.
+Wiesenfeld K and Moss F (1995) Stochastic resonance and the benefits of
+noise: from ice ages to crayfish and SQUIDS. Nature 373, 33–36.
+Wittmann A and Korotev R (2013) Iron-nickel-(cobalt) metal in lunar rocks
+revisited. In 44th Lunar & Planetary Science Conference, abstract no 3035.
+Woese C (1998) Universal ancestor. Proceedings of the National Academy of
+Sciences of the United States of America 95, 6854–6859.
+Wogan T (2016) Ceramics made stronger with 3D printing. Chemistry World,
+11 January 2016.
+Wolfram S (1985) Undecidability and intractability in theoretical physics.
+Physical Review Letters 54(8), 735–738.
+Wolfram S (2002) A New Kind of Science. Champaign, IL: Wolfram Media.
+Yamashita Y and Nakamura Y. (2007) Neuron circuit model with smooth
+nonlinear output function. In Proceedings of the International Symposium
+on Nonlinear Theory & its Applications, Vancouver, pp. 11–14.
+Yildiz A and Selvin P (2005) Kinesin: walking, crawling or sliding along?
+Trends in Cell Biology 15(2), 112–120.
+Yue Z, Johnson B, Monton D, Melosh H, Di K, Hu W and Liu Y (2013)
+Projectile remains in central peaks of lunar impact craters. Nature
+Geoscience 6, 435–437.
+Zakeri B and Carr P (2015) Limits of synthetic biology. Trends in
+Biotechnology 33(2), 57–58.
+Zuravlev Y and Avetisov V (2006) Definition of life in the context of its origins. Biogeosciences 3, 281–291.
+Zykov V, Mytilinaios E, Adams B and Lipson H (2005) Self-reproducing
+machines. Nature 435, 163–164.
+
+Appendix: Biological motors
+We briefly review biological molecular motors because motors figure centrally
+in our engineered life approach. They are commonly implicit in definitions of
+life through the property of motion. Biological motive capability may be very
+ancient – it has been suggested that internal chemistry (such as HCN hydrolysis) in proto-cells might have induced internal stresses thereby generating
+physical movement, i.e. motility (Hanczyc 2011). All molecular motors generate mechanical forces using intermolecular chemical binding energy either
+through a power stroke or a Brownian ratchet to exploit random thermal fluctuations. All biological linear motors operate through sliding along filaments.
+There are three protein motors that act as rotary engines – the bacterial flagellar motor and F0 and F1 motors of ATP synthase (Oster & Wang 2003). All
+these biological rotary motors are based on torqueing a load shaft. We consider only the main biological molecular motors but others exist. For example,
+gene expression begins with RNA polymerase (RNAP) sliding along DNA in
+search of the promoter. RNAP then binds to the promoter to initiate DNA
+transcription.
+ATP powered molecular motors include kinesin and dynein which actuate
+cytoskeletal fibres of tubulin (microtubules), and myosin which actuates cytoskeletal fibres of actin (microfilaments) (Tyreman & Molloy 2003). All these
+motors comprise of a force-generating head (N-terminal) connected by a
+neck to a cargo-carrying tail (C-terminal). Both myosin and kinesin operate
+through the Brownian ratchet. ATP synthase (ATPase) catalyses the reversible
+formation of ATP from the nucleotide ADP and a P group by releasing energy.
+ATPase is ubiquitous in the biological world as the universal form of energy
+currency. It occurs in mitochondria, chloroplasts and bacteria (Senior &
+Wise 1983). ATPase is the smallest biomolecular motor at ∼10 nm in size
+and comprises two major parts organized as a rotor and stator assembly
+(Karplus & Gao 2004; Wang & Oster 1998): (i) a hydrophobic (insoluble)
+membrane segment F0 for proton movement, and (ii) a hydrophilic (soluble)
+F1 segment for ATP hydrolysis and synthesis. ATPase’s two opposing rotary
+units are connected in series on a common shaft. The shaft comprises a coiled
+coil of γ subunits. The F1 motor drives the shaft clockwise (powered by ATP)
+while the F0 motor drives it anticlockwise (powered by proton gradients).
+F1-ATPase comprises three α-subunits and three β-subunits alternately forming a segmented ring (F1) surrounding an α-coiled γ-subunit forming the shaft
+(stator). The F0 motor comprises a cylinder of 10–14 subunits (rotor). It can
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+22
+act as a proton pump. The stator stalk links αβ and F0, though it varies structurally in its mitochondrial, chloroplast and bacterial forms (Weber 2007). The
+foot of the γ-subunit connects to the ring of F0 unit. Rotary motion of the
+γ-subunit of the F1-ATPase motor is energized by the hydrolysis of ATP
+with water (Itoh et al. 2004). Proton flow through F0 rotates the γ unit clockwise to synthesize ATP while hydrolysis of ATP rotates it anticlockwise and
+reverses the proton flow. β-subunits are fixed into a αβ-stator ring which
+pushes the γ-subunit to rotate. It rotates through 120o steps and generates a
+torque of 40–80 pN.nm with near 100% efficiency (almost fully reversible)
+because it converts chemical energy into elastic strain energy of the αβ stator
+rather than acting as a heat engine. F1 could be unrolled to form a linear motor
+so that the αβ-subunits crawl along the γ-subunits (Kinosita K et al. 1998).
+Artificial control of ATP concentration as the fuel supply effects control
+over the movement speed of ATPase molecular motors such as kinesin and
+myosin in synthetic devices (Hess & Vogel 2001). F1-ATPase has been integrated with an engineered nano-propeller to demonstrate the rotation of the
+mechanical nano-propeller energized by ATP (Soong et al. 2000).
+Flagella are widespread in archaea and bacteria indicating its early evolution. The flagellum probably evolved from an ancestor core flagellum of
+around 20 proteins – motor, rod, hook, filament and protein-export machinery. All major archaea possess flagella – halophiles, methanogens, thermophiles and hyperthermophiles. Furthermore, the archaeal flagellum is very
+different to the bacterial flagellum such that there are no genetic homologues
+of bacterial flagellar genes in archaea (Thomas et al. (2001)). This suggests an
+independent evolution in the early prokaryotic kingdoms, though this picture
+is complicated by lateral gene transfer (Ochman et al. 2000). Archaeal flagella
+are very thin ∼10 nm in diameter but operate similarly to bacterial flagella
+with runs alternating with tumbles. Morphologically, archaeal flagella incorporate the hook feature but lack the rings of bacterial flagella being anchored
+into cell walls rather than cell membranes.
+The bacterial flagellum is morphologically similar to engineered DC electric motors though they are electrostatic with their torque output balanced by
+viscous drag, both properties resulting from its small size (Berg 1974). Without
+torque, the flagellum would halt within under 10−6 revolutions due to this viscosity. The flagellum control system including chemoreceptors is specified by
+around 50 genes while the bacterial flagellum itself is constructed from 20 proteins and synthesized and controlled by 40 of those genes. The bacterial flagellar motor, powered by proton gradients, includes 8 stator segments, each
+consisting of 4 MotA and two MotB subunits – MotA conducts protons
+through the C-ring of the rotor while MotB anchors MotA to the cell wall.
+The bacterial flagellum is driven by a rotary motor at the base of the flagellum
+powered by a flow of protons across the bacterial membrane – it is an electrostatic motor. It rotates rather than flexes like eukaryotic flagella – anticlockwise
+rotation generates thrust while clockwise motion causes tumbling in response
+to attractor gradients. Escherichia coli have a set of four flagellar clusters
+around their cell bodies. The chemoreceptors are clustered into a ‘nose’ at
+the poles of the cell. When activated, a conformation change is transmitted
+through the membrane to the flagellar motors. The bacterial flagellum is composed of a basal motor embedded in the cell wall, the hook and the filament.
+The bacterial flagellum comprises a 45 nm diameter rotary motor that drives
+the base of a 10 µm long, rigid helical propeller of ∼20 nm diameter with a
+2 µm pitch. The propeller is connected to a flexible hook by two junction proteins. The hook is a universal joint so the propeller can rotate around multiple
+axes. The outer L (lipopolysaccharide) and P (peptidoglycan) rings act as
+bushings for the propeller shaft through the outer cell membrane but neither
+contribute to torque generation. The 25 µm thick inner MS (membranous/
+supermembranous) ring is the bushing attached to the inner cell membrane.
+The MS ring is central to the flagellar structure, assembly and operation and
+is one of several rings around 20 nm in diameter with a rotating rod inside.
+Attached to the rod is the hook linked to the 5–15 µ long filament – it is related
+to the type III secretion system (T3SSs) complex embedded in Salmonella that
+transports toxins from inside the cell into needle-like structures on the outside
+to inject poisons into its victim. Within the cell cytoplasm is the 45 µm thick C
+ring. Around the flagellar motor between the MS and C rings is a ring of ten
+studs. Flagellar proteins are hydrophobic (Blair 1991; Berg 2003) comprising
+the flagellum assembly – FlgE (hook), FlgB, FlgC, FlgF and FlgG (shaft) and
+FliC proteins (flagellum). FlgH and FlgI proteins form the L and P rings
+respectively. FliG, FliM and FliN are cytoplasmic proteins that form the
+
+A A Ellery
+bistable switch complex for torque generation and switching between clockwise and anticlockwise directions. FliN is part of the C (cytoplasmic) ring
+and stabilizes the switch structure; FliM is part of the C ring and involved
+in switching control of the rotation direction of the flagellum (protein
+CheY-P switches clockwise rotation otherwise rotation is anticlockwise); FliF
+is the structural core of the MS ring (stator); FliG is part of the MS ring
+and is involved in torque generation and switching; the C and MS rings
+form part of the rotor. The two Mot proteins (MotA and MotB) are part of
+the ten studs (stator) and together anchor and drive the motor, transport protons through the membrane and position the torque generators (Stahlberg
+et al. 1995). Phosphorylation of the CheY protein (supplemented by other
+Che proteins) induced by chemoreceptors changes the switching probability
+through bonding to FliM. The flagellar motor spins at rates that depend on
+the proton flux ∼10–100 Hz with a torque of ∼10−18 Nm. Assuming a rotor
+radius of 20 nm, the flagellum generates a force of ∼20 pN at speeds of
+∼1 µm s−1 (Berg 1995). During self-assembly, the flagellum is constructed
+from the inside out beginning with the shaft, followed by the hook then the
+flagellar filament (Ferris & Minamino 2006). It is reckoned that flagella, like
+myosin, dynein and kinesin operate as thermal ratchets driven by thermal
+fluctuations (Cordova et al. 1992). In the latter linear molecular motors,
+cross-bridges fluctuate about equilibrium positions against an elastic
+restoring force with ATP hydrolysis (Maxwell’s Demon) imposing unidirectionality to the random movements. This means that molecular conformation
+switching is absent in biological molecular motors as chemical conformation
+switching in developing molecular electronic devices has been considered
+attractive (Carter 1984). A hierarchical regulation process is based on two
+assemblies – shaft-hook and flagellar filament. The sub-assemblies are: the
+basal body that transmits torque from the motor to the hook; the flagellar
+motor comprises a stator and rotor; the switch determines the rotary direction;
+the hook functions as a universal joint; the flagellar filament acts as a propeller;
+finally, a series of assembly proteins (MacNab, (2003). A molecular automata
+model of bacterial flagellar self-assembly was based on the affinity between
+binding sites as a similarity metric quantified by the Hamming distance
+(Lahoz-Beltra 1997).
+The bacterial flagellum differs fundamentally from the eukaryotic flagellum (DeRosier, (1998). The eukaryotic flagellum is ∼20–100 µm long and
+is based on dynein motors which bend and step along microtubular tracks
+as sliding filaments (Dutcher 1995). The nine parallel microtubule fibres forming the sheath of the flagellum is hollow occupied by two central microtubules.
+Between the core and sheath microtubules are many inner and outer dynein
+arms which link the microtubules together and ratchet up and down. The
+dynein motors are synchronized through entrainment of coupled oscillators
+(Wemmer & Marshall 2004). The compliant tail undulates like a snake to generate movement powered by ATP. Eukaryotic cilia ∼2–15 µm long are also
+constructed from dynein motors along microtubules powered by ATP but
+beat in oar-like movements. Cilia function by relative sliding of outer pairs
+of microtubules linked at their proximal end to a basal structure by connecting
+proteins (Huitorel 1988). By contrast, the bacterial flagellum is powered by an
+electromotive gradient of protons through the cell membrane. Torque is generated through electrostatic interaction between a ring of proton-binding sites
+on the rotor and transmembrane protons (Schuster & Khan 1994). A fixed
+number of protons correlate to a single revolution so proton flow generates
+stepper motor behaviour. It has been postulated however that cyclic conformation changes generate travelling waves through elastic behaviour of the C ring
+(Atsum 2001). Unlike eukaryotic flagella, bacterial flagella can rotate in either
+direction. They can reach rotation rates up to 100–200 Hz at a constant torque
+of ∼4500 pN/nm generating speeds of ∼50 µm s−1 much faster than myosin or
+dynein biological motors.
+In eukaryotic cells, molecular motors transport molecules and organelles
+along cytoskeletal tracks. The eukaryotic cytoskeleton is a dynamic system
+that provides structural integrity to the cell and rapidly re-organizes itself.
+Microtubules are the primary cytoskeletal systems in the eukaryotic cell and
+provide the basis for cellular events like mitosis through the mitotic spindle
+assembly. Microtubules move cargo along long distances while actin is used
+for local transport of cargo. Microtubules also form the basis of centrioles,
+cilia, flagella, pseudopodia, phagocytosis, growth and morphogenetic development. Microtubules form through dynamic self-assembly of tubulin proteins
+powered by the hydrolysis of GTP (Engelborghs 1994; Tuszynski et al.
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+International Journal of Astrobiology
+1997). Microtubules spontaneously self-organize based on reaction–diffusion
+process of dissipative structures at far from equilibrium conditions. This selforganization process appears to require gravity (Tabony et al. 2001). Tubulin
+proteins – α- and β-tubulins (sharing 40% amino acid identity) – provides the
+basis of microtubules while γ-tubulin (sharing 30% amino acid identity with
+α- and β-tubulins) is associated with anchorage at the centrosome and mitotic
+spindle formation in eukaryotes (Oakley 2000). Microtubules are hollow tubes
+comprised 9–18 protofilaments of similar but non-identical α- and β-tubulin
+dimers (8 nm long by 25 nm diameter) forming a helical lattice: for 13 protofilaments, they run parallel to the long axis of the microtubule; for less than
+or greater than 13 protofilaments, they are twisted around each other.
+Microtubules reconfigure themselves through cutting of long immobile microtubules by enzymes katanin and spastin to convert them into short mobile microtubules which move into new configurations (Baas et al. 2005). Microtubules
+function as linear tracks along which motor proteins (kinesin and dynein) travel
+for long-range cargo transport. Kinesins move towards the fast-growing (plus)
+end of the microtubule while dyneins move towards the slow-growing (minus)
+end. Microtubules also form the mitotic spindle that separates chromosomes.
+Viruses as obligate parasites appropriate host kinesin and dynein motors to propel themselves along microtubules (Dohner et al. 2005).
+Most molecular motors have one or more heads-on-a-stalk configuration
+with the head binding to a track and the stalk or tail binding to cargo either
+directly or indirectly (Cross & Carter 2000). They operate by cyclically stepping
+along the track be it circular or linear through conformation changes driven by
+ATP metabolism – myosins along actin and kinesins and dyneins along microtubules (Karcher et al. 2002). Both kinesins and myosins have a head (attaching to the actin or microtubule filament) that undergoes a conformation
+change on hydrolysis. This is amplified by the lever arm connecting the
+head to the tail. The affinity of the head to the filament determines attachment
+or detachment. Kinesin and myosin V are processive and remain attached with
+at least one head while myosin II is non-processive and detaches after the
+power stroke. Processivity permits continuous movement. Filaments of actin
+form tracks for myosin motors for local transport of cargo molecules. Actin
+filaments comprise two thin strands of polymer that are twisted around
+each other which in turn, are crosslinked to rigidize the structure. Myosins
+are actin-based molecular motors comprising one or two heavy chains, each
+connected to between one and six light chains. The motor head binds to
+actin powered by ATP hydrolysis which causes a myosin conformation change
+(power stroke). The motor head on the myosin thick filament forms elastic
+cross-bridges with the actin thin filaments. Myosins move along these actin
+filaments – myosin II and myosin V move in the direction of the barbed
+end. Myosin is 160 nm in length incorporating a 140 nm α-coiled tail and
+two 20 nm long heads which catalyse ATP hydrolysis and bind with actin.
+Thick filament myosin is energized by ATP hydrolysis and the release of phosphate to move cargo along tracks of thin filament actin which forms a local
+network. The myosin motor has multiple functions – muscle contraction,
+cytokinesis, endocytosis, cell shape, vesicle transport and signal pathways.
+Myosin comprises a catalytic core the binds nucleotide to actin linked to an
+80 Å lever arm which rotates to move along the actin filament (power stroke).
+Each working stroke is powered by a single ATPase cycle. Myosin moves 100 Å
+displacement per ATP hydrolysed. ATP binding initiates the recovery stroke of
+recocking the lever arm. A new ATP molecule binds to myosin to repeat the
+cycle for further steps along the actin filament. The sliding filament model
+
+23
+of myosin–actin action underlies muscle contraction driven by cross-bridges
+(Huxley 1996; Huxley 2000). The average rate constant for cross-bridge sliding
+is given by k = k0e −Q/RT where Q = 12kh2 = work done, h is the work stroke
+between 45° and 90° states and κ, the cross-bridge stiffness. A sliding force
+of ∼3–5 pN between the myosin tail and the actin filament is generated yielding a step displacement of ∼5 nm (sliding filament hypothesis). The force
+generated is linear with stroke with the gradient (dF/dh) determined by
+myosin–actin overlap (number of cross-bridges). This is followed by a highly
+non-linear hysteretic force recovery. In muscle, myosin and actin filaments
+overlap with the degree of overlap determining force production. Shortening
+of muscle occurs through sliding of thick filaments (myosin) along thin filaments (actin). Heads of myosin project from the thick filament forming
+cross brides with the thin filament – they exert a force and then detach repeatedly along the filament with a sliding step distance of 60 nm.
+Kinesin is a motor protein that is powered by ATP hydrolysis to move
+cargo by walking along the surface of microtubules to specific destinations.
+Kinesin walks on tubulin with its two heads alternating hand-over-hand generating 8 nm steps. The kinesin motor is involved in mitosis and meiosis,
+mRNA and protein transport, organelle and vesicle transport and signal pathways. Kinesin comprises two identical globular heads at one end of a long
+coiled-coil stalk and a pair of light chains bound at the tail end of the stalk
+(Cross 2004; Miki et al. 2005). The head includes a catalytic pocket for ATP
+hydrolysis and binding sites for microtubules and is the active mover.
+Kinesin moves through a conformation change in its 15-amino acid long
+neck linker triggered by binding to ATP (power stroke). The neck linker
+swings one of the two heads along the microtubule by 80 Å, in turn, generating
+hand-over-hand movement of 16.6 nm (Yildiz & Selvin 2005). Force-velocity
+curves of single kinesin molecules suggest that kinesin is a loosely coupled
+motor with a maximum force of 5–6 pN (Svoboda & Block 1994). The stalk
+and tail bind with cargo molecules while the neck between the stalk and
+head determines the directionality of walking. Kinesin is associated with
+microtubules and takes 50–100 steps at a time (processive) before dissociating
+from a microtubule equating to several microns (Howard et al. 1989;
+Mandelkow & Mandelkow 2002) while myosin associated with actin takes a
+single step at a time. ATP hydrolysis and releasing phosphate induces the
+recovery stroke. While kinesins are directed to the plus end of microtubules,
+dynein is directed to the minus end. Movement is undertaken by dynein
+which interacts with the microtubules by generating a force towards the
+minus-end of microtubules (Vallee & Stehman 2005). Dynein and kinesin
+are the two microtubule-binding proteins associated with the motor protein
+ATP synthase at the origin of the movement. Dyneins are the largest and
+most complex of the three linear motors of eukaryotes (dynein, kinesin and
+myosin), being some ten times larger than kinesin, the other microtubule
+motor. The dynein motor has a ring-shaped core of seven proteins enclosing
+a cavity with protruding two levers – a 20–30 nm tail for binding to cargo and
+a 10–12 nm stalk (B-link) for binding to the microtubule track (Koonce &
+Samso 2004; Asai & Koonce 2001). It is thus quite distinct from kinesin
+and myosin but shares features with them. The dynein head rotates through
+one-quarter turn against the stem and pulls on the α-coiled stalk powered
+by ATP hydrolysis. The base of the stalk translates 708 nm and the tip of
+the stalk by 16 nm. Dynein undertakes 8 nm steps similar to that of kinesin
+(8 nm) and some myosins (5 nm). The stalk acts as a tension cable; thus,
+dynein appears to act as a winch (Burgess & Knight 2004).
+
+Downloaded from https://www.cambridge.org/core. Cambridge University Press, on 27 Mar 2018 at 07:56:17, subject to the Cambridge Core terms of use, available at
+https://www.cambridge.org/core/terms. https://doi.org/10.1017/S1473550417000532
+
+

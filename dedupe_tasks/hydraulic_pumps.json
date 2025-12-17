@@ -1,0 +1,15 @@
+{
+  "id": "dedupe:hydraulic_pumps",
+  "kind": "part",
+  "reason": "overlap",
+  "candidate_ids": ["hydraulic_pump_basic", "hydraulic_pump_small", "hydraulic_pump_heavy_duty", "hydraulic_pump_assembly"],
+  "notes": "Consolidate hydraulic pumps. Size variants (small/basic/heavy_duty) may represent genuine capacity differences or just naming inconsistency. Pump_assembly might be assembled version vs component.",
+  "hints": {
+    "prefer": "hydraulic_pump_basic as default",
+    "keep_variants": "small and heavy_duty if capacity differs by >3x",
+    "assess": "flow rates (GPM) and pressure ratings (PSI)",
+    "consolidate": "pump_assembly if just assembled version of basic pump"
+  },
+  "refs": ["out/reports/inventory.md"],
+  "category": "pumps"
+}

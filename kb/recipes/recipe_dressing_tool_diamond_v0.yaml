@@ -1,0 +1,51 @@
+id: recipe_dressing_tool_diamond_v0
+target_item_id: dressing_tool_diamond
+variant_id: v0
+steps:
+  - process_id: diamond_synthesis_hpht_v0
+    inputs:
+      - item_id: graphite_powder
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: diamond_synthetic_industrial
+        qty: 0.005
+        unit: kg
+    est_time_hr: 4.0
+    notes: Synthesize industrial diamond from graphite under high pressure/temperature
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: tool_holder_machined
+        qty: 0.25
+        unit: kg
+    est_time_hr: 1.0
+    notes: Machine steel tool holder body
+  - process_id: brazing_process_v0
+    inputs:
+      - item_id: tool_holder_machined
+        qty: 0.25
+        unit: kg
+      - item_id: diamond_synthetic_industrial
+        qty: 0.005
+        unit: kg
+      - item_id: brazing_alloy_copper_silver
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: dressing_tool_diamond
+        qty: 0.2
+        unit: kg
+    est_time_hr: 1.0
+    notes: Braze diamond to tool holder tip
+assumptions: |
+  Diamond synthesized from graphite via HPHT (high pressure, high temperature) process.
+  Steel holder provides rigidity and mounting interface.
+  Brazing securely attaches diamond to holder.
+notes: |
+  Manufacturing route for diamond dressing tool.
+  Industrial diamond quality sufficient for grinding wheel dressing.
+  Critical tool for maintaining grinding wheel performance.

@@ -1,0 +1,860 @@
+Oral presentation
+
+Building Physical Self-Replicating Machines
+Alex Ellery1
+1
+
+Carleton University, Ottawa, Canada
+aellery@mae.carleton.ca
+
+This paper introduces the concept of a physical selfreplicating machine for deployment on the Moon
+utilizing raw material available on the Moon. A detailed
+but selective review is given in order to highlight clearly
+the novel aspects of this concept. In particular, it is
+hypothesized that if electric motors and vacuum tubes
+can be 3D printed from the limited repertoire of lunar
+materials, 3D printing constitutes a universal
+construction mechanism. This follows from the
+observation that mechatronic components are the
+constituent parts of all robotic mechanisms. In particular,
+we examine the use of 3D printing of electronics as a
+physical instantiation of a Turing machine. Several
+general implications of such a self-replicator are
+considered including whether it constitutes artificial life
+and mitigation against runaway replication.
+
+Introduction
+This paper is concerned with the physical
+implementation of a self-replicating machine (Freitas
+and Merkle, 2004). We are concerned with a macroscale
+self-replicating machine rather than nanoscale selfreplicators typified by molecular assemblers. Our goal is
+to develop a self-replicating factory complex that can be
+programmed to manufacture solar power satellites in
+large quantities on the Moon to provide a scalable power
+source for Earth’s future energy needs (Ellery 2016a).
+The lunar self-replicating machine is described but
+special consideration is given to the manufacture of
+electric motors and vacuum tubes as essential
+mechatronic components for self-replication. 3D
+printing is introduced as a mechanism of universal
+construction but also of universal computing. The 3D
+printer, in printing neural electronics represents a
+physical instantiation of the universal Turing machine.
+A contextual review then follows concluded with a
+consideration of more general implications with respect
+to artificial life and unrestrained replication.
+
+A Lunar Self-Replicating Machine
+The key concept in self-replication is the universal
+constructor generalizing on the universal Turing
+machine encapsulating the notion of computing (Burks
+
+and von Neumann, 1966). Critical to universal
+construction is parts closure – this has three aspects,
+namely, matter, energy and information closure, though
+material closure is our primary concern here – any
+deviation from material closure invokes the necessity to
+import material from Earth which should be minimized.
+Closure requires restriction of both the materials
+inventory required (and so the number of extractive
+processes) and the families of components (and so the
+number of manufacturing processes). To minimize the
+materials requirement is to base the self-replicating
+machine on a restricted suite of readily available
+materials in the lunar regolith. The core of this materials
+inventory is iron (and a number of its alloys). The
+forthcoming lunar Resource Prospector (RP) mission
+will be demonstrating a number of relevant technologies
+for the extraction of raw material on the Moon (George
+et al, 2012). The RP mission is a 10 day lunar surface
+mission to the Cabeus crater near the lunar south-pole
+where water ice has been detected by the LCROSS
+satellite. It comprises a lunar rover carrying the 72 kg
+RESOLVE (regolith and environment science and
+oxygen and lunar volatile extraction) payload to
+demonstrate in-situ resource utilization of lunar
+material. It includes a drill to acquire core samples of
+lunar regolith to a depth of 1m, a reactor to heat samples
+to 150oC to evolve water and other gases and then to
+900oC to extract oxygen (O2), pure iron (Fe) and titania
+(TiO2) from ilmenite (FeTiO3) via hydrogen reduction.
+The rest of the RESOLVE payload is instrumentation –
+neutron spectrometer to detect subsurface hydrogen
+(water) during the rover traverse and a near infrared
+spectrometer to detect evolved volatiles from the heated
+samples. From the carbon-based volatiles and lunar
+silicate minerals, silicone plastics may be manufactured
+using traditional techniques. The manufacture of a range
+of iron alloys – wrought iron, steels (such as tool steel
+and silicon steel), fernico and permalloy require access
+to silicon (from silicate minerals), nickel, cobalt and
+tungsten. Access to tunico (tungsten, nickel and cobalt)
+elements requires subsurface mining at mascon (mass
+concentration) locations where subsurface nickel-iron
+meteorite materials are buried. There are two major
+mining approaches that may be considered. Room and
+pillar mining involves excavating subsurface materials
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+Abstract
+
+146
+
+Oral presentation
+
+Fig 1. Iron-impregnated PLA-based electric motor
+In particular, we have been concentrating on 3D printing
+the magnetic core of the motor as the most fundamental
+basis of both rotor (in dc motors) and stator (in ac
+motors). Magnetic core electromagnets can also
+substitute for permanent magnets. We are experimenting
+with photolithographically printed coils in different
+configurations (currently implemented in a pancake
+concept for testing – Fig 2) which will be incorporated
+into the rotor concept.
+
+Fig 2. Photolithographically-printed coils
+A 3D printed electromagnet-based stator will essentially
+complete the 3D printed motor. Currently, our 3D
+printed stator electromagnets constructed from ironimpregnated PLA generate insufficient magnetic field
+intensity even with 200 windings (Fig 3) – we are
+redressing this by employing SLS-printed magnetic steel
+for the stator.
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+to form rooms supported by pillars. This leaves large
+blocks of ore in the pillars. Longwall mining involves
+tunneling with a shearer to cut the ore face. The tunnel
+is supported by roof supports. A series of conveyor belts
+return the ore to the surface. These approaches are
+highly energy intensive whereas drilling would reduce
+the amount of overburden removed (Ellery, 2016b).
+Once raw materials have been extracted, they must be
+fashioned into parts and components. The use of 3D
+printing alleviates the parts closure problem by
+simultaneously addressing both parts and manufacturing
+diversity. RepRap uses fused deposition modelling
+((FDM) to manufacture many of its own plastic
+components (Jones et al, 2011). This first step towards a
+self-replicating machine requires several extensions to
+become a fully self-replicating machine: (i) 3D printing
+metal parts; (ii) 3D printing electric motors; (iii) 3D
+printing electronics including computers; (iv) selfassembly. There are seven major types of 3D printing
+technologies but we are concerned with only four: (i)
+fused deposition modelling (FDM) of molten plastic; (ii)
+selective laser sintering/melting (SLS/SLM) fuses
+powder of metal, plastic or ceramic using lasers; (iii)
+electron beam freeform fabrication (EBF3) sinters/melts
+metal rod only using an electron beam; (iv) binder
+jetting involves layers of polymeric binder to ceramic,
+metal or plastic particles. Powder bed methods such as
+SLS/SLM are generally disallowed in micro-gravity or
+vacuum environments due to powder dispersion and
+vacuum welding of the powder respectively. This leaves
+FDM for plastic, EBF3 for metal and binder jetting for a
+variety of materials. We have had some successes in
+developing 3D printing of electric motors using FDM of
+iron particle-impregnated PLA plastic (Fig 1):
+
+Fig 3. Rotor with proposed stator configuration
+We have yet to demonstrate 3D printing of electronics
+though we have demonstrated the viability of our
+approach. For computing circuitry, solid state transistors
+are infeasible for lunar manufacture due to their
+complex fabrication procedures involving extreme
+conditions and reagents. Although simple RC filter
+circuits can be inkjet printed in polymer (Chen et al,
+2003), plastic electronics is not well developed. We
+have been exploring 3D printing multiple materials with
+regard to melting temperature compatibility. Silicone
+plastic has operational thermal tolerance up to 300oC but
+we have found that it can tolerate much higher
+temperatures for short periods. We have lain molten ZnAl (ZA8) alloy (melting temperature of 375-404oC) onto
+a silicone plastic substrate to emulate a metal 3D
+printing process (Fig 4). We laid an Al alloy wire track
+onto the silicone substrate as a first step towards 3D
+printing metal circuitry. In addition, we demonstrated
+melting of 3004/3105 aluminium alloy using a 1.5 m x
+1.5 m Fresnel lens to emulate the use of lunar solar
+concentrators.
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+147
+
+Oral presentation
+
+Fig 4. Modified Yamashida-Nakaruma neuron circuit
+We have demonstrated that two neurons based on this
+circuit can control a desktop rover imparting it with
+BV3 Braitenberg behaviours (Braitenberg, 1984) (Fig
+5).
+
+Functionality
+Tensile structures
+Compressive
+structures
+Elastic structures
+Thermal
+conductors
+Thermal insulation
+Thermal tolerance
+Electrical
+conduction
+Electrical
+insulation
+Active electronics
+Magnetic
+materials
+Sensors and
+sensory
+transduction
+Optical structures
+
+Fig 5.Desktop rover controlled with a two-neuron circuit
+
+Liquids
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+Fig 4. Aluminium track on silicone plastic substrate
+We have adopted vacuum tubes as an alternative to
+transistors without their inherent fabrication complexity.
+Vacuum tubes are more efficient and versatile than
+electromagnetic relays that have in fact been 3D-printed
+(Malone and Lipson, 2007). Rather than adopting
+traditional general von Neumann computer architectures
+which impose large physical footprints, we have
+adopted an analogue neural net circuit based on a
+modified Yamashida-Nakaruma design (Yamashida &
+Nakaruma, 2007) (Fig 4):
+
+Neural network hidden node footprint grows only
+logarithmically with task complexity (Parberry, 1994)
+and recurrent neural networks have been proven to be
+Turing-complete (Siegelmann and Sontag, 1995),
+perhaps even offering super-Turing capabilities
+(Cabessa and Seigelmann, 2012). A universal Turing
+machine comprises an infinitely long tape which stores a
+program and its input data which after the computation
+is replaced by the program’s output data. The tape is
+scanned by a reading head which moves backward and
+forward reading and manipulating each symbol in turn
+according to the program and then writes the output onto
+the tape. It is envisaged in our 3D printer setup that
+programs are stored in magnetic core memory (with a
+similar material configuration as magnetic cores of
+electric motors) which constitutes the input tape to a
+Turing machine represented by a 3D printer-type device.
+The output is a physically 3D printed neural network
+circuit for the specific task. Different neural circuit
+configurations correspond to different programs stored
+in magnetic core memory. The complete system is a
+universal Turing machine but the printed output circuits
+represent specific programs. They may be fine-tuned
+through an electrical circuit representation of the
+backpropagation algorithm (Martinelli and Perfetti,
+1991; Larson and Ellery, 2015).
+If electric motors and vacuum tubes can be 3D printed
+using materials extractable from lunar resources (Table
+1), all these tasks would be achievable, thereby
+demonstrating that 3D printing would constitute a
+universal construction mechanism (Ellery, 2016c).
+Lunar Material
+Wrought Fe, cast Fe,
+steels
+Fused regolith
+Fe alloy springs/flexures,
+Silicone elastomers
+Steel, fernico/ Al
+Glass (fibre), TiO2 wool
+W
+Fernico, Al, Ni, steel
+Glass, ceramic, silicone
+plastic, silicon steel
+Vacuum tubes (fernico,
+Ni/steel, W, glass)
+Silicon steel/laminate
+(electromagnets),
+Permalloy
+Quartz,
+Selenium,
+Thermionic conversion
+Polished Ni/Al
+Glass
+Silicone oils
+148
+
+Oral presentation
+
+W/m2 (or equivalently, 1 MW requires under 90 m x 90
+m solar concentrator (nominally, Fresnel lenses) area.
+Vacuum tube technology is also the basis of the klystron
+and magnetron for high-power microwave generation
+required for solar power satellites (Ellery, 2016d).
+Vacuum tubes are highly reliable and durable when
+maintained at constant temperature at the power-on
+state. This suggests that significant steps towards parts
+closure can be achieved by utilizing components for
+multiple purposes such as magnetic cores and vacuum
+tubes.
+
+Contextual Review of Self-Replicating
+Machines
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+Water
+Gases
+Oxygen – hydrogen
+Table 1. Lunar material inventory
+There are three major resource repositories on the
+Moon: (i) the ubiquitous regolith; (ii) adsorbed volatiles
+in the regolith; (iii) asteroidal material. Initial recovery
+of raw material from the Moon is simple using bucket
+wheels followed by electrostatic and magnetic
+beneficiation. We envisage a number of basic chemical
+processes to extract 3D printer feedstock:
+(i)
+Extraction of lunar volatiles for the
+production of fuel/propellant and silicone
+plastics/oils
+(ii)
+Extraction of iron alloys for structure and
+electric motors
+(iii)
+Extraction of Al metal for structure and
+electrical wiring
+(iv)
+Extraction of Si and SiO2 for alloying,
+ceramics and silicones
+We outline just one or two representative extractive
+processes here. Solar wind has impregnated regolith
+with 96% hydrogen (~120 ppm), almost 4% He and
+trace amounts of H2O, CO, CO2, CH4, N2, NH3, H2S,
+SO2 and the noble gas Ar. Heating the regolith to 700oC
+would release 90% of these adsorbed volatiles. Silicone
+plastics (siloxanes) can be manufactured from syngas
+providing superior resistance to radiation and thermal
+extremes while minimising carbon consumption in
+comparison with hydrocarbon plastics. Further heating
+regolith to 900-1050oC permits hydrogen thermoreduction of ilmenite:
+FeTiO3 + H2 → Fe + TiO2 + H2O
+H2O → H2 + ½O2
+Further heating to 1600oC allows molten iron to be bled
+off. From asteroidal material, Ni, Co, W and Se are
+extractable for diverse alloy creation. Ceramics present a
+challenge for 3D printing due to the high temperatures
+required for sintering or melting. To 3D print ceramics,
+plastic pre-ceramic resins can be 3D printed as plastic
+gel into structures which are then fired into a high
+temperature ceramic. One possible mechanism that we
+have yet to explore is to employ silicone plastics as
+precursors to ceramics. Silicone may be converted to
+silica by flame combustion in oxygen:
+SiOxCy + (1-x+2y)O2 →SiO2 +yCO2
+This provides a mechanism for 3D printing ceramics
+without involving extreme temperatures of direct
+sintering while the CO2 is recovered (thereby conserving
+carbon resources). From silica, quartz may be
+crystallised (as a piezoelectric sensor material)
+Actuators-controllers-sensors constitute the key
+components for any robotic mechanisms (including 3D
+printers which are effectively Cartesian robots) so are
+central to any self-replicating machine. Furthermore,
+these two components – electric motors and vacuum
+tubes - provide the basis for energy generation (through
+thermionic emission) and energy storage (through
+motorized flywheels). Assuming 10% efficiency, solar
+energy provides an electrical energy density of 130
+
+We present a contextual but selective review of selfreplication to illustrate that this work goes far beyond
+the architectural considerations of past work by
+attempting to physically realise key components of a
+self-replicator. The first model of a self-replicating
+machine is the von Neumann kinematic self-replicating
+machine (Burks and von Neumann, 1966). It comprised
+a manipulator (constructing) arm controlled by a
+separate program of step-by-step procedures stored on a
+memory tape that instructed the arm to pick components
+from a sea of component parts and assemble a copy of
+itself. The copying of a separate description of the selfreplicator on the tape avoids the problem of selfreference and infinite regress. The self-replicator
+comprises four major subsystems that have their
+biological counterparts (Mange and Sipper, 1998):
+component A comprises a universal constructor
+including a construction arm (equating to a ribosome);
+component B (A + C + D) comprises a tape of
+instructions describing the specifications of the machine
+(equating to a genetic code); component C comprises a
+controller that reads the tape B and passes the
+interpreted information to constructor A (equating to
+repressor and inducer proteins); component D comprises
+a tape copier to copy B (equating to RNA and DNA
+polymerase). The composition of B, C and D constitute
+a universal Turing machine that holds a set of
+instructions (B) which is read to generate control signals
+(C) and copies those instructions (D). Rather than
+reading information and then writing information, a
+universal constructor reads information and then moves
+a robotic arm. In the kinematic model, the universal
+constructor exists in an environment comprising a sea of
+prefabricated parts. A part is randomly selected and
+inspected to identify it. If it is the required part, it is
+joined to the growing assembly; if not, it is returned
+back into the environment and another part selected.
+Once fully assembled, the copy is supplied with a copy
+of the program of instructions which is then activated.
+The parts in the environment included both mechanical
+elements for implementing mechanisms and logic
+elements for implementing control – in fact, 8
+elementary parts: (i) p or q logic gate; (ii) p and q logic
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+149
+
+Oral presentation
+
+modules and cannot be considered self-replicating. True
+self-replication must emerge from the dust.
+A self-replicating factory will need a means to
+acquire raw materials and the means to convert these
+raw materials into final products. Moore’s artificial
+plants concept went beyond self-assembly to suggest
+machines capable of ingesting air, water and soil as raw
+material powered by solar energy to grow and procreate
+(Moore, 1956). We have considered 3D printing as a
+universal construction mechanism in which raw
+feedstock is lain in 2D layer by 2D layer and built into
+3D structures. The biological ribosome encapsulates a
+similar core process through 3D protein synthesis of 1D
+polypeptide chains from amino acid constituents. In this
+case, transfer RNA acts as the constructing arm while
+messenger RNA acts as the program tape – our
+engineered analogues are electric motors as the
+fundamental component of robotic machines (such as
+mining robots, 3D printers, assembly manipulators, etc)
+and vacuum tubes as the fundamental component of a
+computing machine. Conceptually, our macroscale selfreplicator envisaged here combines both von Neumann
+kinematic and Moore concepts. It is a universal
+constructor comprising an automated factory with
+mining robots to acquire comminuted raw materials for
+input to chemical refining units to extract feedstock for
+fabrication and construction machines to output parts
+and components for assembly robots to construct final
+products. Its application is similar to that proposed in
+the 1980 NASA study involving self-replicating
+factories on the Moon (Freitas and Gilbreath, 1980;
+Freitas and Zachary, 1981). The self-replicating seed
+factory was perceived to be 100 tonnes constituting a
+seed which could expand and grow to its full capacity
+for one year prior to the self-replication phase. This
+NASA reference design comprised a range of computercontrolled robotic vehicles – (i) paving robots mounting
+parabolic mirrors sinter lunar regolith into a hard basalt
+foundation surface – this may be supplemented with the
+laying of rails to reduce navigation requirements of nonmining robots; (ii) front end loader and bucket/dozer
+mining robots for trenching, strip and spiral mining; (iii)
+electric carts on rails for transporting material and
+components within the factory and casting robots for
+tool and mould construction; and (iv) assembly robots
+for assembling fabricated parts stored in warehouses.
+Infrastructure included a radio transponder network to
+implement local navigation/communications for robot
+coordination. This enables a central computer control
+system at the hub to coordinate all robots. Power of 1.7
+MW was implemented through an overhead canopy of
+solar cells erected by mining and assembly robots.
+Chemical refining of lunar regolith was based on
+electrophoretic separation followed by HF acid leaching.
+Chlorine for extracting aluminium was considered to be
+the limiting reagent – we concur with this (and sodium)
+though for different reasons. Indeed, in our case, this
+provides a mechanism for mitigation of uncontrolled
+replication – a salt contingency in which Na and Cl must
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+gate; (iii) p and ~q logic gate; (iv) rigid link; (v) joining
+element; (vi) cutting element; (vii) sensory element, and
+(viii) actuator element. Recognition of each of these
+elements in the environment depends on their properties
+detected by sensory elements. The self-replicator would
+then make a copy of its program tape using a program
+copier. The instructions are thus read twice: once as
+instructions to be interpreted, then as data to be copied.
+In biological systems, this is differentiated by
+transcription and translation of DNA. The universal
+constructor may construct any machine given the
+appropriate instructions and raw material. The need for
+energy was not considered specifically. Artificial life
+considered here – let us call it engineered life to
+differentiate it from artificial and synthetic life - is
+hardware-based which although restrictive with respect
+to software simulation (especially in exploring its
+evolutionary properties) introduces its own insights into
+physical implementation – indeed, we suggest that any
+useful physical self-replicator must be a universal
+constructor.
+Because the basic units of the von Neumann kinematic
+model are complex modules to be assembled, this is
+more properly a form of self-assembly. An example is a
+physical template-based self-replication process that
+exploited stochastic perturbations (Penrose and Penrose,
+1957). Multiple copies of 2D plywood tiles with two
+specific shapes that uniquely fit together in a tray are
+subjected to random shaking. In the correct
+configuration, the two shapes A and B form a composite
+configuration AB or BA. More complex self-replication
+(self-assembly) of modules has been implemented
+physically as towers of “molecubes” (Zykov et al,
+2005). The molecubes are 10 cm sided cubes with a
+diagonal axis through which the molecube is split into
+two halves that can swivel with respect to each other.
+Encapsulated within the molecube is a motor and a
+microcontroller. Each face of the molecube contains
+electromagnets that can be energized to attach to other
+molecubes. On swivelling, attached molecubes may
+move and further molecubes may be added – selfassembly rather than self-replication though it can
+replicate any configuration. Molecubes are reminiscent
+of 3D physical manifestations of 2D cellular automata.
+This represents one of number of different approaches to
+self-assembly of modular units - there are three families
+of reconfigurable robotics (Yim et al, 2007; Patil et al,
+2013): (i) lattice-based configurations form a cubic or
+hexagonal grid of modules, e.g. molecubes; (ii) chainbased configurations forming trees or chains, e.g.
+Polybot, MTRAN, CONRO, etc; (iii) mobile
+architectures that can form chains, lattices or functional
+robots, e.g. CEBOT. Most artificial mechanisms for
+configuration require controlled movement for assembly
+of the units while biological self-assembly is stochastic
+(e.g. through Brownian motion) for which there are few
+artificial examples beyond the Penrose tiles example.
+All these self-assemblers are composed of complex
+
+150
+
+Oral presentation
+
+A self-replicating electromechanical intelligence
+system represented a further step by copying both its
+program and its hardware circuitry (Kim et al, 2004;
+Hastings et al, 2004). It also utilized Lego Mindstorms
+kits and comprised five main components – (i) a control
+circuit comprising motor driver, motor controller,
+feedback controller, and optical reader decoder based on
+logic gates constructed from resistors, capacitors,
+transistors and switches; (ii) a 2 DOF dual set of robotic
+arms for assembling circuit elements and feeding
+physical code components onto the conveyor belt
+respectively; (iii) a conveyor belt for moving coloured
+code components to the code reader, (iv) an optical
+reader array to read colour codes defining discrete
+actuator positions for acquiring electrical components,
+and (v) a vertical hopper to guide circuit modules into a
+copied assembly of the control circuit. This represents a
+physical instantiation of self-replication of basic
+modules by self-inspection.
+One of the most significant problems is that as the
+number of unique parts increases, the manufacturing
+complexity increases exponentially, favouring the use of
+standardized parts – ultimately, the adoption of simple
+modular blocks converts self-replication into a selfassembly process (Stevens, 2009). However, this and
+other self-assembling systems do not consider
+manufacture of the modules. Our approach does indeed
+consider these aspects. In particular, we utilize 3D
+printing to tackle the most challenging of products
+required for robotic machines – electric motors. We also
+propose 3D printing vacuum tubes for electronics and
+the adoption of neural network computer architectures.
+Rather than architectural issues, we are tackling the
+nuts-and-bolts issues in an attempt to make selfreplicating machines an engineering reality. This is a
+bottom-up approach rather than top-down approach.
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+be supplied from Earth for replication to proceed.
+Fabrication for converting feedstock into parts was
+through mould casting and machining and welding by
+CO2 lasers. Manipulator arms and tooling would
+perform construction and assembly of components and
+parts as in the von Neumann kinematic model.
+Mechatronic components such as motors, sensors and
+electronics would be supplied from Earth as “vitamins”.
+The Lackner-Wendt concept is similar in comprising a
+colony of robotic vehicles running on a grid of
+electrified tracks within a manufacturing facility for
+extracting raw material from desert regions powered by
+solar cells (Lackner and Wendt, 1995). The raw
+materials are the commonest elements in desert sand –
+Na, Fe, Mg, Si, Ca, Ti, Al, C, O2 and H2 – which are
+extracted through carbothermic reduction.
+The Chirikjian-Suthakorn concept is a further
+development of self-replicating robots for lunar
+application (Chirikjian et al, 2002). It comprised four
+major subsystems: (i) mobile robots with manipulators
+for mining, transport and assembly of material or
+components; (ii) regolith sintering, chemical refining
+and metal casting and other parts manufacturing
+facilities; (iii) solar energy system based on solar
+collectors, photovoltaic energy conversion and fuel
+cells, (iv) electromagnetic railguns for long range
+delivery of offspring. The Chirikjian-Suthakorn concept
+demonstration was based on Lego Mindstorms kits
+comprising a system of robots capable of assembling
+component modules into replicated robots. Lego
+provides a modular approach in which standard blocks
+and plates of ABS plastic with standard mechanical
+interfaces can be configured into different assemblies. A
+simple robot comprised of several subsystems –
+left/right motors, left/right wheels and/or tracks,
+manipulator wrist, passive gripper and robot control
+system microcontroller – was demonstrated to construct
+a copy of itself. It was programmed with an assembly
+sequence to construct a copy of itself in an assembly
+area of components using a series of assembly jig
+fixtures – chassis, motor/wheels, and gripper units - for
+aligning components for each subassembly. The robot
+controller was required to program and operate the robot
+between stations for the assembly. The assembly
+stations were fairly complex involving conveyor
+belt/pulley/lift units with sensory feedback, docking unit
+with sensors, electrical connectors for electrical power,
+and controller units. Lego was also used for a selfreplicating three axis Cartesian manipulator capable of
+constructing a copy of itself from Lego components
+(Moses et al, 2014). It comprised 45 parts (of 11
+different types) assembled through a sequence of 410
+steps though it lacked any form of automated controller.
+The 11 different types were dominated by racks and
+rails but most significantly included prefabricated
+electric motors. Although Lego has snap-fit assembly,
+many parts were tapered or chamfered in order to permit
+positioning errors during assembly.
+
+Implications
+An interesting question concerns whether the selfreplicating machine advocated here constitutes artificial
+life. It has been suggested that a key feature of heritable
+genetic representation is non-holonomy which
+introduces alternative trajectories for a dynamic system
+(Pattee, 2001). The kinetic energy dynamics and
+momentum cannot be uniquely integrated to specific
+potential energy trajectories. This non-conservation of
+force yields energy degeneracy in which there are
+alternative configuration states with the same energy
+that cannot be uniquely determined via mathematical
+integration. The configuration is trajectory-dependent,
+i.e. it is rate-dependent on the history of previous states.
+A physical example is the non-holonomy of angular
+momentum conservation in a general kinematic
+mechanism that cannot be integrated into a unique
+conservation of angular moments because of the noncommutativity of sequences of rotations. There is a
+dependence on the history of angular states. An infinite
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+151
+
+Oral presentation
+
+References
+Braitenberg V (1984) Vehicles: Experiments in Synthetic
+Psychology, MIT Press, Cambridge, MA
+Burks A & von Neumann J (1966) Theory of Self-Reproducing
+Automata, University of Illinois Press
+Cabessa J & Siegelmann H (2012) “Computational power of
+interactive recurrent neural networks” Neural Computation
+24 (4), 996-1019
+Chen B, Cui T, Liu Y, Varahramyan K (2003) “All-polymer RC
+filter circuits fabricated with inkjet printing technology”
+Solid State Electronics 47, 841-847
+Chirikjian G, Zhou Y, Suthakorn J (2002) “Self-replicating robots
+for lunar development” IEEE/ASME Trans Mechatronics 7
+(4), 462-472
+Ellery A (2004) “An engineering approach to the dynamic control
+of space robotic on-orbit servicers” Proc Inst Mechanical
+Engineers G: J Aerospace Engineering 218, 79-98
+Ellery A (2015) “Engineering artificial extraterrestrial life?” Proc
+European Conf on Artificial Life (Late Breaking), 12-14
+Ellery A (2016) “Progress towards 5D printed mechatronic
+systems” Proc IEEE Int Conf Industrial Technology, Taipei,
+Taiwan
+Ellery A (2016a) “Are self-replicating machines feasible?” in press
+with AIAA J Spacecraft & Rockets
+Ellery A (2016b) “How to build a self-replicating machine on the
+Moon” Proc ASCE Earth & Space Conf, Orlando, Fl
+Ellery A (2016c) “John von Neumann’s self-replicating machine –
+critical components required” Proc IEEE Int Conf Systems
+Man & Cybernetics, Budapest, Hungary, 314-319
+Ellery A (2016d) “Solar power satellites for clean energy enabled
+through disruptive technologies” Proc 23rd World Energy
+Congress (Award Winning Papers), Istanbul, Turkey, 133147
+Freitas R & Gilbreath W (1980) Advanced Automation for Space
+Missions, NASA Conference Publication 2255
+
+(Stengel, 1994)). This mutation must be heritable so it
+applies only to self-replication errors in genetic copying.
+This is relatively straight forward to minimize through
+error detection and correction coding (EDAC) (Shirvani
+et al, 2000). Indeed, artificial neural networks can
+implement Viterbi decoding based on analogue neurons
+(Wang and Wicker, 1996). The third requirement is the
+there is a selection process in which there is a variation
+in the phenotypic success between offspring within the
+constraints of resource limitations. All technologically
+designed systems are brittle and any non-nominal
+variation will fail due to lack of robustness. A pertinent
+example is genetic programs that self-replicate through
+only through genetic cross-over but cannot exploit
+mutation (Koza, 1993). Given the difficulty in creating
+viable self-replication, it is vanishingly unlikely that
+random mutational variation will yield improved
+fecundity. Furthermore, such variations will be detected
+and corrected through EDAC. It is desirable to prevent
+evolutionary change in order to retain control of the selfreplicator. An additional mechanism is the salt
+contingency mentioned earlier – imported Cl is required
+for silicone plastics manufacture and Na for quartz
+manufacture without which self-replication cannot
+proceed. Multiple layers of safeguards should provide
+sufficient protection against the grey goo scenario.
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+number of historical paths can yield a particular
+orientation state. This affords unpredictability to the
+dynamics of such systems. Evolutionary processes are
+non-holonomic explorations in phase space and this is a
+hallmark of life. The artificially constructed selfreplicating machine presented here (and others similar to
+it) has no evolutionary history and therefore does not
+constitute artificial life (Ellery, 2015). If subsequent
+evolutionary processes are permitted however, this
+changes. The introduction of an evolutionary
+exploration to the self-replicating machine implies that it
+will then constitute an artificial lifeform. The great fear
+is the grey goo scenario in which self-replication
+becomes uncontrollable. However, there are practical
+difficulties to this scenario. For evolutionary processes
+to operate, certain conditions are required. The first
+requirement is self-replication in which copies are
+manufactured with the offspring inheriting properties
+from the parents – this is true by definition for the selfreplicating machine. The second requirement is that the
+self-replicating system must suffer from variations due
+to genetic mutation of which there are two types
+(Ikegami and Hashimoto, 1995): passive mutation
+resulting from external noise from the environment and
+active mutation resulting from noise in the selfreplication process itself (in Kalman filtering, this is
+quantified as sensor and model noise respectively
+
+Freitas R & Zachary W (1981) “Self-replicating growing lunar
+factory” Proc 5th AIAA Conf Space Manufacturing 4
+Freitas R & Merkle R (2004) Kinematic Self-Replicating
+Machines, Landes Bioscience, Texas
+George J et al (2012) “RESOLVE mission architecture for lunar
+resource prospecting and utilization” 43rd Lunar & Planetary
+Science Conf abstract no. 2583
+Hastings W, Labarre M, Viswanathan A, Lee S, Sparks D, Tran T,
+NolinJ, David M, Huang S, Suthakorn J, Zhou Y, Chirikjian
+G (2004) “Minimalist parts manipulation system for a selfreplicating electromechanical circuit” reprint
+Ikegami T & Hashimoto T (1995) “Active mutation in selfreproducing networks of machines and tapes” Artificial Life
+2 (3), 305-318
+Jones R, Haufe P, Sells E, Iravani P, Olliver V, Palmer C and
+Bowyer A (2011) “RepRap – the replicating rapid prototype”
+Robotica 29, (1), 177-191
+Kim J, Rivera A, Soya D, Dokko D, Unnimayar L, Ramadon M,
+Denzene R, Syed Z, Zhou Y, Suthakorn J, Chirikjian G
+(2004) “Construction of a prototype of self-replicating
+electromechanical intelligence” reprint
+Koza J (1993) “Spontaneous emergence of self-replicating and
+evolutionarily self-improving computer programs” Proc 3rd
+Workshop Artificial Life, 225-263
+Lackner K & Wendt C (1995) “Exponential growth of large selfreproducing machine systems” Mathematical & Computer
+Modelling 21 (10), 55-81
+Larson S & Ellery A (2015) “Trainable analogue neural network
+with application to lunar in-situ resource utilisation” Proc Int
+Astronautics Federation Congress, Jerusalem, IAC-15D3.3.6
+Malone E & Lipson H (2007) “Freeform fabrication of a complete
+electromechanical relay” Proc 18th Solid Freeform
+Fabrication Symp, 513-526
+Mange D & Sipper M (1998) “von Neumann’s quintessential
+message: genotype + ribotype = phenotype” Artificial Life 4,
+225-227
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+152
+
+Oral presentation
+
+Carole Knibbe et al, eds., Proceedings of the ECAL 2017, Lyon, France, 4-8 September 2017,
+(Cambridge, MA: The MIT Press, ©2017 Massachusetts Institute of Technology).
+This work is licensed to the public under a Creative Commons Attribution - NonCommercial - NoDerivatives
+4.0 license (international): http://creativecommons.org/licenses/by-nc-nd/4.0/
+
+Downloaded from http://direct.mit.edu/isal/proceedings-pdf/ecal2017/29/146/1904502/isal_a_026.pdf by guest on 16 December 2025
+
+Martinelli G & Perfetti R (1991) “Circuit theoretic approach to the
+backpropagation learning algorithm” IEEE Int Symp Circuits
+& Systems 3, 1481-1484
+Moore E (1956) “Artificial living plants” Scientific American
+(Oct), 118-126
+Moses M, Ma H, Wolfe K and Chirikjian G (2014) “An
+architecture for universal construction via modular robotic
+components” Robotics & Autonomous Systems 62 (7), 945965
+Parberry I (1994) Circuit complexity and neural networks, MIT
+Press Foundations of Computing, Cambridge, MA
+Patil M, Abukhalil T, Sobh T (2013) “Hardware architecture
+review of swarm robotic systems: self-reconfigurability, selfreassembly, and self-replication” ISRN Robotics 2013, article
+849606
+Pattee H (2001) “Physics of symbols: bridging the epistemic cut”
+BioSystems 60, 5-21
+Penrose L & Penrose R (1957) “Self-reproducing analogue”
+Nature 179, 1183-1184
+Siegelmann H. & Sontag E (1995) “On the computational power of
+neural nets” J Computer & System Sciences 50, 132-150
+Shirvani P, Saxena N, McCluskey E (2000) “Softwareimplemented EDAC protection against SEUs” IEEE Trans
+Reliability 49 (3), 273-284
+Stengel R (1994) Optimal Control and Estimation, Dover
+Publications
+Stevens W (2009) “Parts closure in a kinematic self-replicating
+programmable constructor” J Artificial Life 13 (2), 508-511
+Wang X & Wicker S (1996) “Artificial neural net Viterbi decoder”
+IEEE Trans Communications 44 (2), 165-171
+Yamashita Y & Nakamura Y (2007) “Neuron circuit model with
+smooth nonlinear output function” Proc Int Symp Nonlinear
+Theory & its Applications, Vancouver, 11-14
+Yim M, Shen W-M, Salemi B, Rus D, Moll M, Lipson H, Klavins
+E, Chirijkian G (2007) “Modular self-reconfigirable robot
+systems: challenges and opportunities for the future” IEEE
+Robotics & Automation Magazine (Mar), 43-52
+Zykov V, Mytilinaios E, Adams B, Lipson H (2005) “Selfreproducing machines” Nature 435, 163-164
+
+153
+
+

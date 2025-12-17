@@ -1,0 +1,52 @@
+id: recipe_silicon_nitride_ceramic_v0
+target_item_id: silicon_nitride_ceramic_v0
+variant_id: v0
+steps:
+  - process_id: powder_milling_process_v0
+    inputs:
+      - item_id: silicon_powder
+        qty: 0.7
+        unit: kg
+      - item_id: nitrogen_gas_purified
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: silicon_nitride_powder_fine
+        qty: 0.95
+        unit: kg
+    est_time_hr: 6.0
+    notes: Ball mill silicon powder in nitrogen atmosphere to form Si3N4
+  - process_id: powder_compaction_process_v0
+    inputs:
+      - item_id: silicon_nitride_powder_fine
+        qty: 0.95
+        unit: kg
+      - item_id: sintering_aid_mgo
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: silicon_nitride_green_body
+        qty: 0.9
+        unit: kg
+    est_time_hr: 2.0
+    notes: Press powder into green body with sintering aids
+  - process_id: ceramic_sintering_high_temp_v0
+    inputs:
+      - item_id: silicon_nitride_green_body
+        qty: 0.9
+        unit: kg
+    outputs:
+      - item_id: silicon_nitride_ceramic_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 12.0
+    notes: Sinter at 1700-1800°C in nitrogen atmosphere
+assumptions: |
+  Reaction bonded or sintered silicon nitride process.
+  Nitrogen atmosphere during processing prevents decomposition.
+  Sintering aids (MgO, Y2O3, or Al2O3) promote densification.
+  High temperature sintering achieves high density and strength.
+notes: |
+  Manufacturing route for silicon nitride ceramic.
+  Challenging but achievable with lunar resources.
+  Superior properties justify complex processing.

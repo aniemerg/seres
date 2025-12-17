@@ -1,0 +1,52 @@
+id: recipe_slam_algorithm_implementation_v0
+target_item_id: slam_algorithm_implementation_v0
+variant_id: v0
+steps:
+  - process_id: software_development_programming_v0
+    inputs:
+      - item_id: computing_time_development
+        qty: 100.0
+        unit: hr
+      - item_id: reference_algorithms_slam
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: slam_code_uncompiled
+        qty: 1.0
+        unit: each
+    est_time_hr: 100.0
+    notes: Develop SLAM algorithm code (sensor fusion, feature extraction, optimization)
+  - process_id: software_compilation_v0
+    inputs:
+      - item_id: slam_code_uncompiled
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: slam_executable
+        qty: 1.0
+        unit: each
+    est_time_hr: 1.0
+    notes: Compile for target embedded platform
+  - process_id: software_testing_simulation_v0
+    inputs:
+      - item_id: slam_executable
+        qty: 1.0
+        unit: each
+      - item_id: sensor_data_test_set
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: slam_algorithm_implementation_v0
+        qty: 0.0
+        unit: kg
+    est_time_hr: 20.0
+    notes: Test with simulated and real sensor data, validate mapping accuracy
+assumptions: |
+  Software development in C/C++ for embedded systems.
+  Reference SLAM algorithms adapted for lunar conditions.
+  Testing with recorded sensor data before deployment.
+  Integration with robot control system.
+notes: |
+  Manufacturing (development) route for SLAM algorithm implementation.
+  Software component - zero mass but critical for autonomous navigation.
+  Requires significant development and testing effort.

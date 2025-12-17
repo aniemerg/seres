@@ -54,10 +54,11 @@ def _infer_kind(path: Path, data: dict) -> Optional[str]:
     return None
 
 
-def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dict]]:
+def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dict], Dict[str, dict]]:
     refs: Set[str] = set()
     unresolved: List[dict] = []
     invalid: List[dict] = []
+    ref_metadata: Dict[str, dict] = {}
 
     def add_unresolved(text: str, field_path: str) -> None:
         if not text:
@@ -71,7 +72,18 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
                 if item_id:
                     refs.add(str(item_id))
         for rid in data.get("requires_ids", []) or []:
-            refs.add(str(rid))
+            if isinstance(rid, str):
+                # Simple string format (backward compatible)
+                refs.add(str(rid))
+            elif isinstance(rid, dict):
+                # Rich object format with metadata
+                item_id = rid.get("id")
+                if item_id:
+                    refs.add(str(item_id))
+                    # Store metadata (everything except 'id')
+                    metadata = {k: v for k, v in rid.items() if k != "id"}
+                    if metadata:
+                        ref_metadata[str(item_id)] = metadata
         for rtxt in data.get("requires_text", []) or []:
             add_unresolved(str(rtxt), "requires_text")
         for req in data.get("resource_requirements", []) or []:
@@ -112,7 +124,7 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
             item_id = comp.get("item_id") or comp.get("id")
             if item_id:
                 refs.add(str(item_id))
-    return refs, unresolved, invalid
+    return refs, unresolved, invalid, ref_metadata
 
 
 def _collect_nulls(kind: str, data: dict) -> List[dict]:
@@ -190,6 +202,7 @@ def build_index() -> Dict[str, dict]:
     recipe_targets: Set[str] = set()  # items that have recipes
     invalid_recipes: List[dict] = []
     seed_references: Dict[str, List[str]] = {}  # item_id -> list of seed file ids that reference it
+    item_metadata: Dict[str, dict] = {}  # item_id -> metadata from seed requires_ids
     kb_files = sorted(KB_ROOT.glob("**/*.yaml"))
 
     for path in kb_files:
@@ -221,14 +234,20 @@ def build_index() -> Dict[str, dict]:
             if caps:
                 machine_capabilities[entry_id] = caps
 
-        refs_out, unresolved, invalid_steps = _collect_refs(kind, data)
+        refs_out, unresolved, invalid_steps, ref_metadata = _collect_refs(kind, data)
 
-        # Track seed file references for work queue
+        # Track seed file references and metadata for work queue
         if kind == "seed":
             for ref_id in refs_out:
                 if ref_id not in seed_references:
                     seed_references[ref_id] = []
                 seed_references[ref_id].append(entry_id)
+            # Store metadata from this seed file
+            for ref_id, metadata in ref_metadata.items():
+                if ref_id not in item_metadata:
+                    item_metadata[ref_id] = {}
+                # Merge metadata (later seeds can add/override)
+                item_metadata[ref_id].update(metadata)
 
         for u in unresolved:
             u.update({"owner_id": entry_id, "owner_kind": kind, "file": str(path)})
@@ -344,7 +363,7 @@ def build_index() -> Dict[str, dict]:
     _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
-        seed_references
+        seed_references, item_metadata
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
@@ -362,6 +381,7 @@ def _update_work_queue(
     orphan_resources: List[dict],
     invalid_recipes: List[dict],
     seed_references: Dict[str, List[str]],
+    item_metadata: Dict[str, dict],
 ) -> None:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -371,6 +391,8 @@ def _update_work_queue(
     - items_without_recipes: parts/materials/machines with no recipe
     - missing_fields: required fields not populated (energy_model, time_model, etc.)
     - orphan_resources: resource_types with no machine providing them
+    - seed_references: item_id -> list of seed file ids that reference it
+    - item_metadata: item_id -> freeform metadata from seed requires_ids
     """
     gap_items: List[dict] = []
 
@@ -393,6 +415,9 @@ def _update_work_queue(
         # Add seed file info if this item was referenced by a seed file
         if ref_id in seed_references:
             context["seed_files"] = seed_references[ref_id]
+        # Add metadata if available
+        if ref_id in item_metadata:
+            context["metadata"] = item_metadata[ref_id]
         gap_items.append(
             {
                 "id": f"referenced_only:{ref_id}",

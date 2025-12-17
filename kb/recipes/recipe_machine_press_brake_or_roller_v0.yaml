@@ -1,0 +1,37 @@
+id: recipe_machine_press_brake_or_roller_v0
+target_item_id: press_brake_or_roller
+variant_id: v0
+steps:
+  - process_id: cutting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.7
+    notes: "Cut frame plates, gussets, and tooling mounts."
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Weld frame, beam/roller supports, and hinge hardware."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.2
+    machine_hours: 1.0
+    labor_hours: 0.8
+    notes: "Finish tooling faces, pivot holes, and mounting surfaces."
+  - process_id: hydraulic_system_assembly_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Install cylinder/actuation, hoses, valves, and power unit."
+  - process_id: hydraulic_system_integration_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Fill/bleed hydraulics and perform basic motion checks."
+  - process_id: wiring_and_electronics_integration_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Wire controls, safety interlocks, and limit switches."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.6
+    labor_hours: 0.5
+    notes: "Cycle press brake/roller, verify angles/roll radius and safety stops."
+assumptions: "Coarse build for small press brake or plate roller; hydraulics and controls are basic."
+notes: Local assembly recipe for press brake/roller.

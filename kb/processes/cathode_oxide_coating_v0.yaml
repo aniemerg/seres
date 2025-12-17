@@ -1,0 +1,32 @@
+id: cathode_oxide_coating_v0
+kind: process
+name: Cathode oxide coating
+layer_tags:
+  - layer_7
+inputs:
+  - item_id: electrode_materials
+    qty: 1.0
+    unit: kg
+  - item_id: coating_compound
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: electrode_materials
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - coating_booth_enclosure
+  - drying_oven
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.6
+  notes: "Spray/dip and oven dry energy for oxide coating."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Apply oxide coating and dry."
+notes: "Placeholder oxide coating step for cathodes (per paper seed list); uses generic coating compound and drying."

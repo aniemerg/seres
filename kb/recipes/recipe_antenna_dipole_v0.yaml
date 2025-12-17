@@ -1,0 +1,67 @@
+id: recipe_antenna_dipole_v0
+target_item_id: antenna_dipole_v0
+variant_id: v0
+steps:
+  - process_id: metal_cutting_process_v0
+    inputs:
+      - item_id: aluminum_tube_stock
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: antenna_elements_cut
+        qty: 0.48
+        unit: kg
+    est_time_hr: 0.5
+    notes: Cut two quarter-wave antenna elements to calculated length
+  - process_id: ceramic_sintering_process_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: center_insulator_ceramic
+        qty: 0.08
+        unit: kg
+    est_time_hr: 4.0
+    notes: Form and sinter ceramic center insulator block
+  - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: center_insulator_ceramic
+        qty: 0.08
+        unit: kg
+    outputs:
+      - item_id: insulator_drilled
+        qty: 0.075
+        unit: kg
+    est_time_hr: 0.5
+    notes: Drill holes for antenna elements and feed point
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: antenna_elements_cut
+        qty: 0.48
+        unit: kg
+      - item_id: insulator_drilled
+        qty: 0.075
+        unit: kg
+      - item_id: coaxial_connector_n_type
+        qty: 1.0
+        unit: each
+      - item_id: wire_copper_insulated
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: antenna_dipole_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.0
+    notes: Assemble elements in insulator, attach connector, wire feed point
+assumptions: |
+  Aluminum elements for light weight and conductivity.
+  Ceramic center insulator provides RF isolation.
+  N-type connector for reliable RF connection.
+  Length tuned for specific frequency band (VHF or UHF).
+notes: |
+  Manufacturing route for dipole antenna.
+  Simple, effective antenna design for radio communications.
+  Length adjusted for operating frequency (λ/2).
+  VSWR testing recommended to verify resonance.

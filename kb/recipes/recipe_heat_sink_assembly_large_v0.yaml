@@ -1,0 +1,56 @@
+id: recipe_heat_sink_assembly_large_v0
+target_item_id: heat_sink_assembly_large
+variant_id: v0
+steps:
+  - process_id: metal_extrusion_process_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: heat_sink_fin_extrusion
+        qty: 22.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: Extrude aluminum with integrated fin structure
+  - process_id: metal_cutting_process_v0
+    inputs:
+      - item_id: heat_sink_fin_extrusion
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: heat_sink_cut_to_length
+        qty: 21.0
+        unit: kg
+    est_time_hr: 1.0
+    notes: Cut heat sink to required length
+  - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: heat_sink_cut_to_length
+        qty: 21.0
+        unit: kg
+    outputs:
+      - item_id: heat_sink_base_machined
+        qty: 20.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: Machine flat mounting base and drill mounting holes
+  - process_id: surface_treatment_anodizing_v0
+    inputs:
+      - item_id: heat_sink_base_machined
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: heat_sink_assembly_large
+        qty: 20.0
+        unit: kg
+    est_time_hr: 3.0
+    notes: Anodize for corrosion protection and high emissivity
+assumptions: |
+  Aluminum extrusion provides cost-effective fin structure.
+  Flat base machined for good thermal contact.
+  Anodizing increases thermal radiation in vacuum environment.
+notes: |
+  Manufacturing route for large heat sink assembly.
+  Extruded fin design maximizes surface area for heat dissipation.
+  Critical for high-power equipment thermal management.

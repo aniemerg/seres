@@ -1,0 +1,37 @@
+id: electrolyte_prep_koh
+kind: process
+name: KOH electrolyte preparation
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: deionized_water
+    qty: 7.0
+    unit: kg
+outputs:
+  - item_id: electrolyte_koh_solution
+    qty: 10.0
+    unit: kg
+requires_ids:
+  - chemical_mixer_tank
+resource_requirements:
+  - resource_type: chemical_mixing
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: Mixing and dissolution energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Dissolution and mixing time
+notes: |
+  Preparation of KOH aqueous electrolyte for Ni-Fe batteries.
+  Source: battery_system_nife_v0 seed file, design/battery-design.md
+  Typical concentration: 20-30% KOH by weight
+  Process: Dissolve KOH pellets in deionized water with stirring
+  Safety: Exothermic dissolution, heat management required
+  Used in Ni-Fe battery assembly

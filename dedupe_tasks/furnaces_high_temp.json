@@ -1,0 +1,14 @@
+{
+  "id": "dedupe:furnaces_high_temp",
+  "kind": "machine",
+  "reason": "overlap",
+  "candidate_ids": ["furnace_high_temp", "high_temp_furnace_v0", "heat_treatment_furnace"],
+  "notes": "Consolidate high-temperature furnaces. Assess if there are distinct thermal capabilities (temp ranges, atmosphere control) or just naming differences. Heat treatment may need to stay separate if it requires specific thermal cycling.",
+  "hints": {
+    "prefer": "furnace_high_temp",
+    "assess": "temperature ranges (1200C vs 1500C+), controlled cooling cycles",
+    "keep_if": "heat_treatment_furnace has unique thermal profile control"
+  },
+  "refs": ["out/reports/inventory.md"],
+  "category": "furnaces"
+}

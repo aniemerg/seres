@@ -1,10 +1,9 @@
 id: recipe_bulk_material_or_parts_import_v0
 target_item_id: bulk_material_or_parts
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
+  - process_id: environment_source_v0
     est_time_hr: 0.1
-    notes: Imported bulk material/parts placeholder.
-assumptions: Represents unspecified imported feedstock; replace with concrete materials later.
-notes: Import placeholder to keep dependency chain runnable.
-
+    notes: "Assume bulk material/parts sourced externally or from environment without further modeling."
+assumptions: "Placeholder feedstock; treated as boundary/environment source until replaced with specific items."
+notes: Boundary placeholder recipe to keep dependency chain runnable.

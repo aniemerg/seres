@@ -1,0 +1,28 @@
+id: additive_manufacturing_polymer_v0
+kind: process
+name: Additive manufacturing (polymer)
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: polymer_printing_feedstock
+    qty: null
+    unit: kg
+outputs:
+  - item_id: polymer_printed_part
+    qty: null
+    unit: kg
+requires_ids:
+  - resource_3d_printer_cartesian_v0_machine
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "Polymer printer energy per kg of part"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+  notes: "Throughput including print time"
+notes: Basic polymer 3D printing for small/medium parts and enclosures.

@@ -1,0 +1,29 @@
+id: hydrogen_recycle_separator_v0
+kind: process
+name: Hydrogen recycle separator
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: reductant_gas
+    qty: 1.1
+    unit: kg
+outputs:
+  - item_id: reductant_gas
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - gas_handling_loop
+  - vacuum_pump_small
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.4
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.8
+  notes: "Compressor/pump power for gas separation and recycle."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Cycle time for cooling/condensing and recompression."
+notes: "Placeholder recycle/separation step to recover hydrogen/reductant gas from reactor offgas streams for reuse."

@@ -1,0 +1,575 @@
+3D PRINTED ELECTRIC MOTORS AS A STEP TOWARDS SELF-REPLICATING
+MACHINES
+Virtual Conference 19–23 October 2020
+Abdurrazag Elaskri1, Alex Ellery2
+1
+
+Carleton University, 1125 Colonel By Drive, Canada, E-mail: Abdurrazagelaskri@cmail.caerleton.ca
+2
+Carleton University, 1125 Colonel By Drive, Canada, E-mail: alexellery@cunet.carleton.ca
+
+ABSTRACT
+This research addresses the application of 3D printing
+technologies in innovative electrical machinery. To
+date, there is a lack of fabricated devices with electromechanical functionality for parts entirely manufactured using only Additive Manufacturing (AM)
+technologies. This study provides a new and different
+approach to create a fully 3D printed electric motors,
+with a focus on an additively manufactured iron core,
+winding, insulation, and permanent magnet. We investigate how to develop 3D printed motor with multi-material and multi-technique without using embedding devices. Several prototypes of radial and axial
+flux DC electric motors were fabricated and tested.
+Their functionality indicated the potential of achieving 3D-printed motor using inexpensive, commercially available equipment. A good plan application is to
+use the 3D printed motor as the core component of a
+self-replicating machine. Suppose such a machine
+was deployed on the Moon. It could be a robotic system that uses lunar materials to replicate itself and,
+eventually, fabricate a broad range of future space
+assets.
+1
+
+INTRODUCTION
+
+Fabrication of functional objects utilizing AM is a
+new research area, and the basic approach is to embed off-the-shelf devices on or in a printed object by
+inserting conductive wires into the printed geometry
+during the printing process. In recent studies, conductive inks were also used to form electronic circuits
+into 3D printed parts [1]. As an example, in [2], the
+writers describe the process in which the 3D printed
+part was embedded with electrical components and
+electronic circuits made of conductive ink. Regardless of the employment of AM technologies for producing a wide range of dielectric and metallic materials, previous studies about fabricating electromechanical devices are relatively limited. All attempts to 3Dprint electric motors only considered the main structure of the rotor and stator. The main challenge of
+building electric motors with current manufacturing
+systems is the limited available materials that can be
+processed using 3D printing machines. For instance,
+
+an electrical conductor is one of the essential elements in an electric motor. However, the lack of mature AM technologies able to produce a high electrical conductivity material such as copper is considered
+as a challenge. A conventional DC motor is also constructed of permanent magnets (PMs), and the most
+powerful PM's should have an organized granular
+structure that is a challenge to rebuild with a 3D
+printing machine. Furthermore, 3D printing the rotor
+and stator cores with high permeability soft magnetic
+materials that determine the motor performance are
+still under development. Based on the above principles, the brushed DC electric motor (BDCM) is selected to be entirely 3D printed. This selection is resulting in the use of fewer components where the
+electrical power source in a classical BDC motor is
+connected to the rotor winding through a commutator
+and brushes without the need for electronic commutation based on hall position sensors. Besides, all other
+motor types are derived from its design. The selection
+of the AM technique in this research revolved around
+considering several issues, including the availability,
+materials, costs, process of manufacturing, and the
+state of the art of the AM technologies available. For
+comparative purposes, the rotor core is produced
+considering different types of additively manufactured material using Fused Deposition Modelling
+(FDM) and Cold Spray Additive Manufacturing
+(CSAM). Several prototypes of Self-excited DC motor were 3D printed in order to eliminate the use of
+PMs in the stator using different materials and different printing techniques, followed by the building process of pancake motor in order to eliminate the use of
+the copper coils. Optimization techniques are not
+addressed in this research since the first goal is to 3D
+print electric motor, not improve its performance.
+Also, the building of the pancake motor was only to
+develop the coils technique to eliminate the copper
+coil winding.
+3 RELEVANT PREVIOUS ATTEMPTS TO
+3D PRINT INTERACTIVE OBJECTS
+Fabrication of functional objects is a new research
+area, and the standard approach is to embed off-theshelf devices inside the printed object. H. Peng et al.
+
+[3] developed a custom print head with two-wire
+feeders that can deliver the wire within five-degrees
+of freedom 5DOF on an FDM printer. They used this
+for winding copper wire coil to induce a magnetic
+field and winding soft iron over a plastic structure to
+form highly magnetic permeability poles. They
+demonstrated this by fabricating a 6-pole motor stepper stator (i.e. a reluctance motor rotor). Savage et al.
+[4] showed how 3D-printing could build interactive
+objects by embedding a machine vision-based system
+for sensing human input in physical controls, such as
+joysticks, buttons and sliders. Hook et al. [5] embedded small three-axis wireless accelerometers in the
+moving parts of a 3D-printed object to tracking
+movement. Furthermore, RevoMaker [6] presented
+the idea of inserting premade circuits inside a folded
+cuboid, then printing over its facets representing
+computer muse. Savage et al. [7] also developed
+placing scanning marks and stickers on a solid model
+surface composed of sculpting materials, allowing
+them to be converted into 3D-printed geometry. They
+then mounted electronics and sensors inside the 3Dprinted item. Other researchers have created interactive objects by adding off-the-shelf sensors and actuator parts during the printing process, including
+3D-printed light pipes [8], interactive speakers [9],
+pneumatic device controls [10], hydraulically actuated robotic structures [11] and capacitive touch sensors for interactive objects [12]. Voxel8 [13] developed an FDM printer that can print with both thermoplastic and conductive silver paste. In addition to
+embedding off-the-shelf electronic components such
+as motors, this made printing a complete quadcopter
+possible, including the circuits. Researchers have
+recently investigated different techniques to insert
+conductive wires into 3D-printed geometry, thus producing 3D-printed interactive objects. Kim et al. [14]
+demonstrated early results of embedding a copper
+wire on an airflow duct built by FDM to demonstrate
+multi-material 3D-printed electronics. Bayless et al.
+[15] studied embedding wire by adding a wireprinting tool head to the RepRap 3D-printer to manufacture hybrid wire/plastic parts. Bas [16] tested
+printing over a copper wire using a rotary ring to orient the laid wire and extruding filament to cover it, as
+an example of single-layer wiring prints. Skylar-Scott
+et al. [17] introduced a combination of direct ink
+writing with a focused laser that anneals printed metallic features locally, to produce complex structures
+such as helical springs at micro-scale. Finally, Christoph Laimer [18] built the 3D-printed rotor and stator
+of a brushless DC electric motor with an ordinary
+FDM printer, then embedded off-the-shelf magnets,
+copper wire, an electronic speed control (ESC) and
+
+ball-bearings. Fabrication of operative objects using
+AM is a new research area. The fundamental way is
+to embed off-the-shelf devices on or in a printed object, including conductive wires, into the printed geometry throughout the printing method. In recent
+researches, conductive inks were such as silver ink,
+also used to form electronic circuits into 3D printed
+parts. Although the employment of AM technologies
+for constructing a wide range of dielectric and metallic materials, previous studies about fabricating electromechanical devices are comparatively limited. All
+efforts to 3D-print electric motors only considered
+the main structure of the rotor and stator. The little
+experimentation on the capabilities of AM on the
+development of products with mixed materials and
+different technologies, such as circuit boards and
+electric motors, shows a gap in the literature. This
+study presents a new approach to creating a fully 3D
+printed electric motors, including all motor parts such
+as the rotor core with the field winding, the stator
+core with stator winding or permanent magnets, insulation and the outer frame. We examine how to develop electric motor with multi-material and multitechnique to attain a 3D printed motor that can build
+without embedding devices.
+3 FABRICATING AND TESTING OF RADIAL-FLUX DC MOTOR
+An electric motor is consisting of a stator and a rotor,
+separated by an air gap. The stator is stationary and
+holds the PMs, while the rotor is the rotating section
+and carries the windings. The rotor is usually produced of silicon steel, presented in thin lamination
+sheets, and cut by laser to shape the desired patterns.
+These sheets are attached to form the final shape of
+the rotor cores [19]. In this study, the brushed DC
+motor was chosen to be studied and 3D-printed. This
+selection was based on the simplicity of this type of
+motors, where the electric power source in a classical
+BDC motor is connected to the rotor winding through
+a commutator and brushes, and therefore no need for
+electronic commutation based on hall position sensors [19]. Different methodologies were used in this
+study to achieve a fully 3D-printed motor are discussed in the following sections. We have evolved
+furthest in 3D printing electric motors and have
+printed and tested all components except for the copper coil windings and stator hard magnets[20][21].
+The building process is performed according to the
+following sections.
+
+3.1 Stator Core Made of Maraging Steel (MS1)
+In this prototype, the PMs were replaced by field coil
+wound on two steel 3D-printed pole shoes, as shown
+in Fig. 1.
+
+Table 1: Comparison between the 3D printed pole
+and the soft iron pole
+Maraging
+Steel
+
+Soft Iron
+Stator
+
+EMF
+(Gauss)
+
+EMF
+(Gauss)
+
+18V
+
+3.1
+
+41
+
+0.5
+
+18V
+
+1.2
+
+23
+
+1
+
+18V
+
+1.1
+
+14
+
+1.5
+
+18V
+
+1
+
+8
+
+Distance
+(cm)
+
+Input DC
+Voltage
+
+0
+
+3.2 Stator Core Made of Magnetic Iron PLA
+
+Figure 1: Self-excited DC motor (The 3D printed
+pole shoes made of steel)
+The two-pole shoes were built using EOS Maraging
+Steel MS1 powder on an EOS M290 machine that
+uses the Direct metal laser sintering (DMLS) technique. The 3D-printing of the pole shoes was done by
+the ICAMP Innovation Center operated by Canadore
+College in North Bay, Ontario [22]. The two-pole
+shoes were wound with copper coil 26 MAG, and the
+number of turns per pole was 350. The motor was
+assembled with the same rotor built from Fe-3Si silicon steel particles and tested in the first approach
+[20]. The results showed that the coil heated up after
+a few seconds, and the produced EMF on the rotor
+was very weak (1.2 Gauss/pole) when connected to
+the 18V DC power supply. The weakness of the produced EMF is due to the low permeability of the 3Dprinted steel, and this demonstrated the need to consider other materials with higher permeability. The
+EMF comparison between the 3D-printed steel stator
+and the soft iron stator is shown in Tab [1].
+
+In this prototype, the Maraging Steel stator was replaced by a magnetic iron PLA stator, as shown in
+Fig. 2. The magnetic iron PLA from Proto-Pasta was
+successfully tested in the rotor core. The 3D printed
+pole-shoes were wound with copper coil 30 MAG,
+and the number of turns for each pole was 900. The
+testing was done using the same rotors that were built
+and tested previously. The results showed that the
+EMF of the stator was increased slightly compared to
+the 3D-printed steel prototype (1.6 Gauss/pole vs 1.2
+respectively) when connected to the same 18V DC
+power. However, this is far too weak to generate a
+stator field than the persistent magnetic fields produced by the rare earth magnet stator (51
+Gauss/magnet).
+
+Figure 2: Open Geometry Self-excited DC Motor
+(Pole Shoes Made of Magnetic Iron PLA).
+This problem is due to the magnetic iron PLA not
+having the features of radially magnetized fast demagnetization like silicon steel or soft iron. Even
+though testing of magnetic iron PLA showed an increase in the intensity of a concentrated field slightly
+
+more than standard polylactic acid (PLA). In order to
+amplify the electromagnet field on the stator, the
+open geometry stator was replaced by closed geometry. This design has a hollow cylindrical shape in
+which the poles are fixed and made of magnetic iron
+PLA, as shown in Fig. 3.
+
+Pancake motor was only chosen to develop the coils
+technique to eliminate the copper coil winding on the
+rotor motor; hence axial-flux (pancake) motors that
+can have more than one rotor were selected. The
+structure of a Pancake DC brush motor is similar to a
+conventional motor, apart from its shape and size.
+Though pancake motors are more compact due to
+their thin rotors, they also consist of a rotor, commutator, stator, PMs, and winding [19], [23], [24]. This
+type was chosen to enable printing the winding on
+both sides of the rotor disks. We investigated the possibility of eliminating the copper coil windings on the
+motor rotor through a pancake motor [20],[21]. The
+latter processes were performed according to the following steps.
+4.1 Motor Rotor Made of Conductive Copper
+Filament (Electrifi by Multi3D)
+
+Figure 3: Closed Geometry Self-excited DC Motor
+(Pole Shoes Made of Magnetic Iron PLA).
+The idea is that using a closed geometry will provide
+a low reluctance path for the magnetic flux. Both the
+rotor and stator magnets were wire wound, and the
+rotor winding was connected to the commutator
+through wire brushes using 24 MAG copper wire,
+which made the motor a series of wound self-excited
+DC. The commutator was a simple set of four thin
+contact copper sheets. The stator was wound with
+100 turns per pole shoe. The main structure and
+commutator core were 3D-printed from ABS filament. The only non-3D-printed parts were the copper
+wire coils and the steel motor shaft. The motor was
+connected to 18V DC power supply, and testing
+showed that the attractive and resistive forces of the
+two-pole shoes are strong enough to rotate the armature. Measurements showed that the EMF increased
+to 12 Gauss/pole, which is approximately eight times
+more intense than the open geometry and was enough
+to run the motor successfully.
+4 FABRICATING AND TESTING OF AXIALFLUX DC (PANCAKE) MOTOR: ROTOR
+WINDING USING AM
+
+To eliminate the use of copper winding or PCB on
+the rotor motor. Another experiment was conducted
+to investigate using conductive copper filament
+(Electrifi by Multi3D), which is the only 3D-printing
+filament on the market considered conductive; the
+manufacturer states it has a resistivity of 0.006 Ω cm.
+The challenge here was determining how to print two
+materials with a single head printer. To accomplish
+this, 3D-printing of the substrate was done first with
+magnetic iron PLA filaments, then cooled, and the
+printing bed was levelled according to the substrate,
+rather than the bed. After repeatably attempting to
+print traces using Electrifi, a print/no print issue was
+encountered since the extruder system of the 3Dprinter (Anet A8) could not push the filament with
+sufficient pressure due to its flexibility, and this led
+to the nozzle becoming clogged. To deal with this, a
+series of attempts were conducted until the printing
+worked adequately. The issue was solved using the
+following steps: (1) The tension from the lever and
+the hobbed gear was too high to handle semi-flexible
+filaments, as the gear teeth would bite too deeply into
+the filament and scrape it off. The tension was reduced until the ideal pressure was determined. (2)
+The print temperature for Electrifi is lower than most
+other filaments (e.g. PLA, ABS), which meant the
+previous residual filament would cause clogging very
+quickly if the nozzle was not well cleaned. A spare,
+clean nozzle was kept on hand to address this problem. (3) Lowering the print speed to 15 mm/s was
+ideal for a 0.5 mm standard brass nozzle. (4) The
+distance between the nozzle tip and the print bed
+must be greater than 0.2 mm to ensure the printed
+first layer is not overly compressed. It was determined that the perfect printer setup when using this
+type of filament is shown in Tab 2.
+
+Table 2: Perfect printer setup for Electrifi filament.
+Nozzle type
+
+Standard brass
+
+Nozzle diameter
+
+0.4 mm
+
+Extruder temperature
+
+150-degrees Celsius
+
+Bed temperature
+
+Room temperature
+
+Layer thickness
+
+0.2 mm
+
+Print speed
+
+15 mm/s
+
+Layer height
+
+0.2 mm
+
+Print bed
+
+Blue tape
+
+Initial layer height
+
+0.2 mm
+
+After successful trace printing on a printed rotor, as
+shown in Fig. 4, the motor was connected to a low
+voltage DC power supply to test the conductivity and
+electromagnetic field. An incremental voltage increases to 3.4 V resulted in very high contact resistance between the probes and traces, and the hot
+spots heated up when the resistance reached 17 Ω at
+200 mA. This verifies that the filament cannot build
+our electric motors and is suitable only for low current applications. The conclusion for the copper conductive filament is that it cannot be used for high
+power applications.
+
+(now Cubic technologies). During the LOM process,
+layers of copper or paper are fused/laminated together using heat and pressure, then cut into the required
+configuration with a computer-controlled blade or
+laser [25]. Though this machine is not available at
+Carleton University, the same idea can be implemented using simple tools. The Circuit Explore Air 2
+machine shown in Fig. 5 was tailored to perform the
+LOM process. The winding traces are drawn on the
+machine software, and after feeding the copper tape
+to the machine, it cuts the copper into the required
+shape, and the unwanted material can then be easily
+removed. The copper winding traces can then be
+taped onto the 3D-printed rotor.
+
+Figure 5: Circuit Explore Air 2 machine.
+Accordingly, the new prototype was fabricated in the
+previously mentioned idea. The rotor and the commutator were designed to be attached as one piece.
+Both rotor and commutator were 3D printed using
+magnetic iron PLA. The rotor diameter was 150 mm
+with a thickness of 2mm, and the commutator diameter was 25 mm. The Circuit Explore Air 2 machine
+was used to cut the shape of the armature winding
+and taped on both sides to create a double-sided rotor, as shown in Fig. 6.
+
+Figure 4: Fully 3D printed armature made from the
+conductive copper filament.
+4.2 Motor Rotor Made Using Laminated Object
+Manufacturing Like Technique (LOM)
+After searching for an alternative to 3D-printing the
+whole rotor, and to eliminate the use of copper winding or PC printed boards, a new prototype was constructed using the LOM technique, a 3D-printing
+process developed by California-based Helisys Inc.
+
+Figure 6: Copper Tape Winding Traces on 3D
+Printed Rotor.
+
+Four poles were created with nine windings per side,
+so 18 turns in total. The width of the winding trace is
+1 mm, the clearance between traces is approximately
+1 mm, and the thickness of the copper foil is 0.0762
+mm. The commutator was divided into four segments; each was attached to a copper conductor tape
+and soldered by hand to the end of each winding coil.
+The motor was assembled with a 3D-printed open
+stator, as shown in Fig. 8, and the two rare-earth circular magnets were buried in the core of the inner
+stator. When connected to 9V DC, the rotor produces
+an electromagnetic field very similar to the previous
+PCB constructed motor, and the magnetic flux magnitude allows the motor to run successfully. Thus, it
+has now been demonstrated that copper wire can be
+replaced by a 3D-printed pattern.
+
+Figure 8: 3D printed parts of DC Motor.
+Using the Anet A8 3D-printer, all parts were made of
+magnetic iron PLA, except the motor base made of
+regular PLA. Four 3D-printed PMs were built from
+NdFeB by the Oak Ridge National Laboratory [26],
+as shown in Fig. 9. These were buried in the inner
+stator core.
+
+Figure 7: 3D Printed Pancake Motor.
+5 RESULTS OF EXPERIMENTATION: THE
+MANUFACTURING PROCESSES OF THE
+FULLY 3D PRINTED RADIAL-FLUX DC MOTOR
+As discussed, the FDM and LOM techniques were
+applied to build the 3D-printed pancake motor. This
+prototype focuses on using the same techniques to
+complete a traditional electric motor that was partially 3D-printed in section 3 since the traditional electric motor is the most fundamental design from which
+all other motors are derived [21]. This approach will
+3D-print all parts of the motor, including the PMs. It
+is designed with an open geometry to provide easy
+access to every part, and consists of the 3D-printed
+motor base, the rotor core, stator brackets, commutator, axle, bearings, nuts, and bolts, as shown in Fig. 8.
+
+Figure 9: 3D Printed Permanent Magnet.
+Eight equally spaced slots were formed at the outer
+circumference of the rotor core and used to wind the
+copper foil tape. Four poles were wound with copper
+tape (SPARKFUN #SF-PRT-11081) with a thickness
+of 152 microns and an approximate width of 5mm,
+with 17 turns per pole. The copper tape was insulated
+using silicone modified conformal coating before it
+was wound by hand, though it could also be fabricated with LOM. Four sets of the 152-micron thick contact copper sheets were attached to the commutator;
+the conductive glue side of the copper foil made it
+easy to attach the ends to the commutator copper
+tapes without soldering. Both rotor core and commutator were attached to the printed axle, which was 60
+mm long, with a diameter of 3.175 mm, as shown in
+Fig. 10.
+
+using inexpensive, commercially available equipment. Though manual intervention was used in these
+samples to build the motors, the systems demonstrate
+what we can do with a multi-material, multitechnology 3D-printer. A promising idea for the future application of such a machine is to facilitate
+evolving a self-replicating machine, which is considered as a tool necessary for outer space exploration.
+Suppose such a machine was deployed on the Moon,
+for example. In that case, it could be a robotic system
+that uses lunar materials to replicate itself and, ultimately, construct a wide range of future space assets,
+thereby demonstrating that 3D-printing could lead to
+significant and sustainable autonomous operations in
+space exploration.
+Figure 10: Rotor Assembly.
+The rotor was assembled with the motor base and the
+stator, and two copper wires of 20 GA were used to
+form the brushes, as shown in Fig. 11. To test the
+motor, it was attached to an 18V DC power source
+connected to the rotor winding through the commutator and brushes. The two brushes contact the copper
+conductor tapes to reverse the flow of current in the
+rotor, resulting in a successful rotor movement.
+
+References
+[1] Ai. Gibson, D. W. Rosen, and Brent Stucker,
+"Design for additive manufacturing," in Design for
+additive manufacturing, Springer, 2010, pp. 299–
+332.
+[2] A. J. Lopes, A. Eric MacDonald, and R. B.
+Wicker, "Integrating stereolithography and direct
+print technologies for 3D structural electronics fabrication," Rapid Prototyp. J., 2012.
+[3] Huaishu Peng, François Guimbretière, J.
+McCann, and Scott Hudson, "A 3d printer for interactive electromagnetic devices," in Proceedings of
+the 29th Annual Symposium on User Interface Software and Technology, 2016, pp. 553–562.
+[4] V. Savage, C. Chang, and B. Hartmann,
+"Sauron: embedded single-camera sensing of printed physical user interfaces," in in Proceedings of the
+26th annual ACM symposium on User interface
+software and technology, 2013, pp. 447–456.
+
+Figure 11: Fully 3D printed Motor.
+5
+
+CONCLUSION
+
+We have demonstrated a DC electric motor in which
+only the wire coils are not 3D-printed. However, the
+coils can be replaced by copper foil, which can be
+3D-printed using the LOM technique. The Circuit
+Explore Air 2 machine was used to form the shape of
+the pancake motor armature winding, rather the LOM
+machine; further investigation is recommended to
+confirm this technique. All parts of the radial and
+axial flux DC electric motors were fabricated with
+3D-printing techniques, and the functionality indicated the potential of achieving a fully 3D-printed motor
+
+[5] J. Hook, P. Wright, T. Nappey, P. Olivier, and S.
+Hodges, "Making 3D printed objects interactive using wireless accelerometers," in Conference on Human Factors in Computing Systems - Proceedings,
+2014.
+[6] W. Gao, Y. Zhang, D. C. Nazzetta, K. Ramani,
+and R. J. Cipra, "RevoMaker: Enabling multidirectional and functionally-embedded 3D printing
+using a rotational cuboidal platform," in UIST 2015
+- Proceedings of the 28th Annual ACM Symposium
+on User Interface Software and Technology, 2015.
+[7] V. Savage, S. Follmer, J. Li, and B. Hartmann,
+"Makers? marks: Physical markup for designing and
+fabricating functional objects," in UIST 2015 - Pro-
+
+ceedings of the 28th Annual ACM Symposium on
+User Interface Software and Technology, 2015.
+[8] K. D. D. Willis, E. Brockmeyer, S. E. Hudson,
+and I. Poupyrev, "Printed Optics: 3D printing of
+embedded optical elements for interactive devices,"
+in UIST'12 - Proceedings of the 25th Annual ACM
+Symposium on User Interface Software and Technology, 2012.
+[9] Y. Ishiguro and I. Poupyrev, "3D printed interactive speakers," in Conference on Human Factors
+in Computing Systems - Proceedings, 2014.
+[10] M. Vázquez, E. Brockmeyer, R. Desai, C. Harrison, and S. E. Hudson, "3D printing pneumatic
+device controls with variable activation force capabilities," in Conference on Human Factors in Computing Systems - Proceedings, 2015.
+[11] R. Maccurdy, R. Katzschmann, Y. Kim, and D.
+Rus, "Printable hydraulics: A method for fabricating
+robots by 3D co-printing solids and liquids," in Proceedings - IEEE International Conference on Robotics and Automation, 2016.
+[12] M. Schmitz, M. Khalilbeigi, M. Balwierz, R.
+Lissermann, M. Mühlhaüser, and J. Steimle, "Capricate: A fabrication pipeline to design and 3D
+printcapacitive touch sensors for interactive objects," in UIST 2015 - Proceedings of the 28th Annual ACM Symposium on User Interface Software
+and Technology, 2015.
+[13] M. Humphries. Voxel8 3d printer can print a
+complete quadcopter. Available at:
+https://www.geek.com/chips/voxel8-3d-printer-canprint-a-complete-quadcopter-including-theelectronics-1613166/
+[14] C. Y. Kim, A. Cuaron, M. A. Perez, D. Espalin,
+E. MacDonald, and R. B. Wicker, "Cooperative fabrication methodology for embedding wireon curved
+surfaces," in 25th Annual International Solid
+Freeform Fabrication Symposium &#65533; An
+Additive Manufacturing Conference, SFF 2014,
+2014.
+[15] J. Bayless, M. Chen, and B. Dai, "Wire Embedding 3D Printer," 2010.
+[16] B. de Bruijn. Additive wire-laying. Available
+at: https://basdebruijn.com/2014/05/additive-wirelaying/
+
+[17] M. A. Skylar-Scott, S. Gunasekaran, and J. A.
+Lewis, "Laser-assisted direct ink writing of planar
+and 3D metal architectures," Proc. Natl. Acad. Sci.
+U. S. A., 2016.
+[18] C. Laimer. 600 watt, halbach brushless motor.
+Available at: http://www.laimer.ch/
+[19] W. Tong, Mechanical Design of Electric Motors. 2014.
+[20] A. Elaskri and A. Ellery, "Developing Techniques To 3D Print Electric Motors," Proc Int Symp
+Artif. Intell. Robot. Autom. Sp., p. 5, 2018.
+[21] A. Ellery and A. Elaskri, "Steps toward selfassembly of lunar structures from modules of 3Dprinted in-situ resources," Proc. Int. Astronaut.
+Congr. IAC, vol. 2019-Octob, no. October, pp. 21–
+25, 2019.
+[22] CANADORE. Innovation Center for Advanced
+Manufacturing and Production. Available at:
+https://www.canadorecollege.ca/icamp.
+[23] G. Gyani, B. Sc, and O. M. Parkash, "Design
+and technological aspects of printed motor armature," no. I.
+[24] L. Hsu, M.-C. Tsai, C. Wu, and M. Tsai, "Design of a Miniature Axial Flux Spindle Motor with
+Rhomboidal PCB Winding.," INTERMAG 2006
+Conf., vol. 3, no. 10, p. 310, 2006.
+[25] E. Palermo. What is Laminated Object Manufacturing?. Available at:
+https://www.livescience.com/40310-laminatedobject-manufacturing.html.
+[26] I. Antoniac, D. Popescu, A. Zapciu, A. Antoniac, F. Miculescu, and H. Moldovan, "Magnesium
+Filled Polylactic Acid (PLA) Material for Filament
+Based 3D Printing," Materials (Basel)., vol. 12, p.
+719, 2019.
+
+

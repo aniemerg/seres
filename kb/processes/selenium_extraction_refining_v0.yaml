@@ -1,0 +1,35 @@
+id: selenium_extraction_refining_v0
+kind: process
+name: Selenium extraction and refining v0
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: mineral_ore_sulfide
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: selenium_refined
+    qty: 0.05
+    unit: kg
+requires_ids:
+  - chemical_reactor_heated
+  - distillation_column_simple
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 50.0
+  notes: Energy for roasting, reduction, and distillation
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Multi-step extraction process
+notes: |
+  Selenium extraction from sulfide ores (often as byproduct of copper/sulfur processing).
+  Source: docs/paper_reviews/ISRU-sensors_missing_tech.md
+  Process: Roast sulfide ore → Selenium dioxide → Reduction to elemental Se → Purification
+  Lunar availability: Trace amounts in sulfide minerals
+  Primary use: Photodiodes and photosensitive detectors
+  Typical yield: Very low (50 ppm typical in ores)

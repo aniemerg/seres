@@ -1,0 +1,83 @@
+id: recipe_lox_lh2_storage_tank_set_v0
+target_item_id: lox_lh2_storage_tank_set
+variant_id: v0
+steps:
+  - process_id: metal_spinning_process_v0
+    inputs:
+      - item_id: aluminum_alloy_sheet
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: tank_dome_spun
+        qty: 140.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Spin form tank domes and cylinders
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: tank_dome_spun
+        qty: 140.0
+        unit: kg
+      - item_id: aluminum_alloy_sheet
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: tank_inner_shell_welded
+        qty: 320.0
+        unit: kg
+    est_time_hr: 12.0
+    notes: TIG weld inner tank shells (LOX and LH2)
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: tank_inner_shell_welded
+        qty: 320.0
+        unit: kg
+      - item_id: aluminum_alloy_sheet
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: tank_vacuum_jacket_assembly
+        qty: 450.0
+        unit: kg
+    est_time_hr: 10.0
+    notes: Weld outer vacuum jackets around inner tanks
+  - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: aluminum_alloy_block
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: tank_valve_and_fitting_set
+        qty: 25.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: Machine valves, fittings, fill/drain ports
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: tank_vacuum_jacket_assembly
+        qty: 450.0
+        unit: kg
+      - item_id: tank_valve_and_fitting_set
+        qty: 25.0
+        unit: kg
+      - item_id: insulation_mli_blanket
+        qty: 15.0
+        unit: kg
+      - item_id: pressure_relief_valve
+        qty: 4.0
+        unit: each
+    outputs:
+      - item_id: lox_lh2_storage_tank_set
+        qty: 500.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Install valves, fittings, MLI blankets, relief valves, leak test
+assumptions: |
+  Aluminum construction for cryogenic compatibility.
+  Vacuum insulation reduces boiloff to acceptable levels.
+  TIG welding provides leak-tight joints for cryogenic service.
+  Separate LOX and LH2 tanks for safety.
+notes: |
+  Manufacturing route for cryogenic propellant storage tanks.
+  Double-wall vacuum-insulated construction.
+  Suitable for long-term storage of LOX and LH2.

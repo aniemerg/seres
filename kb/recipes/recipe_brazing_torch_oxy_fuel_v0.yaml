@@ -1,0 +1,58 @@
+id: recipe_brazing_torch_oxy_fuel_v0
+target_item_id: brazing_torch_oxy_fuel
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: brass_bar_stock
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: torch_body_and_valves_machined
+        qty: 0.45
+        unit: kg
+    est_time_hr: 3.0
+    notes: Machine torch body, valve bodies, and mixing chamber
+  - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: copper_bar_stock
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: torch_tips_set
+        qty: 0.18
+        unit: kg
+    est_time_hr: 2.0
+    notes: Drill torch tips with precise orifices
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: torch_body_and_valves_machined
+        qty: 0.45
+        unit: kg
+      - item_id: torch_tips_set
+        qty: 0.18
+        unit: kg
+      - item_id: rubber_hose_gas_rated
+        qty: 1.0
+        unit: kg
+      - item_id: valve_needle_precision
+        qty: 2.0
+        unit: each
+      - item_id: flashback_arrestor
+        qty: 2.0
+        unit: each
+    outputs:
+      - item_id: brazing_torch_oxy_fuel
+        qty: 2.0
+        unit: kg
+    est_time_hr: 1.5
+    notes: Assemble valves, tips, hoses, safety devices, test for leaks
+assumptions: |
+  Brass construction for corrosion resistance.
+  Precision orifices in tips control flame characteristics.
+  Flashback arrestors prevent dangerous backfires.
+  Needle valves provide fine flame control.
+notes: |
+  Manufacturing route for oxy-fuel brazing torch.
+  Safety features essential for reliable operation.
+  Versatile tool for brazing and heating operations.

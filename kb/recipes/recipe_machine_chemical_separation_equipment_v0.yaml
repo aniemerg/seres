@@ -1,0 +1,32 @@
+id: recipe_machine_chemical_separation_equipment_v0
+target_item_id: chemical_separation_equipment
+variant_id: v0
+steps:
+  - process_id: cutting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.7
+    notes: "Cut stainless/carbon steel sheet and tube for tank, frame, and piping."
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Fabricate vessel, mounts, and pipe spools; add nozzles and brackets."
+  - process_id: plumbing_and_pneumatics_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble piping, valves, seals, and pump connections; leak check."
+  - process_id: heating_element_installation_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Install heat tracing or immersion heaters and sensors."
+  - process_id: wiring_and_electronics_integration_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Wire temperature/flow/pH instruments, controls, and safety interlocks."
+  - process_id: integration_test_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 0.8
+    notes: "Water run/leak test and functional checks for pumps, heaters, and sensors."
+assumptions: "Bench/floor-scale hydrometallurgy skid (tank, piping, small pump, instrumentation). Heat tracing via resistive elements; controls via basic wiring."
+notes: Local fabrication path for chemical separation equipment used in nickel extraction and similar processes.

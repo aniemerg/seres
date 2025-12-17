@@ -1,0 +1,22 @@
+id: firing_ceramic_basic_v0
+kind: process
+name: Firing ceramic (basic)
+layer_tags:
+  - layer_5
+inputs: []
+outputs: []
+requires_ids:
+  - kiln_ceramic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 3.0
+  notes: "Furnace firing energy per batch"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Firing cycle"
+notes: Basic firing cycle for ceramic components/panels.

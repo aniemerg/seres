@@ -1,0 +1,1819 @@
+The Machine to End All Machines – Towards SelfReplicating Machines on the Moon
+Alex Ellery
+Department of Mechanical & Aerospace Engineering
+Carleton University
+1125 Colonel By Drive
+Ottawa, ON K1S 5B6
+613-520-2600 ext 1027
+aellery@mae.carleton.ca
+
+Abstract— We present the notion of a self-replicating machine
+for deployment on the Moon to leverage space colonization by
+exploiting its resources. The utility of self-replication cannot be
+understated – it offers the means to create an exponentially
+increasing general productive capacity on the Moon
+unconstrained by launch costs. Initially, we review the idea of
+physical self-replicating machines, emphasizing the universal
+constructor. The key to the universal construction mechanism
+necessary to realise self-replication is, we hypothesise, 3D
+printing. To date, 3D printing has been demonstrating its
+versatility in manufacturing structures, albeit of great
+sophistication. We briefly review 3D printing methods to date
+and suggest that fused deposition modeling and electron beam
+additive manufacturing offer a complete 3D printing capability
+suitable for deployment on the Moon. In our pursuit of a selfreplicating machine, we have been working on 3D printing
+mechatronic components - electric motors, and to a lesser
+extent, electronics - as necessary steps to realizing 3D printing
+entire robotic machines in general (universal constructor) and
+3D printers in particular (self-replicating machine). This 3D
+printer is essentially a core part of the payload for a rover
+vehicle which scours the lunar environment for the basic
+materials required for its own construction.
+
+solutions to our current global climate problems [1]. Selfreplicating machines have been proposed to build solar
+power satellites (SPS), particularly photovoltaic arrays but
+without consideration of any mechanism to implement such
+a system [2]. The advent of self-replicating machines has
+the prospect of transforming space exploration by offering
+space mission concepts that are hitherto considered too
+expensive to pursue [3]. Self-replication offers exponential
+growth in general purpose productive capacity that may be
+exploited to create a vast extraterrestrial infrastructure at
+low cost.
+We hypothesise that 3D printing of multiple materials –
+plastic, metal, glass and ceramic - offers a universal
+construction mechanism. With this in mind, we are
+approaching the problem of constructing a self-replicating
+machine from lunar resources from a bottom-up perspective.
+The lunar resources to which we are limited include
+regolith-derived volatiles (hydrogen and carbon compound),
+regolith itself (glass, silicon and iron) and asteroid-derived
+material from impact basins (nickel, cobalt, tungsten and
+selenium). Our self-replicating machine may be envisaged
+as a large mobile rover mounting bucket wheels, loading
+shovels, excavator buckets, drills, rockjaws, grinding
+tumblers, pump-driven unit chemical processors, 3D
+printers, milling tools, lathes, ball mills, extruders, assembly
+manipulators, etc. The key components of all these robotic
+devices are electric motors and supporting electronics on the
+assumption that structures will be relatively trivial to
+construct in comparison. By 3D printing motors and their
+electronic controllers, all forms of kinematic machinery can
+be constructed, i.e. any robotic machine including a
+universal constructor. We have been making significant
+progress in developing the first 3D printed electric motors
+and high capacity control electronics – this is described after
+reviewing a number of key concepts.
+
+TABLE OF CONTENTS
+1. INTRODUCTION ....................................................... 1
+2. SELF-REPLICATING MACHINES ............................ 1
+3. SELF-REPLICATING LUNAR ROVER ...................... 2
+4. IN-SITU RESOURCES............................................... 5
+5. 3D PRINTING AS UNIVERSAL CONSTRUCTION ..... 6
+6. 3D PRINTING ELECTRIC MOTORS ...................... 10
+7. 3D PRINTABLE ELECTRONICS ............................. 11
+8. CONCLUSIONS ....................................................... 12
+APPENDIX: TURING MACHINES .............................. 12
+ACKNOWLEDGEMENTS ............................................ 13
+REFERENCES............................................................. 13
+BIOGRAPHY .............................................................. 17
+
+2. SELF-REPLICATING MACHINES
+We briefly review the concept of self-replicating machines
+in the context of space exploration with an emphasis on
+hardware approaches. It has been suggested that selfreplicating robots will be forthcoming from the artificial
+cells of synthetic biology before mechanical self-replicators
+emerge [4]. We disagree.
+
+1. INTRODUCTION
+Our objective is the implementation of self-replicating
+machines on the Moon with potential applications in
+constructing solar shields and solar power satellites as
+978-1-5386-2014-4/18/$31.00 ©2018 IEEE
+
+1
+
+The original model of self-replication was the von Neumann
+self-replicating kinematic machine [5]. It comprised four
+major subsystems – (A) a universal constructing machine to
+manipulate material and construct what is specified by the
+computing machine C (akin to ribosomes); (B) a tape copier
+that copies the tape of the Turing machine C (akin to
+RNA/DNA polymerase); (C) a universal computing
+(Turing) machine to manipulate information on a program
+tape to instruct the universal constructor A (akin to
+repressor/depressor molecules); (IA+B+C) a program tape
+containing a construction blueprint of the entire kinematic
+machine (akin to DNA). The key concept is the universal
+constructor, a machine that can build any machine specified
+by the instructions on the tape including a copy of itself, i.e.
+self-replication is derivative from universal construction.
+The von Neumann self-replicator overcomes the infinite
+regress problem by using the program tape in two ways – as
+interpreted instructions (by the universal constructor) and as
+uninterpreted instructions (by the tape copier). The universal
+constructor was envisaged as an abstract manipulator arm
+embedded in a sea of component parts. The manipulator
+inspects and acquires parts and assembles them according to
+the program stored on the memory tape. The selection of
+elementary parts (e.g. wire – NOR-gate – prismatic joint –
+rotary joint – connecting link – disconnect link) is assumed
+to be based on visual inspection which implies sophisticated
+image processing or some kind of visual markers to permit
+ready distinguishability of parts [6]. Once construction of
+the copy is complete, the memory tape is copied and
+inserted into the physical copy. A variation on the notion of
+inspecting and selecting parts in the environment is to selfinspect (self-program) and self-replicate on the basis of selfinspection rather than a pre-existing tape of instructions but
+there is no analogue of this capability in nature (it
+effectively implies Lamarckian evolution) [7].
+
+Thus, the idea of a self-replicating factory on the Moon is
+not new [9]. The 1980 NASA study proposed that a 100
+tonne seed factory be deployed onto the Moon comprising
+eight subsystems. However, technology has advanced
+considerably since this study enabling further developments.
+The Chirikjian architecture comprised four subsystems [10].
+It was realised through Lego Mindstorms kits supplemented
+with electrical and magnetic connectors to build a number of
+self-assembling robot prototypes constructed from coarse
+modules on a flat surface with printed ground lines and barcoded landmarks for optical tracking. This is an example of
+environmental structuring to reduce “real world”
+complexities – this also occurs in biological systems in the
+form of cell membranes [11]. All biological cellular
+processes are pre-programmed genetically and regulated
+through homeostasis within a cellular enclosure to maintain
+a controlled intracellular environment. Similarly, the selfreplicating machine must maintain a highly structured
+environment to minimise variance. The number of states in
+the Chirikjian-Suthakorn model was small with three basic
+line-tracking behaviours determined by four simple types of
+sensors (optical readers, contact sensors, metal detection
+sensor and touch sensor) [12]. The simplest configuration
+comprised seven modules – left and right motors, left and
+right wheels, manipulator wrist and passive gripper, and a
+microcontroller receiver – supplemented by assembly
+fixtures to force alignments. A second, more complex robot
+required three separate subassembly stations for chassis, left
+and right motor-track, and motorised gripper subassemblies.
+The motor-track assembly station included a hooking
+system while the motorised gripper assembly station
+included a ramp and both had controller units and light
+sensors. The assembled robot included the RCX
+microcontroller brick in the chassis assembly.
+
+The von Neumann kinematic model was later supplanted by
+the von Neumann self-replicating cellular automation (CA)
+model of which a hardware logic circuit version has been
+implemented [8]. The self-replicating CA model comprised
+29 transition states including a quiescent state, 16
+transmission states responsible for propagating excitations
+(OR gates), 4 confluence states (AND gates) and 8 sensorbased construction states. A pulser outputs a sequence of
+excitations when it receives an input (fan out); a decoder
+outputs an excitation when it receives a sequence of inputs
+(fan in). The hardware model comprised a set of “biodules”
+(comprising an FPGA computation unit with a dot matrix
+display unit) forming a small interconnected cellular array
+to emulate a small subset of the 100,000-200,000 cell array.
+However, this implementation yielded little insight into the
+problem of designing a physical self-replicating machine.
+
+3. SELF-REPLICATING LUNAR ROVER
+We have discussed self-assembling systems that assume
+prefabricated components and modules. A more complete
+architecture of a lunar self-replicating machine that
+incorporated in-situ resource utilization (ISRU) has been
+under development [13]. From a practical perspective, a real
+world system will involve a series of mining, chemical
+processing and factory processes: (i) material mining to
+extract mineral ores; (ii) chemical processing of ores to
+extract purified materials; (iii) forming of parts through
+manufacturing methods; (iv) inspection and assembly of
+parts in subsystems/systems. We shall address (iii) in this
+paper but will touch on some of the other aspects in this
+section. The three main lunar self-replicating architectures
+discussed here are summarized in Table 1. We submit that
+the Ellery architecture is the most complete of the three.
+
+Hardware implementation of the kinematic model has also
+been attempted, primarily in an extraterrestrial context.
+
+2
+
+Table 1. Comparison of lunar self-replicating architecture
+Freitas architecture [Freitas &
+Gilbreath 1980]
+Paving robots to fuse regolith to form
+the factory foundation
+Mining robots based on front
+loader/bulldozer configuration for
+strip mining, cellar excavation and
+hauling of ore
+Thermochemical processing system
+to beneficiate, chemically extract
+purified elements using HF acid
+leaching
+Fabrication system for casting and
+laser machining of aluminium,
+magnesium, steel, and basalt parts
+excluding electronics fabrication
+Assembly system by manipulators
+with buffering through warehousing
+
+Computing and communications
+system to implement production
+planning, scheduling and operations
+(imported from Earth)
+Transponder triangulation network
+that functions to support selflocalisation and navigation similar to
+GPS
+Energy plant comprising an overhead
+canopy of photovoltaic solar cells to
+supply 2 MW
+
+Dispersion by radial growth
+
+Chirikjian
+architecture
+[Chirikjian et al 2002]
+
+Ellery architecture [Ellery 2016]
+Fresnel lens-based sinterer/melter
+
+Multifunctional robots with tooling
+for strip mining, excavation and
+transport of material within a 1 km2
+area
+Thermochemical processing system
+to reduce mineral oxides
+
+Casting in sintered regolith for
+mechanical parts
+
+Assembly system based on
+specialised
+rover-mounted
+manipulators for assembly of its
+constituent parts
+Excluded from self-replication
+process
+
+Multifunctional tracked robot(s) with
+bucket wheels and biomimetic drill for
+regolith acquisition.
+Magnetic/electrostatic
+beneficiation,
+thermochemical reduction of mineral
+oxides, FFC Cambridge process, Mond
+process
+Metal (various steels), silicone plastic,
+silica glass and silica/alumina 3D
+printing supplemented by milling
+including electrical components
+Assembly system based on general
+purpose rover-mounted manipulators
+for assembly of its constituent parts
+Hardware neural net computing based
+on vacuum tube technology
+
+Simple reactive behaviours based
+on simple electromechanical relay
+circuits
+
+Hardware neural SLAM and neural
+feedback/forward models
+
+Solar energy generation, storage
+and distribution based on mirrorbased solar concentrators for
+thermal energy, photovoltaic solar
+cells for electrical energy and fuel
+cell storage
+Electromagnetic railguns to deliver
+offspring to long-distance random
+locations
+
+Fresnel lens-based thermal energy
+generation with thermionic conversion
+for electrical energy
+
+Mining robotics has been driven by two factors – the
+hazardous character of mining to human life and the
+challenges of extracting valuable material from diminishing
+grades of ore. Mining has adopted autonomous trucks,
+loaders and trains for material transport augmented by
+autonomous drilling and rock-breaking robotic machines.
+There are several methods for acquiring and transporting
+regolith: (i) rover vehicles; (ii) rail or tram vehicles; (iii)
+cable-driven buckets; (iv) conveyors; (v) pipelines; (vi)
+ballistic/rocket transport. Ballistic/rocket transport is
+generally reserved for transport to orbit from the lunar
+surface rather than local transport. The use of pipelines for
+regolith
+transport
+is
+considered
+inefficient.
+Cableway/dragline carriage system suspending a Stewart
+platform to lift and haul loads offers one approach to lunar
+excavation/construction [14]. The cableway comprised a
+cable track of braided metal wires, elevated supports at both
+ends of the track cable, and a trolley carrier (such as a
+
+Electromagnetic railgun/launcher
+
+Stewart platform) that rides the track cable. The dragline
+excavator is a variation in which hoist cable suspends a
+bucket near vertically from a long truss boom and is pulled
+by a horizontal drag cable through the terrain to scoop up
+overburden. The cableway/dragline lends itself to
+automation more readily than rover vehicles by virtue of its
+simplicity of operation – hoist, drag and slew to move the
+bucket through a simple trajectory – while itself being
+positioned adjacent from the excavation site [15]. Railways
+for transport require considerable infrastructure so are
+generally discarded for lunar application. Although it has
+been suggested that rover platforms may not be the most
+efficient of excavation construction machines [16], most
+lunar mining concepts are in fact based around roving
+vehicles with wheeled or tracked chassis for transport,
+digging, excavating and levelling using a diverse set of
+attachments such as bulldozing blade, soil scoop, backhoe
+bucket, etc.
+3
+
+Rover vehicles, like cableways/draglines can be used for
+both excavation and transport but without the infrastructure
+overhead. Surface mining requires a multirole rover vehicle
+to perform several functions – ripper excavation, load-hauldumping, drilling, etc. The self-replicating rover may be
+armed with a mechanism to acquire raw material for further
+processing. There are several methods of excavating
+regolith: (i) blade or bucket mechanism; (ii) drilling; (iii)
+explosives. We propose a bucket wheel system to scoop
+regolith [17] and a drill for subsurface acquisition of buried
+asteroid ores (average meteoritic component of lunar
+regolith is only 1%) [18]. We have considered mining
+aspects – in particular, excavation methods - in detail
+elsewhere [19].
+
+Fig 1. (a) Kapvik instrumented rocker-bogie chassis
+(actual); (b) Kapvik with elastic loop mobility system
+(model)
+The rover must also include further processing which we
+assume occurs in a self-contained rover payload package –
+this eliminates the requirement for hauling and dumping of
+raw material. The ExoMars rover Pasteur payload comprises
+a robotic laboratory including a sample preparation and
+analysis system serviced by a central 6 DOF robotic
+manipulator with dexterous gripper [26] – it represents a
+rudimentary factory. The RESOLVE payload as an in-situ
+resource utilization package is more representative of what
+is required [27]. The rover must incorporate a
+thermochemical processing system more extensive than the
+RESOLVE payload including a Fresnel lens-based solar
+power source, fractional distillation column for condensing
+regolith volatiles, foundry for smelting minerals and FFC
+Cambridge electrolysis cell for reducing mineral oxides and
+purifying metals [28]. The ubiquitous nanophase iron grains
+impregnating all lunar dust particles impart high magnetic
+susceptibility to lunar dust. This high magnetic
+susceptibility may be exploited through microwave
+processing as microwaves couple with iron strongly [29]. It
+offers high heating rates ~1000o/min up to 2000oC but at a
+cost of high electrical power consumption. The energy plant
+is based on Fresnel lens concentrators supplemented by
+thermionic conversion and flywheel energy storage.
+
+Rotary drilling is often selected for extraterrestrial use by
+default for its maturity. However, vibratory percussion can
+reduce the penetration forces required (e.g. ultrasonic/sonic
+drilling system [20] which potentially favours the novel bioinspired woodwasp design of percussive drill [21].
+Compressed water vapour (assuming its abundance on the
+Moon) could provide drilling fluid for cooling and for the
+removal of cuttings. Self-casing thermal drilling eliminates
+the requirement for borehole casing and drilling fluid but
+would require prohibitive amounts of power. Drilling is
+required to emplace explosives for blasting of subsurface
+ores to fragment it into manageable units. Such buried
+explosives help to reduce the mechanical digging forces
+required for excavation. For the Moon, specific explosive
+charges of 0.04 kg/m3 of soft rock and 0.12 kg/m3 of hard
+rock are required [22]. Rather than chemical blasting with
+explosives, electrical blasting involves a fast discharge of
+electrical energy at an electrode from a capacitor bank into a
+small volume of electrolyte within rock. The electrolyte
+turns into a high pressure plasma which generates
+shockwaves in the rock. The keys to enhanced mining lie in
+increased capabilities in efficient mechanical rock-breaking
+mechanisms (mechanical rather than chemical explosives),
+borehole drilling and other mining machines [23].
+
+We propose a 3D printing suite as the centrepiece of the
+rover payload based on fused deposition modelling (for
+silicone plastic and ceramic/glass precursors) (such as a
+RepRap derivative [30], electron beam freeform fabrication
+(for iron, nickel, cobalt, silicon, tungsten, selenium, and
+possibly aluminium/magnesium) [31] and Fresnel lensbased sinterer/melter (for ceramic processing) supplemented
+by integrated milling. 3D printing introduces the notion that
+subtractive processes can be reduced (but not eliminated
+entirely). 3D printed moulds retain the capacity for rapid
+casting of numbers of parts. Electron beam fabrication is
+selected over laser fabrication to eliminate difficulties in
+replicating a laser.
+
+We envisage a mobile factory system of around 10 tonnes
+with a robust traction system (such as the elastic loop
+mobility system [24, 25] which eliminates the need for
+paving robots. Furthermore, a tracked chassis provides high
+traction against reaction forces imposed on the rover by
+excavation devices. The Kapvik rover represents a very
+modest step towards such a rover with its reconfigurable
+chassis design, combined camera mast/soil scoop and
+sample canisters (Fig 1).
+
+Although assembly is minimised through 3D printing, a
+revolute manipulator may perform compliant assembly with
+special consideration on latching/joining mechanisms (such
+as the remote centre compliance mechanism [32]. The rover
+assembly payload may be configured into a reconfigurable
+workcell built around standard component modules –
+actuators/sensors, kinematic connectors, tooling and fixtures
+4
+
+– that may be assembled into robotic machines with specific
+geometries for desired tasks [33]. The workcell may
+comprise a 7 DOF serial manipulator to pick and place a
+workpiece (assembly task) and a 6 DOF parallel
+manipulator to machine the workpiece linked by a 1 DOF
+linear conveyor between them. Tooling can be interchanged
+through standardise interfaces.
+
+Neural nets are ideally suited to learning the relationship
+between input manufacturing parameters such as depth of
+cut (d), feed rate (f), cutting velocity (v) and workpiece
+dimensions (D) and output manufacturing parameters such
+as cutting force (F), power consumption (P), temperature
+(T) and workpiece surface finish (r) [42]. Neurofuzzy
+approaches permit the use of both symbolic and
+subsymbolic techniques. In order to maintain system
+functionality, state measurements and estimation must be
+implemented using multi-sensor systems (pressure,
+temperature, forces, stiffness, vibration and wear) [43].
+Most sensory feedback during manufacture of products is
+based on X-ray fluorescence and/or ultrasound to detect
+defects but simple displacement and force sensing can yield
+useful feedback to measure perturbations such as thermal
+deformations, mechanical deformations, tool wear and
+vibration chattering during machining. Product quality
+requires precision machining for good surface finish and
+measurement for closed loop control of tool forces. An
+alternative approach involves reduced intricacy in sensing
+and control (RISC) which advocates minimal arrays of
+optical sensors for local sensing, simple parallel jaw
+grippers, passive remote centre compliance and
+environmental fixtures for complex manufacturing
+operations [44]. The key is the decomposition of complex
+operations into multiple simple robotic operations. Petri net
+can decompose complex scheduling problem into more
+tractable subproblems: PN=(P,T,I,O,M,K) where P=set of
+places, T=set of state transitions, P  T ≠ φ, P  T = φ, I:P
+ T→N={0,1,2,…}, O:P  T→N, M:P→N, K:P→N. The
+ultimate goal is to replace sensors by constraining motion
+through friction using a tightly structured environment [45].
+It is not currently clear how far such sensorless approaches
+can ease AI complexity but a combination suggests an
+effective approach. Having presented a brief plausibility
+argument, we do not address these AI aspects further here.
+
+The issue of closure of materials, energy and information is
+essential to ensure that self-replication can occur - the
+machine must mine, process, fabricate and assemble every
+material, part and system from which it is constituted [34].
+It was envisaged that certain complex or exotic parts could
+be exempted and supplied as “vitamins” from Earth –
+electronics, instruments, motors, etc. Our approach to solve
+the closure problem is to (i) minimise the number of
+materials and extraction complexity required; (ii) implement
+generic processing (FFC Cambridge process) and
+manufacturing (3D printing) techniques to minimise
+machinery; (iii) demonstrate universal construction through
+3D printing of mechatronic components (electric motors,
+sensors and neural network hardware) [35]; (vi) to build the
+self-replicator from the ground up based on function
+through simplicity (rather than optimisation) and subject to
+the constraints of the lunar environment.
+Large environmental variances such as those encountered by
+robots engaged in mining and manufacturing require
+behavioural flexibility typically associated with AI
+capacities. A few short years ago, this would have been
+considered the weakest aspect of any robotic lunar system.
+Today, however, AI has, after many years of lying fallow,
+been spurred by developments in deep learning systems
+with applications in robotic mining and lights-out
+manufacturing, amongst others. The central task in
+manufacturing is planning of manufacturing task schedules
+and sequences. This may be treated as a search problem but
+it is NP hard so knowledge must be exploited. An assembly
+plan comprises a sequence of tasks subject to geometric
+constraints – it comprises an NP-complete problem but a
+range of constraints can drastically reduce the options [36].
+A traditional expert system-based AI applied to automated
+manufacturing is one approach [37] such as the adoption of
+frames as objects organised in a semantic network [38].
+
+4. IN-SITU RESOURCES
+We take the view that any kinematic machine (or robot) is a
+configuration of motors – be it a rover vehicle, manipulator,
+drill, excavator, 3D printer, milling machine, etc.
+Manufacture of the motor is the core of the self-replication
+process. In order to fabricate structures, motors and
+electronics, we have devised a minimal list of functional
+materials that can be extracted from the Moon or its NiFe
+meteoritic inventory (Table 2). It is worth noting that on
+Earth, Pt group metals are mined from ores with only 7 ppm
+metal and these materials have similar or greater
+concentrations on the Moon.
+
+Soft computing methods such as neural networks and other
+methods are also applicable [39]. Neural networks have
+been applied to many areas of manufacturing by virtue of
+their adaptability and robustness [40]. Elman recurrent
+neural networks have been used to implement a sequential
+controller for automated manufacturing [41]. This
+demonstrates that neural networks can implement causal
+relationships in a process plan. It is their learning ability that
+offers potential advantages over knowledge-based expert
+systems for intelligent manufacturing required in
+reconfigurable systems. Their applications cover almost all
+manufacturing domains including design, process planning,
+scheduling, process modelling and control, monitoring and
+diagnosis, quality assurance and robotic control systems.
+
+Table 2. Minimal set of functional lunar-derived
+materials
+
+5
+
+Functionality
+
+Lunar-Derived
+Material
+
+Tensile structures
+
+Wrought iron
+
+Substitution of steel by aluminum and plastic on Earth is not
+necessary on the Moon, but the FFC Cambridge process
+offers the capability of a wide range of metals from mineral
+oxides. We wish to implement an industrial ecosystem in
+which the consumption of materials and energy is optimized
+by minimising waste, and the waste of one process becomes
+the raw material for other processes. Minimisation of waste
+is also a Toyota production system philosophy that seeks to
+maximise return on investment. Minimisation of
+consumption is the key to developing a self-sustained
+industry of which a self-replicating machine is an exemplar.
+Recycling is an attempt towards this though recycling
+requires energy input and is never 100% efficient [46]. The
+self-replicating machine provides such a 100% recycling
+capability through the construction of its daughter products
+(itself a form of self-repair).
+
+Compressive structures Cast iron
+Elastic structures
+
+Steel springs/flexures
+Silicone elastomers
+
+Hard structures
+
+Alumina
+
+Thermal
+conductor Fernico (e.g. kovar)
+straps
+Nickel
+Thermal insulation
+Glass (SiO2 fibre)
+Ceramics such as SiO2
+High thermal tolerance
+
+Tungsten
+Alumina
+Electrical conduction Fernico (e.g. kovar)
+wire
+Nickel
+Electrical insulation
+Glass
+Ceramics
+(SiO2,
+Al2O3and TiO2)
+Silicone plastics
+Silicon steel for motors
+
+5.
+3D
+PRINTING
+CONSTRUCTION
+
+Ferrite
+Silicon steel
+Permalloy
+
+Sensory transducers
+
+Resistance wire
+Quartz
+Selenium
+
+Optical structures
+
+Polished nickel
+Fused silica glass
+
+Lubricants
+
+Silicone oils
+Water
+
+Combustible fuels
+
+Oxygen
+Hydrogen
+
+UNIVERSAL
+
+We briefly review 3D printing techniques to assess their
+suitability for extraterrestrial deployment (though we do not
+consider issues invoked by partial gravity on planetary
+surfaces). One of the most important issues concerns the use
+of organic binder which may require a complex
+manufacturing process necessitating its import from Earth.
+Although Earth-imported reagents that are recycled may be
+tolerated, consumption of Earth-imported materials into
+products is not. Furthermore, in terms of a self-replicating
+machine, re-use of the same device for multiple purposes
+provides an efficiency of both material and manufacturing
+processes – in particular, we focus on vacuum tube-derived
+technology based on the electron gun. Conventional
+subtractive manufacturing involves removing material from
+a stock – it may be by machining, laser, electric discharge,
+etc. Prior to the spread of additive manufacturing, material
+cutting was the principal operation in 86% of flexible
+manufacturing system (FMS) operations. CNC machining is
+an example of subtractive manufacturing which employs a 3
+or 5 DOF manipulator with tooling and supported by
+fixtures. Subtractive manufacturing processes are highly
+reliant on electric motors to drive hard tools to perform
+drilling, milling, sawing and laser/electron beams.
+Conventional forming processes are also highly reliant on
+electric motors. Material joining is reliant on thermal energy
+sources like electric arcs, burning gases and laser/electron
+beams.
+
+Active
+electronics Kovar
+devices (vacuum tubes) Nickel
+Tungsten
+Fused silica glass
+Magnetic materials
+
+AS
+
+Additive manufacturing (henceforth synonymous with 3D
+printing) is enabled through the digital STL file format
+which permits slicing of the CAD model into a series of
+cross sectional layers of arbitrary thickness for direct
+manufacture through CAM. 3D printing introduces new
+capabilities – it can fabricate parts with a wide range of
+complex geometries without the tooling, fixtures, jigs and
+moulds that characterise subtractive manufacturing methods
+and with fewer manufacturing steps [47]. This is unlike
+subtractive manufacturing which requires multiple process
+tools such as casting, machining, welding etc. Furthermore,
+6
+
+fewer components for assembly yield materially more
+efficient structures by minimising joinery and unnecessary
+material with mass savings of 40-90%. Additive
+manufacturing offers the potential for enormous savings
+globally by eliminating material waste (swarf, etc) with
+associated reductions in greenhouse gas emissions [48].
+Excess material is readily recycled at the source. It enables
+simplification of structural design and fewer parts count by
+integrating parts, i.e. minimising material, shape and
+functional complexity [49]. In terms of sustainability, a high
+degree of recycling at product end-of-lifecycle is
+conceivable. The reconfigurability of 3D printed products
+offer advantages of distributed manufacturing close to point
+of demand with digital design files transported
+electronically, i.e. reduce physical transport if the material
+source is widespread [50] - manufacturer and consumer are
+merging into the same agent. This has been pioneered by the
+Fab@Home factory system and the RepRap 3D printer
+which could conceivably develop beyond the enthusiast or
+hobbyist [51]. All cases of 3D printing involve a Cartesian
+robot configuration in which a deposition head is moved in
+a 2D planar pattern that outlines the layer geometry, and a
+work platform which is moved in the vertical direction to
+permit consecutive layer upon layer construction. Hence,
+like subtractive manufacturing, it is also reliant on electric
+motors, thermal heating and laser/electron beams. There are
+several major approaches to 3D printing.
+
+layer. It is thus a combination of additive (layering) and
+subtractive (laser cutting) manufacturing techniques.
+However, LOM layers are subject to warping in the zdirection. Ultrasonic consolidation can 3D print multimaterial metal parts from dissimilar metal foils such as
+aluminum, steel and inconel with embedded ceramic fibres
+with high internal bonding integrity [52, 53]. It requires a
+post-process milling stage which may be integrated into the
+additive manufacturing device. The layering in LOM
+requires prefabricated sheet feedstock with a complex
+assembly process which excludes it from further
+consideration for extraterrestrial use.
+Fused deposition manufacturing (FDM) melts a thin
+filament of thermoplastic which feeds into an extrusion head
+which deposits a thin layer of plastic onto a substrate. The
+plastic is heated to 1oC above its melting point in the
+extrusion head so that it solidifies rapidly after extrusion to
+form 50-250 μm layers. Each layer is deposited
+consecutively to build the 3D part. Due to cold welds
+between layers, delamination can occur if the temperature
+fluctuates. The most commonly used thermoplastics are
+acrylonitrile butadiene styrene (ABS), polylactic acid
+(PLA), nylon and more recently silicone plastics (siloxanes).
+FDM is a 3D printing technique that offers versatility
+despite being restricted to plastics. Its application to silicone
+plastics is of particular value for extraterrestrial employment
+as siloxanes are radiation resistant and have wide
+temperature tolerance.
+
+Stereolithography (SLA) was the first 3D printing technique
+developed by Chuck Hall in the 1980s to exploit digital
+CAD models. It is based on layer-by-layer construction of a
+photosensitive resin (such as CibatoolR SL 5170 resin) using
+UV light. A low power UV laser is directed onto a thin layer
+on the surface of a vat of liquid photosensitive polymer to
+polymerise it by cross-linking into a solid resin layer. The
+UV laser spot is controlled by mirrors to trace out the
+desired cross sectional pattern on the liquid photopolymer
+which hardens into a solid on exposure to UV. The platform
+mounting the part is depressed to submerge the solidified
+layer until a layer-thickness of liquid resin covers the solid
+layer. This liquid layer is then subjected to another cycle of
+UV laser treatment. UV light repeatedly solidifies thin
+layers so that a 3D part of resin is constructed layer-bylayer. It can achieve high resolution layering ~5-20 μm and
+a horizontal precision of ~1-10 μm. Such high resolution is
+achievable because it does not create a melt pool unlike
+most other 3D printing processes. It does require support
+structures for overhangs which are subsequently removed
+from the finished part. SLA is limited in the material
+choices (UV photopolymers) available. It is not considered
+suitable for extraterrestrial use due to its material
+limitations.
+
+Of particular interest with respect to FDM are preceramic
+polymers which include silicone-based polysiloxanes [54].
+The high melting point of most ceramics makes their direct
+casting and 3D printing very difficult at best. Furthermore,
+their high brittleness renders them prone to thermal cracking
+if large thermal gradients exist. Pyrolysis of polysiloxanes
+such as PDMS at 350-1000oC or above can yield highly
+quality SiO2 films with the evolution of CO2. This permits
+thermal preforming of the polymer prior to its conversion to
+ceramic which then has an ultrahigh temperature tolerance
+up to 1600oC. Above 1400oC, silica forms its high
+temperature
+crystabolite
+form
+which
+exhibits
+piezoresistivity. Iron-containing polymer-derived ceramics
+can form ceramics with magnetic properties. Combining
+siloxanes (Si-O-Si) with silazanes (Si-N-Si) results in
+SiOCN ceramics after pyrolysis at 1000oC in a noble gas
+environment [55]. The requirement for thin thickness under
+3 mm dictates the employment of lattice and honeycomb
+structures capable of surviving high temperatures. The
+application of UV radiation in the presence of oxygen
+(forming ozone) can potentially reduce polysiloxanes such
+as PDMS to silica at room-temperature [56]. This process is
+limited to a surface film of 20-30 nm with potential
+applications in microelectronics. The UV-exposed layer can
+be 30-100 μm which is compatible with 3D printing layers.
+On the Moon and Mars, ambient solar UV flux can be
+exploited in this manner to create ceramics from siloxanes
+after 3D printing at low temperature.
+
+Laminated object manufacturing (LOM) bonds thin solid
+sheets of paper, metals, plastic or composite coated in a
+thermal adhesive under pressure and heat. A laser cuts the
+material of each layer to the desired cross sectional shape.
+The laser focus and velocity is controlled for depth to ensure
+that only one layer is cut. This process proceeds layer-by7
+
+Inkjet 3D printing is derived from dot-matrix printing – a
+solute is dissolved in a liquid solvent (ink) and the solution
+is sprayed through a nozzle. It deposits liquid droplets of a
+polymer binder (ink) over a powder bed of particles (usually
+metal or ceramic) to form a composite layer of the desired
+shape. The ink dries through evaporation of the solvent to
+bind the particles into a solid horizontal patterned layer. A
+new layer of particles is then deposited over the hardened
+layer followed by the liquid binder. The viscosity, inertia
+and surface tension of the ink determines the droplet
+behaviour as represented by the Reynolds number Re (ratio
+of inertial to viscous forces), Weber number We (ratio of
+kinetic to surface energy) and Ohnesorge number Oh
+(relative importance of viscous to surface forces):
+We
+Oh  Re
+
+
+dv
+
+where Re   , We 
+
+
+ d
+
+[58]. Powder bed fusion offers superior tolerance and finish
+while wire feed offers rapid deposition rate. There is a
+correlation between microstructure, processing parameters
+and materials properties – the microstructure of powdergenerated material is finer than that of wire-generated
+material due to the larger melt pool and consequent slower
+cooling of wire feeding. In powder bed fusion, a powder is
+raked over the work area for subsequent thermal processing.
+In powder feed, the powder is deployed from a nozzle with
+gas onto the work area for subsequent thermal processing.
+In wire feed, the energy source – laser beam, electron beam
+or plasma arc – impinges on the wire to deposit molten
+beads onto the work area. The optimal configuration for
+superior surface finish is to position the wire at the leading
+edge of the melt pool through front feeding. In terms of
+power delivery, there are three main thermal power sources
+– selective laser sintering/melting (SLS/M techniques
+pioneered by EOS and Renishaw respectively), electron
+beam melting (EBM pioneered by ARCAM) and arc
+welding. They are all selective sintering/melting methods
+that impose a localised heat source on the material.
+
+(1)
+
+dv 2
+ , v=fluid velocity, η=dynamic
+
+viscosity, d=droplet diameter, ρ=fluid density, σ=surface
+tension. If Oh>1, nozzle clogging will occur; if Oh<0.1,
+multiple droplets will result. The jetting condition is thus
+1<Oh<0.1. Inkjet 3D printing can bind most types of
+powder but it offers limited parts density. The requirement
+for an imported binder renders it unsuitable for
+extraterrestrial use.
+
+Welding is a joining process which melts base metal for
+fusion supplemented by a filler metal (as opposed to
+soldering and brazing which melt another metal at lower
+temperature). There are several common forms of welding
+but the three most appropriate for extraterrestrial
+deployment include: (i) oxyacetylene welding uses
+acetylene fuel ignited in oxygen to weld and cut metal
+(acetylene may be manufactured readily from Martian
+resources); (ii) TIG (tungsten inert gas) welding uses a
+tungsten electrode to generate an electric arc and an Ar/He
+shielding gas to weld; (iii) special welding techniques for
+high energy density, deep welding including laser beam
+welding (in air or in vacuo) and electron beam welding (in
+vacuo). The TIG welding torch employs tungsten electrodes
+in common with vacuum tube devices (see later). We do not
+consider welding further here other than to note that pairing
+of electron beam welding with electron beam additive
+manufacturing (both based on vacuum tube-based devices)
+and laser beam welding with selective laser
+sintering/melting offer combined additive and subtractive
+techniques.
+
+Prometal 3D printing is a variation on inkjet 3D printing in
+which a powdered metal, ceramic or composite (most
+commonly steel particles) is deposited onto a substrate
+followed by spraying with a binder from a nozzle tracing the
+desired cross sectional pattern. After the 3D part has been
+constructed layer-by-layer, it is fired at elevated temperature
+~170-180oC for 24 h to strengthen the binding to yield a
+40% porous 3D part. The part may then be infused with
+bronze powder at 1100oC to form an alloy of 60% steel and
+40% bronze for near full densification. Tungsten carbide
+particles sintered with zirconium copper have been 3D
+printed into rocket nozzles using this technique. The
+previous argument applies.
+Multiphase jet solidification uses low melting point alloys
+(such as tin-bismuth with a melting point of 180oC) or
+ceramic powder-polymer binder (typically in a 50%:50%
+ratio) paste which is forced from a nozzle to create parts
+layer-by-layer [57]. The polymer binder impregnated by
+ceramic particles may be heated and extruded under low
+viscosity flow to sequentially build each layer which is
+cooled before the next layer is applied. Stainless (316L)
+steel powder may similarly mixed with the polymer binder
+to extrude at low temperature but evaporation of the binder
+results in 30% volume shrinkage and the part still requires
+subsequent high temperature sintering. The previous
+argument applies.
+
+In powder beds, the commonest approach to metal additive
+manufacturing, the laser or electron beam selectively
+thermally fuses a pattern on the powder bed layer-by-layer,
+yielding fully dense metal components with relatively high
+precision [59]. The powder bed is maintained in an inert gas
+environment such as Ar (for laser) or vacuum ~10 -4-10-5
+mbar (for electron beam) environment in an enclosed
+chamber. The laser or electron beam scans over the powder
+bed to sinter or melt the particles in a 2D cross section
+pattern. Conductive heat flow from a rapid scanning laser or
+electron beam onto a solid material is determined by [60]:
+
+Most work to date on metal additive manufacturing has been
+focussed on Ti6Al4V though many alloys can be employed.
+For metal 3D printing, there are three main approaches for
+inputting metal – powder bed, powder feed and wire feed
+
+T
+x
+
+8
+
+ D 2T  cQp
+
+(2)
+
+where D=thermal diffusivity, cp=specific heat/unit volume,
+T=temperature, Q 
+
+P( f )
+2r 2 
+
+printed offering higher strength, stiffness and stability than
+traditional forging/machining methods.
+
+=power density, P(f)=Gaussian
+
+In selective laser melting (SLM), the powder bed is heated
+just below the melting point of the material prior to melting
+to minimise thermal distortions of the new melted layer with
+the underlying solidified layer. The difference between laser
+sintering and laser melting is that in the latter, the powder is
+fully melted rather than partially as in the former. Melting of
+the powder results in greater densification compared with
+the small porosity from sintering but SLM still generally
+benefits from hot isostatic pressing (HIP). Laser melting
+permits processing of non-ferrous materials that are too
+viscous (which causes balling) for sintering. SLM involves
+high laser intensities delivering ~1010 W/m2 to the localised
+workpiece. Laser energy density is given by:
+
+beam power distribution function, r=beam spot radius,
+x=material thickness, λ=absorption length (related to layer
+thickness). Power density is determined by the beam energy
+2
+given by E  hf for the laser and E  12 mve for the
+electron beam respectively. Rapid heating and cooling rates
+of ~104 K/s at solid/liquid interface in the melt pool is
+typical. Once the solidified layer is complete, the work
+platform is depressed one layer thickness and a roller
+spreads another layer of powder onto the solidified layer.
+The unsintered powder of the underlying layer acts as
+support for the overlying layer thereby permitting overhangs
+without dedicated support structures. The process is
+repeated layer-by-layer until the 3D part has been
+constructed. The 3D part may be subjected to postprocessing procedures such as machining, shot peening, heat
+treatment, hot isostatic pressing, etc.
+
+DE  2r0Pv
+
+where P=transmitted laser power, v=laser scanning speed,
+r=laser spot radius. Ceramic processing requires high
+temperatures in excess of 1700oC. In multicomponent
+powder mixtures, the low melting point metal acts as binder
+while the high melting point metal acts as the structural
+component, typically with a small amount of additive to
+prevent oxidation [61]. The processing temperature is
+between the solidus and liquidus temperatures. Wetting of
+the structural metal by the liquid binder may be defined by
+the contact angle:
+
+Selective laser sintering (SLS) uses a high powered laser
+(usually CO2 laser) to sinter a bed of powdered polymer,
+metal, ceramic or glass particles or combinations thereof
+into a hardened solid. Solidification of powder occurs
+without melting. In particular, steel, nickel, cobalt, inconel,
+titanium, intermetallics, alumina, silica, zirconia, PZT and
+PEEK are commonly printed using SLS. SLS focusses a
+laser to sequentially sinter layers of fine powder into
+patterns traced out by the laser. After each layer is sintered,
+a fresh layer of powder is rolled sequentially onto the
+powder bed. The residual stress is dependent on the material
+(especially coefficient of thermal expansion and elastic
+modulus), part height and laser processing conditions
+(including tool path). The major laser processing parameters
+are laser power P, scan speed v, beam size, hatch distance h
+between laser tracks and powder layer thickness d. Laserbased deposition thickness for a Gaussian beam profile is
+given by:
+
+h
+
+R0 rt 
+
+ r  2 ( vt )
+
+ 
+
+cos   sv lv sl
+
+(6)
+
+where γ=surface tension between solid-liquid, solid-vapour
+and liquid-vapour interfaces. As cosθ→1, wetting increases.
+Viscosity of the molten material is given by:
+
+
+
+  0 1  1
+m
+
+l
+
+
+
+2
+
+(7)
+
+where μ0=base viscosity, φl=volume fraction of liquid,
+φm=critical volume fraction of solid above which viscosity
+is infinite. Heterogeneity in alloy mixtures can result
+requiring post-processing such as hot isostatic pressing.
+Despite its promise for multi-material additive
+manufacturing, we discard SLS/SLM techniques for
+extraterrestrial deployment for two reasons: (i) metal
+powders under partial gravity and vacuum conditions are
+difficult to control; (ii) lasers have poor energy conversion
+efficiencies.
+
+(3)
+
+where r=laser spot radius, R0=diffusion-limited axial growth
+rate, v=scanning speed, t=process time. The effects of laser
+parameters are integrated into the volumetric energy density
+factor (kJ/mm3):
+P
+VED  vhd
+
+(5)
+
+(4)
+
+The sintering laser is typical 200-1000 W for metals and
+must deliver < 10 MW/cm2 for optimal processing. Laser
+AM can print with 20-50 μm thick layers depending on the
+powder size (which determines the stair stepping effect),
+dimensional accuracy of ±50 μm and a surface roughness of
+~10-15 μm. Sintered parts are near fully dense but laser
+scanning is slow with a build rate of 5-20 cm3/h but multiple
+sets of lasers can increase this rate. Glass/carbon/metal fibre
+reinforced composites with plastic or metal matrices (such
+as steel, Ti alloys, and Ni-Co super-alloys) may be 3D
+
+Electron beam melting (EBM) is similar to SLM except that
+an electron beam replaces the laser, offering higher energy
+efficiency of 10-20% compared with the 2-5% efficiency of
+laser beams – this will be critical for extraterrestrial
+deployment. EBM can be powder or wire fed [62]. It can
+interact with many metal alloys including Ti, Al, steel,
+copper, Be, Co and Inconel alloys but cannot process
+electrical insulators. In mixed particles, melting
+temperatures range considerably from 1300 oC for Inconel to
+9
+
+2500oC for Nb which affects pre-heat scanning strategies
+and melt scan beam currents. A heated tungsten cathode
+emits electrons that are focussed with two magnetic fields
+generated by the focus coil which acts a magnetic lens to
+focus the beam onto the powder bed ~0.01 mm diameter and
+the deflection coil which scans the beam over the powder
+bed. The electrons interact with the metal particles and melt
+them. The layer thickness is typically 50-200 μm. EBM is
+typically performed in two stages: (i) preheating stage
+preheats the powder bed with multiple passes at high
+scanning speed up to 40-60% melting temperature (700900oC typically) to reduce thermal gradients and consequent
+residual stresses between layers; (ii) melting stage at low
+scanning speed to melt the powder. The main electron beam
+processing parameters are beam power, current, focus
+diameter, pre-heat temperature and layer thickness. For the
+electron beam, temperature of the bed is given by:
+
+T ~ Q(1cp xR )
+where
+
+The chief problems in 3D printing have been in process
+control for high gradient thermal cycles and their effects on
+mechanical properties, and higher dimensional accuracy for
+reduced surface roughness. It is the lack of quality assurance
+by monitoring process control in additive manufacturing
+that has hampered surface roughness and other deficiencies
+in the build – feedback loops with adequate sensors is
+essential [65]. Stair-stepping between layers is determined
+by the layer resolution which is determined by process
+control. Balling occurs when the melt forms spheres that
+exceed the layer thickness resulting in non-uniform material
+distribution. Balling may be reduced at heat inputs of 14001700 J/mm3. A feedback system can provide closed loop
+control of dimension during deposition using sensors to
+extract melt pool information and adjusting input processing
+parameters. In melting, Marangoni convection driven by
+surface temperature gradients of the melt pool affects the
+quality of the melt pool [66]. Camera imaging of the melt
+pool can detect imperfections and measure dimensional
+inaccuracies. In particular, accurate distance measurements
+are required – photodiode sensors and/or electromagnetic
+sensors are ideal. Temperature gradients may be identified
+by pyrometers or infrared cameras protected by ZnSe
+window. However, the range and mix of sensors may be
+much enhanced (such as X-ray spectroscopy) especially
+with data fusion. Integration of sensors, software and
+communications is required for seamless autonomous
+control of industrial machines and processes. However,
+these approaches are still in developmental stages though
+they show much promise.
+
+(8)
+
+Q  IVv =beam power density, R=reflectivity,
+
+ρ=material density, v=scan speed. Typical electron beam
+power is ~3 kW at 30-60 kV. EBM has a higher build rate
+of 100-2500 cm3/h but poorer surface finish than SLM.
+Within EBM manufacturing, measurements may be made
+by a scanning electron microscope (SEM) configuration.
+The SEM comprises an electron gun to generate an electron
+beam, a set of magnetic lenses to focus the beam and a focus
+platform, all encased in a high vacuum. Electron beam
+additive manufacturing, despite being limited only to
+metals, is a versatile technique based on vacuum tube-type
+technology.
+
+6. 3D PRINTING ELECTRIC MOTORS
+Whereas the 1980 NASA study considered that electric
+motors and electronics are complex and should be imported
+from Earth, Chirikjian et al (2002) suggested that electric
+motors might be assembled from cast components in-situ
+[67]. Furthermore, electromechanical relays operate on a
+similar principle and using similar components as electric
+motors. A
+network of manufacturing tools (cyclic
+fabrication) – laser machining, assembly, casting, hot wax
+vacuuming and electroforming - has demonstrated the
+fabrication of a brush “air” DC motor from polyurethane,
+silicone resin moulds, sacrificial wax moulds, solder alloys,
+and metal salt solutions of copper and nickel [68]. The
+motor comprised 15 cast plastic parts (6 coil plates, 7
+magnet disks, 1 commutator shaft, 1 baseplate), 4 cast
+Rose’s metal commutator rings, 8 brass brushes, 6 magnetic
+steel yoke pieces, 42 NdFeB magnets and extruded Rose’s
+metal wires. The motor was complex in construction and
+required complex machinery to fabricate.
+
+Directed energy deposition methods of 3D printing
+(pioneered by 3D Systems) involve melting of material as it
+is being deposited. An example is laser engineering net
+shaping (LENS pioneered by Optomec) which uses a high
+power laser (500 W – 5 kW) to sinter or melt metal powder
+particles which form consecutive layers vertically on a
+substrate build a 3D part. It requires the part to be cut from
+the substrate and requires post-processing. It is a variant on
+the SLM technique so the same criticisms apply.
+Amorphous ceramic structures have been fabricated using
+additive LENS from lunar regolith simulant (primarily
+plagioclase with supplementary olivine and pyroxene
+particles of 50-150 μm) [63]. The process parameters were
+laser power of 50 W (laser spot size of 1.65 mm giving an
+energy density of 2 J/mm2), scan speed of 20 mm/s and
+powder feed rate of 12.4 g/min. The printed glassy material
+had a hardness of 500 Hv similar to soda lime glass (550
+Hv) using those parameters. This demonstrates the viability
+of 3D printing of lunar regolith for habitat and other
+structures as an alternative to lunar contour crafting and 3Dshape which both use a large extrusion nozzle to lay a
+viscous mixture of concrete and regolith/binder respectively
+[64].
+
+The approach we are exploring is to vastly simplify electric
+motor construction through 3D printing using more robust
+materials. We have been striving towards 3D printing
+electric motors [69, 70] as a corollary to the theorem that 3D
+printing supplemented with milling constitutes an universal
+construction mechanism. We have made progress in 3D
+10
+
+printing DC electric motors including rotor core, coils and
+stators. This has involved 3D printing in metals and plastic.
+The motor core comprises magnetically soft material
+(silicon steel) powder impregnating an insulating resin
+binder of PLA has been 3D printed by FDM (Fig 2).
+
+Fig 4.Unsuccessful electromagnetic stator
+
+7. 3D PRINTABLE ELECTRONICS
+
+Fig 2. 3D printed iron-impregnated PLA-based rotor for a
+DC motor
+
+Data processing and expert system functions to support selfreplication is based on neural network architectures to
+implement AI capabilities [71] supplemented with offline
+training through deep learning [72]. This includes a neural
+SLAM capability [73] which eliminates the need for a
+transponder network.
+
+We have photolithographically printed the electrical coils in
+a pancake motor test configuration which has successfully
+demonstrated the elimination of wire windings (Fig 3).
+Photolithography is of course a variation on
+stereolithographic 3D printing. We are in the process of
+integrating the two elements – 3D printed rotor and
+lithographically printed coils – into a hybrid fully-printed
+rotor.
+
+We have been tackling the 3D printed electronics aspect
+from two directions. We have demonstrated the deposition
+of molten aluminum alloy strips directly onto silicone
+plastic substrates to demonstrate integrated multi-material
+compatibility (Fig 5).
+
+Fig 3. Photolithographically-printed coils
+We have also 3D printed electromagnetic iron alloy (by
+SLM) for the stator magnets with mixed success (Fig 4).
+Unfortunately, the stator field was only 3 G which was
+insufficient to generate torque on the rotor even with 900
+turns of wire on the stator. However, we are exploring the
+use of a series of permanent magnet solutions – alnico,
+samarium-cobalt and rare earth alloys – to be 3D printed
+using EBM. Once the stator magnets have been successful,
+we shall integrate all three components into a fully 3D
+printed DC motor.
+Fig 5. Aluminium track on silicone plastic substrate
+With further development, we will be able to print passive
+RC circuits. In our custom-made 3D printer, we shall utilise
+a modular motor unit to drive a rack-and-pinion in all three
+axes to form a Cartesian robot assembly. This bears
+11
+
+resemblance to the “modular production system” concept
+which comprised of two orthogonal horizontal modular
+prismatic links mounting a boring drill to a workpiece on a
+table actuated by a vertical prismatic link [74].
+
+achieved, 3D printing of motors has almost been
+demonstrated but 3D printing of active electronics is less
+well developed.
+
+APPENDIX: TURING MACHINES
+Our approach to computing with active devices however is
+based on vacuum tubes as the basis for hardware neuron
+circuits [75]. There is a complex trade-off between simple
+distributed electronics and microprocessor electronics
+whereby increased subsystems of reduced complexity
+enhance survivability in more complex environments [76].
+This corroborates our approach to use distributed sets of
+neural network circuits rather than a centralised von
+Neumann architecture. We have been examining the use of
+analogue hardware neural network circuits as a new
+approach to computing (Fig 6).
+
+Primitive recursive functions are a class of functions that
+may be computed mechanically, i.e. computable functions.
+A computable function may be defined as an algorithm
+(program) of a finite number of steps composed of a finite
+sequence of symbols from a finite alphabet of symbols but
+of arbitrary complexity. Computable functions may also be
+defined as those that are computable by a Turing machine.
+These are all equivalent definitions of computable functions.
+The last definition is a statement of the Church-Turing
+thesis which states that any computation can be performed
+by a Turing machine. A computable number is one that can
+be computed by a finite, halting algorithm, i.e. computable
+by a Turing machine. Computable numbers include all
+algebraic numbers and many transcendental numbers such
+as π and e. For any Turing machine, it is possible to
+construct an equivalent Boolean circuit that implements all
+its computations because Boolean circuits are equivalent to
+formulas of propositional calculus.
+
+Fig 6. Analogue neuron circuit
+The Turing machine is a machine that encapsulates notion
+of the algorithm as a well-defined finite procedure of
+sequential steps that transform an input into an output. The
+Church-Turing thesis defines computation as a
+mathematically precise process embodied in the Turing
+machine. A Turing machine comprises three parts: (i) an
+infinitely long digital tape divided into consecutive cells
+containing symbols 0 or 1 – this is the stored program, and
+(ii) a finite state machine (movable read-write head) with q
+states that reads the tape as a sequence of inputs one cell at a
+time in either direction initiated from a start state q 0 and
+writes a new output sequence on the tape; (iii) a set of
+transition rules (program) that determines the next state of
+the read/write head. As the tape is read from and written to,
+the finite state machine alters its internal state. As an
+automaton, the Turing machine may be described by:
+M=(Q.q0,qf, A,B,T, δ) where Q=set of states, q0=initial
+state, qf=final state, A=finite alphabet of input symbols,
+B=special blank symbol, T=finite alphabet of tape symbols,
+δ=transition function such that δxT→QxTx{L,R}, L=move
+left, R=move right. The read write/head reads the an input
+symbol on the tape, overwrites the input symbol on the tape
+with the output symbol, and moves left or right to the next
+symbol. The sequence of transitions constitutes the
+computation. Often, the Turing machine concept has
+multiple tapes but they can be simulated by a single tape
+Turing machine. The tape may be likened to mRNA with
+each cell of the tape representing a codon. The transition
+function has been likened to biological translation
+represented by aminoacyl-tRNA pairing. The Turing
+machine computes a finite sequence of symbols until it
+reaches its halting state such that Y=M(I) where Y=output
+string, I=input string, M=Turing machine. The
+computational automaton as a whole represents a ribosome.
+
+We have demonstrated the efficacy of this neuron circuit on
+a desktop rover which used a two-neuron circuit to
+implement simple obstacle avoidance behaviour. The use of
+analogue neural circuits is motivated by the adoption of
+vacuum tubes as the core component of active electronics.
+Unlike solid state circuits, vacuum tubes can be constructed
+from lunar resources – glass, tungsten, nickel and kovar.
+There may be limits to their miniaturisation on the Moon, so
+neural net architectures offer logarithmic footprint growth
+with task complexity over the exponential growth implicit in
+traditional von Neumann architectures and their variants.
+We have yet to 3D print vacuum tubes but have
+demonstrated analogue hardware neural circuits controlling
+a desktop test rover. We are in fact exploring 3D printing of
+a magnetron as a macroscopic vacuum tube but this work is
+in its early stages. Nevertheless, this approach implements a
+direct implementation of the original Turing machine
+concept in which the read/write head is implemented as a
+3D printing machine which outputs (prints) the neural
+circuit (computer program) to be implemented (see
+Appendix A for Turing machine tutorial).
+
+8. CONCLUSIONS
+The prospect of a self-replicating machine to develop and
+exploit extraterrestrial environments remains a significant
+challenge. Nevertheless, the first tentative steps have been
+taken and a solution and an implicit technological roadmap
+is visible. The lunar materials required that impose the
+ultimate constraints are understood. Core capabilities
+include 3D printing of electric motors and electronics as the
+key 3D printing of entire robotic machines including 3D
+printers (universal constructors) and other supporting
+kinematic machines. Although this initial goal has yet to be
+12
+
+There are several variations on the Turing machine. The
+Bernoulli-Turing machine is a deterministic Turing machine
+augmented by an information source modelled as heat bath.
+
+advance whether a particular program will halt with a
+computed output – the unsolvability of the halting problem
+denies the existence of any general algorithm that can
+determine whether a given computation will halt or not, i.e.
+this halting problem is undecidable. For example, a search
+for a counterexample to disprove Goldbach’s conjecture
+(that every even number greater than 2 is expressible as the
+sum of two primes) will find a counterexample if it exists
+but will continue forever if it does not.
+
+The universal Turing machine (UTM) is a general Turing
+machine that can simulate any other Turing machine given
+the description of that Turing machine as an input on its
+tape. It can be an even more complex Turing machine at the
+cost of a fixed overhead to the program size and a
+polynomial decrease in computation speed. An important
+consideration is computational tractability. Computational
+complexity of an algorithm is defined as the time required
+for its computation on a Turing machine. The class of
+decision problems that can be solved by a Turing machine
+in polynomial time constitutes class P; PSPACE are
+problems that can be solved by a Turing machine with
+polynomial storage capability but may require exponential
+time; those that can be solved by a non-deterministic
+(probabilistic) Turing machine in polynomial time
+constitutes class NP. Soluble problems P are those soluble
+in polynomial time while problems NP are soluble in
+exponential time are considered to be insoluble (in a
+practical not theoretical sense) [77]. It is widely expected
+that PSPACE≠P. Similarly, it is known that P  NP but it is
+not known if P=NP but it is suspected that P≠NP. If,
+however, a single problem can be found in class NP that is
+also in P, then P=NP would be proven.
+
+ACKNOWLEDGEMENTS
+The author thanks the National Science & Engineering
+Research Council for part funding this project.
+
+REFERENCES
+[1] Ellery A (2016) “Solar power satellites for clean energy
+enabled through disruptive technologies” Proc 23rd World
+Energy Congress (Award Winning Papers), Istanbul,
+Turkey, 133-147
+[2] Lewis-Weber J (2016) “Lunar-based self-replicating solar
+factory” New Space J 4 (1), 53-61
+[3] Ellery A (2017) “Space exploration through selfreplication technology compensates for discounting in net
+present value cost-benefit analysis” New Space J 5 (3),
+141-154
+
+There are many universal Turing machine concepts
+including small Turing machines such as the Minsky
+machine (with a 7-state read/write head and 4 symbol
+alphabet) and the one-dimensional cellular automaton Rule
+110 [78]. At a hardware level, the UTM has to re-arrange its
+internal structure of switches to implement different
+algorithms. This introduces the key notion of a software
+algorithm differentiated from the underlying hardware. The
+modern computer, by virtue of its reprogrammability, is a
+universal Turing machine. In a von Neumann computational
+architecture, data is read and written by a central processing
+unit (CPU) by fetching data to and from memory. Similarly,
+a dynamical system is computationally universal if it can be
+programmed to perform any digital computation [79].
+Computation may be represented as ordinary differential
+equations of the form dx
+dt  f (x ) which converge to
+
+[4] Cho A (2007) “Making machines that make others of
+their kind” Science 318, 1084-1085
+[5] von Neumann J and Burks A (1966) Theory of SelfReproducing Automata, University of Illinois Press,
+Champaign, Ill
+[6] Stevens W (2009) “Parts closure in a kinematic selfreplicating programmable constructor” Artificial Life &
+Robotics 13 (2), 508-511
+[7] Freitas R & Merkle R (2004) Kinematic Self-Replicating
+Machines, Landes Bioscience, Texas
+[8] Beuchat J-L & Haenni J-O (2000) “von Neumann’s 29state cellular automaton: a hardware implementation”
+IEEE Trans Education 43 (3), 300-308
+
+attractors (fixed points, limit cycles or chaotic attractors) as
+their computational outputs, e.g. the Hopfield neural
+networks relaxes to the solution of optimisation problems in
+which the solution is that state which minimises a cost
+function E by finding the local minimum from gradient flow
+x  gradE [80]. Hence, the equivalence of dynamical
+systems and Turing machines dictates that either can be
+used to represent the other and that all cause/effect relations
+can be expressed either through deductive logic or
+numerical computation. Analogue neural networks represent
+such dynamical systems.
+
+[9] Freitas R and Gilbreath W, Advanced Automation for
+Space Missions, NASA Conference Publication 2255,
+Washington DC, 1980
+[10] Chirikjian G, Zhou Y, Suthakorn J (2002) “Selfreplicating robots for lunar development” IEEE/ASME
+Trans Mechatronics 7 (4), 462-472
+[11] Sayama H (2002) “von Neumann’s machine in the
+shell: enhancing the robustness of self-replication
+process” Artificial Life VIII (eds. Standish, Abbas,
+Bedau), MIT Press, 49-52
+
+There are limits to the Turing machine – they suffer from
+the halting problem whereby it is impossible to determine in
+13
+
+[12] Lee K, Chirikjian G (2007) “Robotic self-replication”
+IEEE Robotics & Automation Magazine (Dec), 34-43
+
+experimental astrobiology” Int J Astrobiology 5 (3),
+221-241
+
+[13] Ellery A (2016) “Are self-replicating machines
+feasible?” AIAA J Spacecraft & Rockets 53 (2), 317-327
+
+[27] D. Andrews, A. Colaprete, J. Quinn, D. Chavers, M.
+Picard, (2014) “Introducing the Resource Prospector
+Mission” AIAA Space 2014 Conference & Exposition,
+San Diego, California
+
+[14] Bernold L (1994) “Cable-based lunar transportation
+system” ASCE J Aerospace Engineering 7 (1), 1-16
+
+[28] Ellery A, Lowing P, Wanjara P, Kirby M, Mellor I,
+Doughty G (2017) “FFC Cambridge process with metal
+3D printing as universal in-situ resource utilisation”
+Proc Advanced Space Technology for Robotics &
+Automation (ASTRA), Leiden, Holland
+
+[15] Dunbabin M, Corke P, Winstanley G, Roberts J (2006)
+“Off-world robotic excavation for large-scale habitat
+construction and resource extraction” AAAI Spring Symp
+To Boldly Go Where No Human-Robot Team Has Gone
+Before, Technical Report SS-07-6, Stanford, CA
+[16] Boles W, Ashley D, Tucker R (1993) “Lunar-base
+construction equipment and methods evaluation” ASCE
+J Aerospace Engineering 6, 217-235
+
+[29] Taylor L, Schmitt H, Carrier III D, Nakagawa M
+(2005) “Lunar dust problem: from liability to asset”
+AIAA 1st Space Exploration Conf: Continuing the
+Voyage of Discovery, Orlando FL, AIAA 2005-2510
+
+[17] Johnson L & King R (2010) “Measurement of force to
+excavate extraterrestrial regolith with a small bucketwheel excavator” J Terramechanics 47, 87-95
+
+[30] Jones R, Haufe P, Sells E, Iravani P, Olliver V, Palmer
+C, Bowyer A (2011) “RepRap – the replicating rapid
+prototyper” Robotica 29 (Jan), 177-191
+
+[18] Bland P, Artemieva N, Collins G, Bottke W, Bussey D,
+Joy K (2008) “Asteroids on the Moon: projectile
+survival during low velocity impacts” 39th Lunar &
+Planetary Science Conf, abstract no 2045
+
+[31] Taminger K & Hafley R (2006) “Electron beam
+freeform fabrication (EBF3) for cost-effective near-net
+shape manufacturing” NASA TM 2006-214284
+[32] Ciblak N & Lipkin H (1996) “Remote centre of
+compliance reconsidered” Proc ASME Design
+Engineering Technical Conf & Computers in
+Engineering Conf, Irvine, California, 1-20
+
+[19] Ellery A (2017) “Self-replicating machines: from
+theory to practice” Proc Planetary & Terrestrial Mining
+Science Symp/Space Resources Roundtable, paper no
+1661
+
+[33] Chen I-M (2001) “Rapid response manufacturing
+through a rapidly reconfigurable robotic workcell”
+Robotics & Computer Integrated Manufacturing 17,
+199-213
+
+[20] Bar-Cohen Y et al (2001) “Ultrasonic/sonic
+drilling/coring (USDC) for planetary application” Proc
+SPIE 8th Annual Symposium on Smart Structures &
+Materials, California, 4327-4355
+
+[34] Freitas R & Zachary W (1981) “Self-replicating
+growing lunar factory” Proc 5th Princeton/AIAA Conf
+Space Manufacturing 4 (ed. Grey J & Hamdan L),
+AIAA Inc
+
+[21] Gao Y, Ellery A, Vincent J, Eckersley S, Jaddou M
+(2007) “Planetary micro-penetrator concept study with
+biomimetic drill and sampler design” IEEE Trans
+Aerospace & Electronic Systems 43 (3), 875-885
+
+[35] Ellery A (2016) “John von Neumann’s self-replicating
+machine – critical components required” Proc IEEE Int
+Conf Systems Man & Cybernetics, Budapest, Hungary,
+314-319
+
+[22] Satish H, Radziszewski P, Ouellet J (2005) “Design
+issues and challenges in lunar/Martian mining
+applications” Mining Technology 114 (2), 107-117
+[23] Nantel J (1996) “Improvements in mining technology”
+Int Conf on Space Engineering, Construction &
+Operations in Space V, Albuquerque, NM, 806-813
+
+[36] Kunica Z, Vranjes B, Tomic I (2003) “Development of
+s design procedure for automatic assembly systems”
+Proc IEEE Int Symp Assembly & Task Planning, 295300
+
+[24] Costes N, Trautwein,W (1973) "Elastic loop mobility
+system - a new concept for planetary exploration" J
+Terramechanics 10(1), 89-104
+
+[37] Shukla C, Chen F (1996) “State of the art in intelligent
+real-time FMS control: a comprehensive survey” J
+Intelligent Manufacturing 7, 441-455
+
+[25] A. Ellery (2005) “Robot-environment interaction - the
+basis for mobility in planetary micro-rovers” Robotics &
+Autonomous Systems 51, 29-39
+
+[38] Lau H, Mak K (2001) “Extended unified framework for
+the rapid development of automated manufacturing
+systems” Mechatronics 11, 131-155
+
+[26] A. Ellery & the Rover Team (2006) “ExoMars rover
+and Pasteur payload Phase A study: an approach to
+
+[39] Zareba M, Morel G (2003) “Integration and control of
+14
+
+intelligence in distributed manufacturing” J Intelligent
+Manufacturing 14, 25-42
+
+[53] Obielodan J, Stucker B (2014) “Fabrication
+methodology for dual-material engineering structures
+using ultrasonic additive manufacturing” Int J Advanced
+Manufacturing Technology 70, 277-284
+
+[40] Huang S & Zhang H-C (1994) “Artificial neural
+networks in manufacturing: concepts, applications and
+perspectives” IEEE Trans Components, Packaging &
+Manufacturing Technology – Part A 17 (2), 212-228
+
+[54] Colombo P, Mera G, Riedel R, Soraru D (2010)
+“Polymer-derived ceramics: 40 years of research and
+innovation in advanced ceramics” J American Ceramic
+Society 93 (7), 1805-1837
+
+[41] Abdelhameed M & Tolbah F (2002) “Recurrent neural
+network-based sequential controller for manufacturing
+automated systems” Mechatronics 12, 617-633
+
+[55] Eckel Z, Zhou C, Martin J, Jacobsen A, Carter W,
+Schaedler T (2016) “Additive manufacturing of
+polymer-derived ceramics” Science 351 (Jan), 58-62
+
+[42] Monostori L (2003) “AI and machine learning
+techniques for managing complexity, changes and
+uncertainties
+in
+manufacturing”
+Engineering
+Applications of Artificial Intelligence 16, 277-291
+
+[56] Ouyang M, Yuan C, Muisener R, Boulares A,
+Koberstein J (2000) “Conversion of some siloxane
+polymers to suilicon oxide by UV/ozone photochemical
+processes” Chemistry of Materials 12, 1591-1596
+
+[43] Mehrabi M, Ulsoy G, Koren Y (2000) “Reconfigurable
+manufacturing systems and their enabling technologies”
+Int J Manufacturing Technology & Management 1 (1),
+114-131
+
+[57] Greulich M, Greul M, Pintat T (1995) “Fast, functional
+prototypes via multiphase jet solidification” Rapid
+Prototyping J 1 (1), 20-25
+
+[44] Canny J, Goldberg K (1995) “RISC approach to
+sensing and manipulation” J Robotic Systems 12, 351363
+
+[58] Frazier W (2014) “Metal additive manufacturing: a
+review” J Materials Engineering & Performance 23,
+1917-1928
+
+[45] Erdmann M, Mason M (1988) “Exploration of
+sensorless manipulation” IEEE J Robotics & Automation
+4 (4), 369-379
+
+[59] Bhavar V, Kattire P, Patil V, Khot S, Gujar K, Singh R
+(2016) “Review on powder bed fusion technology of
+metal
+additive
+manufacturing”
+in
+Additive
+Manufacturing Handbook (ed. Badiru A, Valencia V,
+Liu D), CRC Press, Boco Raton, FL, 251-262
+
+[46] Frosch R, Gallopoulos N (1989) “Strategies for
+manufacturing” Scientific American 261 (3), 144-152
+[47] Huang S, Liu P, Mokasadar A, Hou L (2013) “Additive
+manufacturing and its social impact: a literature review”
+Int J Advanced Manufacturing Technology 67, 11911203
+
+[60] Murr L (2015) “Metallurgy of additive manufacturing:
+examples from electron beam melting” Additive
+Manufacturing 5, 40-53
+[61] Gu D, Meiners W, Wissenbach K, Poprawe R (2012)
+“Laser additive manufacturing of metallic components:
+materials, processes and mechanisms” Int Materials
+Review 57 (3), 133-164
+
+[48] Huang R, Riddle M, Graziano D, Warren J, Das S,
+Nimbalkar S, Cresko J, Masanet E (2016) “Energy and
+emissions saving potential of additive manufacturing:
+the case of lightweight aircraft components” J Cleaner
+Production 135, 1559-1570
+
+[62] Ding D, Pan Z, Cuiuri D, Li H (2015) “Wire feed
+additive manufacturing of metal components:
+technologies, developments and future interests” Int J
+Advanced Manufacturing Technology 81 (1). 465-481
+
+[49] Yang S, Zhao Y (2015) “Additive manufacturingenabled design theory and methodology: a critical
+review” Int J Advanced Manufacturing Technology 80,
+327-342
+
+[63] Balla V, Roberson L, O’Connor G, Trigwell S, Bose S,
+Bandyopadhyay A (2011) “First demonstration on direct
+laser fabrication of lunar regolith parts” Rapid
+Prototyping J 18 (6), 451-457
+
+[50] Ford S, Despeisse M (2016) “Additive manufacturing
+and sustainability: an exploratory study of the
+advantages and challenges” J Cleaner Production 137,
+1573-1587
+
+[64] Mueller R, Howe S, Kochmann D, Ali H, Anderson C,
+Burgoyne H, Chambers W, Clinton R, De Kestellier X,
+Ebelt K, Gerner S, Hofmann D, Hogstrom K, Ives E,
+Jerves A, Keeman R, Keravala J, Khoshnevis B, Lim S,
+Metzger P, Meza L, Nakaruma T, Nelson A, Partridge
+H, Pettit D, Pyle R, Reiners E, Shapiro A, Singer R, Tan
+W-L, Vasquez N, Wilcox B, Zelhofer A (2016)
+“Automated additive construction (AAC) for Earth and
+
+[51] Campbell I, Bourell D, Gibson I (2012) “Additive
+manufacturing: rapid prototyping comes of age” Rapid
+Prototyping J 18 (4), 255-258
+[52] Ram J, Robinson C, Yang Y, Stucker B (2007) “Use of
+ultrasonic consolidation for fabrication of multi-material
+structures” Rapid Prototyping J 13 (4), 226-235
+15
+
+space using in-situ resources” Proc 15th Biennial ASCE
+Int Conf Engineering Science Construction &
+Operations in Challenging Environments (Earth &
+Space 2016), Reston, VA
+
+[77] Cook S (1983) “Overview of computational
+complexity” Communications ACM 26 (6), 401-408
+[78] Woods D & Neary T (2009) “Complexity of small
+universal Turing machines: a survey” Theoretical
+Computer Science 410, 443-450
+
+[65] Eerton S, Hirsch M, Stravroulakis P, Leach R, Clare A
+(2016) “Review of in-situ process monitoring and in-situ
+metrology for metal additive manufacturing” Materials
+& Design 95, 431-445
+
+[79] Bennett C (1995) “Universal computation and physical
+dynamics” Physica D 86, 268-273
+[80] Ben-Hur A, Siegelman H, Fishman S (2002) “Theory of
+complexity for continuous time systems” J Complexity
+18, 51-86
+
+[66] King W, Anderson A, Ferencz R, Hodge N, Kamath C,
+Khairallah S, Rubenchik A (2015) “Laser powder bed
+fusion additive manufacturing of metals: physics,
+computational and material challenges” Applied Physics
+Review 2, 041304
+[67] Chirikjian G, Zhou Y, Suthakorn J (2002) “Selfreplicating robots for lunar development” IEEE/ASME
+Trans Mechatronics 7 (4), 462-472
+[68] Moses M, Yamaguchi H, Chirikjian G (2009)
+“Towards cyclic fabrication systems for modular
+robotics and rapid manufacturing” Robotics: Science &
+Systems V Conf, University of Washington, Seattle
+[69] Ellery A (2016) “John von Neumann’s self-replicating
+machine – critical components required” Proc IEEE Int
+Conf Systems Man & Cybernetics, Budapest, Hungary,
+314-319
+[70] Ellery A (2016) “Progress towards 3D printed
+mechatronic systems” Proc IEEE Int Conf Industrial
+Technology with Symp on 3D Printing, Tapei, Taiwan,
+pp. 1129-1133
+[71] Ellery A (2015) “Artificial intelligence through
+symbolic connectionism – a biomimetic rapprochement”
+in Biomimetic Technologies: Principles & Applications
+(ed. Ngo D), Elsevier Publishing
+[72] Schmidhuber J (2015) “Deep learning in neural
+networks: an overview” Neural Networks 61, 85-117
+[73] Milford M & Wyeth G (2009) “Persistent navigation
+and mapping using a biologically inspired SLAM
+system” Int J Robotics Research 29 (9), 1131-1153
+[74] Rogers G, Bottaci L (1997) “Modular production
+systems: a new manufacturing paradigm” J Intelligent
+Manufacturing 8, 147-156
+[75] Larson S & Ellery A (2015) “Trainable analogue neural
+network with application to lunar in-situ resource
+utilisation” Proc Int Astronautics Federation Congress,
+Jerusalem, IAC-15-D3.3.6
+[76] Lee K, Moses M, Chirikjian G (2008) “Robotic selfreplication in structured environments: physical
+demonstrations and complexity measures” Int J Robotics
+Research 27 (3-4), 387-401
+16
+
+BIOGRAPHY
+
+Alex Ellery received a BSc (Hons) Physics from the
+University of Ulster, UK (1988), MSc Astronomy from the
+University of Sussex, UK (1990) and PhD from Cranfield
+Institute of Technology, UK (1995). He is a graduate of
+the International Space University summer session
+(1993). He worked at Vickers Shipbuilding &
+Engineering Ltd UK as a systems design engineer, the
+Royal National Throat Nose & Ear Hospital London as a
+senior clinical scientist and Logica UK Ltd Space
+Division as a software engineer before embarking on an
+academic career at Queen Mary University of London
+UK as a programme manager on Herschel and Planck
+space telescopes, and Kingston University UK and then
+Surrey Space Centre UK as a senior lecturer specialized
+in space robotics. His current appointment is at Carleton
+University in Ottawa, Canada as a Canada Research
+Professor having spent a decade as a Canada Research
+Chair in Space Robotics & Space Technology. He is the
+author of two textbooks “An Introduction to Space
+Robotics” (2000) and “Planetary Rovers” (2016) both
+published by Praxis-Springer.
+
+17
+
+

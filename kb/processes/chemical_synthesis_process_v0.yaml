@@ -1,0 +1,52 @@
+id: chemical_synthesis_process_v0
+kind: process
+name: General chemical synthesis process v0
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: chemical_reactant_a
+    qty: 1.0
+    unit: kg
+  - item_id: chemical_reactant_b
+    qty: 1.0
+    unit: kg
+  - item_id: solvent_generic
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: chemical_product_crude
+    qty: 3.5
+    unit: kg
+requires_ids:
+  - chemical_reactor_vessel_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: Heating, mixing, and reaction energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Reaction time including heat-up, reaction, and cool-down
+notes: |
+  General chemical synthesis process for producing organic and inorganic compounds.
+  Source: Referenced by various chemical manufacturing recipes
+  Steps: Mixing reactants, heating, maintaining reaction conditions, cooling
+  Reaction types:
+    - Addition reactions
+    - Substitution reactions
+    - Condensation reactions
+    - Polymerization reactions
+  Conditions: Temperature, pressure, pH, catalyst presence
+  Control: Temperature control, agitation, atmosphere (inert, oxidizing, reducing)
+  Safety: Ventilation, temperature control, pressure relief, containment
+  Applications:
+    - Polymer synthesis
+    - Drug/chemical synthesis
+    - Specialty chemicals
+    - Battery electrolytes
+  Lunar context: Essential for chemical industry and materials production
+  Critical for: Pharmaceuticals, polymers, specialty chemicals, life support consumables

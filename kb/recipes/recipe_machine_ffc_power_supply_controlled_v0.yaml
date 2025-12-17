@@ -1,0 +1,60 @@
+id: recipe_machine_ffc_power_supply_controlled_v0
+target_item_id: ffc_power_supply_controlled_v0
+variant_id: v0
+steps:
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: transformer_step_down_high_current
+        qty: 80.0
+        unit: kg
+      - item_id: rectifier_bridge_high_current
+        qty: 15.0
+        unit: kg
+      - item_id: filter_capacitor_bank
+        qty: 20.0
+        unit: kg
+      - item_id: voltage_regulator_feedback_circuit
+        qty: 5.0
+        unit: kg
+      - item_id: current_sensor_shunt
+        qty: 2.0
+        unit: kg
+      - item_id: steel_enclosure_electrical
+        qty: 50.0
+        unit: kg
+      - item_id: cooling_fan_assembly
+        qty: 5.0
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 10.0
+        unit: kg
+      - item_id: control_circuit_microcontroller_based
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: ffc_power_supply_assembled
+        qty: 180.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Assemble all power supply components into enclosure
+  - process_id: electrical_testing_and_calibration_v0
+    inputs:
+      - item_id: ffc_power_supply_assembled
+        qty: 180.0
+        unit: kg
+    outputs:
+      - item_id: ffc_power_supply_controlled_v0
+        qty: 200.0
+        unit: kg
+    est_time_hr: 4.0
+    notes: Test voltage/current regulation, calibrate control loop, verify safety
+assumptions: |
+  All power supply components available from BOM.
+  Step-down transformer converts high voltage AC to low voltage AC.
+  Rectifier and filter provide DC output.
+  Feedback control maintains 2.8-3.2V DC for FFC process.
+  High current capability for molten salt electrolysis.
+notes: |
+  Manufacturing route for FFC controlled DC power supply.
+  Critical for precise voltage control in FFC Cambridge process.
+  Testing and calibration ensure stable operation at 900°C electrolysis conditions.

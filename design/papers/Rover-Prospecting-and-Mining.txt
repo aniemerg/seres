@@ -1,0 +1,795 @@
+207
+
+Earth and Space 2022
+
+Some Key Explorations in Planetary Rover Autonomy for ISRU Roles on the Moon
+A. Ellery1
+1
+
+Dept. of Mechanical and Aerospace Engineering, Carleton Univ., Ottawa, ON.
+Email: aellery@mae.carleton.ca
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+ABSTRACT
+We explore several facets of lunar rovers relevant to the conduct of lunar mining. In
+particular, we suggest that subsurface mining for asteroidal material shall be necessary. Our
+end-to-end 30 kg Kapvik microrover prototype has served as a testbed for exploring these
+issues—terramechanics, vision, SLAM, path planning, onboard intelligence, and multi-rover
+deployment. We suggest that microrovers are fully functionally capable platforms for lunar
+ISRU, especially if employed as cooperative fleets.
+INTRODUCTION
+Most interest in in-situ resource utilisation (ISRU) lies in recovering water ice from the south
+pole but our interest is in recovering metals, glasses and ceramics from lunar minerals (Ellery 2020).
+For this, prospecting is required to determine stripping ratios (of waste to ore). We are concerned
+with the mining phase to recover minerals. Any form of excavation and hauling operations should
+be conducted as near autonomously as possible. Mining on Earth has a long history beginning with
+the acquisition of rocks to manufacture the first stone tools to the oldest underground mine (for
+haematite) in Swaziland dated to 40,000 y ago. The mining process typically involves drilling
+blastholes in rock, breaking rock into fragments by blasting, loading of broken ores by front loader
+or dragline and hauling by truck. Large-scale mining machines such as highwall mining machines
+are discarded from consideration as extraterrestrial mining for the foreseeable future will be
+small-scale. The main mining techniques include open pit, caving, bulk stoping, cut-and-fill and
+room-and-pillar. The lunar soil is suitable for extraction through surface mining. Open pit mining is
+conducted to recover near-surface resources typically through a series of descending benches. This
+type of mining is suited for the recovery of lunar regolith to access indigenous minerals. Open pit
+mining involves the extraction large amounts of useless overburden. Underground lunar mining are
+associated with affording radiation protection to human miners (Baiden et al 2010) but we anticipate
+roboticisation of mining. Exotic materials – nickel, cobalt, tungsten and selenium - may be sourced
+from impact craters exhibiting magnetic anomalies indicating the existence of impactor metals
+(Bland et al 2008). Underground mining will be essential for recovery of such non-indigenous
+meteoritic resources that are expected to be buried in the subsurface of shallow-angle craters (Collins
+2012; Wieczorek et al 2012). Underground mining is characterised by their walls and roof supports
+(Hamrin 2001). Room-and-pillar mines excavate leaving a regular pattern of natural pillars in bedded
+ores to support the roof and walls. Within the mine for thick seams, excavation proceeds from the
+top downwards via benching in steps. The flat levels permit the use of wheeled front-end loaders
+and/or load-haul-dump vehicles. Stope-and-pillar mines are similar in combining room-and-pillar
+with cut-and-fill stoping. High quality ores are excavated around a random pattern of natural pillars
+of poor ores suited to suit more irregular ore bodies. The ores are mined in horizontal slices from the
+bottom-up and mined-out stopes are backfilled with tailings and sand. The vast majority of horizontal
+
+© ASCE
+Earth and Space 2022
+
+208
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+deposits are mined using these two methods. For steeply dipping ore deposits, stoping involves
+mining from below the ore along the seam. In shrinkage stoping, ore is drilled and blasted from the
+ceiling and accumulates to form a platform. Ore is mined in horizontal slices but it is labour-intensive
+and unsuited to mechanisation. Sublevel stoping involves multiple regularly shaped stopes in the
+orebody in which holes are drilled and blasted. Automated load-haul-dumpers operated within open
+stopes which are backfilled after mining. These are unsupported mining approaches; supported
+mining methods are required in weak rock. Cut-and-fill stoping is the commonest supported method
+involving removing ore in horizontal slices from the bottom-up with mined-out stopes
+cement-backfilled as supports with any suitable waste material. It is adaptable to mining of steeply
+inclined and irregular deposits with selected ore pockets for which mechanised load-haul-dumpers
+are ideally suited. Caving involves controlled collapse of overlying ore in a large orebody without
+backfilling. Longwall mining is a caving method applicable to horizontal seams in which a long
+straight front wall is progressively undercut mechanically and caved back and forth along the face.
+A chain conveyor belts transport ore from the mine. Sublevel caving involves ore is blasted
+progressively downward through multiple levels connected by ramps in steeply inclined orebodies.
+Load-haul-dumpers excavate the blasted ores. Block caving is a bulk caving method in which large
+blocks of ore are undercut and fractured by blasting which are funnelled onto rail cars or more
+recently trackless load-haul-dumpers for transport. An important difference between terrestrial
+mines and prospective lunar mines will be scale. Terrestrial mines serve a huge global industry and
+market and are of an according scale. Extraterrestrial mines will serve a far more modest demand so
+will be on a far more diminutive scale. Whereas asteroid mining with microgravity environments
+will not require backfilling for stability after excavation, lunar mines are subjected to gravity
+conditions so backfilling may be required. Subsurface asteroidal ores may constitute combinations
+are large orebodies with more distributed ores. Now, surface rocks on the Moon are typically
+associated with young craters some of which may represent asteroidal material. Although the
+incidence of subsurface rocks (orebodies) is unknown, we may assume that their distribution may
+be similar to that on the surface. This suggests that mechanised cut-and-fill mining is most suited to
+underground lunar mining for accessing subsurface asteroidal ore resources.
+There are also natural subsurface mines to other lunar resources. At diameters under 18 km
+on average (range 15-25 km), craters are simple excavations with a depth-to-diameter ratio, d/D
+of 0.14. Larger craters are more complex with flat floors and lower d/D ratio, wall terraces,
+central peaks and solidified impact melts within the crater. Still larger craters exceeding 300 km
+diameter exhibit concentric rings. More interestingly, skylights are partially collapsed cave
+ceilings forming cave entrances to subsurface lava tubes. Lava tubes are formed through flowing
+volcanic lava forming a crust as it cools through which hotter lava at the centre flows through
+and vacates its central core. Skylights have been identified on Mars in which cold trapping
+microclimates should have led to the accumulation of water ice (Cushing 2012). Similar
+skylights have been identified on the Moon. There are three well-studied lunar skylights at Mare
+Igenii, Mare Tranquillitatis and Marius Hills respectively with diameters ~50-100 m and depths
+~40-100 m. It is possible that they, as cold traps, are repositories of water ice. Lava tubes also
+provide tunnel access to the subsurface. On the ground beneath the skylight, the terrain is likely
+to be rugged, littered with rubble from the collapsed ceiling. Lower gravity should yield
+significantly wider diameter lava tubes than on Earth suggesting that traverse through lava tubes
+can be ~several km. Kapvik is capable of abseiling down crater cliffs using tethers similar to
+cliffbot but while cliffbot adopted coordinated coordination with two anchorbots, Kapvik’s
+wheels were freewheeling during tether-controlled descent and ascent (Mumm et al 2004;
+
+© ASCE
+Earth and Space 2022
+
+209
+
+Earth and Space 2022
+
+Huntsberger et al 2007) (Fig 1a). Kapvik can be winched into a skylight from an anchored cable
+but there would not be the stability of an inclined cliff. Power and data can be transmitted from
+the surface through the tether terminating in a charging station.
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+ROVER TERRAMECHANICS
+Strip mining is based on rectilinear parallel strips in order to allow long conveyors to be used.
+This is not an efficient approach. A more efficient coverage strategy would be a spiral originating
+from the original position as the central base (Schmitt et al 1992). This affords an efficient areal
+coverage with minimum energy consumption. It does require a more complex navigation
+strategy than rectilinear coverage. There are various mobility systems that may be suited to the
+lunar terrain. One of the more sophisticated mobility concepts is the All-Terrain Hex-Limbed
+Extraterrestrial Explorer (ATHLETE) which employs six degree-of-freedom legs terminating in
+elastic wheels (tweels) (Heverly & Matthews 2008). For Kapvik, we adopted the six-wheeled
+rocker bogie system as a modular reference chassis for its flight heritage including Yutu-2
+(Setterfield et al 2014) (Fig 1b). However, Kapvik was designed to accommodate different
+chassis modules and one such module is the elastic loop mobility system, a tracked chassis that
+offers high traction capability for challenging terrains (Ellery 2003) (Fig 1c).
+
+Fig 1. (a) Kapvik abseiling a steep incline; (b) Kapvik with its rocker-bogie wheeled chassis
+undergoing trials at the CSA Mars Yard; (c) Kapvik with an elastic mobility system chassis
+for enhanced traction
+Drawbar pull is given by DP = H-R where H=soil thrust related to the Mohr-Coulomb
+equation for soil traction 𝜏 = 𝑐 + 𝜎𝑡𝑎𝑛𝜙, R=soil resistance dominated by compaction resistance
+due to wheel sinkage, c=soil cohesion, φ=soil friction angle, σ=soil stress (Ellery 2005). Sinkage
+z is given by 𝑧 = (𝜎⁄𝑘)1/𝑛 where k=pressure-sinkage coefficient, n=soil exponent. Sinkage may
+be estimated from wheel pressure p which determined from wheel loads measured by load cells
+above each wheel station of the rocker-bogie chassis – wheel load measurements are unique to
+Kapvik. From these measurements, a trained neural net model yields soil cohesion and friction
+angle estimates (Cross et al 2013) (Fig 2). Soil cohesion and friction measurement constitutes a
+type of tactile sensing of the soil.
+Such continuous geotechnic measurements will be invaluable for siting lunar bases (Ellery
+2021). In addition, drawbar pull of the rover may be estimated from the load measurements and
+traverse velocity to monitor rover traverse performance (Setterfield & Ellery 2013).
+
+© ASCE
+Earth and Space 2022
+
+210
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+Fig 2. Traverse of sandy-loam terrain at Petrie Island near Ottawa (a) wheel load
+measurements; (b) estimated soil cohesion; (c) estimated soil friction angle
+Planetary mining will require a mobile rover that digs, loads and hauls regolith or several
+rovers that are dedicate to digging/loading and hauling respectively. Digging regolith with an
+articulated arm-mounted backhoe is adequate for shallow depths but beyond 3m, a ripper blade
+will be required to loosen the compacted regolith. One approach to in-situ resource acquisition
+is random scooping of in-situ regolith. Another example of a random strategy would be a rotating
+bucket excavator used by the rover to scoop regolith onto an enclosed conveyor belt or hopper
+whilst traversing the terrain. A more focussed approach involves surveying to find specific insitu resources. For example, a search for ilmenite deposits will require magnetometer surveys
+(Hay et al 2018) (Fig 3).
+
+Fig 3. (a) Kapvik microver equipped with boom-mounted magnetometer instrument; (b)
+scanned ground magnetic survey at the Carleton University campus
+Kapvik is configured with a soil scoop mounted at the end of a four degree-of-freedom
+manipulator similar to a JCB for acquiring regolith (Fig 4).
+
+Fig 4. Kapvik using its scoop to acquire regolith deposited into sample canisters
+
+© ASCE
+Earth and Space 2022
+
+211
+
+Earth and Space 2022
+
+More sophisticated regolith acquisition strategies may be explored by modelling frontloading excavation. For a soil-mover, the Mohr-Coulomb relation for computing the failure force
+due active (behind tool) and passive (in front of tool) earth pressure differences for digging is
+given by Reece earth-moving equation (Singh 1995):
+F
+
+FP
+
+FA
+
+1
+2
+
+H 2 (K P
+
+KA)
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+where KP,A=passive/active force coefficients, =ρg=specific density of soil, H=tool cut depth,
+,
+,
+
+=tool rake angle from horizontal, =angle of soil surface, =soil friction angle, =soil-tool
+friction angle. Using Kapvik tool parameters and average lunar soil parameters (Table 1), the
+maximum tool digging force is given by Kapvik’s lunar weight imposing a maximum tool cut
+depth of 17 cm.
+Table 1. Digging parameters
+Parameter
+Soil density
+Soil cohesion
+Soil friction angle
+Tool width
+Tool cut height
+Tool rake angle of approach
+Soil shear plane angle
+Soil-blade friction angle
+
+Symbol
+ρ
+c
+φ
+b
+H
+α
+β
+δ
+
+Value
+1520 kg/m3
+170 Pa
+35o
+0.20 m
+80o
+45+φ/2
+φ/3
+
+ROVER VISION
+Any autonomous rover navigation system requires a vision system (DeSouza & Kak 2002).
+Kapvik is configured with a Point Grey Bumblebee colour stereo camera mounted onto a pan/tilt
+unit at the elbow of the four degree of freedom manipulator. Hence, the rover manipulator serves
+two functions – for directing a soil scoop and as the camera mast. This mounting provides an
+elevated panoramic camera field of view for autonomous navigation and with line of sight to the
+scoop during soil acquisition. In stereovision, the correspondence problem between the binocular
+images dominates the computational load through computation of sum-of-absolute-differences,
+sum-of-squared-differences or normalised-cross-correlation similarity (Tippets et al 2016).
+LIDAR range mapping offers a more reliable approach to 3D mapping and Kapvik employs a
+LIDAR scanner.
+The Harris corner detector is not especially suited to extraterrestrial application until
+artificial structures with corners are constructed. However, feature-based descriptors search
+for specific features in images. Interest points may be selected by a difference of Gaussian to
+define salience which are matched with landmark estimates using feature descriptors. Speededup robust features (SURF) descriptors offer faster performance than scale-invariant feature
+transform (SIFT) descriptors. These keypoints represent blobs or corners in images rather than
+the Canny edge detector which uses Sobel filter masks. Binary robust independent elementary
+features (BRIEF) descriptors with reduced computational complexity permit previously visited sites to be recognised even if that site undergone minor changes (Churchill & Newman
+
+© ASCE
+Earth and Space 2022
+
+212
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+2013). Oriented BRIEF (ORB) is a variation on BRIEF. Random sample consensus
+(RANSAC) selects points randomly to estimate parameters of the plane and fits geometries to
+compute candidate rover poses with good outlier rejection (Lynen et al 2015). Iterative closest
+point (ICP) is used iteratively to match closest points of a point cloud over time from which
+target shapes can be extracted by fitting plane and shape primitives where Hough transforms
+are too computationally expensive. However, bundle adjustment (BA) derived from the
+maximum a posteriori (MAP) approach (as a form of abductive reasoning) for feature
+initialisation yields more accuracy than ICP. Object recognition and scene interpretation
+require further symbolic classification and labelling of objects and their relationships.
+Vision is the basis for opportunistic scientific target selection and preliminary scientific
+analysis. Indeed, opportunistic science targets may be flexibly integrated into a rover traverse
+plan if the novelty of their visual features exceeds a threshold (Gallant et al 2013). To
+opportunistically search for scientific targets while traversing, the mast-mounted camera can
+pan-tilt similar to human active vision. There are two options: (i) optokinetic reflex is based on
+optic flow estimation of target motion via motion parallax information similar to visual odometry
+in hostile terrains; (ii) vestibular-ocular reflex is based on gyroscopic feedback measurements of
+head movement to control head movements. Rather than using camera-mounted gyroscopic
+feedback for pan-tilt control, pan-tilt motor displacement measurement feedback is augmented
+by mast-manipulator dynamic feedforward control (emulating cerebellar neural function) (Ross
+& Ellery 2017). Simulated on a Barratt arm, feedforward-augmented feedback control offers
+superior performance over feedback only control (Fig 5).
+
+Fig 5. Error excursion for 3 degree-of-freedom camera mast in tracking a moving object
+(a) feedback only; (b) feedforward-augmented feedback
+This provides the ability to search for and track moving targets during rover traverse. Such
+active stereovision incorporates visual “searchlight” of attention, gaze control and binocular
+vergence of the eyes to provide SIFT (salient) keypoints for object recognition (AragonCamarasa et al 2010).
+Most space-rated processors have limited capabilities, e.g. ERC32, RAD series (such as the
+200 MHz RAD750 on Curiosity) and LEON series processors. Although the real-time VxWorks
+operating system was used on the Mars rovers, we excluded it for Kapvik and adopted Linux
+with the Linux-compatible Player/Stage, the open-source predecessor to the robot operating
+system (ROS). We opted for FPGA-based Xiphos Q5 platforms for autonomous navigation
+algorithms with a commercial CAN bus protocols for its spaceflight heritage on Surrey satellites
+because SpaceWire was still under development at the time.
+
+© ASCE
+Earth and Space 2022
+
+213
+
+Earth and Space 2022
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+SELF-LOCALISATION & MAPPING
+An autonomous mining rover must negotiate significant obstacles (including terrain costs)
+and navigate within highly confined passageways. An occupancy grid map of cells, each labelled
+with a probabilistic Bayesian classification. Rather than dense grid-based maps, sparse samplebased maps representing maximum likelihood of the data points are an alternative (Meyer-Delius
+& Burgard 2010) but the former is well-established. A compromise might be to switch between
+dense occupancy and sparse feature-based map representations depending on the current
+observations (Wurm & et al 2010). Simultaneous localisation and mapping (SLAM) is the
+process of a rover locating itself within an environment represented in map form (Cadena et al
+2016). Most approaches estimate rover pose with respect to a map of landmarks as the rover
+traverses. Feature locations in the environment are measured relative to the rover pose from
+which rover motion is estimated. Bayes theorem computes a posterior distribution:
+𝑝(𝑧|𝑥)𝑝(𝑥)
+𝑝(𝑥|𝑧) = 𝑝(𝑧)
+where p(x) is the prior (predicted) model, p(z|x) is the likelihood
+(observation/measurement) model and p(z) is empirical evidence. Bayesian inference through
+Bayes rule combines multiple sources of sensor data in a principled manner. Beliefs represent
+uncertainty as conditional probabilities. The Bayes filter estimates a system’s probabilistic state
+(belief) representing uncertainty from noisy observations on the assumption of a Markovian
+process (Fox et al 2003). The Kalman filter is the commonest type of Bayes filter as the solution
+to the Ricatti equation. The Kalman filter comprises a noisy predictive model, a noisy
+measurement model, an estimation of error covariances of both and a weighting mechanism
+(Kalman gain) that balances confidence in the model with that in the measurements. The Kalman
+filter may be employed for sensor fusion of odometry and external reference measurements
+(Marin et al 2013). State estimation involves estimating posterior probability p(x t+1|zt,ut) of the
+rover pose subject to internal and environmental measurements through least square error
+minimisation methods such as Kalman and particle filters comprising a theoretical predictive
+Markovian model p(xt+1|xt,ut) and an observation model p(z t|xt,mt), the back end and front end
+of SLAM respectively. A common approach is the use of the unscented Kalman filter to estimate
+the rover pose using odometry and external references to construct a digital occupancy grid map.
+The extended Kalman filter linearises a nonlinear model through a Taylor series expansion.
+Whereas the extended Kalman filter assumes Gaussian probability distributions fully described
+by mean and variance, e.g. (Lemaire et al 2007), the unscented Kalman filter samples
+nonlinearity with a set of sigma points. The Kalman filter is a special type of Bayesian navigation
+estimation (of posterior p(x i+1|xi, ui)) method describing predictive models and measurements
+(likelihood p(z|x))) as probability density functions which includes particle filters (DurrantWhyte 2001; Thrun 2002). Particle filters are sequential Monte Carlo methods that build a
+posterior probability based on a large number of random samples which are modified through
+model prediction and measurement update steps. Rao-Blackwellised particle filters for SLAM
+use particles as samples representing multiple rover trajectories and maps, p(x 1:t, mj|z1:t, u1:t-1)
+for large environments, e.g. (Sim et al 2007). Trajectory and landmark distribution may be
+modelled as a dynamic Bayesian network with the Markovian assumption to yield a posteriori
+estimates. Dynamic Bayesian networks are directed graphical models in each node is a random
+variable and each directed edge represents the conditional dependence between nodes. Similarly,
+a graphical approach to SLAM involves a graph of nodes corresponding to rover poses and
+landmarks over time with edges representing spatial constraints imposed by observations such
+as odometry (Grisetti et al 2010). GraphSLAM is a sparse view-based representation that
+
+© ASCE
+Earth and Space 2022
+
+214
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+computes a maximum a posteriori (MAP) estimate of rover poses that minimises the negative
+log likelihood of all observations. A neural network can implement similar algorithms (Axenie
+& Conradt 2015). The SLAM graph represents a Gaussian Markov field that models the belief
+in the robot’s pose. A directed Bayes tree equivalent to the square root information matrix is
+another graphical approach to SLAM (Kaess et al 2012). If there is no prior, MAP reduces to
+maximum likelihood estimation. However, incorporation of structured prior domain knowledge
+(such as that all objects are located on a common ground plane) into an object-based 3D SLAM
+process yields accurate predictions (Salas-Moreno et al 2013).
+Data association (correspondence problem) is the matching current measurements with
+previous measurements in SLAM involving high computational complexity of computing the
+maximum likelihood of the fully correlated covariance matrix. The mean is required to compute
+the model Jacobian matrix while the covariance is required for generating data association
+hypotheses. The information matrix is the inverse of the covariance matrix with a sparse
+representation of correlations to reduce computational growth with the number of features of the
+map (Ila et al 2010). A 3D LIDAR scan on Kapvik was employed to generate noisy 3D point
+clouds in a discretised grid map, cells of which are classified in terms of traversibility (Hewitt
+et al 2018). A neural network classifier trained by an extended Kalman filter performed the
+terrain classification given by 𝑤𝑡+1 = 𝑤𝑡 + 𝐾𝑡 (𝑦𝑡𝑑 − ℎ(𝑥𝑡 )) where 𝐾𝑡 = 𝑃𝑡 𝐻𝑡 (1⁄𝜂 +
+𝐻𝑡𝑇 𝑃𝑡 𝐻𝑡 )−1=Kalman gain and 𝜂 = (𝐻𝑡 𝑃𝑡 𝐻𝑡𝑇 + 𝑅𝑡 )−1 𝑃𝑡 =learning parameter. The Kalman filter
+exploits much more information than the backpropagation algorithm (Fig 6).
+
+Fig 6. CSA Mars Yard map (a) photograph; (b) binary classification; (c) graded
+classification
+In ISRU activities, rovers will explore new regions for the acquisition of resources but will
+return those resources to a base location from where it can be stored and/or utilised. Loop closure
+
+© ASCE
+Earth and Space 2022
+
+215
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+(place recognition) involves determination that the rover has returned to a previously mapped
+location based on sensory observations of distinctive signatures (Leong & Newman 2006). Loop
+closure provides a means to reset any accumulated localisation errors implementing a balance
+between visiting new places (exploration) and prior-known places (exploitation). Place
+recognition is central to RatSLAM which generates topological maps of nodes as a continuous
+attractor network representing rover poses (Milford et al 2004; Lowry et al 2016). The
+hippocampus is a cognitive map for navigating both physical and social space (Eichenbaum
+2015). Nodes are added if a new place is encountered or a previously-encountered place that has
+undergone major changes that render it unrecognisable. Visual homing is the process of
+computing the distance (sum of squared differences) between the snapshot image captured at the
+current pose of the rover and a snapshot image captured at the home target site (Szenher 2005).
+Compression of images into a 2D Haar wavelet transform signature may be used to quantify
+global similarity between images (enabling loop closure) facilitating SLAM on rovers with low
+computational resources (Pretto et al 2010). Place recognition is crucial in multi-rover
+environments.
+PATH PLANNING
+Path planning as a predictive search for a temporal sequence of actions is a deliberative
+process (Ingrand & Ghallab 2017). The robot path planning problem may be defined as the robot
+traversing the environment from an initial pose to a final desired pose without interacting with
+intervening obstacles. The Piano Mover’s Problem is the identical problem of moving furniture
+with a complex shape through a cluttered house of doorways, corridors and staircases. We can
+exhaustively test a series of every possible rigid-body transformations (translations and
+rotations) on the robot from the initial to final poses – this is the configuration (C-) space
+representation of pose configurations forming a Lie group through which a continuous freespace
+around obstacles must be defined (LaValle 2011). Although computationally NP-hard, certain
+assumptions (such as no rotations and shrinking the robot pose to a point) can reduce this
+substantially. In such cases, the A* graph search algorithm can find a path through the C-space
+of rover poses (Thrun et al 2004). A more efficient approach with dynamic replanning
+capabilities by storing backpointers are variations of the D* algorithm that find optimal paths in
+weighted occupancy grid maps (Dakulovic & Petrovic 2011). However, for navigating dynamic
+environments, D* is inefficient in requiring extensive re-computations.
+There is no doubt that integration of deliberative planning with reactive execution is highly
+desirable (Joyeux et al 2010). One way to achieve this is through the use of potential fields. An
+attractive potential is emplaced at the goal site while repulsive potentials are emplaced at each
+obstacle. The gradient of the sum of attractive and repulsive forces forces the rover to follow the
+potential minimum path to the goal while avoiding obstacles. Occupancy maps may be enhanced
+with virtual force fields in which each cell imposes potential forces (a sum of attractive forces
+for goals and repulsive forces for obstacles) on the rover. For example, place cells of a cognitive
+map may be used to generate a gradient (vector field) to a goal generated by 2D Gaussians over
+x and y coordinates (Fibla et 2010). A variation on the potential field is the fluid dynamics model
+in which the stream function is a gradient to the flow velocity field as a solution to the Laplace
+equation (Keymeulen & Decuyper 1994). The nonlinear viscoeleastic potential field may have a
+modular form to represent limb forces generated by muscle groups, the vectorial superposition
+of which actuate limbs (Mussa-Ivaldi 1997). We initially adopted the Fajen-Warren polar
+
+© ASCE
+Earth and Space 2022
+
+216
+
+Earth and Space 2022
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+potential field (Hunang et al 2006) to examine path navigation through Mars rock distribution
+models as stringent highly rocky extraterrestrial environments (Golombek & Rapp 1997) (Fig
+7). This particular potential field failed to find paths through the more extremely cluttered
+environments, namely the Mars Pathfinder landing site rock distribution (Mack & Ellery 2010)
+(Fig 7) but this is unrepresentative of the Moon.
+
+Fig 7. Polar potential field generated paths through rock distributions at (a) Viking Lander
+1 site; (b) Viking Lander 2 site; (c) Mars Pathfinder Lander site; (d) Mars Exploration
+Rover A landing site
+ARTIFICIAL INTELLIGENCE AUGMENTATION
+A semantic map incorporates semantic information about the environment into geometric
+and/or topological maps, effectively grounding it through sensorimotor interactions (Nuchter &
+Hertzberg 2008). Semantic information is richer than simple goal (attractor)-obstacle (repellor)
+classification in SLAM/path planning. Semantic information may be visual features that classify
+objects and their relationships as the basis of concepts (D’Este & Sammut 2008). Bayesian
+network classifiers can incorporate probabilistic semantic information into geometric or
+topological maps (Vasudevan & Siegwart 2008). Situation calculus is a logic for reasoning about
+the consequences (events) of actions. Dezert-Smarandache theory of plausible and paradoxical
+reasoning is a generalisation of Dempster-Shafer theory of evidence for selecting target of
+maximum interest based on an interest map (Ceriotti et al 2012). Dempster-Shafer theory and its
+variants are considerably more complex to compute than Bayesian inferencing. Fuzzy logic
+inferencing represents imprecision through fuzzy if-then rules used for feature classification: “IF
+x1 is Ci1… AND xij is Cij THEN object is Ci” (Tan et al 2005). High-level semantic knowledge
+is essential to permit the rover to interact and plan in its environment in a goal-directed manner
+(Galindo et al 2008; Galindo & Saffiotti 2013). Nevertheless, it is essential that symbols are
+grounded through sensorimotor interaction. We have explored an autonomous science system
+
+© ASCE
+Earth and Space 2022
+
+217
+
+Earth and Space 2022
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+based on Gabor filter processing of images of rocks followed by Bayesian network classification
+encoding scientific knowledge (Sharif et al 2015; Tettenborn & Ellery 2018; Arora et al 2017).
+A Bayesian network is a directed acyclic graphical knowledge structure representing the causal
+relationship between the nodes as conditional probabilities in the form: 𝑝(𝑥1 , … , 𝑥𝑛 ) =
+∏𝑛𝑖=1 𝑝(𝑥𝑖 |𝑝𝑎(𝑥𝑖 )) where pa()=parental nodes. Large scale Bayesian network inferencing is NPhard. Hidden Markov models (HMM) are a type of Bayesian network for which the Baum-Welch
+algorithm computes a maximum likelihood estimation of the HMM parameters using forwardbackward computations.
+APPLICABILITY TO MULTI-ROVER SCENARIOS
+The use of multiple robots offers significant advantages over single robots – they offer higher
+speedup, improved performance, higher reliability, greater adaptability and robustness. For
+enhanced cooperation between multiple robots, homogeneous team members are most efficient
+over heterogeneous team members (Waibel et al 2009). Multi-agent systems may be organised
+in hierarchies, holarchies, coalitions or markets (Horling & Lessser 2005). The market economy
+is a common mode of information sharing and coordination in multirobot systems (Yan et al
+2013), e.g. sealed bid auctions for allocation of high-level tasks to different team members (Zlot
+et al 2002), Other paradigms are bio-inspired like “animat” approaches in which collective
+behaviour is an emergent property of interactions between individual agents such as social
+behaviour modelled by particle swarm optimisation (Doriya et al 2015). The methods used for
+single robots are directly applicable to multiple robots. Like for single rovers, multi-rover SLAM
+is based on Bayesian filters including Kalman filters, information filters, particle filters or neural
+networks with the additional requirement to exchange data between robots (Saeedi et al 2016).
+Kalman filter-based SLAM may be extended to multiple robots using occupancy grids explicitly
+communicated from multiple robots with covariances quantifying uncertainties (Zou & Tan
+2013). The key challenge for multi-robot SLAM is data association between local maps of
+multiple robots fused into a global map. Line features such as the Hough transform may be used
+to align multiple maps (Vidal-Calleja et al 2011). The RANSAC algorithm is a common
+approach to map matching without communicating large amounts of data inherent in map
+representations. The sequential Bayesian filter estimates the state of the environment while
+following the gradient of mutual information to maximise joint measurement information
+between robots (Julian et al 2012). Maximising mutual information is equivalent to minimising
+conditional entry, 𝐻(𝑥𝑖 |𝑧𝑖 ) = 𝐻(𝑥𝑖 ) − 𝐼(𝑥𝑖 , 𝑧𝑖 ) where I()=mutual information. Posterior
+estimation involves updating a weighted sample set through sequential importance resampling.
+A distributed expectation maximisation (EM) algorithm may be employed to generate a common
+reference frame with data association from error-prone measurements between multiple robots
+(Dong et al 2015). A greedy Bayesian approach can compute the probability of a specific rover
+moving to a specific neighbouring cell in its local map in the multi-robot area patrolling task
+(Portugal & Rocha 2013). Motor schema are potential field modules with specific reactive
+behaviours (move-to-goal – avoid-static-obstacle – avoid-robot - noise) that combine to form
+formation behaviours such as flocking in specific formation patterns (Balch & Arkin 1998): (i)
+obstacle avoidance to avoid crowding; (ii) gravitational cohesion to the centre of mass; (iii) goaldirected steering to average heading. The multi-robot implementation of behaviour control
+involves the addition of a single specialised avoid-robot module. Task-level behaviours may be
+added for fault tolerance – impatience behaviour (to complete tasks failed by others) and
+
+© ASCE
+Earth and Space 2022
+
+218
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+acquiescence behaviour (to surrender its own failed task) (Parker 1998). A hybrid deliberativereactive system comprises a reactive potential field system with deliberative waypointgenerating path planner (Gifford et al 2010). A set of modular behaviours (avoid-obstacle –
+attract-obstacle – avoid previous places – collision-response) generates a weighted composite
+behaviour. Waypoints are generated in a SLAM-generated occupancy grid-based map using a
+graph search algorithm. Mahalanobis, Manhattan or Euclidean distance quantifies the difference
+between individual robot maps. For example, weighted Euclidean distance is given by:
+𝑑 = √Δ𝑥 𝑇 𝑊 𝑇 𝑊Δ𝑥. Mean square error defines the Euclidean distance between an estimated
+and the true parameter value:
+1 T
+MSE
+(( xi xˆi ) 2 ( yi yˆi ) 2 ) 2
+i 1
+T
+Least squares algorithm is central to parameter estimation without prior information or
+measurement noise. Where the distance is minimum, multiple maps may be merged through
+averaging. In its recursive form, it may also incorporate a forgetting factor to weight data over
+time. Maximum likelihood may be used for parameter estimation if measurement noise is known.
+CONCLUSIONS
+Commercial Lunar Payload Services (CLPS) landers are expected to provide scheduled lunar
+landers to the Moon’s surface. In 2023, Astrobotic’s Griffin lander is scheduled to deliver
+NASA’s VIPER (Volatiles Investigating Polar Exploration Rover) carrying a mass spectrometer,
+neutron detector and near-infrared spectrometer for in-situ mapping of lunar water. Rovers will
+be required for ISRU prospecting and such rovers may be adapted to mining operations. We
+believe that microrover platforms such as Kapvik demonstrate that large rovers are unnecessary
+and inefficient. Microrovers have similar range and though their payload capacity is diminished,
+a multi-microrover approach eliminates this problem while introducing the prospect of
+distributed parallel exploration.
+REFERENCES
+Aragon-Camarasa G, Fattah H, Siebert P (2010) “Towards a unified visual framework in a
+binocular active robot vision system” Robotics & Autonomous Systems 58, 276-286
+Arora A, Fitch R, Sukkarieh S (2017) “Approach to autonomous science by modelling
+geological knowledge in a Bayesian framework” Proc IEEE/RSJ Int Conf Intelligent
+Robots & Systems, Vancouver, Canada
+Axenie C, Conradt J (2015) “Cortically inspired sensor fusion network for mobile rob ot
+egomotion estimation” Robotics & Automation 71, 69-82
+Baiden G, Grenier L, Blair B (2010) “Lunar underground mining and construction: a
+terrestrial vision enabling space exploration and commerce” Proc 4th AIAA Aerospace
+Sciences Meeting Including the New Horizons Forum & Aerospace Exposition, Orlando,
+FL
+Balch T, Arkin R (1998) “Behaviour-based formation control for multirobot teams” IEEE
+Trans Robotics & Automation 14 (6), 926-939
+Bland P, Artemieva N, Collins G, Bottke W, Bussey D, Joy K (2008) “Asteroids on the
+Moon: projectile survival during low velocity impacts” 39th Lunar & Planetary Science
+Conf, abstract no 2045
+
+© ASCE
+Earth and Space 2022
+
+219
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+Cadena C, Carlone L, Carrillo H, Latf Y, Scaramuzza D, Neira J, Reid I, Leonard J (2016)
+“Past, present and future of simultaneous localization and mapping: toward the robustperception age” IEEE Trans Robotics 32 (6), 1309-1332
+Ceriotti M, Vasile M, Giardini G, Massari M (2012) “Approach to model interest for a
+planetary rover through Dezert-Smarandache theory” J Aerospace Computing
+Information & Communication 5 (2), 1.37440
+Churchill W, Newman P (2013) “Experience-based navigation for long-term localisation” Int
+J Robotics Research 32 (14), 1645-1661
+Collins G (2012) “Moonstruck magnetism” Science 335, 1176-1177
+Cross M, Ellery A, Qadi A (2013) “Estimating terrain parameters for a rigid wheeled rover
+using neural networks” J Terramechanics 50 (3), 165-174
+Cushing G (2012) “Candidate cave entrances on Mars” J Cave & Karst Studies 74 (1), 33-47
+D’Este C, Sammut C (2008) “Learning and generalizing semantic knowledge from object
+scenes” Robotics & Autonomous Systems 56, 891-900
+Dakulovic M, Petrovic I (2011) “Two-way D* algorithm for path planning and replanning”
+Robotics & Autonomous Systems 59, 328-342
+DeSouza G, Kak A (2002) “Vision for mobile robot navigation: a survey” IEEE Trans
+Pattern Analysis & Machine Intelligence 24 (2), 237-267
+Dong J, Nelson E, Indelman V, Michael N, Dellaert F (2015) “Distributed real -time
+cooperative localization and mapping using an uncertainty-aware expectation
+maximization approach” Proc IEEE Int Conf Robotics & Automation, 5807-5814
+Doriya R, Mishra S, Gupta S (2015) “Brief survey and analysis of multi-robot
+communication and coordination” Proc Int Conf Computing Communication &
+Automation, 1014-1021
+Durrant-Whyte H (2001) “Critical review of the state-of-the-art in autonomous land vehicle
+systems and technology” Sandia National Laboratories Report SAND2001-3685,
+Albuquerque
+Eichenbaum H (2015) “Hippocampus as a cognitive map…of social space” Neuron 87, 9-11
+Ellery A (2003) “Elastic loop mobility system (ELMS) study for Mars microrovers” Final
+Technical Report (ESA-Contract Number 16221/02/NL/MV), ESTEC Noordwijk, The
+Netherlands
+Ellery A (2005) “Robot-environment interaction - the basis for mobility in planetary microrovers” Robotics & Autonomous Systems 51, 29-39
+Ellery A (2020) “Sustainable in-situ resource utilisation on the Moon” Planetary & Space
+Science 184, 104870
+Ellery A (2021) “Leveraging in-situ resources for lunar base construction” in press with
+Canadian J Civil Engineering
+Fibla S, Bernadet U, Verschure P (2010) “Allostatic control for robot behaviour regulation:
+an extension to path planning” Proc IEEE/RSJ Int Conf Intelligent Robots & Systems,
+1935-1942
+Fox D, Hightower J, Liao L, Schulz D, Borriello G (2003) “Bayesian filtering for location
+estimation” Pervasive Computing (Jul/Sep), 24-33
+Galindo C, Fernandez-Madrigal J-A, Gonzalez J, Saffiotti A (2008) “Robot task planning
+using semantic maps” Robotics & Autonomous Systems 56, 955-966
+Galindo C, Saffiotti A (2013) “Inferring robot goals from violations of semantic knowledge”
+Robotics & Autonomous Systems 61, 1131-1143
+
+© ASCE
+Earth and Space 2022
+
+220
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+Gallant M, Ellery A, Marshall J (2013) “Rover-based autonomous science by probabilistic
+identification and evaluation“ J Intelligent & Robotic Systems 72 (3), 591-613
+Gifford C, Webb R, Bley J, Leung D, Calnon M, Makarewicz J, Banz B, Agah A (2010)
+“Novel low-cost, limited-resource approach to autonomous multi-robot exploration and
+mapping” Robotics & Autonomous Systems 58, 186-202
+Golombek M, Rapp D (1997) “Size-frequency distributions of rocks on Mars and Earth
+analogue sites: implications for future landed missions” J Geophysical Research 102
+(E2), 4117-4129
+Grisetti G, Kummerle R, Stachniss C, Burgard W (2010) “Tutorial on graph-based SLAM”
+IEEE Intelligent Transportation Systems Magazine (Winter), 31-43
+Hamrin H (2001) “Underground mining methods and applications” in Underground Mining
+Methods: Engineering Fundamentals & International Case Studies (ed. Hustrulid W,
+Bullock E) Society of Mining Metallurgy & Exploration Inc, 3-14
+Hay A, Samson C, Ellery A (2018) “Robotic magnetic mapping with the Kapvik planetary
+micro-rover” Int J Astrobiology 1-10. doi:10.1017/S1473550417000209
+Heverly M, Matthews J (2008) “Wheel-on-limb rover for lunar operations” Proc 9th Int Symp
+Artificial Intelligence Robotics & Automation for Space, Hollywood, USA
+Hewitt R, Ellery A, de Ruiter A (2018) “Training a terrain traversibility classifier for a
+planetary rover through simulation” Int J Advanced Robotic Systems (Sep/Oct), 1-14
+Horling B, Lesser V (2005) Survey of multi-agent organizational paradigms” Knowledge
+Engineering Review 19 (4), 281-316
+Huang W, Fajen B, Fink J, Warren W (2006) “Visual navigation and obstacle avoidance
+using a steering potential function” Robotics & Autonomous Systems 54 (4), 288-299
+Huntsberger T, Stroupe A, Aghazarian H, Garrett M, Younse P, Powell M (2007) “TRESSA:
+teamed robots for exploration and sciebce on steep areas” J Field Robotics 24 (11), 10151031
+Ila V, Porta J, Andrade-Cetto J (2010) “Information-based compact pose SLAM” IEEE Trans
+Robotics 26 (1), 78-93
+Ingrand F, Ghallab M (2017) “Deliberation for autonomous robots: a survey” Artificial
+Intelligence 247, 10-44
+Joyeux S, Kirschner F, Lacroix S (2010) “Managing plans: integrating deliberation and
+reactive execution schemes” Robotics & Autonomous Systems 58, 1057-1066
+Julian B, Angermann M, Schwager M, Rus D (2012) “Distributed robotic sensor networks:
+an information-theoretic approach” Int J Robotics Research 31 (10), 1134-1154
+Kaess M, Johannsson H, Roberts R, Ila V, Leonard J, Dellaert F (2012) “iSAM2: incremental
+smoothing and mapping using the Bayes tree” Int J Robotics Research 31 (2), 216-235
+Keymeulen D, Decuyper J (1994) “Fluid dynamics applied to mobile robot motion: the
+stream field method” Proc IEEE Int Conf Robotics & Automation, 378-385
+LaValle S (2011) “Motion planning: the essentials” IEEE Robotics & Automation Magazine
+18 (1), 79-89
+Lemaire T, Berger C, Jung I-K, Lacroix S (2007) “Vision-based SLAM: stereo and
+monocular approaches” Int J Computer Vision 74 (3), 343-364
+Leong K, Newman P (2006) “Loop closure detection in SLAM by combining visual and
+spatial appearance” Robotics & Autonomous Systems 54, 740-749
+Lowry S, Sunderhauf N, Newman P, Leonard J, Cox D, Corke P, Milford M (2016) “Visual
+place recognition: a survey” IEEE Trans Robotics 32 (1), 1-19
+
+© ASCE
+Earth and Space 2022
+
+221
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+Lynen S, Sattler T, Bosse M, Hesch J, Pollefeys M, Siegwart R (2015) “Get out of my lab:
+large-scale, real-time visual-inertial localization” Proc Robotics: Science & Systems,
+Rome, Italy
+Mack A, Ellery A (2010) “The potential steering function and its application to planetary
+exploration rovers“ Proc 15th CASI Conf ASTRO, Toronto
+Marin L, Valls M, Soriano A, Valera A, Albertos P (2013) “Multisensor fusion framework
+for indoor-outdoor localization of limited resource mobile robots” Sensors 13, 1413314160
+Meyer-Delius D, Burgard W (2010) “Maximum-likelihood sample-based maps for mobile
+robots” Robotics & Autonomous Systems 58, 133-139
+Milford M, Wyeth G, Prasser D (2004) “RatSLAM: a hippocampal model for simultaneous
+localization and mapping” Proc IEEE Int Conf Robotics & Automation 1, 403-408
+Mumm E, Farritor S, Pijanian P, Leger C, Schenker P (2004) “Planetary cliff descent using
+cooperative robots” Autonomous Robots 16, 259-272
+Mussa-Ivaldi F (1997) “Nonlinear force fields: a distributed system of control primitiv es for
+representing and learning movements” Proc IEEE Int Symp Computational Intelligence
+in Robotics & Automation: Towards New Computational Principles for Robotics &
+Automation, Monterey, CA
+Nuchter A, Hertzberg J (2008) “Towards semantic maps for mobile robots” Robotics &
+Autonomous Systems 56, 915-926
+Parker L (1998) “ALLIANCE: an architecture for fault tolerant multirobot cooperation”
+IEEE Trans Robotics & Automation 14 (2), 230-240
+Portugal D, Rocha R (2013) “Distributed multi-robot patrol: a scalable and fault-tolerant
+framework” Robotics & Autonomous Systems 61, 1572-1587
+Pretto A, Menegatti E, Jiytsukawa Y, Ueda R, Arai T (2010) “Image similarity based on
+Discrete Wavelet Transform for robots with low computational resources” Robotics &
+Autonomous Systems 58, 879-888
+Ross J & Ellery A (2017) "Panoramic camera tracking on planetary rovers using feedforward
+control" Int J Advanced Robotic Systems (May/Jun), 1-9
+Saeedi S, Trentini M, Seto M, Li H (2016) “Multiple robot simultaneous localization and
+mapping: a review” J Field Robotics 33 (1), 3-46
+Salas-Moreno R, Newcombe R, Strasdat H, Kelly P, Davidson A (2013) “SLAM++:
+simultaneous localization and mapping at the level of objects” Proc IEEE Conf Computer
+Vision & Pattern Recognition, 1352-1359
+Schmitt H, Kulcinski G, Sviatoslavsky I, Carrier W (1992) “Spiral mining for lunar
+volatiles” Proc 3rd Int Conf Engineering, Construction & Operations in Space, Denver,
+Co
+Setterfield T, Ellery A (2013) “Terrain response estimation using an instrumented rockerbogie mobility system“ IEEE Trans Robotics 29 (1), 172-188
+Setterfield T, Ellery A, Frazier C (2014) “Mechanical design and testing of an instrumented
+rocker-bogie mobility system for the Kapvik micro-rover“ J British Interplanetary
+Society 67, 96-104
+Sharif H, Samson C & Ellery A (2015) "Autonomous rock classification using Bayesian image
+analysis for rover-based planetary exploration" Computers & Geosciences 83, 153-167
+Sim R, Elinas P, Little J (2007) “Study of the Rao-Blackwellised particle filter for efficient
+and accurate vision-based SLAM” Int J Computer Vision 74 (3), 303-318
+
+© ASCE
+Earth and Space 2022
+
+222
+
+Downloaded from ascelibrary.org by Alex Ellery on 01/24/23. Copyright ASCE. For personal use only; all rights reserved.
+
+Earth and Space 2022
+
+Singh S (1995) “Learning to predict resistive forces during robotic excavation” IEEE Int
+Conf Robotics & Automation, 2102-2107
+Szenher M (2005) “Visual homing in natural environments” Proc Towards Autonomous
+Robotics, 221-228
+Tan K, Chen Y, Wang L, Liu D (2005) “Intelligent sensor fusion and learning for
+autonomous robot navigation” Applied Artificial Intelligence 19, 433-456
+Tettenborn A & Ellery A (2018) “Comparison of Gabor filters and wavelet transform
+methods for extraction of lithological features” Proc Int Symp Artificial Intelligence
+Robotics & Automation in Space, Madrid, Spain, paper no. P9
+Thrun S (2002) “Probabilistic robotics” Communications of ACM 45 (1), 51-57
+Thrun S, Thayer S, Whittaker W, Baker C, Burgard W, Ferguson D, Hahnel D, Montemerlo
+M, Morris A, Omohundro Z, Reverte C, Whittaker W (2004) “Autonomous exploration
+and mapping of abandoned mines” IEEE Robotics & Automation Magazine (Dec), 79-94
+Tippetts B, Lee J, Lillywhite K, Archibald J (2016) “Review of stereo vision algorithms and
+their suitability for resource-limited systems” J Real-Time Image Processing 11, 5-25
+Vasudevan S, Siegwart R (2008) “Bayesian space conceptualization and place classification
+for semantic maps in mobile robotics” Robotics & Autonomous Systems 56, 522-537
+Vidal-Calleja T, Berger C, Sola J, Lacroix S (2011) “Large scale multiple robot visual
+mapping with heterogeneous landmarks in semi-structured terrain” Robotics &
+Autonomous Systems 59, 654-674
+Waibel M, Keller L, Floreano D (2009) “Genetic team composition and level of selection in
+the evolution of cooperation” IEEE Trans Evolutionary Computation 13 (3), 648-660
+Wieczorek M, Weiss B, Steart S (2012) “Impactor origin for lunar magnetic anomalies”
+Science 335, 1212-1215
+Wurm K, Stachniss C, Grisetti G (2010) “Bridging the gap between feature and grid -based
+SLAM” Robotics & Autonomous Systems 58, 140-148
+Yan Z, Jouandeau N,, Chreif A (2013) “Survey and analysis of multi-robot coordination” Int
+J Advanced Robotic Systems 10, 399
+Zlot R, Stenyz A, Dias B, Thayer S (2002) “Multi-robot exploration controlled by a market
+economy” Proc IEEE Int Conf Robotics & Automation, 3016-3023
+Zou D, Tan P (2013) “CoSLAM: collaborative visual SLAM in dynamic environments”
+IEEE Trans Pattern Analysis & Machine Intelligence 35 (2), 354-366
+
+© ASCE
+Earth and Space 2022
+
+

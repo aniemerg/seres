@@ -1,0 +1,77 @@
+id: recipe_compound_applicator_v0
+target_item_id: compound_applicator
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: applicator_body_machined
+        qty: 0.25
+        unit: kg
+    est_time_hr: 1.0
+    notes: Machine cylindrical body for compound reservoir
+  - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: applicator_body_machined
+        qty: 0.25
+        unit: kg
+    outputs:
+      - item_id: applicator_body_with_threads
+        qty: 0.23
+        unit: kg
+    est_time_hr: 0.5
+    notes: Machine threads for plunger and nozzle attachment
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: applicator_plunger
+        qty: 0.08
+        unit: kg
+    est_time_hr: 0.5
+    notes: Machine plunger with threaded shaft
+  - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: applicator_nozzle
+        qty: 0.04
+        unit: kg
+    est_time_hr: 0.3
+    notes: Drill nozzle with precise orifice
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: applicator_body_with_threads
+        qty: 0.23
+        unit: kg
+      - item_id: applicator_plunger
+        qty: 0.08
+        unit: kg
+      - item_id: applicator_nozzle
+        qty: 0.04
+        unit: kg
+      - item_id: seal_o_ring_rubber
+        qty: 2.0
+        unit: each
+    outputs:
+      - item_id: compound_applicator
+        qty: 0.35
+        unit: kg
+    est_time_hr: 0.3
+    notes: Assemble plunger, nozzle, seals into body
+assumptions: |
+  Steel construction for durability.
+  Syringe-style design with threaded plunger for controlled dispensing.
+  O-rings provide sealing for different compound viscosities.
+  Interchangeable nozzles for different applications.
+notes: |
+  Manufacturing route for compound applicator tool.
+  Replaces import_v0 placeholder.
+  Suitable for grease, adhesive, sealant, thermal compound application.

@@ -1,0 +1,25 @@
+id: self_description_tape_system_v0
+kind: machine
+name: Self-description tape storage system v0
+mass: 100.0
+unit: kg
+bom: bom_self_description_tape_system_v0
+capabilities:
+  - data_storage
+  - self_description_storage
+material_class: composite
+notes: |
+  Physical storage system for von Neumann self-description.
+  Source: docs/paper_reviews/photolithoautotroph_missing_tech.md, von Neumann architecture
+  Purpose: Store complete blueprints and instructions for self-replication
+  Implementation options:
+    - Magnetic tape storage (proven technology)
+    - Punched tape (mechanical readability)
+    - Magnetic drum storage
+    - Core memory banks
+  Von Neumann requirement: Universal constructor must read self-description to replicate
+  Must store: All item specs, process definitions, machine designs, control programs
+  Capacity: ~10-100 MB estimated for complete factory description
+  Redundancy: Multiple copies for reliability
+  Read/write: Magnetic or mechanical read/write heads
+  Critical for: Self-replication capability, bootstrap from minimal seed

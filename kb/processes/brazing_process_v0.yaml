@@ -1,0 +1,47 @@
+id: brazing_process_v0
+kind: process
+name: Brazing process v0
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: base_metal_parts
+    qty: 1.0
+    unit: kg
+  - item_id: brazing_alloy_generic
+    qty: 0.05
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: brazed_assembly
+    qty: 1.05
+    unit: kg
+requires_ids:
+  - brazing_furnace_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: Heating to brazing temperature
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Heat-up, soak, cool-down
+notes: |
+  Brazing process for joining metals with filler alloy above 450°C.
+  Source: Referenced by cooling_water_jacket_v0 and other recipes
+  Principle: Capillary action draws molten filler between close-fitting parts
+  Temperature: 600-1200°C typical depending on alloy
+  Common alloys:
+    - Copper-phosphorus (self-fluxing for copper)
+    - Silver-copper-zinc (general purpose)
+    - Nickel-based (high temperature, corrosion resistant)
+  Advantages over welding: Lower temperature, joins dissimilar metals, less distortion
+  Applications: Heat exchangers, fittings, carbide tool tips, electronic assemblies
+  Atmosphere: Inert gas, vacuum, or with flux to prevent oxidation
+  Joint strength: Typically as strong as base metal
+  Critical for: Leak-tight joints, dissimilar metal joining, precision assemblies

@@ -1,0 +1,12 @@
+id: recipe_steel_stock_v0
+target_item_id: steel_stock
+variant_id: hot_roll_v0
+steps:
+  - process_id: iron_smelting_reduction_v0
+    notes: Reduce ilmenite/ore with carbon to produce pig iron feedstock.
+  - process_id: steel_refining_basic_v0
+    notes: Refine pig iron and cast billets/slabs for rolling.
+  - process_id: steel_stock_hot_rolling_v0
+    notes: Hot roll billets into bar/plate/rod stock and cut to length.
+assumptions: "Local steel route using carbothermal iron reduction, basic refining, and hot rolling; energy/time are best-guess placeholders."
+notes: "Replaces import placeholder for general steel stock feed used across machining and fabrication."

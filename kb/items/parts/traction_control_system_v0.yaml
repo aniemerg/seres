@@ -1,0 +1,23 @@
+id: traction_control_system_v0
+kind: part
+name: Rover traction control system v0
+mass: 5.0
+unit: kg
+material_class: composite
+notes: |
+  Traction control system for lunar rover wheel slip management.
+  Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0, rover autonomy
+  Purpose: Prevent wheel slip on loose regolith, optimize traction
+  Components:
+    - Wheel speed sensors (encoders on each wheel)
+    - Motor current sensors (detect high slip via current spikes)
+    - Control computer (implements traction control algorithm)
+    - Motor controllers (modulate individual wheel torque)
+  Algorithm: Detect slip, reduce torque to slipping wheel, redistribute to gripping wheels
+  Slip detection: Compare wheel speeds, detect deviation from expected speed
+  Response: Reduce motor torque, apply differential braking if available
+  Advantages: Prevents getting stuck, improves mobility on slopes, reduces energy waste
+  Applications: Rovers, construction vehicles, material transport
+  Lunar context: Critical for regolith terrain (loose, variable traction)
+  Implementation: Electronic control, no hydraulic systems (vacuum compatible)
+  Critical for: Rover mobility, mission success, energy efficiency

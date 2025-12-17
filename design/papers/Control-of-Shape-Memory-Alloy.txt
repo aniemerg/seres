@@ -1,0 +1,1267 @@
+Characterization, Modeling, and Control of Ni-Ti Shape Memory
+Alloy based on Electrical Resistance Feedback
+Brian Lynch∗, Xin-Xiang Jiang†, Alex Ellery‡, Fred Nitzsche§
+October 28, 2014
+
+1
+
+Abstract
+
+Introduction
+
+Shape memory alloy is a low-cost, light-weight, and
+easily integrated alternative to conventional actuators that use hydraulics, electric motors or solenoids
+[1]. Although the shape memory effect was first discovered in 1932 by Arne Ölander [2], it was subsequently found to be present in a near equiatomic NiTi alloy by researchers at the Naval Ordnance Laboratory – where it was appropriately named Nitinol
+[3]. The superior properties of Nitinol made it attractive from an engineering application perspective,
+and studies of its thermomechanical properties were
+then pursued. Since its first successful application as
+a coupling ring in the F-14 Tomcat [4], Nitinol has
+been the focus of much research and resulted in numerous applications within such fields as aerospace,
+biomechanical, and robotics engineering [5] [6] [7].
+Despite the fact that Nitinol is difficult to machine
+and process, its high strength, large actuation stroke,
+and durability make it a desirable choice for use as an
+actuator [8]. Furthermore, Nitinol has excellent fatigue properties and is also bio-compatible (making it
+ideal for in-vivo biomedical applications [9] [10] [11]).
+The material is typically used in wire form, which
+results in a number of benefits. It may be modeled
+as a one-dimensional problem; cooling is maximized
+due to the high ratio of surface area to volume; and
+∗ Robert M. Buchan Department of Mining, Queen’s Uniintegration within a mechanical system is easily accomplished [12] [13].
+versity
+† Transportation Safety Board of Canada
+The thermomechanical phenomenon that makes
+‡ Department of Mechanical & Aerospace Engineering, Carshape
+memory alloy unique is known as the shape
+leton University
+§ Department of Mechanical & Aerospace Engineering, Carmemory effect. This phenomenon is driven by transformations in the crystal microstructure of shape
+leton University
+The use of shape memory alloy (SMA) actuators
+has steadily increased within the fields of aerospace,
+robotics, and biomedical engineering due to their superior properties compared to other actuation systems. Position control of SMA actuators is difficult
+due to the highly non-linear behaviour but has been
+well studied using numerous approaches. Electrical
+resistance can be used to estimate strain in SMA actuator wire due to a strong correlation between the
+two parameters. Models that approximate this correlation have so far been limited to single applied
+load conditions, ignored hysteresis effects, apply only
+to the specific actuator used during testing, or subject to a combination of these drawbacks. This paper presents a stress-strain-resistance model that accounts for varying applied load, major and minor hysteresis effects, and is normalized in terms of actuator
+geometry. Results of simulation and a simple position control experiment are demonstrated, validating
+the performance of the model. Furthermore, a correlation between the model and an augmented version
+of the Liang & Rogers model is also presented.
+
+1
+
+memory alloy that depend upon the material’s temperature and applied mechanical stress, as well as its
+exact composition and manufacturing process. At
+lower temperatures, the material is composed primarily of martensite, while at higher temperatures,
+the material is composed primarly of austenite [14].
+The application of mechanical stress may also consequently result in the formation of martensite even at
+higher temperatures where austenite is predominant.
+Transformation between martensite and austenite
+causes twinning and de-twinning of the crystal structure elements, a process that allows apparent plastic
+deformation to be recovered through the application
+of heat or reduction in applied stress. This is unlike
+conventional metals that undergo permanent and irreversible plastic deformation due to the propagation
+of dislocations through slip.
+A third phase has also been observed in Nitinol
+named R-phase (referring to the rhombohedral configuration of the phase’s crystal structure). This
+phase precipitates intermediately during transformations between austenite and martensite. The presence of R-phase is dependent upon similar factors
+that define the other two phases, such as manufacturing processes, applied heat treatments, and alloy composition. Significant hysteresis behaviour observed in the stress, strain, temperature, and resistivity response of Nitinol is primarily due to the occurrence of R-phase.
+Position control of Nitinol actuators is a challenging task that continues to be the focus of much research. Many early actuators were open-loop systems that most often used on-off control. This type
+of control is sufficient for mechanisms that have two
+states, such as a valve with only open and closed positions. However, most applications require closed-loop
+control to handle unpredictable perturbations due to
+variable ambient conditions and external forces.
+Proportional-integral-derivative (PID) control has
+been used extensively for position control of Nitinol
+actuations, alone or as part of a larger algorithm. For
+example, Madill and Wang investigated PI control
+and demonstrated stability based on L2 criteria [15].
+Linear optimal and robust control laws have also been
+applied successfuly. Lee and Marvoidis implemented
+a linear-quadratic control law and extended Kalman
+
+filter based on the H2 algorithm [16]. Jayender also
+used a linear-quadratic controller based on the H∞
+algorithm and optimized using gain scheduling [17].
+Hysteresis effects have been successfully compensated using many types of model-based control laws.
+Although linear models have been used to improve
+the response of feedback control laws [18] [19], nonlinear models more accurately capture the actuator
+behaviour. The commonly used Liang & Rogers
+model has been applied within a backstepping feedback control law [20] and variable structure control
+[21]. The similar Brinson model has also been applied
+in combination with a PID control law [22]. Hysteresis effects have also been compensated through predictive control using a Duhem differential model [23]
+as well as forward and inverse fuzzy Preisach models
+[24]. Other techniques that have been studied include
+sliding mode control [25], time-delay compensation
+[26], and neural networks [27].
+The aforementioned control algorithms all depend
+upon position feedback using sensors such as encoders, strain gauges, and load cells. Integrating a
+position sensor into the actuation system results in a
+significant increase in mass, volume, and complexity
+(features otherwise considered favourable for shape
+memory alloy actuators). Although predictive modelling has been used to provide feed-forward control,
+it is difficult to achieve high precision without position feedback control.
+Fortunately, Nitinol exhibits a strong and repeatable correlation between actuator strain and electrical resistance. This correlation is primarily due to
+the well known relationship between length, L, crosssectional area, A, resistivity, ρ, and resistance, R,
+shown in equation 1. Resistivity itself also changes
+according to temperature as shown in equation 2.
+R=
+
+ρL
+A
+
+
+
+ρ = ρ0 1 + α (T − T0 )
+
+(1)
+(2)
+
+This relationship may then be applied to each
+phase of the material and combined using a simple
+linear mixture rule as shown in equation 3, where ξM
+and ξR are the fractions of martensite and R-phase
+2
+
+respectively and ρA , ρM , and ρR are the resistivities model and resistance feedback [36]. Similar apof each phase.
+proaches were also used by Shi [37] and Zhang and
+Lin [38].
+The effects of hysteresis in the strain-resistance
+ρ = ρA (1 − ξM − ξR ) + ρM ξM + ρR ξR
+(3)
+behaviour have been overcome using numerous apFurthermore, applied stress has an indirect im- proaches. Meier switched between separate linear
+pact due to the resulting strain and changes in phase functions for the strain-resistance correlation during
+transformation temperatures. The combination of heating and cooling [39]. Position control was then
+these various dependencies results in a relationship achieved using a PID law based on the resistance
+between strain and electrical resistance that is over- feedback model. Liu applied fourth-order polynoall non-linear and subject to hysteresis. The width mials within a Duhem differental model for predictof the hysteresis is also notably larger if R-phase is ing actuator strain, again controlled with a PID law
+present in the alloy.
+[40]. Artificial neural networks have also been invesThe correlation between strain and electrical re- tigated for modelling the hysteresis behaviour. Ma
+sistance can be exploited to give Nitinol actuators used a neural network to model the major hysteresis
+a self-sensing ability. Passive elements have been response and provide position estimation for a PD
+used to track structural deformations due to earth- control law [41]. Both major and minor hysteresis
+quakes [28], and have also been embedded in compos- effects were captured using a neural network model
+ite structures for strain monitoring [29]. A linear rela- developed by Asua and applied within PID control
+tionship can be assumed for passive strain monitoring [42].
+since the alloy remains in a single phase. The strainThese algorithms are able to achieve position conresistance correlation has also been integrated into trol of Nitinol actuators based on resistance feedback.
+the Liang & Rogers model [30] and Brinson model However, many do not account for one or more impor[31].
+tant considerations: variable applied load, hysteresis
+Electrical resistance feedback has been successfully behaviour, and generalization for actuator size. In
+applied for position control of Nitinol actuators us- most cases, the strain-resistance correlation is moding many different approaches. Simple methods have elled for a fixed applied load or stiffness. Although
+been studied where a reference resistance value is models developed by Urata [43] as well as Zhang and
+used as an indicator of complete actuation, prevent- Lin [38] accounted for variable applied stress, there
+ing overheating and unnecessary overextension [32], was no consideration for hysteresis effects in either
+or to enable pre-heating for faster response [33]. Lin- study. Furthermore, many models are not generear models have been used extensively, but are lim- alized for Nitinol wire of any length and diameter.
+ited to a single applied load or stiffness and rely on Normalization is sometimes performed but without
+the absence of hysteresis effects. Ikuta designed an consideration of variable applied load.
+endoscope employing antagonistic Nitinol actuators
+This paper presents a model of the stress-straincontrolled by a PID law with resistance feedback and resistance behaviour of Nitinol shape memory alloy
+a linear strain-resistance model [34]. Neugebauer also that accounts for variable applied load, major and
+used a linear strain-resistance model but within an minor hysteresis effects, and is normalized in terms of
+energy-based thermomechanical model that formed actuator geometry. There are three primary sections:
+the basis for feedback linearization control of an ac- characterization of the actuator response in terms of
+tuator [35]. The use of polynomial functions can im- strain-resistance curves, modelling the heating, coolprove the accuracy of strain-resistance models, but ing, and hysteresis behaviour, and application of the
+is most often restricted to conditions that minimize model for actuator position control. The model ithysteresis effects. Arai modelled the strain-resistance self consists of a family of linear curves for heating
+correlation using a fourth-order polynomial and con- and cooling paths whose coefficients are defined by
+trolled an actuator using a PID law based on the polynomial functions of applied stress. Transition be3
+
+by placing a reference resistor in series and measuring the voltages across the reference and the input
+terminals. Lead wire resistance was then measured
+by removing the actuator wire and short-circuiting.
+Therefore, the actuator wire resistance is given by
+equation 4, where RSM A is the actuator resistance,
+Rref is the reference resistance, Vnet is the total input voltage, Vref is the voltage across the reference
+resistor, and Rlead is the resistance of the lead wires.
+Note that a small baseline current was required to
+maintain Vref > 0 and avoid division by zero.
+
+RSM A = Rref
+
+
+Vnet
+− 1 − Rlead
+Vref
+
+(4)
+
+Data acquisition was accomplished using a National Instruments system consisting of a PXI-1033
+chassis with PXI-6220 and PXI-4110 modules for
+measurement and power, respectively. The PXI-6220
+module was connected to an SCXI-1000 chassis with
+Figure 1: Bench-top experimental setup.
+SCXI-1102 signal conditioner and SCXI-1303 terminal block, through which the sensor outputs are meatween the heating and cooling paths is modelled using sured. Additionally, the load cell was excited, aman exponential function and accounts for major and plified, and pre-conditioned using an Ectron 563H
+minor hysteresis. Position control was successfully transducer amplifier/conditioner. The data acquisidemonstrated with varying constant applied loads as tion system was connected to a Dell Precision 690
+computer through a PCIe-8361 card. Measurement
+well as a bias spring load.
+and control programs were created and run in LabView 7.1 software.
+
+2
+
+Experimental Setup
+3
+
+Experiments for characterization and control of Nitinol actuatore wire were performed on a bench-top
+setup shown in figure XXXX. The actuator wire was
+mounted vertically and hung from a Futek LRF300
+load cell attached to the tower. A Solartron Metrology S-Series linear variable displacement transducer
+(LVDT) was mounted to the tower with the probe
+attached to the free end of the actuator wire. Constant loading was provided by hanging brass weights
+from the end of the LVDT probe, while bias spring
+loading was provided by fixing a spring to the end of
+the probe (the other end of which was connected to
+the tower base by a threaded rod). Low-temperature
+Ni-Ti Flexinol actuator wire was used from Dynalloy.
+The electrical resistance of the wire was determined
+
+Characterization
+
+In order to develop a model for use in position control algorithms, it was important to first characterize
+the response of the Nitinol actuator wire in terms of
+stress, strain, and electrical resistance. Experiments
+were therefore performed to identify the trends in the
+stress-strain-resistance relationships. The major hysteresis strain-resistance curves were observed during
+complete actuation and return for a series of varying constant applied loads. Minor hysteresis curves
+were also observed during incomplete actuation and
+return. Characterization experiments used open-loop
+or simple on-off feedback control where the control
+input was desired electrical current.
+4
+
+a
+b
+T
+Af
+
+As
+
+b
+a
+
+c
+
+Rs
+
+d
+e
+
+Ms
+
+M→A
+
+a
+t
+
+R→M
+
+e
+
+A→R
+d
+
+c
+
+Figure 2: Major hysteresis loop behaviour in the heating and cooling resistance-displacement curves. The
+inset shows an approximation of the wire temperature during the experiment.
+
+3.1
+
+Resistance-Displacement Curves
+
+transformation to martensite occurs once the actuator reaches the martensite start temperature, Ms .
+The complete major hysteresis curve was examined The actuator then cools back to the initial temperaby performing a simple open loop experiment. A con- ture while transforming back to martensite.
+stant applied load of approximately 1 N was applied
+The response is highly non-linear and results in
+and actuation was achieved using a square wave pulse a large hysteresis effect. However, the resistanceof current. Figure 2 shows the resulting heating and displacement curves can easily be understood considcooling resistance-displacement curves that form the ering the relationships defined earlier by equations
+major hysteresis loop.
+1, 2, and 3. Figure 3 shows a simplified approximaThe wire starts at a temperature near the martensite finish phase transformation temperature, Mf , at
+point (a). As heating occurs, the temperature reaches
+the austenite start temperature, As , at point (b) and
+phase transformation from martensite to austenite
+begins. Transformation completes at point (c) where
+the actuator the austenite finish temperature, Af , at
+point (c), at which point the actuator is fully contracted. Input current is then removed and the actuator wire cools until reaching the R-phase start
+temperature, Rs , where phase transformation from
+austenite to R-phase begins. Regardless of complete or incomplete transformation to R-phase, phase
+
+tion of the resistance-displacement hysteresis (using
+actuation length, L, instead of displacement). Lines
+of constant resistivity are also shown for the phase
+transformation temperatures. As the actuator heats
+from point (a) to the start of the martensite-austenite
+phase transformation at point (b), there is negligible change in length but the increase in temperature
+causes an increase in resistance. The martensiteaustenite phase transformation occurs as temperature increases, but the lower resistivity of austenite results in a decrease in actuator resistance until
+reaching point (c). Subsequent cooling results in a
+decrease in resistance until reaching point (d), where
+5
+
+Rs
+
+Af
+
+L
+
+Mf
+a
+
+ρA
+
+ρM
+
+As
+
+Ms
+
+T
+
+As
+Ms
+Rs
+Mf
+
+b
+
+ρR
+
+e
+
+d
+
+Af
+
+σ
+
+c
+
+Figure 4: Effect of applied stress on phase transformation temperatures.
+
+R
+Figure 3: Simplified resistance-displacement response
+including lines of constant resistivity for martensite
+at Mf , martensite at As , austenite at Af , austenite
+at Rs , and R-phase at Ms .
+
+mation to martensite to occur sooner during cooling, reducing the amount of R-phase that appears
+beforehand. Figure 4 demonstrates this relationship
+between the phase transformation temperatures and
+the austenite-R-phase transformation begins. Due to applied stress, where it can be seen that Ms becomes
+the much larger resistivity of R-phase, the transfor- greater than Rs at high stress.
+mation causes an increase in resistance despite the
+decrease in temperature. Phase transformation from
+3.3 Incomplete Actuation
+austenite to R-phase also accounts for some strain recovery as the actuator reaches point (e). Finally, the Another important consideration for the model is
+transformation from R-phase to martensite causes a incomplete actuation, which causes minor hysteredecrease in resistivity both due to cooling and phase sis loops within the resistance-displacement response.
+change, but an increase in resistance due to the in- Instead of using the open-loop control method precrease in actuator length.
+viously described, the actuator was commanded to
+reach a series of test points using on-off feedback control.
+3.2 Influence of Applied Stress
+Two series of test points were used, incomplete
+The resistance-displacement behaviour was then heating and incomplete cooling. During incomplete
+characterized for a series of constant applied loads re- cooling, the wire is heated to full actuation and then
+sulting in stress ranging from approximately 15 MPa cooled until reaching a desired intermediary position.
+to 175 MPa. The procedure described in the previ- The wire is subsequently heated and then cooled to
+ous section was used to generate complete actuation the next test point. Incomplete heating is performed
+responses for each load case. The resulting family of similarly, where the wire is partially heated until
+reaching the test point and then cooled fully. The
+curves are shown in figure 5.
+As applied stress increases, there is an expected resulting sets of minor hysteresis loops are shown in
+increase in displacement and resistance at both lim- figure 6, where a constant load of approximately 1.3
+its of actuation due to increased elastic strain. The N was applied.
+width of the hysteresis also decreases with increasing
+It can be seen that minor hysteresis loops are comapplied stress. This is due to the change in phase posed of curves that extend from the point of intransformation temperatures which causes transfor- complete actuation and asymptotically approach the
+6
+
+Figure 5: Resistance-displacement curves for a series of constant applied loads.
+overall heating or cooling paths. Similar to the major and an augmented version of the Liang & Rogers
+hysteresis behaviour, the minor hysteresis loops occur model were also investigated.
+due to differences in the transformation temperatures
+as well as the presence of R-phase.
+
+4.1
+
+4
+
+Heating & Cooling Curves
+
+The majority of the overall heating and cooling
+paths are linear, with a highly non-linear and nondeterministic regions at the start and end of transformation. The non-linear regions are ignored and
+linear functions assumed for modelling the heating
+and cooling paths separately. Equations 5 and 6 define the heating and cooling paths respectively, where
+δ is the displacement and a and b are the linear coefficients (the subscripts H and C denote heating and
+cooling).
+
+Modeling
+
+The relationships between stress, strain, and resistance were modelled for the purpose of position control based on resistance feedback as well as feedback
+of the applied load (either using a load cell or based
+on known conditions). The model was developed
+based on the behaviour observed during characterization and captured the three important features:
+overall heating and cooling paths, minor hysteresis
+loops, and the influence of applied stress. Linear
+δH = aH R + bH
+(5)
+functions were assumed for the heating and cooling
+paths, the coefficients of which were modelled as polynomial functions of applied stress. Transition paths
+δC = aC R + bC
+(6)
+during incomplete actuation were modelled using an
+exponential function for the path slope. The model
+Figure 7 shows the linear functions used to approxparameters were then normalized in terms of actuator imate heating and cooling paths for the resistancelength and diameter. Correlations between the model displacement behaviour observed with an applied
+7
+
+Figure 6: Minor hysteresis loops during incomplete cooling (left) and incomplete heating (right).
+load of approximately 0.5 N. Although the linear
+functions do not capture the behaviour at the limits
+of actuation, there is a good correlation otherwise.
+
+aH =
+
+N
+X
+
+βaH,i σ i−1
+
+(7)
+
+βbH,i σ i−1
+
+(8)
+
+βaC,i σ i−1
+
+(9)
+
+βbC,i σ i−1
+
+(10)
+
+i=0
+
+4.2
+
+Influence of Applied Stress
+bH =
+
+The process of fitting linear functions to the heating
+and cooling curves of the resistance-displacement response was then repeated for each constant applied
+load case. The resulting families of linear functions
+are described in figure 8, where the slope and offset
+of the heating and cooling curves are plotted as a
+function of applied stress.
+The slope and offset coefficients for cooling change
+drastically in comparison with those for heating, but
+all four parameters exhibited non-linear relationships
+with respect to applied stress. Therefore, polynomial
+functions were selected for approximating these relationships. Equations 7 to 10 define the slope, a, and
+offset, b, for heating and cooling (denoted by subscripts H and C), where σ is the applied stress, β are
+the polynomial coefficients, and N is the polynomial
+order.
+
+N
+X
+i=0
+
+aC =
+
+N
+X
+i=0
+
+bC =
+
+N
+X
+i=0
+
+These coefficients are determined by fitting the
+polynomial functions to the slope and offset values
+obtained from experimental data. The resulting approximations are also shown in figure 8 using a polynomial order of 4. While there is a better correlation
+for the heating coefficients, the overall approach results in a good approximation of the stress influence.
+8
+
+Figure 7: Linear functions for approximating heating and cooling.
+
+Figure 8: Slope and offset coefficients for heating and cooling curves as a function of applied stress.
+
+9
+
+4.3
+
+Incomplete Actuation
+
+Characterization of the actuator response during
+incomplete heating and cooling showed that the
+resistance-displacement curve tended to asymptotically approach the relevant complete heating or cooling curve. This behaviour is modelled using a differential approach, where the slope of the resistancedisplacement transition curve, a, is determined and
+the displacement integrated with respect to the
+change in resistance. The slope starts at a relatively
+low value and increases continuously until reaching
+the slope of the relevant heating or cooling curve.
+An exponential function is used to model the slope
+of the resistance-displacement curve, where the independent variable is the difference between the current
+resistance and the expected resistance on the relevant
+curve at the current displacement.
+Equations 11 and 12 define the transition curve
+during heating, while equations 13 and 14 define the
+transition curve during cooling. The initial slope, a0 ,
+and decay coefficient, τ , are assumed to be constant
+and determined from analysis of experimental data.
+a = (aH − a0 )e−τ zH + a0
+zH = R −
+
+δ − bH
+aH
+
+a = (aC − a0 )e−τ zC + a0
+zC =
+
+δ − bC
+−R
+aC
+
+(11)
+(12)
+(13)
+(14)
+
+Actuator displacement is then estimated by integration of the slope in the resistance domain, as defined by equation 15, where Ro and δo are the resistance and displacement at the onset of heating or
+cooling.
+Z R
+δ=
+
+a dR + δo
+
+(15)
+
+Ro
+
+In practice, the displacement is estimated using numerical integration according to equation 16, where
+k is the time index and the slope, ak , is computed
+based on Rk and δk−1 .
+
+δk = ak (Rk − Rk−1 ) + δk−1
+
+(16)
+
+The transition model for incomplete actuation is
+then applied to estimate displacement from experimental characterization data. Figure 9 shows the resulting comparison between experimental data and
+the model, with both major and minor hysteresis
+loops captured.
+
+4.4
+
+Normalization
+
+The model parameters described so far are determined in terms of electrical resistance, applied stress,
+and displacement. A calibrated set of model parameters is therefore only applicable to wire of the same
+length and diameter as that used for characterization.
+Instead, the model may be normalized with respect
+to the actuator geometry so that model parameters
+may be calibrated for a given alloy and applied to
+actuators of any size.
+Normalization of the model was performed by analyzing the response characteristics of actuator wires
+of various lengths. Figure 10 shows the resulting set of major hysteresis loops for the resistancedisplacement response (shown in terms of actuator
+length instead of displacement). The sets of hysteresis loops appear to grow linearly in terms minimum
+and maximum resistance and displacement. This is
+expected since the generalized behaviour is given in
+terms of resistivity and strain, which are linearly proportional to resistance and displacement respectively.
+Resistance is normalized by dividing by the nominal resistance at the purely martensitic state. This
+nominal martensite resistance is then described in
+terms of the nominal martensite resistivity and actuator geometry. Equation 17 defines the normalized resistance, λ, and equation 18 defines the nominal martensite resistance, R0 , where ρM is the nominal martensite resistivity, L0 is the nominal actuator
+length, and A0 is the nominal actuator cross-sectional
+area.
+
+10
+
+λ=
+
+R
+R0
+
+(17)
+
+Figure 9: Comparison of transition model and experimental data.
+
+Figure 10: Sets of resistance-displacement response curves for actuator wires of various lengths.
+
+11
+
+ρM L0
+(18)
+A0
+Actuator displacement is normalized simply by dividing by length, resulting in the actuator strain.
+Equation 19 defines the actuator strain, ε.
+R0 =
+
+δ
+(19)
+L0
+Normalization was then applied to the resistancedisplacement curves shown in figure 10 and the results overlaid for comparison in figure 11. It can be
+seen that the same hysteresis loops are followed by
+each actuator in terms of normalized resistance and
+strain.
+The model can therefore be prescribed in terms of
+normalized parameters for the heating and cooling
+coefficients, β̃, and transition curve coefficients, ã0
+and τ̃ . These coefficients may be determined from a
+given sample of actuator wire, as well as the nominal
+martensite resistivity, ρM .
+Equations 20 and 21 describe the normalized heating and cooling curves, respectively.
+ε=
+
+εH = ãH λ + b̃H
+εC = ãC λ + b̃C
+
+N
+X
+
+(21)
+
+β̃aH,i σ i−1
+
+(22)
+
+β̃bH,i σ i−1
+
+(23)
+
+β̃aC,i σ i−1
+
+(24)
+
+β̃bC,i σ i−1
+
+(25)
+
+i=0
+
+b̃H =
+
+N
+X
+i=0
+
+ãC =
+
+N
+X
+i=0
+
+b̃C =
+
+N
+X
+
+ã = (ãC − ã0 )e
+
+i=0
+
+The slope of the normalized transition curves during heating and cooling are then defined by equations
+26 and 27, respectively.
+
+H
+
+−τ̃
+
+
+
+1
+ãC
+
++ ã0
+
+(26)
+
+
+
+(ε−b̃C )−λ + ã
+0
+
+(27)
+
+Equation 28 then defines the strain estimated from
+numerical integration of the slope in the normalized
+resistance domain.
+εk = ãk (λk − λk−1 ) + εk−1
+
+(28)
+
+The estimated displacement is then determined
+based on the nominal actuator length using equation
+19.
+New actuator wires are modelled by first computing the nominal martensite resistance, R0 , which
+is then used to normalize the measured resistance.
+Strain is estimated from the model based on normalized resistance, λ, and applied stress, σ, and then
+converted to displacement for position feedback.
+
+4.5
+
+(20)
+
+The normalized slope and offset coefficients are
+then defined by equations 22 to 25.
+ãH =
+
+ã = (ãH − ã0 )e
+
+
+
+−τ̃ λ− ã1 (ε−b̃H )
+
+Simulation
+
+The performance of the model was validated through
+simulation after determining the model parameters
+from experimental characterization data. The purpose of simulation was to verify the suitability of the
+integrated model when applied to experimental data.
+Electrical resistance and applied stress measurements
+were input into the model and the estimated actuator displacement compared to the measured value.
+Data from simple actuation experiments used during
+characterization was used that included incomplete
+heating and cooling segments as well as various constant applied loads and spring constraint loading.
+Figures 12 and 13 show simulation results for experiments performed with constant applied loads of
+0.49 N and 0.98 N, respectively, while figure 14 shows
+results using a spring constraint. The model provides
+a good estimation of the actuator displacement, with
+the exception of the highly non-linear and indeterminate martensitic region. The overall mean error
+was approximately 2.1% of the nominal actuator displacement (defined as 4% of the actuator length).
+
+12
+
+Figure 11: Normalized resistance-displacement curves overlaid for comparison.
+The ability of the model to capture the influence of
+varying applied load is verified by the successfully position estimation under both constant loads, but especially by the results obtained using the spring constraint. Since the applied stress varies with actuator
+displacement, the linear coefficients for the heating
+and cooling paths are being modified throughout the
+hysteresis loop. Although the model was not developed with this consideration in mind, experimental
+results demonstrate that the method is valid.
+The importance of accounting for varying applied
+load is shown in figure 15, where a constant applied load is incorrectly assumed for an actuator with
+spring constraint load conditions. There is a significant increase in the model error due to the incorrectly assumed coefficients for the heating and cooling
+Figure 16: Simulated resistance-displacement curves
+paths, which results in a mean error of approximately
+for a constant applied load of 0.49 N.
+7.8% (almost four times the mean error when varying stress is properly included). This emphasizes the
+need to include the influence of applied stress within
+the model.
+The resulting resistance-displacement curves for
+each simulation are shown in figures 16 to 19.
+13
+
+Figure 12: Simulation results under constant applied load of 0.49 N.
+
+Figure 13: Simulation results under constant applied load of 0.98 N.
+
+14
+
+Figure 14: Simulation results under spring constraint loading conditions.
+
+Figure 15: Simulation results under spring constraint loading conditions but with constant applied load
+assumed.
+
+15
+
+Figure 20: PID control law used for position control
+using resistance and applied load feedback.
+
+Figure 17: Simulated resistance-displacement curves
+for a constant applied load of 0.98 N.
+
+Figure 18: Simulated resistance-displacement curves
+for the spring constraint loading condition.
+
+Figure 19: Simulated resistance-displacement curves
+for the spring constraint loading condition with constant applied load assumed.
+
+5
+
+Position Control
+
+Simulation results showed that the model is capable of estimating the actuator displacement through
+complete and incomplete actuation as well as under varying load conditions. The performance of the
+model was then tested within a simple position control application. Electrical resistance and applied
+load were measured and input to the model. The
+resulting estimate of actuator displacement was then
+used as position feedback within a PID control law
+with wire current as the input, as described by figure
+20. Gains were selected by trial and error to achieve
+stability and a reasonable settling time, resulting in a
+satisfactory underdamped response. Threshold limits
+were also applied to the desired wire current value,
+preventing too much current input as well as maintaining the minimum baseline current.
+More elaborate control algorithms or careful selection of PID gains could be used to improve the feedback control response. However, this position control
+experiment was intended to simply test the performance of the model under expected application conditions. Although the performance of the controller is
+dictated by the error between desired and actual displacement, the performance of the model is dictated
+by the error between estimated and actual displacement.
+Figure 21 demonstrates the results of applying the
+model for position control. Varying applied load
+was achieved using the spring constraint condition.
+The desired displacement signal consisted of stepping
+through a series of randomly generated positions and
+holding at each one for 20 s after settling. The performance of the model is similar to that observed during
+16
+
+Figure 21: Results of applying the model in a simple position control experiment with varying applied load.
+simulation, with a mean error of approximately 2.2%. mation strain) and forward and reverse phase transformation equations defining the phase fractions.
+Equation 29 is the simplified constitutive equation,
+6 Model Correlations
+where E is the Young’s modulus, εL is the transformation strain, ξM is the fraction of martensite, and
+The model presented in this paper has been develthermal expansion has been ignored since it is neglioped in terms of actuator stress, strain, and elecgible in comparison with the other terms.
+trical resistance. Temperature is not included as a
+σ
+model variable even though it is the driving paramε=
++ εL ξM
+(29)
+eter behind the phase transformations. Algorithms
+E
+such as the Liang & Rogers model require both temThe Young’s modulus is defined by the simple mixperature and applied stress as independent variables ing rule in equation 30, where E and E are the
+A
+M
+for estimating strain, and were not considered for moduli of austenite and martensite, respectively.
+use during the development of the model. However,
+significant correlations were found between the preE = EM ξM + EA (1 − ξM )
+(30)
+sented model and an augmented version of the Liang
+& Rogers model studied by Brammajyosula [30]. The
+The fraction of martensite is defined by the temaugmented model includes the presence of R-phase perature and stress states. If the temperature is
+and was used by Brammajyosula to predict actuator low enough, the material is entirely martensite and
+strain and electrical resistance based on temperature ξM = 1, whereas if the temperature is high enough
+and stress inputs.
+the material is entirely austenite and ξM = 0. Phase
+The Liang & Rogers model consists of a constitu- transformation from martensite to austenite is detive equation describing the stress-strain relationship fined by equation 31 if heating occurs and the tem(including terms for thermal expansion and transfor- perature and stress states satisfy the inequality in
+17
+
+equation 32.
+
+to 3 where constant volume is assumed when accounting for strain, resulting in equation 35.
+ξ
+
+0
+ξM = M
+2
+
+n
+h
+
+i o
+π
+cos A −A
+T −As − Cσ
++1
+s
+f
+
+A
+
+σ
+σ
+As +
+< T < Af +
+CA
+CA
+
+(31)
+R=
+(32)
+
+ρL0
+(1 + 2ε)
+A0
+
+(35)
+
+The slope and offset for the linear heating function
+are
+determined by equations 36 and 37, respectively.
+Phase transformation from austenite to martensite
+is defined by equation 33 if cooling occurs and the
+δHs − δHf
+temperature and stress states satisfy the inequality
+(36)
+aH =
+RHs − RHf
+in equation 34.
+δHf RHs − δHs RHf
+bH =
+(37)
+
+
+RHs − RHf
+h
+
+i
+1−ξM 0
+π
+T −Mf − Cσ
++1 +ξM 0 (33)
+cos Ms −M
+ξM =
+2
+M
+f
+Equations 38 to 41 define the start and finish resistance and displacement during heating, where the
+σ
+σ
+Mf +
+< T < Ms +
+(34) material starts in the martensite phase at As and
+CM
+CM
+finishes in the austenite phase at Af .
+Brammajyosula modified this algorithm slightly to
+include the R-phase fraction, ξR , adding another
+
+
+
+
+
+ρ L0
+1+2 εLM + Eσ
+RHs = M
+1+αM As + Cσ −T0
+(38)
+A0
+phase transformation equation as well as including
+A
+M
+separate transformation strains for martensite and Rphase. The mixing rules used to determine materials
+
+
+
+
+properties were also slightly modified to include Rρ L0
+1+αA Af + Cσ −T0
+1+2 Eσ
+RHf = A
+(39)
+A0
+A
+A
+phase terms.
+The resistance-displacement response was then
+
+
+simulated using the Brammajyosula algorithm at
+σ
+δHs = L0 εLM +
+(40)
+various levels of applied stress. Temperature was
+EM
+ramped up from below Ms to above Af and then
+σ
+ramped back down, resulting in complete forward and
+δHf = L0
+(41)
+E
+A
+reverse transformation. The response is shown in figure 22, where the behaviour observed during experiThe slope and offset during cooling are similarly
+mental characterization is represented.
+defined by equations 42 and 43.
+A comparison was then made between the BramδCf − δCs
+majyosula model and the model presented in this paaC =
+(42)
+R
+Cf − RCs
+per. The linear heating and cooling curves are described by coefficients that are functions of applied
+δCs RCf − δCF RCs
+stress. These coefficients can also be determined anbC =
+(43)
+RCf − RCs
+alytically from the Brammajyosula model by defining two points on each of the heating and cooling
+The resistance and displacement at the start and
+curves. The heating curve is defined by the limits finish of the cooling phase transformation are defined
+of the transformation from martensite to austenite, by equations 44 to 47, where the material starts at a
+while the cooling curve is defined by the limits of mixture of R-phase and austenite at Ms and finishes
+transformation from R-phase to martensite. Expres- in the martensite phase at Mf .
+sions for both the displacement and electrical resistance must be determined at each point. Note that
+
+
+
+ρ
+L0
+σ
+1+2 εLR +
+(44)
+RCs = Cs
+electrical resistance is determined using equations 1
+A0
+ξR ER +(1−ξR )EA
+18
+
+Figure 22: Simulated resistance-displacement curves using the augmented Liang & Rogers model developed
+by Brammajyosula.
+
+ρ L0
+RCf = M
+A0
+
+
+
+
+σ
+ρCs = ξR ρR 1 + αR Ms +
+− T0
+CM
+
+
+
+σ
++ (1 − ξR ) ρA 1 + αA MS +
+− T0
+CM
+(49)
+
+
+
+
+
+
+1+2 εLM + Eσ
+1+αM Mf + Cσ −T0
+M
+
+M
+
+(45)
+
+
+δCs = L0 εLR +
+
+σ
+ξR ER + (1 − ξR ) EA
+
+
+(46)
+
+Substitution of the relevant equations results in relationships for the heating and cooling slope and offset coefficients that are functions of applied stress.
+These functions were then evaluated at the levels of
+
+
+σ
+applied stress used during experimental characteriδCf = L0 εLM +
+(47)
+zation and modeling. Figure 23 shows the resultEM
+ing correlation between the coefficients fitted to exThe fraction of R-phase at the start must be de- perimental data, the polynomial functions used to
+termined as shown in equation 48 and used to deter- approximate the curves, and the analytically determine resistivity as defined by equation 49 as well as mined values using the Brammajyosula model.
+Considering that the material parameters were
+the elastic modulus in equations 44 and 46.
+used for a different Ni-Ti alloy (in the absence of
+known values for Flexinol), there is a good correlation between the experimentally and analytically
+
+
+
+ 
+π
+Ms + Cσ −Rf − Cσ
++1
+(48)
+ξR = 21 cos Rs −R
+determined values. Therefore, it may be possible
+M
+R
+f
+19
+
+Figure 23: Correlations between experimental data, polynomial fitting functions, and the analytical results.
+to define the linear heating and cooling coefficient
+functions analytically instead of using polynomials
+after identifying the material properties. Although
+the transition functions for completing the hysteresis model were not studied analytically, the resulting
+curves shown in figure 22 suggest that similar correlations may exist.
+
+7
+
+Conclusions
+
+The model presented in this paper successfully captured the key features of the stress-strain-resistance
+behaviour of Nitinol shape memory alloy. Experimental characterization revealed significant hysteresis effects in the resistance-displacement response
+that varied with the level of applied stress.
+Heating and cooling paths were found to be generally linear and therefore modelled as such. The coefficients for the linear heating and cooling paths were
+themselves defined as polynomial functions of applied
+stress. Transition between the heating and cooling
+curves was modelled using an exponential function
+
+that captured both major and minor hysteresis effects.
+Actuator wires of various lengths were also studied
+and showed that the response characteristics are linearly proportional to the wire length. This allowed
+the model to be normalized in terms of the actuator
+geometry for more generalized application.
+The performance of the model was validated
+through simulation based on recorded experimental
+data and within a simple position control application. In both cases, the model had a mean error of
+approximately 2% of the nominal actuator stroke and
+handled the effect of varying applied load. Although
+a simple PID control law was used with position feedback provided by the model estimation of actuator
+displacement, more sophisticated algorithms could be
+used to improve the controller performance.
+The model was also compared to an augmented
+version of the Liang & Rogers model. The linear
+heating and cooling coefficients were defined analytically and estimated for a series of applied stress levels
+using an assumed set of material properties. Good
+correlations between the resulting curves demon-
+
+20
+
+strated that the model coefficients may possibly be [8] Muhammad A. Rahman. Patents on superelastic
+shape memory alloy. Recent Patents on Mechanical
+estimated analytically instead of determined experiEngineering, 1:65–67, 2008.
+mentally.
+It is expected that this model may be useful for fu- [9] F.X. Gil, J.M. Manero, and J.A. Planell. Relevant
+ture applications of Nitinol actuator position control
+aspects in the clinical applications of niti shape memory alloys. Journal of Materials Science: Materials
+based on electrical resistance feedback. The model
+in Medicine, 7:403–406, 1996.
+assumes feedback of the applied stress is also provided, but may possibly be replaced by a known [10] D.Tarnita, D. N. Tarnita, Roxana Tarnita, Cosmin
+value or model depending on the boundary condiBerceanu, and Florin Cismaru. Modular adaptive
+bone plate connected by nitinol staple. Materialwistions. Other functions may possibly be used to resenschaft und Werkstofftechnik, 41-12:83–93, 2010.
+place and improve upon the linear and polynomial
+functions. However, the results of this study demon- [11] Dominiek Reynaerts, Jan Peirs, and Hendrik Van
+strate the feasibility of modelling the stress-strainBrussel. Design of a shape memory alloy actuated
+resistance behaviour of Nitinol actuator wire considimplantable drug delivery system. Eurosensors X,
+pages 1185–1188, 1996.
+ering major and minor hysteresis effects, varying applied load, and normalization in terms of geometry. [12] A.D. Johnson, V. Gupta, V. Martynov, and L. Menchaca. Silicon oxide diaphragm valves and pumps
+with tini thin film actuation. Proceedings of the International Conference on Shape Memory and Superelastic Technologies 2003, pages 605–612, 2004.
+
+References
+[1] Constantinos Mavroidis, Charles Pfeiffer, and
+Michael Mosley. Conventional actuators, shape
+memory alloys, and electrorheological fluids. Invited Chapter in Automation, Miniature Robotics
+and Sensors for Non-Destructive Testing and Evaluation, 1999.
+[2] Arne Ölander. An electrochemical investigation of
+solid cadmium-gold alloy. Journal of the American
+Chemical Society, 54(10):3819–3833, 1932.
+[3] W.J. Buehler and R.C. Wiley. Report noltr 61-75
+(ad 266607). Technical report, U.S. Naval Ordnance
+Laboratory, 1961.
+[4] Ming H. Wu and L. McD. Schetky. Industrial applications for shape memory alloys. Proceedings of
+the International Conference on Shape Memory and
+Superelastic Technolgies, pages 171–182, 2000.
+[5] D.J. Hartl and D.C. Lagoudas. Aerospace applications of shape memory alloys. Proceedings of the Institution of Mechanical Engineers, Part G: Journal
+of Aerospace Engineering, 221:535–553, 2007.
+[6] Lorenza Petrini and FrancescoMigliavacca. Biomedical applications of shape memory alloys. Journal of
+Metallurgy, pages 1–15, 2011.
+[7] T. Raparelli, P. Beomonte Zobel, and F. Durante. A
+robot actuated by shape memory alloy wires. Proceedings of the 2002 IEEE International Symposium
+on Industrial Electronics, pages 420–423, 2002.
+
+[13] D. Mandru, I. Lungu, S. Noveanu, and O. Tatar.
+Shape memory alloy wires as actuators for a
+minirobot. 2010 IEEE International Conference on
+Automation, Quality and Testing, Robotics, pages 4–
+7, 2010.
+[14] Xiangyang Huang, Graeme J. Ackland, and
+Karin M. Rabe. Crystal structures and shapememory behaviour of niti. Nature Materials, 2:307–
+311, 2003.
+[15] Daniel R. Madill and David Wang. Modeling and
+l2-stability of a shape memory alloy position control system. IEEE Transactions on Control Systems
+Technology, 6-4:473–481, 1998.
+[16] Chunhao Joseph Lee and Constantinos Mavroidis.
+Analytical dynamic model and experimental robust
+and optimal control of shape-memory-alloy bundle
+actuators. Proceedings of the 2002 ASME International Mechanical Engineering Congress and Exposition, pages 491–498, 2002.
+[17] J. Jayender, R. V. Patel, S. Nikumb, and M. Ostojic. Modeling and control of shape memory alloy
+actuators. IEEE Transactions on Control Systems
+Technology, 16-2:279–287, 2008.
+[18] Kazuhiko Arai, Shinji Ararnaki, and Kazulaisa
+Yanagisawa. Feedback linearization for sma (shape
+memory alloy).
+Proceedings of the 34th SICE
+
+21
+
+Annual Conference. International Session Papers,
+pages 1383–1386, 1995.
+[19] H. Benzaoui, N. Chaillet, C. Lexcellent, and A. Bourjault. Non linear motion and force control of shape
+memory alloys actuators. Proceedings of the SPIE
+Conference on Mathematics and Control in Smart
+Structures, 3667:337–348, 1999.
+[20] M. Elahinia, J. Koo, M. Ahmadian, and C. Woolsey.
+Backstepping control of a shape memory alloy actuated robotic arm. Journal of Vibration and Control,
+11:407–429, 2005.
+[21] Hashem Ashrafiuon, Mojtaba Eshraghi, and Mohammad H. Elahinia. Position control of a threelink shape memory alloy actuated robot. Journal Of
+Intelligent Material Systems and Structures, 17:381–
+393, 2006.
+[22] Sumiko Majima, Kazuyuki Kodama, and Tadahiro
+Hasegawa. Modeling of shape memory alloy actuator and tracking control system with the model.
+IEEE Transactions on Control Systems Technology,
+9-1:54–59, 2001.
+[23] Sushant M. Dutta, Fathi H. Ghorbel, and James B.
+Dabney. Modeling and control of a shape memory
+alloy actuator. Proceedings of the 2005 IEEE International Symposium on Intelligent Control, pages
+1007–1012, 2005.
+[24] Kyoung Kwan Ahn and Nguyen Bao Kha. Internal model control for shape memory alloy actuators
+using fuzzy based preisach model. Sensors and Actuators A, 13:730–741, 2006.
+[25] G. Song. Robust position regulation of a rotary servo
+actuated by a shape memory alloy wire. 2001 IEEE
+International Symposium on Industrial Electronics
+Proceedings, 3:1923–1928, 2001.
+[26] Hyo Jik Lee and Jung Ju Lee. Time delay control
+of a shape memory alloy actuator. Smart Materials
+and Structures, 13:227–239, 2004.
+[27] G. Song, V. Chaudhry, and C. Batur. A neural network inverse model for a shape memory alloy wire
+actuator. Journal Of Intelligent Material Systems
+and Structures, 14:371–378, 2003.
+[28] C.X. Mao, H. Li, and J.P. Ou. Experimental study
+on shape memory alloy displacement transducer.
+Earth and Space Conference 2008: Proceedings of the
+11th Aerospace Division International Conference on
+Engineering, Science, Construction, and Operations
+in Challenging Environments, 323:1–8, 2008.
+
+22
+
+[29] G. Triantafyllou and G.C. Psarras. Probing the
+reverse martensitic transformation in constrained
+shape memory alloys via electrical resistance. Journal of Intelligent Material Systems and Structures,
+21:975–982, 2010.
+[30] Ravindra Brammajyosula, Vidyashankar Buravalla,
+and Ashish Khandelwal. Model for resistance evolution in shape memory alloys including r-phase. Smart
+Materials and Structures, 20:1–11, 2011.
+[31] Di Cui, Gangbing Song, and Hongnan Li. Modeling of the electrical resistance of shape memory alloy wires. Smart Materials and Structures, 9-5:1–9,
+2010.
+[32] Roy Featherstone and Yee Harn Teh. Improving the
+speed of shape memory alloy actuators by faster electrical heating. Proceedings of the International Symposium of Experimental Robotics, pages 18–21, 2004.
+[33] M. El Dib, R. Gorbet, E. Kubica, X. Gao, A.L.
+Browne, and N.L. Johnson. Adaptive sma actuator
+priming using resistance feedback. Smart Materials
+and Struct, 20:1–14, 2011.
+[34] M. Mertmann and E. Hornbogen. Grippers for the
+micro assembly containing shape memory actuators
+and sensors. Journal de Physique IV, 7-C5:621–626,
+1997.
+[35] Reimund Neugebauer, Andre Bucht, Kenny Pagel,
+and Jakob Jung. Numerical simulation of the activation behavior of thermal shape memory alloys. Proceedings of Industrial and Commercial Applications
+of Smart Structures Technologies 2010, 7645:1–12,
+2010.
+[36] Fumihito Arai, Daisaku Azuma, Keisuke Narumi,
+Yoko Yamanishi, and Yu-Ching Lin. Design and fabrication of a shape memory alloy actuated exoskeletal microarm. Proceedings of the 2007 18th International Symposium on Micro-NanoMechatronics and
+Human Science, pages 148–152, 2007.
+[37] Zhenyun Shi, Da Liu, Cheng Ma, and Depeng Zhao.
+Accurate controlled shape memory alloy actuator for
+minimally invasive surgery. Proceedings of the 2011
+IEEE International Conference on Mechatronics and
+Automation, pages 817–822, 2011.
+[38] Jianjun Zhang and Yuehong Yin. Sma-based bionic
+integration of self-sensor-actuator for artificial skeletal muscle. Sensors and Actuators A, 181:94–102,
+2012.
+
+[39] H. Meier, A. Czechowicza, and C. Haberland. Control loops with detection of inner electrical resistance and fatigue-behaviour by activation of niti shape memory alloys. Proceedings of the 2009 European Symposium on Martensitic Transformations,
+05006:1–8, 2009.
+[40] Shu-Hung Liu, Tse-Shih Huang, and Jia-Yush Yen.
+Tracking control of shape-memory-alloy actuators
+based on self-sensing feedback and inverse hysteresis compensation. Sensors, 10:112–127, 2010.
+[41] N. Ma, G. Song, and H.J. Lee. Position control of
+shape memory alloy actuators with internal electrical
+resistance feedback using neural networks. Smart
+Materials and Structures, 13:777–783, 2004.
+[42] Estibalitz Asua, Jorge Feutchwanger, Alfredo
+Garcia-Arribas, and Victor Etxebarria. Sensorless
+control of sma-based actuators using neural networks. Journal of Intelligent Material Systems and
+Structures, 21:1809–1818, 2010.
+[43] Junichi Urata, Tomoaki Yoshikai, Ikuo Mizuuchi,
+and Masayuki Inaba. Design of high d.o.f. mobile micro robot using electrical resistance control of shape
+memory alloy. Proceedings of the 2007 IEEE/RSJ
+International Conference on Intelligent Robots and
+Systems, pages 3828–3833, 2007.
+
+23
+
+
