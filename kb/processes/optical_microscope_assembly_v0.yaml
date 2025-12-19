@@ -1,0 +1,56 @@
+id: optical_microscope_assembly_v0
+kind: process
+name: Optical microscope assembly v0
+layer_tags:
+  - layer_7
+  - layer_8
+inputs:
+- item_id: glass_lens_objective_set
+  qty: 4.0
+  unit: each
+- item_id: glass_lens_eyepiece
+  qty: 2.0
+  unit: each
+- item_id: prism_glass_optical
+  qty: 2.0
+  unit: each
+- item_id: illumination_lamp_led
+  qty: 1.0
+  unit: each
+- item_id: condenser_lens_assembly
+  qty: 1.0
+  unit: each
+- item_id: mechanical_stage_xy
+  qty: 1.0
+  unit: each
+- item_id: focusing_mechanism_coarse_fine
+  qty: 1.0
+  unit: each
+- item_id: steel_frame_microscope_body
+  qty: 8.0
+  unit: kg
+- item_id: mirror_optical_flat
+  qty: 1.0
+  unit: each
+outputs:
+- item_id: optical_microscope_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_tools_basic
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: unit
+- resource_type: labor_bot_general
+  amount: null
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 6.0
+  notes: Placeholder energy for optical microscope assembly
+time_model:
+  type: fixed_time
+  hr_per_batch: 5.0
+  notes: Placeholder assembly time for microscope
+notes: "Assembles an optical microscope from provided optical components and a steel frame. Placeholder manufacturing step to enable modeling in the KB."

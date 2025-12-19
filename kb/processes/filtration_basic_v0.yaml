@@ -1,0 +1,27 @@
+id: filtration_basic_v0
+kind: process
+name: Filtration (basic)
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: treated_cutting_fluid_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: cutting_fluid
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: filtration_unit
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+  notes: "Approximate energy for simple filtration step; scale with mass"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Basic filtration step to remove particulates from treated cutting fluid."

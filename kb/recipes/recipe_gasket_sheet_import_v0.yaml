@@ -2,9 +2,7 @@ id: recipe_gasket_sheet_import_v0
 target_item_id: gasket_sheet
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported gasket sheet until local polymer processing is modeled.
-assumptions: Sealing materials imported early; replace with local gasket production later.
-notes: Import placeholder for gasket sheet material.
-
+  - process_id: plastic_sheet_extrusion_v0
+    notes: Extrude gasket sheet from plastic pellets
+assumptions: "Local extrusion path using plastic_sheet_extrusion_v0; gasket_sheet produced locally"
+notes: "Converted from import stub to local gasket_sheet production path using existing extrusion process."

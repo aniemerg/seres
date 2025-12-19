@@ -1,0 +1,28 @@
+id: powder_milling_process_v0
+kind: process
+name: Powder milling (Si powder in N2) v0
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: silicon_powder_v0
+    qty: 0.7
+    unit: kg
+  - item_id: nitrogen_gas_purified
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: silicon_nitride_powder_fine
+    qty: 0.95
+    unit: kg
+requires_ids:
+  - ball_mill
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  total_energy_kwh: 4.0
+time_model:
+  total_time_hr: 8.0
+notes: "Powder milling of silicon powder in nitrogen atmosphere to form silicon nitride powder. Placeholder values seeded to enable silicon nitride production path."

@@ -1,0 +1,26 @@
+id: methane_pyrolysis_basic_v0
+name: Methane pyrolysis (basic)
+kind: process
+inputs:
+  - item_id: methane_gas_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: methane_pyrolysis_carbon_v0
+    qty: 0.75
+    unit: kg
+  - item_id: hydrogen_gas_v0
+    qty: 0.25
+    unit: kg
+resource_requirements:
+  - resource_type: high_temp_furnace
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.5
+  rate_kg_per_hr: 2.0
+notes: "Stoichiometric methane pyrolysis; carbon and hydrogen outputs balanced to input mass."

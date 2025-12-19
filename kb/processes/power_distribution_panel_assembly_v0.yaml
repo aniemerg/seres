@@ -1,0 +1,32 @@
+id: power_distribution_panel_assembly_v0
+kind: process
+name: Power distribution panel assembly (basic)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: formed_sheet_metal_parts
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: power_distribution_panel_basic
+  qty: 1.0
+  unit: unit
+requires_ids:
+- enclosure_assembly_basic_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.6
+  unit: hr
+- resource_type: assembly_station
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.9
+  notes: Panel assembly energy for wiring and mounting
+time_model:
+  type: linear_rate
+  hr_per_unit: 0.8
+  setup_hr: 0.1
+notes: "Assembles formed sheet metal parts into a complete power distribution panel. Includes mounting breakers, wiring harness integration, and basic functional test."

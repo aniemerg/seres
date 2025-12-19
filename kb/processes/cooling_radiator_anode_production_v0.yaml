@@ -1,0 +1,22 @@
+id: cooling_radiator_anode_production_v0
+kind: process
+name: Production of cooling radiator anode v0
+inputs:
+- item_id: iron_pig_or_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: cooling_radiator_anode
+  qty: 1.0
+  unit: kg
+layer_tags:
+- layer_4
+- layer_5
+resource_requirements: []
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Placeholder production step converting 1 kg iron_pig_or_ingot into 1 kg cooling_radiator_anode (mass-balanced).

@@ -1,0 +1,27 @@
+id: wire_feed_production_basic_v0
+kind: process
+name: Wire feed production (basic) placeholder
+layer_tags:
+- layer_5
+inputs:
+- item_id: metal_wire_feed
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_wire_feed_production_v0
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: "Placeholder energy per kg for wire feed production"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Placeholder time per batch"
+notes: Placeholder process to convert wire feed into metal_wire_feed_production_v0 (gap filler). This is a temporary placeholder until a real production chain is defined.

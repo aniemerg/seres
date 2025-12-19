@@ -1,0 +1,23 @@
+id: recipe_collection_hopper_set_v0
+kind: recipe
+target_item_id: collection_hopper_set
+variant_id: v0
+steps:
+  - process_id: sheet_metal_fabrication_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Fabricate hopper bodies and mounting frames; includes sheet metal forming"
+  - process_id: welding_and_fabrication_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Weld hopper sections and assemble frame with discharge chutes"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Machine discharge openings and mounting holes"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble hopper bodies into collection hopper set"
+assumptions: "Sheet-metal fabrication path; assembled hopper set from welded components; similar to hopper_feed_steel path but for a set of hoppers."
+notes: "Fabrication path for collection hopper set (import replaced)."

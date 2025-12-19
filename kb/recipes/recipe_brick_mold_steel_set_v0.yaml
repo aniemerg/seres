@@ -1,0 +1,17 @@
+id: recipe_brick_mold_steel_set_v0
+kind: recipe
+name: Brick mold steel set (v0)
+target_item_id: brick_mold_steel_set
+variant_id: v0
+steps:
+  - process_id: mold_preparation_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+assumptions: Cast steel brick mold blocks then machine cavities; coarse times.
+notes: Coarse route; refine cavity geometry and tolerances in BOMs and later steps.

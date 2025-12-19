@@ -1,0 +1,25 @@
+id: epoxy_resin_to_insulation_coating_v0
+kind: process
+name: Epoxy resin to insulation coating material
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: epoxy_resin_base
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: insulation_coating_material
+  qty: 1.0
+  unit: kg
+requires_ids:
+- epoxy_processing_unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 0.5
+notes: "Placeholder synthesis step: convert epoxy resin base into insulation coating material."

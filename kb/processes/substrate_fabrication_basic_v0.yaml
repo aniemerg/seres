@@ -1,0 +1,22 @@
+id: substrate_fabrication_basic_v0
+name: Substrate fabrication (basic)
+kind: process
+inputs:
+- item_id: regolith_raw
+  qty: 0.0
+  unit: kg
+outputs:
+- item_id: uncoated_substrate_material_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: seed_lab
+  amount: 0.0
+  unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Seed substrate production path to generate uncoated_substrate_material_v0 as a placeholder for seed workflow."

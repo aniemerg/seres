@@ -1,0 +1,31 @@
+id: recipe_spindle_assembly_precision_v0
+kind: recipe
+target_item_id: spindle_assembly_precision
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Cast spindle housing from steel (approx mass raw ~40-60 kg)."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Machine bearing journals, taper bore, mounting faces to precision tolerances"
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Grind critical bearing surfaces and taper to final tolerance"
+  - process_id: bearing_installation_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Install precision spindle bearings with thermal fit or press fit"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble drive pulley, seals, and mounting hardware"
+  - process_id: balancing_dynamic_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Dynamic balance spindle assembly to minimize runout"
+notes: "Placeholder recipe to manufacture spindle_assembly_precision; uses standard precision machining and assembly steps."
+assumptions: "Spindle housing from steel casting; precision bearings sourced or imported; final assembly tuned for low runout."

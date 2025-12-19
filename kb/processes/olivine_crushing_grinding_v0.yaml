@@ -1,0 +1,29 @@
+id: olivine_crushing_grinding_v0
+kind: process
+name: Olivine crushing and grinding v0
+layer_tags:
+  - layer_1
+inputs:
+  - item_id: olivine_concentrate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: olivine_powder
+    qty: 0.98
+    unit: kg
+requires_ids:
+  - jaw_crusher_v0
+  - ball_mill_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.3
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.1
+notes: |
+  Olivine crushing and grinding: size reduction of olivine concentrate to olivine powder.
+  Placeholder parameters; refinements needed as data becomes available.

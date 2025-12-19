@@ -1,18 +1,19 @@
 id: recipe_oscilloscope_basic_v0
+produces_id: oscilloscope_basic
 target_item_id: oscilloscope_basic
 variant_id: v0
 steps:
-  - process_id: pcb_assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble main board and display/control PCBs."
-  - process_id: enclosure_assembly_basic_v0
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Mount PCBs, display, controls, and connectors into enclosure."
-  - process_id: calibration_and_test_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Perform calibration and functional tests with signal generator."
+- process_id: pcb_assembly_basic_v0
+  est_time_hr: 1.5
+  labor_hours: 1.5
+  notes: "Assemble main board and display/control PCBs."
+- process_id: enclosure_assembly_basic_v0
+  est_time_hr: 0.8
+  labor_hours: 0.8
+  notes: "Mount PCBs, display, controls, and connectors into enclosure."
+- process_id: calibration_and_test_basic_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: "Perform calibration and functional tests with signal generator."
 assumptions: Complex electronics largely imported; calibration simple.
 notes: Assembly and test of a basic oscilloscope; assumes imported core electronics.

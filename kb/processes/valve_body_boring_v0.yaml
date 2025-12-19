@@ -1,0 +1,26 @@
+id: valve_body_boring_v0
+name: Valve body boring machining v0
+kind: process
+inputs:
+  - item_id: valve_body_cast_rough
+    qty: 4.5
+    unit: kg
+outputs:
+  - item_id: valve_body_machined
+    qty: 4.0
+    unit: kg
+byproducts:
+  - item_id: turning_chip_waste
+    qty: 0.5
+    unit: kg
+resource_requirements:
+  - resource_type: precision_lathe
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.3
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: Bore valve body cast rough to final bore and sealing surfaces; byproduct swarf generated.

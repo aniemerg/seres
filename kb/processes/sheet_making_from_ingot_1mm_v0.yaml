@@ -1,0 +1,25 @@
+id: sheet_making_from_ingot_1mm_v0
+kind: process
+name: Sheet making from ingot (1mm)
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: steel_ingot
+  qty: 0.1
+  unit: kg
+outputs:
+- item_id: steel_sheet_1mm
+  qty: 0.1
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.05
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.05
+notes: Form 1mm-thick sheet from a small steel ingot portion; placeholder parameters.

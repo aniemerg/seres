@@ -1,9 +1,12 @@
 id: salt_contingency_nacl_import_v0
+kind: recipe
+name: Salt contingency NaCl synthesis (import v0) [deprecated]
+produces_id: salt_contingency_nacl
+produces_qty: 1.0
+produces_unit: kg
 target_item_id: salt_contingency_nacl
-variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: "Import NaCl as contingency reagent; not manufactured locally in v0."
-assumptions: NaCl imported until local production modeled.
-notes: Placeholder import recipe for NaCl contingency supply.
+- process_id: naoh_hcl_salt_synthesis_v0
+  est_time_hr: 1.0
+notes: "Synthesize NaCl locally from NaOH and HCl as a contingency replacement for imports. Deprecated; this path is superseded by salt_contingency_nacl_v0."
+assumptions: NaCl synthesized from NaOH + HCl using basic chemical reactor.

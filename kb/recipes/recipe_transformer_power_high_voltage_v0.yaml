@@ -1,0 +1,32 @@
+id: recipe_transformer_power_high_voltage_v0
+kind: recipe
+name: Recipe for high-voltage transformer power path (transformer_power_high_voltage)
+variant_id: v0
+target_item_id: transformer_power_high_voltage
+steps:
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 6.0
+    notes: "Wind primary and secondary coils with high turns ratio, install layer insulation"
+  - process_id: assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Install laminated iron core, mount coils, add end insulation"
+  - process_id: potting_and_sealing_v0
+    est_time_hr: 2.0
+    labor_hours: 1.0
+    notes: "Apply potting compound for electrical insulation and moisture protection"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Mount transformer in steel enclosure with terminal connections"
+  - process_id: electrical_testing_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 1.5
+    notes: "Test turns ratio, insulation resistance, and load performance"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Verify all connections and insulation integrity"
+assumptions: "High-voltage transformer with high turns ratio and appropriate insulation. 20 kg unit for HV power supplies. Requires careful winding and insulation to prevent breakdown."
+notes: "Manufacturing of high-voltage transformer. Adapted from existing HV transformer recipe for transformer_power_high_voltage."

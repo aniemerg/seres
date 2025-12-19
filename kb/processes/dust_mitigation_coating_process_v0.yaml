@@ -1,0 +1,25 @@
+id: dust_mitigation_coating_process_v0
+kind: process
+name: Dust mitigation coating process v0
+layer_tags:
+- layer_6
+- layer_7
+inputs: []
+outputs:
+- item_id: dust_mitigation_coating_v0
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: coating_station
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+  notes: Placeholder energy for coating application
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Placeholder time for coating application
+notes: Placeholder process to generate a dust mitigation coating; mirrors pattern used for protective coatings.

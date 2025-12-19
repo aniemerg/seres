@@ -1,0 +1,23 @@
+id: ceramic_press_or_mold_set_fabrication_v0
+kind: process
+name: Ceramic press or mold set fabrication
+layer_tags:
+- layer_6
+inputs: []
+outputs:
+- item_id: ceramic_press_or_mold_set
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.25
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+  notes: "Placeholder energy for mold/press tooling fabrication"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Fabrication placeholder for ceramic press or mold set; material spec TBD; treat as tooling/fixture."

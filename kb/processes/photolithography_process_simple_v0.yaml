@@ -1,0 +1,38 @@
+id: photolithography_process_simple_v0
+kind: process
+name: Photolithography process (simple)
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: copper_clad_laminate
+  qty: 0.5
+  unit: kg
+- item_id: photoresist_coated_substrate_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: copper_patterned_substrate_v0
+  qty: 1.0
+  unit: kg
+requires_ids:
+- pcb_fab_equipment
+- uv_exposure_unit
+- pcb_development_station
+resource_requirements:
+- resource_type: pcb_fab_equipment
+  qty: 1.0
+  unit: hr
+- resource_type: uv_exposure_unit
+  qty: 0.25
+  unit: hr
+- resource_type: pcb_development_station
+  qty: 0.5
+  unit: hr
+energy_model:
+  total_energy_kwh: 0.8
+time_model:
+  total_time_hr: 1.0
+notes: |
+  Photolithography step: UV exposure of photoresist through a mask, followed by development
+  to reveal copper traces. This simple process is a sub-step within PCB fabrication.

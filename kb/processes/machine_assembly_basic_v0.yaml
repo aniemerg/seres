@@ -1,0 +1,31 @@
+id: machine_assembly_basic_v0
+kind: process
+name: Basic machine assembly (frame + electronics)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
+- item_id: power_electronics_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: analog_test_bench_neural_circuits_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "Estimated assembly time for basic machine from frame_small and electronics"
+notes: Assembly of analog test bench chassis from frame_small and power electronics module.

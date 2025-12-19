@@ -1,0 +1,21 @@
+id: plate_to_steel_plate_raw_v0
+kind: process
+name: Plate to raw steel plate conversion
+layer_tags:
+- layer_6
+inputs:
+- item_id: steel_plate_or_sheet
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: steel_plate_raw
+  qty: 1.0
+  unit: kg
+notes: "Post-rolling sizing and trimming to convert plate/sheet into raw plate stock."
+energy_model:
+  type: kWh_per_kg
+  value: 0.3
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.2
+  setup_hr: 0.1

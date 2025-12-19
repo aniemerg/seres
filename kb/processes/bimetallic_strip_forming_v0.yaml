@@ -1,0 +1,28 @@
+id: bimetallic_strip_forming_v0
+kind: process
+name: Bimetallic strip forming
+layer_tags:
+- layer_5
+inputs:
+- item_id: steel_strip_thin
+  qty: 0.02
+  unit: kg
+- item_id: copper_strip_thin
+  qty: 0.02
+  unit: kg
+outputs:
+- item_id: bimetallic_element
+  qty: 0.04
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: coarse energy for strip forming
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: Forming of a steel-copper bimetallic strip from input thin strips.

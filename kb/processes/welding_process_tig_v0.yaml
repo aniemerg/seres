@@ -1,0 +1,31 @@
+id: welding_process_tig_v0
+kind: process
+name: TIG welding process v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: pipe_bent_sections
+  qty: 2.8
+  unit: kg
+- item_id: valve_body_machined
+  qty: 4.0
+  unit: kg
+outputs:
+- item_id: piping_and_valves_set
+  qty: 6.5
+  unit: kg
+resource_requirements:
+- resource_type: welding_tig_unit
+  qty: 1.0
+  unit: unit
+- resource_type: labor_bot_welder
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 1.0
+notes: TIG welding of bent pipe sections to form piping and valves assembly. Assumes leak-tight joints and proper surface prep.
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0

@@ -1,0 +1,29 @@
+id: test_equipment_basic_assembly_v0
+kind: process
+name: Test equipment basic assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: assembled_electronics
+  qty: 8.0
+  unit: unit
+outputs:
+- item_id: test_equipment_basic
+  qty: 1.0
+  unit: kit
+requires_ids:
+- assembly_tools_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.0
+notes: Basic bench test equipment assembly from eight assembled electronics modules; placeholder energy usage
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: Placeholder assembly process to convert eight electronics modules into one test equipment kit

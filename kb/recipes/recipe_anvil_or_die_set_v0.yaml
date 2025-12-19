@@ -1,15 +1,14 @@
 id: recipe_anvil_or_die_set_v0
 target_item_id: anvil_or_die_set
 variant_id: v0
+kind: recipe
+name: Recipe for anvil or die set (forging route) v0
 steps:
-  - process_id: mold_preparation_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-assumptions: Cast die/anvil then machine; heat treatment TBD.
-notes: Coarse route; add heat treatment/surface finish later.
+- process_id: forging_basic_v0
+  notes: Forge basic forged components, using the anvil/die set as tooling
+- process_id: forging_bearing_ring_blanks_v0
+  notes: Forged bearing ring blanks using the forged components
+- process_id: forging_rolls_basic_v0
+  notes: Forge rolling mill rolls set from forged blanks
+assumptions: Forging chain uses existing forging tooling; no heat-treatment step included yet
+notes: Forging-based route to produce anvil_or_die_set; heat treatment and finishing can be added later.

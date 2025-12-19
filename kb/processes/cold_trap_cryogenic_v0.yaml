@@ -1,0 +1,24 @@
+id: cold_trap_cryogenic_v0
+kind: process
+name: Cryogenic condensation (cold trap) v0
+layer_tags:
+- layer_4
+inputs:
+- item_id: oxygen_gas
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: liquid_oxygen_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: cryogenic_chiller_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Cryogenic condensation step to liquefy oxygen from gas input. Placeholder numbers.

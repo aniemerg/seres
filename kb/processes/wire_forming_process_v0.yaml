@@ -1,0 +1,25 @@
+id: wire_forming_process_v0
+kind: process
+name: Wire forming process v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: nickel_wire_fine
+  qty: 0.007
+  unit: kg
+outputs:
+- item_id: tube_electrode_set
+  qty: 0.007
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Form electrode set from fine nickel wire; placeholder values for initial modeling."

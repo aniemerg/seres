@@ -1,9 +1,42 @@
 id: recipe_chemical_bath_tank_set_import_v0
-target_item_id: chemical_bath_tank_set
+kind: recipe
+name: Recipe for chemical bath tank set (import path resolved locally) v0
+produces_id: chemical_bath_tank_set
+produces_qty: 1.0
+produces_unit: unit
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported chemical bath tanks until local fabrication is modeled.
-assumptions: "Placeholder; future route to form/weld tanks, add liners and plumbing."
-notes: Import route for chemical bath tank set.
+  - process_id: metal_spinning_process_v0
+    inputs:
+      - item_id: stainless_steel_sheet
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: tank_shell_spun
+        qty: 28.0
+        unit: kg
+    est_time_hr: 4.0
+  - process_id: tank_set_assembly_v0
+    inputs:
+      - item_id: tank_shell_spun
+        qty: 1.0
+        unit: unit
+      - item_id: chemical_bath_heaters
+        qty: 1.0
+        unit: unit
+      - item_id: chemical_bath_agitation_system
+        qty: 1.0
+        unit: unit
+      - item_id: chemical_bath_ventilation
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: chemical_bath_tank_set
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.5
+assumptions: "Two-step route; uses spun shell and standard components; now defined locally to resolve gap"
+notes: "Converted from import stub to local recipe for chemical_bath_tank_set"

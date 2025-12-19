@@ -1,0 +1,34 @@
+id: brazing_heat_exchanger_compact_v0
+kind: process
+name: Brazing heat exchanger compact v0
+layer_tags:
+- layer_4
+inputs:
+- item_id: base_metal_parts
+  qty: 1.0
+  unit: kg
+- item_id: brazing_alloy_generic
+  qty: 0.05
+  unit: kg
+- item_id: flux_brazing
+  qty: 0.01
+  unit: kg
+outputs:
+- item_id: heat_exchanger_compact
+  qty: 1.05
+  unit: kg
+requires_ids:
+- brazing_furnace_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: Heating to brazing temperature
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Brazing cycle
+notes: "Brazing operation to produce compact heat exchanger from base metal parts."

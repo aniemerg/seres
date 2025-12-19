@@ -1,0 +1,30 @@
+id: valve_set_gas_handling_assembly_v0
+kind: process
+name: Valve set for gas handling assembly
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: valve_body_machined
+  qty: 1.0
+  unit: unit
+- item_id: gas_flow_controller
+  qty: 1.0
+  unit: unit
+- item_id: fittings_and_valves
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: valve_set_gas_handling
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.6
+  unit: hr
+energy_model:
+  total_energy_kwh: 0.4
+time_model:
+  total_time_hr: 0.9
+notes: "Assemble valve set for gas handling from machined valve body, gas flow controller, and fittings/valves."

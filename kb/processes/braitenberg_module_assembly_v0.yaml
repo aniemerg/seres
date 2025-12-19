@@ -1,0 +1,25 @@
+id: braitenberg_module_assembly_v0
+kind: process
+name: Braitenberg module assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: circuit_board_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: braitenberg_vehicle_circuit_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_electronics
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.8
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "Assembles a Braitenberg vehicle circuit module from a populated circuit board. This is a seed-assembly placeholder to resolve no_recipe gaps."

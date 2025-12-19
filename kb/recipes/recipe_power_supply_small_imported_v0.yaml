@@ -1,8 +1,11 @@
 id: recipe_power_supply_small_imported_v0
-target_item_id: power_supply_small_imported
-variant_id: external_supply_v0
+kind: recipe
+name: Recipe for power supply small (imported)
+produces_id: power_supply_small_imported
+produces_qty: 1.0
+produces_unit: unit
 steps:
-  - process_id: import_placeholder_v0
-    notes: Imported small DC power supply for workstation electronics.
-assumptions: "Treat as imported; local electronics build not modeled."
-notes: Explicit supply path for imported small power supply.
+- process_id: power_supply_small_inhouse_v0
+  notes: In-house assembled small DC power supply for workstation electronics.
+assumptions: "Treat as in-house produced; imported path deprecated."
+notes: "Power supply produced via in-house assembly path instead of import placeholder."

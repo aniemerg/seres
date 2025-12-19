@@ -1,0 +1,25 @@
+id: sheet_making_from_ingot_stainless_v0
+kind: process
+name: Sheet making from stainless ingot
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: stainless_steel_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: stainless_steel_sheet
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.6
+notes: Form sheet from stainless ingot; target thickness placeholder; conservative assumptions.

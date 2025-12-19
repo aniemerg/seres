@@ -1,28 +1,10 @@
 id: recipe_tension_gauge_v0
-target_item_id: tension_gauge
-variant_id: v0
+kind: recipe
+name: Recipe for tension gauge fabrication
+produces_id: tension_gauge
+produces_qty: 1.0
+produces_unit: unit
 steps:
-  - process_id: machining_precision_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    labor_hours: 2.5
-    notes: "Machine gauge body, lever mechanism, and spring housing from steel stock to tight tolerances"
-  - process_id: spring_manufacturing_v0
-    est_time_hr: 2.0
-    machine_hours: 1.5
-    labor_hours: 1.5
-    notes: "Wind calibrated tension spring (compression or extension type) with specific spring constant for target tension range"
-  - process_id: assembly_basic_v0
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: "Assemble gauge mechanism: install calibrated spring, lever arm, dial indicator or digital readout, and tension contacts"
-  - process_id: calibration_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Calibrate tension gauge against known weights or force standards; adjust dial scale or electronic calibration to ensure accuracy (typically ±2-5%)"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Verify gauge accuracy across full tension range, check repeatability and linearity"
-assumptions: "Tension gauge for measuring wire, cable, or belt tension in manufacturing and installation applications. 2 kg mechanical or electronic gauge. Typical tension ranges: 10-500 N (light duty) or 100-5000 N (heavy duty). Includes calibrated spring mechanism, lever system, dial indicator or digital display, and tension contacts. Accuracy ±2-5% of full scale. Used in wire drawing, fiber spinning, belt drives, and cable installations."
-notes: "Manufacturing of tension gauge. Total fabrication time ~11.5 hours. Precision machining of mechanical components, spring calibration, assembly, and final calibration against force standards. Critical for quality control in wire and fiber production processes."
+- process_id: tension_gauge_fabrication_v0
+  notes: Initial one-step fabrication process
+notes: Single-step recipe producing tension_gauge from the fabrication process.

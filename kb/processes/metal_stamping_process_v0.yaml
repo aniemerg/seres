@@ -1,0 +1,24 @@
+id: metal_stamping_process_v0
+kind: process
+name: Metal stamping process v0
+layer_tags:
+- layer_5
+inputs:
+- item_id: steel_sheet_1mm
+  qty: 0.1
+  unit: kg
+outputs:
+- item_id: breaker_housing_and_mechanism
+  qty: 0.09
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.6
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.4
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: Simple stamping operation converting steel sheet 1mm into breaker housing with minor loss.

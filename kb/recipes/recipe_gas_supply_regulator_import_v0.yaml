@@ -1,10 +1,11 @@
 id: recipe_gas_supply_regulator_import_v0
+kind: recipe
 target_item_id: gas_supply_regulator
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported regulator until precision valve manufacturing is modeled.
-assumptions: Regulators are imported early; replace with local machining/valve builds later.
-notes: Import placeholder to unblock gas handling assemblies.
-
+  - process_id: mold_preparation_basic_v0
+  - process_id: metal_casting_basic_v0
+  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
+notes: "Local manufacturing of gas_supply_regulator from BOM components; aligns with the standard v0 production path."
+assumptions: "Casting, machining, and assembly chain to produce gas supply regulator"

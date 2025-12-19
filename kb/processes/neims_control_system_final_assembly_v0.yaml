@@ -1,0 +1,36 @@
+id: neims_control_system_final_assembly_v0
+kind: process
+name: NEIMS control system final assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: formation_control_unit
+  qty: 1.0
+  unit: kg
+- item_id: assembled_electronics
+  qty: 1.0
+  unit: unit
+- item_id: programmed_microcontroller
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: neims_control_system_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_tools_basic
+- test_equipment_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.6
+  notes: "Final assembly energy for integration and QA"
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+notes: >
+  Final assembly of NEIMS control system from core subassemblies; includes QA checks.

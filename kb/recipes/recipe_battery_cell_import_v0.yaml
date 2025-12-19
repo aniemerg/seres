@@ -1,9 +1,6 @@
 id: recipe_battery_cell_import_v0
+kind: recipe
 target_item_id: battery_cell
-variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported battery cell until full cell assembly process is modeled.
-assumptions: "Placeholder import; replace with electrode prep, assembly, filling, sealing, and formation steps later."
-notes: Import route for battery cell.
+  - battery_cell_assembly_v0
+notes: "Local production route for battery_cell (import_stub removed; this is now a standard recipe)."

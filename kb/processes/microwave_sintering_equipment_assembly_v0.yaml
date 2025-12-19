@@ -1,0 +1,33 @@
+id: microwave_sintering_equipment_assembly_v0
+kind: process
+name: Microwave sintering equipment assembly v0
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: machine_frame_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: microwave_sintering_equipment_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+  - resource_type: assembly_station
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 6.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Assembles microwave_sintering_equipment_v0 from heavy machine frame and power_electronics_module using assembly_station."

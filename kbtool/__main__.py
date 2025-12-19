@@ -54,7 +54,12 @@ def _parse_args() -> argparse.Namespace:
 def main() -> None:
     args = _parse_args()
     if args.command in (None, "index"):
-        indexer.main()
+        # Compatibility: some environments may expose indexer.main, others may expose run_indexer only
+        if hasattr(indexer, "main"):
+            indexer.main()
+        else:
+            json_output = indexer.run_indexer()
+            print(json.dumps(json_output, indent=2))
     elif args.command == "queue":
         if args.qcmd == "pop":
             item = queue_tool.pop_queue()

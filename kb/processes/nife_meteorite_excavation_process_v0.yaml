@@ -1,0 +1,24 @@
+id: nife_meteorite_excavation_process_v0
+kind: process
+name: NiFe meteorite excavation process v0
+inputs:
+- item_id: meteorite_iron
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: nife_meteorite_material
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: mining_equipment
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+  notes: Placeholder energy per unit NiFe meteorite material produced.
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+  notes: Batch time for a basic excavation operation.
+notes: "Placeholder NiFe meteorite excavation process. Converts meteorite_iron input into NiFe meteorite material (nife_meteorite_material). Seeded from seed papers; used to bootstrap mass flows."

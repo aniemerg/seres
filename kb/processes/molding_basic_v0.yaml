@@ -1,0 +1,22 @@
+id: molding_basic_v0
+kind: process
+name: Molding (basic)
+layer_tags:
+- layer_6
+inputs: []
+outputs: []
+requires_ids:
+- molding_press_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: "Basic polymer molding operation using molding press"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.5
+  notes: "Mold loading, shaping, curing, cooling, and demolding"
+notes: Placeholder basic molding process; materials to be defined later.

@@ -1,0 +1,26 @@
+id: alnico_casting_process_v0
+kind: process
+name: Alnico casting (investment casting) v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: alnico_magnet_alloy_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: alnico_casting_block_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 6.0
+  notes: Approximate energy for investment casting heat treatment
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.5
+notes: Investment casting of AlNiCo alloy into solid casting blocks for subsequent finishing.

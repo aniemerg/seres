@@ -1,0 +1,41 @@
+id: tank_set_assembly_v0
+kind: process
+name: Tank set assembly v0
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: tank_shell_spun
+  qty: 1.0
+  unit: unit
+- item_id: chemical_bath_heaters
+  qty: 1.0
+  unit: unit
+- item_id: chemical_bath_agitation_system
+  qty: 1.0
+  unit: unit
+- item_id: chemical_bath_ventilation
+  qty: 1.0
+  unit: unit
+- item_id: fastener_kit_medium
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: chemical_bath_tank_set
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+- resource_type: assembly_tools_basic
+  amount: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.5
+  notes: Assembly energy proxy
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Assemble spun tank shell with heaters, agitation, ventilation, and fasteners into a chemical bath tank set."

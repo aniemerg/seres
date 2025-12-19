@@ -1,0 +1,29 @@
+id: liquid_sodium_receiver_fabrication_v0
+kind: process
+name: Liquid sodium receiver fabrication
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: metal_alloy_bulk
+  qty: 25.0
+  unit: kg
+outputs:
+- item_id: liquid_sodium_receiver_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- casting_furnace
+- molds
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: "Placeholder energy for casting-based fabrication of liquid sodium receiver"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder fabrication path: uses casting furnace and molds; refine inputs/outputs later."

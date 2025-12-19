@@ -27,7 +27,9 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  total_energy_kwh: 1.0
+  type: kWh_per_unit_output
+  value: 1.0
 time_model:
-  total_time_hr: 1.0
+  type: fixed_time
+  hr_per_batch: 1.0
 notes: "Battery cell assembly process. Assembles electrodes (anode/cathode), separator, and electrolyte into sealed cell casing. Requires controlled atmosphere (dry room or glove box) for moisture-sensitive chemistries. Includes electrode stacking/winding, electrolyte filling, and hermetic sealing. Formation cycling may be required post-assembly."

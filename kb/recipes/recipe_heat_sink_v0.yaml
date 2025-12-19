@@ -1,0 +1,18 @@
+id: recipe_heat_sink_v0
+kind: recipe
+target_item_id: heat_sink
+variant_id: v0
+steps:
+- process_id: heat_sink_extrusion_v0
+  inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: heat_sink
+    qty: 0.15
+    unit: unit
+  est_time_hr: 0.3
+notes: "Real production path to replace import stub: extrusion of aluminum alloy ingot into heat sink profile."
+assumptions: |
+  Aluminum alloy ingot feedstock is available; extrusion uses standard profile; losses/scrap not explicitly modeled here.

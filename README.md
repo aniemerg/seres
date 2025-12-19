@@ -21,12 +21,18 @@ See `docs/README.md` for complete onboarding documentation.
   - GC expired leases: `queue gc`
   - Prune explicit resolved/superseded: `queue prune`
   - List counts: `queue ls`
+- Autonomous agents:
+  - Run single agent: `python -m queue_agents.worker --agent <name>`
+  - Run parallel agents: `python -m queue_agents.launcher --workers <n>`
+  - Run with live dashboard: `python -m queue_agents.parallel_launcher --workers <n>`
+  - See `queue_agents/README.md` for details
 - See `docs/` for onboarding and workflow details.
 
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.
 - `kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
 - `kbtool/` — Python tooling (models + indexer CLI).
+- `queue_agents/` — Autonomous queue agents for processing KB gaps.
 - `out/` — generated index, reports, work queue.
 
 ## Indexer outputs

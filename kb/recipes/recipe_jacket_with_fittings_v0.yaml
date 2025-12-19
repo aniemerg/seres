@@ -1,0 +1,44 @@
+id: recipe_jacket_with_fittings_v0
+kind: recipe
+target_item_id: jacket_with_fittings
+variant_id: v0
+steps:
+  - process_id: sheet_metal_forming_process_v0
+    inputs:
+      - item_id: copper_sheet_2mm
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: jacket_panels_formed
+        qty: 2.8
+        unit: kg
+    est_time_hr: 2.0
+    notes: Form curved jacket panels to match cooled component geometry
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: jacket_panels_formed
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: jacket_shell_welded
+        qty: 2.7
+        unit: kg
+    est_time_hr: 3.0
+    notes: TIG weld panels into complete jacket shell
+  - process_id: brazing_process_v0
+    inputs:
+      - item_id: jacket_shell_welded
+        qty: 2.7
+        unit: kg
+      - item_id: copper_tube_fitting
+        qty: 0.3
+        unit: kg
+      - item_id: brazing_alloy_copper_phosphorus
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: jacket_with_fittings
+        qty: 3.0
+        unit: kg
+    est_time_hr: 1.5
+    notes: Braze inlet/outlet fittings onto jacket

@@ -1,0 +1,28 @@
+id: lathe_headstock_turn_v0
+kind: process
+name: Lathe headstock turning
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: lathe_headstock_blank
+  qty: 60.0
+  unit: kg
+outputs:
+- item_id: lathe_headstock_simple
+  qty: 60.0
+  unit: kg
+requires_ids:
+- precision_lathe
+resource_requirements:
+- resource_type: precision_lathe
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.25
+  notes: Energy per kilogram for turning operations
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: Turning operation to machine lathe_blank into lathe_headstock_simple; chips modeled elsewhere.

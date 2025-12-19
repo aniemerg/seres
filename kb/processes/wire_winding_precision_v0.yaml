@@ -1,0 +1,36 @@
+id: wire_winding_precision_v0
+kind: process
+name: Wire winding precision (nickel RTD)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: nickel_wire_fine
+  qty: 0.045
+  unit: kg
+- item_id: ceramic_substrate_rtd
+  qty: 0.008
+  unit: kg
+outputs:
+- item_id: rtd_element_wound
+  qty: 0.01
+  unit: kg
+requires_ids:
+- coil_winding_machine_v0
+resource_requirements:
+- resource_type: coil_winding_machine
+  qty: 1.0
+  unit: unit
+- resource_type: labor_bot_general
+  qty: 0.2
+  unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.6
+  notes: "Winding operation energy estimate"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Wind nickel wire precisely on ceramic substrate"
+assumptions: |
+  Nickel wire fine gauge; ceramic substrate provides insulation and thermal stability.

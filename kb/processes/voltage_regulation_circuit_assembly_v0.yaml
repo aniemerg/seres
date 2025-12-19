@@ -1,0 +1,29 @@
+id: voltage_regulation_circuit_assembly_v0
+kind: process
+name: Voltage regulation circuit assembly v0
+layer_tags:
+  - layer_electronics
+inputs:
+  - item_id: assembled_electronics
+    qty: 1.0
+    unit: unit
+  - item_id: voltage_regulator_switching_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: voltage_regulation_circuit_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "Assemble voltage regulation circuit from electronics by placing regulator module and passive components; placeholder BOM-level details."

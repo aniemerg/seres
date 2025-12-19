@@ -1,0 +1,18 @@
+id: recipe_reactor_heating_cooling_system_v0
+kind: recipe
+name: Recipe for reactor heating/cooling system v0
+produces_id: reactor_heating_cooling_system_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: reactor_heating_cooling_system_v0
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+  - process_id: welding_brazing_basic_v0
+  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
+  - process_id: enclosure_assembly_basic_v0
+  - process_id: electrical_wiring_and_controls_v0
+  - process_id: machine_assembly_basic_v0
+assumptions: "Assemble heating/cooling modules (heater, cryocooler, temp control) into reactor system; refer to BOM for subcomponents; temperature_control_system_v0 and cryocooler_active_v0 used as seed components."
+notes: "Top-level recipe to assemble reactor heating/cooling system from standard unit operations."

@@ -1,10 +1,11 @@
 id: recipe_metal_sheet_import_v0
-target_item_id: metal_sheet
-variant_id: import_v0
+kind: recipe
+name: Metal sheet production via rolling (import-style, v0)
+produces_id: metal_sheet
+produces_qty: 1.0
+produces_unit: unit
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported metal sheet until local rolling/shearing is modeled.
-assumptions: Sheet stock imported early; replace with plate rolling and cutting when available.
-notes: Import placeholder to supply fabrication steps.
-
+- process_id: rolling_basic_v0
+  notes: Rolling ingot to sheet using plate_rolling_mill
+assumptions: This is a replacement for the old import placeholder; rolling path is the intended local production route.
+notes: Replaced the previous import placeholder with an actual rolling-based production step for metal_sheet.

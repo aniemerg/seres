@@ -1,0 +1,22 @@
+id: recipe_hauler_v0_alias_v0
+kind: recipe
+produces_id: hauler_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: hauler
+steps:
+  - process_id: metal_casting_basic_v0
+    notes: "Cast base frame components for hauler subassembly"
+  - process_id: welding_brazing_basic_v0
+    notes: "Weld frame and chassis components"
+  - process_id: machining_finish_basic_v0
+    notes: "Finish machining of subassemblies"
+  - process_id: assembly_basic_v0
+    notes: "Assembly of major subassemblies"
+  - process_id: enclosure_assembly_basic_v0
+    notes: "Enclosure and mounting frame"
+  - process_id: electrical_wiring_and_controls_v0
+    notes: "Electrical integration for controls"
+  - process_id: machine_assembly_basic_v0
+    notes: "Final assembly and integration into hauler_v0"
+notes: "Alias recipe to close no_recipe gap for hauler; uses same steps as hauler_v0 recipe."

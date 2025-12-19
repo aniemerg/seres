@@ -1,0 +1,28 @@
+id: tungsten_blank_sintering_high_temp_v0
+kind: process
+name: Tungsten cathode blank sintering (high temperature, blank path)
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: tungsten_powder
+  qty: 0.2
+  unit: kg
+outputs:
+- item_id: tungsten_cathode_blank_v0
+  qty: 0.15
+  unit: kg
+requires_ids:
+- sintering_furnace
+- inert_atmosphere_system
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: total_energy_kwh
+  value: 50.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+notes: "Sinter tungsten powder to form a tungsten cathode blank for CaO coating."

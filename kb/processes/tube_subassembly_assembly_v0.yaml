@@ -1,0 +1,27 @@
+id: tube_subassembly_assembly_v0
+kind: process
+name: Vacuum tube subassembly v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: vacuum_tube_triode_v0
+  qty: 1.0
+  unit: unit
+- item_id: vacuum_envelope_quartz
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: vacuum_tube_subassembly
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  total_energy_kwh: 0.8
+time_model:
+  total_time_hr: 1.0
+notes: Vacuum tube subassembly by placing triode inside quartz envelope and securing it for assembly.

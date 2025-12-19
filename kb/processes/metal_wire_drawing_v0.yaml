@@ -1,0 +1,31 @@
+id: metal_wire_drawing_v0
+kind: process
+name: Metal wire drawing (v0)
+layer_tags:
+  - layer_6
+inputs:
+- item_id: raw_metal_block
+  qty: 2.0
+  unit: kg
+outputs:
+- item_id: metal_wire_feed
+  qty: 2.0
+  unit: kg
+requires_ids:
+  - drawing_die_set_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: "Drawing wire through cold-work dies; placeholder energy estimate"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.5
+  notes: "Two passes through drawing dies; placeholder timing"
+notes: |
+  Placeholder metal wire drawing process (v0).
+  Converts raw metal block into a drawn wire feedstock suitable for WAAM/EBF3 deposition.
+  Parameters and equipment are placeholders and to be refined with BOM inputs.

@@ -1,0 +1,22 @@
+id: recipe_circuit_board_tools_v0
+kind: recipe
+target_item_id: circuit_board_tools_v0
+variant_id: v0
+steps:
+  - process_id: forging_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 0.8
+    machine_hours: 0.8
+    notes: "Forge tool blanks for circuit board tools kit."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 0.8
+    labor_hours: 0.6
+    machine_hours: 0.8
+    notes: "Finish tool components; prepare fixtures"
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.6
+    labor_hours: 0.6
+    machine_hours: 0.3
+    notes: "Assemble toolkit from forged blanks and components"
+assumptions: "Assemble basic hand tools kit; no specialized tooling required; placeholders used for PCB-specific tools."
+notes: "Structured like recipe_hand_tools_basic_v0 for consistency."

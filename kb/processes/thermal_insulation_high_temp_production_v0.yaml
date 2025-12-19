@@ -1,0 +1,22 @@
+id: thermal_insulation_high_temp_production_v0
+name: Thermal insulation high-temperature production v0
+kind: process
+inputs: []
+outputs:
+  - item_id: thermal_insulation_high_temp
+    qty: 2.0
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_station
+    qty: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder production process for high-temperature insulation material; 2 kg per batch."

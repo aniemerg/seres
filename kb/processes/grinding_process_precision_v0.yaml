@@ -1,0 +1,25 @@
+id: grinding_process_precision_v0
+kind: process
+name: Precision grinding (process precision) v0
+inputs:
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: finished_part
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - surface_grinder
+  - grinding_wheels
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.2
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder precision grinding process; aligns with precision_grinding_basic_v0 and surface_grinding_precision_v0 patterns."

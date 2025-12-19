@@ -1,0 +1,23 @@
+id: grinding_silicon_powder_v0
+name: Grinding of silicon metal to silicon powder v0
+kind: process
+inputs:
+  - item_id: silicon_metal_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_powder_v0
+    qty: 1.0
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder grinding to produce silicon powder from silicon metal for modeling."

@@ -1,0 +1,22 @@
+id: procure_fixture_assembly_contacts_v0
+kind: process
+name: Procurement of fixture assembly contacts
+inputs: []
+outputs:
+- item_id: fixture_assembly_contacts
+  qty: 1.0
+  unit: unit
+# removed requires_ids to avoid creating unresolved refs in the gap queue
+resource_requirements:
+- resource_type: procurement_agent
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.1
+  notes: Procurement energy proxy; shipping energy ignored in this abstraction
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Procurement lead time; placeholder
+notes: Procurement pathway for fixture assembly contacts (placeholder for supplier integration)

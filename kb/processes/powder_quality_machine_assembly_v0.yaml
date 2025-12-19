@@ -1,0 +1,27 @@
+id: powder_quality_machine_assembly_v0
+kind: process
+name: Powder quality analysis system assembly v0
+inputs:
+- item_id: optical_microscope_v0
+  qty: 1.0
+  unit: unit
+- item_id: screening_equipment_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: powder_quality_analysis_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.8
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: |-
+  Assemble the powder quality analysis system from an optical microscope v0 and screening equipment v0.
+  This is a placeholder assembly process to enable local manufacturing of the machine in the KB.

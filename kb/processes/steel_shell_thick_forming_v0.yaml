@@ -1,0 +1,27 @@
+id: steel_shell_thick_forming_v0
+kind: process
+name: Form thick steel shell from 3mm sheet
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: steel_sheet_3mm
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: steel_shell_thick
+  qty: 1.0
+  unit: kg
+requires_ids:
+- sheet_making_from_ingot_v0
+resource_requirements:
+- resource_type: steel_forming_press
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Form thick steel shell from 3mm sheet using sheet forming press; placeholder values.

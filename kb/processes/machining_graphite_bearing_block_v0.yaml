@@ -1,0 +1,23 @@
+id: machining_graphite_bearing_block_v0
+kind: process
+name: Machining graphite bearing block to plain bearing graphite v0
+inputs:
+- item_id: graphite_block_material_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: plain_bearing_graphite_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.0
+  notes: "Machining energy for graphite bearing from block"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+notes: "Machining graphite bearing block to final bearing."

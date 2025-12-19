@@ -1,9 +1,12 @@
 id: recipe_part_mill_shell_generic_v0
+kind: recipe
+name: Mill shell generic production
 target_item_id: mill_shell_generic
+produces_id: mill_shell_generic
+produces_qty: 1.0
+produces_unit: unit
 variant_id: v0
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-assumptions: Cast shell from metal_alloy_bulk; machining not modeled yet.
-notes: Uses casting to form shell; finishing steps to be added later.
+- process_id: metal_casting_basic_v0
+notes: Cast shell from metal alloy_bulk; finishing/machining not modeled yet.
+assumptions: Cast shell to ~net shape; subsequent finishing operations to be modeled later.

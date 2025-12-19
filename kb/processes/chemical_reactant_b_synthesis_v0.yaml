@@ -1,0 +1,19 @@
+id: chemical_reactant_b_synthesis_v0
+name: Synthesis of chemical_reactant_b
+kind: process
+inputs:
+  - item_id: chemical_reactant_a
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: chemical_reactant_b
+    qty: 1.0
+    unit: kg
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.5
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 5.0
+notes: "Placeholder synthesis step converting chemical_reactant_a to chemical_reactant_b."

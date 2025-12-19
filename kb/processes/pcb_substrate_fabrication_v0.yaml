@@ -1,0 +1,22 @@
+id: pcb_substrate_fabrication_v0
+name: PCB Substrate fabrication (basic)
+kind: process
+inputs:
+- item_id: uncoated_substrate_material_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: pcb_substrate_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: seed_lab
+  amount: 0.0
+  unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.3
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Seed PCB substrate fabrication: converts uncoated substrate to PCB substrate; placeholder values."

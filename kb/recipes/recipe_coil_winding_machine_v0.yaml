@@ -1,22 +1,24 @@
 id: recipe_coil_winding_machine_v0
-target_item_id: coil_winding_machine
+kind: recipe
+name: Recipe for coil winding machine v0
+target_item_id: coil_winding_machine_v0
 variant_id: v0
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    notes: "Cast machine frame and base"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Machine spindle mounting, bearing journals, wire guide rails"
-  - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble frame, spindle drive motor, wire tensioning mechanism"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Install motor controller, turn counter, speed control"
+- process_id: metal_casting_basic_v0
+  est_time_hr: 1.5
+  machine_hours: 1.5
+  notes: "Cast machine frame and base"
+- process_id: machining_finish_basic_v0
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: "Machine spindle mounting, bearing journals, wire guide rails"
+- process_id: assembly_basic_v0
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  notes: "Assemble frame, spindle drive motor, wire tensioning mechanism"
+- process_id: wiring_and_electronics_integration_v0
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  notes: "Install motor controller, turn counter, speed control"
 assumptions: Motor controller and turn counter electronics fabricated or imported.
-notes: Coil winding machine for electrical coils.
+notes: Coil winding machine variant v0 build sequence.

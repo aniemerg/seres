@@ -1,0 +1,27 @@
+id: hose_end_fittings_fabrication_v0
+kind: process
+name: Hose end fittings fabrication v0
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: steel_stock
+  qty: 0.5
+  unit: kg
+outputs:
+- item_id: hose_end_fittings_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- sheet_metal_fabrication_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Fabricate a hose end fitting from steel stock using basic forming operations."

@@ -1,0 +1,35 @@
+id: metalysis_ffc_reduction_v0
+kind: process
+name: Metalysis FFC reduction
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: ilmenite_concentrate
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: iron_metal_pure
+  qty: 0.9
+  unit: kg
+- item_id: titanium_oxide
+  qty: 0.1
+  unit: kg
+requires_ids:
+- none
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.8
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: Placeholder energy intensity for Metalysis FFC reduction
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Simple 1-hour batch (placeholder)
+notes: |
+  Placeholder for Metalysis FFC reduction converting ilmenite concentrate to
+  iron metal and a titanium-oxide byproduct. Used to resolve a missing mechanism
+  in the KB; details to be refined with better data.

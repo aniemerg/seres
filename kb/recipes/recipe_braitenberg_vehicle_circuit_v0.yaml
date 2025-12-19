@@ -1,0 +1,11 @@
+id: recipe_braitenberg_vehicle_circuit_v0
+kind: recipe
+name: Braitenberg vehicle circuit assembly v0
+produces_id: braitenberg_vehicle_circuit_v0
+produces_qty: 1.0
+produces_unit: unit
+steps:
+  - process_id: circuit_board_assembly_v0
+  - process_id: braitenberg_module_assembly_v0
+assumptions: "Circuit board is produced from pcb_substrate_v0 and basic tools; Braitenberg module assembly then yields the final circuit part."
+notes: "Assembly chain to fabricate Braitenberg vehicle circuit from PCB substrate to final module."

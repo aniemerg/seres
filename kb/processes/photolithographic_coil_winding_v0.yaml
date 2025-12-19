@@ -1,0 +1,28 @@
+id: photolithographic_coil_winding_v0
+kind: process
+name: Photolithographic coil winding (v0)
+inputs:
+- item_id: copper_patterned_substrate_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: photolithographic_coil_winding_v0
+  qty: 1.0
+  unit: kg
+requires_ids:
+- coil_winding_machine_v0
+resource_requirements:
+- resource_type: coil_winding_machine
+  amount: 1.0
+  unit: unit
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.8
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 0.5
+notes: "Photolithographic winding: uses a winding machine after photolithographic patterning to form a copper coil on a patterned substrate. Conservative estimates."

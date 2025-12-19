@@ -1,0 +1,22 @@
+id: data_capture_uncoded_data_v0
+name: Data capture of uncoded data v0
+kind: process
+inputs: []
+outputs:
+  - item_id: uncoded_data_stream
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: cpu_core
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.02
+  notes: "Estimated energy per unit data capture"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+  notes: "Data capture latency"
+notes: "Placeholder process to generate an uncoded data stream from sensors for ISRU modeling." 

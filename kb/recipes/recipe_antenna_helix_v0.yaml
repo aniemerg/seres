@@ -1,0 +1,13 @@
+id: recipe_antenna_helix_v0
+kind: recipe
+target_item_id: antenna_helix_v0
+name: Antenna helix winding recipe v0
+produces_id: antenna_helix_v0
+produces_qty: 1.0
+produces_unit: unit
+steps:
+- process_id: wire_cutting_and_stripping_v0
+- process_id: coil_winding_basic_v0
+notes: |
+  Two-step chain: cut and strip magnet wire copper feed and then wind into a helical antenna element.
+  Assumes magnet_wire_copper as feedstock and basic coil winding machinery.

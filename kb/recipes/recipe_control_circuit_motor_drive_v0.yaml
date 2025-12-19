@@ -1,0 +1,30 @@
+id: recipe_control_circuit_motor_drive_v0
+kind: recipe
+name: Recipe for control circuit board (motor drive)
+produces_id: control_circuit_motor_drive
+produces_qty: 1.0
+produces_unit: unit
+steps:
+- process_id: pcb_fabrication_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  labor_hours: 1.0
+  notes: Fabricate PCB for motor drive control
+- process_id: electronics_assembly_v0
+  est_time_hr: 2.5
+  labor_hours: 2.5
+  notes: Assemble motor drive components
+- process_id: firmware_programming_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: Program firmware for motor drive control
+- process_id: electrical_testing_basic_v0
+  est_time_hr: 0.8
+  labor_hours: 0.8
+  notes: Functional electrical tests
+- process_id: inspection_basic_v0
+  est_time_hr: 0.4
+  labor_hours: 0.4
+  notes: Visual & solder joint inspection
+assumptions: "One-off control circuit board for motor drive; uses off-the-shelf PCB components; generic motor drive control logic."
+notes: "Produces one control circuit module for motor drive control."

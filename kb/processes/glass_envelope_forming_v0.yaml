@@ -1,0 +1,27 @@
+id: glass_envelope_forming_v0
+name: Glass envelope forming (v0)
+kind: process
+inputs:
+  - item_id: fused_silica_glass
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: glass_envelope_vacuum_tube_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - furnace_high_temp
+  - crucible_graphite
+  - controlled_atmosphere_chamber
+resource_requirements:
+  - resource_type: glass_furnace
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 5.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 2.0
+notes: "Bulb forming from fused silica; placeholder values based on related glass forming operations."

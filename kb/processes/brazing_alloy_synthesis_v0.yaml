@@ -1,0 +1,32 @@
+id: brazing_alloy_synthesis_v0
+kind: process
+name: Brazing alloy synthesis v0
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: brazing_alloy_generic
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - brazing_furnace_v0
+  - crucible
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+  notes: "Seed brazing alloy synthesis energy (placeholder)"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: "Placeholder synthesis time"
+notes: "Seed brazing alloy synthesis: produce brazing_alloy_generic from metal_alloy_bulk and flux_brazing. Placeholder values; refine with data."

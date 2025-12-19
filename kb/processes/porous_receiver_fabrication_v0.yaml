@@ -1,0 +1,33 @@
+id: porous_receiver_fabrication_v0
+kind: process
+name: Porous volumetric receiver fabrication
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+- item_id: volumetric_receiver_porous_raw_template_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: volumetric_receiver_porous_v0
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+- resource_type: high_temperature_power_supply
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.0
+  notes: "Placeholder energy for porous receiver fabrication"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: |-
+  Fabrication process for volumetric receiver with a porous absorber. Placeholder
+  inputs include a templated template; actual materials to be refined. This stage
+  is intended to be refined as knowledge improves.

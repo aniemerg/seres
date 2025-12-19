@@ -1,0 +1,16 @@
+id: recipe_chemical_bath_agitation_system_v1
+kind: recipe
+name: Recipe for chemical bath agitation system (v1)
+produces_id: chemical_bath_agitation_system
+produces_qty: 1.0
+produces_unit: unit
+steps:
+- process_id: metal_parts_fabrication_v0
+  notes: Fabricate shaft, impeller blades, mounting brackets
+- process_id: assembly_basic_v0
+  notes: Assemble impeller, shaft, motor, seals
+- process_id: alignment_and_testing_basic_v0
+  notes: Test agitation and seal integrity
+assumptions: |
+  Agitation system fabricated from local steel. Motor may use imported components initially. Seals can be fabricated from local materials or elastomers.
+notes: Manufacturing route for chemical bath agitation system; aligns with existing v0 implementation.

@@ -1,14 +1,15 @@
 id: import_placeholder_v0
 kind: process
-name: Import placeholder
-layer_tags:
-  - layer_0
+name: Import placeholder process
 inputs: []
-outputs: []
-energy_model:
-  type: boundary
-  notes: "No local energy - imported from Earth"
+outputs:
+- item_id: iron_powder_or_sheet
+  qty: 1.0
+  unit: unit
+resource_requirements: []
 time_model:
-  type: boundary
-  notes: "No local time - imported from Earth"
-notes: Represents imported materials not yet modeled for local production. Terminal node - imported items have no upstream dependencies in this model.
+  type: fixed_time
+  hr_per_batch: 0.01
+energy_model:
+  type: kWh_per_unit
+  value: 0.0

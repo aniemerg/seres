@@ -1,0 +1,26 @@
+id: tension_gauge_fabrication_v0
+kind: process
+name: Tension gauge fabrication
+layer_tags:
+- layer_5
+- layer_6
+inputs: []
+outputs:
+- item_id: tension_gauge
+  qty: 1.0
+  unit: unit
+requires_ids:
+- basic_fabrication_station_v0
+resource_requirements:
+- resource_type: basic_fabrication_station
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.25
+  notes: Placeholder energy for tension gauge fabrication
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Fabrication time placeholder
+notes: Basic one-step fabrication to produce tension_gauge; placeholder values for modeling.

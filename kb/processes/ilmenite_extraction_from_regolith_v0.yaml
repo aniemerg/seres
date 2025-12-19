@@ -1,0 +1,27 @@
+id: ilmenite_extraction_from_regolith_v0
+kind: process
+name: Ilmenite extraction from regolith
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: raw_ore_or_regolith
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: iron_ore_or_ilmenite
+  qty: 0.6
+  unit: kg
+- item_id: tailings
+  qty: 0.4
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.6
+  unit: hr
+energy_model:
+  total_energy_kwh: 2.0
+time_model:
+  total_time_hr: 1.0
+notes: "Placeholder ilmenite extraction from regolith; coarse yield: 60% ilmenite; 40% tailings."

@@ -1,0 +1,22 @@
+id: recipe_press_platen_steel_v0
+kind: recipe
+name: Recipe for steel press platen
+produces_id: press_platen_steel
+produces_qty: 1.0
+produces_unit: unit
+variant_id: v0
+steps:
+- process_id: metal_casting_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: Cast steel platen blank
+- process_id: machining_finish_basic_v0
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: Machine platen surfaces parallel and flat; drill mounting holes
+- process_id: precision_grinding_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: Final grinding to tolerance
+assumptions: Steel platen blank produced from standard steel stock; tolerances handled in final pass.
+notes: Simple, repeatable platen fabrication path for press_platen_steel.

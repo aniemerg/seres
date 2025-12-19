@@ -1,0 +1,27 @@
+id: air_compressor_basic_v0
+kind: process
+name: Air compressor basic operation
+inputs:
+- item_id: deionized_water
+  qty: 0.0
+  unit: kg
+outputs:
+- item_id: air_compressor_small
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+- resource_type: power_supply_basic
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.2
+  notes: Placeholder energy per produced unit
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Batch production cycle
+notes: Simple unit-operation to produce an air_compressor_small via basic assembly.

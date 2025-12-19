@@ -1,0 +1,36 @@
+id: core_memory_threading_process_v0
+kind: process
+name: Core memory threading (wire threading through cores) v0
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: magnetic_core_memory_tile_v0
+    qty: 1.0
+    unit: unit
+  - item_id: threading_needle_mechanism_v0
+    qty: 1.0
+    unit: unit
+  - item_id: wire_tensioning_system
+    qty: 1.0
+    unit: unit
+  - item_id: magnet_wire_copper
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: core_memory_threaded_tile_v0
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: core_memory_assembly
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.4
+  notes: "Estimated energy per threaded tile output (seed-based placeholder)."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Seed-based placeholder: threads copper magnet wire through ferrite cores to form a threaded core memory tile; refine with real threading steps later."

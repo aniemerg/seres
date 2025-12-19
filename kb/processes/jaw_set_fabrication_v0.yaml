@@ -1,0 +1,28 @@
+id: jaw_set_fabrication_v0
+kind: process
+name: Crushing jaw set fabrication v0
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: steel_ingot
+  qty: 150.0
+  unit: kg
+outputs:
+- item_id: crushing_jaw_set
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 3.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 5.0
+  notes: "placeholder energy for jaw set fabrication from steel ingot"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "fabrication time (placeholder)"
+notes: "Fabrication of a crushing jaw set from a steel ingot; this is a placeholder pathway to close the gap."

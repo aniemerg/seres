@@ -1,0 +1,33 @@
+id: recipe_brazing_furnace_v0_v0
+kind: recipe
+produces_id: brazing_furnace_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: brazing_furnace_v0
+variant_id: v0
+steps:
+  - process_id: mold_preparation_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 0.8
+    notes: "Prepare mold for furnace shell"
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast furnace shell components"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Finish shell surfaces"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble shell, lining, and components into brazing furnace_v0"
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Weld/braze furnace body and attach components"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Final finish and interface preparations"
+notes: Placeholder, coherent sequence to produce brazing_furnace_v0 from shell and components.

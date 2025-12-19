@@ -1,0 +1,23 @@
+id: machining_bronze_bearing_block_v0
+kind: process
+name: Machining bronze bearing block to plain bronze bearing v0
+inputs:
+- item_id: bronze_block_material_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: plain_bearing_bronze_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.0
+  notes: "Machining energy for bronze bearing from block"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+notes: "Machining bronze bearing block to final bearing."

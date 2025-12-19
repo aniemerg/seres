@@ -1,0 +1,26 @@
+id: metallography_sample_prep_v0
+kind: process
+name: Metallography sample preparation
+layer_tags:
+- layer_6
+inputs:
+- item_id: metallography_sample_raw
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: metallography_sample_prepared
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.3
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: >
+  Polishing and etching for metallography microscopy. Placeholder energy/time estimates;
+  refine with literature and experimental data.

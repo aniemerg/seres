@@ -1,0 +1,27 @@
+id: coarse_powder_production_v0
+kind: process
+name: Coarse powder production from regolith
+layer_tags:
+  - layer_2
+  - layer_3
+inputs:
+- item_id: regolith_coarse_fraction
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: coarse_powder
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.3
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.4
+  notes: "Placeholder coarse powder production energy"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.7
+notes: "Placeholder process: convert regolith coarse fraction into coarse_powder for downstream milling."

@@ -1,0 +1,28 @@
+id: rochow_process_reactor_v0
+kind: process
+name: Rochow process reactor
+layer_tags:
+- layer_4
+inputs:
+- item_id: methyl_chloride_gas
+  qty: 1.0
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: methyl_trichlorosilane_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: chemical_reactor_unit_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+  notes: "Placeholder energy intensity for Rochow reaction"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Rochow process reactor: MeCl gas + Si -> MeSiCl3 (methyltrichlorosilane). Placeholder for early modeling."

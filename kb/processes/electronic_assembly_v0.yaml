@@ -1,0 +1,32 @@
+id: electronic_assembly_v0
+kind: process
+name: Electronic assembly v0
+layer_tags:
+  - layer_7
+  - layer_8
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_tools_basic
+    amount: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit
+  value: 6.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+notes: "Electronic assembly combining populated PCB and enclosure; includes wiring and connectors. Mass balance closed with assembly_loss byproduct."

@@ -1,9 +1,15 @@
 id: recipe_structural_steel_frame_import_v0
 target_item_id: structural_steel_frame
 variant_id: import_v0
+produces_id: structural_steel_frame
+produces_qty: 1.0
+produces_unit: unit
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.5
-    notes: Imported welded frame until detailed fabrication route is modeled.
-assumptions: "Placeholder import; replace with structural welding/cutting recipe later."
-notes: Import route for structural steel frame used in press brake BOMs.
+- process_id: cutting_basic_v0
+  notes: "Cut stock to rough parts for frame assembly"
+- process_id: welding_structural_v0
+  notes: "Weld cut_parts into welded fabrications for frame"
+- process_id: fabricate_structural_steel_frame_v0
+  notes: "Finish fabrication to final structural frame"
+assumptions: "Concrete steps for frame fabrication; replace with BOM details later"
+notes: "Replace import placeholder with a real frame fabrication sequence."

@@ -1,0 +1,29 @@
+id: position_sensor_set_assembly_v0
+kind: process
+name: Position sensor set assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: sensor_suite_general
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: position_sensor_set
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_tools_basic
+- soldering_station
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.3
+notes: "Assemble position sensor set from a general sensor suite using basic tools."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder process to produce position_sensor_set."

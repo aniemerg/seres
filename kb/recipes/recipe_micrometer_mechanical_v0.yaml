@@ -1,0 +1,27 @@
+id: recipe_micrometer_mechanical_v0
+kind: recipe
+name: Recipe for mechanical micrometer v0
+produces_id: micrometer_mechanical_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: micrometer_mechanical_v0
+variant_id: v0
+steps:
+- process_id: machining_finish_basic_v0
+  est_time_hr: 4.0
+  machine_hours: 4.0
+  notes: "Machine basic micrometer body features"
+- process_id: heat_treat_basic_v0
+  est_time_hr: 1.5
+  machine_hours: 1.5
+  notes: "Heat treat to improve dimensional stability"
+- process_id: precision_grinding_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: "Finish reference faces and jaw surfaces to spec"
+- process_id: inspection_basic_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: "Calibrate against gauge blocks and verify accuracy"
+assumptions: "Seed micrometer_mechanical_v0 from seed paper; uses standard micrometer body manufacturing steps."
+notes: "Produces mechanical micrometer body for micrometer_mechanical_v0."

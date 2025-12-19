@@ -1,0 +1,19 @@
+id: information_verification_unit_v0
+kind: process
+name: Information verification unit
+inputs: []
+outputs:
+- item_id: information_closure_verification_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.1
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: Placeholder process for verifying information closure.

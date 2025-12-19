@@ -1,0 +1,27 @@
+id: recipe_bearing_rings_machined_v0
+kind: recipe
+target_item_id: bearing_rings_machined
+variant_id: v0
+steps:
+  - process_id: metal_forging_process_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: bearing_ring_blanks
+        qty: 1.3
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Forge inner and outer bearing rings"
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: bearing_ring_blanks
+        qty: 1.3
+        unit: kg
+    outputs:
+      - item_id: bearing_rings_machined
+        qty: 1.1
+        unit: kg
+    est_time_hr: 3.0
+    notes: "Machine bearing raceways to final dimensions"

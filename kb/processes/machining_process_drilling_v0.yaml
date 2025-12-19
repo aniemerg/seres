@@ -1,0 +1,32 @@
+id: machining_process_drilling_v0
+kind: process
+name: Machining drilling process v0
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: center_insulator_ceramic
+  qty: 0.08
+  unit: kg
+outputs:
+- item_id: insulator_drilled
+  qty: 0.075
+  unit: kg
+byproducts:
+- item_id: ceramic_drill_chip_waste
+  qty: 0.005
+  unit: kg
+requires_ids:
+- drill_press_v0
+resource_requirements:
+- resource_type: drill_press
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.2
+  notes: "Energy per kilogram of ceramic insulator drilled; includes motor operation and coolant."
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Drilling holes in ceramic insulator to prepare antenna feed points. Chips captured as waste."

@@ -1,0 +1,15 @@
+id: recipe_machine_contact_material_application_station_v0
+target_item_id: contact_material_application_station_v0
+variant_id: v0
+steps:
+- process_id: import_receiving_basic_v0
+  est_time_hr: 0.5
+  labor_hours: 0.5
+- process_id: assembly_basic_v0
+  est_time_hr: 2.0
+  labor_hours: 2.0
+- process_id: inspection_basic_v0
+  est_time_hr: 0.5
+  labor_hours: 0.5
+assumptions: Assemble contact_material_application_station_v0 from BOM components via basic assembly; imported components allowed.
+notes: Minimal machine-assembly route; refine with more detailed steps later.

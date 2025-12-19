@@ -1,0 +1,28 @@
+id: charging_system_production_v0
+kind: process
+name: Charging system production (placeholder)
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: cast_metal_parts
+    qty: null
+    unit: kg
+outputs:
+  - item_id: charging_system
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: assembly_station
+    qty: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: "Placeholder charging system production step; converts cast metal parts into charging_system. Add details later."

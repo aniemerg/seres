@@ -1,0 +1,23 @@
+id: recipe_press_platen_set_small_v0
+kind: recipe
+name: Recipe for press_platen_set_small
+target_item_id: press_platen_set_small
+produces_id: press_platen_set_small
+produces_qty: 1.0
+produces_unit: unit
+variant_id: v0
+steps:
+- process_id: metal_casting_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: "Cast steel platen blanks for small platen set"
+- process_id: machining_finish_basic_v0
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: "Machine platen surfaces parallel and flat; drill mounting holes"
+- process_id: precision_grinding_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: "Finish grind for final flatness and parallelism"
+assumptions: Hardened steel platens machined flat and parallel. Upper and lower platen set for small hydraulic/ram press.
+notes: Small press platen set; designed to provide flat, parallel surfaces for uniform pressure distribution.

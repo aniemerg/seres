@@ -1,0 +1,26 @@
+id: regolith_concrete_polymer_binding_v0
+name: Polymer-bound regolith concrete binding (placeholder)
+kind: process
+inputs:
+  - item_id: regolith_powder
+    qty: 0.8
+    unit: kg
+  - item_id: binder_material
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: regolith_concrete_polymer_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.15
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 5.0
+notes: "Placeholder polymer binder/mixing step to produce regolith_concrete_polymer_v0."

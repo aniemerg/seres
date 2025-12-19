@@ -1,0 +1,24 @@
+id: welding_process_general_v0
+kind: process
+name: General welding
+layer_tags:
+- layer_6
+- layer_7
+inputs: []
+outputs: []
+requires_ids:
+- welding_power_supply
+- welding_tools_set
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "arc welding power and wire feed for general joints"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.0
+  notes: "setup, tack welding, welding passes, cleanup"
+notes: "General arc welding process for joining various components. Intended as a flexible, catch-all welding step used across multiple assemblies."

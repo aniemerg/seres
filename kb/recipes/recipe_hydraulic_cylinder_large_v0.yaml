@@ -1,0 +1,24 @@
+id: recipe_hydraulic_cylinder_large_v0
+kind: recipe
+name: Hydraulic cylinder large fabrication v0
+produces_id: hydraulic_cylinder_large
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: hydraulic_cylinder_large
+variant_id: v0
+steps:
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 0.8
+    notes: "Machine barrel, end caps, and ports to size for large cylinder."
+  - process_id: sealing_and_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Install seals, piston, rod, and end caps; assemble with fasteners."
+  - process_id: pressure_test_basic_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Pressure test large hydraulic cylinder; leak and strength verification."
+assumptions: "Seals and pressure testing equipment are available."
+notes: "Fabrication chain for hydraulic_cylinder_large; mirrors the small cylinder route with larger mass/clearances."

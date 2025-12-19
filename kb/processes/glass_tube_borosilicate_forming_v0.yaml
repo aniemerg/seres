@@ -1,0 +1,22 @@
+id: glass_tube_borosilicate_forming_v0
+kind: process
+name: Form borosilicate glass tube blank v0
+inputs:
+  - item_id: molten_glass
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: glass_tube_borosilicate
+    qty: 0.02
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Form borosilicate glass tube blank from molten glass; placeholder energy/time."

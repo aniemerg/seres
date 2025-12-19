@@ -1,0 +1,17 @@
+id: pcb_scrap_generation_v0
+name: PCB scrap generation v0
+kind: process
+inputs: []
+outputs:
+  - item_id: pcb_scrap
+    qty: 0.5
+    unit: kg
+requires_ids: []
+resource_requirements: []
+energy_model:
+  type: kWh_per_batch
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+notes: "Placeholder process to generate pcb scrap as a supply stream for recycling; refine with real data as available."

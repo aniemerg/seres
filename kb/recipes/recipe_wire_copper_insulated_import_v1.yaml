@@ -1,0 +1,11 @@
+id: recipe_wire_copper_insulated_import_v1
+kind: recipe
+# Import path for wire_copper_insulated (non-versioned) until local drawing/insulation path is modeled
+target_item_id: wire_copper_insulated
+variant_id: import_v1
+steps:
+  - process_id: import_placeholder_v0
+    est_time_hr: 0.2
+    notes: Imported insulated copper wire until insulation/drawing path is modeled.
+assumptions: "Wire insulation sourced externally; replace with local copper drawing and insulation path later."
+notes: "Import placeholder to support wiring and electrical subsystems modeling."

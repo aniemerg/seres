@@ -1,0 +1,29 @@
+id: invar_alloy_finalization_v0
+kind: process
+name: Invar alloy finalization to low-expansion v0
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: nife_alloy_casting
+  qty: 0.95
+  unit: kg
+outputs:
+- item_id: invar_low_expansion_v0
+  qty: 0.95
+  unit: kg
+requires_ids:
+- induction_furnace_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.6
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.9
+  notes: Melting energy + homogenization for Invar finalization
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: |
+  Final annealing/homogenization to Invar low-expansion specification; placeholder parameters.

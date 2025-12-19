@@ -1,0 +1,19 @@
+id: recipe_pcb_backprop_bare_v0
+kind: recipe
+target_item_id: pcb_backprop_bare
+steps:
+  - process_id: pcb_fabrication_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: pcb_backprop_bare
+        qty: 0.45
+        unit: kg
+    byproducts:
+      - item_id: pcb_scrap
+        qty: 0.05
+        unit: kg
+    est_time_hr: 4.0
+notes: "PCB backprop bare fabrication step using pcb_fabrication_process_v0; accounts for 0.05 kg scrap and yields pcb_backprop_bare (0.45 kg)."

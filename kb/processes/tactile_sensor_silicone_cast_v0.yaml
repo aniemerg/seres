@@ -1,0 +1,29 @@
+id: tactile_sensor_silicone_cast_v0
+kind: process
+name: Cast tactile silicone sensor element v0
+layer_tags:
+- layer_6
+inputs:
+- item_id: silicone_rubber
+  qty: 0.1
+  unit: kg
+outputs:
+- item_id: tactile_sensor_silicone_v0
+  qty: 0.1
+  unit: kg
+requires_ids:
+- molding_press_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Casting tactile silicone sensor element from silicone rubber; uses a molding press."
+source_tags:
+- ellery_2018
+- ai_estimate

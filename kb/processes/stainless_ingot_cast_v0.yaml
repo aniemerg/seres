@@ -1,0 +1,22 @@
+id: stainless_ingot_cast_v0
+kind: process
+name: Stainless ingot casting
+inputs:
+  - item_id: stainless_billet_or_slab
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: stainless_steel_ingot
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: casting_furnace
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Casting stainless billet/slab into an ingot; placeholder mass balance."

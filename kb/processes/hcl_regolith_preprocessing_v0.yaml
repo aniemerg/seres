@@ -1,0 +1,30 @@
+id: hcl_regolith_preprocessing_v0
+kind: process
+name: HCl regolith preprocessing
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: regolith_powder
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.1
+  unit: kg
+outputs:
+- item_id: regolith_powder_hcl_treated_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: lab_assistant
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Acid-based preprocessing of regolith powder; placeholder numbers. Produces regolith_powder_hcl_treated_v0 as input for subsequent leaching steps."
+provenance:
+- ai_estimate

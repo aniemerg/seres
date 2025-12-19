@@ -1,10 +1,13 @@
 id: recipe_slewing_bearing_import_v0
+kind: recipe
+name: Recipe for slewing bearing v0
+produces_id: slewing_bearing
+produces_qty: 1.0
+produces_unit: unit
 target_item_id: slewing_bearing
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 1.0
-    notes: Imported slewing bearing until local bearing manufacturing is modeled.
-assumptions: Large bearings are imported early; replace with local ring machining/heat treatment later.
-notes: Import placeholder to unblock assemblies requiring slewing joints.
-
+- process_id: metal_forging_process_v0
+- process_id: slewing_bearing_machining_v0
+notes: Local production path for slewing bearing via forging + final machining.
+assumptions: Replaced import placeholder with actual local recipe for slewing_bearing v0.

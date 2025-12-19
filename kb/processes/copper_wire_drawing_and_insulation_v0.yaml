@@ -1,0 +1,28 @@
+id: copper_wire_drawing_and_insulation_v0
+kind: process
+name: Copper wire drawing + insulation (basic)
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: copper_rod_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: magnet_wire_copper
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.8
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: "Energy per kilogram drawn and insulated; simplified for modeling."
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.0
+  notes: "Drawing and insulation pass; simplified single-pass model."
+notes: "Local copper wire drawing from ingot and insulation; placeholder for more detailed coil/treatment in future."

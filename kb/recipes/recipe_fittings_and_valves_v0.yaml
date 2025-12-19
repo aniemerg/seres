@@ -1,0 +1,51 @@
+id: recipe_fittings_and_valves_v0
+kind: recipe
+name: Recipe for fittings and valves v0
+target_item_id: fittings_and_valves
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    outputs:
+      - item_id: valve_body_cast_rough
+        qty: 4.5
+        unit: kg
+    notes: Cast rough valve body for subsequent machining
+  - process_id: valve_body_boring_v0
+    inputs:
+      - item_id: valve_body_cast_rough
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: valve_body_machined
+        qty: 4.0
+        unit: kg
+    notes: Bore valve body casting to final bore and sealing surfaces
+  - process_id: tube_bending_process_v0
+    inputs:
+      - item_id: aluminum_tube_stock
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: pipe_bent_sections
+        qty: 2.8
+        unit: kg
+    notes: Bend aluminum tubes to required sections
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: valve_body_machined
+        qty: 4.0
+        unit: kg
+      - item_id: pipe_bent_sections
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: fittings_and_valves
+        qty: 6.5
+        unit: kg
+    notes: TIG weld bent pipe sections and valve bodies into fittings/valves assembly
+  - process_id: leak_testing_v0
+    inputs: []
+    outputs: []
+    notes: Optional leak testing of assembled fittings and valves
+assumptions: "Local production path using casting->boring->tube bending->welding; leak testing optional."
+notes: "End-to-end production chain for fittings and valves; used to replace import stub for v0."

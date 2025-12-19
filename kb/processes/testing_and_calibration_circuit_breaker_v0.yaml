@@ -1,0 +1,25 @@
+id: testing_and_calibration_circuit_breaker_v0
+kind: process
+name: Testing and calibration of circuit breaker v0
+inputs:
+  - item_id: circuit_breaker_assembled
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: circuit_breaker_thermal_v0
+    qty: 0.3
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.25
+  notes: "Energy for testing and calibration step"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Calibration and functional testing step"
+notes: "Testing trip current, calibrating timing; referenced in circuit_breaker_thermal_v0 recipe step."

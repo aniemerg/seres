@@ -1,0 +1,23 @@
+id: power_component_assembly_v0
+kind: process
+name: Power component assembly (v0)
+layer_tags:
+  - layer_6
+  - layer_7
+inputs: []
+outputs: []
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 0.6
+  notes: "Placeholder energy for power component assembly; to be refined"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+  notes: "Estimated time for assembling a power component"
+notes: "Placeholder process for assembling power components (MOSFETs, inductors, capacitors, transformers) within power electronics module. Pending detailed specs."

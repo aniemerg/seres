@@ -1,0 +1,27 @@
+id: machining_uv_exposure_unit_frame_basic_v0
+kind: process
+name: Machining UV exposure unit frame (basic)
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: raw_metal_block
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: uv_exposure_unit_frame
+    qty: 20.0
+    unit: kg
+byproducts:
+  # none at this stage
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: "spindle motor (~5 kW) plus coolant and axis drives"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.3
+notes: "Machining finishes to shape UV exposure unit frame; placeholder parameters; derived from generic machining template"

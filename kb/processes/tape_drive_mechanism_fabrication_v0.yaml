@@ -1,0 +1,28 @@
+id: tape_drive_mechanism_fabrication_v0
+kind: process
+name: Tape drive mechanism fabrication
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: steel_stock
+  qty: 2.0
+  unit: kg
+outputs:
+- item_id: tape_drive_mechanism
+  qty: 1.0
+  unit: unit
+requires_ids:
+- metal_forming_basic_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.5
+  notes: "Approximate energy for forming and assembling a small metal part"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: "Fabrication path converting steel_stock into tape_drive_mechanism. Placeholder; to be refined as design iterates."

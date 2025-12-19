@@ -1,0 +1,27 @@
+id: magnesium_powder_noop_v0
+kind: process
+name: Magnesium powder no-op processing v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+  - item_id: magnesium_powder_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: magnesium_powder_v0
+    qty: 1.0
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.1
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.0
+  notes: "No-op placeholder for enabling a local production path for magnesium_powder_v0"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+notes: "Placeholder processing step to satisfy no_recipe gap for magnesium_powder_v0"

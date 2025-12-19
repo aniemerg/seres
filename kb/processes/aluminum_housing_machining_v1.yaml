@@ -1,0 +1,31 @@
+id: aluminum_housing_machining_v1
+name: Aluminum housing machining (final) v1
+kind: process
+layer_tags:
+- layer_6
+inputs:
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: aluminum_housing_machined
+    qty: 3.0
+    unit: kg
+requires_ids:
+  - milling_machine_general
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+  - resource_type: cutting_fluid
+    amount: null
+    unit: L
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "Energy intensity placeholder for final machining of aluminum housing"
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 12.0
+notes: "Final machining of machined_part_raw to aluminum_housing_machined, including pockets, ports, and surface finishing."

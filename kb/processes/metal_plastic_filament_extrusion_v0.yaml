@@ -1,0 +1,30 @@
+id: metal_plastic_filament_extrusion_v0
+kind: process
+name: Metal-plastic composite extrusion (Fe-PLA) v0
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: iron_powder_or_sheet
+    qty: 0.5
+    unit: kg
+  - item_id: polymer_printing_feedstock
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: iron_impregnated_pla_filament_v0
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - plastic_extruder
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.8
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 4.0
+notes: "Composite extrusion of 50% iron powder into PLA feedstock to produce iron-impregnated PLA filament."

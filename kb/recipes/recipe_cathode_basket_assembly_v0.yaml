@@ -1,0 +1,23 @@
+id: recipe_cathode_basket_assembly_v0
+kind: recipe
+name: Recipe for cathode basket assembly
+target_item_id: cathode_basket_assembly_v0
+steps:
+  - process_id: sheet_metal_fabrication_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Fabricate base basket components from sheet metal"
+  - process_id: metal_cutting_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: "Cut pieces to shape for frame and basket elements"
+  - process_id: welding_and_fabrication_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Weld basket frame, mesh or bars, and attach handles"
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Final assembly and QA checks"
+assumptions: "Cast/babrication route; basic sheet-metal basket assembled into cathode basket; placeholder cadence for a first-pass model"
+notes: "Initial production recipe to enable mass balance closure for cathode_basket_assembly_v0."

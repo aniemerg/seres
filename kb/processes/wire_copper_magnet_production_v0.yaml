@@ -1,0 +1,25 @@
+id: wire_copper_magnet_production_v0
+kind: process
+name: Copper magnet wire production (basic)
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: wire_copper_magnet
+    qty: 0.3
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.2
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.8
+  notes: "Energy per kilogram for copper magnet wire production (basic)"
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 3.0
+notes: "Basic production of copper magnet wire from copper rod ingot; placeholder data."

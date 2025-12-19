@@ -1,0 +1,32 @@
+id: holonic_control_prosa_v0
+kind: process
+name: Holonic PROSA control architecture
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: software_service_license
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: holonic_control_prosa_output
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.25
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.0
+  notes: "Holonic control software architecture; treated as negligible energy draw for single-unit output."
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+  notes: "Prototype scheduling step; placeholder for control loop execution."
+notes: |
+  Holonic PROSA control architecture seed item. Represents the software/control framework
+  responsible for coordinating holonic actors in a lunar manufacturing system. In this minimal
+  phase, treated as a unit-process with placeholder inputs/outputs to allow dependency closure
+  in the modeling pipeline.

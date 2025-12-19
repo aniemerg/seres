@@ -1,0 +1,23 @@
+id: recipe_cmc_precipitate_wet_v0
+kind: recipe
+name: Recipe for cmc_precipitate_wet
+produces_id: cmc_precipitate_wet
+produces_qty: 2.0
+produces_unit: kg
+variant_id: v0
+steps:
+- process_id: precipitation_and_washing_v0
+  inputs:
+  - item_id: cmc_solution
+    qty: 6.0
+    unit: kg
+  - item_id: ethanol_or_isopropanol
+    qty: 3.0
+    unit: kg
+  outputs:
+  - item_id: cmc_precipitate_wet
+    qty: 2.0
+    unit: kg
+  est_time_hr: 1.0
+  notes: Precipitate CMC from solution and wash to obtain wet precipitate
+notes: This is the canonical route to produce cmc_precipitate_wet from cmc_solution using alcohol precipitation and washing.

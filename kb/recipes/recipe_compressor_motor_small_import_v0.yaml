@@ -2,9 +2,19 @@ id: recipe_compressor_motor_small_import_v0
 target_item_id: compressor_motor_small
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported compressor-duty motor until local motor winding is modeled.
-assumptions: Motor imported early; replace with local motor builds later.
-notes: Import placeholder for compressor motor.
-
+  - process_id: lamination_stamping_v0
+    est_time_hr: 0.8
+    machine_hours: 0.5
+    labor_hours: 0.4
+    notes: "Stamp laminations for motor core; configured for compressor duty."
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 1.2
+    machine_hours: 0.8
+    labor_hours: 0.6
+    notes: "Wind copper coils for stator; may include rotor winding if required by design."
+  - process_id: motor_final_assembly_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+assumptions: |
+  Uses stamped laminations from lamination_stamping_v0; bearings are imported.
+notes: Local implementation of compressor motor small import_v0 using standard motor build steps.

@@ -1,0 +1,31 @@
+id: silicone_polymerization_v0
+kind: process
+name: Silicone polymerization
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: silicone_precursor
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: silicone_polymer
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: chemical_reactor
+  qty: 1.0
+  unit: unit
+energy_model:
+  type: kWh_per_batch
+  value: 4.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: |
+  Placeholder silicone polymerization process (defined to resolve a gap in the seed KB).
+  This process consumes silicone_precursor and yields silicone_polymer. It is intended
+  as a companion to silicone_polymer_synthesis_v0 for modeling polymerization dynamics.
+source_tags:
+- ellery_2018
+- ai_estimate

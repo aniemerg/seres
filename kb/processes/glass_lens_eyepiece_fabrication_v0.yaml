@@ -1,0 +1,27 @@
+id: glass_lens_eyepiece_fabrication_v0
+kind: process
+name: Glass eyepiece lens fabrication
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: cast_glass_parts
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: glass_lens_eyepiece
+  qty: 1.0
+  unit: unit
+requires_ids:
+- glass_casting_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.8
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Fabrication step to convert a glass cast into a glass eyepiece lens; polishing/optical finishing reserved for later steps."

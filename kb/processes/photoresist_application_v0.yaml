@@ -1,0 +1,37 @@
+id: photoresist_application_v0
+kind: process
+name: Photoresist application
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: uncoated_substrate_material_v0
+  qty: 1.0
+  unit: kg
+- item_id: photoresist_solution_v0
+  qty: 0.05
+  unit: kg
+outputs:
+- item_id: photoresist_coated_substrate_v0
+  qty: 1.0
+  unit: kg
+requires_ids:
+- spin_coating_station_v0
+resource_requirements:
+- resource_type: spin_coating_station
+  qty: 1.0
+  unit: hr
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+byproducts:
+- item_id: photoresist_solvent_evap_v0
+  qty: 0.05
+  unit: kg
+energy_model:
+  total_energy_kwh: 0.15
+time_model:
+  total_time_hr: 0.75
+notes: |
+  Spin coating of photoresist onto the substrate, using a spin coating station.
+  Optional post-coating bake is not modeled here.

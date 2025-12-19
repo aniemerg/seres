@@ -1,0 +1,24 @@
+id: regolith_based_thermal_insulation_v0
+kind: process
+name: Thermal insulation from regolith powder
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: regolith_powder
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: thermal_insulation_regolith_based_v0
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.6
+  unit: hr
+energy_model:
+  total_energy_kwh: 0.8
+time_model:
+  total_time_hr: 1.0
+notes: "Placeholder process: convert regolith_powder into regolith-based thermal insulation material. Final properties TBD."

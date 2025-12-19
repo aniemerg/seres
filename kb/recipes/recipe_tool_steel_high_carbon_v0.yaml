@@ -1,0 +1,14 @@
+id: recipe_tool_steel_high_carbon_v0
+kind: recipe
+name: Recipe for tool steel high-carbon v0
+produces_id: tool_steel_high_carbon_v0
+produces_qty: 1.0
+produces_unit: kg
+target_item_id: tool_steel_high_carbon_v0
+variant_id: v0
+steps:
+  - process_id: iron_smelting_reduction_v0
+  - process_id: steel_refining_basic_v0
+  - process_id: tool_steel_high_carbon_cast_v0
+assumptions: "Carbocarbonization step occurs during steel casting; placeholder composition."
+notes: "Path: ilmenite/ore → pig iron → steel billet → tool steel high-carbon v0"

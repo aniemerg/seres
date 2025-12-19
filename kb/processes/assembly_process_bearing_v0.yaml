@@ -1,0 +1,43 @@
+id: assembly_process_bearing_v0
+kind: process
+name: Bearing assembly v0
+layer_tags:
+  - layer_7
+inputs:
+- item_id: bearing_rings_ground
+  qty: 1.0
+  unit: kg
+- item_id: bearing_ball_steel
+  qty: 0.3
+  unit: kg
+- item_id: bearing_cage_stamped
+  qty: 0.1
+  unit: kg
+- item_id: seal_rubber_bearing
+  qty: 0.05
+  unit: kg
+- item_id: grease_bearing_high_temp
+  qty: 0.05
+  unit: kg
+outputs:
+- item_id: bearing_set_sealed
+  qty: 2.0
+  unit: kg
+byproducts:
+- item_id: assembly_loss
+  qty: 0.5
+  unit: kg
+requires_ids:
+- assembly_tools_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: null
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 2.0
+  notes: "Manual assembly with hand tools + small power tools"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Assemble bearing rings, steel ball, cage, seals and grease into sealed bearing set."

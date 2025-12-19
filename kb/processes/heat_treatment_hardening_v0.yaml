@@ -1,0 +1,27 @@
+id: heat_treatment_hardening_v0
+kind: process
+name: Heat treatment - hardening (v0)
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: bearing_rings_machined
+    qty: 1.1
+    unit: kg
+outputs:
+  - item_id: bearing_rings_hardened
+    qty: 1.05
+    unit: kg
+requires_ids:
+  - heat_treatment_furnace_v0
+resource_requirements:
+  - resource_type: heat_treatment_furnace_v0
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: "Hardening heat treatment; placeholder energy per kg based on nearby heat_treatment types"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Hardening heat treatment for bearing rings after machining; values are placeholders to align with the bearing_set_sealed_v0 recipe."

@@ -1,0 +1,28 @@
+id: power_supply_small_inhouse_v0
+kind: process
+name: Power supply small in-house assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: power_supply_components_basic
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: power_supply_small_imported
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.6
+  notes: "In-house assembly energy per unit; placeholder value for small power supply"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "In-house assembled small power supply to replace the import_placeholder path for computer_core_imported. This is a placeholder; details may be refined as components are specified."

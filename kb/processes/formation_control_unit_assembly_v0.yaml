@@ -1,0 +1,30 @@
+id: formation_control_unit_assembly_v0
+kind: process
+name: Formation control unit assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: raw_formation_control_material_v0
+  qty: 20.0
+  unit: kg
+outputs:
+- item_id: formation_control_unit
+  qty: 1.0
+  unit: kg
+requires_ids:
+- assembly_tools_basic
+- test_equipment_basic
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.4
+  notes: "Assumed energy per kg processed for electronics assembly"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+notes: >
+  Assembles formation control unit from raw mass; includes basic electronics assembly and QA checks.

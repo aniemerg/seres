@@ -1,9 +1,22 @@
 id: recipe_steel_frame_heavy_import_v0
+kind: recipe
 target_item_id: steel_frame_heavy
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.5
-    notes: Imported heavy welded frame until local fabrication route is modeled.
-assumptions: "Placeholder import; replace with welded structural steel frame recipe later."
-notes: Import route to unblock excavator BOM usage of heavy steel frame.
+  - process_id: sheet_metal_cutting_v0
+    est_time_hr: 6.0
+    labor_hours: 5.0
+    machine_hours: 5.0
+    notes: Cut plate and tube sections for frame members and mounting points.
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 7.0
+    machine_hours: 7.0
+    notes: Weld box/tube sections into the main chassis; attach brackets and mounts.
+  - process_id: stress_relief_annealing_v0
+    est_time_hr: 4.0
+    labor_hours: 1.0
+    machine_hours: 1.0
+    notes: Stress relief annealing for welded frame.
+assumptions: Uses heavy plate/tube steel feed; detailed fixturing, machining, and coating to be added later. Paint/coating not modeled.
+notes: Local non-import variant for steel_frame_heavy; mirrors v0 steps for closure.

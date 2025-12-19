@@ -1,9 +1,9 @@
 id: recipe_conveyor_drive_unit_import_v0
 target_item_id: conveyor_drive_unit
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported conveyor drive unit until local fabrication/assembly is modeled.
-assumptions: "Placeholder; replace with motor, gearbox, pulley build later."
-notes: Import route for conveyor drive unit.
+  - process_id: conveyor_drive_unit_assembly_v0
+    # Direct assembly to produce the Conveyor drive unit from existing subcomponents
+    # No placeholder step; mirrors the formal v0 recipe structure
+assumptions: "Replaced placeholder; local fabrication route is conveyor_drive_unit_assembly_v0."
+notes: Import path replaced with a concrete assembly sequence for conveyor_drive_unit.

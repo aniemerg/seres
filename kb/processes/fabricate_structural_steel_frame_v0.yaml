@@ -1,0 +1,29 @@
+id: fabricate_structural_steel_frame_v0
+kind: process
+name: Fabricate structural steel frame (v0)
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: welded_fabrications
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: structural_steel_frame
+  qty: 1.0
+  unit: unit
+requires_ids:
+- welding_power_supply
+- welding_tools_set
+- fixturing_table
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.6
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: Fabrication of structural steel frame from welded fabrications.

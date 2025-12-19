@@ -1,0 +1,37 @@
+id: recipe_path_planning_algorithm_v0
+kind: recipe
+target_item_id: path_planning_algorithm_v0
+variant_id: v0
+steps:
+- process_id: software_development_programming_v0
+  outputs:
+    - item_id: path_planning_code_uncompiled
+      qty: 1.0
+      unit: unit
+  est_time_hr: 100.0
+  notes: Develop path planning code
+- process_id: software_compilation_v0
+  inputs:
+    - item_id: path_planning_code_uncompiled
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: path_planning_executable
+      qty: 1.0
+      unit: unit
+  est_time_hr: 1.0
+  notes: Compile for target embedded platform
+- process_id: software_testing_simulation_v0
+  inputs:
+    - item_id: path_planning_executable
+      qty: 1.0
+      unit: unit
+    - item_id: sensor_data_test_set
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: path_planning_algorithm_v0
+      qty: 1.0
+      unit: unit
+  est_time_hr: 20.0
+  notes: Test path planning algorithm with test data; produce final item

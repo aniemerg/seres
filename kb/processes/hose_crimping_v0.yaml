@@ -1,0 +1,29 @@
+id: hose_crimping_v0
+kind: process
+name: Hose crimping
+layer_tags:
+- layer_6
+inputs:
+- item_id: hydraulic_hose_segment_v0
+  qty: 1.0
+  unit: unit
+- item_id: hose_end_fittings_v0
+  qty: 2.0
+  unit: unit
+outputs:
+- item_id: crimped_hydraulic_hose_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: hose_crimping_station_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.0
+  notes: Approximate energy per hose crimp operation
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+  notes: Single crimp operation for one hose
+notes: "Crimp fittings onto hose ends using a hydraulic crimping tool. Produces a crimped hose assembly."

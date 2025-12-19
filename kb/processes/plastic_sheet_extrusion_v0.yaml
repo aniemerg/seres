@@ -1,0 +1,26 @@
+id: plastic_sheet_extrusion_v0
+kind: process
+name: Plastic sheet extrusion (basic)
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: plastic_pellets
+    qty: null
+    unit: kg
+outputs:
+  - item_id: gasket_sheet
+    qty: null
+    unit: kg
+requires_ids:
+  - plastic_extruder
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.05
+notes: Basic extrusion to form gasket_sheet from plastic pellets; uses simple die and cooling.

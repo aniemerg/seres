@@ -1,9 +1,13 @@
 id: recipe_invar_low_expansion_import_v0
+kind: recipe
+name: Recipe for Invar (low expansion) v0 (import)
+produces_id: invar_low_expansion_v0
+produces_qty: 0.95
+produces_unit: kg
 target_item_id: invar_low_expansion_v0
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: "Imported Invar alloy (low expansion) placeholder."
-assumptions: Invar imported until local alloying route defined.
-notes: Import path for low expansion Invar alloy.
+  - process_id: nife_alloy_melting_and_casting_v0
+  - process_id: invar_alloy_finalization_v0
+assumptions: "Legacy import stub converted to modern step format; two-step path to Invar low-expansion."
+notes: "Imported import stub updated to canonical recipe schema."

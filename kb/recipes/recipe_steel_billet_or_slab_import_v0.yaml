@@ -1,10 +1,8 @@
 id: recipe_steel_billet_or_slab_import_v0
+kind: recipe
 target_item_id: steel_billet_or_slab
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported steel billet/slab until local steelmaking is modeled.
-assumptions: Early steel feedstock is imported; replace with local casting/rolling later.
-notes: Import placeholder to supply forging/machining processes.
-
+  - process_id: steel_refining_basic_v0
+assumptions: Converted from import_placeholder_v0 to a local steel refining path using steel_refining_basic_v0.
+notes: Local replacement for import stub to produce steel billet/slab via standard refining.

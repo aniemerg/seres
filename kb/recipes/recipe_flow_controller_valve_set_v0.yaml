@@ -1,0 +1,14 @@
+id: recipe_flow_controller_valve_set_v0
+kind: recipe
+produces_id: flow_controller_valve_set
+produces_qty: 1.0
+produces_unit: unit
+steps:
+- process_id: flow_controller_valve_set_assembly_v0
+  notes: "Assemble valve set body and ports"
+- process_id: calibration_and_test_basic_v0
+  notes: "Calibrate and test flow characteristics"
+- process_id: leak_testing_v0
+  notes: "Leak testing of assembled valve set"
+assumptions: "Assumes valve bodies and seals are available; imported components allowed if missing."
+notes: "Recipe to manufacture a flow controller valve set from assembly, calibration, and leak testing steps."

@@ -1,0 +1,31 @@
+id: pyroxene_separation_v0
+kind: process
+name: Pyroxene separation v0
+layer_tags:
+- layer_3
+inputs:
+- item_id: regolith_powder
+  qty: 100.0
+  unit: kg
+outputs:
+- item_id: pyroxene_concentrate
+  qty: 25.0
+  unit: kg
+- item_id: tailings_silicate_mix
+  qty: 75.0
+  unit: kg
+requires_ids:
+- vibrating_screen_v0
+- magnetic_separator_drum_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: "Energy per kg feed; coarse estimate based on olivine_beneficiation_v0"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.01
+notes: "Separation of pyroxene from other minerals; yields pyroxene concentrate and tailings."

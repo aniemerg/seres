@@ -1,0 +1,23 @@
+id: glass_envelope_quartz_fabrication_v0
+name: Glass envelope quartz fabrication v0
+kind: process
+inputs:
+  - item_id: fused_silica_glass
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: vacuum_envelope_quartz
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: glass_furnace
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Fabrication of vacuum envelope quartz from fused silica glass; placeholder values for energy and time."

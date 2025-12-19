@@ -1,0 +1,28 @@
+id: software_compilation_v0
+kind: process
+name: Software compilation v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: slam_code_uncompiled
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: slam_executable
+  qty: 1.0
+  unit: unit
+requires_ids:
+- 
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.1
+  notes: Energy for compiling a single executable
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Software compilation step converting uncompiled code into executable artifact.

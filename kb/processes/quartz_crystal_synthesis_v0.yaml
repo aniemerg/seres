@@ -1,0 +1,24 @@
+id: quartz_crystal_synthesis_v0
+kind: process
+name: Quartz crystal synthesis
+inputs:
+- item_id: silica_purified
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: quartz_crystal
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: crystallization_unit
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "Estimated energy for crystallization of purified silica into quartz crystal."
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.6
+  setup_hr: 0.2
+notes: "Quartz crystal synthesis: placeholder process to convert purified silica into quartz crystals for sensors."

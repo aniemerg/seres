@@ -1,0 +1,26 @@
+id: ferrite_powder_synthesis_ni_v0
+kind: process
+name: Nickel ferrite powder synthesis
+layer_tags:
+- layer_5
+inputs:
+- item_id: ferrite_powder_precursor_ni_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: nife2o4_soft_ferrite_v0
+  qty: 1.0
+  unit: kg
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: |
+  Seed nickel ferrite powder synthesis; placeholder to enable NiFe2O4 path; real chemistry to be added later.

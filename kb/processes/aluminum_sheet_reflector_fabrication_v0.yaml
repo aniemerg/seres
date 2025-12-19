@@ -1,0 +1,26 @@
+id: aluminum_sheet_reflector_fabrication_v0
+kind: process
+name: Aluminum sheet reflector fabrication v0
+layer_tags:
+- layer_8
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: aluminum_sheet_reflector_v0
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.4
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Fabricate aluminum reflector from 2 mm sheet stock (v0); a placeholder fabrication path to resolve gap."

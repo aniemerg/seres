@@ -1,0 +1,28 @@
+id: part_fabrication_basic_v0
+kind: process
+name: Basic part fabrication
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: steel_stock
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: solar_receiver_cavity_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- metal_forming_basic_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.0
+  notes: "Energy for forming and finishing a small metal cavity"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Fabrication step converting steel_stock into solar_receiver_cavity_v0 via basic forming"

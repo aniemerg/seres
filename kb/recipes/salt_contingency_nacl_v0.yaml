@@ -1,0 +1,14 @@
+id: salt_contingency_nacl_v0
+kind: recipe
+name: Salt contingency NaCl synthesis
+produces_id: salt_contingency_nacl
+produces_qty: 1.0
+produces_unit: kg
+target_item_id: salt_contingency_nacl
+variant_id: v0
+steps:
+- process_id: naoh_hcl_salt_synthesis_v0
+  est_time_hr: 1.0
+  notes: "Synthesize NaCl locally from NaOH and HCl as a contingency replacement for imports."
+assumptions: NaCl synthesized from NaOH + HCl using basic chemical reactor.
+notes: Local production variant; mirrors import_v0 step but defined as a real recipe.

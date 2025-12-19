@@ -1,0 +1,26 @@
+id: dust_mitigation_coating_basic_v0
+name: Dust Mitigation Coating - basic deposition
+kind: process
+inputs:
+  - item_id: dust_mitigation_precursor_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: dust_mitigation_coating_v0
+    qty: 10.0
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.6
+time_model:
+  type: linear_rate
+  setup_hr: 0.25
+  rate_kg_per_hr: 20.0
+notes: "Prototype deposition coating path to produce coating from precursor."

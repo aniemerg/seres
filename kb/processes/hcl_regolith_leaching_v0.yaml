@@ -1,0 +1,25 @@
+id: hcl_regolith_leaching_v0
+name: Hydrochloric acid leaching of regolith v0
+kind: process
+inputs:
+  - item_id: regolith_powder_hcl_treated_v0
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: regolith_powder_hcl_leached_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: lab_assistant
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Acid leaching of HCl-treated regolith powder (Acid attack on anorthite); placeholder values to enable modeling and downstream processing. Produces regolith_powder_hcl_leached_v0."

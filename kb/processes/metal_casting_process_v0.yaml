@@ -1,0 +1,24 @@
+id: metal_casting_process_v0
+kind: process
+name: Casting (General)
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: steel_scrap_refined
+    qty: null
+  - item_id: aluminum_alloy_ingot
+    qty: null
+outputs:
+  - item_id: cast_metal_parts
+    qty: null
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: null
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "Generic casting operation applicable to multiple alloys; concrete outputs provided by recipes."

@@ -1,0 +1,29 @@
+id: ball_mill_ferrite_grinding_v0
+kind: process
+name: Ball mill ferrite grinding
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: mnzn_ferrite_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: fine_powder
+  qty: 0.98
+  unit: kg
+requires_ids:
+- ball_mill_v0
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 4.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+notes: |
+  Ball milling ferrite powder to finer powder (represented here by the generic "fine_powder" material).
+  Placeholder parameters; refinements needed as data becomes available.

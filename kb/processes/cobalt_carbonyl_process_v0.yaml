@@ -1,0 +1,26 @@
+id: cobalt_carbonyl_process_v0
+kind: process
+name: Cobalt carbonyl purification
+inputs:
+- item_id: dicobalt_octacarbonyl
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: purified_dicobalt_octacarbonyl
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: "Estimated energy for purification of cobalt carbonyl (placeholder)"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Seed-defined purification step for cobalt carbonyl; placeholder energy/time."
+source_tags:
+  - ellery_2021_2022
+  - seed_import

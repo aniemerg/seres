@@ -1,0 +1,30 @@
+id: recipe_transformer_step_down_high_current_v0
+kind: recipe
+name: Transformer step-down high-current production (v0)
+variant_id: v0
+target_item_id: transformer_step_down_high_current
+steps:
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: transformer_core
+        qty: 1.0
+        unit: unit
+      - item_id: wound_transformer
+        qty: 1.0
+        unit: unit
+      - item_id: heat_sink_assembly_large
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_steel_large
+        qty: 1.0
+        unit: unit
+      - item_id: shaft_and_bearing_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: transformer_step_down_high_current
+        qty: 1.0
+        unit: unit
+    est_time_hr: 6.0
+    notes: "Assemble core, wound transformer, enclosure, heat sink, and bearing set into final high-current step-down transformer"
+notes: "Mass balance: inputs sum to 80 kg to match transformer_step_down_high_current mass (15+10+20+20+15=80)."

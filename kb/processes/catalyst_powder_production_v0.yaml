@@ -1,0 +1,22 @@
+id: catalyst_powder_production_v0
+kind: process
+name: Catalyst powder production
+inputs:
+- item_id: catalyst_powder_source_material_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: catalyst_powder_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.4
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Production of catalyst powder from precursor material. Placeholder values."

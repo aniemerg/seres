@@ -1,0 +1,27 @@
+id: slewing_bearing_machining_v0
+kind: process
+name: Slewing bearing machining
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: bearing_ring_blanks
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: slewing_bearing
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 1.5
+  notes: Energy intensity for finishing slewing bearing from ring blanks
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: Finish machining bearing ring blanks into slewing bearing; includes final dimensions and inspection.

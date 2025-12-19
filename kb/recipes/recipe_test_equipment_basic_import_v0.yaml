@@ -1,10 +1,9 @@
 id: recipe_test_equipment_basic_import_v0
-target_item_id: test_equipment_basic
-variant_id: import_v0
+kind: recipe
+produces_id: test_equipment_basic
+produces_qty: 1.0
+produces_unit: kit
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported bench test kit until local instrumentation production is defined.
-assumptions: Early-stage testing relies on imported meters and supplies; replace with local builds later.
-notes: Import placeholder to unblock wiring/assembly processes needing basic test gear.
-
+  - process_id: test_equipment_basic_assembly_v0
+notes: Converted from import_stub to a local production path using the existing assembly process.
+assumptions: "Local recipe; placeholder; replace with detailed BOM and routing as needed."

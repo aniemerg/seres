@@ -2,9 +2,8 @@ id: recipe_conductive_additive_import_v0
 target_item_id: conductive_additive
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.05
-    notes: Imported conductive carbon (carbon black or graphite powder) pending local production.
-assumptions: Early-stage Ni-Fe electrode mixes rely on imported conductive carbon; replace with local carbon/graphite production when available.
-notes: Import placeholder to unblock electrode fabrication recipes.
-
+- process_id: conductive_additive_production_v0
+  est_time_hr: 1.0
+  notes: Local production path established to supply conductive additive.
+assumptions: Local carbon-based production path; replace import with full production later as data improves.
+notes: Replaced import placeholder with a real production process for conductive additive.

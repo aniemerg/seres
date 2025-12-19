@@ -1,0 +1,31 @@
+id: conveyor_drive_unit_assembly_v0
+kind: process
+name: Conveyor drive unit assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: motor_electric_small
+  qty: 1.0
+  unit: unit
+- item_id: gearbox_reducer_small
+  qty: 1.0
+  unit: unit
+- item_id: belt_and_pulley_set
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: conveyor_drive_unit
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.0
+notes: Assemble motor, gearbox, and belt/pulley set into a compact conveyor drive unit.
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5

@@ -1,0 +1,26 @@
+id: heat_sink_extrusion_v0
+kind: process
+name: Heat sink extrusion
+layer_tags:
+- layer_4
+inputs:
+- item_id: aluminum_alloy_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: heat_sink
+  qty: 0.15
+  unit: unit
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.2
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.6
+  notes: Extration energy per kg input; placeholder
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.3
+  notes: Batch extrusion cycle; assume continuous feed
+notes: 'Extrude aluminum alloy ingot into a small heat sink profile. Basic extrusion operation; mass balance simplified.'

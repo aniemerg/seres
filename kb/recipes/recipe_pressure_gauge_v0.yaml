@@ -1,0 +1,28 @@
+id: recipe_pressure_gauge_v0
+kind: recipe
+target_item_id: pressure_gauge
+variant_id: v0
+steps:
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Machine gauge body and mounting fittings"
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Install dial, needle, and connection fittings"
+  - process_id: calibration_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 2.5
+    notes: "Calibrate gauge against reference standards"
+  - process_id: leak_test_v0
+    est_time_hr: 1.0
+    labor_hours: 0.8
+    notes: "Test gauge for leaks"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Verify gauge readability and accuracy"
+assumptions: "Single pressure gauge placeholder; mirrors pressure_gauge_set_v0 in steps but for one unit"
+notes: "Placeholder single gauge production; calibration against reference standards required"

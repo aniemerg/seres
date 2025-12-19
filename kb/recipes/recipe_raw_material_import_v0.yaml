@@ -2,9 +2,10 @@ id: recipe_raw_material_import_v0
 target_item_id: raw_material
 variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.05
-    notes: Placeholder import for unspecified raw material.
-assumptions: Represents imported feedstock until a specific local source/material is defined.
-notes: Import placeholder to keep dependency chain runnable.
-
+- process_id: regolith_to_raw_material_extraction_v0
+  est_time_hr: 0.8
+  machine_hours: 0.8
+  labor_hours: 0.4
+  notes: "Regolith to raw_material extraction (placeholder)."
+assumptions: Represents extracted raw_material feedstock via regolith_to_raw_material_extraction_v0; yields 0.6 kg raw_material per kg input and 0.4 kg tailings as waste.
+notes: Converted from an import placeholder to a concrete beneficiation step for raw_material.

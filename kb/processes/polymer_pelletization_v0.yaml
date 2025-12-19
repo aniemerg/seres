@@ -1,0 +1,27 @@
+id: polymer_pelletization_v0
+kind: process
+name: Polymer pelletization (basic)
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: polymer_printing_feedstock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - pelletizer_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.25
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.15
+time_model:
+  type: linear_rate
+  setup_hr: 0.05
+  rate_kg_per_hr: 6.0
+notes: "Baseline polymer pelletization converting feedstock to plastic pellets with minimal losses."

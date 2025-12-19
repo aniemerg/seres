@@ -1,0 +1,35 @@
+id: precipitation_and_washing_v0
+kind: process
+name: Precipitation and washing (v0)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: cmc_solution
+    qty: 6.0
+    unit: kg
+  - item_id: ethanol_or_isopropanol
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: cmc_precipitate_wet
+    qty: 2.0
+    unit: kg
+byproducts:
+  - item_id: salt_waste_solution
+    qty: 7.0
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: Precipitation and washing energy rough estimate
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: |
+  Precipitate CMC from solution using alcohol, then wash to remove salts.
+  This is a canonical unit operation in the binder production flow.

@@ -1,0 +1,47 @@
+id: recipe_ceramic_binder_v0
+kind: recipe
+target_item_id: ceramic_binder
+variant_id: v0
+steps:
+  - process_id: chemical_synthesis_process_v0
+    inputs:
+      - item_id: chemical_reactant_a
+        qty: 1.0
+        unit: kg
+      - item_id: chemical_reactant_b
+        qty: 1.0
+        unit: kg
+      - item_id: solvent_generic
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: cmc_solution
+        qty: 3.5
+        unit: kg
+    est_time_hr: 6.0
+    notes: "Synthesize CMC solution from chemical reagents"
+  - process_id: precipitation_and_washing_v0
+    inputs:
+      - item_id: cmc_solution
+        qty: 3.5
+        unit: kg
+      - item_id: ethanol_or_isopropanol
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cmc_precipitate_wet
+        qty: 2.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Precipitate CMC and wash"
+  - process_id: drying_process_oven_v0
+    inputs:
+      - item_id: cmc_precipitate_wet
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: ceramic_binder
+        qty: 1.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: "Dry precipitated CMC to binder form (ceramic binder)"

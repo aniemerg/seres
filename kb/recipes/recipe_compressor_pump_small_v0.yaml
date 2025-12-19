@@ -1,0 +1,19 @@
+id: recipe_compressor_pump_small_v0
+kind: recipe
+target_item_id: compressor_pump_small
+variant_id: v0
+steps:
+- process_id: metal_casting_basic_v0
+  est_time_hr: 1.0
+  machine_hours: 1.0
+  notes: "Cast pump housing and impeller"
+- process_id: machining_finish_basic_v0
+  est_time_hr: 1.5
+  machine_hours: 1.5
+  notes: "Machine pump internals, shaft, bearing surfaces"
+- process_id: assembly_basic_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: "Assemble motor, impeller, seals, housing"
+assumptions: "Local casting, machining and assembly path for compressor_pump_small."
+notes: "Local, non-import recipe to manufacture compressor_pump_small."

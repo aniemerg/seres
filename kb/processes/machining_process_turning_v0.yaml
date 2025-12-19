@@ -1,0 +1,32 @@
+id: machining_process_turning_v0
+kind: process
+name: Machining turning process v0
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: rough_part
+  qty: 0.08
+  unit: kg
+outputs:
+- item_id: machined_steel_part_precision
+  qty: 0.075
+  unit: kg
+byproducts:
+- item_id: turning_chip_waste
+  qty: 0.005
+  unit: kg
+requires_ids:
+- precision_lathe
+resource_requirements:
+- resource_type: precision_lathe
+  amount: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.25
+  notes: Energy per kilogram of rough part turned; coolant and tool wear included.
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Turning operation to convert rough part into precision machined part. Chips produced as waste.

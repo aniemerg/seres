@@ -1,0 +1,28 @@
+id: methanation_basic_v0
+name: Methanation (CO2 + H2 to CH4 and H2O)
+kind: process
+inputs:
+  - item_id: carbon_dioxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.182
+    unit: kg
+outputs:
+  - item_id: methane_gas
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.182
+    unit: kg
+resource_requirements:
+  - resource_type: chemical_reactor
+    amount: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder stoichiometry for methane production via Sabatier-like methanation; mass-balanced for modeling purposes."

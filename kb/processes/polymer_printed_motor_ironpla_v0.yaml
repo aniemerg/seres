@@ -1,0 +1,25 @@
+id: polymer_printed_motor_ironpla_v0
+kind: process
+name: 3D-printed IronPLA motor body
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: polymer_printing_feedstock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: 3d_printed_motor_ironpla_v0
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: 3d_printer_basic
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 3.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "3D printing motor housing and ironPLA stator; basic polymer printer used."

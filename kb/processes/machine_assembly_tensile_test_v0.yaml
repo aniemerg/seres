@@ -1,0 +1,30 @@
+id: machine_assembly_tensile_test_v0
+kind: process
+name: Basic tensile test machine assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
+- item_id: power_electronics_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: tensile_test_machine_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: Assembles tensile_test_machine_v0 from machine_frame_small and power_electronics_module using the assembly_station.

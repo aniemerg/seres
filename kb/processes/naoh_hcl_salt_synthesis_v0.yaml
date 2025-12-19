@@ -1,0 +1,33 @@
+id: naoh_hcl_salt_synthesis_v0
+kind: process
+name: Sodium hydroxide + hydrochloric acid salt synthesis
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: sodium_hydroxide
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: salt_contingency_nacl
+  qty: 1.0
+  unit: kg
+byproducts:
+- item_id: water
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- resource_type: chemical_reactor_basic
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: "Reactor energy for salt synthesis"
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+notes: "Direct synthesis of NaCl from NaOH and HCl; water byproduct."

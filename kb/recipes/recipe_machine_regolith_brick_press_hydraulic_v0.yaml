@@ -1,0 +1,42 @@
+id: recipe_machine_regolith_brick_press_hydraulic_v0
+kind: recipe
+name: Recipe for regolith brick hydraulic press
+produces_id: regolith_brick_press_hydraulic_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: regolith_brick_press_hydraulic_v0
+variant_id: v0
+steps:
+- process_id: cutting_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  labor_hours: 1.0
+  notes: "Cut frame members, platens, and mold plates."
+- process_id: welded_fabrication_basic_v0
+  est_time_hr: 3.0
+  machine_hours: 2.5
+  labor_hours: 2.5
+  notes: "Weld press frame and mold housing."
+- process_id: machining_finish_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 1.5
+  labor_hours: 1.5
+  notes: "Machine platen faces, mold cavity surfaces, mounting holes."
+- process_id: hydraulic_system_assembly_v0
+  est_time_hr: 1.5
+  labor_hours: 1.5
+  notes: "Install cylinder, hoses, valves, and power unit."
+- process_id: hydraulic_system_integration_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: "Fill/bleed hydraulics; set relief valves."
+- process_id: wiring_and_electronics_integration_v0
+  est_time_hr: 0.8
+  labor_hours: 0.8
+  notes: "Wire controls, limit switches, safety interlocks."
+- process_id: integration_test_basic_v0
+  est_time_hr: 0.8
+  labor_hours: 0.6
+  notes: "Cycle press with mold, verify pressure and ejection."
+assumptions: "Hydraulic press variant for regolith bricks; uses hydraulic system modules present in BOM; includes mold set."
+notes: "Local build route for regolith brick hydraulic press v0."

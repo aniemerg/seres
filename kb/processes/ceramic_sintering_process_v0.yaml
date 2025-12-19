@@ -1,0 +1,29 @@
+id: ceramic_sintering_process_v0
+kind: process
+name: Ceramic sintering process v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: alumina_powder
+  qty: 0.01
+  unit: kg
+outputs:
+- item_id: ceramic_substrate_rtd
+  qty: 0.008
+  unit: kg
+requires_ids:
+- kiln_ceramic
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: "high-temperature sintering to 1200-1400°C for ceramic densification"
+time_model:
+  type: linear_rate
+  hr_per_kg: 6.0
+  notes: "extended heating cycle with controlled ramp, soak, and cooling for sintering and densification"
+notes: Sintering process to densify ceramic parts by heating below melting point. Atomic diffusion bonds particles together, reducing porosity and increasing strength. Used for technical ceramics, insulators, and refractory components.

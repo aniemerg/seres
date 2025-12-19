@@ -1,0 +1,50 @@
+id: recipe_current_sensing_circuit_v0
+kind: recipe
+name: Recipe for current sensing circuit
+produces_id: current_sensing_circuit
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: current_sensing_circuit
+variant_id: v0
+steps:
+- process_id: pcb_fabrication_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  labor_hours: 1.0
+  outputs:
+    - item_id: bare_pcb
+      qty: 1.0
+      unit: unit
+  notes: Fabricate bare PCB for sensing circuit
+- process_id: pcb_assembly_basic_v0
+  est_time_hr: 1.0
+  machine_hours: 1.0
+  labor_hours: 0.5
+  outputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+  notes: Basic PCB population
+- process_id: electronics_assembly_v0
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: pcb_components_placed
+      qty: 0.15
+      unit: kg
+  notes: Mount electronic components on populated PCB
+- process_id: assembly_basic_v0
+  est_time_hr: 0.5
+  outputs:
+    - item_id: current_sensing_circuit
+      qty: 1.0
+      unit: unit
+  notes: Final assembly of current sensing circuit
+notes: "Path to produce a current sensing circuit via PCB fabrication + electronic assembly + final assembly. Placeholder timing included."

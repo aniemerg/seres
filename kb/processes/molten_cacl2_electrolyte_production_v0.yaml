@@ -1,0 +1,27 @@
+id: molten_cacl2_electrolyte_production_v0
+kind: process
+name: Molten CaCl2 electrolyte production v0
+inputs:
+- item_id: cacl2_electrolyte_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: molten_cacl2_electrolyte_system_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- ffc_reactor_enhanced_v0
+- temperature_control_system_v0
+resource_requirements:
+- resource_type: high_temperature_power_supply
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: |
+  Placeholder conversion of CaCl2 electrolyte to molten CaCl2 electrolyte at 900°C.
+  Uses enhanced FFC reactor and temperature control system to achieve molten state.

@@ -1,0 +1,25 @@
+id: uv_exposure_unit_assembly_v0
+kind: process
+name: UV exposure unit assembly
+layer_tags:
+- layer_7
+inputs:
+- item_id: uv_exposure_unit_frame
+  qty: 1.0
+  unit: unit
+- item_id: uv_exposure_unit_lamp_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: uv_exposure_unit
+  qty: 1.0
+  unit: unit
+energy_model:
+  total_energy_kwh: 0.5
+time_model:
+  total_time_hr: 1.0
+notes: "Assemble UV exposure unit from frame and lamp module"
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 1.0
+  unit: hr

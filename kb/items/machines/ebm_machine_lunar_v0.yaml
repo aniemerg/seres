@@ -2,9 +2,19 @@ id: ebm_machine_lunar_v0
 kind: machine
 name: Electron beam melting machine (lunar) v0
 mass: 1800.0
-unit: unit
+unit: kg
 material_class: steel
 capabilities:
   - metal_additive
   - electron_beam
-notes: "Electron Beam Melting (EBM) machine for metal additive manufacturing in vacuum. Includes electron gun, vacuum chamber, powder handling, and heated build platform."
+bom: bom_ebm_machine_lunar_v0_v0
+notes: "Electron Beam Melting (EBM) machine for metal additive manufacturing in vacuum. Includes electron gun, vacuum chamber, powder handling, and heated build platform. Power draw approximated for modeling purposes."
+power_draw_kW: 60.0
+energy_model:
+  type: kWh_per_unit
+  value: 2.5
+  notes: Placeholder energy per unit produced by the machine in nominal operation
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Placeholder build time per batch for one ebm machine

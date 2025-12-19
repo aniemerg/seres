@@ -1,0 +1,26 @@
+id: steel_shaft_machining_v0
+name: Machining steel shaft v0
+kind: process
+inputs:
+  - item_id: steel_bar_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: steel_shaft_machined_v0
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - milling_machine_general
+  - turning_tools_general
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 0.5
+notes: "Placeholder steel shaft machined from raw steel bar (v0)."

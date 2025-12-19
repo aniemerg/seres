@@ -1,0 +1,26 @@
+id: yn_neuron_bias_circuit_v0
+kind: process
+name: Neuron bias circuit (bias current source)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: power_supply_unit_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: yn_neuron_bias_circuit_v0
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.25
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Seed process representing the bias current source for a neuron circuit. Placeholder values derived from seed paper."

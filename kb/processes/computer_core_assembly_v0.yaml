@@ -1,0 +1,35 @@
+id: computer_core_assembly_v0
+kind: process
+name: Computer core assembly
+layer_tags:
+- layer_8
+inputs:
+- item_id: assembled_electronics
+  qty: 1.0
+  unit: unit
+- item_id: enclosure_small
+  qty: 1.0
+  unit: unit
+- item_id: power_supply_small_imported
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: computer_core_imported
+  qty: 1.0
+  unit: unit
+requires_ids:
+- electronics_assembly_v0
+- enclosure_small
+- power_supply_small_imported
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+  notes: "Energy for final assembly and enclosure integration"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Assemble computer core module by integrating electronics, enclosure, and power input"

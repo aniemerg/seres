@@ -1,0 +1,33 @@
+id: mond_carbonyl_process_nickel_v0
+kind: process
+name: Mond carbonyl process for nickel (Ni + 4CO ⇄ Ni(CO)4)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: nickel_metal
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide_gas_v0
+    qty: 4.0
+    unit: kg
+outputs:
+  - item_id: nickel_metal_pure
+    qty: 1.0
+    unit: kg
+notes: "Mond carbonyl purification step; Ni + 4CO ⇄ Ni(CO)4 followed by decomposition to Ni metal_pure. Placeholder parameters; mass conserved for the Ni feed."
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 6.0
+  notes: "Estimated energy for Mond carbonyl steps (placeholder)"
+time_model:
+  type: linear_rate
+  setup_hr: 0.5
+  rate_kg_per_hr: 5.0
+source_tags:
+  - seed_import
+  - ellery_2021_2022

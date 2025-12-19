@@ -1,0 +1,28 @@
+id: ceramic_base_fabrication_v0
+kind: process
+name: Ceramic base fabrication v0
+layer_tags:
+- layer_2
+- layer_3
+inputs:
+- item_id: ceramic_powder
+  qty: 0.007
+  unit: kg
+- item_id: ceramic_binder
+  qty: 0.003
+  unit: kg
+outputs:
+- item_id: tube_base_ceramic
+  qty: 0.01
+  unit: kg
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.2
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Fabrication of ceramic tube base from powder + binder.

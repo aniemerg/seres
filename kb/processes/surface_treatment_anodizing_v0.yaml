@@ -1,0 +1,29 @@
+id: surface_treatment_anodizing_v0
+kind: process
+name: Anodizing (surface treatment)
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+- item_id: heat_sink_base_machined
+  qty: 20.0
+  unit: kg
+outputs:
+- item_id: heat_sink_assembly_large
+  qty: 20.0
+  unit: kg
+requires_ids:
+  - surface_treatment_station
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.6
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: "anodizing electrolyte heating, agitation, and rinse cycles"
+time_model:
+  type: linear_rate
+  hr_per_kg: 1.5
+  notes: "dwell time for oxide growth + rinse/seal steps"
+notes: "Anodizing step to create protective oxide on aluminum heat sink base; increases emissivity and corrosion resistance for vacuum environments."

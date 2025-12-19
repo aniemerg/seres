@@ -1,0 +1,24 @@
+id: machining_basic_v0
+name: Machining (Basic)
+kind: process
+inputs:
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: machined_metal_block_v0
+    qty: 1.8
+    unit: kg
+resource_requirements:
+  - resource_type: cnc_mill
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.0
+  notes: "Energy per kilogram of metal machined (placeholder)"
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 20.0
+notes: "Basic machining operation; placeholder for converting raw metal block to machined_metal_block_v0."

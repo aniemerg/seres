@@ -1,0 +1,26 @@
+id: pheromone_digital_system_assembly_v0
+kind: process
+name: Basic assembly of pheromone digital system
+layer_tags:
+  - layer_7
+  - layer_8
+inputs: []
+outputs:
+  - item_id: pheromone_digital_system_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_tools_basic
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.2
+  notes: "Placeholder energy for digital pheromone system assembly"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Placeholder assembly time"
+notes: "Placeholder assembly to produce pheromone_digital_system_v0; digital asset."

@@ -1,0 +1,45 @@
+id: machine_assembly_spot_welder_v0
+kind: process
+name: 'Machine assembly: Spot welder v0'
+layer_tags:
+  - layer_7
+  - layer_8
+inputs:
+  - item_id: transformer_step_down_welding
+    qty: 1.0
+    unit: unit
+  - item_id: electrode_copper_welding
+    qty: 2.0
+    unit: unit
+  - item_id: actuator_pneumatic_linear
+    qty: 1.0
+    unit: unit
+  - item_id: structural_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_cable_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: welding_spot_welder_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 1.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "Assemble spot welding machine from BOM components. Placeholder estimates for labor and energy."

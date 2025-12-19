@@ -1,0 +1,25 @@
+id: process_3d_print_motor_ironpla_v0
+kind: process
+name: 3D-printed motor ironPLA_v0
+layer_tags:
+- layer_5
+inputs:
+- item_id: printing_material_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: 3d_printed_motor_ironpla_v0
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: 3d_printer_basic
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "3D printing operation to produce iron PLA motor; assumes basic printer; no post-processing modeled."
