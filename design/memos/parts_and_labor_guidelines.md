@@ -1,6 +1,12 @@
 # Parts, BOM, and Labor Modeling Guidelines (v0)
 
-Context: Extends Memo A/B and Build v0 with concrete practices for parts/BOMs and labor resources.
+**⚠️ DEPRECATED**: This memo has been superseded by the official policy document:
+
+**👉 See `docs/parts_and_labor_guidelines.md` for the current, comprehensive guidelines.**
+
+---
+
+**Historical Context**: This memo originally extended Memo A/B and Build v0 with concrete practices for parts/BOMs and labor resources. The content below is preserved for reference but may be outdated.
 
 ## Parts and BOMs
 - One part = one identifiable thing; avoid "miscellaneous" buckets. Group near-substitutable items: e.g., `fastener_kit_medium` instead of many similar screws; `copper_wire_general` unless performance depends on gauge.

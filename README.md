@@ -8,6 +8,7 @@ Minimal setup to run the KB indexer and iterate on YAML data.
 1. `design/meta-memo.md` — Project overview and high-level goals
 2. `design/memo_a.md` — Formal specification and design principles
 3. `design/memo_b.md` — Knowledge acquisition methodology and constraints
+4. `docs/parts_and_labor_guidelines.md` — Parts, BOMs, and labor modeling policy
 
 See `docs/README.md` for complete onboarding documentation.
 

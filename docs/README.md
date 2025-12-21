@@ -7,67 +7,43 @@
 1. **`design/meta-memo.md`** — Project overview and high-level goals
 2. **`design/memo_a.md`** — Formal specification and design principles
 3. **`design/memo_b.md`** — Knowledge acquisition methodology and constraints
+4. **`docs/parts_and_labor_guidelines.md`** — Parts, BOMs, and labor modeling policy (CRITICAL for recipe/BOM work)
 
-These three documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
+These documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
 
 ## Additional Required Reading
 - `design/build_v0.md` (pipeline/queue/index design)
-- `design/memos/parts_and_labor_guidelines.md` (parts/BOM/labor rules)
 - `README.md` (repo layout + commands)
 
 ## Before Creating Parts or BOMs: Check Inventory First
 
 **CRITICAL: Always check existing parts before creating new ones.** Part reuse is essential for keeping the knowledge base tractable.
 
-### Workflow for Part Selection
+**📖 FULL DOCUMENTATION**: See **`docs/parts_and_labor_guidelines.md`** for comprehensive guidelines on:
+- Part reuse policy and equivalence criteria
+- Material class system (enables generic substitution)
+- BOM best practices
+- Labor modeling approach
+- Workflow for creating parts/BOMs
 
-When creating a BOM or recipe that needs a part:
+### Quick Workflow for Part Selection
 
 1. **Check the inventory report**: `out/reports/inventory.md`
    - Regenerate if stale: `.venv/bin/python -m kbtool report inventory`
    - Search for the component type: `grep -i "motor\|bearing\|wire" out/reports/inventory.md`
 
-2. **Prefer existing parts** — Reuse an existing part if it is "reasonably equivalent" to what you need
+2. **Prefer existing parts** — Reuse an existing part if it is "reasonably equivalent" (within ~5× magnitude, same material compatibility)
 
 3. **Only create new parts** if no reasonably equivalent part exists
 
-### What Makes Parts "Reasonably Equivalent"?
+### Key Equivalence Rule
 
-Parts are **reasonably equivalent** (and should be shared) if:
+Parts within **~5× magnitude** (mass, size, capability) are considered equivalent:
+- 5 kW motor ≈ 10 kW motor → **reuse same part**
+- 2 kg component ≈ 8 kg component → **reuse same part**
+- **EXCEPTION**: Materials incompatible (steel ≠ plastic) or process requirements conflict → create new part
 
-- **Magnitude within ~5x**: Dimensions, mass, or capability differences less than 5x are essentially the same for this approximation exercise
-  - A strut and a strut 3x the length → same part
-  - A 5 kW motor and a 10 kW motor → same part
-  - An aluminum gear and a similar gear 2x the size → same part
-
-- **Shape variations with same purpose**: Parts that vary in shape but serve the same function and use similar construction methods
-  - A support frame with cross beams vs. without cross beams → same part
-  - Document differences in BOM/recipe `notes` if needed
-
-- **Similar construction/function**: Parts that would be made the same way and serve the same purpose
-  - Different pump types (vacuum pump vs. water pump) → same part IF materials are compatible
-
-Parts are **NOT reasonably equivalent** if:
-
-- **Materials are incompatible**: Material differences matter
-  - Steel beam ≠ plastic beam (structural strength)
-  - Electrical conductor ≠ electrically resistive material (function)
-  - High-temperature component ≠ low-melting-point material (operating conditions)
-
-- **Process compatibility**: Parts must work in their intended processes
-  - Cannot substitute materials that would melt, corrode, or fail in the target process
-
-### Standard Parts to Prefer
-
-Common reusable components (check inventory for current list):
-- `fastener_kit_medium`, `fastener_kit_small` — hardware
-- `sensor_suite_general` — sensors
-- `control_compute_module_imported` — computing
-- `control_panel_basic` — controls
-- `power_conditioning_module` — power electronics
-- `drive_motor_medium` — motors
-- `bearing_set_heavy` — bearings
-- `support_frame_welded` — structural
+See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 
 ## How to Work the Queue (multi-agent)
 - Queue file: `out/work_queue.jsonl`. IDs are stable: `id = "<gap_type>:<item_id>"` with fields `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.

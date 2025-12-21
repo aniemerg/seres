@@ -277,5 +277,5 @@ cat simulations/claude_base_001/simulation.jsonl | python -m json.tool
 
 - `base_builder/INTERACTIVE_MODE.md` - How to use interactive simulation
 - `docs/labor_bot_design_memo.md` - Labor bot specifications
-- `design/memos/parts_and_labor_guidelines.md` - Part reuse rules
+- `docs/parts_and_labor_guidelines.md` - Parts, BOMs, and labor modeling policy
 - `docs/simulation_learnings.md` - Auto-generated analysis report (detailed)
