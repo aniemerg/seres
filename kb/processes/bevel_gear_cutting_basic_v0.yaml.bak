@@ -1,6 +1,6 @@
-id: helical_gear_cutting_basic_v0
+id: bevel_gear_cutting_basic_v0
 kind: process
-name: Helical gear cutting basic
+name: Bevel gear cutting basic
 layer_tags:
   - layer_6
 inputs:
@@ -8,11 +8,11 @@ inputs:
     qty: 1.0
     unit: unit
 outputs:
-  - item_id: helical_gear_set_v0
+  - item_id: bevel_gear_set_v0
     qty: 1.0
     unit: unit
 requires_ids:
-  - milling_machine_general_v0
+  - milling_machine_general
   - cutting_tools_general
 resource_requirements:
   - machine_id: labor_bot_general_v0
@@ -21,8 +21,8 @@ resource_requirements:
 energy_model:
   type: kWh_per_kg
   value: 2.5
-  notes: "helical gear cutting; times scale with input mass"
+  notes: "Bevel gear cutting with bevel gear geometry; times scale with input mass"
 time_model:
   type: linear_rate
   hr_per_kg: 0.6
-notes: "Helical gear cutting converting a medium gear set into helical gear set. Placeholder time/energy values."
+notes: "Bevel gear cutting operation converting a medium gear set into bevel gear set. Placeholder time/energy values."

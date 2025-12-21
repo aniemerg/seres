@@ -1,22 +1,22 @@
-id: aluminum_housing_machining_v0
-name: Aluminum housing machining (final) v0
+id: flywheel_vacuum_housing_machining_v0
+name: Flywheel vacuum housing machining (final)
 kind: process
 layer_tags:
 - layer_6
 inputs:
   - item_id: machined_part_raw
-    qty: 3.0
+    qty: 20.0
     unit: kg
   - item_id: cutting_fluid
-    qty: 0.5
+    qty: 1.5
     unit: L
     notes: "Consumable coolant/lubricant for machining"
 outputs:
-  - item_id: aluminum_housing_machined_v0
-    qty: 3.0
+  - item_id: flywheel_vacuum_housing_v0
+    qty: 20.0
     unit: kg
 requires_ids:
-  - milling_machine_general_v0
+  - milling_machine_general
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 2.0
@@ -24,9 +24,9 @@ resource_requirements:
 energy_model:
   type: kWh_per_kg
   value: 3.0
-  notes: "Energy intensity placeholder for final machining of aluminum housing"
+  notes: "Energy intensity placeholder for final machining of flywheel_vacuum_housing"
 time_model:
   type: linear_rate
   setup_hr: 0.2
   rate_kg_per_hr: 12.0
-notes: "Final machining of machined_part_raw to aluminum_housing_machined, including pockets, ports, and surface finishing."
+notes: "Final machining of machined_part_raw to flywheel_vacuum_housing_v0, including pockets, ports, and surface finishing."
