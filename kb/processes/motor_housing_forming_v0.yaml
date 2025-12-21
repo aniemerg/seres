@@ -1,0 +1,36 @@
+id: motor_housing_forming_v0
+kind: process
+name: Motor housing forming v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: iron_metal_pure
+  qty: 3.2
+  unit: kg
+outputs:
+- item_id: motor_housing_steel
+  qty: 3.0
+  unit: kg
+byproducts:
+- item_id: metal_scrap
+  qty: 0.2
+  unit: kg
+requires_ids:
+- press_brake_v0
+- labor_bot_general_v0
+resource_requirements:
+- resource_type: press_brake_v0
+  qty: 2.0
+  unit: hr
+- resource_type: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.65
+time_model:
+  type: linear_rate
+  setup_hr: 0.25
+  rate_kg_per_hr: 6.0
+notes: "Form motor housing from sheet metal; forming operation with press brake and labor support."

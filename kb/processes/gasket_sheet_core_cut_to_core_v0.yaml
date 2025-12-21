@@ -1,0 +1,29 @@
+id: gasket_sheet_core_cut_to_core_v0
+name: Cut gasket sheet core to gasket sheet core v0
+kind: process
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: gasket_sheet_core_v0
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: gasket_sheet_core_v0
+    qty: 0.5
+    unit: kg
+requires_ids:
+  - saw_or_cutting_tool
+  - hand_tools_basic
+resource_requirements:
+  - resource_type: cutting_station
+    amount: 0.6
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.8
+time_model:
+  type: linear_rate
+  setup_hr: 0.05
+  rate_kg_per_hr: 1.0
+notes: "Cut gasket_sheet_core_v0 into gasket_sheet_core_v0; basic stock-forming step. Assumes gasket_sheet_core_v0 material is available."

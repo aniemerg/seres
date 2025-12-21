@@ -1,0 +1,20 @@
+id: recipe_steel_lamination_stack_v0
+kind: recipe
+target_item_id: steel_lamination_stack
+steps:
+  - process_id: lamination_stamping_v0
+    outputs:
+      - item_id: lamination_stack_stamped
+        qty: 1.0
+        unit: kg
+  - process_id: stacking_and_clamping_v0
+    inputs:
+      - item_id: lamination_stack_stamped
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: steel_lamination_stack
+        qty: 1.0
+        unit: kg
+notes: "Placeholder recipe to produce steel lamination stack by stamping laminations and stacking/clamping."
+assumptions: "Mass flow: 1.0 kg lamination_stack_stamped produced by lamination_stamping_v0 and stacked into steel_lamination_stack by stacking_and_clamping_v0."

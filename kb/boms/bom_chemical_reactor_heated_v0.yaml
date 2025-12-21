@@ -1,12 +1,15 @@
 id: bom_chemical_reactor_heated_v0
-owner_item_id: chemical_reactor_heated_v0
+owner_item_id: chemical_reactor_heated
+kind: bom
+target_item_id: chemical_reactor_heated
+variant_id: v0
 components:
-- item_id: chemical_reactor_vessel_v0
-  qty: 1.0
-  unit: unit
-- item_id: insulation_panel_high_temp
-  qty: 4.0
-  unit: unit
-- item_id: insulation_pack_high_temp
-  qty: 1.0
-  unit: unit
+  - item_id: chemical_reactor_heated_body
+    qty: 1.0
+  - item_id: reactor_shell_steel_v0
+    qty: 1.0
+  - item_id: pressure_vessel_steel
+    qty: 1.0
+  - item_id: heating_element_set_basic
+    qty: 1.0
+notes: "Seed BOM for chemical_reactor_heated (base) v0; placeholder components to unblock gap."

@@ -1,31 +1,27 @@
 id: recipe_build_atmosphere_control_v0
 kind: recipe
+target_item_id: build_atmosphere_control_v0
 name: Recipe for atmosphere control system build v0
-produces_id: build_atmosphere_control_v0
-produces_qty: 1.0
-produces_unit: unit
-variant_id: v0
 steps:
-- process_id: import_receiving_basic_v0
-  est_time_hr: 0.5
-  labor_hours: 0.5
-- process_id: assembly_basic_v0
-  est_time_hr: 3.0
-  labor_hours: 2.0
-  machine_hours: 2.0
-- process_id: electrical_assembly_basic_v0
-  est_time_hr: 2.0
-  labor_hours: 2.0
-  machine_hours: 1.5
-- process_id: enclosure_assembly_basic_v0
-  est_time_hr: 1.5
-  labor_hours: 1.5
-  machine_hours: 1.0
-- process_id: sealing_and_assembly_basic_v0
-  est_time_hr: 1.0
-  labor_hours: 1.0
-- process_id: inspection_basic_v0
-  est_time_hr: 0.5
-  labor_hours: 0.5
-assumptions: Basic assembly route for atmosphere control system per BOM; labor and machine hours follow patterns from similar machines.
-notes: "Construct atmosphere control module per bom_build_atmosphere_control_v0.yaml using standard unit operations."
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+  - process_id: assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 2.0
+    machine_hours: 2.0
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 1.5
+    machine_hours: 1.5
+  - process_id: enclosure_assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 1.5
+  - process_id: sealing_and_assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.0
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+assumptions: "Legacy step-format updated to new schema; times estimated conservatively."
+notes: "Updated to comply with KB schema; steps are dictionaries with est_time_hr and labor_hours."

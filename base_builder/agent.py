@@ -368,8 +368,8 @@ async def run_simulation_async(
     if initial_prompt is None:
         initial_prompt = "Begin building the lunar base. Start by exploring what processes exist for mining and refining regolith."
 
-    runner = Runner(agent)
-    result = runner.run(initial_prompt)
+    runner = Runner()
+    result = await runner.run(agent, initial_prompt)
 
     # Save final state
     sim_tools._engine.save()

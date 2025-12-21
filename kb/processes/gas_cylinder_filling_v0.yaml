@@ -1,0 +1,19 @@
+id: gas_cylinder_filling_v0
+name: Gas cylinder filling v0
+kind: process
+inputs: []
+outputs:
+  - item_id: gas_cylinder_argon_or_nitrogen
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder process to fill inert gas into a cylinder; external gas source."

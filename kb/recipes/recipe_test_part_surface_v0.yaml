@@ -1,9 +1,6 @@
 id: recipe_test_part_surface_v0
 kind: recipe
-name: Recipe for test_part_surface
-produces_id: test_part_surface
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: test_part_surface
 steps:
-- process_id: machining_precision_v0
-notes: Produce test_part_surface from steel stock using precision machining
+  - process_id: substrate_preparation_basic_v0
+notes: "Simple recipe to manufacture test_part_surface_v0 from substrate via substrate_preparation_basic_v0."

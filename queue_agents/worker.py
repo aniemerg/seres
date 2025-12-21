@@ -393,6 +393,7 @@ async def run_agent_streamed(agent: Agent, user_input: str, max_turns: int = 20)
 
 def build_agent(model: str = "gpt-5-nano") -> Agent:
     """Build the agent with cached context."""
+    import hashlib
     from queue_agents.kb_tools import rg_search, read_file, write_file, run_indexer, queue_release
 
     # Load cached context
@@ -405,6 +406,10 @@ def build_agent(model: str = "gpt-5-nano") -> Agent:
 
     # Build full instructions
     full_instructions = f"{cached_context}\n\n---\n\n{AGENT_INSTRUCTIONS}"
+
+    # Log hash of instructions to verify they're static
+    instructions_hash = hashlib.sha256(full_instructions.encode('utf-8')).hexdigest()[:16]
+    print(f"[AGENT] System message hash: {instructions_hash}")
 
     agent = Agent(
         name="QueueWorkerAgent",
@@ -429,7 +434,6 @@ def run_worker(
         Exit code (0 = success, 1 = failure, 2 = no work)
     """
     items_processed = 0
-    agent = build_agent(model)
 
     while True:
         # Check max items limit
@@ -445,6 +449,10 @@ def run_worker(
         if not lease_result.get("available"):
             print(f"[NO WORK] {lease_result.get('message', 'Queue empty')}")
             return 2 if items_processed == 0 else 0
+
+        # Build fresh agent for this queue item (improves prompt caching)
+        print(f"[AGENT] Building fresh agent for this item...")
+        agent = build_agent(model)
 
         # Use the full gap ID (with prefix like "no_recipe:"), not just the item_id
         item_id = lease_result["id"]
@@ -588,8 +596,7 @@ def run_worker(
             cost = cost_tracker.calculate_cost(total_input_tokens, total_output_tokens, total_cached_tokens)
             print(f"[USAGE] Tokens: {total_input_tokens:,} in + {total_output_tokens:,} out + {total_cached_tokens:,} cached | Cost: ${cost:.4f}")
 
-        # Reset agent state for next item
-        # (We would rebuild agent here, but for now just continue loop)
+        # Agent will be rebuilt at top of loop for next item (fresh conversation for better caching)
         print(f"\n[STATS] Items processed: {items_processed}")
 
     return 0

@@ -1,0 +1,29 @@
+id: load_cell_strain_gauge_fabrication_v0
+kind: process
+name: Load cell strain gauge fabrication v0
+layer_tags:
+  - layer_9
+inputs:
+  - item_id: strain_gauge_foil_v0
+    qty: 1.0
+    unit: each
+  - item_id: strain_gauge_bonded_assembly
+    qty: 1.0
+    unit: each
+outputs:
+  - item_id: load_cell_strain_gauge_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - strain_gauge_bonding_station_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Fabricate a load_cell_strain_gauge_v0 by bonding a strain_gauge_foil_v0 to a bonded strain_gauge_assembly using the strain_gauge_bonding_station_v0."

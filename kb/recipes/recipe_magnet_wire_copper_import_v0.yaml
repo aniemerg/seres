@@ -1,10 +1,12 @@
-id: recipe_magnet_wire_copper_import_v0
+id: recipe_magnet_wire_copper_v0
+kind: recipe
+name: Local magnet wire copper production v0
+produces_id: magnet_wire_copper
+produces_qty: 1.0
+produces_unit: kg
 target_item_id: magnet_wire_copper
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported magnet wire until wire drawing/enamel coating is modeled.
-assumptions: Magnet wire sourced externally early; replace with local copper drawing and insulation later.
-notes: Import placeholder to support winding and motor builds.
-
+- process_id: copper_wire_drawing_and_insulation_v0
+notes: "Local production path replacing import placeholder; v0"
+assumptions: "Feedstock copper_rod_ingot assumed available; this step draws copper and insulation."

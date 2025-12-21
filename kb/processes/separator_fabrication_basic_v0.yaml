@@ -1,0 +1,27 @@
+id: separator_fabrication_basic_v0
+name: Separator fabrication (ceramic_block_small_v0 -> separator_robust)
+kind: process
+layer_tags:
+- layer_9
+inputs:
+- item_id: ceramic_block_small_v0
+  qty: 0.2
+  unit: kg
+outputs:
+- item_id: separator_robust
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- resource_type: assembly_station
+  qty: 0.5
+  unit: unit
+- resource_type: labor_bot_general
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: "Direct fabrication of separator_robust from ceramic_block_small_v0; placeholder values for seed closure."

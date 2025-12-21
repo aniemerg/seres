@@ -16,11 +16,11 @@ requires_ids:
   - power_conditioning_unit
   - solar_tracking_optional
 energy_model:
-  type: kWh_per_kg
+  type: kWh_per_unit_output
   value: 0.0
-  notes: "net energy producer - generates ~0.2 kWh/kg_panel/day at lunar equator"
+  notes: "Placeholder energy per unit of electrical energy output; rate to be calibrated"
 time_model:
-  type: linear_rate
-  hr_per_kg: 0.0
-  notes: "continuous generation during lunar day (~14 Earth days)"
+  type: fixed_time
+  hr_per_batch: 24.0
+  notes: "Daily generation window; placeholder for lunar day cycle"
 notes: Treats PV as imported initially; introduces power accounting node.

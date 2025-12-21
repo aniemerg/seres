@@ -1,0 +1,28 @@
+id: wire_drawing_aluminum_v0
+kind: process
+name: Aluminum wire drawing v0
+inputs:
+- item_id: aluminum_alloy_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: aluminum_wire
+  qty: 0.95
+  unit: kg
+byproducts:
+- item_id: metal_scrap
+  qty: 0.05
+  unit: kg
+requires_ids:
+- wire_drawing_die_set
+resource_requirements:
+- resource_type: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.5
+time_model:
+  type: linear_rate
+  rate: 2.0
+notes: Wire drawing through progressively smaller dies. Includes realistic waste/loss as metal scrap; 5% loss assumed.

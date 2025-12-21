@@ -1,0 +1,23 @@
+id: vacuum_tube_empty_body_forming_v0
+name: Vacuum tube empty body forming v0
+kind: process
+inputs:
+  - item_id: glass_envelope_vacuum_tube_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: vacuum_tube_empty_v0
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.3
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Form empty vacuum tube body from glass envelope; placeholder energy/time values."

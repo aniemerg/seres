@@ -1,14 +1,8 @@
 id: recipe_3d_printer_basic_v0
 kind: recipe
 target_item_id: 3d_printer_basic_v0
-produces_id: 3d_printer_basic_v0
-produces_qty: 1.0
-produces_unit: unit
-variant_id: v0
 steps:
-  - process_id: machine_assembly_3d_printer_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    machine_hours: 1.0
-assumptions: Assemble using the dedicated machine_assembly_3d_printer_basic_v0 process; BOM details may be refined.
-notes: Replaces placeholder mock_printer_production_v0 with a concrete machine-assembly step.
+  - process_id: mock_printer_production_v0
+  - process_id: calibration_and_test_basic_v0
+notes: "Concrete production path for 3d_printer_basic_v0 including calibration and testing."
+assumptions: "Replace placeholder path with a full production chain as design matures."

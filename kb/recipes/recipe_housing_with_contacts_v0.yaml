@@ -1,9 +1,6 @@
 id: recipe_housing_with_contacts_v0
 kind: recipe
-name: Casting/assembly recipe for housing_with_contacts
-produces_id: housing_with_contacts
-produces_qty: 0.1
-produces_unit: kg
+target_item_id: housing_with_contacts
 variant_id: v0
 steps:
   - process_id: contact_material_application_v0
@@ -18,4 +15,6 @@ steps:
       - item_id: housing_with_contacts
         qty: 0.1
         unit: kg
+    est_time_hr: 0.5
+    notes: "Casting/assembly of housing_with_contacts from breaker_housing_and_mechanism and silver_contact_material via contact_material_application_v0."
 notes: "Produces housing_with_contacts from breaker_housing_and_mechanism and silver_contact_material via contact_material_application_v0."

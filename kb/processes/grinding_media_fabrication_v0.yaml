@@ -1,0 +1,23 @@
+id: grinding_media_fabrication_v0
+name: Grinding media fabrication v0
+kind: process
+inputs:
+  - item_id: steel_block_raw_v0
+    qty: 50.0
+    unit: kg
+outputs:
+  - item_id: grinding_media_steel
+    qty: 50.0
+    unit: kg
+resource_requirements:
+  - resource_type: grinding_mill
+    amount: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.3
+  rate_kg_per_hr: 100.0
+notes: "Grinding media fabrication placeholder"

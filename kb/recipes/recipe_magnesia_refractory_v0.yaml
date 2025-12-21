@@ -1,0 +1,30 @@
+id: recipe_magnesia_refractory_v0
+kind: recipe
+target_item_id: magnesia_refractory_v0
+variant_id: v0
+steps:
+  - process_id: magnesium_powder_noop_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    labor_hours: 0.2
+    notes: "Feed magnesium powder through no-op path to satisfy chain"
+  - process_id: powder_processing_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Process magnesium powder with binder for brick molding"
+  - process_id: pressing_operations_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Press powder mixture into brick shapes"
+  - process_id: sintering_basic_v0
+    est_time_hr: 12.0
+    machine_hours: 12.0
+    labor_hours: 2.0
+    notes: "Sinter bricks at high temperature to consolidate"
+  - process_id: inspection_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "QA of magnesia refractory brick"
+notes: "Production path for magnesia refractory brick; aligns with brick production workflows."

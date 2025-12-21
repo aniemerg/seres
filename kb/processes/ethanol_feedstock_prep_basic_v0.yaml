@@ -1,0 +1,23 @@
+id: ethanol_feedstock_prep_basic_v0
+name: Ethanol/Isopropanol feedstock preparation (placeholder)
+kind: process
+inputs:
+  - item_id: raw_material
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: ethanol_or_isopropanol_feedstock_v0
+    qty: 3.0
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.2
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 15.0
+notes: "Placeholder prep from raw_material to ethanol_isopropanol_feedstock_v0"

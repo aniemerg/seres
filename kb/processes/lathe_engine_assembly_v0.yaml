@@ -1,0 +1,44 @@
+id: lathe_engine_assembly_v0
+kind: process
+name: Lathe engine assembly
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+  - item_id: lathe_bed_and_headstock
+    qty: 1.0
+    unit: kg
+  - item_id: lathe_carriage_and_cross_slide
+    qty: 1.0
+    unit: kg
+  - item_id: tailstock_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: lathe_spindle_and_bearings
+    qty: 1.0
+    unit: kg
+  - item_id: lathe_motor_and_drive
+    qty: 1.0
+    unit: kg
+  - item_id: lathe_leadscrew_and_feed_system
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: lathe_engine_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 25.0
+  notes: "Estimated energy for assembling lathe engine from subassemblies"
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+notes: "Placeholder lathe_engine_assembly process; refine BOM and step durations as design evolves."

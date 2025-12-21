@@ -1,0 +1,22 @@
+id: contact_substrate_base_fabrication_v0
+name: Fabricate contact substrate base from uncoated substrate v0
+kind: process
+inputs:
+- item_id: uncoated_substrate_material_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: contact_substrate_base
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: seed_lab
+  amount: 0.0
+  unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.2
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: "Finalizes substrate to contact substrate base; placeholder values; seed lab path."

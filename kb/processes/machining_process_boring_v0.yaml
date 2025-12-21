@@ -16,10 +16,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: unknown
-  value: null
-  notes: Placeholder energy for boring operation
+  type: kWh_per_unit_output
+  value: 0.1
+  notes: "Estimated energy per unit output for boring operation"
 time_model:
-  type: unknown
-  hr_per_batch: null
-  notes: Placeholder time for boring operation
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Fixed bore operation time; placeholder estimate"
+notes: "Explicit energy/time estimates added to resolve no_recipe gap for boring operation."

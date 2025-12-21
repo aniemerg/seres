@@ -1,0 +1,23 @@
+id: bearing_set_fabrication_v0
+name: Bearing set fabrication v0
+kind: process
+inputs:
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: bearing_set
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 0.5
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.3
+time_model:
+  type: linear_rate
+  setup_hr: 0.05
+  rate_kg_per_hr: 20.0
+notes: "Bearing set fabrication placeholder"

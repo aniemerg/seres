@@ -1,0 +1,37 @@
+id: bearing_manufacturing_small_v0
+kind: process
+name: Small bearing manufacturing v0
+inputs:
+  - item_id: iron_metal_pure
+    qty: 0.55
+    unit: kg
+  - item_id: grease_bearing_high_temp
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: bearing_set_small
+    qty: 0.5
+    unit: kg
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.06
+    unit: kg
+resource_requirements:
+  - resource_type: lathe_engine_v0
+    qty: 4.0
+    unit: hr
+  - resource_type: bearing_grinding_machine_v0
+    qty: 2.0
+    unit: hr
+  - resource_type: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 8.0
+  notes: 8 kWh per kg input
+time_model:
+  type: linear_rate
+  setup_hr: 0.0
+  rate_kg_per_hr: 0.0833333333
+notes: Precision machining and grinding of bearing races and balls. Requires tight tolerances.

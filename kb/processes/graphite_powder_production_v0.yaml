@@ -1,0 +1,27 @@
+id: graphite_powder_production_v0
+name: Graphite powder production (crushing/milling) v0
+kind: process
+inputs:
+  - item_id: graphite_block_material_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: graphite_powder
+    qty: 0.95
+    unit: kg
+byproducts:
+  - item_id: dust_fines
+    qty: 0.05
+    unit: kg
+resource_requirements:
+  - machine_id: ball_mill_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.4
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 5.0
+notes: "Crush/mill graphite_block_material_v0 to graphite_powder with ~5% fines loss."

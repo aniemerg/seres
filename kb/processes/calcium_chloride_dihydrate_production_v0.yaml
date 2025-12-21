@@ -1,0 +1,25 @@
+id: calcium_chloride_dihydrate_production_v0
+kind: process
+name: Calcium chloride dihydrate production v0
+inputs:
+  - item_id: calcium_chloride_solution_v0
+    qty: 2.0
+    unit: kg
+  - item_id: water
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: calcium_chloride_dihydrate_v0
+    qty: 2.0
+    unit: kg
+resource_requirements:
+  - resource_type: crystallization_unit
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 1.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Seed process to crystallize calcium chloride dihydrate from calcium chloride solution."

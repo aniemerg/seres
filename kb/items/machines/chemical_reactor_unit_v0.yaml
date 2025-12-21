@@ -1,8 +1,11 @@
 id: chemical_reactor_unit_v0
-name: Chemical Reactor Unit v0
+name: Chemical reactor unit v0
 kind: machine
-mass: 200.0
+mass: 1200.0
 unit: kg
-bom: bom_chemical_reactor_unit_v0_v0.yaml
-processes_supported:
-- rochow_process_reactor_v0
+bom: bom_chemical_reactor_unit_v0_v0
+capabilities:
+  - molten_salt_electrolysis
+  - high_temperature_processing
+  - gas_extraction
+notes: "Placeholder chemical reactor unit to satisfy BOM owner reference; mass estimate aligned with Sabatier-type reactors."

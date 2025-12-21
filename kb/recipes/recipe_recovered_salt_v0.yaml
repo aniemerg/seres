@@ -1,0 +1,17 @@
+id: recipe_recovered_salt_v0
+kind: recipe
+produces_id: recovered_salt
+produces_qty: 1.0
+produces_unit: kg
+steps:
+  - process_id: chloride_recycling_to_hcl_v0
+    notes: "Pass 1 of 5 to yield 0.2 kg recovered_salt per batch"
+  - process_id: chloride_recycling_to_hcl_v0
+    notes: "Pass 2 of 5 to yield cumulative 0.4 kg recovered_salt"
+  - process_id: chloride_recycling_to_hcl_v0
+    notes: "Pass 3 of 5 to yield cumulative 0.6 kg recovered_salt"
+  - process_id: chloride_recycling_to_hcl_v0
+    notes: "Pass 4 of 5 to yield cumulative 0.8 kg recovered_salt"
+  - process_id: chloride_recycling_to_hcl_v0
+    notes: "Pass 5 of 5 to reach 1.0 kg recovered_salt" 
+notes: "Recipe to manufacture recovered_salt via repeated chloride recycling of salt waste. Five passes approximate mass balance with the existing process outputs."

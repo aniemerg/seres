@@ -1,0 +1,19 @@
+id: generate_sensor_data_test_set_v0
+name: Generate sensor data test set
+kind: process
+inputs: []
+outputs:
+  - item_id: sensor_data_test_set
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder data generation process to create sensor_data_test_set for SLAM testing and simulation."

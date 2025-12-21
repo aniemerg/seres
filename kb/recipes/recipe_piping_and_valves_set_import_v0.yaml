@@ -1,9 +1,59 @@
 id: recipe_piping_and_valves_set_import_v0
+kind: recipe
 target_item_id: piping_and_valves_set
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported piping/valve kit until local pipe fabrication, valve machining, and assembly routes are modeled.
-assumptions: "Placeholder import for fluid-handling hardware on the mixing station; replace with casting/machining/bending route later."
-notes: Import route for piping and valves set.
+  - process_id: metal_casting_process_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: valve_body_cast_rough
+        qty: 4.5
+        unit: kg
+    est_time_hr: 2.0
+    notes: Cast valve bodies in sand molds
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: valve_body_cast_rough
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: valve_body_machined
+        qty: 4.0
+        unit: kg
+    est_time_hr: 4.0
+    notes: Machine valve bores, threads, and sealing surfaces
+  - process_id: tube_bending_process_v0
+    inputs:
+      - item_id: aluminum_tube_stock
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: pipe_bent_sections
+        qty: 2.8
+        unit: kg
+    est_time_hr: 1.5
+    notes: Bend tubing to required geometry
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: pipe_bent_sections
+        qty: 2.8
+        unit: kg
+      - item_id: valve_body_machined
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: piping_and_valves_set
+        qty: 6.5
+        unit: kg
+    est_time_hr: 3.0
+    notes: TIG weld pipes and valves into assembly
+assumptions: |
+  Aluminum piping and valves for fluid handling.
+  TIG welding provides leak-tight joints.
+  Sealing surfaces machined for O-ring compatibility.
+notes: |
+  Import path replaced by local piping/valve set production; this is a concrete recipe
+  to build the piping and valves set locally.

@@ -3,5 +3,8 @@ kind: recipe
 target_item_id: battery_cell_nife
 variant_id: import_v0
 steps:
-  - battery_cell_nife_v0
-notes: "Local Ni-Fe battery cell path to replace import stub."
+  - process_id: electrode_fabrication_nife
+  - process_id: electrolyte_prep_koh
+  - process_id: cell_assembly_and_seal_nife
+assumptions: "Local Ni-Fe battery cell production; import path replaced with local steps."
+notes: "Local Ni-Fe battery cell path replacing import stub; uses electrode fabrication, KOH electrolyte preparation, and Ni-Fe cell assembly/sealing steps."

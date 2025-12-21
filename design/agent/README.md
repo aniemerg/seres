@@ -43,6 +43,40 @@ python -m design.agent.launcher --workers 5
 
 This spawns 5 agents in parallel, each processing items from the queue until empty.
 
+### 4. Direct Agent Calling (Bypass Queue)
+
+**NEW**: Call agents directly with specific tasks, without using the queue system.
+
+**Python API**:
+```python
+from design.agent.direct_agent import fix_kb_gap
+
+result = fix_kb_gap(
+    task="Add material_class='metal' to kb/items/materials/metal_powder_v0.yaml",
+    agent_name="claude-direct",
+    model="gpt-5-nano"
+)
+```
+
+**Command Line**:
+```bash
+python -m design.agent.direct_agent \
+    --task "Add material_class='metal' to metal_powder_v0.yaml" \
+    --agent claude-direct
+```
+
+**Use Cases**:
+- Fix specific KB gaps discovered during simulation
+- Make targeted improvements without queue overhead
+- Quick fixes for known issues
+- Ad-hoc KB improvements
+
+**Differences from Queue Mode**:
+- No queue leasing/completing required
+- Focused on single specific task
+- Returns immediately after task completion
+- Auto-validates with indexer (optional)
+
 ## Architecture
 
 ```
@@ -94,8 +128,9 @@ design/agent/
 ├── build_context.py       # Generates cached context
 ├── cached_context.md      # Generated cached context (not in git)
 ├── kb_tools.py           # Tool implementations
-├── worker.py             # Main agent script
-└── launcher.py           # Parallel batch runner
+├── worker.py             # Queue-based agent (auto-lease/complete)
+├── launcher.py           # Parallel batch runner for queue mode
+└── direct_agent.py       # Direct task calling (bypasses queue)
 ```
 
 ## Examples

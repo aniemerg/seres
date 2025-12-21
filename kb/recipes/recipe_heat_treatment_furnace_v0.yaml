@@ -1,12 +1,11 @@
 id: recipe_heat_treatment_furnace_v0
 kind: recipe
-name: Recipe for heat treatment furnace
-produces_id: heat_treatment_furnace
+produces_id: heat_treatment_furnace_v0
 produces_qty: 1.0
 produces_unit: unit
 steps:
   - process_id: metal_casting_basic_v0
-    notes: "Cast or fabricate outer shell and frame (approx 300 kg)"
+    notes: "Cast outer shell and frame (approx 300 kg)"
   - process_id: refractory_lining_installation_v0
     notes: "Install ceramic fiber or brick refractory insulation lining"
   - process_id: coil_winding_basic_v0
@@ -15,4 +14,4 @@ steps:
     notes: "Install temperature controllers, thermocouples, power relays, safety interlocks"
   - process_id: assembly_basic_v0
     notes: "Assemble door, hinges, seals, ventilation system"
-notes: "High-temperature furnace for heat treating metals with controlled atmosphere capability."
+notes: "Versioned recipe mapping to heat_treatment_furnace_v0; aligns with v0 machine id"

@@ -1,11 +1,13 @@
 id: recipe_stainless_billet_or_slab_import_v0
 kind: recipe
-target_item_id: stainless_billet_or_slab
-variant_id: import_v0
+name: Stainless billet or slab production v0 (local)
+# local production path replacing the previous import stub
+# keeping the original identifiers for compatibility
 produces_id: stainless_billet_or_slab
 produces_qty: 1.0
 produces_unit: kg
+target_item_id: stainless_billet_or_slab
 steps:
   - process_id: stainless_refining_basic_v0
+notes: "Local production path replacing import_stub with a local stainless refining path using stainless_refining_basic_v0."
 assumptions: "Converted from import_placeholder_v0 to a local stainless refining path using stainless_refining_basic_v0."
-notes: "Local replacement for import stub to produce stainless billet or slab via stainless_refining_basic_v0."

@@ -1,0 +1,22 @@
+id: manufacture_component_material_a_v0
+name: Manufacture Component Material A
+kind: process
+inputs:
+  - item_id: regolith_raw
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: component_material_a
+    qty: 20.0
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 1.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: Placeholder local production step to synthesize component_material_a from regolith_raw.

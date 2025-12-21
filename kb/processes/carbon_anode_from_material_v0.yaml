@@ -1,0 +1,26 @@
+id: carbon_anode_from_material_v0
+kind: process
+name: Carbon anode formation from precursor material
+inputs:
+- item_id: carbon_anode_material
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: carbon_anode
+  qty: 0.98
+  unit: kg
+byproducts:
+- item_id: pitch_residue
+  qty: 0.02
+  unit: kg
+resource_requirements:
+- resource_type: forming_furnace
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.5
+notes: "Form carbon_anode from precursor carbon_anode_material; mirrors carbon_anode_forming_v0 outputs and byproduct pitch_residue."

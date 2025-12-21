@@ -1,0 +1,28 @@
+id: conveyor_belt_loop_fabrication_v0
+name: Fabrication of conveyor belt loop (v0)
+kind: process
+inputs:
+  - item_id: molded_rubber_or_plastic_piece_v0
+    qty: 2.0
+    unit: unit
+  - item_id: conveyor_frame_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: conveyor_belt_loop
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+energy_model:
+  type: kWh_per_unit
+  value: 4.0
+notes: "Fabricate conveyor belt loop by assembling silicone/rubber belt segment into loop with small frame."

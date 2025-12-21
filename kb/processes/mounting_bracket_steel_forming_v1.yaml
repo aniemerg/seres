@@ -1,0 +1,22 @@
+id: mounting_bracket_steel_forming_v1
+name: Mounting bracket (steel) forming v1
+kind: process
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: mounting_bracket_steel
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: "Form steel plate into a mounting bracket for mounting_bracket_steel (non-v0)."

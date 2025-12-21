@@ -2,6 +2,12 @@ id: recipe_threading_needle_mechanism_v0
 kind: recipe
 target_item_id: threading_needle_mechanism_v0
 steps:
-  - machining_finish_basic_v0
-  - assembly_basic_v0
-notes: "Placeholder recipe to manufacture threading_needle_mechanism_v0 using basic machining and subsequent assembly."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 0.8
+    labor_hours: 0.4
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.3
+    labor_hours: 0.2
+notes: "Placeholder recipe to manufacture threading_needle_mechanism_v0 using basic machining and assembly."

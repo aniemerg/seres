@@ -1,11 +1,22 @@
 id: recipe_wire_copper_insulated_import_v1
 kind: recipe
-# Import path for wire_copper_insulated (non-versioned) until local drawing/insulation path is modeled
+# Upgraded from import_stub to a concrete v1 recipe for wire_copper_insulated
+# variant. Reuses the insulation formation step to produce insulated copper wire.
 target_item_id: wire_copper_insulated
-variant_id: import_v1
+produces_id: wire_copper_insulated
+produces_qty: 1.0
+produces_unit: kg
+variant_id: v1
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported insulated copper wire until insulation/drawing path is modeled.
-assumptions: "Wire insulation sourced externally; replace with local copper drawing and insulation path later."
-notes: "Import placeholder to support wiring and electrical subsystems modeling."
+  - process_id: insulated_wire_formation_v0
+    est_time_hr: 0.5
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wire_copper_insulated
+        qty: 1.0
+        unit: kg
+assumptions: "Insulated copper wire formed from magnet copper wire via polymer insulation coating."
+notes: "Upgraded import stub to concrete v1 recipe for wire_copper_insulated."

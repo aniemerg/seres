@@ -1,10 +1,21 @@
 id: recipe_machine_press_brake_import_v0
-target_item_id: press_brake
-variant_id: import_v0
-steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 1.0
-    notes: Imported press brake until local machine build is modeled.
-assumptions: Sheet forming capacity imported early; replace with local fabrication when hydraulics and large frames are modeled.
-notes: Import placeholder to satisfy sheet metal forming dependencies.
 
+target_item_id: press_brake
+variant_id: v0
+steps:
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 5.0
+    labor_hours: 5.0
+    notes: "Fabricate press brake frame, platen supports, base, and mounting brackets"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 2.0
+    notes: "Machine mounting surfaces and interfaces for hydraulic/power modules"
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble welded components into press brake frame and attach base components"
+assumptions: "Local fabrication path to produce press_brake_v0 base machine; relies on standard fabrication resources."
+notes: "Converted from import_stub to local path; replaced by recipe_machine_press_brake_v0." 

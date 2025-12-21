@@ -1,10 +1,13 @@
 id: recipe_resistance_meter_micro_ohm_v0
 kind: recipe
-name: Recipe for resistance_meter_micro_ohm v0
-produces_id: resistance_meter_micro_ohm
+target_item_id: resistance_meter_micro_ohm
 produces_qty: 1.0
 produces_unit: unit
 steps:
 - process_id: assembly_basic_v0
-  notes: "Assemble resistance_meter_micro_ohm using the generic assembly process (placeholder for now)."
-notes: "Placeholder recipe to close the no_recipe gap for resistance_meter_micro_ohm."
+  notes: "Initial assembly of resistance_meter_micro_ohm from BOM and seed components."
+- process_id: sensor_calibration_v0
+  notes: "Calibrate resistance_meter_micro_ohm for micro-ohm accuracy."
+- process_id: electrical_testing_and_calibration_v0
+  notes: "Electrical test and final calibration of resistance_meter_micro_ohm."
+notes: "Extended recipe to close no_recipe gap for resistance_meter_micro_ohm with calibration and testing steps."

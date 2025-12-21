@@ -1,0 +1,33 @@
+id: regolith_mining_lunar_highlands_v0
+kind: process
+name: Simple Regolith Highlands Surface Mining
+description: |
+  Basic surface collection of lunar regolith from the highlands using a labor bot.
+  Free resource collection - no inputs consumed.
+
+base_rate: "100 kg/hour"
+
+inputs: []  # No consumables - regolith is free
+
+outputs:
+  - item_id: regolith_lunar_highlands
+    quantity: 100
+    unit: kg
+    per: hour
+
+required_machines:
+  - labor_bot_general_v0: 1
+
+scalable: true
+
+time_model:
+  type: linear_rate
+  rate_kg_per_hr: 100
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+
+notes: |
+  Highlands regolith, aluminum-rich for alumina extraction.
+  Bootstrap route for highlands regolith supply; intended for modeling ISRU bootstrapping.

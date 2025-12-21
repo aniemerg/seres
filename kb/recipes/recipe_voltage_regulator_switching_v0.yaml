@@ -1,11 +1,10 @@
 id: recipe_voltage_regulator_switching_v0
 kind: recipe
 name: Recipe for switching voltage regulator module
-produces_id: voltage_regulator_switching_v0
-produces_qty: 1.0
-produces_unit: unit
-variant_id: v0
+# Updated to standard target_item_id schema
+target_item_id: voltage_regulator_switching_v0
 steps:
-- process_id: electrical_assembly_basic_v0
-- process_id: power_conditioning_basic_v0
+  - process_id: electrical_assembly_basic_v0
+  - process_id: power_conditioning_basic_v0
+variant_id: v0
 notes: "Seed recipe: combine basic electrical assembly with power conditioning to form switching regulator module."

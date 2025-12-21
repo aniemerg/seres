@@ -1,4 +1,5 @@
 id: recipe_temperature_controller_basic_v0
+kind: recipe
 target_item_id: temperature_controller_basic
 variant_id: v0
 steps:
@@ -18,8 +19,7 @@ steps:
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Test all control zones, safety systems, and verify proper operation"
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.0
-    notes: "Control electronics and displays initially imported"
-assumptions: Multi-zone temperature control panel with imported controller electronics. Locally fabricated panel and wiring harness.
-notes: Basic temperature control system for furnaces. Provides multi-zone control and safety monitoring.
+  - process_id: electronics_assembly_v0
+    notes: "Assemble electronics modules into assembled_electronics; replaces placeholder"
+assumptions: "Multi-zone temperature control panel with assembled electronics. Locally fabricated panel and wiring harness."
+notes: "Basic temperature control system for furnaces. Provides multi-zone control and safety monitoring."

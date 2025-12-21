@@ -1,22 +1,20 @@
 id: recipe_press_platen_set_medium_v0
 kind: recipe
-name: Recipe for press_platen_set_medium
-produces_id: press_platen_set_medium
+target_item_id: press_platen_set_medium
 produces_qty: 1.0
 produces_unit: unit
-variant_id: v0
 steps:
-- process_id: metal_casting_basic_v0
-  est_time_hr: 4.0
-  machine_hours: 4.0
-  notes: "Cast steel platen blanks for medium platen set"
-- process_id: machining_finish_basic_v0
-  est_time_hr: 3.0
-  machine_hours: 3.0
-  notes: "Machine platen surfaces parallel and flat; drill mounting holes"
-- process_id: precision_grinding_basic_v0
-  est_time_hr: 2.0
-  machine_hours: 2.0
-  notes: "Finish grind to tight flatness and parallelism"
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Cast steel platen blanks for medium platen set"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Machine platen surfaces parallel and flat; drill mounting holes"
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Finish grind to tight flatness and parallelism"
 assumptions: "Hardened steel platens machined flat and parallel. Upper and lower platen set for medium press."
 notes: "Medium press platen set; designed for uniform pressure distribution across platens."

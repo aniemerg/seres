@@ -1,0 +1,33 @@
+id: crystallization_unit_assembly_v0
+kind: process
+name: Crystallization unit assembly
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: structural_frame_steel
+  qty: 1.0
+  unit: unit
+- item_id: aluminum_housing_machined
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: crystallization_unit_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: unit
+- resource_type: labor_bot_general
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 4.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Final assembly of crystallization unit from BOM components."

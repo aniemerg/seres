@@ -1,0 +1,24 @@
+id: seed_output_generation_v0
+name: Seed output generation for stigmergy_coordination_system_output_v0
+kind: process
+inputs:
+  - item_id: stigmergy_pattern_base_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: stigmergy_coordination_system_output_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: seed_generation_unit
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.2
+  notes: Placeholder energy for seed-based generation
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Placeholder time for seed generation
+notes: "Placeholder seed generation that produces the system output artifact."

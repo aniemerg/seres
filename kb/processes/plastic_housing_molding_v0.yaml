@@ -1,0 +1,24 @@
+id: plastic_housing_molding_v0
+kind: process
+name: Plastic housing molding (v0)
+inputs:
+- item_id: plastic_pellets
+  qty: 0.05
+  unit: kg
+outputs:
+- item_id: plastic_housing_molded
+  qty: 0.05
+  unit: kg
+requires_ids:
+- molding_press_basic
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+time_model:
+  type: linear_rate
+  hr_per_kg: 2.0
+notes: "Mold plastic pellets into plastic_housing_molded using basic molding press. Placeholder parameters; mass balance 1:1."

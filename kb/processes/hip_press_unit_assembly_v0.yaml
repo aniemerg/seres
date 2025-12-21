@@ -1,0 +1,45 @@
+id: hip_press_unit_assembly_v0
+name: HIP densification chamber assembly v0
+kind: process
+layer_tags:
+- layer_5
+inputs:
+  - item_id: steel_shell_thick
+    qty: 1.0
+    unit: unit
+  - item_id: structural_steel_frame
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: press_platen_set_medium
+    qty: 1.0
+    unit: unit
+  - item_id: safety_guard_steel_mesh_v0
+    qty: 2.0
+    unit: unit
+  - item_id: pressure_test_gauge_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hip_press_unit_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 20.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+notes: "Assembles HIP densification chamber from BOM components."

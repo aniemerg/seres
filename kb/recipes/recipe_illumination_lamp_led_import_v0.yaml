@@ -1,9 +1,9 @@
 id: recipe_illumination_lamp_led_import_v0
+kind: recipe
+name: Illumination LED lamp import path v0
 target_item_id: illumination_lamp_led
-variant_id: import_v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported LED illumination lamp placeholder
-assumptions: 'LED lamp module is imported; no local production defined yet.'
-notes: 'Import placeholder to provide inputs for downstream assemblies that require illumination_lamp_led.'
+  - process_id: electronics_assembly_v0
+  - process_id: illumination_led_module_assembly_v0
+assumptions: "Local production path for illumination_lamp_led via electronics_assembly_v0 and illumination_led_module_assembly_v0."
+notes: "Replaced import placeholder with local production path."

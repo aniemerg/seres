@@ -1,10 +1,12 @@
 id: recipe_silver_contact_material_v0
 kind: recipe
 name: Casting recipe for silver_contact_material
-produces_id: silver_contact_material
+# Migrated to target_item_id pattern for indexer compatibility
+# target item produced by this recipe
+target_item_id: silver_contact_material
 produces_qty: 1.0
 produces_unit: kg
 variant_id: v0
 steps:
   - process_id: casting_silver_contact_material_v0
-notes: Casting silver ingot to silver_contact_material
+notes: Casting silver ingot to silver_contact_material using standard casting tooling.

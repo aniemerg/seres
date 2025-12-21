@@ -1,0 +1,28 @@
+id: machining_to_coolant_pump_v0
+kind: process
+name: Machining to coolant_pump_system v0
+layer_tags:
+- layer_6
+inputs:
+- item_id: cut_parts
+  qty: 25.0
+  unit: kg
+outputs:
+- item_id: coolant_pump_system
+  qty: 25.0
+  unit: kg
+requires_ids:
+- milling_machine_general
+- cutting_tools_general
+resource_requirements:
+- resource_type: labor_bot_general
+  amount: 0.8
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 50.0
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  hr_per_kg: 1.0
+notes: "Machining to form coolant pump system from cut_parts"

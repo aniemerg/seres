@@ -1,0 +1,22 @@
+id: grease_stock_v0_conversion_v0
+name: Convert base grease stock to v0 variant (placeholder)
+kind: process
+inputs:
+  - item_id: base_grease_stock
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: base_grease_stock_v0
+    qty: 0.05
+    unit: kg
+resource_requirements:
+  - resource_type: lab
+    qty: 0.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+notes: "Transformation of imported base grease stock into v0 seed variant; placeholder step to satisfy KB gap."

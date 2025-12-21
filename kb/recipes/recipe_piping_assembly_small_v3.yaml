@@ -1,0 +1,45 @@
+id: recipe_piping_assembly_small_v3
+kind: recipe
+target_item_id: piping_assembly_small
+produces_id: piping_assembly_small
+produces_qty: 1.0
+produces_unit: unit
+steps:
+  - process_id: tube_bending_and_cutting_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: pipe_bent_sections
+        qty: 0.92
+        unit: kg
+    est_time_hr: 1.0
+    notes: "Bend/cut tubing into bent sections for piping assembly"
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: pipe_bent_sections
+        qty: 0.92
+        unit: kg
+      - item_id: valve_body_machined
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: piping_and_valves_set
+        qty: 6.5
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Weld bent sections with valve bodies to form piping/valves subset"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: piping_and_valves_set
+        qty: 6.5
+        unit: kg
+    outputs:
+      - item_id: piping_assembly_small
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.0
+    notes: "Assemble piping components into final piping assembly small"
+notes: "Alias path: creates a proper recipe for piping_assembly_small using v0-level processes."
+assumptions: "Assumes compatible stock materials and access to tube bending, TIG welding, and basic assembly tools."

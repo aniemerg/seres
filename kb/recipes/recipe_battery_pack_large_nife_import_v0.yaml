@@ -1,10 +1,11 @@
 id: recipe_battery_pack_large_nife_import_v0
+kind: recipe
 target_item_id: battery_pack_large_nife
-variant_id: import_v0
+variant_id: v0
+produces_id: battery_pack_large_nife
+produces_qty: 1.0
+produces_unit: unit
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 1.0
-    notes: Imported Ni-Fe battery pack until local pack assembly is modeled.
-assumptions: Pack imported early; replace with local pack assembly using battery_pack_assembly_nife later.
-notes: Import placeholder to unblock power system scenarios.
-
+  - process_id: battery_pack_assembly_nife
+notes: "Converted from import stub to local v0 path; uses Ni-Fe pack assembly process."
+assumptions: "Local pack assembly defined by battery_pack_assembly_nife; v0 path used for locally manufactured pack."

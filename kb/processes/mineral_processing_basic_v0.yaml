@@ -17,14 +17,16 @@ outputs:
     unit: kg
 requires_ids:
   - rock_crusher_basic
-  - screening_equipment
+  - screening_equipment_v0
   - gravity_separator
 resource_requirements:
-  - machine_id: labor_bot_general_v0
+  - resource_type: labor_bot_general
     qty: 0.5
     unit: hr
 energy_model:
-  total_energy_kwh: 3.0
+  type: kWh_per_kg_input
+  value: 3.0
 time_model:
-  total_time_hr: 2.0
-notes: "Basic mineral processing to concentrate valuable minerals from ore or regolith. Includes crushing, screening, gravity separation, and magnetic separation. Typical recovery 30-50% depending on ore grade. Produces concentrated mineral product and tailings. Used for processing anorthite, ilmenite, and other lunar minerals."
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Basic mineral processing to concentrate valuable minerals from ore or regolith. Includes crushing, screening, gravity separation, and magnetic separation. Typical recovery ~30-50% depending on ore grade. Produces concentrated mineral product and tailings. Used for processing lunar minerals."

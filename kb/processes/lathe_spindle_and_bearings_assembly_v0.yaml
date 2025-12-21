@@ -1,0 +1,33 @@
+id: lathe_spindle_and_bearings_assembly_v0
+kind: process
+name: Lathe spindle and bearings assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: spindle_assembly_precision
+  qty: 40.0
+  unit: kg
+- item_id: bearing_set_sealed
+  qty: 2.0
+  unit: kg
+outputs:
+- item_id: lathe_spindle_and_bearings
+  qty: 42.0
+  unit: kg
+requires_ids:
+- assembly_tools_basic
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: unit
+- resource_type: labor_bot_general
+  qty: 4.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 3.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+notes: "Assemble spindle precision component and sealed bearing set into lathe spindle and bearings."

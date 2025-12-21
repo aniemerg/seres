@@ -1,0 +1,22 @@
+id: tailings_to_processed_tailings_v0
+kind: process
+name: Tailings to processed tailings (placeholder)
+inputs:
+  - item_id: tailings
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: processed_tailings_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: mineral_processing_unit
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.5
+notes: "Placeholder tailings processing step to generate processed_tailings_v0 for seed modeling. Mass balanced (1 kg -> 1 kg)."
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0

@@ -1,0 +1,28 @@
+id: silicon_electrical_steel_synthesis_v0
+kind: process
+name: Silicon electrical steel synthesis v0
+layer_tags:
+- layer_6
+- layer_7
+inputs:
+- item_id: steel_sheet_3mm
+  qty: 1.0
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.4
+  unit: kg
+outputs:
+- item_id: silicon_steel_electrical_v0
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1.0
+  unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder synthesis of silicon electrical steel from 3mm sheet and silicon metal; for modeling ISRU metallurgy."

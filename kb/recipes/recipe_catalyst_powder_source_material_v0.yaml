@@ -1,9 +1,6 @@
 id: recipe_catalyst_powder_source_material_v0
 kind: recipe
-name: Recipe for catalyst powder precursor material v0
-produces_id: catalyst_powder_source_material_v0
-produces_qty: 2.0
-produces_unit: kg
+target_item_id: catalyst_powder_source_material_v0
 steps:
-- process_id: procure_catalyst_powder_source_material_v0
-notes: Procurement-based sourcing path; placeholder for now
+  - process_id: procure_catalyst_powder_source_material_v0
+notes: "Converted from legacy produces_id format; steps now reference processes via process_id as required by indexer. Procurement process builds catalyst_powder_source_material_v0."

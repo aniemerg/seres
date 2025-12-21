@@ -1,20 +1,10 @@
 id: recipe_tank_shell_spun_v0
 kind: recipe
-name: Recipe for tank shell spun
+name: Recipe for tank shell spun v0
 produces_id: tank_shell_spun
 produces_qty: 1.0
 produces_unit: unit
-variant_id: v0
+target_item_id: tank_shell_spun
 steps:
-- process_id: metal_spinning_process_v0
-  inputs:
-  - item_id: stainless_steel_sheet
-    qty: 30.0
-    unit: kg
-  outputs:
-  - item_id: tank_shell_spun
-    qty: 28.0
-    unit: kg
-  est_time_hr: 4.0
-  notes: Spin form tank shell from 30 kg stainless steel sheet; 2 kg scrap generated
-notes: This recipe uses the metal_spinning_process_v0 to produce the tank_shell_spun.
+  - process_id: metal_spinning_process_v0
+notes: "Spin form tank shell from stainless steel sheet using spinning operation."

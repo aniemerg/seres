@@ -11,7 +11,7 @@ inputs:
     qty: 0.1
     unit: kg
 outputs:
-  - item_id: contacts_with_applied_material
+  - item_id: contacts_with_applied_material_v0
     qty: 1.05
     unit: kg
 requires_ids:
@@ -21,7 +21,7 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: kWh_per_kg_input
   value: 2.0
   notes: Welding or brazing energy
 time_model:
@@ -42,4 +42,3 @@ notes: |
     - Tungsten: Very high temperature and arc resistance
   Applications: Relays, switches, contactors, circuit breakers
   Quality: Contact resistance, bond strength, arc erosion resistance
-  Critical for: Reliable electrical switching, long contact life

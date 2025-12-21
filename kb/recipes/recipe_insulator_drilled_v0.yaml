@@ -1,0 +1,16 @@
+id: recipe_insulator_drilled_v0
+kind: recipe
+target_item_id: insulator_drilled
+steps:
+  - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: center_insulator_ceramic
+        qty: 0.08
+        unit: kg
+    outputs:
+      - item_id: insulator_drilled
+        qty: 0.075
+        unit: kg
+    est_time_hr: 0.5
+    notes: "Drill center_insulator_ceramic to produce insulator_drilled"
+notes: "Placeholder recipe to enable local manufacturing of insulator_drilled using the drilling process"

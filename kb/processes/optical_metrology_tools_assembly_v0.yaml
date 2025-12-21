@@ -1,0 +1,40 @@
+id: optical_metrology_tools_assembly_v0
+kind: process
+name: Optical metrology tools assembly v0
+inputs:
+  - item_id: autocollimator_imported
+    qty: 1.0
+    unit: unit
+  - item_id: laser_alignment_system_imported
+    qty: 1.0
+    unit: unit
+  - item_id: optical_flat_set_imported
+    qty: 1.0
+    unit: unit
+  - item_id: optical_square_set
+    qty: 1.0
+    unit: unit
+  - item_id: precision_mounts_and_fixtures
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: optical_metrology_tools
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    amount: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 12.0
+notes: "Local assembly path to produce optical_metrology_tools from imported components"
+time_model:
+  type: fixed_time
+  hr: 6.0

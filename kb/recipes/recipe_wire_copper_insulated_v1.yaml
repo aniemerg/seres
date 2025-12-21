@@ -1,0 +1,21 @@
+id: recipe_wire_copper_insulated_v1
+kind: recipe
+name: Insulated copper wire production v1
+produces_id: wire_copper_insulated
+produces_qty: 1.0
+produces_unit: kg
+target_item_id: wire_copper_insulated
+variant_id: v1
+steps:
+  - process_id: insulated_wire_formation_v0
+    est_time_hr: 0.5
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wire_copper_insulated
+        qty: 1.0
+        unit: kg
+assumptions: "Insulated copper wire formed from magnet copper wire via polymer insulation coating."
+notes: "Realized recipe to produce wire_copper_insulated v1, replacing import stub."

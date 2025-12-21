@@ -1,0 +1,33 @@
+id: magnesium_oxide_reduction_v0
+kind: process
+name: Magnesium oxide reduction to magnesium metal v0
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: magnesium_oxide
+  qty: 1.0
+  unit: kg
+- item_id: carbon_reductant
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: magnesium_metal_v0
+  qty: 1.0
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 1.0
+  unit: kg
+requires_ids:
+- reduction_furnace
+resource_requirements:
+- resource_type: reduction_furnace
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 12.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder magnesium oxide reduction path to produce magnesium metal; mass-balanced with CO2 byproduct."

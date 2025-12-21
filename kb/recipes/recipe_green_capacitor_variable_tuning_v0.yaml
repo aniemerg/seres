@@ -1,0 +1,40 @@
+id: recipe_green_capacitor_variable_tuning_v0
+kind: recipe
+name: Recipe for green capacitor variable tuning v0
+produces_id: green_capacitor_variable_tuning_v0
+produces_qty: 0.1
+produces_unit: kg
+target_item_id: green_capacitor_variable_tuning_v0
+variant_id: v0
+steps:
+  - process_id: ceramic_forming_v0
+    est_time_hr: 1.0
+    machine_hours: 0.8
+    labor_hours: 0.5
+    outputs:
+      - item_id: green_capacitor_variable_tuning_v0
+        qty: 0.1
+        unit: kg
+    notes: "Form green ceramic body for variable tuning capacitor"
+  - process_id: drying_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 0.6
+    notes: "Dry green body"
+  - process_id: firing_ceramic_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 0.6
+    notes: "Fire ceramic to densify"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Finish edges and mounting features"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Dimensional check and functional verification"
+
+assumptions: "Unfired ceramic body formed via ceramic_forming_v0; final tuning achieved after firing and finishing"
+notes: "Placeholder recipe to manufacture green_capacitor_variable_tuning_v0; aligns with capacitor_variable_tuning_v0 recipe"

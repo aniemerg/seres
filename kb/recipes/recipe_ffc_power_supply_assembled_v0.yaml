@@ -1,0 +1,39 @@
+id: recipe_ffc_power_supply_assembled_v0
+kind: recipe
+target_item_id: ffc_power_supply_assembled
+steps:
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: transformer_step_down_high_current
+        qty: 80.0
+        unit: kg
+      - item_id: rectifier_bridge_high_current
+        qty: 15.0
+        unit: kg
+      - item_id: filter_capacitor_bank
+        qty: 20.0
+        unit: kg
+      - item_id: voltage_regulator_feedback_circuit
+        qty: 5.0
+        unit: kg
+      - item_id: current_sensor_shunt
+        qty: 2.0
+        unit: kg
+      - item_id: steel_enclosure_electrical
+        qty: 50.0
+        unit: kg
+      - item_id: cooling_fan_assembly
+        qty: 5.0
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 10.0
+        unit: kg
+      - item_id: control_circuit_microcontroller_based
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: ffc_power_supply_assembled
+        qty: 180.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: Assemble all power supply components into enclosure

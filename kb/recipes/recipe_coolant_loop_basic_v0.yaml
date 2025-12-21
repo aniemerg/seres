@@ -1,0 +1,24 @@
+id: recipe_coolant_loop_basic_v0
+kind: recipe
+target_item_id: coolant_loop_basic
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast tubing sections and fittings"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Machine finishing and interfaces"
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Braze tube joints and fittings"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Final assembly with pump and valves"
+assumptions: "4-step path with generic casting, machining, brazing, and assembly to produce coolant_loop_basic."
+notes: "Placeholder recipe aligned with existing coolant_loop_basic path; target updated to coolant_loop_basic."

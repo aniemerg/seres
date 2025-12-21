@@ -1,35 +1,31 @@
 id: chloralkali_electrolysis_v0
 kind: process
-name: Chlor-alkali electrolysis
-layer_tags:
-- layer_3
-- layer_4
+name: Chloralkali electrolysis
 inputs:
 - item_id: sodium_chloride
-  qty: 1.0
+  qty: 2.0
   unit: kg
 - item_id: water
-  qty: 1.0
+  qty: 2.0
   unit: kg
 outputs:
 - item_id: sodium_hydroxide
+  qty: 2.0
+  unit: kg
+- item_id: chlorine_gas
   qty: 1.0
   unit: kg
 - item_id: hydrogen_gas
-  qty: 0.5
-  unit: kg
-- item_id: chlorine_gas
-  qty: 0.5
+  qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: electrolysis_cell
+- resource_type: power_bus
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_batch
-  value: 2.0
-  notes: "Assumed energy for brine electrolysis producing NaOH with byproducts."
+  type: kWh_per_kg
+  value: 3.0
 time_model:
   type: fixed_time
-  hr_per_batch: 1.0
-notes: "Chlor-alkali electrolysis of brine to NaOH, H2, and Cl2. Placeholder model for early-stage analysis."
+  hr_per_batch: 0.6
+notes: "Chloralkali electrolysis converts NaCl + water into NaOH, Cl2, and H2."

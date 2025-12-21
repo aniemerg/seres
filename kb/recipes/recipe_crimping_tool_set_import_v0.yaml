@@ -1,8 +1,12 @@
 id: recipe_crimping_tool_set_import_v0
-target_item_id: crimping_tool_set
-variant_id: import_v0
+kind: recipe
+name: Assemble crimping tool set (import v0)
+produces_id: crimping_tool_set
+produces_qty: 1.0
+produces_unit: unit
+variant_id: v0
 steps:
-- process_id: import_placeholder_v0
-  est_time_hr: 0.05
-  notes: "Deprecated: replaced by real v0 recipe recipe_crimping_tool_set_v0.yaml."
-assumptions: "Placeholder; replace with machined jaws/handles and assembly steps later."
+- process_id: assembly_basic_v0
+  notes: "Assemble crimping tool set from die set and frame/handles using basic assembly."
+assumptions: "crimping_die_set and crimper_frame_and_handles are available locally; no sub-assembly BOM required yet."
+notes: "Local import recipe converted to a real recipe; can be superseded by recipe_crimping_tool_set_v0.yaml"

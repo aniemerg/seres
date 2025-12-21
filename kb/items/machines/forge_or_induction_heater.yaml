@@ -1,10 +1,12 @@
 id: forge_or_induction_heater
+name: Forge or Induction Heater
 kind: machine
-name: Forge or induction heater
-mass: 120
+mass: 1500.0
 unit: kg
-bom: bom_forge_or_induction_heater_v0
-material_class: steel
-notes: Heating equipment for bringing steel to forging temperature (~1200°C). Can
-  be either a traditional forge with combustion chamber and refractory lining, or
-  an induction heating system with coils and power electronics.
+capabilities:
+  - forging
+  - induction_heating
+  - melting
+material_class: metal
+bom: bom_forge_or_induction_heater_v0.yaml
+notes: "Aligned with v0 BOM to resolve referenced gap; seed BOM will be superseded by versioned BOM."

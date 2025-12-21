@@ -1,26 +1,26 @@
 id: lamination_basic_v0
-name: Lamination of passive insulation into insulation blanket
+name: Copper-clad laminate lamination basic
 kind: process
 inputs:
-  - item_id: passive_thermal_insulation_v0
-    qty: 1.0
+  - item_id: uncoated_substrate_material_v0
+    qty: 0.5
+    unit: kg
+  - item_id: copper_plate_or_sheet
+    qty: 0.5
     unit: kg
 outputs:
-  - item_id: insulation_thermal_blanket
+  - item_id: copper_clad_laminate
     qty: 1.0
     unit: kg
+requires_ids: []
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
+  - resource_type: labor_bot_general
+    qty: 2.0
     unit: hr
 energy_model:
   type: kWh_per_unit_output
-  value: 0.5
+  value: 1.0
 time_model:
-  type: linear_rate
-  setup_hr: 0.05
-  rate_kg_per_hr: 20.0
-notes: "Placeholder lamination step converting passive insulation into insulation blanket; mass conserved for modeling purposes."
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Baseline lamination of FR-4 substrate and copper foil to form copper-clad laminate. Seed production path for PCB materials; approximate parameters."

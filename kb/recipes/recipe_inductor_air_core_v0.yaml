@@ -1,15 +1,10 @@
 id: recipe_inductor_air_core_v0
 kind: recipe
 name: Recipe for air-core inductor
-produces_id: inductor_air_core_v0
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: inductor_air_core_v0
 variant_id: v0
 steps:
-- process_id: coil_winding_basic_v0
-  est_time_hr: 2.0
-  machine_hours: 2.0
-  notes: "Wind copper winding around air core to form inductor"
-assumptions: |
-  Air-core inductor: winding of copper wire around an air core. No ferromagnetic core. Placeholder mass/dimensions; refinement needed as data becomes available.
-notes: Basic winding operation for inductors; does not specify insulation details or final enclosure.
+  - process_id: coil_winding_basic_v0
+    notes: "Wind copper winding around air core; placeholder"
+assumptions: "Air-core inductor: winding copper wire around an air core. No magnetic core."
+notes: "Placeholder recipe; refine with insulation and enclosure once data is available."

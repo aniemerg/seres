@@ -1,15 +1,12 @@
 id: recipe_structural_steel_frame_import_v0
+kind: recipe
 target_item_id: structural_steel_frame
-variant_id: import_v0
+variant_id: v0
 produces_id: structural_steel_frame
 produces_qty: 1.0
 produces_unit: unit
 steps:
-- process_id: cutting_basic_v0
-  notes: "Cut stock to rough parts for frame assembly"
-- process_id: welding_structural_v0
-  notes: "Weld cut_parts into welded fabrications for frame"
-- process_id: fabricate_structural_steel_frame_v0
-  notes: "Finish fabrication to final structural frame"
-assumptions: "Concrete steps for frame fabrication; replace with BOM details later"
-notes: "Replace import placeholder with a real frame fabrication sequence."
+  - process_id: cutting_basic_v0
+  - process_id: welding_structural_v0
+  - process_id: fabricate_structural_steel_frame_v0
+notes: "Converted to a local v0 recipe; uses cutting_basic_v0, welding_structural_v0, and fabricate_structural_steel_frame_v0 to produce structural_steel_frame."

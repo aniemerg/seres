@@ -1,0 +1,25 @@
+id: power_supply_components_basic_fabrication_v0
+kind: process
+name: Power supply components basic fabrication v0
+inputs:
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_supply_components_basic
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: assembly_station
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.4
+  notes: "Placeholder energy for basic power supply component fabrication"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: "Fabrication step producing basic power supply components from electronics components set"

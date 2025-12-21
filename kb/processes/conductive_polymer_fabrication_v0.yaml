@@ -1,0 +1,23 @@
+id: conductive_polymer_fabrication_v0
+name: Fabrication of conductive polymer for potentiometer v0
+kind: process
+inputs:
+  - item_id: conductive_polymer_resin_v0
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: potentiometer_conductive_polymer_v0
+    qty: 2.0
+    unit: kg
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.8
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 10.0
+notes: "Placeholder fabrication step to produce potentiometer conductive polymer from resin."

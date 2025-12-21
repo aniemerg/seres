@@ -1,0 +1,23 @@
+id: photodiode_packaging_v0
+name: Photodiode packaging v0
+kind: process
+inputs:
+  - item_id: selenium_refined
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: photodiode_selenium_v0
+    qty: 0.1
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - resource_type: assembly_station
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.15
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: "Packaging and assembly of selenium-based photodiode from refined selenium."

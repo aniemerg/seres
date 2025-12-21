@@ -1,7 +1,13 @@
 id: 3d_printer_basic_v0
 name: 3D Printer Basic v0
 kind: machine
-mass: 22.0
+mass: 40.0
 unit: kg
 bom: bom_3d_printer_basic_v0
-notes: Seed machine v0 to resolve no_recipe gap in seed KB.
+capabilities:
+  - additive_manufacturing
+processes_supported:
+  - polymer_printed_motor_ironpla_v0
+  - process_3d_print_motor_ironpla_v0
+  - rotor_3d_printed_basic_v0
+notes: "Version 0 seed for 3D printer basic; aligns with seed recipe and BOM for v0."

@@ -1,0 +1,36 @@
+id: manipulator_neural_controller_assembly_v0
+kind: process
+name: Manipulator neural controller assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: yn_neuron_circuit_v0
+  qty: 1.0
+  unit: unit
+- item_id: electronic_assembly
+  qty: 1.0
+  unit: unit
+- item_id: enclosure_small
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: manipulator_neural_controller_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 3.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Assembles manipulator neural controller from neuron circuit, electronic assembly, and enclosure. Placeholder routing to enable local modeling."

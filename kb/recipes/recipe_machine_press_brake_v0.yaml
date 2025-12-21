@@ -1,0 +1,20 @@
+id: recipe_machine_press_brake_v0
+target_item_id: press_brake
+variant_id: v0
+steps:
+  - process_id: welded_fabrication_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 5.0
+    labor_hours: 5.0
+    notes: "Fabricate press brake frame, platen supports, base, and mounting brackets"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 2.0
+    notes: "Machine mounting surfaces and interfaces for hydraulic/power modules"
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble welded components into press brake frame and attach base components"
+assumptions: "Local fabrication path to produce press_brake_v0 base machine; relies on standard fabrication resources."
+notes: "Concrete local fabrication path for press_brake base machine v0"

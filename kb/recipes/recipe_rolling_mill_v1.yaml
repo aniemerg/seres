@@ -1,0 +1,11 @@
+id: recipe_rolling_mill_v1
+kind: recipe
+name: Rolling mill assembly v1
+target_item_id: rolling_mill
+steps:
+  - process_id: assembly_basic_v0
+  - process_id: machining_finish_basic_v0
+  - process_id: welding_brazing_basic_v0
+  - process_id: machine_assembly_basic_v0
+notes: "Upgrade path for rolling_mill; aligns with current rolling_mill item and seed BOM."
+assumptions: "Relies on BOM bom_rolling_mill_v0.yaml for parts and subassemblies."

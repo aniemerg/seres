@@ -1,9 +1,19 @@
 id: bom_microstructure_analysis_system_v0_v0
-kind: bom
 owner_item_id: microstructure_analysis_system_v0
+kind: bom
 components:
-  - item_id: steel_frame_heavy
+  - item_id: optical_microscope_v0
     qty: 1.0
-  - item_id: bearing_set_heavy
+    unit: unit
+  - item_id: computer_workstation
     qty: 1.0
-notes: "Placeholder BOM for microstructure_analysis_system_v0; placeholder components for initial closure."
+    unit: unit
+  - item_id: lab
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - optical_microscope_v0
+  - computer_workstation
+  - lab
+scrap_rate: 0.05
+notes: "Seed BOM for Microstructure Analysis System; minimal hardware set including optical microscope, computer workstation, and laboratory workspace."

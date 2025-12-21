@@ -1,0 +1,24 @@
+id: solvent_production_for_cleaning_v0
+kind: process
+name: Solvent production for cleaning solvent v0
+layer_tags:
+- layer_3
+inputs: []
+outputs:
+  - item_id: cleaning_solvent_or_detergent_v0
+    qty: 1.0
+    unit: kg
+requires_ids: []
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.2
+  notes: Placeholder energy for solvent generation
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+  notes: Placeholder production time
+notes: Placeholder solvent production for cleaning solvent (seeded gap).

@@ -1,0 +1,27 @@
+id: cell_sealing_fabrication_v0
+kind: process
+name: Cell sealing fabrication
+layer_tags:
+- layer_6
+inputs:
+- item_id: silicone_polymer
+  qty: 0.5
+  unit: kg
+outputs:
+- item_id: cell_sealing
+  qty: 0.5
+  unit: kg
+requires_ids: []
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "Placeholder energy per kg for sealing fabrication"
+time_model:
+  type: linear_rate
+  setup_hr: 0.1
+  rate_kg_per_hr: 0.6
+notes: "Placeholder cell sealing fabrication using silicone polymer; basic forming and curing."

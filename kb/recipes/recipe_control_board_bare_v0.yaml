@@ -1,0 +1,16 @@
+id: recipe_control_board_bare_v0
+kind: recipe
+target_item_id: control_board_bare
+variant_id: v0
+steps:
+  - process_id: pcb_fabrication_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: control_board_bare
+        qty: 0.18
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Fabricate bare control board via PCB fabrication process"

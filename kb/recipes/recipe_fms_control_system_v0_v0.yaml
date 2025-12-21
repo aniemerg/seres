@@ -1,0 +1,33 @@
+id: recipe_fms_control_system_v0_v0
+kind: recipe
+target_item_id: fms_control_system_v0_v0
+variant_id: v0
+steps:
+  - process_id: pcb_fabrication_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: control_board_bare
+        qty: 0.18
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Fabricate bare control board (FMS) via PCB fabrication process variant"
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: control_board_bare
+        qty: 0.18
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 15.0
+        unit: kg
+      - item_id: power_distribution_panel_basic
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: fms_control_system_v0_v0
+        qty: 25.0
+        unit: kg
+    est_time_hr: 3.0
+    notes: "Final assembly of FMS controller from subassemblies"

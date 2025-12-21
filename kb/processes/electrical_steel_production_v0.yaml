@@ -1,0 +1,38 @@
+id: electrical_steel_production_v0
+kind: process
+name: Electrical steel production v0
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: iron_metal_pure
+  qty: 0.96
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.04
+  unit: kg
+outputs:
+- item_id: electrical_steel_sheet
+  qty: 1.0
+  unit: kg
+requires_ids:
+- forge_or_induction_heater_v0
+- rolling_mill_v0
+- labor_bot_general_v0
+resource_requirements:
+- resource_type: forge_or_induction_heater_v0
+  qty: 4.0
+  unit: hr
+- resource_type: rolling_mill_v0
+  qty: 2.0
+  unit: hr
+- resource_type: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+notes: Alloy iron with silicon, hot roll, cold roll to thin gauge. Silicon improves magnetic properties and reduces core loss. Silicon can be extracted from silica in regolith.

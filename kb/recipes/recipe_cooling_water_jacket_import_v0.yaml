@@ -1,8 +1,9 @@
 id: recipe_cooling_water_jacket_import_v0
+kind: recipe
 target_item_id: cooling_water_jacket
-variant_id: import_v0
+# Removed import_v0 variant to convert this into a local recipe
 steps:
-  - sheet_metal_forming_process_v0
+  - process_id: sheet_metal_forming_process_v0
     inputs:
       - item_id: copper_sheet_2mm
         qty: 3.0
@@ -13,7 +14,7 @@ steps:
         unit: kg
     est_time_hr: 2.0
     notes: Form curved jacket panels to match cooled component geometry
-  - welding_process_tig_v0
+  - process_id: welding_process_tig_v0
     inputs:
       - item_id: jacket_panels_formed
         qty: 2.8
@@ -24,7 +25,7 @@ steps:
         unit: kg
     est_time_hr: 3.0
     notes: TIG weld panels into complete water jacket shell
-  - brazing_process_v0
+  - process_id: brazing_process_v0
     inputs:
       - item_id: jacket_shell_welded
         qty: 2.7
@@ -41,7 +42,7 @@ steps:
         unit: kg
     est_time_hr: 1.5
     notes: Braze inlet/outlet fittings onto jacket
-  - pressure_testing_hydraulic_v0
+  - process_id: pressure_testing_hydraulic_v0
     inputs:
       - item_id: jacket_with_fittings
         qty: 3.0
@@ -59,6 +60,6 @@ assumptions: |
   Designed to wrap around heated components (motors, transformers, etc.).
 notes: |
   Manufacturing route for cooling water jacket.
-  Inline with v0 model; this is now a local recipe replacing the import placeholder.
+  Replaces import_v0 placeholder.
   Suitable for liquid cooling of electrical equipment, motors, reactors.
   Typical operating pressure: 2-5 bar, temperature: 20-60°C.

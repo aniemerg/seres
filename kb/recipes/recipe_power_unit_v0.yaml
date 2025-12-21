@@ -1,7 +1,13 @@
 id: recipe_power_unit_v0
 kind: recipe
+# Canonical target for the Power Unit
 target_item_id: power_unit
 steps:
-  - assembly_basic_v0
-  - integration_test_basic_v0
-notes: "Placeholder recipe to assemble a generic power unit from common subassemblies; pattern mirrors hydraulic power unit assembly."
+  - process_id: assembly_basic_v0
+    notes: "Assemble power unit from BOM components"
+  - process_id: integration_test_basic_v0
+    notes: "Run integration tests for power_unit"
+produces_id: power_unit
+produces_qty: 1.0
+produces_unit: unit
+notes: "Placeholder recipe to assemble a generic power unit from BOM components; mirrors hydraulic power unit pattern."

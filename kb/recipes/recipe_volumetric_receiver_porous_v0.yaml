@@ -1,11 +1,10 @@
 id: recipe_volumetric_receiver_porous_v0
 kind: recipe
-name: Recipe for volumetric receiver porous v0
-produces_id: volumetric_receiver_porous_v0
+target_item_id: volumetric_receiver_porous_v0
 produces_qty: 1.0
 produces_unit: unit
 steps:
-- process_id: porous_receiver_fabrication_v0
-  notes: Fabricate porous receiver core
-- process_id: assembly_basic_v0
-  notes: Assemble and finalize receiver housing
+  - process_id: porous_receiver_fabrication_v0
+    notes: "Fabricate porous receiver core"
+  - process_id: assembly_basic_v0
+    notes: "Assemble and finalize receiver housing"

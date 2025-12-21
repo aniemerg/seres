@@ -1,10 +1,6 @@
 id: recipe_methyl_chloride_gas_v0
 kind: recipe
-name: Recipe for methyl chloride gas
-produces_id: methyl_chloride_gas
-produces_qty: 1.0
-produces_unit: kg
+target_item_id: methyl_chloride_gas
 steps:
-- process_id: methylchloride_synthesis_v0
-  notes: "Synthesis step from methane and chlorine to methyl chloride."
-notes: "Single-step synthesis route; chain through methylchloride_synthesis_v0."
+  - methylchloride_synthesis_v0
+notes: "Single-step methyl chloride gas production via methylchloride_synthesis_v0"

@@ -28,11 +28,45 @@ See `docs/README.md` for complete onboarding documentation.
   - See `queue_agents/README.md` for details
 - See `docs/` for onboarding and workflow details.
 
+## Base Builder Simulation
+
+**Status**: ✅ **IMPLEMENTED AND VALIDATED** (2025-12-20)
+
+Interactive simulation mode for validating KB completeness by building a lunar base from scratch:
+
+**Key Features**:
+- Start with nothing, bootstrap from regolith mining
+- Material class matching enables generic substitution (e.g., iron → raw_metal_block)
+- JSONL event logging for full audit trail
+- Interactive mode: Direct function calls from Claude
+
+**Proven Results**:
+- ✅ Complete iron production chain: regolith → iron ore → pure iron → parts
+- ✅ 425 kg regolith → 25 kg manufactured parts (2% yield)
+- ✅ 315 kg Earth imports (bootstrap only), 12.6:1 local-to-import ratio
+- ✅ Material class system unlocked 66+ manufacturing processes
+
+**Usage**:
+```bash
+# Interactive mode
+python -c "from base_builder.interactive import *; init_simulation('test_sim')"
+# Then use: view_state(), start_process(), run_recipe(), build_machine(), etc.
+```
+
+**Documentation**:
+- `docs/ADRs/004-base-builder-simulation.md` — Architecture decision record
+- `docs/material_class_system.md` — Material class matching implementation
+- `docs/iron_parts_discovery.md` — Production chain breakthrough
+- `docs/session_accomplishments.md` — Complete session results
+
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.
 - `kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
 - `kbtool/` — Python tooling (models + indexer CLI).
 - `queue_agents/` — Autonomous queue agents for processing KB gaps.
+- `base_builder/` — **Base builder simulation** for validating KB completeness through production chains.
+- `simulations/` — Simulation runs and event logs.
+- `docs/` — Documentation, ADRs, research questions, session accomplishments.
 - `out/` — generated index, reports, work queue.
 
 ## Indexer outputs

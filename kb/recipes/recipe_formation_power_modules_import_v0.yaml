@@ -1,10 +1,30 @@
 id: recipe_formation_power_modules_import_v0
-target_item_id: formation_power_modules
-variant_id: import_v0
-steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.5
-    notes: Imported formation power electronics until local build is modeled.
-assumptions: Current/voltage-controlled channels are imported initially; replace with local power electronics fabrication later.
-notes: Import placeholder to unblock formation rack assembly.
+kind: recipe
+produces_id: formation_power_modules
+produces_qty: 1.0
+produces_unit: unit
 
+target_item_id: formation_power_modules
+variant_id: v0
+steps:
+  - process_id: pcb_assembly_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Assemble formation power module PCB"
+  - process_id: power_component_assembly_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Mount MOSFETs, inductors, capacitors, transformers into core"
+  - process_id: heat_sink_installation_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Attach heatsinks and thermal interface"
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Encapsulate assembly in enclosure and wire interfaces"
+  - process_id: electrical_testing_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Electrical testing and verification"
+notes: "Concrete production recipe to replace import placeholder for formation_power_modules."

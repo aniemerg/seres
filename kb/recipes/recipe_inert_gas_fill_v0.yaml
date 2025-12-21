@@ -1,8 +1,8 @@
 id: recipe_inert_gas_fill_v0
 kind: recipe
-variant_id: import_v0
 target_item_id: inert_gas_fill_v0
 steps:
-  - process_id: import_placeholder_v0
-assumptions: "Inert gas fill sourced from suppliers; placeholder path to unblock gas handling until a defined gas pipeline is modeled."
-notes: "Import placeholder to unblock inert gas fill usage in downstream processes (e.g., NAK fill)."
+  - process_id: inert_gas_fill_basic_v0
+assumptions: "Uses purified nitrogen gas as input; placeholder if contaminants persist"
+notes: "Replace with a tighter gas specification when available."
+variant_id: v0

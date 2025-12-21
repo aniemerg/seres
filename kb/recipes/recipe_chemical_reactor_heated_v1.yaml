@@ -1,9 +1,14 @@
 id: recipe_chemical_reactor_heated_v1
 kind: recipe
-variant_id: v1
+name: Placeholder produktion path for chemical reactor heated v1
 produces_id: chemical_reactor_heated
 produces_qty: 1.0
 produces_unit: unit
+target_item_id: chemical_reactor_heated
+variant_id: v1
 steps:
   - process_id: assembly_basic_v0
-notes: "Placeholder production path to close no_recipe gap for chemical_reactor_heated."
+  - process_id: enclosure_assembly_basic_v0
+  - process_id: electrical_assembly_basic_v0
+  - process_id: sealing_and_assembly_basic_v0
+notes: "Placeholder production path to close no_recipe gap for chemical_reactor_heated (v1); mirrors v0 chain for local target."

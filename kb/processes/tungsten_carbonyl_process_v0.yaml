@@ -1,0 +1,25 @@
+id: tungsten_carbonyl_process_v0
+kind: process
+name: Tungsten carbonyl purification
+inputs:
+- item_id: tungsten_carbonyl_v0
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: tungsten_metal_pure
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Purifies W(CO)6 to tungsten metal; placeholder energy/time. Seed from comprehensive paper reviews."
+source_tags:
+  - ellery_2021_2022
+  - seed_import

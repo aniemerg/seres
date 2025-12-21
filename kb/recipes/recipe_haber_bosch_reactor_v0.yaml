@@ -1,9 +1,20 @@
 id: recipe_haber_bosch_reactor_v0
 kind: recipe
-name: Haber-Bosch reactor fabrication recipe v0
+name: Recipe for haber_bosch_reactor_v0
 produces_id: haber_bosch_reactor_v0
 produces_qty: 1.0
 produces_unit: unit
+target_item_id: haber_bosch_reactor_v0
+variant_id: v0
 steps:
-- process_id: haber_bosch_reactor_fabrication_v0
-notes: Placeholder single-step fabrication path to produce Haber-Bosch reactor.
+  - process_id: assembly_basic_v0
+    notes: "Basic assembly to integrate BOM components into haber_bosch_reactor_v0 subassembly"
+  - process_id: enclosure_assembly_basic_v0
+    notes: "Mount reactor into enclosure and attach shielding"
+  - process_id: machine_assembly_basic_v0
+    notes: "Install major modules: reactor core and shell interfaces"
+  - process_id: sealing_and_assembly_basic_v0
+    notes: "Seal enclosure and finalize integration"
+  - process_id: inspection_basic_v0
+    notes: "Final inspection and readiness check"
+notes: "Placeholder recipe to resolve no_recipe gap for haber_bosch_reactor_v0; refine BOM/steps as design matures."

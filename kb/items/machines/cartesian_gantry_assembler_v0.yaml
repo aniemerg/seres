@@ -1,9 +1,14 @@
 id: cartesian_gantry_assembler_v0
+name: Cartesian Gantry Assembler v0
 kind: machine
-name: Cartesian gantry assembler v0
-mass: 150.0
-unit: unit
-material_class: steel
-bom: bom_cartesian_gantry_assembler_v0
-notes: Gantry-style cartesian robot for light assembly and handling; basic XYZ axes
-  with small end effector.
+mass: 200.0
+unit: kg
+dimensions: "1.5m x 1.2m x 1.8m"
+power_draw_kW: 5.0
+capabilities:
+  - assembly
+  - gantry
+  - positioning
+  - automation
+bom: bom_cartesian_gantry_assembler_v0.yaml
+notes: "Expanded entry to replace placeholder; intended as a modular Cartesian gantry assembly machine for ISRU manufacturing lines."

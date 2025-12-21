@@ -1,0 +1,78 @@
+id: recipe_vacuum_tube_triode_power_v0
+kind: recipe
+target_item_id: vacuum_tube_triode_power
+steps:
+  - process_id: glass_blowing_process_v0
+    inputs:
+      - item_id: glass_tube_borosilicate
+        qty: 0.10
+        unit: kg
+    outputs:
+      - item_id: tube_envelope_blown
+        qty: 0.09
+        unit: kg
+    est_time_hr: 0.5
+    notes: Blow glass envelope for tube (scaled)
+  - process_id: wire_forming_process_v0
+    inputs:
+      - item_id: nickel_wire
+        qty: 0.025
+        unit: kg
+      - item_id: tungsten_wire
+        qty: 0.015
+        unit: kg
+    outputs:
+      - item_id: tube_electrode_set
+        qty: 0.035
+        unit: kg
+    est_time_hr: 1.0
+    notes: Form cathode, grid, and anode electrodes (scaled)
+  - process_id: oxide_coating_cathode_v0
+    inputs:
+      - item_id: tube_electrode_set
+        qty: 0.035
+        unit: kg
+      - item_id: barium_oxide
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: cathode_coated
+        qty: 0.04
+        unit: kg
+    est_time_hr: 2.0
+    notes: Apply cathode coating (scaled)
+  - process_id: tube_assembly_and_evacuation_v0
+    inputs:
+      - item_id: tube_envelope_blown
+        qty: 0.09
+        unit: kg
+      - item_id: cathode_coated
+        qty: 0.04
+        unit: kg
+      - item_id: tube_base_ceramic
+        qty: 0.05
+        unit: kg
+      - item_id: getter_material_raw
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: tube_assembled_evacuated
+        qty: 0.20
+        unit: kg
+    est_time_hr: 3.0
+    notes: Assemble and evacuate (scaled)
+  - process_id: getter_material_activation_v0
+    inputs:
+      - item_id: tube_assembled_evacuated
+        qty: 0.20
+        unit: kg
+    outputs:
+      - item_id: vacuum_tube_triode_power
+        qty: 0.25
+        unit: kg
+    est_time_hr: 1.0
+    notes: Activate getter; final vacuum; mass 0.25 kg
+assumptions: |
+  Scaled version of the standard vacuum_tube_triode_v0 path to produce higher-mass power tubes.
+notes: |
+  Placeholder recipe to manufacture vacuum_tube_triode_power; aligns with vacuum_tube_triode_v0 production routes.

@@ -1,0 +1,26 @@
+id: carbon_dioxide_generation_v0
+name: Carbon dioxide generation via combustion
+kind: process
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: carbon_dioxide_gas
+    qty: 3.0
+    unit: kg
+resource_requirements:
+  - resource_type: combustion_chamber
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.5
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 2.0
+notes: Placeholder combustion path producing CO2; mass-balanced with inputs to output.

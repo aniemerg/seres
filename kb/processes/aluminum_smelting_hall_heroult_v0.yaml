@@ -1,0 +1,42 @@
+id: aluminum_smelting_hall_heroult_v0
+kind: process
+name: Aluminum smelting (Hall-Héroult process) v0
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: alumina_powder
+  qty: 2.0
+  unit: kg
+- item_id: carbon_anode
+  qty: 0.5
+  unit: kg
+- item_id: cryolite_flux
+  qty: 0.15
+  unit: kg
+outputs:
+- item_id: aluminum_alloy_ingot
+  qty: 1.0
+  unit: kg
+- item_id: co2_gas
+  qty: 1.5
+  unit: kg
+- item_id: cryolite_flux
+  qty: 0.135
+  unit: kg
+resource_requirements:
+- resource_type: electrolysis_cell_aluminum
+  qty: 8.0
+  unit: hr
+- resource_type: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 15.0
+  notes: Hall-Héroult electrolysis energy intensity for aluminum production
+time_model:
+  type: linear_rate
+  setup: 0.0
+  rate: 0.125
+notes: Hall-Héroult electrolysis at ~960°C. Very energy-intensive. Cryolite flux enables lower melting point. This is the standard industrial process for aluminum production.

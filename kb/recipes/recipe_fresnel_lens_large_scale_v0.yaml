@@ -1,0 +1,21 @@
+id: recipe_fresnel_lens_large_scale_v0
+kind: recipe
+name: Recipe for Fresnel lens (large-scale) v0
+target_item_id: fresnel_lens_large_scale_v0
+variant_id: v0
+steps:
+  - process_id: glass_casting_v0
+    est_time_hr: 15.0
+    machine_hours: 15.0
+    notes: "Cast large substrate for Fresnel lens grooves"
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Shape grooves and achieve optical precision on substrate"
+  - process_id: inspection_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Quality inspection of groove geometry and surface finish"
+assumptions: |-
+  Large-scale Fresnel lens is produced by casting a single substrate followed by precision grinding to form groove pattern. This is a seed-level approximation intended to enable modeling; downstream refinements may decompose into multiple segments if needed.
+notes: "Seed recipe to manufacture fresnel_lens_large_scale_v0 from glass_casting_v0 and grinding."

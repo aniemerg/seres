@@ -2,8 +2,24 @@ id: recipe_optical_comparator_v0
 kind: recipe
 target_item_id: optical_comparator_v0
 steps:
-  - assembly_basic_v0
-  - electrical_wiring_and_controls_v0
-  - calibration_basic_v0
-  - alignment_and_testing_basic_v0
-notes: "Initial local recipe to manufacture optical_comparator_v0 from BOM components; placeholders: assembly, wiring, calibration, and alignment/testing." 
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 1.0
+    labor_hours: 1.0
+    notes: "Assemble optical comparator frame per BOM components for basic housing."
+  - process_id: electrical_wiring_and_controls_v0
+    est_time_hr: 3.0
+    machine_hours: 1.0
+    labor_hours: 2.0
+    notes: "Connect wiring, conduits, control panels, and sensors."
+  - process_id: calibration_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 0.5
+    labor_hours: 1.0
+    notes: "Calibrate alignment scales, references, and sensors."
+  - process_id: alignment_and_testing_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 1.0
+    labor_hours: 1.5
+    notes: "Align optical axis and perform functional tests."
+notes: "Converted legacy recipe to modern per-step object format. Placeholder steps to manufacture optical_comparator_v0 from BOM components." 

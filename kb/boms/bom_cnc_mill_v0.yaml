@@ -1,5 +1,19 @@
-id: bom_cnc_mill_v0_v0
+id: bom_cnc_mill_v0
 kind: bom
 owner_item_id: cnc_mill_v0
-components: []
-notes: "Seed BOM for cnc_mill_v0 to resolve referenced_only gap. Fill components later."
+target_item_id: cnc_mill_v0
+components:
+  - item_id: structural_frame_steel
+    qty: 1.0
+  - item_id: mill_shell_generic
+    qty: 1.0
+  - item_id: drive_motor_medium
+    qty: 1.0
+  - item_id: gearbox_reducer_medium
+    qty: 1.0
+  - item_id: bearing_set_heavy
+    qty: 1.0
+  - item_id: coolant_pump_system
+    qty: 1.0
+notes: "Seed BOM variant v0 for cnc_mill_v0; replaces placeholder raw_material with concrete components. Mass balance pending refinement."
+scrap_rate: 0.05

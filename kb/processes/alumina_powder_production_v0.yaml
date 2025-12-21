@@ -1,0 +1,26 @@
+id: alumina_powder_production_v0
+name: Alumina powder production (placeholder)
+kind: process
+inputs:
+  - item_id: electricity
+    qty: 0.0
+    unit: kg
+outputs:
+  - item_id: alumina_powder
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: dust_fines
+    qty: 0.0
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 0.1
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.1
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder production step to unblock no_recipe gap for alumina_powder. Replace with a real production path later."

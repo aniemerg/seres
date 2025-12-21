@@ -1,0 +1,25 @@
+id: iron_carbonyl_synthesis_v0
+name: Iron carbonyl synthesis
+kind: process
+inputs:
+  - item_id: iron_powder_v0
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide_gas_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_carbonyl_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: generic_chemical_reactor_v0
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Synthesis of iron carbonyl Fe(CO)5 from iron powder and CO gas; placeholder values used to enable KB closure."

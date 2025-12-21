@@ -1,0 +1,23 @@
+id: mock_coordinate_measuring_machine_assembly_v0
+name: Mock coordinate measuring machine assembly v0
+kind: process
+inputs:
+- item_id: coordinate_measuring_machine
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: coordinate_measuring_machine
+  qty: 1.0
+  unit: unit
+requires_ids: []
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.5
+  unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.2
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Mock assembly step to resolve no_recipe gap for coordinate_measuring_machine; conservative placeholder."

@@ -1,0 +1,16 @@
+id: recipe_copper_wire_magnet_v0
+kind: recipe
+name: Local copper wire magnet production v0
+produces_id: copper_wire_magnet_v0
+produces_qty: 1.0
+produces_unit: kg
+target_item_id: copper_wire_magnet_v0
+variant_id: v0
+steps:
+  - process_id: copper_wire_drawing_and_insulation_v0
+    outputs:
+      - item_id: copper_wire_magnet_v0
+        qty: 1.0
+        unit: kg
+notes: "Local production path using copper_wire_drawing_and_insulation_v0; alias aligned to v0 data"
+assumptions: "Feedstock copper_rod_ingot assumed available; simplification consistent with magnet_wire_copper path."

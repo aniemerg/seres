@@ -1,0 +1,28 @@
+id: power_supply_benchtop_assembly_v0
+kind: process
+name: Power supply benchtop assembly v0
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+  - item_id: power_supply_components_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_supply_benchtop
+    qty: 1.0
+    unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- resource_type: assembly_station
+  qty: 1.0
+  unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+  notes: "Bench-top power supply assembly energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Assemble bench-top power supply from basic components"

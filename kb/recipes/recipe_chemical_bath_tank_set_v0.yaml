@@ -1,42 +1,10 @@
 id: recipe_chemical_bath_tank_set_v0
 kind: recipe
-name: Recipe for chemical bath tank set v0
 produces_id: chemical_bath_tank_set
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
 steps:
-  - process_id: metal_spinning_process_v0
-    inputs:
-      - item_id: stainless_steel_sheet
-        qty: 30.0
-        unit: kg
-    outputs:
-      - item_id: tank_shell_spun
-        qty: 28.0
-        unit: kg
-    est_time_hr: 4.0
-  - process_id: tank_set_assembly_v0
-    inputs:
-      - item_id: tank_shell_spun
-        qty: 1.0
-        unit: unit
-      - item_id: chemical_bath_heaters
-        qty: 1.0
-        unit: unit
-      - item_id: chemical_bath_agitation_system
-        qty: 1.0
-        unit: unit
-      - item_id: chemical_bath_ventilation
-        qty: 1.0
-        unit: unit
-      - item_id: fastener_kit_medium
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: chemical_bath_tank_set
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.5
-assumptions: "Two-step route; uses spun shell and standard components."
-notes: "Realistic production path for chemical_bath_tank_set; not an import."
+  - process_id: welding_brazing_basic_v0
+  - process_id: assembly_basic_v0
+notes: "Placeholder recipe to enable local manufacturing of chemical_bath_tank_set; refine BOM and steps later."

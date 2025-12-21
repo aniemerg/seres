@@ -103,7 +103,6 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
                 else:
                     invalid.append({"reason": "missing_process_id", "step": step})
             else:
-                # Old/invalid schema
                 invalid.append({"reason": "legacy_step_format", "step": step})
                 try:
                     refs.add(str(step))
@@ -128,7 +127,6 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
 
 
 def _collect_nulls(kind: str, data: dict) -> List[dict]:
-    """Collect fields with null values that should eventually have data."""
     nulls: List[dict] = []
 
     if kind == "process":
@@ -154,7 +152,6 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
 
 
 def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
-    """Collect required fields that are missing (not just null, but absent)."""
     missing: List[dict] = []
 
     if kind == "process":
@@ -303,18 +300,17 @@ def build_index() -> Dict[str, dict]:
             if ref in entries:
                 entries[ref]["refs_in"].append(entry["id"])
 
-    # Compute items without recipes (parts, materials, machines that no recipe targets)
+    # Compute items without recipes (parts/materials/machines that no recipe targets)
     items_without_recipes: List[dict] = []
     for entry in entries.values():
-        if entry["kind"] in ("part", "material", "machine") and entry["status"] == "defined":
-            if entry["id"] not in recipe_targets:
-                items_without_recipes.append({
-                    "id": entry["id"],
-                    "kind": entry["kind"],
-                    "file": entry["defined_in"],
-                })
+        if entry["kind"] in ("part", "material", "machine") and entry["id"] not in recipe_targets:
+            items_without_recipes.append({
+                "id": entry["id"],
+                "kind": entry["kind"],
+                "file": entry["defined_in"],
+            })
 
-    # Compute orphan resources (resource_types with no machine capability)
+    # Compute orphan resources (resource_types with no machine providing them)
     all_capabilities: Set[str] = set()
     for caps in machine_capabilities.values():
         all_capabilities.update(caps)
@@ -372,6 +368,20 @@ def build_index() -> Dict[str, dict]:
     return entries
 
 
+# Added helper for missing recipes (backward-compatible stub to satisfy older indexer paths)
+
+def _write_missing_recipes(missing_recipes: List[dict], file_path: Optional[Path] = None) -> None:
+    if file_path is None:
+        file_path = OUT_DIR / "missing_recipes.jsonl"
+    try:
+        with file_path.open("w", encoding="utf-8") as f:
+            for mr in missing_recipes:
+                f.write(json.dumps(mr) + "\n")
+    except Exception:
+        # Best-effort; do not crash indexing if this fails
+        pass
+
+
 def _update_work_queue(
     unresolved_refs: List[dict],
     referenced_only: Set[str],
@@ -416,10 +426,8 @@ def _update_work_queue(
     # Referenced but not defined
     for ref_id in sorted(referenced_only):
         context = {}
-        # Add seed file info if this item was referenced by a seed file
         if ref_id in seed_references:
             context["seed_files"] = seed_references[ref_id]
-        # Add metadata if available
         if ref_id in item_metadata:
             context["metadata"] = item_metadata[ref_id]
         gap_items.append(
@@ -481,7 +489,7 @@ def _update_work_queue(
                 "reason": "no_provider_machine",
                 "gap_type": "no_provider_machine",
                 "item_id": orph["id"],
-                "context": {"needed_by": orph["refs_in"], "file": orph["file"]},
+                "context": {"needed_by": orph.get("refs_in", []), "file": orph["file"]},
             }
         )
 
@@ -511,7 +519,6 @@ def _update_work_queue(
                 filtered_items.append(gap)
                 filtered_count += 1
 
-        # Remove filtered items from gap_items
         gap_items = [g for g in gap_items if g not in filtered_items]
 
     filter_stats = {
@@ -522,8 +529,6 @@ def _update_work_queue(
         "current_mode": config.current_mode,
     }
 
-    # Merge with existing queue to preserve leases/status
-    # Use file lock to prevent race conditions with concurrent lease operations
     with _locked_queue():
         existing: Dict[str, dict] = {}
         if WORK_QUEUE.exists():
@@ -536,23 +541,14 @@ def _update_work_queue(
                         continue
 
         merged: List[dict] = []
-        # Track existing leases by item_id to avoid duplicate leasing of related gaps
-        leased_item_ids: Set[str] = set()
-        for obj in existing.values():
-            if obj.get("status") == "leased":
-                iid = obj.get("item_id") or obj.get("id")
-                if iid:
-                    leased_item_ids.add(str(iid))
         now = time.time()
         for obj in gap_items:
             eid = obj["id"]
             if eid in existing:
                 prev = existing[eid]
-                # Resurface done items if gap persists
                 if prev.get("status") == "done":
                     obj.update({"status": "pending"})
                 else:
-                    # preserve lease/status if not expired
                     if prev.get("status") == "leased" and prev.get("lease_expires_at", 0) < now:
                         prev["status"] = "pending"
                         prev.pop("lease_id", None)
@@ -588,7 +584,6 @@ def _write_report(
     for kind, count in sorted(counts.items()):
         lines.append(f"- {kind}: {count}")
 
-    # Items without recipes (major gap)
     if items_without_recipes:
         by_kind: Dict[str, int] = {}
         for item in items_without_recipes:
@@ -602,7 +597,6 @@ def _write_report(
         lines.append("")
         lines.append("See `out/missing_recipes.jsonl` for details.")
 
-    # Missing required fields
     if missing_fields:
         by_field: Dict[str, int] = {}
         for mf in missing_fields:
@@ -616,7 +610,6 @@ def _write_report(
         lines.append("")
         lines.append("See `out/missing_fields.jsonl` for details.")
 
-    # Orphan resources
     if orphan_resources:
         lines.append("")
         lines.append("## Orphan resources (no machine provides)")
@@ -629,7 +622,6 @@ def _write_report(
         lines.append("")
         lines.append("See `out/orphan_resources.jsonl` for details.")
 
-    # Null value summary
     if null_values:
         null_by_kind: Dict[str, int] = {}
         for nv in null_values:
@@ -652,7 +644,6 @@ def _write_report(
         lines.append("")
         lines.append("No warnings.")
 
-    # Queue filtering summary
     if filter_stats.get("filtering_enabled"):
         lines.append("")
         lines.append("## Queue Filtering")
@@ -666,7 +657,6 @@ def _write_report(
             pct = (filter_stats['filtered_count'] / filter_stats['total_gaps']) * 100
             lines.append(f"**Filtering rate**: {pct:.1f}%")
 
-    # Work queue summary
     total_gaps = (
         len(items_without_recipes) + len(missing_fields) +
         len(orphan_resources) + len(null_values)

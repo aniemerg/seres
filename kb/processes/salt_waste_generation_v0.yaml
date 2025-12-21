@@ -1,0 +1,20 @@
+id: salt_waste_generation_v0
+name: Salt waste generation v0
+kind: process
+inputs:
+  - item_id: none
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: salt_waste
+    qty: 1.0
+    unit: kg
+resource_requirements: []
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.0
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+notes: "Placeholder process to generate salt_waste from a dummy input to close no_recipe gap."

@@ -1,0 +1,22 @@
+id: iron_powder_synthesis_v0
+name: Iron powder synthesis from pure iron (v0)
+kind: process
+inputs:
+  - item_id: iron_metal_pure
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_powder_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.7
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+notes: "Direct reduction of pure iron to iron powder; placeholder numbers for KB closure."

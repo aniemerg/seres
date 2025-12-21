@@ -1,0 +1,23 @@
+id: recipe_data_handler_unit_v0
+kind: recipe
+target_item_id: data_handler_unit_v0
+variant_id: v0
+steps:
+  - process_id: machine_assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble base data handler frame and electronics"
+  - process_id: enclosure_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Mount submodule into enclosure"
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 0.8
+    notes: "Wiring and control electronics"
+  - process_id: sealing_and_assembly_basic_v0
+    est_time_hr: 0.7
+    labor_hours: 0.7
+    notes: "Seal and final assembly"
+assumptions: "Seed placeholder path; uses common assembly steps; BOM for data_handler_unit_v0 currently minimal"
+notes: "Seed recipe to manufacture data_handler_unit_v0; to be refined as BOM matures"

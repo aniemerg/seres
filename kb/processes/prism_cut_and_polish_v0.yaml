@@ -1,0 +1,25 @@
+id: prism_cut_and_polish_v0
+name: Prism glass cut and polish v0
+kind: process
+layer_tags:
+  - layer_7
+  - layer_8
+inputs:
+  - item_id: cast_glass_parts
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: prism_glass_optical
+    qty: 0.25
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Cut and polish a cast glass prism blank into optical prism; placeholder energy/time values."

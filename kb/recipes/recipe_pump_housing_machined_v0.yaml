@@ -1,7 +1,14 @@
 id: recipe_pump_housing_machined_v0
 kind: recipe
+name: Pump housing machined v0
+produces_id: pump_housing_machined
+produces_qty: 1.0
+produces_unit: unit
 target_item_id: pump_housing_machined
+variant_id: v0
 steps:
-  - machining_raw_to_machined_part_v0
-  - pump_housing_machining_v0
+  - process_id: machining_raw_to_machined_part_v0
+    notes: "First stage: rough to machined_part_raw for the pump housing"
+  - process_id: pump_housing_machining_v0
+    notes: "Final machining to pump_housing_machined"
 notes: "Two-step path: rough stock -> machined_part_raw -> final pump_housing_machined. Assumes 25 kg final mass; scales from raw input accordingly."

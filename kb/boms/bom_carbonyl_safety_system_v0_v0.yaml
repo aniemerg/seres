@@ -1,7 +1,18 @@
 id: bom_carbonyl_safety_system_v0_v0
+owner_item_id: carbonyl_safety_system_v0_v0
 kind: bom
-owner_item_id: carbonyl_safety_system_v0
+
+target_item_id: carbonyl_safety_system_v0_v0
+variant_id: v0
+requires_ids:
+  - gasket_sheet_part_v0
+  - gas_inlet_manifold_v0
+  - valve_body_cast_rough_v0
 components:
-  - item_id: placeholder_component
-    qty: 0.0
-notes: "Placeholder BOM to satisfy referenced gap; to be expanded with real components later."
+  - item_id: gasket_sheet_part_v0
+    qty: 1.0
+  - item_id: gas_inlet_manifold_v0
+    qty: 1.0
+  - item_id: valve_body_cast_rough_v0
+    qty: 1.0
+notes: "Canonical BOM aligned with v0_seed; resolves referenced_only gap for carbonyl_safety_system_v0_v0 by using gasket_sheet_part_v0."

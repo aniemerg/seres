@@ -1,0 +1,22 @@
+id: electronic_control_circuit_assembly_v0
+kind: process
+name: Electronic control circuit assembly v0
+inputs:
+  - item_id: electronic_component_or_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: electronic_control_circuit_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: assembly_station
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.8
+notes: "Assembles electronic control circuit from electronic component or module."

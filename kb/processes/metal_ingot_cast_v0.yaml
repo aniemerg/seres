@@ -1,0 +1,29 @@
+id: metal_ingot_cast_v0
+kind: process
+name: Metal ingot casting
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_ingot
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - crucible
+  - casting_furnace
+  - molds
+resource_requirements:
+  - machine_id: casting_furnace_v0
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.5
+  notes: "melting steel (~1.2 MJ/kg enthalpy + heating losses)"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: Casting metal ingot from metal alloy bulk; placeholder mass balance.

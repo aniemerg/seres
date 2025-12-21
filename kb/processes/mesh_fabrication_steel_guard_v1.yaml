@@ -1,0 +1,24 @@
+id: mesh_fabrication_steel_guard_v1
+name: Mesh fabrication (steel guard v1)
+kind: process
+layer_tags:
+- layer_6
+inputs:
+- item_id: steel_mesh_sheet_material
+  qty: 50.0
+  unit: kg
+outputs:
+- item_id: safety_guard_steel_mesh
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Fabrication of safety guard steel mesh from steel mesh sheet feedstock (v1)."

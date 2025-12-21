@@ -1,0 +1,25 @@
+id: methane_pyrolysis_v0
+kind: process
+name: Methane pyrolysis (CH4 -> C + 2H2)
+inputs:
+- item_id: methane_gas
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: carbon_anode_material
+  qty: 0.75
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.25
+  unit: kg
+resource_requirements:
+- resource_type: pyrolysis_chamber
+  qty: 1.0
+  unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.75
+notes: "Pyrolysis of methane at ~1000–1200°C. ~75% carbon recovery; hydrogen byproduct."

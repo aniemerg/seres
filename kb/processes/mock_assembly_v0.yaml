@@ -1,0 +1,22 @@
+id: mock_assembly_v0
+name: Mock assembly process for gap resolution v0
+kind: process
+inputs:
+- item_id: atomization_unit_v0
+  qty: 0.0
+  unit: unit
+outputs:
+  - item_id: atomization_unit_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - resource_type: labor_bot_general
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder mock assembly to close no_recipe gap for atomization_unit_v0; inputs empty or placeholder; use conservative estimates."

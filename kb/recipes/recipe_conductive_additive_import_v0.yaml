@@ -1,9 +1,13 @@
 id: recipe_conductive_additive_import_v0
+kind: recipe
+# Converted import stub into a local production recipe to resolve the gap
+# and provide a concrete production path for conductive additive.
 target_item_id: conductive_additive
-variant_id: import_v0
+produces_id: conductive_additive
+produces_qty: 1.0
+produces_unit: kg
 steps:
-- process_id: conductive_additive_production_v0
-  est_time_hr: 1.0
-  notes: Local production path established to supply conductive additive.
-assumptions: Local carbon-based production path; replace import with full production later as data improves.
+  - process_id: conductive_additive_production_v0
+    est_time_hr: 1.0
+assumptions: Local carbon-based production path; this path replaces the previous import stub as data matures.
 notes: Replaced import placeholder with a real production process for conductive additive.

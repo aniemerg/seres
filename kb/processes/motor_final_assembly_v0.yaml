@@ -3,8 +3,30 @@ kind: process
 name: Motor final assembly (basic)
 layer_tags:
   - layer_5
-inputs: []
-outputs: []
+inputs:
+- item_id: stator_rotor_lamination_set
+  qty: 5.0
+  unit: kg
+- item_id: motor_coil_wound
+  qty: 2.0
+  unit: kg
+- item_id: motor_shaft_steel
+  qty: 1.0
+  unit: kg
+- item_id: bearing_set_small
+  qty: 0.5
+  unit: kg
+- item_id: motor_housing_steel
+  qty: 3.0
+  unit: kg
+outputs:
+- item_id: motor_electric_small
+  qty: 1.0
+  unit: unit
+byproducts:
+- item_id: assembly_loss
+  qty: 0.5
+  unit: kg
 requires_ids:
   - assembly_tools_basic
 resource_requirements:

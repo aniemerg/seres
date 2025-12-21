@@ -1,0 +1,18 @@
+id: recipe_heat_sink_fin_extrusion_v0
+kind: recipe
+target_item_id: heat_sink_fin_extrusion
+variant_id: v0
+steps:
+  - process_id: metal_extrusion_process_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: heat_sink_fin_extrusion
+        qty: 22.0
+        unit: kg
+    est_time_hr: 2.0
+notes: "Production path for heat sink fin extrusion via metal extrusion process; aligns with heat_sink_assembly_large_v0 chain."
+assumptions: |
+  25 kg aluminum alloy ingot feed yields 22 kg heat sink fins and 3 kg scrap (aligned with process spec).

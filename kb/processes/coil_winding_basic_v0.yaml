@@ -3,8 +3,21 @@ kind: process
 name: Coil winding (basic)
 layer_tags:
   - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: aluminum_wire
+  qty: 2.1
+  unit: kg
+- item_id: coil_insulation_material
+  qty: 0.05
+  unit: kg
+outputs:
+- item_id: motor_coil_wound
+  qty: 2.0
+  unit: kg
+byproducts:
+- item_id: wire_scrap
+  qty: 0.15
+  unit: kg
 requires_ids:
   - coil_winding_machine
 resource_requirements:

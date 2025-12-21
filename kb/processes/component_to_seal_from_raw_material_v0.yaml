@@ -1,0 +1,26 @@
+id: component_to_seal_from_raw_material_v0
+kind: process
+name: Produce component_to_seal from raw material (local)
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: raw_metal_block
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: component_to_seal
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    amount: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 0.5
+  notes: "Placeholder energy for local component production"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Local production path to convert 1 kg of raw metal block into a placeholder component_to_seal; replace with actual process later."

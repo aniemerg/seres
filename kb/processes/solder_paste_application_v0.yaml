@@ -1,0 +1,25 @@
+id: solder_paste_application_v0
+name: Solder paste application (SMT) v0
+kind: process
+inputs:
+  - item_id: pcb_bare_board
+    qty: 0.04
+    unit: kg
+  - item_id: solder_paste_tin_lead
+    qty: 0.005
+    unit: kg
+outputs:
+  - item_id: pcb_paste_applied
+    qty: 0.045
+    unit: kg
+resource_requirements:
+  - resource_type: solder_paste_dispenser
+    qty: 1.0
+    unit: unit
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.8
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Apply solder paste to PCB pads using a stencil printer or dispenser."

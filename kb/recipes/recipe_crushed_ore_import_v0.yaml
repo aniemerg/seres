@@ -1,9 +1,11 @@
 id: recipe_crushed_ore_import_v0
+kind: recipe
 target_item_id: crushed_ore
-variant_id: import_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.1
-    notes: Imported crushed ore feed until local mining/crushing is modeled.
-assumptions: "Placeholder to unblock concentration processes; replace with excavation + crushing route later."
-notes: Import route for crushed ore feedstock.
+  - process_id: crushing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Crush ore to sub-50mm size to produce crushed ore feed"
+assumptions: "Converted from import_stub to local crushing route; crushed_ore feed produced."
+notes: "Converted import stub into local production path (crushing_basic_v0)." 

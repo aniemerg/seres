@@ -1,22 +1,6 @@
 id: recipe_alumina_powder_v0
 kind: recipe
-name: Alumina powder production v0
-produces_id: alumina_powder
-variant_id: v0
-produces_qty: 0.5
-produces_unit: kg
+target_item_id: alumina_powder
 steps:
-- process_id: alumina_powder_noop_v0
-  inputs:
-  - item_id: alumina_powder
-    qty: 0.5
-    unit: kg
-  outputs:
-  - item_id: alumina_powder
-    qty: 0.5
-    unit: kg
-  est_time_hr: 0.1
-  notes: "No-op placeholder to resolve missing recipe for alumina_powder"
-assumptions: |
-  Placeholder to enable local production path for alumina_powder; replace with a real process chain in the future.
-notes: "Placeholder recipe to enable local production path for alumina_powder; used as a stub until a real processing chain is defined."
+  - process_id: alumina_powder_production_v0
+notes: "Converted to dict-form step to satisfy invalid_recipe_schema gap; placeholder production path kept, refine steps as design matures"

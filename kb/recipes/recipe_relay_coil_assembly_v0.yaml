@@ -1,0 +1,21 @@
+id: recipe_relay_coil_assembly_v0
+kind: recipe
+name: Relay coil assembly (v0)
+target_item_id: relay_coil_assembly
+variant_id: v0
+steps:
+  - process_id: wire_winding_process_v0
+    inputs:
+      - item_id: copper_wire_magnet
+        qty: 0.04
+        unit: kg
+      - item_id: iron_core_laminated
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: relay_coil_assembly
+        qty: 0.05
+        unit: kg
+    est_time_hr: 0.8
+    notes: Wind coil on iron core using copper magnet wire
+notes: "Converted from legacy format to current process-based step schema."

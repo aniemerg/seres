@@ -1,0 +1,32 @@
+id: permalloy_alloy_melting_and_casting_v0
+kind: process
+name: Permalloy alloy melting and casting process v0
+layer_tags:
+  - layer_3
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.8
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: permalloy_high_permeability_v0
+    qty: 0.95
+    unit: kg
+requires_ids:
+  - induction_furnace_v0
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: Melting energy for Permalloy alloy
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: Melting, homogenization, and casting time
+notes: |
+  Process for producing Permalloy high-permeability alloy (Ni80Fe20) by melting Ni and Fe in an induction furnace and casting into permalloy_high_permeability_v0. Based on Ni-Fe melting literature; tune Ni/Fe to 80/20.

@@ -1,0 +1,27 @@
+id: bearing_ball_steel_cast_v0
+name: Bearing ball steel casting
+kind: process
+inputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: bearing_ball_steel
+    qty: 0.3
+    unit: kg
+byproducts:
+  - item_id: slag_byproduct_v0
+    qty: 0.7
+    unit: kg
+resource_requirements:
+  - resource_type: furnace
+    amount: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.9
+time_model:
+  type: linear_rate
+  setup_hr: 0.2
+  rate_kg_per_hr: 3.0
+notes: "Placeholder bearing_ball_steel casting from steel ingot; mass balance simplified."

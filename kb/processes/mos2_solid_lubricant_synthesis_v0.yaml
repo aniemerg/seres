@@ -1,0 +1,22 @@
+id: mos2_solid_lubricant_synthesis_v0
+name: MoS2 solid lubricant synthesis v0
+kind: process
+inputs:
+  - item_id: mos2_precursor_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: mos2_solid_lubricant_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: synthesis_unit
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Placeholder MoS2 solid lubricant synthesis; seed for ISRU modeling; convert precursor to MoS2 lubricant."

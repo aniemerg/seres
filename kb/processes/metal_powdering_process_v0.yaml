@@ -1,0 +1,23 @@
+id: metal_powdering_process_v0
+name: Metal powdering (Basic) v0
+kind: process
+inputs:
+  - item_id: metal_ingot_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_powder_v0
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - ball_mill
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  total_energy_kwh: 4.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Powdering of metal ingot to metal_powder_v0 using ball mill as the primary unit; placeholder values."

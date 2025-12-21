@@ -1,0 +1,22 @@
+id: packed_bed_spent_generation_v0
+name: Packed bed spent generation v0
+kind: process
+inputs:
+  - item_id: packed_bed_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: packed_bed_spent_v0
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - resource_type: labor_bot_general
+    qty: 0.2
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.1
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: "Seed spent packed bed generation path; placeholder for packed_bed_spent_v0."

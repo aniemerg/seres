@@ -12,14 +12,20 @@ outputs:
   - item_id: fine_powder
     qty: 0.98
     unit: kg
+byproducts:
+  - item_id: dust_fines_v0
+    qty: 0.02
+    unit: kg
 requires_ids:
   - ball_mill
 resource_requirements:
-  - machine_id: labor_bot_general_v0
+  - resource_type: labor_bot_general
     qty: 0.5
     unit: hr
 energy_model:
-  total_energy_kwh: 4.0
+  type: kWh_per_unit_output
+  value: 4.08
 time_model:
-  total_time_hr: 8.0
-notes: "Ball milling process for grinding and mixing powders. Rotating cylinder with grinding media (steel or ceramic balls) reduces particle size and creates uniform mixtures. Used for ceramic powders, metal powders, and mineral processing. Milling time varies by desired fineness (2-24 hours). Small mass loss (~2%) due to media wear and powder handling."
+  type: fixed_time
+  hr_per_batch: 8.0
+notes: "Ball milling process for grinding and mixing powders; milling uses a rotating mill with media; ~0.02 kg dust_fines lost per kg input."

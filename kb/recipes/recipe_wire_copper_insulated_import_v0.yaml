@@ -1,9 +1,20 @@
 id: recipe_wire_copper_insulated_import_v0
+kind: recipe
 target_item_id: wire_copper_insulated_v0
-variant_id: import_v0
+variant_id: v0
+produces_id: wire_copper_insulated_v0
+produces_qty: 1.0
+produces_unit: kg
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.2
-    notes: Imported insulated copper wire until wire drawing/insulation path is modeled.
-assumptions: "Wire insulation sourced externally early; replace with local copper drawing and insulation path later."
-notes: "Import placeholder to support wiring and electrical subsystems modeling."
+  - process_id: insulated_wire_formation_v0
+    est_time_hr: 0.5
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wire_copper_insulated_v0
+        qty: 1.0
+        unit: kg
+assumptions: "Insulated copper wire formed from magnet copper wire via polymer insulation coating."
+notes: "Local insulation pass to convert magnet copper wire into insulated copper wire variant v0."

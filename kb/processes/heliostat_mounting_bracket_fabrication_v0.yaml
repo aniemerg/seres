@@ -1,0 +1,22 @@
+id: heliostat_mounting_bracket_fabrication_v0
+name: Helios mounting bracket fabrication (placeholder)
+kind: process
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: heliostat_mounting_bracket_v0
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.5
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+notes: "Placeholder fabrication that converts steel_plate_or_sheet to heliostat_mounting_bracket_v0 to resolve no_recipe gap for this part."

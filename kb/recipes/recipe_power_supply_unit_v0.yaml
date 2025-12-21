@@ -1,9 +1,8 @@
 id: recipe_power_supply_unit_v0
 kind: recipe
 name: Recipe for power supply unit v0
-produces_id: power_supply_unit_v0
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: power_supply_unit_v0
+variant_id: v0
 steps:
 - process_id: metal_casting_basic_v0
   notes: Cast enclosure and transformer core components
@@ -12,4 +11,4 @@ steps:
 - process_id: assembly_basic_v0
   notes: Assemble enclosure with internal components
 assumptions: "Power supply unit manufactured by casting, finishing, and assembly"
-notes: "Basic production path for power_supply_unit_v0 to remove import gap"
+notes: "Standardized recipe using target_item_id pattern to remove import gap"

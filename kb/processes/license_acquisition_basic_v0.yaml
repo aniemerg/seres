@@ -1,0 +1,22 @@
+id: license_acquisition_basic_v0
+name: Software license acquisition basic
+kind: process
+inputs: []
+outputs:
+  - item_id: software_service_license
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.25
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.0
+  notes: "Procurement energy placeholder"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.25
+  notes: "License procurement time placeholder"
+notes: "Procurement of software service license; placeholder process to enable local modeling of license as a producible item"
