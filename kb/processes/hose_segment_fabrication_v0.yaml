@@ -1,0 +1,24 @@
+id: hose_segment_fabrication_v0
+kind: process
+name: Hose segment fabrication (v0)
+inputs:
+  - item_id: hydraulic_hose_segment_input_placeholder
+    qty: 0.0
+    unit: kg
+outputs:
+  - item_id: hydraulic_hose_segment_v0
+    qty: 0.1
+    unit: kg
+requires_ids:
+  - hose_segment_fabrication_station_v0
+resource_requirements:
+  - resource_type: hose_segment_fabrication_station_v0
+    qty: 0.1
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.2
+notes: "Fabricate hydraulic hose segment (0.1 kg) using a dedicated hose_segment_fabrication_station_v0. Placeholder values for modeling."

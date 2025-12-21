@@ -1,7 +1,10 @@
 id: recipe_coaxial_cable_low_loss_v0
 kind: recipe
-name: Recipe for coaxial cable low-loss (placeholder)
-target_item_id: coaxial_cable_low_loss
+name: Recipe for coaxial cable low-loss (v0)
+target_item_id: coaxial_cable_low_loss_v0
 steps:
-  - cable_harness_assembly_v0
-notes: "Placeholder recipe: uses cable_harness_assembly_v0 as an approximate manufacturing path for a coaxial low-loss cable. A dedicated coaxial fabrication process should be added later."
+  - process_id: cable_harness_assembly_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Placeholder step: uses cable_harness_assembly_v0 to form coaxial low-loss cable"
+notes: "Converted to modern step format; this is a placeholder until a dedicated coaxial fabrication process is added."

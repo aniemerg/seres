@@ -1,0 +1,28 @@
+id: ferrite_sintering_process_v0
+kind: process
+name: Ferrite sintering
+layer_tags:
+- layer_6
+inputs:
+- item_id: powder_metal_or_ceramic
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: powder_metal_or_ceramic
+  qty: 1.0
+  unit: kg
+requires_ids:
+- sintering_furnace
+- pressing_mold_set
+resource_requirements:
+- resource_type: labor_bot_general
+  qty: 0.8
+  unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: "Sintering furnace energy for ferrite compacts."
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+notes: "Seed ferrite sintering step; placeholder to enable ferrite core production path. Based on ferrite_toroid_sintering_v0 pattern."

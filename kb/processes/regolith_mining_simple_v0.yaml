@@ -1,0 +1,35 @@
+id: regolith_mining_simple_v0
+kind: process
+name: Simple Regolith Surface Mining
+description: |
+  Basic surface collection of lunar regolith using a labor bot.
+  Free resource collection - no inputs consumed.
+
+base_rate: "100 kg/hour"
+
+inputs: []  # No consumables - regolith is free
+
+outputs:
+  - item_id: regolith_lunar_mare
+    quantity: 100
+    unit: kg
+    per: hour
+
+required_machines:
+  - labor_bot_general_v0: 1
+
+scalable: true
+
+time_model:
+  type: linear_rate
+  rate_kg_per_hr: 100
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+
+notes: |
+  Simple regolith collection for simulation bootstrapping.
+  Assumes mare regolith (iron-rich) is available at surface.
+  Rate: 100 kg/hr per labor bot.
+  Created to fill KB gap for base builder simulation.

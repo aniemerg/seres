@@ -1,61 +1,70 @@
 # Validation Report (v0)
 
 ## Counts by kind
-- bom: 291
-- machine: 283
-- material: 365
-- part: 802
-- process: 593
-- recipe: 1344
-- resource: 8
+- bom: 296
+- machine: 291
+- material: 370
+- part: 808
+- process: 607
+- recipe: 1372
+- resource: 9
 - resource_type: 88
 - scenario: 1
 - schema: 1
 - seed: 6
-- unknown: 123
+- unknown: 114
 
 ## Items without recipes (will be imports)
-Total: 319 items need recipes or import designation
-- machine: 59
+Total: 311 items need recipes or import designation
+- machine: 58
 - material: 111
-- part: 149
+- part: 142
 
 See `out/missing_recipes.jsonl` for details.
 
 ## Missing required fields
-Total: 23 missing fields
-- bom: 21
-- capabilities: 2
+Total: 336 missing fields
+- bom: 17
+- capabilities: 319
 
 See `out/missing_fields.jsonl` for details.
 
 ## Orphan resources (no machine provides)
-Total: 16 resource_types have no provider machine
-- 3d_printer_basic (needed by 3 processes)
-- bending_machine (needed by 2 processes)
-- chemical_reactor (needed by 8 processes)
-- chemical_reactor_basic (needed by 4 processes)
-- epoxy_synthesis_unit (needed by 1 processes)
-- filtration_unit (needed by 1 processes)
-- forging_press (needed by 1 processes)
-- hip_press_unit (needed by 0 processes)
-- lab_assistant (needed by 2 processes)
-- labor_bot_electronics (needed by 3 processes)
-- ... and 6 more
+Total: 87 resource_types have no provider machine
+- 3d_printer_basic (needed by 2 processes)
+- assembly_tools_basic (needed by 33 processes)
+- bending_machine (needed by 0 processes)
+- chemical_mixing (needed by 1 processes)
+- chemical_reactor_basic (needed by 1 processes)
+- core_memory_assembly (needed by 0 processes)
+- cpu_core (needed by 0 processes)
+- cryogenic_chiller_v0 (needed by 0 processes)
+- cutting_tools_general (needed by 12 processes)
+- electrolysis_cell (needed by 0 processes)
+- ... and 77 more
 
 See `out/orphan_resources.jsonl` for details.
 
 ## Missing data (null values)
-Total: 560 null fields
+Total: 773 null fields
 - bom: 60
 - part: 2
-- process: 498
+- process: 711
 
 See `out/null_values.jsonl` for details.
 
 ## Warnings
 - kb/recipes/recipe_cooling_water_jacket_import_v0.yaml: failed to parse (mapping values are not allowed here
   in "kb/recipes/recipe_cooling_water_jacket_import_v0.yaml", line 6, column 11)
+- kb/units/units.yaml: unknown kind; skipped
+
+## Queue Filtering
+**Status**: Enabled
+**Mode**: boms_recipes_parts_only
+**Total gaps found**: 1059
+**Filtered out**: 406
+**Added to queue**: 653
+**Filtering rate**: 38.3%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

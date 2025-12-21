@@ -360,14 +360,14 @@ def build_index() -> Dict[str, dict]:
         for inv in invalid_recipes:
             f.write(json.dumps(inv) + "\n")
 
-    _update_work_queue(
+    filter_stats = _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
         seed_references, item_metadata
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
-        items_without_recipes, orphan_resources
+        items_without_recipes, orphan_resources, filter_stats
     )
     return entries
 
@@ -382,7 +382,7 @@ def _update_work_queue(
     invalid_recipes: List[dict],
     seed_references: Dict[str, List[str]],
     item_metadata: Dict[str, dict],
-) -> None:
+) -> Dict[str, int]:
     """
     Rebuild work queue from current gaps (replaces previous queue).
     - unresolved_refs: free-text refs needing definition/resolution
@@ -393,7 +393,11 @@ def _update_work_queue(
     - orphan_resources: resource_types with no machine providing them
     - seed_references: item_id -> list of seed file ids that reference it
     - item_metadata: item_id -> freeform metadata from seed requires_ids
+
+    Returns dict of filter statistics.
     """
+    from .config import QueueFilterConfig
+
     gap_items: List[dict] = []
 
     # Unresolved text references
@@ -494,6 +498,30 @@ def _update_work_queue(
             }
         )
 
+    # Apply queue filtering based on config
+    config = QueueFilterConfig.load()
+    total_gaps = len(gap_items)
+    filtered_count = 0
+
+    if config.enabled:
+        filtered_items = []
+        for gap in gap_items:
+            should_exclude, reason = config.should_exclude(gap)
+            if should_exclude:
+                filtered_items.append(gap)
+                filtered_count += 1
+
+        # Remove filtered items from gap_items
+        gap_items = [g for g in gap_items if g not in filtered_items]
+
+    filter_stats = {
+        "total_gaps": total_gaps,
+        "filtered_count": filtered_count,
+        "queued_count": len(gap_items),
+        "filtering_enabled": config.enabled,
+        "current_mode": config.current_mode,
+    }
+
     # Merge with existing queue to preserve leases/status
     # Use file lock to prevent race conditions with concurrent lease operations
     with _locked_queue():
@@ -537,6 +565,8 @@ def _update_work_queue(
             for obj in merged:
                 wf.write(json.dumps(obj) + "\n")
 
+    return filter_stats
+
 
 def _write_report(
     entries: Dict[str, dict],
@@ -545,6 +575,7 @@ def _write_report(
     missing_fields: List[dict],
     items_without_recipes: List[dict],
     orphan_resources: List[dict],
+    filter_stats: Dict[str, int],
 ) -> None:
     counts: Dict[str, int] = {}
     for entry in entries.values():
@@ -620,6 +651,20 @@ def _write_report(
     if not warnings:
         lines.append("")
         lines.append("No warnings.")
+
+    # Queue filtering summary
+    if filter_stats.get("filtering_enabled"):
+        lines.append("")
+        lines.append("## Queue Filtering")
+        lines.append(f"**Status**: Enabled")
+        if filter_stats.get("current_mode"):
+            lines.append(f"**Mode**: {filter_stats['current_mode']}")
+        lines.append(f"**Total gaps found**: {filter_stats['total_gaps']}")
+        lines.append(f"**Filtered out**: {filter_stats['filtered_count']}")
+        lines.append(f"**Added to queue**: {filter_stats['queued_count']}")
+        if filter_stats['filtered_count'] > 0:
+            pct = (filter_stats['filtered_count'] / filter_stats['total_gaps']) * 100
+            lines.append(f"**Filtering rate**: {pct:.1f}%")
 
     # Work queue summary
     total_gaps = (

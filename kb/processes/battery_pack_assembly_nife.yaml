@@ -9,11 +9,11 @@ requires_ids:
   - assembly_tools_basic
   - test_equipment_basic
 resource_requirements:
-  - resource_type: labor_bot_general
-    amount: 2.0
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: kWh_per_batch
   value: 1.5
   notes: Bench power, crimping, and instrumentation use during assembly.
 time_model:
@@ -21,4 +21,3 @@ time_model:
   hr_per_batch: 2.0
   notes: Module stacking, bus bar install, insulation, and initial QA.
 notes: Assemble formed Ni-Fe cells into a pack with interconnects, insulation, enclosure, and basic BMS/wiring; includes continuity and insulation resistance checks.
-

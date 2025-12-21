@@ -1,0 +1,30 @@
+id: machine_assembly_bending_v0
+kind: process
+name: Basic bending machine assembly (frame + electronics)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
+- item_id: power_electronics_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: bending_machine_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 2.0
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Placeholder bending machine assembly; uses machine_frame_small and power_electronics_module as chassis and electronics."

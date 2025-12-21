@@ -1,0 +1,26 @@
+id: recipe_grey_goo_mitigation_system_v0
+kind: recipe
+name: Grey goo mitigation system assembly
+produces_id: grey_goo_mitigation_system_v0
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: grey_goo_mitigation_system_v0
+variant_id: v0
+steps:
+  - process_id: machine_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble base machine from BOM components"
+  - process_id: enclosure_assembly_basic_v0
+    est_time_hr: 0.8
+    labor_hours: 0.8
+    notes: "Mount enclosure and components"
+  - process_id: electrical_assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Wire electronics and control interfaces"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 0.6
+    labor_hours: 0.6
+    notes: "Functional test of mitigation system"
+notes: "Placeholder recipe to manufacture grey_goo_mitigation_system_v0; uses standard assembly path."

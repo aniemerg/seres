@@ -48,6 +48,11 @@ def _parse_args() -> argparse.Namespace:
     d_gc.add_argument("--prune-done-older-than", type=int, default=None, dest="prune_done")
     d_sub.add_parser("ls", help="Show dedupe queue counts by status")
 
+    c = sub.add_parser("config", help="Queue filtering configuration")
+    c_sub = c.add_subparsers(dest="ccmd")
+    c_sub.add_parser("show", help="Show current configuration")
+    c_sub.add_parser("modes", help="List available filter modes")
+
     return parser.parse_args()
 
 
@@ -133,6 +138,38 @@ def main() -> None:
             print(json.dumps(counts, indent=2))
         else:
             raise SystemExit("Unknown dedupe subcommand")
+    elif args.command == "config":
+        from . import config as cfg
+        if args.ccmd == "show":
+            config = cfg.QueueFilterConfig.load()
+            stats = config.get_stats()
+            print("Queue Filtering Configuration")
+            print("=" * 40)
+            print(f"Filtering enabled: {stats['enabled']}")
+            print(f"Current mode: {stats['current_mode'] or '(none)'}")
+            print(f"Available modes: {', '.join(stats['modes_available']) if stats['modes_available'] else '(none)'}")
+            if stats['exclude_kinds']:
+                print(f"Excluded kinds: {', '.join(stats['exclude_kinds'])}")
+            if stats['exclude_gap_types']:
+                print(f"Excluded gap types: {', '.join(stats['exclude_gap_types'])}")
+        elif args.ccmd == "modes":
+            config = cfg.QueueFilterConfig.load()
+            if not config.modes:
+                print("No modes defined in configuration")
+            else:
+                print("Available Filter Modes")
+                print("=" * 40)
+                for name, mode in config.modes.items():
+                    active = " (ACTIVE)" if name == config.current_mode else ""
+                    print(f"\n{name}{active}")
+                    if mode.get("description"):
+                        print(f"  {mode['description']}")
+                    if mode.get("exclude"):
+                        print(f"  Excludes: {len(mode['exclude'])} rules")
+                    if mode.get("include"):
+                        print(f"  Includes: {len(mode['include'])} rules")
+        else:
+            raise SystemExit("Unknown config subcommand")
     else:
         raise SystemExit(f"Unknown command {args.command}")
 

@@ -35,10 +35,16 @@ class Quantity(_BaseModel):
 
 
 class Requirement(_BaseModel):
-    resource_type: Optional[str] = Field(default=None, alias="resource")
-    amount: Optional[float] = None
+    """
+    Resource requirement for a process.
+
+    ADR 003: Migrated from abstract resource_type to concrete machine_id.
+    """
+    machine_id: Optional[str] = Field(default=None, alias="resource_type")  # ADR 003: was resource_type
+    qty: Optional[float] = None  # ADR 003: standardized (was amount/qty)
     unit: Optional[str] = None
     notes: Optional[str] = None
+    # Deprecated: amount field removed in favor of qty (ADR 003)
 
 
 class EnergyModel(_BaseModel):
@@ -104,7 +110,9 @@ class Item(_BaseModel):
     dedupe_candidate: Optional[bool] = None
     preferred_variant: Optional[str] = None  # default recipe variant hint
     notes: Optional[str] = None
-    capabilities: List[str] = Field(default_factory=list)
+    # ADR 003: capabilities deprecated in favor of processes_supported
+    capabilities: List[str] = Field(default_factory=list)  # DEPRECATED: use processes_supported
+    processes_supported: List[str] = Field(default_factory=list)  # ADR 003: which processes this machine can perform
 
 
 class ResourceType(_BaseModel):

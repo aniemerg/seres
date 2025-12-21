@@ -3,8 +3,8 @@ kind: recipe
 name: Placeholder recipe for chemical reactor heated v0
 target_item_id: chemical_reactor_heated
 steps:
-  - assembly_basic_v0
-  - enclosure_assembly_basic_v0
-  - electrical_assembly_basic_v0
-  - sealing_and_assembly_basic_v0
-notes: "Placeholder recipe to resolve no_recipe gap for chemical_reactor_heated_v0; composed from common assembly steps."
+  - process_id: assembly_basic_v0
+  - process_id: enclosure_assembly_basic_v0
+  - process_id: electrical_assembly_basic_v0
+  - process_id: sealing_and_assembly_basic_v0
+notes: "Legacy recipe reformatted to modern schema: steps as process_id dictionaries."

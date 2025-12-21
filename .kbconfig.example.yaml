@@ -1,0 +1,15 @@
+# Example local KB config override
+# Copy this file to .kbconfig.yaml to activate filtering
+#
+# Usage:
+#   cp .kbconfig.example.yaml .kbconfig.yaml
+#   # Edit .kbconfig.yaml to set your preferred mode
+#   .venv/bin/python -m kbtool index
+
+version: 1
+
+# Enable filtering
+filtering_enabled: true
+
+# Set mode to focus on BOMs, recipes, and parts only
+current_mode: boms_recipes_parts_only

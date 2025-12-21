@@ -1,0 +1,68 @@
+id: flywheel_motor_generator_assembly_v0
+kind: process
+name: Flywheel motor generator assembly v0
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: machine_frame_medium
+    qty: 1.0
+    unit: unit
+  - item_id: flywheel_medium
+    qty: 1.0
+    unit: unit
+  - item_id: flywheel_vacuum_housing_v0
+    qty: 1.0
+    unit: unit
+  - item_id: magnetic_bearing_passive_v0
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_race_set
+    qty: 1.0
+    unit: unit
+  - item_id: rolling_elements_set
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_cage_set
+    qty: 1.0
+    unit: unit
+  - item_id: shaft_and_bearing_set
+    qty: 1.0
+    unit: unit
+  - item_id: roller_bearing_cylindrical_v0
+    qty: 1.0
+    unit: unit
+  - item_id: plain_bearing_graphite_v0
+    qty: 1.0
+    unit: unit
+  - item_id: lubrication_pack_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: flywheel_motor_generator_v0
+    qty: 1.0
+    unit: unit
+requires_ids:
+  - assembly_station
+resource_requirements:
+  - resource_type: assembly_station
+    amount: 1.0
+    unit: unit
+  - resource_type: labor_bot_general
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 15.0
+  notes: "Placeholder energy for final assembly of flywheel_motor_generator_v0"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Placeholder assembly time for flywheel_motor_generator_v0"
+notes: "Assemble flywheel_motor_generator_v0 from BOM components; placeholder timing/energy."

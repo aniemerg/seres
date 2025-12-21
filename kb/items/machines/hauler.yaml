@@ -4,8 +4,11 @@ name: Hauler
 mass: 8000.0
 unit: kg
 bom: bom_hauler_v0
-capabilities:
-  - bulk_material_transport
-  - regolith_hauling
 material_class: steel
-notes: Heavy-duty hauling vehicle for regolith and material transport. Dump truck or hauler for bulk material movement.
+notes: Heavy-duty hauling vehicle for regolith and material transport. Dump truck
+  or hauler for bulk material movement.
+processes_supported:
+- excavate_regolith_surface_v0
+- forsterite_extraction_from_regolith_v0
+- mineral_ore_sulfide_extraction_v0
+- regolith_collection_and_processing_v0

@@ -1,0 +1,24 @@
+id: stator_3d_printed_basic_v0
+name: 3D-Printed motor stator (basic) v0
+kind: process
+inputs:
+- item_id: printing_material_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: motor_stator_3d_printed_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- 3d_printer_basic
+resource_requirements:
+- machine_id: 3d_printer_basic
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 0.6
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "3D printing of stator; basic printer; seed item motor_stator_3d_printed_v0."

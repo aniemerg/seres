@@ -7,9 +7,13 @@ produces_unit: unit
 target_item_id: temperature_control_system_v0
 variant_id: v0
 steps:
-  - assembly_basic_v0
-  - wiring_and_electronics_integration_v0
-  - calibration_basic_v0
-  - integration_test_basic_v0
+  - process_id: assembly_basic_v0
+    notes: "Assemble temperature control subsystem enclosure and primary module"
+  - process_id: wiring_and_electronics_integration_v0
+    notes: "Integrate wiring, controls, and power management"
+  - process_id: calibration_basic_v0
+    notes: "Calibrate sensors and actuators; tune PID controllers"
+  - process_id: integration_test_basic_v0
+    notes: "Validate system integration and performance"
 assumptions: "Basic temperature control components assembled into a single system; electronics imports allowed where referenced by sub-recipes."
 notes: "Top-level recipe to assemble temperature control system from its subcomponents."

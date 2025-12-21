@@ -1,0 +1,64 @@
+id: unit_definitions_v0
+name: Unit Definitions and Conversions
+description: |
+  Standard units and conversion factors used throughout the KB.
+
+  Unit categories:
+  - mass: kg, g, tonne
+  - volume: m3, liter
+  - count: count, unit (discrete items)
+  - time: minute, hour, day
+
+  Conversions define how to convert between units.
+
+units:
+  mass:
+    - kg      # kilogram (standard)
+    - g       # gram
+    - tonne   # metric ton
+
+  volume:
+    - m3      # cubic meter (standard)
+    - liter   # liter
+
+  count:
+    - count   # discrete count (standard)
+    - unit    # synonym for count
+
+  time:
+    - minute  # minute
+    - hour    # hour (standard for processes)
+    - day     # day
+
+conversions:
+  # Mass conversions
+  - from: g
+    to: kg
+    factor: 0.001
+
+  - from: tonne
+    to: kg
+    factor: 1000
+
+  # Volume conversions
+  - from: liter
+    to: m3
+    factor: 0.001
+
+  # Time conversions
+  - from: minute
+    to: hour
+    factor: 0.016666667  # 1/60
+
+  - from: day
+    to: hour
+    factor: 24
+
+  - from: hour
+    to: minute
+    factor: 60
+
+notes: |
+  - All conversions are bi-directional (system auto-reverses if needed)
+  - Mass/volume conversions require material density (see materials/properties.yaml)
+  - Count/mass conversions require item mass_kg field (in item definitions)

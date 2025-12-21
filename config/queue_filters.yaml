@@ -1,0 +1,53 @@
+# Queue Filtering Configuration
+#
+# This file controls which gaps are added to the work queue during indexing.
+# Create a local override at .kbconfig.yaml (gitignored) for personal filtering.
+
+version: 1
+
+# Global toggle - set to false to process all gaps
+filtering_enabled: false
+
+# Current active mode (set to null or omit for no filtering)
+current_mode: null
+
+# Named filter modes - switch between them by changing current_mode
+modes:
+  # Mode: No filtering (default)
+  full_queue:
+    description: "Process all gaps - no filtering"
+    exclude: []
+
+  # Mode: Focus on BOMs, recipes, and parts only
+  boms_recipes_parts_only:
+    description: "Exclude process/machine creation, focus on completing existing items"
+    exclude:
+      # Exclude machine capabilities (requires understanding machine function)
+      - gap_type: missing_field
+        kind: machine
+        field: capabilities
+        reason: "Requires defining machine capabilities (process design work)"
+
+      # Exclude orphan resources (requires creating machines)
+      - gap_type: no_provider_machine
+        reason: "Requires creating or updating machines to provide resources"
+
+  # Mode: Only recipes (no new items)
+  recipes_only:
+    description: "Only create/fix recipes for existing items"
+    include:
+      - gap_type: no_recipe
+      - gap_type: import_stub
+      - gap_type: invalid_recipe_schema
+
+  # Mode: Seed references only
+  seed_references_only:
+    description: "Only create items referenced by seed files"
+    include:
+      - gap_type: referenced_only
+        context_has: seed_files
+
+# Alternative: Simple global exclusions (always applied if filtering_enabled=true)
+# These apply regardless of current_mode
+exclude_kinds: []        # e.g., ["process"] to never add processes
+exclude_gap_types: []    # e.g., ["no_provider_machine"] to never add orphan resources

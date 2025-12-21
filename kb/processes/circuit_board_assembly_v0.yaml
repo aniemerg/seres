@@ -15,14 +15,14 @@ outputs:
 requires_ids:
 - circuit_board_tools_v0
 resource_requirements:
-- resource_type: labor_bot_electronics
-  qty: 1.0
+- machine_id: labor_bot_electronics
+  amount: 1.0
   unit: hr
 energy_model:
   type: kWh_per_unit
   value: 0.5
   notes: "Energy per circuit board assembly unit"
 time_model:
-  total_time_hr: 1.5
-  notes: "Time per circuit board assembly unit"
+  type: fixed_time
+  hr_per_batch: 1.5
 notes: "Circuit board assembly placeholder: attaches components onto a PCB substrate and performs basic electrical continuity tests."

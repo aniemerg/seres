@@ -1,0 +1,34 @@
+id: flywheel_energy_storage_system_assembly_v0
+name: Flywheel energy storage system assembly v0
+kind: process
+inputs:
+  - item_id: flywheel_rotor_composite_v0
+    qty: 1.0
+    unit: unit
+  - item_id: flywheel_vacuum_housing_v0
+    qty: 1.0
+    unit: unit
+  - item_id: magnetic_bearing_passive_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: flywheel_energy_storage_system_v0
+    qty: 1.0
+    unit: unit
+requires_ids: []
+resource_requirements:
+  - machine_id: assembly_station
+    qty: 1.0
+    unit: unit
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 25.0
+  notes: "Assembly energy for flywheel energy storage system"
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: "Placeholder assembly time"
+notes: "Assembles flywheel energy storage system from rotor composite, vacuum housing, and passive magnetic bearing"
