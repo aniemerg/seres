@@ -313,6 +313,67 @@ class SimulationEngine:
             "ends_at": ends_at,
         }
 
+    def resolve_step(self, step_def: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Resolve a recipe step to a fully-specified process instance.
+
+        Supports three modes:
+        1. Reference: step has process_id, inherits from process definition
+        2. Override: step has process_id + override fields
+        3. Inline: step has no process_id, defines everything inline
+
+        Args:
+            step_def: Step definition from recipe
+
+        Returns:
+            Resolved process definition with all fields populated
+        """
+        if "process_id" in step_def:
+            # Reference mode: Load base process
+            process_id = step_def["process_id"]
+            base_process = self.kb.get_process(process_id)
+
+            if not base_process:
+                # Process not found - return step as-is with warning
+                return {
+                    **step_def,
+                    "_warning": f"Process '{process_id}' not found in KB",
+                }
+
+            # Start with base process
+            resolved = dict(base_process)
+
+            # Apply step-level overrides (step fields override process fields)
+            # Special handling for certain fields:
+            scale = step_def.get("scale", 1.0)
+
+            # Override direct fields
+            for key in ["inputs", "outputs", "byproducts", "requires_ids",
+                       "resource_requirements", "energy_model", "time_model"]:
+                if key in step_def:
+                    resolved[key] = step_def[key]
+
+            # Apply scale multiplier if present
+            if scale != 1.0:
+                for key in ["inputs", "outputs", "byproducts"]:
+                    if key in resolved:
+                        for item in resolved[key]:
+                            if "qty" in item:
+                                item["qty"] *= scale
+                            elif "quantity" in item:
+                                item["quantity"] *= scale
+
+            # Override specific time/labor estimates
+            for key in ["est_time_hr", "machine_hours", "labor_hours", "notes"]:
+                if key in step_def:
+                    resolved[key] = step_def[key]
+
+            return resolved
+
+        else:
+            # Inline mode: Step IS the process definition
+            return dict(step_def)
+
     def run_recipe(self, recipe_id: str, quantity: int) -> Dict[str, Any]:
         """
         Run a recipe to produce items.
@@ -333,25 +394,57 @@ class SimulationEngine:
                 "message": f"Recipe '{recipe_id}' not found in KB",
             }
 
-        # Check required machines
+        # Resolve process steps (ADR-005: Recipe Step Processing)
+        steps = recipe_def.get("steps", [])
+        resolved_steps = [self.resolve_step(step) for step in steps]
+
+        # Aggregate machine requirements from all steps
+        all_required_machines = set()
+        missing_machines = []
+        warnings = []
+
+        # Check for step resolution warnings
+        for step in resolved_steps:
+            if "_warning" in step:
+                warnings.append(step["_warning"])
+
+        # Aggregate requires_ids from all resolved steps
+        for step in resolved_steps:
+            requires_ids = step.get("requires_ids", [])
+            all_required_machines.update(requires_ids)
+
+        # Also check recipe-level required_machines (legacy support)
         required_machines = recipe_def.get("required_machines", [])
         for machine_req in required_machines:
             if isinstance(machine_req, dict):
                 machine_id = list(machine_req.keys())[0]
-                count = machine_req[machine_id]
             elif isinstance(machine_req, str):
                 machine_id = machine_req
-                count = 1
             else:
                 continue
+            all_required_machines.add(machine_id)
 
+        # Check machine availability (hard enforcement per ADR-005)
+        for machine_id in all_required_machines:
             if machine_id not in self.state.machines_built:
-                if not self.has_item(machine_id, count, "count"):
-                    return {
-                        "success": False,
-                        "error": "missing_machine",
-                        "message": f"Required machine '{machine_id}' not available",
-                    }
+                if not self.has_item(machine_id, 1, "count"):
+                    missing_machines.append(machine_id)
+
+        # Fail if required machines are missing (hard enforcement)
+        if missing_machines:
+            return {
+                "success": False,
+                "error": "missing_machines",
+                "message": f"Required machines not available: {', '.join(missing_machines)}",
+                "missing_machines": missing_machines,
+                "recipe_id": recipe_id,
+            }
+
+        # Log other warnings (process resolution issues, etc.)
+        if warnings:
+            import sys
+            for warning in warnings:
+                print(f"⚠️  {warning}", file=sys.stderr)
 
         # Calculate total inputs needed (per batch × quantity)
         inputs = recipe_def.get("inputs", [])
