@@ -1,18 +1,60 @@
 id: recipe_table_top_t_slot_v0
+kind: recipe
 target_item_id: table_top_t_slot
+produces_id: table_top_t_slot
+produces_qty: 1
+produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 65.0
+    unit: kg
+    notes: "Steel for casting thick plate blank (60 kg finished + 5 kg waste/risers)"
 steps:
   - process_id: metal_casting_basic_v0
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: "Cast steel plate for table top or cut from thick plate stock"
+    notes: "Cast thick steel plate blank (80mm x 600mm x 900mm approx.) or cut from thick plate stock"
   - process_id: machining_finish_basic_v0
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    notes: "Machine T-slots in table surface, face mill top surface flat"
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Face mill top and bottom surfaces parallel, rough machine T-slot channels (5-7 slots, 18mm wide)"
   - process_id: precision_grinding_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Grind table top surface for flatness and T-slot accuracy"
-assumptions: T-slots machined for standard bolt sizes. Surface ground flat for precision fixturing.
-notes: T-slotted table top for universal workholding and fixturing applications.
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Precision grind top surface for flatness (<0.05mm over entire surface), finish grind T-slot surfaces for dimensional accuracy"
+  - process_id: finishing_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Deburr edges, clean T-slots, apply rust preventive coating, final inspection for flatness and slot dimensions"
+outputs:
+  - item_id: table_top_t_slot
+    qty: 1
+    unit: unit
+assumptions: |
+  - T-slots machined to standard dimensions (18mm width, 8mm neck, compatible with M12/M16 T-nuts)
+  - Table surface ground flat to precision tolerance (<0.05mm flatness)
+  - 5-7 parallel T-slots spaced approximately 100mm apart
+  - Table dimensions approximately 600mm x 900mm x 80mm thick
+  - Material: cast steel with good dimensional stability
+  - Finished mass: 60 kg
+notes: |
+  T-slotted table top for universal workholding and fixturing applications.
+
+  Manufacturing process:
+  1. Cast thick steel plate blank (or cut from rolled plate if available)
+  2. Face mill both surfaces to establish parallel datum surfaces
+  3. Rough machine T-slot channels using end mill and T-slot cutter
+  4. Precision grind top surface for flatness tolerance
+  5. Finish grind T-slot surfaces for dimensional accuracy
+  6. Deburr, clean, and apply rust preventive coating
+
+  T-slot specifications:
+  - Slot width: 18mm (standard)
+  - Neck width: 8mm
+  - Slot depth: 12mm
+  - Compatible with M12 and M16 T-nuts and bolts
+
+  Application: Provides versatile clamping surface for machining operations,
+  assembly work, inspection, and general fabrication tasks. Critical component
+  for machine tool work tables and precision assembly stations.

@@ -1,89 +1,73 @@
 id: material_properties_v0
 name: Material Physical Properties
-description: |
-  Physical properties of materials used for unit conversions.
+description: 'Physical properties of materials used for unit conversions.
+
 
   Primary use: Converting between mass and volume using density.
 
+  '
 material_properties:
-  # Metals
   steel:
     density_kg_per_m3: 7850
     notes: Generic steel density
-
   stainless_steel:
     density_kg_per_m3: 8000
     notes: Stainless steel (304)
-
   aluminum:
     density_kg_per_m3: 2700
     notes: Pure aluminum
-
   iron:
     density_kg_per_m3: 7874
     notes: Pure iron
-
   copper:
     density_kg_per_m3: 8960
     notes: Pure copper
-
   titanium:
     density_kg_per_m3: 4506
     notes: Pure titanium
-
   nickel:
     density_kg_per_m3: 8908
     notes: Pure nickel
-
-  # Lunar materials
   regolith_lunar:
     density_kg_per_m3: 1500
     notes: Average lunar regolith density (loose)
-
   regolith_lunar_mare:
     density_kg_per_m3: 1600
     notes: Mare regolith (slightly denser, iron-rich)
-
   regolith_lunar_highlands:
     density_kg_per_m3: 1400
     notes: Highland regolith (lighter, aluminum-rich)
-
   regolith_carbonaceous:
     density_kg_per_m3: 1300
     notes: Carbonaceous meteorite material
-
   regolith_silicate:
     density_kg_per_m3: 1500
     notes: Silicate-rich regolith
-
-  # Non-metals
   silicon:
     density_kg_per_m3: 2330
     notes: Crystalline silicon
-
   glass:
     density_kg_per_m3: 2500
     notes: Generic glass
-
   ceramic:
     density_kg_per_m3: 2400
     notes: Generic ceramic
-
   concrete:
     density_kg_per_m3: 2400
     notes: Standard concrete
-
-  # Gases/liquids (for reference)
   oxygen_liquid:
     density_kg_per_m3: 1141
     notes: Liquid oxygen at boiling point
-
   water:
     density_kg_per_m3: 1000
     notes: Water at 4°C
+notes: '- Densities are approximate and vary by alloy/composition
 
-notes: |
-  - Densities are approximate and vary by alloy/composition
   - Used by unit converter to convert mass ↔ volume
+
   - For precise calculations, use specific alloy densities
+
   - Lunar regolith densities are for loose material (compacted is higher)
+
+  '
+recipe: recipe_material_properties_v0

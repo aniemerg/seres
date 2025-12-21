@@ -144,6 +144,10 @@ class UnitConverter:
 
         count_units = {"count", "unit"}
 
+        # count <-> unit are synonyms (1:1 conversion)
+        if from_unit in count_units and to_unit in count_units:
+            return quantity  # Direct 1:1 conversion
+
         # count -> kg
         if from_unit in count_units and to_unit == "kg":
             if mass_per_unit:

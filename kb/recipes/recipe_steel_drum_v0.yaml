@@ -2,7 +2,49 @@ id: recipe_steel_drum_v0
 kind: recipe
 name: Steel drum v0
 target_item_id: steel_drum
+variant_id: v0
+
+inputs:
+  - item_id: steel_sheet_thin
+    qty: 18.0
+    unit: kg
+    notes: Drum body and end sheets
+  - item_id: steel_hoop_ring
+    qty: 1.5
+    unit: kg
+    notes: Reinforcing hoops
+  - item_id: fastener_kit_small
+    qty: 0.3
+    unit: kg
+    notes: Closure ring and fasteners
+  - item_id: gasket_material_basic
+    qty: 0.2
+    unit: kg
+    notes: Lid gasket
+
+outputs:
+  - item_id: steel_drum
+    qty: 20.0
+    unit: kg
+
 steps:
-  - process_id: steel_drum_fabrication_v0
-assumptions: "Seed recipe to manufacture steel_drum from steel_block_raw_v0; placeholder for closure."
-notes: "Auto-generated to resolve no_recipe gap for steel_drum."
+  - process_id: cutting_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Cut sheet steel for drum body and ends
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Roll body into cylinder, form drum ends
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Weld body seam and attach bottom end
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Install reinforcing hoops, closure ring, and removable lid with gasket
+
+assumptions: "20 kg standard steel drum for material storage and transport. Welded body with removable top closure."
+notes: "Four-step fabrication process for standard 55-gallon style steel drum including forming, welding, and closure assembly."

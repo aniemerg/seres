@@ -165,15 +165,16 @@ def cmd_advance_time(args):
     """Advance simulation time."""
     engine, _ = load_simulation(args.sim_id)
 
+    old_time = engine.state.current_time_hours  # Capture old time before advancing
     print(f"Advancing time by {args.hours} hours...")
     result = engine.advance_time(args.hours)
 
     print(f"✓ Time advanced")
-    print(f"  Old time: {result['old_time']:.1f}h")
+    print(f"  Old time: {old_time:.1f}h")
     print(f"  New time: {result['new_time']:.1f}h")
 
-    if result.get('completed_processes'):
-        print(f"  Completed {len(result['completed_processes'])} processes")
+    if result.get('completed_count', 0) > 0:
+        print(f"  Completed {result['completed_count']} processes")
 
     # Don't need explicit save - advance_time saves automatically
     return 0

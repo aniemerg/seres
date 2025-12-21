@@ -1,6 +1,18 @@
 id: recipe_motor_housing_steel_v0
 kind: recipe
 target_item_id: motor_housing_steel
+inputs:
+  - item_id: iron_metal_pure
+    qty: 19.2
+    unit: kg
+outputs:
+  - item_id: motor_housing_steel
+    qty: 18.0
+    unit: kg
+byproducts:
+  - item_id: metal_scrap
+    qty: 1.2
+    unit: kg
 steps:
-  - motor_housing_forming_v0
-notes: "Manufacture motor housing by forming from sheet/ingot using motor_housing_forming_v0."
+  - process_id: motor_housing_forming_v0
+notes: "Form steel motor housing from iron. 19.2 kg iron → 18 kg housing + 1.2 kg scrap."

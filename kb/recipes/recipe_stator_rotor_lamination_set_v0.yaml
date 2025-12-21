@@ -1,6 +1,18 @@
 id: recipe_stator_rotor_lamination_set_v0
 kind: recipe
 target_item_id: stator_rotor_lamination_set
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 38.0
+    unit: kg
+outputs:
+  - item_id: stator_rotor_lamination_set
+    qty: 36.0
+    unit: kg
+byproducts:
+  - item_id: metal_scrap
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: lamination_stamping_v0
-notes: "Placeholder recipe to manufacture stator_rotor_lamination_set via lamination_stamping_v0."
+notes: "Stamp electrical steel sheet into stator/rotor laminations for medium motor. 38 kg input → 36 kg laminations + 2 kg scrap."

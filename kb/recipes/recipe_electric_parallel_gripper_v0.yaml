@@ -1,0 +1,71 @@
+id: recipe_electric_parallel_gripper_v0
+kind: recipe
+target_item_id: electric_parallel_gripper
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 4.5
+    unit: kg
+  - item_id: steel_stock
+    qty: 0.5
+    unit: kg
+  - item_id: stepper_motor_precision
+    qty: 2.0
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: kg
+outputs:
+  - item_id: electric_parallel_gripper
+    qty: 1
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.5
+    unit: kg
+steps:
+  - process_id: casting_basic_v0
+    note: "Cast aluminum gripper body housing"
+  - process_id: machining_rough_v0
+    note: "CNC machine gripper body: finger slides, ball screw mount, linear bearing bores"
+  - process_id: steel_refining_basic_v0
+    note: "Refine steel for ball screw from lunar iron"
+  - process_id: machining_rough_v0
+    note: "Machine ball screw (10mm dia, 5mm pitch) for finger actuation"
+  - process_id: alignment_and_testing_basic_v0
+    note: "Assemble gripper: install bearings, ball screw, stepper motor, fingers; test stroke and force"
+notes: |
+  Manufactures electric parallel gripper from lunar materials + imported motor.
+
+  Design: 2-finger parallel jaw, 120mm stroke, 200N gripping force.
+  Aluminum body, steel ball screw, imported stepper motor and bearings.
+
+  Process:
+  1. Cast aluminum gripper body housing
+  2. CNC machine precision features:
+     - Parallel finger slides with linear bearings
+     - Ball screw mounting and nut
+     - Motor mounting flange
+  3. Fabricate ball screw from lunar steel (10mm dia, 5mm pitch)
+  4. Assemble components:
+     - Install 4 linear bearings for finger slides
+     - Mount ball screw and nut
+     - Attach NEMA 23 stepper motor (imported)
+     - Install interchangeable jaw inserts
+  5. Test stroke, gripping force, repeatability
+
+  Inputs:
+  - 4.5 kg aluminum (4 kg final + scrap)
+  - 0.5 kg steel for ball screw
+  - 1× stepper motor (NEMA 23, imported - requires magnets)
+  - 4× linear bearings (imported in Phase 1)
+  - Fasteners for assembly
+
+  Lunar manufacturability: Body and ball screw from lunar materials.
+  Motor and precision bearings imported (require NdFeB magnets and precision balls).
+
+  Phase 2: Manufacture bearings from lunar materials with precision grinding.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.6.1.

@@ -7,4 +7,39 @@ bom: bom_labor_bot_general_v0
 capabilities:
 - assembly
 - quality_control
-notes: General automation labor bot.
+- material_handling
+- mechanical_assembly
+- electrical_assembly
+notes: |
+  6-DOF industrial robotic manipulator for lunar manufacturing operations.
+
+  Design specification: docs/labor_bot_design_memo.md
+
+  Key specifications:
+  - Configuration: 6R serial manipulator (6 revolute joints)
+  - Reach: 2.0 m workspace radius
+  - Payload: 20 kg at full extension
+  - Repeatability: ±0.5 mm
+  - Degrees of freedom: 6 (full 3D position + orientation)
+  - End effector: Electric parallel gripper with quick-change interface
+
+  Architecture:
+  - Mechanical structure: Aluminum/steel links and housings (35 kg)
+  - Actuation: 6× brushless DC motors with harmonic drive reducers (30 kg)
+  - Power system: 48V DC from 240V 3-phase AC supply (8 kg)
+  - Control: Industrial PC with real-time Linux, 6× servo drives (6 kg)
+  - Sensing: Stereo cameras, 6-axis force sensor, encoders (12 kg)
+  - Integration: Cables, thermal management, safety systems (21 kg)
+
+  Lunar manufacturability:
+  - Structures, cables, thermal: ~46% (lunar Al/Fe/Cu)
+  - Motors, gearboxes: ~29% (need magnets, precision)
+  - Electronics, sensors: ~25% (Earth import)
+
+  Assembly time: ~140 hours with all parts available
+  Power consumption: 825W average, 2.7kW peak
+  Service life: 10,000 hours before major overhaul
+
+  Operates inside pressurized habitat (not EVA-rated). Provides versatile
+  manipulation for assembly, material handling, quality inspection, and
+  machine operation tasks.

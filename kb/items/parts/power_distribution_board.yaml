@@ -1,0 +1,26 @@
+id: power_distribution_board
+kind: part
+name: Power distribution board
+mass: 2.0
+unit: kg
+material_class: electronic
+notes: |
+  Power distribution board for robotic systems.
+
+  Routes 48V DC from main power supply to multiple motor controllers.
+
+  Components:
+  - PCB with copper bus bars (high current capacity)
+  - Circuit breakers (6× thermal, one per motor)
+  - Status indicator LEDs
+  - Screw terminal blocks for connections
+
+  Ratings:
+  - Input: 48V DC from main supply
+  - Outputs: 6× isolated circuits with individual breakers
+  - Current: 50A total capacity
+
+  Manufacturing: PCB fabrication (copper traces), assembly of breakers and
+  terminals. Copper from lunar resources, breakers likely import.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.3.2.

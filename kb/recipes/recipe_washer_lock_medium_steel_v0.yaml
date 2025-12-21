@@ -1,0 +1,26 @@
+id: recipe_washer_lock_medium_steel_v0
+target_item_id: washer_lock_medium_steel
+variant_id: v0
+
+steps:
+  - process_id: metal_stamping_process_v0
+    est_time_hr: 0.02
+    machine_hours: 0.02
+    notes: "Punch split ring lock washer from spring steel sheet. Creates helical gap for spring action."
+
+  - process_id: heat_treatment_hardening_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: "Heat treat to develop spring properties. Quench and temper for hardness HRC 38-45 typical."
+
+assumptions: |
+  Generic lock washer production for M6-M12 sizes. Process covers 2x size range.
+  Starting material: spring steel sheet 1-2mm thick (material_class: steel, high carbon).
+  Heat treatment essential for spring function - must achieve proper hardness and resilience.
+  Split gap typically 1.5-2x wire thickness.
+
+notes: |
+  Split ring lock washer manufacturing requires spring steel and heat treatment.
+  Stamping creates the split ring geometry, heat treatment develops spring properties.
+  Alternative design: wave washers or toothed lock washers have different geometries
+  but serve similar anti-vibration function.

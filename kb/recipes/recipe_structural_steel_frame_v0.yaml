@@ -2,8 +2,61 @@ id: recipe_structural_steel_frame_v0
 kind: recipe
 target_item_id: structural_steel_frame
 variant_id: v0
+
+inputs:
+  - item_id: steel_beam_i_section
+    qty: 300.0
+    unit: kg
+    notes: I-beams and structural sections
+  - item_id: steel_plate_thick
+    qty: 150.0
+    unit: kg
+    notes: Gusset plates and mounting pads
+  - item_id: welding_rod_steel
+    qty: 15.0
+    unit: kg
+    notes: Structural welding consumables
+  - item_id: fastener_kit_large
+    qty: 10.0
+    unit: kg
+    notes: Heavy structural bolting
+  - item_id: steel_tube_square
+    qty: 25.0
+    unit: kg
+    notes: Box section reinforcements
+
+outputs:
+  - item_id: structural_steel_frame
+    qty: 500.0
+    unit: kg
+
 steps:
   - process_id: cutting_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Cut structural sections to length and prepare joints
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 2.0
+    notes: Bend or notch sections as needed for frame geometry
+  - process_id: assembly_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: Tack weld frame assembly and verify alignment
   - process_id: welding_structural_v0
-  - process_id: fabricate_structural_steel_frame_v0
-notes: Replacement for import stub; defines an explicit fabrication path for the structural steel frame.
+    est_time_hr: 12.0
+    machine_hours: 12.0
+    labor_hours: 12.0
+    notes: Full penetration structural welding of all joints
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Machine mounting surfaces and bolt holes to tolerance
+  - process_id: inspection_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: Inspect welds, check dimensional tolerances and alignment
+
+assumptions: "500 kg heavy structural steel frame for press brake or forming equipment. Welded I-beam construction with mounting surfaces and reinforcements."
+notes: "Six-step fabrication process for heavy structural frame including cutting, forming, assembly, structural welding, finish machining, and inspection."

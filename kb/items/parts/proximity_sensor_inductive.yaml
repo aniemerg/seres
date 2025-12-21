@@ -1,0 +1,33 @@
+id: proximity_sensor_inductive
+kind: part
+name: Proximity sensor (inductive)
+mass: 0.25
+unit: kg
+material_class: electronic
+notes: |
+  Inductive proximity sensor for metal object detection and workspace limiting.
+
+  Detects ferrous or non-ferrous metal objects without physical contact using
+  electromagnetic induction.
+
+  Specifications:
+  - Type: Inductive proximity switch
+  - Sensing range: 0-20 mm (for steel target)
+  - Target: Metal objects (ferrous or aluminum)
+  - Output: Digital NPN/PNP switching output
+  - Response time: <10 ms
+  - Housing: M18 or M30 cylindrical, threaded
+  - Protection: IP67 (dust and water proof)
+
+  Typical use: Detecting robot position at workspace boundaries, homing
+  switches, part presence detection.
+
+  Components:
+  - LC oscillator coil
+  - Sensing electronics (oscillator, detector, output driver)
+  - Metal housing with threaded mount
+
+  Manufacturing: Sensing electronics import. Coil winding and housing
+  potentially manufacturable from lunar copper and aluminum.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.5.4.

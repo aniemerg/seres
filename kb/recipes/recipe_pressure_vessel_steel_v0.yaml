@@ -1,9 +1,67 @@
 id: recipe_pressure_vessel_steel_v0
 kind: recipe
 target_item_id: pressure_vessel_steel
+variant_id: v0
+
+inputs:
+  - item_id: steel_plate_thick
+    qty: 130.0
+    unit: kg
+    notes: Heavy gauge pressure vessel plate
+  - item_id: steel_flange_large
+    qty: 12.0
+    unit: kg
+    notes: Pressure-rated flanges and closures
+  - item_id: welding_rod_steel
+    qty: 3.0
+    unit: kg
+    notes: High-strength welding consumables
+  - item_id: fastener_kit_large
+    qty: 2.0
+    unit: kg
+    notes: Pressure-rated bolting
+  - item_id: gasket_material_high_temp
+    qty: 3.0
+    unit: kg
+    notes: Sealing gaskets
+
+outputs:
+  - item_id: pressure_vessel_steel
+    qty: 150.0
+    unit: kg
+
 steps:
+  - process_id: cutting_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Cut heavy plate to vessel dimensions
   - process_id: metal_forming_basic_v0
-  - process_id: machining_finish_basic_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    labor_hours: 4.0
+    notes: Roll or press heavy plate into cylindrical or spherical vessel sections
   - process_id: welding_brazing_basic_v0
+    est_time_hr: 12.0
+    machine_hours: 12.0
+    labor_hours: 12.0
+    notes: Multi-pass welding of pressure vessel seams per code requirements
+  - process_id: heat_treatment_stress_relief_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: Stress relief heat treatment of welded vessel
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Machine flange faces, nozzle openings, and mounting features
+  - process_id: pressure_test_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Hydrostatic pressure test to code requirements
   - process_id: assembly_basic_v0
-notes: "Converted to standard recipe format using common metal fabrication steps; placeholder for pressure vessel steel shell."
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: Install flanges, gaskets, and pressure fittings
+
+assumptions: "150 kg pressure vessel for chemical reactor. Heavy-gauge steel construction with code-compliant welding, heat treatment, and pressure testing."
+notes: "Seven-step fabrication process for pressure vessel including forming, welding, stress relief, machining, pressure testing, and final assembly per pressure vessel codes."

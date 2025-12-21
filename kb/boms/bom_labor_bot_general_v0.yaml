@@ -2,6 +2,177 @@ id: bom_labor_bot_general_v0
 kind: bom
 owner_item_id: labor_bot_general_v0
 components:
-  - item_id: assembly_tools_basic
+  # ===== MECHANICAL STRUCTURE (35 kg) =====
+  - item_id: machine_frame_small
     qty: 1
-notes: "Minimal BOM to satisfy import resolution for labor_bot_general_v0; expands later with additional tooling."
+    notes: "Robot base frame, 10 kg, cast/welded steel, 600×600×400mm, houses J1 rotation"
+
+  - item_id: robot_arm_link_aluminum
+    qty: 1
+    notes: "Upper arm link, 1.0m aluminum box beam, 8 kg, houses J2 motor"
+
+  - item_id: robot_arm_link_aluminum
+    qty: 1
+    notes: "Forearm link, 0.8m aluminum tapered beam, 7 kg, houses J3 motor"
+
+  - item_id: robot_wrist_3axis
+    qty: 1
+    notes: "3-axis wrist module (J4-J5-J6), aluminum housing with steel shafts, 5 kg"
+
+  - item_id: motor_housing_cast
+    qty: 6
+    notes: "Joint housings, aluminum castings, enclose motors/gearboxes, sealed bearings"
+
+  # ===== ACTUATION SYSTEM (30 kg) =====
+  # Motors
+  - item_id: motor_electric_medium
+    qty: 3
+    notes: "400W BLDC motors for joints 1-2 (base, shoulder), 3000 rpm, integrated 20-bit encoders, 4 kg each"
+
+  - item_id: motor_electric_medium
+    qty: 1
+    notes: "300W BLDC motor for joint 3 (elbow), 3000 rpm, 3 kg"
+
+  - item_id: motor_electric_small
+    qty: 2
+    notes: "200W BLDC motors for wrist joints 4-6, 4000 rpm, 2.5 kg each"
+
+  # Harmonic drives (high-ratio gearboxes)
+  - item_id: harmonic_drive_reducer_medium
+    qty: 3
+    notes: "100:1 ratio, 50mm diameter, for joints 1-3 (base, shoulder, elbow), 2 kg each"
+
+  - item_id: harmonic_drive_reducer_medium
+    qty: 3
+    notes: "80:1 ratio, 40mm diameter, for wrist joints 4-6, 2 kg each"
+
+  # ===== POWER SYSTEM (8 kg) =====
+  - item_id: power_supply_small_imported
+    qty: 1
+    notes: "48V DC output, 2.5 kW continuous, from 240V 3-phase AC input, 5 kg"
+
+  - item_id: power_distribution_board
+    qty: 1
+    notes: "PCB with bus bars, 6× circuit breakers, routes 48V to motor controllers, 2 kg"
+
+  - item_id: battery_backup_small
+    qty: 1
+    notes: "Li-ion 48V 100Wh emergency backup for brake holding on power loss, 1 kg"
+
+  # ===== CONTROL SYSTEM (6 kg) =====
+  - item_id: computer_core_imported
+    qty: 1
+    notes: "Industrial PC: ARM/x86 4-core, 8GB RAM, real-time Linux, EtherCAT master, kinematics, 3 kg"
+
+  - item_id: servo_drive_controller
+    qty: 6
+    notes: "FOC servo drives, EtherCAT communication, 1kHz update, position/velocity/torque modes, 0.3 kg each"
+
+  - item_id: safety_controller_plc
+    qty: 1
+    notes: "SIL 2 safety PLC, monitors E-stop/limits, triggers Safe Torque Off, 1 kg"
+
+  # ===== SENSING SYSTEM (12 kg) =====
+  # Encoders integrated into motors (mass already counted above)
+
+  - item_id: sensor_suite_general
+    qty: 1
+    notes: "Stereo camera pair, 2× 5MP cameras for pose estimation and inspection, 30fps, 2 kg"
+
+  - item_id: force_torque_sensor_6axis
+    qty: 1
+    notes: "6-axis F/T sensor, ±200N/±20Nm, strain gauge on aluminum flexure, 2 kg"
+
+  - item_id: touch_sensor_capacitive
+    qty: 2
+    notes: "Capacitive touch sensors for gripper collision detection, 0.25 kg each"
+
+  - item_id: proximity_sensor_inductive
+    qty: 4
+    notes: "Inductive proximity sensors for workspace boundaries and homing, 0.25 kg each"
+
+  - item_id: instrument_mounts_basic
+    qty: 1
+    notes: "Camera mounting bracket, aluminum, 2 kg"
+
+  - item_id: led_ring_light
+    qty: 2
+    notes: "LED ring lights (12W each) for camera illumination, with diffusers, 1 kg each"
+
+  # ===== END EFFECTOR (8 kg) =====
+  - item_id: electric_parallel_gripper
+    qty: 1
+    notes: "2-finger 120mm stroke, 200N force, interchangeable jaws, aluminum body, 4 kg"
+
+  - item_id: stepper_motor_precision
+    qty: 1
+    notes: "NEMA 23 stepper with ball screw for gripper actuation, 2 kg"
+
+  - item_id: quick_change_tool_interface
+    qty: 1
+    notes: "ISO 9409-1-50-4-M6 coupling, 8-pin connector, pneumatic/manual lock, 2 kg"
+
+  # ===== WIRING AND INTEGRATION (15 kg) =====
+  - item_id: assembled_cable_harness
+    qty: 6
+    notes: "Motor cables: 3m shielded 3-phase + encoder, M12/M23 connectors, 1 kg each"
+
+  - item_id: assembled_cable_harness
+    qty: 1
+    notes: "Signal bundle: EtherCAT, USB3, force sensor, safety, ~25m total, 2 kg"
+
+  - item_id: cable_drag_chain
+    qty: 2
+    notes: "Polymer energy chains for base and shoulder cable routing, 2m each, 1.5 kg each"
+
+  - item_id: electrical_wire_and_connectors
+    qty: 1
+    notes: "Connector set: M12, M23, RJ45, USB-C, terminal blocks, ~40 units, 2 kg"
+
+  - item_id: thermal_management_system
+    qty: 1
+    notes: "6× copper heat pipes from motors, aluminum radiator fins (0.3m²), thermal pads, 2 kg"
+
+  # ===== SAFETY AND ENCLOSURE (6 kg) =====
+  - item_id: emergency_stop_system
+    qty: 1
+    notes: "2× mushroom buttons, dual-channel safety relay, wiring, 1 kg"
+
+  - item_id: safety_light_curtain
+    qty: 1
+    notes: "Optical safety curtain, 2m×2m coverage, IEC 61496 Type 4, <100ms response, 2 kg"
+
+  - item_id: protective_cover_set
+    qty: 1
+    notes: "Polycarbonate/aluminum covers for motors, gears, pinch points, 3 kg"
+
+notes: |
+  Complete bill of materials for labor_bot_general_v0 - a 6-DOF industrial
+  robotic manipulator for lunar manufacturing.
+
+  Design basis: docs/labor_bot_design_memo.md
+  Parts mapping: docs/labor_bot_parts_mapping.md
+
+  Total mass: 120 kg
+  - Mechanical structure: 35 kg
+  - Actuation (motors + gearboxes): 30 kg
+  - Power system: 8 kg
+  - Control system: 6 kg
+  - Sensing system: 12 kg
+  - End effector: 8 kg
+  - Wiring and integration: 15 kg
+  - Safety and enclosure: 6 kg
+
+  Component reuse strategy (per parts_and_labor_guidelines.md):
+  - 14 existing parts reused (motors, frames, cables, sensors)
+  - 18 new parts created (precision mechanisms, safety, robot-specific)
+
+  Lunar manufacturability:
+  - Structures, cables, thermal systems: ~55 kg (46%) - lunar Al/Fe/Cu
+  - Motors, gearboxes, sensors: ~35 kg (29%) - partial (need magnets, precision)
+  - Electronics, magnets, optics: ~30 kg (25%) - Earth import required
+
+  Assembly time: ~140 hours (8 phases from base to testing/calibration)
+
+  This BOM replaces the previous stub (assembly_tools_basic) with a realistic
+  breakdown of robot subsystems based on industrial manipulator architecture.

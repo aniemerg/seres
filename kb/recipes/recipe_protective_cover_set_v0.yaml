@@ -1,0 +1,54 @@
+id: recipe_protective_cover_set_v0
+kind: recipe
+target_item_id: protective_cover_set
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 3.5
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 2
+    unit: kg
+outputs:
+  - item_id: protective_cover_set
+    qty: 1
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.5
+    unit: kg
+steps:
+  - process_id: sheet_metal_cutting_v0
+    note: "Cut aluminum sheet to size for motor covers, cable guards, joint covers"
+  - process_id: sheet_metal_forming_v0
+    note: "Bend sheet into covers, enclosures, guards"
+  - process_id: finishing_deburring_v0
+    note: "Deburr edges, drill mounting holes, add ventilation slots"
+  - process_id: surface_finishing_v0
+    note: "Anodize aluminum for corrosion resistance (optional)"
+notes: |
+  Manufactures protective cover set for robot pinch points and moving parts.
+
+  Design: Aluminum sheet covers for 6 joint motors, cable guards, gripper guards.
+  Total mass: 3 kg covers + fasteners.
+
+  Components:
+  - Motor covers (6×): Enclose joint motors and gearboxes
+  - Cable guards: Shield cable routing paths
+  - Gripper finger guards: Prevent pinching
+  - Joint covers: Prevent access to rotating joints
+
+  Process:
+  1. Cut 2mm aluminum sheet to patterns
+  2. Form into covers using press brake
+  3. Deburr edges and drill mounting holes
+  4. Add ventilation slots if motors need cooling
+  5. Optional: Anodize for corrosion resistance
+
+  Inputs:
+  - 3.5 kg aluminum sheet (3 kg final + scrap)
+  - 2× fastener kits (screws for tool-required attachment)
+
+  Alternative: Polycarbonate sheet (transparent, impact-resistant) if polymer
+  synthesis available. Aluminum chosen as baseline lunar-manufacturable option.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.8.3.

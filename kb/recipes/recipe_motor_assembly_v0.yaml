@@ -1,8 +1,52 @@
 id: recipe_motor_assembly_v0
-kind: recipe
-name: Motor assembly from steel stock (v0)
 target_item_id: motor_assembly
+variant_id: v0
 steps:
-  - process_id: motor_assembly_fabrication_v0
-assumptions: "Seed recipe to manufacture motor_assembly from steel_stock as placeholder."
-notes: "Auto-generated to resolve no_recipe gap for motor_assembly."
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 2.5
+    notes: "Cast motor housing with integral mounting feet and stator bore."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Machine stator bore, bearing seats, and mounting surfaces to precision tolerances."
+  - process_id: lamination_stamping_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.5
+    notes: "Stamp and stack stator and rotor laminations from electrical steel sheet."
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Cast rotor shaft blank from steel alloy."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 2.5
+    notes: "Precision machine shaft journals, keyway, and rotor mounting surfaces."
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 2.5
+    machine_hours: 2.0
+    labor_hours: 1.5
+    notes: "Wind copper wire coils for stator windings; insulate and form coil groups."
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Install stator laminations and windings into housing; secure with fasteners."
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble rotor laminations onto shaft; balance rotor assembly."
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Press fit or mount bearings onto shaft and into housing endplates."
+  - process_id: motor_final_assembly_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Final motor assembly: install rotor into stator, attach endplates, mount terminal box, wire connections. Perform alignment check and basic spin test."
+outputs:
+  - item_id: motor_assembly
+    qty: 1
+    unit: count
+assumptions: "12 kg motor assembly including housing, shaft, laminations, windings, bearings, and fasteners. Assumes availability of electrical steel sheet, copper wire, bearing components, and fastener kit. Terminal box and mounting hardware included."
+notes: "Complete recipe for general-purpose motor assembly. Ten-step process covering housing fabrication, shaft machining, lamination preparation, winding, and final assembly with testing."

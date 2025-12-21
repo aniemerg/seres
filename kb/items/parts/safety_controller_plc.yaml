@@ -1,0 +1,31 @@
+id: safety_controller_plc
+kind: part
+name: Safety controller (PLC)
+mass: 1.0
+unit: kg
+material_class: electronic
+notes: |
+  Programmable safety controller for industrial robotics.
+
+  Safety Integrity Level 2 (SIL 2) rated for machinery safety applications.
+
+  Monitored inputs:
+  - Emergency stop circuit (dual-channel)
+  - Light curtain / safety barrier status
+  - Joint position limits
+  - Velocity limits
+  - Torque/force limits
+
+  Safety action: Triggers Safe Torque Off (STO) to all motor drives if any
+  fault detected, removing power from motors.
+
+  Features:
+  - Redundant processors (dual-channel architecture)
+  - Watchdog timers
+  - Self-diagnostics
+  - Compliance: IEC 61508 (SIL 2), ISO 10218 (robot safety)
+
+  Manufacturing: Safety-critical electronics. Import required for certified
+  safety-rated components and firmware.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.4.3.

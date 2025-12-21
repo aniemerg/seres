@@ -1,0 +1,76 @@
+id: drive_motor_medium_assembly_v0
+kind: process
+name: Drive motor (medium) assembly
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: stator_rotor_lamination_set
+    qty: 36.0
+    unit: kg
+    notes: "Electrical steel laminations for 90 kg motor (40% of mass)"
+  - item_id: motor_coil_wound
+    qty: 27.0
+    unit: kg
+    notes: "Aluminum windings (30% of mass)"
+  - item_id: motor_housing_steel
+    qty: 18.0
+    unit: kg
+    notes: "Steel housing (20% of mass) - scaled from 3 kg small motor"
+  - item_id: motor_shaft_steel
+    qty: 4.5
+    unit: kg
+    notes: "Steel rotor shaft (5% of mass) - scaled from 1 kg small motor"
+  - item_id: bearing_set_heavy
+    qty: 4.0
+    unit: kg
+    notes: "Heavy-duty bearings for medium motor"
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+    notes: "Assembly fasteners"
+outputs:
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+    notes: "Complete 90 kg drive motor"
+byproducts:
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
+    notes: "Assembly waste and trimming"
+requires_ids:
+  - assembly_tools_basic
+  - lifting_equipment
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+    notes: "Assembly labor for larger motor"
+energy_model:
+  type: fixed_kWh
+  value: 1.5
+  notes: "Assembly tools, lifting, and test run energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+  notes: "Assemble stator/rotor, install shaft, bearings, housing, and perform test run. Longer than small motor due to size and weight."
+notes: |
+  Complete assembly process for 90 kg medium drive motor from component materials.
+
+  Process steps:
+  1. Stack and align stator laminations (38 kg electrical steel)
+  2. Insert pre-wound coils into stator slots (27 kg aluminum wire)
+  3. Install rotor shaft with rotor laminations (5 kg shaft)
+  4. Install heavy-duty bearings on shaft (4 kg bearing set)
+  5. Mount stator assembly into housing (15 kg steel housing)
+  6. Secure endplates with fasteners (1 kg fastener kit)
+  7. Connect terminal box and perform initial spin test
+
+  This process is scaled from motor_final_assembly_v0 (12 kg small motor) to handle
+  the larger 90 kg medium drive motor. Material proportions based on typical motor construction:
+  - 40% electrical steel laminations
+  - 30% copper/aluminum windings
+  - 25% structural steel (housing + shaft)
+  - 5% bearings and fasteners
+
+  Total ISRU potential: 96% (89.5 kg ISRU materials, 0.5 kg imported coil insulation already in motor_coil_wound)

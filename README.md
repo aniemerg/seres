@@ -47,13 +47,40 @@ Interactive simulation mode for validating KB completeness by building a lunar b
 - ✅ Material class system unlocked 66+ manufacturing processes
 
 **Usage**:
+
+⭐ **Recommended: CLI Commands (for Claude Code and manual control)**
 ```bash
-# Interactive mode
+# Complete guide in docs/CLI_COMMANDS_GUIDE.md
+# Quick reference in CLI_QUICK_REFERENCE.md
+
+SIM="my_sim"
+
+# View state
+python -m base_builder.cli_commands view-state --sim-id $SIM
+
+# Import bootstrap
+python -m base_builder.cli_commands import --sim-id $SIM --item labor_bot_general_v0 --quantity 1 --unit unit
+
+# Start process
+python -m base_builder.cli_commands start-process --sim-id $SIM --process regolith_mining_highlands_v0 --duration 8
+
+# Preview & execute
+python -m base_builder.cli_commands preview --sim-id $SIM --hours 8
+python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 8
+```
+
+**Alternative: Python API (for custom scripts only)**
+```bash
+# ⚠️ NOT recommended for Claude Code - use CLI commands above instead
 python -c "from base_builder.interactive import *; init_simulation('test_sim')"
 # Then use: view_state(), start_process(), run_recipe(), build_machine(), etc.
 ```
 
 **Documentation**:
+- **`docs/CLI_COMMANDS_GUIDE.md`** — **⭐ Complete CLI reference (USE THIS IN CLAUDE CODE)**
+- **`CLI_QUICK_REFERENCE.md`** — **Quick reference card**
+- `base_builder/README.md` — Overview and architecture
+- `base_builder/INTERACTIVE_MODE.md` — Python API guide (not for Claude Code)
 - `docs/ADRs/004-base-builder-simulation.md` — Architecture decision record
 - `docs/material_class_system.md` — Material class matching implementation
 - `docs/iron_parts_discovery.md` — Production chain breakthrough

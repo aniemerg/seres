@@ -1,0 +1,70 @@
+id: recipe_drive_motor_medium_v1
+target_item_id: drive_motor_medium
+variant_id: v1
+inputs:
+  - item_id: stator_rotor_lamination_set
+    qty: 36.0
+    unit: kg
+  - item_id: motor_coil_wound
+    qty: 27.0
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 18.0
+    unit: kg
+  - item_id: motor_shaft_steel
+    qty: 4.5
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
+steps:
+  - process_id: lamination_stamping_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Stamp stator/rotor laminations from electrical steel sheet (40 kg → 38 kg)"
+  - process_id: coil_winding_basic_v0
+    est_time_hr: 13.0
+    machine_hours: 13.0
+    notes: "Wind aluminum coils for medium motor (28.4 kg wire + insulation → 27 kg coils)"
+  - process_id: drive_motor_medium_assembly_v0
+    est_time_hr: 4.0
+    labor_hours: 3.0
+    notes: "Assemble motor from laminations, coils, housing, shaft, bearings, and fasteners"
+assumptions: |
+  90 kg medium drive motor for automated machinery.
+
+  Material requirements (total ~92.4 kg input):
+  - Electrical steel sheet: 40 kg (for laminations)
+  - Aluminum wire: 28.4 kg (for windings)
+  - Coil insulation: 1.4 kg (imported or produced)
+  - Motor housing steel: 15 kg
+  - Motor shaft steel: 5 kg
+  - Bearing set heavy: 4 kg
+  - Fastener kit medium: 1 kg
+
+  Output: 1 drive_motor_medium unit (90 kg nominal) + ~2.4 kg scrap/loss
+
+  This recipe uses the proven processes from motor_electric_small production
+  but scaled up for the larger motor size.
+notes: |
+  Three-step recipe for medium electric drive motor using detailed process flows.
+
+  Replaces recipe_drive_motor_medium_v0 which used placeholder processes.
+
+  Total production time: ~19 hours
+  - Lamination stamping: 2 hr
+  - Coil winding: 13 hr (precision work)
+  - Final assembly and test: 4 hr
+
+  ISRU potential: 96% by mass (only coil insulation imported)

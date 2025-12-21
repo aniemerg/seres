@@ -3,17 +3,33 @@ kind: recipe
 target_item_id: depth_stop_mechanism
 variant_id: v0
 steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Cast stop collar body, mounting bracket, and adjustment nut blanks from steel
+  - process_id: machining_process_turning_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Turn stop collar OD/ID, adjustment screw threads (M12-M16), and mounting surfaces on lathe
+  - process_id: machining_process_drilling_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Drill mounting holes in bracket and cross-pin holes for lock mechanism
   - process_id: machining_finish_basic_v0
-    est_time_hr: 0.6
-    machine_hours: 0.6
-    notes: "Finish machining features on depth_stop_mechanism body"
-  - process_id: cutting_basic_v0
-    est_time_hr: 0.4
-    machine_hours: 0.4
-    notes: "Cut/prepare depth stop components (screw interface, collar, nut threads)"
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Mill flat mounting surfaces, finish thread engagement surfaces, deburr all edges
+  - process_id: machining_precision_v0
+    est_time_hr: 0.75
+    machine_hours: 0.75
+    notes: Precision grind adjustment screw threads and stop collar contact surfaces for ±0.05mm repeatability
   - process_id: assembly_basic_v0
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Assemble adjustment screw, lock nut, and mechanical stop collar into body"
-assumptions: "Path to in-house machining and manual assembly; depth_stop_mechanism defined as a steel part ~2 kg"
-notes: "Local fabrication path for depth_stop_mechanism; replaces import placeholder"
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Assemble adjustment screw, lock nut, compression spring (preload), stop collar, and mounting hardware. Test depth adjustment mechanism and verify repeatability
+outputs:
+  - item_id: depth_stop_mechanism
+    qty: 1
+    unit: unit
+assumptions: "2 kg depth stop mechanism assembly including precision adjustment screw (M12-M16 thread pitch), stop collar (50-80mm diameter), compression spring for preload, lock nut, and steel mounting bracket. Machined from cast steel blanks with precision grinding on critical surfaces for ±0.05mm depth control accuracy."
+notes: "Complete six-step fabrication recipe for depth stop mechanism. Process flow: (1) cast metal component blanks, (2) turn cylindrical features and threads, (3) drill mounting and pin holes, (4) mill flat surfaces and finish threads, (5) precision grind critical contact surfaces, (6) final assembly with spring and hardware. Mechanism provides repeatable depth control for drill presses, vertical milling machines, and punch presses."

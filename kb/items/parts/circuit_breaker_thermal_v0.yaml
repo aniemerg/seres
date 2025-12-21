@@ -4,16 +4,29 @@ name: Thermal circuit breaker v0
 mass: 0.3
 unit: kg
 material_class: composite
-notes: |
-  Thermal circuit breaker for automatic overcurrent protection.
+notes: 'Thermal circuit breaker for automatic overcurrent protection.
+
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0
+
   Principle: Bimetallic strip heats and bends under overcurrent, trips mechanism
+
   Components: Bimetallic element, latch mechanism, contacts, reset lever
+
   Rating: 5-50A typical at 120-240V AC/DC
+
   Trip time: Inverse time characteristic (faster at higher overcurrent)
+
   Reset: Manual reset after cooling and fault clearing
+
   Advantages: Simple, reliable, no external power needed, reusable
+
   Applications: Motor protection, power distribution, equipment safety
+
   Temperature compensation: Some designs compensate for ambient temperature
+
   Lunar context: Simple electromechanical device, locally manufacturable
+
   Critical for: Electrical safety, fault protection, equipment preservation
+
+  '
+recipe: recipe_circuit_breaker_thermal_v0

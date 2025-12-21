@@ -1,0 +1,60 @@
+id: fastener_kit_medium_production_v0
+kind: process
+name: Fastener kit medium production v0
+layer_tags:
+  - layer_6
+
+inputs:
+  - item_id: steel_stock
+    qty: 1.1
+    unit: kg
+    notes: "Steel bar and sheet stock for bolts, nuts, and washers"
+
+outputs:
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+    notes: "Complete mixed fastener kit M6-M12"
+
+byproducts:
+  - item_id: steel_scrap_refined
+    qty: 0.1
+    unit: kg
+    notes: "Scrap from machining, stamping, and trimming"
+
+requires_ids:
+  - forge_or_induction_heater
+  - lathe_engine_v0
+  - press_brake_v0
+  - molds
+
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+    notes: "Labor for casting, machining, stamping, sorting, and kitting"
+
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: "Combined energy for forging (heating), machining, stamping, and heat treatment"
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: "Integrated process: forge bolt/nut blanks, machine threads, stamp washers, heat treat lock washers, sort and kit"
+
+notes: |
+  Integrated fastener kit production process. Combines multiple operations:
+  1. Forging: Heat and forge hex heads on bolts and nut blanks
+  2. Machining: Cut threads on bolts and tap threads in nuts
+  3. Stamping: Punch flat and lock washers from sheet
+  4. Heat treatment: Harden lock washers
+  5. Assembly: Sort by size and kit into organized container
+
+  Produces complete fastener_kit_medium per BOM specification:
+  - 720g hex bolts M6-M12 (76 pieces)
+  - 180g hex nuts M6-M12 (135 pieces)
+  - 75g flat washers (135 pieces)
+  - 30g lock washers (60 pieces)
+  Total: ~366 fasteners in 1.0 kg kit

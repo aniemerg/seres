@@ -1,6 +1,36 @@
-# Interactive Mode - Claude as Agent
+# Interactive Mode - Python API
 
-This mode allows Claude (in Claude Code) to directly control the base builder simulation through the conversation.
+⚠️ **IMPORTANT - For Claude Code Users:**
+
+**DO NOT use this Python API approach when working in Claude Code.**
+
+**Instead, use the CLI commands via Bash:**
+```bash
+python -m base_builder.cli_commands view-state --sim-id <name>
+python -m base_builder.cli_commands import --sim-id <name> --item <id> --quantity <n> --unit <unit>
+python -m base_builder.cli_commands start-process --sim-id <name> --process <id> --duration <hours>
+python -m base_builder.cli_commands preview --sim-id <name> --hours <n>
+python -m base_builder.cli_commands advance-time --sim-id <name> --hours <n>
+```
+
+**See complete guide:** `docs/CLI_COMMANDS_GUIDE.md`
+
+**Why CLI is better for Claude Code:**
+- ✅ No state management issues (loads/saves automatically per command)
+- ✅ Simpler error handling
+- ✅ Works reliably with Bash tool
+- ✅ One command = one action (no session to maintain)
+
+**This Python API is for:**
+- Custom Python scripts with complex logic
+- Advanced automation requiring state introspection
+- Interactive Python REPL sessions (not Claude Code)
+
+---
+
+## Python API Documentation
+
+This mode allows direct Python control of the base builder simulation.
 
 ## Setup
 

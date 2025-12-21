@@ -1,0 +1,45 @@
+id: recipe_fastener_kit_medium_assembly_v0
+target_item_id: fastener_kit_medium
+variant_id: assembly_v0
+
+inputs:
+  - item_id: bolt_hex_medium_steel
+    qty: 0.720
+    unit: kg
+  - item_id: nut_hex_medium_steel
+    qty: 0.180
+    unit: kg
+  - item_id: washer_flat_medium_steel
+    qty: 0.075
+    unit: kg
+  - item_id: washer_lock_medium_steel
+    qty: 0.030
+    unit: kg
+
+outputs:
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+
+steps:
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Sort and kit fasteners by size and type. Package in organized container with dividers for each size/type."
+
+assumptions: |
+  Assembles 1.0 kg fastener_kit_medium from pre-manufactured components per BOM.
+  Requires all components from bom_fastener_kit_medium_v0:
+    - 0.720 kg bolt_hex_medium_steel
+    - 0.180 kg nut_hex_medium_steel
+    - 0.075 kg washer_flat_medium_steel
+    - 0.030 kg washer_lock_medium_steel
+  Labor-intensive sorting and organization to create useful mixed kit.
+
+notes: |
+  Kit assembly recipe that combines individual fastener components into organized
+  mixed kit. Most commonly used kit in KB (107 BOMs reference this item).
+  Sorting ensures user can quickly find needed size without having to maintain
+  separate inventory of each fastener size.
+  Alternative production path: recipe_fastener_kit_small_v0 uses integrated
+  casting+machining+kitting approach without separate component recipes.

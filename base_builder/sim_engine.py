@@ -599,6 +599,16 @@ class SimulationEngine:
             )
         )
 
+        # Create state snapshot so import persists
+        self._log_event(
+            StateSnapshotEvent(
+                time_hours=self.state.current_time_hours,
+                inventory=self.state.inventory,
+                active_processes=self.state.active_processes,
+                machines_built=self.state.machines_built,
+            )
+        )
+
         return {
             "success": True,
             "message": f"Imported {quantity} {unit} of '{item_id}' from Earth",
@@ -806,6 +816,10 @@ class SimulationEngine:
                         quantity = event.get("quantity")
                         unit = event.get("unit")
                         if item_id:
+                            # Add to inventory (so imports are actually available)
+                            self.add_to_inventory(item_id, quantity, unit)
+
+                            # Track in total_imports (for reporting)
                             if item_id in self.state.total_imports:
                                 existing = self.state.total_imports[item_id]
                                 if existing.unit == unit:
@@ -814,6 +828,25 @@ class SimulationEngine:
                                 self.state.total_imports[item_id] = InventoryItem(
                                     quantity=quantity, unit=unit
                                 )
+
+                    # Replay build events
+                    elif event_type == "build":
+                        machine_id = event.get("machine_id")
+                        components_consumed = event.get("components_consumed", {})
+                        if machine_id:
+                            # Subtract components from inventory
+                            for item_id, inv_data in components_consumed.items():
+                                inv_item = InventoryItem(**inv_data)
+                                self.subtract_from_inventory(
+                                    item_id, inv_item.quantity, inv_item.unit
+                                )
+
+                            # Add machine to inventory
+                            self.add_to_inventory(machine_id, 1, "count")
+
+                            # Add to machines_built list
+                            if machine_id not in self.state.machines_built:
+                                self.state.machines_built.append(machine_id)
 
                 except json.JSONDecodeError:
                     continue

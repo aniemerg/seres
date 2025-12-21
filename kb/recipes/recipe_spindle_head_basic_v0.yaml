@@ -3,28 +3,134 @@ target_item_id: spindle_head_basic
 variant_id: v0
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 47.5
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 2.5
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
-    notes: "Cast spindle housing from steel (approx 70 kg raw for 60 kg finished)"
+    notes: "Cast spindle housing (~25 kg) and chuck body blanks (~12 kg) from steel, plus additional material for gating and risers"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 47.5
+        unit: kg
+      - item_id: steel_bar_stock
+        qty: 16.0
+        unit: kg
+    outputs:
+      - item_id: shaft_steel_machined
+        qty: 15.0
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 25.0
+        unit: kg
+      - item_id: machined_metal_block_v0
+        qty: 12.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 11.5
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
-    notes: "Machine bearing journals, taper bore, mounting faces to precision tolerances"
+    notes: "Machine spindle shaft (15 kg) from bar stock with journals, taper bore, and bearing seats. Machine housing (25 kg) and chuck body (12 kg) from castings to precision tolerances"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: shaft_steel_machined
+        qty: 15.0
+        unit: kg
+      - item_id: machined_metal_block_v0
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 26.5
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.5
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
-    notes: "Grind critical bearing surfaces and taper to final tolerance"
+    notes: "Grind critical bearing surfaces, spindle nose taper (R8 or MT3), and chuck mounting surfaces to final tolerance (<0.002mm runout)"
+  - process_id: heat_treatment_cycle_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 26.5
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 26.5
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Heat treat spindle shaft and chuck components for hardness (HRC 58-62) and wear resistance on critical surfaces"
   - process_id: bearing_installation_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 26.5
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 25.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: spindle_head_basic
+        qty: 55.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.5
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: "Install precision spindle bearings with thermal fit or press fit"
+    notes: "Install precision angular contact bearings (bearing_set_heavy - 4 kg, two 2kg bearings) with thermal fit or press fit; apply preload for rigidity"
   - process_id: assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble drive pulley, seals, and mounting hardware"
+    inputs:
+      - item_id: spindle_head_basic
+        qty: 55.0
+        unit: kg
+      - item_id: belt_and_pulley_set
+        qty: 2.5
+        unit: kg
+      - item_id: seal_mechanical_rotary
+        qty: 0.4
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+      - item_id: metal_alloy_bulk
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: spindle_head_basic
+        qty: 60.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble drive pulley (2.5 kg from belt_and_pulley_set), install mechanical seals (2x 0.2 kg), secure with fasteners (fastener_kit_medium 1 kg), add chuck jaws and other small components (1.1 kg), and apply lubrication"
   - process_id: balancing_dynamic_basic_v0
+    inputs:
+      - item_id: spindle_head_basic
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: spindle_head_basic
+        qty: 60.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: "Dynamic balance spindle assembly to minimize runout"
-assumptions: Precision spindle with R8 or MT taper. Bearings installed with thermal/press fit.
-notes: Precision machining spindle for general milling. Requires tight bearing tolerances and dynamic balancing.
+    notes: "Dynamic balance spindle assembly to minimize runout and vibration at operating speeds (typically <5 µm TIR)"
+outputs:
+  - item_id: spindle_head_basic
+    qty: 1
+    unit: unit
+assumptions: "60 kg precision spindle head assembly with integrated chuck for general milling operations. Uses R8 or MT3 taper interface. Component breakdown: spindle shaft (~15 kg steel), housing (~25 kg cast steel), chuck assembly (~12 kg), bearings (bearing_set_heavy ~4 kg angular contact type), fasteners (fastener_kit_medium ~4 kg). Bearings installed with thermal/press fit and preloaded for high rigidity. Heat treatment critical for wear resistance on bearing surfaces and taper."
+notes: "Seven-step precision manufacturing recipe for basic spindle head with integrated chuck. Critical quality requirements: tight bearing tolerances (ISO P5 or better), precise taper grinding for tool holding accuracy, proper heat treatment for durability, and dynamic balancing for smooth operation. Key component inputs: shaft_steel_machined (raw shaft stock), bearing_set_heavy (precision angular contact bearings), motor_housing_steel (adapted as spindle housing casting), fastener_kit_medium (assembly hardware). Suitable for general purpose milling machines requiring moderate precision and rigidity."

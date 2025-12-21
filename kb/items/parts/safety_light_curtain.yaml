@@ -1,0 +1,43 @@
+id: safety_light_curtain
+kind: part
+name: Safety light curtain
+mass: 2.0
+unit: kg
+material_class: electronic
+notes: |
+  Optical safety light curtain for industrial robot work cell protection.
+
+  Creates invisible barrier of infrared light beams. If person enters protected
+  area (breaking beams), robot immediately stops.
+
+  Specifications:
+  - Type: Type 4 safety light curtain (IEC 61496)
+  - Coverage: 2m × 2m work cell perimeter
+  - Resolution: 30 mm (minimum detectable object)
+  - Response time: <100 ms (detection to safety output)
+  - Range: Up to 5m between emitter and receiver
+  - Safety rating: SIL 2, Category 3 (ISO 13849)
+
+  Components:
+  - Emitter unit:
+    - Array of infrared LEDs (850 nm wavelength)
+    - Synchronization electronics
+    - Mounting bracket
+  - Receiver unit:
+    - Array of photodiodes aligned with emitter LEDs
+    - Signal processing (detects beam interruption)
+    - Safety output relay (dual-channel)
+    - Status indicators (green = OK, red = beam blocked)
+  - Mounting posts (2×): Vertical posts at work cell corners
+  - Controller/interface module:
+    - Connects to safety PLC
+    - Provides muting and blanking functions
+    - Configuration switches
+
+  Operation: If any beam blocked, safety output opens within 100ms, triggering
+  Safe Torque Off to robot. Green light indicates system operational.
+
+  Manufacturing: Optoelectronics (LEDs, photodiodes) import required.
+  Signal processing electronics import. Mounting hardware from lunar aluminum.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.8.2.

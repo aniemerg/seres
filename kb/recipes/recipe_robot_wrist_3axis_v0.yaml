@@ -1,0 +1,56 @@
+id: recipe_robot_wrist_3axis_v0
+kind: recipe
+target_item_id: robot_wrist_3axis
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 6.0
+    unit: kg
+  - item_id: steel_stock
+    qty: 2.0
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 0.3
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: kg
+outputs:
+  - item_id: robot_wrist_3axis
+    qty: 1
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: casting_basic_v0
+    note: "Cast aluminum housing components for 3-axis wrist module"
+  - process_id: machining_rough_v0
+    note: "CNC machine bearing bores, shaft seats, mounting surfaces"
+  - process_id: steel_refining_basic_v0
+    note: "Refine steel for wrist shafts from lunar iron"
+  - process_id: machining_rough_v0
+    note: "Machine steel shafts with precision diameters"
+  - process_id: alignment_and_testing_basic_v0
+    note: "Assemble wrist, install bearings, align joints, test range of motion"
+notes: |
+  Manufactures 3-axis robot wrist module from lunar materials.
+
+  Design: Compact roll-pitch-roll (J4-J5-J6) configuration, 200mm length.
+  Housing: Aluminum castings, Shafts: Steel, Bearings: Initially imported.
+
+  Process:
+  1. Cast aluminum housing components (3 nested housings)
+  2. CNC machine bearing bores and mounting surfaces (±0.05mm precision)
+  3. Fabricate steel shafts from lunar iron
+  4. Assemble with precision bearings (imported in Phase 1)
+  5. Align and test joint motion
+
+  Inputs:
+  - 6 kg aluminum (5 kg final + scrap)
+  - 2 kg steel for shafts
+  - 6 bearings (3 joints × 2 bearings each, imported initially)
+
+  Phase 2: Manufacture bearings from lunar materials.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.1.4.

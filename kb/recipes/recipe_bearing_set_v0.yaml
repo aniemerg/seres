@@ -2,6 +2,72 @@ id: recipe_bearing_set_v0
 name: Bearing set fabrication v0
 kind: recipe
 target_item_id: bearing_set
+variant_id: v0
+
+inputs:
+  - item_id: bearing_steel_bar
+    qty: 1.2
+    unit: kg
+    notes: High-carbon bearing steel for races and rolling elements
+  - item_id: brass_sheet
+    qty: 0.15
+    unit: kg
+    notes: Bearing cage/retainer material
+  - item_id: lubricant_grease_bearing
+    qty: 0.05
+    unit: kg
+    notes: Bearing grease
+  - item_id: bearing_seal_rubber
+    qty: 0.1
+    unit: kg
+    notes: Optional seals
+
+outputs:
+  - item_id: bearing_set
+    qty: 1.5
+    unit: kg
+
 steps:
-  - process_id: bearing_set_fabrication_v0
-notes: "Seed recipe for manufacturing bearing_set from steel_stock; placeholder to satisfy no_recipe gap."
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Cast inner and outer bearing race blanks from bearing steel
+  - process_id: machining_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Rough machine race blanks to near-net shape
+  - process_id: heat_treatment_hardening_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Harden bearing races to HRC 58-62
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Precision grind race surfaces to tight tolerances
+  - process_id: metal_forging_process_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Hot forge ball blanks from bearing steel
+  - process_id: heat_treatment_hardening_v0
+    est_time_hr: 2.5
+    machine_hours: 2.5
+    notes: Harden rolling elements to HRC 60-64
+  - process_id: surface_grinding_precision_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Precision grind balls to spherical form
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 0.3
+    machine_hours: 0.3
+    notes: Cast or stamp bearing cage blanks
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 0.8
+    machine_hours: 0.8
+    notes: Machine cage pockets
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Assemble races, balls, and cage; pack with grease; install seals
+
+assumptions: "Medium bearing set (1.5 kg) for general machinery. Precision ground races and balls, heat-treated to bearing-grade hardness, includes lubrication and seals."
+notes: "Ten-step recipe covering bearing race and ball production, heat treatment, precision grinding, cage fabrication, and final assembly with lubrication for 35-45mm bore bearings."

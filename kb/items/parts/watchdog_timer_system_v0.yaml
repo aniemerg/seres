@@ -4,11 +4,19 @@ name: Watchdog timer system v0
 mass: 0.5
 unit: kg
 material_class: electronics
-notes: |
-  Hardware watchdog timer for system reset and fault detection.
+notes: 'Hardware watchdog timer for system reset and fault detection.
+
   Source: docs/paper_reviews/building-physical-self-replicating_missing_tech.md
+
   Purpose: Automatically resets system if software hangs or faults occur
+
   Implementation: Hardware timer circuit that must be periodically reset by software
+
   If software fails to reset timer, hardware triggers system reboot
+
   Critical for autonomous operation and fault recovery
+
   Can be implemented with simple oscillator + counter circuits
+
+  '
+recipe: recipe_watchdog_timer_system_v0

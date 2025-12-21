@@ -2,32 +2,52 @@ id: recipe_shaft_and_bearing_set_v0
 target_item_id: shaft_and_bearing_set
 variant_id: v0
 steps:
+  - process_id: metal_casting_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Cast shaft blanks from steel stock"
+  - process_id: steel_shaft_machining_v0
+    est_time_hr: 2.5
+    machine_hours: 2.5
+    notes: "Turn and machine shaft journals, bearing seats, and mounting features on lathe"
   - process_id: machining_finish_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    labor_hours: 2.0
-    notes: "Machine shaft to precision tolerances, including bearing journals and mounting features"
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Finish machine shaft to precision tolerances, including keyways and threads"
   - process_id: precision_grinding_basic_v0
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Grind bearing journals to final tolerance and surface finish"
+  - process_id: heat_treatment_hardening_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Harden shaft surfaces for wear resistance and extended service life"
+  - process_id: bearing_set_fabrication_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Fabricate or procure bearing components (races, balls/rollers, cages)"
   - process_id: bearing_installation_basic_v0
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Install ball or roller bearings onto shaft with proper fit"
+    notes: "Install ball or roller bearings onto shaft with proper press or shrink fit"
   - process_id: assembly_basic_v0
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: "Assemble bearing housings, seals, and mounting hardware"
+    notes: "Assemble bearing housings, seals, retaining rings, and mounting hardware"
   - process_id: balancing_dynamic_basic_v0
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
-    notes: "Balance rotating assembly to minimize vibration"
+    notes: "Balance rotating assembly to minimize vibration in operation"
   - process_id: inspection_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: "Verify runout, bearing smoothness, and dimensional accuracy"
-assumptions: "Precision shaft and bearing assembly for rotating machinery. Ground bearing surfaces with proper bearing fits for smooth, reliable operation."
-notes: "Shaft and bearing set for power transmission in machinery. 15 kg assembly provides robust rotating component. Total fabrication time ~11 hours."
+    notes: "Verify runout, bearing smoothness, dimensional accuracy, and hardness"
+outputs:
+  - item_id: shaft_and_bearing_set
+    qty: 1
+    unit: count
+assumptions: "15 kg precision shaft and bearing assembly for rotating machinery. Includes steel casting, turning, grinding, heat treatment for wear resistance. Ground bearing surfaces with proper bearing fits for smooth, reliable operation."
+notes: "Complete shaft and bearing set for power transmission in machinery. Includes casting, precision machining (turning and grinding), heat treatment (hardening), bearing fabrication and installation, final assembly with housings and seals, dynamic balancing, and inspection. Total fabrication time ~15.5 hours. Suitable for motors, gearboxes, and other rotating equipment."

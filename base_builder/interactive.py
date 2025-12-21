@@ -1,8 +1,21 @@
 """
-Interactive mode for base builder - Claude controls the simulation.
+Interactive mode for base builder - Python API.
 
-This module provides tools that Claude can use directly in conversation
-to control a simulation.
+⚠️ WARNING FOR CLAUDE CODE USERS:
+    DO NOT USE THIS MODULE IN CLAUDE CODE!
+
+    Use the CLI commands instead via Bash tool:
+        python -m base_builder.cli_commands view-state --sim-id <name>
+        python -m base_builder.cli_commands import --sim-id <name> ...
+        python -m base_builder.cli_commands start-process --sim-id <name> ...
+
+    See: docs/CLI_COMMANDS_GUIDE.md
+
+    This Python API has state management issues when used from Claude Code.
+    The CLI commands are stateless and work reliably.
+
+This module provides Python functions for controlling simulations.
+For use in custom Python scripts only, not Claude Code.
 """
 from __future__ import annotations
 

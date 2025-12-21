@@ -1,0 +1,36 @@
+id: force_torque_sensor_6axis
+kind: part
+name: Force/torque sensor (6-axis)
+mass: 2.0
+unit: kg
+material_class: composite
+notes: |
+  6-axis force and torque sensor for robotic force control.
+
+  Measures three force components (Fx, Fy, Fz) and three torque components
+  (Tx, Ty, Tz) simultaneously.
+
+  Specifications:
+  - Force range: ±200 N per axis
+  - Torque range: ±20 Nm per axis
+  - Resolution: 0.1 N force, 0.01 Nm torque
+  - Technology: Strain gauge bridge on machined aluminum flexure
+
+  Mounting: Between robot wrist flange (J6) and tool adapter.
+
+  Applications:
+  - Contact detection
+  - Force-controlled assembly (press fits, insertions)
+  - Compliant motion
+  - Tool weight compensation
+
+  Components:
+  - Machined aluminum flexure (precision geometry)
+  - Strain gauges (adhesive-bonded, 4 per axis)
+  - Signal conditioning electronics
+  - Digital interface (SPI or analog output)
+
+  Manufacturing: Aluminum flexure manufacturable from lunar Al. Strain gauges
+  likely import (require precise resistance control). Electronics import.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.5.3.

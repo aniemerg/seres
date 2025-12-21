@@ -1,0 +1,20 @@
+id: recipe_washer_flat_medium_steel_v0
+target_item_id: washer_flat_medium_steel
+variant_id: v0
+
+steps:
+  - process_id: metal_stamping_process_v0
+    est_time_hr: 0.02
+    machine_hours: 0.02
+    notes: "Punch washers from steel sheet using progressive die. Outer diameter, inner hole, and edge chamfer in single or multi-stage operation."
+
+assumptions: |
+  Generic flat washer production for M6-M12 sizes. Process covers 2x size range.
+  Starting material: steel sheet 1-3mm thick (material_class: steel).
+  Progressive die stamping enables high-volume production with minimal scrap.
+  Scrap skeleton can be recycled for next batch.
+
+notes: |
+  Simple stamping operation for flat washers. Progressive or compound dies can produce
+  finished washers at high rates (hundreds per minute). Sheet thickness selected based on
+  washer size: M6-M8 uses ~1.5mm, M10-M12 uses ~2.5mm sheet.

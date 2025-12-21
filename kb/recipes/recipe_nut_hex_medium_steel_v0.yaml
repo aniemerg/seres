@@ -1,0 +1,25 @@
+id: recipe_nut_hex_medium_steel_v0
+target_item_id: nut_hex_medium_steel
+variant_id: v0
+
+steps:
+  - process_id: metal_forging_process_v0
+    est_time_hr: 0.03
+    machine_hours: 0.03
+    notes: "Cold heading to form hexagonal blank from steel rod. Single or double strike operation."
+
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 0.08
+    machine_hours: 0.08
+    notes: "Drill pilot hole and tap internal threads. Chamfer edges for easy thread engagement."
+
+assumptions: |
+  Generic hex nut production for M6-M12 sizes. Process covers 2x size range.
+  Starting material: steel rod or bar stock (material_class: steel).
+  Cold heading preferred for material efficiency and production speed.
+  Thread tapping standard for internal threads (thread rolling possible with specialized tooling).
+
+notes: |
+  Standard hex nut manufacturing. Cold heading creates hexagonal shape efficiently.
+  Tapping creates precise internal threads. For high-volume production, multi-station
+  nut formers can combine heading and tapping in continuous operation.

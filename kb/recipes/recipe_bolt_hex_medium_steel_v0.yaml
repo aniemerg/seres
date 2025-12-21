@@ -1,0 +1,25 @@
+id: recipe_bolt_hex_medium_steel_v0
+target_item_id: bolt_hex_medium_steel
+variant_id: v0
+
+steps:
+  - process_id: metal_forging_process_v0
+    est_time_hr: 0.05
+    machine_hours: 0.05
+    notes: "Hot or cold forge hex head from steel rod/wire stock. Forms head geometry in one or few blows."
+
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 0.1
+    machine_hours: 0.1
+    notes: "Cut threads via thread rolling or turning. Finish shank length and chamfers. Thread rolling preferred for strength."
+
+assumptions: |
+  Generic bolt production for M6-M12 sizes. Process covers 2x size range.
+  Starting material: steel rod or wire stock (material_class: steel).
+  Thread rolling preferred over cutting for superior fatigue strength and surface finish.
+  Batch production typical: 50-100 bolts per setup for economy.
+
+notes: |
+  Standard hex bolt manufacturing using forging + machining. Forging creates net-shape or
+  near-net-shape head, machining creates precise threads and final dimensions. For high-volume
+  production, dedicated cold heading and thread rolling machines would be more efficient.

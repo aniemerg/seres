@@ -1,5 +1,58 @@
 id: recipe_chemical_reactor_heated_body_v0
-kind: recipe
 target_item_id: chemical_reactor_heated_body
+variant_id: v0
+
+inputs:
+  - item_id: steel_plate_medium
+    qty: 0.5
+    unit: kg
+    notes: For reactor body shell sections
+  - item_id: heating_coil_resistance
+    qty: 0.2
+    unit: kg
+    notes: Resistance heating elements
+  - item_id: regolith_insulation_bulk
+    qty: 0.15
+    unit: kg
+    notes: Thermal insulation material
+  - item_id: fastener_kit_small
+    qty: 0.05
+    unit: kg
+    notes: Mounting hardware and fittings
+  - item_id: steel_tube_small
+    qty: 0.1
+    unit: kg
+    notes: Ports and fittings
+
+outputs:
+  - item_id: chemical_reactor_heated_body
+    qty: 1.0
+    unit: kg
+
 steps:
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 3.0
+    notes: Form reactor body shell sections from metal plate stock
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 5.0
+    machine_hours: 5.0
+    labor_hours: 5.0
+    notes: Weld shell sections together, install heating element mounts and ports
+  - process_id: pressure_test_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 1.0
+    notes: Pressure test welded vessel for leaks and structural integrity
+  - process_id: regolith_based_thermal_insulation_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Install thermal insulation layer around heated sections
   - process_id: assembly_basic_v0
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: Final assembly with heating elements, sensors, and protective jacket
+assumptions: "1.0 kg heated reactor body for chemical processing applications. Includes formed metal shell, welded construction, pressure testing, thermal insulation, and final assembly with heating elements."
+notes: "Five-step recipe for chemical reactor heated body fabrication. Includes metal forming, welding, pressure testing, insulation installation, and final assembly."

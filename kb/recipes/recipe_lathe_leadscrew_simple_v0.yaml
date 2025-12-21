@@ -1,0 +1,27 @@
+id: recipe_lathe_leadscrew_simple_v0
+kind: recipe
+target_item_id: lathe_leadscrew_simple
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    est_time_hr: 2.0
+    machine_hours: 1.5
+    labor_hours: 1.0
+    notes: "Turn steel bar stock to diameter, face ends, center drill both ends. Rough turn bearing journals to near-final diameter."
+  - process_id: lead_screw_fabrication_v0
+    est_time_hr: 4.0
+    machine_hours: 3.5
+    labor_hours: 2.0
+    notes: "Cut ACME trapezoidal thread using single-point threading on precision lathe. Multiple passes to achieve proper thread form and fit with carriage nut. Machine keyway for drive gear."
+  - process_id: precision_grinding_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 1.5
+    labor_hours: 1.0
+    notes: "Precision grind bearing journal surfaces to tight tolerances for minimal runout. Grind thread flanks if needed for improved surface finish and wear resistance."
+  - process_id: heat_treatment_hardening_v0
+    est_time_hr: 3.0
+    machine_hours: 2.5
+    labor_hours: 1.0
+    notes: "Heat treat to increase surface hardness and wear resistance. Case harden threads and journals while maintaining core toughness."
+assumptions: Steel bar stock available in appropriate diameter. ACME threading tooling available for lathe operations. Heat treatment capability for hardening.
+notes: Fabrication of precision leadscrew for manual lathe carriage drive. ACME thread provides efficient power transmission with good wear characteristics.

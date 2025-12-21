@@ -2,6 +2,55 @@ id: recipe_reactor_shell_steel_v0
 kind: recipe
 name: Recipe for reactor shell (steel) v0
 target_item_id: reactor_shell_steel_v0
+variant_id: v0
+
+inputs:
+  - item_id: steel_plate_medium
+    qty: 35.0
+    unit: kg
+    notes: Main shell material
+  - item_id: steel_flange_medium
+    qty: 3.0
+    unit: kg
+    notes: Mounting flanges
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+    notes: Assembly hardware
+  - item_id: welding_rod_steel
+    qty: 1.0
+    unit: kg
+    notes: Welding consumables
+
+outputs:
+  - item_id: reactor_shell_steel_v0
+    qty: 40.0
+    unit: kg
+
 steps:
+  - process_id: cutting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Cut steel plate to shell dimensions
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: Form or roll shell sections into cylindrical shape
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    labor_hours: 6.0
+    notes: Weld shell seams and attach flanges
   - process_id: machining_finish_basic_v0
-notes: "Single-step machining finish for reactor_shell_steel_v0; placeholder until BOM refined."
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Machine flange faces and port openings to specifications
+  - process_id: pressure_test_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 1.0
+    notes: Pressure test for leaks and structural integrity
+
+assumptions: "40 kg steel shell for chemical reactor. Formed and welded construction with mounting flanges and pressure-tested."
+notes: "Five-step fabrication process for reactor shell including cutting, forming, welding, finish machining, and pressure testing."

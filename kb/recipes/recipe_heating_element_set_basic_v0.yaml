@@ -1,6 +1,34 @@
 id: recipe_heating_element_set_basic_v0
 target_item_id: heating_element_set_basic
 variant_id: v0
+
+inputs:
+  - item_id: nichrome_wire
+    qty: 20.0
+    unit: kg
+    notes: Resistance wire for heating elements
+  - item_id: ceramic_insulator_tube
+    qty: 35.0
+    unit: kg
+    notes: Ceramic forms and insulators
+  - item_id: steel_support_frame
+    qty: 20.0
+    unit: kg
+    notes: Element mounting frames
+  - item_id: terminal_block_set
+    qty: 3.0
+    unit: kg
+    notes: Electrical terminals
+  - item_id: fastener_kit_small
+    qty: 2.0
+    unit: kg
+    notes: Assembly hardware
+
+outputs:
+  - item_id: heating_element_set_basic
+    qty: 80.0
+    unit: kg
+
 steps:
   - process_id: wire_drawing_basic_v0
     est_time_hr: 2.0

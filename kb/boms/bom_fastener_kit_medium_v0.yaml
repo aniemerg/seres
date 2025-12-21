@@ -1,0 +1,36 @@
+id: bom_fastener_kit_medium_v0
+target_item_id: fastener_kit_medium
+variant_id: v0
+
+components:
+  - item_id: bolt_hex_medium_steel
+    qty: 0.720
+    unit: kg
+    notes: "Hex bolts M6-M12 in various lengths (20-60mm). ~76 pieces total covering M6x20, M8x25, M8x40, M10x30, M10x50, M12x40, M12x60."
+
+  - item_id: nut_hex_medium_steel
+    qty: 0.180
+    unit: kg
+    notes: "Hex nuts M6-M12. ~135 pieces total distributed across sizes."
+
+  - item_id: washer_flat_medium_steel
+    qty: 0.075
+    unit: kg
+    notes: "Flat washers M6-M12. ~135 pieces total for load distribution."
+
+  - item_id: washer_lock_medium_steel
+    qty: 0.030
+    unit: kg
+    notes: "Lock washers (split ring) M6-M12. ~60 pieces total for vibration resistance."
+
+assumptions: |
+  Components based on detailed fastener specification in design/memos/fastener_kit_specification.md.
+  Total mass breakdown: hex bolts 720g (72%), nuts 180g (18%), flat washers 75g (7.5%),
+  lock washers 30g (3%), with ~5g margin.
+
+notes: |
+  Mixed kit of metric fasteners for general machinery, structural assemblies, and equipment frames.
+  Size range M6-M12 per ISO metric thread standard. Approximately 366 total pieces.
+  Generic component IDs follow ~5x equivalence principle (M6-M12 is 2x span).
+  Detailed size breakdown documented in fastener_kit_specification.md.
+  Most commonly used kit across the KB (107 BOMs reference this item).

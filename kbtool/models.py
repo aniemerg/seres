@@ -104,6 +104,7 @@ class Item(_BaseModel):
     mass: Optional[float] = None
     unit: Optional[str] = None
     bom: Optional[str] = None
+    recipe: Optional[str] = None  # reference to recipe for producing this item
     material_class: Optional[str] = None
     density: Optional[float] = None
     alternatives: List[str] = Field(default_factory=list)

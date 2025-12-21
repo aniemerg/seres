@@ -6,6 +6,54 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: power_electronics_module
 variant_id: v1
+
+inputs:
+  - item_id: pcb_power_control
+    qty: 2.0
+    unit: kg
+    notes: Power control PCB with microcontroller and gate drivers
+  - item_id: power_mosfet_set
+    qty: 3.0
+    unit: kg
+    notes: Power semiconductor devices
+  - item_id: inductor_power_large
+    qty: 5.0
+    unit: kg
+    notes: Power inductors and transformers
+  - item_id: capacitor_electrolytic_large
+    qty: 2.0
+    unit: kg
+    notes: Filter and bulk capacitors
+  - item_id: heat_sink_aluminum
+    qty: 4.0
+    unit: kg
+    notes: Heat dissipation components
+  - item_id: enclosure_aluminum_electronics
+    qty: 2.5
+    unit: kg
+    notes: Electronics enclosure
+  - item_id: fan_cooling_small
+    qty: 0.5
+    unit: kg
+    notes: Cooling fan
+  - item_id: wire_power_cable
+    qty: 0.8
+    unit: kg
+    notes: Power wiring and connections
+  - item_id: thermal_paste
+    qty: 0.1
+    unit: kg
+    notes: Thermal interface material
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+    notes: Assembly hardware
+
+outputs:
+  - item_id: power_electronics_module
+    qty: 20.0
+    unit: kg
+
 steps:
   - process_id: pcb_assembly_basic_v0
     est_time_hr: 3.0

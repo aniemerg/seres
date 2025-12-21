@@ -1,0 +1,32 @@
+id: quick_change_tool_interface
+kind: part
+name: Quick-change tool interface
+mass: 2.0
+unit: kg
+material_class: steel
+notes: |
+  Mechanical coupling for rapid tool exchange on robot wrist.
+
+  Allows robot to automatically swap between gripper, vacuum cup, screwdriver,
+  welding torch, or other end effectors without human intervention.
+
+  Specifications:
+  - Standard: ISO 9409-1-50-4-M6 mounting pattern (or proprietary)
+  - Coupling method: Pneumatic lock/unlock or manual latch
+  - Electrical: 8-pin connector for power + signals (automatic mating)
+  - Payload: 20 kg maximum
+  - Repeatability: ±0.05 mm (critical for tool calibration)
+
+  Components:
+  - Master half (on robot wrist): locking mechanism, electrical connector
+  - Tool half (on each end effector): mating surface, connector pins
+  - Pneumatic valve or manual lever for lock/unlock
+  - Tool detection sensor (reed switch or optical)
+
+  Operation: Robot positions tool over coupling, pushes down to engage,
+  pneumatic valve activates lock. Electrical connector mates automatically.
+
+  Manufacturing: Steel precision machining for mating surfaces. Pneumatic
+  valve import. Electrical connector import. Locking mechanism manufacturable.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.6.3.

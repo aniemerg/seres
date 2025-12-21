@@ -1,0 +1,59 @@
+id: recipe_thermal_management_system_v0
+kind: recipe
+target_item_id: thermal_management_system
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 1.2
+    unit: kg
+  - item_id: aluminum_alloy_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: deionized_water
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: thermal_management_system
+    qty: 1
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.2
+    unit: kg
+steps:
+  - process_id: tube_bending_and_cutting_v0
+    note: "Form copper tubes into heat pipes (6× 1m length, 10mm diameter)"
+  - process_id: welding_and_fabrication_v0
+    note: "Weld/braze copper tube ends, evacuate, charge with working fluid, seal"
+  - process_id: sheet_metal_forming_v0
+    note: "Form aluminum sheet into radiator fins (0.3 m² total area)"
+  - process_id: welding_and_fabrication_v0
+    note: "Braze or bolt radiator fins to heat pipe manifold"
+  - process_id: alignment_and_testing_basic_v0
+    note: "Test heat pipe operation, check for leaks, verify thermal conductivity"
+notes: |
+  Manufactures passive thermal management system for robot motors.
+
+  Design: 6 copper heat pipes transfer heat from motors to aluminum radiator.
+  Radiator: 0.3 m² surface area, fin spacing 10mm.
+
+  Heat pipe operation:
+  - Copper tube evacuated and charged with water (or ammonia)
+  - Heat evaporates fluid at motor end
+  - Vapor flows to radiator, condenses, releases heat
+  - Liquid returns via capillary action
+
+  Process:
+  1. Bend copper tubes (from lunar copper, trace in regolith)
+  2. Fabricate heat pipes: weld ends, evacuate, charge with working fluid, seal
+  3. Form aluminum radiator fins from sheet
+  4. Attach fins to heat pipe manifold (brazing or mechanical)
+  5. Test operation
+
+  Inputs:
+  - 1.2 kg copper for 6 heat pipes
+  - 1.0 kg aluminum for radiator fins
+  - 0.05 kg deionized water as working fluid
+
+  Heat dissipation capacity: 500W continuous.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.7.5.

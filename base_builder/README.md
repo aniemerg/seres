@@ -15,6 +15,53 @@ The Base Builder simulation validates KB completeness and generates mission plan
 
 ## Quick Start
 
+### Recommended: CLI Commands (For Manual Control)
+
+**⭐ Use this approach when:**
+- Working with Claude Code or other assistants
+- Running simulations manually
+- Creating shell scripts
+- Debugging production sequences
+
+```bash
+# Complete guide
+cat docs/CLI_COMMANDS_GUIDE.md
+
+# Quick reference
+cat CLI_QUICK_REFERENCE.md
+
+# Example workflow
+SIM="my_base"
+
+# View state
+python -m base_builder.cli_commands view-state --sim-id $SIM
+
+# Import bootstrap
+python -m base_builder.cli_commands import --sim-id $SIM --item labor_bot_general_v0 --quantity 1 --unit unit
+
+# Start process
+python -m base_builder.cli_commands start-process --sim-id $SIM --process regolith_mining_highlands_v0 --duration 8
+
+# Preview & execute
+python -m base_builder.cli_commands preview --sim-id $SIM --hours 8
+python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 8
+```
+
+**Why CLI commands are better:**
+- ✅ No state management - loads/saves automatically
+- ✅ Simple - one command = one action
+- ✅ Reliable - no Python session issues
+- ✅ Scriptable - works great with bash
+
+---
+
+### Alternative: Autonomous Agent Mode
+
+**Use this for:**
+- Fully autonomous exploration
+- Long-running automated builds
+- Multi-hour unattended operation
+
 ### 1. Run Component Tests
 
 ```bash
