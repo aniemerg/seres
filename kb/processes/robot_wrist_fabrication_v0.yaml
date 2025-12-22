@@ -1,0 +1,36 @@
+id: robot_wrist_fabrication_v0
+kind: process
+name: Robot wrist 3-axis fabrication v0
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 5.5
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: robot_wrist_3axis
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 1.5
+    unit: kg
+requires_ids:
+  - milling_machine_general_v0
+  - lathe_engine_v0
+  - drill_press_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 10.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 45.0
+  notes: "Precision machining for 3-axis wrist assembly"
+time_model:
+  type: fixed_time
+  hr_per_batch: 15.0
+notes: "Machine 3-axis wrist housing (5 kg) from ISRU aluminum with steel shafts. Complex precision part."

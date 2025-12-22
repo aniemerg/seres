@@ -34,6 +34,7 @@ class SimulationState(BaseModel):
     active_processes: List[ActiveProcess] = Field(default_factory=list)
     machines_built: List[str] = Field(default_factory=list)
     total_imports: Dict[str, InventoryItem] = Field(default_factory=dict)
+    total_energy_kwh: float = 0.0  # Cumulative energy consumed
 
 
 # ============================================================================
@@ -73,6 +74,7 @@ class ProcessCompleteEvent(Event):
     type: Literal["process_complete"] = "process_complete"
     process_id: str
     outputs: Dict[str, InventoryItem]
+    energy_kwh: Optional[float] = None  # Energy consumed by this process
 
 
 class RecipeStartEvent(Event):
@@ -89,6 +91,7 @@ class RecipeCompleteEvent(Event):
     recipe_id: str
     quantity: int
     outputs: Dict[str, InventoryItem]
+    energy_kwh: Optional[float] = None  # Energy consumed by this recipe
 
 
 class BuildEvent(Event):
@@ -122,6 +125,7 @@ class StateSnapshotEvent(Event):
     inventory: Dict[str, InventoryItem]
     active_processes: List[ActiveProcess]
     machines_built: List[str]
+    total_energy_kwh: Optional[float] = None  # Cumulative energy at snapshot time
 
 
 class ErrorEvent(Event):

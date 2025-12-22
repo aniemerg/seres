@@ -51,6 +51,7 @@ def cmd_view_state(args):
 
     print(f"=== Simulation: {args.sim_id} ===")
     print(f"Time: {state['current_time_hours']:.1f} hours ({state['current_time_hours']/24:.1f} days)")
+    print(f"Energy Consumed: {state.get('total_energy_kwh', 0.0):.2f} kWh")
     print(f"\nInventory ({len(state['inventory'])} items):")
     for item_id, inv in sorted(state['inventory'].items()):
         print(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")

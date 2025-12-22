@@ -36,6 +36,7 @@ from base_builder.models import (
 )
 from base_builder.kb_loader import KBLoader
 from base_builder.unit_converter import UnitConverter
+from base_builder.energy import EnergyCalculator
 
 
 class SimulationEngine:
@@ -49,6 +50,7 @@ class SimulationEngine:
         self.sim_id = sim_id
         self.kb = kb_loader
         self.converter = UnitConverter(kb_loader)
+        self.energy_calc = EnergyCalculator()
 
         # Simulation state
         self.state = SimulationState(sim_id=sim_id)
@@ -304,6 +306,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                total_energy_kwh=self.state.total_energy_kwh,
             )
         )
 
@@ -549,6 +552,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                total_energy_kwh=self.state.total_energy_kwh,
             )
         )
 
@@ -699,6 +703,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                total_energy_kwh=self.state.total_energy_kwh,
             )
         )
 
@@ -791,11 +796,32 @@ class SimulationEngine:
                 for item_id, inv_item in proc.outputs_pending.items():
                     self.add_to_inventory(item_id, inv_item.quantity, inv_item.unit)
 
-                # Log completion
+                # Calculate energy consumption
+                process_id = proc.process_id
+                # Handle recipe processes
+                if process_id.startswith("recipe:"):
+                    recipe_id = process_id[7:]  # Remove "recipe:" prefix
+                    process_def = self.kb.get_recipe(recipe_id)
+                else:
+                    process_def = self.kb.get_process(process_id)
+
+                energy_kwh = 0.0
+                if process_def:
+                    energy_kwh = self.energy_calc.calculate_process_energy(
+                        process_def,
+                        scale=proc.scale,
+                        inputs_consumed=proc.inputs_consumed,
+                        outputs_produced=proc.outputs_pending
+                    )
+                    # Accumulate to state
+                    self.state.total_energy_kwh += energy_kwh
+
+                # Log completion with energy
                 self._log_event(
                     ProcessCompleteEvent(
                         process_id=proc.process_id,
                         outputs=proc.outputs_pending,
+                        energy_kwh=energy_kwh,
                     )
                 )
 
@@ -824,6 +850,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                total_energy_kwh=self.state.total_energy_kwh,
             )
         )
 
@@ -902,6 +929,7 @@ class SimulationEngine:
                             for p in event.get("active_processes", [])
                         ]
                         self.state.machines_built = event.get("machines_built", [])
+                        self.state.total_energy_kwh = event.get("total_energy_kwh", 0.0)
 
                     # Track imports
                     elif event_type == "import":

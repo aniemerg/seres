@@ -23,6 +23,7 @@ def view_state() -> Dict[str, Any]:
     Returns:
         {
             "current_time_hours": float,
+            "total_energy_kwh": float (cumulative energy consumed),
             "inventory": {item_id: "quantity unit", ...},
             "active_processes": [{process_id, ends_at, ...}, ...],
             "machines_built": [machine_id, ...],
@@ -61,6 +62,7 @@ def view_state() -> Dict[str, Any]:
 
     return {
         "current_time_hours": state["current_time_hours"],
+        "total_energy_kwh": state.get("total_energy_kwh", 0.0),
         "inventory": inventory_summary,
         "inventory_item_count": len(inventory_summary),
         "active_processes": active_procs,

@@ -1,0 +1,32 @@
+id: machine_frame_small_casting_v0
+kind: process
+name: Machine frame small casting v0
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: iron_metal_pure
+    qty: 11.0
+    unit: kg
+outputs:
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - forge_or_induction_heater_v0
+  - casting_mold_set
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 25.0
+  notes: "Melting and casting energy for 10kg iron frame"
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+notes: "Cast small machine frame (10 kg) from ISRU iron. Used for robot base structure."

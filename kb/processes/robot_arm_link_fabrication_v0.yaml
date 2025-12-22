@@ -1,0 +1,32 @@
+id: robot_arm_link_fabrication_v0
+kind: process
+name: Robot arm link fabrication v0
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 8.5
+    unit: kg
+outputs:
+  - item_id: robot_arm_link_aluminum
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: aluminum_shavings_v0
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - milling_machine_general_v0
+  - lathe_engine_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 8.0
+    unit: hr
+energy_model:
+  type: kWh_per_unit
+  value: 35.0
+  notes: "Machining energy for aluminum box beam arm link"
+time_model:
+  type: fixed_time
+  hr_per_batch: 12.0
+notes: "Machine robot arm link (7.5 kg) from ISRU aluminum. Box beam structure with motor mounting features."
