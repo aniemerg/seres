@@ -1,0 +1,97 @@
+id: helium3_cryogenic_separation_v0
+kind: process
+name: Helium-3 cryogenic separation from volatiles
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: helium_mixed_isotopes
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: helium_3_gas
+    qty: 0.000014
+    unit: kg
+  - item_id: helium_4_gas
+    qty: 0.999986
+    unit: kg
+requires_ids:
+  - cryogenic_distillation_column_v0
+  - extreme_cryogenic_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 8.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 50.0
+  notes: Extreme cryogenic separation at <4.2K requires significant refrigeration
+time_model:
+  type: fixed_time
+  hr_per_batch: 24.0
+  notes: Very slow cryogenic fractionation at near absolute zero
+notes: |
+  Cryogenic separation of helium-3 from helium-4 for potential fusion fuel.
+  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt
+  Process: Extreme cryogenic fractional distillation
+  Temperature: <4.2 K (near absolute zero, -269°C)
+  3He concentration: 4-30 ppb in regolith (parts per billion)
+  Purpose: Separate valuable 3He isotope for future nuclear fusion
+  3He extraction released with other volatiles (thermal processing)
+  Process details:
+    1. Mixed He isotopes from regolith volatile extraction
+    2. Cool to <4.2 K (He boiling point for 4He)
+    3. Fractional distillation exploits boiling point difference:
+       - 3He boiling point: 3.19 K
+       - 4He boiling point: 4.22 K
+       - ΔT = 1.03 K difference
+    4. Multiple distillation stages for separation
+    5. Collect 3He fraction (earlier to boil/condense)
+    6. 4He remains as bulk fraction
+    7. Store 3He in extreme cryogenic vessels (<4 K)
+  Products:
+    - 3He (helium-3): Potential nuclear fusion fuel
+    - 4He (helium-4): Inert gas, leak detection, cryogenic applications
+  3He concentration in regolith:
+    - Average: 4 ppb (parts per billion)
+    - High-Ti mare: Up to 10-30 ppb (mature regolith)
+    - Mare Tranquillitatis, Oceanus Procellarum highest
+    - Total lunar inventory: ~2 × 10⁸ kg (200 million kg)
+  Collection requirements:
+    - 40 m² at 1m depth → 1g 3He (plus 8.2 kg carbon)
+    - 40 km² at 1m depth → 1 metric tonne 3He
+    - Massive scale required for significant quantities
+  3He nuclear fusion:
+    - Reaction: D + 3He → 4He + p + 18.4 MeV (deuterium-helium-3)
+    - Advantages: Aneutronic (no neutron radiation)
+    - Less radioactive waste than D-T fusion
+    - Disadvantages: Higher ignition temperature than D-T
+    - D-T fusion not yet commercial, D-3He even further away
+  Stoichiometry: 1 kg mixed He → 14 μg 3He, 999.986 mg 4He (at 14 ppb)
+  At mature high-Ti mare (30 ppb): ~30 μg 3He per kg He
+  4He applications:
+    - Inert atmosphere for welding, crystal growth
+    - Leak detection (small molecule, easily detected)
+    - Cryogenic applications (superfluid helium)
+    - Balloon/airship gas (Earth applications)
+  Advantages: 3He extremely valuable for future fusion
+    Released automatically with volatile extraction
+    Separation technology well-established (terrestrial)
+    4He by-product also useful
+  Disadvantages: Extremely low concentration (ppb level)
+    Requires cryogenic storage at <4 K (challenging)
+    Nuclear fusion still not commercially viable
+    D-3He fusion even more difficult than D-T
+    Massive processing required for useful quantities
+  Lunar context: 3He touted as "lunar resource" for future
+    But fusion technology very far from reality
+    Should 3He be husbanded for future generations?
+    Or consumed/lost during volatile processing?
+    Ethical question: Waste vs. extreme cryogenic storage
+  Storage requirements: <4 K cryogenic for indefinite storage
+    - Extreme energy cost for refrigeration
+    - Boil-off losses without perfect insulation
+    - May not be practical for long-term lunar storage
+  Recommendation (per source papers): Capture and store if feasible
+    But don't let 3He recovery block volatile extraction
+    Volatiles (C, N, H) more immediately critical
+    3He as bonus/future resource, not primary driver

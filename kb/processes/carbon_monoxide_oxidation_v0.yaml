@@ -1,0 +1,73 @@
+id: carbon_monoxide_oxidation_v0
+kind: process
+name: Carbon monoxide oxidation to CO2
+layer_tags:
+  - layer_3
+inputs:
+  - item_id: carbon_monoxide
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.571
+    unit: kg
+outputs:
+  - item_id: carbon_dioxide_gas
+    qty: 1.57
+    unit: kg
+requires_ids:
+  - catalytic_oxidizer_v0
+  - spinel_catalyst_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: Exothermic catalytic oxidation, low temperature with catalyst
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: Fast catalytic oxidation
+notes: |
+  Catalytic oxidation of carbon monoxide to carbon dioxide.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: CO + ½O2 → CO2 (highly exothermic)
+  Temperature: 30-350°C with spinel catalyst (low temperature operation)
+  Catalyst: Spinel-type catalysts (CoFe2O4, NiFe2O4, etc.)
+  Process: Catalytic oxidation for CO conversion
+  Purpose: Preprocessing before Sabatier reaction
+  Convert CO to CO2 for downstream processing
+  Safety: Remove toxic CO from process streams
+  Thermodynamics:
+    - Highly exothermic (ΔH = -283 kJ/mol)
+    - Spontaneous at all temperatures
+    - Catalyst enables low-temperature operation
+  Products:
+    - CO2 (carbon dioxide): Feedstock for Sabatier, Bosch, or life support
+  Stoichiometry: CO (28g) + 0.5 O2 (16g) → CO2 (44g)
+  Mass fractions: 157% CO2 from CO input
+  Process integration:
+    - CO from FFC anode, Boudouard, or carbothermal processes
+    - CO2 to Sabatier (→ CH4) or Bosch (→ C) reactions
+    - Closes carbon recycling loops
+  Catalyst options:
+    - Cobalt ferrite (CoFe2O4): From Co/Fe meteorite processing
+    - Nickel ferrite (NiFe2O4): From Ni/Fe purification
+    - Spinel minerals: Synthesizable from lunar resources
+  Advantages: Very low temperature with catalyst (30-350°C)
+  Fast reaction kinetics
+  Highly exothermic (provides heat)
+  Simple single-step process
+  Disadvantages: Requires oxygen input
+  Catalyst needed for low temperature
+  Applications:
+    - Preprocessing for Sabatier methanation
+    - CO removal from process gas streams
+    - CO2 generation for chemical synthesis
+    - Safety scrubbing of CO (toxic)
+  Lunar ISRU: Enables flexible carbon cycle management
+  Converts CO ↔ CO2 as needed for different processes
+  Spinel catalysts manufacturable in-situ from Fe/Co/Ni
+  Alternative to direct CO use (e.g., carbonyl processes)
+  Terrestrial use: Automotive catalytic converters, industrial emissions

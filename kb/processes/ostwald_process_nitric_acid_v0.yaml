@@ -1,0 +1,78 @@
+id: ostwald_process_nitric_acid_v0
+kind: process
+name: Ostwald process for nitric acid production
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: ammonia_gas
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 2.35
+    unit: kg
+outputs:
+  - item_id: nitric_acid_concentrated
+    qty: 3.71
+    unit: kg
+  - item_id: water
+    qty: 0.32
+    unit: kg
+requires_ids:
+  - catalytic_oxidizer_v0
+  - absorption_tower_v0
+  - tungsten_carbide_nickel_catalyst_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: Moderate temperature catalytic oxidation 600-800°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: Multi-stage oxidation and absorption
+notes: |
+  Ostwald process for producing nitric acid from ammonia via catalytic oxidation.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
+  Stage 1 - Ammonia oxidation: 4NH3 + 5O2 → 4NO + 6H2O
+  Stage 2 - NO oxidation: 2NO + O2 → 2NO2
+  Stage 3 - Absorption: 3NO2 + H2O → 2HNO3 + NO (NO recycled)
+  Overall: NH3 + 2O2 → HNO3 + H2O
+  Temperature: 600-800°C for stage 1 (catalytic oxidation)
+  Pressure: 400-1000 kPa (4-10 bar)
+  Catalyst: Platinum on nickel (terrestrial) or tungsten carbide on nickel (lunar)
+  Process sequence:
+    1. Ammonia vaporized and mixed with air/oxygen
+    2. Catalytic oxidation to nitric oxide (NO) and water vapor
+    3. Further oxidation of NO to nitrogen dioxide (NO2)
+    4. Absorption of NO2 in water to form HNO3
+    5. Unreacted NO recycled back to oxidation stage
+  Catalyst considerations:
+    - Terrestrial: Platinum gauze (expensive, not available on Moon)
+    - Lunar alternative: Tungsten carbide on nickel support
+    - Nickel from Mond process (meteorite sources)
+    - Tungsten from density-separated meteorite inclusions
+  Products:
+    - HNO3 (nitric acid): Critical reagent for HCl production from NaCl
+    - H2O (water): Process water, recyclable
+  Nitric acid applications:
+    - React with NaCl to generate HCl gas: NaCl + HNO3 → HCl + NaNO3
+    - Chemical synthesis, oxidizer, etching agent
+    - Propellant oxidizer (when mixed with fuel)
+  Stoichiometry: NH3 (17g) + 2O2 (64g) → HNO3 (63g) + H2O (18g)
+  Mass fractions: 371% HNO3 from ammonia input
+  Nitrogen source: Haber-Bosch synthesis from volatile N2 extraction
+  Oxygen source: Water electrolysis or mineral reduction (abundant)
+  Advantages: Well-established industrial process
+  Enables HCl production from imported NaCl
+  HCl critical for artificial weathering and recycling loops
+  Disadvantages: Requires scarce nitrogen (from volatiles)
+  Pt catalyst unavailable (must use WC/Ni alternative)
+  Multi-stage process with gas handling
+  Lunar context: Nitrogen is severely scarce (~80 ppm in regolith volatiles)
+  Must be carefully husbanded and recycled
+  HNO3 → HCl → recycled as NaCl regeneration loop
+  Essential for unlocking chlorine chemistry with NaCl import

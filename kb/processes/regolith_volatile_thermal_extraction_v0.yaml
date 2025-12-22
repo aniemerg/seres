@@ -1,0 +1,96 @@
+id: regolith_volatile_thermal_extraction_v0
+kind: process
+name: Thermal extraction of volatiles from regolith
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: lunar_regolith_highlands
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: hydrogen_gas
+    qty: 0.000046
+    unit: kg
+  - item_id: helium_4_gas
+    qty: 0.000014
+    unit: kg
+  - item_id: carbon_mixed_gases
+    qty: 0.000124
+    unit: kg
+  - item_id: nitrogen_gas
+    qty: 0.000081
+    unit: kg
+  - item_id: processed_regolith
+    qty: 0.999
+    unit: kg
+requires_ids:
+  - regolith_heating_furnace_v0
+  - fractional_distillation_column_v0
+  - cryogenic_separation_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: Heating to 700-1200°C to release solar-wind implanted volatiles
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Heating, evolution, and cryogenic separation
+notes: |
+  Thermal extraction and fractional distillation of solar-wind volatiles from lunar regolith.
+  Source: Sustainable-ISRU-on-the-Moon.txt, I-SAIRAS-2020
+  Process: Heat regolith to evolve implanted volatiles, then fractionally distill
+  Temperature: 700-1200°C (higher for complete volatile release)
+  Purpose: Extract H, He, C, N volatiles from regolith
+  Critical source of scarce light elements
+  Process details:
+    1. Excavate regolith from upper 2-3m (gardened by impacts)
+    2. Heat in furnace to 700°C (most volatiles) or 1200°C (complete)
+    3. Evolved gases collected: H2, He, CO, CO2, CH4, N2, H2O
+    4. Fractional distillation by condensation temperature:
+       - He: 4.2 K (condenses first at lowest temp)
+       - H2: 20 K
+       - N2: 77 K
+       - CO: 81 K
+       - CH4: 109 K
+       - CO2: 194 K
+       - H2O: 373 K (condenses last)
+  Products (average concentrations from highlands regolith):
+    - H: 46 ppm (mostly as H2, some in H2O, CH4)
+    - 4He: 14 ppm (noble gas)
+    - C: 124 ppm (CO, CO2, CH4 mixture - most abundant volatile!)
+    - N: 81 ppm (mostly N2)
+    - Also: F, Cl, S in trace amounts
+  Solar-wind implantation:
+    - Volatiles implanted in mineral grains over millions of years
+    - Concentration approximately constant to 2-3m depth (gardening)
+    - Ilmenite-rich regolith has highest volatile retention
+    - Mature regolith (long surface exposure) richest
+  Volatile yields (typical):
+    - H2O equivalent: ~900 J/kg/°C heating energy
+    - Total volatiles: <300 ppm by mass (0.03%)
+    - Carbon most abundant volatile (after H)
+  Stoichiometry: 1000 kg regolith → ~0.26 kg total volatiles
+  Critical elements:
+    - H: Water, hydrogen reduction, life support
+    - He: Inert atmosphere, leak detection, (3He fusion fuel)
+    - C: Plastics, reducing agent, FFC anodes, life support
+    - N: Fertilizer, Haber-Bosch, life support, propellant oxidizer
+  Advantages: Only source of light volatiles (H, He, C, N) on Moon
+  Simple thermal process
+  Regolith abundant everywhere
+  No chemical reagents needed
+  Disadvantages: Very low concentrations (<300 ppm)
+  Large mass throughput required
+  Energy intensive for low yield
+  Cryogenic separation complexity
+  Lunar context: Absolutely critical for long-term sustainability
+  No other source of C, N, He on Moon
+  Hydrogen supplemented by polar water ice
+  Must carefully husband these scarce resources
+  Ilmenite beneficiation increases volatile concentration
+  3He valuable for future fusion (4-30 ppb, extract with other volatiles)

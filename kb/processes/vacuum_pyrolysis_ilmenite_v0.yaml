@@ -1,0 +1,50 @@
+id: vacuum_pyrolysis_ilmenite_v0
+kind: process
+name: Vacuum pyrolysis of ilmenite
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_metal_pure
+    qty: 0.368
+    unit: kg
+  - item_id: titanium_dioxide_rutile
+    qty: 0.526
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.106
+    unit: kg
+requires_ids:
+  - solar_concentrator_high_temp_v0
+  - vacuum_furnace_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 15.0
+  notes: Very high temperature solar thermal or resistive heating to 2000-2600°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: High temperature decomposition and vapor condensation
+notes: |
+  Vacuum pyrolysis (thermal decomposition) of ilmenite at very high temperature.
+  Source: FFC-process-for-deep-ISRU.txt, Heat-Pipe-Solar-Receiver-O2-2009.txt
+  Reaction: FeTiO3 → Fe + TiO2 + ½O2
+  Temperature: 2000-2600°C (extreme solar concentration or nuclear heat)
+  Process: Thermal decomposition without chemical reagents
+  Vacuum required: Prevents re-oxidation of products
+  Products separate by condensation temperature differences
+  Advantages: No chemical reagents needed, direct oxygen production
+  Disadvantages: Extremely high temperature requirement, energy intensive
+  Solar concentrator can achieve required temperatures on lunar surface
+  Alternative energy source: Nuclear thermal reactor
+  Yields: Iron metal, rutile (TiO2), and gaseous oxygen
+  Stoichiometry: FeTiO3 (151.7 g/mol) → Fe (55.8g) + TiO2 (79.9g) + 0.5 O2 (16g)
+  Mass fractions: 36.8% Fe, 52.6% TiO2, 10.6% O2

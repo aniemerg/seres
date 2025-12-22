@@ -1,0 +1,92 @@
+id: solvay_process_sodium_carbonate_v0
+kind: process
+name: Solvay process for sodium carbonate production
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: sodium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_carbonate
+    qty: 0.856
+    unit: kg
+  - item_id: ammonia_gas
+    qty: 0.291
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.377
+    unit: kg
+outputs:
+  - item_id: sodium_carbonate
+    qty: 0.907
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.949
+    unit: kg
+  - item_id: ammonia_gas
+    qty: 0.285
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.377
+    unit: kg
+requires_ids:
+  - solvay_tower_v0
+  - calcination_kiln_v0
+  - ammonia_recovery_unit_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 6.0
+  notes: Multi-stage process with calcination and ammonia recovery
+time_model:
+  type: fixed_time
+  hr_per_batch: 12.0
+  notes: Complete Solvay cycle including calcination
+notes: |
+  Solvay process for producing sodium carbonate (soda ash) from salt and limestone.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
+  Stage 1 - Ammoniation: NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl
+  Stage 2 - Calcination: 2NaHCO3 → Na2CO3 + H2O + CO2 (heating to 175°C)
+  Stage 3 - Ammonia recovery: 2NH4Cl + CaO → 2NH3 + CaCl2 + H2O
+  Overall reaction: 2NaCl + CaCO3 ⇌ Na2CO3 + CaCl2
+  Temperature: Room temp for stage 1, 175°C for stage 2, elevated for stage 3
+  Process: Multi-stage industrial process for alkali production
+  Process flow:
+    1. Dissolve NaCl in water (brine)
+    2. Bubble NH3 and CO2 through brine
+    3. NaHCO3 (sodium bicarbonate) precipitates, filter
+    4. Heat NaHCO3 to produce Na2CO3 and recycle CO2
+    5. Recover NH3 from NH4Cl using quicklime (CaO)
+    6. Recycle NH3 and CO2 to step 2
+  Products:
+    - Na2CO3 (sodium carbonate/soda ash): Glass, quartz growth, Se extraction
+    - CaCl2 (calcium chloride): FFC Cambridge electrolyte replenishment
+  Sodium carbonate applications (critical):
+    - Quartz crystal synthesis: Na2CO3 + SiO2 ↔ Na2SiO3 + CO2
+    - Selenium extraction: FeSe + Na2CO3 + O2 → Se + FeO + CO2
+    - Glass production: Flux for silica melting
+    - Chemical synthesis: Alkali source
+  Reagent recycling:
+    - NH3: 97-98% recycled (minimal losses)
+    - CO2: 100% recycled in loop
+    - CaO from anorthite: CaAl2Si2O8 + 4C → CaO + ...
+    - Net consumption: Only NaCl and CaCO3 (or CaO)
+  Stoichiometry: 2NaCl (117g) + CaCO3 (100g) → Na2CO3 (106g) + CaCl2 (111g)
+  Mass fractions: 90.7% Na2CO3, 94.9% CaCl2 from NaCl input
+  Advantages: Proven industrial process (150+ years)
+  Complete reagent recycling (NH3, CO2)
+  Produces valuable CaCl2 for FFC
+  Simple chemistry with available lunar materials
+  Disadvantages: Multi-stage complexity
+  Requires NaCl import (scarce on Moon)
+  Calcium carbonate from CaO + CO2 (preprocessing)
+  Lunar context: NaCl is precious imported reagent
+  Solvay enables one NaCl import to produce Na2CO3
+  CaCl2 by-product replenishes FFC electrolyte
+  Closes multiple chemical loops
+  Critical for quartz sensors and selenium photosensors
+  Alternative: Direct reaction 2NaCl + CaCO3 at high temp (less efficient)

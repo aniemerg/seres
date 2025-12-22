@@ -1,0 +1,62 @@
+id: boudouard_reaction_v0
+kind: process
+name: Boudouard reaction (C + CO2 → CO)
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: carbon_solid
+    qty: 0.214
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbon_monoxide
+    qty: 1.27
+    unit: kg
+requires_ids:
+  - high_temp_reactor_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.5
+  notes: Endothermic reaction at 700°C requires heat input
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Gas-solid reaction time at temperature
+notes: |
+  Boudouard reaction for converting carbon dioxide to carbon monoxide using carbon.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: C + CO2 → 2CO (endothermic)
+  Temperature: ~700°C (equilibrium shifts right with increasing temperature)
+  Process: Gas-solid heterogeneous reaction
+  Purpose: Regenerate CO for Mond/carbonyl metal purification processes
+  Convert waste CO2 back to useful CO
+  Close carbon cycle in FFC Cambridge process
+  Thermodynamics:
+    - Endothermic (ΔH = +172 kJ/mol)
+    - Favored at high temperature (Le Chatelier)
+    - Reverse reaction (2CO → C + CO2) favored at low temp
+  Products:
+    - CO (carbon monoxide): Mond process feedstock, reducing agent
+  Stoichiometry: C (12g) + CO2 (44g) → 2CO (56g)
+  Mass fractions: Input 21.4% C, 100% CO2 → Output 127% CO (from combined inputs)
+  Applications:
+    - CO regeneration for Mond/carbonyl processes (Ni, Fe, Co, W purification)
+    - Carbon cycle closure for FFC Cambridge anode consumption
+    - Chemical feedstock production
+  Carbon source: FFC anode consumption, volatile extraction, pyrolysis
+  CO2 source: FFC process, combustion, respiration, fermentation
+  Reverse reaction (Boudouard equilibrium):
+    - At <700°C: 2CO → C + CO2 (disproportionation)
+    - Used to deposit carbon from CO
+  Industrial applications: Blast furnaces, gasification, synthesis gas
+  Lunar context: Essential for carbon recycling in closed-loop ISRU
+  Prevents carbon loss from system
+  Equilibrium depends on temperature - operate above 700°C for forward reaction
+  Can use solar thermal or resistive heating

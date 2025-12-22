@@ -1,0 +1,57 @@
+id: ilmenite_sulfuric_acid_route_v0
+kind: process
+name: Ilmenite sulfuric acid leaching
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+  - item_id: sulfuric_acid_concentrated
+    qty: 1.29
+    unit: kg
+outputs:
+  - item_id: iron_sulfate_solution
+    qty: 1.0
+    unit: kg
+  - item_id: titanyl_sulfate_solution
+    qty: 1.05
+    unit: kg
+  - item_id: water
+    qty: 0.24
+    unit: kg
+requires_ids:
+  - acid_resistant_reactor_v0
+  - heating_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: Moderate heating for acid digestion
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Acid leaching and dissolution time
+notes: |
+  Sulfuric acid leaching of ilmenite to extract iron and titanium as sulfates.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Primary reaction: FeTiO3 + 2H2SO4 → FeSO4 + TiOSO4 + 2H2O
+  Temperature: Elevated (80-150°C for concentrated H2SO4)
+  Process: Acid digestion in corrosion-resistant reactor
+  Products: Iron sulfate (FeSO4) and titanyl sulfate (TiOSO4) in solution
+  Requires downstream processing:
+    1. FeSO4 + H2O → Fe + ½O2 + H2SO4 (electrolysis, acid recycled)
+    2. TiOSO4 + H2O → H2SO4 + TiO2 (hydrolysis, acid recycled)
+  Advantages: Lower temperature than thermal routes, acid fully recycled
+  Disadvantages: Requires corrosive acid handling, multi-step process
+  Acid recycling essential - cannot consume sulfuric acid
+  Sulfur source: Lunar volatiles or troilite (FeS) from meteorites/regolith
+  Net products: Iron metal, titanium dioxide, oxygen gas
+  Stoichiometry: FeTiO3 (151.7g) + 2H2SO4 (196g) → FeSO4 (151.9g) + TiOSO4 (159.9g) + 2H2O (36g)
+  This process file represents only the leaching step
+  See companion processes for FeSO4 electrolysis and TiOSO4 hydrolysis
+  Complex but proven industrial route (used terrestrially)

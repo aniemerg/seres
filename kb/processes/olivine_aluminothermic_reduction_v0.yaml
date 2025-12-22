@@ -1,0 +1,76 @@
+id: olivine_aluminothermic_reduction_v0
+kind: process
+name: Aluminothermic reduction of olivine
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: olivine_forsterite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: aluminum_metal_powder
+    qty: 0.429
+    unit: kg
+outputs:
+  - item_id: magnesium_aluminate_spinel
+    qty: 0.381
+    unit: kg
+  - item_id: magnesium_metal_pure
+    qty: 0.514
+    unit: kg
+  - item_id: silicon_metal_metallurgical
+    qty: 0.397
+    unit: kg
+  - item_id: aluminum_silicon_alloy
+    qty: 0.137
+    unit: kg
+requires_ids:
+  - thermite_reactor_v0
+  - crucible_refractory
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: Exothermic aluminothermic reaction, minimal external heating to 1000°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: Reaction initiation and product separation time
+notes: |
+  Aluminothermic (thermite-like) reduction of olivine to extract magnesium and silicon.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Primary reaction: 3Mg2SiO4 + 6Al → 2MgAl2O4 + 4MgO + 2AlSi + Si
+  Secondary reaction: 4MgO + 2AlSi → MgAl2O4 + 3Mg + 2Si (at 1000°C)
+  Temperature: 1000°C
+  Process: Exothermic thermite-style reduction
+  Olivine varieties: Forsterite (Mg2SiO4) preferred; fayalite (Fe2SiO4) similar
+  Reaction sequence:
+    1. Initial aluminothermic reduction at 1000°C
+    2. Continued reaction reduces remaining MgO
+    3. Molten Mg tapped above 650°C melting point
+    4. Products separate by density and melting point
+  Products:
+    - MgAl2O4 (spinel): Refractory ceramic, further FFC reduction possible
+    - Mg (magnesium metal): Liquid above 650°C, alloying element
+    - Si (silicon): Semiconductor feedstock, alloying element
+    - AlSi (aluminum-silicon alloy): Casting alloy, brazing filler
+  Product separation:
+    - Mg taps as liquid (density 1.74 g/cm³, MP 650°C)
+    - MgAl2O4 remains refractory solid (MP 2135°C)
+    - Si and AlSi separate by density
+  Advantages: Relatively low temperature (1000°C)
+  Exothermic reaction reduces energy input
+  Multiple valuable products
+  Disadvantages: Requires aluminum metal input
+  Complex product mixture requires separation
+  Stoichiometry complex with two-stage reaction
+  Overall mass balance (approximate):
+    - Mg output: ~51.4% of olivine mass
+    - MgAl2O4: ~38.1%
+    - Si metal: ~39.7%
+    - AlSi alloy: ~13.7%
+  Applications: Alternative to FFC or Pidgeon for Mg extraction
+  Well-suited for lunar crater regions with olivine deposits

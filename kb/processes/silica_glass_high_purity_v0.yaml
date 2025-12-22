@@ -1,0 +1,116 @@
+id: silica_glass_high_purity_v0
+kind: process
+name: High-purity fused silica glass production
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: silicon_tetrachloride
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.024
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.188
+    unit: kg
+outputs:
+  - item_id: fused_silica_glass
+    qty: 0.354
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 0.858
+    unit: kg
+requires_ids:
+  - hydrogen_oxygen_torch_v0
+  - deposition_chamber_v0
+  - gas_scrubber_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 12.0
+  notes: H2-O2 flame temperature ~2800°C for SiCl4 oxidation
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Vapor phase deposition onto substrate
+notes: |
+  High-purity fused silica glass production via flame hydrolysis of silicon tetrachloride.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: SiCl4 + 2H2 + O2 → SiO2 + 4HCl
+  Temperature: H2-O2 flame (~2800°C)
+  Purpose: Optical-grade fused silica for optics, fiber optics, and precision applications
+  Process details:
+    1. Silicon tetrachloride vapor (from carbochlorination or Siemens)
+    2. Hydrogen and oxygen gases (from water electrolysis)
+    3. SiCl4 vapor enters H2-O2 flame in deposition chamber
+    4. Flame hydrolysis: SiCl4 oxidizes to SiO2 particles
+    5. SiO2 particles deposit on rotating substrate (mandrel)
+    6. Build up glassy soot layer
+    7. Sinter soot to dense fused silica (1600°C consolidation)
+    8. HCl vapor captured and recycled
+    9. Cool and remove fused silica blank
+  Products:
+    - Fused silica glass: Optical-grade, ultra-pure
+    - HCl gas: Captured and recycled to SiCl4 production
+  Stoichiometry: SiCl4 (169.9g) + 2H2 (4g) + O2 (32g) → SiO2 (60.1g) + 4HCl (145.8g)
+  Mass yields: 35.4% SiO2, 85.8% HCl (recycled)
+  Purity: >99.999% SiO2 (5 nines)
+    - Lower OH content than natural quartz
+    - Extremely low metal impurities
+  Optical properties:
+    - Transmittance: >90% in UV to near-IR (200-2500 nm)
+    - Low fluorescence
+    - Excellent homogeneity
+    - Controlled refractive index
+  Applications:
+    - Optical lenses and mirrors: High transmittance, low scatter
+    - Fiber optic preforms: Communication fibers
+    - UV optics: Transmits down to 180 nm
+    - Precision windows: High purity, no bubbles
+    - Semiconductor lithography: UV steppers
+    - Crucibles: For Czochralski silicon growth
+  Advantages: Extremely high purity (chemical vapor deposition)
+    No contamination from melting crucible
+    Controlled composition and properties
+    Complete HCl recycling (85.8% by mass)
+    Scalable to large blanks
+  Disadvantages: Energy intensive (flame temperature)
+    Requires pure SiCl4 feedstock
+    Multi-step process (deposition + sintering)
+    Slow deposition rate
+  Process variations:
+    - Outside vapor deposition (OVD): Soot on rotating mandrel
+    - Inside vapor deposition (IVD): Soot inside tube
+    - Vapor axial deposition (VAD): Axial growth
+  Flame chemistry:
+    - 2H2 + O2 → 2H2O + heat (exothermic combustion)
+    - SiCl4 + 2H2O → SiO2 + 4HCl (hydrolysis)
+    - Net: SiCl4 + 2H2 + O2 → SiO2 + 4HCl
+  Sintering step (consolidation):
+    - Porous soot heated to 1600°C in inert atmosphere
+    - Densifies to transparent fused silica (2.2 g/cm³)
+    - Critical for optical quality
+  Lunar context: Essential for photovoltaics and optics
+    Enables communication (fiber optics)
+    Precision manufacturing (lithography)
+    Scientific instruments (telescopes, spectrometers)
+  Comparison to natural quartz:
+    - Natural: Crystalline, anisotropic, contains impurities
+    - Fused silica: Amorphous, isotropic, ultra-pure
+    - Fused silica superior for most optical applications
+  HCl recycling critical:
+    - 85.8% of input mass is HCl product
+    - HCl + Si → SiHCl3 (Siemens process)
+    - Or HCl + SiO2 + C → SiCl4 (carbochlorination)
+    - Closed-loop chlorine chemistry
+  Alternate route to fused silica:
+    - Direct melting of quartz sand (1710°C)
+    - Lower purity, higher contamination
+    - Flame hydrolysis preferred for optical grade
+  Trade-offs:
+    - Complexity vs. purity: Flame hydrolysis more complex but higher purity
+    - Energy: Both require high temperatures (1600-2800°C)
+    - Feedstock: SiCl4 route requires chlorine chemistry infrastructure

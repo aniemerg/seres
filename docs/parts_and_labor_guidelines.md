@@ -9,7 +9,9 @@
 
 This document defines the core philosophy and practices for modeling parts, BOMs (Bills of Materials), and labor in the self-replicating system knowledge base. These guidelines are fundamental to keeping the KB tractable, minimizing combinatorial explosion, and ensuring the dependency graph remains computable.
 
-**Key Principle**: Minimize the number of similar parts by aggressive reuse while preserving material and process compatibility.
+**Key Principle**: Minimize the number of similar items (parts, machines, materials) by aggressive reuse while preserving material and process compatibility.
+
+**Note:** These principles originated for parts but are now extended to **all item types** through [Conservative Mode](conservative_mode_guide.md), the default approach for queue work.
 
 ---
 
@@ -457,8 +459,23 @@ These guidelines directly support the project's core principles:
 
 ---
 
+## Extension to All Items: Conservative Mode
+
+The principles in this document (particularly the Part Reuse Policy and 5× equivalence rule) have been **generalized to all KB work** through **Conservative Mode**.
+
+**See `docs/conservative_mode_guide.md` for:**
+- Decision trees for all gap types (`referenced_only`, `no_recipe`, `missing_field`, etc.)
+- Labor bot vs special machine decision guide
+- Phase/state variation handling (water → water_vapor, etc.)
+- Complete integration with existing guidelines
+
+Conservative Mode treats parts_and_labor_guidelines.md as the foundation and extends it to materials, machines, processes, and all other KB entities.
+
+---
+
 ## Related Documentation
 
+- **`docs/conservative_mode_guide.md`** — Queue work philosophy (extends these principles to all items)
 - **`design/meta-memo.md`** — Project philosophy and goals
 - **`design/memo_a.md`** — Formal specification and data model
 - **`design/memo_b.md`** — Knowledge acquisition methodology

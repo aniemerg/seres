@@ -1,0 +1,114 @@
+id: ffc_anorthite_alcasi_alloy_v0
+kind: process
+name: Direct FFC reduction of anorthite to AlCaSi alloy
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: anorthite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.15
+    unit: kg
+  - item_id: electrodes
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: aluminum_calcium_silicon_alloy
+    qty: 0.576
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.460
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.14
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.07
+    unit: kg
+requires_ids:
+  - ffc_electrolysis_cell_v0
+  - graphite_anode_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 9.0
+  notes: FFC electrolysis at 900-1100°C for complex oxide
+time_model:
+  type: fixed_time
+  hr_per_batch: 12.0
+  notes: Direct reduction of feldspar to alloy sponge
+notes: |
+  Direct FFC Cambridge reduction of anorthite to produce AlCaSi mongrel alloy.
+  Source: FFC-process-for-deep-ISRU.txt, ellery-et-al-2022-metalysis
+  Reaction: CaAl2Si2O8 → AlCaSi alloy + O2 (via electrolysis in CaCl2)
+  Temperature: 900-1100°C (molten CaCl2 electrolyte)
+  Voltage: 2.5-3V typical
+  Process: Direct electrolytic reduction without preprocessing
+  Purpose: Simple one-step alloy production from abundant anorthite
+  Highland regolith is 70-95% anorthite-rich anorthosite
+  Structural material and specialty applications
+  Process details:
+    1. Anorthite ore (CaAl2Si2O8) from highland regolith
+    2. Powder, compact, and sinter into cathode form
+    3. Immerse in molten CaCl2 electrolyte at 900-1100°C
+    4. Apply voltage (graphite anode)
+    5. AlCaSi alloy forms as porous metallic sponge
+    6. Oxygen released at anode (with C → CO/CO2)
+    7. Remove alloy sponge, densify or remelt
+  Products:
+    - AlCaSi alloy: Aluminum-calcium-silicon mongrel alloy
+    - O2 (oxygen): Valuable by-product (46% by mass!)
+  Alloy composition (theoretical from CaAl2Si2O8):
+    - Al: 19.4% by mass (from Al2O3 component)
+    - Ca: 14.4% (from CaO component)
+    - Si: 20.2% (from 2 SiO2 components)
+    - Total metal: 54.0% of anorthite mass
+  Actual alloy properties: NEED INVESTIGATION
+    - AlSi alloys are well-known (silumin: casting alloys)
+    - AlCa: Less common, Ca additions improve castability
+    - AlCaSi: Ternary alloy, properties not well-characterized
+  Potential applications:
+    - Casting alloy: AlSi (20-50% Si) used for high-fluidity castings
+    - Brazing filler metal: AlSi used for joining aluminum parts
+    - Structural material: Moderate strength, low density
+    - Wear-resistant surfaces: Si precipitates provide hardness
+  AlSi alloy benefits (from terrestrial use):
+    - Lower viscosity than pure Al (better casting)
+    - Low thermal expansion
+    - Good wear resistance (Si particles)
+    - Etching can create porous Si for oil retention (engine applications)
+  Stoichiometry: CaAl2Si2O8 (278.2g) → Ca (40.1g) + 2Al (54g) + 2Si (56.2g) + 4 O2 (128g)
+  Total metals: 150.3g (54.0%), oxygen: 46.0%
+  Advantages: Single-step process from most abundant lunar mineral
+    Anorthite is 70-95% of highlands (vast resource)
+    Very high oxygen yield (46% by mass!)
+    No preprocessing required
+    Potentially useful alloy properties
+  Disadvantages: "Mongrel" composition not precisely controlled
+    Ca inclusion may or may not be beneficial
+    Properties unknown - requires testing
+    Not suitable for applications requiring pure Al or Si
+  Comparison to pure metal routes:
+    - Pure: CaAl2Si2O8 + 4C → CaO + Al2O3 + 2Si (carbothermal), then separate
+    - Or: HCl leaching → CaCl2 + Al2O3 + SiO2, then FFC each separately
+    - Mongrel: Direct FFC (simplest but least controlled)
+  Lunar context: Anorthite THE most abundant highland mineral
+    This route exploits highlands abundance directly
+    Suitable for bulk structural material
+    Trade simplicity for material property uncertainty
+  Oxygen yield exceptional: 46% by mass from anorthite!
+    Higher than any other lunar mineral process
+    Critical for life support and propellant
+  Iron contamination tolerance:
+    - Highland anorthite has low Fe (<1%)
+    - Can add Ni, Co from meteorite sources to strengthen
+  Next steps: Metallurgical characterization of AlCaSi alloy
+    Tensile strength, hardness, corrosion resistance
+    Casting properties, weldability
+    May be suitable for many applications as-is
+    Or further processing to separate components

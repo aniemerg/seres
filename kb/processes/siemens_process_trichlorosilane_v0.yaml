@@ -1,0 +1,76 @@
+id: siemens_process_trichlorosilane_v0
+kind: process
+name: Siemens process for polysilicon (trichlorosilane route)
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: silicon_metallurgical_grade
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 3.90
+    unit: kg
+outputs:
+  - item_id: trichlorosilane_liquid
+    qty: 4.83
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.072
+    unit: kg
+requires_ids:
+  - fluidized_bed_reactor_v0
+  - distillation_column_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: Heating to 300°C for chlorination reaction
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: Chlorination and distillation time
+notes: |
+  Siemens process stage 1: Silicon chlorination to produce trichlorosilane.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt
+  Reaction: Si + 3HCl → SiHCl3 + H2 (at 300°C)
+  Temperature: 300°C
+  Process: Gas-solid chlorination in fluidized bed
+  Purpose: Purify metallurgical-grade silicon to semiconductor/solar grade
+  First stage of two-stage Siemens process
+  Process details:
+    1. Metallurgical Si powder (99% pure from carbothermal/FFC)
+    2. React with HCl gas at 300°C in fluidized bed
+    3. SiHCl3 (trichlorosilane) forms as liquid (BP 31.8°C)
+    4. Distillation purifies SiHCl3 (removes impurities)
+    5. H2 gas by-product collected
+  Products:
+    - SiHCl3 (trichlorosilane): Intermediate for polysilicon production
+    - H2 (hydrogen): Recycled for stage 2 reduction
+  Metallurgical silicon sources:
+    - Carbothermal reduction: CaAl2Si2O8 + 4C → 2Si + ...
+    - FFC Cambridge: SiO2 → Si + O2
+    - Carbothermal methane: MgSiO3 + 2CH4 → Si + ...
+  SiHCl3 purification:
+    - Fractional distillation removes metal chlorides (BCl3, PCl3, etc.)
+    - Achieves ppb-level purity (parts per billion)
+    - Critical for electronics and high-efficiency solar cells
+  Stoichiometry: Si (28g) + 3HCl (109.5g) → SiHCl3 (135.5g) + H2 (2g)
+  Mass fractions: 483% SiHCl3, 7.2% H2 from Si input
+  HCl recycling: Stage 2 regenerates HCl for re-use here
+  Overall Siemens process (both stages):
+    - This stage: Si + 3HCl → SiHCl3 + H2
+    - Stage 2: SiHCl3 + H2 → Si + 3HCl (see companion process)
+    - Net: Metallurgical Si → Ultra-pure polysilicon
+  Advantages: Achieves ultra-high purity (9-11 nines: 99.9999999-99.999999999%)
+  HCl fully recycled between two stages
+  Standard industrial process for semiconductor Si
+  Disadvantages: Two-stage process complexity
+  Energy intensive overall
+  Requires HCl (from NaCl-based chlorine chemistry)
+  Lunar/space applications: Essential for electronics manufacturing
+  High-efficiency solar cells (>20% vs <15% for metallurgical)
+  Integrated circuits, sensors, processors
+  See also: Czochralski process (single-crystal growth from polysilicon)

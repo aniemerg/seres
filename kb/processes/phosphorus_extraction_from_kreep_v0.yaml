@@ -1,0 +1,100 @@
+id: phosphorus_extraction_from_kreep_v0
+kind: process
+name: Phosphorus extraction from KREEP apatite
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: apatite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.762
+    unit: kg
+outputs:
+  - item_id: phosphorus_white
+    qty: 0.247
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.030
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 1.41
+    unit: kg
+  - item_id: calcium_oxide
+    qty: 0.890
+    unit: kg
+requires_ids:
+  - high_temp_retort_v0
+  - phosphorus_condenser_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 10.0
+  notes: High temperature carbothermal reduction at 850°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Reduction and phosphorus vapor condensation
+notes: |
+  Extraction of elemental phosphorus from apatite (calcium phosphate) in KREEP regions.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt
+  Reaction: 4H3PO4 + 16C → P4 + 6H2 + 16CO (simplified from Ca3(PO4)2)
+  Or: Ca3(PO4)2 + 5C → 3CaO + 2P + 5CO (then P4 formation)
+  Temperature: 850°C (phosphorus vaporizes)
+  Process: Carbothermal reduction in sealed retort
+  Purpose: Extract phosphorus from KREEP minerals
+  Essential element for life support (agriculture)
+  Electronic materials (phosphorus doping)
+  Process details:
+    1. Apatite [Ca5(PO4)3(F,Cl,OH)] from KREEP basalts
+    2. Mix with carbon (reducing agent)
+    3. Heat to 850°C in sealed retort (excludes oxygen)
+    4. Phosphorus vaporizes as P4 molecules
+    5. Condense phosphorus vapor underwater (safety)
+    6. Store as white phosphorus under water
+    7. CaO (quicklime) remains as solid residue
+  Products:
+    - P4 (white phosphorus): Highly reactive, toxic, pyrophoric
+    - H2 (hydrogen): By-product gas
+    - CO (carbon monoxide): Recyclable
+    - CaO (calcium oxide): Useful for various processes
+  KREEP regions:
+    - Oceanus Procellarum and Imbrium Basin (northwest nearside)
+    - Enriched in K (potassium), REE (rare earth elements), P (phosphorus)
+    - P concentration: ~2× terrestrial soil (still depleted overall)
+    - Apatite: Ca5(PO4)3(F,Cl,OH) - primary P mineral
+    - Concentrated enough for economic extraction
+  White phosphorus handling:
+    - Extremely pyrophoric (ignites in air at 34°C)
+    - Toxic (lethal dose ~50 mg)
+    - Stored underwater to prevent air contact
+    - Converted to red phosphorus (safer allotrope) by heating to 250°C
+  Phosphorus applications:
+    - Agriculture: Phosphate fertilizers (critical for food production)
+    - Life support: Plant growth in habitats
+    - Electronics: Phosphorus doping (n-type semiconductor)
+    - Chemical synthesis: Phosphoric acid, phosphates
+    - Incendiaries/pyrotechnics (white P)
+  Stoichiometry: Ca3(PO4)2 (310g) + 5C (60g) → 3CaO (168g) + 2P (62g) + 5CO (140g)
+  Mass fractions: 24.7% P, 89.0% CaO, 141% CO from apatite
+  Red phosphorus production: Heat white P to 250°C in sealed vessel
+    - Much safer (not pyrophoric)
+    - Less reactive
+    - Preferred form for most applications
+  Advantages: Only viable source of phosphorus on Moon
+  KREEP localized and accessible
+  CaO by-product useful
+  CO recyclable
+  Disadvantages: High toxicity and reactivity of white P
+  KREEP only in specific regions (not globally distributed)
+  High temperature requirement
+  Safety hazards in handling
+  Lunar context: Phosphorus absolutely essential for agriculture
+  Long-term settlement requires food production
+  No alternative source on Moon
+  Must extract from KREEP despite challenges
+  Careful handling protocols essential
+  Red phosphorus conversion recommended immediately

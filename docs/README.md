@@ -8,8 +8,22 @@
 2. **`design/memo_a.md`** — Formal specification and design principles
 3. **`design/memo_b.md`** — Knowledge acquisition methodology and constraints
 4. **`docs/parts_and_labor_guidelines.md`** — Parts, BOMs, and labor modeling policy (CRITICAL for recipe/BOM work)
+5. **`docs/conservative_mode_guide.md`** — Queue work philosophy and decision trees (DEFAULT APPROACH)
 
 These documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
+
+### Conservative Mode: The Default Approach
+
+**All queue work should follow Conservative Mode** - treating queue items as potential symptoms rather than direct fix requests.
+
+**Key principles:**
+- Minimize new creation, maximize reuse
+- Check for equivalents (5× magnitude rule)
+- Prefer labor bot + tools over special machines
+- Adapt existing items before creating new ones
+- Verify references aren't erroneous
+
+**See `conservative_mode_guide.md` for complete decision trees.**
 
 ## Additional Required Reading
 - `design/build_v0.md` (pipeline/queue/index design)

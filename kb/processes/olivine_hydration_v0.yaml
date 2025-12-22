@@ -1,0 +1,71 @@
+id: olivine_hydration_v0
+kind: process
+name: Olivine hydration (low temperature)
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: olivine_fayalite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.088
+    unit: kg
+outputs:
+  - item_id: magnetite_ore
+    qty: 0.563
+    unit: kg
+  - item_id: silica_amorphous
+    qty: 0.462
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.012
+    unit: kg
+requires_ids:
+  - hydration_reactor_v0
+  - pressure_vessel_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: Low energy ambient or low temperature hydration reaction
+time_model:
+  type: fixed_time
+  hr_per_batch: 24.0
+  notes: Slow hydration reaction at ambient to moderate temperature
+notes: |
+  Low-temperature hydration of iron-bearing olivine (fayalite) to produce magnetite.
+  Source: Lunar-Demandite.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: 3Fe2SiO4 + 2H2O → 2Fe3O4 + 3SiO2 + 2H2
+  Alternative (forsterite): Mg2SiO4 + 6H2O → Mg(OH)2 + H2Si3O7
+  Temperature: Ambient to moderate (20-100°C)
+  Process: Aqueous hydration/weathering reaction
+  Works best with fayalite (iron-rich olivine) rather than forsterite (Mg-rich)
+  Products:
+    - Fe3O4 (magnetite): Iron ore, magnetic material, ferrite feedstock
+    - SiO2 (silica): Glass feedstock, ceramic material
+    - H2 (hydrogen): Fuel, reducing agent (bonus product)
+  For forsterite alternative:
+    - Mg(OH)2 (brucite): Decomposes to MgO at 332°C
+    - H2Si3O7: Hydrated silica
+  Advantages: Very low energy process
+  Ambient or low temperature operation
+  Produces valuable magnetite for iron extraction
+  Generates hydrogen gas
+  No high temperature or exotic reagents
+  Disadvantages: Slow reaction kinetics (hours to days)
+  Limited to iron-bearing olivine for best results
+  Water consumption (though H2 can regenerate via reverse reaction)
+  Stoichiometry (fayalite): 3Fe2SiO4 (610.5g) + 2H2O (36g) → 2Fe3O4 (465g) + 3SiO2 (180.3g) + 2H2 (4g)
+  Mass fractions from olivine: 56.3% Fe3O4, 46.2% SiO2, 1.2% H2
+  Magnetite (Fe3O4) further processing:
+    - Hydrogen reduction → Fe metal
+    - Carbothermal reduction → Fe metal
+    - FFC Cambridge → Fe metal
+  Lunar application: Useful for iron extraction in low-energy scenario
+  Crater regions with olivine deposits
+  May occur naturally in subsurface with water ice
+  Terrestrial analog: Serpentinization of olivine on Earth/Mars

@@ -1,0 +1,188 @@
+id: pete_power_generation_v0
+kind: process
+name: Photon-enhanced thermionic emission power generation
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: solar_radiation_concentrated
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: electrical_power
+    qty: 0.50
+    unit: kWh
+  - item_id: waste_heat
+    qty: 0.50
+    unit: kWh
+requires_ids:
+  - pete_converter_v0
+  - solar_concentrator_v0
+  - vacuum_envelope_v0
+  - heat_exchanger_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.1
+    unit: hr
+energy_model:
+  type: conversion_efficiency
+  value: 0.50
+  notes: 50% theoretical efficiency (photovoltaic + thermionic stages)
+time_model:
+  type: continuous
+  notes: Continuous power generation during solar illumination
+notes: |
+  Photon-Enhanced Thermionic Emission (PETE) power generation system.
+  Source: ellery-et-al-2022-metalysis-fray-farthing-chen-process
+  Purpose: Advanced power conversion combining photovoltaic and thermionic effects
+  Efficiency: Up to 50% (theoretical), 30-40% (practical)
+  Temperature: 1000-1500°C cathode temperature
+  Significantly more efficient than photovoltaics alone (~15-20%)
+  Process details:
+    1. Concentrated solar radiation focused onto PETE cathode
+    2. Photovoltaic stage: Photons excite electrons to conduction band
+       - Semiconductor absorbs photons (hν > Eg)
+       - Electron-hole pairs generated
+       - Reduces effective work function
+    3. Thermionic stage: Hot cathode emits electrons into vacuum
+       - Temperature 1000-1500°C
+       - Electrons overcome reduced work function barrier
+       - Richardson-Dushman equation: J = AT² exp(-φ/kT)
+    4. Electrons travel across vacuum gap to cold anode
+    5. External circuit carries electrons back to cathode (generates power)
+    6. Waste heat removed from anode via heat exchanger
+    7. Can use waste heat for thermal processes (ISRU, FFC Cambridge)
+  PETE cathode structure:
+    - Base: Tungsten or molybdenum substrate (high melting point)
+    - Active layer: Aluminum-doped hematite (α-Fe2O3:Al)
+      - Produced from ilmenite-derived iron + oxygen + Al dopant
+      - Bandgap: ~2 eV (absorbs visible and near-IR)
+      - Work function: ~1 eV (reduced by photon excitation)
+    - Alternative: Cesiated surfaces (Ba-O-Cs coatings)
+  Physics:
+    - Thermionic work function: φ = 1-2 eV typical
+    - Photovoltaic reduces effective φ by photo-excitation
+    - Combined effect: Higher current density than pure thermionic
+    - Efficiency: η = (1 - Tc/Th) × (photon utilization factor)
+  Cathode temperature optimization:
+    - Too low (<1000°C): Insufficient thermionic emission
+    - Optimal (1200-1400°C): Maximum combined effect
+    - Too high (>1500°C): Material degradation, thermal losses
+  Anode (collector):
+    - Cool surface (<500°C) to maintain voltage
+    - High work function material (not critical)
+    - Heat extraction via radiator or heat pipe
+  Vacuum requirements:
+    - High vacuum (10⁻⁶ to 10⁻⁸ torr) to prevent electron scattering
+    - Spacing: 1-10 μm gap (close spacing improves efficiency)
+    - Challenges: Thermal expansion, alignment
+  Efficiency breakdown:
+    - Photovoltaic stage: ~20-25% (photon → excited electrons)
+    - Thermionic stage: ~25-30% (thermal → electron kinetic energy)
+    - Combined: ~50% theoretical maximum
+    - Practical: 30-40% (accounting for losses)
+  Comparison to other power systems:
+    - Photovoltaics: ~15-20% (single junction), ~30% (multi-junction)
+    - Thermionic: ~20% (pure thermionic, Russian nuclear reactors)
+    - PETE: ~40-50% (combined photovoltaic + thermionic)
+    - Lunar advantage: More efficient use of solar energy
+  Advantages: Very high efficiency (40-50%)
+    Uses lunar materials (Fe2O3 from ilmenite, W from meteorites)
+    Generates useful waste heat (1000+ °C) for ISRU
+    No moving parts (solid-state)
+    Long lifetime (no wear mechanisms)
+  Disadvantages: Requires high vacuum (challenging to maintain)
+    High operating temperature (material constraints)
+    Close cathode-anode spacing (precision alignment)
+    Requires concentrated solar (not direct sunlight)
+    Complex fabrication (thin-film cathode coatings)
+  Lunar context: Abundant solar energy (no atmosphere)
+    14-day illumination periods (long operational time)
+    High vacuum natural environment (Moon's surface)
+    Can couple with ISRU thermal processes (use waste heat)
+    Ideal for high-power applications (manufacturing, smelting)
+  Materials:
+    - Cathode substrate: Tungsten (from meteorites, density separation)
+    - Cathode coating: α-Fe2O3:Al (from ilmenite + aluminum)
+    - Anode: Molybdenum, nickel, or stainless steel
+    - Vacuum envelope: Fused silica or metal (lunar glass/metal)
+  Cathode coating synthesis:
+    - Start with Fe from ilmenite reduction
+    - Oxidize in O2 atmosphere: 2Fe + 3/2 O2 → Fe2O3 (hematite)
+    - Dope with Al: Replace ~5% Fe with Al (improves conductivity)
+    - Sinter at 1200-1400°C to densify
+    - Result: α-Fe2O3:Al semiconductor with ~2 eV bandgap
+  Solar concentration:
+    - Typical: 100-1000 suns (100,000-1,000,000 W/m²)
+    - Fresnel lenses, parabolic mirrors, or heliostats
+    - Achieves 1200-1400°C cathode temperature
+  Power output scaling:
+    - Current density: 10-50 A/cm² (at 1200°C, 1.5V)
+    - Power density: 15-75 W/cm²
+    - For 1 kW output: 13-67 cm² cathode area
+    - Modular design: Scale by number of converters
+  Waste heat utilization:
+    - Anode at 500-800°C (substantial thermal energy)
+    - Use for FFC Cambridge (900-1100°C after heat pump)
+    - Or other thermal processes (glass melting, sintering)
+    - Combined heat and power (CHP): Overall >70% energy utilization
+  Vacuum maintenance:
+    - Getter materials: Absorb residual gases (Ba, Ti getters)
+    - Seal integrity: High-temperature seals (glass-metal, ceramic)
+    - Lunar vacuum: Natural environment (10⁻¹⁴ torr)
+    - Can operate in lunar ambient vacuum (no envelope needed!)
+  Operational modes:
+    - Day: PETE power generation (14 Earth days continuous)
+    - Night: Shutdown, cool down (14 Earth days)
+    - Thermal cycling: Design for repeated cycling
+  Reliability and lifetime:
+    - Solid-state (no moving parts): Long lifetime expected
+    - Material degradation: Cathode coating evaporation at high T
+    - Estimated lifetime: 10-20 years (with proper design)
+  Development status (terrestrial):
+    - Research stage (laboratory demonstrations)
+    - Stanford, MIT research programs
+    - Not yet commercial
+    - Significant engineering challenges remain
+  Lunar advantages over terrestrial:
+    - Natural vacuum (no envelope needed or simplified)
+    - Concentrated solar easily achievable
+    - Heat rejection via radiation (no atmosphere)
+    - Long illumination periods (14-day "day")
+  Integration with lunar ISRU:
+    1. Solar concentration → PETE cathode → electrical power
+    2. PETE waste heat → FFC Cambridge electrolysis → metals + O2
+    3. Metals → manufacturing (structures, machines)
+    4. Electrical power → water electrolysis, mining, robotics
+    5. Closed-loop energy conversion system
+  Efficiency comparison (solar → useful work):
+    - PV + resistive heating: 15% electric, 85% waste (unusable)
+    - PETE + waste heat recovery: 40% electric, 50% useful heat, 10% loss
+    - Net useful energy: PETE vastly superior for thermal processes
+  Research needs:
+    - Optimize cathode coating (composition, thickness, doping)
+    - Improve vacuum sealing (or open-vacuum lunar design)
+    - Thermal management (heat pipes, radiators)
+    - Cathode-anode spacing control (thermal expansion compensation)
+    - Long-term stability testing (evaporation, degradation)
+  Recommended development timeline:
+    - Phase 1 (years 0-10): Import terrestrial solar panels (PV)
+    - Phase 2 (years 10-30): Develop PETE prototypes on Moon
+    - Phase 3 (years 30+): Deploy PETE for high-power ISRU applications
+  Critical enabler for:
+    - Large-scale FFC Cambridge (requires electrical + thermal energy)
+    - Smelting operations (coupled power + heat)
+    - Materials processing (manufacturing infrastructure)
+  Comparison to nuclear power:
+    - Nuclear: Continuous power (day and night)
+    - PETE: Intermittent (14-day on, 14-day off)
+    - Nuclear: Higher complexity, safety concerns, waste
+    - PETE: Simpler, safer, but requires energy storage for night
+  Energy storage pairing:
+    - PETE day: Generate power + charge batteries
+    - Night: Discharge batteries or shutdown non-critical loads
+    - Alternatively: Locate near polar craters (near-continuous sunlight)
+  Polar deployment:
+    - Peaks of eternal light: 80-90% sunlight availability
+    - Shackleton crater rim: Nearly continuous illumination
+    - Ideal for PETE (minimizes cycling, maximizes uptime)

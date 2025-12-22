@@ -1,0 +1,53 @@
+id: vacuum_pyrolysis_pyroxene_v0
+kind: process
+name: Vacuum pyrolysis of pyroxene (MgSiO3)
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: pyroxene_enstatite_ore
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_monoxide_gas
+    qty: 0.44
+    unit: kg
+  - item_id: magnesium_oxide
+    qty: 0.40
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.16
+    unit: kg
+requires_ids:
+  - solar_concentrator_high_temp_v0
+  - vacuum_furnace_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 18.0
+  notes: Extreme temperature thermal decomposition at 2000-2600°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: High temperature vapor phase pyrolysis
+notes: |
+  Vacuum pyrolysis of pyroxene minerals (enstatite, MgSiO3) at extreme temperature.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: MgSiO3 → SiO + MgO + ½O2
+  Alternative for wollastonite: CaSiO3 → SiO + CaO + ½O2
+  Temperature: 2000-2600°C
+  Process: Direct thermal vaporization and decomposition
+  Vacuum prevents re-oxidation and enables vapor separation
+  Products condense at different temperatures for separation:
+    - SiO condenses around 1880°C
+    - MgO remains solid to 2852°C
+    - O2 collected as gas
+  Advantages: No chemical reagents, works on multiple silicate minerals
+  Disadvantages: Extreme energy requirement, complex vapor handling
+  Lunar application: Solar concentrators or nuclear thermal reactors
+  Can process enstatite (MgSiO3), wollastonite (CaSiO3), and other pyroxenes
+  Stoichiometry: MgSiO3 (100.4 g/mol) → SiO (44.1g) + MgO (40.3g) + 0.5 O2 (16g)
+  SiO can be further processed to Si metal or SiO2

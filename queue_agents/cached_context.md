@@ -5,7 +5,36 @@ This context is cached and reused across all agent invocations.
 ---
 ## 1. Agent Reference
 
-# Agent Reference — KB Creation Guide
+# Agent Reference — KB Gap Analysis and Root Cause Resolution
+
+## CONSERVATIVE MODE: Default Approach (CRITICAL)
+
+**All queue work follows Conservative Mode** - treat queue items as potential symptoms, not direct fixes.
+
+### Core Principle
+**Minimize new creation, maximize reuse and correction.**
+
+Before creating ANY new item:
+1. **Check if it exists under a different name** (search variations: `steel_plate` vs `plate_steel`)
+2. **Check for functional equivalents** (5× magnitude rule from parts_and_labor_guidelines.md)
+3. **Consider phase/state variations** (don't create `water_vapor`, use `water` + boiling step)
+4. **Evaluate labor bot + tools** instead of special machines (strongly preferred unless high efficiency needed)
+5. **Verify the reference isn't erroneous** (check git history, similar files)
+
+**See `docs/conservative_mode_guide.md` for complete decision trees.**
+
+### Quick Examples
+
+❌ **DON'T CREATE:**
+- `water_vapor_v0` → ✅ Use `water` + add boiling/evaporation process step
+- `hose_crimping_station_v0` → ✅ Use `labor_bot_general_v0` + `crimping_tool_manual`
+- `steel_plate_large` when `steel_plate` exists → ✅ Reuse, document size variation in notes
+- `deburring_machine_automated` → ✅ Use `labor_bot_general_v0` + `grinding_tool_portable`
+
+❌ **DON'T CREATE WITHOUT CHECKING:**
+- Any machine that could be labor bot + simple tool
+- Any material that's a state variation (solid/liquid/gas/hot/cold)
+- Any part within 5× magnitude of existing part (mass, size, function)
 
 ## Core Principles
 
@@ -15,11 +44,12 @@ This context is cached and reused across all agent invocations.
 1. **Structure before precision** — Coarse, labeled estimates are acceptable. Capture dependency structure first, refine numbers later.
 2. **Processes before machines** — Prefer unit operations (crush, sinter, cast). Machines are capacity providers, not the primary abstraction.
 3. **Incompleteness is acceptable** — Use placeholders (null values), surface gaps explicitly. The system must run with partial data.
+4. **Labor bot + tools over special machines** — STRONGLY prefer `labor_bot_general_v0` with simple tools unless high precision/throughput/capacity required.
 
 **Best-Guess Engineering:** When uncertain, make conservative assumptions based on similar items. Label estimates with provenance and confidence.
 
 **When to Give Up (Import):**
-- No recipe found after researching similar items
+- No recipe found after researching similar items AND no equivalent exists
 - Modeling effort exceeds likely mass/energy impact
 - Item not in top contributors to imported mass, energy, or time
 
@@ -348,15 +378,47 @@ kb/
 
 ---
 
+## Conservative Mode Workflow
+
+**REQUIRED workflow for all gap types:**
+
+1. **Research FIRST (mandatory):**
+   - Search exact ID: `grep -r "id: item_name" kb/`
+   - Search variations: `grep -ri "motor.*5.*kw" kb/items/`
+   - Check equivalents: review similar items for 5× magnitude match
+   - Check if exists under different ID
+
+2. **Evaluate alternatives (before creating):**
+   - For machines: Could labor bot + tool do this?
+   - For materials: Is this a phase variation? (water→vapor, steel→molten)
+   - For parts: Is there equivalent within 5× size/mass?
+   - For references: Is the reference itself a mistake?
+
+3. **Create ONLY as last resort:**
+   - Document search in notes: "Checked: X, Y, Z - no equivalents"
+   - Follow existing patterns
+   - Use conservative estimates
+   - Apply 5× equivalence for parameters
+
+4. **Labor Bot Decision:**
+   - **Default:** Use `labor_bot_general_v0` + simple tools
+   - **Special machine ONLY if:**
+     - High throughput (>10 units/day continuous)
+     - Precision <0.1mm (labor bot: ±0.5mm)
+     - Heavy loads >20kg (labor bot payload limit)
+     - Environmental (high temp, vacuum, hazardous)
+     - Process physics requires it (furnace, reactor, etc.)
+
 ## Workflow Tips
 
-1. **Research first** — Use `rg_search` to find similar items before creating new ones
+1. **Research first** — Use `rg_search` to find similar items before creating new ones (MANDATORY)
 2. **Follow patterns** — Copy structure from similar existing items
 3. **Start minimal** — Required fields only, add optional fields later
 4. **Be explicit about unknowns** — Use `null` + notes rather than omitting fields
 5. **Validate early** — Run indexer after each change to catch errors
 6. **Conservative assumptions** — When estimating, err on the side of heavier/slower/more energy
 7. **One item at a time** — Don't try to anticipate downstream gaps, let the indexer guide you
+8. **Document reuse decisions** — Note when you've checked and chosen to reuse vs create
 
 ---
 
@@ -464,6 +526,78 @@ Use these as templates when creating new KB entries.
 ### Process Examples
 
 ```yaml
+# kb/processes/flywheel_motor_generator_assembly_v0.yaml
+id: flywheel_motor_generator_assembly_v0
+kind: process
+name: Flywheel motor generator assembly v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: machine_frame_medium
+  qty: 1.0
+  unit: unit
+- item_id: flywheel_medium
+  qty: 1.0
+  unit: unit
+- item_id: flywheel_vacuum_housing_v0
+  qty: 1.0
+  unit: unit
+- item_id: magnetic_bearing_passive_v0
+  qty: 1.0
+  unit: unit
+- item_id: bearing_race_set
+  qty: 1.0
+  unit: unit
+- item_id: rolling_elements_set
+  qty: 1.0
+  unit: unit
+- item_id: bearing_cage_set
+  qty: 1.0
+  unit: unit
+- item_id: shaft_and_bearing_set
+  qty: 1.0
+  unit: unit
+- item_id: roller_bearing_cylindrical_v0
+  qty: 1.0
+  unit: unit
+- item_id: plain_bearing_graphite_v0
+  qty: 1.0
+  unit: unit
+- item_id: lubrication_pack_basic
+  qty: 1.0
+  unit: unit
+- item_id: fastener_kit_large
+  qty: 1.0
+  unit: unit
+- item_id: power_electronics_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: flywheel_motor_generator_v0
+  qty: 1.0
+  unit: unit
+requires_ids:
+- assembly_station
+resource_requirements:
+- machine_id: assembly_station
+  amount: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+energy_model:
+  type: kWh_per_unit_output
+  value: 15.0
+  notes: Placeholder energy for final assembly of flywheel_motor_generator_v0
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Placeholder assembly time for flywheel_motor_generator_v0
+notes: Assemble flywheel_motor_generator_v0 from BOM components; placeholder timing/energy.
+```
+
+```yaml
 # kb/processes/pete_photon_enhanced_thermionic_v0_assembly_v0.yaml
 id: pete_photon_enhanced_thermionic_v0_assembly_v0
 kind: process
@@ -506,10 +640,10 @@ outputs:
 requires_ids:
 - assembly_station
 resource_requirements:
-- resource_type: assembly_station
+- machine_id: assembly_station
   qty: 1.0
   unit: unit
-- resource_type: labor_bot_general
+- machine_id: labor_bot_general_v0
   qty: 4.0
   unit: hr
 energy_model:
@@ -524,277 +658,547 @@ notes: Assemble PETE photon-enhanced thermionic converter from BOM components.
 ```
 
 ```yaml
-# kb/processes/optical_microscope_assembly_v0.yaml
-id: optical_microscope_assembly_v0
+# kb/processes/control_panel_assembly_v0.yaml
+id: control_panel_assembly_v0
 kind: process
-name: Optical microscope assembly v0
+name: Control panel assembly
 layer_tags:
 - layer_7
-- layer_8
 inputs:
-- item_id: glass_lens_objective_set
-  qty: 4.0
-  unit: each
-- item_id: glass_lens_eyepiece
-  qty: 2.0
-  unit: each
-- item_id: prism_glass_optical
-  qty: 2.0
-  unit: each
-- item_id: illumination_lamp_led
-  qty: 1.0
-  unit: each
-- item_id: condenser_lens_assembly
-  qty: 1.0
-  unit: each
-- item_id: mechanical_stage_xy
-  qty: 1.0
-  unit: each
-- item_id: focusing_mechanism_coarse_fine
-  qty: 1.0
-  unit: each
-- item_id: steel_frame_microscope_body
-  qty: 8.0
+- item_id: enclosure_steel_electronics
+  qty: 12.0
   unit: kg
-- item_id: mirror_optical_flat
+  notes: Control panel enclosure cabinet
+- item_id: control_plc_basic
+  qty: 2.0
+  unit: kg
+  notes: Programmable logic controller
+- item_id: relay_set_industrial
+  qty: 2.0
+  unit: kg
+  notes: Control relays and contactors
+- item_id: switch_selector_industrial
   qty: 1.0
-  unit: each
+  unit: kg
+  notes: Selector switches and buttons
+- item_id: indicator_light_set
+  qty: 0.5
+  unit: kg
+  notes: Status indicator lights
+- item_id: wire_harness_control
+  qty: 3.0
+  unit: kg
+  notes: Control wiring and cable assemblies
+- item_id: terminal_block_set
+  qty: 2.0
+  unit: kg
+  notes: Terminal blocks and connectors
+- item_id: circuit_breaker_set
+  qty: 1.5
+  unit: kg
+  notes: Circuit protection devices
+- item_id: fastener_kit_small
+  qty: 0.5
+  unit: kg
+  notes: Mounting hardware
+- item_id: din_rail_steel
+  qty: 0.5
+  unit: kg
+  notes: Component mounting rails
 outputs:
-- item_id: optical_microscope_v0
-  qty: 1.0
-  unit: unit
+- item_id: control_panel_assembly_v0
+  qty: 25.0
+  unit: kg
 requires_ids:
 - assembly_tools_basic
+- test_equipment_basic
 resource_requirements:
-- resource_type: assembly_station
+- machine_id: labor_bot_general_v0
   qty: 1.0
-  unit: unit
-- resource_type: labor_bot_general
-  amount: null
   unit: hr
 energy_model:
-  type: kWh_per_batch
-  value: 6.0
-  notes: Placeholder energy for optical microscope assembly
+  type: kWh_per_kg
+  value: 0.5
+  notes: Bench assembly and test power draw.
 time_model:
-  type: fixed_time
-  hr_per_batch: 5.0
-  notes: Placeholder assembly time for microscope
-notes: Assembles an optical microscope from provided optical components and a steel
-  frame. Placeholder manufacturing step to enable modeling in the KB.
-```
+  type: linear_rate
+  hr_per_kg: 0.4
+  setup_hr: 0.2
+  notes: Wiring, mounting, labeling, and functional checkout.
+notes: 'Assemble control panels or control units: mount switches, indicators, wiring
+  harnesses, and controllers into enclosures; includes continuity checks and basic
+  functional test.
 
-```yaml
-# kb/processes/surface_treatment_station_assembly_v0.yaml
-id: surface_treatment_station_assembly_v0
-kind: process
-name: Surface treatment station assembly
-inputs:
-- item_id: chemical_bath_tank_set
-  qty: 1.0
-  unit: unit
-- item_id: agitation_system_basic
-  qty: 1.0
-  unit: unit
-- item_id: chemical_bath_ventilation
-  qty: 1.0
-  unit: unit
-- item_id: circulation_pump_coolant
-  qty: 1.0
-  unit: unit
-- item_id: control_panel_basic
-  qty: 1.0
-  unit: unit
-- item_id: support_frame_welded
-  qty: 1.0
-  unit: unit
-- item_id: fastener_kit_medium
-  qty: 1.0
-  unit: unit
-outputs:
-- item_id: surface_treatment_station
-  qty: 1.0
-  unit: unit
-requires_ids: []
-resource_requirements:
-- resource_type: labor_bot_general
-  qty: 4.0
-  unit: hr
-energy_model:
-  type: kWh_per_batch
-  value: 5.0
-  notes: Approximate energy for assembling surface_treatment_station
-time_model:
-  type: fixed_time
-  hr_per_batch: 6.0
-  notes: Approximate assembly time
-notes: Local fabrication path for surface_treatment_station; consumes BOM components
-  to produce the machine.
+  '
 ```
 
 
 ### Recipe Examples
 
 ```yaml
-# kb/recipes/recipe_packed_bed_distillation_v0.yaml
-id: recipe_packed_bed_distillation_v0
+# kb/recipes/recipe_bearing_set_v0.yaml
+id: recipe_bearing_set_v0
+name: Bearing set fabrication v0
 kind: recipe
-name: Recipe for packed bed distillation
-produces_id: packed_bed_distillation
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: bearing_set
+variant_id: v0
+inputs:
+- item_id: bearing_steel_bar
+  qty: 1.2
+  unit: kg
+  notes: High-carbon bearing steel for races and rolling elements
+- item_id: brass_sheet
+  qty: 0.15
+  unit: kg
+  notes: Bearing cage/retainer material
+- item_id: lubricant_grease_bearing
+  qty: 0.05
+  unit: kg
+  notes: Bearing grease
+- item_id: bearing_seal_rubber
+  qty: 0.1
+  unit: kg
+  notes: Optional seals
+outputs:
+- item_id: bearing_set
+  qty: 1.5
+  unit: kg
 steps:
 - process_id: metal_casting_basic_v0
-  notes: Cast base frame components for packed bed distillation
-- process_id: welding_brazing_basic_v0
-  notes: Weld frame components and support structures
+  est_time_hr: 1.0
+  machine_hours: 1.0
+  notes: Cast inner and outer bearing race blanks from bearing steel
+- process_id: machining_basic_v0
+  est_time_hr: 1.5
+  machine_hours: 1.5
+  notes: Rough machine race blanks to near-net shape
+- process_id: heat_treatment_hardening_v0
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: Harden bearing races to HRC 58-62
+- process_id: precision_grinding_basic_v0
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: Precision grind race surfaces to tight tolerances
+- process_id: metal_forging_process_v0
+  est_time_hr: 1.0
+  machine_hours: 1.0
+  notes: Hot forge ball blanks from bearing steel
+- process_id: heat_treatment_hardening_v0
+  est_time_hr: 2.5
+  machine_hours: 2.5
+  notes: Harden rolling elements to HRC 60-64
+- process_id: surface_grinding_precision_v0
+  est_time_hr: 1.5
+  machine_hours: 1.5
+  notes: Precision grind balls to spherical form
+- process_id: metal_casting_basic_v0
+  est_time_hr: 0.3
+  machine_hours: 0.3
+  notes: Cast or stamp bearing cage blanks
 - process_id: machining_finish_basic_v0
-  notes: Finish machining for interfaces and mounting holes
+  est_time_hr: 0.8
+  machine_hours: 0.8
+  notes: Machine cage pockets
 - process_id: assembly_basic_v0
-  notes: Pre-assembly of subcomponents into the machine shell
-- process_id: enclosure_assembly_basic_v0
-  notes: Assemble enclosure for electronics and control hardware
-- process_id: electrical_wiring_and_controls_v0
-  notes: Install wiring, control panels, sensors, and interlocks
-- process_id: machine_assembly_basic_v0
-  notes: 'Final assembly: frame, enclosure, wiring into packed bed distillation machine'
-notes: Prototype recipe to manufacture packed bed distillation; BOM details to be
-  refined.
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: Assemble races, balls, and cage; pack with grease; install seals
+assumptions: Medium bearing set (1.5 kg) for general machinery. Precision ground races
+  and balls, heat-treated to bearing-grade hardness, includes lubrication and seals.
+notes: Ten-step recipe covering bearing race and ball production, heat treatment,
+  precision grinding, cage fabrication, and final assembly with lubrication for 35-45mm
+  bore bearings.
 ```
 
 ```yaml
-# kb/recipes/recipe_machine_regolith_brick_press_hydraulic_v0.yaml
-id: recipe_machine_regolith_brick_press_hydraulic_v0
+# kb/recipes/recipe_vacuum_furnace_v0_v0.yaml
+id: recipe_vacuum_furnace_v0_v0
 kind: recipe
-name: Recipe for regolith brick hydraulic press
-produces_id: regolith_brick_press_hydraulic_v0
-produces_qty: 1.0
-produces_unit: unit
-target_item_id: regolith_brick_press_hydraulic_v0
+target_item_id: vacuum_furnace_v0
 variant_id: v0
 steps:
 - process_id: cutting_basic_v0
-  est_time_hr: 2.0
-  machine_hours: 2.0
-  labor_hours: 1.0
-  notes: Cut frame members, platens, and mold plates.
+- process_id: metal_forming_basic_v0
 - process_id: welded_fabrication_basic_v0
-  est_time_hr: 3.0
-  machine_hours: 2.5
-  labor_hours: 2.5
-  notes: Weld press frame and mold housing.
 - process_id: machining_finish_basic_v0
-  est_time_hr: 2.0
-  machine_hours: 1.5
-  labor_hours: 1.5
-  notes: Machine platen faces, mold cavity surfaces, mounting holes.
-- process_id: hydraulic_system_assembly_v0
-  est_time_hr: 1.5
-  labor_hours: 1.5
-  notes: Install cylinder, hoses, valves, and power unit.
-- process_id: hydraulic_system_integration_v0
-  est_time_hr: 1.0
-  labor_hours: 1.0
-  notes: Fill/bleed hydraulics; set relief valves.
+- process_id: enclosure_assembly_basic_v0
+- process_id: heating_element_installation_v0
+- process_id: lamination_basic_v0
 - process_id: wiring_and_electronics_integration_v0
-  est_time_hr: 0.8
-  labor_hours: 0.8
-  notes: Wire controls, limit switches, safety interlocks.
 - process_id: integration_test_basic_v0
-  est_time_hr: 0.8
-  labor_hours: 0.6
-  notes: Cycle press with mold, verify pressure and ejection.
-assumptions: Hydraulic press variant for regolith bricks; uses hydraulic system modules
-  present in BOM; includes mold set.
-notes: Local build route for regolith brick hydraulic press v0.
+notes: Prototype vacuum furnace v0 assembled from basic stock, welding, assembly,
+  heating elements, insulation, wiring; placeholder timing/energy to be refined.
 ```
 
 ```yaml
-# kb/recipes/recipe_press_hydraulic_v1.yaml
-id: recipe_press_hydraulic_v1
+# kb/recipes/recipe_machine_coordinate_measuring_machine_v0.yaml
+id: recipe_machine_coordinate_measuring_machine_v0
 kind: recipe
-name: Recipe for hydraulic press v1
-produces_id: press_hydraulic
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: coordinate_measuring_machine_v0
+variant_id: v0
 steps:
-- process_id: metal_casting_basic_v0
-  notes: Cast frame, columns, and base (approx 600 kg)
-- process_id: welding_brazing_basic_v0
-  notes: Weld hydraulic cylinder mounting, reinforcement gussets
-- process_id: machining_finish_basic_v0
-  notes: Machine ram guides, platen surfaces, cylinder mounting bores
+- process_id: precision_grinding_basic_v0
+  est_time_hr: 40.0
+  machine_hours: 40.0
+  labor_hours: 20.0
+  notes: "Grind and lap granite base to extreme flatness (\xB10.001 mm)"
+- process_id: machining_precision_v0
+  est_time_hr: 30.0
+  machine_hours: 30.0
+  labor_hours: 15.0
+  notes: Machine linear motion stages, guide rails, and mounting components to tight
+    tolerances
 - process_id: assembly_basic_v0
-  notes: Assemble hydraulic cylinders, rams, platens, pressure gauges
-- process_id: hydraulic_system_integration_v0
-  notes: Install hydraulic pump, valves, hoses, and pressure controls
+  est_time_hr: 20.0
+  labor_hours: 20.0
+  notes: Assemble X-Y-Z motion stages on granite base, install linear encoders and
+    bearings
+- process_id: precision_alignment_and_leveling_v0
+  est_time_hr: 16.0
+  labor_hours: 16.0
+  notes: Align and level all axes to extreme accuracy using laser interferometer
 - process_id: wiring_and_electronics_integration_v0
-  notes: Install electrical controls, safety interlocks, pressure sensors
-notes: Alternative production route for hydraulic press; provides explicit path for
-  indexer.
+  est_time_hr: 8.0
+  labor_hours: 8.0
+  notes: Install touch probe, motion controllers, and measurement computer
+- process_id: calibration_basic_v0
+  est_time_hr: 12.0
+  labor_hours: 12.0
+  notes: Calibrate CMM using precision reference standards
+- process_id: integration_test_basic_v0
+  est_time_hr: 8.0
+  labor_hours: 6.0
+  notes: Test measurement accuracy and repeatability
+- process_id: inspection_basic_v0
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  notes: "Verify CMM performance meets \xB10.005 mm tolerance specification"
+assumptions: "Precision 3D coordinate measuring machine with granite base, X-Y-Z linear\
+  \ stages, and touch probe. 800 kg system for dimensional inspection to \xB10.005\
+  \ mm accuracy. Critical for quality control of precision parts."
+notes: Manufacturing of coordinate measuring machine. Total assembly time ~136 hours.
+  Requires extreme precision in grinding, machining, alignment, and calibration. Essential
+  for precision manufacturing quality control.
 ```
 
 
 ### Bom Examples
 
+```yaml
+# kb/boms/bom_labor_bot_general_v0.yaml
+id: bom_labor_bot_general_v0
+kind: bom
+owner_item_id: labor_bot_general_v0
+components:
+- item_id: machine_frame_small
+  qty: 1
+  notes: "Robot base frame, 10 kg, cast/welded steel, 600\xD7600\xD7400mm, houses\
+    \ J1 rotation"
+- item_id: robot_arm_link_aluminum
+  qty: 1
+  notes: Upper arm link, 1.0m aluminum box beam, 8 kg, houses J2 motor
+- item_id: robot_arm_link_aluminum
+  qty: 1
+  notes: Forearm link, 0.8m aluminum tapered beam, 7 kg, houses J3 motor
+- item_id: robot_wrist_3axis
+  qty: 1
+  notes: 3-axis wrist module (J4-J5-J6), aluminum housing with steel shafts, 5 kg
+- item_id: motor_housing_cast
+  qty: 6
+  notes: Joint housings, aluminum castings, enclose motors/gearboxes, sealed bearings
+- item_id: motor_electric_medium
+  qty: 3
+  notes: 400W BLDC motors for joints 1-2 (base, shoulder), 3000 rpm, integrated 20-bit
+    encoders, 4 kg each
+- item_id: motor_electric_medium
+  qty: 1
+  notes: 300W BLDC motor for joint 3 (elbow), 3000 rpm, 3 kg
+- item_id: motor_electric_small
+  qty: 2
+  notes: 200W BLDC motors for wrist joints 4-6, 4000 rpm, 2.5 kg each
+- item_id: harmonic_drive_reducer_medium
+  qty: 3
+  notes: 100:1 ratio, 50mm diameter, for joints 1-3 (base, shoulder, elbow), 2 kg
+    each
+- item_id: harmonic_drive_reducer_medium
+  qty: 3
+  notes: 80:1 ratio, 40mm diameter, for wrist joints 4-6, 2 kg each
+- item_id: power_supply_small_imported
+  qty: 1
+  notes: 48V DC output, 2.5 kW continuous, from 240V 3-phase AC input, 5 kg
+- item_id: power_distribution_board
+  qty: 1
+  notes: "PCB with bus bars, 6\xD7 circuit breakers, routes 48V to motor controllers,\
+    \ 2 kg"
+- item_id: battery_backup_small
+  qty: 1
+  notes: Li-ion 48V 100Wh emergency backup for brake holding on power loss, 1 kg
+- item_id: computer_core_imported
+  qty: 1
+  notes: 'Industrial PC: ARM/x86 4-core, 8GB RAM, real-time Linux, EtherCAT master,
+    kinematics, 3 kg'
+- item_id: servo_drive_controller
+  qty: 6
+  notes: FOC servo drives, EtherCAT communication, 1kHz update, position/velocity/torque
+    modes, 0.3 kg each
+- item_id: safety_controller_plc
+  qty: 1
+  notes: SIL 2 safety PLC, monitors E-stop/limits, triggers Safe Torque Off, 1 kg
+- item_id: sensor_suite_general
+  qty: 1
+  notes: "Stereo camera pair, 2\xD7 5MP cameras for pose estimation and inspection,\
+    \ 30fps, 2 kg"
+- item_id: force_torque_sensor_6axis
+  qty: 1
+  notes: "6-axis F/T sensor, \xB1200N/\xB120Nm, strain gauge on aluminum flexure,\
+    \ 2 kg"
+- item_id: touch_sensor_capacitive
+  qty: 2
+  notes: Capacitive touch sensors for gripper collision detection, 0.25 kg each
+- item_id: proximity_sensor_inductive
+  qty: 4
+  notes: Inductive proximity sensors for workspace boundaries and homing, 0.25 kg
+    each
+- item_id: instrument_mounts_basic
+  qty: 1
+  notes: Camera mounting bracket, aluminum, 2 kg
+- item_id: led_ring_light
+  qty: 2
+  notes: LED ring lights (12W each) for camera illumination, with diffusers, 1 kg
+    each
+- item_id: electric_parallel_gripper
+  qty: 1
+  notes: 2-finger 120mm stroke, 200N force, interchangeable jaws, aluminum body, 4
+    kg
+- item_id: stepper_motor_precision
+  qty: 1
+  notes: NEMA 23 stepper with ball screw for gripper actuation, 2 kg
+- item_id: quick_change_tool_interface
+  qty: 1
+  notes: ISO 9409-1-50-4-M6 coupling, 8-pin connector, pneumatic/manual lock, 2 kg
+- item_id: assembled_cable_harness
+  qty: 6
+  notes: 'Motor cables: 3m shielded 3-phase + encoder, M12/M23 connectors, 1 kg each'
+- item_id: assembled_cable_harness
+  qty: 1
+  notes: 'Signal bundle: EtherCAT, USB3, force sensor, safety, ~25m total, 2 kg'
+- item_id: cable_drag_chain
+  qty: 2
+  notes: Polymer energy chains for base and shoulder cable routing, 2m each, 1.5 kg
+    each
+- item_id: electrical_wire_and_connectors
+  qty: 1
+  notes: 'Connector set: M12, M23, RJ45, USB-C, terminal blocks, ~40 units, 2 kg'
+- item_id: thermal_management_system
+  qty: 1
+  notes: "6\xD7 copper heat pipes from motors, aluminum radiator fins (0.3m\xB2),\
+    \ thermal pads, 2 kg"
+- item_id: emergency_stop_system
+  qty: 1
+  notes: "2\xD7 mushroom buttons, dual-channel safety relay, wiring, 1 kg"
+- item_id: safety_light_curtain
+  qty: 1
+  notes: "Optical safety curtain, 2m\xD72m coverage, IEC 61496 Type 4, <100ms response,\
+    \ 2 kg"
+- item_id: protective_cover_set
+  qty: 1
+  notes: Polycarbonate/aluminum covers for motors, gears, pinch points, 3 kg
+notes: 'Complete bill of materials for labor_bot_general_v0 - a 6-DOF industrial
+
+  robotic manipulator for lunar manufacturing.
+
+
+  Design basis: docs/labor_bot_design_memo.md
+
+  Parts mapping: docs/labor_bot_parts_mapping.md
+
+
+  Total mass: 120 kg
+
+  - Mechanical structure: 35 kg
+
+  - Actuation (motors + gearboxes): 30 kg
+
+  - Power system: 8 kg
+
+  - Control system: 6 kg
+
+  - Sensing system: 12 kg
+
+  - End effector: 8 kg
+
+  - Wiring and integration: 15 kg
+
+  - Safety and enclosure: 6 kg
+
+
+  Component reuse strategy (per parts_and_labor_guidelines.md):
+
+  - 14 existing parts reused (motors, frames, cables, sensors)
+
+  - 18 new parts created (precision mechanisms, safety, robot-specific)
+
+
+  Lunar manufacturability:
+
+  - Structures, cables, thermal systems: ~55 kg (46%) - lunar Al/Fe/Cu
+
+  - Motors, gearboxes, sensors: ~35 kg (29%) - partial (need magnets, precision)
+
+  - Electronics, magnets, optics: ~30 kg (25%) - Earth import required
+
+
+  Assembly time: ~140 hours (8 phases from base to testing/calibration)
+
+
+  This BOM replaces the previous stub (assembly_tools_basic) with a realistic
+
+  breakdown of robot subsystems based on industrial manipulator architecture.
+
+  '
+```
+
+```yaml
+# kb/boms/bom_welding_tig_unit_v0_v0.yaml
+id: bom_welding_tig_unit_v0_v0
+kind: bom
+owner_item_id: welding_tig_unit_v0
+components:
+- item_id: torch_assembly
+  qty: 1.0
+  unit: unit
+  notes: TIG torch assembly
+- item_id: welding_power_supply_unit
+  qty: 1.0
+  unit: unit
+  notes: Welding power supply unit
+- item_id: gas_supply_regulator
+  qty: 1.0
+  unit: unit
+  notes: Gas regulator for TIG arc shielding gas
+- item_id: gas_cylinder_argon_or_nitrogen
+  qty: 1.0
+  unit: unit
+  notes: Inert shielding gas cylinder (argon or nitrogen)
+- item_id: gas_flow_controller
+  qty: 1.0
+  unit: unit
+  notes: Gas flow controller for TIG torch
+- item_id: gas_inlet_manifold
+  qty: 1.0
+  unit: unit
+- item_id: inert_gas_manifold
+  qty: 1.0
+  unit: unit
+- item_id: coolant_loop_basic
+  qty: 1.0
+  unit: unit
+  notes: Coolant loop for TIG power electronics
+- item_id: circulation_pump_coolant
+  qty: 1.0
+  unit: unit
+- item_id: control_panel_basic
+  qty: 1.0
+  unit: unit
+notes: Expanded BOM for TIG welding unit; includes essential subsystems for gas handling
+  and cooling.
+```
+
+```yaml
+# kb/boms/bom_hpht_furnace_v0.yaml
+id: bom_hpht_furnace_v0
+kind: bom
+owner_item_id: hpht_furnace_v0
+components:
+- item_id: furnace_shell_refractory
+  qty: 1
+- item_id: heating_element_set_high_temp
+  qty: 1
+- item_id: insulation_pack_high_temp
+  qty: 1
+- item_id: temperature_controller_basic
+  qty: 1
+- item_id: power_conditioning_module
+  qty: 1
+- item_id: cooling_loop_basic
+  qty: 1
+- item_id: power_bus_high_current
+  qty: 1
+- item_id: control_compute_module_imported
+  qty: 1
+- item_id: fastener_kit_medium
+  qty: 4
+notes: Placeholder HPHT furnace BOM; refined with complete hardware data.
+```
+
 
 ### Machine Examples
 
 ```yaml
-# kb/items/machines/visual_odometry_system_v0.yaml
-id: visual_odometry_system_v0
+# kb/items/machines/basic_fabrication_station_v0.yaml
+id: basic_fabrication_station_v0
+name: Basic fabrication station
 kind: machine
-name: Visual odometry system
-mass: 6.0
+mass: 500.0
 unit: kg
+bom: bom_basic_fabrication_station_v0
+notes: Generic fabrication station used in early-stage KB modeling. Placeholder; extend
+  BOMs later.
 capabilities:
-- odometry
-- visual_odometry
-- slam
-- data_logging
-bom: bom_visual_odometry_system_v0_v0.yaml
-notes: Camera-based dead reckoning system used to estimate motion/pose from onboard
-  camera streams. Placeholder mass; refine with actual hardware data.
+- fabrication
+- fixturing_table
+- cutting
+- drilling
+- milling
+- welding
+- assembly
+recipe: recipe_basic_fabrication_station_v0
 ```
 
 ```yaml
-# kb/items/machines/ffc_reactor_enhanced_v0.yaml
-id: ffc_reactor_enhanced_v0
+# kb/items/machines/universal_constructor_system_v0.yaml
+id: universal_constructor_system_v0
 kind: machine
-name: Enhanced FFC Cambridge reactor
-mass: 1200.0
+name: Universal constructor system
+mass: 1000.0
 unit: kg
-bom: bom_ffc_reactor_enhanced_v0
+notes: 'Placeholder universal constructor system (v0) intended to manufacture and
+  assemble other machines and parts.
+
+  This entry resolves the queue gap for a referenced-butundefined item found in the
+  seed paper_reviews_dec2024_comprehensive_v0.
+
+  '
+bom: bom_universal_constructor_system_v0
 capabilities:
-- molten_salt_electrolysis
-- high_temperature_processing
-- gas_extraction
-notes: "Enhanced fluoride-fluoride conversion (FFC) reactor for molten CaCl2 electrolysis\
-  \ at ~900\xB0C. Primary outputs: Ca, Al, Si metals and O2 gas from regolith-derived\
-  \ feedstock. Energy split typically ~97% thermal and ~3% electrical; integration\
-  \ with solar thermal. Dependencies at installation: molten_salt_containment_v0,\
-  \ graphite_anode_assembly_v0, temperature_control_system_v0. Seed context: from\
-  \ Ellery/Moon ISRU literature; see seeds/paper reviews for provenance."
+- assembly
+- fabrication
+- machining
+- welding
+- testing
+recipe: recipe_universal_constructor_system_v0
 ```
 
 ```yaml
-# kb/items/machines/plate_rolling_mill.yaml
-id: plate_rolling_mill
+# kb/items/machines/basic_fabrication_station.yaml
+id: basic_fabrication_station
+name: Basic fabrication station
 kind: machine
-name: Plate rolling mill
-mass: 1500.0
+mass: 450.0
 unit: kg
-bom: bom_plate_rolling_mill_v0
+bom: bom_basic_fabrication_station_v0
+notes: Base fabrication station (unversioned) referenced by KB gaps; extended in v0
+  as needed.
 capabilities:
-- rolling
-- metal_forming
-- plate_production
-material_class: steel
-notes: Plate rolling mill for producing metal plate from ingots or billets. Heavy
-  rollers compress heated metal through multiple passes to achieve desired thickness.
-  Used for producing steel plate, sheet metal stock, and structural materials. Includes
-  drive motors, roll adjustment, and heating system.
-preferred_variant: simple
+- fabrication
+- assembly
+- machining
+- welding
+- deburring
+processes_supported:
+- tension_gauge_fabrication_v0
+recipe: recipe_basic_fabrication_station_v1
 ```
 
 
@@ -812,6 +1216,7 @@ notes: Complete hydraulic hose assembly with reinforced rubber or thermoplastic 
   crimp fittings, and protective covering. Rated for high pressure (200-400 bar).
   Used for hydraulic power transmission in presses, cylinders, and mobile equipment.
   Includes both flexible hose and metal end fittings.
+recipe: recipe_hydraulic_hose_assembly_v0
 ```
 
 ```yaml
@@ -823,68 +1228,85 @@ mass: 0.1
 unit: kg
 material_class: steel
 notes: Mock bore features produced during bore installation on a mount frame.
+recipe: recipe_mount_frame_bearing_bores_v0
 ```
 
 ```yaml
-# kb/items/parts/rectifier_full_bridge_v0.yaml
-id: rectifier_full_bridge_v0
+# kb/items/parts/antenna_matching_network.yaml
+id: antenna_matching_network
+name: Antenna Matching Network
 kind: part
-name: Full-bridge rectifier module
-mass: 0.3
-unit: unit
+mass: 0.25
+unit: kg
 material_class: electronic
-notes: "Bridge rectifier module for AC\u2192DC conversion; diode pack with heat sink\
-  \ and leads."
+notes: Alias placeholder bridging to antenna_matching_network_v0; replace with a versioned
+  entry later.
+recipe: recipe_antenna_matching_network_unversioned_v0
 ```
 
 
 ### Material Examples
 
 ```yaml
-# kb/items/materials/methane_pyrolysis_carbon_v0.yaml
-id: methane_pyrolysis_carbon_v0
-name: Methane pyrolysis carbon (carbon black)
+# kb/items/materials/hydrogen_chloride.yaml
+id: hydrogen_chloride
+name: Hydrogen Chloride
 kind: material
-unit: kg
-mass: 1.0
-material_class: carbon
-notes: "Product of methane pyrolysis: CH4 \u2192 C + 2H2 (carbon black).\nSeed material\
-  \ referenced in comprehensive paper reviews. Placeholder entry to\nallow closed-loop\
-  \ modeling until a dedicated production process for this carbon is defined.\n"
-source_tags:
-- seed
-- paper_reviews_dec2024_comprehensive_v0
-```
-
-```yaml
-# kb/items/materials/finished_part_deburred.yaml
-id: finished_part_deburred
-kind: material
-name: Finished part (deburred)
 mass: 1.0
 unit: kg
-material_class: metal
-notes: 'Generic placeholder for a part after deburring operations.
+material_class: gas
+state: gas
+physical_properties:
+  boiling_point_c: -85.05
+  notes: Colorless gas at STP. When dissolved in water, forms hydrochloric acid solution.
+notes: 'Hydrogen chloride (HCl). Colorless, pungent gas at STP.
 
-  Represents any part that has had sharp edges, burrs, and flash removed.
+  Dissolves in water to form hydrochloric acid (aqueous HCl).
 
-  Used as output in deburring and finishing processes.
+  Product of chlorination and carbochlorination processes.
 
-  Actual material properties depend on the input part being deburred.
+  Recyclable in closed-loop leaching systems.
 
   '
+recipe: recipe_hydrogen_chloride_v0
 ```
 
 ```yaml
-# kb/items/materials/raw_metal_block.yaml
-id: raw_metal_block
-name: Raw metal block
+# kb/items/materials/epoxy_precursor_block_v0.yaml
+id: epoxy_precursor_block_v0
+name: Epoxy resin precursor block
 kind: material
-mass: 3.0
+mass: 1.0
 unit: kg
-material_class: metal
-notes: Placeholder raw metal block used as input for the robot tool quick-change fabrication
-  process.
+material_class: polymer
+notes: Placeholder precursor material for epoxy resin base synthesis. Represents unreacted
+  epoxy monomer or prepolymer stage.
+recipe: recipe_epoxy_precursor_block_v0
+```
+
+```yaml
+# kb/items/materials/silicon_tetrachloride.yaml
+id: silicon_tetrachloride
+name: Silicon Tetrachloride
+kind: material
+mass: 1.0
+unit: kg
+material_class: chemical
+state: liquid
+physical_properties:
+  boiling_point_c: 57.6
+  melting_point_c: -68.7
+  notes: Colorless fuming liquid at STP. Volatile, reacts with moisture.
+notes: 'Silicon tetrachloride (SiCl4). Liquid at room temperature.
+
+  Intermediate in silicon purification via Siemens process.
+
+  Produced via carbochlorination of silicates.
+
+  Highly reactive with water, producing HCl and silicic acid.
+
+  '
+recipe: recipe_silicon_tetrachloride_v0
 ```
 
 
@@ -949,31 +1371,7 @@ Key papers from Alex Ellery:
 ---
 ## 5. Queue Workflow
 
-# Multi-Agent Queue Usage
-
-## REQUIRED READING FIRST
-
-**Before working on the queue, you MUST read:**
-1. `design/meta-memo.md` — Project overview and goals
-2. `design/memo_a.md` — Specification and design principles
-3. `design/memo_b.md` — Knowledge acquisition methodology
-
-See `docs/README.md` for full onboarding documentation.
-
-## Queue Operations
-
-- IDs are stable: `id = "<gap_type>:<item_id>"` with `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.
-- Always lease before editing:
-  - Lease: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
-    - Only one lease per `item_id` is allowed; if another entry with the same `item_id` is leased, the request is denied.
-  - Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name>`
-  - Release: `.venv/bin/python -m kbtool queue release --id <gap_type:item_id> --agent <name>`
-  - GC expired leases: `.venv/bin/python -m kbtool queue gc [--prune-done-older-than N]`
-  - List: `.venv/bin/python -m kbtool queue ls`
-- Do not edit items you haven’t leased. If you find another agent’s edits, reconcile rather than overwrite; leave context in `notes`.
-- Indexer rebuilds the queue each run, preserving leases/done status; gaps resurface if fixes are incomplete.
-- Pruning only removes items marked `resolved`/`superseded`; gaps persist until fixes land.
-
+[Error reading /Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md: [Errno 2] No such file or directory: '/Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md']
 
 ---
 ## 6. Gap Types and Validation

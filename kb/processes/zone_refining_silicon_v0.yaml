@@ -1,0 +1,91 @@
+id: zone_refining_silicon_v0
+kind: process
+name: Zone refining for ultra-pure silicon
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: silicon_metal_pure
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_ultra_pure
+    qty: 0.98
+    unit: kg
+  - item_id: silicon_impure_ends
+    qty: 0.02
+    unit: kg
+requires_ids:
+  - zone_refining_apparatus_v0
+  - rf_heating_coil_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 12.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 25.0
+  notes: RF heating for local zone melting at 1600°C, multiple passes
+time_model:
+  type: fixed_time
+  hr_per_batch: 48.0
+  notes: Multiple slow passes of molten zone through ingot
+notes: |
+  Zone refining for achieving extreme purity levels in silicon for semiconductors.
+  Source: Sustainable-ISRU-on-the-Moon.txt
+  Process: Thermal zone melting with impurity segregation
+  Temperature: ~1600°C (local melting zone)
+  Purpose: Achieve 9-11 nines purity (99.9999999-99.999999999% pure)
+  Essential for semiconductor manufacturing
+  Process details:
+    1. Silicon ingot from Siemens process (polycrystalline)
+    2. Mount in horizontal apparatus
+    3. RF induction coil creates narrow molten zone (~1 cm wide)
+    4. Slowly translate molten zone along ingot (mm/hr)
+    5. Impurities preferentially stay in liquid phase
+    6. Solid crystallizes behind zone with lower impurity
+    7. Multiple passes (10-50) progressively concentrate impurities
+    8. Cut off impure ends, recycle to earlier processing
+  Physical principle: Distribution coefficient k = Csolid/Cliquid
+    - For most impurities in Si: k < 1 (reject into liquid)
+    - Examples: B (k=0.8), P (k=0.35), Al (k=0.002)
+    - Impurities swept to end of ingot
+  Products:
+    - Ultra-pure silicon: Center section of ingot
+    - Impure ends: Recycled to Siemens process
+  Purity levels achievable:
+    - Starting: 99.9999% (6 nines, from Siemens)
+    - After 10 passes: 99.9999999% (9 nines)
+    - After 30-50 passes: 99.999999999% (11 nines)
+  Critical impurities removed:
+    - Boron (p-type dopant): Must control to <0.1 ppb
+    - Phosphorus (n-type dopant): Must control to <0.1 ppb
+    - Transition metals (Fe, Cu, Ni): Recombination centers
+    - Carbon: Forms SiC defects
+  Advantages: Achieves extreme purity levels
+    No chemical reagents required
+    Physics-based separation (thermodynamic)
+    Scalable to large ingots
+  Disadvantages: Very slow process (days per ingot)
+    Energy intensive (maintain molten zone)
+    Requires multiple passes for highest purity
+    ~2% material loss to impure ends per pass
+  Lunar context: Essential for electronics manufacturing
+    Semiconductor devices require 9+ nines purity
+    Photovoltaics can use lower purity (6-7 nines)
+    Zone refining is final purification step
+  Alternative: Czochralski pulling also achieves high purity
+    But zone refining can reach even higher levels
+  Process variations:
+    - Vertical zone refining (better for vacuum)
+    - Horizontal (shown here, easier mechanically)
+    - Float-zone (contactless, highest purity)
+  Yield: 98% ultra-pure silicon per pass
+    Impure ends (2%) recycled to Siemens or earlier
+  Temperature control critical:
+    - Too hot: Excessive evaporation, Si loss
+    - Too cold: Zone freezes, process stops
+    - Must maintain 1600°C ± 10°C in zone
+  Atmosphere: Inert (Ar) or vacuum
+    Prevents oxidation and contamination
+  Post-processing: Czochralski growth into single crystal
+    Or direct use as polycrystalline for some applications

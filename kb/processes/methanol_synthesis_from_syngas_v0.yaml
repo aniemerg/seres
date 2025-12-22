@@ -1,0 +1,81 @@
+id: methanol_synthesis_from_syngas_v0
+kind: process
+name: Methanol synthesis from syngas
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: carbon_monoxide
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.143
+    unit: kg
+outputs:
+  - item_id: methanol_liquid
+    qty: 1.14
+    unit: kg
+requires_ids:
+  - methanol_synthesis_reactor_v0
+  - alumina_catalyst_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: Exothermic reaction at 250°C with pressure
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: Catalytic synthesis and condensation
+notes: |
+  Methanol synthesis from carbon monoxide and hydrogen (syngas).
+  Source: Sustainable-ISRU-on-the-Moon.txt
+  Reaction: CO + 2H2 → CH3OH (exothermic)
+  Temperature: 250°C
+  Pressure: 5-10 MPa (50-100 bar)
+  Catalyst: Alumina (Al2O3 from anorthite processing)
+  Process: Catalytic synthesis under pressure
+  Purpose: Second step in silicone plastic synthesis chain
+  Chemical feedstock for methyl chloride production
+  Industrial solvent and fuel
+  Process details:
+    1. Syngas (CO + H2) from steam reforming
+    2. Compressed to 5-10 MPa
+    3. Passed over alumina catalyst at 250°C
+    4. Methanol (CH3OH) produced
+    5. Condense liquid methanol
+    6. Unreacted syngas recycled
+  Products:
+    - CH3OH (methanol/methyl alcohol): Feedstock for silicone synthesis
+  Alumina catalyst source:
+    - Anorthite processing: CaAl2Si2O8 → Al2O3
+    - HCl leaching: CaAl2Si2O8 + 8HCl → Al2O3 + ...
+    - Carbothermal: CaAl2Si2O8 + 4C → Al2O3 + ...
+  Alcohol determination:
+    - Methanol from methanol (CH3OH yields polydimethylsiloxane PDMS)
+    - Higher alcohols yield different siloxanes
+  Next step: CH3OH + HCl → CH3Cl + H2O (methyl chloride for Rochow process)
+  Stoichiometry: CO (28g) + 2H2 (4g) → CH3OH (32g)
+  Mass fractions: 114% CH3OH from CO input
+  Syngas ratio: CO:H2 = 1:2 required (steam reforming gives 1:3, adjust)
+  Advantages: Exothermic reaction (releases heat)
+  High conversion efficiency (>90%)
+  Proven industrial process
+  Alumina catalyst from abundant lunar anorthite
+  Moderate temperature (vs steam reforming)
+  Disadvantages: High pressure requirement (5-10 MPa)
+  Equilibrium-limited (requires recycle of unreacted syngas)
+  Catalyst poisoning by sulfur and chlorides
+  Applications:
+    - Silicone synthesis: → methyl chloride → dimethyldichlorosilane → PDMS
+    - Chemical feedstock: Formaldehyde, acetic acid, MTBE
+    - Fuel: Methanol fuel cells, combustion engines
+    - Solvent: Industrial processes
+  Lunar context: Critical intermediate for silicone plastics
+  Silicone essential for: Wire insulation, seals, elastomers, gaskets
+  Limited alternatives to silicone for flexible electrical insulation
+  Methanol also useful as solvent for chemical processing
+  Alternative alcohols (ethanol, etc.) require different synthesis routes
+  Silicone chain: CH4 → syngas → CH3OH → CH3Cl → (CH3)2SiCl2 → PDMS

@@ -1,0 +1,74 @@
+id: sabatier_reaction_complete_v0
+kind: process
+name: Sabatier reaction (CO2 methanation)
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: carbon_dioxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.182
+    unit: kg
+outputs:
+  - item_id: methane_gas
+    qty: 0.364
+    unit: kg
+  - item_id: water
+    qty: 0.818
+    unit: kg
+requires_ids:
+  - catalytic_reactor_v0
+  - nickel_catalyst_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 2.0
+  notes: Exothermic reaction at 300-400°C, produces heat
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: Catalytic methanation time
+notes: |
+  Sabatier reaction for converting carbon dioxide to methane using hydrogen.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: CO2 + 4H2 → CH4 + 2H2O (exothermic)
+  Temperature: 300-400°C
+  Catalyst: Nickel-based (Ni/Al2O3 common)
+  Process: Catalytic hydrogenation of CO2
+  Purpose: Recycle CO2 from FFC process back to methane
+  Close carbon cycle in ISRU systems
+  Produce methane for carbothermal reduction processes
+  Thermodynamics:
+    - Exothermic (ΔH = -165 kJ/mol, releases heat)
+    - Favored at lower temperatures
+    - High conversion efficiency (95%+)
+  Products:
+    - CH4 (methane): Reducing agent, fuel, chemical feedstock
+    - H2O (water): Electrolyzed to recycle H2 + produce O2
+  Water electrolysis: 2H2O → 2H2 + O2
+    - Recycles hydrogen back to Sabatier
+    - Net: CO2 + energy → C (in CH4) + O2
+  Stoichiometry: CO2 (44g) + 4H2 (8g) → CH4 (16g) + 2H2O (36g)
+  Mass fractions: 36.4% CH4, 81.8% H2O from inputs
+  Hydrogen source: Water electrolysis, volatile extraction
+  CO2 source: FFC process, combustion, life support, respiration
+  Catalyst: Nickel from Mond process (abundant on lunar meteorites)
+  Applications:
+    - Methane generation for carbothermal reduction (FeTiO3, MgSiO3, etc.)
+    - Fuel production for combustion engines
+    - Chemical feedstock (syngas, siloxanes via CH4 + H2O → CO + H2)
+    - CO2 removal from life support
+  Comparison to alternatives:
+    - Bosch: CO2 + 2H2 → C + 2H2O (less H2, solid carbon)
+    - Reverse water-gas shift: CO2 + H2 → CO + H2O (produces CO)
+  Sabatier advantages: Exothermic (energy positive), high conversion, simple
+  Used on ISS for CO2 recycling
+  Lunar ISRU: Essential for carbon cycle and methane regeneration
+  Coupled with carbothermal processes for complete mineral processing
+  Methane can be stored or used immediately
+  Alternative: Direct use of CO from Boudouard for carbonyl processes

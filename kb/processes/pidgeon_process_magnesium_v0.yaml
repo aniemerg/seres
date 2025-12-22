@@ -1,0 +1,69 @@
+id: pidgeon_process_magnesium_v0
+kind: process
+name: Pidgeon process for magnesium extraction
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: olivine_forsterite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_oxide
+    qty: 0.798
+    unit: kg
+outputs:
+  - item_id: calcium_silicate
+    qty: 0.985
+    unit: kg
+  - item_id: magnesium_metal_vapor
+    qty: 0.345
+    unit: kg
+requires_ids:
+  - high_temp_retort_v0
+  - vacuum_condenser_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 16.0
+  notes: High temperature reduction above 1000°C in vacuum/low pressure
+time_model:
+  type: fixed_time
+  hr_per_batch: 8.0
+  notes: Vapor generation and condensation time
+notes: |
+  Pidgeon process for direct magnesium metal extraction from olivine using quicklime.
+  Source: Lunar-Demandite.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: Mg2SiO4 + 2CaO → Ca2SiO4 + 2Mg (vapor)
+  Temperature: >1000°C (typically 1100-1200°C)
+  Pressure: Vacuum or low pressure (drives Mg vaporization)
+  Process: Thermal reduction with CaO in sealed retort
+  Magnesium boiling point: 1091°C (vaporizes during process)
+  Product collection: Mg vapor condensed on cool surfaces
+  Products:
+    - Mg metal (vapor→solid): Lightweight structural metal, alloying element
+    - Ca2SiO4 (calcium silicate): Cement component, slag
+  Calcium oxide source: Anorthite carbothermal reduction or limestone calcination
+  Process details:
+    1. Mix powdered olivine with CaO in stoichiometric ratio
+    2. Heat mixture in sealed retort under vacuum
+    3. Mg vaporizes and migrates to condenser
+    4. Condense Mg on cool surface as solid metal
+    5. Ca2SiO4 remains as solid residue
+  Advantages: Direct metal production (not oxide)
+  No electrolysis required
+  Simple chemistry with abundant lunar materials
+  Proven terrestrial process (dominant Mg production method)
+  Disadvantages: High temperature requirement
+  Requires vacuum/low pressure system
+  Vapor handling complexity
+  CaO input requirement
+  Stoichiometry: Mg2SiO4 (140.7g) + 2CaO (112.2g) → 2Mg (48.6g) + Ca2SiO4 (172.2g)
+  Mg yield from olivine: 34.5% by mass
+  Ca2SiO4 yield: 98.5% from combined inputs (123% from olivine alone)
+  Most economic terrestrial process for Mg production
+  Well-suited for lunar ISRU with CaO from anorthite
+  Alternative to FFC Cambridge or aluminothermic routes
+  Vacuum environment on Moon advantageous for Mg vapor collection

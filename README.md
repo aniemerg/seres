@@ -9,8 +9,27 @@ Minimal setup to run the KB indexer and iterate on YAML data.
 2. `design/memo_a.md` — Formal specification and design principles
 3. `design/memo_b.md` — Knowledge acquisition methodology and constraints
 4. `docs/parts_and_labor_guidelines.md` — Parts, BOMs, and labor modeling policy
+5. **`docs/conservative_mode_guide.md` — Queue work philosophy (Conservative Mode)**
 
 See `docs/README.md` for complete onboarding documentation.
+
+## Conservative Mode: Default Approach for Queue Work
+
+**Core Principle:** Treat queue items as potential symptoms, not direct fix requests.
+
+Before creating any new item:
+- **Check if it already exists** under a different name (search variations)
+- **Check for equivalents** within 5× magnitude (same function, compatible materials)
+- **Consider adaptations** of existing items (phase changes, recipe modifications)
+- **Evaluate labor bot + tools** instead of special-purpose machines
+- **Verify the reference** isn't erroneous or based on outdated assumptions
+
+**See `docs/conservative_mode_guide.md` for complete decision trees and examples.**
+
+Quick examples:
+- ❌ Don't create `water_vapor_v0` → ✅ Use `water` + add boiling step to recipe
+- ❌ Don't create `hose_crimping_station_v0` → ✅ Use `labor_bot_general_v0` + `crimping_tool_manual`
+- ❌ Don't create `steel_plate_large` if `steel_plate` exists within 5× size → ✅ Reuse existing, note variation
 
 ## Quick start
 - Install deps with uv: `uv sync` (creates `.venv`).

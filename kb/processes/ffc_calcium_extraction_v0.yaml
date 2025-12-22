@@ -1,0 +1,68 @@
+id: ffc_calcium_extraction_v0
+kind: process
+name: FFC Cambridge calcium metal extraction
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: calcium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.2
+    unit: kg
+  - item_id: electrodes
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: calcium_metal_pure
+    qty: 0.714
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.286
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.18
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.07
+    unit: kg
+requires_ids:
+  - ffc_electrolysis_cell_v0
+  - inert_anode_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 8.0
+  notes: Electrolysis at 900-1100°C, lower than Hall-Heroult
+time_model:
+  type: fixed_time
+  hr_per_batch: 12.0
+  notes: FFC reduction of CaO to calcium metal
+notes: |
+  FFC Cambridge process for extracting pure calcium metal from calcium oxide.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Cathode reaction: CaO + 2e⁻ → Ca + O²⁻
+  Anode reaction: C + O²⁻ → CO + 2e⁻ (or C + 2O²⁻ → CO2 + 4e⁻)
+  Overall: CaO → Ca + ½O2 (with C anode: CaO + C → Ca + CO/CO2)
+  Temperature: 900-1100°C in molten CaCl2 electrolyte
+  Voltage: 2.5-3V typical
+  Products: High-purity calcium metal (>99%), oxygen gas
+  Calcium oxide source: Anorthite carbothermal reduction, lime calcination
+  Calcium metal properties:
+    - More conductive by mass than copper (low density)
+    - Melting point: 842°C (tapped as liquid above this)
+    - Density: 1.55 g/cm³
+    - Electrical conductor for vacuum applications
+    - Chemical reactant for Pidgeon process (Mg extraction)
+  CaCl2 electrolyte recycled (losses <10%)
+  Carbon anode consumed, CO/CO2 can be recycled via Bosch/Boudouard
+  FFC process operates in solid state until Ca melts
+  Stoichiometry: CaO (56.1 g/mol) → Ca (40.1g) + 0.5 O2 (16g)
+  Mass fractions: 71.4% Ca, 28.6% O2
+  Alternative to Hall-Heroult for calcium production
+  Energy efficient compared to traditional metallurgy
+  Suitable for lunar in-situ resource utilization

@@ -1,0 +1,72 @@
+id: olivine_carbothermal_reduction_v0
+kind: process
+name: Carbothermal reduction of olivine
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: olivine_forsterite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.171
+    unit: kg
+outputs:
+  - item_id: magnesium_metal_vapor
+    qty: 0.345
+    unit: kg
+  - item_id: silicon_monoxide_gas
+    qty: 0.298
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 0.398
+    unit: kg
+requires_ids:
+  - ultra_high_temp_furnace_v0
+  - vacuum_condenser_v0
+  - gas_recovery_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 20.0
+  notes: Extreme temperature carbothermal reduction at 2000°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 6.0
+  notes: High temperature vapor phase processing
+notes: |
+  Carbothermal reduction of olivine at extreme temperature to produce Mg vapor and Si.
+  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt
+  Reaction: Mg2SiO4 + 2C → 2Mg + SiO + 2CO
+  Temperature: 2000°C (extreme solar concentration or nuclear heat)
+  Process: High-temperature carbon reduction in vacuum or inert atmosphere
+  All products gaseous at reaction temperature:
+    - Mg vapor (BP 1091°C)
+    - SiO gas (BP 1880°C)
+    - CO gas
+  Product separation by condensation temperature:
+    - SiO condenses first (higher BP)
+    - Mg condenses at lower temperature
+    - CO remains gaseous for collection
+  Advantages: Direct metal production from oxide
+  No reagents except carbon
+  High purity products via vapor separation
+  CO recyclable via Boudouard: C + CO2 → 2CO
+  Disadvantages: Extremely high temperature (2000°C)
+  Vapor handling complexity
+  Energy intensive
+  Mg vaporization losses possible
+  Stoichiometry: Mg2SiO4 (140.7g) + 2C (24g) → 2Mg (48.6g) + SiO (42g) + 2CO (56g)
+  Mass fractions from ore: 34.5% Mg, 29.8% SiO, 39.8% CO
+  SiO further processing options:
+    - Disproportionation: 2SiO → Si + SiO2 (at 1000°C)
+    - Direct use as silicon source
+  Magnesium collection: Condense vapor in cool chamber
+  Similar to vacuum pyrolysis but uses carbon reductant
+  Energy source: Solar concentrators or nuclear thermal reactors
+  Suitable for lunar south pole with continuous solar access
+  Alternative to Pidgeon or FFC routes
+  Highest temperature process for olivine, but yields pure products

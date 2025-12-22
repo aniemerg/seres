@@ -1,0 +1,79 @@
+id: hcl_recovery_from_cacl2_v0
+kind: process
+name: HCl recovery from calcium chloride hydrolysis
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: calcium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.325
+    unit: kg
+outputs:
+  - item_id: calcium_hydroxide
+    qty: 0.667
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 0.657
+    unit: kg
+requires_ids:
+  - high_temp_hydrolysis_reactor_v0
+  - gas_condensation_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 4.0
+  notes: High temperature hydrolysis above 425°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+  notes: Hydrolysis reaction and HCl condensation
+notes: |
+  Recovery of hydrochloric acid from calcium chloride via high-temperature hydrolysis.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
+  Reaction: CaCl2 + 2H2O → Ca(OH)2 + 2HCl (above 425°C)
+  Temperature: >425°C (high temperature required for reaction)
+  Process: Steam hydrolysis to regenerate HCl
+  Purpose: Recover HCl from waste/spent CaCl2
+  Close hydrochloric acid recycling loop
+  Alternative to HCl generation from NaCl
+  Process details:
+    1. CaCl2 (from Solvay by-product or other sources)
+    2. High-temperature steam (H2O vapor above 425°C)
+    3. Hydrolysis produces HCl gas and Ca(OH)2 solid
+    4. HCl gas collected by condensation
+    5. Ca(OH)2 (slaked lime) as solid by-product
+  Products:
+    - HCl (hydrochloric acid gas): Recycled for artificial weathering
+    - Ca(OH)2 (slaked lime): Cement component, CO2 capture
+  Calcium hydroxide applications:
+    - Cement production: Ca(OH)2 + CO2 → CaCO3 + H2O (carbonation)
+    - Water treatment: pH adjustment
+    - CO2 capture: Forms calcium carbonate
+  Stoichiometry: CaCl2 (111g) + 2H2O (36g) → Ca(OH)2 (74g) + 2HCl (73g)
+  Mass fractions: 66.7% Ca(OH)2, 65.7% HCl from CaCl2 input
+  HCl recycling chain:
+    1. HCl used in processes (e.g., anorthite leaching)
+    2. Regenerated in leaching: CaAl2Si2O8 + HCl → CaCl2 + ...
+    3. This process: CaCl2 + H2O → HCl + Ca(OH)2
+    4. HCl recycled to step 1
+  Advantages: Recovers HCl from spent CaCl2
+  Ca(OH)2 useful for cement and CO2 capture
+  Closes HCl recycling loop
+  Reduces reliance on NaCl import for HCl generation
+  Disadvantages: High temperature requirement (>425°C)
+  Additional processing step
+  Not all CaCl2 should be hydrolyzed (need for FFC electrolyte)
+  Lunar context: Enables true HCl recycling
+  CaCl2 from Solvay process can be split:
+    - Portion to FFC electrolyte
+    - Portion hydrolyzed to recover HCl
+  Ca(OH)2 useful for cement (habitat construction)
+  Alternative to constant NaCl consumption
+  Balance: Need both FFC electrolyte AND HCl recycling
+  Optimization required based on system demands

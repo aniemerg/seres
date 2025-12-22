@@ -1,0 +1,79 @@
+id: hcl_generation_from_nacl_v0
+kind: process
+name: HCl generation from NaCl using nitric acid
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: sodium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: nitric_acid_concentrated
+    qty: 1.08
+    unit: kg
+outputs:
+  - item_id: hydrogen_chloride
+    qty: 0.624
+    unit: kg
+  - item_id: sodium_nitrate
+    qty: 1.45
+    unit: kg
+requires_ids:
+  - acid_reactor_v0
+  - gas_collection_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: Moderate heating for HCl gas evolution
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Acid displacement reaction time
+notes: |
+  Generation of hydrochloric acid gas from sodium chloride using nitric acid.
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
+  Reaction: NaCl + HNO3 → HCl + NaNO3
+  Temperature: Moderate heating (80-160°C for HCl gas evolution)
+  Process: Acid displacement - stronger acid displaces weaker from salt
+  Purpose: Generate HCl for artificial weathering and chlorine chemistry
+  Critical enabler for NaCl-based reagent recycling
+  Process details:
+    1. NaCl (solid salt, imported from Earth as recycled reagent)
+    2. React with HNO3 (from Ostwald process)
+    3. HCl gas evolved, collected by condensation or absorption
+    4. NaNO3 (sodium nitrate/saltpetre) remains as solid
+  Products:
+    - HCl (hydrochloric acid gas): Artificial weathering, chlorine source
+    - NaNO3 (sodium nitrate/saltpetre): Oxidizer, nitrogen storage
+  HCl applications (critical):
+    - Anorthite leaching: CaAl2Si2O8 + 8HCl → products (recycled HCl)
+    - Carbochlorination: Provides Cl2 source
+    - Silicon purification: Si + 3HCl → SiHCl3 (recycled HCl)
+    - Rochow process: Forms CH3Cl for silicone synthesis
+    - All processes recycle HCl - not consumed
+  NaCl recycling chain:
+    1. NaCl (import) + HNO3 → HCl + NaNO3
+    2. HCl used in processes, regenerated
+    3. NaNO3 + KCl → NaCl + KNO3 (recovers NaCl)
+    - KCl from orthoclase processing
+  Stoichiometry: NaCl (58.5g) + HNO3 (63g) → HCl (36.5g) + NaNO3 (85g)
+  Mass fractions: 62.4% HCl, 145% NaNO3 from NaCl input
+  Nitric acid source: Ostwald process from ammonia
+  Nitrogen conservation: NaNO3 stores nitrogen as saltpetre
+  Advantages: Simple acid-base chemistry
+  Enables all chlorine chemistry from single NaCl import
+  HCl recycled through all downstream processes
+  NaNO3 useful as oxidizer and N storage
+  Disadvantages: Requires scarce nitrogen (via HNO3)
+  NaCl must be imported from Earth (scarce on Moon)
+  Multi-step process to establish reagents
+  Lunar context: NaCl is THE key imported reagent
+  Small amounts recycled extensively
+  Unlocks silicone plastics, artificial weathering, FFC electrolyte
+  Critical bottleneck: Nitrogen for HNO3 production
+  Alternative: Chloralkali electrolysis (2NaCl + 2H2O → 2NaOH + Cl2 + H2)
+  But this consumes NaCl rather than recycling it

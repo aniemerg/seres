@@ -1,0 +1,208 @@
+id: thermionic_converter_basic_v0
+kind: process
+name: Basic thermionic converter power generation
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: waste_heat_high_temperature
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: electrical_power
+    qty: 0.20
+    unit: kWh
+  - item_id: waste_heat_low_temperature
+    qty: 0.80
+    unit: kWh
+requires_ids:
+  - thermionic_diode_v0
+  - vacuum_envelope_v0
+  - heat_source_v0
+  - cooling_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.1
+    unit: hr
+energy_model:
+  type: conversion_efficiency
+  value: 0.20
+  notes: 20% typical efficiency for basic thermionic conversion
+time_model:
+  type: continuous
+  notes: Continuous power generation from heat source
+notes: |
+  Basic thermionic converter for direct heat-to-electricity conversion.
+  Source: ellery-et-al-2022-metalysis-fray-farthing-chen-process, Power-on-the-Moon-using-ISRU.txt
+  Purpose: Convert waste heat from ISRU processes directly to electrical power
+  Efficiency: 15-20% typical (Russian nuclear reactors achieved 20%)
+  Temperature: 1500-2000°C cathode, 500-800°C anode
+  Simpler than PETE, suitable for waste heat recovery
+  Process details:
+    1. High-temperature heat source (nuclear reactor, concentrated solar, or waste heat)
+    2. Heat cathode to 1500-2000°C (thermionic emission temperature)
+    3. Hot cathode emits electrons (thermionic emission)
+    4. Richardson-Dushman equation: J = A·T² exp(-φ/kT)
+       - J = current density (A/cm²)
+       - A = Richardson constant (120 A/cm²/K² for free electrons)
+       - T = absolute temperature (K)
+       - φ = work function (eV)
+       - k = Boltzmann constant
+    5. Electrons travel across vacuum gap (~10-50 μm) to cooler anode
+    6. Anode collects electrons (maintained at 500-800°C)
+    7. External circuit returns electrons to cathode (generates power)
+    8. Waste heat removed from anode via cooling system
+    9. Continuous operation as long as heat source available
+  Products:
+    - Electrical power: ~20% of input thermal energy
+    - Low-temperature waste heat: ~80% (can be used for secondary processes)
+  Cathode materials and work functions:
+    - Tungsten (W): φ = 4.5 eV (bare), requires very high temperature
+    - Tungsten + BaO coating: φ = 1.8-2.0 eV (lower temperature operation)
+    - Tungsten + CaO coating: φ = 1.6-1.8 eV (better performance)
+    - Molybdenum: φ = 4.2 eV (alternative to tungsten)
+    - Cesiated surfaces (Cs vapor): φ = 1.4-1.6 eV (best performance)
+  Anode materials:
+    - Molybdenum: Good thermal conductivity, moderate work function
+    - Nickel: Lower cost, adequate performance
+    - Niobium: High-temperature capability
+    - Work function less critical (electron collector)
+  Cathode coating production (lunar):
+    - BaO: From barium_oxide_extraction_v0 process
+    - CaO: From calcium_oxide_extraction_v0 process
+    - Apply via vacuum deposition or spraying
+    - Activate by heating in vacuum (drives off contaminants)
+  Operating principles:
+    - Hot cathode: Thermal energy excites electrons over work function barrier
+    - Vacuum gap: Electrons travel ballistically (no gas scattering)
+    - Cold anode: Collects electrons, maintains voltage
+    - Temperature difference: Drives thermodynamic efficiency
+  Efficiency equation:
+    - Carnot limit: η_Carnot = 1 - T_cold/T_hot
+    - With T_hot = 1800K, T_cold = 700K: η_Carnot = 61%
+    - Practical thermionic: η = 15-20% (losses from work function, space charge)
+  Space charge effect:
+    - Electron cloud builds up in gap (negative charge)
+    - Repels additional electrons from cathode
+    - Limits current density
+    - Solutions:
+      a) Close spacing (10-50 μm): Reduces space charge
+      b) Cesium vapor: Positive ions neutralize electrons
+      c) Magnetic field: Focuses electron beam
+  Cesium vapor mode (advanced):
+    - Add Cs vapor to gap at low pressure (~1 torr)
+    - Cs ionizes: Cs → Cs⁺ + e⁻
+    - Cs⁺ ions neutralize electron space charge
+    - Cs adsorbs on surfaces: Lowers work function
+    - Significantly improves performance (20-25% efficiency)
+    - Challenge: Cs vapor pressure control, containment
+  Temperature optimization:
+    - Higher T_cathode: More emission, but higher losses
+    - Lower T_anode: Higher voltage, but heat removal harder
+    - Optimal: T_cathode = 1500-1800°C, T_anode = 500-700°C
+  Vacuum requirements:
+    - High vacuum (10⁻⁶ to 10⁻⁸ torr) prevents electron scattering
+    - Or Cs vapor mode (1 torr Cs, controlled atmosphere)
+    - Lunar surface: Natural high vacuum (~10⁻¹⁴ torr)
+    - Simplifies vacuum envelope design
+  Gap spacing:
+    - Small gap (10 μm): Reduces space charge, higher current
+    - Large gap (100+ μm): Easier to fabricate, lower current
+    - Typical: 20-50 μm for good performance
+    - Precision alignment critical (thermal expansion)
+  Heat source options (lunar):
+    - Nuclear reactor: Continuous high-temperature heat (fission)
+    - Concentrated solar: Daytime operation only (heliostats, lenses)
+    - Waste heat from FFC Cambridge: 900-1100°C (boost to 1500°C)
+    - Waste heat from smelting: High-temperature industrial processes
+  Advantages: Direct conversion (no moving parts, no wear)
+    Long lifetime (solid-state, no mechanical degradation)
+    Compact and lightweight
+    Silent operation
+    Can use waste heat from ISRU processes
+    Proven technology (Russian nuclear reactors, 1960s-1980s)
+  Disadvantages: Lower efficiency than PETE (20% vs 40-50%)
+    Requires very high temperatures (1500-2000°C)
+    Work function limits voltage output (~1-2V typical)
+    Space charge limits current (unless mitigated)
+    Materials challenges (high-temperature operation)
+  Lunar context: Abundant heat sources (solar, nuclear, ISRU waste heat)
+    Natural high vacuum (simplifies design)
+    Tungsten from meteorites (cathode material)
+    BaO, CaO available from mineral processing
+    Ideal for coupling with thermal ISRU processes
+  Russian TOPAZ reactor (space nuclear power):
+    - Thermionic converter coupled to nuclear reactor
+    - 5-10 kWe output (electrical)
+    - 20% efficiency achieved
+    - Operated in space (Cosmos satellites, 1960s-1980s)
+    - Demonstrated long-term reliability (years)
+  Applications:
+    - Nuclear reactor power systems: Base load (continuous)
+    - Solar thermal power: Daytime peak load
+    - Waste heat recovery: FFC Cambridge, smelting, glass melting
+    - Combined heat and power (CHP): Electricity + process heat
+  Voltage and current characteristics:
+    - Voltage: 0.5-1.5V per diode (limited by work function difference)
+    - Current: 5-50 A/cm² (depends on temperature, spacing)
+    - Power density: 2-20 W/cm² typical
+    - Stack multiple diodes in series for higher voltage
+  Modular design:
+    - Series connection: Increases voltage (N diodes × 1V = NV)
+    - Parallel connection: Increases current
+    - Typical module: 20-50 diodes in series (20-50V output)
+    - Scale to desired power by number of modules
+  Cooling system (anode):
+    - Heat pipes: Efficient heat transport
+    - Liquid cooling: Water or molten salt loop
+    - Radiative cooling: Large radiator area (space applications)
+    - Lunar: Radiative cooling effective (no atmosphere)
+  Thermal management:
+    - Cathode insulation: Minimize heat loss (high-temp insulation)
+    - Anode cooling: Maximize heat extraction (fins, radiators)
+    - Thermal cycling: Design for daily/seasonal temperature swings
+  Material degradation mechanisms:
+    - Cathode evaporation: W, Mo evaporate at high temperatures
+    - Coating depletion: BaO, CaO sublimate over time
+    - Interdiffusion: Materials mix at high temperatures
+    - Mitigation: Excess coating thickness, periodic renewal
+  Lifetime:
+    - Well-designed: 5-10 years continuous operation
+    - With maintenance (coating renewal): 20+ years
+    - Russian TOPAZ: Operated for years in space
+  Comparison to other power systems:
+    - Photovoltaic: 15-20% efficiency, lower temperature, lighter
+    - Thermoelectric: 5-10% efficiency, simpler, lower temperature
+    - Thermionic: 15-20% efficiency, high temperature, moderate complexity
+    - PETE: 40-50% efficiency, high temperature, complex (photonic + thermionic)
+    - Stirling engine: 30-40% efficiency, moving parts, wear
+  Integration with ISRU:
+    - FFC Cambridge: 900-1100°C waste heat → boost to 1500°C → thermionic
+    - Glass melting: 1400-1600°C furnace → thermionic on furnace walls
+    - Smelting: 1500-2000°C operations → direct thermionic conversion
+    - Net: Electrical power + useful heat for processes
+  Energy cascade (example):
+    1. Concentrated solar → 2000°C
+    2. Thermionic converter: 2000°C → 800°C, generate 20% electricity
+    3. Waste heat (800°C) → FFC Cambridge (900°C with heat pump)
+    4. FFC waste heat (700°C) → secondary processes
+    5. Overall system efficiency: >60% useful energy
+  Power output scaling (example):
+    - 100 kW thermal input
+    - 20% efficiency → 20 kW electrical output
+    - 80 kW waste heat at 700°C (reusable)
+    - For 1 MW electrical: 5 MW thermal input required
+  Lunar deployment scenarios:
+    - Near-polar bases: Solar concentrators on "peaks of eternal light"
+    - Equatorial bases: Nuclear reactors for continuous power
+    - Industrial sites: Waste heat recovery from smelters, furnaces
+  Research and development needs:
+    - Long-term coating stability (BaO, CaO degradation)
+    - Precision gap spacing control (thermal expansion compensation)
+    - Cesium-free space charge mitigation (avoid Cs handling)
+    - Integration with lunar heat sources (solar, nuclear, ISRU)
+  Recommended timeline:
+    - Phase 1 (years 0-10): Use photovoltaics and batteries
+    - Phase 2 (years 10-20): Deploy nuclear + thermionic for base load
+    - Phase 3 (years 20-30): Integrate thermionic with ISRU waste heat
+    - Phase 4 (years 30+): Transition to PETE for higher efficiency

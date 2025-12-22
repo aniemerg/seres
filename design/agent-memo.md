@@ -1,4 +1,33 @@
-# Agent Reference — KB Creation Guide
+# Agent Reference — KB Gap Analysis and Root Cause Resolution
+
+## CONSERVATIVE MODE: Default Approach (CRITICAL)
+
+**All queue work follows Conservative Mode** - treat queue items as potential symptoms, not direct fixes.
+
+### Core Principle
+**Minimize new creation, maximize reuse and correction.**
+
+Before creating ANY new item:
+1. **Check if it exists under a different name** (search variations: `steel_plate` vs `plate_steel`)
+2. **Check for functional equivalents** (5× magnitude rule from parts_and_labor_guidelines.md)
+3. **Consider phase/state variations** (don't create `water_vapor`, use `water` + boiling step)
+4. **Evaluate labor bot + tools** instead of special machines (strongly preferred unless high efficiency needed)
+5. **Verify the reference isn't erroneous** (check git history, similar files)
+
+**See `docs/conservative_mode_guide.md` for complete decision trees.**
+
+### Quick Examples
+
+❌ **DON'T CREATE:**
+- `water_vapor_v0` → ✅ Use `water` + add boiling/evaporation process step
+- `hose_crimping_station_v0` → ✅ Use `labor_bot_general_v0` + `crimping_tool_manual`
+- `steel_plate_large` when `steel_plate` exists → ✅ Reuse, document size variation in notes
+- `deburring_machine_automated` → ✅ Use `labor_bot_general_v0` + `grinding_tool_portable`
+
+❌ **DON'T CREATE WITHOUT CHECKING:**
+- Any machine that could be labor bot + simple tool
+- Any material that's a state variation (solid/liquid/gas/hot/cold)
+- Any part within 5× magnitude of existing part (mass, size, function)
 
 ## Core Principles
 
@@ -8,11 +37,12 @@
 1. **Structure before precision** — Coarse, labeled estimates are acceptable. Capture dependency structure first, refine numbers later.
 2. **Processes before machines** — Prefer unit operations (crush, sinter, cast). Machines are capacity providers, not the primary abstraction.
 3. **Incompleteness is acceptable** — Use placeholders (null values), surface gaps explicitly. The system must run with partial data.
+4. **Labor bot + tools over special machines** — STRONGLY prefer `labor_bot_general_v0` with simple tools unless high precision/throughput/capacity required.
 
 **Best-Guess Engineering:** When uncertain, make conservative assumptions based on similar items. Label estimates with provenance and confidence.
 
 **When to Give Up (Import):**
-- No recipe found after researching similar items
+- No recipe found after researching similar items AND no equivalent exists
 - Modeling effort exceeds likely mass/energy impact
 - Item not in top contributors to imported mass, energy, or time
 
@@ -341,15 +371,47 @@ kb/
 
 ---
 
+## Conservative Mode Workflow
+
+**REQUIRED workflow for all gap types:**
+
+1. **Research FIRST (mandatory):**
+   - Search exact ID: `grep -r "id: item_name" kb/`
+   - Search variations: `grep -ri "motor.*5.*kw" kb/items/`
+   - Check equivalents: review similar items for 5× magnitude match
+   - Check if exists under different ID
+
+2. **Evaluate alternatives (before creating):**
+   - For machines: Could labor bot + tool do this?
+   - For materials: Is this a phase variation? (water→vapor, steel→molten)
+   - For parts: Is there equivalent within 5× size/mass?
+   - For references: Is the reference itself a mistake?
+
+3. **Create ONLY as last resort:**
+   - Document search in notes: "Checked: X, Y, Z - no equivalents"
+   - Follow existing patterns
+   - Use conservative estimates
+   - Apply 5× equivalence for parameters
+
+4. **Labor Bot Decision:**
+   - **Default:** Use `labor_bot_general_v0` + simple tools
+   - **Special machine ONLY if:**
+     - High throughput (>10 units/day continuous)
+     - Precision <0.1mm (labor bot: ±0.5mm)
+     - Heavy loads >20kg (labor bot payload limit)
+     - Environmental (high temp, vacuum, hazardous)
+     - Process physics requires it (furnace, reactor, etc.)
+
 ## Workflow Tips
 
-1. **Research first** — Use `rg_search` to find similar items before creating new ones
+1. **Research first** — Use `rg_search` to find similar items before creating new ones (MANDATORY)
 2. **Follow patterns** — Copy structure from similar existing items
 3. **Start minimal** — Required fields only, add optional fields later
 4. **Be explicit about unknowns** — Use `null` + notes rather than omitting fields
 5. **Validate early** — Run indexer after each change to catch errors
 6. **Conservative assumptions** — When estimating, err on the side of heavier/slower/more energy
 7. **One item at a time** — Don't try to anticipate downstream gaps, let the indexer guide you
+8. **Document reuse decisions** — Note when you've checked and chosen to reuse vs create
 
 ---
 

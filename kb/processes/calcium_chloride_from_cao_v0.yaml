@@ -1,0 +1,74 @@
+id: calcium_chloride_from_cao_v0
+kind: process
+name: Calcium chloride production from CaO and HCl
+layer_tags:
+  - layer_3
+  - layer_4
+inputs:
+  - item_id: calcium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid_concentrated
+    qty: 1.30
+    unit: kg
+outputs:
+  - item_id: calcium_chloride
+    qty: 1.98
+    unit: kg
+  - item_id: water
+    qty: 0.32
+    unit: kg
+requires_ids:
+  - acid_reactor_v0
+  - drying_oven_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 3.0
+  notes: Highly exothermic reaction plus drying energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: Reaction and drying time
+notes: |
+  Production of calcium chloride from calcium oxide and hydrochloric acid.
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  Reaction: CaO + 2HCl → CaCl2 + H2O (highly exothermic)
+  Temperature: Exothermic reaction (releases heat), then dry at 200-300°C
+  Process: Acid-base neutralization followed by dehydration
+  Purpose: Generate CaCl2 for FFC Cambridge electrolyte replenishment
+  Utilize CaO by-product from anorthite processing
+  Close chlorine recycling loop
+  Process details:
+    1. CaO (quicklime) from anorthite carbothermal reduction
+    2. React with HCl (from artificial weathering, recycled)
+    3. Highly exothermic - temperature rises significantly
+    4. CaCl2 solution forms, then dry to anhydrous salt
+    5. Water condensed and separated
+  Products:
+    - CaCl2 (anhydrous calcium chloride): FFC electrolyte, desiccant
+    - H2O (water): Process water, recyclable
+  CaO source: CaAl2Si2O8 + 4C → CaO + Al2O3 + 2Si + 4CO
+  HCl source: Recycled from anorthite leaching or other chlorine processes
+  FFC Cambridge electrolyte:
+    - Molten CaCl2 bath at 900-1100°C
+    - Losses from cathode porosity and handling (~10%)
+    - This process replenishes lost electrolyte
+  Stoichiometry: CaO (56g) + 2HCl (73g) → CaCl2 (111g) + H2O (18g)
+  Mass fractions: 198% CaCl2 from CaO input
+  Advantages: Simple exothermic reaction
+  Utilizes waste CaO from preprocessing
+  Replenishes critical FFC electrolyte
+  HCl recycled (not consumed overall)
+  Disadvantages: Highly exothermic (requires careful control)
+  Drying step needed for anhydrous salt
+  Lunar context: CaO abundant from anorthite (70-95% of highlands)
+  Critical for maintaining FFC operations
+  Closes calcium-chlorine loop:
+    CaAl2Si2O8 → CaO → CaCl2 (FFC) → repeat
+  Alternative use: Desiccant, road de-icing (Earth), dust control
+  Heat of reaction can be recovered for other processes
+  Essential process for FFC Cambridge sustainability

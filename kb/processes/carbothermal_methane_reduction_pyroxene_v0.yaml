@@ -1,0 +1,60 @@
+id: carbothermal_methane_reduction_pyroxene_v0
+kind: process
+name: Carbothermal reduction of pyroxene with methane
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: pyroxene_enstatite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: methane_gas
+    qty: 0.32
+    unit: kg
+outputs:
+  - item_id: silicon_metal_metallurgical
+    qty: 0.28
+    unit: kg
+  - item_id: magnesium_oxide
+    qty: 0.40
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 0.56
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.08
+    unit: kg
+requires_ids:
+  - high_temp_furnace_v0
+  - gas_recycling_system_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 12.0
+  notes: High temperature carbothermal reduction at 1600°C
+time_model:
+  type: fixed_time
+  hr_per_batch: 5.0
+  notes: Reduction and gas evolution time
+notes: |
+  Carbothermal reduction of pyroxene minerals using methane as reductant.
+  Source: FFC-process-for-deep-ISRU.txt, NASA-ISRU-Progress-2012.txt
+  Primary reaction: MgSiO3 + 2CH4 → Si + MgO + 2CO + 4H2
+  Alternative (ilmenite): FeTiO3 + CH4 → Fe + TiO2 + CO + 2H2
+  Alternative (wollastonite): CaSiO3 + 2CH4 → Si + CaO + 2CO + 4H2
+  Temperature: 1600°C (high temperature requirement)
+  Methane recycling: CO + 3H2 → CH4 + H2O (Sabatier/methanation)
+  Advantages: Higher oxygen yield (15-20%) than H2 reduction (1-2%)
+  Works on multiple silicate minerals
+  CO can be recycled back to CH4 with H2
+  Disadvantages: Very high temperature, requires CH4 feedstock
+  Products: Silicon metal, metal oxides (MgO, CaO), synthesis gas
+  Synthesis gas (CO + H2) valuable for other chemical processes
+  Metal oxides can be further reduced via FFC Cambridge process
+  Stoichiometry for MgSiO3: (100.4g) + 2CH4 (32g) → Si (28.1g) + MgO (40.3g) + 2CO (56g) + 4H2 (8g)
+  Mass fractions: 28% Si, 40% MgO, 56% CO, 8% H2 from inputs
+  Performance: Significantly better than hydrogen reduction
+  Suitable for bulk regolith processing in mare regions

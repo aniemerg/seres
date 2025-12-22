@@ -1,0 +1,151 @@
+id: cobalt_sulfate_extraction_v0
+kind: process
+name: Cobalt extraction via sulfate route
+layer_tags:
+  - layer_5
+inputs:
+  - item_id: cobalt_metal_impure
+    qty: 1.0
+    unit: kg
+  - item_id: sulfur_elemental
+    qty: 0.544
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.814
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: cobalt_metal_pure
+    qty: 0.95
+    unit: kg
+  - item_id: cobalt_sulfate_solution
+    qty: 0.05
+    unit: kg
+  - item_id: process_water
+    qty: 2.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.364
+    unit: kg
+requires_ids:
+  - roasting_furnace_v0
+  - leaching_tank_v0
+  - electrowinning_cell_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 6.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 8.0
+  notes: Roasting, leaching, and electrowinning energy
+time_model:
+  type: fixed_time
+  hr_per_batch: 10.0
+  notes: Roasting, leaching, and electrowinning sequence
+notes: |
+  Cobalt purification via sulfate roasting and electrowinning route.
+  Source: Sustainable-ISRU-on-the-Moon.txt
+  Process: Sulfate formation → aqueous leaching → electrolytic deposition
+  Temperature: 600-800°C for roasting, ambient for leaching, ambient for electrowinning
+  Purpose: Alternative to carbonyl process for cobalt purification
+  Useful when CO is scarce or sulfur is abundant
+  Process details:
+    1. Impure cobalt metal (from meteoritic NiFe material)
+    2. Roast with sulfur in oxygen atmosphere
+    3. Reaction: 2Co + S + 2O2 → 2CoSO4 (cobalt sulfate)
+    4. Alternative: Co + S → CoS, then 2CoS + 3O2 → 2CoSO4
+    5. Cobalt sulfate is water-soluble
+    6. Leach roasted material in water
+    7. CoSO4 dissolves, impurities remain as residue
+    8. Filter solution to remove insoluble impurities
+    9. Electrowinning: Cathode: Co²⁺ + 2e⁻ → Co (pure metal)
+    10. Anode: 2H2O → O2 + 4H⁺ + 4e⁻
+    11. Pure cobalt metal deposits on cathode
+  Products:
+    - Pure cobalt metal: 95% yield, >99% purity
+    - Cobalt sulfate solution: Recycled or retained for other uses
+    - Process water: Recycled
+    - Oxygen: From electrowinning anode reaction
+  Stoichiometry:
+    - Roasting: 2Co (118g) + S (32g) + 2O2 (64g) → 2CoSO4 (310g)
+    - Leaching: CoSO4 + 7H2O → CoSO4·7H2O (soluble)
+    - Electrowinning: Co²⁺ + 2e⁻ → Co
+  Roasting chemistry:
+    - Direct sulfation: 2Co + S + 2O2 → 2CoSO4 (preferred)
+    - Or two-stage: Co + S → CoS, then 2CoS + 3O2 → 2CoSO4
+    - Temperature: 600-800°C (avoid Co3O4 formation)
+    - Atmosphere: Excess oxygen ensures complete sulfation
+  Leaching chemistry:
+    - CoSO4 very soluble in water (36.1g/100mL at 20°C)
+    - Forms pink solution (Co²⁺ hydrated complex)
+    - pH control important (slightly acidic, pH 4-6)
+    - Impurities (Fe, Ni, Si) remain insoluble or precipitate
+  Electrowinning parameters:
+    - Electrolyte: CoSO4 solution (100-150 g/L Co)
+    - Anode: Inert (Pb, graphite, or dimensionally stable anode)
+    - Cathode: Stainless steel or titanium starter sheet
+    - Current density: 200-400 A/m²
+    - Voltage: 2.5-3.5V
+    - Temperature: 40-60°C (moderate heating improves kinetics)
+  Purity and yield:
+    - Cobalt purity: >99% (high-purity from electrolytic deposition)
+    - Yield: 95% (5% losses to solution, residues)
+  Applications of pure cobalt:
+    - Superalloys: High-temperature turbine blades (Co-Cr-W)
+    - Magnets: SmCo, AlNiCo permanent magnets
+    - Catalysts: Fischer-Tropsch synthesis, hydrogenation
+    - Batteries: LiCoO2 cathodes (lithium-ion batteries)
+    - Tool steel: Cobalt-tungsten high-speed steel
+    - Hard facing: Wear-resistant coatings (stellite)
+  Advantages: Does not require CO (unlike carbonyl process)
+    Water-based chemistry (simpler than gas-phase)
+    High purity from electrowinning
+    Sulfur can be recovered from troilite (FeS in meteorites)
+    Scalable process
+  Disadvantages: Multi-step process (roasting, leaching, electrowinning)
+    Requires sulfur input (consumable)
+    Energy for roasting and electrolysis
+    Aqueous processing requires water (recycled but needed)
+  Comparison to carbonyl process:
+    - Carbonyl: Co + 4CO ⇌ Co2(CO)8 (gas) → Co (at 150°C, 35 bar)
+    - Sulfate: Solid-liquid-electrochemical route
+    - Carbonyl: Higher purity, lower temperature, requires CO
+    - Sulfate: More robust, works with impure feed, requires sulfur
+  Lunar context: Cobalt extremely scarce (meteoritic only)
+    Must extract from NiFe meteorite material with high efficiency
+    Sulfur available from troilite (FeS) in meteorites
+    Sulfate route viable if sulfur abundant locally
+    Carbonyl route preferred if CO available (from FFC or Boudouard)
+  Sulfur recovery from troilite:
+    - FeS + O2 → FeO + SO2 (or FeS roasting → Fe2O3 + SO2)
+    - Claus process: SO2 + H2S → S + H2O
+    - Sulfur for cobalt sulfate roasting
+  Impurity removal:
+    - Iron: Precipitates as Fe(OH)3 at pH 4-6
+    - Nickel: May co-extract; separate by selective precipitation
+    - Copper: More noble, may co-deposit (use current control)
+    - Silicon: Insoluble, removed in leaching residue
+  Process optimization:
+    - Roasting: Optimize S:Co ratio (slight excess S)
+    - Leaching: Multiple stages for maximum extraction
+    - Electrowinning: Control current density to avoid dendritic growth
+  Solution recycling:
+    - Spent electrolyte (depleted CoSO4) returned to leaching
+    - Continuous process with solution recirculation
+    - Make-up sulfuric acid as needed
+  Alternative precipitation route:
+    - CoSO4 + 2NaOH → Co(OH)2 + Na2SO4
+    - Co(OH)2 → CoO + H2O (at 200°C)
+    - CoO + H2 → Co + H2O (hydrogen reduction)
+    - Avoids electrowinning but requires H2
+  Cobalt hydroxide (intermediate):
+    - Pink precipitate, Co(OH)2
+    - Can be thermally decomposed to CoO (black)
+    - CoO reduced to Co with H2 or C
+  Environmental considerations:
+    - Cobalt sulfate toxic (handle with care)
+    - Must contain all solutions (closed-loop processing)
+    - Electrowinning produces O2 (useful by-product)
