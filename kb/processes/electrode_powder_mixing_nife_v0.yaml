@@ -1,0 +1,38 @@
+id: electrode_powder_mixing_nife_v0
+kind: process
+name: NiFe electrode powder mixing
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: nickel_hydroxide
+    qty: 0.9
+    unit: kg
+  - item_id: iron_powder_v0
+    qty: 0.95
+    unit: kg
+  - item_id: binder_simple
+    qty: 0.1
+    unit: kg
+  - item_id: conductive_additive
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: electrode_mix_nife
+    qty: 2.0
+    unit: kg
+requires_ids:
+  - powder_mill_and_mixer
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg_input
+  value: 0.3
+  notes: "Energy for powder mixing and blending"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+  notes: "Mix and blend electrode powders"
+notes: "Mix nickel hydroxide (cathode), iron powder (anode), binder, and conductive additives to create NiFe electrode powder mix for battery production."

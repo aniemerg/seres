@@ -1,0 +1,28 @@
+id: recipe_solder_tin_lead_v0
+name: Solder tin-lead wire/bar production
+variant_id: v0
+kind: recipe
+target_item_id: solder_tin_lead
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: tin_metal_pure
+        qty: 0.63
+        unit: kg
+      - item_id: lead_metal
+        qty: 0.37
+        unit: kg
+    outputs:
+      - item_id: solder_tin_lead
+        qty: 1.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: Melt tin and lead together, mix to eutectic composition, cast into bars or extrude into wire
+assumptions: |
+  Eutectic 63/37 Sn/Pb composition for lowest melting point (183°C).
+  Can be cast into bars or extruded into wire for different applications.
+  Standard solder formulation for electronics and general purpose soldering.
+notes: |
+  Manufacturing route for tin-lead solder.
+  Used in wave soldering, hand soldering, and general joining applications.
+  May need flux separately for some applications.

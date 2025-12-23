@@ -84,9 +84,11 @@ requires_ids:
   - bom_formation_rack_v0
 
   # === RESOURCES ===
+  # Note: Resource types are being phased out per ADR-003
+  # Machines now directly provide capabilities
+  # The following are kept for backward compatibility during migration:
   - powder_mill_and_mixer
   - hydraulic_press
-  - low_temp_heating
   - chemical_mixer_tank
   - cell_sealing
   - formation_rack

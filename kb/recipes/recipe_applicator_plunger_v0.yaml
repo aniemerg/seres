@@ -1,0 +1,20 @@
+id: recipe_applicator_plunger_v0
+kind: recipe
+target_item_id: applicator_plunger
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: applicator_plunger
+        qty: 0.08
+        unit: kg
+    est_time_hr: 0.5
+    notes: Machine plunger with threaded shaft for precise linear motion
+notes: |
+  Standalone recipe for applicator plunger.
+  Mirrors step 3 in recipe_compound_applicator_v0.
+  Intermediate item primarily used within compound applicator assembly.

@@ -14,28 +14,28 @@ steps:
         qty: 0.1
         unit: kg
     outputs:
-      - item_id: positive_active_material_mixed
+      - item_id: electrode_mix_nife
         qty: 2.1
         unit: kg
     est_time_hr: 4.0
-    notes: Mix and mill positive electrode materials to uniform consistency
+    notes: Mix and mill positive electrode materials to uniform consistency (modeled as electrode_mix_nife)
   - process_id: powder_milling_process_v0
     inputs:
-      - item_id: iron_powder
+      - item_id: iron_powder_v0
         qty: 2.0
         unit: kg
       - item_id: binder_simple
         qty: 0.1
         unit: kg
     outputs:
-      - item_id: negative_active_material_mixed
+      - item_id: electrode_mix_nife
         qty: 2.05
         unit: kg
     est_time_hr: 4.0
-    notes: Mix negative electrode materials
+    notes: Mix negative electrode materials (modeled as electrode_mix_nife)
   - process_id: metal_stamping_process_v0
     inputs:
-      - item_id: steel_sheet_perforated
+      - item_id: steel_sheet_1mm
         qty: 1.5
         unit: kg
     outputs:
@@ -46,7 +46,7 @@ steps:
     notes: Stamp perforated steel grids for electrode substrates
   - process_id: powder_pressing_process_v0
     inputs:
-      - item_id: positive_active_material_mixed
+      - item_id: electrode_mix_nife
         qty: 2.1
         unit: kg
       - item_id: electrode_grid_set
@@ -60,7 +60,7 @@ steps:
     notes: Press positive active material into grids
   - process_id: powder_pressing_process_v0
     inputs:
-      - item_id: negative_active_material_mixed
+      - item_id: electrode_mix_nife
         qty: 2.05
         unit: kg
       - item_id: electrode_grid_set

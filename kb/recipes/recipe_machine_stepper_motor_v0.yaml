@@ -4,18 +4,19 @@ variant_id: v0
 steps:
   - process_id: metal_stamping_process_v0
     inputs:
-      - item_id: steel_sheet_silicon_electrical
+      - item_id: electrical_steel_sheet
         qty: 1.2
         unit: kg
+        notes: "Silicon steel (electrical steel) for motor laminations"
     outputs:
-      - item_id: lamination_stack_stamped
+      - item_id: steel_lamination_stack
         qty: 1.0
         unit: kg
     est_time_hr: 2.0
     notes: Stamp and stack stator and rotor laminations
   - process_id: wire_winding_process_v0
     inputs:
-      - item_id: lamination_stack_stamped
+      - item_id: steel_lamination_stack
         qty: 0.8
         unit: kg
       - item_id: wire_copper_magnet
@@ -40,21 +41,21 @@ steps:
     notes: Magnetize rotor magnets to full strength
   - process_id: machining_process_turning_v0
     inputs:
-      - item_id: aluminum_alloy_block
+      - item_id: aluminum_alloy_ingot
         qty: 0.6
         unit: kg
     outputs:
-      - item_id: motor_housing_machined
+      - item_id: motor_housing_steel
         qty: 0.4
         unit: kg
     est_time_hr: 2.0
-    notes: Machine housing and end caps
+    notes: Machine housing and end caps (modeled as motor_housing_steel)
   - process_id: assembly_process_general_v0
     inputs:
       - item_id: stator_wound
         qty: 1.0
         unit: kg
-      - item_id: lamination_stack_stamped
+      - item_id: steel_lamination_stack
         qty: 0.2
         unit: kg
       - item_id: rotor_magnets_magnetized
@@ -63,7 +64,7 @@ steps:
       - item_id: steel_shaft_machined
         qty: 0.2
         unit: kg
-      - item_id: motor_housing_machined
+      - item_id: motor_housing_steel
         qty: 0.4
         unit: kg
       - item_id: bearing_ball_steel

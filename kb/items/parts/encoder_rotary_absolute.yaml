@@ -1,0 +1,36 @@
+id: encoder_rotary_absolute
+kind: part
+name: Absolute rotary encoder
+mass: 0.2
+unit: kg
+material_class: electronic
+notes: |
+  Absolute rotary encoder for position sensing without homing.
+
+  Function: Tracks shaft position absolutely (knows position after power-on).
+  Technology: Multi-turn absolute encoder with magnetic or optical sensing.
+  Output: Digital position value (e.g., 12-16 bit resolution, ~360-4096 steps/rev).
+  Interface: Digital output (SSI, Gray code, or simple binary).
+
+  Key advantage over incremental: No homing/reference needed after power cycle.
+  Critical for: Antenna pointing, solar tracking, robotic joints requiring position memory.
+
+  Construction:
+    - Sensing element (Hall effect or optical disk with coded pattern)
+    - Signal processing electronics
+    - Mechanical shaft coupling
+    - Housing and connector
+
+  Conservative Mode check completed:
+  - Searched for: encoder, rotary sensor, position sensor
+  - Checked items: encoder_magnetic_v0 (0.1kg - generic magnetic),
+    encoder_optical_simple_v0 (0.15kg - incremental optical)
+  - No existing absolute encoder found
+  - Created because: Absolute functionality is distinct from incremental encoders
+    (different coding disk/electronics needed)
+  - Mass estimate: Slightly heavier than simple encoders due to absolute encoding
+    electronics and multi-bit output circuitry
+
+  Referenced by: recipe_mounting_bracket_azimuth_elevation_v0
+provenance: hand_assumption
+recipe: recipe_encoder_rotary_absolute_v0

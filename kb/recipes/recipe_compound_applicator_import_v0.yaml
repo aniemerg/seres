@@ -9,22 +9,22 @@ steps:
         qty: 0.3
         unit: kg
     outputs:
-      - item_id: applicator_body_machined
+      - item_id: valve_body_machined
         qty: 0.25
         unit: kg
     est_time_hr: 1.0
-    notes: Machine cylindrical body for compound reservoir
+    notes: Machine cylindrical body for compound reservoir (modeled as valve_body_machined)
   - process_id: machining_process_milling_v0
     inputs:
-      - item_id: applicator_body_machined
+      - item_id: valve_body_machined
         qty: 0.25
         unit: kg
     outputs:
-      - item_id: applicator_body_with_threads
+      - item_id: valve_body_machined
         qty: 0.23
         unit: kg
     est_time_hr: 0.5
-    notes: Machine threads for plunger and nozzle attachment
+    notes: Machine threads for plunger and nozzle attachment (keep as valve_body_machined)
   - process_id: machining_process_turning_v0
     inputs:
       - item_id: steel_bar_stock
@@ -49,7 +49,7 @@ steps:
     notes: Drill nozzle with precise orifice
   - process_id: assembly_process_general_v0
     inputs:
-      - item_id: applicator_body_with_threads
+      - item_id: valve_body_machined
         qty: 0.23
         unit: kg
       - item_id: applicator_plunger

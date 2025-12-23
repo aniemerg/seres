@@ -1,0 +1,33 @@
+id: heat_exchanger_tube_bundle
+kind: part
+name: Heat exchanger tube bundle (thermal storage)
+mass: 100.0
+unit: kg
+material_class: steel
+notes: |
+  Bundle of heat exchanger tubes for thermal storage applications.
+
+  Function: Transfer heat to/from thermal storage medium (regolith, rocks, molten salt).
+  Configuration: Coiled or serpentine stainless steel tubing bundle.
+  Typical specs: 1-2" diameter tubes, wall thickness 2-4mm, total length 50-200m.
+  Operating range: 200-600°C for regolith thermal storage.
+  Embedded in: Packed bed thermal storage, molten salt tanks, rock bed storage.
+
+  Applications:
+    - Solar thermal storage systems
+    - Industrial waste heat recovery
+    - Thermal energy buffering
+
+  Conservative Mode check completed:
+  - Searched for: heat exchanger, tube bundle, heat pipes, tubing
+  - Checked items: heat_exchanger_tube_shell (30kg - different, includes shell),
+    heat_pipes_set (15kg - different, sealed phase-change),
+    metal_tubing_stock (raw material, not formed)
+  - No equivalent found for large tube bundles for thermal storage
+  - Created because: Specific to thermal storage applications, much larger scale
+    than existing heat exchangers, different configuration (embedded vs packaged)
+  - Mass estimate: Based on typical thermal storage coil mass (~1-1.5 kg/m of tube)
+
+  Referenced by: recipe_machine_solar_thermal_storage_system_v0
+provenance: hand_assumption
+recipe: recipe_heat_exchanger_tube_bundle_v0

@@ -1,0 +1,62 @@
+id: recipe_encoder_rotary_absolute_v0
+kind: recipe
+target_item_id: encoder_rotary_absolute
+variant_id: v0
+steps:
+  - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 0.05
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: encoder_pcb_assembled
+        qty: 0.06
+        unit: kg
+    est_time_hr: 1.0
+    notes: "Assemble encoder electronics: Hall sensors or photodetectors, decoder IC, output driver"
+  - process_id: machining_precision_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: encoder_disk_coded
+        qty: 0.15
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Machine coded disk with Gray code or binary pattern for absolute position"
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: encoder_pcb_assembled
+        qty: 0.06
+        unit: kg
+      - item_id: encoder_disk_coded
+        qty: 0.15
+        unit: kg
+      - item_id: aluminum_housing_machined_v0
+        qty: 0.05
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 1.0
+        unit: each
+      - item_id: fastener_kit_small
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: encoder_rotary_absolute
+        qty: 0.2
+        unit: kg
+    est_time_hr: 1.5
+    notes: "Assemble disk, sensors, electronics, housing, shaft coupling. Calibrate zero position."
+assumptions: |
+  Absolute encoding via coded disk pattern (magnetic or optical).
+  Gray code or binary absolute position encoding.
+  Digital output electronics for multi-bit position value.
+  Calibration establishes absolute zero reference.
+notes: |
+  Manufacturing recipe for absolute rotary encoder.
+  More complex than incremental encoder due to coded disk and decoder electronics.
+  Total production time ~4.5 hours per encoder.

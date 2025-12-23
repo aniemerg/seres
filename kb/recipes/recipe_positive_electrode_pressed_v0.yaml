@@ -1,0 +1,22 @@
+id: recipe_positive_electrode_pressed_v0
+target_item_id: positive_electrode_pressed
+variant_id: v0
+steps:
+  - process_id: powder_pressing_process_v0
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 2.1
+        unit: kg
+      - item_id: electrode_grid_set
+        qty: 0.7
+        unit: kg
+    outputs:
+      - item_id: positive_electrode_pressed
+        qty: 2.7
+        unit: kg
+    est_time_hr: 2.0
+    notes: Press positive active material into grids
+assumptions: |
+  Electrode mix represents positive (Ni(OH)2) composition.
+notes: |
+  Intermediate recipe for pressed positive NiFe electrode.

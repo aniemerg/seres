@@ -30,18 +30,18 @@ steps:
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: hydraulic_piston_rod_machined
+      - item_id: steel_shaft_machined
         qty: 2.5
         unit: kg
     est_time_hr: 2.0
-    notes: Machine piston rod with precise tolerances
+    notes: Machine piston rod with precise tolerances (modeled as steel_shaft_machined)
   - process_id: machining_process_milling_v0
     inputs:
-      - item_id: aluminum_alloy_block
+      - item_id: aluminum_alloy_ingot
         qty: 2.0
         unit: kg
     outputs:
-      - item_id: hydraulic_valve_manifold
+      - item_id: hydraulic_control_valve_set
         qty: 1.5
         unit: kg
     est_time_hr: 3.0
@@ -51,19 +51,19 @@ steps:
       - item_id: hydraulic_cylinder_body_machined
         qty: 6.5
         unit: kg
-      - item_id: hydraulic_piston_rod_machined
+      - item_id: steel_shaft_machined
         qty: 2.5
         unit: kg
-      - item_id: hydraulic_valve_manifold
+      - item_id: hydraulic_control_valve_set
         qty: 1.5
         unit: kg
       - item_id: seal_mechanical_rotary
         qty: 4.0
         unit: each
-      - item_id: rubber_hose_hydraulic
+      - item_id: hydraulic_hose_assembly
         qty: 2.0
         unit: kg
-      - item_id: hydraulic_fluid_mineral_oil
+      - item_id: cutting_fluid
         qty: 3.0
         unit: kg
     outputs:
@@ -76,7 +76,7 @@ assumptions: |
   Aluminum cylinder body for light weight.
   Steel piston rod for strength.
   Mechanical seals prevent leakage.
-  Mineral oil hydraulic fluid suitable for lunar environment.
+  Oil-based cutting fluid used as hydraulic fluid in early builds.
   Manual or powered hydraulic pump provides pressure.
 notes: |
   Manufacturing route for hydraulic adjustment/clamping system.

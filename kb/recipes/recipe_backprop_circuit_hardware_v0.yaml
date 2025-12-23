@@ -27,35 +27,35 @@ steps:
       - item_id: capacitor_ceramic_generic
         qty: 50.0
         unit: each
-      - item_id: resistor_precision_metal_film
+      - item_id: resistor_chip_smd
         qty: 100.0
         unit: each
-      - item_id: potentiometer_trim
+      - item_id: potentiometer_wirewound_v0
         qty: 20.0
         unit: each
     outputs:
-      - item_id: pcb_backprop_populated
+      - item_id: pcb_populated
         qty: 1.5
         unit: kg
     est_time_hr: 3.0
     notes: Place analog computing components
   - process_id: soldering_process_wave_v0
     inputs:
-      - item_id: pcb_backprop_populated
+      - item_id: pcb_populated
         qty: 1.5
         unit: kg
       - item_id: solder_tin_lead
         qty: 0.1
         unit: kg
     outputs:
-      - item_id: pcb_backprop_soldered
+      - item_id: pcb_assembled_board
         qty: 1.55
         unit: kg
     est_time_hr: 1.0
     notes: Solder all connections
   - process_id: testing_and_calibration_circuit_v0
     inputs:
-      - item_id: pcb_backprop_soldered
+      - item_id: pcb_assembled_board
         qty: 1.55
         unit: kg
     outputs:

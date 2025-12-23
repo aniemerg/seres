@@ -1,0 +1,20 @@
+id: recipe_tensioner_frame_welded_v0
+kind: recipe
+target_item_id: tensioner_frame_welded
+variant_id: v0
+steps:
+  - process_id: metal_fabrication_welding_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.5
+        unit: kg
+      - item_id: steel_sheet_3mm
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: tensioner_frame_welded
+        qty: 1.9
+        unit: kg
+    est_time_hr: 2.0
+    notes: Fabricate frame and mounting brackets
+notes: "Intermediate recipe for welded tensioner frame."

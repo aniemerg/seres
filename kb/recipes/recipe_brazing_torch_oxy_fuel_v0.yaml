@@ -2,24 +2,14 @@ id: recipe_brazing_torch_oxy_fuel_v0
 target_item_id: brazing_torch_oxy_fuel
 variant_id: v0
 steps:
-  - process_id: machining_process_turning_v0
-    inputs:
-      - item_id: brass_bar_stock
-        qty: 0.5
-        unit: kg
-    outputs:
-      - item_id: torch_body_and_valves_machined
-        qty: 0.45
-        unit: kg
-    est_time_hr: 3.0
-    notes: Machine torch body, valve bodies, and mixing chamber
   - process_id: machining_process_drilling_v0
     inputs:
-      - item_id: copper_bar_stock
+      - item_id: copper_rod_ingot
         qty: 0.2
         unit: kg
+        notes: "Copper bar/rod stock for machining torch tips"
     outputs:
-      - item_id: torch_tips_set
+      - item_id: copper_rod_ingot
         qty: 0.18
         unit: kg
     est_time_hr: 2.0
@@ -29,10 +19,10 @@ steps:
       - item_id: torch_body_and_valves_machined
         qty: 0.45
         unit: kg
-      - item_id: torch_tips_set
+      - item_id: copper_rod_ingot
         qty: 0.18
         unit: kg
-      - item_id: rubber_hose_gas_rated
+      - item_id: hydraulic_hose_segment_v0
         qty: 1.0
         unit: kg
       - item_id: valve_needle_precision

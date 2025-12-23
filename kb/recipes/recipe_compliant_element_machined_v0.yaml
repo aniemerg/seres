@@ -1,0 +1,18 @@
+id: recipe_compliant_element_machined_v0
+target_item_id: compliant_element_machined
+variant_id: v0
+steps:
+  - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: compliant_element_machined
+        qty: 1.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: Machine compliant element with thin flexures and strain concentration features.
+assumptions: |
+  Aluminum alloy used for stiffness and machinability; significant scrap from flexure machining.
+notes: Placeholder machining route for compliant element.

@@ -1,0 +1,28 @@
+id: valve_needle_precision
+kind: part
+name: Precision needle valve
+mass: 0.3
+unit: kg
+material_class: metal
+notes: |
+  Small precision needle valve for fine flow control applications.
+
+  Function: Provides precise, adjustable flow control via tapered needle and seat.
+  Applications: Gas flow control, instrument control, torch regulation.
+  Typical size: 1/4" to 1/2" port connections.
+  Materials: Brass or stainless steel body, hardened needle.
+  Operating range: Low to medium pressure (0-3000 PSI).
+
+  Conservative Mode check completed:
+  - Searched for: needle valve, precision valve, flow control valve
+  - Checked items: flow_controller_valve_set (different - is a set),
+    valve_set_gas_handling (different - shutoff/safety valves),
+    expansion_valve_cryogenic (different - cryogenic specific)
+  - No equivalent found for small precision needle valves
+  - Created because: Required for brazing torch fine flame control,
+    serves different function than existing valve sets
+  - Mass estimate: Based on typical small industrial needle valves (0.2-0.5 kg)
+
+  Referenced by: recipe_brazing_torch_oxy_fuel_v0
+provenance: hand_assumption
+recipe: recipe_valve_needle_precision_v0

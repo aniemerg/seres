@@ -8,39 +8,39 @@ steps:
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: impeller_hub_cast_rough
+      - item_id: steel_bar_stock
         qty: 2.7
         unit: kg
     est_time_hr: 2.0
-    notes: Cast central hub for impeller
+    notes: Cast central hub for impeller (modeled as steel_bar_stock)
   - process_id: sheet_metal_forming_process_v0
     inputs:
       - item_id: steel_sheet_3mm
         qty: 1.5
         unit: kg
     outputs:
-      - item_id: impeller_blades_formed
+      - item_id: steel_sheet_3mm
         qty: 1.4
         unit: kg
     est_time_hr: 2.0
-    notes: Form or cut individual blades from sheet metal
+    notes: Form or cut individual blades from sheet metal (keep as steel_sheet_3mm)
   - process_id: machining_process_turning_v0
     inputs:
-      - item_id: impeller_hub_cast_rough
+      - item_id: steel_bar_stock
         qty: 2.7
         unit: kg
     outputs:
-      - item_id: impeller_hub_machined
+      - item_id: steel_bar_stock
         qty: 2.5
         unit: kg
     est_time_hr: 1.5
-    notes: Machine hub bore, keyway, and blade mounting surfaces
+    notes: Machine hub bore, keyway, and blade mounting surfaces (keep as steel_bar_stock)
   - process_id: welding_process_general_v0
     inputs:
-      - item_id: impeller_hub_machined
+      - item_id: steel_bar_stock
         qty: 2.5
         unit: kg
-      - item_id: impeller_blades_formed
+      - item_id: steel_sheet_3mm
         qty: 1.4
         unit: kg
     outputs:

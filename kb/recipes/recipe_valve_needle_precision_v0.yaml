@@ -1,0 +1,65 @@
+id: recipe_valve_needle_precision_v0
+kind: recipe
+target_item_id: valve_needle_precision
+variant_id: v0
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: brass_bar_stock
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: valve_body_cast_rough
+        qty: 0.45
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Cast small valve body from brass for corrosion resistance"
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: valve_body_cast_rough
+        qty: 0.45
+        unit: kg
+    outputs:
+      - item_id: valve_body_machined
+        qty: 0.4
+        unit: kg
+    est_time_hr: 3.0
+    notes: "Machine valve body - threads, seat, ports, and tapered seat for needle"
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: steel_bar_stock
+        qty: 0.04
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Machine tapered needle and threaded stem from hardened steel rod"
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: valve_body_machined
+        qty: 0.4
+        unit: kg
+      - item_id: steel_bar_stock
+        qty: 0.04
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: valve_needle_precision
+        qty: 0.3
+        unit: kg
+    est_time_hr: 1.0
+    notes: "Assemble needle, packing gland, handle, test for smooth operation"
+assumptions: |
+  Brass body for corrosion resistance in gas applications.
+  Hardened steel needle for wear resistance.
+  Simple packed gland seal (no O-rings required for low-pressure gas service).
+  Manual adjustment via threaded stem and handle.
+notes: |
+  Manufacturing recipe for precision needle valve.
+  Standard industrial component for fine flow control.
+  Total production time ~8 hours per valve.
+  Can be manufactured in small batches.

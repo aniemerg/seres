@@ -1,0 +1,20 @@
+id: recipe_tool_holder_machined_v0
+kind: recipe
+target_item_id: tool_holder_machined
+variant_id: v0
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: tool_holder_machined
+        qty: 0.25
+        unit: kg
+    est_time_hr: 1.0
+    notes: Machine steel tool holder body with precision features for diamond brazing
+notes: |
+  Standalone recipe for tool holder (machined steel).
+  Mirrors step 2 in recipe_dressing_tool_diamond_v0.
+  Intermediate item primarily used within diamond dressing tool assembly.

@@ -1,0 +1,40 @@
+id: recipe_heat_exchanger_tube_bundle_v0
+kind: recipe
+target_item_id: heat_exchanger_tube_bundle
+variant_id: v0
+steps:
+  - process_id: tube_forming_process_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 110.0
+        unit: kg
+    outputs:
+      - item_id: tube_coils_formed
+        qty: 105.0
+        unit: kg
+    est_time_hr: 8.0
+    notes: "Bend steel/stainless tubing into coils or serpentine configuration"
+  - process_id: welding_process_tig_v0
+    inputs:
+      - item_id: tube_coils_formed
+        qty: 105.0
+        unit: kg
+      - item_id: fittings_and_valves
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: heat_exchanger_tube_bundle
+        qty: 100.0
+        unit: kg
+    est_time_hr: 6.0
+    notes: "Weld tube ends, manifolds, and inlet/outlet fittings (stainless assumed). Pressure test for leaks."
+assumptions: |
+  Stainless steel construction for corrosion resistance at high temperatures.
+  TIG welding provides leak-tight joints suitable for pressurized operation.
+  Coil geometry optimized for heat transfer area and pressure drop.
+  Pressure testing verifies integrity before installation.
+notes: |
+  Manufacturing recipe for heat exchanger tube bundle.
+  Used in thermal storage systems embedded in regolith or rock beds.
+  Total production time ~14 hours.
+  Scrap/trim loss ~10% from bending and fitting operations.

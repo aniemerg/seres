@@ -18,35 +18,35 @@ steps:
       - item_id: tank_shell_spun
         qty: 28.0
         unit: kg
-      - item_id: stainless_steel_plate
+      - item_id: stainless_steel_sheet
         qty: 5.0
         unit: kg
     outputs:
-      - item_id: tank_body_welded
+      - item_id: tank_shell_spun
         qty: 32.0
         unit: kg
     est_time_hr: 3.0
-    notes: Weld top flange and bottom seam
+    notes: Weld top flange and bottom seam (keep as tank_shell_spun)
   - process_id: machining_process_milling_v0
     inputs:
-      - item_id: stainless_steel_bar
+      - item_id: steel_bar_stock
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: agitator_shaft_and_impeller
+      - item_id: mixer_agitator_shaft_and_paddles
         qty: 2.5
         unit: kg
     est_time_hr: 2.0
-    notes: Machine agitator shaft and impeller blades
+    notes: Machine agitator shaft and impeller blades (modeled as mixer_agitator_shaft_and_paddles); stainless assumed, steel bar stock used as approximation.
   - process_id: assembly_process_general_v0
     inputs:
-      - item_id: tank_body_welded
+      - item_id: tank_shell_spun
         qty: 32.0
         unit: kg
-      - item_id: agitator_shaft_and_impeller
+      - item_id: mixer_agitator_shaft_and_paddles
         qty: 2.5
         unit: kg
-      - item_id: electric_motor_3_phase_1kw
+      - item_id: electric_motor_small
         qty: 1.0
         unit: each
       - item_id: seal_mechanical_rotary
@@ -55,9 +55,10 @@ steps:
       - item_id: valve_ball_stainless
         qty: 2.0
         unit: each
-      - item_id: sight_glass_round
+      - item_id: glass_to_metal_seal_v0
         qty: 1.0
         unit: each
+        notes: "Sight glass window for visual monitoring of tank contents"
     outputs:
       - item_id: mixing_tank_medium
         qty: 50.0

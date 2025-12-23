@@ -1,0 +1,23 @@
+id: resource_availability_placeholder_v0
+kind: process
+name: Resource availability (abstract placeholder)
+layer_tags:
+  - layer_1
+inputs: []
+outputs: []
+resource_requirements: []
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.0
+energy_model:
+  type: kWh_per_unit
+  value: 0.0
+notes: |
+  Abstract placeholder process for resources that are inherently available.
+  Used for: computing_time, abstract services, conceptual resources.
+  This is not a manufacturing process - it represents resource availability.
+  Actual outputs are specified in recipes that use this process.
+provenance: hand_assumption
+assumptions: |
+  Some resources (computing time, abstract services) don't require manufacturing.
+  This process serves as a KB placeholder to satisfy closure requirements.

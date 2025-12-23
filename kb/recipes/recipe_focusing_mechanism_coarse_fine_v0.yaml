@@ -8,28 +8,28 @@ steps:
         qty: 2.0
         unit: kg
     outputs:
-      - item_id: focusing_screws_machined
+      - item_id: lead_screw_assembly
         qty: 1.8
         unit: kg
     est_time_hr: 4.0
-    notes: Machine coarse and fine focus lead screws with different pitches
+    notes: Machine coarse and fine focus lead screws with different pitches; modeled as lead_screw_assembly for reuse
   - process_id: machining_process_milling_v0
     inputs:
       - item_id: steel_bar_stock
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: rack_and_pinion_set
+      - item_id: spur_gear_set_v0
         qty: 0.9
         unit: kg
     est_time_hr: 3.0
-    notes: Machine rack and pinion gears
+    notes: Machine rack and pinion gears (modeled as spur_gear_set_v0)
   - process_id: assembly_process_general_v0
     inputs:
-      - item_id: focusing_screws_machined
+      - item_id: lead_screw_assembly
         qty: 1.8
         unit: kg
-      - item_id: rack_and_pinion_set
+      - item_id: spur_gear_set_v0
         qty: 0.9
         unit: kg
       - item_id: bearing_ball_steel

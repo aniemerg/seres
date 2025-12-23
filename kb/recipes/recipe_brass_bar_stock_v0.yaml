@@ -1,0 +1,28 @@
+id: recipe_brass_bar_stock_v0
+name: Brass bar stock production
+variant_id: v0
+kind: recipe
+target_item_id: brass_bar_stock
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: copper_rod_ingot
+        qty: 0.7
+        unit: kg
+      - item_id: zinc_metal_v0
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: brass_bar_stock
+        qty: 1.0
+        unit: kg
+    est_time_hr: 3.0
+    notes: Melt copper and zinc together, mix to form brass alloy, cast into bars
+assumptions: |
+  Standard brass composition 70/30 Cu/Zn (C26000 or similar).
+  Good machinability makes it ideal for precision valve and fitting manufacture.
+  Can be cast into bars or rolled into sheets.
+notes: |
+  Manufacturing route for brass bar stock.
+  Used for machining valve bodies, fittings, torch components, and precision parts.
+  Brass offers better machinability than pure copper while maintaining corrosion resistance.

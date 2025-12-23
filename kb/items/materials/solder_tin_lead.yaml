@@ -1,0 +1,23 @@
+id: solder_tin_lead
+name: Solder tin-lead (wire/bar)
+kind: material
+unit: kg
+state: solid
+composition: Sn 63%, Pb 37%
+material_class: metal_alloy
+notes: |
+  Tin-lead solder in wire or bar form for wave soldering and hand soldering.
+  Standard eutectic composition (63/37 Sn/Pb) with melting point ~183°C.
+
+  Different from solder_paste_tin_lead which is powder + flux for SMT reflow.
+
+  Used for:
+  - Wave soldering (molten solder bath)
+  - Hand soldering with iron
+  - Rework and repair
+
+  Conservative Mode check:
+  - solder_paste_tin_lead exists but is different (paste form for SMT)
+  - This solid form needed for wave soldering processes
+  - Created as distinct material
+recipe: recipe_solder_tin_lead_v0

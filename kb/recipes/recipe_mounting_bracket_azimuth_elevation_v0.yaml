@@ -4,21 +4,21 @@ variant_id: v0
 steps:
   - process_id: metal_cutting_process_v0
     inputs:
-      - item_id: steel_structural_tube
+      - item_id: metal_tubing_stock
         qty: 8.0
         unit: kg
     outputs:
-      - item_id: frame_members_cut
+      - item_id: metal_tubing_stock
         qty: 7.5
         unit: kg
     est_time_hr: 2.0
     notes: Cut structural tubes for frame
   - process_id: welding_process_general_v0
     inputs:
-      - item_id: frame_members_cut
+      - item_id: metal_tubing_stock
         qty: 7.5
         unit: kg
-      - item_id: steel_plate_5mm
+      - item_id: steel_plate_or_sheet
         qty: 2.0
         unit: kg
     outputs:
@@ -49,13 +49,13 @@ steps:
       - item_id: stepper_motor_v0
         qty: 2.0
         unit: each
-      - item_id: gear_reducer_assembly
+      - item_id: harmonic_drive_reducer_medium
         qty: 2.0
         unit: each
       - item_id: encoder_rotary_absolute
         qty: 2.0
         unit: each
-      - item_id: limit_switch_mechanical
+      - item_id: proximity_sensor_inductive
         qty: 4.0
         unit: each
     outputs:

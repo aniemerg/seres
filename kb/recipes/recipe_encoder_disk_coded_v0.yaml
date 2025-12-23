@@ -1,0 +1,23 @@
+id: recipe_encoder_disk_coded_v0
+target_item_id: encoder_disk_coded
+variant_id: v0
+steps:
+  - process_id: machining_precision_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: encoder_disk_coded
+        qty: 0.15
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Machine coded disk with Gray code or binary pattern for absolute position encoding"
+assumptions: |
+  Precision machining required for accurate pattern placement.
+  Gray code or binary encoding pattern etched/machined into disk.
+  Pattern may be optical (reflective/transmissive) or magnetic.
+notes: |
+  Standalone recipe for coded encoder disk intermediate component.
+  Typically produced as part of encoder_rotary_absolute recipe, but can be made separately.
+  Used in absolute position encoders for robotics and machine control.
