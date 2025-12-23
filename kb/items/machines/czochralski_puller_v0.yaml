@@ -1,0 +1,24 @@
+id: czochralski_puller_v0
+kind: machine
+name: Czochralski crystal puller
+mass: 500.0
+unit: kg
+material_class: steel
+bom: bom_czochralski_puller_v0
+capabilities:
+  - crystal_growth
+  - high_temp_processing
+notes: |
+  Czochralski crystal pulling system for growing single-crystal silicon ingots.
+  Key components:
+    - Seed holder and rotation mechanism (1-20 rpm)
+    - Pull mechanism (vertical motion control, 1-10 mm/min)
+    - Heating system (maintains melt at ~1600°C)
+    - Crucible support and rotation
+    - Vacuum/inert atmosphere chamber
+    - Diameter control sensors and feedback
+  Process: Dip seed crystal into molten silicon, slowly pull while rotating.
+  Silicon solidifies on seed in single-crystal form.
+  Critical for semiconductor wafer production.
+  See czochralski_process_silicon_v0 for operating details.
+recipe: recipe_czochralski_puller_v0

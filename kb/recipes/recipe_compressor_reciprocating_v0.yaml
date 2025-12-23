@@ -1,0 +1,45 @@
+id: recipe_compressor_reciprocating_v0
+kind: recipe
+target_item_id: compressor_reciprocating
+variant_id: v0
+steps:
+  - process_id: sand_casting_large_v0
+    est_time_hr: 10.0
+    machine_hours: 10.0
+    notes: "Cast compressor housing and crankcase from iron or steel"
+  - process_id: machining_precision_v0
+    est_time_hr: 16.0
+    machine_hours: 16.0
+    notes: "Machine cylinder bores, crankshaft journals, and bearing surfaces"
+  - process_id: steel_shaft_machining_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Machine crankshaft with precision journals and throws"
+  - process_id: machining_precision_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Machine pistons and install piston rings"
+  - process_id: assembly_basic_v0
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Assemble crankshaft, connecting rods, pistons, valves, and bearings"
+  - process_id: assembly_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Install intake and discharge valves with springs"
+  - process_id: sealing_and_assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Install seals, gaskets, and crankcase cover"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Test compression pressure, check for leaks, verify oil circulation"
+assumptions: |
+  Multi-stage reciprocating compressor for cryogenic refrigeration.
+  Cast iron or steel housing with precision-machined cylinders.
+  Sealed crankcase with oil lubrication for long-term operation.
+notes: |
+  Manufacturing recipe for reciprocating compressor.
+  Critical component for cryogenic chillers and refrigeration systems.
+  Total production time ~65 hours.

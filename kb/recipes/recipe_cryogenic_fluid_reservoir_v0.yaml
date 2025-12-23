@@ -1,0 +1,41 @@
+id: recipe_cryogenic_fluid_reservoir_v0
+kind: recipe
+target_item_id: cryogenic_fluid_reservoir
+variant_id: v0
+steps:
+  - process_id: sheet_metal_forming_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Form inner stainless steel vessel and outer carbon steel shell"
+  - process_id: welding_tig_basic_v0
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "TIG weld inner vessel seams for leak-tight construction"
+  - process_id: welding_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Weld outer shell and mounting brackets"
+  - process_id: assembly_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Assemble inner and outer vessels with spacers and support structure"
+  - process_id: assembly_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Install vacuum port, fill ports, and pressure relief valve"
+  - process_id: vacuum_testing_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Evacuate annular space and test vacuum integrity"
+  - process_id: leak_testing_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Helium leak test inner vessel and vacuum jacket"
+assumptions: |
+  Double-wall vacuum-insulated reservoir for cryogenic fluids.
+  Inner vessel: stainless steel for chemical compatibility.
+  Outer vessel: carbon steel with evacuated annular space.
+notes: |
+  Manufacturing recipe for cryogenic fluid reservoir.
+  Critical component for cryogenic chiller refrigerant storage.
+  Total production time ~50 hours.

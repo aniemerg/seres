@@ -1,0 +1,37 @@
+id: recipe_heating_system_low_temp_v0
+kind: recipe
+target_item_id: heating_system_low_temp
+variant_id: v0
+steps:
+  - process_id: sheet_metal_forming_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Fabricate chamber shell and door from steel sheet"
+  - process_id: welding_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Weld chamber structure, frame, and mounting brackets"
+  - process_id: insulation_installation_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Install thermal insulation blanket on chamber walls"
+  - process_id: assembly_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Install heating elements, blower fan, temperature controller, sensors, and door"
+  - process_id: electrical_wiring_and_controls_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Wire electrical components, connect controller, install safety interlocks"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Test heating performance, temperature control, and air circulation"
+assumptions: |
+  Electric resistance heating system with forced air circulation.
+  Operating range 50-200°C for battery and electrode processing.
+  Chamber volume ~1 m³ for batch processing operations.
+notes: |
+  Manufacturing recipe for low-temperature heating system.
+  Critical for NiFe battery formation, electrode drying, and curing processes.
+  Total production time ~35 hours.

@@ -1,0 +1,41 @@
+id: recipe_cryogenic_chiller_v0
+kind: recipe
+target_item_id: cryogenic_chiller_v0
+variant_id: v0
+steps:
+  - process_id: machining_rough_v0
+    est_time_hr: 16.0
+    machine_hours: 16.0
+    notes: "Machine compressor housing, heat exchanger bodies, and mounting brackets"
+  - process_id: welding_structural_v0
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Weld structural frame and pressure vessel components"
+  - process_id: brazing_process_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Braze heat exchanger tubes and vacuum-insulated piping joints"
+  - process_id: assembly_basic_v0
+    est_time_hr: 16.0
+    labor_hours: 16.0
+    notes: "Assemble compressor, heat exchangers, expansion valve, and reservoir"
+  - process_id: vacuum_testing_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Evacuate and test vacuum insulation integrity"
+  - process_id: electrical_wiring_and_controls_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Wire temperature and pressure sensors, install controller, connect power"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Charge with refrigerant, test cooling performance, verify temperature control"
+assumptions: |
+  Cascaded refrigeration system using multiple compression stages.
+  Operating temperature range -150°C to -200°C for cryogenic applications.
+  Vacuum-insulated components minimize thermal losses.
+notes: |
+  Manufacturing recipe for cryogenic chiller system.
+  Critical for noble gas separation, He-3 extraction, and cold trap operations.
+  Total production time ~78 hours.

@@ -1,0 +1,70 @@
+id: hydrogen_sulfide_synthesis_v0
+kind: process
+name: Hydrogen sulfide synthesis from hydrogen and sulfur
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: hydrogen_gas
+    qty: 0.059
+    unit: kg
+  - item_id: sulfur_elemental
+    qty: 0.941
+    unit: kg
+outputs:
+  - item_id: hydrogen_sulfide_gas
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - generic_chemical_reactor_v0
+  - heating_system_low_temp
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.5
+  notes: Direct synthesis at 300-450°C, exothermic reaction
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+  notes: Controlled synthesis with temperature management
+notes: |
+  Direct synthesis of hydrogen sulfide gas from hydrogen and elemental sulfur.
+  Reaction: H2 + S → H2S (exothermic)
+  Temperature: 300-450°C for controlled reaction rate
+  Process: Direct combination in reactor
+  Purpose: Produce H2S for Claus process sulfur recovery
+  Alternative: H2S can also be generated from troilite (FeS) + acid treatment
+  Process details:
+    1. Elemental sulfur (from Claus process or sulfide ores)
+    2. Hydrogen gas (from water electrolysis or regolith volatiles)
+    3. Heat to 300-450°C in reactor
+    4. Direct combination: H2 + S → H2S
+    5. Exothermic reaction (releases ~20 kJ/mol)
+    6. Cool and collect H2S gas
+  Products:
+    - H2S (hydrogen sulfide): Used in Claus process (SO2 + 2H2S → 3S + 2H2O)
+  Stoichiometry: H2 (2g) + S (32g) → H2S (34g)
+  Mass fractions: 5.9% H2, 94.1% S (matches H2S composition)
+  Advantages: Simple direct synthesis
+    Enables sulfur recycling loop with Claus process
+    Exothermic (releases heat)
+  Disadvantages: Produces toxic, corrosive gas
+    Requires careful containment and handling
+    Safety systems essential (scrubbers, monitors)
+  Lunar context: Enables closed-loop sulfur recovery
+    H2S intermediate in Claus process
+    Sulfur conserved (scarce lunar resource)
+  Safety: H2S extremely toxic (>10 ppm hazardous)
+    Corrosive to metals
+    Requires gas-tight reactor and scrubbing system
+    Emergency shutdown and ventilation systems
+  Alternative H2S sources:
+    - Troilite + HCl: FeS + 2HCl → FeCl2 + H2S
+    - Sulfide ore roasting off-gases
+  Sulfur recycling loop:
+    1. Troilite roasting → SO2
+    2. H2 + S → H2S (this process)
+    3. SO2 + 2H2S → 3S + 2H2O (Claus process)
+    4. Sulfur recovered and recycled

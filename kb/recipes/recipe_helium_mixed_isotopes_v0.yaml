@@ -1,0 +1,24 @@
+id: recipe_helium_mixed_isotopes_v0
+target_item_id: helium_mixed_isotopes
+variant_id: v0
+steps:
+  - process_id: regolith_volatile_thermal_extraction_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Heat regolith to 700-1200°C to release solar-wind implanted helium"
+  - process_id: cold_trap_cryogenic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Cryogenic cold trap for helium fraction at ~4K before isotopic separation"
+assumptions: |
+  Mixed helium isotopes (He-3 and He-4) collected from regolith thermal processing.
+  Helium fraction captured before isotopic separation.
+  Contains ~14-30 ppb He-3 depending on regolith maturity.
+  Bulk of helium is He-4 (~99.999%).
+notes: |
+  Production of mixed helium isotopes from lunar regolith volatiles.
+  Source: regolith_volatile_thermal_extraction_v0 process.
+  Helium concentration in regolith: ~14 ppm total.
+  He-3 concentration: 4-30 ppb (parts per billion) within total helium.
+  Mixed isotopes are input to helium3_cryogenic_separation_v0 for He-3 isolation.
+  This represents the helium fraction before cryogenic isotopic separation.

@@ -1,0 +1,34 @@
+id: recipe_winding_drums_v0
+target_item_id: winding_drums
+variant_id: v0
+steps:
+  - process_id: machining_rough_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Machine cylindrical drum bodies and mounting shafts from steel stock"
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Finish machine bearing surfaces and mounting interfaces for smooth rotation"
+  - process_id: assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Assemble drums on shafts, install bearings and tension adjustment mechanisms"
+  - process_id: surface_finishing_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Deburr, polish drum surfaces for smooth fiber contact"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Test drum rotation, balance, and tension control operation"
+assumptions: |
+  Set of precision-machined winding drums for fiber/wire winding operations.
+  Multiple drum assemblies with bearings and tension control.
+  Total mass ~50 kg including shafts, bearings, and mounting hardware.
+notes: |
+  Manufacturing of winding drums for basalt fiber production and wire winding.
+  Used in winding machines (bom_winding_machine_v0).
+  Total fabrication time ~15 hours.
+  Precision machining critical for smooth winding and tension control.

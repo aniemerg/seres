@@ -1,0 +1,32 @@
+id: recipe_hydrogen_oxygen_torch_v0
+target_item_id: hydrogen_oxygen_torch_v0
+variant_id: v0
+steps:
+  - process_id: machining_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Machine burner nozzle from refractory material and mixing chamber from steel"
+  - process_id: welding_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Weld gas mixing chamber, mounting brackets, and pipe connections"
+  - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble burner nozzle, flow regulators, pressure gauges, flashback arrestors"
+  - process_id: leak_test_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Pressure test all gas connections for H2 and O2 safety"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Test flame ignition, flow control, and safety interlocks"
+assumptions: |
+  Hydrogen-oxygen torch assembly from machined and welded components.
+  Safety-critical design requiring thorough leak testing.
+  Refractory nozzle materials withstand 2800°C flame temperatures.
+notes: |
+  Manufacturing recipe for H2-O2 flame torch used in high-purity silica production.
+  Critical safety features: flashback arrestors and pressure monitoring.
+  Used in flame hydrolysis processes (silica_glass_high_purity_v0).

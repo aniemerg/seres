@@ -1,0 +1,45 @@
+id: krypton_gas
+name: Krypton gas
+kind: material
+mass: 1.0
+unit: kg
+density: 3.7  # kg/m³ at STP (gas)
+material_class: gas
+composition:
+  Kr: 1.0
+notes: |
+  Krypton gas (Kr) extracted from lunar regolith volatiles.
+
+  Properties:
+  - Atomic number: 36
+  - Atomic mass: 83.80 amu
+  - Boiling point: 119.9 K (-153°C)
+  - Noble gas (chemically inert)
+  - Colorless, odorless, non-flammable
+
+  Sources on Moon:
+  - Solar wind implantation in regolith
+  - Concentration: ~0.02 ppm (extremely low)
+  - Requires processing vast quantities of regolith
+
+  Applications:
+  - Ion engine propellant (alternative to xenon)
+  - Inert atmosphere and specialized lighting
+  - Leak detection tracer gas
+
+  Production:
+  - Multi-stage cryogenic distillation
+  - Separation from Ar and Xe by boiling point
+  - Energy intensive: ~200 kWh/kg
+
+  Lunar context:
+  - Not economical for early ISRU (extremely low concentration)
+  - Recommended to import from Earth
+  - Process notes: See noble_gas_extraction_v0
+
+  Conservative Mode check completed:
+  - Searched for: krypton_gas, noble gas, inert gas
+  - Checked items: neon_gas, inert_gas_fill_v0
+  - No equivalent found within 5x magnitude or compatible chemistry
+  - Created because noble_gas_extraction_v0 explicitly outputs krypton
+recipe: recipe_krypton_gas_v0

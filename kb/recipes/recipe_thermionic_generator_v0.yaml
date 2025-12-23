@@ -1,0 +1,45 @@
+id: recipe_thermionic_generator_v0
+target_item_id: thermionic_generator
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    est_time_hr: 16.0
+    labor_hours: 16.0
+    notes: "Assemble structural frame and mount radiator heat rejection system"
+  - process_id: assembly_basic_v0
+    est_time_hr: 20.0
+    labor_hours: 20.0
+    notes: "Install and series-connect 10 thermionic converter modules for voltage stacking"
+  - process_id: assembly_basic_v0
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Integrate nuclear heat source and thermal interface to converters"
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Braze thermal connections between heat source, converters, and radiator"
+  - process_id: assembly_basic_v0
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Install power conditioning electronics and electrical connections"
+  - process_id: leak_test_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Vacuum leak test of thermionic converter envelopes"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Test power generation, thermal management, and electrical output under load"
+assumptions: |
+  Thermionic power generator assembly from pre-fabricated components.
+  Nuclear heat source (imported or fabricated separately) provides 1500-2000°C cathode temperature.
+  10 converters connected in series for ~10-15V output voltage.
+  Radiator sized for 70-90% waste heat rejection.
+  Power conditioning converts DC output to usable form.
+notes: |
+  Manufacturing recipe for thermionic emission-based power generation system.
+  Converts nuclear/solar thermal energy directly to electrical power via thermionic emission.
+  Efficiency: 15-20% typical (Russian TOPAZ reactors achieved 20%).
+  Critical assembly steps: thermal interface bonding, vacuum integrity, electrical series connection.
+  Applications: base load power from nuclear reactors, waste heat recovery from ISRU processes.
+  See thermionic_converter_basic_v0 and thermionic_power_generation_v0 processes for operating details.

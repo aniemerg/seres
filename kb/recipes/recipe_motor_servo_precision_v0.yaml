@@ -1,0 +1,41 @@
+id: recipe_motor_servo_precision_v0
+kind: recipe
+target_item_id: motor_servo_precision
+variant_id: v0
+steps:
+  - process_id: machining_precision_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Machine motor housing, shaft, and mounting brackets to tight tolerances"
+  - process_id: coil_winding_motor_v0
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    notes: "Wind stator coils with precision wire placement"
+  - process_id: assembly_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Assemble permanent magnets onto rotor shaft"
+  - process_id: sensor_integration_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Install and align rotary encoder for position feedback"
+  - process_id: motor_final_assembly_v0
+    est_time_hr: 5.0
+    labor_hours: 5.0
+    notes: "Assemble stator, rotor, bearings, and encoder into housing"
+  - process_id: balancing_dynamic_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Balance rotor assembly to minimize vibration"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Test motor performance, encoder accuracy, and torque characteristics"
+assumptions: |
+  DC brushless servo motor with permanent magnet rotor.
+  Integrated rotary encoder provides position and velocity feedback.
+  Precision manufacturing for smooth motion and accurate position control.
+notes: |
+  Manufacturing recipe for precision servo motor.
+  Critical for Czochralski crystal growth, precision stages, and robotic systems.
+  Total production time ~32 hours.

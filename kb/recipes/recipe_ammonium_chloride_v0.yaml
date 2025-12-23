@@ -1,0 +1,18 @@
+id: recipe_ammonium_chloride_v0
+target_item_id: ammonium_chloride
+variant_id: v0
+steps:
+  - process_id: solvay_process_sodium_carbonate_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "By-product of Solvay process for sodium carbonate production"
+assumptions: |
+  Ammonium chloride produced as by-product of Solvay process.
+  Reaction: NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl.
+  NH4Cl crystallizes from solution and is recovered.
+  Can be recycled to recover ammonia via CaO decomposition.
+notes: |
+  Production of ammonium chloride from Solvay process.
+  Critical intermediate for ammonia recycling in lunar ISRU.
+  Decomposes with CaO to regenerate NH3 for Haber-Bosch process.
+  See ammonia_recovery_cao_v0 for recycling chemistry.

@@ -1,0 +1,37 @@
+id: recipe_blower_fan_small_v0
+kind: recipe
+target_item_id: blower_fan_small
+variant_id: v0
+steps:
+  - process_id: sheet_metal_forming_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Form fan housing and impeller blades from sheet metal"
+  - process_id: machining_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Machine fan shaft and mounting brackets"
+  - process_id: welding_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Weld impeller blades to hub and assemble housing"
+  - process_id: assembly_basic_v0
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Assemble fan impeller, bearings, motor mount, and housing"
+  - process_id: balancing_dynamic_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Balance fan impeller to minimize vibration"
+  - process_id: integration_test_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Test fan airflow, verify motor operation, check for vibration"
+assumptions: |
+  Small centrifugal or axial fan for forced air circulation.
+  Power rating: 100-500W motor for heating and drying applications.
+  Sheet metal construction with welded impeller.
+notes: |
+  Manufacturing recipe for small blower fan.
+  Critical for heating systems, drying chambers, and ventilation.
+  Total production time ~15 hours.
