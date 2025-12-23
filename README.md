@@ -37,7 +37,8 @@ Quick examples:
   - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
 - Queue helpers:
   - Lease next item: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900]`
-  - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name>`
+  - Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
+  - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
   - GC expired leases: `queue gc`
   - Prune explicit resolved/superseded: `queue prune`
   - List counts: `queue ls`

@@ -9,6 +9,9 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="kbtool CLI")
     sub = parser.add_subparsers(dest="command")
     sub.add_parser("index", help="Build index.json from kb/**/*.yaml")
+    v = sub.add_parser("validate", help="Rebuild queue and verify gap resolution")
+    v.add_argument("--id", action="append", dest="ids", required=True, help="Gap id to verify (repeatable)")
+    v.add_argument("--no-index", action="store_true", help="Skip indexer run and use existing queue")
     q = sub.add_parser("queue", help="Work queue operations")
     q_sub = q.add_subparsers(dest="qcmd")
     q_sub.add_parser("pop", help="Pop and print the next queue item (legacy)")
@@ -20,6 +23,16 @@ def _parse_args() -> argparse.Namespace:
     comp_p = q_sub.add_parser("complete", help="Mark leased item complete")
     comp_p.add_argument("--id", required=True)
     comp_p.add_argument("--agent", required=True)
+    comp_p.add_argument(
+        "--verify",
+        action="store_true",
+        help="Rebuild queue and refuse completion if the gap remains",
+    )
+    comp_p.add_argument(
+        "--no-index",
+        action="store_true",
+        help="Skip indexer run when used with --verify",
+    )
     rel_p = q_sub.add_parser("release", help="Release a lease back to pending")
     rel_p.add_argument("--id", required=True)
     rel_p.add_argument("--agent", required=True)
@@ -56,6 +69,16 @@ def _parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def _run_indexer() -> bool:
+    if hasattr(indexer, "main"):
+        indexer.main()
+        return True
+    json_output = indexer.run_indexer()
+    if isinstance(json_output, dict):
+        return bool(json_output.get("success", True))
+    return True
+
+
 def main() -> None:
     args = _parse_args()
     if args.command in (None, "index"):
@@ -65,6 +88,18 @@ def main() -> None:
         else:
             json_output = indexer.run_indexer()
             print(json.dumps(json_output, indent=2))
+    elif args.command == "validate":
+        if not args.no_index:
+            ok = _run_indexer()
+            if not ok:
+                raise SystemExit("Indexer failed; cannot validate queue")
+        remaining = queue_tool.gap_ids_present(args.ids)
+        if remaining:
+            print("Unresolved gaps:")
+            for gap_id in sorted(remaining):
+                print(f"- {gap_id}")
+            raise SystemExit(1)
+        print("All specified gaps are resolved.")
     elif args.command == "queue":
         if args.qcmd == "pop":
             item = queue_tool.pop_queue()
@@ -83,6 +118,14 @@ def main() -> None:
             else:
                 print("queue empty")
         elif args.qcmd == "complete":
+            if args.verify:
+                if not args.no_index:
+                    ok = _run_indexer()
+                    if not ok:
+                        raise SystemExit("Indexer failed; refusing to complete")
+                remaining = queue_tool.gap_ids_present([args.id])
+                if remaining:
+                    raise SystemExit(f"Refusing to complete; gap still present: {args.id}")
             ok = queue_tool.complete(args.id, args.agent)
             if ok:
                 print(f"Marked {args.id} done")

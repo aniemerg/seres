@@ -63,7 +63,8 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 - Queue file: `out/work_queue.jsonl`. IDs are stable: `id = "<gap_type>:<item_id>"` with fields `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.
 - Lease next task: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
   - Status becomes `leased`; expires to `pending` if TTL lapses.
-- Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name>`
+- Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
+- Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name> [--verify]`
 - Release: `.venv/bin/python -m kbtool queue release --id <gap_type:item_id> --agent <name>`
 - GC (revert expired leases, optionally prune old done): `.venv/bin/python -m kbtool queue gc [--prune-done-older-than N]`
 - List counts: `.venv/bin/python -m kbtool queue ls`
@@ -82,7 +83,21 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
   2) Implement one item (add YAML/recipe/process/etc.). Prefer ≥3-step recipes with time/labor/machine-hours when possible. Reference missing processes explicitly if needed so they queue.
  3) Run index: `.venv/bin/python -m kbtool index`.
  4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`).
- 5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+ 5) Verify the gap is gone: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` (or use `queue complete --verify`).
+ 6) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+
+## Verification (how it works across gap types)
+
+**Canonical rule:** verification always means "run the indexer and ensure the gap id no longer appears in `out/work_queue.jsonl`." The queue is rebuilt from scratch each run, so absence is the definitive signal.
+
+Supporting reports by gap type (optional, for debugging):
+- `referenced_only`: only in `out/work_queue.jsonl` (no dedicated report)
+- `unresolved_ref`: `out/unresolved_refs.jsonl`
+- `import_stub`: `out/import_stubs.jsonl`
+- `no_recipe`: `out/missing_recipes.jsonl`
+- `missing_field`: `out/missing_fields.jsonl`
+- `no_provider_machine`: `out/orphan_resources.jsonl`
+- `invalid_recipe_schema`: `out/invalid_recipes.jsonl`
 
 ## Dedupe Queue (tool consolidation workflow)
 - Separate file: `out/dedupe_queue.jsonl`; mirror commands:

@@ -231,3 +231,16 @@ def list_queue() -> Dict[str, int]:
         st = obj.get("status") or "pending"
         counts[st] = counts.get(st, 0) + 1
     return counts
+
+
+def gap_ids_present(ids: List[str]) -> Set[str]:
+    wanted = set(ids)
+    if not wanted:
+        return set()
+    items = _load_queue()
+    present: Set[str] = set()
+    for obj in items:
+        obj_id = obj.get("id")
+        if obj_id in wanted:
+            present.add(obj_id)
+    return present

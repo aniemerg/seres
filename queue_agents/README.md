@@ -194,6 +194,7 @@ An item is marked complete when:
 2. The gap item_id no longer appears in `out/work_queue.jsonl`
 
 Both conditions must be met.
+For manual verification, use: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` or `queue complete --verify`.
 
 ## Common Workflows
 
