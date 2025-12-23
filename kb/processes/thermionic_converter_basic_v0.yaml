@@ -5,20 +5,20 @@ layer_tags:
   - layer_4
   - layer_5
 inputs:
-  - item_id: waste_heat_high_temperature
+  - item_id: waste_heat
     qty: 1.0
     unit: kWh
 outputs:
   - item_id: electrical_power
     qty: 0.20
     unit: kWh
-  - item_id: waste_heat_low_temperature
+  - item_id: waste_heat
     qty: 0.80
     unit: kWh
 requires_ids:
-  - thermionic_diode_v0
-  - vacuum_envelope_v0
-  - heat_source_v0
+  - thermionic_converter_v0
+  - vacuum_envelope_quartz
+  - heat_source_nuclear
   - cooling_system_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0

@@ -15,9 +15,14 @@ outputs:
   qty: 1.0
   unit: unit
 resource_requirements:
-- machine_id: hose_crimping_station_v0
-  qty: 1.0
+- machine_id: labor_bot_general_v0
+  qty: 0.75
   unit: hr
+  notes: Manual crimping operation
+- machine_id: hose_crimper_manual
+  qty: 0.75
+  unit: hr
+  notes: Manual hydraulic crimping tool (3 kg part, not 150 kg station)
 energy_model:
   type: kWh_per_unit
   value: 1.0

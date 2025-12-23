@@ -5,29 +5,29 @@ layer_tags:
   - layer_5
   - layer_6
 inputs:
-  - item_id: regolith_volatile_mixed_gases
+  - item_id: carbon_dioxide_gas
     qty: 1.0
     unit: kg
 outputs:
   - item_id: neon_gas
     qty: 0.00015
     unit: kg
-  - item_id: argon_gas
+  - item_id: inert_gas_fill_v0
     qty: 0.00050
     unit: kg
   - item_id: krypton_gas
     qty: 0.00002
     unit: kg
-  - item_id: xenon_gas
+  - item_id: inert_gas_fill_v0
     qty: 0.000003
     unit: kg
-  - item_id: other_volatiles
+  - item_id: carbon_dioxide_gas
     qty: 0.999327
     unit: kg
 requires_ids:
-  - cryogenic_distillation_column_v0
-  - multi_stage_refrigeration_v0
-  - gas_chromatograph_v0
+  - packed_bed_distillation_v0
+  - cryogenic_chiller_v0
+  - gas_chromatograph_simple_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 12.0

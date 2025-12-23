@@ -10,9 +10,12 @@ outputs:
     qty: 0.1
     unit: kg
 requires_ids:
-  - hose_segment_fabrication_station_v0
+  - hydraulic_assembly_tools
 resource_requirements:
-  - resource_type: hose_segment_fabrication_station_v0
+  - machine_id: labor_bot_general_v0
+    qty: 0.1
+    unit: hr
+  - machine_id: hydraulic_assembly_tools
     qty: 0.1
     unit: hr
 energy_model:
@@ -21,4 +24,4 @@ energy_model:
 time_model:
   type: fixed_time
   hr_per_batch: 0.2
-notes: "Fabricate hydraulic hose segment (0.1 kg) using a dedicated hose_segment_fabrication_station_v0. Placeholder values for modeling."
+notes: "Fabricate hydraulic hose segment (0.1 kg) using labor bot + hydraulic assembly tools. Placeholder values for modeling."

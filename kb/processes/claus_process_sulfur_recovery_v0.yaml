@@ -14,7 +14,7 @@ inputs:
     qty: 0.582
     unit: kg
 outputs:
-  - item_id: iron_oxide_hematite
+  - item_id: iron_ore_or_ilmenite
     qty: 1.82
     unit: kg
   - item_id: sulfur_elemental
@@ -25,7 +25,7 @@ outputs:
     unit: kg
 requires_ids:
   - roasting_furnace_v0
-  - claus_reactor_v0
+  - generic_chemical_reactor_v0
   - alumina_catalyst_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
@@ -56,7 +56,7 @@ notes: |
     5. Fe2O3 (hematite) by-product for iron extraction
   Products:
     - S (elemental sulfur): Catalyst for Mond process (CO + Ni → Ni(CO)4)
-    - Fe2O3 (hematite): Iron ore for reduction to metal
+    - Fe2O3 (hematite): Iron ore for reduction to metal (modeled as iron_ore_or_ilmenite)
     - H2O (water): Process water
   Troilite sources:
     - NiFe meteorites: Often associated with troilite inclusions

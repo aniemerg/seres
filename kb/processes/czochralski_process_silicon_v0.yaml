@@ -10,7 +10,7 @@ inputs:
   - item_id: silicon_seed_crystal
     qty: 0.001
     unit: kg
-  - item_id: fused_silica_crucible
+  - item_id: crucible_ceramic_refractory
     qty: 0.05
     unit: kg
 outputs:
@@ -22,8 +22,8 @@ outputs:
     unit: kg
 requires_ids:
   - czochralski_puller_v0
-  - vacuum_inert_atmosphere_system_v0
-  - crucible_heater_v0
+  - inert_atmosphere_system
+  - high_temp_furnace_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 8.0
@@ -45,7 +45,7 @@ notes: |
   Purpose: Convert polysilicon to single-crystal silicon
   Essential for electronics (integrated circuits, high-performance solar)
   Process details:
-    1. Charge fused silica crucible with polysilicon chunks
+    1. Charge fused silica crucible_refractory with polysilicon chunks
     2. Heat to 1600°C in vacuum or argon atmosphere
     3. Dip seed crystal (known orientation, e.g., <100> or <111>) into melt
     4. Slowly pull seed upward while rotating (1-10 mm/min)
@@ -60,7 +60,7 @@ notes: |
     - Small single-crystal silicon rod (oriented)
     - Determines crystal orientation of entire ingot
     - Common orientations: <100> (electronics), <111> (some applications)
-  Crucible: Fused silica (SiO2) - high purity, withstands temperature
+  Crucible: Ceramic refractory (placeholder for fused silica or equivalent)
     - Slowly dissolves into melt (oxygen contamination source)
     - Replaced after each run or few runs
   Dopant addition: Can add B (p-type) or P/As (n-type) during growth

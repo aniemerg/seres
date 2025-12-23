@@ -4,19 +4,19 @@ name: Zone refining for ultra-pure silicon
 layer_tags:
   - layer_5
 inputs:
-  - item_id: silicon_metal_pure
+  - item_id: silicon_purified
     qty: 1.0
     unit: kg
 outputs:
   - item_id: silicon_ultra_pure
     qty: 0.98
     unit: kg
-  - item_id: silicon_impure_ends
+  - item_id: silicon_purified
     qty: 0.02
     unit: kg
 requires_ids:
-  - zone_refining_apparatus_v0
-  - rf_heating_coil_v0
+  - induction_furnace_v0
+  - inductor_coil_rf
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 12.0
@@ -51,7 +51,7 @@ notes: |
     - Impurities swept to end of ingot
   Products:
     - Ultra-pure silicon: Center section of ingot
-    - Impure ends: Recycled to Siemens process
+    - Impure ends: Recycled to Siemens process (modeled as silicon_purified)
   Purity levels achievable:
     - Starting: 99.9999% (6 nines, from Siemens)
     - After 10 passes: 99.9999999% (9 nines)

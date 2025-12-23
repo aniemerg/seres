@@ -21,8 +21,8 @@ outputs:
     qty: 1.13
     unit: kg
 requires_ids:
-  - steam_reforming_reactor_v0
-  - nickel_catalyst_v0
+  - generic_chemical_reactor_v0
+  - catalyst_pellet_forming_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 2.0
@@ -41,7 +41,7 @@ notes: |
   Reaction: CH4 + H2O → CO + 3H2 (endothermic)
   Temperature: 850°C
   Pressure: 4 MPa (40 bar)
-  Catalyst: Nickel (from Mond process, meteorite sources)
+  Catalyst: Nickel (from Mond process, meteorite sources); modeled as catalyst_pellet_forming_v0
   Process: Catalytic steam reforming
   Purpose: First step in silicone plastic synthesis chain
   Generate syngas for methanol production

@@ -5,10 +5,10 @@ layer_tags:
   - layer_4
   - layer_5
 inputs:
-  - item_id: silicon_dioxide_purified
+  - item_id: silica_purified
     qty: 0.57
     unit: kg
-  - item_id: aluminum_oxide_pure
+  - item_id: alumina_powder
     qty: 0.20
     unit: kg
   - item_id: magnesium_oxide
@@ -24,12 +24,12 @@ outputs:
   - item_id: aluminosilicate_glass
     qty: 0.98
     unit: kg
-  - item_id: volatiles_glass_making
+  - item_id: process_waste
     qty: 0.02
     unit: kg
 requires_ids:
-  - glass_melting_furnace_v0
-  - glass_forming_equipment_v0
+  - glass_furnace_v0
+  - glassworking_station
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 4.0
@@ -57,7 +57,7 @@ notes: |
        - CaO: From anorthite processing or lime extraction
        - FeO: From ilmenite reduction or iron oxidation (optional for color)
     2. Mix oxides in correct proportions
-    3. Load into glass melting furnace (crucible or tank furnace)
+    3. Load into glass melting furnace (crucible_refractory or tank furnace)
     4. Heat to 1100-1350°C (above liquidus temperature)
     5. Maintain molten state for homogenization (1-3 hours)
     6. Stir or bubble to ensure uniform composition

@@ -5,7 +5,7 @@ layer_tags:
   - layer_5
   - layer_6
 inputs:
-  - item_id: kreep_basalt_ore
+  - item_id: basalt_aggregate
     qty: 1000.0
     unit: kg
   - item_id: sulfuric_acid_concentrated
@@ -18,23 +18,22 @@ inputs:
     qty: 200.0
     unit: kg
 outputs:
-  - item_id: rare_earth_oxide_mixed
+  - item_id: reduced_metal_oxides
     qty: 1.2
     unit: kg
-  - item_id: leach_residue
+  - item_id: processed_regolith
     qty: 998.8
     unit: kg
-  - item_id: process_water
+  - item_id: water
     qty: 200.0
     unit: kg
   - item_id: sulfuric_acid_dilute
     qty: 50.0
     unit: kg
 requires_ids:
-  - acid_leaching_tank_v0
-  - solvent_extraction_unit_v0
-  - precipitation_reactor_v0
-  - calcination_furnace_v0
+  - chemical_separation_equipment  # Includes solvent extraction capability
+  - chemical_separation_equipment
+  - furnace_basic
   - gamma_ray_spectrometer_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
@@ -49,6 +48,8 @@ time_model:
   hr_per_batch: 48.0
   notes: Multi-stage leaching, extraction, and purification
 notes: |
+  KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock exists.
+  REE oxide concentrate modeled as reduced_metal_oxides for now.
   Rare earth element (REE) extraction from KREEP basalts (advanced process).
   Source: Sustainable-ISRU-on-the-Moon.txt
   Purpose: Extract REE for permanent magnets (NdFeB), superconductors (NbTi), catalysts

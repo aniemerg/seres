@@ -19,8 +19,8 @@ outputs:
     qty: 0.818
     unit: kg
 requires_ids:
-  - catalytic_reactor_v0
-  - nickel_catalyst_v0
+  - generic_chemical_reactor_v0
+  - catalyst_pellet_forming_v0
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 2.0
@@ -38,7 +38,7 @@ notes: |
   Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
   Reaction: CO2 + 4H2 → CH4 + 2H2O (exothermic)
   Temperature: 300-400°C
-  Catalyst: Nickel-based (Ni/Al2O3 common)
+  Catalyst: Nickel-based (Ni/Al2O3 common); modeled as catalyst_pellet_forming_v0
   Process: Catalytic hydrogenation of CO2
   Purpose: Recycle CO2 from FFC process back to methane
   Close carbon cycle in ISRU systems

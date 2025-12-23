@@ -4,7 +4,7 @@ name: Phosphorus extraction from KREEP apatite
 layer_tags:
   - layer_5
 inputs:
-  - item_id: apatite_ore
+  - item_id: basalt_aggregate
     qty: 1.0
     unit: kg
   - item_id: carbon_reducing_agent
@@ -24,8 +24,8 @@ outputs:
     qty: 0.890
     unit: kg
 requires_ids:
-  - high_temp_retort_v0
-  - phosphorus_condenser_v0
+  - high_temp_furnace_v0
+  - vapor_condenser_cold_trap
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 4.0
@@ -39,6 +39,7 @@ time_model:
   hr_per_batch: 8.0
   notes: Reduction and phosphorus vapor condensation
 notes: |
+  KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock exists.
   Extraction of elemental phosphorus from apatite (calcium phosphate) in KREEP regions.
   Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt
   Reaction: 4H3PO4 + 16C → P4 + 6H2 + 16CO (simplified from Ca3(PO4)2)
