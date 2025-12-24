@@ -7,5 +7,22 @@ produces_unit: unit
 target_item_id: furnace_door_assembly
 steps:
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: raw_metal_block
+      qty: 35.0
+      unit: kg
+    - item_id: door_hinge_assembly
+      qty: 2.0
+      unit: unit
+    - item_id: sealing_gaskets
+      qty: 1.0
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: furnace_door_assembly
+      qty: 1.0
+      unit: unit
   notes: "Assemble furnace door components (panel, hinges, gasket, fasteners) into a single furnace_door_assembly"
 notes: "Minimal door assembly recipe using generic assembly step; inputs defined at lower fidelity in this phase."

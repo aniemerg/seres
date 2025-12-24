@@ -1,13 +1,32 @@
 id: recipe_fiber_collection_spool_v0
 target_item_id: fiber_collection_spool
 variant_id: v0
+kind: recipe
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 15.0
+        unit: kg
+        notes: "Steel for spool drum, shaft, and mounting hardware"
+      - item_id: ball_bearing_steel_v0
+        qty: 1.0
+        unit: kg
+        notes: "Bearings for spool shaft rotation"
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Machine spool drum, mounting shaft, and drive coupling"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_electric_small
+        qty: 2.0
+        unit: kg
+        notes: "Drive motor for spool winding"
+      - item_id: sensor_suite_general
+        qty: 0.5
+        unit: kg
+        notes: "Tension control sensor"
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble spool drum on shaft, install bearings and motor coupling"
@@ -20,6 +39,10 @@ steps:
     labor_hours: 0.8
     notes: "Test spool rotation and tension control system"
   - process_id: inspection_basic_v0
+    outputs:
+      - item_id: fiber_collection_spool
+        qty: 20.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify winding mechanism and tension uniformity"

@@ -1,15 +1,30 @@
 id: recipe_sensor_suite_general_v0
+kind: recipe
 target_item_id: sensor_suite_general
 variant_id: v0
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: stock_material
+        qty: 5.0
+        unit: kg
+        notes: "Imported sensor suite stock"
+    outputs:
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-  - process_id: integration_test_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
+    notes: "Receive and inspect imported sensor suite package"
+notes: |
+  Import recipe for general sensor suite.
+
+  Sensor suite includes:
+  - Cameras (visible, IR)
+  - LIDAR/radar sensors
+  - Navigation sensors (IMU, GPS)
+  - Inspection sensors
+
+  Complex electronics manufacturing with optics, signal processing, and calibration.
+  Marked as import until electronics fab is established.
 assumptions: Imported sensor suite inspected and tested.
-notes: Placeholder import route; replace with local production when available.

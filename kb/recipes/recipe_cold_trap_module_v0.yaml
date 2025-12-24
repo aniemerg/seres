@@ -1,6 +1,21 @@
 id: recipe_cold_trap_module_v0
+kind: recipe
 target_item_id: cold_trap_module_v0
 variant_id: assembled_module_v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 5.0
+    unit: kg
+  - item_id: passive_thermal_insulation_v0
+    qty: 1.0
+    unit: kg
+  - item_id: cryogenic_valve_set
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: cold_trap_module_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     notes: Assemble cold trap module components, plumbing, and controls.

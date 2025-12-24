@@ -1,6 +1,39 @@
 id: recipe_assembled_equipment_v0
 target_item_id: assembled_equipment
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 25.0
+    unit: kg
+    notes: "Structural frame and supports"
+  - item_id: steel_plate_or_sheet
+    qty: 12.0
+    unit: kg
+    notes: "Housing and panels"
+  - item_id: motor_electric_small
+    qty: 8.0
+    unit: kg
+    notes: "Drive motors and actuators"
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+    notes: "Electrical wiring and connections"
+  - item_id: fastener_kit_large
+    qty: 3.0
+    unit: kg
+    notes: "Assembly hardware"
+  - item_id: electronic_components_set
+    qty: 1.5
+    unit: kg
+    notes: "Control systems and electronics"
+outputs:
+  - item_id: assembled_equipment
+    qty: 50.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 1.5
+    unit: kg
+    notes: "Assembly and fabrication waste"
 steps:
   - process_id: assembly_basic_v0
     est_time_hr: 12.0

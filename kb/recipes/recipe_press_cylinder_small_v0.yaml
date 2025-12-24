@@ -2,6 +2,23 @@ id: recipe_press_cylinder_small_v0
 kind: recipe
 target_item_id: press_cylinder_small
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 15.0
+    unit: kg
+    notes: Steel for cylinder body and piston rod
+  - item_id: metal_tubing_stock
+    qty: 5.0
+    unit: kg
+    notes: Steel tubing for cylinder barrel
+  - item_id: hydraulic_seals_set
+    qty: 1.0
+    unit: kg
+    notes: Seals and o-rings for hydraulic cylinder
+outputs:
+  - item_id: press_cylinder_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
   - process_id: sealing_and_assembly_basic_v0

@@ -1,0 +1,21 @@
+id: recipe_battery_pack_medium_v0
+kind: recipe
+target_item_id: battery_pack_medium
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: battery_cell_casing_metal
+        qty: 5.0
+        unit: kg
+      - item_id: electrodes_nife_set
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: battery_pack_medium
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble a medium battery pack from cell casings and electrode sets"
+notes: "Placeholder assembly for medium battery pack; refine with detailed cell/BMS components later."

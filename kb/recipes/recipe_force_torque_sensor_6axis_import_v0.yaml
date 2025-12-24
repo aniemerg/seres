@@ -2,13 +2,20 @@ id: recipe_force_torque_sensor_6axis_import_v0
 kind: recipe
 target_item_id: force_torque_sensor_6axis
 variant_id: v0
-produces_id: force_torque_sensor_6axis
-produces_qty: 1
-produces_unit: unit
-inputs: []
 steps:
-  - process_id: import_placeholder_force_torque_sensor_6axis_v0
-    notes: "Imported from Earth due to precision strain gauge and electronics requirements."
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Receive and inspect imported 6-axis force/torque sensors"
+    inputs:
+      - item_id: stock_material
+        qty: 0.5
+        unit: kg
+        notes: "Imported force/torque sensor stock"
+    outputs:
+      - item_id: force_torque_sensor_6axis
+        qty: 1
+        unit: unit
 notes: |
   Import recipe for 6-axis strain gauge force sensor.
 

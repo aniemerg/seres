@@ -1,6 +1,19 @@
 id: recipe_pressing_mold_set_v0
 target_item_id: pressing_mold_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 35.0
+    unit: kg
+    notes: Tool steel for mold bodies and punches
+outputs:
+  - item_id: pressing_mold_set
+    qty: 30.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 5.0
+    unit: kg
+    notes: Machining and grinding waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 20.0

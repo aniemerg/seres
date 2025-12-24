@@ -1,9 +1,37 @@
 id: recipe_catalyst_bed_assembly_v0
 kind: recipe
-name: Catalyst bed assembly v0
 target_item_id: catalyst_bed_assembly
 variant_id: v0
 steps:
   - process_id: assembly_basic_v0
-    notes: "Assemble catalyst bed components into catalyst_bed_assembly"
-notes: "Placeholder recipe to manufacture catalyst bed assembly; refine with BOM and steps later"
+    inputs:
+      - item_id: alumina_powder
+        qty: 15.0
+        unit: kg
+        notes: "Catalyst support material (alumina pellets/honeycomb)"
+      - item_id: nickel_metal
+        qty: 2.0
+        unit: kg
+        notes: "Nickel catalyst material"
+      - item_id: steel_plate_or_sheet
+        qty: 7.0
+        unit: kg
+        notes: "Housing, mesh support, and sealing"
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+        notes: "Assembly hardware"
+    outputs:
+      - item_id: catalyst_bed_assembly
+        qty: 25.0
+        unit: kg
+    notes: "Assemble catalyst bed: load Ni-impregnated alumina into housing with support mesh"
+notes: |
+  Assembly recipe for Sabatier reactor catalyst bed.
+
+  Components:
+  - Catalyst: Nickel on alumina support (Ni/Al2O3)
+  - Support: Mesh or honeycomb structure
+  - Housing: Steel container with inlet/outlet ports
+
+  Assembly involves loading catalyst pellets/monolith into housing and sealing.

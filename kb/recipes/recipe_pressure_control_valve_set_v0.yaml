@@ -3,5 +3,31 @@ kind: recipe
 target_item_id: pressure_control_valve_set
 variant_id: v0
 steps:
+- process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: stainless_steel_bar
+      qty: 5.0
+      unit: kg
+      notes: "Stainless steel for valve bodies and fittings"
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: "Machine valve bodies, seats, and pressure regulation components"
 - process_id: pressure_control_valve_assembly_v0
-notes: "Basic recipe to produce pressure_control_valve_set using a dedicated valve assembly process."
+  inputs:
+    - item_id: steel_stock
+      qty: 0.5
+      unit: kg
+      notes: "Springs for pressure regulation (high-carbon steel wire for spring forming)"
+    - item_id: gasket_sheet_material_v0
+      qty: 0.5
+      unit: kg
+      notes: "Seals and gaskets for valve set"
+  outputs:
+    - item_id: pressure_control_valve_set
+      qty: 6.0
+      unit: kg
+  est_time_hr: 0.5
+  labor_hours: 0.4
+  notes: "Assemble pressure control valve set with springs and seals"
+assumptions: "Pressure control valve set with multiple relief/regulating valves. Machined from stainless steel."
+notes: "Recipe to produce pressure control valve set for vacuum/pressure regulation systems."

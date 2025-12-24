@@ -3,6 +3,14 @@ target_item_id: crimping_die_set
 variant_id: v0
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: crimping_die_set
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine die profiles and cavities for various terminal sizes"

@@ -1,6 +1,19 @@
 id: recipe_chemical_bath_ventilation_v0
 kind: recipe
 target_item_id: chemical_bath_ventilation
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 1.8
+    unit: kg
+    notes: Ducting, housing, and fan blades
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: chemical_bath_ventilation
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: mock_ventilation_unit_v0
 notes: Converted steps to modern format to fix invalid_schema issue

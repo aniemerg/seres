@@ -5,4 +5,12 @@ produces_qty: 1.0
 produces_unit: unit
 steps:
   - process_id: import_placeholder_press_frame_medium_v0
+    inputs:
+      - item_id: stock_material
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: press_frame_medium
+        qty: 1.0
+        unit: unit
 notes: "Prototype import-based recipe to manufacture press_frame_medium until a full process chain is defined"

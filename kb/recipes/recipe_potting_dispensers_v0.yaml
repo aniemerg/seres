@@ -1,8 +1,44 @@
 id: recipe_potting_dispensers_v0
 target_item_id: potting_dispensers
 variant_id: assembled_tooling_v0
+inputs:
+  - item_id: plastic_pellets
+    qty: 3.0
+    unit: kg
+    notes: "Plastic pellets for molding syringe bodies, pour pots, and dispensing mechanisms"
+  - item_id: steel_bar_stock
+    qty: 4.0
+    unit: kg
+    notes: "Metal handles, frames, and structural parts"
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+    notes: "Assembly hardware"
+  - item_id: tubing_flexible_small
+    qty: 0.8
+    unit: kg
+    notes: "Dispensing nozzles and tubes"
+outputs:
+  - item_id: potting_dispensers
+    qty: 8.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.3
+    unit: kg
+    notes: "Machining and assembly waste"
 steps:
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Machine metal parts for dispenser frames and handles"
   - process_id: assembly_basic_v0
-    notes: Assemble dispensers from syringes/pour pots, nozzles, and handles.
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble dispensers from syringes/pour pots, nozzles, and handles"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Test dispenser operation and seal integrity"
 assumptions: "Tooling assembled from generic components; no dedicated machinery needed."
 notes: Local assembly route for potting dispensers used in encapsulation operations.

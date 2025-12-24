@@ -1,40 +1,21 @@
 id: recipe_robot_arm_link_aluminum_v0
 kind: recipe
 target_item_id: robot_arm_link_aluminum
+variant_id: v0
 inputs:
   - item_id: aluminum_alloy_ingot
-    qty: 10.0
+    qty: 9.0
     unit: kg
-  - item_id: fastener_kit_medium
-    qty: 1
-    unit: kg
+    notes: Aluminum alloy for casting or forming link structure
 outputs:
   - item_id: robot_arm_link_aluminum
-    qty: 1
+    qty: 1.0
     unit: unit
-byproducts:
-  - item_id: metal_scrap
-    qty: 2.0
-    unit: kg
 steps:
-  - process_id: welding_and_fabrication_v0
-    note: "Fabricate aluminum box beam structure from cast or rolled sections, weld joints"
-  - process_id: machining_rough_v0
-    note: "CNC machine mounting surfaces, bearing bores, cable routing channels"
-  - process_id: finishing_deburring_v0
-    note: "Deburr edges, drill mounting holes"
-notes: |
-  Manufactures robot arm link from lunar aluminum.
-
-  Design: 1.0m box beam, 100×150mm cross-section, 5mm wall thickness.
-  Serves as both upper arm (8 kg) and forearm (7 kg tapered variant).
-
-  Process:
-  1. Cast or roll aluminum sections from lunar Al (anorthite reduction)
-  2. Weld into box beam structure
-  3. CNC machine mounting surfaces and cable routing channels
-  4. Deburr and finish
-
-  Inputs use 10 kg aluminum (8 kg final + 20% scrap/machining loss).
-
-  Design reference: docs/labor_bot_design_memo.md sections 3.1.2 and 3.1.3.
+  - process_id: metal_casting_basic_v0
+    notes: Cast aluminum link blank
+  - process_id: machining_finish_basic_v0
+    notes: CNC machine mounting surfaces and cable channels
+  - process_id: inspection_basic_v0
+    notes: Verify dimensions and structural integrity
+notes: Robot arm link manufacturing from aluminum casting with precision machining for mounting surfaces.

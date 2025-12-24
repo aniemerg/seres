@@ -3,6 +3,27 @@ kind: recipe
 name: Charge controller set (v0)
 target_item_id: charge_controller_set
 variant_id: v0
+inputs:
+  - item_id: pcb_bare_board
+    qty: 2.0
+    unit: kg
+    notes: Circuit board for charge controller
+  - item_id: electronic_components_set
+    qty: 3.0
+    unit: kg
+    notes: Power transistors, capacitors, inductors for charge control
+  - item_id: enclosure_steel_small
+    qty: 4.0
+    unit: kg
+    notes: Metal enclosure for charge controller
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+    notes: Wiring and power connectors
+outputs:
+  - item_id: charge_controller_set
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electrical_assembly_basic_v0
     est_time_hr: 1.0

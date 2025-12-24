@@ -3,5 +3,20 @@ kind: recipe
 target_item_id: transformer_step_down_welding
 variant_id: v0
 steps:
-  - process_id: welding_basic_v0
-notes: "Converted to target_item_id-based recipe for indexer compatibility"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: laminated_silicon_steel_core_v0
+        qty: 1
+        unit: unit
+      - item_id: magnet_wire_copper
+        qty: 1.5
+        unit: kg
+      - item_id: insulation_coating_material
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: transformer_step_down_welding
+        qty: 1
+        unit: unit
+    notes: "Assemble small welding transformer from laminated core and wound copper coils"
+notes: "Placeholder assembly using small laminated core + copper windings; mass balance ~4 kg."

@@ -479,6 +479,7 @@ Before creating any new item, verify:
 
 ## Related Documentation
 
+- **`docs/closure_error_guidance.md`** - Closure analysis error resolution (complements Conservative Mode for material flow gaps)
 - **`docs/parts_and_labor_guidelines.md`** - Part reuse policy and equivalence criteria (Conservative Mode started here)
 - **`docs/ADRs/003-process-machine-refactor.md`** - Resource type migration (affects `no_provider_machine` gaps)
 - **`design/meta-memo.md`** - Project philosophy (minimizing proliferation)

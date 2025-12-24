@@ -1,6 +1,19 @@
 id: recipe_hot_wire_cutting_wire_v0
 target_item_id: hot_wire_cutting_wire
 variant_id: v0
+inputs:
+  - item_id: nickel_chromium_alloy
+    qty: 1.05
+    unit: kg
+    notes: Nichrome wire stock for resistance heating
+outputs:
+  - item_id: hot_wire_cutting_wire
+    qty: 1.0
+    unit: kg
+  - item_id: wire_scrap
+    qty: 0.05
+    unit: kg
+    notes: Wire drawing and cutting waste
 steps:
   - process_id: wire_drawing_basic_v0
     est_time_hr: 0.5

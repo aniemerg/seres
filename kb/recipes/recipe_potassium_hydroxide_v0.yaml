@@ -1,10 +1,22 @@
 id: recipe_potassium_hydroxide_v0
 kind: recipe
-name: Recipe for potassium hydroxide
 target_item_id: potassium_hydroxide
-produces_id: potassium_hydroxide
-produces_qty: 1.0
-produces_unit: kg
+variant_id: v0
 steps:
-- process_id: potassium_hydroxide_synthesis_v0
-notes: "Placeholder synthesis of KOH; fill in with real conversion data later."
+  - process_id: import_placeholder_v0
+    outputs:
+      - item_id: potassium_hydroxide
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.1
+notes: |
+  Import recipe for potassium hydroxide (KOH, caustic potash).
+
+  Potassium hydroxide production requires:
+  - Electrolysis of potassium chloride (KCl) solution
+  - Membrane or diaphragm cell technology
+  - Evaporation and concentration
+  - Purification
+
+  Complex electrolytic chemical process.
+  Marked as import.

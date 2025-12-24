@@ -1,15 +1,28 @@
 id: recipe_fused_silica_envelope_v0
+kind: recipe
 target_item_id: fused_silica_envelope
 variant_id: v0
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: fused_silica_glass
+        qty: 5.0
+        unit: kg
+        notes: "Imported fused silica glass stock"
     est_time_hr: 0.25
     labor_hours: 0.25
+    notes: "Receive imported fused silica glass"
   - process_id: inspection_basic_v0
     est_time_hr: 0.25
     labor_hours: 0.25
+    notes: "Inspect glass quality and dimensions"
   - process_id: integration_test_basic_v0
+    outputs:
+      - item_id: fused_silica_envelope
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
-assumptions: Imported fused silica envelope; local fabrication not modeled yet.
-notes: Placeholder; replace with glass forming route later.
+    notes: "Test vacuum integrity of fused silica envelope"
+assumptions: "Imported fused silica envelope; local glass forming not modeled yet. Future: add glassblowing/molding processes."
+notes: "Import recipe for fused silica envelope using imported glass stock."

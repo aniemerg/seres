@@ -1,23 +1,43 @@
 id: recipe_printer_frame_generic_v0
+kind: recipe
 target_item_id: printer_frame_generic
 variant_id: v0
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: iron_metal_pure
+        qty: 65.0
+        unit: kg
+        notes: "Iron for casting frame sections"
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: Cast frame sections and gantry rails
+    notes: "Cast frame sections and gantry rails"
   - process_id: machining_finish_basic_v0
     est_time_hr: 2.5
     machine_hours: 2.5
-    notes: Machine linear rail surfaces and mounting points
+    notes: "Machine linear rail surfaces and mounting points"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: welding_rod_steel
+        qty: 1.0
+        unit: kg
+        notes: "Welding rod for joining frame sections"
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.5
-    notes: Weld frame sections
+    notes: "Weld frame sections together"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: fastener_kit_medium
+        qty: 0.5
+        unit: kg
+        notes: "Fasteners for final assembly"
+    outputs:
+      - item_id: printer_frame_generic
+        qty: 60.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: Final assembly with fasteners
+    notes: "Final assembly with fasteners"
 assumptions: "60 kg structural frame for Cartesian 3D printer."
 notes: "Four-step recipe for generic printer frame."

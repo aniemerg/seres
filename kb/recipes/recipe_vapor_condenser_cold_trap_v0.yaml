@@ -1,11 +1,41 @@
 id: recipe_vapor_condenser_cold_trap_v0
 kind: recipe
-name: Recipe for vapor condenser cold trap
-produces_id: vapor_condenser_cold_trap
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: vapor_condenser_cold_trap
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 2.0
+    unit: kg
+    notes: Condenser coils and vapor paths
+  - item_id: steel_plate_or_sheet
+    qty: 1.5
+    unit: kg
+    notes: Cold trap housing and baffles
+  - item_id: thermal_insulation_high_temp
+    qty: 0.3
+    unit: kg
+    notes: Thermal insulation
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: vapor_condenser_cold_trap
+    qty: 4.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
-notes: "Placeholder recipe to manufacture vapor_condenser_cold_trap from base materials using a generic machining_finish_basic_v0 process. Refine BOM and steps as design details become available."
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Machine housing and baffle components
+  - process_id: welding_brazing_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 3.0
+    notes: Weld condenser coils and assemble cold trap
+  - process_id: pressure_test_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 1.0
+    notes: Test for leaks and verify vapor flow
+notes: "Vapor condenser cold trap for vacuum systems and chemical processes. Condenses vapors and traps contaminants using refrigerated or cryogenic cooling."

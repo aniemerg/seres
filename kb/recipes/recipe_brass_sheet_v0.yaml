@@ -1,0 +1,27 @@
+id: recipe_brass_sheet_v0
+kind: recipe
+target_item_id: brass_sheet
+inputs:
+  - item_id: brass_bar_stock
+    qty: 1.1
+    unit: kg
+outputs:
+  - item_id: brass_sheet
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.1
+    unit: kg
+steps:
+  - process_id: rolling_basic_v0
+    note: "Roll brass bar stock into sheet form using rolling mill"
+notes: |
+  Produces brass sheet from brass bar stock via rolling.
+
+  Process: Heat brass bar stock to ~700°C for hot rolling, or room temperature for cold rolling.
+  Pass through rolling mill in multiple passes to achieve desired thickness (0.5-3mm).
+  Annealing between passes may be required to prevent work hardening.
+
+  Input: 1.1 kg brass bar stock (allows for 10% scrap/trimming)
+  Output: 1.0 kg brass sheet

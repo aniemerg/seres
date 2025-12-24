@@ -1,7 +1,24 @@
 id: recipe_graphite_block_material_v0
 kind: recipe
 target_item_id: graphite_block_material_v0
+inputs:
+  - item_id: graphite_powder
+    qty: 0.85
+    unit: kg
+    notes: Graphite powder for molding
+  - item_id: binder_material
+    qty: 0.15
+    unit: kg
+    notes: Binder for graphite consolidation
+outputs:
+  - item_id: graphite_block_material_v0
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: seed_graphite_block_material_v0
-    notes: "Seed graphite block material production step to generate graphite_block_material_v0"
-notes: "Seed recipe for graphite_block_material_v0; placeholder to enable local manufacturing"
+  - process_id: powder_processing_v0
+    notes: Mix graphite powder with pitch binder
+  - process_id: graphite_molding_v0
+    notes: Compress mixture into block form
+  - process_id: heat_treatment_graphitization_v0
+    notes: Fire at high temperature to graphitize and carbonize binder
+notes: "Recipe for graphite block material from graphite powder and pitch binder"

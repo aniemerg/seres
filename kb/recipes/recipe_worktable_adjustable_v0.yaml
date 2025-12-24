@@ -1,11 +1,39 @@
 id: recipe_worktable_adjustable_v0
 kind: recipe
 target_item_id: worktable_adjustable
-produces_id: worktable_adjustable
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 18.0
+    unit: kg
+    notes: Steel plate for table surface
+  - item_id: steel_bar_stock
+    qty: 6.0
+    unit: kg
+    notes: Steel for adjustment mechanism and supports
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: kg
+    notes: Bolts and adjustment hardware
+outputs:
+  - item_id: worktable_adjustable
+    qty: 25.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 1.0
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Machine table surface flat and drill mounting holes
   - process_id: assembly_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: Assemble table with adjustment mechanism and supports
   - process_id: inspection_basic_v0
-notes: "Placeholder multi-step recipe for adjustable worktable. Uses generic machining, assembly, and inspection steps. Refine with concrete sub-assembly/process data as available."
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Verify table flatness and adjustment function
+notes: "Adjustable height/tilt worktable for machining and assembly operations. Steel construction with mechanical adjustment."

@@ -4,9 +4,22 @@ name: Recipe for plumbing system assembly
 produces_id: plumbing_system_assembly
 produces_qty: 1.0
 produces_unit: unit
-# Canonical target item linkage for compatibility with Memo A expectations
 target_item_id: plumbing_system_assembly
 variant_id: v0
 steps:
 - process_id: assembly_process_general_v0
-  notes: Placeholder assembly step to combine subassemblies/parts into plumbing_system_assembly
+  inputs:
+    - item_id: piping_and_valves_set
+      qty: 1.0
+      unit: set
+      notes: "Pipes, tubes, valves, and fittings for plumbing system"
+    - item_id: fastener_kit_medium
+      qty: 0.2
+      unit: kg
+      notes: "Mounting hardware and connections"
+  outputs:
+    - item_id: plumbing_system_assembly
+      qty: 1.0
+      unit: unit
+  est_time_hr: 2.0
+  notes: "Assemble pipes, valves, and fittings into integrated plumbing system"

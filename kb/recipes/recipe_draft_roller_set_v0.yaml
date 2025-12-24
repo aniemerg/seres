@@ -1,6 +1,31 @@
 id: recipe_draft_roller_set_v0
 target_item_id: draft_roller_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 18.0
+    unit: kg
+    notes: "Steel for roller cylinders and shafts"
+  - item_id: bearing_set
+    qty: 4.0
+    unit: kg
+    notes: "Precision bearings for roller support"
+  - item_id: steel_plate_or_sheet
+    qty: 6.0
+    unit: kg
+    notes: "Mounting frame and adjustment mechanisms"
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+    notes: "Assembly hardware"
+outputs:
+  - item_id: draft_roller_set
+    qty: 25.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 3.5
+    unit: kg
+    notes: "Machining and grinding waste"
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 5.0

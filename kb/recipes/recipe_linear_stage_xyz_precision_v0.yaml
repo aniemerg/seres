@@ -2,9 +2,46 @@ id: recipe_linear_stage_xyz_precision_v0
 kind: recipe
 target_item_id: linear_stage_xyz_precision
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 3.0
+    unit: kg
+    notes: Steel for stage base and carriage
+  - item_id: bearing_set
+    qty: 6
+    unit: unit
+    notes: Precision linear bearings for 3 axes
+  - item_id: lead_screw_assembly
+    qty: 3
+    unit: unit
+    notes: Precision lead screws for X, Y, Z motion
+  - item_id: stepper_motor_precision
+    qty: 3
+    unit: unit
+    notes: Stepper motors for axis control
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: linear_stage_xyz_precision
+    qty: 6.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
-    notes: "Finish machining and prepare XYZ precision linear stage housing"
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Machine precision stage base, carriages, and mounting features"
+  - process_id: assembly_basic_v0
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Assemble linear bearings, lead screws, and motors for XYZ motion"
   - process_id: inspection_basic_v0
-    notes: "Inspection for flatness and dimensional tolerances"
-notes: "Placeholder recipe to manufacture linear_stage_xyz_precision using generic machining flow."
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Verify perpendicularity, straightness, and positioning accuracy"
+notes: "XYZ precision linear stage for positioning and inspection applications. Three-axis motion with stepper motor control."

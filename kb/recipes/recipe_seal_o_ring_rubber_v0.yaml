@@ -1,9 +1,34 @@
 id: recipe_seal_o_ring_rubber_v0
 target_item_id: seal_o_ring_rubber
 variant_id: v0
+inputs:
+  - item_id: silicone_rubber
+    qty: 0.012
+    unit: kg
+    notes: Raw rubber compound for o-ring molding
+outputs:
+  - item_id: seal_o_ring_rubber
+    qty: 0.01
+    unit: kg
+  - item_id: elastomer_scrap
+    qty: 0.002
+    unit: kg
+    notes: Flash and trim waste from molding
 steps:
   - process_id: elastomer_molding_basic_v0
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Compression or injection mold o-ring
   - process_id: drying_and_curing_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Vulcanize rubber at elevated temperature
   - process_id: machining_finish_basic_v0
+    est_time_hr: 0.2
+    machine_hours: 0.2
+    notes: Trim flash and clean o-ring
   - process_id: inspection_basic_v0
-notes: "Placeholder manufacturing route for rubber O-ring seal using elastomer molding, curing, finishing, and QA."
+    est_time_hr: 0.1
+    labor_hours: 0.1
+    notes: Visual inspection and dimension check
+notes: "Rubber O-ring seal fabrication via compression molding and vulcanization. Standard o-ring for general sealing applications."

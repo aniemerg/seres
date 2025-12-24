@@ -2,6 +2,19 @@ id: recipe_hydraulic_hose_segment_input_placeholder_v0
 kind: recipe
 name: Recipe for hydraulic_hose_segment_input_placeholder_v0
 target_item_id: hydraulic_hose_segment_input_placeholder
+variant_id: v0
+inputs:
+  - item_id: stock_material
+    qty: 1.0
+    unit: kg
+    notes: "Imported hose segment material stock"
+outputs:
+  - item_id: hydraulic_hose_segment_input_placeholder
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: import_placeholder_hose_segment_input_v0
-notes: "Converted from legacy_step_format to explicit process reference in step list to satisfy recipe schema."
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.1
+    labor_hours: 0.1
+    notes: "Receive imported hose segment materials"
+notes: "Placeholder recipe for hydraulic hose segment input materials."

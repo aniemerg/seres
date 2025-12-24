@@ -1,6 +1,19 @@
 id: recipe_optical_square_set_v0
 target_item_id: optical_square_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 2.5
+    unit: kg
+    notes: Tool steel bar for optical square blanks
+outputs:
+  - item_id: optical_square_set
+    qty: 2.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
+    notes: Machining waste from optical square fabrication
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 2.0

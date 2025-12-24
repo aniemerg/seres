@@ -5,6 +5,17 @@ name: Recipe for switching voltage regulator module
 target_item_id: voltage_regulator_switching_v0
 steps:
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 0.3
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: voltage_regulator_switching_v0
+        qty: 1.0
+        unit: unit
   - process_id: power_conditioning_basic_v0
 variant_id: v0
 notes: "Seed recipe: combine basic electrical assembly with power conditioning to form switching regulator module."

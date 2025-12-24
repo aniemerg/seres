@@ -1,6 +1,19 @@
 id: recipe_high_temp_additive_v0
 kind: recipe
 target_item_id: high_temp_additive_v0
+variant_id: v0
 steps:
   - process_id: high_temp_additive_synthesis_v0
-    notes: "Placeholder production path to close no_recipe gap for high_temp_additive_v0"
+    inputs:
+      - item_id: mos2_solid_lubricant_v0
+        qty: 0.05
+        unit: kg
+        notes: "MoS2 solid lubricant processed into high-temp grease additive"
+    outputs:
+      - item_id: high_temp_additive_v0
+        qty: 0.05
+        unit: kg
+    est_time_hr: 0.5
+    notes: "Formulate MoS2 solid lubricant into high-temperature bearing grease additive"
+assumptions: "MoS2 processed and formulated for compatibility with bearing grease base oils"
+notes: "Production of high-temperature additive for bearing grease using molybdenum disulfide"

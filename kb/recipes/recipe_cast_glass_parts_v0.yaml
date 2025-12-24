@@ -1,8 +1,20 @@
 id: recipe_cast_glass_parts_v0
+kind: recipe
 target_item_id: cast_glass_parts
 variant_id: cast_v0
 steps:
   - process_id: glass_casting_v0
-    notes: Melt glass raw materials, pour into molds, anneal cast parts.
+    inputs:
+      - item_id: glass_raw_materials
+        qty: 5.5
+        unit: kg
+        notes: "Glass raw materials for melting and casting"
+    outputs:
+      - item_id: cast_glass_parts
+        qty: 5.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Melt glass raw materials, pour into molds, anneal cast parts"
 assumptions: "Uses existing glass casting process; detailed polishing/finishing handled elsewhere."
 notes: Local casting route for glass parts to replace import placeholder.

@@ -1,8 +1,44 @@
 id: recipe_magnetic_tape_reel_v0
 kind: recipe
 target_item_id: magnetic_tape_reel
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: polyester_film
+    qty: 0.03
+    unit: kg
+    notes: "Polyester base film for magnetic tape"
+  - item_id: iron_oxide_powder
+    qty: 0.01
+    unit: kg
+    notes: "Magnetic coating material"
+  - item_id: plastic_pellets
+    qty: 0.01
+    unit: kg
+    notes: "Plastic for reel/spool"
+outputs:
+  - item_id: magnetic_tape_reel
+    qty: 1
+    unit: unit
 steps:
 - process_id: magnetic_tape_reel_fabrication_v0
+  inputs:
+    - item_id: polyester_film
+      qty: 0.03
+      unit: kg
+      notes: "Polyester base film for magnetic tape"
+    - item_id: iron_powder_v0
+      qty: 0.01
+      unit: kg
+      notes: "Magnetic coating material"
+    - item_id: plastic_pellets
+      qty: 0.01
+      unit: kg
+      notes: "Plastic for reel/spool"
+  outputs:
+    - item_id: magnetic_tape_reel
+      qty: 1
+      unit: unit
+  est_time_hr: 1.0
+  machine_hours: 1.0
+  labor_hours: 0.5
 notes: "Fixed to use target_item_id field; initial placeholder recipe for magnetic tape reel production"

@@ -4,7 +4,29 @@ target_item_id: insulation_panel_high_temp
 variant_id: v1
 steps:
   - process_id: insulation_panel_forming_v0
+    inputs:
+      - item_id: ceramic_powder
+        qty: 35.0
+        unit: kg
+        notes: "Ceramic powder for insulation panel"
+      - item_id: binder_material
+        qty: 5.0
+        unit: kg
+        notes: "Binder for panel forming"
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Form ceramic insulation panel from powder and binder"
   - process_id: drying_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Dry formed panel to remove moisture"
   - process_id: firing_ceramic_basic_v0
+    outputs:
+      - item_id: insulation_panel_high_temp
+        qty: 40.0
+        unit: kg
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Fire ceramic panel at high temperature for hardening"
 assumptions: "Base insulation panel manufacturing path; mirrors v0 version but targets base item"
 notes: "Manufacturing recipe for insulation_panel_high_temp base part; uses existing forming, drying, and firing processes."

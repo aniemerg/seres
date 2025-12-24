@@ -5,6 +5,27 @@ produces_id: air_bearing_assembly
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: air_bearing_assembly
-variant_id: import_v0
-steps: []
-notes: "Import placeholder recipe for air_bearing_assembly; air bearings require precision manufacturing and may be imported in bootstrap phase. Local production requires ultra-precision machining capability."
+variant_id: v3
+steps:
+  - process_id: machining_finish_basic_v0
+    notes: "Machine bearing plate and orifice surfaces for air film"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 10.0
+        unit: kg
+      - item_id: air_manifold_and_nozzles
+        qty: 1.0
+        unit: unit
+      - item_id: fittings_and_valves
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: air_bearing_assembly
+        qty: 1.0
+        unit: unit
+    notes: "Assemble air bearing plate, manifold, and fittings"
+notes: "Local assembly placeholder for air_bearing_assembly; assumes precision machining capability."

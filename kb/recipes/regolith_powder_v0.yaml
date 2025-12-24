@@ -9,6 +9,16 @@ steps:
     est_time_hr: 0.5
     machine_hours: 0.5
   - process_id: regolith_crushing_grinding_v0
+    inputs:
+      - item_id: regolith_coarse_fraction
+        qty: 10.0
+        unit: kg
+        notes: "Coarse fraction from screening"
+    outputs:
+      - item_id: regolith_powder
+        qty: 9.5
+        unit: kg
+        notes: "Fine ground powder (~5% dust loss)"
     est_time_hr: 1.5
     machine_hours: 1.5
 assumptions: Uses general labor bot for supervision; throughput unspecified.

@@ -175,7 +175,9 @@ def complete(id_value: str, agent: str) -> bool:
         updated = False
         for obj in items:
             if obj.get("id") == id_value:
-                if obj.get("status") == "leased" and obj.get("lease_id") != agent:
+                # Check lease ownership for leased and resolved items
+                status = obj.get("status")
+                if status in ("leased", "resolved") and obj.get("lease_id") != agent:
                     continue
                 obj["status"] = "done"
                 obj["completed_at"] = time.time()
@@ -211,10 +213,17 @@ def gc(expire_ttl: int = 0, prune_done_older_than: Optional[int] = None) -> int:
         items = _load_queue()
         kept: List[dict] = []
         for obj in items:
+            # Expire leased items with expired leases
             if obj.get("status") == "leased" and obj.get("lease_expires_at", 0) < now:
                 obj["status"] = "pending"
                 obj.pop("lease_id", None)
                 obj.pop("lease_expires_at", None)
+            # Expire resolved items with expired leases (agent failed to complete)
+            if obj.get("status") == "resolved" and obj.get("lease_expires_at", 0) < now:
+                obj["status"] = "pending"
+                obj.pop("lease_id", None)
+                obj.pop("lease_expires_at", None)
+            # Prune old done items
             if prune_done_older_than and obj.get("status") == "done":
                 if obj.get("completed_at", 0) < now - prune_done_older_than:
                     removed += 1

@@ -3,6 +3,26 @@ target_item_id: shear_drive_motor
 variant_id: v0
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: belt_and_pulley_set
+        qty: 1.0
+        unit: unit
+      - item_id: control_circuit_motor_drive
+        qty: 1.0
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: shear_drive_motor
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Mount motor on base plate, install drive pulley or coupling"

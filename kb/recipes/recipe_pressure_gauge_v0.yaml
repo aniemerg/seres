@@ -2,6 +2,31 @@ id: recipe_pressure_gauge_v0
 kind: recipe
 target_item_id: pressure_gauge
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 0.15
+    unit: kg
+    notes: Bourdon tube for pressure sensing
+  - item_id: steel_plate_or_sheet
+    qty: 0.2
+    unit: kg
+    notes: Gauge body and dial
+  - item_id: spring_compression_small
+    qty: 1
+    unit: unit
+    notes: Return spring for needle mechanism
+  - item_id: fastener_kit_small
+    qty: 0.05
+    unit: kg
+    notes: Mounting fittings and hardware
+outputs:
+  - item_id: pressure_gauge
+    qty: 0.5
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.05
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 4.0
@@ -25,4 +50,4 @@ steps:
     labor_hours: 0.5
     notes: "Verify gauge readability and accuracy"
 assumptions: "Single pressure gauge placeholder; mirrors pressure_gauge_set_v0 in steps but for one unit"
-notes: "Placeholder single gauge production; calibration against reference standards required"
+notes: "Pressure gauge with Bourdon tube mechanism. Requires calibration against reference standards."

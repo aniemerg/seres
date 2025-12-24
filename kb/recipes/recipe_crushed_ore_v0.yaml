@@ -2,6 +2,19 @@ id: recipe_crushed_ore_v0
 kind: recipe
 target_item_id: crushed_ore
 variant_id: v0
+inputs:
+  - item_id: raw_ore_or_regolith
+    qty: 100.0
+    unit: kg
+    notes: "Raw ore from mining"
+outputs:
+  - item_id: crushed_ore
+    qty: 98.0
+    unit: kg
+  - item_id: fines_or_dust
+    qty: 2.0
+    unit: kg
+    notes: "Fine dust from crushing"
 steps:
   - process_id: crushing_basic_v0
     est_time_hr: 2.0

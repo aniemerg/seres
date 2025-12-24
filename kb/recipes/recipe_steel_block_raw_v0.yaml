@@ -1,6 +1,28 @@
 id: recipe_steel_block_raw_v0
 kind: recipe
 target_item_id: steel_block_raw_v0
+variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 105.0
+    unit: kg
+    notes: "Steel ingot for cutting into blocks"
+outputs:
+  - item_id: steel_block_raw_v0
+    qty: 100.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 5.0
+    unit: kg
+    notes: "Cutting and sawing waste"
 steps:
-  - process_id: import_placeholder_steel_block_raw_v0
-notes: "Seed recipe to manufacture steel_block_raw_v0 using an import placeholder; replace with a real production path later."
+  - process_id: sawing_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 0.5
+    notes: "Cut steel ingot into block sizes"
+  - process_id: inspection_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Verify block dimensions and surface quality"
+notes: "Local production of raw steel blocks from ingots via sawing and cutting."

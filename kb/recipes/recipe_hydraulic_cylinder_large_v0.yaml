@@ -1,11 +1,36 @@
 id: recipe_hydraulic_cylinder_large_v0
 kind: recipe
-name: Hydraulic cylinder large fabrication v0
-produces_id: hydraulic_cylinder_large
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: hydraulic_cylinder_large
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 25.0
+    unit: kg
+    notes: Heavy-wall steel tube for cylinder barrel
+  - item_id: steel_bar_stock
+    qty: 12.0
+    unit: kg
+    notes: Steel rod for piston rod and end caps
+  - item_id: seal_set_high_temp
+    qty: 2
+    unit: unit
+    notes: High-pressure seals for piston and rod
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: kg
+    notes: Hydraulic port fittings and connections
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: hydraulic_cylinder_large
+    qty: 40.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 2.0
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 2.0
@@ -21,4 +46,4 @@ steps:
     labor_hours: 0.7
     notes: "Pressure test large hydraulic cylinder; leak and strength verification."
 assumptions: "Seals and pressure testing equipment are available."
-notes: "Fabrication chain for hydraulic_cylinder_large; mirrors the small cylinder route with larger mass/clearances."
+notes: "Large hydraulic cylinder fabrication. Heavy-duty cylinder for pressing, lifting, and actuation applications."

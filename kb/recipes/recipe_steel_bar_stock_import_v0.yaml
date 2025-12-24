@@ -1,6 +1,15 @@
 id: recipe_steel_bar_stock_v0
 kind: recipe
 target_item_id: steel_bar_stock
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 1.05
+    unit: kg
+    notes: Steel billet for rolling into bar stock
+outputs:
+  - item_id: steel_bar_stock
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: steel_bar_stock_rolling_v0
 notes: "Converted from import_stub to a local production path using the existing rolling process."

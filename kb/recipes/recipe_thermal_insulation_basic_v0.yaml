@@ -1,6 +1,27 @@
 id: recipe_thermal_insulation_basic_v0
 target_item_id: thermal_insulation_basic
 variant_id: v0
+inputs:
+  - item_id: ceramic_fiber_bulk
+    qty: 1.5
+    unit: kg
+    notes: Ceramic fiber material for insulation
+  - item_id: binder_material
+    qty: 0.3
+    unit: kg
+    notes: Binder to hold fiber structure
+  - item_id: water
+    qty: 0.5
+    unit: kg
+    notes: Water for mixing and forming
+outputs:
+  - item_id: thermal_insulation_basic
+    qty: 2.0
+    unit: kg
+  - item_id: water
+    qty: 0.3
+    unit: kg
+    notes: Evaporated water recovered during drying
 steps:
   - process_id: refractory_casting_v0
     est_time_hr: 3.0

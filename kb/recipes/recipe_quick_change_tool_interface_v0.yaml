@@ -1,0 +1,27 @@
+id: recipe_quick_change_tool_interface_v0
+kind: recipe
+target_item_id: quick_change_tool_interface
+variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 1.5
+    unit: kg
+    notes: Steel for coupling mechanism and mounting surfaces
+  - item_id: valve_solenoid
+    qty: 1.0
+    unit: unit
+    notes: Solenoid valve for pneumatic lock/unlock
+  - item_id: connector_electrical_multi_pin
+    qty: 0.2
+    unit: kg
+    notes: 8-pin electrical connector (import)
+outputs:
+  - item_id: quick_change_tool_interface
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: machining_finish_basic_v0
+    notes: Machine precision coupling surfaces
+  - process_id: assembly_basic_v0
+    notes: Assemble coupling mechanism, valve, and connector
+notes: Quick-change tool interface for robotic tool exchange with automatic electrical connection.

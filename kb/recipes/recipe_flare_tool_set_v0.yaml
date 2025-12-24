@@ -1,6 +1,23 @@
 id: recipe_flare_tool_set_v0
 target_item_id: flare_tool_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 2.5
+    unit: kg
+    notes: Tool steel for flaring cones and mandrels
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Handles, clamps, and adjustment hardware
+outputs:
+  - item_id: flare_tool_set
+    qty: 2.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.7
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 4.0

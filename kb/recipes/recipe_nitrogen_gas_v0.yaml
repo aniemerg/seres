@@ -1,8 +1,21 @@
 id: recipe_nitrogen_gas_v0
 kind: recipe
 target_item_id: nitrogen_gas
-variant_id: import_v0
-steps: []
+variant_id: v0
+steps:
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Receive and stage imported nitrogen gas cylinders or dewars"
+    inputs:
+      - item_id: stock_material
+        qty: 1.0
+        unit: kg
+        notes: "Imported nitrogen gas stock"
+    outputs:
+      - item_id: nitrogen_gas
+        qty: 1.0
+        unit: kg
 notes: |
   Import recipe for nitrogen gas.
 

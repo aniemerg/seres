@@ -1,0 +1,24 @@
+id: recipe_cryogenic_valve_set_v0
+kind: recipe
+target_item_id: cryogenic_valve_set
+variant_id: v0
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: stainless_steel_bar
+        qty: 0.6
+        unit: kg
+        notes: "Stainless steel for valve bodies and fittings"
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Machine valve bodies, seats, and fittings for cryogenic service"
+  - process_id: assembly_basic_v0
+    outputs:
+      - item_id: cryogenic_valve_set
+        qty: 0.5
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble valves with cryogenic-rated seals, test for low-temperature service"
+assumptions: "Valve set fabricated from stainless steel with PTFE seals. Mass loss accounts for machining waste."
+notes: "Production of cryogenic valve set for cold traps and refrigeration systems."

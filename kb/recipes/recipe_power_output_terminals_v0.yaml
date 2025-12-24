@@ -1,6 +1,27 @@
 id: recipe_power_output_terminals_v0
 target_item_id: power_output_terminals
 variant_id: v0
+inputs:
+  - item_id: bus_bar_copper
+    qty: 1.2
+    unit: kg
+    notes: Conductive copper terminals
+  - item_id: insulation_coating_material
+    qty: 0.3
+    unit: kg
+    notes: Electrical insulation
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Mounting hardware
+  - item_id: steel_plate_or_sheet
+    qty: 0.3
+    unit: kg
+    notes: Terminal mounting plate
+outputs:
+  - item_id: power_output_terminals
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 0.5

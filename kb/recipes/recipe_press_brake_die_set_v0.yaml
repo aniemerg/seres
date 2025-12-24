@@ -1,6 +1,23 @@
 id: recipe_press_brake_die_set_v0
 target_item_id: press_brake_die_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 45.0
+    unit: kg
+    notes: Tool steel for dies and punches
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+    notes: Mounting hardware
+outputs:
+  - item_id: press_brake_die_set
+    qty: 40.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 5.5
+    unit: kg
+    notes: Machining and grinding waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 12.0

@@ -1,7 +1,30 @@
 id: recipe_crystal_oscillator_timing_v0
 kind: recipe
-name: Recipe for crystal oscillator timing
 target_item_id: crystal_oscillator_timing
+variant_id: v0
 steps:
-  - process_id: electrical_assembly_basic_v0
-notes: "Placeholder recipe to manufacture crystal_oscillator_timing via standard electrical assembly path. BOM and mass to be refined as details become available."
+  - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: stock_material
+        qty: 0.01
+        unit: kg
+        notes: "Imported crystal oscillator stock"
+    outputs:
+      - item_id: crystal_oscillator_timing
+        qty: 1
+        unit: unit
+    est_time_hr: 0.1
+    labor_hours: 0.1
+    notes: "Receive and inspect imported crystal oscillator components"
+notes: |
+  Import recipe for crystal oscillator timing module.
+
+  Crystal oscillator fabrication requires:
+  - Quartz crystal growth and cutting
+  - Precision frequency trimming
+  - Hermetic sealing in metal can
+  - Oscillator circuit assembly (if active)
+  - Frequency testing and calibration
+
+  Requires precision crystal manufacturing and electronics assembly.
+  Marked as import.

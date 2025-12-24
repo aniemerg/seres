@@ -1,10 +1,30 @@
 id: recipe_microscope_inspection_stereo_v0
 kind: recipe
-name: Recipe for stereo inspection microscope (updated)
 target_item_id: microscope_inspection_stereo
-produces_id: microscope_inspection_stereo
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
 steps:
-- process_id: inspection_basic_v0
-notes: Updated to KB schema with explicit target_item_id
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Receive and inspect imported stereo inspection microscope"
+    inputs:
+      - item_id: stock_material
+        qty: 12.0
+        unit: kg
+        notes: "Imported stereo microscope stock"
+    outputs:
+      - item_id: microscope_inspection_stereo
+        qty: 1
+        unit: unit
+notes: |
+  Import recipe for stereo inspection microscope.
+
+  Stereo microscope requires:
+  - Precision optical elements (objective and eyepiece lenses)
+  - Dual optical paths for 3D viewing
+  - Focus mechanism with fine adjustment
+  - Illumination system (LED or halogen)
+  - Precision mechanical assembly and alignment
+
+  Complex optical instrument manufacturing.
+  Marked as import.

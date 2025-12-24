@@ -1,13 +1,36 @@
 id: recipe_feed_horn_antenna_v0
 kind: recipe
-name: Feed horn antenna production v0
-variant_id: v0
 target_item_id: feed_horn_antenna_v0
-produces_id: feed_horn_antenna_v0
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 0.8
+    unit: kg
+    notes: Aluminum sheet for horn structure
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: feed_horn_antenna_v0
+    qty: 1.0
+    unit: kg
+  - item_id: aluminum_scrap
+    qty: 0.1
+    unit: kg
+    notes: Cutting and forming waste
 steps:
-- process_id: metal_cutting_process_v0
-- process_id: machining_finish_basic_v0
-- process_id: assembly_basic_v0
-notes: "Placeholder recipe: fabricate feed horn antenna from aluminum stock; refine with BOM as BOMs are defined."
+  - process_id: metal_cutting_process_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Cut aluminum sheet to horn pattern
+  - process_id: metal_forming_basic_v0
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 1.0
+    notes: Form horn shape from flat pattern
+  - process_id: assembly_basic_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Assemble and secure horn structure
+notes: "Feed horn antenna fabricated from aluminum sheet. Formed into conical or pyramidal horn shape for RF applications."

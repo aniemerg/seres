@@ -1,18 +1,28 @@
 id: recipe_casting_patterns_wooden_v0
+kind: recipe
 target_item_id: casting_patterns_wooden
 variant_id: v0
 steps:
   - process_id: woodworking_basic_v0
+    inputs:
+      - item_id: binder_material
+        qty: 2.0
+        unit: kg
+        notes: "Substitute pattern material (polymer/composite) - wood unavailable on Moon"
     est_time_hr: 4.0
     labor_hours: 4.0
-    notes: "Cut, carve, and shape wood stock into casting pattern geometry matching desired part"
+    notes: "Cut, carve, and shape pattern material into casting pattern geometry matching desired part"
   - process_id: woodworking_basic_v0
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Sand and finish pattern surfaces smooth for clean mold release and good casting surface finish"
   - process_id: inspection_basic_v0
+    outputs:
+      - item_id: casting_patterns_wooden
+        qty: 1.0
+        unit: set
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify pattern dimensions match casting requirements with draft angles for mold removal"
-assumptions: "Wooden pattern construction for sand casting molds. Includes appropriate draft angles and surface finish for mold making."
-notes: "Wooden casting patterns for creating sand mold cavities. Patterns shaped to part geometry plus shrinkage allowance for metal cooling."
+assumptions: "Pattern construction using binder/polymer material as wood substitute. Includes appropriate draft angles and surface finish for mold making."
+notes: "Casting patterns for creating sand mold cavities. Patterns shaped to part geometry plus shrinkage allowance for metal cooling. Uses polymer substitute for wood."

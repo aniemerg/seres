@@ -1,6 +1,19 @@
 id: recipe_straightedge_precision_v0
 target_item_id: straightedge_precision
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 2.5
+    unit: kg
+    notes: Tool steel bar for straightedge blank
+outputs:
+  - item_id: straightedge_precision
+    qty: 2.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
+    notes: Machining waste from straightedge fabrication
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 1.0

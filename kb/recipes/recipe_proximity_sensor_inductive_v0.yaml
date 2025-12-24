@@ -1,0 +1,50 @@
+id: recipe_proximity_sensor_inductive_v0
+kind: recipe
+target_item_id: proximity_sensor_inductive
+produces_id: proximity_sensor_inductive
+produces_qty: 1
+produces_unit: unit
+variant_id: v0
+steps:
+  - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: copper_wire_magnet
+        qty: 0.05
+        unit: kg
+        notes: "Fine copper wire for LC oscillator coil (wound in-process)"
+      - item_id: pcb_populated
+        qty: 0.02
+        unit: kg
+        notes: "Oscillator/detector/driver circuit board"
+      - item_id: aluminum_alloy_ingot
+        qty: 0.15
+        unit: kg
+        notes: "Housing material (machined in-process)"
+      - item_id: potting_compound
+        qty: 0.03
+        unit: kg
+        notes: "IP67 environmental sealing"
+      - item_id: wire_copper_insulated
+        qty: 0.03
+        unit: kg
+        notes: "Output cable"
+    outputs:
+      - item_id: proximity_sensor_inductive
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 2.0
+    notes: "Wind coil, machine housing, assemble electronics, pot and seal to IP67"
+notes: |
+  Manufacturing recipe for inductive proximity sensor.
+
+  Components:
+  - LC oscillator coil (wound from copper wire)
+  - Sensing electronics (oscillator, detector, output driver on PCB)
+  - Metal housing with threaded mount (machined from aluminum)
+  - IP67 environmental sealing (potting compound)
+
+  This recipe uses locally manufactured coil and housing, plus
+  electronics from standard PCB fabrication processes.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.5.4.

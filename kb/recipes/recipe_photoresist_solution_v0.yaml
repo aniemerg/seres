@@ -9,6 +9,17 @@ steps:
   - process_id: mixing_basic_v0
     est_time_hr: 0.3
     labor_hours: 0.3
+    inputs:
+      - item_id: epoxy_resin_base
+        qty: 0.2
+        unit: kg
+      - item_id: solvent_generic
+        qty: 0.8
+        unit: kg
+    outputs:
+      - item_id: photoresist_solution_v0
+        qty: 1.0
+        unit: kg
     notes: "Mix precursor with solvent to form final photoresist solution"
   - process_id: inspection_basic_v0
     est_time_hr: 0.2

@@ -1,11 +1,25 @@
 id: recipe_thermal_insulation_high_temp_v0
 kind: recipe
 target_item_id: thermal_insulation_high_temp
+variant_id: v0
 steps:
   - process_id: thermal_insulation_high_temp_production_v0
+    inputs:
+      - item_id: ceramic_powder
+        qty: 1.5
+        unit: kg
+        notes: "Ceramic powder for high-temperature insulation"
+      - item_id: binder_material
+        qty: 0.5
+        unit: kg
+        notes: "Binder for insulation fabrication"
+    outputs:
+      - item_id: thermal_insulation_high_temp
+        qty: 2.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.25
     labor_hours: 0.25
-    notes: "Placeholder production step producing 2 kg."
-notes: "Placeholder recipe to produce high-temperature insulation material."
-assumptions: "Mass balance uses 2 kg output per batch; energy/time estimated in the process."
+    notes: "Produce high-temperature insulation from ceramic powder and binder"
+assumptions: "Ceramic-based high-temperature insulation for PETE converter. Formed from ceramic powder with binder."
+notes: "Recipe to produce high-temperature insulation material using ceramic powder and binder."

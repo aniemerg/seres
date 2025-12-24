@@ -1,6 +1,21 @@
 id: recipe_hydraulic_seals_set_v0
 target_item_id: hydraulic_seals_set
 variant_id: v0
+inputs:
+  - item_id: nitrile_rubber
+    qty: 0.5
+    unit: kg
+  - item_id: silicone_curing_agent
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: hydraulic_seals_set
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: elastomer_scrap
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: elastomer_molding_basic_v0
     est_time_hr: 2.0

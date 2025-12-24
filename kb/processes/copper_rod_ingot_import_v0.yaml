@@ -1,0 +1,22 @@
+id: copper_rod_ingot_import_v0
+kind: process
+name: Copper rod ingot import receiving
+inputs:
+  - item_id: stock_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: copper_rod_ingot
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.1
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.1
+notes: "Import receiving for copper rod ingot stock. Breaks circular dependency by providing seed copper supply from Earth."

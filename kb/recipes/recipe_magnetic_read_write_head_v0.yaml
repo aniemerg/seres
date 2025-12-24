@@ -5,7 +5,29 @@ target_item_id: magnetic_read_write_head
 produces_id: magnetic_read_write_head
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: mnzn_ferrite_v0
+    qty: 0.15
+    unit: kg
+    notes: Ferrite core for magnetic head
+  - item_id: magnet_wire_copper
+    qty: 0.05
+    unit: kg
+    notes: Fine copper wire for read/write windings
+  - item_id: mounting_bracket_steel
+    qty: 0.05
+    unit: kg
+    notes: Mounting bracket and shield
+outputs:
+  - item_id: magnetic_read_write_head
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
-notes: "Placeholder recipe to manufacture magnetic_read_write_head from base materials using the machining_finish_basic_v0 process. Refine with BOM and additional steps later."
+    notes: Machine ferrite core to precise dimensions
+  - process_id: coil_winding_basic_v0
+    notes: Wind copper coils on ferrite core
+  - process_id: assembly_basic_v0
+    notes: Assemble head, mount in bracket
+notes: "Recipe to manufacture magnetic_read_write_head from ferrite core and copper windings"
 assumptions: "Uses standard finishing pass(es) to achieve final dimensions; mass/throughput aligned with typical small metal parts."

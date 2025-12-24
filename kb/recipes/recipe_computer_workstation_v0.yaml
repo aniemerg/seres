@@ -1,6 +1,31 @@
 id: recipe_computer_workstation_v0
 target_item_id: computer_workstation
 variant_id: v0
+inputs:
+  - item_id: computer_core_imported
+    qty: 1
+    unit: unit
+    notes: Imported computer core (CPU, motherboard, RAM, storage)
+  - item_id: peripheral_set_basic
+    qty: 1
+    unit: unit
+    notes: Monitor, keyboard, mouse
+  - item_id: power_supply_small_inhouse
+    qty: 1
+    unit: unit
+    notes: Power supply unit
+  - item_id: enclosure_small
+    qty: 1
+    unit: unit
+    notes: Computer enclosure/case
+  - item_id: cooling_fan_and_ducting
+    qty: 1
+    unit: unit
+    notes: Cooling system for computer
+outputs:
+  - item_id: computer_workstation
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     est_time_hr: 0.5

@@ -3,13 +3,26 @@ target_item_id: tungsten_powder
 variant_id: v0
 steps:
   - process_id: import_receiving_basic_v0
-    est_time_hr: 0.25
-    labor_hours: 0.25
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.25
-    labor_hours: 0.25
-  - process_id: integration_test_basic_v0
-    est_time_hr: 0.25
-    labor_hours: 0.25
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Receive and stage imported tungsten powder"
+    inputs:
+      - item_id: stock_material
+        qty: 1.0
+        unit: kg
+        notes: "Imported tungsten powder stock"
+    outputs:
+      - item_id: tungsten_powder
+        qty: 1.0
+        unit: kg
+notes: |
+  Placeholder recipe for tungsten powder.
+
+  Tungsten powder production requires:
+  - Tungsten ore processing (wolframite, scheelite)
+  - Chemical conversion to tungsten oxide (WO3)
+  - Hydrogen reduction at high temperature (700-900°C)
+  - Milling and particle size classification
+
+  Complex metallurgical process with rare material.
 assumptions: Imported tungsten powder; local production not modeled yet.
-notes: Placeholder import route; replace with reduction/powderization when available.

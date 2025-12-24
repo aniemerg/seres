@@ -1,9 +1,43 @@
 id: recipe_graphite_anode_assembly_v0
 kind: recipe
 target_item_id: graphite_anode_assembly_v0
+variant_id: v0
+inputs:
+  - item_id: graphite_block_material_v0
+    qty: 6.0
+    unit: kg
+    notes: High-purity graphite for anode
+  - item_id: bus_bar_copper
+    qty: 1.5
+    unit: kg
+    notes: Copper bus bar for current connection
+  - item_id: fastener_kit_small
+    qty: 0.3
+    unit: kg
+    notes: Mounting hardware and clamps
+outputs:
+  - item_id: graphite_anode_assembly_v0
+    qty: 8.0
+    unit: kg
+  - item_id: graphite_scrap
+    qty: 0.5
+    unit: kg
+    notes: Machining waste
 steps:
-  - process_id: assembly_basic_v0
   - process_id: machining_finish_basic_v0
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Machine graphite block to anode dimensions
   - process_id: surface_finishing_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Surface finish for uniform current distribution
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Attach copper bus bars and mounting hardware
   - process_id: inspection_basic_v0
-notes: "Graphite anode assembly assembled from base components; placeholder steps to enable local manufacturing"
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Verify electrical connections and surface quality
+notes: "Graphite anode assembly for electrolysis applications. Machined graphite with copper bus bar connections."

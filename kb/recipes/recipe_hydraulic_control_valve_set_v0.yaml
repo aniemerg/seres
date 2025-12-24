@@ -3,6 +3,20 @@ kind: recipe
 target_item_id: hydraulic_control_valve_set
 steps:
 - process_id: hydraulic_control_valve_set_assembly_v0
+  inputs:
+    - item_id: valve_body_machined
+      qty: 4.0
+      unit: kg
+    - item_id: seal_set_high_temp
+      qty: 1
+      unit: unit
+    - item_id: fittings_and_valves
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: hydraulic_control_valve_set
+      qty: 1
+      unit: unit
   notes: "Assemble hydraulic valve body and ports"
 - process_id: calibration_and_test_basic_v0
   notes: "Calibrate and test hydraulic valve set"

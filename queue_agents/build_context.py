@@ -160,8 +160,20 @@ def build_context() -> str:
     agent_memo = read_file(DESIGN_ROOT / "agent-memo.md")
     sections.append(agent_memo)
 
-    # Section 2: KB Structure Guide
-    sections.append("\n---\n## 2. Knowledge Base Structure\n")
+    # Section 2: Gap Resolution Guidance (Conservative Mode + Closure Errors)
+    sections.append("\n---\n## 2. Gap Resolution Guidance\n")
+    sections.append("\nAgents MUST follow these guides when fixing queue items:\n")
+
+    sections.append("\n### 2.1 Conservative Mode (Default Approach)\n")
+    conservative_guide = read_file(REPO_ROOT / "docs" / "conservative_mode_guide.md")
+    sections.append(conservative_guide)
+
+    sections.append("\n### 2.2 Closure Error Resolution\n")
+    closure_guide = read_file(REPO_ROOT / "docs" / "closure_error_guidance.md")
+    sections.append(closure_guide)
+
+    # Section 3: KB Structure Guide
+    sections.append("\n---\n## 3. Knowledge Base Structure\n")
     sections.append("""
 The KB is organized as:
 
@@ -184,8 +196,8 @@ Each YAML file defines one entity with:
 ```
 """)
 
-    # Section 3: Complex Examples
-    sections.append("\n---\n## 3. Complex Examples (Templates)\n")
+    # Section 4: Complex Examples
+    sections.append("\n---\n## 4. Complex Examples (Templates)\n")
     sections.append("\nUse these as templates when creating new KB entries.\n")
 
     examples = collect_examples()
@@ -196,8 +208,8 @@ Each YAML file defines one entity with:
             sections.append(format_yaml_example(path, data))
             sections.append("")
 
-    # Section 4: Papers Directory
-    sections.append("\n---\n## 4. Available Papers\n")
+    # Section 5: Papers Directory
+    sections.append("\n---\n## 5. Available Papers\n")
     sections.append("\nPapers are located in `design/papers/`. Use `rg_search` to search extracted text.\n")
 
     papers = list_papers()
@@ -218,13 +230,13 @@ Key papers from Alex Ellery:
 - Use as primary source for process parameters and material flows
 """)
 
-    # Section 5: Queue Workflow
-    sections.append("\n---\n## 5. Queue Workflow\n")
+    # Section 6: Queue Workflow
+    sections.append("\n---\n## 6. Queue Workflow\n")
     queue_docs = read_file(REPO_ROOT / "docs" / "queue_multi_agent.md")
     sections.append(queue_docs)
 
-    # Section 6: Validation and Gap Types
-    sections.append("\n---\n## 6. Gap Types and Validation\n")
+    # Section 7: Validation and Gap Types
+    sections.append("\n---\n## 7. Gap Types and Validation\n")
     sections.append("""
 The indexer identifies several gap types:
 
@@ -256,8 +268,8 @@ The indexer outputs:
 - `out/missing_fields.jsonl` - Missing required fields
 """)
 
-    # Section 7: Best Practices
-    sections.append("\n---\n## 7. Best Practices\n")
+    # Section 8: Best Practices
+    sections.append("\n---\n## 8. Best Practices\n")
     sections.append("""
 When filling gaps:
 

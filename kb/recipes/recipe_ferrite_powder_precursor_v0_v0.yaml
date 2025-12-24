@@ -6,6 +6,23 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: ferrite_powder_precursor_v0
 variant_id: v0
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 0.6
+    unit: kg
+    notes: Iron source for ferrite synthesis
+  - item_id: zinc_metal_v0
+    qty: 0.2
+    unit: kg
+    notes: Zinc source for MnZn ferrite
+  - item_id: concentrated_mineral
+    qty: 0.3
+    unit: kg
+    notes: Manganese and other mineral sources
+outputs:
+  - item_id: ferrite_powder_precursor_v0
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: ferrite_powder_precursor_synthesis_v0
 assumptions: "Seed precursor production linking to MnZn ferrite route; placeholder values."

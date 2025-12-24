@@ -1,6 +1,35 @@
 id: recipe_linear_encoder_set_v0
 target_item_id: linear_encoder_set
 variant_id: v0
+inputs:
+  - item_id: bare_pcb
+    qty: 1.0
+    unit: unit
+    notes: Circuit board for read head electronics
+  - item_id: electronic_components_set
+    qty: 0.3
+    unit: kg
+    notes: Sensors and electronic components
+  - item_id: aluminum_sheet_2mm
+    qty: 1.5
+    unit: kg
+    notes: Aluminum for encoder scale carrier
+  - item_id: optical_film_or_tape
+    qty: 0.5
+    unit: kg
+    notes: Encoder scale pattern film
+  - item_id: assembled_wire_harness
+    qty: 0.3
+    unit: kg
+    notes: Cabling and connectors
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Mounting hardware
+outputs:
+  - item_id: linear_encoder_set
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: pcb_assembly_basic_v0
     est_time_hr: 0.8

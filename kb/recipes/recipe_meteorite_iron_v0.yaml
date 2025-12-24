@@ -3,10 +3,25 @@ target_item_id: meteorite_iron
 variant_id: v0
 steps:
   - process_id: environment_source_v0
+    outputs:
+      - item_id: regolith_raw
+        qty: 100.0
+        unit: kg
+        notes: "Collected regolith with meteorite fragments"
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Field collection of meteoritic fragments using magnetic rake and visual survey on exposed regolith."
   - process_id: beneficiate_regolith_magnetic_v0
+    inputs:
+      - item_id: regolith_raw
+        qty: 100.0
+        unit: kg
+        notes: "Collected regolith for magnetic separation"
+    outputs:
+      - item_id: meteorite_iron
+        qty: 0.5
+        unit: kg
+        notes: "Concentrated meteorite iron fragments (~0.5% recovery)"
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5

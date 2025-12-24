@@ -1,8 +1,29 @@
 id: recipe_calcium_hydroxide_v0
 kind: recipe
 target_item_id: calcium_hydroxide
-variant_id: hydration_v0
+variant_id: v0
 steps:
-  - process_id: import_placeholder_calcium_hydroxide_v0
-    notes: "Placeholder import until CaO hydration or CaCl2 hydrolysis is modeled as a production route."
-notes: "Temporary import placeholder for calcium_hydroxide."
+  - process_id: chemical_mixing_basic_v0
+    inputs:
+      - item_id: calcium_oxide
+        qty: 0.76
+        unit: kg
+        notes: "Calcium oxide (quicklime) for hydration"
+      - item_id: water
+        qty: 0.24
+        unit: kg
+        notes: "Water for lime slaking reaction"
+    outputs:
+      - item_id: calcium_hydroxide
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 0.5
+    notes: "Slake lime by adding water to calcium oxide: CaO + H2O → Ca(OH)2"
+assumptions: "Lime slaking process. Exothermic reaction, requires cooling. Stoichiometric ratio CaO:H2O = 56:18 = 0.76:0.24"
+notes: |
+  Production of calcium hydroxide (slaked lime) from calcium oxide.
+
+  Reaction: CaO + H2O → Ca(OH)2
+
+  Simple hydration process. Heat generated must be dissipated during slaking.

@@ -1,6 +1,24 @@
 id: recipe_welding_power_supply_spot_v0
 kind: recipe
 target_item_id: welding_power_supply_spot
+inputs:
+  - item_id: transformer_laminated_steel_v0
+    qty: 5.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 2.0
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 3.0
+    unit: kg
+    notes: Steel housing (using motor housing as generic steel enclosure)
+  - item_id: control_circuit_board_basic
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: welding_power_supply_spot
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
   - process_id: assembly_basic_v0

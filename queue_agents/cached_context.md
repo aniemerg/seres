@@ -492,7 +492,1017 @@ notes: "Placeholder recipe for semiconductor manufacturing"
 
 
 ---
-## 2. Knowledge Base Structure
+## 2. Gap Resolution Guidance
+
+
+Agents MUST follow these guides when fixing queue items:
+
+
+### 2.1 Conservative Mode (Default Approach)
+
+# Conservative Mode: Root Cause Analysis for Queue Work
+
+**Status:** Official Policy
+**Version:** 1.0
+**Date:** 2025-12-22
+
+## Overview
+
+**Conservative Mode** is the default approach for all queue work. Instead of treating queue items as direct fix requests, we treat them as **potential symptoms** that may indicate mistakes elsewhere in the knowledge base.
+
+**Core Principle:** Minimize new creation, maximize reuse and correction.
+
+## Key Philosophy Shift
+
+### OLD Approach (Deprecated)
+```
+Queue says: "missing reference to water_vapor_v0"
+Agent thinks: "I'll create water_vapor_v0"
+Result: Unnecessary item proliferation
+```
+
+### NEW Approach (Conservative Mode)
+```
+Queue says: "missing reference to water_vapor_v0"
+Agent thinks: "Why is this needed? Does 'water' already exist?
+             Can the recipe use 'water' with a boiling step?"
+Result: Recipe updated to use existing 'water' item with transformation
+```
+
+## Why Conservative Mode?
+
+1. **Queue items are often symptoms, not root causes**
+   - A missing reference might indicate a typo in the referencing file
+   - A request for a new machine might be better served by labor bot + tools
+   - A missing BOM might indicate the item doesn't need one
+
+2. **Part/machine proliferation is the primary threat** to KB tractability
+   - Every new item adds to the dependency graph
+   - Similar items should be consolidated, not duplicated
+   - Generic items are better than specific variants
+
+3. **Phase/state variations should be process steps, not new items**
+   - Don't create `water_liquid`, `water_vapor`, `water_ice`
+   - Use one `water` item with transformation processes
+   - Same for `steel_hot`, `steel_molten`, etc.
+
+4. **Existing equivalents are common**
+   - KB already has 800+ items
+   - Many "missing" items have functional equivalents
+   - Name variations obscure duplicates (`steel_plate` vs `plate_steel`)
+
+---
+
+## Conservative Mode Decision Trees
+
+### For `referenced_only` (Missing References)
+
+**Context:** An ID is referenced but doesn't exist in the KB.
+
+**Decision Tree:**
+
+```
+1. Does the exact item exist under a DIFFERENT ID?
+   ├─ YES → Update reference to use existing ID
+   └─ NO → Continue to #2
+
+2. Does a functionally equivalent item exist (5× magnitude rule)?
+   ├─ YES → Update reference to use equivalent, document in notes
+   └─ NO → Continue to #3
+
+3. Is this a phase/state variation of an existing item?
+   (water→water_vapor, steel→steel_molten, etc.)
+   ├─ YES → Update referencing recipe/process to use base item
+   │         + add transformation step (boiling, melting, etc.)
+   └─ NO → Continue to #4
+
+4. Could this be replaced by labor bot + existing tools?
+   (See Labor Bot Decision Guide below)
+   ├─ YES → Update to use labor_bot_general_v0 + appropriate tool
+   └─ NO → Continue to #5
+
+5. Is the reference itself a mistake?
+   (Check git history, similar files, naming patterns)
+   ├─ YES → Remove or correct the erroneous reference
+   └─ NO → Continue to #6
+
+6. CREATE new item (last resort)
+   - Add note: "Created after checking: [list what you checked]"
+   - Follow naming conventions
+   - Apply equivalence principles for estimated parameters
+```
+
+### For `no_recipe` (Items Without Recipes)
+
+**Context:** An item exists but has no manufacturing recipe.
+
+**Decision Tree:**
+
+```
+1. Is this item actually referenced/used anywhere?
+   Search: grep -r "item_id.*" kb/
+   ├─ NO → Mark for potential deletion, investigate further
+   └─ YES → Continue to #2
+
+2. Does an equivalent item with a recipe already exist?
+   (5× magnitude, same material_class, same function)
+   ├─ YES → Replace references to this item with equivalent
+   │         Delete this item (consolidation)
+   └─ NO → Continue to #3
+
+3. Is this a variant/phase of something with a recipe?
+   ├─ YES → Update upstream recipes to produce this as variant
+   │         OR merge into base item and use process variations
+   └─ NO → Continue to #4
+
+4. Should this be a BOM component rather than manufactured item?
+   (Is it always part of a larger assembly?)
+   ├─ YES → Remove from standalone production, keep as BOM component only
+   └─ NO → Continue to #5
+
+5. Can this be marked as import instead of manufactured?
+   (Not in top contributors, high complexity, low mass impact)
+   ├─ YES → Create import_placeholder recipe, mark as import
+   └─ NO → Continue to #6
+
+6. CREATE new recipe (last resort)
+   - Quick check: is this really needed?
+   - Follow existing recipe patterns
+   - Reference established processes
+   - Document assumptions in notes
+```
+
+### For `missing_field` (Required Fields Not Populated)
+
+**Context:** An item is missing required fields like `material_class`, `energy_model`, etc.
+
+**Decision Tree:**
+
+```
+1. Is this item a duplicate of something better-defined?
+   ├─ YES → Consolidate: replace references with better item, delete this one
+   └─ NO → Continue to #2
+
+2. Can the field be populated from similar items?
+   (Search by function, material, mass range)
+   ├─ YES → Add field value based on similar item, note provenance
+   └─ NO → Continue to #3
+
+3. Is the item definition incomplete/unclear?
+   (Vague name, no notes, uncertain purpose)
+   ├─ YES → Investigate purpose, consider deletion if orphaned
+   └─ NO → Continue to #4
+
+4. POPULATE missing field
+   - Use conservative estimates (heavier, slower, more energy)
+   - Document source: "Based on similar_item_v0"
+   - Add confidence tags if available
+```
+
+### For `import_stub` (Import Recipes Needing Local Manufacturing)
+
+**Context:** Recipe uses `import_placeholder_v0` but local manufacturing may be possible.
+
+**Decision Tree:**
+
+```
+1. Is this import in top contributors to imported mass?
+   Check: out/validation_report.md
+   ├─ NO → Leave as import (low priority)
+   └─ YES → Continue to #2
+
+2. Can an existing recipe/process be adapted?
+   ├─ YES → Create recipe variant, reference existing processes
+   └─ NO → Continue to #3
+
+3. Does local manufacturing make sense given complexity?
+   (Electronics, precision optics, exotic materials)
+   ├─ NO → Leave as import, add notes explaining why
+   └─ YES → Continue to #4
+
+4. CREATE local manufacturing recipe
+   - Research papers for process details
+   - Reference or create necessary processes
+   - May create new gaps (expected and acceptable)
+```
+
+### For `no_provider_machine` (Resource Types Without Machines)
+
+**NOTE:** This gap type is being phased out per [ADR-003](../docs/ADRs/003-process-machine-refactor.md). After migration, processes will reference specific `machine_id` instead of abstract `resource_type`.
+
+**Current temporary guidance:**
+
+```
+1. Is this resource_type actually needed?
+   (Check if it's referenced by any process)
+   ├─ NO → Remove from KB
+   └─ YES → Continue to #2
+
+2. Does an existing machine already provide this capability?
+   ├─ YES → Update machine's `processes_supported` list
+   └─ NO → Create machine or wait for ADR-003 migration
+```
+
+---
+
+## Labor Bot vs Special Machine Decision Guide
+
+**CRITICAL PRINCIPLE:** Strongly prefer labor bot + tools over special-purpose machines unless high efficiency is required.
+
+### When to Use Labor Bot + Tools
+
+Use `labor_bot_general_v0` with existing tools for:
+
+- **Manual assembly operations**
+  - Fitting parts together
+  - Fastening bolts/screws
+  - Alignment and adjustment
+  - Testing and inspection
+
+- **Simple fabrication tasks**
+  - Cutting with hand tools
+  - Drilling with portable drill
+  - Grinding/deburring with portable grinder
+  - Measuring with hand tools
+
+- **Material handling**
+  - Loading/unloading
+  - Positioning workpieces
+  - Transferring materials
+  - Sorting/organizing
+
+- **One-off or low-volume operations**
+  - Prototype assembly
+  - Repair work
+  - Custom modifications
+  - Infrequent tasks
+
+### When to Create Special Machine
+
+Create a dedicated machine only when:
+
+1. **High throughput required**
+   - Continuous production (>10 units/day)
+   - Automated mass production
+   - Time-critical processes
+
+2. **Precision beyond labor bot capability**
+   - Tolerances <0.1mm (labor bot: ±0.5mm)
+   - Optical alignment
+   - Surface finish requirements
+   - Automated control loops
+
+3. **Heavy capacity beyond labor bot**
+   - Loads >20kg (labor bot payload limit)
+   - Forces >200N
+   - Large-scale operations
+
+4. **Environmental requirements**
+   - High temperature (>200°C)
+   - Vacuum operations
+   - Hazardous materials
+   - Controlled atmosphere
+
+5. **Process physics requires specialized equipment**
+   - Melting/casting (furnace)
+   - Chemical reactions (reactor)
+   - Electrolysis (electrolyzer)
+   - Centrifugal forces (separator)
+
+### Examples
+
+**GOOD (Labor Bot + Tools):**
+```yaml
+# Instead of "hose_crimping_station_v0"
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+  - machine_id: crimping_tool_manual  # Simple hand tool
+    qty: 0.5
+    unit: hr
+```
+
+**GOOD (Labor Bot + Tools):**
+```yaml
+# Instead of "deburring_station_v0"
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.0
+    unit: hr
+  - machine_id: grinding_tool_portable  # Or even just "hand_tools_general"
+    qty: 1.0
+    unit: hr
+```
+
+**BAD (Unnecessary Special Machine):**
+```yaml
+# Don't create specialized machines for simple tasks
+resource_requirements:
+  - machine_id: bolt_tightening_station_automated_v0  # Overkill!
+    qty: 0.2
+    unit: hr
+
+# Instead use:
+  - machine_id: labor_bot_general_v0
+    qty: 0.2
+    unit: hr
+  - machine_id: wrench_torque_adjustable  # Simple tool
+    qty: 0.2
+    unit: hr
+```
+
+**GOOD (Necessary Special Machine):**
+```yaml
+# High-precision, high-volume operation
+resource_requirements:
+  - machine_id: cnc_mill_precision_v0  # Can't do this with labor bot
+    qty: 2.0
+    unit: hr
+```
+
+### Tool Reuse Strategy
+
+Common reusable tools (prefer these over specialized machines):
+
+- `hand_tools_general` - Wrenches, screwdrivers, pliers, etc.
+- `drill_portable_electric` - For drilling operations
+- `grinding_tool_portable` - For deburring, finishing
+- `welding_torch_manual` - For small-scale welding
+- `cutting_tools_manual` - Saws, shears, cutters
+- `measuring_tools_precision` - Calipers, micrometers, gauges
+
+**Before creating a new tool:** Search for existing tools that could work with reasonable adaptation.
+
+---
+
+## Naming Conventions and Equivalence
+
+### Common Naming Variations to Check
+
+When searching for equivalents, check these variations:
+
+**Material/Component Order:**
+- `steel_plate` vs `plate_steel`
+- `motor_electric` vs `electric_motor`
+- `pump_hydraulic` vs `hydraulic_pump`
+
+**Descriptors:**
+- `_basic`, `_simple`, `_standard`, `_general`
+- `_small`, `_medium`, `_large`
+- `_v0`, `_v1`, etc. (mostly v0 in current KB)
+
+**Specificity:**
+- `water` vs `water_liquid` vs `water_purified`
+- `steel` vs `steel_alloy` vs `steel_structural`
+
+### Search Strategies
+
+```bash
+# Search for potential equivalents
+grep -i "motor.*5.*kw" kb/items/parts/*.yaml
+grep -i "bearing.*steel" kb/items/parts/*.yaml
+
+# Search for usage
+grep -r "item_id: motor_general_5kw" kb/
+
+# Search for similar names
+fd -i motor kb/items/
+```
+
+---
+
+## Documentation Requirements
+
+### When Creating New Items
+
+**REQUIRED in notes field:**
+```yaml
+notes: |
+  Conservative Mode check completed:
+  - Searched for: [specific search terms]
+  - Checked items: [list of similar items reviewed]
+  - No equivalent found within 5× magnitude
+  - Created because: [specific reason]
+```
+
+### When Reusing/Adapting Existing Items
+
+**OPTIONAL but helpful in notes:**
+```yaml
+notes: |
+  Using existing_item_v0 (originally 3kW, this application ~5kW).
+  Within 5× equivalence threshold. Acceptable for approximation.
+  Verified no closer match exists.
+```
+
+### When Updating References
+
+**Git commit messages should note:**
+```
+Fix: Update reference from water_vapor_v0 to water
+
+Conservative Mode: water_vapor_v0 doesn't exist. Recipe updated to
+use existing 'water' item with boiling step added to process chain.
+```
+
+---
+
+## Integration with Existing Guidelines
+
+Conservative Mode **extends and unifies** existing principles:
+
+1. **From parts_and_labor_guidelines.md:**
+   - 5× equivalence rule → now applies to ALL items
+   - Mandatory inventory check → now for all gap types
+   - Material class system → helps identify equivalents
+
+2. **From memo_a.md:**
+   - "Structure before precision" → reuse preserves structure
+   - "Processes before machines" → prefer process adaptation
+   - "Incompleteness is acceptable" → don't create just to fill gaps
+
+3. **From memo_b.md:**
+   - "Best-guess engineering" → when creating, use similar items
+   - "Iterative closure" → don't solve all downstream gaps at once
+   - "Import termination rule" → accept imports when appropriate
+
+---
+
+## Exceptions and Edge Cases
+
+### When to Skip Conservative Mode
+
+**Immediate creation is acceptable for:**
+
+1. **Seed file requirements** - Items explicitly listed in `kb/seeds/*.yaml`
+   - These are intentional roadmaps from design docs
+   - Still check for equivalents, but creation is expected
+
+2. **Obvious gaps from recent work** - You just created item X, now need item Y
+   - If tightly coupled and freshly designed
+   - Still do quick equivalence check
+
+3. **Terminal/boundary items** - Environment sources, imports
+   - `environment_source_v0` for natural inputs
+   - `import_placeholder_v0` for accepted imports
+
+### When in Doubt
+
+**Default actions:**
+- **If 80% sure equivalent exists:** Search harder, ask in notes
+- **If 80% sure new item needed:** Create with documentation
+- **If 50/50 uncertain:** Bias toward reuse/adaptation over creation
+
+**Confidence calibration:**
+- "I've searched thoroughly" → proceed with decision
+- "I've done a quick check" → search more before creating
+- "I'm not sure" → document uncertainty, use best judgment
+
+---
+
+## Summary Checklist
+
+Before creating any new item, verify:
+
+- [ ] Searched for exact ID under different name
+- [ ] Checked for equivalent items (5× rule)
+- [ ] Considered phase/state variation of existing item
+- [ ] Evaluated labor bot + tools alternative (for machines)
+- [ ] Verified reference isn't erroneous
+- [ ] Searched common naming variations
+- [ ] Checked if item is actually used/needed
+- [ ] Reviewed similar items for parameter estimates
+- [ ] Documented search in notes field
+
+**Only after all checks:** Create new item with clear justification.
+
+---
+
+## Related Documentation
+
+- **`docs/closure_error_guidance.md`** - Closure analysis error resolution (complements Conservative Mode for material flow gaps)
+- **`docs/parts_and_labor_guidelines.md`** - Part reuse policy and equivalence criteria (Conservative Mode started here)
+- **`docs/ADRs/003-process-machine-refactor.md`** - Resource type migration (affects `no_provider_machine` gaps)
+- **`design/meta-memo.md`** - Project philosophy (minimizing proliferation)
+- **`design/memo_a.md`** - Specification and design principles
+- **`design/memo_b.md`** - Knowledge acquisition methodology
+
+---
+
+## Questions or Feedback?
+
+Conservative Mode is about using good judgment to minimize KB complexity. If you encounter situations where these guidelines conflict or are unclear:
+
+1. Document the issue in item `notes`
+2. Make a conservative choice (prefer reuse)
+3. Add comment to work queue item or commit message
+4. Patterns will emerge and this document will evolve
+
+
+### 2.2 Closure Error Resolution
+
+# Closure Error Resolution Guide
+
+**Status:** Official Policy
+**Version:** 1.0
+**Date:** 2024-12-24
+**Complements:** [Conservative Mode Guide](conservative_mode_guide.md)
+
+## Overview
+
+This guide provides decision trees for resolving closure analysis errors - material flow problems detected when tracing recipes and processes down to raw materials.
+
+**Core Principle:** Closure errors indicate incomplete or inconsistent material flow definitions. Fix root causes, not symptoms.
+
+---
+
+## Error Types and Decision Trees
+
+### 1. `null_quantity` (Process Inputs/Outputs with Null Quantities)
+
+**Context:** A process has `qty: null` or `qty: 0` for an input or output, breaking material flow tracing.
+
+**Example Error:**
+```
+Process 'welding_brazing_basic_v0' (in recipe 'recipe_printer_frame_v0')
+input 'cast_metal_parts' has null/zero quantity
+```
+
+**Decision Tree:**
+
+```
+1. Is this a GENERIC process used by multiple recipes?
+   (Check: grep "process_id.*{process_name}" kb/recipes/*.yaml)
+   ├─ YES → Process should have null quantities
+   │         → SOLUTION: Add explicit inputs/outputs to RECIPES that use it
+   │         → See "Adding Recipe-Level Inputs" below
+   └─ NO → Continue to #2
+
+2. Is there a SIMILAR process with quantities defined?
+   (Search: find kb/processes -name "*{function}*.yaml")
+   ├─ YES → Copy quantity structure from similar process
+   │         → Document: "Based on {similar_process_id}"
+   └─ NO → Continue to #3
+
+3. Can quantities be calculated from the TARGET ITEM?
+   (If recipe produces X kg of item, inputs ≈ X kg + waste)
+   ├─ YES → Calculate quantities based on:
+   │         - Target item mass
+   │         - Typical material waste (5-20%)
+   │         - Material density conversions
+   │         → Document assumptions in notes
+   └─ NO → Continue to #4
+
+4. Should this process be DELETED?
+   (Is it unreferenced, redundant, or obsolete?)
+   ├─ YES → Remove process, update referencing recipes
+   └─ NO → Continue to #5
+
+5. ESTIMATE quantities conservatively
+   - Use 1 kg as default unit quantity
+   - Assume 10% waste unless specific process indicates otherwise
+   - Document: "Placeholder quantities, refine with research"
+   - Add to queue for future refinement
+```
+
+**Adding Recipe-Level Inputs (for generic processes):**
+
+```yaml
+# BEFORE (generic process with null quantities)
+id: recipe_frame_v0
+target_item_id: frame_structural
+steps:
+  - process_id: welding_basic_v0  # Has null quantities
+
+# AFTER (explicit recipe inputs)
+id: recipe_frame_v0
+target_item_id: frame_structural
+inputs:
+  - item_id: steel_tube_set
+    qty: 5.0
+    unit: kg
+  - item_id: welding_rod
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: frame_structural
+    qty: 5.0
+    unit: kg
+steps:
+  - process_id: welding_basic_v0
+```
+
+---
+
+### 2. `recipe_no_inputs` (Recipes with No Material Flow)
+
+**Context:** A recipe has steps but no material inputs are defined (not at recipe level, not in process steps).
+
+**Example Error:**
+```
+Recipe 'recipe_motor_assembly_v0' for 'motor_electric_small' has no inputs
+```
+
+**Decision Tree:**
+
+```
+1. Does this recipe have EXPLICIT inputs/outputs at recipe level?
+   (Check: recipe has 'inputs:' and 'outputs:' fields)
+   ├─ YES → Check if inputs are empty or have null quantities
+   │         → Fix quantities (see null_quantity guidance above)
+   └─ NO → Continue to #2
+
+2. Do the process steps have DEFINED inputs?
+   (Check each process referenced in steps)
+   ├─ YES (all processes have inputs) → Re-index, should resolve automatically
+   └─ SOME/NONE → Continue to #3
+
+3. Is there a BOM for the target item that shows components?
+   (Check: grep "id.*bom_{target_item}" kb/boms/*.yaml)
+   ├─ YES → Convert BOM components to recipe inputs
+   │         → Add transformation processes as needed
+   └─ NO → Continue to #4
+
+4. Is there a SIMILAR RECIPE for reference?
+   (Search for recipes producing similar items)
+   ├─ YES → Copy input structure, adapt quantities
+   │         → Document: "Based on {similar_recipe_id}"
+   └─ NO → Continue to #5
+
+5. Can inputs be INFERRED from the target item?
+   ├─ YES → Create inputs based on:
+   │         - Target item material_class
+   │         - Target item mass
+   │         - Typical process inputs for that material
+   └─ NO → Continue to #6
+
+6. Should this recipe be DELETED?
+   (Is it redundant, obsolete, or import-only?)
+   ├─ YES → Mark item as import or use different recipe
+   └─ NO → Continue to #7
+
+7. RESEARCH and create minimal inputs
+   - Check papers: docs/papers/
+   - Use Conservative Mode principles (prefer existing items)
+   - Document assumptions clearly
+   - Start with major components only
+```
+
+---
+
+### 3. `recipe_not_found` (Referenced Recipe Doesn't Exist)
+
+**Context:** An item references a recipe that doesn't exist in the KB.
+
+**Example Error:**
+```
+Recipe 'recipe_special_alloy_v0' not found for item 'alloy_special_v0'
+```
+
+**Decision Tree:**
+
+```
+1. Is this a TYPO in the item's recipe field?
+   (Check for similarly-named recipes)
+   ├─ YES → Fix item's recipe field to point to correct recipe
+   └─ NO → Continue to #2
+
+2. Does the recipe exist under a DIFFERENT NAME?
+   (Search: find kb/recipes -name "*{keyword}*.yaml")
+   ├─ YES → Update item to reference correct recipe ID
+   └─ NO → Continue to #3
+
+3. Does the item NEED a recipe?
+   (Is it used anywhere? Is it imported?)
+   ├─ NO (unused/imported) → Remove recipe reference or mark as import
+   └─ YES → Continue to #4
+
+4. Can an EXISTING recipe be adapted?
+   (Search for recipes producing similar items)
+   ├─ YES → Create recipe variant or update item to use existing recipe
+   └─ NO → Continue to #5
+
+5. Should this be consolidated with an EQUIVALENT item?
+   (Check Conservative Mode 5× equivalence rule)
+   ├─ YES → Replace with equivalent item, delete this one
+   └─ NO → Continue to #6
+
+6. CREATE the recipe
+   - Follow existing recipe patterns
+   - Use Conservative Mode principles
+   - Reference existing processes where possible
+   - Document assumptions
+```
+
+---
+
+### 4. `process_not_found` (Referenced Process Doesn't Exist)
+
+**Context:** A recipe step references a process that doesn't exist in the KB.
+
+**Example Error:**
+```
+Process 'special_welding_v0' referenced in recipe 'recipe_frame_v0' not found
+```
+
+**Decision Tree:**
+
+```
+1. Is this a TYPO in the recipe's process_id?
+   (Check for similarly-named processes)
+   ├─ YES → Fix recipe step to point to correct process
+   └─ NO → Continue to #2
+
+2. Does the process exist under a DIFFERENT NAME?
+   (Search: find kb/processes -name "*{keyword}*.yaml")
+   ├─ YES → Update recipe to reference correct process ID
+   └─ NO → Continue to #3
+
+3. Can an EXISTING process be used instead?
+   (Search for processes with similar function)
+   ├─ YES → Update recipe to use existing process
+   │         → Document: "Using {process_id} for {operation}"
+   └─ NO → Continue to #4
+
+4. Can this be replaced with LABOR_BOT + TOOLS?
+   (See Conservative Mode: Labor Bot Decision Guide)
+   ├─ YES → Update recipe to use labor_bot_general_v0 + tool
+   └─ NO → Continue to #5
+
+5. Is this process truly UNIQUE and necessary?
+   ├─ NO → Simplify recipe, use generic process
+   └─ YES → Continue to #6
+
+6. CREATE the process
+   - Follow existing process patterns
+   - Define inputs and outputs with quantities
+   - Reference required machines/tools
+   - Document assumptions
+```
+
+---
+
+### 5. `item_not_found` (Item Referenced But Not Defined)
+
+**Context:** A process or recipe references an item that doesn't exist in the KB.
+
+**See:** Conservative Mode Guide - `referenced_only` decision tree
+
+**Additional Closure-Specific Considerations:**
+
+```
+If detected through closure analysis:
+1. Check WHICH MACHINE needs this item
+   → High-priority machines → higher urgency to fix
+   → Rarely-used machines → lower priority
+
+2. Check QUANTITY needed
+   → Large mass impact → create/define item
+   → Small mass impact → consider consolidation/deletion
+
+3. Follow standard referenced_only guidance with priority weighting
+```
+
+---
+
+## Common Patterns and Solutions
+
+### Pattern 1: Generic Process with Null Quantities
+
+**Problem:** Process is reused across many recipes, can't have fixed quantities.
+
+**Solution:** Add explicit inputs/outputs to recipes, keep process generic.
+
+```yaml
+# Process (generic, null quantities)
+id: assembly_basic_v0
+inputs: []  # Or inputs with qty: null
+outputs: []
+
+# Recipe (explicit inputs/outputs)
+id: recipe_motor_v0
+inputs:
+  - item_id: motor_housing
+    qty: 1
+  - item_id: motor_rotor
+    qty: 1
+outputs:
+  - item_id: motor_electric_small
+    qty: 1
+steps:
+  - process_id: assembly_basic_v0  # Generic process
+```
+
+### Pattern 2: Process Chain with Intermediate Items
+
+**Problem:** Recipe references items that aren't explicitly defined but are intermediate products.
+
+**Solution:** Either:
+- Define intermediate items as parts
+- OR Inline the process chain and skip intermediate items
+
+```yaml
+# Option A: Define intermediate
+id: recipe_wire_v0
+inputs:
+  - item_id: copper_rod
+    qty: 1.0
+outputs:
+  - item_id: copper_wire
+    qty: 0.95
+steps:
+  - process_id: wire_drawing_v0
+
+# Option B: Inline (if intermediate not reused)
+id: recipe_wire_v0
+inputs:
+  - item_id: copper_scrap
+    qty: 1.1
+outputs:
+  - item_id: copper_wire
+    qty: 0.95
+steps:
+  - process_id: copper_refining_v0  # scrap → rod (inlined)
+  - process_id: wire_drawing_v0     # rod → wire
+```
+
+### Pattern 3: Mass Balance Issues
+
+**Problem:** Recipe inputs total mass doesn't match outputs.
+
+**Solution:** Add waste/loss items or adjust quantities.
+
+```yaml
+id: recipe_part_machined_v0
+inputs:
+  - item_id: steel_bar
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: part_machined
+    qty: 1.5
+    unit: kg
+  - item_id: metal_swarf  # Waste from machining
+    qty: 0.5
+    unit: kg
+```
+
+---
+
+## Conservative Mode Integration
+
+All closure error fixes MUST follow Conservative Mode principles:
+
+1. **Check for equivalents** before creating new items/processes/recipes
+2. **Prefer reuse** over creation
+3. **Document assumptions** in notes fields
+4. **Use 5× magnitude rule** for equivalence
+5. **Minimize KB growth** - consolidate when possible
+
+## Research Resources
+
+When quantities or process details are unknown:
+
+1. **Check existing KB patterns**
+   ```bash
+   grep -r "similar_process" kb/processes/
+   ```
+
+2. **Review papers directory**
+   ```bash
+   ls docs/papers/ | grep -i {topic}
+   ```
+
+3. **Use parts and labor guidelines**
+   - Mass estimation guidelines
+   - Material class system
+   - Equivalence criteria
+
+4. **Conservative estimates**
+   - Heavier rather than lighter
+   - More energy rather than less
+   - More waste rather than less
+
+---
+
+## Validation
+
+After fixing closure errors:
+
+1. **Run indexer**
+   ```bash
+   .venv/bin/python -m kbtool index
+   ```
+
+2. **Check if error resolved**
+   ```bash
+   grep "{item_id}" out/closure_errors.jsonl
+   ```
+
+3. **Verify material flow**
+   ```bash
+   .venv/bin/python -m kbtool mat-closure --machine {machine_id}
+   ```
+
+4. **Check for new gaps**
+   - Expect some new gaps when filling closure errors
+   - Each fix should resolve more than it creates
+
+---
+
+## Agent Workflow
+
+For autonomous queue agents processing closure errors:
+
+```
+1. Lease closure error from queue
+2. Read error context (machine, recipe, process, item)
+3. Apply decision tree for error type
+4. Make minimal necessary changes
+5. Run indexer to validate
+6. Check closure error resolved
+7. Complete if resolved, iterate if not
+```
+
+## Questions to Ask Yourself
+
+Before fixing a closure error, ask:
+
+- [ ] Have I checked for existing equivalents?
+- [ ] Is this error a symptom of a deeper issue?
+- [ ] Am I creating new items unnecessarily?
+- [ ] Are my quantity estimates conservative?
+- [ ] Have I documented my assumptions?
+- [ ] Does this fix follow Conservative Mode?
+- [ ] Will this create circular dependencies?
+
+---
+
+## Examples
+
+### Example 1: Fixing Null Quantity
+
+**Error:**
+```
+Process 'welding_basic_v0' input 'metal_parts' has null quantity
+```
+
+**Investigation:**
+```bash
+# Check how many recipes use this process
+grep "welding_basic_v0" kb/recipes/*.yaml | wc -l
+# Output: 45 recipes
+
+# This is a generic process - don't fix the process, fix recipes
+```
+
+**Fix:** Add inputs to specific recipes that use this process
+
+### Example 2: Fixing Recipe No Inputs
+
+**Error:**
+```
+Recipe 'recipe_bracket_v0' has no inputs
+```
+
+**Investigation:**
+```bash
+# Read the recipe
+cat kb/recipes/recipe_bracket_v0.yaml
+# Shows: Only has steps, no inputs
+
+# Check if BOM exists
+grep "bracket" kb/boms/*.yaml
+# Found: bom_bracket_v0 shows steel_plate component
+```
+
+**Fix:** Add inputs based on BOM
+```yaml
+inputs:
+  - item_id: steel_plate
+    qty: 0.5
+    unit: kg
+```
+
+---
+
+## Summary
+
+**Key Takeaways:**
+
+1. Closure errors indicate **incomplete material flow definitions**
+2. Fix **root causes**, not symptoms
+3. Follow **Conservative Mode** principles
+4. **Document assumptions** clearly
+5. **Validate** with indexer and closure analysis
+6. Expect **some new gaps** - each fix should net positive
+
+Closure errors are normal and expected. They help us systematically complete the material flow graph.
+
+
+---
+## 3. Knowledge Base Structure
 
 
 The KB is organized as:
@@ -517,7 +1527,7 @@ Each YAML file defines one entity with:
 
 
 ---
-## 3. Complex Examples (Templates)
+## 4. Complex Examples (Templates)
 
 
 Use these as templates when creating new KB entries.
@@ -665,27 +1675,27 @@ name: Control panel assembly
 layer_tags:
 - layer_7
 inputs:
-- item_id: enclosure_steel_electronics
+- item_id: enclosure_electrical_medium
   qty: 12.0
   unit: kg
   notes: Control panel enclosure cabinet
-- item_id: control_plc_basic
+- item_id: control_circuit_board_basic
   qty: 2.0
   unit: kg
   notes: Programmable logic controller
-- item_id: relay_set_industrial
+- item_id: relay_electromagnetic_v0
   qty: 2.0
   unit: kg
   notes: Control relays and contactors
-- item_id: switch_selector_industrial
+- item_id: control_components
   qty: 1.0
   unit: kg
   notes: Selector switches and buttons
-- item_id: indicator_light_set
+- item_id: control_components
   qty: 0.5
   unit: kg
   notes: Status indicator lights
-- item_id: wire_harness_control
+- item_id: assembled_wire_harness
   qty: 3.0
   unit: kg
   notes: Control wiring and cable assemblies
@@ -693,7 +1703,7 @@ inputs:
   qty: 2.0
   unit: kg
   notes: Terminal blocks and connectors
-- item_id: circuit_breaker_set
+- item_id: control_components
   qty: 1.5
   unit: kg
   notes: Circuit protection devices
@@ -994,9 +2004,9 @@ components:
   qty: 1
   notes: "6\xD7 copper heat pipes from motors, aluminum radiator fins (0.3m\xB2),\
     \ thermal pads, 2 kg"
-- item_id: emergency_stop_system
+- item_id: control_components
   qty: 1
-  notes: "2\xD7 mushroom buttons, dual-channel safety relay, wiring, 1 kg"
+  notes: Includes emergency stop buttons, safety relay, and control wiring
 - item_id: safety_light_curtain
   qty: 1
   notes: "Optical safety curtain, 2m\xD72m coverage, IEC 61496 Type 4, <100ms response,\
@@ -1060,76 +2070,115 @@ notes: 'Complete bill of materials for labor_bot_general_v0 - a 6-DOF industrial
 ```
 
 ```yaml
-# kb/boms/bom_welding_tig_unit_v0_v0.yaml
-id: bom_welding_tig_unit_v0_v0
+# kb/boms/bom_cryogenic_separation_system_v0.yaml
+id: bom_cryogenic_separation_system_v0
 kind: bom
-owner_item_id: welding_tig_unit_v0
+owner_item_id: cryogenic_separation_system_v0
 components:
-- item_id: torch_assembly
-  qty: 1.0
+- item_id: cryocooler_active_v0
+  qty: 1
   unit: unit
-  notes: TIG torch assembly
-- item_id: welding_power_supply_unit
-  qty: 1.0
+  notes: Active refrigeration to <100K
+- item_id: pressure_vessel_steel
+  qty: 200.0
+  unit: kg
+  notes: Vacuum-insulated vessels
+- item_id: distillation_column_module_v0
+  qty: 1
   unit: unit
-  notes: Welding power supply unit
-- item_id: gas_supply_regulator
-  qty: 1.0
+  notes: Multi-stage separation column
+- item_id: thermal_insulation_basic
+  qty: 50.0
+  unit: kg
+  notes: MLI vacuum insulation
+- item_id: vacuum_pump_station
+  qty: 1
   unit: unit
-  notes: Gas regulator for TIG arc shielding gas
-- item_id: gas_cylinder_argon_or_nitrogen
-  qty: 1.0
+  notes: Maintain vacuum insulation
+- item_id: valve_set_gas_handling
+  qty: 1
   unit: unit
-  notes: Inert shielding gas cylinder (argon or nitrogen)
-- item_id: gas_flow_controller
-  qty: 1.0
-  unit: unit
-  notes: Gas flow controller for TIG torch
-- item_id: gas_inlet_manifold
-  qty: 1.0
-  unit: unit
-- item_id: inert_gas_manifold
-  qty: 1.0
-  unit: unit
-- item_id: coolant_loop_basic
-  qty: 1.0
-  unit: unit
-  notes: Coolant loop for TIG power electronics
-- item_id: circulation_pump_coolant
-  qty: 1.0
-  unit: unit
+  notes: Cryogenic-rated valves
+- item_id: piping_and_fittings_thermal
+  qty: 100.0
+  unit: kg
+  notes: Cryogenic transfer lines
 - item_id: control_panel_basic
-  qty: 1.0
+  qty: 1
   unit: unit
-notes: Expanded BOM for TIG welding unit; includes essential subsystems for gas handling
-  and cooling.
+  notes: Temperature and flow controls
+- item_id: sensor_suite_general
+  qty: 1
+  unit: unit
+  notes: Temperature, pressure, flow sensors
+- item_id: structural_frame_steel
+  qty: 150.0
+  unit: kg
+  notes: Support structure
+- item_id: fastener_kit_medium
+  qty: 2
+  unit: unit
+notes: 'BOM for cryogenic separation system.
+
+  Total mass ~800 kg.
+
+  Separates volatile gases by fractional distillation at cryogenic temperatures.
+
+  '
 ```
 
 ```yaml
-# kb/boms/bom_hpht_furnace_v0.yaml
-id: bom_hpht_furnace_v0
+# kb/boms/bom_roasting_furnace_v0.yaml
+id: bom_roasting_furnace_v0
 kind: bom
-owner_item_id: hpht_furnace_v0
+owner_item_id: roasting_furnace_v0
 components:
-- item_id: furnace_shell_refractory
-  qty: 1
+- item_id: refractory_brick_set
+  qty: 200.0
+  unit: kg
+  notes: High-temp refractory lining
+- item_id: structural_steel_frame
+  qty: 300.0
+  unit: kg
+  notes: Outer shell and support structure
 - item_id: heating_element_set_high_temp
+  qty: 2
+  unit: unit
+  notes: Electric resistance heating
+- item_id: thermal_insulation_basic
+  qty: 100.0
+  unit: kg
+  notes: Insulation layer
+- item_id: air_blower_industrial
   qty: 1
-- item_id: insulation_pack_high_temp
-  qty: 1
+  unit: unit
+  notes: Air injection for oxidation (industrial blower for forced air)
+- item_id: piping_and_fittings_thermal
+  qty: 50.0
+  unit: kg
+  notes: Gas collection manifold
 - item_id: temperature_controller_basic
   qty: 1
-- item_id: power_conditioning_module
+  unit: unit
+  notes: Temperature control system
+- item_id: thermocouple_type_s_v0
+  qty: 2
+  unit: unit
+  notes: High-temp temperature sensors
+- item_id: valve_set_gas_handling
   qty: 1
-- item_id: cooling_loop_basic
-  qty: 1
-- item_id: power_bus_high_current
-  qty: 1
-- item_id: control_compute_module_imported
-  qty: 1
+  unit: unit
+  notes: Gas flow control
 - item_id: fastener_kit_medium
-  qty: 4
-notes: Placeholder HPHT furnace BOM; refined with complete hardware data.
+  qty: 2
+  unit: unit
+notes: 'BOM for roasting furnace.
+
+  Total mass ~900 kg.
+
+  Used for oxidizing sulfide ores to produce metal oxides + SO2.
+
+  '
 ```
 
 
@@ -1248,70 +2297,70 @@ recipe: recipe_antenna_matching_network_unversioned_v0
 ### Material Examples
 
 ```yaml
-# kb/items/materials/hydrogen_chloride.yaml
-id: hydrogen_chloride
-name: Hydrogen Chloride
+# kb/imports/permanent_magnet_neodymium.yaml
+id: import_permanent_magnet_neodymium
 kind: material
+is_import: true
+name: Permanent magnet (neodymium, imported)
 mass: 1.0
 unit: kg
-material_class: gas
-state: gas
-physical_properties:
-  boiling_point_c: -85.05
-  notes: Colorless gas at STP. When dissolved in water, forms hydrochloric acid solution.
-notes: 'Hydrogen chloride (HCl). Colorless, pungent gas at STP.
-
-  Dissolves in water to form hydrochloric acid (aqueous HCl).
-
-  Product of chlorination and carbochlorination processes.
-
-  Recyclable in closed-loop leaching systems.
-
-  '
-recipe: recipe_hydrogen_chloride_v0
+density: 7500
+composition: Nd2Fe14B (neodymium iron boron)
+state: solid
+material_class: neodymium_magnet
+notes: "Imported NdFeB permanent magnet for bootstrap. Used in motors and generators.\n\
+  \nISRU alternative: Requires powder metallurgy \u2192 sinter NdFeB alloy from Nd/Fe/B\n\
+  powders \u2192 grind/shape \u2192 magnetization. Complex rare earth extraction from\n\
+  regolith needed.\n"
+isru_alternative: permanent_magnet_neodymium
 ```
 
 ```yaml
-# kb/items/materials/epoxy_precursor_block_v0.yaml
-id: epoxy_precursor_block_v0
-name: Epoxy resin precursor block
+# kb/imports/magnesium_powder.yaml
+id: import_magnesium_powder
 kind: material
+is_import: true
+name: Magnesium powder (imported)
 mass: 1.0
 unit: kg
-material_class: polymer
-notes: Placeholder precursor material for epoxy resin base synthesis. Represents unreacted
-  epoxy monomer or prepolymer stage.
-recipe: recipe_epoxy_precursor_block_v0
+density: 1748
+state: powder
+material_class: magnesium
+notes: 'Imported magnesium powder for bootstrap. Used as feedstock for silicide formation.
+
+
+  ISRU alternative: Extract from lunar regolith (MgO reduction) or seawater
+
+  processing. Real ISRU route requires magnesium metal reduction from
+
+  regolith-derived MgO or seawater Mg extraction.
+
+  '
+isru_alternative: magnesium_powder_v0
 ```
 
 ```yaml
-# kb/items/materials/silicon_tetrachloride.yaml
-id: silicon_tetrachloride
-name: Silicon Tetrachloride
+# kb/items/materials/aluminum_metal_pure.yaml
+id: aluminum_metal_pure
 kind: material
+name: Aluminum metal (pure)
 mass: 1.0
 unit: kg
-material_class: chemical
-state: liquid
-physical_properties:
-  boiling_point_c: 57.6
-  melting_point_c: -68.7
-  notes: Colorless fuming liquid at STP. Volatile, reacts with moisture.
-notes: 'Silicon tetrachloride (SiCl4). Liquid at room temperature.
+density: 2700
+material_class: aluminum
+notes: 'Pure aluminum metal feedstock for alloying and metallurgical processes.
 
-  Intermediate in silicon purification via Siemens process.
+  Used in synthesis of aluminum-containing alloys (e.g., AlNiCo magnets).
 
-  Produced via carbochlorination of silicates.
-
-  Highly reactive with water, producing HCl and silicic acid.
+  Produced via electrolytic reduction or purification processes.
 
   '
-recipe: recipe_silicon_tetrachloride_v0
+recipe: recipe_aluminum_metal_pure_v0
 ```
 
 
 ---
-## 4. Available Papers
+## 5. Available Papers
 
 
 Papers are located in `design/papers/`. Use `rg_search` to search extracted text.
@@ -1369,12 +2418,12 @@ Key papers from Alex Ellery:
 
 
 ---
-## 5. Queue Workflow
+## 6. Queue Workflow
 
 [Error reading /Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md: [Errno 2] No such file or directory: '/Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md']
 
 ---
-## 6. Gap Types and Validation
+## 7. Gap Types and Validation
 
 
 The indexer identifies several gap types:
@@ -1400,141 +2449,15 @@ The indexer identifies several gap types:
 6. **no_provider_machine** - Resource types with no machine providing them
    - Fix: Add capability to an existing machine or create a new machine
 
-7. **missing_recipe_input** - Items used as recipe inputs but not defined
-   - Context includes: `used_as_input_in` (list of recipes), `total_recipe_count`
-   - These are raw materials or parts consumed by recipes but never produced
-   - Fix: Create a material or part definition. Check if it should be:
-     - A material (raw inputs like `copper_sheet_2mm`, `brazing_alloy_copper_phosphorus`)
-     - A part (manufactured components like `copper_tube_fitting`)
-   - Research similar items first (e.g., `aluminum_sheet_2mm` as pattern for `copper_sheet_2mm`)
-
-8. **missing_intermediate_part** - Items produced and consumed across multiple recipes
-   - Context includes: `used_as_input_in`, `used_as_output_in`, `total_recipe_count`
-   - These are sub-assemblies or intermediate products shared by multiple recipes
-   - Fix: Create a part definition with appropriate `mass` and `material_class`
-   - Example: `jacket_panels_formed` (used in 3 recipes as intermediate product)
-
-9. **pure_intermediate** - Items only used within a single recipe
-   - Context includes: `used_as_input_in`, `used_as_output_in` (both list same recipe)
-   - These are internal recipe steps that don't need separate definitions
-   - Fix: Usually can be left undefined (acceptable per design). Only create if:
-     - The item represents a meaningful sub-assembly that might be reused later
-     - It helps with recipe clarity and debugging
-   - Consider: Can the recipe be simplified to eliminate this intermediate?
-
-10. **missing_recipe_target** - Recipe targets an item that doesn't exist
-    - Context includes: `used_as_target_in` (list of recipes)
-    - The recipe produces this item, but the item itself isn't defined
-    - Fix: Create the part/material/machine definition that the recipe produces
-
-11. **recipe_no_inputs** - Recipe has process steps but no inputs/outputs defined
-    - Context includes: `recipe_id`, `target_item_id`, `step_count`, `file`
-    - These are placeholder/incomplete recipes that define process sequence but not material flow
-    - Fix: Add `inputs`, `outputs`, and optionally `byproducts` arrays to each step
-
-    **When NO inputs is acceptable:**
-    - ONLY for raw material extraction using `environment_source_v0` process
-    - The target item should be in `kb/items/raw_materials/` folder
-    - Examples: lunar_regolith_in_situ, water (from polar ice), solar_irradiance
-    - If this is raw material extraction, move the item to raw_materials folder instead
-
-    **How to fix incomplete recipes:**
-    1. Read the recipe file to understand the process sequence
-    2. Check `assumptions` and `notes` fields for material hints
-    3. For each step, define:
-       - `inputs`: What materials/parts go into this step
-         - Each input needs: `item_id`, `qty`, `unit`
-       - `outputs`: What this step produces
-         - Each output needs: `item_id`, `qty`, `unit`
-       - `byproducts`: Optional waste/side products
-    4. Ensure material balance: outputs should account for most of input mass
-    5. Link steps: Step N outputs should be Step N+1 inputs (for multi-step recipes)
-
-    **Example fix:**
-    ```yaml
-    # BEFORE (incomplete):
-    id: recipe_glass_bulk_v0
-    target_item_id: glass_bulk
-    steps:
-      - process_id: glass_melting_and_forming_v0
-        est_time_hr: 2.5
-    assumptions: Glass melting/forming from regolith fines
-
-    # AFTER (complete):
-    id: recipe_glass_bulk_v0
-    target_item_id: glass_bulk
-    steps:
-      - process_id: glass_melting_and_forming_v0
-        est_time_hr: 2.5
-        inputs:
-          - item_id: regolith_fines
-            qty: 10
-            unit: kg
-          - item_id: thermal_energy
-            qty: 50
-            unit: MJ
-        outputs:
-          - item_id: glass_bulk
-            qty: 8
-            unit: kg
-        byproducts:
-          - item_id: waste_gas
-            qty: 0.5
-            unit: kg
-    ```
-
-    **Multi-step recipe example:**
-    ```yaml
-    id: recipe_basalt_fiber_v0
-    target_item_id: basalt_fiber
-    steps:
-      - process_id: glass_melting_and_forming_v0
-        inputs:
-          - item_id: regolith_basalt
-            qty: 10
-            unit: kg
-        outputs:
-          - item_id: glass_bulk
-            qty: 8
-            unit: kg
-      - process_id: basalt_fiber_production_v0
-        inputs:
-          - item_id: glass_bulk  # Output from step 1
-            qty: 8
-            unit: kg
-        outputs:
-          - item_id: basalt_fiber_raw
-            qty: 7
-            unit: kg
-      - process_id: spool_winding_basic_v0
-        inputs:
-          - item_id: basalt_fiber_raw  # Output from step 2
-            qty: 7
-            unit: kg
-        outputs:
-          - item_id: basalt_fiber
-            qty: 7
-            unit: kg
-    ```
-
-    **Common patterns:**
-    - First step often needs raw materials (regolith, ore, metal ingots)
-    - Intermediate steps transform materials (melting, forming, machining)
-    - Final step produces the target item
-    - Energy inputs (thermal_energy, electrical_energy) are common
-    - Tool/machine wear items may be consumed (cutting_fluid, abrasive_media)
-
 The indexer outputs:
 - `out/work_queue.jsonl` - All gaps (rebuilt each run)
 - `out/validation_report.md` - Detailed validation results
 - `out/unresolved_refs.jsonl` - Unresolved references
 - `out/missing_fields.jsonl` - Missing required fields
-- `out/missing_recipe_items.jsonl` - Items referenced in recipe steps but not defined
-- `out/recipes_no_inputs.jsonl` - Recipes with no inputs/outputs defined
 
 
 ---
-## 7. Best Practices
+## 8. Best Practices
 
 
 When filling gaps:

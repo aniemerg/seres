@@ -1,7 +1,27 @@
 id: recipe_protective_coating_aluminum_v0
 kind: recipe
-# Target item produced by this recipe (standardized schema)
 target_item_id: protective_coating_aluminum
+variant_id: v0
 steps:
-  - process_id: apply_protective_coating_aluminum_v0
-notes: "Migration from old produces_id schema to standard target_item_id; ensures this item can be manufactured locally."
+  - process_id: mixing_basic_v0
+    inputs:
+      - item_id: aluminum_metal_pure
+        qty: 0.7
+        unit: kg
+      - item_id: binder_material
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: protective_coating_aluminum
+        qty: 1.0
+        unit: kg
+notes: |
+  Local placeholder recipe for aluminum-based protective coating.
+
+  Aluminum protective coatings include:
+  - Aluminum powder in resin binder
+  - Aluminum-zinc thermal spray coatings
+  - Aluminum pigment paints
+  - Aluminized heat-resistant coatings
+
+  Uses a coarse aluminum + binder mix as a stand-in until detailed formulation exists.

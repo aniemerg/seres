@@ -1,6 +1,29 @@
 id: recipe_voltage_regulator_ic_v0
 kind: recipe
 target_item_id: voltage_regulator_ic
+variant_id: v0
 steps:
-  - process_id: voltage_regulator_ic_assembly_v0
-notes: "Seed recipe to manufacture voltage_regulator_ic using a placeholder assembly process; real BOM/steps can be expanded later."
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.1
+    labor_hours: 0.1
+    notes: "Receive and inspect imported voltage regulator ICs"
+    inputs:
+      - item_id: stock_material
+        qty: 0.001
+        unit: kg
+        notes: "Imported voltage regulator IC stock"
+    outputs:
+      - item_id: voltage_regulator_ic
+        qty: 1
+        unit: unit
+notes: |
+  Import recipe for voltage regulator IC.
+
+  Voltage regulator IC fabrication requires:
+  - Semiconductor fab (CMOS or bipolar process)
+  - Clean room facilities
+  - IC packaging and testing
+  - Precision trimming and calibration
+
+  Requires advanced semiconductor manufacturing.
+  Marked as import.

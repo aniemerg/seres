@@ -1,0 +1,21 @@
+id: rolling_process_v0
+kind: process
+name: Rolling process (basic)
+layer_tags:
+  - layer_5
+  - layer_6
+inputs: []
+outputs: []
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.8
+  notes: "Rolling mill motor power"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.2
+  notes: "Passes through rollers"
+notes: "Basic rolling operation for converting metal stock into bars or sheets; placeholder parameters."

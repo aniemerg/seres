@@ -1,6 +1,31 @@
 id: recipe_dial_indicator_set_v0
 target_item_id: dial_indicator_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 1.0
+    unit: kg
+    notes: Precision steel for indicator body and spindle
+  - item_id: spur_gear_set_v0
+    qty: 0.5
+    unit: kg
+    notes: Precision gears for magnification mechanism (using spur_gear_set_v0 as small gear equivalent)
+  - item_id: spring_compression_small
+    qty: 3
+    unit: unit
+    notes: Return springs for indicator mechanisms
+  - item_id: fastener_kit_small
+    qty: 0.3
+    unit: kg
+    notes: Assembly hardware
+outputs:
+  - item_id: dial_indicator_set
+    qty: 2.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.3
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 6.0

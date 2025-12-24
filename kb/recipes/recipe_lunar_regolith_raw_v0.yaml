@@ -1,7 +1,20 @@
 id: recipe_lunar_regolith_raw_v0
 kind: recipe
 target_item_id: lunar_regolith_raw
-steps:
-  - process_id: lunar_regolith_refinement_basic_v0
 variant_id: v0
-notes: "Placeholder recipe to manufacture lunar_regolith_raw from lunar_regolith_raw via refinement process"
+steps:
+  - process_id: environment_source_v0
+    outputs:
+      - item_id: lunar_regolith_raw
+        qty: 100.0
+        unit: kg
+        notes: "Raw regolith collected from lunar surface"
+notes: |
+  Environment source recipe for raw lunar regolith.
+
+  Lunar regolith collection:
+  - Surface excavation with robotic equipment
+  - Collection and containerization
+  - Transport to processing facility
+
+  Primary feedstock for ISRU operations on the Moon.

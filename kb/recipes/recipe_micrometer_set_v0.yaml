@@ -1,11 +1,25 @@
 id: recipe_micrometer_set_v0
 kind: recipe
 name: Recipe for micrometer set
-produces_id: micrometer_set
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: micrometer_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 3.5
+    unit: kg
+    notes: "Precision tool steel for frames, spindles, anvils"
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: "Assembly hardware for ratchet stops and frames"
+outputs:
+  - item_id: micrometer_set
+    qty: 3.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.7
+    unit: kg
+    notes: "Machining and grinding waste"
 steps:
 - process_id: machining_finish_basic_v0
   est_time_hr: 6.0

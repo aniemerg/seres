@@ -1,7 +1,44 @@
 id: recipe_steel_casting_machine_base_v0
 kind: recipe
 target_item_id: steel_casting_machine_base
+variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 550.0
+    unit: kg
+    notes: Steel for melting and casting
+  - item_id: casting_mold_set
+    qty: 1
+    unit: unit
+    notes: Sand mold set for machine base casting
+outputs:
+  - item_id: steel_casting_machine_base
+    qty: 500.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 50.0
+    unit: kg
+    notes: Gates, risers, and casting cleanup waste
 steps:
-- process_id: casting_basic_v0
-  notes: "Cast steel machine base or subcomponent as a base element."
-notes: "Minimal casting sequence to produce the steel_casting_machine_base (placeholder for detailed steps)."
+  - process_id: melting_basic_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Melt steel ingots in furnace
+  - process_id: casting_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Pour molten steel into large sand mold
+  - process_id: cooling_solidification_v0
+    est_time_hr: 12.0
+    machine_hours: 12.0
+    notes: Allow casting to cool and solidify
+  - process_id: shakeout_basic_v0
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: Remove casting from mold and clean sand
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: Machine mounting surfaces and critical features
+notes: "Heavy steel casting for machine base. Sand casting process with machining of critical surfaces."

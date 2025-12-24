@@ -2,6 +2,28 @@ id: recipe_coaxial_cable_low_loss_v1
 kind: recipe
 name: Recipe for coaxial cable low-loss (v1)
 target_item_id: coaxial_cable_low_loss
+variant_id: v1
 steps:
   - process_id: cable_harness_assembly_v0
-notes: "Placeholder recipe for non-versioned coaxial cable low-loss; mirrors v0 process chain."
+    inputs:
+      - item_id: wire_copper_insulated
+        qty: 0.6
+        unit: kg
+        notes: "Center conductor and shield wire"
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+        notes: "Coaxial connectors and terminations"
+      - item_id: insulation_coating_material
+        qty: 0.2
+        unit: kg
+        notes: "Dielectric and outer jacket insulation"
+    outputs:
+      - item_id: coaxial_cable_low_loss
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble coaxial cable with center conductor, dielectric, shield, and connectors"
+assumptions: "Low-loss RF coaxial cable assembly with copper conductor, dielectric insulation, braided shield, and connectors"
+notes: "Recipe for coaxial cable low-loss assembly from wire, insulation, and connector components."

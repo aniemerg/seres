@@ -7,5 +7,28 @@ produces_qty: 1.0
 produces_unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: hydraulic_reservoir_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_valve_manifold_basic
+        qty: 1.0
+        unit: unit
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
+      - item_id: power_output_terminals
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hydraulic_power_unit_basic
+        qty: 1.0
+        unit: unit
   - process_id: integration_test_basic_v0
 notes: "Migration to target_item_id pattern; placeholder path to assemble hydraulic power unit basic from BOM components."

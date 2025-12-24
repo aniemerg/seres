@@ -10,6 +10,20 @@ steps:
   - process_id: sealing_and_assembly_basic_v0
     est_time_hr: 0.8
     labor_hours: 0.8
+    inputs:
+      - item_id: raw_metal_block
+        qty: 12.0
+        unit: kg
+      - item_id: hydraulic_seals_set
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hydraulic_cylinder_small
+        qty: 1.0
+        unit: unit
     notes: "Install seals, piston, rod, and end caps; assemble with fasteners."
   - process_id: pressure_test_basic_v0
     est_time_hr: 0.5

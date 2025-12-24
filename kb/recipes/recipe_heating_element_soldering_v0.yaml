@@ -2,17 +2,34 @@ id: recipe_heating_element_soldering_v0
 target_item_id: heating_element_soldering
 variant_id: v0
 steps:
-  - process_id: spool_winding_basic_v0
+  - process_id: coil_winding_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: "Wind nichrome wire into resistive coil"
-  - process_id: ceramic_coating_v0
+    notes: "Wind resistive wire into coil using basic winding process"
+  - process_id: coating_insulation_v0
     est_time_hr: 0.3
     labor_hours: 0.3
-    notes: "Apply ceramic insulation to wire coil"
+    notes: "Apply insulation coating to resistive coil"
   - process_id: assembly_basic_v0
     est_time_hr: 0.2
     labor_hours: 0.2
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 0.1
+        unit: kg
+      - item_id: ceramic_insulators
+        qty: 0.1
+        unit: kg
+      - item_id: power_output_terminals
+        qty: 1.0
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: heating_element_soldering
+        qty: 1.0
+        unit: unit
     notes: "Attach electrical connectors and housing"
 assumptions: Nichrome resistance wire wound into coil, ceramic insulated, with copper electrical connections.
 notes: Small resistive heating element for soldering iron applications. Uses nichrome wire coil with ceramic insulation.

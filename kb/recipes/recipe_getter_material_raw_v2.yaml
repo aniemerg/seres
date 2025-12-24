@@ -1,7 +1,18 @@
 id: recipe_getter_material_raw_v2
 kind: recipe
 target_item_id: getter_material_raw
+variant_id: v2
 steps:
   - process_id: getter_material_raw_generation_v0
-notes: "Placeholder recipe to close no_recipe gap for getter_material_raw; refine steps as design matures."
-assumptions: "Generates 1 kg via getter_material_raw_generation_v0 per run."
+    inputs:
+      - item_id: barium_oxide
+        qty: 1.0
+        unit: kg
+        notes: "Barium oxide base material for getter"
+    outputs:
+      - item_id: getter_material_raw
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.5
+notes: "Recipe to produce getter material from barium oxide for vacuum tube applications."
+assumptions: "Barium-based getter material for absorbing residual gases in vacuum tubes."

@@ -7,4 +7,14 @@ produces_unit: kg
 target_item_id: regolith_powder
 steps:
   - process_id: regolith_crushing_grinding_v0
+    inputs:
+      - item_id: regolith_coarse_fraction
+        qty: 1.0
+        unit: kg
+        notes: "Coarse fraction feedstock"
+    outputs:
+      - item_id: regolith_powder
+        qty: 0.95
+        unit: kg
+        notes: "Fine ground powder (~5% dust loss)"
 notes: "Local production path for regolith_powder from regolith_coarse_fraction via regolith_crushing_grinding_v0."

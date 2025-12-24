@@ -1,6 +1,19 @@
 id: recipe_hose_crimper_manual_v0
 target_item_id: hose_crimper_manual
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 3.5
+    unit: kg
+    notes: Steel for frame, jaws, and dies
+outputs:
+  - item_id: hose_crimper_manual
+    qty: 3.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 4.0

@@ -3,6 +3,20 @@ target_item_id: thermionic_converter
 variant_id: v0
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: thermionic_vacuum_tube
+        qty: 1.0
+        unit: unit
+      - item_id: converter_housing_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: vacuum_seal_assembly
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: thermionic_converter
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: Assemble ceramic tube, electrodes, insulators

@@ -1,6 +1,35 @@
 id: recipe_assembled_electrical_equipment_v0
 target_item_id: assembled_electrical_equipment
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 5.0
+    unit: kg
+    notes: "Enclosure and mounting panels"
+  - item_id: electronic_components_set
+    qty: 4.0
+    unit: kg
+    notes: "Power electronics, controls, relays, contactors"
+  - item_id: electrical_wire_and_connectors
+    qty: 3.0
+    unit: kg
+    notes: "Wiring, terminal blocks, and connectors"
+  - item_id: fastener_kit_medium
+    qty: 1.5
+    unit: kg
+    notes: "Assembly hardware"
+  - item_id: cooling_fan_assembly
+    qty: 1.0
+    unit: kg
+    notes: "Cooling fans for thermal management"
+outputs:
+  - item_id: assembled_electrical_equipment
+    qty: 15.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
+    notes: "Fabrication waste"
 steps:
   - process_id: assembly_basic_v0
     est_time_hr: 6.0

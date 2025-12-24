@@ -1,12 +1,29 @@
 id: recipe_molding_press_platen_set_v0
 target_item_id: molding_press_platen_set
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 45.0
+    unit: kg
+    notes: Heavy steel plate for upper and lower platens
+  - item_id: fastener_kit_large
+    qty: 0.5
+    unit: kg
+    notes: Alignment pins and mounting hardware
+outputs:
+  - item_id: molding_press_platen_set
+    qty: 40.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 5.5
+    unit: kg
+    notes: Machining and grinding waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
-    notes: "Machine upper and lower platens, mount ing holes, and alignment features"
+    notes: "Machine upper and lower platens, mounting holes, and alignment features"
   - process_id: precision_grinding_basic_v0
     est_time_hr: 4.0
     machine_hours: 4.0

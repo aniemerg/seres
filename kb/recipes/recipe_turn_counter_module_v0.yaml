@@ -1,16 +1,40 @@
 id: recipe_turn_counter_module_v0
+kind: recipe
 target_item_id: turn_counter_module
 variant_id: v0
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: bare_pcb
+        qty: 0.1
+        unit: kg
+        notes: "PCB for counter circuit"
+      - item_id: electronic_components_set
+        qty: 0.1
+        unit: kg
+        notes: "Counter IC, display driver, passive components"
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Assemble circuit board with counter IC, display driver"
   - process_id: sensor_integration_v0
+    inputs:
+      - item_id: sensor_suite_general
+        qty: 0.1
+        unit: kg
+        notes: "Encoder sensor for rotation counting"
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install encoder sensor or optical pickup"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: enclosure_small
+        qty: 0.2
+        unit: kg
+        notes: "Metal enclosure for module"
+    outputs:
+      - item_id: turn_counter_module
+        qty: 0.5
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Mount in enclosure, wire display, test functionality"

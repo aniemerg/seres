@@ -1,0 +1,19 @@
+id: recipe_workpiece_fixture_set_v0
+kind: recipe
+target_item_id: workpiece_fixture_set
+variant_id: v0
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: workpiece_fixture_set
+        qty: 1.0
+        unit: unit
+    notes: "Assemble clamps and fixture plates for workholding"
+notes: "Basic workpiece fixture set for holding parts during machining."

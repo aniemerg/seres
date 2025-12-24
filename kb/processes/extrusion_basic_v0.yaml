@@ -1,0 +1,20 @@
+id: extrusion_basic_v0
+kind: process
+name: Extrusion (basic)
+layer_tags:
+  - layer_6
+inputs: []
+outputs: []
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 1.0
+  notes: "Extruder motor and heaters"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.3
+  notes: "Extrusion throughput"
+notes: "Basic extrusion process for polymer or soft metal tubing; placeholder parameters."

@@ -1,8 +1,14 @@
 id: recipe_spinneret_block_basic_v0
+kind: recipe
 target_item_id: spinneret_block_basic
 variant_id: v0
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 12.0
+        unit: kg
+        notes: "Steel stock for spinneret block"
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine spinneret block body, drill or EDM fine holes for fiber drawing"
@@ -15,6 +21,10 @@ steps:
     machine_hours: 2.0
     notes: "Grind hole exit surfaces for smooth fiber formation"
   - process_id: inspection_basic_v0
+    outputs:
+      - item_id: spinneret_block_basic
+        qty: 10.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Inspect hole dimensions and surface finish"

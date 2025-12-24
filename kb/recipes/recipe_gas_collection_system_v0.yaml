@@ -2,8 +2,42 @@ id: recipe_gas_collection_system_v0
 kind: recipe
 target_item_id: gas_collection_system
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 30.0
+    unit: kg
+  - item_id: piping_components
+    qty: 5.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: gas_collection_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 30.0
+        unit: kg
+      - item_id: piping_components
+        qty: 5.0
+        unit: kg
+      - item_id: fittings_and_valves
+        qty: 2.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: gas_collection_system
+        qty: 1.0
+        unit: unit
     notes: "Assemble gas collection system from chambers, demisters, and piping"
 notes: |
   Recipe for gas collection system.

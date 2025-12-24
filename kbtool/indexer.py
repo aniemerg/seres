@@ -661,10 +661,14 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
             item_match = re.search(r"Item '([^']+)'", error)
             recipe_match = re.search(r"Recipe '([^']+)'", error)
             process_match = re.search(r"Process '([^']+)'", error)
+            bom_match = re.search(r"BOM '([^']+)'", error)
+            machine_match = re.search(r"Machine '([^']+)'", error)
 
             item_id = item_match.group(1) if item_match else None
             recipe_id = recipe_match.group(1) if recipe_match else None
             process_id = process_match.group(1) if process_match else None
+            bom_id = bom_match.group(1) if bom_match else None
+            machine_id_from_error = machine_match.group(1) if machine_match else None
 
             # Determine gap type from error message
             gap_type = "closure_error"
@@ -693,11 +697,11 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
                 continue
 
             # Create unique signature for deduplication
-            signature = f"{gap_type}:{item_id or recipe_id or process_id or error[:50]}"
+            signature = f"{gap_type}:{item_id or recipe_id or process_id or bom_id or machine_id_from_error or error[:50]}"
 
             if signature not in error_map:
                 # Determine the primary ID for the queue item
-                primary_id = item_id or recipe_id or process_id or "unknown"
+                primary_id = item_id or recipe_id or process_id or bom_id or machine_id_from_error or "unknown"
 
                 error_map[signature] = {
                     "id": f"closure:{gap_type}:{primary_id}",
@@ -711,6 +715,8 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
                         "item_id": item_id,
                         "recipe_id": recipe_id,
                         "process_id": process_id,
+                        "bom_id": bom_id,
+                        "machine_id": machine_id_from_error,
                     }
                 }
 
@@ -955,6 +961,17 @@ def _update_work_queue(
                         prev.pop("lease_expires_at", None)
                     obj = {**obj, **prev}
             merged.append(obj)
+
+        # Preserve leased items that are no longer in gap_items (they were resolved)
+        # This allows agents to successfully complete items they fixed
+        merged_ids = {obj["id"] for obj in merged}
+        for eid, prev in existing.items():
+            if eid not in merged_ids and prev.get("status") == "leased":
+                # Gap was resolved while leased - mark as resolved so agent can complete it
+                if prev.get("lease_expires_at", 0) >= now:
+                    # Only preserve if lease is still valid
+                    prev["status"] = "resolved"
+                    merged.append(prev)
 
         WORK_QUEUE.parent.mkdir(parents=True, exist_ok=True)
         with WORK_QUEUE.open("w", encoding="utf-8") as wf:

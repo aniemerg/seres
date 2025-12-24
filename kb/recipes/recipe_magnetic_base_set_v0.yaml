@@ -1,6 +1,31 @@
 id: recipe_magnetic_base_set_v0
 target_item_id: magnetic_base_set
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 0.8
+    unit: kg
+    notes: Steel base body and arm components
+  - item_id: permanent_magnet_neodymium
+    qty: 0.3
+    unit: kg
+    notes: Strong magnets for base hold
+  - item_id: spring_compression_small
+    qty: 2
+    unit: unit
+    notes: Articulation locking springs
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+    notes: Assembly hardware and pivots
+outputs:
+  - item_id: magnetic_base_set
+    qty: 1.5
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.2
+    unit: kg
+    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 2.0

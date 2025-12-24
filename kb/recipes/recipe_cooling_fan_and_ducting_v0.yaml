@@ -11,7 +11,20 @@ steps:
     est_time_hr: 0.4
     labor_hours: 0.4
     machine_hours: 0.2
+    inputs:
+      - item_id: cooling_fan_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: sheet_metal_or_structural_steel
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cooling_fan_and_ducting
+        qty: 1.0
+        unit: unit
     notes: Install fan, route ducting, and secure mounts/fasteners.
 assumptions: Fan and motor imported initially; ducts/brackets made from sheet metal or plastic stock. Refine with specific airflow and power requirements later.
 notes: Basic fabrication and assembly path for an enclosure cooling kit.
-

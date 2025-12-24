@@ -1,14 +1,27 @@
 id: recipe_mos2_precursor_v0_v0
 kind: recipe
-name: MoS2 precursor synthesis recipe
-produces_id: mos2_precursor_v0
-produces_qty: 1.0
-produces_unit: kg
 target_item_id: mos2_precursor_v0
 variant_id: v0
 steps:
-- process_id: mos2_precursor_synthesis_v0
-assumptions: "Seed MoS2 precursor production route; placeholder values."
-notes: |-
-  This is a seed recipe for MoS2 precursor production. The precursor (mos2_precursor_v0)
-  is produced by mos2_precursor_synthesis_v0. Details of the chemistry can be refined later.
+  - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: stock_material
+        qty: 1.0
+        unit: kg
+        notes: "Imported MoS2 precursor stock"
+    outputs:
+      - item_id: mos2_precursor_v0
+        qty: 1.0
+        unit: kg
+    notes: "Receive and stage imported MoS2 precursor"
+notes: |
+  Placeholder recipe for MoS2 (molybdenum disulfide) precursor.
+
+  MoS2 synthesis requires:
+  - Molybdenum compounds (molybdic acid, ammonium molybdate)
+  - Sulfur compounds (H2S gas, thiourea)
+  - High-temperature sulfurization (500-900°C)
+  - Controlled atmosphere processing
+
+  Complex chemical synthesis with rare materials.
+assumptions: "MoS2 precursor for solid lubricant production. Requires specialized chemistry and rare materials."

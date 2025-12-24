@@ -1,0 +1,34 @@
+id: gas_scrubbing_unit_frame_v0
+kind: process
+name: Gas scrubbing unit frame fabrication v0
+layer_tags:
+  - layer_6
+inputs:
+  - item_id: steel_stock
+    qty: 22.0
+    unit: kg
+outputs:
+  - item_id: gas_scrubbing_unit_frame_v0
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: steel_scrap_v0
+    qty: 2.0
+    unit: kg
+requires_ids:
+  - welding_power_supply_v0
+  - welding_tools_set
+  - cutting_tools_general
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: fixed_kWh
+  value: 5.0
+  notes: "Cutting, fit-up, and welding energy for a 20 kg frame."
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+  notes: "Cut, tack, weld, and clean a single frame."
+notes: "Fabricate a welded steel frame for the gas scrubbing unit from steel stock with basic cutting and welding."

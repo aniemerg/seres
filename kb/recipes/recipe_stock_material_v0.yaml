@@ -3,6 +3,14 @@ target_item_id: stock_material
 variant_id: v0
 steps:
   - process_id: stock_material_source_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: stock_material
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.0
     notes: "Stock material source for placeholder stock_material"
 assumptions: Stock material is a generic placeholder that should be replaced with specific material types (steel_bar, aluminum_plate, ceramic_rod, etc.) in actual recipes. This generic definition allows recipe development before all material types are fully defined.

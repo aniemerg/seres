@@ -6,6 +6,19 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: tool_steel_high_carbon_v0
 variant_id: v0
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 1.8
+    unit: kg
+    notes: Iron ore for smelting
+  - item_id: carbon_reducing_agent
+    qty: 0.3
+    unit: kg
+    notes: Carbon for reduction and alloying
+outputs:
+  - item_id: tool_steel_high_carbon_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: iron_smelting_reduction_v0
   - process_id: steel_refining_basic_v0

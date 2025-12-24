@@ -2,6 +2,27 @@ id: recipe_heat_exchanger_tube_shell_v0
 kind: recipe
 target_item_id: heat_exchanger_tube_shell
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 15.0
+    unit: kg
+    notes: Stainless steel tubes for heat transfer
+  - item_id: steel_plate_or_sheet
+    qty: 12.0
+    unit: kg
+    notes: Shell, tube sheets, and baffles
+  - item_id: welding_rod_steel
+    qty: 2.0
+    unit: kg
+    notes: Welding/brazing joints
+  - item_id: gasket_sheet_material_v0
+    qty: 0.5
+    unit: kg
+    notes: Sealing gaskets
+outputs:
+  - item_id: heat_exchanger_tube_shell
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     notes: "Assemble heat exchanger from tubes, shell, tube sheets, and baffles"

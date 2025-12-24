@@ -2,6 +2,42 @@ id: recipe_seal_mechanical_rotary_v0
 kind: recipe
 target_item_id: seal_mechanical_rotary
 variant_id: v0
+inputs:
+  - item_id: silicon_carbide_ceramic_v0
+    qty: 0.08
+    unit: kg
+    notes: Hard face seal material (stationary face)
+  - item_id: graphite_block_material_v0
+    qty: 0.05
+    unit: kg
+    notes: Rotating seal face material (machined from graphite block)
+  - item_id: seal_o_ring_rubber
+    qty: 0.03
+    unit: kg
+    notes: Secondary sealing elements
+  - item_id: spring_compression_small
+    qty: 1
+    unit: unit
+    notes: Spring loading for seal contact
+  - item_id: steel_plate_or_sheet
+    qty: 0.04
+    unit: kg
+    notes: Seal housing and mounting hardware
+outputs:
+  - item_id: seal_mechanical_rotary
+    qty: 0.2
+    unit: kg
 steps:
-  - process_id: sealing_and_assembly_basic_v0
-notes: "Manufacture mechanical rotary seal using standard sealing/assembly steps."
+  - process_id: machining_finish_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Machine seal faces to precision flatness
+  - process_id: assembly_basic_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Assemble seal faces, o-rings, springs, and housing
+  - process_id: leak_test_v0
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Test seal for leakage under pressure
+notes: "Mechanical rotary seal for pumps and rotating equipment. Silicon carbide/carbon face seal with spring loading and secondary o-ring seals."

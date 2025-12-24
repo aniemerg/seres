@@ -1,0 +1,31 @@
+id: recipe_harmonic_drive_reducer_medium_v0
+kind: recipe
+target_item_id: harmonic_drive_reducer_medium
+variant_id: v0
+steps:
+  - process_id: import_receiving_basic_v0
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Receive and inspect imported harmonic drive reducers"
+    inputs:
+      - item_id: stock_material
+        qty: 2.0
+        unit: kg
+        notes: "Imported harmonic drive reducer stock"
+    outputs:
+      - item_id: harmonic_drive_reducer_medium
+        qty: 1
+        unit: unit
+notes: |
+  Import recipe for harmonic drive gear reducer.
+
+  Harmonic drives require:
+  - High-precision gear tooth machining (micron tolerances)
+  - Thin-walled flexspline fabrication
+  - Heat treatment for hardness and dimensional stability
+  - Advanced metrology for tooth accuracy verification
+
+  Initially imported. Lunar manufacturing possible with precision grinding
+  and heat treatment capability.
+
+  Design reference: docs/labor_bot_design_memo.md section 3.2.2.

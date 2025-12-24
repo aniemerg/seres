@@ -4,6 +4,23 @@ name: Recipe for power management control unit (v0)
 target_item_id: power_management_control_unit
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.3
+        unit: kg
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: power_management_control_unit
+        qty: 1.0
+        unit: unit
     notes: "PCB assembly for power management control unit"
   - process_id: electrical_assembly_basic_v0
     notes: "Electrical assembly and wiring for power management control unit"

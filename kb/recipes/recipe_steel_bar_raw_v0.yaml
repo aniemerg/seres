@@ -2,6 +2,22 @@ id: recipe_steel_bar_raw_v0
 kind: recipe
 target_item_id: steel_bar_raw
 variant_id: v0
+inputs:
+  - item_id: steel_billet_or_slab
+    qty: 1.05
+    unit: kg
+    notes: Steel billet for rolling
+outputs:
+  - item_id: steel_bar_raw
+    qty: 1.0
+    unit: kg
+  - item_id: steel_scrap
+    qty: 0.05
+    unit: kg
+    notes: Rolling scale and trim losses
 steps:
-  - process_id: steel_bar_raw_production_v0
-notes: "Import-style recipe to provide local manufacturing path for steel_bar_raw; placeholder until full chain is defined."
+  - process_id: rolling_basic_v0
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Hot or cold roll steel billet into bar stock
+notes: "Steel bar raw production via rolling mill. Converts steel billet/slab into bar stock for machining."

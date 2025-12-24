@@ -3,6 +3,32 @@ target_item_id: coating_spray_gun_and_pump
 variant_id: assembled_v0
 steps:
   - process_id: assembly_basic_v0
-    notes: Assemble spray gun body, pump, and fittings.
+    inputs:
+      - item_id: raw_metal_block
+        qty: 8.0
+        unit: kg
+      - item_id: compressor_pump_small
+        qty: 1.0
+        unit: unit
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
+      - item_id: applicator_nozzle
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_hose_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: fittings_and_valves
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: coating_spray_gun_and_pump
+        qty: 1.0
+        unit: unit
+    notes: Assemble spray gun body, pump, motor, hose, and fittings.
 assumptions: "Uses available pump housing/nozzle components; refine with dedicated machining later."
 notes: Local assembly route replacing import placeholder for coating spray gun and pump.

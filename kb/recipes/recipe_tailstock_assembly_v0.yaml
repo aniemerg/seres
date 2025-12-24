@@ -4,4 +4,22 @@ target_item_id: tailstock_assembly
 variant_id: v0
 steps:
   - process_id: tailstock_assembly_basic_v0
-notes: "Placeholder recipe to manufacture tailstock_assembly; refine with detailed BOM and processes later."
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 5.0
+        unit: kg
+        notes: "Steel housing and barrel for tailstock"
+      - item_id: ball_bearing_steel_v0
+        qty: 2.0
+        unit: unit
+        notes: "Bearings for spindle support"
+      - item_id: fastener_kit_medium
+        qty: 0.5
+        unit: kg
+        notes: "Bolts and adjustment hardware"
+    outputs:
+      - item_id: tailstock_assembly
+        qty: 1.0
+        unit: unit
+    est_time_hr: 3.0
+notes: "Assemble tailstock from steel housing, bearings, and adjustment hardware for lathe/grinder workpiece support."
