@@ -2,11 +2,30 @@ id: recipe_rectifier_bridge_heavy_duty_v0
 kind: recipe
 target_item_id: rectifier_bridge_heavy_duty
 name: Recipe for rectifier_bridge_heavy_duty v0
-produces_id: rectifier_bridge_heavy_duty
-produces_qty: 1.0
-produces_unit: unit
 variant_id: assembled_module_v0
 steps:
-- process_id: assembly_basic_v0
-notes: "Local assembly path for heavy-duty rectifier bridge; uses diode packs and heat sinks from BOM components."
-assumptions: "Uses diode components and heat sinks from existing parts sets; simple assembly."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 0.4
+        unit: kg
+        notes: "Diodes and other electronic components for bridge rectifier"
+      - item_id: heat_sink
+        qty: 3
+        unit: unit
+        notes: "Heavy-duty heat dissipation (3 × 0.15 kg = 0.45 kg)"
+      - item_id: bus_bar_copper
+        qty: 0.3
+        unit: kg
+        notes: "Heavy-duty electrical connections"
+      - item_id: fastener_kit_medium
+        qty: 0.1
+        unit: kg
+        notes: "Mounting hardware"
+    outputs:
+      - item_id: rectifier_bridge_heavy_duty
+        qty: 1
+        unit: unit
+    notes: "Assemble diode bridge onto heat sinks with heavy-duty terminals"
+notes: "Local assembly path for heavy-duty rectifier bridge; uses diode components, heat sinks, and copper bus bars."
+assumptions: "Uses components from existing parts; total input mass ~1.25 kg yields 2.0 kg finished unit including potting compound and enclosure."

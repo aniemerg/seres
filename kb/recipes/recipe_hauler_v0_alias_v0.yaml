@@ -1,6 +1,6 @@
 id: recipe_hauler_v0_alias_v0
 kind: recipe
-produces_id: hauler_v0
+produces_id: hauler
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: hauler
@@ -18,5 +18,40 @@ steps:
   - process_id: electrical_wiring_and_controls_v0
     notes: "Electrical integration for controls"
   - process_id: machine_assembly_basic_v0
-    notes: "Final assembly and integration into hauler_v0"
-notes: "Alias recipe to close no_recipe gap for hauler; uses same steps as hauler_v0 recipe."
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+      - item_id: motor_electric_medium
+        qty: 2.0
+        unit: unit
+      - item_id: drive_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: battery_pack_large
+        qty: 1.0
+        unit: unit
+      - item_id: cargo_platform_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: wheel_set_industrial
+        qty: 4.0
+        unit: unit
+      - item_id: hydraulic_cylinder_medium
+        qty: 2.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: hauler
+        qty: 1.0
+        unit: unit
+    notes: "Final assembly and integration into hauler"
+notes: "Alias recipe to close no_recipe gap for hauler; uses bom_hauler_v0 components and the hauler_v0 assembly flow."

@@ -1,12 +1,28 @@
 id: recipe_gear_set_medium_v0
+kind: recipe
 target_item_id: gear_set_medium
 variant_id: v0
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
   - process_id: gear_cutting_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-assumptions: Cast gear blanks then cut/finish teeth; heat treatment not modeled.
-notes: Coarse route; add heat treatment and detailed finishing later.
+    inputs:
+      - item_id: steel_bar_raw
+        qty: 65.0
+        unit: kg
+        notes: "Steel stock for gear blanks; ~8% machining loss"
+    outputs:
+      - item_id: gear_set_medium
+        qty: 60.0
+        unit: kg
+        notes: "Medium gear set after cutting and finishing"
+    notes: "Machine gear blanks from steel bar stock and cut gear teeth"
+notes: |
+  Production of medium gear set from steel bar stock.
+
+  Process:
+  1. Cut gear blanks from steel bar stock (lathe/mill)
+  2. Cut gear teeth (gear hobbing or milling)
+  3. Heat treat for hardness (optional, depends on application)
+  4. Finish and inspect
+
+  Mass: ~60 kg finished gears from 65 kg steel stock (8% machining loss)
+assumptions: "Generic medium-sized gear set; gear cutting covers blank machining and tooth cutting; heat treatment optional"

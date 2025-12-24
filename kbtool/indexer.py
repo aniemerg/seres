@@ -519,7 +519,10 @@ def build_index() -> Dict[str, dict]:
     missing_recipe_items = _analyze_recipe_items(kb_files, entries, warnings)
 
     # Validate that recipes have inputs defined
-    recipes_no_inputs = _validate_recipe_inputs(kb_files, warnings)
+    # DISABLED 2025-12-24: Validation moved to closure analyzer which properly
+    # checks recipe-level inputs, step-level inputs, AND process-level inputs.
+    # See ADR-006 addendum for details.
+    recipes_no_inputs = []  # _validate_recipe_inputs(kb_files, warnings)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with (OUT_DIR / "index.json").open("w", encoding="utf-8") as f:
@@ -561,15 +564,20 @@ def build_index() -> Dict[str, dict]:
         for rni in recipes_no_inputs:
             f.write(json.dumps(rni) + "\n")
 
-    # Load KB for circular dependency detection
+    # Load KB for circular dependency detection and closure analysis
     kb_loader = KBLoader(KB_ROOT)
     kb_loader.load_all()
+
+    # Collect closure analysis errors from all machines
+    print("Running closure analysis on all machines...")
+    closure_errors = _collect_closure_errors(entries, kb_loader)
+    print(f"Found {len(closure_errors)} unique closure errors")
 
     filter_stats = _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
         missing_recipe_items, recipes_no_inputs, seed_references, item_metadata,
-        entries, kb_loader
+        entries, kb_loader, closure_errors
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
@@ -622,6 +630,104 @@ def _detect_circular_dependencies(entries: Dict[str, dict], kb_loader) -> List[d
     return queue_items
 
 
+def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
+    """
+    Run closure analysis on all machines and collect errors as queue items.
+
+    Args:
+        entries: Index entries dict (item_id -> entry data)
+        kb_loader: KBLoader instance for closure analysis
+
+    Returns:
+        List of unique queue items from closure analysis errors
+    """
+    from .closure_analysis import ClosureAnalyzer
+    import re
+
+    analyzer = ClosureAnalyzer(kb_loader)
+    error_map = {}  # Deduplicate by error signature
+
+    # Get all machine IDs
+    machine_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'machine']
+
+    for machine_id in machine_ids:
+        result = analyzer.analyze_machine(machine_id)
+
+        for error in result.get('errors', []):
+            # Parse error to extract item_id, recipe_id, process_id
+            # Create a signature for deduplication
+
+            # Patterns to extract IDs from error messages
+            item_match = re.search(r"Item '([^']+)'", error)
+            recipe_match = re.search(r"Recipe '([^']+)'", error)
+            process_match = re.search(r"Process '([^']+)'", error)
+
+            item_id = item_match.group(1) if item_match else None
+            recipe_id = recipe_match.group(1) if recipe_match else None
+            process_id = process_match.group(1) if process_match else None
+
+            # Determine gap type from error message
+            gap_type = "closure_error"
+            reason = "closure_error"
+
+            if "not found in KB" in error:
+                gap_type = "item_not_found"
+                reason = "item_not_found"
+            elif "has no recipe and is not a raw material" in error:
+                gap_type = "no_recipe"
+                reason = "no_recipe_not_raw"
+            elif "Recipe" in error and "not found" in error:
+                gap_type = "recipe_not_found"
+                reason = "recipe_not_found"
+            elif "Process" in error and "not found" in error:
+                gap_type = "process_not_found"
+                reason = "process_not_found"
+            elif "null/zero quantity" in error:
+                gap_type = "null_quantity"
+                reason = "null_quantity"
+            elif "has no inputs" in error:
+                gap_type = "recipe_no_inputs"
+                reason = "recipe_no_inputs"
+            elif "Bootstrap import (circular)" in error:
+                # Skip circular import errors - already handled by circular dependency detection
+                continue
+
+            # Create unique signature for deduplication
+            signature = f"{gap_type}:{item_id or recipe_id or process_id or error[:50]}"
+
+            if signature not in error_map:
+                # Determine the primary ID for the queue item
+                primary_id = item_id or recipe_id or process_id or "unknown"
+
+                error_map[signature] = {
+                    "id": f"closure:{gap_type}:{primary_id}",
+                    "kind": "gap",
+                    "reason": reason,
+                    "gap_type": gap_type,
+                    "item_id": primary_id,
+                    "context": {
+                        "error_message": error,
+                        "detected_in_machine": machine_id,
+                        "item_id": item_id,
+                        "recipe_id": recipe_id,
+                        "process_id": process_id,
+                    }
+                }
+
+    # Write to output file
+    closure_errors_path = OUT_DIR / "closure_errors.jsonl"
+    queue_items = list(error_map.values())
+    try:
+        with closure_errors_path.open("w", encoding="utf-8") as f:
+            for item in queue_items:
+                f.write(json.dumps(item) + "\n")
+    except Exception:
+        # Best-effort; do not crash indexing if this fails
+        pass
+
+    return queue_items
+
+
 def _update_work_queue(
     unresolved_refs: List[dict],
     referenced_only: Set[str],
@@ -636,6 +742,7 @@ def _update_work_queue(
     item_metadata: Dict[str, dict],
     entries: Dict[str, dict],
     kb_loader,
+    closure_errors: List[dict] = None,
 ) -> Dict[str, int]:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -660,6 +767,10 @@ def _update_work_queue(
     # Detect circular dependencies
     circular_dependencies = _detect_circular_dependencies(entries, kb_loader)
     gap_items.extend(circular_dependencies)
+
+    # Add closure analysis errors
+    if closure_errors:
+        gap_items.extend(closure_errors)
 
     # Unresolved text references
     for ref in unresolved_refs:

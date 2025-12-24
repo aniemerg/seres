@@ -1,0 +1,28 @@
+id: recipe_magnesium_powder_v0
+kind: recipe
+target_item_id: magnesium_powder_v0
+variant_id: v0
+steps:
+  - process_id: ball_milling_v0
+    inputs:
+      - item_id: magnesium_metal_v0
+        qty: 1.0
+        unit: kg
+        notes: "Coarse magnesium chips or turnings from machining"
+    outputs:
+      - item_id: magnesium_powder_v0
+        qty: 0.98
+        unit: kg
+      - item_id: dust_fines_v0
+        qty: 0.02
+        unit: kg
+    notes: "Grind magnesium metal turnings into fine powder via ball milling"
+notes: |
+  Production of magnesium powder from magnesium metal via ball milling.
+
+  Process: Magnesium metal chips, turnings, or coarse granules are ground in a ball mill
+  to produce fine powder suitable for metallurgical reduction processes.
+
+  Safety note: Magnesium powder is flammable - milling must be done under inert atmosphere
+  or with cooling to prevent ignition.
+assumptions: "Ball milling under controlled conditions to prevent ignition; 2% dust loss"

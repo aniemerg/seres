@@ -1,6 +1,9 @@
 id: recipe_alumina_powder_v0
 kind: recipe
 target_item_id: alumina_powder
+variant_id: v0
 steps:
-  - process_id: alumina_powder_production_v0
-notes: "Converted to dict-form step to satisfy invalid_recipe_schema gap; placeholder production path kept, refine steps as design matures"
+  - process_id: alumina_extraction_from_highlands_v0
+    est_time_hr: 10.0
+    notes: "Extract alumina from highland regolith using HCl leaching"
+notes: "Alumina extraction from lunar highland regolith. Produces 12 kg alumina per 100 kg regolith input."

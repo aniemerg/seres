@@ -1,6 +1,16 @@
 id: recipe_coded_data_stream_v0
 kind: recipe
 target_item_id: coded_data_stream
+variant_id: v0
 steps:
   - process_id: error_correction_coding_v0
+    inputs:
+      - item_id: uncoded_data_stream
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: coded_data_stream
+        qty: 1.0
+        unit: unit
+    notes: "Apply error correction coding to data stream"
 notes: "Updated to modern step-format to satisfy invalid_recipe_schema; uses error_correction_coding_v0 to produce coded_data_stream from uncoded_data_stream"

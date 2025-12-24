@@ -230,60 +230,107 @@ class ClosureAnalyzer:
             return
 
         # Expand recipe inputs
+        # Priority order:
+        # 1. Recipe-level inputs (explicit material flow)
+        # 2. Step-level inputs (legacy/rare)
+        # 3. Process-level inputs (derived from processes)
+
         has_inputs = False
-        for step in recipe.get('steps', []):
-            # Check for step-level inputs (direct inputs in the step)
-            step_inputs = step.get('inputs', [])
-            if step_inputs:
-                for inp in step_inputs:
-                    has_inputs = True
-                    input_id = inp.get('item_id')
-                    input_qty = inp.get('qty', 0)
-                    input_unit = inp.get('unit', 'kg')
+        null_qty_found = False
 
-                    if input_qty is None or input_qty == 0:
-                        # Quantity not specified - can't expand properly
-                        continue
+        # FIRST: Check for recipe-level inputs (added 2025-12-24)
+        recipe_inputs = recipe.get('inputs', [])
+        if recipe_inputs:
+            for inp in recipe_inputs:
+                has_inputs = True
+                input_id = inp.get('item_id')
+                input_qty = inp.get('qty', 0)
+                input_unit = inp.get('unit', 'kg')
 
-                    # Scale by how much output we need
-                    # This assumes 1:1 ratio - in reality we'd need to look at outputs
-                    scaled_qty = input_qty * qty
+                if input_qty is None or input_qty == 0:
+                    # Null quantity at recipe level - FLAG THIS
+                    null_qty_found = True
+                    errors.append(f"Recipe '{recipe_id}' input '{input_id}' has null/zero quantity")
+                    continue
 
-                    # Recursively expand (results go directly into the dicts)
-                    self._expand_item(input_id, scaled_qty, input_unit,
-                                    raw_materials, imported_items, unresolved_items, errors,
-                                    expansion_path)
+                # Scale by how much output we need
+                # Use recipe outputs to determine scaling if available
+                recipe_outputs = recipe.get('outputs', [])
+                scale_factor = qty
+                if recipe_outputs:
+                    for out in recipe_outputs:
+                        if out.get('item_id') == item_id:
+                            output_qty = out.get('qty', 1)
+                            if output_qty and output_qty > 0:
+                                scale_factor = qty / output_qty
+                            break
 
-            # Check for process_id reference (inputs defined in the process)
-            process_id = step.get('process_id')
-            if process_id:
-                process = self.kb.get_process(process_id)
-                if process:
-                    # Get inputs from the process
-                    process_inputs = process.get('inputs', [])
-                    for inp in process_inputs:
+                scaled_qty = input_qty * scale_factor
+
+                # Recursively expand (results go directly into the dicts)
+                self._expand_item(input_id, scaled_qty, input_unit,
+                                raw_materials, imported_items, unresolved_items, errors,
+                                expansion_path)
+
+        # SECOND: Check step-level and process-level inputs
+        # (only if no recipe-level inputs were found)
+        if not recipe_inputs:
+            for step in recipe.get('steps', []):
+                # Check for step-level inputs (direct inputs in the step)
+                step_inputs = step.get('inputs', [])
+                if step_inputs:
+                    for inp in step_inputs:
                         has_inputs = True
                         input_id = inp.get('item_id')
                         input_qty = inp.get('qty', 0)
                         input_unit = inp.get('unit', 'kg')
 
                         if input_qty is None or input_qty == 0:
-                            # Quantity not specified - can't expand properly
-                            # Still mark that we found inputs though
+                            # Null quantity at step level - FLAG THIS
+                            null_qty_found = True
+                            errors.append(f"Recipe '{recipe_id}' step input '{input_id}' has null/zero quantity")
                             continue
 
                         # Scale by how much output we need
-                        # This is a simplification - ideally we'd look at process outputs
-                        # and calculate the scaling factor based on actual yield
+                        # This assumes 1:1 ratio - in reality we'd need to look at outputs
                         scaled_qty = input_qty * qty
 
                         # Recursively expand (results go directly into the dicts)
                         self._expand_item(input_id, scaled_qty, input_unit,
                                         raw_materials, imported_items, unresolved_items, errors,
                                         expansion_path)
-                else:
-                    # Process referenced but not found
-                    errors.append(f"Process '{process_id}' referenced in recipe '{recipe_id}' not found")
+
+                # Check for process_id reference (inputs defined in the process)
+                process_id = step.get('process_id')
+                if process_id:
+                    process = self.kb.get_process(process_id)
+                    if process:
+                        # Get inputs from the process
+                        process_inputs = process.get('inputs', [])
+                        for inp in process_inputs:
+                            has_inputs = True
+                            input_id = inp.get('item_id')
+                            input_qty = inp.get('qty', 0)
+                            input_unit = inp.get('unit', 'kg')
+
+                            if input_qty is None or input_qty == 0:
+                                # Null quantity in process - FLAG THIS
+                                null_qty_found = True
+                                errors.append(f"Process '{process_id}' (in recipe '{recipe_id}') input '{input_id}' has null/zero quantity")
+                                continue
+
+                            # Scale by how much output we need
+                            # This is a simplification - ideally we'd look at process outputs
+                            # and calculate the scaling factor based on actual yield
+                            scaled_qty = input_qty * qty
+
+                            # Recursively expand (results go directly into the dicts)
+                            self._expand_item(input_id, scaled_qty, input_unit,
+                                            raw_materials, imported_items, unresolved_items, errors,
+                                            expansion_path)
+                    else:
+                        # Process referenced but not found
+                        errors.append(f"Process '{process_id}' referenced in recipe '{recipe_id}' not found")
 
         if not has_inputs:
             # Recipe exists but has no inputs - check if it's a raw material extraction

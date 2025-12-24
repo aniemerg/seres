@@ -1,8 +1,24 @@
 id: recipe_tip_holder_and_stand_v0
 target_item_id: tip_holder_and_stand
 variant_id: v0
+inputs:
+  - item_id: metal_sheet
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: tip_holder_and_stand
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: metal_sheet
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: tip_holder_and_stand
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Fabricate stand base and holder bracket from sheet metal"

@@ -595,3 +595,69 @@ kbtool analyze-closure --seed battery_system_nife_v0
 5. **Iterate KB** - Improve closure percentage over time
 
 **Target**: Achieve 90%+ closure (partial) for v1.0 release.
+
+---
+
+## Addendum: Recipe-Level Input Support (2025-12-24)
+
+**Issue Discovered**: The initial closure analysis implementation only checked for step-level and process-level inputs, missing recipe-level inputs entirely. This caused 133 recipes with explicit recipe-level inputs to be incorrectly flagged as having no inputs.
+
+**Root Cause**: KB recipes follow three valid patterns:
+1. **Recipe-level inputs** (~133 recipes): Explicit `inputs:` and `outputs:` at recipe level
+2. **Process-derived inputs** (~1877 recipes): Material flow comes from referenced processes
+3. **Step-level inputs** (rare/legacy): Inputs defined on individual steps
+
+The closure analyzer only supported patterns 2 and 3, not pattern 1.
+
+**Changes Made**:
+
+1. **Updated `kbtool/closure_analysis.py:_expand_item()`** to check inputs in priority order:
+   ```python
+   # Priority order:
+   # 1. Recipe-level inputs (explicit material flow)
+   # 2. Step-level inputs (legacy/rare)
+   # 3. Process-level inputs (derived from processes)
+   ```
+
+2. **Added recipe-level input handling** with proper scaling:
+   ```python
+   recipe_inputs = recipe.get('inputs', [])
+   if recipe_inputs:
+       # Calculate scale factor from recipe outputs
+       recipe_outputs = recipe.get('outputs', [])
+       # Scale inputs based on output quantity needed
+   ```
+
+3. **Enhanced null quantity detection** to flag gaps:
+   - Recipe-level inputs with null/zero qty
+   - Step-level inputs with null/zero qty
+   - Process-level inputs with null/zero qty
+
+   These are now reported in the errors list for potential work queue generation.
+
+4. **Disabled old validation** in `kbtool/indexer.py:_validate_recipe_inputs()`:
+   - Old validation incorrectly checked for step-level inputs only
+   - Replaced with empty list (validation now happens in closure analyzer)
+   - Removes 1877 false-positive queue items
+
+**Impact**:
+
+- ✅ 133 recipes with recipe-level inputs now properly traced
+- ✅ Closure analysis can now resolve material flow for all valid recipe patterns
+- ✅ Null quantities are flagged as errors (potential work queue items)
+- ✅ Removes false-positive `recipe_no_inputs` validation
+
+**Next Steps**:
+
+1. Run closure analysis to identify actual material flow gaps
+2. Generate work queue items for null quantities that block material tracing
+3. Fill in null quantities in critical processes (83 processes affected)
+
+**Schema Implications**:
+
+Recipe `inputs:` and `outputs:` fields are **optional** per Memo A specification. Recipes can:
+- Define explicit inputs/outputs at recipe level (preferred for clarity)
+- Rely on process inputs/outputs (works for generic processes)
+- Mix both approaches (recipe inputs override process inputs)
+
+The closure analyzer now supports all three patterns correctly.
