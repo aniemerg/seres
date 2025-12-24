@@ -202,11 +202,20 @@ class ClosureAnalyzer:
         # Check if has recipe
         recipe_id = item.get('recipe')
         if not recipe_id:
-            # No recipe and not imported - assume it's a raw material
-            mass_kg = self._calculate_mass(item, qty, unit)
-            self._accumulate(raw_materials, item_id, qty, unit, mass_kg)
-            cache_entry['raw'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
-            self.expansion_cache[cache_key] = cache_entry
+            # No recipe - check if it's a raw material
+            if self._is_raw_material(item_id, item):
+                # Legitimate raw material
+                mass_kg = self._calculate_mass(item, qty, unit)
+                self._accumulate(raw_materials, item_id, qty, unit, mass_kg)
+                cache_entry['raw'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+                self.expansion_cache[cache_key] = cache_entry
+            else:
+                # No recipe and not raw - UNRESOLVED
+                mass_kg = self._calculate_mass(item, qty, unit)
+                self._accumulate(unresolved_items, item_id, qty, unit, mass_kg)
+                cache_entry['unresolved'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+                self.expansion_cache[cache_key] = cache_entry
+                errors.append(f"Item '{item_id}' has no recipe and is not a raw material")
             return
 
         # Get recipe
@@ -277,10 +286,18 @@ class ClosureAnalyzer:
                     errors.append(f"Process '{process_id}' referenced in recipe '{recipe_id}' not found")
 
         if not has_inputs:
-            # Recipe exists but has no inputs - treat as raw material
-            mass_kg = self._calculate_mass(item, qty, unit)
-            self._accumulate(raw_materials, item_id, qty, unit, mass_kg)
-            cache_entry['raw'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+            # Recipe exists but has no inputs - check if it's a raw material extraction
+            if self._is_raw_material(item_id, item):
+                # Legitimate raw material extraction recipe (mining, etc.)
+                mass_kg = self._calculate_mass(item, qty, unit)
+                self._accumulate(raw_materials, item_id, qty, unit, mass_kg)
+                cache_entry['raw'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+            else:
+                # Recipe exists but broken (no inputs) - UNRESOLVED
+                mass_kg = self._calculate_mass(item, qty, unit)
+                self._accumulate(unresolved_items, item_id, qty, unit, mass_kg)
+                cache_entry['unresolved'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+                errors.append(f"Recipe '{recipe_id}' for '{item_id}' has no inputs")
 
         self.expansion_cache[cache_key] = cache_entry
 
@@ -304,6 +321,31 @@ class ClosureAnalyzer:
         if isinstance(notes, str):
             if 'import' in notes.lower() and 'placeholder' in notes.lower():
                 return True
+
+        return False
+
+    def _is_raw_material(self, item_id: str, item: Dict) -> bool:
+        """
+        Check if an item is a true raw material.
+
+        Raw materials are:
+        1. Defined in kb/items/raw_materials/ folder, OR
+        2. Have explicit is_raw_material field, OR
+        3. Have notes containing "BASE material"
+        """
+        # Check folder location
+        defined_in = item.get('defined_in', '')
+        if 'raw_materials' in defined_in:
+            return True
+
+        # Check explicit field
+        if item.get('is_raw_material'):
+            return True
+
+        # Check notes for BASE marker
+        notes = item.get('notes', '')
+        if isinstance(notes, str) and 'BASE material' in notes:
+            return True
 
         return False
 

@@ -108,6 +108,8 @@ class KBLoader:
 
                 if data and isinstance(data, dict):
                     item_id = data.get("id", item_file.stem)
+                    # Add the file path for reference (relative to kb_root)
+                    data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
                     self.items[item_id] = data
             except Exception as e:
                 self.load_errors.append(f"Failed to load item {item_file.name}: {e}")
