@@ -8,6 +8,7 @@ and emits:
 - out/missing_recipes.jsonl (items without recipes)
 - out/missing_fields.jsonl (required fields not populated)
 - out/orphan_resources.jsonl (resource_types with no provider machine)
+- out/missing_recipe_items.jsonl (items referenced in recipe steps but not defined)
 """
 from __future__ import annotations
 
@@ -102,6 +103,19 @@ def _collect_refs(kind: str, data: dict) -> Tuple[Set[str], List[dict], List[dic
                     refs.add(str(pid))
                 else:
                     invalid.append({"reason": "missing_process_id", "step": step})
+                # Collect items from step inputs, outputs, and byproducts
+                for inp in step.get("inputs", []) or []:
+                    item_id = inp.get("item_id")
+                    if item_id:
+                        refs.add(str(item_id))
+                for out in step.get("outputs", []) or []:
+                    item_id = out.get("item_id")
+                    if item_id:
+                        refs.add(str(item_id))
+                for byp in step.get("byproducts", []) or []:
+                    item_id = byp.get("item_id")
+                    if item_id:
+                        refs.add(str(item_id))
             else:
                 invalid.append({"reason": "legacy_step_format", "step": step})
                 try:
@@ -182,6 +196,110 @@ def _load_yaml(path: Path, warnings: List[str]) -> dict:
     except Exception as exc:  # pragma: no cover
         warnings.append(f"{path}: failed to parse ({exc})")
         return {}
+
+
+def _analyze_recipe_items(kb_files: List[Path], entries: Dict[str, dict], warnings: List[str]) -> List[dict]:
+    """
+    Analyze all recipe items to find missing external inputs and intermediate parts.
+    Returns list of missing recipe items with classification and usage context.
+    """
+    if yaml is None:
+        return []
+
+    # Track item usage across all recipes
+    item_usage: Dict[str, dict] = {}  # item_id -> {as_input: [recipes], as_output: [recipes], as_target: [recipes]}
+
+    for path in kb_files:
+        data = _load_yaml(path, warnings)
+        kind = _infer_kind(path, data)
+
+        if kind != "recipe":
+            continue
+
+        recipe_id = data.get("id") or path.stem
+        target = data.get("target_item_id")
+
+        # Track target
+        if target:
+            if target not in item_usage:
+                item_usage[target] = {"as_input": [], "as_output": [], "as_target": []}
+            item_usage[target]["as_target"].append(recipe_id)
+
+        # Track step-level items
+        steps = data.get("steps", []) or []
+        for step in steps:
+            if not isinstance(step, dict):
+                continue
+
+            # Track inputs
+            for inp in step.get("inputs", []) or []:
+                item_id = inp.get("item_id")
+                if item_id:
+                    if item_id not in item_usage:
+                        item_usage[item_id] = {"as_input": [], "as_output": [], "as_target": []}
+                    if recipe_id not in item_usage[item_id]["as_input"]:
+                        item_usage[item_id]["as_input"].append(recipe_id)
+
+            # Track outputs
+            for out in step.get("outputs", []) or []:
+                item_id = out.get("item_id")
+                if item_id:
+                    if item_id not in item_usage:
+                        item_usage[item_id] = {"as_input": [], "as_output": [], "as_target": []}
+                    if recipe_id not in item_usage[item_id]["as_output"]:
+                        item_usage[item_id]["as_output"].append(recipe_id)
+
+            # Track byproducts
+            for byp in step.get("byproducts", []) or []:
+                item_id = byp.get("item_id")
+                if item_id:
+                    if item_id not in item_usage:
+                        item_usage[item_id] = {"as_input": [], "as_output": [], "as_target": []}
+                    if recipe_id not in item_usage[item_id]["as_output"]:
+                        item_usage[item_id]["as_output"].append(recipe_id)
+
+    # Classify missing items
+    missing_recipe_items: List[dict] = []
+
+    for item_id, usage in item_usage.items():
+        # Skip if item is defined in KB
+        if item_id in entries and entries[item_id].get("status") == "defined":
+            continue
+
+        as_input = usage["as_input"]
+        as_output = usage["as_output"]
+        as_target = usage["as_target"]
+
+        # Determine classification
+        is_target = len(as_target) > 0
+        is_produced = len(as_output) > 0
+        is_consumed = len(as_input) > 0
+        used_in_multiple_recipes = len(set(as_input + as_output + as_target)) > 1
+
+        # Classify
+        if is_target:
+            classification = "missing_recipe_target"
+        elif is_produced and is_consumed and used_in_multiple_recipes:
+            classification = "missing_intermediate_part"
+        elif is_produced and is_consumed and not used_in_multiple_recipes:
+            classification = "pure_intermediate"
+        elif is_consumed and not is_produced:
+            classification = "missing_recipe_input"
+        elif is_produced and not is_consumed:
+            classification = "unused_recipe_output"
+        else:
+            classification = "unknown_recipe_item"
+
+        missing_recipe_items.append({
+            "item_id": item_id,
+            "classification": classification,
+            "used_as_input_in": as_input,
+            "used_as_output_in": as_output,
+            "used_as_target_in": as_target,
+            "total_recipe_count": len(set(as_input + as_output + as_target)),
+        })
+
+    return missing_recipe_items
 
 
 def build_index() -> Dict[str, dict]:
@@ -324,6 +442,9 @@ def build_index() -> Dict[str, dict]:
                     "refs_in": entry["refs_in"],  # processes that need this resource
                 })
 
+    # Analyze recipe items to find missing inputs and intermediate parts
+    missing_recipe_items = _analyze_recipe_items(kb_files, entries, warnings)
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with (OUT_DIR / "index.json").open("w", encoding="utf-8") as f:
         json.dump({"entries": entries}, f, indent=2, sort_keys=True)
@@ -356,14 +477,18 @@ def build_index() -> Dict[str, dict]:
         for inv in invalid_recipes:
             f.write(json.dumps(inv) + "\n")
 
+    with (OUT_DIR / "missing_recipe_items.jsonl").open("w", encoding="utf-8") as f:
+        for mri in missing_recipe_items:
+            f.write(json.dumps(mri) + "\n")
+
     filter_stats = _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
-        seed_references, item_metadata
+        missing_recipe_items, seed_references, item_metadata
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
-        items_without_recipes, orphan_resources, filter_stats
+        items_without_recipes, orphan_resources, missing_recipe_items, filter_stats
     )
     return entries
 
@@ -390,6 +515,7 @@ def _update_work_queue(
     missing_fields: List[dict],
     orphan_resources: List[dict],
     invalid_recipes: List[dict],
+    missing_recipe_items: List[dict],
     seed_references: Dict[str, List[str]],
     item_metadata: Dict[str, dict],
 ) -> Dict[str, int]:
@@ -401,6 +527,8 @@ def _update_work_queue(
     - items_without_recipes: parts/materials/machines with no recipe
     - missing_fields: required fields not populated (energy_model, time_model, etc.)
     - orphan_resources: resource_types with no machine providing them
+    - invalid_recipes: legacy step schema or missing process_id
+    - missing_recipe_items: items referenced in recipe steps but not defined
     - seed_references: item_id -> list of seed file ids that reference it
     - item_metadata: item_id -> freeform metadata from seed requires_ids
 
@@ -506,6 +634,25 @@ def _update_work_queue(
             }
         )
 
+    # Missing recipe items (items referenced in recipe steps but not defined)
+    for mri in missing_recipe_items:
+        classification = mri.get("classification", "unknown")
+        gap_items.append(
+            {
+                "id": f"{classification}:{mri['item_id']}",
+                "kind": "item",  # Generic, will be determined during fix
+                "reason": classification,
+                "gap_type": classification,
+                "item_id": mri["item_id"],
+                "context": {
+                    "used_as_input_in": mri.get("used_as_input_in", []),
+                    "used_as_output_in": mri.get("used_as_output_in", []),
+                    "used_as_target_in": mri.get("used_as_target_in", []),
+                    "total_recipe_count": mri.get("total_recipe_count", 0),
+                },
+            }
+        )
+
     # Apply queue filtering based on config
     config = QueueFilterConfig.load()
     total_gaps = len(gap_items)
@@ -571,6 +718,7 @@ def _write_report(
     missing_fields: List[dict],
     items_without_recipes: List[dict],
     orphan_resources: List[dict],
+    missing_recipe_items: List[dict],
     filter_stats: Dict[str, int],
 ) -> None:
     counts: Dict[str, int] = {}
@@ -621,6 +769,31 @@ def _write_report(
             lines.append(f"- ... and {len(orphan_resources) - 10} more")
         lines.append("")
         lines.append("See `out/orphan_resources.jsonl` for details.")
+
+    if missing_recipe_items:
+        by_classification: Dict[str, List[dict]] = {}
+        for mri in missing_recipe_items:
+            classification = mri.get("classification", "unknown")
+            if classification not in by_classification:
+                by_classification[classification] = []
+            by_classification[classification].append(mri)
+
+        lines.append("")
+        lines.append("## Missing recipe items")
+        lines.append(f"Total: {len(missing_recipe_items)} items referenced in recipes but not defined")
+
+        # Show breakdown by classification
+        for classification, items in sorted(by_classification.items()):
+            lines.append("")
+            lines.append(f"### {classification} ({len(items)} items)")
+            for mri in items[:10]:
+                recipe_count = mri.get("total_recipe_count", 0)
+                lines.append(f"- {mri['item_id']} (used in {recipe_count} recipe(s))")
+            if len(items) > 10:
+                lines.append(f"- ... and {len(items) - 10} more")
+
+        lines.append("")
+        lines.append("See `out/missing_recipe_items.jsonl` for details.")
 
     if null_values:
         null_by_kind: Dict[str, int] = {}

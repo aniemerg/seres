@@ -1400,11 +1400,39 @@ The indexer identifies several gap types:
 6. **no_provider_machine** - Resource types with no machine providing them
    - Fix: Add capability to an existing machine or create a new machine
 
+7. **missing_recipe_input** - Items used as recipe inputs but not defined
+   - Context includes: `used_as_input_in` (list of recipes), `total_recipe_count`
+   - These are raw materials or parts consumed by recipes but never produced
+   - Fix: Create a material or part definition. Check if it should be:
+     - A material (raw inputs like `copper_sheet_2mm`, `brazing_alloy_copper_phosphorus`)
+     - A part (manufactured components like `copper_tube_fitting`)
+   - Research similar items first (e.g., `aluminum_sheet_2mm` as pattern for `copper_sheet_2mm`)
+
+8. **missing_intermediate_part** - Items produced and consumed across multiple recipes
+   - Context includes: `used_as_input_in`, `used_as_output_in`, `total_recipe_count`
+   - These are sub-assemblies or intermediate products shared by multiple recipes
+   - Fix: Create a part definition with appropriate `mass` and `material_class`
+   - Example: `jacket_panels_formed` (used in 3 recipes as intermediate product)
+
+9. **pure_intermediate** - Items only used within a single recipe
+   - Context includes: `used_as_input_in`, `used_as_output_in` (both list same recipe)
+   - These are internal recipe steps that don't need separate definitions
+   - Fix: Usually can be left undefined (acceptable per design). Only create if:
+     - The item represents a meaningful sub-assembly that might be reused later
+     - It helps with recipe clarity and debugging
+   - Consider: Can the recipe be simplified to eliminate this intermediate?
+
+10. **missing_recipe_target** - Recipe targets an item that doesn't exist
+    - Context includes: `used_as_target_in` (list of recipes)
+    - The recipe produces this item, but the item itself isn't defined
+    - Fix: Create the part/material/machine definition that the recipe produces
+
 The indexer outputs:
 - `out/work_queue.jsonl` - All gaps (rebuilt each run)
 - `out/validation_report.md` - Detailed validation results
 - `out/unresolved_refs.jsonl` - Unresolved references
 - `out/missing_fields.jsonl` - Missing required fields
+- `out/missing_recipe_items.jsonl` - Items referenced in recipe steps but not defined
 
 
 ---
