@@ -71,7 +71,7 @@ steps:
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Heat treat spindle shaft and chuck components for hardness (HRC 58-62) and wear resistance on critical surfaces"
-  - process_id: bearing_installation_basic_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_steel_part_precision
         qty: 26.5
@@ -81,21 +81,6 @@ steps:
         unit: kg
       - item_id: bearing_set_heavy
         qty: 4.0
-        unit: kg
-    outputs:
-      - item_id: spindle_head_basic
-        qty: 55.0
-        unit: kg
-      - item_id: steel_scrap_v0
-        qty: 0.5
-        unit: kg
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Install precision angular contact bearings (bearing_set_heavy - 4 kg, two 2kg bearings) with thermal fit or press fit; apply preload for rigidity"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: spindle_head_basic
-        qty: 55.0
         unit: kg
       - item_id: belt_and_pulley_set
         qty: 2.5
@@ -113,21 +98,12 @@ steps:
       - item_id: spindle_head_basic
         qty: 60.0
         unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble drive pulley (2.5 kg from belt_and_pulley_set), install mechanical seals (2x 0.2 kg), secure with fasteners (fastener_kit_medium 1 kg), add chuck jaws and other small components (1.1 kg), and apply lubrication"
-  - process_id: balancing_dynamic_basic_v0
-    inputs:
-      - item_id: spindle_head_basic
-        qty: 60.0
+      - item_id: steel_scrap_v0
+        qty: 0.5
         unit: kg
-    outputs:
-      - item_id: spindle_head_basic
-        qty: 60.0
-        unit: kg
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Dynamic balance spindle assembly to minimize runout and vibration at operating speeds (typically <5 µm TIR)"
+    est_time_hr: 3.5
+    labor_hours: 3.5
+    notes: "Install bearings, seals, pulley, fasteners, and chuck components; includes preload setup and dynamic balance checks."
 outputs:
   - item_id: spindle_head_basic
     qty: 1

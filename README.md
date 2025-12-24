@@ -39,6 +39,7 @@ Quick examples:
   - Lease next item: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900]`
   - Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
   - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
+  - `validate` and `queue complete --verify` run the indexer internally; run `kbtool index` separately only when you need refreshed reports.
   - GC expired leases: `queue gc`
   - Prune explicit resolved/superseded: `queue prune`
   - List counts: `queue ls`
@@ -154,4 +155,4 @@ When you fix a gap, the next indexer run automatically removes it from the queue
 3. Add `energy_model` and `time_model` to processes
 4. Create machines for orphan resource_types (or mark as consumables)
 5. Fill in null qty/amount values in processes
-6. Rerun `python -m kbtool index` after changes to refresh all outputs.
+6. Run `python -m kbtool index` after changes only if you need refreshed reports; validation already re-indexes.

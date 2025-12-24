@@ -33,6 +33,7 @@ full_instructions = f"{cached_context}\n\n---\n\n{AGENT_INSTRUCTIONS}"
 - **Contents**:
   - Goal: "Make necessary changes to resolve this gap completely"
   - Process steps (research, edit, validate, check, give up)
+  - Note: validation runs the indexer internally (same as `queue complete --verify`)
   - Output format instructions
   - Important notes
 

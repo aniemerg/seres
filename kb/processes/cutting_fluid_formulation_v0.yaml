@@ -1,0 +1,38 @@
+id: cutting_fluid_formulation_v0
+kind: process
+name: Cutting fluid formulation
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: water
+    qty: 0.85
+    unit: kg
+  - item_id: emulsifying_oil
+    qty: 0.10
+    unit: kg
+  - item_id: corrosion_inhibitor
+    qty: 0.03
+    unit: kg
+  - item_id: biocide_additive
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - mixing_tank
+  - filtration_unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: "Energy for mixing, pH adjustment, and filtration"
+time_model:
+  type: fixed_time
+  hr_per_batch: 2.0
+notes: "Formulate fresh cutting fluid from base materials: water, emulsifying oil, corrosion inhibitors, and biocides. Mix thoroughly, adjust pH to 8.5-9.5, and filter to remove particulates. Produces water-based cutting fluid emulsion for machining operations."

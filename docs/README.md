@@ -81,10 +81,10 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 - Workflow loop:
   1) Pop next: `.venv/bin/python -m kbtool queue pop`.
   2) Implement one item (add YAML/recipe/process/etc.). Prefer ≥3-step recipes with time/labor/machine-hours when possible. Reference missing processes explicitly if needed so they queue.
- 3) Run index: `.venv/bin/python -m kbtool index`.
- 4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`).
- 5) Verify the gap is gone: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` (or use `queue complete --verify`).
- 6) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+  3) Verify the gap is gone: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` (or use `queue complete --verify`).
+     - `validate` and `queue complete --verify` run the indexer internally.
+  4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`) if needed.
+  5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
 
 ## Verification (how it works across gap types)
 

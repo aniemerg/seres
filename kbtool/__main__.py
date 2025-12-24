@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-from . import indexer, queue_tool, report
+from . import indexer, queue_tool, report, closure_analysis
 
 
 def _parse_args() -> argparse.Namespace:
@@ -65,6 +65,11 @@ def _parse_args() -> argparse.Namespace:
     c_sub = c.add_subparsers(dest="ccmd")
     c_sub.add_parser("show", help="Show current configuration")
     c_sub.add_parser("modes", help="List available filter modes")
+
+    cl = sub.add_parser("mat-closure", help="Analyze material closure for machines")
+    cl.add_argument("--machine", type=str, help="Analyze a specific machine")
+    cl.add_argument("--all", action="store_true", help="Analyze all machines")
+    cl.add_argument("--output", type=str, help="Output file (default: stdout)")
 
     return parser.parse_args()
 
@@ -213,6 +218,82 @@ def main() -> None:
                         print(f"  Includes: {len(mode['include'])} rules")
         else:
             raise SystemExit("Unknown config subcommand")
+    elif args.command == "mat-closure":
+        from base_builder.kb_loader import KBLoader
+        import sys
+
+        # Load KB
+        print("Loading knowledge base...", file=sys.stderr)
+        kb_root = Path("kb")
+        kb_loader = KBLoader(kb_root)
+        kb_loader.load_all()
+        print(f"Loaded {len(kb_loader.items)} items, {len(kb_loader.boms)} BOMs, "
+              f"{len(kb_loader.recipes)} recipes", file=sys.stderr)
+
+        analyzer = closure_analysis.ClosureAnalyzer(kb_loader)
+
+        # Determine which machines to analyze
+        machines_to_analyze = []
+
+        if args.machine:
+            machines_to_analyze.append(args.machine)
+        elif args.all:
+            # Get all machines
+            machines_to_analyze = [
+                item_id for item_id, item in kb_loader.items.items()
+                if item.get('kind') == 'machine' and item.get('bom')
+            ]
+        else:
+            print("Error: Must specify --machine <machine_id> or --all", file=sys.stderr)
+            raise SystemExit(1)
+
+        # Analyze machines
+        results = []
+        for machine_id in machines_to_analyze:
+            print(f"Analyzing {machine_id}...", file=sys.stderr)
+            result = analyzer.analyze_machine(machine_id)
+            results.append(result)
+
+        # Format output
+        output_lines = []
+
+        if args.all:
+            # Summary table for all machines
+            output_lines.append("=" * 120)
+            output_lines.append("MATERIAL CLOSURE ANALYSIS SUMMARY - ALL MACHINES")
+            output_lines.append("=" * 120)
+            output_lines.append("")
+            output_lines.append(f"{'Machine ID':<40} {'Total Mass':>12} {'ISRU %':>10} {'Import %':>10} {'Unres %':>10}")
+            output_lines.append("-" * 120)
+
+            for result in sorted(results, key=lambda r: r['imported_percent'], reverse=True):
+                output_lines.append(
+                    f"{result['machine_id']:<40} "
+                    f"{result['total_mass']:>12.1f} kg "
+                    f"{result['isru_percent']:>9.1f}% "
+                    f"{result['imported_percent']:>9.1f}% "
+                    f"{result['unresolved_percent']:>9.1f}%"
+                )
+
+            output_lines.append("")
+            output_lines.append("=" * 120)
+            output_lines.append("")
+            output_lines.append("")
+
+        # Detailed reports
+        for result in results:
+            output_lines.append(closure_analysis.format_closure_report(result))
+            output_lines.append("\n")
+
+        # Output
+        output_text = "\n".join(output_lines)
+
+        if args.output:
+            with open(args.output, 'w') as f:
+                f.write(output_text)
+            print(f"Report written to {args.output}", file=sys.stderr)
+        else:
+            print(output_text)
     else:
         raise SystemExit(f"Unknown command {args.command}")
 

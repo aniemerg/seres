@@ -1,0 +1,202 @@
+================================================================================
+CIRCULAR DEPENDENCY FIX REPORT
+================================================================================
+
+Found 27 circular dependency loops
+
+================================================================================
+RECOMMENDED BOOTSTRAP IMPORTS: 24 items
+================================================================================
+
+To break all circular dependencies, mark these items as imports:
+
+📦 alnico_magnet_alloy_v0
+   Name: Alnico magnet alloy
+   Breaks 1 circular loop(s)
+
+📦 alnico_magnet_v0
+   Name: Alnico magnet
+   Breaks 1 circular loop(s)
+
+📦 calcium_chloride_solution_v0
+   Name: Calcium chloride solution
+   Breaks 1 circular loop(s)
+
+📦 chemical_bath_ventilation
+   Name: Chemical Bath Ventilation
+   Breaks 1 circular loop(s)
+
+📦 copper_scrap_v0
+   Name: Copper scrap
+   Breaks 1 circular loop(s)
+
+📦 epoxy_precursor_block_v0
+   Name: Epoxy resin precursor block
+   Breaks 1 circular loop(s)
+
+📦 formed_metal_part
+   Name: Formed metal part
+   Breaks 1 circular loop(s)
+
+📦 gasket_sheet_core_v0
+   Name: Gasket Sheet Core
+   Breaks 1 circular loop(s)
+
+📦 gear_set_medium
+   Name: Gear set (medium)
+   Breaks 1 circular loop(s)
+
+📦 hydrogen_sulfide_gas
+   Name: Hydrogen sulfide gas
+   Breaks 1 circular loop(s)
+
+📦 lunar_regolith_raw
+   Name: Lunar Regolith (raw)
+   Breaks 1 circular loop(s)
+
+📦 magnesium_powder_v0
+   Name: Magnesium powder
+   Breaks 1 circular loop(s)
+
+📦 magnetic_core_memory_tile
+   Name: Magnetic Core Memory Tile
+   Breaks 1 circular loop(s)
+
+📦 magnetic_core_memory_tile_v0
+   Name: Magnetic Core Memory Tile
+   Breaks 1 circular loop(s)
+
+📦 molten_material_or_preform
+   Name: Molten material or preform
+   Breaks 1 circular loop(s)
+
+📦 nitrogen_gas
+   Name: Nitrogen gas
+   Breaks 1 circular loop(s)
+
+📦 none
+   Name: None
+   Breaks 1 circular loop(s)
+
+📦 regolith_carbonaceous
+   Name: Carbonaceous Chondrite Regolith
+   Breaks 1 circular loop(s)
+
+📦 rolling_mill_rolls_set
+   Name: Rolling mill rolls set
+   Breaks 1 circular loop(s)
+
+📦 sodium_chloride
+   Name: Sodium chloride
+   Breaks 3 circular loop(s)
+
+📦 software_source_code_v0
+   Name: Software source code v0
+   Breaks 1 circular loop(s)
+
+📦 stainless_steel_ingot
+   Name: Stainless steel ingot
+   Breaks 2 circular loop(s)
+
+📦 tungsten_metal_pure
+   Name: Tungsten metal, pure
+   Breaks 1 circular loop(s)
+
+📦 waste_grease_v0
+   Name: Waste grease
+   Breaks 1 circular loop(s)
+
+================================================================================
+DETAILED LOOP ANALYSIS
+================================================================================
+
+Loop 1: copper_scrap_v0 → copper_rod_ingot → copper_scrap_v0
+  ✂️  Break by importing: copper_scrap_v0
+
+Loop 2: nitrogen_gas → nitrogen_gas
+  ✂️  Break by importing: nitrogen_gas
+
+Loop 3: sodium_chloride → salt_contingency_nacl → sodium_hydroxide → sodium_chloride
+  ✂️  Break by importing: sodium_chloride
+
+Loop 4: sodium_chloride → salt_contingency_nacl → hydrochloric_acid → chlorine_gas → sodium_chloride
+  ✂️  Break by importing: sodium_chloride
+
+Loop 5: hydrogen_gas → sodium_chloride → salt_contingency_nacl → hydrochloric_acid → hydrogen_gas
+  ✂️  Break by importing: sodium_chloride
+
+Loop 6: molten_material_or_preform → molten_material_or_preform
+  ✂️  Break by importing: molten_material_or_preform
+
+Loop 7: epoxy_precursor_block_v0 → epoxy_monomer_v0 → epoxy_precursor_block_v0
+  ✂️  Break by importing: epoxy_precursor_block_v0
+
+Loop 8: tungsten_metal_pure → tungsten_carbonyl_v0 → tungsten_metal_pure
+  ✂️  Break by importing: tungsten_metal_pure
+
+Loop 9: lunar_regolith_raw → lunar_regolith_raw
+  ✂️  Break by importing: lunar_regolith_raw
+
+Loop 10: hydrogen_sulfide_gas → sulfur_elemental → hydrogen_sulfide_gas
+  ✂️  Break by importing: hydrogen_sulfide_gas
+
+Loop 11: magnesium_powder_v0 → magnesium_powder_v0
+  ✂️  Break by importing: magnesium_powder_v0
+
+Loop 12: none → none
+  ✂️  Break by importing: none
+
+Loop 13: stainless_billet_or_slab → stainless_steel_ingot → stainless_billet_or_slab
+  ✂️  Break by importing: stainless_steel_ingot
+
+Loop 14: stainless_steel_ingot → stainless_steel_ingot
+  ✂️  Break by importing: stainless_steel_ingot
+
+Loop 15: regolith_carbonaceous → regolith_carbonaceous
+  ✂️  Break by importing: regolith_carbonaceous
+
+Loop 16: software_source_code_v0 → software_source_code_v0
+  ✂️  Break by importing: software_source_code_v0
+
+Loop 17: alnico_magnet_alloy_v0 → alnico_casting_block_v0 → alnico_magnet_alloy_v0
+  ✂️  Break by importing: alnico_magnet_alloy_v0
+
+Loop 18: alnico_magnet_v0 → alnico_magnet_v0
+  ✂️  Break by importing: alnico_magnet_v0
+
+Loop 19: calcium_chloride_solution_v0 → calcium_chloride_solution_v0
+  ✂️  Break by importing: calcium_chloride_solution_v0
+
+Loop 20: gasket_sheet_core_v0 → gasket_sheet_core_v0
+  ✂️  Break by importing: gasket_sheet_core_v0
+
+Loop 21: waste_grease_v0 → waste_grease_v0
+  ✂️  Break by importing: waste_grease_v0
+
+Loop 22: rolling_mill_rolls_set → rolling_mill_rolls_set
+  ✂️  Break by importing: rolling_mill_rolls_set
+
+Loop 23: gear_set_medium → gear_set_medium
+  ✂️  Break by importing: gear_set_medium
+
+Loop 24: chemical_bath_ventilation → chemical_bath_ventilation
+  ✂️  Break by importing: chemical_bath_ventilation
+
+Loop 25: formed_metal_part → formed_metal_part
+  ✂️  Break by importing: formed_metal_part
+
+Loop 26: magnetic_core_memory_tile_v0 → magnetic_core_memory_tile_v0
+  ✂️  Break by importing: magnetic_core_memory_tile_v0
+
+Loop 27: magnetic_core_memory_tile → magnetic_core_memory_tile
+  ✂️  Break by importing: magnetic_core_memory_tile
+
+================================================================================
+IMPLEMENTATION PLAN
+================================================================================
+
+For each item above, update its recipe to:
+
+  variant_id: import_placeholder_v0
+  steps: []
+  notes: 'Bootstrap import - needed to break circular dependency'
