@@ -1427,12 +1427,110 @@ The indexer identifies several gap types:
     - The recipe produces this item, but the item itself isn't defined
     - Fix: Create the part/material/machine definition that the recipe produces
 
+11. **recipe_no_inputs** - Recipe has process steps but no inputs/outputs defined
+    - Context includes: `recipe_id`, `target_item_id`, `step_count`, `file`
+    - These are placeholder/incomplete recipes that define process sequence but not material flow
+    - Fix: Add `inputs`, `outputs`, and optionally `byproducts` arrays to each step
+
+    **When NO inputs is acceptable:**
+    - ONLY for raw material extraction using `environment_source_v0` process
+    - The target item should be in `kb/items/raw_materials/` folder
+    - Examples: lunar_regolith_in_situ, water (from polar ice), solar_irradiance
+    - If this is raw material extraction, move the item to raw_materials folder instead
+
+    **How to fix incomplete recipes:**
+    1. Read the recipe file to understand the process sequence
+    2. Check `assumptions` and `notes` fields for material hints
+    3. For each step, define:
+       - `inputs`: What materials/parts go into this step
+         - Each input needs: `item_id`, `qty`, `unit`
+       - `outputs`: What this step produces
+         - Each output needs: `item_id`, `qty`, `unit`
+       - `byproducts`: Optional waste/side products
+    4. Ensure material balance: outputs should account for most of input mass
+    5. Link steps: Step N outputs should be Step N+1 inputs (for multi-step recipes)
+
+    **Example fix:**
+    ```yaml
+    # BEFORE (incomplete):
+    id: recipe_glass_bulk_v0
+    target_item_id: glass_bulk
+    steps:
+      - process_id: glass_melting_and_forming_v0
+        est_time_hr: 2.5
+    assumptions: Glass melting/forming from regolith fines
+
+    # AFTER (complete):
+    id: recipe_glass_bulk_v0
+    target_item_id: glass_bulk
+    steps:
+      - process_id: glass_melting_and_forming_v0
+        est_time_hr: 2.5
+        inputs:
+          - item_id: regolith_fines
+            qty: 10
+            unit: kg
+          - item_id: thermal_energy
+            qty: 50
+            unit: MJ
+        outputs:
+          - item_id: glass_bulk
+            qty: 8
+            unit: kg
+        byproducts:
+          - item_id: waste_gas
+            qty: 0.5
+            unit: kg
+    ```
+
+    **Multi-step recipe example:**
+    ```yaml
+    id: recipe_basalt_fiber_v0
+    target_item_id: basalt_fiber
+    steps:
+      - process_id: glass_melting_and_forming_v0
+        inputs:
+          - item_id: regolith_basalt
+            qty: 10
+            unit: kg
+        outputs:
+          - item_id: glass_bulk
+            qty: 8
+            unit: kg
+      - process_id: basalt_fiber_production_v0
+        inputs:
+          - item_id: glass_bulk  # Output from step 1
+            qty: 8
+            unit: kg
+        outputs:
+          - item_id: basalt_fiber_raw
+            qty: 7
+            unit: kg
+      - process_id: spool_winding_basic_v0
+        inputs:
+          - item_id: basalt_fiber_raw  # Output from step 2
+            qty: 7
+            unit: kg
+        outputs:
+          - item_id: basalt_fiber
+            qty: 7
+            unit: kg
+    ```
+
+    **Common patterns:**
+    - First step often needs raw materials (regolith, ore, metal ingots)
+    - Intermediate steps transform materials (melting, forming, machining)
+    - Final step produces the target item
+    - Energy inputs (thermal_energy, electrical_energy) are common
+    - Tool/machine wear items may be consumed (cutting_fluid, abrasive_media)
+
 The indexer outputs:
 - `out/work_queue.jsonl` - All gaps (rebuilt each run)
 - `out/validation_report.md` - Detailed validation results
 - `out/unresolved_refs.jsonl` - Unresolved references
 - `out/missing_fields.jsonl` - Missing required fields
 - `out/missing_recipe_items.jsonl` - Items referenced in recipe steps but not defined
+- `out/recipes_no_inputs.jsonl` - Recipes with no inputs/outputs defined
 
 
 ---

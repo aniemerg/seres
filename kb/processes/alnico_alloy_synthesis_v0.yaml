@@ -1,0 +1,51 @@
+id: alnico_alloy_synthesis_v0
+kind: process
+name: AlNiCo alloy synthesis from raw metals v0
+layer_tags:
+  - layer_5
+  - layer_6
+inputs:
+  - item_id: aluminum_pure
+    qty: 0.12
+    unit: kg
+  - item_id: nickel_metal
+    qty: 0.35
+    unit: kg
+  - item_id: cobalt_metal
+    qty: 0.35
+    unit: kg
+  - item_id: iron_pure
+    qty: 0.18
+    unit: kg
+outputs:
+  - item_id: alnico_magnet_alloy_v0
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - crucible_refractory
+resource_requirements:
+  - machine_id: casting_furnace_v0
+    qty: 2.0
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 8.0
+  notes: "Melting and alloying Al, Ni, Co, Fe to form AlNiCo magnet alloy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 3.0
+notes: |
+  Primary synthesis of AlNiCo magnet alloy from constituent metals.
+
+  Composition (typical AlNiCo 5):
+  - Aluminum: 8-12%
+  - Nickel: 14-28%
+  - Cobalt: 24-40%
+  - Iron: balance (~30%)
+  - (Copper, Titanium optional for some grades)
+
+  Process: Melt all metals together in crucible furnace, mix thoroughly,
+  cast into ingot or block form, allow to solidify.
+
+  Breaks circular dependency: alnico_magnet_alloy_v0 can now be made from raw metals
+  instead of requiring alnico_casting_block_v0.

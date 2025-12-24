@@ -6,6 +6,7 @@ items as imports following the rule: "child in dependency chain becomes import"
 """
 
 import sys
+import hashlib
 from pathlib import Path
 from typing import Dict, Set, List, Tuple
 from collections import defaultdict
@@ -13,6 +14,12 @@ from collections import defaultdict
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from base_builder.kb_loader import KBLoader
+
+# Invalid item IDs that indicate data errors
+INVALID_ITEM_IDS = {
+    "none", "null", "unknown", "undefined", "tbd", "todo",
+    "placeholder", "temporary", "stub"
+}
 
 
 class CircularDependencyFixer:
@@ -22,6 +29,112 @@ class CircularDependencyFixer:
         self.kb = kb_loader
         self.circular_loops = []
         self.import_candidates = set()
+
+    @staticmethod
+    def _normalize_loop(loop: List[str]) -> Tuple[str, ...]:
+        """
+        Return rotation-invariant canonical form (prevents duplicates).
+
+        Examples:
+        - [a, b, c] → (a, b, c)
+        - [b, c, a] → (a, b, c)  # rotated to start with min
+        - [c, a, b] → (a, b, c)  # rotated to start with min
+        """
+        if not loop:
+            return ()
+        min_idx = loop.index(min(loop))
+        rotated = loop[min_idx:] + loop[:min_idx]
+        return tuple(rotated)
+
+    @staticmethod
+    def _get_loop_id(loop: List[str]) -> str:
+        """Generate stable hash-based ID for loop."""
+        normalized = CircularDependencyFixer._normalize_loop(loop)
+        loop_str = "->".join(normalized)
+        return f"circular_loop:{hashlib.md5(loop_str.encode()).hexdigest()[:12]}"
+
+    def _classify_loop(self, loop: List[str], entries: Dict[str, dict]) -> str:
+        """
+        Classify loop type based on heuristics.
+
+        Priority order:
+        1. Self-reference: len(loop) == 1
+        2. Invalid data: contains none/null/undefined/etc
+        3. Chemical: len > 2 AND has chemistry layer tags
+        4. Default: any other loop
+        """
+        # Self-reference
+        if len(loop) == 1:
+            return "self_reference"
+
+        # Invalid data
+        if any(item_id in INVALID_ITEM_IDS for item_id in loop):
+            return "invalid_data"
+
+        # Chemical cycle
+        if len(loop) > 2:
+            for item_id in loop:
+                if item_id in entries:
+                    layer_tags = entries[item_id].get("layer_tags", [])
+                    if any(tag in ["chemistry", "chemical"] or "chem" in tag.lower()
+                           for tag in layer_tags):
+                        return "chemical_cycle"
+
+        return "default"
+
+    def _get_classification_reason(self, loop: List[str], loop_type: str,
+                                   entries: Dict[str, dict]) -> str:
+        """Generate human-readable explanation of classification."""
+        if loop_type == "self_reference":
+            return "Loop length = 1 (self-reference)"
+        elif loop_type == "invalid_data":
+            invalid_items = [item for item in loop if item in INVALID_ITEM_IDS]
+            return f"Contains invalid placeholder ID: {', '.join(invalid_items)}"
+        elif loop_type == "chemical_cycle":
+            return "Multi-step loop with chemistry layer tagged items"
+        else:
+            return f"Multi-step dependency loop (length {len(loop)})"
+
+    def get_work_queue_items(self, entries: Dict[str, dict]) -> List[dict]:
+        """
+        Generate queue items for all unique loops.
+
+        Args:
+            entries: Index entries dict from indexer (item_id -> entry data)
+
+        Returns:
+            List of queue items (one per unique normalized loop)
+        """
+        loops = self.find_all_circular_dependencies()
+        seen_normalized = set()
+        queue_items = []
+
+        for loop in loops:
+            normalized = self._normalize_loop(loop)
+            if normalized in seen_normalized:
+                continue
+            seen_normalized.add(normalized)
+
+            loop_type = self._classify_loop(loop, entries)
+            loop_id = self._get_loop_id(loop)
+
+            queue_items.append({
+                "id": loop_id,
+                "kind": "gap",
+                "reason": "circular_dependency",
+                "gap_type": "circular_dependency",
+                "loop_type": loop_type,
+                "item_id": loop[0],  # First item in original loop
+                "context": {
+                    "loop": loop,
+                    "loop_length": len(loop),
+                    "loop_visualization": " → ".join(loop) + f" → {loop[0]}",
+                    "loop_items_defined": all(item_id in entries for item_id in loop),
+                    "classification_reason": self._get_classification_reason(loop, loop_type, entries)
+                }
+            })
+
+        return queue_items
 
     def find_all_circular_dependencies(self) -> List[List[str]]:
         """

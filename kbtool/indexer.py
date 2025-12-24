@@ -24,6 +24,7 @@ except ImportError:  # pragma: no cover
 
 from . import models
 from .queue_tool import _locked_queue
+from base_builder.kb_loader import KBLoader
 
 KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
@@ -36,6 +37,9 @@ def _infer_kind(path: Path, data: dict) -> Optional[str]:
     if kind:
         return kind
     parts = path.parts
+    if "imports" in parts:
+        # Infer kind from data or default to material for import items
+        return data.get("kind", "material")
     if "seeds" in parts:
         return "seed"
     if "processes" in parts:
@@ -302,6 +306,58 @@ def _analyze_recipe_items(kb_files: List[Path], entries: Dict[str, dict], warnin
     return missing_recipe_items
 
 
+def _validate_recipe_inputs(kb_files: List[Path], warnings: List[str]) -> List[dict]:
+    """
+    Validate that recipes have inputs defined in their steps.
+    Returns list of recipes where ALL steps have no inputs.
+    """
+    if yaml is None:
+        return []
+
+    recipes_no_inputs: List[dict] = []
+
+    for path in kb_files:
+        data = _load_yaml(path, warnings)
+        kind = _infer_kind(path, data)
+
+        if kind != "recipe":
+            continue
+
+        recipe_id = data.get("id") or path.stem
+        target_item_id = data.get("target_item_id")
+        variant_id = data.get("variant_id", "")
+
+        # Skip import stubs
+        if "import" in str(variant_id):
+            continue
+
+        steps = data.get("steps", []) or []
+        if not steps:
+            continue
+
+        # Check if ANY step has inputs
+        has_any_inputs = False
+        for step in steps:
+            if not isinstance(step, dict):
+                continue
+
+            inputs = step.get("inputs", []) or []
+            if inputs:
+                has_any_inputs = True
+                break
+
+        # If no steps have inputs, this is incomplete
+        if not has_any_inputs:
+            recipes_no_inputs.append({
+                "recipe_id": recipe_id,
+                "target_item_id": target_item_id,
+                "file": str(path),
+                "step_count": len(steps),
+            })
+
+    return recipes_no_inputs
+
+
 def build_index() -> Dict[str, dict]:
     if yaml is None:
         raise SystemExit("PyYAML is required: pip install pyyaml")
@@ -419,9 +475,26 @@ def build_index() -> Dict[str, dict]:
                 entries[ref]["refs_in"].append(entry["id"])
 
     # Compute items without recipes (parts/materials/machines that no recipe targets)
+    # Skip items marked as imports (is_import: true)
     items_without_recipes: List[dict] = []
     for entry in entries.values():
         if entry["kind"] in ("part", "material", "machine") and entry["id"] not in recipe_targets:
+            # Check if item is marked as import by reading the file
+            is_import = False
+            if entry.get("defined_in"):
+                try:
+                    file_path = Path(entry["defined_in"])
+                    if file_path.exists():
+                        with file_path.open("r", encoding="utf-8") as f:
+                            item_data = yaml.safe_load(f) or {}
+                            is_import = item_data.get("is_import", False)
+                except Exception:
+                    pass
+
+            # Skip import items
+            if is_import:
+                continue
+
             items_without_recipes.append({
                 "id": entry["id"],
                 "kind": entry["kind"],
@@ -444,6 +517,9 @@ def build_index() -> Dict[str, dict]:
 
     # Analyze recipe items to find missing inputs and intermediate parts
     missing_recipe_items = _analyze_recipe_items(kb_files, entries, warnings)
+
+    # Validate that recipes have inputs defined
+    recipes_no_inputs = _validate_recipe_inputs(kb_files, warnings)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     with (OUT_DIR / "index.json").open("w", encoding="utf-8") as f:
@@ -481,14 +557,24 @@ def build_index() -> Dict[str, dict]:
         for mri in missing_recipe_items:
             f.write(json.dumps(mri) + "\n")
 
+    with (OUT_DIR / "recipes_no_inputs.jsonl").open("w", encoding="utf-8") as f:
+        for rni in recipes_no_inputs:
+            f.write(json.dumps(rni) + "\n")
+
+    # Load KB for circular dependency detection
+    kb_loader = KBLoader(KB_ROOT)
+    kb_loader.load_all()
+
     filter_stats = _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
-        missing_recipe_items, seed_references, item_metadata
+        missing_recipe_items, recipes_no_inputs, seed_references, item_metadata,
+        entries, kb_loader
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
-        items_without_recipes, orphan_resources, missing_recipe_items, filter_stats
+        items_without_recipes, orphan_resources, missing_recipe_items, recipes_no_inputs,
+        filter_stats
     )
     return entries
 
@@ -507,6 +593,35 @@ def _write_missing_recipes(missing_recipes: List[dict], file_path: Optional[Path
         pass
 
 
+def _detect_circular_dependencies(entries: Dict[str, dict], kb_loader) -> List[dict]:
+    """
+    Detect circular dependencies and return queue items.
+
+    Args:
+        entries: Index entries dict (item_id -> entry data)
+        kb_loader: KBLoader instance for dependency analysis
+
+    Returns:
+        List of queue items (one per unique normalized loop)
+    """
+    from .circular_dependency_fixer import CircularDependencyFixer
+
+    fixer = CircularDependencyFixer(kb_loader)
+    queue_items = fixer.get_work_queue_items(entries)
+
+    # Write to output file
+    circ_dep_path = OUT_DIR / "circular_dependencies.jsonl"
+    try:
+        with circ_dep_path.open("w", encoding="utf-8") as f:
+            for item in queue_items:
+                f.write(json.dumps(item) + "\n")
+    except Exception:
+        # Best-effort; do not crash indexing if this fails
+        pass
+
+    return queue_items
+
+
 def _update_work_queue(
     unresolved_refs: List[dict],
     referenced_only: Set[str],
@@ -516,8 +631,11 @@ def _update_work_queue(
     orphan_resources: List[dict],
     invalid_recipes: List[dict],
     missing_recipe_items: List[dict],
+    recipes_no_inputs: List[dict],
     seed_references: Dict[str, List[str]],
     item_metadata: Dict[str, dict],
+    entries: Dict[str, dict],
+    kb_loader,
 ) -> Dict[str, int]:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -529,6 +647,7 @@ def _update_work_queue(
     - orphan_resources: resource_types with no machine providing them
     - invalid_recipes: legacy step schema or missing process_id
     - missing_recipe_items: items referenced in recipe steps but not defined
+    - recipes_no_inputs: recipes where all steps have no inputs defined
     - seed_references: item_id -> list of seed file ids that reference it
     - item_metadata: item_id -> freeform metadata from seed requires_ids
 
@@ -537,6 +656,10 @@ def _update_work_queue(
     from .config import QueueFilterConfig
 
     gap_items: List[dict] = []
+
+    # Detect circular dependencies
+    circular_dependencies = _detect_circular_dependencies(entries, kb_loader)
+    gap_items.extend(circular_dependencies)
 
     # Unresolved text references
     for ref in unresolved_refs:
@@ -653,6 +776,25 @@ def _update_work_queue(
             }
         )
 
+    # Recipes with no inputs (incomplete recipes)
+    for rni in recipes_no_inputs:
+        gap_items.append(
+            {
+                "id": f"recipe_no_inputs:{rni['recipe_id']}",
+                "kind": "recipe",
+                "reason": "recipe_no_inputs",
+                "gap_type": "recipe_no_inputs",
+                "item_id": rni.get("target_item_id"),
+                "recipe_id": rni["recipe_id"],
+                "context": {
+                    "recipe_id": rni["recipe_id"],
+                    "target_item_id": rni.get("target_item_id"),
+                    "step_count": rni.get("step_count", 0),
+                    "file": rni["file"],
+                },
+            }
+        )
+
     # Apply queue filtering based on config
     config = QueueFilterConfig.load()
     total_gaps = len(gap_items)
@@ -719,6 +861,7 @@ def _write_report(
     items_without_recipes: List[dict],
     orphan_resources: List[dict],
     missing_recipe_items: List[dict],
+    recipes_no_inputs: List[dict],
     filter_stats: Dict[str, int],
 ) -> None:
     counts: Dict[str, int] = {}
@@ -795,6 +938,19 @@ def _write_report(
         lines.append("")
         lines.append("See `out/missing_recipe_items.jsonl` for details.")
 
+    if recipes_no_inputs:
+        lines.append("")
+        lines.append("## Recipes with no inputs")
+        lines.append(f"Total: {len(recipes_no_inputs)} recipes have steps but no inputs defined")
+        for rni in recipes_no_inputs[:10]:
+            target = rni.get("target_item_id", "unknown")
+            steps = rni.get("step_count", 0)
+            lines.append(f"- {rni['recipe_id']} (target: {target}, {steps} step(s))")
+        if len(recipes_no_inputs) > 10:
+            lines.append(f"- ... and {len(recipes_no_inputs) - 10} more")
+        lines.append("")
+        lines.append("See `out/recipes_no_inputs.jsonl` for details.")
+
     if null_values:
         null_by_kind: Dict[str, int] = {}
         for nv in null_values:
@@ -807,6 +963,43 @@ def _write_report(
             lines.append(f"- {kind}: {count}")
         lines.append("")
         lines.append("See `out/null_values.jsonl` for details.")
+
+    # Read circular dependencies from output file
+    circ_dep_path = OUT_DIR / "circular_dependencies.jsonl"
+    circular_deps = []
+    if circ_dep_path.exists():
+        try:
+            with circ_dep_path.open("r", encoding="utf-8") as f:
+                for line in f:
+                    if line.strip():
+                        circular_deps.append(json.loads(line))
+        except Exception:
+            pass
+
+    if circular_deps:
+        # Count by loop type
+        by_type: Dict[str, int] = {}
+        for cd in circular_deps:
+            loop_type = cd.get("loop_type", "unknown")
+            by_type[loop_type] = by_type.get(loop_type, 0) + 1
+
+        lines.append("")
+        lines.append("## Circular Dependencies")
+        lines.append(f"Total: {len(circular_deps)} circular dependency loops detected")
+        lines.append("")
+        lines.append("By type:")
+        for loop_type, count in sorted(by_type.items()):
+            lines.append(f"- {loop_type}: {count}")
+        lines.append("")
+        lines.append("Sample loops:")
+        for cd in circular_deps[:5]:
+            viz = cd.get("context", {}).get("loop_visualization", "unknown")
+            loop_type = cd.get("loop_type", "unknown")
+            lines.append(f"- [{loop_type}] {viz}")
+        if len(circular_deps) > 5:
+            lines.append(f"- ... and {len(circular_deps) - 5} more")
+        lines.append("")
+        lines.append("See `out/circular_dependencies.jsonl` for details.")
 
     if warnings:
         lines.append("")

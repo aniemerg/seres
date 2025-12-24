@@ -1,6 +1,13 @@
 id: recipe_alnico_magnet_alloy_v0
 kind: recipe
 target_item_id: alnico_magnet_alloy_v0
+variant_id: v0
 steps:
-  - process_id: alnico_alloy_remelting_v0
-notes: "Remelts AlNiCo alloy casting block to feedstock alloy for magnet production. Placeholder parameters; align with seeds when refining."
+  - process_id: alnico_alloy_synthesis_v0
+assumptions: |
+  AlNiCo magnet alloy produced from primary metals (Al, Ni, Co, Fe).
+  Composition: Al 8-12%, Ni 14-28%, Co 24-40%, Fe balance.
+notes: |
+  Primary production route for AlNiCo magnet alloy from raw metals.
+  Breaks circular dependency with alnico_casting_block_v0.
+  Previous remelting-only approach created chicken-and-egg problem.

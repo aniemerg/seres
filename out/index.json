@@ -536,13 +536,34 @@
         "layer_6"
       ],
       "name": "AlNiCo alloy remelting v0",
-      "refs_in": [
-        "recipe_alnico_magnet_alloy_v0"
-      ],
+      "refs_in": [],
       "refs_out": [
         "alnico_casting_block_v0",
         "alnico_magnet_alloy_v0",
         "crucible_refractory"
+      ],
+      "status": "defined"
+    },
+    "alnico_alloy_synthesis_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/alnico_alloy_synthesis_v0.yaml",
+      "id": "alnico_alloy_synthesis_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5",
+        "layer_6"
+      ],
+      "name": "AlNiCo alloy synthesis from raw metals v0",
+      "refs_in": [
+        "recipe_alnico_magnet_alloy_v0"
+      ],
+      "refs_out": [
+        "alnico_magnet_alloy_v0",
+        "aluminum_pure",
+        "cobalt_metal",
+        "crucible_refractory",
+        "iron_pure",
+        "nickel_metal"
       ],
       "status": "defined"
     },
@@ -630,6 +651,7 @@
       "name": "Alnico magnet alloy",
       "refs_in": [
         "alnico_alloy_remelting_v0",
+        "alnico_alloy_synthesis_v0",
         "alnico_casting_process_v0",
         "alnico_heat_treatment_v0",
         "recipe_alnico_magnet_alloy_v0",
@@ -934,6 +956,19 @@
         "milling_machine_general_v0"
       ],
       "status": "defined"
+    },
+    "aluminum_pure": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "aluminum_pure",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "alnico_alloy_synthesis_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
     },
     "aluminum_scrap": {
       "aliases": [],
@@ -4404,6 +4439,20 @@
         "recipe_binder_simple_v0",
         "recipe_electrodes_nife_set_v0",
         "battery_system_nife_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "biocide_additive": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/biocide_additive.yaml",
+      "id": "biocide_additive",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Biocide additive",
+      "refs_in": [
+        "cutting_fluid_formulation_v0",
+        "recipe_biocide_additive_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -11332,7 +11381,7 @@
       "refs_out": [
         "aluminum_housing_machined",
         "bearing_ball_steel",
-        "permanent_magnet_neodymium",
+        "import_permanent_magnet_neodymium",
         "steel_lamination_stack",
         "steel_shaft_machined",
         "wire_copper_insulated",
@@ -13722,6 +13771,7 @@
         "magnesium_oxide_reduction_v0",
         "oxygen_extraction_carbothermal_reduction_v0",
         "silicon_extraction_from_regolith_carbothermic_v0",
+        "stainless_steel_smelting_v0",
         "recipe_carbon_reductant_v0"
       ],
       "refs_out": [],
@@ -14021,6 +14071,7 @@
         "motor_housing_casting_v0",
         "sand_casting_medium_v0",
         "stainless_refining_basic_v0",
+        "stainless_steel_smelting_v0",
         "steel_refining_basic_v0",
         "tool_steel_high_carbon_cast_v0",
         "recipe_casting_mold_set_v0"
@@ -15751,6 +15802,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "chromium_metal": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "chromium_metal",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "stainless_steel_smelting_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "circuit_board_assembly_v0": {
       "aliases": [],
       "defined_in": "kb/processes/circuit_board_assembly_v0.yaml",
@@ -16277,6 +16341,19 @@
         "purified_dicobalt_octacarbonyl"
       ],
       "status": "defined"
+    },
+    "cobalt_metal": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "cobalt_metal",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "alnico_alloy_synthesis_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
     },
     "cobalt_metal_impure": {
       "aliases": [],
@@ -18535,6 +18612,20 @@
       ],
       "status": "defined"
     },
+    "corrosion_inhibitor": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/corrosion_inhibitor.yaml",
+      "id": "corrosion_inhibitor",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Corrosion inhibitor",
+      "refs_in": [
+        "cutting_fluid_formulation_v0",
+        "recipe_corrosion_inhibitor_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "crimped_hydraulic_hose_v0": {
       "aliases": [],
       "defined_in": "kb/items/parts/crimped_hydraulic_hose_v0.yaml",
@@ -18713,6 +18804,7 @@
       "refs_in": [
         "casting_silver_contact_material_v0",
         "alnico_alloy_remelting_v0",
+        "alnico_alloy_synthesis_v0",
         "brazing_alloy_synthesis_v0",
         "iron_smelting_reduction_v0",
         "melting_basic_v0",
@@ -18722,6 +18814,7 @@
         "silicon_metal_reduction_from_purified_v0",
         "silicon_purification_mgsi_v0",
         "solder_paste_casting_v0",
+        "stainless_steel_smelting_v0",
         "recipe_crucible_refractory_import_v0",
         "recipe_crucible_refractory_v0"
       ],
@@ -19348,6 +19441,7 @@
         "aluminum_housing_machining_v0",
         "aluminum_housing_machining_v1",
         "chemical_treatment_v0",
+        "cutting_fluid_formulation_v0",
         "filtration_basic_v0",
         "flywheel_vacuum_housing_machining_v0",
         "machining_precision_v0",
@@ -19357,6 +19451,28 @@
         "recipe_hydraulic_adjustment_system_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "cutting_fluid_formulation_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/cutting_fluid_formulation_v0.yaml",
+      "id": "cutting_fluid_formulation_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4",
+        "layer_5"
+      ],
+      "name": "Cutting fluid formulation",
+      "refs_in": [],
+      "refs_out": [
+        "biocide_additive",
+        "corrosion_inhibitor",
+        "cutting_fluid",
+        "emulsifying_oil",
+        "filtration_unit",
+        "mixing_tank",
+        "water"
+      ],
       "status": "defined"
     },
     "cutting_station_basic_v0": {
@@ -21814,6 +21930,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "emulsifying_oil": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "emulsifying_oil",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "cutting_fluid_formulation_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "encapsulation_station": {
       "aliases": [],
       "defined_in": "kb/items/machines/encapsulation_station.yaml",
@@ -22101,6 +22230,7 @@
         "recipe_nickel_aluminum_alloy_v0",
         "recipe_nickel_chromium_alloy_v0",
         "recipe_nife_meteorite_material_env_v0",
+        "recipe_none_v1",
         "recipe_raw_ore_or_regolith_env_v0",
         "recipe_solar_irradiance_v0",
         "recipe_solar_radiation_v0",
@@ -23435,6 +23565,7 @@
       "name": "Filtration unit",
       "refs_in": [
         "bom_filtration_unit",
+        "cutting_fluid_formulation_v0",
         "recipe_filtration_unit_v0"
       ],
       "refs_out": [
@@ -24401,8 +24532,8 @@
         "recipe_magnetic_bearing_passive_v0"
       ],
       "refs_out": [
-        "magnetic_bearing_passive_v0",
-        "permanent_magnet_neodymium"
+        "import_permanent_magnet_neodymium",
+        "magnetic_bearing_passive_v0"
       ],
       "status": "defined"
     },
@@ -29827,6 +29958,36 @@
       ],
       "status": "defined"
     },
+    "import_magnesium_powder": {
+      "aliases": [],
+      "defined_in": "kb/imports/magnesium_powder.yaml",
+      "id": "import_magnesium_powder",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnesium powder (imported)",
+      "refs_in": [
+        "magnesium_powder_noop_v0",
+        "silicide_formation_basic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "import_permanent_magnet_neodymium": {
+      "aliases": [],
+      "defined_in": "kb/imports/permanent_magnet_neodymium.yaml",
+      "id": "import_permanent_magnet_neodymium",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Permanent magnet (neodymium, imported)",
+      "refs_in": [
+        "bom_stepper_motor_v0",
+        "forming_passive_magnetic_bearing_v0",
+        "magnet_magnetization_process_v0",
+        "recipe_machine_stepper_motor_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "import_placeholder_aluminum_sheet_2mm_v0": {
       "aliases": [],
       "defined_in": "kb/processes/import_placeholder_aluminum_sheet_2mm_v0.yaml",
@@ -30179,6 +30340,7 @@
         "recipe_analog_multiplier_ic_v0",
         "recipe_autocollimator_imported_v0",
         "recipe_battery_backup_small_import_v0",
+        "recipe_biocide_additive_v0",
         "recipe_cable_drag_chain_import_v0",
         "recipe_calibration_artifacts_v0",
         "recipe_capacitor_bank_filter_v0",
@@ -30188,6 +30350,7 @@
         "recipe_coaxial_connector_n_type_v0",
         "recipe_cobalt_metal_impure_v0",
         "recipe_compiled_firmware_binary_v0",
+        "recipe_corrosion_inhibitor_v0",
         "recipe_crucible_set_v0",
         "recipe_cutting_fluid_v0",
         "recipe_deionized_water_v0",
@@ -31551,6 +31714,20 @@
       ],
       "refs_out": [],
       "status": "defined"
+    },
+    "iron_pure": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "iron_pure",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "alnico_alloy_synthesis_v0",
+        "stainless_steel_smelting_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
     },
     "iron_pure_production_from_ilmenite_v0": {
       "aliases": [],
@@ -33231,7 +33408,7 @@
     },
     "lunar_regolith_in_situ": {
       "aliases": [],
-      "defined_in": "kb/items/materials/lunar_regolith_in_situ.yaml",
+      "defined_in": "kb/items/raw_materials/lunar_regolith_in_situ.yaml",
       "id": "lunar_regolith_in_situ",
       "kind": "material",
       "layer_tags": [],
@@ -34646,11 +34823,10 @@
       ],
       "name": "Magnesium powder no-op processing v0",
       "refs_in": [
-        "recipe_magnesia_refractory_v0",
-        "recipe_magnesium_powder_v0"
+        "recipe_magnesia_refractory_v0"
       ],
       "refs_out": [
-        "magnesium_powder_v0"
+        "import_magnesium_powder"
       ],
       "status": "defined"
     },
@@ -34661,11 +34837,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Magnesium powder",
-      "refs_in": [
-        "magnesium_powder_noop_v0",
-        "silicide_formation_basic_v0",
-        "recipe_magnesium_powder_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -34726,8 +34898,8 @@
         "recipe_rotor_magnets_magnetized_v0"
       ],
       "refs_out": [
+        "import_permanent_magnet_neodymium",
         "magnetization_station_v0",
-        "permanent_magnet_neodymium",
         "rotor_magnets_magnetized"
       ],
       "status": "defined"
@@ -37370,6 +37542,19 @@
       ],
       "status": "defined"
     },
+    "mixing_tank": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "mixing_tank",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "cutting_fluid_formulation_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "mixing_tank_medium": {
       "aliases": [],
       "defined_in": "kb/items/parts/mixing_tank_medium.yaml",
@@ -39006,8 +39191,10 @@
       "layer_tags": [],
       "name": "Nickel (metal)",
       "refs_in": [
+        "alnico_alloy_synthesis_v0",
         "mond_carbonyl_process_nickel_v0",
         "nickel_extraction_meteorite_v0",
+        "stainless_steel_smelting_v0",
         "recipe_nickel_metal_import_v0"
       ],
       "refs_out": [],
@@ -39257,7 +39444,7 @@
     },
     "nife_meteorite_material": {
       "aliases": [],
-      "defined_in": "kb/items/materials/nife_meteorite_material.yaml",
+      "defined_in": "kb/items/raw_materials/nife_meteorite_material.yaml",
       "id": "nife_meteorite_material",
       "kind": "material",
       "layer_tags": [],
@@ -40863,8 +41050,7 @@
       "name": "Pass-through None material v0",
       "refs_in": [
         "recipe_ant_colony_optimization_v0",
-        "recipe_none_v0",
-        "recipe_none_v1"
+        "recipe_none_v0"
       ],
       "refs_out": [
         "none"
@@ -41528,13 +41714,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Permanent magnet neodymium (NdFeB)",
-      "refs_in": [
-        "bom_stepper_motor_v0",
-        "forming_passive_magnetic_bearing_v0",
-        "magnet_magnetization_process_v0",
-        "recipe_machine_stepper_motor_v0",
-        "recipe_permanent_magnet_neodymium_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -45753,7 +45933,7 @@
     },
     "raw_ore_or_regolith": {
       "aliases": [],
-      "defined_in": "kb/items/materials/raw_ore_or_regolith.yaml",
+      "defined_in": "kb/items/raw_materials/raw_ore_or_regolith.yaml",
       "id": "raw_ore_or_regolith",
       "kind": "material",
       "layer_tags": [],
@@ -46295,7 +46475,7 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "alnico_alloy_remelting_v0",
+        "alnico_alloy_synthesis_v0",
         "alnico_magnet_alloy_v0"
       ],
       "status": "defined"
@@ -48185,6 +48365,20 @@
         "monochloroacetic_acid",
         "precipitation_and_washing_v0",
         "sodium_hydroxide"
+      ],
+      "status": "defined"
+    },
+    "recipe_biocide_additive_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_biocide_additive_v0.yaml",
+      "id": "recipe_biocide_additive_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "biocide_additive",
+        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -52336,6 +52530,20 @@
       "refs_out": [
         "core_memory_threaded_tile_v0",
         "core_memory_threading_process_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_corrosion_inhibitor_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_corrosion_inhibitor_v0.yaml",
+      "id": "recipe_corrosion_inhibitor_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "corrosion_inhibitor",
+        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -62727,11 +62935,11 @@
         "assembly_process_general_v0",
         "bearing_ball_steel",
         "electrical_steel_sheet",
+        "import_permanent_magnet_neodymium",
         "machining_process_turning_v0",
         "magnet_magnetization_process_v0",
         "metal_stamping_process_v0",
         "motor_housing_steel",
-        "permanent_magnet_neodymium",
         "rotor_magnets_magnetized",
         "stator_wound",
         "steel_lamination_stack",
@@ -63157,20 +63365,6 @@
       "refs_out": [
         "magnesium_oxide",
         "silicon_purification_mgsi_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_magnesium_powder_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_magnesium_powder_v0.yaml",
-      "id": "recipe_magnesium_powder_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "magnesium_powder_noop_v0",
-        "magnesium_powder_v0"
       ],
       "status": "defined"
     },
@@ -65729,8 +65923,8 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "none",
-        "pass_through_none_v0"
+        "environment_source_v0",
+        "none"
       ],
       "status": "defined"
     },
@@ -66887,19 +67081,6 @@
       "refs_out": [
         "import_placeholder_v0",
         "permanent_magnet_array"
-      ],
-      "status": "defined"
-    },
-    "recipe_permanent_magnet_neodymium_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_permanent_magnet_neodymium_v0.yaml",
-      "id": "recipe_permanent_magnet_neodymium_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "permanent_magnet_neodymium"
       ],
       "status": "defined"
     },
@@ -72677,9 +72858,8 @@
       "name": "Recipe for stainless steel ingot v0",
       "refs_in": [],
       "refs_out": [
-        "stainless_ingot_cast_v0",
-        "stainless_refining_basic_v0",
-        "stainless_steel_ingot"
+        "stainless_steel_ingot",
+        "stainless_steel_smelting_v0"
       ],
       "status": "defined"
     },
@@ -77721,7 +77901,7 @@
     },
     "regolith_carbonaceous": {
       "aliases": [],
-      "defined_in": "kb/items/materials/regolith_carbonaceous.yaml",
+      "defined_in": "kb/items/raw_materials/regolith_carbonaceous.yaml",
       "id": "regolith_carbonaceous",
       "kind": "material",
       "layer_tags": [],
@@ -77907,7 +78087,7 @@
     },
     "regolith_lunar_highlands": {
       "aliases": [],
-      "defined_in": "kb/items/materials/regolith_lunar_highlands.yaml",
+      "defined_in": "kb/items/raw_materials/regolith_lunar_highlands.yaml",
       "id": "regolith_lunar_highlands",
       "kind": "material",
       "layer_tags": [],
@@ -77925,7 +78105,7 @@
     },
     "regolith_lunar_mare": {
       "aliases": [],
-      "defined_in": "kb/items/materials/regolith_lunar_mare.yaml",
+      "defined_in": "kb/items/raw_materials/regolith_lunar_mare.yaml",
       "id": "regolith_lunar_mare",
       "kind": "material",
       "layer_tags": [],
@@ -78106,7 +78286,7 @@
     },
     "regolith_raw": {
       "aliases": [],
-      "defined_in": "kb/items/materials/regolith_raw.yaml",
+      "defined_in": "kb/items/raw_materials/regolith_raw.yaml",
       "id": "regolith_raw",
       "kind": "material",
       "layer_tags": [],
@@ -80785,7 +80965,7 @@
         "recipe_magnesium_silicide_v0"
       ],
       "refs_out": [
-        "magnesium_powder_v0",
+        "import_magnesium_powder",
         "magnesium_silicide",
         "silicon_powder_v0"
       ],
@@ -82038,7 +82218,7 @@
     },
     "solar_irradiance": {
       "aliases": [],
-      "defined_in": "kb/items/materials/solar_irradiance.yaml",
+      "defined_in": "kb/items/raw_materials/solar_irradiance.yaml",
       "id": "solar_irradiance",
       "kind": "material",
       "layer_tags": [],
@@ -82078,7 +82258,7 @@
     },
     "solar_radiation": {
       "aliases": [],
-      "defined_in": "kb/items/materials/solar_radiation.yaml",
+      "defined_in": "kb/items/raw_materials/solar_radiation.yaml",
       "id": "solar_radiation",
       "kind": "material",
       "layer_tags": [],
@@ -82811,9 +82991,7 @@
       "kind": "process",
       "layer_tags": [],
       "name": "Stainless ingot casting",
-      "refs_in": [
-        "recipe_stainless_steel_ingot_v0"
-      ],
+      "refs_in": [],
       "refs_out": [
         "stainless_billet_or_slab",
         "stainless_steel_ingot"
@@ -82832,8 +83010,7 @@
       "name": "Basic stainless refining and casting",
       "refs_in": [
         "recipe_stainless_billet_or_slab_import_v0",
-        "recipe_stainless_billet_or_slab_v0",
-        "recipe_stainless_steel_ingot_v0"
+        "recipe_stainless_billet_or_slab_v0"
       ],
       "refs_out": [
         "casting_furnace_v0",
@@ -82856,6 +83033,7 @@
         "sheet_making_from_ingot_stainless_v0",
         "stainless_ingot_cast_v0",
         "stainless_refining_basic_v0",
+        "stainless_steel_smelting_v0",
         "recipe_stainless_steel_ingot_v0"
       ],
       "refs_out": [],
@@ -82891,6 +83069,30 @@
         "recipe_stainless_steel_sheet_v1"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "stainless_steel_smelting_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/stainless_steel_smelting_v0.yaml",
+      "id": "stainless_steel_smelting_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4",
+        "layer_5"
+      ],
+      "name": "Stainless steel smelting from raw metals v0",
+      "refs_in": [
+        "recipe_stainless_steel_ingot_v0"
+      ],
+      "refs_out": [
+        "carbon_reductant",
+        "casting_mold_set",
+        "chromium_metal",
+        "crucible_refractory",
+        "iron_pure",
+        "nickel_metal",
+        "stainless_steel_ingot"
+      ],
       "status": "defined"
     },
     "stamping_press_basic": {
@@ -88860,6 +89062,7 @@
         "claus_process_sulfur_recovery_v0",
         "cobalt_sulfate_extraction_v0",
         "cryolite_flux_synthesis_v0",
+        "cutting_fluid_formulation_v0",
         "drying_process_oven_v0",
         "hcl_recovery_from_cacl2_v0",
         "ilmenite_sulfuric_acid_route_v0",

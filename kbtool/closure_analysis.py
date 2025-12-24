@@ -147,11 +147,11 @@ class ClosureAnalyzer:
 
         # Check for circular dependency
         if item_id in expansion_path:
-            # Circular dependency detected - treat as unresolved
+            # Circular dependency detected - treat second encounter as virtual import for bootstrap
             item = self.kb.get_item(item_id)
             mass_kg = self._calculate_mass(item, qty, unit) if item else 0.0
-            self._accumulate(unresolved_items, item_id, qty, unit, mass_kg)
-            errors.append(f"Circular dependency detected: {item_id} (path: {' -> '.join(expansion_path)} -> {item_id})")
+            self._accumulate(imported_items, item_id, qty, unit, mass_kg)
+            errors.append(f"Bootstrap import (circular): {item_id} (path: {' -> '.join(expansion_path)} -> {item_id})")
             return
 
         # Add to expansion path
@@ -302,25 +302,40 @@ class ClosureAnalyzer:
         self.expansion_cache[cache_key] = cache_entry
 
     def _is_imported(self, item_id: str, item: Dict) -> bool:
-        """Check if an item is imported."""
-        # Check item_id naming
-        if 'import' in item_id.lower():
-            return True
-        if 'imported' in item_id.lower():
+        """
+        Check if an item is imported.
+
+        With ADR-007, imports are identified by:
+        1. Explicit is_import field (most reliable)
+        2. Item ID with import_ prefix (new architecture)
+        3. Legacy patterns (_imported suffix)
+        4. Recipe with import_placeholder variant
+        """
+        # 1. Check explicit is_import field (NEW - most reliable)
+        if item.get('is_import', False):
             return True
 
-        # Check recipe naming
+        # 2. Check item_id prefix (NEW ARCHITECTURE)
+        if item_id.startswith('import_'):
+            return True
+
+        # 3. Check for legacy import patterns (_imported suffix)
+        if '_imported' in item_id.lower():
+            return True
+
+        # 4. Check recipe - specifically for import placeholder variants
         recipe_id = item.get('recipe', '')
-        if 'import' in recipe_id.lower():
+        if recipe_id.startswith('recipe_import_placeholder_'):
             return True
-        if 'imported' in recipe_id.lower():
+        if 'import_placeholder_v0' in recipe_id.lower():
             return True
 
-        # Check notes
-        notes = item.get('notes', '')
-        if isinstance(notes, str):
-            if 'import' in notes.lower() and 'placeholder' in notes.lower():
-                return True
+        # 5. Check variant_id for import placeholder
+        variant_id = item.get('variant_id', '')
+        if variant_id.startswith('import_'):
+            return True
+        if variant_id == 'import_placeholder_v0':
+            return True
 
         return False
 

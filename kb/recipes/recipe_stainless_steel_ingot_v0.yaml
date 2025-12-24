@@ -2,8 +2,13 @@ id: recipe_stainless_steel_ingot_v0
 kind: recipe
 name: Recipe for stainless steel ingot v0
 target_item_id: stainless_steel_ingot
+variant_id: v0
 steps:
-  - process_id: stainless_refining_basic_v0
-  - process_id: stainless_ingot_cast_v0
-assumptions: "Analogous to steel ingot path; stainless feedstock path."
-notes: "Local stainless ingot production path using stainless_refining_basic_v0 and stainless_ingot_cast_v0."
+  - process_id: stainless_steel_smelting_v0
+assumptions: |
+  Stainless steel produced from primary metals (Fe, Cr, Ni).
+  Composition: Fe 68-72%, Cr 18-20%, Ni 8-12%, C <0.08%.
+notes: |
+  Primary production route for stainless steel ingot from raw metals.
+  Breaks circular dependency with stainless_billet_or_slab.
+  Previous recipe had circular dependency: ingot → billet → ingot.

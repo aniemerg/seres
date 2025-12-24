@@ -1,0 +1,393 @@
+CLOSURE ANALYSIS IMPORT ARCHITECTURE INVESTIGATION
+===================================================
+
+## SUMMARY
+
+The current closure_analysis.py uses a simple text-based detection mechanism for imports.
+With the new `import_` prefix architecture, significant changes are needed to handle both
+the new naming convention AND the existing parallel items (e.g., both `water` and `import_water`).
+
+---
+
+## 1. CURRENT IMPORT DETECTION MECHANISM
+
+Location: /Users/allanniemerg/dev2/self-replicating-system-modeling/kbtool/closure_analysis.py
+Lines: 304-325
+
+Current method: _is_imported(item_id: str, item: Dict) -> bool
+
+Detection checks (in order):
+1. Line 307: if 'import' in item_id.lower()
+2. Line 309: if 'imported' in item_id.lower()
+3. Line 314: if 'import' in recipe_id.lower()
+4. Line 316: if 'imported' in recipe_id.lower()
+5. Line 322: if 'import' in notes.lower() AND 'placeholder' in notes.lower()
+
+ISSUES WITH NEW ARCHITECTURE:
+- These are SUBSTRING checks, not prefix checks
+- Will INCORRECTLY match items like "composite_reinforcement" (contains "import")
+- NEW ARCHITECTURE uses `import_` prefix (underscore), need explicit prefix checking
+- NO explicit field to mark items as imports (relies on naming heuristics)
+
+---
+
+## 2. EXISTING IMPORT PATTERNS IN KNOWLEDGE BASE
+
+Current naming patterns found:
+a) Item files:
+   - import_placeholder_aluminum_sheet_reflector_v0 (item with import_placeholder_ prefix)
+   - power_supply_small_imported (item with _imported suffix)
+   - kevlar_fabric_import_v0 (item with _import_v0 suffix)
+   - nitrogen_source_import_or_volatile_v0 (item with _import_ substring)
+
+b) Process files:
+   - import_placeholder_*.yaml (process names with import_placeholder_ prefix)
+   - import_receiving_basic_v0.yaml (process with import_ prefix)
+   - aluminum_sheet_reflector_from_import_v0.yaml (process referencing import in name)
+
+c) Recipe files:
+   - recipe_import_placeholder_*.yaml (recipe with import_placeholder_ prefix)
+   - recipe_*_import_v*.yaml (recipe with _import_v suffix)
+   - variant_id: import_placeholder_v0 (explicit import placeholder variant)
+
+---
+
+## 3. HOW _expand_item() HANDLES IMPORTS
+
+Location: Lines 132-303
+
+The flow is:
+1. Line 195: Check if item is imported via _is_imported()
+2. Line 197: If imported, accumulate to imported_items dict
+3. Line 198: Cache as 'imported' entry
+4. Line 199: RETURN (don't expand further)
+
+PROBLEM: Imported items are TERMINAL - they don't get expanded
+This is correct for true imports (bootstrap items), but could be problematic
+if someone creates an import_water that has a recipe (it would be ignored).
+
+---
+
+## 4. HANDLING BOTH import_water AND water
+
+NEW SCENARIO: Both items exist in KB
+- import_water: placeholder for importing water
+- water: ISRU recipe for producing water from regolith/atmosphere
+
+CURRENT BEHAVIOR:
+- water: Would be expanded via recipe → trace to raw materials
+- import_water: Would be detected as imported → added to imported_items dict, not expanded
+
+EXPECTED BEHAVIOR WITH NEW ARCHITECTURE:
+- import_water: Should ALWAYS be treated as imported, even if recipe exists
+- water: Should be treated as ISRU (requires explicit NOT-imported marker)
+
+POTENTIAL ISSUE:
+If a BOM references import_water, closure analysis will correctly identify it as imported.
+If a BOM references water, it will expand via recipe.
+BUT what if a RECIPE steps references import_water vs water?
+→ Line 240-255: Recursively expands recipe inputs
+→ If input is "import_water", _is_imported() will return true
+→ Will be treated as imported (correct!)
+
+---
+
+## 5. CRITICAL LINE NUMBERS FOR CHANGES
+
+DETECTION LOGIC (needs refactoring):
+- Line 304-325: _is_imported() method
+  Current: Substring matching
+  Required: Explicit prefix checking for `import_`
+
+EXPANSION LOGIC (mostly OK, but clarification needed):
+- Line 195: Call to _is_imported()
+- Line 153: Circular dependency handling (treats as bootstrap import)
+- Line 161-174: Cache handling for imported items
+
+ACCUMULATION & REPORTING:
+- Line 107: Pass imported_items dict to _expand_item()
+- Line 116-117: Calculate imported_mass
+- Line 127: Calculate imported_percent
+- Line 443-450: Format imported_items for report
+
+---
+
+## 6. SPECIFIC CHANGES NEEDED
+
+### Change 1: Update _is_imported() Method (Lines 304-325)
+
+CURRENT CODE:
+```python
+def _is_imported(self, item_id: str, item: Dict) -> bool:
+    """Check if an item is imported."""
+    # Check item_id naming
+    if 'import' in item_id.lower():
+        return True
+    if 'imported' in item_id.lower():
+        return True
+    
+    # Check recipe naming
+    recipe_id = item.get('recipe', '')
+    if 'import' in recipe_id.lower():
+        return True
+    if 'imported' in recipe_id.lower():
+        return True
+    
+    # Check notes
+    notes = item.get('notes', '')
+    if isinstance(notes, str):
+        if 'import' in notes.lower() and 'placeholder' in notes.lower():
+            return True
+    
+    return False
+```
+
+ISSUES:
+1. Line 307: `if 'import' in item_id.lower()` → Too broad
+   - Matches: "composite", "import_water", "imported_item", "reimport" ❌
+   - Need: Only match `import_` prefix (with underscore)
+
+2. Line 309: `if 'imported' in item_id.lower()` → Also too broad
+   - Matches: "power_supply_small_imported" ✓
+   - Also matches: "re-imported", "coated_imported_sheet" ❌
+
+3. Line 314-316: Recipe checks use same logic
+   - Should check `recipe_id` for `import_placeholder_v0` pattern
+   - Not just substring matching
+
+4. Line 322: Notes check requires BOTH 'import' AND 'placeholder'
+   - This is overly restrictive
+   - Should support explicit is_imported field in item definition
+
+REQUIRED NEW LOGIC:
+```python
+def _is_imported(self, item_id: str, item: Dict) -> bool:
+    """Check if an item is imported."""
+    
+    # 1. Check explicit is_imported field (NEW - most reliable)
+    if item.get('is_imported', False):
+        return True
+    
+    # 2. Check item_id prefix (NEW ARCHITECTURE)
+    if item_id.startswith('import_'):
+        return True
+    
+    # 3. Check for legacy import patterns
+    if '_imported' in item_id.lower():
+        return True
+    
+    # 4. Check recipe - specifically for import placeholder variants
+    recipe_id = item.get('recipe', '')
+    if recipe_id.startswith('recipe_import_placeholder_'):
+        return True
+    if 'import_placeholder_v0' in recipe_id.lower():
+        return True
+    
+    # 5. Check variant_id for import placeholder
+    variant_id = item.get('variant_id', '')
+    if variant_id.startswith('import_'):
+        return True
+    if variant_id == 'import_placeholder_v0':
+        return True
+    
+    return False
+```
+
+---
+
+## 7. EDGE CASE: Circular Dependencies with Imports
+
+Location: Lines 148-155
+
+CURRENT CODE:
+```python
+if item_id in expansion_path:
+    # Circular dependency detected - treat second encounter as virtual import for bootstrap
+    item = self.kb.get_item(item_id)
+    mass_kg = self._calculate_mass(item, qty, unit) if item else 0.0
+    self._accumulate(imported_items, item_id, qty, unit, mass_kg)
+    errors.append(f"Bootstrap import (circular): {item_id} (path: {' -> '.join(expansion_path)} -> {item_id})")
+    return
+```
+
+This is treating circular dependencies as bootstrap imports.
+With new architecture:
+- If the circular item has `import_` prefix → it's already marked as import
+- If NOT marked as import but circular → this is a real issue
+- Current behavior (convert to import) might mask real problems
+
+RECOMMENDATION:
+Keep this logic but add a warning if circular item is NOT explicitly marked as imported.
+
+---
+
+## 8. CACHE HANDLING (Lines 160-174)
+
+CURRENT IMPLEMENTATION:
+```python
+cache_key = f"{item_id}:{qty}:{unit}"
+if cache_key in self.expansion_cache:
+    # Add cached results
+    cached = self.expansion_cache[cache_key]
+    for material_id, data in cached.get('raw', {}).items():
+        self._accumulate(raw_materials, material_id, ...)
+    for import_id, data in cached.get('imported', {}).items():
+        self._accumulate(imported_items, import_id, ...)
+    for unres_id, data in cached.get('unresolved', {}).items():
+        self._accumulate(unresolved_items, unres_id, ...)
+    return
+```
+
+STATUS: ✓ This will work fine with new architecture
+- Cache stores 'imported' category separately
+- No changes needed here
+
+---
+
+## 9. WHAT HAPPENS WITH RECIPES REFERENCING import_water?
+
+Scenario: Recipe for `concrete` has input `import_water`
+
+Code flow:
+1. Line 234-255: Iterates recipe steps
+2. Line 240: Gets input_id = "import_water"
+3. Line 253: Calls `_expand_item("import_water", ...)`
+4. Line 195: Calls `_is_imported("import_water", item_dict)`
+5. NEW _is_imported() detects `import_water` has `import_` prefix → returns True
+6. Line 197: Accumulates to imported_items
+7. Line 199: Returns without expanding
+
+RESULT: ✓ Correct! import_water is treated as imported, not expanded.
+
+---
+
+## 10. WHAT HAPPENS WITH RECIPES REFERENCING water?
+
+Scenario: Recipe for `concrete` has input `water`
+
+Code flow:
+1. Line 234-255: Iterates recipe steps
+2. Line 240: Gets input_id = "water"
+3. Line 253: Calls `_expand_item("water", ...)`
+4. Line 195: Calls `_is_imported("water", item_dict)`
+5. NEW _is_imported() checks:
+   - water.startswith('import_') → False
+   - water.get('is_imported') → False (assuming not set)
+   - _is_imported() returns False
+6. Line 202-219: Checks for recipe
+7. Line 203: Gets recipe_id = "recipe_water_v0"
+8. Recursively expands water recipe inputs
+
+RESULT: ✓ Correct! water is treated as ISRU, expanded via recipe.
+
+---
+
+## 11. COEXISTENCE PROBLEM: Handling BOTH Versions
+
+SCENARIO: BOM has component that could be satisfied by either import_water or water
+
+Current behavior:
+- BOM specifies `water` → gets expanded via ISRU recipe
+- BOM specifies `import_water` → treated as import
+
+ISSUE: No automatic fallback or substitution
+- If import_water doesn't exist, error occurs
+- If water recipe is broken, can't fall back to import
+
+RECOMMENDATION (outside of closure_analysis):
+- Item definitions should have explicit `fallback_items` field
+- Or use `variant_id` to specify preference order
+
+---
+
+## 12. MISSING FIELDS PROPOSAL
+
+To properly support the new architecture, consider adding to item definitions:
+
+```yaml
+id: water
+name: Water
+kind: material
+mass: 1.0
+unit: kg
+# NEW FIELDS:
+is_imported: false  # Explicit marker (overrides heuristics)
+import_variant: import_water  # Link to import variant if exists
+# OR for import items:
+is_imported: true
+isru_variant: water  # Link to ISRU variant if exists
+```
+
+---
+
+## 13. FULL IMPACT MATRIX
+
+┌─────────────────────┬──────────────────┬──────────────────┐
+│ Scenario            │ Current Behavior │ New Arch Behavior│
+├─────────────────────┼──────────────────┼──────────────────┤
+│ Item: water         │ Expands via      │ Same: Expands    │
+│ Recipe: recipe_     │ recipe           │ via recipe       │
+│ water_v0            │                  │                  │
+├─────────────────────┼──────────────────┼──────────────────┤
+│ Item:               │ Detected as      │ Same: Detected   │
+│ import_water        │ import (substring│ as import        │
+│ Recipe: None        │ match)           │ (prefix match)   │
+├─────────────────────┼──────────────────┼──────────────────┤
+│ Item: water_        │ Detected as      │ NOT imported     │
+│ imported            │ import (substring│ (suffix, not     │
+│ Recipe: recipe_     │ match)           │ prefix)          │
+│ water_v0            │ INCORRECT!       │ CORRECT!         │
+├─────────────────────┼──────────────────┼──────────────────┤
+│ Recipe inputs       │ Substring match  │ Prefix match     │
+│ referencing         │ works but risky  │ precise & safe   │
+│ import_water        │                  │                  │
+└─────────────────────┴──────────────────┴──────────────────┘
+
+---
+
+## 14. TEST CASES TO VERIFY CHANGES
+
+1. Test: water (ISRU item with recipe)
+   Expected: Expands, classified as raw_materials
+   
+2. Test: import_water (import item with no recipe)
+   Expected: Not expanded, classified as imported_items
+   
+3. Test: Item with 'composite' in name (should NOT match import)
+   Expected: Not classified as import
+   
+4. Test: Recipe with 'import_placeholder_v0' variant
+   Expected: Item classified as import even without explicit prefix
+   
+5. Test: Recipe input referencing import_water
+   Expected: Input treated as imported, not expanded
+   
+6. Test: Recipe input referencing water
+   Expected: Input expanded via recipe chain
+
+---
+
+## 15. SUMMARY OF CODE CHANGES REQUIRED
+
+File: /Users/allanniemerg/dev2/self-replicating-system-modeling/kbtool/closure_analysis.py
+
+1. Replace _is_imported() method (Lines 304-325)
+   - Add explicit prefix checking for `import_`
+   - Support `is_imported` field in items
+   - Check for `import_placeholder_v0` variant pattern
+   
+2. Consider adding optional logging (Lines 194-200)
+   - Log why item was classified as import
+   - Helpful for debugging classification issues
+   
+3. Optional: Add is_imported field to item schema
+   - Provides explicit override for heuristics
+   - Increases robustness
+
+4. Consider: Add validation warnings for items containing 'import'/'imported'
+   that don't match new patterns
+   - Helps identify legacy items needing updates
+
+---
+
+END OF INVESTIGATION

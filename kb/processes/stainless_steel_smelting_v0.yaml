@@ -1,0 +1,51 @@
+id: stainless_steel_smelting_v0
+kind: process
+name: Stainless steel smelting from raw metals v0
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: iron_pure
+    qty: 0.70
+    unit: kg
+  - item_id: chromium_metal
+    qty: 0.18
+    unit: kg
+  - item_id: nickel_metal
+    qty: 0.10
+    unit: kg
+  - item_id: carbon_reductant
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: stainless_steel_ingot
+    qty: 1.0
+    unit: kg
+requires_ids:
+  - crucible_refractory
+  - casting_mold_set
+resource_requirements:
+  - machine_id: casting_furnace_v0
+    qty: 3.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 5.0
+  notes: "Melting Fe, Cr, Ni and alloying to form stainless steel"
+time_model:
+  type: fixed_time
+  hr_per_batch: 4.0
+notes: |
+  Primary production of stainless steel from constituent metals.
+
+  Composition (typical 18-8 stainless / 304 equivalent):
+  - Iron: 68-72%
+  - Chromium: 18-20%
+  - Nickel: 8-12%
+  - Carbon: <0.08% (controlled)
+
+  Process: Melt iron, add chromium and nickel, control carbon content,
+  cast into ingot molds, allow to solidify.
+
+  Breaks circular dependency: stainless_steel_ingot can now be made from raw metals
+  instead of requiring stainless_billet_or_slab (which requires stainless_steel_ingot).
