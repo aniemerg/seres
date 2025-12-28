@@ -1,30 +1,45 @@
 id: recipe_transparent_panel_set_v0
 kind: recipe
 target_item_id: transparent_panel_set
-variant_id: import_v0
+produces_id: transparent_panel_set
+produces_qty: 1
+produces_unit: unit
+variant_id: v0
 steps:
-  - process_id: import_receiving_basic_v0
+  - process_id: glass_casting_v0
     inputs:
-      - item_id: stock_material
-        qty: 5.0
+      - item_id: glass_raw_materials
+        qty: 11.0
         unit: kg
-        notes: "Imported glass panel stock"
+        notes: "Glass batch for casting panel blanks"
+    outputs:
+      - item_id: cast_glass_parts
+        qty: 10.0
+        unit: kg
+    est_time_hr: 4.5
+    labor_hours: 0.5
+    notes: "Cast glass panel blanks and anneal"
+  - process_id: surface_finishing_v0
+    inputs:
+      - item_id: cast_glass_parts
+        qty: 10.0
+        unit: kg
+        notes: "Cut, grind, and polish panels to final dimensions"
+      - item_id: sealing_gaskets
+        qty: 1.0
+        unit: unit
+        notes: "Gaskets for panel mounting and sealing"
     outputs:
       - item_id: transparent_panel_set
         qty: 1
         unit: unit
-    est_time_hr: 0.4
-    labor_hours: 0.4
-    notes: "Receive and stage imported transparent panels"
+    est_time_hr: 3.0
+    labor_hours: 2.0
+    notes: "Finish, inspect, and package transparent panel set"
 notes: |
-  Import recipe for transparent panel set.
+  Local manufacturing recipe for transparent panel set.
 
-  Glass panel production requires:
-  - Float glass manufacturing (molten glass on molten tin)
-  - Annealing for stress relief
-  - Cutting and edge grinding
-  - Tempering or laminating (for safety glass)
-  - Quality inspection for optical clarity
-
-  Complex glass manufacturing process.
-  Marked as import.
+  Glass panel production includes:
+  - Casting and annealing glass panel blanks
+  - Cutting, grinding, and polishing to final size
+  - Fitment of sealing gaskets for mounting

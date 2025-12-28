@@ -13,6 +13,20 @@ steps:
     machine_hours: 1.0
     notes: "Excavate highland regolith from surface"
   - process_id: regolith_screening_sieving_v0
+    inputs:
+      - item_id: regolith_raw
+        qty: 100.0
+        unit: kg
+        notes: "Raw regolith from excavation"
+    outputs:
+      - item_id: regolith_coarse_fraction
+        qty: 60.0
+        unit: kg
+        notes: "Coarse fraction (~60% of input)"
+      - item_id: regolith_fine_fraction
+        qty: 40.0
+        unit: kg
+        notes: "Fine fraction (~40% of input)"
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Screen and separate size fractions"

@@ -6,7 +6,7 @@
 - machine: 344
 - material: 505
 - part: 991
-- process: 891
+- process: 893
 - recipe: 2037
 - resource: 2
 - scenario: 1
@@ -20,9 +20,9 @@ Total: 248 missing fields
 See `out/missing_fields.jsonl` for details.
 
 ## Missing data (null values)
-Total: 916 null fields
+Total: 910 null fields
 - bom: 89
-- process: 827
+- process: 821
 
 See `out/null_values.jsonl` for details.
 
@@ -32,10 +32,10 @@ See `out/null_values.jsonl` for details.
 ## Queue Filtering
 **Status**: Enabled
 **Mode**: boms_recipes_parts_only
-**Total gaps found**: 254
+**Total gaps found**: 248
 **Filtered out**: 248
-**Added to queue**: 6
-**Filtering rate**: 97.6%
+**Added to queue**: 0
+**Filtering rate**: 100.0%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

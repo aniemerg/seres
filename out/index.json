@@ -14190,7 +14190,8 @@
         "prism_cut_and_polish_v0",
         "recipe_cast_glass_parts_v0",
         "recipe_glass_lens_objective_set_v0",
-        "recipe_lens_assembly_magnifying_v0"
+        "recipe_lens_assembly_magnifying_v0",
+        "recipe_transparent_panel_set_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -15527,6 +15528,7 @@
         "bom_chemical_bath_station_v0",
         "copper_etching_process_v0",
         "pcb_fabrication_v0",
+        "solar_cell_fabrication_v0",
         "recipe_chemical_bath_station_v0"
       ],
       "refs_out": [
@@ -18104,8 +18106,10 @@
         "bom_controlled_atmosphere_chamber_v0",
         "fused_silica_production_v0",
         "glass_envelope_forming_v0",
+        "ndfeb_magnet_sintering_v0",
         "silica_glass_high_purity_v0",
         "sintering_basic_v0",
+        "solar_cell_fabrication_v0",
         "recipe_machine_controlled_atmosphere_chamber_v0"
       ],
       "refs_out": [
@@ -22845,7 +22849,9 @@
         "copper_etching_process_v0",
         "microcontroller_ic_generic_fabrication_v0",
         "pcb_fabrication_v0",
-        "recipe_etching_chemicals_v0"
+        "solar_cell_fabrication_v0",
+        "recipe_etching_chemicals_v0",
+        "recipe_solar_cell_set_import_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -26517,7 +26523,8 @@
         "recipe_cast_glass_parts_v0",
         "recipe_fresnel_lens_large_scale_v0",
         "recipe_fresnel_lens_segment_v0",
-        "recipe_spectrometer_simple_prism_v0"
+        "recipe_spectrometer_simple_prism_v0",
+        "recipe_transparent_panel_set_v0"
       ],
       "refs_out": [
         "cast_glass_parts",
@@ -26756,7 +26763,8 @@
         "glass_casting_process_v0",
         "glass_casting_v0",
         "recipe_cast_glass_parts_v0",
-        "recipe_glass_raw_materials_v0"
+        "recipe_glass_raw_materials_v0",
+        "recipe_transparent_panel_set_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -29387,6 +29395,7 @@
       "name": "Hot press v0",
       "refs_in": [
         "bom_hot_press_v0",
+        "ndfeb_magnet_sintering_v0",
         "sintering_and_hot_pressing_v0",
         "recipe_machine_hot_press_v0"
       ],
@@ -31049,7 +31058,6 @@
         "recipe_nitrogen_gas_v0",
         "recipe_optical_film_or_tape_import_v0",
         "recipe_passive_thermal_insulation_v0",
-        "recipe_permanent_magnet_neodymium_v0",
         "recipe_polyester_film_import_v0",
         "recipe_press_brake_v0",
         "recipe_pv_module_imported_v0",
@@ -31060,9 +31068,7 @@
         "recipe_sensor_suite_general_v0",
         "recipe_sensor_suite_general_v1",
         "recipe_shape_memory_wire_sma_v0",
-        "recipe_solar_cell_set_import_v0",
         "recipe_sulfur_elemental_v0",
-        "recipe_transparent_panel_set_v0",
         "recipe_tungsten_powder_v0",
         "recipe_voltage_regulator_ic_v0",
         "recipe_wood_handle_stock_import_v0"
@@ -39490,6 +39496,27 @@
       ],
       "status": "defined"
     },
+    "ndfeb_magnet_sintering_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/ndfeb_magnet_sintering_v0.yaml",
+      "id": "ndfeb_magnet_sintering_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "NdFeB magnet sintering and machining",
+      "refs_in": [
+        "recipe_permanent_magnet_neodymium_v0"
+      ],
+      "refs_out": [
+        "controlled_atmosphere_chamber",
+        "hot_press_v0",
+        "permanent_magnet_neodymium",
+        "processed_powder_mixture",
+        "sintering_furnace_v0"
+      ],
+      "status": "defined"
+    },
     "negative_electrode_pressed": {
       "aliases": [],
       "defined_in": "kb/items/parts/negative_electrode_pressed.yaml",
@@ -42069,6 +42096,7 @@
         "bom_pcb_fab_equipment_v0",
         "pcb_fabrication_v0",
         "photolithography_process_simple_v0",
+        "solar_cell_fabrication_v0",
         "recipe_pcb_fab_equipment_v0"
       ],
       "refs_out": [
@@ -42430,6 +42458,7 @@
         "bom_stepper_motor_v0",
         "forming_passive_magnetic_bearing_v0",
         "magnet_magnetization_process_v0",
+        "ndfeb_magnet_sintering_v0",
         "recipe_machine_stepper_motor_v0",
         "recipe_permanent_magnet_neodymium_v0"
       ],
@@ -42633,7 +42662,9 @@
       "name": "Phosphorus (white)",
       "refs_in": [
         "phosphorus_extraction_from_kreep_v0",
-        "recipe_phosphorus_white_v0"
+        "solar_cell_fabrication_v0",
+        "recipe_phosphorus_white_v0",
+        "recipe_solar_cell_set_import_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -46006,7 +46037,9 @@
       "layer_tags": [],
       "name": "Processed powder mixture",
       "refs_in": [
+        "ndfeb_magnet_sintering_v0",
         "powder_processing_v0",
+        "recipe_permanent_magnet_neodymium_v0",
         "recipe_processed_powder_mixture_v0"
       ],
       "refs_out": [],
@@ -64970,6 +65003,7 @@
         "oxygen_extraction_molten_regolith_electrolysis_v0",
         "regolith_coarse_fraction",
         "regolith_crushing_grinding_v0",
+        "regolith_fine_fraction",
         "regolith_powder",
         "regolith_raw",
         "regolith_screening_sieving_v0"
@@ -68289,8 +68323,9 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "import_receiving_basic_v0",
-        "permanent_magnet_neodymium"
+        "ndfeb_magnet_sintering_v0",
+        "permanent_magnet_neodymium",
+        "processed_powder_mixture"
       ],
       "status": "defined"
     },
@@ -73700,7 +73735,12 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "import_receiving_basic_v0",
+        "etching_chemicals",
+        "phosphorus_white",
+        "silicon_nitride_ceramic_v0",
+        "silicon_single_crystal_ingot",
+        "silver_contact_material",
+        "solar_cell_fabrication_v0",
         "solar_cell_set"
       ],
       "status": "defined"
@@ -76778,8 +76818,11 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "import_receiving_basic_v0",
-        "stock_material",
+        "cast_glass_parts",
+        "glass_casting_v0",
+        "glass_raw_materials",
+        "sealing_gaskets",
+        "surface_finishing_v0",
         "transparent_panel_set"
       ],
       "status": "defined"
@@ -79570,6 +79613,7 @@
         "glass_melting_and_forming_v0",
         "regolith_screening_sieving_v0",
         "sintering_and_hot_pressing_v0",
+        "recipe_metal_alloy_bulk_v0",
         "recipe_regolith_fine_fraction_v0"
       ],
       "refs_out": [],
@@ -81591,7 +81635,8 @@
         "vacuum_seal_assembly_fabrication_v0",
         "recipe_furnace_door_assembly_v0",
         "recipe_machine_water_electrolysis_system_v0",
-        "recipe_sealing_gaskets_v0"
+        "recipe_sealing_gaskets_v0",
+        "recipe_transparent_panel_set_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -82728,7 +82773,9 @@
       "layer_tags": [],
       "name": "Silicon nitride ceramic (Si3N4) v0",
       "refs_in": [
+        "solar_cell_fabrication_v0",
         "recipe_silicon_nitride_ceramic_v0",
+        "recipe_solar_cell_set_import_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
@@ -82864,7 +82911,9 @@
       "name": "Silicon single-crystal ingot",
       "refs_in": [
         "czochralski_process_silicon_v0",
-        "recipe_silicon_single_crystal_ingot_v0"
+        "solar_cell_fabrication_v0",
+        "recipe_silicon_single_crystal_ingot_v0",
+        "recipe_solar_cell_set_import_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -83081,13 +83130,15 @@
       "refs_in": [
         "casting_silver_contact_material_v0",
         "contact_material_application_v0",
+        "solar_cell_fabrication_v0",
         "recipe_circuit_breaker_thermal_v0",
         "recipe_contactor_high_power_v0",
         "recipe_contacts_with_silver_v0",
         "recipe_housing_with_contacts_v0",
         "recipe_relay_electromagnetic_v0",
         "recipe_silver_contact_material_v0",
-        "recipe_silver_contact_material_v1"
+        "recipe_silver_contact_material_v1",
+        "recipe_solar_cell_set_import_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -83271,6 +83322,7 @@
         "bom_sintering_furnace_v0",
         "ferrite_sintering_process_v0",
         "ferrite_toroid_sintering_v0",
+        "ndfeb_magnet_sintering_v0",
         "regolith_sinter_block_process_v0",
         "sintering_and_hot_pressing_v0",
         "tungsten_blank_sintering_high_temp_v0",
@@ -83778,6 +83830,32 @@
       ],
       "status": "defined"
     },
+    "solar_cell_fabrication_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/solar_cell_fabrication_v0.yaml",
+      "id": "solar_cell_fabrication_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6",
+        "layer_7"
+      ],
+      "name": "Solar cell wafer fabrication and metallization",
+      "refs_in": [
+        "recipe_solar_cell_set_import_v0"
+      ],
+      "refs_out": [
+        "chemical_bath_station",
+        "controlled_atmosphere_chamber",
+        "etching_chemicals",
+        "pcb_fab_equipment",
+        "phosphorus_white",
+        "silicon_nitride_ceramic_v0",
+        "silicon_single_crystal_ingot",
+        "silver_contact_material",
+        "solar_cell_set"
+      ],
+      "status": "defined"
+    },
     "solar_cell_set": {
       "aliases": [],
       "defined_in": "kb/items/parts/solar_cell_set.yaml",
@@ -83786,6 +83864,7 @@
       "layer_tags": [],
       "name": "Solar cell set",
       "refs_in": [
+        "solar_cell_fabrication_v0",
         "recipe_solar_cell_set_import_v0"
       ],
       "refs_out": [],
@@ -85948,7 +86027,6 @@
         "recipe_safety_controller_electronics_imported_import_v0",
         "recipe_sensor_suite_general_v0",
         "recipe_stock_material_v0",
-        "recipe_transparent_panel_set_v0",
         "recipe_tungsten_powder_v0",
         "recipe_voltage_regulator_ic_v0"
       ],
@@ -86557,7 +86635,8 @@
         "recipe_nickel_sheet_rolling_v0",
         "recipe_nickel_sheet_v0",
         "recipe_protective_cover_set_v0",
-        "recipe_radiator_panel_v0"
+        "recipe_radiator_panel_v0",
+        "recipe_transparent_panel_set_v0"
       ],
       "refs_out": [
         "surface_grinder"
