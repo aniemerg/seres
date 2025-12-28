@@ -13,13 +13,14 @@ steps:
   - process_id: assembly_basic_v0
     est_time_hr: 1.5
     labor_hours: 1.5
+    inputs:
+      - item_id: capacitor_bank_filter_v0
+        qty: 1.0
+        unit: unit
     notes: "Mount capacitors in enclosure, install safety discharge circuits and connections"
   - process_id: integration_test_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test capacitance, voltage rating, and verify safety discharge functions"
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.0
-    notes: "High-voltage capacitor elements initially imported"
 assumptions: Capacitor bank assembled from imported capacitor elements. Locally fabricated enclosure, wiring, and safety systems.
 notes: Power capacitor bank for energy storage and power smoothing. Used in power conditioning and solar energy systems.

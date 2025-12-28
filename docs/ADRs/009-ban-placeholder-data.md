@@ -50,6 +50,13 @@ notes: "External import placeholder for inductive proximity sensor."
 ```
 Should be proper `is_import: true` items per ADR-007.
 
+**CRITICAL FINDING:** One file in this category is far more problematic than others:
+- `import_placeholder_v0` - Referenced in **90+ recipes** across the KB
+- Currently has specific iron processing logic (iron ore → iron powder)
+- Being misused as generic import for electronics, chemicals, metals, assemblies
+- Should be replaced with `import_receiving_basic_v0` (proper generic receiving process)
+- See Category 7 below for full analysis
+
 #### 4. Stock_Material Recipes (25 recipes)
 **Impact:** HIGHEST - Completely fake
 ```yaml
@@ -82,6 +89,70 @@ Created to unblock dependencies without solving underlying gaps.
 - `raw_material` - Generic feedstock
 - `none` - Null placeholder
 - `placeholder_component` - Generic placeholder
+
+#### 7. Generic Import Placeholder Process (1 file, 90+ references)
+**Impact:** CRITICAL - Systemic misuse
+```yaml
+id: import_placeholder_v0
+kind: process
+name: Iron powder/or sheet production from ore (replaced placeholder v0)
+inputs:
+- item_id: iron_ore_or_ilmenite
+  qty: 1.0
+outputs:
+- item_id: iron_powder_or_sheet
+  qty: 1.0
+notes: "Replaced placeholder with concrete production path..."
+```
+
+**The Problem:**
+- This single file is referenced in **90+ recipes** across the entire KB
+- Has specific iron ore processing logic (ore → iron powder/sheet)
+- Recipes misuse it for completely unrelated items:
+  - Electronics (multimeters, ICs, microcontrollers, sensors)
+  - Chemicals (oxalic acid, potassium hydroxide, phosphorus, sulfur dioxide)
+  - Specialty metals (cobalt, chromium, zinc, lead)
+  - Complex assemblies (vacuum gauges, calibration equipment, optical components)
+  - Compiled software (firmware binaries, programmed microcontrollers)
+
+**Why This Happened:**
+- Started as a generic import placeholder
+- Someone tried to "fix" it by adding iron processing logic
+- 90+ recipes continue using it as generic import, ignoring the iron logic
+
+**Proper Solution:**
+Replace all references with `import_receiving_basic_v0`:
+```yaml
+id: import_receiving_basic_v0
+kind: process
+name: Import receiving and staging (basic)
+inputs: []   # ← Defined at recipe level
+outputs: []  # ← Defined at recipe level
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.05
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.3
+```
+
+This is the **correct pattern** - generic process with recipe-level inputs/outputs.
+
+**Cleanup Required:**
+1. Batch update all 90+ recipes to use `import_receiving_basic_v0`
+2. For each recipe, verify item should be imported (add `is_import: true` per ADR-007)
+3. Delete `import_placeholder_v0.yaml` once all references removed
+4. Some items may need real manufacturing recipes instead of import
+
+**Detection Query:**
+```bash
+grep -r "import_placeholder_v0" kb/recipes --include="*.yaml" -l | wc -l
+# Returns: 90+
+```
 
 ### Problem Patterns Observed
 

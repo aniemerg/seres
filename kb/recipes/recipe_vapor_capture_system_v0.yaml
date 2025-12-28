@@ -3,9 +3,37 @@ kind: recipe
 target_item_id: vapor_capture_system_v0
 variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    notes: "Placeholder - machine assembly process to be defined"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: cold_trap_module_v0
+        qty: 1
+        unit: unit
+      - item_id: vacuum_pump_basic
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_set
+        qty: 1
+        unit: unit
+      - item_id: coolant_reservoir
+        qty: 1
+        unit: unit
+      - item_id: heat_exchanger_compact
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: vapor_capture_system_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: Assemble condenser, pump, piping, coolant loop, sensors, and controls per BOM.
 notes: |
   Assembly recipe for vapor capture system.
   Combines cold trap condensers, collection manifold, reservoir, and vacuum pump.
-  Future: Define detailed assembly process using welding, piping, and integration steps.
+  Based on bom_vapor_capture_system_v0 components.

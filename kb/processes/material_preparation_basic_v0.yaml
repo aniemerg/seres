@@ -5,11 +5,11 @@ layer_tags:
   - layer_4
   - layer_5
 inputs:
-  - item_id: raw_material
+  - item_id: raw_ore_or_regolith
     qty: 1.0
     unit: kg
 outputs:
-  - item_id: prepared_material
+  - item_id: feedstock_material
     qty: 0.95
     unit: kg
 requires_ids:
@@ -25,4 +25,4 @@ time_model:
   type: linear_rate
   setup_hr: 0.1
   rate_kg_per_hr: 50.0
-notes: "Basic material preparation operations to ready raw materials for processing. Includes cleaning (removing dirt, scale, oxidation), sizing (crushing, cutting to length), drying (moisture removal), and sorting (grading by size or quality). 5% material loss typical from cleaning waste and sizing operations. Used as preliminary step before melting, forming, machining, or chemical processing."
+notes: "Basic material preparation operations to ready regolith or ore feedstock for processing. Includes cleaning (removing dirt, scale, oxidation), sizing (crushing, cutting to length), drying (moisture removal), and sorting (grading by size or quality). 5% material loss typical from cleaning waste and sizing operations. Used as preliminary step before melting, forming, machining, or chemical processing."

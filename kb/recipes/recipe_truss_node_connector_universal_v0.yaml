@@ -1,10 +1,31 @@
 id: recipe_truss_node_connector_universal_v0
 kind: recipe
-name: Import truss_node_connector_universal_v0
+name: Truss node connector (universal) fabrication v0
 produces_id: truss_node_connector_universal_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: truss_node_connector_universal_v0
 steps:
-  - process_id: import_placeholder_truss_node_connector_v0
-notes: "Import placeholder for truss_node_connector_universal_v0; local production not defined yet."
+  - process_id: metal_cutting_process_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 0.27
+        unit: kg
+    est_time_hr: 0.5
+    notes: Cut connector blanks from steel plate or sheet
+  - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 0.27
+        unit: kg
+    outputs:
+      - item_id: truss_node_connector_universal_v0
+        qty: 0.25
+        unit: kg
+    est_time_hr: 0.5
+    notes: Drill/finish connector holes and interfaces
+notes: "Local fabrication path for universal truss node connector from steel stock."

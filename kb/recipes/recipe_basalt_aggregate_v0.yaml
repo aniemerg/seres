@@ -3,16 +3,40 @@ target_item_id: basalt_aggregate
 variant_id: v0
 steps:
   - process_id: rock_excavation_basic_v0
+    inputs:
+      - item_id: lunar_regolith_raw
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: regolith_excavated
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Excavate basalt rock and extract suitable chunks."
   - process_id: crushing_and_screening_basic_v0
+    inputs:
+      - item_id: regolith_excavated
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: regolith_crushed
+        qty: 0.9
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5
     notes: "Crush basalt and screen to desired aggregate size."
   - process_id: drying_basic_v0
+    inputs:
+      - item_id: regolith_crushed
+        qty: 0.9
+        unit: kg
+    outputs:
+      - item_id: basalt_aggregate
+        qty: 0.85
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.25

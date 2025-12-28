@@ -2,8 +2,6 @@ id: recipe_cutting_fluid_v0
 target_item_id: cutting_fluid
 variant_id: v0
 steps:
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.0
-    notes: "Import cutting fluid concentrate; local dilution and maintenance handled in use."
-assumptions: Cutting fluid concentrates are imported initially; local regeneration (filtration/treatment) can extend service life once in use.
-notes: Cutting fluid extends tool life, improves surface finish, and removes chips during machining. Water-based emulsions or oil-based fluids; import baseline until additive chemistry is modeled.
+  - process_id: cutting_fluid_formulation_v0
+assumptions: Cutting fluid formulated locally from water, emulsifying oil, corrosion inhibitor, and biocide additives.
+notes: Cutting fluid extends tool life, improves surface finish, and removes chips during machining. Water-based emulsion formulation.

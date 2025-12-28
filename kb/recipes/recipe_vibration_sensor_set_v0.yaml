@@ -13,13 +13,14 @@ steps:
   - process_id: assembly_basic_v0
     est_time_hr: 1.0
     labor_hours: 1.0
+    inputs:
+      - item_id: accelerometer_mechanical_v0
+        qty: 4.0
+        unit: each
     notes: "Mount sensors in housings, attach mounting hardware, complete cable assemblies"
   - process_id: calibration_basic_v0
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate vibration sensors against known vibration sources or reference accelerometers"
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.0
-    notes: "Accelerometer sensing elements initially imported"
 assumptions: Piezoelectric or MEMS accelerometer elements imported. Housings, signal conditioning, and mounting hardware fabricated locally.
 notes: Set of vibration sensors for dynamic balancing and machine monitoring. Includes calibrated accelerometers with signal conditioning.

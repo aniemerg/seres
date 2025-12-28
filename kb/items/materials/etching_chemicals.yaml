@@ -1,11 +1,25 @@
 id: etching_chemicals
 kind: material
-name: Etching chemicals
+name: Etching chemicals (imported)
 mass: 1.0
 unit: kg
 material_class: chemical
-notes: Chemicals for PCB etching and metal surface etching. Common etchants include
-  ferric chloride (FeCl3), ammonium persulfate, or cupric chloride for copper removal.
-  Also includes photoresist developers and stripping solutions. Used in PCB fabrication
-  and chemical milling.
-recipe: recipe_etching_chemicals_v0
+is_import: true
+notes: |
+  Imported specialty chemicals for PCB etching and metal surface etching.
+
+  Common etchants include:
+  - Ferric chloride (FeCl3) for copper etching
+  - Ammonium persulfate ((NH4)2S2O8) for copper removal
+  - Cupric chloride (CuCl2) for controlled etching
+  - Photoresist developers and stripping solutions
+
+  Used in PCB fabrication and chemical milling.
+
+  Marked as import due to:
+  - Complex chemical synthesis requiring purification and quality control
+  - Small quantities needed (specialty chemical, not bulk material)
+  - Requires chemical processing infrastructure beyond early manufacturing capability
+
+  Future ISRU alternative: Could be synthesized from base chemicals (Fe/Cu metals + HCl + oxidizers)
+  but requires significant chemical processing investment for minimal mass savings.

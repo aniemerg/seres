@@ -3,11 +3,34 @@ kind: material
 name: Impure cobalt metal
 unit: kg
 material_class: metal
+is_import: true
 notes: |
-  Impure cobalt metal feedstock derived from meteoritic NiFe material.
+  Impure cobalt metal feedstock for purification via sulfate extraction.
+
+  Imported because local extraction from meteorites is not yet modeled.
+
+  Cobalt sources on the Moon:
+  - Iron meteorites (NiFe alloys): ~0.5-1% cobalt content (trace amounts)
+  - Lunar regolith cobalt: Extremely scarce (<10 ppm, not economically viable)
+  - Meteoritic material is the only practical source
+
+  Local extraction path (not yet modeled):
+  - Meteorite processing would co-extract Co, Ni, Fe from NiFe alloys
+  - Current nickel_extraction_meteorite_v0 process only produces Ni + Fe
+  - TODO: Model cobalt co-extraction process from meteoritic material
+  - Requires multi-stage separation (similar to nickel extraction)
+  - Low concentration makes extraction challenging
+
+  Current usage:
+  - Input to cobalt_sulfate_extraction_v0 for purification
+  - Produces cobalt_metal_pure (>99% purity) via roasting + electrowinning
+
+  Applications of purified cobalt:
+  - Superalloys for high-temperature applications
+  - Permanent magnets (SmCo, AlNiCo)
+  - Battery cathodes (LiCoO2)
+  - Catalysts for chemical synthesis
+
   Conservative Mode check completed:
-  - Searched for: cobalt_metal_impure, cobalt_metal, cobalt scrap
-  - Checked items: cobalt_metal_pure, metal_scrap
-  - No equivalent found within 5x magnitude or compatible chemistry
-  - Created because cobalt_sulfate_extraction_v0 requires an impure cobalt feed
-recipe: recipe_cobalt_metal_impure_v0
+  - No equivalent item found within 5× magnitude or compatible chemistry
+  - Created as distinct from cobalt_metal_pure (different purity levels)

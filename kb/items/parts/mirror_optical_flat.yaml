@@ -4,7 +4,35 @@ kind: part
 mass: 0.25
 unit: kg
 material_class: glass
-notes: Flat optical mirror used in microscope illumination path. Placeholder mass;
-  to be refined with exact substrate and coating details. Sourced from optical_microscope_assembly_v0
-  requirements.
-recipe: recipe_mirror_optical_flat_v0
+is_import: true
+notes: |
+  Flat optical mirror for microscope illumination path.
+
+  Imported due to precision optics manufacturing requirements:
+  - Optical-grade glass substrate (low defects, homogeneous)
+  - Precision grinding and polishing (λ/10 surface flatness, <10nm RMS roughness)
+  - Optical coating deposition (aluminum or silver, vacuum deposition)
+  - Interferometric metrology for surface quality verification
+  - Clean room environment to prevent contamination
+
+  Manufacturing requirements:
+  - Surface flatness: Better than λ/10 (wavelength/10, ~60nm for visible light)
+  - Surface roughness: <10nm RMS (for good reflectivity)
+  - Coating: Vacuum-deposited aluminum (88-92% reflectivity) or silver (>95%)
+  - Coating thickness: 100-200nm aluminum or 80-120nm silver
+  - Protective overcoat: SiO2 or other dielectric (optional, prevents oxidation)
+
+  Applications:
+  - Microscope illumination (beam steering, fold mirrors)
+  - Optical metrology systems
+  - Laser beam steering
+  - Interferometry reference surfaces
+
+  Local manufacturing path (future, advanced):
+  - Basalt glass substrate production (lower quality than commercial optical glass)
+  - CNC grinding and polishing (requires precision machine tools)
+  - Vacuum deposition system for reflective coating
+  - Interferometric testing equipment
+  - Still challenging for early lunar base due to precision requirements
+
+  For early bootstrapping, high-quality optical flats must be imported.

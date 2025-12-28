@@ -1,6 +1,20 @@
 id: recipe_threading_needle_mechanism_v0
 kind: recipe
 target_item_id: threading_needle_mechanism_v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.6
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: threading_needle_mechanism_v0
+    qty: 1
+    unit: each
+  - item_id: metal_swarf
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 1.0

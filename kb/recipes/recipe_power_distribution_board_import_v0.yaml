@@ -4,12 +4,28 @@ target_item_id: power_distribution_board
 produces_id: power_distribution_board
 produces_qty: 1
 produces_unit: unit
-inputs: []
 steps:
-  - process_id: import_placeholder_v0
+  - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: bus_bar_copper
+        qty: 1.0
+        unit: kg
+      - item_id: circuit_breaker_thermal_v0
+        qty: 6.0
+        unit: each
+      - item_id: terminal_block_set
+        qty: 1.0
+        unit: set
+      - item_id: indicator_light_set
+        qty: 1.0
+        unit: set
+    outputs:
+      - item_id: power_distribution_board
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    notes: Assemble copper bus bars, breakers, terminal blocks, and indicator lights into board.
 notes: |
-  Import recipe for robot power distribution board.
-
-  Import required: Thermal circuit breakers (electromechanical), PCB fabrication.
-
-  Phase 2 opportunity: Manufacture with lunar copper (bus bars) + imported breakers.
+  Local assembly route for power distribution board using copper bus bars and
+  off-the-shelf breakers/terminals. Replace imported breaker inputs with local
+  variants when available.

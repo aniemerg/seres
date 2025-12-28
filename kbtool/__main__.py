@@ -158,7 +158,6 @@ def main() -> None:
         elif args.qcmd == "add":
             if args.file:
                 # Batch add from file
-                from pathlib import Path
                 added = queue_tool.add_from_file(Path(args.file))
                 print(f"Added {added} items to queue")
             else:

@@ -4,13 +4,10 @@ target_item_id: press_frame_medium
 produces_qty: 1.0
 produces_unit: unit
 steps:
-  - process_id: import_placeholder_press_frame_medium_v0
-    inputs:
-      - item_id: stock_material
-        qty: 300.0
-        unit: kg
-    outputs:
-      - item_id: press_frame_medium
-        qty: 1.0
-        unit: unit
-notes: "Prototype import-based recipe to manufacture press_frame_medium until a full process chain is defined"
+  - process_id: metal_casting_basic_v0
+    notes: Cast medium press frame blank
+  - process_id: machining_finish_basic_v0
+    notes: Machine finishing of frame features
+  - process_id: assembly_basic_v0
+    notes: Assemble components into final frame
+notes: "3-step production path: cast -> machine finish -> assemble"

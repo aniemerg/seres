@@ -5,26 +5,44 @@ mass: 1.0
 unit: kg
 material_class: chemical
 state: liquid
+is_import: true
 notes: |
-  Corrosion inhibitor additive for metalworking fluids.
+  Corrosion inhibitor additive for water-based metalworking fluids.
 
-  Conservative Mode check:
-  - Searched for: corrosion inhibitor, rust preventive chemicals
-  - No equivalent found in KB
-  - Referenced in: cutting_fluid_formulation_v0
+  Imported due to low consumption rate and specialty formulation requirements.
 
   Function: Prevents rust and corrosion of metal workpieces and machine tools
   in contact with water-based cutting fluids.
 
-  Common types:
-  - Sodium nitrite (NaNO2) - simple inorganic inhibitor
-  - Sodium benzoate - organic inhibitor
-  - Amine-based compounds - film-forming inhibitors
-  - Phosphates, molybdates - passivating inhibitors
+  Common corrosion inhibitor types:
+  - Sodium nitrite (NaNO2): Simple inorganic inhibitor, effective for ferrous metals
+  - Sodium benzoate (C7H5NaO2): Organic inhibitor, less toxic
+  - Amine-based compounds: Film-forming inhibitors (e.g., ethanolamine, morpholine)
+  - Phosphates/molybdates: Passivating inhibitors (e.g., Na3PO4, Na2MoO4)
 
-  Typical concentration: 1-5% in cutting fluid formulations
+  Typical usage:
+  - Concentration in cutting fluids: 1-5%
+  - Consumption rate: ~3% of total cutting fluid mass
+  - Very low overall consumption due to fluid recycling
 
-  Created per Conservative Mode: Referenced in process, specialty chemical
-  appropriate for import or simple synthesis from available chemicals.
+  Local synthesis possibility (sodium nitrite):
+  - NaOH + HNO2 → NaNO2 + H2O (direct, but HNO2 is unstable)
+  - OR: NaNO3 (from NaOH + HNO3) → reduce to NaNO2 (requires reducing agent)
+  - Reduction methods: Pb + NaNO3 → NaNO2 + PbO (lead process, toxic)
+  - OR thermal decomposition with carbon: NaNO3 + C → NaNO2 + CO (difficult to control)
 
-recipe: recipe_corrosion_inhibitor_v0
+  Import justification:
+  - Very low mass requirement (kg quantities, not tonnes)
+  - Specialty chemical formulation for optimal performance
+  - Synthesis routes are complex or require toxic intermediates
+  - Minimal impact on material closure (recycled with cutting fluid)
+  - Cost-effective to import for early bootstrap
+
+  Local manufacturing path (future, if needed):
+  - Sodium hydroxide (NaOH): Available from chloralkali electrolysis
+  - Nitric acid (HNO3): Available from Ostwald process (NH3 + O2)
+  - Synthesis: Multi-step process to produce sodium nitrite
+  - Quality control: Purity testing for corrosion inhibition effectiveness
+
+  Conservative Mode check completed:
+  - No equivalent item found within 5× magnitude

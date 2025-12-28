@@ -1,10 +1,20 @@
 id: stock_material
 kind: material
-name: Stock material
+name: Stock material (DEPRECATED)
 unit: kg
 material_class: composite
-notes: Generic placeholder for raw stock material used in manufacturing processes.
-  Can represent bar stock, plate, sheet, tube, or other semi-finished forms ready
-  for machining or fabrication. Specific material type (steel, aluminum, ceramic,
-  etc.) depends on application context.
-recipe: recipe_stock_material_v0
+is_import: true
+notes: |
+  DEPRECATED: This generic placeholder is banned per ADR-009.
+
+  Previously used as a catch-all for raw stock material in manufacturing processes,
+  representing bar stock, plate, sheet, tube, or other semi-finished forms.
+
+  Do NOT use this item in new or updated recipes. Use specific material types instead:
+  - steel_bar_stock, steel_plate, steel_sheet
+  - aluminum_alloy_ingot, aluminum_sheet_2mm
+  - copper_rod_ingot, copper_plate
+  - ceramic_rod, ceramic_plate
+  - etc.
+
+  This item is kept for backward compatibility during cleanup only.

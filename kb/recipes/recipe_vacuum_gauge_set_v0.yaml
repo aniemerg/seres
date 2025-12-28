@@ -1,6 +1,43 @@
 id: recipe_vacuum_gauge_set_v0
 target_item_id: vacuum_gauge_set
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 0.7
+    unit: kg
+    notes: "Gauge housing and mounting bracket stock"
+  - item_id: metal_tubing_stock
+    qty: 0.4
+    unit: kg
+    notes: "Vacuum port fittings and tubing"
+  - item_id: fused_silica_glass
+    qty: 0.2
+    unit: kg
+    notes: "Viewing window or sensor glass elements"
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+    notes: "Signal conditioning, amplifier, and control electronics (imported)"
+  - item_id: display_screen_small
+    qty: 1
+    unit: unit
+    notes: "Readout display module (imported)"
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+    notes: "Internal wiring and connectors"
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+    notes: "Mounting hardware and seals"
+outputs:
+  - item_id: vacuum_gauge_set
+    qty: 1
+    unit: unit
+  - item_id: steel_scrap
+    qty: 0.2
+    unit: kg
+    notes: "Machining and trimming waste"
 steps:
   - process_id: machining_finish_basic_v0
     est_time_hr: 2.0
@@ -18,8 +55,5 @@ steps:
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate gauge against reference vacuum standards"
-  - process_id: import_placeholder_v0
-    est_time_hr: 0.0
-    notes: "Vacuum sensor element initially imported"
 assumptions: Electronic vacuum gauges with imported sensor elements. Locally fabricated housing and assembly.
 notes: Vacuum gauge set for pressure measurement in vacuum systems. Includes electronic sensors and displays.

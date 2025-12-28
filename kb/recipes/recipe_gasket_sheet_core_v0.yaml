@@ -2,5 +2,17 @@ id: recipe_gasket_sheet_core_v0
 kind: recipe
 target_item_id: gasket_sheet_core_v0
 steps:
-  - process_id: import_placeholder_v0
-notes: "Import placeholder for gasket_sheet_core_v0; local gasket stock fabrication TBD."
+  - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: gasket_sheet_material_v0
+        qty: 0.5
+        unit: kg
+        notes: "Imported gasket sheet stock"
+    outputs:
+      - item_id: gasket_sheet_core_v0
+        qty: 0.5
+        unit: kg
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Receive and stage gasket sheet core material"
+notes: "Import-based gasket sheet core; local fabrication TBD."
