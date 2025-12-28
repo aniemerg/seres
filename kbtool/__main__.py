@@ -39,6 +39,13 @@ def _parse_args() -> argparse.Namespace:
     gc_p = q_sub.add_parser("gc", help="Revert expired leases; optionally prune old done items")
     gc_p.add_argument("--prune-done-older-than", type=int, default=None, dest="prune_done")
     q_sub.add_parser("ls", help="Show queue counts by status")
+    add_p = q_sub.add_parser("add", help="Add manual gap to queue")
+    add_p.add_argument("--gap-type", required=False, help="Gap type (existing or new)")
+    add_p.add_argument("--item-id", required=False, help="Item/recipe/process ID")
+    add_p.add_argument("--description", help="Description of the issue")
+    add_p.add_argument("--context", help="JSON context string")
+    add_p.add_argument("--file", help="JSONL file with gap items to add (alternative to --gap-type)")
+    q_sub.add_parser("gap-types", help="List registered gap types")
 
     r = sub.add_parser("report", help="Generate reports from knowledge base")
     r_sub = r.add_subparsers(dest="rcmd")
@@ -148,6 +155,50 @@ def main() -> None:
         elif args.qcmd == "ls":
             counts = queue_tool.list_queue()
             print(json.dumps(counts, indent=2))
+        elif args.qcmd == "add":
+            if args.file:
+                # Batch add from file
+                from pathlib import Path
+                added = queue_tool.add_from_file(Path(args.file))
+                print(f"Added {added} items to queue")
+            else:
+                # Single add - require gap-type and item-id
+                if not args.gap_type or not args.item_id:
+                    raise SystemExit("Error: --gap-type and --item-id required (or use --file)")
+                import json as json_mod
+                context = json_mod.loads(args.context) if args.context else {}
+                gap_id = queue_tool.add_gap(
+                    gap_type=args.gap_type,
+                    item_id=args.item_id,
+                    description=args.description,
+                    context=context,
+                    source="manual"
+                )
+                print(f"Added gap to queue: {gap_id}")
+        elif args.qcmd == "gap-types":
+            types = queue_tool.list_gap_types()
+            if not types:
+                print("No gap types registered")
+            else:
+                # Separate indexer types from agent-created types
+                indexer_types = {k: v for k, v in types.items() if v.get("source") == "indexer"}
+                agent_types = {k: v for k, v in types.items() if v.get("source") != "indexer"}
+
+                print(f"Registered Gap Types ({len(types)} total)")
+                print("=" * 60)
+
+                if indexer_types:
+                    print("\nIndexer-Detected Types:")
+                    for gap_type, meta in sorted(indexer_types.items()):
+                        desc = meta.get("description", "No description")
+                        print(f"  {gap_type:25s} - {desc}")
+
+                if agent_types:
+                    print("\nAgent-Created Types:")
+                    for gap_type, meta in sorted(agent_types.items()):
+                        desc = meta.get("description", "No description")
+                        usage = meta.get("usage_count", 0)
+                        print(f"  {gap_type:25s} - {desc} (used {usage} times)")
         else:
             raise SystemExit("Unknown queue subcommand")
     elif args.command == "report":

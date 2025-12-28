@@ -436,3 +436,111 @@ def queue_release(item_id: str, agent_name: str) -> Dict[str, Any]:
             "message": f"Failed to release {item_id}",
             "error": str(e),
         }
+
+
+@function_tool
+def queue_add_gap(
+    gap_type: str,
+    item_id: str,
+    description: str,
+    context: dict = None
+) -> Dict[str, Any]:
+    """
+    Add a discovered issue to the work queue for another agent to fix.
+
+    IMPORTANT: Only use this tool when appropriate:
+    - **Fix directly** if the issue is in the file you're currently editing AND
+      you have sufficient information to make the change
+    - **Queue the work** if it requires special research, working in other files,
+      or is outside your current task scope
+
+    Use this when you discover problems that need separate attention.
+
+    Common gap types:
+
+    - quality_concern: Incorrect data, unrealistic estimates, conflicts with papers
+    - needs_consolidation: Multiple similar items should be merged
+    - needs_review: Requires domain expertise or verification
+    - missing_dependency: Found reference to undefined item not caught by indexer
+    - data_inconsistency: Values don't match across related items
+
+    You can also create new gap types with descriptive names.
+
+    Args:
+        gap_type: Type of issue (use existing types or create new descriptive type
+                  like "energy_model_mismatch"). Check existing types with CLI:
+                  `kbtool queue gap-types`
+        item_id: The item/recipe/process ID this issue relates to
+        description: Clear description of the issue for the fixing agent.
+                     Explain WHAT is wrong and WHY it's a problem.
+        context: Optional dict with additional details like paper references,
+                 expected vs actual values, related item IDs, etc.
+
+    Returns:
+        {"success": bool, "gap_id": str, "message": str}
+
+    Examples:
+        # Report quality issue
+        queue_add_gap(
+            gap_type="quality_concern",
+            item_id="steel_melting_v0",
+            description="Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg for steel melting",
+            context={"paper_ref": "ellery_2023.pdf", "section": "Table 4"}
+        )
+
+        # Flag consolidation opportunity
+        queue_add_gap(
+            gap_type="needs_consolidation",
+            item_id="motor_small_v0",
+            description="Found motor_electric_small, motor_small_v0, and small_motor_v0 - likely duplicates",
+            context={"similar_items": ["motor_electric_small", "small_motor_v0"]}
+        )
+    """
+    try:
+        # Build context with description and agent marker
+        ctx = context.copy() if context else {}
+        if description:
+            ctx["description"] = description
+        ctx["discovered_by"] = "queue_agent"
+
+        # Call kbtool queue add
+        import subprocess
+        cmd = [
+            str(VENV_PYTHON),
+            "-m", "kbtool", "queue", "add",
+            "--gap-type", gap_type,
+            "--item-id", item_id,
+            "--description", description
+        ]
+
+        if context:
+            import json
+            cmd.extend(["--context", json.dumps(context)])
+
+        proc = subprocess.run(
+            cmd,
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            check=False
+        )
+
+        if proc.returncode == 0:
+            gap_id = f"{gap_type}:{item_id}"
+            return {
+                "success": True,
+                "gap_id": gap_id,
+                "message": f"Added gap to queue: {gap_id}"
+            }
+        else:
+            return {
+                "success": False,
+                "error": proc.stderr or proc.stdout or "Failed to add gap to queue"
+            }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }

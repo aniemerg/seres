@@ -1753,7 +1753,7 @@ kind: recipe
 target_item_id: bearing_set
 variant_id: v0
 inputs:
-- item_id: bearing_steel_bar
+- item_id: steel_bar_stock
   qty: 1.2
   unit: kg
   notes: High-carbon bearing steel for races and rolling elements
@@ -1761,11 +1761,11 @@ inputs:
   qty: 0.15
   unit: kg
   notes: Bearing cage/retainer material
-- item_id: lubricant_grease_bearing
+- item_id: grease_bearing_high_temp
   qty: 0.05
   unit: kg
   notes: Bearing grease
-- item_id: bearing_seal_rubber
+- item_id: seal_rubber_bearing
   qty: 0.1
   unit: kg
   notes: Optional seals
@@ -2070,115 +2070,82 @@ notes: 'Complete bill of materials for labor_bot_general_v0 - a 6-DOF industrial
 ```
 
 ```yaml
-# kb/boms/bom_cryogenic_separation_system_v0.yaml
-id: bom_cryogenic_separation_system_v0
+# kb/boms/bom_labor_bot_basic_v0.yaml
+id: bom_labor_bot_basic_v0
 kind: bom
-owner_item_id: cryogenic_separation_system_v0
+owner_item_id: labor_bot_basic_v0
 components:
-- item_id: cryocooler_active_v0
+- item_id: machine_frame_small
   qty: 1
-  unit: unit
-  notes: Active refrigeration to <100K
-- item_id: pressure_vessel_steel
-  qty: 200.0
-  unit: kg
-  notes: Vacuum-insulated vessels
-- item_id: distillation_column_module_v0
+  notes: Base frame for lightweight labor bot.
+- item_id: robot_arm_link_aluminum
+  qty: 2
+  notes: Upper arm and forearm links.
+- item_id: robot_wrist_3axis
   qty: 1
-  unit: unit
-  notes: Multi-stage separation column
-- item_id: thermal_insulation_basic
-  qty: 50.0
-  unit: kg
-  notes: MLI vacuum insulation
-- item_id: vacuum_pump_station
+  notes: Basic 3-axis wrist module.
+- item_id: motor_electric_small
+  qty: 4
+  notes: Small motors for joints and wrist.
+- item_id: harmonic_drive_reducer_medium
+  qty: 4
+  notes: Gear reducers for joint actuation.
+- item_id: power_distribution_board
   qty: 1
-  unit: unit
-  notes: Maintain vacuum insulation
-- item_id: valve_set_gas_handling
+  notes: Power distribution for control electronics.
+- item_id: computer_core_imported
   qty: 1
-  unit: unit
-  notes: Cryogenic-rated valves
-- item_id: piping_and_fittings_thermal
-  qty: 100.0
-  unit: kg
-  notes: Cryogenic transfer lines
-- item_id: control_panel_basic
-  qty: 1
-  unit: unit
-  notes: Temperature and flow controls
+  notes: Embedded controller for basic motion and coordination.
 - item_id: sensor_suite_general
   qty: 1
-  unit: unit
-  notes: Temperature, pressure, flow sensors
-- item_id: structural_frame_steel
-  qty: 150.0
-  unit: kg
-  notes: Support structure
-- item_id: fastener_kit_medium
-  qty: 2
-  unit: unit
-notes: 'BOM for cryogenic separation system.
-
-  Total mass ~800 kg.
-
-  Separates volatile gases by fractional distillation at cryogenic temperatures.
-
-  '
+  notes: Basic sensing package.
+- item_id: led_ring_light
+  qty: 1
+  notes: Illumination for inspection tasks.
+- item_id: electric_parallel_gripper
+  qty: 1
+  notes: Simple end effector for handling parts.
+- item_id: assembled_cable_harness
+  qty: 3
+  notes: Motor and signal cabling.
+- item_id: cable_drag_chain
+  qty: 1
+  notes: Cable routing chain.
+- item_id: protective_cover_set
+  qty: 1
+  notes: Safety covers for moving components.
+notes: Placeholder BOM; to be refined as design progresses.
 ```
 
 ```yaml
-# kb/boms/bom_roasting_furnace_v0.yaml
-id: bom_roasting_furnace_v0
+# kb/boms/bom_resource_3d_printer_basic_v0.yaml
+id: bom_resource_3d_printer_basic_v0
 kind: bom
-owner_item_id: roasting_furnace_v0
+owner_item_id: resource_3d_printer_basic_v0
 components:
-- item_id: refractory_brick_set
-  qty: 200.0
-  unit: kg
-  notes: High-temp refractory lining
-- item_id: structural_steel_frame
-  qty: 300.0
-  unit: kg
-  notes: Outer shell and support structure
-- item_id: heating_element_set_high_temp
-  qty: 2
-  unit: unit
-  notes: Electric resistance heating
-- item_id: thermal_insulation_basic
-  qty: 100.0
-  unit: kg
-  notes: Insulation layer
-- item_id: air_blower_industrial
+- item_id: printer_frame_generic
   qty: 1
-  unit: unit
-  notes: Air injection for oxidation (industrial blower for forced air)
-- item_id: piping_and_fittings_thermal
-  qty: 50.0
-  unit: kg
-  notes: Gas collection manifold
-- item_id: temperature_controller_basic
+- item_id: gantry_axes_set
   qty: 1
-  unit: unit
-  notes: Temperature control system
-- item_id: thermocouple_type_s_v0
-  qty: 2
-  unit: unit
-  notes: High-temp temperature sensors
-- item_id: valve_set_gas_handling
+- item_id: extruder_head_basic
   qty: 1
-  unit: unit
-  notes: Gas flow control
+- item_id: drive_motor_medium
+  qty: 3
+- item_id: gearbox_reducer_medium
+  qty: 3
+- item_id: bearing_set_heavy
+  qty: 3
+- item_id: printer_control_module
+  qty: 1
+- item_id: power_conditioning_module
+  qty: 1
+- item_id: sensor_suite_general
+  qty: 1
+- item_id: control_compute_module_imported
+  qty: 1
 - item_id: fastener_kit_medium
-  qty: 2
-  unit: unit
-notes: 'BOM for roasting furnace.
-
-  Total mass ~900 kg.
-
-  Used for oxidizing sulfide ores to produce metal oxides + SO2.
-
-  '
+  qty: 1
+notes: Coarse BOM for resource_3d_printer_basic_v0; matches cartesian 3D printer baseline.
 ```
 
 
@@ -2420,7 +2387,52 @@ Key papers from Alex Ellery:
 ---
 ## 6. Queue Workflow
 
-[Error reading /Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md: [Errno 2] No such file or directory: '/Users/allanniemerg/dev2/self-replicating-system-modeling/docs/queue_multi_agent.md']
+
+When working on queue items, you'll use these tools:
+
+**Available tools (defined in queue_agents/kb_tools.py):**
+
+- **rg_search**: Search repository using ripgrep
+- **read_file**: Read file contents
+- **write_file**: Write/overwrite files with diff output
+- **run_indexer**: Validate changes by running the indexer
+- **queue_release**: Give up on an item and release it back to pending
+- **queue_add_gap**: Add discovered issues to the queue for another agent
+
+**queue_add_gap - Reporting Discovered Issues:**
+
+**IMPORTANT: When to fix directly vs. queue:**
+- **Fix directly** if the issue is in the file you're currently editing AND you have sufficient information to make the change
+- **Queue the work** if it requires special research, working in other files, or is outside your current task scope
+
+Use this tool when you discover problems that need separate attention:
+
+```python
+queue_add_gap(
+    gap_type="quality_concern",
+    item_id="steel_melting_v0",
+    description="Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg",
+    context={"paper_ref": "ellery_2023.pdf", "section": "Table 4"}
+)
+```
+
+Common gap types:
+- `quality_concern` - Incorrect data, unrealistic estimates, conflicts with papers
+- `needs_consolidation` - Multiple similar items should be merged
+- `needs_review` - Requires domain expertise or verification
+- `missing_dependency` - Found reference to undefined item not caught by indexer
+- `data_inconsistency` - Values don't match across related items
+
+You can create new gap types by using descriptive names (e.g., `energy_model_mismatch`).
+
+**Workflow:**
+1. Lease next task with your agent name
+2. Research the gap using rg_search and read_file
+3. Fix the issue by creating/updating YAML files with write_file
+4. Validate with run_indexer to ensure the gap is resolved
+5. If you discover other issues, use queue_add_gap to report them
+6. The system will mark your task complete automatically if validation succeeds
+
 
 ---
 ## 7. Gap Types and Validation

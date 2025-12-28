@@ -20,8 +20,7 @@ Total: 248 missing fields
 See `out/missing_fields.jsonl` for details.
 
 ## Missing data (null values)
-Total: 910 null fields
-- bom: 89
+Total: 821 null fields
 - process: 821
 
 See `out/null_values.jsonl` for details.

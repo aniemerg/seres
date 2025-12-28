@@ -973,6 +973,14 @@ def _update_work_queue(
                     prev["status"] = "resolved"
                     merged.append(prev)
 
+        # Preserve manually-added items that aren't auto-detected by indexer
+        # Manual items (source="manual" or source="agent") persist until explicitly completed/released
+        for eid, prev in existing.items():
+            if eid not in merged_ids and prev.get("source") in ("manual", "agent"):
+                # Only preserve if not already done/superseded
+                if prev.get("status") not in ("done", "superseded"):
+                    merged.append(prev)
+
         WORK_QUEUE.parent.mkdir(parents=True, exist_ok=True)
         with WORK_QUEUE.open("w", encoding="utf-8") as wf:
             for obj in merged:

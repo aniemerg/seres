@@ -87,6 +87,48 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
   4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`) if needed.
   5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
 
+### Manual Queue Addition (Discovered Issues)
+
+**When to fix directly vs. queue:**
+- **Fix directly** if the issue is in the file you're currently editing AND you have sufficient information to make the change
+- **Queue the work** if it requires special research, working in other files, or is outside your current task scope
+
+When you discover issues that need separate attention, add them to the queue for another agent:
+
+**Add a single gap:**
+```bash
+.venv/bin/python -m kbtool queue add \
+  --gap-type quality_concern \
+  --item-id steel_melting_v0 \
+  --description "Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg" \
+  --context '{"paper_ref": "ellery_2023.pdf", "section": "Table 4"}'
+```
+
+**Add multiple gaps from a file:**
+```bash
+.venv/bin/python -m kbtool queue add --file queue_tasks/discovered_issues.jsonl
+```
+
+File format (JSONL):
+```json
+{"gap_type": "quality_concern", "item_id": "foo_v0", "description": "..."}
+{"gap_type": "needs_consolidation", "item_id": "bar_v0", "description": "Found duplicates: bar_v1, bar_alt"}
+```
+
+**Common gap types for manual addition:**
+- `quality_concern` - Incorrect data, unrealistic estimates, conflicts with papers
+- `needs_consolidation` - Multiple similar items should be merged
+- `needs_review` - Requires domain expertise or verification
+- `missing_dependency` - Found reference to undefined item not caught by indexer
+- `data_inconsistency` - Values don't match across related items
+
+**Create new gap types** by using a descriptive name (e.g., `energy_model_mismatch`). View all types with:
+```bash
+.venv/bin/python -m kbtool queue gap-types
+```
+
+**For agents:** Use the `queue_add_gap` tool to add discovered issues programmatically. See `queue_agents/kb_tools.py` for API documentation.
+
 ## Verification (how it works across gap types)
 
 **Canonical rule:** verification always means "run the indexer and ensure the gap id no longer appears in `out/work_queue.jsonl`." The queue is rebuilt from scratch each run, so absence is the definitive signal.

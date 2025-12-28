@@ -253,3 +253,213 @@ def gap_ids_present(ids: List[str]) -> Set[str]:
         if obj_id in wanted:
             present.add(obj_id)
     return present
+
+
+def _register_gap_type(gap_type: str, created_by: str = "unknown") -> None:
+    """
+    Auto-register new gap types in the registry.
+
+    Creates queue/gap_type_registry.json if it doesn't exist.
+    Updates usage_count if gap_type already registered.
+    """
+    import json
+    from pathlib import Path
+
+    registry_path = Path("queue/gap_type_registry.json")
+    registry_path.parent.mkdir(exist_ok=True)
+
+    # Load existing registry
+    if registry_path.exists():
+        try:
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        except Exception:
+            registry = {}
+    else:
+        registry = {}
+
+    # Add or update gap type
+    if gap_type in registry:
+        registry[gap_type]["usage_count"] += 1
+    else:
+        registry[gap_type] = {
+            "description": "",  # Can be filled in manually later
+            "created_by": created_by,
+            "created_at": time.time(),
+            "usage_count": 1,
+            "source": "manual" if created_by != "indexer" else "indexer"
+        }
+
+    registry_path.write_text(json.dumps(registry, indent=2), encoding="utf-8")
+
+
+def list_gap_types() -> Dict[str, dict]:
+    """
+    List all registered gap types from the registry.
+
+    Returns:
+        Dict mapping gap_type -> metadata dict
+    """
+    import json
+    from pathlib import Path
+
+    registry_path = Path("queue/gap_type_registry.json")
+    if not registry_path.exists():
+        return {}
+
+    try:
+        return json.loads(registry_path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+def add_gap(
+    gap_type: str,
+    item_id: str,
+    description: str = None,
+    context: dict = None,
+    kind: str = "gap",
+    source: str = "manual"
+) -> str:
+    """
+    Add a manual gap to the work queue.
+
+    Args:
+        gap_type: Type of issue (existing or new type)
+        item_id: The item/recipe/process ID this relates to
+        description: Clear description for fixing agent (added to context)
+        context: Optional dict with additional metadata
+        kind: Item kind (default "gap")
+        source: Source of gap (default "manual", can use "agent")
+
+    Returns:
+        The generated gap ID (format: "gap_type:item_id")
+
+    Example:
+        gap_id = add_gap(
+            gap_type="quality_concern",
+            item_id="steel_process_v0",
+            description="Energy model doesn't match paper",
+            context={"paper_ref": "ellery_2023.pdf"}
+        )
+    """
+    gap_id = f"{gap_type}:{item_id}"
+
+    # Build context with description
+    ctx = context.copy() if context else {}
+    if description:
+        ctx["description"] = description
+    ctx["added_at"] = time.time()
+
+    item = {
+        "id": gap_id,
+        "kind": kind,
+        "reason": gap_type,
+        "gap_type": gap_type,
+        "item_id": item_id,
+        "source": source,
+        "context": ctx,
+        "status": "pending"
+    }
+
+    # Add to queue
+    with _locked_queue():
+        items = _load_queue()
+        items.append(item)
+        _save_queue(items)
+
+    # Register gap type
+    _register_gap_type(gap_type, source)
+
+    return gap_id
+
+
+def add_from_file(file_path: Path) -> int:
+    """
+    Add multiple gaps from a JSONL or JSON array file.
+
+    Each entry should have at minimum:
+        - gap_type: str
+        - item_id: str
+        - description: str (optional but recommended)
+        - context: dict (optional)
+
+    Args:
+        file_path: Path to JSONL or JSON file
+
+    Returns:
+        Number of items added
+
+    Example file content (JSONL):
+        {"gap_type": "quality_concern", "item_id": "foo_v0", "description": "..."}
+        {"gap_type": "needs_review", "item_id": "bar_v0", "description": "..."}
+    """
+    if not file_path.exists():
+        raise FileNotFoundError(f"File not found: {file_path}")
+
+    new_items: List[dict] = []
+    content = file_path.read_text(encoding="utf-8").strip()
+
+    if not content:
+        return 0
+
+    try:
+        # Try JSON array first
+        obj = json.loads(content)
+        if isinstance(obj, list):
+            new_items.extend(obj)
+        else:
+            new_items.append(obj)
+    except Exception:
+        # Fallback to JSONL
+        for line in content.splitlines():
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                new_items.append(json.loads(line))
+            except Exception:
+                continue
+
+    if not new_items:
+        return 0
+
+    # Convert each item to proper queue format
+    queue_items = []
+    for item in new_items:
+        gap_type = item.get("gap_type")
+        item_id = item.get("item_id")
+
+        if not gap_type or not item_id:
+            continue  # Skip invalid items
+
+        gap_id = f"{gap_type}:{item_id}"
+        description = item.get("description")
+        context = item.get("context", {})
+
+        if description and "description" not in context:
+            context["description"] = description
+
+        context["added_at"] = time.time()
+
+        queue_item = {
+            "id": gap_id,
+            "kind": item.get("kind", "gap"),
+            "reason": gap_type,
+            "gap_type": gap_type,
+            "item_id": item_id,
+            "source": item.get("source", "manual"),
+            "context": context,
+            "status": "pending"
+        }
+        queue_items.append(queue_item)
+
+        # Register gap type
+        _register_gap_type(gap_type, item.get("source", "manual"))
+
+    # Add all items to queue
+    with _locked_queue():
+        items = _load_queue()
+        items.extend(queue_items)
+        _save_queue(items)
+
+    return len(queue_items)

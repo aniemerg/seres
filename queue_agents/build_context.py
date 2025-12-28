@@ -232,8 +232,52 @@ Key papers from Alex Ellery:
 
     # Section 6: Queue Workflow
     sections.append("\n---\n## 6. Queue Workflow\n")
-    queue_docs = read_file(REPO_ROOT / "docs" / "queue_multi_agent.md")
-    sections.append(queue_docs)
+    sections.append("""
+When working on queue items, you'll use these tools:
+
+**Available tools (defined in queue_agents/kb_tools.py):**
+
+- **rg_search**: Search repository using ripgrep
+- **read_file**: Read file contents
+- **write_file**: Write/overwrite files with diff output
+- **run_indexer**: Validate changes by running the indexer
+- **queue_release**: Give up on an item and release it back to pending
+- **queue_add_gap**: Add discovered issues to the queue for another agent
+
+**queue_add_gap - Reporting Discovered Issues:**
+
+**IMPORTANT: When to fix directly vs. queue:**
+- **Fix directly** if the issue is in the file you're currently editing AND you have sufficient information to make the change
+- **Queue the work** if it requires special research, working in other files, or is outside your current task scope
+
+Use this tool when you discover problems that need separate attention:
+
+```python
+queue_add_gap(
+    gap_type="quality_concern",
+    item_id="steel_melting_v0",
+    description="Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg",
+    context={"paper_ref": "ellery_2023.pdf", "section": "Table 4"}
+)
+```
+
+Common gap types:
+- `quality_concern` - Incorrect data, unrealistic estimates, conflicts with papers
+- `needs_consolidation` - Multiple similar items should be merged
+- `needs_review` - Requires domain expertise or verification
+- `missing_dependency` - Found reference to undefined item not caught by indexer
+- `data_inconsistency` - Values don't match across related items
+
+You can create new gap types by using descriptive names (e.g., `energy_model_mismatch`).
+
+**Workflow:**
+1. Lease next task with your agent name
+2. Research the gap using rg_search and read_file
+3. Fix the issue by creating/updating YAML files with write_file
+4. Validate with run_indexer to ensure the gap is resolved
+5. If you discover other issues, use queue_add_gap to report them
+6. The system will mark your task complete automatically if validation succeeds
+""")
 
     # Section 7: Validation and Gap Types
     sections.append("\n---\n## 7. Gap Types and Validation\n")
