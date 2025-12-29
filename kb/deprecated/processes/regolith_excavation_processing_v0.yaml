@@ -1,0 +1,36 @@
+id: regolith_excavation_processing_v0
+kind: process
+name: Regolith excavation and processing
+description: |
+  Simple collection and initial processing of mined regolith.
+  Converts raw mined regolith into excavated/processed form ready for extraction.
+
+inputs:
+  - item_id: regolith_lunar_mare
+    quantity: 100
+    unit: kg
+    per: batch
+
+outputs:
+  - item_id: regolith_excavated
+    quantity: 100
+    unit: kg
+    per: batch
+
+required_machines:
+  - labor_bot_general_v0: 1
+
+scalable: true
+
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.02
+
+notes: |
+  Simple excavation and initial screening process.
+  Takes raw mined regolith and prepares it for extraction processes.
+  1:1 conversion ratio - minimal processing, just collection and basic screening.

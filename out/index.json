@@ -15567,7 +15567,7 @@
       "refs_out": [
         "chemical_reactant_a",
         "chemical_reactor_vessel_v0",
-        "lunar_regolith_raw",
+        "regolith_lunar_mare",
         "solvent_generic"
       ],
       "status": "defined"
@@ -22450,10 +22450,8 @@
       "refs_in": [
         "recipe_bulk_material_or_parts_import_v0",
         "recipe_lunar_regolith_in_situ_v0",
-        "recipe_lunar_regolith_raw_v0",
         "recipe_meteorite_iron_v0",
         "recipe_nife_meteorite_material_env_v0",
-        "recipe_raw_ore_or_regolith_env_v0",
         "recipe_solar_irradiance_v0",
         "recipe_solar_radiation_v0",
         "recipe_tested_electrical_equipment_v0",
@@ -22730,7 +22728,7 @@
     },
     "excavate_regolith_surface_v0": {
       "aliases": [],
-      "defined_in": "kb/processes/excavate_regolith_surface_v0.yaml",
+      "defined_in": "kb/deprecated/processes/excavate_regolith_surface_v0.yaml",
       "id": "excavate_regolith_surface_v0",
       "kind": "process",
       "layer_tags": [
@@ -22738,9 +22736,6 @@
       ],
       "name": "Regolith excavation (surface scoop)",
       "refs_in": [
-        "recipe_metal_alloy_bulk_v0",
-        "recipe_regolith_powder_v0",
-        "recipe_reduced_metal_oxides_v0",
         "recipe_regolith_excavated_v0"
       ],
       "refs_out": [
@@ -22827,7 +22822,7 @@
       "refs_out": [
         "gravity_separator",
         "raw_formation_control_material_v0",
-        "regolith_raw",
+        "regolith_lunar_mare",
         "rock_crusher_basic",
         "screening_equipment",
         "slag"
@@ -24845,7 +24840,7 @@
       ],
       "refs_out": [
         "forsterite_extraction_v0",
-        "lunar_regolith_raw",
+        "regolith_lunar_highlands",
         "tailings"
       ],
       "status": "defined"
@@ -26167,7 +26162,7 @@
       "refs_out": [
         "extraction_unit",
         "getter_material_raw_v0",
-        "regolith_raw",
+        "regolith_lunar_mare",
         "slag_byproduct_v0"
       ],
       "status": "defined"
@@ -27417,8 +27412,8 @@
       "layer_tags": [],
       "name": "Hauler",
       "refs_in": [
-        "hauler_v0",
         "excavate_regolith_surface_v0",
+        "hauler_v0",
         "material_transport_v0",
         "recipe_hauler_v0_alias_v0"
       ],
@@ -28605,6 +28600,7 @@
         "bom_heliostat_array_system_v0_v0",
         "heliostat_array_assembly_v0",
         "polar_water_ice_extraction_v0",
+        "regolith_mining_polar_psc_v0",
         "recipe_heliostat_array_system_v0_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
@@ -30206,7 +30202,7 @@
       ],
       "refs_out": [
         "iron_ore_or_ilmenite",
-        "raw_ore_or_regolith",
+        "regolith_lunar_mare",
         "tailings"
       ],
       "status": "defined"
@@ -33399,36 +33395,16 @@
       "refs_out": [],
       "status": "defined"
     },
-    "lunar_regolith_raw": {
-      "aliases": [],
-      "defined_in": "kb/items/raw_materials/lunar_regolith_raw.yaml",
-      "id": "lunar_regolith_raw",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Lunar Regolith (raw)",
-      "refs_in": [
-        "chemical_reactant_a_synthesis_v0",
-        "forsterite_extraction_from_regolith_v0",
-        "lunar_regolith_refinement_basic_v0",
-        "mineral_ore_sulfide_extraction_v0",
-        "regolith_collection_and_processing_v0",
-        "recipe_basalt_aggregate_v0",
-        "recipe_lunar_regolith_raw_v0",
-        "recipe_machine_solar_thermal_storage_system_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "lunar_regolith_refinement_basic_v0": {
       "aliases": [],
-      "defined_in": "kb/processes/lunar_regolith_refinement_basic_v0.yaml",
+      "defined_in": "kb/deprecated/processes/lunar_regolith_refinement_basic_v0.yaml",
       "id": "lunar_regolith_refinement_basic_v0",
       "kind": "process",
       "layer_tags": [],
       "name": "Lunar Regolith refinement (basic) v0",
       "refs_in": [],
       "refs_out": [
-        "lunar_regolith_raw"
+        "regolith_excavated"
       ],
       "status": "defined"
     },
@@ -35317,7 +35293,7 @@
       ],
       "refs_out": [
         "component_material_a",
-        "regolith_raw"
+        "regolith_lunar_mare"
       ],
       "status": "defined"
     },
@@ -35393,7 +35369,7 @@
       "refs_out": [
         "feedstock_material",
         "material_preparation_equipment",
-        "raw_ore_or_regolith"
+        "regolith_lunar_mare"
       ],
       "status": "defined"
     },
@@ -37285,8 +37261,8 @@
         "recipe_mineral_ore_sulfide_v0"
       ],
       "refs_out": [
-        "lunar_regolith_raw",
-        "mineral_ore_sulfide"
+        "mineral_ore_sulfide",
+        "regolith_carbonaceous"
       ],
       "status": "defined"
     },
@@ -37308,7 +37284,7 @@
       "refs_out": [
         "concentrated_mineral",
         "gravity_separator",
-        "raw_ore_or_regolith",
+        "regolith_lunar_mare",
         "rock_crusher_basic",
         "screening_equipment_v0",
         "tailings"
@@ -42603,7 +42579,7 @@
         "furnace_basic",
         "heliostat_array_system_v0",
         "regolith_crushed",
-        "regolith_excavated",
+        "regolith_polar_psc",
         "vapor_capture_system_v0",
         "water"
       ],
@@ -45873,24 +45849,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "raw_ore_or_regolith": {
-      "aliases": [],
-      "defined_in": "kb/items/raw_materials/raw_ore_or_regolith.yaml",
-      "id": "raw_ore_or_regolith",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Raw ore or regolith",
-      "refs_in": [
-        "ilmenite_extraction_from_regolith_v0",
-        "material_preparation_basic_v0",
-        "mineral_processing_basic_v0",
-        "regolith_heating_water_extraction_v0",
-        "recipe_prepared_material_v0",
-        "recipe_raw_ore_or_regolith_env_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "reactor_agitator_mixer_v0": {
       "aliases": [],
       "defined_in": "kb/items/parts/reactor_agitator_mixer_v0.yaml",
@@ -47501,9 +47459,8 @@
         "basalt_aggregate",
         "crushing_and_screening_basic_v0",
         "drying_basic_v0",
-        "lunar_regolith_raw",
         "regolith_crushed",
-        "regolith_excavated",
+        "regolith_lunar_mare",
         "rock_excavation_basic_v0"
       ],
       "status": "defined"
@@ -61082,20 +61039,6 @@
       ],
       "status": "defined"
     },
-    "recipe_lunar_regolith_raw_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_lunar_regolith_raw_v0.yaml",
-      "id": "recipe_lunar_regolith_raw_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "environment_source_v0",
-        "lunar_regolith_raw"
-      ],
-      "status": "defined"
-    },
     "recipe_machine_annealing_oven_small_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_machine_annealing_oven_small_v0.yaml",
@@ -62432,11 +62375,11 @@
       "refs_out": [
         "assembly_process_general_v0",
         "heat_exchanger_tube_bundle",
-        "lunar_regolith_raw",
         "metal_fabrication_welding_v0",
         "piping_and_valves_set",
         "refractory_casting_v0",
         "regolith_collection_and_processing_v0",
+        "regolith_lunar_mare",
         "solar_thermal_storage_system_v0",
         "steel_plate_or_sheet",
         "tank_shell_steel",
@@ -63404,15 +63347,15 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "excavate_regolith_surface_v0",
         "machining_finish_basic_v0",
         "metal_alloy_bulk",
         "oxygen_extraction_molten_regolith_electrolysis_v0",
         "regolith_coarse_fraction",
         "regolith_crushing_grinding_v0",
         "regolith_fine_fraction",
+        "regolith_lunar_mare",
+        "regolith_mining_simple_v0",
         "regolith_powder",
-        "regolith_raw",
         "regolith_screening_sieving_v0"
       ],
       "status": "defined"
@@ -63756,7 +63699,7 @@
         "environment_source_v0",
         "manual_inspection_sorting_v0",
         "meteorite_iron",
-        "regolith_raw"
+        "regolith_lunar_mare"
       ],
       "status": "defined"
     },
@@ -67834,7 +67777,7 @@
       "refs_out": [
         "material_preparation_basic_v0",
         "prepared_material",
-        "raw_ore_or_regolith"
+        "regolith_lunar_mare"
       ],
       "status": "defined"
     },
@@ -68789,20 +68732,6 @@
       ],
       "status": "defined"
     },
-    "recipe_raw_ore_or_regolith_env_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_raw_ore_or_regolith_env_v0.yaml",
-      "id": "recipe_raw_ore_or_regolith_env_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "environment_source_v0",
-        "raw_ore_or_regolith"
-      ],
-      "status": "defined"
-    },
     "recipe_reactor_agitator_mixer_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_reactor_agitator_mixer_v0.yaml",
@@ -68944,12 +68873,12 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "excavate_regolith_surface_v0",
         "machining_finish_basic_v0",
         "oxygen_extraction_carbothermal_reduction_v0",
         "reduced_metal_oxides",
         "regolith_coarse_fraction",
         "regolith_crushing_grinding_v0",
+        "regolith_mining_simple_v0",
         "regolith_powder",
         "regolith_screening_sieving_v0"
       ],
@@ -69166,13 +69095,27 @@
       "refs_out": [
         "crushing_basic_v0",
         "regolith_crushed",
-        "regolith_raw"
+        "regolith_lunar_mare"
+      ],
+      "status": "defined"
+    },
+    "recipe_regolith_excavated_seed_v0": {
+      "aliases": [],
+      "defined_in": "kb/deprecated/recipes/recipe_regolith_raw_seed_v0.yaml",
+      "id": "recipe_regolith_excavated_seed_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "regolith_excavated",
+        "regolith_excavated_seed_v0"
       ],
       "status": "defined"
     },
     "recipe_regolith_excavated_v0": {
       "aliases": [],
-      "defined_in": "kb/recipes/regolith_excavated_v0.yaml",
+      "defined_in": "kb/deprecated/recipes/regolith_excavated_v0.yaml",
       "id": "recipe_regolith_excavated_v0",
       "kind": "recipe",
       "layer_tags": [],
@@ -69254,6 +69197,20 @@
       ],
       "status": "defined"
     },
+    "recipe_regolith_polar_psc_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_regolith_polar_psc_v0.yaml",
+      "id": "recipe_regolith_polar_psc_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Polar PSC ice-bearing regolith mining",
+      "refs_in": [],
+      "refs_out": [
+        "regolith_mining_polar_psc_v0",
+        "regolith_polar_psc"
+      ],
+      "status": "defined"
+    },
     "recipe_regolith_powder_hcl_leached_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_regolith_powder_hcl_leached_v0.yaml",
@@ -69292,25 +69249,11 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "excavate_regolith_surface_v0",
         "regolith_coarse_fraction",
         "regolith_crushing_grinding_v0",
+        "regolith_mining_simple_v0",
         "regolith_powder",
         "regolith_screening_sieving_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_regolith_raw_seed_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_regolith_raw_seed_v0.yaml",
-      "id": "recipe_regolith_raw_seed_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "regolith_raw",
-        "regolith_raw_seed_v0"
       ],
       "status": "defined"
     },
@@ -76978,6 +76921,8 @@
       "name": "Carbonaceous Chondrite Regolith",
       "refs_in": [
         "carbon_extraction_from_carbonaceous_v0",
+        "mineral_ore_sulfide_extraction_v0",
+        "regolith_heating_water_extraction_v0",
         "regolith_mining_carbonaceous_v0",
         "recipe_regolith_carbonaceous_collection_v0"
       ],
@@ -77015,7 +76960,7 @@
         "recipe_thermal_storage_media_regolith_v0"
       ],
       "refs_out": [
-        "lunar_regolith_raw",
+        "regolith_lunar_highlands",
         "thermal_storage_media_regolith"
       ],
       "status": "defined"
@@ -77094,19 +77039,49 @@
     },
     "regolith_excavated": {
       "aliases": [],
-      "defined_in": "kb/items/materials/regolith_excavated.yaml",
+      "defined_in": "kb/deprecated/items/regolith_excavated.yaml",
       "id": "regolith_excavated",
       "kind": "material",
       "layer_tags": [],
       "name": "Excavated regolith",
       "refs_in": [
         "excavate_regolith_surface_v0",
-        "polar_water_ice_extraction_v0",
-        "regolith_screening_sieving_v0",
-        "recipe_basalt_aggregate_v0",
-        "recipe_regolith_excavated_v0"
+        "lunar_regolith_refinement_basic_v0",
+        "regolith_excavation_processing_v0",
+        "regolith_excavated_seed_v0",
+        "recipe_regolith_excavated_v0",
+        "recipe_regolith_excavated_seed_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_excavated_seed_v0": {
+      "aliases": [],
+      "defined_in": "kb/deprecated/processes/regolith_raw_seed_v0.yaml",
+      "id": "regolith_excavated_seed_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Seed production of regolith_excavated v0",
+      "refs_in": [
+        "recipe_regolith_excavated_seed_v0"
+      ],
+      "refs_out": [
+        "regolith_excavated"
+      ],
+      "status": "defined"
+    },
+    "regolith_excavation_processing_v0": {
+      "aliases": [],
+      "defined_in": "kb/deprecated/processes/regolith_excavation_processing_v0.yaml",
+      "id": "regolith_excavation_processing_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Regolith excavation and processing",
+      "refs_in": [],
+      "refs_out": [
+        "regolith_excavated",
+        "regolith_lunar_mare"
+      ],
       "status": "defined"
     },
     "regolith_fine_fraction": {
@@ -77142,7 +77117,7 @@
       ],
       "refs_out": [
         "furnace_basic",
-        "raw_ore_or_regolith",
+        "regolith_carbonaceous",
         "tailings",
         "water"
       ],
@@ -77170,10 +77145,15 @@
       "name": "Lunar Highland Regolith",
       "refs_in": [
         "alumina_extraction_from_highlands_v0",
+        "forsterite_extraction_from_regolith_v0",
+        "regolith_collection_and_processing_v0",
         "regolith_highland_seed_v0",
         "regolith_mining_highlands_v0",
         "regolith_mining_lunar_highlands_v0",
         "regolith_volatile_thermal_extraction_v0",
+        "silicon_extraction_from_regolith_carbothermic_v0",
+        "silicon_extraction_from_regolith_magnesiothermic_v0",
+        "substrate_fabrication_basic_v0",
         "recipe_regolith_lunar_highlands_v0"
       ],
       "refs_out": [],
@@ -77187,7 +77167,24 @@
       "layer_tags": [],
       "name": "Lunar Mare Regolith",
       "refs_in": [
+        "regolith_excavation_processing_v0",
+        "chemical_reactant_a_synthesis_v0",
+        "extraction_raw_formation_control_material_v0_v0",
+        "getter_material_extraction_v0",
+        "ilmenite_extraction_from_regolith_v0",
+        "manufacture_component_material_a_v0",
+        "material_preparation_basic_v0",
+        "mineral_processing_basic_v0",
         "regolith_mining_simple_v0",
+        "regolith_pellet_pressing_process_v0",
+        "regolith_screening_sieving_v0",
+        "waste_generation_basic_v0",
+        "recipe_metal_alloy_bulk_v0",
+        "recipe_basalt_aggregate_v0",
+        "recipe_machine_solar_thermal_storage_system_v0",
+        "recipe_meteorite_iron_v0",
+        "recipe_prepared_material_v0",
+        "recipe_regolith_crushed_v0",
         "recipe_regolith_lunar_mare_v0"
       ],
       "refs_out": [],
@@ -77240,6 +77237,25 @@
       ],
       "status": "defined"
     },
+    "regolith_mining_polar_psc_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/regolith_mining_polar_psc_v0.yaml",
+      "id": "regolith_mining_polar_psc_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_2",
+        "layer_3"
+      ],
+      "name": "Polar PSC Regolith Mining",
+      "refs_in": [
+        "recipe_regolith_polar_psc_v0"
+      ],
+      "refs_out": [
+        "heliostat_array_system_v0",
+        "regolith_polar_psc"
+      ],
+      "status": "defined"
+    },
     "regolith_mining_simple_v0": {
       "aliases": [],
       "defined_in": "kb/processes/regolith_mining_simple_v0.yaml",
@@ -77248,7 +77264,10 @@
       "layer_tags": [],
       "name": "Simple Regolith Surface Mining",
       "refs_in": [
-        "recipe_regolith_lunar_mare_v0"
+        "recipe_metal_alloy_bulk_v0",
+        "recipe_regolith_lunar_mare_v0",
+        "recipe_regolith_powder_v0",
+        "recipe_reduced_metal_oxides_v0"
       ],
       "refs_out": [
         "regolith_lunar_mare"
@@ -77282,9 +77301,9 @@
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [
+        "regolith_lunar_mare",
         "regolith_pellet_dust_v0",
-        "regolith_pellet_v0",
-        "regolith_raw"
+        "regolith_pellet_v0"
       ],
       "status": "defined"
     },
@@ -77298,6 +77317,21 @@
       "refs_in": [
         "regolith_pellet_pressing_process_v0",
         "recipe_regolith_pellet_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_polar_psc": {
+      "aliases": [],
+      "defined_in": "kb/items/raw_materials/regolith_polar_psc.yaml",
+      "id": "regolith_polar_psc",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Polar PSC Regolith (Ice-Bearing)",
+      "refs_in": [
+        "polar_water_ice_extraction_v0",
+        "regolith_mining_polar_psc_v0",
+        "recipe_regolith_polar_psc_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -77362,46 +77396,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "regolith_raw": {
-      "aliases": [],
-      "defined_in": "kb/items/raw_materials/regolith_raw.yaml",
-      "id": "regolith_raw",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Regolith (raw)",
-      "refs_in": [
-        "extraction_raw_formation_control_material_v0_v0",
-        "getter_material_extraction_v0",
-        "manufacture_component_material_a_v0",
-        "regolith_pellet_pressing_process_v0",
-        "regolith_raw_seed_v0",
-        "silicon_extraction_from_regolith_carbothermic_v0",
-        "silicon_extraction_from_regolith_magnesiothermic_v0",
-        "substrate_fabrication_basic_v0",
-        "waste_generation_basic_v0",
-        "recipe_metal_alloy_bulk_v0",
-        "recipe_meteorite_iron_v0",
-        "recipe_regolith_crushed_v0",
-        "recipe_regolith_raw_seed_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "regolith_raw_seed_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/regolith_raw_seed_v0.yaml",
-      "id": "regolith_raw_seed_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Seed production of regolith_raw v0",
-      "refs_in": [
-        "recipe_regolith_raw_seed_v0"
-      ],
-      "refs_out": [
-        "regolith_raw"
-      ],
-      "status": "defined"
-    },
     "regolith_screening_sieving_v0": {
       "aliases": [],
       "defined_in": "kb/processes/regolith_screening_sieving_v0.yaml",
@@ -77423,8 +77417,8 @@
       "refs_out": [
         "dust_collection_system",
         "regolith_coarse_fraction",
-        "regolith_excavated",
         "regolith_fine_fraction",
+        "regolith_lunar_mare",
         "vibrating_screen_v0"
       ],
       "status": "defined"
@@ -80125,7 +80119,7 @@
       ],
       "refs_out": [
         "carbon_reductant",
-        "regolith_raw",
+        "regolith_lunar_highlands",
         "silicon_metal_v0"
       ],
       "status": "defined"
@@ -80145,7 +80139,7 @@
       ],
       "refs_out": [
         "magnesium_metal_v0",
-        "regolith_raw",
+        "regolith_lunar_highlands",
         "silicon_metal_v0"
       ],
       "status": "defined"
@@ -83723,7 +83717,7 @@
         "recipe_uncoated_substrate_material_v0"
       ],
       "refs_out": [
-        "regolith_raw",
+        "regolith_lunar_highlands",
         "uncoated_substrate_material_v0"
       ],
       "status": "defined"
@@ -88205,7 +88199,7 @@
       "refs_out": [
         "dust_fines",
         "process_waste",
-        "regolith_raw"
+        "regolith_lunar_mare"
       ],
       "status": "defined"
     },

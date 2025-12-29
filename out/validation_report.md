@@ -4,10 +4,10 @@
 - bom: 398
 - item: 1
 - machine: 341
-- material: 499
+- material: 497
 - part: 984
-- process: 856
-- recipe: 1924
+- process: 858
+- recipe: 1923
 - resource: 2
 - scenario: 1
 - schema: 1
@@ -20,8 +20,8 @@ Total: 246 missing fields
 See `out/missing_fields.jsonl` for details.
 
 ## Missing data (null values)
-Total: 815 null fields
-- process: 815
+Total: 818 null fields
+- process: 818
 
 See `out/null_values.jsonl` for details.
 

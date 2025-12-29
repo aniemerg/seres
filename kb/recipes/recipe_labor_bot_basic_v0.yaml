@@ -3,9 +3,53 @@ kind: recipe
 name: Recipe for basic labor bot v0
 target_item_id: labor_bot_basic_v0
 variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1
+    unit: count
+  - item_id: robot_arm_link_aluminum
+    qty: 2
+    unit: unit
+  - item_id: robot_wrist_3axis
+    qty: 1
+    unit: unit
+  - item_id: motor_electric_small
+    qty: 4
+    unit: unit
+  - item_id: harmonic_drive_reducer_medium
+    qty: 4
+    unit: count
+  - item_id: power_distribution_board
+    qty: 1
+    unit: count
+  - item_id: computer_core_imported
+    qty: 1
+    unit: count
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: count
+  - item_id: led_ring_light
+    qty: 1
+    unit: count
+  - item_id: electric_parallel_gripper
+    qty: 1
+    unit: unit
+  - item_id: assembled_cable_harness
+    qty: 3
+    unit: count
+  - item_id: cable_drag_chain
+    qty: 1
+    unit: count
+  - item_id: protective_cover_set
+    qty: 1
+    unit: count
+outputs:
+  - item_id: labor_bot_basic_v0
+    qty: 1
+    unit: count
 steps:
   - process_id: assembly_basic_v0
     est_time_hr: 1.5
     labor_hours: 1.5
 assumptions: "Assemble per BOM; parts produced via BOM; imported compute treated as part."
-notes: "Basic labor bot assembly path; placeholder for refinement."
+notes: "Basic labor bot assembly path; refined to include explicit BOM inputs."

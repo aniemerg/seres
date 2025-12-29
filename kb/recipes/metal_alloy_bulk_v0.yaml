@@ -3,26 +3,16 @@ kind: recipe
 target_item_id: metal_alloy_bulk
 variant_id: v0
 steps:
-  - process_id: excavate_regolith_surface_v0
-    inputs:
-      - item_id: lunar_regolith_in_situ
-        qty: 100.0
-        unit: kg
-        notes: "In-situ regolith for excavation"
-    outputs:
-      - item_id: regolith_excavated
-        qty: 100.0
-        unit: kg
-        notes: "Excavated regolith"
+  - process_id: regolith_mining_simple_v0
     est_time_hr: 1.0
     machine_hours: 1.0
-    notes: "Excavate highland regolith from surface"
+    notes: "Mine mare regolith from surface"
   - process_id: regolith_screening_sieving_v0
     inputs:
-      - item_id: regolith_excavated
+      - item_id: regolith_lunar_mare
         qty: 100.0
         unit: kg
-        notes: "Raw regolith from excavation"
+        notes: "Raw mare regolith from mining"
     outputs:
       - item_id: regolith_coarse_fraction
         qty: 60.0

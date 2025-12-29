@@ -1,0 +1,84 @@
+id: regolith_mining_polar_psc_v0
+kind: process
+name: Polar PSC Regolith Mining
+description: |
+  Excavation of ice-bearing regolith from permanently shadowed craters (PSCs)
+  at lunar poles. Mining ice-cemented regolith requires specialized drilling
+  equipment as the material is rock-hard at PSC temperatures (~40 K).
+
+  Slower and more energy-intensive than loose regolith mining due to ice cement.
+
+base_rate: "50 kg/hour"
+
+inputs: []  # No consumables - regolith is free (but harder to mine)
+
+outputs:
+  - item_id: regolith_polar_psc
+    quantity: 50
+    unit: kg
+    per: hour
+
+required_machines:
+  - labor_bot_general_v0: 1
+  - drilling_equipment_v0: 1
+
+requires_ids:
+  - heliostat_array_system_v0
+
+scalable: true
+
+time_model:
+  type: linear_rate
+  rate_kg_per_hr: 50
+  notes: Lower rate than mare mining due to drilling ice-cemented material
+
+energy_model:
+  type: kWh_per_kg
+  value: 0.5
+  notes: |
+    Higher energy than loose regolith mining (0.05 kWh/kg for mare).
+    Drilling frozen ice-cemented regolith similar to drilling concrete.
+    Includes heliostat power for lighting and equipment operation in PSC.
+
+layer_tags:
+  - layer_2
+  - layer_3
+
+notes: |
+  Mining of ice-bearing regolith from permanently shadowed craters.
+
+  Location: North and south pole PSCs
+  Temperature: ~40 K (-233°C)
+  Ice concentration: 5.6% ± 2.9% by mass
+
+  Operational considerations:
+  - PSCs are permanently dark (no direct sunlight)
+  - Heliostats required: Reflect sunlight from peaks of eternal light
+  - Heliostat distance: ~20 km vertical and horizontal
+  - Alternative: Nuclear power for PSC operations
+
+  Mining challenges:
+  - Ice-cemented regolith is rock-hard (similar to concrete)
+  - Requires drilling equipment (not just scooping)
+  - Lower excavation rate than loose mare/highlands regolith
+  - Higher energy per kg due to drilling
+  - Extreme cold requires specialized equipment
+
+  Rate justification:
+  - Mare regolith (loose): 100 kg/hr with labor bot
+  - PSC regolith (ice-cement): 50 kg/hr with labor bot + drilling equipment
+  - Factor of 2x reduction due to hardness
+
+  Energy justification:
+  - Mare regolith: 0.05 kWh/kg (simple scooping)
+  - PSC regolith: 0.5 kWh/kg (drilling + heliostat operation)
+  - Factor of 10x increase for drilling hard material
+
+  Infrastructure requirements:
+  - Heliostat array on peaks of eternal light
+  - Communication relay (PSCs are in radio shadow)
+  - Thermal management (equipment must operate at 40 K or be insulated)
+  - Power transmission from heliostats or nuclear source
+
+  Source: Power-on-the-Moon-using-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
+  LCROSS impact data (Cabeus crater, 2009)

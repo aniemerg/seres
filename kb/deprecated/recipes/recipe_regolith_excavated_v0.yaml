@@ -1,0 +1,21 @@
+id: recipe_regolith_excavated_v0
+kind: recipe
+target_item_id: regolith_excavated
+name: Excavated regolith from mined mare regolith
+
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 100
+    unit: kg
+
+outputs:
+  - item_id: regolith_excavated
+    qty: 100
+    unit: kg
+
+steps:
+  - process_id: regolith_excavation_processing_v0
+
+notes: |
+  Converts raw mined mare regolith into excavated/processed form.
+  Simple collection and screening step.
