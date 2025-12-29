@@ -1,0 +1,14 @@
+id: recipe_nitrogen_gas_regolith_v0
+kind: recipe
+target_item_id: nitrogen_gas_regolith
+steps:
+  - process_id: regolith_volatile_thermal_extraction_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nitrogen_gas_regolith
+        qty: 0.000081
+        unit: kg
+notes: "Regolith volatile extraction yields trace nitrogen gas; uses existing thermal extraction process."

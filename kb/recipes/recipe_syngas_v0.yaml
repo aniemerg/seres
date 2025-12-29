@@ -1,0 +1,46 @@
+id: recipe_syngas_v0
+kind: recipe
+target_item_id: syngas
+produces_id: syngas
+produces_qty: 2.126
+produces_unit: kg
+variant_id: v0
+steps:
+  - process_id: syngas_generation_steam_reforming_v0
+    inputs:
+      - item_id: methane_gas
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 2.25
+        unit: kg
+    outputs:
+      - item_id: carbon_monoxide
+        qty: 1.75
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.376
+        unit: kg
+      - item_id: water
+        qty: 1.13
+        unit: kg
+    est_time_hr: 4.0
+    labor_hours: 2.0
+    notes: "Steam reform methane to produce CO and H2"
+  - process_id: syngas_blending_v0
+    inputs:
+      - item_id: carbon_monoxide
+        qty: 1.75
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.376
+        unit: kg
+    outputs:
+      - item_id: syngas
+        qty: 2.126
+        unit: kg
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Blend CO and H2 to syngas mixture"
+notes: |
+  Local syngas production via methane steam reforming and gas blending.

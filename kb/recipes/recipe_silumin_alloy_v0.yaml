@@ -1,0 +1,26 @@
+id: recipe_silumin_alloy_v0
+kind: recipe
+target_item_id: silumin_alloy
+variant_id: v0
+inputs:
+  - item_id: aluminum_metal_pure
+    qty: 0.87
+    unit: kg
+    notes: "Aluminum base metal (typical 87% by mass)"
+  - item_id: silicon_metal_v0
+    qty: 0.13
+    unit: kg
+    notes: "Silicon alloying element (typical 13% by mass)"
+outputs:
+  - item_id: silumin_alloy
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: alloying_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Melt and alloy aluminum with silicon to form silumin"
+assumptions: |
+  Typical silumin composition modeled at 87% Al / 13% Si.
+  Actual grades vary from ~3-25% Si for casting, welding, and brazing applications.
+notes: "Silumin (Al-Si) alloy production via basic alloying process."

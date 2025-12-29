@@ -1,0 +1,37 @@
+id: recipe_enstatite_v0
+kind: recipe
+target_item_id: enstatite
+variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 100.0
+    unit: kg
+    notes: "Regolith feedstock with pyroxene minerals"
+outputs:
+  - item_id: enstatite
+    qty: 25.0
+    unit: kg
+    notes: "Enstatite-rich pyroxene concentrate (placeholder yield)"
+  - item_id: tailings_silicate_mix
+    qty: 75.0
+    unit: kg
+steps:
+  - process_id: pyroxene_separation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: enstatite
+        qty: 25.0
+        unit: kg
+      - item_id: tailings_silicate_mix
+        qty: 75.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Separate pyroxene fraction; treat output as enstatite-rich concentrate"
+assumptions: |
+  Enstatite modeled as the dominant pyroxene mineral in the separated concentrate.
+  Yield placeholder aligned to pyroxene separation (25% concentrate from regolith).
+notes: "Placeholder enstatite recovery via pyroxene separation."

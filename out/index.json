@@ -516,8 +516,10 @@
       "name": "Alloy mixing v0",
       "refs_in": [
         "recipe_nickel_chromium_nickel_aluminum_alloy_stock_v0",
+        "recipe_supermalloy_v0",
         "recipe_thermocouple_type_k_v0",
-        "recipe_thermocouple_type_s_v0"
+        "recipe_thermocouple_type_s_v0",
+        "recipe_titanium_aluminide_v0"
       ],
       "refs_out": [
         "nickel_aluminum_alloy",
@@ -536,8 +538,11 @@
       ],
       "name": "Alloying (basic)",
       "refs_in": [
+        "recipe_inovco_alloy_v0",
+        "recipe_magnesium_silicide_thermoelectric_v0",
         "recipe_nickel_aluminum_alloy_v0",
-        "recipe_nickel_chromium_alloy_v0"
+        "recipe_nickel_chromium_alloy_v0",
+        "recipe_silumin_alloy_v0"
       ],
       "refs_out": [
         "furnace_basic"
@@ -746,6 +751,8 @@
         "ceramic_casting_basic_v0",
         "ceramic_sintering_process_v0",
         "cryolite_flux_synthesis_v0",
+        "sapphire_crystal_growth_czochralski_v0",
+        "spinel_synthesis_v0",
         "recipe_alumina_powder_v0",
         "recipe_aluminum_metal_pure_v0",
         "recipe_antenna_dipole_v0",
@@ -843,6 +850,7 @@
         "aluminum_tube_stock_extrusion_v0",
         "ffc_anorthite_alcasi_alloy_v0",
         "heat_sink_extrusion_v0",
+        "magnalium_alloying_v0",
         "metal_extrusion_process_v0",
         "olivine_aluminothermic_reduction_v0",
         "robot_arm_link_fabrication_v0",
@@ -881,7 +889,9 @@
       "name": "Aluminum Chloride",
       "refs_in": [
         "aluminum_chloride_calcination_v0",
+        "aluminum_chloride_hydrate_formation_v0",
         "anorthite_carbochlorination_v0",
+        "recipe_aluminum_chloride_hydrate_v0",
         "recipe_aluminum_chloride_v0"
       ],
       "refs_out": [],
@@ -903,6 +913,39 @@
         "furnace_basic",
         "gas_handling_loop_v0",
         "hydrogen_chloride",
+        "water"
+      ],
+      "status": "defined"
+    },
+    "aluminum_chloride_hydrate": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/aluminum_chloride_hydrate.yaml",
+      "id": "aluminum_chloride_hydrate",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Aluminum chloride hydrate",
+      "refs_in": [
+        "aluminum_chloride_hydrate_formation_v0",
+        "recipe_aluminum_chloride_hydrate_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "aluminum_chloride_hydrate_formation_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/aluminum_chloride_hydrate_formation_v0.yaml",
+      "id": "aluminum_chloride_hydrate_formation_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4"
+      ],
+      "name": "Aluminum chloride hydrate formation",
+      "refs_in": [
+        "recipe_aluminum_chloride_hydrate_v0"
+      ],
+      "refs_out": [
+        "aluminum_chloride",
+        "aluminum_chloride_hydrate",
         "water"
       ],
       "status": "defined"
@@ -4311,6 +4354,8 @@
       "name": "Magnetic beneficiation of regolith (basic)",
       "refs_in": [
         "recipe_anorthite_ore_v0",
+        "recipe_plagioclase_feldspar_v0",
+        "recipe_spinel_ore_v0",
         "recipe_tailings_v0"
       ],
       "refs_out": [
@@ -4332,6 +4377,19 @@
       "refs_in": [
         "tube_bending_and_cutting_v0",
         "recipe_bent_tube_sections_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "bentonite": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/bentonite.yaml",
+      "id": "bentonite",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Bentonite clay",
+      "refs_in": [
+        "recipe_bentonite_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -13139,6 +13197,7 @@
         "ffc_ilmenite_feti_alloy_v0",
         "ffc_magnesium_extraction_v0",
         "ffc_olivine_mgsi_alloy_v0",
+        "ffc_titanium_extraction_v0",
         "hcl_recovery_from_cacl2_v0",
         "solvay_process_sodium_carbonate_v0",
         "recipe_calcium_chloride_v0"
@@ -13242,6 +13301,19 @@
         "calcium_carbonate_from_hydroxide_v0",
         "hcl_recovery_from_cacl2_v0",
         "recipe_calcium_hydroxide_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "calcium_metal": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/calcium_metal.yaml",
+      "id": "calcium_metal",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Calcium metal",
+      "refs_in": [
+        "recipe_calcium_metal_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -13763,7 +13835,6 @@
         "anorthite_carbochlorination_v0",
         "anorthite_carbothermal_reduction_v0",
         "boudouard_reaction_v0",
-        "carbon_monoxide_generation_v0",
         "carbon_monoxide_oxidation_v0",
         "carbothermal_methane_reduction_pyroxene_v0",
         "dicobalt_octacarbonyl_synthesis_v0",
@@ -13773,9 +13844,25 @@
         "olivine_carbothermal_reduction_v0",
         "phosphorus_extraction_from_kreep_v0",
         "reverse_water_gas_shift_v0",
+        "syngas_blending_v0",
         "syngas_generation_steam_reforming_v0",
         "tungsten_carbonyl_synthesis_v0",
-        "recipe_carbon_monoxide_v0"
+        "recipe_carbon_monoxide_v0",
+        "recipe_syngas_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "carbon_monoxide_gas": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/carbon_monoxide_gas.yaml",
+      "id": "carbon_monoxide_gas",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Carbon monoxide gas",
+      "refs_in": [
+        "carbon_monoxide_generation_v0",
+        "recipe_carbon_monoxide_gas_v1"
       ],
       "refs_out": [],
       "status": "defined"
@@ -13804,10 +13891,11 @@
       ],
       "name": "Carbon monoxide gas generation (from carbon reductant)",
       "refs_in": [
-        "recipe_carbon_monoxide_gas_v0"
+        "recipe_carbon_monoxide_gas_v0",
+        "recipe_carbon_monoxide_gas_v1"
       ],
       "refs_out": [
-        "carbon_monoxide",
+        "carbon_monoxide_gas",
         "carbon_reductant"
       ],
       "status": "defined"
@@ -13890,7 +13978,9 @@
         "oxygen_extraction_carbothermal_reduction_v0",
         "silicon_extraction_from_regolith_carbothermic_v0",
         "stainless_steel_smelting_v0",
-        "recipe_carbon_reductant_v0"
+        "recipe_carbon_reductant_v0",
+        "recipe_carbon_monoxide_gas_v0",
+        "recipe_carbon_monoxide_gas_v1"
       ],
       "refs_out": [],
       "status": "defined"
@@ -14152,6 +14242,7 @@
         "bom_casting_furnace_v0",
         "casting_silver_contact_material_v0",
         "liquid_sodium_receiver_fabrication_v0",
+        "magnalium_alloying_v0",
         "melting_basic_v0",
         "metal_casting_basic_v0",
         "metal_ingot_cast_v0",
@@ -14900,7 +14991,8 @@
         "recipe_encoder_magnetic_v0",
         "recipe_molten_salt_containment_v0",
         "recipe_oxygen_sensor_zirconia_alias_v0",
-        "recipe_oxygen_sensor_zirconia_v0"
+        "recipe_oxygen_sensor_zirconia_v0",
+        "recipe_silicon_oxycarbide_ceramic_v0"
       ],
       "refs_out": [
         "furnace_high_temp"
@@ -15478,7 +15570,8 @@
       ],
       "name": "Chemical mixing (basic)",
       "refs_in": [
-        "recipe_calcium_hydroxide_v0"
+        "recipe_calcium_hydroxide_v0",
+        "recipe_gibbsite_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -15815,7 +15908,8 @@
       "refs_in": [
         "recipe_adhesive_cyanoacrylate_base_v0",
         "recipe_adhesive_cyanoacrylate_v0",
-        "recipe_photoresist_solution_v0"
+        "recipe_photoresist_solution_v0",
+        "recipe_talc_v0"
       ],
       "refs_out": [
         "chemical_reactor_basic"
@@ -15953,9 +16047,20 @@
       "refs_out": [],
       "status": "defined"
     },
+    "chromium_metal": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/chromium_metal.yaml",
+      "id": "chromium_metal",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Chromium metal",
+      "refs_in": [],
+      "refs_out": [],
+      "status": "defined"
+    },
     "chromium_metal_pure": {
       "aliases": [],
-      "defined_in": "kb/imports/chromium_metal_pure.yaml",
+      "defined_in": "kb/items/materials/chromium_metal_pure.yaml",
       "id": "chromium_metal_pure",
       "kind": "material",
       "layer_tags": [],
@@ -18900,6 +19005,7 @@
       "refs_in": [
         "bom_crucible_set_v0",
         "czochralski_process_silicon_v0",
+        "sapphire_crystal_growth_czochralski_v0",
         "recipe_crucible_ceramic_refractory_v0"
       ],
       "refs_out": [],
@@ -19746,6 +19852,7 @@
       "refs_in": [
         "bom_czochralski_puller_v0",
         "czochralski_process_silicon_v0",
+        "sapphire_crystal_growth_czochralski_v0",
         "recipe_czochralski_puller_v0"
       ],
       "refs_out": [
@@ -21687,6 +21794,7 @@
         "ffc_ilmenite_feti_alloy_v0",
         "ffc_magnesium_extraction_v0",
         "ffc_olivine_mgsi_alloy_v0",
+        "ffc_titanium_extraction_v0",
         "oxygen_extraction_molten_regolith_electrolysis_v0",
         "recipe_electrodes_v0"
       ],
@@ -22434,6 +22542,19 @@
       "name": "Energy Closure Verification",
       "refs_in": [
         "paper_reviews_dec2024_comprehensive_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "enstatite": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/enstatite.yaml",
+      "id": "enstatite",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Enstatite (MgSiO3)",
+      "refs_in": [
+        "recipe_enstatite_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -23287,6 +23408,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "ferrite_magnet_cobalt": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/ferrite_magnet_cobalt.yaml",
+      "id": "ferrite_magnet_cobalt",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Cobalt ferrite magnet (CoFe2O4)",
+      "refs_in": [
+        "recipe_ferrite_magnet_cobalt_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "ferrite_powder_precursor_ni_v0": {
       "aliases": [],
       "defined_in": "kb/items/materials/ferrite_powder_precursor_ni_v0.yaml",
@@ -23330,6 +23464,7 @@
       "name": "Ferrite powder precursor synthesis v0",
       "refs_in": [
         "recipe_cofe2o4_hard_ferrite_v0",
+        "recipe_ferrite_magnet_cobalt_v0",
         "recipe_ferrite_powder_precursor_v0_v0"
       ],
       "refs_out": [
@@ -23402,6 +23537,7 @@
       "refs_in": [
         "recipe_cofe2o4_hard_ferrite_v0",
         "recipe_demonstrated_ferrite_core_2017_v0",
+        "recipe_ferrite_magnet_cobalt_v0",
         "recipe_transformer_ferrite_core_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
@@ -23459,6 +23595,7 @@
       "refs_in": [
         "recipe_cofe2o4_hard_ferrite_v0",
         "recipe_demonstrated_ferrite_core_2017_v0",
+        "recipe_ferrite_magnet_cobalt_v0",
         "recipe_ferrite_toroid_core_v0",
         "recipe_magnetic_core_memory_array_v0",
         "papers_gap_seed_v0"
@@ -23518,7 +23655,8 @@
       ],
       "name": "FFC Cambridge calcium metal extraction",
       "refs_in": [
-        "recipe_calcium_metal_pure_v0"
+        "recipe_calcium_metal_pure_v0",
+        "recipe_calcium_metal_v0"
       ],
       "refs_out": [
         "calcium_chloride",
@@ -23671,6 +23809,7 @@
         "ffc_ilmenite_feti_alloy_v0",
         "ffc_magnesium_extraction_v0",
         "ffc_olivine_mgsi_alloy_v0",
+        "ffc_titanium_extraction_v0",
         "recipe_ffc_reactor_unit_v0",
         "papers_gap_seed_v0"
       ],
@@ -23692,6 +23831,30 @@
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "ffc_titanium_extraction_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/ffc_titanium_extraction_v0.yaml",
+      "id": "ffc_titanium_extraction_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4",
+        "layer_5"
+      ],
+      "name": "FFC Cambridge titanium metal extraction",
+      "refs_in": [
+        "recipe_titanium_metal_v0"
+      ],
+      "refs_out": [
+        "calcium_chloride",
+        "electrodes",
+        "ffc_reactor_unit_v0",
+        "inert_anode_v0",
+        "oxygen_gas",
+        "titanium_metal",
+        "titanium_oxide"
+      ],
       "status": "defined"
     },
     "fiber_collection_spool": {
@@ -23973,6 +24136,7 @@
         "recipe_green_capacitor_variable_tuning_v0",
         "recipe_insulation_panel_high_temp_v0",
         "recipe_insulation_panel_high_temp_v1",
+        "recipe_metakaolin_v0",
         "recipe_tube_socket_ceramic_v0"
       ],
       "refs_out": [
@@ -25414,6 +25578,7 @@
         "hydrogen_recycle_separator_v0",
         "iron_reduction_from_ilmenite_v0",
         "olivine_carbothermal_reduction_v0",
+        "syngas_blending_v0",
         "recipe_machine_gas_handling_loop_v0"
       ],
       "refs_out": [
@@ -26094,6 +26259,19 @@
       ],
       "status": "defined"
     },
+    "geopolymer_cement": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/geopolymer_cement.yaml",
+      "id": "geopolymer_cement",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Geopolymer cement",
+      "refs_in": [
+        "recipe_geopolymer_cement_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "getter_deposition_activation_v0": {
       "aliases": [],
       "defined_in": "kb/processes/getter_deposition_activation_v0.yaml",
@@ -26228,6 +26406,19 @@
         "getter_material_raw_production_v0",
         "recipe_getter_material_raw_v0",
         "recipe_getter_material_raw_v1"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "gibbsite": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/gibbsite.yaml",
+      "id": "gibbsite",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Gibbsite (aluminum hydroxide)",
+      "refs_in": [
+        "recipe_gibbsite_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -28708,7 +28899,8 @@
       ],
       "name": "Helium-3 cryogenic separation from volatiles",
       "refs_in": [
-        "recipe_helium_3_gas_v0"
+        "recipe_helium_3_gas_v0",
+        "recipe_helium_3_v0"
       ],
       "refs_out": [
         "cryogenic_chiller_v0",
@@ -28717,6 +28909,19 @@
         "helium_mixed_isotopes",
         "packed_bed_distillation_v0"
       ],
+      "status": "defined"
+    },
+    "helium_3": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/helium_3.yaml",
+      "id": "helium_3",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Helium-3",
+      "refs_in": [
+        "recipe_helium_3_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "helium_3_gas": {
@@ -28809,6 +29014,7 @@
         "czochralski_process_silicon_v0",
         "phosphorus_extraction_from_kreep_v0",
         "pidgeon_process_magnesium_v0",
+        "sapphire_crystal_growth_czochralski_v0",
         "recipe_machine_high_temp_furnace_v0"
       ],
       "refs_out": [
@@ -29168,6 +29374,7 @@
         "bom_hot_press_v0",
         "ndfeb_magnet_sintering_v0",
         "sintering_and_hot_pressing_v0",
+        "spinel_synthesis_v0",
         "recipe_machine_hot_press_v0"
       ],
       "refs_out": [
@@ -29944,8 +30151,10 @@
         "hcl_regolith_preprocessing_v0",
         "hcl_synthesis_from_h2_cl2_v0",
         "hydrochloric_acid_synthesis_v0",
+        "magnesium_chloride_from_mgo_v0",
         "naoh_hcl_salt_synthesis_v0",
-        "recipe_hydrochloric_acid_v1"
+        "recipe_hydrochloric_acid_v1",
+        "recipe_magnesium_chloride_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -30034,10 +30243,12 @@
         "siemens_process_polysilicon_deposition_v0",
         "siemens_process_trichlorosilane_v0",
         "silica_glass_high_purity_v0",
+        "syngas_blending_v0",
         "syngas_generation_steam_reforming_v0",
         "ulvospinel_hydrogen_reduction_v0",
         "water_electrolysis_v0",
-        "recipe_hydrogen_gas_v1"
+        "recipe_hydrogen_gas_v1",
+        "recipe_syngas_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -30344,6 +30555,27 @@
       "refs_out": [],
       "status": "defined"
     },
+    "import_placeholder_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/import_placeholder_v0.yaml",
+      "id": "import_placeholder_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_1"
+      ],
+      "name": "Import placeholder (v0)",
+      "refs_in": [
+        "recipe_bentonite_v0",
+        "recipe_iron_cobalt_alloy_v0",
+        "recipe_kaolinite_clay_v0",
+        "recipe_serpentinite_v0",
+        "recipe_silicic_acid_v0",
+        "recipe_ti6al4v_alloy_v0",
+        "recipe_tungsten_disilicide_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "import_receiving_basic_v0": {
       "aliases": [],
       "defined_in": "kb/processes/import_receiving_basic_v0.yaml",
@@ -30401,6 +30633,7 @@
         "recipe_milling_machine_v0_v0",
         "recipe_mining_equipment_v0",
         "recipe_mixer_control_basic_v0",
+        "recipe_molybdenum_disilicide_v0",
         "recipe_nitrile_rubber_import_v0",
         "recipe_press_brake_v0",
         "recipe_pv_module_imported_v0",
@@ -30561,6 +30794,7 @@
       "refs_in": [
         "ffc_calcium_extraction_v0",
         "ffc_magnesium_extraction_v0",
+        "ffc_titanium_extraction_v0",
         "recipe_inert_anode_v0"
       ],
       "refs_out": [],
@@ -30576,6 +30810,7 @@
       "refs_in": [
         "bom_inert_atmosphere_system_v0",
         "czochralski_process_silicon_v0",
+        "sapphire_crystal_growth_czochralski_v0",
         "tungsten_blank_sintering_high_temp_v0",
         "tungsten_sintering_high_temp_v0",
         "recipe_inert_atmosphere_system_v0"
@@ -30661,6 +30896,19 @@
       "refs_out": [
         "information_closure_verification_v0"
       ],
+      "status": "defined"
+    },
+    "inovco_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/inovco_alloy.yaml",
+      "id": "inovco_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Inovco alloy (Fe-Ni-Co)",
+      "refs_in": [
+        "recipe_inovco_alloy_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "inspection_basic_v0": {
@@ -31341,6 +31589,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "invar_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/invar_alloy.yaml",
+      "id": "invar_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Invar alloy",
+      "refs_in": [
+        "recipe_invar_alloy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "invar_alloy_finalization_v0": {
       "aliases": [],
       "defined_in": "kb/processes/invar_alloy_finalization_v0.yaml",
@@ -31352,6 +31613,7 @@
       ],
       "name": "Invar alloy finalization to low-expansion v0",
       "refs_in": [
+        "recipe_invar_alloy_v0",
         "recipe_invar_low_expansion_import_v0",
         "recipe_invar_low_expansion_v0"
       ],
@@ -31457,6 +31719,19 @@
         "iron_carbonyl_process_v0",
         "iron_carbonyl_synthesis_v0",
         "recipe_iron_carbonyl_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "iron_cobalt_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/iron_cobalt_alloy.yaml",
+      "id": "iron_cobalt_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Iron-cobalt alloy",
+      "refs_in": [
+        "recipe_iron_cobalt_alloy_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -31887,6 +32162,19 @@
         "crushing_jaw_set",
         "steel_ingot"
       ],
+      "status": "defined"
+    },
+    "kaolinite_clay": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/kaolinite_clay.yaml",
+      "id": "kaolinite_clay",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Kaolinite clay",
+      "refs_in": [
+        "recipe_kaolinite_clay_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "kapvik_microrover_30kg_v0": {
@@ -34726,6 +35014,40 @@
       ],
       "status": "defined"
     },
+    "magnalium_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/magnalium_alloy.yaml",
+      "id": "magnalium_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnalium alloy (Al-Mg)",
+      "refs_in": [
+        "magnalium_alloying_v0",
+        "recipe_magnalium_alloy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnalium_alloying_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/magnalium_alloying_v0.yaml",
+      "id": "magnalium_alloying_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5"
+      ],
+      "name": "Magnalium alloying",
+      "refs_in": [
+        "recipe_magnalium_alloy_v0"
+      ],
+      "refs_out": [
+        "aluminum_alloy_ingot",
+        "casting_furnace_v0",
+        "magnalium_alloy",
+        "magnesium_metal_v0"
+      ],
+      "status": "defined"
+    },
     "magnesia_refractory_v0": {
       "aliases": [],
       "defined_in": "kb/items/materials/magnesia_refractory_v0.yaml",
@@ -34735,10 +35057,46 @@
       "name": "Magnesia refractory brick",
       "refs_in": [
         "olivine_aluminothermic_reduction_v0",
+        "spinel_synthesis_v0",
         "recipe_magnesia_refractory_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "magnesium_chloride": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/magnesium_chloride.yaml",
+      "id": "magnesium_chloride",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnesium chloride",
+      "refs_in": [
+        "magnesium_chloride_from_mgo_v0",
+        "sorel_cement_synthesis_v0",
+        "recipe_magnesium_chloride_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnesium_chloride_from_mgo_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/magnesium_chloride_from_mgo_v0.yaml",
+      "id": "magnesium_chloride_from_mgo_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4"
+      ],
+      "name": "Magnesium chloride from MgO and HCl",
+      "refs_in": [
+        "recipe_magnesium_chloride_v0"
+      ],
+      "refs_out": [
+        "hydrochloric_acid",
+        "magnesium_chloride",
+        "magnesium_oxide",
+        "water"
+      ],
       "status": "defined"
     },
     "magnesium_metal_v0": {
@@ -34750,6 +35108,7 @@
       "name": "Magnesium metal",
       "refs_in": [
         "ffc_magnesium_extraction_v0",
+        "magnalium_alloying_v0",
         "magnesium_oxide_reduction_v0",
         "olivine_aluminothermic_reduction_v0",
         "olivine_carbothermal_reduction_v0",
@@ -34772,11 +35131,15 @@
         "aluminosilicate_glass_production_v0",
         "carbothermal_methane_reduction_pyroxene_v0",
         "ffc_magnesium_extraction_v0",
+        "magnesium_chloride_from_mgo_v0",
         "magnesium_oxide_reduction_v0",
         "silicon_purification_mgsi_v0",
         "sintering_aid_mgo_production_v0",
+        "sorel_cement_synthesis_v0",
         "vacuum_pyrolysis_pyroxene_v0",
-        "recipe_magnesium_oxide_v0"
+        "recipe_magnesium_chloride_v0",
+        "recipe_magnesium_oxide_v0",
+        "recipe_talc_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -34845,6 +35208,19 @@
         "silicide_formation_basic_v0",
         "silicon_purification_mgsi_v0",
         "recipe_magnesium_silicide_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "magnesium_silicide_thermoelectric": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/magnesium_silicide_thermoelectric.yaml",
+      "id": "magnesium_silicide_thermoelectric",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnesium silicide thermoelectric (Mg2Si)",
+      "refs_in": [
+        "recipe_magnesium_silicide_thermoelectric_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -35126,6 +35502,7 @@
         "nife_alloy_beneficiation_v0",
         "olivine_beneficiation_v0",
         "pyroxene_separation_v0",
+        "troilite_concentration_v0",
         "recipe_machine_magnetic_separator_drum_v0"
       ],
       "refs_out": [
@@ -35613,6 +35990,19 @@
         "current_collector_nickel_or_steel_mesh",
         "nickel_mesh_sheet_material"
       ],
+      "status": "defined"
+    },
+    "metakaolin": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/metakaolin.yaml",
+      "id": "metakaolin",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Metakaolin",
+      "refs_in": [
+        "recipe_metakaolin_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "metal_alloy_bulk": {
@@ -36722,7 +37112,8 @@
         "methylchloride_synthesis_v0",
         "sabatier_reaction_complete_v0",
         "syngas_generation_steam_reforming_v0",
-        "recipe_methane_gas_v1"
+        "recipe_methane_gas_v1",
+        "recipe_syngas_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -37494,6 +37885,7 @@
         "recipe_adhesive_cyanoacrylate_base_v0",
         "recipe_adhesive_cyanoacrylate_v0",
         "recipe_ceramic_powder_mixture_v0",
+        "recipe_geopolymer_cement_v0",
         "recipe_glass_raw_materials_v0",
         "recipe_inert_anode_v0",
         "recipe_photoresist_solution_v0",
@@ -37999,6 +38391,30 @@
         "bom_ffc_reactor_unit_v0_v0",
         "recipe_molten_salt_containment_v0"
       ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "molybdenum_disilicide": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/molybdenum_disilicide.yaml",
+      "id": "molybdenum_disilicide",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Molybdenum disilicide (MoSi2)",
+      "refs_in": [
+        "recipe_molybdenum_disilicide_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "molybdenum_metal": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/molybdenum_metal.yaml",
+      "id": "molybdenum_metal",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Molybdenum metal",
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -39403,6 +39819,7 @@
       ],
       "name": "Nickel-iron alloy melting and casting process v0",
       "refs_in": [
+        "recipe_invar_alloy_v0",
         "recipe_invar_low_expansion_import_v0",
         "recipe_invar_low_expansion_v0",
         "recipe_nife_alloy_casting_v0",
@@ -39465,6 +39882,20 @@
       "refs_out": [],
       "status": "defined"
     },
+    "nitric_acid": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/nitric_acid.yaml",
+      "id": "nitric_acid",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Nitric acid",
+      "refs_in": [
+        "nitric_acid_dilution_v0",
+        "recipe_nitric_acid_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "nitric_acid_concentrated": {
       "aliases": [],
       "defined_in": "kb/items/materials/nitric_acid_concentrated.yaml",
@@ -39474,10 +39905,31 @@
       "name": "Nitric acid, concentrated",
       "refs_in": [
         "hcl_generation_from_nacl_v0",
+        "nitric_acid_dilution_v0",
         "ostwald_process_nitric_acid_v0",
-        "recipe_nitric_acid_concentrated_v0"
+        "recipe_nitric_acid_concentrated_v0",
+        "recipe_nitric_acid_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "nitric_acid_dilution_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/nitric_acid_dilution_v0.yaml",
+      "id": "nitric_acid_dilution_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4"
+      ],
+      "name": "Nitric acid dilution",
+      "refs_in": [
+        "recipe_nitric_acid_v0"
+      ],
+      "refs_out": [
+        "nitric_acid",
+        "nitric_acid_concentrated",
+        "water"
+      ],
       "status": "defined"
     },
     "nitrile_rubber": {
@@ -39547,6 +39999,19 @@
         "recipe_nitrogen_gas_purified_v0",
         "recipe_silicon_nitride_ceramic_v0",
         "recipe_silicon_nitride_powder_fine_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "nitrogen_gas_regolith": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/nitrogen_gas_regolith.yaml",
+      "id": "nitrogen_gas_regolith",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Nitrogen gas (regolith volatiles)",
+      "refs_in": [
+        "recipe_nitrogen_gas_regolith_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -40311,6 +40776,7 @@
         "ffc_ilmenite_feti_alloy_v0",
         "ffc_magnesium_extraction_v0",
         "ffc_olivine_mgsi_alloy_v0",
+        "ffc_titanium_extraction_v0",
         "iron_reduction_from_ilmenite_v0",
         "ostwald_process_nitric_acid_v0",
         "oxygen_extraction_carbothermal_reduction_v0",
@@ -42286,6 +42752,19 @@
       "refs_out": [
         "flywheel_rotor_composite_v0"
       ],
+      "status": "defined"
+    },
+    "plagioclase_feldspar": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/plagioclase_feldspar.yaml",
+      "id": "plagioclase_feldspar",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Plagioclase feldspar",
+      "refs_in": [
+        "recipe_plagioclase_feldspar_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "plain_bearing_bronze_v0": {
@@ -45526,6 +46005,7 @@
       ],
       "name": "Pyroxene separation v0",
       "refs_in": [
+        "recipe_enstatite_v0",
         "recipe_pyroxene_concentrate_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
@@ -46442,6 +46922,22 @@
       "refs_out": [
         "aluminum_alloy_ingot",
         "aluminum_smelting_hall_heroult_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_aluminum_chloride_hydrate_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_aluminum_chloride_hydrate_v0.yaml",
+      "id": "recipe_aluminum_chloride_hydrate_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "aluminum_chloride",
+        "aluminum_chloride_hydrate",
+        "aluminum_chloride_hydrate_formation_v0",
+        "water"
       ],
       "status": "defined"
     },
@@ -48129,6 +48625,20 @@
       ],
       "status": "defined"
     },
+    "recipe_bentonite_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_bentonite_v0.yaml",
+      "id": "recipe_bentonite_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "bentonite",
+        "import_placeholder_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_bevel_gear_set_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_bevel_gear_set_v0.yaml",
@@ -48715,6 +49225,20 @@
       ],
       "status": "defined"
     },
+    "recipe_calcium_metal_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_calcium_metal_v0.yaml",
+      "id": "recipe_calcium_metal_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "calcium_metal",
+        "ffc_calcium_extraction_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_calcium_oxide_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_calcium_oxide_v0.yaml",
@@ -49006,7 +49530,23 @@
       "refs_in": [],
       "refs_out": [
         "carbon_monoxide_gas_v0",
-        "carbon_monoxide_generation_v0"
+        "carbon_monoxide_generation_v0",
+        "carbon_reductant"
+      ],
+      "status": "defined"
+    },
+    "recipe_carbon_monoxide_gas_v1": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_carbon_monoxide_gas_v1.yaml",
+      "id": "recipe_carbon_monoxide_gas_v1",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "carbon_monoxide_gas",
+        "carbon_monoxide_generation_v0",
+        "carbon_reductant"
       ],
       "status": "defined"
     },
@@ -54550,6 +55090,22 @@
       ],
       "status": "defined"
     },
+    "recipe_enstatite_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_enstatite_v0.yaml",
+      "id": "recipe_enstatite_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "enstatite",
+        "pyroxene_separation_v0",
+        "regolith_powder",
+        "tailings_silicate_mix"
+      ],
+      "status": "defined"
+    },
     "recipe_epoxy_precursor_block_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_epoxy_precursor_block_v0.yaml",
@@ -54952,6 +55508,22 @@
       "refs_out": [
         "feedstock_material",
         "material_preparation_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_ferrite_magnet_cobalt_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_ferrite_magnet_cobalt_v0.yaml",
+      "id": "recipe_ferrite_magnet_cobalt_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Cobalt ferrite magnet production (CoFe2O4) v0",
+      "refs_in": [],
+      "refs_out": [
+        "ferrite_magnet_cobalt",
+        "ferrite_powder_precursor_synthesis_v0",
+        "ferrite_pressing_shaping_v0",
+        "ferrite_toroid_sintering_v0"
       ],
       "status": "defined"
     },
@@ -56645,6 +57217,20 @@
       ],
       "status": "defined"
     },
+    "recipe_geopolymer_cement_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_geopolymer_cement_v0.yaml",
+      "id": "recipe_geopolymer_cement_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "geopolymer_cement",
+        "mixing_basic_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_getter_material_activated_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_getter_material_activated_v0.yaml",
@@ -56699,6 +57285,20 @@
         "barium_oxide",
         "getter_material_raw",
         "getter_material_raw_generation_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_gibbsite_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_gibbsite_v0.yaml",
+      "id": "recipe_gibbsite_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "chemical_mixing_basic_v0",
+        "gibbsite"
       ],
       "status": "defined"
     },
@@ -58178,6 +58778,20 @@
       ],
       "status": "defined"
     },
+    "recipe_helium_3_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_helium_3_v0.yaml",
+      "id": "recipe_helium_3_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "helium3_cryogenic_separation_v0",
+        "helium_3"
+      ],
+      "status": "defined"
+    },
     "recipe_helium_4_gas_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_helium_4_gas_v0.yaml",
@@ -59497,6 +60111,20 @@
       ],
       "status": "defined"
     },
+    "recipe_inovco_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_inovco_alloy_v0.yaml",
+      "id": "recipe_inovco_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "alloying_basic_v0",
+        "inovco_alloy"
+      ],
+      "status": "defined"
+    },
     "recipe_inspection_tools_basic_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_inspection_tools_basic_v0.yaml",
@@ -59686,6 +60314,21 @@
       ],
       "status": "defined"
     },
+    "recipe_invar_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_invar_alloy_v0.yaml",
+      "id": "recipe_invar_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Recipe for Invar alloy v0",
+      "refs_in": [],
+      "refs_out": [
+        "invar_alloy",
+        "invar_alloy_finalization_v0",
+        "nife_alloy_melting_and_casting_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_invar_low_expansion_import_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_invar_low_expansion_import_v0.yaml",
@@ -59759,6 +60402,20 @@
       "refs_out": [
         "iron_carbonyl_synthesis_v0",
         "iron_carbonyl_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_iron_cobalt_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_iron_cobalt_alloy_v0.yaml",
+      "id": "recipe_iron_cobalt_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "iron_cobalt_alloy"
       ],
       "status": "defined"
     },
@@ -60026,6 +60683,20 @@
         "jaw_plates_set",
         "machining_finish_basic_v0",
         "metal_casting_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_kaolinite_clay_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_kaolinite_clay_v0.yaml",
+      "id": "recipe_kaolinite_clay_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "kaolinite_clay"
       ],
       "status": "defined"
     },
@@ -62854,6 +63525,20 @@
       ],
       "status": "defined"
     },
+    "recipe_magnalium_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_magnalium_alloy_v0.yaml",
+      "id": "recipe_magnalium_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "magnalium_alloy",
+        "magnalium_alloying_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_magnesia_refractory_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_magnesia_refractory_v0.yaml",
@@ -62869,6 +63554,23 @@
         "powder_processing_v0",
         "pressing_operations_basic_v0",
         "sintering_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_magnesium_chloride_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_magnesium_chloride_v0.yaml",
+      "id": "recipe_magnesium_chloride_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "hydrochloric_acid",
+        "magnesium_chloride",
+        "magnesium_chloride_from_mgo_v0",
+        "magnesium_oxide",
+        "water"
       ],
       "status": "defined"
     },
@@ -62913,6 +63615,20 @@
         "dust_fines_v0",
         "magnesium_metal_v0",
         "magnesium_powder_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_magnesium_silicide_thermoelectric_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_magnesium_silicide_thermoelectric_v0.yaml",
+      "id": "recipe_magnesium_silicide_thermoelectric_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "alloying_basic_v0",
+        "magnesium_silicide_thermoelectric"
       ],
       "status": "defined"
     },
@@ -63335,6 +64051,20 @@
         "import_receiving_basic_v0",
         "inspection_basic_v0",
         "megohmmeter_core_imported"
+      ],
+      "status": "defined"
+    },
+    "recipe_metakaolin_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_metakaolin_v0.yaml",
+      "id": "recipe_metakaolin_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "firing_ceramic_basic_v0",
+        "metakaolin"
       ],
       "status": "defined"
     },
@@ -64411,6 +65141,21 @@
       ],
       "status": "defined"
     },
+    "recipe_molybdenum_disilicide_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_molybdenum_disilicide_v0.yaml",
+      "id": "recipe_molybdenum_disilicide_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_receiving_basic_v0",
+        "molybdenum_disilicide",
+        "stock_material"
+      ],
+      "status": "defined"
+    },
     "recipe_mos2_solid_lubricant_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_mos2_solid_lubricant_v0.yaml",
@@ -65233,6 +65978,22 @@
       ],
       "status": "defined"
     },
+    "recipe_nitric_acid_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_nitric_acid_v0.yaml",
+      "id": "recipe_nitric_acid_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "nitric_acid",
+        "nitric_acid_concentrated",
+        "nitric_acid_dilution_v0",
+        "water"
+      ],
+      "status": "defined"
+    },
     "recipe_nitrile_rubber_import_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_nitrile_rubber_import_v0.yaml",
@@ -65258,6 +66019,21 @@
       "refs_out": [
         "nitrogen_gas_purified",
         "nitrogen_purification_from_air_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_nitrogen_gas_regolith_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_nitrogen_gas_regolith_v0.yaml",
+      "id": "recipe_nitrogen_gas_regolith_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "nitrogen_gas_regolith",
+        "regolith_lunar_highlands",
+        "regolith_volatile_thermal_extraction_v0"
       ],
       "status": "defined"
     },
@@ -66769,6 +67545,21 @@
       "refs_out": [
         "carbon_anode_forming_v0",
         "pitch_residue"
+      ],
+      "status": "defined"
+    },
+    "recipe_plagioclase_feldspar_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_plagioclase_feldspar_v0.yaml",
+      "id": "recipe_plagioclase_feldspar_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "beneficiation_magnetic_basic_v0",
+        "plagioclase_feldspar",
+        "regolith_screening_sieving_v0"
       ],
       "status": "defined"
     },
@@ -69169,6 +69960,20 @@
       ],
       "status": "defined"
     },
+    "recipe_regolith_lunar_polar_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_regolith_lunar_polar_v0.yaml",
+      "id": "recipe_regolith_lunar_polar_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "regolith_lunar_polar",
+        "regolith_mining_polar_psc_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_regolith_pellet_dust_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_regolith_pellet_dust_v0.yaml",
@@ -70115,6 +70920,20 @@
       ],
       "status": "defined"
     },
+    "recipe_sapphire_crystal_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_sapphire_crystal_v0.yaml",
+      "id": "recipe_sapphire_crystal_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Sapphire crystal production v0",
+      "refs_in": [],
+      "refs_out": [
+        "sapphire_crystal",
+        "sapphire_crystal_growth_czochralski_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_saw_or_cutting_tool_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_saw_or_cutting_tool_v0.yaml",
@@ -70547,6 +71366,20 @@
       ],
       "status": "defined"
     },
+    "recipe_serpentinite_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_serpentinite_v0.yaml",
+      "id": "recipe_serpentinite_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "serpentinite"
+      ],
+      "status": "defined"
+    },
     "recipe_shaft_and_bearing_set_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_shaft_and_bearing_set_v0.yaml",
@@ -70735,6 +71568,20 @@
       ],
       "status": "defined"
     },
+    "recipe_silicic_acid_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_silicic_acid_v0.yaml",
+      "id": "recipe_silicic_acid_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "silicic_acid"
+      ],
+      "status": "defined"
+    },
     "recipe_silicon_carbide_ceramic_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_silicon_carbide_ceramic_v0.yaml",
@@ -70853,6 +71700,21 @@
         "powder_milling_process_v0",
         "silicon_nitride_powder_fine",
         "silicon_powder_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_silicon_oxycarbide_ceramic_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_silicon_oxycarbide_ceramic_v0.yaml",
+      "id": "recipe_silicon_oxycarbide_ceramic_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "ceramic_firing_high_temp_v0",
+        "silicon_oxycarbide_ceramic",
+        "silicone_polymer"
       ],
       "status": "defined"
     },
@@ -71011,6 +71873,20 @@
       "refs_out": [
         "silicone_rubber",
         "silicone_rubber_vulcanization_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_silumin_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_silumin_alloy_v0.yaml",
+      "id": "recipe_silumin_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "alloying_basic_v0",
+        "silumin_alloy"
       ],
       "status": "defined"
     },
@@ -71588,6 +72464,20 @@
       ],
       "status": "defined"
     },
+    "recipe_sorel_cement_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_sorel_cement_v0.yaml",
+      "id": "recipe_sorel_cement_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "sorel_cement",
+        "sorel_cement_synthesis_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_space_frame_structure_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_space_frame_structure_v0.yaml",
@@ -71741,6 +72631,34 @@
         "spindle_head_basic",
         "steel_bar_stock",
         "steel_scrap_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_spinel_ceramic_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_spinel_ceramic_v0.yaml",
+      "id": "recipe_spinel_ceramic_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "spinel_ceramic_v0",
+        "spinel_synthesis_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_spinel_ore_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_spinel_ore_v0.yaml",
+      "id": "recipe_spinel_ore_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "beneficiation_magnetic_basic_v0",
+        "spinel_ore"
       ],
       "status": "defined"
     },
@@ -72918,6 +73836,36 @@
       ],
       "status": "defined"
     },
+    "recipe_sulfuric_acid_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_sulfuric_acid_v0.yaml",
+      "id": "recipe_sulfuric_acid_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "sulfuric_acid",
+        "sulfuric_acid_concentrated",
+        "sulfuric_acid_dilution_v0",
+        "water"
+      ],
+      "status": "defined"
+    },
+    "recipe_supermalloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_supermalloy_v0.yaml",
+      "id": "recipe_supermalloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "alloy_mixing_v0",
+        "supermalloy"
+      ],
+      "status": "defined"
+    },
     "recipe_support_frame_small_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_support_frame_small_v0.yaml",
@@ -73050,6 +73998,25 @@
       ],
       "status": "defined"
     },
+    "recipe_syngas_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_syngas_v0.yaml",
+      "id": "recipe_syngas_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "carbon_monoxide",
+        "hydrogen_gas",
+        "methane_gas",
+        "syngas",
+        "syngas_blending_v0",
+        "syngas_generation_steam_reforming_v0",
+        "water"
+      ],
+      "status": "defined"
+    },
     "recipe_table_drive_assembly_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_table_drive_assembly_v0.yaml",
@@ -73141,6 +74108,23 @@
         "steel_plate_or_sheet",
         "tailstock_assembly",
         "tailstock_assembly_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_talc_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_talc_v0.yaml",
+      "id": "recipe_talc_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "chemical_synthesis_basic_v0",
+        "magnesium_oxide",
+        "silica_purified",
+        "talc",
+        "water"
       ],
       "status": "defined"
     },
@@ -73887,6 +74871,20 @@
       ],
       "status": "defined"
     },
+    "recipe_ti6al4v_alloy_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_ti6al4v_alloy_v0.yaml",
+      "id": "recipe_ti6al4v_alloy_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "ti6al4v_alloy"
+      ],
+      "status": "defined"
+    },
     "recipe_tin_metal_pure_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_tin_metal_pure_v0.yaml",
@@ -73916,6 +74914,34 @@
         "sheet_metal_fabrication_v0",
         "tip_holder_and_stand",
         "welding_and_fabrication_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_titanium_aluminide_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_titanium_aluminide_v0.yaml",
+      "id": "recipe_titanium_aluminide_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "alloy_mixing_v0",
+        "titanium_aluminide"
+      ],
+      "status": "defined"
+    },
+    "recipe_titanium_metal_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_titanium_metal_v0.yaml",
+      "id": "recipe_titanium_metal_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "ffc_titanium_extraction_v0",
+        "titanium_metal"
       ],
       "status": "defined"
     },
@@ -74461,6 +75487,22 @@
       ],
       "status": "defined"
     },
+    "recipe_troilite_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_troilite_v0.yaml",
+      "id": "recipe_troilite_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "regolith_powder",
+        "tailings",
+        "troilite",
+        "troilite_concentration_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_truss_node_connector_set_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_truss_node_connector_set_v0.yaml",
@@ -74711,6 +75753,20 @@
       "refs_out": [
         "tungsten_concentrate",
         "tungsten_density_separation_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_tungsten_disilicide_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_tungsten_disilicide_v0.yaml",
+      "id": "recipe_tungsten_disilicide_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "import_placeholder_v0",
+        "tungsten_disilicide"
       ],
       "status": "defined"
     },
@@ -77154,6 +78210,7 @@
         "silicon_extraction_from_regolith_carbothermic_v0",
         "silicon_extraction_from_regolith_magnesiothermic_v0",
         "substrate_fabrication_basic_v0",
+        "recipe_nitrogen_gas_regolith_v0",
         "recipe_regolith_lunar_highlands_v0"
       ],
       "refs_out": [],
@@ -77186,6 +78243,19 @@
         "recipe_prepared_material_v0",
         "recipe_regolith_crushed_v0",
         "recipe_regolith_lunar_mare_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_lunar_polar": {
+      "aliases": [],
+      "defined_in": "kb/items/raw_materials/regolith_lunar_polar.yaml",
+      "id": "regolith_lunar_polar",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Polar lunar regolith",
+      "refs_in": [
+        "recipe_regolith_lunar_polar_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -77248,6 +78318,7 @@
       ],
       "name": "Polar PSC Regolith Mining",
       "refs_in": [
+        "recipe_regolith_lunar_polar_v0",
         "recipe_regolith_polar_psc_v0"
       ],
       "refs_out": [
@@ -77360,8 +78431,11 @@
         "regolith_crushing_grinding_v0",
         "regolith_sinter_block_process_v0",
         "sulfur_concrete_binding_v0",
+        "troilite_concentration_v0",
         "recipe_metal_alloy_bulk_v0",
+        "recipe_enstatite_v0",
         "recipe_regolith_powder_v0",
+        "recipe_troilite_v0",
         "recipe_reduced_metal_oxides_v0"
       ],
       "refs_out": [],
@@ -77408,6 +78482,7 @@
       "refs_in": [
         "recipe_metal_alloy_bulk_v0",
         "recipe_anorthite_ore_v0",
+        "recipe_plagioclase_feldspar_v0",
         "recipe_regolith_powder_v0",
         "recipe_sintered_shapes_v0",
         "recipe_reduced_metal_oxides_v0",
@@ -77472,7 +78547,8 @@
       "name": "Thermal extraction of volatiles from regolith",
       "refs_in": [
         "recipe_helium_4_gas_v0",
-        "recipe_helium_mixed_isotopes_v0"
+        "recipe_helium_mixed_isotopes_v0",
+        "recipe_nitrogen_gas_regolith_v0"
       ],
       "refs_out": [
         "carbon_dioxide_gas",
@@ -78727,6 +79803,42 @@
       ],
       "status": "defined"
     },
+    "sapphire_crystal": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/sapphire_crystal.yaml",
+      "id": "sapphire_crystal",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Sapphire crystal (Al2O3)",
+      "refs_in": [
+        "sapphire_crystal_growth_czochralski_v0",
+        "recipe_sapphire_crystal_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sapphire_crystal_growth_czochralski_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/sapphire_crystal_growth_czochralski_v0.yaml",
+      "id": "sapphire_crystal_growth_czochralski_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5"
+      ],
+      "name": "Sapphire crystal growth (Czochralski)",
+      "refs_in": [
+        "recipe_sapphire_crystal_v0"
+      ],
+      "refs_out": [
+        "alumina_powder",
+        "crucible_ceramic_refractory",
+        "czochralski_puller_v0",
+        "high_temp_furnace_v0",
+        "inert_atmosphere_system",
+        "sapphire_crystal"
+      ],
+      "status": "defined"
+    },
     "saw_or_cutting_tool": {
       "aliases": [],
       "defined_in": "kb/items/parts/saw_or_cutting_tool.yaml",
@@ -78841,6 +79953,7 @@
         "extraction_raw_formation_control_material_v0_v0",
         "powder_processing_v0",
         "screening_basic_v0",
+        "troilite_concentration_v0",
         "recipe_machine_screening_equipment_v0"
       ],
       "refs_out": [
@@ -79466,6 +80579,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "serpentinite": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/serpentinite.yaml",
+      "id": "serpentinite",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Serpentinite",
+      "refs_in": [
+        "recipe_serpentinite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "servo_drive_controller": {
       "aliases": [],
       "defined_in": "kb/imports/servo_drive_controller.yaml",
@@ -80047,7 +81173,21 @@
         "fused_silica_production_v0",
         "olivine_hydration_v0",
         "quartz_crystal_synthesis_v0",
-        "recipe_silica_purified_v0"
+        "recipe_silica_purified_v0",
+        "recipe_talc_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "silicic_acid": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/silicic_acid.yaml",
+      "id": "silicic_acid",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Silicic acid",
+      "refs_in": [
+        "recipe_silicic_acid_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -80253,6 +81393,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "silicon_oxycarbide_ceramic": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/silicon_oxycarbide_ceramic.yaml",
+      "id": "silicon_oxycarbide_ceramic",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Silicon oxycarbide ceramic (SiOC)",
+      "refs_in": [
+        "recipe_silicon_oxycarbide_ceramic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "silicon_polycrystalline_ultrapure": {
       "aliases": [],
       "defined_in": "kb/items/materials/silicon_polycrystalline_ultrapure.yaml",
@@ -80439,6 +81592,7 @@
         "silicone_rubber_vulcanization_v0",
         "thermal_interface_material_synthesis_v0",
         "recipe_separator_membrane_porous_v0",
+        "recipe_silicon_oxycarbide_ceramic_v0",
         "recipe_silicone_polymer_v0"
       ],
       "refs_out": [],
@@ -80559,6 +81713,19 @@
         "silicone_polymer",
         "silicone_rubber"
       ],
+      "status": "defined"
+    },
+    "silumin_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/silumin_alloy.yaml",
+      "id": "silumin_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Silumin alloy (Al-Si)",
+      "refs_in": [
+        "recipe_silumin_alloy_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "silver_contact_material": {
@@ -80766,6 +81933,7 @@
         "ndfeb_magnet_sintering_v0",
         "regolith_sinter_block_process_v0",
         "sintering_and_hot_pressing_v0",
+        "spinel_synthesis_v0",
         "tungsten_blank_sintering_high_temp_v0",
         "tungsten_extraction_meteorite_v0",
         "tungsten_sintering_high_temp_v0",
@@ -81728,6 +82896,39 @@
       ],
       "status": "defined"
     },
+    "sorel_cement": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/sorel_cement.yaml",
+      "id": "sorel_cement",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Sorel cement (magnesium oxychloride)",
+      "refs_in": [
+        "sorel_cement_synthesis_v0",
+        "recipe_sorel_cement_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "sorel_cement_synthesis_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/sorel_cement_synthesis_v0.yaml",
+      "id": "sorel_cement_synthesis_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_5"
+      ],
+      "name": "Sorel cement synthesis",
+      "refs_in": [
+        "recipe_sorel_cement_v0"
+      ],
+      "refs_out": [
+        "magnesium_chloride",
+        "magnesium_oxide",
+        "sorel_cement"
+      ],
+      "status": "defined"
+    },
     "space_frame_structure_fabrication_v0": {
       "aliases": [],
       "defined_in": "kb/processes/space_frame_structure_fabrication_v0.yaml",
@@ -81879,6 +83080,54 @@
         "recipe_spindle_head_basic_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "spinel_ceramic_v0": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/spinel_ceramic_v0.yaml",
+      "id": "spinel_ceramic_v0",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Magnesium aluminate spinel ceramic",
+      "refs_in": [
+        "spinel_synthesis_v0",
+        "recipe_spinel_ceramic_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "spinel_ore": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/spinel_ore.yaml",
+      "id": "spinel_ore",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Spinel ore (MgAl2O4)",
+      "refs_in": [
+        "recipe_spinel_ore_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "spinel_synthesis_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/spinel_synthesis_v0.yaml",
+      "id": "spinel_synthesis_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_6"
+      ],
+      "name": "Spinel synthesis (MgAl2O4)",
+      "refs_in": [
+        "recipe_spinel_ceramic_v0"
+      ],
+      "refs_out": [
+        "alumina_powder",
+        "hot_press_v0",
+        "magnesia_refractory_v0",
+        "sintering_furnace_v0",
+        "spinel_ceramic_v0"
+      ],
       "status": "defined"
     },
     "spinneret_block_basic": {
@@ -83424,7 +84673,9 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Stock material (DEPRECATED)",
-      "refs_in": [],
+      "refs_in": [
+        "recipe_molybdenum_disilicide_v0"
+      ],
       "refs_out": [],
       "status": "defined"
     },
@@ -83813,6 +85064,20 @@
       "refs_out": [],
       "status": "defined"
     },
+    "sulfuric_acid": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/sulfuric_acid.yaml",
+      "id": "sulfuric_acid",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Sulfuric acid",
+      "refs_in": [
+        "sulfuric_acid_dilution_v0",
+        "recipe_sulfuric_acid_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "sulfuric_acid_concentrated": {
       "aliases": [],
       "defined_in": "kb/items/materials/sulfuric_acid_concentrated.yaml",
@@ -83824,7 +85089,9 @@
         "ilmenite_sulfuric_acid_route_v0",
         "ree_extraction_kreep_v0",
         "sulfuric_acid_contact_process_v0",
-        "recipe_sulfuric_acid_concentrated_v0"
+        "sulfuric_acid_dilution_v0",
+        "recipe_sulfuric_acid_concentrated_v0",
+        "recipe_sulfuric_acid_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -83850,6 +85117,38 @@
         "sulfuric_acid_concentrated",
         "water"
       ],
+      "status": "defined"
+    },
+    "sulfuric_acid_dilution_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/sulfuric_acid_dilution_v0.yaml",
+      "id": "sulfuric_acid_dilution_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4"
+      ],
+      "name": "Sulfuric acid dilution",
+      "refs_in": [
+        "recipe_sulfuric_acid_v0"
+      ],
+      "refs_out": [
+        "sulfuric_acid",
+        "sulfuric_acid_concentrated",
+        "water"
+      ],
+      "status": "defined"
+    },
+    "supermalloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/supermalloy.yaml",
+      "id": "supermalloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Supermalloy",
+      "refs_in": [
+        "recipe_supermalloy_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "support_frame_small": {
@@ -84250,6 +85549,40 @@
       "refs_out": [],
       "status": "defined"
     },
+    "syngas": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/syngas.yaml",
+      "id": "syngas",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Syngas (CO + H2)",
+      "refs_in": [
+        "syngas_blending_v0",
+        "recipe_syngas_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "syngas_blending_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/syngas_blending_v0.yaml",
+      "id": "syngas_blending_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_4"
+      ],
+      "name": "Syngas blending",
+      "refs_in": [
+        "recipe_syngas_v0"
+      ],
+      "refs_out": [
+        "carbon_monoxide",
+        "gas_handling_loop_v0",
+        "hydrogen_gas",
+        "syngas"
+      ],
+      "status": "defined"
+    },
     "syngas_generation_steam_reforming_v0": {
       "aliases": [],
       "defined_in": "kb/processes/syngas_generation_steam_reforming_v0.yaml",
@@ -84259,7 +85592,9 @@
         "layer_4"
       ],
       "name": "Syngas generation via steam reforming of methane",
-      "refs_in": [],
+      "refs_in": [
+        "recipe_syngas_v0"
+      ],
       "refs_out": [
         "carbon_monoxide",
         "catalyst_pellet_forming_v0",
@@ -84352,8 +85687,10 @@
         "mineral_processing_basic_v0",
         "regolith_heating_water_extraction_v0",
         "tailings_to_processed_tailings_v0",
+        "troilite_concentration_v0",
         "tungsten_density_separation_v0",
-        "recipe_tailings_v0"
+        "recipe_tailings_v0",
+        "recipe_troilite_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -84368,6 +85705,7 @@
       "refs_in": [
         "olivine_beneficiation_v0",
         "pyroxene_separation_v0",
+        "recipe_enstatite_v0",
         "recipe_tailings_silicate_mix_v0"
       ],
       "refs_out": [],
@@ -84419,6 +85757,19 @@
       "refs_out": [
         "tailstock_assembly"
       ],
+      "status": "defined"
+    },
+    "talc": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/talc.yaml",
+      "id": "talc",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Talc (magnesium silicate)",
+      "refs_in": [
+        "recipe_talc_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "tank_lid_and_basket": {
@@ -85549,6 +86900,19 @@
       "refs_out": [],
       "status": "defined"
     },
+    "ti6al4v_alloy": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/ti6al4v_alloy.yaml",
+      "id": "ti6al4v_alloy",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Ti-6Al-4V alloy",
+      "refs_in": [
+        "recipe_ti6al4v_alloy_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "tin_metal_pure": {
       "aliases": [],
       "defined_in": "kb/items/materials/tin_metal_pure.yaml",
@@ -85577,6 +86941,33 @@
       "refs_out": [],
       "status": "defined"
     },
+    "titanium_aluminide": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/titanium_aluminide.yaml",
+      "id": "titanium_aluminide",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Titanium aluminide (TiAl)",
+      "refs_in": [
+        "recipe_titanium_aluminide_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "titanium_metal": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/titanium_metal.yaml",
+      "id": "titanium_metal",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Titanium metal",
+      "refs_in": [
+        "ffc_titanium_extraction_v0",
+        "recipe_titanium_metal_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
     "titanium_oxide": {
       "aliases": [],
       "defined_in": "kb/items/materials/titanium_oxide.yaml",
@@ -85585,6 +86976,7 @@
       "layer_tags": [],
       "name": "Titanium oxide",
       "refs_in": [
+        "ffc_titanium_extraction_v0",
         "metalysis_ffc_reduction_v0",
         "ulvospinel_hydrogen_reduction_v0",
         "vacuum_pyrolysis_ilmenite_v0",
@@ -86137,6 +87529,41 @@
       "refs_out": [],
       "status": "defined"
     },
+    "troilite": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/troilite.yaml",
+      "id": "troilite",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Troilite (FeS)",
+      "refs_in": [
+        "troilite_concentration_v0",
+        "recipe_troilite_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "troilite_concentration_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/troilite_concentration_v0.yaml",
+      "id": "troilite_concentration_v0",
+      "kind": "process",
+      "layer_tags": [
+        "layer_2"
+      ],
+      "name": "Troilite concentration from regolith",
+      "refs_in": [
+        "recipe_troilite_v0"
+      ],
+      "refs_out": [
+        "magnetic_separator_drum_v0",
+        "regolith_powder",
+        "screening_equipment",
+        "tailings",
+        "troilite"
+      ],
+      "status": "defined"
+    },
     "trunnion_supports": {
       "aliases": [],
       "defined_in": "kb/items/parts/trunnion_supports.yaml",
@@ -86669,6 +88096,19 @@
         "tungsten_concentrate",
         "water"
       ],
+      "status": "defined"
+    },
+    "tungsten_disilicide": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/tungsten_disilicide.yaml",
+      "id": "tungsten_disilicide",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Tungsten disilicide (WSi2)",
+      "refs_in": [
+        "recipe_tungsten_disilicide_v0"
+      ],
+      "refs_out": [],
       "status": "defined"
     },
     "tungsten_extraction_meteorite_v0": {
@@ -88275,6 +89715,7 @@
         "acid_resistant_reactor_lining_fabrication_v0",
         "air_compressor_basic_v0",
         "aluminum_chloride_calcination_v0",
+        "aluminum_chloride_hydrate_formation_v0",
         "ammonia_recovery_cao_v0",
         "ammonia_recovery_solvay_v0",
         "bosch_reaction_v0",
@@ -88291,9 +89732,11 @@
         "electrolyte_prep_koh",
         "hcl_recovery_from_cacl2_v0",
         "ilmenite_sulfuric_acid_route_v0",
+        "magnesium_chloride_from_mgo_v0",
         "methanation_basic_v0",
         "naoh_hcl_salt_synthesis_v0",
         "nickel_hydroxide_synthesis_from_nickel_metal_v0",
+        "nitric_acid_dilution_v0",
         "olivine_hydration_v0",
         "ostwald_process_nitric_acid_v0",
         "polar_water_ice_extraction_v0",
@@ -88302,13 +89745,20 @@
         "reverse_water_gas_shift_v0",
         "sabatier_reaction_complete_v0",
         "sulfuric_acid_contact_process_v0",
+        "sulfuric_acid_dilution_v0",
         "syngas_generation_steam_reforming_v0",
         "tungsten_density_separation_v0",
         "ulvospinel_hydrogen_reduction_v0",
         "water_electrolysis_v0",
+        "recipe_aluminum_chloride_hydrate_v0",
         "recipe_binder_simple_v0",
         "recipe_calcium_hydroxide_v0",
+        "recipe_magnesium_chloride_v0",
+        "recipe_nitric_acid_v0",
         "recipe_separator_membrane_porous_v0",
+        "recipe_sulfuric_acid_v0",
+        "recipe_syngas_v0",
+        "recipe_talc_v0",
         "recipe_water_v0",
         "battery_system_nife_v0"
       ],

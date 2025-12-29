@@ -1,0 +1,44 @@
+id: recipe_talc_v0
+kind: recipe
+target_item_id: talc
+variant_id: v0
+inputs:
+  - item_id: magnesium_oxide
+    qty: 0.6
+    unit: kg
+    notes: "Magnesium source"
+  - item_id: silica_purified
+    qty: 0.4
+    unit: kg
+    notes: "Silica source"
+  - item_id: water
+    qty: 0.1
+    unit: kg
+    notes: "Hydration for talc formation"
+outputs:
+  - item_id: talc
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: chemical_synthesis_basic_v0
+    inputs:
+      - item_id: magnesium_oxide
+        qty: 0.6
+        unit: kg
+      - item_id: silica_purified
+        qty: 0.4
+        unit: kg
+      - item_id: water
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: talc
+        qty: 1.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Hydrothermal synthesis placeholder for talc"
+assumptions: |
+  Placeholder mass balance; actual synthesis uses hydrothermal conditions and
+  may require additional processing steps.
+notes: "Seed talc synthesis route for dry lubricant feedstock."

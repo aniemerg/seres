@@ -1,0 +1,30 @@
+id: recipe_silicon_oxycarbide_ceramic_v0
+kind: recipe
+target_item_id: silicon_oxycarbide_ceramic
+variant_id: v0
+inputs:
+  - item_id: silicone_polymer
+    qty: 1.0
+    unit: kg
+    notes: "Polysiloxane/silicone precursor feedstock"
+outputs:
+  - item_id: silicon_oxycarbide_ceramic
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: ceramic_firing_high_temp_v0
+    inputs:
+      - item_id: silicone_polymer
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silicon_oxycarbide_ceramic
+        qty: 1.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "High-temperature pyrolysis of polysiloxane to SiOC ceramic"
+assumptions: |
+  Placeholder 1:1 mass conversion; actual yield depends on polymer formulation
+  and pyrolysis conditions (>=1400 C).
+notes: "Seed recipe for SiOC ceramics using high-temperature firing/pyrolysis."

@@ -1,0 +1,50 @@
+id: ffc_titanium_extraction_v0
+kind: process
+name: FFC Cambridge titanium metal extraction
+layer_tags:
+  - layer_4
+  - layer_5
+inputs:
+  - item_id: titanium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.2
+    unit: kg
+  - item_id: electrodes
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: titanium_metal
+    qty: 0.6
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.4
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.18
+    unit: kg
+requires_ids:
+  - ffc_reactor_unit_v0
+  - inert_anode_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 4.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 12.0
+  notes: "FFC electrolysis at 900-1100C in molten CaCl2 (placeholder)."
+time_model:
+  type: fixed_time
+  hr_per_batch: 16.0
+  notes: "FFC reduction of TiO2 to titanium metal (placeholder)."
+notes: |
+  FFC Cambridge process for extracting titanium metal from titanium oxide (TiO2).
+  Source: FFC-process-for-deep-ISRU.txt, ellery-et-al-2022-metalysis-fray-farthing-chen-process.
+  Cathode reaction: TiO2 + 4e- -> Ti + 2O2-
+  Anode reaction: 2O2- -> O2 + 4e- (inert anode).
+  Overall: TiO2 -> Ti + O2
+  Temperature: 900-1100C in molten CaCl2 electrolyte.
+  Products: high-purity titanium metal (>99%) and oxygen gas.
+  CaCl2 electrolyte recycled with minor losses; electrodes consumed over time.

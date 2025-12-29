@@ -1,0 +1,17 @@
+id: recipe_metakaolin_v0
+kind: recipe
+target_item_id: metakaolin
+variant_id: v0
+inputs:
+  - item_id: kaolinite_clay
+    qty: 1.0
+    unit: kg
+    notes: "Kaolinite feedstock for calcination"
+outputs:
+  - item_id: metakaolin
+    qty: 0.9
+    unit: kg
+steps:
+  - process_id: firing_ceramic_basic_v0
+    notes: "Calcine kaolinite at ~650-800C to dehydroxylate and form metakaolin"
+notes: "Metakaolin production via calcination of kaolinite; placeholder yields."

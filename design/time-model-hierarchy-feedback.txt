@@ -1,0 +1,68 @@
+Overall Principles
+
+- Based on a review of time-calculation-real-world-examples.md, override-hierarchy-problems.md, time-energy-modeling-investigation-roadmap.md, etc., we have decided that we need to do a very detailed definition of how the KB works.
+- Given the complexity, we will have to start with thorough testing at the start. We also will need to unify indexing, closure analysis, and simulation. To do so, instead of updating those three, the goal will be to build a unified set of code that provides all three of those things from a unified base of tested code.
+- We may need to have multiple ADRs that fully define how the KB files work and provide the basis for a fully testable implementation.
+- We will need to massively harmonize existing approaches into new schema and validations that we will use to find issues in the knowledge base. A future indexer will index the issues for fixing by agents.
+- To be clear, time_models should be fully specified or result in errors. Time_models should be used in simulation and fully accounted for. Energy models should be fully used in simulation and accounted for. Masses and counts should be reconciled across processes and recipes. (Materials must be present before they can be used, must be transformed by processes or recipes, all items used must be made or imported, and so on). KB should fully be validated and checked against the schema or errors should be emitted (or work enqueued) or simulations should fail. Recipes override processes. Units should be implicitly converted where possible, or errors thrown if not possible. Batching and continuous should be fully specified things. 
+
+# time-calculation-real-world file
+- first, some overall thoughts: These examples are incredible examples that would be good to use as parts of planned tests and these examples would be great in the ADR as suggested cases (with an eye towards good tests).
+- Example 1 - "hr_per_kg", "kWh_per_kg" maybe these should be multiple fields, numerator: hr, denominator: kg, or something like that?
+- Example 2 - The default is that the process should define a "batch", but perhaps better would be to explictly specify that a process is a batch process. Then we should fully define how batches work. That would be in opposition to a continuous process which could use something like a linear_rate. In this case, the "setup_hr" should be ignored or trigger a validation error because it suggests a batch. If multiple batches are being run by a recipe, setup_hr should scale linearly with the number of batches (not worth the complexity to account for economies of scale there).
+- Example 3: What is fixed_time in this? Seems like this should be a batch recipe with an output of 1 motor_electric_small. Noticable that no labor_bot is used, probably should be, but I don't think we will have validation for that. I don't know if "fixed_time" should be an actual time model, unless there is a canonical example. The resource requirements is an important thing that should be possible. In the motor example, a labor bot and assembly station would make sense. If we had a "batch" time model, would the fixed_time be necessary? I am uncertain about the suggestion for a "concurrent" field, seems like we just count the qty and unit for the machine_id. If we wanted parallel processing then maybe that could be achieved with multiple outputs.
+- Example 4: We need some sort of validation to ensure that the units can be converted. Rate should be based on the machined_part_raw, although why start with a raw part rather than a more raw material is an interesting question. In this case, the time model should really be count based, not kg based. So an agent made a mistake here, right? But that wonn't be clear, so the rules can probably provide for a scaling input for the time model. So maybe validation fails on this one for lack of a scaling input being noted. Or perhaps the time_model should specify the scaling input or output--that's probably a cleaner way to do it. The time_model specifies what is the source of the kg for the linear_rate. Option 3 looks closest to my thinking.
+- Example 5: This would be improved by having a "batch" time_model (maybe multiple kinds will be needed?). Also, I hope the original file specifies the electrolyzer. But, yeah, this is probably a linear_rate process. Not sure if there's a way to catch that with validation. The energy model looks like it could be better specified. Is it input or output kg? For which output?
+- Example 6: environment_source_v0 doesn't really make much sense to me. Read the regolith_organization... file in design/. It describes how regolith is managed as a raw material. It should have implications for processes. There should be processes that result in mined regolith of some form. They should include a time model for the mining to consume the time of some mining machine. Again, all processes should consume the time of one or more machines. I do see the appeal of specifying a process has no inputs so that we can raise errors otherwise. "regolith_collection_v0" seems kind of like what I think we need, although I think the file better specifies things (and since we may have implemented those regolith changes maybe this example is out of date)
+- Example 7: Clear case of something that should be caught by schema and other validation.
+- Example 8: Overrides are discussed in detail later.
+- Example 9: Count based time models would be fine. Assembly using fixed time would also be fine. Assembly specific model would also be fine. Unit mismatches should raise errors.
+- Example 10: lots to think about here with respect to batch time models. A batch model is great, definitely need thoughts about how batches work. Worth thinking about what kind of validation should trigger on an example like this. I don't like putting batch output in the time model, rather that should be in ouputs. The time model should assume that it relates to 1 batch if in "batch" mode. Option 2 is closer, but "wafers_per_batch" is no good, you are bringing the recipe into the time model. You can maybe specify one input or output to scale off of, that might work. But avoid importing the process or recipe into the time model. "units_per_batch" might work, but not "wafers_per_batch".
+
+# `unit-systems-and-conversions.md`
+- known conversions, (L of water to volume as a possible example, kg to tons) should be handled implicitly without KB having to explicitly model it.
+- implicit conversion requests should be possible, like inputs being in kg, outputs in count.
+
+# override-hierarchy-problems.md
+
+- we should migrate from "est_time_hr" to using time_models directly in the recipe step as an override, unless that completely breaks things
+- machine hours should be consumed by processes as well, right? Every process should have associated machines and machine time consumption
+- All processes should have a time model. The purpose of the time model is to govern time usage of machines. The time model should apply to every machine of the process. If different machines need different models, consideration should be given whether the process should be split into different processes. Additionally, it might make sense to permit time model definition per machine.
+- May permit some way to not have a time model if not needed (although this is questionable).
+- process times model should be used in calculations for simulations. The process time model should be the default, that can be overriden at the recipe level.
+- The time model is to relate time to production. It is meant to quantify the usage of the time resource of machines, to quantify things like amount of machines needed to produce a given quanity of an item in a period of time and so on. And to help quantify the cost of various products of recipes.
+- We will want the indexer to verify that a time model can be correctly evaluated or needs to be corrected by an agent.
+- We will need simulations to use the time model--not to determine actual time process is used--but to determine the time usage of a machine to do an amount of work. An agent gives duration, and then total production can be calculated. It's also possible to imagine agents specifying total production needs and using the time model to determine time duration to use.
+- We will want to migrate away from "est_time_hr" to providing an actual time model in the override.
+
+machine_hours and labor_hours
+- We need to bring harmony to these fields and usage. The key is that we are attempting to account for resource usage and to have a good accounting of the resource costs of producing things. Processes are defined to define capabilities, machines to be used, inputs, outputs, and so on. Recipes are meant to define how to create a particular part or machine. Recipes piece together processes (and implicitly or explicitly machines) to create a defined item. A goal is to define all of the steps to make the part. Steps generally consist of using processes. However, steps can override the actual details of the process. In fact, overrides should be so complete it should be possible to fully re-define the process. "machine_hours" should be harmonized with the description of using the machine usage in the process. "labor" reflects the idea that robots are involved with coordinating and performing labor to finalize recipes. It doesn't necessarily make sense to bring the labor information into the recipe (it should be possible to specify in the recipe but not required), SO, maybe we need labor_hours to be accompanied by a specification of what machine is providing the labor. The goal will be step-wise accounting of machine resources that are in addition to the process accounting of machines used by the process.
+- labor_hours should be concurrent with the step of the process
+- any sequential labor should be it's own step (pure "labor" steps where the robot is the machine is possible)
+- We will need you to think very deeply about how to bring harmony to labor and recipes.
+- We will need to harmonize recipes and processes
+- changes to the spec will be detected by indexing in the future and enqueue for work to fix, so a key principle is fixing definitions, detecting gaps or issues, and creating work for future agents to fix in accordance to specifications.
+
+Simulation Agent
+
+- Timing Data should be usable along with duration provided by an agent to calculate machine usage and production.
+- Agent decides timing based on production needs
+- Need tight integration with KB data. Goal is a full accounting of resources used to create a true simulation.
+
+Conflicts
+
+Example #1 -- unclear which value is correct, however, I expect that the many changes to our approach will render this issue something to be fixed by an agent. The key principle will be that the process will define a time model that can be over-written by the recipe (using the same approach).
+
+Example #2 -
+- assembly should probably be count based, so we need a count based approach. In theory, validation should determine that there is an issue between these two files, and the issue enqueue for an agent to fix.
+
+Example 3
+- As we are harmonizing, we need a way to fully specify how multi-step recipes account for inputs, outputs, and transformations at every step. It should be possible for things to be implicit, but it should be possible to validate the recipe to determine that things can be fully accounted for.
+
+- est_time_hr ultimately was a useful way to get estimates out of agents, BUT was underspecified and has to be fixed.
+
+- a process time model is the default for that process, overrideable by a recipe. When there is a conflict, the recipe will control.
+- The goal of a time model is to quantify time usage of machines.
+- All processes should be associated with a machine that is used for that time (and can't be used for something else during that time).
+
+- It's clear from examples that the existing semantics and fields are not up to the task--we need to better define things and make this all work.

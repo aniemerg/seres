@@ -1,0 +1,29 @@
+id: recipe_inovco_alloy_v0
+kind: recipe
+target_item_id: inovco_alloy
+variant_id: v0
+inputs:
+  - item_id: iron_metal_pure
+    qty: 0.625
+    unit: kg
+    notes: "Iron base metal (62.5%)"
+  - item_id: nickel_metal
+    qty: 0.33
+    unit: kg
+    notes: "Nickel alloying element (33%)"
+  - item_id: cobalt_metal_pure
+    qty: 0.045
+    unit: kg
+    notes: "Cobalt alloying element (4.5%)"
+outputs:
+  - item_id: inovco_alloy
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: alloying_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Melt and alloy Fe-Ni-Co to Inovco composition"
+assumptions: |
+  Composition based on 62.5% Fe, 33% Ni, 4.5% Co by mass.
+notes: "Inovco alloy production via basic alloying."

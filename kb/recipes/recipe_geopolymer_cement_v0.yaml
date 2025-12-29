@@ -1,0 +1,25 @@
+id: recipe_geopolymer_cement_v0
+kind: recipe
+target_item_id: geopolymer_cement
+variant_id: v0
+inputs:
+  - item_id: metakaolin
+    qty: 1.0
+    unit: kg
+    notes: "Calcined aluminosilicate feedstock"
+  - item_id: sodium_hydroxide
+    qty: 0.2
+    unit: kg
+    notes: "Alkali activator"
+  - item_id: water
+    qty: 0.3
+    unit: kg
+    notes: "Mixing water"
+outputs:
+  - item_id: geopolymer_cement
+    qty: 1.4
+    unit: kg
+steps:
+  - process_id: mixing_basic_v0
+    notes: "Blend metakaolin with alkali activator to form geopolymer binder"
+notes: "Placeholder geopolymer cement production from metakaolin and NaOH."

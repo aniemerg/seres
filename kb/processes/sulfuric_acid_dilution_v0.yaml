@@ -1,0 +1,29 @@
+id: sulfuric_acid_dilution_v0
+kind: process
+name: Sulfuric acid dilution
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: sulfuric_acid_concentrated
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 4.0
+    unit: kg
+outputs:
+  - item_id: sulfuric_acid
+    qty: 5.0
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - machine_id: generic_chemical_reactor_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.2
+  notes: "Mixing and cooling during dilution"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.5
+notes: "Dilute concentrated sulfuric acid to a general-use aqueous solution."

@@ -1,0 +1,21 @@
+id: recipe_gibbsite_v0
+kind: recipe
+target_item_id: gibbsite
+variant_id: v0
+inputs:
+  - item_id: sodium_aluminate_solution
+    qty: 1.0
+    unit: kg
+    notes: "Aluminate solution for hydrolysis"
+  - item_id: water
+    qty: 0.5
+    unit: kg
+    notes: "Hydrolysis water"
+outputs:
+  - item_id: gibbsite
+    qty: 0.3
+    unit: kg
+steps:
+  - process_id: chemical_mixing_basic_v0
+    notes: "Hydrolyze aluminate to precipitate Al(OH)3"
+notes: "Placeholder gibbsite precipitation from sodium aluminate solution."

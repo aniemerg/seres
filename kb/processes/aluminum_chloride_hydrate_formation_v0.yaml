@@ -1,0 +1,29 @@
+id: aluminum_chloride_hydrate_formation_v0
+kind: process
+name: Aluminum chloride hydrate formation
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: aluminum_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.8
+    unit: kg
+outputs:
+  - item_id: aluminum_chloride_hydrate
+    qty: 1.8
+    unit: kg
+requires_ids: []
+resource_requirements:
+  - machine_id: generic_chemical_reactor_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.2
+  notes: "Hydration and crystallization energy"
+time_model:
+  type: fixed_time
+  hr_per_batch: 1.0
+notes: "Hydrate AlCl3 to form AlCl3·6H2O for downstream calcination."

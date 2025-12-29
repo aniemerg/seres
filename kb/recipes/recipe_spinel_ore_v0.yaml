@@ -1,0 +1,17 @@
+id: recipe_spinel_ore_v0
+kind: recipe
+target_item_id: spinel_ore
+variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 10.0
+    unit: kg
+    notes: "Regolith feedstock with spinel fraction"
+outputs:
+  - item_id: spinel_ore
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: beneficiation_magnetic_basic_v0
+    notes: "Concentrate spinel-bearing fraction from regolith"
+notes: "Placeholder beneficiation route to concentrate spinel ore from regolith."

@@ -1,0 +1,31 @@
+id: troilite_concentration_v0
+kind: process
+name: Troilite concentration from regolith
+layer_tags:
+  - layer_2
+inputs:
+  - item_id: regolith_powder
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: troilite
+    qty: 0.2
+    unit: kg
+  - item_id: tailings
+    qty: 9.8
+    unit: kg
+requires_ids:
+  - magnetic_separator_drum_v0
+  - screening_equipment
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.0
+    unit: hr
+energy_model:
+  type: kWh_per_kg
+  value: 0.2
+  notes: "Grinding, screening, and magnetic separation"
+time_model:
+  type: linear_rate
+  hr_per_kg: 0.05
+notes: "Placeholder beneficiation to concentrate FeS (troilite) from regolith fines."

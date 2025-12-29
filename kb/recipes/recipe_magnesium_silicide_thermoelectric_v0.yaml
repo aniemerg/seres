@@ -1,0 +1,26 @@
+id: recipe_magnesium_silicide_thermoelectric_v0
+kind: recipe
+target_item_id: magnesium_silicide_thermoelectric
+variant_id: v0
+inputs:
+  - item_id: magnesium_metal_v0
+    qty: 0.63
+    unit: kg
+    notes: "Magnesium feedstock (2:1 molar ratio)"
+  - item_id: silicon_metal_v0
+    qty: 0.37
+    unit: kg
+    notes: "Silicon feedstock (1:2 molar ratio)"
+outputs:
+  - item_id: magnesium_silicide_thermoelectric
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: alloying_basic_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "React Mg and Si to form Mg2Si; ball-mill and sinter in practice"
+assumptions: |
+  Stoichiometry based on Mg2Si (Mg ~63.4%, Si ~36.6% by mass).
+  Placeholder alloying step stands in for ball-milling and sintering.
+notes: "Seed recipe for Mg2Si thermoelectric material."

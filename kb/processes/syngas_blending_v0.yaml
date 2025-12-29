@@ -1,0 +1,30 @@
+id: syngas_blending_v0
+kind: process
+name: Syngas blending
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: carbon_monoxide
+    qty: 1.75
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.376
+    unit: kg
+outputs:
+  - item_id: syngas
+    qty: 2.126
+    unit: kg
+requires_ids:
+  - gas_handling_loop_v0
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.2
+    unit: hr
+energy_model:
+  type: kWh_per_batch
+  value: 0.1
+  notes: "Gas compression and mixing"
+time_model:
+  type: fixed_time
+  hr_per_batch: 0.2
+notes: "Blend CO and H2 in a controlled ratio to form syngas."
