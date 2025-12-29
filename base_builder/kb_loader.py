@@ -95,24 +95,40 @@ class KBLoader:
                 self.load_errors.append(f"Failed to load recipe {recipe_file.name}: {e}")
 
     def load_items(self) -> None:
-        """Load all items from kb/items/**/*.yaml"""
+        """Load all items from kb/items/**/*.yaml and kb/imports/**/*.yaml"""
+        # Load from kb/items/
         items_dir = self.kb_root / "items"
-        if not items_dir.exists():
+        if items_dir.exists():
+            for item_file in items_dir.rglob("*.yaml"):
+                try:
+                    with item_file.open() as f:
+                        data = yaml.safe_load(f)
+
+                    if data and isinstance(data, dict):
+                        item_id = data.get("id", item_file.stem)
+                        # Add the file path for reference (relative to kb_root)
+                        data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
+                        self.items[item_id] = data
+                except Exception as e:
+                    self.load_errors.append(f"Failed to load item {item_file.name}: {e}")
+        else:
             self.load_errors.append(f"Items directory not found: {items_dir}")
-            return
 
-        for item_file in items_dir.rglob("*.yaml"):
-            try:
-                with item_file.open() as f:
-                    data = yaml.safe_load(f)
+        # Load from kb/imports/ (ADR-007 architecture)
+        imports_dir = self.kb_root / "imports"
+        if imports_dir.exists():
+            for item_file in imports_dir.rglob("*.yaml"):
+                try:
+                    with item_file.open() as f:
+                        data = yaml.safe_load(f)
 
-                if data and isinstance(data, dict):
-                    item_id = data.get("id", item_file.stem)
-                    # Add the file path for reference (relative to kb_root)
-                    data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
-                    self.items[item_id] = data
-            except Exception as e:
-                self.load_errors.append(f"Failed to load item {item_file.name}: {e}")
+                    if data and isinstance(data, dict):
+                        item_id = data.get("id", item_file.stem)
+                        # Add the file path for reference (relative to kb_root)
+                        data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
+                        self.items[item_id] = data
+                except Exception as e:
+                    self.load_errors.append(f"Failed to load import item {item_file.name}: {e}")
 
     def load_boms(self) -> None:
         """Load all BOMs from kb/boms/*.yaml"""

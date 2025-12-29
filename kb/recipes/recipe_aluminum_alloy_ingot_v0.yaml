@@ -1,7 +1,50 @@
 id: recipe_aluminum_alloy_ingot_v0
 kind: recipe
 target_item_id: aluminum_alloy_ingot
+variant_id: v0
+inputs:
+  - item_id: alumina_powder
+    qty: 2.0
+    unit: kg
+    notes: "Aluminum oxide extracted from highland regolith"
+  - item_id: carbon_anode
+    qty: 0.5
+    unit: kg
+    notes: "Consumable carbon anode for electrolysis"
+  - item_id: cryolite_flux
+    qty: 0.15
+    unit: kg
+    notes: "Flux to lower melting point (~90% recycled)"
+outputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: co2_gas
+    qty: 1.5
+    unit: kg
+    notes: "Byproduct from carbon anode oxidation"
+  - item_id: cryolite_flux
+    qty: 0.135
+    unit: kg
+    notes: "Recycled flux (~90% recovery)"
 steps:
-  - process_id: melting_basic_v0
-  - process_id: casting_basic_v0
-notes: "Basic path to produce aluminum alloy ingot from metal_alloy_bulk; placeholder chain to resolve no_recipe gap for aluminum_alloy_ingot."
+  - process_id: aluminum_smelting_hall_heroult_v0
+    est_time_hr: 8.0
+    notes: "Hall-Héroult electrolysis at ~960°C. Very energy-intensive (15 kWh/kg)"
+notes: |
+  Aluminum alloy ingot production via Hall-Héroult electrolysis from alumina.
+
+  This is the standard industrial process for primary aluminum production.
+  Extremely energy-intensive (15 kWh/kg output) but enables local aluminum
+  production from lunar highland regolith.
+
+  Process chain from regolith:
+  1. Highland regolith (100 kg) → alumina extraction → 12 kg alumina
+  2. Alumina (2 kg) → Hall-Héroult smelting → 1 kg aluminum ingot
+  3. Therefore: ~17 kg regolith → 1 kg aluminum ingot
+
+  Replaces placeholder recipe that incorrectly used generic melting/casting.
+assumptions: |
+  Hall-Héroult process produces aluminum suitable for structural applications.
+  Cryolite flux is 90% recyclable. Carbon anode consumption rate is 0.5 kg per kg aluminum.
+  Energy requirement: 15 kWh/kg is realistic for electrolytic aluminum production.
