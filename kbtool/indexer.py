@@ -25,6 +25,8 @@ except ImportError:  # pragma: no cover
 from . import models
 from .queue_tool import _locked_queue
 from base_builder.kb_loader import KBLoader
+from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
+from src.kb_core.unit_converter import UnitConverter
 
 KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
@@ -573,16 +575,19 @@ def build_index() -> Dict[str, dict]:
     closure_errors = _collect_closure_errors(entries, kb_loader)
     print(f"Found {len(closure_errors)} unique closure errors")
 
+    # Collect validation issues (ADR-017)
+    validation_issues = _collect_validation_issues(entries, kb_loader)
+
     filter_stats = _update_work_queue(
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
         missing_recipe_items, recipes_no_inputs, seed_references, item_metadata,
-        entries, kb_loader, closure_errors
+        entries, kb_loader, closure_errors, validation_issues
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
         items_without_recipes, orphan_resources, missing_recipe_items, recipes_no_inputs,
-        filter_stats
+        filter_stats, validation_issues
     )
     return entries
 
@@ -734,6 +739,127 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
     return queue_items
 
 
+def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict]:
+    """
+    Run ADR-017 validation on all processes and recipes.
+
+    Args:
+        entries: Index entries dict (item_id -> entry data)
+        kb_loader: KBLoader instance with loaded KB data
+
+    Returns:
+        List of validation issue queue items (ERROR and WARNING levels only)
+    """
+    print("Running ADR-017 validation on processes and recipes...")
+
+    # Create UnitConverter for validation
+    converter = UnitConverter(kb_loader)
+
+    all_issues = []
+    issue_map = {}  # Deduplicate by signature
+
+    # Validate all processes
+    process_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'process']
+    for process_id in process_ids:
+        process_data = kb_loader.processes.get(process_id)
+        if not process_data:
+            continue
+
+        # Run validation
+        issues = validate_process(process_data, converter)
+
+        # Filter to ERROR and WARNING only (skip INFO)
+        issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]
+
+        for issue in issues:
+            # Create unique signature for deduplication
+            signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
+
+            if signature not in issue_map:
+                # Convert ValidationIssue to queue item
+                queue_item = {
+                    "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
+                    "kind": issue.entity_type,
+                    "reason": f"validation_{issue.level.value}",
+                    "gap_type": f"validation_{issue.rule}",
+                    "item_id": issue.entity_id,
+                    "context": {
+                        "validation_level": issue.level.value,
+                        "category": issue.category,
+                        "rule": issue.rule,
+                        "message": issue.message,
+                        "field_path": issue.field_path,
+                        "fix_hint": issue.fix_hint,
+                        "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                    }
+                }
+                issue_map[signature] = queue_item
+                all_issues.append(issue)
+
+    # Validate all recipes
+    recipe_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'recipe']
+    for recipe_id in recipe_ids:
+        recipe_data = kb_loader.recipes.get(recipe_id)
+        if not recipe_data:
+            continue
+
+        # Run validation
+        issues = validate_recipe(recipe_data)
+
+        # Filter to ERROR and WARNING only (skip INFO)
+        issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]
+
+        for issue in issues:
+            # Create unique signature for deduplication
+            signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
+
+            if signature not in issue_map:
+                # Convert ValidationIssue to queue item
+                queue_item = {
+                    "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
+                    "kind": issue.entity_type,
+                    "reason": f"validation_{issue.level.value}",
+                    "gap_type": f"validation_{issue.rule}",
+                    "item_id": issue.entity_id,
+                    "context": {
+                        "validation_level": issue.level.value,
+                        "category": issue.category,
+                        "rule": issue.rule,
+                        "message": issue.message,
+                        "field_path": issue.field_path,
+                        "fix_hint": issue.fix_hint,
+                        "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                    }
+                }
+                issue_map[signature] = queue_item
+                all_issues.append(issue)
+
+    # Write to output file
+    validation_issues_path = OUT_DIR / "validation_issues.jsonl"
+    queue_items = list(issue_map.values())
+    try:
+        with validation_issues_path.open("w", encoding="utf-8") as f:
+            for issue in all_issues:
+                # Write full ValidationIssue details for debugging
+                f.write(json.dumps({
+                    "level": issue.level.value,
+                    "category": issue.category,
+                    "rule": issue.rule,
+                    "entity_type": issue.entity_type,
+                    "entity_id": issue.entity_id,
+                    "message": issue.message,
+                    "field_path": issue.field_path,
+                    "fix_hint": issue.fix_hint,
+                }) + "\n")
+    except Exception:
+        # Best-effort; do not crash indexing if this fails
+        pass
+
+    print(f"Found {len(all_issues)} validation issues ({len([i for i in all_issues if i.level == ValidationLevel.ERROR])} errors, {len([i for i in all_issues if i.level == ValidationLevel.WARNING])} warnings)")
+
+    return queue_items
+
+
 def _update_work_queue(
     unresolved_refs: List[dict],
     referenced_only: Set[str],
@@ -749,6 +875,7 @@ def _update_work_queue(
     entries: Dict[str, dict],
     kb_loader,
     closure_errors: List[dict] = None,
+    validation_issues: List[dict] = None,
 ) -> Dict[str, int]:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -763,6 +890,7 @@ def _update_work_queue(
     - recipes_no_inputs: recipes where all steps have no inputs defined
     - seed_references: item_id -> list of seed file ids that reference it
     - item_metadata: item_id -> freeform metadata from seed requires_ids
+    - validation_issues: ADR-017 validation errors and warnings
 
     Returns dict of filter statistics.
     """
@@ -777,6 +905,10 @@ def _update_work_queue(
     # Add closure analysis errors
     if closure_errors:
         gap_items.extend(closure_errors)
+
+    # Add validation issues (ADR-017)
+    if validation_issues:
+        gap_items.extend(validation_issues)
 
     # Unresolved text references
     for ref in unresolved_refs:
@@ -999,6 +1131,7 @@ def _write_report(
     missing_recipe_items: List[dict],
     recipes_no_inputs: List[dict],
     filter_stats: Dict[str, int],
+    validation_issues: List[dict] = None,
 ) -> None:
     counts: Dict[str, int] = {}
     for entry in entries.values():
@@ -1136,6 +1269,48 @@ def _write_report(
             lines.append(f"- ... and {len(circular_deps) - 5} more")
         lines.append("")
         lines.append("See `out/circular_dependencies.jsonl` for details.")
+
+    # Validation issues (ADR-017)
+    if validation_issues:
+        # Count by level and category
+        by_level: Dict[str, int] = {}
+        by_category: Dict[str, int] = {}
+        by_rule: Dict[str, int] = {}
+
+        for issue in validation_issues:
+            level = issue.get("context", {}).get("validation_level", "unknown")
+            category = issue.get("context", {}).get("category", "unknown")
+            rule = issue.get("context", {}).get("rule", "unknown")
+
+            by_level[level] = by_level.get(level, 0) + 1
+            by_category[category] = by_category.get(category, 0) + 1
+            by_rule[rule] = by_rule.get(rule, 0) + 1
+
+        lines.append("")
+        lines.append("## Validation Issues (ADR-017)")
+        lines.append(f"Total: {len(validation_issues)} validation issues found")
+        lines.append("")
+
+        lines.append("By severity:")
+        for level, count in sorted(by_level.items()):
+            lines.append(f"- {level}: {count}")
+
+        lines.append("")
+        lines.append("By category:")
+        for category, count in sorted(by_category.items()):
+            lines.append(f"- {category}: {count}")
+
+        lines.append("")
+        lines.append("Top validation rules triggered:")
+        # Show top 10 rules by count
+        sorted_rules = sorted(by_rule.items(), key=lambda x: x[1], reverse=True)
+        for rule, count in sorted_rules[:10]:
+            lines.append(f"- {rule}: {count}")
+        if len(sorted_rules) > 10:
+            lines.append(f"- ... and {len(sorted_rules) - 10} more")
+
+        lines.append("")
+        lines.append("See `out/validation_issues.jsonl` for details.")
 
     if warnings:
         lines.append("")

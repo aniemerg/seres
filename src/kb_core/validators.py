@@ -300,10 +300,10 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
 
     # Collect all input/output item_ids
     all_item_ids = set()
-    for inp in process_dict.get('inputs', []):
+    for inp in process_dict.get('inputs', []) or []:
         if inp.get('item_id'):
             all_item_ids.add(inp['item_id'])
-    for out in process_dict.get('outputs', []):
+    for out in process_dict.get('outputs', []) or []:
         if out.get('item_id'):
             all_item_ids.add(out['item_id'])
 
@@ -503,10 +503,10 @@ def validate_process_unit_conversion(
 
     # Build item_id -> Quantity mapping
     items_map = {}
-    for inp in process_dict.get('inputs', []):
+    for inp in process_dict.get('inputs', []) or []:
         if inp.get('item_id'):
             items_map[inp['item_id']] = inp
-    for out in process_dict.get('outputs', []):
+    for out in process_dict.get('outputs', []) or []:
         if out.get('item_id'):
             items_map[out['item_id']] = out
 
@@ -722,7 +722,7 @@ def validate_recipe(recipe: Any) -> List[ValidationIssue]:
         ))
 
     # Rule: steps must be non-empty
-    steps = recipe_dict.get('steps', [])
+    steps = recipe_dict.get('steps', []) or []
     if not steps:
         issues.append(ValidationIssue(
             level=ValidationLevel.WARNING,
