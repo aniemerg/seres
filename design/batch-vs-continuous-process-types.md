@@ -646,41 +646,81 @@ ValidationError: Process 'motor_assembly_v0' has process_type: batch
 
 ### 1. Batch Processes with Variable Time
 
+**RESOLVED:** Avoid variable time modeling that doesn't scale with inputs/outputs.
+
 **Scenario:** Batch time depends on load, temperature, etc.
 
 **Example:** Kiln firing - time depends on peak temperature
 - Low temp (900°C): 4 hours
 - High temp (1200°C): 8 hours
 
-**Options:**
-A. Multiple processes (ceramic_firing_low_temp_v0, ceramic_firing_high_temp_v0)
-B. Recipe overrides time_model
-C. Process parameter (not in scope for now)
+**Decision:**
+- If time doesn't scale with inputs/outputs (kg, count), **just estimate**
+- Don't try to model non-scaling variability
+- Create separate processes for significantly different variants
 
-**Recommendation:** Option A (multiple processes) for now.
+**Options:**
+A. Multiple processes (ceramic_firing_low_temp_v0, ceramic_firing_high_temp_v0) ✓
+B. Recipe overrides with estimated time_model ✓
+C. Complex parameter modeling ✗ (don't do this)
+
+**Recommendation:** Option A (multiple processes) or B (recipe estimate).
 
 ### 2. Semi-Continuous Processes
+
+**RESOLVED:** No mixed continuous/batch - split or pick dominant.
 
 **Scenario:** Process that's continuous but has periodic batch operations
 
 **Example:** Continuous casting with periodic mold change
 
-**Options:**
-A. Model as continuous, ignore mold change
-B. Model as batch with large batch size
-C. New hybrid type (too complex)
+**Decision:**
+- **No mixed process types** - process is either batch OR continuous
+- If both exist, split into two separate processes
+- Or pick the dominant type and ignore the minor component
 
-**Recommendation:** Option A or B depending on which dominates.
+**Options:**
+A. Split into two processes (continuous casting + batch mold change) ✓
+B. Model as dominant type only (continuous, ignore mold change) ✓
+C. Mixed continuous/batch type ✗ (not supported)
+
+**Recommendation:** Option A (split) if both are significant, Option B (dominant) if one is minor.
 
 ### 3. Boundary Processes
 
-**Question:** Do boundary processes (like mining) need process_type?
+**RESOLVED:** Boundary processes can have a process_type.
 
-**Answer (based on regolith feedback):**
-- Mining should NOT use boundary type
-- Mining is continuous or batch process
-- Uses machines, takes time, has time_model
-- process_type: continuous for excavation
+**Question:** Do boundary processes need process_type?
+
+**Answer:**
+- Yes, boundary processes **can** have process_type
+- Even "free" environmental resources require extraction processes
+- Mining/collection processes should be:
+  - process_type: continuous (for excavation)
+  - With time_model (machine time usage)
+  - With machines (excavators, drills)
+
+**Example:**
+```yaml
+# Mining regolith (free resource, but extraction takes time)
+process_id: regolith_mining_lunar_mare_v0
+process_type: continuous  # ← Boundary can have type
+inputs: []  # Free resource
+outputs:
+  - item_id: regolith_lunar_mare
+    qty: 100.0
+    unit: kg
+requires_ids:
+  - excavator_v0
+time_model:
+  type: linear_rate
+  rate_kg_per_hr: 100.0  # Mining rate
+energy_model:
+  type: kWh_per_kg
+  value: 0.5  # Excavation energy
+```
+
+**Key principle:** All processes should have time_model and machines, even boundary processes.
 
 ---
 

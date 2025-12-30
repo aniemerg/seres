@@ -658,43 +658,51 @@ Based on user feedback, validation must:
 
 ### Proposed ADR Structure:
 
-**ADR-010: Time Model Redesign**
+**Note:** ADR-011 is taken, so numbering starts at ADR-012.
+
+**ADR-012: Process Types and Time Model Redesign**
+- Explicit batch vs continuous process types
 - New time_model schema
-- Batch vs continuous process types
 - Scaling basis specification
 - Validation rules
 
-**ADR-011: Recipe Override Mechanics**
+**ADR-013: Recipe Override Mechanics**
 - How recipes override processes
 - Migration from est_time_hr
 - time_model overrides in recipe steps
 - Complete override capability
 
-**ADR-012: Resource Accounting and Labor Harmonization**
+**ADR-014: Energy Model Redesign**
+- Parallel to time_model redesign
+- Scaling basis for energy
+- Flexible units (not just kWh_per_kg)
+- Validation rules
+
+**ADR-015: Resource Accounting and Labor Harmonization**
 - machine_hours, labor_hours semantics
 - Concurrent vs sequential resources
 - Process machines vs recipe resources
 - Full accounting model
 
-**ADR-013: Unit Conversion and Type System**
+**ADR-016: Unit Conversion and Type System**
 - Implicit unit conversion rules
 - Conversion database
 - Type-aware calculations
 - Error handling
 
-**ADR-014: Validation and Error Detection**
+**ADR-017: Validation and Error Detection**
 - Comprehensive validation strategy
 - Schema, semantic, calculation validation
 - Work queue for agent fixes
 - Indexer integration
 
-**ADR-015: Unified KB Code Architecture**
+**ADR-018: Unified KB Code Architecture**
 - Shared calculation engine
 - Validation integration
 - Indexer, closure, simulation from common base
 - Test strategy
 
-**ADR-016: Material Flow Accounting**
+**ADR-019: Material Flow Accounting**
 - Mass/count reconciliation
 - Material provenance tracking
 - Transformation validation
@@ -779,23 +787,19 @@ If batch processes have `hr_per_batch`, how do variable-time batches work?
 - Still 1 batch definition but time varies?
 
 ### 3. Count-Based Time Models
-How should count-based rates be specified?
+**RESOLVED:** Use natural rate (Option A)
 ```yaml
-# Option A: Natural rate
+# Count-based rate specification
 time_model:
   rate: 10.0
-  rate_unit: unit/hr
-
-# Option B: Inverted
-time_model:
-  rate: 0.1
-  rate_unit: hr/unit
+  rate_unit: unit/hr  # Natural rate: 10 units per hour
 ```
 
 ### 4. Energy Model Scope
-Should energy_model redesign happen in parallel with time_model?
+**RESOLVED:** Yes, energy_model redesign in parallel with time_model
 - Same issues (scaling basis, units)
 - Should be consistent
+- Separate ADR-014 for energy model
 
 ### 5. Multiple Outputs
 If process has multiple outputs, how does scaling basis work?
