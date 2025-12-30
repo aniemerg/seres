@@ -1,0 +1,21 @@
+id: test_process_v0
+kind: process
+process_type: continuous
+inputs:
+  - item_id: input_material
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: output_material
+    qty: 9.0
+    unit: kg
+time_model:
+  type: linear_rate
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: input_material
+energy_model:
+  type: per_unit
+  value: 2.0
+  unit: kWh/kg
+  scaling_basis: input_material
