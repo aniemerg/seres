@@ -1,6 +1,7 @@
 id: solder_paste_casting_v0
 name: Solder paste casting (tin-lead) v0
 kind: process
+process_type: batch
 inputs:
   - item_id: molten_material_or_preform
     qty: 1.0
@@ -14,14 +15,15 @@ requires_ids:
   - crucible_refractory
 resource_requirements:
   - machine_id: casting_furnace_v0
-    amount: 1.0
+    qty: 1.0
     unit: hr
-energy_model:
-  type: kWh_per_unit_output
-  value: 3.0
-  notes: "Energy for casting solder paste from molten material"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Casting time for solder paste"
+energy_model:
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
+  notes: "Energy for casting solder paste from molten material"
 notes: "Casting molten material into solder paste; placeholder two-step path to produce Sn-Pb solder paste."

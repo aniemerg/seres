@@ -1,6 +1,7 @@
 id: alumina_extraction_from_highlands_v0
 kind: process
 name: Alumina extraction from highland regolith v0
+process_type: batch
 layer_tags:
 - layer_3
 - layer_4
@@ -26,11 +27,12 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 3.0
+  type: fixed_per_batch
+  value: 36.0
+  unit: kWh
   notes: Electric energy required per kg of alumina produced; leaching/s dissolution stage.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 10.0
   notes: 10 h batch processing; leaching, solid-liquid separation, and washing.
 notes: "Acid leaching to extract alumina from highland regolith. HCl can be partially recycled."

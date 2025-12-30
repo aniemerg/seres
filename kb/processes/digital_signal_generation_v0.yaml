@@ -1,6 +1,7 @@
 id: digital_signal_generation_v0
 name: Digital signal generation (seed)
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: hormone_digital_signaling_v0
@@ -10,9 +11,10 @@ byproducts:
   []
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.01
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
 notes: "Seed process to generate digital hormone-like signaling tokens for neural-immune control."

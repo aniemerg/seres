@@ -25,12 +25,14 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: "Winding operation energy estimate"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: "Wind nickel wire precisely on ceramic substrate"
 assumptions: |
   Nickel wire fine gauge; ceramic substrate provides insulation and thermal stability.

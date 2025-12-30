@@ -1,6 +1,7 @@
 id: calibration_force_torque_sensor_v0
 kind: process
 name: Calibration of force-torque sensor (6-DOF)
+process_type: batch
 layer_tags:
   - layer_7
   - layer_8
@@ -20,9 +21,10 @@ resource_requirements:
   qty: 1.5
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: Calibration process for converting wired assembly into calibrated force-torque sensor; establishes calibration matrix for 6 DOF.

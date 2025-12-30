@@ -1,6 +1,7 @@
 id: alnico_machining_grinding_v0
 kind: process
 name: Alnico machining and grinding v0
+process_type: batch
 layer_tags:
 - layer_6
 inputs:
@@ -18,10 +19,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Placeholder energy for a lightweight post-processing pass
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
 notes: "Post-process machining and grinding of AlNiCo magnets after casting/heat treatment. Placeholder values; to be refined as data becomes available."

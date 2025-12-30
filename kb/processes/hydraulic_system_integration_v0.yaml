@@ -3,8 +3,17 @@ kind: process
 name: Hydraulic system integration
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: hydraulic_system_medium
+    qty: 1.0
+    unit: kg
 requires_ids:
 - hydraulic_assembly_tools
 resource_requirements:
@@ -12,12 +21,16 @@ resource_requirements:
   qty: 3.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.1
+  unit: kWh/kg
+  scaling_basis: piping_components
   notes: minimal energy for assembly and pressure testing
 time_model:
   type: linear_rate
-  hr_per_kg: 2.0
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: piping_components
   notes: install pump, cylinders, valves, hoses, fittings; fill and bleed system; pressure test
 notes: Install and integrate hydraulic systems including pumps, cylinders, valves, hoses, and controls. Includes fluid filling,
   bleeding, and pressure testing.

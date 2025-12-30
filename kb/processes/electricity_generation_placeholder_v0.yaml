@@ -1,7 +1,11 @@
 id: electricity_generation_placeholder_v0
 name: Electricity generation (placeholder v0)
 kind: process
-inputs: []
+process_type: batch
+inputs:
+  - item_id: fuel_generic
+    qty: 1.0
+    unit: kg
 outputs:
   - item_id: electricity
     qty: 1.0
@@ -11,9 +15,10 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
 notes: "Placeholder process to unblock no_recipe gap for electricity; refine inputs/outputs as real data."

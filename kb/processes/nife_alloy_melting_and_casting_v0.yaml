@@ -3,6 +3,7 @@ kind: process
 name: Nickel-iron alloy melting and casting process v0
 layer_tags:
   - layer_3
+process_type: batch
 inputs:
   - item_id: nickel_metal_pure
     qty: 0.6
@@ -21,11 +22,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.5
+  unit: kWh
   notes: Melting energy for Ni-Fe alloy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: Melting, homogenization, and casting time
 notes: |

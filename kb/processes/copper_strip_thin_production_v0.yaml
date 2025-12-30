@@ -18,9 +18,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 0.8
+  type: fixed_per_batch
+  value: 0.016
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.05
 notes: "Simple one-for-one conversion from copper plate or sheet to thin strip via rolling; placeholder efficiency."
+process_type: batch

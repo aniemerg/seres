@@ -20,11 +20,14 @@ resource_requirements:
   qty: 1.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: powder_feedstock
 time_model:
   type: linear_rate
   rate: 15.0
   rate_unit: kg/hr
+  scaling_basis: powder_feedstock
 notes: Powder pressing step using pellet_press with pressing mold set; forms green parts. Placeholder values for modeling.
 process_type: continuous

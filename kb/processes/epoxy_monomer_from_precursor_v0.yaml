@@ -1,6 +1,7 @@
 id: epoxy_monomer_from_precursor_v0
 name: Epoxy monomer synthesis from precursor block v0
 kind: process
+process_type: batch
 inputs:
   - item_id: epoxy_precursor_block_v0
     qty: 1.0
@@ -11,12 +12,13 @@ outputs:
     unit: kg
 resource_requirements:
   - machine_id: generic_chemical_reactor_v0
-    amount: 1.0
+    qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Placeholder process: regenerates epoxy monomer from precursor block to support KB flow."

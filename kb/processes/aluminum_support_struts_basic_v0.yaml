@@ -14,11 +14,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: aluminum_tube_stock
 time_model:
   type: linear_rate
   rate: 5.0
   rate_unit: kg/hr
+  scaling_basis: aluminum_tube_stock
 notes: Placeholder process to convert 10 kg aluminum_tube_stock into aluminum support_struts_aluminum (v0).
 process_type: continuous

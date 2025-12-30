@@ -23,12 +23,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: sheet_metal_or_structural_steel
   notes: Welding and basic fabrication energy for metal welds
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: sheet_metal_or_structural_steel
 notes: 'Metal fabrication welding: combines cutting, forming, and welding of sheet/structural steel for fabrications.'
 process_type: continuous

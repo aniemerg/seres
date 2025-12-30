@@ -17,11 +17,13 @@ resource_requirements:
   qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
+process_type: batch
 notes: Synthesis of silicone polymer from silicone precursor in a chemical reactor. Placeholder values for early modeling.
 source_tags:
 - ellery_2018

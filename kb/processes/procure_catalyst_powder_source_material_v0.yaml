@@ -1,6 +1,7 @@
 id: procure_catalyst_powder_source_material_v0
 kind: process
 name: Procurement of catalyst powder source material
+process_type: batch
 inputs: []
 outputs:
 - item_id: catalyst_powder_source_material_v0
@@ -11,9 +12,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: Procurement-based production path; supplier integration placeholder

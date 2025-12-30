@@ -1,10 +1,17 @@
 id: drying_basic_v0
 kind: process
+process_type: batch
 name: Drying (basic)
 layer_tags:
   - layer_3
-inputs: []
-outputs: []
+inputs:
+  - item_id: wet_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: dried_material
+    qty: 1.0
+    unit: kg
 requires_ids:
   - furnace_high_temp
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: "evaporating moisture/volatiles (~2.3 MJ/kg water + heating)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "batch drying cycle for material conditioning"
 notes: Generic drying/conditioning step; placeholder temperature/time.

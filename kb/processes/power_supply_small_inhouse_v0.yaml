@@ -1,6 +1,7 @@
 id: power_supply_small_inhouse_v0
 kind: process
 name: Power supply small in-house assembly v0
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -19,10 +20,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.6
-  notes: "In-house assembly energy per unit; placeholder value for small power supply"
+  unit: kWh
+  notes: "In-house assembly energy per batch (1 unit); placeholder value for small power supply"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "In-house assembled small power supply to replace the import_placeholder path for computer_core_imported. This is a placeholder; details may be refined as components are specified."

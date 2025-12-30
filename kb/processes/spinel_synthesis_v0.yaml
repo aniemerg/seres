@@ -1,5 +1,6 @@
 id: spinel_synthesis_v0
 kind: process
+process_type: batch
 name: Spinel synthesis (MgAl2O4)
 layer_tags:
   - layer_6
@@ -22,11 +23,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.0
-  notes: "High-temperature synthesis (1000-1800 C) and densification"
+  unit: kWh
+  notes: "High-temperature synthesis (1000-1800 C) and densification (4 kWh for 1 kg batch)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: "Mixing, high-temp reaction, and sintering/pressing cycle"
 notes: |

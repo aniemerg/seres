@@ -1,10 +1,17 @@
 id: pattern_making_basic_v0
 kind: process
+process_type: batch
 name: Pattern making (basic)
 layer_tags:
   - layer_6
-inputs: []
-outputs: []
+inputs:
+  - item_id: wood_or_composite_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: casting_patterns_wooden
+    qty: 1.0
+    unit: kg
 requires_ids:
   - assembly_tools_basic
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Hand tools and small power tools during pattern fabrication.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Layout, cutting, sanding, and sealing per pattern.
 notes: Create casting patterns or molds from wood/composite; includes layout, shaping, finishing, and sealing. Placeholder until detailed pattern shop steps are modeled.

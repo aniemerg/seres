@@ -1,8 +1,12 @@
 """
+DEPRECATED: This file is deprecated and should be migrated to src/
+
 Circular Dependency Fixer
 
 Automatically identifies circular dependencies and breaks them by marking
 items as imports following the rule: "child in dependency chain becomes import"
+
+TODO: Migrate to src/kb_core/dependency_analyzer.py
 """
 
 import sys

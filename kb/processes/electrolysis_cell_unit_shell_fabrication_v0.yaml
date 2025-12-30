@@ -16,11 +16,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: steel_sheet_3mm
 time_model:
   type: linear_rate
   rate: 25.0
   rate_unit: kg/hr
+  scaling_basis: steel_sheet_3mm
 notes: Fabricate a 25 kg electrolysis_cell_unit_shell_v0 from 25 kg steel_sheet_3mm using a forming press.
 process_type: continuous

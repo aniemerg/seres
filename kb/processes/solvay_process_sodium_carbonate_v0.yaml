@@ -39,13 +39,15 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
   notes: Multi-stage process with calcination and ammonia recovery
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
   notes: Complete Solvay cycle including calcination
+process_type: batch
 notes: |
   Solvay process for producing sodium carbonate (soda ash) from salt and limestone.
   Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt

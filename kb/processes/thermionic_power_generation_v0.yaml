@@ -5,14 +5,14 @@ layer_tags:
 - layer_8
 inputs:
 - item_id: concentrated_solar_thermal
-  qty: null
+  qty: 100.0
   unit: kWh
 outputs:
 - item_id: electrical_energy
-  qty: null
+  qty: 10.0
   unit: kWh
 - item_id: waste_heat
-  qty: null
+  qty: 90.0
   unit: kWh
 requires_ids:
 - thermionic_converter_v0
@@ -22,13 +22,17 @@ resource_requirements:
   qty: 0.05
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.0
+  unit: kWh/kWh
+  scaling_basis: concentrated_solar_thermal
   notes: 'Net energy producer. Conversion efficiency: 10% primitive systems, 15-20% optimized, 30% theoretical maximum. Remaining
     70-90% becomes waste heat requiring rejection.'
 time_model:
   type: linear_rate
-  hr_per_kg: 0.0
+  rate: 10.0
+  rate_unit: kWh/hr
+  scaling_basis: concentrated_solar_thermal
   notes: Continuous generation during lunar day (~14 Earth days). Operational during sunlight availability.
 notes: 'THERMIONIC SOLAR POWER GENERATION
 

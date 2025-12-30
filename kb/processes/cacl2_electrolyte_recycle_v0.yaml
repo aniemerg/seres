@@ -1,6 +1,7 @@
 id: cacl2_electrolyte_recycle_v0
 kind: process
 name: CaCl2 electrolyte recycling (placeholder)
+process_type: batch
 layer_tags:
 - layer_4
 - layer_3
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 notes: "Placeholder CaCl2 electrolyte recycling process. Recycles electrolyte back into usable form; impurities to be addressed in later iterations."

@@ -17,15 +17,19 @@ requires_ids:
 - hand_tools_basic
 resource_requirements:
 - machine_id: cutting_station_basic_v0
-  amount: 0.6
+  qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: gasket_sheet_core_v0
+  notes: "Cutting energy per kg of gasket material"
 time_model:
   type: linear_rate
   rate: 1.0
   rate_unit: kg/hr
+  scaling_basis: gasket_sheet_core_v0
 notes: Cut gasket_sheet_core_v0 into gasket_sheet_core_v0_part; basic stock-forming step. Assumes gasket_sheet_core_v0 material
   is available.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: ceramic_powder_synthesis_v0
 kind: process
 name: Ceramic powder synthesis v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -19,9 +20,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: 'Ceramic powder synthesis: convert ceramic powder mixture into ceramic powder using a ball mill. Placeholder parameters.'

@@ -18,12 +18,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: plastic_pellets
   notes: Extruder heating and drive energy per kg
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: plastic_pellets
   notes: Throughput including changeover
 notes: Basic plastic extrusion of pellets into profiles/film; assumes simple die and cooling section.
 process_type: continuous

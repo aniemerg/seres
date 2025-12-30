@@ -56,13 +56,17 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: control_panel_assembly_v0
   notes: Bench assembly and test power draw.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.4
-  notes: Wiring, mounting, labeling, and functional checkout.
+  rate: 2.5
+  rate_unit: kg/hr
+  scaling_basis: control_panel_assembly_v0
+  notes: Wiring, mounting, labeling, and functional checkout. Rate = 1/0.4 = 2.5 kg/hr
 notes: 'Assemble control panels or control units: mount switches, indicators, wiring harnesses, and controllers into enclosures;
   includes continuity checks and basic functional test.
 

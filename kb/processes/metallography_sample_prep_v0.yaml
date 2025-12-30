@@ -1,6 +1,7 @@
 id: metallography_sample_prep_v0
 kind: process
 name: Metallography sample preparation
+process_type: batch
 layer_tags:
 - layer_6
 inputs:
@@ -16,10 +17,12 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
+  notes: "Polishing and etching energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
 notes: >
   Polishing and etching for metallography microscopy. Placeholder energy/time estimates;

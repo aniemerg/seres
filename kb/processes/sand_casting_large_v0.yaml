@@ -26,10 +26,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: molten_material_or_preform
 time_model:
   type: linear_rate
-  hr_per_kg: 0.6
+  rate: 1.667
+  rate_unit: kg/hr
+  scaling_basis: molten_material_or_preform
 notes: Sand casting of large component; placeholder parameters; refined later with mold geometry.
 process_type: continuous

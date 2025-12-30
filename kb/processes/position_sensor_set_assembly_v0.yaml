@@ -17,13 +17,14 @@ requires_ids:
 - soldering_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.3
-notes: "Assemble position sensor set from a general sensor suite using basic tools."
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
-notes: "Placeholder process to produce position_sensor_set."
+process_type: batch
+notes: "Assemble position sensor set from a general sensor suite using basic tools; placeholder process to produce position_sensor_set."

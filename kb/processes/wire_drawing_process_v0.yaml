@@ -16,12 +16,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: nickel_metal_pure
   notes: Drawing nickel wire through dies; energy per kg input
 time_model:
   type: linear_rate
   rate: 50.0
   rate_unit: kg/hr
+  scaling_basis: nickel_metal_pure
 notes: Basic wire drawing operation; parameters align with wire_drawing_basic_v0.
 process_type: continuous

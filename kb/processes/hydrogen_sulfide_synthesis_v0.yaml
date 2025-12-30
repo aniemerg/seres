@@ -1,5 +1,6 @@
 id: hydrogen_sulfide_synthesis_v0
 kind: process
+process_type: batch
 name: Hydrogen sulfide synthesis from hydrogen and sulfur
 layer_tags:
   - layer_4
@@ -22,11 +23,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.5
+  unit: kWh
   notes: Direct synthesis at 300-450°C, exothermic reaction
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Controlled synthesis with temperature management
 notes: |

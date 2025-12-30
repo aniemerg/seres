@@ -26,11 +26,13 @@ resource_requirements:
   amount: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: "Final assembly energy for integration and QA"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
 notes: >
   Final assembly of NEIMS control system from core subassemblies; includes QA checks.
+process_type: batch

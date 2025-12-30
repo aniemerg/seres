@@ -5,23 +5,27 @@ layer_tags:
 - layer_8
 inputs:
 - item_id: waste_heat
-  qty: null
+  qty: 1.0
   unit: kWh
 outputs:
 - item_id: rejected_heat
-  qty: null
+  qty: 1.0
   unit: kWh
 requires_ids:
 - radiator_panels_v0
 - heat_transport_loop_assembly
 - thermal_control_valves
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.05
+  unit: kWh/kWh
+  scaling_basis: waste_heat
   notes: pump power ~5% of rejected heat per kWh rejected
 time_model:
   type: linear_rate
-  hr_per_kg: 0.01
+  rate: 100.0
+  rate_unit: kWh/hr
+  scaling_basis: waste_heat
   notes: continuous heat rejection, minimal time overhead
 notes: Cooling anchor; sizing, materials, and deployment TBD.
 process_type: continuous

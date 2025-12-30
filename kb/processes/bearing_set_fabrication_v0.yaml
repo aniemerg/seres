@@ -11,14 +11,17 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: assembly_station
-  amount: 0.5
-  unit: unit
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: steel_stock
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: steel_stock
 notes: Bearing set fabrication placeholder
 process_type: continuous

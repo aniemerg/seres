@@ -1,6 +1,7 @@
 id: epoxy_resin_base_synthesis_v0
 name: Synthesis of epoxy resin base from precursor
 kind: process
+process_type: batch
 inputs:
   - item_id: epoxy_precursor_block_v0
     qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Placeholder synthesis of epoxy resin base from precursor."

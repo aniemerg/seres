@@ -1,6 +1,7 @@
 id: tungsten_wire_drawing_v0
 kind: process
 name: Tungsten wire drawing
+process_type: continuous
 layer_tags:
   - layer_6
   - layer_7
@@ -17,7 +18,15 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  total_energy_kwh: 5.0
+  type: per_unit
+  value: 1.0
+  unit: kWh/kg
+  scaling_basis: tungsten_metal_pure
+  notes: 5 kWh total for 5 kg = 1 kWh/kg
 time_model:
-  total_time_hr: 0.5
+  type: linear_rate
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: tungsten_metal_pure
+  notes: 0.5 hr for 5 kg = 10 kg/hr throughput
 notes: "Placeholder tungsten wire drawing step; converts 5 kg of pure tungsten into drawn wire. Uses general labor resources; energy and time are placeholder estimates."

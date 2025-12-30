@@ -16,11 +16,16 @@ requires_ids:
   - power_conditioning_equipment
   - solar_tracking_optional
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.0
+  unit: kWh/kWh
+  scaling_basis: solar_irradiance
   notes: "Placeholder energy per unit of electrical energy output; rate to be calibrated"
 time_model:
-  type: fixed_time
-  hr_per_batch: 24.0
+  type: linear_rate
+  rate: 1.0
+  rate_unit: kWh/hr
+  scaling_basis: solar_irradiance
   notes: "Daily generation window; placeholder for lunar day cycle"
 notes: Treats PV as imported initially; introduces power accounting node.
+process_type: continuous

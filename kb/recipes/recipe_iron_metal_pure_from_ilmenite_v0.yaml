@@ -1,10 +1,9 @@
 id: recipe_iron_metal_pure_from_ilmenite_v0
 kind: recipe
 name: 'Recipe: iron_metal_pure from ilmenite'
-produces_id: iron_metal_pure
-produces_qty: 1.0
-produces_unit: kg
+target_item_id: iron_metal_pure
+variant_id: from_ilmenite
 steps:
-- process_id: iron_pure_production_from_ilmenite_v0
-  notes: Produces pure iron metal from ilmenite ore in a simplified step
-target_item_id: iron_metal_pure_from_ilmenite
+  - process_id: iron_pure_production_from_ilmenite_v0
+    notes: Produces pure iron metal from ilmenite ore in a simplified step
+notes: "Variant recipe: produces iron_metal_pure from ilmenite ore via iron_pure_production_from_ilmenite_v0."

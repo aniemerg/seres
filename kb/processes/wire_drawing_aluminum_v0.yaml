@@ -20,10 +20,14 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: aluminum_alloy_ingot
 time_model:
   type: linear_rate
   rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: aluminum_alloy_ingot
 notes: Wire drawing through progressively smaller dies. Includes realistic waste/loss as metal scrap; 5% loss assumed.
 process_type: continuous

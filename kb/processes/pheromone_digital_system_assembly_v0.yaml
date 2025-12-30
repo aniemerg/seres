@@ -16,11 +16,13 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Placeholder energy for digital pheromone system assembly"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Placeholder assembly time"
 notes: "Placeholder assembly to produce pheromone_digital_system_v0; digital asset."
+process_type: batch

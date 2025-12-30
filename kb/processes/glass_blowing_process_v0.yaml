@@ -1,6 +1,7 @@
 id: glass_blowing_process_v0
 kind: process
 name: Glass blowing process v0
+process_type: batch
 inputs:
   - item_id: glass_tube_borosilicate
     qty: 0.02
@@ -18,9 +19,10 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Blow glass envelope for tube (tube_envelope_blown). Placeholder; uses borosilicate glass blank."

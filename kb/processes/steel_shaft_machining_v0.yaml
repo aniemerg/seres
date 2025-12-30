@@ -17,11 +17,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
+  unit: kWh/kg
+  scaling_basis: steel_bar_raw
+  notes: "Lathe and milling energy for shaft machining"
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: steel_bar_raw
+  notes: "Machining rate: 0.5 kg/hr (2 hr per kg)"
 notes: Placeholder steel shaft machined from raw steel bar (v0).
 process_type: continuous

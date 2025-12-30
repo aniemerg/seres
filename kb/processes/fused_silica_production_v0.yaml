@@ -21,12 +21,16 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 8.0
+  unit: kWh/kg
+  scaling_basis: silica_purified
   notes: Melting silica at ~1700°C requires significant energy, plus controlled cooling
 time_model:
   type: linear_rate
-  hr_per_kg: 2.0
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: silica_purified
   notes: Heat-up, melting cycle, controlled cooling to prevent crystallization
 notes: Production of fused silica (quartz glass) by melting purified silica at very high temperature (~1700°C) in controlled
   atmosphere. Results in amorphous glass with excellent optical and thermal properties.

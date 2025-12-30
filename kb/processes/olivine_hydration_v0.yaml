@@ -4,6 +4,7 @@ name: Olivine hydration (low temperature)
 layer_tags:
   - layer_3
   - layer_4
+process_type: batch
 inputs:
   - item_id: olivine_concentrate
     qty: 1.0
@@ -29,11 +30,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: Low energy ambient or low temperature hydration reaction
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 24.0
   notes: Slow hydration reaction at ambient to moderate temperature
 notes: |

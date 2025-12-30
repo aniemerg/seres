@@ -21,12 +21,15 @@ resource_requirements:
   amount: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: steel_ingot
   notes: Energy intensity for rolling per kilogram of input material
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: steel_ingot
 notes: Placeholder steel bar stock rolling path; yields 0.75 kg bar stock and 0.25 kg slag per 1 kg ingot.
 process_type: continuous

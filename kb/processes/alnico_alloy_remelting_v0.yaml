@@ -1,6 +1,7 @@
 id: alnico_alloy_remelting_v0
 kind: process
 name: AlNiCo alloy remelting v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -19,10 +20,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
   notes: "Remelting block to alloy feedstock"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Remelts AlNiCo casting block into magnet alloy feedstock (local, placeholder parameters)"

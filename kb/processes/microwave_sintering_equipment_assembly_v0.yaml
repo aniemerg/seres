@@ -25,9 +25,11 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
+process_type: batch
 notes: "Assembles microwave_sintering_equipment_v0 from heavy machine frame and power_electronics_module using assembly_station."

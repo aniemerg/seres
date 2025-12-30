@@ -14,11 +14,14 @@ resource_requirements:
   amount: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
 time_model:
   type: linear_rate
   rate: 5.0
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
 notes: Placeholder fabrication of XY mechanical stage from a 2 kg raw_metal_block using CNC milling.
 process_type: continuous

@@ -27,10 +27,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Fabrication energy for feedthrough"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: "Simplified fabrication of electrical feedthrough vacuum assembly from copper wire, ceramic insulators, and quartz envelope; placeholder process for modeling."

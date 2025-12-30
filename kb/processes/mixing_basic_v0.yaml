@@ -1,10 +1,17 @@
 id: mixing_basic_v0
 kind: process
+process_type: batch
 name: Mixing (basic)
 layer_tags:
   - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: raw_materials_batch
+  qty: 10.0
+  unit: kg
+outputs:
+- item_id: mixed_batch
+  qty: 10.0
+  unit: kg
 requires_ids:
   - mixer_or_blender
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Mixer motor power during batch.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: Load, mix, and unload small batches.
 notes: Basic mixing of powders or slurries using a small mixer/blender; placeholder parameters until domain-specific data is available.

@@ -1,0 +1,20 @@
+id: metal_fittings_raw
+kind: part
+name: Metal fittings (raw, pre-assembly)
+mass: 0.2
+unit: kg
+material_class: metal
+recipe: recipe_metal_fittings_raw_v0
+notes: |
+  Raw machined metal fittings before final assembly - includes hydraulic adapters,
+  quick disconnects, threaded fittings, and hose barbs after machining but before
+  seals/gaskets are installed. Typically steel or brass with threads, flanges, and
+  connection features machined to specification. Used as intermediate product in
+  fitting assembly processes.
+
+  Conservative Mode check completed:
+  - Searched for: machined_part_raw (2 kg, 10× too large), small metal parts
+  - Checked: hose_end_fittings_v0 (0.25 kg, finished product not raw)
+  - No equivalent found within 5× magnitude (0.04-1.0 kg range)
+  - Created as specific intermediate product for fitting assembly
+  - Mass: 0.2 kg per fitting assembly batch input requirement

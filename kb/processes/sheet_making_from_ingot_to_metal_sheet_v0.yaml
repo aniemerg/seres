@@ -1,5 +1,6 @@
 id: sheet_making_from_ingot_to_metal_sheet_v0
 kind: process
+process_type: batch
 name: Sheet making from ingot to metal_sheet_or_plate v0
 layer_tags:
 - layer_5
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Sheet from ingot to metal_sheet_or_plate; placeholder parameters."

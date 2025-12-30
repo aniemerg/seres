@@ -17,13 +17,15 @@ requires_ids:
 - casting_mold_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 2.5
-  notes: "Placeholder energy for casting-based fabrication of liquid sodium receiver"
+  type: fixed_per_batch
+  value: 62.5
+  unit: kWh
+  notes: "Derived from 2.5 kWh/kg over 25 kg input; placeholder for casting-based fabrication"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: "Placeholder fabrication path: uses casting furnace and molds; refine inputs/outputs later."

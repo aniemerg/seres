@@ -1,6 +1,7 @@
 id: magnesium_chloride_from_mgo_v0
 kind: process
 name: Magnesium chloride from MgO and HCl
+process_type: batch
 layer_tags:
   - layer_4
 inputs:
@@ -23,10 +24,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Heating and drying of MgCl2 solution"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Acid neutralization: MgO + 2HCl → MgCl2 + H2O, followed by drying."

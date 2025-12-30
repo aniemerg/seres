@@ -27,13 +27,15 @@ resource_requirements:
   qty: 3.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 8.0
+  unit: kWh/kg
+  scaling_basis: iron_metal_pure
   notes: 8 kWh per kg input
 time_model:
   type: linear_rate
-  setup_hr: 0.0
   rate: 0.0833333333
   rate_unit: kg/hr
+  scaling_basis: iron_metal_pure
 notes: Precision machining and grinding of bearing races and balls. Requires tight tolerances.
 process_type: continuous

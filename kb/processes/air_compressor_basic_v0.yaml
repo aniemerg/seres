@@ -1,10 +1,14 @@
 id: air_compressor_basic_v0
 kind: process
 name: Air compressor basic operation
+process_type: batch
 inputs:
-- item_id: water
-  qty: 0.0
-  unit: kg
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
+- item_id: motor_electric_small
+  qty: 1.0
+  unit: unit
 outputs:
 - item_id: air_compressor_small
   qty: 1.0
@@ -17,11 +21,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: Placeholder energy per produced unit
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Batch production cycle
-notes: Simple unit-operation to produce an air_compressor_small via basic assembly.
+notes: Simple unit-operation to produce an air_compressor_small via basic assembly. Added placeholder inputs (frame + motor).

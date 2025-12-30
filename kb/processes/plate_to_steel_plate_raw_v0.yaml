@@ -13,9 +13,13 @@ outputs:
   unit: kg
 notes: Post-rolling sizing and trimming to convert plate/sheet into raw plate stock.
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: steel_plate_or_sheet
 time_model:
   type: linear_rate
-  hr_per_kg: 0.2
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: steel_plate_or_sheet
 process_type: continuous

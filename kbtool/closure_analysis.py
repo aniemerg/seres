@@ -1,4 +1,6 @@
 """
+DEPRECATED: This file is deprecated. Use src/indexer/closure_analysis.py instead.
+
 Closure Analysis Tool
 
 Analyzes material closure for machines by recursively expanding BOMs and recipes

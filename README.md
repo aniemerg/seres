@@ -56,65 +56,70 @@ Quick examples:
 
 ## Simulation
 
-### Base Builder Simulation (Current)
+### New Simulation Engine (ADR-012/014/017)
 
-**Status**: ✅ **IMPLEMENTED AND VALIDATED** (2025-12-20)
+**Status**: ✅ **IMPLEMENTED AND VALIDATED** (2025-12-30)
 
-Interactive simulation mode for validating KB completeness by building a lunar base from scratch:
-
-⚠️ **Note**: New simulation engine with ADR-012/014 support is implemented (`src/simulation/engine.py`) but CLI interface (Phase 3.3) is not yet complete. Continue using base_builder CLI below for now.
+Production-ready simulation engine with full ADR-012/014/017 support:
 
 **Key Features**:
-- Start with nothing, bootstrap from regolith mining
-- Material class matching enables generic substitution (e.g., iron → raw_metal_block)
-- JSONL event logging for full audit trail
-- Interactive mode: Direct function calls from Claude
+- ✅ Runtime validation before process execution
+- ✅ Energy calculation using ADR-014 energy models
+- ✅ Duration calculation from time_model (agent-provided OR calculated)
+- ✅ Recipe override resolution per ADR-013
+- ✅ Material class matching for generic substitution
+- ✅ JSONL event logging with full audit trail
+- ✅ State persistence and replay
 
-**Proven Results**:
-- ✅ Complete iron production chain: regolith → iron ore → pure iron → parts
-- ✅ 425 kg regolith → 25 kg manufactured parts (2% yield)
-- ✅ 315 kg Earth imports (bootstrap only), 12.6:1 local-to-import ratio
-- ✅ Material class system unlocked 66+ manufacturing processes
-
-**Usage**:
-
-⭐ **Recommended: CLI Commands (for Claude Code and manual control)**
+**Quick Start**:
 ```bash
-# Complete guide in docs/CLI_COMMANDS_GUIDE.md
-# Quick reference in CLI_QUICK_REFERENCE.md
+# Create simulation
+python -m src.cli sim init --sim-id lunar_base
 
-SIM="my_sim"
+# Import bootstrap items
+python -m src.cli sim import --sim-id lunar_base --item labor_bot_general_v0 --quantity 3 --unit unit
+
+# Start mining
+python -m src.cli sim start-process --sim-id lunar_base --process regolith_mining_highlands_v0 --duration 24
+
+# Preview advancement
+python -m src.cli sim preview --sim-id lunar_base --hours 24
+
+# Advance time
+python -m src.cli sim advance-time --sim-id lunar_base --hours 24
 
 # View state
-python -m base_builder.cli_commands view-state --sim-id $SIM
-
-# Import bootstrap
-python -m base_builder.cli_commands import --sim-id $SIM --item labor_bot_general_v0 --quantity 1 --unit unit
-
-# Start process
-python -m base_builder.cli_commands start-process --sim-id $SIM --process regolith_mining_highlands_v0 --duration 8
-
-# Preview & execute
-python -m base_builder.cli_commands preview --sim-id $SIM --hours 8
-python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 8
+python -m src.cli sim view-state --sim-id lunar_base
 ```
 
-**Alternative: Python API (for custom scripts only)**
-```bash
-# ⚠️ NOT recommended for Claude Code - use CLI commands above instead
-python -c "from base_builder.interactive import *; init_simulation('test_sim')"
-# Then use: view_state(), start_process(), run_recipe(), build_machine(), etc.
-```
+**All Commands**:
+- `init` - Create new simulation
+- `import` - Import items from Earth
+- `start-process` - Start a process (with optional calculated duration)
+- `run-recipe` - Execute a recipe
+- `build-machine` - Build machine from BOM
+- `advance-time` - Advance simulation time
+- `preview` - Preview time advancement (non-destructive)
+- `view-state` - View current simulation state
+- `list` - List all simulations
 
 **Documentation**:
-- **`docs/CLI_COMMANDS_GUIDE.md`** — **⭐ Complete CLI reference (USE THIS IN CLAUDE CODE)**
-- **`CLI_QUICK_REFERENCE.md`** — **Quick reference card**
+- **`docs/SIMULATION_GUIDE.md`** — **⭐ Complete simulation guide**
+- **`docs/CLI_COMMANDS_GUIDE.md`** — CLI reference
+- `src/simulation/engine.py` — Engine implementation
+- `src/simulation/cli.py` — CLI implementation
+- `docs/ADRs/ADR-012-process-types-and-time-model.md` — Time model spec
+- `docs/ADRs/ADR-013-recipe-override-mechanics.md` — Override resolution
+- `docs/ADRs/ADR-014-energy-model-redesign.md` — Energy model spec
+
+### Legacy Base Builder (Deprecated)
+
+The old `base_builder` CLI is deprecated. Use `python -m src.cli sim` instead.
+
+For historical reference:
 - `base_builder/README.md` — Overview and architecture
-- `base_builder/INTERACTIVE_MODE.md` — Python API guide (not for Claude Code)
-- `docs/ADRs/004-base-builder-simulation.md` — Architecture decision record
-- `docs/material_class_system.md` — Material class matching implementation
-- `docs/iron_parts_discovery.md` — Production chain breakthrough
-- `docs/session_accomplishments.md` — Complete session results
+- `docs/material_class_system.md` — Material class matching
+- `docs/iron_parts_discovery.md` — Production chain validation results
 
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.

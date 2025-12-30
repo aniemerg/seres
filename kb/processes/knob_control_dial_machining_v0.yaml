@@ -23,12 +23,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: extruded_plastic_profile
   notes: Machining energy for knob from extruded plastic profile
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: extruded_plastic_profile
 notes: 'Knob control dial machining: extruded plastic profile milled/turned to final knob shape.'
 process_type: continuous

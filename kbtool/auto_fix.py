@@ -1,4 +1,6 @@
 """
+DEPRECATED: This file is deprecated. Use src/kb_core/auto_fixer.py instead.
+
 Auto-Fix CLI
 
 Command-line tool for automatically fixing validation issues in the KB.

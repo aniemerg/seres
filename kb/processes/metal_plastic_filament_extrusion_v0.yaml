@@ -21,11 +21,14 @@ resource_requirements:
   qty: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: iron_powder_or_sheet
 time_model:
   type: linear_rate
   rate: 4.0
   rate_unit: kg/hr
+  scaling_basis: iron_powder_or_sheet
 notes: Composite extrusion of 50% iron powder into PLA feedstock to produce iron-impregnated PLA filament.
 process_type: continuous

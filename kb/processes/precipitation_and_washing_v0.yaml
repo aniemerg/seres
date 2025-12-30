@@ -24,12 +24,14 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.5
-  notes: Precipitation and washing energy rough estimate
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
+  notes: Precipitation and washing energy rough estimate (2 kg wet precipitate per batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: |
   Precipitate CMC from solution using alcohol, then wash to remove salts.
   This is a canonical unit operation in the binder production flow.

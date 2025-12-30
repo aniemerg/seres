@@ -1,6 +1,7 @@
 id: optical_sensor_alignment_assembly_v0
 kind: process
 name: Optical sensor alignment assembly v0
+process_type: batch
 inputs:
   - item_id: electronic_component_or_module
     qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Assemble optical sensor alignment from electronic_component_or_module; conservative placeholder values."

@@ -20,11 +20,14 @@ resource_requirements:
   amount: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: gasket_sheet
 time_model:
   type: linear_rate
   rate: 1.0
   rate_unit: kg/hr
+  scaling_basis: gasket_sheet
 notes: Cut gasket_sheet into gasket_sheet_part_v0; basic stock-forming step. Assumes gasket_sheet is available as input.
 process_type: continuous

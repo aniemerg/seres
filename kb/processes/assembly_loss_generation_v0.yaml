@@ -1,6 +1,7 @@
 id: assembly_loss_generation_v0
 name: Assembly loss generation (placeholder)
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: assembly_loss
@@ -11,9 +12,10 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
-  value: 0.5
+  type: fixed_per_batch
+  value: 0.25
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.2
 notes: "Placeholder process to generate assembly_loss mass balance item; to unblock no_recipe gap for assembly_loss."

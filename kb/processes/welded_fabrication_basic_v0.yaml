@@ -24,12 +24,16 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: steel_stock
   notes: Arc power and grinding/cleanup for basic structural weldments
 time_model:
   type: linear_rate
-  hr_per_kg: 0.4
+  rate: 2.5
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
   notes: Fit-up, tack, weld passes, and cleanup for simple frames
 notes: Basic welded fabrication of steel frames and brackets. Produces welded fabrications from stock steel with filler.
 process_type: continuous

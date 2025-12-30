@@ -19,12 +19,16 @@ resource_requirements:
   amount: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: heat_sink_base_machined
   notes: anodizing electrolyte heating, agitation, and rinse cycles
 time_model:
   type: linear_rate
-  hr_per_kg: 1.5
+  rate: 0.6667
+  rate_unit: kg/hr
+  scaling_basis: heat_sink_base_machined
   notes: dwell time for oxide growth + rinse/seal steps
 notes: Anodizing step to create protective oxide on aluminum heat sink base; increases emissivity and corrosion resistance
   for vacuum environments.

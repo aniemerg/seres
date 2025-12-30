@@ -19,12 +19,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: alumina_powder
   notes: high-temperature sintering to 1200-1400°C for ceramic densification
 time_model:
   type: linear_rate
-  hr_per_kg: 6.0
+  rate: 0.1667
+  rate_unit: kg/hr
+  scaling_basis: alumina_powder
   notes: extended heating cycle with controlled ramp, soak, and cooling for sintering and densification
 notes: Sintering process to densify ceramic parts by heating below melting point. Atomic diffusion bonds particles together,
   reducing porosity and increasing strength. Used for technical ceramics, insulators, and refractory components.

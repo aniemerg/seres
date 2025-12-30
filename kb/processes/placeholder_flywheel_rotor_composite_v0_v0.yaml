@@ -10,9 +10,11 @@ outputs:
     unit: unit
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
+process_type: batch
 notes: "Placeholder process to fabricate flywheel_rotor_composite_v0. Real ISRU/composite fabrication to be defined."

@@ -1,6 +1,7 @@
 id: machine_assembly_tensile_test_v0
 kind: process
 name: Basic tensile test machine assembly
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -22,9 +23,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: Assembles tensile_test_machine_v0 from machine_frame_small and power_electronics_module using the assembly_station.

@@ -14,11 +14,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.9
+  unit: kWh/kg
+  scaling_basis: alumina_powder
 time_model:
   type: linear_rate
   rate: 25.0
   rate_unit: kg/hr
+  scaling_basis: alumina_powder
 notes: Basic ceramic casting from alumina powder to produce thermal_lance_ceramic_casting_v0. Placeholder values for modeling.
 process_type: continuous

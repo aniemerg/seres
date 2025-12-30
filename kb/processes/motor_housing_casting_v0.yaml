@@ -1,5 +1,6 @@
 id: motor_housing_casting_v0
 kind: process
+process_type: batch
 name: Motor housing casting v0
 layer_tags:
   - layer_6
@@ -23,10 +24,11 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
   notes: "Casting energy for motor housing"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Cast motor housing from ISRU iron. Each housing ~1 kg finished."

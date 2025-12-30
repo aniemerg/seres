@@ -22,11 +22,13 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Winding machine motor power"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Wind primary and secondary coils, layer insulation, test"
+process_type: batch
 notes: Transformer winding process. Wind copper wire coils onto laminated core with precise turn counts and layer insulation for voltage transformation.

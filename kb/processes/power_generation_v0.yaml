@@ -1,5 +1,6 @@
 id: power_generation_v0
 kind: process
+process_type: batch
 name: Power generation unit (placeholder)
 layer_tags:
 - layer_0
@@ -15,11 +16,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: Placeholder energy produced per output unit
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
   notes: Short placeholder generation cycle
 notes: Placeholder process to generate 1 kWh of process_power for modeling imports.

@@ -22,12 +22,16 @@ resource_requirements:
   qty: 0.05
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.1
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: drum motor and conveyor/feeder power
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
   notes: continuous separation ~20 kg/hr throughput
 notes: Placeholder beneficiation split; capture process presence before numbers.
 process_type: continuous

@@ -4,6 +4,7 @@ name: Test equipment basic assembly
 layer_tags:
 - layer_7
 - layer_8
+process_type: batch
 inputs:
 - item_id: assembled_electronics
   qty: 8.0
@@ -19,11 +20,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.0
-notes: Basic bench test equipment assembly from eight assembled electronics modules; placeholder energy usage
+  unit: kWh
 
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
-notes: Placeholder assembly process to convert eight electronics modules into one test equipment kit
+notes: Basic bench test equipment assembly from eight electronics modules into one test equipment kit; placeholder energy/time usage

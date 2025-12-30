@@ -1,6 +1,7 @@
 id: camera_vacuum_tube_vidicon_v0
 kind: process
 name: Vidicon camera vacuum tube production v0
+process_type: batch
 inputs:
   - item_id: glass_envelope_vacuum_tube_v0
     qty: 1.0
@@ -18,9 +19,10 @@ resource_requirements:
   qty: 4.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Seed production path for Vidicon camera vacuum tube using envelope and subassembly inputs; placeholder energy/time values."

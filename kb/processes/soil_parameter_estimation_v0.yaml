@@ -1,6 +1,7 @@
 id: soil_parameter_estimation_v0
 name: Soil Parameter Estimation
 kind: process
+process_type: batch
 inputs: []
 outputs: []
 resource_requirements:
@@ -8,9 +9,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
 notes: "Placeholder for soil parameter estimation (wheel sinkage and slip analysis); seed-derived from paper_reviews_dec2024_comprehensive_v0. This entry resolves the referenced_only gap in the seed workflow."

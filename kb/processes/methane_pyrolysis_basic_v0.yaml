@@ -17,11 +17,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 2.0
+  unit: kWh/kg
+  scaling_basis: methane_gas_v0
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: methane_gas_v0
 notes: Stoichiometric methane pyrolysis; carbon and hydrogen outputs balanced to input mass.
 process_type: continuous

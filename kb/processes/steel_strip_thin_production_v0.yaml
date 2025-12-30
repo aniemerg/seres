@@ -3,6 +3,7 @@ kind: process
 name: Steel thin strip production (from plate or sheet)
 layer_tags:
 - layer_6
+process_type: batch
 inputs:
 - item_id: steel_plate_or_sheet
   qty: 0.02
@@ -18,9 +19,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.05
 notes: Simple one-for-one conversion from steel plate/sheet to thin strip via rolling; placeholder efficiency.

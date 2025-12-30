@@ -4,8 +4,14 @@ name: Stacking and clamping
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
-outputs: []
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: lamination_stack_clamped
+    qty: 1.0
+    unit: kg
 requires_ids:
 - workbench_basic
 resource_requirements:
@@ -13,11 +19,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: boundary
+  type: per_unit
+  value: 0.1
+  unit: kWh/kg
+  scaling_basis: electrical_steel_sheet
   notes: manual assembly process requiring minimal energy
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: electrical_steel_sheet
   notes: manual stacking of laminations and clamping with fasteners or welding
 notes: Manual assembly process for stacking laminated components and clamping them together. Used for transformer cores (laminated
   steel sheets), motor stators, and other laminated assemblies. Laminations are stacked with insulation between layers to

@@ -12,13 +12,14 @@ resource_requirements:
   qty: 3.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: minimal energy for cutting, fitting, and adhesive mixing
 time_model:
-  type: linear_rate
-  hr_per_kg: 2.0
+  type: batch
+  hr_per_batch: 2.0
   notes: labor-intensive cutting, fitting, anchoring, and sealing of refractory materials
 notes: Install ceramic fiber, refractory bricks, or castable refractory lining in furnaces and high-temperature equipment.
   Includes cutting, fitting, anchoring, and sealing.
-process_type: continuous
+process_type: batch

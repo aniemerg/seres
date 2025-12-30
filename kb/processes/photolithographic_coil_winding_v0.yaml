@@ -13,18 +13,21 @@ requires_ids:
 - coil_winding_machine_v0
 resource_requirements:
 - machine_id: coil_winding_machine
-  amount: 1.0
+  qty: 1.0
   unit: unit
 - machine_id: labor_bot_general_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: copper_patterned_substrate_v0
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: copper_patterned_substrate_v0
 notes: 'Photolithographic winding: uses a winding machine after photolithographic patterning to form a copper coil on a patterned
   substrate. Conservative estimates.'
 process_type: continuous

@@ -22,11 +22,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: Energy per kg feed; coarse estimate based on olivine_beneficiation_v0
 time_model:
   type: linear_rate
-  hr_per_kg: 0.01
+  rate: 100.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
 notes: Separation of pyroxene from other minerals; yields pyroxene concentrate and tailings.
 process_type: continuous

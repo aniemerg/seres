@@ -1,6 +1,7 @@
 id: heliostat_frame_fabrication_v0
 name: Heliostat frame fabrication (placeholder)
 kind: process
+process_type: batch
 inputs:
   - item_id: steel_plate_or_sheet
     qty: 400.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder fabricate steel plate into heliostat_frame_v0; mass balance coarse."

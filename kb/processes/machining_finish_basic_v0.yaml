@@ -3,8 +3,14 @@ kind: process
 name: Machining and finishing (basic)
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: machined_part_raw
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: machined_part_raw
+  qty: 1.0
+  unit: kg
 requires_ids:
 - milling_machine_general_v0
 - cutting_tools_general
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: machined_part_raw
   notes: spindle motor (~5 kW) plus coolant and axis drives
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
+  rate: 3.333
+  rate_unit: kg/hr
+  scaling_basis: machined_part_raw
   notes: material removal rate dependent on cut depth and feed
 notes: Generic machining/finishing placeholder; add specifics later.
 process_type: continuous

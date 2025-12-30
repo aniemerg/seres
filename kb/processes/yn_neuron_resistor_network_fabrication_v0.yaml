@@ -14,15 +14,18 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: assembly_station
-  amount: 1.0
+  qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: resistor_wire_wound_v0
 time_model:
   type: linear_rate
   rate: 0.2
   rate_unit: kg/hr
+  scaling_basis: resistor_wire_wound_v0
 notes: Fabrication path converting resistor_wire_wound_v0 into yn_neuron_resistor_network_v0 as seed neural resistor network.
   Placeholder path for modeling.
 process_type: continuous

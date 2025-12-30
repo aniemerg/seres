@@ -4,24 +4,29 @@ name: High-temperature additive synthesis v0
 layer_tags:
 - layer_4
 - layer_5
-inputs: []
+inputs:
+  - item_id: chemical_reactant_a
+    qty: 0.04
+    unit: kg
 outputs:
-- item_id: high_temp_additive_v0
-  qty: 0.05
-  unit: kg
+  - item_id: high_temp_additive_v0
+    qty: 0.05
+    unit: kg
 byproducts: []
 resource_requirements:
-- machine_id: chemical_reactor_basic_v0
-  qty: 1.0
-  unit: hr
+  - machine_id: chemical_reactor_basic
+    qty: 1.0
+    unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 3.0
+  unit: kWh/kg
+  scaling_basis: chemical_reactant_a
   notes: Placeholder energy for additive synthesis
 time_model:
   type: linear_rate
-  setup_hr: 0.0
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: chemical_reactant_a
 notes: Placeholder synthesis for high_temp_additive_v0 from generic chemical inputs.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: crimping_and_termination_v0
 kind: process
 name: Crimping and termination
+process_type: batch
 layer_tags:
   - layer_7
 inputs:
@@ -22,11 +23,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: "Bench-top crimp tools and continuity tester power."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.6
   notes: "Cut-strip-crimp for harness leads including continuity checks."
 notes: "Crimps terminals onto pre-cut wires and performs basic termination/continuity checks. Supports downstream harness assembly."

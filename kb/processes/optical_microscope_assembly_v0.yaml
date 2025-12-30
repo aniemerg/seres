@@ -1,6 +1,7 @@
 id: optical_microscope_assembly_v0
 name: Optical microscope assembly v0
 kind: process
+process_type: batch
 inputs:
   - item_id: glass_lens_objective_set
     qty: 1.0
@@ -36,9 +37,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
 notes: "Placeholder optical microscope assembly; minimal path to unblock no_recipe gap for optical_microscope_v0."

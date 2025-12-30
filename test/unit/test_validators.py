@@ -45,6 +45,12 @@ class MockKBLoader:
 
         self.items = {
             "motor": {"mass_kg": 12.0},
+            "steel_ingot": {"mass_kg": 1.0},
+            "steel_plate": {"mass_kg": 1.0},
+        }
+
+        self.processes = {
+            "regolith_mining_highlands_v0": {"id": "regolith_mining_highlands_v0"},
         }
 
     def get_unit_conversion(self, from_unit, to_unit):
@@ -55,6 +61,9 @@ class MockKBLoader:
 
     def get_item(self, item_id):
         return self.items.get(item_id)
+
+    def get_process(self, process_id):
+        return self.processes.get(process_id)
 
 
 @pytest.fixture
@@ -656,6 +665,193 @@ class TestRecipeValidation:
         # No errors
         errors = [i for i in issues if i.level == ValidationLevel.ERROR]
         assert len(errors) == 0
+
+
+# =============================================================================
+# Reference Validation Tests (Category 6)
+# =============================================================================
+
+class TestReferenceValidation:
+    """Test reference validation (ADR-017 Category 6)."""
+
+    def test_input_item_not_found_warning(self, converter):
+        """Process with non-existent input item generates WARNING."""
+        process = {
+            "id": "test_process",
+            "kind": "process",
+            "process_type": "continuous",
+            "inputs": [
+                {"item_id": "nonexistent_item", "qty": 1.0, "unit": "kg"}
+            ],
+            "outputs": [
+                {"item_id": "steel_ingot", "qty": 1.0, "unit": "kg"}
+            ],
+            "time_model": {
+                "type": "linear_rate",
+                "rate": 10.0,
+                "rate_unit": "kg/hr",
+                "scaling_basis": "nonexistent_item"
+            }
+        }
+
+        issues = validate_process(process, converter)
+
+        # Should have WARNING for nonexistent input item
+        warnings = [i for i in issues if i.rule == "input_item_not_found"]
+        assert len(warnings) == 1
+        assert warnings[0].level == ValidationLevel.WARNING
+        assert warnings[0].category == "reference"
+        assert "nonexistent_item" in warnings[0].message
+
+    def test_output_item_not_found_warning(self, converter):
+        """Process with non-existent output item generates WARNING."""
+        process = {
+            "id": "test_process",
+            "kind": "process",
+            "process_type": "continuous",
+            "inputs": [
+                {"item_id": "steel_ingot", "qty": 1.0, "unit": "kg"}
+            ],
+            "outputs": [
+                {"item_id": "nonexistent_output", "qty": 1.0, "unit": "kg"}
+            ],
+            "time_model": {
+                "type": "linear_rate",
+                "rate": 10.0,
+                "rate_unit": "kg/hr",
+                "scaling_basis": "steel_ingot"
+            }
+        }
+
+        issues = validate_process(process, converter)
+
+        # Should have WARNING for nonexistent output item
+        warnings = [i for i in issues if i.rule == "output_item_not_found"]
+        assert len(warnings) == 1
+        assert warnings[0].level == ValidationLevel.WARNING
+        assert "nonexistent_output" in warnings[0].message
+
+    def test_resource_machine_not_found_warning(self, converter):
+        """Process with non-existent machine generates WARNING."""
+        process = {
+            "id": "test_process",
+            "kind": "process",
+            "process_type": "batch",
+            "inputs": [
+                {"item_id": "steel_ingot", "qty": 1.0, "unit": "kg"}
+            ],
+            "outputs": [
+                {"item_id": "steel_plate", "qty": 1.0, "unit": "kg"}
+            ],
+            "resource_requirements": [
+                {"machine_id": "nonexistent_machine", "qty": 1.0, "unit": "hr"}
+            ],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0
+            }
+        }
+
+        issues = validate_process(process, converter)
+
+        # Should have WARNING for nonexistent machine
+        warnings = [i for i in issues if i.rule == "resource_machine_not_found"]
+        assert len(warnings) == 1
+        assert warnings[0].level == ValidationLevel.WARNING
+        assert "nonexistent_machine" in warnings[0].message
+
+    def test_template_process_skips_reference_validation(self, converter):
+        """Process with is_template: true skips reference validation."""
+        process = {
+            "id": "template_process",
+            "kind": "process",
+            "process_type": "batch",
+            "is_template": True,  # Template flag
+            "inputs": [
+                {"item_id": "wet_material", "qty": 1.0, "unit": "kg"}
+            ],
+            "outputs": [
+                {"item_id": "dried_material", "qty": 1.0, "unit": "kg"}
+            ],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0
+            }
+        }
+
+        issues = validate_process(process, converter)
+
+        # Should NOT have reference warnings (template processes are exempt)
+        ref_warnings = [i for i in issues if i.category == "reference"]
+        assert len(ref_warnings) == 0
+
+    def test_recipe_process_not_found_error(self, converter):
+        """Recipe with non-existent process_id generates ERROR."""
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "steel_plate",
+            "steps": [
+                {"process_id": "nonexistent_process"}
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+
+        # Should have ERROR for nonexistent process
+        errors = [i for i in issues if i.rule == "process_not_found"]
+        assert len(errors) == 1
+        assert errors[0].level == ValidationLevel.ERROR
+        assert errors[0].category == "reference"
+        assert "nonexistent_process" in errors[0].message
+
+    def test_recipe_with_valid_process_no_error(self, converter):
+        """Recipe with existing process_id has no reference errors."""
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "steel_plate",
+            "steps": [
+                {"process_id": "regolith_mining_highlands_v0"}  # Real process
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+
+        # Should NOT have process_not_found errors
+        errors = [i for i in issues if i.rule == "process_not_found"]
+        assert len(errors) == 0
+
+    def test_byproduct_item_not_found_warning(self, converter):
+        """Process with non-existent byproduct item generates WARNING."""
+        process = {
+            "id": "test_process",
+            "kind": "process",
+            "process_type": "continuous",
+            "inputs": [
+                {"item_id": "steel_ingot", "qty": 1.0, "unit": "kg"}
+            ],
+            "outputs": [
+                {"item_id": "steel_plate", "qty": 1.0, "unit": "kg"}
+            ],
+            "byproducts": [
+                {"item_id": "nonexistent_byproduct", "qty": 0.1, "unit": "kg"}
+            ],
+            "time_model": {
+                "type": "linear_rate",
+                "rate": 10.0,
+                "rate_unit": "kg/hr",
+                "scaling_basis": "steel_ingot"
+            }
+        }
+
+        issues = validate_process(process, converter)
+
+        # Should have WARNING for nonexistent byproduct item
+        warnings = [i for i in issues if i.rule == "byproduct_item_not_found"]
+        assert len(warnings) == 1
+        assert warnings[0].level == ValidationLevel.WARNING
+        assert "nonexistent_byproduct" in warnings[0].message
 
 
 # =============================================================================

@@ -1,5 +1,6 @@
 id: ffc_temperature_optimization_v0
 kind: process
+process_type: batch
 name: FFC Temperature Optimization
 layer_tags:
 - layer_4
@@ -11,10 +12,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: fixed_energy
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: |
   Placeholder process for temperature optimization within the FFC (Molten Regolith Electrolysis) workflow.

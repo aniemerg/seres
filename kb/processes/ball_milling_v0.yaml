@@ -1,6 +1,7 @@
 id: ball_milling_v0
 kind: process
 name: Ball milling
+process_type: batch
 layer_tags:
   - layer_5
   - layer_6
@@ -23,9 +24,10 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 4.08
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
 notes: "Ball milling process for grinding and mixing powders; milling uses a rotating mill with media; ~0.02 kg dust_fines lost per kg input."

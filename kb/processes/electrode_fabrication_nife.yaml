@@ -1,5 +1,6 @@
 id: electrode_fabrication_nife
 kind: process
+process_type: batch
 name: Ni-Fe electrode fabrication
 layer_tags:
   - layer_6
@@ -23,11 +24,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.5
-  notes: "Mixing, pressing, and drying energy for electrode plaques."
+  unit: kWh
+  notes: "Mixing, pressing, and drying energy for electrode plaques (~1 kg batch)."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Mix, press, and dry electrode plaques."
 notes: "Placeholder Ni-Fe electrode fabrication: mix active powders with binder, press onto nickel/steel mesh current collectors, and dry."

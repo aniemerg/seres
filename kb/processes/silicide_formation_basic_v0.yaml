@@ -17,11 +17,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 8.0
+  unit: kWh/kg
+  scaling_basis: import_magnesium_powder
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: import_magnesium_powder
 notes: Placeholder synthesis of Mg2Si from Mg and Si powders. Stoichiometric, with minimal waste.
 process_type: continuous

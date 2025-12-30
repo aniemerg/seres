@@ -1,6 +1,7 @@
 id: ph_sensor_glass_electrode_fabrication_v0
 name: Glass electrode pH sensor fabrication v0
 kind: process
+process_type: batch
 inputs:
   - item_id: glass_envelope_vacuum_tube_v0
     qty: 1.0
@@ -16,9 +17,11 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
+  notes: "Assembly and sealing energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Assembles glass envelope with electrode elements to form a glass pH sensor electrode. Placeholder estimates."

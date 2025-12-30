@@ -18,12 +18,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: steel_sheet_1mm
 time_model:
   type: linear_rate
   rate: 0.1
   rate_unit: kg/hr
+  scaling_basis: steel_sheet_1mm
 notes: Basic lamination of steel sheet into laminated iron core piece; placeholder parameters for modeling.
 assumptions: 'Uses stamping press basic and labor to form a laminated iron core from a small sheet.
 

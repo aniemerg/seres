@@ -19,10 +19,14 @@ resource_requirements:
   amount: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 50.0
+  unit: kWh/kg
+  scaling_basis: cut_parts
 time_model:
   type: linear_rate
-  hr_per_kg: 1.0
+  rate: 1.0
+  rate_unit: kg/hr
+  scaling_basis: cut_parts
 notes: Machining to form coolant pump system from cut_parts
 process_type: continuous

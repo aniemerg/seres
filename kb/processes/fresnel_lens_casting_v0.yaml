@@ -3,6 +3,7 @@ kind: process
 name: Fresnel lens casting
 layer_tags:
   - layer_6
+process_type: batch
 inputs:
   - item_id: fused_silica_glass
     qty: null
@@ -20,11 +21,12 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.5
-  notes: "Glass melting and casting energy per kg of lens"
+  unit: kWh
+  notes: "Glass melting and casting energy per batch of lens material"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: "Melt, pour, anneal, and rough grind cycle"
 notes: Cast fused silica into Fresnel lens segments using precision molds; includes anneal and initial surface finishing before final grinding/polish.

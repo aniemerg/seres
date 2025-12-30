@@ -1,10 +1,14 @@
 """
+DEPRECATED: This file is deprecated and should be migrated to src/
+
 Queue management helpers.
 
 NOTE: The work queue is now rebuilt from scratch on each indexer run,
 so prune() is largely obsolete - gaps are automatically removed when fixed.
 The pop() function can still be used for manual task-by-task workflows,
 but popped items will reappear on next index if still unresolved.
+
+TODO: Migrate to src/kb_core/queue_manager.py
 """
 from __future__ import annotations
 

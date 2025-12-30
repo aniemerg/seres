@@ -1,6 +1,7 @@
 id: fractional_distillation_v0
 kind: process
 name: Fractional distillation v0
+process_type: batch
 layer_tags:
   - layer_4
   - layer_5
@@ -23,11 +24,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.0
-  notes: "Energy for heating, vaporization, and condensation"
+  unit: kWh
+  notes: "Energy for heating, vaporization, and condensation (4.0 kWh/kg * 1.0 kg)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: "Multi-stage distillation with reflux for high purity"
 notes: |

@@ -1,6 +1,7 @@
 id: electrolyte_prep_koh
 kind: process
 name: KOH electrolyte preparation
+process_type: batch
 layer_tags:
   - layer_4
 inputs:
@@ -21,11 +22,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 0.2
-  notes: Mixing and dissolution energy
+  type: fixed_per_batch
+  value: 0.6
+  unit: kWh
+  notes: Mixing and dissolution energy (3 kg KOH batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Dissolution and mixing time
 notes: |

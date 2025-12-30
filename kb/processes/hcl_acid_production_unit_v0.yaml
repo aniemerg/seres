@@ -4,6 +4,7 @@ name: HCl acid production unit v0
 layer_tags:
 - layer_3
 - layer_4
+process_type: batch
 inputs:
 - item_id: chlorine_gas
   qty: 0.98
@@ -20,9 +21,10 @@ resource_requirements:
   qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Seed path to produce hcl_acid_production_v0; mirrors hydrochloric_acid_synthesis_v0."

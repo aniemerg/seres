@@ -26,6 +26,12 @@ def main():
     subparsers = parser.add_subparsers(dest='command', help='Available commands')
 
     # =========================================================================
+    # SIMULATION commands
+    # =========================================================================
+    from src.simulation.cli import add_sim_subcommands
+    add_sim_subcommands(subparsers)
+
+    # =========================================================================
     # INDEX command
     # =========================================================================
     index_parser = subparsers.add_parser(
@@ -179,6 +185,13 @@ def main():
         elif args.command == 'closure':
             return analyze_closure(args)
 
+        elif args.command == 'sim':
+            from src.simulation.cli import run_sim_command
+            from src.kb_core.kb_loader import KBLoader
+            kb_loader = KBLoader(Path('kb'), use_validated_models=False)
+            kb_loader.load_all()
+            return run_sim_command(args, kb_loader)
+
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
         import traceback
@@ -229,8 +242,9 @@ def validate_item(args):
             print(f"Error: Recipe '{item_id}' not found")
             return 1
 
-        # Validate recipe
-        issues = validate_recipe(item_data)
+        # Validate recipe (with converter for reference validation)
+        converter = UnitConverter(kb_loader)
+        issues = validate_recipe(item_data, converter)
 
     else:
         print(f"Error: Unsupported item type '{item_type}'")

@@ -12,12 +12,13 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.05
-  notes: ~5% conversion losses in power electronics per kWh processed
+  unit: kWh
+  notes: ~5% conversion losses in power electronics per batch
 time_model:
-  type: linear_rate
-  hr_per_kg: 0.01
-  notes: continuous operation, minimal time overhead per kWh
+  type: batch
+  hr_per_batch: 0.01
+  notes: continuous operation, minimal time overhead per batch
 notes: Conditioning/voltage regulation placeholder for generated power.
-process_type: continuous
+process_type: batch

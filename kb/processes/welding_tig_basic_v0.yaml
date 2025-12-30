@@ -14,12 +14,13 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: TIG welding arc power and inert gas flow
 time_model:
-  type: linear_rate
-  hr_per_kg: 1.5
+  type: batch
+  hr_per_batch: 1.5
   notes: Setup, cleaning, tack welding, full welding passes with filler rod, post-weld inspection
 notes: 'TIG (Tungsten Inert Gas) welding process for precision joining.
 
@@ -34,4 +35,4 @@ notes: 'TIG (Tungsten Inert Gas) welding process for precision joining.
   Required for leak-tight joints in pressure vessels and cryogenic equipment.
 
   '
-process_type: continuous
+process_type: batch

@@ -29,9 +29,12 @@ time_model:
   notes: Lower rate than mare mining due to drilling ice-cemented material
   rate: 50
   rate_unit: kg/hr
+  scaling_basis: regolith_polar_psc
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_polar_psc
   notes: 'Higher energy than loose regolith mining (0.05 kWh/kg for mare).
 
     Drilling frozen ice-cemented regolith similar to drilling concrete.

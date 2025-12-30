@@ -25,12 +25,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: aluminum_wire
   notes: motor-driven winding spindle with tensioning control
 time_model:
   type: linear_rate
-  hr_per_kg: 1.5
+  rate: 0.6667
+  rate_unit: kg/hr
+  scaling_basis: aluminum_wire
   notes: precision winding with layer insulation and termination
 notes: Wind electrical coils for motors, transformers, inductors, and induction heaters. Includes wire tensioning, layer insulation,
   and termination.

@@ -1,6 +1,7 @@
 id: heating_element_resistive_fabrication_v0
 kind: process
 name: Fabrication of resistive heating element (placeholder)
+process_type: batch
 layer_tags:
 - layer_5
 inputs:
@@ -14,13 +15,14 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.5
+  qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
 notes: Placeholder fabrication of resistive heating element from alloy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder process; coarse estimation for element production."

@@ -4,6 +4,7 @@ kind: process
 layer_tags:
 - layer_7
 - layer_8
+process_type: batch
 inputs:
 - item_id: hydraulic_pump_basic
   qty: 1.0
@@ -27,9 +28,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Assemble hydraulic pump unit from basic pump, reservoir, and motor assembly."

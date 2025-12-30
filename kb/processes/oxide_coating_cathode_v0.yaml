@@ -4,6 +4,7 @@ name: Oxide coating cathode v0
 layer_tags:
 - layer_5
 - layer_6
+process_type: batch
 inputs:
 - item_id: tube_electrode_set
   qty: 0.007
@@ -23,10 +24,11 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Coating cathode with oxide layer (BaO precursor) as part of vacuum-tube cathode production. Placeholder values; used to enable mass balance in the early model."
 source_tags: [ellery_seed, ai_guess]

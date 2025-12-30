@@ -17,11 +17,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: magnet_wire_copper
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: magnet_wire_copper
 notes: Basic production of electrical wire and connectors from copper wire and pre-cut lengths; placeholder estimates.
 process_type: continuous

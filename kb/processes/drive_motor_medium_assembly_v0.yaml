@@ -1,5 +1,6 @@
 id: drive_motor_medium_assembly_v0
 kind: process
+process_type: batch
 name: Drive motor (medium) assembly
 layer_tags:
   - layer_5
@@ -47,11 +48,12 @@ resource_requirements:
     unit: hr
     notes: "Assembly labor for larger motor"
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 1.5
+  unit: kWh
   notes: "Assembly tools, lifting, and test run energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: "Assemble stator/rotor, install shaft, bearings, housing, and perform test run. Longer than small motor due to size and weight."
 notes: |

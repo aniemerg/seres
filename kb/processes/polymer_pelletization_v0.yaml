@@ -18,11 +18,14 @@ resource_requirements:
   qty: 0.25
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.15
+  unit: kWh/kg
+  scaling_basis: polymer_printing_feedstock
 time_model:
   type: linear_rate
   rate: 6.0
   rate_unit: kg/hr
+  scaling_basis: polymer_printing_feedstock
 notes: Baseline polymer pelletization converting feedstock to plastic pellets with minimal losses.
 process_type: continuous

@@ -21,12 +21,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: powder_metal_or_ceramic
   notes: High temperature heating below melting point, typically 800-1400°C depending on material
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: powder_metal_or_ceramic
   notes: Pressing, furnace heat-up, sintering hold time, controlled cooling
 notes: Sintering process for consolidating powder materials (metal, ceramic) into solid parts by heating below melting point.
   Diffusion bonding creates strong structures.

@@ -24,11 +24,13 @@ resource_requirements:
   unit: hr
   notes: Manual hydraulic crimping tool (3 kg part, not 150 kg station)
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: Approximate energy per hose crimp operation
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
   notes: Single crimp operation for one hose
 notes: "Crimp fittings onto hose ends using a hydraulic crimping tool. Produces a crimped hose assembly."
+process_type: batch

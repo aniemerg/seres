@@ -1,5 +1,6 @@
 id: tank_set_assembly_v0
 kind: process
+process_type: batch
 name: Tank set assembly v0
 layer_tags:
 - layer_6
@@ -26,16 +27,17 @@ outputs:
   unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 - machine_id: assembly_tools_basic
-  amount: 0.5
+  qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.5
+  unit: kWh
   notes: Assembly energy proxy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Assemble spun tank shell with heaters, agitation, ventilation, and fasteners into a chemical bath tank set."

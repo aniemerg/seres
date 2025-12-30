@@ -19,12 +19,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_mare
 time_model:
   type: linear_rate
   rate: 50.0
   rate_unit: kg/hr
+  scaling_basis: regolith_lunar_mare
 notes: Basic material preparation operations to ready regolith or ore feedstock for processing. Includes cleaning (removing
   dirt, scale, oxidation), sizing (crushing, cutting to length), drying (moisture removal), and sorting (grading by size or
   quality). 5% material loss typical from cleaning waste and sizing operations. Used as preliminary step before melting, forming,

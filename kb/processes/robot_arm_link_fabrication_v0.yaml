@@ -1,5 +1,6 @@
 id: robot_arm_link_fabrication_v0
 kind: process
+process_type: batch
 name: Robot arm link fabrication v0
 layer_tags:
   - layer_6
@@ -23,10 +24,11 @@ resource_requirements:
     qty: 8.0
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 35.0
+  unit: kWh
   notes: "Machining energy for aluminum box beam arm link"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
 notes: "Machine robot arm link (7.5 kg) from ISRU aluminum. Box beam structure with motor mounting features."

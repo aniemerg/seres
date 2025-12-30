@@ -1,6 +1,7 @@
 id: crystallization_unit_assembly_v0
 kind: process
 name: Crystallization unit assembly
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -25,9 +26,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Final assembly of crystallization unit from BOM components."

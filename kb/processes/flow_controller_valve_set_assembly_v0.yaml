@@ -4,6 +4,7 @@ name: Flow controller valve set assembly
 layer_tags:
 - layer_6
 - layer_7
+process_type: batch
 inputs:
 - item_id: valve_body_machined
   qty: 0.8
@@ -24,7 +25,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  total_energy_kwh: 0.3
+  type: fixed_per_batch
+  value: 0.3
+  unit: kWh
 time_model:
-  total_time_hr: 0.8
+  type: batch
+  hr_per_batch: 0.8
 notes: "Basic assembly operation to produce a flow controller valve set from subcomponents or pre-machined parts. Placeholder for modeling."

@@ -1,6 +1,7 @@
 id: tungsten_carbonyl_synthesis_v0
 kind: process
 name: Tungsten carbonyl synthesis
+process_type: batch
 inputs:
   - item_id: tungsten_powder
     qty: 1.0
@@ -14,12 +15,13 @@ outputs:
     unit: kg
 resource_requirements:
   - machine_id: gas_handling_loop_v0
-    amount: 1.0
+    qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Placeholder synthesis of W(CO)6 from tungsten powder and CO. Uses imported powder feedstock for now to avoid circular dependency with tungsten_metal_pure."

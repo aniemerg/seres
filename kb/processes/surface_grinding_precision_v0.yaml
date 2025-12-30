@@ -4,8 +4,14 @@ name: Surface grinding (precision)
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
-outputs: []
+inputs:
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: finished_part_deburred
+    qty: 1.0
+    unit: kg
 requires_ids:
 - surface_grinder
 resource_requirements:
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: rough_part
   notes: grinding wheel motor and coolant system for precision surface finishing
 time_model:
   type: linear_rate
-  hr_per_kg: 2.0
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: rough_part
   notes: precision grinding with fine passes and dimensional verification
 notes: Precision surface grinding for achieving tight tolerances and smooth surface finishes. Used for dies, molds, precision
   guides, and bearing surfaces. Typical tolerances ±0.01mm with Ra < 0.4μm finish.

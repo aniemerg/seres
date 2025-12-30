@@ -2,30 +2,33 @@ id: shear_metal_cutting_v0
 name: Shear metal cutting
 kind: process
 layer_tags:
-- layer_6
+  - layer_6
 inputs:
-- item_id: steel_block_raw_v0
-  qty: 10.0
-  unit: kg
+  - item_id: steel_block_raw_v0
+    qty: 10.0
+    unit: kg
 outputs:
-- item_id: steel_block_sheared_v0
-  qty: 9.5
-  unit: kg
+  - item_id: steel_block_sheared_v0
+    qty: 9.5
+    unit: kg
 byproducts:
-- item_id: dust_fines_v0
-  qty: 0.5
-  unit: kg
+  - item_id: dust_fines_v0
+    qty: 0.5
+    unit: kg
 resource_requirements:
-- machine_id: metal_shear_or_saw
-  amount: 1.0
-  unit: unit
+  - machine_id: metal_shear_or_saw
+    qty: 1.0
+    unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.4
+  unit: kWh/kg
+  scaling_basis: steel_block_raw_v0
   notes: Placeholder shear operation energy estimate
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: steel_block_raw_v0
 notes: Placeholder shear operation; derived from generic cutting processes to enable KB modeling
 process_type: continuous

@@ -1,11 +1,18 @@
 id: assembly_process_general_v0
 kind: process
 name: Assembly process (general)
+process_type: continuous
 layer_tags:
 - layer_7
 - layer_8
-inputs: []
-outputs: []
+inputs:
+- item_id: assembly_components
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: assembled_equipment
+  qty: 1.0
+  unit: kg
 requires_ids:
 - assembly_station
 resource_requirements:
@@ -13,13 +20,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: assembly_components
   notes: Placeholder energy per unit assembled; to be refined
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  notes: Placeholder time per kg output; depends on BOM
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: assembly_components
+  notes: Placeholder time per kg output. Rate = 1/0.5 = 2.0 kg/hr
 notes: Generic assembly operation used as a delegating step for combining subassemblies into a final product. This is a placeholder
   to enable modeling; specifics to be provided by recipes.
-process_type: continuous

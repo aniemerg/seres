@@ -4,8 +4,14 @@ name: Surface treatment (basic)
 layer_tags:
 - layer_5
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: formed_metal_part
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_part_surface_treated
+  qty: 1.0
+  unit: kg
 requires_ids:
 - surface_treatment_station
 resource_requirements:
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: formed_metal_part
   notes: chemical bath heating, pumping, and ventilation for surface finishing operations
 time_model:
   type: linear_rate
-  hr_per_kg: 1.2
+  rate: 0.833
+  rate_unit: kg/hr
+  scaling_basis: formed_metal_part
   notes: cleaning, pickling, degreasing, or coating application with drying time
 notes: Basic surface treatment processes including pickling (acid cleaning to remove scale), degreasing, rust removal, passivation,
   and simple protective coatings. Prepares surfaces for further processing or improves corrosion resistance.

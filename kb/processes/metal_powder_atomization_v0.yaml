@@ -14,11 +14,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 2.0
+  unit: kWh/kg
+  scaling_basis: metal_powder_v0
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: metal_powder_v0
 notes: 'Placeholder atomization process: converts metal_powder_v0 to metal_powder_atomization_v0.'
 process_type: continuous

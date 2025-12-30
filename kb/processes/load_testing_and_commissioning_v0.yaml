@@ -1,10 +1,17 @@
 id: load_testing_and_commissioning_v0
 kind: process
+is_template: true
 name: Load testing and commissioning
 layer_tags:
   - layer_7
-inputs: []
-outputs: []
+inputs:
+  - item_id: system_under_test
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: system_commissioned
+    qty: 1.0
+    unit: unit
 requires_ids:
   - test_bench_electrical
   - power_conditioning_basic_v0
@@ -13,11 +20,13 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: "Test runs under load; rough energy placeholder"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Setup, test cycle, inspection, and sign-off"
+process_type: batch
 notes: Commissioning step exercising systems under load, verifying performance and safety interlocks before deployment.

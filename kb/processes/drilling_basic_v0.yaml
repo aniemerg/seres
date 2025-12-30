@@ -1,5 +1,6 @@
 id: drilling_basic_v0
 kind: process
+process_type: batch
 name: Drilling (Basic)
 layer_tags:
 - layer_6
@@ -9,7 +10,7 @@ inputs:
     qty: 1.0
     unit: kg
 outputs:
-  - item_id: formed_metal_part
+  - item_id: metal_part_drilled
     qty: 0.995
     unit: kg
 byproducts:
@@ -23,10 +24,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.25
-  notes: "Energy per kilogram of metal drilled; includes motor operation and coolant."
+  unit: kWh
+  notes: "Energy per drilling operation (batch); includes motor operation and coolant. Fixed per batch as energy depends on hole pattern, not part mass."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Basic drilling operation on a formed metal part; hole pattern is generic and to be refined."

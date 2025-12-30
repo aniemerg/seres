@@ -14,11 +14,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
+  unit: kWh/kg
+  scaling_basis: silica_purified
   notes: Estimated energy for crystallization of purified silica into quartz crystal.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.6
+  rate: 1.667
+  rate_unit: kg/hr
+  scaling_basis: silica_purified
 notes: 'Quartz crystal synthesis: placeholder process to convert purified silica into quartz crystals for sensors.'
 process_type: continuous

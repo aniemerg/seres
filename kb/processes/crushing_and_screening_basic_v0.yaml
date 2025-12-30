@@ -3,8 +3,14 @@ kind: process
 name: Crushing and screening (basic)
 layer_tags:
 - layer_3
-inputs: []
-outputs: []
+inputs:
+- item_id: anorthite_ore
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: regolith_crushed
+  qty: 1.0
+  unit: kg
 requires_ids:
 - rock_crusher_basic
 - vibrating_screen_v0
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: anorthite_ore
   notes: Crusher and screen energy per kg
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
-  notes: Throughput including loading/screening
-notes: Size reduction and screening of rock feedstocks to aggregate fractions.
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: anorthite_ore
+  notes: Throughput including loading/screening (0.05 hr per kg = 20 kg/hr)
+notes: Size reduction and screening of anorthite/rock feedstocks to aggregate fractions.
 process_type: continuous

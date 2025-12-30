@@ -18,14 +18,16 @@ requires_ids:
   - stewart_platform_calibrator
 resource_requirements:
   - machine_id: labor_bot_general_v0
-    qty: null
+    qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Metrology equipment and positioning system power"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: "Stewart platform calibration, optical alignment verification, focal point adjustment"
 notes: Precision alignment of solar concentrators using Stewart platform and optical metrology. Ensures optimal focusing for thermionic or thermal applications.
+process_type: batch

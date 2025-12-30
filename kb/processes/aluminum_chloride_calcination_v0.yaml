@@ -1,5 +1,6 @@
 id: aluminum_chloride_calcination_v0
 kind: process
+process_type: batch
 name: Aluminum chloride calcination to alumina
 layer_tags:
   - layer_4
@@ -25,11 +26,12 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
-  notes: Heating to 400°C for thermal decomposition
+  unit: kWh
+  notes: Heating 1 kg batch to 400°C for thermal decomposition
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Calcination and acid vapor recovery
 notes: |

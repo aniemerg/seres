@@ -3,8 +3,18 @@ kind: process
 name: Sheet metal cutting (basic)
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: sheet_metal_or_structural_steel
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_sheet_or_plate
+  qty: 0.98
+  unit: kg
+byproducts:
+- item_id: metal_scrap
+  qty: 0.02
+  unit: kg
 requires_ids:
 - assembly_tools_basic
 resource_requirements:
@@ -12,13 +22,17 @@ resource_requirements:
   qty: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: sheet_metal_or_structural_steel
   notes: Shear/saw energy for cutting sheet stock.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.4
-  notes: Layout, fixturing, and cut execution per batch.
+  rate: 2.5
+  rate_unit: kg/hr
+  scaling_basis: sheet_metal_or_structural_steel
+  notes: Layout, fixturing, and cut execution per batch (0.4 hr per kg = 2.5 kg/hr).
 notes: Basic cutting/shearing of sheet metal into panels or blanks for enclosures, ducts, and tanks; assumes manual/labor-bot
   operation with simple shears or saws.
 process_type: continuous

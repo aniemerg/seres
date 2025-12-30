@@ -14,11 +14,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 3.0
+  unit: kWh/kg
+  scaling_basis: aramid_precursor_v0
 time_model:
   type: linear_rate
   rate: 1.5
   rate_unit: kg/hr
+  scaling_basis: aramid_precursor_v0
 notes: Local Kevlar fabric synthesis; replaces import placeholder.
 process_type: continuous

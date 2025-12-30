@@ -16,18 +16,22 @@ requires_ids:
 - enclosure_assembly_basic_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.6
+  qty: 0.6
   unit: hr
 - machine_id: assembly_station
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.9
+  unit: kWh
   notes: Panel assembly energy for wiring and mounting
 time_model:
   type: linear_rate
-  hr_per_unit: 0.8
+  rate: 1.25
+  rate_unit: unit/hr
+  scaling_basis: power_distribution_panel_basic
+  notes: "Assembly time: 0.8 hr per panel"
 notes: Assembles formed sheet metal parts into a complete power distribution panel. Includes mounting breakers, wiring harness
   integration, and basic functional test.
 process_type: continuous

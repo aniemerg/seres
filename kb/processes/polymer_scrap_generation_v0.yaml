@@ -9,9 +9,11 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
+process_type: batch
 notes: "Placeholder process to generate polymer scrap as a supply stream for recycling; placeholder for ISRU scrap loop."

@@ -1,0 +1,21 @@
+id: recipe_aluminum_part_base_v0
+kind: recipe
+target_item_id: aluminum_part_base
+variant_id: v0
+steps:
+  - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: aluminum_sheet_2mm
+        qty: 1.0
+        unit: kg
+        notes: "Aluminum sheet stock for forming and cutting"
+    outputs:
+      - item_id: aluminum_part_base
+        qty: 0.9
+        unit: kg
+        notes: "Finished uncoated aluminum part"
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: "Cut, bend, and deburr aluminum sheet into base part"
+assumptions: Aluminum sheet stock is available at required thickness.
+notes: "Base uncoated aluminum part fabricated from sheet stock."

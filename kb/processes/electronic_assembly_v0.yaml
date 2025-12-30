@@ -1,6 +1,7 @@
 id: electronic_assembly_v0
 kind: process
 name: Electronic assembly v0
+process_type: batch
 layer_tags:
   - layer_7
   - layer_8
@@ -24,9 +25,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
 notes: "Electronic assembly combining populated PCB and enclosure; includes wiring and connectors. Mass balance closed with assembly_loss byproduct."

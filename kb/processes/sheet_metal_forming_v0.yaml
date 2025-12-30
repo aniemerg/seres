@@ -19,12 +19,16 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: steel_plate_or_sheet
   notes: Press brake/bending energy and handling.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
+  rate: 3.33
+  rate_unit: kg/hr
+  scaling_basis: steel_plate_or_sheet
   notes: Setup plus multiple forming passes for brackets and panels.
 notes: Forms cut steel sheet/plate into brackets, enclosures, and channels using press brake or rollers. Includes allowance
   for trimming and refitting.

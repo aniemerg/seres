@@ -16,12 +16,15 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.25
   unit: hr
-energy_model:
-  type: kWh_per_unit_output
-  value: 0.3
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
+energy_model:
+  type: per_unit
+  value: 0.3
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
 notes: Dummy fabrication process to generate connector_pin_header (alias); placeholder
 process_type: continuous

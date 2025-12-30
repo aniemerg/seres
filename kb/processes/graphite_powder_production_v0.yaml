@@ -18,11 +18,14 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.4
+  unit: kWh/kg
+  scaling_basis: graphite_block_material_v0
 time_model:
   type: linear_rate
   rate: 5.0
   rate_unit: kg/hr
+  scaling_basis: graphite_block_material_v0
 notes: Crush/mill graphite_block_material_v0 to graphite_powder with ~5% fines loss.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: ball_bearing_machining_v0
 name: Machining ball bearing from steel ball v0
 kind: process
+process_type: batch
 inputs:
   - item_id: bearing_ball_steel
     qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Basic forming/finishing to convert a steel ball into ball_bearing_steel_v0. Placeholder for early KB modeling."

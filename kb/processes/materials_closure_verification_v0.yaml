@@ -1,6 +1,7 @@
 id: materials_closure_verification_v0
 kind: process
 name: Materials closure verification v0
+process_type: batch
 inputs: []
 outputs:
 - item_id: materials_closure_verification_v0
@@ -11,9 +12,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Placeholder process to verify materials closure; outputs materials_closure_verification_v0.

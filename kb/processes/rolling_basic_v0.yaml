@@ -20,12 +20,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: metal_ingot
   notes: Rolling mill power and reheating between passes
 time_model:
   type: linear_rate
-  hr_per_kg: 0.8
+  rate: 1.25
+  rate_unit: kg/hr
+  scaling_basis: metal_ingot
   notes: Hot rolling with multiple passes, includes reheating
 notes: Metal rolling process to convert ingots or billets into sheet, plate, or strip. Hot rolling reduces thickness through
   compression between rotating cylinders. Multiple passes with intermediate reheating produce desired thickness and surface

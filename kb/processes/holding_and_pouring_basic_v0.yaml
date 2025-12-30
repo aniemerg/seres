@@ -1,10 +1,17 @@
 id: holding_and_pouring_basic_v0
 kind: process
 name: Holding and pouring (basic)
+process_type: batch
 layer_tags:
   - layer_5
-inputs: []
-outputs: []
+inputs:
+  - item_id: molten_glass
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: poured_glass_mold
+    qty: 10.0
+    unit: kg
 requires_ids:
   - glass_furnace_v0
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 0.2
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: "Hold and pour energy per batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Hold at temperature and pour to molds or fiber bushing"
 notes: Holding molten glass/basalt at temperature and pouring to downstream casting or fiberizing steps.

@@ -23,14 +23,17 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: electrical_wire_and_connectors
   notes: Hand tools and crimping equipment power
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
-  notes: Cut wires to length, strip ends, crimp connectors, bundle wires, apply cable ties and sleeving, label, continuity
-    test
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: electrical_wire_and_connectors
+  notes: Cut wires to length, strip ends, crimp connectors, bundle wires, apply cable ties and sleeving, label, continuity test. Rate = 1/3.0 = 0.333 kg/hr
 notes: Assemble multi-conductor cable harnesses with connectors. Includes cutting, stripping, crimping, bundling, and testing
   of wire assemblies for electrical systems.
 process_type: continuous

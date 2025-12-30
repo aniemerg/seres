@@ -16,10 +16,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: plastic_pellets
 time_model:
   type: linear_rate
-  hr_per_kg: 2.0
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: plastic_pellets
 notes: Mold plastic pellets into plastic_housing_molded using basic molding press. Placeholder parameters; mass balance 1:1.
 process_type: continuous

@@ -20,12 +20,16 @@ resource_requirements:
   qty: 1.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 6.0
+  unit: kWh/kg
+  scaling_basis: processed_powder_mixture
   notes: High-temperature sintering with controlled atmosphere and hot pressing
 time_model:
   type: linear_rate
-  hr_per_kg: 4.0
+  rate: 0.25
+  rate_unit: kg/hr
+  scaling_basis: processed_powder_mixture
   notes: Pressing, sintering soak, cooling, and final machining
 notes: 'Placeholder NdFeB magnet fabrication step using processed alloy powder with binder.
 

@@ -18,11 +18,14 @@ resource_requirements:
   qty: 4.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: packed_bed_spent_v0
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: packed_bed_spent_v0
 notes: Packed bed regeneration from spent bed to regenerated bed v0 using the dedicated regeneration furnace.
 process_type: continuous

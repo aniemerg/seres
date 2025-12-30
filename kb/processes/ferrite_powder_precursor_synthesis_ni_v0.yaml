@@ -1,9 +1,16 @@
 id: ferrite_powder_precursor_synthesis_ni_v0
 name: Nickel ferrite powder precursor synthesis v0
 kind: process
+process_type: batch
 layer_tags:
 - layer_5
-inputs: []
+inputs:
+  - item_id: nickel_ore_raw
+    qty: 0.5
+    unit: kg
+  - item_id: iron_ore_or_ilmenite
+    qty: 0.5
+    unit: kg
 outputs:
   - item_id: ferrite_powder_precursor_ni_v0
     qty: 1.0
@@ -14,10 +21,12 @@ resource_requirements:
   qty: 0.3
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
+  notes: "Synthesis energy for Ni ferrite precursor"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: |
   Seed precursor production path for Ni ferrite powder; placeholder for Ni ferrite route. Allows modeling to proceed until chemistry is defined.

@@ -1,5 +1,6 @@
 id: chemical_treatment_v0
 kind: process
+process_type: batch
 name: Chemical treatment v0
 layer_tags:
 - layer_3
@@ -18,7 +19,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  total_energy_kwh: null
+  type: fixed_per_batch
+  value: 0.2
+  unit: kWh
 time_model:
-  total_time_hr: null
+  type: batch
+  hr_per_batch: 0.5
 notes: "Placeholder chemical treatment step for cutting fluid; pH adjustment and stability testing. Output placeholder: treated_cutting_fluid_v0."

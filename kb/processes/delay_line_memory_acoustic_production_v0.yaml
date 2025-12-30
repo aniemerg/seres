@@ -1,6 +1,7 @@
 id: delay_line_memory_acoustic_production_v0
 name: Acoustic delay line memory production v0
 kind: process
+process_type: batch
 inputs: []
 outputs:
 - item_id: delay_line_memory_acoustic_v0
@@ -8,10 +9,11 @@ outputs:
   unit: unit
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: Stub energy for producing one acoustic delay line memory element
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Stub production process for acoustic delay line memory element (acoustic RAM)."

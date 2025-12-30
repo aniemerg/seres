@@ -17,11 +17,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.4
+  unit: kWh/each
+  scaling_basis: connector_electrical_multi_pin
 time_model:
   type: linear_rate
   rate: 2.0
-  rate_unit: kg/hr
+  rate_unit: each/hr
+  scaling_basis: connector_electrical_multi_pin
 notes: Prototype multi-pin connector assembly from header; placeholder until BOM for connector is defined.
 process_type: continuous

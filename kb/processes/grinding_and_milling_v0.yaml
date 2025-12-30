@@ -3,8 +3,14 @@ kind: process
 name: Grinding and milling (basic)
 layer_tags:
 - layer_3
-inputs: []
-outputs: []
+inputs:
+  - item_id: coarse_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: fine_powder
+    qty: 1.0
+    unit: kg
 requires_ids:
 - ball_mill_v0
 resource_requirements:
@@ -12,12 +18,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.25
+  unit: kWh/kg
+  scaling_basis: coarse_powder
   notes: Grinding/milling energy per kg
 time_model:
   type: linear_rate
-  hr_per_kg: 0.08
+  rate: 12.5
+  rate_unit: kg/hr
+  scaling_basis: coarse_powder
   notes: Throughput rate including load/unload
 notes: General grinding/milling process for reducing particle size of feedstocks.
 process_type: continuous

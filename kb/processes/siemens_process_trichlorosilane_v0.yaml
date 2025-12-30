@@ -25,11 +25,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.0
-  notes: Heating to 300°C for chlorination reaction
+  unit: kWh
+  notes: Heating to 300°C for chlorination reaction (1 kg Si batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: Chlorination and distillation time
 notes: |
@@ -74,3 +75,4 @@ notes: |
   High-efficiency solar cells (>20% vs <15% for metallurgical)
   Integrated circuits, sensors, processors
   See also: Czochralski process (single-crystal growth from polysilicon)
+process_type: batch

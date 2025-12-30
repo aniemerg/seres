@@ -14,11 +14,14 @@ resource_requirements:
   amount: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: epoxy_precursor_block_v0
 time_model:
   type: linear_rate
   rate: 5.0
   rate_unit: kg/hr
+  scaling_basis: epoxy_precursor_block_v0
 notes: 'Placeholder resin synthesis: converts epoxy precursor block into conductive polymer resin.'
 process_type: continuous

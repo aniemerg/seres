@@ -1,10 +1,14 @@
 id: logic_gate_vacuum_tube_production_v0
 kind: process
 name: Logic gate vacuum tube production v0
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
-inputs: []
+inputs:
+  - item_id: vacuum_tube_assembled_evacuated
+    qty: 0.5
+    unit: kg
 outputs:
 - item_id: logic_gate_vacuum_tube_v0
   qty: 1.0
@@ -15,7 +19,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  total_energy_kwh: 0.5
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
 time_model:
-  total_time_hr: 0.5
+  type: batch
+  hr_per_batch: 0.5
 notes: Placeholder production process for logic_gate_vacuum_tube_v0. No upstream inputs defined yet; to be replaced with real steps and subcomponents as design matures.

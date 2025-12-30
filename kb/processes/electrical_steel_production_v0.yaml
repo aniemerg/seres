@@ -4,6 +4,7 @@ name: Electrical steel production v0
 layer_tags:
 - layer_4
 - layer_5
+process_type: batch
 inputs:
 - item_id: iron_metal_pure
   qty: 0.96
@@ -30,9 +31,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
 notes: Alloy iron with silicon, hot roll, cold roll to thin gauge. Silicon improves magnetic properties and reduces core loss. Silicon can be extracted from silica in regolith.

@@ -1,5 +1,6 @@
 id: software_development_programming_v0
 kind: process
+process_type: batch
 name: Software development and programming
 layer_tags:
 - layer_7
@@ -12,11 +13,12 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: total_energy_kwh
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: Placeholder energy for software development and programming activities
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Placeholder process representing software development and programming tasks. Intended to occupy human/system resources without modeling detailed software outputs yet.
 provenance: hand_assumption

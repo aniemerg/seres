@@ -14,9 +14,11 @@ resource_requirements:
     qty: null
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
+process_type: batch
 notes: "Placeholder production process for high-temperature insulation material; 2 kg per batch."

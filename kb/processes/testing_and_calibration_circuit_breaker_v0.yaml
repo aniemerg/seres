@@ -1,5 +1,6 @@
 id: testing_and_calibration_circuit_breaker_v0
 kind: process
+process_type: batch
 name: Testing and calibration of circuit breaker v0
 inputs:
   - item_id: circuit_breaker_assembled
@@ -14,12 +15,13 @@ resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 1.0
     unit: hr
-energy_model:
-  type: fixed_kWh
-  value: 0.25
-  notes: "Energy for testing and calibration step"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Calibration and functional testing step"
+energy_model:
+  type: fixed_per_batch
+  value: 0.25
+  unit: kWh
+  notes: "Energy for testing and calibration step"
 notes: "Testing trip current, calibrating timing; referenced in circuit_breaker_thermal_v0 recipe step."

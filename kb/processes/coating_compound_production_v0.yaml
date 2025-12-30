@@ -14,11 +14,13 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Placeholder energy for coating compound production
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Placeholder time for production
+process_type: batch
 notes: Placeholder production of coating_compound to resolve no_recipe gap in seed cathode coating workflows.

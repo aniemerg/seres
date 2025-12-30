@@ -20,18 +20,21 @@ requires_ids:
 - furnace_high_temp
 resource_requirements:
 - machine_id: high_temp_furnace_v0
-  amount: 4.0
+  qty: 4.0
   unit: hr
 - machine_id: carbon_feeder_screw
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 8.0
+  unit: kWh/kg
+  scaling_basis: silica_purified
 time_model:
   type: linear_rate
   rate: 25.0
   rate_unit: kg/hr
+  scaling_basis: silica_purified
 notes: Carbothermal synthesis of silicon carbide from purified silica and carbon feed; outputs SiC and CO2-equivalent gas.
   Placeholder energy/model parameters; refine with lab data.
 process_type: continuous

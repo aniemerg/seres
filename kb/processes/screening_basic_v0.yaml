@@ -19,12 +19,16 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: powder_metal_or_ceramic
   notes: vibratory screen motor and air classifier fans for fine powders
 time_model:
   type: linear_rate
-  hr_per_kg: 0.2
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: powder_metal_or_ceramic
   notes: feed, classify, and clean-down for fine powder screening
 notes: Screening/classification of metal or ceramic powders to achieve target particle size distribution and remove agglomerates
   before pressing, sintering, or additive use.

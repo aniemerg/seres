@@ -3,8 +3,14 @@ kind: process
 name: Woodworking (basic)
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: cellulose_raw
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: finished_part
+  qty: 1.0
+  unit: kg
 requires_ids:
 - assembly_tools_basic
 resource_requirements:
@@ -12,12 +18,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.4
+  unit: kWh/kg
+  scaling_basis: cellulose_raw
   notes: power saws, sanders, drills for cutting, shaping, and finishing wood
 time_model:
   type: linear_rate
-  hr_per_kg: 1.2
+  rate: 0.833
+  rate_unit: kg/hr
+  scaling_basis: cellulose_raw
   notes: cutting, shaping, sanding, and finishing operations
 notes: Placeholder woodworking process; details TBD.
 process_type: continuous

@@ -1,18 +1,27 @@
 id: robot_gripper_parallel_jaw_placeholder_v0
 kind: process
 name: Placeholder production of robot_gripper_parallel_jaw_v0
+process_type: batch
 layer_tags:
 - layer_1
-inputs: []
+inputs:
+  - item_id: gripper_components
+    qty: 0.5
+    unit: kg
 outputs:
   - item_id: robot_gripper_parallel_jaw_v0
     qty: 1.0
     unit: unit
-resource_requirements: []
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.01
+    unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.01
+  unit: kWh
+  notes: "Minimal placeholder energy for assembly"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.01
 notes: "Placeholder process to produce robot_gripper_parallel_jaw_v0 for gap resolution."

@@ -21,12 +21,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 3.0
+  unit: kWh/kg
+  scaling_basis: molten_material_or_preform
   notes: Heating and maintaining molten state during drawing
 time_model:
   type: linear_rate
-  hr_per_kg: 1.5
+  rate: 0.667
+  rate_unit: kg/hr
+  scaling_basis: molten_material_or_preform
   notes: Continuous fiber drawing at controlled tension and speed
 notes: Drawing process for creating continuous fibers from molten material (glass, basalt, polymer). Material is heated and
   pulled through controlled tension to create fine fibers.

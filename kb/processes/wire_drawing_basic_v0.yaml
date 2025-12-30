@@ -3,8 +3,14 @@ kind: process
 name: Wire drawing (basic)
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: metal_wire_feed
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_wire_feed
+  qty: 1.0
+  unit: kg
 requires_ids:
 - drawing_die_set_basic
 resource_requirements:
@@ -12,12 +18,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: metal_wire_feed
   notes: drawing bench motors and tensioning systems for cold working metal through dies
 time_model:
   type: linear_rate
-  hr_per_kg: 1.5
+  rate: 0.6667
+  rate_unit: kg/hr
+  scaling_basis: metal_wire_feed
   notes: multiple drawing passes through progressively smaller dies
 notes: Placeholder for drawing wire to smaller diameter; tooling/process params TBD.
 process_type: continuous

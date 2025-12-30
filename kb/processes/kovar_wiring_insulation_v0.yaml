@@ -19,12 +19,16 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.2
+  unit: kWh/kg
+  scaling_basis: substrate_part_or_wire
   notes: Spray/dip insulation curing energy for Kovar leads or feedthrough wiring.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: substrate_part_or_wire
   notes: Surface prep, coating passes, and oven cure for small wiring batches.
 notes: Applies electrical insulation to Kovar wiring or feedthrough leads for vacuum tube assemblies; uses coating booth plus
   low-temp cure. Output treated as insulated_part_or_wire placeholder.

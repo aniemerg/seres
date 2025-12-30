@@ -24,13 +24,17 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 12.0
+  unit: kWh/kg
+  scaling_basis: meteorite_iron
   notes: High temperature melting, chemical separation, refining
 time_model:
   type: linear_rate
-  hr_per_kg: 4.0
-  notes: Melting, chemical separation, electrolytic refining
+  rate: 0.25
+  rate_unit: kg/hr
+  scaling_basis: meteorite_iron
+  notes: Melting, chemical separation, electrolytic refining (4.0 hr per kg = 0.25 kg/hr)
 notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting, chemical separation (Mond process
   or electrolytic), and refining to obtain pure nickel and iron.
 process_type: continuous

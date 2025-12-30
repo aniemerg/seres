@@ -19,11 +19,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 50.0
-  notes: Energy for roasting, reduction, and distillation
+  type: fixed_per_batch
+  value: 5000.0
+  unit: kWh
+  notes: Energy for roasting, reduction, and distillation (100 kg ore batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Multi-step extraction process
 notes: |
@@ -33,3 +34,4 @@ notes: |
   Lunar availability: Trace amounts in sulfide minerals
   Primary use: Photodiodes and photosensitive detectors
   Typical yield: Seed data placeholder; adjust as needed.
+process_type: batch

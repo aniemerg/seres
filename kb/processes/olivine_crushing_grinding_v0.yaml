@@ -23,11 +23,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: olivine_concentrate
 time_model:
   type: linear_rate
-  hr_per_kg: 0.1
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: olivine_concentrate
 notes: 'Olivine crushing and grinding: size reduction of olivine concentrate to olivine powder.
 
   Placeholder parameters; refinements needed as data becomes available.

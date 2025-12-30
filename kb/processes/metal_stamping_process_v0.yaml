@@ -16,9 +16,11 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 0.4
+  type: fixed_per_batch
+  value: 0.04
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
 notes: Simple stamping operation converting steel sheet 1mm into breaker housing with minor loss.
+process_type: batch

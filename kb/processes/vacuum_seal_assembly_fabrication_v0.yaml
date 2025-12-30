@@ -24,11 +24,13 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: "Assembly tools, cleaning, and basic leak checks."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
   notes: "Align flanges, install gaskets, torque fasteners, and verify seal fit."
 notes: "Assemble vacuum seal flange and gasket set from formed sheet metal parts, sealing gaskets, and fasteners. Placeholder mass balance for a 5 kg vacuum seal assembly."
+process_type: batch

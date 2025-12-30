@@ -17,12 +17,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
   notes: spindle motor (~5 kW) plus coolant and axis drives
 time_model:
   type: linear_rate
   rate: 60.0
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
 notes: Machining finishes to shape UV exposure unit frame; placeholder parameters; derived from generic machining template
 process_type: continuous

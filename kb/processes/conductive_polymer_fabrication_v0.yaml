@@ -14,11 +14,14 @@ resource_requirements:
   amount: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: conductive_polymer_resin_v0
 time_model:
   type: linear_rate
   rate: 10.0
   rate_unit: kg/hr
+  scaling_basis: conductive_polymer_resin_v0
 notes: Placeholder fabrication step to produce potentiometer conductive polymer from resin.
 process_type: continuous

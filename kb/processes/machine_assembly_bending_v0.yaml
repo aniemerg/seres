@@ -1,6 +1,7 @@
 id: machine_assembly_bending_v0
 kind: process
 name: Basic bending machine assembly (frame + electronics)
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -22,9 +23,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder bending machine assembly; uses machine_frame_small and power_electronics_module as chassis and electronics."

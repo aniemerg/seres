@@ -1,5 +1,6 @@
 id: motor_bearing_3d_printed_unit_v0
 kind: process
+process_type: batch
 name: 3D-printed motor bearing unit
 layer_tags:
 - layer_5
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.25
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "3D printing operation to produce motor-bearing unit. Assumes basic printer; no post-processing modeled."

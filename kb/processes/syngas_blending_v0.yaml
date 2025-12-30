@@ -1,5 +1,6 @@
 id: syngas_blending_v0
 kind: process
+process_type: batch
 name: Syngas blending
 layer_tags:
   - layer_4
@@ -21,10 +22,11 @@ resource_requirements:
     qty: 0.2
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: "Gas compression and mixing"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.2
 notes: "Blend CO and H2 in a controlled ratio to form syngas."

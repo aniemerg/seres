@@ -21,11 +21,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: per_unit
   value: 0.25
+  unit: kWh/kg
+  scaling_basis: electrical_wire_and_connectors
+  notes: "Hand tools, crimping, and labeling energy per kg of cable stock"
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: electrical_wire_and_connectors
 notes: 'Basic power cable assembly: cut wires, strip insulation, crimp connectors, bundle, and label.'
 process_type: continuous

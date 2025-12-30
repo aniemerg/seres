@@ -1,6 +1,7 @@
 id: fabricate_structural_steel_frame_v0
 kind: process
 name: Fabricate structural steel frame (v0)
+process_type: batch
 layer_tags:
 - layer_6
 - layer_7
@@ -18,12 +19,14 @@ requires_ids:
 - fixturing_workbench
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.6
+  qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.5
+  unit: kWh
+  notes: "Fabrication energy per frame unit"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: Fabrication of structural steel frame from welded fabrications.

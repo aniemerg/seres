@@ -3,19 +3,29 @@ kind: process
 name: Inspection and QA (basic)
 layer_tags:
 - layer_7
-inputs: []
-outputs: []
+process_type: continuous
+inputs:
+- item_id: finished_part
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: finished_part
+  qty: 1.0
+  unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.1
+  unit: kWh/unit
+  scaling_basis: finished_part
   notes: measurement equipment, lighting, and basic test fixtures
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
+  rate: 2.0
+  rate_unit: unit/hr
+  scaling_basis: finished_part
   notes: visual inspection, dimensional checks, and basic functional testing
-notes: Basic inspection/QA of assembled/imported items; placeholder timing.
-process_type: continuous
+notes: Basic inspection/QA of assembled/imported items; placeholder timing. Generic process for quality checks.

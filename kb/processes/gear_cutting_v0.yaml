@@ -19,12 +19,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
+  unit: kWh/unit
+  scaling_basis: gear_set_medium
   notes: gear cutting energy estimate based on basic gear cutting
 time_model:
   type: linear_rate
   rate: 2.0
-  rate_unit: kg/hr
+  rate_unit: unit/hr
+  scaling_basis: gear_set_medium
 notes: Generic gear cutting process; placeholder values aligned with gear_cutting_basic_v0.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: cesium_coating_application_v0
 kind: process
 name: Cesium coating application on cathode v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -23,9 +24,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 notes: "Cesium coating application to oxide-coated cathode to reduce work function."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0

@@ -1,6 +1,7 @@
 id: metal_ingot_cast_v0
 kind: process
 name: Metal ingot casting
+process_type: batch
 layer_tags:
   - layer_6
 inputs:
@@ -20,10 +21,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.5
-  notes: "melting steel (~1.2 MJ/kg enthalpy + heating losses)"
+  unit: kWh
+  notes: "melting steel for 1 kg batch (~1.2 MJ/kg enthalpy + heating losses)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Casting metal ingot from metal alloy bulk; placeholder mass balance.

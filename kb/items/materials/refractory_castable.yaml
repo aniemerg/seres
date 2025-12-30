@@ -1,0 +1,23 @@
+id: refractory_castable
+kind: material
+name: Refractory castable
+unit: kg
+density: 2300
+state: solid
+recipe: recipe_refractory_castable_v0
+notes: |
+  Castable refractory material for forming furnace linings and high-temperature
+  structures. Consists of refractory aggregates (alumina, silica, magnesia) with
+  bonding agents and water for casting. Can be poured or troweled into molds and
+  shapes, then cured and fired. Used for custom furnace linings, reactor vessels,
+  and complex refractory shapes where pre-formed bricks are unsuitable.
+
+  Typical composition: 60-80% refractory aggregate, 10-20% bonding agent,
+  10-20% water for workability. Density ~2300 kg/m³ when cured.
+
+  Conservative Mode check completed:
+  - Searched for: refractory_brick_set (200 kg, pre-formed, not castable)
+  - Checked: chromite_refractory_v0, magnesia_refractory_v0 (different compositions)
+  - No equivalent castable material found
+  - Created as distinct material type (castable vs brick)
+  - Density estimated from typical high-alumina castable refractories

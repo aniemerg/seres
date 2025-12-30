@@ -1,10 +1,17 @@
 id: glazing_and_installation_v0
 kind: process
+process_type: batch
 name: Glazing and installation (basic)
 layer_tags:
   - layer_4
-inputs: []
-outputs: []
+inputs:
+  - item_id: panel_or_door_assembly
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: glazed_panel_or_door
+    qty: 1.0
+    unit: unit
 requires_ids:
   - assembly_tools_basic
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 0.6
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: "Hand tools for glazing/sealing"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Install and seal panels/doors"
 notes: Install and seal transparent panels and door hardware on enclosures/cabins.

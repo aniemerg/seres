@@ -18,12 +18,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.1
+  unit: kWh/kg
+  scaling_basis: insulation_thermal_blanket
   notes: Minimal energy for assembly operations
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: insulation_thermal_blanket
   notes: Manual installation and securing of insulation
 notes: 'Installation of thermal insulation on equipment, vessels, or piping.
 

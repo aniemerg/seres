@@ -20,11 +20,13 @@ resource_requirements:
   qty: 1.0
   unit: unit
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: "Placeholder energy per input mass for methyl chloride synthesis."
+process_type: batch
 nodes: []
 notes: "Synthesis of methyl chloride from methane and chlorine. Placeholder parameters pending detailed chemistry."

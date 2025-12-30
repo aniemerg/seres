@@ -14,12 +14,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
   notes: Energy per kilogram of metal machined (placeholder)
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
 notes: Basic machining operation; placeholder for converting raw metal block to machined_metal_block_v0.
 process_type: continuous

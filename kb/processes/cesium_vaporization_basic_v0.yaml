@@ -17,11 +17,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: cesium_vapor_thermionic_v0
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: cesium_vapor_thermionic_v0
 notes: Vaporize cesium ampule contents under vacuum to produce cesium vapor for thermionic space charge neutralization.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: magnalium_alloying_v0
 kind: process
 name: Magnalium alloying
+process_type: batch
 layer_tags:
   - layer_5
 inputs:
@@ -21,11 +22,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.5
-  notes: "Melting and alloying energy"
+  type: fixed_per_batch
+  value: 1.425
+  unit: kWh
+  notes: "Melting and alloying energy (1.5 kWh/kg * 0.95 kg aluminum)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Melt, alloy, and cast"
 notes: "Alloying aluminum with ~5% magnesium to form magnalium."

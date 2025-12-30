@@ -18,10 +18,14 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: plastic_pellets
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: plastic_pellets
 notes: Basic extrusion to form gasket_sheet from plastic pellets; uses simple die and cooling.
 process_type: continuous

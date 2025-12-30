@@ -17,10 +17,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.4
+  unit: kWh
 
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Fabricate aluminum reflector from 2 mm sheet stock (v0); a placeholder fabrication path to resolve gap."
+process_type: batch

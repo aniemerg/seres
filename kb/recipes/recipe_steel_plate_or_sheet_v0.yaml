@@ -10,13 +10,5 @@ steps:
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Hot roll to plate or sheet thickness with multiple passes"
-  - process_id: surface_treatment_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Pickling to remove scale, optional cold rolling for tighter tolerances"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Check thickness, flatness, and surface quality"
-assumptions: Steel plate/sheet production from steel ingots via hot rolling. Plate is >6mm thick, sheet is <6mm. Cold rolling can be added for improved surface finish and dimensional control.
-notes: Steel plate and sheet stock for fabrication, structural components, and enclosures. Essential material for machine frames, tanks, and general fabrication work.
+assumptions: Steel plate/sheet production from steel ingots via hot rolling. Plate is >6mm thick, sheet is <6mm. Pickling or cold rolling can be added for improved surface finish and dimensional control. QA inspection omitted here to avoid circular dependency on finished_part.
+notes: Steel plate and sheet stock for fabrication, structural components, and enclosures. Surface treatment not yet modeled explicitly.

@@ -1,5 +1,6 @@
 id: aluminosilicate_glass_production_v0
 kind: process
+process_type: batch
 name: Aluminosilicate glass production from lunar minerals
 layer_tags:
   - layer_4
@@ -35,11 +36,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 6.0
-  notes: Melting at 1100-1350°C, lower than pure silica
+  type: fixed_per_batch
+  value: 3.42
+  unit: kWh
+  notes: Melting at 1100-1350°C, lower than pure silica (6.0 kWh/kg * 0.57 kg silica)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: Melting, homogenization, and forming
 notes: |

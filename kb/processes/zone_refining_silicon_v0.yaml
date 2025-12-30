@@ -1,5 +1,6 @@
 id: zone_refining_silicon_v0
 kind: process
+process_type: batch
 name: Zone refining for ultra-pure silicon
 layer_tags:
   - layer_5
@@ -22,11 +23,12 @@ resource_requirements:
     qty: 12.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 25.0
+  unit: kWh
   notes: RF heating for local zone melting at 1600°C, multiple passes
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 48.0
   notes: Multiple slow passes of molten zone through ingot
 notes: |

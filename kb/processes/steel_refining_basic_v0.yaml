@@ -4,6 +4,7 @@ name: Basic steel refining and casting
 layer_tags:
   - layer_4
   - layer_5
+process_type: batch
 inputs:
   - item_id: iron_pig_or_ingot
     qty: 1.05
@@ -27,11 +28,12 @@ resource_requirements:
     qty: 0.6
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.5
+  unit: kWh
   notes: "Electric melting/refining and holding energy for pig iron to steel conversion; small-batch EAF/BOF analog."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Melt, refine (oxygen blow), and cast billets/slabs; batch cycle includes heat-up and tap."
 notes: "Refines pig iron into low-carbon steel and casts into billets/slabs for rolling. Includes decarburization and impurity removal with slag tapped separately."

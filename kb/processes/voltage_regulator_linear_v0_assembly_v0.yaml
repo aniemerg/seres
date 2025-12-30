@@ -1,6 +1,7 @@
 id: voltage_regulator_linear_v0_assembly_v0
 name: Voltage regulator (linear) assembly v0
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: voltage_regulator_linear_v0
@@ -8,9 +9,10 @@ outputs:
     unit: unit
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder assembly process to manufacture voltage_regulator_linear_v0 from seed components or BOM items."

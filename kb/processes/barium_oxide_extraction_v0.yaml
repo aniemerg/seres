@@ -18,12 +18,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: high temperature calcination to decompose Ba-containing minerals and drive off CO2
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
   notes: heating to calcination temperature, soak time, and cool-down
 notes: Placeholder BaO extraction process; chemistry/energy/time TBD.
 process_type: continuous

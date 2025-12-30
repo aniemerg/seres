@@ -21,12 +21,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: sheet_metal_or_structural_steel
   notes: Cutting, bending, punching operations
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
+  rate: 3.333
+  rate_unit: kg/hr
+  scaling_basis: sheet_metal_or_structural_steel
   notes: Layout, cutting, bending, forming, deburring
 notes: Sheet metal cutting, bending, forming, and punching operations for creating enclosures, panels, brackets, and housings.
 process_type: continuous

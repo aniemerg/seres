@@ -120,21 +120,23 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
             entity_id=process_id,
             message="Missing required field 'process_type'",
             field_path="process_type",
-            fix_hint="Add 'process_type: batch' or 'process_type: continuous'"
+            fix_hint="Add 'process_type: batch', 'process_type: continuous', or 'process_type: boundary'"
         ))
         return issues  # Can't validate further without process_type
 
     # Rule 2: process_type valid
-    if process_type not in ["batch", "continuous"]:
+    if process_type not in ["batch", "continuous", "boundary"]:
         issues.append(ValidationIssue(
             level=ValidationLevel.ERROR,
             category="schema",
             rule="process_type_invalid",
             entity_type="process",
             entity_id=process_id,
-            message=f"Invalid process_type '{process_type}'. Must be 'batch' or 'continuous'",
+            message=(
+                f"Invalid process_type '{process_type}'. Must be 'batch', 'continuous', or 'boundary'"
+            ),
             field_path="process_type",
-            fix_hint="Set to 'batch' or 'continuous'"
+            fix_hint="Set to 'batch', 'continuous', or 'boundary'"
         ))
 
     # Rule 3: time_model.type consistency
@@ -165,7 +167,20 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
                 field_path="time_model.type",
                 fix_hint="Change time_model.type to 'batch' or change process_type"
             ))
-
+        if process_type == "boundary" and tm_type not in ["batch", "linear_rate"]:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="schema",
+                rule="time_model_type_mismatch",
+                entity_type="process",
+                entity_id=process_id,
+                message=(
+                    f"process_type 'boundary' requires time_model.type "
+                    f"'batch' or 'linear_rate', got '{tm_type}'"
+                ),
+                field_path="time_model.type",
+                fix_hint="Change time_model.type to 'batch' or 'linear_rate'"
+            ))
         # Rule 4: Required fields for linear_rate
         if tm_type == "linear_rate":
             for field in ["rate", "rate_unit", "scaling_basis"]:
@@ -214,6 +229,17 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
                     field_path=f"time_model.{deprecated}",
                     fix_hint=hint
                 ))
+    elif process_type == "boundary":
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="schema",
+            rule="required_field_missing",
+            entity_type="process",
+            entity_id=process_id,
+            message="process_type 'boundary' requires time_model",
+            field_path="time_model",
+            fix_hint="Add time_model with type 'batch' or 'linear_rate'"
+        ))
 
     # Rule 7: energy_model validation
     energy_model = process_dict.get('energy_model')
@@ -281,6 +307,17 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
                     field_path=f"energy_model.{deprecated}",
                     fix_hint=hint
                 ))
+    elif process_type == "boundary":
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="schema",
+            rule="required_field_missing",
+            entity_type="process",
+            entity_id=process_id,
+            message="process_type 'boundary' requires energy_model",
+            field_path="energy_model",
+            fix_hint="Add energy_model with type 'fixed_per_batch' or 'per_unit'"
+        ))
 
     return issues
 
@@ -312,6 +349,45 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
     process_type = process_dict.get('process_type')
     time_model = process_dict.get('time_model')
     energy_model = process_dict.get('energy_model')
+
+    # Rule 0: Boundary processes must have no inputs and at least one output
+    if process_type == "boundary":
+        inputs = process_dict.get('inputs', []) or []
+        outputs = process_dict.get('outputs', []) or []
+        resource_requirements = process_dict.get('resource_requirements', []) or []
+        if inputs:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="semantic",
+                rule="boundary_inputs_not_allowed",
+                entity_type="process",
+                entity_id=process_id,
+                message="Boundary processes must not declare inputs",
+                field_path="inputs",
+                fix_hint="Remove inputs or change process_type"
+            ))
+        if not outputs:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="semantic",
+                rule="boundary_outputs_required",
+                entity_type="process",
+                entity_id=process_id,
+                message="Boundary processes must declare at least one output",
+                field_path="outputs",
+                fix_hint="Add outputs or change process_type"
+            ))
+        if not resource_requirements:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.WARNING,
+                category="semantic",
+                rule="boundary_machine_missing",
+                entity_type="process",
+                entity_id=process_id,
+                message="Boundary processes should declare at least one machine requirement",
+                field_path="resource_requirements",
+                fix_hint="Add resource_requirements for the machine that performs collection"
+            ))
 
     # Collect all input/output item_ids
     all_item_ids = set()
@@ -669,6 +745,110 @@ def validate_process_cross_model(process: Any) -> List[ValidationIssue]:
 
 
 # =============================================================================
+# Reference Validation (Category 6)
+# =============================================================================
+
+def validate_process_references(
+    process: Any,
+    converter: UnitConverter
+) -> List[ValidationIssue]:
+    """
+    Validate that all referenced entities (items, resources, materials) exist in KB.
+
+    Category 6: Reference Validation (ADR-017)
+
+    Args:
+        process: Process to validate (Process model or dict)
+        converter: UnitConverter (provides access to kb via converter.kb)
+
+    Returns:
+        List of validation issues
+    """
+    issues = []
+    process_dict = process if isinstance(process, dict) else process.model_dump()
+    process_id = process_dict.get('id', 'unknown')
+    kb = converter.kb
+
+    # Check if this is a template process (skip reference validation if so)
+    is_template = process_dict.get('is_template', False)
+    if is_template:
+        # Template processes are allowed to reference undefined items
+        return issues
+
+    # Rule 1: Input/output items exist (WARNING)
+    # Check all item_id in inputs, outputs, byproducts
+    for input_item in process_dict.get('inputs', []) or []:
+        item_id = input_item.get('item_id')
+        if item_id:
+            # Check if item exists in KB
+            item = kb.get_item(item_id)
+            if not item:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="reference",
+                    rule="input_item_not_found",
+                    entity_type="process",
+                    entity_id=process_id,
+                    message=f"Input item '{item_id}' not found in KB (may be import or to-be-created)",
+                    field_path=f"inputs[item_id={item_id}]",
+                    fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
+                ))
+
+    for output_item in process_dict.get('outputs', []) or []:
+        item_id = output_item.get('item_id')
+        if item_id:
+            item = kb.get_item(item_id)
+            if not item:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="reference",
+                    rule="output_item_not_found",
+                    entity_type="process",
+                    entity_id=process_id,
+                    message=f"Output item '{item_id}' not found in KB (may be import or to-be-created)",
+                    field_path=f"outputs[item_id={item_id}]",
+                    fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
+                ))
+
+    for byproduct_item in process_dict.get('byproducts', []) or []:
+        item_id = byproduct_item.get('item_id')
+        if item_id:
+            item = kb.get_item(item_id)
+            if not item:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="reference",
+                    rule="byproduct_item_not_found",
+                    entity_type="process",
+                    entity_id=process_id,
+                    message=f"Byproduct item '{item_id}' not found in KB (may be import or to-be-created)",
+                    field_path=f"byproducts[item_id={item_id}]",
+                    fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
+                ))
+
+    # Rule 2: Resource machines exist (WARNING)
+    # Check all machine_id in resource_requirements
+    for resource_req in process_dict.get('resource_requirements', []) or []:
+        machine_id = resource_req.get('machine_id')
+        if machine_id:
+            # Check if machine exists in KB
+            machine = kb.get_item(machine_id)
+            if not machine:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="reference",
+                    rule="resource_machine_not_found",
+                    entity_type="process",
+                    entity_id=process_id,
+                    message=f"Resource machine '{machine_id}' not found in KB",
+                    field_path=f"resource_requirements[machine_id={machine_id}]",
+                    fix_hint=f"Create machine definition for '{machine_id}'"
+                ))
+
+    return issues
+
+
+# =============================================================================
 # Main Validator
 # =============================================================================
 
@@ -701,15 +881,23 @@ def validate_process(
     # Cross-model validation (always run)
     issues.extend(validate_process_cross_model(process))
 
+    # Reference validation (requires converter for KB access)
+    if converter:
+        issues.extend(validate_process_references(process, converter))
+
     return issues
 
 
-def validate_recipe(recipe: Any) -> List[ValidationIssue]:
+def validate_recipe(
+    recipe: Any,
+    converter: Optional[UnitConverter] = None
+) -> List[ValidationIssue]:
     """
     Validate a recipe.
 
     Args:
         recipe: Recipe to validate (Recipe model or dict)
+        converter: Optional UnitConverter for reference validation (KB access)
 
     Returns:
         List of validation issues
@@ -763,5 +951,25 @@ def validate_recipe(recipe: Any) -> List[ValidationIssue]:
                 field_path=f"steps[{i}].process_id",
                 fix_hint="Add process_id to step"
             ))
+
+    # Reference validation: process_id must exist (ERROR - ADR-017 Category 6 Rule 3)
+    if converter:
+        kb = converter.kb
+        for i, step in enumerate(steps):
+            process_id = step.get('process_id')
+            if process_id:
+                # Check if process exists in KB
+                process = kb.get_process(process_id)
+                if not process:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="process_not_found",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"Step {i} references process '{process_id}' which does not exist in KB",
+                        field_path=f"steps[{i}].process_id",
+                        fix_hint=f"Create process definition for '{process_id}' or correct the process_id"
+                    ))
 
     return issues

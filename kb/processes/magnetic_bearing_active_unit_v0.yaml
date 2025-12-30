@@ -1,5 +1,6 @@
 id: magnetic_bearing_active_unit_v0
 kind: process
+process_type: batch
 name: Active magnetic bearing unit
 layer_tags:
 - layer_5
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Fabrication step for active magnetic bearing unit; placeholder process to enable KB manufacturing path."

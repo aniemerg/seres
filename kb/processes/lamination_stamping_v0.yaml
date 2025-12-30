@@ -22,12 +22,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: electrical_steel_sheet
   notes: Press energy per kg of laminations
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: electrical_steel_sheet
   notes: Throughput for stamping thin laminations
 notes: Stamp stator/rotor laminations from electrical steel for motors/transformers.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: alnico_alloy_synthesis_v0
 kind: process
 name: AlNiCo alloy synthesis from raw metals v0
+process_type: batch
 layer_tags:
   - layer_5
   - layer_6
@@ -28,11 +29,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 8.0
+  unit: kWh
   notes: "Melting and alloying Al, Ni, Co, Fe to form AlNiCo magnet alloy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
 notes: |
   Primary synthesis of AlNiCo magnet alloy from constituent metals.

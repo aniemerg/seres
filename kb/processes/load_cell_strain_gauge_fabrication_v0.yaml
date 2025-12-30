@@ -21,9 +21,11 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: "Fabricate a load_cell_strain_gauge_v0 by bonding a strain_gauge_foil_v0 to a bonded strain_gauge_assembly using the strain_gauge_bonding_station_v0."

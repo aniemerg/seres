@@ -1,6 +1,7 @@
 id: nak_fill_and_seal_process_v0
 kind: process
 name: NAK fill and seal process v0
+process_type: batch
 layer_tags:
 - layer_4
 - layer_5
@@ -22,10 +23,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.6
-  notes: "Placeholder energy for fill+seal operation; to be refined with data."
+  unit: kWh
+  notes: "Placeholder energy for 1-unit batch fill+seal operation; to be refined with data."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Fill a vacuum component with inert gas and apply glass-to-metal seal; placeholder until detailed spec is defined."

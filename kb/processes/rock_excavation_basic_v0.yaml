@@ -4,7 +4,10 @@ name: Rock excavation (basic)
 layer_tags:
 - layer_2
 inputs: []
-outputs: []
+outputs:
+- item_id: basalt_aggregate
+  qty: 1.0
+  unit: kg
 requires_ids:
 - excavator_basic
 resource_requirements:
@@ -12,12 +15,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.15
+  unit: kWh/kg
+  scaling_basis: basalt_aggregate
   notes: Excavator energy per kg of rock
 time_model:
   type: linear_rate
-  hr_per_kg: 0.02
+  rate: 50.0
+  rate_unit: kg/hr
+  scaling_basis: basalt_aggregate
   notes: Excavation and handling time per kg
 notes: Basic rock excavation and recovery of basalt blocks for processing.
 process_type: continuous

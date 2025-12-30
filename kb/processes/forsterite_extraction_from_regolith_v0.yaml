@@ -21,11 +21,14 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_highlands
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: regolith_lunar_highlands
 notes: Placeholder for forsterite extraction from regolith; coarse estimate.
 process_type: continuous

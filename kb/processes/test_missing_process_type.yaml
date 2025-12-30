@@ -1,13 +1,19 @@
 id: test_missing_process_type
+kind: process
+name: Test missing process type
 time_model:
   type: batch
   hr_per_batch: 2.5
 inputs:
-- item_id: steel_plate
+- item_id: steel_plate_or_sheet
   qty: 10.0
   unit: kg
 outputs:
-- item_id: motor_housing
+- item_id: motor_housing_steel
   qty: 1.0
   unit: unit
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
 process_type: batch

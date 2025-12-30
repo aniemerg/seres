@@ -18,12 +18,16 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: powder_feedstock
   notes: Press cycle energy per kg
 time_model:
   type: linear_rate
-  hr_per_kg: 0.1
-  notes: Press cycle time including load/unload
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: powder_feedstock
+  notes: Press cycle time including load/unload (0.1 hr per kg = 10 kg/hr)
 notes: Operating a molding press to form powder/ceramic feedstock into green parts.
 process_type: continuous

@@ -1,6 +1,7 @@
 id: illumination_led_module_assembly_v0
 kind: process
 name: Illumination LED lamp module assembly v0
+process_type: batch
 layer_tags:
   - layer_7
   - layer_8
@@ -23,9 +24,11 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
-  value: 0.05
+  type: fixed_per_batch
+  value: 0.003
+  unit: kWh
+  notes: "Assembly energy for 0.05 kg LED lamp batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Assembles a 0.05 kg illumination LED lamp module from an assembled electronics unit; placeholder path for lamp integration."

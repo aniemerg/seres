@@ -1,5 +1,6 @@
 id: turning_tools_general_fabrication_v0
 kind: process
+process_type: batch
 name: Turning tools general fabrication v0
 layer_tags:
   - layer_6
@@ -15,15 +16,18 @@ requires_ids:
   - precision_lathe
 resource_requirements:
   - machine_id: precision_lathe
-    amount: 1.0
+    qty: 1.0
     unit: hr
   - machine_id: labor_bot_general_v0
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
+  notes: "Machining energy for tool fabrication"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
+  notes: "Machining and finishing time per batch"
 notes: "Fabrication of turning tools general from high-carbon tool steel billet; placeholder steps for lathe finishing and finishing."

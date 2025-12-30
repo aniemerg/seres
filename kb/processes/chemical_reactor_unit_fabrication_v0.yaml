@@ -1,5 +1,6 @@
 id: chemical_reactor_unit_fabrication_v0
 kind: process
+process_type: batch
 name: Fabrication of chemical reactor unit v0
 layer_tags:
 - layer_7
@@ -25,10 +26,11 @@ resource_requirements:
   qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 15.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
 notes: Prototype fabrication process for chemical reactor unit v0; placeholder path; to be refined with BOM.
 source_tags:

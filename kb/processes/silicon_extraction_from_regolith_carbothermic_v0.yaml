@@ -4,6 +4,7 @@ name: Carbothermic silicon extraction from lunar regolith silica
 layer_tags:
 - layer_3
 - layer_4
+process_type: batch
 inputs:
 - item_id: regolith_lunar_highlands
   qty: 6.34
@@ -18,7 +19,10 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  total_energy_kwh: 11.0
+  type: fixed_per_batch
+  value: 11.0
+  unit: kWh
 time_model:
-  total_time_hr: 0.9
+  type: batch
+  hr_per_batch: 0.9
 notes: "Carbothermic reduction of regolith-derived silica to silicon metal. Regolith mass (6.34 kg) provides ~2.85 kg SiO2, yielding ~1 kg Si at ~75% recovery. Carbon reductant consumed in the reaction."

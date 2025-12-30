@@ -214,18 +214,19 @@ The seed file's `notes` section contains worker instructions and references to t
 - Grinding/drying: `sizing_grinding_basic_v0`, `drying_basic_v0`.
 - Winding: `spool_winding_basic_v0`.
 - Import placeholder: `import_placeholder_v0` (only if truly importing).
-- Environment source: `environment_source_v0` (for natural inputs like solar, regolith in situ).
+- Environment source: `environment_source_v0` (legacy generic placeholder; prefer explicit `process_type: boundary` processes for in-situ collection).
 - Manual labor: use `labor_bot_general` in `resource_requirements`.
 
 ## Boundary/Terminal Processes
-To prevent infinite recursion in the dependency graph, some processes are **terminal nodes** that represent boundary conditions:
-- `environment_source_v0` — freely available environmental resources (solar irradiance, lunar regolith in situ)
-- `import_placeholder_v0` — items imported from Earth, not manufactured locally
+To prevent infinite recursion in the dependency graph, some processes are **terminal nodes** that represent in-situ boundary conditions (no upstream inputs).
+Use `process_type: boundary` only for **in-situ resource collection** (e.g., regolith and ice collection, solar irradiance).
 
-These processes use `energy_model: {type: boundary}` and `time_model: {type: boundary}` to indicate they are intentionally terminal and should not generate further queue items. Use these for:
-- Natural resources (sunlight, raw regolith)
-- Imported specialty materials (electronics, SMA wire, etc.)
-- Byproducts that don't need upstream manufacturing (waste heat)
+**Imports are not boundary processes.** Model imports via `is_import: true` on the item and/or `import_placeholder_v0` in the recipe.
+
+Boundary processes:
+- Must have `inputs: []` and at least one output.
+- Use standard ADR-012/014 models (`time_model.type: batch|linear_rate`, `energy_model.type: fixed_per_batch|per_unit`).
+- Should include `resource_requirements` for the collecting machine.
 
 ## Energy and Time Models (Machine-Readable Schema) - **NEW ADR-012/014 FORMAT**
 
@@ -238,7 +239,7 @@ These processes use `energy_model: {type: boundary}` and `time_model: {type: bou
 Every process must specify its type:
 
 ```yaml
-process_type: continuous  # or: batch
+process_type: continuous  # or: batch, boundary
 ```
 
 **Semantics:**
@@ -246,6 +247,8 @@ process_type: continuous  # or: batch
   - Examples: crushing, electrolysis, distillation, machining (one part after another)
 - **`batch`** — Discrete batches, setup per batch, batch size from outputs
   - Examples: assembly, firing, heat treatment, molding
+- **`boundary`** — In-situ collection with no upstream inputs
+  - Examples: regolith mining, polar ice extraction, solar irradiance collection
 
 ### Time Model (ADR-012)
 
@@ -428,21 +431,30 @@ energy_model:
 
 ### Boundary/Terminal Processes
 
-For processes that are intentionally terminal nodes (no upstream dependencies), use boundary type:
+Boundary processes are now supported via `process_type: boundary`. Example (in-situ regolith collection):
 
 ```yaml
-energy_model:
-  type: boundary
-  notes: "Freely available environmental resource"
-
+process_type: boundary
+outputs:
+  - item_id: regolith_lunar_mare
+    qty: 100
+    unit: kg
 time_model:
-  type: boundary
-  notes: "No time modeled for environmental source"
+  type: linear_rate
+  rate: 100
+  rate_unit: kg/hr
+  scaling_basis: regolith_lunar_mare
+energy_model:
+  type: per_unit
+  value: 0.05
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_mare
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+notes: "In-situ boundary process; no upstream inputs."
 ```
-
-**Use boundary type for:**
-- `environment_source_v0` — freely available resources (solar, regolith in situ)
-- `import_placeholder_v0` — items imported from Earth
 
 ### Migration from Old Schema
 

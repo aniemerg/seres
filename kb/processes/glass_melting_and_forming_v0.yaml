@@ -1,6 +1,7 @@
 id: glass_melting_and_forming_v0
 kind: process
 name: Glass melting and forming
+process_type: batch
 layer_tags:
   - layer_5
 inputs:
@@ -16,11 +17,12 @@ requires_ids:
   - casting_mold_set
   - temperature_sensing
 energy_model:
-  type: kWh_per_kg
-  value: 3.0
-  notes: "melting regolith glass at ~1500°C plus forming"
+  type: fixed_per_batch
+  value: 30.0
+  unit: kWh
+  notes: "Melting 10 kg regolith batch at ~1500°C plus forming and annealing"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "batch melt-pour-anneal cycle"
 notes: Anchor for thermal processing; specific glass chemistries TBD.

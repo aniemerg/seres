@@ -4,6 +4,7 @@ name: Pressure testing (hydraulic) v0
 layer_tags:
 - layer_6
 - layer_7
+process_type: batch
 inputs:
 - item_id: jacket_with_fittings
   qty: 3.0
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.4
+  unit: kWh
 notes: Pressure test for hydraulic jacket; leak checks and flow verification
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0

@@ -30,11 +30,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
   notes: Ball milling and centrifugal separation energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: Grinding, density separation, and drying
 notes: |
@@ -98,3 +99,4 @@ notes: |
   Post-processing: Tungsten carbide formation (W + C → WC)
     - Used in cutting tools, abrasives
     - Harder than steel, very durable
+process_type: batch

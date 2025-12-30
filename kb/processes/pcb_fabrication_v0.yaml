@@ -1,5 +1,6 @@
 id: pcb_fabrication_v0
 kind: process
+process_type: batch
 name: PCB fabrication
 layer_tags:
   - layer_6
@@ -24,7 +25,10 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  total_energy_kwh: 2.0
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
 time_model:
-  total_time_hr: 3.0
+  type: batch
+  hr_per_batch: 3.0
 notes: "Printed circuit board fabrication process. Includes photoresist application, UV exposure, developing, etching, drilling, and through-hole plating. Produces bare PCB ready for component assembly. Subtractive process removes unwanted copper to create circuit traces. Multi-layer boards require lamination and additional processing."

@@ -1,6 +1,7 @@
 id: mesh_fabrication_steel_guard_v1
 name: Mesh fabrication (steel guard v1)
 kind: process
+process_type: batch
 layer_tags:
 - layer_6
 inputs:
@@ -16,9 +17,11 @@ resource_requirements:
   qty: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.0
+  type: fixed_per_batch
+  value: 50.0
+  unit: kWh
+  notes: "Cutting and forming energy (50 kg batch)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Fabrication of safety guard steel mesh from steel mesh sheet feedstock (v1)."

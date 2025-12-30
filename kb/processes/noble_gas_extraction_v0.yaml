@@ -33,13 +33,15 @@ resource_requirements:
     qty: 12.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 200.0
-  notes: Extreme cryogenic refrigeration for fractional distillation
+  unit: kWh
+  notes: Extreme cryogenic refrigeration for fractional distillation (per 1 kg feed batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 24.0
   notes: Multi-stage cryogenic separation
+process_type: batch
 notes: |
   Noble gas extraction (Ne, Ar, Kr, Xe) from lunar regolith volatiles.
   Source: Sustainable-ISRU-on-the-Moon.txt

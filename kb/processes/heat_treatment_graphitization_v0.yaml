@@ -1,5 +1,6 @@
 id: heat_treatment_graphitization_v0
 kind: process
+process_type: batch
 name: Heat treatment and graphitization
 layer_tags:
   - layer_6
@@ -10,11 +11,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 50.0
+  unit: kWh
   notes: "High-temperature graphitization furnace cycle"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: "Heat-up, soak, and controlled cool-down"
 notes: "Graphitization heat treatment for carbon/graphite components; placeholder parameters."

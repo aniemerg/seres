@@ -25,11 +25,14 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: copper_wire_magnet_v0
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
+  scaling_basis: copper_wire_magnet_v0
 notes: Placeholder resistor winding using coil winding machinery; produces resistor_wire_wound_v0.
 process_type: continuous

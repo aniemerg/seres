@@ -1,5 +1,6 @@
 id: iron_reduction_from_ilmenite_v0
 kind: process
+process_type: batch
 name: Iron reduction from ilmenite concentrate
 layer_tags:
   - layer_4
@@ -22,11 +23,12 @@ requires_ids:
   - reduction_furnace_v0
   - gas_handling_loop_v0
 energy_model:
-  type: kWh_per_kg
-  value: 4.0
-  notes: "hydrogen reduction at ~1200°C, per kg iron product"
+  type: fixed_per_batch
+  value: 12.0
+  unit: kWh
+  notes: "hydrogen reduction at ~1200°C; placeholder 12 kWh per batch (needs qty values to calculate properly)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: "batch reduction cycle with gas recirculation"
 notes: Captures metals path; distinguishes from generic carbothermal oxygen step.

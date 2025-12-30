@@ -12,12 +12,13 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: motor-driven winding and tensioning
 time_model:
-  type: linear_rate
-  hr_per_kg: 0.2
+  type: batch
+  hr_per_batch: 0.2
   notes: winding rate ~5 kg/hr depending on material
 notes: Wind fibers or wires onto drums/spools; placeholder throughput.
-process_type: continuous
+process_type: batch

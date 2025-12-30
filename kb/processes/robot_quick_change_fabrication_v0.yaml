@@ -1,6 +1,7 @@
 id: robot_quick_change_fabrication_v0
 kind: process
 name: Robot quick-change interface fabrication
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -18,9 +19,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 1.5
+  unit: kWh
+  notes: "Machining and assembly energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Fabrication of the robot tool quick-change interface from raw metal block using a fabrication station."

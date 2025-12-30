@@ -3,6 +3,7 @@ kind: process
 name: High-purity fused silica glass production
 layer_tags:
   - layer_5
+process_type: batch
 inputs:
   - item_id: silicon_tetrachloride
     qty: 1.0
@@ -29,11 +30,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 12.0
+  unit: kWh
   notes: H2-O2 flame temperature ~2800°C for SiCl4 oxidation
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Vapor phase deposition onto substrate
 notes: |

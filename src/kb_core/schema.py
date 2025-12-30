@@ -118,7 +118,7 @@ class RawProcess(BaseModel):
     name: Optional[str] = None
 
     # ADR-012: process_type required (but optional in raw for migration)
-    process_type: Optional[str] = None  # "batch" or "continuous"
+    process_type: Optional[str] = None  # "batch", "continuous", or "boundary"
 
     inputs: List[RawQuantity] = Field(default_factory=list)
     outputs: List[RawQuantity] = Field(default_factory=list)
@@ -134,6 +134,9 @@ class RawProcess(BaseModel):
     layer_tags: List[str] = Field(default_factory=list)
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
+
+    # Template process flag - allows undefined item references
+    is_template: Optional[bool] = None
 
     notes: Optional[str] = None
 
@@ -343,8 +346,8 @@ class Process(BaseModel):
     Validated process definition (strict).
 
     Per ADR-012:
-    - process_type required ("batch" or "continuous")
-    - process_type must match time_model.type
+    - process_type required ("batch", "continuous", or "boundary")
+    - process_type must align with time_model.type (boundary may use batch or linear_rate)
     - time_model required (for now, may be WARNING later)
     """
     model_config = ConfigDict(extra="forbid")
@@ -353,7 +356,7 @@ class Process(BaseModel):
     kind: Literal["process"]
     name: Optional[str] = None
 
-    process_type: Literal["batch", "continuous"]
+    process_type: Literal["batch", "continuous", "boundary"]
 
     inputs: List[Quantity]
     outputs: List[Quantity]
@@ -369,6 +372,9 @@ class Process(BaseModel):
     layer_tags: List[str] = Field(default_factory=list)
     alternatives: List[str] = Field(default_factory=list)
     dedupe_candidate: Optional[bool] = None
+
+    # Template process flag - allows undefined item references
+    is_template: Optional[bool] = None
 
     notes: Optional[str] = None
 

@@ -1,9 +1,13 @@
 id: fixture_and_mold_fabrication_v0
 kind: process
 name: Potting fixtures and molds fabrication
+process_type: batch
 layer_tags:
 - layer_6
-inputs: []
+inputs:
+  - item_id: raw_metal_block
+    qty: 5.0
+    unit: kg
 outputs:
 - item_id: potting_fixtures_and_molds
   qty: 1.0
@@ -11,13 +15,14 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.75
+  qty: 0.75
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.5
+  unit: kWh
   notes: "Placeholder energy for fixture/mold fabrication"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: "Fabrication of potting fixtures and molds; basic tooling and finishing; treated as a placeholder until BOM details are refined."

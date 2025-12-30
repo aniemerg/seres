@@ -3,8 +3,14 @@ kind: process
 name: Precision grinding (basic)
 layer_tags:
 - layer_6
-inputs: []
-outputs: []
+inputs:
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: finished_part_deburred
+  qty: 1.0
+  unit: kg
 requires_ids:
 - surface_grinder
 - grinding_wheels
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.2
+  unit: kWh/kg
+  scaling_basis: rough_part
   notes: high-speed grinding spindle and coolant pump for precision surface grinding
 time_model:
   type: linear_rate
-  hr_per_kg: 1.5
+  rate: 0.6667
+  rate_unit: kg/hr
+  scaling_basis: rough_part
   notes: slow material removal for tight tolerances, typically 0.5-2 kg/hr depending on finish
 notes: Precision grinding for tight tolerances on bearing surfaces, sealing faces, and critical dimensions. Slower than rough
   machining but achieves superior surface finish.

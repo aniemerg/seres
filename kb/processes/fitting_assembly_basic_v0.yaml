@@ -1,10 +1,20 @@
 id: fitting_assembly_basic_v0
 kind: process
 name: Fitting assembly (basic)
+process_type: batch
 layer_tags:
   - layer_4
-inputs: []
-outputs: []
+inputs:
+  - item_id: metal_fittings_raw
+    qty: 0.8
+    unit: kg
+  - item_id: seal_material
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: hose_fittings
+    qty: 1.0
+    unit: kg
 requires_ids:
   - assembly_tools_basic
 resource_requirements:
@@ -12,11 +22,12 @@ resource_requirements:
     qty: 0.3
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
   notes: "Hand tools"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Assemble fittings/adapters"
 notes: Assemble hydraulic adapters, quick disconnects, and thread-seal fittings.

@@ -14,12 +14,15 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
 notes: Basic substrate preparation to generate test_part_surface from raw_metal_block for bonding tests. Placeholder values;
   adjust as real process data becomes available.
 process_type: continuous

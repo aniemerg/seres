@@ -27,11 +27,15 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.65
+  unit: kWh/kg
+  scaling_basis: iron_metal_pure
+  notes: "Forming energy per kg input"
 time_model:
   type: linear_rate
   rate: 6.0
   rate_unit: kg/hr
+  scaling_basis: iron_metal_pure
 notes: Form motor housing from sheet metal; forming operation with press brake and labor support.
 process_type: continuous

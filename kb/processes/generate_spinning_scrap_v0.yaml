@@ -1,5 +1,6 @@
 id: generate_spinning_scrap_v0
 kind: process
+process_type: batch
 name: Generate spinning scrap metal v0
 layer_tags:
 - layer_3
@@ -11,9 +12,10 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.01
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.01
 notes: Placeholder process to generate spinning scrap metal as a byproduct of a spinning operation. Refine with real data as it becomes available.

@@ -1,4 +1,6 @@
 """
+DEPRECATED: This file is deprecated and should be migrated to src/
+
 Indexer for the v0 KB. Scans kb/**/*.yaml, performs permissive parsing,
 and emits:
 - out/index.json (entries + refs)
@@ -9,6 +11,8 @@ and emits:
 - out/missing_fields.jsonl (required fields not populated)
 - out/orphan_resources.jsonl (resource_types with no provider machine)
 - out/missing_recipe_items.jsonl (items referenced in recipe steps but not defined)
+
+TODO: Migrate to src/kb_core/indexer.py or src/indexer/index_builder.py
 """
 from __future__ import annotations
 

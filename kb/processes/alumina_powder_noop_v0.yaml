@@ -1,6 +1,7 @@
 id: alumina_powder_noop_v0
 kind: process
 name: Alumina powder no-op processing v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -18,10 +19,11 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
   notes: "No-op placeholder for enabling a local production path for alumina_powder"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
 notes: "Placeholder processing step to satisfy no_recipe gap for alumina_powder"

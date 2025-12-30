@@ -1,5 +1,6 @@
 id: nitric_acid_dilution_v0
 kind: process
+process_type: batch
 name: Nitric acid dilution
 layer_tags:
   - layer_4
@@ -20,10 +21,11 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Mixing and cooling during dilution"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Dilute concentrated nitric acid to a general-use aqueous solution."

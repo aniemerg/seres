@@ -23,11 +23,14 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: tungsten_powder
 time_model:
   type: linear_rate
   rate: 10.0
   rate_unit: kg/hr
+  scaling_basis: tungsten_powder
 notes: Placeholder powder metallurgy pressing step to form green compact from tungsten powder.
 process_type: continuous

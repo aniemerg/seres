@@ -2,32 +2,36 @@ id: steel_stock_hot_rolling_v0
 kind: process
 name: Steel stock hot rolling and cutting
 layer_tags:
-- layer_6
+  - layer_6
 inputs:
-- item_id: steel_billet_or_slab
-  qty: 1.0
-  unit: kg
+  - item_id: steel_billet_or_slab
+    qty: 1.0
+    unit: kg
 outputs:
-- item_id: steel_stock
-  qty: 1.0
-  unit: kg
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
 requires_ids:
-- plate_rolling_mill
-- heating_furnace
+  - plate_rolling_mill
+  - heating_furnace
 resource_requirements:
-- machine_id: labor_bot_general_v0
-  qty: 0.4
-  unit: hr
-- machine_id: cutting_tools_general
-  qty: 0.2
-  unit: hr
+  - machine_id: labor_bot_general_v0
+    qty: 0.4
+    unit: hr
+  - machine_id: cutting_tools_general
+    qty: 0.2
+    unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.9
+  unit: kWh/kg
+  scaling_basis: steel_stock
   notes: Reheating and mill drive energy for reducing billets/slabs to bar/plate/rod stock with trimming.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.25
+  rate: 4.0
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
   notes: Multiple rolling passes plus handling for cutting to length.
 notes: Hot rolls steel billets/slabs into generic steel stock (bar, plate, rod) and cuts to length. Assumes modest scale losses;
   scrap trimming not modeled separately.

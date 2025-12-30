@@ -9,10 +9,12 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: "Stub energy for producing magnetic delay line memory element"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.6
 notes: "Stub production process for magnetic delay line memory element (magnetic RAM)."
+process_type: batch

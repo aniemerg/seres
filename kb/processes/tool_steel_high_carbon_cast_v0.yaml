@@ -1,5 +1,6 @@
 id: tool_steel_high_carbon_cast_v0
 kind: process
+process_type: batch
 name: Tool steel high-carbon casting v0
 layer_tags:
   - layer_6
@@ -19,11 +20,12 @@ resource_requirements:
     qty: 0.8
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
   notes: "Casting energy for tool steel alloying"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Casting cycle for tool steel billet into final tool steel shape
 notes: "Casting billet/slab into tool steel high-carbon v0; placeholder alloy composition determined by billet feed."

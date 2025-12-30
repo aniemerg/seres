@@ -1,5 +1,6 @@
 id: syngas_generation_steam_reforming_v0
 kind: process
+process_type: batch
 name: Syngas generation via steam reforming of methane
 layer_tags:
   - layer_4
@@ -27,14 +28,15 @@ resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 2.0
     unit: hr
-energy_model:
-  type: kWh_per_kg
-  value: 8.0
-  notes: Endothermic reaction at 850°C requires significant heat input
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Catalytic reforming time
+energy_model:
+  type: fixed_per_batch
+  value: 8.0
+  unit: kWh
+  notes: Endothermic reaction at 850°C requires significant heat input for 1 kg CH4 batch
 notes: |
   Steam reforming of methane to produce synthesis gas (syngas: CO + H2).
   Source: Sustainable-ISRU-on-the-Moon.txt

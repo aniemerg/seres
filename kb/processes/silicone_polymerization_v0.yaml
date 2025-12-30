@@ -1,5 +1,6 @@
 id: silicone_polymerization_v0
 kind: process
+process_type: batch
 name: Silicone polymerization
 layer_tags:
 - layer_3
@@ -17,10 +18,11 @@ resource_requirements:
   qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: |
   Placeholder silicone polymerization process (defined to resolve a gap in the seed KB).

@@ -1,6 +1,7 @@
 id: cathode_oxide_coating_v0
 kind: process
 name: Cathode oxide coating
+process_type: batch
 layer_tags:
   - layer_7
 inputs:
@@ -22,11 +23,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: "Spray/dip and oven dry energy for oxide coating."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Apply oxide coating and dry."
 notes: "Placeholder oxide coating step for cathodes (per paper seed list); uses generic coating compound and drying."

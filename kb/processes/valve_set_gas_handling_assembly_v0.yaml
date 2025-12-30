@@ -1,5 +1,6 @@
 id: valve_set_gas_handling_assembly_v0
 kind: process
+process_type: batch
 name: Valve set for gas handling assembly
 layer_tags:
 - layer_6
@@ -24,9 +25,10 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.4
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.9
 notes: "Assemble valve set for gas handling from machined valve body, gas flow controller, and fittings/valves."

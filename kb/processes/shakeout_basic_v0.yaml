@@ -1,5 +1,6 @@
 id: shakeout_basic_v0
 kind: process
+process_type: batch
 name: Shakeout and casting cleanup (basic)
 layer_tags:
   - layer_6
@@ -10,11 +11,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Vibration/shakeout energy for sand removal"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Shakeout and basic cleanup"
 notes: "Basic shakeout to remove sand from castings and perform initial cleanup."

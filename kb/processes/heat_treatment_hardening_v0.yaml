@@ -18,10 +18,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 3.0
-  notes: "Hardening heat treatment; placeholder energy per kg based on nearby heat_treatment types"
+  type: fixed_per_batch
+  value: 3.3
+  unit: kWh
+  notes: "Hardening heat treatment; placeholder energy per batch based on ~1.1 kg load"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Hardening heat treatment for bearing rings after machining; values are placeholders to align with the bearing_set_sealed_v0 recipe."
+process_type: batch

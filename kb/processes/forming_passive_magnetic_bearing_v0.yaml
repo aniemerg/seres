@@ -18,12 +18,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 5.0
+  unit: kWh/kg
+  scaling_basis: permanent_magnet_neodymium
   notes: Energy for forming passive magnetic bearing from Nd magnets (placeholder)
 time_model:
   type: linear_rate
   rate: 20.0
   rate_unit: kg/hr
+  scaling_basis: permanent_magnet_neodymium
 notes: Form passive magnetic bearing by shaping/assembling Nd magnets into bearing form; placeholder values for seed KB.
 process_type: continuous

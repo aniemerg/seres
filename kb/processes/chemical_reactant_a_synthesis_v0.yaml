@@ -1,6 +1,7 @@
 id: chemical_reactant_a_synthesis_v0
 kind: process
 name: Synthesis of chemical_reactant_a v0
+process_type: batch
 layer_tags:
   - layer_4
 inputs:
@@ -21,11 +22,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 4.0
-  notes: "Placeholder energy for synthesis of chemical_reactant_a"
+  type: fixed_per_batch
+  value: 8.0
+  unit: kWh
+  notes: "Placeholder energy for synthesis of chemical_reactant_a (2 kg batch)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: "Reaction time including heating and mixing"
 notes: "Placeholder synthesis of chemical_reactant_a from regolith_excavated and solvent_generic."

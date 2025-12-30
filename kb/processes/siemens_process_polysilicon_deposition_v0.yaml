@@ -25,13 +25,15 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 180.0
+  unit: kWh
   notes: Very high energy for 1150°C deposition and resistive heating of rods
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 48.0
   notes: Slow CVD deposition over 1-2 days
+process_type: batch
 notes: |
   Siemens process stage 2: Chemical vapor deposition of ultra-pure polysilicon.
   Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt

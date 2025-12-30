@@ -245,6 +245,7 @@ class ClosureAnalyzer:
 
         has_inputs = False
         null_qty_found = False
+        has_boundary_process = False
 
         # FIRST: Check for recipe-level inputs (added 2025-12-24)
         recipe_inputs = recipe.get('inputs', [])
@@ -315,6 +316,8 @@ class ClosureAnalyzer:
                     if process_model:
                         # Convert to dict
                         process = self._to_dict(process_model)
+                        if process.get('process_type') == 'boundary':
+                            has_boundary_process = True
                         # Get inputs from the process
                         process_inputs = process.get('inputs', [])
                         for inp in process_inputs:
@@ -344,8 +347,8 @@ class ClosureAnalyzer:
 
         if not has_inputs:
             # Recipe exists but has no inputs - check if it's a raw material extraction
-            if self._is_raw_material(item_id, item):
-                # Legitimate raw material extraction recipe (mining, etc.)
+            if self._is_raw_material(item_id, item) or has_boundary_process:
+                # Legitimate raw material extraction recipe (mining/boundary)
                 mass_kg = self._calculate_mass(item, qty, unit)
                 self._accumulate(raw_materials, item_id, qty, unit, mass_kg)
                 cache_entry['raw'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}

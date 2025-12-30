@@ -21,12 +21,15 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: Assumed energy for NiFe beneficiation with magnetic separation
 time_model:
   type: linear_rate
   rate: 50.0
   rate_unit: kg/hr
+  scaling_basis: regolith_powder
 notes: Seeded NiFe alloy beneficiation; focuses on magnetic separation of NiFe from regolith.
 process_type: continuous

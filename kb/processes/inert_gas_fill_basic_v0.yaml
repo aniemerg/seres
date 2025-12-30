@@ -1,6 +1,7 @@
 id: inert_gas_fill_basic_v0
 name: Inert gas fill basic v0
 kind: process
+process_type: batch
 inputs:
   - item_id: nitrogen_gas_purified
     qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.3
 notes: "Converts purified nitrogen gas into inert gas fill token for downstream sealing processes (e.g., NAK fill)."

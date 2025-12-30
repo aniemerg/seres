@@ -4,8 +4,14 @@ name: General welding
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
-outputs: []
+inputs:
+- item_id: steel_stock
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: welded_assemblies
+  qty: 1.0
+  unit: kg
 requires_ids:
 - welding_power_supply_v0
 - welding_tools_set
@@ -14,12 +20,16 @@ resource_requirements:
   amount: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: steel_stock
   notes: arc welding power and wire feed for general joints
 time_model:
   type: linear_rate
-  hr_per_kg: 1.0
+  rate: 1.0
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
   notes: setup, tack welding, welding passes, cleanup
 notes: General arc welding process for joining various components. Intended as a flexible, catch-all welding step used across
   multiple assemblies.

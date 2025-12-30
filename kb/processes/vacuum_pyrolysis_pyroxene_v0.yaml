@@ -26,11 +26,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 18.0
+  unit: kWh
   notes: Extreme temperature thermal decomposition at 2000-2600°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: High temperature vapor phase pyrolysis
 notes: |
@@ -51,3 +52,4 @@ notes: |
   Can process enstatite (MgSiO3), wollastonite (CaSiO3), and other pyroxenes
   Stoichiometry: MgSiO3 (100.4 g/mol) → SiO (44.1g) + MgO (40.3g) + 0.5 O2 (16g)
   SiO can be further processed to Si metal or SiO2
+process_type: batch

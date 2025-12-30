@@ -22,11 +22,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: Grinding, screening, and magnetic separation
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
 notes: Placeholder beneficiation to concentrate FeS (troilite) from regolith fines.
 process_type: continuous

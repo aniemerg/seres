@@ -1,6 +1,7 @@
 id: cleaning_basic_v0
 kind: process
 name: Basic cleaning process v0
+process_type: batch
 layer_tags:
   - layer_5
 inputs:
@@ -21,11 +22,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Minimal energy for washing and drying
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: Wash, rinse, and dry time
 notes: |

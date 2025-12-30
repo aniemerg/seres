@@ -9,19 +9,22 @@ description: 'Basic surface collection of lunar regolith from the highlands usin
 inputs: []
 outputs:
 - item_id: regolith_lunar_highlands
-  quantity: 100
+  qty: 1.0
   unit: kg
-  per: hour
-required_machines:
-- labor_bot_general_v0: 1
-scalable: true
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 time_model:
   type: linear_rate
   rate: 100
   rate_unit: kg/hr
+  scaling_basis: regolith_lunar_highlands
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.05
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_highlands
 notes: 'Highlands regolith, aluminum-rich for alumina extraction.
 
   Bootstrap route for highlands regolith supply; intended for modeling ISRU bootstrapping.

@@ -19,10 +19,12 @@ resource_requirements:
   qty: 0.3
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: "Seed fabrication energy for forming a small differential pair component"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
+process_type: batch
 notes: "Fabrication step converting steel stock into yn_neuron_differential_pair_v0. Placeholder values for modeling."

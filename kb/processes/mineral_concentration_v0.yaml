@@ -19,12 +19,16 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
+  unit: kWh/kg
+  scaling_basis: crushed_ore
   notes: Separation equipment power per kg
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
-  notes: Throughput including setup and cleanup
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: crushed_ore
+  notes: Throughput including setup and cleanup (0.05 hr per kg = 20 kg/hr)
 notes: Basic mineral concentration using gravity and magnetic separation steps to upgrade crushed ore.
 process_type: continuous

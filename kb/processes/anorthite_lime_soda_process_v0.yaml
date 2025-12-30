@@ -1,6 +1,7 @@
 id: anorthite_lime_soda_process_v0
 kind: process
 name: Lime-soda process for anorthite (alumina extraction)
+process_type: batch
 layer_tags:
   - layer_4
   - layer_5
@@ -32,11 +33,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 10.0
-  notes: High temperature calcination and sintering
+  unit: kWh
+  notes: High temperature calcination and sintering (1 kg anorthite batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Extended calcination and leaching time
 notes: |

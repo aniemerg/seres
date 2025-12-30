@@ -14,11 +14,14 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: raw_metal_block
 notes: Fabrication step converting 3 kg raw metal block into 1 kg base metal parts; remainder treated as waste.
 process_type: continuous

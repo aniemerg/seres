@@ -14,11 +14,14 @@ resource_requirements:
   amount: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: steel_stock
 time_model:
   type: linear_rate
   rate: 12.0
   rate_unit: kg/hr
+  scaling_basis: steel_stock
 notes: Fabrication of standard motor assembly from steel stock.
 process_type: continuous

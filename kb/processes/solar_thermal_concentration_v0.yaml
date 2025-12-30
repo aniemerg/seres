@@ -19,12 +19,16 @@ resource_requirements:
   qty: 0.1
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.01
+  unit: kWh/kWh
+  scaling_basis: solar_radiation
   notes: minimal energy for tracking motors and control systems
 time_model:
   type: linear_rate
-  hr_per_kg: 0.01
+  rate: 100.0
+  rate_unit: kWh/hr
+  scaling_basis: solar_radiation
   notes: continuous passive operation with minimal intervention
 notes: Solar thermal concentration using fresnel lenses or parabolic mirrors. Achieves 1600-2700°C concentration for thermionic
   or thermal applications.

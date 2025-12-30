@@ -17,9 +17,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
+process_type: batch
 notes: "3D printing motor housing and ironPLA stator; basic polymer printer used."

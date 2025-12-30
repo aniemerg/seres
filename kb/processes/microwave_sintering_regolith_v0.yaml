@@ -21,13 +21,17 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: regolith_powder
   notes: Microwave heating couples efficiently with nanophase iron in regolith. Reaches 1000-1500°C with rapid heating (1000°C/min).
     More energy-efficient than conventional sintering due to volumetric heating and strong coupling with iron particles.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
+  rate: 3.333
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
   notes: 'Very rapid process due to efficient microwave coupling. 1000°C/min heating rate possible. Typical cycle: mold filling,
     microwave exposure (minutes), cooling. Can be performed in-situ with mobile microwave head on rover.'
 notes: 'Microwave sintering process for consolidating lunar regolith into solid construction blocks or in-situ structures.

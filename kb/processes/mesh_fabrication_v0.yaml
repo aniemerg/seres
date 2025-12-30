@@ -1,6 +1,7 @@
 id: mesh_fabrication_v0
 kind: process
 name: Mesh fabrication (nickel/steel mesh)
+process_type: batch
 layer_tags:
 - layer_6
 inputs:
@@ -16,9 +17,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.0
+  type: fixed_per_batch
+  value: 0.15
+  unit: kWh
+  notes: "Mesh cutting and forming energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Fabrication of mesh current collector from nickel mesh sheet; placeholder values."

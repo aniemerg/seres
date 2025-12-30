@@ -28,12 +28,16 @@ resource_requirements:
   unit: hr
   notes: 3 hr/kg * 10 kg input
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
+  unit: kWh/kg
+  scaling_basis: steel_stock
   notes: Higher power and longer cycle times for precision cuts and surface finishes
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
   notes: Slower feeds/speeds for tight tolerances (±0.005 mm), multiple finishing passes, CMM inspection
 notes: Precision machining for tight tolerance parts (±0.005 mm). Includes CNC turning, milling, grinding, and dimensional
   inspection. Used for bearing surfaces, mating components, and precision mechanisms.

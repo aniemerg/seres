@@ -1,11 +1,18 @@
 id: pressing_and_forming_v0
 kind: process
 name: Pressing and forming
+process_type: continuous
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
-outputs: []
+inputs:
+  - item_id: powder_feedstock
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: pressed_green_compact
+    qty: 10.0
+    unit: kg
 requires_ids:
 - hydraulic_press
 resource_requirements:
@@ -13,12 +20,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: powder_feedstock
   notes: Hydraulic press operation and die heating
 time_model:
   type: linear_rate
-  hr_per_kg: 0.2
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: powder_feedstock
   notes: Powder loading, pressing cycle, part ejection, and die cleaning
 notes: 'Pressing and forming process for powder compaction.
 
@@ -31,4 +42,3 @@ notes: 'Pressing and forming process for powder compaction.
   Typical pressures: 50-200 MPa depending on material
 
   '
-process_type: continuous

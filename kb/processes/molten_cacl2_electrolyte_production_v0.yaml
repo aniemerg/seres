@@ -17,11 +17,13 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: |
   Placeholder conversion of CaCl2 electrolyte to molten CaCl2 electrolyte at 900°C.
   Uses enhanced FFC reactor and temperature control system to achieve molten state.

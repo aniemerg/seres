@@ -24,11 +24,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
   notes: Heating, mixing, and reaction energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Reaction time including heat-up, reaction, and cool-down
 notes: |
@@ -50,3 +51,4 @@ notes: |
     - Battery electrolytes
   Lunar context: Essential for chemical industry and materials production
   Critical for: Pharmaceuticals, polymers, specialty chemicals, life support consumables
+process_type: batch

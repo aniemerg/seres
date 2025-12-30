@@ -18,13 +18,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: ferrite_toroid_core_v0
   notes: Placeholder energy per unit output for core memory threading operation.
 time_model:
   type: linear_rate
-  setup_hr: 0.0
   rate: 2.0
   rate_unit: kg/hr
+  scaling_basis: ferrite_toroid_core_v0
 notes: Placeholder threading operation for ferrite toroids to enable KB closure; refine with real threading steps later.
 process_type: continuous

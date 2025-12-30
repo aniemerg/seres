@@ -1,6 +1,7 @@
 id: salt_to_sodium_chloride_v0
 name: Purify sodium chloride from contingency NaCl
 kind: process
+process_type: batch
 inputs:
 - item_id: salt_contingency_nacl
   qty: 1.0
@@ -14,10 +15,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: "Energy for salt purification to NaCl"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Isolate/purify NaCl from contingency NaCl to yield sodium_chloride feedstock."

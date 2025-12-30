@@ -20,9 +20,11 @@ resource_requirements:
     amount: 2.0
     unit: hr
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 4.0
+  unit: kWh
 notes: "Fabricate conveyor belt loop by assembling silicone/rubber belt segment into loop with small frame."
+process_type: batch

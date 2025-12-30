@@ -4,8 +4,14 @@ name: Basic heating
 layer_tags:
 - layer_5
 - layer_6
-inputs: []
-outputs: []
+inputs:
+  - item_id: bulk_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: bulk_material
+    qty: 1.0
+    unit: kg
 requires_ids:
 - furnace_basic
 resource_requirements:
@@ -13,12 +19,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.5
+  unit: kWh/kg
+  scaling_basis: bulk_material
   notes: furnace heating to working temperature (800-1200°C)
 time_model:
   type: linear_rate
-  hr_per_kg: 0.8
+  rate: 1.25
+  rate_unit: kg/hr
+  scaling_basis: bulk_material
   notes: heat-up time including furnace loading and temperature stabilization
 notes: Basic heating process for bringing materials to working temperature. Used for forging, forming, and heat treatment
   operations. Typical temperatures 800-1200°C.

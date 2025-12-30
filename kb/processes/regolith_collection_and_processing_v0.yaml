@@ -18,12 +18,15 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.4
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_highlands
 time_model:
   type: linear_rate
   rate: 100.0
   rate_unit: kg/hr
+  scaling_basis: regolith_lunar_highlands
 notes: Wrapper process to collect lunar regolith raw and produce thermal storage regolith for solar thermal storage system;
   placeholder values.
 process_type: continuous

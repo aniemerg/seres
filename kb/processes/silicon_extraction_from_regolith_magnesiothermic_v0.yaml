@@ -1,5 +1,6 @@
 id: silicon_extraction_from_regolith_magnesiothermic_v0
 kind: process
+process_type: batch
 name: Magnesiothermic silicon extraction from lunar regolith silica
 layer_tags:
 - layer_3
@@ -18,7 +19,10 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  total_energy_kwh: 11.0
+  type: fixed_per_batch
+  value: 11.0
+  unit: kWh
 time_model:
-  total_time_hr: 0.9
+  type: batch
+  hr_per_batch: 0.9
 notes: "Magnesiothermic reduction of regolith-derived silica to silicon metal. Regolith mass (6.34 kg) provides ~2.85 kg SiO2; Mg input ~2.31 kg for ~75% silicon recovery."
