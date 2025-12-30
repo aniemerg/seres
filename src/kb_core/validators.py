@@ -72,6 +72,20 @@ class ValidationIssue:
 
 
 # =============================================================================
+# Helper Functions
+# =============================================================================
+
+def _get_entity_id(entity: Any) -> str:
+    """Extract entity ID from Pydantic model or dict."""
+    if hasattr(entity, 'id'):
+        return entity.id
+    elif isinstance(entity, dict):
+        return entity.get('id', 'unknown')
+    else:
+        return 'unknown'
+
+
+# =============================================================================
 # Schema Validation (Category 1)
 # =============================================================================
 
@@ -87,7 +101,7 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
     - No deprecated fields (ERROR)
     """
     issues = []
-    process_id = getattr(process, 'id', 'unknown')
+    process_id = _get_entity_id(process)
 
     # Get as dict if it's a Pydantic model
     if hasattr(process, 'model_dump'):
@@ -286,7 +300,7 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
     - Known units (ERROR)
     """
     issues = []
-    process_id = getattr(process, 'id', 'unknown')
+    process_id = _get_entity_id(process)
 
     # Get as dict if it's a Pydantic model
     if hasattr(process, 'model_dump'):
@@ -490,7 +504,7 @@ def validate_process_unit_conversion(
     - mass_kg available when needed (ERROR)
     """
     issues = []
-    process_id = getattr(process, 'id', 'unknown')
+    process_id = _get_entity_id(process)
 
     # Get as dict if it's a Pydantic model
     if hasattr(process, 'model_dump'):
@@ -604,7 +618,7 @@ def validate_process_cross_model(process: Any) -> List[ValidationIssue]:
     - Batch process consistency (WARNING)
     """
     issues = []
-    process_id = getattr(process, 'id', 'unknown')
+    process_id = _get_entity_id(process)
 
     # Get as dict if it's a Pydantic model
     if hasattr(process, 'model_dump'):
@@ -700,7 +714,7 @@ def validate_recipe(recipe: Any) -> List[ValidationIssue]:
         List of validation issues
     """
     issues = []
-    recipe_id = getattr(recipe, 'id', 'unknown')
+    recipe_id = _get_entity_id(recipe)
 
     # Get as dict if it's a Pydantic model
     if hasattr(recipe, 'model_dump'):
