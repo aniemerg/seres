@@ -2,27 +2,28 @@ id: spur_gear_cutting_basic_v0
 kind: process
 name: Basic spur gear cutting
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: gear_set_medium
-    qty: 1.0
-    unit: unit
+- item_id: gear_set_medium
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: spur_gear_set_v0
-    qty: 1.0
-    unit: unit
+- item_id: spur_gear_set_v0
+  qty: 1.0
+  unit: unit
 requires_ids:
-  - milling_machine_general_v0
-  - cutting_tools_general
+- milling_machine_general_v0
+- cutting_tools_general
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: null
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: null
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 2.0
-  notes: "spur gear cutting energy placeholder"
+  notes: spur gear cutting energy placeholder
 time_model:
   type: linear_rate
   hr_per_kg: 0.6
-notes: "Basic spur gear cutting operation converting a medium gear set into spur gear set. Placeholder time/energy values."
+notes: Basic spur gear cutting operation converting a medium gear set into spur gear set. Placeholder time/energy values.
+process_type: continuous

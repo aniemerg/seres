@@ -2,21 +2,22 @@ id: sizing_grinding_basic_v0
 kind: process
 name: Sizing and grinding (basic)
 layer_tags:
-  - layer_3
+- layer_3
 inputs: []
 outputs: []
 requires_ids:
-  - ball_mill_v0
+- ball_mill_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.2
-  notes: "ball mill power for fine grinding"
+  notes: ball mill power for fine grinding
 time_model:
   type: linear_rate
   hr_per_kg: 0.1
-  notes: "continuous grinding ~10 kg/hr"
+  notes: continuous grinding ~10 kg/hr
 notes: Generic sizing/grinding for feedstocks (e.g., carbon); placeholder.
+process_type: continuous

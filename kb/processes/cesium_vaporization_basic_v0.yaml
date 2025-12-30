@@ -2,25 +2,26 @@ id: cesium_vaporization_basic_v0
 kind: process
 name: Cesium vaporization from ampule (basic)
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: cesium_ampule
-    qty: 1.0
-    unit: unit
+- item_id: cesium_ampule
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: cesium_vapor_thermionic_v0
-    qty: 0.1
-    unit: kg
+- item_id: cesium_vapor_thermionic_v0
+  qty: 0.1
+  unit: kg
 resource_requirements:
-  - machine_id: vacuum_chamber
-    qty: 1.0
-    unit: hr
+- machine_id: vacuum_chamber
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_unit_output
   value: 0.5
 time_model:
   type: linear_rate
-  setup_hr: 0.05
-  rate_kg_per_hr: 2.0
-notes: "Vaporize cesium ampule contents under vacuum to produce cesium vapor for thermionic space charge neutralization."
+  rate: 2.0
+  rate_unit: kg/hr
+notes: Vaporize cesium ampule contents under vacuum to produce cesium vapor for thermionic space charge neutralization.
+process_type: continuous

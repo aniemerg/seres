@@ -1,3 +1,5 @@
+NOTE: Migration/analysis document for pre-ADR-012 schema. See docs/kb_schema_reference.md for current rules.
+
 # Implementation Plan: KB Core Refactor with ADR 12-17
 
 **Status:** In Progress

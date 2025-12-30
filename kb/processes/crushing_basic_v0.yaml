@@ -2,22 +2,24 @@ id: crushing_basic_v0
 kind: process
 name: Crushing (basic)
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs: []
 outputs: []
 requires_ids:
-  - rock_crusher_basic
+- rock_crusher_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 1.5
-  notes: "crushing motor power for size reduction to <50mm"
+  notes: crushing motor power for size reduction to <50mm
 time_model:
   type: linear_rate
   hr_per_kg: 0.3
-  notes: "primary crushing throughput ~3 kg/hr for jaw or cone crusher"
-notes: Primary crushing process for size reduction of ore, rock, and regolith. Reduces large rocks (>200mm) to smaller aggregate (<50mm) for downstream grinding and processing. Uses jaw crushers, cone crushers, or impact crushers.
+  notes: primary crushing throughput ~3 kg/hr for jaw or cone crusher
+notes: Primary crushing process for size reduction of ore, rock, and regolith. Reduces large rocks (>200mm) to smaller aggregate
+  (<50mm) for downstream grinding and processing. Uses jaw crushers, cone crushers, or impact crushers.
+process_type: continuous

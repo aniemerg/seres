@@ -2,15 +2,15 @@ id: grinding_basic_v0
 kind: process
 name: Grinding (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
 requires_ids:
-  - grinding_wheels
+- grinding_wheels
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.7
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.7
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 1.2
@@ -18,7 +18,7 @@ energy_model:
 time_model:
   type: linear_rate
   hr_per_kg: 0.5
-  setup_hr: 0.2
   notes: Fixturing plus grinding passes per batch.
-notes: Basic grinding for deburring and moderate surface finish improvement on metal parts; not precision grinding. Used for tool edges, brackets, and small components.
-
+notes: Basic grinding for deburring and moderate surface finish improvement on metal parts; not precision grinding. Used for
+  tool edges, brackets, and small components.
+process_type: continuous

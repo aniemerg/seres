@@ -162,6 +162,7 @@ notes: "Minimal BOM - full expansion deferred"
 id: crushing_basic_v0
 name: Crushing (Basic)
 kind: process
+process_type: continuous
 inputs:
   - item_id: regolith_raw
     qty: 100.0
@@ -175,26 +176,30 @@ byproducts:                # Optional but recommended
     qty: 5.0
     unit: kg
 resource_requirements:
-  - resource_type: crusher
-    amount: 2.0
+  - machine_id: crusher_basic_v0
+    qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_raw
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 50.0
+  rate: 50.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_raw
 ```
 
 **Energy Model Types:**
-- `kWh_per_kg_input` — Energy per kg of input material
-- `kWh_per_unit_output` — Energy per unit of output
-- `kW_times_time` — Power draw × time duration
+- `per_unit` — Energy per unit (e.g., kWh/kg, kWh/unit)
+- `fixed_per_batch` — Fixed energy per batch
+- `boundary` — Terminal process boundary
 
 **Time Model Types:**
-- `fixed_time` — Constant duration regardless of quantity
-- `linear_rate` — Time = setup + (qty / rate)
+- `linear_rate` — Continuous rate-based time
+- `batch` — Fixed time per batch (with optional setup)
+- `boundary` — Terminal process boundary
 
 **Conservation:** Mass should balance (inputs ≈ outputs + byproducts). Losses to waste/byproducts are acceptable if declared.
 
@@ -212,10 +217,10 @@ id: recipe_iron_ingot_v0
 kind: recipe
 target_item_id: iron_ingot
 steps:
-  - crushing_basic_v0
-  - magnetic_separation_v0
-  - hydrogen_reduction_v0
-  - melting_basic_v0
+  - process_id: crushing_basic_v0
+  - process_id: magnetic_separation_v0
+  - process_id: hydrogen_reduction_v0
+  - process_id: melting_basic_v0
 ```
 
 **Optional:**
@@ -233,16 +238,17 @@ notes: "Based on Ellery 2018 process chain"
 
 ### Resources
 
-**Purpose:** Resource types that constrain throughput (referenced by processes).
+**Purpose:** Processes declare resource requirements directly, typically via machine IDs.
 
 **Required Fields:**
 ```yaml
-id: crusher
-kind: resource
-resource_type: machine_type
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1.0
+    unit: hr
 ```
 
-**Note:** Agents rarely create resources directly. Most are inferred from machine capabilities or process requirements.
+**Note:** Avoid creating new resource definitions unless a schema or tool explicitly requires them.
 
 ---
 
@@ -272,12 +278,12 @@ resource_type: machine_type
 
 ---
 
-### Standard Units (Required)
+### Standard Units (Preferred)
 
 **Mass:** `kg`
 **Energy:** `kWh`
 **Time:** `hr`
-**Rates:** `kg/hr`
+**Rates:** compound units like `kg/hr`, `unit/hr`, `L/hr` (ADR-012)
 **Distance:** `km`
 **Power:** `kW`
 
@@ -435,6 +441,7 @@ notes: "Refined from lunar regolith via Mg reduction of SiO2"
 id: silicon_reduction_v0
 name: Magnesium Reduction of Silica
 kind: process
+process_type: batch
 inputs:
   - item_id: silica_powder
     qty: 60.0
@@ -454,16 +461,17 @@ byproducts:
     qty: 40.0
     unit: kg
 resource_requirements:
-  - resource_type: reduction_furnace
-    amount: 4.0
+  - machine_id: reduction_furnace_v0
+    qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg_output
-  value: 15.0              # Estimate based on similar reductions
+  type: fixed_per_batch
+  value: 120.0             # Estimate based on similar reductions
+  unit: kWh
 time_model:
-  type: linear_rate
+  type: batch
   setup_hr: 0.5
-  rate_kg_per_hr: 7.0
+  hr_per_batch: 3.5
 notes: "Based on terrestrial Pidgeon process, adapted for lunar"
 ```
 
@@ -475,10 +483,10 @@ id: recipe_silicon_wafer_v0
 kind: recipe
 target_item_id: silicon_wafer_basic
 steps:
-  - silicon_reduction_v0
-  - silicon_purification_v0
-  - crystal_growth_czochralski_v0
-  - wafer_slicing_v0
+  - process_id: silicon_reduction_v0
+  - process_id: silicon_purification_v0
+  - process_id: crystal_growth_czochralski_v0
+  - process_id: wafer_slicing_v0
 assumptions: "Simplified process chain - omits several refinement steps"
 notes: "Placeholder recipe for semiconductor manufacturing"
 ```

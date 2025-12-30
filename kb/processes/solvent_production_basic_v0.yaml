@@ -2,22 +2,23 @@ id: solvent_production_basic_v0
 name: Solvent production (placeholder)
 kind: process
 inputs:
-  - item_id: ethanol_or_isopropanol_feedstock_v0
-    qty: 3.0
-    unit: kg
+- item_id: ethanol_or_isopropanol_feedstock_v0
+  qty: 3.0
+  unit: kg
 outputs:
-  - item_id: ethanol_or_isopropanol
-    qty: 3.0
-    unit: kg
+- item_id: ethanol_or_isopropanol
+  qty: 3.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.2
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 6.0
-notes: "Placeholder solvent production path to satisfy no_recipe gap for ethanol_or_isopropanol."
+  rate: 6.0
+  rate_unit: kg/hr
+notes: Placeholder solvent production path to satisfy no_recipe gap for ethanol_or_isopropanol.
+process_type: continuous

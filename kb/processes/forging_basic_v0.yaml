@@ -2,31 +2,32 @@ id: forging_basic_v0
 kind: process
 name: Basic forging
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: steel_stock_bar_or_billet
-    qty: 1.0
-    unit: kg
+- item_id: steel_stock_bar_or_billet
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: forged_steel_parts
-    qty: 1.0
-    unit: kg
+- item_id: forged_steel_parts
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - forge_or_induction_heater_v0
-  - power_hammer_or_press
-  - anvil_or_die_set
+- forge_or_induction_heater_v0
+- power_hammer_or_press
+- anvil_or_die_set
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 2.0
-  notes: "Heating steel to forging temperature (~1200°C) plus pressing/hammering work"
+  notes: Heating steel to forging temperature (~1200°C) plus pressing/hammering work
 time_model:
   type: linear_rate
   hr_per_kg: 0.6
-  setup_hr: 0.2
-  notes: "Heat cycles, hammer/press forming, cooling, includes setup"
-notes: Hot forging process for shaping steel into complex parts through controlled deformation. Includes heating, hammering or pressing, and controlled cooling.
+  notes: Heat cycles, hammer/press forming, cooling, includes setup
+notes: Hot forging process for shaping steel into complex parts through controlled deformation. Includes heating, hammering
+  or pressing, and controlled cooling.
+process_type: continuous

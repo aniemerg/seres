@@ -2,59 +2,59 @@ id: control_panel_assembly_v0
 kind: process
 name: Control panel assembly
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: enclosure_electrical_medium
-    qty: 12.0
-    unit: kg
-    notes: Control panel enclosure cabinet
-  - item_id: control_circuit_board_basic
-    qty: 2.0
-    unit: kg
-    notes: Programmable logic controller
-  - item_id: relay_electromagnetic_v0
-    qty: 2.0
-    unit: kg
-    notes: Control relays and contactors
-  - item_id: control_components
-    qty: 1.0
-    unit: kg
-    notes: Selector switches and buttons
-  - item_id: control_components
-    qty: 0.5
-    unit: kg
-    notes: Status indicator lights
-  - item_id: assembled_wire_harness
-    qty: 3.0
-    unit: kg
-    notes: Control wiring and cable assemblies
-  - item_id: terminal_block_set
-    qty: 2.0
-    unit: kg
-    notes: Terminal blocks and connectors
-  - item_id: control_components
-    qty: 1.5
-    unit: kg
-    notes: Circuit protection devices
-  - item_id: fastener_kit_small
-    qty: 0.5
-    unit: kg
-    notes: Mounting hardware
-  - item_id: din_rail_steel
-    qty: 0.5
-    unit: kg
-    notes: Component mounting rails
+- item_id: enclosure_electrical_medium
+  qty: 12.0
+  unit: kg
+  notes: Control panel enclosure cabinet
+- item_id: control_circuit_board_basic
+  qty: 2.0
+  unit: kg
+  notes: Programmable logic controller
+- item_id: relay_electromagnetic_v0
+  qty: 2.0
+  unit: kg
+  notes: Control relays and contactors
+- item_id: control_components
+  qty: 1.0
+  unit: kg
+  notes: Selector switches and buttons
+- item_id: control_components
+  qty: 0.5
+  unit: kg
+  notes: Status indicator lights
+- item_id: assembled_wire_harness
+  qty: 3.0
+  unit: kg
+  notes: Control wiring and cable assemblies
+- item_id: terminal_block_set
+  qty: 2.0
+  unit: kg
+  notes: Terminal blocks and connectors
+- item_id: control_components
+  qty: 1.5
+  unit: kg
+  notes: Circuit protection devices
+- item_id: fastener_kit_small
+  qty: 0.5
+  unit: kg
+  notes: Mounting hardware
+- item_id: din_rail_steel
+  qty: 0.5
+  unit: kg
+  notes: Component mounting rails
 outputs:
-  - item_id: control_panel_assembly_v0
-    qty: 25.0
-    unit: kg
+- item_id: control_panel_assembly_v0
+  qty: 25.0
+  unit: kg
 requires_ids:
-  - assembly_tools_basic
-  - test_equipment_basic
+- assembly_tools_basic
+- test_equipment_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.5
@@ -62,9 +62,9 @@ energy_model:
 time_model:
   type: linear_rate
   hr_per_kg: 0.4
-  setup_hr: 0.2
   notes: Wiring, mounting, labeling, and functional checkout.
-notes: >
-  Assemble control panels or control units: mount switches, indicators, wiring
-  harnesses, and controllers into enclosures; includes continuity checks and
-  basic functional test.
+notes: 'Assemble control panels or control units: mount switches, indicators, wiring harnesses, and controllers into enclosures;
+  includes continuity checks and basic functional test.
+
+  '
+process_type: continuous

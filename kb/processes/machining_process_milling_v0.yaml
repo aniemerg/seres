@@ -2,26 +2,27 @@ id: machining_process_milling_v0
 name: Milling (Machining) v0
 kind: process
 inputs:
-  - item_id: raw_metal_block
-    qty: 5.0
-    unit: kg
+- item_id: raw_metal_block
+  qty: 5.0
+  unit: kg
 outputs:
-  - item_id: machined_metal_block_v0
-    qty: 4.5
-    unit: kg
+- item_id: machined_metal_block_v0
+  qty: 4.5
+  unit: kg
 byproducts:
-  - item_id: metal_swarf
-    qty: 0.5
-    unit: kg
+- item_id: metal_swarf
+  qty: 0.5
+  unit: kg
 resource_requirements:
-  - machine_id: cnc_mill
-    qty: 1.0
-    unit: unit
+- machine_id: cnc_mill
+  qty: 1.0
+  unit: unit
 energy_model:
   type: kWh_per_kg_input
   value: 1.0
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 25.0
-notes: "Placeholder milling operation converting raw_metal_block to machined_metal_block_v0; byproduct swarf."
+  rate: 25.0
+  rate_unit: kg/hr
+notes: Placeholder milling operation converting raw_metal_block to machined_metal_block_v0; byproduct swarf.
+process_type: continuous

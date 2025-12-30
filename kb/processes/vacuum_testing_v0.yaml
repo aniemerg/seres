@@ -2,27 +2,33 @@ id: vacuum_testing_v0
 kind: process
 name: Vacuum testing
 layer_tags:
-  - layer_7
+- layer_7
 inputs: []
 outputs: []
 requires_ids:
-  - vacuum_pump_station
-  - leak_test_equipment
+- vacuum_pump_station
+- leak_test_equipment
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.3
-  notes: "Vacuum pump operation, leak detection sensors, and instrumentation"
+  notes: Vacuum pump operation, leak detection sensors, and instrumentation
 time_model:
   type: linear_rate
   hr_per_kg: 1.0
-  notes: "Evacuation, soak time for outgassing, vacuum level measurement, and leak detection"
-notes: |
-  Vacuum testing for vacuum-insulated components and systems.
+  notes: Evacuation, soak time for outgassing, vacuum level measurement, and leak detection
+notes: 'Vacuum testing for vacuum-insulated components and systems.
+
   Evacuates annular spaces or chambers to verify vacuum integrity.
+
   Helium leak testing under vacuum to detect small leaks.
+
   Measures vacuum level and leak rate to ensure thermal performance.
+
   Critical for cryogenic systems, vacuum-insulated piping, and thermal barriers.
+
+  '
+process_type: continuous

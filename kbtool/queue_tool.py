@@ -251,8 +251,20 @@ def gap_ids_present(ids: List[str]) -> Set[str]:
     for obj in items:
         obj_id = obj.get("id")
         if obj_id in wanted:
-            present.add(obj_id)
+            status = obj.get("status") or "pending"
+            if status not in ("resolved", "done", "superseded"):
+                present.add(obj_id)
     return present
+
+
+def gap_id_exists(id_value: str) -> bool:
+    if not id_value:
+        return False
+    items = _load_queue()
+    for obj in items:
+        if obj.get("id") == id_value:
+            return True
+    return False
 
 
 def _register_gap_type(gap_type: str, created_by: str = "unknown") -> None:

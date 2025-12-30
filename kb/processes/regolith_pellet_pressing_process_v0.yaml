@@ -2,26 +2,27 @@ id: regolith_pellet_pressing_process_v0
 name: Regolith Pellet Pressing
 kind: process
 inputs:
-  - item_id: regolith_lunar_mare
-    qty: 100.0
-    unit: kg
+- item_id: regolith_lunar_mare
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: regolith_pellet_v0
-    qty: 95.0
-    unit: kg
+- item_id: regolith_pellet_v0
+  qty: 95.0
+  unit: kg
 byproducts:
-  - item_id: regolith_pellet_dust_v0
-    qty: 5.0
-    unit: kg
+- item_id: regolith_pellet_dust_v0
+  qty: 5.0
+  unit: kg
 resource_requirements:
-  - machine_id: pellet_press
-    qty: 1.5
-    unit: hr
+- machine_id: pellet_press
+  qty: 1.5
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.8
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 40.0
-notes: "Seeded to enable assessment of regolith pellet pressing for FFC cathodes; conservative estimate."
+  rate: 40.0
+  rate_unit: kg/hr
+notes: Seeded to enable assessment of regolith pellet pressing for FFC cathodes; conservative estimate.
+process_type: continuous

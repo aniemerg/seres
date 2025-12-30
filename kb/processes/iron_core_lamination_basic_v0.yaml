@@ -2,29 +2,32 @@ id: iron_core_lamination_basic_v0
 name: Iron core lamination basic v0
 kind: process
 inputs:
-  - item_id: steel_sheet_1mm
-    qty: 0.01
-    unit: kg
+- item_id: steel_sheet_1mm
+  qty: 0.01
+  unit: kg
 outputs:
-  - item_id: iron_core_laminated
-    qty: 0.01
-    unit: kg
+- item_id: iron_core_laminated
+  qty: 0.01
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - resource_type: stamping_press_basic
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- resource_type: stamping_press_basic
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.3
 time_model:
   type: linear_rate
-  setup_hr: 0.01
-  rate_kg_per_hr: 0.1
-notes: "Basic lamination of steel sheet into laminated iron core piece; placeholder parameters for modeling."
-assumptions: |
-  Uses stamping press basic and labor to form a laminated iron core from a small sheet.
+  rate: 0.1
+  rate_unit: kg/hr
+notes: Basic lamination of steel sheet into laminated iron core piece; placeholder parameters for modeling.
+assumptions: 'Uses stamping press basic and labor to form a laminated iron core from a small sheet.
+
   Mass is conserved (0.01 kg steel_sheet_1mm -> 0.01 kg iron_core_laminated).
+
+  '
+process_type: continuous

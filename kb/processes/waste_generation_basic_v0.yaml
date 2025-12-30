@@ -2,26 +2,27 @@ id: waste_generation_basic_v0
 name: Waste generation (basic)
 kind: process
 inputs:
-  - item_id: regolith_lunar_mare
-    qty: 1.0
-    unit: kg
+- item_id: regolith_lunar_mare
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: process_waste
-    qty: 1.0
-    unit: kg
+- item_id: process_waste
+  qty: 1.0
+  unit: kg
 byproducts:
-  - item_id: dust_fines
-    qty: 0.0
-    unit: kg
+- item_id: dust_fines
+  qty: 0.0
+  unit: kg
 resource_requirements:
-  - machine_id: hauler
-    amount: 0.5
-    unit: hr
+- machine_id: hauler
+  amount: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_unit_output
   value: 0.2
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 5.0
-notes: "Placeholder waste-generation process producing 1 kg of process_waste per batch."
+  rate: 5.0
+  rate_unit: kg/hr
+notes: Placeholder waste-generation process producing 1 kg of process_waste per batch.
+process_type: continuous

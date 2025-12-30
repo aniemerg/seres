@@ -2,26 +2,27 @@ id: pcb_fabrication_process_v0
 name: PCB fabrication process (v0)
 kind: process
 inputs:
-  - item_id: copper_clad_laminate
-    qty: 0.5
-    unit: kg
+- item_id: copper_clad_laminate
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: pcb_backprop_bare
-    qty: 0.45
-    unit: kg
+- item_id: pcb_backprop_bare
+  qty: 0.45
+  unit: kg
 byproducts:
-  - item_id: pcb_scrap
-    qty: 0.05
-    unit: kg
+- item_id: pcb_scrap
+  qty: 0.05
+  unit: kg
 resource_requirements:
-  - machine_id: pcb_fab_station
-    qty: 1.0
-    unit: unit
+- machine_id: pcb_fab_station
+  qty: 1.0
+  unit: unit
 energy_model:
   type: kWh_per_kg_input
   value: 0.8
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 2.0
-notes: "Generic PCB fabrication step used across PCB variants to yield bare backprop PCB per recipe."
+  rate: 2.0
+  rate_unit: kg/hr
+notes: Generic PCB fabrication step used across PCB variants to yield bare backprop PCB per recipe.
+process_type: continuous

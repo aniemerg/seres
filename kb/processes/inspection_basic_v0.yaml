@@ -2,19 +2,20 @@ id: inspection_basic_v0
 kind: process
 name: Inspection and QA (basic)
 layer_tags:
-  - layer_7
+- layer_7
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.1
-  notes: "measurement equipment, lighting, and basic test fixtures"
+  notes: measurement equipment, lighting, and basic test fixtures
 time_model:
   type: linear_rate
   hr_per_kg: 0.5
-  notes: "visual inspection, dimensional checks, and basic functional testing"
+  notes: visual inspection, dimensional checks, and basic functional testing
 notes: Basic inspection/QA of assembled/imported items; placeholder timing.
+process_type: continuous

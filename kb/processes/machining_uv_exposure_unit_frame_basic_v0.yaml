@@ -19,9 +19,10 @@ resource_requirements:
 energy_model:
   type: kWh_per_kg_input
   value: 1.5
-  notes: "spindle motor (~5 kW) plus coolant and axis drives"
+  notes: spindle motor (~5 kW) plus coolant and axis drives
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 60.0
-notes: "Machining finishes to shape UV exposure unit frame; placeholder parameters; derived from generic machining template"
+  rate: 60.0
+  rate_unit: kg/hr
+notes: Machining finishes to shape UV exposure unit frame; placeholder parameters; derived from generic machining template
+process_type: continuous

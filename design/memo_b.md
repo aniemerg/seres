@@ -1,3 +1,5 @@
+NOTE: Historical document. Superseded by docs/knowledge_acquisition_protocol.md.
+
 Memo B — Knowledge Acquisition & Normalization Protocol
 (Ellery-seeded, Best-Guess Engineering, LLM-assisted)
 Purpose

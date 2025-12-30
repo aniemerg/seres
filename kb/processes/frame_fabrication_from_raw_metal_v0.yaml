@@ -2,22 +2,23 @@ id: frame_fabrication_from_raw_metal_v0
 name: Frame fabrication from raw metal block
 kind: process
 inputs:
-  - item_id: raw_metal_block
-    qty: 200.0
-    unit: kg
+- item_id: raw_metal_block
+  qty: 200.0
+  unit: kg
 outputs:
-  - item_id: formation_rack_frame
-    qty: 200.0
-    unit: kg
+- item_id: formation_rack_frame
+  qty: 200.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.8
 time_model:
   type: linear_rate
-  setup_hr: 0.3
-  rate_kg_per_hr: 100.0
-notes: "Simplified fabrication of formation rack frame from raw metal stock."
+  rate: 100.0
+  rate_unit: kg/hr
+notes: Simplified fabrication of formation rack frame from raw metal stock.
+process_type: continuous

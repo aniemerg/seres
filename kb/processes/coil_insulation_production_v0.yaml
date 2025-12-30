@@ -1,7 +1,6 @@
 id: coil_insulation_production_v0
 kind: process
 name: Coil insulation production v0
-
 inputs:
 - item_id: silicone_polymer
   qty: 1.0
@@ -24,9 +23,10 @@ resource_requirements:
 energy_model:
   type: kWh_per_kg
   value: 2.0
-notes: 'Energy for producing insulation varnish/film per kg input polymer'
+notes: Energy for producing insulation varnish/film per kg input polymer
 time_model:
   type: linear_rate
   setup: 0.0
   rate: 3.0
-  notes: 'Processing time per kg of input polymer'
+  notes: Processing time per kg of input polymer
+process_type: continuous

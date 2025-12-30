@@ -776,6 +776,27 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
             signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
 
             if signature not in issue_map:
+                # Determine if issue is auto-fixable
+                auto_fixable_rules = {
+                    'process_type_required',
+                    'deprecated_field',
+                    'setup_hr_in_continuous',
+                    'target_item_id_required'
+                }
+                is_auto_fixable = issue.rule in auto_fixable_rules
+
+                # Determine priority (higher number = higher priority)
+                # ERROR validation = 100, WARNING = 50, INFO = 10
+                priority = {
+                    ValidationLevel.ERROR: 100,
+                    ValidationLevel.WARNING: 50,
+                    ValidationLevel.INFO: 10
+                }.get(issue.level, 0)
+
+                # Boost priority for auto-fixable issues
+                if is_auto_fixable:
+                    priority += 20
+
                 # Convert ValidationIssue to queue item
                 queue_item = {
                     "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
@@ -783,6 +804,8 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                     "reason": f"validation_{issue.level.value}",
                     "gap_type": f"validation_{issue.rule}",
                     "item_id": issue.entity_id,
+                    "priority": priority,
+                    "auto_fixable": is_auto_fixable,
                     "context": {
                         "validation_level": issue.level.value,
                         "category": issue.category,
@@ -791,6 +814,7 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                         "field_path": issue.field_path,
                         "fix_hint": issue.fix_hint,
                         "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                        "auto_fixable": is_auto_fixable,
                     }
                 }
                 issue_map[signature] = queue_item
@@ -814,6 +838,27 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
             signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
 
             if signature not in issue_map:
+                # Determine if issue is auto-fixable
+                auto_fixable_rules = {
+                    'process_type_required',
+                    'deprecated_field',
+                    'setup_hr_in_continuous',
+                    'target_item_id_required'
+                }
+                is_auto_fixable = issue.rule in auto_fixable_rules
+
+                # Determine priority (higher number = higher priority)
+                # ERROR validation = 100, WARNING = 50, INFO = 10
+                priority = {
+                    ValidationLevel.ERROR: 100,
+                    ValidationLevel.WARNING: 50,
+                    ValidationLevel.INFO: 10
+                }.get(issue.level, 0)
+
+                # Boost priority for auto-fixable issues
+                if is_auto_fixable:
+                    priority += 20
+
                 # Convert ValidationIssue to queue item
                 queue_item = {
                     "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
@@ -821,6 +866,8 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                     "reason": f"validation_{issue.level.value}",
                     "gap_type": f"validation_{issue.rule}",
                     "item_id": issue.entity_id,
+                    "priority": priority,
+                    "auto_fixable": is_auto_fixable,
                     "context": {
                         "validation_level": issue.level.value,
                         "category": issue.category,
@@ -829,6 +876,7 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                         "field_path": issue.field_path,
                         "fix_hint": issue.fix_hint,
                         "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                        "auto_fixable": is_auto_fixable,
                     }
                 }
                 issue_map[signature] = queue_item

@@ -2,22 +2,23 @@ id: motor_assembly_fabrication_v0
 name: Motor assembly fabrication v0
 kind: process
 inputs:
-  - item_id: steel_stock
-    qty: 12.0
-    unit: kg
+- item_id: steel_stock
+  qty: 12.0
+  unit: kg
 outputs:
-  - item_id: motor_assembly
-    qty: 12.0
-    unit: kg
+- item_id: motor_assembly
+  qty: 12.0
+  unit: kg
 resource_requirements:
-  - machine_id: assembly_station
-    amount: 1.0
-    unit: unit
+- machine_id: assembly_station
+  amount: 1.0
+  unit: unit
 energy_model:
   type: kWh_per_kg_input
   value: 0.6
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 12.0
-notes: "Minimal motor assembly fabrication using steel stock as input."
+  rate: 12.0
+  rate_unit: kg/hr
+notes: Minimal motor assembly fabrication using steel stock as input.
+process_type: continuous

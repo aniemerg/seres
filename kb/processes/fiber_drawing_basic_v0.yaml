@@ -2,31 +2,32 @@ id: fiber_drawing_basic_v0
 kind: process
 name: Basic fiber drawing
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: molten_material_or_preform
-    qty: 1.0
-    unit: kg
+- item_id: molten_material_or_preform
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: drawn_fiber
-    qty: 1.0
-    unit: kg
+- item_id: drawn_fiber
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - furnace_high_temp
-  - fiber_drawing_tower
-  - tension_control_system
+- furnace_high_temp
+- fiber_drawing_tower
+- tension_control_system
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 3.0
-  notes: "Heating and maintaining molten state during drawing"
+  notes: Heating and maintaining molten state during drawing
 time_model:
   type: linear_rate
   hr_per_kg: 1.5
-  setup_hr: 0.5
-  notes: "Continuous fiber drawing at controlled tension and speed"
-notes: Drawing process for creating continuous fibers from molten material (glass, basalt, polymer). Material is heated and pulled through controlled tension to create fine fibers.
+  notes: Continuous fiber drawing at controlled tension and speed
+notes: Drawing process for creating continuous fibers from molten material (glass, basalt, polymer). Material is heated and
+  pulled through controlled tension to create fine fibers.
+process_type: continuous

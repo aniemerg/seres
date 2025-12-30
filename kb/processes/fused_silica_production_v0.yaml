@@ -2,31 +2,32 @@ id: fused_silica_production_v0
 kind: process
 name: Fused silica production
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: silica_purified
-    qty: 10.0
-    unit: kg
+- item_id: silica_purified
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: fused_silica
-    qty: 9.0
-    unit: kg
+- item_id: fused_silica
+  qty: 9.0
+  unit: kg
 requires_ids:
-  - furnace_high_temp
-  - crucible_graphite
-  - controlled_atmosphere_chamber
+- furnace_high_temp
+- crucible_graphite
+- controlled_atmosphere_chamber
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 8.0
-  notes: "Melting silica at ~1700°C requires significant energy, plus controlled cooling"
+  notes: Melting silica at ~1700°C requires significant energy, plus controlled cooling
 time_model:
   type: linear_rate
   hr_per_kg: 2.0
-  setup_hr: 1.0
-  notes: "Heat-up, melting cycle, controlled cooling to prevent crystallization"
-notes: Production of fused silica (quartz glass) by melting purified silica at very high temperature (~1700°C) in controlled atmosphere. Results in amorphous glass with excellent optical and thermal properties.
+  notes: Heat-up, melting cycle, controlled cooling to prevent crystallization
+notes: Production of fused silica (quartz glass) by melting purified silica at very high temperature (~1700°C) in controlled
+  atmosphere. Results in amorphous glass with excellent optical and thermal properties.
+process_type: continuous

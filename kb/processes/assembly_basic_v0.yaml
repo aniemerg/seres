@@ -2,21 +2,22 @@ id: assembly_basic_v0
 kind: process
 name: Basic assembly
 layer_tags:
-  - layer_7
+- layer_7
 inputs: []
 outputs: []
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: null
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: null
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.5
-  notes: "robotic manipulation and hand tools"
+  notes: robotic manipulation and hand tools
 time_model:
   type: linear_rate
   hr_per_kg: 0.5
-  notes: "labor-dominated batch process"
+  notes: labor-dominated batch process
 notes: Generic assembly step referencing BOM components; time/energy to be refined.
+process_type: continuous

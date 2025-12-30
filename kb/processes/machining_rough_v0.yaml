@@ -2,29 +2,30 @@ id: machining_rough_v0
 kind: process
 name: Machining (rough)
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: cut_parts
-    qty: 1.0
-    unit: kg
+- item_id: cut_parts
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: rough_part
-    qty: 0.95
-    unit: kg
+- item_id: rough_part
+  qty: 0.95
+  unit: kg
 requires_ids:
-  - milling_machine_general_v0
-  - cutting_tools_general
+- milling_machine_general_v0
+- cutting_tools_general
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.8
-  notes: "Spindle drive plus coolant/pumps for rough passes; faster feed than precision machining."
+  notes: Spindle drive plus coolant/pumps for rough passes; faster feed than precision machining.
 time_model:
   type: linear_rate
   hr_per_kg: 0.6
-  setup_hr: 0.2
-  notes: "Setup plus roughing passes; no fine finishing."
-notes: "Rough machining to bring cut parts to near-net shape before precision operations. Allows heavier cuts and higher material removal rates than precision machining."
+  notes: Setup plus roughing passes; no fine finishing.
+notes: Rough machining to bring cut parts to near-net shape before precision operations. Allows heavier cuts and higher material
+  removal rates than precision machining.
+process_type: continuous

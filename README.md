@@ -5,9 +5,9 @@ Minimal setup to run the KB indexer and iterate on YAML data.
 ## ⚠️ REQUIRED READING BEFORE WORKING ON QUEUE
 
 **Before working on the work queue, you MUST read these documents:**
-1. `design/meta-memo.md` — Project overview and high-level goals
-2. `design/memo_a.md` — Formal specification and design principles
-3. `design/memo_b.md` — Knowledge acquisition methodology and constraints
+1. `docs/project_overview.md` — Project overview and high-level goals
+2. `docs/kb_schema_reference.md` — Current schema reference (ADR-012+)
+3. `docs/knowledge_acquisition_protocol.md` — Knowledge acquisition workflow
 4. `docs/parts_and_labor_guidelines.md` — Parts, BOMs, and labor modeling policy
 5. **`docs/conservative_mode_guide.md` — Queue work philosophy (Conservative Mode)**
 
@@ -33,13 +33,16 @@ Quick examples:
 
 ## Quick start
 - Install deps with uv: `uv sync` (creates `.venv`).
-- Run indexer: `.venv/bin/python -m kbtool index`
-  - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
-- Queue helpers:
+- **KB Core Tools** (new unified CLI):
+  - Run indexer: `python -m src.cli index`
+    - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
+  - Validate specific item: `python -m src.cli validate --id process:regolith_mining_highlands_v0`
+    - (Find process IDs: `ls kb/processes/` or `grep "^id:" kb/processes/*.yaml`)
+  - Auto-fix validation issues: `python -m src.cli auto-fix --dry-run`
+  - Analyze material closure: `python -m src.cli closure --machine <machine_id>` or `--all`
+- Queue helpers (legacy kbtool):
   - Lease next item: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900]`
-  - Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
   - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
-  - `validate` and `queue complete --verify` run the indexer internally; run `kbtool index` separately only when you need refreshed reports.
   - GC expired leases: `queue gc`
   - Prune explicit resolved/superseded: `queue prune`
   - List counts: `queue ls`
@@ -49,12 +52,17 @@ Quick examples:
   - Run with live dashboard: `python -m queue_agents.parallel_launcher --workers <n>`
   - See `queue_agents/README.md` for details
 - See `docs/` for onboarding and workflow details.
+  - When fixing a queue item, also fix any other validation issues in that same file, then run `python -m src.cli validate --id <type:id>` before completing the queue item.
 
-## Base Builder Simulation
+## Simulation
+
+### Base Builder Simulation (Current)
 
 **Status**: ✅ **IMPLEMENTED AND VALIDATED** (2025-12-20)
 
 Interactive simulation mode for validating KB completeness by building a lunar base from scratch:
+
+⚠️ **Note**: New simulation engine with ADR-012/014 support is implemented (`src/simulation/engine.py`) but CLI interface (Phase 3.3) is not yet complete. Continue using base_builder CLI below for now.
 
 **Key Features**:
 - Start with nothing, bootstrap from regolith mining
@@ -143,16 +151,38 @@ The work queue is **rebuilt from scratch** on each indexer run, reflecting all c
 When you fix a gap, the next indexer run automatically removes it from the queue.
 
 ## Current state (as of last index)
-- 209 total gaps in work queue
-- 83 items without recipes (27 materials + 56 parts)
-- 100 missing required fields (19 energy_model + 19 time_model + 62 material_class)
-- 26 orphan resource_types (no machine provides them)
-- 57 null values in processes
+- **1531 validation issues** from ADR-012/014/017 implementation
+  - 622 processes missing `process_type` (continuous vs batch)
+  - 525 processes missing required fields (`scaling_basis`, `unit`, etc.)
+  - 244 processes using old energy model format (`kWh_per_kg` → needs migration to `per_unit`)
+  - 138 deprecated fields (`rate_kg_per_hr`, `hr_per_kg`, `fixed_time`)
+- 1582 total gaps in work queue (validation errors + missing recipes/fields)
+
+See `out/validation_report.md` and `out/validation_issues.jsonl` for details.
+
+## Schema Migration Status
+
+**⚠️ KB Schema Update In Progress**: Transitioning to ADR-012/014 process and energy models.
+
+**New schemas** (see `docs/README.md` for details):
+- **ADR-012**: Process types (`continuous`/`batch`) and new time_model with `scaling_basis`
+- **ADR-014**: New energy_model with compound units (`kWh/kg`) and `scaling_basis`
+- **ADR-016**: Implicit unit conversion system
+- **ADR-017**: Comprehensive validation and error detection
+
+**Documentation**:
+- `docs/README.md` — **Complete schema reference** with examples (⭐ READ THIS FIRST)
+- `docs/ADRs/` — Architecture decision records with full specifications
+- `out/validation_report.md` — Current validation status
 
 ## Next steps
-1. Add recipes for materials (most are outputs of processes, need to link them)
-2. Add `material_class` to parts (e.g., steel, ceramic, glass)
-3. Add `energy_model` and `time_model` to processes
+1. **Migrate processes to ADR-012/014 schemas** (see `docs/README.md` for new format)
+   - Add `process_type: continuous` or `batch` to all processes
+   - Update `time_model` to use `rate`/`rate_unit`/`scaling_basis` (not `rate_kg_per_hr`)
+   - Update `energy_model` to use `type: per_unit`/`fixed_per_batch` with `unit` and `scaling_basis`
+2. Add recipes for materials (most are outputs of processes, need to link them)
+3. Add `material_class` to parts (e.g., steel, ceramic, glass)
 4. Create machines for orphan resource_types (or mark as consumables)
 5. Fill in null qty/amount values in processes
-6. Run `python -m kbtool index` after changes only if you need refreshed reports; validation already re-indexes.
+
+**For migration help**: See "Energy and Time Models" section in `docs/README.md`

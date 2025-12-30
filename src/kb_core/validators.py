@@ -202,7 +202,8 @@ def validate_process_schema(process: Any) -> List[ValidationIssue]:
         }
 
         for deprecated, hint in deprecated_fields.items():
-            if deprecated in time_model:
+            # Check if field exists AND has a non-None value
+            if deprecated in time_model and time_model.get(deprecated) is not None:
                 issues.append(ValidationIssue(
                     level=ValidationLevel.ERROR,
                     category="schema",

@@ -2,22 +2,24 @@ id: sheet_metal_bending_and_forming_v0
 kind: process
 name: Sheet metal bending and forming
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs: []
 outputs: []
 requires_ids:
-  - plate_rolling_mill
+- plate_rolling_mill
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.4
-  notes: "hydraulic or mechanical press power for bending and forming operations"
+  notes: hydraulic or mechanical press power for bending and forming operations
 time_model:
   type: linear_rate
   hr_per_kg: 1.0
-  notes: "setup, positioning, and sequential bending operations for sheet metal parts"
-notes: Sheet metal bending and forming process using press brake, folder, or forming press. Creates brackets, enclosures, panels, and structural components from flat sheet stock. Includes air bending, bottom bending, and complex forming operations.
+  notes: setup, positioning, and sequential bending operations for sheet metal parts
+notes: Sheet metal bending and forming process using press brake, folder, or forming press. Creates brackets, enclosures,
+  panels, and structural components from flat sheet stock. Includes air bending, bottom bending, and complex forming operations.
+process_type: continuous

@@ -441,19 +441,19 @@ The following parts are designed for broad reuse across BOMs and recipes. **Alwa
 
 These guidelines directly support the project's core principles:
 
-1. **Structure before precision** (meta-memo.md)
+1. **Structure before precision** (docs/project_overview.md)
    - Part reuse preserves dependency structure while accepting coarse estimates
    - Material classes enable generic flows without exact material specs
 
-2. **Processes before machines** (memo_a.md)
+2. **Processes before machines** (docs/project_overview.md)
    - Parts are chosen to support processes, not vice versa
    - Generic parts enable process flexibility
 
-3. **Incompleteness is a feature** (memo_b.md)
+3. **Incompleteness is a feature** (docs/project_overview.md)
    - Missing parts/BOMs are acceptable; gaps are surfaced by indexer
    - Prefer placeholder imports over premature detailed modeling
 
-4. **Iteration guided by bottlenecks** (meta-memo.md)
+4. **Iteration guided by bottlenecks** (docs/project_overview.md)
    - Only create detailed parts for top contributors to mass/energy/time
    - Don't model the long tail prematurely
 
@@ -476,9 +476,9 @@ Conservative Mode treats parts_and_labor_guidelines.md as the foundation and ext
 ## Related Documentation
 
 - **`docs/conservative_mode_guide.md`** — Queue work philosophy (extends these principles to all items)
-- **`design/meta-memo.md`** — Project philosophy and goals
-- **`design/memo_a.md`** — Formal specification and data model
-- **`design/memo_b.md`** — Knowledge acquisition methodology
+- **`docs/project_overview.md`** — Project philosophy and goals
+- **`docs/kb_schema_reference.md`** — Formal specification and data model
+- **`docs/knowledge_acquisition_protocol.md`** — Knowledge acquisition methodology
 - **`docs/material_class_system.md`** — Material class implementation details
 - **`docs/README.md`** — Onboarding and workflow guide
 - **`docs/labor_bot_design_memo.md`** — Labor bot specifications

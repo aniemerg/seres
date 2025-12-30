@@ -2,21 +2,22 @@ id: spool_winding_basic_v0
 kind: process
 name: Spool winding (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
 requires_ids:
-  - winding_drums
+- winding_drums
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.2
-  notes: "motor-driven winding and tensioning"
+  notes: motor-driven winding and tensioning
 time_model:
   type: linear_rate
   hr_per_kg: 0.2
-  notes: "winding rate ~5 kg/hr depending on material"
+  notes: winding rate ~5 kg/hr depending on material
 notes: Wind fibers or wires onto drums/spools; placeholder throughput.
+process_type: continuous

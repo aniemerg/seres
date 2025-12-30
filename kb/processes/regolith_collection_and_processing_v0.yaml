@@ -2,26 +2,28 @@ id: regolith_collection_and_processing_v0
 name: Regolith collection and processing
 kind: process
 inputs:
-  - item_id: regolith_lunar_highlands
-    qty: 100.0
-    unit: kg
+- item_id: regolith_lunar_highlands
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: thermal_storage_media_regolith
-    qty: 95.0
-    unit: kg
+- item_id: thermal_storage_media_regolith
+  qty: 95.0
+  unit: kg
 byproducts: []
 resource_requirements:
-  - machine_id: hauler
-    qty: 1.0
-    unit: hr
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: hauler
+  qty: 1.0
+  unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.4
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 100.0
-notes: "Wrapper process to collect lunar regolith raw and produce thermal storage regolith for solar thermal storage system; placeholder values."
+  rate: 100.0
+  rate_unit: kg/hr
+notes: Wrapper process to collect lunar regolith raw and produce thermal storage regolith for solar thermal storage system;
+  placeholder values.
+process_type: continuous

@@ -142,7 +142,10 @@ def main() -> None:
             if ok:
                 print(f"Marked {args.id} done")
             else:
-                print(f"Failed to mark {args.id} done (not leased by {args.agent}?)")
+                if args.verify and not queue_tool.gap_id_exists(args.id):
+                    print(f"Gap {args.id} already resolved; no queue entry to mark done")
+                else:
+                    print(f"Failed to mark {args.id} done (not leased by {args.agent}?)")
         elif args.qcmd == "release":
             ok = queue_tool.release(args.id, args.agent)
             if ok:

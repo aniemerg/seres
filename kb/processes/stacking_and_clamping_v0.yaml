@@ -2,21 +2,24 @@ id: stacking_and_clamping_v0
 kind: process
 name: Stacking and clamping
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs: []
 outputs: []
 requires_ids:
-  - workbench_basic
+- workbench_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: boundary
-  notes: "manual assembly process requiring minimal energy"
+  notes: manual assembly process requiring minimal energy
 time_model:
   type: linear_rate
   hr_per_kg: 0.5
-  notes: "manual stacking of laminations and clamping with fasteners or welding"
-notes: Manual assembly process for stacking laminated components and clamping them together. Used for transformer cores (laminated steel sheets), motor stators, and other laminated assemblies. Laminations are stacked with insulation between layers to reduce eddy currents.
+  notes: manual stacking of laminations and clamping with fasteners or welding
+notes: Manual assembly process for stacking laminated components and clamping them together. Used for transformer cores (laminated
+  steel sheets), motor stators, and other laminated assemblies. Laminations are stacked with insulation between layers to
+  reduce eddy currents.
+process_type: continuous

@@ -2,25 +2,26 @@ id: pin_header_fabrication_v0
 name: Pin header fabrication (v0)
 kind: process
 inputs:
-  - item_id: raw_metal_block
-    qty: 0.08
-    unit: kg
+- item_id: raw_metal_block
+  qty: 0.08
+  unit: kg
 outputs:
-  - item_id: connector_pin_header_v0
-    qty: 0.08
-    unit: kg
+- item_id: connector_pin_header_v0
+  qty: 0.08
+  unit: kg
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 0.25
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 0.25
+  unit: hr
 energy_model:
   type: kWh_per_unit_output
   value: 0.4
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 0.8
-notes: "Fabrication path for connector_pin_header_v0 alias; placeholder"
+  rate: 0.8
+  rate_unit: kg/hr
+notes: Fabrication path for connector_pin_header_v0 alias; placeholder
+process_type: continuous

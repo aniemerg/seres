@@ -2,15 +2,15 @@ id: sheet_metal_cutting_v0
 kind: process
 name: Sheet metal cutting (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.8
@@ -18,7 +18,7 @@ energy_model:
 time_model:
   type: linear_rate
   hr_per_kg: 0.4
-  setup_hr: 0.2
   notes: Layout, fixturing, and cut execution per batch.
-notes: Basic cutting/shearing of sheet metal into panels or blanks for enclosures, ducts, and tanks; assumes manual/labor-bot operation with simple shears or saws.
-
+notes: Basic cutting/shearing of sheet metal into panels or blanks for enclosures, ducts, and tanks; assumes manual/labor-bot
+  operation with simple shears or saws.
+process_type: continuous

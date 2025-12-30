@@ -2,29 +2,30 @@ id: power_cable_assembly_v0
 name: Power Cable Assembly
 kind: process
 inputs:
-  - item_id: electrical_wire_and_connectors
-    qty: 2.0
-    unit: kg
-  - item_id: cable_ties_and_sleeving
-    qty: 0.5
-    unit: kg
+- item_id: electrical_wire_and_connectors
+  qty: 2.0
+  unit: kg
+- item_id: cable_ties_and_sleeving
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: power_cable_assembly
-    qty: 1.0
-    unit: unit
+- item_id: power_cable_assembly
+  qty: 1.0
+  unit: unit
 requires_ids:
-  - crimping_tool_set
-  - wire_stripper_set
-  - hand_tools_electrical
+- crimping_tool_set
+- wire_stripper_set
+- hand_tools_electrical
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: fixed_kWh
   value: 0.25
 time_model:
   type: linear_rate
-  setup_hr: 0.25
-  rate_kg_per_hr: 2.0
-notes: "Basic power cable assembly: cut wires, strip insulation, crimp connectors, bundle, and label."
+  rate: 2.0
+  rate_unit: kg/hr
+notes: 'Basic power cable assembly: cut wires, strip insulation, crimp connectors, bundle, and label.'
+process_type: continuous

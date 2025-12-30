@@ -2,25 +2,26 @@ id: thermal_management_radiators_basic_v0
 kind: process
 name: Thermal management via radiators
 layer_tags:
-  - layer_8
+- layer_8
 inputs:
-  - item_id: waste_heat
-    qty: null
-    unit: kWh
+- item_id: waste_heat
+  qty: null
+  unit: kWh
 outputs:
-  - item_id: rejected_heat
-    qty: null
-    unit: kWh
+- item_id: rejected_heat
+  qty: null
+  unit: kWh
 requires_ids:
-  - radiator_panels_v0
-  - heat_transport_loop_assembly
-  - thermal_control_valves
+- radiator_panels_v0
+- heat_transport_loop_assembly
+- thermal_control_valves
 energy_model:
   type: kWh_per_kg
   value: 0.05
-  notes: "pump power ~5% of rejected heat per kWh rejected"
+  notes: pump power ~5% of rejected heat per kWh rejected
 time_model:
   type: linear_rate
   hr_per_kg: 0.01
-  notes: "continuous heat rejection, minimal time overhead"
+  notes: continuous heat rejection, minimal time overhead
 notes: Cooling anchor; sizing, materials, and deployment TBD.
+process_type: continuous

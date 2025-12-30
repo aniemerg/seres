@@ -2,21 +2,22 @@ id: annealing_basic_v0
 kind: process
 name: Annealing (basic)
 layer_tags:
-  - layer_5
+- layer_5
 inputs: []
 outputs: []
 requires_ids:
-  - heat_treatment_furnace_v0
+- heat_treatment_furnace_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 1.5
-  notes: "controlled heating and slow cooling cycle for stress relief"
+  notes: controlled heating and slow cooling cycle for stress relief
 time_model:
   type: linear_rate
   hr_per_kg: 3.0
-  notes: "heating, soaking at temperature, and controlled cooling for annealing"
+  notes: heating, soaking at temperature, and controlled cooling for annealing
 notes: Placeholder annealing step for glass/metal stress relief; parameters TBD.
+process_type: continuous

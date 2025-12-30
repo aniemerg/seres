@@ -2,21 +2,21 @@ id: insulation_installation_v0
 kind: process
 name: Insulation installation
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: insulation_thermal_blanket
-    qty: 1.0
-    unit: kg
+- item_id: insulation_thermal_blanket
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: insulated_assembly
-    qty: 1.0
-    unit: kg
+- item_id: insulated_assembly
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.1
@@ -25,7 +25,11 @@ time_model:
   type: linear_rate
   hr_per_kg: 0.5
   notes: Manual installation and securing of insulation
-notes: |
-  Installation of thermal insulation on equipment, vessels, or piping.
+notes: 'Installation of thermal insulation on equipment, vessels, or piping.
+
   Process: Cut insulation to size, fit around equipment, secure with fasteners or adhesive.
+
   Common for furnaces, reactors, heating systems, and piping.
+
+  '
+process_type: continuous

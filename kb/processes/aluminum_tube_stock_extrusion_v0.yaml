@@ -2,26 +2,28 @@ id: aluminum_tube_stock_extrusion_v0
 name: Aluminum tube stock extrusion v0
 kind: process
 inputs:
-  - item_id: aluminum_alloy_ingot
-    qty: 20.0
-    unit: kg
+- item_id: aluminum_alloy_ingot
+  qty: 20.0
+  unit: kg
 outputs:
-  - item_id: aluminum_tube_stock
-    qty: 18.0
-    unit: kg
+- item_id: aluminum_tube_stock
+  qty: 18.0
+  unit: kg
 byproducts:
-  - item_id: aluminum_scrap_v0
-    qty: 2.0
-    unit: kg
+- item_id: aluminum_scrap_v0
+  qty: 2.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.6
 time_model:
   type: linear_rate
   setup_hr: 0.0
-  rate_kg_per_hr: 12.0
-notes: "Extrude aluminum alloy ingot into aluminum_tube_stock; 20 kg input yields 18 kg stock and 2 kg scrap."
+  rate: 12.0
+  rate_unit: kg/hr
+notes: Extrude aluminum alloy ingot into aluminum_tube_stock; 20 kg input yields 18 kg stock and 2 kg scrap.
+process_type: continuous

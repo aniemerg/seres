@@ -2,34 +2,35 @@ id: nickel_extraction_meteorite_v0
 kind: process
 name: Nickel extraction from meteorite
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: meteorite_iron
-    qty: 10.0
-    unit: kg
+- item_id: meteorite_iron
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: nickel_metal
-    qty: 1.0
-    unit: kg
-  - item_id: iron_metal
-    qty: 8.0
-    unit: kg
+- item_id: nickel_metal
+  qty: 1.0
+  unit: kg
+- item_id: iron_metal
+  qty: 8.0
+  unit: kg
 requires_ids:
-  - furnace_high_temp
-  - crucible_graphite
-  - chemical_separation_equipment
+- furnace_high_temp
+- crucible_graphite
+- chemical_separation_equipment
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 12.0
-  notes: "High temperature melting, chemical separation, refining"
+  notes: High temperature melting, chemical separation, refining
 time_model:
   type: linear_rate
   hr_per_kg: 4.0
-  setup_hr: 2.0
-  notes: "Melting, chemical separation, electrolytic refining"
-notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting, chemical separation (Mond process or electrolytic), and refining to obtain pure nickel and iron.
+  notes: Melting, chemical separation, electrolytic refining
+notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting, chemical separation (Mond process
+  or electrolytic), and refining to obtain pure nickel and iron.
+process_type: continuous

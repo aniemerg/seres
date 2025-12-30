@@ -2,31 +2,33 @@ id: olivine_beneficiation_v0
 kind: process
 name: Olivine beneficiation v0
 layer_tags:
-  - layer_3
+- layer_3
 inputs:
-  - item_id: regolith_powder
-    qty: 100.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: olivine_concentrate
-    qty: 30.0
-    unit: kg
-  - item_id: tailings_silicate_mix
-    qty: 70.0
-    unit: kg
+- item_id: olivine_concentrate
+  qty: 30.0
+  unit: kg
+- item_id: tailings_silicate_mix
+  qty: 70.0
+  unit: kg
 requires_ids:
-  - vibrating_screen_v0
-  - magnetic_separator_drum_v0
+- vibrating_screen_v0
+- magnetic_separator_drum_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.5
-  notes: "Screening, magnetic/physical separation energy per kg feed."
+  notes: Screening, magnetic/physical separation energy per kg feed.
 time_model:
   type: linear_rate
   hr_per_kg: 0.01
-  notes: "Throughput ~100 kg/hr feed."
-notes: "Beneficiation of regolith to concentrate olivine using screening and magnetic/physical separation; yields olivine concentrate and silicate tailings."
+  notes: Throughput ~100 kg/hr feed.
+notes: Beneficiation of regolith to concentrate olivine using screening and magnetic/physical separation; yields olivine concentrate
+  and silicate tailings.
+process_type: continuous

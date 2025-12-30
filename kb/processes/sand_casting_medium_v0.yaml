@@ -2,33 +2,34 @@ id: sand_casting_medium_v0
 kind: process
 name: Sand casting (medium) v0
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: molten_material_or_preform
-    qty: 1.0
-    unit: kg
-  - item_id: sand_casting_flask_set
-    qty: 1.0
-    unit: unit
-  - item_id: casting_mold_set
-    qty: 1.0
-    unit: unit
+- item_id: molten_material_or_preform
+  qty: 1.0
+  unit: kg
+- item_id: sand_casting_flask_set
+  qty: 1.0
+  unit: unit
+- item_id: casting_mold_set
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: sand_casting_medium_v0
-    qty: 1.0
-    unit: kg
+- item_id: sand_casting_medium_v0
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - sand_casting_flask_set
-  - casting_mold_set
+- sand_casting_flask_set
+- casting_mold_set
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 3.0
 time_model:
   type: linear_rate
-  setup_hr: 0.4
-  rate_kg_per_hr: 1.0
-notes: "Sand casting of medium component; placeholder parameters; refined later with mold geometry."
+  rate: 1.0
+  rate_unit: kg/hr
+notes: Sand casting of medium component; placeholder parameters; refined later with mold geometry.
+process_type: continuous

@@ -2,31 +2,31 @@ id: glass_casting_process_v0
 kind: process
 name: Glass casting (lens-specific) v0
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: glass_raw_materials
-    qty: 60.0
-    unit: kg
+- item_id: glass_raw_materials
+  qty: 60.0
+  unit: kg
 outputs:
-  - item_id: cast_glass_parts
-    qty: 60.0
-    unit: kg
+- item_id: cast_glass_parts
+  qty: 60.0
+  unit: kg
 requires_ids:
-  - furnace_high_temp
-  - casting_mold_set
-  - crucible_graphite
+- furnace_high_temp
+- casting_mold_set
+- crucible_graphite
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: null
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: null
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 5.0
-  notes: "Melting glass at 1400-1600°C plus holding time"
+  notes: Melting glass at 1400-1600°C plus holding time
 time_model:
   type: linear_rate
-  setup_hr: 1.0
   hr_per_kg: 2.0
-  notes: "Heat-up, melting, pouring, annealing cycle"
+  notes: Heat-up, melting, pouring, annealing cycle
 notes: Glass casting process for making lenses; placeholder parameters aligned with glass_casting_v0 to support seed references.
+process_type: continuous

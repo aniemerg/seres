@@ -2,34 +2,34 @@ id: sand_casting_large_v0
 kind: process
 name: Sand casting (large) v0
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: molten_material_or_preform
-    qty: 50.0
-    unit: kg
-  - item_id: sand_casting_flask_set
-    qty: 1.0
-    unit: unit
-  - item_id: casting_mold_set
-    qty: 1.0
-    unit: unit
+- item_id: molten_material_or_preform
+  qty: 50.0
+  unit: kg
+- item_id: sand_casting_flask_set
+  qty: 1.0
+  unit: unit
+- item_id: casting_mold_set
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: sand_casting_large_v0
-    qty: 45.0
-    unit: kg
+- item_id: sand_casting_large_v0
+  qty: 45.0
+  unit: kg
 requires_ids:
-  - sand_casting_flask_set
-  - casting_mold_set
-  - casting_mold_set
+- sand_casting_flask_set
+- casting_mold_set
+- casting_mold_set
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 2.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 4.0
 time_model:
   type: linear_rate
   hr_per_kg: 0.6
-  setup_hr: 0.5
-notes: "Sand casting of large component; placeholder parameters; refined later with mold geometry."
+notes: Sand casting of large component; placeholder parameters; refined later with mold geometry.
+process_type: continuous

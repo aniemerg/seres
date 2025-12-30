@@ -2,25 +2,26 @@ id: wire_drawing_process_v0
 kind: process
 name: Wire drawing process v0
 inputs:
-  - item_id: nickel_metal_pure
-    qty: 0.05
-    unit: kg
+- item_id: nickel_metal_pure
+  qty: 0.05
+  unit: kg
 outputs:
-  - item_id: nickel_wire_fine
-    qty: 0.045
-    unit: kg
+- item_id: nickel_wire_fine
+  qty: 0.045
+  unit: kg
 requires_ids:
-  - drawing_die_set_basic
+- drawing_die_set_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 1.5
-  notes: "Drawing nickel wire through dies; energy per kg input"
+  notes: Drawing nickel wire through dies; energy per kg input
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 50.0
-notes: "Basic wire drawing operation; parameters align with wire_drawing_basic_v0."
+  rate: 50.0
+  rate_unit: kg/hr
+notes: Basic wire drawing operation; parameters align with wire_drawing_basic_v0.
+process_type: continuous

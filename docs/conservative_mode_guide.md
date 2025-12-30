@@ -415,12 +415,12 @@ Conservative Mode **extends and unifies** existing principles:
    - Mandatory inventory check → now for all gap types
    - Material class system → helps identify equivalents
 
-2. **From memo_a.md:**
+2. **From docs/project_overview.md and docs/kb_schema_reference.md:**
    - "Structure before precision" → reuse preserves structure
    - "Processes before machines" → prefer process adaptation
    - "Incompleteness is acceptable" → don't create just to fill gaps
 
-3. **From memo_b.md:**
+3. **From docs/knowledge_acquisition_protocol.md:**
    - "Best-guess engineering" → when creating, use similar items
    - "Iterative closure" → don't solve all downstream gaps at once
    - "Import termination rule" → accept imports when appropriate
@@ -482,9 +482,9 @@ Before creating any new item, verify:
 - **`docs/closure_error_guidance.md`** - Closure analysis error resolution (complements Conservative Mode for material flow gaps)
 - **`docs/parts_and_labor_guidelines.md`** - Part reuse policy and equivalence criteria (Conservative Mode started here)
 - **`docs/ADRs/003-process-machine-refactor.md`** - Resource type migration (affects `no_provider_machine` gaps)
-- **`design/meta-memo.md`** - Project philosophy (minimizing proliferation)
-- **`design/memo_a.md`** - Specification and design principles
-- **`design/memo_b.md`** - Knowledge acquisition methodology
+- **`docs/project_overview.md`** - Project philosophy (minimizing proliferation)
+- **`docs/kb_schema_reference.md`** - Specification and design principles
+- **`docs/knowledge_acquisition_protocol.md`** - Knowledge acquisition methodology
 
 ---
 

@@ -6,16 +6,17 @@ produces_id: metal_tubing_stock
 produces_qty: 1.0
 produces_unit: kg
 steps:
-  - process_id: tube_stock_forming_v0
-    inputs:
-      - item_id: steel_stock
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: metal_tubing_stock
-        qty: 1.0
-        unit: kg
-    est_time_hr: 0.25
-    notes: "Seed step: form steel stock into metal tubing stock"
-assumptions: "Seed recipe to unblock no_recipe gap for metal_tubing_stock; refine details later."
-notes: "Converted to produces_id-based recipe format to satisfy schema validation."
+- process_id: tube_stock_forming_v0
+  inputs:
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: metal_tubing_stock
+    qty: 1.0
+    unit: kg
+  est_time_hr: 0.25
+  notes: 'Seed step: form steel stock into metal tubing stock'
+assumptions: Seed recipe to unblock no_recipe gap for metal_tubing_stock; refine details later.
+notes: Converted to produces_id-based recipe format to satisfy schema validation.
+target_item_id: metal_tubing_stock

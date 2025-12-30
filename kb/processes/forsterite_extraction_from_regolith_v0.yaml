@@ -2,29 +2,30 @@ id: forsterite_extraction_from_regolith_v0
 name: Forsterite extraction from regolith v0
 kind: process
 inputs:
-  - item_id: regolith_lunar_highlands
-    qty: 10.0
-    unit: kg
+- item_id: regolith_lunar_highlands
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: forsterite_extraction_v0
-    qty: 6.0
-    unit: kg
+- item_id: forsterite_extraction_v0
+  qty: 6.0
+  unit: kg
 byproducts:
-  - item_id: tailings
-    qty: 4.0
-    unit: kg
+- item_id: tailings
+  qty: 4.0
+  unit: kg
 resource_requirements:
-  - machine_id: hauler
-    qty: 0.5
-    unit: hr
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: hauler
+  qty: 0.5
+  unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg_input
   value: 0.6
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 20.0
-notes: "Placeholder for forsterite extraction from regolith; coarse estimate."
+  rate: 20.0
+  rate_unit: kg/hr
+notes: Placeholder for forsterite extraction from regolith; coarse estimate.
+process_type: continuous

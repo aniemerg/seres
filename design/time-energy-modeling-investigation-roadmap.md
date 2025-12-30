@@ -1,3 +1,5 @@
+NOTE: Historical document predating ADR-012+; references deprecated schema. See docs/kb_schema_reference.md for current rules.
+
 # KB Redesign Investigation Roadmap
 
 **Status:** In Progress

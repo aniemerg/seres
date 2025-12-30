@@ -1,3 +1,5 @@
+NOTE: Historical document predating ADR-012+; references deprecated schema. See docs/kb_schema_reference.md for current rules.
+
 # Process Time & Energy Models: Current State Analysis
 
 **Status:** Investigation

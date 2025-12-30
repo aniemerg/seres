@@ -2,22 +2,24 @@ id: surface_treatment_basic_v0
 kind: process
 name: Surface treatment (basic)
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs: []
 outputs: []
 requires_ids:
-  - surface_treatment_station
+- surface_treatment_station
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.8
-  notes: "chemical bath heating, pumping, and ventilation for surface finishing operations"
+  notes: chemical bath heating, pumping, and ventilation for surface finishing operations
 time_model:
   type: linear_rate
   hr_per_kg: 1.2
-  notes: "cleaning, pickling, degreasing, or coating application with drying time"
-notes: Basic surface treatment processes including pickling (acid cleaning to remove scale), degreasing, rust removal, passivation, and simple protective coatings. Prepares surfaces for further processing or improves corrosion resistance.
+  notes: cleaning, pickling, degreasing, or coating application with drying time
+notes: Basic surface treatment processes including pickling (acid cleaning to remove scale), degreasing, rust removal, passivation,
+  and simple protective coatings. Prepares surfaces for further processing or improves corrosion resistance.
+process_type: continuous

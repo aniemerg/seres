@@ -2,30 +2,31 @@ id: nife_alloy_beneficiation_v0
 kind: process
 name: NiFe alloy beneficiation v0
 layer_tags:
-  - layer_3
+- layer_3
 inputs:
-  - item_id: regolith_powder
-    qty: 100.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: nife_alloy_concentrate
-    qty: 8.0
-    unit: kg
-  - item_id: nife_alloy_byproduct
-    qty: 92.0
-    unit: kg
+- item_id: nife_alloy_concentrate
+  qty: 8.0
+  unit: kg
+- item_id: nife_alloy_byproduct
+  qty: 92.0
+  unit: kg
 requires_ids:
-  - magnetic_separator_drum_v0
+- magnetic_separator_drum_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: kWh_per_kg
   value: 0.6
-  notes: "Assumed energy for NiFe beneficiation with magnetic separation"
+  notes: Assumed energy for NiFe beneficiation with magnetic separation
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 50.0
-notes: "Seeded NiFe alloy beneficiation; focuses on magnetic separation of NiFe from regolith."
+  rate: 50.0
+  rate_unit: kg/hr
+notes: Seeded NiFe alloy beneficiation; focuses on magnetic separation of NiFe from regolith.
+process_type: continuous
