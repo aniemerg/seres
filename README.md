@@ -23,6 +23,7 @@ Before creating any new item:
 - **Consider adaptations** of existing items (phase changes, recipe modifications)
 - **Evaluate labor bot + tools** instead of special-purpose machines
 - **Verify the reference** isn't erroneous or based on outdated assumptions
+- **Use `is_template: true` on generic processes** when recipes define concrete inputs/outputs instead of adding placeholder items
 
 **See `docs/conservative_mode_guide.md` for complete decision trees and examples.**
 

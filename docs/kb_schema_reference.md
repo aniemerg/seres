@@ -32,6 +32,11 @@ Required:
 - `time_model` (required by ADR-012)
 - `energy_model` (required by ADR-014)
 
+Optional:
+- `is_template: true` for generic processes where recipes define concrete
+  inputs/outputs. Validation skips undefined item references for template
+  processes. Use sparingly and prefer real items when possible.
+
 ### Time Model (ADR-012)
 
 Continuous:

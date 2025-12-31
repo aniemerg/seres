@@ -3,4 +3,21 @@ kind: recipe
 target_item_id: chemical_product_crude
 steps:
   - process_id: chemical_synthesis_process_v0
+    inputs:
+      - item_id: methanol_liquid
+        qty: 1.0
+        unit: kg
+      - item_id: ammonia_gas
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_monoxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: chemical_product_crude
+        qty: 3.5
+        unit: kg
 notes: "Converted to dict-form step to satisfy recipe schema and explicit process_id reference. Assumes chemical_synthesis_process_v0 is the intended synthesis step for crude chemical product."

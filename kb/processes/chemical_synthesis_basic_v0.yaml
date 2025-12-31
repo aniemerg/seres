@@ -5,7 +5,7 @@ layer_tags:
 - layer_4
 - layer_5
 inputs:
-- item_id: chemical_reactant_a
+- item_id: methanol_liquid
   qty: 1.0
   unit: kg
 outputs:
@@ -26,13 +26,13 @@ energy_model:
   type: per_unit
   value: 3.0
   unit: kWh/kg
-  scaling_basis: chemical_reactant_a
+  scaling_basis: methanol_liquid
   notes: reactor heating, mixing, and temperature control for chemical reactions
 time_model:
   type: linear_rate
   rate: 0.25
   rate_unit: kg/hr
-  scaling_basis: chemical_reactant_a
+  scaling_basis: methanol_liquid
   notes: batch reaction time including reagent addition, reaction, and product recovery (4.0 hr per kg = 0.25 kg/hr)
 notes: Basic chemical synthesis process for producing industrial chemicals, reagents, and materials. Includes mixing, heating,
   reaction control, and product separation. Used for producing acids, bases, salts, solvents, and intermediate chemicals.

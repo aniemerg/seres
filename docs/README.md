@@ -23,6 +23,7 @@ These documents are **mandatory prerequisites** for contributing to the knowledg
 - Prefer labor bot + tools over special machines
 - Adapt existing items before creating new ones
 - Verify references aren't erroneous
+- Use `is_template: true` on generic processes when recipes define concrete inputs/outputs
 
 **See `conservative_mode_guide.md` for complete decision trees.**
 

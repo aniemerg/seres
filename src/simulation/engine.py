@@ -15,6 +15,8 @@ Handles:
 from __future__ import annotations
 
 import json
+import os
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from copy import deepcopy
@@ -39,7 +41,7 @@ from src.simulation.models import (
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.calculations import calculate_duration, calculate_energy
-from src.kb_core.schema import Quantity
+from src.kb_core.schema import Quantity, RawProcess, RawEnergyModel
 from src.kb_core.validators import validate_process, ValidationLevel
 
 
@@ -778,6 +780,105 @@ class SimulationEngine:
             },
         }
 
+    # ========================================================================
+    # Recipe Energy Helpers
+    # ========================================================================
+
+    def _to_quantity(self, entry: Any, multiplier: float = 1.0) -> Quantity:
+        """Normalize raw entries into Quantity for calculations."""
+        if isinstance(entry, dict):
+            item_id = entry.get("item_id")
+            qty = entry.get("qty") if entry.get("qty") is not None else entry.get("quantity")
+            unit = entry.get("unit", "kg")
+        else:
+            item_id = getattr(entry, "item_id", None)
+            qty = getattr(entry, "qty", None)
+            if qty is None:
+                qty = getattr(entry, "quantity", None)
+            unit = getattr(entry, "unit", "kg")
+        return Quantity(item_id=item_id, qty=float(qty or 0) * multiplier, unit=unit)
+
+    def _merge_energy_model(self, base_model: Any, override: Any) -> Optional[RawEnergyModel]:
+        """Merge energy_model overrides per ADR-013 semantics."""
+        if override is None:
+            if base_model is None:
+                return None
+            if isinstance(base_model, RawEnergyModel):
+                return base_model
+            if hasattr(base_model, "model_dump"):
+                return RawEnergyModel(**base_model.model_dump())
+            if isinstance(base_model, dict):
+                return RawEnergyModel(**base_model)
+            return None
+
+        override_data = override.model_dump() if hasattr(override, "model_dump") else dict(override)
+        if override_data.get("type"):
+            return RawEnergyModel(**override_data)
+
+        if base_model is None:
+            return RawEnergyModel(**override_data)
+
+        base_data = base_model.model_dump() if hasattr(base_model, "model_dump") else dict(base_model)
+        for key, value in override_data.items():
+            if value is not None:
+                base_data[key] = value
+        return RawEnergyModel(**base_data)
+
+    def _calculate_recipe_energy(self, recipe_id: str, multiplier: float) -> float:
+        """Calculate total energy for a recipe by summing step energies."""
+        recipe_model = self.kb.get_recipe(recipe_id)
+        if not recipe_model:
+            return 0.0
+
+        recipe_def = recipe_model.model_dump() if hasattr(recipe_model, "model_dump") else recipe_model
+        total_energy = 0.0
+        warn_zero = os.getenv("SIM_WARN_ZERO_RECIPE_ENERGY", "1") != "0"
+
+        for step in recipe_def.get("steps", []):
+            process_id = step.get("process_id")
+            process_model = self.kb.get_process(process_id)
+            if not process_model:
+                continue
+
+            process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+            merged_energy = self._merge_energy_model(process_def.get("energy_model"), step.get("energy_model"))
+
+            process_def["energy_model"] = merged_energy
+            step_process = RawProcess(**process_def)
+
+            step_inputs = step.get("inputs") or process_def.get("inputs", [])
+            step_outputs = step.get("outputs") or process_def.get("outputs", [])
+
+            inputs_for_calc = {
+                q.item_id: q for q in (self._to_quantity(e, multiplier) for e in step_inputs)
+                if q.item_id
+            }
+            outputs_for_calc = {
+                q.item_id: q for q in (self._to_quantity(e, multiplier) for e in step_outputs)
+                if q.item_id
+            }
+
+            if not step_process.energy_model:
+                continue
+
+            try:
+                step_energy = calculate_energy(
+                    step_process,
+                    inputs=inputs_for_calc,
+                    outputs=outputs_for_calc,
+                    converter=self.converter,
+                )
+                if warn_zero and step_energy == 0.0:
+                    print(
+                        f"⚠️  Recipe step '{process_id}' used 0 kWh. Bug?",
+                        file=sys.stderr,
+                    )
+                total_energy += step_energy
+            except Exception:
+                continue
+
+        return total_energy
+
     def import_item(
         self, item_id: str, quantity: float, unit: str
     ) -> Dict[str, Any]:
@@ -953,22 +1054,27 @@ class SimulationEngine:
 
                 if process_model:
                     try:
-                        # Convert InventoryItem objects to Quantity objects for calculate_energy
-                        inputs_for_calc = {
-                            item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
-                            for item_id, inv_item in proc.inputs_consumed.items()
-                        }
-                        outputs_for_calc = {
-                            item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
-                            for item_id, inv_item in proc.outputs_pending.items()
-                        }
+                        if process_id.startswith("recipe:"):
+                            recipe_id = process_id[7:]
+                            energy_kwh = self._calculate_recipe_energy(recipe_id, proc.scale)
+                        else:
+                            # Convert InventoryItem objects to Quantity objects for calculate_energy
+                            inputs_for_calc = {
+                                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
+                                for item_id, inv_item in proc.inputs_consumed.items()
+                            }
+                            outputs_for_calc = {
+                                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
+                                for item_id, inv_item in proc.outputs_pending.items()
+                            }
 
-                        energy_kwh = calculate_energy(
-                            process_model,
-                            inputs=inputs_for_calc,
-                            outputs=outputs_for_calc,
-                            converter=self.converter
-                        )
+                            energy_kwh = calculate_energy(
+                                process_model,
+                                inputs=inputs_for_calc,
+                                outputs=outputs_for_calc,
+                                converter=self.converter
+                            )
+
                         # Accumulate to state
                         self.state.total_energy_kwh += energy_kwh
                     except Exception as e:
