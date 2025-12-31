@@ -239,6 +239,40 @@ class UnitConverter:
     def __init__(self, kb_loader: KBLoaderProtocol):
         self.kb = kb_loader
 
+    def _safe_get(self, obj: any, *keys: str, default=None):
+        """
+        Safely get attribute/key from either dict or Pydantic model.
+
+        Tries each key in order, returns first non-None value or default.
+
+        Args:
+            obj: Dict or Pydantic model
+            *keys: Keys/attributes to try
+            default: Default value if all keys are None
+
+        Returns:
+            First non-None value found, or default
+        """
+        if obj is None:
+            return default
+
+        for key in keys:
+            try:
+                # Try dict-style access first
+                if hasattr(obj, 'get'):
+                    value = obj.get(key)
+                    if value is not None:
+                        return value
+                # Try attribute access (Pydantic models)
+                elif hasattr(obj, key):
+                    value = getattr(obj, key, None)
+                    if value is not None:
+                        return value
+            except (AttributeError, KeyError, TypeError):
+                continue
+
+        return default
+
     def convert(
         self,
         quantity: float,
@@ -367,7 +401,7 @@ class UnitConverter:
         if not item:
             return False
 
-        mass_per_unit = item.get("mass_kg") or item.get("mass_per_unit") or item.get("mass")
+        mass_per_unit = self._safe_get(item, "mass_kg", "mass_per_unit", "mass")
         return mass_per_unit is not None
 
     def _try_direct_conversion(
@@ -436,7 +470,7 @@ class UnitConverter:
             return None
 
         # Check if item has mass_kg, mass_per_unit, or mass
-        mass_per_unit = item.get("mass_kg") or item.get("mass_per_unit") or item.get("mass")
+        mass_per_unit = self._safe_get(item, "mass_kg", "mass_per_unit", "mass")
 
         # count <-> unit are synonyms (1:1 conversion)
         if from_unit in COUNT_UNITS and to_unit in COUNT_UNITS:

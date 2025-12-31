@@ -226,11 +226,22 @@ class SimulationEngine:
         # Convert to dict for compatibility
         process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
 
+        # Track whether duration was calculated or provided
+        duration_calculated = False
+
         # Determine duration (Mode 1: provided, Mode 2: calculated)
         if duration_hours is None:
             if output_quantity is not None and output_unit is not None:
                 # Mode 2: Calculate duration from output quantity
                 try:
+                    # Build input quantities dict for calculation (needed for input-based scaling)
+                    inputs_dict = {}
+                    for inp in process_def.get("inputs", []):
+                        inp_id = inp.get("item_id")
+                        base_qty = inp.get("quantity") or inp.get("qty", 0)
+                        unit = inp.get("unit", "kg")
+                        inputs_dict[inp_id] = Quantity(item_id=inp_id, qty=base_qty * scale, unit=unit)
+
                     # Build output quantities dict for calculation
                     outputs = {}
                     for outp in process_def.get("outputs", []):
@@ -239,10 +250,32 @@ class SimulationEngine:
 
                     duration_hours = calculate_duration(
                         process_model,
-                        inputs={},  # Will be populated below
+                        inputs=inputs_dict,  # Now includes actual inputs
                         outputs=outputs,
                         converter=self.converter
                     )
+                    duration_calculated = True
+
+                    # Calculate effective scale factor from requested output
+                    # Find the first output to determine scale (assumes all outputs scale together)
+                    first_output = process_def.get("outputs", [])[0] if process_def.get("outputs") else None
+                    if first_output:
+                        base_output_qty = first_output.get("quantity") or first_output.get("qty", 1)
+                        base_output_unit = first_output.get("unit", "kg")
+
+                        # Convert requested output_quantity to base unit if needed
+                        if base_output_unit != output_unit:
+                            output_item_id = first_output.get("item_id")
+                            converted_qty = self.converter.convert(
+                                output_quantity, output_unit, base_output_unit, output_item_id
+                            )
+                            if converted_qty is not None:
+                                output_quantity = converted_qty
+                                output_unit = base_output_unit
+
+                        # Calculate scale factor: requested / base
+                        scale = output_quantity / base_output_qty if base_output_qty > 0 else 1.0
+
                 except Exception as e:
                     return {
                         "success": False,
@@ -385,6 +418,7 @@ class SimulationEngine:
             "message": f"Started process '{process_id}' (scale={scale}, ends at t={ends_at}h)",
             "ends_at": ends_at,
             "duration_hours": duration_hours,
+            "duration_calculated": duration_calculated,
         }
 
     def resolve_step(self, step_def: Dict[str, Any]) -> Dict[str, Any]:
@@ -426,9 +460,35 @@ class SimulationEngine:
 
             # Override direct fields
             for key in ["inputs", "outputs", "byproducts", "requires_ids",
-                       "resource_requirements", "energy_model", "time_model"]:
+                       "resource_requirements", "energy_model"]:
                 if key in step_def:
                     resolved[key] = step_def[key]
+
+            # Special handling for time_model per ADR-013: partial vs complete override
+            if "time_model" in step_def:
+                step_time_model = step_def["time_model"]
+                # Check if step has a non-None 'type' field (complete override)
+                # or missing/None 'type' field (partial override - merge with base)
+                has_type = isinstance(step_time_model, dict) and step_time_model.get("type") is not None
+
+                if not has_type:
+                    # Partial override: merge with base process time_model
+                    base_time_model = resolved.get("time_model", {})
+                    if isinstance(base_time_model, dict):
+                        # Start with base, then apply step overrides
+                        # Filter out None values from step to preserve base values
+                        merged = dict(base_time_model)
+                        if isinstance(step_time_model, dict):
+                            for key, value in step_time_model.items():
+                                if value is not None:
+                                    merged[key] = value
+                        resolved["time_model"] = merged
+                    else:
+                        # Base is not a dict (shouldn't happen), use step as-is
+                        resolved["time_model"] = step_time_model
+                else:
+                    # Complete override: step has non-None "type" field
+                    resolved["time_model"] = step_time_model
 
             # Apply scale multiplier if present
             if scale != 1.0:

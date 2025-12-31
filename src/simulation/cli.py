@@ -142,10 +142,13 @@ def cmd_start_process(args, kb_loader: KBLoader):
     engine = load_or_create_simulation(args.sim_id, kb_loader)
 
     # Duration is optional - engine will calculate if not provided
+    # Can provide either duration OR (output_quantity + output_unit) for calculation
     result = engine.start_process(
         process_id=args.process,
         scale=args.scale if hasattr(args, 'scale') else 1.0,
-        duration_hours=args.duration if args.duration else None
+        duration_hours=args.duration if args.duration else None,
+        output_quantity=getattr(args, 'output_quantity', None),
+        output_unit=getattr(args, 'output_unit', None)
     )
 
     if result['success']:
@@ -329,6 +332,8 @@ def add_sim_subcommands(subparsers):
     start_parser.add_argument('--process', required=True, help='Process ID')
     start_parser.add_argument('--scale', type=float, default=1.0, help='Scale factor')
     start_parser.add_argument('--duration', type=float, help='Duration in hours (optional, will calculate if omitted)')
+    start_parser.add_argument('--output-quantity', type=float, help='Desired output quantity (for calculated duration)')
+    start_parser.add_argument('--output-unit', type=str, help='Unit for output quantity (for calculated duration)')
 
     # run-recipe
     recipe_parser = sim_subparsers.add_parser('run-recipe', help='Run a recipe')

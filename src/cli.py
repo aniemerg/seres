@@ -158,12 +158,11 @@ def main():
     # Dispatch to appropriate command
     try:
         if args.command == 'index':
-            from kbtool.indexer import main as index_main
-            # Change to kbtool module directory for imports to work
+            from src.indexer.indexer import main as index_main
             return index_main()
 
         elif args.command == 'auto-fix':
-            from kbtool.auto_fix import main as autofix_main
+            from src.indexer.auto_fix import main as autofix_main
             # Set up sys.argv for the auto_fix CLI
             sys.argv = ['auto_fix']
             if args.dry_run:
