@@ -311,7 +311,7 @@ def run_indexer() -> Dict[str, Any]:
             "gap_count": int,      # Total gaps in work queue
         }
     """
-    cmd = [str(VENV_PYTHON), "-m", "kbtool", "index"]
+    cmd = [str(VENV_PYTHON), "-m", "src.cli", "index"]
 
     try:
         proc = subprocess.run(
@@ -399,7 +399,7 @@ def queue_release(item_id: str, agent_name: str) -> Dict[str, Any]:
     cmd = [
         str(VENV_PYTHON),
         "-m",
-        "kbtool",
+        "src.cli",
         "queue",
         "release",
         "--id",
@@ -469,7 +469,7 @@ def queue_add_gap(
     Args:
         gap_type: Type of issue (use existing types or create new descriptive type
                   like "energy_model_mismatch"). Check existing types with CLI:
-                  `kbtool queue gap-types`
+                  `python -m src.cli queue gap-types`
         item_id: The item/recipe/process ID this issue relates to
         description: Clear description of the issue for the fixing agent.
                      Explain WHAT is wrong and WHY it's a problem.
@@ -503,11 +503,11 @@ def queue_add_gap(
             ctx["description"] = description
         ctx["discovered_by"] = "queue_agent"
 
-        # Call kbtool queue add
+        # Call src queue add
         import subprocess
         cmd = [
             str(VENV_PYTHON),
-            "-m", "kbtool", "queue", "add",
+            "-m", "src.cli", "queue", "add",
             "--gap-type", gap_type,
             "--item-id", item_id,
             "--description", description

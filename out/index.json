@@ -173,7 +173,6 @@
       "name": "Cyanoacrylate adhesive",
       "refs_in": [
         "strain_gauge_bonding_process_v0",
-        "recipe_adhesive_cyanoacrylate_base_v0",
         "recipe_force_torque_sensor_6dof_v0",
         "recipe_sensor_element_with_gauges_v0",
         "recipe_sensor_wired_assembly_v0"
@@ -188,9 +187,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Adhesive cyanoacrylate",
-      "refs_in": [
-        "recipe_adhesive_cyanoacrylate_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -802,6 +799,7 @@
         "recipe_antenna_dipole_v0",
         "recipe_catalyst_bed_assembly_v0",
         "recipe_center_insulator_ceramic_v0",
+        "recipe_ceramic_powder_mixture_v0",
         "recipe_ceramic_substrate_rtd_v0",
         "recipe_glass_batch_mix_v0",
         "recipe_refractory_brick_set_v0",
@@ -1383,10 +1381,12 @@
       "refs_in": [
         "ammonia_recovery_cao_v0",
         "ammonia_recovery_solvay_v0",
+        "chemical_synthesis_process_v0",
         "nitrogen_fixation_haber_bosch_v0",
         "ostwald_process_nitric_acid_v0",
         "solvay_process_sodium_carbonate_v0",
-        "recipe_ammonia_gas_v0"
+        "recipe_ammonia_gas_v0",
+        "recipe_chemical_product_crude_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -1975,7 +1975,7 @@
       ],
       "refs_out": [
         "aramid_precursor_v0",
-        "chemical_reactant_a"
+        "polymer_feedstock"
       ],
       "status": "defined"
     },
@@ -4640,6 +4640,7 @@
         "recipe_binder_material_v0",
         "recipe_casting_patterns_wooden_v0",
         "recipe_coating_compound_v0",
+        "recipe_inert_anode_v0",
         "recipe_insulation_panel_high_temp_v1",
         "recipe_protective_coating_aluminum_v0",
         "recipe_refractory_brick_set_v0",
@@ -13324,7 +13325,8 @@
         "anorthite_lime_soda_process_v0",
         "calcium_carbonate_from_hydroxide_v0",
         "solvay_process_sodium_carbonate_v0",
-        "recipe_calcium_carbonate_v0"
+        "recipe_calcium_carbonate_v0",
+        "recipe_glass_raw_materials_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -13438,9 +13440,7 @@
       "kind": "process",
       "layer_tags": [],
       "name": "Calcium chloride solution seed production v0",
-      "refs_in": [
-        "recipe_calcium_chloride_solution_v0"
-      ],
+      "refs_in": [],
       "refs_out": [
         "calcium_chloride_solution_v0"
       ],
@@ -14040,7 +14040,9 @@
       "name": "Carbon monoxide gas",
       "refs_in": [
         "carbon_monoxide_generation_v0",
-        "recipe_carbon_monoxide_gas_v1"
+        "chemical_synthesis_process_v0",
+        "recipe_carbon_monoxide_gas_v1",
+        "recipe_chemical_product_crude_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -14934,7 +14936,9 @@
       "name": "Raw cellulose",
       "refs_in": [
         "woodworking_basic_v0",
-        "recipe_binder_simple_v0"
+        "recipe_binder_simple_v0",
+        "recipe_ceramic_binder_v0",
+        "recipe_cmc_solution_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -15422,9 +15426,7 @@
         "layer_6"
       ],
       "name": "Ceramic press or mold set fabrication",
-      "refs_in": [
-        "recipe_ceramic_press_or_mold_set_v0"
-      ],
+      "refs_in": [],
       "refs_out": [
         "ceramic_press_or_mold_set"
       ],
@@ -15822,8 +15824,8 @@
       ],
       "refs_out": [
         "blended_mixture",
-        "chemical_reactant_a",
-        "chemical_reactant_b"
+        "sodium_hydroxide",
+        "water"
       ],
       "status": "defined"
     },
@@ -15853,7 +15855,8 @@
       "refs_in": [
         "chemical_synthesis_basic_v0",
         "chemical_synthesis_process_v0",
-        "recipe_chemical_product_crude_v0"
+        "recipe_chemical_product_crude_v0",
+        "recipe_photoresist_solution_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -15877,80 +15880,6 @@
         "concentrated_mineral",
         "silica_purified",
         "tailings"
-      ],
-      "status": "defined"
-    },
-    "chemical_reactant_a": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/chemical_reactant_a.yaml",
-      "id": "chemical_reactant_a",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Chemical reactant A",
-      "refs_in": [
-        "aramid_precursor_synthesis_v0",
-        "chemical_mixing_basic_v0",
-        "chemical_reactant_a_synthesis_v0",
-        "chemical_reactant_b_synthesis_v0",
-        "chemical_synthesis_basic_v0",
-        "chemical_synthesis_process_v0",
-        "high_temp_additive_synthesis_v0",
-        "recipe_ceramic_binder_v0",
-        "recipe_chemical_reactant_a_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "chemical_reactant_a_synthesis_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/chemical_reactant_a_synthesis_v0.yaml",
-      "id": "chemical_reactant_a_synthesis_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_4"
-      ],
-      "name": "Synthesis of chemical_reactant_a v0",
-      "refs_in": [
-        "recipe_chemical_reactant_a_v0"
-      ],
-      "refs_out": [
-        "chemical_reactant_a",
-        "chemical_reactor_vessel_v0",
-        "regolith_lunar_mare",
-        "solvent_generic"
-      ],
-      "status": "defined"
-    },
-    "chemical_reactant_b": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/chemical_reactant_b.yaml",
-      "id": "chemical_reactant_b",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Chemical reactant B",
-      "refs_in": [
-        "chemical_mixing_basic_v0",
-        "chemical_reactant_b_synthesis_v0",
-        "chemical_synthesis_process_v0",
-        "recipe_ceramic_binder_v0",
-        "recipe_chemical_reactant_b_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "chemical_reactant_b_synthesis_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/chemical_reactant_b_synthesis_v0.yaml",
-      "id": "chemical_reactant_b_synthesis_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Synthesis of chemical_reactant_b",
-      "refs_in": [
-        "recipe_chemical_reactant_b_v0"
-      ],
-      "refs_out": [
-        "chemical_reactant_a",
-        "chemical_reactant_b"
       ],
       "status": "defined"
     },
@@ -16126,7 +16055,6 @@
         "bom_chemical_reactor_basic",
         "bom_chemical_reactor_heated_v1",
         "bom_chemical_reactor_unit_v0",
-        "chemical_reactant_a_synthesis_v0",
         "chemical_synthesis_process_v0",
         "recipe_chemical_reactor_vessel_v0"
       ],
@@ -16163,15 +16091,13 @@
       ],
       "name": "Chemical synthesis (basic)",
       "refs_in": [
-        "recipe_adhesive_cyanoacrylate_base_v0",
-        "recipe_adhesive_cyanoacrylate_v0",
         "recipe_photoresist_solution_v0",
         "recipe_talc_v0"
       ],
       "refs_out": [
         "chemical_product_crude",
-        "chemical_reactant_a",
         "chemical_reactor_basic",
+        "methanol_liquid",
         "process_waste"
       ],
       "status": "defined"
@@ -16192,11 +16118,12 @@
         "recipe_cmc_solution_v0"
       ],
       "refs_out": [
+        "ammonia_gas",
+        "carbon_monoxide_gas",
         "chemical_product_crude",
-        "chemical_reactant_a",
-        "chemical_reactant_b",
         "chemical_reactor_vessel_v0",
-        "solvent_generic"
+        "methanol_liquid",
+        "water"
       ],
       "status": "defined"
     },
@@ -21795,6 +21722,7 @@
         "recipe_molding_control_unit_v0",
         "recipe_ratslam_hardware_implementation_v0",
         "recipe_sensor_equipped_system_v0",
+        "recipe_tested_electrical_equipment_v0",
         "recipe_transformer_power_high_voltage_v0"
       ],
       "refs_out": [
@@ -22966,7 +22894,6 @@
         "recipe_rock_feedstock_raw_v0",
         "recipe_solar_irradiance_v0",
         "recipe_solar_radiation_v0",
-        "recipe_tested_electrical_equipment_v0",
         "recipe_waste_heat_v0"
       ],
       "refs_out": [],
@@ -29531,8 +29458,8 @@
         "recipe_high_temp_additive_v0"
       ],
       "refs_out": [
-        "chemical_reactant_a",
-        "high_temp_additive_v0"
+        "high_temp_additive_v0",
+        "mos2_solid_lubricant_v0"
       ],
       "status": "defined"
     },
@@ -30738,6 +30665,7 @@
         "magnesium_chloride_from_mgo_v0",
         "naoh_hcl_salt_synthesis_v0",
         "recipe_hcl_recycling_from_salt_waste_v0",
+        "recipe_hydrochloric_acid_v0",
         "recipe_hydrochloric_acid_v1",
         "recipe_magnesium_chloride_v0"
       ],
@@ -30774,8 +30702,7 @@
       "name": "Hydrochloric acid",
       "refs_in": [
         "calcium_chloride_from_cao_v0",
-        "hcl_recovery_distillation_v0",
-        "recipe_hydrochloric_acid_v0"
+        "hcl_recovery_distillation_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -31153,7 +31080,9 @@
       "refs_in": [
         "recipe_battery_pack_nife_import_v0",
         "recipe_bentonite_v0",
+        "recipe_calcium_chloride_solution_v0",
         "recipe_ceramic_fired_high_temp_import_v0",
+        "recipe_ceramic_press_or_mold_set_v0",
         "recipe_coating_material_import_v0",
         "recipe_component_untested_import_v0",
         "recipe_device_calibrated_import_v0",
@@ -31168,7 +31097,6 @@
         "recipe_lamination_stack_clamped_import_v0",
         "recipe_metal_part_welded_import_v0",
         "recipe_nife_battery_cell_import_v0",
-        "recipe_raw_materials_batch_v0",
         "recipe_serpentinite_v0",
         "recipe_silicic_acid_v0",
         "recipe_system_under_test_import_v0",
@@ -31531,8 +31459,6 @@
       "name": "Inspection and QA (basic)",
       "refs_in": [
         "recipe_actuator_pneumatic_linear_v0",
-        "recipe_adhesive_cyanoacrylate_base_v0",
-        "recipe_adhesive_cyanoacrylate_v0",
         "recipe_air_blower_industrial_v0",
         "recipe_aligned_tested_equipment_v0",
         "recipe_anode_collector_electrode_v0",
@@ -32846,6 +32772,7 @@
       "layer_tags": [],
       "name": "Kaolinite clay",
       "refs_in": [
+        "recipe_ceramic_powder_mixture_v0",
         "recipe_kaolinite_clay_v0"
       ],
       "refs_out": [],
@@ -36741,6 +36668,7 @@
       "layer_tags": [],
       "name": "Metakaolin",
       "refs_in": [
+        "recipe_geopolymer_cement_v0",
         "recipe_metakaolin_v0"
       ],
       "refs_out": [],
@@ -38019,9 +37947,13 @@
       "layer_tags": [],
       "name": "Methanol (liquid)",
       "refs_in": [
+        "chemical_synthesis_basic_v0",
+        "chemical_synthesis_process_v0",
         "ethanol_feedstock_prep_basic_v0",
         "methanol_synthesis_from_syngas_v0",
-        "recipe_methanol_liquid_v0"
+        "recipe_chemical_product_crude_v0",
+        "recipe_methanol_liquid_v0",
+        "recipe_photoresist_solution_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -38727,8 +38659,6 @@
       ],
       "name": "Mixing (basic)",
       "refs_in": [
-        "recipe_adhesive_cyanoacrylate_base_v0",
-        "recipe_adhesive_cyanoacrylate_v0",
         "recipe_ceramic_powder_mixture_v0",
         "recipe_geopolymer_cement_v0",
         "recipe_glass_raw_materials_v0",
@@ -38740,7 +38670,7 @@
       "refs_out": [
         "mixed_batch",
         "mixer_or_blender",
-        "raw_materials_batch"
+        "powder_components"
       ],
       "status": "defined"
     },
@@ -39302,7 +39232,9 @@
       "layer_tags": [],
       "name": "Monochloroacetic acid",
       "refs_in": [
-        "recipe_binder_simple_v0"
+        "recipe_binder_simple_v0",
+        "recipe_ceramic_binder_v0",
+        "recipe_cmc_solution_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -39360,6 +39292,7 @@
       "layer_tags": [],
       "name": "Molybdenum disulfide (MoS2) solid lubricant",
       "refs_in": [
+        "high_temp_additive_synthesis_v0",
         "mos2_solid_lubricant_synthesis_v0",
         "recipe_high_temp_additive_v0",
         "recipe_mos2_solid_lubricant_v0"
@@ -44046,6 +43979,7 @@
       "layer_tags": [],
       "name": "Polymer feedstock (generic)",
       "refs_in": [
+        "aramid_precursor_synthesis_v0",
         "base_grease_stock_synthesis_v0",
         "extrusion_basic_v0",
         "magnetic_tape_reel_fabrication_v0"
@@ -44564,7 +44498,9 @@
       "layer_tags": [],
       "name": "Powder components (unmixed)",
       "refs_in": [
-        "batching_and_mixing_basic_v0"
+        "batching_and_mixing_basic_v0",
+        "mixing_basic_v0",
+        "recipe_mixed_batch_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -44582,6 +44518,7 @@
         "pressing_and_forming_v0",
         "screening_basic_v0",
         "recipe_ceramic_zirconia_v0",
+        "recipe_inert_anode_v0",
         "recipe_powder_feedstock_v0"
       ],
       "refs_out": [],
@@ -47329,20 +47266,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "raw_materials_batch": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/raw_materials_batch.yaml",
-      "id": "raw_materials_batch",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Raw materials batch (unmixed)",
-      "refs_in": [
-        "mixing_basic_v0",
-        "recipe_raw_materials_batch_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "raw_metal_block": {
       "aliases": [],
       "defined_in": "kb/items/materials/raw_metal_block.yaml",
@@ -47574,38 +47497,6 @@
         "integration_test_basic_v0",
         "machining_basic_v0",
         "wiring_and_electronics_integration_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_adhesive_cyanoacrylate_base_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_adhesive_cyanoacrylate_base_v0.yaml",
-      "id": "recipe_adhesive_cyanoacrylate_base_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "adhesive_cyanoacrylate",
-        "chemical_synthesis_basic_v0",
-        "inspection_basic_v0",
-        "mixing_basic_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_adhesive_cyanoacrylate_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_adhesive_cyanoacrylate_v0.yaml",
-      "id": "recipe_adhesive_cyanoacrylate_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "adhesive_cyanoacrylate_v0",
-        "chemical_synthesis_basic_v0",
-        "inspection_basic_v0",
-        "mixing_basic_v0"
       ],
       "status": "defined"
     },
@@ -50303,8 +50194,8 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "calcium_chloride_solution_seed_production_v0",
-        "calcium_chloride_solution_v0"
+        "calcium_chloride_solution_v0",
+        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -51204,16 +51095,17 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "cellulose_raw",
         "ceramic_binder",
-        "chemical_reactant_a",
-        "chemical_reactant_b",
         "chemical_synthesis_process_v0",
         "cmc_precipitate_wet",
         "cmc_solution",
         "drying_process_oven_v0",
         "ethanol_or_isopropanol",
+        "monochloroacetic_acid",
         "precipitation_and_washing_v0",
-        "solvent_generic"
+        "sodium_hydroxide",
+        "water"
       ],
       "status": "defined"
     },
@@ -51300,11 +51192,14 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "alumina_powder",
         "ball_milling_v0",
         "ceramic_powder_mixture",
         "drying_basic_v0",
+        "kaolinite_clay",
         "mixing_basic_v0",
-        "screening_basic_v0"
+        "screening_basic_v0",
+        "silica_purified"
       ],
       "status": "defined"
     },
@@ -51332,7 +51227,7 @@
       "refs_in": [],
       "refs_out": [
         "ceramic_press_or_mold_set",
-        "ceramic_press_or_mold_set_fabrication_v0"
+        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -51696,36 +51591,12 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "ammonia_gas",
+        "carbon_monoxide_gas",
         "chemical_product_crude",
-        "chemical_synthesis_process_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_chemical_reactant_a_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_chemical_reactant_a_v0.yaml",
-      "id": "recipe_chemical_reactant_a_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "chemical_reactant_a",
-        "chemical_reactant_a_synthesis_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_chemical_reactant_b_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_chemical_reactant_b_v0.yaml",
-      "id": "recipe_chemical_reactant_b_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "chemical_reactant_b",
-        "chemical_reactant_b_synthesis_v0"
+        "chemical_synthesis_process_v0",
+        "methanol_liquid",
+        "water"
       ],
       "status": "defined"
     },
@@ -52097,8 +51968,12 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "cellulose_raw",
         "chemical_synthesis_process_v0",
-        "cmc_solution"
+        "cmc_solution",
+        "monochloroacetic_acid",
+        "sodium_hydroxide",
+        "water"
       ],
       "status": "defined"
     },
@@ -58461,7 +58336,10 @@
       "refs_in": [],
       "refs_out": [
         "geopolymer_cement",
-        "mixing_basic_v0"
+        "metakaolin",
+        "mixing_basic_v0",
+        "sodium_hydroxide",
+        "water"
       ],
       "status": "defined"
     },
@@ -58532,7 +58410,9 @@
       "refs_in": [],
       "refs_out": [
         "chemical_mixing_basic_v0",
-        "gibbsite"
+        "gibbsite",
+        "sodium_aluminate_solution",
+        "water"
       ],
       "status": "defined"
     },
@@ -58638,11 +58518,14 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "calcium_carbonate",
         "crushing_and_grinding_v0",
         "glass_raw_materials",
         "inspection_basic_v0",
         "mineral_processing_basic_v0",
-        "mixing_basic_v0"
+        "mixing_basic_v0",
+        "silica_purified",
+        "sodium_carbonate"
       ],
       "status": "defined"
     },
@@ -61000,8 +60883,8 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "hydrochloric_acid_synthesis_v0",
-        "hydrochloric_acid_v0"
+        "hydrochloric_acid",
+        "hydrochloric_acid_synthesis_v0"
       ],
       "status": "defined"
     },
@@ -61327,11 +61210,14 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "binder_material",
         "inert_anode_v0",
         "machining_finish_basic_v0",
         "mixing_basic_v0",
+        "powder_feedstock",
         "pressing_and_forming_v0",
-        "sintering_and_hot_pressing_v0"
+        "sintering_and_hot_pressing_v0",
+        "titanium_oxide"
       ],
       "status": "defined"
     },
@@ -66160,7 +66046,8 @@
       "refs_in": [],
       "refs_out": [
         "mixed_batch",
-        "mixing_basic_v0"
+        "mixing_basic_v0",
+        "powder_components"
       ],
       "status": "defined"
     },
@@ -68792,9 +68679,11 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "chemical_product_crude",
         "chemical_synthesis_basic_v0",
         "epoxy_resin_base",
         "inspection_basic_v0",
+        "methanol_liquid",
         "mixing_basic_v0",
         "photoresist_solution_v0",
         "solvent_generic"
@@ -71033,20 +70922,6 @@
       "refs_out": [
         "extraction_raw_formation_control_material_v0_v0",
         "raw_formation_control_material_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_raw_materials_batch_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_raw_materials_batch_v0.yaml",
-      "id": "recipe_raw_materials_batch_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "raw_materials_batch"
       ],
       "status": "defined"
     },
@@ -76156,7 +76031,7 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "environment_source_v0",
+        "electrical_testing_basic_v0",
         "tested_electrical_equipment"
       ],
       "status": "defined"
@@ -79930,7 +79805,6 @@
       "name": "Lunar Mare Regolith",
       "refs_in": [
         "regolith_excavation_processing_v0",
-        "chemical_reactant_a_synthesis_v0",
         "extraction_raw_formation_control_material_v0_v0",
         "getter_material_extraction_v0",
         "ilmenite_extraction_from_regolith_v0",
@@ -82928,6 +82802,8 @@
         "fused_silica_production_v0",
         "olivine_hydration_v0",
         "quartz_crystal_synthesis_v0",
+        "recipe_ceramic_powder_mixture_v0",
+        "recipe_glass_raw_materials_v0",
         "recipe_silica_purified_v0",
         "recipe_talc_v0"
       ],
@@ -83928,6 +83804,7 @@
       "name": "Sodium aluminate solution",
       "refs_in": [
         "anorthite_lime_soda_process_v0",
+        "recipe_gibbsite_v0",
         "recipe_sodium_aluminate_solution_v0"
       ],
       "refs_out": [],
@@ -83945,6 +83822,7 @@
         "solvay_process_sodium_carbonate_v0",
         "recipe_flux_brazing_v4",
         "recipe_glass_batch_mix_v0",
+        "recipe_glass_raw_materials_v0",
         "recipe_sodium_carbonate_v0"
       ],
       "refs_out": [],
@@ -83977,10 +83855,14 @@
       "layer_tags": [],
       "name": "Sodium hydroxide",
       "refs_in": [
+        "chemical_mixing_basic_v0",
         "chloralkali_electrolysis_v0",
         "cryolite_flux_synthesis_v0",
         "naoh_hcl_salt_synthesis_v0",
         "recipe_binder_simple_v0",
+        "recipe_ceramic_binder_v0",
+        "recipe_cmc_solution_v0",
+        "recipe_geopolymer_cement_v0",
         "recipe_sodium_hydroxide_v0"
       ],
       "refs_out": [],
@@ -84628,9 +84510,6 @@
       "layer_tags": [],
       "name": "Solvent (generic)",
       "refs_in": [
-        "chemical_reactant_a_synthesis_v0",
-        "chemical_synthesis_process_v0",
-        "recipe_ceramic_binder_v0",
         "recipe_photoresist_solution_v0",
         "recipe_solvent_generic_v0"
       ],
@@ -88832,6 +88711,7 @@
         "metalysis_ffc_reduction_v0",
         "ulvospinel_hydrogen_reduction_v0",
         "vacuum_pyrolysis_ilmenite_v0",
+        "recipe_inert_anode_v0",
         "recipe_titanium_oxide_v0"
       ],
       "refs_out": [],
@@ -91611,6 +91491,8 @@
         "calcium_chloride_dihydrate_production_v0",
         "calcium_chloride_from_cao_v0",
         "ceramic_forming_v0",
+        "chemical_mixing_basic_v0",
+        "chemical_synthesis_process_v0",
         "chloralkali_electrolysis_v0",
         "claus_process_sulfur_recovery_v0",
         "cobalt_sulfate_extraction_v0",
@@ -91642,6 +91524,11 @@
         "recipe_aluminum_chloride_hydrate_v0",
         "recipe_binder_simple_v0",
         "recipe_calcium_hydroxide_v0",
+        "recipe_ceramic_binder_v0",
+        "recipe_chemical_product_crude_v0",
+        "recipe_cmc_solution_v0",
+        "recipe_geopolymer_cement_v0",
+        "recipe_gibbsite_v0",
         "recipe_magnesium_chloride_v0",
         "recipe_nitric_acid_v0",
         "recipe_separator_membrane_porous_v0",

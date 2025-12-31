@@ -499,6 +499,34 @@ def cmd_list(args, kb_loader: KBLoader):
     return 0
 
 
+def cmd_visualize(args, kb_loader: KBLoader):
+    """Generate visualizations for a simulation."""
+    from src.simulation.visualize import visualize_simulation
+
+    sim_dir = SIMULATIONS_DIR / args.sim_id
+    log_file = sim_dir / "simulation.jsonl"
+
+    if not log_file.exists():
+        print(f"Error: Simulation '{args.sim_id}' not found", file=sys.stderr)
+        return 1
+
+    try:
+        # Determine output directory
+        output_dir = None
+        if hasattr(args, 'output') and args.output:
+            output_dir = Path(args.output)
+
+        # Generate visualizations
+        visualize_simulation(sim_dir, output_dir)
+        return 0
+
+    except Exception as e:
+        print(f"Error generating visualizations: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
 # ============================================================================
 # Main CLI setup
 # ============================================================================
@@ -578,6 +606,11 @@ def add_sim_subcommands(subparsers):
     # list
     list_parser = sim_subparsers.add_parser('list', help='List all simulations')
 
+    # visualize
+    visualize_parser = sim_subparsers.add_parser('visualize', help='Generate visualizations')
+    visualize_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    visualize_parser.add_argument('--output', help='Output directory for plots (default: sim_dir/plots)')
+
     return sim_parser
 
 
@@ -605,6 +638,7 @@ def run_sim_command(args, kb_loader: KBLoader):
         'preview': cmd_preview,
         'advance-time': cmd_advance_time,
         'list': cmd_list,
+        'visualize': cmd_visualize,
     }
 
     handler = commands.get(args.sim_command)

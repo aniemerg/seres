@@ -830,8 +830,8 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
         if not recipe_data:
             continue
 
-        # Run validation
-        issues = validate_recipe(recipe_data)
+        # Run validation (ADR-018: pass converter for inputs/outputs validation)
+        issues = validate_recipe(recipe_data, converter)
 
         # Filter to ERROR and WARNING only (skip INFO)
         issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]

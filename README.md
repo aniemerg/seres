@@ -41,12 +41,12 @@ Quick examples:
     - (Find process IDs: `ls kb/processes/` or `grep "^id:" kb/processes/*.yaml`)
   - Auto-fix validation issues: `python -m src.cli auto-fix --dry-run`
   - Analyze material closure: `python -m src.cli closure --machine <machine_id>` or `--all`
-- Queue helpers (legacy kbtool):
-  - Lease next item: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900]`
-  - Complete/release: `queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
-  - GC expired leases: `queue gc`
-  - Prune explicit resolved/superseded: `queue prune`
-  - List counts: `queue ls`
+- Queue helpers (src CLI):
+  - Lease next item: `python -m src.cli queue lease --agent <name> [--ttl 900]`
+  - Complete/release: `python -m src.cli queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
+  - GC expired leases: `python -m src.cli queue gc`
+  - Prune explicit resolved/superseded: `python -m src.cli queue prune`
+  - List counts: `python -m src.cli queue ls`
 - Autonomous agents:
   - Run single agent: `python -m queue_agents.worker --agent <name>`
   - Run parallel agents: `python -m queue_agents.launcher --workers <n>`

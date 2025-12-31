@@ -49,7 +49,7 @@ def load_validation_issues(
     if not file_path.exists():
         print(f"No validation issues file found at {file_path}")
         print("Run the indexer first to generate validation issues:")
-        print("  python -m kbtool.indexer")
+        print("  python -m src.cli index")
         return []
 
     issues = []
@@ -98,16 +98,16 @@ def main():
         epilog="""
 Examples:
   # Preview fixes without writing
-  python -m kbtool.auto_fix --dry-run
+  python -m src.cli auto-fix --dry-run
 
   # Apply up to 10 fixes
-  python -m kbtool.auto_fix --max-fixes 10
+  python -m src.cli auto-fix --max-fixes 10
 
   # Fix only process_type_required issues
-  python -m kbtool.auto_fix --rule process_type_required
+  python -m src.cli auto-fix --rule process_type_required
 
   # Fix only ERROR level issues
-  python -m kbtool.auto_fix --level error
+  python -m src.cli auto-fix --level error
         """
     )
 
@@ -210,7 +210,7 @@ Examples:
 
     if not args.dry_run and successful:
         print("\n✨ Fixes applied! Re-run the indexer to verify:")
-        print("   python -m kbtool.indexer")
+        print("   python -m src.cli index")
 
     return 0 if not failed or args.dry_run else 1
 

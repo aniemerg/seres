@@ -8,7 +8,7 @@ The CLI provides three main categories of commands:
 
 1. **KB Tools** - Indexing, validation, auto-fix, closure analysis
 2. **Simulation** - Create and run simulations
-3. **Queue Tools** (legacy) - Work queue management
+3. **Queue Tools** - Work queue management
 
 ## Quick Reference
 
@@ -28,6 +28,13 @@ python -m src.cli sim view-state --sim-id my_sim          # View state
 python -m src.cli sim list                                 # List simulations
 python -m src.cli sim plan --process crushing_basic_v0      # Preflight a process/recipe
 python -m src.cli sim scaffold --sim-id demo --bootstrap labor_bot_general_v0
+
+# Queue Tools
+python -m src.cli queue lease --agent <name>                # Lease next queue item
+python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]
+python -m src.cli queue release --id <gap_type:item_id> --agent <name>
+python -m src.cli queue verify --id <gap_type:item_id>      # Check gap resolution
+python -m src.cli queue ls                                  # Queue status counts
 ```
 
 ---
@@ -163,6 +170,69 @@ python -m src.cli closure --all --output out/closure_report.txt
 - Imported items (from Earth)
 - Unresolved items (missing recipes)
 - ISRU percentage
+
+---
+
+## Queue Tools
+
+Work queue operations for leasing, completing, and verifying gaps.
+
+### queue lease
+
+Lease the next available queue item.
+
+```bash
+python -m src.cli queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]
+```
+
+### queue complete
+
+Mark a leased item complete (optional verify runs indexer first).
+
+```bash
+python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]
+```
+
+### queue release
+
+Release a leased item back to pending.
+
+```bash
+python -m src.cli queue release --id <gap_type:item_id> --agent <name>
+```
+
+### queue verify
+
+Rebuild queue and verify one or more gaps are resolved.
+
+```bash
+python -m src.cli queue verify --id <gap_type:item_id> [--id <gap_type:item_id>] [--no-index]
+```
+
+### queue ls
+
+Show queue counts by status.
+
+```bash
+python -m src.cli queue ls
+```
+
+### queue add
+
+Add a manual gap to the queue (single or batch).
+
+```bash
+python -m src.cli queue add --gap-type quality_concern --item-id steel_melting_v0 --description "..."
+python -m src.cli queue add --file queue_tasks/discovered_issues.jsonl
+```
+
+### queue gap-types
+
+List registered gap types.
+
+```bash
+python -m src.cli queue gap-types
+```
 
 ---
 

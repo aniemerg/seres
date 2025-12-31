@@ -1,6 +1,14 @@
 id: recipe_test_equipment_basic_import_v0
 kind: recipe
 target_item_id: test_equipment_basic_import
+inputs:
+  - item_id: process_power
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: test_equipment_basic_import
+    qty: 1
+    unit: unit
 steps:
   - process_id: import_placeholder_v0
 notes: "Import path for basic test equipment."

@@ -10,7 +10,7 @@ def generate_inventory_report() -> None:
     """Generate a markdown inventory report of all KB items."""
     index_path = Path("out/index.json")
     if not index_path.exists():
-        print("Error: out/index.json not found. Run 'python -m kbtool index' first.")
+        print("Error: out/index.json not found. Run 'python -m src.cli index' first.")
         return
 
     with open(index_path, "r", encoding="utf-8") as f:

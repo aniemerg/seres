@@ -3,7 +3,7 @@
 **Status:** Proposed
 **Date:** 2024-12-28
 **Decision Makers:** Project team
-**Related ADRs:** ADR-014 (Energy Model), ADR-013 (Recipe Overrides), ADR-016 (Unit Conversion)
+**Related ADRs:** ADR-014 (Energy Model), ADR-013 (Recipe Overrides), ADR-016 (Unit Conversion), ADR-018 (Recipe Validation)
 
 ## Context
 
@@ -41,16 +41,20 @@ We will implement a **new time_model schema** with the following changes:
 Add **required** `process_type` field to all processes:
 
 ```yaml
-process_type: batch | continuous
+process_type: batch | continuous | boundary
 ```
 
 **Semantics:**
 - **Continuous:** Rate-based production (kg/hr, unit/hr), linear scaling, steady-state operation
 - **Batch:** Discrete batches, setup per batch, batch size from outputs
+- **Boundary:** Terminal nodes that extract from environment with no material inputs (mining, collection)
 
 **Examples:**
 - Continuous: Crushing, electrolysis, distillation, machining (one after another)
 - Batch: Assembly, firing, heat treatment, discrete manufacturing
+- Boundary: Regolith mining, environmental resource collection, sample gathering
+
+**Note:** Boundary processes have special validation rules - see ADR-018 for recipe input/output validation with boundary processes.
 
 ### 2. New Time Model Schema
 
@@ -93,11 +97,13 @@ time_model:
 
 #### Schema Validation
 
-1. **process_type required** - Every process must specify batch or continuous
+1. **process_type required** - Every process must specify batch, continuous, or boundary
 2. **Type consistency** - `process_type: continuous` requires `time_model.type: linear_rate`
 3. **Type consistency** - `process_type: batch` requires `time_model.type: batch`
-4. **No invalid fields** - Reject deprecated fields (`rate_kg_per_hr`, `hr_per_kg`, `fixed_time`)
-5. **Required fields** - For linear_rate: `rate`, `rate_unit`, `scaling_basis`. For batch: `hr_per_batch`
+4. **Type consistency** - `process_type: boundary` allows `time_model.type: batch` or `linear_rate` (see ADR-018)
+5. **No invalid fields** - Reject deprecated fields (`rate_kg_per_hr`, `hr_per_kg`, `fixed_time`)
+6. **Required fields** - For linear_rate: `rate`, `rate_unit`, `scaling_basis`. For batch: `hr_per_batch`
+7. **Boundary process inputs** - Boundary processes must have empty or no inputs (validated in ADR-018)
 
 #### Semantic Validation
 

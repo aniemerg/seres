@@ -135,7 +135,7 @@ def main():
         print(f"  {gap_type}: {count}")
 
     print(f"\nTotal gaps to enqueue: {len(deduped)}")
-    print(f"Ready to enqueue with: python -m kbtool queue add --file {output_path}")
+    print(f"Ready to enqueue with: python -m src.cli queue add --file {output_path}")
 
 if __name__ == '__main__':
     main()

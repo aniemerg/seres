@@ -63,13 +63,13 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 
 ## How to Work the Queue (multi-agent)
 - Queue file: `out/work_queue.jsonl`. IDs are stable: `id = "<gap_type>:<item_id>"` with fields `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.
-- Lease next task: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
+- Lease next task: `python -m src.cli queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
   - Status becomes `leased`; expires to `pending` if TTL lapses.
-- Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
-- Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name> [--verify]`
-- Release: `.venv/bin/python -m kbtool queue release --id <gap_type:item_id> --agent <name>`
-- GC (revert expired leases, optionally prune old done): `.venv/bin/python -m kbtool queue gc [--prune-done-older-than N]`
-- List counts: `.venv/bin/python -m kbtool queue ls`
+- Validate gap resolved: `python -m src.cli queue verify --id <gap_type:item_id>`
+- Complete: `python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]`
+- Release: `python -m src.cli queue release --id <gap_type:item_id> --agent <name>`
+- GC (revert expired leases, optionally prune old done): `python -m src.cli queue gc [--prune-done-older-than N]`
+- List counts: `python -m src.cli queue ls`
 - Do not edit `work_queue.jsonl` by hand; use the CLI.
 - Pruning: only removes items marked `resolved`/`superseded`; gaps persist until fixes land.
 - Sources of queue items (indexer rebuilds on each run):
@@ -81,11 +81,11 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
   - `no_provider_machine`: resource_type with no machine capability.
   - `invalid_recipe_schema`: recipe steps not in the current schema.
 - Workflow loop:
-  1) Pop next: `.venv/bin/python -m kbtool queue pop`.
+  1) Pop next: `python -m src.cli queue pop`.
   2) Implement one item (add YAML/recipe/process/etc.). Prefer ≥3-step recipes with time/labor/machine-hours when possible. Reference missing processes explicitly if needed so they queue.
   3) Fix all issues in the touched file before moving on (not just the queued gap).
   4) Validate the entity to ensure no remaining issues in that file: `python -m src.cli validate --id <type:id>`.
-  5) Verify the gap is gone: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` (or use `queue complete --verify`).
+  5) Verify the gap is gone: `python -m src.cli queue verify --id <gap_type:item_id>` (or use `queue complete --verify`).
      - Note: `queue complete --verify` only checks that the gap ID no longer appears in the queue; it does not verify all issues in the file.
      - `validate` and `queue complete --verify` run the indexer internally.
   6) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`) if needed.
@@ -101,7 +101,7 @@ When you discover issues that need separate attention, add them to the queue for
 
 **Add a single gap:**
 ```bash
-.venv/bin/python -m kbtool queue add \
+python -m src.cli queue add \
   --gap-type quality_concern \
   --item-id steel_melting_v0 \
   --description "Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg" \
@@ -110,7 +110,7 @@ When you discover issues that need separate attention, add them to the queue for
 
 **Add multiple gaps from a file:**
 ```bash
-.venv/bin/python -m kbtool queue add --file queue_tasks/discovered_issues.jsonl
+python -m src.cli queue add --file queue_tasks/discovered_issues.jsonl
 ```
 
 File format (JSONL):
@@ -128,7 +128,7 @@ File format (JSONL):
 
 **Create new gap types** by using a descriptive name (e.g., `energy_model_mismatch`). View all types with:
 ```bash
-.venv/bin/python -m kbtool queue gap-types
+python -m src.cli queue gap-types
 ```
 
 **For agents:** Use the `queue_add_gap` tool to add discovered issues programmatically. See `queue_agents/kb_tools.py` for API documentation.
@@ -647,8 +647,8 @@ When you encounter validation errors:
   - Analyze material closure for machines (ISRU vs import breakdown)
   - Example: `python -m src.cli closure --all --output out/closure_report.txt`
 
-**Queue Commands** (legacy `kbtool`):
-- Queue: `.venv/bin/python -m kbtool queue pop`, `.venv/bin/python -m kbtool queue prune`
+**Queue Commands** (`python -m src.cli`):
+- Queue: `python -m src.cli queue pop`, `python -m src.cli queue prune`
 
 **Environment**:
 - Virtualenv: `uv sync` to install deps.

@@ -388,7 +388,7 @@ After fixing closure errors:
 
 1. **Run indexer**
    ```bash
-   .venv/bin/python -m kbtool index
+   python -m src.cli index
    ```
 
 2. **Check if error resolved**

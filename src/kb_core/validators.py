@@ -888,6 +888,154 @@ def validate_process(
     return issues
 
 
+def validate_recipe_inputs_outputs(
+    recipe: Any,
+    kb: Any
+) -> List[ValidationIssue]:
+    """
+    Validate recipe inputs/outputs are resolvable (ADR-018).
+
+    Checks if recipe has explicit inputs/outputs OR can infer them from
+    process steps. Generates ERROR if neither is available.
+
+    Args:
+        recipe: Recipe to validate (Recipe model or dict)
+        kb: KB loader with access to processes
+
+    Returns:
+        List of validation issues
+    """
+    issues = []
+    recipe_id = _get_entity_id(recipe)
+
+    # Get as dict if it's a Pydantic model
+    if hasattr(recipe, 'model_dump'):
+        recipe_dict = recipe.model_dump()
+    else:
+        recipe_dict = recipe
+
+    recipe_inputs = recipe_dict.get("inputs", [])
+    recipe_outputs = recipe_dict.get("outputs", [])
+    steps = recipe_dict.get("steps", [])
+
+    # Check if inputs resolvable
+    if not recipe_inputs:
+        # Check if ANY step has inputs (explicit or from process)
+        has_step_inputs = False
+        for step in steps:
+            # Check step-level inputs first
+            step_inputs = step.get("inputs", [])
+            if step_inputs:
+                has_step_inputs = True
+                break
+
+            # Check if process has inputs
+            process_id = step.get("process_id")
+            if process_id:
+                process = kb.get_process(process_id)
+                if process:
+                    # Get as dict if Pydantic model
+                    if hasattr(process, 'model_dump'):
+                        process_dict = process.model_dump()
+                    else:
+                        process_dict = process
+
+                    # Boundary processes are allowed to have no inputs (extract from environment)
+                    if process_dict.get("process_type") == "boundary":
+                        has_step_inputs = True
+                        break
+
+                    # Template processes are allowed to have no inputs (inputs defined in recipe)
+                    if process_dict.get("is_template"):
+                        has_step_inputs = True
+                        break
+
+                    if process_dict.get("inputs", []):
+                        has_step_inputs = True
+                        break
+
+        if not has_step_inputs:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="recipe",
+                rule="recipe_inputs_not_resolvable",
+                entity_type="recipe",
+                entity_id=recipe_id,
+                message="Recipe has no resolvable inputs (neither explicit at recipe level nor from steps/processes)",
+                field_path="inputs",
+                fix_hint="Add inputs: [...] to recipe, or ensure referenced processes have inputs defined"
+            ))
+
+    # Check if outputs resolvable
+    if not recipe_outputs:
+        has_step_outputs = False
+        for step in steps:
+            # Check step-level outputs first
+            step_outputs = step.get("outputs", [])
+            if step_outputs:
+                has_step_outputs = True
+                break
+
+            # Check if process has outputs
+            process_id = step.get("process_id")
+            if process_id:
+                process = kb.get_process(process_id)
+                if process:
+                    # Get as dict if Pydantic model
+                    if hasattr(process, 'model_dump'):
+                        process_dict = process.model_dump()
+                    else:
+                        process_dict = process
+
+                    # Boundary processes must have outputs (checked in process validation)
+                    if process_dict.get("process_type") == "boundary":
+                        has_step_outputs = True
+                        break
+
+                    # Template processes are allowed to have no outputs (outputs defined in recipe)
+                    if process_dict.get("is_template"):
+                        has_step_outputs = True
+                        break
+
+                    if process_dict.get("outputs", []):
+                        has_step_outputs = True
+                        break
+
+        if not has_step_outputs:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="recipe",
+                rule="recipe_outputs_not_resolvable",
+                entity_type="recipe",
+                entity_id=recipe_id,
+                message="Recipe has no resolvable outputs (neither explicit at recipe level nor from steps/processes)",
+                field_path="outputs",
+                fix_hint="Add outputs: [...] to recipe, or ensure referenced processes have outputs defined"
+            ))
+
+    # Check target_item_id in outputs (WARNING)
+    target_item_id = recipe_dict.get("target_item_id")
+    if target_item_id and recipe_outputs:
+        target_found = any(
+            out.get("item_id") == target_item_id
+            for out in recipe_outputs
+        )
+
+        if not target_found:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.WARNING,
+                category="recipe",
+                rule="recipe_outputs_missing_target",
+                entity_type="recipe",
+                entity_id=recipe_id,
+                message=f"Recipe outputs don't include target_item_id '{target_item_id}'",
+                field_path="outputs",
+                fix_hint=f"Add output with item_id: {target_item_id}"
+            ))
+
+    return issues
+
+
 def validate_recipe(
     recipe: Any,
     converter: Optional[UnitConverter] = None
@@ -971,5 +1119,9 @@ def validate_recipe(
                         field_path=f"steps[{i}].process_id",
                         fix_hint=f"Create process definition for '{process_id}' or correct the process_id"
                     ))
+
+        # ADR-018: Validate recipe inputs/outputs are resolvable
+        inputs_outputs_issues = validate_recipe_inputs_outputs(recipe, kb)
+        issues.extend(inputs_outputs_issues)
 
     return issues

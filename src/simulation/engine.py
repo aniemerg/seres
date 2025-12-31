@@ -540,6 +540,56 @@ class SimulationEngine:
         steps = recipe_def.get("steps", [])
         resolved_steps = [self.resolve_step(step) for step in steps]
 
+        # ADR-018: Infer inputs/outputs from resolved steps if not explicitly defined at recipe level
+        recipe_inputs = recipe_def.get("inputs", [])
+        recipe_outputs = recipe_def.get("outputs", [])
+
+        if not recipe_inputs:
+            # Infer from resolved steps - aggregate all step inputs
+            aggregated_inputs = {}
+            for step in resolved_steps:
+                for inp in step.get("inputs", []):
+                    item_id = inp.get("item_id")
+                    if item_id:
+                        # Aggregate quantities for duplicate item_ids
+                        qty = inp.get("quantity") or inp.get("qty", 0)
+                        unit = inp.get("unit", "kg")
+
+                        if item_id in aggregated_inputs:
+                            # Same item from multiple steps - add quantities
+                            aggregated_inputs[item_id]["qty"] += qty
+                        else:
+                            aggregated_inputs[item_id] = {
+                                "item_id": item_id,
+                                "qty": qty,
+                                "unit": unit
+                            }
+
+            recipe_inputs = list(aggregated_inputs.values())
+
+        if not recipe_outputs:
+            # Infer from resolved steps - use last step's outputs
+            if resolved_steps:
+                last_step = resolved_steps[-1]
+                recipe_outputs = last_step.get("outputs", [])
+
+        # Validation: Must have inputs/outputs after inference (ADR-018)
+        if not recipe_inputs:
+            return {
+                "success": False,
+                "error": "validation_error",
+                "message": f"Recipe {recipe_id} has no inputs (neither explicit nor inferred from steps). Fix the recipe or process definitions.",
+                "recipe_id": recipe_id,
+            }
+
+        if not recipe_outputs:
+            return {
+                "success": False,
+                "error": "validation_error",
+                "message": f"Recipe {recipe_id} has no outputs (neither explicit nor inferred from steps). Fix the recipe or process definitions.",
+                "recipe_id": recipe_id,
+            }
+
         # Aggregate machine requirements from all steps
         all_required_machines = set()
         missing_machines = []
@@ -589,7 +639,8 @@ class SimulationEngine:
                 print(f"⚠️  {warning}", file=sys.stderr)
 
         # Calculate total inputs needed (per batch × quantity)
-        inputs = recipe_def.get("inputs", [])
+        # Use recipe_inputs (which may be explicit or inferred) instead of recipe_def.get("inputs", [])
+        inputs = recipe_inputs
         total_inputs = {}
 
         for inp in inputs:
@@ -637,7 +688,8 @@ class SimulationEngine:
             self.subtract_from_inventory(item_id, inv_item.quantity, inv_item.unit)
 
         # Calculate total outputs
-        outputs = recipe_def.get("outputs", [])
+        # Use recipe_outputs (which may be explicit or inferred) instead of recipe_def.get("outputs", [])
+        outputs = recipe_outputs
         total_outputs = {}
 
         for outp in outputs:

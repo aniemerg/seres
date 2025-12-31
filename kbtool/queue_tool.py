@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import os
 import time
+import warnings
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 import hashlib
@@ -22,6 +23,12 @@ import hashlib
 from contextlib import contextmanager
 from functools import wraps
 import fcntl
+
+warnings.warn(
+    "kbtool.queue_tool is deprecated; use src.kb_core.queue_manager instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 WORK_QUEUE = Path("out/work_queue.jsonl")
 INDEX_PATH = Path("out/index.json")

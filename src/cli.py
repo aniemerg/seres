@@ -5,11 +5,13 @@ Provides commands for:
 - index: Build KB index with validation
 - auto-fix: Automatically fix validation issues
 - validate: Validate specific KB items
+- queue: Work queue operations
 
 Usage:
     python -m src.cli index
     python -m src.cli auto-fix --dry-run
     python -m src.cli validate --id process:crushing_v0
+    python -m src.cli queue lease --agent codex
 """
 import sys
 import argparse
@@ -148,6 +150,50 @@ def main():
         help='KB root directory (default: kb)'
     )
 
+    # =========================================================================
+    # QUEUE command
+    # =========================================================================
+    queue_parser = subparsers.add_parser(
+        'queue',
+        help='Work queue operations'
+    )
+    queue_sub = queue_parser.add_subparsers(dest='queue_cmd')
+    queue_sub.add_parser('pop', help='Pop and print the next queue item (legacy)')
+    queue_sub.add_parser('prune', help='Remove items marked resolved/superseded from queue')
+    lease_parser = queue_sub.add_parser('lease', help='Lease next pending item')
+    lease_parser.add_argument('--agent', required=True)
+    lease_parser.add_argument('--ttl', type=int, default=900)
+    lease_parser.add_argument('--priority', help='Comma-separated reasons in priority order')
+    complete_parser = queue_sub.add_parser('complete', help='Mark leased item complete')
+    complete_parser.add_argument('--id', required=True)
+    complete_parser.add_argument('--agent', required=True)
+    complete_parser.add_argument(
+        '--verify',
+        action='store_true',
+        help='Rebuild queue and refuse completion if the gap remains',
+    )
+    complete_parser.add_argument(
+        '--no-index',
+        action='store_true',
+        help='Skip indexer run when used with --verify',
+    )
+    verify_parser = queue_sub.add_parser('verify', help='Rebuild queue and verify gap resolution')
+    verify_parser.add_argument('--id', action='append', dest='ids', required=True, help='Gap id to verify (repeatable)')
+    verify_parser.add_argument('--no-index', action='store_true', help='Skip indexer run and use existing queue')
+    release_parser = queue_sub.add_parser('release', help='Release a lease back to pending')
+    release_parser.add_argument('--id', required=True)
+    release_parser.add_argument('--agent', required=True)
+    gc_parser = queue_sub.add_parser('gc', help='Revert expired leases; optionally prune old done items')
+    gc_parser.add_argument('--prune-done-older-than', type=int, default=None, dest='prune_done')
+    queue_sub.add_parser('ls', help='Show queue counts by status')
+    add_parser = queue_sub.add_parser('add', help='Add manual gap to queue')
+    add_parser.add_argument('--gap-type', required=False, help='Gap type (existing or new)')
+    add_parser.add_argument('--item-id', required=False, help='Item/recipe/process ID')
+    add_parser.add_argument('--description', help='Description of the issue')
+    add_parser.add_argument('--context', help='JSON context string')
+    add_parser.add_argument('--file', help='JSONL file with gap items to add (alternative to --gap-type)')
+    queue_sub.add_parser('gap-types', help='List registered gap types')
+
     # Parse arguments
     args = parser.parse_args()
 
@@ -183,6 +229,9 @@ def main():
 
         elif args.command == 'closure':
             return analyze_closure(args)
+
+        elif args.command == 'queue':
+            return run_queue_command(args)
 
         elif args.command == 'sim':
             from src.simulation.cli import run_sim_command
@@ -394,6 +443,137 @@ def analyze_closure(args):
         print(output_text)
 
     return 0
+
+
+def _run_indexer() -> bool:
+    from src.indexer.indexer import build_index
+    try:
+        build_index()
+        return True
+    except Exception as e:
+        print(f"Error: Indexer failed: {e}", file=sys.stderr)
+        return False
+
+
+def run_queue_command(args):
+    import json as json_mod
+    from src.kb_core import queue_manager
+
+    cmd = args.queue_cmd
+    if cmd == 'pop':
+        item = queue_manager.pop_queue()
+        if item:
+            print(json_mod.dumps(item))
+        else:
+            print("queue empty")
+        return 0
+
+    if cmd == 'prune':
+        removed = queue_manager.prune_queue()
+        print(f"Pruned {removed} completed items from queue")
+        return 0
+
+    if cmd == 'lease':
+        priorities = args.priority.split(',') if args.priority else None
+        item = queue_manager.lease_next(args.agent, ttl=args.ttl, priorities=priorities)
+        if item:
+            print(json_mod.dumps(item))
+        else:
+            print("queue empty")
+        return 0
+
+    if cmd == 'complete':
+        if args.verify:
+            if not args.no_index:
+                ok = _run_indexer()
+                if not ok:
+                    raise SystemExit("Indexer failed; refusing to complete")
+            remaining = queue_manager.gap_ids_present([args.id])
+            if remaining:
+                raise SystemExit(f"Refusing to complete; gap still present: {args.id}")
+        ok = queue_manager.complete(args.id, args.agent)
+        if ok:
+            print(f"Marked {args.id} done")
+            return 0
+        if args.verify and not queue_manager.gap_id_exists(args.id):
+            print(f"Gap {args.id} already resolved; no queue entry to mark done")
+            return 0
+        print(f"Failed to mark {args.id} done (not leased by {args.agent}?)")
+        return 1
+
+    if cmd == 'verify':
+        if not args.no_index:
+            ok = _run_indexer()
+            if not ok:
+                raise SystemExit("Indexer failed; cannot validate queue")
+        remaining = queue_manager.gap_ids_present(args.ids)
+        if remaining:
+            print("Unresolved gaps:")
+            for gap_id in sorted(remaining):
+                print(f"- {gap_id}")
+            return 1
+        print("All specified gaps are resolved.")
+        return 0
+
+    if cmd == 'release':
+        ok = queue_manager.release(args.id, args.agent)
+        if ok:
+            print(f"Released {args.id} to pending")
+            return 0
+        print(f"Failed to release {args.id} (not leased by {args.agent}?)")
+        return 1
+
+    if cmd == 'gc':
+        removed = queue_manager.gc(prune_done_older_than=args.prune_done)
+        print(f"GC removed {removed} items")
+        return 0
+
+    if cmd == 'ls':
+        counts = queue_manager.list_queue()
+        print(json_mod.dumps(counts, indent=2))
+        return 0
+
+    if cmd == 'add':
+        if args.file:
+            added = queue_manager.add_from_file(Path(args.file))
+            print(f"Added {added} items to queue")
+            return 0
+        if not args.gap_type or not args.item_id:
+            raise SystemExit("Error: --gap-type and --item-id required (or use --file)")
+        context = json_mod.loads(args.context) if args.context else {}
+        gap_id = queue_manager.add_gap(
+            gap_type=args.gap_type,
+            item_id=args.item_id,
+            description=args.description,
+            context=context,
+            source="manual"
+        )
+        print(f"Added gap to queue: {gap_id}")
+        return 0
+
+    if cmd == 'gap-types':
+        types = queue_manager.list_gap_types()
+        if not types:
+            print("No gap types registered")
+            return 0
+        indexer_types = {k: v for k, v in types.items() if v.get("source") == "indexer"}
+        agent_types = {k: v for k, v in types.items() if v.get("source") != "indexer"}
+        print(f"Registered Gap Types ({len(types)} total)")
+        print("=" * 60)
+        if indexer_types:
+            print("\nIndexer-Detected Types:")
+            for gap_type, meta in sorted(indexer_types.items()):
+                desc = meta.get("description", "No description")
+                print(f"  {gap_type:25s} - {desc}")
+        if agent_types:
+            print("\nAgent-Created Types:")
+            for gap_type, meta in sorted(agent_types.items()):
+                desc = meta.get("description", "No description")
+                usage = meta.get("usage_count", 0)
+                print(f"  {gap_type:25s} - {desc} (used {usage} times)")
+        return 0
+
+    raise SystemExit("Unknown queue subcommand")
 
 
 if __name__ == '__main__':

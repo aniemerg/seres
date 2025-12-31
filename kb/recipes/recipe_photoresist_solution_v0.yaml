@@ -5,6 +5,14 @@ steps:
   - process_id: chemical_synthesis_basic_v0
     est_time_hr: 1.0
     labor_hours: 0.5
+    inputs:
+      - item_id: methanol_liquid
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: chemical_product_crude
+        qty: 0.85
+        unit: kg
     notes: "Synthesize photoresist precursor"
   - process_id: mixing_basic_v0
     est_time_hr: 0.3

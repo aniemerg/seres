@@ -392,7 +392,7 @@ The KB defines several labor bot types:
 
 6. **Run indexer and verify**
    ```bash
-   .venv/bin/python -m kbtool index
+   python -m src.cli index
    # Check for new gaps, validation warnings
    ```
 
