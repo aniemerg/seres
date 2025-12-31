@@ -4,10 +4,10 @@
 - bom: 398
 - item: 1
 - machine: 341
-- material: 585
-- part: 1014
+- material: 575
+- part: 1008
 - process: 874
-- recipe: 2018
+- recipe: 2001
 - resource: 2
 - scenario: 1
 - schema: 1
