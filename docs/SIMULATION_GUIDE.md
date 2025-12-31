@@ -18,6 +18,8 @@ The simulation engine allows you to:
 - ✅ Recipe overrides (ADR-013)
 - ✅ Material class matching
 - ✅ JSONL event logging
+- ✅ Preflight planning (`sim plan`)
+- ✅ Simulation scaffolding (`sim scaffold`)
 
 ## Quick Start
 
@@ -611,3 +613,26 @@ Compare to available solar/nuclear power capacity.
 - `docs/ADRs/ADR-017-validation-and-error-detection.md` - Validation rules
 - `src/simulation/engine.py` - Engine implementation
 - `src/simulation/cli.py` - CLI implementation
+### plan
+
+Preflight a process or recipe to see required machines, inputs, and calculation readiness.
+
+```bash
+python -m src.cli sim plan --process crushing_basic_v0
+python -m src.cli sim plan --recipe recipe_labor_bot_basic_v0
+```
+
+**Output:**
+- Required machines/resources
+- Inputs and outputs (when specified)
+- Duration/energy calculation readiness (process only)
+
+### scaffold
+
+Create a simulation and optionally import bootstrap items in one step.
+
+```bash
+python -m src.cli sim scaffold --sim-id labor_bot_basic_isru --bootstrap labor_bot_general_v0,assembly_tools_basic
+```
+
+**Bootstrap format:** `item_id[:qty[:unit]]` (defaults: `1 unit`)

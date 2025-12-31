@@ -35,118 +35,32 @@ These are the relevant rules that tooling should follow and surface:
 
 Tooling should not invent new schemas; it should read and report from current KB and ADR rules.
 
-## Proposed CLI Additions (Agent UX)
+## Proposed CLI Additions (Minimal)
 
-All commands should live under `python -m src.cli sim ...` unless noted.
+All commands should live under `python -m src.cli sim ...`.
 
 ### 1) `sim plan`
-**Purpose:** Preflight a process or recipe and show all dependencies.
-
+**Purpose:** Preflight a process or recipe and show immediate blockers.\n
 Example:
 ```
 python -m src.cli sim plan --process crushing_basic_v0
 python -m src.cli sim plan --recipe recipe_labor_bot_basic_v0
 ```
 
-Output:
-- Required machines/resources (flattened list)
-- Required input items and quantities (per batch or scaled)
-- Output items and quantities
-- Duration/energy calculation readiness (OK/ERROR + reason)
-- Suggested imports (items not producible from local KB graph)
+Output (short, flat list):
+- Required machines/resources\n- Required inputs\n- Duration/energy calculation readiness (OK/ERROR + reason)
 
-### 2) `sim deps`
-**Purpose:** Expand dependency tree of an item/recipe/process.
-
-Example:
-```
-python -m src.cli sim deps --item labor_bot_basic_v0 --depth 2
-```
-
-Output:
-- Tree of recipes/processes required
-- Highlight nodes with missing recipes
-- Flag ambiguous or missing conversions
-
-### 3) `sim isru`
-**Purpose:** Quick ISRU feasibility summary for a target item or machine.
-
-Example:
-```
-python -m src.cli sim isru --item labor_bot_basic_v0
-```
-
-Output:
-- Percent ISRU vs. import (by mass)
-- List of import-only items
-- Minimal import set
-
-### 4) `sim check`
-**Purpose:** Dry-run validation of a process/recipe without executing it.
-
-Example:
-```
-python -m src.cli sim check --process motor_final_assembly_v0
-python -m src.cli sim check --recipe recipe_motor_electric_small_v0
-```
-
-Output:
-- All validation errors/warnings (ADR-017)
-- Missing machines and inputs
-- Whether duration/energy can be calculated
-
-### 5) `sim scaffold`
-**Purpose:** Create a simulation with sensible defaults and optional bootstraps.
-
+### 2) `sim scaffold`
+**Purpose:** Create a simulation with optional bootstrap imports.\n
 Example:
 ```
 python -m src.cli sim scaffold --sim-id labor_bot_basic_isru --bootstrap labor_bot_general_v0,assembly_tools_basic
 ```
 
 Output:
-- New simulation
-- Imported bootstrap items
-- Optional metadata note in simulation event log
+- New simulation\n- Imported bootstrap items
 
-### 6) `sim import-plan`
-**Purpose:** Generate and apply a minimal import plan.
-
-Example:
-```
-python -m src.cli sim import-plan --sim-id labor_bot_basic_isru --item labor_bot_basic_v0 --apply
-```
-
-Output:
-- List of items to import and quantities
-- Optional `--apply` to import directly
-
-### 7) `sim runchain`
-**Purpose:** Execute a small chain of processes with consistent durations and reporting.
-
-Example:
-```
-python -m src.cli sim runchain --sim-id labor_bot_basic_isru --processes regolith_mining_simple_v0,ilmenite_extraction_from_regolith_v0,iron_pure_production_from_ilmenite_v0
-```
-
-Output:
-- Process list
-- Duration/energy summary
-- Inventory changes
-
-### 8) `sim diagnose`
-**Purpose:** One-shot diagnosis when a sim command fails.
-
-Example:
-```
-python -m src.cli sim diagnose --last --sim-id labor_bot_basic_isru
-```
-
-Output:
-- Last error and stack trace summary
-- Likely missing inputs/machines
-- Suggested fixes
-
-## Optional: CLI Output Improvements
+## Optional: Small Output Improvements
 
 - Add `--explain` to `sim start-process` to show how duration and energy were calculated.
 - Add `--list-requires` to `sim start-process` to print required machines and resources.

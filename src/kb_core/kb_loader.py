@@ -101,6 +101,8 @@ class KBLoader:
             try:
                 data = self._load_yaml_file(process_file)
                 if data:
+                    # Add defined_in metadata
+                    data['defined_in'] = str(process_file.relative_to(self.kb_root.parent))
                     process_id = data.get("id", process_file.stem)
                     self.processes[process_id] = self._parse_model(data, "process")
             except Exception as e:
@@ -117,6 +119,8 @@ class KBLoader:
             try:
                 data = self._load_yaml_file(recipe_file)
                 if data:
+                    # Add defined_in metadata
+                    data['defined_in'] = str(recipe_file.relative_to(self.kb_root.parent))
                     recipe_id = data.get("id", recipe_file.stem)
                     self.recipes[recipe_id] = self._parse_model(data, "recipe")
             except Exception as e:
@@ -131,6 +135,8 @@ class KBLoader:
                 try:
                     data = self._load_yaml_file(item_file)
                     if data:
+                        # Add defined_in metadata for raw material detection
+                        data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
                         item_id = data.get("id", item_file.stem)
                         self.items[item_id] = self._parse_model(data, data.get("kind", "material"))
                 except Exception as e:
@@ -143,6 +149,8 @@ class KBLoader:
                 try:
                     data = self._load_yaml_file(item_file)
                     if data:
+                        # Add defined_in metadata for import detection
+                        data['defined_in'] = str(item_file.relative_to(self.kb_root.parent))
                         item_id = data.get("id", item_file.stem)
                         self.items[item_id] = self._parse_model(data, data.get("kind", "material"))
                 except Exception as e:

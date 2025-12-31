@@ -26,6 +26,8 @@ python -m src.cli sim start-process --sim-id my_sim --process mining_v0 --durati
 python -m src.cli sim advance-time --sim-id my_sim --hours 24
 python -m src.cli sim view-state --sim-id my_sim          # View state
 python -m src.cli sim list                                 # List simulations
+python -m src.cli sim plan --process crushing_basic_v0      # Preflight a process/recipe
+python -m src.cli sim scaffold --sim-id demo --bootstrap labor_bot_general_v0
 ```
 
 ---
@@ -448,3 +450,26 @@ python -m src.cli sim view-state --sim-id test
 - **`docs/ADRs/`** - Architecture decision records
 - **`src/cli.py`** - CLI implementation
 - **`src/simulation/cli.py`** - Simulation CLI implementation
+### sim plan
+
+Preflight a process or recipe and show immediate blockers.
+
+```bash
+python -m src.cli sim plan --process crushing_basic_v0
+python -m src.cli sim plan --recipe recipe_labor_bot_basic_v0
+```
+
+**Output:**
+- Required machines/resources
+- Inputs and outputs (when specified)
+- Duration/energy calculation readiness (process only)
+
+### sim scaffold
+
+Create a simulation with optional bootstrap imports.
+
+```bash
+python -m src.cli sim scaffold --sim-id labor_bot_basic_isru --bootstrap labor_bot_general_v0,assembly_tools_basic
+```
+
+**Bootstrap format:** `item_id[:qty[:unit]]`

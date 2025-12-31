@@ -18,9 +18,12 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Dict, Any, Iterable
 
 from src.kb_core.kb_loader import KBLoader
+from src.kb_core.calculations import calculate_duration, calculate_energy, CalculationError
+from src.kb_core.unit_converter import UnitConverter
+from src.kb_core.schema import Quantity
 from src.simulation.engine import SimulationEngine
 
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -189,6 +192,208 @@ def cmd_run_recipe(args, kb_loader: KBLoader):
         return 1
 
 
+def _as_quantity(entry: Any) -> Quantity:
+    """Normalize dict/object entries into a Quantity."""
+    if isinstance(entry, dict):
+        item_id = entry.get("item_id")
+        qty = entry.get("qty") if entry.get("qty") is not None else entry.get("quantity")
+        unit = entry.get("unit", "kg")
+    else:
+        item_id = getattr(entry, "item_id", None)
+        qty = getattr(entry, "qty", None)
+        if qty is None:
+            qty = getattr(entry, "quantity", None)
+        unit = getattr(entry, "unit", "kg")
+    return Quantity(item_id=item_id, qty=float(qty or 0), unit=unit)
+
+
+def _collect_machine_requirements(process_def: Dict[str, Any]) -> Dict[str, str]:
+    """Collect required machine IDs from process definition."""
+    required: Dict[str, str] = {}
+
+    for machine_id in process_def.get("requires_ids", []) or []:
+        required[machine_id] = "1 unit"
+
+    for req in process_def.get("resource_requirements", []) or []:
+        if isinstance(req, dict) and req.get("machine_id"):
+            qty = req.get("qty", 1.0)
+            unit = req.get("unit", "hr")
+            required[req["machine_id"]] = f"{qty} {unit}"
+
+    return required
+
+
+def _format_quantity_list(items: Iterable[Quantity]) -> list[str]:
+    lines = []
+    for item in items:
+        lines.append(f"{item.item_id}: {item.qty:.2f} {item.unit}")
+    return lines
+
+
+def _calculate_readiness(process_model, converter: UnitConverter) -> Dict[str, str]:
+    inputs = {_as_quantity(q).item_id: _as_quantity(q) for q in process_model.inputs}
+    outputs = {_as_quantity(q).item_id: _as_quantity(q) for q in process_model.outputs}
+
+    readiness = {"duration": "ok", "energy": "ok"}
+
+    try:
+        _ = calculate_duration(process_model, inputs, outputs, converter)
+    except CalculationError as exc:
+        readiness["duration"] = f"error: {exc}"
+    except Exception as exc:
+        readiness["duration"] = f"error: {exc}"
+
+    if not getattr(process_model, "energy_model", None):
+        readiness["energy"] = "n/a (no energy_model)"
+    else:
+        try:
+            _ = calculate_energy(process_model, inputs, outputs, converter)
+        except CalculationError as exc:
+            readiness["energy"] = f"error: {exc}"
+        except Exception as exc:
+            readiness["energy"] = f"error: {exc}"
+
+    return readiness
+
+
+def cmd_plan(args, kb_loader: KBLoader):
+    """Preflight a process or recipe to show immediate blockers."""
+    converter = UnitConverter(kb_loader)
+
+    if args.process:
+        process_model = kb_loader.get_process(args.process)
+        if not process_model:
+            print(f"Error: Process '{args.process}' not found", file=sys.stderr)
+            return 1
+
+        process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+        required = _collect_machine_requirements(process_def)
+
+        print(f"=== Plan: process {args.process} ===")
+        if required:
+            print("Required machines/resources:")
+            for machine_id, detail in sorted(required.items()):
+                print(f"  {machine_id}: {detail}")
+        else:
+            print("Required machines/resources: none")
+
+        inputs = [_as_quantity(q) for q in process_def.get("inputs", [])]
+        outputs = [_as_quantity(q) for q in process_def.get("outputs", [])]
+        if inputs:
+            print("Inputs:")
+            for line in _format_quantity_list(inputs):
+                print(f"  {line}")
+        else:
+            print("Inputs: none")
+
+        if outputs:
+            print("Outputs:")
+            for line in _format_quantity_list(outputs):
+                print(f"  {line}")
+        else:
+            print("Outputs: none")
+
+        readiness = _calculate_readiness(process_model, converter)
+        print("Duration calculation:", readiness["duration"])
+        print("Energy calculation:", readiness["energy"])
+        return 0
+
+    if args.recipe:
+        recipe_model = kb_loader.get_recipe(args.recipe)
+        if not recipe_model:
+            print(f"Error: Recipe '{args.recipe}' not found", file=sys.stderr)
+            return 1
+
+        recipe_def = recipe_model.model_dump() if hasattr(recipe_model, "model_dump") else recipe_model
+        required = {}
+        missing_steps = []
+
+        for step in recipe_def.get("steps", []):
+            process_id = step.get("process_id")
+            process_model = kb_loader.get_process(process_id)
+            if not process_model:
+                missing_steps.append(process_id)
+                continue
+            process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+            required.update(_collect_machine_requirements(process_def))
+
+        print(f"=== Plan: recipe {args.recipe} ===")
+        if required:
+            print("Required machines/resources:")
+            for machine_id, detail in sorted(required.items()):
+                print(f"  {machine_id}: {detail}")
+        else:
+            print("Required machines/resources: none")
+
+        inputs = recipe_def.get("inputs", [])
+        if inputs:
+            print("Inputs:")
+            for line in _format_quantity_list([_as_quantity(q) for q in inputs]):
+                print(f"  {line}")
+        else:
+            print("Inputs: none specified (recipe uses step processes)")
+
+        if missing_steps:
+            print("Missing processes:")
+            for proc_id in sorted(missing_steps):
+                print(f"  {proc_id}")
+
+        print("Duration/Energy calculation: not evaluated for recipes (step overrides possible)")
+        return 0
+
+    print("Error: Provide --process or --recipe", file=sys.stderr)
+    return 1
+
+
+def _parse_bootstrap_entry(entry: str) -> tuple[str, float, str]:
+    """Parse bootstrap entries like item_id[:qty[:unit]]."""
+    parts = entry.split(":")
+    item_id = parts[0]
+    qty = 1.0
+    unit = "unit"
+    if len(parts) >= 2 and parts[1]:
+        qty = float(parts[1])
+    if len(parts) >= 3 and parts[2]:
+        unit = parts[2]
+    return item_id, qty, unit
+
+
+def cmd_scaffold(args, kb_loader: KBLoader):
+    """Create a simulation with optional bootstrap imports."""
+    sim_dir = SIMULATIONS_DIR / args.sim_id
+    log_file = sim_dir / "simulation.jsonl"
+    if log_file.exists():
+        print(f"Error: Simulation '{args.sim_id}' already exists", file=sys.stderr)
+        return 1
+
+    engine = SimulationEngine(args.sim_id, kb_loader, sim_dir)
+    engine.load()
+
+    imported = []
+    if args.bootstrap:
+        for raw_entry in args.bootstrap.split(","):
+            entry = raw_entry.strip()
+            if not entry:
+                continue
+            item_id, qty, unit = _parse_bootstrap_entry(entry)
+            result = engine.import_item(item_id, qty, unit)
+            if not result.get("success"):
+                print(f"✗ Failed to import {item_id}: {result.get('message', 'Unknown error')}", file=sys.stderr)
+                return 1
+            imported.append((item_id, qty, unit))
+
+    engine.save()
+
+    print(f"✓ Created simulation '{args.sim_id}'")
+    print(f"  Location: {engine.sim_dir}")
+    print(f"  Log file: {engine.log_file}")
+    if imported:
+        print("  Imported:")
+        for item_id, qty, unit in imported:
+            print(f"    - {item_id}: {qty} {unit}")
+    return 0
+
+
 def cmd_build_machine(args, kb_loader: KBLoader):
     """Build a machine from its BOM."""
     engine = load_or_create_simulation(args.sim_id, kb_loader)
@@ -335,6 +540,20 @@ def add_sim_subcommands(subparsers):
     start_parser.add_argument('--output-quantity', type=float, help='Desired output quantity (for calculated duration)')
     start_parser.add_argument('--output-unit', type=str, help='Unit for output quantity (for calculated duration)')
 
+    # plan
+    plan_parser = sim_subparsers.add_parser('plan', help='Preflight a process or recipe')
+    plan_group = plan_parser.add_mutually_exclusive_group(required=True)
+    plan_group.add_argument('--process', help='Process ID')
+    plan_group.add_argument('--recipe', help='Recipe ID')
+
+    # scaffold
+    scaffold_parser = sim_subparsers.add_parser('scaffold', help='Create a simulation with optional bootstrap imports')
+    scaffold_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    scaffold_parser.add_argument(
+        '--bootstrap',
+        help='Comma-separated items to import (item_id[:qty[:unit]])'
+    )
+
     # run-recipe
     recipe_parser = sim_subparsers.add_parser('run-recipe', help='Run a recipe')
     recipe_parser.add_argument('--sim-id', required=True, help='Simulation ID')
@@ -379,6 +598,8 @@ def run_sim_command(args, kb_loader: KBLoader):
         'view-state': cmd_view_state,
         'import': cmd_import,
         'start-process': cmd_start_process,
+        'plan': cmd_plan,
+        'scaffold': cmd_scaffold,
         'run-recipe': cmd_run_recipe,
         'build-machine': cmd_build_machine,
         'preview': cmd_preview,
