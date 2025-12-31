@@ -26,7 +26,7 @@ except ImportError:  # pragma: no cover
     yaml = None
 
 from kbtool import models
-from kbtool.queue_tool import _locked_queue
+from src.kb_core.queue_manager import _locked_queue
 from base_builder.kb_loader import KBLoader  # Uses dict-based loader (indexer expects dicts)
 from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
@@ -620,10 +620,10 @@ def _detect_circular_dependencies(entries: Dict[str, dict], kb_loader) -> List[d
     Returns:
         List of queue items (one per unique normalized loop)
     """
-    from kbtool.circular_dependency_fixer import CircularDependencyFixer
+    from src.kb_core.dependency_analyzer import CircularDependencyAnalyzer
 
-    fixer = CircularDependencyFixer(kb_loader)
-    queue_items = fixer.get_work_queue_items(entries)
+    analyzer = CircularDependencyAnalyzer(kb_loader)
+    queue_items = analyzer.get_work_queue_items(entries)
 
     # Write to output file
     circ_dep_path = OUT_DIR / "circular_dependencies.jsonl"
