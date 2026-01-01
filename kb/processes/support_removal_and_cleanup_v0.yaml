@@ -12,11 +12,13 @@ resource_requirements:
     qty: 0.3
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: "Hand tools and cleanup"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Support removal and surface cleanup"
+process_type: batch
 notes: Remove supports and perform basic cleanup on printed parts prior to assembly.

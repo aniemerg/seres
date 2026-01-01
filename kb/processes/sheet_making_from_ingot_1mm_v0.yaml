@@ -17,9 +17,11 @@ resource_requirements:
   qty: 0.05
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.05
 notes: Form 1mm-thick sheet from a small steel ingot portion; placeholder parameters.
+process_type: batch

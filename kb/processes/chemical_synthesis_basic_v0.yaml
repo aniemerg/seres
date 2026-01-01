@@ -1,23 +1,40 @@
 id: chemical_synthesis_basic_v0
 kind: process
 name: Chemical synthesis (basic)
+is_template: true
 layer_tags:
-  - layer_4
-  - layer_5
-inputs: []
-outputs: []
+- layer_4
+- layer_5
+inputs:
+- item_id: methanol_liquid
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: chemical_product_crude
+  qty: 0.85
+  unit: kg
+byproducts:
+- item_id: process_waste
+  qty: 0.15
+  unit: kg
 requires_ids:
-  - chemical_reactor_basic
+- chemical_reactor_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 3.0
-  notes: "reactor heating, mixing, and temperature control for chemical reactions"
+  unit: kWh/kg
+  scaling_basis: methanol_liquid
+  notes: reactor heating, mixing, and temperature control for chemical reactions
 time_model:
   type: linear_rate
-  hr_per_kg: 4.0
-  notes: "batch reaction time including reagent addition, reaction, and product recovery"
-notes: Basic chemical synthesis process for producing industrial chemicals, reagents, and materials. Includes mixing, heating, reaction control, and product separation. Used for producing acids, bases, salts, solvents, and intermediate chemicals.
+  rate: 0.25
+  rate_unit: kg/hr
+  scaling_basis: methanol_liquid
+  notes: batch reaction time including reagent addition, reaction, and product recovery (4.0 hr per kg = 0.25 kg/hr)
+notes: Basic chemical synthesis process for producing industrial chemicals, reagents, and materials. Includes mixing, heating,
+  reaction control, and product separation. Used for producing acids, bases, salts, solvents, and intermediate chemicals.
+process_type: continuous

@@ -3,6 +3,7 @@ kind: process
 name: Hot isostatic pressing (HIP) v0
 layer_tags:
 - layer_5
+process_type: batch
 inputs:
 - item_id: metal_powder_v0
   qty: 1.0
@@ -15,13 +16,14 @@ requires_ids:
   - hip_press_unit_v0
 resource_requirements:
 - machine_id: hip_press_unit_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 notes: Placeholder HIP densification process converting metal_powder_v0 to metal_densified_v0.
   Conservative estimates used for early modeling.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0

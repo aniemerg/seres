@@ -1,5 +1,6 @@
 id: ammonia_recovery_cao_v0
 kind: process
+process_type: batch
 name: Ammonia recovery from ammonium chloride via CaO
 layer_tags:
   - layer_5
@@ -29,11 +30,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
-  notes: Moderate heating for thermal decomposition, exothermic CaO reaction
+  unit: kWh
+  notes: Moderate heating for thermal decomposition, exothermic CaO reaction (3.0 kWh/kg * 1.0 kg NH4Cl)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Thermal decomposition and ammonia recovery
 notes: |

@@ -2,27 +2,32 @@ id: material_transport_v0
 kind: process
 name: Material transport (basic)
 layer_tags:
-  - layer_2
+- layer_2
 inputs:
-  - item_id: bulk_material
-    qty: null
-    unit: kg
+- item_id: bulk_material
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: transported_material
-    qty: null
-    unit: kg
+- item_id: transported_material
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - hauler
+- hauler
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.2
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.2
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.05
-  notes: "Hauler energy per kg transported"
+  unit: kWh/kg
+  scaling_basis: bulk_material
+  notes: Hauler energy per kg transported
 time_model:
   type: linear_rate
-  hr_per_kg: 0.01
-  notes: "Loading, haul, unload time per kg"
+  rate: 100.0
+  rate_unit: kg/hr
+  scaling_basis: bulk_material
+  notes: Loading, haul, unload time per kg
 notes: Generic material transport step using hauler; preserves mass of transported bulk material.
+process_type: continuous

@@ -1,6 +1,7 @@
 id: dust_mitigation_precursor_synthesis_v0
 name: Dust Mitigation precursor synthesis v0
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: dust_mitigation_precursor_v0
@@ -12,10 +13,11 @@ resource_requirements:
   qty: 0.3
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: |-
   Seed precursor production path for dust mitigation; placeholder for dust mitigation precursor synthesis to seed modeling.

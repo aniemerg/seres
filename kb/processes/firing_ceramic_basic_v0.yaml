@@ -1,5 +1,6 @@
 id: firing_ceramic_basic_v0
 kind: process
+process_type: batch
 name: Firing ceramic (basic)
 layer_tags:
   - layer_5
@@ -12,11 +13,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
   notes: "Furnace firing energy per batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Firing cycle"
 notes: Basic firing cycle for ceramic components/panels.

@@ -2,25 +2,29 @@ id: connector_multi_pin_assembly_v0
 name: Electrical connector multi-pin assembly v0
 kind: process
 inputs:
-  - item_id: connector_pin_header_v0
-    qty: 1.0
-    unit: each
+- item_id: connector_pin_header_v0
+  qty: 1.0
+  unit: each
 outputs:
-  - item_id: connector_electrical_multi_pin
-    qty: 1.0
-    unit: each
+- item_id: connector_electrical_multi_pin
+  qty: 1.0
+  unit: each
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 0.4
+  unit: kWh/each
+  scaling_basis: connector_electrical_multi_pin
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 2.0
-notes: "Prototype multi-pin connector assembly from header; placeholder until BOM for connector is defined."
+  rate: 2.0
+  rate_unit: each/hr
+  scaling_basis: connector_electrical_multi_pin
+notes: Prototype multi-pin connector assembly from header; placeholder until BOM for connector is defined.
+process_type: continuous

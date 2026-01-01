@@ -32,11 +32,16 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 15.0
+  unit: kWh/kg
+  scaling_basis: aluminum_alloy_ingot
   notes: Hall-Héroult electrolysis energy intensity for aluminum production
 time_model:
   type: linear_rate
-  setup: 0.0
   rate: 0.125
-notes: Hall-Héroult electrolysis at ~960°C. Very energy-intensive. Cryolite flux enables lower melting point. This is the standard industrial process for aluminum production.
+  rate_unit: kg/hr
+  scaling_basis: aluminum_alloy_ingot
+notes: Hall-Héroult electrolysis at ~960°C. Very energy-intensive. Cryolite flux enables lower melting point. This is the
+  standard industrial process for aluminum production.
+process_type: continuous

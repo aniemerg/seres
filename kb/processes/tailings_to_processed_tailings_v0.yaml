@@ -14,9 +14,11 @@ resource_requirements:
     amount: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 notes: "Placeholder tailings processing step to generate processed_tailings_v0 for seed modeling. Mass balanced (1 kg -> 1 kg)."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch

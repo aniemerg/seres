@@ -24,13 +24,15 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: Minimal energy for surface prep and curing
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Surface prep, application, alignment, curing
+process_type: batch
 notes: |
   Process for bonding strain gauges to test surfaces for structural monitoring.
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0 (seed file)

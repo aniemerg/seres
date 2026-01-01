@@ -1,5 +1,6 @@
 id: chloride_recycling_to_hcl_v0
 kind: process
+process_type: batch
 name: Recycling of salt waste to hydrochloric acid
 inputs:
 - item_id: salt_waste
@@ -17,9 +18,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 0.5
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
 notes: "Recycles salt waste to regenerate hydrochloric acid and recover usable salt."

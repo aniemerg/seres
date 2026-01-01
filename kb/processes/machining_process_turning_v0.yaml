@@ -1,6 +1,7 @@
 id: machining_process_turning_v0
 kind: process
 name: Machining turning process v0
+process_type: batch
 layer_tags:
 - layer_6
 - layer_7
@@ -20,13 +21,14 @@ requires_ids:
 - precision_lathe
 resource_requirements:
 - machine_id: precision_lathe
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
-  value: 0.25
-  notes: Energy per kilogram of rough part turned; coolant and tool wear included.
+  type: fixed_per_batch
+  value: 0.02
+  unit: kWh
+  notes: "Turning energy for 0.08 kg batch (spindle, coolant, tooling)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: Turning operation to convert rough part into precision machined part. Chips produced as waste.

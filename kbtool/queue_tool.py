@@ -1,16 +1,21 @@
 """
+DEPRECATED: This file is deprecated and should be migrated to src/
+
 Queue management helpers.
 
 NOTE: The work queue is now rebuilt from scratch on each indexer run,
 so prune() is largely obsolete - gaps are automatically removed when fixed.
 The pop() function can still be used for manual task-by-task workflows,
 but popped items will reappear on next index if still unresolved.
+
+TODO: Migrate to src/kb_core/queue_manager.py
 """
 from __future__ import annotations
 
 import json
 import os
 import time
+import warnings
 from pathlib import Path
 from typing import Dict, List, Optional, Set
 import hashlib
@@ -18,6 +23,12 @@ import hashlib
 from contextlib import contextmanager
 from functools import wraps
 import fcntl
+
+warnings.warn(
+    "kbtool.queue_tool is deprecated; use src.kb_core.queue_manager instead.",
+    DeprecationWarning,
+    stacklevel=2,
+)
 
 WORK_QUEUE = Path("out/work_queue.jsonl")
 INDEX_PATH = Path("out/index.json")
@@ -251,8 +262,20 @@ def gap_ids_present(ids: List[str]) -> Set[str]:
     for obj in items:
         obj_id = obj.get("id")
         if obj_id in wanted:
-            present.add(obj_id)
+            status = obj.get("status") or "pending"
+            if status not in ("resolved", "done", "superseded"):
+                present.add(obj_id)
     return present
+
+
+def gap_id_exists(id_value: str) -> bool:
+    if not id_value:
+        return False
+    items = _load_queue()
+    for obj in items:
+        if obj.get("id") == id_value:
+            return True
+    return False
 
 
 def _register_gap_type(gap_type: str, created_by: str = "unknown") -> None:

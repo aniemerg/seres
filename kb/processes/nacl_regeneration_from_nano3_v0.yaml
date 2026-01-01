@@ -4,6 +4,7 @@ name: NaCl regeneration from sodium nitrate
 layer_tags:
   - layer_3
   - layer_4
+process_type: batch
 inputs:
   - item_id: sodium_nitrate
     qty: 1.0
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: Moderate heating for crystallization and separation
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: Reaction, crystallization, and separation
 notes: |

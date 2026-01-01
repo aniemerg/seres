@@ -1,5 +1,6 @@
 id: getter_material_activation_v0
 kind: process
+process_type: batch
 name: Getter material activation process v0
 layer_tags:
   - layer_5
@@ -18,11 +19,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
   notes: High-temperature activation energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Heat-up, activation, and cool-down time
 notes: |

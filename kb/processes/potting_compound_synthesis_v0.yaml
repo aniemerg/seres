@@ -1,6 +1,7 @@
 id: potting_compound_synthesis_v0
 name: Synthesis of potting compound
 kind: process
+process_type: batch
 inputs:
   - item_id: epoxy_resin_base
     qty: 1.0
@@ -16,9 +17,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.75
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Placeholder synthesis of potting compound from epoxy resin base using mixing_station."

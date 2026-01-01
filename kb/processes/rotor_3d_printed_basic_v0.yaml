@@ -1,6 +1,7 @@
 id: rotor_3d_printed_basic_v0
 name: 3D-Printed motor rotor (basic) v0
 kind: process
+process_type: batch
 inputs:
 - item_id: printing_material_v0
   qty: 1.0
@@ -16,9 +17,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: "Basic 3D printing of motor rotor for seed item motor_rotor_3d_printed_v0."

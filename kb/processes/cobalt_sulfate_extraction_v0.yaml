@@ -38,13 +38,15 @@ resource_requirements:
     qty: 6.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 8.0
-  notes: Roasting, leaching, and electrowinning energy
+  unit: kWh
+  notes: Roasting, leaching, and electrowinning energy (per 1 kg feed batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 10.0
   notes: Roasting, leaching, and electrowinning sequence
+process_type: batch
 notes: |
   Cobalt purification via sulfate roasting and electrowinning route.
   Source: Sustainable-ISRU-on-the-Moon.txt

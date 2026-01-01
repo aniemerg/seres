@@ -1,5 +1,6 @@
 id: machining_process_drilling_v0
 kind: process
+process_type: batch
 name: Machining drilling process v0
 layer_tags:
 - layer_6
@@ -23,10 +24,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
-  value: 0.2
+  type: fixed_per_batch
+  value: 0.016
+  unit: kWh
   notes: "Energy per kilogram of ceramic insulator drilled; includes motor operation and coolant."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Drilling holes in ceramic insulator to prepare antenna feed points. Chips captured as waste."

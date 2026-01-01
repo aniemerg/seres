@@ -26,13 +26,15 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: Endothermic reaction at 400-600°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: Catalytic reduction time
+process_type: batch
 notes: |
   Reverse water-gas shift (RWGS) reaction for converting CO2 to CO using hydrogen.
   Source: FFC-process-for-deep-ISRU.txt, Mars ISRU literature

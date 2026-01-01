@@ -1,6 +1,7 @@
 id: mos2_precursor_synthesis_v0
 name: MoS2 precursor synthesis v0
 kind: process
+process_type: batch
 layer_tags:
 - layer_5
 inputs: []
@@ -14,10 +15,11 @@ resource_requirements:
   qty: 0.3
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: |-
   Seed precursor production path for MoS2 precursor; placeholder for MoS2 precursor route. Allows modeling to proceed until chemistry is defined.

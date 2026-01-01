@@ -4,6 +4,7 @@ name: Carbothermal reduction of olivine
 layer_tags:
   - layer_4
   - layer_5
+process_type: batch
 inputs:
   - item_id: olivine_concentrate
     qty: 1.0
@@ -30,11 +31,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 20.0
+  unit: kWh
   notes: Extreme temperature carbothermal reduction at 2000°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: High temperature vapor phase processing
 notes: |

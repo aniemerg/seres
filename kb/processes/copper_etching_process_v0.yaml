@@ -1,6 +1,7 @@
 id: copper_etching_process_v0
 kind: process
 name: Copper etching process
+process_type: batch
 layer_tags:
 - layer_6
 - layer_7
@@ -24,12 +25,14 @@ requires_ids:
 - chemical_bath_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
-  value: 0.8
+  type: fixed_per_batch
+  value: 0.4
+  unit: kWh
+  notes: "Derived from 0.8 kWh/kg for a 0.5 kg batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Copper etching to produce copper traces on a copper-clad laminate. Spent etchant becomes waste."

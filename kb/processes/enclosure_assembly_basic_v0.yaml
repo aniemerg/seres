@@ -1,10 +1,20 @@
 id: enclosure_assembly_basic_v0
 kind: process
 name: Enclosure assembly (basic)
+process_type: batch
 layer_tags:
   - layer_4
-inputs: []
-outputs: []
+inputs:
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: kg
 requires_ids:
   - assembly_tools_basic
 resource_requirements:
@@ -12,11 +22,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: "Hand tools and small fixtures"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.8
   notes: "Mount components in enclosure and secure"
 notes: Basic assembly of electronic or mechanical components into enclosures.

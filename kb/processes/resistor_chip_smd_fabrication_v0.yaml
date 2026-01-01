@@ -1,6 +1,7 @@
 id: resistor_chip_smd_fabrication_v0
 name: Resistor chip SMD fabrication (placeholder)
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: resistor_chip_smd
@@ -8,12 +9,13 @@ outputs:
     unit: unit
 resource_requirements:
   - machine_id: assembly_station
-    amount: 1.0
+    qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.02
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
 notes: "Placeholder fabrication process for SMD resistor chip; local production modeled here as a stand-in until BOMs define a detailed flow."

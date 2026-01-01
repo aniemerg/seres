@@ -2,28 +2,33 @@ id: nickel_hydroxide_synthesis_from_nickel_metal_v0
 name: Nickel hydroxide synthesis from nickel metal
 kind: process
 inputs:
-  - item_id: nickel_metal_pure
-    qty: 1.0
-    unit: kg
-  - item_id: water
-    qty: 1.0
-    unit: kg
-  - item_id: potassium_hydroxide
-    qty: 0.5
-    unit: kg
+- item_id: nickel_metal_pure
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 1.0
+  unit: kg
+- item_id: potassium_hydroxide
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: nickel_hydroxide
-    qty: 2.5
-    unit: kg
+- item_id: nickel_hydroxide
+  qty: 2.5
+  unit: kg
 resource_requirements:
-  - machine_id: chemical_mixer_tank
-    amount: 1.0
-    unit: hr
+- machine_id: chemical_mixer_tank
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: nickel_metal_pure
+  notes: "Synthesis energy per kg nickel input"
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 5.0
-notes: "Local synthesis path for nickel hydroxide from nickel metal; conservative placeholders to enable KB closure."
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: nickel_metal_pure
+notes: Local synthesis path for nickel hydroxide from nickel metal; conservative placeholders to enable KB closure.
+process_type: continuous

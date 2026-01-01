@@ -4,6 +4,7 @@ name: Direct FFC reduction of ilmenite to FeTi alloy
 layer_tags:
   - layer_4
   - layer_5
+process_type: batch
 inputs:
   - item_id: ilmenite_concentrate
     qty: 1.0
@@ -35,11 +36,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 7.0
+  unit: kWh
   notes: FFC electrolysis at 900-1100°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 10.0
   notes: Direct reduction of ilmenite to alloy sponge
 notes: |

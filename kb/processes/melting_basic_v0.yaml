@@ -3,6 +3,7 @@ kind: process
 name: Basic melting
 layer_tags:
   - layer_5
+process_type: batch
 inputs:
   - item_id: metal_alloy_bulk
     qty: 1.0
@@ -19,11 +20,12 @@ resource_requirements:
     qty: 0.3
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
   notes: "Melting energy for metals (incl. losses); coarse anchor"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Heat-up, melt, and hold prior to pour"
 notes: Generic melting step for metal charge to produce molten material/preform for casting or forming.

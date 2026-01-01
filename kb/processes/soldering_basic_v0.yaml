@@ -13,12 +13,13 @@ resource_requirements:
     qty: 0.6
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
   notes: Soldering station power and fume extraction.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.6
   notes: Component prep, soldering, and inspection.
 notes: Basic soldering and rework for electronics or wiring; includes tinning, joint formation, and continuity checks. Placeholder pending detailed solder/material selection.
-
+process_type: batch

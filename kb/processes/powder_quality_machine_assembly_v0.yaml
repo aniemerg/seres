@@ -1,6 +1,7 @@
 id: powder_quality_machine_assembly_v0
 kind: process
 name: Powder quality analysis system assembly v0
+process_type: batch
 inputs:
 - item_id: optical_microscope_v0
   qty: 1.0
@@ -17,10 +18,11 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: |-
   Assemble the powder quality analysis system from an optical microscope v0 and screening equipment v0.

@@ -1,9 +1,15 @@
 id: heat_treatment_stress_relief_v0
 kind: process
 name: Heat Treatment - Stress Relief Annealing (basic)
-
-inputs: []
-outputs: []
+process_type: batch
+inputs:
+  - item_id: welded_assemblies
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: finished_part
+    qty: 5.0
+    unit: kg
 requires_ids:
   - furnace_basic
 resource_requirements:
@@ -11,11 +17,12 @@ resource_requirements:
     qty: 0.4
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.8
-  notes: Furnace soak for stress relief.
+  type: fixed_per_batch
+  value: 9.0
+  unit: kWh
+  notes: Furnace soak for stress relief (5 kg batch).
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Heat, soak, and controlled cool to relieve stresses.
 notes: Stress relief anneal for steel components after welding or machining to reduce residual stresses and distortion; parameters to be refined per alloy and section thickness.

@@ -1,5 +1,6 @@
 id: czochralski_process_silicon_v0
 kind: process
+process_type: batch
 name: Czochralski process for single-crystal silicon
 layer_tags:
   - layer_5
@@ -29,11 +30,12 @@ resource_requirements:
     qty: 8.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 80.0
-  notes: High energy for melting silicon at 1600°C and precise temperature control
+  unit: kWh
+  notes: High energy for melting ~1 kg silicon at 1600°C and precise temperature control
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 24.0
   notes: Slow crystal pulling over 12-24 hours
 notes: |

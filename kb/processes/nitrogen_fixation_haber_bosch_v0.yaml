@@ -21,13 +21,15 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 12.0
+  unit: kWh
   notes: High temperature and pressure operation energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Catalyst bed operation time for batch
+process_type: batch
 notes: |
   Haber-Bosch process for ammonia synthesis from nitrogen and hydrogen.
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0

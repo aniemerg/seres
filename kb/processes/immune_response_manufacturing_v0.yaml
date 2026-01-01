@@ -6,7 +6,11 @@ layer_tags:
 inputs: []
 outputs: []
 energy_model:
-  type: boundary
+  type: fixed_per_batch
+  value: 0.1
+  unit: kWh
 time_model:
-  type: boundary
-notes: "Out-of-scope biomedical manufacturing placeholder; treated as boundary/import until modeled."
+  type: batch
+  hr_per_batch: 0.1
+notes: "Out-of-scope biomedical manufacturing placeholder; treated as external supply until modeled."
+process_type: batch

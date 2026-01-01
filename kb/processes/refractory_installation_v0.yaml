@@ -12,12 +12,13 @@ resource_requirements:
     qty: 1.2
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: Mixing, vibration/ramming tools, and cure heat.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.2
   notes: Formwork setup, placing/ramming refractory, and initial cure.
+process_type: batch
 notes: Install refractory linings/brick in furnaces or kilns; includes surface prep, formwork, placement, and cure. Replace with specific lining system details when available.
-

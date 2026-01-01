@@ -3,6 +3,7 @@ kind: process
 name: Placeholder production of robot_gripper_multi_finger_v0
 layer_tags:
 - layer_1
+process_type: batch
 inputs: []
 outputs:
   - item_id: robot_gripper_multi_finger_v0
@@ -10,9 +11,10 @@ outputs:
     unit: unit
 resource_requirements: []
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.01
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.01
 notes: "Placeholder process to produce robot_gripper_multi_finger_v0 for gap resolution."

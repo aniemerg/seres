@@ -2,29 +2,34 @@ id: regolith_crushing_grinding_v0
 kind: process
 name: Regolith crushing and grinding
 layer_tags:
-  - layer_1
+- layer_1
 inputs:
-  - item_id: regolith_coarse_fraction
-    qty: 1.0
-    unit: kg
+- item_id: regolith_coarse_fraction
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: regolith_powder
-    qty: 1.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - rock_crusher_basic
-  - ball_mill_v0
-  - dust_collection_system
+- rock_crusher_basic
+- ball_mill_v0
+- dust_collection_system
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.1
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
-  notes: "Bond work index ~15-30 kWh/t for lunar regolith comminution"
+  unit: kWh/kg
+  scaling_basis: regolith_coarse_fraction
+  notes: Bond work index ~15-30 kWh/t for lunar regolith comminution
 time_model:
   type: linear_rate
-  hr_per_kg: 0.1
-  notes: "continuous crushing/grinding ~10 kg/hr throughput"
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_coarse_fraction
+  notes: continuous crushing/grinding ~10 kg/hr throughput
 notes: Anchor process to force comminution equipment into the graph.
+process_type: continuous

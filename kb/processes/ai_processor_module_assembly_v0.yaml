@@ -1,6 +1,7 @@
 id: ai_processor_module_assembly_v0
 name: AI Processor Module assembly v0
 kind: process
+process_type: batch
 layer_tags:
   - layer_7
   - layer_8
@@ -19,9 +20,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Assemble AI processor module by integrating microcontroller unit; placeholder for early modeling; will add AI accelerator components when defined."

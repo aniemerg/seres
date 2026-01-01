@@ -32,9 +32,11 @@ resource_requirements:
     amount: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 12.0
+  unit: kWh
 notes: "Local assembly path to produce optical_metrology_tools from imported components"
 time_model:
-  type: fixed_time
-  hr: 6.0
+  type: batch
+  hr_per_batch: 6.0
+process_type: batch

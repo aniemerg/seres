@@ -2,19 +2,30 @@ id: import_receiving_basic_v0
 kind: process
 name: Import receiving and staging (basic)
 layer_tags:
-  - layer_7
-inputs: []
-outputs: []
+- layer_7
+inputs:
+- item_id: bulk_material_or_parts
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: bulk_material_or_parts
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.05
-  notes: "material handling equipment, lighting, and basic inspection"
+  unit: kWh/kg
+  scaling_basis: bulk_material_or_parts
+  notes: material handling equipment, lighting, and basic inspection
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
-  notes: "unpack, inspect packaging and contents, stage for use"
+  rate: 3.333
+  rate_unit: kg/hr
+  scaling_basis: bulk_material_or_parts
+  notes: unpack, inspect packaging and contents, stage for use
 notes: Receive/import items, inspect packaging, stage for assembly; placeholder timing.
+process_type: continuous

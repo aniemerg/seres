@@ -1,23 +1,26 @@
 id: iron_powder_from_pure_iron_v0
 kind: process
 name: Iron powder from pure iron (v0)
+process_type: batch
 inputs:
-- item_id: iron_metal_pure
-  qty: 1.0
-  unit: kg
+  - item_id: iron_metal_pure
+    qty: 1.0
+    unit: kg
 outputs:
-- item_id: iron_powder_or_sheet
-  qty: 1.0
-  unit: kg
+  - item_id: iron_powder_or_sheet
+    qty: 1.0
+    unit: kg
 requires_ids: []
 resource_requirements:
-- machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
+  notes: "Powder processing energy for 1 kg batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Converts one kilogram of pure iron to iron powder or sheet form; placeholder economics."

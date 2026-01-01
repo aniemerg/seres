@@ -1,5 +1,6 @@
 id: pete_photon_enhanced_thermionic_v0_assembly_v0
 kind: process
+process_type: batch
 name: Assemble PETE photon-enhanced thermionic converter v0
 layer_tags:
 - layer_7
@@ -45,12 +46,13 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 4.0
   unit: hr
-energy_model:
-  type: kWh_per_unit_output
-  value: 40.0
-  notes: Preliminary energy for PETE converter assembly
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
   notes: Assembly time including alignment and testing
+energy_model:
+  type: fixed_per_batch
+  value: 40.0
+  unit: kWh
+  notes: Preliminary energy for PETE converter assembly
 notes: "Assemble PETE photon-enhanced thermionic converter from BOM components."

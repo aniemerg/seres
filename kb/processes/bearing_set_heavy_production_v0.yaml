@@ -1,5 +1,6 @@
 id: bearing_set_heavy_production_v0
 kind: process
+process_type: batch
 name: Heavy bearing set production v0
 layer_tags:
   - layer_6
@@ -35,12 +36,13 @@ resource_requirements:
     notes: "Labor for turning, grinding, heat treatment, and assembly. Reduced from 8h for smaller 4kg bearing set."
 
 energy_model:
-  type: kWh_per_kg
-  value: 12.0
-  notes: "Energy for turning, hardening (quench/temper), precision grinding, and assembly. Higher energy due to heat treatment and grinding."
+  type: fixed_per_batch
+  value: 54.0
+  unit: kWh
+  notes: "Energy for turning, hardening (quench/temper), precision grinding, and assembly. Higher energy due to heat treatment and grinding. (12 kWh/kg × 4.5 kg steel_stock)"
 
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 5.0
   notes: "Integrated process: forge rings, machine races, heat treat, grind, make balls, assemble. Heat treatment cycle is time bottleneck. Reduced from 8h for smaller 4kg bearing set."
 

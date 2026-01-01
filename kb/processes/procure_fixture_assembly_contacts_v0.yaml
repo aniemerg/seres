@@ -12,11 +12,13 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: Procurement energy proxy; shipping energy ignored in this abstraction
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: Procurement lead time; placeholder
 notes: Procurement pathway for fixture assembly contacts (placeholder for supplier integration)
+process_type: batch

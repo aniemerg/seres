@@ -20,9 +20,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: total_energy_kwh
+  type: fixed_per_batch
   value: 50.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
+process_type: batch
 notes: "Sinter tungsten powder to form a tungsten cathode blank for CaO coating."

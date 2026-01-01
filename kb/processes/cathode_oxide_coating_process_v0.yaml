@@ -1,6 +1,7 @@
 id: cathode_oxide_coating_process_v0
 name: Cathode oxide coating process v0
 kind: process
+process_type: batch
 inputs:
   - item_id: nickel_sheet_rolling_v0
     qty: 1.0
@@ -18,9 +19,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder cathode oxide coating process to satisfy a referenced gap in the KB."

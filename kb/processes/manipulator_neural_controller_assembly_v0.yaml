@@ -1,6 +1,7 @@
 id: manipulator_neural_controller_assembly_v0
 kind: process
 name: Manipulator neural controller assembly v0
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -28,9 +29,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
+  notes: "Assembly and testing energy for 1-unit batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Assembles manipulator neural controller from neuron circuit, electronic assembly, and enclosure. Placeholder routing to enable local modeling."

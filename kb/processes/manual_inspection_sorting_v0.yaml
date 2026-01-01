@@ -2,22 +2,25 @@ id: manual_inspection_sorting_v0
 kind: process
 name: Manual inspection and sorting
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs: []
 outputs: []
 requires_ids:
-  - inspection_tools_basic
+- inspection_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.05
-  notes: "minimal lighting and hand tools for visual inspection and sorting"
+  unit: kWh
+  notes: minimal lighting and hand tools for visual inspection and sorting
 time_model:
-  type: linear_rate
-  hr_per_kg: 1.5
-  notes: "labor-intensive manual picking, visual inspection, and sorting operations"
-notes: Manual inspection and sorting process. Labor-intensive visual examination and hand-picking to remove inclusions, defects, or unwanted materials. Used in mineral processing and quality control.
+  type: batch
+  hr_per_batch: 1.5
+  notes: labor-intensive manual picking, visual inspection, and sorting operations
+notes: Manual inspection and sorting process. Labor-intensive visual examination and hand-picking to remove inclusions, defects,
+  or unwanted materials. Used in mineral processing and quality control.
+process_type: batch

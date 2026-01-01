@@ -1,21 +1,33 @@
 id: chemical_mixing_basic_v0
 kind: process
 name: Chemical mixing (basic)
+process_type: batch
+is_template: true
 layer_tags:
   - layer_5
   - layer_6
-inputs: []
-outputs: []
+inputs:
+  - item_id: water
+    qty: 0.5
+    unit: kg
+  - item_id: sodium_hydroxide
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: blended_mixture
+    qty: 1.0
+    unit: kg
 resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
   notes: "Agitation and minor heating"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Charge, mix, and discharge"
 notes: "Basic chemical mixing and slurry preparation step; placeholder for simple hydration or blending reactions."

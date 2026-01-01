@@ -1,6 +1,7 @@
 id: core_memory_threading_process_v0
 kind: process
 name: Core memory threading (wire threading through cores) v0
+process_type: batch
 layer_tags:
   - layer_6
   - layer_7
@@ -27,10 +28,11 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.4
-  notes: "Estimated energy per threaded tile output (seed-based placeholder)."
+  unit: kWh
+  notes: "Estimated energy per threaded tile batch (seed-based placeholder)."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Seed-based placeholder: threads copper magnet wire through ferrite cores to form a threaded core memory tile; refine with real threading steps later."

@@ -22,12 +22,17 @@ resource_requirements:
     qty: 0.2
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.9
-  notes: "Reheating and mill drive energy for reducing billets/slabs to bar/plate/rod stock with trimming."
+  unit: kWh/kg
+  scaling_basis: steel_stock
+  notes: Reheating and mill drive energy for reducing billets/slabs to bar/plate/rod stock with trimming.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.25
-  setup_hr: 0.25
-  notes: "Multiple rolling passes plus handling for cutting to length."
-notes: "Hot rolls steel billets/slabs into generic steel stock (bar, plate, rod) and cuts to length. Assumes modest scale losses; scrap trimming not modeled separately."
+  rate: 4.0
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
+  notes: Multiple rolling passes plus handling for cutting to length.
+notes: Hot rolls steel billets/slabs into generic steel stock (bar, plate, rod) and cuts to length. Assumes modest scale losses;
+  scrap trimming not modeled separately.
+process_type: continuous

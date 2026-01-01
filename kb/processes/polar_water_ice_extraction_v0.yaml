@@ -1,5 +1,6 @@
 id: polar_water_ice_extraction_v0
 kind: process
+process_type: batch
 name: Water ice extraction from polar craters
 layer_tags:
   - layer_3
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 6.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 12.0
-  notes: High energy for drilling, heating ice-cemented regolith, and heliostat operation
+  unit: kWh
+  notes: High energy for drilling, heating ice-cemented regolith, and heliostat operation (1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
   notes: Drilling, heating, sublimation/melting, and collection
 notes: |

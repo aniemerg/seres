@@ -17,11 +17,13 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Placeholder energy per kg for wire feed production"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Placeholder time per batch"
+process_type: batch
 notes: Placeholder process to convert wire feed into metal_wire_feed_production_v0 (gap filler). This is a temporary placeholder until a real production chain is defined.

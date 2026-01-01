@@ -1,5 +1,6 @@
 id: tape_drive_mechanism_fabrication_v0
 kind: process
+process_type: batch
 name: Tape drive mechanism fabrication
 layer_tags:
 - layer_5
@@ -19,10 +20,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.5
-  notes: "Approximate energy for forming and assembling a small metal part"
+  unit: kWh
+  notes: "Forming and assembling 1-unit batch"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
+  notes: "Fabrication and assembly cycle"
 notes: "Fabrication path converting steel_stock into tape_drive_mechanism. Placeholder; to be refined as design iterates."

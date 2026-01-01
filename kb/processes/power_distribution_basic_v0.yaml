@@ -3,8 +3,15 @@ kind: process
 name: Power distribution (basic)
 layer_tags:
   - layer_8
-inputs: []
-outputs: []
+process_type: continuous
+inputs:
+  - item_id: electricity
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: electricity
+    qty: 0.98
+    unit: kWh
 requires_ids:
   - power_distribution
 resource_requirements:
@@ -12,11 +19,15 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.02
-  notes: "~2% distribution losses per kWh delivered"
+  unit: kWh/kWh
+  scaling_basis: electricity
+  notes: ~2% distribution losses per kWh delivered
 time_model:
   type: linear_rate
-  hr_per_kg: 0.01
-  notes: "continuous operation, minimal time overhead"
-notes: Distribute conditioned power to loads; placeholder time/energy.
+  rate: 100.0
+  rate_unit: kWh/hr
+  scaling_basis: electricity
+  notes: continuous operation, minimal time overhead
+notes: Distribute conditioned power to loads; 2% losses. High throughput (100 kWh/hr) represents distribution infrastructure capacity.

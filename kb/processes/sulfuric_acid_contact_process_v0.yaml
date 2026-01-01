@@ -1,5 +1,6 @@
 id: sulfuric_acid_contact_process_v0
 kind: process
+process_type: batch
 name: Contact process for sulfuric acid production
 layer_tags:
   - layer_4
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: Exothermic reactions provide heat, minimal external energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Catalytic oxidation and absorption
 notes: |

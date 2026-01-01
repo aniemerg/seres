@@ -2,9 +2,23 @@ id: recipe_tension_gauge_v0
 kind: recipe
 name: Recipe for tension gauge fabrication v0
 target_item_id: tension_gauge
-produces_id: tension_gauge
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 1.6
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 0.3
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 0.01
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.09
+    unit: kg
+outputs:
+  - item_id: tension_gauge
+    qty: 2.0
+    unit: kg
 steps:
 - process_id: tension_gauge_fabrication_v0
   notes: Initial one-step fabrication process

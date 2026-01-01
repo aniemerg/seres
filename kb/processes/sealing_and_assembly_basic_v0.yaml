@@ -12,11 +12,13 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Bench tools and checks"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.8
   notes: "Seal installation and assembly"
 notes: Install seals and assemble components requiring sealing (e.g., hydraulic cylinders, pumps); includes cleanliness checks.
+process_type: batch

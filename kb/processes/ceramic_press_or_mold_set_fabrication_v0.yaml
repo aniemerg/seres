@@ -1,5 +1,6 @@
 id: ceramic_press_or_mold_set_fabrication_v0
 kind: process
+process_type: batch
 name: Ceramic press or mold set fabrication
 layer_tags:
 - layer_6
@@ -11,13 +12,14 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.25
+  qty: 0.25
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Placeholder energy for mold/press tooling fabrication"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Fabrication placeholder for ceramic press or mold set; material spec TBD; treat as tooling/fixture."

@@ -1,5 +1,6 @@
 id: vacuum_tube_assembly_v0
 kind: process
+process_type: batch
 name: Vacuum tube assembly
 layer_tags:
   - layer_7
@@ -30,7 +31,10 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  total_energy_kwh: 3.0
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
 time_model:
-  total_time_hr: 4.5
+  type: batch
+  hr_per_batch: 4.5
 notes: "Assembly of thermionic vacuum tube for solar power conversion. Install tungsten cathode (CaO-coated) and nickel anode inside fused silica envelope. Hermetic sealing under vacuum (10^-6 to 10^-7 torr). Critical process for thermionic converter production. Requires clean room conditions and leak-free seals. Leak testing verifies vacuum integrity. See design/solar_thermionics_report.md for specifications."

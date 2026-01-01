@@ -2,29 +2,34 @@ id: kovar_wiring_insulation_v0
 kind: process
 name: Kovar wiring insulation
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: substrate_part_or_wire
-    qty: 1.0
-    unit: kg
+- item_id: substrate_part_or_wire
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: insulated_part_or_wire
-    qty: 0.98
-    unit: kg
+- item_id: insulated_part_or_wire
+  qty: 0.98
+  unit: kg
 requires_ids:
-  - coating_booth_enclosure
-  - drying_oven
+- coating_booth_enclosure
+- drying_oven
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.2
-  notes: "Spray/dip insulation curing energy for Kovar leads or feedthrough wiring."
+  unit: kWh/kg
+  scaling_basis: substrate_part_or_wire
+  notes: Spray/dip insulation curing energy for Kovar leads or feedthrough wiring.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  setup_hr: 0.25
-  notes: "Surface prep, coating passes, and oven cure for small wiring batches."
-notes: "Applies electrical insulation to Kovar wiring or feedthrough leads for vacuum tube assemblies; uses coating booth plus low-temp cure. Output treated as insulated_part_or_wire placeholder."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: substrate_part_or_wire
+  notes: Surface prep, coating passes, and oven cure for small wiring batches.
+notes: Applies electrical insulation to Kovar wiring or feedthrough leads for vacuum tube assemblies; uses coating booth plus
+  low-temp cure. Output treated as insulated_part_or_wire placeholder.
+process_type: continuous

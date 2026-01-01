@@ -1,5 +1,6 @@
 id: voltage_regulation_circuit_assembly_v0
 kind: process
+process_type: batch
 name: Voltage regulation circuit assembly v0
 layer_tags:
   - layer_electronics
@@ -21,9 +22,10 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: "Assemble voltage regulation circuit from electronics by placing regulator module and passive components; placeholder BOM-level details."

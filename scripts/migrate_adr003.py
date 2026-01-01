@@ -180,7 +180,7 @@ def main():
     else:
         print("\nMigration completed!")
         print("\nNext steps:")
-        print("1. Re-index: .venv/bin/python -m kbtool index")
+        print("1. Re-index: python -m src.cli index")
         print("2. Check validation report: cat out/validation_report.md")
         print("3. Delete kb/resources/*.yaml when ready")
 

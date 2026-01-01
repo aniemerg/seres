@@ -1,6 +1,7 @@
 id: pcb_substrate_glass_epoxy_fabrication_v0
 name: PCB Substrate glass epoxy fabrication (FR-4 type) v0
 kind: process
+process_type: batch
 inputs:
 - item_id: uncoated_substrate_material_v0
   qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 0.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.4
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.7
 notes: "Seed substrate fabrication: converts uncoated substrate to FR-4-like PCB substrate; placeholder values."

@@ -2,27 +2,31 @@ id: forming_passive_magnetic_bearing_v0
 name: Forming passive magnetic bearing v0
 kind: process
 inputs:
-  - item_id: permanent_magnet_neodymium
-    qty: 4.0
-    unit: kg
+- item_id: permanent_magnet_neodymium
+  qty: 4.0
+  unit: kg
 outputs:
-  - item_id: magnetic_bearing_passive_v0
-    qty: 4.0
-    unit: kg
+- item_id: magnetic_bearing_passive_v0
+  qty: 4.0
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: per_unit
   value: 5.0
-  notes: "Energy for forming passive magnetic bearing from Nd magnets (placeholder)"
+  unit: kWh/kg
+  scaling_basis: permanent_magnet_neodymium
+  notes: Energy for forming passive magnetic bearing from Nd magnets (placeholder)
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 20.0
-notes: "Form passive magnetic bearing by shaping/assembling Nd magnets into bearing form; placeholder values for seed KB."
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: permanent_magnet_neodymium
+notes: Form passive magnetic bearing by shaping/assembling Nd magnets into bearing form; placeholder values for seed KB.
+process_type: continuous

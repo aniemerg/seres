@@ -1,6 +1,7 @@
 id: ffc_olivine_mgsi_alloy_v0
 kind: process
 name: Direct FFC reduction of olivine to MgSi alloy
+process_type: batch
 layer_tags:
   - layer_4
   - layer_5
@@ -35,11 +36,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 8.0
-  notes: FFC electrolysis at 900-1100°C
+  unit: kWh
+  notes: FFC electrolysis at 900-1100°C (1 kg olivine_concentrate batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 10.0
   notes: Direct reduction of olivine to alloy
 notes: |

@@ -2,29 +2,34 @@ id: sheet_metal_forming_v0
 kind: process
 name: Sheet metal forming
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: steel_plate_or_sheet
-    qty: 1.0
-    unit: kg
+- item_id: steel_plate_or_sheet
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: formed_sheet_metal_parts
-    qty: 0.95
-    unit: kg
+- item_id: formed_sheet_metal_parts
+  qty: 0.95
+  unit: kg
 requires_ids:
-  - press_brake
-  - press_brake_die_set
+- press_brake
+- press_brake_die_set
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.4
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.4
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.6
-  notes: "Press brake/bending energy and handling."
+  unit: kWh/kg
+  scaling_basis: steel_plate_or_sheet
+  notes: Press brake/bending energy and handling.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
-  setup_hr: 0.2
-  notes: "Setup plus multiple forming passes for brackets and panels."
-notes: "Forms cut steel sheet/plate into brackets, enclosures, and channels using press brake or rollers. Includes allowance for trimming and refitting."
+  rate: 3.33
+  rate_unit: kg/hr
+  scaling_basis: steel_plate_or_sheet
+  notes: Setup plus multiple forming passes for brackets and panels.
+notes: Forms cut steel sheet/plate into brackets, enclosures, and channels using press brake or rollers. Includes allowance
+  for trimming and refitting.
+process_type: continuous

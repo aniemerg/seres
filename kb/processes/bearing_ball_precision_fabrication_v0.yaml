@@ -2,26 +2,31 @@ id: bearing_ball_precision_fabrication_v0
 name: Bearing ball precision fabrication
 kind: process
 inputs:
-  - item_id: bearing_ball_steel
-    qty: 0.3
-    unit: kg
+- item_id: bearing_ball_steel
+  qty: 0.3
+  unit: kg
 outputs:
-  - item_id: bearing_ball_precision
-    qty: 0.02
-    unit: kg
+- item_id: bearing_ball_precision
+  qty: 0.02
+  unit: kg
 byproducts:
-  - item_id: slag_byproduct_v0
-    qty: 0.28
-    unit: kg
+- item_id: slag_byproduct_v0
+  qty: 0.28
+  unit: kg
 resource_requirements:
-  - resource_type: furnace
-    amount: 1.0
-    unit: hr
+- machine_id: furnace
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: bearing_ball_steel
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 0.3
-notes: "Placeholder precision fabrication: refine with full BOM. Converts a 0.3 kg bearing_ball_steel into 0.02 kg bearing_ball_precision with 0.28 kg slag byproduct."
+  rate: 0.3
+  rate_unit: kg/hr
+  scaling_basis: bearing_ball_steel
+notes: 'Placeholder precision fabrication: refine with full BOM. Converts a 0.3 kg bearing_ball_steel into 0.02 kg bearing_ball_precision
+  with 0.28 kg slag byproduct.'
+process_type: continuous

@@ -18,10 +18,12 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
   notes: "No-op placeholder for enabling a local production path for import_magnesium_powder"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
 notes: "Placeholder processing step to satisfy no_recipe gap for import_magnesium_powder"
+process_type: batch

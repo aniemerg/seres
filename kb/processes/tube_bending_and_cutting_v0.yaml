@@ -1,5 +1,6 @@
 id: tube_bending_and_cutting_v0
 kind: process
+process_type: batch
 name: Tube bending and cutting
 layer_tags:
   - layer_5
@@ -20,7 +21,12 @@ resource_requirements:
     qty: 0.8
     unit: hr
 energy_model:
-  total_energy_kwh: 0.5
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
+  notes: Tube bender and cutting tool energy per batch
 time_model:
-  total_time_hr: 1.0
+  type: batch
+  hr_per_batch: 1.0
+  notes: Cutting, bending, and setup time per batch
 notes: "Cutting and bending of metal tubing for piping, hydraulic lines, exhaust systems, and structural frames. Tube bender creates precise radius bends without crimping or flattening the tube. Cutting operations produce clean, square ends for welding or fitting connections. Typical materials: steel, stainless steel, aluminum, copper tubing. Tube sizes: 6-50 mm diameter, wall thickness 0.5-3 mm. 8% material loss due to cutting waste and setup scrap. Used in plumbing, pneumatic systems, heat exchangers, and roll cage fabrication."

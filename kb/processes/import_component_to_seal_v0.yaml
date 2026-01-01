@@ -1,10 +1,14 @@
 id: import_component_to_seal_v0
 kind: process
 name: Import Component to Seal (real)
+process_type: batch
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
+inputs:
+  - item_id: raw_component_material
+    qty: 0.5
+    unit: kg
 outputs:
 - item_id: component_to_seal
   qty: 1.0
@@ -12,12 +16,14 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.5
+  qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
+  notes: "No energy required for placeholder component"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Realistic placeholder for producing the placeholder component_to_seal; replace with real materials/processes if available."

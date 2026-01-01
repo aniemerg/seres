@@ -19,11 +19,13 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Mixing and curing energy"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Blend, mold, and initial cure"
+process_type: batch
 notes: "Magnesium oxychloride cement (Sorel) made by mixing MgO and MgCl2."

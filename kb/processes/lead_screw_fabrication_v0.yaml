@@ -1,6 +1,7 @@
 id: lead_screw_fabrication_v0
 kind: process
 name: Lead screw assembly fabrication
+process_type: batch
 inputs:
   - item_id: steel_bar_stock
     qty: 8.0
@@ -19,10 +20,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.6
-  notes: Placeholder energy for machining lead screw assembly from stock.
+  unit: kWh
+  notes: Placeholder energy for machining lead screw assembly from stock (1 unit per batch).
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: Fabrication of a lead screw assembly from steel bar stock; placeholder routing.

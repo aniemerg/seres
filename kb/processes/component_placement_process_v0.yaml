@@ -2,8 +2,8 @@ id: component_placement_process_v0
 name: Component placement process v0
 kind: process
 layer_tags:
-- layer_7
-- layer_8
+  - layer_7
+  - layer_8
 inputs:
   - item_id: pcb_paste_applied
     qty: 0.045
@@ -33,15 +33,20 @@ outputs:
 resource_requirements:
   - machine_id: assembly_station
     qty: 1.0
-    unit: unit
+    unit: hr
   - machine_id: labor_bot_general_v0
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
-  value: 1.0
+  type: per_unit
+  value: 6.67
+  unit: kWh/kg
+  scaling_basis: pcb_components_placed
+  notes: "1 kWh per board (0.15 kg) = 6.67 kWh/kg for component placement"
 time_model:
   type: linear_rate
-  setup_hr: 0.05
-  rate_kg_per_hr: 0.15
-notes: "Placement of SMT components on PCB for embedded board assembly; follows standard SMT workflow."
+  rate: 0.15
+  rate_unit: kg/hr
+  scaling_basis: pcb_components_placed
+notes: Placement of SMT components on PCB for embedded board assembly; follows standard SMT workflow.
+process_type: continuous

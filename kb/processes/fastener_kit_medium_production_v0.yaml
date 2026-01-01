@@ -34,14 +34,16 @@ resource_requirements:
     notes: "Labor for casting, machining, stamping, sorting, and kitting"
 
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
-  notes: "Combined energy for forging (heating), machining, stamping, and heat treatment"
+  unit: kWh
+  notes: "Combined energy for forging (heating), machining, stamping, and heat treatment per 1 kg kit"
 
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Integrated process: forge bolt/nut blanks, machine threads, stamp washers, heat treat lock washers, sort and kit"
+process_type: batch
 
 notes: |
   Integrated fastener kit production process. Combines multiple operations:

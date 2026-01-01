@@ -20,7 +20,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  total_energy_kwh: 50.0
+  type: fixed_per_batch
+  value: 50.0
+  unit: kWh
 time_model:
-  total_time_hr: 8.0
+  type: batch
+  hr_per_batch: 8.0
+process_type: batch
 notes: "High-temperature sintering of tungsten powder at 2700-3000°C under inert atmosphere (argon or vacuum). Produces dense, high-strength tungsten components. Critical for thermionic cathode production. 5% mass loss typical due to densification and gas evolution. Requires refractory-lined furnace capable of extreme temperatures. Slow heating/cooling rates prevent cracking."

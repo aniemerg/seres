@@ -4,9 +4,9 @@
 
 **You MUST read these documents before working on the queue:**
 
-1. **`design/meta-memo.md`** — Project overview and high-level goals
-2. **`design/memo_a.md`** — Formal specification and design principles
-3. **`design/memo_b.md`** — Knowledge acquisition methodology and constraints
+1. **`docs/project_overview.md`** — Project overview and high-level goals
+2. **`docs/kb_schema_reference.md`** — Current schema reference (012+)
+3. **`docs/knowledge_acquisition_protocol.md`** — Knowledge acquisition workflow
 4. **`docs/parts_and_labor_guidelines.md`** — Parts, BOMs, and labor modeling policy (CRITICAL for recipe/BOM work)
 5. **`docs/conservative_mode_guide.md`** — Queue work philosophy and decision trees (DEFAULT APPROACH)
 6. **`docs/closure_error_guidance.md`** — Closure analysis error resolution (material flow gaps)
@@ -23,6 +23,8 @@ These documents are **mandatory prerequisites** for contributing to the knowledg
 - Prefer labor bot + tools over special machines
 - Adapt existing items before creating new ones
 - Verify references aren't erroneous
+- Use `is_template: true` on generic processes when recipes define concrete inputs/outputs
+  - Template processes may omit inputs/outputs; recipes must provide them explicitly
 
 **See `conservative_mode_guide.md` for complete decision trees.**
 
@@ -62,13 +64,13 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 
 ## How to Work the Queue (multi-agent)
 - Queue file: `out/work_queue.jsonl`. IDs are stable: `id = "<gap_type>:<item_id>"` with fields `gap_type`, `item_id`, `reason`, `context`, `status`, `lease_id`, `lease_expires_at`.
-- Lease next task: `.venv/bin/python -m kbtool queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
+- Lease next task: `python -m src.cli queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]`
   - Status becomes `leased`; expires to `pending` if TTL lapses.
-- Validate gap resolved: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>`
-- Complete: `.venv/bin/python -m kbtool queue complete --id <gap_type:item_id> --agent <name> [--verify]`
-- Release: `.venv/bin/python -m kbtool queue release --id <gap_type:item_id> --agent <name>`
-- GC (revert expired leases, optionally prune old done): `.venv/bin/python -m kbtool queue gc [--prune-done-older-than N]`
-- List counts: `.venv/bin/python -m kbtool queue ls`
+- Validate gap resolved: `python -m src.cli queue verify --id <gap_type:item_id>`
+- Complete: `python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]`
+- Release: `python -m src.cli queue release --id <gap_type:item_id> --agent <name>`
+- GC (revert expired leases, optionally prune old done): `python -m src.cli queue gc [--prune-done-older-than N]`
+- List counts: `python -m src.cli queue ls`
 - Do not edit `work_queue.jsonl` by hand; use the CLI.
 - Pruning: only removes items marked `resolved`/`superseded`; gaps persist until fixes land.
 - Sources of queue items (indexer rebuilds on each run):
@@ -76,16 +78,20 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
   - `unresolved_ref`: free-text refs.
   - `import_stub`: recipes with empty steps/import variants.
   - `no_recipe`: defined items (part/material/machine) missing a recipe.
+    - `is_scrap: true` items are exempt from `no_recipe` and treated as byproducts.
   - `missing_field`: required field absent (e.g., energy_model/time_model).
   - `no_provider_machine`: resource_type with no machine capability.
   - `invalid_recipe_schema`: recipe steps not in the current schema.
 - Workflow loop:
-  1) Pop next: `.venv/bin/python -m kbtool queue pop`.
+  1) Pop next: `python -m src.cli queue pop`.
   2) Implement one item (add YAML/recipe/process/etc.). Prefer ≥3-step recipes with time/labor/machine-hours when possible. Reference missing processes explicitly if needed so they queue.
-  3) Verify the gap is gone: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` (or use `queue complete --verify`).
+  3) Fix all issues in the touched file before moving on (not just the queued gap).
+  4) Validate the entity to ensure no remaining issues in that file: `python -m src.cli validate --id <type:id>`.
+  5) Verify the gap is gone: `python -m src.cli queue verify --id <gap_type:item_id>` (or use `queue complete --verify`).
+     - Note: `queue complete --verify` only checks that the gap ID no longer appears in the queue; it does not verify all issues in the file.
      - `validate` and `queue complete --verify` run the indexer internally.
-  4) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`) if needed.
-  5) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
+  6) Inspect `out/work_queue.jsonl` and any reports (`out/unresolved_refs.jsonl`, `out/missing_recipes.jsonl`, `out/invalid_recipes.jsonl`) if needed.
+  7) Repeat; only mark tasks resolved by removing/renaming queue entries if explicitly done.
 
 ### Manual Queue Addition (Discovered Issues)
 
@@ -97,7 +103,7 @@ When you discover issues that need separate attention, add them to the queue for
 
 **Add a single gap:**
 ```bash
-.venv/bin/python -m kbtool queue add \
+python -m src.cli queue add \
   --gap-type quality_concern \
   --item-id steel_melting_v0 \
   --description "Energy model shows 1.2 kWh/kg but Ellery 2023 paper indicates 3.5 kWh/kg" \
@@ -106,7 +112,7 @@ When you discover issues that need separate attention, add them to the queue for
 
 **Add multiple gaps from a file:**
 ```bash
-.venv/bin/python -m kbtool queue add --file queue_tasks/discovered_issues.jsonl
+python -m src.cli queue add --file queue_tasks/discovered_issues.jsonl
 ```
 
 File format (JSONL):
@@ -124,7 +130,7 @@ File format (JSONL):
 
 **Create new gap types** by using a descriptive name (e.g., `energy_model_mismatch`). View all types with:
 ```bash
-.venv/bin/python -m kbtool queue gap-types
+python -m src.cli queue gap-types
 ```
 
 **For agents:** Use the `queue_add_gap` tool to add discovered issues programmatically. See `queue_agents/kb_tools.py` for API documentation.
@@ -197,7 +203,8 @@ The seed file's `notes` section contains worker instructions and references to t
 
 ## Recipes (breaking schema)
 - Steps must be objects per `kbtool.models.RecipeStep` (`process_id`, optional time/labor/machine fields).
-- Processes may include `est_time_hr` and `resource_requirements` with `amount`+`unit` (use `hr`).
+- Recipe steps can include `time_model`/`energy_model` overrides per 013 (complete override when `type` is present).
+- `resource_requirements` uses `machine_id` with `qty` + `unit` (use `hr` for time).
 - Aim for ≥3 steps per recipe; include mold prep/finishing where applicable; use manual/assembly processes for glue work.
 - If a needed process does not exist, reference it anyway (it will queue as `referenced_only`).
 - Multiple variants can live in the same recipe file (e.g., `variant_id: simple`, `variant_id: additive`, `variant_id: precision`). Use a `preferred_variant` hint on the item to mark the default/simple path (schema update pending; follow convention in notes until field lands).
@@ -209,77 +216,443 @@ The seed file's `notes` section contains worker instructions and references to t
 - Power conditioning/distribution: `power_conditioning_basic_v0`, `power_distribution_basic_v0`.
 - Grinding/drying: `sizing_grinding_basic_v0`, `drying_basic_v0`.
 - Winding: `spool_winding_basic_v0`.
-- Import placeholder: `import_placeholder_v0` (only if truly importing).
-- Environment source: `environment_source_v0` (for natural inputs like solar, regolith in situ).
+- Import items: Add `is_import: true` to item definition (per ADR-007, no recipe needed).
+- Environment source: `environment_source_v0` (legacy generic placeholder; prefer explicit `process_type: boundary` processes for in-situ collection).
 - Manual labor: use `labor_bot_general` in `resource_requirements`.
 
 ## Boundary/Terminal Processes
-To prevent infinite recursion in the dependency graph, some processes are **terminal nodes** that represent boundary conditions:
-- `environment_source_v0` — freely available environmental resources (solar irradiance, lunar regolith in situ)
-- `import_placeholder_v0` — items imported from Earth, not manufactured locally
+To prevent infinite recursion in the dependency graph, some processes are **terminal nodes** that represent in-situ boundary conditions (no upstream inputs).
+Use `process_type: boundary` only for **in-situ resource collection** (e.g., regolith and ice collection, solar irradiance).
 
-These processes use `energy_model: {type: boundary}` and `time_model: {type: boundary}` to indicate they are intentionally terminal and should not generate further queue items. Use these for:
-- Natural resources (sunlight, raw regolith)
-- Imported specialty materials (electronics, SMA wire, etc.)
-- Byproducts that don't need upstream manufacturing (waste heat)
+**Imports are not boundary processes.** Model imports via `is_import: true` on the item (per ADR-007). Import items don't need recipes.
 
-## Energy and Time Models (Machine-Readable Schema)
+Boundary processes:
+- Must have `inputs: []` and at least one output.
+- Use standard 012/014 models (`time_model.type: batch|linear_rate`, `energy_model.type: fixed_per_batch|per_unit`).
+- Should include `resource_requirements` for the collecting machine.
 
-Processes require `energy_model` and `time_model` fields for automated calculations. These are structured objects (see `kbtool/models.py`).
+## Energy and Time Models (Machine-Readable Schema) - **NEW 012/014 FORMAT**
 
-### EnergyModel
+⚠️ **SCHEMA UPDATE IN PROGRESS**: The KB is transitioning to new time and energy model schemas per 012 and 014. See `docs/ADRs/` for full specification.
+
+**All new processes MUST use the new schema. Old schema will cause validation errors.**
+
+### Process Type (012) - **REQUIRED**
+
+Every process must specify its type:
+
+```yaml
+process_type: continuous  # or: batch, boundary
+```
+
+**Semantics:**
+- **`continuous`** — Rate-based production (kg/hr, L/hr, unit/hr), linear scaling, steady-state operation
+  - Examples: crushing, electrolysis, distillation, machining (one part after another)
+- **`batch`** — Discrete batches, setup per batch, batch size from outputs
+  - Examples: assembly, firing, heat treatment, molding
+- **`boundary`** — In-situ collection with no upstream inputs
+  - Examples: regolith mining, polar ice extraction, solar irradiance collection
+
+### Time Model (012)
+
+#### For Continuous Processes
+
+```yaml
+process_type: continuous
+time_model:
+  type: linear_rate
+  rate: 10.0                    # Numeric value
+  rate_unit: kg/hr              # Compound unit: <unit>/<time_unit>
+  scaling_basis: input_material  # Which input/output drives time (REQUIRED)
+  notes: "Continuous crushing at 10 kg/hr throughput"
+```
+
+**Key features:**
+- **Flexible units**: `kg/hr`, `unit/hr`, `L/hr`, `m/hr`, `L/min` (any unit, not just kg)
+- **Required `scaling_basis`**: Explicitly specifies which input or output item drives the time calculation
+- **Compound rate_unit**: Format is `numerator/denominator` (e.g., `kg/hr`, `unit/min`)
+- **Natural count rates**: Use `12 unit/hr` (not `0.083 hr/unit`)
+
+#### For Batch Processes
+
+```yaml
+process_type: batch
+time_model:
+  type: batch
+  setup_hr: 0.1        # Optional, defaults to 0
+  hr_per_batch: 0.9    # Required
+  notes: "Assembly of 1 motor per batch"
+```
+
+**Key features:**
+- Type is `batch` (not `fixed_time` - old name)
+- `setup_hr` is optional (defaults to 0)
+- Batch size implicit from process `outputs` (not duplicated in time_model)
+- No `scaling_basis` - batch size defined by outputs
+
+### Energy Model (014)
+
+#### For Per-Unit Energy
+
 ```yaml
 energy_model:
-  type: kWh_per_kg      # or: fixed_kWh, boundary
-  value: 3.5            # kWh per kg (for kWh_per_kg) or kWh per batch (for fixed_kWh)
-  notes: "melting steel (~1.2 MJ/kg enthalpy + heating losses)"
+  type: per_unit
+  value: 0.3                    # Numeric value
+  unit: kWh/kg                  # Compound unit: <energy_unit>/<scaling_unit>
+  scaling_basis: input_material  # Which input/output drives energy (REQUIRED)
+  notes: "Bond work index for lunar regolith comminution"
 ```
 
-Types:
-- `kWh_per_kg` — energy scales linearly with input mass
-- `fixed_kWh` — constant energy per batch/cycle
-- `boundary` — terminal node (no energy consumption modeled)
+**Key features:**
+- **Flexible energy units**: `kWh`, `MWh`, `MJ`, `GJ`, `BTU`
+- **Flexible scaling units**: `kg`, `unit`, `L`, `m`, etc.
+- **Required `scaling_basis`**: Explicitly specifies which input or output item drives energy
+- **Compound unit format**: `kWh/kg`, `kWh/unit`, `MJ/L`, etc.
 
-### TimeModel
+**Supported energy units** (normalized to kWh internally):
+- `kWh` = 1.0, `MWh` = 1000.0, `Wh` = 0.001
+- `MJ` = 0.2778, `GJ` = 277.8, `BTU` = 0.000293
+
+#### For Fixed Energy Per Batch
+
 ```yaml
+energy_model:
+  type: fixed_per_batch
+  value: 120.0
+  unit: kWh              # Simple energy unit (no denominator)
+  notes: "Kiln firing energy independent of load within 5-15 kg range"
+```
+
+**Key features:**
+- Type is `fixed_per_batch` (not `kWh_per_batch` - old name)
+- No `scaling_basis` - batch size implicit from process outputs
+- Energy unit flexible (`kWh`, `MJ`, etc.), but NO compound unit (no `/kg` part)
+
+### Scaling Basis Rules
+
+**Purpose:** Explicitly specify which input or output drives time/energy calculation.
+
+**Examples:**
+```yaml
+# Single input - unambiguous but still required
+inputs:
+  - item_id: regolith_coarse
+    qty: 1.0
+    unit: kg
 time_model:
-  type: linear_rate     # or: fixed_time, boundary
-  hr_per_kg: 0.4        # hours per kg processed
-  setup_hr: 0.1         # optional setup time
-  notes: "deposition rate ~2.5 kg/hr for GMAW"
-```
+  scaling_basis: regolith_coarse  # Must specify
 
-Or for batch processes:
-```yaml
+# Multiple inputs - MUST specify which one drives time
+inputs:
+  - item_id: steel_sheet
+    qty: 10.0
+    unit: kg
+  - item_id: lubricant
+    qty: 0.5
+    unit: L
 time_model:
-  type: fixed_time
-  hr_per_batch: 1.5
-  notes: "furnace heat-up, pour, cool cycle"
+  scaling_basis: steel_sheet  # Explicitly steel, not lubricant
+
+# Output scaling (less common but valid)
+time_model:
+  scaling_basis: aluminum_pure  # Output drives time
 ```
 
-Types:
-- `linear_rate` — time = setup_hr + (mass × hr_per_kg) or time = setup_hr + (mass / rate_kg_per_hr)
-- `fixed_time` — constant time per batch/cycle (use hr_per_batch)
-- `boundary` — terminal node (no time modeled)
+### Complete Example: Continuous Process
 
-### Example Process with Models
 ```yaml
-id: metal_casting_basic_v0
+id: regolith_crushing_grinding_v0
 kind: process
-name: Basic metal casting
-energy_model:
-  type: kWh_per_kg
-  value: 3.5
-  notes: "melting steel (~1.2 MJ/kg enthalpy + heating losses)"
+process_type: continuous
+
+inputs:
+  - item_id: regolith_coarse_fraction
+    qty: 1.0
+    unit: kg
+
+outputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+
 time_model:
-  type: fixed_time
-  hr_per_batch: 1.5
-  notes: "furnace heat-up, pour, cool cycle"
+  type: linear_rate
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_coarse_fraction
+  notes: "Continuous crushing at 10 kg/hr throughput"
+
+energy_model:
+  type: per_unit
+  value: 0.3
+  unit: kWh/kg
+  scaling_basis: regolith_coarse_fraction
+  notes: "Bond work index for lunar regolith comminution"
 ```
 
-## Commands
-- Index: `.venv/bin/python -m kbtool index`
-- Queue: `.venv/bin/python -m kbtool queue pop`, `.venv/bin/python -m kbtool queue prune`
+**Calculation example (100 kg input):**
+- Time: 100 kg / 10 kg/hr = 10 hours
+- Energy: 100 kg × 0.3 kWh/kg = 30 kWh
+- Average power: 30 kWh / 10 hr = 3 kW
+
+### Complete Example: Batch Process
+
+```yaml
+id: motor_final_assembly_v0
+kind: process
+process_type: batch
+
+inputs:
+  - item_id: stator_rotor_lamination_set
+    qty: 5.0
+    unit: kg
+  # ... more inputs
+
+outputs:
+  - item_id: motor_electric_small
+    qty: 1.0
+    unit: unit
+
+time_model:
+  type: batch
+  setup_hr: 0.1
+  hr_per_batch: 0.9
+  notes: "Assembly of 1 motor per batch"
+
+energy_model:
+  type: per_unit
+  value: 0.2
+  unit: kWh/unit
+  scaling_basis: motor_electric_small  # Output drives energy
+  notes: "Testing and tool energy per motor"
+```
+
+**Calculation example (10 motors):**
+- Batches: 10 motors / 1 motor per batch = 10 batches
+- Time: 10 × (0.1 + 0.9) = 10 hours
+- Energy: 10 unit × 0.2 kWh/unit = 2 kWh
+
+### Boundary/Terminal Processes
+
+Boundary processes are now supported via `process_type: boundary`. Example (in-situ regolith collection):
+
+```yaml
+process_type: boundary
+outputs:
+  - item_id: regolith_lunar_mare
+    qty: 100
+    unit: kg
+time_model:
+  type: linear_rate
+  rate: 100
+  rate_unit: kg/hr
+  scaling_basis: regolith_lunar_mare
+energy_model:
+  type: per_unit
+  value: 0.05
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_mare
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+notes: "In-situ boundary process; no upstream inputs."
+```
+
+### Migration from Old Schema
+
+**DEPRECATED formats (will cause validation errors):**
+
+```yaml
+# OLD - Don't use:
+time_model:
+  type: linear_rate
+  rate_kg_per_hr: 10.0  # ❌ Deprecated
+  hr_per_kg: 0.1         # ❌ Deprecated
+
+energy_model:
+  type: kWh_per_kg       # ❌ Deprecated type name
+  value: 0.3
+
+time_model:
+  type: fixed_time       # ❌ Deprecated, use 'batch'
+  hr_per_batch: 1.5
+```
+
+**NEW formats (required):**
+
+```yaml
+# NEW - Use this:
+process_type: continuous  # ✅ Required
+time_model:
+  type: linear_rate
+  rate: 10.0              # ✅ New format
+  rate_unit: kg/hr        # ✅ Compound unit
+  scaling_basis: input_item  # ✅ Required
+
+energy_model:
+  type: per_unit          # ✅ New type name
+  value: 0.3
+  unit: kWh/kg            # ✅ Compound unit
+  scaling_basis: input_item  # ✅ Required
+
+# For batch:
+process_type: batch       # ✅ Required
+time_model:
+  type: batch             # ✅ New name (was 'fixed_time')
+  hr_per_batch: 1.5
+```
+
+**See `docs/ADRs/012-process-types-and-time-model.md` and `docs/ADRs/014-energy-model-redesign.md` for complete specifications.**
+
+## Validation Rules (017)
+
+The indexer validates all processes against 012/014/017 schemas. Validation issues are categorized by severity:
+
+| Level | Meaning | Action |
+|-------|---------|--------|
+| **ERROR** | Schema violation, cannot be used in simulation | Blocks simulation, must fix |
+| **WARNING** | Missing recommended field | Should fix, allows use |
+| **INFO** | Suggestion for improvement | Optional |
+
+### Common Validation Errors
+
+#### Schema Violations (ERROR)
+
+1. **`process_type_required`** - Missing `process_type` field
+   ```yaml
+   # ❌ ERROR:
+   kind: process
+   time_model: ...
+
+   # ✅ FIX: Add process_type
+   kind: process
+   process_type: continuous  # or batch
+   time_model: ...
+   ```
+
+2. **`energy_model_type_invalid`** - Using old energy model type names
+   ```yaml
+   # ❌ ERROR:
+   energy_model:
+     type: kWh_per_kg  # Old format
+
+   # ✅ FIX: Use new format
+   energy_model:
+     type: per_unit
+     value: 0.3
+     unit: kWh/kg
+     scaling_basis: input_item
+   ```
+
+3. **`required_field_missing`** - Missing required fields
+   ```yaml
+   # ❌ ERROR - Missing scaling_basis:
+   time_model:
+     type: linear_rate
+     rate: 10.0
+     rate_unit: kg/hr
+     # Missing scaling_basis!
+
+   # ✅ FIX:
+   time_model:
+     type: linear_rate
+     rate: 10.0
+     rate_unit: kg/hr
+     scaling_basis: input_material  # Required!
+   ```
+
+4. **`deprecated_field`** - Using deprecated field names
+   ```yaml
+   # ❌ ERROR:
+   time_model:
+     type: linear_rate
+     rate_kg_per_hr: 10.0  # Deprecated
+
+   # ✅ FIX:
+   time_model:
+     type: linear_rate
+     rate: 10.0
+     rate_unit: kg/hr
+     scaling_basis: input_item
+   ```
+
+#### Semantic Errors (ERROR)
+
+1. **`scaling_basis_not_found`** - scaling_basis references non-existent input/output
+   ```yaml
+   # ❌ ERROR:
+   inputs:
+     - item_id: steel_sheet
+       qty: 10.0
+       unit: kg
+   time_model:
+     scaling_basis: aluminum  # Not in inputs or outputs!
+
+   # ✅ FIX:
+   time_model:
+     scaling_basis: steel_sheet  # Must match actual input/output
+   ```
+
+2. **`invalid_compound_unit`** - Malformed compound unit
+   ```yaml
+   # ❌ ERROR:
+   time_model:
+     rate_unit: kg per hour  # Invalid format
+
+   # ✅ FIX:
+   time_model:
+     rate_unit: kg/hr  # Use "/" separator
+   ```
+
+3. **`setup_hr_in_continuous`** - Continuous process with setup time
+   ```yaml
+   # ❌ ERROR:
+   process_type: continuous
+   time_model:
+     type: linear_rate
+     setup_hr: 0.5  # Not allowed in continuous!
+
+   # ✅ FIX: Either remove setup_hr or change to batch
+   process_type: batch  # Change to batch if setup is needed
+   time_model:
+     type: batch
+     setup_hr: 0.5
+     hr_per_batch: 2.0
+   ```
+
+### Validation Workflow
+
+When you encounter validation errors:
+
+1. **Check validation report**: `out/validation_report.md`
+2. **Find specific errors**: `out/validation_issues.jsonl`
+3. **Fix the issue** in the YAML file
+4. **Re-validate**: `python -m src.cli validate --id process:regolith_mining_highlands_v0`
+   - (Find process IDs: `ls kb/processes/` or `grep "^id:" kb/processes/*.yaml`)
+5. **Verify fix**: Error should disappear from `validation_issues.jsonl`
+
+**See `docs/ADRs/017-validation-and-error-detection.md` for complete validation rules.**
+
+## Commands (New Unified CLI)
+
+**KB Core Tools** (`python -m src.cli`):
+- **Index**: `python -m src.cli index` — Build KB index with validation
+  - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.
+- **Validate**: `python -m src.cli validate --id <type:id>` — Validate specific KB item
+  - Example: `python -m src.cli validate --id process:regolith_mining_highlands_v0`
+- **Auto-fix**: `python -m src.cli auto-fix [--dry-run] [--max-fixes N] [--rule RULE]`
+  - Automatically fix validation issues
+  - Use `--dry-run` to preview fixes without writing
+  - Example: `python -m src.cli auto-fix --dry-run --rule process_type_required`
+- **Closure analysis**: `python -m src.cli closure --machine <id>` or `--all`
+  - Analyze material closure for machines (ISRU vs import breakdown)
+  - Example: `python -m src.cli closure --all --output out/closure_report.txt`
+
+**Queue Commands** (`python -m src.cli`):
+- Queue: `python -m src.cli queue pop`, `python -m src.cli queue prune`
+
+**Environment**:
 - Virtualenv: `uv sync` to install deps.
 
 ## Principles

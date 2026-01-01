@@ -19,10 +19,12 @@ resource_requirements:
   amount: 3.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
   notes: "Energy for forming a ventilation hood from steel stock"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Fabrication path from steel_stock to ventilation_fume_hood via basic forming"
+process_type: batch

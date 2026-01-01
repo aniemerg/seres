@@ -2,23 +2,27 @@ id: insulated_wire_formation_v0
 kind: process
 name: Copper insulated wire formation (basic)
 inputs:
-  - item_id: magnet_wire_copper
-    qty: 1.0
-    unit: kg
+- item_id: magnet_wire_copper
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: wire_copper_insulated
-    qty: 1.0
-    unit: kg
+- item_id: wire_copper_insulated
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
-  notes: "Simplified insulation and finishing pass"
+  unit: kWh/kg
+  scaling_basis: magnet_wire_copper
+  notes: Simplified insulation and finishing pass
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 2.0
-notes: "Forms insulated copper wire from magnet copper wire via insulation coating."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: magnet_wire_copper
+notes: Forms insulated copper wire from magnet copper wire via insulation coating.
+process_type: continuous

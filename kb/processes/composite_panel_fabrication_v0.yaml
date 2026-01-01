@@ -1,5 +1,6 @@
 id: composite_panel_fabrication_v0
 kind: process
+process_type: batch
 name: Composite panel fabrication v0
 inputs:
 - item_id: trigon_panel_structure_v0
@@ -14,9 +15,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
-notes: Fabricate composite panel substrate for TRIGON triangular panels; uses panel structure as base and outputs a substrate ready for downstream assembly.
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+notes: Fabricate composite panel substrate for TRIGON triangular panels; uses panel structure as base and outputs a substrate ready for downstream assembly.

@@ -17,9 +17,11 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Synthesis of iron carbonyl Fe(CO)5 from iron powder and CO gas; placeholder values used to enable KB closure."
+process_type: batch

@@ -32,11 +32,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 12.0
-  notes: High temperature carbothermal reduction at 1600°C
+  unit: kWh
+  notes: High temperature carbothermal reduction at 1600°C (1 kg pyroxene batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 5.0
   notes: Reduction and gas evolution time
 notes: |
@@ -58,3 +59,4 @@ notes: |
   Mass fractions: 28% Si, 40% MgO, 56% CO, 8% H2 from inputs
   Performance: Significantly better than hydrogen reduction
   Suitable for bulk regolith processing in mare regions
+process_type: batch

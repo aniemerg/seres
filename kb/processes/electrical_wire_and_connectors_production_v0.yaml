@@ -2,25 +2,29 @@ id: electrical_wire_and_connectors_production_v0
 name: Electrical wire and connectors production (basic)
 kind: process
 inputs:
-  - item_id: magnet_wire_copper
-    qty: 0.5
-    unit: kg
-  - item_id: cut_wire_lengths
-    qty: 0.5
-    unit: kg
+- item_id: magnet_wire_copper
+  qty: 0.5
+  unit: kg
+- item_id: cut_wire_lengths
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: electrical_wire_and_connectors
-    qty: 1.0
-    unit: kg
+- item_id: electrical_wire_and_connectors
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: manual_labour
-    qty: 1.0
-    unit: hr
+- machine_id: manual_labour
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: magnet_wire_copper
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 2.0
-notes: "Basic production of electrical wire and connectors from copper wire and pre-cut lengths; placeholder estimates."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: magnet_wire_copper
+notes: Basic production of electrical wire and connectors from copper wire and pre-cut lengths; placeholder estimates.
+process_type: continuous

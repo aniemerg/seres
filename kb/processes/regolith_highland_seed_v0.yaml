@@ -1,6 +1,7 @@
 id: regolith_highland_seed_v0
 name: Seed production of regolith_highland v0
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: regolith_lunar_highlands
@@ -12,9 +13,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Seed process to bootstrap regolith_highland_v0; placeholder for ISRU highland seed."

@@ -1,6 +1,7 @@
 id: lidar_time_of_flight_simple_assembly_v0
 name: LiDAR Time-of-Flight Simple assembly v0
 kind: process
+process_type: batch
 layer_tags:
   - layer_7
   - layer_8
@@ -22,16 +23,17 @@ requires_ids:
   - assembly_tools_basic
 resource_requirements:
   - machine_id: assembly_station
-    amount: 1.0
+    qty: 1.0
     unit: unit
   - machine_id: labor_bot_general_v0
-    amount: 2.0
+    qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 6.0
-  notes: "Estimated energy for simple LiDAR TOF assembly"
+  unit: kWh
+  notes: "Estimated energy for simple LiDAR TOF assembly (1 unit per batch)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Assemble LiDAR simple by combining core, sensor module, and MCU into final device."

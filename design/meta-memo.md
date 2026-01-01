@@ -1,3 +1,5 @@
+NOTE: Historical document. Superseded by docs/project_overview.md.
+
 Meta-Memo — Modeling Self-Replicating Lunar Industrial Systems
 Purpose
 The purpose of this project is to make self-replicating industrial systems analyzable, computable, and comparable.

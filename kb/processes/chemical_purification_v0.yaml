@@ -1,6 +1,7 @@
 id: chemical_purification_v0
 kind: process
 name: Chemical purification (basic)
+process_type: batch
 layer_tags:
 - layer_4
 - layer_5
@@ -20,7 +21,10 @@ resource_requirements:
   qty: 0.4
   unit: hr
 energy_model:
-  total_energy_kwh: 2.0
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
 time_model:
-  total_time_hr: 1.5
+  type: batch
+  hr_per_batch: 1.5
 notes: "Placeholder chemical purification step to remove impurities and improve SiO2 purity; assumed 93% mass yield from input mineral."

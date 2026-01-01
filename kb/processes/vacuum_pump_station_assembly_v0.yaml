@@ -1,10 +1,14 @@
 id: vacuum_pump_station_assembly_v0
 kind: process
+process_type: batch
 name: Vacuum pump station assembly v0
 layer_tags:
 - layer_7
 - layer_8
-inputs: []
+inputs:
+- item_id: vacuum_pump_small
+  qty: 1.0
+  unit: unit
 outputs:
 - item_id: vacuum_pump_station
   qty: 1.0
@@ -15,11 +19,12 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Placeholder energy for vacuum pump station assembly
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
   notes: Placeholder time for assembly
 notes: Placeholder assembly process to enable local manufacturing of vacuum_pump_station.

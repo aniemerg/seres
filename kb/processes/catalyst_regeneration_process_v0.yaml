@@ -2,26 +2,30 @@ id: catalyst_regeneration_process_v0
 name: Catalyst regeneration process
 kind: process
 inputs:
-  - item_id: catalyst_spent_v0
-    qty: 2.0
-    unit: kg
+- item_id: catalyst_spent_v0
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: catalyst_regenerated_v0
-    qty: 1.8
-    unit: kg
+- item_id: catalyst_regenerated_v0
+  qty: 1.8
+  unit: kg
 byproducts:
-  - item_id: regeneration_gas_v0
-    qty: 0.2
-    unit: kg
+- item_id: regeneration_gas_v0
+  qty: 0.2
+  unit: kg
 resource_requirements:
-  - machine_id: furnace_basic
-    qty: 4.0
-    unit: hr
+- machine_id: furnace_basic
+  qty: 4.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: catalyst_spent_v0
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 20.0
-notes: "Catalyst regeneration via in-situ regeneration furnace; stoichiometry assumes 10% mass loss to gas."
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: catalyst_spent_v0
+notes: Catalyst regeneration via in-situ regeneration furnace; stoichiometry assumes 10% mass loss to gas.
+process_type: continuous

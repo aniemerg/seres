@@ -1,18 +1,29 @@
-# Time & Energy Modeling Investigation Roadmap
+NOTE: Historical document predating ADR-012+; references deprecated schema. See docs/kb_schema_reference.md for current rules.
+
+# KB Redesign Investigation Roadmap
 
 **Status:** In Progress
 **Date Started:** 2024-12-28
-**Goal:** Comprehensive investigation of time and energy modeling architecture leading to ADR-010
+**Scope:** Comprehensive KB redesign investigation leading to **multiple ADRs (ADR-012 through ADR-019+)**
+**Goal:** Design unified, validated, fully-specified knowledge base architecture
 
 ## Purpose
 
-This document serves as the master index for a deep architectural investigation into how process time and energy modeling should work across the knowledge base and simulation systems. A fresh Claude Code instance should be able to read this document and understand:
+This document serves as the master index for a comprehensive architectural redesign of how the KB works. **This is not just time/energy modeling** - this is a fundamental redesign requiring:
 
-1. What the investigation is about
-2. What work has been completed
-3. What work remains
+1. **Multiple ADRs** to fully define KB semantics
+2. **New unified code base** for indexing, closure analysis, and simulation
+3. **Massive schema harmonization** with comprehensive validation
+4. **Full specification** - time_models, energy_models, masses, counts all reconciled
+5. **Agent work queue system** for detected issues
+
+A fresh Claude Code instance should be able to read this document and understand:
+
+1. What the investigation is about (comprehensive KB redesign)
+2. What work has been completed (analysis + design documents)
+3. What work remains (more design documents + ADRs)
 4. How to proceed through the investigation
-5. How it leads to ADR-010
+5. How it leads to multiple ADRs (not just one)
 
 ## Problem Statement
 
@@ -197,6 +208,214 @@ Each document follows this pattern:
 - kb/processes/crushing_basic_v0.yaml:21 (0.3 hr/kg rate)
 - Manufacturing ERP systems precedence patterns
 - base_builder/sim_engine.py:164 (current implementation ignores all timing)
+
+---
+
+## Design Documents (Post-Feedback)
+
+**Note:** After comprehensive user feedback, investigation expanded from "ADR-010" to **comprehensive KB redesign** requiring multiple ADRs.
+
+### ✅ Completed Design Documents
+
+#### 5. `feedback-synthesis-and-next-steps.md`
+**Purpose:** Synthesize user feedback and reorient investigation toward comprehensive KB redesign
+
+**Key synthesis:**
+- Scope expanded: Not just ADR-010, but fundamental KB redesign
+- Multiple ADRs needed (ADR-012 through ADR-019+)
+- New unified code base required (not patch three systems)
+- Full specification required - no partial data, validation catches all gaps
+- Recipes override processes (clear precedence)
+- Implicit unit conversion where possible
+- Batch vs continuous must be explicit
+
+**Major principles established:**
+1. Full specification required (time_models, energy_models, masses/counts reconciled)
+2. Unified code base (indexer, closure, simulation from common base)
+3. Recipes override processes (but migrate from est_time_hr to time_model overrides)
+4. Implicit unit conversion (known conversions automatic)
+5. Batch vs continuous explicit (not inferred)
+6. All processes use machines (even boundary processes)
+
+**Proposed ADR structure:**
+- ADR-012: Process Types and Time Model Redesign
+- ADR-013: Recipe Override Mechanics
+- ADR-014: Energy Model Redesign
+- ADR-015: Resource Accounting and Labor Harmonization
+- ADR-016: Unit Conversion and Type System
+- ADR-017: Validation and Error Detection
+- ADR-018: Unified KB Code Architecture
+- ADR-019: Material Flow Accounting
+
+**User clarifications resolved:**
+- Count-based rates use natural format (10 unit/hr, not 0.1 hr/unit)
+- Variable time that doesn't scale → just estimate
+- No mixed continuous/batch - split or pick dominant
+- Boundary processes can have process_type
+- Energy model redesign in parallel with time model
+- ADR numbering starts at ADR-012 (011 is taken)
+
+**References:**
+- design/time-model-hierarchy-feedback.txt (detailed user feedback)
+
+#### 6. `batch-vs-continuous-process-types.md`
+**Purpose:** Define explicit batch vs continuous process semantics as foundational distinction
+
+**Key decisions:**
+- Add explicit `process_type: batch | continuous` field (required)
+- Continuous: rate-based, linear scaling, no setup, steady-state
+- Batch: discrete batches, setup per batch, linear batch scaling
+- Validation enforces consistency (continuous → linear_rate, batch → batch)
+- No `setup_hr` in continuous processes (validation error)
+- Setup scales linearly with batches (no economies of scale)
+- Batch size defined by outputs (not duplicated in time_model)
+
+**Process type definitions:**
+- Continuous: Crushing, electrolysis, distillation, machining (one after another)
+- Batch: Assembly, firing, heat treatment, discrete manufacturing
+- Each has specific time_model structure and validation rules
+
+**Validation rules:**
+1. process_type required
+2. process_type matches time_model.type
+3. setup_hr only in batch
+4. Batch size from outputs
+
+**Migration impact:**
+- linear_rate → process_type: continuous
+- fixed_time → process_type: batch (change type to "batch")
+- Processes with setup_hr in continuous → split or convert to batch
+
+**Open questions resolved:**
+- Variable time modeling → avoid if doesn't scale, just estimate
+- Semi-continuous → no mixed types, split or pick dominant
+- Boundary processes → can have process_type (continuous for mining)
+
+**References:**
+- design/regolith_organization_proposal.md (mining processes should have time_model)
+- Examples from time-calculation-real-world-examples.md
+
+#### 7. `time-model-schema-redesign.md`
+**Purpose:** Propose new time_model schema with scaling basis and flexible units
+
+**New schema proposed:**
+```yaml
+# Continuous
+time_model:
+  type: linear_rate
+  rate: 10.0
+  rate_unit: kg/hr  # or unit/hr, L/hr, etc.
+  scaling_basis: input_item_id  # REQUIRED
+
+# Batch
+time_model:
+  type: batch
+  setup_hr: 0.1  # Optional, defaults to 0
+  hr_per_batch: 0.9
+```
+
+**Key features:**
+1. **Flexible units** - supports kg, L, unit, count, any unit
+2. **Required scaling_basis** - explicitly specify which input/output drives time
+3. **Natural count rates** - 12 unit/hr (not 0.1 hr/unit)
+4. **Structured rate** - clear rate + rate_unit format
+5. **Batch alignment** - consistent with process_type
+6. **Migration path** - clear mapping from old schema
+
+**Rate unit format:**
+- Pattern: `<numerator_unit>/<denominator_unit>`
+- Examples: kg/hr, unit/hr, L/min, m/hr
+- Parsing and normalization to hours
+
+**Scaling basis:**
+- Required for continuous processes
+- Refers to input or output item_id
+- Unit must match rate_unit numerator (or be convertible)
+- Eliminates "per kg of what?" ambiguity
+
+**Validation rules:**
+1. scaling_basis must exist in inputs/outputs
+2. Unit consistency (scaling_basis unit matches rate_unit numerator)
+3. No setup_hr in linear_rate
+4. Positive rates
+
+**Complete examples:**
+- Crushing (kg/hr continuous)
+- Motor assembly (batch)
+- Water electrolysis (continuous, multi-output)
+- Pump machining (count-based continuous)
+- Ceramic firing (batch with fixed time)
+
+**Migration:**
+- rate_kg_per_hr → rate + rate_unit: kg/hr + scaling_basis
+- hr_per_kg → invert to rate + rate_unit + scaling_basis
+- fixed_time → batch type
+- Processes with setup in continuous → split or convert
+
+**References:**
+- kbtool/models.py:64-78 (current TimeModel schema)
+- batch-vs-continuous-process-types.md (alignment)
+
+#### 8. `energy-model-redesign.md`
+**Purpose:** Propose new energy_model schema parallel to time_model redesign
+
+**New schema proposed:**
+```yaml
+# Per-unit (continuous or batch)
+energy_model:
+  type: per_unit
+  value: 0.3
+  unit: kWh/kg  # or kWh/unit, MJ/kg, etc.
+  scaling_basis: input_item_id  # REQUIRED
+
+# Fixed per batch
+energy_model:
+  type: fixed_per_batch
+  value: 120.0
+  unit: kWh
+  # No scaling_basis
+```
+
+**Key features:**
+1. **Flexible units** - kWh, MJ, BTU, any energy unit
+2. **Required scaling_basis** - for per_unit type
+3. **Parallel structure** - same as time_model (type, value, unit, scaling_basis)
+4. **Clear semantics** - eliminates "per kg of what?" ambiguity
+5. **Batch alignment** - fixed_per_batch for batch processes
+
+**Energy unit format:**
+- Pattern: `<energy_unit>/<scaling_unit>`
+- Examples: kWh/kg, kWh/unit, MJ/L, kWh/m
+- Energy types: kWh, MWh, MJ, GJ, BTU
+
+**Energy-time coupling validation:**
+- Average power = Total energy / Total time
+- Sanity check: 0.001 kW < avg_power < 10000 kW (1W to 10MW)
+- Catches energy/time inconsistencies
+
+**Complete examples:**
+- Crushing (kWh/kg input scaling)
+- Water electrolysis (kWh/kg, multi-output with explicit scaling)
+- Ceramic firing (fixed kWh per batch)
+- Motor assembly (kWh/unit output scaling)
+- Aluminum smelting (MJ/kg alternative to kWh/kg)
+
+**Validation rules:**
+1. scaling_basis exists for per_unit
+2. Unit consistency
+3. Positive energy
+4. Reasonable power (energy/time ratio)
+
+**Migration:**
+- kWh_per_kg → type: per_unit, unit: kWh/kg, add scaling_basis
+- kWh_per_batch → type: fixed_per_batch, unit: kWh
+- kWh_per_unit_output → type: per_unit, unit: kWh/unit, add scaling_basis
+
+**References:**
+- time-model-schema-redesign.md (parallel design)
+- kbtool/models.py:53-61 (current EnergyModel schema)
+
+---
 
 ### ⏳ Planned - High Priority
 
@@ -418,13 +637,19 @@ Once all or most documents are complete:
 
 ## Success Criteria
 
-The investigation is ready for ADR-010 when:
+The investigation is ready for ADR drafting when:
 
+**Core Understanding (Analysis Phase):**
 1. ✅ Current state is thoroughly documented
 2. ✅ Unit systems and conversions analyzed
 3. ✅ Real-world examples tested (10 cases analyzed, 6 critical issues identified)
 4. ✅ Override hierarchy specified (precedence rule recommended, 4 options analyzed)
-5. ⏳ Scaling behavior defined
+
+**Design Specifications (Design Phase):**
+5. ✅ Batch vs continuous process types defined
+6. ✅ Time model schema redesigned (flexible units, scaling basis)
+7. ✅ Energy model schema redesigned (parallel to time)
+8. ⏳ Labor accounting harmonized
 6. ⏳ Recipe timing practice quantified
 7. ⏳ Material dependencies explored
 8. ⏳ Validation strategy proposed
@@ -451,18 +676,34 @@ Each decision should be informed by the investigation documents, not made in a v
 ## Current Status
 
 **Date:** 2024-12-28
-**Progress:** 4/12+ documents completed (33%)
-**Next:** Scaling/batching behavior or recipe timing survey
+**Progress:** 8 documents completed (4 analysis + 4 design)
+**Phase:** Design phase - translating analysis into concrete proposals
+**Next:** Labor accounting harmonization, then ADR drafting
 
-**Recently completed:**
-- ✅ Current state documentation (comprehensive)
-- ✅ Unit systems analysis (thorough)
-- ✅ Real-world examples walkthrough (10 processes, 50% success, 6 critical issues)
-- ✅ Override hierarchy analysis (precedence rule recommended, 4 options evaluated)
+**Investigation Documents Completed (Analysis Phase):**
+1. ✅ process-time-energy-models-current-state.md
+2. ✅ unit-systems-and-conversions.md
+3. ✅ time-calculation-real-world-examples.md
+4. ✅ override-hierarchy-problems.md
+
+**Design Documents Completed (Post-Feedback):**
+5. ✅ feedback-synthesis-and-next-steps.md (scope expansion to KB redesign)
+6. ✅ batch-vs-continuous-process-types.md (explicit process types)
+7. ✅ time-model-schema-redesign.md (flexible units, scaling basis)
+8. ✅ energy-model-redesign.md (parallel to time model)
+
+**Key Achievements:**
+- Identified 6 critical issue categories
+- Found 15× timing discrepancy (2hr vs 30hr)
+- Designed new schemas for time_model and energy_model
+- Established batch vs continuous as foundational distinction
+- Defined clear migration paths from current state
+- Created complete examples for validation
 
 **Up next (high priority):**
-- ⏳ Scaling and batching behavior (batch size undefined in multiple processes)
-- ⏳ Recipe timing practice quantified (survey needed to quantify conflicts)
+- ⏳ Labor accounting harmonization (machine_hours, labor_hours, resource accounting)
+- ⏳ Draft ADR-012: Process Types and Time Model Redesign
+- ⏳ Validation strategy expansion
 
 ## Notes for Reviewers
 

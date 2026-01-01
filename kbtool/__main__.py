@@ -1,5 +1,6 @@
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from . import indexer, queue_tool, report, closure_analysis
@@ -101,6 +102,10 @@ def main() -> None:
             json_output = indexer.run_indexer()
             print(json.dumps(json_output, indent=2))
     elif args.command == "validate":
+        print(
+            "WARNING: kbtool validate is deprecated. Use `python -m src.cli queue verify --id <gap_type:item_id>` instead.",
+            file=sys.stderr,
+        )
         if not args.no_index:
             ok = _run_indexer()
             if not ok:
@@ -113,6 +118,10 @@ def main() -> None:
             raise SystemExit(1)
         print("All specified gaps are resolved.")
     elif args.command == "queue":
+        print(
+            "WARNING: kbtool queue is deprecated. Use `python -m src.cli queue ...` instead.",
+            file=sys.stderr,
+        )
         if args.qcmd == "pop":
             item = queue_tool.pop_queue()
             if item:
@@ -142,7 +151,10 @@ def main() -> None:
             if ok:
                 print(f"Marked {args.id} done")
             else:
-                print(f"Failed to mark {args.id} done (not leased by {args.agent}?)")
+                if args.verify and not queue_tool.gap_id_exists(args.id):
+                    print(f"Gap {args.id} already resolved; no queue entry to mark done")
+                else:
+                    print(f"Failed to mark {args.id} done (not leased by {args.agent}?)")
         elif args.qcmd == "release":
             ok = queue_tool.release(args.id, args.agent)
             if ok:

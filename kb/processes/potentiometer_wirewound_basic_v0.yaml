@@ -1,5 +1,7 @@
 id: potentiometer_wirewound_basic_v0
 kind: process
+process_type: batch
+is_template: true
 name: Wirewound potentiometer assembly (placeholder)
 # Minimal placeholder process to enable local production of potentiometer_wirewound_v0
 inputs: []
@@ -15,10 +17,11 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: |-
   Placeholder process to produce potentiometer_wirewound_v0 for gap resolution.

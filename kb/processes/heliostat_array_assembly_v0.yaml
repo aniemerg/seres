@@ -1,6 +1,8 @@
 id: heliostat_array_assembly_v0
 kind: process
 name: HelioStat array assembly (placeholder)
+process_type: batch
+is_template: true
 inputs: []
 outputs:
 - item_id: heliostat_array_system_v0
@@ -11,9 +13,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Placeholder assembly process for heliostat array system.

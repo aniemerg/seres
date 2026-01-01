@@ -1,5 +1,6 @@
 id: precision_grinding_and_scraping_v0
 kind: process
+process_type: batch
 name: Precision grinding and scraping
 layer_tags:
   - layer_7
@@ -19,11 +20,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.2
+  unit: kWh
   notes: "Surface grinder power and hand scraping effort."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Multiple grinding passes plus hand scraping/inspection."
 notes: "Finishes precision surfaces by grinding followed by hand scraping to achieve high flatness and alignment."

@@ -1,5 +1,6 @@
 id: plumbing_and_pneumatics_v0
 kind: process
+process_type: batch
 name: Plumbing and pneumatics
 layer_tags:
   - layer_5
@@ -23,7 +24,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  total_energy_kwh: 0.5
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
 time_model:
-  total_time_hr: 2.0
+  type: batch
+  hr_per_batch: 2.0
 notes: "Installation of plumbing and pneumatic systems. Includes cutting, threading, fitting, and connecting pipes, tubes, and hoses. Installing valves, regulators, filters, and fittings. Pressure testing for leaks. Used for fluid transport, pneumatic controls, cooling systems, and gas handling."

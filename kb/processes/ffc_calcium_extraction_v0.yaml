@@ -1,5 +1,6 @@
 id: ffc_calcium_extraction_v0
 kind: process
+process_type: batch
 name: FFC Cambridge calcium metal extraction
 layer_tags:
   - layer_4
@@ -35,11 +36,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 8.0
+  unit: kWh
   notes: Electrolysis at 900-1100°C, lower than Hall-Heroult
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
   notes: FFC reduction of CaO to calcium metal
 notes: |

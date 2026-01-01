@@ -1,6 +1,7 @@
 id: chloralkali_electrolysis_v0
 kind: process
 name: Chloralkali electrolysis
+process_type: batch
 inputs:
 - item_id: sodium_chloride
   qty: 2.0
@@ -23,9 +24,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 3.0
+  type: fixed_per_batch
+  value: 6.0
+  unit: kWh
+  notes: "Electrolysis energy per kg of NaCl input"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.6
 notes: "Chloralkali electrolysis converts NaCl + water into NaOH, Cl2, and H2."

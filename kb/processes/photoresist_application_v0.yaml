@@ -4,6 +4,7 @@ name: Photoresist application
 layer_tags:
 - layer_7
 - layer_8
+process_type: batch
 inputs:
 - item_id: uncoated_substrate_material_v0
   qty: 1.0
@@ -29,9 +30,12 @@ byproducts:
   qty: 0.05
   unit: kg
 energy_model:
-  total_energy_kwh: 0.15
+  type: fixed_per_batch
+  value: 0.15
+  unit: kWh
 time_model:
-  total_time_hr: 0.75
+  type: batch
+  hr_per_batch: 0.75
 notes: |
   Spin coating of photoresist onto the substrate, using a spin coating station.
   Optional post-coating bake is not modeled here.

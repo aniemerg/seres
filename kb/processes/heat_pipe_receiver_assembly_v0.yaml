@@ -1,6 +1,7 @@
 id: heat_pipe_receiver_assembly_v0
 name: Heat Pipe Receiver Assembly
 kind: process
+process_type: batch
 inputs:
   - item_id: steel_frame_heavy
     qty: 1.0
@@ -18,9 +19,11 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
+  notes: "Assembly energy per receiver unit"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Placeholder assembly step to produce heat_pipe_receiver_v0 from steel_frame_heavy; byproduct steel_scrap_v0 balances mass."

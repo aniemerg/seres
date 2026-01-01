@@ -4,6 +4,7 @@ name: Glass eyepiece lens fabrication
 layer_tags:
 - layer_6
 - layer_7
+process_type: batch
 inputs:
 - item_id: cast_glass_parts
   qty: 1.0
@@ -19,9 +20,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Fabrication step to convert a glass cast into a glass eyepiece lens; polishing/optical finishing reserved for later steps."

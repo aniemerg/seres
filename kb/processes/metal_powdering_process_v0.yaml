@@ -16,8 +16,11 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  total_energy_kwh: 4.0
+  type: fixed_per_batch
+  value: 4.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Powdering of metal ingot to metal_powder_v0 using ball mill as the primary unit; placeholder values."
+process_type: batch

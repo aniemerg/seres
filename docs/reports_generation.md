@@ -31,7 +31,7 @@ The inventory report provides a comprehensive listing of all items in the knowle
 - **After major KB updates:** When adding many new machines, parts, or processes
 - **Before dedupe reviews:** To get a fresh view of all items for consolidation analysis
 - **For quality audits:** To review naming consistency and identify gaps
-- **After running the indexer:** Reports use the index, so run `kbtool index` first
+- **After running the indexer:** Reports use the index, so run `python -m src.cli index` first
 
 ### Using Reports for Dedupe Analysis
 
@@ -39,7 +39,7 @@ The inventory report is essential for identifying consolidation opportunities:
 
 1. **Generate fresh inventory:**
    ```bash
-   .venv/bin/python -m kbtool index
+   python -m src.cli index
    .venv/bin/python -m kbtool report inventory
    ```
 
@@ -92,7 +92,7 @@ Save to `dedupe_tasks/furnaces_high_temp.json` and add:
 
 **Recommended periodic workflow:**
 
-1. Index KB: `.venv/bin/python -m kbtool index`
+1. Index KB: `python -m src.cli index`
 2. Generate inventory: `.venv/bin/python -m kbtool report inventory`
 3. Review for duplicates (grep patterns or manual scan)
 4. Create dedupe tasks for consolidation opportunities

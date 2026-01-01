@@ -2,28 +2,33 @@ id: gear_cutting_basic_v0
 kind: process
 name: Basic gear cutting and finishing
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: steel_stock_bar_or_billet
-    qty: 1.1
-    unit: kg
+- item_id: steel_stock_bar_or_billet
+  qty: 1.1
+  unit: kg
 outputs:
-  - item_id: steel_stock_bar_or_billet
-    qty: 1.0
-    unit: kg
+- item_id: steel_stock_bar_or_billet
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - milling_machine_general_v0
-  - cutting_tools_general
+- milling_machine_general_v0
+- cutting_tools_general
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
-  notes: "hobbing/cutting spindle (~5 kW) plus multiple finishing passes"
+  unit: kWh/kg
+  scaling_basis: steel_stock_bar_or_billet
+  notes: hobbing/cutting spindle (~5 kW) plus multiple finishing passes
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  notes: "precision gear cutting ~2 kg/hr, multiple tooth profiles"
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: steel_stock_bar_or_billet
+  notes: precision gear cutting ~2 kg/hr, multiple tooth profiles
 notes: Represents cutting/finishing operations for gear sets; placeholders for time/energy.
+process_type: continuous

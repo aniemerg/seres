@@ -1,10 +1,17 @@
 id: apply_protective_coating_aluminum_v0
 kind: process
 name: Apply protective coating aluminum (placeholder)
+process_type: batch
 layer_tags:
 - layer_6
 - layer_7
-inputs: []
+inputs:
+  - item_id: aluminum_part_base
+    qty: 1.0
+    unit: unit
+  - item_id: coating_material
+    qty: 0.1
+    unit: kg
 outputs:
 - item_id: protective_coating_aluminum
   qty: 1.0
@@ -12,14 +19,15 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.2
+  qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Placeholder energy for coating application
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: Placeholder time for coating application
 notes: Placeholder process to generate protective_coating_aluminum; used to resolve no_recipe gap in seed antenna_bom.

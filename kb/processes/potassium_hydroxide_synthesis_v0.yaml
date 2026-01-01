@@ -1,9 +1,13 @@
 id: potassium_hydroxide_synthesis_v0
 kind: process
+process_type: batch
 name: Potassium hydroxide synthesis (placeholder)
 layer_tags:
 - layer_4
-inputs: []
+inputs:
+- item_id: potassium_compound
+  qty: 1.0
+  unit: kg
 outputs:
 - item_id: potassium_hydroxide
   qty: 1.0
@@ -11,11 +15,12 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: Placeholder energy for KOH synthesis
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: Placeholder time for KOH synthesis
 notes: "Placeholder process to synthesize potassium hydroxide; to be replaced with real chemistry data as available."

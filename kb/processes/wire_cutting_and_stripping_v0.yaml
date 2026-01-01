@@ -19,11 +19,13 @@ resource_requirements:
     qty: 0.4
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
   notes: "Handheld/bench-top cutters/strippers and small motorized feed."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Batch cutting/stripping of harness wire segments."
+process_type: batch
 notes: "Cuts insulated copper wire to length and strips ends for harness assembly. Assumes manual/bench-top tooling; scrap allowance included in input."

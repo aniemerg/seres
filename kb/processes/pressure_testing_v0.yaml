@@ -12,12 +12,13 @@ resource_requirements:
     qty: 0.7
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
   notes: Pumps/compressors and instrumentation during test.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.7
   notes: Setup, pressurize, hold, and inspection.
+process_type: batch
 notes: Hydrostatic or pneumatic pressure testing for tanks/enclosures to verify leak-tightness; includes visual inspection and gauge monitoring. Replace with detailed procedures when design specs are known.
-

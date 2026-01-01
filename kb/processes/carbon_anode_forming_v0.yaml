@@ -1,6 +1,7 @@
 id: carbon_anode_forming_v0
 kind: process
 name: Carbon anode forming and baking
+process_type: batch
 inputs:
 - item_id: carbon_anode_material
   qty: 1.0
@@ -18,9 +19,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: "Forming and baking carbon anode material into final carbon anode; minor losses via pitch residues."

@@ -1,23 +1,37 @@
 id: bearing_installation_basic_v0
 kind: process
 name: Bearing installation (basic)
+process_type: continuous
 layer_tags:
-  - layer_6
-inputs: []
-outputs: []
+- layer_6
+inputs:
+- item_id: bearing_set
+  qty: 1.0
+  unit: kg
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: finished_part
+  qty: 2.0
+  unit: kg
 requires_ids:
-  - hydraulic_press
-  - heating_plate_or_induction_heater
+- hydraulic_press
+- heating_plate_or_induction_heater
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.4
-  notes: "hydraulic press and/or induction heating for thermal fits"
+  unit: kWh/kg
+  scaling_basis: bearing_set
+  notes: hydraulic press and/or induction heating for thermal fits
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
-  notes: "heat housing/cool bearing, alignment, press fit, cool/warm to ambient"
+  rate: 3.33
+  rate_unit: kg/hr
+  scaling_basis: bearing_set
+  notes: heat housing/cool bearing, alignment, press fit, cool/warm to ambient. Rate = 1/0.3 = 3.33 kg/hr
 notes: Install precision bearings via thermal fit (heat housing or cool bearing) or press fit with hydraulic press.

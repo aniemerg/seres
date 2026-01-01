@@ -15,14 +15,18 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.4
+  qty: 0.4
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.4
-  notes: "Coarse energy for carbon processing to conductive additive"
+  unit: kWh/kg
+  scaling_basis: carbon_reductant
+  notes: Coarse energy for carbon processing to conductive additive
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  setup_hr: 0.0
-notes: "Placeholder process to synthesize conductive additive from carbon reductant (carbon black/graphite)."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: carbon_reductant
+notes: Placeholder process to synthesize conductive additive from carbon reductant (carbon black/graphite).
+process_type: continuous

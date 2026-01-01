@@ -1,5 +1,6 @@
 id: ammonia_synthesis_catalyst_production_v0
 kind: process
+process_type: batch
 name: Ammonia synthesis catalyst production
 inputs:
 - item_id: iron_ore_or_ilmenite
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.9
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.2
 notes: 'Seed catalyst production path: placeholder for ammonia synthesis catalyst, produced from iron ore / ilmenite.' 

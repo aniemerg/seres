@@ -4,6 +4,7 @@ name: Silicone rubber vulcanization (cross-linking)
 layer_tags:
 - layer_3
 - layer_4
+process_type: batch
 inputs:
 - item_id: silicone_polymer
   qty: 1.0
@@ -22,10 +23,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Cross-linking of silicone polymer to form silicone rubber (elastomer) using curing agent. Assumes vulcanization conditions via heated press.
 source_tags:

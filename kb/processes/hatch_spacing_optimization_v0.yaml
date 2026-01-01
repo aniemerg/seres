@@ -1,15 +1,26 @@
 id: hatch_spacing_optimization_v0
 name: Hatch Spacing Optimization
 kind: process
-inputs: []
-outputs: []
-resource_requirements: []
+inputs:
+  - item_id: uncoded_data_stream
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: optimized_hatch_parameters
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
 energy_confidence: unknown
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 time_confidence: unknown
+process_type: batch
 notes: "Seed placeholder process for hatch spacing optimization to control overlap/density in additive manufacturing; seed reference hatch_spacing_optimization_v0 from paper_reviews_dec2024_comprehensive_v0."

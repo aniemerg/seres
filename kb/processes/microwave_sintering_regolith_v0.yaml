@@ -2,57 +2,86 @@ id: microwave_sintering_regolith_v0
 kind: process
 name: Microwave sintering of regolith
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: regolith_powder
-    qty: 1.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: regolith_sinter_block
-    qty: 0.95
-    unit: kg
+- item_id: regolith_sinter_block
+  qty: 0.95
+  unit: kg
 byproducts: []
 requires_ids:
-  - microwave_sintering_equipment_v0
-  - forming_mold_or_applicator_head_v0
+- microwave_sintering_equipment_v0
+- forming_mold_or_applicator_head_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
-  notes: "Microwave heating couples efficiently with nanophase iron in regolith. Reaches 1000-1500°C with rapid heating (1000°C/min). More energy-efficient than conventional sintering due to volumetric heating and strong coupling with iron particles."
+  unit: kWh/kg
+  scaling_basis: regolith_powder
+  notes: Microwave heating couples efficiently with nanophase iron in regolith. Reaches 1000-1500°C with rapid heating (1000°C/min).
+    More energy-efficient than conventional sintering due to volumetric heating and strong coupling with iron particles.
 time_model:
   type: linear_rate
-  hr_per_kg: 0.3
-  setup_hr: 0.2
-  notes: "Very rapid process due to efficient microwave coupling. 1000°C/min heating rate possible. Typical cycle: mold filling, microwave exposure (minutes), cooling. Can be performed in-situ with mobile microwave head on rover."
-notes: |
-  Microwave sintering process for consolidating lunar regolith into solid construction blocks or in-situ structures.
-  Exploits the ubiquitous nanophase iron (np-Fe0) in lunar regolith which couples strongly with microwave radiation at 2.45 GHz.
+  rate: 3.333
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
+  notes: 'Very rapid process due to efficient microwave coupling. 1000°C/min heating rate possible. Typical cycle: mold filling,
+    microwave exposure (minutes), cooling. Can be performed in-situ with mobile microwave head on rover.'
+notes: 'Microwave sintering process for consolidating lunar regolith into solid construction blocks or in-situ structures.
+
+  Exploits the ubiquitous nanophase iron (np-Fe0) in lunar regolith which couples strongly with microwave radiation at 2.45
+  GHz.
+
 
   Process characteristics:
+
   - Operating temperature: 1000-1500°C (typically 1200°C, just below regolith melting point)
+
   - Heating rate: Up to 1000°C/min due to excellent microwave coupling
+
   - Compressive strength: 55 MPa achieved for microwave-sintered regolith bricks
+
   - Stronger binding than solar sintering methods
+
   - Can be performed in-situ using mobile microwave applicator head mounted on rover
+
   - Typical microwave frequency: 2.45 GHz
+
   - Power requirement: 100-350W (specification for equipment design)
 
+
   Applications:
+
   - Construction bricks and blocks
+
   - Landing pad surfacing (in-situ sintering)
+
   - Road/walkway paving
+
   - Protective shells and structures
+
   - Foundation pads for equipment
 
+
   Sources:
+
   - Ellery 2021 (Leveraging In-Situ Resources for Lunar Base Construction)
+
   - Sustainable ISRU on the Moon
+
   - Self-Replicating Machines on the Moon
 
+
   Provenance: ai_estimate for energy/time values based on literature descriptions
+
   Confidence: medium (process well-documented in literature, but exact parameters estimated)
+
+  '
+process_type: continuous

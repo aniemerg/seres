@@ -16,9 +16,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: Cryogenic condensation step to liquefy oxygen from gas input. Placeholder numbers.
+process_type: batch

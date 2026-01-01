@@ -1,6 +1,7 @@
 id: electrical_testing_v0
 kind: process
 name: Electrical testing
+process_type: batch
 layer_tags:
   - layer_7
 inputs:
@@ -16,14 +17,15 @@ requires_ids:
   - multimeter_set
 resource_requirements:
   - machine_id: labor_bot_general_v0
-    qty: null
+    qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Test equipment power consumption"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Continuity checks, insulation testing, functional verification"
 notes: Electrical testing and verification process. Checks wiring continuity, insulation resistance, proper grounding, and functional operation.

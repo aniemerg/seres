@@ -1,5 +1,6 @@
 id: sabatier_reaction_complete_v0
 kind: process
+process_type: batch
 name: Sabatier reaction (CO2 methanation)
 layer_tags:
   - layer_3
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
-  notes: Exothermic reaction at 300-400°C, produces heat
+  unit: kWh
+  notes: Exothermic reaction at 300-400°C, produces heat; 2.0 kWh for heating and control per batch (1.0 kg CO2)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: Catalytic methanation time
 notes: |

@@ -2,30 +2,35 @@ id: welding_brazing_basic_v0
 kind: process
 name: Basic welding and brazing
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: cast_metal_parts
-    qty: 1.0
-    unit: kg
+- item_id: cast_metal_parts
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: welded_assemblies
-    qty: 1.0
-    unit: kg
+- item_id: welded_assemblies
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - welding_power_supply_v0
-  - welding_consumables
-  - fixturing_workbench
+- welding_power_supply_v0
+- welding_consumables
+- fixturing_workbench
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
-  notes: "arc power (~8 kW) plus wire feed and shielding"
+  unit: kWh/kg
+  scaling_basis: cast_metal_parts
+  notes: arc power (~8 kW) plus wire feed and shielding
 time_model:
   type: linear_rate
-  hr_per_kg: 0.4
-  notes: "deposition rate ~2.5 kg/hr for GMAW"
+  rate: 2.5
+  rate_unit: kg/hr
+  scaling_basis: cast_metal_parts
+  notes: deposition rate ~2.5 kg/hr for GMAW
 notes: Joining anchor; detailed joint types and gas choices TBD.
+process_type: continuous

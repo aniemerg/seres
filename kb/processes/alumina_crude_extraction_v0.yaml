@@ -1,0 +1,35 @@
+id: alumina_crude_extraction_v0
+kind: process
+name: Crude alumina extraction
+process_type: batch
+layer_tags:
+  - layer_4
+inputs:
+  - item_id: anorthite_ore
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: alumina_crude
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: ore_tailings
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.5
+    unit: hr
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: "Extraction and initial processing energy"
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: "Extraction and initial separation time"
+notes: |
+  Basic alumina extraction from aluminum-bearing ores (bauxite, anorthite, etc.).
+  Produces crude alumina with impurities that requires further refining.
+  Placeholder process until detailed chemistry is defined.

@@ -1,10 +1,17 @@
 id: finishing_basic_v0
 kind: process
+process_type: batch
 name: Finishing (basic)
 layer_tags:
   - layer_3
-inputs: []
-outputs: []
+inputs:
+  - item_id: unfinished_part
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: finished_part
+    qty: 1.0
+    unit: unit
 requires_ids:
   - assembly_tools_basic
 resource_requirements:
@@ -12,11 +19,12 @@ resource_requirements:
     qty: 0.3
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
   notes: "Hand sanding/finishing tools"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Sanding and sealing/finishing per item"
 notes: Basic finishing for wood/steel assemblies (deburring, sanding, sealing).

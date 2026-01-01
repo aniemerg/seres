@@ -2,22 +2,26 @@ id: graphite_molding_v0
 name: Graphite molding v0
 kind: process
 inputs:
-  - item_id: graphite_powder
-    qty: 0.01
-    unit: kg
+- item_id: graphite_powder
+  qty: 0.01
+  unit: kg
 outputs:
-  - item_id: crucible_graphite
-    qty: 0.01
-    unit: kg
+- item_id: crucible_graphite
+  qty: 0.01
+  unit: kg
 resource_requirements:
-  - machine_id: molding_press
-    qty: 0.5
-    unit: hr
+- machine_id: molding_press
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: graphite_powder
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 1.0
-notes: "Mold graphite powder into a crucible_refractory-shaped intermediate under pressure."
+  rate: 1.0
+  rate_unit: kg/hr
+  scaling_basis: graphite_powder
+notes: Mold graphite powder into a crucible_refractory-shaped intermediate under pressure.
+process_type: continuous

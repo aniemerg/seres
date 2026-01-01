@@ -535,6 +535,9 @@ id
 name
 
 
+process_type: batch | continuous
+
+
 inputs: list of {item_id, qty, unit}
 
 
@@ -544,29 +547,13 @@ outputs: list of {item_id, qty, unit}
 byproducts / waste (optional but recommended): list of {item_id, qty, unit}
 
 
-resource_requirements: list of {resource_type, amount, unit}
- (e.g., machine:ball_mill, machine_hours: 2 hr, or requires: hauler capacity)
+resource_requirements: list of {machine_id, qty, unit}
 
 
-time_model (coarse): one of:
+time_model (ADR-012): linear_rate (continuous) or batch
 
 
-fixed_time
-
-
-linear_rate (e.g., time = setup + qty / rate)
-
-
-energy_model (coarse): one of:
-
-
-kWh_per_kg_input
-
-
-kWh_per_unit_output
-
-
-kW_times_time (power draw × computed time)
+energy_model (ADR-014): per_unit or fixed_per_batch
 
 
 notes, source_tags
@@ -595,7 +582,7 @@ target_item_id
 variant_id (so multiple recipes can exist for same target)
 
 
-steps: ordered list of process ids (or a small DAG if needed later)
+steps: ordered list of step objects with process_id
 
 
 assumptions (freeform) + source_tags
@@ -605,18 +592,13 @@ Optional:
 applicability constraints (e.g., requires certain other materials or machines)
 
 
-yield_overrides / rate_overrides (tuning knobs)
+Recipe step overrides for time_model and energy_model (ADR-013)
 
 
 Policy: If multiple recipes exist, the planner/optimizer chooses one; if none, item becomes import.
 
 5) Resources
-Resources constrain throughput/time (even if you’re not scheduling yet). In this phase, resources are used mainly to compute machine-hours and identify bottlenecks.
-Resource types:
-machine_type (e.g., “ball_mill”, “furnace”, “electrolysis_cell”, “assembler”, “hauler”)
-
-
-optionally power_bus (if you later add peak power constraints)
+Resources are primarily modeled as machines referenced in process resource_requirements. Avoid creating new resource_type definitions unless required by a tool.
 
 
 Resource definitions include:
@@ -1483,6 +1465,7 @@ Use these as templates when creating new KB entries.
 id: vacuum_tube_assembly_v0
 kind: process
 name: Vacuum tube assembly
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -1508,13 +1491,16 @@ requires_ids:
 - glassworking_station
 - leak_test_equipment
 resource_requirements:
-- resource_type: labor_bot_general
+- machine_id: labor_bot_general_v0
   qty: 4.0
   unit: hr
 energy_model:
-  total_energy_kwh: 3.0
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
 time_model:
-  total_time_hr: 4.5
+  type: batch
+  hr_per_batch: 4.5
 notes: Assembly of thermionic vacuum tube for solar power conversion. Install tungsten
   cathode (CaO-coated) and nickel anode inside fused silica envelope. Hermetic sealing
   under vacuum (10^-6 to 10^-7 torr). Critical process for thermionic converter production.
@@ -1527,6 +1513,7 @@ notes: Assembly of thermionic vacuum tube for solar power conversion. Install tu
 id: steel_refining_basic_v0
 kind: process
 name: Basic steel refining and casting
+process_type: batch
 layer_tags:
 - layer_4
 - layer_5
@@ -1546,19 +1533,21 @@ requires_ids:
 - casting_furnace
 - molds
 resource_requirements:
-- resource_type: labor_bot_general
+- machine_id: labor_bot_general_v0
   qty: 0.6
   unit: hr
-- resource_type: high_temperature_power_supply
+- machine_id: high_temperature_power_supply_v0
   qty: 0.6
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
+  unit: kWh/kg
+  scaling_basis: steel_billet_or_slab
   notes: Electric melting/refining and holding energy for pig iron to steel conversion;
     small-batch EAF/BOF analog.
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Melt, refine (oxygen blow), and cast billets/slabs; batch cycle includes
     heat-up and tap.
@@ -1571,6 +1560,7 @@ notes: Refines pig iron into low-carbon steel and casts into billets/slabs for r
 id: strain_gauge_bonding_process_v0
 kind: process
 name: Strain gauge bonding process v0
+process_type: batch
 layer_tags:
 - layer_5
 inputs:
@@ -1590,15 +1580,16 @@ outputs:
 requires_ids:
 - strain_gauge_bonding_station_v0
 resource_requirements:
-- resource_type: labor_bot_general
-  amount: 0.5
+- machine_id: labor_bot_general_v0
+  qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.1
+  unit: kWh
   notes: Minimal energy for surface prep and curing
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Surface prep, application, alignment, curing
 notes: 'Process for bonding strain gauges to test surfaces for structural monitoring.

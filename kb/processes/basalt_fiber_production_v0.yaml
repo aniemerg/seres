@@ -2,25 +2,30 @@ id: basalt_fiber_production_v0
 kind: process
 name: Basalt fiber production
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: glass_bulk
-    qty: null
-    unit: kg
+- item_id: glass_bulk
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: basalt_fiber
-    qty: null
-    unit: kg
+- item_id: basalt_fiber
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - fiber_spinneret_v0
-  - winding_drums
-  - cooling_chamber_controlled
+- fiber_spinneret_v0
+- winding_drums
+- cooling_chamber_controlled
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 2.0
-  notes: "heating glass to drawing temperature (~1300°C) plus spinneret drive"
+  unit: kWh/kg
+  scaling_basis: glass_bulk
+  notes: heating glass to drawing temperature (~1300°C) plus spinneret drive
 time_model:
   type: linear_rate
-  hr_per_kg: 0.2
-  notes: "continuous fiber drawing ~5 kg/hr throughput"
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: glass_bulk
+  notes: continuous fiber drawing ~5 kg/hr throughput
 notes: Captures fiber path for structural materials; rates TBD.
+process_type: continuous

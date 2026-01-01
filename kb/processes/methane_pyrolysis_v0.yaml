@@ -17,9 +17,11 @@ resource_requirements:
   qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
+process_type: batch
 notes: "Pyrolysis of methane at ~1000–1200°C. ~75% carbon recovery; hydrogen byproduct."

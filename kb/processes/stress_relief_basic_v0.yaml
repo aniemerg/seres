@@ -1,28 +1,25 @@
 id: stress_relief_basic_v0
 kind: process
-name: "Stress relief (basic)"
+name: Stress relief (basic)
 layer_tags:
-  - layer_5
-
+- layer_5
 inputs: []
 outputs: []
-
 requires_ids:
-  - heat_treatment_furnace
-
+- heat_treatment_furnace
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
-
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
-  notes: "Heating to stress relief temperature (typically 500-700°C) and controlled cool-down"
-
+  unit: kWh
+  notes: Heating to stress relief temperature (typically 500-700°C) and controlled cool-down
 time_model:
-  type: linear_rate
-  hr_per_kg: 0.8
-  notes: "Includes heat-up, soak time at temperature, and controlled cooling"
-
-notes: "Stress relief heat treatment for welded or machined parts. Reduces residual stresses from manufacturing processes by heating to subcritical temperature and slow cooling. Improves dimensional stability and reduces risk of cracking."
+  type: batch
+  hr_per_batch: 0.8
+  notes: Includes heat-up, soak time at temperature, and controlled cooling
+notes: Stress relief heat treatment for welded or machined parts. Reduces residual stresses from manufacturing processes by
+  heating to subcritical temperature and slow cooling. Improves dimensional stability and reduces risk of cracking.
+process_type: batch

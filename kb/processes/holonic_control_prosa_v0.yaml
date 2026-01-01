@@ -1,6 +1,7 @@
 id: holonic_control_prosa_v0
 kind: process
 name: Holonic PROSA control architecture
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -18,11 +19,12 @@ resource_requirements:
   qty: 0.25
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
   notes: "Holonic control software architecture; treated as negligible energy draw for single-unit output."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
   notes: "Prototype scheduling step; placeholder for control loop execution."
 notes: |

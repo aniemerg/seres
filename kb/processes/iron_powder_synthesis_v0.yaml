@@ -14,9 +14,11 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.7
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.8
 notes: "Direct reduction of pure iron to iron powder; placeholder numbers for KB closure."
+process_type: batch

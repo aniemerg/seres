@@ -1,5 +1,6 @@
 id: flux_brazing_synthesis_v0
 kind: process
+process_type: batch
 name: Flux brazing synthesis v0
 layer_tags:
 - layer_3
@@ -14,10 +15,11 @@ resource_requirements:
   amount: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
 notes: |
   Placeholder synthesis of flux brazing material. This process exists to resolve the

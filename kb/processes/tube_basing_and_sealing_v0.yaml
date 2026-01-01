@@ -19,13 +19,15 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: Vacuum pumping and flame sealing energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Mount base, evacuate, seal-off
+process_type: batch
 notes: |
   Final assembly step for vacuum tubes: mount tube to base (socket), evacuate envelope to high vacuum,
   flame seal the evacuation port. Activates getter if present.

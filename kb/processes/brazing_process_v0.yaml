@@ -1,6 +1,7 @@
 id: brazing_process_v0
 kind: process
 name: Brazing process v0
+process_type: batch
 layer_tags:
   - layer_4
 inputs:
@@ -24,11 +25,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
-  notes: Heating to brazing temperature
+  unit: kWh
+  notes: Heating to brazing temperature (~1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Heat-up, soak, cool-down
 notes: |

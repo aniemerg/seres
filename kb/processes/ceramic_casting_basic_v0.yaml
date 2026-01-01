@@ -2,22 +2,26 @@ id: ceramic_casting_basic_v0
 name: Ceramic casting (basic)
 kind: process
 inputs:
-  - item_id: alumina_powder
-    qty: 50.0
-    unit: kg
+- item_id: alumina_powder
+  qty: 50.0
+  unit: kg
 outputs:
-  - item_id: thermal_lance_ceramic_casting_v0
-    qty: 1.0
-    unit: unit
+- item_id: thermal_lance_ceramic_casting_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: furnace
-    qty: 2.0
-    unit: hr
+- machine_id: furnace
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.9
+  unit: kWh/kg
+  scaling_basis: alumina_powder
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 25.0
-notes: "Basic ceramic casting from alumina powder to produce thermal_lance_ceramic_casting_v0. Placeholder values for modeling."
+  rate: 25.0
+  rate_unit: kg/hr
+  scaling_basis: alumina_powder
+notes: Basic ceramic casting from alumina powder to produce thermal_lance_ceramic_casting_v0. Placeholder values for modeling.
+process_type: continuous

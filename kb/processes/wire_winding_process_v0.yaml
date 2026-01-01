@@ -25,12 +25,14 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: "Winding operation energy (general coil winding)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.8
 notes: "General wire winding operation used for relays and motors; tailored for different coil types."
 assumptions: |
   Copper wire for coil winding and laminated iron core base.
+process_type: batch

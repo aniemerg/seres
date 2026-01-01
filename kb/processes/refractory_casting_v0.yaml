@@ -2,21 +2,32 @@ id: refractory_casting_v0
 kind: process
 name: Refractory casting
 layer_tags:
-  - layer_6
-inputs: []
-outputs: []
+- layer_6
+inputs:
+- item_id: refractory_castable
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: acid_resistant_reactor_lining_v0
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - refractory_installation_tools
+- refractory_installation_tools
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
-  notes: "mixing equipment, vibration for consolidation, and heating for initial cure"
+  unit: kWh/kg
+  scaling_basis: refractory_castable
+  notes: mixing equipment, vibration for consolidation, and heating for initial cure
 time_model:
   type: linear_rate
-  hr_per_kg: 2.5
-  notes: "mixing refractory castable, forming, vibration, initial cure time"
+  rate: 0.4
+  rate_unit: kg/hr
+  scaling_basis: refractory_castable
+  notes: mixing refractory castable, forming, vibration, initial cure time
 notes: Casting refractory linings and shapes from castable refractory materials. For furnace and reactor linings.
+process_type: continuous

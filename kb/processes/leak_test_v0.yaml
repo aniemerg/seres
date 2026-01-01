@@ -2,19 +2,22 @@ id: leak_test_v0
 kind: process
 name: Leak testing
 layer_tags:
-  - layer_7
+- layer_7
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.2
-  notes: "pressure testing equipment, leak detection sensors, and compressors"
+  unit: kWh
+  notes: pressure testing equipment, leak detection sensors, and compressors
 time_model:
-  type: linear_rate
-  hr_per_kg: 0.8
-  notes: "pressurization, soak time, leak detection, and depressurization"
-notes: Pressure testing and leak detection for tanks, vessels, piping, and sealed systems. Uses pressure or vacuum testing methods.
+  type: batch
+  hr_per_batch: 0.8
+  notes: pressurization, soak time, leak detection, and depressurization
+notes: Pressure testing and leak detection for tanks, vessels, piping, and sealed systems. Uses pressure or vacuum testing
+  methods.
+process_type: batch

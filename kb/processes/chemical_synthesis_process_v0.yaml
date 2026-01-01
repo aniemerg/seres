@@ -1,17 +1,21 @@
 id: chemical_synthesis_process_v0
 kind: process
 name: General chemical synthesis process v0
+is_template: true
 layer_tags:
   - layer_4
 inputs:
-  - item_id: chemical_reactant_a
+  - item_id: methanol_liquid
     qty: 1.0
     unit: kg
-  - item_id: chemical_reactant_b
+  - item_id: ammonia_gas
     qty: 1.0
     unit: kg
-  - item_id: solvent_generic
-    qty: 2.0
+  - item_id: carbon_monoxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.5
     unit: kg
 outputs:
   - item_id: chemical_product_crude
@@ -24,11 +28,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
   notes: Heating, mixing, and reaction energy
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Reaction time including heat-up, reaction, and cool-down
 notes: |
@@ -50,3 +55,4 @@ notes: |
     - Battery electrolytes
   Lunar context: Essential for chemical industry and materials production
   Critical for: Pharmaceuticals, polymers, specialty chemicals, life support consumables
+process_type: batch

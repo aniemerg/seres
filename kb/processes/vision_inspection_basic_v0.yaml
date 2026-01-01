@@ -1,11 +1,9 @@
 id: vision_inspection_basic_v0
 name: Vision inspection (basic) using machine_vision_processing_v0
 kind: process
-inputs:
-outputs:
-  - item_id: vision_inspection_report_v0
-    qty: 1.0
-    unit: unit
+is_template: true
+inputs: []
+outputs: []
 requires_ids:
   - machine_vision_processing_v0
 resource_requirements:
@@ -13,9 +11,11 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
-notes: "Placeholder vision inspection using the machine_vision_processing_v0. No material inputs; outputs a report."
+notes: "Template vision inspection using the machine_vision_processing_v0; recipes provide concrete inputs/outputs."
+process_type: batch

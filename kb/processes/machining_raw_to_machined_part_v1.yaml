@@ -19,11 +19,15 @@ resource_requirements:
   amount: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 50.0
-  notes: "Energy intensity placeholder for finishing a machined part"
+  unit: kWh/kg
+  scaling_basis: cut_parts
+  notes: Energy intensity placeholder for finishing a machined part
 time_model:
   type: linear_rate
-  hr_per_kg: 1.0
-  setup_hr: 0.2
-notes: "Finish machining of cut stock to machined_part_raw; placeholder path for seed factory modeling."
+  rate: 1.0
+  rate_unit: kg/hr
+  scaling_basis: cut_parts
+notes: Finish machining of cut stock to machined_part_raw; placeholder path for seed factory modeling.
+process_type: continuous

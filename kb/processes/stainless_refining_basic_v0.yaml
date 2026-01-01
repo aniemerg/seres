@@ -4,6 +4,7 @@ name: Basic stainless refining and casting
 layer_tags:
   - layer_4
   - layer_5
+process_type: batch
 inputs:
   - item_id: stainless_steel_ingot
     qty: 1.05
@@ -27,11 +28,12 @@ resource_requirements:
     qty: 0.6
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: "Electric melting/refining and holding energy for stainless conversion; placeholder."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Melt, refine, and cast billet/slab; batch cycle includes heat-up and tap."
 notes: "Refines stainless steel ingot into stainless billet or slab; adaptable to ISRU feedstocks."

@@ -4,29 +4,33 @@ kind: process
 layer_tags:
 - layer_6
 inputs:
-  - item_id: machined_part_raw
-    qty: 3.0
-    unit: kg
-  - item_id: cutting_fluid
-    qty: 0.5
-    unit: L
-    notes: "Consumable coolant/lubricant for machining"
+- item_id: machined_part_raw
+  qty: 3.0
+  unit: kg
+- item_id: cutting_fluid
+  qty: 0.5
+  unit: L
+  notes: Consumable coolant/lubricant for machining
 outputs:
-  - item_id: aluminum_housing_machined_v0
-    qty: 3.0
-    unit: kg
+- item_id: aluminum_housing_machined_v0
+  qty: 3.0
+  unit: kg
 requires_ids:
-  - milling_machine_general_v0
+- milling_machine_general_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 3.0
-  notes: "Energy intensity placeholder for final machining of aluminum housing"
+  unit: kWh/kg
+  scaling_basis: machined_part_raw
+  notes: Energy intensity placeholder for final machining of aluminum housing
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 12.0
-notes: "Final machining of machined_part_raw to aluminum_housing_machined, including pockets, ports, and surface finishing."
+  rate: 12.0
+  rate_unit: kg/hr
+  scaling_basis: machined_part_raw
+notes: Final machining of machined_part_raw to aluminum_housing_machined, including pockets, ports, and surface finishing.
+process_type: continuous

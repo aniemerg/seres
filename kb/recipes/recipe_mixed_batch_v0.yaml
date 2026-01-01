@@ -1,0 +1,14 @@
+id: recipe_mixed_batch_v0
+kind: recipe
+target_item_id: mixed_batch
+steps:
+  - process_id: mixing_basic_v0
+    inputs:
+      - item_id: powder_components
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: mixed_batch
+        qty: 10.0
+        unit: kg
+notes: "Single-step recipe: produce mixed_batch via mixing_basic_v0."

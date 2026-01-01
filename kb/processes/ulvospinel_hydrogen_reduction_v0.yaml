@@ -1,5 +1,6 @@
 id: ulvospinel_hydrogen_reduction_v0
 kind: process
+process_type: batch
 name: Hydrogen reduction of ulvospinel
 layer_tags:
   - layer_4
@@ -29,11 +30,12 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
   notes: Heating to 900-1000°C plus H2 recycling from water electrolysis
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Reduction time in fluidized bed at temperature
 notes: |

@@ -2,29 +2,34 @@ id: screening_basic_v0
 kind: process
 name: Basic powder screening
 layer_tags:
-  - layer_2
-  - layer_5
+- layer_2
+- layer_5
 inputs:
-  - item_id: powder_metal_or_ceramic
-    qty: 1.0
-    unit: kg
+- item_id: powder_metal_or_ceramic
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: powder_feedstock
-    qty: 1.0
-    unit: kg
+- item_id: powder_feedstock
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - screening_equipment
+- screening_equipment
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.2
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.2
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
-  notes: "vibratory screen motor and air classifier fans for fine powders"
+  unit: kWh/kg
+  scaling_basis: powder_metal_or_ceramic
+  notes: vibratory screen motor and air classifier fans for fine powders
 time_model:
   type: linear_rate
-  hr_per_kg: 0.2
-  setup_hr: 0.05
-  notes: "feed, classify, and clean-down for fine powder screening"
-notes: Screening/classification of metal or ceramic powders to achieve target particle size distribution and remove agglomerates before pressing, sintering, or additive use.
+  rate: 5.0
+  rate_unit: kg/hr
+  scaling_basis: powder_metal_or_ceramic
+  notes: feed, classify, and clean-down for fine powder screening
+notes: Screening/classification of metal or ceramic powders to achieve target particle size distribution and remove agglomerates
+  before pressing, sintering, or additive use.
+process_type: continuous

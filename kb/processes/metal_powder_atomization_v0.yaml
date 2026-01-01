@@ -2,22 +2,26 @@ id: metal_powder_atomization_v0
 name: Metal Powder Atomization (Basic)
 kind: process
 inputs:
-  - item_id: metal_powder_v0
-    qty: 1.0
-    unit: kg
+- item_id: metal_powder_v0
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: metal_powder_atomization_v0
-    qty: 1.0
-    unit: kg
+- item_id: metal_powder_atomization_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: atomization_unit_v0
-    qty: 2.0
-    unit: hr
+- machine_id: atomization_unit_v0
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 2.0
+  unit: kWh/kg
+  scaling_basis: metal_powder_v0
 time_model:
   type: linear_rate
-  setup_hr: 0.3
-  rate_kg_per_hr: 20.0
-notes: "Placeholder atomization process: converts metal_powder_v0 to metal_powder_atomization_v0."
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: metal_powder_v0
+notes: 'Placeholder atomization process: converts metal_powder_v0 to metal_powder_atomization_v0.'
+process_type: continuous

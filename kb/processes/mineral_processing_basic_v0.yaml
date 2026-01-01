@@ -1,5 +1,6 @@
 id: mineral_processing_basic_v0
 kind: process
+process_type: batch
 name: Mineral processing (basic)
 layer_tags:
   - layer_4
@@ -24,9 +25,10 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Basic mineral processing to concentrate valuable minerals from ore or regolith. Includes crushing, screening, gravity separation, and magnetic separation. Typical recovery ~30-50% depending on ore grade. Produces concentrated mineral product and tailings. Used for processing lunar minerals."

@@ -2,31 +2,36 @@ id: plate_rolling_basic_v0
 kind: process
 name: Plate rolling (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: steel_billet_or_slab
-    qty: 100.0
-    unit: kg
+- item_id: steel_billet_or_slab
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: steel_plate_or_sheet
-    qty: 90.0
-    unit: kg
+- item_id: steel_plate_or_sheet
+  qty: 90.0
+  unit: kg
 byproducts:
-  - item_id: slag
-    qty: 10.0
-    unit: kg
+- item_id: slag
+  qty: 10.0
+  unit: kg
 requires_ids:
-  - plate_rolling_mill
+- plate_rolling_mill
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
-  notes: "Rolling mill motor power for deformation and reduction"
+  unit: kWh/kg
+  scaling_basis: steel_billet_or_slab
+  notes: Rolling mill motor power for deformation and reduction
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 100.0
-notes: Plate rolling process for reducing steel billets or slabs into flat plate or sheet. Multiple passes through rolling mill with controlled reduction per pass.
+  rate: 100.0
+  rate_unit: kg/hr
+  scaling_basis: steel_billet_or_slab
+notes: Plate rolling process for reducing steel billets or slabs into flat plate or sheet. Multiple passes through rolling
+  mill with controlled reduction per pass.
+process_type: continuous

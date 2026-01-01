@@ -1,6 +1,7 @@
 id: surface_treatment_station_shell_fabrication_v0
 name: Surface treatment station shell fabrication
 kind: process
+process_type: batch
 inputs:
   - item_id: raw_metal_block
     qty: 20.0
@@ -11,12 +12,13 @@ outputs:
     unit: unit
 resource_requirements:
   - machine_id: labor_bot_general_v0
-    amount: 5.0
+    qty: 5.0
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 25.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
 notes: "Fabrication of a 200 kg surface_treatment_station_shell_v0 from raw metal blocks; placeholder estimates."

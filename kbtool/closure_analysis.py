@@ -1,4 +1,6 @@
 """
+DEPRECATED: This file is deprecated. Use src/indexer/closure_analysis.py instead.
+
 Closure Analysis Tool
 
 Analyzes material closure for machines by recursively expanding BOMs and recipes
@@ -196,6 +198,11 @@ class ClosureAnalyzer:
             mass_kg = self._calculate_mass(item, qty, unit)
             self._accumulate(imported_items, item_id, qty, unit, mass_kg)
             cache_entry['imported'][item_id] = {'qty': qty, 'unit': unit, 'mass_kg': mass_kg}
+            self.expansion_cache[cache_key] = cache_entry
+            return
+
+        # Scrap items are terminal for closure analysis (ignored for raw/import tracking)
+        if self._is_scrap(item_id, item):
             self.expansion_cache[cache_key] = cache_entry
             return
 
@@ -410,6 +417,14 @@ class ClosureAnalyzer:
             return True
 
         return False
+
+    def _is_scrap(self, item_id: str, item: Dict) -> bool:
+        """
+        Check if an item should be treated as scrap/offal for closure analysis.
+
+        Scrap items are terminal nodes and do not trigger no-recipe errors.
+        """
+        return bool(item.get('is_scrap', False))
 
     def _calculate_mass(self, item: Dict, qty: float, unit: str) -> float:
         """

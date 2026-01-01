@@ -25,12 +25,18 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: conversion_efficiency
-  value: 0.20
-  notes: 20% typical efficiency for basic thermionic conversion
+  type: per_unit
+  value: 0.0
+  unit: kWh/kWh
+  scaling_basis: waste_heat
+  notes: 20% typical efficiency for basic thermionic conversion (no extra energy beyond heat input)
 time_model:
-  type: continuous
+  type: linear_rate
+  rate: 1.0
+  rate_unit: kWh/hr
+  scaling_basis: waste_heat
   notes: Continuous power generation from heat source
+process_type: continuous
 notes: |
   Basic thermionic converter for direct heat-to-electricity conversion.
   Source: ellery-et-al-2022-metalysis-fray-farthing-chen-process, Power-on-the-Moon-using-ISRU.txt

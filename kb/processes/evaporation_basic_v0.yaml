@@ -1,6 +1,7 @@
 id: evaporation_basic_v0
 name: Evaporation (basic)
 kind: process
+process_type: batch
 inputs:
 - item_id: photoresist_solution_v0
   qty: 0.05
@@ -15,10 +16,11 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: Placeholder energy for solvent evaporation
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.25
 notes: "Basic evaporation step: evaporate solvent from the spin-coating photoresist solution."

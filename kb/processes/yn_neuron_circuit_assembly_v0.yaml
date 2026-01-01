@@ -18,9 +18,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
+process_type: batch
 notes: "Assembles neuron circuit by integrating bias circuit into final neuron circuit module. Placeholder values."

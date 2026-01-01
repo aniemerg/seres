@@ -1,6 +1,7 @@
 id: cacl2_recycling_closed_loop_v0
 kind: process
 name: CaCl2 electrolyte closed-loop recycling v0
+process_type: batch
 inputs:
 - item_id: cacl2_electrolyte_v0
   qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Placeholder CaCl2 electrolyte closed-loop recycling process. Recycles used electrolyte back into recycled form."

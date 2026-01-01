@@ -1,5 +1,6 @@
 id: lathe_engine_assembly_v0
 kind: process
+process_type: batch
 name: Lathe engine assembly
 layer_tags:
 - layer_6
@@ -29,16 +30,17 @@ outputs:
     unit: unit
 resource_requirements:
   - machine_id: assembly_station
-    amount: 1.0
+    qty: 1.0
     unit: unit
   - machine_id: labor_bot_general_v0
-    amount: 3.0
+    qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 25.0
-  notes: "Estimated energy for assembling lathe engine from subassemblies"
+  unit: kWh
+  notes: "Assembly energy for 1-unit batch (tooling, alignment, testing)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
 notes: "Placeholder lathe_engine_assembly process; refine BOM and step durations as design evolves."

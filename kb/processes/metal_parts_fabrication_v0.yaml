@@ -1,6 +1,7 @@
 id: metal_parts_fabrication_v0
 kind: process
 name: Metal parts fabrication v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -18,10 +19,11 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
-  notes: Conservative energy intensity for basic metal parts fabrication
+  unit: kWh
+  notes: Conservative energy per batch for basic metal parts fabrication
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: Placeholder metal parts fabrication path producing cast_metal_parts from base_metal_parts.

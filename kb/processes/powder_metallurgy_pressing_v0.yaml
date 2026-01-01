@@ -2,31 +2,35 @@ id: powder_metallurgy_pressing_v0
 kind: process
 name: Powder Metallurgy Pressing (Basic)
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: tungsten_powder
-    qty: 0.2
-    unit: kg
+- item_id: tungsten_powder
+  qty: 0.2
+  unit: kg
 outputs:
-  - item_id: pressed_component
-    qty: 0.18
-    unit: kg
+- item_id: pressed_component
+  qty: 0.18
+  unit: kg
 byproducts:
-  - item_id: dust_fines_v0
-    qty: 0.02
-    unit: kg
+- item_id: dust_fines_v0
+  qty: 0.02
+  unit: kg
 requires_ids:
-  - pellet_press
+- pellet_press
 resource_requirements:
-  - machine_id: pellet_press
-    qty: 1.0
-    unit: hr
+- machine_id: pellet_press
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: tungsten_powder
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 10.0
-notes: "Placeholder powder metallurgy pressing step to form green compact from tungsten powder."
+  rate: 10.0
+  rate_unit: kg/hr
+  scaling_basis: tungsten_powder
+notes: Placeholder powder metallurgy pressing step to form green compact from tungsten powder.
+process_type: continuous

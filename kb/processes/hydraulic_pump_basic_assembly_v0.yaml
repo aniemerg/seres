@@ -1,6 +1,7 @@
 id: hydraulic_pump_basic_assembly_v0
 name: Hydraulic pump basic assembly v0
 kind: process
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -21,9 +22,10 @@ resource_requirements:
   qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 5.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Baseline assembly converting hydraulic_pump_small to hydraulic_pump_basic. Placeholder path until full BOM is defined."

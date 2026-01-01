@@ -23,7 +23,11 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  total_energy_kwh: 0.5
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
 time_model:
-  total_time_hr: 4.0
+  type: batch
+  hr_per_batch: 4.0
 notes: "Electrical wiring and control system installation. Includes running wires, installing conduit, mounting control panels, connecting switches and sensors, and testing circuits. Used in machine assembly, building electrical, and equipment integration. Follows electrical codes and safety practices."
+process_type: batch

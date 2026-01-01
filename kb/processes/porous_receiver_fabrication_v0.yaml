@@ -1,5 +1,6 @@
 id: porous_receiver_fabrication_v0
 kind: process
+process_type: batch
 name: Porous volumetric receiver fabrication
 layer_tags:
   - layer_4
@@ -21,11 +22,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 2.0
+  unit: kWh
   notes: "Placeholder energy for porous receiver fabrication"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.5
 notes: |-
   Fabrication process for volumetric receiver with a porous absorber. Placeholder

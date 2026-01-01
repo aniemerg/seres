@@ -14,9 +14,11 @@ outputs:
     unit: kg
 resource_requirements: []
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.2
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 notes: "Synthesis of TIM from silicone polymer and curing agent to produce TIM material (placeholder; future polymer processing may refine)."
+process_type: batch

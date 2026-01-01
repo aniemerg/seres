@@ -1,6 +1,7 @@
 id: frame_fabrication_basic_v0
 kind: process
 name: Basic structural frame fabrication
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -16,13 +17,14 @@ requires_ids:
 - metal_forming_basic_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 3.0
+  qty: 3.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 6.0
+  unit: kWh
   notes: "Energy for forming a medium structural frame"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Placeholder process: fabricate structural_frame_medium from steel_stock using basic forming"

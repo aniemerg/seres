@@ -2,33 +2,38 @@ id: powder_processing_v0
 kind: process
 name: Powder processing and mixing
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: powder_metal_or_ceramic
-    qty: 0.9
-    unit: kg
-  - item_id: binder_material
-    qty: 0.1
-    unit: kg
+- item_id: powder_metal_or_ceramic
+  qty: 0.9
+  unit: kg
+- item_id: binder_material
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: processed_powder_mixture
-    qty: 1.0
-    unit: kg
+- item_id: processed_powder_mixture
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - powder_mixer
-  - screening_equipment
+- powder_mixer
+- screening_equipment
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
-  notes: "Mixing and screening operations for powder preparation"
+  unit: kWh/kg
+  scaling_basis: powder_metal_or_ceramic
+  notes: Mixing and screening operations for powder preparation
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  setup_hr: 0.5
-  notes: "Powder mixing with binder, screening to remove agglomerates"
-notes: "Process metal, ceramic, or carbon powder with binder for molding or sintering. Includes mixing, blending, and screening to achieve homogeneous mixture suitable for pressing or sintering operations."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: powder_metal_or_ceramic
+  notes: Powder mixing with binder, screening to remove agglomerates
+notes: Process metal, ceramic, or carbon powder with binder for molding or sintering. Includes mixing, blending, and screening
+  to achieve homogeneous mixture suitable for pressing or sintering operations.
+process_type: continuous

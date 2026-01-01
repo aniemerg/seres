@@ -8,7 +8,7 @@ inputs:
   - item_id: calcium_oxide
     qty: 1.0
     unit: kg
-  - item_id: hydrochloric_acid_v0
+  - item_id: hydrochloric_acid
     qty: 1.30
     unit: kg
 outputs:
@@ -26,11 +26,12 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
-  notes: Highly exothermic reaction plus drying energy
+  unit: kWh
+  notes: Highly exothermic reaction plus drying energy (1 kg CaO batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: Reaction and drying time
 notes: |
@@ -72,3 +73,4 @@ notes: |
   Alternative use: Desiccant, road de-icing (Earth), dust control
   Heat of reaction can be recovered for other processes
   Essential process for FFC Cambridge sustainability
+process_type: batch

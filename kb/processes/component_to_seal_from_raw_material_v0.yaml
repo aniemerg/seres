@@ -3,6 +3,7 @@ kind: process
 name: Produce component_to_seal from steel stock (local)
 layer_tags:
   - layer_5
+process_type: batch
 inputs:
   - item_id: steel_plate_or_sheet
     qty: 1.0
@@ -14,13 +15,14 @@ outputs:
 requires_ids: []
 resource_requirements:
   - machine_id: labor_bot_general_v0
-    amount: 0.5
+    qty: 0.5
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Placeholder energy for local component production"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Local production path to convert 1 kg of steel stock into component_to_seal; replace with actual process later."

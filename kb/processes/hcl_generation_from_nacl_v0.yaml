@@ -1,5 +1,6 @@
 id: hcl_generation_from_nacl_v0
 kind: process
+process_type: batch
 name: HCl generation from NaCl using nitric acid
 layer_tags:
   - layer_3
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 1.5
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.5
-  notes: Moderate heating for HCl gas evolution
+  unit: kWh
+  notes: Moderate heating for HCl gas evolution (1 kg NaCl batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Acid displacement reaction time
 notes: |

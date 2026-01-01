@@ -19,11 +19,13 @@ resource_requirements:
     qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: "Energy for PCB population with components"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "PCB population with components; placeholder values"
 notes: "Populate bare PCB with components and prepare for soldering. Placeholder values; refine with actual BOM and process details."
+process_type: batch

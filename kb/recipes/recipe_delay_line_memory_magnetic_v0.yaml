@@ -1,11 +1,22 @@
 id: recipe_delay_line_memory_magnetic_v0
 kind: recipe
 name: Recipe for magnetic delay line memory v0
-produces_id: delay_line_memory_magnetic_v0
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
 target_item_id: delay_line_memory_magnetic_v0
+inputs:
+  - item_id: pcb_assembled_board
+    qty: 0.15
+    unit: kg
+  - item_id: wire_copper_magnet
+    qty: 0.10
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: delay_line_memory_magnetic_v0
+    qty: 0.5
+    unit: kg
 steps:
 - process_id: delay_line_memory_magnetic_production_v0
   notes: "Produce one magnetic delay line memory element."

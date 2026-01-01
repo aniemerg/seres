@@ -4,6 +4,7 @@ name: Metalysis FFC reduction
 layer_tags:
 - layer_4
 - layer_5
+process_type: batch
 inputs:
 - item_id: ilmenite_concentrate
   qty: 1.0
@@ -21,11 +22,12 @@ resource_requirements:
   qty: 0.8
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.5
-  notes: Placeholder energy intensity for Metalysis FFC reduction
+  unit: kWh
+  notes: Placeholder energy intensity for Metalysis FFC reduction (2.5 kWh/kg batch).
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Simple 1-hour batch (placeholder)
 notes: |

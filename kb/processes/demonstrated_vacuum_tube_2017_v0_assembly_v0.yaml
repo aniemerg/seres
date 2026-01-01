@@ -25,9 +25,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.6
 notes: "Demo assembly: combine a glass envelope vacuum_tube_v0 with vacuum_tube_subassembly to form demonstrated_vacuum_tube_2017_v0. Placeholder mass balance: 0.5 kg product + 19.5 kg dust_fines byproduct from ~20 kg inputs."
+process_type: batch

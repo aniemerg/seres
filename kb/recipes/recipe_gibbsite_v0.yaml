@@ -17,5 +17,16 @@ outputs:
     unit: kg
 steps:
   - process_id: chemical_mixing_basic_v0
+    inputs:
+      - item_id: sodium_aluminate_solution
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: gibbsite
+        qty: 0.3
+        unit: kg
     notes: "Hydrolyze aluminate to precipitate Al(OH)3"
 notes: "Placeholder gibbsite precipitation from sodium aluminate solution."

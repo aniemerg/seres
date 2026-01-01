@@ -1,5 +1,6 @@
 id: ree_extraction_kreep_v0
 kind: process
+process_type: batch
 name: Rare earth element extraction from KREEP basalts
 layer_tags:
   - layer_5
@@ -40,11 +41,12 @@ resource_requirements:
     qty: 20.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 150.0
+  type: fixed_per_batch
+  value: 180.0
+  unit: kWh
   notes: Energy-intensive acid leaching, separation, and calcination
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 48.0
   notes: Multi-stage leaching, extraction, and purification
 notes: |

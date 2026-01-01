@@ -14,9 +14,11 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: Placeholder panel-structure formation from a raw metal block to produce trigon_panel_structure_v0.
+process_type: batch

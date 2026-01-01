@@ -14,9 +14,11 @@ resource_requirements:
     qty: 0.0
     unit: unit
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.3
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Seed PCB substrate fabrication: converts uncoated substrate to PCB substrate; placeholder values."
+process_type: batch

@@ -4,6 +4,7 @@ name: Photon-enhanced thermionic emission power generation
 layer_tags:
   - layer_5
   - layer_6
+process_type: continuous
 inputs:
   - item_id: solar_radiation
     qty: 1.0
@@ -25,11 +26,16 @@ resource_requirements:
     qty: 0.1
     unit: hr
 energy_model:
-  type: conversion_efficiency
-  value: 0.50
-  notes: 50% theoretical efficiency (photovoltaic + thermionic stages)
+  type: per_unit
+  value: 0.0
+  unit: kWh/kWh
+  scaling_basis: solar_radiation
+  notes: "Conversion efficiency modeled in outputs (0.5 kWh electric + 0.5 kWh waste heat per 1 kWh input)."
 time_model:
-  type: continuous
+  type: linear_rate
+  rate: 1.0
+  rate_unit: kWh/hr
+  scaling_basis: solar_radiation
   notes: Continuous power generation during solar illumination
 notes: |
   Photon-Enhanced Thermionic Emission (PETE) power generation system.

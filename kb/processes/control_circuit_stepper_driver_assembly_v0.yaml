@@ -1,6 +1,7 @@
 id: control_circuit_stepper_driver_assembly_v0
 kind: process
 name: Control circuit + stepper driver assembly v0
+process_type: batch
 layer_tags:
 - layer_7
 - layer_8
@@ -18,11 +19,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
   notes: "Energy for final electronics-to-driver assembly"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
   notes: "Final assembly and QA"
 notes: "Final assembly step: couple assembled electronics with driver interfaces to form control circuit for stepper driver."

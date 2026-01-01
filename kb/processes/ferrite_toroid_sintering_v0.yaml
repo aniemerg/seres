@@ -1,6 +1,7 @@
 id: ferrite_toroid_sintering_v0
 kind: process
 name: Ferrite toroid sintering
+process_type: batch
 layer_tags:
   - layer_6
 inputs:
@@ -19,11 +20,12 @@ resource_requirements:
     qty: 0.8
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 2.5
-  notes: "Sintering furnace energy for ferrite toroid compacts."
+  unit: kWh
+  notes: "Sintering furnace energy for ferrite toroid compacts (2.5 kWh/kg * 1.0 kg output)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: "Pressing, binder burn-out, and sintering soak."
 notes: "Placeholder sintering step for ferrite toroids used in magnetic components; uses generic powder feedstock and generic output until specific ferrite material is modeled."

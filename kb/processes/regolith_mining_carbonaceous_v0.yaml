@@ -3,6 +3,7 @@ kind: process
 name: Carbonaceous regolith mining v0
 layer_tags:
 - layer_2
+process_type: boundary
 inputs: []
 outputs:
 - item_id: regolith_carbonaceous
@@ -15,11 +16,15 @@ resource_requirements:
   unit: hr
 
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_carbonaceous
 
 time_model:
-  type: fixed_time
-  hr_per_batch: 6.0
+  type: linear_rate
+  rate: 8.333
+  rate_unit: kg/hr
+  scaling_basis: regolith_carbonaceous
 
 notes: Excavation of carbonaceous chondrite material from meteorite impact sites. Less abundant than silicate regolith but rich in carbon and volatiles.

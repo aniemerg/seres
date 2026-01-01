@@ -17,11 +17,15 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.8
-  notes: "Placeholder energy per kg for sealing fabrication"
+  unit: kWh/kg
+  scaling_basis: silicone_polymer
+  notes: Placeholder energy per kg for sealing fabrication
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 0.6
-notes: "Placeholder cell sealing fabrication using silicone polymer; basic forming and curing."
+  rate: 0.6
+  rate_unit: kg/hr
+  scaling_basis: silicone_polymer
+notes: Placeholder cell sealing fabrication using silicone polymer; basic forming and curing.
+process_type: continuous

@@ -2,21 +2,32 @@ id: balancing_dynamic_basic_v0
 kind: process
 name: Dynamic balancing (basic)
 layer_tags:
-  - layer_6
-inputs: []
-outputs: []
+- layer_6
+inputs:
+- item_id: machined_part_raw
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: machined_part_raw
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - balancing_machine
+- balancing_machine
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
-  notes: "spin motors and measurement electronics for iterative balancing"
+  unit: kWh/kg
+  scaling_basis: machined_part_raw
+  notes: spin motors and measurement electronics for iterative balancing
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  notes: "includes mount, spin-test, adjust (add/remove material), re-test cycles"
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: machined_part_raw
+  notes: includes mount, spin-test, adjust (add/remove material), re-test cycles
 notes: Dynamic balance rotating assemblies to minimize vibration and runout.
+process_type: continuous

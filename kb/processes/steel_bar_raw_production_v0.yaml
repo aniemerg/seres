@@ -9,9 +9,13 @@ outputs:
 requires_ids: []
 resource_requirements: []
 energy_model:
-  type: boundary
-  notes: "Placeholder external supply of steel_bar_raw"
+  type: fixed_per_batch
+  value: 0.1
+  unit: kWh
+  notes: "Placeholder external supply of steel_bar_raw; boundary semantics not yet supported"
 time_model:
-  type: boundary
-  notes: "No processing time; material supplied externally"
+  type: batch
+  hr_per_batch: 0.1
+  notes: "Placeholder external supply; material supplied externally"
 notes: "Placeholder production path for steel_bar_raw to enable local KB closure until a real process chain is defined."
+process_type: batch

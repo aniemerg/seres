@@ -5,6 +5,20 @@ steps:
   - process_id: mixing_basic_v0
     est_time_hr: 1.0
     labor_hours: 0.5
+    inputs:
+      - item_id: alumina_powder
+        qty: 0.5
+        unit: kg
+      - item_id: silica_purified
+        qty: 0.3
+        unit: kg
+      - item_id: kaolinite_clay
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: ceramic_powder_mixture
+        qty: 1.0
+        unit: kg
     notes: "Blend ceramic powder components (alumina, silica, kaolin, etc.) in desired proportions"
   - process_id: ball_milling_v0
     est_time_hr: 8.0

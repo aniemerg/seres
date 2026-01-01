@@ -2,31 +2,36 @@ id: sintering_basic_v0
 kind: process
 name: Basic sintering
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: powder_metal_or_ceramic
-    qty: 1.0
-    unit: kg
+- item_id: powder_metal_or_ceramic
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: sintered_parts
-    qty: 0.95
-    unit: kg
+- item_id: sintered_parts
+  qty: 0.95
+  unit: kg
 requires_ids:
-  - furnace_high_temp
-  - controlled_atmosphere_chamber
-  - hydraulic_press
+- furnace_high_temp
+- controlled_atmosphere_chamber
+- hydraulic_press
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
-  notes: "High temperature heating below melting point, typically 800-1400°C depending on material"
+  unit: kWh/kg
+  scaling_basis: powder_metal_or_ceramic
+  notes: High temperature heating below melting point, typically 800-1400°C depending on material
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
-  setup_hr: 1.0
-  notes: "Pressing, furnace heat-up, sintering hold time, controlled cooling"
-notes: Sintering process for consolidating powder materials (metal, ceramic) into solid parts by heating below melting point. Diffusion bonding creates strong structures.
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: powder_metal_or_ceramic
+  notes: Pressing, furnace heat-up, sintering hold time, controlled cooling
+notes: Sintering process for consolidating powder materials (metal, ceramic) into solid parts by heating below melting point.
+  Diffusion bonding creates strong structures.
+process_type: continuous

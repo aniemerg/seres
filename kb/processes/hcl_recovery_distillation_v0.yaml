@@ -2,25 +2,30 @@ id: hcl_recovery_distillation_v0
 name: HCl recovery distillation v0
 kind: process
 inputs:
-  - item_id: spent_solution_v0
-    qty: 100.0
-    unit: kg
+- item_id: spent_solution_v0
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: hydrochloric_acid_v0
-    qty: 60.0
-    unit: kg
-  - item_id: chloride_salts_v0
-    qty: 40.0
-    unit: kg
+- item_id: hydrochloric_acid
+  qty: 60.0
+  unit: kg
+- item_id: chloride_salts_v0
+  qty: 40.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.8
+  unit: kWh/kg
+  scaling_basis: spent_solution_v0
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 40.0
-notes: "Seed from seed paper review; placeholder HCl recovery distillation from spent solution. Mass balance: 100 kg input -> 60 kg HCl + 40 kg salts."
+  rate: 40.0
+  rate_unit: kg/hr
+  scaling_basis: spent_solution_v0
+notes: 'Seed from seed paper review; placeholder HCl recovery distillation from spent solution. Mass balance: 100 kg input
+  -> 60 kg HCl + 40 kg salts.'
+process_type: continuous

@@ -1,6 +1,7 @@
 id: metal_spinning_process_v0
 kind: process
 name: Metal spinning process v0
+process_type: batch
 layer_tags:
 - layer_4
 - layer_5
@@ -18,13 +19,14 @@ byproducts:
   unit: kg
 resource_requirements:
 - machine_id: spinning_machine_v0
-  amount: 1.0
+  qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
-  value: 0.5
-  notes: Spin-form sheet into shell; energy proxy based on mass processed
+  type: fixed_per_batch
+  value: 15.0
+  unit: kWh
+  notes: Spin-form sheet into shell; 0.5 kWh/kg * 30 kg per batch
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
 notes: Spin forming operation converting stainless steel sheet into a cylindrical tank shell; scrap generated as byproduct.

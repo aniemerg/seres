@@ -1,5 +1,6 @@
 id: mixing_and_blending_v0
 kind: process
+process_type: batch
 name: Mixing and blending
 layer_tags:
   - layer_5
@@ -22,7 +23,12 @@ resource_requirements:
     qty: 0.5
     unit: hr
 energy_model:
-  total_energy_kwh: 0.3
+  type: fixed_per_batch
+  value: 0.3
+  unit: kWh
+  notes: "Mixing cycle energy for 1 kg batch"
 time_model:
-  total_time_hr: 0.5
+  type: batch
+  hr_per_batch: 0.5
+  notes: "Loading, mixing, and unloading per batch"
 notes: "Mixing and blending of multiple materials to create homogeneous mixtures. Includes dry mixing of powders, wet mixing of liquids, paste mixing, and blending of composites. Methods: tumbler mixing, paddle mixing, ribbon blending, ball milling, or high-shear mixing. Used for creating alloy powders, ceramic slurries, composite materials, chemical formulations, and concrete/mortar. Mixing time and energy vary by material viscosity and desired homogeneity. Minimal material loss. Critical for material preparation in metallurgy, ceramics, composites, and chemical processing."

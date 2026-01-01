@@ -2,22 +2,26 @@ id: electrical_testing_and_burn_in_v0
 kind: process
 name: Electrical testing and burn-in
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs: []
 outputs: []
 requires_ids:
-  - test_bench_electrical
+- test_bench_electrical
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.5
-  notes: "power supply and load testing equipment for extended burn-in cycles"
+  unit: kWh
+  notes: power supply and load testing equipment for extended burn-in cycles
 time_model:
-  type: linear_rate
-  hr_per_kg: 4.0
-  notes: "extended burn-in testing at elevated temperature or power to screen for early failures"
-notes: Electrical burn-in and reliability testing for electronic assemblies, motors, power supplies, and electrical equipment. Extended operation at rated or elevated conditions to identify infant mortality failures. Includes functional testing, insulation resistance, and performance verification.
+  type: batch
+  hr_per_batch: 4.0
+  notes: extended burn-in testing at elevated temperature or power to screen for early failures
+notes: Electrical burn-in and reliability testing for electronic assemblies, motors, power supplies, and electrical equipment.
+  Extended operation at rated or elevated conditions to identify infant mortality failures. Includes functional testing, insulation
+  resistance, and performance verification.
+process_type: batch

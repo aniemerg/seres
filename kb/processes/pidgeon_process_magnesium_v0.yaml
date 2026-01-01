@@ -1,6 +1,7 @@
 id: pidgeon_process_magnesium_v0
 kind: process
 name: Pidgeon process for magnesium extraction
+process_type: batch
 layer_tags:
   - layer_4
   - layer_5
@@ -26,11 +27,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 16.0
+  unit: kWh
   notes: High temperature reduction above 1000°C in vacuum/low pressure
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Vapor generation and condensation time
 notes: |

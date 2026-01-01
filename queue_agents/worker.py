@@ -117,7 +117,7 @@ def execute_queue_lease(agent_name: str) -> Dict[str, Any]:
     cmd = [
         str(VENV_PYTHON),
         "-m",
-        "kbtool",
+        "src.cli",
         "queue",
         "lease",
         "--agent",
@@ -138,7 +138,11 @@ def execute_queue_lease(agent_name: str) -> Dict[str, Any]:
 
         # Parse the lease output
         # Format: "Leased: <item_id>" or "No pending items"
-        if "No pending items" in output or "no items" in output.lower():
+        if (
+            "No pending items" in output
+            or "no items" in output.lower()
+            or "queue empty" in output.lower()
+        ):
             return {"available": False, "message": "No work available"}
 
         # Try to parse as JSON (if output is JSON)
@@ -187,7 +191,7 @@ def execute_queue_complete(item_id: str, agent_name: str) -> Dict[str, Any]:
     cmd = [
         str(VENV_PYTHON),
         "-m",
-        "kbtool",
+        "src.cli",
         "queue",
         "complete",
         "--id",
@@ -239,7 +243,7 @@ def check_gap_resolved(item_id: str) -> bool:
 
 def execute_run_indexer() -> Dict[str, Any]:
     """Execute the indexer (plain Python function, not a tool)."""
-    cmd = [str(VENV_PYTHON), "-m", "kbtool", "index"]
+    cmd = [str(VENV_PYTHON), "-m", "src.cli", "index"]
 
     try:
         proc = subprocess.run(
@@ -306,7 +310,7 @@ def execute_queue_release_direct(item_id: str, agent_name: str) -> Dict[str, Any
     cmd = [
         str(VENV_PYTHON),
         "-m",
-        "kbtool",
+        "src.cli",
         "queue",
         "release",
         "--id",

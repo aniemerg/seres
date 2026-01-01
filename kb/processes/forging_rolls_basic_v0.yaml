@@ -1,5 +1,6 @@
 id: forging_rolls_basic_v0
 kind: process
+process_type: batch
 name: Forging rolling mill rolls (basic)
 layer_tags:
   - layer_6
@@ -19,11 +20,12 @@ resource_requirements:
     qty: 6.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 4.5
-  notes: "Heating 240 kg steel billet to ~1150-1200C and forging work"
+  type: fixed_per_batch
+  value: 1080.0
+  unit: kWh
+  notes: "Heating 240 kg steel billet to ~1150-1200C and forging work (4.5 kWh/kg × 240 kg)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.5
   notes: "Heat soak, multiple forging passes, and controlled cooling per roll set"
 notes: "Forge pair of rolling mill rolls from steel billets, forming journals and rough diameter prior to heat treatment and grinding. Uses high-force press/hammer and custom dies."

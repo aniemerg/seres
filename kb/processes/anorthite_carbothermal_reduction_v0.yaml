@@ -1,5 +1,6 @@
 id: anorthite_carbothermal_reduction_v0
 kind: process
+process_type: batch
 name: Carbothermal reduction of anorthite
 layer_tags:
   - layer_4
@@ -32,11 +33,12 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 14.0
+  unit: kWh
   notes: Very high temperature carbothermal reduction at 1650-1860°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: Three hours at temperature per research papers
 notes: |

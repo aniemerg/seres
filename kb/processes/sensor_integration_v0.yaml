@@ -19,11 +19,13 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Sensor installation and wiring operations"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: "Install sensors, wire connections, calibrate"
 notes: "Integration of sensors into equipment and systems. Includes mounting, wiring, and basic calibration of temperature, pressure, position, and other sensors."
+process_type: batch

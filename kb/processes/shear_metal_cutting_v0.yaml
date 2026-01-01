@@ -17,14 +17,18 @@ byproducts:
     unit: kg
 resource_requirements:
   - machine_id: metal_shear_or_saw
-    amount: 1.0
+    qty: 1.0
     unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.4
-  notes: "Placeholder shear operation energy estimate"
+  unit: kWh/kg
+  scaling_basis: steel_block_raw_v0
+  notes: Placeholder shear operation energy estimate
 time_model:
   type: linear_rate
-  setup_hr: 0.05
-  rate_kg_per_hr: 20.0
-notes: "Placeholder shear operation; derived from generic cutting processes to enable KB modeling"
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: steel_block_raw_v0
+notes: Placeholder shear operation; derived from generic cutting processes to enable KB modeling
+process_type: continuous

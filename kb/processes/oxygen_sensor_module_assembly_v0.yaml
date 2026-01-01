@@ -24,9 +24,11 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
+process_type: batch
 notes: "Assemble zirconia oxygen sensor element with electronics packaging into oxygen sensor module. Assumes 0.75 kg electronics packaging input to balance mass; 0.25 kg zirconia element; 0.2 kg waste scrap."

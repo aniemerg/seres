@@ -2,29 +2,37 @@ id: welding_tig_basic_v0
 kind: process
 name: TIG welding basic
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs: []
 outputs: []
 requires_ids:
-  - welding_tig_unit_v0
-  - welding_tools_set
+- welding_tig_unit_v0
+- welding_tools_set
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
-  notes: "TIG welding arc power and inert gas flow"
+  unit: kWh
+  notes: TIG welding arc power and inert gas flow
 time_model:
-  type: linear_rate
-  hr_per_kg: 1.5
-  notes: "Setup, cleaning, tack welding, full welding passes with filler rod, post-weld inspection"
-notes: |
-  TIG (Tungsten Inert Gas) welding process for precision joining.
+  type: batch
+  hr_per_batch: 1.5
+  notes: Setup, cleaning, tack welding, full welding passes with filler rod, post-weld inspection
+notes: 'TIG (Tungsten Inert Gas) welding process for precision joining.
+
   Also known as GTAW (Gas Tungsten Arc Welding).
+
   Used for stainless steel, aluminum, and critical high-quality welds.
+
   Produces clean, precise welds with minimal spatter.
+
   Slower than MIG but produces superior weld quality.
+
   Required for leak-tight joints in pressure vessels and cryogenic equipment.
+
+  '
+process_type: batch

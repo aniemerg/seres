@@ -3,10 +3,7 @@ kind: process
 name: Highland regolith mining v0
 layer_tags:
 - layer_2
-inputs:
-- item_id: regolith_lunar_highlands
-  qty: 0.0
-  unit: kg
+inputs: []
 outputs:
 - item_id: regolith_lunar_highlands
   qty: 100.0
@@ -18,11 +15,16 @@ resource_requirements:
   unit: hr
 
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.5
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_highlands
 
 time_model:
-  type: fixed_time
-  hr_per_batch: 8.0
+  type: linear_rate
+  rate: 12.5
+  rate_unit: kg/hr
+  scaling_basis: regolith_lunar_highlands
 
 notes: Excavation of highland regolith for aluminum extraction
+process_type: continuous

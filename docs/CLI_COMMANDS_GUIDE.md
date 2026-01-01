@@ -1,594 +1,545 @@
-# Base Builder CLI Commands Guide
+# CLI Commands Guide
 
-Complete reference for interacting with simulations via individual commands.
+Complete reference for the unified CLI tool (`python -m src.cli`).
 
 ## Overview
 
-The `cli_commands` module provides a command-line interface for running individual simulation operations. Each command:
+The CLI provides three main categories of commands:
 
-1. Loads the simulation from disk
-2. Performs the requested action
-3. Saves the updated state automatically
-4. Exits
+1. **KB Tools** - Indexing, validation, auto-fix, closure analysis
+2. **Simulation** - Create and run simulations
+3. **Queue Tools** - Work queue management
 
-This allows you to interact with a simulation step-by-step without maintaining a persistent Python session or running an autonomous agent.
-
-## Quick Start
+## Quick Reference
 
 ```bash
-# View current state
-python -m base_builder.cli_commands view-state --sim-id my_sim
+# KB Tools
+python -m src.cli index                                    # Build KB index
+python -m src.cli validate --id process:regolith_mining_highlands_v0  # Validate item
+python -m src.cli auto-fix --dry-run                      # Preview auto-fixes
+python -m src.cli closure --all                           # Analyze material closure
 
-# Import materials
-python -m base_builder.cli_commands import --sim-id my_sim --item carbon_anode --quantity 2 --unit kg
+# Simulation
+python -m src.cli sim init --sim-id my_sim                # Create simulation
+python -m src.cli sim import --sim-id my_sim --item labor_bot_general_v0 --quantity 1 --unit unit
+python -m src.cli sim start-process --sim-id my_sim --process mining_v0 --duration 24
+python -m src.cli sim advance-time --sim-id my_sim --hours 24
+python -m src.cli sim view-state --sim-id my_sim          # View state
+python -m src.cli sim list                                 # List simulations
+python -m src.cli sim plan --process crushing_basic_v0      # Preflight a process/recipe
+python -m src.cli sim scaffold --sim-id demo --bootstrap labor_bot_general_v0
 
-# Start a process
-python -m base_builder.cli_commands start-process --sim-id my_sim \
-  --process alumina_extraction_from_highlands_v0 --scale 1 --duration 10
-
-# Preview what will happen
-python -m base_builder.cli_commands preview --sim-id my_sim --hours 10
-
-# Advance time to execute
-python -m base_builder.cli_commands advance-time --sim-id my_sim --hours 10
+# Queue Tools
+python -m src.cli queue lease --agent <name>                # Lease next queue item
+python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]
+python -m src.cli queue release --id <gap_type:item_id> --agent <name>
+python -m src.cli queue verify --id <gap_type:item_id>      # Check gap resolution
+python -m src.cli queue ls                                  # Queue status counts
 ```
 
-## Commands Reference
+---
 
-### view-state
+## KB Tools
 
-View complete simulation state including inventory, processes, and machines.
+### index
+
+Build KB index with validation.
 
 ```bash
-python -m base_builder.cli_commands view-state --sim-id <sim_id>
+python -m src.cli index [--kb-root KB_ROOT] [--out-dir OUT_DIR]
+```
+
+**Arguments:**
+- `--kb-root`: KB root directory (default: `kb`)
+- `--out-dir`: Output directory (default: `out`)
+
+**Output Files:**
+- `out/index.json` - Full dependency graph
+- `out/validation_report.md` - Human-readable validation summary
+- `out/validation_issues.jsonl` - All validation issues
+- `out/work_queue.jsonl` - Work queue items
+- `out/missing_fields.jsonl` - Missing required fields
+- `out/closure_errors.jsonl` - Material closure errors
+
+**Example:**
+```bash
+python -m src.cli index
+# Loading KB data...
+# Loaded: 870 processes, 2016 recipes, 1959 items, 398 BOMs
+# Running 017 validation...
+# Found 4 validation issues (0 errors, 4 warnings)
+# Indexed 5241 entries into out/index.json
+```
+
+---
+
+### validate
+
+Validate a specific KB item.
+
+```bash
+python -m src.cli validate --id <type:id> [--kb-root KB_ROOT] [--verbose]
+```
+
+**Arguments:**
+- `--id`: Item identifier in format `type:id` (e.g., `process:regolith_mining_highlands_v0`, `recipe:recipe_steel_plate_v0`)
+- `--kb-root`: KB root directory (default: `kb`)
+- `--verbose`: Show detailed output
+
+**Supported Types:**
+- `process` - Validate a process
+- `recipe` - Validate a recipe
+
+**Example:**
+```bash
+python -m src.cli validate --id process:regolith_mining_highlands_v0
+
+================================================================================
+VALIDATION RESULTS: process:regolith_mining_highlands_v0
+================================================================================
+
+Found 1 validation issue(s):
+  - 1 ERROR(s)
+  - 0 WARNING(s)
+
+ERRORS:
+1. process_type_required
+   Category: schema
+   Message: Missing required field 'process_type'
+   Field: process_type
+```
+
+---
+
+### auto-fix
+
+Automatically fix validation issues.
+
+```bash
+python -m src.cli auto-fix [--dry-run] [--max-fixes N] [--rule RULE] [--level LEVEL] [--input FILE]
+```
+
+**Arguments:**
+- `--dry-run`: Preview fixes without writing (recommended first)
+- `--max-fixes`: Maximum fixes to apply (default: unlimited)
+- `--rule`: Only fix specific rule (e.g., `process_type_required`)
+- `--level`: Only fix specific level (`error`, `warning`)
+- `--input`: Input file (default: `out/validation_issues.jsonl`)
+- `--kb-root`: KB root directory (default: `kb`)
+
+**Example:**
+```bash
+# Preview fixes
+python -m src.cli auto-fix --dry-run
+
+# Apply fixes
+python -m src.cli auto-fix
+
+# Fix only specific rule
+python -m src.cli auto-fix --rule process_type_required
+```
+
+**Note:** Auto-fix has limited coverage. Most issues require manual fixes or agent work.
+
+---
+
+### closure
+
+Analyze material closure for machines.
+
+```bash
+python -m src.cli closure {--machine MACHINE_ID | --all} [--output FILE]
+```
+
+**Arguments:**
+- `--machine`: Analyze specific machine
+- `--all`: Analyze all machines
+- `--output`: Output file (default: stdout)
+
+**Example:**
+```bash
+# Analyze specific machine
+python -m src.cli closure --machine crusher_basic_v0
+
+# Analyze all machines
+python -m src.cli closure --all --output out/closure_report.txt
 ```
 
 **Output:**
-- Current simulation time
-- Inventory (all items with quantities and units)
-- Active processes (with time remaining)
-- Machines built
-- Total imports from Earth
+- Raw materials (mined/collected locally)
+- Imported items (from Earth)
+- Unresolved items (missing recipes)
+- ISRU percentage
 
-**Example:**
+---
+
+## Queue Tools
+
+Work queue operations for leasing, completing, and verifying gaps.
+
+### queue lease
+
+Lease the next available queue item.
+
 ```bash
-$ python -m base_builder.cli_commands view-state --sim-id claude_base_001
+python -m src.cli queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]
+```
 
-=== Simulation: claude_base_001 ===
-Time: 465.4 hours (19.4 days)
+### queue complete
 
-Inventory (11 items):
-  carbon_anode: 6.00 kg
-  cryolite_flux: 1.00 kg
-  hydrochloric_acid: 20.00 kg
-  iron_metal_pure: 14.40 kg
-  regolith_lunar_highlands: 100.00 kg
-  ...
+Mark a leased item complete (optional verify runs indexer first).
 
-Active Processes (0):
+```bash
+python -m src.cli queue complete --id <gap_type:item_id> --agent <name> [--verify]
+```
 
-Machines Built (1):
-  labor_bot_general_v0
+### queue release
 
-Total Imports (9 items):
-  carbon_anode: 6.00 kg
-  ...
-  Total mass: ~27.5 kg
+Release a leased item back to pending.
+
+```bash
+python -m src.cli queue release --id <gap_type:item_id> --agent <name>
+```
+
+### queue verify
+
+Rebuild queue and verify one or more gaps are resolved.
+
+```bash
+python -m src.cli queue verify --id <gap_type:item_id> [--id <gap_type:item_id>] [--no-index]
+```
+
+### queue ls
+
+Show queue counts by status.
+
+```bash
+python -m src.cli queue ls
+```
+
+### queue add
+
+Add a manual gap to the queue (single or batch).
+
+```bash
+python -m src.cli queue add --gap-type quality_concern --item-id steel_melting_v0 --description "..."
+python -m src.cli queue add --file queue_tasks/discovered_issues.jsonl
+```
+
+### queue gap-types
+
+List registered gap types.
+
+```bash
+python -m src.cli queue gap-types
 ```
 
 ---
 
-### import
+## Simulation Commands
 
-Import an item from Earth. **Use sparingly** - imports are tracked as a failure metric.
+### sim init
+
+Create a new simulation.
 
 ```bash
-python -m base_builder.cli_commands import --sim-id <sim_id> \
-  --item <item_id> --quantity <number> --unit <unit>
+python -m src.cli sim init --sim-id <name>
 ```
 
 **Arguments:**
-- `--sim-id`: Simulation identifier
-- `--item`: Item ID from KB (e.g., `carbon_anode`, `labor_bot_general_v0`)
-- `--quantity`: Amount to import (float)
-- `--unit`: Unit of measurement (`kg`, `count`, `m3`, etc.)
+- `--sim-id`: Simulation identifier (required)
 
 **Example:**
 ```bash
-# Import 2 kg of carbon anodes
-python -m base_builder.cli_commands import --sim-id claude_base_001 \
-  --item carbon_anode --quantity 2 --unit kg
-
-# Import a machine
-python -m base_builder.cli_commands import --sim-id claude_base_001 \
-  --item lathe_engine_v0 --quantity 1 --unit count
+python -m src.cli sim init --sim-id lunar_base_001
+# ✓ Created simulation 'lunar_base_001'
+#   Location: simulations/lunar_base_001
+#   Log file: simulations/lunar_base_001/simulation.jsonl
 ```
-
-**Best Practices:**
-- Import only for bootstrapping (initial labor bots, critical machines)
-- Prefer ISRU (in-situ resource utilization) production
-- Check `total_imports_mass_kg` regularly to minimize Earth dependence
 
 ---
 
-### start-process
+### sim import
 
-Start a production process that will complete after a specified duration.
+Import items from Earth.
 
 ```bash
-python -m base_builder.cli_commands start-process --sim-id <sim_id> \
-  --process <process_id> --scale <number> --duration <hours>
+python -m src.cli sim import --sim-id <name> --item <item_id> --quantity <n> --unit <unit>
 ```
 
 **Arguments:**
-- `--sim-id`: Simulation identifier
-- `--process`: Process ID from KB (e.g., `alumina_extraction_from_highlands_v0`)
-- `--scale`: Scale factor (1.0 = normal, 2.0 = double, etc.) [default: 1.0]
-- `--duration`: How long to run the process (hours)
+- `--sim-id`: Simulation ID (required)
+- `--item`: Item ID from KB (required)
+- `--quantity`: Amount to import (required)
+- `--unit`: Unit (kg, unit, L, etc.) (required)
 
 **Example:**
 ```bash
-# Mine highland regolith for 8 hours
-python -m base_builder.cli_commands start-process --sim-id claude_base_001 \
-  --process regolith_mining_highlands_v0 --scale 1 --duration 8
-
-# Extract alumina at 1.5x scale for 10 hours
-python -m base_builder.cli_commands start-process --sim-id claude_base_001 \
-  --process alumina_extraction_from_highlands_v0 --scale 1.5 --duration 10
+python -m src.cli sim import --sim-id lunar_base_001 --item labor_bot_general_v0 --quantity 3 --unit unit
+# ✓ Imported 3.0 unit of 'labor_bot_general_v0'
 ```
 
 **Notes:**
-- Process must exist in KB (`kb/processes/*.yaml`)
-- Required inputs must be in inventory
-- Required machines must be built or imported
-- Multiple processes can run in parallel
-- Use `preview` before `advance-time` to verify outputs
+- Imports tracked separately in `total_imports`
+- Use sparingly - goal is local production
+- Shown in `view-state` output
 
-**Common Errors:**
+---
+
+### sim start-process
+
+Start a process.
+
+```bash
+python -m src.cli sim start-process --sim-id <name> --process <process_id> [--scale <n>] [--duration <hours>]
 ```
-✗ Failed to start process: Insufficient hydrochloric_acid: need 10.0 kg
-→ Solution: Import or produce the required input first
 
-✗ Failed to start process: Process 'xyz' not found in KB
-→ Solution: Check process ID spelling or create the process definition
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+- `--process`: Process ID from KB (required)
+- `--scale`: Scale factor for inputs/outputs (default: 1.0)
+- `--duration`: Duration in hours (optional - calculated if omitted)
+
+**Duration Modes:**
+
+**1. Agent-provided (explicit):**
+```bash
+python -m src.cli sim start-process --sim-id test --process mining_v0 --duration 10
+```
+
+**2. Calculated (from time_model):**
+```bash
+python -m src.cli sim start-process --sim-id test --process crushing_v0
+# Engine calculates duration from process time_model + inputs
+```
+
+**Example:**
+```bash
+python -m src.cli sim start-process --sim-id lunar_base_001 --process regolith_mining_highlands_v0 --duration 24
+# ✓ Started process 'regolith_mining_highlands_v0'
+#   Duration: 24.00 hours (provided)
+#   Ends at: 24.00 hours
 ```
 
 ---
 
-### run-recipe
+### sim run-recipe
 
-Execute a recipe to produce items (typically for building machines/parts).
+Execute a recipe (multi-step process).
 
 ```bash
-python -m base_builder.cli_commands run-recipe --sim-id <sim_id> \
-  --recipe <recipe_id> --quantity <number>
+python -m src.cli sim run-recipe --sim-id <name> --recipe <recipe_id> [--quantity <n>]
 ```
 
 **Arguments:**
-- `--sim-id`: Simulation identifier
-- `--recipe`: Recipe ID from KB (e.g., `recipe_motor_electric_small_v0`)
-- `--quantity`: Number of times to run the recipe [default: 1]
+- `--sim-id`: Simulation ID (required)
+- `--recipe`: Recipe ID from KB (required)
+- `--quantity`: Number of batches (default: 1)
 
 **Example:**
 ```bash
-# Build one motor
-python -m base_builder.cli_commands run-recipe --sim-id claude_base_001 \
-  --recipe recipe_motor_electric_small_v0 --quantity 1
+python -m src.cli sim run-recipe --sim-id lunar_base_001 --recipe recipe_steel_plate_v0 --quantity 5
+# ✓ Started recipe 'recipe_steel_plate_v0' (quantity: 5)
+#   Steps: 3
+#   Duration: 15.50 hours
+#   Ends at: 15.50 hours
+```
 
-# Produce 10 steel ingots
-python -m base_builder.cli_commands run-recipe --sim-id claude_base_001 \
-  --recipe recipe_steel_ingot_v0 --quantity 10
+---
+
+### sim build-machine
+
+Build a machine from its BOM.
+
+```bash
+python -m src.cli sim build-machine --sim-id <name> --machine <machine_id>
+```
+
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+- `--machine`: Machine ID from KB (required)
+
+**Example:**
+```bash
+python -m src.cli sim build-machine --sim-id lunar_base_001 --machine crusher_basic_v0
+# ✓ Built machine 'crusher_basic_v0'
+#   Parts consumed: 5
 ```
 
 **Notes:**
-- Recipes execute instantly (no time passage)
-- All input components must be in inventory
-- Recipes often involve multiple process steps
-- Check recipe file (`kb/recipes/*.yaml`) to see requirements
+- Consumes parts from inventory
+- Machine added to `machines_built` list
+- No time advancement (instant)
 
 ---
 
-### build-machine
+### sim advance-time
 
-Build a machine from its BOM (Bill of Materials).
+Advance simulation time.
 
 ```bash
-python -m base_builder.cli_commands build-machine --sim-id <sim_id> \
-  --machine <machine_id>
+python -m src.cli sim advance-time --sim-id <name> --hours <n>
 ```
 
 **Arguments:**
-- `--sim-id`: Simulation identifier
-- `--machine`: Machine ID with BOM defined (e.g., `powder_compactor_v0`)
+- `--sim-id`: Simulation ID (required)
+- `--hours`: Hours to advance (required)
+
+**What Happens:**
+1. Time advances by specified duration
+2. Processes with `ends_at <= new_time` complete
+3. Outputs added to inventory
+4. Energy calculated (014)
+5. Events logged
 
 **Example:**
 ```bash
-# Build a powder compactor
-python -m base_builder.cli_commands build-machine --sim-id claude_base_001 \
-  --machine powder_compactor_v0
+python -m src.cli sim advance-time --sim-id lunar_base_001 --hours 24
+# ✓ Advanced time by 24.0 hours
+#   New time: 24.00 hours (1.0 days)
+#   Processes completed: 1
+#   Total energy consumed: 50.00 kWh
+#
+# Completed processes:
+#   - regolith_mining_highlands_v0 (energy: 50.00 kWh)
+#       → regolith_lunar_highlands: 100.00 kg
+```
+
+---
+
+### sim preview
+
+Preview time advancement without committing.
+
+```bash
+python -m src.cli sim preview --sim-id <name> --hours <n>
+```
+
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+- `--hours`: Hours to preview (required)
+
+**Example:**
+```bash
+python -m src.cli sim preview --sim-id lunar_base_001 --hours 24
+# === Preview: +24.0 hours ===
+# Current time: 0.00 hours
+# After advance: 24.00 hours
+#
+# Processes completing (1):
+#   - regolith_mining_highlands_v0 (at 24.00h)
+#       → regolith_lunar_highlands: 100.00 kg
 ```
 
 **Notes:**
-- BOM must exist (`kb/boms/bom_<machine>_v0.yaml`)
-- All component items must be in inventory with correct quantities
-- Machine is added to `machines_built` list
-- Building consumes components from inventory
+- Non-destructive (no state changes)
+- Use to plan operations
+- Logged to event file
 
 ---
 
-### preview
+### sim view-state
 
-Preview what will happen when time advances, without actually committing changes.
+View current simulation state.
 
 ```bash
-python -m base_builder.cli_commands preview --sim-id <sim_id> --hours <number>
+python -m src.cli sim view-state --sim-id <name>
 ```
 
 **Arguments:**
-- `--sim-id`: Simulation identifier
-- `--hours`: Hours to preview (float)
+- `--sim-id`: Simulation ID (required)
 
 **Example:**
 ```bash
-$ python -m base_builder.cli_commands preview --sim-id claude_base_001 --hours 10
-
-=== Preview: Advance 10 hours ===
-Current time: 465.4h
-New time: 475.4h
-
-Processes completing: 1
-
-  Process: alumina_extraction_from_highlands_v0
-  Ends at: 475.4h
-  Outputs:
-    alumina_powder: +12.0 kg
-    processed_tailings: +98.0 kg
-```
-
-**Best Practice:**
-- **Always preview before advancing time**
-- Verify expected outputs
-- Check for errors or insufficient inputs
-- Confirm timing is correct
-
----
-
-### advance-time
-
-Advance simulation time, executing all processes that complete in that period.
-
-```bash
-python -m base_builder.cli_commands advance-time --sim-id <sim_id> --hours <number>
-```
-
-**Arguments:**
-- `--sim-id`: Simulation identifier
-- `--hours`: Hours to advance (float)
-
-**Example:**
-```bash
-$ python -m base_builder.cli_commands advance-time --sim-id claude_base_001 --hours 10
-
-Advancing time by 10.0 hours...
-✓ Time advanced
-  Old time: 465.4h
-  New time: 475.4h
-  Completed 1 processes
-```
-
-**Notes:**
-- State is automatically saved after time advancement
-- All processes ending ≤ new_time are completed
-- Outputs are added to inventory
-- Inputs were already consumed when process started
-
-**Workflow Pattern:**
-```bash
-# 1. Start a process
-start-process --sim-id my_sim --process mining_v0 --duration 8
-
-# 2. Preview (verify)
-preview --sim-id my_sim --hours 8
-
-# 3. Execute
-advance-time --sim-id my_sim --hours 8
-
-# 4. Check results
-view-state --sim-id my_sim
+python -m src.cli sim view-state --sim-id lunar_base_001
+# === Simulation: lunar_base_001 ===
+# Time: 24.0 hours (1.0 days)
+# Energy Consumed: 50.00 kWh
+#
+# Inventory (2 items):
+#   labor_bot_general_v0: 3.00 unit
+#   regolith_lunar_highlands: 100.00 kg
+#
+# Active Processes (0):
+#
+# Machines Built (0):
+#
+# Total Imports (1 items):
+#   labor_bot_general_v0: 3.00 unit
+#   Total imported mass: ~0.0 kg
 ```
 
 ---
 
-### list
+### sim list
 
-List all simulations with their current status.
+List all simulations.
 
 ```bash
-python -m base_builder.cli_commands list
+python -m src.cli sim list
 ```
 
 **Example:**
 ```bash
-$ python -m base_builder.cli_commands list
-
-=== Simulations ===
-
-claude_base_001:
-  Time: 465.4 hours (19.4 days)
-  Inventory: 11 items
-  Machines: 1
-
-test_motor:
-  Time: 120.0 hours (5.0 days)
-  Inventory: 5 items
-  Machines: 3
+python -m src.cli sim list
+# Found 3 simulation(s):
+#
+#   lunar_base_001
+#     Created: 2025-12-30T10:00:00.000000Z
+#     Path: /path/to/simulations/lunar_base_001
+#
+#   test_production
+#     Created: 2025-12-30T11:30:00.000000Z
+#     Path: /path/to/simulations/test_production
 ```
 
 ---
 
-## Complete Workflow Example
+## Legacy Commands (Deprecated)
 
-### Goal: Produce aluminum from highland regolith
+### base_builder CLI
 
+The old `base_builder.cli_commands` interface is deprecated. Use `python -m src.cli sim` instead.
+
+**Old:**
 ```bash
-SIM="claude_base_001"
+python -m base_builder.cli_commands view-state --sim-id test
+```
 
-# 1. Check current state
-python -m base_builder.cli_commands view-state --sim-id $SIM
-
-# 2. Import support materials (bootstrap)
-python -m base_builder.cli_commands import --sim-id $SIM --item carbon_anode --quantity 2 --unit kg
-python -m base_builder.cli_commands import --sim-id $SIM --item cryolite_flux --quantity 0.5 --unit kg
-python -m base_builder.cli_commands import --sim-id $SIM --item hydrochloric_acid --quantity 10 --unit kg
-
-# 3. Mine highland regolith
-python -m base_builder.cli_commands start-process --sim-id $SIM \
-  --process regolith_mining_highlands_v0 --scale 1 --duration 8
-
-# 4. Preview and advance
-python -m base_builder.cli_commands preview --sim-id $SIM --hours 8
-python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 8
-
-# 5. Extract alumina
-python -m base_builder.cli_commands start-process --sim-id $SIM \
-  --process alumina_extraction_from_highlands_v0 --scale 1 --duration 10
-
-python -m base_builder.cli_commands preview --sim-id $SIM --hours 10
-python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 10
-
-# 6. Smelt aluminum (Hall-Héroult process)
-python -m base_builder.cli_commands start-process --sim-id $SIM \
-  --process aluminum_smelting_hall_heroult_v0 --scale 1 --duration 8
-
-python -m base_builder.cli_commands preview --sim-id $SIM --hours 8
-python -m base_builder.cli_commands advance-time --sim-id $SIM --hours 8
-
-# 7. Verify results
-python -m base_builder.cli_commands view-state --sim-id $SIM | grep aluminum
+**New:**
+```bash
+python -m src.cli sim view-state --sim-id test
 ```
 
 ---
 
-## Command Chaining with Shell Scripts
+## See Also
 
-Create reusable production sequences:
+- **`docs/SIMULATION_GUIDE.md`** - Comprehensive simulation guide
+- **`docs/README.md`** - KB schema reference
+- **`docs/ADRs/`** - Architecture decision records
+- **`src/cli.py`** - CLI implementation
+- **`src/simulation/cli.py`** - Simulation CLI implementation
+### sim plan
 
-```bash
-#!/bin/bash
-# produce_aluminum.sh
-
-SIM_ID=$1
-SCALE=${2:-1}
-
-echo "=== Producing Aluminum (Scale: $SCALE) ==="
-
-# Mine highland regolith
-echo "Step 1: Mining highland regolith..."
-python -m base_builder.cli_commands start-process --sim-id $SIM_ID \
-  --process regolith_mining_highlands_v0 --scale $SCALE --duration 8
-python -m base_builder.cli_commands advance-time --sim-id $SIM_ID --hours 8
-
-# Extract alumina
-echo "Step 2: Extracting alumina..."
-python -m base_builder.cli_commands start-process --sim-id $SIM_ID \
-  --process alumina_extraction_from_highlands_v0 --scale $SCALE --duration 10
-python -m base_builder.cli_commands advance-time --sim-id $SIM_ID --hours 10
-
-# Smelt aluminum
-echo "Step 3: Smelting aluminum..."
-python -m base_builder.cli_commands start-process --sim-id $SIM_ID \
-  --process aluminum_smelting_hall_heroult_v0 --scale $SCALE --duration 8
-python -m base_builder.cli_commands advance-time --sim-id $SIM_ID --hours 8
-
-echo "✓ Aluminum production complete!"
-python -m base_builder.cli_commands view-state --sim-id $SIM_ID | grep aluminum_alloy_ingot
-```
-
-Usage: `./produce_aluminum.sh claude_base_001 1.5`
-
----
-
-## Tips & Best Practices
-
-### 1. Always Preview Before Advancing
+Preflight a process or recipe and show immediate blockers.
 
 ```bash
-# Good workflow
-start-process ...
-preview --hours X        # Check what happens
-advance-time --hours X   # Execute
-
-# Bad workflow
-start-process ...
-advance-time --hours X   # Blindly execute (risky!)
+python -m src.cli sim plan --process crushing_basic_v0
+python -m src.cli sim plan --recipe recipe_labor_bot_basic_v0
 ```
 
-### 2. Track Simulation Time
+**Output:**
+- Required machines/resources
+- Inputs and outputs (when specified)
+- Duration/energy calculation readiness (process only)
 
-Keep track of when processes complete:
+### sim scaffold
+
+Create a simulation with optional bootstrap imports.
 
 ```bash
-# Start process at t=100h for 8h duration
-start-process ... --duration 8
-# Process ends at t=108h
-
-# Advance to completion
-advance-time --hours 8   # Now at t=108h
+python -m src.cli sim scaffold --sim-id labor_bot_basic_isru --bootstrap labor_bot_general_v0,assembly_tools_basic
 ```
 
-### 3. Minimize Imports
-
-```bash
-# Check import mass regularly
-view-state --sim-id my_sim | grep "Total mass"
-
-# Goal: < 100 kg for bootstrapping
-# Anything beyond initial labor bots should be ISRU
-```
-
-### 4. Parallel Processes
-
-Multiple processes can run simultaneously:
-
-```bash
-# Start multiple processes
-start-process --process mining_v0 --duration 8
-start-process --process refining_v0 --duration 6
-start-process --process smelting_v0 --duration 4
-
-# Advance to when all complete
-advance-time --hours 8
-```
-
-### 5. Error Handling
-
-If a command fails, check:
-
-```bash
-# 1. Verify item exists
-grep -r "id: item_name" kb/items/
-
-# 2. Check inventory
-view-state --sim-id my_sim | grep item_name
-
-# 3. Verify process exists
-grep -r "id: process_name" kb/processes/
-
-# 4. Read process requirements
-cat kb/processes/process_name_v0.yaml
-```
-
----
-
-## Troubleshooting
-
-### "Insufficient inputs" Error
-
-```
-✗ Failed to start process: Insufficient hydrochloric_acid: need 10.0 kg
-```
-
-**Solutions:**
-1. Check inventory: `view-state --sim-id my_sim | grep hydrochloric_acid`
-2. Import if needed: `import --item hydrochloric_acid --quantity 10 --unit kg`
-3. Or produce via process: `start-process --process hcl_production_v0 ...`
-
-### "Process not found" Error
-
-```
-✗ Failed to start process: Process 'xyz_v0' not found in KB
-```
-
-**Solutions:**
-1. Verify process exists: `ls kb/processes/ | grep xyz`
-2. Check spelling and version (v0, v1, etc.)
-3. Create process definition if missing
-
-### State Not Persisting
-
-If changes don't persist between commands:
-
-- ✓ Commands automatically save state when they modify it
-- ✓ Each command loads from disk, performs action, saves, exits
-- If issues persist, check file permissions on `simulations/<sim_id>/simulation.jsonl`
-
-### Import Not Working
-
-```
-✗ Failed to import: Item 'xyz' not found in KB
-```
-
-**Solutions:**
-1. Verify item exists: `grep -r "id: xyz" kb/items/`
-2. Check if it's a machine: `grep -r "id: xyz" kb/items/machines/`
-3. Check if it's a material: `grep -r "id: xyz" kb/items/materials/`
-
----
-
-## Related Documentation
-
-- [Base Builder README](../base_builder/README.md) - Architecture and autonomous agent mode
-- [Interactive Mode Guide](../base_builder/INTERACTIVE_MODE.md) - Python REPL usage
-- [Knowledge Base Schema](../kb/schema/README.md) - KB structure and file formats
-
----
-
-## Advanced Usage
-
-### JSON Output for Scripting
-
-Parse command output for automation:
-
-```bash
-# Extract specific inventory item
-python -m base_builder.cli_commands view-state --sim-id my_sim 2>/dev/null | \
-  grep "aluminum_alloy_ingot:" | \
-  awk '{print $2}'
-```
-
-### Conditional Execution
-
-```bash
-# Only import if not enough material
-IRON=$(python -m base_builder.cli_commands view-state --sim-id my_sim 2>/dev/null | \
-  grep "iron_metal_pure:" | awk '{print $2}')
-
-if (( $(echo "$IRON < 10" | bc -l) )); then
-  python -m base_builder.cli_commands import --sim-id my_sim \
-    --item iron_metal_pure --quantity 10 --unit kg
-fi
-```
-
-### Parallel Simulations
-
-Run multiple simulations with different strategies:
-
-```bash
-# Strategy A: Maximum imports
-./run_strategy_a.sh sim_a
-
-# Strategy B: Minimum imports
-./run_strategy_b.sh sim_b
-
-# Compare results
-python -m base_builder.cli_commands view-state --sim-id sim_a | grep "Total mass"
-python -m base_builder.cli_commands view-state --sim-id sim_b | grep "Total mass"
-```
-
----
-
-## Getting Help
-
-```bash
-# General help
-python -m base_builder.cli_commands --help
-
-# Command-specific help
-python -m base_builder.cli_commands import --help
-python -m base_builder.cli_commands start-process --help
-```
-
-For issues or questions:
-- Check the [Knowledge Base](../kb/) for process/item definitions
-- Review [simulation logs](../simulations/<sim_id>/simulation.jsonl) for detailed events
-- File issues at https://github.com/anthropics/claude-code/issues
+**Bootstrap format:** `item_id[:qty[:unit]]`

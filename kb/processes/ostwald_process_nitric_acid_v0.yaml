@@ -27,13 +27,15 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 4.0
-  notes: Moderate temperature catalytic oxidation 600-800°C
+  unit: kWh
+  notes: Moderate temperature catalytic oxidation 600-800°C (per 1 kg NH3 batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: Multi-stage oxidation and absorption
+process_type: batch
 notes: |
   Ostwald process for producing nitric acid from ammonia via catalytic oxidation.
   Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt

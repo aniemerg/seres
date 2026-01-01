@@ -2,34 +2,38 @@ id: welded_fabrication_basic_v0
 kind: process
 name: Welded fabrication (basic)
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: steel_stock
-    qty: 1.0
-    unit: kg
-  - item_id: filler_wire_basic
-    qty: 0.05
-    unit: kg
+- item_id: steel_stock
+  qty: 1.0
+  unit: kg
+- item_id: filler_wire_basic
+  qty: 0.05
+  unit: kg
 outputs:
-  - item_id: welded_fabrications
-    qty: 1.0
-    unit: kg
+- item_id: welded_fabrications
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - welding_power_supply_v0
-  - welding_tools_set
-  - fixturing_workbench
+- welding_power_supply_v0
+- welding_tools_set
+- fixturing_workbench
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.4
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.4
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.5
-  notes: "Arc power and grinding/cleanup for basic structural weldments"
+  unit: kWh/kg
+  scaling_basis: steel_stock
+  notes: Arc power and grinding/cleanup for basic structural weldments
 time_model:
   type: linear_rate
-  hr_per_kg: 0.4
-  setup_hr: 0.1
-  notes: "Fit-up, tack, weld passes, and cleanup for simple frames"
+  rate: 2.5
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
+  notes: Fit-up, tack, weld passes, and cleanup for simple frames
 notes: Basic welded fabrication of steel frames and brackets. Produces welded fabrications from stock steel with filler.
+process_type: continuous

@@ -2,26 +2,32 @@ id: tube_bending_process_v0
 name: Tube bending
 kind: process
 inputs:
-  - item_id: aluminum_tube_stock
-    qty: 3.0
-    unit: kg
+- item_id: aluminum_tube_stock
+  qty: 3.0
+  unit: kg
 outputs:
-  - item_id: pipe_bent_sections
-    qty: 2.8
-    unit: kg
+- item_id: pipe_bent_sections
+  qty: 2.8
+  unit: kg
 byproducts:
-  - item_id: aluminum_scrap_v0
+  - item_id: metal_scrap
     qty: 0.2
     unit: kg
 resource_requirements:
-  - machine_id: bending_machine_v0
-    qty: 1.0
-    unit: hr
+- machine_id: bending_machine_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.3
+  unit: kWh/kg
+  scaling_basis: aluminum_tube_stock
+  notes: "Bending machine power per kg input"
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 4.0
-notes: "Bend aluminum tube stock into required straight sections; 0.2 kg becomes scrap."
+  rate: 4.0
+  rate_unit: kg/hr
+  scaling_basis: aluminum_tube_stock
+  notes: "Bending rate: 4 kg/hr throughput"
+notes: Bend aluminum tube stock into required straight sections; 0.2 kg becomes scrap.
+process_type: continuous

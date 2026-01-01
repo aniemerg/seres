@@ -2,27 +2,31 @@ id: tube_stock_forming_v0
 name: Tube stock forming (steel stock to metal_tubing_stock)
 kind: process
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: steel_stock
-    qty: 1.0
-    unit: kg
+- item_id: steel_stock
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: metal_tubing_stock
-    qty: 1.0
-    unit: kg
+- item_id: metal_tubing_stock
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - tube_bender
+- tube_bender
 resource_requirements:
-  - machine_id: bending_machine_v0
-    qty: 1.0
-    unit: unit
+- machine_id: bending_machine_v0
+  qty: 1.0
+  unit: unit
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.25
+  unit: kWh/kg
+  scaling_basis: steel_stock
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 4.0
-notes: "Form metal stock into tubing stock form; easy placeholder for seed modeling."
+  rate: 4.0
+  rate_unit: kg/hr
+  scaling_basis: steel_stock
+notes: Form metal stock into tubing stock form; easy placeholder for seed modeling.
+process_type: continuous

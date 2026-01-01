@@ -3,8 +3,14 @@ kind: process
 name: Stress relief annealing (basic)
 layer_tags:
   - layer_6
-inputs: []
-outputs: []
+inputs:
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
 requires_ids:
   - furnace_basic
 resource_requirements:
@@ -12,12 +18,13 @@ resource_requirements:
     qty: 0.4
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.8
-  notes: Furnace soak for stress relief.
+  unit: kWh
+  notes: Furnace soak for stress relief (1 kg batch).
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
   notes: Heat, soak, and controlled cool to relieve stresses.
+process_type: batch
 notes: Stress relief anneal for steel components after welding or machining to reduce residual stresses and distortion; parameters to be refined per alloy and section thickness.
-

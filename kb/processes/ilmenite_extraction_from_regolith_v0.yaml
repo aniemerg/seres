@@ -1,6 +1,7 @@
 id: ilmenite_extraction_from_regolith_v0
 kind: process
 name: Ilmenite extraction from regolith
+process_type: batch
 layer_tags:
 - layer_4
 - layer_5
@@ -21,7 +22,11 @@ resource_requirements:
   qty: 0.6
   unit: hr
 energy_model:
-  total_energy_kwh: 2.0
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: "Extraction and separation energy"
 time_model:
-  total_time_hr: 1.0
+  type: batch
+  hr_per_batch: 1.0
 notes: "Placeholder ilmenite extraction from regolith; coarse yield: 60% ilmenite; 40% tailings."

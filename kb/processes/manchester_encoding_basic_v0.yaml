@@ -1,6 +1,7 @@
 id: manchester_encoding_basic_v0
 name: Manchester encoding of raw data stream v0
 kind: process
+process_type: batch
 inputs:
   - item_id: raw_data_stream_manchester_v0
     qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.2
+  unit: kWh
 notes: "Seed Manchester encoding step; placeholder values for seed data path."
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5

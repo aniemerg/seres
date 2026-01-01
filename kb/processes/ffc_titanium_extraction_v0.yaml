@@ -1,5 +1,6 @@
 id: ffc_titanium_extraction_v0
 kind: process
+process_type: batch
 name: FFC Cambridge titanium metal extraction
 layer_tags:
   - layer_4
@@ -32,11 +33,12 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 12.0
-  notes: "FFC electrolysis at 900-1100C in molten CaCl2 (placeholder)."
+  unit: kWh
+  notes: "FFC electrolysis at 900-1100C in molten CaCl2; 12 kWh per batch (1 kg TiO2)"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 16.0
   notes: "FFC reduction of TiO2 to titanium metal (placeholder)."
 notes: |

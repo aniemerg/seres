@@ -4,6 +4,7 @@ name: Regolith heating water extraction
 layer_tags:
 - layer_3
 - layer_4
+process_type: batch
 inputs:
 - item_id: regolith_carbonaceous
   qty: 1.0
@@ -19,14 +20,15 @@ requires_ids:
 - furnace_basic
 resource_requirements:
 - machine_id: furnace
-  amount: 1.0
+  qty: 1.0
   unit: unit
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 0.6
+  unit: kWh
   notes: "Estimated energy for heating regolith to liberate adsorbed water; placeholder"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Batch processing of 1 kg regolith; placeholder"
 notes: |

@@ -1,5 +1,9 @@
 """
+DEPRECATED: This file is deprecated and should be migrated to src/
+
 Dedupe queue management (parallel to work queue).
+
+TODO: Migrate to src/kb_core/deduplicator.py
 """
 from __future__ import annotations
 

@@ -1,5 +1,6 @@
 id: sheet_making_from_copper_ingot_to_copper_sheet_v0
 kind: process
+process_type: batch
 name: Sheet making from copper ingot to copper plate or sheet v0
 layer_tags:
 - layer_5
@@ -16,10 +17,11 @@ resource_requirements:
 - machine_id: plate_rolling_mill
   qty: 0.5
   unit: hr
-energy_model:
-  type: kWh_per_kg_input
-  value: 0.8
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
+energy_model:
+  type: fixed_per_batch
+  value: 0.8
+  unit: kWh
 notes: "Sheet copper ingot to copper plate or sheet using rolling mill; placeholder parameters."

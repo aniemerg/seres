@@ -1,3 +1,5 @@
+NOTE: Historical document. Superseded by docs/kb_schema_reference.md.
+
 Memo A — Lunar Self-Replicating Factory Model: Software Specification (Data-First, Best-Guess Engineering)
 Purpose
 Build a Python-based compiler + accountant for an evolving manufacturing knowledge base describing a lunar seed factory capable of replicating itself to the maximum extent possible, with any gaps treated as imports. The system ingests YAML describing items, processes, machines/resources, and transport, compiles this into a quantitative dependency hypergraph, and produces scalar totals:

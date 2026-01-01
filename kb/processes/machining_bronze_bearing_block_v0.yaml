@@ -14,10 +14,12 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 1.0
+  unit: kWh
   notes: "Machining energy for bronze bearing from block"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.8
 notes: "Machining bronze bearing block to final bearing."
+process_type: batch

@@ -1,6 +1,7 @@
 id: casting_silver_contact_material_v0
 kind: process
 name: Casting silver contact material v0
+process_type: batch
 layer_tags:
 - layer_5
 - layer_6
@@ -18,15 +19,15 @@ requires_ids:
 - casting_mold_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 0.7
+  qty: 0.7
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
   notes: Casting energy per kg
-
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Casting cycle time
 notes: Casting silver ingot into silver_contact_material using standard casting tooling.

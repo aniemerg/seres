@@ -2,22 +2,26 @@ id: kevlar_fabric_synthesis_v0
 name: Kevlar fabric synthesis from aramid precursor
 kind: process
 inputs:
-  - item_id: aramid_precursor_v0
-    qty: 1.0
-    unit: kg
+- item_id: aramid_precursor_v0
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: kevlar_fabric_import_v0
-    qty: 1.0
-    unit: kg
+- item_id: kevlar_fabric_import_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 3.0
+  unit: kWh/kg
+  scaling_basis: aramid_precursor_v0
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 1.5
-notes: "Local Kevlar fabric synthesis; replaces import placeholder."
+  rate: 1.5
+  rate_unit: kg/hr
+  scaling_basis: aramid_precursor_v0
+notes: Local Kevlar fabric synthesis; replaces import placeholder.
+process_type: continuous

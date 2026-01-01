@@ -21,7 +21,6 @@ from typing import Optional
 
 REPO_ROOT = Path(__file__).parent.parent
 VENV_PYTHON = REPO_ROOT / ".venv" / "bin" / "python"
-QUEUE_TOOL = REPO_ROOT / "kbtool" / "queue.py"
 
 
 @dataclass
@@ -336,11 +335,14 @@ class ParallelLauncher:
                     # Release the item
                     cmd = [
                         str(VENV_PYTHON),
-                        str(QUEUE_TOOL),
+                        "-m",
+                        "src.cli",
+                        "queue",
                         "release",
+                        "--id",
+                        worker.current_item,
                         "--agent",
                         worker.agent_name,
-                        worker.current_item,
                     ]
                     result = Popen(cmd, stdout=PIPE, stderr=PIPE, cwd=str(REPO_ROOT))
                     result.wait(timeout=5)

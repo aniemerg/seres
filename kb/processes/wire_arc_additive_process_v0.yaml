@@ -1,6 +1,7 @@
 id: wire_arc_additive_process_v0
 kind: process
 name: Wire arc additive manufacturing process v0
+process_type: batch
 layer_tags:
   - layer_5
 inputs:
@@ -19,14 +20,15 @@ requires_ids:
 - wire_arc_additive_machine
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  amount: 2.0
+  qty: 2.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 3.0
-  notes: Arc welding energy for deposition
+  unit: kWh
+  notes: Arc welding energy for deposition (~1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
   notes: Layer-by-layer deposition time
 notes: |

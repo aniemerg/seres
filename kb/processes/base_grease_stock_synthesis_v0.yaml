@@ -1,16 +1,21 @@
 id: base_grease_stock_synthesis_v0
 name: Base grease stock synthesis v0
 kind: process
-inputs: []
+process_type: batch
+inputs:
+  - item_id: polymer_feedstock
+    qty: 0.04
+    unit: kg
 outputs:
   - item_id: base_grease_stock_v0
     qty: 0.05
     unit: kg
 resource_requirements: []
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.1
 energy_model:
-  type: kWh_per_unit
+  type: fixed_per_batch
   value: 0.0
+  unit: kWh
 notes: "Local placeholder synthesis of base grease stock for grease production chain."

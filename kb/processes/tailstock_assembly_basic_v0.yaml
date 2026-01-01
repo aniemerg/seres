@@ -1,6 +1,7 @@
 id: tailstock_assembly_basic_v0
 name: Tailstock assembly basic
 kind: process
+process_type: batch
 inputs: []
 outputs:
   - item_id: tailstock_assembly
@@ -14,9 +15,10 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 3.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 2.0
 notes: "Placeholder tailstock assembly process to enable local manufacturing modeling; refine with BOM and tooling later."

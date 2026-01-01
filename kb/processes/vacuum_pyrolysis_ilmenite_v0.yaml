@@ -26,13 +26,15 @@ resource_requirements:
     qty: 2.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 15.0
+  unit: kWh
   notes: Very high temperature solar thermal or resistive heating to 2000-2600°C
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 6.0
   notes: High temperature decomposition and vapor condensation
+process_type: batch
 notes: |
   Vacuum pyrolysis (thermal decomposition) of ilmenite at very high temperature.
   Source: FFC-process-for-deep-ISRU.txt, Heat-Pipe-Solar-Receiver-O2-2009.txt

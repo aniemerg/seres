@@ -2,32 +2,36 @@ id: metal_fabrication_welding_v0
 kind: process
 name: Metal fabrication welding (v0)
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: sheet_metal_or_structural_steel
-    qty: 10.0
-    unit: kg
+- item_id: sheet_metal_or_structural_steel
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: welded_fabrications
-    qty: 9.5
-    unit: kg
+- item_id: welded_fabrications
+  qty: 9.5
+  unit: kg
 requires_ids:
-  - welding_power_supply_v0
-  - metal_shear_or_saw
-  - press_brake
-  - welding_consumables
-  - fixturing_workbench
+- welding_power_supply_v0
+- metal_shear_or_saw
+- press_brake
+- welding_consumables
+- fixturing_workbench
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 1.0
-  notes: "Welding and basic fabrication energy for metal welds"
+  unit: kWh/kg
+  scaling_basis: sheet_metal_or_structural_steel
+  notes: Welding and basic fabrication energy for metal welds
 time_model:
   type: linear_rate
-  setup_hr: 0.2
-  rate_kg_per_hr: 20.0
-notes: "Metal fabrication welding: combines cutting, forming, and welding of sheet/structural steel for fabrications."
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: sheet_metal_or_structural_steel
+notes: 'Metal fabrication welding: combines cutting, forming, and welding of sheet/structural steel for fabrications.'
+process_type: continuous

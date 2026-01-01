@@ -1,22 +1,33 @@
 id: batching_and_mixing_basic_v0
 kind: process
 name: Batching and mixing (basic)
+process_type: continuous
 layer_tags:
-  - layer_3
-inputs: []
-outputs: []
+- layer_3
+inputs:
+- item_id: powder_components
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: powder_mixture
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - powder_mixer
+- powder_mixer
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.1
-  notes: "Mixer energy per kg batch"
+  unit: kWh/kg
+  scaling_basis: powder_components
+  notes: Mixer energy per kg batch
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
-  notes: "Batch blending throughput"
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: powder_components
+  notes: Batch blending throughput. Rate = 1/0.05 = 20 kg/hr
 notes: Basic dry batching and mixing of powders for glass/ceramic feedstocks.

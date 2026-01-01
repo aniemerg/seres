@@ -4,6 +4,7 @@ name: Metal forging process v0
 layer_tags:
 - layer_4
 - layer_5
+process_type: batch
 inputs:
 - item_id: steel_bar_stock
   qty: 1.5
@@ -21,10 +22,11 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: fixed_per_batch
   value: 0.8
+  unit: kWh
   notes: Energy intensity for forging per kilogram of input material
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.75
 notes: Forge bearing ring blanks from steel bar stock; slag produced as a byproduct.

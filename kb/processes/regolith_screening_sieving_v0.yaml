@@ -2,31 +2,36 @@ id: regolith_screening_sieving_v0
 kind: process
 name: Regolith screening and sieving
 layer_tags:
-  - layer_1
+- layer_1
 inputs:
-  - item_id: regolith_lunar_mare
-    qty: 1.0
-    unit: kg
+- item_id: regolith_lunar_mare
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: regolith_coarse_fraction
-    qty: 0.6
-    unit: kg
-  - item_id: regolith_fine_fraction
-    qty: 0.4
-    unit: kg
+- item_id: regolith_coarse_fraction
+  qty: 0.6
+  unit: kg
+- item_id: regolith_fine_fraction
+  qty: 0.4
+  unit: kg
 requires_ids:
-  - vibrating_screen_v0
-  - dust_collection_system
+- vibrating_screen_v0
+- dust_collection_system
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.1
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.05
-  notes: "vibrating screen motor power"
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_mare
+  notes: vibrating screen motor power
 time_model:
   type: linear_rate
-  hr_per_kg: 0.05
-  notes: "continuous screening ~20 kg/hr throughput"
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_lunar_mare
+  notes: continuous screening ~20 kg/hr throughput
 notes: Placeholder split; yields and throughput TBD.
+process_type: continuous

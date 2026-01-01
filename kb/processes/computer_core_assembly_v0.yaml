@@ -26,10 +26,12 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_unit_output
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Energy for final assembly and enclosure integration"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
 notes: "Assemble computer core module by integrating electronics, enclosure, and power input"
+process_type: batch

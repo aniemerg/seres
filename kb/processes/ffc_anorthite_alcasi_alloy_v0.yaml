@@ -35,13 +35,15 @@ resource_requirements:
     qty: 3.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 9.0
-  notes: FFC electrolysis at 900-1100°C for complex oxide
+  unit: kWh
+  notes: FFC electrolysis at 900-1100°C for complex oxide (1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 12.0
   notes: Direct reduction of feldspar to alloy sponge
+process_type: batch
 notes: |
   Direct FFC Cambridge reduction of anorthite to produce AlCaSi mongrel alloy.
   Source: FFC-process-for-deep-ISRU.txt, ellery-et-al-2022-metalysis

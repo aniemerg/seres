@@ -17,7 +17,7 @@ current_mode: boms_recipes_parts_only
 EOF
 
 # 2. Run indexer (filtering applies automatically)
-.venv/bin/python -m kbtool index
+python -m src.cli index
 
 # 3. Check what was filtered
 grep "Queue Filtering" out/validation_report.md -A 10
@@ -62,7 +62,7 @@ vim .kbconfig.yaml
 # Change: current_mode: boms_recipes_parts_only
 
 # Run indexer
-.venv/bin/python -m kbtool index
+python -m src.cli index
 ```
 
 ## Available Modes
@@ -173,7 +173,7 @@ After running the indexer, check `out/validation_report.md`:
 
 ```bash
 # Check queue counts
-.venv/bin/python -m kbtool queue ls
+python -m src.cli queue ls
 
 # Output:
 {
@@ -206,7 +206,7 @@ filtering_enabled: true
 current_mode: boms_recipes_parts_only
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 python -m queue_agents.parallel_launcher --workers 10
 
 # ... work until queue empty ...
@@ -217,7 +217,7 @@ version: 1
 filtering_enabled: false
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 ```
 
 ### Disable Filtering Temporarily
@@ -230,7 +230,7 @@ filtering_enabled: false  # Temporarily disabled
 # current_mode: boms_recipes_parts_only
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 ```
 
 ## Creating Custom Modes
@@ -280,7 +280,7 @@ filtering_enabled: true
 current_mode: boms_recipes_parts_only
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 # Queue: 684 items (BOMs, recipes, parts)
 
 python -m queue_agents.parallel_launcher --workers 20
@@ -292,7 +292,7 @@ version: 1
 filtering_enabled: false
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 # Queue: ~379 items (previously filtered items return)
 
 python -m queue_agents.parallel_launcher --workers 20
@@ -319,7 +319,7 @@ version: 1
 filtering_enabled: false
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 wc -l out/work_queue.jsonl  # Note the count
 
 # Enable filtering
@@ -329,7 +329,7 @@ filtering_enabled: true
 current_mode: boms_recipes_parts_only
 EOF
 
-.venv/bin/python -m kbtool index
+python -m src.cli index
 wc -l out/work_queue.jsonl  # Compare the count
 ```
 

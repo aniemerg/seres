@@ -1,6 +1,7 @@
 id: diamond_synthesis_hpht_v0
 name: Diamond synthesis via HPHT (high-pressure high-temperature)
 kind: process
+process_type: batch
 inputs:
   - item_id: graphite_powder
     qty: 0.01
@@ -14,12 +15,12 @@ resource_requirements:
     qty: 6.0
     unit: hr
 energy_model:
-  # Unknown energy dataset for this HPHT step
-  type: null
+  type: fixed_per_batch
+  value: 10.0
+  unit: kWh
+  notes: "HPHT cycle; energy usage TBD (placeholder value)"
 energy_confidence: unknown
-  
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 4.0
-  notes: "HPHT cycle; energy usage TBD"
 notes: "HPHT diamond synthesis step; placeholder inputs/outputs for KB modeling. diamond_synthetic_industrial is expected to be defined as a material later."

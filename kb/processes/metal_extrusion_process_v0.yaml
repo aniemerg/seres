@@ -2,26 +2,33 @@ id: metal_extrusion_process_v0
 kind: process
 name: Metal extrusion (fin extrusion) v0
 inputs:
-  - item_id: aluminum_alloy_ingot
-    qty: 25.0
-    unit: kg
+- item_id: aluminum_alloy_ingot
+  qty: 25.0
+  unit: kg
 outputs:
-  - item_id: heat_sink_fin_extrusion
-    qty: 22.0
-    unit: kg
+- item_id: heat_sink_fin_extrusion
+  qty: 22.0
+  unit: kg
 byproducts:
-  - item_id: aluminum_scrap_v0
-    qty: 3.0
-    unit: kg
+- item_id: metal_scrap
+  qty: 3.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 0.6
+  unit: kWh/kg
+  scaling_basis: aluminum_alloy_ingot
+  notes: "Extrusion energy per kg input"
 time_model:
   type: linear_rate
   setup_hr: 0.0
-  rate_kg_per_hr: 12.5
-notes: "Extrude aluminum alloy ingot into heat sink fin extrusion; 25 kg input yields 22 kg extrusion and 3 kg scrap. Placeholder values aligned with existing extrusion templates."
+  rate: 12.5
+  rate_unit: kg/hr
+  scaling_basis: aluminum_alloy_ingot
+notes: Extrude aluminum alloy ingot into heat sink fin extrusion; 25 kg input yields 22 kg extrusion and 3 kg scrap. Placeholder
+  values aligned with existing extrusion templates.
+process_type: continuous

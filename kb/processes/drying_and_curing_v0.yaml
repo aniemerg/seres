@@ -2,21 +2,32 @@ id: drying_and_curing_v0
 kind: process
 name: Drying and curing (basic)
 layer_tags:
-  - layer_3
-inputs: []
-outputs: []
+- layer_3
+inputs:
+- item_id: wet_material
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: dried_material
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - drying_basic_v0
+- drying_basic_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
-  notes: "low-power air circulation, humidity control, or gentle heating for drying"
+  unit: kWh/kg
+  scaling_basis: wet_material
+  notes: low-power air circulation, humidity control, or gentle heating for drying
 time_model:
   type: linear_rate
-  hr_per_kg: 4.0
-  notes: "extended drying/curing time with minimal active intervention"
+  rate: 0.25
+  rate_unit: kg/hr
+  scaling_basis: wet_material
+  notes: extended drying/curing time with minimal active intervention
 notes: Placeholder process for drying/curing materials; parameters TBD.
+process_type: continuous

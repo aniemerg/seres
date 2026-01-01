@@ -99,7 +99,7 @@ Agent Loop (per item):
 - `rg_search(pattern, path, max_matches)` - Search repo using ripgrep
 - `read_file(path)` - Read any file in repo
 - `write_file(path, content)` - Write/overwrite files with diff output
-- `run_indexer()` - Run kbtool index, return validation results
+- `run_indexer()` - Run src index, return validation results
 - `queue_release(item_id, agent_name)` - Give up on an item
 
 Agents do NOT call `queue_lease` or `queue_complete` - these are auto-executed by the runner.
@@ -194,7 +194,7 @@ An item is marked complete when:
 2. The gap item_id no longer appears in `out/work_queue.jsonl`
 
 Both conditions must be met.
-For manual verification, use: `.venv/bin/python -m kbtool validate --id <gap_type:item_id>` or `queue complete --verify`.
+For manual verification, use: `python -m src.cli validate --id <gap_type:item_id>` or `python -m src.cli queue complete --id <gap_type:item_id> --agent <name> --verify`.
 
 ## Common Workflows
 
@@ -207,7 +207,7 @@ If you've updated memos or significantly changed KB structure:
 python -m queue_agents.build_context
 
 # Re-run indexer to update queue
-.venv/bin/python -m kbtool index
+python -m src.cli index
 
 # Launch agents
 python -m queue_agents.launcher --workers 5
@@ -217,7 +217,7 @@ python -m queue_agents.launcher --workers 5
 
 ```bash
 # Run indexer to see current gaps
-.venv/bin/python -m kbtool queue ls
+python -m src.cli queue ls
 
 # Launch agents (they'll pick items FIFO)
 python -m queue_agents.launcher --workers 3
@@ -246,8 +246,8 @@ Run: `python -m queue_agents.build_context`
 The queue is empty. Run indexer to rebuild it:
 
 ```bash
-.venv/bin/python -m kbtool index
-.venv/bin/python -m kbtool queue ls
+python -m src.cli index
+python -m src.cli queue ls
 ```
 
 ### Agent stuck in loop

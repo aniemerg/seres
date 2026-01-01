@@ -2,27 +2,32 @@ id: barium_oxide_extraction_v0
 kind: process
 name: Barium oxide extraction (basic)
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: regolith_powder
-    qty: 10.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: barium_oxide
-    qty: 0.001
-    unit: kg
+- item_id: barium_oxide
+  qty: 0.001
+  unit: kg
 requires_ids:
-  - furnace_high_temp
+- furnace_high_temp
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 4.0
-  notes: "high temperature calcination to decompose Ba-containing minerals and drive off CO2"
+  unit: kWh/kg
+  scaling_basis: regolith_powder
+  notes: high temperature calcination to decompose Ba-containing minerals and drive off CO2
 time_model:
   type: linear_rate
-  hr_per_kg: 3.0
-  notes: "heating to calcination temperature, soak time, and cool-down"
+  rate: 0.333
+  rate_unit: kg/hr
+  scaling_basis: regolith_powder
+  notes: heating to calcination temperature, soak time, and cool-down
 notes: Placeholder BaO extraction process; chemistry/energy/time TBD.
+process_type: continuous

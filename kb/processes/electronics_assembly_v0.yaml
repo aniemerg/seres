@@ -1,6 +1,7 @@
 id: electronics_assembly_v0
 kind: process
 name: Electronics assembly
+process_type: batch
 layer_tags:
   - layer_7
 inputs:
@@ -23,11 +24,12 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.5
+  unit: kWh
   notes: "Soldering and testing equipment power"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 3.0
   notes: "Mount components, solder, inspect joints, functional test"
 notes: General electronics assembly process. Mounts components on PCB, solders connections, inspects quality, and performs functional testing.

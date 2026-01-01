@@ -17,14 +17,16 @@ resource_requirements:
   qty: 0.5
   unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 1.0
-  notes: Simplified energy for iron extraction from ilmenite
+  unit: kWh
+  notes: Simplified energy for iron extraction from ilmenite (1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: Simple 1-hour batch to produce pure iron from ore
 notes: |
   Minimal placeholder process converting iron ore/ilmenite to pure iron.
   Used to resolve missing recipe gaps in the KB. In a real system, this would be
   tied to a full ISRU reduction/refining sequence.
+process_type: batch

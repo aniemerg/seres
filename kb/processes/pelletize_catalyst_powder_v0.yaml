@@ -1,6 +1,7 @@
 id: pelletize_catalyst_powder_v0
 kind: process
 name: Pelletize catalyst powder
+process_type: batch
 inputs:
 - item_id: catalyst_powder_v0
   qty: 1.0
@@ -14,9 +15,10 @@ resource_requirements:
   qty: 0.2
   unit: hr
 energy_model:
-  type: kWh_per_batch
+  type: fixed_per_batch
   value: 0.15
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.5
 notes: "Pelletizing catalyst powder into formed catalyst pellets."

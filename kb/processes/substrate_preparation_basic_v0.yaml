@@ -2,22 +2,27 @@ id: substrate_preparation_basic_v0
 name: Substrate preparation (basic)
 kind: process
 inputs:
-  - item_id: raw_metal_block
-    qty: 0.2
-    unit: kg
+- item_id: raw_metal_block
+  qty: 0.2
+  unit: kg
 outputs:
-  - item_id: test_part_surface
-    qty: 0.2
-    unit: kg
+- item_id: test_part_surface
+  qty: 0.2
+  unit: kg
 resource_requirements:
-  - machine_id: cnc_mill
-    qty: 0.2
-    unit: hr
+- machine_id: cnc_mill
+  qty: 0.2
+  unit: hr
 energy_model:
-  type: kWh_per_kg_input
+  type: per_unit
   value: 1.0
+  unit: kWh/kg
+  scaling_basis: raw_metal_block
 time_model:
   type: linear_rate
-  setup_hr: 0.1
-  rate_kg_per_hr: 2.0
-notes: "Basic substrate preparation to generate test_part_surface from raw_metal_block for bonding tests. Placeholder values; adjust as real process data becomes available."
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: raw_metal_block
+notes: Basic substrate preparation to generate test_part_surface from raw_metal_block for bonding tests. Placeholder values;
+  adjust as real process data becomes available.
+process_type: continuous

@@ -2,30 +2,35 @@ id: ceramic_forming_basic_v0
 kind: process
 name: Basic ceramic forming
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: ceramic_powder_mixture
-    qty: 5.0
-    unit: kg
+- item_id: ceramic_powder_mixture
+  qty: 5.0
+  unit: kg
 outputs:
-  - item_id: green_ceramic_parts
-    qty: 5.0
-    unit: kg
+- item_id: green_ceramic_parts
+  qty: 5.0
+  unit: kg
 requires_ids:
-  - pressing_mold_set
-  - hydraulic_press
+- pressing_mold_set
+- hydraulic_press
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.3
-  notes: "Press operation energy"
+  unit: kWh/kg
+  scaling_basis: ceramic_powder_mixture
+  notes: Press operation energy
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  setup_hr: 0.2
-  notes: "Mold preparation, pressing, demolding"
-notes: Basic ceramic forming process using pressing or slip casting. Creates green (unfired) ceramic parts from powder mixture. Parts must be dried and fired separately.
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: ceramic_powder_mixture
+  notes: Mold preparation, pressing, demolding
+notes: Basic ceramic forming process using pressing or slip casting. Creates green (unfired) ceramic parts from powder mixture.
+  Parts must be dried and fired separately.
+process_type: continuous

@@ -16,13 +16,15 @@ resource_requirements:
     qty: 1.0
     unit: hr
 energy_model:
-  type: fixed_kWh
+  type: fixed_per_batch
   value: 0.05
+  unit: kWh
   notes: "Programming energy for embedded board"
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 1.0
   notes: "Programming and testing duration for embedded board"
+process_type: batch
 notes: "Program firmware, run basic tests, and verify IOs on PCB."
 provenance: hand_assumption
 confidence: medium

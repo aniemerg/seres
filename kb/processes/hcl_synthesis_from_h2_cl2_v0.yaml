@@ -1,5 +1,6 @@
 id: hcl_synthesis_from_h2_cl2_v0
 kind: process
+process_type: batch
 name: Synthesis of hydrochloric acid from hydrogen and chlorine
 inputs:
 - item_id: hydrogen_gas
@@ -17,9 +18,10 @@ resource_requirements:
   qty: 1.0
   unit: hr
 energy_model:
-  type: kWh_per_kg
-  value: 1.0
+  type: fixed_per_batch
+  value: 70.0
+  unit: kWh
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 0.4
 notes: "Direct synthesis of HCl from H2 and Cl2; yields aqueous HCl (30-37%)."

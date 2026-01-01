@@ -2,21 +2,33 @@ id: finishing_deburring_v0
 kind: process
 name: Finishing and deburring
 layer_tags:
-  - layer_5
-inputs: []
-outputs: []
+- layer_5
+inputs:
+- item_id: machined_part_raw
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: finished_part_deburred
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - hand_tools_mechanical
-  - deburring_tools
-  - surface_grinder
+- hand_tools_mechanical
+- deburring_tools
+- surface_grinder
 resource_requirements: []
 energy_model:
-  type: kWh_per_kg
+  type: per_unit
   value: 0.2
-  notes: "Grinding and power tool energy for deburring"
+  unit: kWh/kg
+  scaling_basis: machined_part_raw
+  notes: Grinding and power tool energy for deburring
 time_model:
   type: linear_rate
-  hr_per_kg: 0.5
-  setup_hr: 0.1
-  notes: "Remove burrs with files, grinders, or deburring tools; smooth sharp edges; clean parts"
-notes: Remove burrs, sharp edges, and surface imperfections from machined or cut parts. Uses files, scrapers, rotary deburring tools, bench grinder, and abrasive pads. Improves part safety, fit, and appearance. Essential finishing step for sheet metal, machined parts, and castings.
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: machined_part_raw
+  notes: Remove burrs with files, grinders, or deburring tools; smooth sharp edges; clean parts
+notes: Remove burrs, sharp edges, and surface imperfections from machined or cut parts. Uses files, scrapers, rotary deburring
+  tools, bench grinder, and abrasive pads. Improves part safety, fit, and appearance. Essential finishing step for sheet metal,
+  machined parts, and castings.
+process_type: continuous

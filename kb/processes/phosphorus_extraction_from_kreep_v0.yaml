@@ -31,13 +31,15 @@ resource_requirements:
     qty: 4.0
     unit: hr
 energy_model:
-  type: kWh_per_kg
+  type: fixed_per_batch
   value: 10.0
-  notes: High temperature carbothermal reduction at 850°C
+  unit: kWh
+  notes: High temperature carbothermal reduction at 850°C (1 kg batch)
 time_model:
-  type: fixed_time
+  type: batch
   hr_per_batch: 8.0
   notes: Reduction and phosphorus vapor condensation
+process_type: batch
 notes: |
   KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock exists.
   Extraction of elemental phosphorus from apatite (calcium phosphate) in KREEP regions.
