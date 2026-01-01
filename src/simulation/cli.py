@@ -704,7 +704,10 @@ def cmd_build_machine(args, kb_loader: KBLoader):
 
     if result['success']:
         print(f"✓ Built machine '{args.machine}'")
-        print(f"  Parts consumed: {result.get('parts_consumed', 0)}")
+        components = result.get('components_consumed', {})
+        print(f"  Parts consumed: {len(components)}")
+        for item_id, qty_str in components.items():
+            print(f"    - {item_id}: {qty_str}")
         engine.save()
         return 0
     else:
