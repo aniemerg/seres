@@ -35,10 +35,10 @@ Use three passes per source:
 
 ## Schema Compatibility Rules
 
-- All new processes must use ADR-012 time_model and ADR-014 energy_model.
-- Use flexible units and scaling_basis as required by ADR-012/014/016.
-- Recipe overrides follow ADR-013 (complete override if `type` is set).
-- Validation is authoritative (ADR-017).
+- All new processes must use 012 time_model and 014 energy_model.
+- Use flexible units and scaling_basis as required by 012/014/016.
+- Recipe overrides follow 013 (complete override if `type` is set).
+- Validation is authoritative (017).
 
 ## Provenance and Uncertainty
 
@@ -55,7 +55,7 @@ Prefer imports when:
 - Modeling effort is high relative to impact.
 - The item is outside current capability scope.
 
-Use `import_placeholder_v0` explicitly and let the queue surface follow-up work.
+Mark items with `is_import: true` (per ADR-007). Import items don't need recipes.
 
 ## Consolidation and Reuse
 

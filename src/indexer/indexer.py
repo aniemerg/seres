@@ -480,12 +480,13 @@ def build_index() -> Dict[str, dict]:
                 entries[ref]["refs_in"].append(entry["id"])
 
     # Compute items without recipes (parts/materials/machines that no recipe targets)
-    # Skip items marked as imports (is_import: true)
+    # Skip items marked as imports or scrap (is_import/is_scrap: true)
     items_without_recipes: List[dict] = []
     for entry in entries.values():
         if entry["kind"] in ("part", "material", "machine") and entry["id"] not in recipe_targets:
             # Check if item is marked as import by reading the file
             is_import = False
+            is_scrap = False
             if entry.get("defined_in"):
                 try:
                     file_path = Path(entry["defined_in"])
@@ -493,11 +494,12 @@ def build_index() -> Dict[str, dict]:
                         with file_path.open("r", encoding="utf-8") as f:
                             item_data = yaml.safe_load(f) or {}
                             is_import = item_data.get("is_import", False)
+                            is_scrap = item_data.get("is_scrap", False)
                 except Exception:
                     pass
 
-            # Skip import items
-            if is_import:
+            # Skip import or scrap items
+            if is_import or is_scrap:
                 continue
 
             items_without_recipes.append({

@@ -1,4 +1,4 @@
-NOTE: Migration/analysis document for pre-ADR-012 schema. See docs/kb_schema_reference.md for current rules.
+NOTE: Migration/analysis document for pre-012 schema. See docs/kb_schema_reference.md for current rules.
 
 # Implementation Plan: KB Core Refactor with ADR 12-17
 
@@ -15,11 +15,11 @@ NOTE: Migration/analysis document for pre-ADR-012 schema. See docs/kb_schema_ref
 ## Overview
 
 This implementation plan guides the refactoring of the KB tooling and simulation engine to implement:
-- **ADR-012:** Process Types and Time Model Redesign
-- **ADR-013:** Recipe Override Mechanics
-- **ADR-014:** Energy Model Redesign
-- **ADR-016:** Unit Conversion and Type System
-- **ADR-017:** Validation and Error Detection Strategy
+- **012:** Process Types and Time Model Redesign
+- **013:** Recipe Override Mechanics
+- **014:** Energy Model Redesign
+- **016:** Unit Conversion and Type System
+- **017:** Validation and Error Detection Strategy
 
 **Key Decisions:**
 - Two-layer model architecture (RawModels → ValidatedModels)
@@ -48,9 +48,9 @@ src/
   kb_core/
     __init__.py
     schema.py           # Pydantic models (Raw + Validated)
-    validators.py       # Validation logic (ADR-017)
-    unit_converter.py   # Enhanced converter (ADR-016)
-    calculations.py     # Time/energy calculations (ADR-012, 014)
+    validators.py       # Validation logic (017)
+    unit_converter.py   # Enhanced converter (016)
+    calculations.py     # Time/energy calculations (012, 014)
     kb_loader.py        # Unified KB loading
     config.py           # Configuration management
 
@@ -120,8 +120,8 @@ addopts =
 **Tasks:**
 - [ ] Define `RawProcess`, `RawRecipe`, `RawItem` (permissive parsing)
 - [ ] Define `ValidatedProcess`, `ValidatedRecipe`, `ValidatedItem` (strict validation)
-- [ ] Define new `TimeModel`, `EnergyModel` per ADR-012, ADR-014
-- [ ] Define `RecipeStep` with override support per ADR-013
+- [ ] Define new `TimeModel`, `EnergyModel` per 012, 014
+- [ ] Define `RecipeStep` with override support per 013
 - [ ] Add comprehensive docstrings with examples
 
 **Key Model Structure:**
@@ -242,8 +242,8 @@ class Process(BaseModel):
 **File:** `src/kb_core/calculations.py`
 
 **Tasks:**
-- [ ] Implement `calculate_duration()` per ADR-012
-- [ ] Implement `calculate_energy()` per ADR-014
+- [ ] Implement `calculate_duration()` per 012
+- [ ] Implement `calculate_energy()` per 014
 - [ ] Integrate with unit converter
 - [ ] Handle both agent-provided duration and calculated duration
 - [ ] Add comprehensive error messages
@@ -288,7 +288,7 @@ def calculate_energy(
 **File:** `src/kb_core/validators.py`
 
 **Tasks:**
-- [ ] Implement validation functions per ADR-017
+- [ ] Implement validation functions per 017
 - [ ] Schema validation (process_type, required fields)
 - [ ] Semantic validation (scaling_basis exists, positive values)
 - [ ] Unit conversion validation (convertibility checks)
@@ -546,7 +546,7 @@ python -m src.cli validate --id process:crushing_v0
 **File:** `src/simulation/engine.py`
 
 **Tasks:**
-- [ ] Implement override resolution per ADR-013
+- [ ] Implement override resolution per 013
 - [ ] Merge partial overrides with process time_model
 - [ ] Use complete overrides as-is
 - [ ] Validate merged result

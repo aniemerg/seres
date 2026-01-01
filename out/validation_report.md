@@ -4,20 +4,14 @@
 - bom: 398
 - item: 1
 - machine: 341
-- material: 572
-- part: 1008
-- process: 872
-- recipe: 1996
+- material: 566
+- part: 1006
+- process: 847
+- recipe: 1931
 - resource: 2
 - scenario: 1
 - schema: 1
 - seed: 6
-
-## Items without recipes (will be imports)
-Total: 1 items need recipes or import designation
-- material: 1
-
-See `out/missing_recipes.jsonl` for details.
 
 ## Missing required fields
 Total: 246 missing fields
@@ -26,31 +20,11 @@ Total: 246 missing fields
 See `out/missing_fields.jsonl` for details.
 
 ## Missing data (null values)
-Total: 906 null fields
+Total: 897 null fields
 - part: 10
-- process: 896
+- process: 887
 
 See `out/null_values.jsonl` for details.
-
-## Validation Issues (ADR-017)
-Total: 52 validation issues found
-
-By severity:
-- error: 51
-- warning: 1
-
-By category:
-- recipe: 50
-- reference: 1
-- semantic: 1
-
-Top validation rules triggered:
-- recipe_inputs_not_resolvable: 48
-- recipe_outputs_not_resolvable: 2
-- boundary_machine_missing: 1
-- process_not_found: 1
-
-See `out/validation_issues.jsonl` for details.
 
 ## Warnings
 - kb/units/units.yaml: unknown kind; skipped
@@ -58,10 +32,10 @@ See `out/validation_issues.jsonl` for details.
 ## Queue Filtering
 **Status**: Enabled
 **Mode**: boms_recipes_parts_only
-**Total gaps found**: 299
+**Total gaps found**: 246
 **Filtered out**: 246
-**Added to queue**: 53
-**Filtering rate**: 82.3%
+**Added to queue**: 0
+**Filtering rate**: 100.0%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

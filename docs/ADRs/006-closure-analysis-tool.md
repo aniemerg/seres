@@ -72,6 +72,10 @@ Build a **Closure Analysis Tool** (`kbtool analyze-closure`) that performs multi
 **Bootstrap Closure**: Closure achieved after initial import set:
 - Example: Import 1 labor bot + tools → can manufacture everything else
 
+## Updates
+
+**2026-01-01:** Closure analysis treats `is_scrap: true` items as terminal nodes and ignores them for raw/import requirements to prevent scrap loop inflation.
+
 ## Architecture
 
 ```

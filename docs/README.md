@@ -5,7 +5,7 @@
 **You MUST read these documents before working on the queue:**
 
 1. **`docs/project_overview.md`** — Project overview and high-level goals
-2. **`docs/kb_schema_reference.md`** — Current schema reference (ADR-012+)
+2. **`docs/kb_schema_reference.md`** — Current schema reference (012+)
 3. **`docs/knowledge_acquisition_protocol.md`** — Knowledge acquisition workflow
 4. **`docs/parts_and_labor_guidelines.md`** — Parts, BOMs, and labor modeling policy (CRITICAL for recipe/BOM work)
 5. **`docs/conservative_mode_guide.md`** — Queue work philosophy and decision trees (DEFAULT APPROACH)
@@ -24,6 +24,7 @@ These documents are **mandatory prerequisites** for contributing to the knowledg
 - Adapt existing items before creating new ones
 - Verify references aren't erroneous
 - Use `is_template: true` on generic processes when recipes define concrete inputs/outputs
+  - Template processes may omit inputs/outputs; recipes must provide them explicitly
 
 **See `conservative_mode_guide.md` for complete decision trees.**
 
@@ -77,6 +78,7 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
   - `unresolved_ref`: free-text refs.
   - `import_stub`: recipes with empty steps/import variants.
   - `no_recipe`: defined items (part/material/machine) missing a recipe.
+    - `is_scrap: true` items are exempt from `no_recipe` and treated as byproducts.
   - `missing_field`: required field absent (e.g., energy_model/time_model).
   - `no_provider_machine`: resource_type with no machine capability.
   - `invalid_recipe_schema`: recipe steps not in the current schema.
@@ -201,7 +203,7 @@ The seed file's `notes` section contains worker instructions and references to t
 
 ## Recipes (breaking schema)
 - Steps must be objects per `kbtool.models.RecipeStep` (`process_id`, optional time/labor/machine fields).
-- Recipe steps can include `time_model`/`energy_model` overrides per ADR-013 (complete override when `type` is present).
+- Recipe steps can include `time_model`/`energy_model` overrides per 013 (complete override when `type` is present).
 - `resource_requirements` uses `machine_id` with `qty` + `unit` (use `hr` for time).
 - Aim for ≥3 steps per recipe; include mold prep/finishing where applicable; use manual/assembly processes for glue work.
 - If a needed process does not exist, reference it anyway (it will queue as `referenced_only`).
@@ -214,7 +216,7 @@ The seed file's `notes` section contains worker instructions and references to t
 - Power conditioning/distribution: `power_conditioning_basic_v0`, `power_distribution_basic_v0`.
 - Grinding/drying: `sizing_grinding_basic_v0`, `drying_basic_v0`.
 - Winding: `spool_winding_basic_v0`.
-- Import placeholder: `import_placeholder_v0` (only if truly importing).
+- Import items: Add `is_import: true` to item definition (per ADR-007, no recipe needed).
 - Environment source: `environment_source_v0` (legacy generic placeholder; prefer explicit `process_type: boundary` processes for in-situ collection).
 - Manual labor: use `labor_bot_general` in `resource_requirements`.
 
@@ -222,20 +224,20 @@ The seed file's `notes` section contains worker instructions and references to t
 To prevent infinite recursion in the dependency graph, some processes are **terminal nodes** that represent in-situ boundary conditions (no upstream inputs).
 Use `process_type: boundary` only for **in-situ resource collection** (e.g., regolith and ice collection, solar irradiance).
 
-**Imports are not boundary processes.** Model imports via `is_import: true` on the item and/or `import_placeholder_v0` in the recipe.
+**Imports are not boundary processes.** Model imports via `is_import: true` on the item (per ADR-007). Import items don't need recipes.
 
 Boundary processes:
 - Must have `inputs: []` and at least one output.
-- Use standard ADR-012/014 models (`time_model.type: batch|linear_rate`, `energy_model.type: fixed_per_batch|per_unit`).
+- Use standard 012/014 models (`time_model.type: batch|linear_rate`, `energy_model.type: fixed_per_batch|per_unit`).
 - Should include `resource_requirements` for the collecting machine.
 
-## Energy and Time Models (Machine-Readable Schema) - **NEW ADR-012/014 FORMAT**
+## Energy and Time Models (Machine-Readable Schema) - **NEW 012/014 FORMAT**
 
-⚠️ **SCHEMA UPDATE IN PROGRESS**: The KB is transitioning to new time and energy model schemas per ADR-012 and ADR-014. See `docs/ADRs/` for full specification.
+⚠️ **SCHEMA UPDATE IN PROGRESS**: The KB is transitioning to new time and energy model schemas per 012 and 014. See `docs/ADRs/` for full specification.
 
 **All new processes MUST use the new schema. Old schema will cause validation errors.**
 
-### Process Type (ADR-012) - **REQUIRED**
+### Process Type (012) - **REQUIRED**
 
 Every process must specify its type:
 
@@ -251,7 +253,7 @@ process_type: continuous  # or: batch, boundary
 - **`boundary`** — In-situ collection with no upstream inputs
   - Examples: regolith mining, polar ice extraction, solar irradiance collection
 
-### Time Model (ADR-012)
+### Time Model (012)
 
 #### For Continuous Processes
 
@@ -288,7 +290,7 @@ time_model:
 - Batch size implicit from process `outputs` (not duplicated in time_model)
 - No `scaling_basis` - batch size defined by outputs
 
-### Energy Model (ADR-014)
+### Energy Model (014)
 
 #### For Per-Unit Energy
 
@@ -501,11 +503,11 @@ time_model:
   hr_per_batch: 1.5
 ```
 
-**See `docs/ADRs/ADR-012-process-types-and-time-model.md` and `docs/ADRs/ADR-014-energy-model-redesign.md` for complete specifications.**
+**See `docs/ADRs/012-process-types-and-time-model.md` and `docs/ADRs/014-energy-model-redesign.md` for complete specifications.**
 
-## Validation Rules (ADR-017)
+## Validation Rules (017)
 
-The indexer validates all processes against ADR-012/014/017 schemas. Validation issues are categorized by severity:
+The indexer validates all processes against 012/014/017 schemas. Validation issues are categorized by severity:
 
 | Level | Meaning | Action |
 |-------|---------|--------|
@@ -630,7 +632,7 @@ When you encounter validation errors:
    - (Find process IDs: `ls kb/processes/` or `grep "^id:" kb/processes/*.yaml`)
 5. **Verify fix**: Error should disappear from `validation_issues.jsonl`
 
-**See `docs/ADRs/ADR-017-validation-and-error-detection.md` for complete validation rules.**
+**See `docs/ADRs/017-validation-and-error-detection.md` for complete validation rules.**
 
 ## Commands (New Unified CLI)
 

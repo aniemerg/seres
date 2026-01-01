@@ -120,7 +120,7 @@ Result: Recipe updated to use existing 'water' item with transformation
 
 5. Can this be marked as import instead of manufactured?
    (Not in top contributors, high complexity, low mass impact)
-   ├─ YES → Create import_placeholder recipe, mark as import
+   ├─ YES → Add is_import: true to item (per ADR-007), no recipe needed
    └─ NO → Continue to #6
 
 6. CREATE new recipe (last resort)
@@ -157,9 +157,9 @@ Result: Recipe updated to use existing 'water' item with transformation
    - Add confidence tags if available
 ```
 
-### For `import_stub` (Import Recipes Needing Local Manufacturing)
+### For Import Items Needing Local Manufacturing
 
-**Context:** Recipe uses `import_placeholder_v0` but local manufacturing may be possible.
+**Context:** Item has `is_import: true` but local manufacturing may be possible (per ADR-007).
 
 **Decision Tree:**
 
@@ -442,8 +442,8 @@ Conservative Mode **extends and unifies** existing principles:
    - Still do quick equivalence check
 
 3. **Terminal/boundary items** - Environment sources, imports
-   - `environment_source_v0` for natural inputs
-   - `import_placeholder_v0` for accepted imports
+   - `environment_source_v0` for natural inputs (boundary process)
+   - `is_import: true` for accepted imports (per ADR-007, no recipe needed)
 
 ### When in Doubt
 

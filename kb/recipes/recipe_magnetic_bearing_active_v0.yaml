@@ -1,10 +1,24 @@
 id: recipe_magnetic_bearing_active_v0
 kind: recipe
 name: Recipe for magnetic bearing active v0
-produces_id: magnetic_bearing_active_v0
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: magnetic_bearing_active_v0
+inputs:
+  - item_id: bearing_set
+    qty: 1.5
+    unit: kg
+  - item_id: wire_copper_magnet
+    qty: 0.3
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.5
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 3.7
+    unit: kg
+outputs:
+  - item_id: magnetic_bearing_active_v0
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: magnetic_bearing_active_unit_v0
     notes: "Active magnetic bearing with control electronics; placeholder path to enable local manufacturing in KB"

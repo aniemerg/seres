@@ -2,6 +2,7 @@ id: digital_signal_generation_v0
 name: Digital signal generation (seed)
 kind: process
 process_type: batch
+is_template: true
 inputs: []
 outputs:
   - item_id: hormone_digital_signaling_v0
@@ -9,7 +10,10 @@ outputs:
     unit: unit
 byproducts:
   []
-resource_requirements: []
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 0.1
+    unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.01

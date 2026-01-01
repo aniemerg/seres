@@ -66,7 +66,7 @@ python -m src.cli index [--kb-root KB_ROOT] [--out-dir OUT_DIR]
 python -m src.cli index
 # Loading KB data...
 # Loaded: 870 processes, 2016 recipes, 1959 items, 398 BOMs
-# Running ADR-017 validation...
+# Running 017 validation...
 # Found 4 validation issues (0 errors, 4 warnings)
 # Indexed 5241 entries into out/index.json
 ```
@@ -389,7 +389,7 @@ python -m src.cli sim advance-time --sim-id <name> --hours <n>
 1. Time advances by specified duration
 2. Processes with `ends_at <= new_time` complete
 3. Outputs added to inventory
-4. Energy calculated (ADR-014)
+4. Energy calculated (014)
 5. Events logged
 
 **Example:**

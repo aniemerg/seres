@@ -1,14 +1,12 @@
 id: antenna_matching_network_assembly_v0
 name: Antenna Matching Network Assembly v0
 kind: process
+is_template: true
 process_type: batch
 inputs: []
-outputs:
-  - item_id: antenna_matching_network
-    qty: 1.0
-    unit: unit
+outputs: []
 resource_requirements:
-  - machine_id: assembly_station
+  - machine_id: assembly_station_v0
     qty: 1.0
     unit: hr
 energy_model:
@@ -20,4 +18,4 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: "Assembly time for a single antenna matching network"
-notes: "Placeholder assembly process for antenna matching network; basic one-step assembly using assembly_station."
+notes: "Template assembly process for antenna matching networks; recipes provide concrete inputs/outputs."

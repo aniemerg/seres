@@ -201,6 +201,11 @@ class ClosureAnalyzer:
             self.expansion_cache[cache_key] = cache_entry
             return
 
+        # Scrap items are terminal for closure analysis (ignored for raw/import tracking)
+        if self._is_scrap(item_id, item):
+            self.expansion_cache[cache_key] = cache_entry
+            return
+
         # Check if has recipe
         recipe_id = item.get('recipe')
         if not recipe_id:
@@ -412,6 +417,14 @@ class ClosureAnalyzer:
             return True
 
         return False
+
+    def _is_scrap(self, item_id: str, item: Dict) -> bool:
+        """
+        Check if an item should be treated as scrap/offal for closure analysis.
+
+        Scrap items are terminal nodes and do not trigger no-recipe errors.
+        """
+        return bool(item.get('is_scrap', False))
 
     def _calculate_mass(self, item: Dict, qty: float, unit: str) -> float:
         """

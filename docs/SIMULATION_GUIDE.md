@@ -12,10 +12,10 @@ The simulation engine allows you to:
 - Generate audit trails for accountability
 
 **Key Features:**
-- ✅ Runtime validation (ADR-017)
-- ✅ Energy calculation (ADR-014)
-- ✅ Time calculation (ADR-012)
-- ✅ Recipe overrides (ADR-013)
+- ✅ Runtime validation (017)
+- ✅ Energy calculation (014)
+- ✅ Time calculation (012)
+- ✅ Recipe overrides (013)
 - ✅ Material class matching
 - ✅ JSONL event logging
 - ✅ Preflight planning (`sim plan`)
@@ -174,7 +174,7 @@ python -m src.cli sim run-recipe --sim-id lunar_base_001 --recipe recipe_steel_p
 
 **Notes:**
 - Recipe steps executed sequentially
-- Overrides resolved per ADR-013
+- Overrides resolved per 013
 - Total duration = sum of step durations
 
 ### build-machine
@@ -215,7 +215,7 @@ python -m src.cli sim advance-time --sim-id <name> --hours <n>
 1. Time advances by specified duration
 2. All processes with `ends_at <= new_time` complete
 3. Outputs added to inventory
-4. Energy consumption calculated (ADR-014)
+4. Energy consumption calculated (014)
 5. Events logged
 
 **Example:**
@@ -437,7 +437,7 @@ Duration = `setup_hr + hr_per_batch` (e.g., 0.5 + 2.0 = 2.5 hours)
 
 ### Energy Calculation
 
-Energy automatically calculated per ADR-014:
+Energy automatically calculated per 014:
 
 **Per-unit energy:**
 ```yaml
@@ -462,7 +462,7 @@ Energy = `120.0 kWh` per batch
 
 ### Recipe Overrides
 
-Recipes can override process time/energy models per ADR-013:
+Recipes can override process time/energy models per 013:
 
 **Complete override** (step has `type` field):
 ```yaml
@@ -607,10 +607,10 @@ Compare to available solar/nuclear power capacity.
 ## See Also
 
 - `docs/CLI_COMMANDS_GUIDE.md` - Complete CLI reference
-- `docs/ADRs/ADR-012-process-types-and-time-model.md` - Time model specification
-- `docs/ADRs/ADR-013-recipe-override-mechanics.md` - Override resolution rules
-- `docs/ADRs/ADR-014-energy-model-redesign.md` - Energy calculation specification
-- `docs/ADRs/ADR-017-validation-and-error-detection.md` - Validation rules
+- `docs/ADRs/012-process-types-and-time-model.md` - Time model specification
+- `docs/ADRs/013-recipe-override-mechanics.md` - Override resolution rules
+- `docs/ADRs/014-energy-model-redesign.md` - Energy calculation specification
+- `docs/ADRs/017-validation-and-error-detection.md` - Validation rules
 - `src/simulation/engine.py` - Engine implementation
 - `src/simulation/cli.py` - CLI implementation
 ### plan

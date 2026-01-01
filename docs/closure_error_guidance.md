@@ -268,11 +268,12 @@ If detected through closure analysis:
 
 **Problem:** Process is reused across many recipes, can't have fixed quantities.
 
-**Solution:** Add explicit inputs/outputs to recipes, keep process generic.
+**Solution:** Mark the process as a template and add explicit inputs/outputs to recipes.
 
 ```yaml
 # Process (generic, null quantities)
 id: assembly_basic_v0
+is_template: true
 inputs: []  # Or inputs with qty: null
 outputs: []
 

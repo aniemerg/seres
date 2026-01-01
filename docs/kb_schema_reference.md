@@ -1,7 +1,7 @@
 # KB Schema Reference (Current)
 
 This document is the authoritative, up-to-date summary of the KB schema and
-modeling rules. It consolidates ADR-012/013/014/016/017 for daily use.
+modeling rules. It consolidates 012/013/014/016/017 for daily use.
 
 ## Items
 
@@ -10,6 +10,8 @@ Required:
 - `id`, `name`, `kind: material`, `unit`, `notes`
 Recommended:
 - `material_class`, `density`, `state`, `composition`, `source_tags`
+Optional:
+- `is_scrap: true` to mark byproduct/offal materials that should not require recipes or closure expansion
 
 ### Parts
 Required:
@@ -29,15 +31,16 @@ Required:
 - `id`, `name`, `kind: process`
 - `process_type: continuous | batch`
 - `inputs`, `outputs`
-- `time_model` (required by ADR-012)
-- `energy_model` (required by ADR-014)
+- `time_model` (required by 012)
+- `energy_model` (required by 014)
 
 Optional:
 - `is_template: true` for generic processes where recipes define concrete
   inputs/outputs. Validation skips undefined item references for template
-  processes. Use sparingly and prefer real items when possible.
+  processes. Template processes may omit inputs/outputs; recipes must supply
+  them explicitly. Use sparingly and prefer real items when possible.
 
-### Time Model (ADR-012)
+### Time Model (012)
 
 Continuous:
 ```yaml
@@ -58,7 +61,7 @@ time_model:
   hr_per_batch: 0.9
 ```
 
-### Energy Model (ADR-014)
+### Energy Model (014)
 
 Per-unit:
 ```yaml
@@ -100,7 +103,7 @@ steps:
       rate: 50.0  # Partial override (type omitted)
 ```
 
-Override rules (ADR-013):
+Override rules (013):
 - If `time_model.type` or `energy_model.type` is provided in a step, it is a
   complete override and must include all required fields.
 - If `type` is omitted, the step partially overrides the process model.
@@ -108,13 +111,13 @@ Override rules (ADR-013):
 Recipe-level `inputs`/`outputs` may be used to bind quantities for generic
 processes (see `docs/closure_error_guidance.md`).
 
-## Units and Conversions (ADR-016)
+## Units and Conversions (016)
 
 - Compound units use `numerator/denominator` (e.g., `kg/hr`, `kWh/kg`).
 - Unit conversion is implicit where supported and validated.
 - Conversions may require `density` (mass <-> volume) or `mass` (count <-> mass).
 
-## Validation (ADR-017)
+## Validation (017)
 
 Validation runs at index time and produces queue items for errors. Common errors:
 - Missing `process_type`
@@ -138,13 +141,13 @@ time_model:
 ```
 
 Common boundaries:
-- `environment_source_v0`
-- `import_placeholder_v0`
+- `environment_source_v0` (for in-situ resource collection)
+- For imports: Use `is_import: true` on items (per ADR-007), not a process
 
 ## References
 
-- `docs/ADRs/ADR-012-process-types-and-time-model.md`
-- `docs/ADRs/ADR-013-recipe-override-mechanics.md`
-- `docs/ADRs/ADR-014-energy-model-redesign.md`
-- `docs/ADRs/ADR-016-unit-conversion-system.md`
-- `docs/ADRs/ADR-017-validation-and-error-detection.md`
+- `docs/ADRs/012-process-types-and-time-model.md`
+- `docs/ADRs/013-recipe-override-mechanics.md`
+- `docs/ADRs/014-energy-model-redesign.md`
+- `docs/ADRs/016-unit-conversion-system.md`
+- `docs/ADRs/017-validation-and-error-detection.md`

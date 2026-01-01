@@ -42,6 +42,7 @@ Quick examples:
   - Auto-fix validation issues: `python -m src.cli auto-fix --dry-run`
   - Analyze material closure: `python -m src.cli closure --machine <machine_id>` or `--all`
 - Queue helpers (src CLI):
+  - **IMPORTANT**: Work on queue items **one at a time**. Do not lease multiple items concurrently.
   - Lease next item: `python -m src.cli queue lease --agent <name> [--ttl 900]`
   - Complete/release: `python -m src.cli queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
   - GC expired leases: `python -m src.cli queue gc`

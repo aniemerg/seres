@@ -1095,69 +1095,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "aluminum_scrap": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/aluminum_scrap.yaml",
-      "id": "aluminum_scrap",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Aluminum Scrap",
-      "refs_in": [
-        "aluminum_scrap_generation_direct_v0",
-        "recipe_aluminum_scrap_v1"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "aluminum_scrap_generation_direct_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/aluminum_scrap_generation_direct_v0.yaml",
-      "id": "aluminum_scrap_generation_direct_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Aluminum scrap generation direct v0",
-      "refs_in": [
-        "recipe_aluminum_scrap_v1"
-      ],
-      "refs_out": [
-        "aluminum_scrap",
-        "aluminum_source_material"
-      ],
-      "status": "defined"
-    },
-    "aluminum_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/aluminum_scrap_generation_v0.yaml",
-      "id": "aluminum_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Aluminum scrap generation v0",
-      "refs_in": [
-        "recipe_aluminum_scrap_v0"
-      ],
-      "refs_out": [
-        "aluminum_scrap_v0"
-      ],
-      "status": "defined"
-    },
-    "aluminum_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/aluminum_scrap_v0.yaml",
-      "id": "aluminum_scrap_v0",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Aluminum scrap",
-      "refs_in": [
-        "aluminum_scrap_generation_v0",
-        "aluminum_tube_stock_extrusion_v0",
-        "metal_extrusion_process_v0",
-        "tube_bending_process_v0",
-        "recipe_aluminum_scrap_v0",
-        "recipe_aluminum_sheet_2mm_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "aluminum_shavings_v0": {
       "aliases": [],
       "defined_in": "kb/items/materials/aluminum_shavings_v0.yaml",
@@ -1260,9 +1197,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Aluminum source material",
-      "refs_in": [
-        "aluminum_scrap_generation_direct_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -1318,8 +1253,8 @@
       ],
       "refs_out": [
         "aluminum_alloy_ingot",
-        "aluminum_scrap_v0",
-        "aluminum_tube_stock"
+        "aluminum_tube_stock",
+        "metal_scrap"
       ],
       "status": "defined"
     },
@@ -1806,21 +1741,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "antenna_matching_network": {
-      "aliases": [],
-      "defined_in": "kb/items/parts/antenna_matching_network.yaml",
-      "id": "antenna_matching_network",
-      "kind": "part",
-      "layer_tags": [],
-      "name": "Antenna Matching Network",
-      "refs_in": [
-        "antenna_matching_network_assembly_v0",
-        "recipe_antenna_matching_network_unversioned_v0",
-        "recipe_antenna_matching_network_v1"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "antenna_matching_network_assembly_v0": {
       "aliases": [],
       "defined_in": "kb/processes/antenna_matching_network_assembly_v0.yaml",
@@ -1829,12 +1749,9 @@
       "layer_tags": [],
       "name": "Antenna Matching Network Assembly v0",
       "refs_in": [
-        "recipe_antenna_matching_network_unversioned_v0",
         "recipe_antenna_matching_network_v0"
       ],
-      "refs_out": [
-        "antenna_matching_network"
-      ],
+      "refs_out": [],
       "status": "defined"
     },
     "antenna_matching_network_v0": {
@@ -2156,7 +2073,6 @@
         "recipe_amplitude_modulation_circuit_v0",
         "recipe_analog_test_bench_neural_v0_v0",
         "recipe_anchor_installation_kit_v0",
-        "recipe_antenna_matching_network_v1",
         "recipe_antenna_parabolic_dish_v0",
         "recipe_array_mount_structure_v0",
         "recipe_assembled_cable_harness_v0",
@@ -2848,29 +2764,12 @@
       "name": "Assembly loss",
       "refs_in": [
         "electronic_assembly_v0",
-        "assembly_loss_generation_v0",
         "assembly_process_bearing_v0",
         "drive_motor_medium_assembly_v0",
         "illumination_led_module_assembly_v0",
-        "motor_final_assembly_v0",
-        "recipe_assembly_loss_v0"
+        "motor_final_assembly_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "assembly_loss_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/assembly_loss_generation_v0.yaml",
-      "id": "assembly_loss_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Assembly loss generation (placeholder)",
-      "refs_in": [
-        "recipe_assembly_loss_v0"
-      ],
-      "refs_out": [
-        "assembly_loss"
-      ],
       "status": "defined"
     },
     "assembly_process_bearing_v0": {
@@ -3864,8 +3763,7 @@
       "layer_tags": [],
       "name": "NiFe battery pack",
       "refs_in": [
-        "battery_pack_assembly_nife",
-        "recipe_battery_pack_nife_import_v0"
+        "battery_pack_assembly_nife"
       ],
       "refs_out": [],
       "status": "defined"
@@ -4549,9 +4447,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Bentonite clay",
-      "refs_in": [
-        "recipe_bentonite_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -13428,7 +13324,7 @@
         "calcium_chloride",
         "calcium_oxide",
         "drying_oven",
-        "hydrochloric_acid_v0",
+        "hydrochloric_acid",
         "water"
       ],
       "status": "defined"
@@ -13455,8 +13351,7 @@
       "name": "Calcium chloride solution",
       "refs_in": [
         "calcium_chloride_dihydrate_production_v0",
-        "calcium_chloride_solution_seed_production_v0",
-        "recipe_calcium_chloride_solution_v0"
+        "calcium_chloride_solution_seed_production_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -14587,15 +14482,13 @@
     },
     "catalyst_powder_source_material_v0": {
       "aliases": [],
-      "defined_in": "kb/items/materials/catalyst_powder_source_material_v0.yaml",
+      "defined_in": "kb/imports/catalyst_powder_source_material_v0.yaml",
       "id": "catalyst_powder_source_material_v0",
       "kind": "material",
       "layer_tags": [],
       "name": "Catalyst powder precursor material",
       "refs_in": [
-        "catalyst_powder_production_v0",
-        "procure_catalyst_powder_source_material_v0",
-        "recipe_catalyst_powder_source_material_v0"
+        "catalyst_powder_production_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -15218,9 +15111,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Ceramic (fired, high-temp)",
-      "refs_in": [
-        "recipe_ceramic_fired_high_temp_import_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -15411,8 +15302,7 @@
       "refs_in": [
         "acid_resistant_reactor_lining_fabrication_v0",
         "ceramic_forming_v0",
-        "ceramic_press_or_mold_set_fabrication_v0",
-        "recipe_ceramic_press_or_mold_set_v0"
+        "ceramic_press_or_mold_set_fabrication_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -16692,8 +16582,7 @@
       "layer_tags": [],
       "name": "Coating material",
       "refs_in": [
-        "apply_protective_coating_aluminum_v0",
-        "recipe_coating_material_import_v0"
+        "apply_protective_coating_aluminum_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -17011,8 +16900,8 @@
         "aluminum_wire",
         "coil_insulation_material",
         "coil_winding_machine",
-        "motor_coil_wound",
-        "wire_scrap"
+        "metal_scrap",
+        "motor_coil_wound"
       ],
       "status": "defined"
     },
@@ -17075,8 +16964,8 @@
         "aluminum_wire",
         "coil_insulation_material",
         "coil_winding_machine",
-        "motor_coil_wound",
-        "wire_scrap"
+        "metal_scrap",
+        "motor_coil_wound"
       ],
       "status": "defined"
     },
@@ -17299,9 +17188,7 @@
       "kind": "part",
       "layer_tags": [],
       "name": "Component (untested)",
-      "refs_in": [
-        "recipe_component_untested_import_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -20159,21 +20046,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "delay_line_memory_acoustic_production_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/delay_line_memory_acoustic_production_v0.yaml",
-      "id": "delay_line_memory_acoustic_production_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Acoustic delay line memory production v0",
-      "refs_in": [
-        "recipe_delay_line_memory_acoustic_v0"
-      ],
-      "refs_out": [
-        "delay_line_memory_acoustic_v0"
-      ],
-      "status": "defined"
-    },
     "delay_line_memory_acoustic_v0": {
       "aliases": [],
       "defined_in": "kb/items/parts/delay_line_memory_acoustic_v0.yaml",
@@ -20182,8 +20054,6 @@
       "layer_tags": [],
       "name": "Acoustic delay line memory element v0",
       "refs_in": [
-        "delay_line_memory_acoustic_production_v0",
-        "recipe_delay_line_memory_acoustic_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
@@ -20370,8 +20240,7 @@
       "layer_tags": [],
       "name": "Device (calibrated)",
       "refs_in": [
-        "calibration_and_test_basic_v0",
-        "recipe_device_calibrated_import_v0"
+        "calibration_and_test_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -20384,8 +20253,7 @@
       "layer_tags": [],
       "name": "Device (uncalibrated)",
       "refs_in": [
-        "calibration_and_test_basic_v0",
-        "recipe_device_uncalibrated_import_v0"
+        "calibration_and_test_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -24495,8 +24363,7 @@
       "layer_tags": [],
       "name": "Firing loss",
       "refs_in": [
-        "ceramic_firing_high_temp_v0",
-        "recipe_firing_loss_import_v0"
+        "ceramic_firing_high_temp_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -24761,10 +24628,6 @@
         "brazing_heat_exchanger_high_temp_v0",
         "brazing_process_v0",
         "flux_brazing_synthesis_v0",
-        "recipe_flux_brazing_v0",
-        "recipe_flux_brazing_v1",
-        "recipe_flux_brazing_v2",
-        "recipe_flux_brazing_v3",
         "recipe_flux_brazing_v4"
       ],
       "refs_out": [],
@@ -24780,10 +24643,6 @@
       ],
       "name": "Flux brazing synthesis v0",
       "refs_in": [
-        "recipe_flux_brazing_v0",
-        "recipe_flux_brazing_v1",
-        "recipe_flux_brazing_v2",
-        "recipe_flux_brazing_v3",
         "recipe_flux_brazing_v4"
       ],
       "refs_out": [
@@ -24892,15 +24751,13 @@
     },
     "flywheel_rotor_composite_v0": {
       "aliases": [],
-      "defined_in": "kb/items/materials/flywheel_rotor_composite_v0.yaml",
+      "defined_in": "kb/imports/flywheel_rotor_composite_v0.yaml",
       "id": "flywheel_rotor_composite_v0",
       "kind": "material",
       "layer_tags": [],
       "name": "Flywheel Rotor Composite",
       "refs_in": [
         "flywheel_energy_storage_system_assembly_v0",
-        "placeholder_flywheel_rotor_composite_v0_v0",
-        "recipe_flywheel_rotor_composite_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
@@ -26588,38 +26445,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "generate_sensor_data_test_set_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/generate_sensor_data_test_set_v0.yaml",
-      "id": "generate_sensor_data_test_set_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Generate sensor data test set",
-      "refs_in": [
-        "recipe_sensor_data_test_set_v0"
-      ],
-      "refs_out": [
-        "sensor_data_test_set"
-      ],
-      "status": "defined"
-    },
-    "generate_spinning_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/generate_spinning_scrap_v0.yaml",
-      "id": "generate_spinning_scrap_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_3"
-      ],
-      "name": "Generate spinning scrap metal v0",
-      "refs_in": [
-        "recipe_spinning_scrap_metal_v0"
-      ],
-      "refs_out": [
-        "spinning_scrap_metal_v0"
-      ],
-      "status": "defined"
-    },
     "generic_chemical_reactor_pressure_v0": {
       "aliases": [],
       "defined_in": "kb/items/parts/generic_chemical_reactor_pressure_v0.yaml",
@@ -26746,7 +26571,7 @@
       ],
       "refs_out": [
         "extraction_unit",
-        "getter_material_raw_v0",
+        "getter_material_raw",
         "regolith_lunar_mare",
         "slag_byproduct_v0"
       ],
@@ -26761,6 +26586,7 @@
       "name": "Getter material (raw)",
       "refs_in": [
         "getter_material_activation_v0",
+        "getter_material_extraction_v0",
         "getter_material_raw_generation_v0",
         "tube_assembly_and_evacuation_v0",
         "recipe_getter_material_raw_v2",
@@ -26783,38 +26609,6 @@
       "refs_out": [
         "getter_material_raw"
       ],
-      "status": "defined"
-    },
-    "getter_material_raw_production_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/getter_material_raw_production_v0.yaml",
-      "id": "getter_material_raw_production_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Getter material raw production (placeholder)",
-      "refs_in": [
-        "recipe_getter_material_raw_v0",
-        "recipe_getter_material_raw_v1"
-      ],
-      "refs_out": [
-        "getter_material_raw_v0"
-      ],
-      "status": "defined"
-    },
-    "getter_material_raw_v0": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/getter_material_raw_v0.yaml",
-      "id": "getter_material_raw_v0",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Getter Material (raw)",
-      "refs_in": [
-        "getter_material_extraction_v0",
-        "getter_material_raw_production_v0",
-        "recipe_getter_material_raw_v0",
-        "recipe_getter_material_raw_v1"
-      ],
-      "refs_out": [],
       "status": "defined"
     },
     "gibbsite": {
@@ -26852,7 +26646,6 @@
       "layer_tags": [],
       "name": "Glass blowing process v0",
       "refs_in": [
-        "recipe_glass_scrap_v0",
         "recipe_tube_envelope_blown_v0",
         "recipe_vacuum_tube_triode_power_v0",
         "recipe_vacuum_tube_triode_v0"
@@ -27190,8 +26983,7 @@
       "layer_tags": [],
       "name": "Glass scrap",
       "refs_in": [
-        "glass_blowing_process_v0",
-        "recipe_glass_scrap_v0"
+        "glass_blowing_process_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -27302,8 +27094,7 @@
       "layer_tags": [],
       "name": "Glazed panel or door",
       "refs_in": [
-        "glazing_and_installation_v0",
-        "recipe_glazed_panel_or_door_import_v0"
+        "glazing_and_installation_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -28039,7 +27830,7 @@
       ],
       "refs_out": [
         "optimized_hatch_parameters",
-        "uncoded_data"
+        "uncoded_data_stream"
       ],
       "status": "defined"
     },
@@ -28089,7 +27880,6 @@
       "layer_tags": [],
       "name": "Hydrogen chloride (HCl)",
       "refs_in": [
-        "recipe_hcl_import_v0",
         "recipe_hcl_v0"
       ],
       "refs_out": [],
@@ -28167,7 +27957,7 @@
       ],
       "refs_out": [
         "chloride_salts_v0",
-        "hydrochloric_acid_v0",
+        "hydrochloric_acid",
         "spent_solution_v0"
       ],
       "status": "defined"
@@ -29653,11 +29443,7 @@
       "name": "Holonic PROSA output artifact",
       "refs_in": [
         "holonic_control_prosa_v0",
-        "software_production_v0",
-        "recipe_holonic_control_prosa_output_v0",
-        "recipe_holonic_control_prosa_output_v1",
-        "recipe_holonic_control_prosa_output_v2",
-        "recipe_software_production_for_holonic_output_v0"
+        "recipe_holonic_control_prosa_output_v2"
       ],
       "refs_out": [],
       "status": "defined"
@@ -29673,8 +29459,6 @@
       ],
       "name": "Holonic PROSA control architecture",
       "refs_in": [
-        "recipe_holonic_control_prosa_output_v0",
-        "recipe_holonic_control_prosa_output_v1",
         "recipe_holonic_control_prosa_output_v2",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
@@ -30657,7 +30441,9 @@
       "name": "Hydrochloric acid",
       "refs_in": [
         "alumina_extraction_from_highlands_v0",
+        "calcium_chloride_from_cao_v0",
         "chloride_recycling_to_hcl_v0",
+        "hcl_recovery_distillation_v0",
         "hcl_regolith_leaching_v0",
         "hcl_regolith_preprocessing_v0",
         "hcl_synthesis_from_h2_cl2_v0",
@@ -30691,20 +30477,6 @@
         "hydrochloric_acid",
         "hydrogen_gas"
       ],
-      "status": "defined"
-    },
-    "hydrochloric_acid_v0": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/hydrochloric_acid_v0.yaml",
-      "id": "hydrochloric_acid_v0",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Hydrochloric acid",
-      "refs_in": [
-        "calcium_chloride_from_cao_v0",
-        "hcl_recovery_distillation_v0"
-      ],
-      "refs_out": [],
       "status": "defined"
     },
     "hydrogen_chloride": {
@@ -31065,46 +30837,6 @@
       "layer_tags": [],
       "name": "Permanent magnet (neodymium, imported)",
       "refs_in": [],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "import_placeholder_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/import_placeholder_v0.yaml",
-      "id": "import_placeholder_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_1"
-      ],
-      "name": "Import placeholder (v0)",
-      "refs_in": [
-        "recipe_battery_pack_nife_import_v0",
-        "recipe_bentonite_v0",
-        "recipe_calcium_chloride_solution_v0",
-        "recipe_ceramic_fired_high_temp_import_v0",
-        "recipe_ceramic_press_or_mold_set_v0",
-        "recipe_coating_material_import_v0",
-        "recipe_component_untested_import_v0",
-        "recipe_device_calibrated_import_v0",
-        "recipe_device_uncalibrated_import_v0",
-        "recipe_firing_loss_import_v0",
-        "recipe_glazed_panel_or_door_import_v0",
-        "recipe_hcl_import_v0",
-        "recipe_instrument_uncalibrated_import_v0",
-        "recipe_insulation_material_import_v0",
-        "recipe_iron_cobalt_alloy_v0",
-        "recipe_kaolinite_clay_v0",
-        "recipe_lamination_stack_clamped_import_v0",
-        "recipe_metal_part_welded_import_v0",
-        "recipe_nife_battery_cell_import_v0",
-        "recipe_serpentinite_v0",
-        "recipe_silicic_acid_v0",
-        "recipe_system_under_test_import_v0",
-        "recipe_test_equipment_basic_import_v0",
-        "recipe_ti6al4v_alloy_v0",
-        "recipe_tungsten_disilicide_v0",
-        "recipe_unfinished_part_import_v0"
-      ],
       "refs_out": [],
       "status": "defined"
     },
@@ -31794,8 +31526,7 @@
       "layer_tags": [],
       "name": "Instrument (uncalibrated)",
       "refs_in": [
-        "calibration_basic_v0",
-        "recipe_instrument_uncalibrated_import_v0"
+        "calibration_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -31893,8 +31624,7 @@
       "layer_tags": [],
       "name": "Insulation material",
       "refs_in": [
-        "battery_pack_assembly_nife",
-        "recipe_insulation_material_import_v0"
+        "battery_pack_assembly_nife"
       ],
       "refs_out": [],
       "status": "defined"
@@ -32329,9 +32059,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Iron-cobalt alloy",
-      "refs_in": [
-        "recipe_iron_cobalt_alloy_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -32772,8 +32500,7 @@
       "layer_tags": [],
       "name": "Kaolinite clay",
       "refs_in": [
-        "recipe_ceramic_powder_mixture_v0",
-        "recipe_kaolinite_clay_v0"
+        "recipe_ceramic_powder_mixture_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -33217,8 +32944,7 @@
       "layer_tags": [],
       "name": "Lamination stack (clamped)",
       "refs_in": [
-        "stacking_and_clamping_v0",
-        "recipe_lamination_stack_clamped_import_v0"
+        "stacking_and_clamping_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -34273,7 +33999,7 @@
         "base_grease_stock_v0",
         "grease_bearing_high_temp",
         "high_temp_additive_v0",
-        "waste_grease_v0"
+        "process_waste"
       ],
       "status": "defined"
     },
@@ -35486,8 +35212,6 @@
         "recipe_impeller_blades_set_v0",
         "recipe_lathe_tool_post_basic_v0",
         "recipe_lox_lh2_storage_tank_set_v0",
-        "recipe_metal_swarf_v0",
-        "recipe_metal_swarf_v1",
         "recipe_mixing_tank_medium_v0",
         "recipe_sensor_wired_assembly_v0",
         "recipe_tank_valve_and_fitting_set_v0"
@@ -36041,6 +35765,7 @@
       "name": "Magnetic core memory array v0",
       "refs_in": [
         "bom_pheromone_digital_system_v0",
+        "pheromone_digital_system_assembly_v0",
         "recipe_magnetic_core_memory_array_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
@@ -36485,19 +36210,15 @@
     },
     "materials_closure_verification_v0": {
       "aliases": [],
-      "defined_in": "kb/processes/materials_closure_verification_v0.yaml",
+      "defined_in": "kb/items/materials/materials_closure_verification_v0.yaml",
       "id": "materials_closure_verification_v0",
-      "kind": "process",
+      "kind": "material",
       "layer_tags": [],
-      "name": "Materials closure verification v0",
+      "name": "Materials Closure Verification",
       "refs_in": [
-        "materials_closure_verification_v0",
-        "recipe_materials_closure_verification_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
-      "refs_out": [
-        "materials_closure_verification_v0"
-      ],
+      "refs_out": [],
       "status": "defined"
     },
     "measurement_equipment": {
@@ -37083,8 +36804,8 @@
       ],
       "refs_out": [
         "aluminum_alloy_ingot",
-        "aluminum_scrap_v0",
-        "heat_sink_fin_extrusion"
+        "heat_sink_fin_extrusion",
+        "metal_scrap"
       ],
       "status": "defined"
     },
@@ -37148,8 +36869,7 @@
       "layer_tags": [],
       "name": "Metal feedstock for alloying",
       "refs_in": [
-        "alloying_basic_v0",
-        "metal_scrap_generation_v0"
+        "alloying_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -37336,9 +37056,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Welded metal part",
-      "refs_in": [
-        "recipe_metal_part_welded_import_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -37467,36 +37185,24 @@
       "layer_tags": [],
       "name": "Metal scrap",
       "refs_in": [
+        "aluminum_tube_stock_extrusion_v0",
         "bearing_manufacturing_small_v0",
+        "coil_winding_basic_v0",
+        "coil_winding_motor_v0",
         "lamination_stamping_v0",
         "machine_frame_small_casting_v0",
         "metal_cutting_process_v0",
-        "metal_scrap_generation_v0",
+        "metal_extrusion_process_v0",
         "motor_housing_casting_v0",
         "motor_housing_forming_v0",
         "motor_shaft_machining_v0",
         "robot_wrist_fabrication_v0",
         "sheet_metal_cutting_v0",
+        "tube_bending_process_v0",
         "wire_drawing_aluminum_v0",
-        "recipe_metal_scrap_v0"
+        "recipe_aluminum_sheet_2mm_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "metal_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/metal_scrap_generation_v0.yaml",
-      "id": "metal_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Metal scrap generation v0",
-      "refs_in": [
-        "recipe_metal_scrap_v0"
-      ],
-      "refs_out": [
-        "metal_feedstock",
-        "metal_scrap"
-      ],
       "status": "defined"
     },
     "metal_shear_or_saw": {
@@ -37617,8 +37323,7 @@
       "name": "Metal Swarf",
       "refs_in": [
         "grinding_basic_v0",
-        "machining_process_milling_v0",
-        "recipe_metal_swarf_v1"
+        "machining_process_milling_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -37630,9 +37335,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Metal Swarf",
-      "refs_in": [
-        "recipe_metal_swarf_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -38082,6 +37785,7 @@
         "bom_pheromone_digital_system_v0",
         "bom_resource_prospecting_ai_v0_v0",
         "firmware_programming_v0",
+        "pheromone_digital_system_assembly_v0",
         "programming_and_test_v0",
         "recipe_microcontroller_or_embedded_board_v0"
       ],
@@ -39923,6 +39627,7 @@
       "layer_tags": [],
       "name": "Multimeter set",
       "refs_in": [
+        "testing_and_calibration_circuit_v0",
         "electrical_testing_basic_v0",
         "electrical_testing_v0"
       ],
@@ -40644,8 +40349,7 @@
       "layer_tags": [],
       "name": "NiFe battery cell",
       "refs_in": [
-        "battery_pack_assembly_nife",
-        "recipe_nife_battery_cell_import_v0"
+        "battery_pack_assembly_nife"
       ],
       "refs_out": [],
       "status": "defined"
@@ -40873,26 +40577,9 @@
       "layer_tags": [],
       "name": "Nitrogen source or volatile (import)",
       "refs_in": [
-        "nitrogen_source_import_seed_v0",
-        "recipe_nitrogen_source_import_or_volatile_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "nitrogen_source_import_seed_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/nitrogen_source_import_seed_v0.yaml",
-      "id": "nitrogen_source_import_seed_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Nitrogen source import seed v0",
-      "refs_in": [
-        "recipe_nitrogen_source_import_or_volatile_v0"
-      ],
-      "refs_out": [
-        "nitrogen_source_import_or_volatile_v0"
-      ],
       "status": "defined"
     },
     "noble_gas_extraction_v0": {
@@ -41456,6 +41143,7 @@
       "name": "Oscilloscope (basic)",
       "refs_in": [
         "bom_test_equipment_electronics_v0",
+        "testing_and_calibration_circuit_v0",
         "electrical_testing_basic_v0",
         "recipe_oscilloscope_basic_v0"
       ],
@@ -41663,8 +41351,7 @@
       "refs_in": [
         "recipe_oxygen_sensor_module_import_v0",
         "recipe_oxygen_sensor_module_v0",
-        "recipe_oxygen_sensor_module_v1",
-        "recipe_oxygen_sensor_module_waste_v0"
+        "recipe_oxygen_sensor_module_v1"
       ],
       "refs_out": [
         "assembled_electronics",
@@ -41682,8 +41369,7 @@
       "layer_tags": [],
       "name": "Oxygen sensor module waste",
       "refs_in": [
-        "oxygen_sensor_module_assembly_v0",
-        "recipe_oxygen_sensor_module_waste_v0"
+        "oxygen_sensor_module_assembly_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -41839,15 +41525,13 @@
     },
     "packed_bed_v0": {
       "aliases": [],
-      "defined_in": "kb/items/materials/packed_bed_v0.yaml",
+      "defined_in": "kb/imports/packed_bed_v0.yaml",
       "id": "packed_bed_v0",
       "kind": "material",
       "layer_tags": [],
       "name": "Fresh packed bed",
       "refs_in": [
-        "packed_bed_spent_generation_v0",
-        "seed_packed_bed_v0",
-        "recipe_packed_bed_v0"
+        "packed_bed_spent_generation_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -42790,28 +42474,11 @@
       "name": "PCB Scrap",
       "refs_in": [
         "pcb_fabrication_process_v0",
-        "pcb_scrap_generation_v0",
         "recipe_core_memory_controller_v0",
         "recipe_pcb_backprop_bare_v0",
-        "recipe_pcb_bare_board_v0",
-        "recipe_pcb_scrap_v0"
+        "recipe_pcb_bare_board_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "pcb_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/pcb_scrap_generation_v0.yaml",
-      "id": "pcb_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "PCB scrap generation v0",
-      "refs_in": [
-        "recipe_pcb_scrap_v0"
-      ],
-      "refs_out": [
-        "pcb_scrap"
-      ],
       "status": "defined"
     },
     "pcb_substrate_fabrication_v0": {
@@ -43154,7 +42821,10 @@
       ],
       "refs_out": [
         "assembly_tools_basic",
-        "pheromone_digital_system_v0"
+        "magnetic_core_memory_array_v0",
+        "microcontroller_or_embedded_board",
+        "pheromone_digital_system_v0",
+        "radio_communication_module"
       ],
       "status": "defined"
     },
@@ -43600,23 +43270,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "placeholder_flywheel_rotor_composite_v0_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/placeholder_flywheel_rotor_composite_v0_v0.yaml",
-      "id": "placeholder_flywheel_rotor_composite_v0_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_1"
-      ],
-      "name": "Placeholder production of flywheel rotor composite v0",
-      "refs_in": [
-        "recipe_flywheel_rotor_composite_v0"
-      ],
-      "refs_out": [
-        "flywheel_rotor_composite_v0"
-      ],
-      "status": "defined"
-    },
     "plagioclase_feldspar": {
       "aliases": [],
       "defined_in": "kb/items/materials/plagioclase_feldspar.yaml",
@@ -44054,21 +43707,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "polymer_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/polymer_scrap_generation_v0.yaml",
-      "id": "polymer_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Polymer scrap generation v0",
-      "refs_in": [
-        "recipe_polymer_scrap_v0"
-      ],
-      "refs_out": [
-        "polymer_scrap_v0"
-      ],
-      "status": "defined"
-    },
     "polymer_scrap_v0": {
       "aliases": [],
       "defined_in": "kb/items/materials/polymer_scrap_v0.yaml",
@@ -44078,9 +43716,7 @@
       "name": "Polymer scrap",
       "refs_in": [
         "knob_control_dial_machining_v0",
-        "knob_control_dial_machining_v1",
-        "polymer_scrap_generation_v0",
-        "recipe_polymer_scrap_v0"
+        "knob_control_dial_machining_v1"
       ],
       "refs_out": [],
       "status": "defined"
@@ -45335,6 +44971,7 @@
       "layer_tags": [],
       "name": "Bench-top power supply",
       "refs_in": [
+        "testing_and_calibration_circuit_v0",
         "electrical_testing_basic_v0",
         "power_supply_benchtop_assembly_v0",
         "recipe_power_supply_benchtop_v0"
@@ -46586,6 +46223,7 @@
         "aluminosilicate_glass_production_v0",
         "chemical_synthesis_basic_v0",
         "coil_insulation_production_v0",
+        "lubricant_compounding_high_temp_v0",
         "waste_generation_basic_v0",
         "recipe_process_waste_v0"
       ],
@@ -46621,21 +46259,6 @@
         "recipe_processed_tailings_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "procure_catalyst_powder_source_material_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/procure_catalyst_powder_source_material_v0.yaml",
-      "id": "procure_catalyst_powder_source_material_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Procurement of catalyst powder source material",
-      "refs_in": [
-        "recipe_catalyst_powder_source_material_v0"
-      ],
-      "refs_out": [
-        "catalyst_powder_source_material_v0"
-      ],
       "status": "defined"
     },
     "procure_fixture_assembly_contacts_v0": {
@@ -47143,7 +46766,8 @@
       "name": "Radio communication module",
       "refs_in": [
         "bom_kapvik_microrover_30kg_v0_v0",
-        "bom_pheromone_digital_system_v0"
+        "bom_pheromone_digital_system_v0",
+        "pheromone_digital_system_assembly_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -47221,32 +46845,15 @@
       "refs_out": [],
       "status": "defined"
     },
-    "raw_data_stream_manchester_seed_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/raw_data_stream_manchester_seed_v0.yaml",
-      "id": "raw_data_stream_manchester_seed_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Seed Manchester raw data stream v0",
-      "refs_in": [
-        "recipe_raw_data_stream_manchester_v0"
-      ],
-      "refs_out": [
-        "raw_data_stream_manchester_v0"
-      ],
-      "status": "defined"
-    },
     "raw_data_stream_manchester_v0": {
       "aliases": [],
-      "defined_in": "kb/items/materials/raw_data_stream_manchester_v0.yaml",
+      "defined_in": "kb/imports/raw_data_stream_manchester_v0.yaml",
       "id": "raw_data_stream_manchester_v0",
       "kind": "material",
       "layer_tags": [],
       "name": "Raw Manchester Data Stream",
       "refs_in": [
-        "manchester_encoding_basic_v0",
-        "raw_data_stream_manchester_seed_v0",
-        "recipe_raw_data_stream_manchester_v0"
+        "manchester_encoding_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -47984,34 +47591,6 @@
       ],
       "status": "defined"
     },
-    "recipe_aluminum_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_aluminum_scrap_v0.yaml",
-      "id": "recipe_aluminum_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "aluminum_scrap_generation_v0",
-        "aluminum_scrap_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_aluminum_scrap_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_aluminum_scrap_v1.yaml",
-      "id": "recipe_aluminum_scrap_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "aluminum_scrap",
-        "aluminum_scrap_generation_direct_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_aluminum_shavings_v0_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_aluminum_shavings_v0_v0.yaml",
@@ -48036,8 +47615,8 @@
       "refs_in": [],
       "refs_out": [
         "aluminum_alloy_ingot",
-        "aluminum_scrap_v0",
         "aluminum_sheet_2mm",
+        "metal_scrap",
         "rolling_basic_v0"
       ],
       "status": "defined"
@@ -48350,20 +47929,6 @@
       ],
       "status": "defined"
     },
-    "recipe_antenna_matching_network_unversioned_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_antenna_matching_network_unversioned_v0.yaml",
-      "id": "recipe_antenna_matching_network_unversioned_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "antenna_matching_network",
-        "antenna_matching_network_assembly_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_antenna_matching_network_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_antenna_matching_network_v0.yaml",
@@ -48377,20 +47942,6 @@
         "antenna_matching_network_v0",
         "electronic_components_set",
         "enclosure_small"
-      ],
-      "status": "defined"
-    },
-    "recipe_antenna_matching_network_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_antenna_matching_network_v1.yaml",
-      "id": "recipe_antenna_matching_network_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for antenna matching network v1",
-      "refs_in": [],
-      "refs_out": [
-        "antenna_matching_network",
-        "assembly_basic_v0"
       ],
       "status": "defined"
     },
@@ -48612,20 +48163,6 @@
         "crimping_and_termination_v0",
         "inspection_basic_v0",
         "wire_cutting_and_stripping_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_assembly_loss_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_assembly_loss_v0.yaml",
-      "id": "recipe_assembly_loss_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "assembly_loss",
-        "assembly_loss_generation_v0"
       ],
       "status": "defined"
     },
@@ -49307,20 +48844,6 @@
       ],
       "status": "defined"
     },
-    "recipe_battery_pack_nife_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_battery_pack_nife_import_v0.yaml",
-      "id": "recipe_battery_pack_nife_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "battery_pack_nife",
-        "import_placeholder_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_bearing_ball_precision_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_bearing_ball_precision_v0.yaml",
@@ -49637,20 +49160,6 @@
       "refs_out": [
         "bent_tube_sections",
         "tube_bending_and_cutting_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_bentonite_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_bentonite_v0.yaml",
-      "id": "recipe_bentonite_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "bentonite",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -50182,20 +49691,6 @@
       "refs_out": [
         "calcium_chloride_dihydrate_production_v0",
         "calcium_chloride_dihydrate_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_calcium_chloride_solution_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_calcium_chloride_solution_v0.yaml",
-      "id": "recipe_calcium_chloride_solution_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "calcium_chloride_solution_v0",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -50843,20 +50338,6 @@
       ],
       "status": "defined"
     },
-    "recipe_catalyst_powder_source_material_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_catalyst_powder_source_material_v0.yaml",
-      "id": "recipe_catalyst_powder_source_material_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "catalyst_powder_source_material_v0",
-        "procure_catalyst_powder_source_material_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_catalyst_powder_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_catalyst_powder_v0.yaml",
@@ -51151,20 +50632,6 @@
       ],
       "status": "defined"
     },
-    "recipe_ceramic_fired_high_temp_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_ceramic_fired_high_temp_import_v0.yaml",
-      "id": "recipe_ceramic_fired_high_temp_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "ceramic_fired_high_temp",
-        "import_placeholder_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_ceramic_insulators_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_ceramic_insulators_v0.yaml",
@@ -51214,20 +50681,6 @@
       "refs_out": [
         "ceramic_powder",
         "ceramic_powder_synthesis_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_ceramic_press_or_mold_set_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_ceramic_press_or_mold_set_v0.yaml",
-      "id": "recipe_ceramic_press_or_mold_set_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Ceramic press or mold set fabrication",
-      "refs_in": [],
-      "refs_out": [
-        "ceramic_press_or_mold_set",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -52124,20 +51577,6 @@
       ],
       "status": "defined"
     },
-    "recipe_coating_material_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_coating_material_import_v0.yaml",
-      "id": "recipe_coating_material_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "coating_material",
-        "import_placeholder_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_coating_spray_gun_and_pump_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_coating_spray_gun_and_pump_v0.yaml",
@@ -52490,20 +51929,6 @@
       "refs_out": [
         "component_to_seal",
         "component_to_seal_from_raw_material_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_component_untested_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_component_untested_import_v0.yaml",
-      "id": "recipe_component_untested_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "component_untested",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -54478,20 +53903,6 @@
       ],
       "status": "defined"
     },
-    "recipe_delay_line_memory_acoustic_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_delay_line_memory_acoustic_v0.yaml",
-      "id": "recipe_delay_line_memory_acoustic_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for acoustic delay line memory v0",
-      "refs_in": [],
-      "refs_out": [
-        "delay_line_memory_acoustic_production_v0",
-        "delay_line_memory_acoustic_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_delay_line_memory_magnetic_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_delay_line_memory_magnetic_v0.yaml",
@@ -54629,34 +54040,6 @@
         "machining_process_drilling_v0",
         "machining_process_turning_v0",
         "metal_casting_basic_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_device_calibrated_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_device_calibrated_import_v0.yaml",
-      "id": "recipe_device_calibrated_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "device_calibrated",
-        "import_placeholder_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_device_uncalibrated_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_device_uncalibrated_import_v0.yaml",
-      "id": "recipe_device_uncalibrated_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "device_uncalibrated",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -56834,20 +56217,6 @@
       ],
       "status": "defined"
     },
-    "recipe_firing_loss_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_firing_loss_import_v0.yaml",
-      "id": "recipe_firing_loss_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "firing_loss",
-        "import_placeholder_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_fittings_and_valves_import_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_fittings_and_valves_import_v0.yaml",
@@ -56973,62 +56342,6 @@
       ],
       "status": "defined"
     },
-    "recipe_flux_brazing_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_flux_brazing_v0.yaml",
-      "id": "recipe_flux_brazing_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "flux_brazing",
-        "flux_brazing_synthesis_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_flux_brazing_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_flux_brazing_v1.yaml",
-      "id": "recipe_flux_brazing_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Flux brazing synthesis recipe v1",
-      "refs_in": [],
-      "refs_out": [
-        "flux_brazing",
-        "flux_brazing_synthesis_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_flux_brazing_v2": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_flux_brazing_v2.yaml",
-      "id": "recipe_flux_brazing_v2",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Flux brazing synthesis recipe v2",
-      "refs_in": [],
-      "refs_out": [
-        "flux_brazing",
-        "flux_brazing_synthesis_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_flux_brazing_v3": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_flux_brazing_v3.yaml",
-      "id": "recipe_flux_brazing_v3",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Flux brazing synthesis recipe v3",
-      "refs_in": [],
-      "refs_out": [
-        "flux_brazing",
-        "flux_brazing_synthesis_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_flux_brazing_v4": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_flux_brazing_v4.yaml",
@@ -57085,20 +56398,6 @@
       "refs_out": [
         "flywheel_motor_generator_assembly_v0",
         "flywheel_motor_generator_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_flywheel_rotor_composite_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_flywheel_rotor_composite_v0.yaml",
-      "id": "recipe_flywheel_rotor_composite_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Flywheel Rotor Composite production (placeholder) v0",
-      "refs_in": [],
-      "refs_out": [
-        "flywheel_rotor_composite_v0",
-        "placeholder_flywheel_rotor_composite_v0_v0"
       ],
       "status": "defined"
     },
@@ -58357,34 +57656,6 @@
       ],
       "status": "defined"
     },
-    "recipe_getter_material_raw_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_getter_material_raw_v0.yaml",
-      "id": "recipe_getter_material_raw_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Getter material raw production v0",
-      "refs_in": [],
-      "refs_out": [
-        "getter_material_raw_production_v0",
-        "getter_material_raw_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_getter_material_raw_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_getter_material_raw_v1.yaml",
-      "id": "recipe_getter_material_raw_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "getter_material_raw_production_v0",
-        "getter_material_raw_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_getter_material_raw_v2": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_getter_material_raw_v2.yaml",
@@ -58529,20 +57800,6 @@
       ],
       "status": "defined"
     },
-    "recipe_glass_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_glass_scrap_v0.yaml",
-      "id": "recipe_glass_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "glass_blowing_process_v0",
-        "glass_scrap"
-      ],
-      "status": "defined"
-    },
     "recipe_glass_to_metal_seal_kovar_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_glass_to_metal_seal_kovar_v0.yaml",
@@ -58585,20 +57842,6 @@
         "integration_test_basic_v0",
         "machining_finish_basic_v0",
         "welding_basic_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_glazed_panel_or_door_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_glazed_panel_or_door_import_v0.yaml",
-      "id": "recipe_glazed_panel_or_door_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "glazed_panel_or_door",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -59127,20 +58370,6 @@
       "refs_out": [
         "hcl_acid_production_unit_v0",
         "hcl_acid_production_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_hcl_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_hcl_import_v0.yaml",
-      "id": "recipe_hcl_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "hcl",
-        "import_placeholder_v0"
       ],
       "status": "defined"
     },
@@ -60048,34 +59277,6 @@
       "refs_out": [
         "hip_press_unit_assembly_v0",
         "hip_press_unit_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_holonic_control_prosa_output_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_holonic_control_prosa_output_v0.yaml",
-      "id": "recipe_holonic_control_prosa_output_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for holonic control PROSA output",
-      "refs_in": [],
-      "refs_out": [
-        "holonic_control_prosa_output",
-        "holonic_control_prosa_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_holonic_control_prosa_output_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_holonic_control_prosa_output_v1.yaml",
-      "id": "recipe_holonic_control_prosa_output_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for holonic control PROSA output v1",
-      "refs_in": [],
-      "refs_out": [
-        "holonic_control_prosa_output",
-        "holonic_control_prosa_v0"
       ],
       "status": "defined"
     },
@@ -61360,20 +60561,6 @@
       ],
       "status": "defined"
     },
-    "recipe_instrument_uncalibrated_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_instrument_uncalibrated_import_v0.yaml",
-      "id": "recipe_instrument_uncalibrated_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "instrument_uncalibrated"
-      ],
-      "status": "defined"
-    },
     "recipe_insulated_assembly_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_insulated_assembly_v0.yaml",
@@ -61415,20 +60602,6 @@
       "refs_out": [
         "epoxy_resin_to_insulation_coating_v0",
         "insulation_coating_material"
-      ],
-      "status": "defined"
-    },
-    "recipe_insulation_material_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_insulation_material_import_v0.yaml",
-      "id": "recipe_insulation_material_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "insulation_material"
       ],
       "status": "defined"
     },
@@ -61629,20 +60802,6 @@
       "refs_out": [
         "iron_carbonyl_synthesis_v0",
         "iron_carbonyl_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_iron_cobalt_alloy_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_iron_cobalt_alloy_v0.yaml",
-      "id": "recipe_iron_cobalt_alloy_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "iron_cobalt_alloy"
       ],
       "status": "defined"
     },
@@ -61897,20 +61056,6 @@
         "jaw_plates_set",
         "machining_finish_basic_v0",
         "metal_casting_basic_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_kaolinite_clay_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_kaolinite_clay_v0.yaml",
-      "id": "recipe_kaolinite_clay_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "kaolinite_clay"
       ],
       "status": "defined"
     },
@@ -62212,20 +61357,6 @@
       "refs_out": [
         "laminated_silicon_steel_core_v0",
         "lamination_stamping_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_lamination_stack_clamped_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_lamination_stack_clamped_import_v0.yaml",
-      "id": "recipe_lamination_stack_clamped_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "lamination_stack_clamped"
       ],
       "status": "defined"
     },
@@ -65228,19 +64359,6 @@
       ],
       "status": "defined"
     },
-    "recipe_materials_closure_verification_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_materials_closure_verification_v0.yaml",
-      "id": "recipe_materials_closure_verification_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "materials_closure_verification_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_measurement_equipment_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_measurement_equipment_v0.yaml",
@@ -65457,20 +64575,6 @@
       ],
       "status": "defined"
     },
-    "recipe_metal_part_welded_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_metal_part_welded_import_v0.yaml",
-      "id": "recipe_metal_part_welded_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "metal_part_welded"
-      ],
-      "status": "defined"
-    },
     "recipe_metal_powder_atomization_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_metal_powder_atomization_v0.yaml",
@@ -65509,20 +64613,6 @@
       "refs_out": [
         "metal_powder_v0",
         "metal_powdering_process_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_metal_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_metal_scrap_v0.yaml",
-      "id": "recipe_metal_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "metal_scrap",
-        "metal_scrap_generation_v0"
       ],
       "status": "defined"
     },
@@ -65595,34 +64685,6 @@
       "refs_out": [
         "metal_sheet",
         "rolling_basic_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_metal_swarf_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_metal_swarf_v0.yaml",
-      "id": "recipe_metal_swarf_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "machining_process_milling_v0",
-        "metal_swarf_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_metal_swarf_v1": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_metal_swarf_v1.yaml",
-      "id": "recipe_metal_swarf_v1",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "machining_process_milling_v0",
-        "metal_swarf"
       ],
       "status": "defined"
     },
@@ -67259,20 +66321,6 @@
       ],
       "status": "defined"
     },
-    "recipe_nife_battery_cell_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_nife_battery_cell_import_v0.yaml",
-      "id": "recipe_nife_battery_cell_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "nife_battery_cell"
-      ],
-      "status": "defined"
-    },
     "recipe_nife_meteorite_magnetic_detection_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_nife_meteorite_magnetic_detection_v0.yaml",
@@ -67388,20 +66436,6 @@
       "refs_out": [
         "nitrogen_impurities",
         "nitrogen_purification_from_air_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_nitrogen_source_import_or_volatile_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_nitrogen_source_import_or_volatile_v0.yaml",
-      "id": "recipe_nitrogen_source_import_or_volatile_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "nitrogen_source_import_or_volatile_v0",
-        "nitrogen_source_import_seed_v0"
       ],
       "status": "defined"
     },
@@ -67854,20 +66888,6 @@
       ],
       "status": "defined"
     },
-    "recipe_oxygen_sensor_module_waste_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_oxygen_sensor_module_waste_v0.yaml",
-      "id": "recipe_oxygen_sensor_module_waste_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "oxygen_sensor_module_assembly_v0",
-        "oxygen_sensor_module_waste_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_oxygen_sensor_zirconia_alias_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_oxygen_sensor_zirconia_alias_v0.yaml",
@@ -67959,20 +66979,6 @@
       "refs_out": [
         "packed_bed_spent_generation_v0",
         "packed_bed_spent_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_packed_bed_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_packed_bed_v0.yaml",
-      "id": "recipe_packed_bed_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "packed_bed_v0",
-        "seed_packed_bed_v0"
       ],
       "status": "defined"
     },
@@ -68406,20 +67412,6 @@
         "pcb_assembly_basic_v0",
         "pcb_fabrication_v0",
         "pcb_populated"
-      ],
-      "status": "defined"
-    },
-    "recipe_pcb_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_pcb_scrap_v0.yaml",
-      "id": "recipe_pcb_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "pcb_scrap",
-        "pcb_scrap_generation_v0"
       ],
       "status": "defined"
     },
@@ -69074,20 +68066,6 @@
       "refs_out": [
         "additive_manufacturing_polymer_v0",
         "polymer_printed_part"
-      ],
-      "status": "defined"
-    },
-    "recipe_polymer_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_polymer_scrap_v0.yaml",
-      "id": "recipe_polymer_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "polymer_scrap_generation_v0",
-        "polymer_scrap_v0"
       ],
       "status": "defined"
     },
@@ -70897,20 +69875,6 @@
       ],
       "status": "defined"
     },
-    "recipe_raw_data_stream_manchester_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_raw_data_stream_manchester_v0.yaml",
-      "id": "recipe_raw_data_stream_manchester_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "raw_data_stream_manchester_seed_v0",
-        "raw_data_stream_manchester_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_raw_formation_control_material_v0_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_raw_formation_control_material_v0_v0.yaml",
@@ -72646,20 +71610,6 @@
       ],
       "status": "defined"
     },
-    "recipe_sensor_data_test_set_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_sensor_data_test_set_v0.yaml",
-      "id": "recipe_sensor_data_test_set_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "generate_sensor_data_test_set_v0",
-        "sensor_data_test_set"
-      ],
-      "status": "defined"
-    },
     "recipe_sensor_element_with_gauges_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_sensor_element_with_gauges_v0.yaml",
@@ -72813,20 +71763,6 @@
       "refs_out": [
         "separator_fabrication_basic_v0",
         "separator_robust"
-      ],
-      "status": "defined"
-    },
-    "recipe_serpentinite_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_serpentinite_v0.yaml",
-      "id": "recipe_serpentinite_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "serpentinite"
       ],
       "status": "defined"
     },
@@ -73015,20 +71951,6 @@
         "inspection_basic_v0",
         "mineral_processing_basic_v0",
         "silica_purified"
-      ],
-      "status": "defined"
-    },
-    "recipe_silicic_acid_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_silicic_acid_v0.yaml",
-      "id": "recipe_silicic_acid_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "silicic_acid"
       ],
       "status": "defined"
     },
@@ -73653,20 +72575,6 @@
       ],
       "status": "defined"
     },
-    "recipe_software_production_for_holonic_output_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_software_production_for_holonic_output_v0.yaml",
-      "id": "recipe_software_production_for_holonic_output_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for holonic_prosa_output via software production",
-      "refs_in": [],
-      "refs_out": [
-        "holonic_control_prosa_output",
-        "software_production_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_software_service_license_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_software_service_license_v0.yaml",
@@ -74199,20 +73107,6 @@
       ],
       "status": "defined"
     },
-    "recipe_spinning_scrap_metal_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_spinning_scrap_metal_v0.yaml",
-      "id": "recipe_spinning_scrap_metal_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for spinning scrap metal v0",
-      "refs_in": [],
-      "refs_out": [
-        "generate_spinning_scrap_v0",
-        "spinning_scrap_metal_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_spring_and_dampener_set_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_spring_and_dampener_set_v0.yaml",
@@ -74271,20 +73165,6 @@
       "refs_out": [
         "assembly_basic_v0",
         "staff_holon_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_stainless_billet_or_slab_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_stainless_billet_or_slab_import_v0.yaml",
-      "id": "recipe_stainless_billet_or_slab_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Stainless billet or slab production v0 (local)",
-      "refs_in": [],
-      "refs_out": [
-        "stainless_billet_or_slab",
-        "stainless_refining_basic_v0"
       ],
       "status": "defined"
     },
@@ -74768,20 +73648,6 @@
       ],
       "status": "defined"
     },
-    "recipe_steel_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_steel_scrap_v0.yaml",
-      "id": "recipe_steel_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "steel_scrap_generation_v0",
-        "steel_scrap_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_steel_shaft_machined": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_steel_shaft_machined_v1.yaml",
@@ -74994,20 +73860,6 @@
         "stewart_platform_structure",
         "surface_finishing_basic_v0",
         "welding_and_fabrication_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_stigmergy_algorithm_module_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_stigmergy_algorithm_module_v0.yaml",
-      "id": "recipe_stigmergy_algorithm_module_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "stigmergy_algorithm_module_development_v0",
-        "stigmergy_algorithm_module_v0"
       ],
       "status": "defined"
     },
@@ -75496,20 +74348,6 @@
       ],
       "status": "defined"
     },
-    "recipe_system_under_test_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_system_under_test_import_v0.yaml",
-      "id": "recipe_system_under_test_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "system_under_test"
-      ],
-      "status": "defined"
-    },
     "recipe_table_drive_assembly_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_table_drive_assembly_v0.yaml",
@@ -75947,20 +74785,6 @@
       ],
       "status": "defined"
     },
-    "recipe_test_equipment_basic_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_test_equipment_basic_import_v0.yaml",
-      "id": "recipe_test_equipment_basic_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "test_equipment_basic_import"
-      ],
-      "status": "defined"
-    },
     "recipe_test_equipment_basic_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_test_equipment_basic_v0.yaml",
@@ -76363,20 +75187,6 @@
         "assembly_basic_v0",
         "machining_finish_basic_v0",
         "threading_needle_mechanism_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_ti6al4v_alloy_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_ti6al4v_alloy_v0.yaml",
-      "id": "recipe_ti6al4v_alloy_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "ti6al4v_alloy"
       ],
       "status": "defined"
     },
@@ -77251,20 +76061,6 @@
       ],
       "status": "defined"
     },
-    "recipe_tungsten_disilicide_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_tungsten_disilicide_v0.yaml",
-      "id": "recipe_tungsten_disilicide_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "tungsten_disilicide"
-      ],
-      "status": "defined"
-    },
     "recipe_tungsten_metal_pure_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_tungsten_metal_pure_v0.yaml",
@@ -77401,34 +76197,6 @@
       ],
       "status": "defined"
     },
-    "recipe_uncoded_data_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_uncoded_data_v0.yaml",
-      "id": "recipe_uncoded_data_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for uncoded_data v0",
-      "refs_in": [],
-      "refs_out": [
-        "seed_uncoded_data_v0",
-        "uncoded_data"
-      ],
-      "status": "defined"
-    },
-    "recipe_unfinished_part_import_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_unfinished_part_import_v0.yaml",
-      "id": "recipe_unfinished_part_import_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "import_placeholder_v0",
-        "unfinished_part"
-      ],
-      "status": "defined"
-    },
     "recipe_universal_constructor_system_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_universal_constructor_system_v0.yaml",
@@ -77476,20 +76244,6 @@
       "refs_out": [
         "machining_uv_exposure_unit_frame_basic_v0",
         "uv_exposure_unit_frame"
-      ],
-      "status": "defined"
-    },
-    "recipe_uv_exposure_unit_lamp_module_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_uv_exposure_unit_lamp_module_v0.yaml",
-      "id": "recipe_uv_exposure_unit_lamp_module_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "uv_exposure_unit_lamp_module",
-        "uv_exposure_unit_lamp_module_fabrication_v0"
       ],
       "status": "defined"
     },
@@ -78140,20 +76894,6 @@
       ],
       "status": "defined"
     },
-    "recipe_voltage_regulator_linear_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_voltage_regulator_linear_v0.yaml",
-      "id": "recipe_voltage_regulator_linear_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "voltage_regulator_linear_v0",
-        "voltage_regulator_linear_v0_assembly_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_voltage_regulator_module_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_voltage_regulator_module_v0.yaml",
@@ -78243,20 +76983,6 @@
         "heat_treatment_hardening_v0",
         "metal_stamping_process_v0",
         "washer_lock_medium_steel"
-      ],
-      "status": "defined"
-    },
-    "recipe_waste_grease_v0_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_waste_grease_v0_v0.yaml",
-      "id": "recipe_waste_grease_v0_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "waste_grease_generation_v0",
-        "waste_grease_v0"
       ],
       "status": "defined"
     },
@@ -78818,34 +77544,6 @@
         "gearbox_reducer_small",
         "wire_feed_system_basic",
         "wire_tensioning_system"
-      ],
-      "status": "defined"
-    },
-    "recipe_wire_scrap_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_wire_scrap_v0.yaml",
-      "id": "recipe_wire_scrap_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "wire_scrap",
-        "wire_scrap_generation_v0"
-      ],
-      "status": "defined"
-    },
-    "recipe_wire_stripper_set_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/recipe_wire_stripper_set_v0.yaml",
-      "id": "recipe_wire_stripper_set_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": "Recipe for wire stripper set",
-      "refs_in": [],
-      "refs_out": [
-        "wire_stripper_set",
-        "wire_stripper_set_assembly_v0"
       ],
       "status": "defined"
     },
@@ -81842,39 +80540,6 @@
       ],
       "status": "defined"
     },
-    "seed_packed_bed_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/seed_packed_bed_v0.yaml",
-      "id": "seed_packed_bed_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Seed Packed Bed v0",
-      "refs_in": [
-        "recipe_packed_bed_v0"
-      ],
-      "refs_out": [
-        "packed_bed_v0"
-      ],
-      "status": "defined"
-    },
-    "seed_uncoded_data_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/seed_uncoded_data_v0.yaml",
-      "id": "seed_uncoded_data_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_7",
-        "layer_8"
-      ],
-      "name": "Seed uncoded data v0",
-      "refs_in": [
-        "recipe_uncoded_data_v0"
-      ],
-      "refs_out": [
-        "uncoded_data"
-      ],
-      "status": "defined"
-    },
     "selenium_extraction_refining_v0": {
       "aliases": [],
       "defined_in": "kb/processes/selenium_extraction_refining_v0.yaml",
@@ -81951,16 +80616,14 @@
     },
     "sensor_data_test_set": {
       "aliases": [],
-      "defined_in": "kb/items/materials/sensor_data_test_set.yaml",
+      "defined_in": "kb/imports/sensor_data_test_set.yaml",
       "id": "sensor_data_test_set",
       "kind": "material",
       "layer_tags": [],
       "name": "Sensor data test set",
       "refs_in": [
-        "generate_sensor_data_test_set_v0",
         "software_testing_simulation_v0",
         "recipe_path_planning_algorithm_v0",
-        "recipe_sensor_data_test_set_v0",
         "recipe_slam_algorithm_implementation_v0"
       ],
       "refs_out": [],
@@ -82208,9 +80871,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Serpentinite",
-      "refs_in": [
-        "recipe_serpentinite_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -82817,9 +81478,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Silicic acid",
-      "refs_in": [
-        "recipe_silicic_acid_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -83948,23 +82607,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "software_production_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/software_production_v0.yaml",
-      "id": "software_production_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_7"
-      ],
-      "name": "Software production placeholder",
-      "refs_in": [
-        "recipe_software_production_for_holonic_output_v0"
-      ],
-      "refs_out": [
-        "holonic_control_prosa_output"
-      ],
-      "status": "defined"
-    },
     "software_programming_v0": {
       "aliases": [],
       "defined_in": "kb/processes/software_programming_v0.yaml",
@@ -84865,9 +83507,7 @@
       "layer_tags": [],
       "name": "Spinning scrap metal",
       "refs_in": [
-        "generate_spinning_scrap_v0",
-        "metal_spinning_process_v0",
-        "recipe_spinning_scrap_metal_v0"
+        "metal_spinning_process_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -85030,7 +83670,6 @@
       "refs_in": [
         "stainless_ingot_cast_v0",
         "stainless_refining_basic_v0",
-        "recipe_stainless_billet_or_slab_import_v0",
         "recipe_stainless_billet_or_slab_v0"
       ],
       "refs_out": [],
@@ -85061,7 +83700,6 @@
       ],
       "name": "Basic stainless refining and casting",
       "refs_in": [
-        "recipe_stainless_billet_or_slab_import_v0",
         "recipe_stainless_billet_or_slab_v0"
       ],
       "refs_out": [
@@ -85766,21 +84404,6 @@
       ],
       "status": "defined"
     },
-    "steel_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/steel_scrap_generation_v0.yaml",
-      "id": "steel_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Steel scrap generation v0",
-      "refs_in": [
-        "recipe_steel_scrap_v0"
-      ],
-      "refs_out": [
-        "steel_scrap_v0"
-      ],
-      "status": "defined"
-    },
     "steel_scrap_refined": {
       "aliases": [],
       "defined_in": "kb/items/materials/steel_scrap_refined.yaml",
@@ -85839,11 +84462,9 @@
       "refs_in": [
         "gas_scrubbing_unit_frame_v0",
         "heat_pipe_receiver_assembly_v0",
-        "steel_scrap_generation_v0",
         "steel_scrap_refining_v0",
         "recipe_bearing_cage_stamped_v0",
-        "recipe_spindle_head_basic_v0",
-        "recipe_steel_scrap_v0"
+        "recipe_spindle_head_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -86226,34 +84847,14 @@
       "refs_out": [],
       "status": "defined"
     },
-    "stigmergy_algorithm_module_development_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/stigmergy_algorithm_module_development_v0.yaml",
-      "id": "stigmergy_algorithm_module_development_v0",
-      "kind": "process",
-      "layer_tags": [
-        "layer_7",
-        "layer_8"
-      ],
-      "name": "Development of stigmergy algorithm module v0",
-      "refs_in": [
-        "recipe_stigmergy_algorithm_module_v0"
-      ],
-      "refs_out": [
-        "stigmergy_algorithm_module_v0"
-      ],
-      "status": "defined"
-    },
     "stigmergy_algorithm_module_v0": {
       "aliases": [],
-      "defined_in": "kb/items/parts/stigmergy_algorithm_module_v0.yaml",
+      "defined_in": "kb/imports/stigmergy_algorithm_module_v0.yaml",
       "id": "stigmergy_algorithm_module_v0",
       "kind": "part",
       "layer_tags": [],
       "name": "Stigmergy Algorithm Module",
       "refs_in": [
-        "stigmergy_algorithm_module_development_v0",
-        "recipe_stigmergy_algorithm_module_v0",
         "stigmergy_coordination_system_v0"
       ],
       "refs_out": [],
@@ -87293,8 +85894,7 @@
       "layer_tags": [],
       "name": "System under test",
       "refs_in": [
-        "load_testing_and_commissioning_v0",
-        "recipe_system_under_test_import_v0"
+        "load_testing_and_commissioning_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -87946,9 +86546,7 @@
       "kind": "part",
       "layer_tags": [],
       "name": "Test equipment (basic, import)",
-      "refs_in": [
-        "recipe_test_equipment_basic_import_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -88087,16 +86685,22 @@
     },
     "testing_and_calibration_circuit_v0": {
       "aliases": [],
-      "defined_in": "kb/items/parts/testing_and_calibration_circuit_v0.yaml",
+      "defined_in": "kb/processes/testing_and_calibration_circuit_v0.yaml",
       "id": "testing_and_calibration_circuit_v0",
-      "kind": "part",
-      "layer_tags": [],
-      "name": "Testing and calibration circuit",
+      "kind": "process",
+      "layer_tags": [
+        "layer_7"
+      ],
+      "name": "Circuit testing and calibration",
       "refs_in": [
         "recipe_backprop_circuit_hardware_v0",
         "recipe_testing_and_calibration_circuit_v0"
       ],
-      "refs_out": [],
+      "refs_out": [
+        "multimeter_set",
+        "oscilloscope_basic",
+        "power_supply_benchtop"
+      ],
       "status": "defined"
     },
     "textile_fabric": {
@@ -88638,9 +87242,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Ti-6Al-4V alloy",
-      "refs_in": [
-        "recipe_ti6al4v_alloy_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -89490,8 +88092,8 @@
         "recipe_piping_and_valves_set_v0"
       ],
       "refs_out": [
-        "aluminum_scrap_v0",
         "aluminum_tube_stock",
+        "metal_scrap",
         "pipe_bent_sections"
       ],
       "status": "defined"
@@ -89837,9 +88439,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Tungsten disilicide (WSi2)",
-      "refs_in": [
-        "recipe_tungsten_disilicide_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },
@@ -90071,21 +88671,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "uncoded_data": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/uncoded_data.yaml",
-      "id": "uncoded_data",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Uncoded data",
-      "refs_in": [
-        "hatch_spacing_optimization_v0",
-        "seed_uncoded_data_v0",
-        "recipe_uncoded_data_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "uncoded_data_stream": {
       "aliases": [],
       "defined_in": "kb/items/materials/uncoded_data_stream.yaml",
@@ -90096,6 +88681,7 @@
       "refs_in": [
         "data_capture_uncoded_data_v0",
         "error_correction_coding_v0",
+        "hatch_spacing_optimization_v0",
         "recipe_coded_data_stream_v0",
         "recipe_uncoded_data_stream_v0"
       ],
@@ -90110,8 +88696,7 @@
       "layer_tags": [],
       "name": "Unfinished part",
       "refs_in": [
-        "finishing_basic_v0",
-        "recipe_unfinished_part_import_v0"
+        "finishing_basic_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -90203,33 +88788,16 @@
     },
     "uv_exposure_unit_lamp_module": {
       "aliases": [],
-      "defined_in": "kb/items/parts/uv_exposure_unit_lamp_module.yaml",
+      "defined_in": "kb/imports/uv_exposure_unit_lamp_module.yaml",
       "id": "uv_exposure_unit_lamp_module",
       "kind": "part",
       "layer_tags": [],
       "name": "UV exposure lamp module",
       "refs_in": [
         "bom_uv_exposure_unit_v0",
-        "uv_exposure_unit_assembly_v0",
-        "uv_exposure_unit_lamp_module_fabrication_v0",
-        "recipe_uv_exposure_unit_lamp_module_v0"
+        "uv_exposure_unit_assembly_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "uv_exposure_unit_lamp_module_fabrication_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/uv_exposure_unit_lamp_module_fabrication_v0.yaml",
-      "id": "uv_exposure_unit_lamp_module_fabrication_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "UV exposure lamp module fabrication v0",
-      "refs_in": [
-        "recipe_uv_exposure_unit_lamp_module_v0"
-      ],
-      "refs_out": [
-        "uv_exposure_unit_lamp_module"
-      ],
       "status": "defined"
     },
     "vacuum_blower_industrial": {
@@ -91123,8 +89691,7 @@
         "recipe_vision_inspection_report_v0"
       ],
       "refs_out": [
-        "machine_vision_processing_v0",
-        "vision_inspection_report_v0"
+        "machine_vision_processing_v0"
       ],
       "status": "defined"
     },
@@ -91136,7 +89703,6 @@
       "layer_tags": [],
       "name": "Vision Inspection Report v0",
       "refs_in": [
-        "vision_inspection_basic_v0",
         "recipe_vision_inspection_report_v0"
       ],
       "refs_out": [],
@@ -91257,32 +89823,15 @@
     },
     "voltage_regulator_linear_v0": {
       "aliases": [],
-      "defined_in": "kb/items/parts/voltage_regulator_linear_v0.yaml",
+      "defined_in": "kb/imports/voltage_regulator_linear_v0.yaml",
       "id": "voltage_regulator_linear_v0",
       "kind": "part",
       "layer_tags": [],
       "name": "Linear voltage regulator",
       "refs_in": [
-        "voltage_regulator_linear_v0_assembly_v0",
-        "recipe_voltage_regulator_linear_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "voltage_regulator_linear_v0_assembly_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/voltage_regulator_linear_v0_assembly_v0.yaml",
-      "id": "voltage_regulator_linear_v0_assembly_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Voltage regulator (linear) assembly v0",
-      "refs_in": [
-        "recipe_voltage_regulator_linear_v0"
-      ],
-      "refs_out": [
-        "voltage_regulator_linear_v0"
-      ],
       "status": "defined"
     },
     "voltage_regulator_module": {
@@ -91410,36 +89959,6 @@
         "process_waste",
         "regolith_lunar_mare"
       ],
-      "status": "defined"
-    },
-    "waste_grease_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/waste_grease_generation_v0.yaml",
-      "id": "waste_grease_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Waste grease generation (placeholder)",
-      "refs_in": [
-        "recipe_waste_grease_v0_v0"
-      ],
-      "refs_out": [
-        "waste_grease_v0"
-      ],
-      "status": "defined"
-    },
-    "waste_grease_v0": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/waste_grease_v0.yaml",
-      "id": "waste_grease_v0",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Waste grease",
-      "refs_in": [
-        "lubricant_compounding_high_temp_v0",
-        "waste_grease_generation_v0",
-        "recipe_waste_grease_v0_v0"
-      ],
-      "refs_out": [],
       "status": "defined"
     },
     "waste_heat": {
@@ -92817,40 +91336,9 @@
       ],
       "status": "defined"
     },
-    "wire_scrap": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/wire_scrap.yaml",
-      "id": "wire_scrap",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Wire scrap",
-      "refs_in": [
-        "coil_winding_basic_v0",
-        "coil_winding_motor_v0",
-        "wire_scrap_generation_v0",
-        "recipe_wire_scrap_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
-    "wire_scrap_generation_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/wire_scrap_generation_v0.yaml",
-      "id": "wire_scrap_generation_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Wire scrap generation v0",
-      "refs_in": [
-        "recipe_wire_scrap_v0"
-      ],
-      "refs_out": [
-        "wire_scrap"
-      ],
-      "status": "defined"
-    },
     "wire_stripper_set": {
       "aliases": [],
-      "defined_in": "kb/items/parts/wire_stripper_set.yaml",
+      "defined_in": "kb/imports/wire_stripper_set.yaml",
       "id": "wire_stripper_set",
       "kind": "part",
       "layer_tags": [],
@@ -92859,26 +91347,9 @@
         "cable_harness_assembly_v0",
         "crimping_and_termination_v0",
         "power_cable_assembly_v0",
-        "wire_cutting_and_stripping_v0",
-        "wire_stripper_set_assembly_v0",
-        "recipe_wire_stripper_set_v0"
+        "wire_cutting_and_stripping_v0"
       ],
       "refs_out": [],
-      "status": "defined"
-    },
-    "wire_stripper_set_assembly_v0": {
-      "aliases": [],
-      "defined_in": "kb/processes/wire_stripper_set_assembly_v0.yaml",
-      "id": "wire_stripper_set_assembly_v0",
-      "kind": "process",
-      "layer_tags": [],
-      "name": "Wire stripper set assembly",
-      "refs_in": [
-        "recipe_wire_stripper_set_v0"
-      ],
-      "refs_out": [
-        "wire_stripper_set"
-      ],
       "status": "defined"
     },
     "wire_tensioning_mechanism": {

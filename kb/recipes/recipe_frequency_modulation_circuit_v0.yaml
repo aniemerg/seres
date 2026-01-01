@@ -1,9 +1,17 @@
 id: recipe_frequency_modulation_circuit_v0
 kind: recipe
 name: Recipe for frequency modulation circuit
-produces_id: frequency_modulation_circuit_v0
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: pcb_assembled_board
+    qty: 0.15
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: frequency_modulation_circuit_v0
+    qty: 0.2
+    unit: kg
 steps:
 - process_id: electrical_assembly_basic_v0
   notes: Basic electrical assembly to realize a FM modulation circuit

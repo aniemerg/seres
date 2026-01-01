@@ -1,6 +1,6 @@
 # Integration Testing Instructions - Phase 4.4
 
-**Context:** The KB has been fully migrated to ADR-012/014/017 schemas. All validation errors are resolved. The simulation engine has been rebuilt with new models. We need to verify everything works correctly end-to-end.
+**Context:** The KB has been fully migrated to 012/014/017 schemas. All validation errors are resolved. The simulation engine has been rebuilt with new models. We need to verify everything works correctly end-to-end.
 
 **Your Task:** Perform integration testing to verify the simulation works correctly with the migrated KB.
 
@@ -9,9 +9,9 @@
 **Required Reading:**
 1. `docs/SIMULATION_GUIDE.md` - Complete simulation guide
 2. `docs/CLI_COMMANDS_GUIDE.md` - CLI reference
-3. `docs/ADRs/ADR-012-process-types-and-time-model.md` - Time model spec
-4. `docs/ADRs/ADR-014-energy-model-redesign.md` - Energy model spec
-5. `docs/ADRs/ADR-017-validation-and-error-detection.md` - Validation spec
+3. `docs/ADRs/012-process-types-and-time-model.md` - Time model spec
+4. `docs/ADRs/014-energy-model-redesign.md` - Energy model spec
+5. `docs/ADRs/017-validation-and-error-detection.md` - Validation spec
 
 **Current Status:**
 - ✅ Simulation engine implemented (`src/simulation/engine.py`)

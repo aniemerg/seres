@@ -1,8 +1,8 @@
-NOTE: Migration/analysis document for pre-ADR-012 schema. See docs/kb_schema_reference.md for current rules.
+NOTE: Migration/analysis document for pre-012 schema. See docs/kb_schema_reference.md for current rules.
 
-# Schema Migration Quick Guide (ADR-012/014)
+# Schema Migration Quick Guide (012/014)
 
-Quick reference for migrating processes from old schema to ADR-012/014 format.
+Quick reference for migrating processes from old schema to 012/014 format.
 
 **⭐ For complete documentation, see `docs/README.md` Energy and Time Models section.**
 
@@ -299,5 +299,5 @@ ls kb/processes/
 
 - **Complete schema reference**: `docs/README.md` → Energy and Time Models section
 - **Validation rules**: `docs/README.md` → Validation Rules section
-- **Full specification**: `docs/ADRs/ADR-012-process-types-and-time-model.md`
-- **Energy details**: `docs/ADRs/ADR-014-energy-model-redesign.md`
+- **Full specification**: `docs/ADRs/012-process-types-and-time-model.md`
+- **Energy details**: `docs/ADRs/014-energy-model-redesign.md`
