@@ -256,6 +256,224 @@ def _calculate_readiness(process_model, converter: UnitConverter) -> Dict[str, s
     return readiness
 
 
+def _build_dependency_tree(item_id: str, kb_loader: KBLoader, depth: int = 0, max_depth: int = 10, visited: set = None) -> dict:
+    """
+    Recursively build dependency tree for an item.
+
+    Returns dict with:
+    - item_id: str
+    - item_name: str
+    - qty: float
+    - unit: str
+    - mass: float (if available)
+    - recipe_id: str (if has recipe)
+    - inputs: list of dependency trees
+    - processes: list of process IDs
+    - is_import: bool
+    - is_boundary: bool (raw material)
+    - warnings: list of strings
+    """
+    if visited is None:
+        visited = set()
+
+    if depth > max_depth:
+        return {
+            "item_id": item_id,
+            "warnings": [f"Max depth {max_depth} reached"]
+        }
+
+    # Avoid circular dependencies
+    if item_id in visited:
+        return {
+            "item_id": item_id,
+            "warnings": ["Circular dependency detected"]
+        }
+
+    visited.add(item_id)
+
+    # Get item info
+    item = kb_loader.get_item(item_id)
+    if not item:
+        return {
+            "item_id": item_id,
+            "warnings": ["Item not found in KB"]
+        }
+
+    item_dict = item.model_dump() if hasattr(item, "model_dump") else item
+    result = {
+        "item_id": item_id,
+        "item_name": item_dict.get("name", item_id),
+        "mass": item_dict.get("mass", 0),
+        "unit": item_dict.get("unit", "unit"),
+        "is_import": item_dict.get("is_import", False),
+        "warnings": []
+    }
+
+    # Check for recipe
+    recipe_id = item_dict.get("recipe")
+    if not recipe_id:
+        result["warnings"].append("No recipe defined")
+        result["is_import"] = True
+        visited.remove(item_id)
+        return result
+
+    recipe = kb_loader.get_recipe(recipe_id)
+    if not recipe:
+        result["warnings"].append(f"Recipe {recipe_id} not found")
+        result["is_import"] = True
+        visited.remove(item_id)
+        return result
+
+    recipe_dict = recipe.model_dump() if hasattr(recipe, "model_dump") else recipe
+    result["recipe_id"] = recipe_id
+    result["processes"] = []
+    result["inputs"] = []
+
+    # Collect inputs from recipe steps
+    all_inputs = {}
+
+    for step in recipe_dict.get("steps", []):
+        process_id = step.get("process_id")
+        if not process_id:
+            continue
+
+        result["processes"].append(process_id)
+
+        process = kb_loader.get_process(process_id)
+        if not process:
+            result["warnings"].append(f"Process {process_id} not found")
+            continue
+
+        process_dict = process.model_dump() if hasattr(process, "model_dump") else process
+
+        # Check if boundary process
+        if process_dict.get("process_type") == "boundary":
+            result["is_boundary"] = True
+
+        # Aggregate inputs from all processes
+        for inp in process_dict.get("inputs", []):
+            inp_dict = inp if isinstance(inp, dict) else inp.model_dump()
+            inp_id = inp_dict.get("item_id")
+            inp_qty = float(inp_dict.get("qty", 0))
+            inp_unit = inp_dict.get("unit", "kg")
+
+            if inp_id not in all_inputs:
+                all_inputs[inp_id] = {"qty": 0, "unit": inp_unit}
+            all_inputs[inp_id]["qty"] += inp_qty
+
+    # Recursively build dependency trees for inputs
+    for inp_id, inp_info in all_inputs.items():
+        child_tree = _build_dependency_tree(inp_id, kb_loader, depth + 1, max_depth, visited.copy())
+        child_tree["qty"] = inp_info["qty"]
+        child_tree["unit"] = inp_info["unit"]
+        result["inputs"].append(child_tree)
+
+    visited.remove(item_id)
+    return result
+
+
+def _aggregate_materials(tree: dict, multiplier: float = 1.0) -> dict:
+    """
+    Aggregate all materials from dependency tree.
+
+    Returns dict with:
+    - raw_materials: dict of {item_id: {qty, unit, mass}}
+    - imports: dict of {item_id: {qty, unit, mass}}
+    - intermediates: dict of {item_id: {qty, unit, mass}}
+    - processes: list of process_ids
+    """
+    raw_materials = {}
+    imports = {}
+    intermediates = {}
+    processes = []
+
+    def add_to_dict(target: dict, item_id: str, qty: float, unit: str, mass: float = 0):
+        if item_id not in target:
+            target[item_id] = {"qty": 0, "unit": unit, "mass": 0}
+        target[item_id]["qty"] += qty
+        target[item_id]["mass"] += mass
+
+    def traverse(node: dict, mult: float):
+        item_id = node.get("item_id")
+        qty = node.get("qty", 1.0) * mult
+        unit = node.get("unit", "unit")
+        mass = (node.get("mass") or 0) * mult
+
+        # Collect processes
+        for proc in node.get("processes", []):
+            if proc not in processes:
+                processes.append(proc)
+
+        # Classify this node
+        if node.get("is_boundary"):
+            add_to_dict(raw_materials, item_id, qty, unit, mass)
+        elif node.get("is_import") or not node.get("inputs"):
+            add_to_dict(imports, item_id, qty, unit, mass)
+        else:
+            # Has inputs, so it's an intermediate
+            add_to_dict(intermediates, item_id, qty, unit, mass)
+
+        # Recursively traverse inputs
+        for child in node.get("inputs", []):
+            child_qty = child.get("qty", 1.0)
+            traverse(child, mult * child_qty)
+
+    traverse(tree, multiplier)
+
+    return {
+        "raw_materials": raw_materials,
+        "imports": imports,
+        "intermediates": intermediates,
+        "processes": processes
+    }
+
+
+def _print_dependency_tree(tree: dict, indent: int = 0, show_warnings: bool = True):
+    """Print formatted dependency tree."""
+    prefix = "  " * indent
+    item_id = tree.get("item_id", "unknown")
+    item_name = tree.get("item_name", item_id)
+    qty = tree.get("qty", 1.0)
+    unit = tree.get("unit", "unit")
+    mass = tree.get("mass", 0)
+
+    # Build line
+    line = f"{prefix}├─ {item_name}"
+    if qty != 1.0 or unit != "unit":
+        line += f" ({qty:.2f} {unit}"
+        if mass and mass > 0:
+            line += f", ~{mass:.2f} kg"
+        line += ")"
+
+    # Add annotations
+    annotations = []
+    if tree.get("is_boundary"):
+        annotations.append("ISRU/boundary")
+    if tree.get("is_import"):
+        annotations.append("IMPORT")
+    if tree.get("recipe_id"):
+        annotations.append(f"← {tree['recipe_id']}")
+
+    if annotations:
+        line += f"  [{', '.join(annotations)}]"
+
+    print(line)
+
+    # Show warnings
+    if show_warnings and tree.get("warnings"):
+        for warning in tree["warnings"]:
+            print(f"{prefix}  ⚠ {warning}")
+
+    # Show processes
+    if tree.get("processes"):
+        proc_str = ", ".join(tree["processes"])
+        print(f"{prefix}  via: {proc_str}")
+
+    # Recursively print inputs
+    for child in tree.get("inputs", []):
+        _print_dependency_tree(child, indent + 1, show_warnings)
+
+
 def cmd_plan(args, kb_loader: KBLoader):
     """Preflight a process or recipe to show immediate blockers."""
     converter = UnitConverter(kb_loader)
@@ -305,6 +523,84 @@ def cmd_plan(args, kb_loader: KBLoader):
             return 1
 
         recipe_def = recipe_model.model_dump() if hasattr(recipe_model, "model_dump") else recipe_model
+        target_item_id = recipe_def.get("target_item_id")
+
+        if not target_item_id:
+            print(f"Error: Recipe has no target_item_id", file=sys.stderr)
+            return 1
+
+        # Get target item info
+        target_item = kb_loader.get_item(target_item_id)
+        if not target_item:
+            print(f"Error: Target item '{target_item_id}' not found", file=sys.stderr)
+            return 1
+
+        target_dict = target_item.model_dump() if hasattr(target_item, "model_dump") else target_item
+        target_name = target_dict.get("name", target_item_id)
+        target_mass = target_dict.get("mass", 0)
+
+        print(f"{'='*80}")
+        print(f"PRODUCTION PLAN: {target_name}")
+        print(f"{'='*80}")
+        print()
+        print(f"TARGET: {target_item_id} (1 unit, {target_mass:.2f} kg)")
+        print()
+
+        # Build dependency tree
+        print("DEPENDENCY TREE:")
+        print()
+        dep_tree = _build_dependency_tree(target_item_id, kb_loader, max_depth=8)
+        _print_dependency_tree(dep_tree)
+        print()
+
+        # Aggregate materials
+        aggregated = _aggregate_materials(dep_tree)
+
+        # Print aggregate materials
+        print("AGGREGATE MATERIALS NEEDED:")
+        print()
+
+        raw_mats = aggregated["raw_materials"]
+        if raw_mats:
+            print("Raw Materials (ISRU/Boundary):")
+            for item_id in sorted(raw_mats.keys()):
+                info = raw_mats[item_id]
+                print(f"  • {item_id}: {info['qty']:.2f} {info['unit']}", end="")
+                if info['mass'] > 0:
+                    print(f" (~{info['mass']:.2f} kg)")
+                else:
+                    print()
+        else:
+            print("Raw Materials (ISRU/Boundary): none")
+        print()
+
+        imports = aggregated["imports"]
+        if imports:
+            print("Must Import or Collect:")
+            for item_id in sorted(imports.keys()):
+                info = imports[item_id]
+                print(f"  • {item_id}: {info['qty']:.2f} {info['unit']}", end="")
+                if info['mass'] > 0:
+                    print(f" (~{info['mass']:.2f} kg)")
+                else:
+                    print()
+        else:
+            print("Must Import or Collect: none")
+        print()
+
+        intermediates = aggregated["intermediates"]
+        if intermediates:
+            print("Intermediate Materials (produced & consumed):")
+            for item_id in sorted(intermediates.keys()):
+                info = intermediates[item_id]
+                print(f"  • {item_id}: {info['qty']:.2f} {info['unit']}", end="")
+                if info['mass'] > 0:
+                    print(f" (~{info['mass']:.2f} kg)")
+                else:
+                    print()
+            print()
+
+        # Collect machine requirements
         required = {}
         missing_steps = []
 
@@ -317,28 +613,34 @@ def cmd_plan(args, kb_loader: KBLoader):
             process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
             required.update(_collect_machine_requirements(process_def))
 
-        print(f"=== Plan: recipe {args.recipe} ===")
+        print("MACHINES REQUIRED (for this recipe's direct processes):")
         if required:
-            print("Required machines/resources:")
             for machine_id, detail in sorted(required.items()):
-                print(f"  {machine_id}: {detail}")
+                print(f"  - {machine_id}: {detail}")
         else:
-            print("Required machines/resources: none")
+            print("  none (may need machines from sub-recipes)")
+        print()
 
-        inputs = recipe_def.get("inputs", [])
-        if inputs:
-            print("Inputs:")
-            for line in _format_quantity_list([_as_quantity(q) for q in inputs]):
-                print(f"  {line}")
-        else:
-            print("Inputs: none specified (recipe uses step processes)")
+        # Show process list
+        processes = aggregated["processes"]
+        if processes:
+            print(f"PROCESSES IN DEPENDENCY CHAIN ({len(processes)} total):")
+            for i, proc_id in enumerate(processes[:20], 1):  # Limit to first 20
+                print(f"  {i}. {proc_id}")
+            if len(processes) > 20:
+                print(f"  ... and {len(processes) - 20} more")
+            print()
 
+        # Warnings
         if missing_steps:
-            print("Missing processes:")
+            print("WARNINGS:")
+            print("  Missing processes:")
             for proc_id in sorted(missing_steps):
-                print(f"  {proc_id}")
+                print(f"    - {proc_id}")
+            print()
 
-        print("Duration/Energy calculation: not evaluated for recipes (step overrides possible)")
+        print("NOTE: Time/energy calculations require simulation execution")
+        print(f"{'='*80}")
         return 0
 
     print("Error: Provide --process or --recipe", file=sys.stderr)
