@@ -600,7 +600,7 @@ class SimulationEngine:
         components_consumed = {}
         for comp in components:
             item_id = comp.get("item_id") or comp.get("id")
-            quantity = comp.get("quantity", 1)
+            quantity = comp.get("qty") or comp.get("quantity") or 1
             unit = comp.get("unit", "count")
 
             if not self.has_item(item_id, quantity, unit):
