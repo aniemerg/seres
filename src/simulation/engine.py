@@ -752,7 +752,8 @@ class SimulationEngine:
         return {
             "success": True,
             "message": f"Started recipe '{recipe_id}' × {quantity} (ends at t={ends_at}h)",
-            "duration_hours": total_duration_hours,
+            "total_steps": len(resolved_steps),
+            "total_duration_hours": total_duration_hours,
             "ends_at": ends_at,
         }
 
