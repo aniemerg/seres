@@ -567,18 +567,59 @@ class SimulationEngine:
 
             recipe_inputs = list(aggregated_inputs.values())
 
+        # ADR-019: Infer inputs from BOM if recipe has target_item_id
+        if not recipe_inputs:
+            target_item_id = recipe_def.get("target_item_id")
+            if target_item_id:
+                bom = self.kb.get_bom(target_item_id)
+                if bom:
+                    components = bom.get("components", [])
+                    if components:
+                        # Convert BOM components to recipe input format
+                        bom_inputs = []
+                        for comp in components:
+                            item_id = comp.get("item_id")
+                            qty = comp.get("qty", 1)
+                            # Use component's unit if specified, otherwise default to "unit"
+                            unit = comp.get("unit", "unit")
+
+                            if item_id:
+                                bom_inputs.append({
+                                    "item_id": item_id,
+                                    "qty": qty,
+                                    "unit": unit
+                                })
+
+                        if bom_inputs:
+                            recipe_inputs = bom_inputs
+                            import sys
+                            print(f"⚠️  Recipe {recipe_id}: Inferred {len(bom_inputs)} inputs from BOM for {target_item_id}", file=sys.stderr)
+
         if not recipe_outputs:
             # Infer from resolved steps - use last step's outputs
             if resolved_steps:
                 last_step = resolved_steps[-1]
                 recipe_outputs = last_step.get("outputs", [])
 
-        # Validation: Must have inputs/outputs after inference (ADR-018)
+        # ADR-019: Infer outputs from target_item_id if not specified
+        if not recipe_outputs:
+            target_item_id = recipe_def.get("target_item_id")
+            if target_item_id:
+                # Default: recipe produces 1 unit of target_item_id
+                recipe_outputs = [{
+                    "item_id": target_item_id,
+                    "qty": 1,
+                    "unit": "unit"
+                }]
+                import sys
+                print(f"⚠️  Recipe {recipe_id}: Inferred output {target_item_id} (qty=1)", file=sys.stderr)
+
+        # Validation: Must have inputs/outputs after inference (ADR-018, ADR-019)
         if not recipe_inputs:
             return {
                 "success": False,
                 "error": "validation_error",
-                "message": f"Recipe {recipe_id} has no inputs (neither explicit nor inferred from steps). Fix the recipe or process definitions.",
+                "message": f"Recipe {recipe_id} has no inputs (neither explicit, nor inferred from steps, nor from BOM). Fix the recipe or process definitions.",
                 "recipe_id": recipe_id,
             }
 
@@ -586,7 +627,7 @@ class SimulationEngine:
             return {
                 "success": False,
                 "error": "validation_error",
-                "message": f"Recipe {recipe_id} has no outputs (neither explicit nor inferred from steps). Fix the recipe or process definitions.",
+                "message": f"Recipe {recipe_id} has no outputs (neither explicit, nor inferred from steps, nor from target_item_id). Fix the recipe or process definitions.",
                 "recipe_id": recipe_id,
             }
 

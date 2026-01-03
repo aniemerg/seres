@@ -53,6 +53,8 @@ class MockKBLoader:
             "regolith_mining_highlands_v0": {"id": "regolith_mining_highlands_v0"},
         }
 
+        self.boms = {}
+
     def get_unit_conversion(self, from_unit, to_unit):
         return self.conversions.get((from_unit, to_unit))
 
@@ -64,6 +66,9 @@ class MockKBLoader:
 
     def get_process(self, process_id):
         return self.processes.get(process_id)
+
+    def get_bom(self, machine_id):
+        return self.boms.get(machine_id)
 
 
 @pytest.fixture

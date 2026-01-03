@@ -954,6 +954,25 @@ def validate_recipe_inputs_outputs(
                         has_step_inputs = True
                         break
 
+        # ADR-019: Check if BOM exists for target_item_id (allows BOM-based inference)
+        if not has_step_inputs:
+            target_item_id = recipe_dict.get("target_item_id")
+            if target_item_id:
+                bom = kb.get_bom(target_item_id)
+                if bom and bom.get("components"):
+                    has_step_inputs = True  # Resolvable via BOM at runtime
+                    # Add INFO-level issue to encourage explicit inputs
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.INFO,
+                        category="recipe",
+                        rule="recipe_inputs_inferred_from_bom",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"Recipe inputs will be inferred from BOM for '{target_item_id}' at runtime",
+                        field_path="inputs",
+                        fix_hint="Consider adding explicit inputs: [...] to recipe for clarity and performance"
+                    ))
+
         if not has_step_inputs:
             issues.append(ValidationIssue(
                 level=ValidationLevel.ERROR,
@@ -961,9 +980,9 @@ def validate_recipe_inputs_outputs(
                 rule="recipe_inputs_not_resolvable",
                 entity_type="recipe",
                 entity_id=recipe_id,
-                message="Recipe has no resolvable inputs (neither explicit at recipe level nor from steps/processes)",
+                message="Recipe has no resolvable inputs (neither explicit at recipe level nor from steps/processes/BOM)",
                 field_path="inputs",
-                fix_hint="Add inputs: [...] to recipe, or ensure referenced processes have inputs defined"
+                fix_hint="Add inputs: [...] to recipe, ensure referenced processes have inputs, or verify BOM exists for target_item_id"
             ))
 
     # Check if outputs resolvable
@@ -1123,5 +1142,146 @@ def validate_recipe(
         # ADR-018: Validate recipe inputs/outputs are resolvable
         inputs_outputs_issues = validate_recipe_inputs_outputs(recipe, kb)
         issues.extend(inputs_outputs_issues)
+
+    return issues
+
+
+def validate_machine_completeness(kb: Any) -> List[ValidationIssue]:
+    """
+    ADR-019: Validate that machines have both BOM and recipe.
+
+    Machines should have:
+    - A BOM defining components
+    - At least one recipe describing assembly process
+
+    Args:
+        kb: Knowledge base loader instance
+
+    Returns:
+        List of validation issues
+    """
+    issues = []
+
+    # Check: Every BOM should have at least one recipe
+    for machine_id, bom in kb.boms.items():
+        recipes = [r for r_id, r in kb.recipes.items()
+                   if r.get('target_item_id') == machine_id]
+        if not recipes:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.WARNING,
+                category="machine",
+                rule="machine_missing_recipe",
+                entity_type="bom",
+                entity_id=f"bom_{machine_id}",
+                message=f"Machine '{machine_id}' has BOM but no recipe",
+                field_path="",
+                fix_hint=f"Create recipe with target_item_id: {machine_id} to describe assembly process"
+            ))
+
+    # Check: Every machine recipe should have a BOM
+    for recipe_id, recipe in kb.recipes.items():
+        if recipe_id.startswith('recipe_machine_'):
+            target = recipe.get('target_item_id')
+            if target:
+                bom = kb.get_bom(target)
+                if not bom:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.WARNING,
+                        category="machine",
+                        rule="machine_recipe_missing_bom",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"Machine recipe '{recipe_id}' targets '{target}' but no BOM exists",
+                        field_path="target_item_id",
+                        fix_hint=f"Create BOM bom_{target}.yaml listing components for this machine"
+                    ))
+
+    return issues
+
+
+def validate_bom_recipe_consistency(kb: Any) -> List[ValidationIssue]:
+    """
+    ADR-019: Validate consistency between BOM components and recipe inputs.
+
+    When a recipe has explicit inputs AND a BOM exists for the target_item_id,
+    check if they match. This helps catch discrepancies.
+
+    Args:
+        kb: Knowledge base loader instance
+
+    Returns:
+        List of validation issues
+    """
+    issues = []
+
+    for recipe_id, recipe in kb.recipes.items():
+        target_item_id = recipe.get('target_item_id')
+        recipe_inputs = recipe.get('inputs', [])
+
+        # Only check if recipe has explicit inputs and a BOM exists
+        if target_item_id and recipe_inputs:
+            bom = kb.get_bom(target_item_id)
+            if bom:
+                bom_components = bom.get('components', [])
+
+                # Build sets for comparison
+                bom_items = {}
+                for comp in bom_components:
+                    item_id = comp.get('item_id')
+                    qty = comp.get('qty', 1)
+                    if item_id:
+                        # Accumulate quantities for duplicate items
+                        bom_items[item_id] = bom_items.get(item_id, 0) + qty
+
+                recipe_items = {}
+                for inp in recipe_inputs:
+                    item_id = inp.get('item_id')
+                    qty = inp.get('qty', 0)
+                    if item_id:
+                        recipe_items[item_id] = recipe_items.get(item_id, 0) + qty
+
+                # Check for items in BOM but not in recipe
+                missing_in_recipe = set(bom_items.keys()) - set(recipe_items.keys())
+                if missing_in_recipe:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.WARNING,
+                        category="consistency",
+                        rule="bom_recipe_input_mismatch",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"Recipe inputs missing {len(missing_in_recipe)} items from BOM: {', '.join(sorted(list(missing_in_recipe))[:5])}{'...' if len(missing_in_recipe) > 5 else ''}",
+                        field_path="inputs",
+                        fix_hint="Add missing BOM components to recipe inputs, or verify BOM is correct"
+                    ))
+
+                # Check for items in recipe but not in BOM
+                extra_in_recipe = set(recipe_items.keys()) - set(bom_items.keys())
+                if extra_in_recipe:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.INFO,
+                        category="consistency",
+                        rule="recipe_has_extra_inputs",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"Recipe has {len(extra_in_recipe)} inputs not in BOM: {', '.join(sorted(list(extra_in_recipe))[:5])}{'...' if len(extra_in_recipe) > 5 else ''}",
+                        field_path="inputs",
+                        fix_hint="Verify these extra inputs are intentional (consumables, energy, etc.) or update BOM"
+                    ))
+
+                # Check for quantity mismatches
+                for item_id in set(bom_items.keys()) & set(recipe_items.keys()):
+                    bom_qty = bom_items[item_id]
+                    recipe_qty = recipe_items[item_id]
+                    if abs(bom_qty - recipe_qty) > 0.001:  # Allow small floating point differences
+                        issues.append(ValidationIssue(
+                            level=ValidationLevel.INFO,
+                            category="consistency",
+                            rule="bom_recipe_quantity_mismatch",
+                            entity_type="recipe",
+                            entity_id=recipe_id,
+                            message=f"Quantity mismatch for '{item_id}': BOM={bom_qty}, Recipe={recipe_qty}",
+                            field_path="inputs",
+                            fix_hint="Verify correct quantity - may account for scrap/loss or be an error"
+                        ))
 
     return issues
