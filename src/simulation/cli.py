@@ -116,11 +116,36 @@ def cmd_view_state(args, kb_loader: KBLoader):
 
     print(f"\nTotal Imports ({len(state['total_imports'])} items):")
     total_mass = 0.0
+    unknown_mass_count = 0
+
     for item_id, inv in sorted(state['total_imports'].items()):
         print(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
+
+        # Calculate mass contribution (Issue #10)
         if inv['unit'] == 'kg':
+            # Direct mass measurement
             total_mass += inv['quantity']
-    print(f"  Total imported mass: ~{total_mass:.1f} kg")
+        elif inv['unit'] == 'unit':
+            # Look up item mass
+            item = kb_loader.get_item(item_id)
+            if item:
+                item_dict = item.model_dump() if hasattr(item, 'model_dump') else item
+                item_mass = item_dict.get('mass')
+                if item_mass is not None:
+                    total_mass += item_mass * inv['quantity']
+                else:
+                    unknown_mass_count += 1
+            else:
+                unknown_mass_count += 1
+        else:
+            # Unknown unit (L, m3, etc.)
+            unknown_mass_count += 1
+
+    # Display total with unknown count
+    if unknown_mass_count > 0:
+        print(f"  Total imported mass: ~{total_mass:.1f} kg ({unknown_mass_count} items with unknown mass)")
+    else:
+        print(f"  Total imported mass: ~{total_mass:.1f} kg")
 
     return 0
 
@@ -548,13 +573,17 @@ def cmd_plan(args, kb_loader: KBLoader):
 
         target_dict = target_item.model_dump() if hasattr(target_item, "model_dump") else target_item
         target_name = target_dict.get("name", target_item_id)
-        target_mass = target_dict.get("mass", 0)
+        target_mass = target_dict.get("mass")  # None if not defined
 
         print(f"{'='*80}")
         print(f"PRODUCTION PLAN: {target_name}")
         print(f"{'='*80}")
         print()
-        print(f"TARGET: {target_item_id} (1 unit, {target_mass:.2f} kg)")
+        # Handle missing mass gracefully (Issue #11)
+        if target_mass is not None:
+            print(f"TARGET: {target_item_id} (1 unit, {target_mass:.2f} kg)")
+        else:
+            print(f"TARGET: {target_item_id} (1 unit, mass unknown)")
         print()
 
         # Build dependency tree
