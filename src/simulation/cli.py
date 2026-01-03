@@ -214,6 +214,17 @@ def _collect_machine_requirements(process_def: Dict[str, Any]) -> Dict[str, str]
     for machine_id in process_def.get("requires_ids", []) or []:
         required[machine_id] = "1 unit"
 
+    for machine_req in process_def.get("required_machines", []) or []:
+        if isinstance(machine_req, dict):
+            machine_id = list(machine_req.keys())[0]
+            count = machine_req[machine_id]
+        elif isinstance(machine_req, str):
+            machine_id = machine_req
+            count = 1
+        else:
+            continue
+        required[machine_id] = f"{count} unit"
+
     for req in process_def.get("resource_requirements", []) or []:
         if isinstance(req, dict) and req.get("machine_id"):
             qty = req.get("qty", 1.0)
