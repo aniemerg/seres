@@ -2,23 +2,23 @@ id: surface_finishing_basic_v0
 kind: process
 name: Surface finishing (basic)
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: rough_part
-    qty: 1.0
-    unit: kg
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 0.95
-    unit: kg
+- item_id: finished_part
+  qty: 0.95
+  unit: kg
 requires_ids:
-  - surface_grinder
-  - hand_tools_basic
+- surface_grinder
+- hand_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -27,4 +27,8 @@ time_model:
   type: batch
   hr_per_batch: 1.5
 process_type: batch
-notes: "Basic surface finishing operations for functional parts. Includes grinding, sanding, deburring, and light polishing. Achieves adequate surface quality for most applications. Less precise than advanced surface finishing but faster and lower cost."
+notes: Basic surface finishing operations for functional parts. Includes grinding,
+  sanding, deburring, and light polishing. Achieves adequate surface quality for most
+  applications. Less precise than advanced surface finishing but faster and lower
+  cost.
+is_template: true

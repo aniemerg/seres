@@ -3,29 +3,36 @@ kind: process
 name: Metal forming (basic)
 process_type: batch
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: metal_sheet_or_plate
-    qty: 1.0
-    unit: kg
+- item_id: metal_sheet_or_plate
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: formed_metal_part
-    qty: 0.95
-    unit: kg
+- item_id: formed_metal_part
+  qty: 0.95
+  unit: kg
 requires_ids:
-  - hydraulic_press
-  - plate_rolling_mill
+- hydraulic_press
+- plate_rolling_mill
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Forming and finishing energy"
+  notes: Forming and finishing energy
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: "Basic metal forming operations including bending, rolling, stamping, and pressing. Transforms flat sheet metal or plate into formed shapes (brackets, channels, tubes, tanks, curved panels). Methods include hydraulic press forming, brake bending, and rolling. Typically performed at room temperature for mild steel, aluminum, and copper. May require multiple forming steps for complex shapes. 5% material loss due to trimming and edge finishing. Used to create structural components, enclosures, tanks, and machine parts."
+notes: Basic metal forming operations including bending, rolling, stamping, and pressing.
+  Transforms flat sheet metal or plate into formed shapes (brackets, channels, tubes,
+  tanks, curved panels). Methods include hydraulic press forming, brake bending, and
+  rolling. Typically performed at room temperature for mild steel, aluminum, and copper.
+  May require multiple forming steps for complex shapes. 5% material loss due to trimming
+  and edge finishing. Used to create structural components, enclosures, tanks, and
+  machine parts.
+is_template: true

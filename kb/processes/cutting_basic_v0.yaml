@@ -3,23 +3,23 @@ kind: process
 process_type: batch
 name: Cutting (basic)
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: steel_plate_or_sheet
-    qty: 10.0
-    unit: kg
+- item_id: steel_plate_or_sheet
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: cut_parts
-    qty: 9.5
-    unit: kg
+- item_id: cut_parts
+  qty: 9.5
+  unit: kg
 requires_ids:
-  - saw_or_cutting_tool
-  - hand_tools_basic
+- saw_or_cutting_tool
+- hand_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -27,4 +27,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Basic cutting operations to separate steel plate or sheet stock into smaller pieces. Includes sawing, shearing, plasma cutting, or abrasive cutting. Produces rough-cut parts for further machining or fabrication. Simple dimensional accuracy, requires finishing for precision parts."
+notes: Basic cutting operations to separate steel plate or sheet stock into smaller
+  pieces. Includes sawing, shearing, plasma cutting, or abrasive cutting. Produces
+  rough-cut parts for further machining or fabrication. Simple dimensional accuracy,
+  requires finishing for precision parts.
+is_template: true
