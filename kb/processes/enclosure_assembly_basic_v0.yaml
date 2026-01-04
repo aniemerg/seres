@@ -3,31 +3,32 @@ kind: process
 name: Enclosure assembly (basic)
 process_type: batch
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: enclosure_steel_small
-    qty: 1.0
-    unit: kg
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
-    unit: kg
+- item_id: enclosure_steel_small
+  qty: 1.0
+  unit: kg
+- item_id: assembled_electrical_equipment
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: enclosure_electrical_medium
-    qty: 1.0
-    unit: kg
+- item_id: enclosure_electrical_medium
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Hand tools and small fixtures"
+  notes: Hand tools and small fixtures
 time_model:
   type: batch
   hr_per_batch: 0.8
-  notes: "Mount components in enclosure and secure"
+  notes: Mount components in enclosure and secure
 notes: Basic assembly of electronic or mechanical components into enclosures.
+is_template: true

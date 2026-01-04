@@ -2,23 +2,25 @@ id: metal_fabrication_basic_v0
 kind: process
 name: Metal fabrication (basic)
 layer_tags:
-  - layer_4
+- layer_4
 inputs: []
 outputs: []
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Hand tools, small equipment"
+  notes: Hand tools, small equipment
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "General fabrication tasks (cut/fit/tack)"
-notes: Generic metal fabrication/glue process for small assemblies where specific steps are not detailed.
+  notes: General fabrication tasks (cut/fit/tack)
+notes: Generic metal fabrication/glue process for small assemblies where specific
+  steps are not detailed.
 process_type: batch
+is_template: true

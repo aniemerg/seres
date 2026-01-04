@@ -3,19 +3,19 @@ name: Microcontroller IC fabrication (generic)
 kind: process
 process_type: batch
 inputs:
-  - item_id: silicon_purified
-    qty: 0.05
-    unit: kg
-  - item_id: photoresist_solution_v0
-    qty: 0.01
-    unit: kg
-  - item_id: etching_chemicals
-    qty: 0.02
-    unit: kg
+- item_id: silicon_purified
+  qty: 0.05
+  unit: kg
+- item_id: photoresist_solution_v0
+  qty: 0.01
+  unit: kg
+- item_id: etching_chemicals
+  qty: 0.02
+  unit: kg
 outputs:
-  - item_id: microcontroller_ic_generic
-    qty: 1.0
-    unit: unit
+- item_id: microcontroller_ic_generic
+  qty: 1.0
+  unit: unit
 resource_requirements: []
 time_model:
   type: batch
@@ -24,4 +24,6 @@ energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-notes: "Placeholder fabrication process enabling a local production path for a generic MCU IC. Until a specific fab flow is defined, treat as an imported capability."
+notes: Placeholder fabrication process enabling a local production path for a generic
+  MCU IC. Until a specific fab flow is defined, treat as an imported capability.
+is_template: true

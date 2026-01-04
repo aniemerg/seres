@@ -3,20 +3,21 @@ kind: process
 process_type: batch
 name: Shakeout and casting cleanup (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Vibration/shakeout energy for sand removal"
+  notes: Vibration/shakeout energy for sand removal
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Shakeout and basic cleanup"
-notes: "Basic shakeout to remove sand from castings and perform initial cleanup."
+  notes: Shakeout and basic cleanup
+notes: Basic shakeout to remove sand from castings and perform initial cleanup.
+is_template: true

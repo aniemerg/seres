@@ -2,23 +2,25 @@ id: electrical_assembly_basic_v0
 kind: process
 name: Electrical assembly (basic)
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs: []
 outputs: []
 requires_ids:
-  - assembly_tools_basic
+- assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Bench tools and testing equipment usage"
+  notes: Bench tools and testing equipment usage
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Assembly and bench test per small harness/control module"
-notes: Basic electrical assembly for wiring harnesses and control boxes; includes crimping, soldering, and bench checks.
+  notes: Assembly and bench test per small harness/control module
+notes: Basic electrical assembly for wiring harnesses and control boxes; includes
+  crimping, soldering, and bench checks.
+is_template: true

@@ -3,24 +3,24 @@ kind: process
 name: Basic cleaning process v0
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: part_to_clean
-    qty: 1.0
-    unit: kg
-  - item_id: cleaning_solvent_or_detergent_v0
-    qty: 0.1
-    unit: kg
+- item_id: part_to_clean
+  qty: 1.0
+  unit: kg
+- item_id: cleaning_solvent_or_detergent_v0
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: part_cleaned
-    qty: 1.0
-    unit: kg
+- item_id: part_cleaned
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - cleaning_station_basic_v0
+- cleaning_station_basic_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -30,14 +30,11 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Wash, rinse, and dry time
-notes: |
-  Basic cleaning process for parts and components.
-  Source: General manufacturing requirement
-  Methods:
-    - Solvent cleaning (alcohols, acetone, specialized solvents)
-    - Aqueous cleaning (detergent and water)
-    - Ultrasonic cleaning (for complex geometries)
-  Purpose: Remove oils, chips, dust, contaminants before assembly or processing
-  Applications: Pre-assembly cleaning, post-machining, surface preparation
-  Drying: Air dry, heated air, or vacuum dry
-  Critical for: Assembly quality, adhesive bonding, coating application, cleanliness
+notes: "Basic cleaning process for parts and components.\nSource: General manufacturing\
+  \ requirement\nMethods:\n  - Solvent cleaning (alcohols, acetone, specialized solvents)\n\
+  \  - Aqueous cleaning (detergent and water)\n  - Ultrasonic cleaning (for complex\
+  \ geometries)\nPurpose: Remove oils, chips, dust, contaminants before assembly or\
+  \ processing\nApplications: Pre-assembly cleaning, post-machining, surface preparation\n\
+  Drying: Air dry, heated air, or vacuum dry\nCritical for: Assembly quality, adhesive\
+  \ bonding, coating application, cleanliness\n"
+is_template: true

@@ -2,30 +2,32 @@ id: melting_basic_v0
 kind: process
 name: Basic melting
 layer_tags:
-  - layer_5
+- layer_5
 process_type: batch
 inputs:
-  - item_id: metal_alloy_bulk
-    qty: 1.0
-    unit: kg
+- item_id: metal_alloy_bulk
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: molten_material_or_preform
-    qty: 1.0
-    unit: kg
+- item_id: molten_material_or_preform
+  qty: 1.0
+  unit: kg
 requires_ids:
-  - casting_furnace_v0
-  - crucible_refractory
+- casting_furnace_v0
+- crucible_refractory
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: "Melting energy for metals (incl. losses); coarse anchor"
+  notes: Melting energy for metals (incl. losses); coarse anchor
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Heat-up, melt, and hold prior to pour"
-notes: Generic melting step for metal charge to produce molten material/preform for casting or forming.
+  notes: Heat-up, melt, and hold prior to pour
+notes: Generic melting step for metal charge to produce molten material/preform for
+  casting or forming.
+is_template: true

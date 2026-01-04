@@ -3,28 +3,29 @@ kind: process
 name: Calibration and test (basic)
 process_type: batch
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: device_uncalibrated
-    qty: 1.0
-    unit: unit
+- item_id: device_uncalibrated
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: device_calibrated
-    qty: 1.0
-    unit: unit
+- item_id: device_calibrated
+  qty: 1.0
+  unit: unit
 requires_ids:
-  - test_equipment_basic
+- test_equipment_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Test equipment usage"
+  notes: Test equipment usage
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Calibration and functional testing"
+  notes: Calibration and functional testing
 notes: Basic calibration and functional testing for electronic instruments or assemblies.
+is_template: true
