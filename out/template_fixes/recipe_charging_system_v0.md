@@ -1,0 +1,55 @@
+# Fix Intelligence: recipe_charging_system_v0
+
+## Files
+
+- **Recipe:** `kb/recipes/recipe_charging_system_v0.yaml`
+- **Target item:** `charging_system`
+  - File: `kb/items/charging_system.yaml`
+- **BOM:** None
+- **Steps:** 2 total
+
+## Errors (2 found)
+
+### Error 1: recipe_template_missing_step_inputs
+
+**Message:** Step 0 uses template process 'metal_casting_basic_v0' but doesn't provide step-level input overrides
+
+**Location:** Step 0
+**Process:** `metal_casting_basic_v0`
+  - File: `kb/processes/metal_casting_basic_v0.yaml`
+
+**Process type:** TEMPLATE (requires step-level inputs)
+
+**Current step:**
+```yaml
+- process_id: metal_casting_basic_v0
+  # NO inputs field
+```
+
+**Analysis:** Template process used without step-level input overrides.
+
+---
+
+### Error 2: recipe_step_input_not_satisfied
+
+**Message:** Step 1 (process 'charging_system_production_v0') requires input 'cast_metal_parts' which is not available
+
+**Location:** Step 1
+**Process:** `charging_system_production_v0`
+  - File: `kb/processes/charging_system_production_v0.yaml`
+
+**Current step:**
+```yaml
+- process_id: charging_system_production_v0
+  # NO inputs field
+```
+
+**Analysis:** Step has inputs, but one or more items don't exist or aren't available.
+
+---
+
+## Summary
+
+- **Total errors:** 2
+- **Recipe file:** `kb/recipes/recipe_charging_system_v0.yaml`
+- **BOM available:** No
