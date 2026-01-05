@@ -1127,17 +1127,34 @@ def validate_recipe_step_inputs(
         if process_dict.get("process_type") == "boundary":
             continue
 
-        # Skip template processes (inputs defined in recipe)
-        if process_dict.get("is_template"):
-            continue
-
         # Determine required inputs for this step
         # Step-level inputs override process-level inputs (ADR-013)
         step_inputs = step.get("inputs", [])
-        if step_inputs:
+
+        # Template processes MUST have step-level input overrides
+        if process_dict.get("is_template"):
+            if not step_inputs:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="recipe",
+                    rule="recipe_template_missing_step_inputs",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Step {step_idx} uses template process '{process_id}' but doesn't provide step-level input overrides",
+                    field_path=f"steps[{step_idx}].inputs",
+                    fix_hint=f"Template process '{process_id}' has placeholder inputs that must be overridden. "
+                             f"Add 'inputs:' to this step with specific item IDs. "
+                             f"Template processes cannot use default process-level inputs."
+                ))
+                continue  # Skip further validation for this step
+            # Use step-level inputs for template processes
             required_inputs = step_inputs
         else:
-            required_inputs = process_dict.get("inputs", [])
+            # Non-template: use step-level if provided, else process-level
+            if step_inputs:
+                required_inputs = step_inputs
+            else:
+                required_inputs = process_dict.get("inputs", [])
 
         # Build set of available inputs for this step
         available_inputs = recipe_input_ids | bom_component_ids | accumulated_outputs
