@@ -26,16 +26,37 @@ Total: 897 null fields
 
 See `out/null_values.jsonl` for details.
 
+## Circular Dependencies
+Total: 1 circular dependency loops detected
+
+By type:
+- self_reference: 1
+
+Sample loops:
+- [self_reference] electrical_energy → electrical_energy
+
+See `out/circular_dependencies.jsonl` for details.
+
+## Validation Issues (ADR-017)
+Total: 4644 validation issues found
+
+By severity:
+- error: 4644
+
+By category:
+- recipe: 4607
+- semantic: 37
+
+Top validation rules triggered:
+- recipe_template_missing_step_inputs: 2954
+- recipe_step_input_not_satisfied: 1653
+- process_machine_required: 35
+- scaling_basis_not_found: 2
+
+See `out/validation_issues.jsonl` for details.
+
 ## Warnings
 - kb/units/units.yaml: unknown kind; skipped
-
-## Queue Filtering
-**Status**: Enabled
-**Mode**: boms_recipes_parts_only
-**Total gaps found**: 246
-**Filtered out**: 246
-**Added to queue**: 0
-**Filtering rate**: 100.0%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

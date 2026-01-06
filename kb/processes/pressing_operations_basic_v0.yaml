@@ -3,29 +3,33 @@ kind: process
 name: Pressing operations (basic)
 process_type: batch
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: feedstock_material
-    qty: 10.0
-    unit: kg
+- item_id: feedstock_material
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: pressed_component
-    qty: 9.5
-    unit: kg
+- item_id: pressed_component
+  qty: 9.5
+  unit: kg
 requires_ids:
-  - hydraulic_press
-  - press_ram_set
+- hydraulic_press
+- press_ram_set
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Pressing energy for 10 kg batch"
+  notes: Pressing energy for 10 kg batch
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Basic pressing operations using hydraulic press. Includes hot pressing, cold pressing, powder compaction, and forming operations. Pressure range typically 50-500 tons depending on press capacity. Used for powder metallurgy compaction, metal forming, and composite pressing."
+notes: Basic pressing operations using hydraulic press. Includes hot pressing, cold
+  pressing, powder compaction, and forming operations. Pressure range typically 50-500
+  tons depending on press capacity. Used for powder metallurgy compaction, metal forming,
+  and composite pressing.
+is_template: true

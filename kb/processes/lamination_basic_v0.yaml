@@ -3,21 +3,21 @@ name: Copper-clad laminate lamination basic
 kind: process
 process_type: batch
 inputs:
-  - item_id: uncoated_substrate_material_v0
-    qty: 0.5
-    unit: kg
-  - item_id: copper_plate_or_sheet
-    qty: 0.5
-    unit: kg
+- item_id: uncoated_substrate_material_v0
+  qty: 0.5
+  unit: kg
+- item_id: copper_plate_or_sheet
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: copper_clad_laminate
-    qty: 1.0
-    unit: kg
+- item_id: copper_clad_laminate
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 time_model:
   type: batch
   hr_per_batch: 1.0
@@ -25,4 +25,6 @@ energy_model:
   type: fixed_per_batch
   value: 1.0
   unit: kWh
-notes: "Baseline lamination of FR-4 substrate and copper foil to form copper-clad laminate. Seed production path for PCB materials; approximate parameters."
+notes: Baseline lamination of FR-4 substrate and copper foil to form copper-clad laminate.
+  Seed production path for PCB materials; approximate parameters.
+is_template: true

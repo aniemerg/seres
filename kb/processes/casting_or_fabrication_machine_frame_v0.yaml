@@ -3,18 +3,18 @@ name: Casting or fabrication of machine frame body
 kind: process
 process_type: batch
 inputs:
-  - item_id: raw_metal_block
-    qty: 3.0
-    unit: kg
+- item_id: raw_metal_block
+  qty: 3.0
+  unit: kg
 outputs:
-  - item_id: lathe_carriage_and_cross_slide
-    qty: 1.0
-    unit: unit
+- item_id: lathe_carriage_and_cross_slide
+  qty: 1.0
+  unit: unit
 byproducts: []
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 2.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 10.0
@@ -22,4 +22,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: "Cast or fabricate lathe carriage and cross-slide body from a raw metal block. This is a placeholder, refined as design data becomes available."
+notes: Cast or fabricate lathe carriage and cross-slide body from a raw metal block.
+  This is a placeholder, refined as design data becomes available.
+is_template: true

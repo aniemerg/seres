@@ -3,7 +3,7 @@ kind: process
 name: Alloying (basic)
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
 - item_id: metal_feedstock
   qty: 10.0
@@ -13,11 +13,11 @@ outputs:
   qty: 10.0
   unit: kg
 requires_ids:
-  - furnace_basic
+- furnace_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 50.0
@@ -26,8 +26,13 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: |
-  Basic alloying process for combining metals at high temperature.
+notes: 'Basic alloying process for combining metals at high temperature.
+
   Melts base metals and alloying elements together to create homogeneous alloy.
+
   Used for steel, bronze, brass, and other metal alloy production.
+
   Assumes 10 kg batch size for placeholder calculations.
+
+  '
+is_template: true

@@ -3,29 +3,32 @@ kind: process
 process_type: batch
 name: Heat treatment (basic)
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: rough_part
-    qty: 10.0
-    unit: kg
+- item_id: rough_part
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 10.0
-    unit: kg
+- item_id: finished_part
+  qty: 10.0
+  unit: kg
 requires_ids:
-  - heat_treatment_furnace
-  - quench_tank
+- heat_treatment_furnace
+- quench_tank
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 25.0
   unit: kWh
-  notes: "heating to austenitizing temperature (~850°C for steel) plus hold time and quench/tempering cycles (10 kg batch)"
+  notes: heating to austenitizing temperature (~850°C for steel) plus hold time and
+    quench/tempering cycles (10 kg batch)
 time_model:
   type: batch
   hr_per_batch: 3.0
-  notes: "heat-up, soak time, quench, temper cycle; batch process"
-notes: Heat treatment of metals for hardening, tempering, annealing, or stress relief. Includes controlled heating, soaking, and cooling cycles.
+  notes: heat-up, soak time, quench, temper cycle; batch process
+notes: Heat treatment of metals for hardening, tempering, annealing, or stress relief.
+  Includes controlled heating, soaking, and cooling cycles.
+is_template: true

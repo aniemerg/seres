@@ -21410,7 +21410,11 @@
       "layer_tags": [],
       "name": "Electrical energy",
       "refs_in": [
+        "electricity_generation_placeholder_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0",
         "pete_power_generation_v0",
+        "power_distribution_basic_v0",
+        "power_generation_v0",
         "power_storage_basic_v0",
         "solar_power_generation_basic_v0",
         "thermionic_converter_basic_v0",
@@ -21752,8 +21756,6 @@
       "layer_tags": [],
       "name": "Electricity",
       "refs_in": [
-        "electricity_generation_placeholder_v0",
-        "power_distribution_basic_v0",
         "recipe_electricity_v0"
       ],
       "refs_out": [],
@@ -21770,7 +21772,7 @@
         "recipe_electricity_v0"
       ],
       "refs_out": [
-        "electricity",
+        "electrical_energy",
         "fuel_generic"
       ],
       "status": "defined"
@@ -41281,12 +41283,12 @@
         "recipe_oxygen_gas_v0"
       ],
       "refs_out": [
+        "electrical_energy",
         "electrodes",
         "high_temperature_power_supply_v0",
         "metal_alloy_bulk",
         "mre_reactor_v0",
         "oxygen_gas",
-        "process_power",
         "regolith_powder"
       ],
       "status": "defined"
@@ -44625,7 +44627,7 @@
         "recipe_electrical_energy_thermionic_v0"
       ],
       "refs_out": [
-        "electricity",
+        "electrical_energy",
         "power_distribution"
       ],
       "status": "defined"
@@ -44772,7 +44774,7 @@
         "recipe_process_power_v0"
       ],
       "refs_out": [
-        "process_power"
+        "electrical_energy"
       ],
       "status": "defined"
     },
@@ -46205,10 +46207,7 @@
       "kind": "material",
       "layer_tags": [],
       "name": "Process power",
-      "refs_in": [
-        "oxygen_extraction_molten_regolith_electrolysis_v0",
-        "power_generation_v0"
-      ],
+      "refs_in": [],
       "refs_out": [],
       "status": "defined"
     },

@@ -10,6 +10,7 @@ Minimal setup to run the KB indexer and iterate on YAML data.
 3. `docs/knowledge_acquisition_protocol.md` — Knowledge acquisition workflow
 4. `docs/parts_and_labor_guidelines.md` — Parts, BOMs, and labor modeling policy
 5. **`docs/conservative_mode_guide.md` — Queue work philosophy (Conservative Mode)**
+6. **`docs/fixing-template-validation-errors.md` — Guide for fixing template process errors (4,609 errors)**
 
 See `docs/README.md` for complete onboarding documentation.
 
@@ -48,6 +49,7 @@ Quick examples:
   - GC expired leases: `python -m src.cli queue gc`
   - Prune explicit resolved/superseded: `python -m src.cli queue prune`
   - List counts: `python -m src.cli queue ls`
+  - **Template validation errors**: Intelligence files available in `out/template_fixes/<recipe_id>.md` with context and suggestions
 - Autonomous agents:
   - Run single agent: `python -m queue_agents.worker --agent <name>`
   - Run parallel agents: `python -m queue_agents.launcher --workers <n>`

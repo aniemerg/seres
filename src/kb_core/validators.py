@@ -331,6 +331,8 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
     Validate process semantic correctness.
 
     Rules:
+    - All processes must declare machine requirements (ERROR)
+    - Boundary processes: no inputs, at least one output (ERROR)
     - scaling_basis exists in inputs/outputs (ERROR)
     - No setup_hr in continuous (ERROR)
     - Positive values (ERROR)
@@ -379,15 +381,37 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
             ))
         if not resource_requirements:
             issues.append(ValidationIssue(
-                level=ValidationLevel.WARNING,
+                level=ValidationLevel.ERROR,
                 category="semantic",
-                rule="boundary_machine_missing",
+                rule="process_machine_required",
                 entity_type="process",
                 entity_id=process_id,
-                message="Boundary processes should declare at least one machine requirement",
+                message="Boundary processes must declare at least one machine requirement",
                 field_path="resource_requirements",
-                fix_hint="Add resource_requirements for the machine that performs collection"
+                fix_hint="Add resource_requirements with machine_id for the machine that performs this process"
             ))
+
+    # Rule 0b: ALL processes must declare machine requirements
+    # Processes track machine usage, so every process needs resource_requirements with machine_id
+    resource_requirements = process_dict.get('resource_requirements', []) or []
+    has_machine = False
+    for req in resource_requirements:
+        if req.get('machine_id'):
+            has_machine = True
+            break
+
+    if not has_machine:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="semantic",
+            rule="process_machine_required",
+            entity_type="process",
+            entity_id=process_id,
+            message="All processes must declare at least one machine requirement to track machine usage",
+            field_path="resource_requirements",
+            fix_hint="Add resource_requirements with machine_id for the machine that performs this process. "
+                     "Example: resource_requirements: [{resource_type: machine_time, machine_id: labor_bot_general_v0, qty: 1, unit: hr}]"
+        ))
 
     # Collect all input/output item_ids
     all_item_ids = set()
@@ -1055,6 +1079,153 @@ def validate_recipe_inputs_outputs(
     return issues
 
 
+def validate_recipe_step_inputs(
+    recipe: Any,
+    kb: Any
+) -> List[ValidationIssue]:
+    """
+    Validate that each recipe step's required inputs are satisfied (Issue #9).
+
+    Checks if each step's inputs are available from:
+    1. Recipe-level explicit inputs (shared across all steps)
+    2. Step-level input override (specific to this step)
+    3. Previous step outputs (accumulated from steps 0..N-1)
+    4. BOM components (if target_item_id has a BOM, per ADR-019)
+
+    Skips validation for:
+    - Boundary processes (process_type="boundary" - extract from environment)
+    - Template processes (is_template=True - inputs defined in recipe)
+
+    Args:
+        recipe: Recipe to validate (Recipe model or dict)
+        kb: KB loader with access to processes and BOMs
+
+    Returns:
+        List of validation issues (ERROR level for unsatisfied inputs)
+    """
+    issues = []
+    recipe_id = _get_entity_id(recipe)
+
+    # Get as dict if it's a Pydantic model
+    if hasattr(recipe, 'model_dump'):
+        recipe_dict = recipe.model_dump()
+    else:
+        recipe_dict = recipe
+
+    # Build available inputs from recipe level
+    recipe_inputs = recipe_dict.get("inputs", [])
+    recipe_input_ids = {inp.get("item_id") for inp in recipe_inputs if inp.get("item_id")}
+
+    # Add BOM components as available inputs (ADR-019)
+    bom_component_ids = set()
+    target_item_id = recipe_dict.get("target_item_id")
+    if target_item_id:
+        bom = kb.get_bom(target_item_id)
+        if bom:
+            bom_dict = bom if isinstance(bom, dict) else bom.model_dump()
+            bom_components = bom_dict.get("components", [])
+            bom_component_ids = {comp.get("item_id") for comp in bom_components if comp.get("item_id")}
+
+    # Track accumulated outputs from previous steps
+    accumulated_outputs = set()
+
+    # Validate each step
+    steps = recipe_dict.get("steps", [])
+    for step_idx, step in enumerate(steps):
+        process_id = step.get("process_id")
+        if not process_id:
+            continue  # Already caught by schema validation
+
+        # Get process definition
+        process = kb.get_process(process_id)
+        if not process:
+            continue  # Already caught by process_not_found validation
+
+        # Get as dict if Pydantic model
+        if hasattr(process, 'model_dump'):
+            process_dict = process.model_dump()
+        else:
+            process_dict = process
+
+        # Skip boundary processes (no inputs required)
+        if process_dict.get("process_type") == "boundary":
+            continue
+
+        # Determine required inputs for this step
+        # Step-level inputs override process-level inputs (ADR-013)
+        step_inputs = step.get("inputs", [])
+
+        # Template processes MUST have step-level input overrides
+        if process_dict.get("is_template"):
+            if not step_inputs:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="recipe",
+                    rule="recipe_template_missing_step_inputs",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Step {step_idx} uses template process '{process_id}' but doesn't provide step-level input overrides",
+                    field_path=f"steps[{step_idx}].inputs",
+                    fix_hint=f"Template process '{process_id}' has placeholder inputs that must be overridden. "
+                             f"Add 'inputs:' to this step with specific item IDs. "
+                             f"Template processes cannot use default process-level inputs."
+                ))
+                continue  # Skip further validation for this step
+            # Use step-level inputs for template processes
+            required_inputs = step_inputs
+        else:
+            # Non-template: use step-level if provided, else process-level
+            if step_inputs:
+                required_inputs = step_inputs
+            else:
+                required_inputs = process_dict.get("inputs", [])
+
+        # Build set of available inputs for this step
+        available_inputs = recipe_input_ids | bom_component_ids | accumulated_outputs
+
+        # Check each required input
+        for required_input in required_inputs:
+            item_id = required_input.get("item_id")
+            if not item_id:
+                continue
+
+            # Check if input is satisfied
+            if item_id not in available_inputs:
+                # Build context for fix hint
+                available_list = sorted(available_inputs) if available_inputs else ["(none)"]
+                available_str = ", ".join(available_list[:5])
+                if len(available_list) > 5:
+                    available_str += f", ... ({len(available_list)} total)"
+
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="recipe",
+                    rule="recipe_step_input_not_satisfied",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Step {step_idx} (process '{process_id}') requires input '{item_id}' which is not available",
+                    field_path=f"steps[{step_idx}].inputs",
+                    fix_hint=f"Input '{item_id}' is required but not available. "
+                             f"Option 1: Add to recipe inputs: {{item_id: {item_id}, qty: X, unit: Y}}. "
+                             f"Option 2: Add to BOM for '{target_item_id}' (if applicable). "
+                             f"Option 3: Add a process step before step {step_idx} that produces '{item_id}'. "
+                             f"Currently available: {available_str}"
+                ))
+
+        # Add this step's outputs to accumulated outputs for next steps
+        for output in process_dict.get("outputs", []):
+            output_id = output.get("item_id")
+            if output_id:
+                accumulated_outputs.add(output_id)
+
+        for byproduct in process_dict.get("byproducts", []):
+            byproduct_id = byproduct.get("item_id")
+            if byproduct_id:
+                accumulated_outputs.add(byproduct_id)
+
+    return issues
+
+
 def validate_recipe(
     recipe: Any,
     converter: Optional[UnitConverter] = None
@@ -1142,6 +1313,10 @@ def validate_recipe(
         # ADR-018: Validate recipe inputs/outputs are resolvable
         inputs_outputs_issues = validate_recipe_inputs_outputs(recipe, kb)
         issues.extend(inputs_outputs_issues)
+
+        # Issue #9: Validate step inputs are satisfied
+        step_inputs_issues = validate_recipe_step_inputs(recipe, kb)
+        issues.extend(step_inputs_issues)
 
     return issues
 
