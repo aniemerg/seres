@@ -38,18 +38,19 @@ Sample loops:
 See `out/circular_dependencies.jsonl` for details.
 
 ## Validation Issues (ADR-017)
-Total: 4609 validation issues found
+Total: 4644 validation issues found
 
 By severity:
-- error: 4609
+- error: 4644
 
 By category:
 - recipe: 4607
-- semantic: 2
+- semantic: 37
 
 Top validation rules triggered:
 - recipe_template_missing_step_inputs: 2954
 - recipe_step_input_not_satisfied: 1653
+- process_machine_required: 35
 - scaling_basis_not_found: 2
 
 See `out/validation_issues.jsonl` for details.

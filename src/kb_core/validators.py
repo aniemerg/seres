@@ -331,6 +331,8 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
     Validate process semantic correctness.
 
     Rules:
+    - All processes must declare machine requirements (ERROR)
+    - Boundary processes: no inputs, at least one output (ERROR)
     - scaling_basis exists in inputs/outputs (ERROR)
     - No setup_hr in continuous (ERROR)
     - Positive values (ERROR)
@@ -379,15 +381,37 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
             ))
         if not resource_requirements:
             issues.append(ValidationIssue(
-                level=ValidationLevel.WARNING,
+                level=ValidationLevel.ERROR,
                 category="semantic",
-                rule="boundary_machine_missing",
+                rule="process_machine_required",
                 entity_type="process",
                 entity_id=process_id,
-                message="Boundary processes should declare at least one machine requirement",
+                message="Boundary processes must declare at least one machine requirement",
                 field_path="resource_requirements",
-                fix_hint="Add resource_requirements for the machine that performs collection"
+                fix_hint="Add resource_requirements with machine_id for the machine that performs this process"
             ))
+
+    # Rule 0b: ALL processes must declare machine requirements
+    # Processes track machine usage, so every process needs resource_requirements with machine_id
+    resource_requirements = process_dict.get('resource_requirements', []) or []
+    has_machine = False
+    for req in resource_requirements:
+        if req.get('machine_id'):
+            has_machine = True
+            break
+
+    if not has_machine:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="semantic",
+            rule="process_machine_required",
+            entity_type="process",
+            entity_id=process_id,
+            message="All processes must declare at least one machine requirement to track machine usage",
+            field_path="resource_requirements",
+            fix_hint="Add resource_requirements with machine_id for the machine that performs this process. "
+                     "Example: resource_requirements: [{resource_type: machine_time, machine_id: labor_bot_general_v0, qty: 1, unit: hr}]"
+        ))
 
     # Collect all input/output item_ids
     all_item_ids = set()

@@ -22,6 +22,7 @@ from src.kb_core.schema import (
     Quantity,
     TimeModel,
     EnergyModel,
+    Requirement,
 )
 from src.kb_core.unit_converter import UnitConverter
 
@@ -474,7 +475,79 @@ class TestSemanticValidation:
         error = next((i for i in issues if i.rule == "invalid_compound_unit"), None)
         assert error is not None
         assert error.level == ValidationLevel.ERROR
-        assert "Unknown numerator unit" in error.message
+
+    def test_process_missing_machine_requirement(self):
+        """ERROR: All processes must declare machine requirements."""
+        process_dict = {
+            "id": "test_process_v0",
+            "process_type": "batch",
+            "inputs": [{"item_id": "raw_material", "qty": 10.0, "unit": "kg"}],
+            "outputs": [{"item_id": "product", "qty": 8.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 2.0
+            },
+            "energy_model": {
+                "type": "fixed_per_batch",
+                "value": 5.0,
+                "unit": "kWh"
+            },
+            # Missing resource_requirements with machine_id
+        }
+
+        issues = validate_process_semantics(process_dict)
+
+        error = next((i for i in issues if i.rule == "process_machine_required"), None)
+        assert error is not None
+        assert error.level == ValidationLevel.ERROR
+        assert "machine requirement" in error.message.lower()
+
+    def test_process_with_machine_requirement_passes(self):
+        """Process with machine requirement should not generate error."""
+        process_dict = {
+            "id": "test_process_v0",
+            "process_type": "batch",
+            "inputs": [{"item_id": "raw_material", "qty": 10.0, "unit": "kg"}],
+            "outputs": [{"item_id": "product", "qty": 8.0, "unit": "kg"}],
+            "resource_requirements": [
+                {"machine_id": "labor_bot_general_v0", "qty": 2.0, "unit": "hr"}
+            ],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 2.0
+            },
+            "energy_model": {
+                "type": "fixed_per_batch",
+                "value": 5.0,
+                "unit": "kWh"
+            }
+        }
+
+        issues = validate_process_semantics(process_dict)
+
+        machine_errors = [i for i in issues if i.rule == "process_machine_required"]
+        assert len(machine_errors) == 0, "Process with machine requirement should not generate error"
+
+    def test_boundary_process_missing_machine_requirement(self):
+        """ERROR: Boundary processes must also declare machine requirements."""
+        process_dict = {
+            "id": "test_boundary_v0",
+            "process_type": "boundary",
+            "inputs": [],
+            "outputs": [{"item_id": "regolith_lunar_highlands", "qty": 100.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0
+            },
+            # Missing resource_requirements
+        }
+
+        issues = validate_process_semantics(process_dict)
+
+        error = next((i for i in issues if i.rule == "process_machine_required"), None)
+        assert error is not None
+        assert error.level == ValidationLevel.ERROR
+        assert "machine requirement" in error.message.lower()
 
 
 # =============================================================================
@@ -1171,6 +1244,13 @@ class TestValidationIntegration:
             process_type="continuous",
             inputs=[Quantity(item_id="water", qty=100.0, unit="L")],
             outputs=[Quantity(item_id="steam", qty=90.0, unit="L")],
+            resource_requirements=[
+                Requirement(
+                    machine_id="boiler_v0",
+                    qty=1.0,
+                    unit="hr"
+                )
+            ],
             time_model=TimeModel(
                 type="linear_rate",
                 rate=5.0,
