@@ -52,6 +52,9 @@ class TestProcessStartWithAgentDuration:
             'outputs': [
                 {'item_id': 'iron', 'qty': 0.9, 'unit': 'kg'}
             ],
+            'resource_requirements': [
+                {'machine_id': 'furnace', 'qty': 1.0, 'unit': 'hr'}
+            ],
             'time_model': {
                 'type': 'linear_rate',
                 'rate': 10.0,
@@ -122,6 +125,9 @@ class TestProcessStartWithAgentDuration:
             'outputs': [
                 {'item_id': 'iron', 'qty': 0.9, 'unit': 'kg'}
             ],
+            'resource_requirements': [
+                {'machine_id': 'furnace', 'qty': 1.0, 'unit': 'hr'}
+            ],
             'time_model': {
                 'type': 'linear_rate',
                 'rate': 10.0,
@@ -163,6 +169,9 @@ class TestMachineReservation:
             ],
             'outputs': [
                 {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'batch',
@@ -225,6 +234,9 @@ class TestMachineReservation:
             ],
             'outputs': [
                 {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'batch',
@@ -293,6 +305,9 @@ class TestProcessStartWithCalculatedDuration:
             ],
             'outputs': [
                 {'item_id': 'iron', 'qty': 0.9, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'furnace', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'linear_rate',
@@ -399,6 +414,9 @@ class TestEnergyCalculation:
             ],
             'outputs': [
                 {'item_id': 'iron', 'qty': 0.9, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'furnace', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'linear_rate',
@@ -569,6 +587,9 @@ class TestTimeAdvancement:
             'outputs': [
                 {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
             ],
+            'resource_requirements': [
+                {'machine_id': 'processor', 'qty': 1.0, 'unit': 'hr'}
+            ],
             'time_model': {
                 'type': 'batch',
                 'hr_per_batch': 1.0
@@ -621,6 +642,9 @@ class TestTimeAdvancement:
             ],
             'outputs': [
                 {'item_id': 'iron', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'furnace', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'batch',
@@ -678,6 +702,9 @@ class TestMachineReservation:
             ],
             'outputs': [
                 {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'batch',
@@ -740,6 +767,9 @@ class TestMachineReservation:
             ],
             'outputs': [
                 {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'hr'}
             ],
             'time_model': {
                 'type': 'batch',
