@@ -24,6 +24,7 @@ class ActiveProcess(BaseModel):
     ends_at: float     # simulation time in hours
     inputs_consumed: Dict[str, InventoryItem] = Field(default_factory=dict)
     outputs_pending: Dict[str, InventoryItem] = Field(default_factory=dict)
+    machines_reserved: Dict[str, int] = Field(default_factory=dict)
 
 
 class SimulationState(BaseModel):
@@ -33,6 +34,7 @@ class SimulationState(BaseModel):
     inventory: Dict[str, InventoryItem] = Field(default_factory=dict)
     active_processes: List[ActiveProcess] = Field(default_factory=list)
     machines_built: List[str] = Field(default_factory=list)
+    machines_in_use: Dict[str, int] = Field(default_factory=dict)
     total_imports: Dict[str, InventoryItem] = Field(default_factory=dict)
     total_energy_kwh: float = 0.0  # Cumulative energy consumed
 
@@ -125,6 +127,7 @@ class StateSnapshotEvent(Event):
     inventory: Dict[str, InventoryItem]
     active_processes: List[ActiveProcess]
     machines_built: List[str]
+    machines_in_use: Dict[str, int] = Field(default_factory=dict)
     total_energy_kwh: Optional[float] = None  # Cumulative energy at snapshot time
 
 

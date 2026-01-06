@@ -162,9 +162,13 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
             if req.get("amount") is None:
                 rtype = req.get("resource_type") or req.get("resource") or "unknown"
                 nulls.append({"field": f"resource_requirements[{i}].amount", "resource": rtype})
-    elif kind in ("part", "machine"):
-        if data.get("mass") is None:
-            nulls.append({"field": "mass"})
+    elif kind in ("part", "machine", "material"):
+        # Check if item should have mass (skip non-physical items)
+        material_class = data.get("material_class", "")
+        # Skip software, abstract, and information items
+        if material_class not in ("software", "abstract", "information"):
+            if data.get("mass") is None:
+                nulls.append({"field": "mass"})
     elif kind == "bom":
         for i, comp in enumerate(data.get("components", []) or []):
             if comp.get("qty") is None:
@@ -587,7 +591,7 @@ def build_index() -> Dict[str, dict]:
         unresolved_refs, referenced_only, import_stubs,
         items_without_recipes, missing_fields, orphan_resources, invalid_recipes,
         missing_recipe_items, recipes_no_inputs, seed_references, item_metadata,
-        entries, kb_loader, closure_errors, validation_issues
+        entries, kb_loader, closure_errors, validation_issues, null_values
     )
     _write_report(
         entries, warnings, null_values, missing_fields,
@@ -929,6 +933,7 @@ def _update_work_queue(
     kb_loader,
     closure_errors: List[dict] = None,
     validation_issues: List[dict] = None,
+    null_values: List[dict] = None,
 ) -> Dict[str, int]:
     """
     Rebuild work queue from current gaps (replaces previous queue).
@@ -944,6 +949,7 @@ def _update_work_queue(
     - seed_references: item_id -> list of seed file ids that reference it
     - item_metadata: item_id -> freeform metadata from seed requires_ids
     - validation_issues: ADR-017 validation errors and warnings
+    - null_values: items with null/missing critical fields (mass, etc.)
 
     Returns dict of filter statistics.
     """
@@ -1096,6 +1102,23 @@ def _update_work_queue(
                 },
             }
         )
+
+    # Null values (missing critical fields like mass)
+    if null_values:
+        for nv in null_values:
+            gap_items.append(
+                {
+                    "id": f"null_value:{nv['owner_id']}:{nv['field']}",
+                    "kind": nv["owner_kind"],
+                    "reason": "null_value",
+                    "gap_type": "null_value",
+                    "item_id": nv["owner_id"],
+                    "context": {
+                        "field": nv["field"],
+                        "file": nv["file"],
+                    },
+                }
+            )
 
     # Apply queue filtering based on config
     config = QueueFilterConfig.load()

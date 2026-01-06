@@ -149,6 +149,135 @@ class TestProcessStartWithAgentDuration:
         assert result["error"] == "insufficient_inputs"
 
 
+class TestMachineReservation:
+    """Ensure machines cannot be double-booked during simulation."""
+
+    def test_machine_reservation_blocks_concurrent_use(self, temp_kb, temp_sim_dir):
+        """Should prevent starting a second process that needs the same machine."""
+        write_yaml(temp_kb / "processes" / "machine_process.yaml", {
+            'id': 'machine_process',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'input_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            },
+            'requires_ids': ['test_machine']
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "input_material.yaml", {
+            'id': 'input_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.add_to_inventory("input_material", 2.0, "kg")
+        engine.add_to_inventory("test_machine", 1.0, "count")
+
+        first = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert first["success"] is True
+        assert engine.state.machines_in_use["test_machine"] == 1
+
+        second = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert second["success"] is False
+        assert second["error"] == "missing_machine"
+
+    def test_machine_released_on_completion(self, temp_kb, temp_sim_dir):
+        """Should release machine reservations when a process completes."""
+        write_yaml(temp_kb / "processes" / "machine_process.yaml", {
+            'id': 'machine_process',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'input_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            },
+            'requires_ids': ['test_machine']
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "input_material.yaml", {
+            'id': 'input_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.add_to_inventory("input_material", 2.0, "kg")
+        engine.add_to_inventory("test_machine", 1.0, "count")
+
+        first = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert first["success"] is True
+
+        engine.advance_time(1.0)
+        assert "test_machine" not in engine.state.machines_in_use
+
+        second = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert second["success"] is True
+
+
 class TestProcessStartWithCalculatedDuration:
     """Test starting processes with calculated duration (ADR-012)."""
 
@@ -533,3 +662,132 @@ class TestTimeAdvancement:
         # But inventory shouldn't change
         assert "iron" not in engine.state.inventory
         assert engine.state.current_time_hours == 0.0
+
+
+class TestMachineReservation:
+    """Ensure machines cannot be double-booked during simulation."""
+
+    def test_machine_reservation_blocks_concurrent_use(self, temp_kb, temp_sim_dir):
+        """Should prevent starting a second process that needs the same machine."""
+        write_yaml(temp_kb / "processes" / "machine_process.yaml", {
+            'id': 'machine_process',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'input_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            },
+            'requires_ids': ['test_machine']
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "input_material.yaml", {
+            'id': 'input_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.add_to_inventory("input_material", 2.0, "kg")
+        engine.add_to_inventory("test_machine", 1.0, "count")
+
+        first = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert first["success"] is True
+        assert engine.state.machines_in_use["test_machine"] == 1
+
+        second = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert second["success"] is False
+        assert second["error"] == "missing_machine"
+
+    def test_machine_released_on_completion(self, temp_kb, temp_sim_dir):
+        """Should release machine reservations when a process completes."""
+        write_yaml(temp_kb / "processes" / "machine_process.yaml", {
+            'id': 'machine_process',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'input_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            },
+            'requires_ids': ['test_machine']
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "input_material.yaml", {
+            'id': 'input_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.add_to_inventory("input_material", 2.0, "kg")
+        engine.add_to_inventory("test_machine", 1.0, "count")
+
+        first = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert first["success"] is True
+
+        engine.advance_time(1.0)
+        assert "test_machine" not in engine.state.machines_in_use
+
+        second = engine.start_process(
+            process_id="machine_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert second["success"] is True

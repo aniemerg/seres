@@ -168,6 +168,101 @@ class SimulationEngine:
 
         return existing.quantity >= quantity
 
+    def _get_machine_available_count(self, machine_id: str) -> float:
+        """Return available count for a machine, accounting for current reservations."""
+        in_use = self.state.machines_in_use.get(machine_id, 0)
+        total = 0.0
+
+        inv_item = self.state.inventory.get(machine_id)
+        if inv_item:
+            if inv_item.unit in ("count", "unit"):
+                total = inv_item.quantity
+            else:
+                converted = self.converter.convert(inv_item.quantity, inv_item.unit, "count", machine_id)
+                if converted is not None:
+                    total = converted
+        elif machine_id in self.state.machines_built:
+            total = 1.0
+
+        return max(0.0, total - in_use)
+
+    def _collect_required_machines_from_process_def(self, process_def: Dict[str, Any]) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for machine_id in process_def.get("requires_ids", []) or []:
+            counts[machine_id] = max(counts.get(machine_id, 0), 1)
+
+        required_machines = process_def.get("required_machines", []) or []
+        for machine_req in required_machines:
+            if isinstance(machine_req, dict):
+                machine_id = list(machine_req.keys())[0]
+                count = int(machine_req[machine_id])
+            elif isinstance(machine_req, str):
+                machine_id = machine_req
+                count = 1
+            else:
+                continue
+            counts[machine_id] = max(counts.get(machine_id, 0), count)
+
+        return counts
+
+    def _collect_required_machines_from_steps(
+        self, resolved_steps: List[Dict[str, Any]], recipe_def: Dict[str, Any]
+    ) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for step in resolved_steps:
+            for machine_id in step.get("requires_ids", []) or []:
+                counts[machine_id] = max(counts.get(machine_id, 0), 1)
+
+            for machine_req in step.get("required_machines", []) or []:
+                if isinstance(machine_req, dict):
+                    machine_id = list(machine_req.keys())[0]
+                    count = int(machine_req[machine_id])
+                elif isinstance(machine_req, str):
+                    machine_id = machine_req
+                    count = 1
+                else:
+                    continue
+                counts[machine_id] = max(counts.get(machine_id, 0), count)
+
+        for machine_req in recipe_def.get("required_machines", []) or []:
+            if isinstance(machine_req, dict):
+                machine_id = list(machine_req.keys())[0]
+                count = int(machine_req[machine_id])
+            elif isinstance(machine_req, str):
+                machine_id = machine_req
+                count = 1
+            else:
+                continue
+            counts[machine_id] = max(counts.get(machine_id, 0), count)
+
+        return counts
+
+    def _reserve_machines(self, required: Dict[str, int]) -> None:
+        for machine_id, count in required.items():
+            if count <= 0:
+                continue
+            self.state.machines_in_use[machine_id] = self.state.machines_in_use.get(machine_id, 0) + count
+
+    def _release_machines(self, reserved: Dict[str, int]) -> None:
+        for machine_id, count in reserved.items():
+            if count <= 0:
+                continue
+            current = self.state.machines_in_use.get(machine_id, 0)
+            remaining = current - count
+            if remaining > 0:
+                self.state.machines_in_use[machine_id] = remaining
+            elif machine_id in self.state.machines_in_use:
+                del self.state.machines_in_use[machine_id]
+
+    def _rebuild_machines_in_use(self) -> None:
+        machines_in_use: Dict[str, int] = {}
+        for proc in self.state.active_processes:
+            for machine_id, count in proc.machines_reserved.items():
+                if count <= 0:
+                    continue
+                machines_in_use[machine_id] = machines_in_use.get(machine_id, 0) + count
+        self.state.machines_in_use = machines_in_use
+
     # ========================================================================
     # Process execution
     # ========================================================================
@@ -291,26 +386,19 @@ class SimulationEngine:
                     "message": "Must provide either duration_hours or (output_quantity + output_unit)",
                 }
 
-        # Check required machines
-        required_machines = process_def.get("required_machines", [])
-        for machine_req in required_machines:
-            if isinstance(machine_req, dict):
-                machine_id = list(machine_req.keys())[0]
-                count = machine_req[machine_id]
-            elif isinstance(machine_req, str):
-                machine_id = machine_req
-                count = 1
-            else:
-                continue
-
-            # Check if machine exists in inventory or built
-            if machine_id not in self.state.machines_built:
-                if not self.has_item(machine_id, count, "count"):
-                    return {
-                        "success": False,
-                        "error": "missing_machine",
-                        "message": f"Required machine '{machine_id}' not available (need {count})",
-                    }
+        # Check required machines (existence + availability)
+        required_counts = self._collect_required_machines_from_process_def(process_def)
+        for machine_id, count in required_counts.items():
+            available = self._get_machine_available_count(machine_id)
+            if available < count:
+                return {
+                    "success": False,
+                    "error": "missing_machine",
+                    "message": (
+                        f"Required machine '{machine_id}' not available "
+                        f"(need {count}, available {available})"
+                    ),
+                }
 
         # Calculate inputs needed
         inputs = process_def.get("inputs", [])
@@ -391,8 +479,10 @@ class SimulationEngine:
             ends_at=ends_at,
             inputs_consumed=inputs_consumed,
             outputs_pending=outputs_pending,
+            machines_reserved=required_counts,
         )
 
+        self._reserve_machines(required_counts)
         self.state.active_processes.append(active_proc)
 
         # Log event
@@ -411,6 +501,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -632,7 +723,6 @@ class SimulationEngine:
             }
 
         # Aggregate machine requirements from all steps
-        all_required_machines = set()
         missing_machines = []
         warnings = []
 
@@ -642,26 +732,15 @@ class SimulationEngine:
                 warnings.append(step["_warning"])
 
         # Aggregate requires_ids from all resolved steps
-        for step in resolved_steps:
-            requires_ids = step.get("requires_ids", [])
-            all_required_machines.update(requires_ids)
-
-        # Also check recipe-level required_machines (legacy support)
-        required_machines = recipe_def.get("required_machines", [])
-        for machine_req in required_machines:
-            if isinstance(machine_req, dict):
-                machine_id = list(machine_req.keys())[0]
-            elif isinstance(machine_req, str):
-                machine_id = machine_req
-            else:
-                continue
-            all_required_machines.add(machine_id)
+        required_counts = self._collect_required_machines_from_steps(resolved_steps, recipe_def)
 
         # Check machine availability
-        for machine_id in all_required_machines:
-            if machine_id not in self.state.machines_built:
-                if not self.has_item(machine_id, 1, "count"):
-                    missing_machines.append(machine_id)
+        for machine_id, count in required_counts.items():
+            available = self._get_machine_available_count(machine_id)
+            if available < count:
+                missing_machines.append(
+                    f"{machine_id} (need {count}, available {available})"
+                )
 
         # Fail if required machines are missing
         if missing_machines:
@@ -766,8 +845,10 @@ class SimulationEngine:
             ends_at=ends_at,
             inputs_consumed=total_inputs,
             outputs_pending=total_outputs,
+            machines_reserved=required_counts,
         )
 
+        self._reserve_machines(required_counts)
         self.state.active_processes.append(active_proc)
 
         # Log event
@@ -786,6 +867,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -1041,6 +1123,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -1135,6 +1218,8 @@ class SimulationEngine:
                 for item_id, inv_item in proc.outputs_pending.items():
                     self.add_to_inventory(item_id, inv_item.quantity, inv_item.unit)
 
+                self._release_machines(proc.machines_reserved)
+
                 # Calculate energy consumption using ADR-014 energy models
                 process_id = proc.process_id
                 energy_kwh = 0.0
@@ -1211,6 +1296,7 @@ class SimulationEngine:
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -1291,6 +1377,31 @@ class SimulationEngine:
                             for p in event.get("active_processes", [])
                         ]
                         self.state.machines_built = event.get("machines_built", [])
+                        self.state.machines_in_use = event.get("machines_in_use", {})
+
+                        # Backfill machine reservations when loading older snapshots
+                        for proc in self.state.active_processes:
+                            if proc.machines_reserved:
+                                continue
+                            if proc.process_id.startswith("recipe:"):
+                                recipe_id = proc.process_id[7:]
+                                recipe_model = self.kb.get_recipe(recipe_id)
+                                if recipe_model:
+                                    recipe_def = recipe_model.model_dump() if hasattr(recipe_model, "model_dump") else recipe_model
+                                    resolved_steps = [self.resolve_step(step) for step in recipe_def.get("steps", [])]
+                                    proc.machines_reserved = self._collect_required_machines_from_steps(
+                                        resolved_steps, recipe_def
+                                    )
+                            else:
+                                process_model = self.kb.get_process(proc.process_id)
+                                if process_model:
+                                    process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+                                    proc.machines_reserved = self._collect_required_machines_from_process_def(
+                                        process_def
+                                    )
+
+                        if not self.state.machines_in_use:
+                            self._rebuild_machines_in_use()
                         self.state.total_energy_kwh = event.get("total_energy_kwh", 0.0)
 
                     # Track imports
