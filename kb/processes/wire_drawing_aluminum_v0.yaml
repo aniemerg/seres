@@ -13,12 +13,13 @@ byproducts:
 - item_id: metal_scrap
   qty: 0.05
   unit: kg
-requires_ids:
-- wire_drawing_die_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: wire_drawing_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.5
@@ -29,5 +30,6 @@ time_model:
   rate: 2.0
   rate_unit: kg/hr
   scaling_basis: aluminum_alloy_ingot
-notes: Wire drawing through progressively smaller dies. Includes realistic waste/loss as metal scrap; 5% loss assumed.
+notes: Wire drawing through progressively smaller dies. Includes realistic waste/loss
+  as metal scrap; 5% loss assumed.
 process_type: continuous

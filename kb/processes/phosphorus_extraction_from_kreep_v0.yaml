@@ -2,34 +2,37 @@ id: phosphorus_extraction_from_kreep_v0
 kind: process
 name: Phosphorus extraction from KREEP apatite
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: basalt_aggregate
-    qty: 1.0
-    unit: kg
-  - item_id: carbon_reducing_agent
-    qty: 0.762
-    unit: kg
+- item_id: basalt_aggregate
+  qty: 1.0
+  unit: kg
+- item_id: carbon_reducing_agent
+  qty: 0.762
+  unit: kg
 outputs:
-  - item_id: phosphorus_white
-    qty: 0.247
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.030
-    unit: kg
-  - item_id: carbon_monoxide
-    qty: 1.41
-    unit: kg
-  - item_id: calcium_oxide
-    qty: 0.890
-    unit: kg
-requires_ids:
-  - high_temp_furnace_v0
-  - vapor_condenser_cold_trap
+- item_id: phosphorus_white
+  qty: 0.247
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.03
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 1.41
+  unit: kg
+- item_id: calcium_oxide
+  qty: 0.89
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: high_temp_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: vapor_condenser_cold_trap
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 10.0

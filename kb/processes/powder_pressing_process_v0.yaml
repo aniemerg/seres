@@ -13,12 +13,13 @@ byproducts:
 - item_id: dust_fines_v0
   qty: 0.1
   unit: kg
-requires_ids:
-- pressing_mold_set
 resource_requirements:
 - machine_id: pellet_press
   qty: 1.5
   unit: hr
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.6
@@ -29,5 +30,6 @@ time_model:
   rate: 15.0
   rate_unit: kg/hr
   scaling_basis: powder_feedstock
-notes: Powder pressing step using pellet_press with pressing mold set; forms green parts. Placeholder values for modeling.
+notes: Powder pressing step using pellet_press with pressing mold set; forms green
+  parts. Placeholder values for modeling.
 process_type: continuous

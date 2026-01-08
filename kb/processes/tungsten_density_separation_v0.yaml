@@ -2,33 +2,38 @@ id: tungsten_density_separation_v0
 kind: process
 name: Tungsten extraction via density separation
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: nife_alloy_byproduct
-    qty: 1.0
-    unit: kg
-  - item_id: water
-    qty: 2.0
-    unit: kg
+- item_id: nife_alloy_byproduct
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: tungsten_concentrate
-    qty: 0.005
-    unit: kg
-  - item_id: tailings
-    qty: 0.995
-    unit: kg
-  - item_id: water
-    qty: 2.0
-    unit: kg
-requires_ids:
-  - ball_mill_v0
-  - gravity_separator
-  - centrifugal_separator_v0
+- item_id: tungsten_concentrate
+  qty: 0.005
+  unit: kg
+- item_id: tailings
+  qty: 0.995
+  unit: kg
+- item_id: water
+  qty: 2.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: ball_mill_v0
+  qty: 1
+  unit: count
+- machine_id: gravity_separator
+  qty: 1
+  unit: count
+- machine_id: centrifugal_separator_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

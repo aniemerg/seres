@@ -17,12 +17,13 @@ byproducts:
 - item_id: turning_chip_waste
   qty: 0.005
   unit: kg
-requires_ids:
-- drill_press_v0
 resource_requirements:
 - machine_id: drill_press
   qty: 1.0
   unit: hr
+- machine_id: drill_press_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.25

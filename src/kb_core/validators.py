@@ -410,7 +410,21 @@ def validate_process_semantics(process: Any) -> List[ValidationIssue]:
             message="All processes must declare at least one machine requirement to track machine usage",
             field_path="resource_requirements",
             fix_hint="Add resource_requirements with machine_id for the machine that performs this process. "
-                     "Example: resource_requirements: [{resource_type: machine_time, machine_id: labor_bot_general_v0, qty: 1, unit: hr}]"
+                     "Example: resource_requirements: [{machine_id: labor_bot_general_v0, qty: 1, unit: count}]"
+        ))
+
+    # Rule 0c: Warn if requires_ids is present (deprecated field)
+    if process_dict.get('requires_ids'):
+        issues.append(ValidationIssue(
+            level=ValidationLevel.WARNING,
+            category="deprecated",
+            rule="requires_ids_deprecated",
+            entity_type="process",
+            entity_id=process_id,
+            message="Field 'requires_ids' is deprecated. Use 'resource_requirements' with machine_id instead.",
+            field_path="requires_ids",
+            fix_hint="Move machines from 'requires_ids' to 'resource_requirements'. "
+                     "Example: resource_requirements: [{machine_id: ball_mill_v0, qty: 1, unit: count}]"
         ))
 
     # Collect all input/output item_ids

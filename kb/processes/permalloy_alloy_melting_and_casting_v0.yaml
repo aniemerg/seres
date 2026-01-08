@@ -3,24 +3,25 @@ kind: process
 name: Permalloy alloy melting and casting process v0
 process_type: batch
 layer_tags:
-  - layer_3
+- layer_3
 inputs:
-  - item_id: nickel_metal_pure
-    qty: 0.8
-    unit: kg
-  - item_id: iron_metal_pure
-    qty: 0.2
-    unit: kg
+- item_id: nickel_metal_pure
+  qty: 0.8
+  unit: kg
+- item_id: iron_metal_pure
+  qty: 0.2
+  unit: kg
 outputs:
-  - item_id: permalloy_high_permeability_v0
-    qty: 0.95
-    unit: kg
-requires_ids:
-  - induction_furnace_v0
+- item_id: permalloy_high_permeability_v0
+  qty: 0.95
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: induction_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5

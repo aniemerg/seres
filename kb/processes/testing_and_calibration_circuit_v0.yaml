@@ -5,23 +5,28 @@ process_type: batch
 is_template: true
 inputs: []
 outputs: []
-requires_ids:
-  - multimeter_set
-  - power_supply_benchtop
-  - oscilloscope_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: multimeter_set
+  qty: 1
+  unit: count
+- machine_id: power_supply_benchtop
+  qty: 1
+  unit: count
+- machine_id: oscilloscope_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Test equipment power consumption during calibration"
+  notes: Test equipment power consumption during calibration
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Testing and calibration including functional verification"
+  notes: Testing and calibration including functional verification
 notes: |
   Generic template process for circuit testing and calibration.
   Tests electrical functionality and calibrates analog/digital circuits.
@@ -29,4 +34,4 @@ notes: |
   and calibration of adjustable components (potentiometers, trimmers, etc.).
   Recipe steps should override inputs/outputs for specific circuit types.
 layer_tags:
-  - layer_7
+- layer_7

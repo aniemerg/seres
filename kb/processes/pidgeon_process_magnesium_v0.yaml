@@ -3,29 +3,32 @@ kind: process
 name: Pidgeon process for magnesium extraction
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: olivine_concentrate
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_oxide
-    qty: 0.798
-    unit: kg
+- item_id: olivine_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: calcium_oxide
+  qty: 0.798
+  unit: kg
 outputs:
-  - item_id: slag
-    qty: 0.985
-    unit: kg
-  - item_id: magnesium_metal_v0
-    qty: 0.345
-    unit: kg
-requires_ids:
-  - high_temp_furnace_v0
-  - vapor_capture_system_v0
+- item_id: slag
+  qty: 0.985
+  unit: kg
+- item_id: magnesium_metal_v0
+  qty: 0.345
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: high_temp_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: vapor_capture_system_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 16.0

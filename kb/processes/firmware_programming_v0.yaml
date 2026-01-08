@@ -2,33 +2,38 @@ id: firmware_programming_v0
 kind: process
 name: Firmware programming
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: microcontroller_or_embedded_board
-    qty: 1.0
-    unit: unit
-  - item_id: compiled_firmware_binary
-    qty: 1.0
-    unit: unit
+- item_id: microcontroller_or_embedded_board
+  qty: 1.0
+  unit: unit
+- item_id: compiled_firmware_binary
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: programmed_microcontroller
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - programming_adapter_or_jig
-  - computer_workstation
+- item_id: programmed_microcontroller
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: programming_adapter_or_jig
+  qty: 1
+  unit: count
+- machine_id: computer_workstation
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.05
   unit: kWh
-  notes: "Programming adapter and computer power for firmware upload"
+  notes: Programming adapter and computer power for firmware upload
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Connect programmer, upload firmware, verify checksum, test basic functionality"
-notes: Upload compiled firmware to microcontroller or embedded system via JTAG, SWD, UART, or other programming interface. Includes verification and basic functional testing.
+  notes: Connect programmer, upload firmware, verify checksum, test basic functionality
+notes: Upload compiled firmware to microcontroller or embedded system via JTAG, SWD,
+  UART, or other programming interface. Includes verification and basic functional
+  testing.
 process_type: batch

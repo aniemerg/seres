@@ -2,30 +2,33 @@ id: hcl_recovery_from_cacl2_v0
 kind: process
 name: HCl recovery from calcium chloride hydrolysis
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 process_type: batch
 inputs:
-  - item_id: calcium_chloride
-    qty: 1.0
-    unit: kg
-  - item_id: water
-    qty: 0.325
-    unit: kg
+- item_id: calcium_chloride
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.325
+  unit: kg
 outputs:
-  - item_id: calcium_hydroxide
-    qty: 0.667
-    unit: kg
-  - item_id: hydrogen_chloride
-    qty: 0.657
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated_v0
-  - cold_trap_module_v0
+- item_id: calcium_hydroxide
+  qty: 0.667
+  unit: kg
+- item_id: hydrogen_chloride
+  qty: 0.657
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: chemical_reactor_heated_v0
+  qty: 1
+  unit: count
+- machine_id: cold_trap_module_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

@@ -3,19 +3,20 @@ kind: process
 name: Heat Treatment - Stress Relief Annealing (basic)
 process_type: batch
 inputs:
-  - item_id: welded_assemblies
-    qty: 5.0
-    unit: kg
+- item_id: welded_assemblies
+  qty: 5.0
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 5.0
-    unit: kg
-requires_ids:
-  - furnace_basic
+- item_id: finished_part
+  qty: 5.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.4
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.4
+  unit: hr
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 9.0
@@ -25,4 +26,6 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Heat, soak, and controlled cool to relieve stresses.
-notes: Stress relief anneal for steel components after welding or machining to reduce residual stresses and distortion; parameters to be refined per alloy and section thickness.
+notes: Stress relief anneal for steel components after welding or machining to reduce
+  residual stresses and distortion; parameters to be refined per alloy and section
+  thickness.

@@ -3,37 +3,43 @@ kind: process
 process_type: batch
 name: Ammonia recovery from ammonium chloride via CaO
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: ammonium_chloride
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_oxide
-    qty: 1.049
-    unit: kg
+- item_id: ammonium_chloride
+  qty: 1.0
+  unit: kg
+- item_id: calcium_oxide
+  qty: 1.049
+  unit: kg
 outputs:
-  - item_id: ammonia_gas
-    qty: 0.636
-    unit: kg
-  - item_id: calcium_chloride
-    qty: 2.075
-    unit: kg
-  - item_id: water
-    qty: 0.338
-    unit: kg
-requires_ids:
-  - kiln_ceramic
-  - cold_trap_module_v0
-  - gas_scrubbing_unit_v0
+- item_id: ammonia_gas
+  qty: 0.636
+  unit: kg
+- item_id: calcium_chloride
+  qty: 2.075
+  unit: kg
+- item_id: water
+  qty: 0.338
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: kiln_ceramic
+  qty: 1
+  unit: count
+- machine_id: cold_trap_module_v0
+  qty: 1
+  unit: count
+- machine_id: gas_scrubbing_unit_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: Moderate heating for thermal decomposition, exothermic CaO reaction (3.0 kWh/kg * 1.0 kg NH4Cl)
+  notes: Moderate heating for thermal decomposition, exothermic CaO reaction (3.0
+    kWh/kg * 1.0 kg NH4Cl)
 time_model:
   type: batch
   hr_per_batch: 4.0

@@ -12,14 +12,19 @@ outputs:
 - item_id: sintered_parts
   qty: 0.95
   unit: kg
-requires_ids:
-- furnace_high_temp
-- controlled_atmosphere_chamber
-- hydraulic_press
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 4.0

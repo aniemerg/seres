@@ -3,22 +3,23 @@ kind: process
 process_type: batch
 name: Material handling
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: bulk_material_or_parts
-    qty: 100.0
-    unit: kg
+- item_id: bulk_material_or_parts
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: positioned_material_or_parts
-    qty: 100.0
-    unit: kg
-requires_ids:
-  - material_handling_equipment
+- item_id: positioned_material_or_parts
+  qty: 100.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: material_handling_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -26,4 +27,10 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Material handling operations including loading, unloading, positioning, and transporting materials and parts within manufacturing facility. Methods include forklifts, cranes, conveyors, carts, and manual handling. Moves raw materials to processing stations, work-in-progress between operations, and finished goods to storage. Critical support operation for production flow. Minimal material loss (primarily from spillage prevention). Used in all manufacturing operations requiring material movement."
+notes: Material handling operations including loading, unloading, positioning, and
+  transporting materials and parts within manufacturing facility. Methods include
+  forklifts, cranes, conveyors, carts, and manual handling. Moves raw materials to
+  processing stations, work-in-progress between operations, and finished goods to
+  storage. Critical support operation for production flow. Minimal material loss (primarily
+  from spillage prevention). Used in all manufacturing operations requiring material
+  movement.

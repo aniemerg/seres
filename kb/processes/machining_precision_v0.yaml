@@ -16,17 +16,26 @@ outputs:
   qty: 7.0
   unit: kg
   waste_fraction: 0.3
-requires_ids:
-- precision_lathe
-- milling_machine_cnc
-- surface_grinder
-- coordinate_measuring_machine
-- precision_tooling_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 30.0
   unit: hr
   notes: 3 hr/kg * 10 kg input
+- machine_id: precision_lathe
+  qty: 1
+  unit: count
+- machine_id: milling_machine_cnc
+  qty: 1
+  unit: count
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
+- machine_id: coordinate_measuring_machine
+  qty: 1
+  unit: count
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 4.0

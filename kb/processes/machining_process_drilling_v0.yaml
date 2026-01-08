@@ -17,18 +17,21 @@ byproducts:
 - item_id: ceramic_drill_chip_waste
   qty: 0.005
   unit: kg
-requires_ids:
-- drill_press_v0
 resource_requirements:
 - machine_id: drill_press
   qty: 1.0
   unit: hr
+- machine_id: drill_press_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.016
   unit: kWh
-  notes: "Energy per kilogram of ceramic insulator drilled; includes motor operation and coolant."
+  notes: Energy per kilogram of ceramic insulator drilled; includes motor operation
+    and coolant.
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Drilling holes in ceramic insulator to prepare antenna feed points. Chips captured as waste."
+notes: Drilling holes in ceramic insulator to prepare antenna feed points. Chips captured
+  as waste.

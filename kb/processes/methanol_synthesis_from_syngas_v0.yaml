@@ -3,25 +3,28 @@ kind: process
 process_type: batch
 name: Methanol synthesis from syngas
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: carbon_monoxide
-    qty: 1.0
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.143
-    unit: kg
+- item_id: carbon_monoxide
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.143
+  unit: kg
 outputs:
-  - item_id: methanol_liquid
-    qty: 1.14
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - catalyst_pellet_forming_v0
+- item_id: methanol_liquid
+  qty: 1.14
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

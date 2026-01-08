@@ -14,14 +14,19 @@ outputs:
 - item_id: assembled_cable_harness
   qty: 1.0
   unit: unit
-requires_ids:
-- crimping_tool_set
-- wire_stripper_set
-- hand_tools_electrical
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: crimping_tool_set
+  qty: 1
+  unit: count
+- machine_id: wire_stripper_set
+  qty: 1
+  unit: count
+- machine_id: hand_tools_electrical
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2
@@ -33,7 +38,8 @@ time_model:
   rate: 0.333
   rate_unit: kg/hr
   scaling_basis: electrical_wire_and_connectors
-  notes: Cut wires to length, strip ends, crimp connectors, bundle wires, apply cable ties and sleeving, label, continuity test. Rate = 1/3.0 = 0.333 kg/hr
-notes: Assemble multi-conductor cable harnesses with connectors. Includes cutting, stripping, crimping, bundling, and testing
-  of wire assemblies for electrical systems.
+  notes: Cut wires to length, strip ends, crimp connectors, bundle wires, apply cable
+    ties and sleeving, label, continuity test. Rate = 1/3.0 = 0.333 kg/hr
+notes: Assemble multi-conductor cable harnesses with connectors. Includes cutting,
+  stripping, crimping, bundling, and testing of wire assemblies for electrical systems.
 process_type: continuous

@@ -9,12 +9,13 @@ outputs:
 - item_id: tension_gauge
   qty: 1.0
   unit: unit
-requires_ids:
-- basic_fabrication_station_v0
 resource_requirements:
 - machine_id: basic_fabrication_station
   qty: 1.0
   unit: hr
+- machine_id: basic_fabrication_station_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.25
@@ -25,4 +26,5 @@ time_model:
   hr_per_batch: 0.5
   notes: Fabrication time placeholder
 process_type: batch
-notes: Basic one-step fabrication to produce tension_gauge; placeholder values for modeling.
+notes: Basic one-step fabrication to produce tension_gauge; placeholder values for
+  modeling.

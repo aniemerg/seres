@@ -3,41 +3,47 @@ kind: process
 process_type: batch
 name: Thermal extraction of volatiles from regolith
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: regolith_lunar_highlands
-    qty: 1.0
-    unit: kg
+- item_id: regolith_lunar_highlands
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: hydrogen_gas
-    qty: 0.000046
-    unit: kg
-  - item_id: helium_4_gas
-    qty: 0.000014
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.000124
-    unit: kg
-  - item_id: nitrogen_gas
-    qty: 0.000081
-    unit: kg
-  - item_id: regolith_crushed
-    qty: 0.999
-    unit: kg
-requires_ids:
-  - furnace_high_temp
-  - distillation_column_simple_v0
-  - cryogenic_separation_system_v0
+- item_id: hydrogen_gas
+  qty: 4.6e-05
+  unit: kg
+- item_id: helium_4_gas
+  qty: 1.4e-05
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.000124
+  unit: kg
+- item_id: nitrogen_gas
+  qty: 8.1e-05
+  unit: kg
+- item_id: regolith_crushed
+  qty: 0.999
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: distillation_column_simple_v0
+  qty: 1
+  unit: count
+- machine_id: cryogenic_separation_system_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: "Heating 1 kg batch to 700-1200°C to release solar-wind implanted volatiles (8 hr cycle)"
+  notes: Heating 1 kg batch to 700-1200°C to release solar-wind implanted volatiles
+    (8 hr cycle)
 time_model:
   type: batch
   hr_per_batch: 8.0

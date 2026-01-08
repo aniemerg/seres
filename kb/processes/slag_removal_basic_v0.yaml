@@ -3,22 +3,23 @@ kind: process
 process_type: batch
 name: Slag removal (basic)
 layer_tags:
-  - layer_5
+- layer_5
 inputs: []
 outputs: []
-requires_ids:
-  - casting_furnace_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Skimming/decanting energy negligible; furnace holding energy accounted upstream"
+  notes: Skimming/decanting energy negligible; furnace holding energy accounted upstream
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Skim/decant slag per heat"
+  notes: Skim/decant slag per heat
 notes: Basic slag removal/skim step during metal smelting and casting.

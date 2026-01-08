@@ -2,23 +2,24 @@ id: support_removal_and_cleanup_v0
 kind: process
 name: Support removal and cleanup
 layer_tags:
-  - layer_4
+- layer_4
 inputs: []
 outputs: []
-requires_ids:
-  - assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Hand tools and cleanup"
+  notes: Hand tools and cleanup
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Support removal and surface cleanup"
+  notes: Support removal and surface cleanup
 process_type: batch
 notes: Remove supports and perform basic cleanup on printed parts prior to assembly.

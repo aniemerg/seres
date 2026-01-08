@@ -12,13 +12,16 @@ outputs:
 - item_id: finished_part
   qty: 10.0
   unit: kg
-requires_ids:
-- heat_treatment_furnace
-- quench_tank
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: heat_treatment_furnace
+  qty: 1
+  unit: count
+- machine_id: quench_tank
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 25.0

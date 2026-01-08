@@ -14,13 +14,16 @@ outputs:
 - item_id: tailings_silicate_mix
   qty: 70.0
   unit: kg
-requires_ids:
-- vibrating_screen_v0
-- magnetic_separator_drum_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: vibrating_screen_v0
+  qty: 1
+  unit: count
+- machine_id: magnetic_separator_drum_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.5
@@ -33,6 +36,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: regolith_powder
   notes: Throughput ~100 kg/hr feed.
-notes: Beneficiation of regolith to concentrate olivine using screening and magnetic/physical separation; yields olivine concentrate
-  and silicate tailings.
+notes: Beneficiation of regolith to concentrate olivine using screening and magnetic/physical
+  separation; yields olivine concentrate and silicate tailings.
 process_type: continuous

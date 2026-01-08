@@ -11,12 +11,13 @@ outputs:
 - item_id: transported_material
   qty: 100.0
   unit: kg
-requires_ids:
-- hauler
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: hauler
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.05
@@ -29,5 +30,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: bulk_material
   notes: Bulk material transport time including loading and unloading
-notes: Hauler operation for bulk material transport. Moves regolith, ore, or other materials between locations.
+notes: Hauler operation for bulk material transport. Moves regolith, ore, or other
+  materials between locations.
 process_type: continuous

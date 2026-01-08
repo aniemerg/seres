@@ -4,20 +4,23 @@ name: Precision alignment and leveling
 layer_tags:
 - layer_6
 inputs:
-  - item_id: machine_frame_small
-    qty: 1.0
-    unit: kg
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: machine_frame_small
-    qty: 1.0
-    unit: kg
-requires_ids:
-- alignment_tools
-- precision_levels
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 4.0
   unit: hr
+- machine_id: alignment_tools
+  qty: 1
+  unit: count
+- machine_id: precision_levels
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.05
@@ -30,6 +33,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: machine_frame_small
   notes: iterative measurement, shimming, and verification of alignment and level
-notes: Precision alignment and leveling of machine tools and equipment using optical levels, laser alignment tools, and precision
-  levels. Includes shimming and iterative adjustment.
+notes: Precision alignment and leveling of machine tools and equipment using optical
+  levels, laser alignment tools, and precision levels. Includes shimming and iterative
+  adjustment.
 process_type: continuous

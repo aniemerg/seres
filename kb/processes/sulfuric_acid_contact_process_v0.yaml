@@ -3,29 +3,34 @@ kind: process
 process_type: batch
 name: Contact process for sulfuric acid production
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: sulfur_dioxide_gas
-    qty: 1.0
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 0.25
-    unit: kg
-  - item_id: water
-    qty: 0.281
-    unit: kg
+- item_id: sulfur_dioxide_gas
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.25
+  unit: kg
+- item_id: water
+  qty: 0.281
+  unit: kg
 outputs:
-  - item_id: sulfuric_acid_concentrated
-    qty: 1.53
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated
-  - catalyst_bed_assembly
-  - packed_bed_distillation_v0
+- item_id: sulfuric_acid_concentrated
+  qty: 1.53
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: chemical_reactor_heated
+  qty: 1
+  unit: count
+- machine_id: catalyst_bed_assembly
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0

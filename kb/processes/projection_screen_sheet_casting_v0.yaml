@@ -2,21 +2,19 @@ id: projection_screen_sheet_casting_v0
 kind: process
 name: Projection screen sheet extrusion v0
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: plastic_pellets
-    qty: 1.0
-    unit: kg
+- item_id: plastic_pellets
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: projection_screen_translucent
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - plastic_extruder_v0
+- item_id: projection_screen_translucent
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: plastic_extruder_v0
-    qty: 0.5
-    unit: hr
+- machine_id: plastic_extruder_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -25,4 +23,5 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: "Extrusion of polymer pellets into translucent projection screen sheet; placeholder parameters."
+notes: Extrusion of polymer pellets into translucent projection screen sheet; placeholder
+  parameters.

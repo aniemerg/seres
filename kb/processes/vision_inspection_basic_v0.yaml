@@ -4,12 +4,13 @@ kind: process
 is_template: true
 inputs: []
 outputs: []
-requires_ids:
-  - machine_vision_processing_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: machine_vision_processing_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -17,5 +18,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.25
-notes: "Template vision inspection using the machine_vision_processing_v0; recipes provide concrete inputs/outputs."
+notes: Template vision inspection using the machine_vision_processing_v0; recipes
+  provide concrete inputs/outputs.
 process_type: batch

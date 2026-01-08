@@ -3,25 +3,28 @@ kind: process
 name: Carbon monoxide oxidation to CO2
 process_type: batch
 layer_tags:
-  - layer_3
+- layer_3
 inputs:
-  - item_id: carbon_monoxide
-    qty: 1.0
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 0.571
-    unit: kg
+- item_id: carbon_monoxide
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.571
+  unit: kg
 outputs:
-  - item_id: carbon_dioxide_gas
-    qty: 1.57
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated
-  - catalyst_pellet_forming_v0
+- item_id: carbon_dioxide_gas
+  qty: 1.57
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: chemical_reactor_heated
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5

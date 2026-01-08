@@ -3,16 +3,17 @@ kind: process
 process_type: batch
 name: Surface finishing
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs: []
 outputs: []
-requires_ids:
-  - surface_grinder
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -20,4 +21,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Surface finishing operations to achieve desired surface quality, roughness, and appearance. Includes grinding, polishing, buffing, honing, and lapping. Removes machining marks, improves surface roughness, and achieves dimensional tolerances. Critical for precision mating surfaces, optical components, and aesthetic finishes."
+notes: Surface finishing operations to achieve desired surface quality, roughness,
+  and appearance. Includes grinding, polishing, buffing, honing, and lapping. Removes
+  machining marks, improves surface roughness, and achieves dimensional tolerances.
+  Critical for precision mating surfaces, optical components, and aesthetic finishes.

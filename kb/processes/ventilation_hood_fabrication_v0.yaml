@@ -12,19 +12,20 @@ outputs:
 - item_id: ventilation_fume_hood
   qty: 1.0
   unit: unit
-requires_ids:
-- metal_forming_basic_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 3.0
   unit: hr
+- machine_id: metal_forming_basic_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 6.0
   unit: kWh
-  notes: "Energy for forming a ventilation hood from steel stock"
+  notes: Energy for forming a ventilation hood from steel stock
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Fabrication path from steel_stock to ventilation_fume_hood via basic forming"
+notes: Fabrication path from steel_stock to ventilation_fume_hood via basic forming
 process_type: batch

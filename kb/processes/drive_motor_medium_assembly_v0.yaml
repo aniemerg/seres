@@ -3,59 +3,63 @@ kind: process
 process_type: batch
 name: Drive motor (medium) assembly
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: stator_rotor_lamination_set
-    qty: 36.0
-    unit: kg
-    notes: "Electrical steel laminations for 90 kg motor (40% of mass)"
-  - item_id: motor_coil_wound
-    qty: 27.0
-    unit: kg
-    notes: "Aluminum windings (30% of mass)"
-  - item_id: motor_housing_steel
-    qty: 18.0
-    unit: kg
-    notes: "Steel housing (20% of mass) - scaled from 3 kg small motor"
-  - item_id: motor_shaft_steel
-    qty: 4.5
-    unit: kg
-    notes: "Steel rotor shaft (5% of mass) - scaled from 1 kg small motor"
-  - item_id: bearing_set_heavy
-    qty: 4.0
-    unit: kg
-    notes: "Heavy-duty bearings for medium motor"
-  - item_id: fastener_kit_medium
-    qty: 1.0
-    unit: kg
-    notes: "Assembly fasteners"
+- item_id: stator_rotor_lamination_set
+  qty: 36.0
+  unit: kg
+  notes: Electrical steel laminations for 90 kg motor (40% of mass)
+- item_id: motor_coil_wound
+  qty: 27.0
+  unit: kg
+  notes: Aluminum windings (30% of mass)
+- item_id: motor_housing_steel
+  qty: 18.0
+  unit: kg
+  notes: Steel housing (20% of mass) - scaled from 3 kg small motor
+- item_id: motor_shaft_steel
+  qty: 4.5
+  unit: kg
+  notes: Steel rotor shaft (5% of mass) - scaled from 1 kg small motor
+- item_id: bearing_set_heavy
+  qty: 4.0
+  unit: kg
+  notes: Heavy-duty bearings for medium motor
+- item_id: fastener_kit_medium
+  qty: 1.0
+  unit: kg
+  notes: Assembly fasteners
 outputs:
-  - item_id: drive_motor_medium
-    qty: 1.0
-    unit: unit
-    notes: "Complete 90 kg drive motor"
+- item_id: drive_motor_medium
+  qty: 1.0
+  unit: unit
+  notes: Complete 90 kg drive motor
 byproducts:
-  - item_id: assembly_loss
-    qty: 0.5
-    unit: kg
-    notes: "Assembly waste and trimming"
-requires_ids:
-  - assembly_tools_basic
-  - lifting_equipment
+- item_id: assembly_loss
+  qty: 0.5
+  unit: kg
+  notes: Assembly waste and trimming
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
-    notes: "Assembly labor for larger motor"
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+  notes: Assembly labor for larger motor
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: lifting_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Assembly tools, lifting, and test run energy"
+  notes: Assembly tools, lifting, and test run energy
 time_model:
   type: batch
   hr_per_batch: 4.0
-  notes: "Assemble stator/rotor, install shaft, bearings, housing, and perform test run. Longer than small motor due to size and weight."
+  notes: Assemble stator/rotor, install shaft, bearings, housing, and perform test
+    run. Longer than small motor due to size and weight.
 notes: |
   Complete assembly process for 90 kg medium drive motor from component materials.
 

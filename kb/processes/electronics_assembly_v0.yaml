@@ -3,33 +3,39 @@ kind: process
 name: Electronics assembly
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: pcb_populated
-    qty: 1
-    unit: unit
-  - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+- item_id: pcb_populated
+  qty: 1
+  unit: unit
+- item_id: electronic_components_set
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: assembled_electronics
-    qty: 1
-    unit: unit
-requires_ids:
-  - soldering_station
-  - assembly_tools_basic
-  - test_bench_electrical
+- item_id: assembled_electronics
+  qty: 1
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: soldering_station
+  qty: 1
+  unit: count
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: test_bench_electrical
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Soldering and testing equipment power"
+  notes: Soldering and testing equipment power
 time_model:
   type: batch
   hr_per_batch: 3.0
-  notes: "Mount components, solder, inspect joints, functional test"
-notes: General electronics assembly process. Mounts components on PCB, solders connections, inspects quality, and performs functional testing.
+  notes: Mount components, solder, inspect joints, functional test
+notes: General electronics assembly process. Mounts components on PCB, solders connections,
+  inspects quality, and performs functional testing.

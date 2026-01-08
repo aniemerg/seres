@@ -3,27 +3,32 @@ kind: process
 process_type: batch
 name: Tungsten extraction (meteorite)
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: nife_meteorite_material
-    qty: 10.0
-    unit: kg
+- item_id: nife_meteorite_material
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: tungsten_powder
-    qty: 0.05
-    unit: kg
-  - item_id: nife_alloy_byproduct
-    qty: 9.5
-    unit: kg
-requires_ids:
-  - magnetic_separator
-  - sintering_furnace_v0
-  - gravity_separator
+- item_id: tungsten_powder
+  qty: 0.05
+  unit: kg
+- item_id: nife_alloy_byproduct
+  qty: 9.5
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: magnetic_separator
+  qty: 1
+  unit: count
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: gravity_separator
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 18.0
@@ -31,4 +36,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 10.0
-notes: "Tungsten extraction from NiFe meteorite material via magnetic separation and density separation. Meteorites contain trace tungsten (~0.5% by mass). Process: (1) Magnetic separation removes Fe/Ni, (2) Density separation concentrates tungsten (density 19.3 g/cm³) from remaining material, (3) High-temperature sintering at 3000°C+ consolidates tungsten particles. Critical for thermionic cathode production. See design/solar_thermionics_report.md for lunar tungsten sourcing."
+notes: 'Tungsten extraction from NiFe meteorite material via magnetic separation and
+  density separation. Meteorites contain trace tungsten (~0.5% by mass). Process:
+  (1) Magnetic separation removes Fe/Ni, (2) Density separation concentrates tungsten
+  (density 19.3 g/cm³) from remaining material, (3) High-temperature sintering at
+  3000°C+ consolidates tungsten particles. Critical for thermionic cathode production.
+  See design/solar_thermionics_report.md for lunar tungsten sourcing.'

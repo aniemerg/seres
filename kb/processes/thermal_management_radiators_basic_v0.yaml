@@ -11,10 +11,6 @@ outputs:
 - item_id: rejected_heat
   qty: 1.0
   unit: kWh
-requires_ids:
-- radiator_panels_v0
-- heat_transport_loop_assembly
-- thermal_control_valves
 energy_model:
   type: per_unit
   value: 0.05
@@ -33,3 +29,12 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: radiator_panels_v0
+  qty: 1
+  unit: count
+- machine_id: heat_transport_loop_assembly
+  qty: 1
+  unit: count
+- machine_id: thermal_control_valves
+  qty: 1
+  unit: count

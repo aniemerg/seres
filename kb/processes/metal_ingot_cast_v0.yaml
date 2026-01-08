@@ -3,28 +3,30 @@ kind: process
 name: Metal ingot casting
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: metal_alloy_bulk
-    qty: 1.0
-    unit: kg
+- item_id: metal_alloy_bulk
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: metal_ingot
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - crucible_refractory
-  - casting_furnace_v0
-  - casting_mold_set
+- item_id: metal_ingot
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1.0
+  unit: hr
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.5
   unit: kWh
-  notes: "melting steel for 1 kg batch (~1.2 MJ/kg enthalpy + heating losses)"
+  notes: melting steel for 1 kg batch (~1.2 MJ/kg enthalpy + heating losses)
 time_model:
   type: batch
   hr_per_batch: 1.0

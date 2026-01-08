@@ -3,25 +3,28 @@ kind: process
 process_type: batch
 name: Hydrogen sulfide synthesis from hydrogen and sulfur
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: hydrogen_gas
-    qty: 0.059
-    unit: kg
-  - item_id: sulfur_elemental
-    qty: 0.941
-    unit: kg
+- item_id: hydrogen_gas
+  qty: 0.059
+  unit: kg
+- item_id: sulfur_elemental
+  qty: 0.941
+  unit: kg
 outputs:
-  - item_id: hydrogen_sulfide_gas
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - heating_system_low_temp
+- item_id: hydrogen_sulfide_gas
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: heating_system_low_temp
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5

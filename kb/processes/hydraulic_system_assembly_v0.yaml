@@ -2,23 +2,25 @@ id: hydraulic_system_assembly_v0
 kind: process
 name: Hydraulic system assembly
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs: []
 outputs: []
-requires_ids:
-  - assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.3
   unit: kWh
-  notes: "Assembly tools and test pump usage"
+  notes: Assembly tools and test pump usage
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Assemble hoses, fittings, cylinders, and power unit"
-notes: Assemble hydraulic power unit, hoses, fittings, valves, and cylinders; includes leak checks and basic function test.
+  notes: Assemble hoses, fittings, cylinders, and power unit
+notes: Assemble hydraulic power unit, hoses, fittings, valves, and cylinders; includes
+  leak checks and basic function test.

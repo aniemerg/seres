@@ -3,25 +3,26 @@ kind: process
 name: Boudouard reaction (C + CO2 → CO)
 process_type: batch
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: carbon_reductant
-    qty: 0.214
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 1.0
-    unit: kg
+- item_id: carbon_reductant
+  qty: 0.214
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: carbon_monoxide
-    qty: 1.27
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated
+- item_id: carbon_monoxide
+  qty: 1.27
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: chemical_reactor_heated
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5

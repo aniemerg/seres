@@ -3,28 +3,29 @@ kind: process
 process_type: batch
 name: Heat sink installation
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: electronic_component_or_module
-    qty: 1.0
-    unit: unit
-  - item_id: heat_sink
-    qty: 1.0
-    unit: unit
-  - item_id: thermal_interface_material
-    qty: 0.01
-    unit: kg
+- item_id: electronic_component_or_module
+  qty: 1.0
+  unit: unit
+- item_id: heat_sink
+  qty: 1.0
+  unit: unit
+- item_id: thermal_interface_material
+  qty: 0.01
+  unit: kg
 outputs:
-  - item_id: component_with_heat_sink
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_station
+- item_id: component_with_heat_sink
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
@@ -34,4 +35,11 @@ time_model:
   type: batch
   hr_per_batch: 0.3
   notes: Apply TIM, mount heat sink, fasten/clip, and inspect.
-notes: "Installation of heat sink for thermal management of electronic components. Process: (1) Clean component and heat sink mating surfaces, (2) Apply thermal interface material (thermal paste, thermal pad, or phase-change material), (3) Mount heat sink using spring clips, screws, or adhesive, (4) Verify good thermal contact and mechanical retention. Thermal interface fills microscopic air gaps to improve heat transfer. Used for power transistors, voltage regulators, CPUs, power supplies, and motor controllers. Reduces junction temperature and increases component reliability. Proper installation critical for thermal performance."
+notes: 'Installation of heat sink for thermal management of electronic components.
+  Process: (1) Clean component and heat sink mating surfaces, (2) Apply thermal interface
+  material (thermal paste, thermal pad, or phase-change material), (3) Mount heat
+  sink using spring clips, screws, or adhesive, (4) Verify good thermal contact and
+  mechanical retention. Thermal interface fills microscopic air gaps to improve heat
+  transfer. Used for power transistors, voltage regulators, CPUs, power supplies,
+  and motor controllers. Reduces junction temperature and increases component reliability.
+  Proper installation critical for thermal performance.'

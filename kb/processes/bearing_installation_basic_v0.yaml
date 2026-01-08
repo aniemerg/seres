@@ -15,13 +15,16 @@ outputs:
 - item_id: finished_part
   qty: 2.0
   unit: kg
-requires_ids:
-- hydraulic_press
-- heating_plate_or_induction_heater
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
+- machine_id: heating_plate_or_induction_heater
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.4

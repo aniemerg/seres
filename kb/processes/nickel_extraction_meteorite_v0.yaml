@@ -15,14 +15,19 @@ outputs:
 - item_id: iron_metal
   qty: 8.0
   unit: kg
-requires_ids:
-- furnace_high_temp
-- crucible_graphite
-- chemical_separation_equipment
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: crucible_graphite
+  qty: 1
+  unit: count
+- machine_id: chemical_separation_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 12.0
@@ -34,7 +39,9 @@ time_model:
   rate: 0.25
   rate_unit: kg/hr
   scaling_basis: meteorite_iron
-  notes: Melting, chemical separation, electrolytic refining (4.0 hr per kg = 0.25 kg/hr)
-notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting, chemical separation (Mond process
-  or electrolytic), and refining to obtain pure nickel and iron.
+  notes: Melting, chemical separation, electrolytic refining (4.0 hr per kg = 0.25
+    kg/hr)
+notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting,
+  chemical separation (Mond process or electrolytic), and refining to obtain pure
+  nickel and iron.
 process_type: continuous

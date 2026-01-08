@@ -13,13 +13,16 @@ outputs:
 - item_id: pressed_component
   qty: 9.5
   unit: kg
-requires_ids:
-- hydraulic_press
-- press_ram_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
+- machine_id: press_ram_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0

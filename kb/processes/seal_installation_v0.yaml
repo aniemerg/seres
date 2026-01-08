@@ -3,31 +3,33 @@ kind: process
 process_type: batch
 name: Seal installation
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: hydraulic_seals_set
-    qty: 1
-    unit: unit
-  - item_id: component_to_seal
-    qty: 1
-    unit: unit
+- item_id: hydraulic_seals_set
+  qty: 1
+  unit: unit
+- item_id: component_to_seal
+  qty: 1
+  unit: unit
 outputs:
-  - item_id: sealed_component
-    qty: 1
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
+- item_id: sealed_component
+  qty: 1
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Minimal energy for hand tools"
+  notes: Minimal energy for hand tools
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Install O-rings, seals, and gaskets"
-notes: Installation of hydraulic seals, O-rings, and gaskets in cylinders, pumps, and other hydraulic components.
+  notes: Install O-rings, seals, and gaskets
+notes: Installation of hydraulic seals, O-rings, and gaskets in cylinders, pumps,
+  and other hydraulic components.

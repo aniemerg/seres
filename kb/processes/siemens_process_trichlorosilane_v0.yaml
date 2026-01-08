@@ -2,28 +2,31 @@ id: siemens_process_trichlorosilane_v0
 kind: process
 name: Siemens process for polysilicon (trichlorosilane route)
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: silicon_metal_v0
-    qty: 1.0
-    unit: kg
-  - item_id: hydrogen_chloride
-    qty: 3.90
-    unit: kg
+- item_id: silicon_metal_v0
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_chloride
+  qty: 3.9
+  unit: kg
 outputs:
-  - item_id: trichlorosilane_liquid
-    qty: 4.83
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.072
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - distillation_column_simple_v0
+- item_id: trichlorosilane_liquid
+  qty: 4.83
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.072
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: distillation_column_simple_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

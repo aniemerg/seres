@@ -1,7 +1,48 @@
 # ADR 003: Process-Machine Schema Harmonization
 
-**Status:** Draft
-**Date:** 2025-12-18
+**Status:** Partially Implemented
+**Date:** 2025-12-18 (Draft), 2026-01-08 (Partial Implementation)
+
+---
+
+## Implementation Update (2026-01-08)
+
+**Implemented:** Machine reference consolidation (`requires_ids` migration)
+
+This update implements a key subset of ADR-003's goals: consolidating machine references from the legacy `requires_ids` field into `resource_requirements` with explicit `machine_id` fields. This furthers ADR-003's core principle of using concrete machine references instead of abstract types.
+
+### Changes Made:
+
+1. **Migration completed**: All 463 processes with `requires_ids` have been migrated to `resource_requirements`
+2. **Schema updated**: `requires_ids` marked as deprecated in `src/kb_core/schema.py`
+3. **Simulation updated**: Engine now reads from `resource_requirements.machine_id` instead of `requires_ids`
+4. **Validation updated**: New warning rule `requires_ids_deprecated` added (WARNING level)
+5. **Documentation updated**: All examples now use `resource_requirements` format
+
+**Migration script**: `scripts/migrate_requires_ids.py`
+
+**Format after migration:**
+```yaml
+resource_requirements:
+  - machine_id: ball_mill_v0      # Migrated from requires_ids
+    qty: 1
+    unit: count
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+```
+
+### Still To Implement (Future Work):
+
+- [ ] Add `processes_supported` field to machine definitions
+- [ ] Remove `capabilities` field from machines (deprecated)
+- [ ] Delete `kb/resources/*.yaml` files (73 files)
+- [ ] Move consumables from `resource_requirements` to `inputs` where appropriate
+- [ ] Build bidirectional machine ↔ process linkage
+
+This partial implementation removes the `requires_ids` / `resource_requirements` duplication discovered during the original investigation, establishing `resource_requirements` as the single source of truth for machine requirements.
+
+---
 
 ## Context
 

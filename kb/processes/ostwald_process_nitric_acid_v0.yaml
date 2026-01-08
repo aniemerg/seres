@@ -2,30 +2,35 @@ id: ostwald_process_nitric_acid_v0
 kind: process
 name: Ostwald process for nitric acid production
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: ammonia_gas
-    qty: 1.0
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 2.35
-    unit: kg
+- item_id: ammonia_gas
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 2.35
+  unit: kg
 outputs:
-  - item_id: nitric_acid_concentrated
-    qty: 3.71
-    unit: kg
-  - item_id: water
-    qty: 0.32
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated
-  - packed_bed_distillation_v0
-  - catalyst_pellet_forming_v0
+- item_id: nitric_acid_concentrated
+  qty: 3.71
+  unit: kg
+- item_id: water
+  qty: 0.32
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: chemical_reactor_heated
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

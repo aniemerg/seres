@@ -2,29 +2,30 @@ id: programming_and_test_v0
 name: Programming and Test of embedded board v0
 kind: process
 inputs:
-  - item_id: pcb_assembled_board
-    qty: 0.145
-    unit: kg
+- item_id: pcb_assembled_board
+  qty: 0.145
+  unit: kg
 outputs:
-  - item_id: microcontroller_or_embedded_board
-    qty: 0.2
-    unit: kg
-requires_ids:
-  - computer_workstation
+- item_id: microcontroller_or_embedded_board
+  qty: 0.2
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_specialist_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_specialist_v0
+  qty: 1.0
+  unit: hr
+- machine_id: computer_workstation
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.05
   unit: kWh
-  notes: "Programming energy for embedded board"
+  notes: Programming energy for embedded board
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Programming and testing duration for embedded board"
+  notes: Programming and testing duration for embedded board
 process_type: batch
-notes: "Program firmware, run basic tests, and verify IOs on PCB."
+notes: Program firmware, run basic tests, and verify IOs on PCB.
 provenance: hand_assumption
 confidence: medium

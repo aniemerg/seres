@@ -11,12 +11,13 @@ outputs:
 - item_id: machined_part_raw
   qty: 1.0
   unit: kg
-requires_ids:
-- balancing_machine
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: balancing_machine
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3

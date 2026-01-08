@@ -2,30 +2,29 @@ id: pcb_assembly_v0
 kind: process
 name: PCB assembly v0
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: pcb_bare_board
-    qty: 1.0
-    unit: unit
+- item_id: pcb_bare_board
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
+- item_id: pcb_populated
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_tools_basic
-    qty: 1.0
-    unit: unit
+- machine_id: assembly_tools_basic
+  qty: 1.0
+  unit: unit
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Energy for PCB population with components"
+  notes: Energy for PCB population with components
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "PCB population with components; placeholder values"
-notes: "Populate bare PCB with components and prepare for soldering. Placeholder values; refine with actual BOM and process details."
+  notes: PCB population with components; placeholder values
+notes: Populate bare PCB with components and prepare for soldering. Placeholder values;
+  refine with actual BOM and process details.
 process_type: batch

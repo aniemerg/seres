@@ -3,29 +3,33 @@ kind: process
 process_type: batch
 name: Precision grinding and scraping
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: rough_part
-    qty: 1.0
-    unit: kg
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - surface_grinder
-  - inspection_tools_basic
+- item_id: finished_part
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
+- machine_id: inspection_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.2
   unit: kWh
-  notes: "Surface grinder power and hand scraping effort."
+  notes: Surface grinder power and hand scraping effort.
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Multiple grinding passes plus hand scraping/inspection."
-notes: "Finishes precision surfaces by grinding followed by hand scraping to achieve high flatness and alignment."
+  notes: Multiple grinding passes plus hand scraping/inspection.
+notes: Finishes precision surfaces by grinding followed by hand scraping to achieve
+  high flatness and alignment.

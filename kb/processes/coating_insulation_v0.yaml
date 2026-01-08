@@ -2,27 +2,30 @@ id: coating_insulation_v0
 kind: process
 name: Insulation coating application
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 process_type: batch
 inputs:
-  - item_id: substrate_part_or_wire
-    qty: 1.0
-    unit: kg
-  - item_id: insulation_coating_material
-    qty: 0.3
-    unit: kg
+- item_id: substrate_part_or_wire
+  qty: 1.0
+  unit: kg
+- item_id: insulation_coating_material
+  qty: 0.3
+  unit: kg
 outputs:
-  - item_id: insulated_part_or_wire
-    qty: 1.3
-    unit: kg
-requires_ids:
-  - coating_station
-  - drying_oven
+- item_id: insulated_part_or_wire
+  qty: 1.3
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: coating_station
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -30,4 +33,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.5
-notes: "Application of electrical insulation coating to parts, wires, or components. Methods include dip coating, spray coating, or powder coating with epoxy, polyimide, ceramic, or enamel materials. Followed by curing/drying in oven. Provides electrical insulation (dielectric strength), moisture barrier, and corrosion protection. Used for magnet wires, electrical components, motor windings, and high-voltage parts. Coating thickness typically 0.05-0.5 mm."
+notes: Application of electrical insulation coating to parts, wires, or components.
+  Methods include dip coating, spray coating, or powder coating with epoxy, polyimide,
+  ceramic, or enamel materials. Followed by curing/drying in oven. Provides electrical
+  insulation (dielectric strength), moisture barrier, and corrosion protection. Used
+  for magnet wires, electrical components, motor windings, and high-voltage parts.
+  Coating thickness typically 0.05-0.5 mm.

@@ -13,8 +13,6 @@ outputs:
 - item_id: power_supply_small_inhouse
   qty: 1.0
   unit: unit
-requires_ids:
-- assembly_station
 resource_requirements:
 - machine_id: assembly_station
   qty: 1.0
@@ -23,8 +21,11 @@ energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "In-house assembly energy per batch (1 unit); placeholder value for small power supply"
+  notes: In-house assembly energy per batch (1 unit); placeholder value for small
+    power supply
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "In-house assembled small power supply to replace the import_placeholder path for computer_core_imported. This is a placeholder; details may be refined as components are specified."
+notes: In-house assembled small power supply to replace the import_placeholder path
+  for computer_core_imported. This is a placeholder; details may be refined as components
+  are specified.

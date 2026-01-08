@@ -3,28 +3,29 @@ kind: process
 name: Calcium carbonate from Ca(OH)2 carbonation
 process_type: batch
 layer_tags:
-  - layer_2
-  - layer_3
+- layer_2
+- layer_3
 inputs:
-  - item_id: calcium_hydroxide
-    qty: 1.0
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.595
-    unit: kg
+- item_id: calcium_hydroxide
+  qty: 1.0
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.595
+  unit: kg
 outputs:
-  - item_id: calcium_carbonate
-    qty: 1.35
-    unit: kg
-  - item_id: water
-    qty: 0.243
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
+- item_id: calcium_carbonate
+  qty: 1.35
+  unit: kg
+- item_id: water
+  qty: 0.243
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5

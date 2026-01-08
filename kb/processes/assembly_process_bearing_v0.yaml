@@ -3,7 +3,7 @@ kind: process
 name: Bearing assembly v0
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
 - item_id: bearing_rings_ground
   qty: 1.0
@@ -28,18 +28,20 @@ byproducts:
 - item_id: assembly_loss
   qty: 0.5
   unit: kg
-requires_ids:
-- assembly_tools_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Manual assembly with hand tools + small power tools"
+  notes: Manual assembly with hand tools + small power tools
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Assemble bearing rings, steel ball, cage, seals and grease into sealed bearing set."
+notes: Assemble bearing rings, steel ball, cage, seals and grease into sealed bearing
+  set.

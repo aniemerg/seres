@@ -2,30 +2,33 @@ id: nacl_regeneration_from_nano3_v0
 kind: process
 name: NaCl regeneration from sodium nitrate
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 process_type: batch
 inputs:
-  - item_id: sodium_nitrate
-    qty: 1.0
-    unit: kg
-  - item_id: sodium_chloride
-    qty: 0.877
-    unit: kg
+- item_id: sodium_nitrate
+  qty: 1.0
+  unit: kg
+- item_id: sodium_chloride
+  qty: 0.877
+  unit: kg
 outputs:
-  - item_id: sodium_chloride
-    qty: 0.688
-    unit: kg
-  - item_id: potassium_nitrate
-    qty: 1.19
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - crystallization_unit_v0
+- item_id: sodium_chloride
+  qty: 0.688
+  unit: kg
+- item_id: potassium_nitrate
+  qty: 1.19
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: crystallization_unit_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0

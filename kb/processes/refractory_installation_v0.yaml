@@ -2,15 +2,16 @@ id: refractory_installation_v0
 kind: process
 name: Refractory installation (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
-requires_ids:
-  - assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.2
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.2
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -21,4 +22,6 @@ time_model:
   hr_per_batch: 1.2
   notes: Formwork setup, placing/ramming refractory, and initial cure.
 process_type: batch
-notes: Install refractory linings/brick in furnaces or kilns; includes surface prep, formwork, placement, and cure. Replace with specific lining system details when available.
+notes: Install refractory linings/brick in furnaces or kilns; includes surface prep,
+  formwork, placement, and cure. Replace with specific lining system details when
+  available.

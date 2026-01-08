@@ -12,13 +12,16 @@ outputs:
 - item_id: tungsten_cathode_blank_v0
   qty: 0.15
   unit: kg
-requires_ids:
-- sintering_furnace_v0
-- inert_atmosphere_system
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: inert_atmosphere_system
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 50.0
@@ -27,4 +30,4 @@ time_model:
   type: batch
   hr_per_batch: 8.0
 process_type: batch
-notes: "Sinter tungsten powder to form a tungsten cathode blank for CaO coating."
+notes: Sinter tungsten powder to form a tungsten cathode blank for CaO coating.

@@ -2,35 +2,38 @@ id: olivine_aluminothermic_reduction_v0
 kind: process
 name: Aluminothermic reduction of olivine
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: olivine_concentrate
-    qty: 1.0
-    unit: kg
-  - item_id: aluminum_shavings_v0
-    qty: 0.429
-    unit: kg
+- item_id: olivine_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: aluminum_shavings_v0
+  qty: 0.429
+  unit: kg
 outputs:
-  - item_id: magnesia_refractory_v0
-    qty: 0.381
-    unit: kg
-  - item_id: magnesium_metal_v0
-    qty: 0.514
-    unit: kg
-  - item_id: silicon_metal_v0
-    qty: 0.397
-    unit: kg
-  - item_id: aluminum_alloy_ingot
-    qty: 0.137
-    unit: kg
-requires_ids:
-  - furnace_basic
-  - crucible_refractory
+- item_id: magnesia_refractory_v0
+  qty: 0.381
+  unit: kg
+- item_id: magnesium_metal_v0
+  qty: 0.514
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.397
+  unit: kg
+- item_id: aluminum_alloy_ingot
+  qty: 0.137
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0

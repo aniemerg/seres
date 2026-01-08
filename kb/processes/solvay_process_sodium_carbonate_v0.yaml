@@ -2,42 +2,47 @@ id: solvay_process_sodium_carbonate_v0
 kind: process
 name: Solvay process for sodium carbonate production
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: sodium_chloride
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_carbonate
-    qty: 0.856
-    unit: kg
-  - item_id: ammonia_gas
-    qty: 0.291
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.377
-    unit: kg
+- item_id: sodium_chloride
+  qty: 1.0
+  unit: kg
+- item_id: calcium_carbonate
+  qty: 0.856
+  unit: kg
+- item_id: ammonia_gas
+  qty: 0.291
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.377
+  unit: kg
 outputs:
-  - item_id: sodium_carbonate
-    qty: 0.907
-    unit: kg
-  - item_id: calcium_chloride
-    qty: 0.949
-    unit: kg
-  - item_id: ammonia_gas
-    qty: 0.285
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.377
-    unit: kg
-requires_ids:
-  - packed_bed_distillation_v0
-  - kiln_ceramic
-  - ammonia_recovery_unit_v0
+- item_id: sodium_carbonate
+  qty: 0.907
+  unit: kg
+- item_id: calcium_chloride
+  qty: 0.949
+  unit: kg
+- item_id: ammonia_gas
+  qty: 0.285
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.377
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: kiln_ceramic
+  qty: 1
+  unit: count
+- machine_id: ammonia_recovery_unit_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 6.0

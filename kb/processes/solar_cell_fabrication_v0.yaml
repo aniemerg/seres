@@ -2,45 +2,50 @@ id: solar_cell_fabrication_v0
 kind: process
 name: Solar cell wafer fabrication and metallization
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: silicon_single_crystal_ingot
-    qty: 9.0
-    unit: kg
-  - item_id: phosphorus_white
-    qty: 0.05
-    unit: kg
-  - item_id: silver_contact_material
-    qty: 0.2
-    unit: kg
-  - item_id: silicon_nitride_ceramic_v0
-    qty: 0.1
-    unit: kg
-  - item_id: etching_chemicals
-    qty: 0.2
-    unit: kg
+- item_id: silicon_single_crystal_ingot
+  qty: 9.0
+  unit: kg
+- item_id: phosphorus_white
+  qty: 0.05
+  unit: kg
+- item_id: silver_contact_material
+  qty: 0.2
+  unit: kg
+- item_id: silicon_nitride_ceramic_v0
+  qty: 0.1
+  unit: kg
+- item_id: etching_chemicals
+  qty: 0.2
+  unit: kg
 outputs:
-  - item_id: solar_cell_set
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - pcb_fab_equipment
-  - chemical_bath_station
-  - controlled_atmosphere_chamber
+- item_id: solar_cell_set
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: pcb_fab_equipment
+  qty: 1
+  unit: count
+- machine_id: chemical_bath_station
+  qty: 1
+  unit: count
+- machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 108.0
   unit: kWh
-  notes: "Wafer slicing, doping diffusion, metallization, and coating (9 kg ingot batch)"
+  notes: Wafer slicing, doping diffusion, metallization, and coating (9 kg ingot batch)
 time_model:
   type: batch
   hr_per_batch: 12.0
-  notes: "Slice wafers, dope junctions, deposit contacts and anti-reflective coating"
+  notes: Slice wafers, dope junctions, deposit contacts and anti-reflective coating
 notes: |
   Placeholder solar cell fabrication from single-crystal silicon ingot.
   Includes wafer slicing, phosphorus doping, front/back metallization,

@@ -15,12 +15,13 @@ outputs:
 - item_id: flywheel_vacuum_housing_v0
   qty: 20.0
   unit: kg
-requires_ids:
-- milling_machine_general_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: milling_machine_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 3.0
@@ -32,5 +33,6 @@ time_model:
   rate: 12.0
   rate_unit: kg/hr
   scaling_basis: machined_part_raw
-notes: Final machining of machined_part_raw to flywheel_vacuum_housing_v0, including pockets, ports, and surface finishing.
+notes: Final machining of machined_part_raw to flywheel_vacuum_housing_v0, including
+  pockets, ports, and surface finishing.
 process_type: continuous

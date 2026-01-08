@@ -3,32 +3,37 @@ kind: process
 name: Getter deposition and activation
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: sealed_component
-    qty: 1.0
-    unit: unit
+- item_id: sealed_component
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: sealed_component
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - vacuum_chamber
-  - heating_furnace_module
+- item_id: sealed_component
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
-  - machine_id: high_temperature_power_supply_v0
-    qty: 0.2
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: high_temperature_power_supply_v0
+  qty: 0.2
+  unit: hr
+- machine_id: vacuum_chamber
+  qty: 1
+  unit: count
+- machine_id: heating_furnace_module
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Vacuum pumpdown plus resistive heating/induction to flash getter material."
+  notes: Vacuum pumpdown plus resistive heating/induction to flash getter material.
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Pumpdown, deposition/flash, and cool-down for small vacuum tube assemblies."
-notes: "Deposits getter material inside sealed vacuum components and activates it (flash/evaporation) to maintain vacuum. Placeholder step for vacuum tube and detector builds derived from paper seeds."
+  notes: Pumpdown, deposition/flash, and cool-down for small vacuum tube assemblies.
+notes: Deposits getter material inside sealed vacuum components and activates it (flash/evaporation)
+  to maintain vacuum. Placeholder step for vacuum tube and detector builds derived
+  from paper seeds.

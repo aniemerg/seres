@@ -3,35 +3,38 @@ kind: process
 name: Lime-soda process for anorthite (alumina extraction)
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: anorthite_ore
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_carbonate
-    qty: 1.08
-    unit: kg
-  - item_id: sodium_carbonate
-    qty: 0.381
-    unit: kg
+- item_id: anorthite_ore
+  qty: 1.0
+  unit: kg
+- item_id: calcium_carbonate
+  qty: 1.08
+  unit: kg
+- item_id: sodium_carbonate
+  qty: 0.381
+  unit: kg
 outputs:
-  - item_id: sodium_aluminate_solution
-    qty: 0.59
-    unit: kg
-  - item_id: slag
-    qty: 1.25
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.633
-    unit: kg
-requires_ids:
-  - kiln_ceramic
-  - heating_furnace
+- item_id: sodium_aluminate_solution
+  qty: 0.59
+  unit: kg
+- item_id: slag
+  qty: 1.25
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.633
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: kiln_ceramic
+  qty: 1
+  unit: count
+- machine_id: heating_furnace
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 10.0

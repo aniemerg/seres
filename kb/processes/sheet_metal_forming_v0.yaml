@@ -11,13 +11,16 @@ outputs:
 - item_id: formed_sheet_metal_parts
   qty: 0.95
   unit: kg
-requires_ids:
-- press_brake
-- press_brake_die_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.4
   unit: hr
+- machine_id: press_brake
+  qty: 1
+  unit: count
+- machine_id: press_brake_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.6
@@ -30,6 +33,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: steel_plate_or_sheet
   notes: Setup plus multiple forming passes for brackets and panels.
-notes: Forms cut steel sheet/plate into brackets, enclosures, and channels using press brake or rollers. Includes allowance
-  for trimming and refitting.
+notes: Forms cut steel sheet/plate into brackets, enclosures, and channels using press
+  brake or rollers. Includes allowance for trimming and refitting.
 process_type: continuous

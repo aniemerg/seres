@@ -16,21 +16,22 @@ outputs:
 - item_id: tailings
   qty: 0.85
   unit: kg
-requires_ids:
-- furnace_basic
 resource_requirements:
 - machine_id: furnace
   qty: 1.0
   unit: unit
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Estimated energy for heating regolith to liberate adsorbed water; placeholder"
+  notes: Estimated energy for heating regolith to liberate adsorbed water; placeholder
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Batch processing of 1 kg regolith; placeholder"
+  notes: Batch processing of 1 kg regolith; placeholder
 notes: |
   Thermal extraction of water from regolith using a furnace. Input is raw ore or regolith
   and outputs water and tailings. This is a coarse, placeholder model to seed the

@@ -13,19 +13,21 @@ outputs:
 - item_id: tape_drive_mechanism
   qty: 1.0
   unit: unit
-requires_ids:
-- metal_forming_basic_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: metal_forming_basic_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Forming and assembling 1-unit batch"
+  notes: Forming and assembling 1-unit batch
 time_model:
   type: batch
   hr_per_batch: 0.75
-  notes: "Fabrication and assembly cycle"
-notes: "Fabrication path converting steel_stock into tape_drive_mechanism. Placeholder; to be refined as design iterates."
+  notes: Fabrication and assembly cycle
+notes: Fabrication path converting steel_stock into tape_drive_mechanism. Placeholder;
+  to be refined as design iterates.

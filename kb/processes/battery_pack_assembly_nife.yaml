@@ -3,28 +3,31 @@ kind: process
 name: Ni-Fe battery pack assembly
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: nife_battery_cell
-    qty: 12.0
-    unit: unit
-  - item_id: bus_bar_copper
-    qty: 0.5
-    unit: kg
-  - item_id: insulation_material
-    qty: 0.3
-    unit: kg
+- item_id: nife_battery_cell
+  qty: 12.0
+  unit: unit
+- item_id: bus_bar_copper
+  qty: 0.5
+  unit: kg
+- item_id: insulation_material
+  qty: 0.3
+  unit: kg
 outputs:
-  - item_id: battery_pack_nife
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
-  - test_equipment_basic
+- item_id: battery_pack_nife
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: test_equipment_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
@@ -34,4 +37,5 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Module stacking, bus bar install, insulation, and initial QA.
-notes: Assemble formed Ni-Fe cells into a pack with interconnects, insulation, enclosure, and basic BMS/wiring; includes continuity and insulation resistance checks.
+notes: Assemble formed Ni-Fe cells into a pack with interconnects, insulation, enclosure,
+  and basic BMS/wiring; includes continuity and insulation resistance checks.

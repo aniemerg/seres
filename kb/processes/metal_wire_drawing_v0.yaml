@@ -11,12 +11,13 @@ outputs:
 - item_id: metal_wire_feed
   qty: 2.0
   unit: kg
-requires_ids:
-- drawing_die_set_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: drawing_die_set_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.5
@@ -29,11 +30,8 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: raw_metal_block
   notes: Two passes through drawing dies; placeholder timing
-notes: 'Placeholder metal wire drawing process (v0).
-
+notes: |
+  Placeholder metal wire drawing process (v0).
   Converts raw metal block into a drawn wire feedstock suitable for WAAM/EBF3 deposition.
-
   Parameters and equipment are placeholders and to be refined with BOM inputs.
-
-  '
 process_type: continuous

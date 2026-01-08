@@ -11,14 +11,19 @@ outputs:
 - item_id: permanent_magnet_neodymium
   qty: 1.0
   unit: kg
-requires_ids:
-- sintering_furnace_v0
-- hot_press_v0
-- controlled_atmosphere_chamber
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.5
   unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: hot_press_v0
+  qty: 1
+  unit: count
+- machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 6.0
@@ -31,9 +36,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: processed_powder_mixture
   notes: Pressing, sintering soak, cooling, and final machining
-notes: 'Placeholder NdFeB magnet fabrication step using processed alloy powder with binder.
-
+notes: |
+  Placeholder NdFeB magnet fabrication step using processed alloy powder with binder.
   Assumes NdFeB alloy powder is available via upstream REE processing or import.
-
-  '
 process_type: continuous

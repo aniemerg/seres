@@ -12,13 +12,16 @@ outputs:
 - item_id: green_ceramic_parts
   qty: 5.0
   unit: kg
-requires_ids:
-- pressing_mold_set
-- hydraulic_press
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3

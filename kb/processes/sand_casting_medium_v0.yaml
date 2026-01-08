@@ -17,13 +17,16 @@ outputs:
 - item_id: sand_casting_medium_v0
   qty: 1.0
   unit: kg
-requires_ids:
-- sand_casting_flask_set
-- casting_mold_set
 resource_requirements:
 - machine_id: casting_furnace_v0
   qty: 1.0
   unit: hr
+- machine_id: sand_casting_flask_set
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 3.0
@@ -34,5 +37,6 @@ time_model:
   rate: 1.0
   rate_unit: kg/hr
   scaling_basis: molten_material_or_preform
-notes: Sand casting of medium component; placeholder parameters; refined later with mold geometry.
+notes: Sand casting of medium component; placeholder parameters; refined later with
+  mold geometry.
 process_type: continuous

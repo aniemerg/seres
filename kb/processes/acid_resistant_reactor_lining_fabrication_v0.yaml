@@ -19,18 +19,20 @@ outputs:
 - item_id: acid_resistant_reactor_lining_v0
   qty: 5.0
   unit: kg
-requires_ids:
-- ceramic_press_or_mold_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: ceramic_press_or_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 7.5
   unit: kWh
-  notes: "Fabrication energy for ceramic pressing/molding of lining (5 kg powder batch)"
+  notes: Fabrication energy for ceramic pressing/molding of lining (5 kg powder batch)
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Fabrication of acid-resistant reactor lining from ceramic powder + binder using pressing/mold set. Placeholder parameters; refine with material specifics."
+notes: Fabrication of acid-resistant reactor lining from ceramic powder + binder using
+  pressing/mold set. Placeholder parameters; refine with material specifics.

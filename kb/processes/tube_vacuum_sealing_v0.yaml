@@ -3,32 +3,36 @@ kind: process
 name: Vacuum sealing of vacuum tube subassembly v0
 process_type: batch
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: vacuum_tube_subassembly
-    qty: 1.0
-    unit: unit
-  - item_id: glass_to_metal_seal_v0
-    qty: 1.0
-    unit: unit
+- item_id: vacuum_tube_subassembly
+  qty: 1.0
+  unit: unit
+- item_id: glass_to_metal_seal_v0
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: vacuum_tube_sealed
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - vacuum_pump_small
-  - leak_test_equipment
+- item_id: vacuum_tube_sealed
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: vacuum_pump_small
+  qty: 1
+  unit: count
+- machine_id: leak_test_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
   unit: kWh
-  notes: "Placeholder energy for vacuum sealing operation; to be refined."
+  notes: Placeholder energy for vacuum sealing operation; to be refined.
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Seals vacuum_tube_subassembly using a glass-to-metal seal; placeholder energy/time values. Precursor to tube_basing_and_sealing."
+notes: Seals vacuum_tube_subassembly using a glass-to-metal seal; placeholder energy/time
+  values. Precursor to tube_basing_and_sealing.

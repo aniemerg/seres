@@ -5,19 +5,20 @@ layer_tags:
 - layer_6
 - layer_7
 inputs:
-  - item_id: rough_part
-    qty: 1.0
-    unit: kg
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: finished_part_deburred
-    qty: 1.0
-    unit: kg
-requires_ids:
-- surface_grinder
+- item_id: finished_part_deburred
+  qty: 1.0
+  unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.5
@@ -30,6 +31,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: rough_part
   notes: precision grinding with fine passes and dimensional verification
-notes: Precision surface grinding for achieving tight tolerances and smooth surface finishes. Used for dies, molds, precision
-  guides, and bearing surfaces. Typical tolerances ±0.01mm with Ra < 0.4μm finish.
+notes: Precision surface grinding for achieving tight tolerances and smooth surface
+  finishes. Used for dies, molds, precision guides, and bearing surfaces. Typical
+  tolerances ±0.01mm with Ra < 0.4μm finish.
 process_type: continuous

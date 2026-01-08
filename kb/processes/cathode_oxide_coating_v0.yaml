@@ -3,32 +3,36 @@ kind: process
 name: Cathode oxide coating
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: electrodes_nife_set
-    qty: 1.0
-    unit: kg
-  - item_id: coating_compound
-    qty: 0.1
-    unit: kg
+- item_id: electrodes_nife_set
+  qty: 1.0
+  unit: kg
+- item_id: coating_compound
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: electrode_materials
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - coating_booth_enclosure
-  - drying_oven
+- item_id: electrode_materials
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: coating_booth_enclosure
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Spray/dip and oven dry energy for oxide coating."
+  notes: Spray/dip and oven dry energy for oxide coating.
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Apply oxide coating and dry."
-notes: "Placeholder oxide coating step for cathodes (per paper seed list); uses generic coating compound and drying."
+  notes: Apply oxide coating and dry.
+notes: Placeholder oxide coating step for cathodes (per paper seed list); uses generic
+  coating compound and drying.

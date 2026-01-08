@@ -3,49 +3,54 @@ kind: process
 process_type: batch
 name: Heavy bearing set production v0
 layer_tags:
-  - layer_6
-
+- layer_6
 inputs:
-  - item_id: steel_stock
-    qty: 4.5
-    unit: kg
-    notes: "Steel bar stock for races, balls, and cage. Includes material for heat treatment scale loss."
-
+- item_id: steel_stock
+  qty: 4.5
+  unit: kg
+  notes: Steel bar stock for races, balls, and cage. Includes material for heat treatment
+    scale loss.
 outputs:
-  - item_id: bearing_set_heavy
-    qty: 4.0
-    unit: kg
-    notes: "Complete heavy-duty bearing set with hardened races and rolling elements (2x ~2kg bearings)"
-
+- item_id: bearing_set_heavy
+  qty: 4.0
+  unit: kg
+  notes: Complete heavy-duty bearing set with hardened races and rolling elements
+    (2x ~2kg bearings)
 byproducts:
-  - item_id: steel_scrap_refined
-    qty: 0.5
-    unit: kg
-    notes: "Grinding swarf and machining chips from precision finishing"
-
-requires_ids:
-  - lathe_engine_v0
-  - heat_treatment_furnace
-  - bearing_grinding_machine_v0
-  - forge_or_induction_heater_v0
-
+- item_id: steel_scrap_refined
+  qty: 0.5
+  unit: kg
+  notes: Grinding swarf and machining chips from precision finishing
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 5.0
-    unit: hr
-    notes: "Labor for turning, grinding, heat treatment, and assembly. Reduced from 8h for smaller 4kg bearing set."
-
+- machine_id: labor_bot_general_v0
+  qty: 5.0
+  unit: hr
+  notes: Labor for turning, grinding, heat treatment, and assembly. Reduced from 8h
+    for smaller 4kg bearing set.
+- machine_id: lathe_engine_v0
+  qty: 1
+  unit: count
+- machine_id: heat_treatment_furnace
+  qty: 1
+  unit: count
+- machine_id: bearing_grinding_machine_v0
+  qty: 1
+  unit: count
+- machine_id: forge_or_induction_heater_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 54.0
   unit: kWh
-  notes: "Energy for turning, hardening (quench/temper), precision grinding, and assembly. Higher energy due to heat treatment and grinding. (12 kWh/kg × 4.5 kg steel_stock)"
-
+  notes: Energy for turning, hardening (quench/temper), precision grinding, and assembly.
+    Higher energy due to heat treatment and grinding. (12 kWh/kg × 4.5 kg steel_stock)
 time_model:
   type: batch
   hr_per_batch: 5.0
-  notes: "Integrated process: forge rings, machine races, heat treat, grind, make balls, assemble. Heat treatment cycle is time bottleneck. Reduced from 8h for smaller 4kg bearing set."
-
+  notes: 'Integrated process: forge rings, machine races, heat treat, grind, make
+    balls, assemble. Heat treatment cycle is time bottleneck. Reduced from 8h for
+    smaller 4kg bearing set.'
 notes: |
   Complete ball bearing set production process for heavy machinery. Produces one set of
   heavy-duty ball bearings suitable for high-load applications.

@@ -11,12 +11,13 @@ outputs:
 - item_id: pressed_component
   qty: 10.0
   unit: kg
-requires_ids:
-- molding_press_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.4
   unit: hr
+- machine_id: molding_press_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2

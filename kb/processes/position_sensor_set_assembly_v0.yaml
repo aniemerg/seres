@@ -12,13 +12,16 @@ outputs:
 - item_id: position_sensor_set
   qty: 1.0
   unit: unit
-requires_ids:
-- assembly_tools_basic
-- soldering_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: soldering_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.3
@@ -27,4 +30,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
 process_type: batch
-notes: "Assemble position sensor set from a general sensor suite using basic tools; placeholder process to produce position_sensor_set."
+notes: Assemble position sensor set from a general sensor suite using basic tools;
+  placeholder process to produce position_sensor_set.

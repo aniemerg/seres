@@ -3,29 +3,33 @@ kind: process
 process_type: batch
 name: Regolith sinter block forming
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: regolith_powder
-    qty: 11.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 11.0
+  unit: kg
 outputs:
-  - item_id: regolith_sinter_block
-    qty: 10.0
-    unit: kg
-requires_ids:
-  - sintering_furnace_v0
-  - pressing_mold_set
+- item_id: regolith_sinter_block
+  qty: 10.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 16.5
   unit: kWh
-  notes: "Heating and hold for regolith/basalt sintering; assumes modest porosity."
+  notes: Heating and hold for regolith/basalt sintering; assumes modest porosity.
 time_model:
   type: batch
   hr_per_batch: 3.0
-  notes: "Charge mold, heat, sinter, and controlled cool."
-notes: "Forms sintered regolith bricks/blocks for construction; inputs powdered regolith, presses/sinters to near-solid block."
+  notes: Charge mold, heat, sinter, and controlled cool.
+notes: Forms sintered regolith bricks/blocks for construction; inputs powdered regolith,
+  presses/sinters to near-solid block.

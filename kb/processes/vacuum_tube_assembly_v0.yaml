@@ -3,33 +3,38 @@ kind: process
 process_type: batch
 name: Vacuum tube assembly
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: tungsten_cathode_coated
-    qty: 1.0
-    unit: unit
-  - item_id: nickel_anode_plate
-    qty: 1.0
-    unit: unit
-  - item_id: fused_silica_envelope
-    qty: 1.0
-    unit: unit
-  - item_id: vacuum_seal_assembly
-    qty: 1.0
-    unit: unit
+- item_id: tungsten_cathode_coated
+  qty: 1.0
+  unit: unit
+- item_id: nickel_anode_plate
+  qty: 1.0
+  unit: unit
+- item_id: fused_silica_envelope
+  qty: 1.0
+  unit: unit
+- item_id: vacuum_seal_assembly
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: thermionic_vacuum_tube
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - vacuum_pump_small
-  - glassworking_station
-  - leak_test_equipment
+- item_id: thermionic_vacuum_tube
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: vacuum_pump_small
+  qty: 1
+  unit: count
+- machine_id: glassworking_station
+  qty: 1
+  unit: count
+- machine_id: leak_test_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
@@ -37,4 +42,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.5
-notes: "Assembly of thermionic vacuum tube for solar power conversion. Install tungsten cathode (CaO-coated) and nickel anode inside fused silica envelope. Hermetic sealing under vacuum (10^-6 to 10^-7 torr). Critical process for thermionic converter production. Requires clean room conditions and leak-free seals. Leak testing verifies vacuum integrity. See design/solar_thermionics_report.md for specifications."
+notes: Assembly of thermionic vacuum tube for solar power conversion. Install tungsten
+  cathode (CaO-coated) and nickel anode inside fused silica envelope. Hermetic sealing
+  under vacuum (10^-6 to 10^-7 torr). Critical process for thermionic converter production.
+  Requires clean room conditions and leak-free seals. Leak testing verifies vacuum
+  integrity. See design/solar_thermionics_report.md for specifications.

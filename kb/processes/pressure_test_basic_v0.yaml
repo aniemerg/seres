@@ -2,23 +2,25 @@ id: pressure_test_basic_v0
 kind: process
 name: Pressure test (basic)
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs: []
 outputs: []
-requires_ids:
-  - pressure_test_rig_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.3
+  unit: hr
+- machine_id: pressure_test_rig_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Pump/compressor usage"
+  notes: Pump/compressor usage
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Setup and pressure hold"
-notes: Basic pressure testing for cylinders or pressure components to verify sealing and strength.
+  notes: Setup and pressure hold
+notes: Basic pressure testing for cylinders or pressure components to verify sealing
+  and strength.

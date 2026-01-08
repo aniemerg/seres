@@ -12,14 +12,19 @@ outputs:
 - item_id: bearing_ring_blanks
   qty: 1.3
   unit: kg
-requires_ids:
-- forge_or_induction_heater_v0
-- power_hammer_or_press
-- anvil_or_die_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: forge_or_induction_heater_v0
+  qty: 1
+  unit: count
+- machine_id: power_hammer_or_press
+  qty: 1
+  unit: count
+- machine_id: anvil_or_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 2.0
@@ -31,5 +36,6 @@ time_model:
   rate: 1.6667
   rate_unit: kg/hr
   scaling_basis: steel_stock_bar_or_billet
-notes: Hot forging of steel stock into bearing ring blanks. Mass balance intentionally coarse.
+notes: Hot forging of steel stock into bearing ring blanks. Mass balance intentionally
+  coarse.
 process_type: continuous

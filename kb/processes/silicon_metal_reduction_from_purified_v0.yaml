@@ -2,29 +2,34 @@ id: silicon_metal_reduction_from_purified_v0
 kind: process
 name: Silicon metal production from purified silicon v0
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: silicon_purified
-    qty: 1.0
-    unit: kg
+- item_id: silicon_purified
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: silicon_metal_v0
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - reduction_furnace_v0
-  - crucible_refractory
+- item_id: silicon_metal_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: reduction_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: "Placeholder energy intensity for silicon metal production via purification reduction"
+  notes: Placeholder energy intensity for silicon metal production via purification
+    reduction
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Reduction of purified silicon to silicon metal; placeholder for Rochow-compatible path."
+notes: Reduction of purified silicon to silicon metal; placeholder for Rochow-compatible
+  path.
 process_type: batch

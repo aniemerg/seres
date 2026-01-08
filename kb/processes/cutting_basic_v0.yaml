@@ -13,13 +13,16 @@ outputs:
 - item_id: cut_parts
   qty: 9.5
   unit: kg
-requires_ids:
-- saw_or_cutting_tool
-- hand_tools_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.3
   unit: hr
+- machine_id: saw_or_cutting_tool
+  qty: 1
+  unit: count
+- machine_id: hand_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5

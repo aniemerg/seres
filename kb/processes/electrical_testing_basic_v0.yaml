@@ -12,14 +12,19 @@ outputs:
 - item_id: tested_electrical_equipment
   qty: 1.0
   unit: unit
-requires_ids:
-- multimeter_set
-- power_supply_benchtop
-- oscilloscope_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: multimeter_set
+  qty: 1
+  unit: count
+- machine_id: power_supply_benchtop
+  qty: 1
+  unit: count
+- machine_id: oscilloscope_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1

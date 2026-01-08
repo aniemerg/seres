@@ -13,18 +13,20 @@ outputs:
 - item_id: circuit_board_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- circuit_board_tools_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: circuit_board_tools_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Energy per circuit board assembly unit"
+  notes: Energy per circuit board assembly unit
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: "Circuit board assembly placeholder: attaches components onto a PCB substrate and performs basic electrical continuity tests."
+notes: 'Circuit board assembly placeholder: attaches components onto a PCB substrate
+  and performs basic electrical continuity tests.'

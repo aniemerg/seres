@@ -3,31 +3,33 @@ kind: process
 name: Gas scrubbing unit filter fabrication v0
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: filter_cartridges_dust
-    qty: 1.0
-    unit: unit
-  - item_id: sealing_gaskets
-    qty: 0.1
-    unit: kg
+- item_id: filter_cartridges_dust
+  qty: 1.0
+  unit: unit
+- item_id: sealing_gaskets
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: gas_scrubbing_unit_filter_v0_v0
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
+- item_id: gas_scrubbing_unit_filter_v0_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.3
   unit: kWh
-  notes: "Assembly and sealing of filter cartridge."
+  notes: Assembly and sealing of filter cartridge.
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Install media, gaskets, and end caps."
-notes: "Placeholder fabrication of gas scrubbing filter cartridge using generic dust filter media and gaskets."
+  notes: Install media, gaskets, and end caps.
+notes: Placeholder fabrication of gas scrubbing filter cartridge using generic dust
+  filter media and gaskets.

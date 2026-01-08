@@ -3,36 +3,37 @@ kind: process
 name: AlNiCo alloy synthesis from raw metals v0
 process_type: batch
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: aluminum_metal_pure
-    qty: 0.12
-    unit: kg
-  - item_id: nickel_metal
-    qty: 0.35
-    unit: kg
-  - item_id: cobalt_metal_pure
-    qty: 0.35
-    unit: kg
-  - item_id: iron_metal_pure
-    qty: 0.18
-    unit: kg
+- item_id: aluminum_metal_pure
+  qty: 0.12
+  unit: kg
+- item_id: nickel_metal
+  qty: 0.35
+  unit: kg
+- item_id: cobalt_metal_pure
+  qty: 0.35
+  unit: kg
+- item_id: iron_metal_pure
+  qty: 0.18
+  unit: kg
 outputs:
-  - item_id: alnico_magnet_alloy_v0
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - crucible_refractory
+- item_id: alnico_magnet_alloy_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 2.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 2.0
+  unit: hr
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 8.0
   unit: kWh
-  notes: "Melting and alloying Al, Ni, Co, Fe to form AlNiCo magnet alloy"
+  notes: Melting and alloying Al, Ni, Co, Fe to form AlNiCo magnet alloy
 time_model:
   type: batch
   hr_per_batch: 3.0

@@ -3,27 +3,26 @@ kind: process
 name: Lead screw assembly fabrication
 process_type: batch
 inputs:
-  - item_id: steel_bar_stock
-    qty: 8.0
-    unit: unit
+- item_id: steel_bar_stock
+  qty: 8.0
+  unit: unit
 outputs:
-  - item_id: lead_screw_assembly
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - precision_lathe
+- item_id: lead_screw_assembly
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: precision_lathe
-    qty: 2.0
-    unit: hr
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: precision_lathe
+  qty: 2.0
+  unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: Placeholder energy for machining lead screw assembly from stock (1 unit per batch).
+  notes: Placeholder energy for machining lead screw assembly from stock (1 unit per
+    batch).
 time_model:
   type: batch
   hr_per_batch: 1.5

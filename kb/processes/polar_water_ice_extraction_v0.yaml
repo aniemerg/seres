@@ -3,34 +3,42 @@ kind: process
 process_type: batch
 name: Water ice extraction from polar craters
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: regolith_polar_psc
-    qty: 1.0
-    unit: kg
+- item_id: regolith_polar_psc
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: water
-    qty: 0.056
-    unit: kg
-    notes: Extracted as ice, can be melted or used frozen
-  - item_id: regolith_crushed
-    qty: 0.944
-    unit: kg
-requires_ids:
-  - drilling_equipment_v0
-  - furnace_basic
-  - vapor_capture_system_v0
-  - heliostat_array_system_v0
+- item_id: water
+  qty: 0.056
+  unit: kg
+  notes: Extracted as ice, can be melted or used frozen
+- item_id: regolith_crushed
+  qty: 0.944
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 6.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 6.0
+  unit: hr
+- machine_id: drilling_equipment_v0
+  qty: 1
+  unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+- machine_id: vapor_capture_system_v0
+  qty: 1
+  unit: count
+- machine_id: heliostat_array_system_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 12.0
   unit: kWh
-  notes: High energy for drilling, heating ice-cemented regolith, and heliostat operation (1 kg batch)
+  notes: High energy for drilling, heating ice-cemented regolith, and heliostat operation
+    (1 kg batch)
 time_model:
   type: batch
   hr_per_batch: 12.0

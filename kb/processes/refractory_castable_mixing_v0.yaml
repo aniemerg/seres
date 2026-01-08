@@ -3,34 +3,35 @@ kind: process
 name: Refractory castable mixing
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: alumina_powder
-    qty: 0.7
-    unit: kg
-  - item_id: ceramic_binder
-    qty: 0.2
-    unit: kg
-  - item_id: water
-    qty: 0.1
-    unit: kg
+- item_id: alumina_powder
+  qty: 0.7
+  unit: kg
+- item_id: ceramic_binder
+  qty: 0.2
+  unit: kg
+- item_id: water
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: refractory_castable
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - mixer_or_blender
+- item_id: refractory_castable
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: mixer_or_blender
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Mixer energy for a 1 kg castable batch"
+  notes: Mixer energy for a 1 kg castable batch
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Loading, mixing, and discharge"
-notes: "Batch mixing of refractory aggregate, binder, and water to form castable refractory."
+  notes: Loading, mixing, and discharge
+notes: Batch mixing of refractory aggregate, binder, and water to form castable refractory.

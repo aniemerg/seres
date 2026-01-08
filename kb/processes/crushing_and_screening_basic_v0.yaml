@@ -11,13 +11,16 @@ outputs:
 - item_id: regolith_crushed
   qty: 1.0
   unit: kg
-requires_ids:
-- rock_crusher_basic
-- vibrating_screen_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.4
   unit: hr
+- machine_id: rock_crusher_basic
+  qty: 1
+  unit: count
+- machine_id: vibrating_screen_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2

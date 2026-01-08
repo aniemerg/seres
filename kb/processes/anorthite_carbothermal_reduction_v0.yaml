@@ -3,35 +3,38 @@ kind: process
 process_type: batch
 name: Carbothermal reduction of anorthite
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: anorthite_ore
-    qty: 1.0
-    unit: kg
-  - item_id: carbon_reducing_agent
-    qty: 0.172
-    unit: kg
+- item_id: anorthite_ore
+  qty: 1.0
+  unit: kg
+- item_id: carbon_reducing_agent
+  qty: 0.172
+  unit: kg
 outputs:
-  - item_id: calcium_oxide
-    qty: 0.201
-    unit: kg
-  - item_id: alumina_powder
-    qty: 0.367
-    unit: kg
-  - item_id: silicon_metal_v0
-    qty: 0.202
-    unit: kg
-  - item_id: carbon_monoxide
-    qty: 0.402
-    unit: kg
-requires_ids:
-  - high_temp_furnace_v0
-  - solar_concentrator_fresnel_v0
+- item_id: calcium_oxide
+  qty: 0.201
+  unit: kg
+- item_id: alumina_powder
+  qty: 0.367
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.202
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 0.402
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: high_temp_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: solar_concentrator_fresnel_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 14.0

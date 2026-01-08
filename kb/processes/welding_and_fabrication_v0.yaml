@@ -12,16 +12,25 @@ outputs:
 - item_id: welded_fabrications
   qty: 9.5
   unit: kg
-requires_ids:
-- welding_power_supply_v0
-- metal_shear_or_saw
-- press_brake
-- welding_consumables
-- fixturing_workbench
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: welding_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: metal_shear_or_saw
+  qty: 1
+  unit: count
+- machine_id: press_brake
+  qty: 1
+  unit: count
+- machine_id: welding_consumables
+  qty: 1
+  unit: count
+- machine_id: fixturing_workbench
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 2.5

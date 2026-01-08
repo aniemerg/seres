@@ -3,28 +3,30 @@ kind: process
 process_type: batch
 name: Basic part fabrication
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: steel_stock
-    qty: 1.0
-    unit: kg
+- item_id: steel_stock
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: solar_receiver_cavity_v0
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - metal_forming_basic_v0
+- item_id: solar_receiver_cavity_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: metal_forming_basic_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Energy for forming and finishing a small metal cavity"
+  notes: Energy for forming and finishing a small metal cavity
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Fabrication step converting steel_stock into solar_receiver_cavity_v0 via basic forming"
+notes: Fabrication step converting steel_stock into solar_receiver_cavity_v0 via basic
+  forming

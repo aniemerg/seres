@@ -16,8 +16,6 @@ byproducts:
 - item_id: carbon_dioxide_gas
   qty: 130.0
   unit: kg
-requires_ids:
-- furnace_high_temp
 resource_requirements:
 - machine_id: high_temp_furnace_v0
   qty: 4.0
@@ -25,6 +23,9 @@ resource_requirements:
 - machine_id: carbon_feeder_screw
   qty: 1.0
   unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 8.0
@@ -35,6 +36,7 @@ time_model:
   rate: 25.0
   rate_unit: kg/hr
   scaling_basis: silica_purified
-notes: Carbothermal synthesis of silicon carbide from purified silica and carbon feed; outputs SiC and CO2-equivalent gas.
-  Placeholder energy/model parameters; refine with lab data.
+notes: Carbothermal synthesis of silicon carbide from purified silica and carbon feed;
+  outputs SiC and CO2-equivalent gas. Placeholder energy/model parameters; refine
+  with lab data.
 process_type: continuous

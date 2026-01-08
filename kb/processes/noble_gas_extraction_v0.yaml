@@ -2,41 +2,47 @@ id: noble_gas_extraction_v0
 kind: process
 name: Noble gas extraction from lunar volatiles
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: carbon_dioxide_gas
-    qty: 1.0
-    unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: neon_gas
-    qty: 0.00015
-    unit: kg
-  - item_id: inert_gas_fill_v0
-    qty: 0.00050
-    unit: kg
-  - item_id: krypton_gas
-    qty: 0.00002
-    unit: kg
-  - item_id: inert_gas_fill_v0
-    qty: 0.000003
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.999327
-    unit: kg
-requires_ids:
-  - packed_bed_distillation_v0
-  - cryogenic_chiller_v0
-  - gas_chromatograph_simple_v0
+- item_id: neon_gas
+  qty: 0.00015
+  unit: kg
+- item_id: inert_gas_fill_v0
+  qty: 0.0005
+  unit: kg
+- item_id: krypton_gas
+  qty: 2.0e-05
+  unit: kg
+- item_id: inert_gas_fill_v0
+  qty: 3.0e-06
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.999327
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 12.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 12.0
+  unit: hr
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: cryogenic_chiller_v0
+  qty: 1
+  unit: count
+- machine_id: gas_chromatograph_simple_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 200.0
   unit: kWh
-  notes: Extreme cryogenic refrigeration for fractional distillation (per 1 kg feed batch)
+  notes: Extreme cryogenic refrigeration for fractional distillation (per 1 kg feed
+    batch)
 time_model:
   type: batch
   hr_per_batch: 24.0

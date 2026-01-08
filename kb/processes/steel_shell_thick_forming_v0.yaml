@@ -12,12 +12,13 @@ outputs:
 - item_id: steel_shell_thick
   qty: 1.0
   unit: kg
-requires_ids:
-- sheet_making_from_ingot_v0
 resource_requirements:
 - machine_id: steel_forming_press
   qty: 1.0
   unit: hr
+- machine_id: sheet_making_from_ingot_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -26,4 +27,5 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: Form thick steel shell from 3mm sheet using sheet forming press; placeholder values.
+notes: Form thick steel shell from 3mm sheet using sheet forming press; placeholder
+  values.

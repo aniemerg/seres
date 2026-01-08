@@ -2,35 +2,43 @@ id: pete_power_generation_v0
 kind: process
 name: Photon-enhanced thermionic emission power generation
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 process_type: continuous
 inputs:
-  - item_id: solar_radiation
-    qty: 1.0
-    unit: kWh
+- item_id: solar_radiation
+  qty: 1.0
+  unit: kWh
 outputs:
-  - item_id: electrical_energy
-    qty: 0.50
-    unit: kWh
-  - item_id: waste_heat
-    qty: 0.50
-    unit: kWh
-requires_ids:
-  - pete_photon_enhanced_thermionic_v0
-  - solar_concentrator_fresnel_v0
-  - vacuum_envelope_quartz
-  - heat_exchanger_compact
+- item_id: electrical_energy
+  qty: 0.5
+  unit: kWh
+- item_id: waste_heat
+  qty: 0.5
+  unit: kWh
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.1
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr
+- machine_id: pete_photon_enhanced_thermionic_v0
+  qty: 1
+  unit: count
+- machine_id: solar_concentrator_fresnel_v0
+  qty: 1
+  unit: count
+- machine_id: vacuum_envelope_quartz
+  qty: 1
+  unit: count
+- machine_id: heat_exchanger_compact
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.0
   unit: kWh/kWh
   scaling_basis: solar_radiation
-  notes: "Conversion efficiency modeled in outputs (0.5 kWh electric + 0.5 kWh waste heat per 1 kWh input)."
+  notes: Conversion efficiency modeled in outputs (0.5 kWh electric + 0.5 kWh waste
+    heat per 1 kWh input).
 time_model:
   type: linear_rate
   rate: 1.0

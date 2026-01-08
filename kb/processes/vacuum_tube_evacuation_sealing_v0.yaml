@@ -12,13 +12,16 @@ outputs:
 - item_id: vacuum_tube_sealed
   qty: 1.0
   unit: unit
-requires_ids:
-- vacuum_pump_small
-- leak_test_equipment
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: vacuum_pump_small
+  qty: 1
+  unit: count
+- machine_id: leak_test_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -26,5 +29,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: "Evacuate an assembled thermionic vacuum tube envelope and hermetically seal; placeholder values for energy and time."
+notes: Evacuate an assembled thermionic vacuum tube envelope and hermetically seal;
+  placeholder values for energy and time.
 process_type: batch

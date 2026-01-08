@@ -3,28 +3,27 @@ kind: process
 name: Ceramic sintering (high-temp) v0
 process_type: batch
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: ceramic_powder
-    qty: 2.0
-    unit: kg
+- item_id: ceramic_powder
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: sintered_shapes
-    qty: 2.0
-    unit: kg
-requires_ids:
-  - kiln_ceramic
+- item_id: sintered_shapes
+  qty: 2.0
+  unit: kg
 resource_requirements:
-  - machine_id: kiln_ceramic
-    qty: 1.0
-    unit: hr
+- machine_id: kiln_ceramic
+  qty: 1.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 8.0
   unit: kWh
-  notes: "High-temperature sintering densification step (2 kg batch)"
+  notes: High-temperature sintering densification step (2 kg batch)
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: "Placeholder high-temperature sintering for ceramic powder to produce a 2 kg sintered module."
+notes: Placeholder high-temperature sintering for ceramic powder to produce a 2 kg
+  sintered module.

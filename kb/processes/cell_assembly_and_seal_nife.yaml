@@ -2,27 +2,32 @@ id: cell_assembly_and_seal_nife
 kind: process
 name: Ni-Fe cell assembly and sealing (nife)
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: electrode_mix_nife
-    qty: 1.4
-    unit: kg
-  - item_id: electrolyte_koh_solution
-    qty: 1.0
-    unit: kg
+- item_id: electrode_mix_nife
+  qty: 1.4
+  unit: kg
+- item_id: electrolyte_koh_solution
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: battery_cell_nife
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_station
-  - glove_box_or_dry_room
-  - sealing_equipment
+- item_id: battery_cell_nife
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
+- machine_id: glove_box_or_dry_room
+  qty: 1
+  unit: count
+- machine_id: sealing_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -30,5 +35,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Ni-Fe cell assembly and sealing for the unformed battery cell; uses electrode mix and electrolyte solution."
+notes: Ni-Fe cell assembly and sealing for the unformed battery cell; uses electrode
+  mix and electrolyte solution.
 process_type: batch

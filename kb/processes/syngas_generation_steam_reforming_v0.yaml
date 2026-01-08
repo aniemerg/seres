@@ -3,31 +3,34 @@ kind: process
 process_type: batch
 name: Syngas generation via steam reforming of methane
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: methane_gas
-    qty: 1.0
-    unit: kg
-  - item_id: water
-    qty: 2.25
-    unit: kg
+- item_id: methane_gas
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 2.25
+  unit: kg
 outputs:
-  - item_id: carbon_monoxide
-    qty: 1.75
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.376
-    unit: kg
-  - item_id: water
-    qty: 1.13
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - catalyst_pellet_forming_v0
+- item_id: carbon_monoxide
+  qty: 1.75
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.376
+  unit: kg
+- item_id: water
+  qty: 1.13
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 time_model:
   type: batch
   hr_per_batch: 4.0
@@ -36,7 +39,8 @@ energy_model:
   type: fixed_per_batch
   value: 8.0
   unit: kWh
-  notes: Endothermic reaction at 850°C requires significant heat input for 1 kg CH4 batch
+  notes: Endothermic reaction at 850°C requires significant heat input for 1 kg CH4
+    batch
 notes: |
   Steam reforming of methane to produce synthesis gas (syngas: CO + H2).
   Source: Sustainable-ISRU-on-the-Moon.txt

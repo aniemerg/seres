@@ -11,18 +11,20 @@ outputs:
 - item_id: calcium_oxide
   qty: 2.0
   unit: kg
-requires_ids:
-- furnace_high_temp
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 4.0
   unit: kWh/kg
   scaling_basis: regolith_powder
-  notes: high temperature calcination to decompose calcium-bearing minerals and drive off CO2
+  notes: high temperature calcination to decompose calcium-bearing minerals and drive
+    off CO2
 time_model:
   type: linear_rate
   rate: 0.3333

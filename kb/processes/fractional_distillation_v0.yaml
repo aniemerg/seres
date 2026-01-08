@@ -3,35 +3,38 @@ kind: process
 name: Fractional distillation v0
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: blended_mixture
-    qty: 1.0
-    unit: kg
+- item_id: blended_mixture
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: purified_liquid
-    qty: 0.95
-    unit: kg
-  - item_id: distillation_residue
-    qty: 0.05
-    unit: kg
-requires_ids:
-  - packed_bed_distillation_v0
-  - heat_exchanger_compact
+- item_id: purified_liquid
+  qty: 0.95
+  unit: kg
+- item_id: distillation_residue
+  qty: 0.05
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: heat_exchanger_compact
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0
   unit: kWh
-  notes: "Energy for heating, vaporization, and condensation (4.0 kWh/kg * 1.0 kg)"
+  notes: Energy for heating, vaporization, and condensation (4.0 kWh/kg * 1.0 kg)
 time_model:
   type: batch
   hr_per_batch: 6.0
-  notes: "Multi-stage distillation with reflux for high purity"
+  notes: Multi-stage distillation with reflux for high purity
 notes: |
   Fractional distillation for separating and purifying liquid chemical mixtures.
   Process: Heat mixture, vaporize components based on boiling points, condense and collect fractions.

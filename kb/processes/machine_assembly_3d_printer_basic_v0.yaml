@@ -16,12 +16,13 @@ outputs:
 - item_id: 3d_printer_basic_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- assembly_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -29,4 +30,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Basic 3D printer assembly from frame_small and power_electronics_module using assembly_station; placeholder until BOM refined."
+notes: Basic 3D printer assembly from frame_small and power_electronics_module using
+  assembly_station; placeholder until BOM refined.

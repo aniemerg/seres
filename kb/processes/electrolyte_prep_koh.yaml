@@ -3,24 +3,22 @@ kind: process
 name: KOH electrolyte preparation
 process_type: batch
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: potassium_hydroxide
-    qty: 3.0
-    unit: kg
-  - item_id: water
-    qty: 7.0
-    unit: kg
+- item_id: potassium_hydroxide
+  qty: 3.0
+  unit: kg
+- item_id: water
+  qty: 7.0
+  unit: kg
 outputs:
-  - item_id: electrolyte_koh_solution
-    qty: 10.0
-    unit: kg
-requires_ids:
-  - chemical_mixer_tank
+- item_id: electrolyte_koh_solution
+  qty: 10.0
+  unit: kg
 resource_requirements:
-  - machine_id: chemical_mixer_tank
-    qty: 1.0
-    unit: hr
+- machine_id: chemical_mixer_tank
+  qty: 1.0
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.6

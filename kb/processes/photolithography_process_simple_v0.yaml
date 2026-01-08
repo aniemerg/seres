@@ -16,10 +16,6 @@ outputs:
 - item_id: copper_patterned_substrate_v0
   qty: 1.0
   unit: kg
-requires_ids:
-- pcb_fab_equipment
-- uv_exposure_unit
-- pcb_development_station
 resource_requirements:
 - machine_id: pcb_fab_equipment
   qty: 1.0
@@ -34,7 +30,7 @@ energy_model:
   type: fixed_per_batch
   value: 0.8
   unit: kWh
-  notes: "UV exposure and development energy"
+  notes: UV exposure and development energy
 time_model:
   type: batch
   hr_per_batch: 1.0

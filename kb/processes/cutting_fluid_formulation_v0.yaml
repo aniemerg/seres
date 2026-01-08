@@ -3,38 +3,44 @@ kind: process
 name: Cutting fluid formulation
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: water
-    qty: 0.85
-    unit: kg
-  - item_id: emulsifying_oil
-    qty: 0.10
-    unit: kg
-  - item_id: corrosion_inhibitor
-    qty: 0.03
-    unit: kg
-  - item_id: biocide_additive
-    qty: 0.02
-    unit: kg
+- item_id: water
+  qty: 0.85
+  unit: kg
+- item_id: emulsifying_oil
+  qty: 0.1
+  unit: kg
+- item_id: corrosion_inhibitor
+  qty: 0.03
+  unit: kg
+- item_id: biocide_additive
+  qty: 0.02
+  unit: kg
 outputs:
-  - item_id: cutting_fluid
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - mixing_tank_medium
-  - filtration_unit
+- item_id: cutting_fluid
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: mixing_tank_medium
+  qty: 1
+  unit: count
+- machine_id: filtration_unit
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Energy for mixing, pH adjustment, and filtration"
+  notes: Energy for mixing, pH adjustment, and filtration
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Formulate fresh cutting fluid from base materials: water, emulsifying oil, corrosion inhibitors, and biocides. Mix thoroughly, adjust pH to 8.5-9.5, and filter to remove particulates. Produces water-based cutting fluid emulsion for machining operations."
+notes: 'Formulate fresh cutting fluid from base materials: water, emulsifying oil,
+  corrosion inhibitors, and biocides. Mix thoroughly, adjust pH to 8.5-9.5, and filter
+  to remove particulates. Produces water-based cutting fluid emulsion for machining
+  operations.'

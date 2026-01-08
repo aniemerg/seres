@@ -11,13 +11,16 @@ outputs:
 - item_id: concentrated_thermal_energy
   qty: 99.0
   unit: kWh
-requires_ids:
-- concentrator_frame_structure
-- fresnel_lens_segment
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.1
   unit: hr
+- machine_id: concentrator_frame_structure
+  qty: 1
+  unit: count
+- machine_id: fresnel_lens_segment
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.01
@@ -30,6 +33,6 @@ time_model:
   rate_unit: kWh/hr
   scaling_basis: solar_radiation
   notes: continuous passive operation with minimal intervention
-notes: Solar thermal concentration using fresnel lenses or parabolic mirrors. Achieves 1600-2700°C concentration for thermionic
-  or thermal applications.
+notes: Solar thermal concentration using fresnel lenses or parabolic mirrors. Achieves
+  1600-2700°C concentration for thermionic or thermal applications.
 process_type: continuous

@@ -2,25 +2,30 @@ id: grinding_and_finishing_v0
 kind: process
 name: Grinding and finishing
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 process_type: batch
 inputs:
-  - item_id: rough_part
-    qty: 1.0
-    unit: kg
+- item_id: rough_part
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - surface_grinder
-  - grinding_wheels
-  - work_rest_adjustable
+- item_id: finished_part
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
+- machine_id: grinding_wheels
+  qty: 1
+  unit: count
+- machine_id: work_rest_adjustable
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
@@ -28,4 +33,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.5
-notes: "Combined grinding and finishing operations for precision parts. Includes surface grinding, cylindrical grinding, and final finishing. Achieves tight tolerances and smooth surface finish. Used for precision components, tooling, and mating surfaces."
+notes: Combined grinding and finishing operations for precision parts. Includes surface
+  grinding, cylindrical grinding, and final finishing. Achieves tight tolerances and
+  smooth surface finish. Used for precision components, tooling, and mating surfaces.

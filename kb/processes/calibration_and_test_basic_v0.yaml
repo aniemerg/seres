@@ -12,12 +12,13 @@ outputs:
 - item_id: device_calibrated
   qty: 1.0
   unit: unit
-requires_ids:
-- test_equipment_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.8
   unit: hr
+- machine_id: test_equipment_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2

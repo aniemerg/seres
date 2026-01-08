@@ -3,7 +3,7 @@ kind: process
 name: Wire arc additive manufacturing process v0
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
 - item_id: metal_wire_feed
   qty: 1.0
@@ -16,12 +16,13 @@ byproducts:
 - item_id: slag
   qty: 0.05
   unit: kg
-requires_ids:
-- wire_arc_additive_machine
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: wire_arc_additive_machine
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0

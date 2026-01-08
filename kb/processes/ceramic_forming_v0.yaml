@@ -14,13 +14,16 @@ outputs:
 - item_id: green_ceramic_part
   qty: 5.0
   unit: kg
-requires_ids:
-- ceramic_press_or_mold_set
-- drying_oven
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: ceramic_press_or_mold_set
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3
@@ -33,6 +36,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: ceramic_powder_mixture
   notes: Mix powder with binder, fill mold or press, de-mold green part, initial drying
-notes: Form green (unfired) ceramic parts from powder mixture. Methods include slip casting, dry pressing, or plastic forming.
-  Produces shaped but fragile green parts ready for firing/sintering.
+notes: Form green (unfired) ceramic parts from powder mixture. Methods include slip
+  casting, dry pressing, or plastic forming. Produces shaped but fragile green parts
+  ready for firing/sintering.
 process_type: continuous

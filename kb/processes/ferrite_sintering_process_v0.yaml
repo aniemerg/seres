@@ -12,19 +12,23 @@ outputs:
 - item_id: powder_metal_or_ceramic
   qty: 1.0
   unit: kg
-requires_ids:
-- sintering_furnace_v0
-- pressing_mold_set
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.8
   unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5
   unit: kWh
-  notes: "Sintering furnace energy for ferrite compacts (~1 kg batch)."
+  notes: Sintering furnace energy for ferrite compacts (~1 kg batch).
 time_model:
   type: batch
   hr_per_batch: 3.0
-notes: "Seed ferrite sintering step; placeholder to enable ferrite core production path. Based on ferrite_toroid_sintering_v0 pattern."
+notes: Seed ferrite sintering step; placeholder to enable ferrite core production
+  path. Based on ferrite_toroid_sintering_v0 pattern.

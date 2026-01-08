@@ -127,7 +127,8 @@ class RawProcess(BaseModel):
     time_model: Optional[RawTimeModel] = None
     energy_model: Optional[RawEnergyModel] = None
 
-    requires_ids: List[str] = Field(default_factory=list)
+    # DEPRECATED: Use resource_requirements with machine_id instead
+    requires_ids: List[str] = Field(default_factory=list, deprecated=True)
     requires_text: List[str] = Field(default_factory=list)
     resource_requirements: List[RawRequirement] = Field(default_factory=list)
 

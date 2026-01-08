@@ -3,32 +3,35 @@ kind: process
 process_type: batch
 name: Motor housing casting v0
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: iron_metal_pure
-    qty: 1.2
-    unit: kg
+- item_id: iron_metal_pure
+  qty: 1.2
+  unit: kg
 outputs:
-  - item_id: motor_housing_cast
-    qty: 1.0
-    unit: unit
+- item_id: motor_housing_cast
+  qty: 1.0
+  unit: unit
 byproducts:
-  - item_id: metal_scrap
-    qty: 0.2
-    unit: kg
-requires_ids:
-  - forge_or_induction_heater_v0
-  - casting_mold_set
+- item_id: metal_scrap
+  qty: 0.2
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: forge_or_induction_heater_v0
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0
   unit: kWh
-  notes: "Casting energy for motor housing"
+  notes: Casting energy for motor housing
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Cast motor housing from ISRU iron. Each housing ~1 kg finished."
+notes: Cast motor housing from ISRU iron. Each housing ~1 kg finished.

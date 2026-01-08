@@ -3,21 +3,22 @@ kind: process
 process_type: batch
 name: Pattern making (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: wood_or_composite_material
-    qty: 1.0
-    unit: kg
+- item_id: wood_or_composite_material
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: casting_patterns_wooden
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - assembly_tools_basic
+- item_id: casting_patterns_wooden
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -27,5 +28,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Layout, cutting, sanding, and sealing per pattern.
-notes: Create casting patterns or molds from wood/composite; includes layout, shaping, finishing, and sealing. Placeholder until detailed pattern shop steps are modeled.
-
+notes: Create casting patterns or molds from wood/composite; includes layout, shaping,
+  finishing, and sealing. Placeholder until detailed pattern shop steps are modeled.

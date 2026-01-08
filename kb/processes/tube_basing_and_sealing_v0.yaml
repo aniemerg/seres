@@ -2,22 +2,25 @@ id: tube_basing_and_sealing_v0
 kind: process
 name: Vacuum tube basing and sealing v0
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: vacuum_tube_subassembly
-    qty: 1
-    unit: unit
+- item_id: vacuum_tube_subassembly
+  qty: 1
+  unit: unit
 outputs:
-  - item_id: vacuum_tube_sealed
-    qty: 1
-    unit: unit
-requires_ids:
-  - vacuum_pump_station
-  - tube_sealing_torch
+- item_id: vacuum_tube_sealed
+  qty: 1
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: vacuum_pump_station
+  qty: 1
+  unit: count
+- machine_id: tube_sealing_torch
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0

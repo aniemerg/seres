@@ -3,34 +3,36 @@ kind: process
 process_type: batch
 name: Machine vision camera assembly
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: electronic_components_set
-    qty: 0.2
-    unit: kg
-  - item_id: glass_lens_eyepiece
-    qty: 0.04
-    unit: kg
-  - item_id: sealing_gaskets
-    qty: 0.01
-    unit: kg
+- item_id: electronic_components_set
+  qty: 0.2
+  unit: kg
+- item_id: glass_lens_eyepiece
+  qty: 0.04
+  unit: kg
+- item_id: sealing_gaskets
+  qty: 0.01
+  unit: kg
 outputs:
-  - item_id: machine_vision_camera_v0
-    qty: 0.25
-    unit: kg
-requires_ids:
-  - assembly_tools_basic
+- item_id: machine_vision_camera_v0
+  qty: 0.25
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Bench assembly, alignment, and basic functional checks."
+  notes: Bench assembly, alignment, and basic functional checks.
 time_model:
   type: batch
   hr_per_batch: 0.8
-  notes: "Assemble electronics and lens into sealed housing; basic alignment."
-notes: "Assemble a small machine vision camera from imported electronics, a glass lens, and gasket material. Placeholder quantities to match 0.25 kg camera mass."
+  notes: Assemble electronics and lens into sealed housing; basic alignment.
+notes: Assemble a small machine vision camera from imported electronics, a glass lens,
+  and gasket material. Placeholder quantities to match 0.25 kg camera mass.

@@ -2,30 +2,34 @@ id: hydrogen_recycle_separator_v0
 kind: process
 name: Hydrogen recycle separator
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs:
-  - item_id: hydrogen_gas
-    qty: 1.1
-    unit: kg
+- item_id: hydrogen_gas
+  qty: 1.1
+  unit: kg
 outputs:
-  - item_id: hydrogen_gas
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - gas_handling_loop_v0
-  - vacuum_pump_small
+- item_id: hydrogen_gas
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.4
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.4
+  unit: hr
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: vacuum_pump_small
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8
   unit: kWh
-  notes: "Compressor/pump power for gas separation and recycle."
+  notes: Compressor/pump power for gas separation and recycle.
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Cycle time for cooling/condensing and recompression."
-notes: "Recycle/separation step to recover hydrogen from reactor offgas streams for reuse."
+  notes: Cycle time for cooling/condensing and recompression.
+notes: Recycle/separation step to recover hydrogen from reactor offgas streams for
+  reuse.

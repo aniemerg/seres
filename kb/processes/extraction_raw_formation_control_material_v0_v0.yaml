@@ -3,38 +3,44 @@ name: Extraction of raw_formation_control_material_v0 v0
 kind: process
 process_type: batch
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: regolith_lunar_mare
-    qty: 25.0
-    unit: kg
+- item_id: regolith_lunar_mare
+  qty: 25.0
+  unit: kg
 outputs:
-  - item_id: raw_formation_control_material_v0
-    qty: 20.0
-    unit: kg
+- item_id: raw_formation_control_material_v0
+  qty: 20.0
+  unit: kg
 byproducts:
-  - item_id: slag
-    qty: 5.0
-    unit: kg
-requires_ids:
-  - rock_crusher_basic
-  - screening_equipment
-  - gravity_separator
+- item_id: slag
+  qty: 5.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
-  - machine_id: mineral_processing_unit
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: mineral_processing_unit
+  qty: 1.0
+  unit: hr
+- machine_id: rock_crusher_basic
+  qty: 1
+  unit: count
+- machine_id: screening_equipment
+  qty: 1
+  unit: count
+- machine_id: gravity_separator
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 20.0
   unit: kWh
-  notes: "Prototype energy per kg input for extraction path"
+  notes: Prototype energy per kg input for extraction path
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Extraction time (prototype)"
-notes: "Prototype extraction path to produce raw_formation_control_material_v0 from regolith_excavated; byproduct slag."
+  notes: Extraction time (prototype)
+notes: Prototype extraction path to produce raw_formation_control_material_v0 from
+  regolith_excavated; byproduct slag.

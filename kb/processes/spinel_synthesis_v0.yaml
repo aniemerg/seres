@@ -3,34 +3,38 @@ kind: process
 process_type: batch
 name: Spinel synthesis (MgAl2O4)
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: alumina_powder
-    qty: 0.7
-    unit: kg
-  - item_id: magnesia_refractory_v0
-    qty: 0.3
-    unit: kg
+- item_id: alumina_powder
+  qty: 0.7
+  unit: kg
+- item_id: magnesia_refractory_v0
+  qty: 0.3
+  unit: kg
 outputs:
-  - item_id: spinel_ceramic_v0
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - sintering_furnace_v0
-  - hot_press_v0
+- item_id: spinel_ceramic_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: hot_press_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0
   unit: kWh
-  notes: "High-temperature synthesis (1000-1800 C) and densification (4 kWh for 1 kg batch)"
+  notes: High-temperature synthesis (1000-1800 C) and densification (4 kWh for 1 kg
+    batch)
 time_model:
   type: batch
   hr_per_batch: 6.0
-  notes: "Mixing, high-temp reaction, and sintering/pressing cycle"
+  notes: Mixing, high-temp reaction, and sintering/pressing cycle
 notes: |
   MgAl2O4 spinel synthesis from magnesia + alumina powders.
   Paper: ceramics-08-00107.txt notes synthesis at ~1800 C, or via precursor route

@@ -12,12 +12,13 @@ outputs:
 - item_id: metal_tubing_stock
   qty: 1.0
   unit: kg
-requires_ids:
-- tube_bender
 resource_requirements:
 - machine_id: bending_machine_v0
   qty: 1.0
   unit: unit
+- machine_id: tube_bender
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.25

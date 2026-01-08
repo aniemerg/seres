@@ -18,21 +18,24 @@ outputs:
 - item_id: neims_control_system_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- assembly_tools_basic
-- test_equipment_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: test_equipment_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Final assembly energy for integration and QA"
+  notes: Final assembly energy for integration and QA
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: >
+notes: |
   Final assembly of NEIMS control system from core subassemblies; includes QA checks.
 process_type: batch

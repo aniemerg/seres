@@ -15,13 +15,16 @@ byproducts:
 - item_id: dust_fines_v0
   qty: 0.02
   unit: kg
-requires_ids:
-- jaw_crusher_v0
-- ball_mill_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: jaw_crusher_v0
+  qty: 1
+  unit: count
+- machine_id: ball_mill_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3
@@ -32,9 +35,7 @@ time_model:
   rate: 10.0
   rate_unit: kg/hr
   scaling_basis: olivine_concentrate
-notes: 'Olivine crushing and grinding: size reduction of olivine concentrate to olivine powder.
-
+notes: |
+  Olivine crushing and grinding: size reduction of olivine concentrate to olivine powder.
   Placeholder parameters; refinements needed as data becomes available.
-
-  '
 process_type: continuous

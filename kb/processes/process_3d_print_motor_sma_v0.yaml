@@ -14,12 +14,13 @@ outputs:
 - item_id: sma_motor_components
   qty: 1.0
   unit: unit
-requires_ids:
-- resource_3d_printer_cartesian_v0_machine
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: resource_3d_printer_cartesian_v0_machine
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.0
@@ -32,5 +33,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: polymer_printing_feedstock
   notes: slow deposition rate ~1 kg/hr for polymer/SMA composite
-notes: Placeholder for printing SMA-actuated motor structures; includes polymer body and embedded SMA wires.
+notes: Placeholder for printing SMA-actuated motor structures; includes polymer body
+  and embedded SMA wires.
 process_type: continuous

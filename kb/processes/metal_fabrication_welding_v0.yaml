@@ -12,16 +12,25 @@ outputs:
 - item_id: welded_fabrications
   qty: 9.5
   unit: kg
-requires_ids:
-- welding_power_supply_v0
-- metal_shear_or_saw
-- press_brake
-- welding_consumables
-- fixturing_workbench
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: welding_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: metal_shear_or_saw
+  qty: 1
+  unit: count
+- machine_id: press_brake
+  qty: 1
+  unit: count
+- machine_id: welding_consumables
+  qty: 1
+  unit: count
+- machine_id: fixturing_workbench
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.0
@@ -33,5 +42,6 @@ time_model:
   rate: 20.0
   rate_unit: kg/hr
   scaling_basis: sheet_metal_or_structural_steel
-notes: 'Metal fabrication welding: combines cutting, forming, and welding of sheet/structural steel for fabrications.'
+notes: 'Metal fabrication welding: combines cutting, forming, and welding of sheet/structural
+  steel for fabrications.'
 process_type: continuous

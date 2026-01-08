@@ -2,23 +2,26 @@ id: tube_forming_process_v0
 kind: process
 name: Tube forming (coil bending)
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: metal_tubing_stock
-    qty: 1.0
-    unit: kg
+- item_id: metal_tubing_stock
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: tube_coils_formed
-    qty: 0.95
-    unit: kg
-requires_ids:
-  - tube_bender
-  - metal_shear_or_saw
+- item_id: tube_coils_formed
+  qty: 0.95
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
+- machine_id: tube_bender
+  qty: 1
+  unit: count
+- machine_id: metal_shear_or_saw
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -27,4 +30,5 @@ time_model:
   type: batch
   hr_per_batch: 1.2
 process_type: batch
-notes: "Form metal tubing into coil or serpentine geometries for heat exchangers. Uses tube bender and cutting tools; modest scrap from trimming."
+notes: Form metal tubing into coil or serpentine geometries for heat exchangers. Uses
+  tube bender and cutting tools; modest scrap from trimming.

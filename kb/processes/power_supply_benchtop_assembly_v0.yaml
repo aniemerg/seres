@@ -6,15 +6,13 @@ layer_tags:
 - layer_7
 - layer_8
 inputs:
-  - item_id: power_supply_components_basic
-    qty: 1.0
-    unit: unit
+- item_id: power_supply_components_basic
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: power_supply_benchtop
-    qty: 1.0
-    unit: unit
-requires_ids:
-- assembly_station
+- item_id: power_supply_benchtop
+  qty: 1.0
+  unit: unit
 resource_requirements:
 - machine_id: assembly_station
   qty: 1.0
@@ -23,8 +21,8 @@ energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Bench-top power supply assembly energy"
+  notes: Bench-top power supply assembly energy
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Assemble bench-top power supply from basic components"
+notes: Assemble bench-top power supply from basic components

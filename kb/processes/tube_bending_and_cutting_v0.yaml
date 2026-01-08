@@ -3,23 +3,26 @@ kind: process
 process_type: batch
 name: Tube bending and cutting
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: metal_tubing_stock
-    qty: 1.0
-    unit: kg
+- item_id: metal_tubing_stock
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: bent_tube_sections
-    qty: 0.92
-    unit: kg
-requires_ids:
-  - tube_bender
-  - metal_shear_or_saw
+- item_id: bent_tube_sections
+  qty: 0.92
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
+- machine_id: tube_bender
+  qty: 1
+  unit: count
+- machine_id: metal_shear_or_saw
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -29,4 +32,10 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Cutting, bending, and setup time per batch
-notes: "Cutting and bending of metal tubing for piping, hydraulic lines, exhaust systems, and structural frames. Tube bender creates precise radius bends without crimping or flattening the tube. Cutting operations produce clean, square ends for welding or fitting connections. Typical materials: steel, stainless steel, aluminum, copper tubing. Tube sizes: 6-50 mm diameter, wall thickness 0.5-3 mm. 8% material loss due to cutting waste and setup scrap. Used in plumbing, pneumatic systems, heat exchangers, and roll cage fabrication."
+notes: 'Cutting and bending of metal tubing for piping, hydraulic lines, exhaust systems,
+  and structural frames. Tube bender creates precise radius bends without crimping
+  or flattening the tube. Cutting operations produce clean, square ends for welding
+  or fitting connections. Typical materials: steel, stainless steel, aluminum, copper
+  tubing. Tube sizes: 6-50 mm diameter, wall thickness 0.5-3 mm. 8% material loss
+  due to cutting waste and setup scrap. Used in plumbing, pneumatic systems, heat
+  exchangers, and roll cage fabrication.'

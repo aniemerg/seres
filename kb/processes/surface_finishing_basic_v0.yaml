@@ -12,13 +12,16 @@ outputs:
 - item_id: finished_part
   qty: 0.95
   unit: kg
-requires_ids:
-- surface_grinder
-- hand_tools_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.8
   unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
+- machine_id: hand_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8

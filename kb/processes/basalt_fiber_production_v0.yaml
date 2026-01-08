@@ -11,16 +11,12 @@ outputs:
 - item_id: basalt_fiber
   qty: 1.0
   unit: kg
-requires_ids:
-- fiber_spinneret_v0
-- winding_drums
-- cooling_chamber_controlled
 energy_model:
   type: per_unit
   value: 2.0
   unit: kWh/kg
   scaling_basis: glass_bulk
-  notes: "heating glass to drawing temperature (~1300\xB0C) plus spinneret drive"
+  notes: heating glass to drawing temperature (~1300°C) plus spinneret drive
 time_model:
   type: linear_rate
   rate: 5.0
@@ -33,3 +29,12 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: fiber_spinneret_v0
+  qty: 1
+  unit: count
+- machine_id: winding_drums
+  qty: 1
+  unit: count
+- machine_id: cooling_chamber_controlled
+  qty: 1
+  unit: count

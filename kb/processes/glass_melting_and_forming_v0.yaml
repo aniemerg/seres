@@ -12,15 +12,11 @@ outputs:
 - item_id: glass_bulk
   qty: 9.0
   unit: kg
-requires_ids:
-- glass_furnace_v0
-- casting_mold_set
-- temperature_sensing
 energy_model:
   type: fixed_per_batch
   value: 30.0
   unit: kWh
-  notes: "Melting 10 kg regolith batch at ~1500\xB0C plus forming and annealing"
+  notes: Melting 10 kg regolith batch at ~1500°C plus forming and annealing
 time_model:
   type: batch
   hr_per_batch: 2.0
@@ -30,3 +26,12 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: glass_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
+- machine_id: temperature_sensing
+  qty: 1
+  unit: count

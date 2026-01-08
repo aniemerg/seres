@@ -2,30 +2,34 @@ id: sensor_integration_v0
 kind: process
 name: Sensor integration
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: sensor_suite_general
-    qty: 1.0
-    unit: unit
+- item_id: sensor_suite_general
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: sensor_equipped_system
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
-  - soldering_station
+- item_id: sensor_equipped_system
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
+- machine_id: soldering_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Sensor installation and wiring operations"
+  notes: Sensor installation and wiring operations
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Install sensors, wire connections, calibrate"
-notes: "Integration of sensors into equipment and systems. Includes mounting, wiring, and basic calibration of temperature, pressure, position, and other sensors."
+  notes: Install sensors, wire connections, calibrate
+notes: Integration of sensors into equipment and systems. Includes mounting, wiring,
+  and basic calibration of temperature, pressure, position, and other sensors.
 process_type: batch

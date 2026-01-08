@@ -3,38 +3,41 @@ kind: process
 name: Direct FFC reduction of olivine to MgSi alloy
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: olivine_concentrate
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_chloride
-    qty: 0.15
-    unit: kg
-  - item_id: electrodes
-    qty: 0.04
-    unit: kg
+- item_id: olivine_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: calcium_chloride
+  qty: 0.15
+  unit: kg
+- item_id: electrodes
+  qty: 0.04
+  unit: kg
 outputs:
-  - item_id: magnesium_silicon_alloy
-    qty: 0.545
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 0.455
-    unit: kg
-  - item_id: calcium_chloride
-    qty: 0.14
-    unit: kg
-  - item_id: carbon_dioxide_gas
-    qty: 0.05
-    unit: kg
-requires_ids:
-  - ffc_reactor_unit_v0
-  - graphite_anode_assembly_v0
+- item_id: magnesium_silicon_alloy
+  qty: 0.545
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.455
+  unit: kg
+- item_id: calcium_chloride
+  qty: 0.14
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.05
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: ffc_reactor_unit_v0
+  qty: 1
+  unit: count
+- machine_id: graphite_anode_assembly_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 8.0

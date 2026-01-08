@@ -2,27 +2,30 @@ id: potting_and_encapsulation_v0
 kind: process
 name: Potting and encapsulation
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 process_type: batch
 inputs:
-  - item_id: electronic_assembly
-    qty: 1.0
-    unit: kg
-  - item_id: potting_compound
-    qty: 0.5
-    unit: kg
+- item_id: electronic_assembly
+  qty: 1.0
+  unit: kg
+- item_id: potting_compound
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: potted_electronic_assembly
-    qty: 1.5
-    unit: kg
-requires_ids:
-  - encapsulation_station
-  - drying_oven
+- item_id: potted_electronic_assembly
+  qty: 1.5
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: encapsulation_station
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
@@ -30,4 +33,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: "Potting and encapsulation of electronic assemblies for environmental protection. Process: (1) Place electronics in mold or housing, (2) Mix two-part epoxy, polyurethane, or silicone potting compound, (3) Pour or inject compound to fully encapsulate components, (4) Degas in vacuum to remove air bubbles, (5) Cure at room temperature or elevated temperature (50-100°C). Provides moisture protection, vibration damping, electrical insulation, and thermal management. Used for sensors, power supplies, motor controllers, and harsh environment electronics. Curing time 2-24 hours depending on compound type."
+notes: 'Potting and encapsulation of electronic assemblies for environmental protection.
+  Process: (1) Place electronics in mold or housing, (2) Mix two-part epoxy, polyurethane,
+  or silicone potting compound, (3) Pour or inject compound to fully encapsulate components,
+  (4) Degas in vacuum to remove air bubbles, (5) Cure at room temperature or elevated
+  temperature (50-100°C). Provides moisture protection, vibration damping, electrical
+  insulation, and thermal management. Used for sensors, power supplies, motor controllers,
+  and harsh environment electronics. Curing time 2-24 hours depending on compound
+  type.'

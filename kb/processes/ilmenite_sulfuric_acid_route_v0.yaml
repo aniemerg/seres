@@ -3,32 +3,35 @@ kind: process
 process_type: batch
 name: Ilmenite sulfuric acid leaching
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: ilmenite_concentrate
-    qty: 1.0
-    unit: kg
-  - item_id: sulfuric_acid_concentrated
-    qty: 1.29
-    unit: kg
+- item_id: ilmenite_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: sulfuric_acid_concentrated
+  qty: 1.29
+  unit: kg
 outputs:
-  - item_id: iron_sulfate_solution
-    qty: 1.0
-    unit: kg
-  - item_id: titanyl_sulfate_solution
-    qty: 1.05
-    unit: kg
-  - item_id: water
-    qty: 0.24
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - furnace_basic
+- item_id: iron_sulfate_solution
+  qty: 1.0
+  unit: kg
+- item_id: titanyl_sulfate_solution
+  qty: 1.05
+  unit: kg
+- item_id: water
+  qty: 0.24
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0

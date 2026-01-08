@@ -14,13 +14,16 @@ outputs:
 - item_id: regolith_fine_fraction
   qty: 0.4
   unit: kg
-requires_ids:
-- vibrating_screen_v0
-- dust_collection_system
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.1
   unit: hr
+- machine_id: vibrating_screen_v0
+  qty: 1
+  unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.05

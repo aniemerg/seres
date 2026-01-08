@@ -3,27 +3,32 @@ kind: process
 process_type: batch
 name: PCB fabrication
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: copper_clad_laminate
-    qty: 0.5
-    unit: kg
-  - item_id: etching_chemicals
-    qty: 0.2
-    unit: kg
+- item_id: copper_clad_laminate
+  qty: 0.5
+  unit: kg
+- item_id: etching_chemicals
+  qty: 0.2
+  unit: kg
 outputs:
-  - item_id: bare_pcb
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - pcb_fab_equipment
-  - drill_press
-  - chemical_bath_station
+- item_id: bare_pcb
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: pcb_fab_equipment
+  qty: 1
+  unit: count
+- machine_id: drill_press
+  qty: 1
+  unit: count
+- machine_id: chemical_bath_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -31,4 +36,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 3.0
-notes: "Printed circuit board fabrication process. Includes photoresist application, UV exposure, developing, etching, drilling, and through-hole plating. Produces bare PCB ready for component assembly. Subtractive process removes unwanted copper to create circuit traces. Multi-layer boards require lamination and additional processing."
+notes: Printed circuit board fabrication process. Includes photoresist application,
+  UV exposure, developing, etching, drilling, and through-hole plating. Produces bare
+  PCB ready for component assembly. Subtractive process removes unwanted copper to
+  create circuit traces. Multi-layer boards require lamination and additional processing.

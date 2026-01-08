@@ -2,33 +2,38 @@ id: silica_glass_high_purity_v0
 kind: process
 name: High-purity fused silica glass production
 layer_tags:
-  - layer_5
+- layer_5
 process_type: batch
 inputs:
-  - item_id: silicon_tetrachloride
-    qty: 1.0
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.024
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 0.188
-    unit: kg
+- item_id: silicon_tetrachloride
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.024
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.188
+  unit: kg
 outputs:
-  - item_id: fused_silica_glass
-    qty: 0.354
-    unit: kg
-  - item_id: hydrogen_chloride
-    qty: 0.858
-    unit: kg
-requires_ids:
-  - hydrogen_oxygen_torch_v0
-  - controlled_atmosphere_chamber
-  - gas_scrubbing_unit_v0
+- item_id: fused_silica_glass
+  qty: 0.354
+  unit: kg
+- item_id: hydrogen_chloride
+  qty: 0.858
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: hydrogen_oxygen_torch_v0
+  qty: 1
+  unit: count
+- machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
+- machine_id: gas_scrubbing_unit_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 12.0

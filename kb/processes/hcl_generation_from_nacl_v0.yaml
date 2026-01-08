@@ -3,29 +3,32 @@ kind: process
 process_type: batch
 name: HCl generation from NaCl using nitric acid
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: sodium_chloride
-    qty: 1.0
-    unit: kg
-  - item_id: nitric_acid_concentrated
-    qty: 1.08
-    unit: kg
+- item_id: sodium_chloride
+  qty: 1.0
+  unit: kg
+- item_id: nitric_acid_concentrated
+  qty: 1.08
+  unit: kg
 outputs:
-  - item_id: hydrogen_chloride
-    qty: 0.624
-    unit: kg
-  - item_id: sodium_nitrate
-    qty: 1.45
-    unit: kg
-requires_ids:
-  - acid_reactor_v0
-  - gas_handling_loop_v0
+- item_id: hydrogen_chloride
+  qty: 0.624
+  unit: kg
+- item_id: sodium_nitrate
+  qty: 1.45
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5

@@ -2,28 +2,31 @@ id: siemens_process_polysilicon_deposition_v0
 kind: process
 name: Siemens process polysilicon deposition (stage 2)
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: trichlorosilane_liquid
-    qty: 1.0
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.015
-    unit: kg
+- item_id: trichlorosilane_liquid
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.015
+  unit: kg
 outputs:
-  - item_id: silicon_polycrystalline_ultrapure
-    qty: 0.207
-    unit: kg
-  - item_id: hydrogen_chloride
-    qty: 0.807
-    unit: kg
-requires_ids:
-  - vacuum_chamber
-  - silicon_purified
+- item_id: silicon_polycrystalline_ultrapure
+  qty: 0.207
+  unit: kg
+- item_id: hydrogen_chloride
+  qty: 0.807
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: vacuum_chamber
+  qty: 1
+  unit: count
+- machine_id: silicon_purified
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 180.0

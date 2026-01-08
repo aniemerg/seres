@@ -11,12 +11,13 @@ outputs:
 - item_id: machined_part_raw
   qty: 1.0
   unit: kg
-requires_ids:
-- heat_treatment_furnace
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: heat_treatment_furnace
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 2.5
@@ -29,5 +30,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: machined_part_raw
   notes: heat-up to hardening temperature, soak, quench, and temper cycle
-notes: Basic heat treatment for hardening and tempering steel parts. Improves strength and wear resistance.
+notes: Basic heat treatment for hardening and tempering steel parts. Improves strength
+  and wear resistance.
 process_type: continuous

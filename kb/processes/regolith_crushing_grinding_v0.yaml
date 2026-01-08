@@ -11,14 +11,19 @@ outputs:
 - item_id: regolith_powder
   qty: 1.0
   unit: kg
-requires_ids:
-- rock_crusher_basic
-- ball_mill_v0
-- dust_collection_system
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.1
   unit: hr
+- machine_id: rock_crusher_basic
+  qty: 1
+  unit: count
+- machine_id: ball_mill_v0
+  qty: 1
+  unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3

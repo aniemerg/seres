@@ -3,30 +3,35 @@ kind: process
 name: Battery cell assembly
 process_type: batch
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: electrode_materials
-    qty: 1.0
-    unit: kg
-  - item_id: electrolyte
-    qty: 0.5
-    unit: kg
-  - item_id: battery_cell_casing
-    qty: 1.0
-    unit: unit
+- item_id: electrode_materials
+  qty: 1.0
+  unit: kg
+- item_id: electrolyte
+  qty: 0.5
+  unit: kg
+- item_id: battery_cell_casing
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: battery_cell
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_station
-  - glove_box_or_dry_room
-  - sealing_equipment
+- item_id: battery_cell
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
+- machine_id: glove_box_or_dry_room
+  qty: 1
+  unit: count
+- machine_id: sealing_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -34,4 +39,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Battery cell assembly process. Assembles electrodes (anode/cathode), separator, and electrolyte into sealed cell casing. Requires controlled atmosphere (dry room or glove box) for moisture-sensitive chemistries. Includes electrode stacking/winding, electrolyte filling, and hermetic sealing. Formation cycling may be required post-assembly."
+notes: Battery cell assembly process. Assembles electrodes (anode/cathode), separator,
+  and electrolyte into sealed cell casing. Requires controlled atmosphere (dry room
+  or glove box) for moisture-sensitive chemistries. Includes electrode stacking/winding,
+  electrolyte filling, and hermetic sealing. Formation cycling may be required post-assembly.

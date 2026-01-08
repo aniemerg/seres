@@ -15,15 +15,22 @@ outputs:
 - item_id: welded_fabrications
   qty: 1.05
   unit: kg
-requires_ids:
-- welding_power_supply_v0
-- welding_tools_set
-- fixturing_workbench
-- welding_consumables
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.6
   unit: hr
+- machine_id: welding_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: welding_tools_set
+  qty: 1
+  unit: count
+- machine_id: fixturing_workbench
+  qty: 1
+  unit: count
+- machine_id: welding_consumables
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.2
@@ -36,6 +43,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: cut_parts
   notes: fit-up, clamping, multi-pass welding, and post-weld cleanup
-notes: Structural welding of frames and heavy assemblies. Covers fit-up of cut steel members, tack welds, full-penetration
-  passes, and inspection/cleanup suitable for machine bases and support structures.
+notes: Structural welding of frames and heavy assemblies. Covers fit-up of cut steel
+  members, tack welds, full-penetration passes, and inspection/cleanup suitable for
+  machine bases and support structures.
 process_type: continuous

@@ -2,22 +2,25 @@ id: selenium_extraction_refining_v0
 kind: process
 name: Selenium extraction and refining v0
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: mineral_ore_sulfide
-    qty: 100.0
-    unit: kg
+- item_id: mineral_ore_sulfide
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: selenium_refined
-    qty: 0.10
-    unit: kg
-requires_ids:
-  - chemical_reactor_heated_v0
-  - distillation_column_simple_v0
+- item_id: selenium_refined
+  qty: 0.1
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: chemical_reactor_heated_v0
+  qty: 1
+  unit: count
+- machine_id: distillation_column_simple_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5000.0

@@ -2,33 +2,37 @@ id: transformer_winding_v0
 kind: process
 name: Transformer winding
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: transformer_core
-    qty: 1
-    unit: unit
-  - item_id: magnet_wire_copper
-    qty: 2.0
-    unit: kg
+- item_id: transformer_core
+  qty: 1
+  unit: unit
+- item_id: magnet_wire_copper
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: wound_transformer
-    qty: 1
-    unit: unit
-requires_ids:
-  - coil_winding_machine
-  - turn_counter_module
+- item_id: wound_transformer
+  qty: 1
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: coil_winding_machine
+  qty: 1
+  unit: count
+- machine_id: turn_counter_module
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Winding machine motor power"
+  notes: Winding machine motor power
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Wind primary and secondary coils, layer insulation, test"
+  notes: Wind primary and secondary coils, layer insulation, test
 process_type: batch
-notes: Transformer winding process. Wind copper wire coils onto laminated core with precise turn counts and layer insulation for voltage transformation.
+notes: Transformer winding process. Wind copper wire coils onto laminated core with
+  precise turn counts and layer insulation for voltage transformation.

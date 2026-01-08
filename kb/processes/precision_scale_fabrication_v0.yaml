@@ -2,23 +2,25 @@ id: precision_scale_fabrication_v0
 kind: process
 name: Precision scale fabrication
 layer_tags:
-  - layer_5
+- layer_5
 process_type: batch
 inputs: []
 outputs: []
-requires_ids:
-  - optical_metrology_tools
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: optical_metrology_tools
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Equipment for patterning/printing scale"
+  notes: Equipment for patterning/printing scale
 time_model:
   type: batch
   hr_per_batch: 1.5
-  notes: "Patterning and inspection time"
-notes: Fabricate encoder scale pattern (optical or magnetic) with high positional accuracy; may involve printing/etching and inspection.
+  notes: Patterning and inspection time
+notes: Fabricate encoder scale pattern (optical or magnetic) with high positional
+  accuracy; may involve printing/etching and inspection.

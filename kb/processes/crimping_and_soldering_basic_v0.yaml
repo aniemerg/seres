@@ -11,14 +11,19 @@ outputs:
 - item_id: assembled_wire_harness
   qty: 1.0
   unit: kg
-requires_ids:
-- crimping_tool_set
-- soldering_station
-- hand_tools_electrical
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: crimping_tool_set
+  qty: 1
+  unit: count
+- machine_id: soldering_station
+  qty: 1
+  unit: count
+- machine_id: hand_tools_electrical
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3

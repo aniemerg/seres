@@ -2,26 +2,29 @@ id: electrical_wiring_and_controls_v0
 kind: process
 name: Electrical wiring and controls
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: electrical_wire_and_connectors
-    qty: 2.0
-    unit: kg
-  - item_id: control_components
-    qty: 1.0
-    unit: unit
+- item_id: electrical_wire_and_connectors
+  qty: 2.0
+  unit: kg
+- item_id: control_components
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: wired_electrical_system
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - hand_tools_electrical
-  - test_bench_electrical
+- item_id: wired_electrical_system
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: hand_tools_electrical
+  qty: 1
+  unit: count
+- machine_id: test_bench_electrical
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -29,5 +32,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: "Electrical wiring and control system installation. Includes running wires, installing conduit, mounting control panels, connecting switches and sensors, and testing circuits. Used in machine assembly, building electrical, and equipment integration. Follows electrical codes and safety practices."
+notes: Electrical wiring and control system installation. Includes running wires,
+  installing conduit, mounting control panels, connecting switches and sensors, and
+  testing circuits. Used in machine assembly, building electrical, and equipment integration.
+  Follows electrical codes and safety practices.
 process_type: batch

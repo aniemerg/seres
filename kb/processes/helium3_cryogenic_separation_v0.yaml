@@ -2,26 +2,29 @@ id: helium3_cryogenic_separation_v0
 kind: process
 name: Helium-3 cryogenic separation from volatiles
 layer_tags:
-  - layer_5
+- layer_5
 process_type: batch
 inputs:
-  - item_id: helium_mixed_isotopes
-    qty: 1.0
-    unit: kg
+- item_id: helium_mixed_isotopes
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: helium_3_gas
-    qty: 0.000014
-    unit: kg
-  - item_id: helium_4_gas
-    qty: 0.999986
-    unit: kg
-requires_ids:
-  - packed_bed_distillation_v0
-  - cryogenic_chiller_v0
+- item_id: helium_3_gas
+  qty: 1.4e-05
+  unit: kg
+- item_id: helium_4_gas
+  qty: 0.999986
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 8.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 8.0
+  unit: hr
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: cryogenic_chiller_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 50.0

@@ -13,18 +13,19 @@ outputs:
 - item_id: test_equipment_basic
   qty: 1.0
   unit: kit
-requires_ids:
-- assembly_tools_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
   unit: kWh
-
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: Basic bench test equipment assembly from eight electronics modules into one test equipment kit; placeholder energy/time usage
+notes: Basic bench test equipment assembly from eight electronics modules into one
+  test equipment kit; placeholder energy/time usage

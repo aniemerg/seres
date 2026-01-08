@@ -3,28 +3,29 @@ kind: process
 name: Insulation panel forming
 process_type: batch
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: ceramic_fiber_slurry
-    qty: 5.0
-    unit: kg
+- item_id: ceramic_fiber_slurry
+  qty: 5.0
+  unit: kg
 outputs:
-  - item_id: insulation_panel_raw
-    qty: 5.0
-    unit: kg
-requires_ids:
-  - pressing_tools
+- item_id: insulation_panel_raw
+  qty: 5.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: pressing_tools
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Mixing, pressing energy"
+  notes: Mixing, pressing energy
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Forming and press cycle"
+  notes: Forming and press cycle
 notes: Form ceramic fiber slurry into panel shape before drying and firing.

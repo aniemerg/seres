@@ -12,12 +12,13 @@ outputs:
 - item_id: ceramic_substrate_rtd
   qty: 0.008
   unit: kg
-requires_ids:
-- kiln_ceramic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: kiln_ceramic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 4.0
@@ -29,7 +30,9 @@ time_model:
   rate: 0.1667
   rate_unit: kg/hr
   scaling_basis: alumina_powder
-  notes: extended heating cycle with controlled ramp, soak, and cooling for sintering and densification
-notes: Sintering process to densify ceramic parts by heating below melting point. Atomic diffusion bonds particles together,
-  reducing porosity and increasing strength. Used for technical ceramics, insulators, and refractory components.
+  notes: extended heating cycle with controlled ramp, soak, and cooling for sintering
+    and densification
+notes: Sintering process to densify ceramic parts by heating below melting point.
+  Atomic diffusion bonds particles together, reducing porosity and increasing strength.
+  Used for technical ceramics, insulators, and refractory components.
 process_type: continuous

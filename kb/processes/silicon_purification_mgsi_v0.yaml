@@ -2,33 +2,37 @@ id: silicon_purification_mgsi_v0
 kind: process
 name: Silicon purification (MgSi reduction) v0
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs:
-  - item_id: magnesium_silicide
-    qty: 100.0
-    unit: kg
+- item_id: magnesium_silicide
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: silicon_purified
-    qty: 50.0
-    unit: kg
-  - item_id: magnesium_oxide
-    qty: 50.0
-    unit: kg
-requires_ids:
-  - reduction_furnace_v0
-  - crucible_refractory
+- item_id: silicon_purified
+  qty: 50.0
+  unit: kg
+- item_id: magnesium_oxide
+  qty: 50.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: reduction_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 800.0
   unit: kWh
-  notes: "Thermal energy for MgSi reduction/oxidation cycle (8 kWh/kg over 100 kg batch)."
+  notes: Thermal energy for MgSi reduction/oxidation cycle (8 kWh/kg over 100 kg batch).
 time_model:
   type: batch
   hr_per_batch: 4.0
-  notes: "Heat, reduction, and cool-down per batch."
-notes: "Purify silicon via magnesium silicide reduction/oxidation path; yields purified silicon and magnesium oxide for recycle."
+  notes: Heat, reduction, and cool-down per batch.
+notes: Purify silicon via magnesium silicide reduction/oxidation path; yields purified
+  silicon and magnesium oxide for recycle.

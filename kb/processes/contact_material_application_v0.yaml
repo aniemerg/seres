@@ -2,25 +2,26 @@ id: contact_material_application_v0
 kind: process
 name: Electrical contact material application v0
 layer_tags:
-  - layer_5
+- layer_5
 process_type: batch
 inputs:
-  - item_id: contact_substrate_base
-    qty: 1.0
-    unit: kg
-  - item_id: silver_contact_material
-    qty: 0.1
-    unit: kg
+- item_id: contact_substrate_base
+  qty: 1.0
+  unit: kg
+- item_id: silver_contact_material
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: contacts_with_applied_material_v0
-    qty: 1.05
-    unit: kg
-requires_ids:
-  - contact_material_application_station_v0
+- item_id: contacts_with_applied_material_v0
+  qty: 1.05
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: contact_material_application_station_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0

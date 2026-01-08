@@ -15,12 +15,13 @@ byproducts:
 - item_id: metal_scrap
   qty: 0.02
   unit: kg
-requires_ids:
-- assembly_tools_basic
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.8
   unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -33,6 +34,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: sheet_metal_or_structural_steel
   notes: Layout, fixturing, and cut execution per batch (0.4 hr per kg = 2.5 kg/hr).
-notes: Basic cutting/shearing of sheet metal into panels or blanks for enclosures, ducts, and tanks; assumes manual/labor-bot
-  operation with simple shears or saws.
+notes: Basic cutting/shearing of sheet metal into panels or blanks for enclosures,
+  ducts, and tanks; assumes manual/labor-bot operation with simple shears or saws.
 process_type: continuous

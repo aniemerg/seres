@@ -13,12 +13,13 @@ outputs:
 - item_id: coded_data_stream
   qty: 1.0
   unit: unit
-requires_ids:
-- data_handler_unit_v0
 resource_requirements:
 - machine_id: control_compute_module_imported
   qty: 2.0
   unit: hr
+- machine_id: data_handler_unit_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.15
@@ -28,4 +29,5 @@ time_model:
   type: batch
   hr_per_batch: 0.25
   notes: Coding latency; placeholder
-notes: "Converts uncoded data to coded data using error correction coding v0. Seed input to error-correction coding v0; output = coded data stream."
+notes: Converts uncoded data to coded data using error correction coding v0. Seed
+  input to error-correction coding v0; output = coded data stream.

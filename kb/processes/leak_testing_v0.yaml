@@ -11,12 +11,13 @@ outputs:
 - item_id: welded_assemblies
   qty: 1.0
   unit: kg
-requires_ids:
-- leak_test_equipment
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: leak_test_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2
@@ -29,6 +30,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: welded_assemblies
   notes: pressurization, soak time, leak detection, and depressurization
-notes: Pressure testing and leak detection for assembled systems. Tests connections, valves, and sealed joints for leak-tight
-  operation using pressure or vacuum methods.
+notes: Pressure testing and leak detection for assembled systems. Tests connections,
+  valves, and sealed joints for leak-tight operation using pressure or vacuum methods.
 process_type: continuous

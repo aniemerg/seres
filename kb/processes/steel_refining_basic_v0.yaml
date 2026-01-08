@@ -2,38 +2,46 @@ id: steel_refining_basic_v0
 kind: process
 name: Basic steel refining and casting
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 process_type: batch
 inputs:
-  - item_id: iron_pig_or_ingot
-    qty: 1.05
-    unit: kg
+- item_id: iron_pig_or_ingot
+  qty: 1.05
+  unit: kg
 outputs:
-  - item_id: steel_billet_or_slab
-    qty: 1.0
-    unit: kg
-  - item_id: slag
-    qty: 0.05
-    unit: kg
-requires_ids:
-  - reduction_furnace_v0
-  - casting_furnace_v0
-  - casting_mold_set
+- item_id: steel_billet_or_slab
+  qty: 1.0
+  unit: kg
+- item_id: slag
+  qty: 0.05
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
-  - machine_id: high_temperature_power_supply_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
+- machine_id: high_temperature_power_supply_v0
+  qty: 0.6
+  unit: hr
+- machine_id: reduction_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Electric melting/refining and holding energy for pig iron to steel conversion; small-batch EAF/BOF analog."
+  notes: Electric melting/refining and holding energy for pig iron to steel conversion;
+    small-batch EAF/BOF analog.
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Melt, refine (oxygen blow), and cast billets/slabs; batch cycle includes heat-up and tap."
-notes: "Refines pig iron into low-carbon steel and casts into billets/slabs for rolling. Includes decarburization and impurity removal with slag tapped separately."
+  notes: Melt, refine (oxygen blow), and cast billets/slabs; batch cycle includes
+    heat-up and tap.
+notes: Refines pig iron into low-carbon steel and casts into billets/slabs for rolling.
+  Includes decarburization and impurity removal with slag tapped separately.

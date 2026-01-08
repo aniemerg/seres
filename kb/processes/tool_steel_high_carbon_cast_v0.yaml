@@ -3,29 +3,33 @@ kind: process
 process_type: batch
 name: Tool steel high-carbon casting v0
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: steel_billet_or_slab
-    qty: 1.0
-    unit: kg
+- item_id: steel_billet_or_slab
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: tool_steel_high_carbon_v0
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - furnace_basic
-  - casting_mold_set
+- item_id: tool_steel_high_carbon_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: "Casting energy for tool steel alloying"
+  notes: Casting energy for tool steel alloying
 time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Casting cycle for tool steel billet into final tool steel shape
-notes: "Casting billet/slab into tool steel high-carbon v0; placeholder alloy composition determined by billet feed."
+notes: Casting billet/slab into tool steel high-carbon v0; placeholder alloy composition
+  determined by billet feed.

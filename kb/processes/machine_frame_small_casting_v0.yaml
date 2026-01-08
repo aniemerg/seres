@@ -3,32 +3,35 @@ kind: process
 process_type: batch
 name: Machine frame small casting v0
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: iron_metal_pure
-    qty: 11.0
-    unit: kg
+- item_id: iron_metal_pure
+  qty: 11.0
+  unit: kg
 outputs:
-  - item_id: machine_frame_small
-    qty: 1.0
-    unit: unit
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
 byproducts:
-  - item_id: metal_scrap
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - forge_or_induction_heater_v0
-  - casting_mold_set
+- item_id: metal_scrap
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: forge_or_induction_heater_v0
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 25.0
   unit: kWh
-  notes: "Melting and casting energy for 10kg iron frame"
+  notes: Melting and casting energy for 10kg iron frame
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: "Cast small machine frame (10 kg) from ISRU iron. Used for robot base structure."
+notes: Cast small machine frame (10 kg) from ISRU iron. Used for robot base structure.

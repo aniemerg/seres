@@ -3,37 +3,39 @@ name: LiDAR Time-of-Flight Simple assembly v0
 kind: process
 process_type: batch
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: lidar_time_of_flight_core_v0
-    qty: 1.0
-    unit: unit
-  - item_id: lidar_sensor_module_v0
-    qty: 1.0
-    unit: unit
-  - item_id: microcontroller_unit_v0
-    qty: 1.0
-    unit: unit
+- item_id: lidar_time_of_flight_core_v0
+  qty: 1.0
+  unit: unit
+- item_id: lidar_sensor_module_v0
+  qty: 1.0
+  unit: unit
+- item_id: microcontroller_unit_v0
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: lidar_time_of_flight_simple_v0
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
+- item_id: lidar_time_of_flight_simple_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 6.0
   unit: kWh
-  notes: "Estimated energy for simple LiDAR TOF assembly (1 unit per batch)"
+  notes: Estimated energy for simple LiDAR TOF assembly (1 unit per batch)
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Assemble LiDAR simple by combining core, sensor module, and MCU into final device."
+notes: Assemble LiDAR simple by combining core, sensor module, and MCU into final
+  device.

@@ -12,12 +12,13 @@ outputs:
 - item_id: powder_mixture
   qty: 1.0
   unit: kg
-requires_ids:
-- powder_mixer
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.3
   unit: hr
+- machine_id: powder_mixer
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.1

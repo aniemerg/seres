@@ -16,9 +16,6 @@ byproducts:
 - item_id: metal_scrap
   qty: 0.2
   unit: kg
-requires_ids:
-- press_brake_v0
-- labor_bot_general_v0
 resource_requirements:
 - machine_id: press_brake_v0
   qty: 2.0
@@ -31,11 +28,12 @@ energy_model:
   value: 0.65
   unit: kWh/kg
   scaling_basis: iron_metal_pure
-  notes: "Forming energy per kg input"
+  notes: Forming energy per kg input
 time_model:
   type: linear_rate
   rate: 6.0
   rate_unit: kg/hr
   scaling_basis: iron_metal_pure
-notes: Form motor housing from sheet metal; forming operation with press brake and labor support.
+notes: Form motor housing from sheet metal; forming operation with press brake and
+  labor support.
 process_type: continuous

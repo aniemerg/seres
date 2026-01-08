@@ -12,13 +12,16 @@ outputs:
 - item_id: crushed_ore
   qty: 1.0
   unit: kg
-requires_ids:
-- rock_crusher_basic
-- ball_mill_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: rock_crusher_basic
+  qty: 1
+  unit: count
+- machine_id: ball_mill_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.5
@@ -31,6 +34,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: mineral_ore_sulfide
   notes: Includes loading, crushing, milling, and cleanup.
-notes: Combined coarse crushing and fine grinding of feedstock (ore/regolith) to prepare for beneficiation or processing.
-  Replace with domain-specific throughputs as data improves.
+notes: Combined coarse crushing and fine grinding of feedstock (ore/regolith) to prepare
+  for beneficiation or processing. Replace with domain-specific throughputs as data
+  improves.
 process_type: continuous

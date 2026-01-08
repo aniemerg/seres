@@ -12,12 +12,13 @@ outputs:
 - item_id: metal_part_surface_treated
   qty: 1.0
   unit: kg
-requires_ids:
-- surface_treatment_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: surface_treatment_station
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -30,6 +31,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: formed_metal_part
   notes: cleaning, pickling, degreasing, or coating application with drying time
-notes: Basic surface treatment processes including pickling (acid cleaning to remove scale), degreasing, rust removal, passivation,
-  and simple protective coatings. Prepares surfaces for further processing or improves corrosion resistance.
+notes: Basic surface treatment processes including pickling (acid cleaning to remove
+  scale), degreasing, rust removal, passivation, and simple protective coatings. Prepares
+  surfaces for further processing or improves corrosion resistance.
 process_type: continuous

@@ -188,9 +188,20 @@ class SimulationEngine:
 
     def _collect_required_machines_from_process_def(self, process_def: Dict[str, Any]) -> Dict[str, int]:
         counts: Dict[str, int] = {}
+
+        # Read from resource_requirements (post-migration)
+        resource_requirements = process_def.get("resource_requirements", []) or []
+        for req in resource_requirements:
+            if isinstance(req, dict) and req.get("machine_id"):
+                machine_id = req["machine_id"]
+                # Count is always 1 for machine availability (duration is from time_model)
+                counts[machine_id] = max(counts.get(machine_id, 0), 1)
+
+        # Legacy support: requires_ids (deprecated, for backward compatibility)
         for machine_id in process_def.get("requires_ids", []) or []:
             counts[machine_id] = max(counts.get(machine_id, 0), 1)
 
+        # Legacy support: required_machines (deprecated)
         required_machines = process_def.get("required_machines", []) or []
         for machine_req in required_machines:
             if isinstance(machine_req, dict):
@@ -209,10 +220,20 @@ class SimulationEngine:
         self, resolved_steps: List[Dict[str, Any]], recipe_def: Dict[str, Any]
     ) -> Dict[str, int]:
         counts: Dict[str, int] = {}
+
+        # Collect from each step's resource_requirements
         for step in resolved_steps:
+            resource_requirements = step.get("resource_requirements", []) or []
+            for req in resource_requirements:
+                if isinstance(req, dict) and req.get("machine_id"):
+                    machine_id = req["machine_id"]
+                    counts[machine_id] = max(counts.get(machine_id, 0), 1)
+
+            # Legacy support: requires_ids (deprecated)
             for machine_id in step.get("requires_ids", []) or []:
                 counts[machine_id] = max(counts.get(machine_id, 0), 1)
 
+            # Legacy support: required_machines (deprecated)
             for machine_req in step.get("required_machines", []) or []:
                 if isinstance(machine_req, dict):
                     machine_id = list(machine_req.keys())[0]
@@ -224,6 +245,7 @@ class SimulationEngine:
                     continue
                 counts[machine_id] = max(counts.get(machine_id, 0), count)
 
+        # Legacy support: recipe-level required_machines (deprecated)
         for machine_req in recipe_def.get("required_machines", []) or []:
             if isinstance(machine_req, dict):
                 machine_id = list(machine_req.keys())[0]

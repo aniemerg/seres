@@ -3,34 +3,40 @@ kind: process
 name: Gas scrubbing unit frame fabrication v0
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: steel_stock
-    qty: 22.0
-    unit: kg
+- item_id: steel_stock
+  qty: 22.0
+  unit: kg
 outputs:
-  - item_id: gas_scrubbing_unit_frame_v0
-    qty: 1.0
-    unit: unit
+- item_id: gas_scrubbing_unit_frame_v0
+  qty: 1.0
+  unit: unit
 byproducts:
-  - item_id: steel_scrap_v0
-    qty: 2.0
-    unit: kg
-requires_ids:
-  - welding_power_supply_v0
-  - welding_tools_set
-  - cutting_tools_general
+- item_id: steel_scrap_v0
+  qty: 2.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: welding_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: welding_tools_set
+  qty: 1
+  unit: count
+- machine_id: cutting_tools_general
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0
   unit: kWh
-  notes: "Cutting, fit-up, and welding energy for a 20 kg frame."
+  notes: Cutting, fit-up, and welding energy for a 20 kg frame.
 time_model:
   type: batch
   hr_per_batch: 3.0
-  notes: "Cut, tack, weld, and clean a single frame."
-notes: "Fabricate a welded steel frame for the gas scrubbing unit from steel stock with basic cutting and welding."
+  notes: Cut, tack, weld, and clean a single frame.
+notes: Fabricate a welded steel frame for the gas scrubbing unit from steel stock
+  with basic cutting and welding.

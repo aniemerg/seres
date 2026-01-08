@@ -3,38 +3,41 @@ kind: process
 name: Carbochlorination of anorthite
 process_type: batch
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: anorthite_ore
-    qty: 1.0
-    unit: kg
-  - item_id: carbon_reducing_agent
-    qty: 0.172
-    unit: kg
-  - item_id: chlorine_gas
-    qty: 1.02
-    unit: kg
+- item_id: anorthite_ore
+  qty: 1.0
+  unit: kg
+- item_id: carbon_reducing_agent
+  qty: 0.172
+  unit: kg
+- item_id: chlorine_gas
+  qty: 1.02
+  unit: kg
 outputs:
-  - item_id: calcium_chloride
-    qty: 0.399
-    unit: kg
-  - item_id: silicon_tetrachloride
-    qty: 0.611
-    unit: kg
-  - item_id: aluminum_chloride
-    qty: 0.480
-    unit: kg
-  - item_id: carbon_monoxide
-    qty: 0.402
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - gas_handling_loop_v0
+- item_id: calcium_chloride
+  qty: 0.399
+  unit: kg
+- item_id: silicon_tetrachloride
+  qty: 0.611
+  unit: kg
+- item_id: aluminum_chloride
+  qty: 0.48
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 0.402
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 6.0

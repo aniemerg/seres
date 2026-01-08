@@ -3,31 +3,33 @@ kind: process
 name: Heating element installation
 process_type: batch
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: heating_element_resistive
-    qty: 1.0
-    unit: unit
-  - item_id: furnace_chamber_unequipped
-    qty: 1.0
-    unit: unit
+- item_id: heating_element_resistive
+  qty: 1.0
+  unit: unit
+- item_id: furnace_chamber_unequipped
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: furnace_chamber_equipped
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_tools_basic
+- item_id: furnace_chamber_equipped
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.6
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Hand tools and checks"
+  notes: Hand tools and checks
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Element routing, connection, and fixture"
-notes: Install resistive heating elements into kiln or furnace chambers with proper routing and insulation.
+  notes: Element routing, connection, and fixture
+notes: Install resistive heating elements into kiln or furnace chambers with proper
+  routing and insulation.

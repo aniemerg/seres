@@ -9,14 +9,19 @@ outputs:
 - item_id: glass_envelope_vacuum_tube_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- furnace_high_temp
-- crucible_graphite
-- controlled_atmosphere_chamber
 resource_requirements:
 - machine_id: glass_furnace_v0
   qty: 2.0
   unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: crucible_graphite
+  qty: 1
+  unit: count
+- machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 5.0
@@ -27,5 +32,6 @@ time_model:
   rate: 2.0
   rate_unit: kg/hr
   scaling_basis: fused_silica_glass
-notes: Bulb forming from fused silica; placeholder values based on related glass forming operations.
+notes: Bulb forming from fused silica; placeholder values based on related glass forming
+  operations.
 process_type: continuous

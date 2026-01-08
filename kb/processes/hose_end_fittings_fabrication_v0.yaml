@@ -12,12 +12,13 @@ outputs:
 - item_id: hose_end_fittings_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- sheet_metal_fabrication_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: sheet_metal_fabrication_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -25,5 +26,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Fabricate a hose end fitting from steel stock using basic forming operations."
+notes: Fabricate a hose end fitting from steel stock using basic forming operations.
 process_type: batch

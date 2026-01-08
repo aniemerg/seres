@@ -9,12 +9,13 @@ outputs:
 - item_id: electrolysis_cell_unit_shell_v0
   qty: 25.0
   unit: kg
-requires_ids:
-- sheet_making_from_ingot_v0
 resource_requirements:
 - machine_id: steel_forming_press
   qty: 1.0
   unit: hr
+- machine_id: sheet_making_from_ingot_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -25,5 +26,6 @@ time_model:
   rate: 25.0
   rate_unit: kg/hr
   scaling_basis: steel_sheet_3mm
-notes: Fabricate a 25 kg electrolysis_cell_unit_shell_v0 from 25 kg steel_sheet_3mm using a forming press.
+notes: Fabricate a 25 kg electrolysis_cell_unit_shell_v0 from 25 kg steel_sheet_3mm
+  using a forming press.
 process_type: continuous

@@ -3,30 +3,31 @@ kind: process
 name: General chemical synthesis process v0
 is_template: true
 layer_tags:
-  - layer_4
+- layer_4
 inputs:
-  - item_id: methanol_liquid
-    qty: 1.0
-    unit: kg
-  - item_id: ammonia_gas
-    qty: 1.0
-    unit: kg
-  - item_id: carbon_monoxide_gas
-    qty: 1.0
-    unit: kg
-  - item_id: water
-    qty: 0.5
-    unit: kg
+- item_id: methanol_liquid
+  qty: 1.0
+  unit: kg
+- item_id: ammonia_gas
+  qty: 1.0
+  unit: kg
+- item_id: carbon_monoxide_gas
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: chemical_product_crude
-    qty: 3.5
-    unit: kg
-requires_ids:
-  - chemical_reactor_vessel_v0
+- item_id: chemical_product_crude
+  qty: 3.5
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: chemical_reactor_vessel_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0

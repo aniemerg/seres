@@ -20,19 +20,23 @@ byproducts:
 - item_id: etching_waste_solution
   qty: 0.15
   unit: kg
-requires_ids:
-- pcb_etching_tank_set
-- chemical_bath_station
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: pcb_etching_tank_set
+  qty: 1
+  unit: count
+- machine_id: chemical_bath_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.4
   unit: kWh
-  notes: "Derived from 0.8 kWh/kg for a 0.5 kg batch"
+  notes: Derived from 0.8 kWh/kg for a 0.5 kg batch
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Copper etching to produce copper traces on a copper-clad laminate. Spent etchant becomes waste."
+notes: Copper etching to produce copper traces on a copper-clad laminate. Spent etchant
+  becomes waste.

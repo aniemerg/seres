@@ -3,32 +3,35 @@ kind: process
 process_type: batch
 name: Ammonia recovery from ammonium chloride (Solvay)
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: ammonium_chloride
-    qty: 1.0
-    unit: kg
-  - item_id: calcium_oxide
-    qty: 1.05
-    unit: kg
+- item_id: ammonium_chloride
+  qty: 1.0
+  unit: kg
+- item_id: calcium_oxide
+  qty: 1.05
+  unit: kg
 outputs:
-  - item_id: ammonia_gas
-    qty: 0.636
-    unit: kg
-  - item_id: calcium_chloride
-    qty: 2.08
-    unit: kg
-  - item_id: water
-    qty: 0.337
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - distillation_column_simple_v0
+- item_id: ammonia_gas
+  qty: 0.636
+  unit: kg
+- item_id: calcium_chloride
+  qty: 2.08
+  unit: kg
+- item_id: water
+  qty: 0.337
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: distillation_column_simple_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5

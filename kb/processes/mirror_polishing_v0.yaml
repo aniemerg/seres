@@ -2,31 +2,38 @@ id: mirror_polishing_v0
 kind: process
 name: Mirror polishing
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: metal_sheet
-    qty: 2.0
-    unit: kg
+- item_id: metal_sheet
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: parabolic_mirror_segment
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - surface_grinder
-  - optical_metrology_tools
+- item_id: parabolic_mirror_segment
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 6.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 6.0
+  unit: hr
+- machine_id: surface_grinder
+  qty: 1
+  unit: count
+- machine_id: optical_metrology_tools
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
   unit: kWh
-  notes: "Grinding and polishing operations for optical surface"
+  notes: Grinding and polishing operations for optical surface
 time_model:
   type: batch
   hr_per_batch: 6.0
-  notes: "Progressive grinding and polishing to achieve optical surface finish and parabolic shape"
+  notes: Progressive grinding and polishing to achieve optical surface finish and
+    parabolic shape
 process_type: batch
-notes: "Mirror polishing process for solar concentrator segments. Achieves 90% reflectivity for nickel, 75% for steel. Parabolic shape formed through precision grinding and optical metrology. Alternative to Fresnel lenses for solar concentration. Used in thermionic power systems. See: design/solar_thermionics_report.md"
+notes: 'Mirror polishing process for solar concentrator segments. Achieves 90% reflectivity
+  for nickel, 75% for steel. Parabolic shape formed through precision grinding and
+  optical metrology. Alternative to Fresnel lenses for solar concentration. Used in
+  thermionic power systems. See: design/solar_thermionics_report.md'

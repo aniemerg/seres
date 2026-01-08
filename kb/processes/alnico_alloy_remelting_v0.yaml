@@ -6,25 +6,27 @@ layer_tags:
 - layer_5
 - layer_6
 inputs:
-  - item_id: alnico_casting_block_v0
-    qty: 1.0
-    unit: unit
+- item_id: alnico_casting_block_v0
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: alnico_magnet_alloy_v0
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - crucible_refractory
+- item_id: alnico_magnet_alloy_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1.0
+  unit: hr
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0
   unit: kWh
-  notes: "Remelting block to alloy feedstock"
+  notes: Remelting block to alloy feedstock
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Remelts AlNiCo casting block into magnet alloy feedstock (local, placeholder parameters)"
+notes: Remelts AlNiCo casting block into magnet alloy feedstock (local, placeholder
+  parameters)

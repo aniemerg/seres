@@ -3,28 +3,27 @@ kind: process
 name: Ni-Fe formation cycling
 process_type: batch
 layer_tags:
-  - layer_7
+- layer_7
 inputs:
-  - item_id: battery_cell_nife
-    qty: 1.0
-    unit: unit
+- item_id: battery_cell_nife
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: battery_cell_nife_formed
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - formation_rack
+- item_id: battery_cell_nife_formed
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: formation_rack
-    qty: 1.5
-    unit: hr
+- machine_id: formation_rack
+  qty: 1.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.8
   unit: kWh
-  notes: "Charge/discharge energy for conditioning cycles per cell."
+  notes: Charge/discharge energy for conditioning cycles per cell.
 time_model:
   type: batch
   hr_per_batch: 1.5
-  notes: "Multiple charge/discharge cycles; simplified aggregate time."
-notes: "Formation cycling for Ni-Fe cells to condition electrodes and reach capacity; uses formation rack resource."
+  notes: Multiple charge/discharge cycles; simplified aggregate time.
+notes: Formation cycling for Ni-Fe cells to condition electrodes and reach capacity;
+  uses formation rack resource.

@@ -3,37 +3,40 @@ kind: process
 process_type: batch
 name: Stainless steel smelting from raw metals v0
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: iron_metal_pure
-    qty: 0.70
-    unit: kg
-  - item_id: chromium_metal_pure
-    qty: 0.18
-    unit: kg
-  - item_id: nickel_metal
-    qty: 0.10
-    unit: kg
-  - item_id: carbon_reductant
-    qty: 0.02
-    unit: kg
+- item_id: iron_metal_pure
+  qty: 0.7
+  unit: kg
+- item_id: chromium_metal_pure
+  qty: 0.18
+  unit: kg
+- item_id: nickel_metal
+  qty: 0.1
+  unit: kg
+- item_id: carbon_reductant
+  qty: 0.02
+  unit: kg
 outputs:
-  - item_id: stainless_steel_ingot
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - crucible_refractory
-  - casting_mold_set
+- item_id: stainless_steel_ingot
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 3.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 3.0
+  unit: hr
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0
   unit: kWh
-  notes: "Melting Fe, Cr, Ni and alloying to form stainless steel"
+  notes: Melting Fe, Cr, Ni and alloying to form stainless steel
 time_model:
   type: batch
   hr_per_batch: 4.0

@@ -3,33 +3,39 @@ kind: process
 process_type: batch
 name: Ni-Fe electrode fabrication
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: electrode_mix_nife
-    qty: 1.0
-    unit: kg
-  - item_id: current_collector_nickel_or_steel_mesh
-    qty: 0.5
-    unit: kg
+- item_id: electrode_mix_nife
+  qty: 1.0
+  unit: kg
+- item_id: current_collector_nickel_or_steel_mesh
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: electrodes_nife_set
-    qty: 1.5
-    unit: kg
-requires_ids:
-  - powder_mill_and_mixer
-  - hydraulic_press
-  - drying_oven
+- item_id: electrodes_nife_set
+  qty: 1.5
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: powder_mill_and_mixer
+  qty: 1
+  unit: count
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Mixing, pressing, and drying energy for electrode plaques (~1 kg batch)."
+  notes: Mixing, pressing, and drying energy for electrode plaques (~1 kg batch).
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: "Mix, press, and dry electrode plaques."
-notes: "Placeholder Ni-Fe electrode fabrication: mix active powders with binder, press onto nickel/steel mesh current collectors, and dry."
+  notes: Mix, press, and dry electrode plaques.
+notes: 'Placeholder Ni-Fe electrode fabrication: mix active powders with binder, press
+  onto nickel/steel mesh current collectors, and dry.'

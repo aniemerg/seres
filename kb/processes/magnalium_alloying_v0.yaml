@@ -3,31 +3,32 @@ kind: process
 name: Magnalium alloying
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: aluminum_alloy_ingot
-    qty: 0.95
-    unit: kg
-  - item_id: magnesium_metal_v0
-    qty: 0.05
-    unit: kg
+- item_id: aluminum_alloy_ingot
+  qty: 0.95
+  unit: kg
+- item_id: magnesium_metal_v0
+  qty: 0.05
+  unit: kg
 outputs:
-  - item_id: magnalium_alloy
-    qty: 1.0
-    unit: kg
-requires_ids:
-  - casting_furnace_v0
+- item_id: magnalium_alloy
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.425
   unit: kWh
-  notes: "Melting and alloying energy (1.5 kWh/kg * 0.95 kg aluminum)"
+  notes: Melting and alloying energy (1.5 kWh/kg * 0.95 kg aluminum)
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Melt, alloy, and cast"
-notes: "Alloying aluminum with ~5% magnesium to form magnalium."
+  notes: Melt, alloy, and cast
+notes: Alloying aluminum with ~5% magnesium to form magnalium.

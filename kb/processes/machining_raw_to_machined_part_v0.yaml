@@ -11,13 +11,16 @@ outputs:
 - item_id: machined_part_raw
   qty: 25.0
   unit: kg
-requires_ids:
-- milling_machine_general_v0
-- cutting_tools_general
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.8
   unit: hr
+- machine_id: milling_machine_general_v0
+  qty: 1
+  unit: count
+- machine_id: cutting_tools_general
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 50.0
@@ -29,5 +32,6 @@ time_model:
   rate: 1.0
   rate_unit: kg/hr
   scaling_basis: cut_parts
-notes: Finish machining of cut stock to machined_part_raw; placeholder path for seed factory modeling.
+notes: Finish machining of cut stock to machined_part_raw; placeholder path for seed
+  factory modeling.
 process_type: continuous

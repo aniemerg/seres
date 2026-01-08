@@ -18,14 +18,19 @@ outputs:
 - item_id: metal_alloy_bulk
   qty: 0.6
   unit: kg
-requires_ids:
-- mre_reactor_v0
-- high_temperature_power_supply_v0
-- electrodes
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: mre_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: high_temperature_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: electrodes
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 10.0

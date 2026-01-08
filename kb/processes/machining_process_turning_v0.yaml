@@ -17,8 +17,6 @@ byproducts:
 - item_id: turning_chip_waste
   qty: 0.005
   unit: kg
-requires_ids:
-- precision_lathe
 resource_requirements:
 - machine_id: precision_lathe
   qty: 1.0
@@ -27,8 +25,9 @@ energy_model:
   type: fixed_per_batch
   value: 0.02
   unit: kWh
-  notes: "Turning energy for 0.08 kg batch (spindle, coolant, tooling)"
+  notes: Turning energy for 0.08 kg batch (spindle, coolant, tooling)
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Turning operation to convert rough part into precision machined part. Chips produced as waste.
+notes: Turning operation to convert rough part into precision machined part. Chips
+  produced as waste.

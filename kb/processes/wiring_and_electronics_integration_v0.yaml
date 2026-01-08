@@ -14,13 +14,16 @@ outputs:
 - item_id: wired_electrical_system
   qty: 1.0
   unit: unit
-requires_ids:
-- soldering_station
-- wire_crimping_tools
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: soldering_station
+  qty: 1
+  unit: count
+- machine_id: wire_crimping_tools
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2

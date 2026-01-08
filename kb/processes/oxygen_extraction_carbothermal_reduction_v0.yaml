@@ -3,37 +3,42 @@ kind: process
 process_type: batch
 name: Carbothermal reduction of regolith
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: regolith_powder
-    qty: 10.0
-    unit: kg
-  - item_id: carbon_reductant
-    qty: 1.0
-    unit: kg
+- item_id: regolith_powder
+  qty: 10.0
+  unit: kg
+- item_id: carbon_reductant
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: oxygen_gas
-    qty: 1.0
-    unit: kg
-  - item_id: reduced_metal_oxides
-    qty: 10.0
-    unit: kg
-requires_ids:
-  - furnace_high_temp
-  - offgas_handling
-  - carbon_feeder_screw
+- item_id: oxygen_gas
+  qty: 1.0
+  unit: kg
+- item_id: reduced_metal_oxides
+  qty: 10.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 4.0
+  unit: hr
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: offgas_handling
+  qty: 1
+  unit: count
+- machine_id: carbon_feeder_screw
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 50.0
   unit: kWh
-  notes: "high temp reduction (~1600°C), 5 kWh/kg * 10 kg regolith"
+  notes: high temp reduction (~1600°C), 5 kWh/kg * 10 kg regolith
 time_model:
   type: batch
   hr_per_batch: 4.0
-  notes: "batch carbothermal reduction cycle"
+  notes: batch carbothermal reduction cycle
 notes: Alternative oxygen path; temperature, yield, and rates TBD.

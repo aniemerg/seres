@@ -3,7 +3,7 @@ kind: process
 name: Basalt melting (basic)
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
 - item_id: basalt_aggregate
   qty: 1.0
@@ -12,19 +12,20 @@ outputs:
 - item_id: basalt_molten
   qty: 1.0
   unit: kg
-requires_ids:
-  - glass_furnace_v0
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: glass_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5
   unit: kWh
-  notes: "Melting 1 kg basalt batch to 1200-1400°C"
+  notes: Melting 1 kg basalt batch to 1200-1400°C
 time_model:
   type: batch
   hr_per_batch: 3.0
-  notes: "Heat-up and melt cycle"
+  notes: Heat-up and melt cycle
 notes: Melts basalt aggregate for casting or fiberizing processes.

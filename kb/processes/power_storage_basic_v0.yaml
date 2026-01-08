@@ -12,9 +12,6 @@ outputs:
 - item_id: stored_energy
   qty: 1.0
   unit: kWh
-requires_ids:
-- power_storage_bank_v0
-- power_management_system
 energy_model:
   type: per_unit
   value: 0.15
@@ -32,3 +29,9 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: power_storage_bank_v0
+  qty: 1
+  unit: count
+- machine_id: power_management_system
+  qty: 1
+  unit: count

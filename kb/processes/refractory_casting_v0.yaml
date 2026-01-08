@@ -11,12 +11,13 @@ outputs:
 - item_id: acid_resistant_reactor_lining_v0
   qty: 1.0
   unit: kg
-requires_ids:
-- refractory_installation_tools
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 2.0
   unit: hr
+- machine_id: refractory_installation_tools
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -29,5 +30,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: refractory_castable
   notes: mixing refractory castable, forming, vibration, initial cure time
-notes: Casting refractory linings and shapes from castable refractory materials. For furnace and reactor linings.
+notes: Casting refractory linings and shapes from castable refractory materials. For
+  furnace and reactor linings.
 process_type: continuous

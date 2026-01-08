@@ -13,19 +13,24 @@ outputs:
 - item_id: structural_steel_frame
   qty: 1.0
   unit: unit
-requires_ids:
-- welding_power_supply_v0
-- welding_tools_set
-- fixturing_workbench
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.6
   unit: hr
+- machine_id: welding_power_supply_v0
+  qty: 1
+  unit: count
+- machine_id: welding_tools_set
+  qty: 1
+  unit: count
+- machine_id: fixturing_workbench
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.5
   unit: kWh
-  notes: "Fabrication energy per frame unit"
+  notes: Fabrication energy per frame unit
 time_model:
   type: batch
   hr_per_batch: 2.0

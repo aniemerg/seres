@@ -3,7 +3,7 @@ kind: process
 name: Motor final assembly (basic)
 process_type: batch
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
 - item_id: stator_rotor_lamination_set
   qty: 5.0
@@ -28,19 +28,21 @@ byproducts:
 - item_id: assembly_loss
   qty: 0.5
   unit: kg
-requires_ids:
-  - assembly_tools_basic
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.8
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.8
+  unit: hr
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Bench tools and test energy"
+  notes: Bench tools and test energy
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Assemble rotor/stator, bearings, housing, and test run"
-notes: Assemble electric motor components, install bearings, and perform basic spin test.
+  notes: Assemble rotor/stator, bearings, housing, and test run
+notes: Assemble electric motor components, install bearings, and perform basic spin
+  test.

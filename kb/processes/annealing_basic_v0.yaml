@@ -12,12 +12,13 @@ outputs:
 - item_id: material_annealed
   qty: 1.0
   unit: kg
-requires_ids:
-- heat_treatment_furnace_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1.0
   unit: hr
+- machine_id: heat_treatment_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.5

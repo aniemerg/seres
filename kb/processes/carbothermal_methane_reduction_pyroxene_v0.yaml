@@ -2,35 +2,38 @@ id: carbothermal_methane_reduction_pyroxene_v0
 kind: process
 name: Carbothermal reduction of pyroxene with methane
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs:
-  - item_id: pyroxene_concentrate
-    qty: 1.0
-    unit: kg
-  - item_id: methane_gas
-    qty: 0.32
-    unit: kg
+- item_id: pyroxene_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: methane_gas
+  qty: 0.32
+  unit: kg
 outputs:
-  - item_id: silicon_metal_v0
-    qty: 0.28
-    unit: kg
-  - item_id: magnesium_oxide
-    qty: 0.40
-    unit: kg
-  - item_id: carbon_monoxide
-    qty: 0.56
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.08
-    unit: kg
-requires_ids:
-  - high_temp_furnace_v0
-  - gas_handling_loop_v0
+- item_id: silicon_metal_v0
+  qty: 0.28
+  unit: kg
+- item_id: magnesium_oxide
+  qty: 0.4
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 0.56
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.08
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: high_temp_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 12.0

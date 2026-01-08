@@ -3,26 +3,29 @@ kind: process
 process_type: batch
 name: Plumbing and pneumatics
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: piping_components
-    qty: 5.0
-    unit: kg
-  - item_id: fittings_and_valves
-    qty: 1.0
-    unit: unit
+- item_id: piping_components
+  qty: 5.0
+  unit: kg
+- item_id: fittings_and_valves
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: plumbing_system_assembly
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - hand_tools_basic
-  - pipe_threading_tools
+- item_id: plumbing_system_assembly
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr
+- machine_id: hand_tools_basic
+  qty: 1
+  unit: count
+- machine_id: pipe_threading_tools
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -30,4 +33,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: "Installation of plumbing and pneumatic systems. Includes cutting, threading, fitting, and connecting pipes, tubes, and hoses. Installing valves, regulators, filters, and fittings. Pressure testing for leaks. Used for fluid transport, pneumatic controls, cooling systems, and gas handling."
+notes: Installation of plumbing and pneumatic systems. Includes cutting, threading,
+  fitting, and connecting pipes, tubes, and hoses. Installing valves, regulators,
+  filters, and fittings. Pressure testing for leaks. Used for fluid transport, pneumatic
+  controls, cooling systems, and gas handling.

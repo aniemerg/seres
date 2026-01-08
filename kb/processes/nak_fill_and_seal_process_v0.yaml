@@ -16,18 +16,21 @@ outputs:
 - item_id: nak_glass_to_metal_sealed_unit_v0
   qty: 1.0
   unit: unit
-requires_ids:
-- glass_to_metal_seal_v0
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 0.5
   unit: hr
+- machine_id: glass_to_metal_seal_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Placeholder energy for 1-unit batch fill+seal operation; to be refined with data."
+  notes: Placeholder energy for 1-unit batch fill+seal operation; to be refined with
+    data.
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Fill a vacuum component with inert gas and apply glass-to-metal seal; placeholder until detailed spec is defined."
+notes: Fill a vacuum component with inert gas and apply glass-to-metal seal; placeholder
+  until detailed spec is defined.

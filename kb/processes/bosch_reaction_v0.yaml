@@ -3,29 +3,32 @@ kind: process
 process_type: batch
 name: Bosch reaction (CO2 + H2 → C)
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: carbon_dioxide_gas
-    qty: 1.0
-    unit: kg
-  - item_id: hydrogen_gas
-    qty: 0.091
-    unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.091
+  unit: kg
 outputs:
-  - item_id: carbon_reductant
-    qty: 0.273
-    unit: kg
-  - item_id: water
-    qty: 0.818
-    unit: kg
-requires_ids:
-  - generic_chemical_reactor_v0
-  - catalyst_pellet_forming_v0
+- item_id: carbon_reductant
+  qty: 0.273
+  unit: kg
+- item_id: water
+  qty: 0.818
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 2.0
+  unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0

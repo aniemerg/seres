@@ -3,29 +3,31 @@ kind: process
 process_type: batch
 name: Power component assembly (v0)
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+- item_id: electronic_components_set
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: electronic_component_or_module
-    qty: 1.0
-    unit: unit
-requires_ids:
-  - assembly_station
+- item_id: electronic_component_or_module
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
   unit: kWh
-  notes: "Placeholder energy for power component assembly; to be refined"
+  notes: Placeholder energy for power component assembly; to be refined
 time_model:
   type: batch
   hr_per_batch: 0.75
-  notes: "Estimated time for assembling a power component"
-notes: "Placeholder process for assembling power components (MOSFETs, inductors, capacitors, transformers) within power electronics module. Pending detailed specs."
+  notes: Estimated time for assembling a power component
+notes: Placeholder process for assembling power components (MOSFETs, inductors, capacitors,
+  transformers) within power electronics module. Pending detailed specs.

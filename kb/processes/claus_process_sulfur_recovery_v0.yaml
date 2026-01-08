@@ -2,36 +2,41 @@ id: claus_process_sulfur_recovery_v0
 kind: process
 name: Claus process for sulfur recovery from troilite
 layer_tags:
-  - layer_4
+- layer_4
 process_type: batch
 inputs:
-  - item_id: mineral_ore_sulfide
-    qty: 1.0
-    unit: kg
-  - item_id: oxygen_gas
-    qty: 1.273
-    unit: kg
-  - item_id: hydrogen_sulfide_gas
-    qty: 0.582
-    unit: kg
+- item_id: mineral_ore_sulfide
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 1.273
+  unit: kg
+- item_id: hydrogen_sulfide_gas
+  qty: 0.582
+  unit: kg
 outputs:
-  - item_id: iron_ore_or_ilmenite
-    qty: 1.82
-    unit: kg
-  - item_id: sulfur_elemental
-    qty: 1.09
-    unit: kg
-  - item_id: water
-    qty: 0.205
-    unit: kg
-requires_ids:
-  - roasting_furnace_v0
-  - generic_chemical_reactor_v0
-  - catalyst_pellet_forming_v0
+- item_id: iron_ore_or_ilmenite
+  qty: 1.82
+  unit: kg
+- item_id: sulfur_elemental
+  qty: 1.09
+  unit: kg
+- item_id: water
+  qty: 0.205
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 3.0
+  unit: hr
+- machine_id: roasting_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: catalyst_pellet_forming_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0

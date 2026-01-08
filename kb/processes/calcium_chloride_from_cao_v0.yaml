@@ -2,29 +2,32 @@ id: calcium_chloride_from_cao_v0
 kind: process
 name: Calcium chloride production from CaO and HCl
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: calcium_oxide
-    qty: 1.0
-    unit: kg
-  - item_id: hydrochloric_acid
-    qty: 1.30
-    unit: kg
+- item_id: calcium_oxide
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 1.3
+  unit: kg
 outputs:
-  - item_id: calcium_chloride
-    qty: 1.98
-    unit: kg
-  - item_id: water
-    qty: 0.32
-    unit: kg
-requires_ids:
-  - acid_reactor_v0
-  - drying_oven
+- item_id: calcium_chloride
+  qty: 1.98
+  unit: kg
+- item_id: water
+  qty: 0.32
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.5
+  unit: hr
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: drying_oven
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0

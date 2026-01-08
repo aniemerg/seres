@@ -12,13 +12,16 @@ outputs:
 - item_id: gasket_sheet_part_v0
   qty: 0.5
   unit: kg
-requires_ids:
-- saw_or_cutting_tool
-- hand_tools_basic
 resource_requirements:
 - machine_id: cutting_station_basic_v0
   qty: 0.6
   unit: hr
+- machine_id: saw_or_cutting_tool
+  qty: 1
+  unit: count
+- machine_id: hand_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -29,5 +32,6 @@ time_model:
   rate: 1.0
   rate_unit: kg/hr
   scaling_basis: gasket_sheet
-notes: Cut gasket_sheet into gasket_sheet_part_v0; basic stock-forming step. Assumes gasket_sheet is available as input.
+notes: Cut gasket_sheet into gasket_sheet_part_v0; basic stock-forming step. Assumes
+  gasket_sheet is available as input.
 process_type: continuous

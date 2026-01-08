@@ -3,43 +3,50 @@ kind: process
 process_type: batch
 name: Rare earth element extraction from KREEP basalts
 layer_tags:
-  - layer_5
-  - layer_6
+- layer_5
+- layer_6
 inputs:
-  - item_id: basalt_aggregate
-    qty: 1000.0
-    unit: kg
-  - item_id: sulfuric_acid_concentrated
-    qty: 50.0
-    unit: kg
-  - item_id: oxalic_acid
-    qty: 5.0
-    unit: kg
-  - item_id: water
-    qty: 200.0
-    unit: kg
+- item_id: basalt_aggregate
+  qty: 1000.0
+  unit: kg
+- item_id: sulfuric_acid_concentrated
+  qty: 50.0
+  unit: kg
+- item_id: oxalic_acid
+  qty: 5.0
+  unit: kg
+- item_id: water
+  qty: 200.0
+  unit: kg
 outputs:
-  - item_id: reduced_metal_oxides
-    qty: 1.2
-    unit: kg
-  - item_id: regolith_crushed
-    qty: 998.8
-    unit: kg
-  - item_id: water
-    qty: 200.0
-    unit: kg
-  - item_id: sulfuric_acid_concentrated
-    qty: 50.0
-    unit: kg
-requires_ids:
-  - chemical_separation_equipment  # Includes solvent extraction capability
-  - chemical_separation_equipment
-  - furnace_basic
-  - gamma_ray_spectrometer_v0
+- item_id: reduced_metal_oxides
+  qty: 1.2
+  unit: kg
+- item_id: regolith_crushed
+  qty: 998.8
+  unit: kg
+- item_id: water
+  qty: 200.0
+  unit: kg
+- item_id: sulfuric_acid_concentrated
+  qty: 50.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 20.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 20.0
+  unit: hr
+- machine_id: chemical_separation_equipment
+  qty: 1
+  unit: count
+- machine_id: chemical_separation_equipment
+  qty: 1
+  unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+- machine_id: gamma_ray_spectrometer_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 180.0

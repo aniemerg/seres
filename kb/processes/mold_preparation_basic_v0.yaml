@@ -2,15 +2,16 @@ id: mold_preparation_basic_v0
 kind: process
 name: Mold preparation (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
-requires_ids:
-  - casting_mold_set
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
+- machine_id: casting_mold_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.3
