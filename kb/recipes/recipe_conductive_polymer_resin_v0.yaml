@@ -1,10 +1,30 @@
 id: recipe_conductive_polymer_resin_v0
 kind: recipe
-target_item_id: conductive_polymer_resin_v0
 name: Conductive polymer resin production v0
+target_item_id: conductive_polymer_resin_v0
+variant_id: v0
 produces_qty: 1.0
 produces_unit: kg
 produces_id: conductive_polymer_resin_v0
+inputs:
+  - item_id: epoxy_precursor_block_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: conductive_polymer_resin_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: conductive_polymer_resin_synthesis_v0
+    inputs:
+      - item_id: epoxy_precursor_block_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: conductive_polymer_resin_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Synthesize conductive polymer resin from epoxy precursor block via chemical reaction in reactor"
 notes: "Placeholder recipe to manufacture conductive polymer resin from epoxy_precursor_block_v0 via resin synthesis."

@@ -1,22 +1,69 @@
 id: recipe_wire_drawing_die_set_v0
 kind: recipe
 target_item_id: wire_drawing_die_set
-produces_id: wire_drawing_die_set
 variant_id: v0
+inputs:
+  - item_id: tool_steel_high_carbon_v0
+    qty: 2.1
+    unit: kg
+  - item_id: metal_part_surface_treated
+    qty: 2.02
+    unit: kg
+    notes: "Intermediate for precision grinding"
+  - item_id: finished_part_deburred
+    qty: 2.0
+    unit: kg
+    notes: "Intermediate for inspection"
+outputs:
+  - item_id: wire_drawing_die_set
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: tool_steel_high_carbon_v0
+        qty: 2.1
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.05
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine die bodies and holders from tool steel blanks"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.05
+        unit: kg
+    outputs:
+      - item_id: metal_part_surface_treated
+        qty: 2.02
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat treat die bodies for hardness and wear resistance"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: metal_part_surface_treated
+        qty: 2.02
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 2.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Grind die apertures to precise dimensions for wire reduction"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: wire_drawing_die_set
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify die aperture dimensions and surface finish"

@@ -1,0 +1,29 @@
+id: recipe_steel_shaft_v0
+kind: recipe
+target_item_id: steel_shaft
+variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 3.3
+    unit: kg
+outputs:
+  - item_id: steel_shaft
+    qty: 3.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.3
+    unit: kg
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 3.3
+        unit: kg
+    outputs:
+      - item_id: steel_shaft
+        qty: 3.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Machine shaft stock to diameter, length, and keyway features"
+notes: "Basic machining route for a 3 kg steel shaft from bar stock."

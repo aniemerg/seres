@@ -3,16 +3,77 @@ kind: recipe
 name: Sealing bar assembly
 target_item_id: sealing_bar_assembly
 variant_id: v0
+inputs:
+  - item_id: furnace_chamber_unequipped
+    qty: 1.0
+    unit: unit
+  - item_id: heating_element_resistive
+    qty: 1.0
+    unit: kg
+  - item_id: ceramic_fiber_slurry
+    qty: 5.0
+    unit: kg
+  - item_id: mounting_bracket_steel
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: sealing_bar_assembly
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
+      - item_id: mounting_bracket_steel
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
     notes: "Assemble base components for sealing bar housing"
   - process_id: heating_element_installation_v0
+    inputs:
+      - item_id: heating_element_resistive
+        qty: 1.0
+        unit: kg
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
     notes: "Install heating element and route wiring"
   - process_id: insulation_panel_forming_v0
+    inputs:
+      - item_id: ceramic_fiber_slurry
+        qty: 5.0
+        unit: kg
     notes: "Form insulation panels and apply around heating element"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: furnace_chamber_equipped
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
     notes: "Wire temperature control and sensors; integrate electronics into assembly"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     notes: "Test heating, temperature control, and sealing function"
 assumptions: "Sealing bar assembly fabricated from heating element, insulation, temperature control. Uses existing assembly and electronics integration processes."
 notes: "Placeholder recipe for sealing_bar_assembly; refine with detailed steps as design evolves."

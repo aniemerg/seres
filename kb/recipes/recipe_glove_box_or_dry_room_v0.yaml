@@ -1,26 +1,112 @@
 id: recipe_glove_box_or_dry_room_v0
 target_item_id: glove_box_or_dry_room
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 200.0
+    unit: kg
+  - item_id: transparent_panel_set
+    qty: 1
+    unit: unit
+  - item_id: glove_ports_and_gloves
+    qty: 4
+    unit: unit
+  - item_id: vacuum_pump_small
+    qty: 1
+    unit: unit
+  - item_id: gas_distribution_manifold
+    qty: 1
+    unit: unit
+  - item_id: humidity_sensor_set
+    qty: 1
+    unit: unit
+  - item_id: sealing_gaskets
+    qty: 3
+    unit: kg
+  - item_id: air_lock_chamber
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_forming_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 190.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
-    notes: "Fabricate enclosure panels and airlock chamber"
+    notes: "Fabricate enclosure panels and frame; ~5% forming loss"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 190.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 188.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
-    notes: "Weld sealed enclosure structure with leak-tight seams"
+    notes: "Weld sealed enclosure structure with leak-tight seams; ~1% welding loss"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 188.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 180.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
-    notes: "Machine glove port openings, window frames, and mounting flanges"
+    notes: "Machine glove port openings, window frames, and mounting flanges; ~4% machining loss"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 180.0
+        unit: kg
+      - item_id: transparent_panel_set
+        qty: 1
+        unit: unit
+      - item_id: glove_ports_and_gloves
+        qty: 4
+        unit: unit
+      - item_id: vacuum_pump_small
+        qty: 1
+        unit: unit
+      - item_id: gas_distribution_manifold
+        qty: 1
+        unit: unit
+      - item_id: humidity_sensor_set
+        qty: 1
+        unit: unit
+      - item_id: sealing_gaskets
+        qty: 3
+        unit: kg
+      - item_id: air_lock_chamber
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
-    notes: "Install glove ports, windows, gas purification, humidity sensors, and airlock"
+    notes: "Install glove ports, windows, gas systems, sensors, and airlock; complete assembly"
   - process_id: pressure_testing_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: glove_box_or_dry_room
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Leak test enclosure and verify atmosphere control performance"
-assumptions: Sealed glove box enclosure for controlled atmosphere work. Critical for handling lithium, sodium, or other reactive materials, and for moisture-sensitive assembly operations.
-notes: Glove box maintains inert atmosphere for handling reactive or moisture-sensitive materials. Essential for battery manufacturing, chemical synthesis, and precision electronics assembly.
+assumptions: "Sealed glove box enclosure for controlled atmosphere work. Critical for handling lithium, sodium, or other reactive materials, and for moisture-sensitive assembly operations. Fabricates enclosure from sheet metal, then assembles with BOM components."
+notes: "Glove box maintains inert atmosphere for handling reactive or moisture-sensitive materials. Essential for battery manufacturing, chemical synthesis, and precision electronics assembly. 5-step process: form → weld → machine → assemble → test."

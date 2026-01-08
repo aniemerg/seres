@@ -1,22 +1,50 @@
 id: recipe_concentrated_mineral_v0
 target_item_id: concentrated_mineral
 variant_id: v0
+inputs:
+  - item_id: anorthite_ore
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: concentrated_mineral
+    qty: 0.3
+    unit: kg
 steps:
   - process_id: crushing_basic_v0
+    inputs:
+      - item_id: anorthite_ore
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: regolith_crushed
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Primary crushing of ore to <50mm size"
   - process_id: grinding_basic_v0
+    inputs:
+      - item_id: regolith_crushed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: regolith_crushed
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Fine grinding to liberate target minerals from gangue"
   - process_id: mineral_concentration_v0
+    inputs:
+      - item_id: regolith_crushed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: concentrated_mineral
+        qty: 0.3
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Gravity separation, magnetic separation, or flotation to concentrate target minerals"
-  - process_id: drying_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Remove moisture from concentrate for transport and storage"
 assumptions: Beneficiation process to upgrade ore from ~1-10% to 20-70% target mineral. Process selection depends on ore mineralogy (gravity for dense minerals, magnetic for iron, flotation for sulfides).
 notes: Mineral concentration reduces mass for smelting and improves efficiency. Essential preprocessing step for all metal extraction operations.

@@ -1,6 +1,22 @@
 id: recipe_processed_tailings_v0
 kind: recipe
 target_item_id: processed_tailings_v0
+inputs:
+  - item_id: tailings
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: processed_tailings_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: tailings_to_processed_tailings_v0
+    inputs:
+      - item_id: tailings
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: processed_tailings_v0
+        qty: 1.0
+        unit: kg
 notes: "Placeholder recipe to produce processed_tailings_v0 from tailings; used to seed KB until dedicated tailings processing is defined."

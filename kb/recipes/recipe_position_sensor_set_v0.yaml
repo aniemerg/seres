@@ -2,8 +2,16 @@ id: recipe_position_sensor_set_v0
 kind: recipe
 name: Recipe for position sensor set
 target_item_id: position_sensor_set
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: sensor_suite_general
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: position_sensor_set
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: position_sensor_set_assembly_v0
+  - process_id: position_sensor_set_assembly_v0
+    est_time_hr: 1.0
+    labor_hours: 1.0
 notes: "Assemble a position sensor set from a sensor_suite_general."

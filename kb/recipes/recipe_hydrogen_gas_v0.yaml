@@ -2,6 +2,40 @@ id: recipe_hydrogen_gas_v0
 kind: recipe
 name: Hydrogen gas production via chloralkali electrolysis (v0)
 target_item_id: hydrogen_gas_v0
+inputs:
+  - item_id: sodium_chloride
+    qty: 2.0
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: hydrogen_gas_v0
+    qty: 1.0
+    unit: kg
+  - item_id: sodium_hydroxide
+    qty: 2.0
+    unit: kg
+  - item_id: chlorine_gas
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: chloralkali_electrolysis_v0
+    inputs:
+      - item_id: sodium_chloride
+        qty: 2.0
+        unit: kg
+      - item_id: water
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrogen_gas_v0
+        qty: 1.0
+        unit: kg
+      - item_id: sodium_hydroxide
+        qty: 2.0
+        unit: kg
+      - item_id: chlorine_gas
+        qty: 1.0
+        unit: kg
 notes: "Produces hydrogen gas (mapped to hydrogen_gas_v0) from brine electrolysis."

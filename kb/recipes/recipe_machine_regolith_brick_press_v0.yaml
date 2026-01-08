@@ -1,37 +1,79 @@
 id: recipe_machine_regolith_brick_press_v0
+kind: recipe
+name: Recipe for regolith_brick_press_v0
 target_item_id: regolith_brick_press_v0
 variant_id: v0
+inputs:
+  - item_id: press_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: press_platen_set
+    qty: 1
+    unit: unit
+  - item_id: press_cylinder_medium
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_power_unit_basic
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_hoses_and_fittings
+    qty: 1
+    unit: unit
+  - item_id: pressing_mold_set
+    qty: 1
+    unit: unit
+  - item_id: control_circuit_board_basic
+    qty: 1
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: regolith_brick_press_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: cutting_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 1.0
-    notes: "Cut frame members, platens, and mold plates."
-  - process_id: welded_fabrication_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 2.5
-    labor_hours: 2.5
-    notes: "Weld press frame and mold housing."
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 1.5
-    labor_hours: 1.5
-    notes: "Machine platen faces, mold cavity surfaces, and mounting holes."
-  - process_id: hydraulic_system_assembly_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Install cylinder, hoses, valves, and power unit."
-  - process_id: hydraulic_system_integration_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Fill/bleed hydraulics; set relief valves."
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Wire controls, limit switches, and safety interlocks."
+  - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: press_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: press_platen_set
+        qty: 1
+        unit: unit
+      - item_id: press_cylinder_medium
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_power_unit_basic
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_hoses_and_fittings
+        qty: 1
+        unit: unit
+      - item_id: pressing_mold_set
+        qty: 1
+        unit: unit
+      - item_id: control_circuit_board_basic
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 10.0
+    labor_hours: 8.0
+    notes: "Assemble regolith brick press from BOM components: frame, platens, cylinder, hydraulics, mold, and controls"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: regolith_brick_press_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.6
-    notes: "Cycle press with mold, verify pressure and ejection."
-assumptions: "Hydraulic press dedicated to regolith block forming; mold set included."
-notes: Local build route for regolith brick press v0.
+    notes: "Cycle press with mold, verify pressure and ejection; final QA and acceptance test"
+assumptions: "Hydraulic press dedicated to regolith block forming; mold set included. Simplified to BOM-based assembly from 7 components."
+notes: "Local build route for regolith brick press v0; simplified from complex fabrication to direct BOM assembly."

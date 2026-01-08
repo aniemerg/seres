@@ -2,17 +2,20 @@ id: recipe_drive_motor_medium_v1
 target_item_id: drive_motor_medium
 variant_id: v1
 inputs:
-  - item_id: stator_rotor_lamination_set
-    qty: 36.0
+  - item_id: electrical_steel_sheet
+    qty: 40.0
     unit: kg
-  - item_id: motor_coil_wound
-    qty: 27.0
+  - item_id: aluminum_wire
+    qty: 28.4
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 1.4
     unit: kg
   - item_id: motor_housing_steel
-    qty: 18.0
+    qty: 15.0
     unit: kg
   - item_id: motor_shaft_steel
-    qty: 4.5
+    qty: 5.0
     unit: kg
   - item_id: bearing_set_heavy
     qty: 4.0
@@ -30,14 +33,59 @@ byproducts:
     unit: kg
 steps:
   - process_id: lamination_stamping_v0
+    inputs:
+      - item_id: electrical_steel_sheet
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 38.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Stamp stator/rotor laminations from electrical steel sheet (40 kg → 38 kg)"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 28.4
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 1.4
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 27.0
+        unit: kg
     est_time_hr: 13.0
     machine_hours: 13.0
     notes: "Wind aluminum coils for medium motor (28.4 kg wire + insulation → 27 kg coils)"
   - process_id: drive_motor_medium_assembly_v0
+    inputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 38.0
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 27.0
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 15.0
+        unit: kg
+      - item_id: motor_shaft_steel
+        qty: 5.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: assembly_loss
+        qty: 0.5
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 3.0
     notes: "Assemble motor from laminations, coils, housing, shaft, bearings, and fasteners"

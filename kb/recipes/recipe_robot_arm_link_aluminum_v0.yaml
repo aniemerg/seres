@@ -13,9 +13,33 @@ outputs:
     unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+    - item_id: aluminum_alloy_ingot
+      qty: 9.0
+      unit: kg
+    outputs:
+    - item_id: cast_metal_parts
+      qty: 8.7
+      unit: kg
     notes: Cast aluminum link blank
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: cast_metal_parts
+      qty: 8.7
+      unit: kg
+    outputs:
+    - item_id: machined_part_raw
+      qty: 8.3
+      unit: kg
     notes: CNC machine mounting surfaces and cable channels
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: machined_part_raw
+      qty: 8.3
+      unit: kg
+    outputs:
+    - item_id: robot_arm_link_aluminum
+      qty: 1
+      unit: unit
     notes: Verify dimensions and structural integrity
 notes: Robot arm link manufacturing from aluminum casting with precision machining for mounting surfaces.

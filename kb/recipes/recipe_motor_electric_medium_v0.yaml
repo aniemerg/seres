@@ -1,32 +1,120 @@
 id: recipe_motor_electric_medium_v0
 target_item_id: motor_electric_medium
 variant_id: v0
+produces_qty: 80.0
+produces_unit: kg
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 90.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 4.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.1
+    unit: kg
+  - item_id: bearing_set
+    qty: 1.5
+    unit: kg
+  - item_id: cooling_fan_assembly
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: motor_electric_medium
+    qty: 80.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 85.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Cast motor housing, rotor shaft, and stator core laminations"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 80.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Machine rotor shaft, bearing journals, and stator bore to precision tolerances"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 4.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 3.8
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Wind three-phase stator coils for AC induction motor"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 80.0
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 3.8
+        unit: kg
+      - item_id: bearing_set
+        qty: 1.5
+        unit: kg
+      - item_id: cooling_fan_assembly
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble motor with bearings, cooling fan, terminal box, and electrical connections"
   - process_id: balancing_dynamic_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.0
     notes: "Balance rotor assembly to minimize vibration"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: motor_electric_medium
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Test motor operation, verify power output and cooling"

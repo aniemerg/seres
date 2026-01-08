@@ -2,8 +2,40 @@ id: recipe_helical_gear_set_v0
 kind: recipe
 target_item_id: helical_gear_set_v0
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 13.0
+    unit: kg
+outputs:
+  - item_id: helical_gear_set_v0
+    qty: 12.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 13.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 12.5
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Cast gear blanks"
   - process_id: helical_gear_cutting_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 12.5
+        unit: kg
+    outputs:
+      - item_id: helical_gear_set_v0
+        qty: 12.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Cut helical gear teeth"
 assumptions: Cast gear blanks then cut teeth helically; heat treatment not modeled
 notes: Coarse route to produce helical gear set.

@@ -3,8 +3,24 @@ kind: recipe
 name: Tungsten metal pure production (via tungsten carbonyl purification)
 # Target item produced by this recipe
 target_item_id: tungsten_metal_pure
+inputs:
+  - item_id: tungsten_carbonyl_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: tungsten_metal_pure
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: tungsten_carbonyl_process_v0
+    inputs:
+      - item_id: tungsten_carbonyl_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: tungsten_metal_pure
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.25

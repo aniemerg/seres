@@ -1,22 +1,46 @@
 id: recipe_gas_blower_basic_v0
 target_item_id: gas_blower_basic
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 31.5
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 31.5
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 30.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Cast blower housing and impeller"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 30.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine impeller blade profiles, shaft, and bearing surfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: gas_blower_basic
+        qty: 30.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble motor, impeller, shaft, bearings, and housing"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Test blower flow rate, pressure, and motor operation"
 assumptions: Centrifugal blower with electric motor drive. For gas recirculation in furnaces and reactors.
 notes: Gas blower for process gas circulation. Provides gas flow for reduction reactors and gas handling systems.

@@ -2,34 +2,51 @@ id: recipe_hydraulic_seals_set_v0
 target_item_id: hydraulic_seals_set
 variant_id: v0
 inputs:
-  - item_id: nitrile_rubber
+  - item_id: silicone_rubber
     qty: 0.5
-    unit: kg
-  - item_id: silicone_curing_agent
-    qty: 0.05
     unit: kg
 outputs:
   - item_id: hydraulic_seals_set
     qty: 1.0
     unit: kg
 byproducts:
-  - item_id: elastomer_scrap
+  - item_id: polymer_scrap_v0
     qty: 0.05
     unit: kg
 steps:
   - process_id: elastomer_molding_basic_v0
+    inputs:
+    - item_id: silicone_rubber
+      qty: 0.5
+      unit: kg
+    outputs:
+    - item_id: silicone_rubber
+      qty: 0.5
+      unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Mold O-rings, piston seals, and rod seals from nitrile rubber or polyurethane"
-  - process_id: drying_and_curing_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Cure elastomer seals to final hardness and chemical resistance"
-  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+    - item_id: silicone_rubber
+      qty: 0.5
+      unit: kg
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: kg
     est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Trim flash and finish seal surfaces for proper fit"
+    labor_hours: 1.0
+    notes: "Assemble molded seals into a set and package"
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: kg
+    outputs:
+    - item_id: hydraulic_seals_set
+      qty: 1.0
+      unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Inspect seal dimensions and surface finish"

@@ -1,19 +1,103 @@
 id: recipe_packed_bed_distillation_v0
 kind: recipe
 target_item_id: packed_bed_distillation_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
     notes: "Cast base frame components for packed bed distillation"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
     notes: "Weld frame components and support structures"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     notes: "Finish machining for interfaces and mounting holes"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Pre-assembly of subcomponents into the machine shell"
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_steel_small
+        qty: 1.0
+        unit: kg
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
     notes: "Assemble enclosure for electronics and control hardware"
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     notes: "Install wiring, control panels, sensors, and interlocks"
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: packed_bed_distillation_v0
+        qty: 1.0
+        unit: unit
     notes: "Final assembly: frame, enclosure, wiring into packed bed distillation machine"
 notes: "Prototype recipe to manufacture packed bed distillation; BOM details to be refined."

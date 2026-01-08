@@ -7,7 +7,23 @@ produces_unit: unit
 
 target_item_id: bolt_and_nut_steel_v0
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: bolt_and_nut_steel_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: bolt_and_nut_steel_v0
+        qty: 1.0
+        unit: unit
     notes: "Placeholder finish step for bolt_and_nut_steel_v0"
 notes: "Placeholder recipe to resolve no_recipe gap for bolt_and_nut_steel_v0; uses a generic machining finish step."

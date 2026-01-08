@@ -1,11 +1,53 @@
 id: recipe_fabrication_station_v0
 kind: recipe
 target_item_id: fabrication_station
+inputs:
+  - item_id: steel_frame_heavy
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 4
+    unit: unit
+outputs:
+  - item_id: fabrication_station
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_fabrication_basic_v0
-  - process_id: frame_fabrication_basic_v0
-  - process_id: bearing_installation_basic_v0
-  - process_id: machine_assembly_basic_v0
-  - process_id: electrical_assembly_basic_v0
-  - process_id: electrical_testing_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_heavy
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 4
+        unit: unit
+    outputs:
+      - item_id: fabrication_station
+        qty: 1
+        unit: unit
+    notes: "Assemble fabrication station from frame, control panel, bearings, power module, sensors, and fasteners; includes installation and electrical testing"
 notes: "Placeholder recipe to manufacture fabrication_station using basic fabrication steps."

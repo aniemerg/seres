@@ -1,12 +1,25 @@
 id: recipe_steel_sheet_3mm_v0
 kind: recipe
 name: Recipe for steel sheet 3mm
-produces_id: steel_sheet_3mm
-produces_qty: 1.0
-produces_unit: kg
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: steel_sheet_3mm
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: sheet_making_from_ingot_v0
+  inputs:
+    - item_id: steel_ingot
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: steel_sheet_3mm
+      qty: 1.0
+      unit: kg
   notes: Convert ingot into 3mm steel sheet
 assumptions: 'Assumes input ingot is steel and thickness target is 3mm.
 

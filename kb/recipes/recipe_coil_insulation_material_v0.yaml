@@ -1,6 +1,14 @@
 id: recipe_coil_insulation_material_v0
 kind: recipe
 target_item_id: coil_insulation_material
+inputs:
+  - item_id: silicone_polymer
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: coil_insulation_material
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: coil_insulation_production_v0
 notes: "Link coil insulation material to production process coil_insulation_production_v0 to resolve no_recipe gap."

@@ -1,23 +1,39 @@
 id: recipe_array_mount_structure_v0
 target_item_id: array_mount_structure
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 200.0
+    unit: kg
+  - item_id: fastener_kit_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: array_mount_structure
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 20.0
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Cast structural frame members
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    notes: Machine mounting surfaces and holes
-  - process_id: welding_brazing_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 2.0
-    notes: Weld frame members together
   - process_id: assembly_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: Final assembly with fasteners
+    inputs:
+      - item_id: steel_ingot
+        qty: 200.0
+        unit: kg
+      - item_id: fastener_kit_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: array_mount_structure
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 20.0
+        unit: kg
+    est_time_hr: 7.5
+    machine_hours: 6.5
+    labor_hours: 3.0
+    notes: "Cast structural frame members, machine mounting surfaces and holes, weld frame members together, final assembly with fasteners"
 assumptions: "Steel or aluminum frame; ~180 kg total mass."
-notes: "Four-step recipe for solar array mounting structure."
+notes: "Recipe for solar array mounting structure."

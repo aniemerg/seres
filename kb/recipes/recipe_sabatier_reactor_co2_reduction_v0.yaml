@@ -1,17 +1,69 @@
 id: recipe_sabatier_reactor_co2_reduction_v0
 kind: recipe
 target_item_id: sabatier_reactor_co2_reduction_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
     notes: "Cast housing and major subcomponents"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
     notes: "Weld frame and major assemblies"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     notes: "Machine tolerances on mating surfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Assemble subassemblies into reactor housing"
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Seal interfaces; install manifolds and sensors"
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sabatier_reactor_co2_reduction_v0
+        qty: 1.0
+        unit: unit
     notes: "Final assembly, inspection, and testing"
 notes: "Placeholder recipe to manufacture sabatier reactor (high-level assembly chain). BOM details defined separately in bom_sabatier_reactor_co2_reduction_v0.yaml"

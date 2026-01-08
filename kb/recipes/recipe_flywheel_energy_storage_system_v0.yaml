@@ -1,7 +1,35 @@
 id: recipe_flywheel_energy_storage_system_v0
 kind: recipe
 target_item_id: flywheel_energy_storage_system_v0
+inputs:
+  - item_id: flywheel_rotor_composite_v0
+    qty: 1.0
+    unit: unit
+  - item_id: flywheel_vacuum_housing_v0
+    qty: 1.0
+    unit: unit
+  - item_id: magnetic_bearing_passive_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: flywheel_energy_storage_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: flywheel_energy_storage_system_assembly_v0
+    inputs:
+      - item_id: flywheel_rotor_composite_v0
+        qty: 1.0
+        unit: unit
+      - item_id: flywheel_vacuum_housing_v0
+        qty: 1.0
+        unit: unit
+      - item_id: magnetic_bearing_passive_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: flywheel_energy_storage_system_v0
+        qty: 1.0
+        unit: unit
     notes: "Assembles energy storage flywheel from rotor composite, vacuum housing, and bearing"
 notes: "Assembles energy storage flywheel from rotor composite, vacuum housing, and bearing"

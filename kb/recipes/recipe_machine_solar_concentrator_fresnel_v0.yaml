@@ -1,29 +1,93 @@
 id: recipe_machine_solar_concentrator_fresnel_v0
 target_item_id: solar_concentrator_fresnel
 variant_id: v0
+inputs:
+  - item_id: concentrator_frame_structure
+    qty: 1
+    unit: unit
+  - item_id: fresnel_lens_segment
+    qty: 8
+    unit: unit
+  - item_id: thermal_receiver_assembly
+    qty: 1
+    unit: unit
+  - item_id: concentrator_tracking_mechanism
+    qty: 1
+    unit: unit
+  - item_id: piping_and_fittings_set
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: solar_concentrator_fresnel
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: concentrator_frame_structure
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     machine_hours: 2.0
     notes: "Assemble concentrator frame structure with mounting points for Fresnel lens segments"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: fresnel_lens_segment
+        qty: 8
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install Fresnel lens segments into frame with proper spacing and orientation"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: thermal_receiver_assembly
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_set
+        qty: 1
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install thermal receiver assembly at focal point of concentrator"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: concentrator_tracking_mechanism
+        qty: 1
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Integrate optional tracking mechanism for dual-axis solar tracking"
   - process_id: concentrator_alignment_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: aligned_solar_concentrator
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Align Fresnel lens segments and receiver using precision measurement tools for optimal focus"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: aligned_solar_concentrator
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: solar_concentrator_fresnel
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test concentrator focusing performance and verify thermal concentration capability"

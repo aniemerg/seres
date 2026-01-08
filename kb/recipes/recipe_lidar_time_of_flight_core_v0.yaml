@@ -3,11 +3,79 @@ kind: recipe
 name: LiDAR Time-of-Flight Core (v0) recipe
 variant_id: v0
 target_item_id: lidar_time_of_flight_core_v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: lidar_time_of_flight_core_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
   - process_id: electrical_testing_basic_v0
+    inputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: tested_electrical_equipment
+        qty: 1.0
+        unit: unit
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: tested_electrical_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: lidar_time_of_flight_core_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture lidar_time_of_flight_core_v0 by assembling electronics and basic QA."

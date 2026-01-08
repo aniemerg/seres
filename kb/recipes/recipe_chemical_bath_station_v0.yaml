@@ -1,17 +1,97 @@
 id: recipe_chemical_bath_station_v0
 target_item_id: chemical_bath_station
 variant_id: v0
+inputs:
+  - item_id: steel_beam_i_section
+    qty: 50.0
+    unit: kg
+  - item_id: chemical_bath_tank_set
+    qty: 1
+    unit: unit
+  - item_id: chemical_bath_heaters
+    qty: 1
+    unit: unit
+  - item_id: chemical_bath_agitation_system
+    qty: 1
+    unit: unit
+  - item_id: chemical_bath_ventilation
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: power_output_terminals
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: chemical_bath_station
+    qty: 1
+    unit: unit
 steps:
   - process_id: welded_fabrication_basic_v0
+    inputs:
+    - item_id: steel_beam_i_section
+      qty: 50.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 48.0
+      unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: "Fabricate tank supports, frames, and ventilation mounting."
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 48.0
+      unit: kg
+    - item_id: chemical_bath_tank_set
+      qty: 1
+      unit: unit
+    - item_id: chemical_bath_heaters
+      qty: 1
+      unit: unit
+    - item_id: chemical_bath_agitation_system
+      qty: 1
+      unit: unit
+    - item_id: chemical_bath_ventilation
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install tanks, heaters, agitation, and ventilation hardware."
   - process_id: electrical_assembly_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    - item_id: control_panel_basic
+      qty: 1
+      unit: unit
+    - item_id: power_output_terminals
+      qty: 1
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: chemical_bath_station
+      qty: 1
+      unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire controls, heaters, and fans; verify safety interlocks."

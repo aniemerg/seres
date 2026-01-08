@@ -1,12 +1,66 @@
 id: recipe_steel_stock_v0
+kind: recipe
 target_item_id: steel_stock
 variant_id: hot_roll_v0
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 2.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.5
+    unit: kg
+  - item_id: iron_pig_or_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: steel_billet_or_slab
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
+  - item_id: slag
+    qty: 0.85
+    unit: kg
 steps:
   - process_id: iron_smelting_reduction_v0
+    inputs:
+      - item_id: iron_ore_or_ilmenite
+        qty: 2.0
+        unit: kg
+      - item_id: carbon_reducing_agent
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: iron_pig_or_ingot
+        qty: 1.0
+        unit: kg
+      - item_id: slag
+        qty: 0.8
+        unit: kg
     notes: Reduce ilmenite/ore with carbon to produce pig iron feedstock.
   - process_id: steel_refining_basic_v0
+    inputs:
+      - item_id: iron_pig_or_ingot
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.0
+        unit: kg
+      - item_id: slag
+        qty: 0.05
+        unit: kg
     notes: Refine pig iron and cast billets/slabs for rolling.
   - process_id: steel_stock_hot_rolling_v0
+    inputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: steel_stock
+        qty: 1.0
+        unit: kg
     notes: Hot roll billets into bar/plate/rod stock and cut to length.
 assumptions: "Local steel route using carbothermal iron reduction, basic refining, and hot rolling; energy/time are best-guess placeholders."
 notes: "Replaces import placeholder for general steel stock feed used across machining and fabrication."

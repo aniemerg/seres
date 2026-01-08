@@ -1,10 +1,70 @@
 id: recipe_grinder_cylindrical_v0_v0
 kind: recipe
+name: Recipe for grinder cylindrical v0
 target_item_id: grinder_cylindrical_v0
 variant_id: v0
+inputs:
+  - item_id: steel_casting_machine_base
+    qty: 1
+    unit: unit
+  - item_id: grinding_spindle_assembly
+    qty: 1
+    unit: unit
+  - item_id: lathe_headstock_simple
+    qty: 1
+    unit: unit
+  - item_id: tailstock_assembly
+    qty: 1
+    unit: unit
+  - item_id: motor_electric_small
+    qty: 2
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: linear_guide_rails
+    qty: 2
+    unit: unit
+  - item_id: fastener_kit_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: grinder_cylindrical_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: grinding_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 1.0
-    labor_hours: 0.8
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_casting_machine_base
+        qty: 1
+        unit: unit
+      - item_id: grinding_spindle_assembly
+        qty: 1
+        unit: unit
+      - item_id: lathe_headstock_simple
+        qty: 1
+        unit: unit
+      - item_id: tailstock_assembly
+        qty: 1
+        unit: unit
+      - item_id: motor_electric_small
+        qty: 2
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: linear_guide_rails
+        qty: 2
+        unit: unit
+      - item_id: fastener_kit_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: grinder_cylindrical_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 20.0
+    machine_hours: 4.0
+    labor_hours: 16.0
+    notes: "Install grinding spindle assembly on machine base, mount headstock and tailstock for workpiece holding, install motors for spindle and traverse motion, mount linear guide rails for precise grinding head movement, install control panel and wire electrical systems, align all components, test grinding accuracy"
 notes: "Converted to modern step format to satisfy invalid_recipe_schema; placeholder update."

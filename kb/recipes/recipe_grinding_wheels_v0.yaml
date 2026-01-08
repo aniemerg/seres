@@ -1,8 +1,22 @@
 id: recipe_grinding_wheels_v0
 target_item_id: grinding_wheels
 variant_id: v0
+produces_qty: 1.0
+produces_unit: unit
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: grinding_wheels
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
     outputs:
       - item_id: grinding_wheels
         qty: 1.0

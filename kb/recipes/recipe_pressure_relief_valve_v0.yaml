@@ -2,24 +2,98 @@ id: recipe_pressure_relief_valve_v0
 kind: recipe
 target_item_id: pressure_relief_valve
 variant_id: v0
+produces_qty: 2.0
+produces_unit: kg
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 3.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 0.2
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 1.0
+    unit: each
+  - item_id: seal_rubber_bearing
+    qty: 0.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: pressure_relief_valve
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 2.8
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Cast valve body and bonnet from brass or stainless steel"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 2.8
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 2.2
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine valve seat, threads, and pressure port"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 2.2
+        unit: kg
+      - item_id: spring_compression_small
+        qty: 1.0
+        unit: each
+      - item_id: seal_rubber_bearing
+        qty: 0.1
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble valve disc, spring, stem, and bonnet"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate set pressure by adjusting spring compression"
   - process_id: pressure_testing_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: pressure_relief_valve
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test opening pressure, reseat pressure, and leak-tightness"

@@ -2,32 +2,146 @@ id: recipe_motor_servo_precision_v0
 kind: recipe
 target_item_id: motor_servo_precision
 variant_id: v0
+produces_qty: 12.0
+produces_unit: kg
+inputs:
+  - item_id: steel_stock
+    qty: 20.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 2.1
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.05
+    unit: kg
+  - item_id: permanent_magnet_array
+    qty: 1.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: kg
+  - item_id: motor_shaft_steel
+    qty: 1.0
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 0.5
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: motor_servo_precision
+    qty: 12.0
+    unit: kg
 steps:
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 20.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 15.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine motor housing, shaft, and mounting brackets to tight tolerances"
   - process_id: coil_winding_motor_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 2.1
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 2.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Wind stator coils with precision wire placement"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 15.0
+        unit: kg
+      - item_id: permanent_magnet_array
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 16.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Assemble permanent magnets onto rotor shaft"
   - process_id: sensor_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 16.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sensor_equipped_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install and align rotary encoder for position feedback"
   - process_id: motor_final_assembly_v0
+    inputs:
+      - item_id: sensor_equipped_system
+        qty: 1.0
+        unit: unit
+      - item_id: motor_coil_wound
+        qty: 2.0
+        unit: kg
+      - item_id: motor_shaft_steel
+        qty: 1.0
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 0.5
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Assemble stator, rotor, bearings, and encoder into housing"
   - process_id: balancing_dynamic_basic_v0
+    inputs:
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Balance rotor assembly to minimize vibration"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: motor_servo_precision
+        qty: 12.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test motor performance, encoder accuracy, and torque characteristics"

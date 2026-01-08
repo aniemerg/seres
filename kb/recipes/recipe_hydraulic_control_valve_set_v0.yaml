@@ -1,26 +1,56 @@
 id: recipe_hydraulic_control_valve_set_v0
 kind: recipe
 target_item_id: hydraulic_control_valve_set
+inputs:
+  - item_id: valve_body_machined
+    qty: 4.0
+    unit: kg
+  - item_id: seal_set_high_temp
+    qty: 1.0
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: hydraulic_control_valve_set_assembly_v0
+- process_id: assembly_basic_v0
   inputs:
     - item_id: valve_body_machined
       qty: 4.0
       unit: kg
     - item_id: seal_set_high_temp
-      qty: 1
+      qty: 1.0
       unit: unit
     - item_id: fittings_and_valves
-      qty: 1
+      qty: 1.0
       unit: unit
   outputs:
-    - item_id: hydraulic_control_valve_set
-      qty: 1
+    - item_id: assembled_equipment
+      qty: 1.0
       unit: unit
   notes: "Assemble hydraulic valve body and ports"
 - process_id: calibration_and_test_basic_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: device_calibrated
+      qty: 1.0
+      unit: unit
   notes: "Calibrate and test hydraulic valve set"
 - process_id: leak_testing_v0
+  inputs:
+    - item_id: device_calibrated
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: hydraulic_control_valve_set
+      qty: 1.0
+      unit: unit
   notes: "Leak testing of assembled hydraulic valve set"
 assumptions: "Assumes valve bodies and seals are available; imported components allowed if missing."
 notes: "Recipe to manufacture a hydraulic_control_valve_set via assembly, testing, and leak checks."

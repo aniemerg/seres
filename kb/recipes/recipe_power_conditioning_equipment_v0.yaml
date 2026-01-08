@@ -5,7 +5,6 @@ inputs:
   - item_id: inverter_module_imported
     qty: 1
     unit: unit
-    notes: "Imported DC-AC inverter module"
   - item_id: voltage_regulator_module
     qty: 1
     unit: unit
@@ -29,21 +28,36 @@ outputs:
     qty: 1
     unit: unit
 steps:
-  - process_id: sheet_metal_fabrication_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Fabricate electrical enclosure from sheet metal"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Wire inverter module, voltage regulator, capacitor bank, transformer"
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Mount components in enclosure, install cooling fans, cable entries"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Test power conditioning under load, verify voltage regulation and conversion"
+    inputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
+      - item_id: voltage_regulator_module
+        qty: 1
+        unit: unit
+      - item_id: capacitor_bank_power
+        qty: 1
+        unit: unit
+      - item_id: transformer_power_medium
+        qty: 1
+        unit: unit
+      - item_id: control_circuit_board_power
+        qty: 1
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: power_conditioning_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 9.0
+    machine_hours: 2.0
+    labor_hours: 7.0
+    notes: "Fabricate electrical enclosure, wire inverter module/voltage regulator/capacitor bank/transformer, mount components in enclosure, install cooling fans and cable entries, test power conditioning under load, verify voltage regulation and conversion"
 assumptions: Inverter module and control electronics imported. Transformer and enclosure fabricated locally.
 notes: Power conditioning equipment for solar power integration with imported electronics.

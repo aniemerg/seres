@@ -1,24 +1,102 @@
 id: recipe_thermionic_generator_v0
 target_item_id: thermionic_generator
 variant_id: v0
+inputs:
+  - item_id: thermionic_converter
+    qty: 10
+    unit: unit
+  - item_id: heat_source_nuclear
+    qty: 1
+    unit: unit
+  - item_id: heat_rejection_radiator
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: thermionic_generator
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: heat_rejection_radiator
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Assemble structural frame and mount radiator heat rejection system"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: thermionic_converter
+        qty: 10
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 20.0
     labor_hours: 20.0
     notes: "Install and series-connect 10 thermionic converter modules for voltage stacking"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: heat_source_nuclear
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Integrate nuclear heat source and thermal interface to converters"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Braze thermal connections between heat source, converters, and radiator"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Install power conditioning electronics and electrical connections"
@@ -27,6 +105,14 @@ steps:
     labor_hours: 2.0
     notes: "Vacuum leak test of thermionic converter envelopes"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: thermionic_generator
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Test power generation, thermal management, and electrical output under load"

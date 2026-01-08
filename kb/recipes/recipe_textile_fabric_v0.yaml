@@ -1,8 +1,24 @@
 id: recipe_textile_fabric_v0
 target_item_id: textile_fabric
 variant_id: v0
+inputs:
+  - item_id: fiber_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: textile_fabric
+    qty: 0.9
+    unit: kg
 steps:
   - process_id: textile_manufacturing_basic_v0
+    inputs:
+      - item_id: fiber_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: textile_fabric
+        qty: 0.9
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0

@@ -4,6 +4,58 @@ produces_id: lattice_builder_gantry_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: lattice_builder_gantry_v0
+inputs:
+  - item_id: gantry_axes_set
+    qty: 1
+    unit: unit
+  - item_id: steel_frame_heavy
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 4
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: sensor_equipped_system
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: lattice_builder_gantry_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: gantry_axes_set
+        qty: 1
+        unit: unit
+      - item_id: steel_frame_heavy
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 4
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: sensor_equipped_system
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: lattice_builder_gantry_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to assemble lattice_builder_gantry_v0 from basic assembly steps. Will be refined with actual subassemblies as defined."

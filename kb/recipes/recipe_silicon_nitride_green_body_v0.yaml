@@ -1,8 +1,37 @@
 id: recipe_silicon_nitride_green_body_v0
 kind: recipe
 target_item_id: silicon_nitride_green_body
+variant_id: v0
+inputs:
+  - item_id: silicon_nitride_powder_fine
+    qty: 0.95
+    unit: kg
+  - item_id: sintering_aid_mgo
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: silicon_nitride_green_body
+    qty: 0.9
+    unit: kg
+  - item_id: compaction_loss_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: powder_compaction_process_v0
+    inputs:
+      - item_id: silicon_nitride_powder_fine
+        qty: 0.95
+        unit: kg
+      - item_id: sintering_aid_mgo
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: silicon_nitride_green_body
+        qty: 0.9
+        unit: kg
+      - item_id: compaction_loss_v0
+        qty: 0.1
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.25
     labor_hours: 0.25

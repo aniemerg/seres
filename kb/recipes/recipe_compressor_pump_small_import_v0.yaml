@@ -1,18 +1,66 @@
 id: recipe_compressor_pump_small_import_v0
 target_item_id: compressor_pump_small
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 42.0
+    unit: kg
+  - item_id: cast_part_raw
+    qty: 41.0
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: motor_electric_small
+    qty: 1
+    unit: unit
+  - item_id: seal_rubber_bearing
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: compressor_pump_small
+    qty: 1
+    unit: unit
 steps:
-- process_id: metal_casting_basic_v0
-  est_time_hr: 1.0
-  machine_hours: 1.0
-  notes: "Cast pump housing and impeller"
-- process_id: machining_finish_basic_v0
-  est_time_hr: 1.5
-  machine_hours: 1.5
-  notes: "Machine pump internals, shaft, bearing surfaces"
-- process_id: assembly_basic_v0
-  est_time_hr: 1.0
-  labor_hours: 1.0
-  notes: "Assemble motor, impeller, seals, housing"
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 42.0
+        unit: kg
+    outputs:
+      - item_id: cast_part_raw
+        qty: 41.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Cast pump housing and impeller"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_part_raw
+        qty: 41.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 39.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Machine pump internals, shaft, bearing surfaces"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 39.0
+        unit: kg
+      - item_id: motor_electric_small
+        qty: 1
+        unit: unit
+      - item_id: seal_rubber_bearing
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: compressor_pump_small
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble motor, impeller, seals, housing"
 assumptions: "Local casting, machining and assembly path for compressor_pump_small."
 notes: "Converted import_stub into a real local recipe to produce compressor_pump_small."

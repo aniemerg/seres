@@ -2,36 +2,114 @@ id: recipe_compressor_reciprocating_v0
 kind: recipe
 target_item_id: compressor_reciprocating
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 90.0
+    unit: kg
+  - item_id: steel_bar_raw
+    qty: 28.0
+    unit: kg
+outputs:
+  - item_id: compressor_reciprocating
+    qty: 1
+    unit: unit
 steps:
   - process_id: sand_casting_large_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: sand_casting_large_v0
+        qty: 88.0
+        unit: kg
     est_time_hr: 10.0
     machine_hours: 10.0
     notes: "Cast compressor housing and crankcase from iron or steel"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: sand_casting_large_v0
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 57.0
+        unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
     notes: "Machine cylinder bores, crankshaft journals, and bearing surfaces"
   - process_id: steel_shaft_machining_v0
+    inputs:
+      - item_id: steel_bar_raw
+        qty: 28.0
+        unit: kg
+    outputs:
+      - item_id: steel_shaft_machined_v0
+        qty: 25.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine crankshaft with precision journals and throws"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 8.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine pistons and install piston rings"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 55.0
+        unit: kg
+      - item_id: steel_shaft_machined_v0
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 78.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Assemble crankshaft, connecting rods, pistons, valves, and bearings"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 78.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install intake and discharge valves with springs"
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 82.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install seals, gaskets, and crankcase cover"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 82.0
+        unit: kg
+    outputs:
+      - item_id: compressor_reciprocating
+        qty: 1
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Test compression pressure, check for leaks, verify oil circulation"

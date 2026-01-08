@@ -5,7 +5,52 @@ target_item_id: vacuum_tube_sealed
 produces_id: vacuum_tube_sealed
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: tungsten_cathode_coated
+    qty: 1.0
+    unit: unit
+  - item_id: nickel_anode_plate
+    qty: 1.0
+    unit: unit
+  - item_id: fused_silica_envelope
+    qty: 1.0
+    unit: unit
+  - item_id: vacuum_seal_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: thermionic_vacuum_tube
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: vacuum_tube_sealed
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: vacuum_tube_assembly_v0
+  inputs:
+    - item_id: tungsten_cathode_coated
+      qty: 1.0
+      unit: unit
+    - item_id: nickel_anode_plate
+      qty: 1.0
+      unit: unit
+    - item_id: fused_silica_envelope
+      qty: 1.0
+      unit: unit
+    - item_id: vacuum_seal_assembly
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: thermionic_vacuum_tube
+      qty: 1.0
+      unit: unit
 - process_id: vacuum_tube_evacuation_sealing_v0
+  inputs:
+    - item_id: thermionic_vacuum_tube
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: vacuum_tube_sealed
+      qty: 1.0
+      unit: unit
 notes: "Chain: assemble vacuum_tube_assembly (thermionic_vacuum_tube) then evacuate and hermetically seal to form vacuum_tube_sealed."

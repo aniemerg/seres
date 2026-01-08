@@ -1,10 +1,25 @@
 id: recipe_furnace_door_assembly_v0
 kind: recipe
 name: Recipe for furnace door assembly
-produces_id: furnace_door_assembly
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: furnace_door_assembly
+variant_id: v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 35.0
+    unit: kg
+  - item_id: door_hinge_assembly
+    qty: 2.0
+    unit: unit
+  - item_id: sealing_gaskets
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: furnace_door_assembly
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: assembly_basic_v0
   inputs:

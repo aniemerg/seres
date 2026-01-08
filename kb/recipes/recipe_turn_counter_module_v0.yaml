@@ -2,6 +2,23 @@ id: recipe_turn_counter_module_v0
 kind: recipe
 target_item_id: turn_counter_module
 variant_id: v0
+inputs:
+  - item_id: bare_pcb
+    qty: 0.1
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.1
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 0.1
+    unit: kg
+  - item_id: enclosure_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: turn_counter_module
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: pcb_assembly_basic_v0
     inputs:

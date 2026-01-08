@@ -1,16 +1,72 @@
 id: recipe_extraction_unit_v0
 target_item_id: extraction_unit
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 100.0
+    unit: kg
+  - item_id: structural_frame_steel
+    qty: 1
+    unit: unit
+  - item_id: excavator_bucket
+    qty: 1
+    unit: unit
+  - item_id: conveyor_belt_system_v0
+    qty: 1
+    unit: unit
+  - item_id: motor_electric_medium
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: extraction_unit
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 95.0
+        unit: kg
     est_time_hr: 20.0
     labor_hours: 20.0
     notes: "Fabricate structural frame and mounting points"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 95.0
+        unit: kg
+      - item_id: structural_frame_steel
+        qty: 1
+        unit: unit
+      - item_id: excavator_bucket
+        qty: 1
+        unit: unit
+      - item_id: conveyor_belt_system_v0
+        qty: 1
+        unit: unit
+      - item_id: motor_electric_medium
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 198.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Assemble excavation tooling, conveyors, and motors"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 198.0
+        unit: kg
+    outputs:
+      - item_id: extraction_unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test extraction and material handling systems"

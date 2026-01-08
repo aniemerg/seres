@@ -1,0 +1,51 @@
+id: recipe_reservoir_tank_formed_import_v0
+kind: recipe
+name: Import reservoir tank formed
+target_item_id: reservoir_tank_formed
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 27.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: reservoir_tank_formed
+    qty: 1
+    unit: unit
+steps:
+  - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 27.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 25.5
+        unit: kg
+    est_time_hr: 1.5
+    notes: "Cut and roll tank panels and end caps"
+  - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 25.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 1.5
+    notes: "Weld seams, add ports and mounting tabs"
+  - process_id: leak_test_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: reservoir_tank_formed
+        qty: 1
+        unit: unit
+    est_time_hr: 0.5
+    notes: "Pressure test tank for leaks"
+notes: "Local fabrication route for formed reservoir tank"

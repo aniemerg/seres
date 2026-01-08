@@ -2,6 +2,23 @@ id: recipe_photoresist_solvent_evap_v0
 kind: recipe
 name: Photoresist solvent evaporation
 target_item_id: photoresist_solvent_evap_v0
+variant_id: v0
+inputs:
+  - item_id: photoresist_solution_v0
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: photoresist_solvent_evap_v0
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: evaporation_basic_v0
+    inputs:
+      - item_id: photoresist_solution_v0
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: photoresist_solvent_evap_v0
+        qty: 0.05
+        unit: kg
 notes: "Evaporate solvent from spin-coating solution to yield evaporated solvent byproduct"

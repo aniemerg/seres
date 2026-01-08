@@ -1,4 +1,5 @@
 id: recipe_optical_square_set_v0
+kind: recipe
 target_item_id: optical_square_set
 variant_id: v0
 inputs:
@@ -16,18 +17,50 @@ outputs:
     notes: Machining waste from optical square fabrication
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine optical square blanks from tool steel, rough surfaces"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat treat and stress relieve to prevent warping"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: optical_square_set
+        qty: 2.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Grind reference surfaces to precision flatness and perpendicularity (90° ± arcseconds)"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: optical_square_set
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify perpendicularity with autocollimator or master square"

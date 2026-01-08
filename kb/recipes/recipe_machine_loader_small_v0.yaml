@@ -1,21 +1,117 @@
 id: recipe_machine_loader_small_v0
 target_item_id: loader_small
 variant_id: v0
+inputs:
+  - item_id: machine_frame_medium
+    qty: 1.0
+    unit: unit
+  - item_id: motor_electric_large
+    qty: 1.0
+    unit: unit
+  - item_id: bucket_assembly_small
+    qty: 1.0
+    unit: unit
+  - item_id: wheel_set_industrial
+    qty: 4.0
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 2.0
+    unit: unit
+  - item_id: hydraulic_cylinder_medium
+    qty: 4.0
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_hoses_and_fittings
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: unit
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: loader_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+      - item_id: motor_electric_large
+        qty: 1.0
+        unit: unit
+      - item_id: bucket_assembly_small
+        qty: 1.0
+        unit: unit
+      - item_id: wheel_set_industrial
+        qty: 4.0
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 2.0
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     machine_hours: 4.0
-    notes: "Assemble loader frame, hydraulic cylinders, bucket, and drive system"
+    notes: "Assemble loader frame, bucket, drive system, and running gear"
   - process_id: hydraulic_system_integration_v0
+    inputs:
+      - item_id: hydraulic_cylinder_medium
+        qty: 4.0
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_hoses_and_fittings
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_control_valve_set
+        qty: 1.0
+        unit: unit
+      - item_id: piping_components
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install and test hydraulic system for bucket and arm operation"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Wire control systems and operator controls"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test loader operation including bucket lift, tilt, and mobility"

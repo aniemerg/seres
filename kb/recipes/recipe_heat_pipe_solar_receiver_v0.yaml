@@ -2,12 +2,50 @@ id: recipe_heat_pipe_solar_receiver_v0
 kind: recipe
 name: Recipe for heat pipe solar receiver v0
 target_item_id: heat_pipe_solar_receiver_v0
-produces_id: heat_pipe_solar_receiver_v0
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 160.0
+    unit: kg
+outputs:
+  - item_id: heat_pipe_solar_receiver_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 160.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 152.0
+      unit: kg
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 152.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 150.0
+      unit: kg
 - process_id: welding_brazing_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 150.0
+      unit: kg
+  outputs:
+    - item_id: welded_assemblies
+      qty: 150.0
+      unit: kg
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: welded_assemblies
+      qty: 150.0
+      unit: kg
+  outputs:
+    - item_id: heat_pipe_solar_receiver_v0
+      qty: 1.0
+      unit: unit
 notes: Basic multi-step build for heat pipe solar receiver; uses heat pipes and modular interface.

@@ -1,6 +1,22 @@
 id: recipe_machined_part_raw_v0
 kind: recipe
 target_item_id: machined_part_raw
+inputs:
+  - item_id: cut_parts
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: machined_part_raw
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
 notes: "Roughly machine 2 kg of cut_parts into machined_part_raw"

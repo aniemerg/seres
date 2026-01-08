@@ -2,6 +2,32 @@ id: recipe_power_strip_and_protection_v0
 kind: recipe
 target_item_id: power_strip_and_protection
 variant_id: v0
+inputs:
+  - item_id: wire_copper_insulated
+    qty: 0.6
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.4
+    unit: kg
+  - item_id: assembled_electronics
+    qty: 1
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+  - item_id: seal_rubber_o_ring
+    qty: 0.1
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: power_strip_and_protection
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
@@ -11,8 +37,36 @@ steps:
       - item_id: electronic_components_set
         qty: 0.4
         unit: kg
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    machine_hours: 0.5
+    notes: "Assemble power strip harness and protection circuitry"
+  - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1
+        unit: unit
       - item_id: enclosure_small
         qty: 1.0
+        unit: unit
+      - item_id: seal_rubber_o_ring
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Install protective enclosure seals"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
         unit: unit
       - item_id: fastener_kit_small
         qty: 0.2
@@ -21,15 +75,6 @@ steps:
       - item_id: power_strip_and_protection
         qty: 1.0
         unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    machine_hours: 0.5
-    notes: "Assemble power strip harness and protection circuitry"
-  - process_id: sealing_and_assembly_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Install protective enclosure seals"
-  - process_id: assembly_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Final assembly step to finalize power strip unit"

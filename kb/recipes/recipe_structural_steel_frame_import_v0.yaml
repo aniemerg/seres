@@ -1,12 +1,43 @@
 id: recipe_structural_steel_frame_import_v0
 kind: recipe
+name: Recipe for structural steel frame
 target_item_id: structural_steel_frame
 variant_id: v0
 produces_id: structural_steel_frame
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: structural_steel_sections
+    qty: 55.0
+    unit: kg
+  - item_id: fastener_kit_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: structural_steel_frame
+    qty: 1.0
+    unit: unit
+  - item_id: metal_scrap
+    qty: 5.0
+    unit: kg
 steps:
-  - process_id: cutting_basic_v0
-  - process_id: welding_structural_v0
-  - process_id: fabricate_structural_steel_frame_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_sections
+        qty: 55.0
+        unit: kg
+      - item_id: fastener_kit_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: structural_steel_frame
+        qty: 1.0
+        unit: unit
+      - item_id: metal_scrap
+        qty: 5.0
+        unit: kg
+    est_time_hr: 8.0
+    machine_hours: 2.0
+    labor_hours: 6.0
+    notes: "Cut structural steel sections to length, weld steel frame members together to form rigid structure, fabricate mounting brackets and reinforcements, grind and finish weld seams"
 notes: "Converted to a local v0 recipe; uses cutting_basic_v0, welding_structural_v0, and fabricate_structural_steel_frame_v0 to produce structural_steel_frame."

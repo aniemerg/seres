@@ -3,6 +3,20 @@ kind: recipe
 name: Recipe for coaxial cable low-loss (v1)
 target_item_id: coaxial_cable_low_loss
 variant_id: v1
+inputs:
+  - item_id: wire_copper_insulated
+    qty: 0.6
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: insulation_coating_material
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: coaxial_cable_low_loss
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cable_harness_assembly_v0
     inputs:

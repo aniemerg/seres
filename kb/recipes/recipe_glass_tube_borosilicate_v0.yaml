@@ -1,9 +1,23 @@
 id: recipe_glass_tube_borosilicate_v0
 kind: recipe
 target_item_id: glass_tube_borosilicate
-produces_id: glass_tube_borosilicate
-produces_qty: 0.02
-produces_unit: kg
+variant_id: v0
+inputs:
+  - item_id: molten_glass
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: glass_tube_borosilicate
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: glass_tube_borosilicate_forming_v0
+    inputs:
+      - item_id: molten_glass
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: glass_tube_borosilicate
+        qty: 0.02
+        unit: kg
 notes: "Manufacture borosilicate glass tube blank from molten glass; placeholder recipe."

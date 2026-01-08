@@ -1,7 +1,23 @@
 id: recipe_component_material_a_v0
 kind: recipe
 target_item_id: component_material_a
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: component_material_a
+    qty: 20.0
+    unit: kg
 steps:
   - process_id: manufacture_component_material_a_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: component_material_a
+        qty: 20.0
+        unit: kg
 notes: "Local production path for component_material_a; replaces import_stub with a direct manufacturing route using manufacture_component_material_a_v0 process."
 assumptions: "Feedstock: regolith_raw; uses placeholder path from manufacture_component_material_a_v0 process."

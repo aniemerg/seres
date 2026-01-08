@@ -1,21 +1,67 @@
 id: recipe_casting_furnace_shell_v0
 target_item_id: casting_furnace_shell
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 500.0
+    unit: kg
+  - item_id: regolith_fine_fraction
+    qty: 60.0
+    unit: kg
+outputs:
+  - item_id: casting_furnace_shell
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 470.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: Cast outer shell sections
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 470.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 460.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: Weld shell sections together
   - process_id: sintering_and_hot_pressing_v0
+    inputs:
+      - item_id: regolith_fine_fraction
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: sintered_shapes
+        qty: 55.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Apply refractory lining via sintered ceramics
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 460.0
+        unit: kg
+      - item_id: sintered_shapes
+        qty: 55.0
+        unit: kg
+    outputs:
+      - item_id: casting_furnace_shell
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly with insulation

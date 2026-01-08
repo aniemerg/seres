@@ -2,43 +2,50 @@ id: recipe_oscilloscope_basic_v0
 produces_id: oscilloscope_basic
 target_item_id: oscilloscope_basic
 variant_id: v0
+inputs:
+  - item_id: bare_pcb
+    qty: 0.3
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.2
+    unit: kg
+  - item_id: display_screen_small
+    qty: 1
+    unit: unit
+  - item_id: enclosure_small
+    qty: 0.8
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: oscilloscope_basic
+    qty: 1
+    unit: unit
 steps:
-- process_id: pcb_assembly_basic_v0
-  inputs:
-    - item_id: bare_pcb
-      qty: 0.3
-      unit: kg
-      notes: "Main board and control PCBs"
-    - item_id: electronic_components_set
-      qty: 1.2
-      unit: kg
-      notes: "ADC, amplifiers, trigger circuits, microcontroller"
-    - item_id: display_screen_small
-      qty: 1
-      unit: unit
-      notes: "Display for waveform viewing"
-    - item_id: enclosure_small
-      qty: 0.8
-      unit: kg
-      notes: "Oscilloscope housing"
-    - item_id: electrical_wire_and_connectors
-      qty: 0.2
-      unit: kg
-      notes: "Internal wiring and BNC connectors"
-  est_time_hr: 1.5
-  labor_hours: 1.5
-  notes: "Assemble main board and display/control PCBs."
-- process_id: enclosure_assembly_basic_v0
-  est_time_hr: 0.8
-  labor_hours: 0.8
-  notes: "Mount PCBs, display, controls, and connectors into enclosure."
-- process_id: calibration_and_test_basic_v0
-  outputs:
-    - item_id: oscilloscope_basic
-      qty: 1
-      unit: unit
-  est_time_hr: 1.0
-  labor_hours: 1.0
-  notes: "Perform calibration and functional tests with signal generator."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: bare_pcb
+        qty: 0.3
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.2
+        unit: kg
+      - item_id: display_screen_small
+        qty: 1
+        unit: unit
+      - item_id: enclosure_small
+        qty: 0.8
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: oscilloscope_basic
+        qty: 1
+        unit: unit
+    est_time_hr: 3.3
+    labor_hours: 3.3
+    notes: "Assemble main board and display/control PCBs with ADC/amplifiers/trigger circuits/microcontroller, mount PCBs/display/controls/BNC connectors into enclosure, perform calibration and functional tests with signal generator"
 assumptions: Complex electronics largely imported; calibration simple.
 notes: Assembly and test of a basic oscilloscope; assumes imported core electronics.

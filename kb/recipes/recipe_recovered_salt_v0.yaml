@@ -5,15 +5,81 @@ produces_id: sodium_chloride
 produces_qty: 1.0
 produces_unit: kg
 variant_id: recovered_v0
+inputs:
+  - item_id: salt_waste
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: sodium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 9.0
+    unit: kg
 steps:
   - process_id: chloride_recycling_to_hcl_v0
+    inputs:
+      - item_id: salt_waste
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.8
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.2
+        unit: kg
     notes: "Pass 1 of 5 to yield 0.2 kg sodium_chloride per batch"
   - process_id: chloride_recycling_to_hcl_v0
+    inputs:
+      - item_id: salt_waste
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.8
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.2
+        unit: kg
     notes: "Pass 2 of 5 to yield cumulative 0.4 kg sodium_chloride"
   - process_id: chloride_recycling_to_hcl_v0
+    inputs:
+      - item_id: salt_waste
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.8
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.2
+        unit: kg
     notes: "Pass 3 of 5 to yield cumulative 0.6 kg sodium_chloride"
   - process_id: chloride_recycling_to_hcl_v0
+    inputs:
+      - item_id: salt_waste
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.8
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.2
+        unit: kg
     notes: "Pass 4 of 5 to yield cumulative 0.8 kg sodium_chloride"
   - process_id: chloride_recycling_to_hcl_v0
+    inputs:
+      - item_id: salt_waste
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.8
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.2
+        unit: kg
     notes: "Pass 5 of 5 to reach 1.0 kg sodium_chloride"
 notes: "Recipe to recover sodium_chloride via repeated chloride recycling of salt waste. Five passes approximate mass balance with the existing process outputs. This is an alternative to primary salt production."

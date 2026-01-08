@@ -4,10 +4,24 @@ name: Recipe for safety guard steel mesh v3
 produces_id: safety_guard_steel_mesh
 produces_qty: 1.0
 produces_unit: unit
-steps:
-- process_id: mesh_fabrication_steel_guard_v1
-notes: Fabrication of safety guard steel mesh from steel mesh sheet feedstock (v1 path).
-assumptions: 'Input material: steel_mesh_sheet_material (50 kg) assumed; final part mass equals ~0.8 kg.
-
-  '
 target_item_id: safety_guard_steel_mesh
+inputs:
+  - item_id: steel_mesh_sheet_material
+    qty: 50.0
+    unit: kg
+steps:
+  - process_id: mesh_fabrication_steel_guard_v1
+    inputs:
+      - item_id: steel_mesh_sheet_material
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: safety_guard_steel_mesh
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 0.8
+    notes: "Cut and form steel mesh sheet into safety guard; ~98% material loss/scrap"
+notes: "Fabrication of safety guard steel mesh from steel mesh sheet feedstock (v1 path); single unit from 50 kg batch."
+assumptions: "Input material: steel_mesh_sheet_material (50 kg); final part mass ~0.8 kg per unit; significant material loss due to cutting and forming operations."

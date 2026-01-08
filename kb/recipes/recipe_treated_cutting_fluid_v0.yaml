@@ -4,6 +4,22 @@ name: Recipe for treated cutting fluid v0
 produces_id: treated_cutting_fluid_v0
 target_item_id: treated_cutting_fluid_v0
 variant_id: v0
+inputs:
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: treated_cutting_fluid_v0
+    qty: 0.95
+    unit: kg
 steps:
-- process_id: chemical_treatment_v0
+  - process_id: chemical_treatment_v0
+    inputs:
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: treated_cutting_fluid_v0
+        qty: 0.95
+        unit: kg
 notes: "Use chemical_treatment_v0 to convert cutting_fluid into treated_cutting_fluid_v0. Inputs will be resolved from existing cutting_fluid resources."

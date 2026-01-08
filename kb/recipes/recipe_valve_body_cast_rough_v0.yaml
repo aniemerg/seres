@@ -5,7 +5,23 @@ produces_id: valve_body_cast_rough_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: valve_body_cast_rough_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 3.2
+    unit: kg
+outputs:
+  - item_id: valve_body_cast_rough_v0
+    qty: 3.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 3.2
+      unit: kg
+  outputs:
+    - item_id: valve_body_cast_rough_v0
+      qty: 3.0
+      unit: kg
   notes: Cast rough valve body; follow-on machining to achieve final tolerances if needed.
 notes: This recipe enables local production of the rough valve body cast; final finishing is handled by downstream machining as a separate recipe if needed.

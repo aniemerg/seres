@@ -1,6 +1,15 @@
 id: recipe_applicator_nozzle_v0
+kind: recipe
 target_item_id: applicator_nozzle
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: applicator_nozzle
+    qty: 0.04
+    unit: kg
 steps:
   - process_id: machining_process_drilling_v0
     inputs:

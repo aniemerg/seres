@@ -3,10 +3,46 @@ kind: recipe
 name: Recipe for potted electronic assembly
 target_item_id: potted_electronic_assembly
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: potting_compound
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: potted_electronic_assembly
+    qty: 1.5
+    unit: kg
 steps:
 - process_id: electronic_assembly_v0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: enclosure_small
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: electronic_assembly
+      qty: 1.0
+      unit: unit
   notes: "Populate PCB and assemble electronics into enclosure"
 - process_id: potting_and_encapsulation_v0
+  inputs:
+    - item_id: electronic_assembly
+      qty: 1.0
+      unit: kg
+    - item_id: potting_compound
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: potted_electronic_assembly
+      qty: 1.5
+      unit: kg
   notes: "Encapsulate assembled electronics in potting compound; degas and cure per potting process"
 assumptions: "Electronic assembly produced by electronic_assembly_v0; potting compound supplied by potting_compound material."
 notes: "Chain electronic assembly with encapsulation to produce potted_electronic_assembly."

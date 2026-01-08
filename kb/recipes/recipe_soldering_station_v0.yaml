@@ -1,20 +1,102 @@
 id: recipe_soldering_station_v0
 target_item_id: soldering_station
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 3.0
+    unit: kg
+  - item_id: nickel_chromium_alloy
+    qty: 0.2
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.05
+    unit: kg
+  - item_id: temperature_controller_module
+    qty: 1.0
+    unit: unit
+  - item_id: power_supply_low_voltage
+    qty: 1.0
+    unit: unit
+  - item_id: tip_holder_and_stand
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: soldering_station
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Machine base, iron holder, tip cleaning station"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 0.2
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 0.2
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Wind heating element coil for soldering iron tip"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.5
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 0.2
+        unit: kg
+      - item_id: tip_holder_and_stand
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Assemble soldering iron, heating element, tip holder, base"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: temperature_controller_module
+        qty: 1.0
+        unit: unit
+      - item_id: power_supply_low_voltage
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: soldering_station
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Install temperature controller, power supply, thermocouple"

@@ -17,6 +17,17 @@ outputs:
     notes: Rolling scale and trim losses
 steps:
   - process_id: rolling_basic_v0
+    inputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_bar_raw
+        qty: 1.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 0.05
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Hot or cold roll steel billet into bar stock

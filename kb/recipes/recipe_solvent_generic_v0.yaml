@@ -1,6 +1,14 @@
 id: recipe_solvent_generic_v0
 kind: recipe
 target_item_id: solvent_generic
+inputs:
+  - item_id: ethanol_or_isopropanol_feedstock_v0
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: solvent_generic
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: solvent_production_basic_v0
 notes: Placeholder recipe to produce solvent_generic.

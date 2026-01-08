@@ -2,6 +2,23 @@ id: recipe_magnetite_ore_v0
 kind: recipe
 target_item_id: magnetite_ore
 variant_id: hydration_v0
+inputs:
+  - item_id: olivine_concentrate
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.088
+    unit: kg
+outputs:
+  - item_id: magnetite_ore
+    qty: 0.563
+    unit: kg
+  - item_id: silica_purified
+    qty: 0.462
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.012
+    unit: kg
 steps:
   - process_id: olivine_hydration_v0
     est_time_hr: 8.0

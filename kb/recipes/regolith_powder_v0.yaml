@@ -1,22 +1,48 @@
 id: recipe_regolith_powder_v0
 target_item_id: regolith_powder
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 10.0
+    unit: kg
+  - item_id: regolith_coarse_fraction
+    qty: 6.0
+    unit: kg
+outputs:
+  - item_id: regolith_powder
+    qty: 5.7
+    unit: kg
 steps:
   - process_id: regolith_mining_simple_v0
     est_time_hr: 1.0
     machine_hours: 1.0
+    outputs:
+      - item_id: regolith_lunar_mare
+        qty: 10.0
+        unit: kg
   - process_id: regolith_screening_sieving_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: regolith_coarse_fraction
+        qty: 6.0
+        unit: kg
+      - item_id: regolith_fine_fraction
+        qty: 4.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
   - process_id: regolith_crushing_grinding_v0
     inputs:
       - item_id: regolith_coarse_fraction
-        qty: 10.0
+        qty: 6.0
         unit: kg
         notes: "Coarse fraction from screening"
     outputs:
       - item_id: regolith_powder
-        qty: 9.5
+        qty: 5.7
         unit: kg
         notes: "Fine ground powder (~5% dust loss)"
     est_time_hr: 1.5

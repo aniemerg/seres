@@ -1,7 +1,25 @@
 id: recipe_iron_impregnated_pla_filament_v0
 kind: recipe
 target_item_id: iron_impregnated_pla_filament_v0
+inputs:
+  - item_id: iron_powder_or_sheet
+    qty: 0.5
+    unit: kg
+  - item_id: polymer_printing_feedstock
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: metal_plastic_filament_extrusion_v0
+    inputs:
+      - item_id: iron_powder_or_sheet
+        qty: 0.5
+        unit: kg
+      - item_id: polymer_printing_feedstock
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: iron_impregnated_pla_filament_v0
+        qty: 1.0
+        unit: kg
 assumptions: "Composite filament produced by blending iron powder with PLA feedstock and extruding into filament."
 notes: "Recipe to manufacture iron-impregnated PLA filament v0 from Fe powder or sheet and PLA feedstock."

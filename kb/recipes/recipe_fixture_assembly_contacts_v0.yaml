@@ -2,9 +2,18 @@ id: recipe_fixture_assembly_contacts_v0
 kind: recipe
 name: Recipe for fixture assembly contacts (procurement)
 target_item_id: fixture_assembly_contacts
-produces_id: fixture_assembly_contacts
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 0.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: fixture_assembly_contacts
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: procure_fixture_assembly_contacts_v0
   inputs:

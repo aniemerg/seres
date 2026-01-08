@@ -2,6 +2,17 @@ id: recipe_encoder_pcb_assembled_v0
 kind: recipe
 target_item_id: encoder_pcb_assembled
 variant_id: v0
+inputs:
+  - item_id: pcb_bare_board
+    qty: 0.05
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: encoder_pcb_assembled
+    qty: 0.06
+    unit: kg
 steps:
   - process_id: pcb_assembly_basic_v0
     inputs:

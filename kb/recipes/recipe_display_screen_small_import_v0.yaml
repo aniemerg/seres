@@ -2,8 +2,25 @@ id: recipe_display_screen_small_import_v0
 kind: recipe
 target_item_id: display_screen_small
 variant_id: v0
+inputs:
+  - item_id: display_screen_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: display_screen_small
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: display_screen_small
+        qty: 0.5
+        unit: kg
+        notes: "Imported small display screens"
+    outputs:
+      - item_id: display_screen_small
+        qty: 0.5
+        unit: kg
     est_time_hr: 0.2
     labor_hours: 0.2
     notes: "Receive and stage imported display screens"

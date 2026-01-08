@@ -6,15 +6,57 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: haber_bosch_reactor_v0
 variant_id: v0
+inputs:
+  - item_id: furnace_shell_refractory
+    qty: 1.0
+    unit: unit
+  - item_id: refractory_brick_set
+    qty: 1.0
+    unit: unit
+  - item_id: steel_plate_raw
+    qty: 400.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 150.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: furnace_shell_refractory
+        qty: 1.0
+        unit: unit
+      - item_id: refractory_brick_set
+        qty: 1.0
+        unit: unit
+      - item_id: steel_plate_raw
+        qty: 400.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 150.0
+        unit: kg
     notes: "Basic assembly to integrate BOM components into haber_bosch_reactor_v0 subassembly"
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Mount reactor into enclosure and attach shielding"
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Install major modules: reactor core and shell interfaces"
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: analog_test_bench_neural_circuits_v0
+        qty: 1.0
+        unit: unit
     notes: "Seal enclosure and finalize integration"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: analog_test_bench_neural_circuits_v0
+        qty: 1.0
+        unit: unit
     notes: "Final inspection and readiness check"
 notes: "Placeholder recipe to resolve no_recipe gap for haber_bosch_reactor_v0; refine BOM/steps as design matures."

@@ -1,6 +1,22 @@
 id: recipe_structural_frame_medium_v0
 kind: recipe
 target_item_id: structural_frame_medium
+inputs:
+  - item_id: steel_stock
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: structural_frame_medium
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: frame_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: structural_frame_medium
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture structural_frame_medium from steel_stock via basic forming"

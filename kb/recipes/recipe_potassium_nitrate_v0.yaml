@@ -2,7 +2,35 @@ id: recipe_potassium_nitrate_v0
 kind: recipe
 target_item_id: potassium_nitrate
 variant_id: metathesis_v0
+inputs:
+  - item_id: sodium_nitrate
+    qty: 1.0
+    unit: kg
+  - item_id: sodium_chloride
+    qty: 0.877
+    unit: kg
+outputs:
+  - item_id: sodium_chloride
+    qty: 0.688
+    unit: kg
+  - item_id: potassium_nitrate
+    qty: 1.19
+    unit: kg
 steps:
   - process_id: nacl_regeneration_from_nano3_v0
+    inputs:
+      - item_id: sodium_nitrate
+        qty: 1.0
+        unit: kg
+      - item_id: sodium_chloride
+        qty: 0.877
+        unit: kg
+    outputs:
+      - item_id: sodium_chloride
+        qty: 0.688
+        unit: kg
+      - item_id: potassium_nitrate
+        qty: 1.19
+        unit: kg
     notes: "Metathesis reaction produces potassium_nitrate alongside NaCl."
 notes: "Recipe for potassium nitrate from NaNO3 + KCl metathesis."

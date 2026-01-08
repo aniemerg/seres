@@ -2,6 +2,19 @@ id: recipe_gear_set_medium_v0
 kind: recipe
 target_item_id: gear_set_medium
 variant_id: v0
+inputs:
+  - item_id: steel_bar_raw
+    qty: 65.0
+    unit: kg
+    notes: "Steel stock for gear blanks; ~8% machining loss"
+outputs:
+  - item_id: gear_set_medium
+    qty: 60.0
+    unit: kg
+    notes: "Medium gear set after cutting and finishing"
+  - item_id: steel_scrap_v0
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: gear_cutting_basic_v0
     inputs:

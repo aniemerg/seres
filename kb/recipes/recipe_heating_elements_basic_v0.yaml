@@ -1,13 +1,45 @@
 id: recipe_heating_elements_basic_v0
 target_item_id: heating_elements_basic
 variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 20.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 20.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.5
+    unit: kg
+  - item_id: ceramic_powder_mixture
+    qty: 4.0
+    unit: kg
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 20.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Draw nichrome or kanthal resistance wire to specified diameter (typically 1-3 mm) for heating elements"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 20.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 19.5
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 5.0
@@ -18,14 +50,37 @@ steps:
         qty: 4.0
         unit: kg
         notes: "Ceramic powder for forming insulator supports"
+    outputs:
+      - item_id: green_ceramic_part
+        qty: 4.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 2.5
     notes: "Form ceramic insulator supports and spacers for mounting heating coils"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 19.5
+        unit: kg
+      - item_id: green_ceramic_part
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 20.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Mount resistance coils on ceramic insulators, install electrical terminals and connectors"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: heating_elements_basic
+        qty: 20.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Test resistance values, verify insulation integrity, check for shorts to ground"

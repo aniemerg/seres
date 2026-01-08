@@ -2,6 +2,28 @@ id: recipe_nife_alloy_concentrate_v0
 kind: recipe
 name: NiFe alloy concentrate production
 target_item_id: nife_alloy_concentrate
+inputs:
+  - item_id: regolith_powder
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: nife_alloy_concentrate
+    qty: 8.0
+    unit: kg
+  - item_id: nife_alloy_byproduct
+    qty: 92.0
+    unit: kg
 steps:
   - process_id: nife_alloy_beneficiation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: nife_alloy_concentrate
+        qty: 8.0
+        unit: kg
+      - item_id: nife_alloy_byproduct
+        qty: 92.0
+        unit: kg
 notes: "Simplified recipe: produce NiFe alloy concentrate via beneficiation of regolith powder."

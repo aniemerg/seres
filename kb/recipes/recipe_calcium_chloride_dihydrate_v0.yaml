@@ -1,6 +1,29 @@
 id: recipe_calcium_chloride_dihydrate_v0
 kind: recipe
 target_item_id: calcium_chloride_dihydrate_v0
+variant_id: default
+inputs:
+  - item_id: calcium_chloride_solution_v0
+    qty: 2.0
+    unit: kg
+  - item_id: water
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: calcium_chloride_dihydrate_v0
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: calcium_chloride_dihydrate_production_v0
-notes: "Placeholder recipe; updated to modern step format using process_id field."
+    inputs:
+      - item_id: calcium_chloride_solution_v0
+        qty: 2.0
+        unit: kg
+      - item_id: water
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: calcium_chloride_dihydrate_v0
+        qty: 2.0
+        unit: kg
+notes: "Placeholder recipe aligned to seed crystallization process."

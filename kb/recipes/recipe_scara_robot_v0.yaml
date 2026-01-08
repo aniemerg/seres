@@ -1,6 +1,38 @@
 id: recipe_scara_robot_v0
 kind: recipe
 target_item_id: scara_robot_v0
+inputs:
+  - item_id: steel_frame_heavy
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: scara_robot_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_frame_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1
+        unit: unit
+    notes: "Machine mounting holes and precision surfaces on frame"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: scara_robot_v0
+        qty: 1
+        unit: unit
+    notes: "Assemble frame with bearings and actuators"

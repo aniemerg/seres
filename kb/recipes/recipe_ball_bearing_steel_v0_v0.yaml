@@ -1,6 +1,23 @@
 id: recipe_ball_bearing_steel_v0_v0
 kind: recipe
 target_item_id: ball_bearing_steel_v0
+variant_id: v0
+inputs:
+  - item_id: bearing_ball_steel
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: ball_bearing_steel_v0
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: ball_bearing_machining_v0
+    inputs:
+      - item_id: bearing_ball_steel
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: ball_bearing_steel_v0
+        qty: 0.5
+        unit: kg
 notes: "Minimal placeholder recipe to manufacture ball_bearing_steel_v0 from bearing_ball_steel; to be refined with full BOM."

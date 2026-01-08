@@ -6,35 +6,155 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: regolith_brick_press_hydraulic_v0
 variant_id: v0
+inputs:
+  - item_id: steel_frame_heavy_duty
+    qty: 1200.0
+    unit: kg
+  - item_id: press_platen_steel
+    qty: 200.0
+    unit: kg
+  - item_id: brick_mold_steel_set
+    qty: 100.0
+    unit: kg
+  - item_id: safety_guard_steel_mesh
+    qty: 50.0
+    unit: kg
+  - item_id: hydraulic_cylinder_large
+    qty: 1.0
+    unit: each
+  - item_id: hydraulic_pump_high_pressure
+    qty: 1.0
+    unit: each
+  - item_id: electric_motor_3_phase_5kw
+    qty: 1.0
+    unit: each
+  - item_id: control_circuit_hydraulic_press
+    qty: 1.0
+    unit: each
+  - item_id: pressure_gauge
+    qty: 2.0
+    unit: each
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: regolith_brick_press_hydraulic_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: cutting_basic_v0
+  inputs:
+    - item_id: steel_frame_heavy_duty
+      qty: 1200.0
+      unit: kg
+    - item_id: press_platen_steel
+      qty: 200.0
+      unit: kg
+    - item_id: brick_mold_steel_set
+      qty: 100.0
+      unit: kg
+    - item_id: safety_guard_steel_mesh
+      qty: 50.0
+      unit: kg
+  outputs:
+    - item_id: cut_parts
+      qty: 9.5
+      unit: kg
   est_time_hr: 2.0
   machine_hours: 2.0
   labor_hours: 1.0
   notes: "Cut frame members, platens, and mold plates."
 - process_id: welded_fabrication_basic_v0
+  inputs:
+    - item_id: cut_parts
+      qty: 9.5
+      unit: kg
+  outputs:
+    - item_id: welded_fabrications
+      qty: 1.0
+      unit: kg
   est_time_hr: 3.0
   machine_hours: 2.5
   labor_hours: 2.5
   notes: "Weld press frame and mold housing."
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: welded_fabrications
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 1.0
+      unit: kg
   est_time_hr: 2.0
   machine_hours: 1.5
   labor_hours: 1.5
   notes: "Machine platen faces, mold cavity surfaces, mounting holes."
 - process_id: hydraulic_system_assembly_v0
+  inputs:
+    - item_id: hydraulic_cylinder_large
+      qty: 1.0
+      unit: each
+    - item_id: hydraulic_pump_high_pressure
+      qty: 1.0
+      unit: each
+    - item_id: electric_motor_3_phase_5kw
+      qty: 1.0
+      unit: each
   est_time_hr: 1.5
   labor_hours: 1.5
   notes: "Install cylinder, hoses, valves, and power unit."
 - process_id: hydraulic_system_integration_v0
+  inputs:
+    - item_id: hydraulic_control_valve_set
+      qty: 1.0
+      unit: kg
+    - item_id: piping_components
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: hydraulic_system_medium
+      qty: 1.0
+      unit: kg
   est_time_hr: 1.0
   labor_hours: 1.0
   notes: "Fill/bleed hydraulics; set relief valves."
 - process_id: wiring_and_electronics_integration_v0
+  inputs:
+    - item_id: control_circuit_hydraulic_press
+      qty: 1.0
+      unit: each
+    - item_id: pressure_gauge
+      qty: 2.0
+      unit: each
+    - item_id: electrical_wire_and_connectors
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: wired_electrical_system
+      qty: 1.0
+      unit: unit
   est_time_hr: 0.8
   labor_hours: 0.8
   notes: "Wire controls, limit switches, safety interlocks."
 - process_id: integration_test_basic_v0
+  inputs:
+    - item_id: wired_electrical_system
+      qty: 1.0
+      unit: unit
+    - item_id: hydraulic_system_medium
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: regolith_brick_press_hydraulic_v0
+      qty: 1.0
+      unit: unit
   est_time_hr: 0.8
   labor_hours: 0.6
   notes: "Cycle press with mold, verify pressure and ejection."

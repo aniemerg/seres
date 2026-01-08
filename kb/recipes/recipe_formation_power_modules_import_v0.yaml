@@ -6,24 +6,117 @@ produces_unit: unit
 
 target_item_id: formation_power_modules
 variant_id: v0
+inputs:
+  - item_id: bare_pcb
+    qty: 5.0
+    unit: kg
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink
+    qty: 1.0
+    unit: unit
+  - item_id: thermal_interface_material
+    qty: 0.01
+    unit: kg
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 3.0
+    unit: kg
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+  - item_id: assembled_electrical_system
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: formation_power_modules
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: bare_pcb
+        qty: 5.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Assemble formation power module PCB"
   - process_id: power_component_assembly_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Mount MOSFETs, inductors, capacitors, transformers into core"
   - process_id: heat_sink_installation_v0
+    inputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
+      - item_id: heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: thermal_interface_material
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Attach heatsinks and thermal interface"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 3.0
+        unit: kg
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Encapsulate assembly in enclosure and wire interfaces"
   - process_id: electrical_testing_v0
+    inputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: formation_power_modules
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Electrical testing and verification"

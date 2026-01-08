@@ -1,65 +1,42 @@
 id: recipe_impeller_blades_set_v0
+kind: recipe
+name: Recipe for impeller blades set
 target_item_id: impeller_blades_set
 variant_id: v0
+inputs:
+  - item_id: steel_scrap_refined
+    qty: 3.0
+    unit: kg
+  - item_id: steel_sheet_3mm
+    qty: 1.5
+    unit: kg
+outputs:
+  - item_id: impeller_blades_set
+    qty: 2.0
+    unit: kg
+  - item_id: metal_swarf
+    qty: 2.5
+    unit: kg
 steps:
-  - process_id: metal_casting_process_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_scrap_refined
         qty: 3.0
         unit: kg
-    outputs:
-      - item_id: steel_bar_stock
-        qty: 2.7
-        unit: kg
-    est_time_hr: 2.0
-    notes: Cast central hub for impeller (modeled as steel_bar_stock)
-  - process_id: sheet_metal_forming_process_v0
-    inputs:
       - item_id: steel_sheet_3mm
         qty: 1.5
-        unit: kg
-    outputs:
-      - item_id: steel_sheet_3mm
-        qty: 1.4
-        unit: kg
-    est_time_hr: 2.0
-    notes: Form or cut individual blades from sheet metal (keep as steel_sheet_3mm)
-  - process_id: machining_process_turning_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 2.7
-        unit: kg
-    outputs:
-      - item_id: steel_bar_stock
-        qty: 2.5
-        unit: kg
-    est_time_hr: 1.5
-    notes: Machine hub bore, keyway, and blade mounting surfaces (keep as steel_bar_stock)
-  - process_id: welding_process_general_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 2.5
-        unit: kg
-      - item_id: steel_sheet_3mm
-        qty: 1.4
-        unit: kg
-    outputs:
-      - item_id: impeller_assembly_welded
-        qty: 3.8
-        unit: kg
-    est_time_hr: 2.0
-    notes: Weld blades to hub at correct angles
-  - process_id: machining_process_milling_v0
-    inputs:
-      - item_id: impeller_assembly_welded
-        qty: 3.8
         unit: kg
     outputs:
       - item_id: impeller_blades_set
         qty: 2.0
         unit: kg
-    est_time_hr: 1.0
-    notes: Final machining, balancing, and finishing
+      - item_id: metal_swarf
+        qty: 2.5
+        unit: kg
+    est_time_hr: 8.5
+    machine_hours: 6.5
+    labor_hours: 2.0
+    notes: "Cast central hub from steel scrap, form individual blades from sheet metal, machine hub bore and blade mounting surfaces, weld blades to hub at correct angles, final machining, balancing, and finishing"
 assumptions: |
   Steel construction for durability and corrosion resistance.
   Welded blade-to-hub joints provide adequate strength.

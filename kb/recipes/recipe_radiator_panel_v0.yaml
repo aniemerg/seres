@@ -1,13 +1,33 @@
 id: recipe_radiator_panel_v0
 target_item_id: radiator_panel
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 100.0
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 95.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Fabricate radiator panel with integrated fin structure from steel or aluminum sheet"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 95.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Weld fin arrays and coolant channels to panel base"
@@ -21,6 +41,14 @@ steps:
     labor_hours: 1.0
     notes: "Pressure test internal coolant channels"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 95.0
+        unit: kg
+    outputs:
+      - item_id: radiator_panel
+        qty: 100.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify surface finish, emissivity, and leak-tightness"

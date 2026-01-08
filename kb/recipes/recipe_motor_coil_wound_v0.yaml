@@ -1,6 +1,7 @@
 id: recipe_motor_coil_wound_v0
 kind: recipe
 target_item_id: motor_coil_wound
+variant_id: v0
 inputs:
   - item_id: aluminum_wire
     qty: 28.4
@@ -18,4 +19,18 @@ byproducts:
     unit: kg
 steps:
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 28.4
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 1.4
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 27.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 2.8
+        unit: kg
 notes: "Wind aluminum wire with insulation into motor coils. 28.4 kg wire + 1.4 kg insulation → 27 kg coils + 2.8 kg scrap."

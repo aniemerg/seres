@@ -1,6 +1,20 @@
 id: recipe_lens_assembly_magnifying_v0
 kind: recipe
 target_item_id: lens_assembly_magnifying
+inputs:
+  - item_id: glass_lens_eyepiece
+    qty: 1.0
+    unit: unit
+  - item_id: cast_glass_parts
+    qty: 0.3
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: lens_assembly_magnifying
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:

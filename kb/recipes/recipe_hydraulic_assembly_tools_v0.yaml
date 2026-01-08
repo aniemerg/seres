@@ -1,16 +1,53 @@
 id: recipe_hydraulic_assembly_tools_v0
 target_item_id: hydraulic_assembly_tools
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine tool bodies, wrenches, crimping dies"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble torque wrenches, flare tools, hand pumps"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_assembly_tools
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble pressure test gauges and electronic torque wrenches"

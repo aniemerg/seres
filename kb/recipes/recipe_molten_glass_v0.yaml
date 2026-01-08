@@ -1,18 +1,58 @@
 id: recipe_molten_glass_v0
 target_item_id: molten_glass
 variant_id: v0
+produces_qty: 25.0
+produces_unit: kg
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: molten_glass
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: mineral_processing_basic_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: concentrated_mineral
+        qty: 30.0
+        unit: kg
+      - item_id: tailings
+        qty: 70.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Crush and process anorthite or basalt feedstock to uniform particle size"
-  - process_id: glass_melting_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Melt feedstock at 1400-1600°C in glass furnace"
   - process_id: chemical_purification_v0
+    inputs:
+      - item_id: concentrated_mineral
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: silica_purified
+        qty: 28.0
+        unit: kg
+      - item_id: tailings
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Remove impurities and refine glass composition for optical quality"
+  - process_id: glass_melting_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 28.0
+        unit: kg
+    outputs:
+      - item_id: molten_glass
+        qty: 25.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: "Melt feedstock at 1400-1600°C in glass furnace"
 assumptions: Glass melted from anorthite or basalt feedstock using high-temperature furnace.
 notes: Molten glass at working temperature for forming operations. Used for lenses, tubes, and optical components.

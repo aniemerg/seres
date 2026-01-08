@@ -3,20 +3,23 @@ name: Cryocooler core unit assembly v0
 kind: process
 process_type: batch
 inputs:
-  - item_id: machined_metal_block_v0
-    qty: 2.0
-    unit: kg
+- item_id: machined_metal_block_v0
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: cryocooler_core_unit_v0
-    qty: 2.0
-    unit: kg
-resource_requirements: []
+- item_id: cryocooler_core_unit_v0
+  qty: 2.0
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Assembly energy for 2 kg batch"
+  notes: Assembly energy for 2 kg batch
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Assemble cryocooler core unit from machined metal block (placeholder)."
+notes: Assemble cryocooler core unit from machined metal block (placeholder).

@@ -2,8 +2,24 @@ id: recipe_base_grease_stock_v0
 kind: recipe
 target_item_id: base_grease_stock_v0
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: base_grease_stock_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: base_grease_stock_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Receive and stage imported base grease stock"

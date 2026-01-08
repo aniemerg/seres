@@ -6,23 +6,65 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: truss_node_connector_set
 variant_id: v1
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 10.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 9.5
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 9.5
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.5
     notes: "Initial cutting of components for truss node connectors"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 9.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.0
     labor_hours: 1.0
     notes: "Welding subassemblies for connector set"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Finish surfaces and holes"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: truss_node_connector_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     machine_hours: 0.2
     labor_hours: 0.3

@@ -1,7 +1,22 @@
 id: recipe_heat_exchanger_tube_bundle_v0
 kind: recipe
+name: Recipe for heat exchanger tube bundle
 target_item_id: heat_exchanger_tube_bundle
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 110.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: heat_exchanger_tube_bundle
+    qty: 100.0
+    unit: kg
+  - item_id: metal_scrap
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: tube_forming_process_v0
     inputs:

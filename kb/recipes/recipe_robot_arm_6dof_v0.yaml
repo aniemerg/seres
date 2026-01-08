@@ -6,10 +6,63 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: robot_arm_6dof_v0
 variant_id: v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 66.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 60.0
+    unit: kg
+  - item_id: import_misc_components_set
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 66.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
   - process_id: finishing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 60.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 60.0
+        unit: kg
+      - item_id: import_misc_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 61.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 61.0
+        unit: kg
+    outputs:
+      - item_id: robot_arm_6dof_v0
+        qty: 60.0
+        unit: kg
 notes: "Prototype manufacturing path for robot_arm_6dof_v0 using generic metalworking and assembly steps."

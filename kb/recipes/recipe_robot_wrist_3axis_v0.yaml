@@ -1,13 +1,26 @@
 id: recipe_robot_wrist_3axis_v0
 kind: recipe
 target_item_id: robot_wrist_3axis
+variant_id: v0
 inputs:
   - item_id: aluminum_alloy_ingot
     qty: 6.0
     unit: kg
+  - item_id: cast_metal_parts
+    qty: 5.5
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: machined_part_raw
+    qty: 5.2
+    unit: kg
+    notes: "Intermediate for assembly step"
   - item_id: steel_stock
     qty: 2.0
     unit: kg
+  - item_id: machined_steel_part_precision
+    qty: 1.8
+    unit: kg
+    notes: "Intermediate for assembly step"
   - item_id: bearing_set_small
     qty: 0.3
     unit: kg
@@ -24,15 +37,89 @@ byproducts:
     unit: kg
 steps:
   - process_id: casting_basic_v0
-    note: "Cast aluminum housing components for 3-axis wrist module"
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 5.5
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast aluminum housing components for 3-axis wrist module"
   - process_id: machining_rough_v0
-    note: "CNC machine bearing bores, shaft seats, mounting surfaces"
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 5.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 5.2
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "CNC machine bearing bores, shaft seats, mounting surfaces"
   - process_id: steel_refining_basic_v0
-    note: "Refine steel for wrist shafts from lunar iron"
+    inputs:
+      - item_id: steel_stock
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.9
+        unit: kg
+      - item_id: slag
+        qty: 0.1
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Refine steel for wrist shafts from lunar iron"
   - process_id: machining_rough_v0
-    note: "Machine steel shafts with precision diameters"
+    inputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.9
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 1.8
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Machine steel shafts with precision diameters"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 5.2
+        unit: kg
+      - item_id: machined_steel_part_precision
+        qty: 1.8
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 0.3
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble wrist housing, install bearings and shafts"
   - process_id: alignment_and_testing_basic_v0
-    note: "Assemble wrist, install bearings, align joints, test range of motion"
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: robot_wrist_3axis
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 2.0
+    notes: "Align joints and test range of motion"
 notes: |
   Manufactures 3-axis robot wrist module from lunar materials.
 

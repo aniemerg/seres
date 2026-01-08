@@ -2,6 +2,18 @@ id: recipe_alumina_crude_v0
 kind: recipe
 target_item_id: alumina_crude
 variant_id: v0
+inputs:
+  - item_id: anorthite_ore
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: alumina_crude
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: ore_tailings
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: alumina_crude_extraction_v0
 notes: Basic recipe for producing crude alumina from ore processing.

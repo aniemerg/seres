@@ -1,19 +1,37 @@
 id: recipe_silicon_seed_crystal_v0
 target_item_id: silicon_seed_crystal
 variant_id: v0
+inputs:
+  - item_id: silicon_purified
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_seed_crystal
+    qty: 0.01
+    unit: kg
+  - item_id: silicon_polycrystalline_ultrapure
+    qty: 0.97
+    unit: kg
 steps:
   - process_id: zone_refining_silicon_v0
     est_time_hr: 48.0
     machine_hours: 48.0
     notes: "Zone refine polycrystalline silicon to create oriented single crystal"
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: silicon_polycrystalline_ultrapure
+        qty: 0.98
+        unit: kg
+    outputs:
+      - item_id: silicon_seed_crystal
+        qty: 0.01
+        unit: kg
+      - item_id: silicon_polycrystalline_ultrapure
+        qty: 0.97
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cut small seed crystal rods (~1-10g each) from single-crystal boule"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Verify crystal orientation and quality using X-ray diffraction"
 assumptions: |
   Seed crystals produced from zone-refined single-crystal silicon.
   Zone refining creates initial single crystal with known orientation.

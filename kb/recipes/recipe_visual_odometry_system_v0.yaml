@@ -1,11 +1,66 @@
 id: recipe_visual_odometry_system_v0
 kind: recipe
 target_item_id: visual_odometry_system_v0
+inputs:
+  - item_id: camera_vacuum_tube_vidicon_v0
+    qty: 2.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: steel_frame_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: visual_odometry_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
     notes: Assemble VO sensor module base frame, housing, and electronics into submodule
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: analog_test_bench_neural_circuits_v0
+        qty: 1.0
+        unit: unit
+      - item_id: camera_vacuum_tube_vidicon_v0
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
     notes: Mount VO submodule into enclosure and attach shielding
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     notes: Integrate wiring, sensors, and camera interface for visual odometry
 notes: Basic manufacturing path for Visual Odometry System v0; placeholder until BOMs defined.

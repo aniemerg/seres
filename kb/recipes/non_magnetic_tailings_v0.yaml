@@ -1,8 +1,31 @@
 id: recipe_non_magnetic_tailings_v0
+kind: recipe
 target_item_id: non_magnetic_tailings
 variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: non_magnetic_tailings
+    qty: 0.8
+    unit: kg
+  - item_id: magnetic_concentrate
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: beneficiate_regolith_magnetic_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: non_magnetic_tailings
+        qty: 0.8
+        unit: kg
+      - item_id: magnetic_concentrate
+        qty: 0.2
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
 assumptions: Tailings from magnetic separation of regolith powder.

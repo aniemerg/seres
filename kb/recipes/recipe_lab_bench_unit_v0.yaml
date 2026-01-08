@@ -2,8 +2,46 @@ id: recipe_lab_bench_unit_v0
 kind: recipe
 name: Laboratory bench unit fabrication v0
 target_item_id: lab_bench_unit_v0
+inputs:
+  - item_id: steel_stock
+    qty: 25.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 1.25
+    unit: kg
+outputs:
+  - item_id: lab_bench_unit_v0
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 25.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 1.25
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 25.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: lab_bench_unit_v0
+        qty: 25.0
+        unit: kg
 notes: "Seed recipe to fabricate lab_bench_unit_v0 using standard fabrication steps."

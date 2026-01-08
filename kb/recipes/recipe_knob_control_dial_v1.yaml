@@ -2,6 +2,13 @@ id: recipe_knob_control_dial_v1
 kind: recipe
 name: Recipe for knob_control_dial v1
 target_item_id: knob_control_dial
+variant_id: v1
+inputs:
+  - item_id: extruded_plastic_profile
+    qty: 0.25
+    unit: kg
 steps:
   - process_id: knob_control_dial_machining_v1
+    est_time_hr: 0.5
+    machine_hours: 0.5
     notes: "Machining extruded plastic profile into knob_control_dial."

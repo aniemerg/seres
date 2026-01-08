@@ -2,16 +2,68 @@ id: recipe_compressor_pump_small_v0
 kind: recipe
 target_item_id: compressor_pump_small
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 45.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 42.0
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: machined_part_raw
+    qty: 40.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: hydraulic_seals_set
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: compressor_pump_small
+    qty: 40.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 45.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 42.0
+      unit: kg
   est_time_hr: 1.0
   machine_hours: 1.0
   notes: "Cast pump housing and impeller"
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 42.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 40.0
+      unit: kg
   est_time_hr: 1.5
   machine_hours: 1.5
   notes: "Machine pump internals, shaft, bearing surfaces"
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 40.0
+      unit: kg
+    - item_id: hydraulic_seals_set
+      qty: 1.0
+      unit: kg
+    - item_id: fastener_kit_small
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: compressor_pump_small
+      qty: 40.0
+      unit: kg
   est_time_hr: 1.0
   labor_hours: 1.0
   notes: "Assemble motor, impeller, seals, housing"

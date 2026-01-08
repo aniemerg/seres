@@ -1,5 +1,24 @@
 id: recipe_testing_and_calibration_circuit_v0
 kind: recipe
 target_item_id: testing_and_calibration_circuit_v0
+variant_id: v0
+inputs:
+  - item_id: pcb_assembled_board
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: testing_and_calibration_circuit_v0
+    qty: 0.5
+    unit: kg
 steps:
-  - process_id: electrical_testing_and_calibration_v0
+  - process_id: testing_and_calibration_circuit_v0
+    inputs:
+      - item_id: pcb_assembled_board
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: testing_and_calibration_circuit_v0
+        qty: 0.5
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Test and calibrate assembled circuit"

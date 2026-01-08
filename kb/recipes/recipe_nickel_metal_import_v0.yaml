@@ -2,6 +2,17 @@ id: recipe_nickel_metal_import_v0
 kind: recipe
 target_item_id: nickel_metal
 variant_id: v0
+inputs:
+  - item_id: meteorite_iron
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: nickel_metal
+    qty: 1.0
+    unit: kg
+  - item_id: iron_metal
+    qty: 8.0
+    unit: kg
 steps:
   - process_id: nickel_extraction_meteorite_v0
     inputs:
@@ -12,6 +23,9 @@ steps:
     outputs:
       - item_id: nickel_metal
         qty: 1.0
+        unit: kg
+      - item_id: iron_metal
+        qty: 8.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 2.0

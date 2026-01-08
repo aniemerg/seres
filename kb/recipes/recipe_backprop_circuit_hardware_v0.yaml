@@ -1,6 +1,44 @@
 id: recipe_backprop_circuit_hardware_v0
 target_item_id: backprop_circuit_hardware_v0
 variant_id: v0
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: pcb_backprop_bare
+    qty: 0.45
+    unit: kg
+    notes: "Intermediate for component placement"
+  - item_id: operational_amplifier_ic
+    qty: 20.0
+    unit: each
+  - item_id: analog_multiplier_ic
+    qty: 10.0
+    unit: each
+  - item_id: capacitor_ceramic_generic
+    qty: 50.0
+    unit: each
+  - item_id: resistor_chip_smd
+    qty: 100.0
+    unit: each
+  - item_id: potentiometer_wirewound_v0
+    qty: 20.0
+    unit: each
+  - item_id: pcb_populated
+    qty: 1.5
+    unit: kg
+    notes: "Intermediate for soldering step"
+  - item_id: solder_tin_lead
+    qty: 0.1
+    unit: kg
+  - item_id: pcb_assembled_board
+    qty: 1.55
+    unit: kg
+    notes: "Intermediate for testing and calibration"
+outputs:
+  - item_id: backprop_circuit_hardware_v0
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: pcb_fabrication_process_v0
     inputs:

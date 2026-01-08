@@ -3,29 +3,75 @@ kind: recipe
 name: Recipe for electric motor 3-phase 5 kW v0
 target_item_id: electric_motor_3_phase_5kw
 variant_id: v0
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 15.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 5.0
+    unit: kg
+  - item_id: steel_shaft
+    qty: 3.0
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 10.0
+    unit: kg
+  - item_id: bearing_set
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: electric_motor_3_phase_5kw
+    qty: 1
+    unit: unit
 steps:
   - process_id: lamination_stamping_v0
+    inputs:
+      - item_id: electrical_steel_sheet
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 14.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0
     labor_hours: 0.8
     notes: "Stamp stator laminations for 3-phase motor"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 14.5
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 19.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.0
     notes: "Wind stator windings for 3-phase motor"
   - process_id: motor_final_assembly_v0
-    est_time_hr: 2.0
-    machine_hours: 1.5
-    labor_hours: 1.5
-    notes: "Assemble laminations, shaft, housing, bearings"
-  - process_id: balancing_dynamic_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.8
-    notes: "Balance rotor assembly"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    machine_hours: 0.5
-    labor_hours: 0.5
-    notes: "Operational and safety checks"
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 19.0
+        unit: kg
+      - item_id: steel_shaft
+        qty: 3.0
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 10.0
+        unit: kg
+      - item_id: bearing_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: electric_motor_3_phase_5kw
+        qty: 1
+        unit: unit
+    est_time_hr: 3.5
+    machine_hours: 2.5
+    labor_hours: 2.3
+    notes: "Assemble motor, balance rotor, and perform operational checks"

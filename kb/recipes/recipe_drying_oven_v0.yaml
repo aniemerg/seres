@@ -1,10 +1,59 @@
 id: recipe_drying_oven_v0
 kind: recipe
 name: Recipe for drying oven
-produces_id: drying_oven
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: drying_oven
+variant_id: v0
+inputs:
+  - item_id: structural_steel_frame
+    qty: 60.0
+    unit: kg
+  - item_id: insulation_panel_high_temp
+    qty: 30.0
+    unit: kg
+  - item_id: heating_element_resistive
+    qty: 4
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: drying_oven
+    qty: 1
+    unit: unit
 steps:
-- process_id: assembly_basic_v0
-notes: "Local production path to assemble drying oven from BOM_drying_oven_v0 components"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_frame
+        qty: 60.0
+        unit: kg
+      - item_id: insulation_panel_high_temp
+        qty: 30.0
+        unit: kg
+      - item_id: heating_element_resistive
+        qty: 4
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: drying_oven
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 2.0
+    labor_hours: 6.0
+    notes: "Assemble steel frame, install insulation panels, mount heating elements, integrate temperature controller and power electronics"
+assumptions: "Drying oven assembled from structural frame, insulation, heating elements, and control systems"
+notes: "Assembly of drying oven for materials drying and heat treatment processes"

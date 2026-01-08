@@ -4,7 +4,23 @@ name: Air bearing assembly v1
 produces_id: air_bearing_assembly
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+- item_id: bearing_set
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: air_bearing_assembly
+  qty: 1.0
+  unit: unit
 steps:
 - process_id: air_bearing_assembly_basic_v0
+  inputs:
+  - item_id: bearing_set
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: air_bearing_assembly
+    qty: 1.0
+    unit: unit
 notes: Migration to v1; same steps as v0; placeholder improvements
 target_item_id: air_bearing_assembly

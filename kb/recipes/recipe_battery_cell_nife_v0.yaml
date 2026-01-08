@@ -2,10 +2,64 @@ id: recipe_battery_cell_nife_v0
 kind: recipe
 target_item_id: battery_cell_nife
 variant_id: v0
+inputs:
+  - item_id: electrode_mix_nife
+    qty: 2.4
+    unit: kg
+  - item_id: current_collector_nickel_or_steel_mesh
+    qty: 0.5
+    unit: kg
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: water
+    qty: 7.0
+    unit: kg
 steps:
   - process_id: electrode_fabrication_nife
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 1.0
+        unit: kg
+      - item_id: current_collector_nickel_or_steel_mesh
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: electrodes_nife_set
+        qty: 1.5
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 1.0
+    notes: "Fabricate Ni-Fe electrodes from mix and current collector"
   - process_id: electrolyte_prep_koh
+    inputs:
+      - item_id: potassium_hydroxide
+        qty: 3.0
+        unit: kg
+      - item_id: water
+        qty: 7.0
+        unit: kg
+    outputs:
+      - item_id: electrolyte_koh_solution
+        qty: 10.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 0.5
+    notes: "Prepare KOH electrolyte solution"
   - process_id: cell_assembly_and_seal_nife
-assumptions: "Local Ni-Fe battery cell path; variant v0 alias to battery_cell_nife."
-nodes: ""
-notes: "Local Ni-Fe battery cell v0 path producing the alias item battery_cell_nife."
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 1.4
+        unit: kg
+      - item_id: electrolyte_koh_solution
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: battery_cell_nife
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 0.6
+    notes: "Assemble and seal Ni-Fe battery cell with electrodes and electrolyte"
+assumptions: "Local Ni-Fe battery cell path; variant v0 alias to battery_cell_nife. Uses electrode mix directly in assembly step."
+notes: "Local Ni-Fe battery cell v0 path producing battery_cell_nife; 3-step process: electrode fabrication, electrolyte prep, cell assembly."

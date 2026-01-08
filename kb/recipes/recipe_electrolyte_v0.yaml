@@ -2,6 +2,28 @@ id: recipe_electrolyte_v0
 kind: recipe
 variant_id: v0
 target_item_id: electrolyte
+inputs:
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: water
+    qty: 7.0
+    unit: kg
+outputs:
+  - item_id: electrolyte
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: electrolyte_prep_koh
+    inputs:
+      - item_id: potassium_hydroxide
+        qty: 3.0
+        unit: kg
+      - item_id: water
+        qty: 7.0
+        unit: kg
+    outputs:
+      - item_id: electrolyte
+        qty: 10.0
+        unit: kg
 notes: "Seed production path: derive generic electrolyte from KOH electrolyte preparation; placeholder until broader electrolyte types are defined."

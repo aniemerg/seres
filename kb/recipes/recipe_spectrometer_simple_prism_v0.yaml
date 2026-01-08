@@ -1,8 +1,52 @@
 id: recipe_spectrometer_simple_prism_v0
 kind: recipe
+name: Recipe for spectrometer simple prism
 target_item_id: spectrometer_simple_prism_v0
+variant_id: v0
+inputs:
+  - item_id: fused_silica_glass
+    qty: 2.0
+    unit: kg
+  - item_id: formed_sheet_metal_parts
+    qty: 3.0
+    unit: kg
+  - item_id: optic_flow_sensor_array_v0
+    qty: 0.5
+    unit: kg
+  - item_id: metal_part_drilled
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: spectrometer_simple_prism_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: glass_casting_v0
-  - process_id: precision_grinding_basic_v0
-  - process_id: finishing_basic_v0
-notes: "Minimal production path to manufacture prism-based spectrometer component; placeholder path for gap resolution."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: fused_silica_glass
+        qty: 2.0
+        unit: kg
+      - item_id: formed_sheet_metal_parts
+        qty: 3.0
+        unit: kg
+      - item_id: optic_flow_sensor_array_v0
+        qty: 0.5
+        unit: kg
+      - item_id: metal_part_drilled
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: spectrometer_simple_prism_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 4.0
+    labor_hours: 4.0
+    notes: "Cast optical glass prism and lenses, precision grind prism surfaces for proper dispersion angles, finish and polish optical surfaces to high quality, assemble prism in metal housing with detector array and slit assembly, align optical path, calibrate wavelength response"
+notes: "Minimal production path to manufacture prism-based spectrometer component; placeholder path for gap resolution. Uses fused_silica_glass as optical glass within 5x equivalence."

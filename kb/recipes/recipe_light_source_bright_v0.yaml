@@ -1,13 +1,86 @@
 id: recipe_light_source_bright_v0
 kind: recipe
 target_item_id: light_source_bright
+inputs:
+  - item_id: illumination_lamp_led
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.2
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: light_source_bright
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: illumination_lamp_led
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: "Assemble base housing and initial electronics into light source submodule"
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_steel_small
+        qty: 1.0
+        unit: kg
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: "Mount submodule into enclosure and shield"
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 0.2
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: unit
     notes: "Assemble LED driver circuitry and power electronics"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: light_source_bright
+        qty: 1.0
+        unit: unit
     notes: "Wire in power input and LED interface; integrate sensors/controls where applicable"
 notes: "Basic production path for light_source_bright; placeholder steps pending BOM refinements"

@@ -4,11 +4,93 @@ target_item_id: inert_atmosphere_system
 name: Recipe for inert atmosphere system
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: gas_cylinder_argon_or_nitrogen
+    qty: 2
+    unit: unit
+  - item_id: gas_supply_regulator
+    qty: 2
+    unit: unit
+  - item_id: gas_flow_controller
+    qty: 1
+    unit: unit
+  - item_id: oxygen_sensor_module
+    qty: 1
+    unit: unit
+  - item_id: piping_components
+    qty: 1
+    unit: unit
+  - item_id: vacuum_pump_small
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+  - item_id: assembled_electrical_equipment
+    qty: 1
+    unit: kg
 steps:
 - process_id: machine_assembly_basic_v0
+  inputs:
+    - item_id: enclosure_electrical_medium
+      qty: 1
+      unit: unit
+    - item_id: piping_components
+      qty: 1
+      unit: unit
+    - item_id: gas_cylinder_argon_or_nitrogen
+      qty: 2
+      unit: unit
+    - item_id: gas_supply_regulator
+      qty: 2
+      unit: unit
+    - item_id: gas_flow_controller
+      qty: 1
+      unit: unit
+    - item_id: vacuum_pump_small
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
   notes: Assemble base inert atmosphere system frame + electronics into submodule
 - process_id: electrical_assembly_basic_v0
+  inputs:
+    - item_id: control_panel_basic
+      qty: 1
+      unit: unit
+    - item_id: oxygen_sensor_module
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: assembled_electrical_equipment
+      qty: 1
+      unit: kg
   notes: Integrate gas controls, sensors, purge interface, and control electronics
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    - item_id: assembled_electrical_equipment
+      qty: 1
+      unit: kg
+  outputs:
+    - item_id: inert_atmosphere_system
+      qty: 1
+      unit: unit
   notes: Final assembly and enclosure integration to form complete system
 notes: Basic 3-step assembly of the inert atmosphere system from BOM components; inputs provided by BOM.

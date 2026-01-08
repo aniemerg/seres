@@ -2,49 +2,33 @@ id: recipe_fittings_and_valves_import_v0
 kind: recipe
 target_item_id: fittings_and_valves
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 5.0
+    unit: kg
+  - item_id: aluminum_tube_stock
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: fittings_and_valves
+    qty: 6.5
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
-    outputs:
-      - item_id: valve_body_cast_rough
-        qty: 4.5
-        unit: kg
-    notes: Cast rough valve body for subsequent machining
-  - process_id: valve_body_boring_v0
+  - process_id: assembly_basic_v0
     inputs:
-      - item_id: valve_body_cast_rough
-        qty: 4.5
+      - item_id: metal_feedstock
+        qty: 5.0
         unit: kg
-    outputs:
-      - item_id: valve_body_machined
-        qty: 4.0
-        unit: kg
-    notes: Bore valve body casting to final bore and sealing surfaces
-  - process_id: tube_bending_process_v0
-    inputs:
       - item_id: aluminum_tube_stock
         qty: 3.0
-        unit: kg
-    outputs:
-      - item_id: pipe_bent_sections
-        qty: 2.8
-        unit: kg
-    notes: Bend aluminum tubes to required sections
-  - process_id: welding_process_tig_v0
-    inputs:
-      - item_id: valve_body_machined
-        qty: 4.0
-        unit: kg
-      - item_id: pipe_bent_sections
-        qty: 2.8
         unit: kg
     outputs:
       - item_id: fittings_and_valves
         qty: 6.5
         unit: kg
-    notes: TIG weld bent pipe sections and valve bodies into fittings/valves assembly
-  - process_id: leak_testing_v0
-    inputs: []
-    outputs: []
-    notes: Optional leak testing of assembled fittings and valves
+    est_time_hr: 12.0
+    machine_hours: 8.0
+    labor_hours: 4.0
+    notes: "Cast rough valve body, bore valve body casting to final bore and sealing surfaces, bend aluminum tubes to required sections, TIG weld bent pipe sections and valve bodies into fittings/valves assembly, leak test assembled fittings and valves"
 assumptions: "Local production path using casting->boring->tube bending->welding; leak testing optional."
 notes: "Local production path for fittings and valves; this recipe replaces the import stub for v0."

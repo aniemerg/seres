@@ -1,6 +1,28 @@
 id: recipe_amplitude_modulation_circuit_v0
 kind: recipe
 target_item_id: amplitude_modulation_circuit_v0
+inputs:
+  - item_id: pcb_substrate_v0
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: amplitude_modulation_circuit_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_substrate_v0
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: amplitude_modulation_circuit_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture amplitude_modulation_circuit_v0 using a basic assembly step."

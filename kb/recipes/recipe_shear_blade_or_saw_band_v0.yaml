@@ -12,21 +12,53 @@ outputs:
     unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: tool_steel_high_carbon_v0
+        qty: 11.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 11.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Machine blade blanks from tool steel stock to approximate dimensions"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 11.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 11.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.0
     notes: "Heat treat blades to achieve hardness (HRC 55-62)"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 11.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 10.5
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Grind cutting edges to precise angles and sharpness"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 10.5
+        unit: kg
+    outputs:
+      - item_id: shear_blade_or_saw_band
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify blade hardness, edge geometry, and straightness"

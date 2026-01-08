@@ -1,11 +1,140 @@
 id: recipe_hpht_furnace_v0
 kind: recipe
 target_item_id: hpht_furnace_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 500.0
+    unit: kg
+  - item_id: furnace_shell_refractory
+    qty: 1.0
+    unit: unit
+  - item_id: heating_element_set_high_temp
+    qty: 1.0
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 1.0
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_bus_high_current
+    qty: 1.0
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 4.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hpht_furnace_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 500.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 475.0
+      unit: kg
 - process_id: welding_brazing_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 475.0
+      unit: kg
+  outputs:
+    - item_id: welded_assemblies
+      qty: 465.0
+      unit: kg
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: welded_assemblies
+      qty: 465.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 450.0
+      unit: kg
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 450.0
+      unit: kg
+    - item_id: furnace_shell_refractory
+      qty: 1.0
+      unit: unit
+    - item_id: heating_element_set_high_temp
+      qty: 1.0
+      unit: unit
+    - item_id: insulation_pack_high_temp
+      qty: 1.0
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 4.0
+      unit: unit
+    - item_id: cooling_loop_basic
+      qty: 1.0
+      unit: unit
 - process_id: enclosure_assembly_basic_v0
+  inputs:
+    - item_id: furnace_shell_refractory
+      qty: 1.0
+      unit: unit
+    - item_id: machined_part_raw
+      qty: 450.0
+      unit: kg
+  outputs:
+    - item_id: enclosure_electrical_medium
+      qty: 1.0
+      unit: unit
 - process_id: electrical_wiring_and_controls_v0
+  inputs:
+    - item_id: electrical_wire_and_connectors
+      qty: 2.0
+      unit: kg
+    - item_id: control_components
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: wired_electrical_system
+      qty: 1.0
+      unit: unit
 - process_id: machine_assembly_basic_v0
+  inputs:
+    - item_id: enclosure_electrical_medium
+      qty: 1.0
+      unit: unit
+    - item_id: wired_electrical_system
+      qty: 1.0
+      unit: unit
+    - item_id: temperature_controller_basic
+      qty: 1.0
+      unit: unit
+    - item_id: power_conditioning_module
+      qty: 1.0
+      unit: unit
+    - item_id: power_bus_high_current
+      qty: 1.0
+      unit: unit
+    - item_id: control_compute_module_imported
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: hpht_furnace_v0
+      qty: 1.0
+      unit: unit

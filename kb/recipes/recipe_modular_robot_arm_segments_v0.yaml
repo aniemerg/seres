@@ -6,18 +6,56 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: modular_robot_arm_segments_v0
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 6.5
+    unit: kg
+  - item_id: cut_parts
+    qty: 6.3
+    unit: kg
+outputs:
+  - item_id: modular_robot_arm_segments_v0
+    qty: 1.0
+    unit: unit
+  - item_id: steel_scrap_v0
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 6.5
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 6.3
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.9
     notes: "Cut stock to arm segment length"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 6.3
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 6.1
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.2
     labor_hours: 1.0
     notes: "Finish surfaces and achieve nominal tolerances"
   - process_id: finishing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 6.1
+        unit: kg
+    outputs:
+      - item_id: modular_robot_arm_segments_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     machine_hours: 0.0
     labor_hours: 0.3

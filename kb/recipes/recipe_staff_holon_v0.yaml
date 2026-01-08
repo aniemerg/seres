@@ -1,6 +1,25 @@
 id: recipe_staff_holon_v0
 kind: recipe
 target_item_id: staff_holon_v0
+inputs:
+  - item_id: software_source_code_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: staff_holon_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-notes: "Migrated to target_item_id field for indexer compatibility; uses assembly_basic_v0."
+    inputs:
+      - item_id: software_source_code_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: staff_holon_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Deploy staff holon software to compute substrate"
+notes: "Provisional recipe to deploy staff_holon_v0 software component from source code."

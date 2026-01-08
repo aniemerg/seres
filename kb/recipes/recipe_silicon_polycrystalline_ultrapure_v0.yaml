@@ -2,7 +2,23 @@ id: recipe_silicon_polycrystalline_ultrapure_v0
 kind: recipe
 target_item_id: silicon_polycrystalline_ultrapure
 variant_id: siemens_v0
+inputs:
+  - item_id: trichlorosilane_liquid
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_polycrystalline_ultrapure
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: siemens_process_polysilicon_deposition_v0
+    inputs:
+      - item_id: trichlorosilane_liquid
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silicon_polycrystalline_ultrapure
+        qty: 1.0
+        unit: kg
     notes: "Siemens process CVD deposition to produce ultra-pure polysilicon."
 notes: "Recipe for ultra-pure polysilicon via Siemens process."

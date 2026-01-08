@@ -1,20 +1,62 @@
 id: recipe_drawing_rollers_precision_v0
 target_item_id: drawing_rollers_precision
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 42.0
+    unit: kg
+  - item_id: cast_part_raw
+    qty: 41.0
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: bearing_set_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: drawing_rollers_precision
+    qty: 1
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 42.0
+        unit: kg
+    outputs:
+      - item_id: cast_part_raw
+        qty: 41.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5
-    notes: "Cast roller blanks from steel alloy; include allowance for machining and bearing seats."
+    notes: "Cast roller blanks from steel alloy; include allowance for machining and bearing seats"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_part_raw
+        qty: 41.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 39.5
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.0
-    notes: "Finish grind/polish roller surfaces, turn bearing journals, and maintain concentricity."
+    notes: "Finish grind/polish roller surfaces, turn bearing journals, and maintain concentricity"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 39.5
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: drawing_rollers_precision
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Install bearings and mounts; assemble adjustable spacing hardware."
+    notes: "Install bearings and mounts; assemble adjustable spacing hardware"
 assumptions: Uses hardened steel alloy; surface finish sufficient for fiber drawing; bearings available/imported as needed.
 notes: Precision drawing rollers for fiber drawing tower with polished surfaces and adjustable mounting.

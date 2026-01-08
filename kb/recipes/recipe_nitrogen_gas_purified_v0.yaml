@@ -1,5 +1,21 @@
 id: recipe_nitrogen_gas_purified_v0
 kind: recipe
 target_item_id: nitrogen_gas_purified
+inputs:
+  - item_id: nitrogen_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: nitrogen_gas_purified
+    qty: 0.98
+    unit: kg
 steps:
   - process_id: nitrogen_purification_from_air_v0
+    inputs:
+      - item_id: nitrogen_gas
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nitrogen_gas_purified
+        qty: 0.98
+        unit: kg

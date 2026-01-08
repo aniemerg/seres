@@ -2,12 +2,81 @@ id: recipe_power_unit_v0
 kind: recipe
 # Canonical target for the Power Unit
 target_item_id: power_unit
+inputs:
+  - item_id: power_supply_unit_v0
+    qty: 1.0
+    unit: unit
+  - item_id: control_circuit_board_power
+    qty: 1.0
+    unit: unit
+  - item_id: transformer_power_medium
+    qty: 1.0
+    unit: unit
+  - item_id: busbar_distribution_system_v0
+    qty: 1.0
+    unit: unit
+  - item_id: power_output_terminals
+    qty: 2.0
+    unit: unit
+  - item_id: power_management_control_unit
+    qty: 1.0
+    unit: unit
+  - item_id: power_distribution_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: capacitor_bank_power
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 4.0
+    unit: unit
+outputs:
+  - item_id: power_unit
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: power_supply_unit_v0
+        qty: 1.0
+        unit: unit
+      - item_id: control_circuit_board_power
+        qty: 1.0
+        unit: unit
+      - item_id: transformer_power_medium
+        qty: 1.0
+        unit: unit
+      - item_id: busbar_distribution_system_v0
+        qty: 1.0
+        unit: unit
+      - item_id: power_output_terminals
+        qty: 2.0
+        unit: unit
+      - item_id: power_management_control_unit
+        qty: 1.0
+        unit: unit
+      - item_id: power_distribution_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: capacitor_bank_power
+        qty: 2.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 4.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: "Assemble power unit from BOM components"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_unit
+        qty: 1.0
+        unit: unit
     notes: "Run integration tests for power_unit"
-produces_id: power_unit
-produces_qty: 1.0
-produces_unit: unit
 notes: "Placeholder recipe to assemble a generic power unit from BOM components; mirrors hydraulic power unit pattern."

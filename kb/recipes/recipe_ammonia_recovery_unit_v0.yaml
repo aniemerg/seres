@@ -2,8 +2,72 @@ id: recipe_ammonia_recovery_unit_v0
 kind: recipe
 target_item_id: ammonia_recovery_unit_v0
 variant_id: v0
+inputs:
+  - item_id: pressure_vessel_steel
+    qty: 150.0
+    unit: kg
+  - item_id: heating_element_resistive
+    qty: 2
+    unit: unit
+  - item_id: vapor_condenser_cold_trap
+    qty: 1
+    unit: unit
+  - item_id: piping_and_fittings_thermal
+    qty: 50.0
+    unit: kg
+  - item_id: valve_set_gas_handling
+    qty: 1
+    unit: unit
+  - item_id: structural_frame_steel
+    qty: 100.0
+    unit: kg
+  - item_id: thermal_insulation_basic
+    qty: 30.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: ammonia_recovery_unit_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pressure_vessel_steel
+        qty: 150.0
+        unit: kg
+      - item_id: heating_element_resistive
+        qty: 2
+        unit: unit
+      - item_id: vapor_condenser_cold_trap
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_thermal
+        qty: 50.0
+        unit: kg
+      - item_id: valve_set_gas_handling
+        qty: 1
+        unit: unit
+      - item_id: structural_frame_steel
+        qty: 100.0
+        unit: kg
+      - item_id: thermal_insulation_basic
+        qty: 30.0
+        unit: kg
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: ammonia_recovery_unit_v0
+        qty: 1
+        unit: unit
     notes: "Assemble ammonia recovery unit per BOM"
 notes: |
   Recipe for assembling ammonia recovery unit.

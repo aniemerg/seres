@@ -1,9 +1,24 @@
 id: recipe_piping_assembly_small_v3
 kind: recipe
 target_item_id: piping_assembly_small
-produces_id: piping_assembly_small
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v3
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 1.0
+    unit: kg
+  - item_id: valve_body_machined
+    qty: 4.0
+    unit: kg
+  - item_id: bent_tube_sections
+    qty: 0.92
+    unit: kg
+  - item_id: piping_and_valves_set
+    qty: 6.5
+    unit: kg
+outputs:
+  - item_id: piping_assembly_small
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: tube_bending_and_cutting_v0
     inputs:
@@ -11,14 +26,14 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: pipe_bent_sections
+      - item_id: bent_tube_sections
         qty: 0.92
         unit: kg
     est_time_hr: 1.0
     notes: "Bend/cut tubing into bent sections for piping assembly"
   - process_id: welding_process_tig_v0
     inputs:
-      - item_id: pipe_bent_sections
+      - item_id: bent_tube_sections
         qty: 0.92
         unit: kg
       - item_id: valve_body_machined

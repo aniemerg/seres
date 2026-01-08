@@ -1,10 +1,39 @@
 id: recipe_hcl_v0
 kind: recipe
 name: Production of hydrochloric acid via direct H2/Cl2 route
-produces_id: hydrochloric_acid
-produces_qty: 72.0
-produces_unit: kg
-steps:
-- process_id: hcl_synthesis_from_h2_cl2_v0
-notes: Direct synthesis of HCl from H2 and Cl2 as per process chain.
 target_item_id: hcl
+variant_id: v0
+inputs:
+  - item_id: hydrogen_gas
+    qty: 2.0
+    unit: kg
+  - item_id: chlorine_gas
+    qty: 70.0
+    unit: kg
+outputs:
+  - item_id: hydrochloric_acid
+    qty: 72.0
+    unit: kg
+  - item_id: hcl
+    qty: 72.0
+    unit: kg
+steps:
+  - process_id: hcl_synthesis_from_h2_cl2_v0
+    inputs:
+      - item_id: hydrogen_gas
+        qty: 2.0
+        unit: kg
+      - item_id: chlorine_gas
+        qty: 70.0
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 72.0
+        unit: kg
+      - item_id: hcl
+        qty: 72.0
+        unit: kg
+    est_time_hr: 0.4
+    machine_hours: 0.4
+    notes: "Synthesize hydrochloric acid by direct reaction of hydrogen and chlorine gases, yields aqueous HCl (30-37%)"
+notes: "Direct synthesis of HCl from H2 and Cl2 via exothermic reaction"

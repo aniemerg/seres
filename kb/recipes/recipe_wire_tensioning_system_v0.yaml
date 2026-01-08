@@ -1,19 +1,40 @@
 id: recipe_wire_tensioning_system_v0
 target_item_id: wire_tensioning_system
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 3.5
+    unit: kg
+  - item_id: steel_sheet_3mm
+    qty: 0.5
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 2.0
+    unit: each
+  - item_id: bearing_ball_steel
+    qty: 2.0
+    unit: each
+  - item_id: bolt_hex_medium_steel
+    qty: 2.0
+    unit: each
+outputs:
+  - item_id: wire_tensioning_system
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_process_turning_v0
+  - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_bar_stock
         qty: 2.0
         unit: kg
     outputs:
-      - item_id: tension_roller_set
+      - item_id: machined_part_raw
         qty: 1.8
         unit: kg
     est_time_hr: 2.0
+    machine_hours: 2.0
     notes: Machine pulley for wire guidance
-  - process_id: metal_fabrication_welding_v0
+  - process_id: welding_basic_v0
     inputs:
       - item_id: steel_bar_stock
         qty: 1.5
@@ -22,17 +43,18 @@ steps:
         qty: 0.5
         unit: kg
     outputs:
-      - item_id: tensioner_frame_welded
+      - item_id: welded_assemblies
         qty: 1.9
         unit: kg
     est_time_hr: 2.0
+    labor_hours: 2.0
     notes: Fabricate frame and mounting brackets
   - process_id: assembly_process_general_v0
     inputs:
-      - item_id: tensioner_frame_welded
+      - item_id: welded_assemblies
         qty: 1.9
         unit: kg
-      - item_id: tension_roller_set
+      - item_id: machined_part_raw
         qty: 1.8
         unit: kg
       - item_id: spring_compression_small
@@ -46,9 +68,10 @@ steps:
         unit: each
     outputs:
       - item_id: wire_tensioning_system
-        qty: 5.0
-        unit: kg
+        qty: 1
+        unit: unit
     est_time_hr: 1.5
+    labor_hours: 1.5
     notes: Assemble pulley, spring, bearings, adjustment mechanism
 assumptions: |
   Spring-loaded design provides constant tension force.

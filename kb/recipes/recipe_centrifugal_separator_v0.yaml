@@ -2,10 +2,70 @@ id: recipe_centrifugal_separator_v0
 kind: recipe
 target_item_id: centrifugal_separator_v0
 variant_id: v0
+inputs:
+  - item_id: motor_electric_medium
+    qty: 1
+    unit: unit
+  - item_id: centrifugal_bowl_steel
+    qty: 80.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 2
+    unit: unit
+  - item_id: structural_frame_steel
+    qty: 100.0
+    unit: kg
+  - item_id: spring_and_dampener_set
+    qty: 4
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: piping_and_fittings_set
+    qty: 20.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: centrifugal_separator_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-    notes: "Assemble centrifugal separator per BOM"
+    inputs:
+      - item_id: motor_electric_medium
+        qty: 1
+        unit: unit
+      - item_id: centrifugal_bowl_steel
+        qty: 80.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 2
+        unit: unit
+      - item_id: structural_frame_steel
+        qty: 100.0
+        unit: kg
+      - item_id: spring_and_dampener_set
+        qty: 4
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_set
+        qty: 20.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: centrifugal_separator_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Assemble centrifugal separator: mount motor to frame, install bowl on bearings, add controls and piping"
 notes: |
   Recipe for centrifugal separator.
-  Assemble motor, bowl, bearings, frame, and controls.
+  Assemble motor, bowl, bearings, frame, and controls per BOM.
   Used for tungsten and heavy mineral extraction.

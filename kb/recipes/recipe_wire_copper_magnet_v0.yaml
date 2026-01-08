@@ -1,6 +1,22 @@
 id: recipe_wire_copper_magnet_v0
 kind: recipe
 target_item_id: wire_copper_magnet
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: wire_copper_magnet
+    qty: 0.3
+    unit: kg
 steps:
   - process_id: wire_copper_magnet_production_v0
+    inputs:
+      - item_id: copper_rod_ingot
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: wire_copper_magnet
+        qty: 0.3
+        unit: kg
 notes: "Direct production of copper magnet wire from copper rod ingot."

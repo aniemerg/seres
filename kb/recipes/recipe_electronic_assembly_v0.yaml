@@ -3,6 +3,34 @@ kind: recipe
 produces_id: electronic_assembly_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
 steps:
 - process_id: electronic_assembly_v0
+  inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
 target_item_id: electronic_assembly

@@ -2,6 +2,23 @@ id: recipe_edac_error_correction_v0
 kind: recipe
 name: Recipe for EDAC error correction module
 target_item_id: edac_error_correction_v0
+variant_id: v0
+inputs:
+  - item_id: pcb_assembled_board
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: edac_error_correction_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_assembled_board
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: edac_error_correction_v0
+        qty: 1.0
+        unit: unit
     notes: "Basic EDAC module assembly step referencing BOM components"

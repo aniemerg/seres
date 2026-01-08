@@ -2,30 +2,34 @@ id: solar_power_generation_basic_v0
 kind: process
 name: Basic solar power generation
 layer_tags:
-  - layer_8
+- layer_8
 inputs:
-  - item_id: solar_irradiance
-    qty: 1.0
-    unit: kWh
+- item_id: solar_irradiance
+  qty: 1.0
+  unit: kWh
 outputs:
-  - item_id: electrical_energy
-    qty: 1.0
-    unit: kWh
+- item_id: electrical_energy
+  qty: 1.0
+  unit: kWh
 requires_ids:
-  - solar_array_v0
-  - power_conditioning_equipment
-  - solar_tracking_optional
+- solar_array_v0
+- power_conditioning_equipment
+- solar_tracking_optional
 energy_model:
   type: per_unit
   value: 0.0
   unit: kWh/kWh
   scaling_basis: solar_irradiance
-  notes: "Placeholder energy per unit of electrical energy output; rate to be calibrated"
+  notes: Placeholder energy per unit of electrical energy output; rate to be calibrated
 time_model:
   type: linear_rate
   rate: 1.0
   rate_unit: kWh/hr
   scaling_basis: solar_irradiance
-  notes: "Daily generation window; placeholder for lunar day cycle"
+  notes: Daily generation window; placeholder for lunar day cycle
 notes: Treats PV as imported initially; introduces power accounting node.
 process_type: continuous
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr

@@ -1,10 +1,19 @@
 id: recipe_nickel_wire_fine_v0
 kind: recipe
 name: Nickel wire, fine gauge (drawing)
-produces_id: nickel_wire_fine
-produces_qty: 0.045
-produces_unit: kg
+target_item_id: nickel_wire_fine
 variant_id: v0
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: nickel_wire_fine
+    qty: 0.045
+    unit: kg
+  - item_id: metal_scrap
+    qty: 0.005
+    unit: kg
 steps:
 - process_id: wire_drawing_basic_v0
   inputs:
@@ -14,6 +23,9 @@ steps:
   outputs:
   - item_id: nickel_wire_fine
     qty: 0.045
+    unit: kg
+  - item_id: metal_scrap
+    qty: 0.005
     unit: kg
   est_time_hr: 1.5
 notes: Single-step wire drawing from pure nickel to fine gauge; accounts for small losses as slag/dust.

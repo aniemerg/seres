@@ -28,19 +28,60 @@ outputs:
     notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.0
+        unit: kg
+      - item_id: spur_gear_set_v0
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     labor_hours: 3.0
     notes: "Machine precision gear mechanisms, spindles, and dial faces for indicators"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
+      - item_id: spring_compression_small
+        qty: 3.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Assemble indicator mechanisms with precision gearing and spring return"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate dial indicators against gauge blocks for accuracy verification"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: dial_indicator_set
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify measurement accuracy and repeatability across full range"

@@ -1,19 +1,42 @@
 id: recipe_machine_solar_thermal_storage_system_v0
 target_item_id: solar_thermal_storage_system_v0
 variant_id: v0
+inputs:
+  - item_id: tank_shell_steel
+    qty: 450.0
+    unit: kg
+  - item_id: refractory_castable
+    qty: 100.0
+    unit: kg
+  - item_id: regolith_lunar_mare
+    qty: 1000.0
+    unit: kg
+  - item_id: thermal_insulation_high_temp
+    qty: 280.0
+    unit: kg
+  - item_id: heat_exchanger_tube_bundle
+    qty: 100.0
+    unit: kg
+  - item_id: thermocouple_type_k_v0
+    qty: 10
+    unit: unit
+  - item_id: piping_and_valves_set
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: solar_thermal_storage_system_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_fabrication_welding_v0
+  - process_id: refractory_casting_v0
     inputs:
-      - item_id: steel_plate_or_sheet
-        qty: 500.0
+      - item_id: refractory_castable
+        qty: 100.0
         unit: kg
     outputs:
-      - item_id: tank_shell_steel
-        qty: 450.0
+      - item_id: acid_resistant_reactor_lining_v0
+        qty: 95.0
         unit: kg
-    est_time_hr: 20.0
-    notes: Fabricate large insulated storage tank
-  - process_id: refractory_casting_v0
     est_time_hr: 8.0
     notes: Cast refractory insulation lining inside tank
   - process_id: regolith_collection_and_processing_v0
@@ -32,6 +55,9 @@ steps:
       - item_id: tank_shell_steel
         qty: 450.0
         unit: kg
+      - item_id: acid_resistant_reactor_lining_v0
+        qty: 95.0
+        unit: kg
       - item_id: thermal_insulation_high_temp
         qty: 280.0
         unit: kg
@@ -42,15 +68,15 @@ steps:
         qty: 100.0
         unit: kg
       - item_id: thermocouple_type_k_v0
-        qty: 10.0
-        unit: each
+        qty: 10
+        unit: unit
       - item_id: piping_and_valves_set
         qty: 20.0
         unit: kg
     outputs:
       - item_id: solar_thermal_storage_system_v0
-        qty: 2000.0
-        unit: kg
+        qty: 1
+        unit: unit
     est_time_hr: 16.0
     notes: Assemble tank, insulation, storage media, heat exchangers, instrumentation
 assumptions: |

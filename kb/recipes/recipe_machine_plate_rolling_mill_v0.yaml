@@ -1,36 +1,138 @@
 id: recipe_machine_plate_rolling_mill_v0
 target_item_id: plate_rolling_mill
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 200.0
+    unit: kg
+    notes: Steel for frame and structure
+  - item_id: rolling_mill_rolls_set
+    qty: 1
+    unit: unit
+    notes: Pre-fabricated roll set
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+  - item_id: motor_electric_medium
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_large
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: plate_rolling_mill
+    qty: 1
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 190.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     labor_hours: 1.2
     notes: "Cut frame plates, gussets, and roll mounts."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 190.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 185.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Weld mill frame, housings, and roll supports."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 185.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 180.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.0
     labor_hours: 1.5
     notes: "Machine bearing seats, roll journals, and adjustment screw mounts."
   - process_id: roll_grinding_and_balancing_v0
+    inputs:
+      - item_id: rolling_mill_rolls_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: rolling_mill_rolls_set
+        qty: 1
+        unit: unit
     est_time_hr: 4.5
     machine_hours: 4.0
     labor_hours: 4.0
     notes: "Finish grind and balance installed roll set."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 180.0
+        unit: kg
+      - item_id: rolling_mill_rolls_set
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+      - item_id: motor_electric_medium
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install rolls, bearings, drive system, guards, and adjustment screws."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire motors, controls, limit switches, and safety interlocks."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: plate_rolling_mill
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Run loaded passes, verify roll gap adjustment and safety systems."

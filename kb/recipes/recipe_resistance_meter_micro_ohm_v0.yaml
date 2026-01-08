@@ -3,11 +3,64 @@ kind: recipe
 target_item_id: resistance_meter_micro_ohm
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 0.5
+    unit: kg
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: resistance_meter_micro_ohm
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 0.5
+      unit: kg
+    - item_id: enclosure_small
+      qty: 1.0
+      unit: unit
+    - item_id: fastener_kit_small
+      qty: 0.2
+      unit: kg
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
   notes: "Initial assembly of resistance_meter_micro_ohm from BOM and seed components."
 - process_id: sensor_calibration_v0
+  inputs:
+    - item_id: sensor_suite_general
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: sensor_suite_general
+      qty: 1.0
+      unit: unit
   notes: "Calibrate resistance_meter_micro_ohm for micro-ohm accuracy."
-- process_id: electrical_testing_and_calibration_v0
+- process_id: integration_test_basic_v0
+  inputs:
+    - item_id: sensor_suite_general
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: resistance_meter_micro_ohm
+      qty: 1.0
+      unit: unit
   notes: "Electrical test and final calibration of resistance_meter_micro_ohm."
 notes: "Extended recipe to close no_recipe gap for resistance_meter_micro_ohm with calibration and testing steps."

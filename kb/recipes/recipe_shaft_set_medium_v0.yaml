@@ -1,18 +1,27 @@
 id: recipe_shaft_set_medium_v0
 target_item_id: shaft_set_medium
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 32.0
+    unit: kg
+outputs:
+  - item_id: shaft_set_medium
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    notes: Cast shaft blanks from steel
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Precision machine shaft journals and gear seats
   - process_id: assembly_basic_v0
-    est_time_hr: 0.5
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 32.0
+        unit: kg
+    outputs:
+      - item_id: shaft_set_medium
+        qty: 1
+        unit: unit
+    est_time_hr: 5.0
+    machine_hours: 4.5
     labor_hours: 0.5
-    notes: Final inspection and pairing
+    notes: "Cast shaft blanks from steel, precision machine shaft journals and gear seats, final inspection and pairing"
 assumptions: "30 kg shaft set for gearbox; multiple shafts."
 notes: "Three-step recipe for gearbox shaft set."

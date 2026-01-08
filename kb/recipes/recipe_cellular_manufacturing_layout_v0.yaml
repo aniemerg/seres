@@ -1,28 +1,32 @@
 id: recipe_cellular_manufacturing_layout_v0
 kind: recipe
 target_item_id: cellular_manufacturing_layout_v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_cutting_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Cut stock from raw metal into layout components"
-  - process_id: welding_and_fabrication_v0
-    est_time_hr: 2.5
-    labor_hours: 2.5
-    notes: "Assemble basic frame and mounting points"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    notes: "Machine mounting surfaces and interfaces for integration"
   - process_id: assembly_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Assemble subcomponents into cellular layout frame"
-  - process_id: surface_treatment_basic_v0
-    est_time_hr: 0.8
-    labor_hours: 0.4
-    notes: "Apply protective coating / surface finish"
+    inputs:
+      - item_id: raw_metal_block
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: "Fabricate and assemble cellular layout from metal stock"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cellular_manufacturing_layout_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Final QA inspection of layout assembly"

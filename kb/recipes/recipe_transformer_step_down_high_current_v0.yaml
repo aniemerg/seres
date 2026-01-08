@@ -3,6 +3,26 @@ kind: recipe
 name: Transformer step-down high-current production (v0)
 variant_id: v0
 target_item_id: transformer_step_down_high_current
+inputs:
+  - item_id: transformer_core
+    qty: 1.0
+    unit: unit
+  - item_id: wound_transformer
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink_assembly_large
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_steel_large
+    qty: 1.0
+    unit: unit
+  - item_id: shaft_and_bearing_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: transformer_step_down_high_current
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_process_general_v0
     inputs:

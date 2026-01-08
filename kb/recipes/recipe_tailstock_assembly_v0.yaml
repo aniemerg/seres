@@ -2,6 +2,20 @@ id: recipe_tailstock_assembly_v0
 kind: recipe
 target_item_id: tailstock_assembly
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 5.0
+    unit: kg
+  - item_id: ball_bearing_steel_v0
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: tailstock_assembly
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: tailstock_assembly_basic_v0
     inputs:

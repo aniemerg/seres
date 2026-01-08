@@ -1,6 +1,17 @@
 id: recipe_brazing_alloy_generic_v0
 kind: recipe
 target_item_id: brazing_alloy_generic
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: brazing_alloy_generic
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: brazing_alloy_synthesis_v0
 notes: "Seed recipe to produce brazing_alloy_generic from base metal and flux; placeholder values for mass/energy." 

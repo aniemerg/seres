@@ -2,10 +2,63 @@ id: recipe_concentrating_mirror_set_v0
 kind: recipe
 name: Concentrating mirror set assembly v0
 target_item_id: concentrating_mirror_set
+inputs:
+  - item_id: silica_purified
+    qty: 52.0
+    unit: kg
+  - item_id: structural_frame_steel
+    qty: 5.0
+    unit: kg
+  - item_id: parabolic_mirror_segment
+    qty: 5.0
+    unit: unit
+outputs:
+  - item_id: concentrating_mirror_set
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: glass_melting_and_forming_v0
-- process_id: annealing_basic_v0
-- process_id: machining_finish_basic_v0
-- process_id: assembly_basic_v0
+  - process_id: glass_melting_and_forming_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 52.0
+        unit: kg
+    outputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+    notes: "Melt and cast glass into mirror blank segments"
+  - process_id: annealing_basic_v0
+    inputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+    outputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+    notes: "Anneal glass to relieve thermal stress"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+    outputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+    notes: "Grind and polish mirror surfaces to parabolic shape"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+      - item_id: structural_frame_steel
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: concentrating_mirror_set
+        qty: 1.0
+        unit: unit
+    notes: "Mount 5 mirror segments onto structural frame"
 assumptions: "Assembles 5 parabolic mirror segments into concentrating_mirror_set; derived from BOM."
 notes: "Placeholder concentrating mirror set assembly; uses generic assembly of 5 segments."

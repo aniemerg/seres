@@ -3,18 +3,96 @@ kind: recipe
 name: Recipe for molding press v0 (machine)
 target_item_id: molding_press_v0
 variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 120.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 6.0
+    unit: kg
+  - item_id: steel_frame_molding_press_v0
+    qty: 1.0
+    unit: unit
+    notes: "Intermediate for machining/assembly steps"
+  - item_id: hydraulic_pump_unit_v0
+    qty: 1.0
+    unit: unit
+  - item_id: mold_platen_assembly_v0
+    qty: 2.0
+    unit: unit
+  - item_id: control_panel_basic_v0
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_v0
+    qty: 4.0
+    unit: unit
+  - item_id: fastener_kit_large_v0
+    qty: 1.0
+    unit: unit
+  - item_id: motor_assembly_standard_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: molding_press_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 120.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: steel_frame_molding_press_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Fabricate press frame and platen supports (v0)."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_frame_molding_press_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: steel_frame_molding_press_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Machine platen interfaces and mounting surfaces for molding press v0."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_molding_press_v0
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_pump_unit_v0
+        qty: 1.0
+        unit: unit
+      - item_id: mold_platen_assembly_v0
+        qty: 2.0
+        unit: unit
+      - item_id: control_panel_basic_v0
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_v0
+        qty: 4.0
+        unit: unit
+      - item_id: fastener_kit_large_v0
+        qty: 1.0
+        unit: unit
+      - item_id: motor_assembly_standard_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: molding_press_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 0.0
     labor_hours: 2.0

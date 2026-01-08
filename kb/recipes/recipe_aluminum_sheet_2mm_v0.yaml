@@ -2,6 +2,19 @@ id: recipe_aluminum_sheet_2mm_v0
 variant_id: v0
 kind: recipe
 target_item_id: aluminum_sheet_2mm
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 1.0
+    unit: kg
+  - item_id: metal_scrap
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: rolling_basic_v0
     inputs:

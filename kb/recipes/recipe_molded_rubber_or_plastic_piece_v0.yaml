@@ -2,9 +2,23 @@ id: recipe_molded_rubber_or_plastic_piece_v0_v0
 kind: recipe
 name: Recipe to mold rubber/plastic piece (v0)
 target_item_id: molded_rubber_or_plastic_piece_v0
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: silicone_rubber
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: molded_rubber_or_plastic_piece_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: molding_rubber_or_plastic_v0
+    inputs:
+      - item_id: silicone_rubber
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: molded_rubber_or_plastic_piece_v0
+        qty: 1.0
+        unit: unit
 notes: "Mold rubber/plastic input into molded_rubber_or_plastic_piece_v0 using a basic molding press."

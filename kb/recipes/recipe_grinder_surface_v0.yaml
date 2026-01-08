@@ -1,11 +1,75 @@
 id: recipe_grinder_surface_v0
 kind: recipe
 target_item_id: grinder_surface_v0
+variant_id: v0
+inputs:
+  - item_id: machine_base_large
+    qty: 1
+    unit: unit
+  - item_id: grinding_spindle_assembly
+    qty: 1
+    unit: unit
+  - item_id: table_drive_assembly
+    qty: 1
+    unit: unit
+  - item_id: magnetic_chuck_surface_grinder
+    qty: 1
+    unit: unit
+  - item_id: coolant_system_basic
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: grinder_surface_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
-  - process_id: welding_brazing_basic_v0
-  - process_id: machining_finish_basic_v0
   - process_id: assembly_basic_v0
-  - process_id: machine_assembly_basic_v0
-  - process_id: alignment_and_testing_basic_v0
-notes: "Initial seed recipe to manufacture grinder_surface_v0 using common machine fabrication steps. Placeholder; refine BOM and steps later."
+    inputs:
+      - item_id: machine_base_large
+        qty: 1
+        unit: unit
+      - item_id: grinding_spindle_assembly
+        qty: 1
+        unit: unit
+      - item_id: table_drive_assembly
+        qty: 1
+        unit: unit
+      - item_id: magnetic_chuck_surface_grinder
+        qty: 1
+        unit: unit
+      - item_id: coolant_system_basic
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: grinder_surface_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 16.0
+    machine_hours: 8.0
+    labor_hours: 12.0
+    notes: "Assemble machine base with grinding spindle, table drive, magnetic chuck, coolant system, controls, sensors, and power conditioning. Align and test for precision."
+notes: "Recipe to manufacture surface grinder from BOM components."

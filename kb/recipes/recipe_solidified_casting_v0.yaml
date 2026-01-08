@@ -1,6 +1,14 @@
 id: recipe_solidified_casting_v0
 kind: recipe
 target_item_id: solidified_casting
+inputs:
+  - item_id: molten_material_or_preform
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: solidified_casting
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: cooling_solidification_v0
 notes: "Single-step recipe: solidified_casting produced from molten_material_or_preform via cooling_solidification_v0."

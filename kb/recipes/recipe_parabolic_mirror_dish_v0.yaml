@@ -6,11 +6,46 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: parabolic_mirror_dish_v0
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 20.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 18.0
+    unit: kg
+outputs:
+  - item_id: parabolic_mirror_dish_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 19.6
+        unit: kg
     notes: "Cut sheet metal blanks to approximate disk shape for parabolic dish"
   - process_id: sheet_metal_bending_and_forming_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 19.6
+        unit: kg
+    outputs:
+      - item_id: metal_sheet
+        qty: 19.6
+        unit: kg
     notes: "Form into approximate parabolic dish geometry"
   - process_id: finishing_deburring_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: parabolic_mirror_dish_v0
+        qty: 1.0
+        unit: unit
     notes: "Deburr edges and finalize surfaces"
 notes: "Minimal closure recipe for parabolic_mirror_dish_v0; details refined later"

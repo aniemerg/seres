@@ -5,7 +5,31 @@ produces_id: iron_powder_or_sheet
 produces_qty: 1.0
 produces_unit: kg
 target_item_id: iron_powder_or_sheet
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_powder_or_sheet
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: iron_pure_production_from_ilmenite_v0
+    inputs:
+      - item_id: iron_ore_or_ilmenite
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: iron_metal_pure
+        qty: 1.0
+        unit: kg
   - process_id: iron_powder_from_pure_iron_v0
+    inputs:
+      - item_id: iron_metal_pure
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: iron_powder_or_sheet
+        qty: 1.0
+        unit: kg
 notes: "Local production path to iron_powder_or_sheet from ilmenite via iron_pure_production_from_ilmenite_v0 and iron_powder_from_pure_iron_v0."

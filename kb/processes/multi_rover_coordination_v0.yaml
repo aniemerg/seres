@@ -2,14 +2,17 @@ id: multi_rover_coordination_v0
 kind: process
 name: Multi-rover coordination
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs: []
 outputs:
-  - item_id: stigmergy_coordination_system_output_v0
-    qty: 1.0
-    unit: unit
-resource_requirements: []
+- item_id: stigmergy_coordination_system_output_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.01
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.01
@@ -17,5 +20,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.01
-notes: "Placeholder process to bootstrap multi-rover coordination; seed reference from paper_reviews_dec2024_comprehensive_v0."
+notes: Placeholder process to bootstrap multi-rover coordination; seed reference from
+  paper_reviews_dec2024_comprehensive_v0.
 process_type: batch

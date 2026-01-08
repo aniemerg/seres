@@ -1,22 +1,49 @@
 id: recipe_air_tank_small_v0
 target_item_id: air_tank_small
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     machine_hours: 0.8
     notes: Form shell halves or cylinder sections from steel.
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.2
     labor_hours: 1.0
     machine_hours: 1.0
     notes: Weld shell seams and attach fittings/mounts.
   - process_id: pressure_testing_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: air_tank_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.7
     labor_hours: 0.7
     machine_hours: 0.3
     notes: Pressure/leak test tank after fabrication.
 assumptions: Uses steel plate/shells; valves/gauges imported. Replace casting with rolled shells if available.
 notes: Basic fabrication route for a small air receiver tank; refine with coating and certified valve sets later.
-

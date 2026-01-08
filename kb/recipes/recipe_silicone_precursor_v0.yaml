@@ -5,6 +5,28 @@ produces_id: silicone_precursor
 produces_qty: 1.0
 produces_unit: kg
 target_item_id: silicone_precursor
+inputs:
+  - item_id: silicon_metal_v0
+    qty: 0.5
+    unit: kg
+  - item_id: silicon_powder_v0
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: silicone_precursor
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: silicone_precursor_synthesis_v0
+  inputs:
+    - item_id: silicon_metal_v0
+      qty: 0.5
+      unit: kg
+    - item_id: silicon_powder_v0
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: silicone_precursor
+      qty: 1.0
+      unit: kg
 notes: Base recipe linking the silicone_precursor_synthesis_v0 process to the silicone_precursor product.

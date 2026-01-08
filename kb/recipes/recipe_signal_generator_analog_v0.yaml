@@ -2,8 +2,66 @@ id: recipe_signal_generator_analog_v0
 kind: recipe
 target_item_id: signal_generator_analog_v0
 variant_id: v0
+inputs:
+  - item_id: vacuum_tube_triode_v0
+    qty: 3.0
+    unit: each
+  - item_id: capacitor_variable_tuning_v0
+    qty: 2.0
+    unit: each
+  - item_id: resistor_wire_wound_v0
+    qty: 10.0
+    unit: each
+  - item_id: ferrite_toroid_core_v0
+    qty: 2.0
+    unit: each
+  - item_id: steel_sheet_3mm
+    qty: 2.0
+    unit: kg
+  - item_id: aluminum_sheet_2mm
+    qty: 0.5
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.3
+    unit: kg
+  - item_id: knob_control_dial
+    qty: 3.0
+    unit: each
+outputs:
+  - item_id: signal_generator_analog_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_process_general_v0
+    inputs:
+      - item_id: vacuum_tube_triode_v0
+        qty: 3.0
+        unit: each
+      - item_id: capacitor_variable_tuning_v0
+        qty: 2.0
+        unit: each
+      - item_id: resistor_wire_wound_v0
+        qty: 10.0
+        unit: each
+      - item_id: ferrite_toroid_core_v0
+        qty: 2.0
+        unit: each
+      - item_id: steel_sheet_3mm
+        qty: 2.0
+        unit: kg
+      - item_id: aluminum_sheet_2mm
+        qty: 0.5
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.3
+        unit: kg
+      - item_id: knob_control_dial
+        qty: 3.0
+        unit: each
+    outputs:
+      - item_id: signal_generator_analog_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 15.0
     notes: "Top-level assembly: combine BOM components into analog signal generator chassis."
 notes: "Uses BOM bom_signal_generator_analog_v0 for components."

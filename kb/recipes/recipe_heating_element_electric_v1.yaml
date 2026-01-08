@@ -1,6 +1,23 @@
 id: recipe_heating_element_electric_v1
 kind: recipe
 target_item_id: heating_element_electric
+variant_id: v1
+inputs:
+  - item_id: nickel_chromium_alloy
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: heating_element_electric
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: heating_element_electric_fabrication_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: heating_element_electric
+        qty: 1.0
+        unit: unit
 notes: "Migrated to target_item_id-based schema; keeps existing fabrication step."

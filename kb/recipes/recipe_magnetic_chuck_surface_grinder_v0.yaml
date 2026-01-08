@@ -1,24 +1,84 @@
 id: recipe_magnetic_chuck_surface_grinder_v0
 target_item_id: magnetic_chuck_surface_grinder
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 90.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 3.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: magnetic_chuck_surface_grinder
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 85.5
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Cast steel chuck body and pole pieces"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 85.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 82.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine chuck body, pole piece slots, mounting surface"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 82.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 80.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Grind chuck top surface and pole pieces to precision flatness"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 3.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 2.9
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wind electromagnetic coils for on/off control"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 80.0
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 2.9
+        unit: kg
+    outputs:
+      - item_id: magnetic_chuck_surface_grinder
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install coils, pole pieces, wiring, switching mechanism"

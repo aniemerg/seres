@@ -1,5 +1,31 @@
 id: recipe_electrolyte_koh_solution_v0
 kind: recipe
 target_item_id: electrolyte_koh_solution
+variant_id: v0
+inputs:
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: water
+    qty: 7.0
+    unit: kg
+outputs:
+  - item_id: electrolyte_koh_solution
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: electrolyte_prep_koh
+    inputs:
+      - item_id: potassium_hydroxide
+        qty: 3.0
+        unit: kg
+      - item_id: water
+        qty: 7.0
+        unit: kg
+    outputs:
+      - item_id: electrolyte_koh_solution
+        qty: 10.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+notes: "KOH electrolyte preparation for Ni-Fe batteries"

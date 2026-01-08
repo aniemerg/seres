@@ -1,11 +1,97 @@
 id: recipe_pcb_fab_station_v0
 kind: recipe
 target_item_id: pcb_fab_station
+inputs:
+  - item_id: cast_metal_parts
+    qty: 200.0
+    unit: kg
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: pcb_fab_station
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 195.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 195.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 190.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 190.0
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
   - process_id: electrical_testing_and_calibration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_fab_station
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture PCB fabrication station from generic machine-building steps."

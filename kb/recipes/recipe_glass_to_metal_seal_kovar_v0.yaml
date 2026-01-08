@@ -1,6 +1,23 @@
 id: recipe_glass_to_metal_seal_kovar_v0
 kind: recipe
 target_item_id: glass_to_metal_seal_kovar_v0
+variant_id: v0
+inputs:
+  - item_id: kovar_alloy_fe_ni_co_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: glass_to_metal_seal_kovar_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: glass_to_metal_seal_kovar_fabrication_v0
+    inputs:
+      - item_id: kovar_alloy_fe_ni_co_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: glass_to_metal_seal_kovar_v0
+        qty: 1.0
+        unit: kg
 notes: "Manufacture glass_to_metal_seal_kovar_v0 via fabrication process (placeholder)."

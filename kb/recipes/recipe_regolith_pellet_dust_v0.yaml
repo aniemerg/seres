@@ -3,6 +3,28 @@ kind: recipe
 target_item_id: regolith_pellet_dust_v0
 produces_qty: 5.0
 produces_unit: kg
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: regolith_pellet_dust_v0
+    qty: 5.0
+    unit: kg
+  - item_id: regolith_pellet_v0
+    qty: 95.0
+    unit: kg
 steps:
   - process_id: regolith_pellet_pressing_process_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: regolith_pellet_dust_v0
+        qty: 5.0
+        unit: kg
+      - item_id: regolith_pellet_v0
+        qty: 95.0
+        unit: kg
 notes: "Dust produced as byproduct of regolith pellet pressing; documented for the regolith_pellet_dust_v0 item."

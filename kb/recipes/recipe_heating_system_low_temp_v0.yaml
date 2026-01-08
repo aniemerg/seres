@@ -2,28 +2,86 @@ id: recipe_heating_system_low_temp_v0
 kind: recipe
 target_item_id: heating_system_low_temp
 variant_id: v0
+inputs:
+  - item_id: heating_chamber_large
+    qty: 1
+    unit: unit
+  - item_id: heating_element_electric
+    qty: 2
+    unit: unit
+  - item_id: blower_fan_small
+    qty: 1
+    unit: unit
+  - item_id: insulation_thermal_blanket
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: thermocouple_type_s_v0
+    qty: 2
+    unit: unit
+  - item_id: structural_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: furnace_door_assembly
+    qty: 1
+    unit: unit
+  - item_id: power_cable_assembly
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
 steps:
-  - process_id: sheet_metal_forming_v0
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    notes: "Fabricate chamber shell and door from steel sheet"
-  - process_id: welding_basic_v0
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Weld chamber structure, frame, and mounting brackets"
-  - process_id: insulation_installation_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Install thermal insulation blanket on chamber walls"
   - process_id: assembly_basic_v0
-    est_time_hr: 8.0
-    labor_hours: 8.0
-    notes: "Install heating elements, blower fan, temperature controller, sensors, and door"
-  - process_id: electrical_wiring_and_controls_v0
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Wire electrical components, connect controller, install safety interlocks"
+    inputs:
+      - item_id: heating_chamber_large
+        qty: 1
+        unit: unit
+      - item_id: heating_element_electric
+        qty: 2
+        unit: unit
+      - item_id: blower_fan_small
+        qty: 1
+        unit: unit
+      - item_id: insulation_thermal_blanket
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: thermocouple_type_s_v0
+        qty: 2
+        unit: unit
+      - item_id: structural_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: furnace_door_assembly
+        qty: 1
+        unit: unit
+      - item_id: power_cable_assembly
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Assemble heating system from BOM components"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: heating_system_low_temp
+        qty: 1
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test heating performance, temperature control, and air circulation"

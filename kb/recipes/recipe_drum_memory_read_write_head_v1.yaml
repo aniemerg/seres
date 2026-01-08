@@ -2,10 +2,23 @@ id: recipe_drum_memory_read_write_head_v1
 kind: recipe
 variant_id: v1
 target_item_id: drum_memory_read_write_head
-produces_id: drum_memory_read_write_head
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: machined_part_raw
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: drum_memory_read_write_head
+    qty: 0.25
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.25
+        unit: kg
+    outputs:
+      - item_id: drum_memory_read_write_head
+        qty: 0.25
+        unit: kg
 notes: "Placeholder recipe to manufacture drum_memory_read_write_head from base materials using the machining_finish_basic_v0 process. Refine with BOM and additional steps later."
 assumptions: "Uses standard finishing pass(es) to achieve final dimensions; mass/throughput aligned with typical small metal parts."

@@ -2,9 +2,31 @@ id: recipe_cryocooler_core_unit_v0_v0
 kind: recipe
 name: Cryocooler core unit v0 fabrication
 target_item_id: cryocooler_core_unit_v0
-produces_qty: 2.0
-produces_unit: kg
+inputs:
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: cryocooler_core_unit_v0
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: machining_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: machined_metal_block_v0
+        qty: 1.8
+        unit: kg
   - process_id: cryocooler_core_unit_assembly_v0
+    inputs:
+      - item_id: machined_metal_block_v0
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: cryocooler_core_unit_v0
+        qty: 2.0
+        unit: kg
 notes: "Canonicalized to target_item_id pattern; uses existing processes."

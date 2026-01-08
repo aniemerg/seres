@@ -1,15 +1,131 @@
 id: recipe_machine_cement_mixer_small_v0
 target_item_id: cement_mixer_small
 variant_id: v0
+inputs:
+  - item_id: mixer_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: mixer_drum_small
+    qty: 1.0
+    unit: unit
+  - item_id: mixer_motor_small
+    qty: 1.0
+    unit: unit
+  - item_id: mixer_control_basic
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cement_mixer_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: mixer_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_drum_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_motor_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_control_basic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: mixer_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_drum_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_motor_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_control_basic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: mixer_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_drum_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_motor_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_control_basic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     machine_hours: 2.0
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cement_mixer_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble mixer per BOM; imported compute not included.

@@ -1,16 +1,54 @@
 id: recipe_pcb_drilling_station_v0
 target_item_id: pcb_drilling_station
 variant_id: v0
+inputs:
+  - item_id: base_metal_parts
+    qty: 50.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 50.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: pcb_drilling_station
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: metal_parts_fabrication_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 50.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 2.0
     notes: Fabricate table, spindle mount, fixturing system
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: Assemble spindle, table, drive system, controls
   - process_id: alignment_and_testing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_drilling_station
+        qty: 50.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Calibrate positioning and test drilling accuracy

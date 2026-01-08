@@ -4,8 +4,58 @@ target_item_id: pellet_press
 produces_id: pellet_press
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 850.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 2.0
+    unit: unit
+  - item_id: motor_general_5kw
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: pellet_press
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 850.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: unit
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 2.0
+        unit: unit
+      - item_id: motor_general_5kw
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pellet_press
+        qty: 1.0
+        unit: unit
 notes: "Backwards-compatible recipe for pellet_press using target_item_id; mirrors v0 steps."

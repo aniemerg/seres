@@ -3,6 +3,23 @@ name: Electrolyzer cell stack v0 production
 variant_id: v0
 kind: recipe
 target_item_id: electrolyzer_cell_stack
+inputs:
+  - item_id: stainless_steel_sheet
+    qty: 18.0
+    unit: kg
+  - item_id: separator_membrane_porous
+    qty: 2.0
+    unit: kg
+  - item_id: gasket_sheet_material_v0
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 4.0
+    unit: kg
+outputs:
+  - item_id: electrolyzer_cell_stack
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:

@@ -1,7 +1,35 @@
 id: recipe_hydraulic_pump_unit_v0
 kind: recipe
 target_item_id: hydraulic_pump_unit_v0
+inputs:
+  - item_id: hydraulic_pump_basic
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_reservoir_basic
+    qty: 1.0
+    unit: unit
+  - item_id: motor_assembly_standard_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hydraulic_pump_unit_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: hydraulic_pump_unit_assembly_v0
+    inputs:
+      - item_id: hydraulic_pump_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_reservoir_basic
+        qty: 1.0
+        unit: unit
+      - item_id: motor_assembly_standard_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hydraulic_pump_unit_v0
+        qty: 1.0
+        unit: unit
 notes: "Local recipe to assemble hydraulic_pump_unit_v0 from basic components."
 assumptions: "Assembled locally; additional BOM refinements pending."

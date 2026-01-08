@@ -1,6 +1,24 @@
 id: recipe_liquid_sodium_receiver_v0_v0
 kind: recipe
 target_item_id: liquid_sodium_receiver_v0
+produces_qty: 1.0
+produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: liquid_sodium_receiver_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: liquid_sodium_receiver_fabrication_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: liquid_sodium_receiver_v0
+        qty: 1.0
+        unit: unit
 notes: "Initial placeholder recipe invoking fabrication process"

@@ -1,6 +1,22 @@
 id: recipe_slag_byproduct_v0
 kind: recipe
 target_item_id: slag_byproduct_v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 50.0
+    unit: kg
+outputs:
+  - item_id: slag_byproduct_v0
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: getter_material_extraction_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: slag_byproduct_v0
+        qty: 10.0
+        unit: kg
 notes: "Creates slag_byproduct_v0 from getter material extraction; slag is produced as byproduct of the getter process."

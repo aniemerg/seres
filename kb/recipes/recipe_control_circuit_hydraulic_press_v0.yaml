@@ -2,28 +2,101 @@ id: recipe_control_circuit_hydraulic_press_v0
 kind: recipe
 name: Recipe for control circuit hydraulic press
 target_item_id: control_circuit_hydraulic_press
-produces_id: control_circuit_hydraulic_press
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: etching_chemicals
+    qty: 0.2
+    unit: kg
+  - item_id: pcb_populated
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: microcontroller_or_embedded_board
+    qty: 1.0
+    unit: unit
+  - item_id: compiled_firmware_binary
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: control_circuit_hydraulic_press
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: pcb_fabrication_v0
+  inputs:
+    - item_id: copper_clad_laminate
+      qty: 0.5
+      unit: kg
+    - item_id: etching_chemicals
+      qty: 0.2
+      unit: kg
+  outputs:
+    - item_id: bare_pcb
+      qty: 1.0
+      unit: unit
   est_time_hr: 2.0
   machine_hours: 2.0
   labor_hours: 1.0
   notes: Fabricate PCB for hydraulic press control
-- process_id: electronics_assembly_v0
-  est_time_hr: 2.5
-  labor_hours: 2.5
-  notes: Assemble control electronics
 - process_id: firmware_programming_v0
+  inputs:
+    - item_id: microcontroller_or_embedded_board
+      qty: 1.0
+      unit: unit
+    - item_id: compiled_firmware_binary
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: programmed_microcontroller
+      qty: 1.0
+      unit: unit
   est_time_hr: 1.0
   labor_hours: 1.0
   notes: Program firmware for hydraulic press control
+- process_id: electronics_assembly_v0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: unit
+    - item_id: programmed_microcontroller
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: assembled_electronics
+      qty: 1.0
+      unit: unit
+  est_time_hr: 2.5
+  labor_hours: 2.5
+  notes: Assemble control electronics
 - process_id: electrical_testing_basic_v0
+  inputs:
+    - item_id: assembled_electronics
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: tested_electrical_equipment
+      qty: 1.0
+      unit: unit
   est_time_hr: 0.8
   labor_hours: 0.8
   notes: Functional electrical tests
 - process_id: inspection_basic_v0
+  inputs:
+    - item_id: tested_electrical_equipment
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: control_circuit_hydraulic_press
+      qty: 1.0
+      unit: unit
   est_time_hr: 0.4
   labor_hours: 0.4
   notes: Final QA

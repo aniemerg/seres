@@ -4,8 +4,24 @@ name: Metal sheet production via rolling (import-style, v0)
 produces_id: metal_sheet
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+- item_id: metal_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_sheet
+  qty: 1.0
+  unit: kg
 steps:
 - process_id: rolling_basic_v0
+  inputs:
+  - item_id: metal_ingot
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: metal_sheet
+    qty: 1.0
+    unit: kg
   notes: Rolling ingot to sheet using plate_rolling_mill
 assumptions: This is a replacement for the old import placeholder; rolling path is the intended local production route.
 notes: Replaced the previous import placeholder with an actual rolling-based production step for metal_sheet.

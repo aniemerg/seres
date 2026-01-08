@@ -2,7 +2,29 @@ id: recipe_raw_formation_control_material_v0_v0
 kind: recipe
 name: Recipe for raw_formation_control_material_v0 v0
 target_item_id: raw_formation_control_material_v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: raw_formation_control_material_v0
+    qty: 20.0
+    unit: kg
+  - item_id: slag
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: extraction_raw_formation_control_material_v0_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: raw_formation_control_material_v0
+        qty: 20.0
+        unit: kg
+      - item_id: slag
+        qty: 5.0
+        unit: kg
     notes: "Seed extraction step to obtain raw_formation_control_material_v0 from regolith_raw"
 notes: "Seed recipe for raw_formation_control_material_v0 production path"

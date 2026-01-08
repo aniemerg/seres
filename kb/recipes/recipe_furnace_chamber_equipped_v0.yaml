@@ -2,8 +2,36 @@ id: recipe_furnace_chamber_equipped_v0
 kind: recipe
 target_item_id: furnace_chamber_equipped
 variant_id: v0
+inputs:
+  - item_id: furnace_chamber_unequipped
+    qty: 1
+    unit: unit
+  - item_id: heating_element_resistive
+    qty: 5.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: furnace_chamber_equipped
+    qty: 1
+    unit: unit
 steps:
   - process_id: heating_element_installation_v0
+    inputs:
+      - item_id: furnace_chamber_unequipped
+        qty: 1
+        unit: unit
+      - item_id: heating_element_resistive
+        qty: 5.0
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: furnace_chamber_equipped
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 0.6
     notes: "Install resistive heating elements and wiring"

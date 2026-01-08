@@ -29,19 +29,57 @@ outputs:
 
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_sheet_1mm
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 18.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Cut sheet steel for drum body and ends
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 18.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Roll body into cylinder, form drum ends
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 18.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: Weld body seam and attach bottom end
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 19.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.3
+        unit: kg
+      - item_id: gasket_sheet_material_v0
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: steel_drum
+        qty: 20.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Install reinforcing hoops, closure ring, and removable lid with gasket

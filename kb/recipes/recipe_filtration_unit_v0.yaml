@@ -3,7 +3,47 @@ kind: recipe
 name: Filtration unit assembly
 target_item_id: filtration_unit
 variant_id: v0
+inputs:
+  - item_id: support_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: plumbing_system_assembly
+    qty: 1
+    unit: unit
+  - item_id: coolant_pump_system
+    qty: 1
+    unit: unit
+  - item_id: filter_cartridges_dust
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: filtration_unit
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: support_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: plumbing_system_assembly
+        qty: 1
+        unit: unit
+      - item_id: coolant_pump_system
+        qty: 1
+        unit: unit
+      - item_id: filter_cartridges_dust
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: filtration_unit
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
 notes: "Assemble filtration unit from BOM; placeholder assembly step."

@@ -2,9 +2,14 @@ id: recipe_ceramic_zirconia_v0
 kind: recipe
 name: Ceramic zirconia (v0) recipe
 target_item_id: zirconia_ceramic_v0
-produces_id: zirconia_ceramic_v0
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: powder_feedstock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: zirconia_ceramic_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: ceramic_sintering_v0
     inputs:

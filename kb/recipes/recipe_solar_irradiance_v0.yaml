@@ -1,13 +1,19 @@
 id: recipe_solar_irradiance_v0
+kind: recipe
 target_item_id: solar_irradiance
 variant_id: v0
 inputs: []
 outputs:
   - item_id: solar_irradiance
     qty: 1.0
-    unit: unit
+    unit: kWh
 steps:
   - process_id: environment_source_v0
+    inputs: []
+    outputs:
+      - item_id: solar_irradiance
+        qty: 1.0
+        unit: kWh
     est_time_hr: 0.0
     notes: Solar irradiance is freely available from the lunar environment
 assumptions: ~1.4 kW/m2 available at lunar surface; no manufacturing required.

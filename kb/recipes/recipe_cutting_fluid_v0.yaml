@@ -1,7 +1,41 @@
 id: recipe_cutting_fluid_v0
 target_item_id: cutting_fluid
 variant_id: v0
+inputs:
+  - item_id: water
+    qty: 0.85
+    unit: kg
+  - item_id: emulsifying_oil
+    qty: 0.10
+    unit: kg
+  - item_id: corrosion_inhibitor
+    qty: 0.03
+    unit: kg
+  - item_id: biocide_additive
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cutting_fluid_formulation_v0
+    inputs:
+      - item_id: water
+        qty: 0.85
+        unit: kg
+      - item_id: emulsifying_oil
+        qty: 0.10
+        unit: kg
+      - item_id: corrosion_inhibitor
+        qty: 0.03
+        unit: kg
+      - item_id: biocide_additive
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: kg
 assumptions: Cutting fluid formulated locally from water, emulsifying oil, corrosion inhibitor, and biocide additives.
 notes: Cutting fluid extends tool life, improves surface finish, and removes chips during machining. Water-based emulsion formulation.

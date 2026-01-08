@@ -4,6 +4,14 @@ name: Nitrogen impurities production from air purification v0
 target_item_id: nitrogen_impurities
 produces_qty: 0.02
 produces_unit: kg
+inputs:
+  - item_id: nitrogen_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: nitrogen_impurities
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: nitrogen_purification_from_air_v0
 notes: "Migration to target_item_id field for compatibility with indexer."

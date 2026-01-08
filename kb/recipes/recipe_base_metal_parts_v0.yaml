@@ -3,7 +3,23 @@ kind: recipe
 produces_id: base_metal_parts
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: raw_metal_block
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: base_metal_parts
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: base_metal_parts_from_raw_metal_v0
+  inputs:
+    - item_id: raw_metal_block
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: base_metal_parts
+      qty: 1.0
+      unit: kg
 notes: Manufacture base metal parts from raw_metal_block via placeholder fabrication process
 target_item_id: base_metal_parts

@@ -2,9 +2,45 @@ id: recipe_battery_cell_nife_local_v0
 kind: recipe
 target_item_id: battery_cell_nife
 variant_id: local_v0
+inputs:
+  - item_id: electrode_mix_nife
+    qty: 2.4
+    unit: kg
+  - item_id: current_collector_nickel_or_steel_mesh
+    qty: 0.5
+    unit: kg
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: water
+    qty: 7.0
+    unit: kg
+outputs:
+  - item_id: battery_cell_nife
+    qty: 1.0
+    unit: unit
 steps:
-  - process_id: electrode_fabrication_nife
-  - process_id: electrolyte_prep_koh
-  - process_id: cell_assembly_and_seal_nife
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 2.4
+        unit: kg
+      - item_id: current_collector_nickel_or_steel_mesh
+        qty: 0.5
+        unit: kg
+      - item_id: potassium_hydroxide
+        qty: 3.0
+        unit: kg
+      - item_id: water
+        qty: 7.0
+        unit: kg
+    outputs:
+      - item_id: battery_cell_nife
+        qty: 1.0
+        unit: unit
+    est_time_hr: 4.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Mix active powders with binder and press onto nickel/steel mesh current collectors and dry, dissolve KOH pellets in deionized water with stirring, assemble and seal cell with electrode mix and electrolyte solution"
 assumptions: "Local Ni-Fe battery cell path replacing import stub."
 notes: "Local Ni-Fe battery cell path replacing import stub; uses Ni-Fe electrode fabrication, KOH electrolyte preparation, and Ni-Fe cell assembly/sealing steps."

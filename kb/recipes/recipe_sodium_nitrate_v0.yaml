@@ -2,6 +2,20 @@ id: recipe_sodium_nitrate_v0
 kind: recipe
 target_item_id: sodium_nitrate
 variant_id: hcl_generation_v0
+inputs:
+  - item_id: sodium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: nitric_acid_concentrated
+    qty: 1.08
+    unit: kg
+outputs:
+  - item_id: sodium_nitrate
+    qty: 1.45
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 0.624
+    unit: kg
 steps:
   - process_id: hcl_generation_from_nacl_v0
     notes: "Acid displacement reaction produces sodium_nitrate alongside HCl."

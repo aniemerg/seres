@@ -2,28 +2,68 @@ id: recipe_lathe_tool_post_basic_v0
 kind: recipe
 target_item_id: lathe_tool_post_basic
 variant_id: v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 5.0
+    unit: kg
+  - item_id: center_insulator_ceramic
+    qty: 0.08
+    unit: kg
+  - item_id: bearing_rings_machined
+    qty: 1.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: lathe_tool_post_basic
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: machining_process_milling_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 5.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.0
     notes: "Mill tool post body from steel bar stock or block. Machine base mounting surface, tool holder slots or turret positions, and clamping mechanism features."
   - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: center_insulator_ceramic
+        qty: 0.08
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.5
     labor_hours: 0.5
     notes: "Drill and tap holes for mounting bolts, height adjustment screws, and tool clamping bolts. Drill pin holes for alignment features."
   - process_id: heat_treatment_hardening_v0
+    inputs:
+      - item_id: bearing_rings_machined
+        qty: 1.1
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 0.5
     notes: "Heat treat tool post body to increase hardness and wear resistance. Focus on contact surfaces and clamping areas."
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_metal_block_v0
+        qty: 4.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Precision grind mounting base for perpendicularity to tool axis. Grind tool holder reference surfaces for accurate tool positioning."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble tool post components: install height adjustment mechanism, tool holder wedges or turret, clamping screws with hardened washers. Test clamping force and tool holder repeatability."

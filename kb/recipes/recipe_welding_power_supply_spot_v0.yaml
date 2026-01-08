@@ -15,12 +15,53 @@ inputs:
   - item_id: control_circuit_board_basic
     qty: 0.5
     unit: kg
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+    notes: "Intermediate for welding step"
 outputs:
   - item_id: welding_power_supply_spot
     qty: 1.0
     unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: motor_housing_steel
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
+      - item_id: transformer_laminated_steel_v0
+        qty: 5.0
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 2.0
+        unit: kg
+      - item_id: control_circuit_board_basic
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: welding_power_supply_spot
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture Welding power supply spot module using basic machining, assembly, and welding steps."

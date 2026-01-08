@@ -1,7 +1,46 @@
 id: recipe_rover_thermal_control_v0
 kind: recipe
 target_item_id: rover_thermal_control_v0
+inputs:
+  - item_id: insulation_material
+    qty: 3.0
+    unit: kg
+  - item_id: heating_elements_basic
+    qty: 1.0
+    unit: kg
+  - item_id: heat_pipes_set
+    qty: 1.0
+    unit: unit
+  - item_id: machined_part_raw
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: rover_thermal_control_v0
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: insulation_material
+        qty: 3.0
+        unit: kg
+      - item_id: heating_elements_basic
+        qty: 1.0
+        unit: kg
+      - item_id: heat_pipes_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machined_part_raw
+        qty: 5.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: rover_thermal_control_v0
+        qty: 5.0
+        unit: kg
 notes: "Placeholder recipe to manufacture rover_thermal_control_v0; refine BOM and steps later."

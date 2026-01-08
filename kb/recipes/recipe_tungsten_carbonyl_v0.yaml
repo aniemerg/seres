@@ -3,6 +3,17 @@ kind: recipe
 name: Tungsten carbonyl production v0
 # Target item produced by this recipe
 target_item_id: tungsten_carbonyl_v0
+inputs:
+  - item_id: tungsten_powder
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 6.0
+    unit: kg
+outputs:
+  - item_id: tungsten_carbonyl_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: tungsten_carbonyl_synthesis_v0
     est_time_hr: 0.5

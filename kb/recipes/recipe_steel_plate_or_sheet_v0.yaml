@@ -1,12 +1,36 @@
 id: recipe_steel_plate_or_sheet_v0
 target_item_id: steel_plate_or_sheet
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: steel_plate_or_sheet
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: heating_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_ingot
+        qty: 1.04
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat steel ingot or billet to rolling temperature (1100-1250°C)"
   - process_id: rolling_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 1.04
+        unit: kg
+    outputs:
+      - item_id: steel_plate_or_sheet
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Hot roll to plate or sheet thickness with multiple passes"

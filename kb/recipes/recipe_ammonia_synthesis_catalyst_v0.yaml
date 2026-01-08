@@ -3,6 +3,22 @@ kind: recipe
 name: Recipe for ammonia synthesis catalyst v0
 target_item_id: ammonia_synthesis_catalyst_v0
 variant_id: v0
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: ammonia_synthesis_catalyst_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: ammonia_synthesis_catalyst_production_v0
+    inputs:
+      - item_id: iron_ore_or_ilmenite
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: ammonia_synthesis_catalyst_v0
+        qty: 1.0
+        unit: kg
 notes: "Seed catalyst production path for ammonia synthesis catalyst."

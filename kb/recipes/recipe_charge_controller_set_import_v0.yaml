@@ -2,22 +2,77 @@ id: recipe_charge_controller_set_import_v0
 kind: recipe
 target_item_id: charge_controller_set
 variant_id: v0
+inputs:
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: assembled_electronics
+    qty: 1
+    unit: unit
+  - item_id: pcb_populated
+    qty: 1
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: charge_controller_set
+    qty: 1
+    unit: unit
 steps:
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble charge controller electronics and power management circuitry"
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: pcb_populated
+        qty: 1
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Populate and wire PCB for charge controller"
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1
+        unit: unit
+      - item_id: enclosure_steel_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
     est_time_hr: 0.6
     labor_hours: 0.6
     notes: "Mount electronics enclosure and interface connectors"
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: charge_controller_set
+        qty: 1
+        unit: unit
     est_time_hr: 0.4
     labor_hours: 0.4
     notes: "Install seals, finalize enclosure assembly"
 assumptions: "Local electronics subassembly assembled from standard electrical components; final integration with enclosure and seals."
-notes: "Converted from import stub to full v0 recipe"
+notes: |
+  Converted from import stub to full v0 recipe
+
+  Sequential flow: assemble electronics → populate PCB → install in enclosure → seal.

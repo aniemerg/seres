@@ -1,0 +1,30 @@
+id: encoder_rotary_incremental
+kind: part
+name: Incremental rotary encoder
+mass: 0.15
+unit: kg
+material_class: electronic
+notes: |
+  Incremental rotary encoder for relative position and velocity sensing.
+
+  Function: Tracks relative shaft rotation (requires homing/reference point).
+  Technology: Incremental encoder with optical or magnetic quadrature sensing.
+  Output: A/B quadrature pulses for direction and position tracking.
+  Interface: Digital quadrature output (A, B channels, optional Z index).
+
+  Simpler than absolute encoders - only tracks changes from power-on position.
+  Requires homing sequence to establish absolute position reference.
+
+  Construction:
+    - Optical disk with radial pattern or magnetic ring
+    - Optical sensors (LED + photodiodes) or Hall effect sensors
+    - Simple signal conditioning electronics
+    - Mechanical shaft coupling
+    - Housing and connector
+
+  Used in: Motor control, linear actuators, CNC machines, motion control systems.
+
+  Conservative Mode check:
+  - Similar to encoder_optical_simple_v0 (0.15kg) but more generic designation
+  - Mass estimate: 0.15 kg typical for industrial incremental encoder
+recipe: recipe_encoder_rotary_incremental_v0

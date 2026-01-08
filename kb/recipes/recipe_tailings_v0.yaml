@@ -1,8 +1,30 @@
 id: recipe_tailings_v0
 target_item_id: tailings
 variant_id: coproduct_v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: tailings
+    qty: 0.8
+    unit: kg
+  - item_id: magnetic_concentrate
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: beneficiation_magnetic_basic_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_concentrate
+        qty: 0.2
+        unit: kg
+      - item_id: tailings
+        qty: 0.8
+        unit: kg
     notes: Treat tailings as coproduct of magnetic beneficiation; captured as waste stream.
 assumptions: "Tailings generated during beneficiation; modeled as coproduct rather than imported."
 notes: Coproduct route for tailings instead of import placeholder.

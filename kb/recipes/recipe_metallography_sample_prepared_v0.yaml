@@ -1,7 +1,14 @@
 id: recipe_metallography_sample_prepared_v0
 kind: recipe
 target_item_id: metallography_sample_prepared
+variant_id: v0
+inputs:
+  - item_id: metallography_sample_raw
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metallography_sample_prep_v0
+    est_time_hr: 0.75
+    labor_hours: 0.5
     notes: "Metallography sample preparation (polishing + etching)"
 notes: "Adjusted to conform to standard recipe schema"

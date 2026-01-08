@@ -1,10 +1,23 @@
 id: recipe_material_annealed_v0
 kind: recipe
 name: Material annealing
-produces_id: material_annealed
-produces_qty: 1.0
-produces_unit: kg
+inputs:
+  - item_id: material_unannealed
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: material_annealed
+    qty: 5.0
+    unit: kg
 steps:
-- process_id: annealing_v0
+  - process_id: annealing_v0
+    inputs:
+      - item_id: material_unannealed
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: material_annealed
+        qty: 5.0
+        unit: kg
 notes: Anneal material to relieve stress and improve ductility.
 target_item_id: material_annealed

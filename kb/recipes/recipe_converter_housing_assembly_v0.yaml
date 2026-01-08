@@ -1,26 +1,70 @@
 id: recipe_converter_housing_assembly_v0
 target_item_id: converter_housing_assembly
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 10.5
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 10.5
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 10.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Fabricate steel housing shell and mounting brackets for thermionic converter array"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 9.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld housing assembly with hermetic seals for thermal containment"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 9.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install ceramic or refractory insulation inside housing for thermal management"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Machine mounting points and vacuum tube access ports"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: converter_housing_assembly
+        qty: 9.5
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify thermal insulation integrity and mounting point alignment"

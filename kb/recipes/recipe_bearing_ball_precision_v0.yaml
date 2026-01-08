@@ -1,6 +1,14 @@
 id: recipe_bearing_ball_precision_v0
 kind: recipe
 target_item_id: bearing_ball_precision
+inputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: bearing_ball_precision
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: bearing_ball_steel_cast_v0
   - process_id: bearing_ball_precision_fabrication_v0

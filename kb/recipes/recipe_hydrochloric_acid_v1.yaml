@@ -1,6 +1,33 @@
 id: recipe_hydrochloric_acid_v1
 kind: recipe
+name: Hydrochloric acid production v1
 target_item_id: hydrochloric_acid
+variant_id: v1
+inputs:
+  - item_id: chlorine_gas
+    qty: 0.98
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: hydrochloric_acid
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: hydrochloric_acid_synthesis_v0
+    inputs:
+      - item_id: chlorine_gas
+        qty: 0.98
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: hydrochloric_acid
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Synthesize hydrochloric acid by direct reaction of hydrogen and chlorine gases via exothermic reaction, yields aqueous HCl"
 notes: "One-step synthesis from Cl2 and H2 to HCl (version v1)."

@@ -6,10 +6,18 @@ variant_id: v0
 produces_id: vane_set_or_diaphragm
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: seal_material
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: vane_set_or_diaphragm
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: nitrile_rubber
+      - item_id: seal_material
         qty: 2.0
         unit: kg
     outputs:

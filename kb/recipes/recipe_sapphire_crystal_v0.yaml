@@ -3,8 +3,36 @@ kind: recipe
 name: Sapphire crystal production v0
 target_item_id: sapphire_crystal
 variant_id: v0
+inputs:
+  - item_id: alumina_powder
+    qty: 1.0
+    unit: kg
+  - item_id: crucible_ceramic_refractory
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: sapphire_crystal
+    qty: 0.95
+    unit: kg
+  - item_id: alumina_powder
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: sapphire_crystal_growth_czochralski_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 1.0
+        unit: kg
+      - item_id: crucible_ceramic_refractory
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: sapphire_crystal
+        qty: 0.95
+        unit: kg
+      - item_id: alumina_powder
+        qty: 0.05
+        unit: kg
     notes: "Czochralski growth of sapphire boule"
 assumptions: |
   Czochralski process selected as baseline; hydrothermal or Verneuil routes can be

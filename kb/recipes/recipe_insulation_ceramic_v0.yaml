@@ -1,0 +1,38 @@
+id: recipe_insulation_ceramic_v0
+kind: recipe
+target_item_id: insulation_ceramic
+variant_id: v0
+inputs:
+  - item_id: ceramic_fiber_slurry
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: insulation_ceramic
+    qty: 5.0
+    unit: kg
+steps:
+  - process_id: insulation_panel_forming_v0
+    inputs:
+      - item_id: ceramic_fiber_slurry
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: insulation_panel_raw
+        qty: 5.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 0.5
+    notes: "Form ceramic fiber slurry into insulation panels."
+  - process_id: drying_basic_v0
+    inputs:
+      - item_id: insulation_panel_raw
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: insulation_ceramic
+        qty: 5.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Dry formed panels to produce ceramic insulation."
+notes: "Placeholder ceramic insulation production from ceramic fiber slurry."

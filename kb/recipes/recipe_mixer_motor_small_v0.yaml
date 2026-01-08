@@ -1,18 +1,52 @@
 id: recipe_mixer_motor_small_v0
 target_item_id: mixer_motor_small
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 5.0
+    unit: kg
+  - item_id: motor_coil_wound
+    qty: 2
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 4.75
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
-    notes: Cast motor housing
+    notes: Cast motor housing; ~5% casting loss
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
-    notes: Machine housing surfaces
+    notes: Machine housing surfaces; ~5% machining loss
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: mixer_motor_small
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: Assemble rotor/stator (imported coils assumed)
+    notes: Assemble rotor/stator with coils
 assumptions: Coarse motor build; coils/windings assumed imported for now.
 notes: Placeholder route; replace with detailed motor manufacture later.

@@ -1,8 +1,41 @@
 id: recipe_wheel_load_cell_system_v0_v0
 kind: recipe
 target_item_id: wheel_load_cell_system_v0
+variant_id: v0
+inputs:
+  - item_id: component_material_a
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: wheel_load_cell_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: grinding_basic_v0
+    inputs:
+      - item_id: component_material_a
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 0.99
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 0.99
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wheel_load_cell_system_v0
+        qty: 1.0
+        unit: unit
 notes: "Local fabrication path for wheel_load_cell_system_v0; replaces import stub."

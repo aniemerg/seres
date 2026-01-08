@@ -2,18 +2,33 @@ id: recipe_steel_frame_heavy_duty_v0
 kind: recipe
 target_item_id: steel_frame_heavy_duty
 variant_id: v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 1230.0
+    unit: kg
 steps:
-  - process_id: sheet_metal_cutting_v0
-    est_time_hr: 6.0
-    labor_hours: 5.0
-    machine_hours: 5.0
-    notes: Cut plate and tube sections for frame members and mounting points.
-  - process_id: welding_brazing_basic_v0
-    est_time_hr: 8.0
-    labor_hours: 7.0
-    machine_hours: 7.0
-    notes: Weld box/tube sections into the main chassis; attach brackets and mounts.
+  - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 1230.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 1200.0
+        unit: kg
+    est_time_hr: 14.0
+    labor_hours: 12.0
+    machine_hours: 12.0
+    notes: Cut plate and tube sections, then weld into main chassis with brackets and mounts.
   - process_id: stress_relief_annealing_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 1200.0
+        unit: kg
+    outputs:
+      - item_id: steel_frame_heavy_duty
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 1.0
     machine_hours: 1.0

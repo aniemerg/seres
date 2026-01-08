@@ -1,6 +1,37 @@
 id: recipe_silicon_carbide_ceramic_v0
 kind: recipe
 target_item_id: silicon_carbide_ceramic_v0
+variant_id: v0
+inputs:
+  - item_id: silica_purified
+    qty: 100.0
+    unit: kg
+  - item_id: carbon_reductant
+    qty: 120.0
+    unit: kg
+outputs:
+  - item_id: silicon_carbide_ceramic_v0
+    qty: 90.0
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 130.0
+    unit: kg
 steps:
   - process_id: carbothermal_synthesis_silicon_carbide_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 100.0
+        unit: kg
+      - item_id: carbon_reductant
+        qty: 120.0
+        unit: kg
+    outputs:
+      - item_id: silicon_carbide_ceramic_v0
+        qty: 90.0
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 130.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
 notes: "Recipe to manufacture silicon carbide ceramic using carbothermal reduction of purified silica with carbon."

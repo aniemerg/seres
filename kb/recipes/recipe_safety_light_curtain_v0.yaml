@@ -33,10 +33,35 @@ outputs:
     unit: kg
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: electronic_components_set
+        qty: 1.1
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Receive and stage imported emitter/receiver electronics and optics"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.1
+        unit: kg
+      - item_id: aluminum_alloy_ingot
+        qty: 0.6
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: safety_light_curtain
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble mounting hardware, enclosures, and wiring harness"

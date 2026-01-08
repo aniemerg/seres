@@ -1,6 +1,16 @@
 id: recipe_methyl_chloride_gas_v1
 kind: recipe
 target_item_id: methyl_chloride_gas
+variant_id: v1
+inputs:
+  - item_id: methane_gas
+    qty: 1.0
+    unit: kg
+  - item_id: chlorine_gas
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: methylchloride_synthesis_v0
+    est_time_hr: 2.0
+    machine_hours: 2.0
 notes: "Migrated to target_item_id schema; mirrors v0 recipe structure"

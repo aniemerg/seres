@@ -2,5 +2,27 @@ id: recipe_electrical_wire_and_connectors_v0
 kind: recipe
 name: Electrical wire and connectors production
 target_item_id: electrical_wire_and_connectors
+inputs:
+  - item_id: magnet_wire_copper
+    qty: 0.5
+    unit: kg
+  - item_id: cut_wire_lengths
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: electrical_wire_and_connectors_production_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 0.5
+        unit: kg
+      - item_id: cut_wire_lengths
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg

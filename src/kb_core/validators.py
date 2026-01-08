@@ -1157,7 +1157,7 @@ def validate_recipe_step_inputs(
 
         # Template processes MUST have step-level input overrides
         if process_dict.get("is_template"):
-            if not step_inputs:
+            if "inputs" not in step:
                 issues.append(ValidationIssue(
                     level=ValidationLevel.ERROR,
                     category="recipe",

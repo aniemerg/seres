@@ -1,8 +1,46 @@
 id: recipe_structural_frame_large_v0
 kind: recipe
 target_item_id: structural_frame_large
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 60.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 57.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 57.0
+    unit: kg
+outputs:
+  - item_id: structural_frame_large
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 57.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 57.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 57.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 57.0
+        unit: kg
+    outputs:
+      - item_id: structural_frame_large
+        qty: 60.0
+        unit: kg
 notes: "Placeholder recipe to manufacture structural_frame_large from steel_stock via basic forming"

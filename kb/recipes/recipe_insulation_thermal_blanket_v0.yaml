@@ -1,6 +1,28 @@
 id: recipe_insulation_thermal_blanket_v0
 kind: recipe
 target_item_id: insulation_thermal_blanket
+inputs:
+  - item_id: insulation_ceramic
+    qty: 1.0
+    unit: kg
+  - item_id: fiber_material
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: insulation_thermal_blanket
+    qty: 1.2
+    unit: kg
 steps:
   - process_id: lamination_basic_v0
+    inputs:
+      - item_id: insulation_ceramic
+        qty: 1.0
+        unit: kg
+      - item_id: fiber_material
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: insulation_thermal_blanket
+        qty: 1.2
+        unit: kg
 notes: "Placeholder recipe to produce insulation blanket from passive insulation via lamination."

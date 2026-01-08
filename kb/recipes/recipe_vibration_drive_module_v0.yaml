@@ -2,45 +2,39 @@ id: recipe_vibration_drive_module_v0
 kind: recipe
 target_item_id: vibration_drive_module
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 8.0
+    unit: kg
+  - item_id: motor_electric_small
+    qty: 1
+    unit: unit
+  - item_id: ball_bearing_steel_v0
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: vibration_drive_module
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_stock_bar_or_billet
         qty: 8.0
         unit: kg
-        notes: "Steel for eccentric weights and mounting frame"
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    labor_hours: 1.5
-    notes: "Machine eccentric weight disks and mounting shaft"
-  - process_id: assembly_basic_v0
-    inputs:
       - item_id: motor_electric_small
-        qty: 10.0
-        unit: kg
-        notes: "Electric motor for vibration drive"
+        qty: 1
+        unit: unit
       - item_id: ball_bearing_steel_v0
         qty: 2.0
         unit: kg
-        notes: "Bearings for shaft rotation"
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Mount eccentric weights on motor shaft, install bearings and mounting frame"
-  - process_id: balancing_dynamic_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Balance vibration drive for uniform shaking motion"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 0.8
-    notes: "Test vibration amplitude and frequency"
-  - process_id: inspection_basic_v0
     outputs:
       - item_id: vibration_drive_module
-        qty: 20.0
-        unit: kg
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Verify vibration uniformity and bearing integrity"
-assumptions: "Vibration drive module for shaking tables and screening equipment. Motor with eccentric weights for vibration generation. 20 kg assembly."
-notes: "Manufacturing of vibration drive module. Total fabrication time ~8 hours. Critical for screening equipment and powder processing."
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 3.0
+    labor_hours: 6.3
+    notes: "Machine eccentric weight disks and mounting shaft from steel, mount eccentric weights on motor shaft with bearings and mounting frame, balance vibration drive for uniform shaking, test vibration amplitude and frequency, verify uniformity and bearing integrity"
+assumptions: "Vibration drive module for shaking tables and screening equipment - motor with eccentric weights for vibration generation, 20 kg assembly"
+notes: "Fabrication of vibration drive module for screening equipment and powder processing applications"

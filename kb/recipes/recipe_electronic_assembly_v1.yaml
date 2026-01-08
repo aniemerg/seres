@@ -4,7 +4,29 @@ name: Recipe for electronic assembly base v1
 produces_id: electronic_assembly
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: electronic_assembly_v0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: enclosure_small
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: electronic_assembly
+      qty: 1.0
+      unit: unit
 notes: Base recipe to manufacture generic electronic_assembly from electronic_assembly_v0 process
 target_item_id: electronic_assembly

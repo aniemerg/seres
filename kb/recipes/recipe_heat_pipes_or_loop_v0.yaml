@@ -1,21 +1,57 @@
 id: recipe_heat_pipes_or_loop_v0
 target_item_id: heat_pipes_or_loop
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 90.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 85.5
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: Cast pipe sections and fittings
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 85.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 85.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine connection interfaces
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 85.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 85.5
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     labor_hours: 2.5
     notes: Braze pipe joints and connections
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 85.5
+        unit: kg
+    outputs:
+      - item_id: heat_pipes_or_loop
+        qty: 90.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly and leak testing

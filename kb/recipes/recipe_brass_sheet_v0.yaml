@@ -15,6 +15,19 @@ byproducts:
     unit: kg
 steps:
   - process_id: rolling_basic_v0
+    inputs:
+      - item_id: brass_bar_stock
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: brass_sheet
+        qty: 1.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
     note: "Roll brass bar stock into sheet form using rolling mill"
 notes: |
   Produces brass sheet from brass bar stock via rolling.

@@ -5,7 +5,35 @@ name: Recipe for machine_vision_lighting_v0 v0
 produces_id: machine_vision_lighting_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: machine_vision_lighting_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: unit
+    - item_id: electrical_wire_and_connectors
+      qty: 0.2
+      unit: kg
+    - item_id: fastener_kit_small
+      qty: 0.2
+      unit: kg
+  outputs:
+    - item_id: machine_vision_lighting_v0
+      qty: 1.0
+      unit: unit
   notes: Assemble structured lighting module (LED array, optics, controller, and mounting hardware).
 notes: Canonical assembly path for machine vision lighting module.

@@ -1,20 +1,80 @@
 id: recipe_measurement_equipment_v0
 target_item_id: measurement_equipment
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 10.0
+    unit: kg
+  - item_id: caliper_set_precision
+    qty: 1.0
+    unit: unit
+  - item_id: micrometer_set
+    qty: 1.0
+    unit: unit
+  - item_id: dial_indicator_set
+    qty: 1.0
+    unit: unit
+  - item_id: gauge_block_set
+    qty: 1.0
+    unit: unit
+  - item_id: multimeter_digital
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: measurement_equipment
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 10.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Machine precision gauge blocks, calipers, micrometer frames"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: caliper_set_precision
+        qty: 1.0
+        unit: unit
+      - item_id: micrometer_set
+        qty: 1.0
+        unit: unit
+      - item_id: dial_indicator_set
+        qty: 1.0
+        unit: unit
+      - item_id: gauge_block_set
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble mechanical measurement tools"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: multimeter_digital
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble electronic measurement instruments"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Calibrate measurement devices against standards"

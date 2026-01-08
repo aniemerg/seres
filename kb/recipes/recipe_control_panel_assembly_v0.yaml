@@ -3,32 +3,57 @@ kind: recipe
 name: Control panel assembly v0
 target_item_id: control_panel_assembly_v0
 variant_id: v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 25.0
+    unit: kg
+  - item_id: control_components
+    qty: 1
+    unit: unit
+  - item_id: assembled_wire_harness
+    qty: 1
+    unit: unit
+  - item_id: terminal_block_set
+    qty: 1
+    unit: unit
+  - item_id: power_output_terminals
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: control_panel_assembly_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-    notes: "Assemble control panel enclosure and mounting hardware"
-  - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: raw_metal_block
         qty: 25.0
         unit: kg
       - item_id: control_components
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: assembled_wire_harness
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: terminal_block_set
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: power_output_terminals
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: fastener_kit_medium
-        qty: 1.0
+        qty: 1
         unit: unit
     outputs:
       - item_id: control_panel_assembly_v0
-        qty: 1.0
+        qty: 1
         unit: unit
-    notes: "Install control components, wiring, and terminals into panel enclosure"
-notes: "Placeholder control panel assembly; uses generic control components and wiring."
+    est_time_hr: 6.0
+    machine_hours: 2.0
+    labor_hours: 4.0
+    notes: "Fabricate control panel enclosure, install control components, wire harness, and terminals into panel enclosure"
+assumptions: "Control panel assembly uses generic control components and wiring"
+notes: "Assembly of control panel with enclosure, control electronics, wiring, and terminals"

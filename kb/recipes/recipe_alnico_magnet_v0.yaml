@@ -4,9 +4,25 @@ name: Recipe for AlNiCo magnet v0
 target_item_id: alnico_magnet_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+- item_id: alnico_magnet_alloy_v0
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: alnico_magnet_v0
+  qty: 1.0
+  unit: unit
 steps:
 - process_id: alnico_heat_treatment_v0
   notes: Magnetize alloy to AlNiCo magnet (machining done separately if needed)
+  inputs:
+  - item_id: alnico_magnet_alloy_v0
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: alnico_magnet_v0
+    qty: 1.0
+    unit: unit
 notes: This recipe chains the existing heat-treatment step with a machining/grinding pass to yield alnico_magnet_v0 from alnico_magnet_alloy_v0. Assumes feedstock availability from alnico_magnet_alloy_v0 and a heat-treated magnet ready for finishing.
 source_tags:
 - derived_from ellery_seed

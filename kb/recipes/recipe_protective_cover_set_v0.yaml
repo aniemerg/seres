@@ -3,8 +3,14 @@ kind: recipe
 target_item_id: protective_cover_set
 variant_id: v0
 inputs:
-  - item_id: aluminum_sheet_2mm
+  - item_id: sheet_metal_or_structural_steel
     qty: 3.5
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 3.4
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 3.2
     unit: kg
   - item_id: fastener_kit_medium
     qty: 2
@@ -19,13 +25,48 @@ byproducts:
     unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
-    note: "Cut aluminum sheet to size for motor covers, cable guards, joint covers"
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 3.5
+        unit: kg
+    outputs:
+      - item_id: steel_plate_or_sheet
+        qty: 3.4
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
+    note: "Cut sheet to size for motor covers, cable guards, joint covers"
   - process_id: sheet_metal_forming_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 3.4
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.2
+        unit: kg
     note: "Bend sheet into covers, enclosures, guards"
   - process_id: finishing_deburring_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.2
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 3.2
+        unit: kg
     note: "Deburr edges, drill mounting holes, add ventilation slots"
   - process_id: surface_finishing_v0
-    note: "Anodize aluminum for corrosion resistance (optional)"
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 3.2
+        unit: kg
+    outputs:
+      - item_id: protective_cover_set
+        qty: 1
+        unit: unit
+    note: "Surface finish for corrosion resistance (optional)"
 notes: |
   Manufactures protective cover set for robot pinch points and moving parts.
 

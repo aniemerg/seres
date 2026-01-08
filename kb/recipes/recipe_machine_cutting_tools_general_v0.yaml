@@ -2,6 +2,43 @@ id: recipe_machine_cutting_tools_general_v0
 kind: recipe
 target_item_id: cutting_tools_general
 variant_id: v0
+inputs:
+  - item_id: hand_tools_basic
+    qty: 1
+    unit: unit
+  - item_id: saw_or_cutting_tool
+    qty: 2
+    unit: unit
+  - item_id: shear_blade_or_saw_band
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cutting_tools_general
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: hand_tools_basic
+        qty: 1
+        unit: unit
+      - item_id: saw_or_cutting_tool
+        qty: 2
+        unit: unit
+      - item_id: shear_blade_or_saw_band
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cutting_tools_general
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble cutting tools from BOM components"
 notes: "Assemble cutting tools from BOM components; placeholder assembly recipe."

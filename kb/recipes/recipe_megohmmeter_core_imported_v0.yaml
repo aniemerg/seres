@@ -1,12 +1,24 @@
 id: recipe_megohmmeter_core_imported_v0
 target_item_id: megohmmeter_core_imported
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: megohmmeter_core_imported
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Receive imported megohmmeter measurement core"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Verify functionality and specifications"

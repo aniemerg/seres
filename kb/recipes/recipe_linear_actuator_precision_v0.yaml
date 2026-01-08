@@ -1,31 +1,50 @@
 id: recipe_linear_actuator_precision_v0
 target_item_id: linear_actuator_precision
 variant_id: v0
+inputs:
+  - item_id: lead_screw_assembly
+    qty: 1
+    unit: unit
+  - item_id: bearing_set
+    qty: 1
+    unit: unit
+  - item_id: motor_housing_steel
+    qty: 5.0
+    unit: kg
+  - item_id: encoder_rotary_incremental
+    qty: 1
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: linear_actuator_precision
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_precision_v0
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    labor_hours: 3.0
-    notes: "Machine leadscrew/ball-screw, housing, and nut assembly to tight tolerances"
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Install bearings, leadscrew/ball-screw in housing, attach motor coupling"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install and wire encoder for position feedback"
-  - process_id: precision_alignment_and_leveling_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Align leadscrew and eliminate backlash, calibrate encoder"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.0
-    notes: "Test motion accuracy, repeatability, and encoder feedback"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Verify positioning accuracy and smooth motion"
+    inputs:
+      - item_id: lead_screw_assembly
+        qty: 1
+        unit: unit
+      - item_id: bearing_set
+        qty: 1
+        unit: unit
+      - item_id: motor_housing_steel
+        qty: 5.0
+        unit: kg
+      - item_id: encoder_rotary_incremental
+        qty: 1
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: linear_actuator_precision
+        qty: 1
+        unit: unit
+    est_time_hr: 13.0
+    labor_hours: 9.5
+    notes: "Assemble leadscrew, bearings, housing, encoder, wire and test; includes machining, assembly, wiring, alignment, testing, and inspection"
 assumptions: "Precision linear actuator with leadscrew or ball-screw drive and encoder feedback. Used for Stewart platform and other precision positioning applications. Requires tight tolerance machining and alignment."
 notes: "Manufacturing of precision linear actuator. Total fabrication time ~13 hours. Critical for Stewart platform solar concentrator alignment."

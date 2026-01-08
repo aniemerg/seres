@@ -1,6 +1,35 @@
 id: recipe_bearing_set_sealed_v0
 target_item_id: bearing_set_sealed
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 1.5
+    unit: kg
+  - item_id: bearing_rings_machined
+    qty: 1.1
+    unit: kg
+  - item_id: bearing_rings_ground
+    qty: 1.0
+    unit: kg
+  - item_id: bearing_ball_steel
+    qty: 0.3
+    unit: kg
+  - item_id: bearing_cage_stamped
+    qty: 0.1
+    unit: kg
+  - item_id: seal_rubber_bearing
+    qty: 0.05
+    unit: kg
+  - item_id: grease_bearing_high_temp
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: bearing_set_sealed
+    qty: 2.0
+    unit: kg
+  - item_id: assembly_loss
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: metal_forging_process_v0
     inputs:

@@ -3,16 +3,54 @@ kind: recipe
 name: Recipe for magnetic drum memory v0
 target_item_id: magnetic_drum_memory_v0
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 15.0
+    unit: kg
+  - item_id: iron_oxide_powder
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: magnetic_drum_memory_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Finish machining drum body and apply initial coating"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
+      - item_id: iron_oxide_powder
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble drum housing with magnetic coating and mounting fixtures"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_drum_memory_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Dimensional inspection and surface finish verification"

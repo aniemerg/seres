@@ -3,6 +3,17 @@ kind: recipe
 name: Recipe for bearing cage stamped v0
 variant_id: v0
 target_item_id: bearing_cage_stamped
+inputs:
+  - item_id: steel_sheet_1mm
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: bearing_cage_stamped
+    qty: 0.09
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.01
+    unit: kg
 steps:
   - process_id: metal_stamping_process_v0
     inputs:

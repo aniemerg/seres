@@ -3,6 +3,22 @@ kind: recipe
 name: Silicon monoxide gas production
 target_item_id: silicon_monoxide_gas
 variant_id: v0
+inputs:
+  - item_id: olivine_concentrate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silicon_monoxide_gas
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: olivine_carbothermal_reduction_v0
+    inputs:
+      - item_id: olivine_concentrate
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silicon_monoxide_gas
+        qty: 1.0
+        unit: kg
 notes: "SiO gas produced as intermediate in carbothermal reduction processes."

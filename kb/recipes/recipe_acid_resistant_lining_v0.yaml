@@ -1,20 +1,77 @@
 id: recipe_acid_resistant_lining_v0
 target_item_id: acid_resistant_lining
 variant_id: v0
+inputs:
+  - item_id: regolith_fine_fraction
+    qty: 10.0
+    unit: kg
+  - item_id: part_to_clean
+    qty: 1.0
+    unit: kg
+  - item_id: cleaning_solvent_or_detergent_v0
+    qty: 0.1
+    unit: kg
+  - item_id: finished_part
+    qty: 1.0
+    unit: kg
+  - item_id: coating_compound
+    qty: 0.1
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: glass_melting_and_forming_v0
+    inputs:
+      - item_id: regolith_fine_fraction
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: glass_bulk
+        qty: 9.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Produce glass coating material or ceramic tiles"
   - process_id: cleaning_basic_v0
+    inputs:
+      - item_id: part_to_clean
+        qty: 1.0
+        unit: kg
+      - item_id: cleaning_solvent_or_detergent_v0
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: part_cleaned
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Prepare substrate surface for lining application"
   - process_id: ceramic_coating_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+      - item_id: coating_compound
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Apply glass/ceramic lining via spraying or tiling"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: acid_resistant_lining
+        qty: 1.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Cure/fuse coating to substrate"

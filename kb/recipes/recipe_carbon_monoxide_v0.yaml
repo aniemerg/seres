@@ -3,8 +3,34 @@ kind: recipe
 target_item_id: carbon_monoxide
 variant_id: v0
 name: Carbon monoxide production via Boudouard reaction
+inputs:
+  - item_id: carbon_reductant
+    qty: 0.21
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.79
+    unit: kg
+outputs:
+  - item_id: carbon_monoxide
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: boudouard_reaction_v0
+    inputs:
+      - item_id: carbon_reductant
+        qty: 0.21
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.79
+        unit: kg
+    outputs:
+      - item_id: carbon_monoxide
+        qty: 1.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "React carbon with carbon dioxide at high temperature via Boudouard reaction: C + CO2 → 2CO"
+assumptions: "Boudouard reaction at ~900-1000°C for CO generation"
 notes: |
   Produce carbon monoxide via the Boudouard reaction (C + CO2 → 2CO).
   Primary method for CO generation in lunar ISRU.

@@ -1,6 +1,29 @@
 id: recipe_sorel_cement_v0
 kind: recipe
 target_item_id: sorel_cement
+variant_id: v0
+inputs:
+  - item_id: magnesium_oxide
+    qty: 0.6
+    unit: kg
+  - item_id: magnesium_chloride
+    qty: 0.4
+    unit: kg
+outputs:
+  - item_id: sorel_cement
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sorel_cement_synthesis_v0
+    inputs:
+      - item_id: magnesium_oxide
+        qty: 0.6
+        unit: kg
+      - item_id: magnesium_chloride
+        qty: 0.4
+        unit: kg
+    outputs:
+      - item_id: sorel_cement
+        qty: 1.0
+        unit: kg
 notes: "Sorel cement production from MgO and MgCl2."

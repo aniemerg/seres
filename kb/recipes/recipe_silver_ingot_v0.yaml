@@ -4,8 +4,24 @@ name: Recipe for silver ingot v0
 produces_id: silver_ingot
 variant_id: v0
 target_item_id: silver_ingot
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silver_ingot
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silver_ingot
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.0

@@ -2,5 +2,29 @@ id: recipe_welding_electrode_copper_v0
 kind: recipe
 name: Welding electrode copper
 target_item_id: welding_electrode_copper
+variant_id: v0
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: welding_electrode_copper
+    qty: 0.25
+    unit: kg
+  - item_id: copper_scrap_v0
+    qty: 0.75
+    unit: kg
 steps:
   - process_id: electrode_fabrication_copper_v0
+    inputs:
+      - item_id: copper_rod_ingot
+        qty: 0.25
+        unit: kg
+    outputs:
+      - item_id: welding_electrode_copper
+        qty: 0.25
+        unit: kg
+    byproducts:
+      - item_id: copper_scrap_v0
+        qty: 0.75
+        unit: kg

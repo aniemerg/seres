@@ -1,6 +1,23 @@
 id: recipe_ceramic_drill_chip_waste_v0
 kind: recipe
 target_item_id: ceramic_drill_chip_waste
+variant_id: v0
+inputs:
+  - item_id: center_insulator_ceramic
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: ceramic_drill_chip_waste
+    qty: 0.005
+    unit: kg
 steps:
   - process_id: machining_process_drilling_v0
+    inputs:
+      - item_id: center_insulator_ceramic
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: ceramic_drill_chip_waste
+        qty: 0.005
+        unit: kg
 notes: "Produce ceramic_drill_chip_waste as a byproduct of the drilling operation."

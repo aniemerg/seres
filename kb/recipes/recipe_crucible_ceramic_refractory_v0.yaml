@@ -1,20 +1,56 @@
 id: recipe_crucible_ceramic_refractory_v0
 target_item_id: crucible_ceramic_refractory
 variant_id: v0
+inputs:
+  - item_id: ceramic_powder_mixture
+    qty: 13.0
+    unit: kg
 steps:
   - process_id: ceramic_forming_basic_v0
+    inputs:
+      - item_id: ceramic_powder_mixture
+        qty: 13.0
+        unit: kg
+    outputs:
+      - item_id: green_ceramic_parts
+        qty: 13.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Form crucible shape from refractory clay or alumina mixture"
   - process_id: drying_basic_v0
+    inputs:
+      - item_id: green_ceramic_parts
+        qty: 13.0
+        unit: kg
+    outputs:
+      - item_id: dried_material
+        qty: 11.3
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Slow dry formed crucible to prevent cracking"
   - process_id: ceramic_firing_high_temp_v0
+    inputs:
+      - item_id: dried_material
+        qty: 11.3
+        unit: kg
+    outputs:
+      - item_id: sintered_shapes
+        qty: 10.2
+        unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
     notes: "Fire crucible at high temperature to vitrify and strengthen"
   - process_id: surface_finishing_basic_v0
+    inputs:
+      - item_id: sintered_shapes
+        qty: 10.2
+        unit: kg
+    outputs:
+      - item_id: crucible_ceramic_refractory
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Clean and inspect fired crucible"

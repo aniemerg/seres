@@ -2,6 +2,14 @@ id: recipe_fused_silica_envelope_v0
 kind: recipe
 target_item_id: fused_silica_envelope
 variant_id: v0
+inputs:
+  - item_id: fused_silica_glass
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: fused_silica_envelope
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     inputs:
@@ -9,14 +17,30 @@ steps:
         qty: 5.0
         unit: kg
         notes: "Imported fused silica glass stock"
+    outputs:
+      - item_id: fused_silica_glass
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
     notes: "Receive imported fused silica glass"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: fused_silica_glass
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: fused_silica_glass
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
     notes: "Inspect glass quality and dimensions"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: fused_silica_glass
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: fused_silica_envelope
         qty: 5.0

@@ -1,35 +1,40 @@
 id: recipe_lh2_storage_tank_cryogenic_v0
 kind: recipe
 name: Recipe for LH2 cryogenic storage tank v0
-produces_id: lh2_storage_tank_cryogenic_v0
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: lh2_storage_tank_cryogenic_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 150.0
+    unit: kg
+  - item_id: insulation_pack_high_temp
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: lh2_storage_tank_cryogenic_v0
+    qty: 1
+    unit: unit
+  - item_id: spinning_scrap_metal_v0
+    qty: 10.0
+    unit: kg
 steps:
-  - process_id: metal_spinning_process_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: aluminum_sheet_2mm
         qty: 150.0
         unit: kg
-    outputs:
-      - item_id: tank_shell_spun
-        qty: 140.0
-        unit: kg
-    est_time_hr: 8.0
-    notes: Spin aluminum alloy sheet to form tank shell (tank_shell_spun)
-  - process_id: sealing_and_assembly_basic_v0
-    inputs:
-      - item_id: tank_shell_spun
-        qty: 1.0
-        unit: unit
       - item_id: insulation_pack_high_temp
-        qty: 1.0
+        qty: 1
         unit: unit
     outputs:
       - item_id: lh2_storage_tank_cryogenic_v0
-        qty: 1.0
+        qty: 1
         unit: unit
-    est_time_hr: 2.0
-    notes: Assemble cryogenic LH2 tank shell with insulation (placeholder for cryogenic specifics)
-notes: "Preliminary recipe to manufacture LH2 cryogenic storage tank v0 using spin-formed shell and insulation pack. Detailed sealing, purge, and certification steps are deferred pending further design."
+      - item_id: spinning_scrap_metal_v0
+        qty: 10.0
+        unit: kg
+    est_time_hr: 10.0
+    machine_hours: 8.0
+    labor_hours: 2.0
+    notes: "Spin aluminum sheet to form tank shell, apply insulation, seal and assemble cryogenic LH2 storage tank"
+notes: "Manufacture LH2 cryogenic storage tank using spin-formed aluminum shell with high-temp insulation. Includes forming, insulation, and sealing operations."

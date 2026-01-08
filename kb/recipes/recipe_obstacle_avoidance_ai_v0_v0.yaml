@@ -2,10 +2,63 @@ id: recipe_obstacle_avoidance_ai_v0_v0
 kind: recipe
 name: Recipe for Obstacle avoidance AI module v0
 target_item_id: obstacle_avoidance_ai_v0
+variant_id: v0
+inputs:
+  - item_id: microcontroller_or_embedded_board
+    qty: 1.0
+    unit: unit
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+    notes: "Intermediate for final assembly"
+outputs:
+  - item_id: obstacle_avoidance_ai_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-    notes: "Legacy step converted to modern recipe schema"
+    inputs:
+      - item_id: microcontroller_or_embedded_board
+        qty: 1.0
+        unit: unit
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    notes: "Assemble electronics and internal harness"
   - process_id: machine_assembly_basic_v0
-    notes: "Legacy step converted to modern recipe schema"
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: obstacle_avoidance_ai_v0
+        qty: 1.0
+        unit: unit
+    notes: "Install electronics into enclosure"
 assumptions: "Generic machine assembly path; no dedicated subsystems defined yet"
 notes: "Initial placeholder recipe to enable manufacturing modeling for obstacle_avoidance_ai_v0"

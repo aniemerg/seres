@@ -1,6 +1,39 @@
 id: recipe_permalloy_high_permeability_v0
 kind: recipe
+name: Recipe for permalloy high permeability
 target_item_id: permalloy_high_permeability_v0
+variant_id: v0
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.8
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: permalloy_high_permeability_v0
+    qty: 0.95
+    unit: kg
+  - item_id: metal_swarf
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: permalloy_alloy_melting_and_casting_v0
-notes: "Single-step recipe using modern step format (legacy_step_format upgrade)."
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 0.8
+        unit: kg
+      - item_id: iron_metal_pure
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: permalloy_high_permeability_v0
+        qty: 0.95
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.05
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Melt nickel and iron metals in induction furnace, cast permalloy alloy with high magnetic permeability (80% Ni, 20% Fe)"
+notes: "Production of permalloy high permeability magnetic alloy from nickel and iron via alloying and casting"

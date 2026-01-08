@@ -1,20 +1,81 @@
 id: recipe_cooling_chamber_controlled_v0
 target_item_id: cooling_chamber_controlled
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 60.0
+    unit: kg
+  - item_id: formed_sheet_metal_parts
+    qty: 57.0
+    unit: kg
+  - item_id: welded_fabrications
+    qty: 55.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cooling_chamber_controlled
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 57.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Fabricate chamber housing, air ducts, fan housings from sheet metal"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 57.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 55.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Weld chamber structure, install insulation panels, attach ductwork"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 55.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install fans, motors, temperature controller, ducting, dampers"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cooling_chamber_controlled
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Wire temperature controller, fan motors, sensors"

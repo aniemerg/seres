@@ -1,12 +1,44 @@
 id: recipe_gantry_axes_set_v0
 target_item_id: gantry_axes_set
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 30.0
+    unit: kg
+outputs:
+  - item_id: gantry_axes_set
+    qty: 30.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 30.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 28.5
+      unit: kg
   notes: Cast rail sections and carriage blanks
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 28.5
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 28.5
+      unit: kg
   notes: Precision machine rail surfaces and bearings
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 28.5
+      unit: kg
+  outputs:
+    - item_id: gantry_axes_set
+      qty: 30.0
+      unit: kg
   notes: Assemble axes with linear bearings and motors
 assumptions: "30 kg linear axes set for Cartesian 3D printer motion."
 notes: "Three-step recipe for gantry axes set."

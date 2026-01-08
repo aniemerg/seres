@@ -1,14 +1,35 @@
 id: recipe_cutting_tool_set_basic_v0
 target_item_id: cutting_tool_set_basic
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 27.0
+    unit: kg
+outputs:
+  - item_id: cutting_tool_set_basic
+    qty: 1
+    unit: unit
 steps:
-  - process_id: import_receiving_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 27.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 26.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 26.0
+        unit: kg
+    outputs:
+      - item_id: cutting_tool_set_basic
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 1.0
 assumptions: Cast/tool steel blanks then finish; imported tooling steel assumed initially.

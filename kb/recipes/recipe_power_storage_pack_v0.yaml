@@ -1,23 +1,65 @@
 id: recipe_power_storage_pack_v0
 target_item_id: power_storage_pack
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 20.0
+    unit: kg
+  - item_id: battery_pack_nife
+    qty: 2
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: Cast enclosure and structural components
+    notes: "Cast enclosure and structural components; ~5% casting loss"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 17.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
-    notes: Machine mounting and connection interfaces
+    notes: "Machine mounting and connection interfaces; ~10% machining loss"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 17.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 17.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 1.0
-    notes: Weld enclosure sections
+    notes: "Weld enclosure sections"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 17.0
+        unit: kg
+      - item_id: battery_pack_nife
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: power_storage_pack
+        qty: 1
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: Assemble pack with battery cells or flywheel
-assumptions: "60 kg power storage pack for mobile platforms."
-notes: "Four-step recipe for power storage pack."
+    notes: "Assemble pack with battery modules; enclosure + 2 NiFe battery modules"
+assumptions: "Power storage pack for mobile platforms; fabricated enclosure + NiFe battery modules."
+notes: "Four-step recipe for power storage pack: cast → machine → weld → assemble with batteries."

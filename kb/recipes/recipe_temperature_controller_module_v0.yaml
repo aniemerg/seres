@@ -1,20 +1,75 @@
 id: recipe_temperature_controller_module_v0
 target_item_id: temperature_controller_module
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 2.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: instrument_uncalibrated
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: temperature_controller_module
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 1.9
+        unit: kg
     est_time_hr: 0.3
     machine_hours: 0.3
     notes: "Fabricate small control module enclosure"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Wire PID controller, thermocouple input, relay output, and display"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 1.9
+        unit: kg
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: instrument_uncalibrated
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Mount components in enclosure, install terminals and user interface"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: instrument_uncalibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Calibrate thermocouple input and verify PID control response"

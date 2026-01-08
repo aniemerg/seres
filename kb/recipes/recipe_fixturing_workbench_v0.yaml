@@ -1,16 +1,44 @@
 id: recipe_fixturing_workbench_v0
 target_item_id: fixturing_workbench
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 160.0
+    unit: kg
 steps:
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 160.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 152.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Weld workbench frame from steel tubing or angle iron"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 152.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine T-slots in table top, mount holes, leveling surfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: fixturing_workbench
+        qty: 150.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble frame, table top, leveling feet, mounting hardware"

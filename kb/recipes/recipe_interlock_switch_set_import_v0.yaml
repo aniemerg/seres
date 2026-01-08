@@ -1,0 +1,26 @@
+id: recipe_interlock_switch_set_v0
+kind: recipe
+name: Recipe for interlock_switch_set
+target_item_id: interlock_switch_set
+variant_id: v0
+inputs:
+  - item_id: switch_set_industrial
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: interlock_switch_set
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: switch_set_industrial
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: interlock_switch_set
+        qty: 1
+        unit: unit
+    est_time_hr: 0.2
+    notes: "Assemble interlock switch set from industrial switch components"
+notes: "Local assembly of interlock switch set from industrial switch components"

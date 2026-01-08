@@ -1,62 +1,34 @@
 # Validation Report (v0)
 
 ## Counts by kind
-- bom: 398
+- bom: 400
 - item: 1
-- machine: 341
-- material: 566
-- part: 1006
+- machine: 343
+- material: 583
+- part: 1028
 - process: 847
-- recipe: 1931
+- recipe: 1940
 - resource: 2
 - scenario: 1
 - schema: 1
 - seed: 6
 
 ## Missing required fields
-Total: 246 missing fields
-- capabilities: 246
+Total: 248 missing fields
+- capabilities: 248
 
 See `out/missing_fields.jsonl` for details.
 
-## Missing data (null values)
-Total: 897 null fields
-- part: 10
-- process: 887
-
-See `out/null_values.jsonl` for details.
-
-## Circular Dependencies
-Total: 1 circular dependency loops detected
-
-By type:
-- self_reference: 1
-
-Sample loops:
-- [self_reference] electrical_energy → electrical_energy
-
-See `out/circular_dependencies.jsonl` for details.
-
-## Validation Issues (ADR-017)
-Total: 4644 validation issues found
-
-By severity:
-- error: 4644
-
-By category:
-- recipe: 4607
-- semantic: 37
-
-Top validation rules triggered:
-- recipe_template_missing_step_inputs: 2954
-- recipe_step_input_not_satisfied: 1653
-- process_machine_required: 35
-- scaling_basis_not_found: 2
-
-See `out/validation_issues.jsonl` for details.
-
 ## Warnings
 - kb/units/units.yaml: unknown kind; skipped
+
+## Queue Filtering
+**Status**: Enabled
+**Mode**: boms_recipes_parts_only
+**Total gaps found**: 248
+**Filtered out**: 248
+**Added to queue**: 0
+**Filtering rate**: 100.0%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

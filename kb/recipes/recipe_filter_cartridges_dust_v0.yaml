@@ -1,16 +1,48 @@
 id: recipe_filter_cartridges_dust_v0
 target_item_id: filter_cartridges_dust
 variant_id: v0
+inputs:
+  - item_id: fiber_material
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: filter_cartridges_dust
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: textile_manufacturing_basic_v0
+    inputs:
+      - item_id: fiber_material
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: textile_fabric
+        qty: 4.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Produce or cut filter media fabric in appropriate dimensions"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: textile_fabric
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Pleat fabric, install in cartridge frames, seal edges"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: filter_cartridges_dust
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
     notes: "Test airflow and filtration efficiency"

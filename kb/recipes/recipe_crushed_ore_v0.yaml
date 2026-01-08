@@ -11,12 +11,23 @@ outputs:
   - item_id: crushed_ore
     qty: 98.0
     unit: kg
-  - item_id: fines_or_dust
+  - item_id: dust_fines
     qty: 2.0
     unit: kg
     notes: "Fine dust from crushing"
 steps:
   - process_id: crushing_basic_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: crushed_ore
+        qty: 98.0
+        unit: kg
+      - item_id: dust_fines
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Crush ore to sub-50mm size to produce crushed ore feed"

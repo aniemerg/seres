@@ -4,7 +4,23 @@ name: Recipe for liquid oxygen via cryogenic condensation
 produces_id: liquid_oxygen_v0
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: oxygen_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: liquid_oxygen_v0
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: cold_trap_cryogenic_v0
+  inputs:
+    - item_id: oxygen_gas
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: liquid_oxygen_v0
+      qty: 1.0
+      unit: kg
 notes: Cryogenic condensation step to liquefy oxygen.
 target_item_id: liquid_oxygen_v0

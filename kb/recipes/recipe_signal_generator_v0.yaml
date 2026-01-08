@@ -3,7 +3,41 @@ kind: recipe
 name: Signal generator assembly
 target_item_id: signal_generator
 variant_id: v0
+inputs:
+  - item_id: oscillator_circuit_vacuum_tube_v0
+    qty: 1
+    unit: unit
+  - item_id: amplifier_circuit_vacuum_tube_v0
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: power_supply_bench
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: signal_generator
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: oscillator_circuit_vacuum_tube_v0
+        qty: 1
+        unit: unit
+      - item_id: amplifier_circuit_vacuum_tube_v0
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: power_supply_bench
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: signal_generator
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
 notes: "Assemble signal generator from BOM; placeholder assembly step."

@@ -1,21 +1,67 @@
 id: recipe_precision_levels_v0
 target_item_id: precision_levels
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 4.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 0.4
+    unit: L
+outputs:
+  - item_id: precision_levels
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 4.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 0.4
+        unit: L
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 3.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Machine aluminum body to high flatness and precision (±0.01 mm tolerance)"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install spirit vials or electronic sensor modules in machined body"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate levels against reference surface to 0.02 mm/m accuracy"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: precision_levels
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify accuracy and repeatability of level readings"

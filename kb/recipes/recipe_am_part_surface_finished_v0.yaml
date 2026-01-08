@@ -3,7 +3,23 @@ kind: recipe
 name: AM Part Surface Finished v0
 variant_id: v0
 target_item_id: am_part_surface_finished_v0
+inputs:
+  - item_id: deposited_metal_structure
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: am_part_surface_finished_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: surface_finishing_am_parts_v0
+    inputs:
+      - item_id: deposited_metal_structure
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: am_part_surface_finished_v0
+        qty: 1.0
+        unit: unit
     notes: "Format-updated step using the new schema with process_id"
 notes: "Produces surface-finished AM part from raw AM part using the standard surface finishing process."

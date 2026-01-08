@@ -1,8 +1,26 @@
 id: recipe_enclosure_steel_large_v0
 kind: recipe
 target_item_id: enclosure_steel_large
+inputs:
+  - item_id: steel_plate_raw
+    qty: 22.0
+    unit: kg
+outputs:
+  - item_id: enclosure_steel_large
+    qty: 1
+    unit: unit
 steps:
-  - process_id: cutting_basic_v0
-  - process_id: welding_brazing_basic_v0
-  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_steel_large
+        qty: 1
+        unit: unit
+    est_time_hr: 6.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Cut steel sheet to enclosure dimensions, weld/braze panels together, machine finish surfaces and mounting holes"
 notes: "Placeholder manufacturing recipe for enclosure_steel_large; to be refined with BOM and specific tolerances."

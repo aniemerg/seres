@@ -1,17 +1,27 @@
 id: recipe_nut_hex_medium_steel_v0
 target_item_id: nut_hex_medium_steel
 variant_id: v0
-
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: nut_hex_medium_steel
+    qty: 20
+    unit: unit
 steps:
   - process_id: metal_forging_process_v0
-    est_time_hr: 0.03
-    machine_hours: 0.03
-    notes: "Cold heading to form hexagonal blank from steel rod. Single or double strike operation."
-
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 0.08
-    machine_hours: 0.08
-    notes: "Drill pilot hole and tap internal threads. Chamfer edges for easy thread engagement."
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: nut_hex_medium_steel
+        qty: 20
+        unit: unit
+    est_time_hr: 0.11
+    machine_hours: 0.11
+    notes: "Cold heading to form hexagonal blank from steel rod, then drill and tap internal threads in continuous operation."
 
 assumptions: |
   Generic hex nut production for M6-M12 sizes. Process covers 2x size range.

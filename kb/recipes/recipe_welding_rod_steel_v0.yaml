@@ -2,8 +2,24 @@ id: recipe_welding_rod_steel_v0
 kind: recipe
 target_item_id: welding_rod_steel
 variant_id: v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: welding_rod_steel
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: welding_rod_steel
+        qty: 1.0
+        unit: kg
 notes: |
   Simple recipe for steel welding rods.
   Form steel wire/rod from steel stock, add flux coating.

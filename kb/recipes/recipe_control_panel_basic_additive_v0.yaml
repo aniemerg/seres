@@ -1,19 +1,35 @@
 id: recipe_control_panel_basic_additive_v0
+kind: recipe
+name: Recipe for control panel basic additive
 target_item_id: control_panel_basic
 variant_id: additive
+inputs:
+  - item_id: polymer_filament
+    qty: 1.5
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
 steps:
-  - process_id: additive_manufacturing_polymer_v0
-    est_time_hr: 3.5
-    machine_hours: 3.5
-    labor_hours: 0.5
-    notes: "Print panel enclosure and cover with mounting bosses."
-  - process_id: support_removal_and_cleanup_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Remove supports, deburr openings."
   - process_id: assembly_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install switches, indicators, terminals."
+    inputs:
+      - item_id: polymer_filament
+        qty: 1.5
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+    est_time_hr: 5.0
+    machine_hours: 3.5
+    labor_hours: 2.0
+    notes: "3D print polymer panel enclosure and cover with mounting bosses from polymer filament, remove support material and deburr openings, install electronic components (switches, indicators, terminals) in enclosure"
 assumptions: Polymer enclosure acceptable for low/medium heat; use sheet metal variant if high-temp.
 notes: Additive path for basic control panel housing.

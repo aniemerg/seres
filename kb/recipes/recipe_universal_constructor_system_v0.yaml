@@ -4,10 +4,100 @@ target_item_id: universal_constructor_system_v0
 produces_id: universal_constructor_system_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: machine_frame_medium
+    qty: 1.0
+    unit: unit
+  - item_id: frame_and_supports_basic
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: structural_steel_frame
+    qty: 1.0
+    unit: unit
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: universal_constructor_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+      - item_id: frame_and_supports_basic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_steel_small
+        qty: 1.0
+        unit: kg
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: analog_test_bench_neural_circuits_v0
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: structural_steel_frame
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: universal_constructor_system_v0
+        qty: 1.0
+        unit: unit
 notes: "Seeded assembly path for universal_constructor_system_v0 using existing unit operations. Placeholder chain to enable local manufacturing modeling."

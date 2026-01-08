@@ -2,10 +2,76 @@ id: recipe_lab_console_unit_v0
 kind: recipe
 name: Lab console unit production v0
 target_item_id: lab_console_unit_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 22.0
+    unit: kg
+  - item_id: control_panel_basic_v0
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: lab_console_unit_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 21.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 21.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 21.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 21.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 20.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 20.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic_v0
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: lab_console_unit_v0
+        qty: 1.0
+        unit: unit
 notes: "Replicates lab_v0 recipe structure for producing lab_console_unit_v0 using common unit operations."

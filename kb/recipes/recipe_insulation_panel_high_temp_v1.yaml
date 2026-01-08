@@ -2,25 +2,41 @@ id: recipe_insulation_panel_high_temp_v1
 kind: recipe
 target_item_id: insulation_panel_high_temp
 variant_id: v1
+inputs:
+  - item_id: ceramic_fiber_slurry
+    qty: 40.0
+    unit: kg
 steps:
   - process_id: insulation_panel_forming_v0
     inputs:
-      - item_id: ceramic_powder
-        qty: 35.0
+      - item_id: ceramic_fiber_slurry
+        qty: 40.0
         unit: kg
-        notes: "Ceramic powder for insulation panel"
-      - item_id: binder_material
-        qty: 5.0
+        notes: "Ceramic fiber slurry feedstock for panel forming"
+    outputs:
+      - item_id: insulation_panel_raw
+        qty: 40.0
         unit: kg
-        notes: "Binder for panel forming"
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Form ceramic insulation panel from powder and binder"
   - process_id: drying_basic_v0
+    inputs:
+      - item_id: insulation_panel_raw
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: dried_material
+        qty: 40.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Dry formed panel to remove moisture"
   - process_id: firing_ceramic_basic_v0
+    inputs:
+      - item_id: dried_material
+        qty: 40.0
+        unit: kg
     outputs:
       - item_id: insulation_panel_high_temp
         qty: 40.0

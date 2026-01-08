@@ -1,24 +1,41 @@
 id: recipe_discharge_chute_steel_v0
+kind: recipe
+name: Recipe for discharge chute steel
 target_item_id: discharge_chute_steel
 variant_id: v0
+inputs:
+  - item_id: steel_sheet_3mm
+    qty: 12.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: discharge_chute_steel
+    qty: 1
+    unit: unit
+  - item_id: steel_scrap
+    qty: 2.5
+    unit: kg
 steps:
-  - process_id: sheet_metal_fabrication_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 1.0
-    notes: "Fabricate chute body from steel sheet with appropriate slope angle"
-  - process_id: welding_and_fabrication_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Weld chute seams and attach mounting flanges"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 0.5
-    machine_hours: 0.5
-    labor_hours: 0.3
-    notes: "Machine mounting holes and attachment points"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Verify chute dimensions and flow characteristics"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_sheet_3mm
+        qty: 12.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: discharge_chute_steel
+        qty: 1
+        unit: unit
+      - item_id: steel_scrap
+        qty: 2.5
+        unit: kg
+    est_time_hr: 4.3
+    machine_hours: 2.5
+    labor_hours: 1.8
+    notes: "Fabricate chute body from steel sheet with appropriate slope angle, weld seams and attach mounting flanges, machine mounting holes and attachment points, verify dimensions and flow characteristics"
 assumptions: "Steel sheet construction with welded seams. Angled for gravity flow of bulk materials."
 notes: "Steel discharge chute for material handling systems. Directs flow from hoppers or conveyors to collection points."

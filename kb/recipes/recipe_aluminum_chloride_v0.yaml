@@ -2,7 +2,55 @@ id: recipe_aluminum_chloride_v0
 kind: recipe
 target_item_id: aluminum_chloride
 variant_id: carbochlorination_v0
+inputs:
+  - item_id: anorthite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.172
+    unit: kg
+  - item_id: chlorine_gas
+    qty: 1.02
+    unit: kg
+outputs:
+  - item_id: aluminum_chloride
+    qty: 0.480
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.399
+    unit: kg
+  - item_id: silicon_tetrachloride
+    qty: 0.611
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 0.402
+    unit: kg
 steps:
   - process_id: anorthite_carbochlorination_v0
+    inputs:
+      - item_id: anorthite_ore
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_reducing_agent
+        qty: 0.172
+        unit: kg
+      - item_id: chlorine_gas
+        qty: 1.02
+        unit: kg
+    outputs:
+      - item_id: aluminum_chloride
+        qty: 0.480
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.399
+        unit: kg
+      - item_id: silicon_tetrachloride
+        qty: 0.611
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 0.402
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 6.0
     notes: "Carbochlorination produces AlCl3 alongside CaCl2 and SiCl4."
 notes: "Recipe for aluminum_chloride from anorthite carbochlorination."

@@ -1,35 +1,134 @@
 id: recipe_machine_stamping_press_basic_import_v0
 target_item_id: stamping_press_basic
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 1000.0
+    unit: kg
+  - item_id: steel_stock
+    qty: 950.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 50.0
+    unit: kg
+  - item_id: hydraulic_cylinder_medium
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_pump_small
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 1000.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 950.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     labor_hours: 1.2
     notes: "Cut plate/structural members for press frame and platen mounts."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 950.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 1000.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Weld frame, platen supports, and cylinder mounts."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 1000.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1000.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.0
     labor_hours: 1.5
     notes: "Machine platen surfaces, mounting holes, and guide surfaces."
   - process_id: hydraulic_system_assembly_v0
+    inputs:
+      - item_id: hydraulic_cylinder_medium
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_pump_small
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_control_valve_set
+        qty: 1.0
+        unit: kg
+      - item_id: piping_components
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_system_medium
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble cylinder, hoses, valves, and power unit."
   - process_id: hydraulic_system_integration_v0
+    inputs:
+      - item_id: hydraulic_control_valve_set
+        qty: 1.0
+        unit: kg
+      - item_id: piping_components
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_system_medium
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Fill/bleed hydraulics, set relief valve, perform leak and function checks."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire controls, interlocks, and gauges."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: stamping_press_basic
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Cycle press under load, verify stroke, pressure, and safety systems."

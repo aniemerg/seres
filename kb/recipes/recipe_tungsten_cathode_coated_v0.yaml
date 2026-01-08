@@ -1,35 +1,68 @@
 id: recipe_tungsten_cathode_coated_v0
 target_item_id: tungsten_cathode_coated
 variant_id: v0
+inputs:
+  - item_id: tungsten_powder
+    qty: 1.0
+    unit: kg
+  - item_id: binder_material
+    qty: 0.1
+    unit: kg
+  - item_id: tungsten_cathode_blank_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: tungsten_cathode_coated
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: powder_processing_v0
+    inputs:
+      - item_id: tungsten_powder
+        qty: 1.0
+        unit: kg
+      - item_id: binder_material
+        qty: 0.1
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Process tungsten powder with binder for cathode molding"
   - process_id: pressing_operations_basic_v0
+    inputs:
+      - item_id: processed_powder_mixture
+        qty: 1.1
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.5
     notes: "Press tungsten powder into cathode blank shape"
   - process_id: tungsten_sintering_high_temp_v0
+    inputs:
+      - item_id: tungsten_powder
+        qty: 1.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 1.0
     notes: "Sinter tungsten cathode at ~3000°C to achieve dense, conductive structure"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sintered_tungsten_part
+        qty: 0.95
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Machine cathode to final dimensions and add electrical connection point"
   - process_id: cathode_coating_application_v0
+    inputs:
+      - item_id: tungsten_cathode_blank_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Apply calcium oxide (CaO) coating to tungsten surface to reduce work function"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Verify coating uniformity and cathode dimensions"
 assumptions: "Critical thermionic converter component. Tungsten powder from NiFe meteorites, sintered at 3000°C. CaO coating from anorthite extraction reduces work function from 4.5eV to ~2.0eV, dramatically improving thermionic emission. 100% lunar-manufacturable. See: design/solar_thermionics_report.md"
 notes: "Production of CaO-coated tungsten cathode for thermionic power conversion. The CaO coating is critical for efficient electron emission at ~2000°C operating temperature. Total fabrication time ~13 hours. Key component enabling 10-30% solar-to-electric conversion efficiency."

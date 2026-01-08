@@ -1,0 +1,26 @@
+id: recipe_heat_treated_part_v0
+kind: recipe
+target_item_id: heat_treated_part
+variant_id: v0
+inputs:
+  - item_id: formed_metal_part
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: heat_treated_part
+    qty: 5.0
+    unit: kg
+steps:
+  - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: heat_treated_part
+        qty: 5.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 1.0
+notes: Heat treatment of formed metal parts to achieve desired mechanical properties such as hardness and strength.

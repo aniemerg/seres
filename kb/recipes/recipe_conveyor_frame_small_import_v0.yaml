@@ -1,27 +1,90 @@
 id: recipe_conveyor_frame_small_import_v0
 target_item_id: conveyor_frame_small
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 50.0
+    unit: kg
+    notes: "Main frame members and crossmembers"
+  - item_id: steel_sheet_3mm
+    qty: 15.0
+    unit: kg
+    notes: "Brackets and mounting tabs"
+  - item_id: insulation_coating_material
+    qty: 0.5
+    unit: kg
+    notes: "Protective coating for corrosion resistance"
+outputs:
+  - item_id: conveyor_frame_small
+    qty: 1
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 50.0
+        unit: kg
+      - item_id: steel_sheet_3mm
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 62.0
+        unit: kg
     est_time_hr: 0.6
     machine_hours: 0.6
     labor_hours: 0.4
     notes: "Cut tube/channel sections and brackets."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 62.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 61.0
+        unit: kg
     est_time_hr: 1.2
     machine_hours: 1.0
     labor_hours: 1.0
     notes: "Weld frame, crossmembers, and mounting tabs."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 61.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.5
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.4
     labor_hours: 0.4
     notes: "Drill/ream mounting holes for idlers, drive, and guards."
   - process_id: coating_insulation_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.5
+        unit: kg
+      - item_id: insulation_coating_material
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: insulated_part_or_wire
+        qty: 61.0
+        unit: kg
     est_time_hr: 0.4
     labor_hours: 0.4
     notes: "Apply protective coating/paint to prevent corrosion."
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: insulated_part_or_wire
+        qty: 61.0
+        unit: kg
+    outputs:
+      - item_id: conveyor_frame_small
+        qty: 1
+        unit: unit
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Check alignment, flatness, and mounting hole positions."

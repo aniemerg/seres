@@ -1,6 +1,28 @@
 id: recipe_bimetallic_element_v0
 kind: recipe
 target_item_id: bimetallic_element
+inputs:
+  - item_id: steel_strip_thin
+    qty: 0.02
+    unit: kg
+  - item_id: copper_strip_thin
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: bimetallic_element
+    qty: 0.04
+    unit: kg
 steps:
   - process_id: bimetallic_strip_forming_v0
+    inputs:
+      - item_id: steel_strip_thin
+        qty: 0.02
+        unit: kg
+      - item_id: copper_strip_thin
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: bimetallic_element
+        qty: 0.04
+        unit: kg
 notes: "Manufacture bimetallic_element from steel_strip_thin and copper_strip_thin using bimetallic_strip_forming_v0."

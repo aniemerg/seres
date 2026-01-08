@@ -1,11 +1,24 @@
 id: recipe_wet_material_import_v0
 kind: recipe
 name: Wet material (import/placeholder)
-produces_id: wet_material
-produces_qty: 1.0
-produces_unit: kg
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: wet_material
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: import_receiving_basic_v0
+  inputs:
+    - item_id: bulk_material_or_parts
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: wet_material
+      qty: 1.0
+      unit: kg
 notes: |
   Placeholder recipe for wet_material generic item.
   In practice, wet materials are outputs from washing, coating, or other wet processes.

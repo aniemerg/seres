@@ -4,18 +4,98 @@ name: Recipe for hydraulic press
 produces_id: press_hydraulic
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 260.0
+    unit: kg
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: press_hydraulic
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 260.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 247.0
+      unit: kg
   notes: Cast frame, columns, and base (approx 600 kg)
 - process_id: welding_brazing_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 247.0
+      unit: kg
+  outputs:
+    - item_id: welded_assemblies
+      qty: 247.0
+      unit: kg
   notes: Weld hydraulic cylinder mounting, reinforcement gussets
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: welded_assemblies
+      qty: 247.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 247.0
+      unit: kg
   notes: Machine ram guides, platen surfaces, cylinder mounting bores
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 247.0
+      unit: kg
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
   notes: Assemble hydraulic cylinders, rams, platens, pressure gauges
 - process_id: hydraulic_system_integration_v0
+  inputs:
+    - item_id: hydraulic_control_valve_set
+      qty: 1.0
+      unit: kg
+    - item_id: piping_components
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: hydraulic_system_medium
+      qty: 1.0
+      unit: kg
   notes: Install hydraulic pump, valves, hoses, and pressure controls
 - process_id: wiring_and_electronics_integration_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+    - item_id: hydraulic_system_medium
+      qty: 1.0
+      unit: kg
+    - item_id: electrical_wire_and_connectors
+      qty: 2.0
+      unit: kg
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: press_hydraulic
+      qty: 1.0
+      unit: unit
   notes: Install electrical controls, safety interlocks, pressure sensors
 notes: Multi-purpose hydraulic press for bearing installation, forming, and press fit operations.
 target_item_id: press_hydraulic

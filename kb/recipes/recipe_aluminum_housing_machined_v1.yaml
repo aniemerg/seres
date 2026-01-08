@@ -1,7 +1,40 @@
 id: recipe_aluminum_housing_machined_v1
 kind: recipe
 target_item_id: aluminum_housing_machined
+inputs:
+  - item_id: cut_parts
+    qty: 6.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 6.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: L
+outputs:
+  - item_id: aluminum_housing_machined
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v1
+    inputs:
+      - item_id: cut_parts
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 6.0
+        unit: kg
   - process_id: aluminum_housing_machining_v1
+    inputs:
+      - item_id: machined_part_raw
+        qty: 6.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: L
+    outputs:
+      - item_id: aluminum_housing_machined
+        qty: 6.0
+        unit: kg
 notes: "Two-step path to produce base aluminum_housing_machined from raw stock using intermediate machined_part_raw."

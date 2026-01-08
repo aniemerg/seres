@@ -1,6 +1,34 @@
 id: recipe_refractory_castable_v0
 kind: recipe
 target_item_id: refractory_castable
+inputs:
+  - item_id: alumina_powder
+    qty: 0.7
+    unit: kg
+  - item_id: ceramic_binder
+    qty: 0.2
+    unit: kg
+  - item_id: water
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: refractory_castable
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: refractory_castable_mixing_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 0.7
+        unit: kg
+      - item_id: ceramic_binder
+        qty: 0.2
+        unit: kg
+      - item_id: water
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: refractory_castable
+        qty: 1.0
+        unit: kg
 notes: "Single-step recipe: mix alumina powder, ceramic binder, and water into refractory_castable."

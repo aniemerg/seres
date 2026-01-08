@@ -1,35 +1,59 @@
 id: recipe_water_purification_distillation_v0
 kind: recipe
+name: Recipe for water purification distillation
 target_item_id: water_purification_distillation_v0
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 45.0
+    unit: kg
+  - item_id: piping_assembly_small
+    qty: 1
+    unit: unit
+  - item_id: heating_element_electric
+    qty: 4
+    unit: unit
+  - item_id: heat_exchanger_compact
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: water_purification_distillation_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 5.0
+    unit: kg
 steps:
-  - process_id: cutting_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.5
-    notes: "Cut shell sections, supports, and mounting flanges."
-  - process_id: metal_forming_basic_v0
-    est_time_hr: 0.8
-    machine_hours: 0.6
-    labor_hours: 0.6
-    notes: "Form shell panels and mounting surfaces."
-  - process_id: welded_fabrication_basic_v0
-    est_time_hr: 1.8
-    machine_hours: 1.5
-    labor_hours: 1.5
-    notes: "Weld shell, brackets, and internal supports."
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 0.8
-    machine_hours: 0.6
-    labor_hours: 0.5
-    notes: "Finish ports and mounting faces."
-  - process_id: plumbing_and_pneumatics_v0
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Install plumbing for water in/out and pneumatic interfaces."
-  - process_id: integration_test_basic_v0
-    est_time_hr: 0.6
-    labor_hours: 0.5
-    notes: "Leak test and instrument verification."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 45.0
+        unit: kg
+      - item_id: piping_assembly_small
+        qty: 1
+        unit: unit
+      - item_id: heating_element_electric
+        qty: 4
+        unit: unit
+      - item_id: heat_exchanger_compact
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: water_purification_distillation_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 5.0
+        unit: kg
+    est_time_hr: 5.8
+    machine_hours: 3.7
+    labor_hours: 4.4
+    notes: "Cut shell sections and supports from steel plate, form shell panels and mounting surfaces, weld shell with brackets and internal supports, machine ports and mounting faces, install plumbing for water in/out, install heating elements and condenser coil, leak test and verify operation"
 assumptions: "Basic distillation column path for water purification; external condenser and reflux unknowns treated as placeholders."
 notes: "Prototype recipe to manufacture water_purification_distillation_v0; BOM details to be refined."

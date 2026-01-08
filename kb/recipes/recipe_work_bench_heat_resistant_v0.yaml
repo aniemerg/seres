@@ -1,18 +1,62 @@
 id: recipe_work_bench_heat_resistant_v0
 target_item_id: work_bench_heat_resistant
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 50.0
+    unit: kg
+  - item_id: steel_stock_bar_or_billet
+    qty: 32.0
+    unit: kg
+outputs:
+  - item_id: work_bench_heat_resistant
+    qty: 80.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 50.0
+        unit: kg
+      - item_id: steel_stock_bar_or_billet
+        qty: 32.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 80.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.4
     notes: "Cut steel frame members and heat-resistant top plate."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 80.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Assemble bench frame, cross-bracing, and mount top."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: work_bench_heat_resistant
+        qty: 80.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.2

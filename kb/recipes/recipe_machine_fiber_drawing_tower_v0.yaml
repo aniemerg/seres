@@ -1,34 +1,128 @@
 id: recipe_machine_fiber_drawing_tower_v0
 target_item_id: fiber_drawing_tower
 variant_id: v0
+inputs:
+  - item_id: cut_parts
+    qty: 520.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 15.0
+    unit: kg
+  - item_id: steel_stock
+    qty: 100.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 10.0
+    unit: L
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: fiber_drawing_tower
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: welding_structural_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 520.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 510.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 8.0
     labor_hours: 10.0
     notes: "Fabricate and weld vertical tower frame (6-8 meters tall) from steel structural members"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 100.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 10.0
+        unit: L
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 70.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
     notes: "Machine mounting surfaces for heating furnace, drawing rollers, and motor mounting brackets"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 510.0
+        unit: kg
+      - item_id: machined_steel_part_precision
+        qty: 70.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install heating furnace module at top of tower, mount drawing rollers at multiple levels, install drive motors and tension control system"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Wire control panel to heating elements, motors, and tension sensors; install power distribution and safety interlocks"
   - process_id: precision_alignment_and_leveling_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Align drawing rollers vertically to ensure concentric fiber path; level tower frame for proper fiber tension"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test heating system, verify drawing roller speed control and synchronization, test fiber collection system"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: fiber_drawing_tower
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify all safety systems, check fiber path alignment, ensure proper temperature control"

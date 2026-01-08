@@ -1,16 +1,48 @@
 id: recipe_wire_crimping_tools_v0
 target_item_id: wire_crimping_tools
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 6.0
+    unit: kg
+outputs:
+  - item_id: wire_crimping_tools
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 5.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Machine crimping dies, tool frames, handles"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 5.5
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 5.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat treat crimping dies for hardness and wear resistance"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 5.5
+        unit: kg
+    outputs:
+      - item_id: wire_crimping_tools
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble hand crimpers, die sets, ratcheting mechanisms"

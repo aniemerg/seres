@@ -1,24 +1,68 @@
 id: recipe_pipe_threading_tools_v0
 target_item_id: pipe_threading_tools
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 12.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
     est_time_hr: 15.0
     machine_hours: 15.0
     notes: "Machine threading dies, die head, and vise components"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Heat treat threading dies for hardness and edge retention (HRC 58-62)"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 12.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Grind thread form profiles on dies to precise NPT specifications"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 12.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble die head, install dies, and complete tool set with gauges"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: pipe_threading_tools
+        qty: 12.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify thread form accuracy using thread gauges and test cuts"

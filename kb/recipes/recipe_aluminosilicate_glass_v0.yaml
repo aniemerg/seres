@@ -2,8 +2,56 @@ id: recipe_aluminosilicate_glass_v0
 kind: recipe
 target_item_id: aluminosilicate_glass
 variant_id: v0
+inputs:
+  - item_id: silica_purified
+    qty: 0.57
+    unit: kg
+  - item_id: alumina_powder
+    qty: 0.20
+    unit: kg
+  - item_id: magnesium_oxide
+    qty: 0.12
+    unit: kg
+  - item_id: calcium_oxide
+    qty: 0.05
+    unit: kg
+  - item_id: iron_ore_or_ilmenite
+    qty: 0.06
+    unit: kg
+outputs:
+  - item_id: aluminosilicate_glass
+    qty: 0.98
+    unit: kg
+  - item_id: process_waste
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: aluminosilicate_glass_production_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 0.57
+        unit: kg
+      - item_id: alumina_powder
+        qty: 0.20
+        unit: kg
+      - item_id: magnesium_oxide
+        qty: 0.12
+        unit: kg
+      - item_id: calcium_oxide
+        qty: 0.05
+        unit: kg
+      - item_id: iron_ore_or_ilmenite
+        qty: 0.06
+        unit: kg
+    outputs:
+      - item_id: aluminosilicate_glass
+        qty: 0.98
+        unit: kg
+      - item_id: process_waste
+        qty: 0.02
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 6.0
 notes: |
   Recipe for producing aluminosilicate glass from lunar mineral oxides.
   Single-step process: melt oxide mixture to form glass.

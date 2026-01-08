@@ -17,6 +17,17 @@ outputs:
     unit: kg
 steps:
   - process_id: alloying_basic_v0
+    inputs:
+      - item_id: aluminum_metal_pure
+        qty: 0.87
+        unit: kg
+      - item_id: silicon_metal_v0
+        qty: 0.13
+        unit: kg
+    outputs:
+      - item_id: silumin_alloy
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Melt and alloy aluminum with silicon to form silumin"

@@ -1,9 +1,17 @@
 id: recipe_formed_sheet_metal_parts_v0
+kind: recipe
+name: Recipe for formed_sheet_metal_parts
 target_item_id: formed_sheet_metal_parts
 variant_id: v0
 inputs:
-  - item_id: steel_sheet_3mm
+  - item_id: sheet_metal_or_structural_steel
     qty: 5.0
+    unit: kg
+  - item_id: metal_sheet
+    qty: 4.8
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 4.6
     unit: kg
 outputs:
   - item_id: formed_sheet_metal_parts
@@ -15,14 +23,41 @@ byproducts:
     unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet
+        qty: 4.8
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.2
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cut sheet metal blanks to size from steel sheet stock"
   - process_id: sheet_metal_bending_and_forming_v0
+    inputs:
+      - item_id: metal_sheet
+        qty: 4.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.6
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Bend, stamp, or roll sheet metal into brackets, panels, housings, enclosures"
   - process_id: finishing_deburring_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.6
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 4.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Deburr edges, file sharp corners, clean parts"

@@ -6,10 +6,83 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: forge_or_induction_heater_v0
 variant_id: v0
+inputs:
+  - item_id: motor_assembly
+    qty: 12.0
+    unit: kg
+  - item_id: shaft_and_bearing_set
+    qty: 15.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: kg
+  - item_id: sealing_gaskets
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 40.0
+    unit: kg
+outputs:
+  - item_id: forge_or_induction_heater_v0
+    qty: 1800.0
+    unit: kg
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: motor_assembly
+        qty: 12.0
+        unit: kg
+      - item_id: shaft_and_bearing_set
+        qty: 15.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 40.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 40.0
+        unit: kg
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 40.0
+        unit: kg
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: kg
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 40.0
+        unit: kg
+      - item_id: sealing_gaskets
+        qty: 1.0
+        unit: kg
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: forge_or_induction_heater_v0
+        qty: 1800.0
+        unit: kg
 notes: Versioned recipe to produce forge_or_induction_heater_v0; mirrors v0 alias path.

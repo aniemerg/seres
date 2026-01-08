@@ -1,20 +1,68 @@
 id: recipe_precision_stage_v0
 target_item_id: precision_stage
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 75.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: device_uncalibrated
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 75.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 75.0
+        unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
     notes: "Machine precision linear guides and mounting surfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 75.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Assemble XYZ stages, ball screws, and linear bearings"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install stepper motors, encoders, and control electronics"
   - process_id: calibration_and_test_basic_v0
+    inputs:
+      - item_id: device_uncalibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: precision_stage
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Calibrate positioning accuracy and repeatability"

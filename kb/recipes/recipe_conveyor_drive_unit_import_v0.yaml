@@ -1,8 +1,36 @@
 id: recipe_conveyor_drive_unit_import_v0
 target_item_id: conveyor_drive_unit
 variant_id: v0
+inputs:
+  - item_id: motor_electric_small
+    qty: 1.0
+    unit: unit
+  - item_id: gearbox_reducer_small
+    qty: 1.0
+    unit: unit
+  - item_id: belt_and_pulley_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: conveyor_drive_unit
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: conveyor_drive_unit_assembly_v0
+    inputs:
+      - item_id: motor_electric_small
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 1.0
+        unit: unit
+      - item_id: belt_and_pulley_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: conveyor_drive_unit
+        qty: 1.0
+        unit: unit
     # Direct assembly to produce the Conveyor drive unit from existing subcomponents
     # No placeholder step; mirrors the formal v0 recipe structure
 assumptions: "Replaced placeholder; local fabrication route is conveyor_drive_unit_assembly_v0."

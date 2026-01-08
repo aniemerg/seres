@@ -1,16 +1,48 @@
 id: recipe_ground_clamp_and_cables_v0
 target_item_id: ground_clamp_and_cables
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 2.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: ground_clamp_and_cables
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 2.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Cast clamp body and terminals
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1.9
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Machine contact surfaces
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.9
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Assemble clamp with cables and connectors

@@ -1,28 +1,144 @@
 id: recipe_power_hammer_or_press_v0
 target_item_id: power_hammer_or_press
 variant_id: v0
+inputs:
+  - item_id: molten_material_or_preform
+    qty: 550.0
+    unit: kg
+  - item_id: sand_casting_flask_set
+    qty: 1.0
+    unit: unit
+  - item_id: casting_mold_set
+    qty: 1.0
+    unit: unit
+  - item_id: hammer_frame_basic
+    qty: 1.0
+    unit: unit
+  - item_id: hammer_head_basic
+    qty: 1.0
+    unit: unit
+  - item_id: hammer_drive_motor
+    qty: 1.0
+    unit: unit
+  - item_id: anvil_block_basic
+    qty: 1.0
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_hammer_or_press
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sand_casting_large_v0
+    inputs:
+      - item_id: molten_material_or_preform
+        qty: 550.0
+        unit: kg
+      - item_id: sand_casting_flask_set
+        qty: 1.0
+        unit: unit
+      - item_id: casting_mold_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: sand_casting_large_v0
+        qty: 495.0
+        unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
     notes: "Cast heavy frame, anvil, and hammer head components"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sand_casting_large_v0
+        qty: 495.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
     est_time_hr: 40.0
     machine_hours: 40.0
     notes: "Machine frame mounting surfaces, guide ways, and bearing surfaces"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Heat treat hammer head and anvil for impact resistance"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 495.0
+        unit: kg
     est_time_hr: 20.0
     labor_hours: 20.0
     notes: "Weld frame structure and reinforcements"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 495.0
+        unit: kg
+      - item_id: hammer_frame_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hammer_head_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hammer_drive_motor
+        qty: 1.0
+        unit: unit
+      - item_id: anvil_block_basic
+        qty: 1.0
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 30.0
     labor_hours: 30.0
     notes: "Assemble frame, anvil, hammer head, drive mechanism, and motor"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_hammer_or_press
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test hammer operation, impact force, and safety systems"

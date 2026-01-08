@@ -1,28 +1,108 @@
 id: recipe_sensor_equipped_system_v0
 target_item_id: sensor_equipped_system
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: mounting_bracket_steel
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: sensor_equipped_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble sensor modules (temperature, pressure, vibration, etc.)"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wire sensors to control board, install wiring harness and connectors"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+      - item_id: mounting_bracket_steel
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Install mounting hardware and protective enclosures"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Calibrate sensors against known references"
   - process_id: electrical_testing_basic_v0
+    inputs:
+      - item_id: instrument_calibrated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: tested_electrical_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Test sensor readings and communication"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: tested_electrical_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: sensor_equipped_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify sensor accuracy and wiring integrity"

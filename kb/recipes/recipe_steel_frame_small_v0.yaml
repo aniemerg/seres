@@ -1,27 +1,34 @@
 id: recipe_steel_frame_small_v0
 kind: recipe
+name: Recipe for steel frame small
 target_item_id: steel_frame_small
 variant_id: v0
+inputs:
+  - item_id: structural_steel_sections
+    qty: 3.5
+    unit: kg
+outputs:
+  - item_id: steel_frame_small
+    qty: 1
+    unit: unit
+  - item_id: steel_scrap
+    qty: 0.5
+    unit: kg
 steps:
-  - process_id: cutting_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 1.5
-    machine_hours: 1.5
-    notes: "Cut steel members to frame geometry"
-  - process_id: welding_basic_v0
-    est_time_hr: 3.0
-    labor_hours: 2.5
-    machine_hours: 2.5
-    notes: "Weld small frame from members"
-  - process_id: drilling_basic_v0
-    est_time_hr: 0.5
-    machine_hours: 0.5
-    notes: "Drill mounting holes"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.4
-  - process_id: surface_treatment_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Clean and coat frame"
-notes: "Prototype recipe to manufacture steel_frame_small; uses standard frame fabrication steps."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_sections
+        qty: 3.5
+        unit: kg
+    outputs:
+      - item_id: steel_frame_small
+        qty: 1
+        unit: unit
+      - item_id: steel_scrap
+        qty: 0.5
+        unit: kg
+    est_time_hr: 7.0
+    machine_hours: 5.5
+    labor_hours: 4.4
+    notes: "Cut steel angle members to frame geometry, weld small frame, drill mounting holes, inspect welds and dimensions, clean and coat frame surface"
+notes: "Fabrication of small steel frame from angle stock using cutting, welding, drilling, and surface treatment"

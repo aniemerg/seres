@@ -1,6 +1,23 @@
 id: recipe_holonic_control_prosa_output_v2
 kind: recipe
 target_item_id: holonic_control_prosa_output
+variant_id: v2
+inputs:
+  - item_id: software_service_license
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: holonic_control_prosa_output
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: holonic_control_prosa_v0
+    inputs:
+      - item_id: software_service_license
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: holonic_control_prosa_output
+        qty: 1.0
+        unit: kg
 notes: "Canonical target_item_id-based recipe for holonic_control_prosa_output; uses holonic_control_prosa_v0 as input."

@@ -5,10 +5,64 @@ produces_id: heliostat_control_electronics_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: heliostat_control_electronics_v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: electronic_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: electronic_assembly
+        qty: 1.0
+        unit: unit
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electronic_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: heliostat_control_electronics_v0
+        qty: 1.0
+        unit: unit
 assumptions: "Assembles heliostat control electronics v0 from standard electronic modules using established electronics assembly steps; placeholder timings."
 notes: "Basic manufacturing chain for heliostat_control_electronics_v0; downstream BOMs may refine inputs/outputs."

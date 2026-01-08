@@ -1,8 +1,30 @@
 id: recipe_ilmenite_concentrate_v0
 target_item_id: ilmenite_concentrate
 variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: ilmenite_concentrate
+    qty: 0.2
+    unit: kg
+  - item_id: non_magnetic_tailings
+    qty: 0.8
+    unit: kg
 steps:
   - process_id: beneficiate_regolith_magnetic_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: ilmenite_concentrate
+        qty: 0.2
+        unit: kg
+      - item_id: non_magnetic_tailings
+        qty: 0.8
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
 assumptions: Ilmenite-rich concentrate from magnetic separation; placeholder.

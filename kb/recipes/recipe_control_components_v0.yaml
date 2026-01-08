@@ -1,24 +1,105 @@
 id: recipe_control_components_v0
 target_item_id: control_components
 variant_id: v0
+inputs:
+  - item_id: pcb_bare_board
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: relay_electromagnetic_v0
+    qty: 2.0
+    unit: kg
+  - item_id: terminal_block_set
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: wired_electrical_system
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: control_components
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: pcb_assembly_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Assemble control boards and I/O modules from imported electronic components"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: relay_electromagnetic_v0
+        qty: 2.0
+        unit: kg
+      - item_id: terminal_block_set
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install components in enclosure, mount relays, contactors, and terminal blocks"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Wire control circuits, install switches, buttons, and indicators"
   - process_id: software_programming_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Program PLC or microcontroller with control logic"
   - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: control_components
+        qty: 5.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Test control functions, I/O operation, and safety interlocks"

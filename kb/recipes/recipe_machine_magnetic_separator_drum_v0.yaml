@@ -1,8 +1,64 @@
 id: recipe_machine_magnetic_separator_drum_v0
 target_item_id: magnetic_separator_drum_v0
 variant_id: v0
+inputs:
+  - item_id: magnetic_separator_drum_body
+    qty: 1.0
+    unit: unit
+  - item_id: magnet_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: separator_frame
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 2.0
+    unit: unit
+  - item_id: vibratory_feeder_v0
+    qty: 1.0
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: magnetic_separator_drum_body
+        qty: 1.0
+        unit: unit
+      - item_id: magnet_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: separator_frame
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 2.0
+        unit: unit
+      - item_id: vibratory_feeder_v0
+        qty: 1.0
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
 assumptions: Assemble per BOM; parts produced via part-level routes.

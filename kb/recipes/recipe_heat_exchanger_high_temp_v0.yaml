@@ -2,6 +2,34 @@ id: recipe_heat_exchanger_high_temp_v0
 kind: recipe
 # Standardized recipe for heat exchanger high temp variant
 target_item_id: heat_exchanger_high_temp_v0
+inputs:
+  - item_id: base_metal_parts
+    qty: 15.0
+    unit: unit
+  - item_id: brazing_alloy_generic
+    qty: 0.05
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: heat_exchanger_high_temp_v0
+    qty: 15.0
+    unit: kg
 steps:
   - process_id: brazing_heat_exchanger_high_temp_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 15.0
+        unit: unit
+      - item_id: brazing_alloy_generic
+        qty: 0.05
+        unit: kg
+      - item_id: flux_brazing
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: heat_exchanger_high_temp_v0
+        qty: 15.0
+        unit: kg
 notes: "Single-step brazing process to produce heat exchanger high-temp from base metal parts and brazing materials."

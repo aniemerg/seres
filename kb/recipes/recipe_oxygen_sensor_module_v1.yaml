@@ -1,8 +1,37 @@
 id: recipe_oxygen_sensor_module_v1
 kind: recipe
 target_item_id: oxygen_sensor_module
+inputs:
+  - item_id: oxygen_sensor_zirconia_v0
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electronics
+    qty: 0.75
+    unit: kg
+outputs:
+  - item_id: oxygen_sensor_module
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: oxygen_sensor_module_waste_v0
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: oxygen_sensor_module_assembly_v0
+    inputs:
+      - item_id: oxygen_sensor_zirconia_v0
+        qty: 1.0
+        unit: unit
+      - item_id: assembled_electronics
+        qty: 0.75
+        unit: kg
+    outputs:
+      - item_id: oxygen_sensor_module
+        qty: 1.0
+        unit: unit
+      - item_id: oxygen_sensor_module_waste_v0
+        qty: 0.2
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 2.0

@@ -3,8 +3,60 @@ kind: recipe
 name: Recipe for antenna_parabolic_dish_v0
 target_item_id: antenna_parabolic_dish_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_sheet_reflector_v0
+    qty: 30.0
+    unit: kg
+  - item_id: feed_horn_antenna_v0
+    qty: 1.0
+    unit: each
+  - item_id: support_struts_aluminum
+    qty: 10.0
+    unit: kg
+  - item_id: mounting_bracket_azimuth_elevation
+    qty: 1.0
+    unit: each
+  - item_id: bearing_ball_steel
+    qty: 4.0
+    unit: each
+  - item_id: coaxial_cable_low_loss
+    qty: 20.0
+    unit: m
+  - item_id: protective_coating_aluminum
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: antenna_parabolic_dish_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: aluminum_sheet_reflector_v0
+        qty: 30.0
+        unit: kg
+      - item_id: feed_horn_antenna_v0
+        qty: 1.0
+        unit: each
+      - item_id: support_struts_aluminum
+        qty: 10.0
+        unit: kg
+      - item_id: mounting_bracket_azimuth_elevation
+        qty: 1.0
+        unit: each
+      - item_id: bearing_ball_steel
+        qty: 4.0
+        unit: each
+      - item_id: coaxial_cable_low_loss
+        qty: 20.0
+        unit: m
+      - item_id: protective_coating_aluminum
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: antenna_parabolic_dish_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 2.0

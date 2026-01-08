@@ -1,12 +1,44 @@
 id: recipe_instrument_mounts_basic_v0
 target_item_id: instrument_mounts_basic
 variant_id: fabricated_bracket_set_v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 11.0
+    unit: kg
+outputs:
+  - item_id: instrument_mounts_basic
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 11.0
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 10.5
+        unit: kg
     notes: Form steel sheet/angles into brackets and rails.
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 10.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 10.5
+        unit: kg
     notes: Weld brackets and supports into mounting frame/rails.
   - process_id: surface_finishing_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 10.5
+        unit: kg
+    outputs:
+      - item_id: instrument_mounts_basic
+        qty: 10.0
+        unit: kg
     notes: Deburr and finish mounting surfaces; add protective coating if needed.
 assumptions: "Simple welded steel brackets/rails sized for benchtop instrumentation; fasteners handled separately."
 notes: Local fabrication route for basic instrument mounts used on test benches.

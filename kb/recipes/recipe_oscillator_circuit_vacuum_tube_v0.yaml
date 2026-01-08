@@ -5,7 +5,29 @@ target_item_id: oscillator_circuit_vacuum_tube_v0
 produces_id: oscillator_circuit_vacuum_tube_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: vacuum_tube_subassembly
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: oscillator_circuit_vacuum_tube_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: vacuum_tube_subassembly
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: oscillator_circuit_vacuum_tube_v0
+        qty: 1.0
+        unit: unit
 notes: "Seed recipe for oscillator_circuit_vacuum_tube_v0 using basic assembly."
 assumptions: "Seed recipe; will refine with BOM/proc steps as design matures"

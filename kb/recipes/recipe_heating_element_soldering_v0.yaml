@@ -1,12 +1,51 @@
 id: recipe_heating_element_soldering_v0
 target_item_id: heating_element_soldering
 variant_id: v0
+inputs:
+  - item_id: nickel_chromium_alloy
+    qty: 0.1
+    unit: kg
+  - item_id: insulation_coating_material
+    qty: 0.03
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 0.1
+    unit: kg
+  - item_id: power_output_terminals
+    qty: 1.0
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: heating_element_soldering
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 0.1
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Wind resistive wire into coil using basic winding process"
   - process_id: coating_insulation_v0
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 0.1
+        unit: kg
+      - item_id: insulation_coating_material
+        qty: 0.03
+        unit: kg
+    outputs:
+      - item_id: insulated_part_or_wire
+        qty: 0.13
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Apply insulation coating to resistive coil"
@@ -14,8 +53,8 @@ steps:
     est_time_hr: 0.2
     labor_hours: 0.2
     inputs:
-      - item_id: nickel_chromium_alloy
-        qty: 0.1
+      - item_id: insulated_part_or_wire
+        qty: 0.13
         unit: kg
       - item_id: ceramic_insulators
         qty: 0.1

@@ -1,6 +1,31 @@
 id: recipe_relay_electromagnetic_v0
 target_item_id: relay_electromagnetic_v0
 variant_id: v0
+produces_qty: 0.1
+produces_unit: kg
+inputs:
+  - item_id: wire_copper_magnet
+    qty: 0.02
+    unit: kg
+  - item_id: iron_core_laminated
+    qty: 0.03
+    unit: kg
+  - item_id: contact_substrate_base
+    qty: 0.05
+    unit: kg
+  - item_id: silver_contact_material
+    qty: 0.005
+    unit: kg
+  - item_id: plastic_housing_molded
+    qty: 0.015
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 1.0
+    unit: each
+outputs:
+  - item_id: relay_electromagnetic_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: wire_winding_process_v0
     inputs:
@@ -18,14 +43,14 @@ steps:
     notes: Wind coil on iron core for electromagnet
   - process_id: contact_material_application_v0
     inputs:
-      - item_id: steel_sheet_1mm
+      - item_id: contact_substrate_base
         qty: 0.05
         unit: kg
       - item_id: silver_contact_material
         qty: 0.005
         unit: kg
     outputs:
-      - item_id: contacts_with_silver
+      - item_id: contacts_with_applied_material_v0
         qty: 0.045
         unit: kg
     est_time_hr: 0.5
@@ -35,7 +60,7 @@ steps:
       - item_id: relay_coil_assembly
         qty: 0.05
         unit: kg
-      - item_id: contacts_with_silver
+      - item_id: contacts_with_applied_material_v0
         qty: 0.045
         unit: kg
       - item_id: plastic_housing_molded

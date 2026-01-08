@@ -4,7 +4,23 @@ target_item_id: uv_exposure_unit_frame
 produces_id: uv_exposure_unit_frame
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: raw_metal_block
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: uv_exposure_unit_frame
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_uv_exposure_unit_frame_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: uv_exposure_unit_frame
+        qty: 20.0
+        unit: kg
     notes: "Machining frame from raw_metal_block (20 kg input) to produce uv_exposure_unit_frame."
 notes: "Simplified frame fabrication recipe; mass balance assumed."

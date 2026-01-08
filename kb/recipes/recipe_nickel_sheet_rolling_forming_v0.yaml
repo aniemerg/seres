@@ -1,8 +1,25 @@
 id: recipe_nickel_sheet_rolling_forming_v0
 kind: recipe
+name: Recipe for nickel_sheet_rolling_forming_v0
 target_item_id: nickel_sheet_rolling_forming_v0
 variant_id: v0
+inputs:
+  - item_id: nickel_sheet_rolling_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: nickel_sheet_rolling_forming_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: rolling_forming_nickel_sheet_v0
+    inputs:
+      - item_id: nickel_sheet_rolling_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nickel_sheet_rolling_forming_v0
+        qty: 1.0
+        unit: kg
 assumptions: "Placeholder rolling/forming path to produce nickel_sheet_rolling_forming_v0 from nickel_sheet_rolling_v0"
 notes: "Production path for nickel sheet rolling forming v0; aligns with nickel_sheet_rolling_v0 pattern."

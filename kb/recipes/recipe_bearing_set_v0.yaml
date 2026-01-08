@@ -21,6 +21,24 @@ inputs:
     qty: 0.1
     unit: kg
     notes: Optional seals
+  - item_id: assembly_components
+    qty: 1.0
+    unit: kg
+  - item_id: metal_alloy_bulk
+    qty: 1.2
+    unit: kg
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+  - item_id: bearing_rings_machined
+    qty: 1.1
+    unit: kg
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
 
 outputs:
   - item_id: bearing_set
@@ -29,18 +47,50 @@ outputs:
 
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.14
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Cast inner and outer bearing race blanks from bearing steel
   - process_id: machining_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: machined_metal_block_v0
+        qty: 1.8
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Rough machine race blanks to near-net shape
   - process_id: heat_treatment_hardening_v0
+    inputs:
+      - item_id: bearing_rings_machined
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: bearing_rings_hardened
+        qty: 1.05
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: Harden bearing races to HRC 58-62
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: rough_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Precision grind race surfaces to tight tolerances
@@ -49,22 +99,62 @@ steps:
     machine_hours: 1.0
     notes: Hot forge ball blanks from bearing steel
   - process_id: heat_treatment_hardening_v0
+    inputs:
+      - item_id: bearing_rings_machined
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: bearing_rings_hardened
+        qty: 1.05
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: Harden rolling elements to HRC 60-64
   - process_id: surface_grinding_precision_v0
+    inputs:
+      - item_id: rough_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Precision grind balls to spherical form
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.14
+        unit: kg
     est_time_hr: 0.3
     machine_hours: 0.3
     notes: Cast or stamp bearing cage blanks
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Machine cage pockets
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembly_components
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: bearing_set
+        qty: 1.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble races, balls, and cage; pack with grease; install seals

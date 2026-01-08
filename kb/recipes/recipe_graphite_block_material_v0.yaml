@@ -16,9 +16,36 @@ outputs:
     unit: kg
 steps:
   - process_id: powder_processing_v0
+    inputs:
+      - item_id: graphite_powder
+        qty: 0.85
+        unit: kg
+      - item_id: binder_material
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: processed_powder_mixture
+        qty: 1.0
+        unit: kg
     notes: Mix graphite powder with pitch binder
   - process_id: graphite_molding_v0
+    inputs:
+      - item_id: processed_powder_mixture
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: crucible_graphite
+        qty: 1.0
+        unit: kg
     notes: Compress mixture into block form
   - process_id: heat_treatment_graphitization_v0
+    inputs:
+      - item_id: crucible_graphite
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: graphite_block_material_v0
+        qty: 1.0
+        unit: kg
     notes: Fire at high temperature to graphitize and carbonize binder
 notes: "Recipe for graphite block material from graphite powder and pitch binder"

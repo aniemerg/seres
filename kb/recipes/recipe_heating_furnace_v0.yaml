@@ -2,12 +2,44 @@ id: recipe_heating_furnace_v0
 kind: recipe
 target_item_id: heating_furnace
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 200.0
+    unit: kg
+  - item_id: refractory_brick_set
+    qty: 1
+    unit: unit
+  - item_id: heating_element_electric
+    qty: 4
+    unit: unit
+  - item_id: insulation_thermal_blanket
+    qty: 1
+    unit: unit
+  - item_id: furnace_door_assembly
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: structural_frame_large
+    qty: 1
+    unit: unit
+  - item_id: power_cable_assembly
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_forming_v0
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Fabricate furnace shell and door from steel sheet"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 190.0
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Weld furnace structure and mounting brackets"
@@ -16,10 +48,42 @@ steps:
     labor_hours: 16.0
     notes: "Install refractory brick or castable lining"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 190.0
+        unit: kg
+      - item_id: refractory_brick_set
+        qty: 1
+        unit: unit
+      - item_id: heating_element_electric
+        qty: 4
+        unit: unit
+      - item_id: insulation_thermal_blanket
+        qty: 1
+        unit: unit
+      - item_id: furnace_door_assembly
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: structural_frame_large
+        qty: 1
+        unit: unit
+      - item_id: power_cable_assembly
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install heating elements, temperature controller, door, and insulation"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test heating performance, temperature uniformity, and controller operation"

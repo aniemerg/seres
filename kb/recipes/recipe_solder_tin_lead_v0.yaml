@@ -3,6 +3,17 @@ name: Solder tin-lead wire/bar production
 variant_id: v0
 kind: recipe
 target_item_id: solder_tin_lead
+inputs:
+  - item_id: tin_metal_pure
+    qty: 0.63
+    unit: kg
+  - item_id: lead_metal
+    qty: 0.37
+    unit: kg
+outputs:
+  - item_id: solder_tin_lead
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:

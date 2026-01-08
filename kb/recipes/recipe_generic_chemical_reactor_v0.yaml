@@ -1,12 +1,96 @@
 id: recipe_generic_chemical_reactor_v0
 kind: recipe
 target_item_id: generic_chemical_reactor_v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_steel_small
+        qty: 1.0
+        unit: kg
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: generic_chemical_reactor_v0
+        qty: 1.0
+        unit: unit
 notes: "Standard machine-assembly chain to manufacture generic_chemical_reactor_v0 using existing unit operations."

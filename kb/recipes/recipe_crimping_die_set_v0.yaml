@@ -1,16 +1,24 @@
 id: recipe_crimping_die_set_v0
 target_item_id: crimping_die_set
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 1.7
+    unit: kg
+outputs:
+  - item_id: crimping_die_set
+    qty: 1.5
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_stock_bar_or_billet
-        qty: 1.5
+        qty: 1.7
         unit: kg
     outputs:
-      - item_id: crimping_die_set
-        qty: 1
-        unit: unit
+      - item_id: machined_part_raw
+        qty: 1.6
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine die profiles and cavities for various terminal sizes"
@@ -19,10 +27,26 @@ steps:
     machine_hours: 1.5
     notes: "Harden dies for durability and wear resistance"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.6
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 1.55
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Precision grind die surfaces and crimp profiles to final dimensions"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 1.55
+        unit: kg
+    outputs:
+      - item_id: crimping_die_set
+        qty: 1.5
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify die dimensions and test crimp quality on sample terminals"

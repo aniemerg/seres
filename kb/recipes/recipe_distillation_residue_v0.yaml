@@ -2,9 +2,34 @@ id: recipe_distillation_residue_v0
 kind: recipe
 target_item_id: distillation_residue
 variant_id: v0
+inputs:
+  - item_id: blended_mixture
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: distillation_residue
+    qty: 1.0
+    unit: kg
+  - item_id: purified_liquid
+    qty: 19.0
+    unit: kg
 steps:
   - process_id: fractional_distillation_v0
-    notes: "Byproduct of fractional distillation process"
+    inputs:
+      - item_id: blended_mixture
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: purified_liquid
+        qty: 19.0
+        unit: kg
+      - item_id: distillation_residue
+        qty: 1.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Fractional distillation producing residue as byproduct (scaled to produce 1 kg residue)"
 notes: |
   Distillation residue is a byproduct of fractional distillation.
   Contains higher-boiling fractions and impurities.
+  Recipe scaled to produce 1 kg of residue (with 19 kg purified_liquid as co-product).

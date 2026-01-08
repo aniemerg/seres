@@ -1,8 +1,31 @@
 id: recipe_rectifier_full_bridge_v0
+kind: recipe
 target_item_id: rectifier_full_bridge_v0
 variant_id: assembled_module_v0
+inputs:
+  - item_id: rectifier_diode_set
+    qty: 0.2
+    unit: kg
+  - item_id: heat_sink
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: rectifier_full_bridge_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: rectifier_diode_set
+        qty: 0.2
+        unit: kg
+      - item_id: heat_sink
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: rectifier_full_bridge_v0
+        qty: 1.0
+        unit: unit
     notes: Assemble diode pack onto small heat sink and attach leads/terminals.
 assumptions: "Uses diode components and small heat sink from existing parts sets; simple assembly."
 notes: Local assembly route for bridge rectifier module.

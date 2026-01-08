@@ -2,26 +2,76 @@ id: recipe_build_atmosphere_control_v0
 kind: recipe
 target_item_id: build_atmosphere_control_v0
 name: Recipe for atmosphere control system build v0
+variant_id: v0
+inputs:
+  - item_id: vacuum_pump_small
+    qty: 1
+    unit: unit
+  - item_id: gas_cylinder_mount
+    qty: 2
+    unit: unit
+  - item_id: flow_controller_valve_set
+    qty: 1
+    unit: unit
+  - item_id: oxygen_sensor_zirconia
+    qty: 1
+    unit: unit
+  - item_id: pressure_gauge_set
+    qty: 1
+    unit: unit
+  - item_id: piping_assembly_small
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: build_atmosphere_control_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: import_receiving_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
   - process_id: assembly_basic_v0
-    est_time_hr: 3.0
-    labor_hours: 2.0
-    machine_hours: 2.0
-  - process_id: electrical_assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 1.5
-    machine_hours: 1.5
-  - process_id: enclosure_assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 1.5
-  - process_id: sealing_and_assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.0
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-assumptions: "Legacy step-format updated to new schema; times estimated conservatively."
-notes: "Updated to comply with KB schema; steps are dictionaries with est_time_hr and labor_hours."
+    inputs:
+      - item_id: vacuum_pump_small
+        qty: 1
+        unit: unit
+      - item_id: gas_cylinder_mount
+        qty: 2
+        unit: unit
+      - item_id: flow_controller_valve_set
+        qty: 1
+        unit: unit
+      - item_id: oxygen_sensor_zirconia
+        qty: 1
+        unit: unit
+      - item_id: pressure_gauge_set
+        qty: 1
+        unit: unit
+      - item_id: piping_assembly_small
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: enclosure_steel_small
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: build_atmosphere_control_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 9.5
+    labor_hours: 7.0
+    machine_hours: 3.5
+    notes: "Receive components, assemble vacuum pump with gas cylinder mounts, integrate flow controllers and sensors, wire control panel and electrical systems, mount in steel enclosure, seal and test atmosphere control"
+assumptions: "Vacuum pump evacuates chamber, gas cylinders supply inert gas, flow controllers regulate gas flow, oxygen sensor monitors purity"
+notes: "Assembly of atmosphere control system for build chamber - used in metal AM and other oxygen-sensitive processes"

@@ -2,6 +2,34 @@ id: recipe_machine_welding_consumables_v0
 kind: recipe
 target_item_id: welding_consumables
 variant_id: v0
+inputs:
+  - item_id: welding_rod_steel
+    qty: 10.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 5.0
+    unit: kg
+  - item_id: storage_enclosure
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: welding_consumables
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welding_rod_steel
+        qty: 10.0
+        unit: kg
+      - item_id: aluminum_wire
+        qty: 5.0
+        unit: kg
+      - item_id: storage_enclosure
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: welding_consumables
+        qty: 1.0
+        unit: unit
 notes: "Assemble welding consumables set from BOM components; placeholder assembly recipe."

@@ -2,9 +2,18 @@ id: recipe_olivine_concentrate_v1
 kind: recipe
 target_item_id: olivine_concentrate
 name: Recipe for olivine concentrate v1
-produces_id: olivine_concentrate
-produces_qty: 1.0
-produces_unit: kg
+variant_id: v1
+inputs:
+  - item_id: regolith_powder
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: olivine_concentrate
+    qty: 30.0
+    unit: kg
+  - item_id: tailings_silicate_mix
+    qty: 70.0
+    unit: kg
 steps:
   - process_id: olivine_beneficiation_v0
 notes: "Alternative production path; primary step: olivine_beneficiation_v0; aligns with existing processes."

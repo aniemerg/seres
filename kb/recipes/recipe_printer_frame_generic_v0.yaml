@@ -2,6 +2,20 @@ id: recipe_printer_frame_generic_v0
 kind: recipe
 target_item_id: printer_frame_generic
 variant_id: v0
+inputs:
+  - item_id: iron_metal_pure
+    qty: 65.0
+    unit: kg
+  - item_id: welding_rod_steel
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: printer_frame_generic
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -9,25 +23,47 @@ steps:
         qty: 65.0
         unit: kg
         notes: "Iron for casting frame sections"
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 61.8
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cast frame sections and gantry rails"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 61.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.8
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: "Machine linear rail surfaces and mounting points"
   - process_id: welding_brazing_basic_v0
     inputs:
+      - item_id: machined_part_raw
+        qty: 60.8
+        unit: kg
       - item_id: welding_rod_steel
         qty: 1.0
         unit: kg
         notes: "Welding rod for joining frame sections"
+    outputs:
+      - item_id: welded_assemblies
+        qty: 60.8
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Weld frame sections together"
   - process_id: assembly_basic_v0
     inputs:
+      - item_id: welded_assemblies
+        qty: 60.8
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 0.5
         unit: kg

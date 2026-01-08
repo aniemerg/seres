@@ -1,11 +1,26 @@
 id: recipe_steel_lamination_stack_v0
 kind: recipe
 target_item_id: steel_lamination_stack
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: steel_lamination_stack
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: lamination_stamping_v0
+    inputs:
+      - item_id: electrical_steel_sheet
+        qty: 1.05
+        unit: kg
     outputs:
       - item_id: steel_lamination_stack
         qty: 1.0
         unit: kg
-notes: "Placeholder recipe to produce steel lamination stack by stamping laminations."
-assumptions: "Mass flow: 1.0 kg steel_lamination_stack produced by lamination_stamping_v0."
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: "Stamp laminations from electrical steel sheet and stack"
+notes: "Recipe to produce steel lamination stack by stamping laminations from electrical steel sheet."
+assumptions: "Mass flow: 1.05 kg electrical steel sheet produces 1.0 kg steel_lamination_stack with ~5% scrap."

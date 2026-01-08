@@ -6,6 +6,34 @@ produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
 name: Local production path for contator_high_power_v0
+inputs:
+  - item_id: metal_part_surface_treated
+    qty: 0.8
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: contator_high_power_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_part_surface_treated
+        qty: 0.8
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: contator_high_power_v0
+        qty: 1.0
+        unit: unit
 notes: "Seed recipe to resolve no_recipe gap for contator_high_power_v0; refine BOM/step details later."

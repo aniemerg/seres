@@ -1,6 +1,28 @@
 id: recipe_nickel_chromium_nickel_aluminum_alloy_stock_v0
 kind: recipe
 target_item_id: nickel_chromium_nickel_aluminum_alloy_stock
+inputs:
+  - item_id: nickel_chromium_alloy
+    qty: 1.0
+    unit: kg
+  - item_id: nickel_aluminum_alloy
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: nickel_chromium_nickel_aluminum_alloy_stock
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: alloy_mixing_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 1.0
+        unit: kg
+      - item_id: nickel_aluminum_alloy
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nickel_chromium_nickel_aluminum_alloy_stock
+        qty: 1.0
+        unit: kg
 notes: "Manufacture nickel-chromium-nickel-aluminum alloy stock by alloying nickel_chromium_alloy with nickel_aluminum_alloy using the existing alloy_mixing_v0 process."

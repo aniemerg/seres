@@ -1,6 +1,23 @@
 id: recipe_dicobalt_octacarbonyl_v0
 kind: recipe
 target_item_id: dicobalt_octacarbonyl
+variant_id: v0
+inputs:
+  - item_id: carbon_monoxide
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: dicobalt_octacarbonyl
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: dicobalt_octacarbonyl_synthesis_v0
+    inputs:
+      - item_id: carbon_monoxide
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: dicobalt_octacarbonyl
+        qty: 1.0
+        unit: kg
 notes: "Seed production recipe for dicobalt_octacarbonyl; placeholder chain to enable local modeling."

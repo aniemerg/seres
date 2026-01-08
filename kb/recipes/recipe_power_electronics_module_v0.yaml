@@ -6,24 +6,74 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: power_electronics_module_v0
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink
+    qty: 1.0
+    unit: unit
+  - item_id: thermal_interface_material
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: power_electronics_module_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Assemble power PCB with microcontroller, gate drivers, sensing circuits"
   - process_id: power_component_assembly_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install power MOSFETs, inductors, capacitors, transformers"
   - process_id: heat_sink_installation_v0
+    inputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
+      - item_id: heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: thermal_interface_material
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Mount heat sinks to power semiconductors with thermal interface"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_electronics_module_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount in enclosure, wire connections, install cooling fan"
-  - process_id: electrical_testing_v0
+  - process_id: electrical_testing_and_burn_in_v0
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test charge control, voltage regulation, load response"

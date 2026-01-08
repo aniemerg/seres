@@ -3,6 +3,17 @@ name: Brass bar stock production
 variant_id: v0
 kind: recipe
 target_item_id: brass_bar_stock
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.7
+    unit: kg
+  - item_id: zinc_metal_v0
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: brass_bar_stock
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:

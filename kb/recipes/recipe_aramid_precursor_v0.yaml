@@ -1,7 +1,25 @@
 id: recipe_aramid_precursor_v0
 kind: recipe
 target_item_id: aramid_precursor_v0
+inputs:
+  - item_id: polymer_feedstock
+    qty: 0.8
+    unit: kg
+outputs:
+  - item_id: aramid_precursor_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: aramid_precursor_synthesis_v0
-    notes: "Link to aramid_precursor_synthesis_v0 process"
-notes: "Adjusted to standard recipe schema (target_item_id) and simple linking to the aramid_precursor_synthesis_v0 process."
+    inputs:
+      - item_id: polymer_feedstock
+        qty: 0.8
+        unit: kg
+    outputs:
+      - item_id: aramid_precursor_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.3
+    notes: "Synthesize aramid precursor from polymer feedstock"
+notes: "Aramid precursor synthesis for advanced materials production."

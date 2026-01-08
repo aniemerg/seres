@@ -20,18 +20,53 @@ outputs:
     notes: Machining and grinding waste
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 42.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Machine die blocks and punches to precise angles and dimensions from tool steel stock"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 42.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 42.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Harden and temper dies for wear resistance"
   - process_id: surface_grinding_precision_v0
+    inputs:
+      - item_id: finished_part
+        qty: 42.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 40.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Precision grind working surfaces for accurate bending"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 40.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: press_brake_die_set
+        qty: 40.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Organize die set with mounting hardware"

@@ -2,9 +2,47 @@ id: recipe_anorthite_ore_v0
 kind: recipe
 target_item_id: anorthite_ore
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: anorthite_ore
+    qty: 90.0
+    unit: kg
+  - item_id: magnetic_concentrate
+    qty: 4.0
+    unit: kg
+  - item_id: regolith_fines
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: beneficiation_magnetic_basic_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: regolith_lunar_highlands
+        qty: 95.0
+        unit: kg
+      - item_id: magnetic_concentrate
+        qty: 4.0
+        unit: kg
+    notes: "Remove iron-rich minerals via magnetic separation"
   - process_id: regolith_screening_sieving_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 95.0
+        unit: kg
+    outputs:
+      - item_id: anorthite_ore
+        qty: 90.0
+        unit: kg
+      - item_id: regolith_fines
+        qty: 5.0
+        unit: kg
+    notes: "Screen for target grain size to produce anorthite ore"
 notes: |
   Extract anorthite ore from lunar highland regolith.
   Process: Mine highland regolith, remove iron-rich minerals (magnetic separation),

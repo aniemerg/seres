@@ -2,6 +2,26 @@ id: recipe_compound_applicator_import_v0
 kind: recipe
 target_item_id: compound_applicator
 # variant_id: import_v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.45
+    unit: kg
+  - item_id: valve_body_machined
+    qty: 0.23
+    unit: kg
+  - item_id: applicator_plunger
+    qty: 0.08
+    unit: kg
+  - item_id: applicator_nozzle
+    qty: 0.04
+    unit: kg
+  - item_id: seal_o_ring_rubber
+    qty: 2.0
+    unit: each
+outputs:
+  - item_id: compound_applicator
+    qty: 0.35
+    unit: kg
 steps:
   - process_id: machining_process_turning_v0
     inputs:

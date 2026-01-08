@@ -2,9 +2,24 @@ id: recipe_rock_feedstock_raw_v0
 kind: recipe
 name: Rock feedstock collection
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: rock_feedstock_raw
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: environment_source_v0
-    est_time_hr: 0.0
-    notes: "Deprecated boundary source; prefer specific regolith/ore items per ADR-011."
-notes: Deprecated boundary source for raw rock feedstock.
+  - process_id: manual_inspection_sorting_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: rock_feedstock_raw
+        qty: 1.0
+        unit: kg
+    notes: Select and stage larger rock feedstock from highlands regolith.
+notes: Deprecated placeholder for raw rock feedstock; modeled as manual selection from regolith.
 target_item_id: rock_feedstock_raw

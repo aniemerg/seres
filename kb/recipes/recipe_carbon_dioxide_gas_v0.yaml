@@ -1,6 +1,28 @@
 id: recipe_carbon_dioxide_gas_v0
 kind: recipe
 target_item_id: carbon_dioxide_gas
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: carbon_dioxide_gas
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: carbon_dioxide_generation_v0
+    inputs:
+      - item_id: carbon_reductant
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: carbon_dioxide_gas
+        qty: 3.0
+        unit: kg
 notes: "CO2 generation path (carbon dioxide generation from carbon_reductant and oxygen)." 

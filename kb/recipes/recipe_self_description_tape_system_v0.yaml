@@ -2,11 +2,69 @@ id: recipe_self_description_tape_system_v0
 kind: recipe
 variant_id: v0
 target_item_id: self_description_tape_system_v0
+inputs:
+  - item_id: magnetic_tape_reel
+    qty: 10
+    unit: unit
+  - item_id: tape_drive_mechanism
+    qty: 2
+    unit: unit
+  - item_id: magnetic_read_write_head
+    qty: 4
+    unit: unit
+  - item_id: stepper_motor_v0
+    qty: 4
+    unit: unit
+  - item_id: steel_frame_welded
+    qty: 30.0
+    unit: kg
+  - item_id: electronic_control_circuit_v0
+    qty: 5.0
+    unit: kg
+  - item_id: bearing_ball_steel
+    qty: 20
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: self_description_tape_system_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: import_receiving_basic_v0
   - process_id: assembly_basic_v0
-  - process_id: electrical_assembly_basic_v0
-  - process_id: machine_assembly_basic_v0
-  - process_id: inspection_basic_v0
-notes: "Placeholder recipe for self_description_tape_system_v0 using generic fabrications steps. Refine BOM and process sequence as design details become available."
-assumptions: "Uses standard basic fabrication steps to assemble the self-description tape system from BOM components."
+    inputs:
+      - item_id: magnetic_tape_reel
+        qty: 10
+        unit: unit
+      - item_id: tape_drive_mechanism
+        qty: 2
+        unit: unit
+      - item_id: magnetic_read_write_head
+        qty: 4
+        unit: unit
+      - item_id: stepper_motor_v0
+        qty: 4
+        unit: unit
+      - item_id: steel_frame_welded
+        qty: 30.0
+        unit: kg
+      - item_id: electronic_control_circuit_v0
+        qty: 5.0
+        unit: kg
+      - item_id: bearing_ball_steel
+        qty: 20
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: self_description_tape_system_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 16.0
+    machine_hours: 6.0
+    labor_hours: 10.0
+    notes: "Assemble steel frame, mount tape drive mechanisms, install read/write heads, integrate stepper motors and bearings, wire control electronics, test read/write functionality"
+notes: "Self-description tape storage system with redundant tape drives for data archival. Assembly from BOM components."
+assumptions: "Uses standard assembly to build tape system from BOM components including magnetic tape reels, drive mechanisms, and control electronics."

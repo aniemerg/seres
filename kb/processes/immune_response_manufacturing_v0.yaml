@@ -2,7 +2,7 @@ id: immune_response_manufacturing_v0
 kind: process
 name: Immune response manufacturing (placeholder)
 layer_tags:
-  - layer_8
+- layer_8
 inputs: []
 outputs: []
 energy_model:
@@ -12,5 +12,10 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.1
-notes: "Out-of-scope biomedical manufacturing placeholder; treated as external supply until modeled."
+notes: Out-of-scope biomedical manufacturing placeholder; treated as external supply
+  until modeled.
 process_type: batch
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr

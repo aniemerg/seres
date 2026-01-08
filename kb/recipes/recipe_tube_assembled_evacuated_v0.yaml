@@ -5,6 +5,42 @@ target_item_id: tube_assembled_evacuated
 produces_id: tube_assembled_evacuated
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: tube_envelope_blown
+    qty: 0.018
+    unit: kg
+  - item_id: cathode_coated
+    qty: 0.008
+    unit: kg
+  - item_id: tube_base_ceramic
+    qty: 0.01
+    unit: kg
+  - item_id: getter_material_raw
+    qty: 0.002
+    unit: kg
+outputs:
+  - item_id: tube_assembled_evacuated
+    qty: 0.04
+    unit: kg
 steps:
 - process_id: tube_assembly_and_evacuation_v0
+  inputs:
+    - item_id: tube_envelope_blown
+      qty: 0.018
+      unit: kg
+    - item_id: cathode_coated
+      qty: 0.008
+      unit: kg
+    - item_id: tube_base_ceramic
+      qty: 0.01
+      unit: kg
+    - item_id: getter_material_raw
+      qty: 0.002
+      unit: kg
+  outputs:
+    - item_id: tube_assembled_evacuated
+      qty: 0.04
+      unit: kg
+  est_time_hr: 1.5
+  labor_hours: 1.5
 notes: "Chain: assemble envelope components and evacuate to form tube_assembled_evacuated."

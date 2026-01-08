@@ -1,24 +1,81 @@
 id: recipe_hydraulic_cylinder_press_v0
 target_item_id: hydraulic_cylinder_press
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 100.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 95.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 92.0
+    unit: kg
+  - item_id: finished_part_deburred
+    qty: 90.0
+    unit: kg
+outputs:
+  - item_id: hydraulic_cylinder_press
+    qty: 90.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 95.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Cast cylinder body and end caps from steel"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 95.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 92.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine cylinder bore, piston, rod, mounting lugs to precision tolerances"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 92.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 90.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Grind cylinder bore and piston for tight seal clearances"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 90.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble piston, rod, seals, end caps, hydraulic fittings"
   - process_id: leak_test_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_cylinder_press
+        qty: 90.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Pressure test cylinder for leaks"

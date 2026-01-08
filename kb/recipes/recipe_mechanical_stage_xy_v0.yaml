@@ -1,6 +1,22 @@
 id: recipe_mechanical_stage_xy_v0
 kind: recipe
 target_item_id: mechanical_stage_xy
+inputs:
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: mechanical_stage_xy
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: mechanical_stage_xy_fabrication_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: mechanical_stage_xy
+        qty: 1.0
+        unit: unit
 notes: "Produce XY mechanical stage from raw metal block using CNC milling; placeholder path."

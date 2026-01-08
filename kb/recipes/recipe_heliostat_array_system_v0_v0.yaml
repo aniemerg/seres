@@ -2,9 +2,47 @@ id: recipe_heliostat_array_system_v0_v0
 kind: recipe
 name: Recipe for heliostat array system v0
 target_item_id: heliostat_array_system_v0
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: heliostat_frame_v0
+    qty: 1.0
+    unit: unit
+  - item_id: heliostat_mirror_panel_v0
+    qty: 6.0
+    unit: unit
+  - item_id: heliostat_actuator_unit_v0
+    qty: 4.0
+    unit: unit
+  - item_id: heliostat_control_electronics_v0
+    qty: 1.0
+    unit: unit
+  - item_id: heliostat_mounting_bracket_v0
+    qty: 4.0
+    unit: unit
+outputs:
+  - item_id: heliostat_array_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: heliostat_array_assembly_v0
+    inputs:
+      - item_id: heliostat_frame_v0
+        qty: 1.0
+        unit: unit
+      - item_id: heliostat_mirror_panel_v0
+        qty: 6.0
+        unit: unit
+      - item_id: heliostat_actuator_unit_v0
+        qty: 4.0
+        unit: unit
+      - item_id: heliostat_control_electronics_v0
+        qty: 1.0
+        unit: unit
+      - item_id: heliostat_mounting_bracket_v0
+        qty: 4.0
+        unit: unit
+    outputs:
+      - item_id: heliostat_array_system_v0
+        qty: 1.0
+        unit: unit
 notes: Placeholder recipe linking to assembly process for heliostat array system.

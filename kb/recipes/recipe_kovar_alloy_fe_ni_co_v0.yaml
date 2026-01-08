@@ -1,6 +1,23 @@
 id: recipe_kovar_alloy_fe_ni_co_v0
 kind: recipe
 target_item_id: kovar_alloy_fe_ni_co_v0
+variant_id: v0
+inputs:
+  - item_id: powder_mixture
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: kovar_alloy_fe_ni_co_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: kovar_alloy_production_v0
+    inputs:
+      - item_id: powder_mixture
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: kovar_alloy_fe_ni_co_v0
+        qty: 1.0
+        unit: kg
 notes: "Seed recipe to manufacture kovar alloy (Fe-Ni-Co) for glass seals; uses kovar_alloy_production_v0 as the single step. Placeholder until more detailed process chain is defined."

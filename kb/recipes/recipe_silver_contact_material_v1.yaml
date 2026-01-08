@@ -2,6 +2,22 @@ id: recipe_silver_contact_material_v1
 kind: recipe
 name: Casting recipe for silver_contact_material v1
 target_item_id: silver_contact_material
+inputs:
+  - item_id: silver_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silver_contact_material
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: casting_silver_contact_material_v0
+    inputs:
+      - item_id: silver_ingot
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silver_contact_material
+        qty: 1.0
+        unit: kg
 notes: "Version 1 recipe using explicit target_item_id field for compatibility with indexer."

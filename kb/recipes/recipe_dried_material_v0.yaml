@@ -4,7 +4,23 @@ name: Dried material production (generic)
 produces_id: dried_material
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: wet_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: dried_material
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: drying_and_curing_v0
+  inputs:
+    - item_id: wet_material
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: dried_material
+      qty: 1.0
+      unit: kg
 notes: Generic placeholder recipe for drying/curing materials.
 target_item_id: dried_material

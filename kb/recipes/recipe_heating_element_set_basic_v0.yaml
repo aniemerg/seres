@@ -23,6 +23,10 @@ inputs:
     qty: 2.0
     unit: kg
     notes: Assembly hardware
+  - item_id: heating_elements_basic
+    qty: 55.0
+    unit: kg
+    notes: Coil elements on ceramic forms
 
 outputs:
   - item_id: heating_element_set_basic
@@ -31,18 +35,62 @@ outputs:
 
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: nichrome_wire
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: nichrome_wire
+        qty: 20.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Draw resistance wire (nichrome or similar alloy) to heating element diameter"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: nichrome_wire
+        qty: 20.0
+        unit: kg
+      - item_id: ceramic_insulator_tube
+        qty: 35.0
+        unit: kg
+    outputs:
+      - item_id: heating_elements_basic
+        qty: 55.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Wind resistance wire into coil elements on ceramic forms"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: heating_elements_basic
+        qty: 55.0
+        unit: kg
+      - item_id: steel_frame_heavy
+        qty: 20.0
+        unit: kg
+      - item_id: terminal_block_set
+        qty: 3.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount coil elements on support frames, install terminals and insulators"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: heating_element_set_basic
+        qty: 80.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test resistance, continuity, and insulation of heating elements"

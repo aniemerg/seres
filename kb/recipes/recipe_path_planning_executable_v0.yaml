@@ -2,10 +2,28 @@ id: recipe_path_planning_executable_v0
 kind: recipe
 target_item_id: path_planning_executable
 variant_id: v0
+inputs:
+  - item_id: software_source_code_v0
+    qty: 1
+    unit: unit
+    notes: Source code libraries and dependencies
+  - item_id: compute_resource_time
+    qty: 1.5
+    unit: hr
+    notes: Development and compilation compute time
+outputs:
+  - item_id: path_planning_executable
+    qty: 1
+    unit: unit
 steps:
   - process_id: software_development_programming_v0
-    est_time_hr: 1.0
-    notes: "Develop path planning software component"
-  - process_id: software_compilation_v0
-    est_time_hr: 0.5
-    notes: "Compile into executable artifact"
+    inputs:
+      - item_id: software_source_code_v0
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: path_planning_executable
+        qty: 1
+        unit: unit
+    est_time_hr: 1.5
+    notes: "Develop and compile path planning software component"

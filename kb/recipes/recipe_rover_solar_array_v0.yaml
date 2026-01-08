@@ -6,35 +6,46 @@ inputs:
   - item_id: solar_cell_set
     qty: 8.0
     unit: kg
-    notes: "Photovoltaic cells for power generation"
   - item_id: aluminum_sheet_2mm
     qty: 6.0
     unit: kg
-    notes: "Aluminum frames and backing plates"
   - item_id: aluminosilicate_glass
     qty: 4.0
     unit: kg
-    notes: "Protective glass cover for solar cells (aluminosilicate glass, heat-strengthened)"
   - item_id: electrical_wire_and_connectors
     qty: 1.5
     unit: kg
-    notes: "Wiring and junction boxes"
   - item_id: fastener_kit_small
     qty: 0.5
     unit: kg
-    notes: "Assembly hardware"
 outputs:
   - item_id: rover_solar_array_v0
     qty: 20.0
     unit: kg
 steps:
   - process_id: assembly_basic_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Assemble solar cells onto panels, install glass covers, wire cells in series/parallel, mount in frames"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Test electrical output and verify connections"
+    inputs:
+      - item_id: solar_cell_set
+        qty: 8.0
+        unit: kg
+      - item_id: aluminum_sheet_2mm
+        qty: 6.0
+        unit: kg
+      - item_id: aluminosilicate_glass
+        qty: 4.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 1.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: rover_solar_array_v0
+        qty: 20.0
+        unit: kg
+    est_time_hr: 5.0
+    labor_hours: 5.0
+    notes: "Assemble solar cells onto panels, install glass covers, wire cells in series/parallel, mount in frames, test electrical output and verify connections"
 assumptions: "Seed recipe; solar array components BOM to be defined; simple assembly route using assembly_basic_v0."
 notes: "Seed placeholder recipe for rover solar array v0; follows pattern of solar_array_v0 assembly."

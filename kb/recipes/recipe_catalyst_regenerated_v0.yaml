@@ -5,6 +5,22 @@ produces_id: catalyst_regenerated_v0
 produces_qty: 1.8
 produces_unit: kg
 target_item_id: catalyst_regenerated_v0
+inputs:
+- item_id: catalyst_spent_v0
+  qty: 2.0
+  unit: kg
+outputs:
+- item_id: catalyst_regenerated_v0
+  qty: 1.8
+  unit: kg
 steps:
 - process_id: catalyst_regeneration_process_v0
+  inputs:
+  - item_id: catalyst_spent_v0
+    qty: 2.0
+    unit: kg
+  outputs:
+  - item_id: catalyst_regenerated_v0
+    qty: 1.8
+    unit: kg
 notes: "Regenerates catalyst from spent catalyst; derived yield from catalyst_regeneration_process_v0."

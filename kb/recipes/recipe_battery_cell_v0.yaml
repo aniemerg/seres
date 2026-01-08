@@ -1,6 +1,34 @@
 id: recipe_battery_cell_v0
 kind: recipe
 target_item_id: battery_cell
+inputs:
+  - item_id: electrode_materials
+    qty: 1.0
+    unit: kg
+  - item_id: electrolyte
+    qty: 0.5
+    unit: kg
+  - item_id: battery_cell_casing
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: battery_cell
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: battery_cell_assembly_v0
+    inputs:
+      - item_id: electrode_materials
+        qty: 1.0
+        unit: kg
+      - item_id: electrolyte
+        qty: 0.5
+        unit: kg
+      - item_id: battery_cell_casing
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: battery_cell
+        qty: 1.0
+        unit: unit
 notes: "Local production route for battery_cell using existing battery_cell_assembly_v0 process. Replaces import stub."

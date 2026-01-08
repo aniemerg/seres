@@ -2,6 +2,20 @@ id: recipe_refractory_brick_set_v0
 kind: recipe
 target_item_id: refractory_brick_set
 variant_id: v0
+inputs:
+  - item_id: alumina_powder
+    qty: 150.0
+    unit: kg
+  - item_id: ceramic_powder
+    qty: 40.0
+    unit: kg
+  - item_id: binder_material
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: refractory_brick_set
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: powder_processing_v0
     inputs:
@@ -22,13 +36,17 @@ steps:
     labor_hours: 1.0
     notes: "Process alumina-silicate ceramic powder with binder for brick molding"
   - process_id: pressing_operations_basic_v0
+    inputs:
+      - item_id: processed_powder_mixture
+        qty: 200.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Press ceramic powder into brick shapes"
   - process_id: sintering_basic_v0
     inputs:
-      - item_id: powder_metal_or_ceramic
+      - item_id: pressed_component
         qty: 200.0
         unit: kg
         notes: "Pressed green bricks for sintering"
@@ -37,6 +55,10 @@ steps:
     labor_hours: 2.0
     notes: "Fire refractory bricks at high temperature (1400-1600°C) to achieve final strength and heat resistance"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 190.0
+        unit: kg
     outputs:
       - item_id: refractory_brick_set
         qty: 200.0

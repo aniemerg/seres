@@ -2,17 +2,55 @@ id: recipe_compound_parabolic_concentrator_v0
 kind: recipe
 target_item_id: compound_parabolic_concentrator_v0
 variant_id: v0
+inputs:
+  - item_id: parabolic_mirror_segment
+    qty: 5.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: compound_parabolic_concentrator_v0
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: parabolic_mirror_segment
+        qty: 5.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 25.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble 5x parabolic_mirror_segment parts into CPC body (approx 25 kg)"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 0.0
     notes: "Finish Machining/finishing of CPC surfaces and geometry"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: compound_parabolic_concentrator_v0
+        qty: 25.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "QA and dimensional checks of CPC assembly"

@@ -3,8 +3,14 @@ kind: recipe
 name: Ceramic substrate RTD production
 target_item_id: ceramic_substrate_rtd
 variant_id: v0
-produces_qty: 0.008
-produces_unit: kg
+inputs:
+  - item_id: alumina_powder
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: ceramic_substrate_rtd
+    qty: 0.008
+    unit: kg
 steps:
 - process_id: ceramic_sintering_v0
   inputs:

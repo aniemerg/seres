@@ -2,7 +2,31 @@ id: recipe_regolith_powder_hcl_treated_v0
 kind: recipe
 name: Recipe for regolith powder (HCl-treated)
 target_item_id: regolith_powder_hcl_treated_v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: regolith_powder_hcl_treated_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: hcl_regolith_preprocessing_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: regolith_powder_hcl_treated_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
     notes: "Acid preprocessing: regolith_powder + hydrochloric_acid → regolith_powder_hcl_treated_v0"
 notes: "Uses HCl regolith preprocessing process to produce regolith_powder_hcl_treated_v0 from regolith_powder."

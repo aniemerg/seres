@@ -1,8 +1,52 @@
 id: recipe_structural_frame_small_v1
 kind: recipe
 target_item_id: structural_frame_small
+inputs:
+  - item_id: steel_bar_raw
+    qty: 13.0
+    unit: kg
+outputs:
+  - item_id: structural_frame_small
+    qty: 12.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_bar_raw
+        qty: 13.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 12.8
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 12.8
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 12.5
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 12.5
+        unit: kg
+    outputs:
+      - item_id: structural_frame_small
+        qty: 12.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.5
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
 notes: "Placeholder recipe to manufacture structural_frame_small from steel stock via basic forming"

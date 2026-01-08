@@ -1,26 +1,93 @@
 id: recipe_tube_sealing_torch_v0
+kind: recipe
 target_item_id: tube_sealing_torch
 variant_id: v0
+inputs:
+  - item_id: metal_ingot
+    qty: 27.0
+    unit: kg
+  - item_id: cast_part_raw
+    qty: 25.5
+    unit: kg
+    notes: "Intermediate for welding step"
+  - item_id: welded_fabrications
+    qty: 25.1
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: assembled_equipment
+    qty: 25.3
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: valve_set_gas_handling
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: tube_sealing_torch
+    qty: 1
+    unit: unit
 steps:
-- process_id: metal_casting_basic_v0
-  est_time_hr: 2.0
-  machine_hours: 2.0
-  notes: "Cast torch body components"
-- process_id: welding_and_fabrication_v0
-  est_time_hr: 1.5
-  labor_hours: 1.5
-  notes: "Weld body interfaces and fittings"
-- process_id: assembly_basic_v0
-  est_time_hr: 1.0
-  labor_hours: 1.0
-  notes: "Assemble torch components into body"
-- process_id: machining_finish_basic_v0
-  est_time_hr: 0.5
-  labor_hours: 0.5
-  notes: "Finish mounting surfaces and tolerances"
-- process_id: leak_test_v0
-  est_time_hr: 0.5
-  labor_hours: 0.5
-  notes: "Leak testing of torch assembly"
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_ingot
+        qty: 27.0
+        unit: kg
+    outputs:
+      - item_id: cast_part_raw
+        qty: 25.5
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast torch body components"
+  - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: cast_part_raw
+        qty: 25.5
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 25.1
+        unit: kg
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Weld body interfaces and fittings"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 25.1
+        unit: kg
+      - item_id: valve_set_gas_handling
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 25.3
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble torch components into body"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 25.3
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.05
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Finish mounting surfaces and tolerances"
+  - process_id: leak_test_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 25.05
+        unit: kg
+    outputs:
+      - item_id: tube_sealing_torch
+        qty: 1
+        unit: unit
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Leak testing of torch assembly"
 assumptions: "This is a placeholder manufacturing route for tube sealing torch; refine with BOM and dedicated torch assembly steps."
 notes: "Tube sealing torch manufacturing recipe; uses existing casting, welding, assembly, machining and leak testing steps."

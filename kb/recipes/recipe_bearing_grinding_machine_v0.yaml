@@ -1,7 +1,77 @@
 id: recipe_bearing_grinding_machine_v0
 kind: recipe
 target_item_id: bearing_grinding_machine_v0
+variant_id: v0
+inputs:
+  - item_id: import_misc_components_set
+    qty: 2.0
+    unit: unit
+  - item_id: machine_base_large
+    qty: 1.0
+    unit: unit
+  - item_id: grinding_wheels
+    qty: 2.0
+    unit: unit
+  - item_id: grinding_spindle_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 2.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1.0
+    unit: unit
+  - item_id: coolant_system_basic
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: bearing_grinding_machine_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: bearing_machine_assembly_v0
-variant_id: v0
+    inputs:
+      - item_id: import_misc_components_set
+        qty: 2.0
+        unit: unit
+      - item_id: machine_base_large
+        qty: 1.0
+        unit: unit
+      - item_id: grinding_wheels
+        qty: 2.0
+        unit: unit
+      - item_id: grinding_spindle_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 2.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: coolant_system_basic
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: bearing_grinding_machine_v0
+        qty: 1.0
+        unit: unit
 notes: "Canonical recipe file with valid schema."

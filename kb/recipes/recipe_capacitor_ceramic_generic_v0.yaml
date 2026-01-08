@@ -6,33 +6,32 @@ produces_qty: 0.05
 produces_unit: kg
 target_item_id: capacitor_ceramic_generic
 variant_id: v0
+inputs:
+  - item_id: ceramic_powder_mixture
+    qty: 0.053
+    unit: kg
+  - item_id: water
+    qty: 0.01
+    unit: L
+outputs:
+  - item_id: capacitor_ceramic_generic
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: ceramic_forming_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.8
+    inputs:
+      - item_id: ceramic_powder_mixture
+        qty: 0.053
+        unit: kg
+      - item_id: water
+        qty: 0.01
+        unit: L
     outputs:
-      - item_id: green_ceramic_part
+      - item_id: capacitor_ceramic_generic
         qty: 0.05
         unit: kg
-    notes: "Form green ceramic capacitor body from ceramic_powder_mixture"
-  - process_id: drying_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 0.6
-    notes: "Dry green body"
-  - process_id: firing_ceramic_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 0.6
-    notes: "Fire ceramic to densify"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.5
-    notes: "Finish edges and mounting features"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Dimensional check and functional verification"
+    est_time_hr: 6.3
+    machine_hours: 6.0
+    labor_hours: 2.8
+    notes: "Form green ceramic capacitor body, dry, fire to densify, machine finish, and inspect"
 notes: "Placeholder recipe to manufacture capacitor_ceramic_generic via ceramic forming and firing; mass and properties may be adjusted as BOMs mature."

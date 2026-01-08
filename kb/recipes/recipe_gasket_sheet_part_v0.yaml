@@ -1,6 +1,23 @@
 id: recipe_gasket_sheet_part_v0
 kind: recipe
 target_item_id: gasket_sheet_part_v0
+variant_id: v0
+inputs:
+  - item_id: gasket_sheet
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: gasket_sheet_part_v0
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: gasket_sheet_cut_to_part_v0
+    inputs:
+      - item_id: gasket_sheet
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: gasket_sheet_part_v0
+        qty: 0.5
+        unit: kg
 notes: "Local gasket_sheet_part_v0 production path; uses gasket_sheet_cut_to_part_v0 process."

@@ -2,6 +2,22 @@ id: recipe_base_grease_stock_import_v0
 kind: recipe
 name: Base grease stock import v0 (revised)
 target_item_id: base_grease_stock
+inputs:
+  - item_id: polymer_feedstock
+    qty: 0.04
+    unit: kg
+outputs:
+  - item_id: base_grease_stock
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: base_grease_stock_synthesis_v0
+    inputs:
+      - item_id: polymer_feedstock
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: base_grease_stock
+        qty: 0.05
+        unit: kg
 notes: "Converted to a standard v0 recipe; this path unblocks the no_recipe gap by using the local synthesis route."

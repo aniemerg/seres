@@ -1,12 +1,60 @@
 id: recipe_chemical_reactor_basic_v0
 kind: recipe
+name: Recipe for chemical reactor basic
 target_item_id: chemical_reactor_basic
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 300.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: piping_and_fittings_set
+    qty: 1
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: chemical_reactor_basic
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 20.0
+    unit: kg
 steps:
-  - process_id: welded_fabrication_basic_v0
-    notes: "Fabricate reactor vessel from steel"
   - process_id: assembly_basic_v0
-    notes: "Assemble reactor components and instrumentation"
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 300.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_set
+        qty: 1
+        unit: unit
+      - item_id: insulation_pack_high_temp
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: chemical_reactor_basic
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 20.0
+        unit: kg
+    est_time_hr: 20.0
+    machine_hours: 10.0
+    labor_hours: 10.0
+    notes: "Fabricate reactor vessel from steel plate via welding, machine vessel openings for instrumentation and piping, install temperature sensors and pressure gauges, assemble inlet/outlet piping and fittings, apply high-temperature insulation, final assembly and pressure testing"
 notes: |
   Basic chemical reactor assembly from welded steel vessel.
   500 kg machine for molten salt electrolysis and chemical processing.

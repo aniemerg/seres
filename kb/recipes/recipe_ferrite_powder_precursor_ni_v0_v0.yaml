@@ -6,8 +6,30 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: ferrite_powder_precursor_ni_v0
 variant_id: v0
+inputs:
+  - item_id: nickel_ore_raw
+    qty: 0.5
+    unit: kg
+  - item_id: iron_ore_or_ilmenite
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: ferrite_powder_precursor_ni_v0
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: ferrite_powder_precursor_synthesis_ni_v0
+  inputs:
+    - item_id: nickel_ore_raw
+      qty: 0.5
+      unit: kg
+    - item_id: iron_ore_or_ilmenite
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: ferrite_powder_precursor_ni_v0
+      qty: 1.0
+      unit: kg
 assumptions: "Seed precursor production linking to Ni ferrite route; placeholder values."
 notes: |-
   This is a seed recipe for NiFe2O4 powder precursor production. The precursor (ferrite_powder_precursor_ni_v0)

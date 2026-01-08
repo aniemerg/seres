@@ -1,16 +1,55 @@
 id: recipe_mixer_frame_small_v0
+kind: recipe
 target_item_id: mixer_frame_small
 variant_id: v0
+inputs:
+  - item_id: steel_beam_i_section
+    qty: 35.0
+    unit: kg
+  - item_id: cut_parts
+    qty: 34.0
+    unit: kg
+  - item_id: welded_fabrications
+    qty: 34.0
+    unit: kg
+outputs:
+  - item_id: mixer_frame_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+    - item_id: steel_beam_i_section
+      qty: 35.0
+      unit: kg
+    outputs:
+    - item_id: cut_parts
+      qty: 34.0
+      unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cut steel tubing or angle iron for frame structure"
   - process_id: welding_and_fabrication_v0
+    inputs:
+    - item_id: cut_parts
+      qty: 34.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 34.0
+      unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld frame structure with mixer drum mounts and motor platform"
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 34.0
+      unit: kg
+    outputs:
+    - item_id: mixer_frame_small
+      qty: 1
+      unit: unit
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Machine motor mounting holes, drum pivot points, leveling feet"

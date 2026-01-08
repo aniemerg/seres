@@ -3,8 +3,30 @@ kind: recipe
 name: Recipe for air-core inductor
 target_item_id: inductor_air_core_v0
 variant_id: v0
+inputs:
+  - item_id: copper_wire_magnet
+    qty: 1.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: inductor_air_core_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: copper_wire_magnet
+        qty: 1.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: inductor_air_core_v0
+        qty: 1.0
+        unit: unit
     notes: "Wind copper winding around air core; placeholder"
 assumptions: "Air-core inductor: winding copper wire around an air core. No magnetic core."
 notes: "Placeholder recipe; refine with insulation and enclosure once data is available."

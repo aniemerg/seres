@@ -1,8 +1,24 @@
 id: recipe_lunar_regolith_in_situ_v0
 target_item_id: lunar_regolith_in_situ
 variant_id: v0
+inputs:
+  - item_id: electrical_energy
+    qty: 0.001
+    unit: kWh
+outputs:
+  - item_id: lunar_regolith_in_situ
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: environment_source_v0
+    inputs:
+      - item_id: electrical_energy
+        qty: 0.001
+        unit: kWh
+    outputs:
+      - item_id: lunar_regolith_in_situ
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.0
     notes: Lunar regolith is freely available at the surface
 assumptions: Regolith available in unlimited quantity at lunar surface.

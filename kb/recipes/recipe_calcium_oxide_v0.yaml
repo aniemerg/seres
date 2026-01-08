@@ -1,8 +1,24 @@
 id: recipe_calcium_oxide_v0
 target_item_id: calcium_oxide
 variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: calcium_oxide
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: calcium_oxide_extraction_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: calcium_oxide
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
 assumptions: Placeholder CaO extraction from regolith; yields/energy TBD.

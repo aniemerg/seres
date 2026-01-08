@@ -1,20 +1,97 @@
 id: recipe_machine_press_brake_v0
+kind: recipe
 target_item_id: press_brake
 variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 500.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 25.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 120.0
+    unit: kg
+  - item_id: structural_steel_frame
+    qty: 500.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: machined_steel_part_precision
+    qty: 120.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: hydraulic_system_medium
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_assembly_v0
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kit
+outputs:
+  - item_id: press_brake
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 500.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: structural_steel_frame
+        qty: 500.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 5.0
     labor_hours: 5.0
     notes: "Fabricate press brake frame, platen supports, base, and mounting brackets"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 120.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 120.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 2.0
     notes: "Machine mounting surfaces and interfaces for hydraulic/power modules"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_frame
+        qty: 500.0
+        unit: kg
+      - item_id: machined_steel_part_precision
+        qty: 120.0
+        unit: kg
+      - item_id: hydraulic_system_medium
+        qty: 1.0
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_assembly_v0
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kit
+    outputs:
+      - item_id: press_brake
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble welded components into press brake frame and attach base components"
-assumptions: "Local fabrication path to produce press_brake_v0 base machine; relies on standard fabrication resources."
+assumptions: "Local fabrication path to produce press_brake base machine; relies on standard fabrication resources."
 notes: "Concrete local fabrication path for press_brake base machine v0"

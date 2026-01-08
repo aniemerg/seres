@@ -3,12 +3,53 @@ kind: recipe
 produces_id: obstacle_avoidance_ai_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: obstacle_avoidance_ai_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: wiring_and_electronics_integration_v0
+  inputs:
+    - item_id: electrical_wire_and_connectors
+      qty: 1.0
+      unit: kg
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: wired_electrical_system
+      qty: 1.0
+      unit: unit
   notes: Wiring and electronics integration for AI module
 - process_id: sensor_integration_v0
+  inputs:
+    - item_id: sensor_suite_general
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: sensor_equipped_system
+      qty: 1.0
+      unit: unit
   notes: Sensor integration for obstacle detection inputs
 - process_id: integration_test_basic_v0
+  inputs:
+    - item_id: sensor_equipped_system
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: obstacle_avoidance_ai_v0
+      qty: 1.0
+      unit: unit
   notes: Basic integration test of AI obstacle avoidance functionality
 notes: Standard recipe to assemble obstacle avoidance AI v0 using existing integration processes.
 target_item_id: obstacle_avoidance_ai_v0

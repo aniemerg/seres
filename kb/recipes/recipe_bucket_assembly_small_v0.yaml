@@ -1,24 +1,84 @@
 id: recipe_bucket_assembly_small_v0
 target_item_id: bucket_assembly_small
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 95.0
+    unit: kg
+  - item_id: formed_sheet_metal_parts
+    qty: 90.0
+    unit: kg
+  - item_id: welded_assemblies
+    qty: 88.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 85.0
+    unit: kg
+  - item_id: finished_part
+    qty: 80.0
+    unit: kg
+outputs:
+  - item_id: bucket_assembly_small
+    qty: 80.0
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 95.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 90.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Cut and form heavy gauge steel plate for bucket body and cutting edge"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 90.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 88.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Weld bucket body, reinforcements, and cutting edge"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 88.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 85.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine mounting pins, pivot points, and hydraulic linkage connections"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 80.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install mounting hardware, pins, and hydraulic cylinder attachments"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: bucket_assembly_small
+        qty: 80.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify structural integrity and mounting interface"

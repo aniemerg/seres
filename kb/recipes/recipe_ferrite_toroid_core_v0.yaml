@@ -1,12 +1,35 @@
 id: recipe_ferrite_toroid_core_v0
 target_item_id: ferrite_toroid_core_v0
 variant_id: v0
+inputs:
+  - item_id: coarse_powder
+    qty: 1.1
+    unit: kg
+  - item_id: powder_metal_or_ceramic
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: ball_milling_v0
+    inputs:
+      - item_id: coarse_powder
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 0.5
     notes: Mill ferrite powder precursors (Fe oxide, Ni oxide) to fine particle size
   - process_id: ferrite_toroid_sintering_v0
+    inputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: ferrite_toroid_core_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 0.8
     notes: Press into toroid shape and sinter at 1200-1400°C

@@ -1,7 +1,31 @@
 id: recipe_gas_inlet_manifold_v1
 kind: recipe
 target_item_id: gas_inlet_manifold
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: gas_inlet_manifold
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 2.8
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: gas_inlet_manifold
+        qty: 2.0
+        unit: kg
 notes: "Seed recipe to manufacture non-versioned gas inlet manifold from metal stock; mirrors gas_inlet_manifold_v0 as a placeholder path."

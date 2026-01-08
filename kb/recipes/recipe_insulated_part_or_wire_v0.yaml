@@ -1,16 +1,51 @@
 id: recipe_insulated_part_or_wire_v0
 target_item_id: insulated_part_or_wire
 variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 2.0
+    unit: kg
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: insulated_part_or_wire
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Draw copper or aluminum wire to required gauge"
   - process_id: plastic_extrusion_v0
+    inputs:
+      - item_id: plastic_pellets
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: extruded_plastic_profile
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Extrude polymer insulation over conductor"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: extruded_plastic_profile
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: insulated_part_or_wire
+        qty: 3.0
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Test insulation resistance and verify dimensions"

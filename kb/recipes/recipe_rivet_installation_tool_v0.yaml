@@ -4,8 +4,52 @@ name: Recipe for rivet installation tool v0
 target_item_id: rivet_installation_tool_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 4.0
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: rivet_installation_tool_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 3.8
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 3.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.6
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.6
+        unit: kg
+      - item_id: spring_compression_small
+        qty: 2.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: rivet_installation_tool_v0
+        qty: 1.0
+        unit: unit
 notes: "Minimal recipe to enable Rivet Installation Tool (v0) production."

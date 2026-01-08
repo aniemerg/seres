@@ -1,16 +1,72 @@
 id: recipe_encapsulation_station_v0
 target_item_id: encapsulation_station
 variant_id: v0
+inputs:
+  - item_id: potting_dispensers
+    qty: 1.0
+    unit: unit
+  - item_id: potting_vacuum_chamber_small
+    qty: 1.0
+    unit: unit
+  - item_id: potting_curing_oven_small
+    qty: 1.0
+    unit: unit
+  - item_id: potting_fixtures_and_molds
+    qty: 1.0
+    unit: unit
+  - item_id: chemical_bath_ventilation
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: encapsulation_station
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: potting_dispensers
+        qty: 1.0
+        unit: unit
+      - item_id: potting_vacuum_chamber_small
+        qty: 1.0
+        unit: unit
+      - item_id: potting_curing_oven_small
+        qty: 1.0
+        unit: unit
+      - item_id: potting_fixtures_and_molds
+        qty: 1.0
+        unit: unit
+      - item_id: chemical_bath_ventilation
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble work surface, mounts for dispensers, vacuum chamber, and curing oven."
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Wire controls for ventilation, vacuum pump, and curing oven/UV lamp."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test vacuum degassing, curing cycle, and ventilation airflow."

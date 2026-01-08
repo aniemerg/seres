@@ -1,6 +1,22 @@
 id: recipe_liquid_oxygen_v0
 kind: recipe
 target_item_id: liquid_oxygen_v0
+inputs:
+  - item_id: oxygen_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: liquid_oxygen_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cold_trap_cryogenic_v0
+    inputs:
+      - item_id: oxygen_gas
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: liquid_oxygen_v0
+        qty: 1.0
+        unit: kg
 notes: Cryogenic condensation route to liquid oxygen.

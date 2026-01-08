@@ -2,10 +2,68 @@ id: recipe_gas_supply_regulator_v0
 kind: recipe
 target_item_id: gas_supply_regulator
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 3.5
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 3.3
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+  - item_id: sealing_gaskets
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: gas_supply_regulator
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
+    est_time_hr: 0.5
+    notes: "Prepare molds for regulator casting"
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 3.5
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 3.3
+        unit: kg
+    est_time_hr: 1.5
+    notes: "Cast regulator body and cap"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 3.3
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Machine threads, ports, and sealing surfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
+      - item_id: sealing_gaskets
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: gas_supply_regulator
+        qty: 3.0
+        unit: kg
+    est_time_hr: 1.0
+    notes: "Install seals, hardware, and adjusters"
 assumptions: "Casting, machining, and assembly chain to produce gas supply regulator"
 notes: "Placeholder recipe to manufacture gas_supply_regulator from BOM components; refine BOM and process parameters as data becomes available."

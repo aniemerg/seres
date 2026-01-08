@@ -2,10 +2,53 @@ id: recipe_concentrating_mirror_set_v1
 kind: recipe
 name: Concentrating mirror set assembly v1
 target_item_id: concentrating_mirror_set
+inputs:
+  - item_id: regolith_fine_fraction
+    qty: 30.0
+    unit: kg
+  - item_id: finished_part_deburred
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: concentrating_mirror_set
+    qty: 1
+    unit: unit
 steps:
 - process_id: glass_melting_and_forming_v0
+  inputs:
+    - item_id: regolith_fine_fraction
+      qty: 30.0
+      unit: kg
+  outputs:
+    - item_id: glass_bulk
+      qty: 27.0
+      unit: kg
 - process_id: annealing_basic_v0
+  inputs:
+    - item_id: glass_bulk
+      qty: 27.0
+      unit: kg
+  outputs:
+    - item_id: material_annealed
+      qty: 27.0
+      unit: kg
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: material_annealed
+      qty: 27.0
+      unit: kg
+  outputs:
+    - item_id: finished_part_deburred
+      qty: 25.0
+      unit: kg
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: finished_part_deburred
+      qty: 25.0
+      unit: kg
+  outputs:
+    - item_id: concentrating_mirror_set
+      qty: 1
+      unit: unit
 assumptions: "Converted to current recipe schema; uses standard steps to assemble concentrating_mirror_set."
 notes: "KB-aligned recipe schema for v1; mirrors v0 pattern."

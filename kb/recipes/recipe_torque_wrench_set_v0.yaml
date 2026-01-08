@@ -1,34 +1,72 @@
 id: recipe_torque_wrench_set_v0
 target_item_id: torque_wrench_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 4.0
+    unit: kg
+  - item_id: spring_compression_small
+    qty: 2
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: torque_wrench_set
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.8
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine wrench bodies, ratchet mechanisms, beam or click-type mechanisms"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.8
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat treat wrench bodies and ratchet components for strength and durability"
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
     inputs:
-      - item_id: raw_metal_block
-        qty: 4.0
+      - item_id: machined_part_raw
+        qty: 3.8
         unit: kg
       - item_id: spring_compression_small
-        qty: 2.0
+        qty: 2
         unit: unit
       - item_id: fastener_kit_small
-        qty: 1.0
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble ratchet mechanisms, calibration springs, handles, sockets"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
         unit: unit
     outputs:
       - item_id: torque_wrench_set
-        qty: 1.0
+        qty: 1
         unit: unit
-    notes: "Assemble ratchet mechanisms, calibration springs, handles, sockets"
-  - process_id: inspection_basic_v0
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate torque wrenches against load cell or known standards"

@@ -1,0 +1,34 @@
+id: recipe_bearing_set_medium_v0
+kind: recipe
+target_item_id: bearing_set_medium
+variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.5
+    unit: kg
+outputs:
+  - item_id: bearing_set_medium
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 0.3
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: bearing_set_medium
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 0.3
+        unit: kg
+    est_time_hr: 10.0
+    machine_hours: 10.0
+    labor_hours: 2.0
+    notes: "Cast bearing races and rolling elements, machine and heat treat to HRC 58-64, precision grind to final tolerances, assemble with cage, lubricate, seal, and test"
+assumptions: "Medium bearing set (1.2 kg) for mid-sized motors and machinery; simplified from multi-step process to single assembly step for KB closure."
+notes: "Simplified recipe for medium bearing set. Covers casting, machining, heat treatment, grinding, assembly, and testing. Suitable for 40-60mm bore applications."

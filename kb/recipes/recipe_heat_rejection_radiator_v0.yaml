@@ -1,13 +1,39 @@
 id: recipe_heat_rejection_radiator_v0
 target_item_id: heat_rejection_radiator
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 250.0
+    unit: kg
+  - item_id: assembly_components
+    qty: 250.0
+    unit: kg
+  - item_id: finished_part
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 250.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 237.5
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
     notes: "Fabricate large radiator panel arrays from steel or aluminum sheet metal"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 250.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 237.5
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Weld radiator fin arrays, coolant channels, and mounting structure"
@@ -17,6 +43,14 @@ steps:
     labor_hours: 2.0
     notes: "Apply high-emissivity coating to radiator surfaces for enhanced thermal radiation"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembly_components
+        qty: 250.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 250.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble radiator panels with coolant distribution manifolds and mounting hardware"
@@ -25,6 +59,14 @@ steps:
     labor_hours: 2.0
     notes: "Pressure test coolant channels for leak-tightness"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify radiator surface area, emissivity, and structural integrity"

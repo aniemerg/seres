@@ -29,10 +29,38 @@ outputs:
     unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: silicon_carbide_ceramic_v0
+        qty: 0.08
+        unit: kg
+      - item_id: graphite_block_material_v0
+        qty: 0.05
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.17
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Machine seal faces to precision flatness
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.17
+        unit: kg
+      - item_id: seal_o_ring_rubber
+        qty: 0.03
+        unit: kg
+      - item_id: spring_compression_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: seal_mechanical_rotary
+        qty: 0.2
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble seal faces, o-rings, springs, and housing

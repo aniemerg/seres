@@ -2,7 +2,23 @@ id: recipe_quartz_crystal_v0
 kind: recipe
 name: Quartz crystal production v0
 target_item_id: quartz_crystal
+inputs:
+  - item_id: silica_purified
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: quartz_crystal
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: quartz_crystal_synthesis_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: quartz_crystal
+        qty: 1.0
+        unit: kg
     notes: "Initial quartz crystal synthesis step"
 notes: "Updated to dictionary-step per KB recipe schema."

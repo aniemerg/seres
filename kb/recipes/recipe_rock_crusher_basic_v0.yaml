@@ -1,24 +1,72 @@
 id: recipe_rock_crusher_basic_v0
 target_item_id: rock_crusher_basic
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 530.0
+    unit: kg
+outputs:
+  - item_id: rock_crusher_basic
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 530.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 520.0
+        unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
     notes: "Machine crusher frame, jaw components, and shaft assemblies"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 520.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 515.0
+        unit: kg
     est_time_hr: 10.0
     machine_hours: 10.0
     notes: "Heat treat crushing jaws for maximum hardness and wear resistance"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 515.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 510.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Weld frame structure and reinforcements"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 510.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 505.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Assemble crusher with motor, gearbox, jaws, bearings, and feed system"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 505.0
+        unit: kg
+    outputs:
+      - item_id: rock_crusher_basic
+        qty: 1
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test crushing action, jaw alignment, and motor performance"

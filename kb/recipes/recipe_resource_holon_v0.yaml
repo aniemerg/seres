@@ -1,7 +1,24 @@
 id: recipe_resource_holon_v0
 kind: recipe
 target_item_id: resource_holon_v0
+variant_id: v0
+inputs:
+  - item_id: software_source_code_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: resource_holon_v0
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: software_deployment_v0
-  notes: Deploy holon software
+  - process_id: software_deployment_v0
+    inputs:
+      - item_id: software_source_code_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: resource_holon_v0
+        qty: 1.0
+        unit: unit
+    notes: Deploy holon software
 notes: Minimal recipe to manufacture the Resource holon part (software agent).

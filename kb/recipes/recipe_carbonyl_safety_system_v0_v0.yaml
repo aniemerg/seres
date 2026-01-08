@@ -2,13 +2,27 @@ id: recipe_carbonyl_safety_system_v0_v0
 kind: recipe
 target_item_id: carbonyl_safety_system_v0_v0
 variant_id: v0
+inputs:
+  - item_id: gasket_sheet_part_v0
+    qty: 1.0
+    unit: kg
+  - item_id: gas_inlet_manifold_v0
+    qty: 1.0
+    unit: kg
+  - item_id: valve_body_cast_rough_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbonyl_safety_system_v0_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
     inputs:
-      - item_id: gasket_sheet
+      - item_id: gasket_sheet_part_v0
         qty: 1.0
         unit: kg
       - item_id: gas_inlet_manifold_v0

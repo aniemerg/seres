@@ -2,10 +2,37 @@ id: recipe_din_rail_steel_v0
 kind: recipe
 target_item_id: din_rail_steel
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 0.6
+    unit: kg
+outputs:
+  - item_id: din_rail_steel
+    qty: 0.5
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 0.6
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 0.55
+        unit: kg
     notes: "Roll form steel sheet into DIN rail profile"
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 0.55
+        unit: kg
+    outputs:
+      - item_id: din_rail_steel
+        qty: 0.5
+        unit: kg
     notes: "Cut rail to length and punch mounting holes"
 notes: |
   Manufacturing DIN rail from steel sheet.

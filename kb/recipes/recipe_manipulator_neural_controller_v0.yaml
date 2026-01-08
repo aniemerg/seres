@@ -1,6 +1,35 @@
 id: recipe_manipulator_neural_controller_v0
 kind: recipe
 target_item_id: manipulator_neural_controller_v0
+variant_id: v0
+inputs:
+  - item_id: yn_neuron_circuit_v0
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: manipulator_neural_controller_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: manipulator_neural_controller_assembly_v0
+    inputs:
+      - item_id: yn_neuron_circuit_v0
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: manipulator_neural_controller_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to close no_recipe gap for manipulator_neural_controller_v0."

@@ -1,10 +1,53 @@
 id: recipe_lathe_motor_and_drive_v0
 kind: recipe
+name: Recipe for lathe motor and drive assembly
 target_item_id: lathe_motor_and_drive
+variant_id: v0
+inputs:
+  - item_id: motor_electric_medium
+    qty: 1
+    unit: unit
+  - item_id: installed_belt_drive
+    qty: 1
+    unit: unit
+  - item_id: steel_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: lathe_motor_and_drive
+    qty: 1
+    unit: unit
 steps:
-  - process_id: motor_final_assembly_v0
-  - process_id: coil_winding_motor_v0
-  - process_id: belt_installation_and_tensioning_v0
-  - process_id: electrical_testing_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_electric_medium
+        qty: 1
+        unit: unit
+      - item_id: installed_belt_drive
+        qty: 1
+        unit: unit
+      - item_id: steel_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: lathe_motor_and_drive
+        qty: 1
+        unit: unit
+    est_time_hr: 6.0
+    machine_hours: 2.0
+    labor_hours: 4.0
+    notes: "Mount motor on steel frame, install and tension belt drive system, integrate power electronics and motor controller, wire electrical connections, test drive system operation"
 assumptions: "Motor winding and assembly steps integrated; belt drive installed; basic electrical tests performed"
-notes: "Prototype recipe for lathe motor and drive assembly. Placeholder chain; refine with BOM and step durations as design evolves."
+notes: "Assembly of lathe motor and drive system including motor, belt drive, mounting frame, and control electronics"

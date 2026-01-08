@@ -3,20 +3,74 @@ kind: recipe
 name: Recipe for inverter (DC to AC) module
 target_item_id: inverter_dc_to_ac_v0
 variant_id: v0
+inputs:
+  - item_id: inverter_module_imported
+    qty: 1
+    unit: unit
+  - item_id: control_circuit_board_power
+    qty: 1
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Receive imported DC-AC inverter module and related components"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify inverter specifications and inspect packaging"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: inverter_module_imported
+        qty: 1
+        unit: unit
+      - item_id: control_circuit_board_power
+        qty: 1
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Basic assembly of inverter frame and integration points"
   - process_id: electrical_testing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: inverter_dc_to_ac_v0
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Electrical tests for continuity, insulation, and functional checks"

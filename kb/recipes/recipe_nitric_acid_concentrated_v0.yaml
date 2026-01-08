@@ -1,8 +1,37 @@
 id: recipe_nitric_acid_concentrated_v0
+kind: recipe
 target_item_id: nitric_acid_concentrated
 variant_id: v0
+inputs:
+  - item_id: ammonia_gas
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 2.35
+    unit: kg
+outputs:
+  - item_id: nitric_acid_concentrated
+    qty: 3.71
+    unit: kg
+  - item_id: water
+    qty: 0.32
+    unit: kg
 steps:
   - process_id: ostwald_process_nitric_acid_v0
+    inputs:
+      - item_id: ammonia_gas
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 2.35
+        unit: kg
+    outputs:
+      - item_id: nitric_acid_concentrated
+        qty: 3.71
+        unit: kg
+      - item_id: water
+        qty: 0.32
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Catalytic oxidation of ammonia to produce concentrated nitric acid"

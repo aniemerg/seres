@@ -1,10 +1,48 @@
 id: recipe_airlock_module_v0
 kind: recipe
 target_item_id: airlock_module_v0
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 140.0
+    unit: kg
+  - item_id: sealing_gaskets
+    qty: 10.0
+    unit: kg
+  - item_id: panel_or_door_assembly
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: airlock_module_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 30.0
+    unit: kg
 steps:
-  - process_id: enclosure_assembly_basic_v0
-  - process_id: sealing_and_assembly_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 140.0
+        unit: kg
+      - item_id: sealing_gaskets
+        qty: 10.0
+        unit: kg
+      - item_id: panel_or_door_assembly
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: airlock_module_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 30.0
+        unit: kg
+    est_time_hr: 30.0
+    machine_hours: 20.0
+    labor_hours: 30.0
+    notes: "Assemble airlock pressure vessel structure, install seals and doors, pressure test"
 notes: |
   Placeholder recipe to enable modeling of airlock_module_v0. Details to be refined
-  as habitat module design matures. The steps assume generic enclosure assembly followed by
-  basic sealing. No performance claims implied.
+  as habitat module design matures. Simplified from 2-step to single assembly step.
+  Output mass is 120 kg, requiring ~140 kg steel input accounting for fabrication losses.

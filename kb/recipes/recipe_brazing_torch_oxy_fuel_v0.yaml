@@ -1,6 +1,28 @@
 id: recipe_brazing_torch_oxy_fuel_v0
 target_item_id: brazing_torch_oxy_fuel
 variant_id: v0
+produces_qty: 2.0
+produces_unit: kg
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.2
+    unit: kg
+  - item_id: torch_body_and_valves_machined
+    qty: 0.45
+    unit: kg
+  - item_id: hydraulic_hose_segment_v0
+    qty: 1.0
+    unit: kg
+  - item_id: valve_needle_precision
+    qty: 2.0
+    unit: each
+  - item_id: valve_set_gas_handling
+    qty: 2.0
+    unit: each
+outputs:
+  - item_id: brazing_torch_oxy_fuel
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: machining_process_drilling_v0
     inputs:

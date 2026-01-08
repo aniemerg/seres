@@ -1,20 +1,79 @@
 id: recipe_glassworking_station_v0
+kind: recipe
 target_item_id: glassworking_station
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 120.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 115.0
+    unit: kg
+    notes: "Intermediate for welding step"
+  - item_id: welded_fabrications
+    qty: 115.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+    notes: "Intermediate for integration test"
+outputs:
+  - item_id: glassworking_station
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 120.0
+      unit: kg
+    outputs:
+    - item_id: machined_part_raw
+      qty: 115.0
+      unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine workbench frame and mounting fixtures"
   - process_id: welding_basic_v0
+    inputs:
+    - item_id: machined_part_raw
+      qty: 115.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 115.0
+      unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Weld workbench structure and burner mounting"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 115.0
+      unit: kg
+    - item_id: fastener_kit_large
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble workbench, torch/burner, annealing oven, and tool storage"
   - process_id: integration_test_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: glassworking_station
+      qty: 1
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test torch operation, gas flow control, and annealing oven temperature"

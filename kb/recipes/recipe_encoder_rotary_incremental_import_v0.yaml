@@ -1,0 +1,28 @@
+id: recipe_encoder_rotary_incremental_v0
+kind: recipe
+name: Recipe for incremental rotary encoder
+target_item_id: encoder_rotary_incremental
+variant_id: v0
+inputs:
+  - item_id: encoder_optical_simple_v0
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: encoder_rotary_incremental
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: encoder_optical_simple_v0
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: encoder_rotary_incremental
+        qty: 1
+        unit: unit
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: "Adopt optical encoder build as incremental rotary encoder assembly"
+assumptions: "Imported from Earth during early phases until local electronics manufacturing is established"
+notes: "Import of incremental rotary encoder for motion control and position sensing applications"

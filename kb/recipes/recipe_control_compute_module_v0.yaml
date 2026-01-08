@@ -1,15 +1,48 @@
 id: recipe_control_compute_module_v0
+kind: recipe
 target_item_id: control_compute_module_imported
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: control_compute_module_imported
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
   - process_id: inspection_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
   - process_id: integration_test_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: control_compute_module_imported
+        qty: 2.0
+        unit: kg
 assumptions: Imported compute module inspected and functionally tested.
 notes: Placeholder import route; replace with local production when available.

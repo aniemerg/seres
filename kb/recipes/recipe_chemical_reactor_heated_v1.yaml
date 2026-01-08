@@ -6,9 +6,44 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: chemical_reactor_heated
 variant_id: v1
+inputs:
+  - item_id: enclosure_small
+    qty: 1
+    unit: unit
+  - item_id: gas_scrubbing_unit_v0
+    qty: 1
+    unit: unit
+  - item_id: gas_inlet_manifold_v0
+    qty: 1
+    unit: unit
+  - item_id: leak_test_equipment
+    qty: 1
+    unit: unit
+  - item_id: valve_body_cast_rough
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-  - process_id: enclosure_assembly_basic_v0
-  - process_id: electrical_assembly_basic_v0
-  - process_id: sealing_and_assembly_basic_v0
-notes: "Placeholder production path to close no_recipe gap for chemical_reactor_heated (v1); mirrors v0 chain for local target."
+    inputs:
+      - item_id: enclosure_small
+        qty: 1
+        unit: unit
+      - item_id: gas_scrubbing_unit_v0
+        qty: 1
+        unit: unit
+      - item_id: gas_inlet_manifold_v0
+        qty: 1
+        unit: unit
+      - item_id: leak_test_equipment
+        qty: 1
+        unit: unit
+      - item_id: valve_body_cast_rough
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: chemical_reactor_heated
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+notes: "BOM-based assembly of heated chemical reactor from components."

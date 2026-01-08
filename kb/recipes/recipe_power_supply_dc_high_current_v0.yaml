@@ -2,42 +2,72 @@ id: recipe_power_supply_dc_high_current_v0
 kind: recipe
 target_item_id: power_supply_dc_high_current
 variant_id: v0
+inputs:
+  - item_id: transformer_power_medium
+    qty: 25.0
+    unit: kg
+  - item_id: rectifier_bridge_heavy_duty
+    qty: 2.0
+    unit: kg
+  - item_id: capacitor_bank_power
+    qty: 5.0
+    unit: kg
+  - item_id: control_circuit_board_power
+    qty: 2.0
+    unit: kg
+  - item_id: enclosure_steel_large
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: power_supply_dc_high_current
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: transformer_power_medium
         qty: 25.0
         unit: kg
-        notes: "High-current transformer for AC to DC conversion"
       - item_id: rectifier_bridge_heavy_duty
         qty: 2.0
         unit: kg
-        notes: "Rectifier diodes and power semiconductors (heavy-duty bridge module)"
       - item_id: capacitor_bank_power
         qty: 5.0
         unit: kg
-        notes: "Filter capacitors for DC smoothing"
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Assemble transformer, rectifier bridge, and filter capacitors"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
       - item_id: control_circuit_board_power
         qty: 2.0
         unit: kg
-        notes: "Current regulation and protection circuits"
       - item_id: enclosure_steel_large
         qty: 3.0
         unit: kg
-        notes: "Metal enclosure and mounting chassis"
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Install current regulation circuits and protection systems"
+    notes: "Install current regulation circuits and protection systems, mount in enclosure"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     outputs:
       - item_id: power_supply_dc_high_current
-        qty: 40.0
-        unit: kg
+        qty: 1
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test output voltage, current regulation, and load handling"

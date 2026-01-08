@@ -2,8 +2,25 @@ id: recipe_base_metal_parts_v1
 kind: recipe
 name: Recipe for base metal parts v1
 target_item_id: base_metal_parts
-produces_qty: 1.0
-produces_unit: kg
+inputs:
+  - item_id: raw_metal_block
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: base_metal_parts
+    qty: 1.0
+    unit: kg
 steps:
-- process_id: base_metal_parts_from_raw_metal_v0
-notes: "Manufacture base metal parts from raw_metal_block via placeholder fabrication process"
+  - process_id: base_metal_parts_from_raw_metal_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: base_metal_parts
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.5
+    labor_hours: 0.6
+    notes: "Fabricate base metal parts from raw metal block; 2 kg waste"
+notes: "Manufacture base metal parts from raw_metal_block via fabrication process with ~67% waste."

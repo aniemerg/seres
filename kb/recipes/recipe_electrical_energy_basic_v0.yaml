@@ -1,22 +1,51 @@
 id: recipe_electrical_energy_basic_v0
 kind: recipe
 name: Recipe for electrical energy (basic)
-produces_id: electrical_energy
-produces_qty: 1.0
-produces_unit: kWh
+target_item_id: electrical_energy
+inputs:
+  - item_id: solar_irradiance
+    qty: 1.02
+    unit: kWh
+outputs:
+  - item_id: electrical_energy
+    qty: 0.98
+    unit: kWh
 steps:
-- process_id: solar_power_generation_basic_v0
-  est_time_hr: 1.0
-  machine_hours: 1.0
-  notes: Generate electrical energy from solar input
-- process_id: power_conditioning_basic_v0
-  est_time_hr: 0.5
-  machine_hours: 0.5
-  notes: Condition electrical energy for distribution
-- process_id: power_distribution_basic_v0
-  est_time_hr: 0.5
-  machine_hours: 0.5
-  notes: Distribute electrical energy to loads
+  - process_id: solar_power_generation_basic_v0
+    inputs:
+      - item_id: solar_irradiance
+        qty: 1.02
+        unit: kWh
+    outputs:
+      - item_id: electrical_energy
+        qty: 1.02
+        unit: kWh
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Generate electrical energy from solar input
+  - process_id: power_conditioning_basic_v0
+    inputs:
+      - item_id: electrical_energy
+        qty: 1.02
+        unit: kWh
+    outputs:
+      - item_id: electrical_energy
+        qty: 1.0
+        unit: kWh
+    est_time_hr: 0.01
+    machine_hours: 0.01
+    notes: Condition electrical energy for distribution (2% losses)
+  - process_id: power_distribution_basic_v0
+    inputs:
+      - item_id: electrical_energy
+        qty: 1.0
+        unit: kWh
+    outputs:
+      - item_id: electrical_energy
+        qty: 0.98
+        unit: kWh
+    est_time_hr: 0.01
+    machine_hours: 0.01
+    notes: Distribute electrical energy to loads (2% losses)
 assumptions: Electrical energy produced via solar generation; basic conditioning and distribution applied.
 notes: Basic explicit recipe path for electrical_energy to satisfy no_recipe gap.
-target_item_id: electrical_energy

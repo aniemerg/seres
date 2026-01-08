@@ -1,18 +1,68 @@
 id: recipe_operator_cabin_v0
 target_item_id: operator_cabin
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 180.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 10.0
+    unit: kg
+  - item_id: transparent_panel_set
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: operator_cabin
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 180.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 170.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.8
     notes: "Cut tubing/plate for cabin frame and panel mounts."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 170.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 160.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: "Assemble cabin frame, mounts for controls/seat, and door structure."
   - process_id: glazing_and_installation_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 160.0
+        unit: kg
+      - item_id: transparent_panel_set
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: operator_cabin
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install transparent panels (glass/acrylic), door hardware, and seals."

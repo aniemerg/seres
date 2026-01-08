@@ -1,6 +1,17 @@
 id: recipe_regolith_coarse_fraction_v0
 target_item_id: regolith_coarse_fraction
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: regolith_coarse_fraction
+    qty: 0.6
+    unit: kg
+  - item_id: regolith_fine_fraction
+    qty: 0.4
+    unit: kg
 steps:
   - process_id: regolith_screening_sieving_v0
     est_time_hr: 0.5

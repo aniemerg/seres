@@ -1,16 +1,60 @@
 id: recipe_tuyere_assembly_v0
 target_item_id: tuyere_assembly
 variant_id: v0
+inputs:
+  - item_id: molten_material_or_preform
+    qty: 30.0
+    unit: kg
+  - item_id: sand_casting_flask_set
+    qty: 1.0
+    unit: unit
+  - item_id: casting_mold_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: tuyere_assembly
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: sand_casting_medium_v0
+    inputs:
+      - item_id: molten_material_or_preform
+        qty: 30.0
+        unit: kg
+      - item_id: sand_casting_flask_set
+        qty: 1.0
+        unit: unit
+      - item_id: casting_mold_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: sand_casting_medium_v0
+        qty: 27.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Cast copper or steel tuyere body and nozzle"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sand_casting_medium_v0
+        qty: 27.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 26.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine nozzle bore, cooling passages, and mounting surfaces"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 26.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 26.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Weld cooling jacket and piping connections"
@@ -19,6 +63,14 @@ steps:
     machine_hours: 1.0
     notes: "Pressure test cooling jacket for leaks"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 26.0
+        unit: kg
+    outputs:
+      - item_id: tuyere_assembly
+        qty: 25.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify nozzle geometry, cooling circuit integrity, and mounting interfaces"

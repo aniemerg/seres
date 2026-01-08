@@ -1,7 +1,32 @@
 id: recipe_tailings_silicate_mix_v0
 kind: recipe
 target_item_id: tailings_silicate_mix
+inputs:
+  - item_id: regolith_powder
+    qty: 1.43
+    unit: kg
+outputs:
+  - item_id: tailings_silicate_mix
+    qty: 1.0
+    unit: kg
+  - item_id: olivine_concentrate
+    qty: 0.43
+    unit: kg
 steps:
   - process_id: olivine_beneficiation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.43
+        unit: kg
+    outputs:
+      - item_id: olivine_concentrate
+        qty: 0.43
+        unit: kg
+      - item_id: tailings_silicate_mix
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.015
+    labor_hours: 0.015
+    notes: "Beneficiation to separate olivine from silicate tailings"
 notes: "Tailings silicate mix as coproduct of olivine beneficiation; seeds downstream processing of tailings."
 assumptions: "Tailings produced during beneficiation; coproduct routing for tailings_silicate_mix."

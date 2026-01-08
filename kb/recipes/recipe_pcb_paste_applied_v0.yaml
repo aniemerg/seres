@@ -1,6 +1,24 @@
 id: recipe_pcb_paste_applied_v0
 kind: recipe
 target_item_id: pcb_paste_applied
+inputs:
+  - item_id: pcb_bare_board
+    qty: 0.04
+    unit: kg
+  - item_id: solder_paste_tin_lead
+    qty: 0.005
+    unit: kg
 steps:
   - process_id: solder_paste_application_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 0.04
+        unit: kg
+      - item_id: solder_paste_tin_lead
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: pcb_paste_applied
+        qty: 0.045
+        unit: kg
 notes: "Placeholder recipe to manufacture pcb_paste_applied; uses solder_paste_application_v0 process" 

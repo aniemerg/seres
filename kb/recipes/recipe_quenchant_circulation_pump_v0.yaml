@@ -1,16 +1,68 @@
 id: recipe_quenchant_circulation_pump_v0
 target_item_id: quenchant_circulation_pump
 variant_id: v0
+produces_qty: 40.0
+produces_unit: kg
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 40.0
+    unit: kg
+  - item_id: mixer_motor_small
+    qty: 1.0
+    unit: kg
+  - item_id: seal_rubber_bearing
+    qty: 0.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: quenchant_circulation_pump
+    qty: 40.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 38.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Cast pump housing and impeller from cast iron or steel"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 38.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 36.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine pump internals, shaft, bearing surfaces, impeller balance"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 36.0
+        unit: kg
+      - item_id: mixer_motor_small
+        qty: 1.0
+        unit: kg
+      - item_id: seal_rubber_bearing
+        qty: 0.1
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: quenchant_circulation_pump
+        qty: 40.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble motor, impeller, shaft, seals, housing"

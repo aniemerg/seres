@@ -3,6 +3,14 @@ kind: recipe
 name: Recipe for metal tubing stock v1
 variant_id: v1
 target_item_id: metal_tubing_stock
+inputs:
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_tubing_stock
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: tube_stock_forming_v0
     inputs:

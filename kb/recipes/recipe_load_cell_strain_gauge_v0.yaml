@@ -2,6 +2,28 @@ id: recipe_load_cell_strain_gauge_v0
 kind: recipe
 target_item_id: load_cell_strain_gauge_v0
 variant_id: v0
+inputs:
+  - item_id: strain_gauge_foil_v0
+    qty: 1.0
+    unit: each
+  - item_id: strain_gauge_bonded_assembly
+    qty: 1.0
+    unit: each
+outputs:
+  - item_id: load_cell_strain_gauge_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: load_cell_strain_gauge_fabrication_v0
+    inputs:
+      - item_id: strain_gauge_foil_v0
+        qty: 1.0
+        unit: each
+      - item_id: strain_gauge_bonded_assembly
+        qty: 1.0
+        unit: each
+    outputs:
+      - item_id: load_cell_strain_gauge_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to replace import path with concrete fabrication steps."

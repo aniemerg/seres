@@ -1,23 +1,47 @@
 id: recipe_gas_loop_piping_set_v0
+kind: recipe
+name: Recipe for gas loop piping set
 target_item_id: gas_loop_piping_set
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 50.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: unit
+  - item_id: valve_set_gas_handling
+    qty: 1.0
+    unit: unit
+  - item_id: pressure_gauge
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: gas_loop_piping_set
+    qty: 40.0
+    unit: kg
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Machine pipe sections, valve bodies, and threaded connections"
-  - process_id: welding_brazing_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    labor_hours: 3.0
-    notes: "Weld pipe sections, flanges, and fittings for gas-tight joints"
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Install valves, pressure gauges, and connection fittings"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Pressure test all joints and valves for gas leaks"
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 50.0
+        unit: kg
+      - item_id: piping_components
+        qty: 1.0
+        unit: unit
+      - item_id: valve_set_gas_handling
+        qty: 1.0
+        unit: unit
+      - item_id: pressure_gauge
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: gas_loop_piping_set
+        qty: 40.0
+        unit: kg
+    est_time_hr: 8.0
+    machine_hours: 5.0
+    labor_hours: 6.0
+    notes: "Machine pipe sections, valve bodies, and threaded connections from metal alloy, weld pipe sections and flanges for gas-tight joints, braze fittings, install valves and pressure gauges with connection fittings, pressure test all joints and valves for gas leaks"
 assumptions: Steel piping with threaded or welded connections. Valves and fittings assembled into complete gas loop.
 notes: Set of piping and valves for gas handling loops. Includes pressure testing for leak-free operation.

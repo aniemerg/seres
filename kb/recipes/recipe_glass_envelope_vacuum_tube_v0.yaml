@@ -2,6 +2,33 @@ id: recipe_glass_envelope_vacuum_tube_v0
 kind: recipe
 name: Glass envelope vacuum tube v0
 target_item_id: glass_envelope_vacuum_tube_v0
+variant_id: v0
+inputs:
+  - item_id: fused_silica_glass
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: glass_envelope_vacuum_tube_v0
+    qty: 0.4
+    unit: kg
+byproducts:
+  - item_id: glass_scrap
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: glass_envelope_forming_v0
+    inputs:
+      - item_id: fused_silica_glass
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: glass_envelope_vacuum_tube_v0
+        qty: 0.4
+        unit: kg
+      - item_id: glass_scrap
+        qty: 0.1
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: "Form glass envelope via blowing/molding"
 notes: "Manufacture glass envelope vacuum tube via glass_envelope_forming_v0 process."

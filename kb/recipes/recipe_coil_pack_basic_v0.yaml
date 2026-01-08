@@ -1,16 +1,54 @@
 id: recipe_coil_pack_basic_v0
 target_item_id: coil_pack_basic
 variant_id: v0
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 18.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: coil_pack_basic
+    qty: 20.0
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
+  - process_id: copper_wire_drawing_and_insulation_v0
+    inputs:
+      - item_id: copper_rod_ingot
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: magnet_wire_copper
+        qty: 18.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Draw copper wire from rod stock
   - process_id: spool_winding_basic_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: magnet_wire_copper
+        qty: 18.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Wind coils on forms to specification
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 18.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: coil_pack_basic
+        qty: 20.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble coil pack with insulation and terminals

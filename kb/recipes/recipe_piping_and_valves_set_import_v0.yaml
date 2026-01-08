@@ -2,6 +2,29 @@ id: recipe_piping_and_valves_set_import_v0
 kind: recipe
 target_item_id: piping_and_valves_set
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 5.0
+    unit: kg
+  - item_id: valve_body_cast_rough
+    qty: 4.5
+    unit: kg
+    notes: "Intermediate for machining step"
+  - item_id: aluminum_tube_stock
+    qty: 3.0
+    unit: kg
+  - item_id: valve_body_machined
+    qty: 4.0
+    unit: kg
+    notes: "Intermediate for welding step"
+  - item_id: pipe_bent_sections
+    qty: 2.8
+    unit: kg
+    notes: "Intermediate for welding step"
+outputs:
+  - item_id: piping_and_valves_set
+    qty: 6.5
+    unit: kg
 steps:
   - process_id: metal_casting_process_v0
     inputs:

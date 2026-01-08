@@ -2,9 +2,23 @@ id: recipe_dust_mitigation_coating_v0
 kind: recipe
 name: Dust Mitigation Coating Production v0
 target_item_id: dust_mitigation_coating_v0
-produces_id: dust_mitigation_coating_v0
-produces_qty: 10.0
-produces_unit: kg
+variant_id: v0
+inputs:
+  - item_id: dust_mitigation_precursor_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: dust_mitigation_coating_v0
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: dust_mitigation_coating_basic_v0
+    inputs:
+      - item_id: dust_mitigation_precursor_v0
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: dust_mitigation_coating_v0
+        qty: 10.0
+        unit: kg
     notes: "Deposition coating step from precursor to form dust mitigation coating"

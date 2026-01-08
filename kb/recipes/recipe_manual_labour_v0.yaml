@@ -3,8 +3,24 @@ kind: recipe
 name: Recipe for manual labour v0
 target_item_id: manual_labour
 variant_id: v0
+inputs:
+  - item_id: import_misc_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: manual_labour
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: import_misc_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: manual_labour
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
 assumptions: "Assemble per BOM; basic path using assembly_basic_v0; BOM is placeholder and may be refined."

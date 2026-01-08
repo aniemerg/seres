@@ -3,7 +3,29 @@ target_item_id: welding_power_supply_v0
 variant_id: v0
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: welding_power_supply_unit
+      qty: 1
+      unit: unit
+    - item_id: torch_assembly
+      qty: 1
+      unit: unit
+    - item_id: ground_clamp_and_cables
+      qty: 1
+      unit: unit
+    - item_id: power_conditioning_module
+      qty: 1
+      unit: unit
+    - item_id: control_compute_module_imported
+      qty: 1
+      unit: unit
+    - item_id: sensor_suite_general
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1
+      unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
 assumptions: Assemble per BOM; parts produced via part-level routes.
-notes: Coarse assembly route; add detailed steps later.
+notes: Coarse assembly route; add detailed steps later. Uses all BOM components.

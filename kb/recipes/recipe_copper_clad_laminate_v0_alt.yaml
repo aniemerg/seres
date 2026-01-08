@@ -1,6 +1,30 @@
 id: recipe_copper_clad_laminate_v0_alt
 kind: recipe
 target_item_id: copper_clad_laminate
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: uncoated_substrate_material_v0
+    qty: 0.5
+    unit: kg
+  - item_id: copper_plate_or_sheet
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: copper_clad_laminate
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: lamination_basic_v0
+    inputs:
+      - item_id: uncoated_substrate_material_v0
+        qty: 0.5
+        unit: kg
+      - item_id: copper_plate_or_sheet
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: copper_clad_laminate
+        qty: 1.0
+        unit: kg
 notes: "Alternative local path to produce copper_clad_laminate; mirrors lamination_basic_v0. This resolves the import_stub gap by adding a non-import v0 recipe."

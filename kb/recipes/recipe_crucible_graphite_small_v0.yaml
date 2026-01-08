@@ -1,25 +1,35 @@
 id: recipe_crucible_graphite_small_v0
+kind: recipe
+name: Recipe for crucible graphite small
 target_item_id: crucible_graphite_small
 variant_id: v0
+inputs:
+  - item_id: graphite_powder
+    qty: 2.5
+    unit: kg
+  - item_id: ceramic_binder
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: crucible_graphite_small
+    qty: 1
+    unit: unit
 steps:
-  - process_id: powder_processing_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.5
-    notes: "Process graphite powder with binder for crucible molding"
-  - process_id: sintering_and_hot_pressing_v0
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    labor_hours: 0.5
-    notes: "Mold and sinter graphite mixture into crucible shape with thick walls for thermal mass"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.5
-    notes: "Machine interior surface smooth and verify wall thickness uniformity"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Inspect for cracks and verify crucible integrity"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: graphite_powder
+        qty: 2.5
+        unit: kg
+      - item_id: ceramic_binder
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: crucible_graphite_small
+        qty: 1
+        unit: unit
+    est_time_hr: 10.3
+    machine_hours: 10.0
+    labor_hours: 1.8
+    notes: "Process graphite powder with ceramic binder for crucible molding, mold and sinter graphite mixture into crucible shape with thick walls for thermal mass, machine interior surface smooth and verify wall thickness uniformity, inspect for cracks and verify crucible integrity"
 assumptions: "Graphite construction formed by powder processing and sintering. Small size suitable for laboratory-scale or small batch metal melting."
 notes: "Small graphite crucible for high-temperature metal melting and casting operations. Thermal shock resistant for foundry work."

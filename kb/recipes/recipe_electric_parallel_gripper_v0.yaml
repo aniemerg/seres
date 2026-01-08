@@ -27,16 +27,68 @@ byproducts:
     qty: 0.5
     unit: kg
 steps:
-  - process_id: casting_basic_v0
-    note: "Cast aluminum gripper body housing"
-  - process_id: machining_rough_v0
-    note: "CNC machine gripper body: finger slides, ball screw mount, linear bearing bores"
-  - process_id: steel_refining_basic_v0
-    note: "Refine steel for ball screw from lunar iron"
-  - process_id: machining_rough_v0
-    note: "Machine ball screw (10mm dia, 5mm pitch) for finger actuation"
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 4.0
+        unit: kg
+    notes: "Cast aluminum gripper body housing"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 4.0
+        unit: kg
+      - item_id: steel_stock
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.0
+        unit: kg
+    notes: "Machine gripper body and steel ball screw components"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.0
+        unit: kg
+      - item_id: stepper_motor_precision
+        qty: 2.0
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    notes: "Assemble gripper: install bearings, ball screw, stepper motor, fingers"
   - process_id: alignment_and_testing_basic_v0
-    note: "Assemble gripper: install bearings, ball screw, stepper motor, fingers; test stroke and force"
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: aligned_tested_equipment
+        qty: 1
+        unit: unit
+    notes: "Test stroke and gripping force"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: aligned_tested_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: electric_parallel_gripper
+        qty: 1
+        unit: unit
+    notes: "Final inspection of gripper assembly"
 notes: |
   Manufactures electric parallel gripper from lunar materials + imported motor.
 

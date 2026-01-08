@@ -1,31 +1,114 @@
 id: recipe_hand_tools_mechanical_v0
+kind: recipe
 target_item_id: hand_tools_mechanical
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 16.0
+    unit: kg
+  - item_id: forged_steel_parts
+    qty: 15.5
+    unit: kg
+    notes: "Intermediate for precision machining"
+  - item_id: machined_steel_part_precision
+    qty: 15.0
+    unit: kg
+    notes: "Intermediate for heat treatment"
+  - item_id: finished_part
+    qty: 15.0
+    unit: kg
+    notes: "Intermediate for surface finishing"
+  - item_id: finished_part_deburred
+    qty: 14.8
+    unit: kg
+    notes: "Intermediate for final assembly"
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+    notes: "Intermediate for inspection"
+outputs:
+  - item_id: hand_tools_mechanical
+    qty: 1
+    unit: unit
 steps:
   - process_id: forging_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 16.0
+      unit: kg
+    outputs:
+    - item_id: forged_steel_parts
+      qty: 15.5
+      unit: kg
     est_time_hr: 8.0
     machine_hours: 6.0
     labor_hours: 6.0
     notes: "Hot forge wrench bodies, plier jaws, hammer heads, and other tool blanks from steel stock"
   - process_id: machining_precision_v0
+    inputs:
+    - item_id: forged_steel_parts
+      qty: 15.5
+      unit: kg
+    outputs:
+    - item_id: machined_steel_part_precision
+      qty: 15.0
+      unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     labor_hours: 8.0
     notes: "Machine wrench openings, socket drive squares, screwdriver tips, plier pivot holes, and file cutting edges"
   - process_id: heat_treatment_basic_v0
+    inputs:
+    - item_id: machined_steel_part_precision
+      qty: 15.0
+      unit: kg
+    outputs:
+    - item_id: finished_part
+      qty: 15.0
+      unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     labor_hours: 2.0
     notes: "Harden and temper tool steel components (wrench jaws, screwdriver tips, socket drives, plier jaws) for wear resistance"
   - process_id: surface_finishing_basic_v0
+    inputs:
+    - item_id: finished_part
+      qty: 15.0
+      unit: kg
+    outputs:
+    - item_id: finished_part_deburred
+      qty: 14.8
+      unit: kg
     est_time_hr: 4.0
     labor_hours: 3.0
     notes: "Polish tool surfaces, remove sharp edges, apply corrosion-resistant coating (chrome plating or phosphate coating)"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: finished_part_deburred
+      qty: 14.8
+      unit: kg
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble multi-part tools (pliers with rivets, socket wrenches with ratchet mechanisms), install handles on screwdrivers and files"
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: hand_tools_mechanical
+      qty: 1
+      unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify tool hardness, dimensional accuracy, and functional testing (wrench fit, screwdriver grip, plier action)"

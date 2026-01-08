@@ -2,6 +2,23 @@ id: recipe_cobalt_metal_pure_v0
 kind: recipe
 target_item_id: cobalt_metal_pure
 variant_id: v0
+inputs:
+  - item_id: cobalt_metal_impure
+    qty: 1.0
+    unit: kg
+  - item_id: sulfur_elemental
+    qty: 0.544
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.814
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: cobalt_metal_pure
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: cobalt_sulfate_extraction_v0
 notes: "Purify cobalt metal via sulfate extraction and electrowinning."

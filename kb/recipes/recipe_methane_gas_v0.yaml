@@ -2,9 +2,34 @@ id: recipe_methane_gas_v0
 kind: recipe
 name: Recipe for methane gas v0
 target_item_id: methane_gas_v0
-produces_id: methane_gas_v0
-produces_qty: 1.0
-produces_unit: kg
+inputs:
+  - item_id: carbon_dioxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.182
+    unit: kg
+outputs:
+  - item_id: methane_gas_v0
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.182
+    unit: kg
 steps:
   - process_id: methanation_basic_v0
+    inputs:
+      - item_id: carbon_dioxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.182
+        unit: kg
+    outputs:
+      - item_id: methane_gas_v0
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.182
+        unit: kg
 notes: "Updated to target methane_gas_v0; uses methanation_basic_v0 process."

@@ -1,24 +1,72 @@
 id: recipe_hopper_feed_system_v0
 target_item_id: hopper_feed_system
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 85.0
+    unit: kg
+outputs:
+  - item_id: hopper_feed_system
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_forming_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 82.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Cut and form hopper panels from steel sheet"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 82.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 81.0
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Weld hopper structure, chute, and mounting brackets"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 81.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 80.5
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine mounting holes and gate mechanism components"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 80.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Assemble discharge gate or vibrating feeder mechanism"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: hopper_feed_system
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Test gate operation and verify hopper capacity"

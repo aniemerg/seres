@@ -1,16 +1,63 @@
 id: recipe_torch_assembly_v0
 target_item_id: torch_assembly
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 8.5
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 8.0
+    unit: kg
+outputs:
+  - item_id: torch_assembly
+    qty: 8.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 8.5
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 8.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Cast torch body and nozzle
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 8.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Machine gas passages and electrode seat
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 8.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: torch_assembly
+        qty: 8.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble torch with cabling and connections

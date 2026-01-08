@@ -1,12 +1,57 @@
 id: recipe_tension_control_system_v0
 target_item_id: tension_control_system
 variant_id: v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 25.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: control_circuit_board_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_output_terminals
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: tension_control_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine brake drums, mounting brackets, and control arms"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wire tension sensors, brake actuators, and control electronics"
@@ -14,7 +59,7 @@ steps:
     est_time_hr: 2.0
     labor_hours: 2.0
     inputs:
-      - item_id: raw_metal_block
+      - item_id: machined_part_raw
         qty: 25.0
         unit: kg
       - item_id: sensor_suite_general
@@ -35,6 +80,14 @@ steps:
         unit: unit
     notes: "Assemble brake mechanism, mount sensors, integrate control system"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: tension_control_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate tension feedback and brake response"

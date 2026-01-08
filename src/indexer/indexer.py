@@ -159,9 +159,9 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
                     item_id = entry.get("item_id") or entry.get("id") or "unknown"
                     nulls.append({"field": f"{field_name}[{i}].qty", "item": item_id})
         for i, req in enumerate(data.get("resource_requirements", []) or []):
-            if req.get("amount") is None:
+            if req.get("qty") is None:
                 rtype = req.get("resource_type") or req.get("resource") or "unknown"
-                nulls.append({"field": f"resource_requirements[{i}].amount", "resource": rtype})
+                nulls.append({"field": f"resource_requirements[{i}].qty", "resource": rtype})
     elif kind in ("part", "machine", "material"):
         # Check if item should have mass (skip non-physical items)
         material_class = data.get("material_class", "")

@@ -1,0 +1,78 @@
+id: recipe_motor_general_5kw_v0
+kind: recipe
+name: Recipe for general-purpose motor 5 kW v0
+target_item_id: motor_general_5kw
+variant_id: v0
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 15.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 5.0
+    unit: kg
+  - item_id: steel_shaft
+    qty: 3.0
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 10.0
+    unit: kg
+  - item_id: bearing_set
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: motor_general_5kw
+    qty: 1
+    unit: unit
+steps:
+  - process_id: lamination_stamping_v0
+    inputs:
+      - item_id: electrical_steel_sheet
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 14.5
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.0
+    labor_hours: 0.8
+    notes: "Stamp stator and rotor laminations"
+  - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 14.5
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 19.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 1.5
+    labor_hours: 1.0
+    notes: "Wind motor coils"
+  - process_id: motor_final_assembly_v0
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 19.0
+        unit: kg
+      - item_id: steel_shaft
+        qty: 3.0
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 10.0
+        unit: kg
+      - item_id: bearing_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: motor_general_5kw
+        qty: 1
+        unit: unit
+    est_time_hr: 3.5
+    machine_hours: 2.5
+    labor_hours: 2.3
+    notes: "Assemble motor components and perform operational checks"
+notes: "General-purpose 5 kW motor assembly recipe."

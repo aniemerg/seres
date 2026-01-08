@@ -1,6 +1,23 @@
 id: recipe_metal_part_drilled_v0
 kind: recipe
 target_item_id: metal_part_drilled
+variant_id: v0
+inputs:
+  - item_id: formed_metal_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_part_drilled
+    qty: 0.995
+    unit: kg
 steps:
   - process_id: drilling_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: metal_part_drilled
+        qty: 0.995
+        unit: kg
 notes: "Single-step recipe: drill formed_metal_part into metal_part_drilled via drilling_basic_v0."

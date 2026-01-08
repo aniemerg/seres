@@ -1,0 +1,31 @@
+id: recipe_carbon_reductant_v0
+target_item_id: carbon_reductant
+variant_id: v0
+inputs:
+  - item_id: regolith_carbonaceous
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: carbon_reductant
+    qty: 0.29
+    unit: kg
+  - item_id: tailings
+    qty: 9.7
+    unit: kg
+steps:
+  - process_id: carbon_extraction_from_carbonaceous_v0
+    inputs:
+      - item_id: regolith_carbonaceous
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: carbon_reductant
+        qty: 0.3
+        unit: kg
+      - item_id: tailings
+        qty: 9.7
+        unit: kg
+    est_time_hr: 1.5
+    notes: Extract carbon reductant from carbonaceous regolith feedstock.
+assumptions: Carbonaceous regolith feedstock available for small-scale carbon recovery.
+notes: ISRU extraction route for carbon reductant; drying and sizing steps deferred.

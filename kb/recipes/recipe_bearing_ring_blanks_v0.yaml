@@ -6,6 +6,22 @@ produces_qty: 1.3
 produces_unit: kg
 target_item_id: bearing_ring_blanks
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 1.3
+    unit: kg
+outputs:
+  - item_id: bearing_ring_blanks
+    qty: 1.3
+    unit: kg
 steps:
 - process_id: forging_bearing_ring_blanks_v0
+  inputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 1.3
+      unit: kg
+  outputs:
+    - item_id: bearing_ring_blanks
+      qty: 1.3
+      unit: kg
 notes: "Single-step forging to produce bearing ring blanks from steel stock bar"

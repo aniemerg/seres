@@ -1,9 +1,50 @@
 id: recipe_structural_frame_steel_v0
 kind: recipe
 target_item_id: structural_frame_steel
+inputs:
+  - item_id: steel_bar_raw
+    qty: 27.0
+    unit: kg
+outputs:
+  - item_id: structural_frame_steel
+    qty: 25.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_bar_raw
+        qty: 27.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 26.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 1.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 26.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 25.5
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 25.5
+        unit: kg
+    outputs:
+      - item_id: structural_frame_steel
+        qty: 25.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.5
+        unit: kg
 assumptions: "Basic chain to form a steel structural frame from stock material via cutting, welding, and finishing."
 notes: "Canonical recipe for structural_frame_steel"

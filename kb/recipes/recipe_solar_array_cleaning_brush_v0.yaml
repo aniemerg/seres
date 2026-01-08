@@ -1,8 +1,54 @@
 id: recipe_solar_array_cleaning_brush_v0
 target_item_id: solar_array_cleaning_brush_v0
 variant_id: assembled_brush_v0
+inputs:
+  - item_id: wire_brush_set
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: support_frame_small
+    qty: 1
+    unit: unit
+  - item_id: power_storage_pack
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: mounting_fixtures_adjustable
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: solar_array_cleaning_brush_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: wire_brush_set
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+      - item_id: power_storage_pack
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: mounting_fixtures_adjustable
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: solar_array_cleaning_brush_v0
+        qty: 1
+        unit: unit
     notes: Assemble motorized brush, controls, power pack, and frame/handle.
 assumptions: "Portable brush assembly; refine with detailed drive and dust-mitigation features later."
 notes: Local assembly route for solar array cleaning brush module.

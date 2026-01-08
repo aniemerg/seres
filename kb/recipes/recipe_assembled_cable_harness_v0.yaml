@@ -1,21 +1,79 @@
 id: recipe_assembled_cable_harness_v0
 target_item_id: assembled_cable_harness
 variant_id: v0
+inputs:
+  - item_id: magnet_wire_copper
+    qty: 1.02
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: cable_ties_and_sleeving
+    qty: 0.2
+    unit: kg
+  - item_id: cut_wire_lengths
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: assembled_cable_harness
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: wire_cutting_and_stripping_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 1.02
+        unit: kg
+    outputs:
+      - item_id: cut_wire_lengths
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Cut power cables and signal wires to specified lengths (typically 10-50 meters total), strip insulation from conductor ends"
   - process_id: crimping_and_termination_v0
+    inputs:
+      - item_id: cut_wire_lengths
+        qty: 1.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     machine_hours: 2.0
     labor_hours: 3.5
     notes: "Crimp connectors onto cable ends (ring terminals, spade terminals, Anderson connectors, D-sub connectors), solder signal wire connections"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
+      - item_id: cable_ties_and_sleeving
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Route cables in harness layout, install strain relief components, bundle cables with cable ties or braided sleeving, label all connections"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_cable_harness
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Continuity testing of all conductors, insulation resistance testing, verify connector integrity and proper mating"

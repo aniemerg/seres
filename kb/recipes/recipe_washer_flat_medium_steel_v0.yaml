@@ -2,8 +2,20 @@ id: recipe_washer_flat_medium_steel_v0
 target_item_id: washer_flat_medium_steel
 variant_id: v0
 
+inputs:
+  - item_id: steel_sheet_1mm
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: metal_stamping_process_v0
+    inputs:
+      - item_id: steel_sheet_1mm
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: washer_flat_medium_steel
+        qty: 0.09
+        unit: kg
     est_time_hr: 0.02
     machine_hours: 0.02
     notes: "Punch washers from steel sheet using progressive die. Outer diameter, inner hole, and edge chamfer in single or multi-stage operation."

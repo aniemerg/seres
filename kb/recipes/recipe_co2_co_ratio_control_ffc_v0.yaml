@@ -1,12 +1,46 @@
 id: recipe_co2_co_ratio_control_ffc_v0
 kind: recipe
 target_item_id: co2_co_ratio_control_ffc_v0
+variant_id: v0
+inputs:
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: structural_frame_steel
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+  - item_id: sensor_set_basic
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: co2_co_ratio_control_ffc_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-    notes: "Initial CO2/CO ratio control assembly"
-  - process_id: sensor_integration_v0
-    notes: "Integrate sensors into CO2/CO ratio control module"
-  - process_id: calibration_basic_v0
-    notes: "Basic calibration of sensors"
-  - process_id: electrical_testing_and_calibration_v0
-    notes: "Electrical testing and calibration sequence"
+    inputs:
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: structural_frame_steel
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+      - item_id: sensor_set_basic
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: co2_co_ratio_control_ffc_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 6.0
+    machine_hours: 2.0
+    labor_hours: 4.0
+    notes: "Assemble control panel with sensors on structural frame, integrate sensor electronics, calibrate CO2/CO ratio monitoring system"
+assumptions: "Gas composition control module for FFC (Fray-Farthing-Chen) process using CO2/CO ratio monitoring"
+notes: "Assembly of CO2/CO ratio control module for Fray-Farthing-Chen electrolytic reduction process"

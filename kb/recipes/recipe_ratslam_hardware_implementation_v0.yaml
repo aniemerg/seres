@@ -2,7 +2,35 @@ id: recipe_ratslam_hardware_implementation_v0
 kind: recipe
 name: RAT-SLAM hardware implementation
 target_item_id: ratslam_hardware_implementation_v0
+inputs:
+  - item_id: computer_core_imported
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: ratslam_hardware_implementation_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-  - process_id: electrical_testing_basic_v0
-notes: "Converted to modern dict-based step format to satisfy invalid_recipe_schema gap; uses assembly_basic_v0 and electrical_testing_basic_v0."
+    inputs:
+      - item_id: computer_core_imported
+        qty: 1
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: ratslam_hardware_implementation_v0
+        qty: 1
+        unit: unit
+    notes: "Assemble computer core with electronic components in enclosure, includes basic testing"
+notes: "Assembly of RAT-SLAM navigation hardware from BOM components."

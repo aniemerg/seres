@@ -1,27 +1,75 @@
 id: recipe_crushing_jaw_set_v0
 target_item_id: crushing_jaw_set
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 150.0
+    unit: kg
+outputs:
+  - item_id: crushing_jaw_set
+    qty: 150.0
+    unit: kg
 steps:
-  - process_id: casting_basic_v0
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 150.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 10.0
     labor_hours: 8.0
     notes: "Cast crushing jaw plates from high-manganese steel or high-chromium cast iron for wear resistance (total ~120-130 kg castings for fixed and movable jaws)"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 150.0
+        unit: kg
     est_time_hr: 15.0
     machine_hours: 15.0
     labor_hours: 10.0
     notes: "Machine mounting surfaces, bolt holes, and alignment features on jaw plates; surface grind crushing faces if needed"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 150.0
+        unit: kg
     est_time_hr: 10.0
     machine_hours: 10.0
     labor_hours: 3.0
     notes: "Heat treat jaw plates for maximum wear resistance: harden crushing surfaces to HRC 50-60 or work-harden manganese steel"
   - process_id: surface_finishing_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 150.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 2.5
     notes: "Grind or profile crushing surfaces for optimal rock crushing geometry (corrugated or ribbed pattern), remove casting defects"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: crushing_jaw_set
+        qty: 150.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify hardness of crushing surfaces, dimensional accuracy, mounting hole alignment, and absence of cracks"

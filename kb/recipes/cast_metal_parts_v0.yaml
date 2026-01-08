@@ -1,15 +1,39 @@
 id: recipe_cast_metal_parts_v0
+kind: recipe
 target_item_id: cast_metal_parts
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 2.5
+    unit: kg
+  - item_id: prepared_mold
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cast_metal_parts
+    qty: 1.0
+    unit: kg
+  - item_id: metal_scrap
+    qty: 1.5
+    unit: kg
 steps:
-  - process_id: mold_preparation_basic_v0
-    est_time_hr: 0.5
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 2.5
+        unit: kg
+      - item_id: prepared_mold
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 1.5
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 2.5
     labor_hours: 0.5
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-assumptions: Cast parts from metal alloy bulk; finishing not modeled.
-notes: Coarse route; add machining/finishing variants later.
+    notes: "Prepare casting mold, melt steel ingot and pour into mold, allow to cool, remove from mold, machine to final dimensions and finish surfaces"
+assumptions: Cast parts from metal alloy bulk with mold prep, casting, and finishing combined. ~60% material loss due to casting gates, risers, and machining removal.

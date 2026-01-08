@@ -1,24 +1,72 @@
 id: recipe_rolling_cylinders_hardened_v0
 target_item_id: rolling_cylinders_hardened
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 500.0
+    unit: kg
+outputs:
+  - item_id: rolling_cylinders_hardened
+    qty: 500.0
+    unit: kg
 steps:
   - process_id: forging_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: forged_steel_parts
+        qty: 500.0
+        unit: kg
     est_time_hr: 15.0
     machine_hours: 15.0
     notes: "Forge large steel cylinder blank from ingot for grain refinement"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: forged_steel_parts
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 500.0
+        unit: kg
     est_time_hr: 40.0
     machine_hours: 40.0
     notes: "Rough turn cylinder to near-net diameter and length"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 500.0
+        unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
     notes: "Through-harden or case-harden to HRC 55-65 for wear resistance"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 500.0
+        unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
     notes: "Precision cylindrical grinding to final diameter, parallelism, and surface finish"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 500.0
+        unit: kg
+    outputs:
+      - item_id: rolling_cylinders_hardened
+        qty: 500.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Verify hardness, diameter, runout, and surface finish specifications"

@@ -1,8 +1,37 @@
 id: recipe_oxygen_gas_v0
+kind: recipe
 target_item_id: oxygen_gas
 variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_energy
+    qty: 10.0
+    unit: kWh
+outputs:
+  - item_id: oxygen_gas
+    qty: 0.4
+    unit: kg
+  - item_id: metal_alloy_bulk
+    qty: 0.6
+    unit: kg
 steps:
   - process_id: oxygen_extraction_molten_regolith_electrolysis_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+      - item_id: electrical_energy
+        qty: 10.0
+        unit: kWh
+    outputs:
+      - item_id: oxygen_gas
+        qty: 0.4
+        unit: kg
+      - item_id: metal_alloy_bulk
+        qty: 0.6
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
 assumptions: Oxygen output from MRE; alternate variants (carbothermal) can be added later.

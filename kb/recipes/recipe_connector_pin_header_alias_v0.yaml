@@ -1,6 +1,22 @@
 id: recipe_connector_pin_header_alias_v0
 kind: recipe
 target_item_id: connector_pin_header
+inputs:
+  - item_id: raw_metal_block
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: connector_pin_header
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: pin_header_fabrication_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: connector_pin_header
+        qty: 0.05
+        unit: kg
 notes: "Alias production path for connector_pin_header (base alias) using basic fabrication"

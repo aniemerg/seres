@@ -3,16 +3,51 @@ kind: recipe
 name: Recipe for vacuum pump system miniature
 target_item_id: vacuum_pump_system_miniature
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.2
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: vacuum_pump_system_miniature
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cast miniature pump housing from aluminum"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine pump chamber, ports, and small bearing journals"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: vacuum_pump_system_miniature
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble rotor (or impeller), seals, and mount hardware"

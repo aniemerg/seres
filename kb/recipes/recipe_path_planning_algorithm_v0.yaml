@@ -2,8 +2,31 @@ id: recipe_path_planning_algorithm_v0
 kind: recipe
 target_item_id: path_planning_algorithm_v0
 variant_id: v0
+produces_qty: 1.0
+produces_unit: unit
+inputs:
+  - item_id: software_source_code_v0
+    qty: 1.0
+    unit: unit
+  - item_id: path_planning_code_uncompiled
+    qty: 1.0
+    unit: unit
+  - item_id: path_planning_executable
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_data_test_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: path_planning_algorithm_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: software_development_programming_v0
+  inputs:
+    - item_id: software_source_code_v0
+      qty: 1.0
+      unit: unit
   outputs:
     - item_id: path_planning_code_uncompiled
       qty: 1.0

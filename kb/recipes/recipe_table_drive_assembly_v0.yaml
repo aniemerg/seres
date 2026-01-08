@@ -1,6 +1,15 @@
 id: recipe_table_drive_assembly_v0
+kind: recipe
 target_item_id: table_drive_assembly
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 85.0
+    unit: kg
+outputs:
+  - item_id: table_drive_assembly
+    qty: 80.0
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
     est_time_hr: 0.5
@@ -8,8 +17,24 @@ steps:
   - process_id: metal_casting_basic_v0
     est_time_hr: 1.0
     machine_hours: 1.0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 80.0
+        unit: kg
   - process_id: machining_finish_basic_v0
     est_time_hr: 1.0
     machine_hours: 1.0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: table_drive_assembly
+        qty: 80.0
+        unit: kg
 assumptions: Cast housing/drive parts then machine; bearings/gears assumed imported.
 notes: Coarse route; refine with gear/drive specifics later.

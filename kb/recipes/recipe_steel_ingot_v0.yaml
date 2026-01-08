@@ -2,8 +2,39 @@ id: recipe_steel_ingot_v0
 kind: recipe
 name: Recipe for steel ingot v0
 target_item_id: steel_ingot
+variant_id: v0
+inputs:
+  - item_id: iron_pig_or_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: slag
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: steel_refining_basic_v0
+    inputs:
+      - item_id: iron_pig_or_ingot
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.0
+        unit: kg
+      - item_id: slag
+        qty: 0.05
+        unit: kg
   - process_id: steel_ingot_cast_v0
+    inputs:
+      - item_id: steel_billet_or_slab
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: steel_ingot
+        qty: 1.0
+        unit: kg
 assumptions: "Pig iron to steel ingot via refining to billet/slab then casting to ingot."
 notes: "Simplified steel ingot production path."

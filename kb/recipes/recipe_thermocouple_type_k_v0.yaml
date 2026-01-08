@@ -1,16 +1,75 @@
 id: recipe_thermocouple_type_k_v0
+kind: recipe
 target_item_id: thermocouple_type_k_v0
 variant_id: v0
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.8
+    unit: kg
+  - item_id: chromium_metal_pure
+    qty: 0.2
+    unit: kg
+  - item_id: aluminum_metal_pure
+    qty: 0.2
+    unit: kg
+  - item_id: thermocouple_alloy_mix
+    qty: 1.2
+    unit: kg
+    notes: "Intermediate for wire drawing"
+  - item_id: metal_wire_feed
+    qty: 1.0
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: ceramic_insulator_tube
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: thermocouple_type_k_v0
+    qty: 50.0
+    unit: unit
 steps:
   - process_id: alloy_mixing_v0
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 0.8
+        unit: kg
+      - item_id: chromium_metal_pure
+        qty: 0.2
+        unit: kg
+      - item_id: aluminum_metal_pure
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: thermocouple_alloy_mix
+        qty: 1.2
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     notes: Mix Ni-Cr (Chromel) and Ni-Al (Alumel) alloys
   - process_id: metal_wire_drawing_v0
+    inputs:
+      - item_id: thermocouple_alloy_mix
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     notes: Draw both alloys into fine wires
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+      - item_id: ceramic_insulator_tube
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: thermocouple_type_k_v0
+        qty: 50.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Join wires at junction, add insulation and protective sheath

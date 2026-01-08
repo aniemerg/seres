@@ -3,8 +3,47 @@ kind: recipe
 name: Epoxy Processing Unit manufacturing recipe
 target_item_id: epoxy_processing_unit
 variant_id: v0
+inputs:
+  - item_id: steel_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: heating_element_industrial
+    qty: 1
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+  - item_id: control_components
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: epoxy_processing_unit
+    qty: 1
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
-  - process_id: enclosure_assembly_basic_v0
-  - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: heating_element_industrial
+        qty: 1
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+      - item_id: control_components
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: epoxy_processing_unit
+        qty: 1
+        unit: unit
+    notes: "Assemble complete epoxy processing unit - frame, motor, heating elements, enclosure, and controls"
 notes: "Minimal recipe for epoxy_processing_unit using generic assembly steps."

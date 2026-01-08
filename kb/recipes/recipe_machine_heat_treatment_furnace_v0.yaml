@@ -1,11 +1,88 @@
 id: recipe_machine_heat_treatment_furnace_v0
 target_item_id: heat_treatment_furnace
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+  - item_id: furnace_shell_insulated
+    qty: 1
+    unit: unit
+  - item_id: refractory_lining_set
+    qty: 1
+    unit: unit
+  - item_id: heating_element_set_basic
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: level_sensor_basic
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: quench_rack_and_baskets
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: heat_treatment_furnace
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: furnace_shell_insulated
+        qty: 1
+        unit: unit
+      - item_id: refractory_lining_set
+        qty: 1
+        unit: unit
+      - item_id: heating_element_set_basic
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: level_sensor_basic
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: quench_rack_and_baskets
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     machine_hours: 3.0
@@ -13,6 +90,14 @@ steps:
     est_time_hr: 2.0
     labor_hours: 2.0
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: heat_treatment_furnace
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble furnace per BOM; imported compute/sensors.

@@ -1,10 +1,48 @@
 id: recipe_tactile_sensor_silicone_v0
 kind: recipe
 target_item_id: tactile_sensor_silicone_v0
+inputs:
+  - item_id: silicone_precursor
+    qty: 0.1
+    unit: kg
+  - item_id: silicone_curing_agent
+    qty: 0.005
+    unit: kg
+outputs:
+  - item_id: tactile_sensor_silicone_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: silicone_polymer_synthesis_v0
+    inputs:
+      - item_id: silicone_precursor
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: silicone_polymer
+        qty: 0.1
+        unit: kg
   - process_id: silicone_rubber_vulcanization_v0
+    inputs:
+      - item_id: silicone_polymer
+        qty: 0.1
+        unit: kg
+      - item_id: silicone_curing_agent
+        qty: 0.005
+        unit: kg
+    outputs:
+      - item_id: silicone_rubber
+        qty: 0.1
+        unit: kg
   - process_id: tactile_sensor_silicone_cast_v0
+    inputs:
+      - item_id: silicone_rubber
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: tactile_sensor_silicone_v0
+        qty: 0.1
+        unit: kg
 notes: "Placeholder recipe to fabricate tactile_sensor_silicone_v0 from silicone-derived materials; mass balanced using polymer -> rubber -> cast sequence."
 source_tags:
 - ellery_2018

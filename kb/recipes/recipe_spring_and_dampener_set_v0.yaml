@@ -1,26 +1,70 @@
 id: recipe_spring_and_dampener_set_v0
 target_item_id: spring_and_dampener_set
 variant_id: v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 5.5
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 5.5
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 5.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Form springs by coiling wire on spring winder or lathe"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 5.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5
     notes: "Heat treat springs to set shape and achieve desired spring rate"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble dampener elements with springs and mounting hardware"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Test spring rate and dampening characteristics"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: spring_and_dampener_set
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify spring dimensions and load-deflection curves"

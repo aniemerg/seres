@@ -1,15 +1,107 @@
 id: recipe_machine_gas_handling_loop_v0
 target_item_id: gas_handling_loop_v0
 variant_id: v0
+inputs:
+  - item_id: gas_loop_piping_set
+    qty: 1
+    unit: unit
+  - item_id: gas_blower_basic
+    qty: 1
+    unit: unit
+  - item_id: offgas_handling
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: gas_handling_loop_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: gas_loop_piping_set
+        qty: 1
+        unit: unit
+      - item_id: gas_blower_basic
+        qty: 1
+        unit: unit
+      - item_id: offgas_handling
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: gas_loop_piping_set
+        qty: 1
+        unit: unit
+      - item_id: gas_blower_basic
+        qty: 1
+        unit: unit
+      - item_id: offgas_handling
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: gas_loop_piping_set
+        qty: 1
+        unit: unit
+      - item_id: gas_blower_basic
+        qty: 1
+        unit: unit
+      - item_id: offgas_handling
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     machine_hours: 1.5
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: gas_handling_loop_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble gas loop per BOM; imported compute/sensors.

@@ -1,31 +1,159 @@
 id: recipe_machine_powder_mill_and_mixer_v0
 target_item_id: powder_mill_and_mixer
 variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 150.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 5.0
+    unit: kg
+  - item_id: mill_shell_generic
+    qty: 1.0
+    unit: unit
+  - item_id: liner_set_abrasion_resistant
+    qty: 1.0
+    unit: unit
+  - item_id: mixer_drum_small
+    qty: 1.0
+    unit: unit
+  - item_id: mixer_agitator_shaft_and_paddles
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1.0
+    unit: unit
+  - item_id: support_frame_welded
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: powder_mill_and_mixer
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 150.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Cut shell sections, frame members, and mounting plates."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 150.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 150.0
+        unit: kg
     est_time_hr: 1.8
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Fabricate mill shell, mixer drum supports, and frame."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
     est_time_hr: 1.4
     machine_hours: 1.2
     labor_hours: 1.0
     notes: "Machine bearing seats, shafts, and mounting bores."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
+      - item_id: mill_shell_generic
+        qty: 1.0
+        unit: unit
+      - item_id: liner_set_abrasion_resistant
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_drum_small
+        qty: 1.0
+        unit: unit
+      - item_id: mixer_agitator_shaft_and_paddles
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: support_frame_welded
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.6
     labor_hours: 1.6
     notes: "Install liners, agitator shaft/paddles, drive motor, gearbox, and guards."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire controls, interlocks, and instrumentation."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: powder_mill_and_mixer
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.6
     notes: "Spin/charge test with inert media; verify mixing/milling operation and seals."

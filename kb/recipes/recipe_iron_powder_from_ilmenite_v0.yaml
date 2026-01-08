@@ -1,12 +1,33 @@
 id: recipe_iron_powder_from_ilmenite_v0
 kind: recipe
 name: Iron powder production from ilmenite v0
-produces_id: iron_powder_v0
-produces_qty: 1.0
-produces_unit: kg
 target_item_id: iron_powder_v0
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_powder_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: iron_pure_production_from_ilmenite_v0
+    inputs:
+      - item_id: iron_ore_or_ilmenite
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: iron_metal_pure
+        qty: 1.0
+        unit: kg
   - process_id: iron_powder_synthesis_v0
+    inputs:
+      - item_id: iron_metal_pure
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: iron_powder_v0
+        qty: 1.0
+        unit: kg
 notes: "Two-step local production path to iron_powder_v0 from ilmenite; combines ilmenite reduction with iron powder synthesis."
 variant_id: v0

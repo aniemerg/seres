@@ -1,7 +1,51 @@
 id: recipe_hydraulic_pump_unit_basic_v0
 kind: recipe
+name: Recipe for hydraulic pump unit basic
 target_item_id: hydraulic_pump_unit_basic
+variant_id: v0
+inputs:
+  - item_id: hydraulic_pump_unit_v0
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_reservoir_basic
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_hose_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_hose_segment_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hydraulic_pump_unit_basic
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: hydraulic_pump_unit_basic_assembly_v0
+    inputs:
+      - item_id: hydraulic_pump_unit_v0
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_reservoir_basic
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_control_valve_set
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_hose_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_hose_segment_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hydraulic_pump_unit_basic
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    notes: "Assemble hydraulic pump unit with reservoir, control valve set, and hose assemblies"
 notes: "Local recipe to assemble hydraulic_pump_unit_basic from subcomponents."
 assumptions: "Assembled locally; additional BOM refinements pending."

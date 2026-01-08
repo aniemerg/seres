@@ -1,20 +1,69 @@
 id: recipe_hot_wire_cutter_frame_v0
 target_item_id: hot_wire_cutter_frame
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 25.0
+    unit: kg
+  - item_id: cut_parts
+    qty: 24.0
+    unit: kg
+  - item_id: welded_fabrications
+    qty: 23.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 22.0
+    unit: kg
+outputs:
+  - item_id: hot_wire_cutter_frame
+    qty: 20.0
+    unit: kg
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 24.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cut steel tubing for frame base and cutting arm members"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 24.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 23.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld frame structure with cutting arm supports and adjustment mechanisms"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 23.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 22.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Machine wire attachment points, adjustment slots, and tensioning mechanisms"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: hot_wire_cutter_frame
+        qty: 20.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install adjustment hardware, wire guides, and mounting feet"

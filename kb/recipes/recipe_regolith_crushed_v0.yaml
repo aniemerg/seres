@@ -1,6 +1,15 @@
 id: recipe_regolith_crushed_v0
 kind: recipe
 target_item_id: regolith_crushed
+variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: regolith_crushed
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: crushing_basic_v0
     inputs:

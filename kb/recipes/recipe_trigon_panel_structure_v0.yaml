@@ -4,7 +4,23 @@ produces_id: trigon_panel_structure_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: trigon_panel_structure_v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: trigon_panel_structure_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: panel_structure_formation_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: trigon_panel_structure_v0
+        qty: 1.0
+        unit: unit
     notes: "Form from raw_metal_block to trigon_panel_structure_v0"
 notes: "Placeholder recipe for producing Trigon panel structure from a raw metal block. Uses minimal formative process."

@@ -1,8 +1,31 @@
 id: recipe_water_v0
+kind: recipe
 target_item_id: water
 variant_id: v0
+inputs:
+  - item_id: regolith_polar_psc
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: water
+    qty: 0.056
+    unit: kg
+  - item_id: regolith_crushed
+    qty: 0.944
+    unit: kg
 steps:
   - process_id: polar_water_ice_extraction_v0
+    inputs:
+      - item_id: regolith_polar_psc
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: water
+        qty: 0.056
+        unit: kg
+      - item_id: regolith_crushed
+        qty: 0.944
+        unit: kg
     est_time_hr: 12.0
     notes: "Extract water from polar ice-bearing regolith; melt/condense to collect."
 assumptions: Water sourced from lunar polar ice deposits; regolith volatiles or imports are fallback options.

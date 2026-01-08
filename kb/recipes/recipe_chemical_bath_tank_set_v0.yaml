@@ -4,8 +4,38 @@ produces_id: chemical_bath_tank_set
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
+inputs:
+- item_id: steel_plate_or_sheet
+  qty: 100.0
+  unit: kg
+- item_id: fastener_kit_small
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: chemical_bath_tank_set
+  qty: 1.0
+  unit: unit
 steps:
 - process_id: welding_brazing_basic_v0
+  inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 100.0
+    unit: kg
+  outputs:
+  - item_id: welded_assemblies
+    qty: 90.0
+    unit: kg
 - process_id: assembly_basic_v0
+  inputs:
+  - item_id: welded_assemblies
+    qty: 90.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: chemical_bath_tank_set
+    qty: 1.0
+    unit: unit
 notes: Placeholder recipe to enable local manufacturing of chemical_bath_tank_set; refine BOM and steps later.
 target_item_id: chemical_bath_tank_set

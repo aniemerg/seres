@@ -1,12 +1,36 @@
 id: recipe_trigon_latch_mechanism_v0
 target_item_id: trigon_latch_mechanism_v0
 variant_id: v0
+inputs:
+  - item_id: base_metal_parts
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: trigon_latch_mechanism_v0
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: metal_parts_fabrication_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 0.1
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.3
     notes: Fabricate latch body, hook, spring from sheet metal
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: trigon_latch_mechanism_v0
+        qty: 0.05
+        unit: kg
     est_time_hr: 0.2
     labor_hours: 0.2
     notes: Assemble latch components

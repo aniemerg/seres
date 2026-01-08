@@ -1,9 +1,33 @@
 id: recipe_magnetic_concentrate_v0
 target_item_id: magnetic_concentrate
 variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: magnetic_concentrate
+    qty: 2.0
+    unit: kg
+byproducts:
+  - item_id: ore_tailings
+    qty: 8.0
+    unit: kg
 steps:
   - process_id: beneficiate_regolith_magnetic_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_concentrate
+        qty: 2.0
+        unit: kg
+      - item_id: ore_tailings
+        qty: 8.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
+    notes: "Magnetic separation of iron-bearing minerals from regolith"
 assumptions: Magnetic separation of regolith powder; yields concentrate and tailings.
 notes: Coarse route; yields/energy TBD.

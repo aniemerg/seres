@@ -4,6 +4,38 @@ target_item_id: microstructure_analysis_system_v0
 produces_id: microstructure_analysis_system_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: optical_microscope_v0
+    qty: 1.0
+    unit: unit
+  - item_id: computer_workstation
+    qty: 1.0
+    unit: unit
+  - item_id: lab
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: kg
+  - item_id: sensor_element_with_gauges
+    qty: 1.1
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.1
+    unit: kg
+  - item_id: connector_electrical_multi_pin
+    qty: 0.1
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: microstructure_analysis_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
     inputs:
@@ -17,14 +49,66 @@ steps:
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: microstructure_analysis_system_v0
+      - item_id: assembled_equipment
         qty: 1.0
         unit: unit
     notes: Assemble base frame and mount bearing set as subassembly
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: Mount subassembly into enclosure and apply shielding
   - process_id: electronic_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: kg
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: electronic_assembly
+        qty: 1.0
+        unit: unit
     notes: Install electronics and sensor suite
   - process_id: electrical_wiring_assembly_v0
+    inputs:
+      - item_id: sensor_element_with_gauges
+        qty: 1.1
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.1
+        unit: kg
+      - item_id: connector_electrical_multi_pin
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: sensor_wired_assembly
+        qty: 1.3
+        unit: kg
     notes: Wire electrical components and interconnects
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_wired_assembly
+        qty: 1.3
+        unit: kg
+    outputs:
+      - item_id: microstructure_analysis_system_v0
+        qty: 1.0
+        unit: unit
+    notes: Final integration of enclosure, electronics, and wired sensors
 notes: "Updated seed recipe; aligns with standard assembly patterns for microstructure_analysis_system_v0."

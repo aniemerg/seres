@@ -17,6 +17,20 @@ outputs:
     qty: 1.0
     unit: kg
 steps:
-  - process_id: alloy_mixing_v0
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: nickel_metal
+        qty: 0.79
+        unit: kg
+      - item_id: iron_metal
+        qty: 0.16
+        unit: kg
+      - item_id: molybdenum_metal
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: supermalloy
+        qty: 1.0
+        unit: kg
     notes: "Melt and alloy Ni-Fe-Mo to supermalloy composition"
 notes: "Placeholder supermalloy alloying recipe."

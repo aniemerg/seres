@@ -4,6 +4,18 @@ produces_id: nickel_mesh_sheet_material
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: nickel_mesh_sheet_material
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: nickel_mesh_sheet_production_v0
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: nickel_mesh_sheet_material
+        qty: 0.15
+        unit: kg
     notes: "Produce nickel mesh sheet material via nickel_mesh_sheet_production_v0"

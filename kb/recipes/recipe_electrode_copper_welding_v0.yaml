@@ -3,5 +3,17 @@ kind: recipe
 name: Copper welding electrode fabrication
 target_item_id: electrode_copper_welding
 variant_id: v0
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 0.3
+    unit: kg
 steps:
   - process_id: electrode_fabrication_copper_welding_v0
+    inputs:
+      - item_id: copper_rod_ingot
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: electrode_copper_welding
+        qty: 0.3
+        unit: kg

@@ -1,19 +1,28 @@
 id: recipe_gas_scrubbing_unit_filter_v0
 kind: recipe
 target_item_id: gas_scrubbing_unit_filter_v0
+variant_id: v0
 inputs:
   - item_id: ceramic_powder_mixture
     qty: 12.0
     unit: kg
     notes: "Porous ceramic media stock"
-  - item_id: ceramic_binder
-    qty: 1.0
-    unit: kg
-    notes: "Binder for forming green ceramic filter body"
+  - item_id: water
+    qty: 2.4
+    unit: L
+    notes: "Water for ceramic slurry during forming"
   - item_id: steel_plate_or_sheet
     qty: 0.5
     unit: kg
     notes: "End caps and mounting ring"
+  - item_id: cleaning_solvent_or_detergent_v0
+    qty: 0.5
+    unit: kg
+    notes: "Cleaning solvent for post-machining wash"
+  - item_id: sintered_parts
+    qty: 11.5
+    unit: kg
+    notes: "Intermediate sintered ceramic body prior to machining"
   - item_id: fastener_kit_small
     qty: 1
     unit: unit
@@ -32,12 +41,70 @@ outputs:
     notes: "Trimming and fitting waste"
 steps:
   - process_id: ceramic_forming_v0
+    inputs:
+      - item_id: ceramic_powder_mixture
+        qty: 12.0
+        unit: kg
+      - item_id: water
+        qty: 2.4
+        unit: L
+    outputs:
+      - item_id: green_ceramic_part
+        qty: 12.0
+        unit: kg
     notes: "Form porous ceramic filter body from powder and binder"
   - process_id: ceramic_sintering_v0
+    inputs:
+      - item_id: green_ceramic_part
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 11.5
+        unit: kg
     notes: "Sinter filter body to final strength while preserving porosity"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 11.5
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 11.0
+        unit: kg
+      - item_id: ceramic_drill_chip_waste
+        qty: 0.5
+        unit: kg
     notes: "Machine mounting faces and fit filter end caps"
   - process_id: cleaning_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 11.0
+        unit: kg
+      - item_id: cleaning_solvent_or_detergent_v0
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 11.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 11.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: gas_scrubbing_unit_filter_v0
+        qty: 1
+        unit: unit
+      - item_id: steel_scrap
+        qty: 0.1
+        unit: kg
 notes: "Ceramic filter cartridge for gas scrubbing units; uses ceramic forming and sintering with final machining and assembly."
 assumptions: "Porous ceramic filter body with metal end caps; quantities approximate for 15 kg cartridge."

@@ -1,12 +1,36 @@
 id: recipe_stored_energy_v0
 target_item_id: stored_energy
 variant_id: v0
+inputs:
+  - item_id: solar_irradiance
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: stored_energy
+    qty: 1.0
+    unit: kWh
 steps:
   - process_id: solar_power_generation_basic_v0
+    inputs:
+      - item_id: solar_irradiance
+        qty: 1.0
+        unit: kWh
+    outputs:
+      - item_id: electrical_energy
+        qty: 1.0
+        unit: kWh
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Generate electrical energy from solar
   - process_id: power_storage_basic_v0
+    inputs:
+      - item_id: electrical_energy
+        qty: 1.0
+        unit: kWh
+    outputs:
+      - item_id: stored_energy
+        qty: 1.0
+        unit: kWh
     est_time_hr: 0.1
     machine_hours: 0.1
     notes: Store electrical energy in batteries/flywheels

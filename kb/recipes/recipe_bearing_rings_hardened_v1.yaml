@@ -1,6 +1,14 @@
 id: recipe_bearing_rings_hardened_v1
 kind: recipe
 target_item_id: bearing_rings_hardened
+inputs:
+  - item_id: bearing_rings_machined
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: bearing_rings_hardened
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: heat_treatment_hardening_v0
     inputs:
@@ -11,4 +19,7 @@ steps:
       - item_id: bearing_rings_hardened
         qty: 0.2
         unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Heat treat and harden bearing rings"
 notes: "Scaled-down heat treatment to produce hardened bearing rings from machined rings (non-v0). Masses are placeholders for modeling parity."

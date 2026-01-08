@@ -1,16 +1,58 @@
 id: recipe_trigon_hinge_motorized_v0
 kind: recipe
 name: Recipe for Trigon hinge motorized
-produces_id: trigon_hinge_motorized_v0
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: trigon_hinge_motorized_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_bar
+    qty: 0.5
+    unit: kg
+  - item_id: motor_electric_small
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 0.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: trigon_hinge_motorized_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 0.1
+    unit: kg
 steps:
-- process_id: assembly_basic_v0
-- process_id: motor_assembly_3d_printed_v0
-- process_id: electrical_wiring_and_controls_v0
-- process_id: electronic_assembly_v0
-- process_id: finishing_basic_v0
-- process_id: inspection_basic_v0
-notes: "Enhanced recipe incorporating motor subassembly and electronics for the Trigon hinge motorized variant."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: aluminum_alloy_bar
+        qty: 0.5
+        unit: kg
+      - item_id: motor_electric_small
+        qty: 1
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 0.1
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: trigon_hinge_motorized_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_swarf
+        qty: 0.1
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 1.5
+    labor_hours: 1.5
+    notes: "Machine hinge body and bracket from aluminum, assemble motor subassembly, wire electrical controls and position sensing, integrate electronics, finish and inspect motorized hinge"
+notes: "Assembly of motorized hinge for Trigon self-assembling panels with integrated motor and control electronics"

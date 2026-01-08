@@ -1,8 +1,25 @@
 id: recipe_linear_guide_rails_v0
 target_item_id: linear_guide_rails
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 22.0
+    unit: kg
+  - item_id: ball_bearing_steel_v0
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: linear_guide_rails
+    qty: 1.0
+    unit: unit
+  - item_id: metal_scrap
+    qty: 6.5
+    unit: kg
 steps:
-  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_bar_stock
         qty: 22.0
@@ -17,20 +34,12 @@ steps:
       - item_id: linear_guide_rails
         qty: 1.0
         unit: unit
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    notes: "Machine rail profiles and carriage bodies from steel stock"
-  - process_id: heat_treatment_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Harden rail surfaces for wear resistance"
-  - process_id: surface_grinding_precision_v0
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    notes: "Precision grind rail surfaces to tight tolerances"
-  - process_id: assembly_basic_v0
-    est_time_hr: 2.0
+      - item_id: metal_scrap
+        qty: 6.5
+        unit: kg
+    est_time_hr: 20.0
+    machine_hours: 18.0
     labor_hours: 2.0
-    notes: "Assemble ball bearing carriages to rails, lubricate, test motion"
+    notes: "Machine rail profiles and carriage bodies from steel stock, harden rail surfaces for wear resistance, precision grind rail surfaces to tight tolerances, assemble ball bearing carriages to rails, lubricate and test motion"
 assumptions: Hardened and precision-ground steel rails with ball bearing carriages. Total mass ~20 kg including rails and carriages.
 notes: Precision linear guide rail system for machine tools. Provides smooth, accurate linear positioning.

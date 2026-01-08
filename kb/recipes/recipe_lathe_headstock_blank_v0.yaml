@@ -1,6 +1,22 @@
 id: recipe_lathe_headstock_blank_v0
 kind: recipe
 target_item_id: lathe_headstock_blank
+inputs:
+  - item_id: steel_billet_or_slab
+    qty: 60.0
+    unit: kg
+outputs:
+  - item_id: lathe_headstock_blank
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: lathe_headstock_blank_cast_v0
+    inputs:
+      - item_id: steel_billet_or_slab
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: lathe_headstock_blank
+        qty: 60.0
+        unit: kg
 notes: "Manufacture lathe_headstock_blank from a steel billet/slab via casting."

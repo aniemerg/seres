@@ -1,18 +1,102 @@
 id: recipe_heat_treatment_furnace_v0
 kind: recipe
-produces_id: heat_treatment_furnace_v0
+produces_id: heat_treatment_furnace
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 300.0
+    unit: kg
+  - item_id: refractory_castable
+    qty: 50.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 10.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 2.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electrical_system
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: heat_treatment_furnace
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 300.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 285.0
+      unit: kg
   notes: Cast outer shell and frame (approx 300 kg)
 - process_id: refractory_lining_installation_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 285.0
+      unit: kg
+    - item_id: refractory_castable
+      qty: 50.0
+      unit: kg
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
   notes: Install ceramic fiber or brick refractory insulation lining
 - process_id: coil_winding_basic_v0
+  inputs:
+    - item_id: aluminum_wire
+      qty: 10.0
+      unit: kg
+    - item_id: coil_insulation_material
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: motor_coil_wound
+      qty: 9.5
+      unit: kg
   notes: Wind or install resistive heating elements (nichrome or silicon carbide)
 - process_id: wiring_and_electronics_integration_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+    - item_id: electrical_wire_and_connectors
+      qty: 5.0
+      unit: kg
+    - item_id: electronic_components_set
+      qty: 2.0
+      unit: kg
+  outputs:
+    - item_id: assembled_electrical_system
+      qty: 1.0
+      unit: unit
   notes: Install temperature controllers, thermocouples, power relays, safety interlocks
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+    - item_id: assembled_electrical_system
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: heat_treatment_furnace
+      qty: 1.0
+      unit: unit
   notes: Assemble door, hinges, seals, ventilation system
-notes: Versioned recipe mapping to heat_treatment_furnace_v0; aligns with v0 machine id
+notes: Versioned recipe mapping to heat_treatment_furnace; aligns with unversioned machine id
 target_item_id: heat_treatment_furnace

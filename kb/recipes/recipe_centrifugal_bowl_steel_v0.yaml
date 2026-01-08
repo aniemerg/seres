@@ -2,16 +2,48 @@ id: recipe_centrifugal_bowl_steel_v0
 kind: recipe
 target_item_id: centrifugal_bowl_steel
 variant_id: machined_v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 89.0
+    unit: kg
+outputs:
+  - item_id: centrifugal_bowl_steel
+    qty: 80.0
+    unit: kg
 steps:
   - process_id: metal_fabrication_welding_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 89.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 84.6
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Weld steel sheet into cylindrical bowl"
   - process_id: machining_rough_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 84.6
+        unit: kg
+    outputs:
+      - item_id: rough_part
+        qty: 80.4
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine internal surface and mounting features"
   - process_id: balancing_dynamic_basic_v0
+    inputs:
+      - item_id: rough_part
+        qty: 80.4
+        unit: kg
+    outputs:
+      - item_id: centrifugal_bowl_steel
+        qty: 80.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Balance bowl for high-speed rotation"

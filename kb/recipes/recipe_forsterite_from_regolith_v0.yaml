@@ -6,8 +6,30 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: forsterite_extraction_v0
 variant_id: v0
+inputs:
+- item_id: regolith_lunar_highlands
+  qty: 10.0
+  unit: kg
+outputs:
+- item_id: forsterite_extraction_v0
+  qty: 6.0
+  unit: kg
+- item_id: tailings
+  qty: 4.0
+  unit: kg
 steps:
 - process_id: forsterite_extraction_from_regolith_v0
+  inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 10.0
+    unit: kg
+  outputs:
+  - item_id: forsterite_extraction_v0
+    qty: 6.0
+    unit: kg
+  - item_id: tailings
+    qty: 4.0
+    unit: kg
   notes: "Extract forsterite from regolith; yields generated in process."
 assumptions: "Extraction yields ~0.6 kg for 1 kg regolith input; tailings ~0.4 kg."
 notes: "In-situ forsterite extraction from regolith; placeholder yields and mass balance."

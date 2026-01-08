@@ -1,36 +1,121 @@
 id: recipe_hydraulic_pump_heavy_duty_v0
 target_item_id: hydraulic_pump_heavy_duty
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 70.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 68.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 2.0
+    unit: unit
+  - item_id: seal_rubber_bearing
+    qty: 4.0
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hydraulic_pump_heavy_duty
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: casting_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 70.0
+      unit: kg
+    outputs:
+    - item_id: cast_metal_parts
+      qty: 68.0
+      unit: kg
     est_time_hr: 8.0
     machine_hours: 6.0
     labor_hours: 5.0
     notes: "Cast heavy-duty pump body and end caps from high-strength cast iron or steel (combined ~60-70 kg)"
   - process_id: machining_precision_v0
+    inputs:
+    - item_id: cast_metal_parts
+      qty: 68.0
+      unit: kg
+    outputs:
+    - item_id: machined_steel_part_precision
+      qty: 66.0
+      unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
     labor_hours: 12.0
     notes: "Precision machine pump body bore, end cap mating surfaces, gear/piston pockets, port threads, and seal grooves to tight tolerances (±0.01 mm) for minimal leakage"
   - process_id: machining_precision_v0
+    inputs:
+    - item_id: machined_steel_part_precision
+      qty: 66.0
+      unit: kg
+    outputs:
+    - item_id: machined_steel_part_precision
+      qty: 64.0
+      unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     labor_hours: 8.0
     notes: "Machine internal pump gears (or pistons), drive shaft, bearings seats, and mounting flange with precision tooth/piston profiles"
   - process_id: heat_treatment_basic_v0
+    inputs:
+    - item_id: machined_steel_part_precision
+      qty: 64.0
+      unit: kg
+    outputs:
+    - item_id: finished_part
+      qty: 64.0
+      unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 2.0
     notes: "Harden and temper gears, drive shaft, and high-wear surfaces for durability and wear resistance"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: finished_part
+      qty: 64.0
+      unit: kg
+    - item_id: bearing_set_heavy
+      qty: 2
+      unit: unit
+    - item_id: seal_rubber_bearing
+      qty: 4
+      unit: unit
+    - item_id: fastener_kit_large
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Assemble internal gears/pistons in pump body, install bearings and seals, attach end caps with high-strength fasteners, install drive shaft"
   - process_id: leak_test_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 4.0
     labor_hours: 3.0
     notes: "Pressure test pump at rated pressure (200+ bar), verify flow rate and pressure output, check seal integrity under load"
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: hydraulic_pump_heavy_duty
+      qty: 1
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify pump displacement, pressure rating, volumetric efficiency, and absence of leaks or noise"

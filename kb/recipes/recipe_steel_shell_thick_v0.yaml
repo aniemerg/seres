@@ -7,6 +7,18 @@ target_item_id: steel_shell_thick
 produces_id: steel_shell_thick
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: steel_sheet_3mm
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: steel_shell_thick_forming_v0
+  inputs:
+    - item_id: steel_sheet_3mm
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: steel_shell_thick
+      qty: 1.0
+      unit: kg
   notes: Form thick shell from 3mm steel sheet

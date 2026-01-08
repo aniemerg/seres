@@ -1,16 +1,54 @@
 id: recipe_alignment_tools_v0
 target_item_id: alignment_tools
 variant_id: v0
+inputs:
+  - item_id: tool_steel_high_carbon_v0
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: alignment_tools
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: tool_steel_high_carbon_v0
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine straightedges, optical squares, mounting bases"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 4.3
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Grind reference surfaces to precision flatness and perpendicularity"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 4.3
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: alignment_tools
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble dial indicators, magnetic bases, optical components"

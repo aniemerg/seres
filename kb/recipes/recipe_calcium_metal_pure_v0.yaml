@@ -2,8 +2,54 @@ id: recipe_calcium_metal_pure_v0
 kind: recipe
 target_item_id: calcium_metal_pure
 variant_id: ffc_v0
+inputs:
+  - item_id: calcium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.2
+    unit: kg
+  - item_id: electrodes
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: calcium_metal_pure
+    qty: 0.714
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.286
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.18
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.07
+    unit: kg
 steps:
   - process_id: ffc_calcium_extraction_v0
+    inputs:
+      - item_id: calcium_oxide
+        qty: 1.0
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.2
+        unit: kg
+      - item_id: electrodes
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: calcium_metal_pure
+        qty: 0.714
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 0.286
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.18
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.07
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 3.0
 notes: |

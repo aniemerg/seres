@@ -17,6 +17,17 @@ outputs:
     unit: kg
 steps:
   - process_id: alloying_basic_v0
+    inputs:
+      - item_id: magnesium_metal_v0
+        qty: 0.63
+        unit: kg
+      - item_id: silicon_metal_v0
+        qty: 0.37
+        unit: kg
+    outputs:
+      - item_id: magnesium_silicide_thermoelectric
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "React Mg and Si to form Mg2Si; ball-mill and sinter in practice"

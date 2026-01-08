@@ -2,7 +2,29 @@ id: recipe_purified_liquid_v0
 kind: recipe
 target_item_id: purified_liquid
 variant_id: distillation_v0
+inputs:
+  - item_id: blended_mixture
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: purified_liquid
+    qty: 0.95
+    unit: kg
+  - item_id: distillation_residue
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: fractional_distillation_v0
+    inputs:
+      - item_id: blended_mixture
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: purified_liquid
+        qty: 0.95
+        unit: kg
+      - item_id: distillation_residue
+        qty: 0.05
+        unit: kg
     notes: "Generic fractional distillation output."
 notes: "Recipe for purified liquid via fractional distillation."

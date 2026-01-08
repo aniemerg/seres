@@ -1,6 +1,15 @@
 id: recipe_compliant_element_machined_v0
+kind: recipe
 target_item_id: compliant_element_machined
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: compliant_element_machined
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: machining_process_milling_v0
     inputs:

@@ -2,6 +2,22 @@ id: recipe_selenium_refined_v0
 kind: recipe
 target_item_id: selenium_refined
 variant_id: v0
+inputs:
+  - item_id: mineral_ore_sulfide
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: selenium_refined
+    qty: 0.10
+    unit: kg
 steps:
   - process_id: selenium_extraction_refining_v0
+    inputs:
+      - item_id: mineral_ore_sulfide
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: selenium_refined
+        qty: 0.10
+        unit: kg
 notes: "Single-step refinement producing selenium_refined from mineral_ore_sulfide via selenium_extraction_refining_v0."

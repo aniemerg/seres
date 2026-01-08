@@ -3,27 +3,117 @@ kind: recipe
 name: Recipe for molding press (top-level v0)
 target_item_id: molding_press_v0
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1500.0
+    unit: kg
+  - item_id: steel_frame_molding_press_v0
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_pump_unit_v0
+    qty: 1.0
+    unit: unit
+  - item_id: mold_platen_assembly_v0
+    qty: 2.0
+    unit: unit
+  - item_id: control_panel_basic_v0
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_v0
+    qty: 4.0
+    unit: unit
+  - item_id: fastener_kit_large_v0
+    qty: 1.0
+    unit: unit
+  - item_id: motor_assembly_standard_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: molding_press_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1500.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1425.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 4.0
     notes: "Fabricate base components."
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1425.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1400.0
+        unit: kg
     est_time_hr: 5.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Weld frame and platen supports."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1400.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1400.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Finish surfaces for mounting interfaces."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1400.0
+        unit: kg
+      - item_id: steel_frame_molding_press_v0
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_pump_unit_v0
+        qty: 1.0
+        unit: unit
+      - item_id: mold_platen_assembly_v0
+        qty: 2.0
+        unit: unit
+      - item_id: control_panel_basic_v0
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_v0
+        qty: 4.0
+        unit: unit
+      - item_id: fastener_kit_large_v0
+        qty: 1.0
+        unit: unit
+      - item_id: motor_assembly_standard_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble frame, cylinder, platen_set, hydraulic power unit, and controls."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: molding_press_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
 notes: "Placeholder recipe to manufacture molding_press_v0; align with pattern used for other molding_press variants."

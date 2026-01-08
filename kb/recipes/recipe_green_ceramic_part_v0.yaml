@@ -1,19 +1,28 @@
 id: recipe_green_ceramic_part_v0
 target_item_id: green_ceramic_part
 variant_id: v0
+inputs:
+  - item_id: ceramic_powder_mixture
+    qty: 5.0
+    unit: kg
+  - item_id: water
+    qty: 1.0
+    unit: L
 steps:
   - process_id: ceramic_forming_v0
+    inputs:
+      - item_id: ceramic_powder_mixture
+        qty: 5.0
+        unit: kg
+      - item_id: water
+        qty: 1.0
+        unit: L
+    outputs:
+      - item_id: green_ceramic_part
+        qty: 5.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
-    notes: "Form green ceramic part from ceramic powder mixture (pressing, molding, or slip casting)"
-  - process_id: drying_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    labor_hours: 0.5
-    notes: "Dry green part to remove moisture before sintering"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Inspect green part for cracks and defects"
-assumptions: "Unfired ('green') ceramic part formed from ceramic powder with binders. Ready for sintering to achieve final strength. Fragile and requires careful handling."
-notes: "Manufacturing of green ceramic part. Total processing time ~6.8 hours. Must be sintered to achieve final ceramic properties."
+    notes: "Form green compact from ceramic powder mixture (pressing, molding, or slip casting)"
+assumptions: "Unfired ('green') ceramic part formed from ceramic powder with binders. Ready for sintering to achieve final strength. Fragile and requires careful handling. Water loss during drying ~4%."
+notes: "Manufacturing of green ceramic part. Total processing time ~6.3 hours. Must be sintered to achieve final ceramic properties."

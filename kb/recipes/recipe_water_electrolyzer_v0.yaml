@@ -1,28 +1,104 @@
 id: recipe_water_electrolyzer_v0
 target_item_id: water_electrolyzer_v0
 variant_id: v0
+inputs:
+  - item_id: electrolyzer_cell_stack
+    qty: 1
+    unit: unit
+  - item_id: electrode_set_mre
+    qty: 2
+    unit: unit
+  - item_id: separator_robust
+    qty: 5
+    unit: unit
+  - item_id: power_supply_dc_high_current
+    qty: 1
+    unit: unit
+  - item_id: gas_collection_system
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: electrolyzer_cell_stack
+        qty: 1
+        unit: unit
+      - item_id: electrode_set_mre
+        qty: 2
+        unit: unit
+      - item_id: separator_robust
+        qty: 5
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Assemble electrolyzer cell stack, electrodes, and separators"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Seal cell stack and fabricate gas collection manifolds"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: kg
+      - item_id: power_supply_dc_high_current
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Install DC power supply and electrical connections"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
+      - item_id: gas_collection_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Integrate gas collection system for H2 and O2 separation"
   - process_id: leak_test_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Pressure test gas collection system and cell seals"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: water_electrolyzer_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Test electrolysis performance, gas purity, and efficiency"

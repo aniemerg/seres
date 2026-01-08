@@ -1,6 +1,33 @@
 id: recipe_etching_waste_solution_v3
 kind: recipe
 target_item_id: etching_waste_solution
+variant_id: v3
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: etching_chemicals
+    qty: 0.15
+    unit: kg
+outputs:
+  - item_id: etching_waste_solution
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: copper_etching_process_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.5
+        unit: kg
+      - item_id: etching_chemicals
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: copper_etched_laminate
+        qty: 0.5
+        unit: kg
+    byproducts:
+      - item_id: etching_waste_solution
+        qty: 0.15
+        unit: kg
 notes: "Canonical recipe migrated from legacy produces_id format; uses process_id step reference."

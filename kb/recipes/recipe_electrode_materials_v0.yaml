@@ -1,10 +1,46 @@
 id: recipe_electrode_materials_v0
 target_item_id: electrode_materials
 variant_id: mixed_batch_v0
+inputs:
+  - item_id: electrode_mix_nife
+    qty: 1.0
+    unit: kg
+  - item_id: current_collector_nickel_or_steel_mesh
+    qty: 0.5
+    unit: kg
+  - item_id: coating_compound
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: electrode_materials
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: electrode_fabrication_nife
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 1.0
+        unit: kg
+      - item_id: current_collector_nickel_or_steel_mesh
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: electrodes_nife_set
+        qty: 1.5
+        unit: kg
     notes: Mix and press Ni-Fe electrode materials with collectors.
   - process_id: cathode_oxide_coating_v0
+    inputs:
+      - item_id: electrodes_nife_set
+        qty: 1.0
+        unit: kg
+      - item_id: coating_compound
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: electrode_materials
+        qty: 1.0
+        unit: kg
     notes: Apply oxide coating as required.
 assumptions: "Aggregated electrode material preparation for Ni-Fe cells; refine with specific anode/cathode splits later."
 notes: Local route supplying electrode_materials instead of import placeholder.

@@ -2,18 +2,27 @@ id: recipe_depth_stop_mechanism_import_v0
 kind: recipe
 target_item_id: depth_stop_mechanism
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 2.2
+    unit: kg
+outputs:
+  - item_id: depth_stop_mechanism
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 0.6
-    machine_hours: 0.6
-    notes: "Finish machining features on depth_stop_mechanism body"
-  - process_id: cutting_basic_v0
-    est_time_hr: 0.4
-    machine_hours: 0.4
-    notes: "Cut/prepare depth stop components (screw interface, collar, nut threads)"
   - process_id: assembly_basic_v0
-    est_time_hr: 0.8
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 2.2
+        unit: kg
+    outputs:
+      - item_id: depth_stop_mechanism
+        qty: 1
+        unit: unit
+    est_time_hr: 1.8
+    machine_hours: 1.0
     labor_hours: 0.8
-    notes: "Assemble adjustment screw, lock nut, and mechanical stop collar into body"
+    notes: "Finish machining features on depth_stop_mechanism body, cut/prepare depth stop components (screw interface/collar/nut threads), assemble adjustment screw/lock nut/mechanical stop collar into body"
 assumptions: "Path to in-house machining and manual assembly; depth_stop_mechanism defined as a steel part ~2 kg"
 notes: "Local fabrication path for depth_stop_mechanism; replaces import placeholder"

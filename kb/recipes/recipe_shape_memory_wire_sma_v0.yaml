@@ -1,14 +1,47 @@
 id: recipe_shape_memory_wire_sma_v0
+kind: recipe
 target_item_id: shape_memory_wire_sma
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: shape_memory_wire_sma
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: shape_memory_wire_sma
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Imported SMA wire; local production not yet modeled.

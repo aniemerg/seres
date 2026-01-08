@@ -1,11 +1,19 @@
 id: recipe_stainless_billet_or_slab_v0
 kind: recipe
 name: Stainless billet or slab production v0
-produces_id: stainless_billet_or_slab
-produces_qty: 1.0
-produces_unit: kg
 variant_id: v0
 target_item_id: stainless_billet_or_slab
+inputs:
+  - item_id: stainless_steel_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: stainless_billet_or_slab
+    qty: 1.0
+    unit: kg
+  - item_id: slag
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: stainless_refining_basic_v0
 notes: "Local production path replacing import_stub: stainless_billet_or_slab using stainless_refining_basic_v0."

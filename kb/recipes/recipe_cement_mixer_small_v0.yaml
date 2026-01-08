@@ -1,20 +1,78 @@
 id: recipe_cement_mixer_small_v0
 target_item_id: cement_mixer_small
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 60.0
+    unit: kg
+  - item_id: motor_electric_small
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_small
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cement_mixer_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 60.0
+      unit: kg
+    outputs:
+    - item_id: cast_metal_parts
+      qty: 58.0
+      unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Cast mixer drum, gear housing, motor mount"
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: cast_metal_parts
+      qty: 58.0
+      unit: kg
+    outputs:
+    - item_id: machined_part_raw
+      qty: 56.0
+      unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine drum rim, bearing surfaces, gear teeth, axle mounts"
   - process_id: welding_and_fabrication_v0
+    inputs:
+    - item_id: machined_part_raw
+      qty: 56.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 56.0
+      unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld frame structure, mixing drum supports, discharge chute"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 56.0
+      unit: kg
+    - item_id: motor_electric_small
+      qty: 1
+      unit: unit
+    - item_id: bearing_set_small
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: cement_mixer_small
+      qty: 1
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble motor, gearbox, drum, frame, wheels"

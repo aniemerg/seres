@@ -1,23 +1,63 @@
 id: recipe_tapping_hole_assembly_v0
 target_item_id: tapping_hole_assembly
 variant_id: v0
+inputs:
+  - item_id: refractory_castable
+    qty: 80.0
+    unit: kg
+outputs:
+  - item_id: tapping_hole_assembly
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: refractory_casting_v0
+    inputs:
+      - item_id: refractory_castable
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: acid_resistant_reactor_lining_v0
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0
     labor_hours: 0.8
     notes: "Cast refractory sleeve/blocks for tap hole with steel jacket inserts."
   - process_id: sintering_basic_v0
+    inputs:
+      - item_id: acid_resistant_reactor_lining_v0
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 76.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5
     notes: "Sinter refractory components for strength and erosion resistance."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 76.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 76.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.6
     labor_hours: 0.5
     notes: "Finish bore and seating surfaces for plug/runner alignment."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 76.0
+        unit: kg
+    outputs:
+      - item_id: tapping_hole_assembly
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.6
     labor_hours: 0.6
     notes: "Assemble sleeve, runner block, plug, and mounting hardware."

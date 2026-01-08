@@ -1,30 +1,98 @@
 id: recipe_heat_rejection_system_v0
 target_item_id: heat_rejection_system
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 250.0
+    unit: kg
+  - item_id: radiator_panel
+    qty: 1.0
+    unit: unit
+  - item_id: coolant_piping
+    qty: 10.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: heat_rejection_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 250.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 237.5
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     labor_hours: 3.0
     notes: "Fabricate radiator panels and coolant reservoir from steel or aluminum sheet"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 237.5
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 230.0
+        unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Weld radiator fin arrays, reservoir, piping connections for coolant loops"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 230.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 225.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Machine pump mounting, fittings, and connection ports"
   - process_id: heat_rejection_system_assembly_v0
+    inputs:
+      - item_id: radiator_panel
+        qty: 1.0
+        unit: unit
+      - item_id: coolant_piping
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Assemble radiator panels, coolant loops, pumps, and thermal management components"
   - process_id: leak_test_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Pressure test coolant loops for leaks"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: heat_rejection_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify radiative surface finish and thermal performance"

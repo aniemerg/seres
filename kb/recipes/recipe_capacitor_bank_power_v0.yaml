@@ -1,26 +1,76 @@
 id: recipe_capacitor_bank_power_v0
 target_item_id: capacitor_bank_power
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 10.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: capacitor_bank_filter_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Fabricate capacitor bank enclosure and mounting racks"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.5
     labor_hours: 2.5
     notes: "Wire capacitors in parallel/series configuration, install bus bars and terminals"
   - process_id: assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
     inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 9.5
+        unit: kg
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
       - item_id: capacitor_bank_filter_v0
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.5
+    labor_hours: 1.5
     notes: "Mount capacitors in enclosure, install safety discharge circuits and connections"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: capacitor_bank_power
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test capacitance, voltage rating, and verify safety discharge functions"
-assumptions: Capacitor bank assembled from imported capacitor elements. Locally fabricated enclosure, wiring, and safety systems.
-notes: Power capacitor bank for energy storage and power smoothing. Used in power conditioning and solar energy systems.
+assumptions: "Capacitor bank assembled from imported capacitor elements. Locally fabricated enclosure, wiring, and safety systems."
+notes: "Power capacitor bank for energy storage and power smoothing. Used in power conditioning and solar energy systems."

@@ -3,11 +3,43 @@ kind: recipe
 target_item_id: press_frame_medium
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 320.0
+    unit: kg
+outputs:
+  - item_id: press_frame_medium
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 320.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 304.0
+        unit: kg
     notes: Cast medium press frame blank
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 304.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 300.0
+        unit: kg
     notes: Machine finishing of frame features
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: press_frame_medium
+        qty: 1.0
+        unit: unit
     notes: Assemble components into final frame
 notes: "3-step production path: cast -> machine finish -> assemble"

@@ -1,7 +1,25 @@
 id: recipe_cesium_vapor_thermionic_v0
 kind: recipe
 target_item_id: cesium_vapor_thermionic_v0
+produces_qty: 0.1
+produces_unit: kg
+inputs:
+  - item_id: cesium_ampule
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cesium_vapor_thermionic_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: cesium_vaporization_basic_v0
+    inputs:
+      - item_id: cesium_ampule
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cesium_vapor_thermionic_v0
+        qty: 0.1
+        unit: kg
 assumptions: "Vaporize cesium ampule to cesium vapor for space-charge neutralization in thermionic converters. Seed recipe; refine with process data later."
 notes: "Placeholder recipe to manufacture cesium vapor from cesium ampule for thermionic converter operation."

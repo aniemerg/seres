@@ -2,8 +2,24 @@ id: recipe_powder_mixture_v0
 kind: recipe
 target_item_id: powder_mixture
 variant_id: v0
+inputs:
+  - item_id: powder_components
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: powder_mixture
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: batching_and_mixing_basic_v0
+    inputs:
+      - item_id: powder_components
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: powder_mixture
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.1
     machine_hours: 0.1
     notes: "Batch and mix powder components into a homogeneous blend"

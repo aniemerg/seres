@@ -2,8 +2,36 @@ id: recipe_calcium_carbonate_v0
 kind: recipe
 target_item_id: calcium_carbonate
 variant_id: carbonation_v0
+inputs:
+  - item_id: calcium_hydroxide
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.595
+    unit: kg
+outputs:
+  - item_id: calcium_carbonate
+    qty: 1.35
+    unit: kg
+  - item_id: water
+    qty: 0.243
+    unit: kg
 steps:
   - process_id: calcium_carbonate_from_hydroxide_v0
+    inputs:
+      - item_id: calcium_hydroxide
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.595
+        unit: kg
+    outputs:
+      - item_id: calcium_carbonate
+        qty: 1.35
+        unit: kg
+      - item_id: water
+        qty: 0.243
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 1.0
 notes: |

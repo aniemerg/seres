@@ -2,6 +2,28 @@ id: recipe_cathode_coated_v0
 kind: recipe
 target_item_id: cathode_coated
 variant_id: v0
+inputs:
+  - item_id: tube_electrode_set
+    qty: 0.007
+    unit: kg
+  - item_id: barium_oxide
+    qty: 0.001
+    unit: kg
+outputs:
+  - item_id: cathode_coated
+    qty: 0.008
+    unit: kg
 steps:
   - process_id: oxide_coating_cathode_v0
+    inputs:
+      - item_id: tube_electrode_set
+        qty: 0.007
+        unit: kg
+      - item_id: barium_oxide
+        qty: 0.001
+        unit: kg
+    outputs:
+      - item_id: cathode_coated
+        qty: 0.008
+        unit: kg
 notes: "Migrated from legacy step format to structured step object to satisfy schema. Uses existing process oxide_coating_cathode_v0."

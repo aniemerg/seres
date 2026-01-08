@@ -3,8 +3,24 @@ kind: recipe
 name: Recipe for hydraulic cylinder body cast
 target_item_id: hydraulic_cylinder_body_cast
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 8.0
+    unit: kg
+outputs:
+  - item_id: hydraulic_cylinder_body_cast
+    qty: 7.2
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_cylinder_body_cast
+        qty: 7.2
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: Cast hydraulic cylinder body

@@ -1,10 +1,47 @@
 id: recipe_rtd_assembled_uncalibrated_v0
 kind: recipe
+name: Recipe for RTD assembled uncalibrated
 target_item_id: rtd_assembled_uncalibrated
+variant_id: v0
+inputs:
+  - item_id: nickel_wire_fine
+    qty: 0.01
+    unit: kg
+  - item_id: ceramic_tube_body
+    qty: 0.05
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.02
+    unit: kg
+  - item_id: connector_electrical_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: rtd_assembled_uncalibrated
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: nickel_wire_fine
+        qty: 0.01
+        unit: kg
+      - item_id: ceramic_tube_body
+        qty: 0.05
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.02
+        unit: kg
+      - item_id: connector_electrical_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: rtd_assembled_uncalibrated
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 0.5
     labor_hours: 0.5
-notes: "Initial placeholder recipe to enable closed-loop RTD chain modeling; uses basic assembly operation. Downstream calibration step not defined yet."
+    notes: "Wind nickel wire element on ceramic former, install element in ceramic protective tube, attach insulated copper lead wires to element, seal assembly, attach electrical connector"
+notes: "Initial placeholder recipe to enable closed-loop RTD chain modeling; uses nickel wire as a substitute for platinum in this placeholder assembly. Downstream calibration step not defined yet."
 assumptions: "Assumes calibration will be performed as a separate process after assembly."

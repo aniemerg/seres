@@ -2,9 +2,26 @@ id: recipe_slam_code_uncompiled_v0
 kind: recipe
 target_item_id: slam_code_uncompiled
 variant_id: v0
+inputs:
+  - item_id: software_source_code_v0
+    qty: 1.0
+    unit: unit
+  - item_id: computer_workstation
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: slam_code_uncompiled
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: software_development_programming_v0
-    inputs: []
+    inputs:
+      - item_id: software_source_code_v0
+        qty: 1.0
+        unit: unit
+      - item_id: computer_workstation
+        qty: 1.0
+        unit: unit
     outputs:
       - item_id: slam_code_uncompiled
         qty: 1.0

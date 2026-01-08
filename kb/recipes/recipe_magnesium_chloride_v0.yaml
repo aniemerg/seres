@@ -1,10 +1,21 @@
 id: recipe_magnesium_chloride_v0
 kind: recipe
 target_item_id: magnesium_chloride
-produces_id: magnesium_chloride
-produces_qty: 1.6
-produces_unit: kg
 variant_id: v0
+inputs:
+  - item_id: magnesium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 1.5
+    unit: kg
+outputs:
+  - item_id: magnesium_chloride
+    qty: 1.6
+    unit: kg
+  - item_id: water
+    qty: 0.9
+    unit: kg
 steps:
   - process_id: magnesium_chloride_from_mgo_v0
     inputs:

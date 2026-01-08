@@ -1,24 +1,112 @@
 id: recipe_balancing_machine_v0
+kind: recipe
 target_item_id: balancing_machine
 variant_id: v0
+inputs:
+  - item_id: machine_frame_medium
+    qty: 1.0
+    unit: unit
+  - item_id: spindle_drive_motor_small
+    qty: 1.0
+    unit: unit
+  - item_id: vibration_sensor_set
+    qty: 1.0
+    unit: unit
+  - item_id: mounting_fixtures_adjustable
+    qty: 1.0
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: balancing_machine
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cast machine base and mounting frame"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine mounting surfaces, spindle bearings, alignment features"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: unit
+      - item_id: spindle_drive_motor_small
+        qty: 1.0
+        unit: unit
+      - item_id: mounting_fixtures_adjustable
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble base, drive motors, mounting fixtures"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: vibration_sensor_set
+        qty: 1.0
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install vibration sensors, measurement electronics, control system"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: vibration_sensor_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: balancing_machine
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate vibration sensors with known unbalanced reference"

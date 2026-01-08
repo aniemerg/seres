@@ -1,0 +1,44 @@
+id: recipe_signal_amplifier_module_v0
+kind: recipe
+target_item_id: signal_amplifier_module
+variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 0.2
+    unit: kg
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: connector_electrical_multi_pin
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: signal_amplifier_module
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 0.2
+        unit: kg
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+      - item_id: connector_electrical_multi_pin
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: signal_amplifier_module
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble amplifier PCB, connectors, and enclosure into module."
+notes: "Placeholder assembly route for signal amplifier module."

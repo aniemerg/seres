@@ -1,6 +1,24 @@
 id: recipe_contacts_with_applied_material_v0
 kind: recipe
 target_item_id: contacts_with_applied_material_v0
+inputs:
+  - item_id: contact_substrate_base
+    qty: 1.0
+    unit: kg
+  - item_id: silver_contact_material
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: contact_material_application_v0
+    inputs:
+      - item_id: contact_substrate_base
+        qty: 1.0
+        unit: kg
+      - item_id: silver_contact_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: contacts_with_applied_material_v0
+        qty: 1.05
+        unit: kg
 notes: "Produces contacts_with_applied_material_v0 via the contact_material_application_v0 process (inputs: substrate_base + silver_contact_material)."

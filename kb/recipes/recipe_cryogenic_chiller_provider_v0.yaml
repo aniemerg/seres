@@ -1,15 +1,40 @@
 id: recipe_cryogenic_chiller_provider_v0
 kind: recipe
 target_item_id: cryogenic_chiller_provider_v0
+variant_id: v0
+inputs:
+  - item_id: cryogenic_chiller_v0
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: pressure_gauge_set
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cryogenic_chiller_provider_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
-    notes: "Casting structural components for cryogenic chiller provider"
-  - process_id: welding_brazing_basic_v0
-    notes: "Weld/braze frame and subassemblies"
-  - process_id: machining_finish_basic_v0
-    notes: "Finish machining on interfaces and mounting surfaces"
   - process_id: assembly_basic_v0
-    notes: "Pre-assembly of subcomponents into machine shell"
-  - process_id: machine_assembly_basic_v0
-    notes: "Final assembly: frame, electronics, wiring into cryogenic_chiller_provider_v0"
-notes: "Prototype recipe to manufacture cryogenic_chiller_provider_v0; BOM details to be refined."
+    inputs:
+      - item_id: cryogenic_chiller_v0
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: pressure_gauge_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cryogenic_chiller_provider_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 2.0
+    labor_hours: 6.0
+    notes: "Assemble cryogenic chiller unit with control panel and pressure monitoring into provider machine configuration"
+assumptions: "Seed provider machine that offers the cryogenic_chiller_v0 resource capability"
+notes: "Assembly of cryogenic chiller provider from main chiller unit and control systems"

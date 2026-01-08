@@ -10,6 +10,7 @@
 4. **`docs/parts_and_labor_guidelines.md`** — Parts, BOMs, and labor modeling policy (CRITICAL for recipe/BOM work)
 5. **`docs/conservative_mode_guide.md`** — Queue work philosophy and decision trees (DEFAULT APPROACH)
 6. **`docs/closure_error_guidance.md`** — Closure analysis error resolution (material flow gaps)
+7. **`docs/fixing-template-validation-errors.md`** — Guide for fixing template process errors (4,609 errors)
 
 These documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
 

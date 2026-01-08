@@ -1,5 +1,23 @@
 id: recipe_sulfur_concrete_regolith_v0
 kind: recipe
 target_item_id: sulfur_concrete_regolith_v0
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: sulfur_concrete_regolith_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sulfur_concrete_binding_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sulfur_concrete_regolith_v0
+        qty: 1.0
+        unit: kg

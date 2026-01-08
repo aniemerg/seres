@@ -5,7 +5,32 @@ produces_id: valve_body_cast_rough
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: valve_body_cast_rough
+inputs:
+  - item_id: metal_feedstock
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: valve_body_cast_rough
+    qty: 1.0
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.3
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_feedstock
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: valve_body_cast_rough
+      qty: 1.0
+      unit: unit
+    - item_id: metal_scrap
+      qty: 0.3
+      unit: kg
+  est_time_hr: 1.5
+  machine_hours: 1.5
   notes: Cast rough valve body; downstream machining will finish tolerances if needed.
 notes: Local production path for valve_body_cast_rough (non-v0); final finishing may be performed by machining in downstream recipes.

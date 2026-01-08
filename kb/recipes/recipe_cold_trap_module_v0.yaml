@@ -18,6 +18,20 @@ outputs:
     unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 5.0
+        unit: kg
+      - item_id: passive_thermal_insulation_v0
+        qty: 1.0
+        unit: kg
+      - item_id: cryogenic_valve_set
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: cold_trap_module_v0
+        qty: 1.0
+        unit: unit
     notes: Assemble cold trap module components, plumbing, and controls.
 assumptions: "Treats cold trap as assembled from listed BOM components; detailed refrigeration cycle to be added later."
 notes: Local assembly route for cold trap module replacing referenced-only placeholder.

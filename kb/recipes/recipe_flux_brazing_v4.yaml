@@ -3,9 +3,15 @@ kind: recipe
 name: Flux brazing synthesis recipe v4
 target_item_id: flux_brazing
 variant_id: v4
-produces_id: flux_brazing
-produces_qty: 0.01
-produces_unit: kg
+inputs:
+  - item_id: sodium_carbonate
+    qty: 0.01
+    unit: kg
+    notes: "Sodium carbonate as basic brazing flux"
+outputs:
+  - item_id: flux_brazing
+    qty: 0.01
+    unit: kg
 steps:
 - process_id: flux_brazing_synthesis_v0
   inputs:

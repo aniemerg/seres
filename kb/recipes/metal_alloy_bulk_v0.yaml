@@ -2,8 +2,33 @@ id: recipe_metal_alloy_bulk_v0
 kind: recipe
 target_item_id: metal_alloy_bulk
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 100.0
+    unit: kg
+  - item_id: electrical_energy
+    qty: 380.0
+    unit: kWh
+outputs:
+  - item_id: metal_alloy_bulk
+    qty: 22.8
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 15.2
+    unit: kg
+  - item_id: regolith_fine_fraction
+    qty: 40.0
+    unit: kg
+  - item_id: regolith_coarse_fraction
+    qty: 20.0
+    unit: kg
 steps:
   - process_id: regolith_mining_simple_v0
+    inputs: []
+    outputs:
+      - item_id: regolith_lunar_mare
+        qty: 100.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Mine mare regolith from surface"
@@ -12,16 +37,13 @@ steps:
       - item_id: regolith_lunar_mare
         qty: 100.0
         unit: kg
-        notes: "Raw mare regolith from mining"
     outputs:
       - item_id: regolith_coarse_fraction
         qty: 60.0
         unit: kg
-        notes: "Coarse fraction (~60% of input)"
       - item_id: regolith_fine_fraction
         qty: 40.0
         unit: kg
-        notes: "Fine fraction (~40% of input)"
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Screen and separate size fractions"
@@ -30,16 +52,28 @@ steps:
       - item_id: regolith_coarse_fraction
         qty: 40.0
         unit: kg
-        notes: "Coarse fraction for grinding"
     outputs:
       - item_id: regolith_powder
         qty: 38.0
         unit: kg
-        notes: "Ground regolith powder (~5% dust loss)"
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Crush and grind coarse regolith to powder"
   - process_id: oxygen_extraction_molten_regolith_electrolysis_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 38.0
+        unit: kg
+      - item_id: electrical_energy
+        qty: 380.0
+        unit: kWh
+    outputs:
+      - item_id: oxygen_gas
+        qty: 15.2
+        unit: kg
+      - item_id: metal_alloy_bulk
+        qty: 22.8
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Extract oxygen and produce metal byproduct via MRE"

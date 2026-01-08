@@ -3,8 +3,42 @@ kind: recipe
 name: Recipe for stainless steel ingot v0
 target_item_id: stainless_steel_ingot
 variant_id: v0
+inputs:
+  - item_id: iron_metal_pure
+    qty: 0.70
+    unit: kg
+  - item_id: chromium_metal_pure
+    qty: 0.18
+    unit: kg
+  - item_id: nickel_metal
+    qty: 0.10
+    unit: kg
+  - item_id: carbon_reductant
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: stainless_steel_ingot
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: stainless_steel_smelting_v0
+    inputs:
+      - item_id: iron_metal_pure
+        qty: 0.70
+        unit: kg
+      - item_id: chromium_metal_pure
+        qty: 0.18
+        unit: kg
+      - item_id: nickel_metal
+        qty: 0.10
+        unit: kg
+      - item_id: carbon_reductant
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: stainless_steel_ingot
+        qty: 1.0
+        unit: kg
 assumptions: |
   Stainless steel produced from primary metals (Fe, Cr, Ni).
   Composition: Fe 68-72%, Cr 18-20%, Ni 8-12%, C <0.08%.

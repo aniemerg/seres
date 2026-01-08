@@ -1,8 +1,43 @@
 id: recipe_tungsten_concentrate_v0
+kind: recipe
 target_item_id: tungsten_concentrate
 variant_id: v0
+inputs:
+  - item_id: nife_alloy_byproduct
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: tungsten_concentrate
+    qty: 0.005
+    unit: kg
+  - item_id: tailings
+    qty: 0.995
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: tungsten_density_separation_v0
+    inputs:
+      - item_id: nife_alloy_byproduct
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: tungsten_concentrate
+        qty: 0.005
+        unit: kg
+      - item_id: tailings
+        qty: 0.995
+        unit: kg
+      - item_id: water
+        qty: 2.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Density separation of tungsten from NiFe meteorite residue"

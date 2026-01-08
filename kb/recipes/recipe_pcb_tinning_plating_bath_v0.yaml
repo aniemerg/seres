@@ -1,22 +1,59 @@
 id: recipe_pcb_tinning_plating_bath_v0
 target_item_id: pcb_tinning_plating_bath
 variant_id: v0
+inputs:
+  - item_id: plastic_pellets
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: pcb_tinning_plating_bath
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: plastic_extrusion_v0
+    inputs:
+      - item_id: plastic_pellets
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: extruded_plastic_profile
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.3
     machine_hours: 0.8
     notes: Form tank body/panels from plastic sheet or extrusion.
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: extruded_plastic_profile
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.8
+        unit: kg
     est_time_hr: 0.4
     labor_hours: 0.3
     machine_hours: 0.4
     notes: Cut/drill ports, brackets, and fixture points.
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.8
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_tinning_plating_bath
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.4
     labor_hours: 0.4
     machine_hours: 0.2
     notes: Assemble bath, plumbing, and basic agitation/heater mounts.
 assumptions: Uses plastic stock plus imported heaters/pumps; chemistry handled separately. Sized for bench-scale PCB tinning/plating.
 notes: Simple fabrication route for a tinning/plating bath; refine with materials and safety controls later.
-

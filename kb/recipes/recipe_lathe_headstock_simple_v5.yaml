@@ -3,9 +3,23 @@ kind: recipe
 # Ensure compatibility with various schema variants
 # Provide explicit target and produced items for robustness
 target_item_id: lathe_headstock_simple
-produces_id: lathe_headstock_simple
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v5
+inputs:
+  - item_id: lathe_headstock_blank
+    qty: 60.0
+    unit: kg
+outputs:
+  - item_id: lathe_headstock_simple
+    qty: 60.0
+    unit: kg
 steps:
 - process_id: lathe_headstock_turn_v0
+  inputs:
+    - item_id: lathe_headstock_blank
+      qty: 60.0
+      unit: kg
+  outputs:
+    - item_id: lathe_headstock_simple
+      qty: 60.0
+      unit: kg
 notes: "Local repeated recipe: turning lathe_headstock_blank into lathe_headstock_simple (v5)"

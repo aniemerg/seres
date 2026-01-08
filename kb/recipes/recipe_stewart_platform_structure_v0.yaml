@@ -1,20 +1,61 @@
 id: recipe_stewart_platform_structure_v0
 target_item_id: stewart_platform_structure
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 85.0
+    unit: kg
+    notes: "Thick steel plates for base and platform"
+outputs:
+  - item_id: stewart_platform_structure
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 83.3
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Cut thick steel plates for base and platform"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 83.3
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 82.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Precision machine mounting holes and spherical bearing seats for actuator connections"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 82.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 81.5
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Weld mounting brackets and reinforcement gussets to plates"
   - process_id: surface_finishing_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 81.5
+        unit: kg
+    outputs:
+      - item_id: stewart_platform_structure
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Deburr, clean, and paint for corrosion protection"

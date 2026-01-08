@@ -1,7 +1,24 @@
 id: recipe_machined_metal_block_v0
 kind: recipe
+name: Recipe for machined_metal_block_v0
 target_item_id: machined_metal_block_v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: machined_metal_block_v0
+    qty: 1.8
+    unit: kg
 steps:
   - process_id: machining_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: machined_metal_block_v0
+        qty: 1.8
+        unit: kg
 assumptions: "Uses basic machining path from raw_metal_block to machined_metal_block_v0 (placeholder values)."
 notes: "Simple recipe to manufacture machined_metal_block_v0 using machining_basic_v0."

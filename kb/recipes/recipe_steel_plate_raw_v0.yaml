@@ -6,9 +6,24 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: steel_plate_raw
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: steel_plate_raw
+    qty: 1.0
+    unit: kg
 steps:
-- process_id: heating_basic_v0
-- process_id: rolling_basic_v0
-- process_id: plate_to_steel_plate_raw_v0
+  - process_id: rolling_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_plate_raw
+        qty: 1.0
+        unit: kg
+    notes: "Hot roll steel ingot to produce raw steel plate; includes heating, rolling, and final sizing"
 assumptions: "Chain from steel ingot to raw steel plate via hot rolling and final sizing; final product is raw stock for fabrication."
 notes: "Local production recipe to replace import stub for steel_plate_raw."

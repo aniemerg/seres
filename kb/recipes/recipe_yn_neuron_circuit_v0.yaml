@@ -1,6 +1,23 @@
 id: recipe_yn_neuron_circuit_v0
 kind: recipe
 target_item_id: yn_neuron_circuit_v0
+variant_id: v0
+inputs:
+  - item_id: yn_neuron_bias_circuit_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: yn_neuron_circuit_v0
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: yn_neuron_circuit_assembly_v0
+  - process_id: yn_neuron_circuit_assembly_v0
+    inputs:
+      - item_id: yn_neuron_bias_circuit_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: yn_neuron_circuit_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe for neuron circuit module assembly. Will be refined with full BOM/steps later."

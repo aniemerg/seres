@@ -1,8 +1,73 @@
 id: recipe_machine_casting_furnace_v0
+kind: recipe
 target_item_id: casting_furnace_v0
 variant_id: v0
+inputs:
+  - item_id: casting_furnace_shell
+    qty: 1.0
+    unit: unit
+  - item_id: burner_or_heater_casting
+    qty: 1.0
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 1.0
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+  - item_id: temperature_sensing
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: casting_furnace_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: casting_furnace_shell
+        qty: 1.0
+        unit: unit
+      - item_id: burner_or_heater_casting
+        qty: 1.0
+        unit: unit
+      - item_id: insulation_pack_high_temp
+        qty: 1.0
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1.0
+        unit: unit
+      - item_id: temperature_sensing
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: casting_furnace_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
 assumptions: Assemble per BOM; parts produced via part-level routes.

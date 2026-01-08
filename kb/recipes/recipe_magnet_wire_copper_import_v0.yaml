@@ -6,7 +6,23 @@ produces_qty: 1.0
 produces_unit: kg
 target_item_id: magnet_wire_copper
 variant_id: v0
+inputs:
+  - item_id: copper_rod_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: magnet_wire_copper
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: copper_wire_drawing_and_insulation_v0
+  inputs:
+    - item_id: copper_rod_ingot
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: magnet_wire_copper
+      qty: 1.0
+      unit: kg
 notes: "Local production path replacing import placeholder; v0"
 assumptions: "Feedstock copper_rod_ingot assumed available; this step draws copper and insulation."

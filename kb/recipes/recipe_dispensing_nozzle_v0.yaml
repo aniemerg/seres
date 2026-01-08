@@ -2,8 +2,31 @@ id: recipe_dispensing_nozzle_v0
 kind: recipe
 target_item_id: dispensing_nozzle
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 0.6
+    unit: kg
+outputs:
+  - item_id: dispensing_nozzle
+    qty: 1
+    unit: unit
+byproducts:
+  - item_id: metal_scrap
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 0.6
+        unit: kg
+    outputs:
+      - item_id: dispensing_nozzle
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
     notes: "Machine nozzle body and precision orifice"
 notes: |
   Recipe for precision dispensing nozzle.

@@ -4,8 +4,46 @@ target_item_id: oxygen_sensor_zirconia
 produces_id: oxygen_sensor_zirconia
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: ceramic_powder_mixture
+    qty: 0.3
+    unit: kg
+  - item_id: green_ceramic_part
+    qty: 0.3
+    unit: kg
+  - item_id: dried_material
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: oxygen_sensor_zirconia
+    qty: 0.25
+    unit: kg
 steps:
   - process_id: ceramic_forming_basic_v0
+    inputs:
+      - item_id: ceramic_powder_mixture
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: green_ceramic_parts
+        qty: 0.3
+        unit: kg
   - process_id: drying_basic_v0
+    inputs:
+      - item_id: green_ceramic_parts
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: green_ceramic_part
+        qty: 0.3
+        unit: kg
   - process_id: ceramic_firing_high_temp_v0
+    inputs:
+      - item_id: green_ceramic_part
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: oxygen_sensor_zirconia
+        qty: 0.25
+        unit: kg
 notes: "Alias production path for zirconia oxygen sensor element; maps to v0 ceramic route."

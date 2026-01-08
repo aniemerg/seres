@@ -2,29 +2,62 @@ id: recipe_refractory_lining_set_v0
 kind: recipe
 target_item_id: refractory_lining_set
 variant_id: v0
+inputs:
+  - item_id: alumina_powder
+    qty: 110.0
+    unit: kg
+  - item_id: ceramic_binder
+    qty: 20.0
+    unit: kg
+  - item_id: wet_material
+    qty: 125.0
+    unit: kg
+    notes: "Intermediate for drying step"
+  - item_id: dried_material
+    qty: 122.0
+    unit: kg
+    notes: "Intermediate for firing step"
+outputs:
+  - item_id: refractory_lining_set
+    qty: 120.0
+    unit: kg
 steps:
-  - process_id: refractory_casting_v0
+  - process_id: chemical_mixing_basic_v0
     inputs:
       - item_id: alumina_powder
-        qty: 10.0
+        qty: 110.0
         unit: kg
-        notes: "Alumina base for high-temperature refractory"
       - item_id: ceramic_binder
-        qty: 2.0
+        qty: 20.0
         unit: kg
-        notes: "Binder for castable refractory"
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Cast or trowel refractory cement into forms for lining bricks and shapes"
-  - process_id: drying_and_curing_v0
+    outputs:
+      - item_id: wet_material
+        qty: 125.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Mix alumina powder and ceramic binder into castable refractory"
+  - process_id: drying_basic_v0
+    inputs:
+      - item_id: wet_material
+        qty: 125.0
+        unit: kg
+    outputs:
+      - item_id: dried_material
+        qty: 122.0
+        unit: kg
     est_time_hr: 24.0
     machine_hours: 24.0
     notes: "Dry and cure refractory lining pieces at controlled temperature"
   - process_id: firing_v0
+    inputs:
+      - item_id: dried_material
+        qty: 122.0
+        unit: kg
     outputs:
       - item_id: refractory_lining_set
-        qty: 1.0
-        unit: set
+        qty: 120.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Fire refractory pieces to final hardness and temperature resistance"

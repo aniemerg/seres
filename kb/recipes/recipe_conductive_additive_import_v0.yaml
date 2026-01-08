@@ -6,8 +6,20 @@ target_item_id: conductive_additive
 produces_id: conductive_additive
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: conductive_additive
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: conductive_additive_production_v0
+    inputs:
+      - item_id: carbon_reductant
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
 assumptions: Local carbon-based production path; this path replaces the previous import stub as data matures.
 notes: Replaced import placeholder with a real production process for conductive additive.

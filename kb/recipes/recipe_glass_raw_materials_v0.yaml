@@ -1,13 +1,51 @@
 id: recipe_glass_raw_materials_v0
 target_item_id: glass_raw_materials
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 1.0
+    unit: kg
+  - item_id: mineral_ore_sulfide
+    qty: 1.0
+    unit: kg
+  - item_id: silica_purified
+    qty: 0.7
+    unit: kg
+  - item_id: sodium_carbonate
+    qty: 0.2
+    unit: kg
+  - item_id: calcium_carbonate
+    qty: 0.1
+    unit: kg
+  - item_id: finished_part
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: mineral_processing_basic_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: concentrated_mineral
+        qty: 0.3
+        unit: kg
+      - item_id: tailings
+        qty: 0.7
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Process anorthite ore to concentrate silica and calcium minerals"
   - process_id: crushing_and_grinding_v0
+    inputs:
+      - item_id: mineral_ore_sulfide
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: crushed_ore
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 0.8
@@ -31,6 +69,14 @@ steps:
         unit: kg
     notes: "Mix glass-forming oxides in desired proportions for glass production"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: glass_raw_materials
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Verify composition and particle size"

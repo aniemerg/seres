@@ -1,0 +1,38 @@
+id: recipe_pogo_pin_set_v0
+kind: recipe
+target_item_id: pogo_pin_set
+variant_id: v0
+inputs:
+  - item_id: connector_pin_header
+    qty: 1.0
+    unit: unit
+  - item_id: spring_and_dampener_set
+    qty: 0.1
+    unit: unit
+  - item_id: metal_wire_feed
+    qty: 0.03
+    unit: kg
+outputs:
+  - item_id: pogo_pin_set
+    qty: 0.05
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: connector_pin_header
+        qty: 1.0
+        unit: unit
+      - item_id: spring_and_dampener_set
+        qty: 0.1
+        unit: unit
+      - item_id: metal_wire_feed
+        qty: 0.03
+        unit: kg
+    outputs:
+      - item_id: pogo_pin_set
+        qty: 0.05
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Assemble spring-loaded pogo pins from contacts, springs, and wire stock."
+notes: "Placeholder assembly route for pogo pin sets."

@@ -2,7 +2,35 @@ id: recipe_iron_sulfate_solution_v0
 kind: recipe
 target_item_id: iron_sulfate_solution
 variant_id: leach_v0
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+  - item_id: sulfuric_acid_concentrated
+    qty: 1.29
+    unit: kg
+outputs:
+  - item_id: iron_sulfate_solution
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: ilmenite_sulfuric_acid_route_v0
+    inputs:
+      - item_id: ilmenite_concentrate
+        qty: 1.0
+        unit: kg
+      - item_id: sulfuric_acid_concentrated
+        qty: 1.29
+        unit: kg
+    outputs:
+      - item_id: iron_sulfate_solution
+        qty: 1.0
+        unit: kg
+      - item_id: titanyl_sulfate_solution
+        qty: 1.05
+        unit: kg
+      - item_id: water
+        qty: 0.24
+        unit: kg
     notes: "Shared leaching step yields iron_sulfate_solution and titanyl_sulfate_solution."
 notes: "Ilmenite sulfuric acid leaching output for iron_sulfate_solution."

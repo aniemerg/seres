@@ -1,21 +1,73 @@
 id: recipe_cooling_loop_basic_v0
 target_item_id: cooling_loop_basic
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 57.0
+    unit: kg
+  - item_id: circulation_pump_coolant
+    qty: 1
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cooling_loop_basic
+    qty: 1
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_feedstock
+        qty: 57.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 54.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Cast tubing sections and fittings
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 54.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 52.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Machine fitting interfaces
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 52.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 52.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: Braze tube joints and fittings
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 52.0
+        unit: kg
+      - item_id: circulation_pump_coolant
+        qty: 1
+        unit: unit
+      - item_id: fittings_and_valves
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cooling_loop_basic
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly with pump and valves

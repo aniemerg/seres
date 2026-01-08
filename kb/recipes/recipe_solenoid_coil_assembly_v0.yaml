@@ -2,11 +2,55 @@ id: recipe_solenoid_coil_assembly_v0
 kind: recipe
 target_item_id: solenoid_coil_assembly
 variant_id: v0
+produces_qty: 0.15
+produces_unit: kg
+inputs:
+  - item_id: copper_wire_magnet
+    qty: 0.04
+    unit: kg
+  - item_id: iron_core_laminated
+    qty: 0.01
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.02
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: solenoid_coil_assembly
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: wire_winding_process_v0
     notes: "Wind copper wire on bobbin with ferromagnetic core"
+    inputs:
+      - item_id: copper_wire_magnet
+        qty: 0.04
+        unit: kg
+      - item_id: iron_core_laminated
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: relay_coil_assembly
+        qty: 0.05
+        unit: kg
   - process_id: assembly_basic_v0
     notes: "Attach terminals and encapsulate coil"
+    inputs:
+      - item_id: relay_coil_assembly
+        qty: 0.05
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.02
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: solenoid_coil_assembly
+        qty: 0.15
+        unit: kg
 notes: |
   Manufacturing solenoid coil assembly from copper wire and core.
   Process: Wind wire, insert core, attach leads, test continuity.

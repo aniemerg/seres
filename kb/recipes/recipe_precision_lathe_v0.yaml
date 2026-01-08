@@ -1,18 +1,93 @@
 id: recipe_precision_lathe_v0
 target_item_id: precision_lathe
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 200.0
+    unit: kg
+    notes: "Stock for casting/fabricating carriage and cross-slide assemblies"
+  - item_id: lathe_bed_and_headstock
+    qty: 1
+    unit: unit
+  - item_id: lathe_spindle_and_bearings
+    qty: 1
+    unit: unit
+  - item_id: lathe_leadscrew_and_feed_system
+    qty: 1
+    unit: unit
+  - item_id: lathe_motor_and_drive
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: coolant_system_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: precision_lathe
+    qty: 1
+    unit: unit
 steps:
   - process_id: casting_or_fabrication_machine_frame_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: lathe_carriage_and_cross_slide
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     machine_hours: 6.0
     labor_hours: 4.0
     notes: "Cast or fabricate lathe bed/headstock and rough machine ways and mounting pads."
   - process_id: precision_grinding_and_scraping_v0
+    inputs:
+      - item_id: lathe_carriage_and_cross_slide
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: lathe_carriage_and_cross_slide
+        qty: 1
+        unit: unit
     est_time_hr: 10.0
     machine_hours: 8.0
     labor_hours: 4.0
     notes: "Precision grind and scrape bed ways, headstock alignment surfaces, and carriage ways."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: lathe_bed_and_headstock
+        qty: 1
+        unit: unit
+      - item_id: lathe_carriage_and_cross_slide
+        qty: 1
+        unit: unit
+      - item_id: lathe_spindle_and_bearings
+        qty: 1
+        unit: unit
+      - item_id: lathe_leadscrew_and_feed_system
+        qty: 1
+        unit: unit
+      - item_id: lathe_motor_and_drive
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: coolant_system_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: precision_lathe
+        qty: 1
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble spindle, carriage/cross-slide, leadscrew/feed system, motor/drive, controls, and coolant."

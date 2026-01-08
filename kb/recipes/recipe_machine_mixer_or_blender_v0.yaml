@@ -3,14 +3,118 @@ kind: recipe
 name: Recipe for mixer or blender v0
 target_item_id: mixer_or_blender
 variant_id: v0
+inputs:
+  - item_id: mixer_drum_small
+    qty: 1
+    unit: unit
+  - item_id: mixer_agitator_shaft_and_paddles
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: gearbox_reducer_small
+    qty: 1
+    unit: unit
+  - item_id: support_frame_small
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: mixer_or_blender
+    qty: 1
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: mixer_drum_small
+        qty: 1
+        unit: unit
+      - item_id: mixer_agitator_shaft_and_paddles
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 1
+        unit: unit
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: mixer_drum_small
+        qty: 1
+        unit: unit
+      - item_id: mixer_agitator_shaft_and_paddles
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 1
+        unit: unit
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: mixer_drum_small
+        qty: 1
+        unit: unit
+      - item_id: mixer_agitator_shaft_and_paddles
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 1
+        unit: unit
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: mixer_or_blender
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5

@@ -3,31 +3,57 @@ kind: recipe
 target_item_id: kiln_basic
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 200.0
+    unit: kg
+  - item_id: refractory_brick_set
+    qty: 300.0
+    unit: kg
+  - item_id: heating_element_set_basic
+    qty: 1
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 50.0
+    unit: kg
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: kiln_basic
+    qty: 1
+    unit: unit
 steps:
-  - process_id: steel_shell_thick_forming_v0
-    est_time_hr: 6.0
-    machine_hours: 4.0
-    labor_hours: 2.0
-    notes: "Form thick steel shell for basic kiln"
-  - process_id: refractory_lining_installation_v0
-    est_time_hr: 12.0
-    machine_hours: 8.0
-    labor_hours: 4.0
-    notes: "Install refractory brick lining"
-  - process_id: heating_element_installation_v0
-    est_time_hr: 3.0
-    machine_hours: 1.0
-    labor_hours: 2.0
-    notes: "Install heating element set_basic"
   - process_id: assembly_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 2.0
-    labor_hours: 2.0
-    notes: "Assemble insulation pack_high_temp, temperature_controller_basic, and power_conditioning_module"
-  - process_id: calibration_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 1.0
-    labor_hours: 1.0
-    notes: "Calibrate temperature controller and sensors"
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 200.0
+        unit: kg
+      - item_id: refractory_brick_set
+        qty: 300.0
+        unit: kg
+      - item_id: heating_element_set_basic
+        qty: 1
+        unit: unit
+      - item_id: insulation_pack_high_temp
+        qty: 50.0
+        unit: kg
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: kiln_basic
+        qty: 1
+        unit: unit
+    est_time_hr: 27.0
+    machine_hours: 16.0
+    labor_hours: 11.0
+    notes: "Form steel shell, install refractory lining, install heating elements, assemble insulation and controls, calibrate temperature controller"
 assumptions: "Replaced placeholder import path with concrete kiln construction steps."
 notes: "Concrete production path to replace import placeholder for kiln_basic."

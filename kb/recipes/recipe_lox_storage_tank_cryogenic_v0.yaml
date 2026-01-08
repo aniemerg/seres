@@ -6,6 +6,21 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: lox_storage_tank_cryogenic_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 150.0
+    unit: kg
+  - item_id: tank_shell_spun
+    qty: 1.0
+    unit: unit
+    notes: "Intermediate for assembly step"
+  - item_id: insulation_pack_high_temp
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: lox_storage_tank_cryogenic_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_spinning_process_v0
     inputs:

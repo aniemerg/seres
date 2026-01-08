@@ -1,11 +1,22 @@
 id: recipe_etching_waste_solution_v1
 kind: recipe
 name: Recipe for etching waste solution (variant 1)
-produces_id: etching_waste_solution
-produces_qty: 0.15
-produces_unit: kg
+target_item_id: etching_waste_solution
+variant_id: v1
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: etching_chemicals
+    qty: 0.15
+    unit: kg
+outputs:
+  - item_id: etching_waste_solution
+    qty: 0.15
+    unit: kg
 steps:
 - process_id: copper_etching_process_v0
+  est_time_hr: 0.5
+  labor_hours: 1.0
   notes: Waste etchant byproduct from copper etching process
 notes: 'Variant 1: Generates the same etching_waste_solution byproduct as the v0 recipe.'
-target_item_id: etching_waste_solution

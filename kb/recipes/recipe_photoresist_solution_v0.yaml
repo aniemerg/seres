@@ -1,6 +1,20 @@
 id: recipe_photoresist_solution_v0
 kind: recipe
 target_item_id: photoresist_solution_v0
+inputs:
+  - item_id: methanol_liquid
+    qty: 1.0
+    unit: kg
+  - item_id: epoxy_resin_base
+    qty: 0.2
+    unit: kg
+  - item_id: solvent_generic
+    qty: 0.8
+    unit: kg
+outputs:
+  - item_id: photoresist_solution_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: chemical_synthesis_basic_v0
     est_time_hr: 1.0
@@ -29,7 +43,3 @@ steps:
         qty: 1.0
         unit: kg
     notes: "Mix precursor with solvent to form final photoresist solution"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.2
-    labor_hours: 0.2
-    notes: "QA of photoresist solution"

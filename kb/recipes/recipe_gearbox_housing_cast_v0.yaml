@@ -1,18 +1,35 @@
 id: recipe_gearbox_housing_cast_v0
+kind: recipe
+name: Recipe for gearbox housing cast
 target_item_id: gearbox_housing_cast
 variant_id: v0
+inputs:
+  - item_id: iron_pig_or_ingot
+    qty: 75.0
+    unit: kg
+outputs:
+  - item_id: gearbox_housing_cast
+    qty: 70.0
+    unit: kg
+  - item_id: metal_scrap
+    qty: 5.0
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 2.5
-    machine_hours: 2.5
-    notes: Cast gearbox housing
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Machine bearing bores and shaft seals
   - process_id: assembly_basic_v0
-    est_time_hr: 0.5
+    inputs:
+      - item_id: iron_pig_or_ingot
+        qty: 75.0
+        unit: kg
+    outputs:
+      - item_id: gearbox_housing_cast
+        qty: 70.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 5.0
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 5.5
     labor_hours: 0.5
-    notes: Final inspection and preparation
+    notes: "Cast gearbox housing from cast iron, machine bearing bores and shaft seals to precise tolerances, final inspection and preparation for assembly"
 assumptions: "70 kg cast gearbox housing for medium gearbox."
 notes: "Three-step recipe for cast gearbox housing."

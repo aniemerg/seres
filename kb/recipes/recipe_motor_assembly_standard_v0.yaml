@@ -2,7 +2,19 @@ id: recipe_motor_assembly_standard_v0
 kind: recipe
 name: Motor assembly standard from steel stock (v0)
 target_item_id: motor_assembly_standard_v0
+inputs:
+  - item_id: steel_stock
+    qty: 18.0
+    unit: kg
 steps:
   - process_id: motor_assembly_standard_fabrication_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: motor_assembly_standard_v0
+        qty: 18.0
+        unit: kg
 assumptions: "Seed recipe to manufacture motor_assembly_standard_v0 from steel_stock as placeholder."
 notes: "Auto-generated to resolve no_recipe gap for motor_assembly_standard_v0."

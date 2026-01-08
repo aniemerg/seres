@@ -3,6 +3,17 @@ kind: recipe
 name: Recipe for switching voltage regulator module
 # Updated to standard target_item_id schema
 target_item_id: voltage_regulator_switching_v0
+inputs:
+  - item_id: pcb_bare_board
+    qty: 0.3
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: voltage_regulator_switching_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electrical_assembly_basic_v0
     inputs:

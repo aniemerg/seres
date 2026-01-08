@@ -1,10 +1,29 @@
 id: recipe_hcl_recycling_from_salt_waste_v0
 kind: recipe
 name: Hydrochloric acid production via salt waste recycling
-produces_id: hydrochloric_acid
-produces_qty: 1.8
-produces_unit: kg
+inputs:
+  - item_id: salt_waste
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: hydrochloric_acid
+    qty: 1.8
+    unit: kg
+  - item_id: sodium_chloride
+    qty: 0.2
+    unit: kg
 steps:
 - process_id: chloride_recycling_to_hcl_v0
+  inputs:
+    - item_id: salt_waste
+      qty: 2.0
+      unit: kg
+  outputs:
+    - item_id: hydrochloric_acid
+      qty: 1.8
+      unit: kg
+    - item_id: sodium_chloride
+      qty: 0.2
+      unit: kg
 notes: Recycles salt waste to hydrochloric acid and recovered salt.
 target_item_id: hydrochloric_acid

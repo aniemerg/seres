@@ -1,22 +1,59 @@
 id: recipe_motor_electric_large_v0
+kind: recipe
+name: Recipe for motor electric large
 target_item_id: motor_electric_large
 variant_id: v0
+inputs:
+  - item_id: aluminum_ingot
+    qty: 80.0
+    unit: kg
+  - item_id: copper_wire_magnet
+    qty: 20.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 8.0
+    unit: kg
+  - item_id: cooling_fan_assembly
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_heavy
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: motor_electric_large
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 8.0
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    notes: "Cast large motor housing and end bells from aluminum or cast iron"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 10.0
-    machine_hours: 10.0
-    notes: "Machine housing bore, bearing journals, mounting faces, cooling fins"
-  - process_id: coil_winding_motor_v0
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Wind large stator coils and rotor windings with heavy copper wire"
   - process_id: assembly_basic_v0
-    est_time_hr: 6.0
+    inputs:
+      - item_id: aluminum_ingot
+        qty: 80.0
+        unit: kg
+      - item_id: copper_wire_magnet
+        qty: 20.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 8.0
+        unit: kg
+      - item_id: cooling_fan_assembly
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_heavy
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: motor_electric_large
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 8.0
+        unit: kg
+    est_time_hr: 34.0
+    machine_hours: 28.0
     labor_hours: 6.0
-    notes: "Assemble stator, rotor, large bearings, end bells, fan, test motor"
+    notes: "Cast large motor housing and end bells from aluminum, machine housing bore with bearing journals and mounting faces, machine cooling fins, wind large stator coils and rotor windings with heavy copper wire, assemble stator and rotor with large bearings, install end bells and cooling fan, wire and test motor"
 assumptions: Large AC induction motor design (20-100 kW). Cast housing, machined, with wound copper coils. Includes large bearings, cooling fan. Mass ~150 kg.
 notes: Large industrial electric motor for heavy machinery and processing equipment. Three-phase AC with integrated cooling.

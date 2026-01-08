@@ -1,10 +1,74 @@
 id: recipe_nife_meteorite_magnetic_detection_v0
 kind: recipe
 target_item_id: nife_meteorite_magnetic_detection_v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 15.0
+    unit: kg
+  - item_id: encoder_magnetic_v0
+    qty: 1.0
+    unit: unit
+  - item_id: magnetic_read_write_head
+    qty: 1.0
+    unit: unit
+  - item_id: magnetic_core_memory_tile
+    qty: 1.0
+    unit: unit
+  - item_id: permalloy_high_permeability_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: nife_meteorite_magnetic_detection_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: frame_fabrication_from_raw_metal_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: formation_rack_frame
+        qty: 15.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: formation_rack_frame
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
+      - item_id: encoder_magnetic_v0
+        qty: 1.0
+        unit: unit
+      - item_id: magnetic_read_write_head
+        qty: 1.0
+        unit: unit
+      - item_id: magnetic_core_memory_tile
+        qty: 1.0
+        unit: unit
+      - item_id: permalloy_high_permeability_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: nife_meteorite_magnetic_detection_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to bootstrap local manufacturing path for nife_meteorite_magnetic_detection_v0; uses generic machine fabrication steps."
 assumptions: "Basic fabrication path; downstream BOM details pending"

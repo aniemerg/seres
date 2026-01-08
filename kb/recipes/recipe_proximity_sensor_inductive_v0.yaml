@@ -1,10 +1,28 @@
 id: recipe_proximity_sensor_inductive_v0
 kind: recipe
+name: Recipe for inductive proximity sensor
 target_item_id: proximity_sensor_inductive
-produces_id: proximity_sensor_inductive
-produces_qty: 1
-produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: copper_wire_magnet
+    qty: 0.05
+    unit: kg
+  - item_id: pcb_populated
+    qty: 0.02
+    unit: kg
+  - item_id: aluminum_alloy_ingot
+    qty: 0.15
+    unit: kg
+  - item_id: potting_compound
+    qty: 0.03
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.03
+    unit: kg
+outputs:
+  - item_id: proximity_sensor_inductive
+    qty: 1
+    unit: unit
 steps:
   - process_id: electronics_assembly_v0
     inputs:

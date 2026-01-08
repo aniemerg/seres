@@ -3,14 +3,64 @@ target_item_id: resource_3d_printer_basic_v0
 variant_id: v0
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: printer_frame_generic
+      qty: 1
+      unit: unit
+    - item_id: gantry_axes_set
+      qty: 1
+      unit: unit
+    - item_id: extruder_head_basic
+      qty: 1
+      unit: unit
+    - item_id: drive_motor_medium
+      qty: 3
+      unit: unit
+    - item_id: gearbox_reducer_medium
+      qty: 3
+      unit: unit
+    - item_id: bearing_set_heavy
+      qty: 3
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 20.0
     labor_hours: 20.0
     notes: "Assemble 3D printer frame, motion system, and extruder from BOM components"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    - item_id: printer_control_module
+      qty: 1
+      unit: unit
+    - item_id: power_conditioning_module
+      qty: 1
+      unit: unit
+    - item_id: sensor_suite_general
+      qty: 1
+      unit: unit
+    - item_id: control_compute_module_imported
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: wired_electrical_system
+      qty: 1
+      unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install control electronics, stepper motors, sensors, and wiring"
   - process_id: calibration_and_test_basic_v0
+    inputs:
+    - item_id: wired_electrical_system
+      qty: 1
+      unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Calibrate motion system, extruder, and bed leveling. Test print quality."
@@ -24,3 +74,6 @@ notes: |
   Created as stub during ADR 003 migration.
   Total assembly time ~34 hours.
   Refine BOM and production steps as design matures.
+
+  Sequential flow: mechanical assembly → electronics integration → calibration/test.
+  Step 0 uses mechanical components, step 1 adds electronics to assembled frame, step 2 tests final unit.

@@ -1,8 +1,33 @@
 id: recipe_raw_metal_block_v0
 kind: recipe
 target_item_id: raw_metal_block
+variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 3.2
+    unit: kg
+outputs:
+  - item_id: raw_metal_block
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 3.2
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 3.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: raw_metal_block
+        qty: 3.0
+        unit: kg
 assumptions: "Convert to dictionary-form steps for strict schema compatibility"
 notes: "Placeholder recipe to manufacture a raw metal block from casting and finishing steps."

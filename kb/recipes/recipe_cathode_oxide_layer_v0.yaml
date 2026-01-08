@@ -1,6 +1,28 @@
 id: recipe_cathode_oxide_layer_v0
 kind: recipe
 target_item_id: cathode_oxide_layer_v0
+inputs:
+  - item_id: nickel_sheet_rolling_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cathode_oxide_layer_v0
+    qty: 1.0
+    unit: kg
+  - item_id: nickel_oxide_waste_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: cathode_oxide_coating_process_v0
+    inputs:
+      - item_id: nickel_sheet_rolling_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cathode_oxide_layer_v0
+        qty: 1.0
+        unit: kg
+      - item_id: nickel_oxide_waste_v0
+        qty: 0.1
+        unit: kg
 notes: "KB gap resolution: provides a manufacturing path for cathode_oxide_layer_v0 using the cathode_oxide_coating_process_v0."

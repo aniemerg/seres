@@ -1,8 +1,21 @@
 id: recipe_traction_control_software_v0
+kind: recipe
 target_item_id: traction_control_software
 variant_id: v0
+inputs:
+  - item_id: computing_time_development
+    qty: 80.0
+    unit: hr
+outputs:
+  - item_id: traction_control_software
+    qty: 1.0
+    unit: each
 steps:
   - process_id: software_development_programming_v0
+    inputs:
+      - item_id: computing_time_development
+        qty: 80.0
+        unit: hr
     outputs:
       - item_id: traction_control_software
         qty: 1.0

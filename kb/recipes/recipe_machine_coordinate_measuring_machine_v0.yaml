@@ -3,38 +3,151 @@ kind: recipe
 
 target_item_id: coordinate_measuring_machine_v0
 variant_id: v0
+inputs:
+  - item_id: granite_surface_plate_large
+    qty: 1
+    unit: unit
+  - item_id: linear_stage_xyz_precision
+    qty: 1
+    unit: unit
+  - item_id: touch_probe_assembly
+    qty: 1
+    unit: unit
+  - item_id: linear_encoder_set
+    qty: 3
+    unit: unit
+  - item_id: stepper_motor_precision
+    qty: 3
+    unit: unit
+  - item_id: computer_workstation
+    qty: 1
+    unit: unit
+  - item_id: air_bearing_assembly
+    qty: 3
+    unit: unit
+  - item_id: calibration_artifacts
+    qty: 1
+    unit: unit
+  - item_id: machine_frame_small
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: granite_surface_plate_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: granite_surface_plate_large
+        qty: 1
+        unit: unit
     est_time_hr: 40.0
     machine_hours: 40.0
     labor_hours: 20.0
     notes: "Grind and lap granite base to extreme flatness (±0.001 mm)"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: linear_stage_xyz_precision
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: linear_stage_xyz_precision
+        qty: 1
+        unit: unit
     est_time_hr: 30.0
     machine_hours: 30.0
     labor_hours: 15.0
     notes: "Machine linear motion stages, guide rails, and mounting components to tight tolerances"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: granite_surface_plate_large
+        qty: 1
+        unit: unit
+      - item_id: linear_stage_xyz_precision
+        qty: 1
+        unit: unit
+      - item_id: touch_probe_assembly
+        qty: 1
+        unit: unit
+      - item_id: linear_encoder_set
+        qty: 3
+        unit: unit
+      - item_id: stepper_motor_precision
+        qty: 3
+        unit: unit
+      - item_id: computer_workstation
+        qty: 1
+        unit: unit
+      - item_id: air_bearing_assembly
+        qty: 3
+        unit: unit
+      - item_id: calibration_artifacts
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 20.0
     labor_hours: 20.0
     notes: "Assemble X-Y-Z motion stages on granite base, install linear encoders and bearings"
   - process_id: precision_alignment_and_leveling_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: machine_frame_small
+        qty: 50.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Align and level all axes to extreme accuracy using laser interferometer"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install touch probe, motion controllers, and measurement computer"
   - process_id: calibration_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Calibrate CMM using precision reference standards"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 8.0
     labor_hours: 6.0
     notes: "Test measurement accuracy and repeatability"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: coordinate_measuring_machine_v0
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify CMM performance meets ±0.005 mm tolerance specification"

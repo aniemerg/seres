@@ -6,6 +6,20 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: neural_analog_tile
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.05
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: neural_analog_tile
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: neural_analog_tile_generation_v0
     inputs:

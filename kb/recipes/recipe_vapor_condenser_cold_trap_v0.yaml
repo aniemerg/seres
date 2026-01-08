@@ -25,15 +25,48 @@ outputs:
     unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: steel_plate_or_sheet
+        qty: 1.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Machine housing and baffle components
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 2.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 1.5
+        unit: kg
+      - item_id: thermal_insulation_high_temp
+        qty: 0.3
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 4.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: Weld condenser coils and assemble cold trap
   - process_id: pressure_test_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: vapor_condenser_cold_trap
+        qty: 4.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 1.0

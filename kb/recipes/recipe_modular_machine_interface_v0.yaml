@@ -6,6 +6,17 @@ produces_id: modular_machine_interface_v0
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 2.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: modular_machine_interface_v0
+    qty: 1
+    unit: unit
 steps:
 - process_id: machining_finish_basic_v0
   inputs:
@@ -13,13 +24,24 @@ steps:
       qty: 2.5
       unit: kg
   outputs:
-    - item_id: modular_machine_interface_v0
+    - item_id: machined_part_raw
       qty: 2.0
       unit: kg
   est_time_hr: 1.0
   machine_hours: 1.0
   notes: "Machine steel plate to create modular interface with mounting holes and alignment features"
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 2.0
+      unit: kg
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: modular_machine_interface_v0
+      qty: 1
+      unit: unit
   est_time_hr: 0.5
   machine_hours: 0.5
   notes: "Final assembly and inspection"

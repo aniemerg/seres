@@ -1,20 +1,66 @@
 id: recipe_induction_coil_or_heating_element_v0
 target_item_id: induction_coil_or_heating_element
 variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 3.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: induction_coil_or_heating_element
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 3.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Draw copper or nichrome wire to appropriate gauge"
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 3.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 3.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Wind coil on ceramic or air core former for induction or resistive heating"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install terminals, insulation, and mounting hardware"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: induction_coil_or_heating_element
+        qty: 3.0
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
     notes: "Test coil resistance, continuity, and insulation"

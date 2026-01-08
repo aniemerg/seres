@@ -2,8 +2,64 @@ id: recipe_neural_network_training_system_v0_v0
 kind: recipe
 name: Recipe for Neural Network Training System v0
 target_item_id: neural_network_training_system_v0
+variant_id: v0
+inputs:
+  - item_id: computer_workstation
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 4
+    unit: unit
+  - item_id: computer_core_imported
+    qty: 1
+    unit: unit
+  - item_id: control_components
+    qty: 1
+    unit: unit
+  - item_id: power_supply_dc_high_current
+    qty: 1
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1
+    unit: unit
+  - item_id: storage_enclosure
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: neural_network_training_system_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-  - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: computer_workstation
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 4
+        unit: unit
+      - item_id: computer_core_imported
+        qty: 1
+        unit: unit
+      - item_id: control_components
+        qty: 1
+        unit: unit
+      - item_id: power_supply_dc_high_current
+        qty: 1
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1
+        unit: unit
+      - item_id: storage_enclosure
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: neural_network_training_system_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 12.0
+    machine_hours: 2.0
+    labor_hours: 10.0
+    notes: "Install workstation in rack, install GPU accelerator cards, connect storage module, install network switch and cabling, connect high-capacity power supply, install cooling system, configure and test all components"
 assumptions: "Legacy step format updated to process_id dictionaries"
 notes: "Initial placeholder recipe to enable manufacturing modeling for neural_network_training_system_v0"

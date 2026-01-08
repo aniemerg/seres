@@ -6,6 +6,9 @@ inputs:
     qty: 2.0
     unit: kg
     notes: "Sheet metal for control panel enclosure"
+  - item_id: formed_sheet_metal_parts
+    qty: 2.9
+    unit: kg
   - item_id: switch_set_industrial
     qty: 0.3
     unit: kg
@@ -49,19 +52,43 @@ steps:
         qty: 0.4
         unit: kg
         notes: "Internal wiring and connectors"
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 2.9
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Fabricate steel enclosure box from sheet metal, drill mounting holes for switches and indicators"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 2.9
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 3.0
+        unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Install control switches (start, stop, emergency stop), indicator lights (power, run, fault), selector switches, mounting rails for internal components"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 3.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Wire switches and indicators to terminal blocks, install internal wiring for connections to external equipment, label all terminals"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 3.0
+        unit: kg
     outputs:
       - item_id: control_panel_basic_v0
         qty: 1

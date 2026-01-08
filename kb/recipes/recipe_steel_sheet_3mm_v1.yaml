@@ -2,6 +2,23 @@ id: recipe_steel_sheet_3mm_v1
 kind: recipe
 name: Recipe for steel sheet 3mm (v1)
 target_item_id: steel_sheet_3mm
+variant_id: v1
+inputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: steel_sheet_3mm
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sheet_making_from_ingot_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: steel_sheet_3mm
+        qty: 1.0
+        unit: kg
 notes: "Alternative canonical recipe using target_item_id format for steel_sheet_3mm."

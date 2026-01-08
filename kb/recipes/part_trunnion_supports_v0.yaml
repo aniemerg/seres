@@ -1,8 +1,37 @@
 id: recipe_part_trunnion_supports_v0
+kind: recipe
 target_item_id: trunnion_supports
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 3.0
+    unit: kg
+  - item_id: prepared_mold
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: trunnion_supports
+    qty: 2.5
+    unit: kg
+  - item_id: metal_scrap
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 3.0
+        unit: kg
+      - item_id: prepared_mold
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: trunnion_supports
+        qty: 2.5
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
 assumptions: Cast trunnion ends; machining for bearings not modeled yet.

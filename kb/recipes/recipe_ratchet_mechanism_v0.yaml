@@ -1,14 +1,38 @@
 id: recipe_ratchet_mechanism_v0
 target_item_id: ratchet_mechanism
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: ratchet_mechanism
+    qty: 0.8
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
     est_time_hr: 0.25
     labor_hours: 0.25
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: ratchet_mechanism
+        qty: 0.8
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
 assumptions: Cast small ratchet parts then machine; coarse times.

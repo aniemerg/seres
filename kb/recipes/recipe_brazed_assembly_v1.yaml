@@ -1,11 +1,37 @@
 id: recipe_brazed_assembly_v1
 kind: recipe
 name: Recipe for brazed assembly v1
-produces_id: brazed_assembly
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v1
+inputs:
+  - item_id: base_metal_parts
+    qty: 1.0
+    unit: kg
+  - item_id: brazing_alloy_generic
+    qty: 0.05
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: brazed_assembly
+    qty: 1.05
+    unit: kg
 steps:
 - process_id: brazing_process_v0
+  inputs:
+    - item_id: base_metal_parts
+      qty: 1.0
+      unit: kg
+    - item_id: brazing_alloy_generic
+      qty: 0.05
+      unit: kg
+    - item_id: flux_brazing
+      qty: 0.01
+      unit: kg
+  outputs:
+    - item_id: brazed_assembly
+      qty: 1.05
+      unit: kg
 notes: Standardized recipe; brazed_assembly produced by brazing_process_v0. Inputs come from base_metal_parts, brazing_alloy_generic,
   and flux_brazing as defined in brazing_process_v0.
 target_item_id: brazed_assembly

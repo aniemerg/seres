@@ -21,23 +21,69 @@ outputs:
     notes: Gates, risers, and casting cleanup waste
 steps:
   - process_id: melting_basic_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 550.0
+        unit: kg
+    outputs:
+      - item_id: molten_material_or_preform
+        qty: 550.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: Melt steel ingots in furnace
   - process_id: casting_basic_v0
+    inputs:
+      - item_id: molten_material_or_preform
+        qty: 550.0
+        unit: kg
+      - item_id: casting_mold_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: molten_material_or_preform
+        qty: 550.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: Pour molten steel into large sand mold
   - process_id: cooling_solidification_v0
+    inputs:
+      - item_id: molten_material_or_preform
+        qty: 550.0
+        unit: kg
+    outputs:
+      - item_id: solidified_casting
+        qty: 550.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: Allow casting to cool and solidify
   - process_id: shakeout_basic_v0
+    inputs:
+      - item_id: solidified_casting
+        qty: 550.0
+        unit: kg
+    outputs:
+      - item_id: solidified_casting
+        qty: 550.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: Remove casting from mold and clean sand
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: solidified_casting
+        qty: 550.0
+        unit: kg
+    outputs:
+      - item_id: steel_casting_machine_base
+        qty: 500.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 50.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: Machine mounting surfaces and critical features

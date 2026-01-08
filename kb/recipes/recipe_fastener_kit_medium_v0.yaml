@@ -2,38 +2,121 @@ id: recipe_fastener_kit_medium_v0
 target_item_id: fastener_kit_medium
 variant_id: v0
 
+inputs:
+  - item_id: metal_wire_feed
+    qty: 1.0
+    unit: kg
+  - item_id: steel_sheet_3mm
+    qty: 1.0
+    unit: kg
+  - item_id: forged_steel_parts
+    qty: 1.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+  - item_id: steel_chassis_sheet_metal
+    qty: 1.0
+    unit: kg
+  - item_id: finished_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Draw steel wire/rod stock to appropriate diameters for bolt and nut blanks (M6-M12 range)
 
   - process_id: forging_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: forged_steel_parts
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.2
     machine_hours: 1.2
     notes: Hot forge hex heads on bolt blanks and upset nut blanks using dies
 
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: forged_steel_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: Cut external threads on bolts (M6-M12) and tap internal threads in nuts using lathes and tapping machines
 
   - process_id: sheet_metal_forming_process_v0
+    inputs:
+      - item_id: steel_sheet_3mm
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: steel_chassis_sheet_metal
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.6
     machine_hours: 0.6
     notes: Stamp flat washers and lock washers from steel sheet stock using progressive dies
 
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: Heat treat bolts and lock washers for hardness and spring properties (austenitizing, quenching, tempering)
 
   - process_id: finishing_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Tumble finish to remove burrs, clean, and improve surface finish
 
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+      - item_id: steel_chassis_sheet_metal
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.4
     labor_hours: 0.4
     notes: Sort fasteners by size (M6, M8, M10, M12), count, and kit into organized container

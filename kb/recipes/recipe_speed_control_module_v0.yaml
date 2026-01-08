@@ -1,6 +1,29 @@
 id: recipe_speed_control_module_v0
 target_item_id: speed_control_module
 variant_id: v0
+inputs:
+  - item_id: pcb_substrate_v0
+    qty: 0.3
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: solder_paste_tin_lead
+    qty: 0.05
+    unit: kg
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: speed_control_module
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: pcb_assembly_basic_v0
     inputs:
@@ -32,13 +55,21 @@ steps:
         qty: 1
         unit: unit
     outputs:
-      - item_id: speed_control_module
+      - item_id: enclosure_electrical_medium
         qty: 1
-        unit: unit
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Mount PCB, heatsink, connectors, and controls into enclosure."
   - process_id: calibration_and_test_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: kg
+    outputs:
+      - item_id: speed_control_module
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Bench-test speed control, current limit, and safety features."

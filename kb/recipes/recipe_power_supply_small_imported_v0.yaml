@@ -1,6 +1,15 @@
 id: recipe_power_supply_small_imported_v0
 kind: recipe
 target_item_id: power_supply_small_imported
+variant_id: v0
+inputs:
+  - item_id: power_supply_components_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_supply_small_imported
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: power_supply_small_inhouse_v0
 assumptions: "In-house produced power supply; replaces import placeholder."

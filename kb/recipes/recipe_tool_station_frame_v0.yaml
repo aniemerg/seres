@@ -1,16 +1,67 @@
 id: recipe_tool_station_frame_v0
+kind: recipe
 target_item_id: tool_station_frame
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 85.0
+    unit: kg
+  - item_id: cut_parts
+    qty: 83.0
+    unit: kg
+  - item_id: welded_fabrications
+    qty: 82.0
+    unit: kg
+outputs:
+  - item_id: tool_station_frame
+    qty: 80.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 85.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 83.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 2.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cut steel tubing or angle iron for frame legs, crossmembers, and work surface supports"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 83.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 82.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Weld frame structure with reinforcements and tool mounting points"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 82.0
+        unit: kg
+    outputs:
+      - item_id: tool_station_frame
+        qty: 80.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Machine mounting holes, leveling feet locations, and tool holder attachment points"

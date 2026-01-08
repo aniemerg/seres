@@ -2,18 +2,56 @@ id: recipe_steel_frame_heavy_import_v0
 kind: recipe
 target_item_id: steel_frame_heavy
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 150.0
+    unit: kg
+outputs:
+  - item_id: steel_frame_heavy
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 147.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 3.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 5.0
     machine_hours: 5.0
     notes: Cut plate and tube sections for frame members and mounting points.
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 147.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 142.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 7.0
     machine_hours: 7.0
     notes: Weld box/tube sections into the main chassis; attach brackets and mounts.
   - process_id: stress_relief_annealing_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 142.0
+        unit: kg
+    outputs:
+      - item_id: steel_frame_heavy
+        qty: 1
+        unit: unit
     est_time_hr: 4.0
     labor_hours: 1.0
     machine_hours: 1.0

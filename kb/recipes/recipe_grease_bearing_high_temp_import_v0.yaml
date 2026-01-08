@@ -1,9 +1,36 @@
 id: recipe_grease_bearing_high_temp_import_v0
-produces_id: grease_bearing_high_temp
-produces_qty: 1.0
-produces_unit: unit
+kind: recipe
 name: Grease bearing high-temp import v0
+variant_id: v0
+inputs:
+  - item_id: base_grease_stock_v0
+    qty: 0.05
+    unit: kg
+  - item_id: high_temp_additive_v0
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: grease_bearing_high_temp
+    qty: 0.05
+    unit: kg
+  - item_id: process_waste
+    qty: 0.05
+    unit: kg
 steps:
 - process_id: lubricant_compounding_high_temp_v0
+  inputs:
+    - item_id: base_grease_stock_v0
+      qty: 0.05
+      unit: kg
+    - item_id: high_temp_additive_v0
+      qty: 0.05
+      unit: kg
+  outputs:
+    - item_id: grease_bearing_high_temp
+      qty: 0.05
+      unit: kg
+    - item_id: process_waste
+      qty: 0.05
+      unit: kg
 notes: 'Import placeholder: local grease synthesis path; can be replaced by local production.'
 target_item_id: grease_bearing_high_temp

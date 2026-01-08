@@ -1,8 +1,42 @@
 id: recipe_enclosure_steel_small_v0
 kind: recipe
 target_item_id: enclosure_steel_small
+produces_qty: 6.0
+produces_unit: kg
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 8.0
+    unit: kg
+outputs:
+  - item_id: enclosure_steel_small
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 7.6
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 7.6
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 7.2
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 7.2
+        unit: kg
+    outputs:
+      - item_id: enclosure_steel_small
+        qty: 6.0
+        unit: kg
 notes: "Placeholder manufacturing recipe for enclosure_steel_small; to be refined with BOM and specific tolerances."

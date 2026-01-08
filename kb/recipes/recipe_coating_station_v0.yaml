@@ -2,28 +2,127 @@ id: recipe_coating_station_v0
 kind: recipe
 target_item_id: coating_station_v0
 variant_id: v0
+inputs:
+  - item_id: steel_beam_i_section
+    qty: 40.0
+    unit: kg
+  - item_id: coating_booth_enclosure
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: coating_spray_gun_and_pump
+    qty: 1.0
+    unit: unit
+  - item_id: coating_drying_oven
+    qty: 1.0
+    unit: unit
+  - item_id: chemical_bath_ventilation
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electrical_system
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: coating_station_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: welded_fabrication_basic_v0
+    inputs:
+    - item_id: steel_beam_i_section
+      qty: 40.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 38.0
+      unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Fabricate coating station frame and enclosure mounts"
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 38.0
+      unit: kg
+    - item_id: coating_booth_enclosure
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: enclosure_electrical_medium
+      qty: 1
+      unit: unit
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.8
     notes: "Assemble enclosure for coating booth"
   - process_id: electrical_assembly_basic_v0
+    inputs:
+    - item_id: enclosure_electrical_medium
+      qty: 1
+      unit: unit
+    - item_id: control_panel_basic
+      qty: 1
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_electrical_system
+      qty: 1
+      unit: unit
     est_time_hr: 0.8
     machine_hours: 0.8
     labor_hours: 0.8
     notes: "Install control electronics and wiring harness"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: assembled_electrical_system
+      qty: 1
+      unit: unit
+    - item_id: coating_spray_gun_and_pump
+      qty: 1
+      unit: unit
+    - item_id: coating_drying_oven
+      qty: 1
+      unit: unit
+    - item_id: chemical_bath_ventilation
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_medium
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 1.2
     machine_hours: 1.0
     labor_hours: 1.0
     notes: "Mount spray gun/pump, ventilation ducts, hoses, and mounting hardware"
   - process_id: integration_test_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: coating_station_v0
+      qty: 1
+      unit: unit
     est_time_hr: 0.6
     machine_hours: 0.4
     labor_hours: 0.4

@@ -2,7 +2,44 @@ id: recipe_electrode_mix_nife_v0
 kind: recipe
 target_item_id: electrode_mix_nife
 variant_id: v0
+inputs:
+  - item_id: nickel_hydroxide
+    qty: 1.5
+    unit: kg
+  - item_id: iron_powder_or_sheet
+    qty: 0.3
+    unit: kg
+  - item_id: binder_material
+    qty: 0.1
+    unit: kg
+  - item_id: graphite_powder
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: electrode_mix_nife
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: electrode_powder_mixing_nife_v0
-    notes: "Mix nickel hydroxide, iron powder, binder, and conductive additives"
-notes: "ISRU route for NiFe electrode powder mix from raw powders. This mix is then used in electrode_fabrication_nife to produce electrodes_nife_set."
+    inputs:
+      - item_id: nickel_hydroxide
+        qty: 1.5
+        unit: kg
+      - item_id: iron_powder_or_sheet
+        qty: 0.3
+        unit: kg
+      - item_id: binder_material
+        qty: 0.1
+        unit: kg
+      - item_id: graphite_powder
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: electrode_mix_nife
+        qty: 2.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Mix nickel hydroxide, iron powder, binder, and conductive carbon additives for NiFe electrode fabrication"
+assumptions: "ISRU route for NiFe battery electrode powder mix from raw material powders"
+notes: "Mixing of electrode powder for NiFe battery production - this mix is used in electrode_fabrication_nife to produce electrodes_nife_set"

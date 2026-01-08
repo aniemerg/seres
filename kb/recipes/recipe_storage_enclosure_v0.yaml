@@ -1,21 +1,70 @@
 id: recipe_storage_enclosure_v0
 target_item_id: storage_enclosure
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 100.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 95.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 93.0
+    unit: kg
+  - item_id: welded_assemblies
+    qty: 92.0
+    unit: kg
+outputs:
+  - item_id: storage_enclosure
+    qty: 90.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 95.0
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
     notes: Cast enclosure panels and frame sections
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 95.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 93.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine mounting surfaces and connector cutouts
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 93.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 92.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: Weld frame and panels together
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 92.0
+        unit: kg
+    outputs:
+      - item_id: storage_enclosure
+        qty: 90.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly with mounting hardware

@@ -3,6 +3,28 @@ kind: recipe
 name: Methanol synthesis from syngas
 target_item_id: methanol_liquid
 variant_id: v0
+inputs:
+  - item_id: carbon_monoxide
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.143
+    unit: kg
+outputs:
+  - item_id: methanol_liquid
+    qty: 1.14
+    unit: kg
 steps:
   - process_id: methanol_synthesis_from_syngas_v0
+    inputs:
+      - item_id: carbon_monoxide
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.143
+        unit: kg
+    outputs:
+      - item_id: methanol_liquid
+        qty: 1.14
+        unit: kg
 notes: "Methanol produced from syngas via catalytic synthesis."

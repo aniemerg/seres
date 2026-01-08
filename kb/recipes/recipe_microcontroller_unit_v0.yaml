@@ -6,9 +6,73 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: microcontroller_unit_v0
 variant_id: v0
+inputs:
+  - item_id: silicon_purified
+    qty: 0.05
+    unit: kg
+  - item_id: photoresist_solution_v0
+    qty: 0.01
+    unit: kg
+  - item_id: etching_chemicals
+    qty: 0.22
+    unit: kg
+  - item_id: copper_clad_laminate
+    qty: 0.5
+    unit: kg
+  - item_id: pcb_bare_board
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: microcontroller_unit_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: microcontroller_ic_generic_fabrication_v0
+    inputs:
+      - item_id: silicon_purified
+        qty: 0.05
+        unit: kg
+      - item_id: photoresist_solution_v0
+        qty: 0.01
+        unit: kg
+      - item_id: etching_chemicals
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: microcontroller_ic_generic
+        qty: 1.0
+        unit: unit
   - process_id: pcb_fabrication_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 0.5
+        unit: kg
+      - item_id: etching_chemicals
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: pcb_bare_board
+        qty: 1.0
+        unit: unit
   - process_id: pcb_assembly_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
   - process_id: microcontroller_unit_assembly_v0
+    inputs:
+      - item_id: microcontroller_ic_generic
+        qty: 1.0
+        unit: unit
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: microcontroller_unit_v0
+        qty: 1.0
+        unit: unit
 notes: "End-to-end path to produce microcontroller_unit_v0 from MCU IC generic and PCB."

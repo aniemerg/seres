@@ -1,36 +1,65 @@
 id: recipe_solar_tracking_mechanism_dual_axis_v0
 kind: recipe
+name: Recipe for solar tracking mechanism (dual axis)
 target_item_id: solar_tracking_mechanism_dual_axis_v0
 variant_id: dual_axis_v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 5.0
+    unit: kg
+  - item_id: motor_electric_small
+    qty: 2
+    unit: unit
+  - item_id: bearing_set
+    qty: 2
+    unit: unit
+  - item_id: encoder_rotary_absolute
+    qty: 2
+    unit: unit
+  - item_id: worm_gear_set_v0
+    qty: 2
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: solar_tracking_mechanism_dual_axis_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 0.5
+    unit: kg
 steps:
-  - process_id: welding_and_fabrication_v0
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Fabricate dual-axis tracking frame structure and mounting points"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    labor_hours: 2.0
-    notes: "Machine pivot bearings, dual-axis components, and motor mounts"
   - process_id: assembly_basic_v0
-    est_time_hr: 5.0
-    labor_hours: 5.0
-    notes: "Assemble drive motors, gears, bearings, and pivot mechanisms for dual-axis tracking"
-  - process_id: sensor_integration_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Integrate position sensors for dual-axis tracking (azimuth and elevation)"
-  - process_id: sensor_calibration_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Calibrate sensors and alignment references"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Test tracking motion, verify position feedback, and control loop responsiveness"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "QA and dimensional/functional inspection of the dual-axis mechanism"
-assumptions: "Dual-axis solar tracking mechanism built with a frame, pivoting bearings, motors, sensors, and control wiring; intended for integration with solar concentrators or PV arrays."
-notes: "Manufacturing chain for solar_tracking_mechanism_dual_axis_v0 inspired by the solar_tracking_optional pattern; placeholder timings refined as data becomes available."
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 5.0
+        unit: kg
+      - item_id: motor_electric_small
+        qty: 2
+        unit: unit
+      - item_id: bearing_set
+        qty: 2
+        unit: unit
+      - item_id: encoder_rotary_absolute
+        qty: 2
+        unit: unit
+      - item_id: worm_gear_set_v0
+        qty: 2
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: solar_tracking_mechanism_dual_axis_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_swarf
+        qty: 0.5
+        unit: kg
+    est_time_hr: 20.5
+    machine_hours: 8.0
+    labor_hours: 18.5
+    notes: "Fabricate dual-axis tracking frame from steel tube, machine pivot bearings and motor mounts, assemble motors with gear reduction for azimuth and elevation axes, integrate absolute position encoders, calibrate sensor alignment, test tracking motion and control loop"
+assumptions: "Dual-axis solar tracking mechanism built with frame, pivoting bearings, motors, sensors, and gears for integration with solar concentrators or PV arrays"
+notes: "Manufacturing of solar tracking mechanism with dual-axis (azimuth and elevation) actuation for optimal solar alignment"

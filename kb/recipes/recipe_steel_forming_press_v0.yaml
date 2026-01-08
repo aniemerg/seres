@@ -1,12 +1,67 @@
 id: recipe_steel_forming_press_v0
 kind: recipe
 target_item_id: steel_forming_press
-produces_id: steel_forming_press
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
 name: Local production path for steel_forming_press
+inputs:
+  - item_id: press_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_cylinder_press
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_system_medium
+    qty: 1
+    unit: unit
+  - item_id: press_platen_set_medium
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: steel_forming_press
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: press_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_cylinder_press
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_system_medium
+        qty: 1
+        unit: unit
+      - item_id: press_platen_set_medium
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: steel_forming_press
+        qty: 1.0
+        unit: unit
 notes: "Local fabrication path to assemble steel_forming_press from BOM components."
 assumptions: None

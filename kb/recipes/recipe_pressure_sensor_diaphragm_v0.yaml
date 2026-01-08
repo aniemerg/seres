@@ -3,6 +3,28 @@ kind: recipe
 name: Recipe for pressure sensor diaphragm v0
 target_item_id: pressure_sensor_diaphragm_v0
 variant_id: v0
+inputs:
+  - item_id: stainless_steel_sheet
+    qty: 0.012
+    unit: kg
+outputs:
+  - item_id: pressure_sensor_diaphragm_v0
+    qty: 0.01
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.002
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: stainless_steel_sheet
+        qty: 0.012
+        unit: kg
+    outputs:
+      - item_id: pressure_sensor_diaphragm_v0
+        qty: 0.01
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.002
+        unit: kg
 notes: "Converted legacy string-based step to structured step. This recipe manufactures the diaphragm part using basic machining/finishing."

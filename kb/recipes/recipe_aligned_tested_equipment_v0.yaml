@@ -1,10 +1,34 @@
 id: recipe_aligned_tested_equipment_v0
 target_item_id: aligned_tested_equipment
 variant_id: inspection_alignment_v0
+inputs:
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: aligned_tested_equipment
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: Assemble equipment prior to alignment (placeholder for pre-check).
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: aligned_tested_equipment
+        qty: 1.0
+        unit: unit
     notes: Functional test and alignment verification; marks equipment as ready.
 assumptions: "Treats aligned/tested equipment as QC-passed output from basic assembly and inspection."
 notes: Local route replacing import placeholder for aligned/tested equipment status.

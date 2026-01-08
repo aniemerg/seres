@@ -1,4 +1,5 @@
 id: recipe_nickel_aluminum_alloy_v0
+kind: recipe
 target_item_id: nickel_aluminum_alloy
 variant_id: v0
 inputs:
@@ -16,6 +17,17 @@ outputs:
     unit: kg
 steps:
   - process_id: alloying_basic_v0
+    inputs:
+      - item_id: nickel_metal
+        qty: 0.7
+        unit: kg
+      - item_id: aluminum_metal_pure
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: nickel_aluminum_alloy
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Melt and alloy nickel with aluminum in controlled atmosphere

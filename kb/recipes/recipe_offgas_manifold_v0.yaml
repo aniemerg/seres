@@ -1,21 +1,60 @@
 id: recipe_offgas_manifold_v0
 target_item_id: offgas_manifold
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 70.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 70.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 70.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 66.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Cast manifold sections from high-temp alloy
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 70.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 70.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine flange faces and connection ports
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 66.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 66.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: Weld manifold sections together
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 66.5
+        unit: kg
+    outputs:
+      - item_id: offgas_manifold
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Final assembly with gaskets and fittings

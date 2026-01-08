@@ -2,9 +2,44 @@ id: recipe_regolith_powder_hcl_leached_v0
 kind: recipe
 name: Recipe for regolith powder (HCl-leached)
 target_item_id: regolith_powder_hcl_leached_v0
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: regolith_powder_hcl_leached_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: hcl_regolith_preprocessing_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: regolith_powder_hcl_treated_v0
+        qty: 1.0
+        unit: kg
     notes: "Acid preprocessing: regolith_powder + hydrochloric_acid → regolith_powder_hcl_treated_v0"
   - process_id: hcl_regolith_leaching_v0
+    inputs:
+      - item_id: regolith_powder_hcl_treated_v0
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: regolith_powder_hcl_leached_v0
+        qty: 1.0
+        unit: kg
     notes: "Leaching: regolith_powder_hcl_treated_v0 + hydrochloric_acid → regolith_powder_hcl_leached_v0"
 notes: "Chained process: preprocess regolith powder with HCl, then leach to produce leached powder."

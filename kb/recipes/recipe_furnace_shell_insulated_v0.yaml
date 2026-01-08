@@ -1,15 +1,51 @@
 id: recipe_furnace_shell_insulated_v0
 target_item_id: furnace_shell_insulated
 variant_id: v0
+inputs:
+  - item_id: silica_purified
+    qty: 10.0
+    unit: kg
+  - item_id: metal_alloy_bulk
+    qty: 50.0
+    unit: kg
+  - item_id: insulation_thermal_blanket
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 10.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
+    notes: "Prepare casting mold"
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 47.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
+    notes: "Cast furnace shell; ~5% casting loss"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 47.5
+        unit: kg
+      - item_id: insulation_thermal_blanket
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: furnace_shell_insulated
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 1.0
+    notes: "Finish shell and install insulation"
 assumptions: Cast insulated shell structure then finish; coarse times.
 notes: Coarse route; add insulation install details later.

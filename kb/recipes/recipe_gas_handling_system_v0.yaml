@@ -1,21 +1,73 @@
 id: recipe_gas_handling_system_v0
 target_item_id: gas_handling_system
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 160.0
+    unit: kg
+  - item_id: gas_blower_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: gas_handling_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 160.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 150.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: Cast pipe sections, valve bodies, blower housing
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 145.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Machine valve seats and flange faces
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 145.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 145.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: Weld pipe sections and connections
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 145.0
+        unit: kg
+      - item_id: gas_blower_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: gas_handling_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: Assemble system with valves and blower

@@ -5,15 +5,59 @@ produces_id: cnc_mill_v0_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: cnc_mill_v0_v0
+inputs:
+  - item_id: structural_frame_steel
+    qty: 1
+    unit: unit
+  - item_id: mill_shell_generic
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1
+    unit: unit
+  - item_id: coolant_pump_system
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cnc_mill_v0_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
-    notes: Assemble base frame, shell, drive, gearbox, bearings, coolant pump, and control electronics into cnc_mill_v0_v0 subassembly
-  - process_id: enclosure_assembly_basic_v0
-    notes: Mount cnc_mill_v0_v0 subassembly into enclosure and attach shielding
-  - process_id: electrical_assembly_basic_v0
-    notes: Wire power and control electronics for CNC milling functionality
-  - process_id: sealing_and_assembly_basic_v0
-    notes: Seal enclosure and finalize integration
-  - process_id: inspection_basic_v0
-    notes: Final inspection and readiness check
+    inputs:
+      - item_id: structural_frame_steel
+        qty: 1
+        unit: unit
+      - item_id: mill_shell_generic
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1
+        unit: unit
+      - item_id: coolant_pump_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cnc_mill_v0_v0
+        qty: 1
+        unit: unit
+    notes: Assemble all components into CNC mill - frame, shell, drive, gearbox, bearings, cooling loop, and coolant pump. Includes electrical wiring, sealing, and final inspection.
 notes: Basic manufacturing path for cnc_mill_v0_v0 using seed BOM components.

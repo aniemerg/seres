@@ -3,12 +3,44 @@ target_item_id: anvil_or_die_set
 variant_id: v0
 kind: recipe
 name: Recipe for anvil or die set (forging route) v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 270.0
+    unit: kg
+outputs:
+  - item_id: anvil_or_die_set
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: forging_basic_v0
+  inputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 10.0
+      unit: kg
+  outputs:
+    - item_id: forged_steel_parts
+      qty: 10.0
+      unit: kg
   notes: Forge basic forged components, using the anvil/die set as tooling
 - process_id: forging_bearing_ring_blanks_v0
+  inputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 20.0
+      unit: kg
+  outputs:
+    - item_id: bearing_ring_blanks
+      qty: 20.0
+      unit: kg
   notes: Forged bearing ring blanks using the forged components
 - process_id: forging_rolls_basic_v0
+  inputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 240.0
+      unit: kg
+  outputs:
+    - item_id: anvil_or_die_set
+      qty: 1.0
+      unit: unit
   notes: Forge rolling mill rolls set from forged blanks
 assumptions: Forging chain uses existing forging tooling; no heat-treatment step included yet
 notes: Forging-based route to produce anvil_or_die_set; heat treatment and finishing can be added later.

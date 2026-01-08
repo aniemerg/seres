@@ -2,6 +2,28 @@ id: recipe_copper_clad_laminate_v0
 kind: recipe
 target_item_id: copper_clad_laminate
 variant_id: v0
+inputs:
+  - item_id: uncoated_substrate_material_v0
+    qty: 0.5
+    unit: kg
+  - item_id: copper_plate_or_sheet
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: copper_clad_laminate
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: lamination_basic_v0
+    inputs:
+      - item_id: uncoated_substrate_material_v0
+        qty: 0.5
+        unit: kg
+      - item_id: copper_plate_or_sheet
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: copper_clad_laminate
+        qty: 1.0
+        unit: kg
 notes: "Local production of copper_clad_laminate from uncoated_substrate_material_v0 and copper_plate_or_sheet; replaces import placeholder."

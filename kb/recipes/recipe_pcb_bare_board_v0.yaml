@@ -1,6 +1,18 @@
 id: recipe_pcb_bare_board_v0
 kind: recipe
 target_item_id: pcb_bare_board
+variant_id: v0
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: pcb_bare_board
+    qty: 0.04
+    unit: kg
+  - item_id: pcb_scrap
+    qty: 0.01
+    unit: kg
 steps:
   - process_id: pcb_fabrication_process_v0
     inputs:

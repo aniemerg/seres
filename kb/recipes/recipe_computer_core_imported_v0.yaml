@@ -2,9 +2,55 @@ id: recipe_computer_core_imported_v0
 
 target_item_id: computer_core_imported
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: power_supply_components_basic
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: electronics_assembly_v0
+  inputs:
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: assembled_electronics
+      qty: 1.0
+      unit: unit
 - process_id: power_supply_small_inhouse_v0
+  inputs:
+    - item_id: power_supply_components_basic
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: power_supply_small_inhouse
+      qty: 1.0
+      unit: unit
 - process_id: computer_core_assembly_v0
+  inputs:
+    - item_id: assembled_electronics
+      qty: 1.0
+      unit: unit
+    - item_id: enclosure_small
+      qty: 1.0
+      unit: unit
+    - item_id: power_supply_small_inhouse
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: computer_core_imported
+      qty: 1.0
+      unit: unit
 assumptions: "Electronics assembled locally; power supply produced in-house; final core assembled from assembled electronics, in-house power supply, and enclosure."
 notes: "Converted from import_stub to standard production path; this recipe now represents local manufacturing of computer_core_imported."

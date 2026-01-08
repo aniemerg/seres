@@ -2,6 +2,19 @@ id: recipe_coating_compound_v0
 kind: recipe
 target_item_id: coating_compound
 variant_id: v0
+inputs:
+  - item_id: barium_oxide
+    qty: 0.8
+    unit: kg
+    notes: "Barium oxide for cathode coating"
+  - item_id: binder_material
+    qty: 0.2
+    unit: kg
+    notes: "Binder to formulate coating compound"
+outputs:
+  - item_id: coating_compound
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: coating_compound_production_v0
     inputs:

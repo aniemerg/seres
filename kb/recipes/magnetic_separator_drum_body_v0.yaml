@@ -1,8 +1,24 @@
 id: recipe_magnetic_separator_drum_body_v0
 target_item_id: magnetic_separator_drum_body
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: magnetic_separator_drum_body
+    qty: 9.5
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_separator_drum_body
+        qty: 9.5
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
 assumptions: Cast separator drum body; finishing not modeled.

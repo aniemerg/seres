@@ -1,6 +1,53 @@
 id: recipe_pelletizer_v0
 kind: recipe
 target_item_id: pelletizer_v0
+variant_id: v0
+inputs:
+  - item_id: steel_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+  - item_id: hopper_feed_steel
+    qty: 1
+    unit: unit
+  - item_id: mill_shell_generic
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: pelletizer_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+      - item_id: hopper_feed_steel
+        qty: 1
+        unit: unit
+      - item_id: mill_shell_generic
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: pelletizer_v0
+        qty: 1
+        unit: unit
     notes: "Placeholder assembly path for pelletizer_v0; follow BOM for subcomponents in future iterations."

@@ -1,0 +1,26 @@
+id: recipe_polymer_filament_import_v0
+kind: recipe
+name: Local polymer filament extrusion
+target_item_id: polymer_filament
+variant_id: v0
+inputs:
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: polymer_filament
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: plastic_extrusion_v0
+    inputs:
+      - item_id: plastic_pellets
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: polymer_filament
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.3
+    notes: "Extrude plastic pellets into filament using a filament die"
+notes: "Local recipe for polymer filament used in additive manufacturing"

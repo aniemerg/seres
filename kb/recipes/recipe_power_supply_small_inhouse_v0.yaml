@@ -1,7 +1,23 @@
 id: recipe_power_supply_small_inhouse_v0
 kind: recipe
 target_item_id: power_supply_small_inhouse
+inputs:
+  - item_id: power_supply_components_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_supply_small_inhouse
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: power_supply_small_inhouse_v0
+    inputs:
+      - item_id: power_supply_components_basic
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_supply_small_inhouse
+        qty: 1.0
+        unit: unit
 assumptions: "In-house produced power supply; single-step path using existing in-house assembly process."
 notes: "Recipe to manufacture power_supply_small_inhouse via the in-house assembly process."

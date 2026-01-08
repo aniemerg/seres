@@ -1,14 +1,46 @@
 id: recipe_refining_furnace_v0
 kind: recipe
 variant_id: v0
-# Note: Produces a refining furnace using standard furnace fabrication steps.
 target_item_id: refining_furnace_v0
+inputs:
+  - item_id: furnace_shell_insulated
+    qty: 1
+    unit: unit
+  - item_id: refractory_lining_set
+    qty: 1
+    unit: unit
+  - item_id: heating_element_set_basic
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: refining_furnace_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: casting_basic_v0
-  - process_id: welding_brazing_basic_v0
-  - process_id: machining_finish_basic_v0
   - process_id: assembly_basic_v0
-  - process_id: enclosure_assembly_basic_v0
-  - process_id: electrical_wiring_and_controls_v0
-  - process_id: machine_assembly_basic_v0
-notes: "Placeholder recipe to manufacture refining_furnace following furnace fabrication pattern."
+    inputs:
+      - item_id: furnace_shell_insulated
+        qty: 1
+        unit: unit
+      - item_id: refractory_lining_set
+        qty: 1
+        unit: unit
+      - item_id: heating_element_set_basic
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: refining_furnace_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 24.0
+    machine_hours: 8.0
+    labor_hours: 16.0
+    notes: "Assemble furnace shell, install refractory lining, mount heating elements, integrate temperature control system"
+assumptions: "Standard refining furnace assembly from pre-fabricated components"
+notes: "Assembly of refining furnace for metallurgical refining operations"

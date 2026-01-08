@@ -1,6 +1,25 @@
 id: recipe_thermal_lance_ceramic_casting_v0
 kind: recipe
 target_item_id: thermal_lance_ceramic_casting_v0
+inputs:
+  - item_id: ceramic_powder
+    qty: 2.1
+    unit: kg
+outputs:
+  - item_id: thermal_lance_ceramic_casting_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: ceramic_casting_basic_v0
+    inputs:
+      - item_id: ceramic_powder
+        qty: 2.1
+        unit: kg
+    outputs:
+      - item_id: thermal_lance_ceramic_casting_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Cast ceramic component for thermal lance"
 notes: "Modern recipe to manufacture thermal_lance_ceramic_casting_v0 using ceramic_casting_basic_v0. Replaces legacy format."

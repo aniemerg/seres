@@ -1,10 +1,15 @@
 id: recipe_carbon_monoxide_gas_v1
 kind: recipe
 target_item_id: carbon_monoxide_gas
-produces_id: carbon_monoxide_gas
-produces_qty: 1.0
-produces_unit: kg
 variant_id: v1
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbon_monoxide_gas
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: carbon_monoxide_generation_v0
     inputs:

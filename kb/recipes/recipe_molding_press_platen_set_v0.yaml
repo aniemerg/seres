@@ -20,20 +20,64 @@ outputs:
     notes: Machining and grinding waste
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 42.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 3.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
     notes: "Machine upper and lower platens, mounting holes, and alignment features"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 42.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 40.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 2.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Grind platen surfaces to high flatness for uniform mold clamping"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 40.0
+        unit: kg
+      - item_id: fastener_kit_large
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install alignment pins and mounting hardware"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: molding_press_platen_set
+        qty: 40.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 0.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify platen flatness and parallelism"

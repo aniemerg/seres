@@ -1,8 +1,22 @@
 id: recipe_epoxy_precursor_block_v0
 kind: recipe
 target_item_id: epoxy_precursor_block_v0
-produces_qty: 1.0
-produces_unit: kg
+inputs:
+  - item_id: epoxy_monomer_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: epoxy_precursor_block_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: epoxy_precursor_block_synthesis_v0
+    inputs:
+      - item_id: epoxy_monomer_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: epoxy_precursor_block_v0
+        qty: 1.0
+        unit: kg
 notes: "Placeholder recipe to manufacture epoxy_precursor_block_v0 from epoxy_monomer_v0 via precursor synthesis."

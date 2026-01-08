@@ -3,6 +3,40 @@ kind: recipe
 name: Czochralski single-crystal silicon
 target_item_id: silicon_single_crystal_ingot
 variant_id: v0
+inputs:
+  - item_id: silicon_polycrystalline_ultrapure
+    qty: 1.0
+    unit: kg
+  - item_id: silicon_seed_crystal
+    qty: 0.001
+    unit: kg
+  - item_id: crucible_ceramic_refractory
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: silicon_single_crystal_ingot
+    qty: 0.95
+    unit: kg
+  - item_id: silicon_polycrystalline_ultrapure
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: czochralski_process_silicon_v0
+    inputs:
+      - item_id: silicon_polycrystalline_ultrapure
+        qty: 1.0
+        unit: kg
+      - item_id: silicon_seed_crystal
+        qty: 0.001
+        unit: kg
+      - item_id: crucible_ceramic_refractory
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: silicon_single_crystal_ingot
+        qty: 0.95
+        unit: kg
+      - item_id: silicon_polycrystalline_ultrapure
+        qty: 0.05
+        unit: kg
 notes: "Single-crystal silicon ingot produced via Czochralski process."

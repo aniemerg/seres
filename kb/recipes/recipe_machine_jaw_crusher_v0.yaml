@@ -1,8 +1,72 @@
 id: recipe_machine_jaw_crusher_v0
 target_item_id: jaw_crusher_v0
 variant_id: v0
+inputs:
+  - item_id: crusher_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: jaw_plates_set
+    qty: 1
+    unit: unit
+  - item_id: flywheel_medium
+    qty: 1
+    unit: unit
+  - item_id: toggle_mechanism_set
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 2
+    unit: unit
+  - item_id: support_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: jaw_crusher_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: crusher_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: jaw_plates_set
+        qty: 1
+        unit: unit
+      - item_id: flywheel_medium
+        qty: 1
+        unit: unit
+      - item_id: toggle_mechanism_set
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 2
+        unit: unit
+      - item_id: support_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: jaw_crusher_v0
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
 assumptions: Assemble per BOM; parts produced via part-level routes.

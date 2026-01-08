@@ -1,8 +1,25 @@
 id: recipe_hydraulic_pump_basic_import_v0
 kind: recipe
 target_item_id: hydraulic_pump_basic
+variant_id: v0
+inputs:
+  - item_id: hydraulic_pump_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: hydraulic_pump_basic
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: hydraulic_pump_basic_assembly_v0
     notes: "Imported path; converted to local process format for compatibility."
+    inputs:
+      - item_id: hydraulic_pump_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hydraulic_pump_basic
+        qty: 1.0
+        unit: unit
 notes: "Converted from import_stub to local recipe path; uses hydraulic_pump_basic_assembly_v0 to produce hydraulic_pump_basic from hydraulic_pump_small."
 assumptions: "Pump assembled locally; replace with full BOM later."

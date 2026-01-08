@@ -2,14 +2,94 @@ id: recipe_vacuum_furnace_v0_v0
 kind: recipe
 target_item_id: vacuum_furnace_v0
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 1200.0
+    unit: kg
+  - item_id: steel_stock
+    qty: 200.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 10.0
+    unit: kg
+  - item_id: heating_element_resistive
+    qty: 1.0
+    unit: unit
+  - item_id: furnace_chamber_unequipped
+    qty: 1.0
+    unit: unit
+  - item_id: uncoated_substrate_material_v0
+    qty: 0.5
+    unit: kg
+  - item_id: copper_plate_or_sheet
+    qty: 0.5
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: vacuum_furnace_v0
+    qty: 1200.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 1200.0
+        unit: kg
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 1200.0
+        unit: kg
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 200.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 10.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 200.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 200.0
+        unit: kg
   - process_id: heating_element_installation_v0
+    inputs:
+      - item_id: heating_element_resistive
+        qty: 1.0
+        unit: unit
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
   - process_id: lamination_basic_v0
+    inputs:
+      - item_id: uncoated_substrate_material_v0
+        qty: 0.5
+        unit: kg
+      - item_id: copper_plate_or_sheet
+        qty: 0.5
+        unit: kg
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 5.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
 notes: "Prototype vacuum furnace v0 assembled from basic stock, welding, assembly, heating elements, insulation, wiring; placeholder timing/energy to be refined."

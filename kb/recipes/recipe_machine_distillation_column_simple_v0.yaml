@@ -1,32 +1,111 @@
 id: recipe_machine_distillation_column_simple_v0
 target_item_id: distillation_column_simple_v0
 variant_id: v0
+inputs:
+  - item_id: assembled_electronics
+    qty: 1.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 25.0
+    unit: kg
+  - item_id: metal_sheet_or_plate
+    qty: 24.5
+    unit: kg
+  - item_id: steel_stock
+    qty: 24.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 0.05
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 23.5
+    unit: kg
+  - item_id: piping_components
+    qty: 5.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 24.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Cut shell sections, flanges, and support brackets."
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 24.5
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 24.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.6
     labor_hours: 0.6
     notes: "Roll shell sections and form trays/packing supports."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 24.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 23.5
+        unit: kg
     est_time_hr: 1.8
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Weld column shell, nozzles, and supports."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 23.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 23.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.6
     labor_hours: 0.5
     notes: "Machine flanges and port faces; drill tray/packing supports."
   - process_id: plumbing_and_pneumatics_v0
+    inputs:
+      - item_id: piping_components
+        qty: 5.0
+        unit: kg
+      - item_id: fittings_and_valves
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: plumbing_system_assembly
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Install internals, trays/packing, valves, and instrumentation ports."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: distillation_column_simple_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.6
     labor_hours: 0.5
     notes: "Pressure/leak check with water/air."

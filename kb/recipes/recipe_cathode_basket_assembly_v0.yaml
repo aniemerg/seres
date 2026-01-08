@@ -2,22 +2,34 @@ id: recipe_cathode_basket_assembly_v0
 kind: recipe
 name: Recipe for cathode basket assembly
 target_item_id: cathode_basket_assembly_v0
+variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 9.0
+    unit: kg
+  - item_id: steel_mesh_sheet_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cathode_basket_assembly_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: sheet_metal_fabrication_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Fabricate base basket components from sheet metal"
-  - process_id: metal_cutting_basic_v0
-    est_time_hr: 0.5
-    machine_hours: 0.5
-    notes: "Cut pieces to shape for frame and basket elements"
-  - process_id: welding_and_fabrication_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Weld basket frame, mesh or bars, and attach handles"
   - process_id: assembly_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Final assembly and QA checks"
-assumptions: "Cast/babrication route; basic sheet-metal basket assembled into cathode basket; placeholder cadence for a first-pass model"
-notes: "Initial production recipe to enable mass balance closure for cathode_basket_assembly_v0."
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 9.0
+        unit: kg
+      - item_id: steel_mesh_sheet_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cathode_basket_assembly_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    machine_hours: 1.5
+    labor_hours: 3.0
+    notes: "Fabricate and cut sheet metal pieces for basket frame, weld frame with mesh/bars and handles, assemble and perform QA checks"
+assumptions: "Sheet-metal cathode basket for Molten Regolith Electrolysis (MRE) - high-temperature steel construction for holding regolith pellets"
+notes: "Fabrication of cathode basket assembly for FFC/MRE process cathode"

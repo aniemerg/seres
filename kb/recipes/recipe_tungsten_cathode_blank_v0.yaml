@@ -2,6 +2,22 @@ id: recipe_tungsten_cathode_blank_v0
 kind: recipe
 target_item_id: tungsten_cathode_blank_v0
 variant_id: v0
+inputs:
+  - item_id: tungsten_powder
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: tungsten_cathode_blank_v0
+    qty: 0.15
+    unit: kg
 steps:
-- process_id: tungsten_blank_sintering_high_temp_v0
+  - process_id: tungsten_blank_sintering_high_temp_v0
+    inputs:
+      - item_id: tungsten_powder
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: tungsten_cathode_blank_v0
+        qty: 0.15
+        unit: kg
 notes: "Fabricate tungsten cathode blank from tungsten powder via high temp sintering"

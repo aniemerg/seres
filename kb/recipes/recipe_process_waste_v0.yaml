@@ -1,8 +1,23 @@
 id: recipe_process_waste_v0
 kind: recipe
+name: Recipe for process_waste
 target_item_id: process_waste
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: process_waste
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: waste_generation_basic_v0
+  inputs:
+    - item_id: regolith_lunar_mare
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: process_waste
+      qty: 1.0
+      unit: kg
 notes: "Concrete path for producing process_waste via waste_generation_basic_v0; replaces import placeholder."

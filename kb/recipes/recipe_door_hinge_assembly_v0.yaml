@@ -1,10 +1,22 @@
 id: recipe_door_hinge_assembly_v0
 kind: recipe
 name: Recipe for door hinge assembly
-produces_id: door_hinge_assembly
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: door_hinge_assembly
+variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.2
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 0.1
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: door_hinge_assembly
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:

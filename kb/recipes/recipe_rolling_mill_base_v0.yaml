@@ -3,9 +3,39 @@ kind: recipe
 name: Rolling mill base production (v0)
 target_item_id: rolling_mill
 variant_id: base_v0
+inputs:
+  - item_id: steel_drum
+    qty: 1
+    unit: unit
+  - item_id: motor_assembly
+    qty: 1
+    unit: unit
+  - item_id: bearing_set
+    qty: 2
+    unit: unit
+  - item_id: grinding_media_steel
+    qty: 50.0
+    unit: kg
 steps:
-  - process_id: assembly_basic_v0
-  - process_id: machining_finish_basic_v0
-  - process_id: welding_brazing_basic_v0
   - process_id: machine_assembly_basic_v0
-notes: "Base variant recipe to produce the rolling_mill item from BOM components; aligns with bom_rolling_mill_v0.yaml."
+    inputs:
+      - item_id: steel_drum
+        qty: 1
+        unit: unit
+      - item_id: motor_assembly
+        qty: 1
+        unit: unit
+      - item_id: bearing_set
+        qty: 2
+        unit: unit
+      - item_id: grinding_media_steel
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: rolling_mill
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Assemble rolling mill from BOM components: drum, motor, bearings, and grinding media"
+notes: "Base variant recipe to produce the rolling_mill item from BOM components; aligns with bom_rolling_mill_v0.yaml. Simplified to single assembly step."

@@ -1,13 +1,26 @@
 id: recipe_iron_core_laminated_v0
 kind: recipe
 name: Iron core laminated production v0
-produces_id: iron_core_laminated
-produces_qty: 0.01
-produces_unit: kg
 variant_id: v0
 target_item_id: iron_core_laminated
+inputs:
+  - item_id: steel_sheet_1mm
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: iron_core_laminated
+    qty: 0.01
+    unit: kg
 steps:
   - process_id: iron_core_lamination_basic_v0
+    inputs:
+      - item_id: steel_sheet_1mm
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: iron_core_laminated
+        qty: 0.01
+        unit: kg
     notes: "Laminate 0.01 kg steel_sheet_1mm into iron_core_laminated using iron_core_lamination_basic_v0."
 assumptions: "Simple lamination step from steel_sheet_1mm to laminated iron core. Placeholder; refine BOM accordingly."
 notes: "Manufacturing recipe to create laminated iron core; references iron_core_lamination_basic_v0 process."

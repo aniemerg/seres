@@ -1,6 +1,31 @@
 id: recipe_focusing_mechanism_coarse_fine_v0
 target_item_id: focusing_mechanism_coarse_fine
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 3.0
+    unit: kg
+  - item_id: lead_screw_assembly
+    qty: 1.8
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: spur_gear_set_v0
+    qty: 0.9
+    unit: kg
+    notes: "Intermediate for assembly step"
+  - item_id: bearing_ball_steel
+    qty: 4.0
+    unit: each
+  - item_id: knob_control_dial
+    qty: 2.0
+    unit: each
+  - item_id: spring_compression_small
+    qty: 2.0
+    unit: each
+outputs:
+  - item_id: focusing_mechanism_coarse_fine
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: machining_process_turning_v0
     inputs:

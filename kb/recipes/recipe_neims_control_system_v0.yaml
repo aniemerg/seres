@@ -1,11 +1,45 @@
 id: recipe_neims_control_system_v0
 target_item_id: neims_control_system_v0
 variant_id: v0
+inputs:
+  - item_id: formation_control_unit
+    qty: 1
+    unit: unit
+  - item_id: assembled_electronics
+    qty: 1
+    unit: unit
+  - item_id: programmed_microcontroller
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: neims_control_system_v0
+    qty: 1
+    unit: unit
 steps:
-- process_id: formation_control_unit_assembly_v0
-- process_id: electronics_assembly_v0
-- process_id: firmware_programming_v0
-- process_id: wiring_and_electronics_integration_v0
-- process_id: neims_control_system_final_assembly_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formation_control_unit
+        qty: 1
+        unit: unit
+      - item_id: assembled_electronics
+        qty: 1
+        unit: unit
+      - item_id: programmed_microcontroller
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: neims_control_system_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 2.0
+    labor_hours: 6.0
+    notes: "Assemble formation control unit, electronics assembly, program firmware to microcontroller, wire and integrate electronics, final assembly of NEIMS control system"
 assumptions: "End-to-end assembly with upstream subrecipes; microcontroller and firmware are produced via their own recipes."
 notes: "Assembles NEIMS control system by chaining subassemblies and integrating electronics and software."

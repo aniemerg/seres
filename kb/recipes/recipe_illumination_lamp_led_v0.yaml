@@ -2,8 +2,44 @@ id: recipe_illumination_lamp_led_v0
 kind: recipe
 name: Illumination LED lamp v0
 target_item_id: illumination_lamp_led
+inputs:
+  - item_id: pcb_populated
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: illumination_lamp_led
+    qty: 0.05
+    unit: kg
+  - item_id: assembly_loss
+    qty: 1.95
+    unit: kg
 steps:
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
   - process_id: illumination_led_module_assembly_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: illumination_lamp_led
+        qty: 0.05
+        unit: kg
+      - item_id: assembly_loss
+        qty: 1.95
+        unit: kg
 assumptions: "Local production path for illumination_lamp_led via electronics_assembly_v0 and illumination_led_module_assembly_v0."
 notes: "Local production path for illumination_lamp_led replacing import stub."

@@ -1,21 +1,76 @@
 id: recipe_reduction_furnace_shell_v0
 target_item_id: reduction_furnace_shell
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 400.0
+    unit: kg
+    notes: "Steel for outer shell casting"
+  - item_id: refractory_castable
+    qty: 100.0
+    unit: kg
+    notes: "Refractory material for lining"
+  - item_id: thermal_insulation_high_temp
+    qty: 25.0
+    unit: kg
+    notes: "Thermal insulation"
+outputs:
+  - item_id: reduction_furnace_shell
+    qty: 1
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 400.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 380.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: Cast outer shell sections
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 380.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 375.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 4.0
     notes: Weld shell sections together
   - process_id: sintering_and_hot_pressing_v0
+    inputs:
+      - item_id: refractory_castable
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: sintered_shapes
+        qty: 95.0
+        unit: kg
     est_time_hr: 3.5
     machine_hours: 3.5
     notes: Apply sintered refractory lining
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 375.0
+        unit: kg
+      - item_id: sintered_shapes
+        qty: 95.0
+        unit: kg
+      - item_id: thermal_insulation_high_temp
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: reduction_furnace_shell
+        qty: 1
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: Final assembly with insulation

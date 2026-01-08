@@ -2,6 +2,14 @@ id: recipe_tool_holder_machined_v0
 kind: recipe
 target_item_id: tool_holder_machined
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: tool_holder_machined
+    qty: 0.25
+    unit: kg
 steps:
   - process_id: machining_process_turning_v0
     inputs:

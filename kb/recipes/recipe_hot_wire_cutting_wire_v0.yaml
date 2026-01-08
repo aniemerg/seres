@@ -6,20 +6,43 @@ inputs:
     qty: 1.05
     unit: kg
     notes: Nichrome wire stock for resistance heating
+  - item_id: nichrome_wire
+    qty: 1.02
+    unit: kg
+    notes: Drawn nichrome wire before cutting
 outputs:
   - item_id: hot_wire_cutting_wire
     qty: 1.0
     unit: kg
   - item_id: metal_scrap
-    qty: 0.05
+    qty: 0.03
     unit: kg
-    notes: Wire drawing and cutting waste
+    notes: Wire drawing and cutting waste (0.03 from drawing + 0.02 from cutting)
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: nichrome_wire
+        qty: 1.02
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Draw resistance wire to appropriate diameter"
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: nichrome_wire
+        qty: 1.02
+        unit: kg
+    outputs:
+      - item_id: hot_wire_cutting_wire
+        qty: 1.0
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.02
+        unit: kg
     est_time_hr: 0.2
     machine_hours: 0.2
     notes: "Cut wire to length for hot wire cutter"

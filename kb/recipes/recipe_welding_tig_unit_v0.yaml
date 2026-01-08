@@ -1,9 +1,118 @@
 id: recipe_welding_tig_unit_v0
 kind: recipe
 target_item_id: welding_tig_unit_v0
+inputs:
+  - item_id: torch_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: welding_power_supply_unit
+    qty: 1.0
+    unit: unit
+  - item_id: gas_supply_regulator
+    qty: 1.0
+    unit: unit
+  - item_id: gas_cylinder_argon_or_nitrogen
+    qty: 1.0
+    unit: unit
+  - item_id: gas_flow_controller
+    qty: 1.0
+    unit: unit
+  - item_id: gas_inlet_manifold
+    qty: 1.0
+    unit: unit
+  - item_id: inert_gas_manifold
+    qty: 1.0
+    unit: unit
+  - item_id: coolant_loop_basic
+    qty: 1.0
+    unit: unit
+  - item_id: circulation_pump_coolant
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: welding_tig_unit_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: machine_assembly_basic_v0
+  inputs:
+    - item_id: welding_power_supply_unit
+      qty: 1.0
+      unit: unit
+    - item_id: control_panel_basic
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: torch_assembly
+      qty: 1.0
+      unit: unit
+    - item_id: gas_supply_regulator
+      qty: 1.0
+      unit: unit
+    - item_id: gas_cylinder_argon_or_nitrogen
+      qty: 1.0
+      unit: unit
+    - item_id: gas_flow_controller
+      qty: 1.0
+      unit: unit
+    - item_id: gas_inlet_manifold
+      qty: 1.0
+      unit: unit
+    - item_id: inert_gas_manifold
+      qty: 1.0
+      unit: unit
+    - item_id: coolant_loop_basic
+      qty: 1.0
+      unit: unit
+    - item_id: circulation_pump_coolant
+      qty: 1.0
+      unit: unit
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
 - process_id: electrical_assembly_basic_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
 - process_id: wiring_and_electronics_integration_v0
+  inputs:
+    - item_id: electrical_wire_and_connectors
+      qty: 2.0
+      unit: kg
+    - item_id: electronic_components_set
+      qty: 1.0
+      unit: kg
+    - item_id: assembled_equipment
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: welding_tig_unit_v0
+      qty: 1.0
+      unit: unit
 notes: "Placeholder recipe to manufacture TIG welding unit v0 using common machine assembly steps."

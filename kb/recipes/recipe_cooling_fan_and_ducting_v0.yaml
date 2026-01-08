@@ -1,8 +1,30 @@
 id: recipe_cooling_fan_and_ducting_v0
 target_item_id: cooling_fan_and_ducting
 variant_id: v0
+inputs:
+  - item_id: cooling_fan_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: sheet_metal_or_structural_steel
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cooling_fan_and_ducting
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.4
     machine_hours: 0.5
@@ -15,8 +37,8 @@ steps:
       - item_id: cooling_fan_assembly
         qty: 1.0
         unit: unit
-      - item_id: sheet_metal_or_structural_steel
-        qty: 5.0
+      - item_id: machined_part_raw
+        qty: 4.5
         unit: kg
       - item_id: fastener_kit_small
         qty: 1.0

@@ -1,16 +1,68 @@
 id: recipe_screw_conveyor_assembly_v0
 target_item_id: screw_conveyor_assembly
 variant_id: v0
+produces_qty: 40.0
+produces_unit: kg
+inputs:
+  - item_id: steel_bar_stock
+    qty: 20.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 30.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: screw_conveyor_assembly
+    qty: 40.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 18.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine conveyor shaft and helical flight sections"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 30.0
+        unit: kg
+      - item_id: machined_part_raw
+        qty: 18.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 40.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Weld helical flights to shaft, fabricate trough from sheet metal"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 40.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: screw_conveyor_assembly
+        qty: 40.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install bearings, couplings, drive connection, and mount shaft in trough"

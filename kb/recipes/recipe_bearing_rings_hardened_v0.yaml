@@ -1,6 +1,14 @@
 id: recipe_bearing_rings_hardened_v0
 kind: recipe
 target_item_id: bearing_rings_hardened_v0
+inputs:
+  - item_id: bearing_rings_machined
+    qty: 1.1
+    unit: kg
+outputs:
+  - item_id: bearing_rings_hardened_v0
+    qty: 1.05
+    unit: kg
 steps:
   - process_id: heat_treatment_hardening_v0
     inputs:

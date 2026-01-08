@@ -1,16 +1,68 @@
 id: recipe_hydraulic_cylinder_medium_v0
 target_item_id: hydraulic_cylinder_medium
 variant_id: v0
+produces_qty: 120.0
+produces_unit: kg
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 120.0
+    unit: kg
+  - item_id: steel_bar_stock
+    qty: 20.0
+    unit: kg
+  - item_id: hydraulic_seals_set
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: hydraulic_cylinder_medium
+    qty: 120.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 120.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 110.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Cast cylinder body
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 110.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 105.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine bore/ports
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 105.0
+        unit: kg
+      - item_id: steel_bar_stock
+        qty: 20.0
+        unit: kg
+      - item_id: hydraulic_seals_set
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_cylinder_medium
+        qty: 120.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble seals/rod (seals imported)

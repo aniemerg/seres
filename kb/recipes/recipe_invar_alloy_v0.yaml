@@ -3,8 +3,38 @@ kind: recipe
 name: Recipe for Invar alloy v0
 target_item_id: invar_alloy
 variant_id: v0
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 0.6
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 0.4
+    unit: kg
+outputs:
+  - item_id: invar_alloy
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: nife_alloy_melting_and_casting_v0
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 0.6
+        unit: kg
+      - item_id: iron_metal_pure
+        qty: 0.4
+        unit: kg
+    outputs:
+      - item_id: nife_alloy_casting
+        qty: 0.95
+        unit: kg
   - process_id: invar_alloy_finalization_v0
+    inputs:
+      - item_id: nife_alloy_casting
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: invar_alloy
+        qty: 0.95
+        unit: kg
 assumptions: "Same production path as invar_low_expansion_v0; placeholder until consolidated."
 notes: "Manufacture Invar alloy by Ni-Fe casting then finalization."

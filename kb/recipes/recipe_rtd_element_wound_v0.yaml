@@ -2,6 +2,17 @@ id: recipe_rtd_element_wound_v0
 kind: recipe
 name: RTD element wound (nickel winding) v0
 target_item_id: rtd_element_wound
+inputs:
+  - item_id: nickel_wire_fine
+    qty: 0.045
+    unit: kg
+  - item_id: ceramic_substrate_rtd
+    qty: 0.008
+    unit: kg
+outputs:
+  - item_id: rtd_element_wound
+    qty: 0.01
+    unit: kg
 steps:
   - process_id: wire_winding_precision_v0
     inputs:

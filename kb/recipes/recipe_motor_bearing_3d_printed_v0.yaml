@@ -2,7 +2,26 @@ id: recipe_motor_bearing_3d_printed_v0
 kind: recipe
 name: Recipe for 3D-printed motor bearing v0
 target_item_id: motor_bearing_3d_printed_v0
+variant_id: v0
+inputs:
+  - item_id: printing_material_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: motor_bearing_3d_printed_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: motor_bearing_3d_printed_unit_v0
+    inputs:
+      - item_id: printing_material_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: motor_bearing_3d_printed_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 0.5
+    notes: "3D print motor bearing unit from printing material using basic 3D printer"
 notes: "3D-printed bearing unit produced from placeholder material"
 assumptions: "Printing uses printing_material_v0; post-processing not modeled"

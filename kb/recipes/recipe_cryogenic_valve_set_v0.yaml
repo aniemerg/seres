@@ -2,6 +2,20 @@ id: recipe_cryogenic_valve_set_v0
 kind: recipe
 target_item_id: cryogenic_valve_set
 variant_id: v0
+inputs:
+  - item_id: stainless_steel_bar
+    qty: 0.6
+    unit: kg
+  - item_id: seal_set_high_temp
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: cryogenic_valve_set
+    qty: 0.5
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -9,10 +23,24 @@ steps:
         qty: 0.6
         unit: kg
         notes: "Stainless steel for valve bodies and fittings"
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.5
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.1
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Machine valve bodies, seats, and fittings for cryogenic service"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.5
+        unit: kg
+      - item_id: seal_set_high_temp
+        qty: 0.1
+        unit: kg
     outputs:
       - item_id: cryogenic_valve_set
         qty: 0.5

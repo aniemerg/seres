@@ -1,6 +1,23 @@
 id: recipe_strain_gauge_bonding_station_v0
 kind: recipe
 target_item_id: strain_gauge_bonding_station_v0
+variant_id: v0
+inputs:
+  - item_id: assembly_components
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: strain_gauge_bonding_station_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: build_strain_gauge_bonding_station_v0
+    inputs:
+      - item_id: assembly_components
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: strain_gauge_bonding_station_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to enable manufacturing of strain_gauge_bonding_station_v0; refine BOM and steps later."

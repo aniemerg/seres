@@ -1,13 +1,26 @@
 id: recipe_bevel_gear_set_v0
 kind: recipe
 name: Bevel gear set v0 recipe
-produces_id: bevel_gear_set_v0
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: bevel_gear_set_v0
 variant_id: v0
+inputs:
+  - item_id: gear_set_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: bevel_gear_set_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: bevel_gear_cutting_basic_v0
+  inputs:
+    - item_id: gear_set_medium
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: bevel_gear_set_v0
+      qty: 1.0
+      unit: unit
   est_time_hr: 1.0
   machine_hours: 1.0
   labor_hours: 0.5

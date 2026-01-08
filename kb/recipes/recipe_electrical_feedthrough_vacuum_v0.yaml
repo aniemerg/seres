@@ -3,9 +3,40 @@ kind: recipe
 name: Recipe for electrical feedthrough vacuum v0
 target_item_id: electrical_feedthrough_vacuum
 variant_id: v0
+inputs:
+  - item_id: magnet_wire_copper
+    qty: 1.0
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 0.5
+    unit: kg
+  - item_id: vacuum_envelope_quartz
+    qty: 0.2
+    unit: kg
+  - item_id: steel_stock
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: electrical_feedthrough_vacuum
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: electrical_feedthrough_vacuum_fabrication_v0
+  inputs:
+    - item_id: magnet_wire_copper
+      qty: 1.0
+      unit: kg
+    - item_id: ceramic_insulators
+      qty: 0.5
+      unit: kg
+    - item_id: vacuum_envelope_quartz
+      qty: 0.2
+      unit: kg
+    - item_id: steel_stock
+      qty: 0.3
+      unit: kg
+  outputs:
+    - item_id: electrical_feedthrough_vacuum
+      qty: 1.0
+      unit: unit
 notes: "Single-step fabrication path ending with electrical_feedthrough_vacuum"
-produces_id: electrical_feedthrough_vacuum
-produces_qty: 1.0
-produces_unit: unit

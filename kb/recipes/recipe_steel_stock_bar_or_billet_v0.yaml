@@ -1,11 +1,27 @@
 id: recipe_steel_stock_bar_or_billet_v0
 target_item_id: steel_stock_bar_or_billet
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: rolling_basic_v0
+    inputs:
+    - item_id: steel_ingot
+      qty: 1.0
+      unit: kg
+    outputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 0.95
+      unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 0.8
     notes: "Hot roll steel ingot into bar or billet shapes"
 assumptions: "Semi-finished steel product from hot rolling of ingots. Standard stock sizes for machining and forging feedstock."
-notes: "Production of steel bar and billet stock from ingots. Processing time ~1.5 hours per kg."
+notes: "Production of steel bar and billet stock from ingots. Processing time ~1.5 hours per kg. ~5% loss to scale and trim."

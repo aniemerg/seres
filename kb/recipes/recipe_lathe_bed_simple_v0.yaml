@@ -1,26 +1,41 @@
 id: recipe_lathe_bed_simple_v0
 kind: recipe
+name: Recipe for lathe bed simple
 target_item_id: lathe_bed_simple
 variant_id: v0
+inputs:
+  - item_id: iron_pig_or_ingot
+    qty: 45.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: lathe_bed_simple
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 5.0
+    unit: kg
 steps:
-  - process_id: casting_or_fabrication_machine_frame_v0
-    est_time_hr: 4.0
-    machine_hours: 3.0
-    labor_hours: 2.0
-    notes: "Cast iron bed with integral ways and mounting surfaces. Pattern includes core for hollow sections to reduce mass while maintaining rigidity."
-  - process_id: machining_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 2.5
-    labor_hours: 1.5
-    notes: "Rough machining of mounting surfaces, way surfaces, and bolt hole patterns. Leaves stock for final precision grinding."
-  - process_id: precision_grinding_and_scraping_v0
-    est_time_hr: 6.0
-    machine_hours: 4.0
-    labor_hours: 3.5
-    notes: "Precision grind V-ways and flat way to straightness within 0.02mm per meter. Hand scrape critical bearing surfaces for optimal flatness and oil retention."
   - process_id: assembly_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install leveling pads, chip pan mounting brackets, and protective way covers. Final inspection and alignment verification."
-assumptions: Cast iron material available with suitable composition for machine tool applications. Pattern-making capability assumed for casting process.
-notes: Fabrication of simplified lathe bed for compact engine lathe. Precision ways enable accurate carriage motion for turning operations.
+    inputs:
+      - item_id: iron_pig_or_ingot
+        qty: 45.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: lathe_bed_simple
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 5.0
+        unit: kg
+    est_time_hr: 14.0
+    machine_hours: 9.5
+    labor_hours: 8.0
+    notes: "Cast iron bed with integral ways and mounting surfaces, rough machine mounting and way surfaces, precision grind V-ways and flat way to straightness within 0.02mm/m, hand scrape bearing surfaces, install leveling pads and chip pan brackets"
+assumptions: "Cast iron material with composition suitable for machine tool applications, pattern-making capability for casting process"
+notes: "Fabrication of simplified cast iron lathe bed with precision-ground ways for compact engine lathe"

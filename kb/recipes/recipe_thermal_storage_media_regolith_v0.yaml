@@ -1,7 +1,23 @@
 id: recipe_thermal_storage_media_regolith_v0
 kind: recipe
 target_item_id: thermal_storage_media_regolith
+inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: thermal_storage_media_regolith
+    qty: 95.0
+    unit: kg
 steps:
   - process_id: regolith_collection_and_processing_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: thermal_storage_media_regolith
+        qty: 95.0
+        unit: kg
 notes: "Manufacture thermal_storage_media_regolith from lunar regolith using the defined regolith_collection_and_processing_v0 process."
 assumptions: "Process inputs: regolith_lunar_mare -> thermal_storage_media_regolith (95 kg output per 100 kg input) as per process v0."

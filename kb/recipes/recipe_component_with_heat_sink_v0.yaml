@@ -1,12 +1,39 @@
 id: recipe_component_with_heat_sink_v0
 target_item_id: component_with_heat_sink
 variant_id: v0
+inputs:
+  - item_id: electronic_component_or_module
+    qty: 1.0
+    unit: unit
+  - item_id: heat_sink
+    qty: 1.0
+    unit: unit
+  - item_id: thermal_interface_material
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: component_with_heat_sink
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: heat_sink_installation_v0
+    inputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
+      - item_id: heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: thermal_interface_material
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.3
     labor_hours: 0.3
     machine_hours: 0.1
     notes: Mount heat sink to electronic module with thermal interface material.
 assumptions: Electronic module, heat sink, and thermal interface material are available as inputs; fastening uses clips or screws. Throughput modeled per assembled unit.
 notes: Simple assembly route to add thermal management to a generic electronic module; refine with specific module IDs and TIM quantity later.
-

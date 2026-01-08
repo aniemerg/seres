@@ -3,8 +3,24 @@ kind: recipe
 target_item_id: metal_wire_feed_production_v0
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: metal_wire_feed
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_wire_feed_production_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: wire_feed_production_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed_production_v0
+        qty: 1.0
+        unit: kg
     notes: "One-step placeholder production path"
 assumptions: "Placeholder path; one-step transformation from metal_wire_feed to metal_wire_feed_production_v0 using wire_feed_production_basic_v0"
 notes: "Single-step path; to be replaced with real production chain"

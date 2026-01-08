@@ -1,12 +1,45 @@
 id: recipe_trichlorosilane_liquid_v0
 target_item_id: trichlorosilane_liquid
 variant_id: v0
+inputs:
+  - item_id: silicon_metal_v0
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 3.9
+    unit: kg
+  - item_id: blended_mixture
+    qty: 4.83
+    unit: kg
+outputs:
+  - item_id: trichlorosilane_liquid
+    qty: 4.83
+    unit: kg
 steps:
   - process_id: siemens_process_trichlorosilane_v0
+    inputs:
+      - item_id: silicon_metal_v0
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_chloride
+        qty: 3.9
+        unit: kg
+    outputs:
+      - item_id: trichlorosilane_liquid
+        qty: 4.83
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Synthesize trichlorosilane from silicon and hydrogen chloride"
   - process_id: fractional_distillation_v0
+    inputs:
+      - item_id: blended_mixture
+        qty: 4.83
+        unit: kg
+    outputs:
+      - item_id: trichlorosilane_liquid
+        qty: 4.59
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Purify trichlorosilane via distillation"

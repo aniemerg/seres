@@ -2,9 +2,47 @@ id: recipe_power_supply_dc_controlled_v0
 kind: recipe
 name: Recipe for DC-controlled power supply v0
 target_item_id: power_supply_dc_controlled
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 2.5
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_supply_dc_controlled
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 2.3
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 2.3
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_supply_dc_controlled
+        qty: 1.0
+        unit: unit
 assumptions: "Seed recipe mirroring DC power supply BOM component manufacturing"
 notes: "Seed recipe to manufacture power_supply_dc_controlled from standard unit operations; mirrors power_supply_unit_v0 pattern"

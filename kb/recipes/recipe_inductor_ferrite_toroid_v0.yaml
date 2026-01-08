@@ -5,7 +5,46 @@ target_item_id: inductor_ferrite_toroid_v0
 produces_id: inductor_ferrite_toroid_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: ferrite_toroid_core_v0
+    qty: 1.0
+    unit: unit
+  - item_id: aluminum_wire
+    qty: 0.2
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.01
+    unit: kg
+  - item_id: motor_coil_wound
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: inductor_ferrite_toroid_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: coil_winding_basic_v0
+  inputs:
+    - item_id: aluminum_wire
+      qty: 0.2
+      unit: kg
+    - item_id: coil_insulation_material
+      qty: 0.01
+      unit: kg
+  outputs:
+    - item_id: motor_coil_wound
+      qty: 0.2
+      unit: kg
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: ferrite_toroid_core_v0
+      qty: 1.0
+      unit: unit
+    - item_id: motor_coil_wound
+      qty: 0.2
+      unit: kg
+  outputs:
+    - item_id: inductor_ferrite_toroid_v0
+      qty: 1.0
+      unit: unit
 notes: "Seed recipe to assemble an inductor ferrite toroid around a ferrite toroid core with winding. Placeholder steps; adjust with actual coil specs and assembly steps as available."

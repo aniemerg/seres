@@ -1,4 +1,5 @@
 id: recipe_thermal_insulation_basic_v0
+kind: recipe
 target_item_id: thermal_insulation_basic
 variant_id: v0
 inputs:
@@ -14,6 +15,12 @@ inputs:
     qty: 0.5
     unit: kg
     notes: Water for mixing and forming
+  - item_id: wet_material
+    qty: 2.0
+    unit: kg
+  - item_id: dried_material
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: thermal_insulation_basic
     qty: 2.0
@@ -24,14 +31,44 @@ outputs:
     notes: Evaporated water recovered during drying
 steps:
   - process_id: refractory_casting_v0
+    inputs:
+      - item_id: ceramic_fiber_bulk
+        qty: 1.5
+        unit: kg
+      - item_id: binder_material
+        qty: 0.3
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: wet_material
+        qty: 2.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Cast or form insulation blankets/boards from ceramic fiber or mineral wool"
   - process_id: drying_and_curing_v0
+    inputs:
+      - item_id: wet_material
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: dried_material
+        qty: 2.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Dry insulation material"
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: dried_material
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: thermal_insulation_basic
+        qty: 2.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cut insulation to size for application"

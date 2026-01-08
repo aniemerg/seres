@@ -5,7 +5,29 @@ target_item_id: titanium_oxide
 produces_id: titanium_oxide
 produces_qty: 0.1
 produces_unit: kg
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: titanium_oxide
+    qty: 0.1
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 0.9
+    unit: kg
 steps:
 - process_id: metalysis_ffc_reduction_v0
+  inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: iron_metal_pure
+    qty: 0.9
+    unit: kg
+  - item_id: titanium_oxide
+    qty: 0.1
+    unit: kg
   notes: Produces titanium_oxide as a byproduct alongside iron_metal_pure
 notes: "Directly uses the Metalysis FFC reduction process to generate titanium oxide from ilmenite concentrate."

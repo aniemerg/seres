@@ -6,8 +6,30 @@ produces_id: crimping_tool_set
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
+inputs:
+- item_id: crimping_die_set
+  qty: 1.0
+  unit: unit
+- item_id: crimper_frame_and_handles
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: crimping_tool_set
+  qty: 1.0
+  unit: unit
 steps:
 - process_id: assembly_basic_v0
+  inputs:
+  - item_id: crimping_die_set
+    qty: 1.0
+    unit: unit
+  - item_id: crimper_frame_and_handles
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: crimping_tool_set
+    qty: 1.0
+    unit: unit
   notes: "Assemble crimping tool set from die set and frame/handles using basic assembly."
 assumptions: "crimping_die_set and crimper_frame_and_handles are available locally; no sub-assembly BOM required yet."
 notes: "Assemble crimping tool set from two subcomponents."

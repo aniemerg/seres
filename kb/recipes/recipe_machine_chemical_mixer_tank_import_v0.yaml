@@ -2,6 +2,10 @@ id: recipe_machine_chemical_mixer_tank_import_v0
 kind: recipe
 target_item_id: chemical_mixer_tank
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
     est_time_hr: 2.0
@@ -9,6 +13,10 @@ steps:
     machine_hours: 1.5
     notes: Cut shell and head panels plus baffles and nozzle plates.
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 0.98
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.2
     machine_hours: 1.2

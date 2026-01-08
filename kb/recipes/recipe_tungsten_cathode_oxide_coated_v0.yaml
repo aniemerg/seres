@@ -1,18 +1,56 @@
 id: recipe_tungsten_cathode_oxide_coated_v0
 target_item_id: tungsten_cathode_oxide_coated_v0
 variant_id: v0
+inputs:
+  - item_id: tungsten_powder
+    qty: 1.0
+    unit: kg
+  - item_id: nickel_sheet_rolling_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: tungsten_cathode_oxide_coated_v0
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: tungsten_wire_drawing_v0
-    est_time_hr: 0.5
-    labor_hours: 0.3
-    notes: Draw tungsten wire to fine diameter for cathode
   - process_id: tungsten_sintering_high_temp_v0
+    inputs:
+      - item_id: tungsten_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sintered_tungsten_part
+        qty: 0.95
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 0.5
     notes: Sinter tungsten for grain structure and strength
   - process_id: cathode_oxide_coating_process_v0
+    inputs:
+      - item_id: nickel_sheet_rolling_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cathode_oxide_layer_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: Apply oxide coating (BaO/SrO/CaO) and activate
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sintered_tungsten_part
+        qty: 0.95
+        unit: kg
+      - item_id: cathode_oxide_layer_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: tungsten_cathode_oxide_coated_v0
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Assemble oxide coating onto tungsten cathode base
 assumptions: Tungsten cathodes fabricated from lunar-derived or meteoritic tungsten. Oxide coating precursors (Ba, Sr, Ca) may require import initially. Coating activated by heating in vacuum.
 notes: Manufacturing route for oxide-coated tungsten cathodes. Critical component for all vacuum tube electronics. Source from photolithoautotroph and neural computing papers.

@@ -6,8 +6,24 @@ produces_qty: 1.0
 produces_unit: kg
 variant_id: v0
 target_item_id: coarse_powder
+inputs:
+  - item_id: regolith_coarse_fraction
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: coarse_powder
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: coarse_powder_production_v0
+    inputs:
+      - item_id: regolith_coarse_fraction
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: coarse_powder
+        qty: 1.0
+        unit: kg
 notes: "Single-step production of coarse powder from regolith_coarse_fraction; can be refined later."
 assumptions: |
   Assumes regolith_coarse_fraction is available; mass is conserved to within placeholder losses.

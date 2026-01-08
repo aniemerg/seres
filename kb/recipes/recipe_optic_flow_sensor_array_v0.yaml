@@ -1,6 +1,29 @@
 id: recipe_optic_flow_sensor_array_v0
 kind: recipe
 target_item_id: optic_flow_sensor_array_v0
+variant_id: v0
+inputs:
+  - item_id: pcb_bare_board
+    qty: 1.0
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: optic_flow_sensor_array_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: optic_flow_sensor_array_v0
+        qty: 1.0
+        unit: unit
 notes: "Migrated to target_item_id; uses assembly_basic_v0 as a minimal path for optic_flow_sensor_array_v0."

@@ -17,11 +17,30 @@ outputs:
     notes: "Wire drawing waste"
 steps:
   - process_id: wire_drawing_basic_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 0.05
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.3
     notes: "Draw NiCr alloy into resistance wire"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nichrome_wire
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.2
     labor_hours: 0.2
     notes: "Verify wire diameter and resistance"

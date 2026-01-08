@@ -1,10 +1,41 @@
 id: recipe_machine_vision_processing_v0_v0
 kind: recipe
 target_item_id: machine_vision_processing_v0_v0
-produces_id: machine_vision_processing_v0_v0
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: machine_vision_camera_v0
+    qty: 1.0
+    unit: unit
+  - item_id: camera_vacuum_tube_vidicon_v0
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1.0
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: machine_vision_processing_v0_v0
+    qty: 1.0
+    unit: unit
 steps:
-  - process_id: mock_mount_bore_v0
-notes: "Minimal placeholder recipe to close the no_recipe gap for machine_vision_processing_v0_v0. Will be expanded with real steps later."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_vision_camera_v0
+        qty: 1.0
+        unit: unit
+      - item_id: camera_vacuum_tube_vidicon_v0
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machine_vision_processing_v0_v0
+        qty: 1.0
+        unit: unit
+notes: "Minimal placeholder recipe to close the no_recipe gap for machine_vision_processing_v0_v0; assembled from basic vision hardware and enclosures."

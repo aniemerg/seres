@@ -1,20 +1,75 @@
 id: recipe_formation_wiring_harness_import_v0
 target_item_id: formation_wiring_harness
 variant_id: v0
+inputs:
+  - item_id: magnet_wire_copper
+    qty: 30.6
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 7.0
+    unit: kg
+  - item_id: cable_ties_and_sleeving
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: formation_wiring_harness
+    qty: 30.0
+    unit: kg
 steps:
   - process_id: wire_cutting_and_stripping_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 30.6
+        unit: kg
+    outputs:
+      - item_id: cut_wire_lengths
+        qty: 30.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Cut and strip multi-gauge leads for formation channels; include extra for strain relief."
   - process_id: crimping_and_termination_v0
+    inputs:
+      - item_id: cut_wire_lengths
+        qty: 30.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.2
     labor_hours: 1.2
     notes: "Crimp lugs/clamps/shunts onto leads; basic continuity check."
-  - process_id: cable_harness_assembly_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_wire_harness
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+      - item_id: cable_ties_and_sleeving
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Bundle, sleeve, and label harness branches; install connectors."
   - process_id: electrical_testing_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: formation_wiring_harness
+        qty: 30.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Continuity/insulation checks and polarity verification for harness."

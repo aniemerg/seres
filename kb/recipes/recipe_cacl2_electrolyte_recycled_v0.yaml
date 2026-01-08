@@ -1,6 +1,22 @@
 id: recipe_cacl2_electrolyte_recycled_v0
 kind: recipe
 target_item_id: cacl2_electrolyte_recycled_v0
+inputs:
+  - item_id: cacl2_electrolyte_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cacl2_electrolyte_recycled_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cacl2_electrolyte_recycle_v0
+    inputs:
+      - item_id: cacl2_electrolyte_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cacl2_electrolyte_recycled_v0
+        qty: 1.0
+        unit: kg
 notes: "Direct recycling path: CaCl2 electrolyte recycled from waste electrolyte via the recycle process."

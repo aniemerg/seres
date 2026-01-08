@@ -2,8 +2,54 @@ id: recipe_ferrotitanium_alloy_v0
 kind: recipe
 target_item_id: ferrotitanium_alloy
 variant_id: v0
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.15
+    unit: kg
+  - item_id: electrodes
+    qty: 0.04
+    unit: kg
+outputs:
+  - item_id: ferrotitanium_alloy
+    qty: 0.632
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.316
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.14
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.052
+    unit: kg
 steps:
   - process_id: ffc_ilmenite_feti_alloy_v0
+    inputs:
+      - item_id: ilmenite_concentrate
+        qty: 1.0
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.15
+        unit: kg
+      - item_id: electrodes
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: ferrotitanium_alloy
+        qty: 0.632
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 0.316
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.14
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.052
+        unit: kg
     notes: "Direct FFC electrolytic reduction of ilmenite to FeTi alloy"
 notes: |
   Recipe for producing ferrotitanium alloy from ilmenite via FFC Cambridge process.

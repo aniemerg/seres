@@ -4,7 +4,23 @@ produces_id: ai_processor_module_v0
 produces_qty: 1.0
 produces_unit: unit
 target_item_id: ai_processor_module_v0
+inputs:
+  - item_id: microcontroller_unit_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: ai_processor_module_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: ai_processor_module_assembly_v0
+    inputs:
+      - item_id: microcontroller_unit_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: ai_processor_module_v0
+        qty: 1.0
+        unit: unit
     notes: "Seed step; migrated from legacy format to structured step for indexer compatibility"
 notes: "Seed recipe to enable manufacturing modeling for AI processor module; uses microcontroller unit as input."

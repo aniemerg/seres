@@ -1,21 +1,33 @@
 id: recipe_steel_frame_heavy_v0
 target_item_id: steel_frame_heavy
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 100.0
+    unit: kg
+  - item_id: metal_tubing_stock
+    qty: 50.0
+    unit: kg
+outputs:
+  - item_id: steel_frame_heavy
+    qty: 1
+    unit: unit
 steps:
-  - process_id: sheet_metal_cutting_v0
-    est_time_hr: 6.0
-    labor_hours: 5.0
-    machine_hours: 5.0
-    notes: Cut plate and tube sections for frame members and mounting points.
-  - process_id: welding_brazing_basic_v0
-    est_time_hr: 8.0
-    labor_hours: 7.0
-    machine_hours: 7.0
-    notes: Weld box/tube sections into the main chassis; attach brackets and mounts.
-  - process_id: stress_relief_annealing_v0
-    est_time_hr: 4.0
-    labor_hours: 1.0
-    machine_hours: 1.0
-    notes: Stress relieve weldments to reduce distortion.
-assumptions: Uses heavy plate/tube steel feed; detailed fixturing, machining, and coating to be added later. Paint/coating not modeled yet.
-notes: Coarse fabrication route for heavy equipment frame; refine with machining/coat steps and BOM when available.
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 100.0
+        unit: kg
+      - item_id: metal_tubing_stock
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: steel_frame_heavy
+        qty: 1
+        unit: unit
+    est_time_hr: 18.0
+    labor_hours: 13.0
+    machine_hours: 13.0
+    notes: "Cut plate and tube sections for frame members and mounting points, weld box/tube sections into main chassis with brackets and mounts, stress relieve weldments to reduce distortion"
+assumptions: "Heavy welded steel frame from plate and tube stock for large ISRU machinery"
+notes: "Fabrication of heavy steel frame with cutting, welding, and stress relief treatment"

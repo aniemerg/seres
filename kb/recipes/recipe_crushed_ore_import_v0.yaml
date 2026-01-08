@@ -2,8 +2,24 @@ id: recipe_crushed_ore_import_v0
 kind: recipe
 target_item_id: crushed_ore
 variant_id: v0
+inputs:
+  - item_id: anorthite_ore
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: crushed_ore
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: crushing_basic_v0
+    inputs:
+      - item_id: anorthite_ore
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: crushed_ore
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Crush ore to sub-50mm size to produce crushed ore feed"

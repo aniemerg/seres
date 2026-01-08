@@ -1,18 +1,65 @@
 id: recipe_potting_curing_oven_small_v0
 target_item_id: potting_curing_oven_small
 variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 25.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 1.0
+    unit: kg
+  - item_id: heating_element_resistive
+    qty: 1.0
+    unit: unit
+  - item_id: furnace_chamber_unequipped
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: potting_curing_oven_small
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 24.0
+        unit: kg
     est_time_hr: 0.7
     machine_hours: 0.7
     labor_hours: 0.3
     notes: "Cut sheet/plate for oven enclosure and supports."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 24.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.8
     notes: "Assemble enclosure, mounts, and insulation panels."
   - process_id: heating_element_installation_v0
+    inputs:
+      - item_id: heating_element_resistive
+        qty: 1.0
+        unit: unit
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: potting_curing_oven_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Install heating elements and temperature sensor."

@@ -2,29 +2,33 @@ id: power_storage_basic_v0
 kind: process
 name: Basic power storage
 layer_tags:
-  - layer_8
+- layer_8
 process_type: continuous
 inputs:
-  - item_id: electrical_energy
-    qty: null
-    unit: kWh
+- item_id: electrical_energy
+  qty: 1.0
+  unit: kWh
 outputs:
-  - item_id: stored_energy
-    qty: null
-    unit: kWh
+- item_id: stored_energy
+  qty: 1.0
+  unit: kWh
 requires_ids:
-  - power_storage_bank_v0
-  - power_management_system
+- power_storage_bank_v0
+- power_management_system
 energy_model:
   type: per_unit
   value: 0.15
   unit: kWh/kWh
   scaling_basis: electrical_energy
-  notes: "~15% round-trip losses for battery storage per kWh stored"
+  notes: ~15% round-trip losses for battery storage per kWh stored
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kWh/hr
   scaling_basis: electrical_energy
-  notes: "charge/discharge throughput"
+  notes: charge/discharge throughput
 notes: Placeholder for storage; chemistry/technology undecided.
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: hr

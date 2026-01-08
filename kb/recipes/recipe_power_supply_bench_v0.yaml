@@ -1,16 +1,60 @@
 id: recipe_power_supply_bench_v0
 target_item_id: power_supply_bench
 variant_id: v0
+inputs:
+  - item_id: assembled_electronics
+    qty: 1.0
+    unit: kg
+  - item_id: enclosure_electrical_medium
+    qty: 12.0
+    unit: kg
+  - item_id: control_circuit_board_basic
+    qty: 2.0
+    unit: kg
+  - item_id: relay_electromagnetic_v0
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 3.0
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 3.0
+    unit: kg
+  - item_id: terminal_block_set
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+  - item_id: din_rail_steel
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: control_panel_assembly_v0
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Prepare chassis, mount transformer, cooling, and power electronics."
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: control_panel_assembly_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Wire control PCB, power electronics, and output terminals; add protection."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: power_supply_bench
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Bench-test voltage/current regulation and protection features."

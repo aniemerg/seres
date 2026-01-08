@@ -1,30 +1,75 @@
 id: recipe_furnace_high_temp_v0
 target_item_id: furnace_high_temp
 variant_id: v0
+inputs:
+  - item_id: furnace_shell_refractory
+    qty: 1
+    unit: unit
+  - item_id: heating_element_set_high_temp
+    qty: 1
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 1
+    unit: unit
+  - item_id: chamber_shell_sealed
+    qty: 1
+    unit: unit
+  - item_id: gas_handling_system
+    qty: 1
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_module
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: furnace_high_temp
+    qty: 1
+    unit: unit
 steps:
-  - process_id: sheet_metal_fabrication_v0
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Fabricate outer chamber shell and mounting frame"
-  - process_id: refractory_lining_installation_v0
-    est_time_hr: 20.0
-    labor_hours: 20.0
-    notes: "Install multi-layer refractory lining for 1600-3000°C capability"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 8.0
-    labor_hours: 8.0
-    notes: "Install heating elements, temperature sensors, and control systems"
-  - process_id: hydraulic_system_integration_v0
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Install gas handling system and cooling loops"
   - process_id: assembly_basic_v0
-    est_time_hr: 10.0
-    labor_hours: 10.0
-    notes: "Assemble all components, install insulation, seal chamber"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Test heating performance, atmosphere control, and temperature uniformity"
+    inputs:
+      - item_id: furnace_shell_refractory
+        qty: 1
+        unit: unit
+      - item_id: heating_element_set_high_temp
+        qty: 1
+        unit: unit
+      - item_id: insulation_pack_high_temp
+        qty: 1
+        unit: unit
+      - item_id: chamber_shell_sealed
+        qty: 1
+        unit: unit
+      - item_id: gas_handling_system
+        qty: 1
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_module
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: furnace_high_temp
+        qty: 1
+        unit: unit
+    est_time_hr: 60.0
+    machine_hours: 12.0
+    labor_hours: 48.0
+    notes: "Fabricate outer chamber shell and mounting frame, install multi-layer refractory lining for 1600-3000°C capability, install heating elements/temperature sensors/control systems, install gas handling system and cooling loops, assemble all components/install insulation/seal chamber, test heating performance/atmosphere control/temperature uniformity"
 assumptions: High-temperature furnace capable of 1600-3000°C for carbothermal reduction and sintering. Can use resistance heating or solar concentration.
 notes: High-temperature furnace for advanced materials processing. Critical for tungsten sintering, calcium oxide extraction, and other high-temperature chemical processes.

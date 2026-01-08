@@ -2,32 +2,186 @@ id: recipe_cryogenic_chiller_v0
 kind: recipe
 target_item_id: cryogenic_chiller_v0
 variant_id: v0
+inputs:
+  - item_id: cut_parts
+    qty: 300.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 6.0
+    unit: kg
+  - item_id: base_metal_parts
+    qty: 50.0
+    unit: kg
+  - item_id: brazing_alloy_generic
+    qty: 1.0
+    unit: kg
+  - item_id: flux_brazing
+    qty: 0.2
+    unit: kg
+  - item_id: compressor_reciprocating
+    qty: 1.0
+    unit: unit
+  - item_id: heat_exchanger_tube_shell
+    qty: 2.0
+    unit: unit
+  - item_id: expansion_valve_cryogenic
+    qty: 1.0
+    unit: unit
+  - item_id: cryogenic_fluid_reservoir
+    qty: 1.0
+    unit: unit
+  - item_id: heat_pipes_or_loop
+    qty: 1.0
+    unit: unit
+  - item_id: structural_frame_large
+    qty: 1.0
+    unit: unit
+  - item_id: power_cable_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electronics
+    qty: 1.0
+    unit: kg
+  - item_id: finished_part
+    qty: 300.0
+    unit: kg
+outputs:
+  - item_id: cryogenic_chiller_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_rough_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 300.0
+        unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
     notes: "Machine compressor housing, heat exchanger bodies, and mounting brackets"
   - process_id: welding_structural_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 300.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 300.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Weld structural frame and pressure vessel components"
   - process_id: brazing_process_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 50.0
+        unit: kg
+      - item_id: brazing_alloy_generic
+        qty: 1.0
+        unit: kg
+      - item_id: flux_brazing
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: brazed_assembly
+        qty: 50.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Braze heat exchanger tubes and vacuum-insulated piping joints"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 300.0
+        unit: kg
+      - item_id: brazed_assembly
+        qty: 50.0
+        unit: kg
+      - item_id: compressor_reciprocating
+        qty: 1.0
+        unit: unit
+      - item_id: heat_exchanger_tube_shell
+        qty: 2.0
+        unit: unit
+      - item_id: expansion_valve_cryogenic
+        qty: 1.0
+        unit: unit
+      - item_id: cryogenic_fluid_reservoir
+        qty: 1.0
+        unit: unit
+      - item_id: heat_pipes_or_loop
+        qty: 1.0
+        unit: unit
+      - item_id: structural_frame_large
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: finished_part
+        qty: 300.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Assemble compressor, heat exchangers, expansion valve, and reservoir"
   - process_id: vacuum_testing_v0
+    inputs:
+      - item_id: finished_part
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 300.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Evacuate and test vacuum insulation integrity"
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: finished_part
+        qty: 300.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1.0
+        unit: unit
+      - item_id: power_cable_assembly
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Wire temperature and pressure sensors, install controller, connect power"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cryogenic_chiller_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Charge with refrigerant, test cooling performance, verify temperature control"

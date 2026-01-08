@@ -6,6 +6,30 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: pheromone_trail_marking_v0
 variant_id: v0
+inputs:
+  - item_id: plastic_housing_molded
+    qty: 0.15
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.05
+    unit: kg
+outputs:
+  - item_id: pheromone_trail_marking_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: plastic_housing_molded
+        qty: 0.15
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: pheromone_trail_marking_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 0.5
+    labor_hours: 0.5
 notes: "Placeholder recipe to manufacture pheromone_trail_marking_v0; uses basic assembly route from BOM components."

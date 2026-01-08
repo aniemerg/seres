@@ -24,6 +24,10 @@ inputs:
     qty: 25.0
     unit: kg
     notes: Bar stock for box section reinforcements (formed into square tubing)
+  - item_id: welded_fabrications
+    qty: 480.0
+    unit: kg
+    notes: Intermediate for finish machining step
 
 outputs:
   - item_id: structural_steel_frame
@@ -32,28 +36,88 @@ outputs:
 
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_beam_i_section
+        qty: 300.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 440.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: Cut structural sections to length and prepare joints
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 24.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 2.0
     notes: Bend or notch sections as needed for frame geometry
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 440.0
+        unit: kg
+      - item_id: formed_metal_part
+        qty: 24.0
+        unit: kg
+      - item_id: fastener_kit_large
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 470.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: Tack weld frame assembly and verify alignment
-  - process_id: welding_structural_v0
+  - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 470.0
+        unit: kg
+      - item_id: welding_rod_steel
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 480.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     labor_hours: 12.0
     notes: Full penetration structural welding of all joints
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 480.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: Machine mounting surfaces and bolt holes to tolerance
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 495.0
+        unit: kg
+    outputs:
+      - item_id: structural_steel_frame
+        qty: 500.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: Inspect welds, check dimensional tolerances and alignment

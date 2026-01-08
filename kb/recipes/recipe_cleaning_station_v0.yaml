@@ -1,16 +1,61 @@
 id: recipe_cleaning_station_v0
 kind: recipe
+name: Recipe for cleaning station v0
+target_item_id: cleaning_station_basic_v0
+variant_id: v0
 produces_id: cleaning_station_basic_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: machine_frame_small
+    qty: 1
+    unit: unit
+  - item_id: enclosure_steel_small
+    qty: 1
+    unit: unit
+  - item_id: pump_water_small
+    qty: 1
+    unit: unit
+  - item_id: piping_assembly_small
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: cleaning_station_basic_v0
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: assembly_basic_v0
-  notes: Pre-assembly of subcomponents into machine shell
-- process_id: enclosure_assembly_basic_v0
-  notes: Assemble enclosure for cleaning station electronics and plumbing
-- process_id: electrical_wiring_and_controls_v0
-  notes: Install wiring, control panels, sensors, interlocks for cleaning station
-- process_id: machine_assembly_basic_v0
-  notes: 'Final assembly: frame, enclosure, wiring into cleaning_station_basic_v0'
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1
+        unit: unit
+      - item_id: enclosure_steel_small
+        qty: 1
+        unit: unit
+      - item_id: pump_water_small
+        qty: 1
+        unit: unit
+      - item_id: piping_assembly_small
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cleaning_station_basic_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 10.0
+    machine_hours: 2.0
+    labor_hours: 8.0
+    notes: "Pre-assemble subcomponents, assemble enclosure for cleaning station electronics and plumbing, install wiring and control panels with sensors and interlocks, final assembly of frame with enclosure and systems into complete cleaning station"
 notes: Prototype recipe to manufacture cleaning_station_basic_v0; refine BOM and process details
-target_item_id: cleaning_station_basic_v0

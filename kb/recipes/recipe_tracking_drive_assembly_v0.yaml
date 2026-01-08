@@ -1,20 +1,51 @@
 id: recipe_tracking_drive_assembly_v0
 target_item_id: tracking_drive_assembly
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 30.0
+    unit: kg
+  - item_id: motor_electric_small
+    qty: 2
+    unit: unit
+  - item_id: bearing_set_small
+    qty: 2
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: tracking_drive_assembly
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 3.0
+    unit: kg
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 0.5
-    notes: "Machine housings, shafts, and mounting brackets for drive components."
-  - process_id: gear_cutting_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    labor_hours: 0.5
-    notes: "Cut gears or pulleys for tracking actuators."
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble actuators, gearboxes, and bearings into drive module."
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 30.0
+        unit: kg
+      - item_id: motor_electric_small
+        qty: 2
+        unit: unit
+      - item_id: bearing_set_small
+        qty: 2
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: tracking_drive_assembly
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 3.0
+        unit: kg
+    est_time_hr: 5.5
+    machine_hours: 3.5
+    labor_hours: 3.0
+    notes: "Machine housings, shafts, and mounting brackets for drive components, cut gears or pulleys for tracking actuators, assemble actuators, gearboxes, and bearings into drive module"
 assumptions: Small actuator scale; gears may be coarse; electric drives used.
 notes: Drive assembly for solar tracker axes (actuator + gearing + mounts).

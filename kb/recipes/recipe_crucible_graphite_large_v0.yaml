@@ -1,20 +1,62 @@
 id: recipe_crucible_graphite_large_v0
 target_item_id: crucible_graphite_large
 variant_id: v0
+produces_qty: 15.0
+produces_unit: kg
+inputs:
+  - item_id: graphite_powder
+    qty: 16.0
+    unit: kg
+outputs:
+  - item_id: crucible_graphite_large
+    qty: 15.0
+    unit: kg
 steps:
   - process_id: ceramic_forming_basic_v0
+    inputs:
+      - item_id: graphite_powder
+        qty: 16.0
+        unit: kg
+    outputs:
+      - item_id: green_ceramic_parts
+        qty: 16.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Form graphite crucible blank from graphite powder and binder"
   - process_id: sintering_basic_v0
+    inputs:
+      - item_id: green_ceramic_parts
+        qty: 16.0
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 15.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Sinter graphite crucible at high temperature to consolidate"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sintered_parts
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Machine crucible interior and rim to final dimensions"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: crucible_graphite_large
+        qty: 15.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Inspect for cracks, verify dimensions and pour spout"

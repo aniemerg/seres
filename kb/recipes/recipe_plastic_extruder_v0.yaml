@@ -2,12 +2,122 @@ id: recipe_plastic_extruder_v0
 kind: recipe
 target_item_id: plastic_extruder_v0
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 5.0
+    unit: kg
+  - item_id: extruder_head_basic
+    qty: 1
+    unit: unit
+  - item_id: heating_plate_or_induction_heater
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1
+    unit: unit
+  - item_id: steel_frame_welded
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: plastic_extruder_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 4.75
+        unit: kg
+    notes: "Cast extruder barrel and mounting brackets"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 4.75
+        unit: kg
+    notes: "Weld barrel sections and brackets"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
+    notes: "Machine barrel bore and mounting surfaces to precision"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
+      - item_id: extruder_head_basic
+        qty: 1
+        unit: unit
+      - item_id: heating_plate_or_induction_heater
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1
+        unit: unit
+      - item_id: steel_frame_welded
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    notes: "Assemble machined barrel with motor, gearbox, heater, and frame"
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+    notes: "Wire heaters, sensors, and motor controls"
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: plastic_extruder_v0
+        qty: 1
+        unit: unit
+    notes: "Final integration, testing, and calibration"
 notes: "Local production path for plastic_extruder_v0; mirrors the base plastic_extruder_v0 production chain."
 assumptions: "Variant v0; local fabrication path for plastic_extruder_v0"

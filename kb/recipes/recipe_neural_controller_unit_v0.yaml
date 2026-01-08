@@ -3,10 +3,52 @@ kind: recipe
 name: Recipe for Neural Controller Unit v0
 target_item_id: neural_controller_unit_v0
 variant_id: v0
+inputs:
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_electronics
+    qty: 1.0
+    unit: kg
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
   - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: neural_controller_unit_v0
+        qty: 1.0
+        unit: unit
 assumptions: "Placeholder electronics path for neural controller unit; uses standard PCB + electronics subassemblies and basic testing."
 notes: "Initial placeholder recipe for neural_controller_unit_v0; refine with BOM and process times later."

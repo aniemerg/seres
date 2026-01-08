@@ -1,6 +1,23 @@
 id: recipe_purified_dicobalt_octacarbonyl_v0
 kind: recipe
 target_item_id: purified_dicobalt_octacarbonyl
+variant_id: v0
+inputs:
+  - item_id: dicobalt_octacarbonyl
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: purified_dicobalt_octacarbonyl
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cobalt_carbonyl_process_v0
+    inputs:
+      - item_id: dicobalt_octacarbonyl
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: purified_dicobalt_octacarbonyl
+        qty: 1.0
+        unit: kg
 notes: "Derives purified product from dicobalt octacarbonyl via cobalt_carbonyl_process_v0; placeholder chain."

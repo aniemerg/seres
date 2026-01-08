@@ -1,22 +1,62 @@
 id: recipe_saw_or_cutting_tool_v0
 target_item_id: saw_or_cutting_tool
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: saw_or_cutting_tool
+    qty: 1.0
+    unit: unit
+  - item_id: steel_scrap_v0
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: forging_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: forged_steel_parts
+        qty: 0.9
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.4
     machine_hours: 0.3
     notes: Forge frame blanks and blade backer from steel stock.
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: forged_steel_parts
+        qty: 0.9
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.8
+        unit: kg
     est_time_hr: 0.4
     labor_hours: 0.3
     machine_hours: 0.4
     notes: Machine blade slots, tensioning features, and handle interface; finish cut edges.
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.8
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: saw_or_cutting_tool
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.3
     labor_hours: 0.3
     machine_hours: 0.2
     notes: Assemble frame, fasteners, and blade; align and tension.
 assumptions: Uses generic steel stock and fasteners; blade teeth geometry and hardening to be refined later.
 notes: Basic three-step route to a hand saw/hacksaw equivalent; replace with detailed heat treat and blade production later.
-

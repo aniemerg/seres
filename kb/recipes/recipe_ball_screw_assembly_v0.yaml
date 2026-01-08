@@ -1,11 +1,34 @@
 id: recipe_ball_screw_assembly_v0
 kind: recipe
 name: Ball screw assembly fabrication v0
-produces_id: ball_screw_assembly
-produces_qty: 1.0
-produces_unit: unit
-steps:
-- process_id: ball_screw_fabrication_v0
-  notes: Fabricate ball screw assembly from stock steel bar.
-  assumptions: Ball screw assembly assumes stock bar input and basic machining; tolerances not specified.
 target_item_id: ball_screw_assembly
+variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 7.0
+    unit: kg
+  - item_id: bearing_ball_steel
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: ball_screw_assembly
+    qty: 1
+    unit: unit
+steps:
+  - process_id: ball_screw_fabrication_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 7.0
+        unit: kg
+      - item_id: bearing_ball_steel
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: ball_screw_assembly
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    notes: "Machine screw shaft with precision ball grooves, fabricate nut housing, assemble ball screw with recirculating ball bearings"
+assumptions: "Ball screw assembly from stock bar with precision machining for linear motion systems"
+notes: "Fabrication of precision ball screw assembly with nut for linear motion applications"

@@ -2,9 +2,39 @@ id: recipe_voltage_regulation_circuit_alias_v0
 kind: recipe
 target_item_id: voltage_regulation_circuit
 variant_id: v0_alias
+inputs:
+  - item_id: pcb_blank
+    qty: 0.3
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: voltage_regulator_switching_v0
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: voltage_regulation_circuit
+    qty: 1
+    unit: unit
 steps:
-  - process_id: pcb_assembly_v0
-  - process_id: electronics_assembly_v0
-  - process_id: voltage_regulation_circuit_assembly_v0
-notes: "Alias seed recipe to manufacture voltage_regulation_circuit (bare alias) using v0 PCB and electronics assembly plus circuit assembly."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_blank
+        qty: 0.3
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+      - item_id: voltage_regulator_switching_v0
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: voltage_regulation_circuit
+        qty: 1
+        unit: unit
+    est_time_hr: 2.5
+    machine_hours: 1.5
+    labor_hours: 2.0
+    notes: "Assemble PCB with electronics, integrate voltage regulator module"
+notes: "Alias seed recipe to manufacture voltage_regulation_circuit (bare alias) using PCB and electronics assembly plus regulator module."
 assumptions: "Voltage regulation circuit assembled from PCB, electronics, and regulator module; alias to v0 for mass modeling."

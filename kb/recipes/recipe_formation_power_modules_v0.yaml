@@ -5,25 +5,68 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: formation_power_modules
 variant_id: v0
+inputs:
+  - item_id: bare_pcb
+    qty: 5.0
+    unit: kg
+  - item_id: mosfet_power_set
+    qty: 10.0
+    unit: kg
+  - item_id: inductor_filter_large
+    qty: 15.0
+    unit: kg
+  - item_id: capacitor_bank_power
+    qty: 15.0
+    unit: kg
+  - item_id: heat_sink_assembly_large
+    qty: 30.0
+    unit: kg
+  - item_id: enclosure_electrical_medium
+    qty: 40.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 3.0
+    unit: kg
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: formation_power_modules
+    qty: 1
+    unit: unit
 steps:
-  - process_id: pcb_assembly_basic_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Assemble formation power module PCB"
-  - process_id: power_component_assembly_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Mount MOSFETs, inductors, capacitors, transformers into core"
-  - process_id: heat_sink_installation_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Attach heatsinks and thermal interface"
   - process_id: assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Encapsulate assembly in enclosure and wire interfaces"
-  - process_id: electrical_testing_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Electrical testing and verification"
+    inputs:
+      - item_id: bare_pcb
+        qty: 5.0
+        unit: kg
+      - item_id: mosfet_power_set
+        qty: 10.0
+        unit: kg
+      - item_id: inductor_filter_large
+        qty: 15.0
+        unit: kg
+      - item_id: capacitor_bank_power
+        qty: 15.0
+        unit: kg
+      - item_id: heat_sink_assembly_large
+        qty: 30.0
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 40.0
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 3.0
+        unit: kg
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: formation_power_modules
+        qty: 1
+        unit: unit
+    est_time_hr: 9.5
+    machine_hours: 3.0
+    labor_hours: 6.5
+    notes: "Assemble formation power module PCB, mount MOSFETs/inductors/capacitors/transformers into core, attach heatsinks and thermal interface, encapsulate assembly in enclosure and wire interfaces, electrical testing and verification"
 notes: "Concrete production recipe to replace import placeholder for formation_power_modules."

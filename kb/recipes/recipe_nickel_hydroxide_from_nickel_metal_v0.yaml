@@ -5,6 +5,34 @@ produces_id: nickel_hydroxide
 produces_qty: 1.0
 produces_unit: kg
 target_item_id: nickel_hydroxide
+inputs:
+  - item_id: nickel_metal_pure
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 1.0
+    unit: kg
+  - item_id: potassium_hydroxide
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: nickel_hydroxide
+    qty: 2.5
+    unit: kg
 steps:
   - process_id: nickel_hydroxide_synthesis_from_nickel_metal_v0
+    inputs:
+      - item_id: nickel_metal_pure
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 1.0
+        unit: kg
+      - item_id: potassium_hydroxide
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: nickel_hydroxide
+        qty: 2.5
+        unit: kg
 notes: "Local recipe to synthesize nickel hydroxide from nickel metal."

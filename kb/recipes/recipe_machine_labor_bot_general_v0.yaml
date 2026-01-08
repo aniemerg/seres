@@ -1,9 +1,194 @@
 id: recipe_machine_labor_bot_general_v0
 target_item_id: labor_bot_general_v0
 variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1
+    unit: unit
+  - item_id: robot_arm_link_aluminum
+    qty: 2
+    unit: unit
+  - item_id: robot_wrist_3axis
+    qty: 1
+    unit: unit
+  - item_id: motor_housing_cast
+    qty: 6
+    unit: unit
+  - item_id: motor_electric_medium
+    qty: 4
+    unit: unit
+  - item_id: motor_electric_small
+    qty: 2
+    unit: unit
+  - item_id: harmonic_drive_reducer_medium
+    qty: 6
+    unit: unit
+  - item_id: power_supply_small_imported
+    qty: 1
+    unit: unit
+  - item_id: power_distribution_board
+    qty: 1
+    unit: unit
+  - item_id: battery_backup_small
+    qty: 1
+    unit: unit
+  - item_id: computer_core_imported
+    qty: 1
+    unit: unit
+  - item_id: servo_drive_controller
+    qty: 6
+    unit: unit
+  - item_id: safety_controller_plc
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: force_torque_sensor_6axis
+    qty: 1
+    unit: unit
+  - item_id: touch_sensor_capacitive
+    qty: 2
+    unit: unit
+  - item_id: proximity_sensor_inductive
+    qty: 4
+    unit: unit
+  - item_id: instrument_mounts_basic
+    qty: 1
+    unit: unit
+  - item_id: led_ring_light
+    qty: 2
+    unit: unit
+  - item_id: electric_parallel_gripper
+    qty: 1
+    unit: unit
+  - item_id: stepper_motor_precision
+    qty: 1
+    unit: unit
+  - item_id: quick_change_tool_interface
+    qty: 1
+    unit: unit
+  - item_id: assembled_cable_harness
+    qty: 7
+    unit: unit
+  - item_id: cable_drag_chain
+    qty: 2
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1
+    unit: unit
+  - item_id: thermal_management_system
+    qty: 1
+    unit: unit
+  - item_id: control_components
+    qty: 1
+    unit: unit
+  - item_id: safety_light_curtain
+    qty: 1
+    unit: unit
+  - item_id: protective_cover_set
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: labor_bot_general_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1
+        unit: unit
+      - item_id: robot_arm_link_aluminum
+        qty: 2
+        unit: unit
+      - item_id: robot_wrist_3axis
+        qty: 1
+        unit: unit
+      - item_id: motor_housing_cast
+        qty: 6
+        unit: unit
+      - item_id: motor_electric_medium
+        qty: 4
+        unit: unit
+      - item_id: motor_electric_small
+        qty: 2
+        unit: unit
+      - item_id: harmonic_drive_reducer_medium
+        qty: 6
+        unit: unit
+      - item_id: power_supply_small_imported
+        qty: 1
+        unit: unit
+      - item_id: power_distribution_board
+        qty: 1
+        unit: unit
+      - item_id: battery_backup_small
+        qty: 1
+        unit: unit
+      - item_id: computer_core_imported
+        qty: 1
+        unit: unit
+      - item_id: servo_drive_controller
+        qty: 6
+        unit: unit
+      - item_id: safety_controller_plc
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: force_torque_sensor_6axis
+        qty: 1
+        unit: unit
+      - item_id: touch_sensor_capacitive
+        qty: 2
+        unit: unit
+      - item_id: proximity_sensor_inductive
+        qty: 4
+        unit: unit
+      - item_id: instrument_mounts_basic
+        qty: 1
+        unit: unit
+      - item_id: led_ring_light
+        qty: 2
+        unit: unit
+      - item_id: electric_parallel_gripper
+        qty: 1
+        unit: unit
+      - item_id: stepper_motor_precision
+        qty: 1
+        unit: unit
+      - item_id: quick_change_tool_interface
+        qty: 1
+        unit: unit
+      - item_id: assembled_cable_harness
+        qty: 7
+        unit: unit
+      - item_id: cable_drag_chain
+        qty: 2
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1
+        unit: unit
+      - item_id: thermal_management_system
+        qty: 1
+        unit: unit
+      - item_id: control_components
+        qty: 1
+        unit: unit
+      - item_id: safety_light_curtain
+        qty: 1
+        unit: unit
+      - item_id: protective_cover_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: labor_bot_general_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 140.0
+    labor_hours: 140.0
+    notes: "Assemble 6-DOF industrial robotic manipulator from BOM components including mechanical structure, actuation, power, control, sensing, end effector, wiring, and safety systems"
 assumptions: Assemble per BOM; parts produced via part-level routes; imported compute as part.
-notes: Coarse assembly route; add detailed steps later.
+notes: Recipe for labor_bot_general_v0 assembly from detailed BOM components.

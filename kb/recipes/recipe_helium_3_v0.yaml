@@ -2,8 +2,20 @@ id: recipe_helium_3_v0
 kind: recipe
 target_item_id: helium_3
 variant_id: v0
+inputs:
+  - item_id: helium_mixed_isotopes
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: helium_3
+    qty: 0.000014
+    unit: kg
 steps:
   - process_id: helium3_cryogenic_separation_v0
+    inputs:
+      - item_id: helium_mixed_isotopes
+        qty: 1.0
+        unit: kg
     outputs:
       - item_id: helium_3
         qty: 0.000014

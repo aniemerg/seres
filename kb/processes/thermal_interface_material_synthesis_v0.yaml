@@ -2,17 +2,20 @@ id: thermal_interface_material_synthesis_v0
 name: Thermal interface material synthesis
 kind: process
 inputs:
-  - item_id: silicone_polymer
-    qty: 0.9
-    unit: kg
-  - item_id: silicone_curing_agent
-    qty: 0.1
-    unit: kg
+- item_id: silicone_polymer
+  qty: 0.9
+  unit: kg
+- item_id: silicone_curing_agent
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: thermal_interface_material
-    qty: 1.0
-    unit: kg
-resource_requirements: []
+- item_id: thermal_interface_material
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.2
+  unit: hr
 time_model:
   type: batch
   hr_per_batch: 0.2
@@ -20,5 +23,6 @@ energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-notes: "Synthesis of TIM from silicone polymer and curing agent to produce TIM material (placeholder; future polymer processing may refine)."
+notes: Synthesis of TIM from silicone polymer and curing agent to produce TIM material
+  (placeholder; future polymer processing may refine).
 process_type: batch

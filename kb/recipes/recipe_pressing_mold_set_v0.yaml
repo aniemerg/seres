@@ -5,31 +5,29 @@ inputs:
   - item_id: steel_bar_stock
     qty: 35.0
     unit: kg
-    notes: Tool steel for mold bodies and punches
 outputs:
   - item_id: pressing_mold_set
-    qty: 30.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: steel_scrap
     qty: 5.0
     unit: kg
-    notes: Machining and grinding waste
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 20.0
-    machine_hours: 20.0
-    notes: "Machine mold cavities, die bodies, punches, and ejector components"
-  - process_id: heat_treat_basic_v0
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    notes: "Heat treatment for hardness and wear resistance (HRC 50-55)"
-  - process_id: precision_grinding_basic_v0
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Precision grind mold surfaces for dimensional accuracy and smooth finish"
-  - process_id: inspection_basic_v0
-    est_time_hr: 2.0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 35.0
+        unit: kg
+    outputs:
+      - item_id: pressing_mold_set
+        qty: 1
+        unit: unit
+      - item_id: steel_scrap
+        qty: 5.0
+        unit: kg
+    est_time_hr: 42.0
+    machine_hours: 40.0
     labor_hours: 2.0
-    notes: "Verify dimensions, surface finish, and mold alignment"
-assumptions: Precision mold tooling for ceramic and powder metallurgy pressing. Requires hardened tool steel with precision-ground surfaces for consistent part geometry and release.
-notes: Mold set for hydraulic press operations. Used to form green ceramics, powder metallurgy compacts, and other pressed materials prior to sintering.
+    notes: "Machine mold cavities/die bodies/punches/ejector components, heat treat for hardness and wear resistance (HRC 50-55), precision grind mold surfaces for dimensional accuracy, verify dimensions and surface finish"
+assumptions: "Precision mold tooling for ceramic and powder metallurgy pressing - hardened tool steel with precision-ground surfaces for consistent part geometry and release"
+notes: "Fabrication of mold set for hydraulic press operations used to form green ceramics, powder metallurgy compacts, and pressed materials prior to sintering"

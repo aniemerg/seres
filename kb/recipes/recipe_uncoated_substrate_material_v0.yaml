@@ -1,6 +1,22 @@
 id: recipe_uncoated_substrate_material_v0
 kind: recipe
 target_item_id: uncoated_substrate_material_v0
+inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: uncoated_substrate_material_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: substrate_fabrication_basic_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: uncoated_substrate_material_v0
+        qty: 1.0
+        unit: kg
 notes: "Seed production of uncoated substrate material via basic seed process; aligns with substrate_fabrication_basic_v0"

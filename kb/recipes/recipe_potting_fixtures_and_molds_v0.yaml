@@ -1,10 +1,19 @@
 id: recipe_potting_fixtures_and_molds_v0
 kind: recipe
 target_item_id: potting_fixtures_and_molds
+inputs:
+  - item_id: steel_sheet_3mm
+    qty: 12.0
+    unit: kg
+    notes: Steel sheet stock for fixture/mold fabrication
+outputs:
+  - item_id: potting_fixtures_and_molds
+    qty: 1
+    unit: unit
 steps:
   - process_id: fixture_and_mold_fabrication_v0
     inputs:
-      - item_id: steel_plate_or_sheet
+      - item_id: steel_sheet_3mm
         qty: 12.0
         unit: kg
     outputs:

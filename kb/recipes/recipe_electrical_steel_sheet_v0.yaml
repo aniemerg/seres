@@ -1,5 +1,27 @@
 id: recipe_electrical_steel_sheet_v0
 kind: recipe
 target_item_id: electrical_steel_sheet
+inputs:
+  - item_id: iron_metal_pure
+    qty: 0.96
+    unit: kg
+  - item_id: silicon_metal_v0
+    qty: 0.04
+    unit: kg
+outputs:
+  - item_id: electrical_steel_sheet
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: electrical_steel_production_v0
+    inputs:
+      - item_id: iron_metal_pure
+        qty: 0.96
+        unit: kg
+      - item_id: silicon_metal_v0
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: electrical_steel_sheet
+        qty: 1.0
+        unit: kg

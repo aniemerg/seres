@@ -1,8 +1,55 @@
 id: recipe_machine_solar_array_v0
+kind: recipe
 target_item_id: solar_array_v0
 variant_id: v0
+inputs:
+  - item_id: pv_module_imported
+    qty: 8
+    unit: unit
+  - item_id: array_mount_structure
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: solar_array_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pv_module_imported
+        qty: 8
+        unit: unit
+      - item_id: array_mount_structure
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: solar_array_v0
+        qty: 1
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
 assumptions: Assemble per BOM; parts produced via part-level routes; PV modules imported.

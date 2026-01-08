@@ -1,8 +1,58 @@
 id: recipe_wheel_load_cell_system_v0
 kind: recipe
+name: Recipe for wheel load cell system
 target_item_id: wheel_load_cell_system_v0
+variant_id: v0
+inputs:
+  - item_id: load_cell_strain_gauge_v0
+    qty: 4
+    unit: unit
+  - item_id: aluminum_alloy_bar
+    qty: 2.0
+    unit: kg
+  - item_id: signal_amplifier_module
+    qty: 1
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: wheel_load_cell_system_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 0.3
+    unit: kg
 steps:
-  - process_id: grinding_basic_v0
   - process_id: assembly_basic_v0
-  - process_id: machine_assembly_basic_v0
-notes: "Local fabrication path for wheel_load_cell_system_v0; replaces import stub."
+    inputs:
+      - item_id: load_cell_strain_gauge_v0
+        qty: 4
+        unit: unit
+      - item_id: aluminum_alloy_bar
+        qty: 2.0
+        unit: kg
+      - item_id: signal_amplifier_module
+        qty: 1
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: wheel_load_cell_system_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_swarf
+        qty: 0.3
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Machine aluminum mounting brackets, install strain gauge load cells on each wheel position, integrate signal amplifier and wiring harness, calibrate load measurement system"
+notes: "Assembly of wheel load cell system with strain gauges for vehicle weight distribution monitoring"

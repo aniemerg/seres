@@ -1,21 +1,82 @@
 id: recipe_robot_power_docking_coupler_v0
 target_item_id: robot_power_docking_coupler_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 2.5
+    unit: kg
+  - item_id: seal_rubber_o_ring
+    qty: 0.1
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.3
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 0.2
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: robot_power_docking_coupler_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.3
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     labor_hours: 0.5
     notes: "Machine coupler body, alignment taper, and pin bores."
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.3
+        unit: kg
+      - item_id: seal_rubber_o_ring
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install gaskets/seals, dust covers, and locking pins."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.3
+        unit: kg
+      - item_id: wire_copper_insulated
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install high-current contacts, wiring pigtails, and strain relief."
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: robot_power_docking_coupler_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Check fit, lock engagement, and continuity."

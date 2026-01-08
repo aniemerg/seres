@@ -1,6 +1,22 @@
 id: recipe_positioned_material_or_parts_v0
 kind: recipe
 target_item_id: positioned_material_or_parts
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: positioned_material_or_parts
+    qty: 100.0
+    unit: kg
 steps:
   - process_id: material_handling_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: positioned_material_or_parts
+        qty: 100.0
+        unit: kg
 notes: "Produce positioned_material_or_parts from bulk_material_or_parts using the existing material_handling_v0 process. Placeholder recipe to close the no_recipe gap."

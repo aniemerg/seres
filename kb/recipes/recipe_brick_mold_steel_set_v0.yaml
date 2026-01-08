@@ -3,15 +3,65 @@ kind: recipe
 name: Brick mold steel set (v0)
 target_item_id: brick_mold_steel_set
 variant_id: v0
+inputs:
+  - item_id: prepared_mold
+    qty: 2.0
+    unit: kg
+  - item_id: regolith_fine_fraction
+    qty: 2.0
+    unit: kg
+  - item_id: binder_simple
+    qty: 0.1
+    unit: kg
+  - item_id: metal_feedstock
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: brick_mold_steel_set
+    qty: 0.9
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
+    inputs:
+    - item_id: regolith_fine_fraction
+      qty: 2.0
+      unit: kg
+    - item_id: binder_simple
+      qty: 0.1
+      unit: kg
+    outputs:
+    - item_id: prepared_mold
+      qty: 2.0
+      unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
+    notes: "Prepare casting molds for brick mold blocks"
   - process_id: metal_casting_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 1.0
+      unit: kg
+    - item_id: prepared_mold
+      qty: 2.0
+      unit: kg
+    outputs:
+    - item_id: cast_metal_parts
+      qty: 0.95
+      unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
+    notes: "Cast steel brick mold blocks"
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: cast_metal_parts
+      qty: 0.95
+      unit: kg
+    outputs:
+    - item_id: brick_mold_steel_set
+      qty: 0.9
+      unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
+    notes: "Machine mold cavities and finish surfaces"
 assumptions: Cast steel brick mold blocks then machine cavities; coarse times.
 notes: Coarse route; refine cavity geometry and tolerances in BOMs and later steps.

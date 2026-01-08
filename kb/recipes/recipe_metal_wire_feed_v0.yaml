@@ -2,8 +2,24 @@ id: recipe_metal_wire_feed_v0
 kind: recipe
 name: Recipe for metal_wire_feed_v0
 target_item_id: metal_wire_feed
+inputs:
+  - item_id: raw_metal_block
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: metal_wire_feed
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: metal_wire_drawing_process_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 2.0
+        unit: kg
     notes: "Draw metal_wire_feed from raw_metal_block using metal_wire_drawing_process_v0"
 notes: "Placeholder path: generate metal_wire_feed from raw_metal_block via metal_wire_drawing_process_v0"
 assumptions: "Raw metal_block input required; uses drawing die set_basic"

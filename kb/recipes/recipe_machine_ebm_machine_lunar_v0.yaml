@@ -1,31 +1,135 @@
 id: recipe_machine_ebm_machine_lunar_v0
 target_item_id: ebm_machine_lunar_v0
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 1850.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 5.0
+    unit: kg
+  - item_id: ebm_build_platform_heated_v0
+    qty: 30.0
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 12.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 2.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 10.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: ebm_machine_lunar_v0
+    qty: 1800.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 1850.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 1800.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
     notes: "Cut chamber panels, frame members, and mounting plates."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 1800.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 1780.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: "Weld chamber, frame, and support structures."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 1780.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1750.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.5
     labor_hours: 2.0
     notes: "Machine sealing surfaces, mounts for gun, feed, and build platform."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1750.0
+        unit: kg
+      - item_id: ebm_build_platform_heated_v0
+        qty: 30.0
+        unit: kg
+      - item_id: power_conditioning_module
+        qty: 12.0
+        unit: kg
+      - item_id: control_compute_module_imported
+        qty: 2.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install electron gun assembly, powder handling, build platform, and drives."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 10.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wire high-voltage gun supply, motion controls, heaters, and sensors."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
+    outputs:
+      - item_id: ebm_machine_lunar_v0
+        qty: 1800.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
     notes: "Vacuum check, beam emission test, and motion calibration."

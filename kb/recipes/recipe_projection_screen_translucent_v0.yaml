@@ -5,6 +5,22 @@ variant_id: v0
 produces_id: projection_screen_translucent
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: projection_screen_translucent
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: projection_screen_sheet_casting_v0
+    inputs:
+      - item_id: plastic_pellets
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: projection_screen_translucent
+        qty: 1.0
+        unit: kg
 notes: "Placeholder recipe to manufacture projection_screen_translucent from polymer pellets via extrusion."

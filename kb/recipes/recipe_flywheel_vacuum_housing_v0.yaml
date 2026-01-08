@@ -1,6 +1,17 @@
 id: recipe_flywheel_vacuum_housing_v0
 kind: recipe
 target_item_id: flywheel_vacuum_housing_v0
+inputs:
+  - item_id: cut_parts
+    qty: 25.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 1.5
+    unit: L
+outputs:
+  - item_id: flywheel_vacuum_housing_v0
+    qty: 20.0
+    unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v0
   - process_id: flywheel_vacuum_housing_machining_v0

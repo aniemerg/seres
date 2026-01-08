@@ -2,8 +2,23 @@ id: recipe_molten_cacl2_electrolyte_system_v0
 kind: recipe
 name: Recipe for molten CaCl2 electrolyte system v0
 target_item_id: molten_cacl2_electrolyte_system_v0
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: cacl2_electrolyte_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: molten_cacl2_electrolyte_system_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: molten_cacl2_electrolyte_production_v0
+  inputs:
+    - item_id: cacl2_electrolyte_v0
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: molten_cacl2_electrolyte_system_v0
+      qty: 1.0
+      unit: unit
 notes: "Produces molten CaCl2 electrolyte system from solid CaCl2 electrolyte feed."

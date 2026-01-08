@@ -1,20 +1,84 @@
 id: recipe_inert_gas_manifold_v0
 target_item_id: inert_gas_manifold
 variant_id: v0
+inputs:
+  - item_id: stainless_steel_ingot
+    qty: 22.0
+    unit: kg
+  - item_id: valve_set_gas_handling
+    qty: 1.0
+    unit: unit
+  - item_id: pressure_gauge
+    qty: 2.0
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: unit
+  - item_id: piping_components
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: inert_gas_manifold
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: stainless_steel_ingot
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 20.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine manifold block with gas ports and valve mounting threads"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 20.0
+        unit: kg
+      - item_id: valve_set_gas_handling
+        qty: 1.0
+        unit: unit
+      - item_id: pressure_gauge
+        qty: 2.0
+        unit: unit
+      - item_id: fittings_and_valves
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install valves, pressure regulators, gauges, and fittings"
-  - process_id: welding_and_fabrication_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: piping_components
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld pipe connections and mounting brackets"
-  - process_id: leak_testing_v0
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: inert_gas_manifold
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Pressure test all connections for leak-tight operation"

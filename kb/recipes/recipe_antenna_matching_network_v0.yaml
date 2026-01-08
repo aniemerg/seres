@@ -2,6 +2,19 @@ id: recipe_antenna_matching_network_v0
 kind: recipe
 target_item_id: antenna_matching_network_v0
 variant_id: v0
+inputs:
+  - item_id: electronic_components_set
+    qty: 0.2
+    unit: kg
+    notes: "Capacitors, inductors, and passive components for impedance matching"
+  - item_id: enclosure_small
+    qty: 0.05
+    unit: kg
+    notes: "Small enclosure for housing matching network"
+outputs:
+  - item_id: antenna_matching_network_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: antenna_matching_network_assembly_v0
     inputs:

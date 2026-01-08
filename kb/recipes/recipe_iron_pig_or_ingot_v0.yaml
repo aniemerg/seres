@@ -5,6 +5,20 @@ target_item_id: iron_pig_or_ingot
 produces_id: iron_pig_or_ingot
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: iron_ore_or_ilmenite
+    qty: 2.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: iron_pig_or_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: slag
+    qty: 0.8
+    unit: kg
 steps:
 - process_id: iron_smelting_reduction_v0
   notes: "Single-step carbothermal reduction from ore to iron pig/ingot."

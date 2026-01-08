@@ -2,38 +2,49 @@ id: recipe_jacket_with_fittings_v0
 kind: recipe
 target_item_id: jacket_with_fittings
 variant_id: v0
+inputs:
+  - item_id: copper_plate_or_sheet
+    qty: 3.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 0.3
+    unit: kg
+  - item_id: brazing_alloy_generic
+    qty: 0.05
+    unit: kg
 steps:
-  - process_id: sheet_metal_forming_process_v0
+  - process_id: metal_forming_basic_v0
     inputs:
       - item_id: copper_plate_or_sheet
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: jacket_panels_formed
+      - item_id: formed_metal_part
         qty: 2.8
         unit: kg
     est_time_hr: 2.0
+    machine_hours: 2.0
     notes: Form curved jacket panels to match cooled component geometry
-  - process_id: welding_process_tig_v0
+  - process_id: welding_basic_v0
     inputs:
-      - item_id: jacket_panels_formed
+      - item_id: formed_metal_part
         qty: 2.8
         unit: kg
     outputs:
-      - item_id: jacket_shell_welded
+      - item_id: welded_assemblies
         qty: 2.7
         unit: kg
     est_time_hr: 3.0
-    notes: TIG weld panels into complete jacket shell
-  - process_id: brazing_process_v0
+    labor_hours: 3.0
+    notes: Weld panels into complete jacket shell
+  - process_id: welding_brazing_basic_v0
     inputs:
-      - item_id: jacket_shell_welded
+      - item_id: welded_assemblies
         qty: 2.7
         unit: kg
       - item_id: fittings_and_valves
         qty: 0.3
         unit: kg
-        notes: "Copper/brass tube fittings for inlet/outlet connections"
       - item_id: brazing_alloy_generic
         qty: 0.05
         unit: kg
@@ -42,4 +53,6 @@ steps:
         qty: 3.0
         unit: kg
     est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 1.5
     notes: Braze inlet/outlet fittings onto jacket

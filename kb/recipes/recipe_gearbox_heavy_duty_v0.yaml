@@ -1,38 +1,108 @@
 id: recipe_gearbox_heavy_duty_v0
 target_item_id: gearbox_heavy_duty
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 60.0
+    unit: kg
+  - item_id: gear_set_medium
+    qty: 2.0
+    unit: unit
+  - item_id: bearing_set
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: gearbox_heavy_duty
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 58.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Cast gearbox housing from iron or steel"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 58.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 56.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     labor_hours: 6.0
     notes: "Machine housing bores, bearing seats, and mounting surfaces"
   - process_id: gear_cutting_v0
+    inputs:
+      - item_id: gear_set_medium
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: gear_set_medium
+        qty: 2.0
+        unit: unit
     est_time_hr: 16.0
     machine_hours: 16.0
     labor_hours: 8.0
     notes: "Cut gear teeth on multiple gear sets for multi-stage reduction"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 56.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 56.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 1.0
     notes: "Heat treat gears for hardness and wear resistance"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 56.0
+        unit: kg
+      - item_id: gear_set_medium
+        qty: 2.0
+        unit: unit
+      - item_id: bearing_set
+        qty: 2.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble gears, shafts, bearings in housing, fill with lubricant"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: gearbox_heavy_duty
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 1.5
     notes: "Test gearbox operation under load"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Verify gear mesh, bearing operation, and seal integrity"
 assumptions: "Heavy-duty gearbox for high torque applications. 50 kg assembly with cast housing and hardened steel gears. Multi-stage reduction for conveyors, mills, and drive systems."
 notes: "Manufacturing of heavy-duty gearbox. Total fabrication time ~45 hours. Requires gear cutting capability and heat treatment for gear hardening."

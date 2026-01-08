@@ -5,6 +5,14 @@ target_item_id: prism_glass_optical
 produces_id: prism_glass_optical
 produces_qty: 0.25
 produces_unit: kg
+inputs:
+  - item_id: cast_glass_parts
+    qty: 0.25
+    unit: kg
+outputs:
+  - item_id: prism_glass_optical
+    qty: 0.25
+    unit: kg
 steps:
   - process_id: prism_cut_and_polish_v0
 notes: "Single-step recipe to produce prism_glass_optical from glass cast parts."

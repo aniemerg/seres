@@ -3,9 +3,39 @@ kind: recipe
 target_item_id: drilling_equipment_v0
 variant_id: v0
 steps:
-  - process_id: welding_structural_v0
-  - process_id: machining_precision_v0
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_electric_medium
+        qty: 2
+        unit: unit
+      - item_id: structural_frame_steel
+        qty: 150.0
+        unit: kg
+      - item_id: drill_string_steel
+        qty: 100.0
+        unit: kg
+      - item_id: hydraulic_power_unit_basic
+        qty: 1
+        unit: unit
+      - item_id: cutting_tool_set_basic
+        qty: 5
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 4
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: drilling_equipment_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Assemble drilling equipment from BOM components"
 notes: |
-  Assemble drilling equipment from structural frame, motors, hydraulics, and drill string.
-  Requires welding for frame, precision machining for bearings/spindle, and mechanical assembly.
+  Assemble drilling equipment from BOM components: motors, structural frame, drill string,
+  hydraulics, control panel, bearings, and fasteners.

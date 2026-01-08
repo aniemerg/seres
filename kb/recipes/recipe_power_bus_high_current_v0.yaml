@@ -1,16 +1,60 @@
 id: recipe_power_bus_high_current_v0
 target_item_id: power_bus_high_current
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 55.0
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: power_bus_high_current
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 55.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 52.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Cast copper bus bar blanks
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 52.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 50.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine connection holes and mounting surfaces
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 50.0
+        unit: kg
+      - item_id: ceramic_insulators
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: power_bus_high_current
+        qty: 50.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble bus with insulators and connectors

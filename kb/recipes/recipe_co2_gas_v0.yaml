@@ -2,9 +2,47 @@ id: recipe_co2_gas_v0
 kind: recipe
 name: Carbon dioxide gas production via Hall-Heroult aluminum smelting (v0)
 target_item_id: co2_gas
-produces_id: co2_gas
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: alumina_powder
+    qty: 2.0
+    unit: kg
+  - item_id: carbon_anode
+    qty: 0.5
+    unit: kg
+  - item_id: cryolite_flux
+    qty: 0.15
+    unit: kg
+outputs:
+  - item_id: co2_gas
+    qty: 1.5
+    unit: kg
+  - item_id: aluminum_alloy_ingot
+    qty: 1.0
+    unit: kg
+  - item_id: cryolite_flux
+    qty: 0.135
+    unit: kg
 steps:
   - process_id: aluminum_smelting_hall_heroult_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 2.0
+        unit: kg
+      - item_id: carbon_anode
+        qty: 0.5
+        unit: kg
+      - item_id: cryolite_flux
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 1.0
+        unit: kg
+      - item_id: co2_gas
+        qty: 1.5
+        unit: kg
+      - item_id: cryolite_flux
+        qty: 0.135
+        unit: kg
 notes: "Produce CO2 gas as a byproduct from the Hall-Héroult aluminum smelting process."

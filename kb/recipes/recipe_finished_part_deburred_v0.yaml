@@ -5,7 +5,23 @@ name: Recipe for finished_part_deburred
 produces_id: finished_part_deburred
 produces_qty: 1.0
 produces_unit: kg
+inputs:
+  - item_id: machined_part_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: finished_part_deburred
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: finishing_deburring_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 1.0
+        unit: kg
     notes: Deburring and finishing of machined_part_raw to produce finished_part_deburred
 notes: Deburring step converts machined_part_raw into a deburred finished_part_deburred; input is assumed to be available as machined_part_raw via upstream processes.

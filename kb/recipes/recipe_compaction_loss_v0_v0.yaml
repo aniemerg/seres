@@ -6,7 +6,25 @@ produces_id: compaction_loss_v0
 produces_qty: 0.1
 produces_unit: kg
 variant_id: v0
+inputs:
+  - item_id: silicon_nitride_powder_fine
+    qty: 0.95
+    unit: kg
+  - item_id: sintering_aid_mgo
+    qty: 0.05
+    unit: kg
 steps:
 - process_id: powder_compaction_process_v0
+  inputs:
+    - item_id: silicon_nitride_powder_fine
+      qty: 0.95
+      unit: kg
+    - item_id: sintering_aid_mgo
+      qty: 0.05
+      unit: kg
+  outputs:
+    - item_id: compaction_loss_v0
+      qty: 0.1
+      unit: kg
   notes: Byproduct of the compaction process; yields 0.1 kg of loss material.
 notes: "Produces compaction_loss_v0 as a byproduct of powder_compaction_process_v0."

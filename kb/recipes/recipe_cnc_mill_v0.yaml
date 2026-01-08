@@ -6,15 +6,101 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: cnc_mill
 variant_id: v0
+inputs:
+  - item_id: structural_frame_steel
+    qty: 1.0
+    unit: unit
+  - item_id: mill_shell_generic
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1.0
+    unit: unit
+  - item_id: coolant_pump_system
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electrical_equipment
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: structural_frame_steel
+        qty: 1.0
+        unit: unit
+      - item_id: mill_shell_generic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1.0
+        unit: unit
+      - item_id: coolant_pump_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: Assemble base frame, shell, drive, gearbox, bearings, coolant pump, and control electronics into cnc_mill subassembly
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
     notes: Mount cnc_mill subassembly into enclosure and attach shielding
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
     notes: Wire power and control electronics for CNC milling functionality
   - process_id: sealing_and_assembly_basic_v0
+    inputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: Seal enclosure and finalize integration
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cnc_mill
+        qty: 1.0
+        unit: unit
     notes: Final inspection and readiness check
 notes: Placeholder CNC milling machine production path to resolve no_recipe gap for cnc_mill.

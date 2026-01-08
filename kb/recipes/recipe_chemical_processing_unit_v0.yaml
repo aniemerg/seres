@@ -1,9 +1,70 @@
 id: recipe_chemical_processing_unit_v0
 kind: recipe
 target_item_id: chemical_processing_unit
+produces_qty: 450.0
+produces_unit: kg
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 450.0
+    unit: kg
+  - item_id: machine_frame_medium
+    qty: 1.0
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: chemical_processing_unit
+    qty: 450.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 450.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 450.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1.0
+        unit: kg
+      - item_id: power_conditioning_module
+        qty: 1.0
+        unit: kg
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 450.0
+        unit: kg
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 450.0
+        unit: kg
+    outputs:
+      - item_id: chemical_processing_unit
+        qty: 450.0
+        unit: kg
 assumptions: Placeholder local production path to manufacture chemical_processing_unit_v0 using existing basic processes; aligns with BOM bom_chemical_processing_unit.yaml
 notes: Placeholder recipe to close no_recipe gap for chemical_processing_unit; refine BOM/steps as design matures

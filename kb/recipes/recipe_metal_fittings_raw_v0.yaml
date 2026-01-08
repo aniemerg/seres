@@ -3,11 +3,44 @@ kind: recipe
 name: Metal fittings (raw) fabrication v0
 target_item_id: metal_fittings_raw
 variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 0.22
+    unit: kg
+outputs:
+  - item_id: metal_fittings_raw
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 0.22
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.21
+        unit: kg
     notes: "Rough and finish machining of fittings from bar/stock material"
   - process_id: finishing_deburring_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.21
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 0.2
+        unit: kg
     notes: "Deburr and clean machined fitting surfaces"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: metal_fittings_raw
+        qty: 0.2
+        unit: kg
     notes: "Dimensional and thread inspection prior to assembly"
 notes: Placeholder recipe for raw metal fittings prior to seal/gasket installation.
+  Assumes steel stock feed with ~10% machining loss.

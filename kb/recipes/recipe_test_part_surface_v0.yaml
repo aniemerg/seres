@@ -1,6 +1,22 @@
 id: recipe_test_part_surface_v0
 kind: recipe
 target_item_id: test_part_surface
+inputs:
+  - item_id: raw_metal_block
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: test_part_surface
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: substrate_preparation_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: test_part_surface
+        qty: 0.2
+        unit: kg
 notes: "Simple recipe to manufacture test_part_surface_v0 from substrate via substrate_preparation_basic_v0."

@@ -4,8 +4,24 @@ name: Metal sheet production v0 (rolling)
 produces_id: metal_sheet
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: metal_sheet
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: rolling_basic_v0
+  inputs:
+  - item_id: metal_ingot
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: metal_sheet
+    qty: 1.0
+    unit: kg
   notes: Rolling ingot into metal_sheet using plate_rolling_mill
 notes: Minimal recipe to convert metal_ingot (via rolling) into a metal_sheet.
 target_item_id: metal_sheet

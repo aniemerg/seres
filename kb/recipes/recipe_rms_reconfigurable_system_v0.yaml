@@ -2,9 +2,57 @@ id: recipe_rms_reconfigurable_system_v0
 kind: recipe
 label: "Recipe RMS v0"
 target_item_id: rms_reconfigurable_system_v0
+produces_qty: 200.0
+produces_unit: kg
+inputs:
+  - item_id: base_metal_parts
+    qty: 100.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: rms_reconfigurable_system_v0
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 100.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 150.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 150.0
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: rms_reconfigurable_system_v0
+        qty: 200.0
+        unit: kg
 notes: "Placeholder recipe to manufacture RMS v0 using existing assembly and machining processes."

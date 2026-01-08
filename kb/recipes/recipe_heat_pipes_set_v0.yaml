@@ -1,21 +1,78 @@
 id: recipe_heat_pipes_set_v0
+kind: recipe
+name: Recipe for heat_pipes_set
 target_item_id: heat_pipes_set
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 16.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 15.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 0.5
+    unit: kg
+  - item_id: water
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: heat_pipes_set
+    qty: 1
+    unit: unit
 steps:
   - process_id: metal_cutting_basic_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 16.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cut copper or aluminum tubing to length for heat pipe bodies"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 14.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine end caps, install internal wick structure (screen or sintered powder)"
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 14.5
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 0.5
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 15.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.5
     notes: "Seal one end, evacuate air, charge with working fluid (water/ammonia), seal final end"
   - process_id: leak_test_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: heat_pipes_set
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Pressure test seals and verify heat pipe function"

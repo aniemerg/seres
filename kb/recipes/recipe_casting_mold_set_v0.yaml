@@ -1,20 +1,85 @@
 id: recipe_casting_mold_set_v0
+kind: recipe
 target_item_id: casting_mold_set
 variant_id: v0
+inputs:
+  - item_id: sand_casting_flask_set
+    qty: 3.0
+    unit: unit
+  - item_id: permanent_mold_steel_set
+    qty: 2.0
+    unit: unit
+  - item_id: casting_patterns_wooden
+    qty: 5.0
+    unit: unit
+  - item_id: cope_and_drag_boards
+    qty: 2.0
+    unit: unit
+outputs:
+  - item_id: casting_mold_set
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: sand_casting_flask_set
+        qty: 3.0
+        unit: unit
+    outputs:
+      - item_id: sand_casting_flask_set
+        qty: 3.0
+        unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Fabricate sand casting flasks from steel angle or flat stock"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: permanent_mold_steel_set
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: permanent_mold_steel_set
+        qty: 2.0
+        unit: unit
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine permanent mold cavities, gating systems, parting lines"
   - process_id: woodworking_basic_v0
+    inputs:
+      - item_id: casting_patterns_wooden
+        qty: 5.0
+        unit: unit
+      - item_id: cope_and_drag_boards
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: casting_patterns_wooden
+        qty: 5.0
+        unit: unit
+      - item_id: cope_and_drag_boards
+        qty: 2.0
+        unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Carve or turn wooden casting patterns for various part geometries"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sand_casting_flask_set
+        qty: 3.0
+        unit: unit
+      - item_id: permanent_mold_steel_set
+        qty: 2.0
+        unit: unit
+      - item_id: casting_patterns_wooden
+        qty: 5.0
+        unit: unit
+      - item_id: cope_and_drag_boards
+        qty: 2.0
+        unit: unit
+    outputs:
+      - item_id: casting_mold_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble casting equipment set, organize patterns and flasks"

@@ -2,8 +2,65 @@ id: recipe_mining_equipment_v0
 kind: recipe
 target_item_id: mining_equipment
 variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 1.0
+    unit: kg
+  - item_id: steel_frame_heavy
+    qty: 2
+    unit: unit
+  - item_id: motor_electric_large
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 2
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 6
+    unit: unit
+outputs:
+  - item_id: mining_equipment
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 1.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_heavy
+        qty: 2
+        unit: unit
+      - item_id: motor_electric_large
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 2
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 6
+        unit: unit
+    outputs:
+      - item_id: mining_equipment
+        qty: 1.0
+        unit: unit
 notes: "Assemble mining equipment from BOM components; receive/import parts and then assemble."
 assumptions: "Mining equipment assembled from standard BOM components; subassemblies produced via existing recipes where defined."

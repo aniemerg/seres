@@ -1,8 +1,24 @@
 id: recipe_inert_gas_fill_v0
 kind: recipe
 target_item_id: inert_gas_fill_v0
+inputs:
+  - item_id: nitrogen_gas_purified
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: inert_gas_fill_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: inert_gas_fill_basic_v0
+    inputs:
+      - item_id: nitrogen_gas_purified
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: inert_gas_fill_v0
+        qty: 1.0
+        unit: unit
 assumptions: "Uses purified nitrogen gas as input; placeholder if contaminants persist"
 notes: "Replace with a tighter gas specification when available."
 variant_id: v0

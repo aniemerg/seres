@@ -6,6 +6,28 @@ produces_id: chemical_reactor_unit_v0
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 20.0
+    unit: kg
+  - item_id: metal_ingot
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: chemical_reactor_unit_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: chemical_reactor_unit_fabrication_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 20.0
+        unit: kg
+      - item_id: metal_ingot
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: chemical_reactor_unit_v0
+        qty: 1.0
+        unit: unit
 notes: Prototype path to fabricate the reactor unit from basic feedstock.

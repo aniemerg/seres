@@ -1,6 +1,29 @@
 id: recipe_ceramic_fiber_slurry_v0
 kind: recipe
 target_item_id: ceramic_fiber_slurry
+variant_id: v0
+inputs:
+  - item_id: ceramic_fiber_raw
+    qty: 4.0
+    unit: kg
+  - item_id: binder_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: ceramic_fiber_slurry
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: ceramic_fiber_slurry_mixing_v0
+    inputs:
+      - item_id: ceramic_fiber_raw
+        qty: 4.0
+        unit: kg
+      - item_id: binder_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: ceramic_fiber_slurry
+        qty: 5.0
+        unit: kg
 notes: Basic recipe for producing ceramic fiber slurry from ceramic fibers and binders.

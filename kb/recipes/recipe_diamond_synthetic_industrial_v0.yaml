@@ -1,7 +1,24 @@
 id: recipe_diamond_synthetic_industrial_v0
 kind: recipe
+name: Recipe for diamond_synthetic_industrial
 target_item_id: diamond_synthetic_industrial
+inputs:
+  - item_id: graphite_powder
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: diamond_synthetic_industrial
+    qty: 0.005
+    unit: kg
 steps:
   - process_id: diamond_synthesis_hpht_v0
+    inputs:
+      - item_id: graphite_powder
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: diamond_synthetic_industrial
+        qty: 0.005
+        unit: kg
     notes: "HPHT diamond synthesis step producing industrial diamond from graphite_powder"
 notes: "Minimal HPHT-based synthesis recipe for industrial diamond; placeholder for future refinement with mass/energy balances."

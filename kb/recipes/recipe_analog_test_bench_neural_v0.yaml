@@ -1,9 +1,29 @@
 id: recipe_analog_test_bench_neural_v0
 kind: recipe
-produces_id: analog_test_bench_neural_v0
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: analog_test_bench_neural_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: machine_assembly_basic_v0
+  inputs:
+    - item_id: machine_frame_small
+      qty: 1.0
+      unit: unit
+    - item_id: power_electronics_module
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: analog_test_bench_neural_v0
+      qty: 1.0
+      unit: unit
 notes: Placeholder recipe to close no_recipe gap for analog_test_bench_neural_v0.
 target_item_id: analog_test_bench_neural_v0

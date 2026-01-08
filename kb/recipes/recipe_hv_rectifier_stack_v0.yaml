@@ -1,16 +1,60 @@
 id: recipe_hv_rectifier_stack_v0
 target_item_id: hv_rectifier_stack
 variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 1
+    unit: unit
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: potting_compound
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: hv_rectifier_stack
+    qty: 1
+    unit: unit
 steps:
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 4.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble high-voltage diodes in series/parallel configuration on insulated mounting board"
   - process_id: potting_and_encapsulation_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 4.0
+        unit: kg
+      - item_id: potting_compound
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: potted_electronic_assembly
+        qty: 4.5
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Encapsulate rectifier assembly in epoxy or silicone for high-voltage insulation"
   - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: potted_electronic_assembly
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: hv_rectifier_stack
+        qty: 1
+        unit: unit
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Test voltage withstand, leakage current, forward voltage drop, burn-in at rated current"

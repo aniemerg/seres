@@ -1,4 +1,5 @@
 id: recipe_nife_meteorite_material_env_v0
+kind: recipe
 target_item_id: nife_meteorite_material
 variant_id: env_v0
 inputs:
@@ -11,6 +12,14 @@ outputs:
   unit: kg
 steps:
 - process_id: environment_source_v0
+  inputs:
+    - item_id: electrical_energy
+      qty: 0.1
+      unit: kWh
+  outputs:
+    - item_id: nife_meteorite_material
+      qty: 1.0
+      unit: kg
   est_time_hr: 0.2
   notes: Meteorite metal collected from environment; boundary node for upstream sourcing.
 assumptions: Represents in-situ meteoritic metal recovery; refining steps handled

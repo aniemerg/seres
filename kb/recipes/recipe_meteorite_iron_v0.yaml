@@ -1,8 +1,23 @@
 id: recipe_meteorite_iron_v0
 target_item_id: meteorite_iron
 variant_id: v0
+inputs:
+  - item_id: electrical_energy
+    qty: 0.001
+    unit: kWh
+  - item_id: regolith_lunar_mare
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: meteorite_iron
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: environment_source_v0
+    inputs:
+      - item_id: electrical_energy
+        qty: 0.001
+        unit: kWh
     outputs:
       - item_id: regolith_lunar_mare
         qty: 100.0

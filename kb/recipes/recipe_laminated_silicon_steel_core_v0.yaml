@@ -2,6 +2,28 @@ id: recipe_laminated_silicon_steel_core_v0
 kind: recipe
 name: Laminated silicon steel core production (v0)
 target_item_id: laminated_silicon_steel_core_v0
+inputs:
+  - item_id: electrical_steel_sheet
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: laminated_silicon_steel_core_v0
+    qty: 0.95
+    unit: kg
+  - item_id: metal_scrap
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: lamination_stamping_v0
+    inputs:
+      - item_id: electrical_steel_sheet
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: laminated_silicon_steel_core_v0
+        qty: 0.95
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.05
+        unit: kg
 notes: "Placeholder recipe to enable local production of laminated_silicon_steel_core_v0 using lamination_stamping_v0. This should be refined when BOM/process details are defined."

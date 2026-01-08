@@ -13,7 +13,10 @@ outputs:
 layer_tags:
 - layer_4
 - layer_5
-resource_requirements: []
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -21,4 +24,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Placeholder production step converting 1 kg iron_pig_or_ingot into 1 kg cooling_radiator_anode (mass-balanced).
+notes: Placeholder production step converting 1 kg iron_pig_or_ingot into 1 kg cooling_radiator_anode
+  (mass-balanced).

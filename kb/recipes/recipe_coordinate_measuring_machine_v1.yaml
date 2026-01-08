@@ -1,11 +1,69 @@
 id: recipe_coordinate_measuring_machine_v1
 kind: recipe
-
-# Target product is coordinate measuring machine (base, non-v0); minimal placeholder chain
-# Uses a generic assembly step to unblock the no_recipe gap.
 target_item_id: coordinate_measuring_machine
 variant_id: v1
+inputs:
+  - item_id: granite_surface_plate_large
+    qty: 1
+    unit: unit
+  - item_id: linear_stage_xyz_precision
+    qty: 1
+    unit: unit
+  - item_id: touch_probe_assembly
+    qty: 1
+    unit: unit
+  - item_id: linear_encoder_set
+    qty: 3
+    unit: unit
+  - item_id: stepper_motor_precision
+    qty: 3
+    unit: unit
+  - item_id: computer_workstation
+    qty: 1
+    unit: unit
+  - item_id: air_bearing_assembly
+    qty: 3
+    unit: unit
+  - item_id: calibration_artifacts
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: coordinate_measuring_machine
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: granite_surface_plate_large
+        qty: 1
+        unit: unit
+      - item_id: linear_stage_xyz_precision
+        qty: 1
+        unit: unit
+      - item_id: touch_probe_assembly
+        qty: 1
+        unit: unit
+      - item_id: linear_encoder_set
+        qty: 3
+        unit: unit
+      - item_id: stepper_motor_precision
+        qty: 3
+        unit: unit
+      - item_id: computer_workstation
+        qty: 1
+        unit: unit
+      - item_id: air_bearing_assembly
+        qty: 3
+        unit: unit
+      - item_id: calibration_artifacts
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: coordinate_measuring_machine
+        qty: 1
+        unit: unit
+    est_time_hr: 40.0
+    labor_hours: 40.0
+    notes: "Assemble CMM from precision components"
 notes: "Placeholder recipe to resolve no_recipe gap for coordinate_measuring_machine (base)."
 assumptions: "Minimal path; refine BOM/steps later."

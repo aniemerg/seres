@@ -1,22 +1,45 @@
 id: recipe_programming_adapter_or_jig_v0
 target_item_id: programming_adapter_or_jig
 variant_id: v0
+inputs:
+  - item_id: plastic_housing_molded
+    qty: 0.3
+    unit: kg
+  - item_id: pogo_pin_set
+    qty: 1
+    unit: unit
+  - item_id: connector_electrical_small
+    qty: 1
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: programming_adapter_or_jig
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Machine jig body and alignment features"
   - process_id: assembly_basic_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Install pogo pins, connectors, or socket"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Wire programming connections to cable header"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Test programming connectivity and alignment"
+    inputs:
+      - item_id: plastic_housing_molded
+        qty: 0.3
+        unit: kg
+      - item_id: pogo_pin_set
+        qty: 1
+        unit: unit
+      - item_id: connector_electrical_small
+        qty: 1
+        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: programming_adapter_or_jig
+        qty: 1
+        unit: unit
+    est_time_hr: 5.0
+    machine_hours: 2.0
+    labor_hours: 3.0
+    notes: "Machine jig body and alignment features, install pogo pins/connectors/socket, wire programming connections to cable header, test connectivity and alignment"
 assumptions: Programming adapter for microcontroller firmware loading. Pogo pins and connectors may be imported initially, jig body manufactured locally.
 notes: Essential tool for electronics manufacturing. Provides reliable, repeatable connection for programming embedded systems during production.

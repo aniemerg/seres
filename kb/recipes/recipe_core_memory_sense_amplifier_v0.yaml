@@ -1,9 +1,35 @@
 id: recipe_core_memory_sense_amplifier_v0
 kind: recipe
 target_item_id: core_memory_sense_amplifier_v0
+produces_qty: 0.05
+produces_unit: kg
+inputs:
+  - item_id: pcb_substrate_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: core_memory_sense_amplifier_v0
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: circuit_board_assembly_v0
     notes: Assemble memory sense amplifier PCB
+    inputs:
+      - item_id: pcb_substrate_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: circuit_board_v0
+        qty: 1.0
+        unit: unit
   - process_id: alignment_and_testing_basic_v0
     notes: Functional test of sense amplifier integrated with readout circuit
+    inputs:
+      - item_id: circuit_board_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: core_memory_sense_amplifier_v0
+        qty: 0.05
+        unit: kg
 notes: Production recipe for core_memory_sense_amplifier_v0; may require additional components in future revisions.

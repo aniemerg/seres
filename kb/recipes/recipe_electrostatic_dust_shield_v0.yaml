@@ -2,6 +2,31 @@ id: recipe_electrostatic_dust_shield_v0
 kind: recipe
 name: Electrostatic Dust Shield – basic assembly
 target_item_id: electrostatic_dust_shield_v0
+inputs:
+  - item_id: insulation_material
+    qty: 2.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: electrostatic_dust_shield_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: insulation_material
+        qty: 2.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: electrostatic_dust_shield_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    machine_hours: 1.5
+    labor_hours: 1.0
 notes: "Placeholder recipe to manufacture electrostatic_dust_shield_v0 using a basic assembly step. Refine BOM and steps as design matures."

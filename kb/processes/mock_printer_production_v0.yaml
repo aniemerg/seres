@@ -4,10 +4,13 @@ kind: process
 process_type: batch
 inputs: []
 outputs:
-  - item_id: 3d_printer_basic_v0
-    qty: 1.0
-    unit: unit
-resource_requirements: []
+- item_id: 3d_printer_basic_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.5
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.1
@@ -15,4 +18,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Placeholder process to resolve no_recipe gap for 3d_printer_basic_v0."
+notes: Placeholder process to resolve no_recipe gap for 3d_printer_basic_v0.

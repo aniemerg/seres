@@ -5,6 +5,20 @@ variant_id: v1
 produces_id: piping_assembly_small
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+- item_id: metal_tubing_stock
+  qty: 1.0
+  unit: kg
+- item_id: pipe_bent_sections
+  qty: 0.92
+  unit: kg
+- item_id: valve_body_machined
+  qty: 4.0
+  unit: kg
+outputs:
+- item_id: piping_assembly_small
+  qty: 1.0
+  unit: kg
 steps:
 - process_id: tube_bending_and_cutting_v0
   inputs:

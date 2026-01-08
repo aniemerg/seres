@@ -3,6 +3,28 @@ kind: recipe
 name: Nickel metal, pure (Mond carbonyl) v0
 target_item_id: nickel_metal_pure
 variant_id: v0
+inputs:
+  - item_id: nickel_metal
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 4.0
+    unit: kg
+outputs:
+  - item_id: nickel_metal_pure
+    qty: 1.0
+    unit: kg
 steps:
-- process_id: mond_carbonyl_process_nickel_v0
+  - process_id: mond_carbonyl_process_nickel_v0
+    inputs:
+      - item_id: nickel_metal
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: nickel_metal_pure
+        qty: 1.0
+        unit: kg
 notes: "Manufacture nickel metal, pure, via Mond carbonyl process. Placeholder parameters; mass balance provided by the Mond process."

@@ -1,18 +1,41 @@
 id: recipe_thermal_control_valves_v0
+kind: recipe
+name: Recipe for thermal control valves
 target_item_id: thermal_control_valves
 variant_id: v0
+inputs:
+  - item_id: brass_bar_stock
+    qty: 6.0
+    unit: kg
+  - item_id: valve_components_kit
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: thermal_control_valves
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Machine valve bodies, seats, stems from steel or brass"
   - process_id: assembly_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble valve internals, packing, actuators"
-  - process_id: leak_test_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Test valves for leaks and proper sealing"
+    inputs:
+      - item_id: brass_bar_stock
+        qty: 6.0
+        unit: kg
+      - item_id: valve_components_kit
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: thermal_control_valves
+        qty: 1
+        unit: unit
+      - item_id: metal_swarf
+        qty: 1.0
+        unit: kg
+    est_time_hr: 6.5
+    machine_hours: 4.0
+    labor_hours: 2.5
+    notes: "Machine valve bodies, seats, stems from brass bar stock; assemble with valve internals, packing, seals; test for leaks and proper sealing"
 assumptions: Ball valves or gate valves for thermal fluid control. Manual or actuated operation.
 notes: Thermal control valves for regulating coolant, heating oil, or other thermal fluids.

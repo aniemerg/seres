@@ -1,18 +1,54 @@
 id: recipe_anvil_and_die_set_v0
+kind: recipe
 target_item_id: anvil_and_die_set
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 65.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 60.0
+    unit: kg
+outputs:
+  - item_id: anvil_and_die_set
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 65.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 0.5
     notes: "Cast anvil block and die blanks from alloy steel."
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 0.5
     notes: "Harden and temper anvil face and dies for durability."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: anvil_and_die_set
+        qty: 60.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0

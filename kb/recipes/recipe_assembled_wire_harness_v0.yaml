@@ -1,23 +1,40 @@
 id: recipe_assembled_wire_harness_v0
 target_item_id: assembled_wire_harness
 variant_id: v0
+inputs:
+  - item_id: wire_copper_insulated
+    qty: 2.5
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.5
+    unit: kg
 steps:
-  - process_id: wire_cutting_and_stripping_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Cut signal and control wires to specified lengths (typically 5-20 meters total harness length), strip insulation from conductor ends"
-  - process_id: crimping_and_termination_v0
-    est_time_hr: 3.0
-    machine_hours: 1.5
-    labor_hours: 2.5
-    notes: "Crimp terminals onto wire ends (pin/socket terminals, spade terminals), install connectors (D-sub, Molex, JST), solder delicate connections"
   - process_id: assembly_basic_v0
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: "Route wires in harness layout according to wiring diagram, bundle wires with cable ties or loom, install strain relief at connector points, label all wires and connectors"
+    inputs:
+      - item_id: wire_copper_insulated
+        qty: 2.5
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 7.5
+    labor_hours: 7.5
+    notes: "Cut and strip wires, crimp terminals, install connectors, route and bundle wires, install strain relief and labels"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_wire_harness
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Continuity testing of all circuits, verify correct pin assignments, check connector mating and retention, ensure proper wire routing and strain relief"
+    notes: "Continuity testing, verify pin assignments, check connector mating and wire routing"
 assumptions: "Assembled wire harness for equipment wiring and interconnections. 3 kg harness includes signal wires (18-24 AWG), control wires (16-20 AWG), connectors (various types: D-sub, Molex, terminal blocks), cable management (ties, loom), and labels. Lighter duty than cable harness - focused on signal/control rather than power distribution. Custom-built for specific equipment. Simplifies assembly and reduces installation errors."
 notes: "Manufacturing of assembled wire harness. Total fabrication time ~8.5 hours. Includes wire cutting and stripping, connector crimping/soldering, routing and bundling per wiring diagram, labeling, and electrical testing. Pre-assembled harnesses reduce equipment assembly time and improve reliability. Critical for complex equipment with multiple electrical connections."

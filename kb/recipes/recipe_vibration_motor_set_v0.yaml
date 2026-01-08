@@ -1,20 +1,79 @@
 id: recipe_vibration_motor_set_v0
+kind: recipe
 target_item_id: vibration_motor_set
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 45.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 40.0
+    unit: kg
+  - item_id: aluminum_wire
+    qty: 5.0
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.2
+    unit: kg
+  - item_id: motor_coil_wound
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: vibration_motor_set
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 40.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Cast motor housings and eccentric weights
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 40.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 40.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Machine bearing seats and mounting surfaces
   - process_id: spool_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 5.0
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: Wind motor coils
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 40.0
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: vibration_motor_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble motor set with eccentrics

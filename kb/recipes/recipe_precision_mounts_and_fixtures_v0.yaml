@@ -1,18 +1,30 @@
 id: recipe_precision_mounts_and_fixtures_v0
 target_item_id: precision_mounts_and_fixtures
 variant_id: v0
+inputs:
+  - item_id: finished_part
+    qty: 4.75
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: precision_mounts_and_fixtures
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    labor_hours: 0.5
-    notes: "Machine plates, slots, and alignment surfaces."
-  - process_id: grinding_and_finishing_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.5
-    notes: "Finish grind mating faces and critical dimensions."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 4.75
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: precision_mounts_and_fixtures
+        qty: 1
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Assemble clamps, screws, and adjustment hardware."

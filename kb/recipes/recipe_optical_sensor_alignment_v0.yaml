@@ -5,7 +5,24 @@ target_item_id: optical_sensor_alignment
 produces_id: optical_sensor_alignment
 produces_qty: 1.0
 produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: electronic_component_or_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: optical_sensor_alignment
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: optical_sensor_alignment_assembly_v0
+    inputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: optical_sensor_alignment
+        qty: 1.0
+        unit: unit
     notes: "Single-step optical sensor alignment assembly"
 notes: "Single-step recipe using optical_sensor_alignment_assembly_v0."

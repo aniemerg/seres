@@ -2,9 +2,43 @@ id: recipe_sodium_hydroxide_v0
 kind: recipe
 name: Production of sodium hydroxide via chloralkali
 target_item_id: sodium_hydroxide
-produces_id: sodium_hydroxide
-produces_qty: 2.0
-produces_unit: kg
+inputs:
+  - item_id: sodium_chloride
+    qty: 2.0
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: sodium_hydroxide
+    qty: 2.0
+    unit: kg
+  - item_id: chlorine_gas
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 1.0
+    unit: kg
 steps:
-- process_id: chloralkali_electrolysis_v0
+  - process_id: chloralkali_electrolysis_v0
+    inputs:
+      - item_id: sodium_chloride
+        qty: 2.0
+        unit: kg
+      - item_id: water
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: sodium_hydroxide
+        qty: 2.0
+        unit: kg
+      - item_id: chlorine_gas
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.6
+    machine_hours: 1.0
+    notes: "Chloralkali electrolysis of brine"
 notes: "Produces NaOH as byproduct from brine electrolysis."

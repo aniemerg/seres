@@ -1,26 +1,120 @@
 id: recipe_machine_delta_robot_v0
+kind: recipe
 target_item_id: delta_robot_v0
 variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: robot_arm_link_aluminum
+    qty: 3.0
+    unit: unit
+  - item_id: motor_electric_small
+    qty: 3.0
+    unit: unit
+  - item_id: harmonic_drive_reducer_medium
+    qty: 3.0
+    unit: unit
+  - item_id: power_distribution_board
+    qty: 1.0
+    unit: unit
+  - item_id: computer_core_imported
+    qty: 1.0
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: unit
+  - item_id: electric_parallel_gripper
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_cable_harness
+    qty: 3.0
+    unit: unit
+outputs:
+  - item_id: delta_robot_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     machine_hours: 0.8
     labor_hours: 0.4
     notes: "Cut frame plates/arms and mounting brackets."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: robot_arm_link_aluminum
+        qty: 3.0
+        unit: unit
+    outputs:
+      - item_id: robot_arm_link_aluminum
+        qty: 3.0
+        unit: unit
     est_time_hr: 0.8
     machine_hours: 0.7
     labor_hours: 0.5
     notes: "Machine pivots, bearing seats, and actuator mounts."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: robot_arm_link_aluminum
+        qty: 3.0
+        unit: unit
+      - item_id: motor_electric_small
+        qty: 3.0
+        unit: unit
+      - item_id: harmonic_drive_reducer_medium
+        qty: 3.0
+        unit: unit
+      - item_id: electric_parallel_gripper
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.2
     labor_hours: 1.2
     notes: "Assemble arms, joints, bearings, actuators, and end effector."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: power_distribution_board
+        qty: 1.0
+        unit: unit
+      - item_id: computer_core_imported
+        qty: 1.0
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+      - item_id: assembled_cable_harness
+        qty: 3.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electrical_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Wire motors, encoders, limit switches, and controller."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: delta_robot_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.6
     labor_hours: 0.5
     notes: "Motion/accuracy check and safety interlock test."

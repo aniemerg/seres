@@ -2,6 +2,29 @@ id: recipe_cutting_station_basic_v0
 kind: recipe
 name: Cutting Station production basic v0
 target_item_id: cutting_station_basic_v0
+variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cutting_station_basic_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cutting_station_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cutting_station_basic_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to close no_recipe gap for cutting_station_basic_v0; BOM is placeholder."

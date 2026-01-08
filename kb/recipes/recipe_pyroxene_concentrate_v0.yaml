@@ -1,6 +1,27 @@
 id: recipe_pyroxene_concentrate_v0
 kind: recipe
 target_item_id: pyroxene_concentrate
+produces_qty: 25.0
+produces_unit: kg
+inputs:
+  - item_id: regolith_powder
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: pyroxene_concentrate
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: pyroxene_separation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: pyroxene_concentrate
+        qty: 25.0
+        unit: kg
+      - item_id: tailings_silicate_mix
+        qty: 75.0
+        unit: kg
 notes: "Simplified recipe: uses pyroxene separation process to produce pyroxene concentrate from regolith powder. Yields scale with input mass; current target mass is 1 kg; process yields 25 kg per 100 kg regolith_powder."

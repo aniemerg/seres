@@ -1,20 +1,69 @@
 id: recipe_sealing_equipment_v0
 target_item_id: sealing_equipment
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 5.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 4.5
+    unit: kg
+  - item_id: welded_assemblies
+    qty: 4.0
+    unit: kg
+  - item_id: assembled_equipment
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: sealing_equipment
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: metal_feedstock
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine frame components and sealing bar assembly"
   - process_id: welding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 4.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Weld frame structure and mounting brackets"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble frame, heating elements, vacuum pump, controls, and sealing mechanism"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sealing_equipment
+        qty: 3.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test sealing performance, temperature control, and vacuum levels"

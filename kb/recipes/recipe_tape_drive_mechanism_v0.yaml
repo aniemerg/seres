@@ -6,8 +6,24 @@ produces_qty: 1.0
 produces_unit: unit
 requires_ids:
 - tape_drive_mechanism_fabrication_v0
+inputs:
+  - item_id: steel_stock
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: tape_drive_mechanism
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: tape_drive_mechanism_fabrication_v0
+  inputs:
+  - item_id: steel_stock
+    qty: 2.0
+    unit: kg
+  outputs:
+  - item_id: tape_drive_mechanism
+    qty: 1.0
+    unit: unit
   notes: Single-step fabrication path for tape_drive_mechanism
 notes: Minimal recipe mapping item to fabrication process
 target_item_id: tape_drive_mechanism

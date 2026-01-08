@@ -2,10 +2,44 @@ id: recipe_drill_string_steel_v0
 kind: recipe
 target_item_id: drill_string_steel
 variant_id: v0
+inputs:
+  - item_id: metal_tubing_stock
+    qty: 112.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: L
+outputs:
+  - item_id: drill_string_steel
+    qty: 1
+    unit: unit
 steps:
   - process_id: tube_bending_and_cutting_v0
+    inputs:
+      - item_id: metal_tubing_stock
+        qty: 112.0
+        unit: kg
+    outputs:
+      - item_id: bent_tube_sections
+        qty: 103.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 0.8
     notes: "Cut and form drill pipe from seamless steel tubing"
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: bent_tube_sections
+        qty: 103.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: L
+    outputs:
+      - item_id: drill_string_steel
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    labor_hours: 8.0
     notes: "Machine tool joint threads and upset ends"
 notes: |
   Manufacturing drill string from steel tubing stock.

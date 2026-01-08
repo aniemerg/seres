@@ -2,7 +2,41 @@ id: recipe_xy_positioning_table_v0
 kind: recipe
 target_item_id: xy_positioning_table_v0
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 30.0
+    unit: kg
+  - item_id: lead_screw_assembly
+    qty: 2
+    unit: unit
+  - item_id: bearing_set
+    qty: 4
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: xy_positioning_table_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: cutting_basic_v0
-  - process_id: machining_finish_basic_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 30.0
+        unit: kg
+      - item_id: lead_screw_assembly
+        qty: 2
+        unit: unit
+      - item_id: bearing_set
+        qty: 4
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: xy_positioning_table_v0
+        qty: 1
+        unit: unit
+    notes: "Cut and machine steel plates for X and Y stages, assemble with leadscrews and bearings for precision positioning"
 notes: "Placeholder recipe to manufacture XY Positioning Table v0 from standard machining steps."

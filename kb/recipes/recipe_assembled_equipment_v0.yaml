@@ -36,16 +36,34 @@ outputs:
     notes: "Assembly and fabrication waste"
 steps:
   - process_id: assembly_basic_v0
-    est_time_hr: 12.0
-    labor_hours: 12.0
-    notes: "Assemble mechanical components, install motors and drives"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Wire electrical systems and integrate controls"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Test assembled equipment for functionality and performance"
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 25.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 12.0
+        unit: kg
+      - item_id: motor_electric_small
+        qty: 8.0
+        unit: kg
+      - item_id: fastener_kit_large
+        qty: 3.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 50.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 1.5
+        unit: kg
+    est_time_hr: 20.0
+    labor_hours: 20.0
+    notes: "Assemble all components including wiring and electronics integration"
 assumptions: Generic equipment assembly placeholder. Should be replaced with specific equipment types in detailed recipes.
 notes: Placeholder for assembled equipment including machinery, process equipment, and subsystems ready for installation.

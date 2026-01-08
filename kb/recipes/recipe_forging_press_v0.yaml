@@ -4,17 +4,133 @@ name: Recipe for forging press v0
 target_item_id: forging_press_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 900.0
+    unit: kg
+  - item_id: steel_shell_thick
+    qty: 1.0
+    unit: unit
+  - item_id: structural_steel_frame
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: kg
+  - item_id: press_platen_set_medium
+    qty: 1.0
+    unit: unit
+  - item_id: safety_guard_steel_mesh
+    qty: 2.0
+    unit: unit
+  - item_id: pressure_test_gauge_set
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_control_valve_set
+    qty: 1.0
+    unit: kg
+  - item_id: piping_components
+    qty: 1.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: forging_press_v0
+    qty: 850.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     notes: "Cast main frame, base, and supports"
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 900.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 850.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
     notes: "Weld frame components"
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 850.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 850.0
+        unit: kg
   - process_id: machining_finish_basic_v0
     notes: "Machine mating surfaces and platen interfaces"
+    inputs:
+      - item_id: welded_assemblies
+        qty: 850.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 850.0
+        unit: kg
   - process_id: hip_press_unit_assembly_v0
     notes: "Assemble press unit from frame, hydraulic components, and control panels"
+    inputs:
+      - item_id: steel_shell_thick
+        qty: 1.0
+        unit: unit
+      - item_id: structural_steel_frame
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: kg
+      - item_id: press_platen_set_medium
+        qty: 1.0
+        unit: unit
+      - item_id: safety_guard_steel_mesh
+        qty: 2.0
+        unit: unit
+      - item_id: pressure_test_gauge_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: hip_press_unit_v0
+        qty: 1.0
+        unit: unit
   - process_id: hydraulic_system_integration_v0
     notes: "Install hydraulic pump, hoses, manifolds, and controls"
+    inputs:
+      - item_id: hydraulic_control_valve_set
+        qty: 1.0
+        unit: kg
+      - item_id: piping_components
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_system_medium
+        qty: 1.0
+        unit: kg
   - process_id: wiring_and_electronics_integration_v0
     notes: "Install electrical controls, interlocks, and sensors"
+    inputs:
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 5.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: forging_press_v0
+        qty: 850.0
+        unit: kg
 notes: "Basic forging press manufacturing recipe; components and BOM to be expanded."

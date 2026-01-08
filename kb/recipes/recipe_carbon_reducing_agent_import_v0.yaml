@@ -3,7 +3,15 @@ kind: recipe
 name: Carbon reducing agent import replacement v0
 produces_id: carbon_reducing_agent
 produces_qty: 1.0
-produces_unit: unit
+produces_unit: kg
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbon_reducing_agent
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: carbon_reducing_agent_production_v0
   notes: Local production path to replace import placeholder for carbon reducing agent.

@@ -2,6 +2,40 @@ id: recipe_machine_power_conditioner_v0
 kind: recipe
 target_item_id: power_conditioner
 variant_id: v0
+inputs:
+  - item_id: transformer_step_down_high_current
+    qty: 1.0
+    unit: unit
+  - item_id: capacitor_bank_power
+    qty: 1.0
+    unit: unit
+  - item_id: inductor_filter_large
+    qty: 3.0
+    unit: unit
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: power_conditioner
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: transformer_step_down_high_current
+        qty: 1.0
+        unit: unit
+      - item_id: capacitor_bank_power
+        qty: 1.0
+        unit: unit
+      - item_id: inductor_filter_large
+        qty: 3.0
+        unit: unit
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_conditioner
+        qty: 1.0
+        unit: unit
 notes: "Assemble power conditioner from BOM components; placeholder assembly recipe."

@@ -2,5 +2,28 @@ id: recipe_cathode_low_work_function_v0
 kind: recipe
 variant_id: v0
 target_item_id: cathode_low_work_function_v0
+inputs:
+  - item_id: cathode_coated
+    qty: 1.0
+    unit: unit
+  - item_id: cesium_ampule
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: cathode_low_work_function_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: cesium_coating_application_v0
+    inputs:
+    - item_id: cathode_coated
+      qty: 1.0
+      unit: unit
+    - item_id: cesium_ampule
+      qty: 1.0
+      unit: unit
+    outputs:
+    - item_id: cathode_low_work_function_v0
+      qty: 1.0
+      unit: unit
+notes: Apply cesium coating to oxide-coated cathode to reduce work function for enhanced thermionic emission.

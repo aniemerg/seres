@@ -4,6 +4,22 @@ target_item_id: logic_gate_vacuum_tube_v0
 name: Recipe for logic gate vacuum tube v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: vacuum_tube_assembled_evacuated
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: logic_gate_vacuum_tube_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: logic_gate_vacuum_tube_production_v0
+  inputs:
+    - item_id: vacuum_tube_assembled_evacuated
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: logic_gate_vacuum_tube_v0
+      qty: 1.0
+      unit: unit
 notes: "Converted to standard format; uses placeholder single-step production."

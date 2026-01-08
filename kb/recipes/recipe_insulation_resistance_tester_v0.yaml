@@ -1,23 +1,58 @@
 id: recipe_insulation_resistance_tester_v0
 kind: recipe
 name: Recipe for insulation resistance tester
-produces_id: insulation_resistance_tester
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: insulation_resistance_tester
 variant_id: v0
+inputs:
+  - item_id: megohmmeter_core_imported
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: test_leads_insulation_tester
+    qty: 1
+    unit: unit
+  - item_id: power_supply_low_voltage
+    qty: 1
+    unit: unit
+  - item_id: enclosure_small
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: insulation_resistance_tester
+    qty: 1
+    unit: unit
 steps:
-  - process_id: control_panel_assembly_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Assemble enclosure, mount core, power supply, and connectors."
-  - process_id: electrical_assembly_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Wire HV output, measurement circuitry, and controls."
-  - process_id: integration_test_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Calibrate and verify insulation test readings."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: megohmmeter_core_imported
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: test_leads_insulation_tester
+        qty: 1
+        unit: unit
+      - item_id: power_supply_low_voltage
+        qty: 1
+        unit: unit
+      - item_id: enclosure_small
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: insulation_resistance_tester
+        qty: 1
+        unit: unit
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble enclosure, mount core, power supply, and connectors, wire HV output, measurement circuitry, and controls, calibrate and verify insulation test readings"
 assumptions: Measurement core imported; HV generation built-in to core.
-notes: Insulation resistance tester assembly (megohmmeter).
+notes: Insulation resistance tester assembly (megohmmeter) from imported core and standard components.

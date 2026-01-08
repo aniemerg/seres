@@ -1,6 +1,22 @@
 id: recipe_coolant_pump_system_v0
 kind: recipe
 target_item_id: coolant_pump_system
+inputs:
+  - item_id: cut_parts
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: coolant_pump_system
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: machining_to_coolant_pump_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: coolant_pump_system
+        qty: 25.0
+        unit: kg
 notes: "Placeholder machining path to manufacture coolant_pump_system from cut_parts"

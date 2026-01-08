@@ -3,7 +3,23 @@ kind: recipe
 name: Recipe for steel billet or slab v0
 target_item_id: steel_billet_or_slab
 variant_id: v0
+inputs:
+  - item_id: iron_pig_or_ingot
+    qty: 1.05
+    unit: kg
+outputs:
+  - item_id: steel_billet_or_slab
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: steel_refining_basic_v0
+  inputs:
+    - item_id: iron_pig_or_ingot
+      qty: 1.05
+      unit: kg
+  outputs:
+    - item_id: steel_billet_or_slab
+      qty: 1.0
+      unit: kg
 assumptions: Feedstock is pig iron (iron_pig_or_ingot); steel_refining_basic_v0 outputs a billet/slab and slag.
 notes: Casting/refining a pig iron feed into steel billet or slab. Uses basic refining/casting furnaces.

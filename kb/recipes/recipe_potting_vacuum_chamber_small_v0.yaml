@@ -1,33 +1,91 @@
 id: recipe_potting_vacuum_chamber_small_v0
 target_item_id: potting_vacuum_chamber_small
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 28.0
+    unit: kg
+  - item_id: gasket_sheet_part_v0
+    qty: 0.5
+    unit: unit
+  - item_id: valve_set_gas_handling
+    qty: 1
+    unit: unit
+  - item_id: pressure_gauge
+    qty: 1
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 28.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 27.5
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.3
-    notes: "Cut small chamber body, lid, and flange pieces."
+    notes: "Cut chamber body, lid, and flange pieces"
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 27.5
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 26.5
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.6
     labor_hours: 0.6
-    notes: "Weld chamber body, attach ports and mounting hardware."
+    notes: "Weld chamber body, attach ports and mounting hardware"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 26.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.5
+        unit: kg
     est_time_hr: 0.6
     machine_hours: 0.5
     labor_hours: 0.4
-    notes: "Machine sealing surfaces and port threads."
-  - process_id: seal_installation_v0
-    est_time_hr: 0.4
-    labor_hours: 0.4
-    notes: "Install gaskets, view window (if any), and feedthroughs."
-  - process_id: plumbing_and_pneumatics_v0
-    est_time_hr: 0.4
-    labor_hours: 0.4
-    notes: "Install vacuum valve, gauge, and pump connection."
+    notes: "Machine sealing surfaces and port threads"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 25.5
+        unit: kg
+      - item_id: gasket_sheet_part_v0
+        qty: 0.5
+        unit: unit
+      - item_id: valve_set_gas_handling
+        qty: 1
+        unit: unit
+      - item_id: pressure_gauge
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 0.8
+    labor_hours: 0.8
+    notes: "Install gaskets, vacuum valve, gauge, and pump connection"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: potting_vacuum_chamber_small
+        qty: 1
+        unit: unit
     est_time_hr: 0.4
     labor_hours: 0.3
-    notes: "Pump-down and leak check for small chamber."
+    notes: "Pump-down and leak check"
 assumptions: "Bench-top vacuum potting chamber sized for degassing resins; uses welded steel body with simple seals."
 notes: Local fabrication for small potting vacuum chamber.

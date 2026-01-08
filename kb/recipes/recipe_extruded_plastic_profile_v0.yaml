@@ -1,6 +1,14 @@
 id: recipe_extruded_plastic_profile_v0
 target_item_id: extruded_plastic_profile
 variant_id: plastic_extrusion_v0
+inputs:
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: extruded_plastic_profile
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: plastic_extrusion_v0
     notes: Extrude plastic pellets through die to produce profile lengths; includes cooling and cut-to-length.

@@ -1,18 +1,41 @@
 id: recipe_piping_and_fittings_set_v0
+kind: recipe
+name: Recipe for piping and fittings set
 target_item_id: piping_and_fittings_set
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 12.0
+    unit: kg
+  - item_id: seal_rubber_o_ring
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: piping_and_fittings_set
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 1.5
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: Cast pipe/fitting blanks
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: Machine ends/threads
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 12.0
+        unit: kg
+      - item_id: seal_rubber_o_ring
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: piping_and_fittings_set
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 1.5
+        unit: kg
+    est_time_hr: 2.5
+    machine_hours: 2.0
     labor_hours: 0.5
-    notes: Inspect dimensions/seals
+    notes: "Cast pipe and fitting blanks from steel, machine pipe ends and threads, machine fitting internal surfaces, cut seal grooves, install rubber seal material, inspect dimensions and seal integrity"
 assumptions: Coarse piping/fitting fabrication; coatings/seals TBD.
 notes: Placeholder; refine with standards/coatings later.

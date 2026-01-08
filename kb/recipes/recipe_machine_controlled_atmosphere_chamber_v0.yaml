@@ -1,15 +1,119 @@
 id: recipe_machine_controlled_atmosphere_chamber_v0
 target_item_id: controlled_atmosphere_chamber
 variant_id: v0
+inputs:
+  - item_id: chamber_shell_sealed
+    qty: 1
+    unit: unit
+  - item_id: vacuum_pump_small
+    qty: 1
+    unit: unit
+  - item_id: inert_gas_manifold
+    qty: 1
+    unit: unit
+  - item_id: atmosphere_sensors_basic
+    qty: 1
+    unit: unit
+  - item_id: thermal_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: sensor_suite_general
+    qty: 1
+    unit: unit
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: controlled_atmosphere_chamber
+    qty: 1
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: chamber_shell_sealed
+        qty: 1
+        unit: unit
+      - item_id: vacuum_pump_small
+        qty: 1
+        unit: unit
+      - item_id: inert_gas_manifold
+        qty: 1
+        unit: unit
+      - item_id: atmosphere_sensors_basic
+        qty: 1
+        unit: unit
+      - item_id: thermal_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: bulk_material_or_parts
+        qty: 1
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: chamber_shell_sealed
+        qty: 1
+        unit: unit
+      - item_id: vacuum_pump_small
+        qty: 1
+        unit: unit
+      - item_id: inert_gas_manifold
+        qty: 1
+        unit: unit
+      - item_id: atmosphere_sensors_basic
+        qty: 1
+        unit: unit
+      - item_id: thermal_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: sensor_suite_general
+        qty: 1
+        unit: unit
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 2.5
     labor_hours: 2.5
     machine_hours: 2.5
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: controlled_atmosphere_chamber
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble chamber per BOM; imported compute/sensors.

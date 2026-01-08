@@ -1,6 +1,29 @@
 id: recipe_resistor_wire_wound_v0
 kind: recipe
 target_item_id: resistor_wire_wound_v0
+variant_id: v0
+inputs:
+  - item_id: copper_wire_magnet_v0
+    qty: 0.08
+    unit: kg
+  - item_id: iron_core_laminated
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: resistor_wire_wound_v0
+    qty: 0.1
+    unit: kg
 steps:
 - process_id: resistor_wire_winding_v0
+  inputs:
+    - item_id: copper_wire_magnet_v0
+      qty: 0.08
+      unit: kg
+    - item_id: iron_core_laminated
+      qty: 0.02
+      unit: kg
+  outputs:
+    - item_id: resistor_wire_wound_v0
+      qty: 0.1
+      unit: kg
 notes: "Placeholder recipe to manufacture resistor_wire_wound_v0 using coil winding machinery."

@@ -4,7 +4,23 @@ target_item_id: lead_screw_assembly
 produces_id: lead_screw_assembly
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: steel_bar_stock
+    qty: 8.0
+    unit: unit
+outputs:
+  - item_id: lead_screw_assembly
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: lead_screw_fabrication_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 8.0
+        unit: unit
+    outputs:
+      - item_id: lead_screw_assembly
+        qty: 1.0
+        unit: unit
     notes: "Fabricate lead screw assembly from steel_bar_stock"
 notes: "Recipe to manufacture lead_screw_assembly from a single fabrication step."

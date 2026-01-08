@@ -1,8 +1,60 @@
 id: recipe_condenser_lens_assembly_v0
 kind: recipe
 target_item_id: condenser_lens_assembly
+inputs:
+  - item_id: cast_glass_parts
+    qty: 5.0
+    unit: kg
+  - item_id: machine_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+  - item_id: unfinished_part
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: condenser_lens_assembly
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: glass_lens_objective_set_fabrication_v0
+  inputs:
+    - item_id: cast_glass_parts
+      qty: 4.0
+      unit: kg
+  outputs:
+    - item_id: glass_lens_objective_set
+      qty: 1.0
+      unit: unit
 - process_id: glass_lens_eyepiece_fabrication_v0
+  inputs:
+    - item_id: cast_glass_parts
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: glass_lens_eyepiece
+      qty: 1.0
+      unit: unit
 - process_id: lens_machine_lunar_v0_assembly_v0
+  inputs:
+    - item_id: machine_frame_small
+      qty: 1.0
+      unit: unit
+    - item_id: power_electronics_module
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: lens_machine_lunar_v0
+      qty: 1.0
+      unit: unit
 - process_id: finishing_basic_v0
+  inputs:
+    - item_id: unfinished_part
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: condenser_lens_assembly
+      qty: 1.0
+      unit: unit

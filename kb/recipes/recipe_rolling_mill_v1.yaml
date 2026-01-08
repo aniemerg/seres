@@ -2,10 +2,68 @@ id: recipe_rolling_mill_v1
 kind: recipe
 name: Rolling mill assembly v1
 target_item_id: rolling_mill
+inputs:
+  - item_id: steel_drum
+    qty: 1.0
+    unit: unit
+  - item_id: motor_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set
+    qty: 2.0
+    unit: unit
+  - item_id: grinding_media_steel
+    qty: 50.0
+    unit: kg
+outputs:
+  - item_id: rolling_mill
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_drum
+        qty: 1.0
+        unit: unit
+      - item_id: motor_assembly
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set
+        qty: 2.0
+        unit: unit
+      - item_id: grinding_media_steel
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: unit
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: unit
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: rolling_mill
+        qty: 1.0
+        unit: unit
 notes: "Upgrade path for rolling_mill; aligns with current rolling_mill item and seed BOM."
 assumptions: "Relies on BOM bom_rolling_mill_v0.yaml for parts and subassemblies."

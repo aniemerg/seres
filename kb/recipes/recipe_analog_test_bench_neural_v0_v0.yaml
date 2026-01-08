@@ -1,7 +1,35 @@
 id: recipe_analog_test_bench_neural_v0_v0
 kind: recipe
 target_item_id: analog_test_bench_neural_v0
+inputs:
+  - item_id: steel_frame_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: analog_test_bench_neural_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: analog_test_bench_neural_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to resolve no_recipe gap for analog_test_bench_neural_v0."
 assumptions: "Simplified placeholder path; refine with explicit BOM and steps later."

@@ -12,5 +12,14 @@ outputs:
     unit: kg
 steps:
   - process_id: steel_bar_stock_rolling_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: steel_bar_stock
+        qty: 1.0
+        unit: kg
+    notes: "Roll billet into bar stock"
 notes: "Converted from import_stub to a local production path using the existing rolling process."
 assumptions: "Local production path; placeholder; replace with detailed BOM and routing as needed."

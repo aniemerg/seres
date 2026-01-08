@@ -1,28 +1,76 @@
 id: recipe_machine_cartesian_gantry_assembler_v0
 target_item_id: cartesian_gantry_assembler_v0
 variant_id: v0
+inputs:
+  - item_id: steel_plate_raw
+    qty: 210.0
+    unit: kg
+outputs:
+  - item_id: cartesian_gantry_assembler_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_raw
+        qty: 210.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 205.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
-    notes: "Cut rail mounts, gantry plates, and brackets."
+    notes: "Cut rail mounts, gantry plates, and brackets"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 205.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 202.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.6
-    notes: "Machine bearing seats, lead screw/nut mounts, and carriage interfaces."
+    notes: "Machine bearing seats, lead screw/nut mounts, and carriage interfaces"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 202.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 201.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: "Assemble frame, rails, carriages, screws/belts, and end effector mount."
+    notes: "Assemble frame, rails, carriages, screws/belts, and end effector mount"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 201.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Install motors, limit switches, controllers, and cable management."
+    notes: "Install motors, limit switches, controllers, and cable management"
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: cartesian_gantry_assembler_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.7
     labor_hours: 0.6
-    notes: "Axis motion and accuracy check, safety interlocks."
+    notes: "Axis motion and accuracy check, safety interlocks"
 assumptions: "Light-duty cartesian gantry for assembly/pick-and-place; electronics imported/coarse."
-notes: Local assembly route for cartesian gantry assembler.
+notes: Local assembly route for cartesian gantry assembler from steel plate.

@@ -6,11 +6,29 @@ target_item_id: support_frame_small
 produces_id: support_frame_small
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: steel_bar_stock
+    qty: 12.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: support_frame_small
+    qty: 1
+    unit: unit
 steps:
-- process_id: metal_casting_basic_v0
-  notes: Cast support frame small blank
-- process_id: machining_finish_basic_v0
-  notes: Machine finishing of frame features
-- process_id: assembly_basic_v0
-  notes: Assemble components into final frame
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 12.0
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+    notes: "Cast frame blank, machine finishing of frame features, assemble components"
 notes: '3-step production path: cast -> machine finish -> assemble'

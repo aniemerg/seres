@@ -1,15 +1,19 @@
 id: recipe_helium_mixed_isotopes_v0
 target_item_id: helium_mixed_isotopes
 variant_id: v0
+inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: helium_mixed_isotopes
+    qty: 0.000014
+    unit: kg
 steps:
   - process_id: regolith_volatile_thermal_extraction_v0
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Heat regolith to 700-1200°C to release solar-wind implanted helium"
-  - process_id: cold_trap_cryogenic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Cryogenic cold trap for helium fraction at ~4K before isotopic separation"
 assumptions: |
   Mixed helium isotopes (He-3 and He-4) collected from regolith thermal processing.
   Helium fraction captured before isotopic separation.

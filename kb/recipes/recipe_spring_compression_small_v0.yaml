@@ -2,13 +2,37 @@ id: recipe_spring_compression_small_v0
 kind: recipe
 target_item_id: spring_compression_small
 variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 0.012
+    unit: kg
+outputs:
+  - item_id: spring_compression_small
+    qty: 0.01
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 0.012
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 0.011
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
     notes: "Form small compression spring from wire stock"
   - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 0.011
+        unit: kg
+    outputs:
+      - item_id: spring_compression_small
+        qty: 0.01
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.2

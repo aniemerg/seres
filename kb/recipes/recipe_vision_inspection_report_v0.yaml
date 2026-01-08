@@ -1,9 +1,7 @@
 id: recipe_vision_inspection_report_v0
 kind: recipe
 target_item_id: vision_inspection_report_v0
-produces_id: vision_inspection_report_v0
-produces_qty: 1.0
-produces_unit: unit
+variant_id: v0
 inputs:
   - item_id: finished_part
     qty: 1.0
@@ -17,4 +15,15 @@ outputs:
     unit: unit
 steps:
   - process_id: vision_inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+      - item_id: vision_inspection_report_v0
+        qty: 1.0
+        unit: unit
 notes: "Updated to use process_id pattern for steps to satisfy schema validation. Produces vision_inspection_report_v0 via vision_inspection_basic_v0. Inspection assumes a generic finished_part input that is returned after inspection."

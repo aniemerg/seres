@@ -1,0 +1,26 @@
+id: recipe_pcb_blank_import_v0
+kind: recipe
+name: PCB blank preparation
+target_item_id: pcb_blank
+variant_id: v0
+inputs:
+  - item_id: copper_clad_laminate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: pcb_blank
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: copper_clad_laminate
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: pcb_blank
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.2
+    notes: "Cut and prep copper-clad laminate into PCB blank stock"
+notes: "Local preparation of PCB blank material from copper-clad laminate."

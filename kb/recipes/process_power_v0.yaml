@@ -1,8 +1,24 @@
 id: recipe_process_power_v0
 target_item_id: process_power
 variant_id: v0
+inputs:
+  - item_id: solar_irradiance
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: process_power
+    qty: 1.0
+    unit: kWh
 steps:
   - process_id: solar_power_generation_basic_v0
+    inputs:
+      - item_id: solar_irradiance
+        qty: 1.0
+        unit: kWh
+    outputs:
+      - item_id: process_power
+        qty: 1.0
+        unit: kWh
     est_time_hr: 1.0
     machine_hours: 1.0
 assumptions: Process power sourced from solar generation; conditioning losses not modeled.

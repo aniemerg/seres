@@ -1,6 +1,16 @@
 id: recipe_magnesium_metal_v0
 kind: recipe
 target_item_id: magnesium_metal_v0
+variant_id: v0
+inputs:
+  - item_id: magnesium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: magnesium_oxide_reduction_v0
+    est_time_hr: 4.0
+    machine_hours: 4.0
 notes: "Direct reduction of magnesium oxide to metal using carbon reductant in a reduction furnace. Placeholder for future refinement."

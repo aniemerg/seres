@@ -2,11 +2,60 @@ id: recipe_machine_bench_grinder_v0
 kind: recipe
 target_item_id: bench_grinder
 name: Recipe for bench grinder
-produces_id: bench_grinder
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: grinding_wheels
+    qty: 2
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: support_frame_small
+    qty: 1
+    unit: unit
+  - item_id: work_rest_adjustable
+    qty: 1
+    unit: unit
+  - item_id: transparent_panel_set
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: bench_grinder
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: grinding_wheels
+      qty: 2
+      unit: unit
+    - item_id: drive_motor_small
+      qty: 1
+      unit: unit
+    - item_id: support_frame_small
+      qty: 1
+      unit: unit
+    - item_id: work_rest_adjustable
+      qty: 1
+      unit: unit
+    - item_id: transparent_panel_set
+      qty: 1
+      unit: unit
+    - item_id: control_panel_basic
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: bench_grinder
+      qty: 1.0
+      unit: unit
   notes: Assemble motor, wheels, guards, rests, and controls on the frame.
 assumptions: "Local assembly from available components; refine with grinder-specific machining later."
 notes: Local assembly route replacing import placeholder for bench grinder.

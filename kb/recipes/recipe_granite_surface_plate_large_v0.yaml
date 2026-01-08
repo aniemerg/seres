@@ -1,12 +1,32 @@
 id: recipe_granite_surface_plate_large_v0
 target_item_id: granite_surface_plate_large
 variant_id: lapped_granite_v0
+inputs:
+  - item_id: rock_feedstock_raw
+    qty: 400.0
+    unit: kg
+outputs:
+  - item_id: granite_surface_plate_large
+    qty: 400.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: rock_feedstock_raw
+        qty: 400.0
+        unit: kg
     notes: Cut granite block to plate dimensions (placeholder using generic cutting).
   - process_id: surface_finishing_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 400.0
+        unit: kg
     notes: Grind/lap surface to flatness; stand-in for precision lapping.
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 400.0
+        unit: kg
     notes: Flatness inspection and marking of reference surfaces.
-assumptions: "Granite block feedstock assumed available; uses generic cutting/finishing until stone-specific processes are modeled."
+assumptions: "Granite block feedstock modeled as rock_feedstock_raw; cut_parts stands in for cut granite blanks before surface finishing and inspection."
 notes: Localized fabrication path replacing import placeholder for granite surface plates.

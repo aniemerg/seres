@@ -1,22 +1,32 @@
 id: recipe_wired_electrical_system_v0
 target_item_id: wired_electrical_system
 variant_id: v0
+inputs:
+  - item_id: electrical_wire_and_connectors
+    qty: 12.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: wired_electrical_system
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electrical_wire_and_connectors
+        qty: 12.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Route and install power and control wiring, connectors, and terminal blocks"
-  - process_id: assembly_basic_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Install junction boxes, cable management, and labeling"
-  - process_id: electrical_testing_and_burn_in_v0
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Test wiring continuity, insulation resistance, and circuit functionality"
-  - process_id: inspection_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Inspect wiring quality, routing, and connections"
 assumptions: Complete electrical wiring system assembled as harness or integrated system. Tested and ready for installation in larger equipment.
 notes: Pre-wired electrical system reduces installation time and improves reliability. All wiring tested before installation into final equipment.

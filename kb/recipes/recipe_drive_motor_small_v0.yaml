@@ -1,16 +1,36 @@
 id: recipe_drive_motor_small_v0
 target_item_id: drive_motor_small
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: drive_motor_small
+    qty: 20.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 20.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Cast motor housing
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Machine housing
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 19.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: Assemble rotor/stator (coils imported)

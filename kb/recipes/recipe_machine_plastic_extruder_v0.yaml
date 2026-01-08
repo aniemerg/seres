@@ -1,26 +1,130 @@
 id: recipe_machine_plastic_extruder_v0
+kind: recipe
+name: Recipe for plastic_extruder (machine)
 target_item_id: plastic_extruder
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 80.0
+    unit: kg
+  - item_id: steel_stock
+    qty: 120.0
+    unit: kg
+  - item_id: filler_wire_basic
+    qty: 6.0
+    unit: kg
+  - item_id: extruder_head_basic
+    qty: 1
+    unit: unit
+  - item_id: heating_plate_or_induction_heater
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: gearbox_reducer_medium
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+  - item_id: control_components
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: plastic_extruder
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.3
     labor_hours: 1.0
     notes: "Machine barrel, screw, and die components."
   - process_id: welded_fabrication_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 120.0
+        unit: kg
+      - item_id: filler_wire_basic
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 115.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.8
     notes: "Fabricate frame and mounts."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 80.0
+        unit: kg
+      - item_id: welded_fabrications
+        qty: 115.0
+        unit: kg
+      - item_id: extruder_head_basic
+        qty: 1
+        unit: unit
+      - item_id: heating_plate_or_induction_heater
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: gearbox_reducer_medium
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
     est_time_hr: 1.2
     labor_hours: 1.2
     notes: "Assemble barrel, screw, heaters, motor/gearbox, and die."
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 5.0
+        unit: kg
+      - item_id: control_components
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Wire heaters, sensors, and controls."
   - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: plastic_extruder
+        qty: 1
+        unit: unit
     est_time_hr: 0.6
     labor_hours: 0.5
     notes: "Test extrusion with sample polymer."

@@ -1,31 +1,100 @@
 id: recipe_lathe_bed_and_headstock_v0
+kind: recipe
 target_item_id: lathe_bed_and_headstock
 variant_id: v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 520.0
+    unit: kg
+  - item_id: cast_metal_parts
+    qty: 500.0
+    unit: kg
+  - item_id: welded_fabrications
+    qty: 500.0
+    unit: kg
+  - item_id: machined_steel_part_precision
+    qty: 480.0
+    unit: kg
+  - item_id: finished_part
+    qty: 480.0
+    unit: kg
+outputs:
+  - item_id: lathe_bed_and_headstock
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: casting_basic_v0
+    inputs:
+    - item_id: metal_feedstock
+      qty: 520.0
+      unit: kg
+    outputs:
+    - item_id: cast_metal_parts
+      qty: 500.0
+      unit: kg
     est_time_hr: 30.0
     machine_hours: 25.0
     labor_hours: 20.0
     notes: "Cast lathe bed from cast iron (~400-450 kg) with integral ways and headstock mounting area; allow extended cooling and stress relieving (days to weeks)"
   - process_id: welding_structural_v0
+    inputs:
+    - item_id: cast_metal_parts
+      qty: 500.0
+      unit: kg
+    outputs:
+    - item_id: welded_fabrications
+      qty: 500.0
+      unit: kg
     est_time_hr: 15.0
     machine_hours: 12.0
     labor_hours: 12.0
     notes: "Weld steel reinforcements to bed if fabricated design; fabricate and weld headstock housing from steel plate"
   - process_id: machining_precision_v0
+    inputs:
+    - item_id: welded_fabrications
+      qty: 500.0
+      unit: kg
+    outputs:
+    - item_id: machined_steel_part_precision
+      qty: 480.0
+      unit: kg
     est_time_hr: 60.0
     machine_hours: 60.0
     labor_hours: 40.0
     notes: "Precision machine bed ways (V-ways and flat ways) to extremely tight tolerances (±0.01 mm), machine headstock bore for spindle bearings, drill/tap mounting holes"
   - process_id: precision_alignment_and_leveling_v0
+    inputs:
+    - item_id: machined_steel_part_precision
+      qty: 480.0
+      unit: kg
+    outputs:
+    - item_id: machined_steel_part_precision
+      qty: 480.0
+      unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Scrape ways by hand to achieve final precision and straightness (±0.005 mm over full length), verify parallelism of ways"
   - process_id: surface_finishing_basic_v0
+    inputs:
+    - item_id: machined_steel_part_precision
+      qty: 480.0
+      unit: kg
+    outputs:
+    - item_id: finished_part
+      qty: 480.0
+      unit: kg
     est_time_hr: 4.0
     labor_hours: 3.0
     notes: "Grind and polish critical surfaces, apply protective coating (paint or oil) to prevent rust"
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: finished_part
+      qty: 480.0
+      unit: kg
+    outputs:
+    - item_id: lathe_bed_and_headstock
+      qty: 1
+      unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Verify straightness, flatness, and parallelism of ways using precision straight edge and autocollimator; check headstock bore concentricity"

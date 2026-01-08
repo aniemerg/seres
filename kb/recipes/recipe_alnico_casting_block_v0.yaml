@@ -5,6 +5,25 @@ target_item_id: alnico_casting_block_v0
 produces_id: alnico_casting_block_v0
 produces_qty: 1.0
 produces_unit: unit
+variant_id: v0
+inputs:
+  - item_id: alnico_magnet_alloy_v0
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: alnico_casting_block_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: alnico_casting_process_v0
+    inputs:
+      - item_id: alnico_magnet_alloy_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: alnico_casting_block_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.5
+    machine_hours: 2.5
 notes: "Casting AlNiCo magnet alloy into Alnico casting block using investment casting."

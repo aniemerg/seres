@@ -2,21 +2,45 @@ id: recipe_casting_patterns_wooden_v0
 kind: recipe
 target_item_id: casting_patterns_wooden
 variant_id: v0
+inputs:
+  - item_id: cellulose_raw
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: casting_patterns_wooden
+    qty: 1.0
+    unit: set
 steps:
   - process_id: woodworking_basic_v0
     inputs:
-      - item_id: binder_material
+      - item_id: cellulose_raw
         qty: 2.0
         unit: kg
-        notes: "Substitute pattern material (polymer/composite) - wood unavailable on Moon"
+        notes: "Wood substitute feedstock; placeholder for cellulose-based stock"
+    outputs:
+      - item_id: finished_part
+        qty: 2.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Cut, carve, and shape pattern material into casting pattern geometry matching desired part"
   - process_id: woodworking_basic_v0
+    inputs:
+      - item_id: cellulose_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Sand and finish pattern surfaces smooth for clean mold release and good casting surface finish"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 3.0
+        unit: kg
     outputs:
       - item_id: casting_patterns_wooden
         qty: 1.0

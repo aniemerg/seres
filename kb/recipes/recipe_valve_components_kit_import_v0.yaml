@@ -4,8 +4,24 @@ name: Valve components kit (import)
 produces_id: valve_components_kit
 produces_qty: 0.5
 produces_unit: kg
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: valve_components_kit
+    qty: 0.5
+    unit: kg
 steps:
 - process_id: import_receiving_basic_v0
+  inputs:
+    - item_id: bulk_material_or_parts
+      qty: 0.5
+      unit: kg
+  outputs:
+    - item_id: valve_components_kit
+      qty: 0.5
+      unit: kg
 notes: |
   Import valve components kit as a complete assembly.
   Includes springs, seals, spools, seats, pins, and clips for hydraulic valves.

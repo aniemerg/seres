@@ -1,9 +1,41 @@
 id: recipe_part_to_clean_v0
 kind: recipe
 target_item_id: part_to_clean
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: part_to_clean
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
     notes: "Casting base for part_to_clean as local path; aligns with existing casting process."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: part_to_clean
+        qty: 1.0
+        unit: kg
 notes: "Converted to dict-form steps to satisfy invalid_recipe_schema gap; local manufacturing path for part_to_clean."

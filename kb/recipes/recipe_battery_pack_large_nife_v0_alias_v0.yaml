@@ -5,6 +5,34 @@ variant_id: v0
 produces_id: battery_pack_large_nife_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: nife_battery_cell
+    qty: 12.0
+    unit: unit
+  - item_id: bus_bar_copper
+    qty: 0.5
+    unit: kg
+  - item_id: insulation_material
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: battery_pack_large_nife_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: battery_pack_assembly_nife
+    inputs:
+      - item_id: nife_battery_cell
+        qty: 12.0
+        unit: unit
+      - item_id: bus_bar_copper
+        qty: 0.5
+        unit: kg
+      - item_id: insulation_material
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: battery_pack_large_nife_v0
+        qty: 1.0
+        unit: unit
 notes: "Local alias path to assemble a Ni-Fe battery pack v0 for battery_pack_large_nife_v0. Reuses existing assembly process."

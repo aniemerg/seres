@@ -6,6 +6,17 @@ produces_qty: 42.0
 produces_unit: kg
 target_item_id: lathe_spindle_and_bearings
 variant_id: v0
+inputs:
+  - item_id: spindle_assembly_precision
+    qty: 40.0
+    unit: kg
+  - item_id: bearing_set_sealed
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: lathe_spindle_and_bearings
+    qty: 42.0
+    unit: kg
 steps:
 - process_id: lathe_spindle_and_bearings_assembly_v0
 notes: "Assemble spindle precision assembly with sealed bearing set into lathe spindle and bearings"

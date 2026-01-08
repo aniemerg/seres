@@ -1,5 +1,22 @@
 id: recipe_ethanol_or_isopropanol_feedstock_v0
 kind: recipe
 target_item_id: ethanol_or_isopropanol_feedstock_v0
+name: Recipe for ethanol_or_isopropanol_feedstock_v0
+inputs:
+  - item_id: methanol_liquid
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: ethanol_or_isopropanol_feedstock_v0
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: ethanol_feedstock_prep_basic_v0
+    inputs:
+      - item_id: methanol_liquid
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: ethanol_or_isopropanol_feedstock_v0
+        qty: 3.0
+        unit: kg

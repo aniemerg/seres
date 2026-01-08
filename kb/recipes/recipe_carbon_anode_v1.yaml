@@ -2,6 +2,28 @@ id: recipe_carbon_anode_v1
 kind: recipe
 name: Carbon Anode from Forming (v1)
 target_item_id: carbon_anode
+inputs:
+  - item_id: carbon_anode_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbon_anode
+    qty: 0.98
+    unit: kg
+  - item_id: pitch_residue
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: carbon_anode_forming_v0
+    inputs:
+      - item_id: carbon_anode_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: carbon_anode
+        qty: 0.98
+        unit: kg
+      - item_id: pitch_residue
+        qty: 0.02
+        unit: kg
 notes: "Alternate carbon anode production path referencing the forming/baking process."

@@ -1,11 +1,30 @@
 id: recipe_dust_fines_alias_v0
 kind: recipe
 name: Dust fines production path alias v0
-produces_id: dust_fines_v0
-produces_qty: 0.1
-produces_unit: kg
 target_item_id: dust_fines
 variant_id: v0
+inputs:
+  - item_id: powder_feedstock
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: dust_fines_v0
+    qty: 0.1
+    unit: kg
+  - item_id: dust_fines
+    qty: 0.1
+    unit: kg
 steps:
-- process_id: powder_pressing_process_v0
+  - process_id: powder_pressing_process_v0
+    inputs:
+      - item_id: powder_feedstock
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: dust_fines_v0
+        qty: 0.1
+        unit: kg
+      - item_id: dust_fines
+        qty: 0.1
+        unit: kg
 notes: "Alias-based path: map alias 'dust_fines' to actual dust_fines_v0 production via powder_pressing_process_v0."

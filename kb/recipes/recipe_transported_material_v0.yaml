@@ -1,10 +1,27 @@
 id: recipe_transported_material_v0
+kind: recipe
 target_item_id: transported_material
 variant_id: v0
+inputs:
+  - item_id: bulk_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: transported_material
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: material_transport_v0
     est_time_hr: 0.1
     labor_hours: 0.1
+    inputs:
+      - item_id: bulk_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: transported_material
+        qty: 1.0
+        unit: kg
     notes: "Transport bulk material using hauler or loader"
 assumptions: "Placeholder for material after transport. Mass preserved through transport operation."
 notes: "Material transport operation. Time varies based on distance and hauler capacity."

@@ -1,9 +1,6 @@
 id: recipe_power_electronics_module_v1
 kind: recipe
 name: Recipe for power electronics module v1
-produces_id: power_electronics_module
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: power_electronics_module
 variant_id: v1
 
@@ -16,6 +13,10 @@ inputs:
     qty: 10.0
     unit: kg
     notes: Power semiconductors (MOSFETs, diodes), inductors, transformers, large capacitors
+  - item_id: pcb_populated
+    qty: 2.0
+    unit: kg
+    notes: Populated power control PCB from pcb_assembly_basic_v0
   - item_id: heat_sink_assembly_large
     qty: 4.0
     unit: kg
@@ -40,6 +41,10 @@ inputs:
     qty: 0.1
     unit: kg
     notes: Assembly hardware
+  - item_id: assembled_electrical_system
+    qty: 1.0
+    unit: unit
+    notes: Assembled enclosure ready for testing
 
 outputs:
   - item_id: power_electronics_module
@@ -48,6 +53,17 @@ outputs:
 
 steps:
   - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: control_circuit_board_power
+        qty: 2.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: pcb_populated
+        qty: 2.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Assemble power PCB with microcontroller, gate drivers, sensing circuits"
@@ -56,14 +72,59 @@ steps:
     labor_hours: 2.0
     notes: "Install power MOSFETs, inductors, capacitors, transformers"
   - process_id: heat_sink_installation_v0
+    inputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
+      - item_id: heat_sink_assembly_large
+        qty: 4.0
+        unit: kg
+      - item_id: thermal_interface_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Mount heat sinks to power semiconductors with thermal interface"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 2.0
+        unit: kg
+      - item_id: component_with_heat_sink
+        qty: 1.0
+        unit: unit
+      - item_id: aluminum_housing_machined
+        qty: 2.5
+        unit: kg
+      - item_id: cooling_fan_assembly
+        qty: 0.5
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 0.8
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount in enclosure, wire connections, install cooling fan"
   - process_id: electrical_testing_v0
+    inputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test charge control, voltage regulation, load response"

@@ -1,10 +1,46 @@
 id: recipe_gas_mixing_chamber_steel_v0
 kind: recipe
+name: Recipe for gas mixing chamber steel
 target_item_id: gas_mixing_chamber_steel
 variant_id: v0
+inputs:
+  - item_id: steel_bar_stock
+    qty: 15.0
+    unit: kg
+  - item_id: flame_arrestor
+    qty: 1
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: gas_mixing_chamber_steel
+    qty: 1
+    unit: unit
+  - item_id: metal_scrap
+    qty: 2.0
+    unit: kg
 steps:
-  - process_id: machining_basic_v0
-    notes: "Machine chamber body and mixing ports"
   - process_id: assembly_basic_v0
-    notes: "Assemble flame arrestor and fittings"
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 15.0
+        unit: kg
+      - item_id: flame_arrestor
+        qty: 1
+        unit: unit
+      - item_id: fittings_and_valves
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: gas_mixing_chamber_steel
+        qty: 1
+        unit: unit
+      - item_id: metal_scrap
+        qty: 2.0
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 4.0
+    labor_hours: 2.0
+    notes: "Machine steel bar stock to create chamber body with mixing ports and mounting features, drill and tap gas inlet and outlet ports, install flame arrestor for safety, assemble fittings and valves for gas connections, pressure test for leaks"
 notes: Manufacturing gas mixing chamber from steel stock.

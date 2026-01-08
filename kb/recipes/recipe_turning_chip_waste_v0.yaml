@@ -4,7 +4,30 @@ name: Recipe for turning_chip_waste generation
 produces_id: turning_chip_waste
 produces_qty: 1.0
 produces_unit: unit
-steps:
-- process_id: machining_process_turning_v0
-notes: Produce turning_chip_waste as a byproduct of the turning operation.
 target_item_id: turning_chip_waste
+inputs:
+  - item_id: rough_part
+    qty: 0.08
+    unit: kg
+outputs:
+  - item_id: machined_steel_part_precision
+    qty: 0.075
+    unit: kg
+  - item_id: turning_chip_waste
+    qty: 0.005
+    unit: kg
+steps:
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: rough_part
+        qty: 0.08
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 0.075
+        unit: kg
+      - item_id: turning_chip_waste
+        qty: 0.005
+        unit: kg
+    notes: "Produce turning_chip_waste as a byproduct of the turning operation"
+notes: Produce turning_chip_waste as a byproduct of the turning operation.

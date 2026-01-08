@@ -2,10 +2,46 @@ id: recipe_expansion_valve_cryogenic_v0
 kind: recipe
 target_item_id: expansion_valve_cryogenic
 variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 10.0
+    unit: kg
+  - item_id: cutting_fluid
+    qty: 1.0
+    unit: L
+  - item_id: seal_o_ring_rubber
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: expansion_valve_cryogenic
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_precision_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 10.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.0
+        unit: L
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 7.0
+        unit: kg
     notes: "Machine valve body and precision orifice for controlled flow"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 7.0
+        unit: kg
+      - item_id: seal_o_ring_rubber
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: expansion_valve_cryogenic
+        qty: 1.0
+        unit: unit
     notes: "Assemble valve components with cryogenic-rated seals"
 notes: |
   Recipe for cryogenic expansion valve.

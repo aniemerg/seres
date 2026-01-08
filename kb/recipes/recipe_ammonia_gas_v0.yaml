@@ -5,7 +5,29 @@ target_item_id: ammonia_gas
 produces_id: ammonia_gas
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: nitrogen_gas_purified
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.215
+    unit: kg
+outputs:
+  - item_id: ammonia_gas
+    qty: 1.215
+    unit: kg
 steps:
   - process_id: nitrogen_fixation_haber_bosch_v0
+    inputs:
+      - item_id: nitrogen_gas_purified
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.215
+        unit: kg
+    outputs:
+      - item_id: ammonia_gas
+        qty: 1.215
+        unit: kg
     notes: "Haber-Bosch ammonia synthesis step"
 notes: "Placeholder recipe to manufacture ammonia_gas via Haber-Bosch process for mass-balance modeling."

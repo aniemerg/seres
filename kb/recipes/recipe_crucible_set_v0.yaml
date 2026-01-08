@@ -1,20 +1,69 @@
 id: recipe_crucible_set_v0
 target_item_id: crucible_set
 variant_id: v0
+inputs:
+  - item_id: refractory_castable
+    qty: 50.0
+    unit: kg
+  - item_id: wet_material
+    qty: 50.0
+    unit: kg
+  - item_id: dried_material
+    qty: 50.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: crucible_set
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: refractory_casting_v0
+    inputs:
+      - item_id: refractory_castable
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: wet_material
+        qty: 50.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Cast crucibles from refractory mix or graphite-clay composite"
   - process_id: drying_and_curing_v0
+    inputs:
+      - item_id: wet_material
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: dried_material
+        qty: 50.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Dry crucibles slowly to prevent cracking"
   - process_id: firing_v0
+    inputs:
+      - item_id: dried_material
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: crucible_set
+        qty: 50.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Fire crucibles to final hardness and temperature resistance"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: crucible_set
+        qty: 50.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine crucible tongs from steel stock"

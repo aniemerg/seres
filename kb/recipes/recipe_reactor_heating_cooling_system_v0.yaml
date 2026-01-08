@@ -1,18 +1,115 @@
 id: recipe_reactor_heating_cooling_system_v0
 kind: recipe
 name: Recipe for reactor heating/cooling system v0
-produces_id: reactor_heating_cooling_system_v0
-produces_qty: 1.0
-produces_unit: unit
 target_item_id: reactor_heating_cooling_system_v0
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+  - item_id: heating_plate_or_induction_heater
+    qty: 1.0
+    unit: unit
+  - item_id: cryocooler_active_v0
+    qty: 1.0
+    unit: unit
+  - item_id: temperature_control_system_v0
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_components
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: reactor_heating_cooling_system_v0
+    qty: 1.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 0.95
+        unit: kg
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.9
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.05
+        unit: kg
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.9
+        unit: kg
+      - item_id: heating_plate_or_induction_heater
+        qty: 1.0
+        unit: unit
+      - item_id: cryocooler_active_v0
+        qty: 1.0
+        unit: unit
+      - item_id: temperature_control_system_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
   - process_id: electrical_wiring_and_controls_v0
+    inputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_components
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: reactor_heating_cooling_system_v0
+        qty: 1.0
+        unit: kg
 assumptions: "Assemble heating/cooling modules (heater, cryocooler, temp control) into reactor system; refer to BOM for subcomponents; temperature_control_system_v0 and cryocooler_active_v0 used as seed components."
 notes: "Top-level recipe to assemble reactor heating/cooling system from standard unit operations."

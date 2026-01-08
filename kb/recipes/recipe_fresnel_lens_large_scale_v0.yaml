@@ -3,16 +3,47 @@ kind: recipe
 name: Recipe for Fresnel lens (large-scale) v0
 target_item_id: fresnel_lens_large_scale_v0
 variant_id: v0
+inputs:
+  - item_id: glass_raw_materials
+    qty: 1.0
+    unit: kg
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: glass_casting_v0
+    inputs:
+      - item_id: glass_raw_materials
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cast_glass_parts
+        qty: 1.0
+        unit: kg
     est_time_hr: 15.0
     machine_hours: 15.0
     notes: "Cast large substrate for Fresnel lens grooves"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: rough_part
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 1.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Shape grooves and achieve optical precision on substrate"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: fresnel_lens_large_scale_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Quality inspection of groove geometry and surface finish"

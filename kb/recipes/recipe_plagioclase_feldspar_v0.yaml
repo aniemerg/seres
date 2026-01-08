@@ -2,9 +2,41 @@ id: recipe_plagioclase_feldspar_v0
 kind: recipe
 target_item_id: plagioclase_feldspar
 variant_id: v0
+produces_qty: 0.4
+produces_unit: kg
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+  - item_id: regolith_lunar_mare
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: plagioclase_feldspar
+    qty: 0.4
+    unit: kg
 steps:
   - process_id: beneficiation_magnetic_basic_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_concentrate
+        qty: 0.2
+        unit: kg
+      - item_id: tailings
+        qty: 0.8
+        unit: kg
   - process_id: regolith_screening_sieving_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: plagioclase_feldspar
+        qty: 0.4
+        unit: kg
 notes: |
   Extract plagioclase feldspar concentrate from lunar highland regolith.
   Remove iron-rich minerals via magnetic separation and screen for grain size.

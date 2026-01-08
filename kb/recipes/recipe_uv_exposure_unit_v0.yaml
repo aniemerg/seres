@@ -1,29 +1,32 @@
 id: recipe_uv_exposure_unit_v0
 kind: recipe
 target_item_id: uv_exposure_unit
+inputs:
+  - item_id: uv_exposure_unit_frame
+    qty: 1
+    unit: unit
+  - item_id: uv_exposure_unit_lamp_module
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: uv_exposure_unit
+    qty: 1
+    unit: unit
 steps:
-  - process_id: sheet_metal_fabrication_v0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: uv_exposure_unit_frame
+        qty: 1
+        unit: unit
+      - item_id: uv_exposure_unit_lamp_module
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: uv_exposure_unit
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 1.0
-    notes: "Fabricate outer enclosure and housing from sheet metal"
-  - process_id: welding_and_fabrication_v0
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    labor_hours: 1.0
-    notes: "Assemble enclosure with welds"
-  - process_id: machining_finish_basic_v0
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    labor_hours: 0.6
-    notes: "Finish faces, drill mounting holes"
-  - process_id: surface_treatment_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.3
-    notes: "Apply protective coating"
-  - process_id: inspection_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.3
-    notes: "Dimension check and finish verification"
-assumptions: "Placeholder recipe to manufacture UV exposure unit housing from sheet metal enclosure; will be refined with BOM"
-notes: "Manufacture UV exposure unit housing; specific lamp assembly steps to be added later"
+    labor_hours: 2.0
+    notes: "Assemble frame and lamp module, test and verify UV lamp function"
+assumptions: "Assembly of UV exposure unit from frame and lamp module components per BOM"
+notes: "Assemble UV exposure unit from BOM components; frame fabricated separately"

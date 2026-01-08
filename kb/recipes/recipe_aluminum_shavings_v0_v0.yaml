@@ -6,6 +6,29 @@ produces_qty: 0.7
 produces_unit: kg
 target_item_id: aluminum_shavings_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: aluminum_shavings_v0
+    qty: 0.7
+    unit: kg
+byproducts:
+  - item_id: machined_part_raw
+    qty: 0.3
+    unit: kg
 steps:
 - process_id: machining_process_boring_v0
+  inputs:
+    - item_id: aluminum_alloy_ingot
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: aluminum_shavings_v0
+      qty: 0.7
+      unit: kg
+    - item_id: machined_part_raw
+      qty: 0.3
+      unit: kg
 notes: Byproduct generation from cylinder body machining

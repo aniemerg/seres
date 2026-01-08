@@ -1,23 +1,102 @@
 id: recipe_demonstrated_motor_2017_v0
 target_item_id: demonstrated_motor_2017_v0
 variant_id: v0
+inputs:
+  - item_id: aluminum_wire
+    qty: 2.1
+    unit: kg
+  - item_id: coil_insulation_material
+    qty: 0.05
+    unit: kg
+  - item_id: raw_metal_block
+    qty: 1.0
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_electrical_system
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: demonstrated_motor_2017_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: aluminum_wire
+        qty: 2.1
+        unit: kg
+      - item_id: coil_insulation_material
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 2.0
+        unit: kg
     est_time_hr: 0.6
     labor_hours: 0.6
     notes: "Wind stator/armature coils."
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
     est_time_hr: 0.6
     machine_hours: 0.5
     labor_hours: 0.4
     notes: "Machine rotor/shaft and housing features."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: motor_coil_wound
+        qty: 2.0
+        unit: kg
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+      - item_id: bearing_set_small
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Assemble rotor, stator, bearings, and housing."
   - process_id: electrical_testing_v0
+    inputs:
+      - item_id: assembled_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: tested_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.4
     labor_hours: 0.4
     notes: "Continuity and spin test."
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: tested_electrical_system
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: demonstrated_motor_2017_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Final inspection and acceptance"
 assumptions: "Generic small motor build aligned to 2017 demonstration; specifics TBD."
 notes: Local build route for demonstrated motor placeholder.

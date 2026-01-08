@@ -10,20 +10,61 @@ inputs:
     qty: 65.0
     unit: kg
     notes: "Steel for casting thick plate blank (60 kg finished + 5 kg waste/risers)"
+  - item_id: machined_part_raw
+    qty: 60.0
+    unit: kg
+  - item_id: rough_part
+    qty: 60.0
+    unit: kg
+  - item_id: unfinished_part
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 65.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 61.75
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cast thick steel plate blank (80mm x 600mm x 900mm approx.) or cut from thick plate stock"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 60.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Face mill top and bottom surfaces parallel, rough machine T-slot channels (5-7 slots, 18mm wide)"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: rough_part
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 60.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Precision grind top surface for flatness (<0.05mm over entire surface), finish grind T-slot surfaces for dimensional accuracy"
   - process_id: finishing_basic_v0
+    inputs:
+      - item_id: unfinished_part
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: table_top_t_slot
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Deburr edges, clean T-slots, apply rust preventive coating, final inspection for flatness and slot dimensions"

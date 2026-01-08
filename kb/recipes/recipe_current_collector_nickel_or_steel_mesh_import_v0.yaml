@@ -5,7 +5,23 @@ target_item_id: current_collector_nickel_or_steel_mesh
 produces_id: current_collector_nickel_or_steel_mesh
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: nickel_mesh_sheet_material
+    qty: 0.15
+    unit: kg
+outputs:
+  - item_id: current_collector_nickel_or_steel_mesh
+    qty: 0.15
+    unit: unit
 steps:
   - process_id: mesh_fabrication_v0
+    inputs:
+      - item_id: nickel_mesh_sheet_material
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: current_collector_nickel_or_steel_mesh
+        qty: 0.15
+        unit: unit
 notes: "Converted from import stub to a local fabrication recipe; aligned with recipe_current_collector_nickel_or_steel_mesh_v0.yaml"
 assumptions: "Nickel mesh sheet material provided as nickel_mesh_sheet_material"

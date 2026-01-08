@@ -1,8 +1,26 @@
 id: recipe_gasket_sheet_import_v0
 target_item_id: gasket_sheet
 variant_id: plastic_sheet_extrusion_v0
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: plastic_pellets
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: gasket_sheet
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: plastic_sheet_extrusion_v0
+    inputs:
+      - item_id: plastic_pellets
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: gasket_sheet
+        qty: 1.0
+        unit: kg
     notes: Extrude gasket sheet from plastic pellets
 assumptions: "Local extrusion path using plastic_sheet_extrusion_v0; gasket_sheet produced locally"
 notes: "Alignment with local gasket_sheet production path; this recipe supersedes the import stub by providing a concrete production route."

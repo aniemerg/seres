@@ -1,9 +1,23 @@
 id: recipe_thermal_insulation_regolith_based_v0
 kind: recipe
-produces_id: thermal_insulation_regolith_based_v0
-produces_qty: 1.0
-produces_unit: kg
 target_item_id: thermal_insulation_regolith_based_v0
+variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: thermal_insulation_regolith_based_v0
+    qty: 1.0
+    unit: kg
 steps:
-- process_id: regolith_based_thermal_insulation_v0
+  - process_id: regolith_based_thermal_insulation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: thermal_insulation_regolith_based_v0
+        qty: 1.0
+        unit: kg
 notes: "Regolith-based insulation production from regolith_powder; placeholder process."

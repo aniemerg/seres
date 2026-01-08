@@ -1,10 +1,59 @@
 id: recipe_gas_outlet_manifold_v0
 kind: recipe
 target_item_id: gas_outlet_manifold
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 2.2
+    unit: kg
+outputs:
+  - item_id: gas_outlet_manifold
+    qty: 2.0
+    unit: kg
+  - item_id: steel_scrap_v0
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 2.2
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 2.1
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.1
+        unit: kg
     notes: "Converted to modern step schema"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: formed_metal_part
+        qty: 2.1
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 0.1
+        unit: kg
   - process_id: drilling_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: metal_part_drilled
+        qty: 2.0
+        unit: kg
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: metal_part_drilled
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: gas_outlet_manifold
+        qty: 2.0
+        unit: kg
 notes: "Placeholder recipe to manufacture gas_outlet_manifold from metal stock; sequence uses forming, finishing, drilling, and inspection."

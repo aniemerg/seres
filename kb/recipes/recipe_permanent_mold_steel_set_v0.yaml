@@ -1,15 +1,55 @@
 id: recipe_permanent_mold_steel_set_v0
 target_item_id: permanent_mold_steel_set
 variant_id: v0
+inputs:
+  - item_id: silica_purified
+    qty: 20.0
+    unit: kg
+  - item_id: binder_material
+    qty: 2.0
+    unit: kg
+  - item_id: metal_alloy_bulk
+    qty: 52.0
+    unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 20.0
+        unit: kg
+      - item_id: binder_material
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: prepared_mold
+        qty: 21.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
+    notes: "Prepare sand mold for casting steel blocks"
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 52.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 50.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
+    notes: "Cast steel blocks for permanent molds"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: permanent_mold_steel_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 1.0
+    notes: "Machine cavities and surfaces into permanent mold set"
 assumptions: Cast steel mold blocks then machine cavities; coarse times.
 notes: Coarse route; add heat treatment/surface finishing later.

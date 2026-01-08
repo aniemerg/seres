@@ -2,6 +2,40 @@ id: recipe_machine_power_distribution_bus_v0
 kind: recipe
 target_item_id: power_distribution_bus
 variant_id: v0
+inputs:
+  - item_id: bus_bar_copper
+    qty: 10.0
+    unit: kg
+  - item_id: center_insulator_ceramic
+    qty: 20.0
+    unit: kg
+  - item_id: mounting_bracket_steel
+    qty: 8.0
+    unit: kg
+  - item_id: power_output_terminals
+    qty: 12.0
+    unit: kg
+outputs:
+  - item_id: power_distribution_bus
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: bus_bar_copper
+        qty: 10.0
+        unit: kg
+      - item_id: center_insulator_ceramic
+        qty: 20.0
+        unit: kg
+      - item_id: mounting_bracket_steel
+        qty: 8.0
+        unit: kg
+      - item_id: power_output_terminals
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: power_distribution_bus
+        qty: 200.0
+        unit: kg
 notes: "Assemble power distribution bus from BOM components; placeholder assembly recipe."

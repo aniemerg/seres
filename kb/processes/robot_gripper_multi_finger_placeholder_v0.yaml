@@ -6,10 +6,13 @@ layer_tags:
 process_type: batch
 inputs: []
 outputs:
-  - item_id: robot_gripper_multi_finger_v0
-    qty: 1.0
-    unit: unit
-resource_requirements: []
+- item_id: robot_gripper_multi_finger_v0
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.01
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.01
@@ -17,4 +20,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.01
-notes: "Placeholder process to produce robot_gripper_multi_finger_v0 for gap resolution."
+notes: Placeholder process to produce robot_gripper_multi_finger_v0 for gap resolution.

@@ -1,6 +1,19 @@
 id: recipe_valve_set_gas_handling_v0
 kind: recipe
 target_item_id: valve_set_gas_handling
+variant_id: v0
+inputs:
+  - item_id: valve_body_machined
+    qty: 1.0
+    unit: unit
+  - item_id: gas_flow_controller
+    qty: 1.0
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: valve_set_gas_handling_assembly_v0
+  est_time_hr: 0.9
+  labor_hours: 0.6
 notes: "Assemble valve set for gas handling using machined valve body, gas flow controller, and fittings/valves."

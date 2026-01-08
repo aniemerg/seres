@@ -1,20 +1,89 @@
 id: recipe_hydraulic_cylinder_industrial_v0
+kind: recipe
+name: Recipe for hydraulic_cylinder_industrial
 target_item_id: hydraulic_cylinder_industrial
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 30.0
+    unit: kg
+  - item_id: rough_part
+    qty: 30.0
+    unit: kg
+  - item_id: hydraulic_seals_set
+    qty: 1
+    unit: unit
+  - item_id: component_to_seal
+    qty: 1
+    unit: unit
+  - item_id: fittings_and_valves
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: hydraulic_cylinder_industrial
+    qty: 1
+    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 30.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Machine cylinder barrel bore, piston, rod, and end caps from steel stock"
   - process_id: surface_grinding_precision_v0
+    inputs:
+      - item_id: rough_part
+        qty: 30.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 30.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Precision grind cylinder bore and piston rod for smooth operation"
   - process_id: seal_installation_v0
+    inputs:
+      - item_id: hydraulic_seals_set
+        qty: 1
+        unit: unit
+      - item_id: component_to_seal
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: sealed_component
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install hydraulic seals, O-rings, and wiper seals"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sealed_component
+        qty: 1
+        unit: unit
+      - item_id: finished_part_deburred
+        qty: 30.0
+        unit: kg
+      - item_id: fittings_and_valves
+        qty: 1.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: hydraulic_cylinder_industrial
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble piston, rod, barrel, end caps, pressure test"

@@ -3,6 +3,40 @@ kind: recipe
 name: Recipe for dynamic_balancing_stand_v0 (alt)
 target_item_id: dynamic_balancing_stand_v0
 variant_id: alt_v0
+inputs:
+  - item_id: machine_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 1
+    unit: unit
+  - item_id: bearing_set_heavy
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: dynamic_balancing_stand_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 1
+        unit: unit
+      - item_id: bearing_set_heavy
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: dynamic_balancing_stand_v0
+        qty: 1
+        unit: unit
 notes: "Alternate ID to avoid collision with existing recipe_dynamic_balancing_stand_v0_v0.yaml"

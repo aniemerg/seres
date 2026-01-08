@@ -2,25 +2,80 @@ id: recipe_roasting_furnace_v0
 kind: recipe
 target_item_id: roasting_furnace_v0
 variant_id: v0
+inputs:
+  - item_id: refractory_brick_set
+    qty: 200.0
+    unit: kg
+  - item_id: structural_steel_frame
+    qty: 300.0
+    unit: kg
+  - item_id: heating_element_set_high_temp
+    qty: 2
+    unit: unit
+  - item_id: thermal_insulation_basic
+    qty: 100.0
+    unit: kg
+  - item_id: air_blower_industrial
+    qty: 1
+    unit: unit
+  - item_id: piping_and_fittings_thermal
+    qty: 50.0
+    unit: kg
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: thermocouple_type_s_v0
+    qty: 2
+    unit: unit
+  - item_id: valve_set_gas_handling
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: roasting_furnace_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: metal_fabrication_welding_v0
-    est_time_hr: 16.0
-    machine_hours: 16.0
-    notes: "Fabricate steel shell and support frame"
-  - process_id: refractory_lining_installation_v0
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Install refractory brick lining"
   - process_id: assembly_basic_v0
-    est_time_hr: 10.0
-    machine_hours: 10.0
-    notes: "Install heating elements, insulation, and gas handling system"
-  - process_id: wiring_and_electronics_integration_v0
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    notes: "Install temperature control and monitoring"
-notes: |
-  Recipe for roasting furnace fabrication.
-  Multi-step process: shell fab → refractory lining → component installation
-  Total assembly time ~44 hours.
-  Critical equipment for sulfide ore oxidation and sulfur recovery.
+    inputs:
+      - item_id: refractory_brick_set
+        qty: 200.0
+        unit: kg
+      - item_id: structural_steel_frame
+        qty: 300.0
+        unit: kg
+      - item_id: heating_element_set_high_temp
+        qty: 2
+        unit: unit
+      - item_id: thermal_insulation_basic
+        qty: 100.0
+        unit: kg
+      - item_id: air_blower_industrial
+        qty: 1
+        unit: unit
+      - item_id: piping_and_fittings_thermal
+        qty: 50.0
+        unit: kg
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: thermocouple_type_s_v0
+        qty: 2
+        unit: unit
+      - item_id: valve_set_gas_handling
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: roasting_furnace_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 44.0
+    machine_hours: 44.0
+    notes: "Fabricate steel shell and support frame, install refractory brick lining, install heating elements/insulation/gas handling system, install temperature control and monitoring"
+assumptions: "Roasting furnace for oxidizing sulfide ores to produce metal oxides + SO2"
+notes: "Assembly of roasting furnace with refractory lining, heating, and gas handling - critical equipment for sulfide ore oxidation and sulfur recovery"

@@ -1,8 +1,24 @@
 id: recipe_insulation_panel_raw_v0
 target_item_id: insulation_panel_raw
 variant_id: v0
+inputs:
+  - item_id: ceramic_fiber_slurry
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: insulation_panel_raw
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: insulation_panel_forming_v0
+    inputs:
+      - item_id: ceramic_fiber_slurry
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: insulation_panel_raw
+        qty: 5.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Form ceramic fiber slurry into panel shape"

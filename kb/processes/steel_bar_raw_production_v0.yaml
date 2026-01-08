@@ -3,19 +3,24 @@ name: Production of steel bar raw (placeholder)
 kind: process
 inputs: []
 outputs:
-  - item_id: steel_bar_raw
-    qty: 1.0
-    unit: kg
+- item_id: steel_bar_raw
+  qty: 1.0
+  unit: kg
 requires_ids: []
-resource_requirements: []
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.1
+  unit: hr
 energy_model:
   type: fixed_per_batch
   value: 0.1
   unit: kWh
-  notes: "Placeholder external supply of steel_bar_raw; boundary semantics not yet supported"
+  notes: Placeholder external supply of steel_bar_raw; boundary semantics not yet
+    supported
 time_model:
   type: batch
   hr_per_batch: 0.1
-  notes: "Placeholder external supply; material supplied externally"
-notes: "Placeholder production path for steel_bar_raw to enable local KB closure until a real process chain is defined."
+  notes: Placeholder external supply; material supplied externally
+notes: Placeholder production path for steel_bar_raw to enable local KB closure until
+  a real process chain is defined.
 process_type: batch

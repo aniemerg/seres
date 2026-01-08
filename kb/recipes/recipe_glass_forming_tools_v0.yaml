@@ -1,18 +1,58 @@
 id: recipe_glass_forming_tools_v0
 target_item_id: glass_forming_tools
 variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 4.0
+    unit: kg
+  - item_id: graphite_powder
+    qty: 0.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
 steps:
   - process_id: forging_basic_v0
+    inputs:
+    - item_id: steel_stock_bar_or_billet
+      qty: 4.0
+      unit: kg
+    outputs:
+    - item_id: forged_steel_parts
+      qty: 3.9
+      unit: kg
     est_time_hr: 1.5
     labor_hours: 1.0
     machine_hours: 1.0
     notes: Forge steel tool blanks for tweezers, shears, jacks, and punties from bar stock.
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: forged_steel_parts
+      qty: 3.9
+      unit: kg
+    outputs:
+    - item_id: machined_part_raw
+      qty: 3.8
+      unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     machine_hours: 1.0
     notes: Grind edges, true jaws, and add threaded/bolted joints; light machining of graphite paddles/marvers.
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: machined_part_raw
+      qty: 3.8
+      unit: kg
+    - item_id: graphite_powder
+      qty: 0.5
+      unit: kg
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: glass_forming_tools
+      qty: 1
+      unit: unit
     est_time_hr: 0.75
     labor_hours: 0.75
     machine_hours: 0.25

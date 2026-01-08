@@ -6,9 +6,43 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: pump_housing_machined
 variant_id: v0
+inputs:
+  - item_id: cut_parts
+    qty: 25.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 25.0
+    unit: kg
+    notes: "Intermediate for final machining step"
+  - item_id: cutting_fluid
+    qty: 1.8
+    unit: L
+outputs:
+  - item_id: pump_housing_machined
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
     notes: "First stage: rough to machined_part_raw for the pump housing"
   - process_id: pump_housing_machining_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 25.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.8
+        unit: L
+    outputs:
+      - item_id: pump_housing_machined
+        qty: 25.0
+        unit: kg
     notes: "Final machining to pump_housing_machined"
 notes: "Two-step path: rough stock -> machined_part_raw -> final pump_housing_machined. Assumes 25 kg final mass; scales from raw input accordingly."

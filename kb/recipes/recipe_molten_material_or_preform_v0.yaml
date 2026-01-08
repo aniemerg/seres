@@ -1,8 +1,24 @@
 id: recipe_molten_material_or_preform_v0
 target_item_id: molten_material_or_preform
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: molten_material_or_preform
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: melting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: molten_material_or_preform
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0

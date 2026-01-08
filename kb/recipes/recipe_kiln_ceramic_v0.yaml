@@ -1,17 +1,72 @@
 id: recipe_kiln_ceramic_v0
+kind: recipe
+name: Recipe for kiln_ceramic
 target_item_id: kiln_ceramic
 variant_id: v0
+inputs:
+  - item_id: refractory_castable
+    qty: 50.0
+    unit: kg
+  - item_id: furnace_chamber_unequipped
+    qty: 1.0
+    unit: unit
+  - item_id: heating_element_resistive
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+  - item_id: control_circuit_board_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: kiln_ceramic
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: refractory_casting_v0
+    inputs:
+      - item_id: refractory_castable
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 1.0
     notes: "Cast and cure refractory/insulated kiln shell."
   - process_id: heating_element_installation_v0
+    inputs:
+      - item_id: heating_element_resistive
+        qty: 1.0
+        unit: unit
+      - item_id: furnace_chamber_unequipped
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: furnace_chamber_equipped
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install and fixture heating elements within kiln chamber."
   - process_id: electrical_assembly_basic_v0
+    inputs:
+      - item_id: furnace_chamber_equipped
+        qty: 1.0
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+      - item_id: control_circuit_board_basic
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: kiln_ceramic
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire control unit, sensors, and power connections."

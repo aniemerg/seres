@@ -2,6 +2,28 @@ id: recipe_iron_carbonyl_v0
 kind: recipe
 name: Iron carbonyl production v0
 target_item_id: iron_carbonyl_v0
+inputs:
+  - item_id: iron_powder_v0
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_carbonyl_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: iron_carbonyl_synthesis_v0
+    inputs:
+      - item_id: iron_powder_v0
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: iron_carbonyl_v0
+        qty: 1.0
+        unit: kg
 notes: "Placeholder recipe to manufacture iron carbonyl from iron powder and CO gas; mass flows simplified."

@@ -2,6 +2,22 @@ id: recipe_robot_tool_quick_change_v0
 kind: recipe
 name: Recipe for robot tool quick-change v0
 target_item_id: robot_tool_quick_change_v0
+inputs:
+  - item_id: raw_metal_block
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: robot_tool_quick_change_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: robot_quick_change_fabrication_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: robot_tool_quick_change_v0
+        qty: 1.0
+        unit: unit
     notes: "Single-step fabrication from raw metal block"

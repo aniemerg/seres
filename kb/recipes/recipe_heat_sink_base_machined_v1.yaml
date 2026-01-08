@@ -2,6 +2,14 @@ id: recipe_heat_sink_base_machined_v1
 kind: recipe
 target_item_id: heat_sink_base_machined
 variant_id: v1
+inputs:
+  - item_id: aluminum_housing_machined
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: heat_sink_base_machined
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:

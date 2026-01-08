@@ -1,6 +1,15 @@
 id: recipe_slam_executable_v0
+kind: recipe
 target_item_id: slam_executable
 variant_id: v0
+inputs:
+  - item_id: slam_code_uncompiled
+    qty: 1.0
+    unit: each
+outputs:
+  - item_id: slam_executable
+    qty: 1.0
+    unit: each
 steps:
 - process_id: software_development_programming_v0
   inputs:

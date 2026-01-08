@@ -1,6 +1,33 @@
 id: water_isru_train_recipe_v0
 kind: recipe
 target_item_id: water_isru_train_v0
+inputs:
+  - item_id: regolith_carbonaceous
+    qty: 1.0
+    unit: kg
+  - item_id: concentrated_mineral
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: water_isru_train_v0
+    qty: 0.15
+    unit: kg
 steps:
   - process_id: regolith_heating_water_extraction_v0
+    inputs:
+      - item_id: regolith_carbonaceous
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: water
+        qty: 0.15
+        unit: kg
   - process_id: chemical_purification_v0
+    inputs:
+      - item_id: concentrated_mineral
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: water_isru_train_v0
+        qty: 0.15
+        unit: kg

@@ -1,11 +1,62 @@
 id: recipe_welding_arc_welder_v0
 kind: recipe
 target_item_id: welding_arc_welder_v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 15.0
+    unit: kg
+  - item_id: transformer_core
+    qty: 1.0
+    unit: unit
+  - item_id: copper_wire_magnet
+    qty: 2.0
+    unit: kg
+  - item_id: rectifier_diode_set
+    qty: 1.0
+    unit: unit
+  - item_id: blower_fan_small
+    qty: 1.0
+    unit: unit
+  - item_id: assembled_cable_harness
+    qty: 1.0
+    unit: unit
+  - item_id: control_circuit_board_power
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: welding_arc_welder_v0
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machine_assembly_basic_v0
-  - process_id: welding_brazing_basic_v0
-  - process_id: machining_finish_basic_v0
   - process_id: assembly_basic_v0
-  - process_id: electrical_assembly_basic_v0
-  - process_id: wiring_and_electronics_integration_v0
-notes: "Placeholder multi-step recipe to manufacture Arc Welding Welder v0 using common subassemblies and wiring." 
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 15.0
+        unit: kg
+      - item_id: transformer_core
+        qty: 1.0
+        unit: unit
+      - item_id: copper_wire_magnet
+        qty: 2.0
+        unit: kg
+      - item_id: rectifier_diode_set
+        qty: 1.0
+        unit: unit
+      - item_id: blower_fan_small
+        qty: 1.0
+        unit: unit
+      - item_id: assembled_cable_harness
+        qty: 1.0
+        unit: unit
+      - item_id: control_circuit_board_power
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: welding_arc_welder_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 12.0
+    machine_hours: 6.0
+    labor_hours: 6.0
+    notes: "Assemble frame and mount transformer core, wind transformer coils and weld frame joints, machine mounting holes and control interfaces, install rectifier/cooling fan/mechanical components, install power connections and safety components, integrate control electronics and complete wiring"
+notes: "Placeholder multi-step recipe to manufacture Arc Welding Welder v0 using common subassemblies and wiring."

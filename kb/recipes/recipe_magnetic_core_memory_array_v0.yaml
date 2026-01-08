@@ -1,20 +1,63 @@
 id: recipe_magnetic_core_memory_array_v0
 target_item_id: magnetic_core_memory_array_v0
 variant_id: v0
+inputs:
+  - item_id: powder_metal_or_ceramic
+    qty: 1.1
+    unit: kg
+  - item_id: ferrite_toroid_core_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: magnetic_core_memory_array_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: ferrite_toroid_sintering_v0
+    inputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     notes: "Produce small ferrite core batch for array."
   - process_id: core_memory_threading_machine_v0
+    inputs:
+      - item_id: ferrite_toroid_core_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: ferrite_toroid_core_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 0.5
     notes: "Thread cores with X/Y drive and sense/inhibit wires."
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: ferrite_toroid_core_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Mount threaded core plane on frame, add connectors."
   - process_id: electrical_testing_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: magnetic_core_memory_array_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Continuity and basic read/write functional check."

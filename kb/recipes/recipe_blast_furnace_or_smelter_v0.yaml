@@ -1,23 +1,45 @@
 id: recipe_blast_furnace_or_smelter_v0
 target_item_id: blast_furnace_or_smelter
 variant_id: v0
+inputs:
+  - item_id: structural_steel_sections
+    qty: 4500.0
+    unit: kg
+  - item_id: refractory_brick_set
+    qty: 500.0
+    unit: kg
+  - item_id: gas_blower_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_large
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: blast_furnace_or_smelter
+    qty: 1
+    unit: unit
 steps:
-  - process_id: welding_structural_v0
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    labor_hours: 8.0
-    notes: Fabricate thick steel shell sections, stiffeners, and support frame; include openings for tuyeres and tap holes.
-  - process_id: refractory_lining_installation_v0
-    est_time_hr: 16.0
-    labor_hours: 16.0
-    notes: Install refractory brick/castable lining, anchors, and sealing in hearth and stack regions.
   - process_id: assembly_basic_v0
-    est_time_hr: 10.0
-    labor_hours: 10.0
-    notes: Integrate blower, charging system, tuyeres, tap hole assembly, cooling jacket, and exhaust handling onto the lined shell.
-  - process_id: sealing_and_assembly_basic_v0
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: Final sealing, gasketing, sensor mounting, and mechanical checks before commissioning.
+    inputs:
+      - item_id: structural_steel_sections
+        qty: 4500.0
+        unit: kg
+      - item_id: refractory_brick_set
+        qty: 500.0
+        unit: kg
+      - item_id: gas_blower_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: blast_furnace_or_smelter
+        qty: 1
+        unit: unit
+    est_time_hr: 42.0
+    machine_hours: 12.0
+    labor_hours: 38.0
+    notes: "Fabricate thick steel shell sections/stiffeners/support frame with tuyeres and tap hole openings, install refractory brick/castable lining with anchors and sealing, integrate blower/charging system/tuyeres/tap hole assembly/cooling jacket/exhaust handling, final sealing/gasketing/sensor mounting and mechanical checks"
 assumptions: "5000 kg furnace; coarse cycle times; blower/charging/exhaust treated as subassemblies from BOM."
-notes: "Four-step build: steel shell fabrication, refractory lining, integration of blower/charging/tapping hardware, and final sealing/inspection."
+notes: "Build sequence: steel shell fabrication → refractory lining → hardware integration → sealing/inspection."

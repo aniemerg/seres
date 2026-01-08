@@ -5,6 +5,22 @@ produces_id: catalyst_spent_v0
 produces_qty: 1.0
 produces_unit: kg
 target_item_id: catalyst_spent_v0
+inputs:
+  - item_id: ammonia_synthesis_catalyst_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: catalyst_spent_v0
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: catalyst_spent_generation_v0
+  inputs:
+    - item_id: ammonia_synthesis_catalyst_v0
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: catalyst_spent_v0
+      qty: 1.0
+      unit: kg
 notes: "Seed catalyst spent production path; placeholder for catalyst_spent_v0."

@@ -2,10 +2,23 @@ id: recipe_nickel_anode_vacuum_tube_v0
 kind: recipe
 name: Nickel anode vacuum tube v0
 target_item_id: nickel_anode_vacuum_tube_v0
-produces_id: nickel_anode_vacuum_tube_v0
-produces_qty: 1.0
-produces_unit: unit
+inputs:
+  - item_id: raw_metal_block
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: nickel_anode_vacuum_tube_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_basic_v0
+    inputs:
+      - item_id: raw_metal_block
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: nickel_anode_vacuum_tube_v0
+        qty: 1.0
+        unit: unit
 notes: "Seed recipe for nickel_anode_vacuum_tube_v0 using basic machining."
 assumptions: "Seed recipe; placeholder until BOM and downstream integration defined"

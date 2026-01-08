@@ -1,21 +1,60 @@
 id: recipe_radiator_panel_set_v0
 target_item_id: radiator_panel_set
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 220.0
+    unit: kg
+  - item_id: machined_part_raw
+    qty: 220.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 220.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 209.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: Cast radiator panels and headers
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 220.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 220.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Machine connection ports and mounting surfaces
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 209.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 209.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 3.0
     notes: Braze panel tubes and connections
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 209.0
+        unit: kg
+    outputs:
+      - item_id: radiator_panel_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: Final assembly with headers and mounting hardware

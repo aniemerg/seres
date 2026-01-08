@@ -12,6 +12,12 @@ inputs:
     qty: 0.2
     unit: kg
     notes: "Assembly hardware for ratchet stops and frames"
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+  - item_id: rough_part
+    qty: 3.0
+    unit: kg
 outputs:
   - item_id: micrometer_set
     qty: 3.0
@@ -22,22 +28,62 @@ outputs:
     notes: "Machining and grinding waste"
 steps:
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 3.0
+      unit: kg
   est_time_hr: 6.0
   machine_hours: 6.0
   notes: "Machine frame, spindle, anvil, thimble, barrel from precision steel"
 - process_id: heat_treat_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 3.0
+      unit: kg
   est_time_hr: 2.0
   machine_hours: 2.0
   notes: "Heat treat for dimensional stability"
 - process_id: precision_grinding_basic_v0
+  inputs:
+    - item_id: rough_part
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: finished_part_deburred
+      qty: 3.0
+      unit: kg
   est_time_hr: 4.0
   machine_hours: 4.0
   notes: "Grind spindle, anvil, measuring faces to precision tolerances"
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: finished_part_deburred
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: assembled_equipment
+      qty: 3.0
+      unit: kg
   est_time_hr: 2.0
   labor_hours: 2.0
   notes: "Assemble spindle, thimble, ratchet stop, frame"
 - process_id: inspection_basic_v0
+  inputs:
+    - item_id: assembled_equipment
+      qty: 3.0
+      unit: kg
+  outputs:
+    - item_id: assembled_equipment
+      qty: 3.0
+      unit: kg
   est_time_hr: 1.0
   labor_hours: 1.0
   notes: "Calibrate against gauge blocks, verify accuracy"

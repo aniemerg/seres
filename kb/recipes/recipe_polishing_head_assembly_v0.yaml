@@ -1,8 +1,21 @@
 id: recipe_polishing_head_assembly_v0
 kind: recipe
 target_item_id: polishing_head_assembly
+inputs:
+  - item_id: formed_metal_part
+    qty: 4.7
+    unit: kg
+  - item_id: shaft_steel_machined
+    qty: 1.0
+    unit: kg
+  - item_id: bearing_set_small
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: polishing_head_assembly
+    qty: 1
+    unit: unit
 steps:
-  - process_id: machining_finish_basic_v0
   - process_id: assembly_basic_v0
     inputs:
       - item_id: formed_metal_part
@@ -16,6 +29,7 @@ steps:
         unit: kg
     outputs:
       - item_id: polishing_head_assembly
-        qty: 1.0
+        qty: 1
         unit: unit
-notes: "Aligned target_item_id to the actual polishing_head_assembly part; uses basic machining and assembly steps."
+    notes: "Assemble polishing head from machined components, shaft, and bearings"
+notes: "Aligned target_item_id to the actual polishing_head_assembly part; uses basic assembly."

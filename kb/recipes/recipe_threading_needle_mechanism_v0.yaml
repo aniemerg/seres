@@ -10,17 +10,39 @@ inputs:
     unit: kg
 outputs:
   - item_id: threading_needle_mechanism_v0
-    qty: 1
-    unit: each
+    qty: 0.5
+    unit: kg
   - item_id: metal_swarf
-    qty: 0.15
+    qty: 0.1
     unit: kg
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 0.6
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.5
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.1
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.4
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: threading_needle_mechanism_v0
+        qty: 0.5
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.3
     labor_hours: 0.2

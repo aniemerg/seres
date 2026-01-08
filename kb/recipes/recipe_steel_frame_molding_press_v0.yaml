@@ -4,11 +4,43 @@ target_item_id: steel_frame_molding_press_v0
 produces_id: steel_frame_molding_press_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 150.0
+    unit: kg
+outputs:
+  - item_id: steel_frame_molding_press_v0
+    qty: 120.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 150.0
+      unit: kg
+  outputs:
+    - item_id: cast_metal_parts
+      qty: 140.0
+      unit: kg
   notes: Cast steel molding press frame blank
 - process_id: machining_finish_basic_v0
+  inputs:
+    - item_id: cast_metal_parts
+      qty: 140.0
+      unit: kg
+  outputs:
+    - item_id: machined_part_raw
+      qty: 130.0
+      unit: kg
   notes: Machine finishing of frame features
 - process_id: assembly_basic_v0
+  inputs:
+    - item_id: machined_part_raw
+      qty: 130.0
+      unit: kg
+  outputs:
+    - item_id: steel_frame_molding_press_v0
+      qty: 120.0
+      unit: kg
   notes: Assemble components into final molding press frame
 notes: "Placeholder recipe to resolve no_recipe gap for steel_frame_molding_press_v0; follow-up BOM refinement as design matures."

@@ -1,11 +1,24 @@
 id: recipe_silicone_curing_agent_v0
 kind: recipe
 name: Silicone curing agent synthesis recipe v0
-produces_id: silicone_curing_agent
-produces_qty: 0.1
-produces_unit: kg
 target_item_id: silicone_curing_agent
 variant_id: v0
+inputs:
+  - item_id: silicone_precursor
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: silicone_curing_agent
+    qty: 0.1
+    unit: kg
 steps:
-- process_id: silicone_curing_agent_synthesis_v0
+  - process_id: silicone_curing_agent_synthesis_v0
+    inputs:
+      - item_id: silicone_precursor
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: silicone_curing_agent
+        qty: 0.1
+        unit: kg
 notes: Base recipe linking the silicone_curing_agent_synthesis_v0 process to the silicone_curing_agent product.

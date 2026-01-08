@@ -22,13 +22,13 @@ energy_model:
   type: per_unit
   value: 0.02
   unit: kWh/kWh
-  scaling_basis: electricity
+  scaling_basis: electrical_energy
   notes: ~2% distribution losses per kWh delivered
 time_model:
   type: linear_rate
   rate: 100.0
   rate_unit: kWh/hr
-  scaling_basis: electricity
+  scaling_basis: electrical_energy
   notes: continuous operation, minimal time overhead
 notes: Distribute conditioned power to loads; 2% losses. High throughput (100 kWh/hr)
   represents distribution infrastructure capacity.

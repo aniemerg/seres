@@ -1,9 +1,37 @@
 id: recipe_part_liner_set_abrasion_resistant_v0
+kind: recipe
 target_item_id: liner_set_abrasion_resistant
 variant_id: v0
+inputs:
+  - item_id: regolith_fine_fraction
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: liner_set_abrasion_resistant
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sintering_and_hot_pressing_v0
+    inputs:
+      - item_id: regolith_fine_fraction
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: sintered_shapes
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sintered_shapes
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: liner_set_abrasion_resistant
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
 assumptions: Sintered liner blocks from regolith_fine_fraction; machining/finishing omitted.
 notes: Placeholder route; could be cast from metal_alloy_bulk as an alternate variant.

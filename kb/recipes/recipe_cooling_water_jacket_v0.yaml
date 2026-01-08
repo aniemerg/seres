@@ -1,6 +1,23 @@
 id: recipe_cooling_water_jacket_v0
 target_item_id: cooling_water_jacket
 variant_id: v0
+inputs:
+  - item_id: copper_plate_or_sheet
+    qty: 3.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 0.3
+    unit: kg
+  - item_id: brazing_alloy_generic
+    qty: 0.05
+    unit: kg
+  - item_id: jacket_with_fittings
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: cooling_water_jacket
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: sheet_metal_forming_process_v0
     inputs:
@@ -8,25 +25,25 @@ steps:
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: jacket_panels_formed
+      - item_id: steel_chassis_sheet_metal
         qty: 2.8
         unit: kg
     est_time_hr: 2.0
     notes: Form curved jacket panels to match cooled component geometry
   - process_id: welding_process_tig_v0
     inputs:
-      - item_id: jacket_panels_formed
+      - item_id: steel_chassis_sheet_metal
         qty: 2.8
         unit: kg
     outputs:
-      - item_id: jacket_shell_welded
+      - item_id: piping_and_valves_set
         qty: 2.7
         unit: kg
     est_time_hr: 3.0
     notes: TIG weld panels into complete water jacket shell
   - process_id: brazing_process_v0
     inputs:
-      - item_id: jacket_shell_welded
+      - item_id: piping_and_valves_set
         qty: 2.7
         unit: kg
       - item_id: fittings_and_valves
@@ -37,11 +54,22 @@ steps:
         qty: 0.05
         unit: kg
     outputs:
-      - item_id: jacket_with_fittings
+      - item_id: brazed_assembly
         qty: 3.0
         unit: kg
     est_time_hr: 1.5
     notes: Braze inlet/outlet fittings onto jacket
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: brazed_assembly
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: jacket_with_fittings
+        qty: 3.0
+        unit: kg
+    est_time_hr: 0.5
+    notes: "Configure brazed jacket into pressure-testable assembly"
   - process_id: pressure_testing_hydraulic_v0
     inputs:
       - item_id: jacket_with_fittings

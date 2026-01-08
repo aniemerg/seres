@@ -1,6 +1,23 @@
 id: recipe_cmc_solution_v0
 kind: recipe
 target_item_id: cmc_solution
+inputs:
+  - item_id: cellulose_raw
+    qty: 1.0
+    unit: kg
+  - item_id: sodium_hydroxide
+    qty: 0.3
+    unit: kg
+  - item_id: monochloroacetic_acid
+    qty: 0.4
+    unit: kg
+  - item_id: water
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: cmc_solution
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: chemical_synthesis_process_v0
     inputs:

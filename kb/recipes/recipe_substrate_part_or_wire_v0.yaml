@@ -1,10 +1,40 @@
 id: recipe_substrate_part_or_wire_v0
 target_item_id: substrate_part_or_wire
 variant_id: cleaned_stock_v0
+inputs:
+  - item_id: metal_feedstock
+    qty: 1.0
+    unit: kg
+  - item_id: cleaning_solvent_or_detergent_v0
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: substrate_part_or_wire
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
+    inputs:
+      - item_id: metal_feedstock
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 0.95
+        unit: kg
     notes: Cut stock material or wire to substrate form.
   - process_id: cleaning_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 0.95
+        unit: kg
+      - item_id: cleaning_solvent_or_detergent_v0
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: substrate_part_or_wire
+        qty: 0.95
+        unit: kg
     notes: Clean/degrease substrate prior to coating.
 assumptions: "Uses existing stock materials; generic cleaning to prep for coating/insulation."
 notes: Local prep route replacing import placeholder for substrate parts/wires.

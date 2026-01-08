@@ -4,16 +4,22 @@ process_type: batch
 is_template: true
 name: Environmental resource source
 layer_tags:
-  - layer_0
+- layer_0
 inputs: []
 outputs: []
 energy_model:
   type: fixed_per_batch
   value: 0.001
   unit: kWh
-  notes: "No energy consumption - freely available environmental resource"
+  notes: No energy consumption - freely available environmental resource
 time_model:
   type: batch
   hr_per_batch: 0.001
-  notes: "No time required - environmental boundary condition"
-notes: Represents freely available environmental resources (solar, regolith in situ). No manufacturing required - these are boundary conditions. Terminal node - no upstream dependencies.
+  notes: No time required - environmental boundary condition
+notes: Represents freely available environmental resources (solar, regolith in situ).
+  No manufacturing required - these are boundary conditions. Terminal node - no upstream
+  dependencies.
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 0.001
+  unit: hr

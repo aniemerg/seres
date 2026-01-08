@@ -3,16 +3,54 @@ kind: recipe
 name: Manufacturing route for Type S thermocouple v0
 target_item_id: thermocouple_type_s_v0
 variant_id: v0
+inputs:
+  - item_id: nickel_chromium_alloy
+    qty: 0.025
+    unit: kg
+  - item_id: nickel_aluminum_alloy
+    qty: 0.025
+    unit: kg
+outputs:
+  - item_id: thermocouple_type_s_v0
+    qty: 1
+    unit: unit
 steps:
   - process_id: alloy_mixing_v0
+    inputs:
+      - item_id: nickel_chromium_alloy
+        qty: 0.025
+        unit: kg
+      - item_id: nickel_aluminum_alloy
+        qty: 0.025
+        unit: kg
+    outputs:
+      - item_id: nickel_chromium_nickel_aluminum_alloy_stock
+        qty: 0.048
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     notes: Use Pt-Rh alloy stock placeholder; actual Pt-Rh stock to be substituted when defined
   - process_id: metal_wire_drawing_v0
+    inputs:
+      - item_id: nickel_chromium_nickel_aluminum_alloy_stock
+        qty: 0.048
+        unit: kg
+    outputs:
+      - item_id: metal_wire_feed
+        qty: 0.047
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
     notes: Draw thermocouple wire feedstock (placeholder for Pt-Rh wire)
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 0.047
+        unit: kg
+    outputs:
+      - item_id: thermocouple_type_s_v0
+        qty: 1
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Assemble thermocouple components into Type S sheath

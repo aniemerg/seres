@@ -2,9 +2,46 @@ id: recipe_battery_cell_nife_v1
 kind: recipe
 target_item_id: battery_cell_nife
 variant_id: v1
+inputs:
+  - item_id: electrode_mix_nife
+    qty: 1.4
+    unit: kg
+  - item_id: potassium_hydroxide
+    qty: 3.0
+    unit: kg
+  - item_id: water
+    qty: 7.0
+    unit: kg
+outputs:
+  - item_id: battery_cell_nife
+    qty: 1
+    unit: unit
 steps:
-  - process_id: electrode_fabrication_nife
   - process_id: electrolyte_prep_koh
+    inputs:
+      - item_id: potassium_hydroxide
+        qty: 3.0
+        unit: kg
+      - item_id: water
+        qty: 7.0
+        unit: kg
+    outputs:
+      - item_id: electrolyte_koh_solution
+        qty: 10.0
+        unit: kg
+    notes: "Prepare KOH electrolyte solution"
   - process_id: cell_assembly_and_seal_nife
+    inputs:
+      - item_id: electrode_mix_nife
+        qty: 1.4
+        unit: kg
+      - item_id: electrolyte_koh_solution
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: battery_cell_nife
+        qty: 1
+        unit: unit
+    notes: "Assemble and seal Ni-Fe battery cell"
 assumptions: "Local Ni-Fe battery cell production; variant v1 to replace import stub."
-notes: "Local Ni-Fe battery cell production path replacing import stub; uses electrode fabrication, electrolyte preparation, and assembly/sealing steps."
+notes: "Local Ni-Fe battery cell production path replacing import stub; uses electrolyte preparation and assembly/sealing steps."

@@ -28,14 +28,50 @@ outputs:
     notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+    - item_id: steel_plate_or_sheet
+      qty: 0.8
+      unit: kg
+    outputs:
+    - item_id: machined_part_raw
+      qty: 0.7
+      unit: kg
+    - item_id: steel_scrap
+      qty: 0.1
+      unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine magnetic base bodies, articulating arm components, and mounting fixtures"
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: machined_part_raw
+      qty: 0.7
+      unit: kg
+    - item_id: permanent_magnet_neodymium
+      qty: 0.3
+      unit: kg
+    - item_id: spring_compression_small
+      qty: 2
+      unit: unit
+    - item_id: fastener_kit_small
+      qty: 0.2
+      unit: kg
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble articulating arms, install magnetic switches, attach mounting hardware"
   - process_id: inspection_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: magnetic_base_set
+      qty: 1
+      unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test magnetic hold strength, verify articulation range and locking mechanisms"

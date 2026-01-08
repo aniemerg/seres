@@ -1,6 +1,40 @@
 id: recipe_ffc_power_supply_assembled_v0
 kind: recipe
 target_item_id: ffc_power_supply_assembled
+produces_qty: 180.0
+produces_unit: kg
+inputs:
+  - item_id: transformer_step_down_high_current
+    qty: 80.0
+    unit: kg
+  - item_id: rectifier_bridge_heavy_duty
+    qty: 15.0
+    unit: kg
+  - item_id: capacitor_bank_filter
+    qty: 20.0
+    unit: kg
+  - item_id: voltage_regulation_circuit_v0
+    qty: 5.0
+    unit: kg
+  - item_id: current_sensing_circuit
+    qty: 2.0
+    unit: kg
+  - item_id: electrical_cabinet
+    qty: 50.0
+    unit: kg
+  - item_id: cooling_fan_assembly
+    qty: 5.0
+    unit: kg
+  - item_id: wire_copper_insulated
+    qty: 10.0
+    unit: kg
+  - item_id: control_circuit_board_power
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: ffc_power_supply_assembled
+    qty: 180.0
+    unit: kg
 steps:
   - process_id: assembly_process_general_v0
     inputs:

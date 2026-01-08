@@ -1,16 +1,63 @@
 id: recipe_printer_control_module_v0
 target_item_id: printer_control_module
 variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_ingot
+    qty: 13.0
+    unit: kg
+  - item_id: aluminum_housing_machined
+    qty: 12.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
+  - item_id: control_circuit_board_power
+    qty: 3.0
+    unit: unit
+outputs:
+  - item_id: printer_control_module
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 13.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 12.5
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Cast enclosure and heat sink
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 12.5
+        unit: kg
+    outputs:
+      - item_id: aluminum_housing_machined
+        qty: 12.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Machine mounting surfaces and connector cutouts
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: aluminum_housing_machined
+        qty: 12.0
+        unit: kg
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
+      - item_id: control_circuit_board_power
+        qty: 3.0
+        unit: unit
+    outputs:
+      - item_id: printer_control_module
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Assemble with imported compute module and motor drivers

@@ -1,27 +1,71 @@
 id: recipe_hydrogen_oxygen_torch_v0
 target_item_id: hydrogen_oxygen_torch_v0
 variant_id: v0
+inputs:
+  - item_id: torch_or_burner_oxy_fuel
+    qty: 1
+    unit: unit
+  - item_id: gas_mixing_chamber_steel
+    qty: 1
+    unit: unit
+  - item_id: valve_solenoid
+    qty: 2
+    unit: unit
+  - item_id: valve_set_gas_handling
+    qty: 2
+    unit: unit
+  - item_id: pressure_gauge
+    qty: 2
+    unit: unit
+  - item_id: mounting_bracket_steel
+    qty: 1
+    unit: unit
+  - item_id: hose_end_fittings_v0
+    qty: 2
+    unit: unit
 steps:
-  - process_id: machining_basic_v0
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Machine burner nozzle from refractory material and mixing chamber from steel"
-  - process_id: welding_basic_v0
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: "Weld gas mixing chamber, mounting brackets, and pipe connections"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: torch_or_burner_oxy_fuel
+        qty: 1
+        unit: unit
+      - item_id: gas_mixing_chamber_steel
+        qty: 1
+        unit: unit
+      - item_id: valve_solenoid
+        qty: 2
+        unit: unit
+      - item_id: valve_set_gas_handling
+        qty: 2
+        unit: unit
+      - item_id: pressure_gauge
+        qty: 2
+        unit: unit
+      - item_id: mounting_bracket_steel
+        qty: 1
+        unit: unit
+      - item_id: hose_end_fittings_v0
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 5.0
+    labor_hours: 5.0
+    notes: "Assemble hydrogen-oxygen torch from BOM components with safety features"
+  - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: hydrogen_oxygen_torch_v0
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Assemble burner nozzle, flow regulators, pressure gauges, flashback arrestors"
-  - process_id: leak_test_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Pressure test all gas connections for H2 and O2 safety"
-  - process_id: integration_test_basic_v0
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Test flame ignition, flow control, and safety interlocks"
+    notes: "Leak test gas connections, test flame ignition and safety interlocks"
 assumptions: |
   Hydrogen-oxygen torch assembly from machined and welded components.
   Safety-critical design requiring thorough leak testing.

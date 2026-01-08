@@ -1,16 +1,101 @@
 id: recipe_pcb_fab_equipment_v0
 target_item_id: pcb_fab_equipment
 variant_id: v0
+produces_qty: 1
+produces_unit: unit
+inputs:
+  - item_id: uv_exposure_unit
+    qty: 1
+    unit: unit
+  - item_id: pcb_etching_tank_set
+    qty: 1
+    unit: unit
+  - item_id: pcb_development_station
+    qty: 1
+    unit: unit
+  - item_id: pcb_drilling_station
+    qty: 1
+    unit: unit
+  - item_id: pcb_tinning_plating_bath
+    qty: 1
+    unit: unit
+  - item_id: chemical_bath_ventilation
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1
+    unit: kg
+  - item_id: assembled_electronics
+    qty: 1
+    unit: kg
+outputs:
+  - item_id: pcb_fab_equipment
+    qty: 1
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
+    inputs:
+    - item_id: uv_exposure_unit
+      qty: 1
+      unit: unit
+    - item_id: pcb_etching_tank_set
+      qty: 1
+      unit: unit
+    - item_id: pcb_development_station
+      qty: 1
+      unit: unit
+    - item_id: pcb_drilling_station
+      qty: 1
+      unit: unit
+    - item_id: pcb_tinning_plating_bath
+      qty: 1
+      unit: unit
+    - item_id: chemical_bath_ventilation
+      qty: 1
+      unit: unit
+    - item_id: fastener_kit_small
+      qty: 1
+      unit: unit
+    outputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble exposure unit, drilling station, and mount tanks/trays with supports."
   - process_id: electrical_assembly_basic_v0
+    inputs:
+    - item_id: assembled_equipment
+      qty: 1
+      unit: unit
+    - item_id: control_panel_basic
+      qty: 1
+      unit: kg
+    - item_id: electronic_components_set
+      qty: 1
+      unit: kg
+    outputs:
+    - item_id: assembled_electronics
+      qty: 1
+      unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire UV unit, heaters/agitation for tanks, and controls."
   - process_id: integration_test_basic_v0
+    inputs:
+    - item_id: assembled_electronics
+      qty: 1
+      unit: kg
+    outputs:
+    - item_id: pcb_fab_equipment
+      qty: 1
+      unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Test exposure timing, agitation/heating, and drill operation."

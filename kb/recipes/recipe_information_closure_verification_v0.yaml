@@ -4,7 +4,26 @@ name: Recipe for information closure verification
 produces_id: information_closure_verification_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: coded_data
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: information_closure_verification_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: information_verification_unit_v0
+  inputs:
+    - item_id: coded_data
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: information_closure_verification_v0
+      qty: 1.0
+      unit: unit
+  est_time_hr: 1.0
+  labor_hours: 0.5
+  notes: "Verification of information closure"
 notes: Placeholder recipe that uses a single verification step to produce the information_closure_verification_v0 item.
 target_item_id: information_closure_verification_v0

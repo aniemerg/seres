@@ -1,16 +1,50 @@
 id: recipe_welded_assemblies_v0
 target_item_id: welded_assemblies
 variant_id: v0
+produces_qty: 9.0
+produces_unit: kg
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: welded_assemblies
+    qty: 9.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 9.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: Cast metal parts for welding
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 9.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 9.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Prep surfaces and edges for welding
   - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 9.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 9.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.5

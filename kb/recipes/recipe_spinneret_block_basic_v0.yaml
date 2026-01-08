@@ -2,25 +2,55 @@ id: recipe_spinneret_block_basic_v0
 kind: recipe
 target_item_id: spinneret_block_basic
 variant_id: v0
+inputs:
+  - item_id: machined_part_raw
+    qty: 12.0
+    unit: kg
+  - item_id: rough_part
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: steel_stock_bar_or_billet
+      - item_id: machined_part_raw
         qty: 12.0
         unit: kg
-        notes: "Steel stock for spinneret block"
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Machine spinneret block body, drill or EDM fine holes for fiber drawing"
   - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Heat treat for wear resistance"
   - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: rough_part
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 10.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Grind hole exit surfaces for smooth fiber formation"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 10.0
+        unit: kg
     outputs:
       - item_id: spinneret_block_basic
         qty: 10.0

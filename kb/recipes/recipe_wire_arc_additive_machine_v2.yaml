@@ -1,8 +1,24 @@
 id: recipe_wire_arc_additive_machine_v2
 kind: recipe
 target_item_id: wire_arc_additive_machine
+inputs:
+  - item_id: import_misc_components_set
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: wire_arc_additive_machine
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: import_receiving_basic_v0
+    inputs:
+      - item_id: import_misc_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: wire_arc_additive_machine
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
 notes: "Import-based receipt for wire arc additive machine; local fabrication TBD."

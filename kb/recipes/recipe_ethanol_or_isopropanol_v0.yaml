@@ -2,6 +2,25 @@ id: recipe_ethanol_or_isopropanol_v0
 kind: recipe
 name: Recipe for ethanol_or_isopropanol (placeholder)
 target_item_id: ethanol_or_isopropanol
+variant_id: v0
+inputs:
+  - item_id: ethanol_or_isopropanol_feedstock_v0
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: ethanol_or_isopropanol
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: solvent_production_basic_v0
+    inputs:
+      - item_id: ethanol_or_isopropanol_feedstock_v0
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: ethanol_or_isopropanol
+        qty: 3.0
+        unit: kg
+    est_time_hr: 0.5
+    machine_hours: 0.5
 notes: "Placeholder recipe to enable import-free production path for ethanol_or_isopropanol."

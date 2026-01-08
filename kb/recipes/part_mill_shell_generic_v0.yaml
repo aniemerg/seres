@@ -6,7 +6,19 @@ produces_id: mill_shell_generic
 produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
+  inputs:
+    - item_id: metal_alloy_bulk
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: mill_shell_generic
+      qty: 1.0
+      unit: unit
 notes: Cast shell from metal alloy_bulk; finishing/machining not modeled yet.
 assumptions: Cast shell to ~net shape; subsequent finishing operations to be modeled later.

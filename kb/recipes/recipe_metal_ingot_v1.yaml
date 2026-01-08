@@ -2,11 +2,23 @@ id: recipe_metal_ingot_v1
 kind: recipe
 target_item_id: metal_ingot
 variant_id: v1
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 1.05
+    unit: kg
 steps:
   - process_id: metal_ingot_cast_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 1.05
+        unit: kg
+    outputs:
+      - item_id: metal_ingot
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.0
     notes: "Cast molten metal into ingot or billet molds"
-assumptions: "Local metal ingot production from metal_alloy_bulk; aligns with metal_ingot_v0 path but for current metal_ingot target."
-notes: "Casting metal ingot from metal alloy bulk via metal_ingot_cast_v0 process."
+assumptions: "Local metal ingot production from metal_alloy_bulk; 5% loss during casting from slag and furnace residue."
+notes: "Casting metal ingot from metal alloy bulk via metal_ingot_cast_v0 process; produces 1.0 kg standard ingot."

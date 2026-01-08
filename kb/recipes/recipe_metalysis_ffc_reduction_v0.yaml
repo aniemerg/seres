@@ -1,11 +1,30 @@
 id: recipe_metalysis_ffc_reduction_v0
 kind: recipe
 name: 'Recipe: metalysis FFC reduction (v0)'
-produces_id: iron_metal_pure
-produces_qty: 0.9
-produces_unit: kg
 variant_id: v0
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: iron_metal_pure
+    qty: 0.9
+    unit: kg
+  - item_id: titanium_oxide
+    qty: 0.1
+    unit: kg
 steps:
 - process_id: metalysis_ffc_reduction_v0
+  inputs:
+    - item_id: ilmenite_concentrate
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: iron_metal_pure
+      qty: 0.9
+      unit: kg
+    - item_id: titanium_oxide
+      qty: 0.1
+      unit: kg
   notes: Metalysis FFC reduction step producing iron metal; titanium oxide is a byproduct.
 target_item_id: iron_metal_pure

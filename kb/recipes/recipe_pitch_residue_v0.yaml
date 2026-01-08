@@ -2,7 +2,29 @@ id: recipe_pitch_residue_v0
 kind: recipe
 target_item_id: pitch_residue
 name: Pitch residue production from carbon anode forming v0
+inputs:
+  - item_id: carbon_anode_material
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: carbon_anode
+    qty: 0.98
+    unit: kg
+  - item_id: pitch_residue
+    qty: 0.02
+    unit: kg
 steps:
   - process_id: carbon_anode_forming_v0
+    inputs:
+      - item_id: carbon_anode_material
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: carbon_anode
+        qty: 0.98
+        unit: kg
+      - item_id: pitch_residue
+        qty: 0.02
+        unit: kg
     notes: "Produces pitch_residue as byproduct during carbon anode formation"
 notes: "Resolve no_recipe gap: pitch_residue produced as byproduct of carbon_anode_forming_v0."

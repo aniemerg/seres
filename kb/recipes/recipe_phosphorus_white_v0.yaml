@@ -2,8 +2,26 @@ id: recipe_phosphorus_white_v0
 kind: recipe
 target_item_id: phosphorus_white
 variant_id: v0
+inputs:
+  - item_id: basalt_aggregate
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_reducing_agent
+    qty: 0.762
+    unit: kg
 steps:
   - process_id: phosphorus_extraction_from_kreep_v0
+    inputs:
+      - item_id: basalt_aggregate
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_reducing_agent
+        qty: 0.762
+        unit: kg
+    outputs:
+      - item_id: phosphorus_white
+        qty: 0.247
+        unit: kg
     est_time_hr: 8.0
     notes: Carbothermal reduction of apatite in KREEP basalt; condense and store white phosphorus under water.
 notes: "Local extraction path for white phosphorus from KREEP basalt."

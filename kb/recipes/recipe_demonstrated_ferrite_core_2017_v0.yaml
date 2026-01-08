@@ -1,12 +1,33 @@
 id: recipe_demonstrated_ferrite_core_2017_v0
 kind: recipe
 name: Demonstrated ferrite core (2017) production
-produces_id: demonstrated_ferrite_core_2017_v0
-produces_qty: 1.0
-produces_unit: unit
 # Explicit target for the KB gap resolution
 target_item_id: demonstrated_ferrite_core_2017_v0
+inputs:
+  - item_id: ferrite_powder_precursor_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: demonstrated_ferrite_core_2017_v0
+    qty: 0.1
+    unit: kg
 steps:
-- process_id: ferrite_pressing_shaping_v0
-- process_id: ferrite_toroid_sintering_v0
+  - process_id: ferrite_pressing_shaping_v0
+    inputs:
+      - item_id: ferrite_powder_precursor_v0
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
+  - process_id: ferrite_toroid_sintering_v0
+    inputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: demonstrated_ferrite_core_2017_v0
+        qty: 0.1
+        unit: kg
 notes: "Seed recipe linking demonstration ferrite core to ferrite powder processing; placeholder values."

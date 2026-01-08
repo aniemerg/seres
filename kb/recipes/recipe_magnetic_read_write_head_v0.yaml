@@ -24,10 +24,40 @@ outputs:
     unit: unit
 steps:
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: mnzn_ferrite_v0
+        qty: 0.15
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.15
+        unit: kg
     notes: Machine ferrite core to precise dimensions
   - process_id: coil_winding_basic_v0
+    inputs:
+      - item_id: magnet_wire_copper
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 0.05
+        unit: kg
     notes: Wind copper coils on ferrite core
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 0.15
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 0.05
+        unit: kg
+      - item_id: mounting_bracket_steel
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: magnetic_read_write_head
+        qty: 1.0
+        unit: unit
     notes: Assemble head, mount in bracket
 notes: "Recipe to manufacture magnetic_read_write_head from ferrite core and copper windings"
 assumptions: "Uses standard finishing pass(es) to achieve final dimensions; mass/throughput aligned with typical small metal parts."

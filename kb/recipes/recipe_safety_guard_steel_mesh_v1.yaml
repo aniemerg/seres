@@ -1,13 +1,27 @@
 id: recipe_safety_guard_steel_mesh_v1
 kind: recipe
 name: Recipe for safety guard steel mesh v1
-produces_id: safety_guard_steel_mesh
-produces_qty: 1.0
-produces_unit: unit
+target_item_id: safety_guard_steel_mesh
+variant_id: v1
+inputs:
+  - item_id: steel_mesh_sheet_material
+    qty: 50.0
+    unit: kg
+outputs:
+  - item_id: safety_guard_steel_mesh
+    qty: 1.0
+    unit: unit
 steps:
-- process_id: mesh_fabrication_steel_guard_v1
+  - process_id: mesh_fabrication_steel_guard_v1
+    inputs:
+      - item_id: steel_mesh_sheet_material
+        qty: 50.0
+        unit: kg
+    outputs:
+      - item_id: safety_guard_steel_mesh
+        qty: 1.0
+        unit: unit
 notes: Fabrication path using steel mesh sheet; mass aligns with part mass (0.8 kg per guard).
 assumptions: 'Input material: steel_mesh_sheet_material (50 kg) assumed; final part mass equals 0.8 kg.
 
   '
-target_item_id: safety_guard_steel_mesh

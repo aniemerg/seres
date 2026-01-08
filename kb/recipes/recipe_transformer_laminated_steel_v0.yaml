@@ -2,8 +2,26 @@ id: recipe_transformer_laminated_steel_v0
 kind: recipe
 name: Laminated transformer steel production (v0)
 target_item_id: transformer_laminated_steel_v0
+inputs:
+  - item_id: uncoated_substrate_material_v0
+    qty: 0.5
+    unit: kg
+  - item_id: copper_plate_or_sheet
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: transformer_laminated_steel_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: lamination_basic_v0
+    inputs:
+      - item_id: uncoated_substrate_material_v0
+        qty: 0.5
+        unit: kg
+      - item_id: copper_plate_or_sheet
+        qty: 0.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.6
     machine_hours: 0.4

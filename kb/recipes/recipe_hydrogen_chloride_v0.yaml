@@ -2,8 +2,36 @@ id: recipe_hydrogen_chloride_v0
 kind: recipe
 target_item_id: hydrogen_chloride
 variant_id: v0
+inputs:
+  - item_id: sodium_chloride
+    qty: 1.0
+    unit: kg
+  - item_id: nitric_acid_concentrated
+    qty: 1.08
+    unit: kg
+outputs:
+  - item_id: hydrogen_chloride
+    qty: 0.624
+    unit: kg
+  - item_id: sodium_nitrate
+    qty: 1.45
+    unit: kg
 steps:
   - process_id: hcl_generation_from_nacl_v0
+    inputs:
+      - item_id: sodium_chloride
+        qty: 1.0
+        unit: kg
+      - item_id: nitric_acid_concentrated
+        qty: 1.08
+        unit: kg
+    outputs:
+      - item_id: hydrogen_chloride
+        qty: 0.624
+        unit: kg
+      - item_id: sodium_nitrate
+        qty: 1.45
+        unit: kg
     notes: "Generate HCl gas from NaCl + nitric acid and capture"
 assumptions: |
   HCl is produced via acid displacement using nitric acid.

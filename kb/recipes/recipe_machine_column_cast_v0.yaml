@@ -1,24 +1,83 @@
 id: recipe_machine_column_cast_v0
 target_item_id: machine_column_cast
 variant_id: v0
+inputs:
+  - item_id: wood_or_composite_material
+    qty: 5.0
+    unit: kg
+  - item_id: molten_material_or_preform
+    qty: 50.0
+    unit: kg
+  - item_id: sand_casting_flask_set
+    qty: 1.0
+    unit: unit
+  - item_id: casting_mold_set
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: pattern_making_basic_v0
+    inputs:
+      - item_id: wood_or_composite_material
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: casting_patterns_wooden
+        qty: 5.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Create casting pattern for machine column with core prints and draft angles"
   - process_id: sand_casting_large_v0
+    inputs:
+      - item_id: molten_material_or_preform
+        qty: 50.0
+        unit: kg
+      - item_id: sand_casting_flask_set
+        qty: 1.0
+        unit: unit
+      - item_id: casting_mold_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: sand_casting_large_v0
+        qty: 45.0
+        unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
     notes: "Cast iron casting of large machine column structure with internal ribs"
-  - process_id: stress_relief_annealing_v0
-    est_time_hr: 24.0
-    machine_hours: 24.0
-    notes: "Heat treatment to relieve casting stresses and stabilize dimensions"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: sand_casting_large_v0
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 45.0
+        unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
     notes: "Machine mounting surfaces, precision-grind ways, drill/tap mounting holes"
+  - process_id: stress_relief_annealing_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 45.0
+        unit: kg
+    est_time_hr: 24.0
+    machine_hours: 24.0
+    notes: "Heat treatment to relieve casting stresses and stabilize dimensions"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: machine_column_cast
+        qty: 1
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify dimensional accuracy, surface finish, and flatness of critical surfaces"

@@ -5,6 +5,28 @@ produces_id: silicon_metal_v0
 produces_qty: 1.0
 produces_unit: kg
 target_item_id: silicon_metal_v0
+inputs:
+- item_id: regolith_lunar_highlands
+  qty: 6.34
+  unit: kg
+- item_id: carbon_reductant
+  qty: 1.14
+  unit: kg
+outputs:
+- item_id: silicon_metal_v0
+  qty: 1.0
+  unit: kg
 steps:
 - process_id: silicon_extraction_from_regolith_carbothermic_v0
+  inputs:
+  - item_id: regolith_lunar_highlands
+    qty: 6.34
+    unit: kg
+  - item_id: carbon_reductant
+    qty: 1.14
+    unit: kg
+  outputs:
+  - item_id: silicon_metal_v0
+    qty: 1.0
+    unit: kg
 notes: "Carbothermic path step producing silicon metal from regolith silica"

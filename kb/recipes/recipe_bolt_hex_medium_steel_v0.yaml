@@ -1,14 +1,38 @@
 id: recipe_bolt_hex_medium_steel_v0
+kind: recipe
 target_item_id: bolt_hex_medium_steel
 variant_id: v0
-
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 0.02
+    unit: kg
+outputs:
+  - item_id: bolt_hex_medium_steel
+    qty: 0.01
+    unit: kg
 steps:
-  - process_id: metal_forging_process_v0
+  - process_id: forging_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: forged_steel_parts
+        qty: 0.02
+        unit: kg
     est_time_hr: 0.05
     machine_hours: 0.05
     notes: "Hot or cold forge hex head from steel rod/wire stock. Forms head geometry in one or few blows."
 
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: forged_steel_parts
+        qty: 0.02
+        unit: kg
+    outputs:
+      - item_id: bolt_hex_medium_steel
+        qty: 0.01
+        unit: kg
     est_time_hr: 0.1
     machine_hours: 0.1
     notes: "Cut threads via thread rolling or turning. Finish shank length and chamfers. Thread rolling preferred for strength."

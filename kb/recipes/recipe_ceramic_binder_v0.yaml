@@ -2,6 +2,31 @@ id: recipe_ceramic_binder_v0
 kind: recipe
 target_item_id: ceramic_binder
 variant_id: v0
+produces_qty: 1.0
+produces_unit: kg
+inputs:
+  - item_id: cellulose_raw
+    qty: 1.0
+    unit: kg
+  - item_id: sodium_hydroxide
+    qty: 0.3
+    unit: kg
+  - item_id: monochloroacetic_acid
+    qty: 0.4
+    unit: kg
+  - item_id: water
+    qty: 5.0
+    unit: kg
+  - item_id: ethanol_or_isopropanol
+    qty: 1.0
+    unit: kg
+  - item_id: cmc_solution
+    qty: 3.5
+    unit: kg
+outputs:
+  - item_id: ceramic_binder
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: chemical_synthesis_process_v0
     inputs:

@@ -1,26 +1,74 @@
 id: recipe_enclosure_small_v0
 target_item_id: enclosure_small
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: enclosure_small
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 4.75
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 0.8
     notes: "Fabricate small enclosure box and cover from sheet metal"
   - process_id: welding_and_fabrication_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 4.75
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Weld or rivet enclosure structure"
   - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_fabrications
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 4.75
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     labor_hours: 0.4
     notes: "Drill mounting holes and install grounding provisions"
   - process_id: surface_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: metal_part_surface_treated
+        qty: 4.75
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.3
     notes: "Apply protective coating"
   - process_id: inspection_basic_v0
+    inputs:
+      - item_id: metal_part_surface_treated
+        qty: 4.75
+        unit: kg
+    outputs:
+      - item_id: enclosure_small
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.3
     labor_hours: 0.3
     notes: "Verify dimensions and grounding"

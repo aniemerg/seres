@@ -1,20 +1,58 @@
 id: recipe_transformer_core_v0
 target_item_id: transformer_core
 variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 15.0
+    unit: kg
+  - item_id: insulation_coating_material
+    qty: 0.3
+    unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 14.7
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Cut thin silicon steel sheets into E-I or toroidal lamination shapes"
   - process_id: coating_insulation_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 14.7
+        unit: kg
+      - item_id: insulation_coating_material
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: insulated_part_or_wire
+        qty: 15.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Apply thin insulating coating to laminations to prevent eddy currents"
   - process_id: stacking_and_clamping_v0
+    inputs:
+      - item_id: insulated_part_or_wire
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: lamination_stack_clamped
+        qty: 15.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Stack coated laminations, align, clamp or bond together to form core"
   - process_id: annealing_basic_v0
+    inputs:
+      - item_id: lamination_stack_clamped
+        qty: 15.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Stress-relief anneal to improve magnetic properties"

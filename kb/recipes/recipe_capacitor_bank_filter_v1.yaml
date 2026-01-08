@@ -2,16 +2,66 @@ id: recipe_capacitor_bank_filter_v1
 kind: recipe
 target_item_id: capacitor_bank_filter
 variant_id: v1
+inputs:
+  - item_id: metal_sheet
+    qty: 5.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 1.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: capacitor_bank_filter
+    qty: 1
+    unit: unit
 steps:
   - process_id: sheet_metal_fabrication_v0
+    inputs:
+      - item_id: metal_sheet
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 4.8
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Fabricate capacitor bank enclosure"
   - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble filter components and connect to bus"
   - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 4.8
+        unit: kg
+      - item_id: wired_electrical_system
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: capacitor_bank_filter
+        qty: 1
+        unit: unit
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Mount filter assembly inside enclosure"
@@ -24,4 +74,6 @@ notes: |
   - Bus bars and terminals
 
   Currently assumes filter capacitors are imported but not modeled separately.
+
+  Parallel processing: enclosure (step 0) and electronics (step 1), then final assembly (step 2).
 assumptions: "Capacitor bank filter v1 assembled from imported filter elements; local enclosure fabrication"

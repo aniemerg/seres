@@ -1,6 +1,22 @@
 id: recipe_getter_material_activated_v0
 kind: recipe
 target_item_id: getter_material_activated
+inputs:
+  - item_id: getter_material_raw
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: getter_material_activated
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: getter_material_activation_v0
+    inputs:
+      - item_id: getter_material_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: getter_material_activated
+        qty: 1.0
+        unit: kg
 notes: "Local production recipe for activated getter material using getter_material_activation_v0."
