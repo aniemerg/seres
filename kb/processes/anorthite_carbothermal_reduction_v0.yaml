@@ -27,8 +27,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: high_temp_furnace_v0
   qty: 1
   unit: count
@@ -44,29 +44,22 @@ time_model:
   type: batch
   hr_per_batch: 3.0
   notes: Three hours at temperature per research papers
-notes: |
-  Carbothermal reduction of anorthite feldspar to extract multiple valuable products.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: CaAl2Si2O8 + 4C → 4CO + CaO + Al2O3 + 2Si
-  Temperature: 1650-1860°C for 3 hours
-  Process: High-temperature carbon reduction in furnace
-  Anorthite is primary mineral in lunar highland regolith (70-95% anorthosite)
-  Products require separation after powdering:
-    - CaO (quicklime): Refractory, cement, thermionic coatings, Pidgeon Mg process
-    - Al2O3 (alumina): FFC feedstock for Al metal, refractory ceramics, catalyst
-    - Si (silicon): Alloying element (silicon steel), semiconductor feedstock
-    - CO (carbon monoxide): Recycled for Mond process or Boudouard reaction
-  Separation methods:
-    - Mechanical grinding/milling to powder
-    - Density separation, magnetic separation
-    - Chemical leaching for purification
-  Al powder scavenges oxygen: Al + CaO → Al2O3 + Ca at high temp (taps liquid Ca)
-  Alternative: CaO + 2HCl → CaCl2 + H2O (FFC electrolyte regeneration)
-  Carbon monoxide can be recycled: C + CO2 → 2CO (Boudouard)
-  Stoichiometry: CaAl2Si2O8 (278.2g) + 4C (48g) → CaO (56.1g) + Al2O3 (102g) + 2Si (56.2g) + 4CO (112g)
-  Mass fractions from ore: 20.1% CaO, 36.7% Al2O3, 20.2% Si, 40.2% CO
-  Advantages: Single process yields multiple valuable outputs
-  Versatile - all products have multiple applications
-  Disadvantages: Very high temperature, requires carbon feedstock
-  Product separation complexity
-  Energy source: Solar concentrator or solar-electric resistance heating
+notes: "Carbothermal reduction of anorthite feldspar to extract multiple valuable\
+  \ products.\nSource: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\n\
+  Reaction: CaAl2Si2O8 + 4C → 4CO + CaO + Al2O3 + 2Si\nTemperature: 1650-1860°C for\
+  \ 3 hours\nProcess: High-temperature carbon reduction in furnace\nAnorthite is primary\
+  \ mineral in lunar highland regolith (70-95% anorthosite)\nProducts require separation\
+  \ after powdering:\n  - CaO (quicklime): Refractory, cement, thermionic coatings,\
+  \ Pidgeon Mg process\n  - Al2O3 (alumina): FFC feedstock for Al metal, refractory\
+  \ ceramics, catalyst\n  - Si (silicon): Alloying element (silicon steel), semiconductor\
+  \ feedstock\n  - CO (carbon monoxide): Recycled for Mond process or Boudouard reaction\n\
+  Separation methods:\n  - Mechanical grinding/milling to powder\n  - Density separation,\
+  \ magnetic separation\n  - Chemical leaching for purification\nAl powder scavenges\
+  \ oxygen: Al + CaO → Al2O3 + Ca at high temp (taps liquid Ca)\nAlternative: CaO\
+  \ + 2HCl → CaCl2 + H2O (FFC electrolyte regeneration)\nCarbon monoxide can be recycled:\
+  \ C + CO2 → 2CO (Boudouard)\nStoichiometry: CaAl2Si2O8 (278.2g) + 4C (48g) → CaO\
+  \ (56.1g) + Al2O3 (102g) + 2Si (56.2g) + 4CO (112g)\nMass fractions from ore: 20.1%\
+  \ CaO, 36.7% Al2O3, 20.2% Si, 40.2% CO\nAdvantages: Single process yields multiple\
+  \ valuable outputs\nVersatile - all products have multiple applications\nDisadvantages:\
+  \ Very high temperature, requires carbon feedstock\nProduct separation complexity\n\
+  Energy source: Solar concentrator or solar-electric resistance heating\n"

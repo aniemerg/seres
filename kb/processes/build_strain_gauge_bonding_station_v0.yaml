@@ -3,9 +3,9 @@ kind: process
 name: Build strain gauge bonding station v0
 process_type: batch
 inputs:
-  - item_id: assembly_components
-    qty: 10.0
-    unit: kg
+- item_id: assembly_components
+  qty: 10.0
+  unit: kg
 outputs:
 - item_id: strain_gauge_bonding_station_v0
   qty: 1.0
@@ -13,14 +13,15 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Assembly energy for 1-unit batch (bonding station)"
+  notes: Assembly energy for 1-unit batch (bonding station)
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Placeholder factory operation to produce strain_gauge_bonding_station_v0 from base materials.
+notes: Placeholder factory operation to produce strain_gauge_bonding_station_v0 from
+  base materials.

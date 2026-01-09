@@ -4,21 +4,22 @@ kind: process
 process_type: batch
 inputs: []
 outputs:
-  - item_id: uncoded_data_stream
-    qty: 1.0
-    unit: unit
+- item_id: uncoded_data_stream
+  qty: 1.0
+  unit: unit
 requires_ids: []
 resource_requirements:
-  - machine_id: control_compute_module_imported
-    qty: 1.0
-    unit: hr
+- machine_id: control_compute_module_imported
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.02
   unit: kWh
-  notes: "Estimated energy per unit data capture"
+  notes: Estimated energy per unit data capture
 time_model:
   type: batch
   hr_per_batch: 0.1
-  notes: "Data capture latency"
-notes: "Placeholder process to generate an uncoded data stream from sensors for ISRU modeling." 
+  notes: Data capture latency
+notes: Placeholder process to generate an uncoded data stream from sensors for ISRU
+  modeling.

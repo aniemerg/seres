@@ -2,24 +2,25 @@ id: dicobalt_octacarbonyl_synthesis_v0
 name: Synthesis of Dicobalt octacarbonyl
 kind: process
 inputs:
-  - item_id: carbon_monoxide
-    qty: 2.0
-    unit: kg
+- item_id: carbon_monoxide
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: dicobalt_octacarbonyl
-    qty: 1.0
-    unit: kg
+- item_id: dicobalt_octacarbonyl
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.25
   unit: kWh
-  notes: "Placeholder energy per unit output for synthesis"
+  notes: Placeholder energy per unit output for synthesis
 time_model:
   type: batch
   hr_per_batch: 0.75
 process_type: batch
-notes: "Seed synthesis to enable local production of dicobalt_octacarbonyl; inputs are placeholders for seed modeling."
+notes: Seed synthesis to enable local production of dicobalt_octacarbonyl; inputs
+  are placeholders for seed modeling.

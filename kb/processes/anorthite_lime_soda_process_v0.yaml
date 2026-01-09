@@ -27,8 +27,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: kiln_ceramic
   qty: 1
   unit: count
@@ -44,28 +44,21 @@ time_model:
   type: batch
   hr_per_batch: 8.0
   notes: Extended calcination and leaching time
-notes: |
-  Lime-soda process for extracting alumina from anorthite feldspar.
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Primary reaction: CaAl2Si2O8 + 3CaCO3 + Na2CO3 → 2NaAlO2 + 2Ca2SiO4 + 4CO2
-  Secondary processing:
-    1. NaAlO2 + 2H2O → NaOH + Al(OH)3 (hydrolysis)
-    2. 2Al(OH)3 → Al2O3 + 3H2O (calcination at 1050°C)
-  Temperature: Elevated for sintering/calcination
-  Process: Complex multi-stage chemical processing
-  Products:
-    - Sodium aluminate (NaAlO2) - further processed to alumina
-    - Calcium silicate (Ca2SiO4) - cement component, waste product
-    - Carbon dioxide - evolved gas, can be captured
-  Advantages: Proven terrestrial process for alumina from non-bauxite sources
-  Anorthite used commercially on Earth via this route
-  Disadvantages: Very complex multi-step process
-  Requires Na2CO3 import/recycling (scarce on Moon)
-  Multiple processing stages with intermediate separations
-  Lower yield and efficiency than carbothermal route
-  Conclusion: TOO COMPLEX for first-generation lunar ISRU
-  Included for completeness and future consideration
-  Carbothermal reduction or HCl leaching preferred for lunar application
-  Stoichiometry: CaAl2Si2O8 (278.2g) + 3CaCO3 (300g) + Na2CO3 (106g) → 2NaAlO2 (164g) + 2Ca2SiO4 (348g) + 4CO2 (176g)
-  Final alumina yield: ~36.7% of anorthite mass (after hydrolysis and calcination)
-  May be viable for Mars where carbonates more available
+notes: "Lime-soda process for extracting alumina from anorthite feldspar.\nSource:\
+  \ Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nPrimary reaction: CaAl2Si2O8\
+  \ + 3CaCO3 + Na2CO3 → 2NaAlO2 + 2Ca2SiO4 + 4CO2\nSecondary processing:\n  1. NaAlO2\
+  \ + 2H2O → NaOH + Al(OH)3 (hydrolysis)\n  2. 2Al(OH)3 → Al2O3 + 3H2O (calcination\
+  \ at 1050°C)\nTemperature: Elevated for sintering/calcination\nProcess: Complex\
+  \ multi-stage chemical processing\nProducts:\n  - Sodium aluminate (NaAlO2) - further\
+  \ processed to alumina\n  - Calcium silicate (Ca2SiO4) - cement component, waste\
+  \ product\n  - Carbon dioxide - evolved gas, can be captured\nAdvantages: Proven\
+  \ terrestrial process for alumina from non-bauxite sources\nAnorthite used commercially\
+  \ on Earth via this route\nDisadvantages: Very complex multi-step process\nRequires\
+  \ Na2CO3 import/recycling (scarce on Moon)\nMultiple processing stages with intermediate\
+  \ separations\nLower yield and efficiency than carbothermal route\nConclusion: TOO\
+  \ COMPLEX for first-generation lunar ISRU\nIncluded for completeness and future\
+  \ consideration\nCarbothermal reduction or HCl leaching preferred for lunar application\n\
+  Stoichiometry: CaAl2Si2O8 (278.2g) + 3CaCO3 (300g) + Na2CO3 (106g) → 2NaAlO2 (164g)\
+  \ + 2Ca2SiO4 (348g) + 4CO2 (176g)\nFinal alumina yield: ~36.7% of anorthite mass\
+  \ (after hydrolysis and calcination)\nMay be viable for Mars where carbonates more\
+  \ available\n"

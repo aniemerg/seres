@@ -15,8 +15,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 8.0
@@ -26,7 +26,12 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Testing and calibration sequence including safety checks
-notes: |
-  Electrical testing and calibration to validate voltage/current regulation and control loop
-  performance. This step assumes all components are present from the BOM and focuses on
+notes: 'Electrical testing and calibration to validate voltage/current regulation
+  and control loop
+
+  performance. This step assumes all components are present from the BOM and focuses
+  on
+
   functional verification rather than repair or rework.
+
+  '

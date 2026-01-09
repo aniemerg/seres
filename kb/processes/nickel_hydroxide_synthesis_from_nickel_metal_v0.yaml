@@ -17,18 +17,19 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: chemical_mixer_tank
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.0
   unit: kWh/kg
   scaling_basis: nickel_metal_pure
-  notes: "Synthesis energy per kg nickel input"
+  notes: Synthesis energy per kg nickel input
 time_model:
   type: linear_rate
   rate: 5.0
   rate_unit: kg/hr
   scaling_basis: nickel_metal_pure
-notes: Local synthesis path for nickel hydroxide from nickel metal; conservative placeholders to enable KB closure.
+notes: Local synthesis path for nickel hydroxide from nickel metal; conservative placeholders
+  to enable KB closure.
 process_type: continuous

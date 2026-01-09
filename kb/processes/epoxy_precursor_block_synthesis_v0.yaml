@@ -3,17 +3,17 @@ name: Synthesis of epoxy resin precursor block from monomer
 kind: process
 process_type: batch
 inputs:
-  - item_id: epoxy_monomer_v0
-    qty: 1.0
-    unit: kg
+- item_id: epoxy_monomer_v0
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: epoxy_precursor_block_v0
-    qty: 1.0
-    unit: kg
+- item_id: epoxy_precursor_block_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: generic_chemical_reactor_v0
-    qty: 1.0
-    unit: hr
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -21,4 +21,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Placeholder synthesis: polymerizes epoxy monomer into precursor block."
+notes: 'Placeholder synthesis: polymerizes epoxy monomer into precursor block.'

@@ -2,40 +2,40 @@ id: optical_metrology_tools_assembly_v0
 kind: process
 name: Optical metrology tools assembly v0
 inputs:
-  - item_id: autocollimator_imported
-    qty: 1.0
-    unit: unit
-  - item_id: laser_alignment_system_imported
-    qty: 1.0
-    unit: unit
-  - item_id: optical_flat_set_imported
-    qty: 1.0
-    unit: unit
-  - item_id: optical_square_set
-    qty: 1.0
-    unit: unit
-  - item_id: precision_mounts_and_fixtures
-    qty: 1.0
-    unit: unit
-  - item_id: fastener_kit_small
-    qty: 1.0
-    unit: unit
+- item_id: autocollimator_imported
+  qty: 1.0
+  unit: unit
+- item_id: laser_alignment_system_imported
+  qty: 1.0
+  unit: unit
+- item_id: optical_flat_set_imported
+  qty: 1.0
+  unit: unit
+- item_id: optical_square_set
+  qty: 1.0
+  unit: unit
+- item_id: precision_mounts_and_fixtures
+  qty: 1.0
+  unit: unit
+- item_id: fastener_kit_small
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: optical_metrology_tools
-    qty: 1.0
-    unit: unit
+- item_id: optical_metrology_tools
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 12.0
   unit: kWh
-notes: "Local assembly path to produce optical_metrology_tools from imported components"
+notes: Local assembly path to produce optical_metrology_tools from imported components
 time_model:
   type: batch
   hr_per_batch: 6.0

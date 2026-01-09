@@ -18,11 +18,11 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: spin_coating_station_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 byproducts:
 - item_id: photoresist_solvent_evap_v0
   qty: 0.05
@@ -34,6 +34,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.75
-notes: |
-  Spin coating of photoresist onto the substrate, using a spin coating station.
+notes: 'Spin coating of photoresist onto the substrate, using a spin coating station.
+
   Optional post-coating bake is not modeled here.
+
+  '

@@ -33,8 +33,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 20.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: chemical_separation_equipment
   qty: 1
   unit: count
@@ -56,133 +56,82 @@ time_model:
   type: batch
   hr_per_batch: 48.0
   notes: Multi-stage leaching, extraction, and purification
-notes: |
-  KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock exists.
-  REE oxide concentrate modeled as reduced_metal_oxides for now.
-  Rare earth element (REE) extraction from KREEP basalts (advanced process).
-  Source: Sustainable-ISRU-on-the-Moon.txt
-  Purpose: Extract REE for permanent magnets (NdFeB), superconductors (NbTi), catalysts
-  KREEP: Potassium (K), Rare Earth Elements (REE), Phosphorus (P) enriched basalts
-  Concentration: ~1200 ppm average REE (0.12%), up to 5× higher than Earth
-  WARNING: Complex, energy-intensive process - not suitable for first-generation ISRU
-  Process details:
-    1. Locate KREEP regions using gamma-ray spectroscopy
-       - Detect U, Th signatures (correlate with REE)
-       - U/Th ratio ~0.27 typical for KREEP
-       - Imbrium basin, Oceanus Procellarum highest concentrations
-    2. Mine and crush KREEP basalt ore
-    3. Roast ore at 600°C to oxidize Ce³⁺ to Ce⁴⁺ (if Ce separation desired)
-    4. Acid leaching with concentrated H2SO4 (or HCl)
-       - Heat to 80-100°C for several hours
-       - REE dissolve as sulfates or chlorides
-       - REE³⁺ + 3/2 H2SO4 → REE2(SO4)3 + 3/2 H2
-    5. Filter leach liquor from insoluble residue
-    6. Solvent extraction for REE concentration and separation
-       - Organic extractants: D2EHPA, Cyanex, TODGA
-       - Multiple stages for individual REE separation
-       - pH-dependent extraction selectivity
-    7. Strip REE from organic phase with acid
-    8. Precipitate REE as oxalates: REE³⁺ + oxalic acid → REE2(C2O4)3
-    9. Calcinate oxalates to oxides: REE2(C2O4)3 → REE2O3 + CO + CO2
-    10. Further purification if individual REE needed (beyond scope)
-  Products:
-    - Mixed rare earth oxides (REO): ~0.12% of ore mass, mixture of La, Ce, Nd, Y, etc.
-    - Leach residue: Depleted ore, may contain valuable minerals
-    - Acids: Partially recycled
-  REE concentration in KREEP:
-    - Total REE: ~1200 ppm (0.12%) average
-    - Y: ~300 ppm (most abundant)
-    - Ce: ~300 ppm
-    - Nd: ~180 ppm (critical for magnets)
-    - La: ~150 ppm
-    - Sm: ~50 ppm
-    - Gd: ~50 ppm
-    - Pr: ~40 ppm
-    - Dy: ~30 ppm (critical for magnets)
-    - Others: Eu (~3-5 ppm), Tb, Ho, Er, Yb, Lu (each <30 ppm)
-  KREEP detection:
-    - Gamma-ray spectroscopy: Detect U (3-10 ppm), Th (10-40 ppm)
-    - U/Th ratio ~0.27 diagnostic for KREEP
-    - Lunar Prospector gamma-ray data shows hotspots
-    - Procellarum KREEP Terrane (PKT) richest region
-  REE applications (critical for advanced technology):
-    - NdFeB magnets: Strongest permanent magnets (Nd, Dy additions)
-    - Electric motors: High-power-density motors (robotics, spacecraft)
-    - Generators: Lightweight, high-efficiency power generation
-    - Superconductors: NbTi superconducting wire (Nb is REE-associated)
-    - Catalysts: La, Ce for various chemical processes
-    - Lasers: Nd:YAG lasers (Nd-doped yttrium aluminum garnet)
-    - Phosphors: Eu, Tb for displays and lighting
-    - Batteries: La in NiMH batteries
-  Stoichiometry (example, Ce):
-    - Ce2O3 + 3H2SO4 → Ce2(SO4)3 + 3H2O (leaching)
-    - Ce2(SO4)3 + 3 H2C2O4 → Ce2(C2O4)3 + 3H2SO4 (precipitation)
-    - Ce2(C2O4)3 → Ce2O3 + 3CO + 3CO2 (calcination at 800°C)
-  Separation challenges:
-    - REE have very similar chemistry (all 3+ cations)
-    - Separation requires many stages (10-50 extraction stages)
-    - Extremely complex process (solvent extraction cascades)
-    - Individual REE separation beyond first-gen ISRU capability
-  Mixed REO vs. separated REE:
-    - Mixed REO: Easier, 10-20 extraction stages
-    - Separated REE: Extremely difficult, requires specialized equipment
-    - For first lunar use: Mixed REO may be acceptable
-    - Refine to pure REE only if absolutely necessary
-  Advantages: KREEP concentration 5× higher than typical Earth ores
-    Multiple valuable elements (REE, U, Th, P, K)
-    Enables high-tech applications (magnets, superconductors)
-  Disadvantages: Extremely complex process (many stages)
-    Energy intensive (acid production, leaching, calcination)
-    Requires exotic reagents (organic extractants)
-    Low concentration (0.12% even in KREEP)
-    Not economical for first-generation ISRU
-  Lunar context: KREEP regions well-mapped (Procellarum, Imbrium)
-    Essential for advanced manufacturing (motors, generators, sensors)
-    Likely deferred to later ISRU stages (after basics established)
-    But critical for long-term sustainability
-  Alternative processing:
-    - Pyrometallurgical: High-temp chlorination/fluorination
-    - Ion exchange: Similar to solvent extraction but solid resin
-    - Electrochemical: Direct electrolysis of REE salts
-  Uranium and Thorium co-extraction:
-    - U and Th also leach with REE (both 4+, 3+ cations)
-    - Must separate or manage radioactive elements
-    - U/Th potentially valuable for nuclear power
-    - Or hazard requiring careful disposal
-  Phosphorus co-extraction:
-    - KREEP rich in phosphate minerals (apatite)
-    - P extracted as phosphoric acid (H3PO4)
-    - Valuable for fertilizer (agriculture on Moon/Mars)
-    - Or phosphorus for semiconductors (dopant)
-  Potassium recovery:
-    - K dissolves as sulfate or chloride
-    - Separate from REE by solvent extraction
-    - Valuable for fertilizer, glass production
-  Environmental/safety concerns:
-    - Concentrated acids (H2SO4, HCl) hazardous
-    - Radioactive U, Th require shielding and containment
-    - Organic solvents (flammable, toxic)
-    - Must be closed-loop, zero-release system
-  Scale requirements:
-    - 1 tonne KREEP ore → ~1.2 kg mixed REO
-    - For 1 kg pure Nd: ~6 tonnes KREEP ore (if 180 ppm Nd)
-    - Large-scale mining required for useful quantities
-  Energy analysis:
-    - Acid production: ~10 kWh/kg acid (if from scratch)
-    - Leaching/heating: ~20 kWh/tonne ore
-    - Solvent extraction: ~50 kWh/kg REO
-    - Calcination: ~5 kWh/kg REO
-    - Total: ~150 kWh/kg REO (very energy intensive)
-  Comparison to Earth REE processing:
-    - Earth: ~0.02-0.1% REE typical (bastnäsite, monazite)
-    - KREEP: ~0.12% REE (slightly better)
-    - Similar complexity, similar energy costs
-  Trade-offs:
-    - Import REE from Earth vs. extract from KREEP
-    - Early stages: Import likely cheaper
-    - Long-term: In-situ extraction necessary for self-sufficiency
-    - Critical decision point: When does KREEP mining become viable?
-  Recommended timeline:
-    - Phase 1 (years 0-10): Import REE from Earth
-    - Phase 2 (years 10-30): Develop KREEP processing pilot plant
-    - Phase 3 (years 30+): Full-scale KREEP mining and REE extraction
+notes: "KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock\
+  \ exists.\nREE oxide concentrate modeled as reduced_metal_oxides for now.\nRare\
+  \ earth element (REE) extraction from KREEP basalts (advanced process).\nSource:\
+  \ Sustainable-ISRU-on-the-Moon.txt\nPurpose: Extract REE for permanent magnets (NdFeB),\
+  \ superconductors (NbTi), catalysts\nKREEP: Potassium (K), Rare Earth Elements (REE),\
+  \ Phosphorus (P) enriched basalts\nConcentration: ~1200 ppm average REE (0.12%),\
+  \ up to 5× higher than Earth\nWARNING: Complex, energy-intensive process - not suitable\
+  \ for first-generation ISRU\nProcess details:\n  1. Locate KREEP regions using gamma-ray\
+  \ spectroscopy\n     - Detect U, Th signatures (correlate with REE)\n     - U/Th\
+  \ ratio ~0.27 typical for KREEP\n     - Imbrium basin, Oceanus Procellarum highest\
+  \ concentrations\n  2. Mine and crush KREEP basalt ore\n  3. Roast ore at 600°C\
+  \ to oxidize Ce³⁺ to Ce⁴⁺ (if Ce separation desired)\n  4. Acid leaching with concentrated\
+  \ H2SO4 (or HCl)\n     - Heat to 80-100°C for several hours\n     - REE dissolve\
+  \ as sulfates or chlorides\n     - REE³⁺ + 3/2 H2SO4 → REE2(SO4)3 + 3/2 H2\n  5.\
+  \ Filter leach liquor from insoluble residue\n  6. Solvent extraction for REE concentration\
+  \ and separation\n     - Organic extractants: D2EHPA, Cyanex, TODGA\n     - Multiple\
+  \ stages for individual REE separation\n     - pH-dependent extraction selectivity\n\
+  \  7. Strip REE from organic phase with acid\n  8. Precipitate REE as oxalates:\
+  \ REE³⁺ + oxalic acid → REE2(C2O4)3\n  9. Calcinate oxalates to oxides: REE2(C2O4)3\
+  \ → REE2O3 + CO + CO2\n  10. Further purification if individual REE needed (beyond\
+  \ scope)\nProducts:\n  - Mixed rare earth oxides (REO): ~0.12% of ore mass, mixture\
+  \ of La, Ce, Nd, Y, etc.\n  - Leach residue: Depleted ore, may contain valuable\
+  \ minerals\n  - Acids: Partially recycled\nREE concentration in KREEP:\n  - Total\
+  \ REE: ~1200 ppm (0.12%) average\n  - Y: ~300 ppm (most abundant)\n  - Ce: ~300\
+  \ ppm\n  - Nd: ~180 ppm (critical for magnets)\n  - La: ~150 ppm\n  - Sm: ~50 ppm\n\
+  \  - Gd: ~50 ppm\n  - Pr: ~40 ppm\n  - Dy: ~30 ppm (critical for magnets)\n  - Others:\
+  \ Eu (~3-5 ppm), Tb, Ho, Er, Yb, Lu (each <30 ppm)\nKREEP detection:\n  - Gamma-ray\
+  \ spectroscopy: Detect U (3-10 ppm), Th (10-40 ppm)\n  - U/Th ratio ~0.27 diagnostic\
+  \ for KREEP\n  - Lunar Prospector gamma-ray data shows hotspots\n  - Procellarum\
+  \ KREEP Terrane (PKT) richest region\nREE applications (critical for advanced technology):\n\
+  \  - NdFeB magnets: Strongest permanent magnets (Nd, Dy additions)\n  - Electric\
+  \ motors: High-power-density motors (robotics, spacecraft)\n  - Generators: Lightweight,\
+  \ high-efficiency power generation\n  - Superconductors: NbTi superconducting wire\
+  \ (Nb is REE-associated)\n  - Catalysts: La, Ce for various chemical processes\n\
+  \  - Lasers: Nd:YAG lasers (Nd-doped yttrium aluminum garnet)\n  - Phosphors: Eu,\
+  \ Tb for displays and lighting\n  - Batteries: La in NiMH batteries\nStoichiometry\
+  \ (example, Ce):\n  - Ce2O3 + 3H2SO4 → Ce2(SO4)3 + 3H2O (leaching)\n  - Ce2(SO4)3\
+  \ + 3 H2C2O4 → Ce2(C2O4)3 + 3H2SO4 (precipitation)\n  - Ce2(C2O4)3 → Ce2O3 + 3CO\
+  \ + 3CO2 (calcination at 800°C)\nSeparation challenges:\n  - REE have very similar\
+  \ chemistry (all 3+ cations)\n  - Separation requires many stages (10-50 extraction\
+  \ stages)\n  - Extremely complex process (solvent extraction cascades)\n  - Individual\
+  \ REE separation beyond first-gen ISRU capability\nMixed REO vs. separated REE:\n\
+  \  - Mixed REO: Easier, 10-20 extraction stages\n  - Separated REE: Extremely difficult,\
+  \ requires specialized equipment\n  - For first lunar use: Mixed REO may be acceptable\n\
+  \  - Refine to pure REE only if absolutely necessary\nAdvantages: KREEP concentration\
+  \ 5× higher than typical Earth ores\n  Multiple valuable elements (REE, U, Th, P,\
+  \ K)\n  Enables high-tech applications (magnets, superconductors)\nDisadvantages:\
+  \ Extremely complex process (many stages)\n  Energy intensive (acid production,\
+  \ leaching, calcination)\n  Requires exotic reagents (organic extractants)\n  Low\
+  \ concentration (0.12% even in KREEP)\n  Not economical for first-generation ISRU\n\
+  Lunar context: KREEP regions well-mapped (Procellarum, Imbrium)\n  Essential for\
+  \ advanced manufacturing (motors, generators, sensors)\n  Likely deferred to later\
+  \ ISRU stages (after basics established)\n  But critical for long-term sustainability\n\
+  Alternative processing:\n  - Pyrometallurgical: High-temp chlorination/fluorination\n\
+  \  - Ion exchange: Similar to solvent extraction but solid resin\n  - Electrochemical:\
+  \ Direct electrolysis of REE salts\nUranium and Thorium co-extraction:\n  - U and\
+  \ Th also leach with REE (both 4+, 3+ cations)\n  - Must separate or manage radioactive\
+  \ elements\n  - U/Th potentially valuable for nuclear power\n  - Or hazard requiring\
+  \ careful disposal\nPhosphorus co-extraction:\n  - KREEP rich in phosphate minerals\
+  \ (apatite)\n  - P extracted as phosphoric acid (H3PO4)\n  - Valuable for fertilizer\
+  \ (agriculture on Moon/Mars)\n  - Or phosphorus for semiconductors (dopant)\nPotassium\
+  \ recovery:\n  - K dissolves as sulfate or chloride\n  - Separate from REE by solvent\
+  \ extraction\n  - Valuable for fertilizer, glass production\nEnvironmental/safety\
+  \ concerns:\n  - Concentrated acids (H2SO4, HCl) hazardous\n  - Radioactive U, Th\
+  \ require shielding and containment\n  - Organic solvents (flammable, toxic)\n \
+  \ - Must be closed-loop, zero-release system\nScale requirements:\n  - 1 tonne KREEP\
+  \ ore → ~1.2 kg mixed REO\n  - For 1 kg pure Nd: ~6 tonnes KREEP ore (if 180 ppm\
+  \ Nd)\n  - Large-scale mining required for useful quantities\nEnergy analysis:\n\
+  \  - Acid production: ~10 kWh/kg acid (if from scratch)\n  - Leaching/heating: ~20\
+  \ kWh/tonne ore\n  - Solvent extraction: ~50 kWh/kg REO\n  - Calcination: ~5 kWh/kg\
+  \ REO\n  - Total: ~150 kWh/kg REO (very energy intensive)\nComparison to Earth REE\
+  \ processing:\n  - Earth: ~0.02-0.1% REE typical (bastnäsite, monazite)\n  - KREEP:\
+  \ ~0.12% REE (slightly better)\n  - Similar complexity, similar energy costs\nTrade-offs:\n\
+  \  - Import REE from Earth vs. extract from KREEP\n  - Early stages: Import likely\
+  \ cheaper\n  - Long-term: In-situ extraction necessary for self-sufficiency\n  -\
+  \ Critical decision point: When does KREEP mining become viable?\nRecommended timeline:\n\
+  \  - Phase 1 (years 0-10): Import REE from Earth\n  - Phase 2 (years 10-30): Develop\
+  \ KREEP processing pilot plant\n  - Phase 3 (years 30+): Full-scale KREEP mining\
+  \ and REE extraction\n"

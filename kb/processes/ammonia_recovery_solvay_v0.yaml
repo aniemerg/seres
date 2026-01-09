@@ -24,8 +24,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -41,42 +41,27 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Reaction and ammonia distillation
-notes: |
-  Ammonia recovery from ammonium chloride using quicklime (calcium oxide).
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Reaction: 2NH4Cl + CaO → 2NH3 + CaCl2 + H2O
-  Temperature: Moderate heating (100-200°C for ammonia evolution)
-  Process: Acid-base reaction liberating ammonia gas
-  Part of Solvay process recycling loop for sodium carbonate production
-  Purpose: Recycle ammonia from Solvay process intermediate
-  Nitrogen conservation (scarce lunar resource)
-  Regenerate valuable NH3 for Haber-Bosch or other processes
-  Process details:
-    1. NH4Cl (ammonium chloride) from Solvay process
-    2. React with CaO (quicklime from anorthite processing)
-    3. NH3 evolved as gas, captured by distillation/condensation
-    4. CaCl2 (calcium chloride) by-product
-  Products:
-    - NH3 (ammonia): Recycled to Haber-Bosch, Ostwald, or Solvay processes
-    - CaCl2 (calcium chloride): FFC Cambridge electrolyte replenishment
-    - H2O (water): Process water
-  Calcium oxide source: Anorthite carbothermal reduction
-  CaAl2Si2O8 + 4C → CaO + Al2O3 + 2Si + 4CO
-  Stoichiometry: 2NH4Cl (107g) + CaO (56g) → 2NH3 (34g) + CaCl2 (111g) + H2O (18g)
-  Mass fractions: 63.6% NH3, 208% CaCl2, 33.7% H2O from NH4Cl input
-  Solvay process context:
-    - Overall Solvay: 2NaCl + CaCO3 ⇌ Na2CO3 + CaCl2
-    - Intermediate: NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl
-    - This process recovers NH3 from NH4Cl
-    - CO2 also recovered and recycled
-  Advantages: Simple acid-base chemistry
-  Complete ammonia recovery
-  CaCl2 by-product valuable for FFC electrolyte
-  CaO abundant from anorthite
-  Disadvantages: Requires CaO input
-  Additional processing step in Solvay loop
-  Lunar applications: Critical for nitrogen conservation
-  Ammonia too scarce to waste as NH4Cl
-  Enables closed-loop Solvay process
-  CaCl2 output supports FFC Cambridge operations
-  Alternative route: CaCl2 + 2H2O → Ca(OH)2 + 2HCl (recovers HCl instead)
+notes: "Ammonia recovery from ammonium chloride using quicklime (calcium oxide).\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nReaction: 2NH4Cl\
+  \ + CaO → 2NH3 + CaCl2 + H2O\nTemperature: Moderate heating (100-200°C for ammonia\
+  \ evolution)\nProcess: Acid-base reaction liberating ammonia gas\nPart of Solvay\
+  \ process recycling loop for sodium carbonate production\nPurpose: Recycle ammonia\
+  \ from Solvay process intermediate\nNitrogen conservation (scarce lunar resource)\n\
+  Regenerate valuable NH3 for Haber-Bosch or other processes\nProcess details:\n \
+  \ 1. NH4Cl (ammonium chloride) from Solvay process\n  2. React with CaO (quicklime\
+  \ from anorthite processing)\n  3. NH3 evolved as gas, captured by distillation/condensation\n\
+  \  4. CaCl2 (calcium chloride) by-product\nProducts:\n  - NH3 (ammonia): Recycled\
+  \ to Haber-Bosch, Ostwald, or Solvay processes\n  - CaCl2 (calcium chloride): FFC\
+  \ Cambridge electrolyte replenishment\n  - H2O (water): Process water\nCalcium oxide\
+  \ source: Anorthite carbothermal reduction\nCaAl2Si2O8 + 4C → CaO + Al2O3 + 2Si\
+  \ + 4CO\nStoichiometry: 2NH4Cl (107g) + CaO (56g) → 2NH3 (34g) + CaCl2 (111g) +\
+  \ H2O (18g)\nMass fractions: 63.6% NH3, 208% CaCl2, 33.7% H2O from NH4Cl input\n\
+  Solvay process context:\n  - Overall Solvay: 2NaCl + CaCO3 ⇌ Na2CO3 + CaCl2\n  -\
+  \ Intermediate: NaCl + NH3 + CO2 + H2O → NaHCO3 + NH4Cl\n  - This process recovers\
+  \ NH3 from NH4Cl\n  - CO2 also recovered and recycled\nAdvantages: Simple acid-base\
+  \ chemistry\nComplete ammonia recovery\nCaCl2 by-product valuable for FFC electrolyte\n\
+  CaO abundant from anorthite\nDisadvantages: Requires CaO input\nAdditional processing\
+  \ step in Solvay loop\nLunar applications: Critical for nitrogen conservation\n\
+  Ammonia too scarce to waste as NH4Cl\nEnables closed-loop Solvay process\nCaCl2\
+  \ output supports FFC Cambridge operations\nAlternative route: CaCl2 + 2H2O → Ca(OH)2\
+  \ + 2HCl (recovers HCl instead)\n"

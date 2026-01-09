@@ -3,17 +3,17 @@ kind: process
 name: Lathe headstock blank casting
 process_type: batch
 inputs:
-  - item_id: steel_billet_or_slab
-    qty: 60.0
-    unit: kg
+- item_id: steel_billet_or_slab
+  qty: 60.0
+  unit: kg
 outputs:
-  - item_id: lathe_headstock_blank
-    qty: 60.0
-    unit: kg
+- item_id: lathe_headstock_blank
+  qty: 60.0
+  unit: kg
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0
@@ -21,4 +21,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Casting 60 kg of steel billet/slab into a lathe_headstock_blank (60 kg)." 
+notes: Casting 60 kg of steel billet/slab into a lathe_headstock_blank (60 kg).

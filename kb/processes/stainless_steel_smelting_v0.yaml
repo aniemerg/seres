@@ -24,8 +24,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: casting_furnace_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: crucible_refractory
   qty: 1
   unit: count
@@ -40,17 +40,27 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: |
-  Primary production of stainless steel from constituent metals.
+notes: 'Primary production of stainless steel from constituent metals.
+
 
   Composition (typical 18-8 stainless / 304 equivalent):
+
   - Iron: 68-72%
+
   - Chromium: 18-20%
+
   - Nickel: 8-12%
+
   - Carbon: <0.08% (controlled)
 
+
   Process: Melt iron, add chromium and nickel, control carbon content,
+
   cast into ingot molds, allow to solidify.
 
+
   Breaks circular dependency: stainless_steel_ingot can now be made from raw metals
+
   instead of requiring stainless_billet_or_slab (which requires stainless_steel_ingot).
+
+  '

@@ -15,8 +15,8 @@ resource_requirements:
   qty: 1.0
   unit: unit
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.3
@@ -27,8 +27,10 @@ time_model:
   rate: 0.1
   rate_unit: kg/hr
   scaling_basis: steel_sheet_1mm
-notes: Basic lamination of steel sheet into laminated iron core piece; placeholder parameters for modeling.
-assumptions: 'Uses stamping press basic and labor to form a laminated iron core from a small sheet.
+notes: Basic lamination of steel sheet into laminated iron core piece; placeholder
+  parameters for modeling.
+assumptions: 'Uses stamping press basic and labor to form a laminated iron core from
+  a small sheet.
 
   Mass is conserved (0.01 kg steel_sheet_1mm -> 0.01 kg iron_core_laminated).
 

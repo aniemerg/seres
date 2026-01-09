@@ -3,23 +3,23 @@ kind: process
 name: Ceramic coating application (basic)
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: finished_part
-    qty: 1.0
-    unit: kg
-  - item_id: coating_compound
-    qty: 0.1
-    unit: kg
+- item_id: finished_part
+  qty: 1.0
+  unit: kg
+- item_id: coating_compound
+  qty: 0.1
+  unit: kg
 outputs:
-  - item_id: finished_part
-    qty: 1.0
-    unit: kg
+- item_id: finished_part
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.6
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -29,4 +29,6 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Surface prep, coating, flash-off, and cure.
-notes: Apply ceramic or refractory coating to parts for corrosion/heat protection; assumes low-to-moderate temperature cure in an oven or kiln. Replace with domain-specific parameters when substrate and coating are known.
+notes: Apply ceramic or refractory coating to parts for corrosion/heat protection;
+  assumes low-to-moderate temperature cure in an oven or kiln. Replace with domain-specific
+  parameters when substrate and coating are known.

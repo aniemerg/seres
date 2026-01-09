@@ -6,9 +6,9 @@ layer_tags:
 - layer_6
 - layer_7
 inputs:
-  - item_id: valve_components_kit
-    qty: 1.0
-    unit: unit
+- item_id: valve_components_kit
+  qty: 1.0
+  unit: unit
 outputs:
 - item_id: pressure_control_valve_set
   qty: 1.0
@@ -16,14 +16,15 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.4
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Assembly and testing energy"
+  notes: Assembly and testing energy
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Minimal dedicated assembly for pressure control valve set; placeholder to enable modeling of this item."
+notes: Minimal dedicated assembly for pressure control valve set; placeholder to enable
+  modeling of this item.

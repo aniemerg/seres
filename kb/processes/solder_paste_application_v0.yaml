@@ -2,23 +2,23 @@ id: solder_paste_application_v0
 name: Solder paste application (SMT) v0
 kind: process
 inputs:
-  - item_id: pcb_bare_board
-    qty: 0.04
-    unit: kg
-  - item_id: solder_paste_tin_lead
-    qty: 0.005
-    unit: kg
+- item_id: pcb_bare_board
+  qty: 0.04
+  unit: kg
+- item_id: solder_paste_tin_lead
+  qty: 0.005
+  unit: kg
 outputs:
-  - item_id: pcb_paste_applied
-    qty: 0.045
-    unit: kg
+- item_id: pcb_paste_applied
+  qty: 0.045
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
-  - machine_id: assembly_tools_basic
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+- machine_id: assembly_tools_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -27,4 +27,4 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: "Apply solder paste to PCB pads using a stencil printer or dispenser."
+notes: Apply solder paste to PCB pads using a stencil printer or dispenser.

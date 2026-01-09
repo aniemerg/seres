@@ -20,8 +20,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: chemical_reactor_heated
   qty: 1
   unit: count
@@ -40,59 +40,35 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Catalytic oxidation and absorption
-notes: |
-  Contact process for producing sulfuric acid from sulfur dioxide.
-  Source: Lunar-Demandite.txt, Sustainable-ISRU-on-the-Moon.txt
-  Stage 1 - Oxidation: 2SO2 + O2 ⇌ 2SO3 (reversible, exothermic)
-  Stage 2 - Absorption: SO3 + H2O → H2SO4 (highly exothermic)
-  Catalyst: Vanadium pentoxide (V2O5) at 450°C
-  Process: Catalytic oxidation followed by absorption
-  Purpose: Produce sulfuric acid for chemical processing
-  Ilmenite acid leaching: FeTiO3 + 2H2SO4 → products
-  Selenium extraction: Na2SeO3 + H2SO4 → Se + ...
-  Process details:
-    1. SO2 gas (from troilite roasting or sulfur combustion)
-    2. Mix with oxygen (from mineral reduction processes)
-    3. Pass over V2O5 catalyst at 450°C
-    4. SO3 produced (equilibrium reaction, ~98% conversion)
-    5. Absorb SO3 in water or oleum
-    6. Concentrated H2SO4 produced
-  Products:
-    - H2SO4 (sulfuric acid): 96-98% concentrated acid
-  SO2 sources:
-    - Troilite roasting: 4FeS + 7O2 → 2Fe2O3 + 4SO2
-    - Sulfur combustion: S + O2 → SO2
-  Catalyst: V2O5 (vanadium pentoxide)
-    - Not abundant on Moon (V rare)
-    - Small amounts needed (catalyst not consumed)
-    - May need Earth import initially
-    - Alternative: Platinum (also rare), iron oxide (less efficient)
-  Sulfuric acid applications:
-    - Ilmenite processing: FeTiO3 + 2H2SO4 → FeSO4 + TiOSO4 + 2H2O
-    - Selenium deposition: Na2SeO3 + H2SO4 → Se + Na2O + H2SO4 (recycled)
-    - Acid leaching of minerals
-    - Battery electrolyte (lead-acid batteries)
-  Stoichiometry:
-    - Oxidation: 2SO2 (128g) + O2 (32g) → 2SO3 (160g)
-    - Absorption: SO3 (80g) + H2O (18g) → H2SO4 (98g)
-    - Overall: SO2 (64g) + 0.5 O2 (16g) + H2O (18g) → H2SO4 (98g)
-  Mass fractions: 153% H2SO4 from SO2 input
-  Equilibrium considerations:
-    - Forward reaction favored at low temperature (exothermic)
-    - But low temperature = slow kinetics
-    - Compromise: 450°C with V2O5 catalyst
-    - Multiple catalyst beds with interstage cooling for high conversion
-  Advantages: Highly exothermic (energy-positive process)
-  High conversion efficiency (>98%)
-  Acid not consumed in many applications (recycled)
-  Well-established industrial process
-  Disadvantages: Requires V2O5 catalyst (rare on Moon)
-  Highly corrosive product
-  SO2 from sulfur combustion or troilite (limited)
-  Lunar context: Sulfur/sulfuric acid scarce but essential
-  Used in selenium extraction (photosensitive material)
-  Ilmenite alternative processing route
-  Acid recycled in most processes (not consumed)
-  V2O5 catalyst import may be necessary
-  Sulfur source: Troilite from meteorites/regolith
-  Sustainable only if acid recycled, sulfur conserved
+notes: "Contact process for producing sulfuric acid from sulfur dioxide.\nSource:\
+  \ Lunar-Demandite.txt, Sustainable-ISRU-on-the-Moon.txt\nStage 1 - Oxidation: 2SO2\
+  \ + O2 ⇌ 2SO3 (reversible, exothermic)\nStage 2 - Absorption: SO3 + H2O → H2SO4\
+  \ (highly exothermic)\nCatalyst: Vanadium pentoxide (V2O5) at 450°C\nProcess: Catalytic\
+  \ oxidation followed by absorption\nPurpose: Produce sulfuric acid for chemical\
+  \ processing\nIlmenite acid leaching: FeTiO3 + 2H2SO4 → products\nSelenium extraction:\
+  \ Na2SeO3 + H2SO4 → Se + ...\nProcess details:\n  1. SO2 gas (from troilite roasting\
+  \ or sulfur combustion)\n  2. Mix with oxygen (from mineral reduction processes)\n\
+  \  3. Pass over V2O5 catalyst at 450°C\n  4. SO3 produced (equilibrium reaction,\
+  \ ~98% conversion)\n  5. Absorb SO3 in water or oleum\n  6. Concentrated H2SO4 produced\n\
+  Products:\n  - H2SO4 (sulfuric acid): 96-98% concentrated acid\nSO2 sources:\n \
+  \ - Troilite roasting: 4FeS + 7O2 → 2Fe2O3 + 4SO2\n  - Sulfur combustion: S + O2\
+  \ → SO2\nCatalyst: V2O5 (vanadium pentoxide)\n  - Not abundant on Moon (V rare)\n\
+  \  - Small amounts needed (catalyst not consumed)\n  - May need Earth import initially\n\
+  \  - Alternative: Platinum (also rare), iron oxide (less efficient)\nSulfuric acid\
+  \ applications:\n  - Ilmenite processing: FeTiO3 + 2H2SO4 → FeSO4 + TiOSO4 + 2H2O\n\
+  \  - Selenium deposition: Na2SeO3 + H2SO4 → Se + Na2O + H2SO4 (recycled)\n  - Acid\
+  \ leaching of minerals\n  - Battery electrolyte (lead-acid batteries)\nStoichiometry:\n\
+  \  - Oxidation: 2SO2 (128g) + O2 (32g) → 2SO3 (160g)\n  - Absorption: SO3 (80g)\
+  \ + H2O (18g) → H2SO4 (98g)\n  - Overall: SO2 (64g) + 0.5 O2 (16g) + H2O (18g) →\
+  \ H2SO4 (98g)\nMass fractions: 153% H2SO4 from SO2 input\nEquilibrium considerations:\n\
+  \  - Forward reaction favored at low temperature (exothermic)\n  - But low temperature\
+  \ = slow kinetics\n  - Compromise: 450°C with V2O5 catalyst\n  - Multiple catalyst\
+  \ beds with interstage cooling for high conversion\nAdvantages: Highly exothermic\
+  \ (energy-positive process)\nHigh conversion efficiency (>98%)\nAcid not consumed\
+  \ in many applications (recycled)\nWell-established industrial process\nDisadvantages:\
+  \ Requires V2O5 catalyst (rare on Moon)\nHighly corrosive product\nSO2 from sulfur\
+  \ combustion or troilite (limited)\nLunar context: Sulfur/sulfuric acid scarce but\
+  \ essential\nUsed in selenium extraction (photosensitive material)\nIlmenite alternative\
+  \ processing route\nAcid recycled in most processes (not consumed)\nV2O5 catalyst\
+  \ import may be necessary\nSulfur source: Troilite from meteorites/regolith\nSustainable\
+  \ only if acid recycled, sulfur conserved\n"

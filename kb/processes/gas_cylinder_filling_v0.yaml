@@ -4,13 +4,13 @@ kind: process
 process_type: batch
 inputs: []
 outputs:
-  - item_id: gas_cylinder_argon_or_nitrogen
-    qty: 1.0
-    unit: unit
+- item_id: gas_cylinder_argon_or_nitrogen
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -18,4 +18,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Placeholder process to fill inert gas into a cylinder; external gas source."
+notes: Placeholder process to fill inert gas into a cylinder; external gas source.

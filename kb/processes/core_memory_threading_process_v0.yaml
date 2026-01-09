@@ -3,36 +3,37 @@ kind: process
 name: Core memory threading (wire threading through cores) v0
 process_type: batch
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 inputs:
-  - item_id: magnetic_core_memory_tile
-    qty: 1.0
-    unit: unit
-  - item_id: threading_needle_mechanism_v0
-    qty: 1.0
-    unit: unit
-  - item_id: wire_tensioning_system
-    qty: 1.0
-    unit: unit
-  - item_id: magnet_wire_copper
-    qty: 0.5
-    unit: kg
+- item_id: magnetic_core_memory_tile
+  qty: 1.0
+  unit: unit
+- item_id: threading_needle_mechanism_v0
+  qty: 1.0
+  unit: unit
+- item_id: wire_tensioning_system
+  qty: 1.0
+  unit: unit
+- item_id: magnet_wire_copper
+  qty: 0.5
+  unit: kg
 outputs:
-  - item_id: core_memory_threaded_tile_v0
-    qty: 1.0
-    unit: unit
+- item_id: core_memory_threaded_tile_v0
+  qty: 1.0
+  unit: unit
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.4
   unit: kWh
-  notes: "Estimated energy per threaded tile batch (seed-based placeholder)."
+  notes: Estimated energy per threaded tile batch (seed-based placeholder).
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Seed-based placeholder: threads copper magnet wire through ferrite cores to form a threaded core memory tile; refine with real threading steps later."
+notes: 'Seed-based placeholder: threads copper magnet wire through ferrite cores to
+  form a threaded core memory tile; refine with real threading steps later.'

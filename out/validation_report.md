@@ -1,21 +1,21 @@
 # Validation Report (v0)
 
 ## Counts by kind
-- bom: 400
+- bom: 408
 - item: 1
 - machine: 343
 - material: 583
-- part: 1028
+- part: 1031
 - process: 847
-- recipe: 1940
+- recipe: 1943
 - resource: 2
 - scenario: 1
 - schema: 1
 - seed: 6
 
 ## Missing required fields
-Total: 248 missing fields
-- capabilities: 248
+Total: 256 missing fields
+- capabilities: 256
 
 See `out/missing_fields.jsonl` for details.
 
@@ -25,8 +25,8 @@ See `out/missing_fields.jsonl` for details.
 ## Queue Filtering
 **Status**: Enabled
 **Mode**: boms_recipes_parts_only
-**Total gaps found**: 248
-**Filtered out**: 248
+**Total gaps found**: 256
+**Filtered out**: 256
 **Added to queue**: 0
 **Filtering rate**: 100.0%
 

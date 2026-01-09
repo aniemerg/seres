@@ -418,9 +418,9 @@ class KBLoader:
                 if raw_class:
                     raw_model = raw_class.model_validate(data)
                     # Convert to validated (excluding None deprecated fields)
-                    return model_class.model_validate(
-                        raw_model.model_dump(exclude_none=True)
-                    )
+                    payload = raw_model.model_dump(exclude_none=True)
+                    payload.pop("defined_in", None)
+                    return model_class.model_validate(payload)
                 else:
                     # Fallback: direct validation
                     return model_class.model_validate(data)

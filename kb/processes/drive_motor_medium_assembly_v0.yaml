@@ -41,8 +41,8 @@ byproducts:
   notes: Assembly waste and trimming
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
   notes: Assembly labor for larger motor
 - machine_id: assembly_tools_basic
   qty: 1
@@ -60,23 +60,41 @@ time_model:
   hr_per_batch: 4.0
   notes: Assemble stator/rotor, install shaft, bearings, housing, and perform test
     run. Longer than small motor due to size and weight.
-notes: |
-  Complete assembly process for 90 kg medium drive motor from component materials.
+notes: 'Complete assembly process for 90 kg medium drive motor from component materials.
+
 
   Process steps:
+
   1. Stack and align stator laminations (38 kg electrical steel)
+
   2. Insert pre-wound coils into stator slots (27 kg aluminum wire)
+
   3. Install rotor shaft with rotor laminations (5 kg shaft)
+
   4. Install heavy-duty bearings on shaft (4 kg bearing set)
+
   5. Mount stator assembly into housing (15 kg steel housing)
+
   6. Secure endplates with fasteners (1 kg fastener kit)
+
   7. Connect terminal box and perform initial spin test
 
+
   This process is scaled from motor_final_assembly_v0 (12 kg small motor) to handle
-  the larger 90 kg medium drive motor. Material proportions based on typical motor construction:
+
+  the larger 90 kg medium drive motor. Material proportions based on typical motor
+  construction:
+
   - 40% electrical steel laminations
+
   - 30% copper/aluminum windings
+
   - 25% structural steel (housing + shaft)
+
   - 5% bearings and fasteners
 
-  Total ISRU potential: 96% (89.5 kg ISRU materials, 0.5 kg imported coil insulation already in motor_coil_wound)
+
+  Total ISRU potential: 96% (89.5 kg ISRU materials, 0.5 kg imported coil insulation
+  already in motor_coil_wound)
+
+  '

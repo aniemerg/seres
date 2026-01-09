@@ -3,21 +3,21 @@ name: Aramid precursor synthesis v0
 kind: process
 process_type: batch
 layer_tags:
-  - layer_3
-  - layer_4
+- layer_3
+- layer_4
 inputs:
-  - item_id: polymer_feedstock
-    qty: 0.8
-    unit: kg
+- item_id: polymer_feedstock
+  qty: 0.8
+  unit: kg
 outputs:
-  - item_id: aramid_precursor_v0
-    qty: 1.0
-    unit: kg
+- item_id: aramid_precursor_v0
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.3
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -25,5 +25,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: |-
-  Seed precursor synthesis path for aramid precursor; placeholder until full chemistry is defined.
+notes: Seed precursor synthesis path for aramid precursor; placeholder until full
+  chemistry is defined.

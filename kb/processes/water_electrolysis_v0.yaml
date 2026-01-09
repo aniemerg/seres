@@ -18,8 +18,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: water_electrolyzer_v0
   qty: 1
   unit: count
@@ -40,100 +40,53 @@ time_model:
   scaling_basis: water
   notes: Continuous electrolysis process
 process_type: continuous
-notes: |
-  Water electrolysis for producing hydrogen and oxygen gases.
-  Source: All ISRU papers (fundamental process)
-  Reaction: 2H2O → 2H2 + O2
-  Voltage: 1.23V minimum (thermodynamic), 1.8-2.4V typical (with overpotential)
-  Current density: 0.5-2 A/cm² typical
-  Purpose: Split water into constituent gases for propellant, life support, and chemical feedstock
-  Process details:
-    1. Pure water (or dilute electrolyte solution)
-    2. DC electrical current through electrolyzer cell
-    3. Cathode reaction: 4H2O + 4e⁻ → 2H2 + 4OH⁻
-    4. Anode reaction: 4OH⁻ → O2 + 2H2O + 4e⁻
-    5. Net: 2H2O → 2H2 + O2
-    6. H2 collected at cathode, O2 at anode
-    7. Gas separation and drying
-  Products:
-    - Hydrogen gas (H2): 11.1% by mass (stoichiometric)
-    - Oxygen gas (O2): 88.9% by mass (stoichiometric)
-  Stoichiometry: 2H2O (36g) → 2H2 (4g) + O2 (32g)
-  Mass yields: 11.1% H2, 88.9% O2
-  Volume ratio: 2:1 (H2:O2) at STP
-  Electrolyte types:
-    - Alkaline (KOH solution): Most common, mature technology
-    - PEM (Proton Exchange Membrane): High purity, compact
-    - Solid oxide (SOEC): High temperature, higher efficiency
-  Alkaline electrolysis (most common):
-    - Electrolyte: 25-30% KOH solution
-    - Temperature: 60-80°C
-    - Pressure: 1-30 bar
-    - Efficiency: 60-70% (LHV basis)
-  PEM electrolysis:
-    - Membrane: Nafion or similar polymer
-    - Temperature: 50-80°C
-    - Pressure: Up to 200 bar (high-pressure H2)
-    - Purity: 99.999% H2 (no KOH carryover)
-    - Efficiency: 65-75%
-  Solid oxide electrolysis (SOEC):
-    - Temperature: 700-900°C
-    - Uses waste heat from other processes
-    - Efficiency: 85-90% (thermoneutral operation)
-    - Less mature technology
-  Energy requirements:
-    - Theoretical minimum: 39.4 kWh/kg H2 (HHV basis)
-    - Practical: 50-60 kWh/kg H2 (alkaline)
-    - Per kg water: 4-5 kWh (typical)
-  Applications:
-    - Propellant: H2-O2 rocket fuel (high Isp ~450s)
-    - Life support: O2 for breathing
-    - Chemical feedstock: H2 for reduction reactions
-    - Energy storage: H2 fuel cells for power generation
-    - Sabatier/Bosch: H2 for CO2 reduction
-  Lunar context: Critical process for ISRU
-    - Water from polar ice or regolith volatiles
-    - O2 for life support and oxidizer
-    - H2 for propellant and chemical processing
-    - Enables many downstream processes
-  Advantages: Simple, well-established technology
-    High-purity products (especially PEM)
-    Scalable from small to large scale
-    No chemical reagents consumed
-  Disadvantages: Energy intensive
-    Requires electrical power (solar/nuclear)
-    Alkaline systems require KOH (Earth import initially)
-    PEM membranes may be difficult to manufacture in-situ
-  Lunar implementation considerations:
-    - PEM preferred for high purity and compactness
-    - Alkaline viable with KOH import or in-situ synthesis
-    - SOEC attractive if waste heat available (FFC, smelting)
-    - High-pressure operation reduces storage volume
-  Gas purity and separation:
-    - Membrane separators for final cleanup
-    - H2 purity: 99.9-99.999% depending on electrolyzer type
-    - O2 purity: 99.2-99.9%
-    - Trace water removal via desiccant or PSA
-  Hydrogen storage:
-    - Compressed gas: 200-700 bar tanks
-    - Cryogenic liquid: 20K (-253°C)
-    - Metal hydrides: Mg, LaNi5 (reversible storage)
-  Oxygen storage:
-    - Compressed gas: 150-200 bar typical
-    - Cryogenic liquid: 90K (-183°C)
-    - Higher density as liquid (for propellant)
-  Safety considerations:
-    - H2-O2 mixture explosive (4-75% H2 in O2)
-    - Must prevent gas mixing
-    - Catalytic recombiners for trace H2 removal from O2
-    - Proper venting in case of overpressure
-  Efficiency improvements:
-    - Advanced catalysts: IrO2 (anode), Pt (cathode) for PEM
-    - Thinner membranes: Reduce resistance
-    - Higher temperature: Improves kinetics (SOEC)
-    - Pressurized operation: Direct high-pressure H2
-  Integration opportunities:
-    - Coupled with FFC Cambridge: O2 from both processes
-    - Sabatier loop: Recycle H2 from water product
-    - Fuel cells: Reverse process for power generation
-    - Ilmenite reduction: H2 feedstock for reduction
+notes: "Water electrolysis for producing hydrogen and oxygen gases.\nSource: All ISRU\
+  \ papers (fundamental process)\nReaction: 2H2O → 2H2 + O2\nVoltage: 1.23V minimum\
+  \ (thermodynamic), 1.8-2.4V typical (with overpotential)\nCurrent density: 0.5-2\
+  \ A/cm² typical\nPurpose: Split water into constituent gases for propellant, life\
+  \ support, and chemical feedstock\nProcess details:\n  1. Pure water (or dilute\
+  \ electrolyte solution)\n  2. DC electrical current through electrolyzer cell\n\
+  \  3. Cathode reaction: 4H2O + 4e⁻ → 2H2 + 4OH⁻\n  4. Anode reaction: 4OH⁻ → O2\
+  \ + 2H2O + 4e⁻\n  5. Net: 2H2O → 2H2 + O2\n  6. H2 collected at cathode, O2 at anode\n\
+  \  7. Gas separation and drying\nProducts:\n  - Hydrogen gas (H2): 11.1% by mass\
+  \ (stoichiometric)\n  - Oxygen gas (O2): 88.9% by mass (stoichiometric)\nStoichiometry:\
+  \ 2H2O (36g) → 2H2 (4g) + O2 (32g)\nMass yields: 11.1% H2, 88.9% O2\nVolume ratio:\
+  \ 2:1 (H2:O2) at STP\nElectrolyte types:\n  - Alkaline (KOH solution): Most common,\
+  \ mature technology\n  - PEM (Proton Exchange Membrane): High purity, compact\n\
+  \  - Solid oxide (SOEC): High temperature, higher efficiency\nAlkaline electrolysis\
+  \ (most common):\n  - Electrolyte: 25-30% KOH solution\n  - Temperature: 60-80°C\n\
+  \  - Pressure: 1-30 bar\n  - Efficiency: 60-70% (LHV basis)\nPEM electrolysis:\n\
+  \  - Membrane: Nafion or similar polymer\n  - Temperature: 50-80°C\n  - Pressure:\
+  \ Up to 200 bar (high-pressure H2)\n  - Purity: 99.999% H2 (no KOH carryover)\n\
+  \  - Efficiency: 65-75%\nSolid oxide electrolysis (SOEC):\n  - Temperature: 700-900°C\n\
+  \  - Uses waste heat from other processes\n  - Efficiency: 85-90% (thermoneutral\
+  \ operation)\n  - Less mature technology\nEnergy requirements:\n  - Theoretical\
+  \ minimum: 39.4 kWh/kg H2 (HHV basis)\n  - Practical: 50-60 kWh/kg H2 (alkaline)\n\
+  \  - Per kg water: 4-5 kWh (typical)\nApplications:\n  - Propellant: H2-O2 rocket\
+  \ fuel (high Isp ~450s)\n  - Life support: O2 for breathing\n  - Chemical feedstock:\
+  \ H2 for reduction reactions\n  - Energy storage: H2 fuel cells for power generation\n\
+  \  - Sabatier/Bosch: H2 for CO2 reduction\nLunar context: Critical process for ISRU\n\
+  \  - Water from polar ice or regolith volatiles\n  - O2 for life support and oxidizer\n\
+  \  - H2 for propellant and chemical processing\n  - Enables many downstream processes\n\
+  Advantages: Simple, well-established technology\n  High-purity products (especially\
+  \ PEM)\n  Scalable from small to large scale\n  No chemical reagents consumed\n\
+  Disadvantages: Energy intensive\n  Requires electrical power (solar/nuclear)\n \
+  \ Alkaline systems require KOH (Earth import initially)\n  PEM membranes may be\
+  \ difficult to manufacture in-situ\nLunar implementation considerations:\n  - PEM\
+  \ preferred for high purity and compactness\n  - Alkaline viable with KOH import\
+  \ or in-situ synthesis\n  - SOEC attractive if waste heat available (FFC, smelting)\n\
+  \  - High-pressure operation reduces storage volume\nGas purity and separation:\n\
+  \  - Membrane separators for final cleanup\n  - H2 purity: 99.9-99.999% depending\
+  \ on electrolyzer type\n  - O2 purity: 99.2-99.9%\n  - Trace water removal via desiccant\
+  \ or PSA\nHydrogen storage:\n  - Compressed gas: 200-700 bar tanks\n  - Cryogenic\
+  \ liquid: 20K (-253°C)\n  - Metal hydrides: Mg, LaNi5 (reversible storage)\nOxygen\
+  \ storage:\n  - Compressed gas: 150-200 bar typical\n  - Cryogenic liquid: 90K (-183°C)\n\
+  \  - Higher density as liquid (for propellant)\nSafety considerations:\n  - H2-O2\
+  \ mixture explosive (4-75% H2 in O2)\n  - Must prevent gas mixing\n  - Catalytic\
+  \ recombiners for trace H2 removal from O2\n  - Proper venting in case of overpressure\n\
+  Efficiency improvements:\n  - Advanced catalysts: IrO2 (anode), Pt (cathode) for\
+  \ PEM\n  - Thinner membranes: Reduce resistance\n  - Higher temperature: Improves\
+  \ kinetics (SOEC)\n  - Pressurized operation: Direct high-pressure H2\nIntegration\
+  \ opportunities:\n  - Coupled with FFC Cambridge: O2 from both processes\n  - Sabatier\
+  \ loop: Recycle H2 from water product\n  - Fuel cells: Reverse process for power\
+  \ generation\n  - Ilmenite reduction: H2 feedstock for reduction\n"

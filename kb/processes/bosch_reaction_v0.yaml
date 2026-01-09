@@ -21,8 +21,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -38,40 +38,25 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Catalytic reduction and carbon deposition
-notes: |
-  Bosch reaction for reducing carbon dioxide to solid carbon using hydrogen.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: CO2 + 2H2 → C + 2H2O
-  Temperature: 530-730°C
-  Catalyst: Iron or nickel
-  Process: Catalytic reduction of CO2 to elemental carbon
-  Purpose: Regenerate carbon for FFC Cambridge graphite anodes
-  CO2 recycling in closed-loop ISRU systems
-  Products:
-    - C (solid carbon): FFC anode material, reducing agent, feedstock
-    - H2O (water): Electrolyzed to recycle H2 + generate O2
-  Water electrolysis: 2H2O → 2H2 + O2
-    - Hydrogen recycled back to Bosch reaction
-    - Oxygen as valuable by-product
-  Net reaction with H2 recycling: CO2 → C + O2
-  Stoichiometry: CO2 (44g) + 2H2 (4g) → C (12g) + 2H2O (36g)
-  Mass fractions: 27.3% C, 81.8% H2O from inputs
-  Hydrogen source: Water electrolysis, volatile extraction
-  CO2 source: FFC process, life support, combustion
-  Catalyst considerations:
-    - Iron: Abundant from ilmenite/meteorite processing
-    - Nickel: From Mond process purification
-    - Catalyst promotes carbon deposition on surface
-  Comparison to Sabatier reaction:
-    - Sabatier: CO2 + 4H2 → CH4 + 2H2O (produces methane)
-    - Bosch: CO2 + 2H2 → C + 2H2O (produces solid carbon)
-    - Bosch uses less H2, directly produces carbon
-  Applications:
-    - Carbon regeneration for FFC graphite anodes
-    - CO2 removal from life support atmospheres
-    - Carbon feedstock for chemical synthesis
-  Lunar ISRU: Critical for carbon cycle closure
-  Prevents depletion of scarce carbon volatiles
-  Coupled with water electrolysis for complete recycling
-  Alternative to Boudouard for carbon regeneration
-  Terrestrial use: Space station CO2 scrubbing (ISS uses Sabatier instead)
+notes: "Bosch reaction for reducing carbon dioxide to solid carbon using hydrogen.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nReaction:\
+  \ CO2 + 2H2 → C + 2H2O\nTemperature: 530-730°C\nCatalyst: Iron or nickel\nProcess:\
+  \ Catalytic reduction of CO2 to elemental carbon\nPurpose: Regenerate carbon for\
+  \ FFC Cambridge graphite anodes\nCO2 recycling in closed-loop ISRU systems\nProducts:\n\
+  \  - C (solid carbon): FFC anode material, reducing agent, feedstock\n  - H2O (water):\
+  \ Electrolyzed to recycle H2 + generate O2\nWater electrolysis: 2H2O → 2H2 + O2\n\
+  \  - Hydrogen recycled back to Bosch reaction\n  - Oxygen as valuable by-product\n\
+  Net reaction with H2 recycling: CO2 → C + O2\nStoichiometry: CO2 (44g) + 2H2 (4g)\
+  \ → C (12g) + 2H2O (36g)\nMass fractions: 27.3% C, 81.8% H2O from inputs\nHydrogen\
+  \ source: Water electrolysis, volatile extraction\nCO2 source: FFC process, life\
+  \ support, combustion\nCatalyst considerations:\n  - Iron: Abundant from ilmenite/meteorite\
+  \ processing\n  - Nickel: From Mond process purification\n  - Catalyst promotes\
+  \ carbon deposition on surface\nComparison to Sabatier reaction:\n  - Sabatier:\
+  \ CO2 + 4H2 → CH4 + 2H2O (produces methane)\n  - Bosch: CO2 + 2H2 → C + 2H2O (produces\
+  \ solid carbon)\n  - Bosch uses less H2, directly produces carbon\nApplications:\n\
+  \  - Carbon regeneration for FFC graphite anodes\n  - CO2 removal from life support\
+  \ atmospheres\n  - Carbon feedstock for chemical synthesis\nLunar ISRU: Critical\
+  \ for carbon cycle closure\nPrevents depletion of scarce carbon volatiles\nCoupled\
+  \ with water electrolysis for complete recycling\nAlternative to Boudouard for carbon\
+  \ regeneration\nTerrestrial use: Space station CO2 scrubbing (ISS uses Sabatier\
+  \ instead)\n"

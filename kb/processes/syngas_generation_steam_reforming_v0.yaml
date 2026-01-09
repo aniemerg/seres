@@ -23,8 +23,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -41,48 +41,30 @@ energy_model:
   unit: kWh
   notes: Endothermic reaction at 850°C requires significant heat input for 1 kg CH4
     batch
-notes: |
-  Steam reforming of methane to produce synthesis gas (syngas: CO + H2).
-  Source: Sustainable-ISRU-on-the-Moon.txt
-  Reaction: CH4 + H2O → CO + 3H2 (endothermic)
-  Temperature: 850°C
-  Pressure: 4 MPa (40 bar)
-  Catalyst: Nickel (from Mond process, meteorite sources); modeled as catalyst_pellet_forming_v0
-  Process: Catalytic steam reforming
-  Purpose: First step in silicone plastic synthesis chain
-  Generate syngas for methanol production
-  Chemical feedstock for various syntheses
-  Process details:
-    1. Methane (from lunar volatiles or Sabatier process)
-    2. Superheated steam (H2O vapor)
-    3. React over Ni catalyst at 850°C and 4 MPa
-    4. CO and H2 produced (syngas)
-    5. Separate syngas from unreacted steam
-  Products:
-    - CO (carbon monoxide): Methanol synthesis, Fischer-Tropsch, Mond process
-    - H2 (hydrogen): Reducing agent, fuel, chemical feedstock
-  Methane sources:
-    - Lunar volatiles (thermal extraction from regolith)
-    - Sabatier reaction: CO2 + 4H2 → CH4 + 2H2O
-  Syngas ratio: CO:H2 = 1:3 (ideal for methanol synthesis)
-  Methanol synthesis: CO + 2H2 → CH3OH (next step in silicone chain)
-  Stoichiometry: CH4 (16g) + H2O (18g) → CO (28g) + 3H2 (6g)
-  Mass fractions: 175% CO, 37.6% H2 from CH4 input
-  Water excess used to prevent carbon deposition (coking)
-  Advantages: Well-established industrial process
-  Flexible feedstock (works with other hydrocarbons)
-  High conversion efficiency (>90%)
-  Ni catalyst from lunar meteorite sources
-  Disadvantages: Endothermic (high energy input)
-  High temperature and pressure requirements
-  Catalyst deactivation by sulfur (must purify CH4)
-  Applications:
-    - Silicone synthesis: Syngas → methanol → methyl chloride → siloxanes
-    - Fischer-Tropsch: Syngas → hydrocarbons
-    - Hydrogen production: Shift reaction CO + H2O → CO2 + H2
-    - Chemical feedstock: Ammonia, methanol, aldehydes
-  Lunar context: Methane from scarce carbon volatiles
-  Critical first step for silicone plastic manufacture
-  Silicone plastics essential: Electrical insulation, elastomers, sealants
-  Alternative: Direct CO from Boudouard or RWGS for some applications
-  Next step: Methanol synthesis from syngas
+notes: "Steam reforming of methane to produce synthesis gas (syngas: CO + H2).\nSource:\
+  \ Sustainable-ISRU-on-the-Moon.txt\nReaction: CH4 + H2O → CO + 3H2 (endothermic)\n\
+  Temperature: 850°C\nPressure: 4 MPa (40 bar)\nCatalyst: Nickel (from Mond process,\
+  \ meteorite sources); modeled as catalyst_pellet_forming_v0\nProcess: Catalytic\
+  \ steam reforming\nPurpose: First step in silicone plastic synthesis chain\nGenerate\
+  \ syngas for methanol production\nChemical feedstock for various syntheses\nProcess\
+  \ details:\n  1. Methane (from lunar volatiles or Sabatier process)\n  2. Superheated\
+  \ steam (H2O vapor)\n  3. React over Ni catalyst at 850°C and 4 MPa\n  4. CO and\
+  \ H2 produced (syngas)\n  5. Separate syngas from unreacted steam\nProducts:\n \
+  \ - CO (carbon monoxide): Methanol synthesis, Fischer-Tropsch, Mond process\n  -\
+  \ H2 (hydrogen): Reducing agent, fuel, chemical feedstock\nMethane sources:\n  -\
+  \ Lunar volatiles (thermal extraction from regolith)\n  - Sabatier reaction: CO2\
+  \ + 4H2 → CH4 + 2H2O\nSyngas ratio: CO:H2 = 1:3 (ideal for methanol synthesis)\n\
+  Methanol synthesis: CO + 2H2 → CH3OH (next step in silicone chain)\nStoichiometry:\
+  \ CH4 (16g) + H2O (18g) → CO (28g) + 3H2 (6g)\nMass fractions: 175% CO, 37.6% H2\
+  \ from CH4 input\nWater excess used to prevent carbon deposition (coking)\nAdvantages:\
+  \ Well-established industrial process\nFlexible feedstock (works with other hydrocarbons)\n\
+  High conversion efficiency (>90%)\nNi catalyst from lunar meteorite sources\nDisadvantages:\
+  \ Endothermic (high energy input)\nHigh temperature and pressure requirements\n\
+  Catalyst deactivation by sulfur (must purify CH4)\nApplications:\n  - Silicone synthesis:\
+  \ Syngas → methanol → methyl chloride → siloxanes\n  - Fischer-Tropsch: Syngas →\
+  \ hydrocarbons\n  - Hydrogen production: Shift reaction CO + H2O → CO2 + H2\n  -\
+  \ Chemical feedstock: Ammonia, methanol, aldehydes\nLunar context: Methane from\
+  \ scarce carbon volatiles\nCritical first step for silicone plastic manufacture\n\
+  Silicone plastics essential: Electrical insulation, elastomers, sealants\nAlternative:\
+  \ Direct CO from Boudouard or RWGS for some applications\nNext step: Methanol synthesis\
+  \ from syngas\n"

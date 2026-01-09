@@ -31,15 +31,16 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0
   unit: kWh
-  notes: "Assembly energy for 1-unit batch (tooling, alignment, testing)"
+  notes: Assembly energy for 1-unit batch (tooling, alignment, testing)
 time_model:
   type: batch
   hr_per_batch: 6.0
-  notes: "Assembly and testing cycle"
-notes: Local fabrication path for surface_treatment_station_v0; consumes BOM components to produce the machine.
+  notes: Assembly and testing cycle
+notes: Local fabrication path for surface_treatment_station_v0; consumes BOM components
+  to produce the machine.

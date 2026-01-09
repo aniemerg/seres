@@ -2,19 +2,19 @@ id: haber_bosch_reactor_fabrication_v0
 kind: process
 name: Haber-Bosch reactor fabrication v0
 layer_tags:
-  - layer_6
-  - layer_7
+- layer_6
+- layer_7
 process_type: batch
 inputs: []
 outputs:
-  - item_id: haber_bosch_reactor_v0
-    qty: 1.0
-    unit: unit
+- item_id: haber_bosch_reactor_v0
+  qty: 1.0
+  unit: unit
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 6.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 30.0
@@ -24,6 +24,8 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Placeholder fabrication time
-notes: |
-  Placeholder fabrication process to produce Haber-Bosch reactor from base materials.
+notes: 'Placeholder fabrication process to produce Haber-Bosch reactor from base materials.
+
   This enables the Memo A runtime to model a local production path for the reactor.
+
+  '

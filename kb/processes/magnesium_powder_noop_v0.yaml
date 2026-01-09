@@ -5,25 +5,25 @@ layer_tags:
 - layer_5
 - layer_6
 inputs:
-  - item_id: import_magnesium_powder
-    qty: 1.0
-    unit: kg
+- item_id: import_magnesium_powder
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: import_magnesium_powder
-    qty: 1.0
-    unit: kg
+- item_id: import_magnesium_powder
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.1
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.0
   unit: kWh
-  notes: "No-op placeholder for enabling a local production path for import_magnesium_powder"
+  notes: No-op placeholder for enabling a local production path for import_magnesium_powder
 time_model:
   type: batch
   hr_per_batch: 0.1
-notes: "Placeholder processing step to satisfy no_recipe gap for import_magnesium_powder"
+notes: Placeholder processing step to satisfy no_recipe gap for import_magnesium_powder
 process_type: batch

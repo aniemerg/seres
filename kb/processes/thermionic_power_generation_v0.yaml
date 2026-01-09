@@ -16,8 +16,8 @@ outputs:
   unit: kWh
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.05
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: thermionic_converter_v0
   qty: 1
   unit: count
@@ -39,42 +39,73 @@ time_model:
   scaling_basis: concentrated_solar_thermal
   notes: Continuous generation during lunar day (~14 Earth days). Operational during
     sunlight availability.
-notes: |
-  THERMIONIC SOLAR POWER GENERATION
+notes: 'THERMIONIC SOLAR POWER GENERATION
 
-  Converts concentrated solar thermal energy (1600-2700°C) directly into electrical power
+
+  Converts concentrated solar thermal energy (1600-2700°C) directly into electrical
+  power
+
   via thermionic emission in vacuum tube converters.
 
+
   OPERATING PRINCIPLE:
+
   - Concentrated sunlight heats tungsten cathode to emission temperature (~2000°C)
+
   - Cathode coated with CaO to reduce work function and enable lower operating temperature
+
   - Thermal energy causes thermionic emission - electrons "boil off" cathode surface
+
   - Electrons flow across vacuum gap to nickel anode, generating DC electrical current
+
   - No intermediate conversion steps (solar → thermal → electric directly)
 
+
   CONVERSION EFFICIENCY:
+
   - Primitive/v0 systems: ~10% solar-to-electric
+
   - Optimized systems (v1/v2): 15-20%
+
   - Theoretical maximum: 30%
+
   - Waste heat: 70-90% must be rejected via radiators
 
+
   ADVANTAGES OVER PHOTOVOLTAICS:
+
   - 100% manufacturable from lunar materials (anorthite + NiFe meteorites)
+
   - Higher efficiency than lunar PV (1-5% without dopants)
+
   - Proven technology (used in space nuclear reactors: 5-20% efficiency)
+
   - Dual-use concentrators (power + foundry operations)
+
   - Same vacuum tube technology as computing/communications
 
+
   MATERIALS (all lunar-sourced):
+
   - Cathode: Tungsten with CaO coating (from anorthite)
+
   - Anode: Nickel (from NiFe meteorites)
+
   - Envelope: Fused silica glass (from anorthite)
+
   - Concentrator: Cast glass Fresnel lenses or polished Ni mirrors
 
+
   ENERGY FLOW:
+
   Solar Irradiance → Concentrated Thermal (1600-2700°C) → Thermionic Emission
+
   → Electrical Power (10-30%) + Waste Heat (70-90%)
 
+
   See design/solar_thermionics_report.md for complete technical specifications,
+
   chemical processing equations, and references to source papers.
+
+  '
 process_type: continuous

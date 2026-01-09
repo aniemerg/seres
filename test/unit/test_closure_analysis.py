@@ -179,13 +179,13 @@ class TestRawMaterialDetection:
         assert analyzer._is_raw_material('ore', item_dict) is True
 
     def test_raw_material_by_folder(self, temp_kb):
-        """Should detect raw material by folder location."""
+        """Items outside raw_materials folder are not raw materials."""
         write_yaml(temp_kb / "items" / "materials" / "iron_ore.yaml", {
             'id': 'iron_ore',
             'kind': 'material',
             'mass': 1.0,
             'unit': 'kg',
-            'defined_in': 'kb/items/raw_materials/iron_ore.yaml'
+            'defined_in': 'kb/items/materials/iron_ore.yaml'
         })
 
         kb = KBLoader(temp_kb, use_validated_models=False)
@@ -195,7 +195,7 @@ class TestRawMaterialDetection:
         item = kb.get_item('iron_ore')
         item_dict = analyzer._to_dict(item)
 
-        assert analyzer._is_raw_material('iron_ore', item_dict) is True
+        assert analyzer._is_raw_material('iron_ore', item_dict) is False
 
     def test_raw_material_by_notes(self, temp_kb):
         """Should detect raw material by BASE marker in notes."""

@@ -3,13 +3,13 @@ name: Calcium chloride solution seed production v0
 kind: process
 inputs: []
 outputs:
-  - item_id: calcium_chloride_solution_v0
-    qty: 1.0
-    unit: kg
+- item_id: calcium_chloride_solution_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: lab_v0
-    qty: 0.5
-    unit: hr
+- machine_id: lab_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
@@ -19,5 +19,6 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Placeholder seed production time for calcium_chloride_solution_v0
-notes: "Seed process to bootstrap production of calcium_chloride_solution_v0 for dihydrate crystallization."
+notes: Seed process to bootstrap production of calcium_chloride_solution_v0 for dihydrate
+  crystallization.
 process_type: batch

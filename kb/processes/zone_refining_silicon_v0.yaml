@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 12.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: induction_furnace_v0
   qty: 1
   unit: count
@@ -34,63 +34,38 @@ time_model:
   type: batch
   hr_per_batch: 48.0
   notes: Multiple slow passes of molten zone through ingot
-notes: |
-  Zone refining for achieving extreme purity levels in silicon for semiconductors.
-  Source: Sustainable-ISRU-on-the-Moon.txt
-  Process: Thermal zone melting with impurity segregation
-  Temperature: ~1600°C (local melting zone)
-  Purpose: Achieve 9-11 nines purity (99.9999999-99.999999999% pure)
-  Essential for semiconductor manufacturing
-  Process details:
-    1. Silicon ingot from Siemens process (polycrystalline)
-    2. Mount in horizontal apparatus
-    3. RF induction coil creates narrow molten zone (~1 cm wide)
-    4. Slowly translate molten zone along ingot (mm/hr)
-    5. Impurities preferentially stay in liquid phase
-    6. Solid crystallizes behind zone with lower impurity
-    7. Multiple passes (10-50) progressively concentrate impurities
-    8. Cut off impure ends, recycle to earlier processing
-  Physical principle: Distribution coefficient k = Csolid/Cliquid
-    - For most impurities in Si: k < 1 (reject into liquid)
-    - Examples: B (k=0.8), P (k=0.35), Al (k=0.002)
-    - Impurities swept to end of ingot
-  Products:
-    - Ultra-pure silicon: Center section of ingot
-    - Impure ends: Recycled to Siemens process (modeled as silicon_purified)
-  Purity levels achievable:
-    - Starting: 99.9999% (6 nines, from Siemens)
-    - After 10 passes: 99.9999999% (9 nines)
-    - After 30-50 passes: 99.999999999% (11 nines)
-  Critical impurities removed:
-    - Boron (p-type dopant): Must control to <0.1 ppb
-    - Phosphorus (n-type dopant): Must control to <0.1 ppb
-    - Transition metals (Fe, Cu, Ni): Recombination centers
-    - Carbon: Forms SiC defects
-  Advantages: Achieves extreme purity levels
-    No chemical reagents required
-    Physics-based separation (thermodynamic)
-    Scalable to large ingots
-  Disadvantages: Very slow process (days per ingot)
-    Energy intensive (maintain molten zone)
-    Requires multiple passes for highest purity
-    ~2% material loss to impure ends per pass
-  Lunar context: Essential for electronics manufacturing
-    Semiconductor devices require 9+ nines purity
-    Photovoltaics can use lower purity (6-7 nines)
-    Zone refining is final purification step
-  Alternative: Czochralski pulling also achieves high purity
-    But zone refining can reach even higher levels
-  Process variations:
-    - Vertical zone refining (better for vacuum)
-    - Horizontal (shown here, easier mechanically)
-    - Float-zone (contactless, highest purity)
-  Yield: 98% ultra-pure silicon per pass
-    Impure ends (2%) recycled to Siemens or earlier
-  Temperature control critical:
-    - Too hot: Excessive evaporation, Si loss
-    - Too cold: Zone freezes, process stops
-    - Must maintain 1600°C ± 10°C in zone
-  Atmosphere: Inert (Ar) or vacuum
-    Prevents oxidation and contamination
-  Post-processing: Czochralski growth into single crystal
-    Or direct use as polycrystalline for some applications
+notes: "Zone refining for achieving extreme purity levels in silicon for semiconductors.\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt\nProcess: Thermal zone melting with impurity\
+  \ segregation\nTemperature: ~1600°C (local melting zone)\nPurpose: Achieve 9-11\
+  \ nines purity (99.9999999-99.999999999% pure)\nEssential for semiconductor manufacturing\n\
+  Process details:\n  1. Silicon ingot from Siemens process (polycrystalline)\n  2.\
+  \ Mount in horizontal apparatus\n  3. RF induction coil creates narrow molten zone\
+  \ (~1 cm wide)\n  4. Slowly translate molten zone along ingot (mm/hr)\n  5. Impurities\
+  \ preferentially stay in liquid phase\n  6. Solid crystallizes behind zone with\
+  \ lower impurity\n  7. Multiple passes (10-50) progressively concentrate impurities\n\
+  \  8. Cut off impure ends, recycle to earlier processing\nPhysical principle: Distribution\
+  \ coefficient k = Csolid/Cliquid\n  - For most impurities in Si: k < 1 (reject into\
+  \ liquid)\n  - Examples: B (k=0.8), P (k=0.35), Al (k=0.002)\n  - Impurities swept\
+  \ to end of ingot\nProducts:\n  - Ultra-pure silicon: Center section of ingot\n\
+  \  - Impure ends: Recycled to Siemens process (modeled as silicon_purified)\nPurity\
+  \ levels achievable:\n  - Starting: 99.9999% (6 nines, from Siemens)\n  - After\
+  \ 10 passes: 99.9999999% (9 nines)\n  - After 30-50 passes: 99.999999999% (11 nines)\n\
+  Critical impurities removed:\n  - Boron (p-type dopant): Must control to <0.1 ppb\n\
+  \  - Phosphorus (n-type dopant): Must control to <0.1 ppb\n  - Transition metals\
+  \ (Fe, Cu, Ni): Recombination centers\n  - Carbon: Forms SiC defects\nAdvantages:\
+  \ Achieves extreme purity levels\n  No chemical reagents required\n  Physics-based\
+  \ separation (thermodynamic)\n  Scalable to large ingots\nDisadvantages: Very slow\
+  \ process (days per ingot)\n  Energy intensive (maintain molten zone)\n  Requires\
+  \ multiple passes for highest purity\n  ~2% material loss to impure ends per pass\n\
+  Lunar context: Essential for electronics manufacturing\n  Semiconductor devices\
+  \ require 9+ nines purity\n  Photovoltaics can use lower purity (6-7 nines)\n  Zone\
+  \ refining is final purification step\nAlternative: Czochralski pulling also achieves\
+  \ high purity\n  But zone refining can reach even higher levels\nProcess variations:\n\
+  \  - Vertical zone refining (better for vacuum)\n  - Horizontal (shown here, easier\
+  \ mechanically)\n  - Float-zone (contactless, highest purity)\nYield: 98% ultra-pure\
+  \ silicon per pass\n  Impure ends (2%) recycled to Siemens or earlier\nTemperature\
+  \ control critical:\n  - Too hot: Excessive evaporation, Si loss\n  - Too cold:\
+  \ Zone freezes, process stops\n  - Must maintain 1600°C ± 10°C in zone\nAtmosphere:\
+  \ Inert (Ar) or vacuum\n  Prevents oxidation and contamination\nPost-processing:\
+  \ Czochralski growth into single crystal\n  Or direct use as polycrystalline for\
+  \ some applications\n"

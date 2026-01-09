@@ -19,8 +19,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 6.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: drilling_equipment_v0
   qty: 1
   unit: count
@@ -43,61 +43,40 @@ time_model:
   type: batch
   hr_per_batch: 12.0
   notes: Drilling, heating, sublimation/melting, and collection
-notes: |
-  Extraction of water ice from permanently shadowed craters at lunar poles.
-  Source: Power-on-the-Moon-using-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Location: Permanently shadowed craters (PSCs) at north and south poles
-  Temperature: ~40 K (-233°C) in PSCs
-  Concentration: 5.6% ± 2.9% by mass (LCROSS impact data)
-  Purpose: Extract water for life support, propellant, hydrogen source
-  Higher concentration than volatile extraction from regolith
-  Process details:
-    1. Heliostats on peaks of eternal light reflect sunlight to PSCs
-    2. Solar arrays in PSC powered by reflected light
-    3. Drill into frozen regolith to depth (subsurface ice)
-    4. Option A - Direct heating: Heat ice directly, capture sublimed vapor
-    5. Option B - Heater insertion: Insert heaters into boreholes
-    6. Ice sublimes/melts, vapor captured in cold trap canopy
-    7. Condense water vapor to liquid or keep as ice
-  Products:
-    - H2O (water ice/liquid): 5.6% average, up to 8.5% in some locations
-    - Dry regolith: Processed material
-  Ice characteristics:
-    - Rock-hard when frozen (~40 K)
-    - Drilling difficult (similar to drilling concrete)
-    - May be in layers or pockets (not uniformly distributed)
-    - Subsurface ice insulated by dry regolith overburden
-  Water ice deposits:
-    - Total PSC area: >31,000 km² (both poles)
-    - Estimated inventory: 3-6 × 10¹² kg (3-6 billion tonnes)
-    - Cabeus crater (south pole): High concentration region
-    - 40+ craters at north pole with water potential
-  Energy challenges:
-    - PSCs permanently shadowed (no direct sunlight)
-    - Heliostats required: Reflect sunlight from peaks of eternal light
-    - Distance: ~20 km vertical and horizontal
-    - Three heliostats minimum for continuous coverage
-  Heliostat system:
-    - Mirrors on peaks of eternal light (continuous solar access)
-    - Beam sunlight to PSC floor (photovoltaics or direct heating)
-    - Complex pointing and tracking
-    - Alternative: Nuclear power for PSC operations
-  Stoichiometry: 1000 kg frozen regolith → 56 kg water ice (5.6%)
-  Comparison to volatile extraction:
-    - Polar ice: 5.6% H2O by mass
-    - Regolith volatiles: 0.046% H by mass (~0.041% H2O equivalent)
-    - Polar ice ~140x higher water concentration
-  Advantages: Much higher concentration than regolith volatiles
-  Large total inventory (billions of tonnes)
-  Direct water extraction (not just H)
-  Disadvantages: Extreme environment (40 K, permanently dark)
-  Complex infrastructure (heliostats, drilling, heating)
-  Rugged terrain (SPA basin: 11 km elevation changes)
-  Distance from potential base sites (peaks of eternal light)
-  Lunar context: Critical water source for life support
-  Hydrogen for reduction processes (ilmenite, etc.)
-  Oxygen via electrolysis
-  Propellant/oxidizer (though wasteful of scarce resource)
-  Sustainability concern: Burning H2/O2 as propellant unsustainable
-  Better uses: Life support recycling, chemical processes
-  Alternative propulsion: Solar-electric, electromagnetic launchers
+notes: "Extraction of water ice from permanently shadowed craters at lunar poles.\n\
+  Source: Power-on-the-Moon-using-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nLocation:\
+  \ Permanently shadowed craters (PSCs) at north and south poles\nTemperature: ~40\
+  \ K (-233°C) in PSCs\nConcentration: 5.6% ± 2.9% by mass (LCROSS impact data)\n\
+  Purpose: Extract water for life support, propellant, hydrogen source\nHigher concentration\
+  \ than volatile extraction from regolith\nProcess details:\n  1. Heliostats on peaks\
+  \ of eternal light reflect sunlight to PSCs\n  2. Solar arrays in PSC powered by\
+  \ reflected light\n  3. Drill into frozen regolith to depth (subsurface ice)\n \
+  \ 4. Option A - Direct heating: Heat ice directly, capture sublimed vapor\n  5.\
+  \ Option B - Heater insertion: Insert heaters into boreholes\n  6. Ice sublimes/melts,\
+  \ vapor captured in cold trap canopy\n  7. Condense water vapor to liquid or keep\
+  \ as ice\nProducts:\n  - H2O (water ice/liquid): 5.6% average, up to 8.5% in some\
+  \ locations\n  - Dry regolith: Processed material\nIce characteristics:\n  - Rock-hard\
+  \ when frozen (~40 K)\n  - Drilling difficult (similar to drilling concrete)\n \
+  \ - May be in layers or pockets (not uniformly distributed)\n  - Subsurface ice\
+  \ insulated by dry regolith overburden\nWater ice deposits:\n  - Total PSC area:\
+  \ >31,000 km² (both poles)\n  - Estimated inventory: 3-6 × 10¹² kg (3-6 billion\
+  \ tonnes)\n  - Cabeus crater (south pole): High concentration region\n  - 40+ craters\
+  \ at north pole with water potential\nEnergy challenges:\n  - PSCs permanently shadowed\
+  \ (no direct sunlight)\n  - Heliostats required: Reflect sunlight from peaks of\
+  \ eternal light\n  - Distance: ~20 km vertical and horizontal\n  - Three heliostats\
+  \ minimum for continuous coverage\nHeliostat system:\n  - Mirrors on peaks of eternal\
+  \ light (continuous solar access)\n  - Beam sunlight to PSC floor (photovoltaics\
+  \ or direct heating)\n  - Complex pointing and tracking\n  - Alternative: Nuclear\
+  \ power for PSC operations\nStoichiometry: 1000 kg frozen regolith → 56 kg water\
+  \ ice (5.6%)\nComparison to volatile extraction:\n  - Polar ice: 5.6% H2O by mass\n\
+  \  - Regolith volatiles: 0.046% H by mass (~0.041% H2O equivalent)\n  - Polar ice\
+  \ ~140x higher water concentration\nAdvantages: Much higher concentration than regolith\
+  \ volatiles\nLarge total inventory (billions of tonnes)\nDirect water extraction\
+  \ (not just H)\nDisadvantages: Extreme environment (40 K, permanently dark)\nComplex\
+  \ infrastructure (heliostats, drilling, heating)\nRugged terrain (SPA basin: 11\
+  \ km elevation changes)\nDistance from potential base sites (peaks of eternal light)\n\
+  Lunar context: Critical water source for life support\nHydrogen for reduction processes\
+  \ (ilmenite, etc.)\nOxygen via electrolysis\nPropellant/oxidizer (though wasteful\
+  \ of scarce resource)\nSustainability concern: Burning H2/O2 as propellant unsustainable\n\
+  Better uses: Life support recycling, chemical processes\nAlternative propulsion:\
+  \ Solar-electric, electromagnetic launchers\n"

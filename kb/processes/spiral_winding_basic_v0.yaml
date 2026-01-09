@@ -2,21 +2,22 @@ id: spiral_winding_basic_v0
 kind: process
 name: Spiral winding (basic)
 layer_tags:
-  - layer_6
+- layer_6
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.4
   unit: kWh
-  notes: "Winding motor and tooling"
+  notes: Winding motor and tooling
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Setup and winding cycle"
-notes: "Basic spiral winding operation for flexible ducting or tubing; placeholder parameters."
+  notes: Setup and winding cycle
+notes: Basic spiral winding operation for flexible ducting or tubing; placeholder
+  parameters.
 process_type: batch

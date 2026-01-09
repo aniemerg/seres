@@ -5,14 +5,17 @@ layer_tags:
 - layer_3
 inputs: []
 outputs:
-  - item_id: cleaning_solvent_or_detergent_v0
-    qty: 1.0
-    unit: kg
+- item_id: cleaning_solvent_or_detergent_v0
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.1
-  unit: hr
+  qty: 1.0
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2

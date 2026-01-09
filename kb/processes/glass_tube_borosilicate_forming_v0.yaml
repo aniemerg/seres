@@ -3,17 +3,17 @@ kind: process
 name: Form borosilicate glass tube blank v0
 process_type: batch
 inputs:
-  - item_id: molten_glass
-    qty: 0.02
-    unit: kg
+- item_id: molten_glass
+  qty: 0.02
+  unit: kg
 outputs:
-  - item_id: glass_tube_borosilicate
-    qty: 0.02
-    unit: kg
+- item_id: glass_tube_borosilicate
+  qty: 0.02
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -21,4 +21,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Form borosilicate glass tube blank from molten glass; placeholder energy/time."
+notes: Form borosilicate glass tube blank from molten glass; placeholder energy/time.

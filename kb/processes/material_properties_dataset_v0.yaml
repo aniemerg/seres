@@ -3,23 +3,24 @@ kind: process
 name: Material properties dataset generation v0
 process_type: batch
 inputs:
-  - item_id: test_samples
-    qty: 0.5
-    unit: kg
+- item_id: test_samples
+  qty: 0.5
+  unit: kg
 outputs:
 - item_id: material_properties_v0
   qty: 1.0
   unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Testing and data collection energy"
+  notes: Testing and data collection energy
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Placeholder process to generate material_properties_v0 dataset; used to resolve no_recipe gap."
+notes: Placeholder process to generate material_properties_v0 dataset; used to resolve
+  no_recipe gap.

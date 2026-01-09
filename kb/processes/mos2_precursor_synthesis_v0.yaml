@@ -6,14 +6,14 @@ layer_tags:
 - layer_5
 inputs: []
 outputs:
-  - item_id: mos2_precursor_v0
-    qty: 1.0
-    unit: kg
+- item_id: mos2_precursor_v0
+  qty: 1.0
+  unit: kg
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.3
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
@@ -21,5 +21,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: |-
-  Seed precursor production path for MoS2 precursor; placeholder for MoS2 precursor route. Allows modeling to proceed until chemistry is defined.
+notes: Seed precursor production path for MoS2 precursor; placeholder for MoS2 precursor
+  route. Allows modeling to proceed until chemistry is defined.

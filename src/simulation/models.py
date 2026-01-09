@@ -75,6 +75,8 @@ class ProcessCompleteEvent(Event):
     """Process completed."""
     type: Literal["process_complete"] = "process_complete"
     process_id: str
+    process_run_id: Optional[str] = None  # Runtime process instance ID
+    recipe_run_id: Optional[str] = None  # Recipe run ID if part of a recipe
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this process
 

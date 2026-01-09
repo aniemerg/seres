@@ -3,26 +3,27 @@ kind: process
 process_type: batch
 name: Space frame structure fabrication (v0)
 inputs:
-  - item_id: aluminum_tube_stock
-    qty: 60.0
-    unit: kg
+- item_id: aluminum_tube_stock
+  qty: 60.0
+  unit: kg
 outputs:
-  - item_id: space_frame_structure_v0
-    qty: 1.0
-    unit: unit
+- item_id: space_frame_structure_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 15.0
   unit: kWh
-  notes: "Placeholder energy for space frame fabrication from aluminum stock"
+  notes: Placeholder energy for space frame fabrication from aluminum stock
 time_model:
   type: batch
   hr_per_batch: 8.0
-notes: "Placeholder space frame fabrication from aluminum tube stock; refines BOM and process chain later as details emerge."
+notes: Placeholder space frame fabrication from aluminum tube stock; refines BOM and
+  process chain later as details emerge.

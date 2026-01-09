@@ -13,8 +13,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: chemical_reactor_heated_v0
   qty: 1
   unit: count
@@ -30,11 +30,18 @@ time_model:
   type: batch
   hr_per_batch: 8.0
   notes: Multi-step extraction process
-notes: |
-  Selenium extraction from sulfide ores (often as byproduct of copper/sulfur processing).
+notes: 'Selenium extraction from sulfide ores (often as byproduct of copper/sulfur
+  processing).
+
   Source: docs/paper_reviews/ISRU-sensors_missing_tech.md
+
   Process: Roast sulfide ore → Selenium dioxide → Reduction to elemental Se → Purification
+
   Lunar availability: Trace amounts in sulfide minerals
+
   Primary use: Photodiodes and photosensitive detectors
+
   Typical yield: Seed data placeholder; adjust as needed.
+
+  '
 process_type: batch

@@ -3,17 +3,17 @@ kind: process
 name: Steel scrap refining
 process_type: batch
 inputs:
-  - item_id: steel_scrap_v0
-    qty: 1.0
-    unit: kg
+- item_id: steel_scrap_v0
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: steel_scrap_refined_v0
-    qty: 1.0
-    unit: kg
+- item_id: steel_scrap_refined_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: refining_furnace
-    qty: 1.0
-    unit: hr
+- machine_id: refining_furnace
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 4.0
@@ -21,4 +21,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Refining raw steel scrap into refined steel scrap suitable for casting and forming."
+notes: Refining raw steel scrap into refined steel scrap suitable for casting and
+  forming.

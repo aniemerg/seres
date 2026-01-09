@@ -2,23 +2,23 @@ id: nickel_grid_electrode_assembly_v0
 name: Nickel grid electrode assembly v0
 kind: process
 inputs:
-  - item_id: nickel_wire_fine
-    qty: 0.4
-    unit: kg
-  - item_id: nickel_mesh_sheet_material
-    qty: 0.6
-    unit: kg
+- item_id: nickel_wire_fine
+  qty: 0.4
+  unit: kg
+- item_id: nickel_mesh_sheet_material
+  qty: 0.6
+  unit: kg
 outputs:
-  - item_id: nickel_grid_electrode_v0
-    qty: 1.0
-    unit: kg
+- item_id: nickel_grid_electrode_v0
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 6.0
@@ -26,5 +26,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Assembles nickel wire and mesh sheet into a nickel grid electrode for vacuum tube applications. Placeholder parameters; refine with BOM."
+notes: Assembles nickel wire and mesh sheet into a nickel grid electrode for vacuum
+  tube applications. Placeholder parameters; refine with BOM.
 process_type: batch

@@ -19,8 +19,8 @@ outputs:
   unit: each
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: strain_gauge_bonding_station_v0
   qty: 1
   unit: count
@@ -34,11 +34,19 @@ time_model:
   hr_per_batch: 1.0
   notes: Surface prep, application, alignment, curing
 process_type: batch
-notes: |
-  Process for bonding strain gauges to test surfaces for structural monitoring.
+notes: 'Process for bonding strain gauges to test surfaces for structural monitoring.
+
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0 (seed file)
+
   Method: Adhesive bonding of foil strain gauge to cleaned surface
+
   Steps: Surface cleaning, adhesive application, gauge placement, curing
+
   Applications: Structural health monitoring, load testing, calibration
+
   Curing: Room temperature or low-heat accelerated cure
-  Critical for: Validating structural designs, monitoring self-replicating system health
+
+  Critical for: Validating structural designs, monitoring self-replicating system
+  health
+
+  '

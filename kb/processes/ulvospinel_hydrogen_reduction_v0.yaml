@@ -24,8 +24,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -41,21 +41,16 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Reduction time in fluidized bed at temperature
-notes: |
-  Hydrogen reduction of ulvospinel spinel mineral to extract iron and titanium oxide.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: Fe2TiO4 + H2 → TiO2 + 2Fe + H2O
-  Temperature: 900-1000°C
-  Process: Fluidized bed or packed bed reactor
-  Similar to ilmenite reduction but different stoichiometry
-  Ulvospinel (Fe2TiO4) is a spinel mineral found in lunar mare basalts
-  Product is sponge iron mixed with rutile powder
-  Separation: Mechanical grinding/milling then magnetic separation
-  Or further heating to 1600°C to tap molten iron from TiO2
-  Water by-product is electrolyzed to recycle H2:
-    2H2O → 2H2 + O2 (electrolysis)
-  Hydrogen recycled continuously; net oxygen production
-  Stoichiometry: Fe2TiO4 (223.6 g/mol) + H2 (2g) → 2Fe (111.6g) + TiO2 (79.9g) + H2O (18g)
-  Mass fractions from ore: 49.2% Fe, 35.3% TiO2, 8.0% H2O, requires 0.89% H2 input
-  Advantages: Lower temperature than pyrolysis, simple chemistry
-  Common process, similar to ilmenite reduction
+notes: "Hydrogen reduction of ulvospinel spinel mineral to extract iron and titanium\
+  \ oxide.\nSource: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\n\
+  Reaction: Fe2TiO4 + H2 → TiO2 + 2Fe + H2O\nTemperature: 900-1000°C\nProcess: Fluidized\
+  \ bed or packed bed reactor\nSimilar to ilmenite reduction but different stoichiometry\n\
+  Ulvospinel (Fe2TiO4) is a spinel mineral found in lunar mare basalts\nProduct is\
+  \ sponge iron mixed with rutile powder\nSeparation: Mechanical grinding/milling\
+  \ then magnetic separation\nOr further heating to 1600°C to tap molten iron from\
+  \ TiO2\nWater by-product is electrolyzed to recycle H2:\n  2H2O → 2H2 + O2 (electrolysis)\n\
+  Hydrogen recycled continuously; net oxygen production\nStoichiometry: Fe2TiO4 (223.6\
+  \ g/mol) + H2 (2g) → 2Fe (111.6g) + TiO2 (79.9g) + H2O (18g)\nMass fractions from\
+  \ ore: 49.2% Fe, 35.3% TiO2, 8.0% H2O, requires 0.89% H2 input\nAdvantages: Lower\
+  \ temperature than pyrolysis, simple chemistry\nCommon process, similar to ilmenite\
+  \ reduction\n"

@@ -13,8 +13,8 @@ outputs:
   unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: vacuum_pump_station
   qty: 1
   unit: count
@@ -31,8 +31,13 @@ time_model:
   hr_per_batch: 1.0
   notes: Mount base, evacuate, seal-off
 process_type: batch
-notes: |
-  Final assembly step for vacuum tubes: mount tube to base (socket), evacuate envelope to high vacuum,
+notes: 'Final assembly step for vacuum tubes: mount tube to base (socket), evacuate
+  envelope to high vacuum,
+
   flame seal the evacuation port. Activates getter if present.
+
   Source: docs/paper_reviews/photolithoautotroph_missing_tech.md
+
   Critical for achieving and maintaining vacuum inside tube envelope.
+
+  '

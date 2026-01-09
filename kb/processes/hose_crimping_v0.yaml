@@ -16,12 +16,12 @@ outputs:
   unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.75
-  unit: hr
+  qty: 1
+  unit: count
   notes: Manual crimping operation
 - machine_id: hose_crimper_manual
-  qty: 0.75
-  unit: hr
+  qty: 1
+  unit: count
   notes: Manual hydraulic crimping tool (3 kg part, not 150 kg station)
 energy_model:
   type: fixed_per_batch
@@ -32,5 +32,6 @@ time_model:
   type: batch
   hr_per_batch: 0.75
   notes: Single crimp operation for one hose
-notes: "Crimp fittings onto hose ends using a hydraulic crimping tool. Produces a crimped hose assembly."
+notes: Crimp fittings onto hose ends using a hydraulic crimping tool. Produces a crimped
+  hose assembly.
 process_type: batch

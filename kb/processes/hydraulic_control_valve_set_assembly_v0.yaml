@@ -6,12 +6,12 @@ layer_tags:
 - layer_6
 - layer_7
 inputs:
-  - item_id: valve_body_machined
-    qty: 2.0
-    unit: kg
-  - item_id: valve_components_kit
-    qty: 0.5
-    unit: kg
+- item_id: valve_body_machined
+  qty: 2.0
+  unit: kg
+- item_id: valve_components_kit
+  qty: 0.5
+  unit: kg
 outputs:
 - item_id: hydraulic_control_valve_set
   qty: 1.0
@@ -19,8 +19,8 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.6
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -28,4 +28,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: "Assemble hydraulic control valve set from machined bodies and subcomponents. Placeholder for modeling."
+notes: Assemble hydraulic control valve set from machined bodies and subcomponents.
+  Placeholder for modeling.

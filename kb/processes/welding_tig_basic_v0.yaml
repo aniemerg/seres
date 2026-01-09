@@ -8,8 +8,8 @@ inputs: []
 outputs: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: welding_tig_unit_v0
   qty: 1
   unit: count
@@ -26,12 +26,18 @@ time_model:
   hr_per_batch: 1.5
   notes: Setup, cleaning, tack welding, full welding passes with filler rod, post-weld
     inspection
-notes: |
-  TIG (Tungsten Inert Gas) welding process for precision joining.
+notes: 'TIG (Tungsten Inert Gas) welding process for precision joining.
+
   Also known as GTAW (Gas Tungsten Arc Welding).
+
   Used for stainless steel, aluminum, and critical high-quality welds.
+
   Produces clean, precise welds with minimal spatter.
+
   Slower than MIG but produces superior weld quality.
+
   Required for leak-tight joints in pressure vessels and cryogenic equipment.
+
+  '
 process_type: batch
 is_template: true

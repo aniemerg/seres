@@ -3,9 +3,9 @@ kind: process
 name: Magnetic tape reel fabrication
 process_type: batch
 inputs:
-  - item_id: polymer_feedstock
-    qty: 0.2
-    unit: kg
+- item_id: polymer_feedstock
+  qty: 0.2
+  unit: kg
 outputs:
 - item_id: magnetic_tape_reel
   qty: 1.0
@@ -13,13 +13,13 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.05
   unit: kWh
-  notes: "Molding/forming energy for reel"
+  notes: Molding/forming energy for reel
 time_model:
   type: batch
   hr_per_batch: 0.25

@@ -2,51 +2,52 @@ id: component_placement_process_v0
 name: Component placement process v0
 kind: process
 layer_tags:
-  - layer_7
-  - layer_8
+- layer_7
+- layer_8
 inputs:
-  - item_id: pcb_paste_applied
-    qty: 0.045
-    unit: kg
-  - item_id: microcontroller_ic_generic
-    qty: 1.0
-    unit: each
-  - item_id: capacitor_ceramic_generic
-    qty: 10.0
-    unit: each
-  - item_id: resistor_chip_smd
-    qty: 15.0
-    unit: each
-  - item_id: voltage_regulator_ic
-    qty: 1.0
-    unit: each
-  - item_id: crystal_oscillator_timing
-    qty: 1.0
-    unit: each
-  - item_id: connector_pin_header_v0
-    qty: 4.0
-    unit: each
+- item_id: pcb_paste_applied
+  qty: 0.045
+  unit: kg
+- item_id: microcontroller_ic_generic
+  qty: 1.0
+  unit: each
+- item_id: capacitor_ceramic_generic
+  qty: 10.0
+  unit: each
+- item_id: resistor_chip_smd
+  qty: 15.0
+  unit: each
+- item_id: voltage_regulator_ic
+  qty: 1.0
+  unit: each
+- item_id: crystal_oscillator_timing
+  qty: 1.0
+  unit: each
+- item_id: connector_pin_header_v0
+  qty: 4.0
+  unit: each
 outputs:
-  - item_id: pcb_components_placed
-    qty: 0.15
-    unit: kg
+- item_id: pcb_components_placed
+  qty: 0.15
+  unit: kg
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: hr
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: assembly_station
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 6.67
   unit: kWh/kg
   scaling_basis: pcb_components_placed
-  notes: "1 kWh per board (0.15 kg) = 6.67 kWh/kg for component placement"
+  notes: 1 kWh per board (0.15 kg) = 6.67 kWh/kg for component placement
 time_model:
   type: linear_rate
   rate: 0.15
   rate_unit: kg/hr
   scaling_basis: pcb_components_placed
-notes: Placement of SMT components on PCB for embedded board assembly; follows standard SMT workflow.
+notes: Placement of SMT components on PCB for embedded board assembly; follows standard
+  SMT workflow.
 process_type: continuous

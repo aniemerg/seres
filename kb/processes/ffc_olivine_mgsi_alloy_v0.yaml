@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: ffc_reactor_unit_v0
   qty: 1
   unit: count
@@ -47,78 +47,45 @@ time_model:
   type: batch
   hr_per_batch: 10.0
   notes: Direct reduction of olivine to alloy
-notes: |
-  Direct FFC Cambridge reduction of olivine to produce MgSi mongrel alloy.
-  Source: FFC-process-for-deep-ISRU.txt
-  Reaction: Mg2SiO4 → MgSi alloy + O2 (via electrolysis in CaCl2)
-  Temperature: 900-1100°C (molten CaCl2 electrolyte)
-  Voltage: 2.5-3V typical
-  Process: Direct electrolytic reduction without preprocessing
-  Purpose: Simple one-step alloy production from crater olivine deposits
-  Alloying additive and specialty applications
-  Process details:
-    1. Olivine ore (Mg2SiO4 forsterite or Fe2SiO4 fayalite)
-    2. Powder, compact, and sinter into cathode pellet
-    3. Immerse in molten CaCl2 electrolyte at 900-1100°C
-    4. Apply voltage (graphite anode)
-    5. MgSi alloy (or MgFeSi for fayalite) forms at cathode
-    6. Oxygen released at anode (CO/CO2 with graphite)
-    7. Remove alloy sponge, process as needed
-  Products:
-    - MgSi alloy: Magnesium-silicon alloy
-    - O2 (oxygen): High yield (45.5% by mass)
-  Alloy composition (from forsterite Mg2SiO4):
-    - Mg: 34.5% by mass
-    - Si: 19.9% by mass
-    - Total metal: 54.5% of olivine mass
-  For fayalite (Fe2SiO4):
-    - Fe: 49.2%, Si: 19.9%, total: 69.1%
-  Mg2Si compound:
-    - Intermetallic compound, not mechanical mixture
-    - Used as strengthening agent in aluminum alloys
-    - Improves strength, hardness, creep resistance
-  Applications:
-    - Aluminum alloying: Small Mg2Si additions strengthen Al
-    - Thermoelectric materials: Mg2Si has thermoelectric properties
-    - Semiconductor: Mg2Si is narrow-gap semiconductor
-    - Pyrotechnic fuel: Mg + Si + oxidizer (ground into powder)
-    - Hydrogen storage: Mg2Si can absorb/release H2
-  Stoichiometry: Mg2SiO4 (140.7g) → 2Mg (48.6g) + Si (28.1g) + 2 O2 (64g)
-  Total metals: 76.7g (54.5%), oxygen: 45.5%
-  Fe contamination tolerance:
-    - Most lunar olivine is mixed Mg-Fe composition
-    - FeTiO3 olivine → MgFeSi alloy
-    - Fe may or may not be problematic depending on use
-  Advantages: Direct single-step process
-    High oxygen yield (45.5%)
-    Olivine common in crater ejecta and some maria
-    Mg2Si useful as Al alloy additive
-    Multiple potential applications
-  Disadvantages: "Mongrel" alloy with uncertain properties
-    Olivine less abundant than anorthite or ilmenite
-    Mg vacuum outgassing concern (though in alloy form)
-    Composition varies with olivine Mg/Fe ratio
-    Not suitable for pure Mg or pure Si applications
-  Comparison to pure metal routes:
-    - Pidgeon: Mg2SiO4 + 2CaO → 2Mg + Ca2SiO4 (pure Mg vapor)
-    - Carbothermal: Mg2SiO4 + 2C → 2Mg + SiO + 2CO (pure components)
-    - FFC pure: Separate MgO and SiO2, then FFC each
-    - FFC mongrel: Direct (simplest but mixed alloy)
-  Lunar context: Olivine in crater regions and some maria
-    Not as abundant as anorthite or ilmenite
-    Suitable for specialty applications
-    Mg2Si valuable for Al alloy strengthening
-  Magnesium concerns:
-    - Mg outgasses in vacuum (vapor pressure)
-    - Problematic for structural use in vacuum
-    - Better suited for enclosed environments
-    - Or alloying additions where Mg is minority component
-  Iron-bearing olivine (fayalite):
-    - More common than pure forsterite
-    - Fe2SiO4 → FeSi alloy + O2 (iron silicide)
-    - May be more useful due to Fe inclusion
-  Potential: Investigate MgSi and MgFeSi alloy properties
-    Mechanical strength, stability in vacuum
-    Thermoelectric performance
-    Hydrogen storage capacity
-    Applications in lunar context
+notes: "Direct FFC Cambridge reduction of olivine to produce MgSi mongrel alloy.\n\
+  Source: FFC-process-for-deep-ISRU.txt\nReaction: Mg2SiO4 → MgSi alloy + O2 (via\
+  \ electrolysis in CaCl2)\nTemperature: 900-1100°C (molten CaCl2 electrolyte)\nVoltage:\
+  \ 2.5-3V typical\nProcess: Direct electrolytic reduction without preprocessing\n\
+  Purpose: Simple one-step alloy production from crater olivine deposits\nAlloying\
+  \ additive and specialty applications\nProcess details:\n  1. Olivine ore (Mg2SiO4\
+  \ forsterite or Fe2SiO4 fayalite)\n  2. Powder, compact, and sinter into cathode\
+  \ pellet\n  3. Immerse in molten CaCl2 electrolyte at 900-1100°C\n  4. Apply voltage\
+  \ (graphite anode)\n  5. MgSi alloy (or MgFeSi for fayalite) forms at cathode\n\
+  \  6. Oxygen released at anode (CO/CO2 with graphite)\n  7. Remove alloy sponge,\
+  \ process as needed\nProducts:\n  - MgSi alloy: Magnesium-silicon alloy\n  - O2\
+  \ (oxygen): High yield (45.5% by mass)\nAlloy composition (from forsterite Mg2SiO4):\n\
+  \  - Mg: 34.5% by mass\n  - Si: 19.9% by mass\n  - Total metal: 54.5% of olivine\
+  \ mass\nFor fayalite (Fe2SiO4):\n  - Fe: 49.2%, Si: 19.9%, total: 69.1%\nMg2Si compound:\n\
+  \  - Intermetallic compound, not mechanical mixture\n  - Used as strengthening agent\
+  \ in aluminum alloys\n  - Improves strength, hardness, creep resistance\nApplications:\n\
+  \  - Aluminum alloying: Small Mg2Si additions strengthen Al\n  - Thermoelectric\
+  \ materials: Mg2Si has thermoelectric properties\n  - Semiconductor: Mg2Si is narrow-gap\
+  \ semiconductor\n  - Pyrotechnic fuel: Mg + Si + oxidizer (ground into powder)\n\
+  \  - Hydrogen storage: Mg2Si can absorb/release H2\nStoichiometry: Mg2SiO4 (140.7g)\
+  \ → 2Mg (48.6g) + Si (28.1g) + 2 O2 (64g)\nTotal metals: 76.7g (54.5%), oxygen:\
+  \ 45.5%\nFe contamination tolerance:\n  - Most lunar olivine is mixed Mg-Fe composition\n\
+  \  - FeTiO3 olivine → MgFeSi alloy\n  - Fe may or may not be problematic depending\
+  \ on use\nAdvantages: Direct single-step process\n  High oxygen yield (45.5%)\n\
+  \  Olivine common in crater ejecta and some maria\n  Mg2Si useful as Al alloy additive\n\
+  \  Multiple potential applications\nDisadvantages: \"Mongrel\" alloy with uncertain\
+  \ properties\n  Olivine less abundant than anorthite or ilmenite\n  Mg vacuum outgassing\
+  \ concern (though in alloy form)\n  Composition varies with olivine Mg/Fe ratio\n\
+  \  Not suitable for pure Mg or pure Si applications\nComparison to pure metal routes:\n\
+  \  - Pidgeon: Mg2SiO4 + 2CaO → 2Mg + Ca2SiO4 (pure Mg vapor)\n  - Carbothermal:\
+  \ Mg2SiO4 + 2C → 2Mg + SiO + 2CO (pure components)\n  - FFC pure: Separate MgO and\
+  \ SiO2, then FFC each\n  - FFC mongrel: Direct (simplest but mixed alloy)\nLunar\
+  \ context: Olivine in crater regions and some maria\n  Not as abundant as anorthite\
+  \ or ilmenite\n  Suitable for specialty applications\n  Mg2Si valuable for Al alloy\
+  \ strengthening\nMagnesium concerns:\n  - Mg outgasses in vacuum (vapor pressure)\n\
+  \  - Problematic for structural use in vacuum\n  - Better suited for enclosed environments\n\
+  \  - Or alloying additions where Mg is minority component\nIron-bearing olivine\
+  \ (fayalite):\n  - More common than pure forsterite\n  - Fe2SiO4 → FeSi alloy +\
+  \ O2 (iron silicide)\n  - May be more useful due to Fe inclusion\nPotential: Investigate\
+  \ MgSi and MgFeSi alloy properties\n  Mechanical strength, stability in vacuum\n\
+  \  Thermoelectric performance\n  Hydrogen storage capacity\n  Applications in lunar\
+  \ context\n"

@@ -14,14 +14,14 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: furnace_basic
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.5
   unit: kWh/kg
   scaling_basis: carbon_reductant
-  notes: "Combustion energy per kg of carbon input"
+  notes: Combustion energy per kg of carbon input
 time_model:
   type: linear_rate
   rate: 2.0

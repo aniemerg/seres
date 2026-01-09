@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: contact_material_application_station_v0
   qty: 1
   unit: count
@@ -31,17 +31,12 @@ time_model:
   type: batch
   hr_per_batch: 1.5
   notes: Application and cooling time
-notes: |
-  Process for applying contact material (silver, tungsten, etc.) to electrical contacts.
-  Source: Referenced by relay_electromagnetic_v0 recipe
-  Methods:
-    - Resistance welding (fast, good for high-volume)
-    - Brazing (stronger bond, high reliability)
-    - Riveting (mechanical attachment)
-    - Cladding (rolling or explosive bonding)
-  Contact materials:
-    - Silver: Low resistance, good for low-power contacts
-    - Silver-cadmium oxide: Arc resistant, good for medium power
-    - Tungsten: Very high temperature and arc resistance
-  Applications: Relays, switches, contactors, circuit breakers
-  Quality: Contact resistance, bond strength, arc erosion resistance
+notes: "Process for applying contact material (silver, tungsten, etc.) to electrical\
+  \ contacts.\nSource: Referenced by relay_electromagnetic_v0 recipe\nMethods:\n \
+  \ - Resistance welding (fast, good for high-volume)\n  - Brazing (stronger bond,\
+  \ high reliability)\n  - Riveting (mechanical attachment)\n  - Cladding (rolling\
+  \ or explosive bonding)\nContact materials:\n  - Silver: Low resistance, good for\
+  \ low-power contacts\n  - Silver-cadmium oxide: Arc resistant, good for medium power\n\
+  \  - Tungsten: Very high temperature and arc resistance\nApplications: Relays, switches,\
+  \ contactors, circuit breakers\nQuality: Contact resistance, bond strength, arc\
+  \ erosion resistance\n"

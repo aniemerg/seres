@@ -9,8 +9,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 time_model:
   type: linear_rate
   rate: 100
@@ -21,10 +21,16 @@ energy_model:
   value: 0.05
   unit: kWh/kg
   scaling_basis: regolith_lunar_mare
-notes: |
-  Simple regolith collection for simulation bootstrapping.
+notes: 'Simple regolith collection for simulation bootstrapping.
+
   Basic surface collection of lunar regolith using a labor bot.
+
   Free resource collection - no inputs consumed.
+
   Assumes mare regolith (iron-rich) is available at surface.
+
   Rate: 100 kg/hr per labor bot.
+
   Created to fill KB gap for base builder simulation.
+
+  '

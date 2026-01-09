@@ -3,27 +3,28 @@ kind: process
 name: 3D-Printed Motor Assembly (ironPLA)
 process_type: batch
 inputs:
-  - item_id: sma_motor_components
-    qty: 1.0
-    unit: unit
-  - item_id: motor_bearing_3d_printed_v0
-    qty: 1.0
-    unit: unit
+- item_id: sma_motor_components
+  qty: 1.0
+  unit: unit
+- item_id: motor_bearing_3d_printed_v0
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: 3d_printed_motor_ironpla_v0
-    qty: 1.0
-    unit: unit
+- item_id: 3d_printed_motor_ironpla_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
   unit: kWh
-  notes: "Assembly energy for 3D-printed motor components (1 unit per batch)"
+  notes: Assembly energy for 3D-printed motor components (1 unit per batch)
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Short assembly and testing pass"
-notes: "Assembles the 3D-printed motor from SMA components and printed bearings into a complete unit."
+  notes: Short assembly and testing pass
+notes: Assembles the 3D-printed motor from SMA components and printed bearings into
+  a complete unit.

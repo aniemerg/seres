@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -47,32 +47,24 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Carbochlorination and vapor condensation
-notes: |
-  Carbochlorination of anorthite to produce metal chlorides for downstream processing.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: CaO + Al2O3 + 2SiO2 + 8C + 8Cl2 → CaCl2 + 8CO + 2SiCl4 + 2AlCl3
-  Or decomposed: CaAl2Si2O8 + 8C + 8Cl2 → CaCl2 + 2AlCl3 + 2SiCl4 + 8CO
-  Temperature: 770°C in fluidized bed reactor
-  Process: Chlorination of oxide minerals with carbon co-reductant
-  Products (all valuable):
-    - CaCl2 (calcium chloride): FFC Cambridge electrolyte replenishment
-    - SiCl4 (silicon tetrachloride): Siemens process feedstock (pure Si)
-    - AlCl3 (aluminum chloride): Alcoa electrolytic process feedstock (pure Al)
-    - CO (carbon monoxide): Recycled for Mond/carbonyl processes
-  Chlorine recycling:
-    - From AlCl3: Alcoa electrolysis regenerates Cl2
-    - From SiCl4: Siemens process regenerates HCl → Cl2 via chloralkali
-  Product separation: Fractional distillation by boiling point
-    - SiCl4: 57°C (condenses easily)
-    - AlCl3: 180°C sublimes (collected separately)
-    - CaCl2: 1935°C (remains solid, separated mechanically)
-  Advantages: Intermediate temperature (vs carbothermal at 1650°C+)
-  All products useful for metal extraction
-  Chlorine fully recycled through downstream processes
-  Disadvantages: Requires Cl2 supply (from NaCl via chloralkali)
-  Complex multi-product separation
-  Corrosive chlorine handling
-  Stoichiometry: CaAl2Si2O8 (278.2g) + 8C (96g) + 8Cl2 (568g) → CaCl2 (111g) + 2AlCl3 (267g) + 2SiCl4 (340g) + 8CO (224g)
-  Mass fractions from ore: 39.9% CaCl2, 48.0% AlCl3, 61.1% SiCl4, 40.2% CO
-  Similar to Alcoa intermediate chloride process for aluminum
-  Well-suited for lunar ISRU with NaCl import and recycling
+notes: "Carbochlorination of anorthite to produce metal chlorides for downstream processing.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nReaction:\
+  \ CaO + Al2O3 + 2SiO2 + 8C + 8Cl2 → CaCl2 + 8CO + 2SiCl4 + 2AlCl3\nOr decomposed:\
+  \ CaAl2Si2O8 + 8C + 8Cl2 → CaCl2 + 2AlCl3 + 2SiCl4 + 8CO\nTemperature: 770°C in\
+  \ fluidized bed reactor\nProcess: Chlorination of oxide minerals with carbon co-reductant\n\
+  Products (all valuable):\n  - CaCl2 (calcium chloride): FFC Cambridge electrolyte\
+  \ replenishment\n  - SiCl4 (silicon tetrachloride): Siemens process feedstock (pure\
+  \ Si)\n  - AlCl3 (aluminum chloride): Alcoa electrolytic process feedstock (pure\
+  \ Al)\n  - CO (carbon monoxide): Recycled for Mond/carbonyl processes\nChlorine\
+  \ recycling:\n  - From AlCl3: Alcoa electrolysis regenerates Cl2\n  - From SiCl4:\
+  \ Siemens process regenerates HCl → Cl2 via chloralkali\nProduct separation: Fractional\
+  \ distillation by boiling point\n  - SiCl4: 57°C (condenses easily)\n  - AlCl3:\
+  \ 180°C sublimes (collected separately)\n  - CaCl2: 1935°C (remains solid, separated\
+  \ mechanically)\nAdvantages: Intermediate temperature (vs carbothermal at 1650°C+)\n\
+  All products useful for metal extraction\nChlorine fully recycled through downstream\
+  \ processes\nDisadvantages: Requires Cl2 supply (from NaCl via chloralkali)\nComplex\
+  \ multi-product separation\nCorrosive chlorine handling\nStoichiometry: CaAl2Si2O8\
+  \ (278.2g) + 8C (96g) + 8Cl2 (568g) → CaCl2 (111g) + 2AlCl3 (267g) + 2SiCl4 (340g)\
+  \ + 8CO (224g)\nMass fractions from ore: 39.9% CaCl2, 48.0% AlCl3, 61.1% SiCl4,\
+  \ 40.2% CO\nSimilar to Alcoa intermediate chloride process for aluminum\nWell-suited\
+  \ for lunar ISRU with NaCl import and recycling\n"

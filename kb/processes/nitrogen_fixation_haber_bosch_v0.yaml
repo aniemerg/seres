@@ -16,8 +16,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: haber_bosch_reactor_v0
   qty: 1
   unit: count
@@ -31,17 +31,30 @@ time_model:
   hr_per_batch: 8.0
   notes: Catalyst bed operation time for batch
 process_type: batch
-notes: |
-  Haber-Bosch process for ammonia synthesis from nitrogen and hydrogen.
+notes: 'Haber-Bosch process for ammonia synthesis from nitrogen and hydrogen.
+
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0
+
   Reaction: N2 + 3H2 ⇌ 2NH3 (exothermic, equilibrium)
+
   Conditions: 400-500°C, 150-300 bar pressure
+
   Catalyst: Iron with K2O, Al2O3, CaO promoters
+
   Hydrogen source: Water electrolysis or steam reforming
+
   Nitrogen source: Air separation (cryogenic or PSA)
+
   Equilibrium: Favored by high pressure, low temperature
+
   Yield: 10-20% per pass typical, unreacted gases recycled
+
   Applications: Fertilizer production, chemical feedstock, propellant
+
   Lunar context: Critical for agriculture, life support, chemical industry
+
   Energy intensive: 1-2% of world energy consumption on Earth
+
   Critical for: Long-term settlement, agricultural capability, chemical synthesis
+
+  '

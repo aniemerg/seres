@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 8.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: packed_bed_distillation_v0
   qty: 1
   unit: count
@@ -34,69 +34,43 @@ time_model:
   type: batch
   hr_per_batch: 24.0
   notes: Very slow cryogenic fractionation at near absolute zero
-notes: |
-  Cryogenic separation of helium-3 from helium-4 for potential fusion fuel.
-  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt
-  Process: Extreme cryogenic fractional distillation
-  Temperature: <4.2 K (near absolute zero, -269°C)
-  3He concentration: 4-30 ppb in regolith (parts per billion)
-  Purpose: Separate valuable 3He isotope for future nuclear fusion
-  3He extraction released with other volatiles (thermal processing)
-  Process details:
-    1. Mixed He isotopes from regolith volatile extraction
-    2. Cool to <4.2 K (He boiling point for 4He)
-    3. Fractional distillation exploits boiling point difference:
-       - 3He boiling point: 3.19 K
-       - 4He boiling point: 4.22 K
-       - ΔT = 1.03 K difference
-    4. Multiple distillation stages for separation
-    5. Collect 3He fraction (earlier to boil/condense)
-    6. 4He remains as bulk fraction
-    7. Store 3He in extreme cryogenic vessels (<4 K)
-  Products:
-    - 3He (helium-3): Potential nuclear fusion fuel
-    - 4He (helium-4): Inert gas, leak detection, cryogenic applications
-  3He concentration in regolith:
-    - Average: 4 ppb (parts per billion)
-    - High-Ti mare: Up to 10-30 ppb (mature regolith)
-    - Mare Tranquillitatis, Oceanus Procellarum highest
-    - Total lunar inventory: ~2 × 10⁸ kg (200 million kg)
-  Collection requirements:
-    - 40 m² at 1m depth → 1g 3He (plus 8.2 kg carbon)
-    - 40 km² at 1m depth → 1 metric tonne 3He
-    - Massive scale required for significant quantities
-  3He nuclear fusion:
-    - Reaction: D + 3He → 4He + p + 18.4 MeV (deuterium-helium-3)
-    - Advantages: Aneutronic (no neutron radiation)
-    - Less radioactive waste than D-T fusion
-    - Disadvantages: Higher ignition temperature than D-T
-    - D-T fusion not yet commercial, D-3He even further away
-  Stoichiometry: 1 kg mixed He → 14 μg 3He, 999.986 mg 4He (at 14 ppb)
-  At mature high-Ti mare (30 ppb): ~30 μg 3He per kg He
-  4He applications:
-    - Inert atmosphere for welding, crystal growth
-    - Leak detection (small molecule, easily detected)
-    - Cryogenic applications (superfluid helium)
-    - Balloon/airship gas (Earth applications)
-  Advantages: 3He extremely valuable for future fusion
-    Released automatically with volatile extraction
-    Separation technology well-established (terrestrial)
-    4He by-product also useful
-  Disadvantages: Extremely low concentration (ppb level)
-    Requires cryogenic storage at <4 K (challenging)
-    Nuclear fusion still not commercially viable
-    D-3He fusion even more difficult than D-T
-    Massive processing required for useful quantities
-  Lunar context: 3He touted as "lunar resource" for future
-    But fusion technology very far from reality
-    Should 3He be husbanded for future generations?
-    Or consumed/lost during volatile processing?
-    Ethical question: Waste vs. extreme cryogenic storage
-  Storage requirements: <4 K cryogenic for indefinite storage
-    - Extreme energy cost for refrigeration
-    - Boil-off losses without perfect insulation
-    - May not be practical for long-term lunar storage
-  Recommendation (per source papers): Capture and store if feasible
-    But don't let 3He recovery block volatile extraction
-    Volatiles (C, N, H) more immediately critical
-    3He as bonus/future resource, not primary driver
+notes: "Cryogenic separation of helium-3 from helium-4 for potential fusion fuel.\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt\nProcess:\
+  \ Extreme cryogenic fractional distillation\nTemperature: <4.2 K (near absolute\
+  \ zero, -269°C)\n3He concentration: 4-30 ppb in regolith (parts per billion)\nPurpose:\
+  \ Separate valuable 3He isotope for future nuclear fusion\n3He extraction released\
+  \ with other volatiles (thermal processing)\nProcess details:\n  1. Mixed He isotopes\
+  \ from regolith volatile extraction\n  2. Cool to <4.2 K (He boiling point for 4He)\n\
+  \  3. Fractional distillation exploits boiling point difference:\n     - 3He boiling\
+  \ point: 3.19 K\n     - 4He boiling point: 4.22 K\n     - ΔT = 1.03 K difference\n\
+  \  4. Multiple distillation stages for separation\n  5. Collect 3He fraction (earlier\
+  \ to boil/condense)\n  6. 4He remains as bulk fraction\n  7. Store 3He in extreme\
+  \ cryogenic vessels (<4 K)\nProducts:\n  - 3He (helium-3): Potential nuclear fusion\
+  \ fuel\n  - 4He (helium-4): Inert gas, leak detection, cryogenic applications\n\
+  3He concentration in regolith:\n  - Average: 4 ppb (parts per billion)\n  - High-Ti\
+  \ mare: Up to 10-30 ppb (mature regolith)\n  - Mare Tranquillitatis, Oceanus Procellarum\
+  \ highest\n  - Total lunar inventory: ~2 × 10⁸ kg (200 million kg)\nCollection requirements:\n\
+  \  - 40 m² at 1m depth → 1g 3He (plus 8.2 kg carbon)\n  - 40 km² at 1m depth → 1\
+  \ metric tonne 3He\n  - Massive scale required for significant quantities\n3He nuclear\
+  \ fusion:\n  - Reaction: D + 3He → 4He + p + 18.4 MeV (deuterium-helium-3)\n  -\
+  \ Advantages: Aneutronic (no neutron radiation)\n  - Less radioactive waste than\
+  \ D-T fusion\n  - Disadvantages: Higher ignition temperature than D-T\n  - D-T fusion\
+  \ not yet commercial, D-3He even further away\nStoichiometry: 1 kg mixed He → 14\
+  \ μg 3He, 999.986 mg 4He (at 14 ppb)\nAt mature high-Ti mare (30 ppb): ~30 μg 3He\
+  \ per kg He\n4He applications:\n  - Inert atmosphere for welding, crystal growth\n\
+  \  - Leak detection (small molecule, easily detected)\n  - Cryogenic applications\
+  \ (superfluid helium)\n  - Balloon/airship gas (Earth applications)\nAdvantages:\
+  \ 3He extremely valuable for future fusion\n  Released automatically with volatile\
+  \ extraction\n  Separation technology well-established (terrestrial)\n  4He by-product\
+  \ also useful\nDisadvantages: Extremely low concentration (ppb level)\n  Requires\
+  \ cryogenic storage at <4 K (challenging)\n  Nuclear fusion still not commercially\
+  \ viable\n  D-3He fusion even more difficult than D-T\n  Massive processing required\
+  \ for useful quantities\nLunar context: 3He touted as \"lunar resource\" for future\n\
+  \  But fusion technology very far from reality\n  Should 3He be husbanded for future\
+  \ generations?\n  Or consumed/lost during volatile processing?\n  Ethical question:\
+  \ Waste vs. extreme cryogenic storage\nStorage requirements: <4 K cryogenic for\
+  \ indefinite storage\n  - Extreme energy cost for refrigeration\n  - Boil-off losses\
+  \ without perfect insulation\n  - May not be practical for long-term lunar storage\n\
+  Recommendation (per source papers): Capture and store if feasible\n  But don't let\
+  \ 3He recovery block volatile extraction\n  Volatiles (C, N, H) more immediately\
+  \ critical\n  3He as bonus/future resource, not primary driver\n"

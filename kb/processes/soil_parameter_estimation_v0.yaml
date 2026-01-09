@@ -5,9 +5,9 @@ process_type: batch
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
@@ -15,4 +15,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.75
-notes: "Placeholder for soil parameter estimation (wheel sinkage and slip analysis); seed-derived from paper_reviews_dec2024_comprehensive_v0. This entry resolves the referenced_only gap in the seed workflow."
+notes: Placeholder for soil parameter estimation (wheel sinkage and slip analysis);
+  seed-derived from paper_reviews_dec2024_comprehensive_v0. This entry resolves the
+  referenced_only gap in the seed workflow.

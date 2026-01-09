@@ -9,17 +9,18 @@ outputs:
   qty: 1.0
   unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.0
   unit: kWh
-notes: |-
-  Placeholder process to enable a recipe for oxygen_collection_system_ffc_v0.
+notes: 'Placeholder process to enable a recipe for oxygen_collection_system_ffc_v0.
+
   This is not a real artifact; replace with a proper unit operation when data
-  becomes available.
+
+  becomes available.'
 time_model:
   type: batch
   hr_per_batch: 0.5

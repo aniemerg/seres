@@ -19,8 +19,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: vacuum_chamber
   qty: 1
   unit: count
@@ -37,49 +37,31 @@ time_model:
   hr_per_batch: 48.0
   notes: Slow CVD deposition over 1-2 days
 process_type: batch
-notes: |
-  Siemens process stage 2: Chemical vapor deposition of ultra-pure polysilicon.
-  Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt
-  Reaction: SiHCl3 + H2 → Si + 3HCl (at 1150°C)
-  Temperature: 1150°C (resistive heating of silicon seed rods)
-  Process: Chemical vapor deposition (CVD) on heated silicon rods
-  Purpose: Deposit ultra-pure polysilicon for electronics and solar cells
-  Second stage of Siemens process
-  Process details:
-    1. SiHCl3 vapor (from stage 1) mixed with excess H2
-    2. Flow over resistively-heated silicon seed rods at 1150°C
-    3. SiHCl3 thermally decomposes, depositing Si on rods
-    4. HCl gas released, condensed, and recycled to stage 1
-    5. Rods grow in diameter over 24-48 hours
-    6. Break rods into chunks (polysilicon)
-  Products:
-    - Polysilicon (ultra-pure, 9-11 nines purity)
-    - HCl gas (recycled to stage 1 chlorination)
-  Silicon seed rods:
-    - Initial thin rods of metallurgical or polysilicon
-    - Electrically heated by passing current through them
-    - Si deposits on surface, growing rod diameter
-    - Can grow from ~8mm to 150-200mm diameter
-  Stoichiometry: SiHCl3 (135.5g) + H2 (2g) → Si (28g) + 3HCl (109.5g)
-  Mass fractions: 20.7% Si, 80.7% HCl from SiHCl3 input
-  HCl recycling: All HCl returned to stage 1
-  Net process: Metallurgical Si → Ultra-pure polysilicon (via closed loop)
-  Purity achieved: 99.9999999% to 99.999999999% (9N to 11N)
-  Impurity levels: <1 ppb (part per billion) for most elements
-  Advantages: Highest purity silicon available
-  Complete HCl recycling (closed loop with stage 1)
-  Standard industrial process (well-proven)
-  Suitable for both electronics and solar applications
-  Disadvantages: Extremely energy intensive (150-200 kWh/kg total)
-  Very slow (1-2 days per batch)
-  High temperature requirement
-  Batch process (not continuous)
-  Applications:
-    - Electronics: Czochralski → single crystal → wafers → ICs
-    - Solar cells: High-efficiency (20-25%) photovoltaics
-    - Sensors: Photodetectors, pressure sensors, MEMS
-  Lunar/space context: Critical for in-situ electronics manufacturing
-  Solar cells for power generation
-  Sensors and computing for automation
-  Alternative: Float-zone refining for even higher purity (12N)
-  Next step: Czochralski or float-zone for single-crystal silicon
+notes: "Siemens process stage 2: Chemical vapor deposition of ultra-pure polysilicon.\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, Power-on-the-Moon-using-ISRU.txt\nReaction:\
+  \ SiHCl3 + H2 → Si + 3HCl (at 1150°C)\nTemperature: 1150°C (resistive heating of\
+  \ silicon seed rods)\nProcess: Chemical vapor deposition (CVD) on heated silicon\
+  \ rods\nPurpose: Deposit ultra-pure polysilicon for electronics and solar cells\n\
+  Second stage of Siemens process\nProcess details:\n  1. SiHCl3 vapor (from stage\
+  \ 1) mixed with excess H2\n  2. Flow over resistively-heated silicon seed rods at\
+  \ 1150°C\n  3. SiHCl3 thermally decomposes, depositing Si on rods\n  4. HCl gas\
+  \ released, condensed, and recycled to stage 1\n  5. Rods grow in diameter over\
+  \ 24-48 hours\n  6. Break rods into chunks (polysilicon)\nProducts:\n  - Polysilicon\
+  \ (ultra-pure, 9-11 nines purity)\n  - HCl gas (recycled to stage 1 chlorination)\n\
+  Silicon seed rods:\n  - Initial thin rods of metallurgical or polysilicon\n  - Electrically\
+  \ heated by passing current through them\n  - Si deposits on surface, growing rod\
+  \ diameter\n  - Can grow from ~8mm to 150-200mm diameter\nStoichiometry: SiHCl3\
+  \ (135.5g) + H2 (2g) → Si (28g) + 3HCl (109.5g)\nMass fractions: 20.7% Si, 80.7%\
+  \ HCl from SiHCl3 input\nHCl recycling: All HCl returned to stage 1\nNet process:\
+  \ Metallurgical Si → Ultra-pure polysilicon (via closed loop)\nPurity achieved:\
+  \ 99.9999999% to 99.999999999% (9N to 11N)\nImpurity levels: <1 ppb (part per billion)\
+  \ for most elements\nAdvantages: Highest purity silicon available\nComplete HCl\
+  \ recycling (closed loop with stage 1)\nStandard industrial process (well-proven)\n\
+  Suitable for both electronics and solar applications\nDisadvantages: Extremely energy\
+  \ intensive (150-200 kWh/kg total)\nVery slow (1-2 days per batch)\nHigh temperature\
+  \ requirement\nBatch process (not continuous)\nApplications:\n  - Electronics: Czochralski\
+  \ → single crystal → wafers → ICs\n  - Solar cells: High-efficiency (20-25%) photovoltaics\n\
+  \  - Sensors: Photodetectors, pressure sensors, MEMS\nLunar/space context: Critical\
+  \ for in-situ electronics manufacturing\nSolar cells for power generation\nSensors\
+  \ and computing for automation\nAlternative: Float-zone refining for even higher\
+  \ purity (12N)\nNext step: Czochralski or float-zone for single-crystal silicon\n"

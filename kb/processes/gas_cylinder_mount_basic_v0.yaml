@@ -3,23 +3,27 @@ name: Gas cylinder mount fabrication (basic)
 kind: process
 process_type: batch
 inputs:
-  - item_id: steel_stock
-    qty: 2.0
-    unit: kg
+- item_id: steel_stock
+  qty: 2.0
+  unit: kg
 outputs:
-  - item_id: gas_cylinder_mount
-    qty: 1.0
-    unit: unit
+- item_id: gas_cylinder_mount
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
   unit: kWh
-  notes: "Fabrication energy per mount"
+  notes: Fabrication energy per mount
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Placeholder process to fabricate gas cylinder mount from stock; refine with actual process data."
+notes: Placeholder process to fabricate gas cylinder mount from stock; refine with
+  actual process data.

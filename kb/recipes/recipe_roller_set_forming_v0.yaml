@@ -1,0 +1,61 @@
+id: recipe_roller_set_forming_v0
+produces_id: roller_set_forming
+produces_qty: 1.0
+produces_unit: unit
+target_item_id: roller_set_forming
+variant_id: v0
+inputs:
+  - item_id: steel_stock_bar_or_billet
+    qty: 160.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: roller_set_forming
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock_bar_or_billet
+        qty: 160.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 155.0
+        unit: kg
+    est_time_hr: 8.0
+    machine_hours: 8.0
+    labor_hours: 3.0
+    notes: "Machine large roller cylinders, shafts, and mounting blocks from steel billet."
+  - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 155.0
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 152.0
+        unit: kg
+    est_time_hr: 5.0
+    machine_hours: 5.0
+    labor_hours: 2.0
+    notes: "Grind roller surfaces to smooth, uniform finish for metal forming."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 152.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: roller_set_forming
+        qty: 1.0
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Install heavy bearings and mount rollers in frame with adjustable spacing for sheet forming."
+assumptions: Heavy steel roller set for sheet metal forming operations. Includes drive roller, backing roller, and support structure with precision bearings.
+notes: Manufacturing of forming roller set for metal rolling and sheet forming equipment. Total fabrication time ~16 hours. Precision ground surfaces critical for uniform metal forming.

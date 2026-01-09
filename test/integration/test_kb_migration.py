@@ -30,6 +30,7 @@ def write_yaml(path: Path, data: dict) -> None:
 def test_process_with_linear_rate_time_model(kb_loader, sim_dir):
     """Test duration calculation for continuous process."""
     engine = SimulationEngine("linear_rate", kb_loader, sim_dir)
+    engine.import_item("labor_bot_general_v0", 1.0, "unit")
 
     # regolith_mining_highlands_v0: 100 kg output / 12.5 kg/hr = 8 hr
     result = engine.start_process(
@@ -48,6 +49,9 @@ def test_process_with_batch_time_model(kb_loader, sim_dir):
     # Process takes 1.0 kg input, produces 0.95 kg output
     # To get 1.0 kg output, need 1.0/0.95 = ~1.053 kg input
     engine.import_item("metal_sheet_or_plate", 2.0, "kg")
+    engine.import_item("labor_bot_general_v0", 1.0, "unit")
+    engine.import_item("hydraulic_press", 1.0, "count")
+    engine.import_item("plate_rolling_mill", 1.0, "count")
 
     # metal_forming_basic_v0: hr_per_batch = 1.5
     result = engine.start_process(
@@ -63,6 +67,7 @@ def test_process_with_batch_time_model(kb_loader, sim_dir):
 def test_energy_calculation_per_unit(kb_loader, sim_dir):
     """Test energy calculation with per_unit model."""
     engine = SimulationEngine("energy_per_unit", kb_loader, sim_dir)
+    engine.import_item("labor_bot_general_v0", 1.0, "unit")
 
     result = engine.start_process(
         process_id="regolith_mining_highlands_v0",
@@ -81,6 +86,9 @@ def test_energy_calculation_fixed_per_batch(kb_loader, sim_dir):
     """Test energy calculation with fixed_per_batch model."""
     engine = SimulationEngine("energy_fixed", kb_loader, sim_dir)
     engine.import_item("metal_sheet_or_plate", 1.0, "kg")
+    engine.import_item("labor_bot_general_v0", 1.0, "unit")
+    engine.import_item("hydraulic_press", 1.0, "count")
+    engine.import_item("plate_rolling_mill", 1.0, "count")
 
     result = engine.start_process(
         process_id="metal_forming_basic_v0",
@@ -196,6 +204,7 @@ def test_full_bootstrap_chain(kb_loader, sim_dir):
 
     # Bootstrap imports
     engine.import_item("labor_bot_general_v0", 2.0, "unit")
+    engine.import_item("chemical_reactor_unit_v0", 1.0, "count")
     engine.import_item("magnesium_metal_v0", 2.31, "kg")
     engine.import_item("methyl_chloride_gas", 1.0, "kg")
 

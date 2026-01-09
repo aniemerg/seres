@@ -3,26 +3,26 @@ kind: process
 name: Copper welding electrode fabrication
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: copper_rod_ingot
-    qty: 0.3
-    unit: kg
+- item_id: copper_rod_ingot
+  qty: 0.3
+  unit: kg
 outputs:
-  - item_id: electrode_copper_welding
-    qty: 0.3
-    unit: kg
+- item_id: electrode_copper_welding
+  qty: 0.3
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.3
   unit: kWh
-  notes: "Forging/shaping energy for 0.3 kg batch"
+  notes: Forging/shaping energy for 0.3 kg batch
 time_model:
   type: batch
   hr_per_batch: 0.5
-  notes: "Forging/shaping of copper electrode"
-notes: "Fabricate welding electrode copper from copper rod ingot; produces copper electrode"
+  notes: Forging/shaping of copper electrode
+notes: Fabricate welding electrode copper from copper rod ingot; produces copper electrode

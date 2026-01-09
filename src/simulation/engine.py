@@ -17,6 +17,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from copy import deepcopy
@@ -38,6 +39,10 @@ from src.simulation.models import (
     ErrorEvent,
     KBGapEvent,
 )
+from src.simulation.scheduler import Scheduler, EventType
+from src.simulation.machine_reservations import MachineReservationManager
+from src.simulation.recipe_orchestrator import RecipeOrchestrator
+from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.calculations import calculate_duration, calculate_energy
@@ -80,6 +85,104 @@ class SimulationEngine:
         # Only log sim start for NEW simulations
         # (load() will skip this if loading existing)
         self._is_new_sim = not self.log_file.exists()
+
+        # ADR-020 components
+        self.scheduler = Scheduler()
+        self.orchestrator = RecipeOrchestrator(self.scheduler)
+        # Reservation manager will be initialized when machines are available
+        self.reservation_manager = None
+        # Enable ADR-020 mode (event-driven scheduling, machine reservations, recipe orchestration)
+        self.adr020_mode = True
+
+        # Register event handler for input validation (must happen during event processing)
+        self.scheduler.register_handler(
+            EventType.PROCESS_START,
+            self._validate_process_inputs
+        )
+
+    def _validate_process_inputs(self, event) -> None:
+        """
+        Event handler to validate inputs when process starts.
+
+        This runs during event processing, after the process is added to active_processes.
+        If inputs aren't available, cancel the process.
+        """
+        process_run_id = event.data.get('process_run_id')
+        if not process_run_id:
+            return
+
+        # Get process run from active processes
+        if process_run_id not in self.scheduler.active_processes:
+            return
+
+        process_run = self.scheduler.active_processes[process_run_id]
+
+        # Get process definition to check inputs
+        process_model = self.kb.get_process(process_run.process_id)
+        if not process_model:
+            return
+
+        if hasattr(process_model, 'model_dump'):
+            process_def = process_model.model_dump()
+        else:
+            process_def = process_model
+
+        # Try to consume inputs from inventory
+        inputs_available = True
+        consumed_inputs = []
+
+        for inp in process_def.get("inputs", []):
+            item_id = inp.get("item_id")
+            unit = inp.get("unit", "kg")
+            if item_id in process_run.inputs_consumed:
+                qty = process_run.inputs_consumed[item_id]
+                success = self.subtract_from_inventory(item_id, qty, unit)
+                if success:
+                    consumed_inputs.append((item_id, qty, unit))
+                else:
+                    inputs_available = False
+                    break
+
+        if not inputs_available:
+            # Rollback any inputs we already consumed
+            for item_id, qty, unit in consumed_inputs:
+                self.add_to_inventory(item_id, qty, unit)
+
+            # Cancel this process (removes from active_processes and event queue)
+            self.scheduler.cancel_process(process_run_id)
+
+    def _init_reservation_manager(self) -> None:
+        """Initialize reservation manager with current machine inventory."""
+        if self.reservation_manager is not None:
+            return  # Already initialized
+
+        machine_capacities = {}
+        for item_id, inv_item in self.state.inventory.items():
+            item_model = self.kb.get_item(item_id)
+            if item_model:
+                item_def = item_model.model_dump() if hasattr(item_model, 'model_dump') else item_model
+                if item_def.get('kind') == 'machine':
+                    if inv_item.unit in ('count', 'unit'):
+                        machine_capacities[item_id] = inv_item.quantity
+
+        self.reservation_manager = MachineReservationManager(machine_capacities)
+
+    def _update_machine_capacities(self) -> None:
+        """Update reservation manager with current machine inventory."""
+        if self.reservation_manager is None:
+            self._init_reservation_manager()
+            return
+
+        machine_capacities = {}
+        for item_id, inv_item in self.state.inventory.items():
+            item_model = self.kb.get_item(item_id)
+            if item_model:
+                item_def = item_model.model_dump() if hasattr(item_model, 'model_dump') else item_model
+                if item_def.get('kind') == 'machine':
+                    if inv_item.unit in ('count', 'unit'):
+                        machine_capacities[item_id] = inv_item.quantity
+
+        self.reservation_manager.machine_capacities = machine_capacities
 
     # ========================================================================
     # State queries
@@ -295,28 +398,26 @@ class SimulationEngine:
         scale: float = 1.0,
         duration_hours: Optional[float] = None,
         output_quantity: Optional[float] = None,
-        output_unit: Optional[str] = None
+        output_unit: Optional[str] = None,
+        start_time: Optional[float] = None,
+        recipe_run_id: Optional[str] = None,
+        step_index: Optional[int] = None,
     ) -> Dict[str, Any]:
         """
-        Start a process.
+        Start a process using ADR-020 event-driven scheduling.
 
-        Supports two modes per ADR-012:
-        1. Agent provides duration_hours (traditional, backward compatible)
-        2. Agent provides output_quantity + output_unit, duration calculated
-
-        Steps:
-        1. Validate process exists in KB
-        2. Run runtime validation (ADR-017)
-        3. Check required machines exist
-        4. Calculate duration (if not provided)
-        5. Calculate inputs needed (base × scale)
-        6. Validate inputs available
-        7. Reserve inputs (subtract from inventory)
-        8. Schedule completion
-        9. Log event
+        Args:
+            process_id: Process definition ID
+            scale: Process scale factor
+            duration_hours: Process duration (or calculated from output)
+            output_quantity: Requested output quantity (for duration calculation)
+            output_unit: Requested output unit (for duration calculation)
+            start_time: When to start (default: now)
+            recipe_run_id: Parent recipe run ID (if part of recipe)
+            step_index: Step index in recipe (if applicable)
 
         Returns:
-            {"success": bool, "message": str, ...}
+            Dict with success, process_run_id, and scheduling info
         """
         # Validate process exists
         process_model = self.kb.get_process(process_id)
@@ -324,36 +425,34 @@ class SimulationEngine:
             return {
                 "success": False,
                 "error": "kb_gap",
-                "gap_type": "missing_process",
                 "message": f"Process '{process_id}' not found in KB",
             }
 
-        # Runtime validation (ADR-017)
-        validation_issues = validate_process(process_model, self.converter)
+        process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
+
+        # ADR-020 validation
+        validation_issues = validate_process_adr020(process_def, self.kb.items)
         errors = [i for i in validation_issues if i.level == ValidationLevel.ERROR]
 
         if errors:
             return {
                 "success": False,
                 "error": "validation_error",
-                "message": f"Process '{process_id}' failed runtime validation: {errors[0].message}",
+                "message": f"Process '{process_id}' failed ADR-020 validation: {errors[0].message}",
                 "validation_errors": [
                     {"rule": e.rule, "message": e.message} for e in errors
                 ],
             }
 
-        # Convert to dict for compatibility
-        process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
+        # Generate unique process_run_id
+        process_run_id = str(uuid.uuid4())
 
-        # Track whether duration was calculated or provided
+        # Calculate duration if not provided
         duration_calculated = False
-
-        # Determine duration (Mode 1: provided, Mode 2: calculated)
         if duration_hours is None:
             if output_quantity is not None and output_unit is not None:
-                # Mode 2: Calculate duration from output quantity
                 try:
-                    # Build input quantities dict for calculation (needed for input-based scaling)
+                    # Build input quantities dict
                     inputs_dict = {}
                     for inp in process_def.get("inputs", []):
                         inp_id = inp.get("item_id")
@@ -361,7 +460,7 @@ class SimulationEngine:
                         unit = inp.get("unit", "kg")
                         inputs_dict[inp_id] = Quantity(item_id=inp_id, qty=base_qty * scale, unit=unit)
 
-                    # Build output quantities dict for calculation
+                    # Build output quantities dict
                     outputs = {}
                     for outp in process_def.get("outputs", []):
                         outp_id = outp.get("item_id")
@@ -369,30 +468,16 @@ class SimulationEngine:
 
                     duration_hours = calculate_duration(
                         process_model,
-                        inputs=inputs_dict,  # Now includes actual inputs
+                        inputs=inputs_dict,
                         outputs=outputs,
                         converter=self.converter
                     )
                     duration_calculated = True
 
-                    # Calculate effective scale factor from requested output
-                    # Find the first output to determine scale (assumes all outputs scale together)
+                    # Calculate effective scale from requested output
                     first_output = process_def.get("outputs", [])[0] if process_def.get("outputs") else None
                     if first_output:
                         base_output_qty = first_output.get("quantity") or first_output.get("qty", 1)
-                        base_output_unit = first_output.get("unit", "kg")
-
-                        # Convert requested output_quantity to base unit if needed
-                        if base_output_unit != output_unit:
-                            output_item_id = first_output.get("item_id")
-                            converted_qty = self.converter.convert(
-                                output_quantity, output_unit, base_output_unit, output_item_id
-                            )
-                            if converted_qty is not None:
-                                output_quantity = converted_qty
-                                output_unit = base_output_unit
-
-                        # Calculate scale factor: requested / base
                         scale = output_quantity / base_output_qty if base_output_qty > 0 else 1.0
 
                 except Exception as e:
@@ -408,39 +493,19 @@ class SimulationEngine:
                     "message": "Must provide either duration_hours or (output_quantity + output_unit)",
                 }
 
-        # Check required machines (existence + availability)
-        required_counts = self._collect_required_machines_from_process_def(process_def)
-        for machine_id, count in required_counts.items():
-            available = self._get_machine_available_count(machine_id)
-            if available < count:
-                return {
-                    "success": False,
-                    "error": "missing_machine",
-                    "message": (
-                        f"Required machine '{machine_id}' not available "
-                        f"(need {count}, available {available})"
-                    ),
-                }
-
         # Calculate inputs needed
         inputs = process_def.get("inputs", [])
         inputs_consumed = {}
 
         for inp in inputs:
             requested_item_id = inp.get("item_id")
-            # Handle both 'quantity' and 'qty' fields
             base_quantity = inp.get("quantity") or inp.get("qty", 0)
             unit = inp.get("unit", "kg")
-
-            # Scale quantity
             needed_quantity = base_quantity * scale
 
-            # Try to find matching item in inventory
-            # First try exact match, then try material_class match
+            # Try exact match first
             actual_item_id = None
-
             if self.has_item(requested_item_id, needed_quantity, unit):
-                # Exact match found
                 actual_item_id = requested_item_id
             else:
                 # Try material_class matching
@@ -449,7 +514,6 @@ class SimulationEngine:
                     requested_item_def = requested_item_model.model_dump() if hasattr(requested_item_model, 'model_dump') else requested_item_model
                     requested_class = requested_item_def.get("material_class")
                     if requested_class:
-                        # Search inventory for items with matching material_class
                         for inv_item_id in self.state.inventory.keys():
                             inv_item_model = self.kb.get_item(inv_item_id)
                             if inv_item_model:
@@ -459,7 +523,6 @@ class SimulationEngine:
                                         actual_item_id = inv_item_id
                                         break
 
-            # Check if we found a suitable item
             if actual_item_id is None:
                 return {
                     "success": False,
@@ -471,69 +534,118 @@ class SimulationEngine:
                 quantity=needed_quantity, unit=unit
             )
 
-        # Subtract inputs from inventory
-        for item_id, inv_item in inputs_consumed.items():
-            self.subtract_from_inventory(item_id, inv_item.quantity, inv_item.unit)
-
         # Calculate outputs
         outputs = process_def.get("outputs", [])
         outputs_pending = {}
 
         for outp in outputs:
             item_id = outp.get("item_id")
-            # Handle both 'quantity' and 'qty' fields
             base_quantity = outp.get("quantity") or outp.get("qty", 0)
             unit = outp.get("unit", "kg")
-
-            # Scale quantity
             output_quantity = base_quantity * scale
 
             outputs_pending[item_id] = InventoryItem(
                 quantity=output_quantity, unit=unit
             )
 
-        # Create active process
-        ends_at = self.state.current_time_hours + duration_hours
-        active_proc = ActiveProcess(
+        # Collect machine requirements
+        machines_reserved = {}
+        for req in process_def.get('resource_requirements', []):
+            machine_id = req.get('machine_id')
+            qty = req.get('qty', 1.0)
+            if machine_id:
+                machines_reserved[machine_id] = qty
+
+        # Update machine capacities from current inventory
+        self._update_machine_capacities()
+
+        # Determine start time
+        if start_time is None:
+            start_time = self.scheduler.current_time
+
+        end_time = start_time + duration_hours
+
+        # Add machine reservations
+        for machine_id, qty in machines_reserved.items():
+            unit = 'count'  # default
+            for req in process_def.get('resource_requirements', []):
+                if req.get('machine_id') == machine_id:
+                    unit = req.get('unit', 'count')
+                    break
+
+            success = self.reservation_manager.add_reservation(
+                machine_id=machine_id,
+                process_run_id=process_run_id,
+                start_time=start_time,
+                end_time=end_time,
+                qty=qty,
+                unit=unit,
+            )
+
+            if not success:
+                # Cleanup reservations already made
+                self.reservation_manager.remove_reservation(process_run_id)
+                return {
+                    "success": False,
+                    "error": "machine_conflict",
+                    "message": f"Machine '{machine_id}' not available at time {start_time}-{end_time}h",
+                }
+
+            # For partial (unit: hr) reservations, schedule a release event
+            if unit == 'hr' and qty < duration_hours:
+                release_time = start_time + qty
+                self.scheduler.schedule_machine_release(
+                    process_run_id=process_run_id,
+                    machine_id=machine_id,
+                    release_time=release_time,
+                    qty=qty,
+                )
+
+        # Convert InventoryItem objects to simple dicts for scheduler
+        inputs_dict = {
+            item_id: inv_item.quantity
+            for item_id, inv_item in inputs_consumed.items()
+        }
+        outputs_dict = {
+            item_id: inv_item.quantity
+            for item_id, inv_item in outputs_pending.items()
+        }
+
+        # Schedule with ADR-020 scheduler
+        self.scheduler.schedule_process_start(
+            process_run_id=process_run_id,
             process_id=process_id,
+            start_time=start_time,
+            duration_hours=duration_hours,
             scale=scale,
-            started_at=self.state.current_time_hours,
-            ends_at=ends_at,
-            inputs_consumed=inputs_consumed,
-            outputs_pending=outputs_pending,
-            machines_reserved=required_counts,
+            inputs_consumed=inputs_dict,
+            outputs_pending=outputs_dict,
+            machines_reserved=machines_reserved,
+            recipe_run_id=recipe_run_id,
+            step_index=step_index,
         )
 
-        self._reserve_machines(required_counts)
-        self.state.active_processes.append(active_proc)
-
-        # Log event
+        # Log the process scheduling immediately so it can be reconstructed on load
         self._log_event(
             ProcessStartEvent(
                 process_id=process_id,
                 scale=scale,
-                ends_at=ends_at,
-            )
-        )
-
-        # Save state snapshot so active process persists
-        self._log_event(
-            StateSnapshotEvent(
-                time_hours=self.state.current_time_hours,
-                inventory=self.state.inventory,
-                active_processes=self.state.active_processes,
-                machines_built=self.state.machines_built,
-                machines_in_use=self.state.machines_in_use,
-                total_energy_kwh=self.state.total_energy_kwh,
+                ends_at=end_time,
             )
         )
 
         return {
             "success": True,
-            "message": f"Started process '{process_id}' (scale={scale}, ends at t={ends_at}h)",
-            "ends_at": ends_at,
+            "process_run_id": process_run_id,
+            "process_id": process_id,
+            "start_time": start_time,
             "duration_hours": duration_hours,
+            "end_time": end_time,
+            "ends_at": end_time,  # For backward compatibility
             "duration_calculated": duration_calculated,
+            "inputs_consumed": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in inputs_consumed.items()},
+            "outputs_pending": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in outputs_pending.items()},
+            "machines_reserved": machines_reserved,
         }
 
     def resolve_step(self, step_def: Dict[str, Any]) -> Dict[str, Any]:
@@ -626,15 +738,25 @@ class SimulationEngine:
             # Inline mode: Step IS the process definition
             return dict(step_def)
 
-    def run_recipe(self, recipe_id: str, quantity: int) -> Dict[str, Any]:
+    def run_recipe(
+        self,
+        recipe_id: str,
+        quantity: int = 1,
+        start_time: Optional[float] = None,
+    ) -> Dict[str, Any]:
         """
-        Run a recipe to produce items.
+        Run a recipe using ADR-020 orchestration.
 
-        Similar to process but based on batch quantity.
-        Recipes define inputs/outputs per batch and duration.
+        Instead of running as a single process, schedules each step
+        based on dependencies.
+
+        Args:
+            recipe_id: Recipe definition ID
+            quantity: Number of recipe instances to run (for backward compatibility, currently ignored)
+            start_time: When recipe starts (default: now)
 
         Returns:
-            {"success": bool, "message": str, "duration_hours": float, ...}
+            Dict with success, recipe_run_id, and orchestration info
         """
         # Validate recipe exists
         recipe_model = self.kb.get_recipe(recipe_id)
@@ -642,266 +764,146 @@ class SimulationEngine:
             return {
                 "success": False,
                 "error": "kb_gap",
-                "gap_type": "missing_recipe",
                 "message": f"Recipe '{recipe_id}' not found in KB",
             }
 
-        # Convert to dict
         recipe_def = recipe_model.model_dump() if hasattr(recipe_model, 'model_dump') else recipe_model
 
-        # Resolve process steps (ADR-013: Recipe Step Processing)
-        steps = recipe_def.get("steps", [])
-        resolved_steps = [self.resolve_step(step) for step in steps]
+        # ADR-020 validation
+        validation_issues = validate_recipe_adr020(recipe_def)
+        errors = [i for i in validation_issues if i.level == ValidationLevel.ERROR]
 
-        # ADR-018: Infer inputs/outputs from resolved steps if not explicitly defined at recipe level
-        recipe_inputs = recipe_def.get("inputs", [])
-        recipe_outputs = recipe_def.get("outputs", [])
-
-        if not recipe_inputs:
-            # Infer from resolved steps - aggregate all step inputs
-            aggregated_inputs = {}
-            for step in resolved_steps:
-                for inp in step.get("inputs", []):
-                    item_id = inp.get("item_id")
-                    if item_id:
-                        # Aggregate quantities for duplicate item_ids
-                        qty = inp.get("quantity") or inp.get("qty", 0)
-                        unit = inp.get("unit", "kg")
-
-                        if item_id in aggregated_inputs:
-                            # Same item from multiple steps - add quantities
-                            aggregated_inputs[item_id]["qty"] += qty
-                        else:
-                            aggregated_inputs[item_id] = {
-                                "item_id": item_id,
-                                "qty": qty,
-                                "unit": unit
-                            }
-
-            recipe_inputs = list(aggregated_inputs.values())
-
-        # ADR-019: Infer inputs from BOM if recipe has target_item_id
-        if not recipe_inputs:
-            target_item_id = recipe_def.get("target_item_id")
-            if target_item_id:
-                bom = self.kb.get_bom(target_item_id)
-                if bom:
-                    components = bom.get("components", [])
-                    if components:
-                        # Convert BOM components to recipe input format
-                        bom_inputs = []
-                        for comp in components:
-                            item_id = comp.get("item_id")
-                            qty = comp.get("qty", 1)
-                            # Use component's unit if specified, otherwise default to "unit"
-                            unit = comp.get("unit", "unit")
-
-                            if item_id:
-                                bom_inputs.append({
-                                    "item_id": item_id,
-                                    "qty": qty,
-                                    "unit": unit
-                                })
-
-                        if bom_inputs:
-                            recipe_inputs = bom_inputs
-                            import sys
-                            print(f"⚠️  Recipe {recipe_id}: Inferred {len(bom_inputs)} inputs from BOM for {target_item_id}", file=sys.stderr)
-
-        if not recipe_outputs:
-            # Infer from resolved steps - use last step's outputs
-            if resolved_steps:
-                last_step = resolved_steps[-1]
-                recipe_outputs = last_step.get("outputs", [])
-
-        # ADR-019: Infer outputs from target_item_id if not specified
-        if not recipe_outputs:
-            target_item_id = recipe_def.get("target_item_id")
-            if target_item_id:
-                # Default: recipe produces 1 unit of target_item_id
-                recipe_outputs = [{
-                    "item_id": target_item_id,
-                    "qty": 1,
-                    "unit": "unit"
-                }]
-                import sys
-                print(f"⚠️  Recipe {recipe_id}: Inferred output {target_item_id} (qty=1)", file=sys.stderr)
-
-        # Validation: Must have inputs/outputs after inference (ADR-018, ADR-019)
-        if not recipe_inputs:
+        if errors:
             return {
                 "success": False,
                 "error": "validation_error",
-                "message": f"Recipe {recipe_id} has no inputs (neither explicit, nor inferred from steps, nor from BOM). Fix the recipe or process definitions.",
-                "recipe_id": recipe_id,
+                "message": f"Recipe '{recipe_id}' failed ADR-020 validation: {errors[0].message}",
+                "validation_errors": [
+                    {"rule": e.rule, "message": e.message} for e in errors
+                ],
             }
 
-        if not recipe_outputs:
-            return {
-                "success": False,
-                "error": "validation_error",
-                "message": f"Recipe {recipe_id} has no outputs (neither explicit, nor inferred from steps, nor from target_item_id). Fix the recipe or process definitions.",
-                "recipe_id": recipe_id,
-            }
+        if start_time is None:
+            start_time = self.scheduler.current_time
 
-        # Aggregate machine requirements from all steps
-        missing_machines = []
-        warnings = []
+        # Start recipe with orchestrator
+        recipe_run_id = self.orchestrator.start_recipe(
+            recipe_id=recipe_id,
+            recipe_dict=recipe_def,
+            target_item_id=recipe_def.get('target_item_id', 'unknown'),
+            start_time=start_time,
+        )
 
-        # Check for step resolution warnings
-        for step in resolved_steps:
-            if "_warning" in step:
-                warnings.append(step["_warning"])
+        # Schedule ready steps
+        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
 
-        # Aggregate requires_ids from all resolved steps
-        required_counts = self._collect_required_machines_from_steps(resolved_steps, recipe_def)
+        scheduled_count = 0
+        for step_idx in ready_steps:
+            recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+            step = recipe_def['steps'][step_idx]
 
-        # Check machine availability
-        for machine_id, count in required_counts.items():
-            available = self._get_machine_available_count(machine_id)
-            if available < count:
-                missing_machines.append(
-                    f"{machine_id} (need {count}, available {available})"
-                )
+            # Resolve step to apply overrides (ADR-013)
+            resolved_process = self.resolve_step(step)
 
-        # Fail if required machines are missing
-        if missing_machines:
-            return {
-                "success": False,
-                "error": "missing_machines",
-                "message": f"Required machines not available: {', '.join(missing_machines)}",
-                "missing_machines": missing_machines,
-                "recipe_id": recipe_id,
-            }
-
-        # Log other warnings (process resolution issues, etc.)
-        if warnings:
-            import sys
-            for warning in warnings:
-                print(f"⚠️  {warning}", file=sys.stderr)
-
-        # Calculate total inputs needed (per batch × quantity)
-        # Use recipe_inputs (which may be explicit or inferred) instead of recipe_def.get("inputs", [])
-        inputs = recipe_inputs
-        total_inputs = {}
-
-        for inp in inputs:
-            requested_item_id = inp.get("item_id")
-            # Handle both 'quantity' and 'qty' fields
-            per_batch = inp.get("quantity") or inp.get("qty", 0)
-            unit = inp.get("unit", "kg")
-            total_needed = per_batch * quantity
-
-            # Try to find matching item in inventory
-            # First try exact match, then try material_class match
-            actual_item_id = None
-
-            if self.has_item(requested_item_id, total_needed, unit):
-                # Exact match found
-                actual_item_id = requested_item_id
-            else:
-                # Try material_class matching
-                requested_item_model = self.kb.get_item(requested_item_id)
-                if requested_item_model:
-                    requested_item_def = requested_item_model.model_dump() if hasattr(requested_item_model, 'model_dump') else requested_item_model
-                    requested_class = requested_item_def.get("material_class")
-                    if requested_class:
-                        # Search inventory for items with matching material_class
-                        for inv_item_id in self.state.inventory.keys():
-                            inv_item_model = self.kb.get_item(inv_item_id)
-                            if inv_item_model:
-                                inv_item_def = inv_item_model.model_dump() if hasattr(inv_item_model, 'model_dump') else inv_item_model
-                                if inv_item_def.get("material_class") == requested_class:
-                                    if self.has_item(inv_item_id, total_needed, unit):
-                                        actual_item_id = inv_item_id
-                                        break
-
-            if actual_item_id is None:
+            # Get process_id from resolved process
+            process_id = resolved_process.get('id') or step.get('process_id')
+            if not process_id:
                 return {
                     "success": False,
-                    "error": "insufficient_inputs",
-                    "message": f"Insufficient {requested_item_id}: need {total_needed} {unit}",
+                    "error": "invalid_recipe",
+                    "message": f"Step {step_idx} missing process_id",
+                    "failed_step": step_idx,
                 }
 
-            total_inputs[actual_item_id] = InventoryItem(quantity=total_needed, unit=unit)
+            # Calculate duration from resolved process (respects step overrides)
+            # Get default output quantity and unit from first output
+            outputs = resolved_process.get('outputs', [])
+            output_quantity = None
+            output_unit = None
+            duration_hours = None
+            scale = 1.0
 
-        # Subtract inputs
-        for item_id, inv_item in total_inputs.items():
-            self.subtract_from_inventory(item_id, inv_item.quantity, inv_item.unit)
+            # Always try to calculate duration_hours from time_model
+            time_model = resolved_process.get('time_model', {})
+            if time_model.get('type') == 'batch':
+                duration_hours = time_model.get('hr_per_batch', 1.0)
+            elif time_model.get('type') == 'linear_rate':
+                # Need outputs to calculate from rate
+                pass
 
-        # Calculate total outputs
-        # Use recipe_outputs (which may be explicit or inferred) instead of recipe_def.get("outputs", [])
-        outputs = recipe_outputs
-        total_outputs = {}
+            if outputs:
+                first_output = outputs[0]
+                output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
+                output_unit = first_output.get('unit', 'kg')
 
-        for outp in outputs:
-            item_id = outp.get("item_id")
-            # Handle both 'quantity' and 'qty' fields
-            per_batch = outp.get("quantity") or outp.get("qty", 0)
-            unit = outp.get("unit", "kg")
-            total_output = per_batch * quantity
+                base_process = self.kb.get_process(process_id)
+                if base_process:
+                    base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
+                    base_outputs = base_def.get('outputs', [])
+                    if base_outputs:
+                        base_output = base_outputs[0]
+                        base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
+                        if base_qty:
+                            scale = output_quantity / base_qty
 
-            total_outputs[item_id] = InventoryItem(quantity=total_output, unit=unit)
+                # For linear_rate, calculate duration from outputs
+                if time_model.get('type') == 'linear_rate' and duration_hours is None:
+                    rate = time_model.get('rate', 1.0)
+                    scaling_basis = time_model.get('scaling_basis')
+                    if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
+                        # Find output with this basis
+                        for outp in outputs:
+                            if outp.get('item_id') == scaling_basis:
+                                outp_qty = outp.get('qty', outp.get('quantity', 1.0))
+                                duration_hours = outp_qty / rate if rate > 0 else 1.0
+                                break
 
-        # Get duration
-        duration = recipe_def.get("duration", 1)
-        duration_unit = recipe_def.get("duration_unit", "hours")
+            # Fallback if duration still not set
+            if duration_hours is None:
+                duration_hours = 1.0
 
-        # Convert duration to hours
-        if duration_unit == "minutes":
-            duration_hours = duration / 60.0
-        elif duration_unit == "days":
-            duration_hours = duration * 24.0
-        else:  # hours
-            duration_hours = float(duration)
-
-        # Total duration (assuming batches run sequentially for now)
-        total_duration_hours = duration_hours * quantity
-
-        # Create active process for recipe
-        ends_at = self.state.current_time_hours + total_duration_hours
-        active_proc = ActiveProcess(
-            process_id=f"recipe:{recipe_id}",
-            scale=quantity,
-            started_at=self.state.current_time_hours,
-            ends_at=ends_at,
-            inputs_consumed=total_inputs,
-            outputs_pending=total_outputs,
-            machines_reserved=required_counts,
-        )
-
-        self._reserve_machines(required_counts)
-        self.state.active_processes.append(active_proc)
-
-        # Log event
-        self._log_event(
-            RecipeStartEvent(
-                recipe_id=recipe_id,
-                quantity=quantity,
-                duration_hours=total_duration_hours,
+            # Schedule step process with calculated duration
+            result = self.start_process(
+                process_id=process_id,
+                scale=scale,
+                start_time=start_time,
+                duration_hours=duration_hours,
+                output_quantity=output_quantity,
+                output_unit=output_unit,
+                recipe_run_id=recipe_run_id,
+                step_index=step_idx,
             )
-        )
 
-        # Save state snapshot so active process persists
-        self._log_event(
-            StateSnapshotEvent(
-                time_hours=self.state.current_time_hours,
-                inventory=self.state.inventory,
-                active_processes=self.state.active_processes,
-                machines_built=self.state.machines_built,
-                machines_in_use=self.state.machines_in_use,
-                total_energy_kwh=self.state.total_energy_kwh,
-            )
-        )
+            if result['success']:
+                self.orchestrator.schedule_step(
+                    recipe_run_id,
+                    step_idx,
+                    result['process_run_id']
+                )
+                scheduled_count += 1
+            elif result.get('error') == 'machine_conflict':
+                # Machine conflict - don't fail recipe, just skip this step for now
+                # It will be retried later when machines become available
+                # Don't mark step as failed, leave it pending
+                continue
+            else:
+                # Other failure - cancel recipe
+                self.orchestrator.cancel_recipe(recipe_run_id)
+                return {
+                    "success": False,
+                    "error": "step_scheduling_failed",
+                    "message": f"Failed to schedule step {step_idx}: {result.get('message')}",
+                    "failed_step": step_idx,
+                }
 
         return {
             "success": True,
-            "message": f"Started recipe '{recipe_id}' × {quantity} (ends at t={ends_at}h)",
-            "total_steps": len(resolved_steps),
-            "total_duration_hours": total_duration_hours,
-            "ends_at": ends_at,
+            "recipe_run_id": recipe_run_id,
+            "recipe_id": recipe_id,
+            "start_time": start_time,
+            "total_steps": len(recipe_def['steps']),
+            "scheduled_steps": scheduled_count,
         }
-
     def build_machine(self, machine_id: str) -> Dict[str, Any]:
         """
         Build a machine from BOM components.
@@ -1167,7 +1169,7 @@ class SimulationEngine:
 
     def preview_step(self, duration_hours: float) -> Dict[str, Any]:
         """
-        Preview what would happen if time advanced.
+        Preview what would happen if time advanced (ADR-020 version).
 
         Does NOT commit changes.
 
@@ -1178,19 +1180,35 @@ class SimulationEngine:
                 "errors": [str, ...] if any
             }
         """
-        new_time = self.state.current_time_hours + duration_hours
+        new_time = self.scheduler.current_time + duration_hours
 
-        # Find processes that would complete
+        # Find processes that would complete in ADR-020 scheduler
         completing = []
-        for proc in self.state.active_processes:
-            if proc.ends_at <= new_time:
+        for process_run in self.scheduler.active_processes.values():
+            if process_run.end_time <= new_time:
+                # Get process definition to reconstruct outputs with units
+                process_model = self.kb.get_process(process_run.process_id)
+                outputs_dict = {}
+
+                if process_model:
+                    if hasattr(process_model, 'model_dump'):
+                        process_def = process_model.model_dump()
+                    else:
+                        process_def = process_model
+
+                    for outp in process_def.get("outputs", []):
+                        item_id = outp.get("item_id")
+                        unit = outp.get("unit", "kg")
+                        if item_id in process_run.outputs_pending:
+                            outputs_dict[item_id] = {
+                                "quantity": process_run.outputs_pending[item_id],
+                                "unit": unit
+                            }
+
                 completing.append({
-                    "process_id": proc.process_id,
-                    "ends_at": proc.ends_at,
-                    "outputs": {
-                        k: {"quantity": v.quantity, "unit": v.unit}
-                        for k, v in proc.outputs_pending.items()
-                    },
+                    "process_id": process_run.process_id,
+                    "ends_at": process_run.end_time,
+                    "outputs": outputs_dict,
                 })
 
         # Log preview event
@@ -1204,117 +1222,250 @@ class SimulationEngine:
         return {
             "new_time": new_time,
             "processes_completing": completing,
-            "active_processes_count": len(self.state.active_processes),
+            "active_processes_count": len(self.scheduler.active_processes),
             "completing_count": len(completing),
         }
 
     def advance_time(self, duration_hours: float) -> Dict[str, Any]:
         """
-        Advance simulation time.
+        Advance time using ADR-020 event-driven scheduler.
 
-        Steps:
-        1. Calculate new time
-        2. Find all processes ending <= new_time
-        3. Complete processes (add outputs, remove from active)
-        4. Calculate energy for completed processes (ADR-014)
-        5. Update current time
-        6. Log events
+        Processes events chronologically:
+        - Process starts (inputs consumed)
+        - Process completions (outputs added, machines released)
+        - Recipe step dependencies (schedule ready steps)
+
+        Args:
+            duration_hours: Time delta to advance
 
         Returns:
-            {
-                "new_time": float,
-                "completed": [{process_id, outputs, energy_kwh}, ...],
-                "new_inventory": {...}
-            }
+            Dict with completed processes and events
         """
-        new_time = self.state.current_time_hours + duration_hours
+        target_time = self.scheduler.current_time + duration_hours
 
-        # Find and complete processes
-        completed = []
-        remaining = []
+        # Process all events up to target time
+        processed_events = self.scheduler.advance_to(target_time)
 
-        for proc in self.state.active_processes:
-            if proc.ends_at <= new_time:
-                # Process completes
-                # Add outputs to inventory
-                for item_id, inv_item in proc.outputs_pending.items():
-                    self.add_to_inventory(item_id, inv_item.quantity, inv_item.unit)
+        # Track what happened
+        completed_processes = []
+        started_processes = []
 
-                self._release_machines(proc.machines_reserved)
+        for event in processed_events:
+            if event.event_type == EventType.PROCESS_START:
+                # Process started - book energy
+                process_run_id = event.data.get("process_run_id")
 
-                # Calculate energy consumption using ADR-014 energy models
-                process_id = proc.process_id
-                energy_kwh = 0.0
+                # Get process run from active or completed processes
+                # (it might have been canceled by input validation, in which case skip it)
+                process_run = None
+                if process_run_id in self.scheduler.active_processes:
+                    process_run = self.scheduler.active_processes[process_run_id]
+                elif any(p.process_run_id == process_run_id for p in self.scheduler.completed_processes):
+                    # Process completed in the same advance_to call
+                    process_run = next(p for p in self.scheduler.completed_processes if p.process_run_id == process_run_id)
 
-                # Handle recipe processes
-                if process_id.startswith("recipe:"):
-                    recipe_id = process_id[7:]  # Remove "recipe:" prefix
-                    process_model = self.kb.get_recipe(recipe_id)
-                else:
-                    process_model = self.kb.get_process(process_id)
+                if not process_run:
+                    # Process was canceled (e.g., due to insufficient inputs)
+                    continue
 
+                # Get process definition for energy calculation
+                process_model = self.kb.get_process(process_run.process_id)
                 if process_model:
-                    try:
-                        if process_id.startswith("recipe:"):
-                            recipe_id = process_id[7:]
-                            energy_kwh = self._calculate_recipe_energy(recipe_id, proc.scale)
-                        else:
-                            # Convert InventoryItem objects to Quantity objects for calculate_energy
-                            inputs_for_calc = {
-                                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
-                                for item_id, inv_item in proc.inputs_consumed.items()
-                            }
-                            outputs_for_calc = {
-                                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
-                                for item_id, inv_item in proc.outputs_pending.items()
-                            }
+                    if hasattr(process_model, 'model_dump'):
+                        process_def = process_model.model_dump()
+                    else:
+                        process_def = process_model
+
+                    # Calculate and book energy at process start (ADR-014/ADR-016)
+                    energy_kwh = 0.0
+                    if process_def.get('energy_model'):
+                        try:
+                            # Build input quantities for energy calculation
+                            inputs_dict = {}
+                            for inp in process_def.get("inputs", []):
+                                inp_id = inp.get("item_id")
+                                if inp_id in process_run.inputs_consumed:
+                                    qty = process_run.inputs_consumed[inp_id]
+                                    unit = inp.get("unit", "kg")
+                                    inputs_dict[inp_id] = Quantity(item_id=inp_id, qty=qty, unit=unit)
+
+                            # Build output quantities for energy calculation
+                            outputs_dict = {}
+                            for outp in process_def.get("outputs", []):
+                                outp_id = outp.get("item_id")
+                                if outp_id in process_run.outputs_pending:
+                                    qty = process_run.outputs_pending[outp_id]
+                                    unit = outp.get("unit", "kg")
+                                    outputs_dict[outp_id] = Quantity(item_id=outp_id, qty=qty, unit=unit)
 
                             energy_kwh = calculate_energy(
                                 process_model,
-                                inputs=inputs_for_calc,
-                                outputs=outputs_for_calc,
+                                inputs=inputs_dict,
+                                outputs=outputs_dict,
                                 converter=self.converter
                             )
+                        except Exception as e:
+                            # If calculation fails, energy stays at 0.0
+                            pass
 
-                        # Accumulate to state
-                        self.state.total_energy_kwh += energy_kwh
-                    except Exception as e:
-                        # Energy calculation failed - log warning but continue
-                        import sys
-                        print(f"⚠️  Energy calculation failed for {process_id}: {e}", file=sys.stderr)
+                    # Accumulate energy into total
+                    self.state.total_energy_kwh += energy_kwh
 
-                # Log completion with energy
-                self._log_event(
-                    ProcessCompleteEvent(
-                        process_id=proc.process_id,
-                        outputs=proc.outputs_pending,
-                        energy_kwh=energy_kwh,
-                    )
-                )
+                    # Store energy on process_run for later retrieval
+                    # We need to extend ProcessRun or store it separately
+                    # For now, store in a dict keyed by process_run_id
+                    if not hasattr(self, '_process_energy'):
+                        self._process_energy = {}
+                    self._process_energy[process_run_id] = energy_kwh
 
-                completed.append({
-                    "process_id": proc.process_id,
-                    "ended_at": proc.ends_at,
-                    "energy_kwh": energy_kwh,
-                    "outputs": {
-                        k: {"quantity": v.quantity, "unit": v.unit}
-                        for k, v in proc.outputs_pending.items()
-                    },
+                #Note: ProcessStartEvent is logged immediately when start_process() is called,
+                # not here during advance_time processing
+
+                started_processes.append({
+                    "process_run_id": event.data.get("process_run_id"),
+                    "process_id": event.data.get("process_id"),
+                    "time": event.time,
                 })
-            else:
-                # Process still running
-                remaining.append(proc)
 
-        # Update active processes
-        self.state.active_processes = remaining
+            elif event.event_type == EventType.PROCESS_COMPLETE:
+                # Process completed - add outputs
+                process_run_id = event.data.get("process_run_id")
 
-        # Update time
-        self.state.current_time_hours = new_time
+                # Find process in completed list
+                process_run = None
+                for proc in self.scheduler.completed_processes:
+                    if proc.process_run_id == process_run_id:
+                        process_run = proc
+                        break
+
+                if process_run:
+                    # Add outputs to inventory with correct units
+                    # Get process definition to look up output units
+                    process_model = self.kb.get_process(process_run.process_id)
+                    if process_model:
+                        if hasattr(process_model, 'model_dump'):
+                            process_def = process_model.model_dump()
+                        else:
+                            process_def = process_model
+
+                        # Build a map of item_id -> unit from process outputs
+                        output_units = {}
+                        for outp in process_def.get("outputs", []):
+                            output_units[outp.get("item_id")] = outp.get("unit", "kg")
+
+                        # Add outputs with their correct units
+                        for item_id, qty in process_run.outputs_pending.items():
+                            unit = output_units.get(item_id, "kg")
+                            self.add_to_inventory(item_id, qty, unit)
+                    else:
+                        # Fallback if process definition not found
+                        for item_id, qty in process_run.outputs_pending.items():
+                            self.add_to_inventory(item_id, qty, "kg")
+
+                    # Release machine reservations
+                    self.reservation_manager.remove_reservation(process_run_id)
+
+                    # Reconstruct outputs with units for event logging
+                    process_model = self.kb.get_process(process_run.process_id)
+                    outputs_with_units = {}
+                    if process_model:
+                        # Convert to dict if it's a Pydantic model
+                        if hasattr(process_model, 'model_dump'):
+                            process_def = process_model.model_dump()
+                        else:
+                            process_def = process_model
+
+                        for outp in process_def.get("outputs", []):
+                            item_id = outp.get("item_id")
+                            unit = outp.get("unit", "kg")
+                            if item_id in process_run.outputs_pending:
+                                outputs_with_units[item_id] = InventoryItem(
+                                    quantity=process_run.outputs_pending[item_id],
+                                    unit=unit
+                                )
+
+                    # Retrieve stored energy for this process
+                    energy_kwh = 0.0
+                    if hasattr(self, '_process_energy') and process_run_id in self._process_energy:
+                        energy_kwh = self._process_energy[process_run_id]
+
+                    # Log completion event
+                    self._log_event(
+                        ProcessCompleteEvent(
+                            process_id=process_run.process_id,
+                            process_run_id=process_run_id,
+                            recipe_run_id=process_run.recipe_run_id,
+                            time_hours=event.time,
+                            outputs=outputs_with_units,
+                            energy_kwh=energy_kwh,
+                        )
+                    )
+
+                    completed_processes.append({
+                        "process_run_id": process_run_id,
+                        "process_id": process_run.process_id,
+                        "time": event.time,
+                        "outputs": process_run.outputs_pending,
+                        "energy_kwh": energy_kwh,
+                    })
+
+                    # Check if this was a recipe step - schedule dependent steps
+                    if process_run.recipe_run_id:
+                        recipe_run_id = process_run.recipe_run_id
+                        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
+
+                        for step_idx in ready_steps:
+                            recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                            if recipe_run:
+                                recipe_def = self.kb.get_recipe(recipe_run.recipe_id).model_dump()
+                                step = recipe_def['steps'][step_idx]
+
+                                # Get process_id directly from step
+                                process_id = step.get('process_id')
+                                if not process_id:
+                                    continue  # Skip invalid step
+
+                                # Get process definition to extract default output
+                                process_def_model = self.kb.get_process(process_id)
+                                if not process_def_model:
+                                    continue  # Skip if process not found
+
+                                process_dict = process_def_model.model_dump() if hasattr(process_def_model, 'model_dump') else process_def_model
+
+                                # Get default output quantity and unit from first output
+                                outputs = process_dict.get('outputs', [])
+                                output_quantity = None
+                                output_unit = None
+                                if outputs:
+                                    first_output = outputs[0]
+                                    output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
+                                    output_unit = first_output.get('unit', 'kg')
+
+                                # Schedule dependent step
+                                result = self.start_process(
+                                    process_id=process_id,
+                                    scale=1.0,
+                                    start_time=event.time,
+                                    output_quantity=output_quantity,
+                                    output_unit=output_unit,
+                                    recipe_run_id=recipe_run_id,
+                                    step_index=step_idx,
+                                )
+
+                                if result['success']:
+                                    self.orchestrator.schedule_step(
+                                        recipe_run_id,
+                                        step_idx,
+                                        result['process_run_id']
+                                    )
+
+        # Update engine state time
+        self.state.current_time_hours = target_time
 
         # Log state snapshot
         self._log_event(
             StateSnapshotEvent(
-                time_hours=new_time,
+                time_hours=target_time,
                 inventory=self.state.inventory,
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
@@ -1323,22 +1474,16 @@ class SimulationEngine:
             )
         )
 
-        # Flush events to disk
-        self.save()
-
         return {
-            "new_time": new_time,
-            "completed": completed,
-            "completed_count": len(completed),
-            "active_processes_remaining": len(remaining),
+            "new_time": target_time,
+            "events_processed": len(processed_events),
+            "processes_started": len(started_processes),
+            "processes_completed": len(completed_processes),
+            "completed_count": len(completed_processes),  # For backward compatibility
+            "completed": completed_processes,
+            "started": started_processes,
             "total_energy_kwh": self.state.total_energy_kwh,
-            "new_inventory": self.get_inventory_summary(),
         }
-
-    # ========================================================================
-    # Event logging
-    # ========================================================================
-
     def _log_event(self, event: Any) -> None:
         """Add event to buffer."""
         self.event_buffer.append(event)
@@ -1468,3 +1613,40 @@ class SimulationEngine:
                     continue
 
         return True
+
+    def get_schedule_summary(self) -> Dict[str, Any]:
+        """
+        Get summary of scheduled and active processes.
+
+        Returns:
+            Dict with scheduler state
+        """
+        return {
+            "current_time": self.scheduler.current_time,
+            "queued_events": len(self.scheduler.event_queue),
+            "active_processes": len(self.scheduler.active_processes),
+            "completed_processes": len(self.scheduler.completed_processes),
+            "next_event_time": self.scheduler.get_next_event_time(),
+            "active_recipes": len(self.orchestrator.get_active_recipe_runs()),
+            "completed_recipes": len(self.orchestrator.get_completed_recipe_runs()),
+        }
+
+    def get_machine_utilization(
+        self,
+        machine_id: str,
+        time_range: Optional[tuple[float, float]] = None
+    ) -> float:
+        """
+        Get machine utilization over time range.
+
+        Args:
+            machine_id: Machine to analyze
+            time_range: (start, end) time range (default: 0 to current time)
+
+        Returns:
+            Utilization ratio (0.0 to 1.0)
+        """
+        if time_range is None:
+            time_range = (0.0, self.scheduler.current_time)
+
+        return self.reservation_manager.get_utilization(machine_id, time_range)

@@ -23,8 +23,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 8.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: czochralski_puller_v0
   qty: 1
   unit: count
@@ -43,57 +43,36 @@ time_model:
   type: batch
   hr_per_batch: 24.0
   notes: Slow crystal pulling over 12-24 hours
-notes: |
-  Czochralski (CZ) process for growing single-crystal silicon ingots.
-  Source: Sustainable-ISRU-on-the-Moon.txt
-  Process: Seed crystal dipping and slow pulling from molten silicon
-  Temperature: ~1600°C (silicon melting point: 1414°C, kept just above)
-  Atmosphere: Vacuum or inert gas (argon) to prevent contamination
-  Purpose: Convert polysilicon to single-crystal silicon
-  Essential for electronics (integrated circuits, high-performance solar)
-  Process details:
-    1. Charge fused silica crucible_refractory with polysilicon chunks
-    2. Heat to 1600°C in vacuum or argon atmosphere
-    3. Dip seed crystal (known orientation, e.g., <100> or <111>) into melt
-    4. Slowly pull seed upward while rotating (1-10 mm/min)
-    5. Silicon solidifies on seed in single-crystal form
-    6. Control pull rate and temperature to control diameter
-    7. Typical ingot: 200-300mm diameter, 1-2m length
-    8. Cool ingot, remove from puller
-  Products:
-    - Single-crystal silicon ingot (cylindrical boule)
-    - Scrap polysilicon (cropped ends, re-melt)
-  Seed crystal:
-    - Small single-crystal silicon rod (oriented)
-    - Determines crystal orientation of entire ingot
-    - Common orientations: <100> (electronics), <111> (some applications)
-  Crucible: Ceramic refractory (placeholder for fused silica or equivalent)
-    - Slowly dissolves into melt (oxygen contamination source)
-    - Replaced after each run or few runs
-  Dopant addition: Can add B (p-type) or P/As (n-type) during growth
-  Crystal quality:
-    - Dislocation-free (or very low dislocation density)
-    - Uniform crystal orientation throughout
-    - Controlled resistivity via doping
-  Stoichiometry: Polysilicon → Single-crystal silicon (95% yield)
-    - 5% losses from cropping, surface defects
-  Advantages: Produces large, high-quality single crystals
-  Well-controlled process (diameter, doping, orientation)
-  Standard for semiconductor industry
-  Suitable for high-efficiency solar cells (>25%)
-  Disadvantages: Energy intensive (80-100 kWh/kg)
-  Slow process (12-24 hours per ingot)
-  Requires ultra-pure polysilicon input
-  Crucible consumption (SiO2)
-  5% material loss
-  Applications:
-    - Electronics: Wafers → integrated circuits, processors, memory
-    - Solar cells: High-efficiency monocrystalline panels
-    - Sensors: MEMS, photodetectors, pressure sensors
-    - Power devices: Rectifiers, thyristors, MOSFETs
-  Post-processing: Ingot → sliced into wafers → polished → device fabrication
-  Lunar/space context: Essential for in-situ electronics manufacturing
-  Enables computational infrastructure
-  High-efficiency solar power generation
-  Sensors for robotic systems
-  Alternative: Float-zone (FZ) process for higher purity, smaller diameter
+notes: "Czochralski (CZ) process for growing single-crystal silicon ingots.\nSource:\
+  \ Sustainable-ISRU-on-the-Moon.txt\nProcess: Seed crystal dipping and slow pulling\
+  \ from molten silicon\nTemperature: ~1600°C (silicon melting point: 1414°C, kept\
+  \ just above)\nAtmosphere: Vacuum or inert gas (argon) to prevent contamination\n\
+  Purpose: Convert polysilicon to single-crystal silicon\nEssential for electronics\
+  \ (integrated circuits, high-performance solar)\nProcess details:\n  1. Charge fused\
+  \ silica crucible_refractory with polysilicon chunks\n  2. Heat to 1600°C in vacuum\
+  \ or argon atmosphere\n  3. Dip seed crystal (known orientation, e.g., <100> or\
+  \ <111>) into melt\n  4. Slowly pull seed upward while rotating (1-10 mm/min)\n\
+  \  5. Silicon solidifies on seed in single-crystal form\n  6. Control pull rate\
+  \ and temperature to control diameter\n  7. Typical ingot: 200-300mm diameter, 1-2m\
+  \ length\n  8. Cool ingot, remove from puller\nProducts:\n  - Single-crystal silicon\
+  \ ingot (cylindrical boule)\n  - Scrap polysilicon (cropped ends, re-melt)\nSeed\
+  \ crystal:\n  - Small single-crystal silicon rod (oriented)\n  - Determines crystal\
+  \ orientation of entire ingot\n  - Common orientations: <100> (electronics), <111>\
+  \ (some applications)\nCrucible: Ceramic refractory (placeholder for fused silica\
+  \ or equivalent)\n  - Slowly dissolves into melt (oxygen contamination source)\n\
+  \  - Replaced after each run or few runs\nDopant addition: Can add B (p-type) or\
+  \ P/As (n-type) during growth\nCrystal quality:\n  - Dislocation-free (or very low\
+  \ dislocation density)\n  - Uniform crystal orientation throughout\n  - Controlled\
+  \ resistivity via doping\nStoichiometry: Polysilicon → Single-crystal silicon (95%\
+  \ yield)\n  - 5% losses from cropping, surface defects\nAdvantages: Produces large,\
+  \ high-quality single crystals\nWell-controlled process (diameter, doping, orientation)\n\
+  Standard for semiconductor industry\nSuitable for high-efficiency solar cells (>25%)\n\
+  Disadvantages: Energy intensive (80-100 kWh/kg)\nSlow process (12-24 hours per ingot)\n\
+  Requires ultra-pure polysilicon input\nCrucible consumption (SiO2)\n5% material\
+  \ loss\nApplications:\n  - Electronics: Wafers → integrated circuits, processors,\
+  \ memory\n  - Solar cells: High-efficiency monocrystalline panels\n  - Sensors:\
+  \ MEMS, photodetectors, pressure sensors\n  - Power devices: Rectifiers, thyristors,\
+  \ MOSFETs\nPost-processing: Ingot → sliced into wafers → polished → device fabrication\n\
+  Lunar/space context: Essential for in-situ electronics manufacturing\nEnables computational\
+  \ infrastructure\nHigh-efficiency solar power generation\nSensors for robotic systems\n\
+  Alternative: Float-zone (FZ) process for higher purity, smaller diameter\n"

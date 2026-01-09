@@ -12,15 +12,17 @@ outputs:
   unit: unit
 resource_requirements:
 - machine_id: mining_equipment
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
   unit: kWh
-  notes: "Excavation energy for 1-unit batch of meteorite material"
+  notes: Excavation energy for 1-unit batch of meteorite material
 time_model:
   type: batch
   hr_per_batch: 0.25
   notes: Batch time for a basic excavation operation.
-notes: "Placeholder NiFe meteorite excavation process. Converts meteorite_iron input into NiFe meteorite material (nife_meteorite_material). Seeded from seed papers; used to bootstrap mass flows."
+notes: Placeholder NiFe meteorite excavation process. Converts meteorite_iron input
+  into NiFe meteorite material (nife_meteorite_material). Seeded from seed papers;
+  used to bootstrap mass flows.

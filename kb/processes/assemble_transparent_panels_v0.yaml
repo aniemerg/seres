@@ -6,12 +6,12 @@ layer_tags:
 - layer_7
 - layer_8
 inputs:
-  - item_id: glass_bulk
-    qty: 5.0
-    unit: kg
-  - item_id: aluminum_sheet_2mm
-    qty: 1.0
-    unit: kg
+- item_id: glass_bulk
+  qty: 5.0
+  unit: kg
+- item_id: aluminum_sheet_2mm
+  qty: 1.0
+  unit: kg
 outputs:
 - item_id: transparent_panel_set
   qty: 1.0
@@ -19,8 +19,8 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
@@ -30,4 +30,5 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Assembly time for panel set (placeholder)
-notes: Assembly of a set of transparent panels for viewing windows, guards, and enclosures. Placeholder; inputs to be defined as the KB matures.
+notes: Assembly of a set of transparent panels for viewing windows, guards, and enclosures.
+  Placeholder; inputs to be defined as the KB matures.

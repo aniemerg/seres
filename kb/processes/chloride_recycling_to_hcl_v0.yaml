@@ -14,9 +14,12 @@ outputs:
   qty: 0.2
   unit: kg
 resource_requirements:
-  - machine_id: chemical_separation_equipment
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: count
+- machine_id: chemical_separation_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -24,4 +27,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.25
-notes: "Recycles salt waste to regenerate hydrochloric acid and recover usable salt."
+notes: Recycles salt waste to regenerate hydrochloric acid and recover usable salt.

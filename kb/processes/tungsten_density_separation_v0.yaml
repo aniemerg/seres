@@ -23,8 +23,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: ball_mill_v0
   qty: 1
   unit: count
@@ -43,65 +43,41 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Grinding, density separation, and drying
-notes: |
-  Extraction of tungsten microparticles from NiFe meteorite material via density separation.
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Process: Grinding + hydrocyclone/centrifugal separation by density
-  Tungsten density: 19.3 g/cm³ (vs Fe: 7.87, Ni: 8.91 g/cm³)
-  Concentration: 0.1-5 μg/g (0.01-0.5 ppm) in NiFe meteorites
-  Purpose: Extract critical tungsten for tool steel and thermionic cathodes
-  Process details:
-    1. NiFe meteorite residue (after Mond process for Ni/Fe extraction)
-    2. Grind to fine powder in ball mill (<100 μm particles)
-    3. Create water slurry with ground material
-    4. Hydrocyclone separation:
-       - Wet feed enters cyclone tangentially
-       - Centrifugal forces push heavy particles (W) to walls
-       - Heavy concentrate exits at bottom (underflow)
-       - Light gangue exits at top (overflow)
-    5. Multiple passes for concentration
-    6. Dry tungsten concentrate
-    7. Further purification if needed
-  Products:
-    - Tungsten concentrate: W microparticles
-    - Fe-Ni tailings: Iron-nickel residue (can be reprocessed)
-    - Process water: Recycled
-  Density separation principles:
-    - Stokes law: Settling velocity ∝ (ρparticle - ρfluid) × d²
-    - Heavy tungsten particles settle faster
-    - Centrifugal force enhances separation
-    - Hydrocyclone provides compact, continuous operation
-  Tungsten in meteorites:
-    - Present as micro-inclusions in NiFe metal
-    - Concentration: 0.1-5 μg/g (extremely low)
-    - Mass separation: 1 tonne meteorite → 0.1-5g tungsten
-    - Challenging but critical extraction
-  Tungsten applications (critical):
-    - Tool steel (Fe-W alloy): Cutting tools, drill bits, wear resistance
-    - Thermionic cathodes: Vacuum tube electron emitters (heating elements)
-    - High-temperature applications: Melting point 3422°C
-    - Electrical contacts: High conductivity, durability
-  Stoichiometry: 1000 kg NiFe residue → ~0.5-5 kg W concentrate (0.05-0.5%)
-  Concentration factor: 100-1000× in concentrate vs feed
-  Alternative processing:
-    - Magnetic separation (W non-magnetic, separate from Fe/Ni)
-    - Flotation (surface chemistry differences)
-    - Acid leaching (dissolve Fe/Ni, W remains)
-  Advantages: Uses density difference (19.3 vs 8 g/cm³)
-    Simple mechanical separation
-    No chemical reagents (water recycled)
-    Works in lunar gravity (1/6 Earth, but still functional)
-  Disadvantages: Very low concentration (ppm level)
-    Large mass throughput for small W output
-    Multiple passes needed
-    Requires fine grinding (energy intensive)
-  Lunar context: Tungsten absolutely critical but extremely scarce
-    No tungsten minerals on Moon
-    Meteorite impacts only source
-    Magnetic anomalies indicate impact sites (NiFe meteorites)
-    Must process large quantities for small yields
-    Essential for tool steel and vacuum tube technology
-  Post-processing: Tungsten carbide formation (W + C → WC)
-    - Used in cutting tools, abrasives
-    - Harder than steel, very durable
+notes: "Extraction of tungsten microparticles from NiFe meteorite material via density\
+  \ separation.\nSource: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nProcess:\
+  \ Grinding + hydrocyclone/centrifugal separation by density\nTungsten density: 19.3\
+  \ g/cm³ (vs Fe: 7.87, Ni: 8.91 g/cm³)\nConcentration: 0.1-5 μg/g (0.01-0.5 ppm)\
+  \ in NiFe meteorites\nPurpose: Extract critical tungsten for tool steel and thermionic\
+  \ cathodes\nProcess details:\n  1. NiFe meteorite residue (after Mond process for\
+  \ Ni/Fe extraction)\n  2. Grind to fine powder in ball mill (<100 μm particles)\n\
+  \  3. Create water slurry with ground material\n  4. Hydrocyclone separation:\n\
+  \     - Wet feed enters cyclone tangentially\n     - Centrifugal forces push heavy\
+  \ particles (W) to walls\n     - Heavy concentrate exits at bottom (underflow)\n\
+  \     - Light gangue exits at top (overflow)\n  5. Multiple passes for concentration\n\
+  \  6. Dry tungsten concentrate\n  7. Further purification if needed\nProducts:\n\
+  \  - Tungsten concentrate: W microparticles\n  - Fe-Ni tailings: Iron-nickel residue\
+  \ (can be reprocessed)\n  - Process water: Recycled\nDensity separation principles:\n\
+  \  - Stokes law: Settling velocity ∝ (ρparticle - ρfluid) × d²\n  - Heavy tungsten\
+  \ particles settle faster\n  - Centrifugal force enhances separation\n  - Hydrocyclone\
+  \ provides compact, continuous operation\nTungsten in meteorites:\n  - Present as\
+  \ micro-inclusions in NiFe metal\n  - Concentration: 0.1-5 μg/g (extremely low)\n\
+  \  - Mass separation: 1 tonne meteorite → 0.1-5g tungsten\n  - Challenging but critical\
+  \ extraction\nTungsten applications (critical):\n  - Tool steel (Fe-W alloy): Cutting\
+  \ tools, drill bits, wear resistance\n  - Thermionic cathodes: Vacuum tube electron\
+  \ emitters (heating elements)\n  - High-temperature applications: Melting point\
+  \ 3422°C\n  - Electrical contacts: High conductivity, durability\nStoichiometry:\
+  \ 1000 kg NiFe residue → ~0.5-5 kg W concentrate (0.05-0.5%)\nConcentration factor:\
+  \ 100-1000× in concentrate vs feed\nAlternative processing:\n  - Magnetic separation\
+  \ (W non-magnetic, separate from Fe/Ni)\n  - Flotation (surface chemistry differences)\n\
+  \  - Acid leaching (dissolve Fe/Ni, W remains)\nAdvantages: Uses density difference\
+  \ (19.3 vs 8 g/cm³)\n  Simple mechanical separation\n  No chemical reagents (water\
+  \ recycled)\n  Works in lunar gravity (1/6 Earth, but still functional)\nDisadvantages:\
+  \ Very low concentration (ppm level)\n  Large mass throughput for small W output\n\
+  \  Multiple passes needed\n  Requires fine grinding (energy intensive)\nLunar context:\
+  \ Tungsten absolutely critical but extremely scarce\n  No tungsten minerals on Moon\n\
+  \  Meteorite impacts only source\n  Magnetic anomalies indicate impact sites (NiFe\
+  \ meteorites)\n  Must process large quantities for small yields\n  Essential for\
+  \ tool steel and vacuum tube technology\nPost-processing: Tungsten carbide formation\
+  \ (W + C → WC)\n  - Used in cutting tools, abrasives\n  - Harder than steel, very\
+  \ durable\n"
 process_type: batch

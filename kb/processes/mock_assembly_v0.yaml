@@ -6,13 +6,13 @@ inputs:
   qty: 0.0
   unit: unit
 outputs:
-  - item_id: atomization_unit_v0
-    qty: 1.0
-    unit: unit
+- item_id: atomization_unit_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -21,4 +21,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
 process_type: batch
-notes: "Placeholder mock assembly to close no_recipe gap for atomization_unit_v0; inputs empty or placeholder; use conservative estimates."
+notes: Placeholder mock assembly to close no_recipe gap for atomization_unit_v0; inputs
+  empty or placeholder; use conservative estimates.

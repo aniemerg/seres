@@ -20,8 +20,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: chemical_reactor_heated
   qty: 1
   unit: count
@@ -41,45 +41,30 @@ time_model:
   hr_per_batch: 6.0
   notes: Multi-stage oxidation and absorption
 process_type: batch
-notes: |
-  Ostwald process for producing nitric acid from ammonia via catalytic oxidation.
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Stage 1 - Ammonia oxidation: 4NH3 + 5O2 → 4NO + 6H2O
-  Stage 2 - NO oxidation: 2NO + O2 → 2NO2
-  Stage 3 - Absorption: 3NO2 + H2O → 2HNO3 + NO (NO recycled)
-  Overall: NH3 + 2O2 → HNO3 + H2O
-  Temperature: 600-800°C for stage 1 (catalytic oxidation)
-  Pressure: 400-1000 kPa (4-10 bar)
-  Catalyst: Platinum on nickel (terrestrial) or tungsten carbide on nickel (lunar)
-  Process sequence:
-    1. Ammonia vaporized and mixed with air/oxygen
-    2. Catalytic oxidation to nitric oxide (NO) and water vapor
-    3. Further oxidation of NO to nitrogen dioxide (NO2)
-    4. Absorption of NO2 in water to form HNO3
-    5. Unreacted NO recycled back to oxidation stage
-  Catalyst considerations:
-    - Terrestrial: Platinum gauze (expensive, not available on Moon)
-    - Lunar alternative: Tungsten carbide on nickel support
-    - Nickel from Mond process (meteorite sources)
-    - Tungsten from density-separated meteorite inclusions
-  Products:
-    - HNO3 (nitric acid): Critical reagent for HCl production from NaCl
-    - H2O (water): Process water, recyclable
-  Nitric acid applications:
-    - React with NaCl to generate HCl gas: NaCl + HNO3 → HCl + NaNO3
-    - Chemical synthesis, oxidizer, etching agent
-    - Propellant oxidizer (when mixed with fuel)
-  Stoichiometry: NH3 (17g) + 2O2 (64g) → HNO3 (63g) + H2O (18g)
-  Mass fractions: 371% HNO3 from ammonia input
-  Nitrogen source: Haber-Bosch synthesis from volatile N2 extraction
-  Oxygen source: Water electrolysis or mineral reduction (abundant)
-  Advantages: Well-established industrial process
-  Enables HCl production from imported NaCl
-  HCl critical for artificial weathering and recycling loops
-  Disadvantages: Requires scarce nitrogen (from volatiles)
-  Pt catalyst unavailable (must use WC/Ni alternative)
-  Multi-stage process with gas handling
-  Lunar context: Nitrogen is severely scarce (~80 ppm in regolith volatiles)
-  Must be carefully husbanded and recycled
-  HNO3 → HCl → recycled as NaCl regeneration loop
-  Essential for unlocking chlorine chemistry with NaCl import
+notes: "Ostwald process for producing nitric acid from ammonia via catalytic oxidation.\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nStage 1 - Ammonia\
+  \ oxidation: 4NH3 + 5O2 → 4NO + 6H2O\nStage 2 - NO oxidation: 2NO + O2 → 2NO2\n\
+  Stage 3 - Absorption: 3NO2 + H2O → 2HNO3 + NO (NO recycled)\nOverall: NH3 + 2O2\
+  \ → HNO3 + H2O\nTemperature: 600-800°C for stage 1 (catalytic oxidation)\nPressure:\
+  \ 400-1000 kPa (4-10 bar)\nCatalyst: Platinum on nickel (terrestrial) or tungsten\
+  \ carbide on nickel (lunar)\nProcess sequence:\n  1. Ammonia vaporized and mixed\
+  \ with air/oxygen\n  2. Catalytic oxidation to nitric oxide (NO) and water vapor\n\
+  \  3. Further oxidation of NO to nitrogen dioxide (NO2)\n  4. Absorption of NO2\
+  \ in water to form HNO3\n  5. Unreacted NO recycled back to oxidation stage\nCatalyst\
+  \ considerations:\n  - Terrestrial: Platinum gauze (expensive, not available on\
+  \ Moon)\n  - Lunar alternative: Tungsten carbide on nickel support\n  - Nickel from\
+  \ Mond process (meteorite sources)\n  - Tungsten from density-separated meteorite\
+  \ inclusions\nProducts:\n  - HNO3 (nitric acid): Critical reagent for HCl production\
+  \ from NaCl\n  - H2O (water): Process water, recyclable\nNitric acid applications:\n\
+  \  - React with NaCl to generate HCl gas: NaCl + HNO3 → HCl + NaNO3\n  - Chemical\
+  \ synthesis, oxidizer, etching agent\n  - Propellant oxidizer (when mixed with fuel)\n\
+  Stoichiometry: NH3 (17g) + 2O2 (64g) → HNO3 (63g) + H2O (18g)\nMass fractions: 371%\
+  \ HNO3 from ammonia input\nNitrogen source: Haber-Bosch synthesis from volatile\
+  \ N2 extraction\nOxygen source: Water electrolysis or mineral reduction (abundant)\n\
+  Advantages: Well-established industrial process\nEnables HCl production from imported\
+  \ NaCl\nHCl critical for artificial weathering and recycling loops\nDisadvantages:\
+  \ Requires scarce nitrogen (from volatiles)\nPt catalyst unavailable (must use WC/Ni\
+  \ alternative)\nMulti-stage process with gas handling\nLunar context: Nitrogen is\
+  \ severely scarce (~80 ppm in regolith volatiles)\nMust be carefully husbanded and\
+  \ recycled\nHNO3 → HCl → recycled as NaCl regeneration loop\nEssential for unlocking\
+  \ chlorine chemistry with NaCl import\n"

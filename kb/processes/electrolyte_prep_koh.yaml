@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: chemical_mixer_tank
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -28,10 +28,16 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Dissolution and mixing time
-notes: |
-  Preparation of KOH aqueous electrolyte for Ni-Fe batteries.
+notes: 'Preparation of KOH aqueous electrolyte for Ni-Fe batteries.
+
   Source: battery_system_nife_v0 seed file, design/battery-design.md
+
   Typical concentration: 20-30% KOH by weight
+
   Process: Dissolve KOH pellets in deionized water with stirring
+
   Safety: Exothermic dissolution, heat management required
+
   Used in Ni-Fe battery assembly
+
+  '

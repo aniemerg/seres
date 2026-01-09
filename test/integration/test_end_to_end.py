@@ -28,6 +28,8 @@ def test_simulation_lifecycle(kb_loader, tmp_path):
     engine = SimulationEngine("lifecycle", kb_loader, sim_dir)
 
     engine.import_item("anorthite_ore", 2.0, "kg")
+    engine.import_item("labor_bot_general_v0", 1.0, "unit")
+    engine.import_item("rock_crusher_basic", 1.0, "count")
 
     start = engine.start_process(
         process_id="crushing_basic_v0",
@@ -122,6 +124,9 @@ def test_recipe_energy_calculation_from_steps(tmp_path):
         "process_type": "continuous",
         "inputs": [{"item_id": "input_material", "qty": 1.0, "unit": "kg"}],
         "outputs": [{"item_id": "output_material", "qty": 1.0, "unit": "kg"}],
+        "resource_requirements": [
+            {"machine_id": "worker_bot_v0", "qty": 1.0, "unit": "count"},
+        ],
         "time_model": {
             "type": "linear_rate",
             "rate": 1.0,
@@ -163,12 +168,19 @@ def test_recipe_energy_calculation_from_steps(tmp_path):
         "mass": 1.0,
         "unit": "kg",
     })
+    write_yaml(kb_root / "items" / "machines" / "worker_bot_v0.yaml", {
+        "id": "worker_bot_v0",
+        "kind": "machine",
+        "unit": "count",
+        "mass": 100.0,
+    })
 
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
 
     engine = SimulationEngine("recipe_energy", kb, tmp_path / "simulations")
     engine.import_item("input_material", 2.0, "kg")
+    engine.import_item("worker_bot_v0", 1.0, "count")
 
     result = engine.run_recipe("test_recipe", 1)
     assert result["success"] is True
@@ -177,5 +189,5 @@ def test_recipe_energy_calculation_from_steps(tmp_path):
     assert advance["completed_count"] == 1
 
     completed = advance["completed"][0]
-    assert completed["process_id"] == "recipe:test_recipe"
+    assert completed["process_id"] == "step_process"
     assert completed["energy_kwh"] == pytest.approx(4.0, rel=0.01)

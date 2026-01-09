@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: glass_furnace_v0
   qty: 1
   unit: count
@@ -47,122 +47,74 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Melting, homogenization, and forming
-notes: |
-  Aluminosilicate glass production from lunar mineral oxides.
-  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt
-  Composition: 57% SiO2, 20% Al2O3, 12% MgO, 5% CaO, 6% FeO
-  Melting point: 1100-1350°C (significantly lower than pure fused silica at 1710°C)
-  Purpose: Structural glass for habitats, greenhouses, and general applications
-  Lower melting point than pure silica saves energy
-  Process details:
-    1. Gather oxide components from mineral processing:
-       - SiO2: From anorthite leaching or direct silica extraction
-       - Al2O3: From anorthite leaching + HCl calcination
-       - MgO: From olivine processing or FFC by-product
-       - CaO: From anorthite processing or lime extraction
-       - FeO: From ilmenite reduction or iron oxidation (optional for color)
-    2. Mix oxides in correct proportions
-    3. Load into glass melting furnace (crucible_refractory or tank furnace)
-    4. Heat to 1100-1350°C (above liquidus temperature)
-    5. Maintain molten state for homogenization (1-3 hours)
-    6. Stir or bubble to ensure uniform composition
-    7. Form glass: Pour, cast, blow, or draw into desired shape
-    8. Anneal: Slow cooling to relieve thermal stress (400-600°C)
-    9. Final cooling to room temperature
-  Products:
-    - Aluminosilicate glass: Transparent to translucent, greenish tint from FeO
-    - Volatiles: Minor losses from evaporation
-  Composition details:
-    - SiO2 (57%): Network former, provides structure
-    - Al2O3 (20%): Improves durability, chemical resistance
-    - MgO (12%): Flux, reduces melting point
-    - CaO (5%): Flux, improves workability
-    - FeO (6%): Natural lunar component, causes green/brown color
-  Glass properties:
-    - Melting point: 1100-1350°C (depends on exact composition)
-    - Density: ~2.5-2.7 g/cm³
-    - Thermal expansion: Moderate (lower than soda-lime glass)
-    - Chemical resistance: Excellent (aluminosilicate glasses durable)
-    - Optical: Transparent but with greenish tint from FeO
-  Iron content and color:
-    - Natural lunar glass contains FeO (reduces from Fe2O3 in vacuum melting)
-    - FeO gives green to brown coloration
-    - For transparent colorless glass: Must remove iron impurities
-    - For colored glass: Can adjust FeO content deliberately
-  Decolorization (if needed):
-    - Oxidize FeO to Fe2O3 (amber color, less intense)
-    - Add MnO2 (complementary color, visual cancellation)
-    - Or purify feedstock to remove all iron
-  Applications:
-    - Habitat windows: Structural glazing, pressure barriers
-    - Greenhouse covers: Transmit light for plant growth
-    - Containers: Chemical-resistant glassware
-    - Fiber optics: Draw into fibers (if purified)
-    - Insulation: Spin into glass wool
-    - Radiation shielding: High-density glass with heavy elements
-  Advantages: Lower melting point than pure silica (saves energy)
-    Uses natural lunar mineral ratios (close to anorthite composition)
-    No exotic additives required
-    Durable and chemically resistant
-    Can be formed by standard glass-working techniques
-  Disadvantages: Natural FeO content darkens glass
-    Not suitable for precision optics (unless purified)
-    Requires multiple oxide inputs (logistical complexity)
-    Thermal shock sensitivity (needs careful annealing)
-  Comparison to fused silica:
-    - Fused silica: 100% SiO2, melts at 1710°C, ultra-pure, expensive
-    - Aluminosilicate: Mixed oxides, melts at 1100-1350°C, natural, economical
-    - Fused silica for optics, aluminosilicate for structural
-  Comparison to soda-lime glass (Earth):
-    - Soda-lime: 70% SiO2, 15% Na2O, 10% CaO, melts at 1000°C
-    - Aluminosilicate: No Na2O (sodium scarce on Moon)
-    - Higher Al2O3 content improves durability
-  Lunar context: Natural composition close to anorthite mineral
-    Anorthite: CaAl2Si2O8 (decomposed to oxides)
-    Add MgO from olivine, FeO from ilmenite
-    Enables large-scale glass production from local resources
-  Glass forming techniques:
-    - Casting: Pour into molds (flat sheets, blocks)
-    - Blowing: Traditional glassblowing for complex shapes
-    - Drawing: Pull fibers or rods from molten glass
-    - Float process: Flat glass on molten tin bath (high quality)
-    - Pressing: Mold under pressure (optical elements)
-  Annealing importance:
-    - Glass cools unevenly → internal stress
-    - Stress causes spontaneous fracture
-    - Anneal at ~500°C (below glass transition)
-    - Slow cool over hours to relieve stress
-  Thermal properties:
-    - Coefficient of thermal expansion: ~5-7 × 10⁻⁶ /°C
-    - Glass transition temperature: ~600-700°C
-    - Softening point: ~800-900°C
-    - Working range: 1000-1200°C
-  Chemical durability:
-    - Excellent resistance to water, acids (except HF)
-    - Aluminosilicate glasses very durable
-    - Suitable for long-term lunar environment
-  Optical properties:
-    - Refractive index: ~1.52-1.55
-    - Transmittance: 80-90% (visible), reduced by FeO
-    - Absorption edge: UV region (glass blocks UV)
-  Radiation resistance:
-    - Glass darkens under ionizing radiation (color centers)
-    - Aluminosilicate glasses more resistant than soda-lime
-    - Can self-anneal under solar heating
-  Recycling:
-    - Glass fully recyclable (remelt and reform)
-    - No chemical degradation from multiple cycles
-    - Broken glass (cullet) used as feedstock
-  Compositional flexibility:
-    - Can adjust ratios for specific properties
-    - More SiO2: Higher melting point, harder, more brittle
-    - More MgO/CaO: Lower melting point, easier working
-    - More Al2O3: Higher durability, chemical resistance
-  Advanced variants:
-    - Borosilicate: Add B2O3 for thermal shock resistance (Pyrex-like)
-    - Lead glass: Add PbO for high refractive index (optics)
-    - But exotic additives may not be available initially
-  Scale-up potential:
-    - Glass production highly scalable
-    - Continuous tank furnaces for large-scale production
-    - Can produce tons per day with proper infrastructure
+notes: "Aluminosilicate glass production from lunar mineral oxides.\nSource: Sustainable-ISRU-on-the-Moon.txt,\
+  \ FFC-process-for-deep-ISRU.txt\nComposition: 57% SiO2, 20% Al2O3, 12% MgO, 5% CaO,\
+  \ 6% FeO\nMelting point: 1100-1350°C (significantly lower than pure fused silica\
+  \ at 1710°C)\nPurpose: Structural glass for habitats, greenhouses, and general applications\n\
+  Lower melting point than pure silica saves energy\nProcess details:\n  1. Gather\
+  \ oxide components from mineral processing:\n     - SiO2: From anorthite leaching\
+  \ or direct silica extraction\n     - Al2O3: From anorthite leaching + HCl calcination\n\
+  \     - MgO: From olivine processing or FFC by-product\n     - CaO: From anorthite\
+  \ processing or lime extraction\n     - FeO: From ilmenite reduction or iron oxidation\
+  \ (optional for color)\n  2. Mix oxides in correct proportions\n  3. Load into glass\
+  \ melting furnace (crucible_refractory or tank furnace)\n  4. Heat to 1100-1350°C\
+  \ (above liquidus temperature)\n  5. Maintain molten state for homogenization (1-3\
+  \ hours)\n  6. Stir or bubble to ensure uniform composition\n  7. Form glass: Pour,\
+  \ cast, blow, or draw into desired shape\n  8. Anneal: Slow cooling to relieve thermal\
+  \ stress (400-600°C)\n  9. Final cooling to room temperature\nProducts:\n  - Aluminosilicate\
+  \ glass: Transparent to translucent, greenish tint from FeO\n  - Volatiles: Minor\
+  \ losses from evaporation\nComposition details:\n  - SiO2 (57%): Network former,\
+  \ provides structure\n  - Al2O3 (20%): Improves durability, chemical resistance\n\
+  \  - MgO (12%): Flux, reduces melting point\n  - CaO (5%): Flux, improves workability\n\
+  \  - FeO (6%): Natural lunar component, causes green/brown color\nGlass properties:\n\
+  \  - Melting point: 1100-1350°C (depends on exact composition)\n  - Density: ~2.5-2.7\
+  \ g/cm³\n  - Thermal expansion: Moderate (lower than soda-lime glass)\n  - Chemical\
+  \ resistance: Excellent (aluminosilicate glasses durable)\n  - Optical: Transparent\
+  \ but with greenish tint from FeO\nIron content and color:\n  - Natural lunar glass\
+  \ contains FeO (reduces from Fe2O3 in vacuum melting)\n  - FeO gives green to brown\
+  \ coloration\n  - For transparent colorless glass: Must remove iron impurities\n\
+  \  - For colored glass: Can adjust FeO content deliberately\nDecolorization (if\
+  \ needed):\n  - Oxidize FeO to Fe2O3 (amber color, less intense)\n  - Add MnO2 (complementary\
+  \ color, visual cancellation)\n  - Or purify feedstock to remove all iron\nApplications:\n\
+  \  - Habitat windows: Structural glazing, pressure barriers\n  - Greenhouse covers:\
+  \ Transmit light for plant growth\n  - Containers: Chemical-resistant glassware\n\
+  \  - Fiber optics: Draw into fibers (if purified)\n  - Insulation: Spin into glass\
+  \ wool\n  - Radiation shielding: High-density glass with heavy elements\nAdvantages:\
+  \ Lower melting point than pure silica (saves energy)\n  Uses natural lunar mineral\
+  \ ratios (close to anorthite composition)\n  No exotic additives required\n  Durable\
+  \ and chemically resistant\n  Can be formed by standard glass-working techniques\n\
+  Disadvantages: Natural FeO content darkens glass\n  Not suitable for precision optics\
+  \ (unless purified)\n  Requires multiple oxide inputs (logistical complexity)\n\
+  \  Thermal shock sensitivity (needs careful annealing)\nComparison to fused silica:\n\
+  \  - Fused silica: 100% SiO2, melts at 1710°C, ultra-pure, expensive\n  - Aluminosilicate:\
+  \ Mixed oxides, melts at 1100-1350°C, natural, economical\n  - Fused silica for\
+  \ optics, aluminosilicate for structural\nComparison to soda-lime glass (Earth):\n\
+  \  - Soda-lime: 70% SiO2, 15% Na2O, 10% CaO, melts at 1000°C\n  - Aluminosilicate:\
+  \ No Na2O (sodium scarce on Moon)\n  - Higher Al2O3 content improves durability\n\
+  Lunar context: Natural composition close to anorthite mineral\n  Anorthite: CaAl2Si2O8\
+  \ (decomposed to oxides)\n  Add MgO from olivine, FeO from ilmenite\n  Enables large-scale\
+  \ glass production from local resources\nGlass forming techniques:\n  - Casting:\
+  \ Pour into molds (flat sheets, blocks)\n  - Blowing: Traditional glassblowing for\
+  \ complex shapes\n  - Drawing: Pull fibers or rods from molten glass\n  - Float\
+  \ process: Flat glass on molten tin bath (high quality)\n  - Pressing: Mold under\
+  \ pressure (optical elements)\nAnnealing importance:\n  - Glass cools unevenly →\
+  \ internal stress\n  - Stress causes spontaneous fracture\n  - Anneal at ~500°C\
+  \ (below glass transition)\n  - Slow cool over hours to relieve stress\nThermal\
+  \ properties:\n  - Coefficient of thermal expansion: ~5-7 × 10⁻⁶ /°C\n  - Glass\
+  \ transition temperature: ~600-700°C\n  - Softening point: ~800-900°C\n  - Working\
+  \ range: 1000-1200°C\nChemical durability:\n  - Excellent resistance to water, acids\
+  \ (except HF)\n  - Aluminosilicate glasses very durable\n  - Suitable for long-term\
+  \ lunar environment\nOptical properties:\n  - Refractive index: ~1.52-1.55\n  -\
+  \ Transmittance: 80-90% (visible), reduced by FeO\n  - Absorption edge: UV region\
+  \ (glass blocks UV)\nRadiation resistance:\n  - Glass darkens under ionizing radiation\
+  \ (color centers)\n  - Aluminosilicate glasses more resistant than soda-lime\n \
+  \ - Can self-anneal under solar heating\nRecycling:\n  - Glass fully recyclable\
+  \ (remelt and reform)\n  - No chemical degradation from multiple cycles\n  - Broken\
+  \ glass (cullet) used as feedstock\nCompositional flexibility:\n  - Can adjust ratios\
+  \ for specific properties\n  - More SiO2: Higher melting point, harder, more brittle\n\
+  \  - More MgO/CaO: Lower melting point, easier working\n  - More Al2O3: Higher durability,\
+  \ chemical resistance\nAdvanced variants:\n  - Borosilicate: Add B2O3 for thermal\
+  \ shock resistance (Pyrex-like)\n  - Lead glass: Add PbO for high refractive index\
+  \ (optics)\n  - But exotic additives may not be available initially\nScale-up potential:\n\
+  \  - Glass production highly scalable\n  - Continuous tank furnaces for large-scale\
+  \ production\n  - Can produce tons per day with proper infrastructure\n"

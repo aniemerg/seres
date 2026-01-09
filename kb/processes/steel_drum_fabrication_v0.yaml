@@ -11,19 +11,20 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: fabrication_station
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 2.0
   unit: kWh/kg
   scaling_basis: steel_block_raw_v0
-  notes: "Fabrication energy per kg steel input"
+  notes: Fabrication energy per kg steel input
 time_model:
   type: linear_rate
   rate: 25.0
   rate_unit: kg/hr
   scaling_basis: steel_block_raw_v0
-  notes: "Fabrication rate: 25 kg/hr throughput"
-notes: Placeholder steel drum fabrication using raw steel block; mass-balanced for seed KB closure.
+  notes: 'Fabrication rate: 25 kg/hr throughput'
+notes: Placeholder steel drum fabrication using raw steel block; mass-balanced for
+  seed KB closure.
 process_type: continuous

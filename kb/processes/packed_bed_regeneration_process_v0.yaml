@@ -15,8 +15,11 @@ byproducts:
   unit: kg
 resource_requirements:
 - machine_id: furnace_basic
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.5
@@ -27,5 +30,6 @@ time_model:
   rate: 20.0
   rate_unit: kg/hr
   scaling_basis: packed_bed_spent_v0
-notes: Packed bed regeneration via in-situ regeneration furnace; stoichiometry assumes 10% mass loss to gas.
+notes: Packed bed regeneration via in-situ regeneration furnace; stoichiometry assumes
+  10% mass loss to gas.
 process_type: continuous

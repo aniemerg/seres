@@ -26,8 +26,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 12.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: packed_bed_distillation_v0
   qty: 1
   unit: count
@@ -48,143 +48,86 @@ time_model:
   hr_per_batch: 24.0
   notes: Multi-stage cryogenic separation
 process_type: batch
-notes: |
-  Noble gas extraction (Ne, Ar, Kr, Xe) from lunar regolith volatiles.
-  Source: Sustainable-ISRU-on-the-Moon.txt
-  Purpose: Extract noble gases for ion engine propellant, inert atmospheres, and specialized uses
-  Concentration: <1 ppm total (highly rarefied)
-  WARNING: Extremely low concentrations - not practical for first-generation ISRU
-  Process details:
-    1. Collect mixed volatiles from thermal regolith processing (700-1200°C)
-    2. Remove reactive gases (CO2, H2O, N2) via chemical scrubbing
-    3. Cool remaining gas mixture to cryogenic temperatures
-    4. Multi-stage fractional distillation using boiling point differences:
-       - Ne: 27.1 K (-246°C) boiling point
-       - Ar: 87.3 K (-186°C)
-       - Kr: 119.9 K (-153°C)
-       - Xe: 165.1 K (-108°C)
-    5. Sequential condensation and vaporization stages
-    6. Collect purified noble gas fractions
-    7. Store in high-pressure cylinders (compressed gas)
-  Products:
-    - Neon (Ne): ~0.15 ppm (0.000015%) - inert atmosphere, cryogenics
-    - Argon (Ar): ~0.5 ppm (0.00005%) - inert atmosphere, ion engines
-    - Krypton (Kr): ~0.02 ppm - specialized lighting, ion engines
-    - Xenon (Xe): ~0.003 ppm - ion engines, anesthesia, lighting
-    - Other volatiles: He, H2, N2, CO, CH4 (separated earlier)
-  Concentration in regolith volatiles:
-    - Ne: 0.1-0.3 ppm (parts per million)
-    - Ar: 0.3-0.8 ppm
-    - Kr: 0.01-0.03 ppm
-    - Xe: 0.002-0.005 ppm
-    - Total noble gases: <1 ppm (extremely rare)
-  Boiling points for separation:
-    - He: 4.2 K (separated first, see helium-3 process)
-    - Ne: 27.1 K
-    - H2: 20.3 K (interferes with Ne, remove via chemical reaction)
-    - N2: 77.4 K
-    - Ar: 87.3 K
-    - O2: 90.2 K (if present)
-    - Kr: 119.9 K
-    - Xe: 165.1 K
-    - CO2: 194.7 K (sublimes, removed earlier)
-  Separation strategy:
-    1. Remove CO2 (194K): Sublimation or chemical scrubbing
-    2. Liquefy Xe (165K): Condense, remove
-    3. Liquefy Kr (120K): Condense, remove
-    4. Liquefy Ar (87K): Condense, remove (with N2)
-    5. Separate Ar from N2: Additional distillation (7K difference)
-    6. Liquefy Ne (27K): Condense, remove (separate from H2)
-    7. He remains gaseous (4K for liquefaction)
-  Applications:
-    - Xenon ion engines: High Isp (3000-5000 s), efficient propulsion
-      - Xe: Heavy atom (131 amu), easily ionized (12.1 eV)
-      - Best ion engine propellant (NSTAR, NEXT, HiPEP)
-    - Krypton ion engines: Alternative to Xe, lighter (84 amu)
-    - Argon: Inert atmosphere for welding, crystal growth
-      - Arc welding (TIG/MIG): Prevents oxidation
-      - FFC Cambridge: Inert environment (alternative to vacuum)
-    - Neon: Cryogenic refrigerant, lighting (neon signs)
-    - All: Leak detection, inert gas purging
-  Advantages: Noble gases valuable for propulsion (ion engines)
-    Released automatically with volatile extraction
-    No chemical processing needed (inert, don't react)
-    Can be stored indefinitely (stable)
-  Disadvantages: Extremely low concentration (<1 ppm)
-    Requires processing huge quantities of regolith
-    Energy-intensive cryogenic separation
-    Not economical for early ISRU
-  Lunar context: Noble gases implanted by solar wind
-    Concentration depends on regolith maturity and exposure
-    Mare regolith typically higher than highland
-    Mature regolith (billion years exposure) highest
-  Scale requirements (example for Xe):
-    - Xe concentration: ~3 ppb (0.000003%)
-    - For 1 kg Xe: Must process ~330,000 kg regolith volatiles
-    - Regolith volatile content: ~0.01% by mass
-    - Total regolith: ~33 million kg (33,000 tonnes!)
-    - Clearly not practical for small-scale ISRU
-  Ion engine propellant requirements:
-    - Typical ion engine: 5-10 mg/s Xe consumption
-    - 1 kg Xe: 100,000-200,000 seconds runtime (~28-56 hours)
-    - Deep space missions: 100s-1000s kg Xe required
-    - Lunar extraction cannot supply mission-scale quantities
-  Energy analysis:
-    - Regolith heating: ~0.5 kWh/kg regolith
-    - Cryogenic refrigeration: ~50 kWh/kg noble gas
-    - Multi-stage distillation: ~100 kWh/kg noble gas
-    - Compression/storage: ~50 kWh/kg
-    - Total: ~200 kWh/kg noble gas (very energy intensive)
-  Comparison to Earth sources:
-    - Earth atmosphere: 0.93% Ar, 18 ppm Ne, 1 ppm Kr, 0.09 ppm Xe
-    - 1000× to 1,000,000× higher than lunar regolith
-    - Earth air separation vastly more economical
-  Trade-offs:
-    - Import from Earth vs. extract from regolith
-    - Early stages: Import essential (no alternative)
-    - Long-term: Extraction only if absolutely critical
-    - Most likely: Never economical to extract noble gases on Moon
-  Alternative: Import noble gases from Earth
-    - Compressed gas cylinders: High pressure (150-200 bar)
-    - Cryogenic liquid: Xe, Kr as liquids (saves mass/volume)
-    - Reasonable mass penalty for Earth launch
-    - Far cheaper than lunar extraction
-  Potential niche applications:
-    - Emergency backup: Extract if Earth supply disrupted
-    - Local use: Small quantities for welding, leak detection
-    - Scientific experiments: Study solar wind implantation
-  Helium-3 co-extraction:
-    - He-3 valuable for potential fusion (see helium3_cryogenic_separation_v0)
-    - He separated first (lowest boiling point)
-    - Noble gas extraction shares infrastructure with He-3 extraction
-  Separation efficiency:
-    - Multi-stage distillation: 90-95% recovery
-    - Cross-contamination: <1% between adjacent fractions
-    - Requires 10-20 theoretical stages (trays or packing)
-  Cryogenic refrigeration:
-    - Cascade refrigeration: Multiple refrigerants (NH3, CO2, CH4, etc.)
-    - Or turbo-expander: Adiabatic expansion cooling
-    - Extremely energy intensive (<10% Carnot efficiency typical)
-  Storage and handling:
-    - High-pressure cylinders: 150-200 bar compressed gas
-    - Cryogenic dewars: Liquid Xe (165K), Kr (120K)
-    - Noble gases inert: No safety concerns (non-toxic, non-flammable)
-    - Asphyxiation risk: Displace oxygen in confined spaces
-  Purity requirements:
-    - Ion engines: 99.99% purity minimum (avoid cathode poisoning)
-    - Welding: 99.9% adequate (small O2/N2 contamination acceptable)
-    - Lighting: 99% adequate
-  Isotopic separation:
-    - Natural isotope ratios: Ne (90% Ne-20, 10% Ne-22)
-    - Ar (99.6% Ar-40, 0.3% Ar-36)
-    - Kr, Xe: Multiple stable isotopes
-    - Isotopic separation not typically needed (natural mix acceptable)
-  Research value:
-    - Solar wind composition: Noble gas isotopes record solar wind history
-    - Regolith exposure dating: Ne-21/Ne-22 ratio indicates exposure age
-    - Scientific return: Study noble gas retention in regolith
-  Recommended approach:
-    - Phase 1 (years 0-20): Import all noble gases from Earth
-    - Phase 2 (years 20-50): Pilot noble gas extraction (research)
-    - Phase 3 (years 50+): Consider noble gas extraction only if critical
-    - Most likely: Import indefinitely (too expensive to extract locally)
+notes: "Noble gas extraction (Ne, Ar, Kr, Xe) from lunar regolith volatiles.\nSource:\
+  \ Sustainable-ISRU-on-the-Moon.txt\nPurpose: Extract noble gases for ion engine\
+  \ propellant, inert atmospheres, and specialized uses\nConcentration: <1 ppm total\
+  \ (highly rarefied)\nWARNING: Extremely low concentrations - not practical for first-generation\
+  \ ISRU\nProcess details:\n  1. Collect mixed volatiles from thermal regolith processing\
+  \ (700-1200°C)\n  2. Remove reactive gases (CO2, H2O, N2) via chemical scrubbing\n\
+  \  3. Cool remaining gas mixture to cryogenic temperatures\n  4. Multi-stage fractional\
+  \ distillation using boiling point differences:\n     - Ne: 27.1 K (-246°C) boiling\
+  \ point\n     - Ar: 87.3 K (-186°C)\n     - Kr: 119.9 K (-153°C)\n     - Xe: 165.1\
+  \ K (-108°C)\n  5. Sequential condensation and vaporization stages\n  6. Collect\
+  \ purified noble gas fractions\n  7. Store in high-pressure cylinders (compressed\
+  \ gas)\nProducts:\n  - Neon (Ne): ~0.15 ppm (0.000015%) - inert atmosphere, cryogenics\n\
+  \  - Argon (Ar): ~0.5 ppm (0.00005%) - inert atmosphere, ion engines\n  - Krypton\
+  \ (Kr): ~0.02 ppm - specialized lighting, ion engines\n  - Xenon (Xe): ~0.003 ppm\
+  \ - ion engines, anesthesia, lighting\n  - Other volatiles: He, H2, N2, CO, CH4\
+  \ (separated earlier)\nConcentration in regolith volatiles:\n  - Ne: 0.1-0.3 ppm\
+  \ (parts per million)\n  - Ar: 0.3-0.8 ppm\n  - Kr: 0.01-0.03 ppm\n  - Xe: 0.002-0.005\
+  \ ppm\n  - Total noble gases: <1 ppm (extremely rare)\nBoiling points for separation:\n\
+  \  - He: 4.2 K (separated first, see helium-3 process)\n  - Ne: 27.1 K\n  - H2:\
+  \ 20.3 K (interferes with Ne, remove via chemical reaction)\n  - N2: 77.4 K\n  -\
+  \ Ar: 87.3 K\n  - O2: 90.2 K (if present)\n  - Kr: 119.9 K\n  - Xe: 165.1 K\n  -\
+  \ CO2: 194.7 K (sublimes, removed earlier)\nSeparation strategy:\n  1. Remove CO2\
+  \ (194K): Sublimation or chemical scrubbing\n  2. Liquefy Xe (165K): Condense, remove\n\
+  \  3. Liquefy Kr (120K): Condense, remove\n  4. Liquefy Ar (87K): Condense, remove\
+  \ (with N2)\n  5. Separate Ar from N2: Additional distillation (7K difference)\n\
+  \  6. Liquefy Ne (27K): Condense, remove (separate from H2)\n  7. He remains gaseous\
+  \ (4K for liquefaction)\nApplications:\n  - Xenon ion engines: High Isp (3000-5000\
+  \ s), efficient propulsion\n    - Xe: Heavy atom (131 amu), easily ionized (12.1\
+  \ eV)\n    - Best ion engine propellant (NSTAR, NEXT, HiPEP)\n  - Krypton ion engines:\
+  \ Alternative to Xe, lighter (84 amu)\n  - Argon: Inert atmosphere for welding,\
+  \ crystal growth\n    - Arc welding (TIG/MIG): Prevents oxidation\n    - FFC Cambridge:\
+  \ Inert environment (alternative to vacuum)\n  - Neon: Cryogenic refrigerant, lighting\
+  \ (neon signs)\n  - All: Leak detection, inert gas purging\nAdvantages: Noble gases\
+  \ valuable for propulsion (ion engines)\n  Released automatically with volatile\
+  \ extraction\n  No chemical processing needed (inert, don't react)\n  Can be stored\
+  \ indefinitely (stable)\nDisadvantages: Extremely low concentration (<1 ppm)\n \
+  \ Requires processing huge quantities of regolith\n  Energy-intensive cryogenic\
+  \ separation\n  Not economical for early ISRU\nLunar context: Noble gases implanted\
+  \ by solar wind\n  Concentration depends on regolith maturity and exposure\n  Mare\
+  \ regolith typically higher than highland\n  Mature regolith (billion years exposure)\
+  \ highest\nScale requirements (example for Xe):\n  - Xe concentration: ~3 ppb (0.000003%)\n\
+  \  - For 1 kg Xe: Must process ~330,000 kg regolith volatiles\n  - Regolith volatile\
+  \ content: ~0.01% by mass\n  - Total regolith: ~33 million kg (33,000 tonnes!)\n\
+  \  - Clearly not practical for small-scale ISRU\nIon engine propellant requirements:\n\
+  \  - Typical ion engine: 5-10 mg/s Xe consumption\n  - 1 kg Xe: 100,000-200,000\
+  \ seconds runtime (~28-56 hours)\n  - Deep space missions: 100s-1000s kg Xe required\n\
+  \  - Lunar extraction cannot supply mission-scale quantities\nEnergy analysis:\n\
+  \  - Regolith heating: ~0.5 kWh/kg regolith\n  - Cryogenic refrigeration: ~50 kWh/kg\
+  \ noble gas\n  - Multi-stage distillation: ~100 kWh/kg noble gas\n  - Compression/storage:\
+  \ ~50 kWh/kg\n  - Total: ~200 kWh/kg noble gas (very energy intensive)\nComparison\
+  \ to Earth sources:\n  - Earth atmosphere: 0.93% Ar, 18 ppm Ne, 1 ppm Kr, 0.09 ppm\
+  \ Xe\n  - 1000× to 1,000,000× higher than lunar regolith\n  - Earth air separation\
+  \ vastly more economical\nTrade-offs:\n  - Import from Earth vs. extract from regolith\n\
+  \  - Early stages: Import essential (no alternative)\n  - Long-term: Extraction\
+  \ only if absolutely critical\n  - Most likely: Never economical to extract noble\
+  \ gases on Moon\nAlternative: Import noble gases from Earth\n  - Compressed gas\
+  \ cylinders: High pressure (150-200 bar)\n  - Cryogenic liquid: Xe, Kr as liquids\
+  \ (saves mass/volume)\n  - Reasonable mass penalty for Earth launch\n  - Far cheaper\
+  \ than lunar extraction\nPotential niche applications:\n  - Emergency backup: Extract\
+  \ if Earth supply disrupted\n  - Local use: Small quantities for welding, leak detection\n\
+  \  - Scientific experiments: Study solar wind implantation\nHelium-3 co-extraction:\n\
+  \  - He-3 valuable for potential fusion (see helium3_cryogenic_separation_v0)\n\
+  \  - He separated first (lowest boiling point)\n  - Noble gas extraction shares\
+  \ infrastructure with He-3 extraction\nSeparation efficiency:\n  - Multi-stage distillation:\
+  \ 90-95% recovery\n  - Cross-contamination: <1% between adjacent fractions\n  -\
+  \ Requires 10-20 theoretical stages (trays or packing)\nCryogenic refrigeration:\n\
+  \  - Cascade refrigeration: Multiple refrigerants (NH3, CO2, CH4, etc.)\n  - Or\
+  \ turbo-expander: Adiabatic expansion cooling\n  - Extremely energy intensive (<10%\
+  \ Carnot efficiency typical)\nStorage and handling:\n  - High-pressure cylinders:\
+  \ 150-200 bar compressed gas\n  - Cryogenic dewars: Liquid Xe (165K), Kr (120K)\n\
+  \  - Noble gases inert: No safety concerns (non-toxic, non-flammable)\n  - Asphyxiation\
+  \ risk: Displace oxygen in confined spaces\nPurity requirements:\n  - Ion engines:\
+  \ 99.99% purity minimum (avoid cathode poisoning)\n  - Welding: 99.9% adequate (small\
+  \ O2/N2 contamination acceptable)\n  - Lighting: 99% adequate\nIsotopic separation:\n\
+  \  - Natural isotope ratios: Ne (90% Ne-20, 10% Ne-22)\n  - Ar (99.6% Ar-40, 0.3%\
+  \ Ar-36)\n  - Kr, Xe: Multiple stable isotopes\n  - Isotopic separation not typically\
+  \ needed (natural mix acceptable)\nResearch value:\n  - Solar wind composition:\
+  \ Noble gas isotopes record solar wind history\n  - Regolith exposure dating: Ne-21/Ne-22\
+  \ ratio indicates exposure age\n  - Scientific return: Study noble gas retention\
+  \ in regolith\nRecommended approach:\n  - Phase 1 (years 0-20): Import all noble\
+  \ gases from Earth\n  - Phase 2 (years 20-50): Pilot noble gas extraction (research)\n\
+  \  - Phase 3 (years 50+): Consider noble gas extraction only if critical\n  - Most\
+  \ likely: Import indefinitely (too expensive to extract locally)\n"

@@ -27,8 +27,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 4.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: furnace_high_temp
   qty: 1
   unit: count
@@ -48,57 +48,34 @@ time_model:
   type: batch
   hr_per_batch: 8.0
   notes: Heating, evolution, and cryogenic separation
-notes: |
-  Thermal extraction and fractional distillation of solar-wind volatiles from lunar regolith.
-  Source: Sustainable-ISRU-on-the-Moon.txt, I-SAIRAS-2020
-  Process: Heat regolith to evolve implanted volatiles, then fractionally distill
-  Temperature: 700-1200°C (higher for complete volatile release)
-  Purpose: Extract H, He, C, N volatiles from regolith
-  Critical source of scarce light elements
-  Process details:
-    1. Excavate regolith from upper 2-3m (gardened by impacts)
-    2. Heat in furnace to 700°C (most volatiles) or 1200°C (complete)
-    3. Evolved gases collected: H2, He, CO, CO2, CH4, N2, H2O
-    4. Fractional distillation by condensation temperature:
-       - He: 4.2 K (condenses first at lowest temp)
-       - H2: 20 K
-       - N2: 77 K
-       - CO: 81 K
-       - CH4: 109 K
-       - CO2: 194 K
-       - H2O: 373 K (condenses last)
-  Products (average concentrations from highlands regolith):
-    - H: 46 ppm (mostly as H2, some in H2O, CH4)
-    - 4He: 14 ppm (noble gas)
-    - C: 124 ppm (CO, CO2, CH4 mixture - most abundant volatile!)
-    - N: 81 ppm (mostly N2)
-    - Also: F, Cl, S in trace amounts
-  Solar-wind implantation:
-    - Volatiles implanted in mineral grains over millions of years
-    - Concentration approximately constant to 2-3m depth (gardening)
-    - Ilmenite-rich regolith has highest volatile retention
-    - Mature regolith (long surface exposure) richest
-  Volatile yields (typical):
-    - H2O equivalent: ~900 J/kg/°C heating energy
-    - Total volatiles: <300 ppm by mass (0.03%)
-    - Carbon most abundant volatile (after H)
-  Stoichiometry: 1000 kg regolith → ~0.26 kg total volatiles
-  Critical elements:
-    - H: Water, hydrogen reduction, life support
-    - He: Inert atmosphere, leak detection, (3He fusion fuel)
-    - C: Plastics, reducing agent, FFC anodes, life support
-    - N: Fertilizer, Haber-Bosch, life support, propellant oxidizer
-  Advantages: Only source of light volatiles (H, He, C, N) on Moon
-  Simple thermal process
-  Regolith abundant everywhere
-  No chemical reagents needed
-  Disadvantages: Very low concentrations (<300 ppm)
-  Large mass throughput required
-  Energy intensive for low yield
-  Cryogenic separation complexity
-  Lunar context: Absolutely critical for long-term sustainability
-  No other source of C, N, He on Moon
-  Hydrogen supplemented by polar water ice
-  Must carefully husband these scarce resources
-  Ilmenite beneficiation increases volatile concentration
-  3He valuable for future fusion (4-30 ppb, extract with other volatiles)
+notes: "Thermal extraction and fractional distillation of solar-wind volatiles from\
+  \ lunar regolith.\nSource: Sustainable-ISRU-on-the-Moon.txt, I-SAIRAS-2020\nProcess:\
+  \ Heat regolith to evolve implanted volatiles, then fractionally distill\nTemperature:\
+  \ 700-1200°C (higher for complete volatile release)\nPurpose: Extract H, He, C,\
+  \ N volatiles from regolith\nCritical source of scarce light elements\nProcess details:\n\
+  \  1. Excavate regolith from upper 2-3m (gardened by impacts)\n  2. Heat in furnace\
+  \ to 700°C (most volatiles) or 1200°C (complete)\n  3. Evolved gases collected:\
+  \ H2, He, CO, CO2, CH4, N2, H2O\n  4. Fractional distillation by condensation temperature:\n\
+  \     - He: 4.2 K (condenses first at lowest temp)\n     - H2: 20 K\n     - N2:\
+  \ 77 K\n     - CO: 81 K\n     - CH4: 109 K\n     - CO2: 194 K\n     - H2O: 373 K\
+  \ (condenses last)\nProducts (average concentrations from highlands regolith):\n\
+  \  - H: 46 ppm (mostly as H2, some in H2O, CH4)\n  - 4He: 14 ppm (noble gas)\n \
+  \ - C: 124 ppm (CO, CO2, CH4 mixture - most abundant volatile!)\n  - N: 81 ppm (mostly\
+  \ N2)\n  - Also: F, Cl, S in trace amounts\nSolar-wind implantation:\n  - Volatiles\
+  \ implanted in mineral grains over millions of years\n  - Concentration approximately\
+  \ constant to 2-3m depth (gardening)\n  - Ilmenite-rich regolith has highest volatile\
+  \ retention\n  - Mature regolith (long surface exposure) richest\nVolatile yields\
+  \ (typical):\n  - H2O equivalent: ~900 J/kg/°C heating energy\n  - Total volatiles:\
+  \ <300 ppm by mass (0.03%)\n  - Carbon most abundant volatile (after H)\nStoichiometry:\
+  \ 1000 kg regolith → ~0.26 kg total volatiles\nCritical elements:\n  - H: Water,\
+  \ hydrogen reduction, life support\n  - He: Inert atmosphere, leak detection, (3He\
+  \ fusion fuel)\n  - C: Plastics, reducing agent, FFC anodes, life support\n  - N:\
+  \ Fertilizer, Haber-Bosch, life support, propellant oxidizer\nAdvantages: Only source\
+  \ of light volatiles (H, He, C, N) on Moon\nSimple thermal process\nRegolith abundant\
+  \ everywhere\nNo chemical reagents needed\nDisadvantages: Very low concentrations\
+  \ (<300 ppm)\nLarge mass throughput required\nEnergy intensive for low yield\nCryogenic\
+  \ separation complexity\nLunar context: Absolutely critical for long-term sustainability\n\
+  No other source of C, N, He on Moon\nHydrogen supplemented by polar water ice\n\
+  Must carefully husband these scarce resources\nIlmenite beneficiation increases\
+  \ volatile concentration\n3He valuable for future fusion (4-30 ppb, extract with\
+  \ other volatiles)\n"

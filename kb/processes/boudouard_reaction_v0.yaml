@@ -18,8 +18,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: chemical_reactor_heated
   qty: 1
   unit: count
@@ -32,34 +32,23 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Gas-solid reaction time at temperature
-notes: |
-  Boudouard reaction for converting carbon dioxide to carbon monoxide using carbon.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: C + CO2 → 2CO (endothermic)
-  Temperature: ~700°C (equilibrium shifts right with increasing temperature)
-  Process: Gas-solid heterogeneous reaction
-  Purpose: Regenerate CO for Mond/carbonyl metal purification processes
-  Convert waste CO2 back to useful CO
-  Close carbon cycle in FFC Cambridge process
-  Thermodynamics:
-    - Endothermic (ΔH = +172 kJ/mol)
-    - Favored at high temperature (Le Chatelier)
-    - Reverse reaction (2CO → C + CO2) favored at low temp
-  Products:
-    - CO (carbon monoxide): Mond process feedstock, reducing agent
-  Stoichiometry: C (12g) + CO2 (44g) → 2CO (56g)
-  Mass fractions: Input 21.4% C, 100% CO2 → Output 127% CO (from combined inputs)
-  Applications:
-    - CO regeneration for Mond/carbonyl processes (Ni, Fe, Co, W purification)
-    - Carbon cycle closure for FFC Cambridge anode consumption
-    - Chemical feedstock production
-  Carbon source: FFC anode consumption, volatile extraction, pyrolysis
-  CO2 source: FFC process, combustion, respiration, fermentation
-  Reverse reaction (Boudouard equilibrium):
-    - At <700°C: 2CO → C + CO2 (disproportionation)
-    - Used to deposit carbon from CO
-  Industrial applications: Blast furnaces, gasification, synthesis gas
-  Lunar context: Essential for carbon recycling in closed-loop ISRU
-  Prevents carbon loss from system
-  Equilibrium depends on temperature - operate above 700°C for forward reaction
-  Can use solar thermal or resistive heating
+notes: "Boudouard reaction for converting carbon dioxide to carbon monoxide using\
+  \ carbon.\nSource: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\n\
+  Reaction: C + CO2 → 2CO (endothermic)\nTemperature: ~700°C (equilibrium shifts right\
+  \ with increasing temperature)\nProcess: Gas-solid heterogeneous reaction\nPurpose:\
+  \ Regenerate CO for Mond/carbonyl metal purification processes\nConvert waste CO2\
+  \ back to useful CO\nClose carbon cycle in FFC Cambridge process\nThermodynamics:\n\
+  \  - Endothermic (ΔH = +172 kJ/mol)\n  - Favored at high temperature (Le Chatelier)\n\
+  \  - Reverse reaction (2CO → C + CO2) favored at low temp\nProducts:\n  - CO (carbon\
+  \ monoxide): Mond process feedstock, reducing agent\nStoichiometry: C (12g) + CO2\
+  \ (44g) → 2CO (56g)\nMass fractions: Input 21.4% C, 100% CO2 → Output 127% CO (from\
+  \ combined inputs)\nApplications:\n  - CO regeneration for Mond/carbonyl processes\
+  \ (Ni, Fe, Co, W purification)\n  - Carbon cycle closure for FFC Cambridge anode\
+  \ consumption\n  - Chemical feedstock production\nCarbon source: FFC anode consumption,\
+  \ volatile extraction, pyrolysis\nCO2 source: FFC process, combustion, respiration,\
+  \ fermentation\nReverse reaction (Boudouard equilibrium):\n  - At <700°C: 2CO →\
+  \ C + CO2 (disproportionation)\n  - Used to deposit carbon from CO\nIndustrial applications:\
+  \ Blast furnaces, gasification, synthesis gas\nLunar context: Essential for carbon\
+  \ recycling in closed-loop ISRU\nPrevents carbon loss from system\nEquilibrium depends\
+  \ on temperature - operate above 700°C for forward reaction\nCan use solar thermal\
+  \ or resistive heating\n"

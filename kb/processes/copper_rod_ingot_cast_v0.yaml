@@ -3,17 +3,17 @@ kind: process
 name: Copper rod ingot casting
 process_type: batch
 inputs:
-  - item_id: copper_scrap_v0
-    qty: 1.0
-    unit: kg
+- item_id: copper_scrap_v0
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: copper_rod_ingot
-    qty: 1.0
-    unit: kg
+- item_id: copper_rod_ingot
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
@@ -21,4 +21,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.75
-notes: "Casting copper rod ingot from copper scrap in a casting furnace; placeholder mass balance."
+notes: Casting copper rod ingot from copper scrap in a casting furnace; placeholder
+  mass balance.

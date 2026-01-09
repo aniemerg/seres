@@ -14,8 +14,11 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1.0
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -25,8 +28,11 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Simple 1-hour batch to produce pure iron from ore
-notes: |
-  Minimal placeholder process converting iron ore/ilmenite to pure iron.
+notes: 'Minimal placeholder process converting iron ore/ilmenite to pure iron.
+
   Used to resolve missing recipe gaps in the KB. In a real system, this would be
+
   tied to a full ISRU reduction/refining sequence.
+
+  '
 process_type: batch

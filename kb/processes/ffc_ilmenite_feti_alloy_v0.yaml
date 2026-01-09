@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: ffc_reactor_unit_v0
   qty: 1
   unit: count
@@ -47,61 +47,39 @@ time_model:
   type: batch
   hr_per_batch: 10.0
   notes: Direct reduction of ilmenite to alloy sponge
-notes: |
-  Direct FFC Cambridge reduction of ilmenite to produce ferrotitanium mongrel alloy.
-  Source: ellery-et-al-2022-metalysis-fray-farthing-chen-process, FFC-process-for-deep-ISRU.txt
-  Reaction: FeTiO3 → FeTi alloy + O2 (via electrolysis in CaCl2)
-  Temperature: 900-1100°C (molten CaCl2 electrolyte)
-  Voltage: 2.5-3V typical
-  Process: Direct electrolytic reduction without preprocessing
-  Purpose: Simple one-step alloy production from ilmenite
-  Alternative to hydrogen reduction + separation
-  Structural material and specialty applications
-  Process details:
-    1. Ilmenite concentrate (FeTiO3) from mare regolith
-    2. Sinter into cathode pellet/rod
-    3. Immerse in molten CaCl2 electrolyte at 900-1100°C
-    4. Apply voltage (graphite anode)
-    5. FeTi alloy forms as porous sponge at cathode
-    6. Oxygen released at anode (CO/CO2 with graphite)
-    7. Remove alloy sponge, mechanically densify or remelt
-  Products:
-    - FeTi alloy (ferrotitanium): 45-75% Ti typical composition
-    - O2 (oxygen): Valuable by-product
-  Ferrotitanium alloy applications:
-    - General structural material (moderate strength)
-    - Oxygen scavenging in metallurgy (deoxidation agent)
-    - Pyrotechnic fuel (reacts vigorously with O2)
-    - Specialty alloy additive
-  Alloy composition:
-    - Depends on exact ilmenite composition
-    - FeTiO3 theoretically → ~52% Ti, 48% Fe by mass
-    - Actual: 45-75% Ti range (ferroti tanium specification)
-  Stoichiometry: FeTiO3 (151.7g) → Fe (55.8g) + Ti (47.9g) + 1.5 O2 (48g)
-  Total metal: 103.7g (68.3% of ilmenite), oxygen: 31.6%
-  Advantages: Single-step process (no preprocessing)
-    Simpler than H2 reduction + Fe/TiO2 separation
-    Alloy suitable for many applications as-is
-    Higher oxygen yield than H2 reduction
-    Well-suited for bulk structural material production
-  Disadvantages: "Mongrel" alloy composition not precisely controlled
-    Properties need investigation
-    Not suitable where pure Fe or pure Ti required
-    Oxygen-scavenging property may limit applications
-    (reacts with free O2 - problematic in oxidizing environments)
-  Comparison to pure metal routes:
-    - Pure route: FeTiO3 + H2 → Fe + TiO2, then separate and purify
-    - Mongrel route: FeTiO3 → FeTi alloy directly (simpler)
-  Lunar context: Ilmenite abundant in mare basalts (10-25% by weight)
-    Simplest route for structural metal from ilmenite
-    Suitable for non-critical structures, tools, equipment
-    Trade-off: Simplicity vs. material property control
-  Oxygen yield: 31.6% by mass (good for ISRU)
-  Further processing: Can remelt alloy to densify
-    Can add other elements to adjust properties
-    Or separate Fe/Ti via subsequent processing if needed
-  Caution: Oxygen-scavenging property
-    - FeTi + O2 → oxides (exothermic, pyrotechnic)
-    - Should not be used where free O2 present
-    - Suitable for vacuum or inert atmosphere applications
-    - Or as deoxidizer in metallurgy (intentional use)
+notes: "Direct FFC Cambridge reduction of ilmenite to produce ferrotitanium mongrel\
+  \ alloy.\nSource: ellery-et-al-2022-metalysis-fray-farthing-chen-process, FFC-process-for-deep-ISRU.txt\n\
+  Reaction: FeTiO3 → FeTi alloy + O2 (via electrolysis in CaCl2)\nTemperature: 900-1100°C\
+  \ (molten CaCl2 electrolyte)\nVoltage: 2.5-3V typical\nProcess: Direct electrolytic\
+  \ reduction without preprocessing\nPurpose: Simple one-step alloy production from\
+  \ ilmenite\nAlternative to hydrogen reduction + separation\nStructural material\
+  \ and specialty applications\nProcess details:\n  1. Ilmenite concentrate (FeTiO3)\
+  \ from mare regolith\n  2. Sinter into cathode pellet/rod\n  3. Immerse in molten\
+  \ CaCl2 electrolyte at 900-1100°C\n  4. Apply voltage (graphite anode)\n  5. FeTi\
+  \ alloy forms as porous sponge at cathode\n  6. Oxygen released at anode (CO/CO2\
+  \ with graphite)\n  7. Remove alloy sponge, mechanically densify or remelt\nProducts:\n\
+  \  - FeTi alloy (ferrotitanium): 45-75% Ti typical composition\n  - O2 (oxygen):\
+  \ Valuable by-product\nFerrotitanium alloy applications:\n  - General structural\
+  \ material (moderate strength)\n  - Oxygen scavenging in metallurgy (deoxidation\
+  \ agent)\n  - Pyrotechnic fuel (reacts vigorously with O2)\n  - Specialty alloy\
+  \ additive\nAlloy composition:\n  - Depends on exact ilmenite composition\n  - FeTiO3\
+  \ theoretically → ~52% Ti, 48% Fe by mass\n  - Actual: 45-75% Ti range (ferroti\
+  \ tanium specification)\nStoichiometry: FeTiO3 (151.7g) → Fe (55.8g) + Ti (47.9g)\
+  \ + 1.5 O2 (48g)\nTotal metal: 103.7g (68.3% of ilmenite), oxygen: 31.6%\nAdvantages:\
+  \ Single-step process (no preprocessing)\n  Simpler than H2 reduction + Fe/TiO2\
+  \ separation\n  Alloy suitable for many applications as-is\n  Higher oxygen yield\
+  \ than H2 reduction\n  Well-suited for bulk structural material production\nDisadvantages:\
+  \ \"Mongrel\" alloy composition not precisely controlled\n  Properties need investigation\n\
+  \  Not suitable where pure Fe or pure Ti required\n  Oxygen-scavenging property\
+  \ may limit applications\n  (reacts with free O2 - problematic in oxidizing environments)\n\
+  Comparison to pure metal routes:\n  - Pure route: FeTiO3 + H2 → Fe + TiO2, then\
+  \ separate and purify\n  - Mongrel route: FeTiO3 → FeTi alloy directly (simpler)\n\
+  Lunar context: Ilmenite abundant in mare basalts (10-25% by weight)\n  Simplest\
+  \ route for structural metal from ilmenite\n  Suitable for non-critical structures,\
+  \ tools, equipment\n  Trade-off: Simplicity vs. material property control\nOxygen\
+  \ yield: 31.6% by mass (good for ISRU)\nFurther processing: Can remelt alloy to\
+  \ densify\n  Can add other elements to adjust properties\n  Or separate Fe/Ti via\
+  \ subsequent processing if needed\nCaution: Oxygen-scavenging property\n  - FeTi\
+  \ + O2 → oxides (exothermic, pyrotechnic)\n  - Should not be used where free O2\
+  \ present\n  - Suitable for vacuum or inert atmosphere applications\n  - Or as deoxidizer\
+  \ in metallurgy (intentional use)\n"

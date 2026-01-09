@@ -15,20 +15,21 @@ byproducts:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.8
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.6
   unit: kWh/kg
   scaling_basis: aluminum_alloy_ingot
-  notes: "Extrusion energy per kg input"
+  notes: Extrusion energy per kg input
 time_model:
   type: linear_rate
   setup_hr: 0.0
   rate: 12.5
   rate_unit: kg/hr
   scaling_basis: aluminum_alloy_ingot
-notes: Extrude aluminum alloy ingot into heat sink fin extrusion; 25 kg input yields 22 kg extrusion and 3 kg scrap. Placeholder
-  values aligned with existing extrusion templates.
+notes: Extrude aluminum alloy ingot into heat sink fin extrusion; 25 kg input yields
+  22 kg extrusion and 3 kg scrap. Placeholder values aligned with existing extrusion
+  templates.
 process_type: continuous

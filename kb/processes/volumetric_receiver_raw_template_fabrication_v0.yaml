@@ -2,18 +2,18 @@ id: volumetric_receiver_raw_template_fabrication_v0
 kind: process
 name: Volumetric receiver raw template fabrication
 layer_tags:
-  - layer_4
-  - layer_5
+- layer_4
+- layer_5
 inputs: []
 outputs:
-  - item_id: volumetric_receiver_porous_raw_template_v0
-    qty: 1.0
-    unit: unit
+- item_id: volumetric_receiver_porous_raw_template_v0
+  qty: 1.0
+  unit: unit
 requires_ids: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -22,4 +22,4 @@ time_model:
   type: batch
   hr_per_batch: 0.25
 process_type: batch
-notes: "Placeholder fabrication step to create raw template from scratch."
+notes: Placeholder fabrication step to create raw template from scratch.

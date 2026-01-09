@@ -2,30 +2,33 @@ id: sorel_cement_synthesis_v0
 kind: process
 name: Sorel cement synthesis
 layer_tags:
-  - layer_5
+- layer_5
 inputs:
-  - item_id: magnesium_oxide
-    qty: 0.6
-    unit: kg
-  - item_id: magnesium_chloride
-    qty: 0.4
-    unit: kg
+- item_id: magnesium_oxide
+  qty: 0.6
+  unit: kg
+- item_id: magnesium_chloride
+  qty: 0.4
+  unit: kg
 outputs:
-  - item_id: sorel_cement
-    qty: 1.0
-    unit: kg
+- item_id: sorel_cement
+  qty: 1.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.5
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1.0
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
   unit: kWh
-  notes: "Mixing and curing energy"
+  notes: Mixing and curing energy
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: "Blend, mold, and initial cure"
+  notes: Blend, mold, and initial cure
 process_type: batch
-notes: "Magnesium oxychloride cement (Sorel) made by mixing MgO and MgCl2."
+notes: Magnesium oxychloride cement (Sorel) made by mixing MgO and MgCl2.

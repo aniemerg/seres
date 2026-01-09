@@ -4,13 +4,13 @@ process_type: batch
 is_template: true
 name: Resource availability (abstract placeholder)
 layer_tags:
-  - layer_1
+- layer_1
 inputs: []
 outputs: []
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 0.001
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 time_model:
   type: batch
   hr_per_batch: 0.001
@@ -20,12 +20,18 @@ energy_model:
   value: 0.001
   unit: kWh
   notes: Abstract resource availability - minimal energy placeholder
-notes: |
-  Abstract placeholder process for resources that are inherently available.
+notes: 'Abstract placeholder process for resources that are inherently available.
+
   Used for: computing_time, abstract services, conceptual resources.
+
   This is not a manufacturing process - it represents resource availability.
+
   Actual outputs are specified in recipes that use this process.
+
+  '
 provenance: hand_assumption
-assumptions: |
-  Some resources (computing time, abstract services) don't require manufacturing.
+assumptions: 'Some resources (computing time, abstract services) don''t require manufacturing.
+
   This process serves as a KB placeholder to satisfy closure requirements.
+
+  '

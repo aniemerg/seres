@@ -24,8 +24,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: furnace_high_temp
   qty: 1
   unit: count
@@ -44,36 +44,22 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: High temperature vapor phase processing
-notes: |
-  Carbothermal reduction of olivine at extreme temperature to produce Mg vapor and Si.
-  Source: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt
-  Reaction: Mg2SiO4 + 2C → 2Mg + SiO + 2CO
-  Temperature: 2000°C (extreme solar concentration or nuclear heat)
-  Process: High-temperature carbon reduction in vacuum or inert atmosphere
-  All products gaseous at reaction temperature:
-    - Mg vapor (BP 1091°C)
-    - SiO gas (BP 1880°C)
-    - CO gas
-  Product separation by condensation temperature:
-    - SiO condenses first (higher BP)
-    - Mg condenses at lower temperature
-    - CO remains gaseous for collection
-  Advantages: Direct metal production from oxide
-  No reagents except carbon
-  High purity products via vapor separation
-  CO recyclable via Boudouard: C + CO2 → 2CO
-  Disadvantages: Extremely high temperature (2000°C)
-  Vapor handling complexity
-  Energy intensive
-  Mg vaporization losses possible
-  Stoichiometry: Mg2SiO4 (140.7g) + 2C (24g) → 2Mg (48.6g) + SiO (42g) + 2CO (56g)
-  Mass fractions from ore: 34.5% Mg, 29.8% SiO, 39.8% CO
-  SiO further processing options:
-    - Disproportionation: 2SiO → Si + SiO2 (at 1000°C)
-    - Direct use as silicon source
-  Magnesium collection: Condense vapor in cool chamber
-  Similar to vacuum pyrolysis but uses carbon reductant
-  Energy source: Solar concentrators or nuclear thermal reactors
-  Suitable for lunar south pole with continuous solar access
-  Alternative to Pidgeon or FFC routes
-  Highest temperature process for olivine, but yields pure products
+notes: "Carbothermal reduction of olivine at extreme temperature to produce Mg vapor\
+  \ and Si.\nSource: Sustainable-ISRU-on-the-Moon.txt, FFC-process-for-deep-ISRU.txt\n\
+  Reaction: Mg2SiO4 + 2C → 2Mg + SiO + 2CO\nTemperature: 2000°C (extreme solar concentration\
+  \ or nuclear heat)\nProcess: High-temperature carbon reduction in vacuum or inert\
+  \ atmosphere\nAll products gaseous at reaction temperature:\n  - Mg vapor (BP 1091°C)\n\
+  \  - SiO gas (BP 1880°C)\n  - CO gas\nProduct separation by condensation temperature:\n\
+  \  - SiO condenses first (higher BP)\n  - Mg condenses at lower temperature\n  -\
+  \ CO remains gaseous for collection\nAdvantages: Direct metal production from oxide\n\
+  No reagents except carbon\nHigh purity products via vapor separation\nCO recyclable\
+  \ via Boudouard: C + CO2 → 2CO\nDisadvantages: Extremely high temperature (2000°C)\n\
+  Vapor handling complexity\nEnergy intensive\nMg vaporization losses possible\nStoichiometry:\
+  \ Mg2SiO4 (140.7g) + 2C (24g) → 2Mg (48.6g) + SiO (42g) + 2CO (56g)\nMass fractions\
+  \ from ore: 34.5% Mg, 29.8% SiO, 39.8% CO\nSiO further processing options:\n  -\
+  \ Disproportionation: 2SiO → Si + SiO2 (at 1000°C)\n  - Direct use as silicon source\n\
+  Magnesium collection: Condense vapor in cool chamber\nSimilar to vacuum pyrolysis\
+  \ but uses carbon reductant\nEnergy source: Solar concentrators or nuclear thermal\
+  \ reactors\nSuitable for lunar south pole with continuous solar access\nAlternative\
+  \ to Pidgeon or FFC routes\nHighest temperature process for olivine, but yields\
+  \ pure products\n"

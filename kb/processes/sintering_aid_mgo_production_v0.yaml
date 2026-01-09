@@ -2,24 +2,24 @@ id: sintering_aid_mgo_production_v0
 name: Sintering aid MgO production (placeholder) v0
 kind: process
 inputs:
-  - item_id: magnesium_oxide
-    qty: 100.0
-    unit: kg
+- item_id: magnesium_oxide
+  qty: 100.0
+  unit: kg
 outputs:
-  - item_id: sintering_aid_mgo
-    qty: 100.0
-    unit: kg
+- item_id: sintering_aid_mgo
+  qty: 100.0
+  unit: kg
 resource_requirements:
-  - machine_id: sintering_furnace_v0
-    qty: 1.0
-    unit: hr
+- machine_id: sintering_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 50.0
   unit: kWh
-  notes: "Placeholder energy for transforming MgO to sintering_aid_mgo (100 kg batch)"
+  notes: Placeholder energy for transforming MgO to sintering_aid_mgo (100 kg batch)
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Placeholder production path: convert MgO to sintering_aid_mgo for modeling." 
+notes: 'Placeholder production path: convert MgO to sintering_aid_mgo for modeling.'
 process_type: batch

@@ -18,11 +18,11 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: coating_station
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: labor_bot_general_v0
-  qty: 0.4
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -30,5 +30,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Coating cathode with oxide layer (BaO precursor) as part of vacuum-tube cathode production. Placeholder values; used to enable mass balance in the early model."
-source_tags: [ellery_seed, ai_guess]
+notes: Coating cathode with oxide layer (BaO precursor) as part of vacuum-tube cathode
+  production. Placeholder values; used to enable mass balance in the early model.
+source_tags:
+- ellery_seed
+- ai_guess

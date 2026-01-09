@@ -20,8 +20,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: brazing_furnace_v0
   qty: 1
   unit: count
@@ -34,17 +34,13 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Heat-up, soak, cool-down
-notes: |
-  Brazing process for joining metals with filler alloy above 450°C.
-  Source: Referenced by cooling_water_jacket_v0 and other recipes
-  Principle: Capillary action draws molten filler between close-fitting parts
-  Temperature: 600-1200°C typical depending on alloy
-  Common alloys:
-    - Copper-phosphorus (self-fluxing for copper)
-    - Silver-copper-zinc (general purpose)
-    - Nickel-based (high temperature, corrosion resistant)
-  Advantages over welding: Lower temperature, joins dissimilar metals, less distortion
-  Applications: Heat exchangers, fittings, carbide tool tips, electronic assemblies
-  Atmosphere: Inert gas, vacuum, or with flux to prevent oxidation
-  Joint strength: Typically as strong as base metal
-  Critical for: Leak-tight joints, dissimilar metal joining, precision assemblies
+notes: "Brazing process for joining metals with filler alloy above 450°C.\nSource:\
+  \ Referenced by cooling_water_jacket_v0 and other recipes\nPrinciple: Capillary\
+  \ action draws molten filler between close-fitting parts\nTemperature: 600-1200°C\
+  \ typical depending on alloy\nCommon alloys:\n  - Copper-phosphorus (self-fluxing\
+  \ for copper)\n  - Silver-copper-zinc (general purpose)\n  - Nickel-based (high\
+  \ temperature, corrosion resistant)\nAdvantages over welding: Lower temperature,\
+  \ joins dissimilar metals, less distortion\nApplications: Heat exchangers, fittings,\
+  \ carbide tool tips, electronic assemblies\nAtmosphere: Inert gas, vacuum, or with\
+  \ flux to prevent oxidation\nJoint strength: Typically as strong as base metal\n\
+  Critical for: Leak-tight joints, dissimilar metal joining, precision assemblies\n"

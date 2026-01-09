@@ -10,7 +10,7 @@ Outputs:
 - out/missing_fields.jsonl (required fields not populated)
 - out/orphan_resources.jsonl (resource_types with no provider machine)
 - out/missing_recipe_items.jsonl (items referenced in recipe steps but not defined)
-- out/validation_issues.jsonl (ADR-017 validation issues)
+- out/validation_issues.jsonl (ADR-017 and ADR-020 validation issues)
 - out/closure_errors.jsonl (closure analysis errors)
 """
 from __future__ import annotations
@@ -30,6 +30,7 @@ from src.kb_core.queue_manager import _locked_queue
 from base_builder.kb_loader import KBLoader  # Uses dict-based loader (indexer expects dicts)
 from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
+from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 
 KB_ROOT = Path("kb")
 OUT_DIR = Path("out")
@@ -750,7 +751,7 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
 
 def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict]:
     """
-    Run ADR-017 validation on all processes and recipes.
+    Run ADR-017 and ADR-020 validation on all processes and recipes.
 
     Args:
         entries: Index entries dict (item_id -> entry data)
@@ -759,7 +760,7 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
     Returns:
         List of validation issue queue items (ERROR and WARNING levels only)
     """
-    print("Running ADR-017 validation on processes and recipes...")
+    print("Running ADR-017 and ADR-020 validation on processes and recipes...")
 
     # Create UnitConverter for validation
     converter = UnitConverter(kb_loader)
@@ -774,8 +775,12 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
         if not process_data:
             continue
 
-        # Run validation
+        # Run ADR-017 validation
         issues = validate_process(process_data, converter)
+
+        # Run ADR-020 validation
+        adr020_issues = validate_process_adr020(process_data, kb_loader.items)
+        issues.extend(adr020_issues)
 
         # Filter to ERROR and WARNING only (skip INFO)
         issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]
@@ -836,8 +841,12 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
         if not recipe_data:
             continue
 
-        # Run validation (ADR-018: pass converter for inputs/outputs validation)
+        # Run ADR-017/018 validation (pass converter for inputs/outputs validation)
         issues = validate_recipe(recipe_data, converter)
+
+        # Run ADR-020 validation
+        adr020_issues = validate_recipe_adr020(recipe_data)
+        issues.extend(adr020_issues)
 
         # Filter to ERROR and WARNING only (skip INFO)
         issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]
@@ -1363,7 +1372,7 @@ def _write_report(
             by_rule[rule] = by_rule.get(rule, 0) + 1
 
         lines.append("")
-        lines.append("## Validation Issues (ADR-017)")
+        lines.append("## Validation Issues (ADR-017 and ADR-020)")
         lines.append(f"Total: {len(validation_issues)} validation issues found")
         lines.append("")
 

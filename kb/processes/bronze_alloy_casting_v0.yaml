@@ -3,17 +3,17 @@ name: Bronze alloy casting v0
 kind: process
 process_type: batch
 inputs:
-  - item_id: metal_alloy_bulk
-    qty: 1.0
-    unit: kg
+- item_id: metal_alloy_bulk
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: bronze_block_material_v0
-    qty: 1.0
-    unit: unit
+- item_id: bronze_block_material_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: casting_furnace_v0
-    qty: 2.0
-    unit: hr
+- machine_id: casting_furnace_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 5.0
@@ -21,4 +21,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Bronze alloy casting into bronze_block_material_v0"
+notes: Bronze alloy casting into bronze_block_material_v0

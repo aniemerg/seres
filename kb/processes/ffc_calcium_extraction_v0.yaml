@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: ffc_reactor_unit_v0
   qty: 1
   unit: count
@@ -47,27 +47,18 @@ time_model:
   type: batch
   hr_per_batch: 12.0
   notes: FFC reduction of CaO to calcium metal
-notes: |
-  FFC Cambridge process for extracting pure calcium metal from calcium oxide.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Cathode reaction: CaO + 2e⁻ → Ca + O²⁻
-  Anode reaction: C + O²⁻ → CO + 2e⁻ (or C + 2O²⁻ → CO2 + 4e⁻)
-  Overall: CaO → Ca + ½O2 (with C anode: CaO + C → Ca + CO/CO2)
-  Temperature: 900-1100°C in molten CaCl2 electrolyte
-  Voltage: 2.5-3V typical
-  Products: High-purity calcium metal (>99%), oxygen gas
-  Calcium oxide source: Anorthite carbothermal reduction, lime calcination
-  Calcium metal properties:
-    - More conductive by mass than copper (low density)
-    - Melting point: 842°C (tapped as liquid above this)
-    - Density: 1.55 g/cm³
-    - Electrical conductor for vacuum applications
-    - Chemical reactant for Pidgeon process (Mg extraction)
-  CaCl2 electrolyte recycled (losses <10%)
-  Carbon anode consumed, CO/CO2 can be recycled via Bosch/Boudouard
-  FFC process operates in solid state until Ca melts
-  Stoichiometry: CaO (56.1 g/mol) → Ca (40.1g) + 0.5 O2 (16g)
-  Mass fractions: 71.4% Ca, 28.6% O2
-  Alternative to Hall-Heroult for calcium production
-  Energy efficient compared to traditional metallurgy
-  Suitable for lunar in-situ resource utilization
+notes: "FFC Cambridge process for extracting pure calcium metal from calcium oxide.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nCathode\
+  \ reaction: CaO + 2e⁻ → Ca + O²⁻\nAnode reaction: C + O²⁻ → CO + 2e⁻ (or C + 2O²⁻\
+  \ → CO2 + 4e⁻)\nOverall: CaO → Ca + ½O2 (with C anode: CaO + C → Ca + CO/CO2)\n\
+  Temperature: 900-1100°C in molten CaCl2 electrolyte\nVoltage: 2.5-3V typical\nProducts:\
+  \ High-purity calcium metal (>99%), oxygen gas\nCalcium oxide source: Anorthite\
+  \ carbothermal reduction, lime calcination\nCalcium metal properties:\n  - More\
+  \ conductive by mass than copper (low density)\n  - Melting point: 842°C (tapped\
+  \ as liquid above this)\n  - Density: 1.55 g/cm³\n  - Electrical conductor for vacuum\
+  \ applications\n  - Chemical reactant for Pidgeon process (Mg extraction)\nCaCl2\
+  \ electrolyte recycled (losses <10%)\nCarbon anode consumed, CO/CO2 can be recycled\
+  \ via Bosch/Boudouard\nFFC process operates in solid state until Ca melts\nStoichiometry:\
+  \ CaO (56.1 g/mol) → Ca (40.1g) + 0.5 O2 (16g)\nMass fractions: 71.4% Ca, 28.6%\
+  \ O2\nAlternative to Hall-Heroult for calcium production\nEnergy efficient compared\
+  \ to traditional metallurgy\nSuitable for lunar in-situ resource utilization\n"

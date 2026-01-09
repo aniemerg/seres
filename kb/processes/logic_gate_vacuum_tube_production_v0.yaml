@@ -6,9 +6,9 @@ layer_tags:
 - layer_7
 - layer_8
 inputs:
-  - item_id: vacuum_tube_assembled_evacuated
-    qty: 0.5
-    unit: kg
+- item_id: vacuum_tube_assembled_evacuated
+  qty: 0.5
+  unit: kg
 outputs:
 - item_id: logic_gate_vacuum_tube_v0
   qty: 1.0
@@ -16,8 +16,8 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -25,4 +25,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Placeholder production process for logic_gate_vacuum_tube_v0. No upstream inputs defined yet; to be replaced with real steps and subcomponents as design matures.
+notes: Placeholder production process for logic_gate_vacuum_tube_v0. No upstream inputs
+  defined yet; to be replaced with real steps and subcomponents as design matures.

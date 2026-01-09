@@ -12,19 +12,19 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.2
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 1.8
   unit: kWh/kg
   scaling_basis: copper_rod_ingot
-  notes: "Drawing and annealing energy per kg copper wire"
+  notes: Drawing and annealing energy per kg copper wire
 time_model:
   type: linear_rate
   rate: 3.0
   rate_unit: kg/hr
   scaling_basis: copper_rod_ingot
-  notes: "Wire drawing rate: 3 kg/hr throughput"
+  notes: 'Wire drawing rate: 3 kg/hr throughput'
 notes: Basic production of copper magnet wire from copper rod ingot; placeholder data.
 process_type: continuous

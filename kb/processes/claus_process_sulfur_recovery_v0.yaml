@@ -26,8 +26,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: roasting_furnace_v0
   qty: 1
   unit: count
@@ -46,52 +46,35 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Two-stage roasting and sulfur recovery
-notes: |
-  Claus process for recovering elemental sulfur from troilite (iron sulfide).
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Stage 1 - Roasting: 4FeS + 7O2 → 2Fe2O3 + 4SO2 (at 600°C)
-  Stage 2 - Claus reaction: SO2 + 2H2S → 3S + 2H2O (at 750-1100°C)
-  Catalyst: Alumina (Al2O3 from anorthite processing)
-  Process: Two-stage oxidation and reduction
-  Purpose: Extract elemental sulfur from meteoritic/regolith troilite
-  Sulfur used as catalyst in Mond/carbonyl processes
-  Process details:
-    1. Troilite (FeS) from meteorites or lunar regolith (~1% in regolith)
-    2. Stage 1: Roast in oxygen to produce Fe2O3 and SO2
-    3. Stage 2: React SO2 with H2S over alumina catalyst
-    4. Elemental sulfur (S) produced and collected (molten above 115°C)
-    5. Fe2O3 (hematite) by-product for iron extraction
-  Products:
-    - S (elemental sulfur): Catalyst for Mond process (CO + Ni → Ni(CO)4)
-    - Fe2O3 (hematite): Iron ore for reduction to metal (modeled as iron_ore_or_ilmenite)
-    - H2O (water): Process water
-  Troilite sources:
-    - NiFe meteorites: Often associated with troilite inclusions
-    - Lunar regolith: ~1% troilite content
-    - Also with pentlandite (Fe,Ni)9S8 and graphite
-  H2S source: Can be generated from troilite + acid, or recycle from process
-  Sulfur applications (critical):
-    - Mond process catalyst: Ni + 4CO ⇌ Ni(CO)4 (requires S catalyst)
-    - Similar for Fe, Co carbonyl processes
-    - Chemical synthesis: Sulfuric acid, vulcanization (Earth)
-  Stoichiometry:
-    - Roasting: 4FeS (352g) + 7O2 (224g) → 2Fe2O3 (320g) + 4SO2 (256g)
-    - Claus: SO2 (64g) + 2H2S (68g) → 3S (96g) + 2H2O (36g)
-    - Overall from FeS: FeS (88g) + O2 → Fe2O3 + S (with H2S input)
-  Mass fractions: 182% Fe2O3, 109% S from troilite input
-  Iron oxide reduction: Fe2O3 + 3H2 → 2Fe + 3H2O (hydrogen reduction)
-  Or: Fe2O3 + 3C → 2Fe + 3CO (carbothermal)
-  Advantages: Recovers valuable sulfur catalyst
-  Fe2O3 by-product useful for iron production
-  Proven industrial process (Claus widely used)
-  Alumina catalyst from abundant lunar anorthite
-  Disadvantages: Two-stage complexity
-  Requires H2S input (can recycle within process)
-  High temperatures for both stages
-  Troilite relatively scarce in bulk regolith
-  Lunar context: Sulfur critical catalyst for Mond process
-  Mond process essential for Ni/Fe/Co purification
-  Meteorite processing provides troilite + metals
-  Sulfur must be conserved (scarce resource)
-  Alternative sulfur source: Volcanic deposits (if accessible)
-  Troilite associated with impact craters and meteoritic material
+notes: "Claus process for recovering elemental sulfur from troilite (iron sulfide).\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nStage 1 - Roasting:\
+  \ 4FeS + 7O2 → 2Fe2O3 + 4SO2 (at 600°C)\nStage 2 - Claus reaction: SO2 + 2H2S →\
+  \ 3S + 2H2O (at 750-1100°C)\nCatalyst: Alumina (Al2O3 from anorthite processing)\n\
+  Process: Two-stage oxidation and reduction\nPurpose: Extract elemental sulfur from\
+  \ meteoritic/regolith troilite\nSulfur used as catalyst in Mond/carbonyl processes\n\
+  Process details:\n  1. Troilite (FeS) from meteorites or lunar regolith (~1% in\
+  \ regolith)\n  2. Stage 1: Roast in oxygen to produce Fe2O3 and SO2\n  3. Stage\
+  \ 2: React SO2 with H2S over alumina catalyst\n  4. Elemental sulfur (S) produced\
+  \ and collected (molten above 115°C)\n  5. Fe2O3 (hematite) by-product for iron\
+  \ extraction\nProducts:\n  - S (elemental sulfur): Catalyst for Mond process (CO\
+  \ + Ni → Ni(CO)4)\n  - Fe2O3 (hematite): Iron ore for reduction to metal (modeled\
+  \ as iron_ore_or_ilmenite)\n  - H2O (water): Process water\nTroilite sources:\n\
+  \  - NiFe meteorites: Often associated with troilite inclusions\n  - Lunar regolith:\
+  \ ~1% troilite content\n  - Also with pentlandite (Fe,Ni)9S8 and graphite\nH2S source:\
+  \ Can be generated from troilite + acid, or recycle from process\nSulfur applications\
+  \ (critical):\n  - Mond process catalyst: Ni + 4CO ⇌ Ni(CO)4 (requires S catalyst)\n\
+  \  - Similar for Fe, Co carbonyl processes\n  - Chemical synthesis: Sulfuric acid,\
+  \ vulcanization (Earth)\nStoichiometry:\n  - Roasting: 4FeS (352g) + 7O2 (224g)\
+  \ → 2Fe2O3 (320g) + 4SO2 (256g)\n  - Claus: SO2 (64g) + 2H2S (68g) → 3S (96g) +\
+  \ 2H2O (36g)\n  - Overall from FeS: FeS (88g) + O2 → Fe2O3 + S (with H2S input)\n\
+  Mass fractions: 182% Fe2O3, 109% S from troilite input\nIron oxide reduction: Fe2O3\
+  \ + 3H2 → 2Fe + 3H2O (hydrogen reduction)\nOr: Fe2O3 + 3C → 2Fe + 3CO (carbothermal)\n\
+  Advantages: Recovers valuable sulfur catalyst\nFe2O3 by-product useful for iron\
+  \ production\nProven industrial process (Claus widely used)\nAlumina catalyst from\
+  \ abundant lunar anorthite\nDisadvantages: Two-stage complexity\nRequires H2S input\
+  \ (can recycle within process)\nHigh temperatures for both stages\nTroilite relatively\
+  \ scarce in bulk regolith\nLunar context: Sulfur critical catalyst for Mond process\n\
+  Mond process essential for Ni/Fe/Co purification\nMeteorite processing provides\
+  \ troilite + metals\nSulfur must be conserved (scarce resource)\nAlternative sulfur\
+  \ source: Volcanic deposits (if accessible)\nTroilite associated with impact craters\
+  \ and meteoritic material\n"

@@ -6,11 +6,10 @@ outputs:
 - item_id: fixture_assembly_contacts
   qty: 1.0
   unit: unit
-# removed requires_ids to avoid creating unresolved refs in the gap queue
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.1
@@ -20,5 +19,6 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Procurement lead time; placeholder
-notes: Procurement pathway for fixture assembly contacts (placeholder for supplier integration)
+notes: Procurement pathway for fixture assembly contacts (placeholder for supplier
+  integration)
 process_type: batch

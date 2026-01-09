@@ -6,41 +6,42 @@ layer_tags:
 - layer_6
 - layer_7
 inputs:
-  - item_id: lathe_bed_and_headstock
-    qty: 1.0
-    unit: kg
-  - item_id: lathe_carriage_and_cross_slide
-    qty: 1.0
-    unit: kg
-  - item_id: tailstock_assembly
-    qty: 1.0
-    unit: unit
-  - item_id: lathe_spindle_and_bearings
-    qty: 1.0
-    unit: kg
-  - item_id: lathe_motor_and_drive
-    qty: 1.0
-    unit: kg
-  - item_id: lathe_leadscrew_and_feed_system
-    qty: 1.0
-    unit: kg
+- item_id: lathe_bed_and_headstock
+  qty: 1.0
+  unit: kg
+- item_id: lathe_carriage_and_cross_slide
+  qty: 1.0
+  unit: kg
+- item_id: tailstock_assembly
+  qty: 1.0
+  unit: unit
+- item_id: lathe_spindle_and_bearings
+  qty: 1.0
+  unit: kg
+- item_id: lathe_motor_and_drive
+  qty: 1.0
+  unit: kg
+- item_id: lathe_leadscrew_and_feed_system
+  qty: 1.0
+  unit: kg
 outputs:
-  - item_id: lathe_engine_v0
-    qty: 1.0
-    unit: unit
+- item_id: lathe_engine_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 3.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 25.0
   unit: kWh
-  notes: "Assembly energy for 1-unit batch (tooling, alignment, testing)"
+  notes: Assembly energy for 1-unit batch (tooling, alignment, testing)
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: "Placeholder lathe_engine_assembly process; refine BOM and step durations as design evolves."
+notes: Placeholder lathe_engine_assembly process; refine BOM and step durations as
+  design evolves.

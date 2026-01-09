@@ -20,8 +20,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -38,45 +38,27 @@ time_model:
   hr_per_batch: 3.0
   notes: Catalytic reduction time
 process_type: batch
-notes: |
-  Reverse water-gas shift (RWGS) reaction for converting CO2 to CO using hydrogen.
-  Source: FFC-process-for-deep-ISRU.txt, Mars ISRU literature
-  Reaction: CO2 + H2 → CO + H2O (endothermic)
-  Temperature: 400-600°C
-  Catalyst: Iron or nickel based catalysts
-  Process: Catalytic reduction of CO2 to CO
-  Purpose: Generate CO for Mond/carbonyl processes
-  Alternative to Boudouard reaction (no carbon consumption)
-  Produce syngas (CO + H2 mixture) for chemical synthesis
-  Thermodynamics:
-    - Endothermic (ΔH = +41 kJ/mol, requires heat input)
-    - Equilibrium limited (not 100% conversion)
-    - Favored at higher temperatures
-  Products:
-    - CO (carbon monoxide): Mond process feedstock, syngas component
-    - H2O (water): Electrolyzed to recycle H2 + produce O2
-  Water electrolysis: 2H2O → 2H2 + O2
-    - Recycles hydrogen
-    - Net: CO2 + energy → CO + ½O2
-  Stoichiometry: CO2 (44g) + H2 (2g) → CO (28g) + H2O (18g)
-  Mass fractions: 63.6% CO, 40.9% H2O from inputs
-  Comparison to alternatives:
-    - Boudouard: C + CO2 → 2CO (uses carbon, higher temp)
-    - Bosch: CO2 + 2H2 → C + 2H2O (produces solid carbon)
-    - Sabatier: CO2 + 4H2 → CH4 + 2H2O (produces methane)
-  RWGS advantages: Uses less H2 than Sabatier
-  Produces CO directly (no carbon intermediate)
-  Lower temperature than Boudouard
-  Disadvantages: Endothermic (requires energy input)
-  Equilibrium limited conversion
-  Lower selectivity than Sabatier or Bosch
-  Applications:
-    - CO production for Mond/carbonyl metal purification
-    - Syngas generation (CO + H2 for Fischer-Tropsch, methanol synthesis)
-    - Alternative to Boudouard when carbon is scarce
-    - Mars ISRU (CO2 abundant in atmosphere)
-  Lunar context: Useful when CO needed but carbon is scarce
-  Hydrogen from water electrolysis or volatiles
-  Catalyst: Iron from ilmenite or nickel from meteorites
-  Can be coupled with water electrolysis for H2 recycling
-  Alternative pathway in carbon management network
+notes: "Reverse water-gas shift (RWGS) reaction for converting CO2 to CO using hydrogen.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Mars ISRU literature\nReaction: CO2 + H2\
+  \ → CO + H2O (endothermic)\nTemperature: 400-600°C\nCatalyst: Iron or nickel based\
+  \ catalysts\nProcess: Catalytic reduction of CO2 to CO\nPurpose: Generate CO for\
+  \ Mond/carbonyl processes\nAlternative to Boudouard reaction (no carbon consumption)\n\
+  Produce syngas (CO + H2 mixture) for chemical synthesis\nThermodynamics:\n  - Endothermic\
+  \ (ΔH = +41 kJ/mol, requires heat input)\n  - Equilibrium limited (not 100% conversion)\n\
+  \  - Favored at higher temperatures\nProducts:\n  - CO (carbon monoxide): Mond process\
+  \ feedstock, syngas component\n  - H2O (water): Electrolyzed to recycle H2 + produce\
+  \ O2\nWater electrolysis: 2H2O → 2H2 + O2\n  - Recycles hydrogen\n  - Net: CO2 +\
+  \ energy → CO + ½O2\nStoichiometry: CO2 (44g) + H2 (2g) → CO (28g) + H2O (18g)\n\
+  Mass fractions: 63.6% CO, 40.9% H2O from inputs\nComparison to alternatives:\n \
+  \ - Boudouard: C + CO2 → 2CO (uses carbon, higher temp)\n  - Bosch: CO2 + 2H2 →\
+  \ C + 2H2O (produces solid carbon)\n  - Sabatier: CO2 + 4H2 → CH4 + 2H2O (produces\
+  \ methane)\nRWGS advantages: Uses less H2 than Sabatier\nProduces CO directly (no\
+  \ carbon intermediate)\nLower temperature than Boudouard\nDisadvantages: Endothermic\
+  \ (requires energy input)\nEquilibrium limited conversion\nLower selectivity than\
+  \ Sabatier or Bosch\nApplications:\n  - CO production for Mond/carbonyl metal purification\n\
+  \  - Syngas generation (CO + H2 for Fischer-Tropsch, methanol synthesis)\n  - Alternative\
+  \ to Boudouard when carbon is scarce\n  - Mars ISRU (CO2 abundant in atmosphere)\n\
+  Lunar context: Useful when CO needed but carbon is scarce\nHydrogen from water electrolysis\
+  \ or volatiles\nCatalyst: Iron from ilmenite or nickel from meteorites\nCan be coupled\
+  \ with water electrolysis for H2 recycling\nAlternative pathway in carbon management\
+  \ network\n"

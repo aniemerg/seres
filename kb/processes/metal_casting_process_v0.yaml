@@ -3,25 +3,26 @@ kind: process
 name: Casting (General)
 process_type: batch
 layer_tags:
-  - layer_6
+- layer_6
 inputs:
-  - item_id: molten_material_or_preform
-    qty: 10.0
-    unit: kg
+- item_id: molten_material_or_preform
+  qty: 10.0
+  unit: kg
 outputs:
-  - item_id: metal_casting_blank
-    qty: 10.0
-    unit: kg
+- item_id: metal_casting_blank
+  qty: 10.0
+  unit: kg
 resource_requirements:
-  - machine_id: labor_bot_general_v0
-    qty: 1.0
-    unit: hr
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 30.0
   unit: kWh
-  notes: "Casting and cooling energy (10 kg batch)"
+  notes: Casting and cooling energy (10 kg batch)
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: "Generic casting operation applicable to multiple alloys; concrete outputs provided by recipes."
+notes: Generic casting operation applicable to multiple alloys; concrete outputs provided
+  by recipes.

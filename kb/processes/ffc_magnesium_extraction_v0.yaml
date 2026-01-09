@@ -30,8 +30,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 3.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: ffc_reactor_unit_v0
   qty: 1
   unit: count
@@ -47,31 +47,21 @@ time_model:
   type: batch
   hr_per_batch: 12.0
   notes: FFC reduction of MgO to magnesium metal
-notes: |
-  FFC Cambridge process for extracting pure magnesium metal from magnesium oxide.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Cathode reaction: MgO + 2e⁻ → Mg + O²⁻
-  Anode reaction: C + O²⁻ → CO + 2e⁻ (or C + 2O²⁻ → CO2 + 4e⁻)
-  Overall: MgO → Mg + ½O2 (with C anode: MgO + C → Mg + CO/CO2)
-  Temperature: 900-1100°C in molten CaCl2 electrolyte
-  Voltage: 2.5-3V typical
-  Products: High-purity magnesium metal (>99%), oxygen gas
-  Magnesium oxide source: Olivine processing, pyroxene reduction
-  Magnesium metal properties:
-    - Melting point: 650°C
-    - Boiling point: 1091°C (may vaporize during process)
-    - Density: 1.74 g/cm³ (lightweight)
-    - Structural metal, alloying element (with Al)
-    - CAUTION: Outgassing tendency in vacuum environments
-  Vapor condensation: Mg may need to be collected as vapor above 1091°C
-  Limited lunar applications due to vacuum outgassing
-  Primary use: Alloying additive (Mg2Si strengthens aluminum)
-  Also used in: Pyrotechnic compositions, lightweight structures (Earth/Mars)
-  CaCl2 electrolyte recycled (losses <10%)
-  Carbon anode consumed, CO/CO2 recyclable
-  Stoichiometry: MgO (40.3 g/mol) → Mg (24.3g) + 0.5 O2 (16g)
-  Mass fractions: 60.3% Mg, 39.7% O2
-  Alternative processes: Pidgeon reduction (CaO + Mg2SiO4), carbothermal
-  FFC offers higher purity and direct electrolytic route
-  Note: Mg not recommended for lunar vacuum applications
-  Better suited for Mars or enclosed habitats
+notes: "FFC Cambridge process for extracting pure magnesium metal from magnesium oxide.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nCathode\
+  \ reaction: MgO + 2e⁻ → Mg + O²⁻\nAnode reaction: C + O²⁻ → CO + 2e⁻ (or C + 2O²⁻\
+  \ → CO2 + 4e⁻)\nOverall: MgO → Mg + ½O2 (with C anode: MgO + C → Mg + CO/CO2)\n\
+  Temperature: 900-1100°C in molten CaCl2 electrolyte\nVoltage: 2.5-3V typical\nProducts:\
+  \ High-purity magnesium metal (>99%), oxygen gas\nMagnesium oxide source: Olivine\
+  \ processing, pyroxene reduction\nMagnesium metal properties:\n  - Melting point:\
+  \ 650°C\n  - Boiling point: 1091°C (may vaporize during process)\n  - Density: 1.74\
+  \ g/cm³ (lightweight)\n  - Structural metal, alloying element (with Al)\n  - CAUTION:\
+  \ Outgassing tendency in vacuum environments\nVapor condensation: Mg may need to\
+  \ be collected as vapor above 1091°C\nLimited lunar applications due to vacuum outgassing\n\
+  Primary use: Alloying additive (Mg2Si strengthens aluminum)\nAlso used in: Pyrotechnic\
+  \ compositions, lightweight structures (Earth/Mars)\nCaCl2 electrolyte recycled\
+  \ (losses <10%)\nCarbon anode consumed, CO/CO2 recyclable\nStoichiometry: MgO (40.3\
+  \ g/mol) → Mg (24.3g) + 0.5 O2 (16g)\nMass fractions: 60.3% Mg, 39.7% O2\nAlternative\
+  \ processes: Pidgeon reduction (CaO + Mg2SiO4), carbothermal\nFFC offers higher\
+  \ purity and direct electrolytic route\nNote: Mg not recommended for lunar vacuum\
+  \ applications\nBetter suited for Mars or enclosed habitats\n"

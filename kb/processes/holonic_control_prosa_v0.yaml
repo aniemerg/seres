@@ -16,19 +16,27 @@ outputs:
 requires_ids: []
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.25
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.0
   unit: kWh
-  notes: "Holonic control software architecture; treated as negligible energy draw for single-unit output."
+  notes: Holonic control software architecture; treated as negligible energy draw
+    for single-unit output.
 time_model:
   type: batch
   hr_per_batch: 0.25
-  notes: "Prototype scheduling step; placeholder for control loop execution."
-notes: |
-  Holonic PROSA control architecture seed item. Represents the software/control framework
-  responsible for coordinating holonic actors in a lunar manufacturing system. In this minimal
-  phase, treated as a unit-process with placeholder inputs/outputs to allow dependency closure
+  notes: Prototype scheduling step; placeholder for control loop execution.
+notes: 'Holonic PROSA control architecture seed item. Represents the software/control
+  framework
+
+  responsible for coordinating holonic actors in a lunar manufacturing system. In
+  this minimal
+
+  phase, treated as a unit-process with placeholder inputs/outputs to allow dependency
+  closure
+
   in the modeling pipeline.
+
+  '

@@ -18,14 +18,14 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: pcb_fab_equipment
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: uv_exposure_unit
-  qty: 0.25
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: pcb_development_station
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -34,6 +34,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: |
-  Photolithography step: UV exposure of photoresist through a mask, followed by development
+notes: 'Photolithography step: UV exposure of photoresist through a mask, followed
+  by development
+
   to reveal copper traces. This simple process is a sub-step within PCB fabrication.
+
+  '

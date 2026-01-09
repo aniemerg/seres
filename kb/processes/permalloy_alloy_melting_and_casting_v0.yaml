@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: induction_furnace_v0
   qty: 1
   unit: count
@@ -31,5 +31,8 @@ time_model:
   type: batch
   hr_per_batch: 3.0
   notes: Melting, homogenization, and casting time
-notes: |
-  Process for producing Permalloy high-permeability alloy (Ni80Fe20) by melting Ni and Fe in an induction furnace and casting into permalloy_high_permeability_v0. Based on Ni-Fe melting literature; tune Ni/Fe to 80/20.
+notes: 'Process for producing Permalloy high-permeability alloy (Ni80Fe20) by melting
+  Ni and Fe in an induction furnace and casting into permalloy_high_permeability_v0.
+  Based on Ni-Fe melting literature; tune Ni/Fe to 80/20.
+
+  '

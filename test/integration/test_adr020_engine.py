@@ -1,0 +1,753 @@
+"""
+Integration tests for ADR-020 enhanced simulation engine.
+
+Tests end-to-end workflow with:
+- Event-driven scheduling
+- Machine reservations
+- Recipe orchestration
+- Dependency-based execution
+"""
+from pathlib import Path
+
+import pytest
+import yaml
+
+from src.kb_core.kb_loader import KBLoader
+from src.simulation.engine import SimulationEngine
+from src.simulation.scheduler import EventType
+
+
+@pytest.fixture
+def kb_root(tmp_path):
+    """Create minimal test KB."""
+    kb = tmp_path / "kb"
+    (kb / "processes").mkdir(parents=True)
+    (kb / "recipes").mkdir(parents=True)
+    (kb / "items" / "materials").mkdir(parents=True)
+    (kb / "items" / "machines").mkdir(parents=True)
+
+    # Create a simple process
+    with open(kb / "processes" / "test_process_v0.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_process_v0",
+            "kind": "process",
+            "process_type": "batch",
+            "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+            "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0,
+            },
+            "resource_requirements": [
+                {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+            ],
+        }, f)
+
+    # Create material items
+    with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+        yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+    with open(kb / "items" / "materials" / "metal.yaml", "w") as f:
+        yaml.dump({"id": "metal", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+    # Create machine
+    with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+        yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+    return kb
+
+
+@pytest.fixture
+def sim_dir(tmp_path):
+    return tmp_path / "simulations"
+
+
+class TestBasicProcessScheduling:
+    """Test basic process scheduling with ADR-020."""
+
+    def test_schedule_single_process(self, kb_root, sim_dir):
+        """Schedule and complete a single process."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        # Import initial resources
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Schedule process
+        result = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+
+        if not result["success"]:
+            print(f"Error: {result}")
+        assert result["success"]
+        assert "process_run_id" in result
+        assert result["duration_hours"] == 1.0
+
+        # Check scheduler state
+        assert len(engine.scheduler.event_queue) == 2  # start and complete events
+        assert engine.scheduler.current_time == 0.0
+
+        # Advance time to completion
+        advance_result = engine.advance_time(1.0)
+
+        assert advance_result["new_time"] == 1.0
+        assert advance_result["processes_completed"] == 1
+        assert len(advance_result["completed"]) == 1
+
+        # Check outputs added
+        assert engine.has_item("metal", 1.0, "kg")
+
+    def test_schedule_sequential_processes(self, kb_root, sim_dir):
+        """Schedule two sequential processes."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        # Import resources
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Schedule first process
+        result1 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result1["success"]
+
+        # Schedule second process (sequential - different time)
+        result2 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            start_time=1.0,  # Starts after first completes
+            duration_hours=1.0,
+        )
+        assert result2["success"]
+
+        # Advance to completion of both
+        advance_result = engine.advance_time(2.0)
+
+        assert advance_result["processes_completed"] == 2
+        assert engine.has_item("metal", 2.0, "kg")
+
+    def test_machine_conflict_detection(self, kb_root, sim_dir):
+        """Machine conflict prevents concurrent processes."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        # Import resources (only 1 furnace)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Schedule first process
+        result1 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            start_time=0.0,
+            duration_hours=2.0,
+        )
+        assert result1["success"]
+
+        # Try to schedule overlapping process - should fail
+        result2 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            start_time=1.0,  # Overlaps with first
+            duration_hours=2.0,
+        )
+        assert not result2["success"]
+        assert result2["error"] == "machine_conflict"
+
+    def test_events_persisted_to_log(self, kb_root, sim_dir):
+        """Verify that process start and complete events are written to simulation.jsonl."""
+        import json
+
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        sim_id = "test_event_persistence"
+        # Match CLI pattern: sim_dir should be the full path to this specific simulation
+        full_sim_dir = sim_dir / sim_id
+        engine = SimulationEngine(sim_id, kb, full_sim_dir)
+
+        # Import initial resources
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+        engine.save()  # Flush import events
+
+        # Schedule and complete a process
+        result = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result["success"]
+
+        # Advance time to complete the process
+        advance_result = engine.advance_time(1.0)
+        assert advance_result["processes_completed"] == 1
+
+        # Save events to log
+        engine.save()
+
+        # Read the log file and verify events are present
+        log_file = full_sim_dir / "simulation.jsonl"
+
+        # Debug: check if directory exists
+        assert full_sim_dir.exists(), f"Simulation directory should exist at {full_sim_dir}"
+
+        # Debug: list what files are there
+        if full_sim_dir.exists():
+            files = list(full_sim_dir.glob("*"))
+            print(f"Files in sim directory: {files}")
+
+        assert log_file.exists(), f"Log file should exist at {log_file}"
+
+        events = []
+        with open(log_file, "r") as f:
+            for line in f:
+                events.append(json.loads(line))
+
+        # Verify we have the expected event types
+        event_types = [e.get("type") for e in events]
+
+        # Key assertion: process_start events should be logged
+        assert "process_start" in event_types, f"Should have process_start event. Got event types: {event_types}"
+        assert "process_complete" in event_types, "Should have process_complete event"
+
+        # Verify process_start event has correct structure
+        process_start_events = [e for e in events if e.get("type") == "process_start"]
+        assert len(process_start_events) == 1, "Should have exactly one process_start event"
+
+        ps_event = process_start_events[0]
+        assert ps_event.get("process_id") == "test_process_v0"
+        assert ps_event.get("scale") == 1.0
+        assert ps_event.get("ends_at") == 1.0
+
+        # Verify process_complete event has correct structure
+        process_complete_events = [e for e in events if e.get("type") == "process_complete"]
+        assert len(process_complete_events) == 1, "Should have exactly one process_complete event"
+
+        pc_event = process_complete_events[0]
+        assert pc_event.get("process_id") == "test_process_v0"
+        assert "outputs" in pc_event
+        # Check that outputs contain the expected item
+        outputs = pc_event.get("outputs", {})
+        assert "metal" in outputs
+
+
+class TestRecipeOrchestration:
+    """Test recipe orchestration with dependencies."""
+
+    @pytest.fixture
+    def recipe_kb(self, tmp_path):
+        """Create KB with multi-step recipe."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        # Step 1: ore -> ingot
+        with open(kb / "processes" / "smelt_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "smelt_v0",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "ingot", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        # Step 2: ingot -> part
+        with open(kb / "processes" / "forge_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "forge_v0",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ingot", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "part", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "forge", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        # Recipe with dependencies
+        with open(kb / "recipes" / "recipe_part_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_part_v0",
+                "target_item_id": "part",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "smelt_v0", "dependencies": []},
+                    {"process_id": "forge_v0", "dependencies": [0]},  # Depends on step 0
+                ],
+            }, f)
+
+        # Materials
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+        with open(kb / "items" / "materials" / "ingot.yaml", "w") as f:
+            yaml.dump({"id": "ingot", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+        with open(kb / "items" / "materials" / "part.yaml", "w") as f:
+            yaml.dump({"id": "part", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+        # Machines
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        with open(kb / "items" / "machines" / "forge.yaml", "w") as f:
+            yaml.dump({"id": "forge", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        return kb
+
+    def test_recipe_with_dependencies(self, recipe_kb, sim_dir):
+        """Recipe steps execute in dependency order."""
+        kb = KBLoader(recipe_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        # Import resources
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+        engine.import_item("forge", 1.0, "count")
+
+        # Run recipe
+        result = engine.run_recipe(recipe_id="recipe_part_v0")
+
+        assert result["success"]
+        assert result["total_steps"] == 2
+        assert result["scheduled_steps"] >= 1  # At least step 0 scheduled
+
+        # Advance time - step 0 should complete
+        engine.advance_time(1.0)
+
+        # Check intermediate product
+        assert engine.has_item("ingot", 1.0, "kg")
+
+        # Advance more - step 1 should complete
+        engine.advance_time(1.0)
+
+        # Check final product
+        assert engine.has_item("part", 1.0, "kg")
+
+        # Recipe should be complete
+        recipe_run_id = result["recipe_run_id"]
+        assert engine.orchestrator.is_recipe_complete(recipe_run_id)
+
+    def test_recipe_progress_tracking(self, recipe_kb, sim_dir):
+        """Track recipe progress through execution."""
+        kb = KBLoader(recipe_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        # Import resources
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+        engine.import_item("forge", 1.0, "count")
+
+        # Run recipe
+        result = engine.run_recipe(recipe_id="recipe_part_v0")
+        recipe_run_id = result["recipe_run_id"]
+
+        # Initial progress
+        progress = engine.orchestrator.get_recipe_progress(recipe_run_id)
+        assert progress["total_steps"] == 2
+        assert progress["completed_steps"] == 0
+        assert not progress["is_completed"]
+
+        # Complete first step
+        engine.advance_time(1.0)
+        progress = engine.orchestrator.get_recipe_progress(recipe_run_id)
+        assert progress["completed_steps"] == 1
+        assert progress["progress_percent"] == pytest.approx(50.0)
+
+        # Complete second step
+        engine.advance_time(1.0)
+        progress = engine.orchestrator.get_recipe_progress(recipe_run_id)
+        assert progress["completed_steps"] == 2
+        assert progress["progress_percent"] == pytest.approx(100.0)
+        assert progress["is_completed"]
+
+
+class TestUtilityMethods:
+    """Test utility and query methods."""
+
+    def test_get_schedule_summary(self, kb_root, sim_dir):
+        """Get scheduler state summary."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Schedule process
+        engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+
+        summary = engine.get_schedule_summary()
+        assert summary["current_time"] == 0.0
+        assert summary["queued_events"] > 0
+        assert summary["next_event_time"] == 0.0
+
+    def test_machine_utilization(self, kb_root, sim_dir):
+        """Calculate machine utilization."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Schedule process using furnace for 1 hour
+        engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+
+        # Utilization over 0-2h should be 50% (used 1h out of 2h)
+        util = engine.get_machine_utilization("furnace", (0.0, 2.0))
+        assert util == pytest.approx(0.5)
+
+
+class TestAdr020Gaps:
+    """Tests that enforce ADR-020 behaviors currently missing."""
+
+    def test_step_override_time_model_applied(self, tmp_path, sim_dir):
+        """Step-level time_model overrides should affect scheduled duration."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "base_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "base_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 2.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_override.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_override",
+                "target_item_id": "metal",
+                "variant_id": "v0",
+                "steps": [{
+                    "process_id": "base_proc",
+                    "dependencies": [],
+                    "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                }],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "metal.yaml", "w") as f:
+            yaml.dump({"id": "metal", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.run_recipe(recipe_id="recipe_override")
+        assert result["success"]
+
+        start_events = [
+            e for e in engine.scheduler.event_queue._heap
+            if e.event_type == EventType.PROCESS_START
+        ]
+        assert len(start_events) == 1
+        assert start_events[0].data["duration_hours"] == 1.0
+
+    def test_missing_inputs_do_not_create_outputs(self, kb_root, sim_dir):
+        """Lack of input reservation should not allow extra outputs."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 2.0, "count")
+
+        result1 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+            start_time=0.0,
+        )
+        assert result1["success"]
+
+        result2 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+            start_time=0.0,
+        )
+        assert result2["success"]
+
+        engine.advance_time(1.0)
+        assert engine.has_item("metal", 1.0, "kg")
+        assert not engine.has_item("metal", 2.0, "kg")
+
+    def test_output_units_preserved(self, tmp_path, sim_dir):
+        """Outputs should be added using their declared unit, not forced to kg."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "count_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "count_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "widget", "qty": 1.0, "unit": "count"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "press", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "widget.yaml", "w") as f:
+            yaml.dump({"id": "widget", "kind": "material", "unit": "count", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "press.yaml", "w") as f:
+            yaml.dump({"id": "press", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("press", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="count_proc",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result["success"]
+        engine.advance_time(1.0)
+
+        assert "widget" in engine.state.inventory
+        assert engine.state.inventory["widget"].unit == "count"
+
+    def test_energy_booked_on_process_start(self, tmp_path, sim_dir):
+        """Energy usage should be accumulated when a process starts."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "energy_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "energy_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "energy_model": {
+                    "type": "per_unit",
+                    "value": 2.0,
+                    "unit": "kWh/kg",
+                    "scaling_basis": "metal",
+                },
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "metal.yaml", "w") as f:
+            yaml.dump({"id": "metal", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="energy_proc",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result["success"]
+        engine.advance_time(1.0)
+
+        assert engine.state.total_energy_kwh > 0.0
+
+    def test_machine_conflict_pauses_recipe(self, tmp_path, sim_dir):
+        """Machine conflicts should pause recipe runs instead of failing immediately."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "proc_a.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_a",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "ingot", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "processes" / "proc_b.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_b",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "plate", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_conflict.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_conflict",
+                "target_item_id": "plate",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "proc_a", "dependencies": []},
+                    {"process_id": "proc_b", "dependencies": []},
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "ingot.yaml", "w") as f:
+            yaml.dump({"id": "ingot", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "plate.yaml", "w") as f:
+            yaml.dump({"id": "plate", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.run_recipe(recipe_id="recipe_conflict")
+        assert result["success"]
+
+    def test_process_complete_event_includes_run_id(self, kb_root, sim_dir):
+        """Process complete events should include process_run_id."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result["success"]
+        engine.advance_time(1.0)
+
+        complete_events = [
+            e for e in engine.event_buffer
+            if getattr(e, "type", None) == "process_complete"
+        ]
+        assert complete_events
+        event_data = complete_events[0].model_dump()
+        assert "process_run_id" in event_data
+
+    def test_machine_release_event_scheduled_for_partial(self, tmp_path, sim_dir):
+        """Partial reservations should schedule a machine release event."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "partial_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "partial_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 8.0},
+                "resource_requirements": [
+                    {"machine_id": "operator", "qty": 1.0, "unit": "count"},
+                    {"machine_id": "furnace", "qty": 6.0, "unit": "hr"},
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "metal.yaml", "w") as f:
+            yaml.dump({"id": "metal", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "operator.yaml", "w") as f:
+            yaml.dump({"id": "operator", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("operator", 1.0, "count")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="partial_proc",
+            scale=1.0,
+            duration_hours=8.0,
+        )
+        assert result["success"]
+
+        release_events = [
+            e for e in engine.scheduler.event_queue._heap
+            if e.event_type == EventType.MACHINE_RELEASE
+        ]
+        assert release_events

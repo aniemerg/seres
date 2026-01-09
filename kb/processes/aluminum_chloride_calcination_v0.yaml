@@ -20,8 +20,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 1.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: furnace_basic
   qty: 1
   unit: count
@@ -37,28 +37,19 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Calcination and acid vapor recovery
-notes: |
-  Thermal decomposition of aluminum chloride hexahydrate to produce pure alumina.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: 2AlCl3·6H2O → Al2O3 + 6HCl + 9H2O
-  Temperature: 400°C
-  Process: Calcination (dry heating) to drive off HCl and water
-  Input: AlCl3·6H2O from HCl leaching of anorthite or carbochlorination
-  Products:
-    - Al2O3 (alumina): Pure oxide for FFC Cambridge reduction to Al metal
-    - HCl (hydrochloric acid gas): Recovered and recycled for leaching
-    - H2O (water vapor): Condensed and recycled
-  Complete HCl recycling enables closed-loop processing
-  Alumina quality: High purity suitable for FFC or Hall-Heroult
-  Intermediate step in anorthite → alumina → aluminum chain
-  Stoichiometry: 2AlCl3·6H2O (483g) → Al2O3 (102g) + 6HCl (219g) + 9H2O (162g)
-  Mass fractions: 42.1% Al2O3, 45.1% HCl, 33.4% H2O
-  Advantages: Simple thermal process, complete acid recovery
-  Moderate temperature requirement
-  High purity alumina output
-  Disadvantages: Intermediate step adds process complexity
-  Requires acid vapor handling and condensation
-  Applications: Preprocessing for FFC aluminum production
-  Part of HCl artificial weathering route for anorthite
-  Alternative to direct carbothermal reduction
-  Critical process for closing acid recycling loops
+notes: "Thermal decomposition of aluminum chloride hexahydrate to produce pure alumina.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nReaction:\
+  \ 2AlCl3·6H2O → Al2O3 + 6HCl + 9H2O\nTemperature: 400°C\nProcess: Calcination (dry\
+  \ heating) to drive off HCl and water\nInput: AlCl3·6H2O from HCl leaching of anorthite\
+  \ or carbochlorination\nProducts:\n  - Al2O3 (alumina): Pure oxide for FFC Cambridge\
+  \ reduction to Al metal\n  - HCl (hydrochloric acid gas): Recovered and recycled\
+  \ for leaching\n  - H2O (water vapor): Condensed and recycled\nComplete HCl recycling\
+  \ enables closed-loop processing\nAlumina quality: High purity suitable for FFC\
+  \ or Hall-Heroult\nIntermediate step in anorthite → alumina → aluminum chain\nStoichiometry:\
+  \ 2AlCl3·6H2O (483g) → Al2O3 (102g) + 6HCl (219g) + 9H2O (162g)\nMass fractions:\
+  \ 42.1% Al2O3, 45.1% HCl, 33.4% H2O\nAdvantages: Simple thermal process, complete\
+  \ acid recovery\nModerate temperature requirement\nHigh purity alumina output\n\
+  Disadvantages: Intermediate step adds process complexity\nRequires acid vapor handling\
+  \ and condensation\nApplications: Preprocessing for FFC aluminum production\nPart\
+  \ of HCl artificial weathering route for anorthite\nAlternative to direct carbothermal\
+  \ reduction\nCritical process for closing acid recycling loops\n"

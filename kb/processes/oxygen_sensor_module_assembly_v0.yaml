@@ -2,27 +2,27 @@ id: oxygen_sensor_module_assembly_v0
 name: Oxygen sensor module assembly v0
 kind: process
 inputs:
-  - item_id: oxygen_sensor_zirconia_v0
-    qty: 1.0
-    unit: unit
-  - item_id: assembled_electronics
-    qty: 0.75
-    unit: kg
+- item_id: oxygen_sensor_zirconia_v0
+  qty: 1.0
+  unit: unit
+- item_id: assembled_electronics
+  qty: 0.75
+  unit: kg
 outputs:
-  - item_id: oxygen_sensor_module
-    qty: 1.0
-    unit: unit
+- item_id: oxygen_sensor_module
+  qty: 1.0
+  unit: unit
 byproducts:
-  - item_id: oxygen_sensor_module_waste_v0
-    qty: 0.2
-    unit: kg
+- item_id: oxygen_sensor_module_waste_v0
+  qty: 0.2
+  unit: kg
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 2.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -31,4 +31,6 @@ time_model:
   type: batch
   hr_per_batch: 1.0
 process_type: batch
-notes: "Assemble zirconia oxygen sensor element with electronics packaging into oxygen sensor module. Assumes 0.75 kg electronics packaging input to balance mass; 0.25 kg zirconia element; 0.2 kg waste scrap."
+notes: Assemble zirconia oxygen sensor element with electronics packaging into oxygen
+  sensor module. Assumes 0.75 kg electronics packaging input to balance mass; 0.25
+  kg zirconia element; 0.2 kg waste scrap.

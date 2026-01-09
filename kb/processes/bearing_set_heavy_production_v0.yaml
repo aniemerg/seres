@@ -23,8 +23,8 @@ byproducts:
   notes: Grinding swarf and machining chips from precision finishing
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 5.0
-  unit: hr
+  qty: 1
+  unit: count
   notes: Labor for turning, grinding, heat treatment, and assembly. Reduced from 8h
     for smaller 4kg bearing set.
 - machine_id: lathe_engine_v0
@@ -51,43 +51,26 @@ time_model:
   notes: 'Integrated process: forge rings, machine races, heat treat, grind, make
     balls, assemble. Heat treatment cycle is time bottleneck. Reduced from 8h for
     smaller 4kg bearing set.'
-notes: |
-  Complete ball bearing set production process for heavy machinery. Produces one set of
-  heavy-duty ball bearings suitable for high-load applications.
-
-  Process steps:
-  1. **Forging**: Upset forging to create inner and outer race ring blanks from bar stock
-  2. **Rough machining**: Turn races to near-final dimensions on lathe (raceways, shoulders, bore, OD)
-  3. **Heat treatment**:
-     - Carburize or through-harden to HRC 58-62
-     - Quench in oil
-     - Temper at 150-200°C for dimensional stability and toughness
-  4. **Precision grinding**: Grind raceways to final tolerances (±0.005mm) and surface finish (Ra 0.2μm)
-  5. **Ball production**:
-     - Cast or forge ball blanks
-     - Rough grind to near-spherical
-     - Heat treat to HRC 60-65
-     - Precision lap/grind for sphericity and surface finish
-  6. **Cage fabrication**: Stamp or machine cage from steel sheet/bar
-  7. **Assembly**: Install balls in races with cage, pack with grease, seal
-  8. **Inspection**: Check running torque, radial play, and smoothness
-
-  Typical bearing specifications for "heavy" set (updated to realistic 4kg total):
-  - Bore: 70-100mm (size 6314-6320)
-  - OD: 130-180mm
-  - Width: 30-40mm
-  - Load rating: 100-200 kN dynamic
-  - ~12-16 balls per bearing
-  - Mass: ~2 kg per bearing
-  - Set includes: 2 bearings (one at each end of shaft)
-
-  Critical quality requirements:
-  - Hardness: HRC 58-65 for races and balls (wear resistance)
-  - Surface finish: Ra 0.1-0.4 μm (low friction, long life)
-  - Dimensional tolerance: ISO P6 or better (smooth running)
-  - Residual stress: Properly tempered (prevent cracking)
-
-  Material: High-carbon steel (0.95-1.10% C) or bearing steel equivalent (SAE 52100)
-
-  This is a simplified integrated process. In practice, bearing manufacturing is highly
-  specialized with dedicated machinery for each operation.
+notes: "Complete ball bearing set production process for heavy machinery. Produces\
+  \ one set of\nheavy-duty ball bearings suitable for high-load applications.\n\n\
+  Process steps:\n1. **Forging**: Upset forging to create inner and outer race ring\
+  \ blanks from bar stock\n2. **Rough machining**: Turn races to near-final dimensions\
+  \ on lathe (raceways, shoulders, bore, OD)\n3. **Heat treatment**:\n   - Carburize\
+  \ or through-harden to HRC 58-62\n   - Quench in oil\n   - Temper at 150-200°C for\
+  \ dimensional stability and toughness\n4. **Precision grinding**: Grind raceways\
+  \ to final tolerances (±0.005mm) and surface finish (Ra 0.2μm)\n5. **Ball production**:\n\
+  \   - Cast or forge ball blanks\n   - Rough grind to near-spherical\n   - Heat treat\
+  \ to HRC 60-65\n   - Precision lap/grind for sphericity and surface finish\n6. **Cage\
+  \ fabrication**: Stamp or machine cage from steel sheet/bar\n7. **Assembly**: Install\
+  \ balls in races with cage, pack with grease, seal\n8. **Inspection**: Check running\
+  \ torque, radial play, and smoothness\n\nTypical bearing specifications for \"heavy\"\
+  \ set (updated to realistic 4kg total):\n- Bore: 70-100mm (size 6314-6320)\n- OD:\
+  \ 130-180mm\n- Width: 30-40mm\n- Load rating: 100-200 kN dynamic\n- ~12-16 balls\
+  \ per bearing\n- Mass: ~2 kg per bearing\n- Set includes: 2 bearings (one at each\
+  \ end of shaft)\n\nCritical quality requirements:\n- Hardness: HRC 58-65 for races\
+  \ and balls (wear resistance)\n- Surface finish: Ra 0.1-0.4 μm (low friction, long\
+  \ life)\n- Dimensional tolerance: ISO P6 or better (smooth running)\n- Residual\
+  \ stress: Properly tempered (prevent cracking)\n\nMaterial: High-carbon steel (0.95-1.10%\
+  \ C) or bearing steel equivalent (SAE 52100)\n\nThis is a simplified integrated\
+  \ process. In practice, bearing manufacturing is highly\nspecialized with dedicated\
+  \ machinery for each operation.\n"

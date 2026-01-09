@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -34,42 +34,24 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Controlled synthesis with temperature management
-notes: |
-  Direct synthesis of hydrogen sulfide gas from hydrogen and elemental sulfur.
-  Reaction: H2 + S → H2S (exothermic)
-  Temperature: 300-450°C for controlled reaction rate
-  Process: Direct combination in reactor
-  Purpose: Produce H2S for Claus process sulfur recovery
-  Alternative: H2S can also be generated from troilite (FeS) + acid treatment
-  Process details:
-    1. Elemental sulfur (from Claus process or sulfide ores)
-    2. Hydrogen gas (from water electrolysis or regolith volatiles)
-    3. Heat to 300-450°C in reactor
-    4. Direct combination: H2 + S → H2S
-    5. Exothermic reaction (releases ~20 kJ/mol)
-    6. Cool and collect H2S gas
-  Products:
-    - H2S (hydrogen sulfide): Used in Claus process (SO2 + 2H2S → 3S + 2H2O)
-  Stoichiometry: H2 (2g) + S (32g) → H2S (34g)
-  Mass fractions: 5.9% H2, 94.1% S (matches H2S composition)
-  Advantages: Simple direct synthesis
-    Enables sulfur recycling loop with Claus process
-    Exothermic (releases heat)
-  Disadvantages: Produces toxic, corrosive gas
-    Requires careful containment and handling
-    Safety systems essential (scrubbers, monitors)
-  Lunar context: Enables closed-loop sulfur recovery
-    H2S intermediate in Claus process
-    Sulfur conserved (scarce lunar resource)
-  Safety: H2S extremely toxic (>10 ppm hazardous)
-    Corrosive to metals
-    Requires gas-tight reactor and scrubbing system
-    Emergency shutdown and ventilation systems
-  Alternative H2S sources:
-    - Troilite + HCl: FeS + 2HCl → FeCl2 + H2S
-    - Sulfide ore roasting off-gases
-  Sulfur recycling loop:
-    1. Troilite roasting → SO2
-    2. H2 + S → H2S (this process)
-    3. SO2 + 2H2S → 3S + 2H2O (Claus process)
-    4. Sulfur recovered and recycled
+notes: "Direct synthesis of hydrogen sulfide gas from hydrogen and elemental sulfur.\n\
+  Reaction: H2 + S → H2S (exothermic)\nTemperature: 300-450°C for controlled reaction\
+  \ rate\nProcess: Direct combination in reactor\nPurpose: Produce H2S for Claus process\
+  \ sulfur recovery\nAlternative: H2S can also be generated from troilite (FeS) +\
+  \ acid treatment\nProcess details:\n  1. Elemental sulfur (from Claus process or\
+  \ sulfide ores)\n  2. Hydrogen gas (from water electrolysis or regolith volatiles)\n\
+  \  3. Heat to 300-450°C in reactor\n  4. Direct combination: H2 + S → H2S\n  5.\
+  \ Exothermic reaction (releases ~20 kJ/mol)\n  6. Cool and collect H2S gas\nProducts:\n\
+  \  - H2S (hydrogen sulfide): Used in Claus process (SO2 + 2H2S → 3S + 2H2O)\nStoichiometry:\
+  \ H2 (2g) + S (32g) → H2S (34g)\nMass fractions: 5.9% H2, 94.1% S (matches H2S composition)\n\
+  Advantages: Simple direct synthesis\n  Enables sulfur recycling loop with Claus\
+  \ process\n  Exothermic (releases heat)\nDisadvantages: Produces toxic, corrosive\
+  \ gas\n  Requires careful containment and handling\n  Safety systems essential (scrubbers,\
+  \ monitors)\nLunar context: Enables closed-loop sulfur recovery\n  H2S intermediate\
+  \ in Claus process\n  Sulfur conserved (scarce lunar resource)\nSafety: H2S extremely\
+  \ toxic (>10 ppm hazardous)\n  Corrosive to metals\n  Requires gas-tight reactor\
+  \ and scrubbing system\n  Emergency shutdown and ventilation systems\nAlternative\
+  \ H2S sources:\n  - Troilite + HCl: FeS + 2HCl → FeCl2 + H2S\n  - Sulfide ore roasting\
+  \ off-gases\nSulfur recycling loop:\n  1. Troilite roasting → SO2\n  2. H2 + S →\
+  \ H2S (this process)\n  3. SO2 + 2H2S → 3S + 2H2O (Claus process)\n  4. Sulfur recovered\
+  \ and recycled\n"

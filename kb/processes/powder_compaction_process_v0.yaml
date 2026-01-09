@@ -21,11 +21,11 @@ byproducts:
   unit: kg
 resource_requirements:
 - machine_id: powder_compactor_v0
-  qty: 0.25
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: labor_bot_general_v0
-  qty: 0.25
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -35,8 +35,12 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Assumed batch time for compaction
-notes: |
-  Powder compaction step converting fine silicon nitride powder into a green body.
+notes: 'Powder compaction step converting fine silicon nitride powder into a green
+  body.
+
   Includes a small loss (compaction_waste) of 0.1 kg and formation of a compacted
+
   body suitable for subsequent sintering.
+
+  '
 process_type: batch

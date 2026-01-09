@@ -18,8 +18,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: packed_bed_distillation_v0
   qty: 1
   unit: count
@@ -35,10 +35,17 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Multi-stage distillation with reflux for high purity
-notes: |
-  Fractional distillation for separating and purifying liquid chemical mixtures.
-  Process: Heat mixture, vaporize components based on boiling points, condense and collect fractions.
+notes: 'Fractional distillation for separating and purifying liquid chemical mixtures.
+
+  Process: Heat mixture, vaporize components based on boiling points, condense and
+  collect fractions.
+
   Multiple theoretical plates (stages) provide high separation efficiency.
+
   Used for: Trichlorosilane purification, chemical separation, solvent recovery.
+
   Typical applications: Semiconductor-grade chemical purification, petrochemical processing.
+
   Achieves high purity (>95%) through reflux and multiple distillation stages.
+
+  '

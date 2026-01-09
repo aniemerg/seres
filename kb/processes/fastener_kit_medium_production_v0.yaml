@@ -20,8 +20,8 @@ byproducts:
   notes: Scrap from machining, stamping, and trimming
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
   notes: Labor for casting, machining, stamping, sorting, and kitting
 - machine_id: forge_or_induction_heater_v0
   qty: 1
@@ -47,17 +47,29 @@ time_model:
   notes: 'Integrated process: forge bolt/nut blanks, machine threads, stamp washers,
     heat treat lock washers, sort and kit'
 process_type: batch
-notes: |
-  Integrated fastener kit production process. Combines multiple operations:
+notes: 'Integrated fastener kit production process. Combines multiple operations:
+
   1. Forging: Heat and forge hex heads on bolts and nut blanks
+
   2. Machining: Cut threads on bolts and tap threads in nuts
+
   3. Stamping: Punch flat and lock washers from sheet
+
   4. Heat treatment: Harden lock washers
+
   5. Assembly: Sort by size and kit into organized container
 
+
   Produces complete fastener_kit_medium per BOM specification:
+
   - 720g hex bolts M6-M12 (76 pieces)
+
   - 180g hex nuts M6-M12 (135 pieces)
+
   - 75g flat washers (135 pieces)
+
   - 30g lock washers (60 pieces)
+
   Total: ~366 fasteners in 1.0 kg kit
+
+  '

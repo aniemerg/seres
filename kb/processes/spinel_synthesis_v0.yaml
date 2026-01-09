@@ -17,8 +17,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: sintering_furnace_v0
   qty: 1
   unit: count
@@ -35,7 +35,10 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Mixing, high-temp reaction, and sintering/pressing cycle
-notes: |
-  MgAl2O4 spinel synthesis from magnesia + alumina powders.
+notes: 'MgAl2O4 spinel synthesis from magnesia + alumina powders.
+
   Paper: ceramics-08-00107.txt notes synthesis at ~1800 C, or via precursor route
+
   followed by calcination at 1000-1400 C; HIP used for densification.
+
+  '

@@ -21,8 +21,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -38,51 +38,31 @@ time_model:
   type: batch
   hr_per_batch: 6.0
   notes: Reaction, crystallization, and separation
-notes: |
-  Regeneration of sodium chloride from sodium nitrate using potassium chloride.
-  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt
-  Reaction: NaNO3 + KCl → NaCl + KNO3 (double displacement/metathesis)
-  Temperature: Moderate (100-200°C for crystallization)
-  Process: Ion exchange via differential solubility
-  Purpose: Regenerate NaCl from NaNO3 (HCl generation by-product)
-  Close sodium chloride recycling loop
-  Conserve imported NaCl reagent
-  Process details:
-    1. NaNO3 (from NaCl + HNO3 → HCl + NaNO3 reaction)
-    2. React with KCl (from orthoclase feldspar processing)
-    3. Double displacement reaction
-    4. Crystallization exploits different solubilities
-    5. Separate NaCl and KNO3 by fractional crystallization
-  Products:
-    - NaCl (sodium chloride): Recycled for HCl generation, Solvay process
-    - KNO3 (potassium nitrate/saltpetre): Catalyst, oxidizer, N storage
-  KCl source: Orthoclase feldspar (KAlSi3O8)
-    - Found in lunar KREEP regions (~8-18 mg/g K)
-    - Processing similar to anorthite routes
-  KNO3 (saltpetre) applications:
-    - Catalyst for selenium extraction: FeSe + Na2CO3 + O2 → Se (KNO3 catalyst)
-    - Nitrogen storage form (more stable than NH3)
-    - Oxidizer for pyrotechnics/propellants
-    - Fertilizer (Earth/Mars agriculture)
-  Stoichiometry: NaNO3 (85g) + KCl (74.5g) → NaCl (58.5g) + KNO3 (101g)
-  Mass fractions: 68.8% NaCl, 119% KNO3 from NaNO3 input
-  Solubility exploitation:
-    - Different salts have different temperature-dependent solubilities
-    - Fractional crystallization separates products
-  NaCl recycling chain:
-    1. NaCl (import) + HNO3 → HCl + NaNO3
-    2. HCl used and recycled in various processes
-    3. This process: NaNO3 + KCl → NaCl + KNO3
-    4. NaCl returned to step 1
-  Advantages: Closes NaCl recycling loop
-  KCl from lunar orthoclase (KREEP regions)
-  KNO3 product useful as catalyst and N storage
-  Simple metathesis chemistry
-  Disadvantages: Requires KCl (less abundant than Na)
-  Fractional crystallization complexity
-  Not 100% efficiency (some losses)
-  Lunar context: Critical for NaCl conservation
-  Imported NaCl can be recycled indefinitely
-  KCl from KREEP processing unlocks this route
-  Nitrogen husbandry: NaNO3 → KNO3 → stored safely
-  Enables sustainable chlorine chemistry with minimal import
+notes: "Regeneration of sodium chloride from sodium nitrate using potassium chloride.\n\
+  Source: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nReaction: NaNO3 +\
+  \ KCl → NaCl + KNO3 (double displacement/metathesis)\nTemperature: Moderate (100-200°C\
+  \ for crystallization)\nProcess: Ion exchange via differential solubility\nPurpose:\
+  \ Regenerate NaCl from NaNO3 (HCl generation by-product)\nClose sodium chloride\
+  \ recycling loop\nConserve imported NaCl reagent\nProcess details:\n  1. NaNO3 (from\
+  \ NaCl + HNO3 → HCl + NaNO3 reaction)\n  2. React with KCl (from orthoclase feldspar\
+  \ processing)\n  3. Double displacement reaction\n  4. Crystallization exploits\
+  \ different solubilities\n  5. Separate NaCl and KNO3 by fractional crystallization\n\
+  Products:\n  - NaCl (sodium chloride): Recycled for HCl generation, Solvay process\n\
+  \  - KNO3 (potassium nitrate/saltpetre): Catalyst, oxidizer, N storage\nKCl source:\
+  \ Orthoclase feldspar (KAlSi3O8)\n  - Found in lunar KREEP regions (~8-18 mg/g K)\n\
+  \  - Processing similar to anorthite routes\nKNO3 (saltpetre) applications:\n  -\
+  \ Catalyst for selenium extraction: FeSe + Na2CO3 + O2 → Se (KNO3 catalyst)\n  -\
+  \ Nitrogen storage form (more stable than NH3)\n  - Oxidizer for pyrotechnics/propellants\n\
+  \  - Fertilizer (Earth/Mars agriculture)\nStoichiometry: NaNO3 (85g) + KCl (74.5g)\
+  \ → NaCl (58.5g) + KNO3 (101g)\nMass fractions: 68.8% NaCl, 119% KNO3 from NaNO3\
+  \ input\nSolubility exploitation:\n  - Different salts have different temperature-dependent\
+  \ solubilities\n  - Fractional crystallization separates products\nNaCl recycling\
+  \ chain:\n  1. NaCl (import) + HNO3 → HCl + NaNO3\n  2. HCl used and recycled in\
+  \ various processes\n  3. This process: NaNO3 + KCl → NaCl + KNO3\n  4. NaCl returned\
+  \ to step 1\nAdvantages: Closes NaCl recycling loop\nKCl from lunar orthoclase (KREEP\
+  \ regions)\nKNO3 product useful as catalyst and N storage\nSimple metathesis chemistry\n\
+  Disadvantages: Requires KCl (less abundant than Na)\nFractional crystallization\
+  \ complexity\nNot 100% efficiency (some losses)\nLunar context: Critical for NaCl\
+  \ conservation\nImported NaCl can be recycled indefinitely\nKCl from KREEP processing\
+  \ unlocks this route\nNitrogen husbandry: NaNO3 → KNO3 → stored safely\nEnables\
+  \ sustainable chlorine chemistry with minimal import\n"

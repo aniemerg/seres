@@ -15,11 +15,11 @@ outputs:
   unit: unit
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 0.5
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: power_supply_bench
-  qty: 1.0
-  unit: hr
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.2
@@ -29,4 +29,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Batch production cycle
-notes: Simple unit-operation to produce an air_compressor_small via basic assembly. Added placeholder inputs (frame + motor).
+notes: Simple unit-operation to produce an air_compressor_small via basic assembly.
+  Added placeholder inputs (frame + motor).

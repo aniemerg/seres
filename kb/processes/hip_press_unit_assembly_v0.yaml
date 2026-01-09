@@ -5,38 +5,38 @@ layer_tags:
 - layer_5
 process_type: batch
 inputs:
-  - item_id: steel_shell_thick
-    qty: 1.0
-    unit: unit
-  - item_id: structural_steel_frame
-    qty: 1.0
-    unit: unit
-  - item_id: hydraulic_pump_basic
-    qty: 1.0
-    unit: unit
-  - item_id: control_panel_basic
-    qty: 1.0
-    unit: unit
-  - item_id: press_platen_set_medium
-    qty: 1.0
-    unit: unit
-  - item_id: safety_guard_steel_mesh
-    qty: 2.0
-    unit: unit
-  - item_id: pressure_test_gauge_set
-    qty: 1.0
-    unit: unit
+- item_id: steel_shell_thick
+  qty: 1.0
+  unit: unit
+- item_id: structural_steel_frame
+  qty: 1.0
+  unit: unit
+- item_id: hydraulic_pump_basic
+  qty: 1.0
+  unit: unit
+- item_id: control_panel_basic
+  qty: 1.0
+  unit: unit
+- item_id: press_platen_set_medium
+  qty: 1.0
+  unit: unit
+- item_id: safety_guard_steel_mesh
+  qty: 2.0
+  unit: unit
+- item_id: pressure_test_gauge_set
+  qty: 1.0
+  unit: unit
 outputs:
-  - item_id: hip_press_unit_v0
-    qty: 1.0
-    unit: unit
+- item_id: hip_press_unit_v0
+  qty: 1.0
+  unit: unit
 resource_requirements:
-  - machine_id: assembly_station
-    qty: 1.0
-    unit: unit
-  - machine_id: labor_bot_general_v0
-    qty: 4.0
-    unit: hr
+- machine_id: assembly_station
+  qty: 1.0
+  unit: unit
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 20.0
@@ -44,4 +44,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: "Assembles HIP densification chamber from BOM components."
+notes: Assembles HIP densification chamber from BOM components.

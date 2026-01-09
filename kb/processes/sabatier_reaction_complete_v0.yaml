@@ -21,8 +21,8 @@ outputs:
   unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
-  qty: 2.0
-  unit: hr
+  qty: 1
+  unit: count
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
@@ -39,42 +39,27 @@ time_model:
   type: batch
   hr_per_batch: 3.0
   notes: Catalytic methanation time
-notes: |
-  Sabatier reaction for converting carbon dioxide to methane using hydrogen.
-  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt
-  Reaction: CO2 + 4H2 → CH4 + 2H2O (exothermic)
-  Temperature: 300-400°C
-  Catalyst: Nickel-based (Ni/Al2O3 common); modeled as catalyst_pellet_forming_v0
-  Process: Catalytic hydrogenation of CO2
-  Purpose: Recycle CO2 from FFC process back to methane
-  Close carbon cycle in ISRU systems
-  Produce methane for carbothermal reduction processes
-  Thermodynamics:
-    - Exothermic (ΔH = -165 kJ/mol, releases heat)
-    - Favored at lower temperatures
-    - High conversion efficiency (95%+)
-  Products:
-    - CH4 (methane): Reducing agent, fuel, chemical feedstock
-    - H2O (water): Electrolyzed to recycle H2 + produce O2
-  Water electrolysis: 2H2O → 2H2 + O2
-    - Recycles hydrogen back to Sabatier
-    - Net: CO2 + energy → C (in CH4) + O2
-  Stoichiometry: CO2 (44g) + 4H2 (8g) → CH4 (16g) + 2H2O (36g)
-  Mass fractions: 36.4% CH4, 81.8% H2O from inputs
-  Hydrogen source: Water electrolysis, volatile extraction
-  CO2 source: FFC process, combustion, life support, respiration
-  Catalyst: Nickel from Mond process (abundant on lunar meteorites)
-  Applications:
-    - Methane generation for carbothermal reduction (FeTiO3, MgSiO3, etc.)
-    - Fuel production for combustion engines
-    - Chemical feedstock (syngas, siloxanes via CH4 + H2O → CO + H2)
-    - CO2 removal from life support
-  Comparison to alternatives:
-    - Bosch: CO2 + 2H2 → C + 2H2O (less H2, solid carbon)
-    - Reverse water-gas shift: CO2 + H2 → CO + H2O (produces CO)
-  Sabatier advantages: Exothermic (energy positive), high conversion, simple
-  Used on ISS for CO2 recycling
-  Lunar ISRU: Essential for carbon cycle and methane regeneration
-  Coupled with carbothermal processes for complete mineral processing
-  Methane can be stored or used immediately
-  Alternative: Direct use of CO from Boudouard for carbonyl processes
+notes: "Sabatier reaction for converting carbon dioxide to methane using hydrogen.\n\
+  Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nReaction:\
+  \ CO2 + 4H2 → CH4 + 2H2O (exothermic)\nTemperature: 300-400°C\nCatalyst: Nickel-based\
+  \ (Ni/Al2O3 common); modeled as catalyst_pellet_forming_v0\nProcess: Catalytic hydrogenation\
+  \ of CO2\nPurpose: Recycle CO2 from FFC process back to methane\nClose carbon cycle\
+  \ in ISRU systems\nProduce methane for carbothermal reduction processes\nThermodynamics:\n\
+  \  - Exothermic (ΔH = -165 kJ/mol, releases heat)\n  - Favored at lower temperatures\n\
+  \  - High conversion efficiency (95%+)\nProducts:\n  - CH4 (methane): Reducing agent,\
+  \ fuel, chemical feedstock\n  - H2O (water): Electrolyzed to recycle H2 + produce\
+  \ O2\nWater electrolysis: 2H2O → 2H2 + O2\n  - Recycles hydrogen back to Sabatier\n\
+  \  - Net: CO2 + energy → C (in CH4) + O2\nStoichiometry: CO2 (44g) + 4H2 (8g) →\
+  \ CH4 (16g) + 2H2O (36g)\nMass fractions: 36.4% CH4, 81.8% H2O from inputs\nHydrogen\
+  \ source: Water electrolysis, volatile extraction\nCO2 source: FFC process, combustion,\
+  \ life support, respiration\nCatalyst: Nickel from Mond process (abundant on lunar\
+  \ meteorites)\nApplications:\n  - Methane generation for carbothermal reduction\
+  \ (FeTiO3, MgSiO3, etc.)\n  - Fuel production for combustion engines\n  - Chemical\
+  \ feedstock (syngas, siloxanes via CH4 + H2O → CO + H2)\n  - CO2 removal from life\
+  \ support\nComparison to alternatives:\n  - Bosch: CO2 + 2H2 → C + 2H2O (less H2,\
+  \ solid carbon)\n  - Reverse water-gas shift: CO2 + H2 → CO + H2O (produces CO)\n\
+  Sabatier advantages: Exothermic (energy positive), high conversion, simple\nUsed\
+  \ on ISS for CO2 recycling\nLunar ISRU: Essential for carbon cycle and methane regeneration\n\
+  Coupled with carbothermal processes for complete mineral processing\nMethane can\
+  \ be stored or used immediately\nAlternative: Direct use of CO from Boudouard for\
+  \ carbonyl processes\n"

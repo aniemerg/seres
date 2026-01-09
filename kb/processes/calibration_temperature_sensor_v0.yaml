@@ -3,17 +3,17 @@ name: Calibration of RTD temperature sensor (Ni-Ni) v0
 kind: process
 process_type: batch
 inputs:
-  - item_id: rtd_assembled_uncalibrated
-    qty: 0.02
-    unit: kg
+- item_id: rtd_assembled_uncalibrated
+  qty: 0.02
+  unit: kg
 outputs:
-  - item_id: rtd_nickel_v0
-    qty: 0.02
-    unit: kg
+- item_id: rtd_nickel_v0
+  qty: 0.02
+  unit: kg
 resource_requirements:
-  - machine_id: calibration_station
-    qty: 1.0
-    unit: hr
+- machine_id: calibration_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.01
@@ -21,4 +21,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: "Calibration step for RTD Ni-Ni sensor; placeholder values for energy and time."
+notes: Calibration step for RTD Ni-Ni sensor; placeholder values for energy and time.
