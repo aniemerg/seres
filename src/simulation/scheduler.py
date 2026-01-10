@@ -127,6 +127,7 @@ class ProcessRun:
     machines_reserved: Dict[str, float]
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
+    energy_kwh: Optional[float] = None
 
     def __repr__(self) -> str:
         return (
@@ -229,6 +230,7 @@ class Scheduler:
         machines_reserved: Dict[str, float],
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
+        energy_kwh: Optional[float] = None,
     ) -> SchedulerEvent:
         """
         Schedule a process to start.
@@ -264,6 +266,7 @@ class Scheduler:
                 'machines_reserved': machines_reserved,
                 'recipe_run_id': recipe_run_id,
                 'step_index': step_index,
+                'energy_kwh': energy_kwh,
             }
         )
 
@@ -425,6 +428,7 @@ class Scheduler:
             machines_reserved=data['machines_reserved'],
             recipe_run_id=data.get('recipe_run_id'),
             step_index=data.get('step_index'),
+            energy_kwh=data.get('energy_kwh'),
         )
 
         # Add to active processes

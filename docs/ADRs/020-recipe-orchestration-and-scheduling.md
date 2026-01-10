@@ -657,13 +657,13 @@ Agent: run_recipe("recipe_B")
 
 ### 8. Energy Accounting
 
-Energy consumption is calculated and booked at **process start** (activation time) using ADR-014 energy models.
+Energy consumption is calculated at scheduling time and **booked at process completion** using ADR-014 energy models.
 
-**Why Book at Start**:
-- Prevents double-counting if process is force-stopped or fails
-- Provides consistent accounting point across all processes
-- Energy requirements known at scheduling time (from energy_model and scaled quantities)
-- Simplifies accounting: one booking event per process
+**Why Book at Completion**:
+- Guarantees a single, durable accounting point across CLI reloads and persisted state
+- Aligns energy with completed work (no energy is counted for canceled/failed processes)
+- Energy requirements are known at scheduling time (from energy_model and scaled quantities)
+- Simplifies persistence: one booking event per process completion
 
 **Energy Calculation**:
 
@@ -674,16 +674,16 @@ During scheduling (Step 2 of Recipe Execution Model):
 4. Use ADR-016 unit conversion for energy units
 5. Store calculated `energy_kwh` in ScheduledProcess
 
-During activation:
+During completion:
 1. Book `energy_kwh` to process run record
 2. Accumulate to parent recipe run (if applicable)
-3. Include in `process_start` event for tracking
+3. Accumulate to simulation total and persist in `state_snapshot`
 
 **Energy Availability**:
 
 Energy availability constraints are **out of scope** for this ADR. The system:
 - Tracks total energy consumption
-- Books energy at process start
+- Books energy at process completion
 - Does NOT check battery capacity or power limits
 - Does NOT prevent processes from starting due to insufficient energy
 

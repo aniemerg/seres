@@ -109,11 +109,11 @@ class SimulationState:
     inventory: Dict[str, InventoryItem]  # ✅ In state_snapshot
     machines_built: List[str]  # ✅ In state_snapshot
     machines_in_use: Dict[str, float]  # ✅ In state_snapshot
-    total_energy_kwh: float  # ✅ In state_snapshot
+    total_energy_kwh: float  # ✅ In state_snapshot (updated on process completion)
     total_imports: Dict[str, InventoryItem]  # ✅ Reconstructed from import events
 ```
 
-**Status:** WORKING - state_snapshot and import replay handle this.
+**Status:** WORKING - state_snapshot and import replay handle this. Energy is accumulated at process completion and persisted in each advance-time snapshot, so CLI reloads do not affect totals.
 
 #### 2. Scheduler State (❌ Not Persisted)
 

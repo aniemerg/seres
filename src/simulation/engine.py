@@ -612,6 +612,26 @@ class SimulationEngine:
             for item_id, inv_item in outputs_pending.items()
         }
 
+        # Calculate energy at scheduling time (persisted with event)
+        energy_kwh = 0.0
+        try:
+            inputs_for_energy = {
+                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
+                for item_id, inv_item in inputs_consumed.items()
+            }
+            outputs_for_energy = {
+                item_id: Quantity(item_id=item_id, qty=inv_item.quantity, unit=inv_item.unit)
+                for item_id, inv_item in outputs_pending.items()
+            }
+            energy_kwh = calculate_energy(
+                process_model,
+                inputs=inputs_for_energy,
+                outputs=outputs_for_energy,
+                converter=self.converter,
+            )
+        except Exception:
+            energy_kwh = 0.0
+
         # Schedule with ADR-020 scheduler
         self.scheduler.schedule_process_start(
             process_run_id=process_run_id,
@@ -624,6 +644,7 @@ class SimulationEngine:
             machines_reserved=machines_reserved,
             recipe_run_id=recipe_run_id,
             step_index=step_index,
+            energy_kwh=energy_kwh,
         )
 
         # Log the process scheduling immediately so it can be reconstructed on load
@@ -673,6 +694,7 @@ class SimulationEngine:
                 machine_reservations=machine_reservations_list,
                 recipe_run_id=recipe_run_id,
                 step_index=step_index,
+                energy_kwh=energy_kwh,
             )
         )
 
@@ -1310,55 +1332,51 @@ class SimulationEngine:
                     # Process was canceled (e.g., due to insufficient inputs)
                     continue
 
-                # Get process definition for energy calculation
-                process_model = self.kb.get_process(process_run.process_id)
-                if process_model:
-                    if hasattr(process_model, 'model_dump'):
-                        process_def = process_model.model_dump()
+                energy_kwh = process_run.energy_kwh
+                if energy_kwh is None:
+                    # Backward compatibility: calculate if not persisted
+                    process_model = self.kb.get_process(process_run.process_id)
+                    if process_model:
+                        if hasattr(process_model, 'model_dump'):
+                            process_def = process_model.model_dump()
+                        else:
+                            process_def = process_model
+
+                        if process_def.get('energy_model'):
+                            try:
+                                inputs_dict = {}
+                                for inp in process_def.get("inputs", []):
+                                    inp_id = inp.get("item_id")
+                                    if inp_id in process_run.inputs_consumed:
+                                        qty = process_run.inputs_consumed[inp_id]
+                                        unit = inp.get("unit", "kg")
+                                        inputs_dict[inp_id] = Quantity(item_id=inp_id, qty=qty, unit=unit)
+
+                                outputs_dict = {}
+                                for outp in process_def.get("outputs", []):
+                                    outp_id = outp.get("item_id")
+                                    if outp_id in process_run.outputs_pending:
+                                        qty = process_run.outputs_pending[outp_id]
+                                        unit = outp.get("unit", "kg")
+                                        outputs_dict[outp_id] = Quantity(item_id=outp_id, qty=qty, unit=unit)
+
+                                energy_kwh = calculate_energy(
+                                    process_model,
+                                    inputs=inputs_dict,
+                                    outputs=outputs_dict,
+                                    converter=self.converter
+                                )
+                            except Exception:
+                                energy_kwh = 0.0
                     else:
-                        process_def = process_model
+                        energy_kwh = 0.0
 
-                    # Calculate and book energy at process start (ADR-014/ADR-016)
+                if energy_kwh is None:
                     energy_kwh = 0.0
-                    if process_def.get('energy_model'):
-                        try:
-                            # Build input quantities for energy calculation
-                            inputs_dict = {}
-                            for inp in process_def.get("inputs", []):
-                                inp_id = inp.get("item_id")
-                                if inp_id in process_run.inputs_consumed:
-                                    qty = process_run.inputs_consumed[inp_id]
-                                    unit = inp.get("unit", "kg")
-                                    inputs_dict[inp_id] = Quantity(item_id=inp_id, qty=qty, unit=unit)
 
-                            # Build output quantities for energy calculation
-                            outputs_dict = {}
-                            for outp in process_def.get("outputs", []):
-                                outp_id = outp.get("item_id")
-                                if outp_id in process_run.outputs_pending:
-                                    qty = process_run.outputs_pending[outp_id]
-                                    unit = outp.get("unit", "kg")
-                                    outputs_dict[outp_id] = Quantity(item_id=outp_id, qty=qty, unit=unit)
-
-                            energy_kwh = calculate_energy(
-                                process_model,
-                                inputs=inputs_dict,
-                                outputs=outputs_dict,
-                                converter=self.converter
-                            )
-                        except Exception as e:
-                            # If calculation fails, energy stays at 0.0
-                            pass
-
-                    # Accumulate energy into total
-                    self.state.total_energy_kwh += energy_kwh
-
-                    # Store energy on process_run for later retrieval
-                    # We need to extend ProcessRun or store it separately
-                    # For now, store in a dict keyed by process_run_id
-                    if not hasattr(self, '_process_energy'):
-                        self._process_energy = {}
-                    self._process_energy[process_run_id] = energy_kwh
+                if not hasattr(self, '_process_energy'):
+                    self._process_energy = {}
+                self._process_energy[process_run_id] = energy_kwh
 
                 # Log activation event for lifecycle tracking
                 self._log_event(
@@ -1434,9 +1452,12 @@ class SimulationEngine:
                                 )
 
                     # Retrieve stored energy for this process
-                    energy_kwh = 0.0
+                    energy_kwh = process_run.energy_kwh or 0.0
                     if hasattr(self, '_process_energy') and process_run_id in self._process_energy:
                         energy_kwh = self._process_energy[process_run_id]
+
+                    # Book energy on completion to ensure persistence across CLI reloads
+                    self.state.total_energy_kwh += energy_kwh
 
                     # Log completion event
                     self._log_event(
@@ -1571,6 +1592,7 @@ class SimulationEngine:
             return False
 
         # Read all events
+        saw_snapshot = False
         with self.log_file.open("r", encoding="utf-8") as f:
             for line in f:
                 line = line.strip()
@@ -1583,6 +1605,7 @@ class SimulationEngine:
 
                     # Reconstruct state from state_snapshot events
                     if event_type == "state_snapshot":
+                        saw_snapshot = True
                         self.state.current_time_hours = event.get("time_hours", 0)
                         self.state.inventory = {
                             k: InventoryItem(**v)
@@ -1703,6 +1726,9 @@ class SimulationEngine:
                         scheduled_end_time = event.get("scheduled_end_time", 0.0)
 
                         if scheduled_end_time <= self.state.current_time_hours:
+                            energy_kwh = event.get("energy_kwh")
+                            if energy_kwh is not None and not saw_snapshot:
+                                self.state.total_energy_kwh += energy_kwh
                             continue
 
                         inputs_consumed = {}
@@ -1738,6 +1764,7 @@ class SimulationEngine:
                                 machines_reserved=machines_reserved,
                                 recipe_run_id=event.get("recipe_run_id"),
                                 step_index=event.get("step_index"),
+                                energy_kwh=event.get("energy_kwh"),
                             )
                         else:
                             from src.simulation.scheduler import ProcessRun
@@ -1754,6 +1781,7 @@ class SimulationEngine:
                                 machines_reserved=machines_reserved,
                                 recipe_run_id=event.get("recipe_run_id"),
                                 step_index=event.get("step_index"),
+                                energy_kwh=event.get("energy_kwh"),
                             )
 
                             self.scheduler.active_processes[process_run_id] = process_run

@@ -82,6 +82,7 @@ class ProcessScheduledEvent(Event):
 
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
+    energy_kwh: Optional[float] = None
 
 
 class ProcessStartEvent(Event):

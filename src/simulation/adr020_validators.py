@@ -9,6 +9,7 @@ Process Definition Rules:
 1. full_duration_machine_required (ERROR)
 2. machine_reservation_units_valid (ERROR)
 3. machine_id_exists (WARNING)
+4. machine_id_is_machine_kind (ERROR)
 
 Scheduling Rules:
 4. no_overlapping_reservations (ERROR)
@@ -126,6 +127,46 @@ def validate_machine_id_exists(process: Dict[str, Any], kb_items: Dict[str, Any]
                 message=f"Machine '{machine_id}' referenced in resource_requirements[{idx}] not found in KB",
                 field_path=f"resource_requirements[{idx}].machine_id",
                 fix_hint=f"Define machine '{machine_id}' in kb/items/machines/ or update reference"
+            ))
+
+    return issues
+
+
+def validate_machine_id_is_machine_kind(process: Dict[str, Any], kb_items: Dict[str, Any]) -> List[ValidationIssue]:
+    """
+    Rule 4: Ensure machine_id references items with kind: machine.
+
+    ERROR level - non-machine items cause reservation failures at runtime.
+    """
+    issues = []
+    process_id = process.get('id', 'unknown')
+    resource_reqs = process.get('resource_requirements', [])
+
+    for idx, req in enumerate(resource_reqs):
+        machine_id = req.get('machine_id')
+        if not machine_id:
+            continue
+
+        item = kb_items.get(machine_id)
+        if not item:
+            continue
+
+        item_def = item.model_dump() if hasattr(item, "model_dump") else item
+        kind = item_def.get("kind")
+
+        if kind != "machine":
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="reference",
+                rule="machine_id_is_machine_kind",
+                entity_type="process",
+                entity_id=process_id,
+                message=(
+                    f"Machine '{machine_id}' referenced in resource_requirements[{idx}] "
+                    f"has kind '{kind}', expected kind 'machine'"
+                ),
+                field_path=f"resource_requirements[{idx}].machine_id",
+                fix_hint=f"Change item '{machine_id}' to kind: machine or update the process requirement"
             ))
 
     return issues
@@ -486,6 +527,9 @@ def validate_process_adr020(process: Dict[str, Any], kb_items: Dict[str, Any]) -
 
     # Rule 3: Machine ID exists
     issues.extend(validate_machine_id_exists(process, kb_items))
+
+    # Rule 4: Machine ID references machine kind
+    issues.extend(validate_machine_id_is_machine_kind(process, kb_items))
 
     return issues
 
