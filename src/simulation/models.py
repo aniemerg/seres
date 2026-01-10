@@ -63,12 +63,34 @@ class ActionEvent(Event):
     agent_reasoning: Optional[str] = None
 
 
+class ProcessScheduledEvent(Event):
+    """Process scheduled for execution."""
+    type: Literal["process_scheduled"] = "process_scheduled"
+
+    process_id: str
+    process_run_id: str
+
+    scheduled_start_time: float
+    duration_hours: float
+    scheduled_end_time: float
+
+    scale: float
+
+    inputs_consumed: Dict[str, Dict[str, Any]]
+    outputs_pending: Dict[str, Dict[str, Any]]
+    machine_reservations: List[Dict[str, Any]]
+
+    recipe_run_id: Optional[str] = None
+    step_index: Optional[int] = None
+
+
 class ProcessStartEvent(Event):
     """Process started."""
     type: Literal["process_start"] = "process_start"
     process_id: str
+    process_run_id: str
+    actual_start_time: float
     scale: float
-    ends_at: float  # simulation time
 
 
 class ProcessCompleteEvent(Event):
@@ -79,6 +101,7 @@ class ProcessCompleteEvent(Event):
     recipe_run_id: Optional[str] = None  # Recipe run ID if part of a recipe
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this process
+    time_hours: float
 
 
 class RecipeStartEvent(Event):

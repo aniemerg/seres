@@ -48,7 +48,7 @@ python -m src.cli sim import --sim-id my_simulation --item drilling_rig_basic_v0
 ### 3. Start Production
 
 ```bash
-# Start a process (engine calculates duration OR you provide it)
+# Schedule a process (engine calculates duration OR you provide it)
 python -m src.cli sim start-process --sim-id my_simulation --process regolith_mining_highlands_v0 --duration 24
 
 # Or let engine calculate duration from time_model
@@ -115,7 +115,7 @@ python -m src.cli sim import --sim-id lunar_base_001 --item steel_plate --quanti
 
 ### start-process
 
-Start a process.
+Schedule a process for execution.
 
 ```bash
 python -m src.cli sim start-process --sim-id <name> --process <process_id> [--scale <n>] [--duration <hours>]
@@ -148,6 +148,10 @@ python -m src.cli sim start-process --sim-id lunar_base_001 --process regolith_m
 # Scaled process (2x inputs/outputs)
 python -m src.cli sim start-process --sim-id lunar_base_001 --process alumina_extraction_v0 --scale 2.0
 ```
+
+**Behavior:**
+- Logs a `process_scheduled` event with full timing and reservation details
+- Actual activation is logged as `process_start` when time advances
 
 **Validation:**
 - Process must exist in KB
@@ -213,10 +217,11 @@ python -m src.cli sim advance-time --sim-id <name> --hours <n>
 
 **What Happens:**
 1. Time advances by specified duration
-2. All processes with `ends_at <= new_time` complete
-3. Outputs added to inventory
-4. Energy consumption calculated (014)
-5. Events logged
+2. Scheduled processes whose start time is reached become active (`process_start`)
+3. Active processes whose end time is reached complete (`process_complete`)
+4. Outputs added to inventory
+5. Energy consumption calculated (014)
+6. Events logged
 
 **Example:**
 ```bash
@@ -490,8 +495,9 @@ All actions logged to `simulation.jsonl`:
 ```json
 {"type": "sim_start", "timestamp": "2025-12-30T10:00:00Z", "sim_id": "lunar_base_001"}
 {"type": "import", "item_id": "labor_bot_general_v0", "quantity": 3.0, "unit": "unit"}
-{"type": "process_start", "process_id": "regolith_mining_highlands_v0", "duration_hours": 24.0}
-{"type": "process_complete", "process_id": "regolith_mining_highlands_v0", "energy_kwh": 50.0, "outputs": {...}}
+{"type": "process_scheduled", "process_id": "regolith_mining_highlands_v0", "scheduled_start_time": 0.0, "scheduled_end_time": 24.0}
+{"type": "process_start", "process_id": "regolith_mining_highlands_v0", "actual_start_time": 0.0}
+{"type": "process_complete", "process_id": "regolith_mining_highlands_v0", "time_hours": 24.0, "energy_kwh": 50.0, "outputs": {...}}
 ```
 
 Use for:
@@ -499,6 +505,13 @@ Use for:
 - Replay simulations
 - Debug issues
 - Export to other tools
+
+## State Persistence and Lifecycle
+
+- CLI commands load and save simulation state on every invocation.
+- `start-process` records a `process_scheduled` event so the scheduler can be rebuilt across commands.
+- `advance-time` activates scheduled work (`process_start`) and completes work (`process_complete`).
+- Phase 1 persistence covers scheduled/active processes; recipe orchestration persistence is still deferred and recipes should complete within one CLI session.
 
 ## Troubleshooting
 

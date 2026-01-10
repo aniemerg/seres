@@ -799,9 +799,19 @@ def cmd_advance_time(args, kb_loader: KBLoader):
         for proc in result['completed']:
             print(f"  - {proc['process_id']} (energy: {proc.get('energy_kwh', 0.0):.2f} kWh)")
             if proc.get('outputs'):
+                output_units = {}
+                process_model = kb_loader.get_process(proc["process_id"])
+                if process_model:
+                    process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+                    for outp in process_def.get("outputs", []):
+                        output_units[outp.get("item_id")] = outp.get("unit", "unit")
                 for item_id, inv_item in proc['outputs'].items():
-                    qty = inv_item.quantity if hasattr(inv_item, 'quantity') else inv_item['quantity']
-                    unit = inv_item.unit if hasattr(inv_item, 'unit') else inv_item['unit']
+                    if isinstance(inv_item, (int, float)):
+                        qty = float(inv_item)
+                        unit = output_units.get(item_id, "unit")
+                    else:
+                        qty = inv_item.quantity if hasattr(inv_item, 'quantity') else inv_item['quantity']
+                        unit = inv_item.unit if hasattr(inv_item, 'unit') else inv_item['unit']
                     print(f"      → {item_id}: {qty:.2f} {unit}")
 
     engine.save()

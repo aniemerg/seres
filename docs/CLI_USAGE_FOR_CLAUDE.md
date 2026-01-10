@@ -28,7 +28,7 @@ python -m base_builder.cli_commands view-state --sim-id $SIM
 python -m base_builder.cli_commands import --sim-id $SIM \
   --item <item_id> --quantity <n> --unit <unit>
 
-# 3. Start process
+# 3. Schedule process
 python -m base_builder.cli_commands start-process --sim-id $SIM \
   --process <process_id> --duration <hours>
 
@@ -62,7 +62,7 @@ python -m base_builder.cli_commands import --sim-id <sim_id> \
 ```
 
 ### start-process
-Start a production process
+Schedule a production process (activation happens when time advances)
 
 ```bash
 python -m base_builder.cli_commands start-process --sim-id <sim_id> \
@@ -151,6 +151,11 @@ python -m base_builder.cli_commands view-state --sim-id $SIM | grep drive_motor
 | Debugging | ✅ Easy (one command = one action) | ❌ Hard (session state issues) |
 | Reliability | ✅ Stateless | ❌ Stateful |
 | Use in Claude Code | ✅ Perfect via Bash tool | ❌ Session management problems |
+
+**State persistence notes:**
+- `start-process` logs scheduling state so the scheduler can be reconstructed across commands.
+- `advance-time` logs activation (`process_start`) and completion (`process_complete`).
+- Recipe persistence across sessions is still limited; finish recipes within one CLI session for now.
 
 ---
 

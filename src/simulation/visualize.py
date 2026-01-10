@@ -60,7 +60,7 @@ class SimulationVisualizer:
                     if event_type == 'state_snapshot':
                         self.state_snapshots.append(event)
 
-                    elif event_type in ('process_start', 'process_complete'):
+                    elif event_type in ('process_scheduled', 'process_start', 'process_complete'):
                         self.process_events.append(event)
                         # Also track as energy event if it has energy data
                         if event_type == 'process_complete' and 'energy_kwh' in event:
@@ -125,9 +125,14 @@ class SimulationVisualizer:
             # Build a time mapping from process events
             process_times = {}
             for event in self.process_events:
-                if event.get('type') == 'process_start':
+                if event.get('type') == 'process_scheduled':
                     process_times[event.get('process_id')] = {
-                        'start': event.get('starts_at', 0.0) if 'starts_at' in event else 0.0,
+                        'start': event.get('scheduled_start_time', 0.0),
+                        'end': event.get('scheduled_end_time', 0.0)
+                    }
+                elif event.get('type') == 'process_start' and event.get('process_id') not in process_times:
+                    process_times[event.get('process_id')] = {
+                        'start': event.get('actual_start_time', 0.0),
                         'end': event.get('ends_at', 0.0)
                     }
 
@@ -255,20 +260,27 @@ class SimulationVisualizer:
         for event in self.process_events:
             process_id = event.get('process_id', 'unknown')
 
-            if event.get('type') == 'process_start':
+            if event.get('type') == 'process_scheduled':
                 if process_id not in processes:
                     processes[process_id] = {'starts': [], 'ends': []}
 
-                # Get start time from state snapshot time_hours (current time)
-                start_time = 0.0
+                start_time = event.get('scheduled_start_time', 0.0)
+                ends_at = event.get('scheduled_end_time', 0.0)
+                processes[process_id]['starts'].append(start_time)
+                processes[process_id]['ends'].append(ends_at)
+
+            elif event.get('type') == 'process_start' and process_id not in processes:
+                processes[process_id] = {'starts': [], 'ends': []}
+
+                start_time = event.get('actual_start_time', 0.0)
                 ends_at = event.get('ends_at', 0.0)
 
-                # Find the state snapshot around this event to get current time
-                for snapshot in self.state_snapshots:
-                    if any(proc.get('process_id') == process_id and proc.get('ends_at') == ends_at
-                          for proc in snapshot.get('active_processes', [])):
-                        start_time = snapshot.get('time_hours', 0.0)
-                        break
+                if not start_time:
+                    for snapshot in self.state_snapshots:
+                        if any(proc.get('process_id') == process_id and proc.get('ends_at') == ends_at
+                              for proc in snapshot.get('active_processes', [])):
+                            start_time = snapshot.get('time_hours', 0.0)
+                            break
 
                 processes[process_id]['starts'].append(start_time)
                 processes[process_id]['ends'].append(ends_at)

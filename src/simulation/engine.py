@@ -28,6 +28,7 @@ from src.simulation.models import (
     ActiveProcess,
     SimStartEvent,
     ActionEvent,
+    ProcessScheduledEvent,
     ProcessStartEvent,
     ProcessCompleteEvent,
     RecipeStartEvent,
@@ -626,11 +627,52 @@ class SimulationEngine:
         )
 
         # Log the process scheduling immediately so it can be reconstructed on load
+        inputs_consumed_with_units = {
+            item_id: {"quantity": inv_item.quantity, "unit": inv_item.unit}
+            for item_id, inv_item in inputs_consumed.items()
+        }
+        outputs_pending_with_units = {
+            item_id: {"quantity": inv_item.quantity, "unit": inv_item.unit}
+            for item_id, inv_item in outputs_pending.items()
+        }
+        machine_reservations_list = []
+        for req in process_def.get('resource_requirements', []):
+            machine_id = req.get('machine_id')
+            if not machine_id:
+                continue
+            qty = req.get('qty', 1.0)
+            unit = req.get('unit', 'count')
+            reservation_type = 'FULL_DURATION'
+            release_time = None
+            reservation_end = end_time
+            if unit == 'hr':
+                reservation_type = 'PARTIAL'
+                release_time = start_time + qty
+                reservation_end = release_time
+
+            machine_reservations_list.append({
+                "machine_id": machine_id,
+                "start_time": start_time,
+                "end_time": reservation_end,
+                "qty": qty,
+                "unit": unit,
+                "reservation_type": reservation_type,
+                "release_time": release_time,
+            })
+
         self._log_event(
-            ProcessStartEvent(
+            ProcessScheduledEvent(
                 process_id=process_id,
+                process_run_id=process_run_id,
+                scheduled_start_time=start_time,
+                duration_hours=duration_hours,
+                scheduled_end_time=end_time,
                 scale=scale,
-                ends_at=end_time,
+                inputs_consumed=inputs_consumed_with_units,
+                outputs_pending=outputs_pending_with_units,
+                machine_reservations=machine_reservations_list,
+                recipe_run_id=recipe_run_id,
+                step_index=step_index,
             )
         )
 
@@ -1318,8 +1360,15 @@ class SimulationEngine:
                         self._process_energy = {}
                     self._process_energy[process_run_id] = energy_kwh
 
-                #Note: ProcessStartEvent is logged immediately when start_process() is called,
-                # not here during advance_time processing
+                # Log activation event for lifecycle tracking
+                self._log_event(
+                    ProcessStartEvent(
+                        process_id=process_run.process_id,
+                        process_run_id=process_run_id,
+                        actual_start_time=event.time,
+                        scale=process_run.scale,
+                    )
+                )
 
                 started_processes.append({
                     "process_run_id": event.data.get("process_run_id"),
@@ -1611,6 +1660,154 @@ class SimulationEngine:
 
                 except json.JSONDecodeError:
                     continue
+
+        # Reconstruct scheduler and machine reservations from process_scheduled events
+        self._update_machine_capacities()
+        if self.reservation_manager is None:
+            self._init_reservation_manager()
+
+        if self.reservation_manager is not None:
+            self.scheduler.current_time = self.state.current_time_hours
+            self.reservation_manager.current_time = self.state.current_time_hours
+
+            completed_processes = set()
+            with self.log_file.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        event = json.loads(line)
+                        if event.get("type") == "process_complete":
+                            process_run_id = event.get("process_run_id")
+                            if process_run_id:
+                                completed_processes.add(process_run_id)
+                    except json.JSONDecodeError:
+                        continue
+
+            with self.log_file.open("r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        event = json.loads(line)
+                        if event.get("type") != "process_scheduled":
+                            continue
+
+                        process_run_id = event.get("process_run_id")
+                        if not process_run_id or process_run_id in completed_processes:
+                            continue
+
+                        scheduled_start_time = event.get("scheduled_start_time", 0.0)
+                        scheduled_end_time = event.get("scheduled_end_time", 0.0)
+
+                        if scheduled_end_time <= self.state.current_time_hours:
+                            continue
+
+                        inputs_consumed = {}
+                        for item_id, item_data in event.get("inputs_consumed", {}).items():
+                            if isinstance(item_data, dict):
+                                inputs_consumed[item_id] = item_data.get("quantity", 0.0)
+                            else:
+                                inputs_consumed[item_id] = item_data
+
+                        outputs_pending = {}
+                        for item_id, item_data in event.get("outputs_pending", {}).items():
+                            if isinstance(item_data, dict):
+                                outputs_pending[item_id] = item_data.get("quantity", 0.0)
+                            else:
+                                outputs_pending[item_id] = item_data
+
+                        machines_reserved = {}
+                        for reservation in event.get("machine_reservations", []):
+                            machine_id = reservation.get("machine_id")
+                            qty = reservation.get("qty", 0.0)
+                            if machine_id:
+                                machines_reserved[machine_id] = machines_reserved.get(machine_id, 0.0) + qty
+
+                        if scheduled_start_time > self.state.current_time_hours:
+                            self.scheduler.schedule_process_start(
+                                process_run_id=process_run_id,
+                                process_id=event.get("process_id"),
+                                start_time=scheduled_start_time,
+                                duration_hours=event.get("duration_hours", 0.0),
+                                scale=event.get("scale", 1.0),
+                                inputs_consumed=inputs_consumed,
+                                outputs_pending=outputs_pending,
+                                machines_reserved=machines_reserved,
+                                recipe_run_id=event.get("recipe_run_id"),
+                                step_index=event.get("step_index"),
+                            )
+                        else:
+                            from src.simulation.scheduler import ProcessRun
+
+                            process_run = ProcessRun(
+                                process_run_id=process_run_id,
+                                process_id=event.get("process_id"),
+                                start_time=scheduled_start_time,
+                                duration_hours=event.get("duration_hours", 0.0),
+                                end_time=scheduled_end_time,
+                                scale=event.get("scale", 1.0),
+                                inputs_consumed=inputs_consumed,
+                                outputs_pending=outputs_pending,
+                                machines_reserved=machines_reserved,
+                                recipe_run_id=event.get("recipe_run_id"),
+                                step_index=event.get("step_index"),
+                            )
+
+                            self.scheduler.active_processes[process_run_id] = process_run
+                            self.scheduler.schedule_event(
+                                time=scheduled_end_time,
+                                event_type=EventType.PROCESS_COMPLETE,
+                                event_id=f"complete_{process_run_id}",
+                                priority=5,
+                                data={
+                                    'process_run_id': process_run_id,
+                                }
+                            )
+
+                        for reservation in event.get("machine_reservations", []):
+                            machine_id = reservation.get("machine_id")
+                            if not machine_id:
+                                continue
+                            qty = reservation.get("qty", 0.0)
+                            unit = reservation.get("unit", "count")
+                            reservation_type = reservation.get("reservation_type", "FULL_DURATION")
+                            release_time = reservation.get("release_time")
+                            start_time = reservation.get("start_time", scheduled_start_time)
+                            end_time = reservation.get("end_time", scheduled_end_time)
+
+                            if reservation_type == "PARTIAL" and release_time:
+                                if release_time <= self.state.current_time_hours:
+                                    continue
+                                end_time = release_time
+
+                            success = self.reservation_manager.add_reservation(
+                                machine_id=machine_id,
+                                process_run_id=process_run_id,
+                                start_time=start_time,
+                                end_time=end_time,
+                                qty=qty,
+                                unit=unit,
+                            )
+
+                            if not success:
+                                print(
+                                    f"Warning: Could not restore reservation for {machine_id} "
+                                    f"(process {process_run_id})",
+                                    file=sys.stderr
+                                )
+
+                            if reservation_type == "PARTIAL" and release_time and release_time > self.state.current_time_hours:
+                                self.scheduler.schedule_machine_release(
+                                    process_run_id=process_run_id,
+                                    machine_id=machine_id,
+                                    release_time=release_time,
+                                    qty=qty,
+                                )
+                    except json.JSONDecodeError:
+                        continue
 
         return True
 

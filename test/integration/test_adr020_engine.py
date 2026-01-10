@@ -220,9 +220,22 @@ class TestBasicProcessScheduling:
         # Verify we have the expected event types
         event_types = [e.get("type") for e in events]
 
-        # Key assertion: process_start events should be logged
+        # Key assertion: process_scheduled and process_start events should be logged
+        assert "process_scheduled" in event_types, f"Should have process_scheduled event. Got event types: {event_types}"
         assert "process_start" in event_types, f"Should have process_start event. Got event types: {event_types}"
         assert "process_complete" in event_types, "Should have process_complete event"
+
+        # Verify process_scheduled event has correct structure
+        process_scheduled_events = [e for e in events if e.get("type") == "process_scheduled"]
+        assert len(process_scheduled_events) == 1, "Should have exactly one process_scheduled event"
+
+        ps_event = process_scheduled_events[0]
+        assert ps_event.get("process_id") == "test_process_v0"
+        assert ps_event.get("scale") == 1.0
+        assert ps_event.get("scheduled_start_time") == 0.0
+        assert ps_event.get("scheduled_end_time") == 1.0
+        assert ps_event.get("duration_hours") == 1.0
+        assert ps_event.get("process_run_id")
 
         # Verify process_start event has correct structure
         process_start_events = [e for e in events if e.get("type") == "process_start"]
@@ -231,7 +244,8 @@ class TestBasicProcessScheduling:
         ps_event = process_start_events[0]
         assert ps_event.get("process_id") == "test_process_v0"
         assert ps_event.get("scale") == 1.0
-        assert ps_event.get("ends_at") == 1.0
+        assert ps_event.get("actual_start_time") == 0.0
+        assert ps_event.get("process_run_id")
 
         # Verify process_complete event has correct structure
         process_complete_events = [e for e in events if e.get("type") == "process_complete"]
@@ -239,10 +253,142 @@ class TestBasicProcessScheduling:
 
         pc_event = process_complete_events[0]
         assert pc_event.get("process_id") == "test_process_v0"
+        assert pc_event.get("time_hours") == 1.0
         assert "outputs" in pc_event
         # Check that outputs contain the expected item
         outputs = pc_event.get("outputs", {})
         assert "metal" in outputs
+
+    def test_scheduler_persistence_across_loads(self, kb_root, sim_dir):
+        """Verify scheduler state persists across save/load cycles (ADR-021 core requirement)."""
+        import json
+
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        sim_id = "persistence_test"
+        full_sim_dir = sim_dir / sim_id
+
+        # Phase 1: Create engine, schedule process, save
+        engine1 = SimulationEngine(sim_id, kb, full_sim_dir)
+        engine1.import_item("ore", 10.0, "kg")
+        engine1.import_item("furnace", 1.0, "count")
+
+        result = engine1.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=5.0,
+        )
+        assert result["success"]
+        process_run_id = result["process_run_id"]
+
+        # Verify scheduled in engine1
+        assert len(engine1.scheduler.active_processes) == 1, "Should have 1 active process before save"
+        assert process_run_id in engine1.scheduler.active_processes, "Process should be in scheduler"
+
+        # Verify process details
+        process_run = engine1.scheduler.active_processes[process_run_id]
+        assert process_run.process_id == "test_process_v0"
+        assert process_run.start_time == 0.0
+        assert process_run.duration_hours == 5.0
+        assert process_run.end_time == 5.0
+
+        engine1.save()
+
+        # Phase 2: Load in fresh engine, verify scheduler state reconstructed
+        engine2 = SimulationEngine(sim_id, kb, full_sim_dir)
+        success = engine2.load()
+        assert success, "Load should succeed"
+
+        # CRITICAL ASSERTIONS: Scheduler state reconstructed from process_scheduled events
+        assert engine2.scheduler.current_time == 0.0, "Scheduler time should be synced"
+        assert len(engine2.scheduler.active_processes) == 1, "Should have reconstructed 1 active process"
+        assert process_run_id in engine2.scheduler.active_processes, f"Process {process_run_id} should be reconstructed"
+
+        # Verify reconstructed process details
+        process_run2 = engine2.scheduler.active_processes[process_run_id]
+        assert process_run2.process_id == "test_process_v0"
+        assert process_run2.start_time == 0.0
+        assert process_run2.duration_hours == 5.0
+        assert process_run2.end_time == 5.0
+        assert process_run2.scale == 1.0
+
+        # Verify inputs/outputs reconstructed
+        assert "ore" in process_run2.inputs_consumed
+        assert "metal" in process_run2.outputs_pending
+
+        # Verify machine reservations reconstructed
+        assert "furnace" in process_run2.machines_reserved
+        assert process_run2.machines_reserved["furnace"] == 1.0
+
+        # Phase 3: Advance time in engine2, verify process completes
+        advance_result = engine2.advance_time(5.0)
+        assert advance_result["processes_completed"] == 1, "Should complete 1 process"
+
+        # Verify process no longer active
+        assert len(engine2.scheduler.active_processes) == 0, "No processes should be active after completion"
+
+        # Verify outputs produced
+        assert engine2.has_item("metal", 1.0, "kg"), "Should have produced metal output"
+
+    def test_partial_reservation_persistence(self, kb_root, sim_dir):
+        """Verify PARTIAL reservations are reconstructed correctly, skipping already-released ones."""
+        import json
+
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        sim_id = "partial_res_test"
+        full_sim_dir = sim_dir / sim_id
+
+        # Phase 1: Schedule process with PARTIAL reservation
+        engine1 = SimulationEngine(sim_id, kb, full_sim_dir)
+        engine1.import_item("ore", 10.0, "kg")
+        engine1.import_item("test_machine_partial", 1.0, "count")
+
+        # This process should have a PARTIAL reservation (unit='hr')
+        result = engine1.start_process(
+            process_id="test_process_partial_v0",
+            scale=1.0,
+            duration_hours=10.0,
+        )
+        assert result["success"]
+        process_run_id = result["process_run_id"]
+
+        engine1.save()
+
+        # Phase 2: Load at t=0, verify reservation exists
+        engine2 = SimulationEngine(sim_id, kb, full_sim_dir)
+        engine2.load()
+
+        # Check reservation manager has the partial reservation
+        reserved = engine2.reservation_manager.get_reserved_qty(
+            machine_id="test_machine_partial",
+            start_time=0.0,
+            end_time=5.0  # Partial release at 5 hours
+        )
+        assert reserved > 0, "Reservation should exist at t=0"
+
+        # Phase 3: Advance time past release, save, reload
+        engine2.advance_time(6.0)  # Past the release_time
+        engine2.save()
+
+        # Phase 4: Load at t=6, verify partial reservation NOT restored
+        engine3 = SimulationEngine(sim_id, kb, full_sim_dir)
+        engine3.load()
+
+        # The partial reservation should have been released and not restored
+        # But the process should still be active (ends at t=10)
+        assert process_run_id in engine3.scheduler.active_processes, "Process should still be active"
+
+        # Check that machine is no longer reserved (partial release happened)
+        reserved = engine3.reservation_manager.get_reserved_qty(
+            machine_id="test_machine_partial",
+            start_time=6.0,
+            end_time=10.0
+        )
+        # Should be 0 because the partial reservation was released at t=5
+        assert reserved == 0, "Machine should not be reserved after partial release"
 
 
 class TestRecipeOrchestration:

@@ -288,7 +288,7 @@ python -m src.cli sim import --sim-id lunar_base_001 --item labor_bot_general_v0
 
 ### sim start-process
 
-Start a process.
+Schedule a process for execution.
 
 ```bash
 python -m src.cli sim start-process --sim-id <name> --process <process_id> [--scale <n>] [--duration <hours>]
@@ -316,10 +316,14 @@ python -m src.cli sim start-process --sim-id test --process crushing_v0
 **Example:**
 ```bash
 python -m src.cli sim start-process --sim-id lunar_base_001 --process regolith_mining_highlands_v0 --duration 24
-# ✓ Started process 'regolith_mining_highlands_v0'
+# ✓ Scheduled process 'regolith_mining_highlands_v0'
 #   Duration: 24.00 hours (provided)
-#   Ends at: 24.00 hours
+#   Scheduled end: 24.00 hours
 ```
+
+**Notes:**
+- Logs `process_scheduled` immediately (used to reconstruct scheduler state across CLI commands)
+- Actual activation is logged as `process_start` during `advance-time`
 
 ---
 
@@ -387,10 +391,11 @@ python -m src.cli sim advance-time --sim-id <name> --hours <n>
 
 **What Happens:**
 1. Time advances by specified duration
-2. Processes with `ends_at <= new_time` complete
-3. Outputs added to inventory
-4. Energy calculated (014)
-5. Events logged
+2. Scheduled processes whose start time is reached become active (`process_start`)
+3. Active processes whose end time is reached complete (`process_complete`)
+4. Outputs added to inventory
+5. Energy calculated (014)
+6. Events logged
 
 **Example:**
 ```bash

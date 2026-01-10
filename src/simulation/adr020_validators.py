@@ -358,23 +358,43 @@ def validate_event_ids_consistent(events: List[Dict[str, Any]]) -> List[Validati
     ERROR level - inconsistent IDs indicate data corruption.
 
     Checks:
-    - process_start -> process_complete: same process_run_id
+    - process_scheduled -> process_start -> process_complete: same process_run_id
     - recipe_start -> recipe_complete: same recipe_run_id
-    - scheduled -> started -> completed: same process_run_id
     """
     issues = []
 
     # Track runtime IDs
+    process_scheduled: Dict[str, Dict[str, Any]] = {}  # process_run_id → event
     process_starts: Dict[str, Dict[str, Any]] = {}  # process_run_id → event
     recipe_starts: Dict[str, Dict[str, Any]] = {}  # recipe_run_id → event
 
     for event in events:
         event_type = event.get('type')
 
+        if event_type == 'process_scheduled':
+            process_run_id = event.get('process_run_id')
+            if process_run_id:
+                process_scheduled[process_run_id] = event
+
         if event_type == 'process_start':
             process_run_id = event.get('process_run_id')
             if process_run_id:
                 process_starts[process_run_id] = event
+                if process_run_id in process_scheduled:
+                    scheduled_event = process_scheduled[process_run_id]
+                    if scheduled_event.get('process_id') != event.get('process_id'):
+                        issues.append(ValidationIssue(
+                            level=ValidationLevel.ERROR,
+                            category="event",
+                            rule="event_ids_consistent",
+                            entity_type="process_run",
+                            entity_id=process_run_id,
+                            message=(
+                                f"Process ID mismatch for process_run_id={process_run_id}: "
+                                f"scheduled as '{scheduled_event.get('process_id')}', "
+                                f"started as '{event.get('process_id')}'"
+                            )
+                        ))
 
         elif event_type == 'process_complete':
             process_run_id = event.get('process_run_id')
@@ -392,6 +412,21 @@ def validate_event_ids_consistent(events: List[Dict[str, Any]]) -> List[Validati
                         message=(
                             f"Process ID mismatch for process_run_id={process_run_id}: "
                             f"started as '{start_event.get('process_id')}', "
+                            f"completed as '{event.get('process_id')}'"
+                        )
+                    ))
+            elif process_run_id and process_run_id in process_scheduled:
+                scheduled_event = process_scheduled[process_run_id]
+                if scheduled_event.get('process_id') != event.get('process_id'):
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="event",
+                        rule="event_ids_consistent",
+                        entity_type="process_run",
+                        entity_id=process_run_id,
+                        message=(
+                            f"Process ID mismatch for process_run_id={process_run_id}: "
+                            f"scheduled as '{scheduled_event.get('process_id')}', "
                             f"completed as '{event.get('process_id')}'"
                         )
                     ))
