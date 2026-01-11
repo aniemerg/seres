@@ -65,7 +65,7 @@ def calculate_duration(
     if process.time_model.type == "linear_rate":
         return _calculate_linear_rate_duration(process, inputs, outputs, converter)
     elif process.time_model.type == "batch":
-        return _calculate_batch_duration(process)
+        return _calculate_batch_duration(process, inputs, outputs, converter)
     else:
         raise CalculationError(
             f"Unknown time_model type: {process.time_model.type}"
@@ -145,8 +145,18 @@ def _calculate_linear_rate_duration(
     return duration_hr
 
 
-def _calculate_batch_duration(process: Process) -> float:
-    """Calculate duration for batch time_model."""
+def _calculate_batch_duration(
+    process: Process,
+    inputs: Dict[str, Quantity],
+    outputs: Dict[str, Quantity],
+    converter: UnitConverter
+) -> float:
+    """
+    Calculate duration for batch time_model.
+
+    If outputs are provided with quantities different from the base process,
+    scales the duration by the number of batches required.
+    """
     hr_per_batch = process.time_model.hr_per_batch
     if not hr_per_batch or hr_per_batch <= 0:
         raise CalculationError(
@@ -155,7 +165,38 @@ def _calculate_batch_duration(process: Process) -> float:
 
     setup_hr = process.time_model.setup_hr or 0.0
 
-    return setup_hr + hr_per_batch
+    # Calculate number of batches if outputs are scaled
+    num_batches = 1.0
+    if outputs and process.outputs:
+        # Find the first output to use as scaling basis
+        for process_output in process.outputs:
+            output_item_id = process_output.item_id
+            if output_item_id in outputs:
+                requested_qty = outputs[output_item_id]
+                base_qty = process_output.qty if process_output.qty is not None else process_output.quantity
+
+                if base_qty and base_qty > 0:
+                    # Convert requested quantity to base unit if needed
+                    if requested_qty.unit != process_output.unit:
+                        converted_qty = converter.convert(
+                            requested_qty.qty,
+                            requested_qty.unit,
+                            process_output.unit,
+                            output_item_id
+                        )
+                        if converted_qty is None:
+                            raise CalculationError(
+                                f"Process '{process.id}' cannot convert output unit "
+                                f"'{requested_qty.unit}' to '{process_output.unit}' "
+                                f"for item '{output_item_id}'"
+                            )
+                    else:
+                        converted_qty = requested_qty.qty
+
+                    num_batches = converted_qty / base_qty
+                    break
+
+    return setup_hr + (hr_per_batch * num_batches)
 
 
 def calculate_energy(
@@ -202,7 +243,7 @@ def calculate_energy(
     if process.energy_model.type == "per_unit":
         return _calculate_per_unit_energy(process, inputs, outputs, converter)
     elif process.energy_model.type == "fixed_per_batch":
-        return _calculate_fixed_energy(process)
+        return _calculate_fixed_energy(process, inputs, outputs, converter)
     else:
         raise CalculationError(
             f"Unknown energy_model type: {process.energy_model.type}"
@@ -280,15 +321,56 @@ def _calculate_per_unit_energy(
     return energy
 
 
-def _calculate_fixed_energy(process: Process) -> float:
-    """Calculate energy for fixed_per_batch energy_model."""
+def _calculate_fixed_energy(
+    process: Process,
+    inputs: Dict[str, Quantity],
+    outputs: Dict[str, Quantity],
+    converter: UnitConverter
+) -> float:
+    """
+    Calculate energy for fixed_per_batch energy_model.
+
+    If outputs are provided with quantities different from the base process,
+    scales the energy by the number of batches required.
+    """
     energy_value = process.energy_model.value
     if not energy_value or energy_value < 0:
         raise CalculationError(
             f"Process '{process.id}' has invalid fixed energy value: {energy_value}"
         )
 
+    # Calculate number of batches if outputs are scaled
+    num_batches = 1.0
+    if outputs and process.outputs:
+        # Find the first output to use as scaling basis
+        for process_output in process.outputs:
+            output_item_id = process_output.item_id
+            if output_item_id in outputs:
+                requested_qty = outputs[output_item_id]
+                base_qty = process_output.qty if process_output.qty is not None else process_output.quantity
+
+                if base_qty and base_qty > 0:
+                    # Convert requested quantity to base unit if needed
+                    if requested_qty.unit != process_output.unit:
+                        converted_qty = converter.convert(
+                            requested_qty.qty,
+                            requested_qty.unit,
+                            process_output.unit,
+                            output_item_id
+                        )
+                        if converted_qty is None:
+                            raise CalculationError(
+                                f"Process '{process.id}' cannot convert output unit "
+                                f"'{requested_qty.unit}' to '{process_output.unit}' "
+                                f"for item '{output_item_id}'"
+                            )
+                    else:
+                        converted_qty = requested_qty.qty
+
+                    num_batches = converted_qty / base_qty
+                    break
+
     # TODO: Convert to kWh if unit is not kWh (future enhancement)
     # For now, assume all energy is in kWh
 
-    return energy_value
+    return energy_value * num_batches
