@@ -107,10 +107,11 @@ def cmd_view_state(args, kb_loader: KBLoader):
     for item_id, inv in sorted(state['inventory'].items()):
         print(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
 
-    print(f"\nActive Processes ({len(state['active_processes'])}):")
-    for proc in state['active_processes']:
-        remaining = proc['ends_at'] - state['current_time_hours']
-        print(f"  {proc['process_id']} (ends at {proc['ends_at']:.1f}h, {remaining:.1f}h remaining)")
+    # Read active processes from scheduler (source of truth)
+    print(f"\nActive Processes ({len(engine.scheduler.active_processes)}):")
+    for process_run in engine.scheduler.active_processes.values():
+        remaining = process_run.end_time - state['current_time_hours']
+        print(f"  {process_run.process_id} (ends at {process_run.end_time:.1f}h, {remaining:.1f}h remaining)")
 
     print(f"\nMachines Built ({len(state['machines_built'])}):")
     for machine in state['machines_built']:
