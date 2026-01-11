@@ -17,7 +17,7 @@ The knowledge base has grown to ~891 processes, hundreds of recipes, thousands o
 
 ### Current Validation
 
-The indexer (`kbtool/indexer.py`) currently validates:
+The indexer (`src/indexer/indexer.py`) currently validates:
 - **Missing fields** - Soft warnings for missing energy_model, time_model, material_class, etc.
 - **Null values** - Detects null qty, amount fields
 - **Unresolved references** - Tracks requires_text and other unresolved strings
@@ -216,9 +216,9 @@ Organize validation into logical categories:
 **Architecture:**
 
 ```
-Indexer (kbtool/indexer.py)
+Indexer (src/indexer/indexer.py)
     ↓
-Validator (new: kbtool/validator.py)
+Validator (new: src/kb_core/validators.py)
     ↓
 Validation Rules (modular)
     - schema_validator.py
@@ -611,7 +611,7 @@ def execute_process(process_id: str, inputs: dict) -> ProcessResult:
 ### Phase 1: Implement Validators (Week 1)
 
 1. **Create validator infrastructure**
-   - `kbtool/validator.py` - Core validator
+   - `src/kb_core/validators.py` - Core validator
    - `ValidationError` class
    - `ValidationLevel` enum
 
@@ -820,7 +820,7 @@ time_model:
 - 014: Energy model redesign (validation rules)
 - 016: Unit conversion system (conversion validation)
 - 013: Recipe override mechanics (override validation)
-- Current indexer: `kbtool/indexer.py`
+- Current indexer: `src/indexer/indexer.py`
 - User feedback: `design/time-model-hierarchy-feedback.txt`
 
 ## Related Decisions

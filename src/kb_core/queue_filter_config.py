@@ -1,4 +1,4 @@
-"""Configuration management for KB indexer."""
+"""Queue filtering configuration for the work queue."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -6,7 +6,7 @@ from typing import Dict, List, Optional, Tuple
 
 try:
     import yaml
-except ImportError:
+except ImportError:  # pragma: no cover
     yaml = None
 
 DEFAULT_CONFIG_PATH = Path("config/queue_filters.yaml")
@@ -16,7 +16,7 @@ LOCAL_CONFIG_PATH = Path(".kbconfig.yaml")
 class QueueFilterConfig:
     """Queue filtering configuration loaded from YAML files."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.enabled = True
         self.current_mode: Optional[str] = None
         self.modes: Dict[str, dict] = {}
@@ -24,7 +24,7 @@ class QueueFilterConfig:
         self.exclude_gap_types: List[str] = []
 
     @classmethod
-    def load(cls) -> QueueFilterConfig:
+    def load(cls) -> "QueueFilterConfig":
         """
         Load config from default and local override files.
 
@@ -32,18 +32,15 @@ class QueueFilterConfig:
         then .kbconfig.yaml (local override, gitignored) if present.
         """
         if yaml is None:
-            # If yaml not available, return disabled config
             config = cls()
             config.enabled = False
             return config
 
         config = cls()
 
-        # Load default config
         if DEFAULT_CONFIG_PATH.exists():
             config._merge_from_file(DEFAULT_CONFIG_PATH)
 
-        # Overlay local config (takes precedence)
         if LOCAL_CONFIG_PATH.exists():
             config._merge_from_file(LOCAL_CONFIG_PATH)
 
@@ -57,7 +54,6 @@ class QueueFilterConfig:
         except Exception:
             return
 
-        # Merge settings (local overrides default)
         if "filtering_enabled" in data:
             self.enabled = data["filtering_enabled"]
         if "current_mode" in data:
@@ -81,54 +77,44 @@ class QueueFilterConfig:
         gap_type = gap_item.get("gap_type")
         kind = gap_item.get("kind")
 
-        # Global kind exclusions
         if kind in self.exclude_kinds:
             return True, f"kind={kind} globally excluded"
 
-        # Global gap_type exclusions
         if gap_type in self.exclude_gap_types:
             return True, f"gap_type={gap_type} globally excluded"
 
-        # Mode-based filtering
         if self.current_mode and self.current_mode in self.modes:
             mode = self.modes[self.current_mode]
 
-            # Check exclusions first
             for rule in mode.get("exclude", []):
                 if self._matches_rule(gap_item, rule):
                     reason = rule.get("reason", "matches exclusion rule")
                     return True, reason
 
-            # Check inclusions (if present, acts as whitelist)
             includes = mode.get("include", [])
             if includes:
                 for rule in includes:
                     if self._matches_rule(gap_item, rule):
-                        return False, ""  # Explicitly included
-                # If includes are defined but item doesn't match, exclude it
+                        return False, ""
                 return True, "not in include whitelist"
 
         return False, ""
 
     def _matches_rule(self, gap_item: dict, rule: dict) -> bool:
         """Check if a gap item matches a filter rule."""
-        # Match gap_type
         if "gap_type" in rule:
             if gap_item.get("gap_type") != rule["gap_type"]:
                 return False
 
-        # Match kind
         if "kind" in rule:
             if gap_item.get("kind") != rule["kind"]:
                 return False
 
-        # Match field (for missing_field gaps)
         if "field" in rule:
             context_field = gap_item.get("context", {}).get("field")
             if context_field != rule["field"]:
                 return False
 
-        # Match context_has (check if context contains a key)
         if "context_has" in rule:
             if rule["context_has"] not in gap_item.get("context", {}):
                 return False

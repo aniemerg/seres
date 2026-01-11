@@ -76,7 +76,7 @@ Manual items persist until explicitly completed/released, surviving indexer rebu
 
 **Auto-registration:** When an agent uses a new gap_type, it's automatically added to the registry.
 
-**List gap types:** `kbtool queue gap-types` shows all registered types (both indexer-defined and agent-created).
+**List gap types:** `python -m src.cli queue gap-types` shows all registered types (both indexer-defined and agent-created).
 
 **Why `queue/` directory:**
 - Not ephemeral output (`out/` is for generated files cleared on rebuild)
@@ -120,7 +120,7 @@ But agents can include any fields they find useful.
 
 **Simple addition:**
 ```bash
-kbtool queue add \
+python -m src.cli queue add \
   --gap-type quality_concern \
   --item-id steel_process_v0 \
   --description "Energy model doesn't match paper references"
@@ -128,7 +128,7 @@ kbtool queue add \
 
 **With full context (heredoc for complex JSON):**
 ```bash
-kbtool queue add \
+python -m src.cli queue add \
   --gap-type quality_concern \
   --item-id steel_process_v0 \
   --description "Energy model conflicts with Ellery 2023 paper" \
@@ -144,7 +144,7 @@ EOF
 
 **Batch addition from file:**
 ```bash
-kbtool queue add --file discovered_gaps.jsonl
+python -m src.cli queue add --file discovered_gaps.jsonl
 ```
 
 Where `discovered_gaps.jsonl` contains:
@@ -155,7 +155,7 @@ Where `discovered_gaps.jsonl` contains:
 
 **List gap types:**
 ```bash
-kbtool queue gap-types
+python -m src.cli queue gap-types
 ```
 
 Output:
@@ -177,7 +177,7 @@ Agent-Created Types:
 
 ### 5. Python API
 
-**Add to `kbtool/queue_tool.py`:**
+**Add to `src/kb_core/queue_manager.py`:**
 
 ```python
 def add_gap(
@@ -348,11 +348,11 @@ def queue_add_gap(
         ctx["description"] = description
         ctx["discovered_by"] = "queue_agent"  # Will be overridden by agent name if in worker
 
-        # Call kbtool queue add
+        # Call python -m src.cli queue add
         result = subprocess.run(
             [
                 str(VENV_PYTHON),
-                "-m", "kbtool", "queue", "add",
+                "-m", "src.cli", "queue", "add",
                 "--gap-type", gap_type,
                 "--item-id", item_id,
                 "--description", description,
@@ -396,7 +396,7 @@ Agents are responsible for providing useful information. Invalid additions will 
 
 ### 8. CLI Implementation
 
-**Add to `kbtool/__main__.py`:**
+**Add to `src/cli.py`:**
 
 ```python
 # In queue subparser
@@ -493,7 +493,7 @@ Existing queue items get `source: "indexer"` by default (missing field = indexer
 # Agent is fixing recipe_steel_v0 and notices energy model seems wrong
 
 # Check existing gap types
-gap_types = subprocess.run(["kbtool", "queue", "gap-types"], ...)
+gap_types = subprocess.run(["src.cli", "queue", "gap-types"], ...)
 
 # Add issue to queue for another agent
 queue_add_gap(
@@ -514,7 +514,7 @@ queue_add_gap(
 
 ```bash
 # Found duplicate items while browsing inventory
-kbtool queue add \
+python -m src.cli queue add \
   --gap-type needs_consolidation \
   --item-id motor_small_v0 \
   --description "Three similar motor items found: motor_small_v0, motor_electric_small, small_motor_v0. Should consolidate to one canonical item." \
@@ -526,14 +526,14 @@ kbtool queue add \
 ```bash
 # Agent analyzed inventory and found 10 quality issues
 # Wrote them to discovered_issues.jsonl
-kbtool queue add --file discovered_issues.jsonl
+python -m src.cli queue add --file discovered_issues.jsonl
 ```
 
 ## References
 
-- Queue system: `kbtool/queue_tool.py`
-- Dedupe queue addition: `kbtool/dedupe_tool.py:149` (similar pattern)
-- Indexer merge logic: `kbtool/indexer.py:932-968`
+- Queue system: `src/kb_core/queue_manager.py`
+- Dedupe queue addition: pending in `src/` (legacy dedupe tool removed).
+- Indexer merge logic: `src/indexer/indexer.py:932-968`
 - Agent tools: `queue_agents/kb_tools.py`
 - Conservative Mode: `docs/conservative_mode_guide.md`
 

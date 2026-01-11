@@ -127,7 +127,6 @@ The old `base_builder` CLI has been removed. Use `python -m src.cli sim` instead
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.
 - `kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
-- `kbtool/` — Python tooling (models + indexer CLI).
 - `queue_agents/` — Autonomous queue agents for processing KB gaps.
 - `simulations/` — Simulation runs and event logs.
 - `docs/` — Documentation, ADRs, research questions, session accomplishments.

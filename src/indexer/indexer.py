@@ -25,8 +25,8 @@ try:
 except ImportError:  # pragma: no cover
     yaml = None
 
-from kbtool import models
 from src.kb_core.queue_manager import _locked_queue
+from src.kb_core.queue_filter_config import QueueFilterConfig
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
@@ -962,8 +962,6 @@ def _update_work_queue(
 
     Returns dict of filter statistics.
     """
-    from kbtool.config import QueueFilterConfig
-
     gap_items: List[dict] = []
 
     # Detect circular dependencies

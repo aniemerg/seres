@@ -194,7 +194,7 @@ time_model:
 
 ### Phase 1: Schema Update
 
-1. **Update `kbtool/models.py`** with new TimeModel schema
+1. **Update `src/kb_core/schema.py`** with new TimeModel schema
 2. **Add validation** to reject old schema
 3. **Implement parsing** for `rate_unit` strings
 
@@ -511,7 +511,7 @@ time_model:
 ## References
 
 - Investigation documents in `design/` directory
-- Current schema: `kbtool/models.py:64-78`
+- Current schema: `src/kb_core/schema.py:64-78`
 - Real-world examples: `design/time-calculation-real-world-examples.md`
 - Batch semantics: `design/batch-vs-continuous-process-types.md`
 - Schema proposal: `design/time-model-schema-redesign.md`

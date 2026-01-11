@@ -303,7 +303,7 @@ find kb/items -name "*placeholder*"
 Using ADR-008 CLI:
 ```bash
 # Add stock_material recipe for cleanup
-.venv/bin/python -m kbtool queue add \
+.venv/bin/python -m python -m src.cli queue add \
   --id "placeholder_cleanup:recipe_fluorite_v0" \
   --type recipe \
   --reason placeholder_cleanup \
@@ -311,7 +311,7 @@ Using ADR-008 CLI:
   --context '{"recipe_id": "recipe_fluorite_v0", "issue": "Uses stock_material instead of specific inputs"}'
 
 # Add placeholder process for cleanup
-.venv/bin/python -m kbtool queue add \
+.venv/bin/python -m python -m src.cli queue add \
   --id "placeholder_cleanup:heliostat_mounting_bracket_fabrication_v0" \
   --type process \
   --reason placeholder_cleanup \
@@ -321,7 +321,7 @@ Using ADR-008 CLI:
 
 Using Python API:
 ```python
-from kbtool.queue_tool import add_queue_item
+from src.kb_core.queue_manager import add_queue_item
 
 # Add all stock_material recipes to cleanup queue
 import os, yaml

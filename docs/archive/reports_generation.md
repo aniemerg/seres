@@ -1,5 +1,7 @@
 # Reports Generation Guide
 
+**Update 2026-01-11:** Archived. References to `kbtool` are historical; use `python -m src.cli` equivalents.
+
 ## Generating Inventory Reports
 
 The inventory report provides a comprehensive listing of all items in the knowledge base, organized by type (machines, parts, materials, processes, etc.).

@@ -258,7 +258,7 @@ energy_model:
 
 ### Phase 1: Schema Update
 
-1. **Update `kbtool/models.py`** with new EnergyModel schema
+1. **Update `src/kb_core/schema.py`** with new EnergyModel schema
 2. **Add validation** to reject old schema types
 3. **Implement parsing** for energy unit strings
 4. **Add energy conversions** (MJ→kWh, etc.)
@@ -696,7 +696,7 @@ energy_model:
 
 - Investigation documents in `design/` directory
 - Design document: `design/energy-model-redesign.md`
-- Current schema: `kbtool/models.py` (EnergyModel class)
+- Current schema: `src/kb_core/schema.py` (EnergyModel class)
 - Parallel design: 012 (Process Types and Time Model Redesign)
 
 ## Related Decisions

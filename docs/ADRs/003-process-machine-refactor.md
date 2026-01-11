@@ -2,6 +2,7 @@
 
 **Status:** Partially Implemented
 **Date:** 2025-12-18 (Draft), 2026-01-08 (Partial Implementation)
+**Update 2026-01-11:** Schema references updated to `src/kb_core/schema.py`.
 
 ---
 
@@ -51,7 +52,7 @@ This partial implementation removes the `requires_ids` / `resource_requirements`
 **What's already working:**
 - ✅ Process schema has `inputs`, `outputs`, `byproducts` (71% use inputs, 83% use outputs)
 - ✅ Process schema has `resource_requirements` (92% use them)
-- ✅ All data models exist in `kbtool/models.py`
+- ✅ All data models exist in `src/kb_core/schema.py`
 
 **Problems identified:**
 
@@ -89,7 +90,7 @@ This partial implementation removes the `requires_ids` / `resource_requirements`
 
 ### Schema Changes
 
-#### 1. Requirement Model (kbtool/models.py)
+#### 1. Requirement Model (`src/kb_core/schema.py`)
 
 **BEFORE:**
 ```python
@@ -210,7 +211,7 @@ Information is now embedded in:
 
 ### Phase 1: Schema Updates
 
-1. **Update `kbtool/models.py`:**
+1. **Update `src/kb_core/schema.py`:**
    ```python
    # In Requirement class:
    - resource_type → machine_id (rename, make required)
@@ -333,7 +334,7 @@ resource_requirements:
 ## Implementation Checklist
 
 - [ ] Finalize ADR
-- [ ] Update `kbtool/models.py`:
+- [ ] Update `src/kb_core/schema.py`:
   - [ ] Requirement: resource_type → machine_id, remove amount, keep qty
   - [ ] Item (machine): add processes_supported, deprecate capabilities
 - [ ] Update indexer validation

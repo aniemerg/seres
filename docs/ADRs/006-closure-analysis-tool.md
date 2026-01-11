@@ -2,7 +2,8 @@
 
 **Status:** Proposed
 **Date:** 2025-12-22
-**Owner:** kbtool/analysis
+**Owner:** kb/analysis
+**Update 2026-01-11:** References updated to `src/` equivalents.
 
 ## Context / Problem
 
@@ -16,7 +17,7 @@ The primary goal of this KB is to model a self-replicating lunar base and determ
 5. **Manual KB validation** - Closure checking requires manual inspection of BOMs/recipes
 
 **Current validation tools:**
-- ✅ `kbtool index` - Detects missing references, null values, orphan resources
+- ✅ `python -m src.cli index` - Detects missing references, null values, orphan resources
 - ✅ `base_builder` simulation - Validates end-to-end production chains
 - ❌ No tool to answer: "Can this system replicate itself?"
 
@@ -37,7 +38,7 @@ The primary goal of this KB is to model a self-replicating lunar base and determ
 
 ## Decision / Direction
 
-Build a **Closure Analysis Tool** (`kbtool analyze-closure`) that performs multi-level dependency analysis:
+Build a **Closure Analysis Tool** (`python -m src.cli closure`) that performs multi-level dependency analysis:
 
 1. **Machine-level closure**: Trace machine → BOM → parts → recipes → processes → materials
 2. **Import set identification**: Flag items with no local manufacturing route
@@ -80,7 +81,7 @@ Build a **Closure Analysis Tool** (`kbtool analyze-closure`) that performs multi
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│ CLI: kbtool analyze-closure                             │
+│ CLI: python -m src.cli closure                             │
 │  Options: --output-dir, --closure-type, --max-depth     │
 └──────────────────────┬──────────────────────────────────┘
                        │
@@ -283,10 +284,10 @@ Generate actionable gaps for filling:
 
 ```bash
 # Basic closure analysis
-kbtool analyze-closure
+python -m src.cli closure
 
 # With options
-kbtool analyze-closure \
+python -m src.cli closure \
   --closure-type partial \
   --max-depth 20 \
   --output-dir out/closure \
@@ -294,10 +295,10 @@ kbtool analyze-closure \
   --generate-graph
 
 # Focus on specific subsystem
-kbtool analyze-closure --seed battery_system_nife_v0
+python -m src.cli closure --seed battery_system_nife_v0
 
 # Check specific machine
-kbtool analyze-closure --machine labor_bot_general_v0
+python -m src.cli closure --machine labor_bot_general_v0
 ```
 
 ## Output Files
@@ -442,13 +443,13 @@ Gaps blocking closure (feeds into main work queue):
 
 ## Integration with Existing Tools
 
-### With `kbtool index`
+### With `python -m src.cli index`
 
 Closure analysis runs **after** indexing:
 ```bash
 # Standard workflow
-kbtool index                  # Generate index.json
-kbtool analyze-closure        # Analyze closure using index.json
+python -m src.cli index                  # Generate index.json
+python -m src.cli closure        # Analyze closure using index.json
 ```
 
 Work items from closure analysis feed into main work queue:
@@ -481,7 +482,7 @@ agent.import_items(bootstrap_items)  # Minimal imports
 Closure analysis per seed:
 ```bash
 # Analyze specific subsystem
-kbtool analyze-closure --seed battery_system_nife_v0
+python -m src.cli closure --seed battery_system_nife_v0
 # Output: Closure status for just battery-related machines
 ```
 
@@ -615,7 +616,7 @@ The closure analyzer only supported patterns 2 and 3, not pattern 1.
 
 **Changes Made**:
 
-1. **Updated `kbtool/closure_analysis.py:_expand_item()`** to check inputs in priority order:
+1. **Updated `src/indexer/closure_analysis.py:_expand_item()`** to check inputs in priority order:
    ```python
    # Priority order:
    # 1. Recipe-level inputs (explicit material flow)
@@ -639,7 +640,7 @@ The closure analyzer only supported patterns 2 and 3, not pattern 1.
 
    These are now reported in the errors list for potential work queue generation.
 
-4. **Disabled old validation** in `kbtool/indexer.py:_validate_recipe_inputs()`:
+4. **Disabled old validation** in `src/indexer/indexer.py:_validate_recipe_inputs()`:
    - Old validation incorrectly checked for step-level inputs only
    - Replaced with empty list (validation now happens in closure analyzer)
    - Removes 1877 false-positive queue items

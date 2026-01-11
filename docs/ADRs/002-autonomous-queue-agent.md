@@ -3,6 +3,7 @@
 **Status:** Proposed
 **Date:** 2024-12-16
 **Owner:** kb/ops
+**Update 2026-01-11:** Implementation lives in `queue_agents/` and uses `python -m src.cli`.
 
 ## Context / Problem
 
@@ -53,7 +54,7 @@ Agent has access to standard, generic tools:
 - `rg_search(pattern, path, max_matches)` - Search repo using ripgrep
 - `read_file(path)` - Read any file in repo
 - `write_file(path, content)` - Write/overwrite files (shows diff if existing)
-- `run_indexer()` - Run kbtool index, return structured validation results
+- `run_indexer()` - Run `python -m src.cli index`, return structured validation results
 - `queue_release(item_id, agent_name)` - Explicitly give up on an item
 
 Agent does NOT call `queue_lease` or `queue_complete` - these are auto-executed by the runner.
@@ -76,24 +77,24 @@ Agent produces verbose output suitable for monitoring:
 
 ## Implementation Components
 
-### 1. Context Builder (`design/agent/build_context.py`)
+### 1. Context Builder (`queue_agents/build_context.py`)
 Generates the static cached context file:
 - Reads project memos
 - Scans KB structure
 - Auto-selects complex examples of each kind
 - Lists papers with brief summaries
-- Outputs to `design/agent/cached_context.md`
+- Outputs to `queue_agents/cached_context.md`
 
-### 2. Agent Tools (`design/agent/kb_tools.py`)
-Implements function tools following existing patterns from `design/agent/tools.py`:
+### 2. Agent Tools (`queue_agents/kb_tools.py`)
+Implements function tools following existing patterns from `queue_agents/kb_tools.py`:
 - Generic file operations (read_file, write_file)
 - Generic search (rg_search)
 - Queue operations (queue_release)
 - Indexer execution (run_indexer)
 
-All tools shell out to system commands (rg, python -m kbtool) and parse results.
+All tools shell out to system commands (rg, `python -m src.cli`) and parse results.
 
-### 3. Agent Worker (`design/agent/worker.py`)
+### 3. Agent Worker (`queue_agents/worker.py`)
 Main agent logic:
 - Loads cached context
 - Constructs agent with instructions
@@ -103,7 +104,7 @@ Main agent logic:
 - Auto-executes queue operations
 - Handles max iteration limits
 
-### 4. Parallel Launcher (`design/agent/launcher.py`)
+### 4. Parallel Launcher (`queue_agents/launcher.py`)
 Spawns and monitors multiple agent processes:
 - Launch N workers in parallel
 - Stream their stdout/stderr

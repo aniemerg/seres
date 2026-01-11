@@ -3,6 +3,7 @@
 **Status:** Proposed  
 **Date:** 2024-XX-XX  
 **Owner:** kb/ops
+**Update 2026-01-11:** References updated to `src/` equivalents; dedupe CLI is not yet implemented in `src/`.
 
 ## Context / Problem
 - The current KB keeps adding machines/processes/recipes, causing fan-out and a growing core replication graph.
@@ -28,7 +29,7 @@
 ## Dedupe Queue (new, separate)
 - File: `out/dedupe_queue.jsonl`
 - Entries (draft): `{id, kind: process|machine|item|recipe, reason, candidate_ids[], status, lease_id, lease_expires_at, notes, hints, refs, category}`
-- CLI (mirror existing queue semantics): `kbtool dedupe lease|complete|release|gc|ls|add` (`add` consumes JSON/JSONL).
+- CLI (mirror existing queue semantics): pending in `src/` (no current CLI).
 - Seeding: manual/agent review of `out/reports/inventory.md` and other reports; no auto-population in v0.
 
 ## Heuristics / Guidance (document-only for now)
