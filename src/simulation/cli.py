@@ -17,8 +17,14 @@ Each command loads simulation, executes action, saves state, and reports results
 import argparse
 import json
 import sys
+import shutil
 from pathlib import Path
 from typing import Optional, Dict, Any, Iterable
+
+try:
+    import yaml  # type: ignore
+except ImportError:  # pragma: no cover
+    yaml = None
 
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.calculations import calculate_duration, calculate_energy, CalculationError
@@ -69,6 +75,159 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
 
     return engine
 
+
+# ============================================================================
+# Runbook helpers
+# ============================================================================
+
+def _parse_runbook_blocks(md_text: str) -> list[str]:
+    blocks: list[str] = []
+    in_block = False
+    current: list[str] = []
+
+    for line in md_text.splitlines():
+        stripped = line.strip()
+        if stripped.startswith("```") and stripped[3:].strip() == "sim-runbook":
+            in_block = True
+            current = []
+            continue
+        if stripped.startswith("```") and in_block:
+            blocks.append("\n".join(current))
+            in_block = False
+            current = []
+            continue
+        if in_block:
+            current.append(line)
+
+    return blocks
+
+
+def _load_runbook_commands(path: Path) -> list[dict]:
+    if yaml is None:
+        raise RuntimeError("PyYAML is required to run sim runbooks")
+
+    md_text = path.read_text(encoding="utf-8")
+    blocks = _parse_runbook_blocks(md_text)
+    commands: list[dict] = []
+
+    for block in blocks:
+        data = yaml.safe_load(block)
+        if data is None:
+            continue
+        if isinstance(data, dict):
+            commands.append(data)
+            continue
+        if isinstance(data, list):
+            for entry in data:
+                if isinstance(entry, dict):
+                    commands.append(entry)
+            continue
+        raise RuntimeError(f"Invalid runbook block in {path}")
+
+    return commands
+
+
+def _normalize_arg_key(key: str) -> str:
+    return key.replace("-", "_")
+
+
+def _get_arg(args: dict, *names: str) -> Optional[Any]:
+    for name in names:
+        if name in args:
+            return args[name]
+    return None
+
+
+def _reset_simulation(sim_id: str, kb_loader: KBLoader) -> int:
+    sim_dir = SIMULATIONS_DIR / sim_id
+    if sim_dir.exists():
+        shutil.rmtree(sim_dir)
+    return cmd_init(argparse.Namespace(sim_id=sim_id), kb_loader)
+
+# ============================================================================
+# Runbook command
+# ============================================================================
+
+def cmd_runbook(args, kb_loader: KBLoader):
+    """Execute a Markdown runbook with sim-runbook YAML blocks."""
+    runbook_path = Path(args.file)
+    if not runbook_path.exists():
+        print(f"Error: runbook file not found: {runbook_path}", file=sys.stderr)
+        return 1
+
+    try:
+        commands = _load_runbook_commands(runbook_path)
+    except Exception as exc:
+        print(f"Error parsing runbook: {exc}", file=sys.stderr)
+        return 1
+
+    default_sim_id: Optional[str] = None
+    command_map = {
+        "sim.init": cmd_init,
+        "sim.scaffold": cmd_scaffold,
+        "sim.import": cmd_import,
+        "sim.start-process": cmd_start_process,
+        "sim.run-recipe": cmd_run_recipe,
+        "sim.build-machine": cmd_build_machine,
+        "sim.advance-time": cmd_advance_time,
+        "sim.preview": cmd_preview,
+        "sim.view-state": cmd_view_state,
+        "sim.status": cmd_status,
+        "sim.list": cmd_list,
+        "sim.plan": cmd_plan,
+        "sim.visualize": cmd_visualize,
+    }
+
+    for idx, entry in enumerate(commands, start=1):
+        cmd_name = entry.get("cmd")
+        cmd_args = entry.get("args") or {}
+
+        if not cmd_name:
+            print(f"Error: missing cmd in runbook step {idx}", file=sys.stderr)
+            return 1
+        if not cmd_name.startswith("sim."):
+            print(f"Error: non-sim command in runbook step {idx}: {cmd_name}", file=sys.stderr)
+            return 1
+
+        if cmd_name == "sim.use":
+            sim_id = _get_arg(cmd_args, "sim-id", "sim_id")
+            if not sim_id:
+                print(f"Error: sim.use requires sim-id (step {idx})", file=sys.stderr)
+                return 1
+            default_sim_id = sim_id
+            continue
+
+        if cmd_name == "sim.reset":
+            sim_id = _get_arg(cmd_args, "sim-id", "sim_id") or default_sim_id
+            if not sim_id:
+                print(f"Error: sim.reset requires sim-id (step {idx})", file=sys.stderr)
+                return 1
+            if args.dry_run:
+                print(f"[dry-run] sim.reset --sim-id {sim_id}")
+                continue
+            result = _reset_simulation(sim_id, kb_loader)
+            if result != 0 and not args.continue_on_error:
+                return result
+            continue
+
+        handler = command_map.get(cmd_name)
+        if handler is None:
+            print(f"Error: unsupported runbook command (step {idx}): {cmd_name}", file=sys.stderr)
+            return 1
+
+        normalized_args = { _normalize_arg_key(k): v for k, v in cmd_args.items() }
+        if "sim_id" not in normalized_args and default_sim_id:
+            normalized_args["sim_id"] = default_sim_id
+
+        if args.dry_run:
+            print(f"[dry-run] {cmd_name} {cmd_args}")
+            continue
+
+        result = handler(argparse.Namespace(**normalized_args), kb_loader)
+        if result != 0 and not args.continue_on_error:
+            return result
+
+    return 0
 
 # ============================================================================
 # Commands
@@ -1091,6 +1250,12 @@ def add_sim_subcommands(subparsers):
     visualize_parser.add_argument('--sim-id', required=True, help='Simulation ID')
     visualize_parser.add_argument('--output', help='Output directory for plots (default: sim_dir/plots)')
 
+    # runbook
+    runbook_parser = sim_subparsers.add_parser('runbook', help='Run a simulation runbook (Markdown)')
+    runbook_parser.add_argument('--file', required=True, help='Runbook markdown file path')
+    runbook_parser.add_argument('--dry-run', action='store_true', help='Print commands without executing')
+    runbook_parser.add_argument('--continue-on-error', action='store_true', help='Continue after errors')
+
     return sim_parser
 
 
@@ -1120,6 +1285,7 @@ def run_sim_command(args, kb_loader: KBLoader):
         'status': cmd_status,
         'list': cmd_list,
         'visualize': cmd_visualize,
+        'runbook': cmd_runbook,
     }
 
     handler = commands.get(args.sim_command)

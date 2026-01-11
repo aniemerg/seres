@@ -366,6 +366,50 @@ List all simulations.
 python -m src.cli sim list
 ```
 
+### runbook
+
+Run a Markdown runbook with YAML command cells. See ADR-022 for the spec.
+
+Runbooks live in `runbooks/` and use fenced `sim-runbook` blocks:
+
+```markdown
+```sim-runbook
+- cmd: sim.use
+  args:
+    sim-id: demo
+- cmd: sim.reset
+  args:
+    sim-id: demo
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
+    quantity: 2
+    unit: unit
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_highlands_v0
+    duration: 24
+- cmd: sim.advance-time
+  args:
+    hours: 24
+- cmd: sim.status
+  args: {}
+```
+```
+
+Execute a runbook:
+
+```bash
+python -m src.cli sim runbook --file runbooks/lunar_base_demo.md
+```
+
+Notes:
+- Only `sim.*` commands are allowed.
+- `sim.use` sets the default `sim-id` for later steps.
+- `sim.reset` clears an existing sim directory and re-initializes it.
+
+**Reference:** `docs/ADRs/022-simulation-runbooks.md`
+
 **Output:**
 ```
 Found 3 simulation(s):
