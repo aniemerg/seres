@@ -350,6 +350,96 @@ class TestBatchDuration:
         with pytest.raises(CalculationError, match="invalid hr_per_batch"):
             calculate_duration(process, {}, {}, converter)
 
+    def test_batch_with_scaled_output_quantity(self, converter):
+        """Calculate duration for batch process with scaled output quantity."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="regolith", qty=10.0, unit="kg")],
+            outputs=[Quantity(item_id="carbon", qty=0.3, unit="kg")],
+            time_model=TimeModel(
+                type="batch",
+                hr_per_batch=1.5,
+                setup_hr=0.0
+            )
+        )
+
+        # Request 10 kg output (33.33 batches)
+        outputs = {"carbon": Quantity(item_id="carbon", qty=10.0, unit="kg")}
+
+        duration = calculate_duration(process, {}, outputs, converter)
+
+        # 33.33 batches × 1.5 hr/batch = 50 hours
+        assert duration == pytest.approx(50.0, abs=0.01)
+
+    def test_batch_with_scaled_output_and_setup(self, converter):
+        """Calculate duration for batch with scaled output and setup time."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="material", qty=5.0, unit="kg")],
+            outputs=[Quantity(item_id="product", qty=1.0, unit="kg")],
+            time_model=TimeModel(
+                type="batch",
+                hr_per_batch=2.0,
+                setup_hr=0.5
+            )
+        )
+
+        # Request 5 kg output (5 batches)
+        outputs = {"product": Quantity(item_id="product", qty=5.0, unit="kg")}
+
+        duration = calculate_duration(process, {}, outputs, converter)
+
+        # 0.5 + (5 batches × 2 hr/batch) = 10.5 hours
+        assert duration == 10.5
+
+    def test_batch_with_unit_conversion_in_output(self, converter):
+        """Calculate duration for batch with unit conversion."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="ore", qty=1000.0, unit="kg")],
+            outputs=[Quantity(item_id="metal", qty=1.0, unit="kg")],
+            time_model=TimeModel(
+                type="batch",
+                hr_per_batch=3.0,
+                setup_hr=0.0
+            )
+        )
+
+        # Request 2000 g output (2 kg = 2 batches)
+        outputs = {"metal": Quantity(item_id="metal", qty=2000.0, unit="g")}
+
+        duration = calculate_duration(process, {}, outputs, converter)
+
+        # 2 batches × 3 hr/batch = 6 hours
+        assert duration == 6.0
+
+    def test_batch_default_quantity_no_scaling(self, converter):
+        """Verify batch without scaled output uses default duration."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="material", qty=10.0, unit="kg")],
+            outputs=[Quantity(item_id="product", qty=1.0, unit="kg")],
+            time_model=TimeModel(
+                type="batch",
+                hr_per_batch=2.0,
+                setup_hr=0.5
+            )
+        )
+
+        # No outputs provided - should use default (1 batch)
+        duration = calculate_duration(process, {}, {}, converter)
+
+        # 0.5 + 2.0 = 2.5 hours (1 batch)
+        assert duration == 2.5
+
 
 # =============================================================================
 # Energy Calculation Tests (Per-Unit)
@@ -570,6 +660,100 @@ class TestFixedEnergy:
 
         with pytest.raises(CalculationError, match="invalid fixed energy value"):
             calculate_energy(process, {}, {}, converter)
+
+    def test_fixed_energy_with_scaled_output_quantity(self, converter):
+        """Calculate energy for batch process with scaled output quantity."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="regolith", qty=10.0, unit="kg")],
+            outputs=[Quantity(item_id="carbon", qty=0.3, unit="kg")],
+            time_model=TimeModel(type="batch", hr_per_batch=1.5, setup_hr=0.0),
+            energy_model=EnergyModel(
+                type="fixed_per_batch",
+                value=2.0,
+                unit="kWh"
+            )
+        )
+
+        # Request 10 kg output (33.33 batches)
+        outputs = {"carbon": Quantity(item_id="carbon", qty=10.0, unit="kg")}
+
+        energy = calculate_energy(process, {}, outputs, converter)
+
+        # 33.33 batches × 2 kWh/batch = 66.67 kWh
+        assert energy == pytest.approx(66.67, abs=0.01)
+
+    def test_fixed_energy_with_multiple_batches(self, converter):
+        """Calculate energy for multiple batches."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="material", qty=5.0, unit="kg")],
+            outputs=[Quantity(item_id="product", qty=1.0, unit="kg")],
+            time_model=TimeModel(type="batch", hr_per_batch=2.0, setup_hr=0.0),
+            energy_model=EnergyModel(
+                type="fixed_per_batch",
+                value=10.0,
+                unit="kWh"
+            )
+        )
+
+        # Request 5 kg output (5 batches)
+        outputs = {"product": Quantity(item_id="product", qty=5.0, unit="kg")}
+
+        energy = calculate_energy(process, {}, outputs, converter)
+
+        # 5 batches × 10 kWh/batch = 50 kWh
+        assert energy == 50.0
+
+    def test_fixed_energy_with_unit_conversion(self, converter):
+        """Calculate energy for batch with unit conversion in output."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="ore", qty=1000.0, unit="kg")],
+            outputs=[Quantity(item_id="metal", qty=1.0, unit="kg")],
+            time_model=TimeModel(type="batch", hr_per_batch=3.0, setup_hr=0.0),
+            energy_model=EnergyModel(
+                type="fixed_per_batch",
+                value=15.0,
+                unit="kWh"
+            )
+        )
+
+        # Request 2000 g output (2 kg = 2 batches)
+        outputs = {"metal": Quantity(item_id="metal", qty=2000.0, unit="g")}
+
+        energy = calculate_energy(process, {}, outputs, converter)
+
+        # 2 batches × 15 kWh/batch = 30 kWh
+        assert energy == 30.0
+
+    def test_fixed_energy_default_quantity_no_scaling(self, converter):
+        """Verify fixed energy without scaled output uses default energy."""
+        process = Process(
+            id="test_v0",
+            kind="process",
+            process_type="batch",
+            inputs=[Quantity(item_id="material", qty=10.0, unit="kg")],
+            outputs=[Quantity(item_id="product", qty=1.0, unit="kg")],
+            time_model=TimeModel(type="batch", hr_per_batch=2.0, setup_hr=0.0),
+            energy_model=EnergyModel(
+                type="fixed_per_batch",
+                value=20.0,
+                unit="kWh"
+            )
+        )
+
+        # No outputs provided - should use default (1 batch)
+        energy = calculate_energy(process, {}, {}, converter)
+
+        # 1 batch × 20 kWh/batch = 20 kWh
+        assert energy == 20.0
 
 
 # =============================================================================
