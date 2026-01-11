@@ -1,5 +1,7 @@
 # Knowledge Base Statistics Summary
 
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 Generated: 2025-12-16
 
 ## Overall Status

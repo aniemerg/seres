@@ -1,3 +1,5 @@
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 NOTE: Migration/analysis document for pre-012 schema. See docs/kb_schema_reference.md for current rules.
 
 # Implementation Plan: KB Core Refactor with ADR 12-17

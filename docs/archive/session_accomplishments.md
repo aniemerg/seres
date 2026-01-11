@@ -1,5 +1,7 @@
 # Session Accomplishments - Base Builder Simulation
 
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 **Date**: 2025-12-20
 **Duration**: Full implementation and testing session
 **Status**: ✅ MAJOR SUCCESS

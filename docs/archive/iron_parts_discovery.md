@@ -1,5 +1,7 @@
 # Iron Parts Manufacturing - Major Discovery
 
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 **Date**: 2025-12-20
 **Status**: ✅ WORKING - Parts production from lunar iron achieved!
 

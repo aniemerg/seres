@@ -1,5 +1,7 @@
 # Agent Prompt Cache Analysis
 
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 ## Current Cache Hit Rate: 54.9% ⚠️
 
 This is LOW. We should be getting 80-90%+ cache hit rate.

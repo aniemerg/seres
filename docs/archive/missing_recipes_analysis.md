@@ -1,3 +1,5 @@
+**Update 2026-01-11:** Archived as stale plan/memo; superseded by current src-based workflow.
+
 NOTE: Historical document predating 012+; references deprecated schema. See docs/kb_schema_reference.md for current rules.
 
 # Missing Recipes Analysis
