@@ -18,34 +18,16 @@ steps:
         qty: 0.06
         unit: kg
     outputs:
-      - item_id: silicone_rubber
-        qty: 0.06
-        unit: kg
-  - process_id: drying_and_curing_v0
-    inputs:
-      - item_id: silicone_rubber
-        qty: 0.06
-        unit: kg
-    outputs:
-      - item_id: dried_material
-        qty: 0.06
-        unit: kg
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: dried_material
-        qty: 0.06
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 0.06
-        unit: kg
+      - item_id: seal_rubber_bearing
+        qty: 1.0
+        unit: unit
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: machined_part_raw
-        qty: 0.06
-        unit: kg
+      - item_id: seal_rubber_bearing
+        qty: 1.0
+        unit: unit
     outputs:
       - item_id: seal_rubber_bearing
         qty: 1.0
         unit: unit
-notes: "Initial manufacturing route for rubber bearing seal; uses elastomer molding and curing followed by finishing and QA. This is a placeholder path to enable local manufacturing in the KB."
+notes: "Initial manufacturing route for rubber bearing seal; uses elastomer molding followed by inspection. Placeholder path to enable local manufacturing in the KB."

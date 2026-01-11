@@ -29,7 +29,7 @@ class SimulationVisualizer:
 
     def __init__(self, sim_dir: Path):
         self.sim_dir = sim_dir
-        self.log_file = sim_dir / "simulation.jsonl"
+        self.log_file = sim_dir / "events.jsonl"
 
         # Parsed data
         self.events: List[Dict[str, Any]] = []
@@ -68,6 +68,25 @@ class SimulationVisualizer:
 
                 except json.JSONDecodeError:
                     continue
+
+        if not self.state_snapshots:
+            snapshot_file = self.sim_dir / "snapshot.json"
+            if snapshot_file.exists():
+                try:
+                    snapshot_data = json.loads(snapshot_file.read_text(encoding="utf-8"))
+                    state = snapshot_data.get("state", {})
+                    self.state_snapshots.append({
+                        "type": "state_snapshot",
+                        "time_hours": state.get("current_time_hours", 0.0),
+                        "inventory": state.get("inventory", {}),
+                        "active_processes": state.get("active_processes", []),
+                        "machines_built": state.get("machines_built", []),
+                        "machines_in_use": state.get("machines_in_use", {}),
+                        "total_imports": state.get("total_imports", {}),
+                        "total_energy_kwh": state.get("total_energy_kwh", 0.0),
+                    })
+                except json.JSONDecodeError:
+                    pass
 
     # ========================================================================
     # Visualization 1: Energy Consumption Over Time
@@ -108,57 +127,13 @@ class SimulationVisualizer:
         event_labels = []
 
         for event in self.energy_events:
-            # Find corresponding state snapshot to get time
-            for snapshot in self.state_snapshots:
-                if abs(snapshot.get('time_hours', 0) - event.get('time_hours', -999)) < 0.01:
-                    time_hours = snapshot.get('time_hours', 0.0)
-                    energy = event.get('energy_kwh', 0.0)
-                    process_id = event.get('process_id', 'unknown')
+            time_hours = event.get('time_hours', 0.0)
+            energy = event.get('energy_kwh', 0.0)
+            process_id = event.get('process_id', 'unknown')
 
-                    event_times.append(time_hours)
-                    event_energies.append(energy)
-                    event_labels.append(process_id)
-                    break
-
-        # If we didn't find matches in snapshots, try using process_complete events directly
-        if not event_times:
-            # Build a time mapping from process events
-            process_times = {}
-            for event in self.process_events:
-                if event.get('type') == 'process_scheduled':
-                    process_times[event.get('process_id')] = {
-                        'start': event.get('scheduled_start_time', 0.0),
-                        'end': event.get('scheduled_end_time', 0.0)
-                    }
-                elif event.get('type') == 'process_start' and event.get('process_id') not in process_times:
-                    process_times[event.get('process_id')] = {
-                        'start': event.get('actual_start_time', 0.0),
-                        'end': event.get('ends_at', 0.0)
-                    }
-
-            for event in self.energy_events:
-                process_id = event.get('process_id', 'unknown')
-                energy = event.get('energy_kwh', 0.0)
-
-                # Use end time from process_times or estimate
-                if process_id in process_times:
-                    time_hours = process_times[process_id]['end']
-                else:
-                    # Try to find from process_complete event
-                    time_hours = 0.0
-                    for proc_event in self.process_events:
-                        if proc_event.get('type') == 'process_complete' and proc_event.get('process_id') == process_id:
-                            # Use the time from state snapshots near this event
-                            for snapshot in self.state_snapshots:
-                                # Find snapshot right after this process
-                                if snapshot.get('time_hours', 0) >= time_hours:
-                                    time_hours = snapshot.get('time_hours', 0)
-                                    break
-                            break
-
-                event_times.append(time_hours)
-                event_energies.append(energy)
-                event_labels.append(process_id)
+            event_times.append(time_hours)
+            event_energies.append(energy)
+            event_labels.append(process_id)
 
         # Plot individual energy events as bars
         if event_times:
@@ -273,7 +248,7 @@ class SimulationVisualizer:
                 processes[process_id] = {'starts': [], 'ends': []}
 
                 start_time = event.get('actual_start_time', 0.0)
-                ends_at = event.get('ends_at', 0.0)
+                ends_at = event.get('ends_at', 0.0) or event.get('scheduled_end_time', 0.0)
 
                 if not start_time:
                     for snapshot in self.state_snapshots:

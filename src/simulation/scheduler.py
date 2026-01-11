@@ -111,6 +111,15 @@ class EventQueue:
         """Remove all events."""
         self._heap.clear()
 
+    def to_list(self) -> List[SchedulerEvent]:
+        """Return a shallow copy of queued events."""
+        return list(self._heap)
+
+    def load_from_list(self, events: List[SchedulerEvent]) -> None:
+        """Replace queue with provided events and restore heap order."""
+        self._heap = list(events)
+        heapq.heapify(self._heap)
+
 
 @dataclass
 class ProcessRun:

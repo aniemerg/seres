@@ -31,7 +31,8 @@ python -m src.cli sim init --sim-id my_simulation
 
 This creates:
 - `simulations/my_simulation/` directory
-- `simulation.jsonl` event log
+- `events.jsonl` event log
+- `snapshot.json` state snapshot
 
 ### 2. Import Bootstrap Items
 
@@ -69,6 +70,7 @@ python -m src.cli sim advance-time --sim-id my_simulation --hours 24
 
 ```bash
 python -m src.cli sim view-state --sim-id my_simulation
+python -m src.cli sim status --sim-id my_simulation
 ```
 
 ## Commands Reference
@@ -318,6 +320,42 @@ Total Imports (4 items):
   steel_plate: 100.00 kg
   ...
   Total imported mass: ~150.0 kg
+```
+
+### status
+
+Show a concise metadata summary for a simulation.
+
+```bash
+python -m src.cli sim status --sim-id <name>
+```
+
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+
+**Example:**
+```bash
+python -m src.cli sim status --sim-id lunar_base_001
+```
+
+**Output:**
+```
+=== Simulation: lunar_base_001 ===
+Time: 24.00 hours (1.00 days)
+Energy: 156.50 kWh
+Inventory items: 5
+Machines built: 2
+Imports tracked: 4
+Imported mass: ~150.00 kg
+Inventory mass: ~220.00 kg
+Inventory volume: ~0.010 m3
+Inventory count: ~3.00 units
+Processes: 1 active, 4 completed
+Recipes: 0 active, 1 completed
+Events queued: 2
+Next event time: 48.00 hours
+Snapshot: /path/to/simulations/lunar_base_001/snapshot.json
+Events: /path/to/simulations/lunar_base_001/events.jsonl
 ```
 
 ### list

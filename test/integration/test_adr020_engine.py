@@ -168,7 +168,7 @@ class TestBasicProcessScheduling:
         assert result2["error"] == "machine_conflict"
 
     def test_events_persisted_to_log(self, kb_root, sim_dir):
-        """Verify that process start and complete events are written to simulation.jsonl."""
+        """Verify that process start and complete events are written to events.jsonl."""
         import json
 
         kb = KBLoader(kb_root, use_validated_models=False)
@@ -200,7 +200,7 @@ class TestBasicProcessScheduling:
         engine.save()
 
         # Read the log file and verify events are present
-        log_file = full_sim_dir / "simulation.jsonl"
+        log_file = full_sim_dir / "events.jsonl"
 
         # Debug: check if directory exists
         assert full_sim_dir.exists(), f"Simulation directory should exist at {full_sim_dir}"
@@ -636,6 +636,126 @@ class TestAdr020Gaps:
         ]
         assert len(start_events) == 1
         assert start_events[0].data["duration_hours"] == 1.0
+
+    def test_step_override_inputs_are_used(self, tmp_path, sim_dir):
+        """Step-level inputs override process inputs during scheduling."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "base_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "base_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "base_input", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "output", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_override_inputs.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_override_inputs",
+                "target_item_id": "output",
+                "variant_id": "v0",
+                "inputs": [{"item_id": "override_input", "qty": 1.0, "unit": "kg"}],
+                "steps": [{
+                    "process_id": "base_proc",
+                    "inputs": [{"item_id": "override_input", "qty": 1.0, "unit": "kg"}],
+                }],
+            }, f)
+
+        with open(kb / "items" / "materials" / "base_input.yaml", "w") as f:
+            yaml.dump({"id": "base_input", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "override_input.yaml", "w") as f:
+            yaml.dump({"id": "override_input", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "output.yaml", "w") as f:
+            yaml.dump({"id": "output", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("override_input", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.run_recipe(recipe_id="recipe_override_inputs")
+        assert result["success"]
+
+        start_events = [
+            e for e in engine.scheduler.event_queue._heap
+            if e.event_type == EventType.PROCESS_START
+        ]
+        assert len(start_events) == 1
+        inputs = start_events[0].data["inputs_consumed"]
+        assert "override_input" in inputs
+
+    def test_steps_without_dependencies_run_sequentially(self, tmp_path, sim_dir):
+        """Steps without explicit dependencies should execute in order."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "proc_a.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_a",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "mid", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "processes" / "proc_b.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_b",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "mid", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "output", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_sequential.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_sequential",
+                "target_item_id": "output",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "proc_a"},
+                    {"process_id": "proc_b"},
+                ],
+            }, f)
+
+        for item_id in ("ore", "mid", "output"):
+            with open(kb / "items" / "materials" / f"{item_id}.yaml", "w") as f:
+                yaml.dump({"id": item_id, "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.run_recipe(recipe_id="recipe_sequential")
+        assert result["success"]
+        assert result["scheduled_steps"] == 1
 
     def test_missing_inputs_do_not_create_outputs(self, kb_root, sim_dir):
         """Lack of input reservation should not allow extra outputs."""

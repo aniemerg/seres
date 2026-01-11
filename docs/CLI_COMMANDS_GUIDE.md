@@ -25,6 +25,7 @@ python -m src.cli sim import --sim-id my_sim --item labor_bot_general_v0 --quant
 python -m src.cli sim start-process --sim-id my_sim --process mining_v0 --duration 24
 python -m src.cli sim advance-time --sim-id my_sim --hours 24
 python -m src.cli sim view-state --sim-id my_sim          # View state
+python -m src.cli sim status --sim-id my_sim              # Status summary
 python -m src.cli sim list                                 # List simulations
 python -m src.cli sim plan --process crushing_basic_v0      # Preflight a process/recipe
 python -m src.cli sim scaffold --sim-id demo --bootstrap labor_bot_general_v0
@@ -472,6 +473,39 @@ python -m src.cli sim view-state --sim-id lunar_base_001
 # Total Imports (1 items):
 #   labor_bot_general_v0: 3.00 unit
 #   Total imported mass: ~0.0 kg
+```
+
+---
+
+### sim status
+
+Show a concise metadata summary for a simulation.
+
+```bash
+python -m src.cli sim status --sim-id <name>
+```
+
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+
+**Example:**
+```bash
+python -m src.cli sim status --sim-id lunar_base_001
+# === Simulation: lunar_base_001 ===
+# Time: 24.00 hours (1.00 days)
+# Energy: 50.00 kWh
+# Inventory items: 2
+# Machines built: 0
+# Imports tracked: 1
+# Imported mass: ~0.00 kg
+# Inventory mass: ~100.00 kg
+# Inventory count: ~3.00 units
+# Processes: 0 active, 1 completed
+# Recipes: 0 active, 0 completed
+# Events queued: 0
+# Next event time: none
+# Snapshot: /path/to/simulations/lunar_base_001/snapshot.json
+# Events: /path/to/simulations/lunar_base_001/events.jsonl
 ```
 
 ---

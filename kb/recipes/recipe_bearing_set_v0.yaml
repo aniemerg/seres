@@ -6,13 +6,17 @@ variant_id: v0
 
 inputs:
   - item_id: steel_bar_stock
-    qty: 1.2
+    qty: 1.5
     unit: kg
     notes: High-carbon bearing steel for races and rolling elements
-  - item_id: brass_sheet
+  - item_id: metal_alloy_bulk
+    qty: 0.6
+    unit: kg
+    notes: Casting feedstock for rolling element blanks
+  - item_id: metal_sheet_or_plate
     qty: 0.15
     unit: kg
-    notes: Bearing cage/retainer material
+    notes: Bearing cage/retainer material (steel sheet substitute)
   - item_id: grease_bearing_high_temp
     qty: 0.05
     unit: kg
@@ -21,24 +25,6 @@ inputs:
     qty: 0.1
     unit: kg
     notes: Optional seals
-  - item_id: assembly_components
-    qty: 1.0
-    unit: kg
-  - item_id: metal_alloy_bulk
-    qty: 1.2
-    unit: kg
-  - item_id: raw_metal_block
-    qty: 2.0
-    unit: kg
-  - item_id: bearing_rings_machined
-    qty: 1.1
-    unit: kg
-  - item_id: rough_part
-    qty: 1.0
-    unit: kg
-  - item_id: machined_part_raw
-    qty: 1.0
-    unit: kg
 
 outputs:
   - item_id: bearing_set
@@ -49,55 +35,51 @@ steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: metal_alloy_bulk
-        qty: 1.2
+        qty: 0.6
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 1.14
+        qty: 0.57
         unit: kg
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: Cast inner and outer bearing race blanks from bearing steel
-  - process_id: machining_basic_v0
-    inputs:
-      - item_id: raw_metal_block
-        qty: 2.0
-        unit: kg
-    outputs:
-      - item_id: machined_metal_block_v0
-        qty: 1.8
-        unit: kg
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    notes: Rough machine race blanks to near-net shape
-  - process_id: heat_treatment_hardening_v0
-    inputs:
-      - item_id: bearing_rings_machined
-        qty: 1.1
-        unit: kg
-    outputs:
-      - item_id: bearing_rings_hardened
-        qty: 1.05
-        unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Harden bearing races to HRC 58-62
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: Cast rolling element blanks from bearing steel
   - process_id: precision_grinding_basic_v0
     inputs:
-      - item_id: rough_part
-        qty: 1.0
+      - item_id: cast_metal_parts
+        qty: 0.57
         unit: kg
     outputs:
       - item_id: finished_part_deburred
-        qty: 1.0
+        qty: 0.55
         unit: kg
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: Precision grind race surfaces to tight tolerances
-  - process_id: metal_forging_process_v0
     est_time_hr: 1.0
     machine_hours: 1.0
-    notes: Hot forge ball blanks from bearing steel
+    notes: Precision grind rolling elements to spherical finish
+  - process_id: metal_forging_process_v0
+    inputs:
+      - item_id: steel_bar_stock
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: bearing_ring_blanks
+        qty: 1.3
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: Forge bearing ring blanks from steel bar stock
+  - process_id: machining_process_turning_v0
+    inputs:
+      - item_id: bearing_ring_blanks
+        qty: 1.3
+        unit: kg
+    outputs:
+      - item_id: bearing_rings_machined
+        qty: 1.1
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Turn raceways and bores to near-final dimensions
   - process_id: heat_treatment_hardening_v0
     inputs:
       - item_id: bearing_rings_machined
@@ -109,55 +91,55 @@ steps:
         unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
-    notes: Harden rolling elements to HRC 60-64
-  - process_id: surface_grinding_precision_v0
+    notes: Harden bearing races to HRC 58-62
+  - process_id: precision_grinding_basic_v0
     inputs:
-      - item_id: rough_part
-        qty: 1.0
+      - item_id: bearing_rings_hardened
+        qty: 1.05
         unit: kg
     outputs:
-      - item_id: finished_part_deburred
+      - item_id: bearing_rings_hardened
         qty: 1.0
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
-    notes: Precision grind balls to spherical form
-  - process_id: metal_casting_basic_v0
+    notes: Precision grind raceways to final tolerances
+  - process_id: metal_forming_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
-        qty: 1.2
+      - item_id: metal_sheet_or_plate
+        qty: 0.15
         unit: kg
     outputs:
-      - item_id: cast_metal_parts
-        qty: 1.14
+      - item_id: formed_metal_part
+        qty: 0.14
         unit: kg
-    est_time_hr: 0.3
-    machine_hours: 0.3
-    notes: Cast or stamp bearing cage blanks
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-    est_time_hr: 0.8
-    machine_hours: 0.8
-    notes: Machine cage pockets
+    est_time_hr: 0.6
+    machine_hours: 0.6
+    notes: Form bearing cage/retainer from steel sheet stock
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: assembly_components
+      - item_id: bearing_rings_hardened
         qty: 1.0
+        unit: kg
+      - item_id: finished_part_deburred
+        qty: 0.55
+        unit: kg
+      - item_id: formed_metal_part
+        qty: 0.14
+        unit: kg
+      - item_id: grease_bearing_high_temp
+        qty: 0.05
+        unit: kg
+      - item_id: seal_rubber_bearing
+        qty: 0.1
         unit: kg
     outputs:
       - item_id: bearing_set
         qty: 1.5
         unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
+    est_time_hr: 1.2
+    labor_hours: 1.2
     notes: Assemble races, balls, and cage; pack with grease; install seals
 
 assumptions: "Medium bearing set (1.5 kg) for general machinery. Precision ground races and balls, heat-treated to bearing-grade hardness, includes lubrication and seals."
-notes: "Ten-step recipe covering bearing race and ball production, heat treatment, precision grinding, cage fabrication, and final assembly with lubrication for 35-45mm bore bearings."
+notes: "Eight-step recipe covering ring forging, turning, heat treatment, precision grinding, rolling element grinding, cage forming, and final assembly for 35-45mm bore bearings. Uses in-situ steel stock and alloy feedstock; grease and seals still required."

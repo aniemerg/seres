@@ -43,6 +43,13 @@ from src.simulation.models import (
 from src.simulation.scheduler import Scheduler, EventType
 from src.simulation.machine_reservations import MachineReservationManager
 from src.simulation.recipe_orchestrator import RecipeOrchestrator
+from src.simulation.persistence import (
+    build_snapshot,
+    restore_orchestrator,
+    restore_reservation_manager,
+    restore_scheduler,
+    SimulationSnapshot,
+)
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
@@ -81,11 +88,12 @@ class SimulationEngine:
         self.sim_dir = sim_dir
         self.sim_dir.mkdir(parents=True, exist_ok=True)
 
-        self.log_file = self.sim_dir / "simulation.jsonl"
+        self.snapshot_file = self.sim_dir / "snapshot.json"
+        self.event_log_file = self.sim_dir / "events.jsonl"
 
         # Only log sim start for NEW simulations
         # (load() will skip this if loading existing)
-        self._is_new_sim = not self.log_file.exists()
+        self._is_new_sim = not self.snapshot_file.exists()
 
         # ADR-020 components
         self.scheduler = Scheduler()
@@ -403,6 +411,7 @@ class SimulationEngine:
         start_time: Optional[float] = None,
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
+        process_def_override: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Start a process using ADR-020 event-driven scheduling.
@@ -430,6 +439,8 @@ class SimulationEngine:
             }
 
         process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
+        if process_def_override:
+            process_def = process_def_override
 
         # ADR-020 validation
         validation_issues = validate_process_adr020(process_def, self.kb.items)
@@ -537,6 +548,9 @@ class SimulationEngine:
 
         # Calculate outputs
         outputs = process_def.get("outputs", [])
+        if not outputs and process_def_override is not None:
+            base_process = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+            outputs = base_process.get("outputs", []) if isinstance(base_process, dict) else outputs
         outputs_pending = {}
 
         for outp in outputs:
@@ -886,6 +900,7 @@ class SimulationEngine:
             output_unit = None
             duration_hours = None
             scale = 1.0
+            step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
 
             # Always try to calculate duration_hours from time_model
             time_model = resolved_process.get('time_model', {})
@@ -900,15 +915,16 @@ class SimulationEngine:
                 output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
                 output_unit = first_output.get('unit', 'kg')
 
-                base_process = self.kb.get_process(process_id)
-                if base_process:
-                    base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
-                    base_outputs = base_def.get('outputs', [])
-                    if base_outputs:
-                        base_output = base_outputs[0]
-                        base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
-                        if base_qty:
-                            scale = output_quantity / base_qty
+                if not step_has_io_override:
+                    base_process = self.kb.get_process(process_id)
+                    if base_process:
+                        base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
+                        base_outputs = base_def.get('outputs', [])
+                        if base_outputs:
+                            base_output = base_outputs[0]
+                            base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
+                            if base_qty:
+                                scale = output_quantity / base_qty
 
                 # For linear_rate, calculate duration from outputs
                 if time_model.get('type') == 'linear_rate' and duration_hours is None:
@@ -936,6 +952,7 @@ class SimulationEngine:
                 output_unit=output_unit,
                 recipe_run_id=recipe_run_id,
                 step_index=step_idx,
+                process_def_override=resolved_process,
             )
 
             if result['success']:
@@ -1033,6 +1050,18 @@ class SimulationEngine:
             BuildEvent(
                 machine_id=machine_id,
                 components_consumed=components_consumed,
+            )
+        )
+
+        self._log_event(
+            StateSnapshotEvent(
+                time_hours=self.state.current_time_hours,
+                inventory=self.state.inventory,
+                active_processes=self.state.active_processes,
+                machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
+                total_imports=self.state.total_imports,
+                total_energy_kwh=self.state.total_energy_kwh,
             )
         )
 
@@ -1212,6 +1241,7 @@ class SimulationEngine:
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
                 machines_in_use=self.state.machines_in_use,
+                total_imports=self.state.total_imports,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -1385,6 +1415,7 @@ class SimulationEngine:
                         process_run_id=process_run_id,
                         actual_start_time=event.time,
                         scale=process_run.scale,
+                        scheduled_end_time=process_run.end_time,
                     )
                 )
 
@@ -1466,6 +1497,7 @@ class SimulationEngine:
                             process_run_id=process_run_id,
                             recipe_run_id=process_run.recipe_run_id,
                             time_hours=event.time,
+                            start_time=process_run.start_time,
                             outputs=outputs_with_units,
                             energy_kwh=energy_kwh,
                         )
@@ -1490,36 +1522,69 @@ class SimulationEngine:
                                 recipe_def = self.kb.get_recipe(recipe_run.recipe_id).model_dump()
                                 step = recipe_def['steps'][step_idx]
 
-                                # Get process_id directly from step
-                                process_id = step.get('process_id')
+                                # Resolve step overrides (ADR-013)
+                                resolved_process = self.resolve_step(step)
+
+                                # Get process_id from resolved process
+                                process_id = resolved_process.get('id') or step.get('process_id')
                                 if not process_id:
                                     continue  # Skip invalid step
 
-                                # Get process definition to extract default output
-                                process_def_model = self.kb.get_process(process_id)
-                                if not process_def_model:
-                                    continue  # Skip if process not found
-
-                                process_dict = process_def_model.model_dump() if hasattr(process_def_model, 'model_dump') else process_def_model
-
-                                # Get default output quantity and unit from first output
-                                outputs = process_dict.get('outputs', [])
+                                outputs = resolved_process.get('outputs', [])
                                 output_quantity = None
                                 output_unit = None
+                                duration_hours = None
+                                scale = 1.0
+                                step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
+
+                                # Calculate duration from resolved process (respects step overrides)
+                                time_model = resolved_process.get('time_model', {})
+                                if time_model.get('type') == 'batch':
+                                    duration_hours = time_model.get('hr_per_batch', 1.0)
+                                elif time_model.get('type') == 'linear_rate':
+                                    pass
+
                                 if outputs:
                                     first_output = outputs[0]
                                     output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
                                     output_unit = first_output.get('unit', 'kg')
 
+                                    if not step_has_io_override:
+                                        base_process = self.kb.get_process(process_id)
+                                        if base_process:
+                                            base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
+                                            base_outputs = base_def.get('outputs', [])
+                                            if base_outputs:
+                                                base_output = base_outputs[0]
+                                                base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
+                                                if base_qty:
+                                                    scale = output_quantity / base_qty
+
+                                    if time_model.get('type') == 'linear_rate' and duration_hours is None:
+                                        rate = time_model.get('rate', 1.0)
+                                        scaling_basis = time_model.get('scaling_basis')
+                                        if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
+                                            for outp in outputs:
+                                                if outp.get('item_id') == scaling_basis:
+                                                    outp_qty = outp.get('qty', outp.get('quantity', 1.0))
+                                                    duration_hours = outp_qty / rate if rate > 0 else 1.0
+                                                    break
+
+                                if duration_hours is None:
+                                    duration_hours = 1.0
+
                                 # Schedule dependent step
+                                schedule_time = max(event.time, self.scheduler.current_time)
                                 result = self.start_process(
                                     process_id=process_id,
-                                    scale=1.0,
-                                    start_time=event.time,
+                                    scale=scale,
+                                    start_time=schedule_time,
+                                    duration_hours=duration_hours,
                                     output_quantity=output_quantity,
                                     output_unit=output_unit,
                                     recipe_run_id=recipe_run_id,
                                     step_index=step_idx,
+                                    process_def_override=resolved_process,
                                 )
 
                                 if result['success']:
@@ -1540,6 +1605,7 @@ class SimulationEngine:
                 active_processes=self.state.active_processes,
                 machines_built=self.state.machines_built,
                 machines_in_use=self.state.machines_in_use,
+                total_imports=self.state.total_imports,
                 total_energy_kwh=self.state.total_energy_kwh,
             )
         )
@@ -1559,283 +1625,45 @@ class SimulationEngine:
         self.event_buffer.append(event)
 
     def save(self) -> None:
-        """Flush event buffer to JSONL file."""
-        if not self.event_buffer:
-            return
+        """Persist snapshot and flush event buffer to sidecar log."""
+        if self.event_buffer:
+            with self.event_log_file.open("a", encoding="utf-8") as f:
+                for event in self.event_buffer:
+                    if hasattr(event, "model_dump"):
+                        event_dict = event.model_dump()
+                    else:
+                        event_dict = event
+                    f.write(json.dumps(event_dict) + "\n")
+            self.event_buffer.clear()
 
-        with self.log_file.open("a", encoding="utf-8") as f:
-            for event in self.event_buffer:
-                # Convert Pydantic model to dict
-                if hasattr(event, "model_dump"):
-                    event_dict = event.model_dump()
-                else:
-                    event_dict = event
-
-                f.write(json.dumps(event_dict) + "\n")
-
-        # Clear buffer
-        self.event_buffer.clear()
+        snapshot = build_snapshot(self)
+        self.snapshot_file.write_text(snapshot.model_dump_json(indent=2), encoding="utf-8")
 
     def load(self) -> bool:
         """
-        Load simulation state from JSONL file.
-
-        Reconstructs state from events.
+        Load simulation state from snapshot file.
 
         Returns:
             True if loaded successfully, False if no save file exists
         """
-        if not self.log_file.exists():
-            # New simulation - log sim start
+        if not self.snapshot_file.exists():
             self._log_event(SimStartEvent(sim_id=self.sim_id))
             self.save()
             return False
 
-        # Read all events
-        saw_snapshot = False
-        with self.log_file.open("r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
+        snapshot = SimulationSnapshot.model_validate_json(
+            self.snapshot_file.read_text(encoding="utf-8")
+        )
 
-                try:
-                    event = json.loads(line)
-                    event_type = event.get("type")
+        self.state = snapshot.state
+        self.scheduler = restore_scheduler(snapshot.scheduler)
+        self.orchestrator = restore_orchestrator(snapshot.orchestrator, self.scheduler)
+        self.reservation_manager = restore_reservation_manager(snapshot.reservation_manager)
 
-                    # Reconstruct state from state_snapshot events
-                    if event_type == "state_snapshot":
-                        saw_snapshot = True
-                        self.state.current_time_hours = event.get("time_hours", 0)
-                        self.state.inventory = {
-                            k: InventoryItem(**v)
-                            for k, v in event.get("inventory", {}).items()
-                        }
-                        self.state.active_processes = [
-                            ActiveProcess(**p)
-                            for p in event.get("active_processes", [])
-                        ]
-                        self.state.machines_built = event.get("machines_built", [])
-                        self.state.machines_in_use = event.get("machines_in_use", {})
-
-                        # Backfill machine reservations when loading older snapshots
-                        for proc in self.state.active_processes:
-                            if proc.machines_reserved:
-                                continue
-                            if proc.process_id.startswith("recipe:"):
-                                recipe_id = proc.process_id[7:]
-                                recipe_model = self.kb.get_recipe(recipe_id)
-                                if recipe_model:
-                                    recipe_def = recipe_model.model_dump() if hasattr(recipe_model, "model_dump") else recipe_model
-                                    resolved_steps = [self.resolve_step(step) for step in recipe_def.get("steps", [])]
-                                    proc.machines_reserved = self._collect_required_machines_from_steps(
-                                        resolved_steps, recipe_def
-                                    )
-                            else:
-                                process_model = self.kb.get_process(proc.process_id)
-                                if process_model:
-                                    process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
-                                    proc.machines_reserved = self._collect_required_machines_from_process_def(
-                                        process_def
-                                    )
-
-                        if not self.state.machines_in_use:
-                            self._rebuild_machines_in_use()
-                        self.state.total_energy_kwh = event.get("total_energy_kwh", 0.0)
-
-                    # Track imports
-                    elif event_type == "import":
-                        item_id = event.get("item_id")
-                        quantity = event.get("quantity")
-                        unit = event.get("unit")
-                        if item_id:
-                            # Add to inventory (so imports are actually available)
-                            self.add_to_inventory(item_id, quantity, unit)
-
-                            # Track in total_imports (for reporting)
-                            if item_id in self.state.total_imports:
-                                existing = self.state.total_imports[item_id]
-                                if existing.unit == unit:
-                                    existing.quantity += quantity
-                            else:
-                                self.state.total_imports[item_id] = InventoryItem(
-                                    quantity=quantity, unit=unit
-                                )
-
-                    # Replay build events
-                    elif event_type == "build":
-                        machine_id = event.get("machine_id")
-                        components_consumed = event.get("components_consumed", {})
-                        if machine_id:
-                            # Subtract components from inventory
-                            for item_id, inv_data in components_consumed.items():
-                                inv_item = InventoryItem(**inv_data)
-                                self.subtract_from_inventory(
-                                    item_id, inv_item.quantity, inv_item.unit
-                                )
-
-                            # Add machine to inventory
-                            self.add_to_inventory(machine_id, 1, "count")
-
-                            # Add to machines_built list
-                            if machine_id not in self.state.machines_built:
-                                self.state.machines_built.append(machine_id)
-
-                except json.JSONDecodeError:
-                    continue
-
-        # Reconstruct scheduler and machine reservations from process_scheduled events
-        self._update_machine_capacities()
-        if self.reservation_manager is None:
-            self._init_reservation_manager()
-
-        if self.reservation_manager is not None:
-            self.scheduler.current_time = self.state.current_time_hours
-            self.reservation_manager.current_time = self.state.current_time_hours
-
-            completed_processes = set()
-            with self.log_file.open("r", encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        event = json.loads(line)
-                        if event.get("type") == "process_complete":
-                            process_run_id = event.get("process_run_id")
-                            if process_run_id:
-                                completed_processes.add(process_run_id)
-                    except json.JSONDecodeError:
-                        continue
-
-            with self.log_file.open("r", encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line:
-                        continue
-                    try:
-                        event = json.loads(line)
-                        if event.get("type") != "process_scheduled":
-                            continue
-
-                        process_run_id = event.get("process_run_id")
-                        if not process_run_id or process_run_id in completed_processes:
-                            continue
-
-                        scheduled_start_time = event.get("scheduled_start_time", 0.0)
-                        scheduled_end_time = event.get("scheduled_end_time", 0.0)
-
-                        if scheduled_end_time <= self.state.current_time_hours:
-                            energy_kwh = event.get("energy_kwh")
-                            if energy_kwh is not None and not saw_snapshot:
-                                self.state.total_energy_kwh += energy_kwh
-                            continue
-
-                        inputs_consumed = {}
-                        for item_id, item_data in event.get("inputs_consumed", {}).items():
-                            if isinstance(item_data, dict):
-                                inputs_consumed[item_id] = item_data.get("quantity", 0.0)
-                            else:
-                                inputs_consumed[item_id] = item_data
-
-                        outputs_pending = {}
-                        for item_id, item_data in event.get("outputs_pending", {}).items():
-                            if isinstance(item_data, dict):
-                                outputs_pending[item_id] = item_data.get("quantity", 0.0)
-                            else:
-                                outputs_pending[item_id] = item_data
-
-                        machines_reserved = {}
-                        for reservation in event.get("machine_reservations", []):
-                            machine_id = reservation.get("machine_id")
-                            qty = reservation.get("qty", 0.0)
-                            if machine_id:
-                                machines_reserved[machine_id] = machines_reserved.get(machine_id, 0.0) + qty
-
-                        if scheduled_start_time > self.state.current_time_hours:
-                            self.scheduler.schedule_process_start(
-                                process_run_id=process_run_id,
-                                process_id=event.get("process_id"),
-                                start_time=scheduled_start_time,
-                                duration_hours=event.get("duration_hours", 0.0),
-                                scale=event.get("scale", 1.0),
-                                inputs_consumed=inputs_consumed,
-                                outputs_pending=outputs_pending,
-                                machines_reserved=machines_reserved,
-                                recipe_run_id=event.get("recipe_run_id"),
-                                step_index=event.get("step_index"),
-                                energy_kwh=event.get("energy_kwh"),
-                            )
-                        else:
-                            from src.simulation.scheduler import ProcessRun
-
-                            process_run = ProcessRun(
-                                process_run_id=process_run_id,
-                                process_id=event.get("process_id"),
-                                start_time=scheduled_start_time,
-                                duration_hours=event.get("duration_hours", 0.0),
-                                end_time=scheduled_end_time,
-                                scale=event.get("scale", 1.0),
-                                inputs_consumed=inputs_consumed,
-                                outputs_pending=outputs_pending,
-                                machines_reserved=machines_reserved,
-                                recipe_run_id=event.get("recipe_run_id"),
-                                step_index=event.get("step_index"),
-                                energy_kwh=event.get("energy_kwh"),
-                            )
-
-                            self.scheduler.active_processes[process_run_id] = process_run
-                            self.scheduler.schedule_event(
-                                time=scheduled_end_time,
-                                event_type=EventType.PROCESS_COMPLETE,
-                                event_id=f"complete_{process_run_id}",
-                                priority=5,
-                                data={
-                                    'process_run_id': process_run_id,
-                                }
-                            )
-
-                        for reservation in event.get("machine_reservations", []):
-                            machine_id = reservation.get("machine_id")
-                            if not machine_id:
-                                continue
-                            qty = reservation.get("qty", 0.0)
-                            unit = reservation.get("unit", "count")
-                            reservation_type = reservation.get("reservation_type", "FULL_DURATION")
-                            release_time = reservation.get("release_time")
-                            start_time = reservation.get("start_time", scheduled_start_time)
-                            end_time = reservation.get("end_time", scheduled_end_time)
-
-                            if reservation_type == "PARTIAL" and release_time:
-                                if release_time <= self.state.current_time_hours:
-                                    continue
-                                end_time = release_time
-
-                            success = self.reservation_manager.add_reservation(
-                                machine_id=machine_id,
-                                process_run_id=process_run_id,
-                                start_time=start_time,
-                                end_time=end_time,
-                                qty=qty,
-                                unit=unit,
-                            )
-
-                            if not success:
-                                print(
-                                    f"Warning: Could not restore reservation for {machine_id} "
-                                    f"(process {process_run_id})",
-                                    file=sys.stderr
-                                )
-
-                            if reservation_type == "PARTIAL" and release_time and release_time > self.state.current_time_hours:
-                                self.scheduler.schedule_machine_release(
-                                    process_run_id=process_run_id,
-                                    machine_id=machine_id,
-                                    release_time=release_time,
-                                    qty=qty,
-                                )
-                    except json.JSONDecodeError:
-                        continue
+        self.scheduler.register_handler(
+            EventType.PROCESS_START,
+            self._validate_process_inputs,
+        )
 
         return True
 

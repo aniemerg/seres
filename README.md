@@ -94,6 +94,9 @@ python -m src.cli sim advance-time --sim-id lunar_base --hours 24
 
 # View state
 python -m src.cli sim view-state --sim-id lunar_base
+
+# Status summary
+python -m src.cli sim status --sim-id lunar_base
 ```
 
 **All Commands**:
@@ -105,6 +108,7 @@ python -m src.cli sim view-state --sim-id lunar_base
 - `advance-time` - Advance simulation time
 - `preview` - Preview time advancement (non-destructive)
 - `view-state` - View current simulation state
+- `status` - Show simulation metadata summary
 - `list` - List all simulations
 
 **Documentation**:

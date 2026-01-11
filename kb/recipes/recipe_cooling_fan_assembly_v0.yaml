@@ -6,7 +6,7 @@ inputs:
   - item_id: steel_plate_or_sheet
     qty: 10.0
     unit: kg
-  - item_id: aluminum_alloy_bar
+  - item_id: aluminum_alloy_ingot
     qty: 5.0
     unit: kg
   - item_id: drive_motor_medium
@@ -43,7 +43,7 @@ steps:
     notes: "Fabricate fan housing and motor mount from sheet steel"
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: aluminum_alloy_bar
+      - item_id: aluminum_alloy_ingot
         qty: 5.0
         unit: kg
     outputs:
@@ -55,7 +55,7 @@ steps:
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: "Machine fan blades or impeller from aluminum or steel"
+    notes: "Machine fan blades or impeller from aluminum alloy ingot stock"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: formed_sheet_metal_parts
@@ -78,4 +78,4 @@ steps:
     labor_hours: 1.5
     notes: "Mount motor, install blades, balance assembly, test airflow"
 assumptions: Sheet metal housing with machined blades/impeller. Electric motor driven. Balanced for smooth operation. Mass ~15 kg.
-notes: Cooling fan assembly for forced air cooling in motors, power electronics, and industrial equipment.
+notes: Cooling fan assembly for forced air cooling in motors, power electronics, and industrial equipment. Aluminum blade stock sourced from ingots for in-situ machining.

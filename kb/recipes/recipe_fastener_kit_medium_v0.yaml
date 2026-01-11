@@ -3,22 +3,10 @@ target_item_id: fastener_kit_medium
 variant_id: v0
 
 inputs:
-  - item_id: metal_wire_feed
+  - item_id: steel_stock_bar_or_billet
     qty: 1.0
     unit: kg
   - item_id: steel_sheet_3mm
-    qty: 1.0
-    unit: kg
-  - item_id: forged_steel_parts
-    qty: 1.0
-    unit: kg
-  - item_id: machined_part_raw
-    qty: 1.0
-    unit: kg
-  - item_id: steel_chassis_sheet_metal
-    qty: 1.0
-    unit: kg
-  - item_id: finished_part
     qty: 1.0
     unit: kg
 outputs:
@@ -27,22 +15,9 @@ outputs:
     unit: kg
 
 steps:
-  - process_id: wire_drawing_basic_v0
-    inputs:
-      - item_id: metal_wire_feed
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: metal_wire_feed
-        qty: 1.0
-        unit: kg
-    est_time_hr: 0.8
-    machine_hours: 0.8
-    notes: Draw steel wire/rod stock to appropriate diameters for bolt and nut blanks (M6-M12 range)
-
   - process_id: forging_basic_v0
     inputs:
-      - item_id: metal_wire_feed
+      - item_id: steel_stock_bar_or_billet
         qty: 1.0
         unit: kg
     outputs:
@@ -79,35 +54,35 @@ steps:
     machine_hours: 0.6
     notes: Stamp flat washers and lock washers from steel sheet stock using progressive dies
 
-  - process_id: heat_treatment_basic_v0
+  - process_id: heat_treat_basic_v0
     inputs:
       - item_id: machined_part_raw
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: finished_part
+      - item_id: machined_part_raw
         qty: 1.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: Heat treat bolts and lock washers for hardness and spring properties (austenitizing, quenching, tempering)
 
-  - process_id: finishing_basic_v0
+  - process_id: inspection_basic_v0
     inputs:
-      - item_id: finished_part
+      - item_id: machined_part_raw
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: finished_part
+      - item_id: machined_part_raw
         qty: 1.0
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: Tumble finish to remove burrs, clean, and improve surface finish
+    notes: Inspect heat-treated fasteners for hardness and dimensional checks
 
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: finished_part
+      - item_id: machined_part_raw
         qty: 1.0
         unit: kg
       - item_id: steel_chassis_sheet_metal
@@ -123,19 +98,18 @@ steps:
 
 assumptions: |
   Complete fastener manufacturing from steel stock to finished kit. Process integrates:
-  - Wire/rod drawing for bolt and nut starting material
   - Hot forging for head formation (hex heads on bolts, upset blanks for nuts)
   - Thread cutting via single-point turning (bolts) and tapping (nuts)
   - Sheet metal stamping for washer production
   - Heat treatment for strength and hardness
-  - Final sorting and kitting
+  - Final inspection and kitting
 
-  Input materials: 1.1 kg steel stock (0.9 kg rod/wire, 0.2 kg sheet)
+  Input materials: 2.0 kg steel stock (1.0 kg bar/billet, 1.0 kg sheet)
   Output: 1.0 kg complete fastener kit per BOM specification
-  Scrap rate: ~9% from machining chips, stamping waste, and heat treatment losses
+  Scrap rate: ~50% from machining chips and stamping waste (conservative placeholder)
 
 notes: |
-  Comprehensive seven-step recipe for fastener_kit_medium production.
+  Six-step recipe for fastener_kit_medium production.
 
   Kit composition per bom_fastener_kit_medium_v0:
   - 720g hex bolts M6-M12 in various lengths (76 pieces total)
@@ -145,14 +119,13 @@ notes: |
   Total: ~366 fasteners, 1.0 kg net weight
 
   Manufacturing process details:
-  1. Wire drawing: Reduce bar stock to bolt shank diameters (6mm, 8mm, 10mm, 12mm)
-  2. Forging: Form hex heads on bolt blanks, upset nut blanks for adequate thread engagement
-  3. Threading: Cut external threads on bolts (dies or single-point), tap nuts (spiral point taps)
-  4. Washer stamping: Progressive die stamps flat and lock washers from sheet
-  5. Heat treatment: Quench and temper bolts to grade 8.8 equivalent, harden lock washers
-  6. Finishing: Vibratory tumbling removes scale and burrs
-  7. Kitting: Sort by size, verify counts, package in compartmented container
+  1. Forging: Form hex heads on bolt blanks, upset nut blanks for adequate thread engagement
+  2. Threading: Cut external threads on bolts (dies or single-point), tap nuts (spiral point taps)
+  3. Washer stamping: Progressive die stamps flat and lock washers from sheet
+  4. Heat treatment: Quench and temper bolts to grade 8.8 equivalent, harden lock washers
+  5. Inspection: Verify hardness and dimensional checks
+  6. Kitting: Sort by size, verify counts, package in compartmented container
 
-  Total time: ~9 hours (primarily sequential, some parallel opportunity for washers)
+  Total time: ~8 hours (primarily sequential, some parallel opportunity for washers)
   References detailed specification in design/memos/fastener_kit_specification.md
   Most commonly used fastener kit in the KB (107 BOMs reference this item)

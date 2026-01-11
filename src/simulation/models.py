@@ -92,6 +92,7 @@ class ProcessStartEvent(Event):
     process_run_id: str
     actual_start_time: float
     scale: float
+    scheduled_end_time: Optional[float] = None
 
 
 class ProcessCompleteEvent(Event):
@@ -103,6 +104,7 @@ class ProcessCompleteEvent(Event):
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this process
     time_hours: float
+    start_time: Optional[float] = None
 
 
 class RecipeStartEvent(Event):
@@ -154,6 +156,7 @@ class StateSnapshotEvent(Event):
     active_processes: List[ActiveProcess]
     machines_built: List[str]
     machines_in_use: Dict[str, int] = Field(default_factory=dict)
+    total_imports: Dict[str, InventoryItem] = Field(default_factory=dict)
     total_energy_kwh: Optional[float] = None  # Cumulative energy at snapshot time
 
 

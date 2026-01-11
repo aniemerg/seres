@@ -50,10 +50,14 @@ class DependencyGraph:
 
         # Build nodes
         for idx, step in enumerate(self.steps):
+            if "dependencies" in step:
+                dependencies = step.get("dependencies", [])
+            else:
+                dependencies = [idx - 1] if idx > 0 else []
             node = StepNode(
                 step_index=idx,
                 process_id=step.get('process_id', f'step_{idx}'),
-                dependencies=step.get('dependencies', [])
+                dependencies=dependencies
             )
             self.nodes.append(node)
 

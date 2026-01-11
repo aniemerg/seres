@@ -45,8 +45,8 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
         SimulationEngine instance
     """
     sim_dir = SIMULATIONS_DIR / sim_id
-    log_file = sim_dir / "simulation.jsonl"
-    exists = log_file.exists()
+    snapshot_file = sim_dir / "snapshot.json"
+    exists = snapshot_file.exists()
 
     if create and exists:
         print(f"Error: Simulation '{sim_id}' already exists", file=sys.stderr)
@@ -77,8 +77,8 @@ def cmd_init(args, kb_loader: KBLoader):
     """Initialize a new simulation."""
     # Check if simulation already exists
     sim_dir = SIMULATIONS_DIR / args.sim_id
-    log_file = sim_dir / "simulation.jsonl"
-    if log_file.exists():
+    snapshot_file = sim_dir / "snapshot.json"
+    if snapshot_file.exists():
         print(f"Error: Simulation '{args.sim_id}' already exists", file=sys.stderr)
         return 1
 
@@ -88,7 +88,8 @@ def cmd_init(args, kb_loader: KBLoader):
 
     print(f"✓ Created simulation '{args.sim_id}'")
     print(f"  Location: {engine.sim_dir}")
-    print(f"  Log file: {engine.log_file}")
+    print(f"  Snapshot: {engine.snapshot_file}")
+    print(f"  Events: {engine.event_log_file}")
     return 0
 
 
@@ -703,8 +704,8 @@ def _parse_bootstrap_entry(entry: str) -> tuple[str, float, str]:
 def cmd_scaffold(args, kb_loader: KBLoader):
     """Create a simulation with optional bootstrap imports."""
     sim_dir = SIMULATIONS_DIR / args.sim_id
-    log_file = sim_dir / "simulation.jsonl"
-    if log_file.exists():
+    snapshot_file = sim_dir / "snapshot.json"
+    if snapshot_file.exists():
         print(f"Error: Simulation '{args.sim_id}' already exists", file=sys.stderr)
         return 1
 
@@ -728,7 +729,8 @@ def cmd_scaffold(args, kb_loader: KBLoader):
 
     print(f"✓ Created simulation '{args.sim_id}'")
     print(f"  Location: {engine.sim_dir}")
-    print(f"  Log file: {engine.log_file}")
+    print(f"  Snapshot: {engine.snapshot_file}")
+    print(f"  Events: {engine.event_log_file}")
     if imported:
         print("  Imported:")
         for item_id, qty, unit in imported:
@@ -818,6 +820,115 @@ def cmd_advance_time(args, kb_loader: KBLoader):
     return 0
 
 
+def cmd_status(args, kb_loader: KBLoader):
+    """Show simulation metadata summary."""
+    engine = load_or_create_simulation(args.sim_id, kb_loader)
+    state = engine.get_state_dict()
+    schedule = engine.get_schedule_summary()
+    converter = UnitConverter(kb_loader)
+
+    def summarize_mass(
+        items: Dict[str, Dict[str, Any]]
+    ) -> tuple[float, int]:
+        total_mass = 0.0
+        unknown_mass_count = 0
+        for item_id, inv in items.items():
+            qty = inv.get("quantity", 0.0)
+            unit = inv.get("unit")
+            if unit == "kg":
+                total_mass += qty
+                continue
+            converted = converter.convert(qty, unit, "kg", item_id)
+            if converted is not None:
+                total_mass += converted
+                continue
+            item = kb_loader.get_item(item_id)
+            if item:
+                item_dict = item.model_dump() if hasattr(item, "model_dump") else item
+                item_mass = item_dict.get("mass")
+                if item_mass is not None and unit in ("unit", "count"):
+                    total_mass += item_mass * qty
+                    continue
+            unknown_mass_count += 1
+        return total_mass, unknown_mass_count
+
+    def summarize_volume(
+        items: Dict[str, Dict[str, Any]]
+    ) -> tuple[float, int]:
+        total_volume = 0.0
+        unknown_volume_count = 0
+        for item_id, inv in items.items():
+            qty = inv.get("quantity", 0.0)
+            unit = inv.get("unit")
+            if unit in ("m3", "liter", "L"):
+                converted = converter.convert(qty, unit, "m3", item_id)
+                if converted is not None:
+                    total_volume += converted
+                else:
+                    unknown_volume_count += 1
+            else:
+                converted = converter.convert(qty, unit, "m3", item_id)
+                if converted is not None:
+                    total_volume += converted
+        return total_volume, unknown_volume_count
+
+    time_hours = state.get("current_time_hours", 0.0)
+    days = time_hours / 24.0
+    total_energy = state.get("total_energy_kwh", 0.0)
+
+    inventory_count = len(state.get("inventory", {}))
+    machines_built_count = len(state.get("machines_built", []))
+    imports_count = len(state.get("total_imports", {}))
+
+    import_mass, import_unknown_mass = summarize_mass(state.get("total_imports", {}))
+    inventory_mass, inventory_unknown_mass = summarize_mass(state.get("inventory", {}))
+    inventory_volume, inventory_unknown_volume = summarize_volume(state.get("inventory", {}))
+    inventory_unit_total = 0.0
+    for inv in state.get("inventory", {}).values():
+        if inv.get("unit") in ("unit", "count"):
+            inventory_unit_total += inv.get("quantity", 0.0)
+
+    active_processes = schedule.get("active_processes", len(state.get("active_processes", [])))
+    completed_processes = schedule.get("completed_processes", 0)
+    queued_events = schedule.get("queued_events", 0)
+    active_recipes = schedule.get("active_recipes", 0)
+    completed_recipes = schedule.get("completed_recipes", 0)
+    next_event_time = schedule.get("next_event_time")
+
+    print(f"=== Simulation: {args.sim_id} ===")
+    print(f"Time: {time_hours:.2f} hours ({days:.2f} days)")
+    print(f"Energy: {total_energy:.2f} kWh")
+    print(f"Inventory items: {inventory_count}")
+    print(f"Machines built: {machines_built_count}")
+    print(f"Imports tracked: {imports_count}")
+    if import_unknown_mass > 0:
+        print(f"Imported mass: ~{import_mass:.2f} kg ({import_unknown_mass} unknown)")
+    else:
+        print(f"Imported mass: ~{import_mass:.2f} kg")
+    if inventory_unknown_mass > 0:
+        print(f"Inventory mass: ~{inventory_mass:.2f} kg ({inventory_unknown_mass} unknown)")
+    else:
+        print(f"Inventory mass: ~{inventory_mass:.2f} kg")
+    if inventory_volume > 0 or inventory_unknown_volume > 0:
+        if inventory_unknown_volume > 0:
+            print(f"Inventory volume: ~{inventory_volume:.3f} m3 ({inventory_unknown_volume} unknown)")
+        else:
+            print(f"Inventory volume: ~{inventory_volume:.3f} m3")
+    if inventory_unit_total > 0:
+        print(f"Inventory count: ~{inventory_unit_total:.2f} units")
+    print(f"Processes: {active_processes} active, {completed_processes} completed")
+    print(f"Recipes: {active_recipes} active, {completed_recipes} completed")
+    print(f"Events queued: {queued_events}")
+    if next_event_time is None:
+        print("Next event time: none")
+    else:
+        print(f"Next event time: {next_event_time:.2f} hours")
+    print(f"Snapshot: {engine.snapshot_file}")
+    print(f"Events: {engine.event_log_file}")
+
+    return 0
+
+
 def cmd_list(args, kb_loader: KBLoader):
     """List all simulations."""
     if not SIMULATIONS_DIR.exists():
@@ -827,18 +938,19 @@ def cmd_list(args, kb_loader: KBLoader):
     sims = []
     for sim_dir in SIMULATIONS_DIR.iterdir():
         if sim_dir.is_dir():
-            log_file = sim_dir / "simulation.jsonl"
-            if log_file.exists():
-                # Try to read first event to get sim info
-                with open(log_file, 'r') as f:
-                    first_line = f.readline()
-                    if first_line:
-                        event = json.loads(first_line)
-                        sims.append({
-                            'id': sim_dir.name,
-                            'created': event.get('timestamp', 'unknown'),
-                            'path': str(sim_dir)
-                        })
+            snapshot_file = sim_dir / "snapshot.json"
+            if snapshot_file.exists():
+                sim_time = None
+                try:
+                    snapshot_data = json.loads(snapshot_file.read_text(encoding="utf-8"))
+                    sim_time = snapshot_data.get("state", {}).get("current_time_hours")
+                except Exception:
+                    sim_time = None
+                sims.append({
+                    'id': sim_dir.name,
+                    'time_hours': sim_time,
+                    'path': str(sim_dir)
+                })
 
     if not sims:
         print("No simulations found")
@@ -847,7 +959,9 @@ def cmd_list(args, kb_loader: KBLoader):
     print(f"Found {len(sims)} simulation(s):\n")
     for sim in sorted(sims, key=lambda x: x['id']):
         print(f"  {sim['id']}")
-        print(f"    Created: {sim['created']}")
+        if sim.get('time_hours') is not None:
+            days = sim['time_hours'] / 24.0
+            print(f"    Sim time: {sim['time_hours']:.2f} hours ({days:.2f} days)")
         print(f"    Path: {sim['path']}")
         print()
 
@@ -857,15 +971,21 @@ def cmd_list(args, kb_loader: KBLoader):
 def cmd_visualize(args, kb_loader: KBLoader):
     """Generate visualizations for a simulation."""
     from src.simulation.visualize import visualize_simulation
+    import os
 
     sim_dir = SIMULATIONS_DIR / args.sim_id
-    log_file = sim_dir / "simulation.jsonl"
+    log_file = sim_dir / "events.jsonl"
 
     if not log_file.exists():
         print(f"Error: Simulation '{args.sim_id}' not found", file=sys.stderr)
         return 1
 
     try:
+        if "MPLCONFIGDIR" not in os.environ:
+            print(
+                "Note: set MPLCONFIGDIR to a writable path if Matplotlib cache errors occur.",
+                file=sys.stderr,
+            )
         # Determine output directory
         output_dir = None
         if hasattr(args, 'output') and args.output:
@@ -958,6 +1078,10 @@ def add_sim_subcommands(subparsers):
     advance_parser.add_argument('--sim-id', required=True, help='Simulation ID')
     advance_parser.add_argument('--hours', type=float, required=True, help='Hours to advance')
 
+    # status
+    status_parser = sim_subparsers.add_parser('status', help='Show simulation metadata')
+    status_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+
     # list
     list_parser = sim_subparsers.add_parser('list', help='List all simulations')
 
@@ -992,6 +1116,7 @@ def run_sim_command(args, kb_loader: KBLoader):
         'build-machine': cmd_build_machine,
         'preview': cmd_preview,
         'advance-time': cmd_advance_time,
+        'status': cmd_status,
         'list': cmd_list,
         'visualize': cmd_visualize,
     }

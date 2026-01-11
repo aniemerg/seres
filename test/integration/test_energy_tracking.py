@@ -73,7 +73,7 @@ def test_energy_persisted_in_events_and_load(kb_root, sim_dir):
     engine.advance_time(1.0)
     engine.save()
 
-    log_file = full_sim_dir / "simulation.jsonl"
+    log_file = full_sim_dir / "events.jsonl"
     assert log_file.exists()
 
     events = []
