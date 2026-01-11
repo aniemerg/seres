@@ -24,6 +24,7 @@ from src.kb_core.kb_loader import KBLoader
 from src.kb_core.calculations import calculate_duration, calculate_energy, CalculationError
 from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.schema import Quantity
+from src.kb_core.override_resolver import resolve_recipe_step_with_kb
 from src.simulation.engine import SimulationEngine
 
 REPO_ROOT = Path(__file__).parent.parent.parent
@@ -646,13 +647,12 @@ def cmd_plan(args, kb_loader: KBLoader):
         missing_steps = []
 
         for step in recipe_def.get("steps", []):
-            process_id = step.get("process_id")
-            process_model = kb_loader.get_process(process_id)
-            if not process_model:
-                missing_steps.append(process_id)
-                continue
-            process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
-            required.update(_collect_machine_requirements(process_def))
+            resolved_step = resolve_recipe_step_with_kb(step, kb_loader)
+            if "_warning" in resolved_step:
+                process_id = step.get("process_id")
+                if process_id:
+                    missing_steps.append(process_id)
+            required.update(_collect_machine_requirements(resolved_step))
 
         print("MACHINES REQUIRED (for this recipe's direct processes):")
         if required:

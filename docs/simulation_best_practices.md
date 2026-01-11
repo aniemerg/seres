@@ -120,7 +120,7 @@ electric_parallel_gripper (recipe_electric_parallel_gripper_v0)
 **Solutions**:
 1. Map full dependency tree before starting simulation
 2. Ensure prerequisite processes complete before dependent ones
-3. Use `view_state()` frequently to check inventory
+3. Use `python -m src.cli sim view-state --sim-id $SIM_ID` frequently to check inventory
 
 **Tested Chain** (from `claude_base_001`):
 ```
@@ -157,13 +157,14 @@ Before running a recipe in simulation:
 ### Pattern 1: Component Testing
 **Use case**: Verify a single recipe works
 **Structure**:
-```python
-init_simulation("test_component_X")
-import_item("input1", qty, unit)
-import_item("input2", qty, unit)
-run_recipe("recipe_X_v0", quantity=1)
-advance_time(duration)
-view_state()  # Verify output in inventory
+```bash
+SIM_ID="test_component_X"
+python -m src.cli sim init --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item input1 --quantity <qty> --unit <unit>
+python -m src.cli sim import --sim-id $SIM_ID --item input2 --quantity <qty> --unit <unit>
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_X_v0 --quantity 1
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim view-state --sim-id $SIM_ID
 ```
 
 **Example**: `test_labor_bot_parts` - tested single robot arm link recipe
@@ -171,15 +172,16 @@ view_state()  # Verify output in inventory
 ### Pattern 2: Assembly Testing
 **Use case**: Build complete machine from imported parts
 **Structure**:
-```python
-init_simulation("test_assembly_X")
+```bash
+SIM_ID="test_assembly_X"
+python -m src.cli sim init --sim-id $SIM_ID
 # Import ALL components from BOM
-for component in bom:
-    import_item(component, qty, unit)
+python -m src.cli sim import --sim-id $SIM_ID --item component1 --quantity <qty> --unit <unit>
+python -m src.cli sim import --sim-id $SIM_ID --item component2 --quantity <qty> --unit <unit>
 # Run assembly recipes in dependency order
-run_recipe("recipe_subassembly1_v0", 1)
-run_recipe("recipe_subassembly2_v0", 1)
-run_recipe("recipe_final_assembly_v0", 1)
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_subassembly1_v0 --quantity 1
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_subassembly2_v0 --quantity 1
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_final_assembly_v0 --quantity 1
 ```
 
 **Example**: `motor_build_v2` - built complete motor + robot parts
@@ -187,18 +189,19 @@ run_recipe("recipe_final_assembly_v0", 1)
 ### Pattern 3: Full Supply Chain
 **Use case**: Test production from raw materials to finished goods
 **Structure**:
-```python
-init_simulation("test_full_chain_X")
+```bash
+SIM_ID="test_full_chain_X"
+python -m src.cli sim init --sim-id $SIM_ID
 # Import only initial seed items (labor_bot, initial machines)
-import_item("labor_bot_general_v0", 1, "unit")
+python -m src.cli sim import --sim-id $SIM_ID --item labor_bot_general_v0 --quantity 1 --unit unit
 
 # Run base material production
-run_process("regolith_mining_simple_v0", scale=1.0)
-advance_time(8)  # Wait for mining
+python -m src.cli sim start-process --sim-id $SIM_ID --process regolith_mining_simple_v0 --duration 8
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours 8
 
 # Extract resources
-run_process("ilmenite_extraction_from_regolith_v0", scale=10.0)
-advance_time(10)
+python -m src.cli sim start-process --sim-id $SIM_ID --process ilmenite_extraction_from_regolith_v0 --duration 10
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours 10
 
 # Continue through refinement and manufacturing...
 ```
@@ -245,11 +248,11 @@ Based on simulation analysis, these are high-priority improvements:
 
 ## Quick Tips for New Simulations
 
-1. **Always start with** `init_simulation("descriptive_name")`
+1. **Always start with** `python -m src.cli sim init --sim-id descriptive_name`
 2. **Name your simulation** descriptively (e.g., `motor_assembly_test_dec21` not `test_sim_5`)
 3. **Import in bulk** before starting recipes (reduces events)
-4. **Check inventory** with `view_state()` after each major milestone
-5. **Use advance_time()** to fast-forward through long processes
+4. **Check inventory** with `python -m src.cli sim view-state --sim-id $SIM_ID` after each major milestone
+5. **Use** `python -m src.cli sim advance-time --sim-id $SIM_ID --hours <n>` to fast-forward through long processes
 6. **Calculate total materials** needed before importing (avoid shortages)
 7. **Test recipes individually** before chaining them together
 8. **Document intent** in simulation name and initial comments
@@ -268,14 +271,14 @@ python tools/analyze_simulations.py claude_base_001
 python tools/analyze_simulations.py
 
 # View simulation events
-cat simulations/claude_base_001/simulation.jsonl | python -m json.tool
+cat simulations/claude_base_001/events.jsonl | python -m json.tool
 ```
 
 ---
 
 ## Related Documentation
 
-- `base_builder/INTERACTIVE_MODE.md` - How to use interactive simulation
+- `docs/SIMULATION_GUIDE.md` - How to use the simulation CLI
 - `docs/labor_bot_design_memo.md` - Labor bot specifications
 - `docs/parts_and_labor_guidelines.md` - Parts, BOMs, and labor modeling policy
 - `docs/simulation_learnings.md` - Auto-generated analysis report (detailed)

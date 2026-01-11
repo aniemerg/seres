@@ -13,8 +13,8 @@ from pathlib import Path
 from typing import Dict, Set, List, Tuple, Any
 from collections import defaultdict
 
-# Use base_builder.kb_loader for dict-based KB (dependency analysis expects dicts)
-from base_builder.kb_loader import KBLoader
+# Use src.kb_core.kb_loader for dict-based KB (dependency analysis expects dicts)
+from src.kb_core.kb_loader import KBLoader
 
 # Invalid item IDs that indicate data errors
 INVALID_ITEM_IDS = {

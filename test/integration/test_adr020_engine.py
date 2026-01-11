@@ -43,6 +43,24 @@ def kb_root(tmp_path):
             ],
         }, f)
 
+    # Create a process with partial machine reservation
+    with open(kb / "processes" / "test_process_partial_v0.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_process_partial_v0",
+            "kind": "process",
+            "process_type": "batch",
+            "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+            "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0,
+            },
+            "resource_requirements": [
+                {"machine_id": "test_machine_full", "qty": 1.0, "unit": "count"},
+                {"machine_id": "test_machine_partial", "qty": 5.0, "unit": "hr"},
+            ],
+        }, f)
+
     # Create material items
     with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
         yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
@@ -53,6 +71,22 @@ def kb_root(tmp_path):
     # Create machine
     with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
         yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+    with open(kb / "items" / "machines" / "test_machine_partial.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_machine_partial",
+            "kind": "machine",
+            "unit": "count",
+            "mass": 50.0
+        }, f)
+
+    with open(kb / "items" / "machines" / "test_machine_full.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_machine_full",
+            "kind": "machine",
+            "unit": "count",
+            "mass": 75.0
+        }, f)
 
     return kb
 
@@ -345,6 +379,7 @@ class TestBasicProcessScheduling:
         engine1 = SimulationEngine(sim_id, kb, full_sim_dir)
         engine1.import_item("ore", 10.0, "kg")
         engine1.import_item("test_machine_partial", 1.0, "count")
+        engine1.import_item("test_machine_full", 1.0, "count")
 
         # This process should have a PARTIAL reservation (unit='hr')
         result = engine1.start_process(

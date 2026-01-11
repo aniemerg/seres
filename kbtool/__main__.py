@@ -281,7 +281,7 @@ def main() -> None:
         else:
             raise SystemExit("Unknown config subcommand")
     elif args.command == "mat-closure":
-        from base_builder.kb_loader import KBLoader
+        from src.kb_core.kb_loader import KBLoader
         import sys
 
         # Load KB

@@ -55,6 +55,7 @@ from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
 from src.kb_core.calculations import calculate_duration, calculate_energy
 from src.kb_core.schema import Quantity, RawProcess, RawEnergyModel
+from src.kb_core.override_resolver import resolve_recipe_step_with_kb
 from src.kb_core.validators import validate_process, ValidationLevel
 
 
@@ -741,80 +742,7 @@ class SimulationEngine:
         Returns:
             Resolved process definition with all fields populated
         """
-        if "process_id" in step_def:
-            # Reference mode: Load base process
-            process_id = step_def["process_id"]
-            base_process_model = self.kb.get_process(process_id)
-
-            if not base_process_model:
-                # Process not found - return step as-is with warning
-                return {
-                    **step_def,
-                    "_warning": f"Process '{process_id}' not found in KB",
-                }
-
-            # Convert to dict
-            base_process = base_process_model.model_dump() if hasattr(base_process_model, 'model_dump') else base_process_model
-
-            # Start with base process
-            resolved = dict(base_process)
-
-            # Apply step-level overrides (step fields override process fields)
-            # Special handling for certain fields:
-            scale = step_def.get("scale", 1.0)
-
-            # Override direct fields
-            for key in ["inputs", "outputs", "byproducts", "requires_ids",
-                       "resource_requirements", "energy_model"]:
-                if key in step_def:
-                    resolved[key] = step_def[key]
-
-            # Special handling for time_model per ADR-013: partial vs complete override
-            if "time_model" in step_def:
-                step_time_model = step_def["time_model"]
-                # Check if step has a non-None 'type' field (complete override)
-                # or missing/None 'type' field (partial override - merge with base)
-                has_type = isinstance(step_time_model, dict) and step_time_model.get("type") is not None
-
-                if not has_type:
-                    # Partial override: merge with base process time_model
-                    base_time_model = resolved.get("time_model", {})
-                    if isinstance(base_time_model, dict):
-                        # Start with base, then apply step overrides
-                        # Filter out None values from step to preserve base values
-                        merged = dict(base_time_model)
-                        if isinstance(step_time_model, dict):
-                            for key, value in step_time_model.items():
-                                if value is not None:
-                                    merged[key] = value
-                        resolved["time_model"] = merged
-                    else:
-                        # Base is not a dict (shouldn't happen), use step as-is
-                        resolved["time_model"] = step_time_model
-                else:
-                    # Complete override: step has non-None "type" field
-                    resolved["time_model"] = step_time_model
-
-            # Apply scale multiplier if present
-            if scale != 1.0:
-                for key in ["inputs", "outputs", "byproducts"]:
-                    if key in resolved:
-                        for item in resolved[key]:
-                            if "qty" in item:
-                                item["qty"] *= scale
-                            elif "quantity" in item:
-                                item["quantity"] *= scale
-
-            # Override specific time/labor estimates
-            for key in ["est_time_hr", "machine_hours", "labor_hours", "notes"]:
-                if key in step_def:
-                    resolved[key] = step_def[key]
-
-            return resolved
-
-        else:
-            # Inline mode: Step IS the process definition
-            return dict(step_def)
+        return resolve_recipe_step_with_kb(step_def, self.kb)
 
     def run_recipe(
         self,

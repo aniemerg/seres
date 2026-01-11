@@ -8,7 +8,7 @@
 #   ./scripts/build_component_template.sh motor_build drive_motor_medium recipe_drive_motor_medium_v1
 #
 # This template demonstrates the standard workflow for building components
-# using the base_builder CLI commands. Customize the imports section for
+# using the src.cli simulation commands. Customize the imports section for
 # your specific component's requirements.
 
 set -e  # Exit on any error
@@ -27,12 +27,16 @@ echo ""
 
 # Helper function for CLI commands
 cmd() {
-    python -m base_builder.cli_commands "$@"
+    python -m src.cli sim "$@"
 }
+
+if ! cmd view-state --sim-id "$SIM_ID" >/dev/null 2>&1; then
+    cmd init --sim-id "$SIM_ID"
+fi
 
 # Step 1: View initial state
 echo "=== Step 1: Initial State ==="
-cmd view-state --sim-id $SIM_ID || echo "(New simulation)"
+cmd view-state --sim-id $SIM_ID
 echo ""
 
 # Step 2: Import bootstrap equipment
@@ -97,8 +101,9 @@ echo "==========================================================================
 echo "✓ Build sequence complete!"
 echo "================================================================================"
 echo ""
-echo "View full state: python -m base_builder.cli_commands view-state --sim-id $SIM_ID"
-echo "Simulation logs: simulations/$SIM_ID/simulation.jsonl"
+echo "View full state: python -m src.cli sim view-state --sim-id $SIM_ID"
+echo "Simulation snapshot: simulations/$SIM_ID/snapshot.json"
+echo "Simulation events: simulations/$SIM_ID/events.jsonl"
 echo ""
 
 # Summary

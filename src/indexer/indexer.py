@@ -27,7 +27,7 @@ except ImportError:  # pragma: no cover
 
 from kbtool import models
 from src.kb_core.queue_manager import _locked_queue
-from base_builder.kb_loader import KBLoader  # Uses dict-based loader (indexer expects dicts)
+from src.kb_core.kb_loader import KBLoader
 from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020

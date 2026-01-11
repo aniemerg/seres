@@ -15,7 +15,7 @@ from collections import defaultdict
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from base_builder.kb_loader import KBLoader
+from src.kb_core.kb_loader import KBLoader
 
 
 class ClosureAnalyzer:

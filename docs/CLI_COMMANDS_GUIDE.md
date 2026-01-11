@@ -534,21 +534,9 @@ python -m src.cli sim list
 
 ---
 
-## Legacy Commands (Deprecated)
+## Legacy Commands (Removed)
 
-### base_builder CLI
-
-The old `base_builder.cli_commands` interface is deprecated. Use `python -m src.cli sim` instead.
-
-**Old:**
-```bash
-python -m base_builder.cli_commands view-state --sim-id test
-```
-
-**New:**
-```bash
-python -m src.cli sim view-state --sim-id test
-```
+The old `base_builder` CLI has been removed. Use `python -m src.cli sim` instead.
 
 ---
 

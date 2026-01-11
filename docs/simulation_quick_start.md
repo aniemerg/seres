@@ -20,7 +20,7 @@ Before starting ANY simulation, read these files in order:
    - Review "imports" to see what's commonly imported
    - Look for similar simulation names
 
-3. **`base_builder/INTERACTIVE_MODE.md`**
+3. **`src/simulation/cli.py`**
    - Quick reference for simulation API
 
 ---
@@ -121,59 +121,32 @@ Total: ~10.5 hours before you can start arm fabrication
 
 Based on pattern from `simulation_best_practices.md`:
 
-```python
-from base_builder.interactive import *
-
-# Initialize
-sim_id = "robot_arm_test_dec21"  # Descriptive name with date
-init_simulation(sim_id)
-
-# Import seed items
-print("=== Importing materials ===")
-import_item("labor_bot_general_v0", 1, "unit")
-import_item("aluminum_alloy_ingot", 12, "kg")  # 20% buffer
-import_item("fastener_kit_medium", 2, "unit")
-
-# Verify imports
-state = view_state()
-print(f"Inventory: {len(state['inventory'])} items")
-
-# Run recipe
-print("\n=== Manufacturing robot_arm_link_aluminum ===")
-result = run_recipe("recipe_robot_arm_link_aluminum_v0", quantity=1)
-print(f"Recipe started: {result}")
-
-# Fast forward to completion
-if result.get('success'):
-    duration = result.get('duration_hours', 0)
-    advance_time(duration)
-
-    # Verify output
-    final_state = view_state()
-    if 'robot_arm_link_aluminum' in final_state['inventory']:
-        print("✓ SUCCESS: robot_arm_link_aluminum produced")
-    else:
-        print("✗ FAILED: Expected output not in inventory")
-        print(f"Final inventory: {final_state['inventory']}")
+```bash
+SIM_ID="example_sim"
+python -m src.cli sim init --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item labor_bot_general_v0 --quantity 1 --unit unit
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe <recipe_id> --quantity 1
+python -m src.cli sim preview --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim view-state --sim-id $SIM_ID
 ```
 
 ---
 
 ## Step 6: Run and Monitor
 
-Execute your script:
+Run commands directly in your shell:
 
 ```bash
 cd /path/to/self-replicating-system-modeling
-python3 -c "
-from base_builder.interactive import *
-# [paste your script here]
-"
+python -m src.cli sim view-state --sim-id $SIM_ID
+python -m src.cli sim preview --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
 ```
 
 **Monitor as it runs**:
 - Check for error messages
-- Use `view_state()` after each major step
+- Use `python -m src.cli sim view-state --sim-id $SIM_ID` after each major step
 - Verify inventory matches expectations
 
 ---
@@ -206,16 +179,10 @@ cat docs/simulation_learnings.md | grep -A 20 "robot_arm_test_dec21"
 **Cause**: Not enough materials imported OR dependent recipe didn't run yet
 
 **Solution**:
-```python
-# Check current inventory
-state = view_state()
-print(state['inventory'])
-
-# Import missing item
-import_item("missing_item_id", quantity, "unit")
-
-# Retry recipe
-run_recipe("recipe_name_v0", quantity=1)
+```bash
+python -m src.cli sim view-state --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item missing_item_id --quantity <n> --unit unit
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_name_v0 --quantity 1
 ```
 
 ### Issue: Recipe references non-existent process
@@ -247,8 +214,8 @@ grep -r "copper" kb/items/materials/ | grep "^id:"
 **Cause**: Didn't account for sequential dependencies
 
 **Solution**:
-- Use `advance_time()` to fast-forward
-- Check process duration with `view_state()['active_processes']`
+- Use `python -m src.cli sim advance-time --sim-id $SIM_ID --hours <n>` to fast-forward
+- Check process duration with `python -m src.cli sim view-state --sim-id $SIM_ID`
 - Consider parallelizing independent processes
 
 ---
@@ -256,58 +223,32 @@ grep -r "copper" kb/items/materials/ | grep "^id:"
 ## Templates
 
 ### Component Test Template
-```python
-from base_builder.interactive import *
-
-# Test single recipe: recipe_NAME_v0
-sim_id = "test_NAME_dec21"
-init_simulation(sim_id)
-
-# Import inputs (from recipe YAML)
-import_item("labor_bot_general_v0", 1, "unit")
-import_item("INPUT1", QTY1, "UNIT1")
-import_item("INPUT2", QTY2, "UNIT2")
-
-# Run recipe
-result = run_recipe("recipe_NAME_v0", quantity=1)
-if result.get('success'):
-    advance_time(result['duration_hours'])
-    state = view_state()
-    assert 'OUTPUT_ITEM' in state['inventory'], "Output not produced!"
-    print(f"✓ SUCCESS: {state['inventory']['OUTPUT_ITEM']}")
+```bash
+SIM_ID="test_NAME_dec21"
+python -m src.cli sim init --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item labor_bot_general_v0 --quantity 1 --unit unit
+python -m src.cli sim import --sim-id $SIM_ID --item INPUT1 --quantity QTY1 --unit UNIT1
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_NAME_v0 --quantity 1
+python -m src.cli sim preview --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim view-state --sim-id $SIM_ID
 ```
 
 ### Assembly Test Template
-```python
-from base_builder.interactive import *
+```bash
+SIM_ID="assembly_MACHINE_dec21"
+python -m src.cli sim init --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item labor_bot_general_v0 --quantity 1 --unit unit
+python -m src.cli sim import --sim-id $SIM_ID --item component1 --quantity 2 --unit unit
+python -m src.cli sim import --sim-id $SIM_ID --item component2 --quantity 1 --unit kg
 
-# Build complete machine from BOM
-sim_id = "assembly_MACHINE_dec21"
-init_simulation(sim_id)
-
-# Import base machines
-import_item("labor_bot_general_v0", 1, "unit")
-
-# Import ALL BOM components
-bom = [
-    ("component1", 2, "unit"),
-    ("component2", 1, "kg"),
-    # ... etc
-]
-for item_id, qty, unit in bom:
-    import_item(item_id, qty, unit)
-
-# Run assembly in dependency order
-run_recipe("recipe_subassembly_A_v0", 1)
-advance_time(...)
-run_recipe("recipe_subassembly_B_v0", 1)
-advance_time(...)
-run_recipe("recipe_final_MACHINE_v0", 1)
-advance_time(...)
-
-# Verify
-state = view_state()
-assert 'MACHINE' in state['inventory']
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_subassembly_A_v0 --quantity 1
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_subassembly_B_v0 --quantity 1
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_final_MACHINE_v0 --quantity 1
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim view-state --sim-id $SIM_ID
 ```
 
 ---
@@ -317,7 +258,7 @@ assert 'MACHINE' in state['inventory']
 1. **Name simulations descriptively**: `motor_build_v2` better than `test_sim`
 2. **Always import labor_bot first**: It's your base machine for almost everything
 3. **Import 20% extra materials**: Avoid mid-simulation shortages
-4. **Use view_state() liberally**: Check inventory after each milestone
+4. **Use `python -m src.cli sim view-state --sim-id $SIM_ID` liberally**: Check inventory after each milestone
 5. **Test recipes individually first**: Before chaining them together
 6. **Document your intent**: Add comments explaining what you're testing
 7. **Check past simulations**: Someone may have already tested what you need
@@ -354,37 +295,17 @@ grep "target_item_id: deionized_water" kb/recipes/*.yaml     # Has recipe
 - For full chain: MANUFACTURE from regolith (adds ~50 hours)
 
 **Step 5**: Write script (import strategy)
-```python
-from base_builder.interactive import *
-
-init_simulation("thermal_mgmt_test_dec21")
-
-# Seed
-import_item("labor_bot_general_v0", 1, "unit")
-
-# Materials (with 20% buffer)
-import_item("copper_rod_ingot", 1.5, "kg")
-import_item("aluminum_alloy_ingot", 1.2, "kg")
-import_item("deionized_water", 0.1, "kg")
-
-# Build
-result = run_recipe("recipe_thermal_management_system_v0", quantity=1)
-print(result)
-
-if result['success']:
-    advance_time(result['duration_hours'])
-    state = view_state()
-
-    if 'thermal_management_system' in state['inventory']:
-        print("✓ SUCCESS")
-        print(f"   Output: {state['inventory']['thermal_management_system']}")
-    else:
-        print("✗ FAILED - check errors")
-```
-
-**Step 6**: Run it
 ```bash
-python3 -c "exec(open('my_simulation_script.py').read())"
+SIM_ID="thermal_mgmt_test_dec21"
+python -m src.cli sim init --sim-id $SIM_ID
+python -m src.cli sim import --sim-id $SIM_ID --item labor_bot_general_v0 --quantity 1 --unit unit
+python -m src.cli sim import --sim-id $SIM_ID --item copper_rod_ingot --quantity 1.5 --unit kg
+python -m src.cli sim import --sim-id $SIM_ID --item aluminum_alloy_ingot --quantity 1.2 --unit kg
+python -m src.cli sim import --sim-id $SIM_ID --item deionized_water --quantity 0.1 --unit kg
+python -m src.cli sim run-recipe --sim-id $SIM_ID --recipe recipe_thermal_management_system_v0 --quantity 1
+python -m src.cli sim preview --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim advance-time --sim-id $SIM_ID --hours <hours>
+python -m src.cli sim view-state --sim-id $SIM_ID
 ```
 
 **Step 7**: Analyze

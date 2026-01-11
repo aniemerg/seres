@@ -120,21 +120,15 @@ python -m src.cli sim status --sim-id lunar_base
 - `docs/ADRs/ADR-013-recipe-override-mechanics.md` — Override resolution
 - `docs/ADRs/ADR-014-energy-model-redesign.md` — Energy model spec
 
-### Legacy Base Builder (Deprecated)
+### Legacy Base Builder (Removed)
 
-The old `base_builder` CLI is deprecated. Use `python -m src.cli sim` instead.
-
-For historical reference:
-- `base_builder/README.md` — Overview and architecture
-- `docs/material_class_system.md` — Material class matching
-- `docs/iron_parts_discovery.md` — Production chain validation results
+The old `base_builder` CLI has been removed. Use `python -m src.cli sim` instead.
 
 ## Repo layout (current)
 - `design/` — memos, notes, reference papers.
 - `kb/` — YAML knowledge base (processes, items, resources, recipes, BOMs, scenarios).
 - `kbtool/` — Python tooling (models + indexer CLI).
 - `queue_agents/` — Autonomous queue agents for processing KB gaps.
-- `base_builder/` — **Base builder simulation** for validating KB completeness through production chains.
 - `simulations/` — Simulation runs and event logs.
 - `docs/` — Documentation, ADRs, research questions, session accomplishments.
 - `out/` — generated index, reports, work queue.

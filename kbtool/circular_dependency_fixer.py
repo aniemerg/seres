@@ -17,7 +17,7 @@ from collections import defaultdict
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from base_builder.kb_loader import KBLoader
+from src.kb_core.kb_loader import KBLoader
 
 # Invalid item IDs that indicate data errors
 INVALID_ITEM_IDS = {

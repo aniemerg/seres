@@ -292,6 +292,50 @@ class MachineReservationManager:
             reserved=reserved,
         )
 
+    def get_reserved_qty(
+        self,
+        machine_id: str,
+        start_time: float,
+        end_time: float
+    ) -> float:
+        """
+        Get the maximum reserved quantity for a machine over a time range.
+
+        Args:
+            machine_id: Machine to query
+            start_time: Range start (hours)
+            end_time: Range end (hours)
+
+        Returns:
+            Maximum reserved quantity over the range
+        """
+        if machine_id not in self.machine_capacities:
+            raise ValueError(f"Machine '{machine_id}' not found in capacity registry")
+
+        reservations = [r for r in self.reservations if r.machine_id == machine_id]
+        if not reservations:
+            return 0.0
+
+        time_points = {start_time, end_time}
+        for res in reservations:
+            if res.start_time <= end_time and res.release_time >= start_time:
+                time_points.add(res.start_time)
+                time_points.add(res.release_time)
+
+        max_reserved = 0.0
+        for time in sorted(time_points):
+            if time < start_time or time > end_time:
+                continue
+            reserved = sum(
+                r.qty_reserved
+                for r in reservations
+                if r.is_active_at(time)
+            )
+            if reserved > max_reserved:
+                max_reserved = reserved
+
+        return max_reserved
+
     def get_reservations_for_machine(
         self,
         machine_id: str,

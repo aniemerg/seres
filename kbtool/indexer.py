@@ -28,7 +28,7 @@ except ImportError:  # pragma: no cover
 
 from . import models
 from .queue_tool import _locked_queue
-from base_builder.kb_loader import KBLoader
+from src.kb_core.kb_loader import KBLoader
 from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
 

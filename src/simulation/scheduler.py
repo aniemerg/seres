@@ -291,6 +291,22 @@ class Scheduler:
             }
         )
 
+        if start_time == self.current_time and process_run_id not in self.active_processes:
+            self.active_processes[process_run_id] = ProcessRun(
+                process_run_id=process_run_id,
+                process_id=process_id,
+                start_time=start_time,
+                duration_hours=duration_hours,
+                end_time=end_time,
+                scale=scale,
+                inputs_consumed=inputs_consumed,
+                outputs_pending=outputs_pending,
+                machines_reserved=machines_reserved,
+                recipe_run_id=recipe_run_id,
+                step_index=step_index,
+                energy_kwh=energy_kwh,
+            )
+
         return start_event
 
     def schedule_machine_release(
@@ -423,6 +439,8 @@ class Scheduler:
             return
 
         process_run_id = data['process_run_id']
+        if process_run_id in self.active_processes:
+            return
 
         # Create ProcessRun
         process_run = ProcessRun(

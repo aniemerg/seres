@@ -19,6 +19,7 @@ from .unit_converter import (
     parse_compound_unit,
     is_valid_unit,
 )
+from .override_resolver import resolve_recipe_step_with_kb
 
 
 class ValidationLevel(Enum):
@@ -961,36 +962,26 @@ def validate_recipe_inputs_outputs(
         # Check if ANY step has inputs (explicit or from process)
         has_step_inputs = False
         for step in steps:
+            resolved_step = resolve_recipe_step_with_kb(step, kb)
             # Check step-level inputs first
-            step_inputs = step.get("inputs", [])
+            step_inputs = resolved_step.get("inputs", [])
             if step_inputs:
                 has_step_inputs = True
                 break
 
-            # Check if process has inputs
-            process_id = step.get("process_id")
-            if process_id:
-                process = kb.get_process(process_id)
-                if process:
-                    # Get as dict if Pydantic model
-                    if hasattr(process, 'model_dump'):
-                        process_dict = process.model_dump()
-                    else:
-                        process_dict = process
+            # Boundary processes are allowed to have no inputs (extract from environment)
+            if resolved_step.get("process_type") == "boundary":
+                has_step_inputs = True
+                break
 
-                    # Boundary processes are allowed to have no inputs (extract from environment)
-                    if process_dict.get("process_type") == "boundary":
-                        has_step_inputs = True
-                        break
+            # Template processes are allowed to have no inputs (inputs defined in recipe)
+            if resolved_step.get("is_template"):
+                has_step_inputs = True
+                break
 
-                    # Template processes are allowed to have no inputs (inputs defined in recipe)
-                    if process_dict.get("is_template"):
-                        has_step_inputs = True
-                        break
-
-                    if process_dict.get("inputs", []):
-                        has_step_inputs = True
-                        break
+            if resolved_step.get("inputs", []):
+                has_step_inputs = True
+                break
 
         # ADR-019: Check if BOM exists for target_item_id (allows BOM-based inference)
         if not has_step_inputs:
@@ -1027,36 +1018,26 @@ def validate_recipe_inputs_outputs(
     if not recipe_outputs:
         has_step_outputs = False
         for step in steps:
+            resolved_step = resolve_recipe_step_with_kb(step, kb)
             # Check step-level outputs first
-            step_outputs = step.get("outputs", [])
+            step_outputs = resolved_step.get("outputs", [])
             if step_outputs:
                 has_step_outputs = True
                 break
 
-            # Check if process has outputs
-            process_id = step.get("process_id")
-            if process_id:
-                process = kb.get_process(process_id)
-                if process:
-                    # Get as dict if Pydantic model
-                    if hasattr(process, 'model_dump'):
-                        process_dict = process.model_dump()
-                    else:
-                        process_dict = process
+            # Boundary processes must have outputs (checked in process validation)
+            if resolved_step.get("process_type") == "boundary":
+                has_step_outputs = True
+                break
 
-                    # Boundary processes must have outputs (checked in process validation)
-                    if process_dict.get("process_type") == "boundary":
-                        has_step_outputs = True
-                        break
+            # Template processes are allowed to have no outputs (outputs defined in recipe)
+            if resolved_step.get("is_template"):
+                has_step_outputs = True
+                break
 
-                    # Template processes are allowed to have no outputs (outputs defined in recipe)
-                    if process_dict.get("is_template"):
-                        has_step_outputs = True
-                        break
-
-                    if process_dict.get("outputs", []):
-                        has_step_outputs = True
-                        break
+            if resolved_step.get("outputs", []):
+                has_step_outputs = True
+                break
 
         if not has_step_outputs:
             issues.append(ValidationIssue(
@@ -1149,20 +1130,10 @@ def validate_recipe_step_inputs(
         process_id = step.get("process_id")
         if not process_id:
             continue  # Already caught by schema validation
-
-        # Get process definition
-        process = kb.get_process(process_id)
-        if not process:
-            continue  # Already caught by process_not_found validation
-
-        # Get as dict if Pydantic model
-        if hasattr(process, 'model_dump'):
-            process_dict = process.model_dump()
-        else:
-            process_dict = process
+        resolved_step = resolve_recipe_step_with_kb(step, kb)
 
         # Skip boundary processes (no inputs required)
-        if process_dict.get("process_type") == "boundary":
+        if resolved_step.get("process_type") == "boundary":
             continue
 
         # Determine required inputs for this step
@@ -1170,7 +1141,7 @@ def validate_recipe_step_inputs(
         step_inputs = step.get("inputs", [])
 
         # Template processes MUST have step-level input overrides
-        if process_dict.get("is_template"):
+        if resolved_step.get("is_template"):
             if "inputs" not in step:
                 issues.append(ValidationIssue(
                     level=ValidationLevel.ERROR,
@@ -1192,7 +1163,7 @@ def validate_recipe_step_inputs(
             if step_inputs:
                 required_inputs = step_inputs
             else:
-                required_inputs = process_dict.get("inputs", [])
+                required_inputs = resolved_step.get("inputs", [])
 
         # Build set of available inputs for this step
         available_inputs = recipe_input_ids | bom_component_ids | accumulated_outputs
@@ -1227,12 +1198,12 @@ def validate_recipe_step_inputs(
                 ))
 
         # Add this step's outputs to accumulated outputs for next steps
-        for output in process_dict.get("outputs", []):
+        for output in resolved_step.get("outputs", []):
             output_id = output.get("item_id")
             if output_id:
                 accumulated_outputs.add(output_id)
 
-        for byproduct in process_dict.get("byproducts", []):
+        for byproduct in resolved_step.get("byproducts", []):
             byproduct_id = byproduct.get("item_id")
             if byproduct_id:
                 accumulated_outputs.add(byproduct_id)
