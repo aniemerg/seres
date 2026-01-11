@@ -15,11 +15,24 @@ Usage:
 """
 import sys
 import argparse
+import builtins
 from pathlib import Path
 
 
 def main():
     """Main CLI entry point."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(line_buffering=True, write_through=True)
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(line_buffering=True, write_through=True)
+    original_print = builtins.print
+
+    def unbuffered_print(*print_args, **print_kwargs):
+        print_kwargs.setdefault("flush", True)
+        return original_print(*print_args, **print_kwargs)
+
+    builtins.print = unbuffered_print
+
     parser = argparse.ArgumentParser(
         description="KB Core Tools - Indexing, Validation, and Auto-Fix",
         formatter_class=argparse.RawDescriptionHelpFormatter
@@ -236,8 +249,10 @@ def main():
         elif args.command == 'sim':
             from src.simulation.cli import run_sim_command
             from src.kb_core.kb_loader import KBLoader
+            print("Loading KB...", flush=True)
             kb_loader = KBLoader(Path('kb'), use_validated_models=False)
             kb_loader.load_all()
+            print("KB loaded.", flush=True)
             return run_sim_command(args, kb_loader)
 
     except Exception as e:

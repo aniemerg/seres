@@ -407,6 +407,7 @@ Notes:
 - Only `sim.*` commands are allowed.
 - `sim.use` sets the default `sim-id` for later steps.
 - `sim.reset` clears an existing sim directory and re-initializes it.
+- `sim.note` prints a runbook-friendly message with `style` (info, milestone, warning, success, note, dim).
 
 **Reference:** `docs/ADRs/022-simulation-runbooks.md`
 

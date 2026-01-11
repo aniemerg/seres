@@ -84,9 +84,9 @@ These commands are currently exposed by the simulation CLI (`src/simulation/cli.
 
 **References:** `docs/CLI_COMMANDS_GUIDE.md`, `docs/SIMULATION_GUIDE.md`, `src/simulation/cli.py`.
 
-## New Commands (Proposed)
+## Runbook-Only Commands
 
-These are required to support the runbook workflow but are not implemented yet:
+These are implemented in the runbook runner and are not standalone CLI subcommands:
 
 - `sim.use` — set a default `sim-id` for subsequent commands in the runbook.
   - Example: `sim.use --sim-id demo`
@@ -99,6 +99,12 @@ These are required to support the runbook workflow but are not implemented yet:
   - CLI parity: a new `sim reset` command should be added.
 
 These are CLI-accessible actions; the runbook runner must only invoke CLI behaviors.
+
+Additional runbook-only helper:
+
+- `sim.note` — emit a user-facing message to make runbooks more readable.
+  - Example: `sim.note --message "Begin regolith mining" --style milestone`
+  - Styles: `info`, `milestone`, `warning`, `success`, `note`, `dim`
 
 ## Execution Semantics
 

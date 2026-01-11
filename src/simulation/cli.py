@@ -38,6 +38,40 @@ KB_ROOT = REPO_ROOT / "kb"
 SIMULATIONS_DIR = REPO_ROOT / "simulations"
 
 
+# ============================================================================
+# Terminal output helpers
+# ============================================================================
+
+_COLOR_RESET = "\033[0m"
+_COLOR_DIM = "\033[38;2;68;68;68m"
+_COLOR_INFO = "\033[38;2;0;141;248m"
+_COLOR_SUCCESS = "\033[38;2;140;225;11m"
+_COLOR_WARN = "\033[38;2;255;185;0m"
+_COLOR_ERROR = "\033[38;2;255;0;15m"
+_COLOR_NOTE = "\033[38;2;0;216;235m"
+_COLOR_TIME = "\033[38;2;0;146;255m"
+_COLOR_ENERGY = "\033[38;2;255;210;66m"
+_COLOR_MASS = "\033[38;2;171;225;91m"
+
+
+def _color(text: str, color_code: str) -> str:
+    if not sys.stdout.isatty():
+        return text
+    return f"{color_code}{text}{_COLOR_RESET}"
+
+
+def _emit(message: str, color_code: Optional[str] = None, is_error: bool = False) -> None:
+    if color_code:
+        message = _color(message, color_code)
+    print(message, file=sys.stderr if is_error else sys.stdout, flush=True)
+
+
+def _emit_kv(label: str, value: str, color_code: Optional[str] = None, is_error: bool = False) -> None:
+    if color_code:
+        label = _color(label, color_code)
+    _emit(f"{label} {value}", is_error=is_error)
+
+
 def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = False) -> SimulationEngine:
     """
     Load existing simulation or create new one.
@@ -56,11 +90,11 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
     exists = snapshot_file.exists()
 
     if create and exists:
-        print(f"Error: Simulation '{sim_id}' already exists", file=sys.stderr)
+        _emit(f"Error: Simulation '{sim_id}' already exists", _COLOR_ERROR, is_error=True)
         sys.exit(1)
 
     if not create and not exists:
-        print(f"Error: Simulation '{sim_id}' not found", file=sys.stderr)
+        _emit(f"Error: Simulation '{sim_id}' not found", _COLOR_ERROR, is_error=True)
         sys.exit(1)
 
     # Create engine
@@ -70,7 +104,7 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
     if not create:
         success = engine.load()
         if not success:
-            print(f"Error: Failed to load simulation '{sim_id}'", file=sys.stderr)
+            _emit(f"Error: Failed to load simulation '{sim_id}'", _COLOR_ERROR, is_error=True)
             sys.exit(1)
 
     return engine
@@ -150,15 +184,30 @@ def _reset_simulation(sim_id: str, kb_loader: KBLoader) -> int:
 
 def cmd_runbook(args, kb_loader: KBLoader):
     """Execute a Markdown runbook with sim-runbook YAML blocks."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(line_buffering=True, write_through=True)
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(line_buffering=True, write_through=True)
+    import builtins
+    original_print = builtins.print
+
+    def runbook_print(*print_args, **print_kwargs):
+        print_kwargs.setdefault("flush", True)
+        return original_print(*print_args, **print_kwargs)
+
+    builtins.print = runbook_print
+
     runbook_path = Path(args.file)
     if not runbook_path.exists():
-        print(f"Error: runbook file not found: {runbook_path}", file=sys.stderr)
+        _emit(f"Error: runbook file not found: {runbook_path}", _COLOR_ERROR, is_error=True)
+        builtins.print = original_print
         return 1
 
     try:
         commands = _load_runbook_commands(runbook_path)
     except Exception as exc:
-        print(f"Error parsing runbook: {exc}", file=sys.stderr)
+        _emit(f"Error parsing runbook: {exc}", _COLOR_ERROR, is_error=True)
+        builtins.print = original_print
         return 1
 
     default_sim_id: Optional[str] = None
@@ -178,56 +227,80 @@ def cmd_runbook(args, kb_loader: KBLoader):
         "sim.visualize": cmd_visualize,
     }
 
-    for idx, entry in enumerate(commands, start=1):
-        cmd_name = entry.get("cmd")
-        cmd_args = entry.get("args") or {}
+    _emit(f"== Runbook: {runbook_path} ==", _COLOR_INFO)
+    try:
+        for idx, entry in enumerate(commands, start=1):
+            cmd_name = entry.get("cmd")
+            cmd_args = entry.get("args") or {}
 
-        if not cmd_name:
-            print(f"Error: missing cmd in runbook step {idx}", file=sys.stderr)
-            return 1
-        if not cmd_name.startswith("sim."):
-            print(f"Error: non-sim command in runbook step {idx}: {cmd_name}", file=sys.stderr)
-            return 1
-
-        if cmd_name == "sim.use":
-            sim_id = _get_arg(cmd_args, "sim-id", "sim_id")
-            if not sim_id:
-                print(f"Error: sim.use requires sim-id (step {idx})", file=sys.stderr)
+            if not cmd_name:
+                _emit(f"Error: missing cmd in runbook step {idx}", _COLOR_ERROR, is_error=True)
                 return 1
-            default_sim_id = sim_id
-            continue
-
-        if cmd_name == "sim.reset":
-            sim_id = _get_arg(cmd_args, "sim-id", "sim_id") or default_sim_id
-            if not sim_id:
-                print(f"Error: sim.reset requires sim-id (step {idx})", file=sys.stderr)
+            if not cmd_name.startswith("sim."):
+                _emit(f"Error: non-sim command in runbook step {idx}: {cmd_name}", _COLOR_ERROR, is_error=True)
                 return 1
-            if args.dry_run:
-                print(f"[dry-run] sim.reset --sim-id {sim_id}")
+
+            if cmd_name == "sim.use":
+                sim_id = _get_arg(cmd_args, "sim-id", "sim_id")
+                if not sim_id:
+                    _emit(f"Error: sim.use requires sim-id (step {idx})", _COLOR_ERROR, is_error=True)
+                    return 1
+                default_sim_id = sim_id
                 continue
-            result = _reset_simulation(sim_id, kb_loader)
+
+            if cmd_name == "sim.reset":
+                sim_id = _get_arg(cmd_args, "sim-id", "sim_id") or default_sim_id
+                if not sim_id:
+                    _emit(f"Error: sim.reset requires sim-id (step {idx})", _COLOR_ERROR, is_error=True)
+                    return 1
+                if args.dry_run:
+                    _emit(f"[dry-run] sim.reset --sim-id {sim_id}", _COLOR_DIM)
+                    continue
+                result = _reset_simulation(sim_id, kb_loader)
+                if result != 0 and not args.continue_on_error:
+                    return result
+                continue
+
+            if cmd_name == "sim.note":
+                message = _get_arg(cmd_args, "message", "msg")
+                style = _get_arg(cmd_args, "style") or "info"
+                if not message:
+                    _emit(f"Error: sim.note requires message (step {idx})", _COLOR_ERROR, is_error=True)
+                    return 1
+                color_map = {
+                    "info": _COLOR_INFO,
+                    "milestone": _COLOR_SUCCESS,
+                    "warning": _COLOR_WARN,
+                    "success": _COLOR_SUCCESS,
+                    "dim": _COLOR_DIM,
+                    "note": _COLOR_NOTE,
+                }
+                _emit(str(message), color_map.get(style, _COLOR_INFO))
+                continue
+
+            handler = command_map.get(cmd_name)
+            if handler is None:
+                _emit(f"Error: unsupported runbook command (step {idx}): {cmd_name}", _COLOR_ERROR, is_error=True)
+                return 1
+
+            normalized_args = { _normalize_arg_key(k): v for k, v in cmd_args.items() }
+            if "sim_id" not in normalized_args and default_sim_id:
+                normalized_args["sim_id"] = default_sim_id
+
+            if args.dry_run:
+                _emit(f"[dry-run] {cmd_name} {cmd_args}", _COLOR_DIM)
+                continue
+
+            result = handler(argparse.Namespace(**normalized_args), kb_loader)
             if result != 0 and not args.continue_on_error:
                 return result
-            continue
+            sys.stdout.flush()
+            sys.stderr.flush()
 
-        handler = command_map.get(cmd_name)
-        if handler is None:
-            print(f"Error: unsupported runbook command (step {idx}): {cmd_name}", file=sys.stderr)
-            return 1
-
-        normalized_args = { _normalize_arg_key(k): v for k, v in cmd_args.items() }
-        if "sim_id" not in normalized_args and default_sim_id:
-            normalized_args["sim_id"] = default_sim_id
-
-        if args.dry_run:
-            print(f"[dry-run] {cmd_name} {cmd_args}")
-            continue
-
-        result = handler(argparse.Namespace(**normalized_args), kb_loader)
-        if result != 0 and not args.continue_on_error:
-            return result
-
-    return 0
+        _emit("== Runbook complete ==", _COLOR_SUCCESS)
+        return 0
+    finally:
+        builtins.print = original_print
 
 # ============================================================================
 # Commands
@@ -239,17 +312,17 @@ def cmd_init(args, kb_loader: KBLoader):
     sim_dir = SIMULATIONS_DIR / args.sim_id
     snapshot_file = sim_dir / "snapshot.json"
     if snapshot_file.exists():
-        print(f"Error: Simulation '{args.sim_id}' already exists", file=sys.stderr)
+        _emit(f"Error: Simulation '{args.sim_id}' already exists", _COLOR_ERROR, is_error=True)
         return 1
 
     # Create new simulation
     engine = SimulationEngine(args.sim_id, kb_loader, sim_dir)
     engine.load()  # This will create the initial SimStartEvent for new sims
 
-    print(f"✓ Created simulation '{args.sim_id}'")
-    print(f"  Location: {engine.sim_dir}")
-    print(f"  Snapshot: {engine.snapshot_file}")
-    print(f"  Events: {engine.event_log_file}")
+    _emit(f"✓ Created simulation '{args.sim_id}'", _COLOR_SUCCESS)
+    _emit(f"  Location: {engine.sim_dir}", _COLOR_DIM)
+    _emit(f"  Snapshot: {engine.snapshot_file}", _COLOR_DIM)
+    _emit(f"  Events: {engine.event_log_file}", _COLOR_DIM)
     return 0
 
 
@@ -258,30 +331,30 @@ def cmd_view_state(args, kb_loader: KBLoader):
     engine = load_or_create_simulation(args.sim_id, kb_loader)
     state = engine.get_state_dict()
 
-    print(f"=== Simulation: {args.sim_id} ===")
-    print(f"Time: {state['current_time_hours']:.1f} hours ({state['current_time_hours']/24:.1f} days)")
-    print(f"Energy Consumed: {state.get('total_energy_kwh', 0.0):.2f} kWh")
+    _emit(f"=== Simulation: {args.sim_id} ===", _COLOR_INFO)
+    _emit_kv("Time:", f"{state['current_time_hours']:.1f} hours ({state['current_time_hours']/24:.1f} days)", _COLOR_TIME)
+    _emit_kv("Energy Consumed:", f"{state.get('total_energy_kwh', 0.0):.2f} kWh", _COLOR_ENERGY)
 
-    print(f"\nInventory ({len(state['inventory'])} items):")
+    _emit(f"\nInventory ({len(state['inventory'])} items):", _COLOR_NOTE)
     for item_id, inv in sorted(state['inventory'].items()):
-        print(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
+        _emit(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
 
     # Read active processes from scheduler (source of truth)
-    print(f"\nActive Processes ({len(engine.scheduler.active_processes)}):")
+    _emit(f"\nActive Processes ({len(engine.scheduler.active_processes)}):", _COLOR_NOTE)
     for process_run in engine.scheduler.active_processes.values():
         remaining = process_run.end_time - state['current_time_hours']
-        print(f"  {process_run.process_id} (ends at {process_run.end_time:.1f}h, {remaining:.1f}h remaining)")
+        _emit(f"  {process_run.process_id} (ends at {process_run.end_time:.1f}h, {remaining:.1f}h remaining)")
 
-    print(f"\nMachines Built ({len(state['machines_built'])}):")
+    _emit(f"\nMachines Built ({len(state['machines_built'])}):", _COLOR_NOTE)
     for machine in state['machines_built']:
-        print(f"  {machine}")
+        _emit(f"  {machine}")
 
-    print(f"\nTotal Imports ({len(state['total_imports'])} items):")
+    _emit(f"\nTotal Imports ({len(state['total_imports'])} items):", _COLOR_NOTE)
     total_mass = 0.0
     unknown_mass_count = 0
 
     for item_id, inv in sorted(state['total_imports'].items()):
-        print(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
+        _emit(f"  {item_id}: {inv['quantity']:.2f} {inv['unit']}")
 
         # Calculate mass contribution (Issue #10)
         if inv['unit'] == 'kg':
@@ -305,9 +378,9 @@ def cmd_view_state(args, kb_loader: KBLoader):
 
     # Display total with unknown count
     if unknown_mass_count > 0:
-        print(f"  Total imported mass: ~{total_mass:.1f} kg ({unknown_mass_count} items with unknown mass)")
+        _emit_kv("  Total imported mass:", f"~{total_mass:.1f} kg ({unknown_mass_count} items with unknown mass)", _COLOR_MASS)
     else:
-        print(f"  Total imported mass: ~{total_mass:.1f} kg")
+        _emit_kv("  Total imported mass:", f"~{total_mass:.1f} kg", _COLOR_MASS)
 
     return 0
 
@@ -319,11 +392,11 @@ def cmd_import(args, kb_loader: KBLoader):
     result = engine.import_item(args.item, args.quantity, args.unit)
 
     if result['success']:
-        print(f"✓ Imported {args.quantity} {args.unit} of '{args.item}'")
+        _emit(f"✓ Imported {args.quantity} {args.unit} of '{args.item}'", _COLOR_SUCCESS)
         engine.save()
         return 0
     else:
-        print(f"✗ Failed to import: {result.get('message', 'Unknown error')}", file=sys.stderr)
+        _emit(f"✗ Failed to import: {result.get('message', 'Unknown error')}", _COLOR_ERROR, is_error=True)
         return 1
 
 
@@ -345,19 +418,19 @@ def cmd_start_process(args, kb_loader: KBLoader):
         duration = result.get('duration_hours', 0.0)
         calculated = result.get('duration_calculated', False)
         duration_source = "(calculated)" if calculated else "(provided)"
-        print(f"✓ Started process '{args.process}'")
-        print(f"  Duration: {duration:.2f} hours {duration_source}")
-        print(f"  Ends at: {result.get('ends_at', 0.0):.2f} hours")
+        _emit(f"✓ Started process '{args.process}'", _COLOR_SUCCESS)
+        _emit_kv("  Duration:", f"{duration:.2f} hours {duration_source}", _COLOR_TIME)
+        _emit_kv("  Ends at:", f"{result.get('ends_at', 0.0):.2f} hours", _COLOR_TIME)
         if 'energy_kwh' in result:
-            print(f"  Energy: {result['energy_kwh']:.2f} kWh")
+            _emit_kv("  Energy:", f"{result['energy_kwh']:.2f} kWh", _COLOR_ENERGY)
         engine.save()
         return 0
     else:
-        print(f"✗ Failed to start process: {result.get('message', 'Unknown error')}", file=sys.stderr)
+        _emit(f"✗ Failed to start process: {result.get('message', 'Unknown error')}", _COLOR_ERROR, is_error=True)
         if 'validation_errors' in result:
-            print("\nValidation errors:", file=sys.stderr)
+            _emit("\nValidation errors:", _COLOR_WARN, is_error=True)
             for err in result['validation_errors']:
-                print(f"  - {err['message']}", file=sys.stderr)
+                _emit(f"  - {err['message']}", _COLOR_WARN, is_error=True)
         return 1
 
 
@@ -368,14 +441,14 @@ def cmd_run_recipe(args, kb_loader: KBLoader):
     result = engine.run_recipe(args.recipe, args.quantity)
 
     if result['success']:
-        print(f"✓ Started recipe '{args.recipe}' (quantity: {args.quantity})")
-        print(f"  Steps: {result.get('total_steps', 0)}")
-        print(f"  Duration: {result.get('total_duration_hours', 0.0):.2f} hours")
-        print(f"  Ends at: {result.get('ends_at', 0.0):.2f} hours")
+        _emit(f"✓ Started recipe '{args.recipe}' (quantity: {args.quantity})", _COLOR_SUCCESS)
+        _emit_kv("  Steps:", f"{result.get('total_steps', 0)}", _COLOR_TIME)
+        _emit_kv("  Duration:", f"{result.get('total_duration_hours', 0.0):.2f} hours", _COLOR_TIME)
+        _emit_kv("  Ends at:", f"{result.get('ends_at', 0.0):.2f} hours", _COLOR_TIME)
         engine.save()
         return 0
     else:
-        print(f"✗ Failed to run recipe: {result.get('message', 'Unknown error')}", file=sys.stderr)
+        _emit(f"✗ Failed to run recipe: {result.get('message', 'Unknown error')}", _COLOR_ERROR, is_error=True)
         return 1
 
 
@@ -951,15 +1024,15 @@ def cmd_advance_time(args, kb_loader: KBLoader):
 
     result = engine.advance_time(args.hours)
 
-    print(f"✓ Advanced time by {args.hours} hours")
-    print(f"  New time: {result['new_time']:.2f} hours ({result['new_time']/24:.1f} days)")
-    print(f"  Processes completed: {result['completed_count']}")
-    print(f"  Total energy consumed: {result['total_energy_kwh']:.2f} kWh")
+    _emit(f"✓ Advanced time by {args.hours} hours", _COLOR_SUCCESS)
+    _emit_kv("  New time:", f"{result['new_time']:.2f} hours ({result['new_time']/24:.1f} days)", _COLOR_TIME)
+    _emit_kv("  Processes completed:", f"{result['completed_count']}")
+    _emit_kv("  Total energy consumed:", f"{result['total_energy_kwh']:.2f} kWh", _COLOR_ENERGY)
 
     if result['completed']:
-        print(f"\nCompleted processes:")
+        _emit("\nCompleted processes:", _COLOR_NOTE)
         for proc in result['completed']:
-            print(f"  - {proc['process_id']} (energy: {proc.get('energy_kwh', 0.0):.2f} kWh)")
+            _emit(f"  - {proc['process_id']} (energy: {proc.get('energy_kwh', 0.0):.2f} kWh)")
             if proc.get('outputs'):
                 output_units = {}
                 process_model = kb_loader.get_process(proc["process_id"])
@@ -974,7 +1047,7 @@ def cmd_advance_time(args, kb_loader: KBLoader):
                     else:
                         qty = inv_item.quantity if hasattr(inv_item, 'quantity') else inv_item['quantity']
                         unit = inv_item.unit if hasattr(inv_item, 'unit') else inv_item['unit']
-                    print(f"      → {item_id}: {qty:.2f} {unit}")
+                    _emit(f"      → {item_id}: {qty:.2f} {unit}")
 
     engine.save()
     return 0
@@ -1055,36 +1128,36 @@ def cmd_status(args, kb_loader: KBLoader):
     completed_recipes = schedule.get("completed_recipes", 0)
     next_event_time = schedule.get("next_event_time")
 
-    print(f"=== Simulation: {args.sim_id} ===")
-    print(f"Time: {time_hours:.2f} hours ({days:.2f} days)")
-    print(f"Energy: {total_energy:.2f} kWh")
-    print(f"Inventory items: {inventory_count}")
-    print(f"Machines built: {machines_built_count}")
-    print(f"Imports tracked: {imports_count}")
+    _emit(f"=== Simulation: {args.sim_id} ===", _COLOR_INFO)
+    _emit_kv("Time:", f"{time_hours:.2f} hours ({days:.2f} days)", _COLOR_TIME)
+    _emit_kv("Energy:", f"{total_energy:.2f} kWh", _COLOR_ENERGY)
+    _emit_kv("Inventory items:", f"{inventory_count}")
+    _emit_kv("Machines built:", f"{machines_built_count}")
+    _emit_kv("Imports tracked:", f"{imports_count}")
     if import_unknown_mass > 0:
-        print(f"Imported mass: ~{import_mass:.2f} kg ({import_unknown_mass} unknown)")
+        _emit_kv("Imported mass:", f"~{import_mass:.2f} kg ({import_unknown_mass} unknown)", _COLOR_MASS)
     else:
-        print(f"Imported mass: ~{import_mass:.2f} kg")
+        _emit_kv("Imported mass:", f"~{import_mass:.2f} kg", _COLOR_MASS)
     if inventory_unknown_mass > 0:
-        print(f"Inventory mass: ~{inventory_mass:.2f} kg ({inventory_unknown_mass} unknown)")
+        _emit_kv("Inventory mass:", f"~{inventory_mass:.2f} kg ({inventory_unknown_mass} unknown)", _COLOR_MASS)
     else:
-        print(f"Inventory mass: ~{inventory_mass:.2f} kg")
+        _emit_kv("Inventory mass:", f"~{inventory_mass:.2f} kg", _COLOR_MASS)
     if inventory_volume > 0 or inventory_unknown_volume > 0:
         if inventory_unknown_volume > 0:
-            print(f"Inventory volume: ~{inventory_volume:.3f} m3 ({inventory_unknown_volume} unknown)")
+            _emit_kv("Inventory volume:", f"~{inventory_volume:.3f} m3 ({inventory_unknown_volume} unknown)")
         else:
-            print(f"Inventory volume: ~{inventory_volume:.3f} m3")
+            _emit_kv("Inventory volume:", f"~{inventory_volume:.3f} m3")
     if inventory_unit_total > 0:
-        print(f"Inventory count: ~{inventory_unit_total:.2f} units")
-    print(f"Processes: {active_processes} active, {completed_processes} completed")
-    print(f"Recipes: {active_recipes} active, {completed_recipes} completed")
-    print(f"Events queued: {queued_events}")
+        _emit_kv("Inventory count:", f"~{inventory_unit_total:.2f} units")
+    _emit_kv("Processes:", f"{active_processes} active, {completed_processes} completed")
+    _emit_kv("Recipes:", f"{active_recipes} active, {completed_recipes} completed")
+    _emit_kv("Events queued:", f"{queued_events}")
     if next_event_time is None:
-        print("Next event time: none")
+        _emit("Next event time: none")
     else:
-        print(f"Next event time: {next_event_time:.2f} hours")
-    print(f"Snapshot: {engine.snapshot_file}")
-    print(f"Events: {engine.event_log_file}")
+        _emit_kv("Next event time:", f"{next_event_time:.2f} hours", _COLOR_TIME)
+    _emit_kv("Snapshot:", f"{engine.snapshot_file}")
+    _emit_kv("Events:", f"{engine.event_log_file}")
 
     return 0
 
