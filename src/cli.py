@@ -251,8 +251,7 @@ def main():
             from src.kb_core.kb_loader import KBLoader
             print("Loading KB...", flush=True)
             kb_loader = KBLoader(Path('kb'), use_validated_models=False)
-            kb_loader.load_all()
-            print("KB loaded.", flush=True)
+            print("KB loader ready.", flush=True)
             return run_sim_command(args, kb_loader)
 
     except Exception as e:

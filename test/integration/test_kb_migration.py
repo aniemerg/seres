@@ -61,7 +61,8 @@ def test_process_with_batch_time_model(kb_loader, sim_dir):
     )
 
     assert result["success"] is True
-    assert result["duration_hours"] == pytest.approx(1.5, rel=0.01)
+    # metal_forming_basic_v0 outputs 0.95 kg per batch, so 1.0 kg scales by 1/0.95
+    assert result["duration_hours"] == pytest.approx(1.5 * (1.0 / 0.95), rel=0.01)
 
 
 def test_energy_calculation_per_unit(kb_loader, sim_dir):

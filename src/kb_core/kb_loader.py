@@ -60,6 +60,7 @@ class KBLoader:
         self._processes: Optional[Dict[str, Any]] = {} if cache_enabled else None
         self._recipes: Optional[Dict[str, Any]] = {} if cache_enabled else None
         self._items: Optional[Dict[str, Any]] = {} if cache_enabled else None
+        self._recipe_index: Optional[Dict[str, Path]] = None
 
         # Eager-loaded indexes (populated by load_all())
         self.processes: Dict[str, Any] = {}
@@ -68,6 +69,9 @@ class KBLoader:
         self.boms: Dict[str, Any] = {}
         self.units: Dict[str, Any] = {}
         self.materials: Dict[str, Any] = {}
+        self._boms_loaded = False
+        self._units_loaded = False
+        self._materials_loaded = False
 
         # Error tracking
         self.load_errors: List[str] = []
@@ -160,6 +164,7 @@ class KBLoader:
         """Load all BOMs from kb/boms/*.yaml"""
         boms_dir = self.kb_root / "boms"
         if not boms_dir.exists():
+            self._boms_loaded = True
             return
 
         for bom_file in boms_dir.glob("*.yaml"):
@@ -175,6 +180,7 @@ class KBLoader:
                     self.boms[machine_id] = data
             except Exception as e:
                 self.load_errors.append(f"Failed to load BOM {bom_file.name}: {e}")
+        self._boms_loaded = True
 
     def load_units(self) -> None:
         """Load unit definitions from kb/units/units.yaml"""
@@ -207,6 +213,7 @@ class KBLoader:
                     {"from": "unit", "to": "count", "factor": 1.0},
                 ]
             }
+            self._units_loaded = True
             return
 
         try:
@@ -214,6 +221,7 @@ class KBLoader:
         except Exception as e:
             self.load_errors.append(f"Failed to load units: {e}")
             self.units = {}
+        self._units_loaded = True
 
     def load_material_properties(self) -> None:
         """Load material properties from kb/materials/properties.yaml"""
@@ -227,6 +235,7 @@ class KBLoader:
                     "water": {"density_kg_per_m3": 1000},
                 }
             }
+            self._materials_loaded = True
             return
 
         try:
@@ -234,6 +243,7 @@ class KBLoader:
         except Exception as e:
             self.load_errors.append(f"Failed to load material properties: {e}")
             self.materials = {}
+        self._materials_loaded = True
 
     # =========================================================================
     # Lazy Loading (for simulation)
@@ -293,7 +303,9 @@ class KBLoader:
         # Lazy load from file
         recipe_file = self.kb_root / "recipes" / f"{recipe_id}.yaml"
         if not recipe_file.exists():
-            return None
+            recipe_file = self._find_recipe_file(recipe_id)
+            if recipe_file is None:
+                return None
 
         try:
             data = self._load_yaml_file(recipe_file)
@@ -306,6 +318,27 @@ class KBLoader:
         except Exception as e:
             self.load_errors.append(f"Failed to lazy-load recipe {recipe_id}: {e}")
             return None
+
+    def _find_recipe_file(self, recipe_id: str) -> Optional[Path]:
+        """
+        Find recipe file by scanning recipe IDs (fallback for mismatched filenames).
+        """
+        if self._recipe_index is None:
+            self._recipe_index = {}
+            recipes_dir = self.kb_root / "recipes"
+            if not recipes_dir.exists():
+                return None
+            for recipe_file in recipes_dir.glob("*.yaml"):
+                try:
+                    data = self._load_yaml_file(recipe_file)
+                    if not data:
+                        continue
+                    rid = data.get("id", recipe_file.stem)
+                    if isinstance(rid, str):
+                        self._recipe_index[rid] = recipe_file
+                except Exception as e:
+                    self.load_errors.append(f"Failed to index recipe {recipe_file.name}: {e}")
+        return self._recipe_index.get(recipe_id)
 
     def get_item(self, item_id: str) -> Optional[Any]:
         """
@@ -361,6 +394,8 @@ class KBLoader:
 
     def get_bom(self, machine_id: str) -> Optional[dict]:
         """Get BOM definition or None if not found."""
+        if not self._boms_loaded:
+            self.load_boms()
         return self.boms.get(machine_id)
 
     # =========================================================================
@@ -369,12 +404,16 @@ class KBLoader:
 
     def get_material_density(self, material_name: str) -> Optional[float]:
         """Get material density in kg/m³ or None if not found."""
+        if not self._materials_loaded:
+            self.load_material_properties()
         props = self.materials.get("material_properties", {})
         material_data = props.get(material_name, {})
         return material_data.get("density_kg_per_m3")
 
     def get_unit_conversion(self, from_unit: str, to_unit: str) -> Optional[float]:
         """Get conversion factor from_unit -> to_unit, or None if not found."""
+        if not self._units_loaded:
+            self.load_units()
         conversions = self.units.get("conversions", [])
         for conv in conversions:
             if conv.get("from") == from_unit and conv.get("to") == to_unit:
