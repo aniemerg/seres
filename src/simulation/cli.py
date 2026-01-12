@@ -182,35 +182,34 @@ def _reset_simulation(sim_id: str, kb_loader: KBLoader) -> int:
 # Runbook command
 # ============================================================================
 
-def cmd_runbook(args, kb_loader: KBLoader):
-    """Execute a Markdown runbook with sim-runbook YAML blocks."""
-    if hasattr(sys.stdout, "reconfigure"):
-        sys.stdout.reconfigure(line_buffering=True, write_through=True)
-    if hasattr(sys.stderr, "reconfigure"):
-        sys.stderr.reconfigure(line_buffering=True, write_through=True)
-    import builtins
-    original_print = builtins.print
-
-    def runbook_print(*print_args, **print_kwargs):
-        print_kwargs.setdefault("flush", True)
-        return original_print(*print_args, **print_kwargs)
-
-    builtins.print = runbook_print
-
-    runbook_path = Path(args.file)
+def _run_runbook(
+    runbook_path: Path,
+    kb_loader: KBLoader,
+    *,
+    default_sim_id: Optional[str],
+    stack: list[Path],
+    allow_control: bool,
+    dry_run: bool,
+    continue_on_error: bool,
+) -> int:
     if not runbook_path.exists():
         _emit(f"Error: runbook file not found: {runbook_path}", _COLOR_ERROR, is_error=True)
-        builtins.print = original_print
+        return 1
+
+    resolved_path = runbook_path.resolve()
+    if resolved_path in stack:
+        _emit(f"Error: runbook cycle detected at {runbook_path}", _COLOR_ERROR, is_error=True)
+        return 1
+    if len(stack) >= 10:
+        _emit("Error: runbook nesting too deep (max 10)", _COLOR_ERROR, is_error=True)
         return 1
 
     try:
         commands = _load_runbook_commands(runbook_path)
     except Exception as exc:
         _emit(f"Error parsing runbook: {exc}", _COLOR_ERROR, is_error=True)
-        builtins.print = original_print
         return 1
 
-    default_sim_id: Optional[str] = None
     command_map = {
         "sim.init": cmd_init,
         "sim.scaffold": cmd_scaffold,
@@ -228,6 +227,7 @@ def cmd_runbook(args, kb_loader: KBLoader):
     }
 
     _emit(f"== Runbook: {runbook_path} ==", _COLOR_INFO)
+    stack.append(resolved_path)
     try:
         for idx, entry in enumerate(commands, start=1):
             cmd_name = entry.get("cmd")
@@ -240,7 +240,28 @@ def cmd_runbook(args, kb_loader: KBLoader):
                 _emit(f"Error: non-sim command in runbook step {idx}: {cmd_name}", _COLOR_ERROR, is_error=True)
                 return 1
 
+            if cmd_name == "sim.runbook":
+                child_file = _get_arg(cmd_args, "file", "path")
+                if not child_file:
+                    _emit(f"Error: sim.runbook requires file (step {idx})", _COLOR_ERROR, is_error=True)
+                    return 1
+                child_path = (runbook_path.parent / child_file).resolve()
+                result = _run_runbook(
+                    child_path,
+                    kb_loader,
+                    default_sim_id=default_sim_id,
+                    stack=stack,
+                    allow_control=False,
+                    dry_run=dry_run,
+                    continue_on_error=continue_on_error,
+                )
+                if result != 0 and not continue_on_error:
+                    return result
+                continue
+
             if cmd_name == "sim.use":
+                if not allow_control:
+                    continue
                 sim_id = _get_arg(cmd_args, "sim-id", "sim_id")
                 if not sim_id:
                     _emit(f"Error: sim.use requires sim-id (step {idx})", _COLOR_ERROR, is_error=True)
@@ -249,15 +270,17 @@ def cmd_runbook(args, kb_loader: KBLoader):
                 continue
 
             if cmd_name == "sim.reset":
+                if not allow_control:
+                    continue
                 sim_id = _get_arg(cmd_args, "sim-id", "sim_id") or default_sim_id
                 if not sim_id:
                     _emit(f"Error: sim.reset requires sim-id (step {idx})", _COLOR_ERROR, is_error=True)
                     return 1
-                if args.dry_run:
+                if dry_run:
                     _emit(f"[dry-run] sim.reset --sim-id {sim_id}", _COLOR_DIM)
                     continue
                 result = _reset_simulation(sim_id, kb_loader)
-                if result != 0 and not args.continue_on_error:
+                if result != 0 and not continue_on_error:
                     return result
                 continue
 
@@ -283,22 +306,53 @@ def cmd_runbook(args, kb_loader: KBLoader):
                 _emit(f"Error: unsupported runbook command (step {idx}): {cmd_name}", _COLOR_ERROR, is_error=True)
                 return 1
 
-            normalized_args = { _normalize_arg_key(k): v for k, v in cmd_args.items() }
+            normalized_args = {_normalize_arg_key(k): v for k, v in cmd_args.items()}
             if "sim_id" not in normalized_args and default_sim_id:
                 normalized_args["sim_id"] = default_sim_id
 
-            if args.dry_run:
+            if dry_run:
                 _emit(f"[dry-run] {cmd_name} {cmd_args}", _COLOR_DIM)
                 continue
 
             result = handler(argparse.Namespace(**normalized_args), kb_loader)
-            if result != 0 and not args.continue_on_error:
+            if result != 0 and not continue_on_error:
                 return result
             sys.stdout.flush()
             sys.stderr.flush()
 
-        _emit("== Runbook complete ==", _COLOR_SUCCESS)
+        if len(stack) == 1:
+            _emit("== Runbook complete ==", _COLOR_SUCCESS)
         return 0
+    finally:
+        stack.pop()
+
+
+def cmd_runbook(args, kb_loader: KBLoader):
+    """Execute a Markdown runbook with sim-runbook YAML blocks."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(line_buffering=True, write_through=True)
+    if hasattr(sys.stderr, "reconfigure"):
+        sys.stderr.reconfigure(line_buffering=True, write_through=True)
+    import builtins
+    original_print = builtins.print
+
+    def runbook_print(*print_args, **print_kwargs):
+        print_kwargs.setdefault("flush", True)
+        return original_print(*print_args, **print_kwargs)
+
+    builtins.print = runbook_print
+
+    runbook_path = Path(args.file)
+    try:
+        return _run_runbook(
+            runbook_path,
+            kb_loader,
+            default_sim_id=None,
+            stack=[],
+            allow_control=True,
+            dry_run=args.dry_run,
+            continue_on_error=args.continue_on_error,
+        )
     finally:
         builtins.print = original_print
 
@@ -389,7 +443,45 @@ def cmd_import(args, kb_loader: KBLoader):
     """Import an item from Earth."""
     engine = load_or_create_simulation(args.sim_id, kb_loader)
 
-    result = engine.import_item(args.item, args.quantity, args.unit)
+    if getattr(args, "ensure", False):
+        current_qty = 0.0
+        if args.item in engine.state.inventory:
+            existing = engine.state.inventory[args.item]
+            if existing.unit == args.unit:
+                current_qty = existing.quantity
+            else:
+                converted = engine.converter.convert(
+                    existing.quantity, existing.unit, args.unit, args.item
+                )
+                if converted is None:
+                    _emit(
+                        f"✗ Failed to import: incompatible units for '{args.item}' "
+                        f"({existing.unit} -> {args.unit})",
+                        _COLOR_ERROR,
+                        is_error=True,
+                    )
+                    return 1
+                current_qty = converted
+
+        import_qty = max(0.0, args.quantity - current_qty)
+        if import_qty <= 0:
+            _emit(
+                f"↷ Skipped import for '{args.item}' (have {current_qty:.2f} {args.unit})",
+                _COLOR_NOTE,
+            )
+            return 0
+
+        result = engine.import_item(args.item, import_qty, args.unit)
+        if result["success"]:
+            _emit(
+                f"✓ Imported {import_qty:.2f} {args.unit} of '{args.item}' "
+                f"(had {current_qty:.2f} {args.unit})",
+                _COLOR_SUCCESS,
+            )
+            engine.save()
+            return 0
+    else:
+        result = engine.import_item(args.item, args.quantity, args.unit)
 
     if result['success']:
         _emit(f"✓ Imported {args.quantity} {args.unit} of '{args.item}'", _COLOR_SUCCESS)
@@ -1266,6 +1358,11 @@ def add_sim_subcommands(subparsers):
     import_parser.add_argument('--item', required=True, help='Item ID')
     import_parser.add_argument('--quantity', type=float, required=True, help='Quantity')
     import_parser.add_argument('--unit', required=True, help='Unit')
+    import_parser.add_argument(
+        '--ensure',
+        action='store_true',
+        help='Import only the missing amount to reach the requested quantity',
+    )
 
     # start-process
     start_parser = sim_subparsers.add_parser('start-process', help='Start a process')

@@ -110,6 +110,11 @@ python -m src.cli sim import --sim-id <name> --item <item_id> --quantity <n> --u
 python -m src.cli sim import --sim-id lunar_base_001 --item steel_plate --quantity 100 --unit kg
 ```
 
+**Ensure a minimum quantity:**
+```bash
+python -m src.cli sim import --sim-id lunar_base_001 --item steel_plate --quantity 100 --unit kg --ensure
+```
+
 **Notes:**
 - Imports are tracked separately (shown in `total_imports`)
 - Use for bootstrap items that can't be manufactured yet
@@ -408,6 +413,7 @@ Notes:
 - `sim.use` sets the default `sim-id` for later steps.
 - `sim.reset` clears an existing sim directory and re-initializes it.
 - `sim.note` prints a runbook-friendly message with `style` (info, milestone, warning, success, note, dim).
+- `sim.runbook` runs another runbook; child runbooks ignore `sim.use` and `sim.reset`.
 
 **Reference:** `docs/ADRs/022-simulation-runbooks.md`
 

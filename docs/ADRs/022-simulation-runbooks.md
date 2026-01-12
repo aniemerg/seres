@@ -120,6 +120,8 @@ Runner behavior:
 - `--continue-on-error` is optional for best-effort runs.
 - Each command is executed via the same handlers as the CLI.
 - The simulation engine loads/saves state per command (no special shortcuts).
+- Nested runbooks are allowed via `sim.runbook`; child runbooks ignore `sim.use` and `sim.reset`.
+- Cycle detection prevents a runbook from calling itself (max depth 10).
 
 ## Example Runbook
 
@@ -135,6 +137,9 @@ This runbook bootstraps a minimal simulation and runs a short process.
 - cmd: sim.reset
   args:
     sim-id: demo
+- cmd: sim.runbook
+  args:
+    file: runbooks/bootstrap.md
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
