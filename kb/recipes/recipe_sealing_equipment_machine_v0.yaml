@@ -1,0 +1,62 @@
+id: recipe_sealing_equipment_machine_v0
+kind: recipe
+target_item_id: sealing_equipment
+variant_id: v0
+inputs:
+  - item_id: machine_frame_small
+    qty: 1
+    unit: unit
+  - item_id: heating_element_set_basic
+    qty: 1
+    unit: unit
+  - item_id: vacuum_pump_small
+    qty: 1
+    unit: unit
+  - item_id: pressure_control_valve_set
+    qty: 1
+    unit: unit
+  - item_id: sealing_bar_assembly
+    qty: 1
+    unit: unit
+  - item_id: control_circuit_board_basic
+    qty: 1
+    unit: unit
+  - item_id: power_supply_low_voltage
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: sealing_equipment
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1
+        unit: unit
+      - item_id: heating_element_set_basic
+        qty: 1
+        unit: unit
+      - item_id: vacuum_pump_small
+        qty: 1
+        unit: unit
+      - item_id: pressure_control_valve_set
+        qty: 1
+        unit: unit
+      - item_id: sealing_bar_assembly
+        qty: 1
+        unit: unit
+      - item_id: control_circuit_board_basic
+        qty: 1
+        unit: unit
+      - item_id: power_supply_low_voltage
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: sealing_equipment
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Assemble sealing equipment from frame, sealing bar, vacuum and control subsystems"
+notes: "Assembly recipe for sealing_equipment based on bom_sealing_equipment_v0 components."

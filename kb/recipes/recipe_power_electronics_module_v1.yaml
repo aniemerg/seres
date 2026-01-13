@@ -68,14 +68,22 @@ steps:
     machine_hours: 3.0
     notes: "Assemble power PCB with microcontroller, gate drivers, sensing circuits"
   - process_id: power_component_assembly_v0
+    inputs:
+      - item_id: electronic_components_set
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: electronic_component_or_module
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install power MOSFETs, inductors, capacitors, transformers"
   - process_id: heat_sink_installation_v0
     inputs:
-      - item_id: electronic_component_or_module
-        qty: 1.0
-        unit: unit
+      - item_id: electronic_components_set
+        qty: 2.0
+        unit: kg
       - item_id: heat_sink_assembly_large
         qty: 4.0
         unit: kg

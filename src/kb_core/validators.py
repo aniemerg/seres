@@ -18,6 +18,7 @@ from .unit_converter import (
     UnitConverter,
     parse_compound_unit,
     is_valid_unit,
+    COUNT_UNITS,
 )
 from .override_resolver import resolve_recipe_step_with_kb
 
@@ -86,9 +87,111 @@ def _get_entity_id(entity: Any) -> str:
         return 'unknown'
 
 
+def _get_entity_dict(entity: Any) -> Dict[str, Any]:
+    """Normalize Pydantic model or dict into a dict."""
+    if hasattr(entity, 'model_dump'):
+        return entity.model_dump()
+    return entity
+
+
 # =============================================================================
 # Schema Validation (Category 1)
 # =============================================================================
+
+def validate_item(item: Any) -> List[ValidationIssue]:
+    """
+    Validate item schema and unit-kind consistency.
+
+    Rules:
+    - unit_kind must be present and valid (WARNING if missing, ERROR if invalid)
+    - discrete items must use count-like units and define mass (ERROR)
+    - bulk items must not use count-like units (ERROR)
+    """
+    issues = []
+    item_id = _get_entity_id(item)
+    item_dict = _get_entity_dict(item)
+
+    unit_kind = item_dict.get("unit_kind")
+    unit = item_dict.get("unit")
+    mass = item_dict.get("mass")
+    mass_kg = item_dict.get("mass_kg")
+
+    if not unit_kind:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.WARNING,
+            category="item",
+            rule="unit_kind_missing",
+            entity_type="item",
+            entity_id=item_id,
+            message="Missing unit_kind (expected 'discrete' or 'bulk')",
+            field_path="unit_kind",
+            fix_hint="Add unit_kind: discrete for countable parts or unit_kind: bulk for bulk materials"
+        ))
+
+    if unit_kind and unit_kind not in {"discrete", "bulk"}:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="item",
+            rule="unit_kind_invalid",
+            entity_type="item",
+            entity_id=item_id,
+            message=f"Invalid unit_kind '{unit_kind}' (expected 'discrete' or 'bulk')",
+            field_path="unit_kind",
+            fix_hint="Set unit_kind to 'discrete' or 'bulk'"
+        ))
+        return issues
+
+    if not unit:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="item",
+            rule="unit_missing",
+            entity_type="item",
+            entity_id=item_id,
+            message="Missing unit for item",
+            field_path="unit",
+            fix_hint="Add a unit such as 'unit' for discrete parts or 'kg' for bulk materials"
+        ))
+        return issues
+
+    if unit_kind == "discrete":
+        if unit not in COUNT_UNITS:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="unit_kind_discrete_unit_mismatch",
+                entity_type="item",
+                entity_id=item_id,
+                message=f"Discrete item uses non-count unit '{unit}'",
+                field_path="unit",
+                fix_hint="Use unit: unit (or count/set/kit) for discrete items"
+            ))
+        if mass is None and mass_kg is None:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="unit_kind_discrete_missing_mass",
+                entity_type="item",
+                entity_id=item_id,
+                message="Discrete item missing mass_kg (mass per unit)",
+                field_path="mass_kg",
+                fix_hint="Add mass_kg (or mass) as mass per unit for this discrete item"
+            ))
+
+    if unit_kind == "bulk":
+        if unit in COUNT_UNITS:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="item",
+                rule="unit_kind_bulk_unit_mismatch",
+                entity_type="item",
+                entity_id=item_id,
+                message=f"Bulk item uses count unit '{unit}'",
+                field_path="unit",
+                fix_hint="Use unit: kg (or another continuous unit) for bulk items"
+            ))
+
+    return issues
 
 def validate_process_schema(process: Any) -> List[ValidationIssue]:
     """
@@ -1211,6 +1314,164 @@ def validate_recipe_step_inputs(
     return issues
 
 
+def validate_recipe_target_produced(
+    recipe: Any,
+    kb: Any,
+    converter: UnitConverter
+) -> List[ValidationIssue]:
+    """
+    Validate that at least one step produces the recipe target item.
+
+    Rule:
+    - At least one resolved step output/byproduct must match target_item_id.
+    - If units differ, conversion must be possible.
+    """
+    issues = []
+    recipe_id = _get_entity_id(recipe)
+    recipe_dict = _get_entity_dict(recipe)
+
+    target_item_id = recipe_dict.get("target_item_id")
+    if not target_item_id:
+        return issues
+
+    steps = recipe_dict.get("steps", []) or []
+    recipe_outputs = recipe_dict.get("outputs", []) or []
+
+    target_unit = None
+    for output in recipe_outputs:
+        if output.get("item_id") == target_item_id:
+            target_unit = output.get("unit")
+            break
+
+    if not target_unit:
+        target_item = kb.get_item(target_item_id)
+        if target_item:
+            target_dict = _get_entity_dict(target_item)
+            target_unit = target_dict.get("unit")
+
+    produced = False
+    unit_mismatch = False
+
+    for step_idx, step in enumerate(steps):
+        resolved_step = resolve_recipe_step_with_kb(step, kb)
+        step_outputs = (resolved_step.get("outputs", []) or []) + (
+            resolved_step.get("byproducts", []) or []
+        )
+        for output in step_outputs:
+            if output.get("item_id") != target_item_id:
+                continue
+            produced = True
+            output_unit = output.get("unit")
+            if target_unit and output_unit and output_unit != target_unit:
+                if not converter.can_convert(output_unit, target_unit, item_id=target_item_id):
+                    unit_mismatch = True
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="recipe",
+                        rule="recipe_target_unit_not_convertible",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=(
+                            f"Step {step_idx} outputs target '{target_item_id}' in '{output_unit}', "
+                            f"cannot convert to target unit '{target_unit}'"
+                        ),
+                        field_path=f"steps[{step_idx}].outputs",
+                        fix_hint="Align step output unit with target unit or add a convertible mass_kg"
+                    ))
+
+    if not produced:
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="recipe",
+            rule="recipe_target_not_produced",
+            entity_type="recipe",
+            entity_id=recipe_id,
+            message=f"No step produces target_item_id '{target_item_id}'",
+            field_path="steps",
+            fix_hint="Add or override a step output to produce the target item"
+        ))
+
+    return issues
+
+
+def validate_recipe_unit_convertibility(
+    recipe: Any,
+    kb: Any,
+    converter: UnitConverter
+) -> List[ValidationIssue]:
+    """
+    Validate unit convertibility between recipe-level quantities and step-level quantities.
+    """
+    issues = []
+    recipe_id = _get_entity_id(recipe)
+    recipe_dict = _get_entity_dict(recipe)
+
+    recipe_inputs = recipe_dict.get("inputs", []) or []
+    recipe_outputs = recipe_dict.get("outputs", []) or []
+    steps = recipe_dict.get("steps", []) or []
+
+    def _unit_map(quantities: List[dict]) -> Dict[str, str]:
+        mapping = {}
+        for qty in quantities:
+            item_id = qty.get("item_id")
+            unit = qty.get("unit")
+            if item_id and unit:
+                mapping[item_id] = unit
+        return mapping
+
+    recipe_input_units = _unit_map(recipe_inputs)
+    recipe_output_units = _unit_map(recipe_outputs)
+
+    for step_idx, step in enumerate(steps):
+        resolved_step = resolve_recipe_step_with_kb(step, kb)
+
+        for step_input in resolved_step.get("inputs", []) or []:
+            item_id = step_input.get("item_id")
+            unit = step_input.get("unit")
+            if not item_id or not unit:
+                continue
+            recipe_unit = recipe_input_units.get(item_id)
+            if recipe_unit and recipe_unit != unit:
+                if not converter.can_convert(unit, recipe_unit, item_id=item_id):
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="recipe",
+                        rule="recipe_unit_not_convertible",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=(
+                            f"Step {step_idx} input '{item_id}' uses '{unit}' "
+                            f"which cannot convert to recipe unit '{recipe_unit}'"
+                        ),
+                        field_path=f"steps[{step_idx}].inputs",
+                        fix_hint="Align step and recipe units or add mass_kg for conversion"
+                    ))
+
+        for step_output in resolved_step.get("outputs", []) or []:
+            item_id = step_output.get("item_id")
+            unit = step_output.get("unit")
+            if not item_id or not unit:
+                continue
+            recipe_unit = recipe_output_units.get(item_id)
+            if recipe_unit and recipe_unit != unit:
+                if not converter.can_convert(unit, recipe_unit, item_id=item_id):
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="recipe",
+                        rule="recipe_unit_not_convertible",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=(
+                            f"Step {step_idx} output '{item_id}' uses '{unit}' "
+                            f"which cannot convert to recipe unit '{recipe_unit}'"
+                        ),
+                        field_path=f"steps[{step_idx}].outputs",
+                        fix_hint="Align step and recipe units or add mass_kg for conversion"
+                    ))
+
+    return issues
+
+
 def validate_recipe(
     recipe: Any,
     converter: Optional[UnitConverter] = None
@@ -1298,6 +1559,10 @@ def validate_recipe(
         # ADR-018: Validate recipe inputs/outputs are resolvable
         inputs_outputs_issues = validate_recipe_inputs_outputs(recipe, kb)
         issues.extend(inputs_outputs_issues)
+
+        # Unit convertibility and target production checks (report-driven)
+        issues.extend(validate_recipe_unit_convertibility(recipe, kb, converter))
+        issues.extend(validate_recipe_target_produced(recipe, kb, converter))
 
         # Issue #9: Validate step inputs are satisfied
         step_inputs_issues = validate_recipe_step_inputs(recipe, kb)

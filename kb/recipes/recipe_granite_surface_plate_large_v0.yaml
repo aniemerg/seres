@@ -15,18 +15,20 @@ steps:
       - item_id: rock_feedstock_raw
         qty: 400.0
         unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 400.0
+        unit: kg
     notes: Cut granite block to plate dimensions (placeholder using generic cutting).
   - process_id: surface_finishing_v0
     inputs:
       - item_id: cut_parts
         qty: 400.0
         unit: kg
-    notes: Grind/lap surface to flatness; stand-in for precision lapping.
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: cut_parts
+    outputs:
+      - item_id: granite_surface_plate_large
         qty: 400.0
         unit: kg
-    notes: Flatness inspection and marking of reference surfaces.
+    notes: Grind/lap surface to flatness; stand-in for precision lapping.
 assumptions: "Granite block feedstock modeled as rock_feedstock_raw; cut_parts stands in for cut granite blanks before surface finishing and inspection."
 notes: Localized fabrication path replacing import placeholder for granite surface plates.

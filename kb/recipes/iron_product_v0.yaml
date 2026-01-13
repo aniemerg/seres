@@ -1,4 +1,5 @@
 id: recipe_iron_product_v0
+kind: recipe
 target_item_id: iron_product
 variant_id: v0
 inputs:
@@ -8,8 +9,16 @@ inputs:
   - item_id: hydrogen_gas
     qty: 0.02
     unit: kg
+outputs:
+  - item_id: iron_product
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: iron_reduction_from_ilmenite_v0
+    outputs:
+      - item_id: iron_product
+        qty: 5.0
+        unit: kg
     est_time_hr: 4.0
 assumptions: Reduction of ilmenite concentrate to produce iron product; refining not modeled.
 notes: Coarse route; add refining/alloying later.

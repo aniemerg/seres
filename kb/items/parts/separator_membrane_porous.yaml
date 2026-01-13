@@ -4,22 +4,38 @@ kind: part
 mass: 0.15
 unit: kg
 material_class: ceramic_composite
-notes: |
-  Porous separator membrane for alkaline electrolyzers.
+notes: 'Porous separator membrane for alkaline electrolyzers.
+
   Keeps hydrogen and oxygen gases separate during water electrolysis.
 
+
   Modern alkaline electrolyzer separators are typically made from:
+
   - Zirconia-polymer composites (Zirfon-type)
+
   - Porous ceramic matrix with polymer binder
+
   - Must be chemically resistant to KOH electrolyte
+
   - Must allow ionic conduction while preventing gas crossover
 
+
   Conservative Mode check completed:
+
   - Searched for: membrane, porous, separator, filter
-  - Checked items: electrolyzer_cell_stack (includes separators but not as individual component)
+
+  - Checked items: electrolyzer_cell_stack (includes separators but not as individual
+  component)
+
   - No equivalent membrane component found
+
   - Created because: Essential component for water electrolysis system, used in recipe_machine_water_electrolysis_system_v0
 
+
   Mass estimate: ~150g per membrane sheet, based on typical dimensions
+
   (30cm x 30cm x 1-2mm) and composite density.
+
+  '
 recipe: recipe_separator_membrane_porous_v0
+unit_kind: bulk

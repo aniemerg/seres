@@ -5,6 +5,70 @@ name: Recipe for PETE photon-enhanced thermionic converter v0
 produces_qty: 1.0
 produces_unit: unit
 produces_id: pete_photon_enhanced_thermionic_v0
+inputs:
+  - item_id: cathode_low_work_function_v0
+    qty: 10.0
+    unit: kg
+  - item_id: anode_collector_electrode_v0
+    qty: 8.0
+    unit: kg
+  - item_id: vacuum_envelope_quartz
+    qty: 15.0
+    unit: kg
+  - item_id: vacuum_pump_system_miniature
+    qty: 1.0
+    unit: unit
+  - item_id: electrical_feedthrough_vacuum
+    qty: 20.0
+    unit: unit
+  - item_id: thermal_insulation_high_temp
+    qty: 5.0
+    unit: kg
+  - item_id: concentrating_mirror_set
+    qty: 20.0
+    unit: kg
+  - item_id: cooling_radiator_anode
+    qty: 15.0
+    unit: kg
+  - item_id: structural_frame_steel
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: pete_photon_enhanced_thermionic_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: pete_photon_enhanced_thermionic_v0_assembly_v0
+  inputs:
+    - item_id: cathode_low_work_function_v0
+      qty: 10.0
+      unit: kg
+    - item_id: anode_collector_electrode_v0
+      qty: 8.0
+      unit: kg
+    - item_id: vacuum_envelope_quartz
+      qty: 15.0
+      unit: kg
+    - item_id: vacuum_pump_system_miniature
+      qty: 1.0
+      unit: unit
+    - item_id: electrical_feedthrough_vacuum
+      qty: 20.0
+      unit: unit
+    - item_id: thermal_insulation_high_temp
+      qty: 5.0
+      unit: kg
+    - item_id: concentrating_mirror_set
+      qty: 20.0
+      unit: kg
+    - item_id: cooling_radiator_anode
+      qty: 15.0
+      unit: kg
+    - item_id: structural_frame_steel
+      qty: 25.0
+      unit: kg
+  outputs:
+    - item_id: pete_photon_enhanced_thermionic_v0
+      qty: 1.0
+      unit: unit
 notes: "Assemble PETE converter from BOM components."

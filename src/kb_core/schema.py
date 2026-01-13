@@ -203,6 +203,7 @@ class RawItem(BaseModel):
     kind: str  # "material", "part", "machine"
     name: Optional[str] = None
 
+    unit_kind: Optional[str] = None  # "discrete" or "bulk"
     mass: Optional[float] = None  # Item mass (for count → mass conversion)
     mass_kg: Optional[float] = None  # Explicit mass_kg field
     unit: Optional[str] = None
@@ -433,6 +434,7 @@ class Item(BaseModel):
     kind: Literal["material", "part", "machine"]
     name: Optional[str] = None
 
+    unit_kind: Optional[Literal["discrete", "bulk"]] = None
     mass: Optional[float] = None
     mass_kg: Optional[float] = None
     unit: Optional[str] = None

@@ -13,5 +13,13 @@ outputs:
     unit: kg
 steps:
 - process_id: steel_strip_thin_production_v0
+  inputs:
+    - item_id: steel_plate_or_sheet
+      qty: 0.02
+      unit: kg
+  outputs:
+    - item_id: steel_strip_thin
+      qty: 0.02
+      unit: kg
   notes: "Production step: convert plate/sheet to thin strip"
 notes: "Basic one-step recipe to produce a thin steel strip from a small plate."

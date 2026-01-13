@@ -16,6 +16,10 @@ steps:
       - item_id: metal_alloy_bulk
         qty: 300.0
         unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 285.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 4.0
@@ -23,6 +27,10 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: cast_metal_parts
+        qty: 285.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
         qty: 285.0
         unit: kg
     est_time_hr: 5.0
@@ -34,6 +42,10 @@ steps:
       - item_id: welded_assemblies
         qty: 285.0
         unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 285.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 1.0
@@ -43,6 +55,10 @@ steps:
       - item_id: machined_part_raw
         qty: 285.0
         unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 285.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble frame, cylinder, platen_set, hydraulic power unit, and controls."
@@ -50,6 +66,10 @@ steps:
     inputs:
       - item_id: assembled_equipment
         qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: molding_press
+        qty: 300.0
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0

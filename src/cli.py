@@ -272,7 +272,7 @@ def validate_item(args):
         Exit code (0 = success, 1 = validation errors)
     """
     from src.kb_core.kb_loader import KBLoader
-    from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
+    from src.kb_core.validators import validate_process, validate_recipe, validate_item, ValidationLevel
     from src.kb_core.unit_converter import UnitConverter
 
     # Parse item ID (format: type:id)
@@ -308,9 +308,20 @@ def validate_item(args):
         converter = UnitConverter(kb_loader)
         issues = validate_recipe(item_data, converter)
 
+    elif item_type in {'material', 'part', 'machine', 'item'}:
+        if item_type == 'item':
+            item_data = kb_loader.get_item(item_id)
+        else:
+            item_data = kb_loader.items.get(item_id)
+        if not item_data:
+            print(f"Error: Item '{item_id}' not found")
+            return 1
+
+        issues = validate_item(item_data)
+
     else:
         print(f"Error: Unsupported item type '{item_type}'")
-        print("Supported types: process, recipe")
+        print("Supported types: process, recipe, material, part, machine, item")
         return 1
 
     # Report results

@@ -21,5 +21,12 @@ outputs:
     unit: kg
 steps:
 - process_id: iron_smelting_reduction_v0
+  outputs:
+    - item_id: iron_pig_or_ingot
+      qty: 1.0
+      unit: kg
+    - item_id: slag
+      qty: 0.8
+      unit: kg
   notes: "Single-step carbothermal reduction from ore to iron pig/ingot."
 notes: "Direct path from iron ore/ilmenite to iron_pig_or_ingot using the iron_smelting_reduction_v0 process."

@@ -12,7 +12,11 @@ outputs:
     qty: 1.0
     unit: kg
 steps:
-- process_id: cooling_radiator_anode_production_v0
-  notes: "Placeholder production step converting iron_pig_or_ingot to cooling_radiator_anode"
+  - process_id: cooling_radiator_anode_production_v0
+    outputs:
+      - item_id: cooling_radiator_anode
+        qty: 1.0
+        unit: kg
+    notes: "Placeholder production step converting iron_pig_or_ingot to cooling_radiator_anode"
 assumptions: "Conservative placeholder: 1 kg input -> 1 kg output"
 notes: "Temporary recipe to close no_recipe gap; replace with a real process later."

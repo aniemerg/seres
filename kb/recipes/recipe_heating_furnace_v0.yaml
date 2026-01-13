@@ -30,14 +30,30 @@ inputs:
   - item_id: fastener_kit_large
     qty: 1
     unit: unit
+outputs:
+  - item_id: heating_furnace
+    qty: 800.0
+    unit: kg
 steps:
   - process_id: sheet_metal_forming_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 200.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 190.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     notes: "Fabricate furnace shell and door from steel sheet"
   - process_id: welding_basic_v0
     inputs:
       - item_id: formed_sheet_metal_parts
+        qty: 190.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
         qty: 190.0
         unit: kg
     est_time_hr: 10.0
@@ -76,13 +92,21 @@ steps:
       - item_id: fastener_kit_large
         qty: 1
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 800.0
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install heating elements, temperature controller, door, and insulation"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 800.0
+        unit: kg
+    outputs:
+      - item_id: heating_furnace
+        qty: 800.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0

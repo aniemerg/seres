@@ -1,6 +1,14 @@
 id: recipe_lidar_time_of_flight_simple_v0
 kind: recipe
 target_item_id: lidar_time_of_flight_simple_v0
+outputs:
+  - item_id: lidar_time_of_flight_simple_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: lidar_time_of_flight_simple_assembly_v0
+    outputs:
+      - item_id: lidar_time_of_flight_simple_v0
+        qty: 1.0
+        unit: unit
 notes: "Manufacture LiDAR Time-of-Flight Simple by assembling core, sensor, and MCU."

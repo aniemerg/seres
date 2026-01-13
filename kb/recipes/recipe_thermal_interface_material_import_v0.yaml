@@ -15,5 +15,16 @@ outputs:
     unit: kg
 steps:
   - process_id: thermal_interface_material_synthesis_v0
+    inputs:
+      - item_id: silicone_polymer
+        qty: 0.9
+        unit: kg
+      - item_id: silicone_curing_agent
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: thermal_interface_material
+        qty: 1.0
+        unit: kg
     notes: "TIM synthesis path; using local TIM synthesis instead of import"
 notes: "TIM import path; replaced import placeholder with local synthesis."

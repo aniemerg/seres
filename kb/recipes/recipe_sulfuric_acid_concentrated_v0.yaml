@@ -18,6 +18,20 @@ outputs:
     unit: kg
 steps:
   - process_id: sulfuric_acid_contact_process_v0
+    inputs:
+      - item_id: sulfur_dioxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 0.25
+        unit: kg
+      - item_id: water
+        qty: 0.281
+        unit: kg
+    outputs:
+      - item_id: sulfuric_acid_concentrated
+        qty: 1.53
+        unit: kg
 notes: |
   Produce concentrated sulfuric acid via the contact process.
   Process: S + O2 → SO2 → SO3 → H2SO4

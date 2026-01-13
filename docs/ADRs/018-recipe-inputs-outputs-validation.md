@@ -221,6 +221,19 @@ if not recipe_outputs:
    - Recipe outputs don't include target_item_id
    - **Fix hint:** Add output for {target_item_id}
 
+5. **`recipe_target_not_produced`** (ERROR)
+   - No resolved step outputs/byproducts produce the target_item_id
+   - **Fix hint:** Override a step output or add a step that produces the target item
+
+6. **`recipe_target_unit_not_convertible`** (ERROR)
+   - A step outputs the target item, but its unit cannot convert to the target unit
+   - **Fix hint:** Align step output unit with target, or add mass_kg for conversion
+
+7. **`recipe_unit_not_convertible`** (ERROR)
+   - A step input/output uses a different unit than recipe-level inputs/outputs
+   - Conversion is not possible for that item
+   - **Fix hint:** Align units or add mass_kg for conversion
+
 **Implementation:**
 ```python
 def validate_recipe_inputs_outputs(
@@ -618,6 +631,9 @@ outputs:
 | `recipe_inputs_not_resolvable` | ERROR | Recipe has no inputs (neither explicit nor from steps/processes) |
 | `recipe_outputs_not_resolvable` | ERROR | Recipe has no outputs (neither explicit nor from steps/processes) |
 | `recipe_outputs_missing_target` | WARNING | Recipe outputs don't include target_item_id |
+| `recipe_target_not_produced` | ERROR | No step produces the target_item_id |
+| `recipe_target_unit_not_convertible` | ERROR | Step outputs target item in unit that cannot convert to target unit |
+| `recipe_unit_not_convertible` | ERROR | Step input/output unit cannot convert to recipe-level unit |
 | `recipe_inputs_not_explicit` | INFO | Recipe relies on process inputs (consider making explicit) |
 
 ## Testing Strategy

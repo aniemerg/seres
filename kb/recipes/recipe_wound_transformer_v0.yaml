@@ -16,4 +16,15 @@ outputs:
     unit: unit
 steps:
   - process_id: transformer_winding_v0
+    inputs:
+      - item_id: transformer_core
+        qty: 1.0
+        unit: unit
+      - item_id: magnet_wire_copper
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: wound_transformer
+        qty: 1.0
+        unit: unit
 notes: "Wind transformer coils using transformer_winding_v0 process"

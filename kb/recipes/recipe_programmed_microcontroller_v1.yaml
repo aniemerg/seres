@@ -13,6 +13,10 @@ inputs:
   - item_id: compiled_firmware_binary
     qty: 1.0
     unit: unit
+outputs:
+  - item_id: programmed_microcontroller
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: firmware_programming_v0
   inputs:
@@ -20,6 +24,10 @@ steps:
       qty: 1.0
       unit: unit
     - item_id: compiled_firmware_binary
+      qty: 1.0
+      unit: unit
+  outputs:
+    - item_id: programmed_microcontroller
       qty: 1.0
       unit: unit
 notes: Direct firmware programming using the firmware_programming_v0 process; replaces import placeholder in v0

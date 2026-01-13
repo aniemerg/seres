@@ -13,8 +13,16 @@ inputs:
   - item_id: etching_chemicals
     qty: 0.15
     unit: kg
+outputs:
+  - item_id: etching_waste_solution
+    qty: 0.15
+    unit: kg
 steps:
 - process_id: copper_etching_process_v0
+  byproducts:
+    - item_id: etching_waste_solution
+      qty: 0.15
+      unit: kg
   est_time_hr: 0.5
   labor_hours: 1.0
   notes: Waste etchant byproduct from copper etching process

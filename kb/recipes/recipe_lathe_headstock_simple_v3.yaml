@@ -8,10 +8,14 @@ inputs:
     unit: kg
 outputs:
   - item_id: lathe_headstock_simple
-    qty: 1.0
-    unit: unit
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: lathe_headstock_turn_v0
+    outputs:
+      - item_id: lathe_headstock_simple
+        qty: 60.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
 notes: Single-step turning from lathe_headstock_blank to lathe_headstock_simple; v3

@@ -21,12 +21,20 @@ steps:
       - item_id: metal_alloy_bulk
         qty: 2.0
         unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1.9
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: Cast clamp body and terminals
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
+        qty: 1.9
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
         qty: 1.9
         unit: kg
     est_time_hr: 0.5
@@ -43,6 +51,10 @@ steps:
       - item_id: fastener_kit_small
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: ground_clamp_and_cables
+        qty: 6.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: Assemble clamp with cables and connectors

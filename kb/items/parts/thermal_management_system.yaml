@@ -4,34 +4,20 @@ name: Thermal management system
 mass: 2.0
 unit: kg
 material_class: composite
-notes: |
-  Passive thermal management system for robot motor heat dissipation.
-
-  In vacuum-adjacent environments, convective cooling is ineffective. Heat
-  must be conducted from motors to radiator for radiative dissipation.
-
-  Components:
-  - Copper heat pipes (6×): Transfer heat from motors to radiator
-    - Length: ~1m each from joint to base
-    - Diameter: 10mm
-    - Working fluid: water or ammonia (sealed, evacuated)
-    - Mass: ~1 kg total
-  - Aluminum radiator fins: Mounted on robot base
-    - Surface area: 0.3 m²
-    - Fin spacing: 10 mm
-    - Mass: 0.8 kg
-  - Thermal interface pads: Between motor housing and heat pipe
-    - Graphite or silicone-based
-    - Mass: 0.2 kg
-
-  Heat dissipation capacity: 500W continuous (motors at 50% duty cycle).
-
-  Operation: Heat conducted from motor → heat pipe evaporates fluid → vapor
-  flows to radiator → condenses, releasing heat → radiates to environment →
-  liquid returns to motor end.
-
-  Manufacturing: Copper and aluminum from lunar resources. Heat pipe
-  fabrication requires vacuum sealing and fluid charging (specialized).
-
-  Design reference: docs/labor_bot_design_memo.md section 3.7.5.
+notes: "Passive thermal management system for robot motor heat dissipation.\n\nIn\
+  \ vacuum-adjacent environments, convective cooling is ineffective. Heat\nmust be\
+  \ conducted from motors to radiator for radiative dissipation.\n\nComponents:\n\
+  - Copper heat pipes (6\xD7): Transfer heat from motors to radiator\n  - Length:\
+  \ ~1m each from joint to base\n  - Diameter: 10mm\n  - Working fluid: water or ammonia\
+  \ (sealed, evacuated)\n  - Mass: ~1 kg total\n- Aluminum radiator fins: Mounted\
+  \ on robot base\n  - Surface area: 0.3 m\xB2\n  - Fin spacing: 10 mm\n  - Mass:\
+  \ 0.8 kg\n- Thermal interface pads: Between motor housing and heat pipe\n  - Graphite\
+  \ or silicone-based\n  - Mass: 0.2 kg\n\nHeat dissipation capacity: 500W continuous\
+  \ (motors at 50% duty cycle).\n\nOperation: Heat conducted from motor \u2192 heat\
+  \ pipe evaporates fluid \u2192 vapor\nflows to radiator \u2192 condenses, releasing\
+  \ heat \u2192 radiates to environment \u2192\nliquid returns to motor end.\n\nManufacturing:\
+  \ Copper and aluminum from lunar resources. Heat pipe\nfabrication requires vacuum\
+  \ sealing and fluid charging (specialized).\n\nDesign reference: docs/labor_bot_design_memo.md\
+  \ section 3.7.5.\n"
 recipe: recipe_thermal_management_system_v0
+unit_kind: bulk

@@ -10,4 +10,15 @@ inputs:
     unit: kg
 steps:
   - process_id: magnalium_alloying_v0
+    inputs:
+      - item_id: aluminum_alloy_ingot
+        qty: 0.95
+        unit: kg
+      - item_id: magnesium_metal_v0
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: magnalium_alloy
+        qty: 1.0
+        unit: kg
 notes: "Magnalium alloy production from aluminum and magnesium."

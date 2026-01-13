@@ -1,0 +1,29 @@
+id: recipe_insulated_furnace_chamber_v0
+kind: recipe
+target_item_id: insulated_furnace_chamber
+variant_id: v0
+inputs:
+  - item_id: ceramic_fiber_slurry
+    qty: 5.0
+    unit: kg
+  - item_id: furnace_chamber_equipped
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: insulated_furnace_chamber
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: insulation_panel_forming_v0
+    inputs:
+      - item_id: ceramic_fiber_slurry
+        qty: 5.0
+        unit: kg
+      - item_id: furnace_chamber_equipped
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: insulated_furnace_chamber
+        qty: 1.0
+        unit: unit
+notes: "Apply formed insulation panels to a furnace chamber to create insulated_furnace_chamber."

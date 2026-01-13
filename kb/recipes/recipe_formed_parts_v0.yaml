@@ -1,0 +1,23 @@
+id: recipe_formed_parts_v0
+kind: recipe
+target_item_id: formed_parts
+variant_id: v0
+inputs:
+  - item_id: metal_sheet_or_plate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: formed_parts
+    qty: 0.95
+    unit: kg
+steps:
+  - process_id: metal_forming_basic_v0
+    inputs:
+      - item_id: metal_sheet_or_plate
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: formed_parts
+        qty: 0.95
+        unit: kg
+notes: "Generic forming step to convert sheet/plate stock into formed parts."

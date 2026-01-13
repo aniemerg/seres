@@ -12,8 +12,16 @@ inputs:
   - item_id: fittings_and_valves
     qty: 1.0
     unit: unit
+outputs:
+  - item_id: valve_set_gas_handling
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: valve_set_gas_handling_assembly_v0
+  outputs:
+    - item_id: valve_set_gas_handling
+      qty: 1.0
+      unit: unit
   est_time_hr: 0.9
   labor_hours: 0.6
 notes: "Assemble valve set for gas handling using machined valve body, gas flow controller, and fittings/valves."

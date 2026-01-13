@@ -11,6 +11,10 @@ outputs:
     unit: kg
 steps:
   - process_id: plastic_extrusion_v0
+    outputs:
+      - item_id: extruded_plastic_profile
+        qty: 1.0
+        unit: kg
     notes: Extrude plastic pellets through die to produce profile lengths; includes cooling and cut-to-length.
 assumptions: "Feedstock is plastic_pellets; profile geometry generalized."
 notes: Local extrusion route for plastic profiles to replace referenced-only placeholder.

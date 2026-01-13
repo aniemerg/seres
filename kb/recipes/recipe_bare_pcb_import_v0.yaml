@@ -13,5 +13,9 @@ outputs:
     unit: unit
 steps:
 - process_id: pcb_fabrication_v0
+  outputs:
+    - item_id: bare_pcb
+      qty: 1.0
+      unit: unit
 notes: Replaced placeholder import with actual PCB fabrication path to produce bare PCB.
 assumptions: "PCB fabrication process yields bare_pcb units; no additional post-processing here."

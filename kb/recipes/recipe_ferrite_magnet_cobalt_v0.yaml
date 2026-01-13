@@ -3,10 +3,33 @@ kind: recipe
 name: Cobalt ferrite magnet production (CoFe2O4) v0
 target_item_id: ferrite_magnet_cobalt
 variant_id: v0
+inputs:
+  - item_id: ferrite_powder_precursor_v0
+    qty: 1.1
+    unit: kg
+outputs:
+  - item_id: ferrite_magnet_cobalt
+    qty: 1.0
+    unit: kg
 steps:
-  - process_id: ferrite_powder_precursor_synthesis_v0
   - process_id: ferrite_pressing_shaping_v0
+    inputs:
+      - item_id: ferrite_powder_precursor_v0
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.1
+        unit: kg
   - process_id: ferrite_toroid_sintering_v0
+    inputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.1
+        unit: kg
+    outputs:
+      - item_id: ferrite_magnet_cobalt
+        qty: 1.0
+        unit: kg
 assumptions: |
   Seed recipe for cobalt ferrite hard ferrite production; detailed chemistry to be refined.
 notes: "Links ferrite precursor to a sintered hard ferrite magnet via pressing and sintering."

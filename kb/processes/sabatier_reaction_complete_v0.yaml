@@ -26,7 +26,7 @@ resource_requirements:
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
-- machine_id: catalyst_pellet_forming_v0
+- machine_id: pellet_press
   qty: 1
   unit: count
 energy_model:
@@ -42,7 +42,7 @@ time_model:
 notes: "Sabatier reaction for converting carbon dioxide to methane using hydrogen.\n\
   Source: FFC-process-for-deep-ISRU.txt, Sustainable-ISRU-on-the-Moon.txt\nReaction:\
   \ CO2 + 4H2 → CH4 + 2H2O (exothermic)\nTemperature: 300-400°C\nCatalyst: Nickel-based\
-  \ (Ni/Al2O3 common); modeled as catalyst_pellet_forming_v0\nProcess: Catalytic hydrogenation\
+  \ (Ni/Al2O3 common); modeled as pellet_press\nProcess: Catalytic hydrogenation\
   \ of CO2\nPurpose: Recycle CO2 from FFC process back to methane\nClose carbon cycle\
   \ in ISRU systems\nProduce methane for carbothermal reduction processes\nThermodynamics:\n\
   \  - Exothermic (ΔH = -165 kJ/mol, releases heat)\n  - Favored at lower temperatures\n\

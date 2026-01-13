@@ -47,6 +47,13 @@ steps:
       - item_id: metal_tubing_stock
         qty: 0.4
         unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+      - item_id: steel_scrap
+        qty: 0.2
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine gauge body, mounting fittings, and sensor housing"
@@ -61,6 +68,10 @@ steps:
       - item_id: electrical_wire_and_connectors
         qty: 0.2
         unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install vacuum sensor, display electronics, and signal conditioning"
@@ -75,6 +86,10 @@ steps:
       - item_id: fastener_kit_small
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble gauge with sensor, display, and mounting hardware"
@@ -83,6 +98,10 @@ steps:
       - item_id: assembled_equipment
         qty: 1.0
         unit: kg
+    outputs:
+      - item_id: vacuum_gauge_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate gauge against reference vacuum standards"

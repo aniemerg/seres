@@ -18,7 +18,37 @@ outputs:
     unit: unit
 steps:
   - process_id: pcb_assembly_v0
+    inputs:
+      - item_id: pcb_bare_board
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
   - process_id: electronics_assembly_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 1.0
+        unit: unit
+      - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
   - process_id: voltage_regulation_circuit_assembly_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+      - item_id: voltage_regulator_switching_v0
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: voltage_regulation_circuit_v0
+        qty: 1.0
+        unit: unit
 notes: "Seed recipe to manufacture voltage_regulation_circuit_v0 from PCB, assembled electronics, and regulator module."
 assumptions: "Voltage regulation circuit assembled from PCB with switching regulator module"

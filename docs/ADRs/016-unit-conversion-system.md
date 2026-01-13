@@ -70,6 +70,19 @@ Define unit categories with standard (canonical) units for normalization:
 
 **Normalization rule:** All calculations performed in standard units, conversions applied at input/output.
 
+### 1.1 Canonical item units (unit_kind)
+
+To reduce ambiguity between discrete parts and bulk materials, items declare a
+canonical unit via `unit_kind`:
+
+- `unit_kind: discrete` → canonical unit is `unit` (or count-like equivalents).
+  `mass_kg` is **required** and represents mass per unit.
+- `unit_kind: bulk` → canonical unit is a continuous unit (typically `kg`, but may
+  be other continuous units such as `kWh` for energy).
+
+Conversions between `unit` and `kg` remain allowed when `mass_kg` is defined, but
+recipe inputs/outputs should prefer the canonical unit for clarity and validation.
+
 ### 2. Compound Unit Parsing
 
 **Format:** `<numerator_unit>/<denominator_unit>`

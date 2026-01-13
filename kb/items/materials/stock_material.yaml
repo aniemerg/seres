@@ -5,17 +5,28 @@ mass: 1.0
 unit: kg
 material_class: composite
 is_import: true
-notes: |
-  DEPRECATED: This generic placeholder is banned per ADR-009.
+notes: 'DEPRECATED: This generic placeholder is banned per ADR-009.
+
 
   Previously used as a catch-all for raw stock material in manufacturing processes,
+
   representing bar stock, plate, sheet, tube, or other semi-finished forms.
 
+
   Do NOT use this item in new or updated recipes. Use specific material types instead:
+
   - steel_bar_stock, steel_plate, steel_sheet
+
   - aluminum_alloy_ingot, aluminum_sheet_2mm
+
   - copper_rod_ingot, copper_plate
+
   - ceramic_rod, ceramic_plate
+
   - etc.
 
+
   This item is kept for backward compatibility during cleanup only.
+
+  '
+unit_kind: bulk

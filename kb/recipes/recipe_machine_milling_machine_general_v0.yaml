@@ -1,6 +1,11 @@
 id: recipe_machine_milling_machine_general_v0
+kind: recipe
 target_item_id: milling_machine_general_v0
 variant_id: v0
+outputs:
+  - item_id: milling_machine_general_v0
+    qty: 1.0
+    unit: unit
 inputs:
   - item_id: bulk_material_or_parts
     qty: 1.0
@@ -34,9 +39,9 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: milling_machine_general_v0
         qty: 1.0
-        unit: kg
+        unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble milling machine per BOM; imported compute/tools.

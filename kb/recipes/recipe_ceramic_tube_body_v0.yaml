@@ -11,8 +11,23 @@ inputs:
   - item_id: water
     qty: 1.0
     unit: L
+outputs:
+  - item_id: ceramic_tube_body
+    qty: 0.95
+    unit: kg
 steps:
   - process_id: powder_processing_v0
+    inputs:
+      - item_id: powder_metal_or_ceramic
+        qty: 1.0
+        unit: kg
+      - item_id: binder_material
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: processed_powder_mixture
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 0.5
@@ -25,6 +40,10 @@ steps:
       - item_id: water
         qty: 1.0
         unit: L
+    outputs:
+      - item_id: green_ceramic_part
+        qty: 5.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
@@ -33,6 +52,10 @@ steps:
     inputs:
       - item_id: green_ceramic_part
         qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: sintered_parts
+        qty: 0.95
         unit: kg
     est_time_hr: 10.0
     machine_hours: 10.0
@@ -43,6 +66,10 @@ steps:
       - item_id: sintered_parts
         qty: 0.95
         unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 0.95
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     labor_hours: 1.0
@@ -50,7 +77,11 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.95
+        unit: kg
+    outputs:
+      - item_id: ceramic_tube_body
+        qty: 0.95
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5

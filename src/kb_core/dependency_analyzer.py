@@ -185,8 +185,13 @@ class CircularDependencyAnalyzer:
         """Get all direct dependencies for an item (items it requires to be built)."""
         dependencies = set()
 
+        def _as_dict(entity):
+            if hasattr(entity, "model_dump"):
+                return entity.model_dump()
+            return entity
+
         # Get item
-        item = self.kb.get_item(item_id)
+        item = _as_dict(self.kb.get_item(item_id))
         if not item:
             return dependencies
 
@@ -196,7 +201,7 @@ class CircularDependencyAnalyzer:
             return dependencies
 
         # Get recipe
-        recipe = self.kb.get_recipe(recipe_id)
+        recipe = _as_dict(self.kb.get_recipe(recipe_id))
         if not recipe:
             return dependencies
 
@@ -211,8 +216,8 @@ class CircularDependencyAnalyzer:
             # Check process inputs
             process_id = step.get('process_id')
             if process_id:
-                process = self.kb.get_process(process_id)
-                if process and isinstance(process, dict):
+                process = _as_dict(self.kb.get_process(process_id))
+                if process:
                     for inp in process.get('inputs', []) or []:
                         if isinstance(inp, dict):
                             input_id = inp.get('item_id')

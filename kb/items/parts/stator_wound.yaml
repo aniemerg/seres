@@ -4,18 +4,12 @@ name: Wound stator assembly (intermediate)
 mass: 1.0
 unit: kg
 material_class: steel
-notes: |
-  Intermediate product: Stator laminations with copper coils wound.
-
-  Manufacturing stage: After wire winding, before motor assembly.
-  This is a pure intermediate in stepper motor manufacturing process.
-
-  Status: Internal manufacturing step, not a final product.
-  Used in: recipe_machine_stepper_motor_v0 (step 2 output → step 5 input)
-
-  Conservative Mode: Created as intermediate item to satisfy recipe flow.
-  No standalone recipe needed (produced within stepper motor recipe).
+notes: "Intermediate product: Stator laminations with copper coils wound.\n\nManufacturing\
+  \ stage: After wire winding, before motor assembly.\nThis is a pure intermediate\
+  \ in stepper motor manufacturing process.\n\nStatus: Internal manufacturing step,\
+  \ not a final product.\nUsed in: recipe_machine_stepper_motor_v0 (step 2 output\
+  \ \u2192 step 5 input)\n\nConservative Mode: Created as intermediate item to satisfy\
+  \ recipe flow.\nNo standalone recipe needed (produced within stepper motor recipe).\n"
 provenance: hand_assumption
 recipe: recipe_stator_wound_v0
-# Note: No standalone recipe - this is produced and consumed within recipe_machine_stepper_motor_v0
-# The no_recipe gap for this item is expected and acceptable
+unit_kind: bulk

@@ -15,13 +15,21 @@ steps:
       - item_id: sheet_metal_or_structural_steel
         qty: 50.0
         unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 47.5
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cut steel tubing or angle iron for frame members"
   - process_id: welding_and_fabrication_v0
     inputs:
-      - item_id: sheet_metal_or_structural_steel
-        qty: 50.0
+      - item_id: formed_sheet_metal_parts
+        qty: 47.5
+        unit: kg
+    outputs:
+      - item_id: welded_fabrications
+        qty: 47.5
         unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
@@ -30,6 +38,10 @@ steps:
     inputs:
       - item_id: welded_fabrications
         qty: 47.5
+        unit: kg
+    outputs:
+      - item_id: machine_frame_small
+        qty: 50.0
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5

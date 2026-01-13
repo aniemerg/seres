@@ -8,6 +8,10 @@ inputs:
   - item_id: insulation_coating_material
     qty: 0.3
     unit: kg
+outputs:
+  - item_id: transformer_core
+    qty: 15.0
+    unit: kg
 steps:
   - process_id: sheet_metal_cutting_v0
     inputs:
@@ -51,6 +55,10 @@ steps:
   - process_id: annealing_basic_v0
     inputs:
       - item_id: lamination_stack_clamped
+        qty: 15.0
+        unit: kg
+    outputs:
+      - item_id: transformer_core
         qty: 15.0
         unit: kg
     est_time_hr: 4.0

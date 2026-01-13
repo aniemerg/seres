@@ -1,6 +1,14 @@
 id: recipe_regolith_lunar_mare_v0
 kind: recipe
 target_item_id: regolith_lunar_mare
+outputs:
+  - item_id: regolith_lunar_mare
+    qty: 100
+    unit: kg
 steps:
   - process_id: regolith_mining_simple_v0
+    outputs:
+      - item_id: regolith_lunar_mare
+        qty: 100
+        unit: kg
 notes: "Bootstrap production path for mare regolith using the simple mining process."

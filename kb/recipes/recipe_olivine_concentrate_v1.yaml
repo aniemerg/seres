@@ -16,4 +16,15 @@ outputs:
     unit: kg
 steps:
   - process_id: olivine_beneficiation_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: olivine_concentrate
+        qty: 30.0
+        unit: kg
+      - item_id: tailings_silicate_mix
+        qty: 70.0
+        unit: kg
 notes: "Alternative production path; primary step: olivine_beneficiation_v0; aligns with existing processes."

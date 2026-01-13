@@ -5,6 +5,21 @@ name: Recipe for tensile test machine
 produces_id: tensile_test_machine_v0
 produces_qty: 1.0
 produces_unit: unit
+outputs:
+  - item_id: tensile_test_machine_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machine_assembly_tensile_test_v0
+    inputs:
+      - item_id: machine_frame_small
+        qty: 1.0
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: tensile_test_machine_v0
+        qty: 1.0
+        unit: unit
 notes: "Canonical recipe using the tensile_test_machine_v0 assembly process."

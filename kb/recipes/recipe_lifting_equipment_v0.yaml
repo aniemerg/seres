@@ -1,0 +1,54 @@
+id: recipe_lifting_equipment_v0
+kind: recipe
+target_item_id: lifting_equipment
+variant_id: v0
+inputs:
+  - item_id: structural_frame_large
+    qty: 1.0
+    unit: unit
+  - item_id: electric_motor_small
+    qty: 1.0
+    unit: unit
+  - item_id: worm_gear_set_v0
+    qty: 1.0
+    unit: unit
+  - item_id: bearing_set_sealed
+    qty: 2.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: control_circuit_board_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: lifting_equipment
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_frame_large
+        qty: 1.0
+        unit: unit
+      - item_id: electric_motor_small
+        qty: 1.0
+        unit: unit
+      - item_id: worm_gear_set_v0
+        qty: 1.0
+        unit: unit
+      - item_id: bearing_set_sealed
+        qty: 2.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+      - item_id: control_circuit_board_basic
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: lifting_equipment
+        qty: 1.0
+        unit: unit
+    notes: Assemble gantry frame, hoist drive, and controls.
+notes: Placeholder assembly recipe for lifting equipment; quantities align to coarse BOM.

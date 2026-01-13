@@ -6,6 +6,18 @@ inputs:
   - item_id: carbon_dioxide_gas
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: krypton_gas
+    qty: 2.0e-05
+    unit: kg
 steps:
   - process_id: noble_gas_extraction_v0
+    inputs:
+      - item_id: carbon_dioxide_gas
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: krypton_gas
+        qty: 2.0e-05
+        unit: kg
 notes: "Krypton fraction recovered during noble gas cryogenic separation."

@@ -1,0 +1,23 @@
+id: recipe_pcb_with_control_circuits_v0
+kind: recipe
+target_item_id: pcb_with_control_circuits
+variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: pcb_with_control_circuits
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: pcb_assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: pcb_with_control_circuits
+        qty: 1.0
+        unit: unit
+notes: "Populate control circuitry on a base PCB for power electronics modules."

@@ -1,6 +1,14 @@
 id: recipe_metallography_sample_raw_v0
 kind: recipe
 target_item_id: metallography_sample_raw
+outputs:
+  - item_id: metallography_sample_raw
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metallography_sample_collection_v0
+    outputs:
+      - item_id: metallography_sample_raw
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to enable production of metallography_sample_raw; relies on collection process."

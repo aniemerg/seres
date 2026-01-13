@@ -7,7 +7,7 @@ modeling rules. It consolidates 012/013/014/016/017 for daily use.
 
 ### Materials
 Required:
-- `id`, `name`, `kind: material`, `unit`, `notes`
+- `id`, `name`, `kind: material`, `unit`, `unit_kind: bulk`, `notes`
 Recommended:
 - `material_class`, `density`, `state`, `composition`, `source_tags`
 Optional:
@@ -15,13 +15,13 @@ Optional:
 
 ### Parts
 Required:
-- `id`, `name`, `kind: part`, `mass`, `material_class`, `notes`
+- `id`, `name`, `kind: part`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `material_class`, `notes`
 Recommended:
 - `dimensions`, `source_tags`
 
 ### Machines
 Required:
-- `id`, `name`, `kind: machine`, `mass`, `notes`
+- `id`, `name`, `kind: machine`, `unit`, `unit_kind: discrete`, `mass_kg` (mass per unit), `notes`
 Recommended:
 - `bom`, `capabilities`, `power_draw_kW`, `source_tags`
 
@@ -115,7 +115,9 @@ processes (see `docs/closure_error_guidance.md`).
 
 - Compound units use `numerator/denominator` (e.g., `kg/hr`, `kWh/kg`).
 - Unit conversion is implicit where supported and validated.
-- Conversions may require `density` (mass <-> volume) or `mass` (count <-> mass).
+- Conversions may require `density` (mass <-> volume) or `mass_kg` (count <-> mass).
+- Discrete items use `unit` with `mass_kg` as mass per unit; bulk items use
+  continuous units (typically `kg`).
 
 ## Validation (017)
 

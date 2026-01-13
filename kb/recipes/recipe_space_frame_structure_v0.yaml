@@ -5,6 +5,18 @@ inputs:
   - item_id: aluminum_tube_stock
     qty: 60.0
     unit: kg
+outputs:
+  - item_id: space_frame_structure_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: space_frame_structure_fabrication_v0
+    inputs:
+      - item_id: aluminum_tube_stock
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: space_frame_structure_v0
+        qty: 1.0
+        unit: unit
 notes: "Placeholder recipe to manufacture space_frame_structure_v0 using aluminum stock; finalized steps to be defined as BOM matures."

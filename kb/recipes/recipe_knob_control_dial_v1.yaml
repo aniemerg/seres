@@ -7,8 +7,26 @@ inputs:
   - item_id: extruded_plastic_profile
     qty: 0.25
     unit: kg
+outputs:
+  - item_id: knob_control_dial
+    qty: 0.2
+    unit: kg
+  - item_id: polymer_scrap_v0
+    qty: 0.05
+    unit: kg
 steps:
   - process_id: knob_control_dial_machining_v1
+    inputs:
+      - item_id: extruded_plastic_profile
+        qty: 0.25
+        unit: kg
+    outputs:
+      - item_id: knob_control_dial
+        qty: 0.2
+        unit: kg
+      - item_id: polymer_scrap_v0
+        qty: 0.05
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     notes: "Machining extruded plastic profile into knob_control_dial."

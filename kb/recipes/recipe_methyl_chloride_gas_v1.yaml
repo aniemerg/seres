@@ -9,8 +9,16 @@ inputs:
   - item_id: chlorine_gas
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: methyl_chloride_gas
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: methylchloride_synthesis_v0
+    outputs:
+      - item_id: methyl_chloride_gas
+        qty: 1.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
 notes: "Migrated to target_item_id schema; mirrors v0 recipe structure"

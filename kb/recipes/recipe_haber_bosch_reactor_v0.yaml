@@ -19,6 +19,10 @@ inputs:
   - item_id: steel_plate_or_sheet
     qty: 150.0
     unit: kg
+outputs:
+  - item_id: haber_bosch_reactor_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:
@@ -34,9 +38,17 @@ steps:
       - item_id: steel_plate_or_sheet
         qty: 150.0
         unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Basic assembly to integrate BOM components into haber_bosch_reactor_v0 subassembly"
   - process_id: enclosure_assembly_basic_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
       - item_id: assembled_equipment
         qty: 1.0
         unit: kg
@@ -46,16 +58,28 @@ steps:
       - item_id: assembled_equipment
         qty: 1.0
         unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Install major modules: reactor core and shell interfaces"
   - process_id: sealing_and_assembly_basic_v0
     inputs:
-      - item_id: analog_test_bench_neural_circuits_v0
+      - item_id: assembled_equipment
         qty: 1.0
-        unit: unit
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
     notes: "Seal enclosure and finalize integration"
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: analog_test_bench_neural_circuits_v0
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: haber_bosch_reactor_v0
         qty: 1.0
         unit: unit
     notes: "Final inspection and readiness check"

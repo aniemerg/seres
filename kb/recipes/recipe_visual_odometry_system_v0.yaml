@@ -19,7 +19,7 @@ inputs:
     unit: kg
   - item_id: electronic_components_set
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: visual_odometry_system_v0
     qty: 1.0
@@ -36,10 +36,14 @@ steps:
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     notes: Assemble VO sensor module base frame, housing, and electronics into submodule
   - process_id: enclosure_assembly_basic_v0
     inputs:
-      - item_id: analog_test_bench_neural_circuits_v0
+      - item_id: assembled_equipment
         qty: 1.0
         unit: unit
       - item_id: camera_vacuum_tube_vidicon_v0
@@ -48,7 +52,7 @@ steps:
     outputs:
       - item_id: enclosure_electrical_medium
         qty: 1.0
-        unit: unit
+        unit: kg
     notes: Mount VO submodule into enclosure and attach shielding
   - process_id: wiring_and_electronics_integration_v0
     inputs:
@@ -57,9 +61,12 @@ steps:
         unit: kg
       - item_id: electronic_components_set
         qty: 1.0
-        unit: unit
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: kg
     outputs:
-      - item_id: wired_electrical_system
+      - item_id: visual_odometry_system_v0
         qty: 1.0
         unit: unit
     notes: Integrate wiring, sensors, and camera interface for visual odometry

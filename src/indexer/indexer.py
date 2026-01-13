@@ -28,7 +28,7 @@ except ImportError:  # pragma: no cover
 from src.kb_core.queue_manager import _locked_queue
 from src.kb_core.queue_filter_config import QueueFilterConfig
 from src.kb_core.kb_loader import KBLoader
-from src.kb_core.validators import validate_process, validate_recipe, ValidationLevel
+from src.kb_core.validators import validate_process, validate_recipe, validate_item, ValidationLevel
 from src.kb_core.unit_converter import UnitConverter
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 
@@ -760,7 +760,7 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
     Returns:
         List of validation issue queue items (ERROR and WARNING levels only)
     """
-    print("Running ADR-017 and ADR-020 validation on processes and recipes...")
+    print("Running ADR-017 and ADR-020 validation on items, processes, and recipes...")
 
     # Create UnitConverter for validation
     converter = UnitConverter(kb_loader)
@@ -774,6 +774,8 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
         process_data = kb_loader.processes.get(process_id)
         if not process_data:
             continue
+        if hasattr(process_data, "model_dump"):
+            process_data = process_data.model_dump()
 
         # Run ADR-017 validation
         issues = validate_process(process_data, converter)
@@ -834,12 +836,70 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                 issue_map[signature] = queue_item
                 all_issues.append(issue)
 
+    # Validate all items
+    item_ids = [
+        eid for eid, entry in entries.items()
+        if entry.get('kind') in {"material", "part", "machine"}
+    ]
+    for item_id in item_ids:
+        item_data = kb_loader.items.get(item_id)
+        if not item_data:
+            continue
+
+        issues = validate_item(item_data)
+        issues = [i for i in issues if i.level in (ValidationLevel.ERROR, ValidationLevel.WARNING)]
+
+        for issue in issues:
+            signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
+
+            if signature not in issue_map:
+                auto_fixable_rules = {
+                    'process_type_required',
+                    'deprecated_field',
+                    'setup_hr_in_continuous',
+                    'target_item_id_required'
+                }
+                is_auto_fixable = issue.rule in auto_fixable_rules
+
+                priority = {
+                    ValidationLevel.ERROR: 100,
+                    ValidationLevel.WARNING: 50,
+                    ValidationLevel.INFO: 10
+                }.get(issue.level, 0)
+
+                if is_auto_fixable:
+                    priority += 20
+
+                queue_item = {
+                    "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
+                    "kind": issue.entity_type,
+                    "reason": f"validation_{issue.level.value}",
+                    "gap_type": f"validation_{issue.rule}",
+                    "item_id": issue.entity_id,
+                    "priority": priority,
+                    "auto_fixable": is_auto_fixable,
+                    "context": {
+                        "validation_level": issue.level.value,
+                        "category": issue.category,
+                        "rule": issue.rule,
+                        "message": issue.message,
+                        "field_path": issue.field_path,
+                        "fix_hint": issue.fix_hint,
+                        "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                        "auto_fixable": is_auto_fixable,
+                    }
+                }
+                issue_map[signature] = queue_item
+                all_issues.append(issue)
+
     # Validate all recipes
     recipe_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'recipe']
     for recipe_id in recipe_ids:
         recipe_data = kb_loader.recipes.get(recipe_id)
         if not recipe_data:
             continue
+        if hasattr(recipe_data, "model_dump"):
+            recipe_data = recipe_data.model_dump()
 
         # Run ADR-017/018 validation (pass converter for inputs/outputs validation)
         issues = validate_recipe(recipe_data, converter)

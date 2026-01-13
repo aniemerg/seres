@@ -11,6 +11,14 @@ outputs:
     unit: kg
 steps:
   - process_id: regolith_volatile_thermal_extraction_v0
+    inputs:
+      - item_id: regolith_lunar_highlands
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: helium_mixed_isotopes
+        qty: 0.000014
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     notes: "Heat regolith to 700-1200°C to release solar-wind implanted helium"

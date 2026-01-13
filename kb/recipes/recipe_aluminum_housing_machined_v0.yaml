@@ -1,18 +1,38 @@
 id: recipe_aluminum_housing_machined_v0
 kind: recipe
 target_item_id: aluminum_housing_machined_v0
-produces_id: aluminum_housing_machined_v0
-produces_qty: 1.0
-produces_unit: unit
 variant_id: v0
 inputs:
   - item_id: cut_parts
-    qty: 25.0
+    qty: 3.0
     unit: kg
   - item_id: cutting_fluid
     qty: 0.5
     unit: L
+outputs:
+  - item_id: aluminum_housing_machined_v0
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
   - process_id: aluminum_housing_machining_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 3.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 0.5
+        unit: L
+    outputs:
+      - item_id: aluminum_housing_machined_v0
+        qty: 3.0
+        unit: kg
 notes: "Two-step path: rough stock -> machined_part -> final aluminum housing machined. Mass balance assumed with 3 kg final mass; adjust if needed."

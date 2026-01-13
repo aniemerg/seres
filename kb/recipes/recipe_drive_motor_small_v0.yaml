@@ -15,6 +15,10 @@ steps:
       - item_id: metal_alloy_bulk
         qty: 20.0
         unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Cast motor housing
@@ -23,12 +27,20 @@ steps:
       - item_id: cast_metal_parts
         qty: 19.0
         unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 19.0
+        unit: kg
     est_time_hr: 0.8
     machine_hours: 0.8
     notes: Machine housing
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
+        qty: 19.0
+        unit: kg
+    outputs:
+      - item_id: drive_motor_small
         qty: 19.0
         unit: kg
     est_time_hr: 0.8

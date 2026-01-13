@@ -9,8 +9,16 @@ inputs:
   - item_id: stainless_steel_ingot
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: stainless_steel_sheet
+    qty: 0.95
+    unit: kg
 steps:
-- process_id: sheet_making_from_ingot_stainless_v0
-  notes: Convert ingot to sheet (placeholder).
+  - process_id: sheet_making_from_ingot_stainless_v0
+    outputs:
+      - item_id: stainless_steel_sheet
+        qty: 0.95
+        unit: kg
+    notes: Convert ingot to sheet (placeholder).
 notes: Basic sheet production path for stainless steel sheet from ingot; placeholder values.
 target_item_id: stainless_steel_sheet

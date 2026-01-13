@@ -1,6 +1,14 @@
 id: recipe_regolith_lunar_highlands_v0
 kind: recipe
 target_item_id: regolith_lunar_highlands
+outputs:
+  - item_id: regolith_lunar_highlands
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: regolith_mining_lunar_highlands_v0
+    outputs:
+      - item_id: regolith_lunar_highlands
+        qty: 1.0
+        unit: kg
 notes: "Bootstrap Highlands regolith supply via simple mining process."

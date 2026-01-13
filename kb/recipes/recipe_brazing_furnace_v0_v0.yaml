@@ -18,6 +18,10 @@ outputs:
     unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
+    outputs:
+      - item_id: prepared_mold
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 0.8
     notes: "Prepare mold for furnace shell"
@@ -26,12 +30,23 @@ steps:
       - item_id: metal_alloy_bulk
         qty: 350.0
         unit: kg
+      - item_id: prepared_mold
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 332.5
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Cast furnace shell components"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
+        qty: 332.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
         qty: 332.5
         unit: kg
     est_time_hr: 1.0
@@ -45,12 +60,20 @@ steps:
       - item_id: base_metal_parts
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 332.5
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble shell, lining, and components into brazing furnace_v0"
   - process_id: welding_brazing_basic_v0
     inputs:
-      - item_id: cast_metal_parts
+      - item_id: assembled_equipment
+        qty: 332.5
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
         qty: 332.5
         unit: kg
     est_time_hr: 2.0
@@ -60,6 +83,10 @@ steps:
     inputs:
       - item_id: welded_assemblies
         qty: 332.5
+        unit: kg
+    outputs:
+      - item_id: brazing_furnace_v0
+        qty: 350.0
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0

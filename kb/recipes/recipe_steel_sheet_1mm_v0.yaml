@@ -9,6 +9,18 @@ inputs:
   - item_id: steel_ingot
     qty: 0.1
     unit: kg
+outputs:
+  - item_id: steel_sheet_1mm
+    qty: 0.1
+    unit: kg
 steps:
   - process_id: sheet_making_from_ingot_1mm_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: steel_sheet_1mm
+        qty: 0.1
+        unit: kg
 notes: "Recipe to manufacture steel sheet 1mm from ingot (uses sheet_making_from_ingot_1mm)."

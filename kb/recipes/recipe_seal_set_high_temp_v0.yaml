@@ -12,6 +12,10 @@ inputs:
   - item_id: formed_metal_part
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: seal_set_high_temp
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
     inputs:
@@ -26,6 +30,14 @@ steps:
     machine_hours: 2.0
     notes: "Cut and form graphite sheet material into seal shapes"
   - process_id: metal_stamping_process_v0
+    inputs:
+      - item_id: steel_sheet_1mm
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: formed_metal_part
+        qty: 1.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Stamp or machine metal C-rings and backup seals"
@@ -59,7 +71,7 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: seal_set_high_temp
         qty: 1.0
         unit: kg
     est_time_hr: 1.0

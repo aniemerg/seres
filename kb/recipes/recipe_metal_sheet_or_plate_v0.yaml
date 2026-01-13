@@ -6,7 +6,15 @@ inputs:
   - item_id: steel_ingot
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: metal_sheet_or_plate
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: sheet_making_from_ingot_to_metal_sheet_v0
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 1.0
+        unit: kg
 assumptions: "Sheet production path from ingot to metal_sheet_or_plate; updated to modern steps format"
 notes: "Placeholder recipe: convert ingot to sheet/plate"

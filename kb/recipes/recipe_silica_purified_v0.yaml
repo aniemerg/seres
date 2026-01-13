@@ -8,6 +8,10 @@ inputs:
   - item_id: wet_material
     qty: 0.28
     unit: kg
+outputs:
+  - item_id: silica_purified
+    qty: 0.28
+    unit: kg
 steps:
   - process_id: mineral_processing_basic_v0
     inputs:
@@ -25,6 +29,14 @@ steps:
     machine_hours: 4.0
     notes: "Extract and concentrate silica from regolith or anorthite source"
   - process_id: chemical_purification_v0
+    inputs:
+      - item_id: concentrated_mineral
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: wet_material
+        qty: 0.28
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     notes: "Chemical treatment to remove impurities and achieve >99% SiO2 purity"
@@ -34,7 +46,7 @@ steps:
         qty: 0.28
         unit: kg
     outputs:
-      - item_id: dried_material
+      - item_id: silica_purified
         qty: 0.28
         unit: kg
     est_time_hr: 8.0

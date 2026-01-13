@@ -9,8 +9,16 @@ inputs:
   - item_id: carbon_reductant
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: magnesium_metal_v0
+    qty: 1.0
+    unit: kg
 steps:
   - process_id: magnesium_oxide_reduction_v0
+    outputs:
+      - item_id: magnesium_metal_v0
+        qty: 1.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
 notes: "Direct reduction of magnesium oxide to metal using carbon reductant in a reduction furnace. Placeholder for future refinement."

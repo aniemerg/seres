@@ -2,8 +2,16 @@ id: recipe_regolith_carbonaceous_collection_v0
 kind: recipe
 target_item_id: regolith_carbonaceous
 variant_id: collection_v0
+outputs:
+  - item_id: regolith_carbonaceous
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: regolith_mining_carbonaceous_v0
+    outputs:
+      - item_id: regolith_carbonaceous
+        qty: 50.0
+        unit: kg
     notes: "Collection of carbonaceous chondrite regolith from meteorite impact sites. Rare (1-2% of lunar surface) but critical for carbon and volatile extraction. Slower than generic mining due to site prospecting and travel."
 notes: |
   Collection process for carbonaceous regolith from CM/CI chondrite impact sites.

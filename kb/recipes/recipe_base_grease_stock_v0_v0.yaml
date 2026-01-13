@@ -13,4 +13,12 @@ outputs:
     unit: kg
 steps:
   - process_id: grease_stock_v0_conversion_v0
+    inputs:
+      - item_id: base_grease_stock
+        qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: base_grease_stock_v0
+        qty: 0.05
+        unit: kg
 notes: "Seed path converting base grease stock to v0 seed variant; used to unblock initial imports."

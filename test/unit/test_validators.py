@@ -8,6 +8,7 @@ import pytest
 from src.kb_core.validators import (
     validate_process,
     validate_recipe,
+    validate_item,
     validate_process_schema,
     validate_process_semantics,
     validate_process_unit_conversion,
@@ -45,9 +46,10 @@ class MockKBLoader:
         }
 
         self.items = {
-            "motor": {"mass_kg": 12.0},
-            "steel_ingot": {"mass_kg": 1.0},
-            "steel_plate": {"mass_kg": 1.0},
+            "motor": {"mass_kg": 12.0, "unit": "unit"},
+            "steel_ingot": {"mass_kg": 1.0, "unit": "kg"},
+            "steel_plate": {"mass_kg": 1.0, "unit": "kg"},
+            "mystery_part": {"unit": "unit"},
         }
 
         self.processes = {
@@ -237,6 +239,69 @@ class TestSchemaValidation:
         error = next((i for i in issues if i.rule == "required_field_missing"), None)
         assert error is not None
         assert "hr_per_batch" in error.message
+
+
+class TestItemValidation:
+    """Test item unit_kind validation rules."""
+
+    def test_item_missing_unit_kind_warning(self):
+        item = {
+            "id": "test_part",
+            "kind": "part",
+            "unit": "kg",
+        }
+        issues = validate_item(item)
+        issue = next((i for i in issues if i.rule == "unit_kind_missing"), None)
+        assert issue is not None
+        assert issue.level == ValidationLevel.WARNING
+
+    def test_item_discrete_requires_mass(self):
+        item = {
+            "id": "test_part",
+            "kind": "part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+        }
+        issues = validate_item(item)
+        issue = next((i for i in issues if i.rule == "unit_kind_discrete_missing_mass"), None)
+        assert issue is not None
+        assert issue.level == ValidationLevel.ERROR
+
+    def test_item_discrete_unit_mismatch(self):
+        item = {
+            "id": "test_part",
+            "kind": "part",
+            "unit_kind": "discrete",
+            "unit": "kg",
+            "mass_kg": 1.0,
+        }
+        issues = validate_item(item)
+        issue = next((i for i in issues if i.rule == "unit_kind_discrete_unit_mismatch"), None)
+        assert issue is not None
+        assert issue.level == ValidationLevel.ERROR
+
+    def test_item_bulk_unit_mismatch(self):
+        item = {
+            "id": "test_material",
+            "kind": "material",
+            "unit_kind": "bulk",
+            "unit": "unit",
+        }
+        issues = validate_item(item)
+        issue = next((i for i in issues if i.rule == "unit_kind_bulk_unit_mismatch"), None)
+        assert issue is not None
+        assert issue.level == ValidationLevel.ERROR
+
+    def test_item_valid_discrete(self):
+        item = {
+            "id": "test_part",
+            "kind": "part",
+            "unit_kind": "discrete",
+            "unit": "unit",
+            "mass_kg": 2.0,
+        }
+        issues = validate_item(item)
+        assert issues == []
 
     def test_deprecated_field_rate_kg_per_hr(self):
         """ERROR: deprecated field rate_kg_per_hr."""
@@ -938,6 +1003,114 @@ class TestReferenceValidation:
         # Should NOT have process_not_found errors
         errors = [i for i in issues if i.rule == "process_not_found"]
         assert len(errors) == 0
+
+
+class TestRecipeTargetAndUnitValidation:
+    """Test recipe target output and unit convertibility validation."""
+
+    def test_recipe_target_not_produced_error(self, converter):
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "steel_plate",
+            "inputs": [
+                {"item_id": "regolith_powder", "qty": 1.0, "unit": "kg"}
+            ],
+            "steps": [
+                {"process_id": "beneficiation_magnetic_basic_v0"}
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+        error = next((i for i in issues if i.rule == "recipe_target_not_produced"), None)
+        assert error is not None
+        assert error.level == ValidationLevel.ERROR
+
+    def test_recipe_target_produced_ok(self, converter):
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "robot_arm_link_aluminum",
+            "inputs": [
+                {"item_id": "aluminum_alloy_ingot", "qty": 9.0, "unit": "kg"}
+            ],
+            "steps": [
+                {"process_id": "metal_casting_basic_v0"},
+                {"process_id": "machining_finish_basic_v0"},
+                {"process_id": "inspection_basic_v0"}
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+        errors = [i for i in issues if i.rule == "recipe_target_not_produced"]
+        assert errors == []
+
+    def test_recipe_target_unit_not_convertible_error(self, converter):
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "mystery_part",
+            "steps": [
+                {
+                    "process_id": "regolith_mining_highlands_v0",
+                    "outputs": [{"item_id": "mystery_part", "qty": 1.0, "unit": "kg"}]
+                }
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+        error = next((i for i in issues if i.rule == "recipe_target_unit_not_convertible"), None)
+        assert error is not None
+        assert error.level == ValidationLevel.ERROR
+
+    def test_recipe_unit_convertible_ok(self, converter):
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "motor",
+            "inputs": [
+                {"item_id": "motor", "qty": 1.0, "unit": "unit"}
+            ],
+            "outputs": [
+                {"item_id": "motor", "qty": 1.0, "unit": "unit"}
+            ],
+            "steps": [
+                {
+                    "process_id": "regolith_mining_highlands_v0",
+                    "inputs": [{"item_id": "motor", "qty": 12.0, "unit": "kg"}],
+                    "outputs": [{"item_id": "motor", "qty": 1.0, "unit": "unit"}]
+                }
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+        errors = [i for i in issues if i.rule == "recipe_unit_not_convertible"]
+        assert errors == []
+
+    def test_recipe_unit_not_convertible_error(self, converter):
+        recipe = {
+            "id": "test_recipe",
+            "kind": "recipe",
+            "target_item_id": "mystery_part",
+            "inputs": [
+                {"item_id": "mystery_part", "qty": 1.0, "unit": "unit"}
+            ],
+            "outputs": [
+                {"item_id": "mystery_part", "qty": 1.0, "unit": "unit"}
+            ],
+            "steps": [
+                {
+                    "process_id": "regolith_mining_highlands_v0",
+                    "inputs": [{"item_id": "mystery_part", "qty": 1.0, "unit": "kg"}],
+                    "outputs": [{"item_id": "mystery_part", "qty": 1.0, "unit": "unit"}]
+                }
+            ]
+        }
+
+        issues = validate_recipe(recipe, converter)
+        error = next((i for i in issues if i.rule == "recipe_unit_not_convertible"), None)
+        assert error is not None
+        assert error.level == ValidationLevel.ERROR
 
     def test_byproduct_item_not_found_warning(self, converter):
         """Process with non-existent byproduct item generates WARNING."""

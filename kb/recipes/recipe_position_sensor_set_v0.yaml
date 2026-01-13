@@ -12,6 +12,14 @@ outputs:
     unit: unit
 steps:
   - process_id: position_sensor_set_assembly_v0
+    inputs:
+      - item_id: sensor_suite_general
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: position_sensor_set
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
 notes: "Assemble a position sensor set from a sensor_suite_general."

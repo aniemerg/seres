@@ -29,12 +29,23 @@ steps:
       - item_id: pcb_populated
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: pcb_with_control_circuits
+        qty: 1.0
+        unit: unit
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: "Assemble power PCB with microcontroller, gate drivers, sensing circuits"
   - process_id: power_component_assembly_v0
     inputs:
+      - item_id: pcb_with_control_circuits
+        qty: 1.0
+        unit: unit
       - item_id: electronic_components_set
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: electronic_component_or_module
         qty: 1.0
         unit: unit
     est_time_hr: 2.0
@@ -63,17 +74,22 @@ steps:
       - item_id: component_with_heat_sink
         qty: 1.0
         unit: unit
-      - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
     outputs:
-      - item_id: power_electronics_module_v0
+      - item_id: assembled_electronics
         qty: 1.0
         unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount in enclosure, wire connections, install cooling fan"
   - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: assembled_electronics
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: power_electronics_module_v0
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test charge control, voltage regulation, load response"

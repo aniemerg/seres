@@ -14,5 +14,13 @@ outputs:
     unit: kg
 steps:
   - process_id: machining_raw_to_machined_part_v0
+    outputs:
+      - item_id: machined_part_raw
+        qty: 22.0
+        unit: kg
   - process_id: flywheel_vacuum_housing_machining_v0
+    outputs:
+      - item_id: flywheel_vacuum_housing_v0
+        qty: 20.0
+        unit: kg
 notes: "Two-step path: rough stock -> machined_part_raw -> flywheel_vacuum_housing_v0"

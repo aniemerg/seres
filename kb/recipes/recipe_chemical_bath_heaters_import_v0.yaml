@@ -29,12 +29,20 @@ steps:
       - item_id: metal_alloy_bulk
         qty: 20.0
         unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Cast heater housing/body"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
+        qty: 19.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
         qty: 19.0
         unit: kg
     est_time_hr: 1.0
@@ -47,6 +55,10 @@ steps:
         unit: kg
       - item_id: coil_insulation_material
         qty: 0.05
+        unit: kg
+    outputs:
+      - item_id: motor_coil_wound
+        qty: 2.0
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
@@ -72,6 +84,10 @@ steps:
         unit: kg
       - item_id: motor_coil_wound
         qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: chemical_bath_heaters
+        qty: 20.0
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5

@@ -6,8 +6,20 @@ inputs:
   - item_id: sheet_metal_or_structural_steel
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: chemical_mixer_tank
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_cutting_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: metal_sheet_or_plate
+        qty: 0.98
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
     machine_hours: 1.5
@@ -17,11 +29,23 @@ steps:
       - item_id: metal_sheet_or_plate
         qty: 0.98
         unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.5
     labor_hours: 1.2
     machine_hours: 1.2
     notes: Weld shell seams, nozzles, and mounting pads; attach legs/brackets.
   - process_id: pressure_testing_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: chemical_mixer_tank
+        qty: 1.0
+        unit: unit
     est_time_hr: 0.7
     labor_hours: 0.7
     machine_hours: 0.3

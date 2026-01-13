@@ -2,9 +2,31 @@ id: recipe_cofe2o4_hard_ferrite_v0
 kind: recipe
 name: Recipe for cobalt ferrite hard ferrite (CoFe2O4)
 target_item_id: cofe2o4_hard_ferrite_v0
+variant_id: v0
+inputs:
+  - item_id: iron_oxide_powder
+    qty: 0.7
+    unit: kg
+    notes: "Iron oxide (Fe2O3) for ferrite synthesis"
+  - item_id: cobalt_metal
+    qty: 0.25
+    unit: kg
+    notes: "Cobalt source for CoFe2O4"
+  - item_id: ceramic_powder
+    qty: 0.1
+    unit: kg
+    notes: "Binder and processing aids"
+outputs:
+  - item_id: cofe2o4_hard_ferrite_v0
+    qty: 1.0
+    unit: kg
 steps:
 - process_id: ferrite_powder_precursor_synthesis_v0
 - process_id: ferrite_pressing_shaping_v0
 - process_id: ferrite_toroid_sintering_v0
+  outputs:
+    - item_id: cofe2o4_hard_ferrite_v0
+      qty: 1.0
+      unit: kg
 assumptions: "Seed recipe for cobalt ferrite hard ferrite production; detailed steps may be refined later."
 notes: "Links ferrite precursor to a shaped ferrite core via pressing and sintering." 

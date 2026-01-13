@@ -11,16 +11,16 @@ outputs:
     unit: kg
 steps:
   - process_id: import_receiving_basic_v0
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Receive imported megohmmeter measurement core"
-  - process_id: inspection_basic_v0
     inputs:
       - item_id: bulk_material_or_parts
         qty: 2.0
         unit: kg
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Verify functionality and specifications"
+    outputs:
+      - item_id: megohmmeter_core_imported
+        qty: 2.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: "Receive imported megohmmeter measurement core"
 assumptions: "Imported high-voltage insulation resistance testing core. Provides megaohm-range resistance measurement capability. Required for electrical safety testing."
 notes: "Import of megohmmeter measurement core. Total receiving time ~0.8 hours. Imported component for specialized high-voltage testing."

@@ -2,6 +2,18 @@ id: recipe_heat_pipe_receiver_v0
 kind: recipe
 name: Heat Pipe Receiver Manufacturing Recipe v0
 target_item_id: heat_pipe_receiver_v0
+outputs:
+  - item_id: heat_pipe_receiver_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: heat_pipe_receiver_assembly_v0
+    outputs:
+      - item_id: heat_pipe_receiver_v0
+        qty: 1.0
+        unit: unit
+    byproducts:
+      - item_id: steel_scrap_v0
+        qty: 80.0
+        unit: kg
 notes: "Seed recipe to manufacture heat_pipe_receiver_v0 via heat_pipe_receiver_assembly_v0; placeholder path for upstream modeling."

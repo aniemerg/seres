@@ -5,10 +5,18 @@ inputs:
   - item_id: fuel_generic
     qty: 1.0
     unit: kg
+outputs:
+  - item_id: electricity
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: electricity_generation_placeholder_v0
     inputs:
       - item_id: fuel_generic
         qty: 1.0
         unit: kg
+    outputs:
+      - item_id: electricity
+        qty: 1.0
+        unit: unit
 notes: "Placeholder electricity recipe; replace with actual solar power generation chain when available."
