@@ -59,7 +59,12 @@ def resolve_recipe_step(step_def: Dict[str, Any], process_def: Optional[Any]) ->
         "energy_model",
     ]:
         if key in step:
-            resolved[key] = deepcopy(step[key])
+            value = step.get(key)
+            if value is None:
+                continue
+            if isinstance(value, list) and not value:
+                continue
+            resolved[key] = deepcopy(value)
 
     # ADR-013 time_model: partial override when type is missing/None
     if "time_model" in step:

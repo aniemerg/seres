@@ -570,6 +570,199 @@ class TestBuildMachine:
         assert not engine.has_item("motor", 1, "count")
 
 
+class TestProvenanceTracking:
+    """Test mass provenance tracking and strict conversion errors."""
+
+    def test_import_records_imported_mass(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "items" / "materials" / "iron_ore.yaml", {
+            'id': 'iron_ore',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("iron_ore", 5.0, "kg")
+
+        entry = engine.state.provenance["iron_ore"]
+        assert entry.imported_kg == pytest.approx(5.0)
+        assert entry.in_situ_kg == 0.0
+        assert entry.unknown_kg == 0.0
+
+    def test_process_provenance_allocates_outputs(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "processes" / "test_process.yaml", {
+            'id': 'test_process',
+            'kind': 'process',
+            'process_type': 'continuous',
+            'inputs': [
+                {'item_id': 'input_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'time_model': {
+                'type': 'linear_rate',
+                'rate': 1.0,
+                'rate_unit': 'kg/hr',
+                'scaling_basis': 'input_material'
+            }
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "input_material.yaml", {
+            'id': 'input_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+        write_yaml(temp_kb / "items" / "machines" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'mass': 10.0,
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("input_material", 1.0, "kg")
+        engine.import_item("test_machine", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="test_process",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert result["success"] is True
+
+        engine.advance_time(1.0)
+
+        output_entry = engine.state.provenance["output_material"]
+        assert output_entry.imported_kg == pytest.approx(1.0)
+        assert output_entry.in_situ_kg == 0.0
+
+    def test_boundary_process_marks_in_situ(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "processes" / "mining.yaml", {
+            'id': 'mining',
+            'kind': 'process',
+            'process_type': 'boundary',
+            'outputs': [
+                {'item_id': 'regolith', 'qty': 2.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'time_model': {
+                'type': 'linear_rate',
+                'rate': 2.0,
+                'rate_unit': 'kg/hr',
+                'scaling_basis': 'regolith'
+            }
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "regolith.yaml", {
+            'id': 'regolith',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+        write_yaml(temp_kb / "items" / "machines" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'mass': 10.0,
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("test_machine", 1.0, "count")
+        result = engine.start_process(
+            process_id="mining",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert result["success"] is True
+
+        engine.advance_time(1.0)
+
+        entry = engine.state.provenance["regolith"]
+        assert entry.in_situ_kg == pytest.approx(2.0)
+        assert entry.imported_kg == 0.0
+
+    def test_strict_conversion_errors(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "processes" / "convert.yaml", {
+            'id': 'convert',
+            'kind': 'process',
+            'process_type': 'continuous',
+            'inputs': [
+                {'item_id': 'odd_item', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'outputs': [
+                {'item_id': 'output_material', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'time_model': {
+                'type': 'linear_rate',
+                'rate': 1.0,
+                'rate_unit': 'kg/hr',
+                'scaling_basis': 'output_material'
+            }
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "odd_item.yaml", {
+            'id': 'odd_item',
+            'kind': 'material',
+            'unit': 'count'
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "output_material.yaml", {
+            'id': 'output_material',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+        write_yaml(temp_kb / "items" / "machines" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'mass': 10.0,
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("test_machine", 1.0, "count")
+        engine.add_to_inventory("odd_item", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="convert",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert result["success"] is True
+
+        with pytest.raises(ValueError, match="Provenance conversion failed"):
+            engine.advance_time(0.0)
+
+
 class TestInventoryManagement:
     """Test inventory operations."""
 

@@ -38,6 +38,8 @@ class ProcessRunSnapshot(BaseModel):
     outputs_pending: Dict[str, float]
     outputs_pending_units: Dict[str, str] = Field(default_factory=dict)
     machines_reserved: Dict[str, float]
+    provenance_consumed_kg: Dict[str, float] = Field(default_factory=dict)
+    inputs_consumed_units: Dict[str, str] = Field(default_factory=dict)
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
@@ -104,6 +106,8 @@ def _process_run_to_snapshot(proc: ProcessRun) -> ProcessRunSnapshot:
         outputs_pending=dict(proc.outputs_pending),
         outputs_pending_units=dict(proc.outputs_pending_units),
         machines_reserved=dict(proc.machines_reserved),
+        provenance_consumed_kg=dict(proc.provenance_consumed_kg),
+        inputs_consumed_units=dict(proc.inputs_consumed_units),
         recipe_run_id=proc.recipe_run_id,
         step_index=proc.step_index,
         energy_kwh=proc.energy_kwh,
@@ -122,6 +126,8 @@ def _snapshot_to_process_run(snapshot: ProcessRunSnapshot) -> ProcessRun:
         outputs_pending=dict(snapshot.outputs_pending),
         outputs_pending_units=dict(snapshot.outputs_pending_units),
         machines_reserved=dict(snapshot.machines_reserved),
+        provenance_consumed_kg=dict(snapshot.provenance_consumed_kg),
+        inputs_consumed_units=dict(snapshot.inputs_consumed_units),
         recipe_run_id=snapshot.recipe_run_id,
         step_index=snapshot.step_index,
         energy_kwh=snapshot.energy_kwh,

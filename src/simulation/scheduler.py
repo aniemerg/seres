@@ -135,6 +135,8 @@ class ProcessRun:
     outputs_pending: Dict[str, float]
     machines_reserved: Dict[str, float]
     outputs_pending_units: Dict[str, str] = field(default_factory=dict)
+    inputs_consumed_units: Dict[str, str] = field(default_factory=dict)
+    provenance_consumed_kg: Dict[str, float] = field(default_factory=dict)
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
@@ -239,6 +241,7 @@ class Scheduler:
         outputs_pending: Dict[str, float],
         machines_reserved: Dict[str, float],
         outputs_pending_units: Optional[Dict[str, str]] = None,
+        inputs_consumed_units: Optional[Dict[str, str]] = None,
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
         energy_kwh: Optional[float] = None,
@@ -276,6 +279,7 @@ class Scheduler:
                 'inputs_consumed': inputs_consumed,
                 'outputs_pending': outputs_pending,
                 'outputs_pending_units': outputs_pending_units or {},
+                'inputs_consumed_units': inputs_consumed_units or {},
                 'machines_reserved': machines_reserved,
                 'recipe_run_id': recipe_run_id,
                 'step_index': step_index,
@@ -306,6 +310,7 @@ class Scheduler:
                 inputs_consumed=inputs_consumed,
                 outputs_pending=outputs_pending,
                 outputs_pending_units=outputs_pending_units or {},
+                inputs_consumed_units=inputs_consumed_units or {},
                 machines_reserved=machines_reserved,
                 recipe_run_id=recipe_run_id,
                 step_index=step_index,
@@ -458,6 +463,7 @@ class Scheduler:
             inputs_consumed=data['inputs_consumed'],
             outputs_pending=data['outputs_pending'],
             outputs_pending_units=data.get('outputs_pending_units', {}),
+            inputs_consumed_units=data.get('inputs_consumed_units', {}),
             machines_reserved=data['machines_reserved'],
             recipe_run_id=data.get('recipe_run_id'),
             step_index=data.get('step_index'),

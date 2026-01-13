@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 from src.simulation.models import (
     SimulationState,
     InventoryItem,
+    ProvenanceTotals,
     ActiveProcess,
     SimStartEvent,
     ActionEvent,
@@ -153,26 +154,34 @@ class SimulationEngine:
         # Try to consume inputs from inventory
         inputs_available = True
         consumed_inputs = []
+        provenance_totals = {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": 0.0}
+        provenance_consumed = []
 
-        for inp in process_def.get("inputs", []):
-            item_id = inp.get("item_id")
-            unit = inp.get("unit", "kg")
-            if item_id in process_run.inputs_consumed:
-                qty = process_run.inputs_consumed[item_id]
-                success = self.subtract_from_inventory(item_id, qty, unit)
-                if success:
-                    consumed_inputs.append((item_id, qty, unit))
-                else:
-                    inputs_available = False
-                    break
+        for item_id, qty in process_run.inputs_consumed.items():
+            unit = process_run.inputs_consumed_units.get(item_id, "kg")
+            success = self.subtract_from_inventory(item_id, qty, unit)
+            if success:
+                consumed_inputs.append((item_id, qty, unit))
+                context = f"process={process_run.process_id}, run={process_run.process_run_id}, input={item_id}"
+                consumed = self._consume_provenance(item_id, qty, unit, context)
+                provenance_consumed.append((item_id, consumed))
+                for key in provenance_totals:
+                    provenance_totals[key] += consumed[key]
+            else:
+                inputs_available = False
+                break
 
         if not inputs_available:
             # Rollback any inputs we already consumed
             for item_id, qty, unit in consumed_inputs:
                 self.add_to_inventory(item_id, qty, unit)
+            for item_id, consumed in provenance_consumed:
+                self._add_provenance(item_id, consumed)
 
             # Cancel this process (removes from active_processes and event queue)
             self.scheduler.cancel_process(process_run_id)
+        else:
+            process_run.provenance_consumed_kg = provenance_totals
 
     def _add_process_outputs(self, event) -> None:
         """
@@ -210,9 +219,59 @@ class SimulationEngine:
                 for outp in process_def.get("outputs", []):
                     output_units[outp.get("item_id")] = outp.get("unit", "kg")
 
+        process_model = self.kb.get_process(process_run.process_id)
+        process_def = None
+        if process_model:
+            process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
+
+        provenance_consumed = dict(process_run.provenance_consumed_kg or {})
+        provenance_total = sum(provenance_consumed.values())
+
+        if provenance_total <= 0:
+            process_type = process_def.get("process_type") if isinstance(process_def, dict) else None
+            if process_type == "boundary":
+                provenance_consumed = {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": 0.0}
+            elif process_def and process_def.get("inputs"):
+                raise ValueError(
+                    f"Missing provenance for process outputs: "
+                    f"process={process_run.process_id}, run={process_run.process_run_id}"
+                )
+
+        output_kg = {}
+        untracked_outputs = []
+        total_output_kg = 0.0
         for item_id, qty in process_run.outputs_pending.items():
             unit = output_units.get(item_id, "kg")
+            if not self._should_track_mass(item_id, unit):
+                untracked_outputs.append((item_id, unit, qty))
+                continue
+            context = f"process={process_run.process_id}, run={process_run.process_run_id}, output={item_id}"
+            output_mass = self._require_kg(item_id, qty, unit, context)
+            output_kg[item_id] = (output_mass, unit, qty)
+            total_output_kg += output_mass
+
+        for item_id, unit, qty in untracked_outputs:
             self.add_to_inventory(item_id, qty, unit)
+
+        if total_output_kg <= 0:
+            if not output_kg:
+                return
+            raise ValueError(
+                f"Invalid output mass for process={process_run.process_id}, run={process_run.process_run_id}"
+            )
+
+        for item_id, (mass_kg, unit, qty) in output_kg.items():
+            self.add_to_inventory(item_id, qty, unit)
+            if provenance_consumed:
+                if provenance_total <= 0:
+                    self._add_provenance(item_id, {"in_situ_kg": mass_kg})
+                else:
+                    share = mass_kg / total_output_kg
+                    self._add_provenance(item_id, {
+                        "in_situ_kg": provenance_consumed.get("in_situ_kg", 0.0) * share,
+                        "imported_kg": provenance_consumed.get("imported_kg", 0.0) * share,
+                        "unknown_kg": provenance_consumed.get("unknown_kg", 0.0) * share,
+                    })
 
     def _schedule_dependent_recipe_steps(self, event) -> None:
         """
@@ -357,6 +416,70 @@ class SimulationEngine:
         for item_id, inv_item in self.state.inventory.items():
             summary[item_id] = f"{inv_item.quantity} {inv_item.unit}"
         return summary
+
+    # ========================================================================
+    # Provenance helpers
+    # ========================================================================
+
+    def _get_provenance_entry(self, item_id: str) -> ProvenanceTotals:
+        entry = self.state.provenance.get(item_id)
+        if entry is None:
+            entry = ProvenanceTotals()
+            self.state.provenance[item_id] = entry
+        return entry
+
+    def _should_track_mass(self, item_id: str, unit: str) -> bool:
+        if unit in ("kWh", "MWh", "Wh", "J", "MJ", "GJ"):
+            return False
+        return True
+
+    def _require_kg(self, item_id: str, quantity: float, unit: str, context: str) -> float:
+        if not self._should_track_mass(item_id, unit):
+            return 0.0
+        if unit == "kg":
+            return quantity
+        converted = self.converter.convert(quantity, unit, "kg", item_id)
+        if converted is None:
+            item_model = self.kb.get_item(item_id)
+            item_def = item_model.model_dump() if hasattr(item_model, "model_dump") else item_model
+            item_unit = item_def.get("unit") if isinstance(item_def, dict) else None
+            raise ValueError(
+                f"Provenance conversion failed ({context}): "
+                f"cannot convert {quantity} {unit} of '{item_id}' to kg "
+                f"(item unit={item_unit}). Fix item mass/unit or process I/O units."
+            )
+        return converted
+
+    def _consume_provenance(self, item_id: str, quantity: float, unit: str, context: str) -> Dict[str, float]:
+        if not self._should_track_mass(item_id, unit):
+            return {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": 0.0}
+        consumed_kg = self._require_kg(item_id, quantity, unit, context)
+        entry = self._get_provenance_entry(item_id)
+        total_kg = entry.in_situ_kg + entry.imported_kg + entry.unknown_kg
+        if total_kg <= 0:
+            return {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": consumed_kg}
+        if consumed_kg > total_kg + 1e-6:
+            raise ValueError(
+                f"Provenance underflow ({context}): consuming {consumed_kg:.4f} kg "
+                f"but only {total_kg:.4f} kg recorded for '{item_id}'"
+            )
+
+        ratio = consumed_kg / total_kg if total_kg else 0.0
+        consumed = {
+            "in_situ_kg": entry.in_situ_kg * ratio,
+            "imported_kg": entry.imported_kg * ratio,
+            "unknown_kg": entry.unknown_kg * ratio,
+        }
+        entry.in_situ_kg -= consumed["in_situ_kg"]
+        entry.imported_kg -= consumed["imported_kg"]
+        entry.unknown_kg -= consumed["unknown_kg"]
+        return consumed
+
+    def _add_provenance(self, item_id: str, totals: Dict[str, float]) -> None:
+        entry = self._get_provenance_entry(item_id)
+        entry.in_situ_kg += totals.get("in_situ_kg", 0.0)
+        entry.imported_kg += totals.get("imported_kg", 0.0)
+        entry.unknown_kg += totals.get("unknown_kg", 0.0)
 
     # ========================================================================
     # Inventory management
@@ -771,6 +894,10 @@ class SimulationEngine:
             item_id: inv_item.quantity
             for item_id, inv_item in inputs_consumed.items()
         }
+        inputs_units = {
+            item_id: inv_item.unit
+            for item_id, inv_item in inputs_consumed.items()
+        }
         outputs_dict = {
             item_id: inv_item.quantity
             for item_id, inv_item in outputs_pending.items()
@@ -810,6 +937,7 @@ class SimulationEngine:
             inputs_consumed=inputs_dict,
             outputs_pending=outputs_dict,
             outputs_pending_units=outputs_units,
+            inputs_consumed_units=inputs_units,
             machines_reserved=machines_reserved,
             recipe_run_id=recipe_run_id,
             step_index=step_index,
@@ -1301,15 +1429,18 @@ class SimulationEngine:
 
         # Estimate mass for tracking
         mass_kg = None
-        if unit == "kg":
-            mass_kg = quantity
-        else:
-            # Try to convert to kg (handle Pydantic models)
-            try:
-                mass_kg = self.converter.convert(quantity, unit, "kg", item_id)
-            except Exception:
-                # Conversion failed, that's okay
-                pass
+        if self._should_track_mass(item_id, unit):
+            if unit == "kg":
+                mass_kg = quantity
+            else:
+                # Try to convert to kg (handle Pydantic models)
+                try:
+                    mass_kg = self.converter.convert(quantity, unit, "kg", item_id)
+                except Exception:
+                    # Conversion failed, that's okay
+                    pass
+            if mass_kg is not None:
+                self._add_provenance(item_id, {"imported_kg": mass_kg})
 
         # Log event
         self._log_event(

@@ -16,6 +16,13 @@ class InventoryItem(BaseModel):
     unit: str  # kg, count, m3, liter, etc.
 
 
+class ProvenanceTotals(BaseModel):
+    """Mass provenance totals (kg) for an inventory item."""
+    in_situ_kg: float = 0.0
+    imported_kg: float = 0.0
+    unknown_kg: float = 0.0
+
+
 class ActiveProcess(BaseModel):
     """A process currently running in the simulation."""
     process_id: str
@@ -36,6 +43,7 @@ class SimulationState(BaseModel):
     machines_built: List[str] = Field(default_factory=list)
     machines_in_use: Dict[str, int] = Field(default_factory=dict)
     total_imports: Dict[str, InventoryItem] = Field(default_factory=dict)
+    provenance: Dict[str, ProvenanceTotals] = Field(default_factory=dict)
     total_energy_kwh: float = 0.0  # Cumulative energy consumed
 
 
