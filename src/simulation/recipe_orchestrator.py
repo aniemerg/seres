@@ -29,6 +29,7 @@ class RecipeRun:
     recipe_run_id: str
     recipe_id: str
     target_item_id: str
+    recipe_def: Dict[str, Any]
     dependency_graph: DependencyGraph
     started_at: float
 
@@ -154,6 +155,7 @@ class RecipeOrchestrator:
             recipe_run_id=recipe_run_id,
             recipe_id=recipe_id,
             target_item_id=target_item_id,
+            recipe_def=recipe_dict,
             dependency_graph=dependency_graph,
             started_at=start_time,
         )

@@ -359,13 +359,14 @@ class KBLoader:
 
         # Lazy load from file (try multiple locations)
         # Try kb/items/<kind>/<item_id>.yaml
-        for kind in ["materials", "parts", "machines"]:
+        for kind in ["materials", "raw_materials", "parts", "machines"]:
             item_file = self.kb_root / "items" / kind / f"{item_id}.yaml"
             if item_file.exists():
                 try:
                     data = self._load_yaml_file(item_file)
                     if data:
-                        model = self._parse_model(data, kind.rstrip("s"))  # materials -> material
+                        parse_kind = data.get("kind", "material")
+                        model = self._parse_model(data, parse_kind)
                         # Cache it
                         if self.cache_enabled and self._items is not None:
                             self._items[item_id] = model

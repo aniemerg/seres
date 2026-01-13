@@ -1,0 +1,76 @@
+id: recipe_burner_or_heater_casting_local_v1
+kind: recipe
+target_item_id: burner_or_heater_casting
+variant_id: local_v1
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 80.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: burner_or_heater_casting
+    qty: 1
+    unit: unit
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: metal_alloy_bulk
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 78.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Cast heater body and housing.
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 78.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 76.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Machine mounting surfaces.
+  - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 76.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 76.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: Attach heating element mounts and connections.
+  - process_id: burner_or_heater_casting_assembly_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 76.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: burner_or_heater_casting
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Final assembly with electronics and fasteners.
+assumptions: "Local fabrication route using metal_alloy_bulk and standard welding/assembly."
+notes: "Local burner/heater assembly variant to reduce metal_feedstock imports."

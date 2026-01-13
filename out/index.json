@@ -1894,7 +1894,7 @@
       "name": "Anvil block (basic)",
       "refs_in": [
         "bom_metal_forming_basic_v0",
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "recipe_anvil_block_basic_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_power_hammer_or_press_v0"
@@ -2563,7 +2563,6 @@
         "recipe_atomization_unit_v0_v0",
         "recipe_auger_drill_assembly_v0",
         "recipe_balancing_machine_v0",
-        "recipe_ball_mill_v0",
         "recipe_ball_mill_v0_seed_v0",
         "recipe_battery_cell_casing_import_v0",
         "recipe_battery_cell_casing_metal_v0",
@@ -2599,7 +2598,6 @@
         "recipe_carbonyl_safety_system_v0",
         "recipe_carbonyl_safety_system_v0_v0",
         "recipe_cartesian_gantry_assembler_robot_v0",
-        "recipe_casting_furnace_shell_v0",
         "recipe_casting_mold_set_v0",
         "recipe_catalyst_bed_assembly_v0",
         "recipe_cathode_basket_assembly_v0",
@@ -5031,7 +5029,8 @@
         "recipe_ilmenite_concentrate_v0",
         "recipe_magnetic_concentrate_v0",
         "recipe_non_magnetic_tailings_v0",
-        "recipe_meteorite_iron_v0"
+        "recipe_meteorite_iron_v0",
+        "recipe_nickel_metal_from_regolith_v0"
       ],
       "refs_out": [
         "magnetic_concentrate",
@@ -11648,16 +11647,15 @@
       ],
       "status": "defined"
     },
-    "bom_power_hammer_or_press_v0": {
+    "bom_power_hammer_or_press": {
       "aliases": [],
-      "defined_in": "kb/boms/bom_power_hammer_or_press_v0.yaml",
-      "id": "bom_power_hammer_or_press_v0",
+      "defined_in": "kb/boms/bom_power_hammer_or_press.yaml",
+      "id": "bom_power_hammer_or_press",
       "kind": "bom",
       "layer_tags": [],
       "name": null,
       "refs_in": [
-        "power_hammer_or_press",
-        "power_hammer_or_press_v0"
+        "power_hammer_or_press"
       ],
       "refs_out": [
         "anvil_block_basic",
@@ -11667,10 +11665,23 @@
         "hammer_frame_basic",
         "hammer_head_basic",
         "power_conditioning_module",
-        "power_hammer_or_press_v0",
+        "power_hammer_or_press",
         "sensor_suite_general"
       ],
       "status": "defined"
+    },
+    "bom_power_hammer_or_press_v0": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "bom_power_hammer_or_press_v0",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "power_hammer_or_press_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
     },
     "bom_power_management_system_v0": {
       "aliases": [],
@@ -14998,10 +15009,47 @@
       "name": "Burner or heater assembly (casting)",
       "refs_in": [
         "bom_casting_furnace_v0",
+        "burner_or_heater_casting_assembly_v0",
+        "burner_or_heater_casting_fabrication_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_machine_casting_furnace_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "burner_or_heater_casting_assembly_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/burner_or_heater_casting_assembly_v0.yaml",
+      "id": "burner_or_heater_casting_assembly_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Burner or heater assembly (casting)",
+      "refs_in": [
+        "recipe_burner_or_heater_casting_local_v1"
+      ],
+      "refs_out": [
+        "burner_or_heater_casting",
+        "electronic_components_set",
+        "fastener_kit_medium",
+        "welded_assemblies"
+      ],
+      "status": "defined"
+    },
+    "burner_or_heater_casting_fabrication_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/burner_or_heater_casting_fabrication_v0.yaml",
+      "id": "burner_or_heater_casting_fabrication_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Burner or heater fabrication (casting)",
+      "refs_in": [],
+      "refs_out": [
+        "burner_or_heater_casting",
+        "electronic_components_set",
+        "fastener_kit_medium",
+        "metal_alloy_bulk"
+      ],
       "status": "defined"
     },
     "bus_bar_copper": {
@@ -16305,6 +16353,7 @@
         "recipe_bearing_set_v0",
         "recipe_brazing_furnace_v0_v0",
         "recipe_brick_mold_steel_set_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_casting_furnace_shell_v0",
         "recipe_cement_mixer_small_v0",
@@ -16518,10 +16567,28 @@
       "name": "Casting furnace shell",
       "refs_in": [
         "bom_casting_furnace_v0",
+        "casting_furnace_shell_assembly_v0",
         "recipe_casting_furnace_shell_v0",
         "recipe_machine_casting_furnace_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "casting_furnace_shell_assembly_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/casting_furnace_shell_assembly_v0.yaml",
+      "id": "casting_furnace_shell_assembly_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Casting furnace shell assembly",
+      "refs_in": [
+        "recipe_casting_furnace_shell_v0"
+      ],
+      "refs_out": [
+        "casting_furnace_shell",
+        "sintered_shapes",
+        "welded_assemblies"
+      ],
       "status": "defined"
     },
     "casting_furnace_v0": {
@@ -20402,7 +20469,7 @@
         "bom_milling_machine_general_v0",
         "bom_milling_machine_v0_v0",
         "bom_mre_reactor_v0",
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "bom_power_storage_bank_v0",
         "bom_press_hydraulic_v0",
         "bom_quench_tank_v0",
@@ -21056,6 +21123,7 @@
         "bom_mre_reactor_v0",
         "bom_reduction_furnace_v0",
         "bom_sintering_furnace_v0",
+        "cooling_loop_basic_fabrication_v0",
         "recipe_cnc_mill_v0",
         "recipe_cnc_mill_v0_seed_v0",
         "recipe_cnc_mill_v0_v0",
@@ -21073,6 +21141,21 @@
         "recipe_neural_network_training_system_v0_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "cooling_loop_basic_fabrication_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/cooling_loop_basic_fabrication_v0.yaml",
+      "id": "cooling_loop_basic_fabrication_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Cooling loop fabrication (basic)",
+      "refs_in": [],
+      "refs_out": [
+        "cooling_loop_basic",
+        "fastener_kit_small",
+        "metal_alloy_bulk"
+      ],
       "status": "defined"
     },
     "cooling_radiator_anode": {
@@ -25186,11 +25269,14 @@
         "bom_pcb_fab_station",
         "bom_ratslam_hardware_implementation_v0",
         "bom_ratslam_hardware_implementation_v0_v0",
+        "burner_or_heater_casting_assembly_v0",
+        "burner_or_heater_casting_fabrication_v0",
         "cryocooler_active_assembly_v0",
         "electronics_assembly_v0",
         "machine_vision_camera_assembly_v0",
         "neural_analog_tile_generation_v0",
         "power_component_assembly_v0",
+        "power_conditioning_module_fabrication_v0",
         "power_supply_components_basic_fabrication_v0",
         "wiring_and_electronics_integration_v0",
         "recipe_amplifier_circuit_vacuum_tube_v0",
@@ -25199,6 +25285,7 @@
         "recipe_assembled_electrical_equipment_v0",
         "recipe_assembled_electronics_v0",
         "recipe_assembled_equipment_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_capacitor_bank_filter_v0",
         "recipe_capacitor_bank_filter_v1",
@@ -26615,7 +26702,7 @@
         "bom_powder_mill_and_mixer_v0",
         "bom_powder_mixer_v0",
         "bom_power_conditioning_equipment_v0",
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "bom_power_storage_bank_v0",
         "bom_power_supply_unit_v0_v0",
         "bom_power_unit_v0",
@@ -26653,6 +26740,8 @@
         "bom_welding_spot_welder_v0",
         "bom_winding_drums",
         "bom_winding_machine_v0",
+        "burner_or_heater_casting_assembly_v0",
+        "burner_or_heater_casting_fabrication_v0",
         "drive_motor_medium_assembly_v0",
         "fastener_kit_medium_production_v0",
         "machine_assembly_spot_welder_v0",
@@ -26670,6 +26759,7 @@
         "recipe_ball_mill_v0",
         "recipe_ball_mill_v0_seed_v0",
         "recipe_build_atmosphere_control_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_carbon_feeder_screw_v0",
         "recipe_catalyst_bed_assembly_v0",
@@ -26915,8 +27005,11 @@
         "bom_wire_crimping_tools_v0",
         "bom_workbench_basic_v0",
         "control_panel_assembly_v0",
+        "cooling_loop_basic_fabrication_v0",
+        "fastener_kit_small_fabrication_v0",
         "flow_controller_valve_set_assembly_v0",
         "optical_metrology_tools_assembly_v0",
+        "power_conditioning_module_fabrication_v0",
         "recipe_accelerometer_mechanical_v0",
         "recipe_actuator_pneumatic_linear_v0",
         "recipe_air_bearing_assembly_v3",
@@ -27072,6 +27165,20 @@
         "recipe_workpiece_fixture_set_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "fastener_kit_small_fabrication_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/fastener_kit_small_fabrication_v0.yaml",
+      "id": "fastener_kit_small_fabrication_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Fastener kit (small) fabrication",
+      "refs_in": [],
+      "refs_out": [
+        "fastener_kit_small",
+        "metal_alloy_bulk"
+      ],
       "status": "defined"
     },
     "feed_and_clamp_system": {
@@ -31538,7 +31645,7 @@
       "layer_tags": [],
       "name": "Hammer drive motor",
       "refs_in": [
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "recipe_hammer_drive_motor_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_power_hammer_or_press_v0"
@@ -31554,7 +31661,7 @@
       "layer_tags": [],
       "name": "Hammer frame (basic)",
       "refs_in": [
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "recipe_hammer_frame_basic_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_power_hammer_or_press_v0"
@@ -31570,7 +31677,7 @@
       "layer_tags": [],
       "name": "Hammer head (basic)",
       "refs_in": [
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "recipe_hammer_head_basic_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_power_hammer_or_press_v0"
@@ -36208,6 +36315,7 @@
         "nickel_extraction_meteorite_v0",
         "recipe_iron_metal_v0",
         "recipe_nickel_compound_active_material_import_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_nickel_metal_import_v0",
         "recipe_nickel_sheet_v0",
         "recipe_nife_alloy_byproduct_v0",
@@ -38660,6 +38768,7 @@
         "recipe_bolt_and_nut_steel_v0",
         "recipe_brazing_furnace_v0_v0",
         "recipe_bucket_assembly_small_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_busbar_distribution_system_v0",
         "recipe_calibration_standards_v0",
@@ -39130,6 +39239,7 @@
         "recipe_brazing_furnace_v0_v0",
         "recipe_brick_mold_steel_set_v0",
         "recipe_bucket_assembly_small_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_calibration_standards_v0",
         "recipe_caliper_set_precision_v0",
@@ -40868,11 +40978,15 @@
         "alloying_basic_v0",
         "brazing_alloy_synthesis_v0",
         "bronze_alloy_casting_v0",
+        "burner_or_heater_casting_fabrication_v0",
+        "cooling_loop_basic_fabrication_v0",
+        "fastener_kit_small_fabrication_v0",
         "liquid_sodium_receiver_fabrication_v0",
         "melting_basic_v0",
         "metal_casting_basic_v0",
         "metal_ingot_cast_v0",
         "oxygen_extraction_molten_regolith_electrolysis_v0",
+        "power_conditioning_module_fabrication_v0",
         "recipe_cutting_tool_set_basic_v0",
         "recipe_magnetic_separator_drum_body_v0",
         "recipe_metal_alloy_bulk_v0",
@@ -40895,6 +41009,8 @@
         "recipe_belt_and_pulley_set_v0",
         "recipe_brazing_furnace_v0_v0",
         "recipe_bronze_block_material_v0",
+        "recipe_burner_or_heater_casting_local_v1",
+        "recipe_burner_or_heater_casting_v0",
         "recipe_cast_part_raw_v0",
         "recipe_casting_furnace_shell_v0",
         "recipe_charging_system_v0",
@@ -40968,6 +41084,7 @@
         "recipe_motion_gantry_basic_v0",
         "recipe_motor_assembly_v0",
         "recipe_motor_electric_medium_v0",
+        "recipe_motor_housing_cast_v0",
         "recipe_nickel_sheet_rolling_v0",
         "recipe_offgas_manifold_v0",
         "recipe_packed_bed_distillation_v0",
@@ -41076,6 +41193,7 @@
         "recipe_brass_bar_stock_v0",
         "recipe_brazing_furnace_v0_v0",
         "recipe_brick_mold_steel_set_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_caliper_set_precision_v0",
         "recipe_cast_part_raw_v0",
@@ -41445,7 +41563,6 @@
         "alloying_basic_v0",
         "recipe_metal_casting_blank_v0",
         "recipe_brick_mold_steel_set_v0",
-        "recipe_burner_or_heater_casting_v0",
         "recipe_cement_mixer_small_v0",
         "recipe_circuit_board_tools_v0",
         "recipe_cooling_loop_basic_v0",
@@ -41464,7 +41581,6 @@
         "recipe_installed_belt_drive_v0",
         "recipe_lathe_bed_and_headstock_v0",
         "recipe_machine_punch_press_drill_v0",
-        "recipe_motor_housing_cast_v0",
         "recipe_robot_end_effector_tool_v0",
         "recipe_sealing_equipment_v0",
         "recipe_sintering_furnace_shell_v0",
@@ -42247,6 +42363,7 @@
         "nife_meteorite_excavation_process_v0",
         "recipe_meteorite_iron_v0",
         "recipe_nickel_compound_active_material_import_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_nickel_metal_import_v0",
         "recipe_nickel_sheet_v0"
       ],
@@ -44877,6 +44994,7 @@
       "name": "Nickel extraction from meteorite",
       "refs_in": [
         "recipe_nickel_compound_active_material_import_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_nickel_metal_import_v0",
         "recipe_nickel_sheet_v0",
         "recipe_nife_alloy_byproduct_v0",
@@ -45010,6 +45128,7 @@
         "recipe_inovco_alloy_v0",
         "recipe_nickel_aluminum_alloy_v0",
         "recipe_nickel_chromium_alloy_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_nickel_metal_import_v0",
         "recipe_nickel_metal_pure_v0",
         "recipe_nickel_sheet_rolling_v0",
@@ -49710,7 +49829,7 @@
         "bom_milling_machine_general_v0",
         "bom_milling_machine_v0_v0",
         "bom_mineral_processing_unit",
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "bom_power_management_system_v0",
         "bom_power_storage_bank_v0",
         "bom_power_supply_bench_v0",
@@ -49730,6 +49849,7 @@
         "bom_vibratory_feeder_v0",
         "bom_welding_power_supply_v0",
         "bom_winding_machine_v0",
+        "power_conditioning_module_fabrication_v0",
         "recipe_assembly_station_v0",
         "recipe_assembly_tools_basic_v0",
         "recipe_balancing_machine_v0",
@@ -49777,6 +49897,22 @@
         "recipe_thermionic_generator_v0"
       ],
       "refs_out": [],
+      "status": "defined"
+    },
+    "power_conditioning_module_fabrication_v0": {
+      "aliases": [],
+      "defined_in": "kb/processes/power_conditioning_module_fabrication_v0.yaml",
+      "id": "power_conditioning_module_fabrication_v0",
+      "kind": "process",
+      "layer_tags": [],
+      "name": "Power conditioning module fabrication",
+      "refs_in": [],
+      "refs_out": [
+        "electronic_components_set",
+        "fastener_kit_small",
+        "metal_alloy_bulk",
+        "power_conditioning_module"
+      ],
       "status": "defined"
     },
     "power_distribution": {
@@ -49837,7 +49973,7 @@
     },
     "power_distribution_bus": {
       "aliases": [],
-      "defined_in": "kb/items/machines/power_distribution_bus_system.yaml",
+      "defined_in": "kb/items/machines/power_distribution_bus.yaml",
       "id": "power_distribution_bus",
       "kind": "machine",
       "layer_tags": [],
@@ -49992,10 +50128,11 @@
       "layer_tags": [],
       "name": "Power hammer or press",
       "refs_in": [
+        "bom_power_hammer_or_press",
         "recipe_power_hammer_or_press_v0"
       ],
       "refs_out": [
-        "bom_power_hammer_or_press_v0"
+        "bom_power_hammer_or_press"
       ],
       "status": "defined"
     },
@@ -50007,7 +50144,6 @@
       "layer_tags": [],
       "name": "Power hammer or press v0",
       "refs_in": [
-        "bom_power_hammer_or_press_v0",
         "recipe_machine_power_hammer_or_press_v0"
       ],
       "refs_out": [
@@ -53925,7 +54061,6 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "assembly_basic_v0",
         "ball_mill_v0",
         "bearing_set_heavy",
         "drive_motor_medium",
@@ -55313,6 +55448,29 @@
       ],
       "status": "defined"
     },
+    "recipe_burner_or_heater_casting_local_v1": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_burner_or_heater_casting_local_v1.yaml",
+      "id": "recipe_burner_or_heater_casting_local_v1",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "burner_or_heater_casting",
+        "burner_or_heater_casting_assembly_v0",
+        "cast_metal_parts",
+        "electronic_components_set",
+        "fastener_kit_medium",
+        "machined_part_raw",
+        "machining_finish_basic_v0",
+        "metal_alloy_bulk",
+        "metal_casting_basic_v0",
+        "welded_assemblies",
+        "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_burner_or_heater_casting_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_burner_or_heater_casting_v0.yaml",
@@ -55329,8 +55487,8 @@
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
+        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "metal_feedstock",
         "welded_fabrications",
         "welding_brazing_basic_v0"
       ],
@@ -56109,9 +56267,9 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "assembly_basic_v0",
         "cast_metal_parts",
         "casting_furnace_shell",
+        "casting_furnace_shell_assembly_v0",
         "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "regolith_fine_fraction",
@@ -75066,8 +75224,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
+        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "metal_feedstock",
         "motor_housing_cast"
       ],
       "status": "defined"
@@ -75558,6 +75716,25 @@
         "nickel_mesh_sheet_material",
         "nickel_mesh_sheet_production_v0",
         "nickel_metal_pure"
+      ],
+      "status": "defined"
+    },
+    "recipe_nickel_metal_from_regolith_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_nickel_metal_from_regolith_v0.yaml",
+      "id": "recipe_nickel_metal_from_regolith_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Nickel metal from regolith via meteorite extraction",
+      "refs_in": [],
+      "refs_out": [
+        "beneficiate_regolith_magnetic_v0",
+        "iron_metal",
+        "meteorite_iron",
+        "nickel_extraction_meteorite_v0",
+        "nickel_metal",
+        "regolith_lunar_mare",
+        "tailings"
       ],
       "status": "defined"
     },
@@ -90248,6 +90425,7 @@
         "recipe_machine_solar_thermal_storage_system_v0",
         "recipe_meteorite_iron_v0",
         "recipe_molten_glass_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_plagioclase_feldspar_v0",
         "recipe_prepared_material_v0",
         "recipe_process_waste_v0",
@@ -92616,7 +92794,7 @@
         "bom_mre_reactor_v0",
         "bom_nife_meteorite_magnetic_detection_v0",
         "bom_pcb_development_station",
-        "bom_power_hammer_or_press_v0",
+        "bom_power_hammer_or_press",
         "bom_power_storage_bank_v0",
         "bom_press_hydraulic_v0",
         "bom_quench_tank_v0",
@@ -94152,6 +94330,7 @@
       "name": "Sintered shapes",
       "refs_in": [
         "ceramic_sintering_high_temp_v0",
+        "casting_furnace_shell_assembly_v0",
         "ceramic_firing_high_temp_v0",
         "sintering_and_hot_pressing_v0",
         "recipe_part_liner_set_abrasion_resistant_v0",
@@ -98605,6 +98784,7 @@
         "recipe_ilmenite_from_regolith_v0",
         "recipe_iron_ore_or_ilmenite_basic_v0",
         "recipe_molten_glass_v0",
+        "recipe_nickel_metal_from_regolith_v0",
         "recipe_plagioclase_feldspar_v0",
         "recipe_processed_tailings_v0",
         "recipe_silica_purified_v0",
@@ -103063,6 +103243,8 @@
       "layer_tags": [],
       "name": "Welded assemblies",
       "refs_in": [
+        "burner_or_heater_casting_assembly_v0",
+        "casting_furnace_shell_assembly_v0",
         "heat_treatment_stress_relief_v0",
         "leak_testing_v0",
         "welding_basic_v0",
@@ -103074,6 +103256,7 @@
         "recipe_blower_fan_small_v0",
         "recipe_brazing_furnace_v0_v0",
         "recipe_bucket_assembly_small_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_casting_furnace_shell_v0",
         "recipe_chemical_bath_tank_set_v0",
         "recipe_chemical_bath_tank_set_v1",
@@ -103529,6 +103712,7 @@
         "recipe_amari_neural_field_hardware_v0",
         "recipe_ball_mill_v0",
         "recipe_brazing_furnace_v0_v0",
+        "recipe_burner_or_heater_casting_local_v1",
         "recipe_burner_or_heater_casting_v0",
         "recipe_casting_furnace_shell_v0",
         "recipe_chemical_bath_tank_set_v0",

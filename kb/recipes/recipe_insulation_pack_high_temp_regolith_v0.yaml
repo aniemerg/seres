@@ -1,0 +1,35 @@
+id: recipe_insulation_pack_high_temp_regolith_v0
+kind: recipe
+name: High-temp insulation pack from regolith-based insulation
+target_item_id: insulation_pack_high_temp
+variant_id: regolith_v0
+inputs:
+  - item_id: thermal_insulation_regolith_based_v0
+    qty: 120.0
+    unit: kg
+outputs:
+  - item_id: insulation_pack_high_temp
+    qty: 1
+    unit: unit
+  - item_id: dust_fines
+    qty: 3.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: thermal_insulation_regolith_based_v0
+        qty: 120.0
+        unit: kg
+    outputs:
+      - item_id: insulation_pack_high_temp
+        qty: 1
+        unit: unit
+      - item_id: dust_fines
+        qty: 3.0
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 5.0
+    labor_hours: 1.0
+    notes: "Form regolith-based insulation into panels/blankets and kit into a high-temp pack."
+assumptions: "Regolith-based insulation can be formed into high-temperature panels with adequate thermal performance."
+notes: "Local alternative to ceramic fiber-based insulation pack using regolith-derived insulation."

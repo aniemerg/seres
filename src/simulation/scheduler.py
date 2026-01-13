@@ -134,6 +134,7 @@ class ProcessRun:
     inputs_consumed: Dict[str, float]
     outputs_pending: Dict[str, float]
     machines_reserved: Dict[str, float]
+    outputs_pending_units: Dict[str, str] = field(default_factory=dict)
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
@@ -237,6 +238,7 @@ class Scheduler:
         inputs_consumed: Dict[str, float],
         outputs_pending: Dict[str, float],
         machines_reserved: Dict[str, float],
+        outputs_pending_units: Optional[Dict[str, str]] = None,
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
         energy_kwh: Optional[float] = None,
@@ -253,6 +255,7 @@ class Scheduler:
             inputs_consumed: Input items consumed
             outputs_pending: Output items to produce
             machines_reserved: Machines reserved
+            outputs_pending_units: Units for outputs_pending
             recipe_run_id: Parent recipe run ID (if part of recipe)
             step_index: Step index in recipe (if applicable)
 
@@ -272,6 +275,7 @@ class Scheduler:
                 'scale': scale,
                 'inputs_consumed': inputs_consumed,
                 'outputs_pending': outputs_pending,
+                'outputs_pending_units': outputs_pending_units or {},
                 'machines_reserved': machines_reserved,
                 'recipe_run_id': recipe_run_id,
                 'step_index': step_index,
@@ -301,6 +305,7 @@ class Scheduler:
                 scale=scale,
                 inputs_consumed=inputs_consumed,
                 outputs_pending=outputs_pending,
+                outputs_pending_units=outputs_pending_units or {},
                 machines_reserved=machines_reserved,
                 recipe_run_id=recipe_run_id,
                 step_index=step_index,
@@ -452,6 +457,7 @@ class Scheduler:
             scale=data['scale'],
             inputs_consumed=data['inputs_consumed'],
             outputs_pending=data['outputs_pending'],
+            outputs_pending_units=data.get('outputs_pending_units', {}),
             machines_reserved=data['machines_reserved'],
             recipe_run_id=data.get('recipe_run_id'),
             step_index=data.get('step_index'),

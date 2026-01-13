@@ -1,0 +1,38 @@
+id: cooling_loop_basic_fabrication_v0
+kind: process
+name: Cooling loop fabrication (basic)
+process_type: batch
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 60.0
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: cooling_loop_basic
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: furnace_basic
+    qty: 1
+    unit: count
+  - machine_id: milling_machine_general_v0
+    qty: 1
+    unit: count
+  - machine_id: assembly_tools_basic
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 8.0
+  notes: Casting, machining, and assembly of a simple loop.
+energy_model:
+  type: fixed_per_batch
+  value: 10.0
+  unit: kWh
+  notes: Furnace heating and machining energy.
+notes: Aggregated fabrication step for a basic cooling loop to support in-situ builds.

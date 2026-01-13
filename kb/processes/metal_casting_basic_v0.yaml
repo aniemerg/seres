@@ -19,7 +19,7 @@ resource_requirements:
 - machine_id: crucible_refractory
   qty: 1
   unit: count
-- machine_id: casting_furnace_v0
+- machine_id: furnace_basic
   qty: 1
   unit: count
 - machine_id: casting_mold_set
@@ -34,5 +34,5 @@ time_model:
   type: batch
   hr_per_batch: 1.5
   notes: furnace heat-up, pour, cool cycle
-notes: Casting anchor; drives crucible_refractory, furnace, and mold requirements.
+notes: Casting anchor; uses furnace_basic to avoid deprecated casting_furnace_v0.
 is_template: true

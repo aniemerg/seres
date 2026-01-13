@@ -626,6 +626,10 @@ class SimulationEngine:
             item_id: inv_item.quantity
             for item_id, inv_item in outputs_pending.items()
         }
+        outputs_units = {
+            item_id: inv_item.unit
+            for item_id, inv_item in outputs_pending.items()
+        }
 
         # Calculate energy at scheduling time (persisted with event)
         energy_kwh = 0.0
@@ -656,6 +660,7 @@ class SimulationEngine:
             scale=scale,
             inputs_consumed=inputs_dict,
             outputs_pending=outputs_dict,
+            outputs_pending_units=outputs_units,
             machines_reserved=machines_reserved,
             recipe_run_id=recipe_run_id,
             step_index=step_index,
@@ -758,7 +763,7 @@ class SimulationEngine:
 
         Args:
             recipe_id: Recipe definition ID
-            quantity: Number of recipe instances to run (for backward compatibility, currently ignored)
+            quantity: Number of recipe instances to run
             start_time: When recipe starts (default: now)
 
         Returns:
@@ -774,6 +779,9 @@ class SimulationEngine:
             }
 
         recipe_def = recipe_model.model_dump() if hasattr(recipe_model, 'model_dump') else recipe_model
+        if quantity != 1:
+            for step in recipe_def.get("steps", []):
+                step["scale"] = step.get("scale", 1.0) * quantity
 
         # ADR-020 validation
         validation_issues = validate_recipe_adr020(recipe_def)
@@ -806,7 +814,7 @@ class SimulationEngine:
         scheduled_count = 0
         for step_idx in ready_steps:
             recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
-            step = recipe_def['steps'][step_idx]
+            step = dict(recipe_def['steps'][step_idx])
 
             # Resolve step to apply overrides (ADR-013)
             resolved_process = self.resolve_step(step)
@@ -834,6 +842,9 @@ class SimulationEngine:
             time_model = resolved_process.get('time_model', {})
             if time_model.get('type') == 'batch':
                 duration_hours = time_model.get('hr_per_batch', 1.0)
+                step_scale = step.get("scale", 1.0)
+                if step_scale != 1.0:
+                    duration_hours *= step_scale
             elif time_model.get('type') == 'linear_rate':
                 # Need outputs to calculate from rate
                 pass
@@ -1366,49 +1377,51 @@ class SimulationEngine:
 
                 if process_run:
                     # Add outputs to inventory with correct units
-                    # Get process definition to look up output units
-                    process_model = self.kb.get_process(process_run.process_id)
-                    if process_model:
-                        if hasattr(process_model, 'model_dump'):
-                            process_def = process_model.model_dump()
-                        else:
-                            process_def = process_model
+                    output_units = dict(process_run.outputs_pending_units or {})
 
-                        # Build a map of item_id -> unit from process outputs
-                        output_units = {}
-                        for outp in process_def.get("outputs", []):
-                            output_units[outp.get("item_id")] = outp.get("unit", "kg")
+                    if not output_units:
+                        # Fallback to process definition units when units weren't captured
+                        process_model = self.kb.get_process(process_run.process_id)
+                        if process_model:
+                            if hasattr(process_model, 'model_dump'):
+                                process_def = process_model.model_dump()
+                            else:
+                                process_def = process_model
 
-                        # Add outputs with their correct units
-                        for item_id, qty in process_run.outputs_pending.items():
-                            unit = output_units.get(item_id, "kg")
-                            self.add_to_inventory(item_id, qty, unit)
-                    else:
-                        # Fallback if process definition not found
-                        for item_id, qty in process_run.outputs_pending.items():
-                            self.add_to_inventory(item_id, qty, "kg")
+                            for outp in process_def.get("outputs", []):
+                                output_units[outp.get("item_id")] = outp.get("unit", "kg")
+
+                    for item_id, qty in process_run.outputs_pending.items():
+                        unit = output_units.get(item_id, "kg")
+                        self.add_to_inventory(item_id, qty, unit)
 
                     # Release machine reservations
                     self.reservation_manager.remove_reservation(process_run_id)
 
                     # Reconstruct outputs with units for event logging
-                    process_model = self.kb.get_process(process_run.process_id)
                     outputs_with_units = {}
-                    if process_model:
-                        # Convert to dict if it's a Pydantic model
-                        if hasattr(process_model, 'model_dump'):
-                            process_def = process_model.model_dump()
-                        else:
-                            process_def = process_model
+                    if output_units:
+                        for item_id, qty in process_run.outputs_pending.items():
+                            outputs_with_units[item_id] = InventoryItem(
+                                quantity=qty,
+                                unit=output_units.get(item_id, "kg"),
+                            )
+                    else:
+                        process_model = self.kb.get_process(process_run.process_id)
+                        if process_model:
+                            if hasattr(process_model, 'model_dump'):
+                                process_def = process_model.model_dump()
+                            else:
+                                process_def = process_model
 
-                        for outp in process_def.get("outputs", []):
-                            item_id = outp.get("item_id")
-                            unit = outp.get("unit", "kg")
-                            if item_id in process_run.outputs_pending:
-                                outputs_with_units[item_id] = InventoryItem(
-                                    quantity=process_run.outputs_pending[item_id],
-                                    unit=unit
-                                )
+                            for outp in process_def.get("outputs", []):
+                                item_id = outp.get("item_id")
+                                unit = outp.get("unit", "kg")
+                                if item_id in process_run.outputs_pending:
+                                    outputs_with_units[item_id] = InventoryItem(
+                                        quantity=process_run.outputs_pending[item_id],
+                                        unit=unit
+                                    )
 
                     # Retrieve stored energy for this process
                     energy_kwh = process_run.energy_kwh or 0.0
@@ -1445,10 +1458,10 @@ class SimulationEngine:
                         ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
 
                         for step_idx in ready_steps:
-                            recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
-                            if recipe_run:
-                                recipe_def = self.kb.get_recipe(recipe_run.recipe_id).model_dump()
-                                step = recipe_def['steps'][step_idx]
+                                recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                                if recipe_run:
+                                    recipe_def = recipe_run.recipe_def or {}
+                                    step = recipe_def.get('steps', [])[step_idx]
 
                                 # Resolve step overrides (ADR-013)
                                 resolved_process = self.resolve_step(step)
@@ -1469,6 +1482,9 @@ class SimulationEngine:
                                 time_model = resolved_process.get('time_model', {})
                                 if time_model.get('type') == 'batch':
                                     duration_hours = time_model.get('hr_per_batch', 1.0)
+                                    step_scale = step.get("scale", 1.0)
+                                    if step_scale != 1.0:
+                                        duration_hours *= step_scale
                                 elif time_model.get('type') == 'linear_rate':
                                     pass
 

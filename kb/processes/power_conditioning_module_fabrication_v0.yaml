@@ -1,0 +1,44 @@
+id: power_conditioning_module_fabrication_v0
+kind: process
+name: Power conditioning module fabrication
+process_type: batch
+inputs:
+  - item_id: metal_alloy_bulk
+    qty: 15.0
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: furnace_basic
+    qty: 1
+    unit: count
+  - machine_id: casting_mold_set
+    qty: 1
+    unit: count
+  - machine_id: milling_machine_general_v0
+    qty: 1
+    unit: count
+  - machine_id: assembly_tools_basic
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 6.0
+  notes: Casting, machining, and assembly for a small module.
+energy_model:
+  type: fixed_per_batch
+  value: 8.0
+  unit: kWh
+  notes: Casting and machining energy.
+notes: Aggregated fabrication step to reduce reliance on recipe orchestration.

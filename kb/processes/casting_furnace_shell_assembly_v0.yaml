@@ -1,0 +1,32 @@
+id: casting_furnace_shell_assembly_v0
+kind: process
+name: Casting furnace shell assembly
+process_type: batch
+inputs:
+  - item_id: welded_assemblies
+    qty: 460.0
+    unit: kg
+  - item_id: sintered_shapes
+    qty: 55.0
+    unit: kg
+outputs:
+  - item_id: casting_furnace_shell
+    qty: 1.0
+    unit: unit
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: assembly_tools_basic
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Fit refractory lining and assemble shell sections.
+energy_model:
+  type: fixed_per_batch
+  value: 1.5
+  unit: kWh
+  notes: Assembly tooling and handling energy.
+notes: Batch assembly step for the furnace shell using welded steel sections and refractory liners.
