@@ -331,24 +331,23 @@ Commentary: Produce steel ingot from local iron, then roll into steel_sheet_3mm.
 
 ## Nickel Production
 
-Commentary: Extract nickel metal from regolith meteoritic fragments, then produce nickel wire for components.
+Commentary: Nickel metal can theoretically be extracted from meteoritic fragments in regolith using recipe_nickel_metal_from_regolith_v0, but currently blocked by simulation engine limitation. Importing nickel_metal for now.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Extracting nickel from regolith meteoritic fragments."
-- cmd: sim.run-recipe
+    message: "Importing nickel for component production."
+- cmd: sim.import
   args:
-    recipe: recipe_nickel_metal_from_regolith_v0
-    quantity: 40
-- cmd: sim.advance-time
-  args:
-    hours: 300
+    item: nickel_metal
+    quantity: 2
+    unit: kg
+    ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Nickel extraction complete, producing nickel components."
+    message: "Nickel imported, producing nickel components."
 - cmd: sim.import
   args:
     item: carbon_monoxide

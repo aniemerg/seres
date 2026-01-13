@@ -2,7 +2,7 @@
   "sim_id": "crucible_refractory_runbook",
   "state": {
     "sim_id": "crucible_refractory_runbook",
-    "current_time_hours": 846.0,
+    "current_time_hours": 426.0,
     "inventory": {
       "labor_bot_general_v0": {
         "quantity": 2.0,
@@ -57,27 +57,7 @@
         "unit": "kg"
       },
       "fine_powder": {
-        "quantity": 69.47999999999999,
-        "unit": "kg"
-      },
-      "ceramic_powder_mixture": {
-        "quantity": 2.1999999999999957,
-        "unit": "kg"
-      },
-      "green_ceramic_parts": {
-        "quantity": 32.0,
-        "unit": "kg"
-      },
-      "dried_material": {
-        "quantity": 31.0,
-        "unit": "kg"
-      },
-      "sintered_shapes": {
-        "quantity": 30.0,
-        "unit": "kg"
-      },
-      "crucible_refractory": {
-        "quantity": 30.0,
+        "quantity": 35.28,
         "unit": "kg"
       }
     },
@@ -130,15 +110,15 @@
         "unit": "unit"
       }
     },
-    "total_energy_kwh": 205.28000000000003
+    "total_energy_kwh": 169.28
   },
   "scheduler": {
-    "current_time": 846.0,
+    "current_time": 426.0,
     "event_queue": [],
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "f3c631fb-07af-4e33-89f0-5f1605d48517",
+        "process_run_id": "a3497c9c-45d5-4807-b1c8-0d1baead14bc",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 0.0,
         "duration_hours": 1.0,
@@ -154,12 +134,12 @@
         "machines_reserved": {
           "labor_bot_general_v0": 1.0
         },
-        "recipe_run_id": "ffb5644e-0a16-444d-9bd8-e8cfdae16ec8",
+        "recipe_run_id": "353a8668-e094-4b0d-ae46-530e6002642d",
         "step_index": 0,
         "energy_kwh": 5.0
       },
       {
-        "process_run_id": "2493002a-6d22-4b85-ab79-5c5e178577e1",
+        "process_run_id": "1c630943-4d21-49f6-a728-8a9983912f88",
         "process_id": "regolith_screening_sieving_v0",
         "start_time": 2.0,
         "duration_hours": 1.0,
@@ -181,12 +161,12 @@
           "vibrating_screen_v0": 1.0,
           "dust_collection_system": 1.0
         },
-        "recipe_run_id": "72c668e8-43ee-4a13-ad6a-f7e41c6e7fb0",
+        "recipe_run_id": "06b4f918-9f7d-4b28-8017-aea58ecc74d4",
         "step_index": 0,
         "energy_kwh": 3.0
       },
       {
-        "process_run_id": "9ff281ae-8854-455f-9836-02e82d30793a",
+        "process_run_id": "1ee4bee5-171d-449c-8458-d64b7546d5b5",
         "process_id": "coarse_powder_production_v0",
         "start_time": 4.0,
         "duration_hours": 1.0,
@@ -204,12 +184,12 @@
         "machines_reserved": {
           "labor_bot_general_v0": 1.0
         },
-        "recipe_run_id": "72a92d49-c933-42af-987d-95d2858dc637",
+        "recipe_run_id": "044121d5-4e02-4c2f-9f10-b7d853a547d0",
         "step_index": 0,
         "energy_kwh": 14.4
       },
       {
-        "process_run_id": "22ad6046-8434-4d9a-a26b-e6f6e0e1b5ce",
+        "process_run_id": "8a3c88e3-0a13-4318-897d-0774b1fec088",
         "process_id": "ball_milling_v0",
         "start_time": 16.0,
         "duration_hours": 288.0,
@@ -228,163 +208,17 @@
           "labor_bot_general_v0": 1.0,
           "ball_mill_v0": 1.0
         },
-        "recipe_run_id": "56f3391b-eff2-46a5-8dfd-91be22a1171d",
+        "recipe_run_id": "c06cb52d-f53c-4054-8ff3-cbba6e9aef0f",
         "step_index": 0,
         "energy_kwh": 146.88
-      },
-      {
-        "process_run_id": "5b17b9f1-f36e-494c-b0ad-ce781cff95bc",
-        "process_id": "drying_basic_v0",
-        "start_time": 336.0,
-        "duration_hours": 72.0,
-        "end_time": 408.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "fine_powder": 35.28
-        },
-        "outputs_pending": {
-          "fine_powder": 34.199999999999996
-        },
-        "outputs_pending_units": {
-          "fine_powder": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "furnace_high_temp": 1.0
-        },
-        "recipe_run_id": "56f3391b-eff2-46a5-8dfd-91be22a1171d",
-        "step_index": 1,
-        "energy_kwh": 0.8
-      },
-      {
-        "process_run_id": "fb9969cc-decc-4a0e-a089-2608178f7b4f",
-        "process_id": "screening_basic_v0",
-        "start_time": 416.0,
-        "duration_hours": 1.0,
-        "end_time": 417.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "fine_powder": 34.199999999999996
-        },
-        "outputs_pending": {
-          "ceramic_powder_mixture": 34.199999999999996
-        },
-        "outputs_pending_units": {
-          "ceramic_powder_mixture": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "screening_equipment": 1.0
-        },
-        "recipe_run_id": "56f3391b-eff2-46a5-8dfd-91be22a1171d",
-        "step_index": 2,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "6bfbf519-04a7-4818-b6ea-81e60b548ee8",
-        "process_id": "ceramic_forming_basic_v0",
-        "start_time": 426.0,
-        "duration_hours": 1.0,
-        "end_time": 427.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "ceramic_powder_mixture": 32.0
-        },
-        "outputs_pending": {
-          "green_ceramic_parts": 32.0
-        },
-        "outputs_pending_units": {
-          "green_ceramic_parts": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "pressing_mold_set": 1.0,
-          "hydraulic_press": 1.0
-        },
-        "recipe_run_id": "b6aa4777-9712-48d6-9c4e-3eb23ab1948b",
-        "step_index": 0,
-        "energy_kwh": 9.6
-      },
-      {
-        "process_run_id": "9876a8f4-279f-4d8a-863e-fbf03348cd1c",
-        "process_id": "drying_basic_v0",
-        "start_time": 506.0,
-        "duration_hours": 4.0,
-        "end_time": 510.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "green_ceramic_parts": 32.0
-        },
-        "outputs_pending": {
-          "dried_material": 31.0
-        },
-        "outputs_pending_units": {
-          "dried_material": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "furnace_high_temp": 1.0
-        },
-        "recipe_run_id": "b6aa4777-9712-48d6-9c4e-3eb23ab1948b",
-        "step_index": 1,
-        "energy_kwh": 24.8
-      },
-      {
-        "process_run_id": "d5293d52-5aee-461d-980e-aad06f169b14",
-        "process_id": "ceramic_firing_high_temp_v0",
-        "start_time": 546.0,
-        "duration_hours": 1.0,
-        "end_time": 547.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "dried_material": 31.0
-        },
-        "outputs_pending": {
-          "sintered_shapes": 30.0
-        },
-        "outputs_pending_units": {
-          "sintered_shapes": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "furnace_high_temp": 1.0
-        },
-        "recipe_run_id": "b6aa4777-9712-48d6-9c4e-3eb23ab1948b",
-        "step_index": 2,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "8bfa0ad2-03f9-4444-9cc2-46b0c4a98986",
-        "process_id": "surface_finishing_basic_v0",
-        "start_time": 826.0,
-        "duration_hours": 3.0,
-        "end_time": 829.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "sintered_shapes": 30.0
-        },
-        "outputs_pending": {
-          "crucible_refractory": 30.0
-        },
-        "outputs_pending_units": {
-          "crucible_refractory": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "surface_grinder": 1.0,
-          "hand_tools_basic": 1.0
-        },
-        "recipe_run_id": "b6aa4777-9712-48d6-9c4e-3eb23ab1948b",
-        "step_index": 3,
-        "energy_kwh": 0.8
       }
     ],
-    "total_events_processed": 20
+    "total_events_processed": 8
   },
   "orchestrator": {
     "recipe_runs": {
-      "ffb5644e-0a16-444d-9bd8-e8cfdae16ec8": {
-        "recipe_run_id": "ffb5644e-0a16-444d-9bd8-e8cfdae16ec8",
+      "353a8668-e094-4b0d-ae46-530e6002642d": {
+        "recipe_run_id": "353a8668-e094-4b0d-ae46-530e6002642d",
         "recipe_id": "recipe_regolith_lunar_mare_v0",
         "target_item_id": "regolith_lunar_mare",
         "recipe_def": {
@@ -436,8 +270,8 @@
         "is_completed": true,
         "completed_at": 1.0
       },
-      "72c668e8-43ee-4a13-ad6a-f7e41c6e7fb0": {
-        "recipe_run_id": "72c668e8-43ee-4a13-ad6a-f7e41c6e7fb0",
+      "06b4f918-9f7d-4b28-8017-aea58ecc74d4": {
+        "recipe_run_id": "06b4f918-9f7d-4b28-8017-aea58ecc74d4",
         "recipe_id": "recipe_regolith_coarse_fraction_v0",
         "target_item_id": "regolith_coarse_fraction",
         "recipe_def": {
@@ -515,8 +349,8 @@
         "is_completed": true,
         "completed_at": 3.0
       },
-      "72a92d49-c933-42af-987d-95d2858dc637": {
-        "recipe_run_id": "72a92d49-c933-42af-987d-95d2858dc637",
+      "044121d5-4e02-4c2f-9f10-b7d853a547d0": {
+        "recipe_run_id": "044121d5-4e02-4c2f-9f10-b7d853a547d0",
         "recipe_id": "recipe_coarse_powder_v0",
         "target_item_id": "coarse_powder",
         "recipe_def": {
@@ -587,8 +421,8 @@
         "is_completed": true,
         "completed_at": 5.0
       },
-      "56f3391b-eff2-46a5-8dfd-91be22a1171d": {
-        "recipe_run_id": "56f3391b-eff2-46a5-8dfd-91be22a1171d",
+      "c06cb52d-f53c-4054-8ff3-cbba6e9aef0f": {
+        "recipe_run_id": "c06cb52d-f53c-4054-8ff3-cbba6e9aef0f",
         "recipe_id": "recipe_ceramic_powder_mixture_v0",
         "target_item_id": "ceramic_powder_mixture",
         "recipe_def": {
@@ -696,167 +530,12 @@
         },
         "started_at": 16.0,
         "completed_steps": [
-          0,
-          1,
-          2
+          0
         ],
         "active_steps": {},
         "scheduled_steps": {},
-        "is_completed": true,
-        "completed_at": 417.0
-      },
-      "b6aa4777-9712-48d6-9c4e-3eb23ab1948b": {
-        "recipe_run_id": "b6aa4777-9712-48d6-9c4e-3eb23ab1948b",
-        "recipe_id": "recipe_crucible_refractory_v0",
-        "target_item_id": "crucible_refractory",
-        "recipe_def": {
-          "id": "recipe_crucible_refractory_v0",
-          "target_item_id": "crucible_refractory",
-          "variant_id": "v0",
-          "steps": [
-            {
-              "process_id": "ceramic_forming_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "ceramic_powder_mixture",
-                  "qty": 16.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "green_ceramic_parts",
-                  "qty": 16.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 2.0,
-              "labor_hours": 2.0,
-              "machine_hours": null,
-              "notes": "Form refractory crucible shape from ceramic mixture (clay-alumina, etc.)",
-              "scale": 2.0
-            },
-            {
-              "process_id": "drying_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "green_ceramic_parts",
-                  "qty": 16.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "dried_material",
-                  "qty": 15.5,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 12.0,
-              "labor_hours": null,
-              "machine_hours": 12.0,
-              "notes": "Slow dry formed crucible to prevent cracking",
-              "scale": 2.0
-            },
-            {
-              "process_id": "ceramic_firing_high_temp_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "dried_material",
-                  "qty": 15.5,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "sintered_shapes",
-                  "qty": 15.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 16.0,
-              "labor_hours": null,
-              "machine_hours": 16.0,
-              "notes": "Fire crucible at high temperature to vitrify and strengthen",
-              "scale": 2.0
-            },
-            {
-              "process_id": "surface_finishing_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "sintered_shapes",
-                  "qty": 15.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "crucible_refractory",
-                  "qty": 15.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 1.0,
-              "labor_hours": 1.0,
-              "machine_hours": null,
-              "notes": "Clean and inspect fired crucible",
-              "scale": 2.0
-            }
-          ],
-          "inputs": [
-            {
-              "item_id": "ceramic_powder_mixture",
-              "qty": 16.0,
-              "unit": "kg",
-              "notes": null
-            }
-          ],
-          "outputs": [
-            {
-              "item_id": "crucible_refractory",
-              "qty": 15.0,
-              "unit": "kg",
-              "notes": null
-            }
-          ],
-          "alternatives": [],
-          "dedupe_candidate": null,
-          "assumptions": "Refractory ceramic materials (e.g., clay-graphite or alumina) formed, dried, and fired.\nTarget mass ~15 kg.\n",
-          "notes": "Ceramic refractory crucible for high-temperature metal casting operations. This replaces the import placeholder with a local fabrication route.\n\nSequential flow: form → dry → fire → finish.\n",
-          "produces_qty": 15.0,
-          "produces_unit": "kg"
-        },
-        "started_at": 426.0,
-        "completed_steps": [
-          0,
-          1,
-          2,
-          3
-        ],
-        "active_steps": {},
-        "scheduled_steps": {},
-        "is_completed": true,
-        "completed_at": 829.0
+        "is_completed": false,
+        "completed_at": null
       }
     }
   },

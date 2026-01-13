@@ -25,6 +25,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -48,6 +49,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -69,6 +71,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -96,6 +99,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -121,6 +125,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -147,6 +152,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )
@@ -173,6 +179,7 @@ class TestRecipeRun:
             recipe_run_id='run_1',
             recipe_id='test_recipe',
             target_item_id='metal',
+            recipe_def=recipe,
             dependency_graph=graph,
             started_at=0.0,
         )

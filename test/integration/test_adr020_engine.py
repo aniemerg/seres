@@ -516,11 +516,13 @@ class TestRecipeOrchestration:
         assert result["total_steps"] == 2
         assert result["scheduled_steps"] >= 1  # At least step 0 scheduled
 
-        # Advance time - step 0 should complete
+        # Advance time - step 0 should complete and step 1 should start
         engine.advance_time(1.0)
 
-        # Check intermediate product
-        assert engine.has_item("ingot", 1.0, "kg")
+        # With the fix, step 1 starts immediately after step 0 completes,
+        # consuming the intermediate product (ingot). Check that step 1 is active.
+        progress = engine.orchestrator.get_recipe_progress(result["recipe_run_id"])
+        assert progress['active_steps'] == 1, "Step 1 should be active after step 0 completes"
 
         # Advance more - step 1 should complete
         engine.advance_time(1.0)

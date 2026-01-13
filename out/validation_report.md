@@ -6,7 +6,7 @@
 - material: 584
 - part: 966
 - process: 853
-- recipe: 1950
+- recipe: 1951
 - resource: 2
 - scenario: 1
 - schema: 1

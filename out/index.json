@@ -2860,6 +2860,7 @@
         "recipe_inert_gas_manifold_v0",
         "recipe_inspection_tools_basic_v0",
         "recipe_installed_belt_drive_v0",
+        "recipe_insulation_pack_high_temp_regolith_v0",
         "recipe_insulation_pack_high_temp_v0",
         "recipe_insulation_resistance_tester_v0",
         "recipe_interlock_switch_set_v0",
@@ -5033,9 +5034,9 @@
         "recipe_nickel_metal_from_regolith_v0"
       ],
       "refs_out": [
-        "magnetic_concentrate",
-        "non_magnetic_tailings",
-        "regolith_powder"
+        "meteorite_iron",
+        "regolith_powder",
+        "tailings"
       ],
       "status": "defined"
     },
@@ -23821,6 +23822,7 @@
         "waste_generation_basic_v0",
         "recipe_crushed_ore_v0",
         "recipe_dust_fines_alias_v0",
+        "recipe_insulation_pack_high_temp_regolith_v0",
         "recipe_insulation_pack_high_temp_v0"
       ],
       "refs_out": [],
@@ -35809,6 +35811,7 @@
         "recipe_heating_plate_or_induction_heater_v0",
         "recipe_hpht_furnace_v0",
         "recipe_induction_furnace_v0",
+        "recipe_insulation_pack_high_temp_regolith_v0",
         "recipe_insulation_pack_high_temp_v0",
         "recipe_kiln_basic_import_v0",
         "recipe_kiln_basic_v0",
@@ -40327,7 +40330,6 @@
       "layer_tags": [],
       "name": "Magnetic concentrate",
       "refs_in": [
-        "beneficiate_regolith_magnetic_v0",
         "beneficiation_magnetic_basic_v0",
         "recipe_magnetic_concentrate_v0",
         "recipe_non_magnetic_tailings_v0",
@@ -42359,6 +42361,7 @@
       "layer_tags": [],
       "name": "Meteorite iron",
       "refs_in": [
+        "beneficiate_regolith_magnetic_v0",
         "nickel_extraction_meteorite_v0",
         "nife_meteorite_excavation_process_v0",
         "recipe_meteorite_iron_v0",
@@ -45656,7 +45659,6 @@
       "layer_tags": [],
       "name": "Non-magnetic tailings",
       "refs_in": [
-        "beneficiate_regolith_magnetic_v0",
         "recipe_ilmenite_concentrate_v0",
         "recipe_non_magnetic_tailings_v0"
       ],
@@ -68775,6 +68777,22 @@
         "epoxy_resin_base",
         "epoxy_resin_to_insulation_coating_v0",
         "insulation_coating_material"
+      ],
+      "status": "defined"
+    },
+    "recipe_insulation_pack_high_temp_regolith_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_insulation_pack_high_temp_regolith_v0.yaml",
+      "id": "recipe_insulation_pack_high_temp_regolith_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "High-temp insulation pack from regolith-based insulation",
+      "refs_in": [],
+      "refs_out": [
+        "assembly_basic_v0",
+        "dust_fines",
+        "insulation_pack_high_temp",
+        "thermal_insulation_regolith_based_v0"
       ],
       "status": "defined"
     },
@@ -98768,6 +98786,7 @@
       "layer_tags": [],
       "name": "Tailings",
       "refs_in": [
+        "beneficiate_regolith_magnetic_v0",
         "beneficiation_magnetic_basic_v0",
         "carbon_extraction_from_carbonaceous_v0",
         "chemical_purification_v0",
@@ -99696,6 +99715,7 @@
       "refs_in": [
         "regolith_based_thermal_insulation_v0",
         "recipe_chemical_reactor_heated_body_v0",
+        "recipe_insulation_pack_high_temp_regolith_v0",
         "recipe_thermal_insulation_regolith_based_v0",
         "paper_reviews_dec2024_comprehensive_v0"
       ],

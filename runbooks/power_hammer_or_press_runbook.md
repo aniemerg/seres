@@ -187,6 +187,36 @@ Commentary: import basic equipment for mining and processing.
     ensure: true
 - cmd: sim.import
   args:
+    item: heat_treatment_furnace
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: quench_tank
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: surface_grinder
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: grinding_wheels
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: coil_winding_machine
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: rolling_mill_v0
     quantity: 1
     unit: unit
@@ -449,7 +479,7 @@ Commentary: import fasteners since they require forging (circular dependency).
 
 ## Hammer Components
 
-Commentary: build frame, head, and anvil from metals.
+Commentary: build frame, head, and anvil sequentially to avoid machine conflicts.
 
 ```sim-runbook
 - cmd: sim.note
@@ -462,7 +492,7 @@ Commentary: build frame, head, and anvil from metals.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 13
+    hours: 40
 - cmd: sim.note
   args:
     style: milestone
@@ -473,7 +503,7 @@ Commentary: build frame, head, and anvil from metals.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 11
+    hours: 30
 - cmd: sim.note
   args:
     style: milestone
@@ -484,7 +514,7 @@ Commentary: build frame, head, and anvil from metals.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 13
+    hours: 30
 ```
 
 ## Motor Assembly
@@ -508,7 +538,7 @@ Commentary: assemble the hammer drive motor.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 9
+    hours: 30
 ```
 
 ## Final Assembly
@@ -538,13 +568,10 @@ Commentary: import electronics that can't be made locally and assemble the power
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.advance-time
-  args:
-    hours: 50
 - cmd: sim.note
   args:
     style: info
-    message: "Waiting for all component recipes to complete."
+    message: "Waiting for all recipes to complete."
 - cmd: sim.advance-time
   args:
     hours: 100

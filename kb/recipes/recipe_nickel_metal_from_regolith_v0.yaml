@@ -5,42 +5,47 @@ target_item_id: nickel_metal
 variant_id: from_regolith
 inputs:
   - item_id: regolith_lunar_mare
-    qty: 100.0
+    qty: 2000.0
     unit: kg
 outputs:
   - item_id: nickel_metal
-    qty: 0.05
+    qty: 1.0
     unit: kg
   - item_id: iron_metal
-    qty: 0.4
+    qty: 8.0
     unit: kg
+byproducts:
   - item_id: tailings
-    qty: 99.5
+    qty: 1990.0
     unit: kg
 steps:
   - process_id: beneficiate_regolith_magnetic_v0
     inputs:
       - item_id: regolith_lunar_mare
-        qty: 100.0
+        qty: 2000.0
         unit: kg
     outputs:
       - item_id: meteorite_iron
-        qty: 0.5
+        qty: 10.0
         unit: kg
       - item_id: tailings
-        qty: 99.5
+        qty: 1990.0
         unit: kg
+    est_time_hr: 100.0
+    machine_hours: 100.0
   - process_id: nickel_extraction_meteorite_v0
     inputs:
       - item_id: meteorite_iron
-        qty: 0.5
+        qty: 10.0
         unit: kg
     outputs:
       - item_id: nickel_metal
-        qty: 0.05
+        qty: 1.0
         unit: kg
       - item_id: iron_metal
-        qty: 0.4
+        qty: 8.0
         unit: kg
+    est_time_hr: 40.0
+    machine_hours: 40.0
 notes: "Extract nickel metal from lunar regolith by magnetically separating meteoritic iron-nickel fragments, then chemically separating nickel from iron. Typical lunar regolith contains ~0.5% meteoritic iron-nickel material, which is ~10% nickel by mass, yielding ~0.05% nickel recovery overall."
 assumptions: "Meteoritic fragments accessible in regolith; magnetic separation feasible; chemical separation equipment available."

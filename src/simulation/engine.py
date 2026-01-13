@@ -15,12 +15,16 @@ Handles:
 from __future__ import annotations
 
 import json
+import logging
 import os
 import sys
 import uuid
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 from copy import deepcopy
+
+# Configure debug logger for recipe scheduling
+logger = logging.getLogger(__name__)
 
 from src.simulation.models import (
     SimulationState,
@@ -104,10 +108,19 @@ class SimulationEngine:
         # Enable ADR-020 mode (event-driven scheduling, machine reservations, recipe orchestration)
         self.adr020_mode = True
 
-        # Register event handler for input validation (must happen during event processing)
+        # Register event handlers (must happen during event processing)
+        # Order matters: handlers are called in registration order
         self.scheduler.register_handler(
             EventType.PROCESS_START,
             self._validate_process_inputs
+        )
+        self.scheduler.register_handler(
+            EventType.PROCESS_COMPLETE,
+            self._add_process_outputs  # FIRST: add outputs to inventory
+        )
+        self.scheduler.register_handler(
+            EventType.PROCESS_COMPLETE,
+            self._schedule_dependent_recipe_steps  # THEN: schedule dependent steps
         )
 
     def _validate_process_inputs(self, event) -> None:
@@ -160,6 +173,142 @@ class SimulationEngine:
 
             # Cancel this process (removes from active_processes and event queue)
             self.scheduler.cancel_process(process_run_id)
+
+    def _add_process_outputs(self, event) -> None:
+        """
+        Event handler to add process outputs to inventory when a process completes.
+
+        This runs during event processing, before dependent recipe steps are scheduled,
+        so that outputs are available as inputs for dependent steps.
+        """
+        process_run_id = event.data.get('process_run_id')
+        if not process_run_id:
+            return
+
+        # Find process in completed list
+        process_run = None
+        for proc in self.scheduler.completed_processes:
+            if proc.process_run_id == process_run_id:
+                process_run = proc
+                break
+
+        if not process_run:
+            return
+
+        # Add outputs to inventory with correct units
+        output_units = dict(process_run.outputs_pending_units or {})
+
+        if not output_units:
+            # Fallback to process definition units when units weren't captured
+            process_model = self.kb.get_process(process_run.process_id)
+            if process_model:
+                if hasattr(process_model, 'model_dump'):
+                    process_def = process_model.model_dump()
+                else:
+                    process_def = process_model
+
+                for outp in process_def.get("outputs", []):
+                    output_units[outp.get("item_id")] = outp.get("unit", "kg")
+
+        for item_id, qty in process_run.outputs_pending.items():
+            unit = output_units.get(item_id, "kg")
+            self.add_to_inventory(item_id, qty, unit)
+
+    def _schedule_dependent_recipe_steps(self, event) -> None:
+        """
+        Event handler to schedule dependent recipe steps when a process completes.
+
+        This runs during event processing while scheduler.current_time = event.time,
+        which allows us to schedule dependent steps at the correct time without
+        "Cannot schedule event in the past" errors.
+        """
+        process_run_id = event.data.get('process_run_id')
+        if not process_run_id:
+            return
+
+        # Find process run in active or completed processes
+        process_run = None
+        if process_run_id in self.scheduler.active_processes:
+            process_run = self.scheduler.active_processes[process_run_id]
+        elif any(p.process_run_id == process_run_id for p in self.scheduler.completed_processes):
+            process_run = next(p for p in self.scheduler.completed_processes
+                             if p.process_run_id == process_run_id)
+
+        if not process_run or not process_run.recipe_run_id:
+            return  # Not a recipe step
+
+        recipe_run_id = process_run.recipe_run_id
+
+        # Get ready steps from orchestrator
+        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
+
+        if not ready_steps:
+            return
+
+
+        # Schedule ready steps
+        recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+        if not recipe_run:
+            return
+
+        recipe_def = recipe_run.recipe_def
+
+        for step_idx in ready_steps:
+            if step_idx >= len(recipe_def.get('steps', [])):
+                continue
+
+            step = recipe_def['steps'][step_idx]
+            process_id = step.get('process_id')
+
+            if not process_id:
+                continue
+
+            # Calculate scale and duration
+            scale = 1.0
+            duration_hours = step.get('est_time_hr', 1.0)
+            output_quantity = None
+            output_unit = None
+
+            # Try to calculate duration from time_model
+            time_model = step.get('time_model')
+            if time_model:
+                # Get process definition
+                process_model = self.kb.get_process(process_id)
+                if process_model:
+                    process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
+                    outputs = process_def.get('outputs', [])
+
+                    if time_model.get('type') == 'linear_rate' and duration_hours is None:
+                        rate = time_model.get('rate', 1.0)
+                        scaling_basis = time_model.get('scaling_basis')
+                        if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
+                            for outp in outputs:
+                                if outp.get('item_id') == scaling_basis:
+                                    outp_qty = outp.get('qty', outp.get('quantity', 1.0))
+                                    duration_hours = outp_qty / rate if rate > 0 else 1.0
+                                    break
+
+            if duration_hours is None:
+                duration_hours = 1.0
+
+            # Schedule at event.time (when dependency was satisfied)
+            # Since we're in an event handler, scheduler.current_time = event.time,
+            # so this won't cause "past" errors
+            schedule_time = event.time
+
+            result = self.start_process(
+                process_id=process_id,
+                scale=scale,
+                start_time=schedule_time,
+                duration_hours=duration_hours,
+                output_quantity=output_quantity,
+                output_unit=output_unit,
+                recipe_run_id=recipe_run_id,
+                step_index=step_idx,
+            )
+
+            if result['success']:
+                self.orchestrator.schedule_step(recipe_run_id, step_idx, result['process_run_id'])
 
     def _init_reservation_manager(self) -> None:
         """Initialize reservation manager with current machine inventory."""
@@ -1365,7 +1514,8 @@ class SimulationEngine:
                 })
 
             elif event.event_type == EventType.PROCESS_COMPLETE:
-                # Process completed - add outputs
+                # Process completed
+                # NOTE: Outputs are now added to inventory by _add_process_outputs event handler
                 process_run_id = event.data.get("process_run_id")
 
                 # Find process in completed list
@@ -1376,29 +1526,11 @@ class SimulationEngine:
                         break
 
                 if process_run:
-                    # Add outputs to inventory with correct units
-                    output_units = dict(process_run.outputs_pending_units or {})
-
-                    if not output_units:
-                        # Fallback to process definition units when units weren't captured
-                        process_model = self.kb.get_process(process_run.process_id)
-                        if process_model:
-                            if hasattr(process_model, 'model_dump'):
-                                process_def = process_model.model_dump()
-                            else:
-                                process_def = process_model
-
-                            for outp in process_def.get("outputs", []):
-                                output_units[outp.get("item_id")] = outp.get("unit", "kg")
-
-                    for item_id, qty in process_run.outputs_pending.items():
-                        unit = output_units.get(item_id, "kg")
-                        self.add_to_inventory(item_id, qty, unit)
-
                     # Release machine reservations
                     self.reservation_manager.remove_reservation(process_run_id)
 
                     # Reconstruct outputs with units for event logging
+                    output_units = dict(process_run.outputs_pending_units or {})
                     outputs_with_units = {}
                     if output_units:
                         for item_id, qty in process_run.outputs_pending.items():
@@ -1452,91 +1584,9 @@ class SimulationEngine:
                         "energy_kwh": energy_kwh,
                     })
 
-                    # Check if this was a recipe step - schedule dependent steps
-                    if process_run.recipe_run_id:
-                        recipe_run_id = process_run.recipe_run_id
-                        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
-
-                        for step_idx in ready_steps:
-                                recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
-                                if recipe_run:
-                                    recipe_def = recipe_run.recipe_def or {}
-                                    step = recipe_def.get('steps', [])[step_idx]
-
-                                # Resolve step overrides (ADR-013)
-                                resolved_process = self.resolve_step(step)
-
-                                # Get process_id from resolved process
-                                process_id = resolved_process.get('id') or step.get('process_id')
-                                if not process_id:
-                                    continue  # Skip invalid step
-
-                                outputs = resolved_process.get('outputs', [])
-                                output_quantity = None
-                                output_unit = None
-                                duration_hours = None
-                                scale = 1.0
-                                step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
-
-                                # Calculate duration from resolved process (respects step overrides)
-                                time_model = resolved_process.get('time_model', {})
-                                if time_model.get('type') == 'batch':
-                                    duration_hours = time_model.get('hr_per_batch', 1.0)
-                                    step_scale = step.get("scale", 1.0)
-                                    if step_scale != 1.0:
-                                        duration_hours *= step_scale
-                                elif time_model.get('type') == 'linear_rate':
-                                    pass
-
-                                if outputs:
-                                    first_output = outputs[0]
-                                    output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
-                                    output_unit = first_output.get('unit', 'kg')
-
-                                    if not step_has_io_override:
-                                        base_process = self.kb.get_process(process_id)
-                                        if base_process:
-                                            base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
-                                            base_outputs = base_def.get('outputs', [])
-                                            if base_outputs:
-                                                base_output = base_outputs[0]
-                                                base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
-                                                if base_qty:
-                                                    scale = output_quantity / base_qty
-
-                                    if time_model.get('type') == 'linear_rate' and duration_hours is None:
-                                        rate = time_model.get('rate', 1.0)
-                                        scaling_basis = time_model.get('scaling_basis')
-                                        if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
-                                            for outp in outputs:
-                                                if outp.get('item_id') == scaling_basis:
-                                                    outp_qty = outp.get('qty', outp.get('quantity', 1.0))
-                                                    duration_hours = outp_qty / rate if rate > 0 else 1.0
-                                                    break
-
-                                if duration_hours is None:
-                                    duration_hours = 1.0
-
-                                # Schedule dependent step
-                                schedule_time = max(event.time, self.scheduler.current_time)
-                                result = self.start_process(
-                                    process_id=process_id,
-                                    scale=scale,
-                                    start_time=schedule_time,
-                                    duration_hours=duration_hours,
-                                    output_quantity=output_quantity,
-                                    output_unit=output_unit,
-                                    recipe_run_id=recipe_run_id,
-                                    step_index=step_idx,
-                                    process_def_override=resolved_process,
-                                )
-
-                                if result['success']:
-                                    self.orchestrator.schedule_step(
-                                        recipe_run_id,
-                                        step_idx,
-                                        result['process_run_id']
-                                    )
+                    # NOTE: Dependent recipe step scheduling is now handled by the
+                    # _schedule_dependent_recipe_steps event handler, which is called
+                    # during event processing when scheduler.current_time = event.time
 
         # Update engine state time
         self.state.current_time_hours = target_time
@@ -1604,9 +1654,18 @@ class SimulationEngine:
         self.orchestrator = restore_orchestrator(snapshot.orchestrator, self.scheduler)
         self.reservation_manager = restore_reservation_manager(snapshot.reservation_manager)
 
+        # Register event handlers in same order as __init__
         self.scheduler.register_handler(
             EventType.PROCESS_START,
             self._validate_process_inputs,
+        )
+        self.scheduler.register_handler(
+            EventType.PROCESS_COMPLETE,
+            self._add_process_outputs
+        )
+        self.scheduler.register_handler(
+            EventType.PROCESS_COMPLETE,
+            self._schedule_dependent_recipe_steps
         )
 
         return True
