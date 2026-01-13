@@ -733,6 +733,79 @@ class TestAdr020Gaps:
         inputs = start_events[0].data["inputs_consumed"]
         assert "override_input" in inputs
 
+    def test_dependent_step_respects_overrides(self, tmp_path, sim_dir):
+        """Dependent steps should apply step-level overrides when scheduled."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "proc_a.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_a",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "mid", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "processes" / "proc_b.yaml", "w") as f:
+            yaml.dump({
+                "id": "proc_b",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "base_input", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "base_output", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_override_dependent.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_override_dependent",
+                "target_item_id": "override_output",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "proc_a", "dependencies": []},
+                    {
+                        "process_id": "proc_b",
+                        "dependencies": [0],
+                        "inputs": [{"item_id": "override_input", "qty": 1.0, "unit": "kg"}],
+                        "outputs": [{"item_id": "override_output", "qty": 1.0, "unit": "kg"}],
+                    },
+                ],
+            }, f)
+
+        for item_id in ("ore", "mid", "base_input", "override_input", "base_output", "override_output"):
+            with open(kb / "items" / "materials" / f"{item_id}.yaml", "w") as f:
+                yaml.dump({"id": item_id, "kind": "material", "unit": "kg", "mass": 1.0}, f)
+
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("override_input", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        result = engine.run_recipe(recipe_id="recipe_override_dependent")
+        assert result["success"]
+
+        engine.advance_time(1.0)
+        engine.advance_time(1.0)
+
+        assert engine.has_item("override_output", 1.0, "kg")
+        assert not engine.has_item("base_output", 1.0, "kg")
+
     def test_steps_without_dependencies_run_sequentially(self, tmp_path, sim_dir):
         """Steps without explicit dependencies should execute in order."""
         kb = tmp_path / "kb"

@@ -317,35 +317,55 @@ class SimulationEngine:
                 continue
 
             step = recipe_def['steps'][step_idx]
-            process_id = step.get('process_id')
+
+            resolved_process = self.resolve_step(step)
+            process_id = resolved_process.get('id') or step.get('process_id')
 
             if not process_id:
                 continue
 
             # Calculate scale and duration
             scale = 1.0
-            duration_hours = step.get('est_time_hr', 1.0)
+            duration_hours = None
             output_quantity = None
             output_unit = None
+            step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
 
-            # Try to calculate duration from time_model
-            time_model = step.get('time_model')
-            if time_model:
-                # Get process definition
-                process_model = self.kb.get_process(process_id)
-                if process_model:
-                    process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
-                    outputs = process_def.get('outputs', [])
+            time_model = resolved_process.get('time_model', {})
+            if time_model.get('type') == 'batch':
+                duration_hours = time_model.get('hr_per_batch', 1.0)
+                step_scale = step.get("scale", 1.0)
+                if step_scale != 1.0:
+                    duration_hours *= step_scale
+            elif time_model.get('type') == 'linear_rate':
+                pass
 
-                    if time_model.get('type') == 'linear_rate' and duration_hours is None:
-                        rate = time_model.get('rate', 1.0)
-                        scaling_basis = time_model.get('scaling_basis')
-                        if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
-                            for outp in outputs:
-                                if outp.get('item_id') == scaling_basis:
-                                    outp_qty = outp.get('qty', outp.get('quantity', 1.0))
-                                    duration_hours = outp_qty / rate if rate > 0 else 1.0
-                                    break
+            outputs = resolved_process.get('outputs', [])
+            if outputs:
+                first_output = outputs[0]
+                output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
+                output_unit = first_output.get('unit', 'kg')
+
+                if not step_has_io_override:
+                    base_process = self.kb.get_process(process_id)
+                    if base_process:
+                        base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
+                        base_outputs = base_def.get('outputs', [])
+                        if base_outputs:
+                            base_output = base_outputs[0]
+                            base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
+                            if base_qty:
+                                scale = output_quantity / base_qty
+
+                if time_model.get('type') == 'linear_rate' and duration_hours is None:
+                    rate = time_model.get('rate', 1.0)
+                    scaling_basis = time_model.get('scaling_basis')
+                    if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
+                        for outp in outputs:
+                            if outp.get('item_id') == scaling_basis:
+                                outp_qty = outp.get('qty', outp.get('quantity', 1.0))
+                                duration_hours = outp_qty / rate if rate > 0 else 1.0
+                                break
 
             if duration_hours is None:
                 duration_hours = 1.0
@@ -364,6 +384,7 @@ class SimulationEngine:
                 output_unit=output_unit,
                 recipe_run_id=recipe_run_id,
                 step_index=step_idx,
+                process_def_override=resolved_process,
             )
 
             if result['success']:
