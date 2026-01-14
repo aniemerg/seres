@@ -4,16 +4,10 @@ target_item_id: steel_stock
 variant_id: hot_roll_v0
 inputs:
   - item_id: iron_ore_or_ilmenite
-    qty: 2.0
+    qty: 2.1
     unit: kg
   - item_id: carbon_reducing_agent
-    qty: 0.5
-    unit: kg
-  - item_id: iron_pig_or_ingot
-    qty: 1.0
-    unit: kg
-  - item_id: steel_billet_or_slab
-    qty: 1.0
+    qty: 0.525
     unit: kg
 outputs:
   - item_id: steel_stock
@@ -26,17 +20,17 @@ steps:
   - process_id: iron_smelting_reduction_v0
     inputs:
       - item_id: iron_ore_or_ilmenite
-        qty: 2.0
+        qty: 2.1
         unit: kg
       - item_id: carbon_reducing_agent
-        qty: 0.5
+        qty: 0.525
         unit: kg
     outputs:
       - item_id: iron_pig_or_ingot
-        qty: 1.0
+        qty: 1.05
         unit: kg
       - item_id: slag
-        qty: 0.8
+        qty: 0.84
         unit: kg
     notes: Reduce ilmenite/ore with carbon to produce pig iron feedstock.
   - process_id: steel_refining_basic_v0

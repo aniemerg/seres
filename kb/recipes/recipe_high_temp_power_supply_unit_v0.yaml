@@ -3,7 +3,7 @@ target_item_id: high_temp_power_supply_unit
 variant_id: v0
 inputs:
   - item_id: metal_alloy_bulk
-    qty: 150.0
+    qty: 182.2
     unit: kg
   - item_id: power_supply_components_basic
     qty: 5.0
@@ -19,11 +19,11 @@ steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: metal_alloy_bulk
-        qty: 150.0
+        qty: 182.2
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 142.5
+        qty: 173.1
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -31,11 +31,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 142.5
+        qty: 173.1
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 142.5
+        qty: 173.1
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -43,11 +43,11 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 142.5
+        qty: 173.1
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 142.5
+        qty: 173.1
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
@@ -56,7 +56,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 142.5
+        qty: 173.1
         unit: kg
       - item_id: power_supply_components_basic
         qty: 5.0

@@ -8,6 +8,20 @@
 
 Implemented a material class matching system that allows processes to accept inputs by material class rather than exact item ID. This solves the type compatibility issue between specific material types (e.g., `regolith_lunar_mare`) and generic process inputs (e.g., `raw_ore_or_regolith`).
 
+## ⚠️ Current Status: SUBSTITUTION DISABLED
+
+**IMPORTANT**: Material class substitution is **currently disabled** in the simulation engine (`allow_material_class_substitution = False` in `engine.py`).
+
+This means:
+- **Recipe inputs must match exact `item_id`** - no automatic substitution happens
+- Even if items share the same `material_class`, they won't substitute for each other
+- You must specify the exact item ID in recipes and process inputs
+- The `material_class` field is documented for future use but not currently active in simulations
+
+**Why disabled**: Conservative approach to ensure explicit material flows and prevent unintended substitutions during KB development.
+
+**When enabled**: The system would allow `regolith_lunar_mare` to satisfy requests for `raw_ore_or_regolith` if they share `material_class: regolith`.
+
 ## Problem Solved
 
 **Before**: Mining produced `regolith_lunar_mare`, but refining expected `raw_ore_or_regolith`. These didn't connect, blocking the mine → refine production chain.
@@ -42,7 +56,7 @@ material_class: regolith
 
 ### Matching Logic
 
-The simulation engine (`base_builder/sim_engine.py`) implements a two-step matching process:
+The simulation engine (`src/simulation/engine.py`) implements a two-step matching process when enabled:
 
 1. **Exact match**: Try to find exact `item_id` in inventory
 2. **Class match**: If not found, check if requested item has a `material_class`, then search inventory for items with matching class
@@ -61,7 +75,7 @@ else:
 
 ### Files Modified
 
-- `base_builder/sim_engine.py`: Added material_class matching to `start_process()` and `run_recipe()`
+- `src/simulation/engine.py`: Material class matching exists but is gated by `allow_material_class_substitution = False` by default.
 - `kb/items/materials/regolith_lunar_mare.yaml`: Created with material_class system
 - Fixed `qty` vs `quantity` field handling (KB uses both)
 - Fixed state persistence for active processes

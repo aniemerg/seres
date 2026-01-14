@@ -221,6 +221,7 @@ def _run_runbook(
         "sim.preview": cmd_preview,
         "sim.view-state": cmd_view_state,
         "sim.status": cmd_status,
+        "sim.provenance": cmd_provenance,
         "sim.list": cmd_list,
         "sim.plan": cmd_plan,
         "sim.visualize": cmd_visualize,
@@ -1145,6 +1146,144 @@ def cmd_advance_time(args, kb_loader: KBLoader):
     return 0
 
 
+def cmd_provenance(args, kb_loader: KBLoader):
+    """Show provenance breakdown for simulation inventory."""
+    engine = load_or_create_simulation(args.sim_id, kb_loader)
+    state = engine.get_state_dict()
+    converter = UnitConverter(kb_loader)
+
+    # Handle JSON output
+    if hasattr(args, 'json') and args.json:
+        output = {
+            "sim_id": args.sim_id,
+            "overall": {},
+            "items": {}
+        }
+
+        total_in_situ, total_imported, total_unknown = 0.0, 0.0, 0.0
+        for item_id, prov_dict in state.get('provenance', {}).items():
+            in_situ = prov_dict.get('in_situ_kg', 0.0)
+            imported = prov_dict.get('imported_kg', 0.0)
+            unknown = prov_dict.get('unknown_kg', 0.0)
+            total_in_situ += in_situ
+            total_imported += imported
+            total_unknown += unknown
+
+            item_total = in_situ + imported + unknown
+            if item_total > 0:
+                output["items"][item_id] = {
+                    "total_kg": item_total,
+                    "in_situ_kg": in_situ,
+                    "imported_kg": imported,
+                    "unknown_kg": unknown,
+                    "isru_percent": (in_situ / item_total * 100)
+                }
+
+        overall_total = total_in_situ + total_imported + total_unknown
+        if overall_total > 0:
+            output["overall"] = {
+                "total_kg": overall_total,
+                "in_situ_kg": total_in_situ,
+                "imported_kg": total_imported,
+                "unknown_kg": total_unknown,
+                "isru_percent": (total_in_situ / overall_total * 100)
+            }
+
+        print(json.dumps(output, indent=2))
+        return 0
+
+    # Calculate overall provenance
+    total_in_situ, total_imported, total_unknown = 0.0, 0.0, 0.0
+    item_provenance = []
+
+    for item_id, prov_dict in state.get('provenance', {}).items():
+        in_situ = prov_dict.get('in_situ_kg', 0.0)
+        imported = prov_dict.get('imported_kg', 0.0)
+        unknown = prov_dict.get('unknown_kg', 0.0)
+
+        total_in_situ += in_situ
+        total_imported += imported
+        total_unknown += unknown
+
+        item_total = in_situ + imported + unknown
+        if item_total > 0:
+            item_provenance.append({
+                'item_id': item_id,
+                'total': item_total,
+                'in_situ': in_situ,
+                'imported': imported,
+                'unknown': unknown,
+                'isru_pct': (in_situ / item_total * 100) if item_total > 0 else 0
+            })
+
+    overall_total = total_in_situ + total_imported + total_unknown
+    overall_isru_pct = (total_in_situ / overall_total * 100) if overall_total > 0 else 0
+
+    # Display results
+    _emit(f"=== Provenance: {args.sim_id} ===", _COLOR_INFO)
+
+    if overall_total > 0:
+        _emit_kv("Overall ISRU:",
+                f"{overall_isru_pct:.1f}% ({total_in_situ:.2f} kg in-situ, {total_imported:.2f} kg imported)",
+                _COLOR_SUCCESS if overall_isru_pct >= 50 else _COLOR_WARN)
+    else:
+        _emit("No provenance data available", _COLOR_NOTE)
+        return 0
+
+    # Filter or show specific item
+    if hasattr(args, 'item') and args.item:
+        matching = [p for p in item_provenance if p['item_id'] == args.item]
+        if not matching:
+            _emit(f"\nItem '{args.item}' not found in provenance data", _COLOR_ERROR, is_error=True)
+            return 1
+
+        item = matching[0]
+        _emit(f"\n=== Item: {item['item_id']} ===", _COLOR_NOTE)
+        _emit_kv("Total mass:", f"{item['total']:.2f} kg")
+
+        bar_width = 40
+        in_situ_bars = int(item['isru_pct'] / 100 * bar_width)
+        imported_bars = bar_width - in_situ_bars
+        bar = "█" * in_situ_bars + "░" * imported_bars
+
+        _emit(f"  In-situ:  {item['in_situ']:8.2f} kg ({item['isru_pct']:5.1f}%) {_color(bar, _COLOR_SUCCESS)}")
+        _emit(f"  Imported: {item['imported']:8.2f} kg ({100-item['isru_pct']:5.1f}%)")
+        if item['unknown'] > 0:
+            _emit(f"  Unknown:  {item['unknown']:8.2f} kg")
+
+        return 0
+
+    # Show summary table
+    _emit(f"\nTop Items by Mass:", _COLOR_NOTE)
+
+    # Sort by total mass
+    item_provenance.sort(key=lambda x: x['total'], reverse=True)
+
+    # Show top 10 items
+    for item in item_provenance[:10]:
+        isru_pct = item['isru_pct']
+        bar_width = 20
+        bar_filled = int(isru_pct / 100 * bar_width)
+        bar = "█" * bar_filled + "░" * (bar_width - bar_filled)
+
+        color = _COLOR_SUCCESS if isru_pct >= 80 else (_COLOR_WARN if isru_pct >= 50 else _COLOR_DIM)
+        _emit(f"  {item['item_id']:40s} {item['total']:9.2f} kg  {isru_pct:5.1f}% {_color(bar, color)}")
+
+    if len(item_provenance) > 10:
+        _emit(f"  ... and {len(item_provenance) - 10} more items", _COLOR_DIM)
+
+    # Show items with partial ISRU (opportunities for improvement)
+    partial_isru = [p for p in item_provenance if 0 < p['isru_pct'] < 100]
+    if partial_isru and not (hasattr(args, 'item') and args.item):
+        _emit(f"\nItems with Mixed Provenance ({len(partial_isru)} items):", _COLOR_NOTE)
+        for item in partial_isru[:5]:
+            _emit(f"  {item['item_id']:40s} {item['total']:6.2f} kg  ({item['in_situ']:.2f} in-situ, {item['imported']:.2f} imported)")
+        if len(partial_isru) > 5:
+            _emit(f"  ... and {len(partial_isru) - 5} more", _COLOR_DIM)
+
+    return 0
+
+
 def cmd_status(args, kb_loader: KBLoader):
     """Show simulation metadata summary."""
     engine = load_or_create_simulation(args.sim_id, kb_loader)
@@ -1412,6 +1551,12 @@ def add_sim_subcommands(subparsers):
     status_parser = sim_subparsers.add_parser('status', help='Show simulation metadata')
     status_parser.add_argument('--sim-id', required=True, help='Simulation ID')
 
+    # provenance
+    provenance_parser = sim_subparsers.add_parser('provenance', help='Show provenance breakdown (ISRU vs imported)')
+    provenance_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    provenance_parser.add_argument('--item', help='Show detailed breakdown for specific item')
+    provenance_parser.add_argument('--json', action='store_true', help='Output JSON format')
+
     # list
     list_parser = sim_subparsers.add_parser('list', help='List all simulations')
 
@@ -1453,6 +1598,7 @@ def run_sim_command(args, kb_loader: KBLoader):
         'preview': cmd_preview,
         'advance-time': cmd_advance_time,
         'status': cmd_status,
+        'provenance': cmd_provenance,
         'list': cmd_list,
         'visualize': cmd_visualize,
         'runbook': cmd_runbook,

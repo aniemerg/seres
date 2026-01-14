@@ -3,11 +3,8 @@ target_item_id: fastener_kit_medium
 variant_id: v0
 
 inputs:
-  - item_id: steel_stock_bar_or_billet
-    qty: 1.0
-    unit: kg
-  - item_id: steel_sheet_3mm
-    qty: 1.0
+  - item_id: metal_alloy_bulk
+    qty: 2.0
     unit: kg
 outputs:
   - item_id: fastener_kit_medium
@@ -15,101 +12,84 @@ outputs:
     unit: kg
 
 steps:
-  - process_id: forging_basic_v0
+  - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: steel_stock_bar_or_billet
-        qty: 1.0
+      - item_id: metal_alloy_bulk
+        qty: 2.0
         unit: kg
     outputs:
-      - item_id: forged_steel_parts
-        qty: 1.0
-        unit: kg
-    est_time_hr: 1.2
-    machine_hours: 1.2
-    notes: Hot forge hex heads on bolt blanks and upset nut blanks using dies
-
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: forged_steel_parts
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-    est_time_hr: 2.5
-    machine_hours: 2.5
-    notes: Cut external threads on bolts (M6-M12) and tap internal threads in nuts using lathes and tapping machines
-
-  - process_id: sheet_metal_forming_process_v0
-    inputs:
-      - item_id: steel_sheet_3mm
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: steel_chassis_sheet_metal
-        qty: 1.0
+      - item_id: cast_metal_parts
+        qty: 1.8
         unit: kg
     est_time_hr: 0.6
     machine_hours: 0.6
-    notes: Stamp flat washers and lock washers from steel sheet stock using progressive dies
+    notes: Cast fastener blanks and washer stock in batch molds
+
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.6
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Machine threads and washer profiles from cast blanks
 
   - process_id: heat_treat_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 1.6
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 1.6
         unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Heat treat bolts and lock washers for hardness and spring properties (austenitizing, quenching, tempering)
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Heat treat fasteners for strength and spring properties
 
   - process_id: inspection_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 1.6
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 1.6
         unit: kg
-    est_time_hr: 0.5
-    labor_hours: 0.5
+    est_time_hr: 0.4
+    labor_hours: 0.4
     notes: Inspect heat-treated fasteners for hardness and dimensional checks
 
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-      - item_id: steel_chassis_sheet_metal
-        qty: 1.0
+        qty: 1.6
         unit: kg
     outputs:
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: kg
-    est_time_hr: 0.4
-    labor_hours: 0.4
-    notes: Sort fasteners by size (M6, M8, M10, M12), count, and kit into organized container
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: Sort fasteners by size (M6, M8, M10, M12), count, and kit
 
 assumptions: |
-  Complete fastener manufacturing from steel stock to finished kit. Process integrates:
-  - Hot forging for head formation (hex heads on bolts, upset blanks for nuts)
-  - Thread cutting via single-point turning (bolts) and tapping (nuts)
-  - Sheet metal stamping for washer production
-  - Heat treatment for strength and hardness
+  Simplified fastener manufacturing from metal alloy bulk to finished kit:
+  - Cast blanks for bolts, nuts, and washers
+  - Machine threads and profiles
+  - Heat treat for strength and spring properties
   - Final inspection and kitting
 
-  Input materials: 2.0 kg steel stock (1.0 kg bar/billet, 1.0 kg sheet)
+  Input materials: 2.0 kg metal_alloy_bulk
   Output: 1.0 kg complete fastener kit per BOM specification
-  Scrap rate: ~50% from machining chips and stamping waste (conservative placeholder)
+  Scrap rate: ~50% from casting/machining losses (conservative placeholder)
 
 notes: |
-  Six-step recipe for fastener_kit_medium production.
+  Simplified local recipe for fastener_kit_medium production.
 
   Kit composition per bom_fastener_kit_medium_v0:
   - 720g hex bolts M6-M12 in various lengths (76 pieces total)
@@ -119,13 +99,10 @@ notes: |
   Total: ~366 fasteners, 1.0 kg net weight
 
   Manufacturing process details:
-  1. Forging: Form hex heads on bolt blanks, upset nut blanks for adequate thread engagement
-  2. Threading: Cut external threads on bolts (dies or single-point), tap nuts (spiral point taps)
-  3. Washer stamping: Progressive die stamps flat and lock washers from sheet
-  4. Heat treatment: Quench and temper bolts to grade 8.8 equivalent, harden lock washers
-  5. Inspection: Verify hardness and dimensional checks
-  6. Kitting: Sort by size, verify counts, package in compartmented container
-
-  Total time: ~8 hours (primarily sequential, some parallel opportunity for washers)
+  1. Casting: Form blanks for bolts, nuts, and washers
+  2. Threading: Cut external threads on bolts, tap nuts
+  3. Heat treatment: Quench and temper bolts to grade 8.8 equivalent, harden lock washers
+  4. Inspection: Verify hardness and dimensional checks
+  5. Kitting: Sort by size, verify counts, package in compartmented container
   References detailed specification in design/memos/fastener_kit_specification.md
   Most commonly used fastener kit in the KB (107 BOMs reference this item)

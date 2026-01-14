@@ -217,6 +217,12 @@ Commentary: import basic equipment for mining and processing.
     ensure: true
 - cmd: sim.import
   args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: rolling_mill_v0
     quantity: 1
     unit: unit
@@ -241,20 +247,24 @@ Commentary: import basic equipment for mining and processing.
 
 ## Bootstrap: Regolith Mining and Metal Production
 
-Commentary: mine regolith and produce metal alloy bulk for components.
+Commentary: mine regolith for iron extraction and metal alloy bulk for components.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Mining regolith and producing metals."
+    message: "Mining regolith for iron extraction and metals."
 - cmd: sim.start-process
   args:
     process: regolith_mining_simple_v0
-    duration: 8
+    duration: 40
 - cmd: sim.advance-time
   args:
-    hours: 8
+    hours: 40
+- cmd: sim.note
+  args:
+    style: info
+    message: "Regolith mining complete."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_metal_alloy_bulk_v0
@@ -270,50 +280,106 @@ Commentary: mine regolith and produce metal alloy bulk for components.
 
 ## Steel Production
 
-Commentary: produce steel materials for frame and fasteners.
+Commentary: mine additional regolith and produce steel materials for frame using in situ iron ore from regolith.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Producing steel plate and stock."
-- cmd: sim.import
+    message: "Mining additional regolith for iron extraction."
+- cmd: sim.start-process
   args:
-    item: iron_metal_pure
-    quantity: 130
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: carbon_reductant
-    quantity: 5
-    unit: kg
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_plate_raw_v0
-    quantity: 1
+    process: regolith_mining_simple_v0
+    duration: 1
 - cmd: sim.advance-time
   args:
-    hours: 4
-- cmd: sim.run-recipe
+    hours: 2
+- cmd: sim.start-process
   args:
-    recipe: recipe_steel_stock_bar_or_billet_v0
-    quantity: 1
+    process: regolith_mining_simple_v0
+    duration: 1
 - cmd: sim.advance-time
   args:
-    hours: 4
-- cmd: sim.run-recipe
+    hours: 2
+- cmd: sim.start-process
   args:
-    recipe: recipe_steel_sheet_3mm_v0
-    quantity: 1
+    process: regolith_mining_simple_v0
+    duration: 1
 - cmd: sim.advance-time
   args:
-    hours: 3
+    hours: 2
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_simple_v0
+    duration: 1
+- cmd: sim.advance-time
+  args:
+    hours: 2
 - cmd: sim.note
   args:
     style: info
-    message: "Steel materials ready."
+    message: "Extracting ilmenite from regolith."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_ilmenite_from_regolith_v0
+    quantity: 460
+- cmd: sim.advance-time
+  args:
+    hours: 50
+- cmd: sim.note
+  args:
+    style: info
+    message: "Ilmenite extracted. Producing carbon reducing agent."
+- cmd: sim.import
+  args:
+    item: carbon_reductant
+    quantity: 70
+    unit: kg
+    ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_carbon_reducing_agent_v0
+    quantity: 70
+- cmd: sim.advance-time
+  args:
+    hours: 10
+- cmd: sim.note
+  args:
+    style: info
+    message: "Producing iron pig ingot from ilmenite."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_iron_pig_or_ingot_v0
+    quantity: 140
+- cmd: sim.advance-time
+  args:
+    hours: 30
+- cmd: sim.note
+  args:
+    style: info
+    message: "Producing steel ingot from iron pig."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_ingot_v0
+    quantity: 135
+- cmd: sim.advance-time
+  args:
+    hours: 30
+- cmd: sim.note
+  args:
+    style: info
+    message: "Producing steel plate for frame."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_plate_raw_v0
+    quantity: 130
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.note
+  args:
+    style: info
+    message: "Steel plate ready."
 ```
 
 ## Motor Components: Aluminum Wire

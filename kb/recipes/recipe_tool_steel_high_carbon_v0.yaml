@@ -8,11 +8,11 @@ target_item_id: tool_steel_high_carbon_v0
 variant_id: v0
 inputs:
   - item_id: iron_ore_or_ilmenite
-    qty: 1.8
+    qty: 1.89
     unit: kg
     notes: Iron ore for smelting
   - item_id: carbon_reducing_agent
-    qty: 0.3
+    qty: 0.315
     unit: kg
     notes: Carbon for reduction and alloying
 outputs:
@@ -23,22 +23,22 @@ steps:
   - process_id: iron_smelting_reduction_v0
     inputs:
       - item_id: iron_ore_or_ilmenite
-        qty: 1.8
+        qty: 1.89
         unit: kg
       - item_id: carbon_reducing_agent
-        qty: 0.3
+        qty: 0.315
         unit: kg
     outputs:
       - item_id: iron_pig_or_ingot
-        qty: 1.0
+        qty: 1.05
         unit: kg
       - item_id: slag
-        qty: 0.8
+        qty: 0.84
         unit: kg
   - process_id: steel_refining_basic_v0
     inputs:
       - item_id: iron_pig_or_ingot
-        qty: 1.0
+        qty: 1.05
         unit: kg
     outputs:
       - item_id: steel_billet_or_slab

@@ -258,7 +258,7 @@ Commentary: produce metal_alloy_bulk from regolith using the full processing cha
     duration: null
 - cmd: sim.advance-time
   args:
-    hours: 2300
+    hours: 2600
 - cmd: sim.note
   args:
     style: info
@@ -343,7 +343,7 @@ metal components locally, while accepting that electronics must still be importe
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 4
+    hours: 10
 - cmd: sim.note
   args:
     style: success

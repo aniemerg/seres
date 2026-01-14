@@ -802,6 +802,7 @@ class SimulationEngine:
         # Calculate inputs needed
         inputs = process_def.get("inputs", [])
         inputs_consumed = {}
+        allow_material_class_substitution = False
 
         for inp in inputs:
             requested_item_id = inp.get("item_id")
@@ -809,11 +810,11 @@ class SimulationEngine:
             unit = inp.get("unit", "kg")
             needed_quantity = base_quantity * scale
 
-            # Try exact match first
+            # Exact match only (material_class substitution disabled by default)
             actual_item_id = None
             if self.has_item(requested_item_id, needed_quantity, unit):
                 actual_item_id = requested_item_id
-            else:
+            elif allow_material_class_substitution:
                 # Try material_class matching
                 requested_item_model = self.kb.get_item(requested_item_id)
                 if requested_item_model:

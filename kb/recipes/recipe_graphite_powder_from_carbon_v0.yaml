@@ -1,0 +1,40 @@
+id: recipe_graphite_powder_from_carbon_v0
+kind: recipe
+name: Graphite powder from carbon reductant v0
+target_item_id: graphite_powder
+variant_id: from_carbon_v0
+inputs:
+  - item_id: carbon_reductant
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: graphite_powder
+    qty: 0.9
+    unit: kg
+  - item_id: volatiles_off_gas
+    qty: 0.1
+    unit: kg
+steps:
+  - process_id: heat_treatment_graphitization_v0
+    inputs:
+      - item_id: carbon_reductant
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: graphite_powder
+        qty: 0.9
+        unit: kg
+      - item_id: volatiles_off_gas
+        qty: 0.1
+        unit: kg
+    est_time_hr: 12.0
+    machine_hours: 12.0
+    notes: "High-temperature heat treatment (2500-3000°C) to convert amorphous carbon to crystalline graphite structure"
+assumptions: |
+  Graphitization process converts disordered carbon from regolith into crystalline graphite.
+  Process requires inert atmosphere or vacuum and temperatures above 2500°C.
+  Yields ~90% graphite powder with ~10% volatile loss (residual organics, moisture).
+notes: |
+  ISRU pathway for graphite powder production from regolith-derived carbon.
+  Enables local electrode and crucible production for lunar/Mars manufacturing.
+  Alternative to importing graphite from Earth.

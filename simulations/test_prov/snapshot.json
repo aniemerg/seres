@@ -1,0 +1,142 @@
+{
+  "sim_id": "test_prov",
+  "state": {
+    "sim_id": "test_prov",
+    "current_time_hours": 2.0,
+    "inventory": {
+      "labor_bot_general_v0": {
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      "regolith_lunar_mare": {
+        "quantity": 200.0,
+        "unit": "kg"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "labor_bot_general_v0": {
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      "regolith_lunar_mare": {
+        "quantity": 100.0,
+        "unit": "kg"
+      }
+    },
+    "provenance": {
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 240.0,
+        "unknown_kg": 0.0
+      },
+      "regolith_lunar_mare": {
+        "in_situ_kg": 100.0,
+        "imported_kg": 100.0,
+        "unknown_kg": 0.0
+      }
+    },
+    "total_energy_kwh": 5.0
+  },
+  "scheduler": {
+    "current_time": 2.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "e943a52a-84e8-439e-b17f-28e1cb1479a7",
+        "process_id": "regolith_mining_simple_v0",
+        "start_time": 0.0,
+        "duration_hours": 1.0,
+        "end_time": 1.0,
+        "scale": 1.0,
+        "inputs_consumed": {},
+        "outputs_pending": {
+          "regolith_lunar_mare": 100.0
+        },
+        "outputs_pending_units": {
+          "regolith_lunar_mare": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 0.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {},
+        "recipe_run_id": "198aeea5-da2a-495c-98cd-3625c73884cd",
+        "step_index": 0,
+        "energy_kwh": 5.0
+      }
+    ],
+    "total_events_processed": 2
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "198aeea5-da2a-495c-98cd-3625c73884cd": {
+        "recipe_run_id": "198aeea5-da2a-495c-98cd-3625c73884cd",
+        "recipe_id": "recipe_regolith_lunar_mare_v0",
+        "target_item_id": "regolith_lunar_mare",
+        "recipe_def": {
+          "id": "recipe_regolith_lunar_mare_v0",
+          "target_item_id": "regolith_lunar_mare",
+          "variant_id": null,
+          "steps": [
+            {
+              "process_id": "regolith_mining_simple_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [],
+              "outputs": [
+                {
+                  "item_id": "regolith_lunar_mare",
+                  "qty": 100.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": null,
+              "labor_hours": null,
+              "machine_hours": null,
+              "notes": null
+            }
+          ],
+          "inputs": [],
+          "outputs": [
+            {
+              "item_id": "regolith_lunar_mare",
+              "qty": 100.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": null,
+          "notes": "Bootstrap production path for mare regolith using the simple mining process.",
+          "kind": "recipe"
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 1.0
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "labor_bot_general_v0": 2.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

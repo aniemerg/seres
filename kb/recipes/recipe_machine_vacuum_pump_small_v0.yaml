@@ -73,8 +73,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 22.3
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble pump rotor, vanes, drive motor, and seals"
@@ -96,20 +96,20 @@ steps:
   - process_id: leak_test_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 22.3
+        unit: kg
     outputs:
-      - item_id: tested_electrical_equipment
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 22.3
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test vacuum pump performance and verify vacuum level achieved"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 22.3
+        unit: kg
     outputs:
       - item_id: vacuum_pump_small
         qty: 1.0

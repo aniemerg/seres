@@ -20,8 +20,9 @@ Total: 306 missing fields
 See `out/missing_fields.jsonl` for details.
 
 ## Missing data (null values)
-Total: 2 null fields
+Total: 3 null fields
 - machine: 2
+- part: 1
 
 See `out/null_values.jsonl` for details.
 
@@ -45,10 +46,10 @@ See `out/validation_issues.jsonl` for details.
 ## Queue Filtering
 **Status**: Enabled
 **Mode**: boms_recipes_parts_only
-**Total gaps found**: 311
+**Total gaps found**: 312
 **Filtered out**: 306
-**Added to queue**: 5
-**Filtering rate**: 98.4%
+**Added to queue**: 6
+**Filtering rate**: 98.1%
 
 ## Work queue summary
 Total gaps in work queue: see `out/work_queue.jsonl`

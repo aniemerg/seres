@@ -2,14 +2,14 @@ id: recipe_welding_power_supply_unit_v0
 target_item_id: welding_power_supply_unit
 variant_id: v0
 inputs:
-  - item_id: metal_feedstock
+  - item_id: metal_alloy_bulk
     qty: 50.0
     unit: kg
   - item_id: machined_part_raw
     qty: 46.0
     unit: kg
     notes: "Intermediate for assembly step"
-  - item_id: copper_wire_magnet
+  - item_id: aluminum_wire
     qty: 10.0
     unit: kg
   - item_id: motor_coil_wound
@@ -22,6 +22,10 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 2.0
     unit: kg
+  - item_id: metal_alloy_bulk
+    qty: 2.5
+    unit: kg
+    notes: "Additional enclosure mass to balance output weight"
 outputs:
   - item_id: welding_power_supply_unit
     qty: 1
@@ -29,7 +33,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_feedstock
+      - item_id: metal_alloy_bulk
         qty: 50.0
         unit: kg
     outputs:
@@ -53,7 +57,7 @@ steps:
     notes: Machine mounting surfaces and cooling channels
   - process_id: spool_winding_basic_v0
     inputs:
-      - item_id: copper_wire_magnet
+      - item_id: aluminum_wire
         qty: 10.0
         unit: kg
     outputs:
@@ -76,6 +80,9 @@ steps:
         unit: kg
       - item_id: fastener_kit_medium
         qty: 2.0
+        unit: kg
+      - item_id: metal_alloy_bulk
+        qty: 2.5
         unit: kg
     outputs:
       - item_id: welding_power_supply_unit

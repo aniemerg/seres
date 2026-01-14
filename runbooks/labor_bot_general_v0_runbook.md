@@ -354,6 +354,24 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
+    item: metal_shear_or_saw
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: press_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fixturing_workbench
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: casting_mold_set
     quantity: 1
     unit: unit
@@ -442,23 +460,27 @@ Commentary: mine highland regolith and extract alumina for aluminum production.
 - cmd: sim.import
   args:
     item: hydrochloric_acid
-    quantity: 300
+    quantity: 1500
     unit: kg
     ensure: true
 - cmd: sim.start-process
   args:
     process: regolith_mining_highlands_v0
-    duration: 120
+    output_quantity: 500
+    output_unit: kg
+    duration: null
 - cmd: sim.advance-time
   args:
-    hours: 120
+    hours: 60
 - cmd: sim.start-process
   args:
     process: alumina_extraction_from_highlands_v0
-    duration: 50
+    output_quantity: 60
+    output_unit: kg
+    duration: null
 - cmd: sim.advance-time
   args:
-    hours: 50
+    hours: 100
 - cmd: sim.note
   args:
     style: info
@@ -559,40 +581,28 @@ Commentary: produce steel from regolith ilmenite via iron smelting and refining.
   args:
     style: info
     message: "Mining additional mare regolith for steel production (300 kg needed)."
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 2
-- cmd: sim.advance-time
-  args:
-    hours: 2
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 2
-- cmd: sim.advance-time
-  args:
-    hours: 2
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 2
-- cmd: sim.advance-time
-  args:
-    hours: 2
 - cmd: sim.import
   args:
     item: carbon_reductant
     quantity: 30
     unit: kg
     ensure: true
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_simple_v0
+    output_quantity: 350
+    output_unit: kg
+    duration: null
+- cmd: sim.advance-time
+  args:
+    hours: 8
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
     quantity: 210
 - cmd: sim.advance-time
   args:
-    hours: 20
+    hours: 300
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_pig_or_ingot_v0

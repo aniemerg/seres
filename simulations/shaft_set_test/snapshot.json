@@ -1,0 +1,183 @@
+{
+  "sim_id": "shaft_set_test",
+  "state": {
+    "sim_id": "shaft_set_test",
+    "current_time_hours": 10.0,
+    "inventory": {
+      "steel_bar_stock": {
+        "quantity": 8.0,
+        "unit": "kg"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "shaft_set_medium": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "steel_bar_stock": {
+        "quantity": 40.0,
+        "unit": "kg"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "provenance": {
+      "steel_bar_stock": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 8.0,
+        "unknown_kg": 0.0
+      },
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 120.0,
+        "unknown_kg": 0.0
+      },
+      "assembly_tools_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 50.0,
+        "unknown_kg": 0.0
+      },
+      "shaft_set_medium": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 32.0,
+        "unknown_kg": 0.0
+      }
+    },
+    "total_energy_kwh": 0.0
+  },
+  "scheduler": {
+    "current_time": 10.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "4a9e9724-36db-4f3b-b899-4a497d26e2ed",
+        "process_id": "assembly_basic_v0",
+        "start_time": 0.0,
+        "duration_hours": 1.0,
+        "end_time": 1.0,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "steel_bar_stock": 32.0
+        },
+        "outputs_pending": {
+          "shaft_set_medium": 1.0
+        },
+        "outputs_pending_units": {
+          "shaft_set_medium": "unit"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "assembly_tools_basic": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 32.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "steel_bar_stock": "kg"
+        },
+        "recipe_run_id": "db059fa4-e4e5-4b63-942e-5f3903c924a8",
+        "step_index": 0,
+        "energy_kwh": 0.0
+      }
+    ],
+    "total_events_processed": 2
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "db059fa4-e4e5-4b63-942e-5f3903c924a8": {
+        "recipe_run_id": "db059fa4-e4e5-4b63-942e-5f3903c924a8",
+        "recipe_id": "recipe_shaft_set_medium_v0",
+        "target_item_id": "shaft_set_medium",
+        "recipe_def": {
+          "id": "recipe_shaft_set_medium_v0",
+          "target_item_id": "shaft_set_medium",
+          "variant_id": "v0",
+          "steps": [
+            {
+              "process_id": "assembly_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "steel_bar_stock",
+                  "qty": 32.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "shaft_set_medium",
+                  "qty": 1.0,
+                  "unit": "unit",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 5.0,
+              "labor_hours": 0.5,
+              "machine_hours": 4.5,
+              "notes": "Cast shaft blanks from steel, precision machine shaft journals and gear seats, final inspection and pairing"
+            }
+          ],
+          "inputs": [
+            {
+              "item_id": "steel_bar_stock",
+              "qty": 32.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "outputs": [
+            {
+              "item_id": "shaft_set_medium",
+              "qty": 1.0,
+              "unit": "unit",
+              "notes": null
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": "30 kg shaft set for gearbox; multiple shafts.",
+          "notes": "Three-step recipe for gearbox shaft set."
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 1.0
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "labor_bot_general_v0": 1.0,
+      "assembly_tools_basic": 1.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

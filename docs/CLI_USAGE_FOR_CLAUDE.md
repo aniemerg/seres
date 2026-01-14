@@ -40,6 +40,9 @@ python -m src.cli sim advance-time --sim-id $SIM --hours <n>
 
 # 6. Verify results
 python -m src.cli sim view-state --sim-id $SIM
+
+# 7. Check ISRU percentage (optional)
+python -m src.cli sim provenance --sim-id $SIM
 ```
 
 ---
@@ -98,6 +101,18 @@ Execute time step (commits changes)
 ```bash
 python -m src.cli sim advance-time --sim-id <sim_id> --hours <number>
 ```
+
+### provenance
+Show ISRU vs imported material breakdown
+
+```bash
+python -m src.cli sim provenance --sim-id <sim_id> [--item <item_id>] [--json]
+```
+
+Use this to:
+- Track how much of your build is from local resources
+- Find largest imported items to replace with ISRU
+- Verify runbook ISRU improvements
 
 ### list
 List all simulations

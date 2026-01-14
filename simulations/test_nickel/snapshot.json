@@ -5,7 +5,7 @@
     "current_time_hours": 1005.0,
     "inventory": {
       "regolith_lunar_mare": {
-        "quantity": 4000.0,
+        "quantity": 2000.0,
         "unit": "kg"
       },
       "magnetic_separator_drum_v0": {
@@ -86,6 +86,63 @@
         "unit": "kWh"
       }
     },
+    "provenance": {
+      "regolith_lunar_mare": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 2000.0,
+        "unknown_kg": 0.0
+      },
+      "magnetic_separator_drum_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 750.0,
+        "unknown_kg": 0.0
+      },
+      "vibratory_feeder_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 320.0,
+        "unknown_kg": 0.0
+      },
+      "furnace_high_temp": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 800.0,
+        "unknown_kg": 0.0
+      },
+      "crucible_graphite": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 10.0,
+        "unknown_kg": 0.0
+      },
+      "chemical_separation_equipment": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 200.0,
+        "unknown_kg": 0.0
+      },
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 360.0,
+        "unknown_kg": 0.0
+      },
+      "meteorite_iron": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "tailings": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1990.0,
+        "unknown_kg": 0.0
+      },
+      "nickel_metal": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1.1111111111111112,
+        "unknown_kg": 0.0
+      },
+      "iron_metal": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 8.88888888888889,
+        "unknown_kg": 0.0
+      }
+    },
     "total_energy_kwh": 120.0
   },
   "scheduler": {
@@ -94,7 +151,7 @@
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "35d6ea64-d050-4e51-b5bb-62415b96c4ec",
+        "process_run_id": "bbce822b-08f6-4ca3-8ad4-3cff5bf358d5",
         "process_id": "beneficiate_regolith_magnetic_v0",
         "start_time": 0.0,
         "duration_hours": 1.0,
@@ -116,16 +173,24 @@
           "magnetic_separator_drum_v0": 1.0,
           "vibratory_feeder_v0": 1.0
         },
-        "recipe_run_id": "34e518d8-95d5-4a21-8cea-8dee0c42b718",
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 2000.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "regolith_lunar_mare": "kg"
+        },
+        "recipe_run_id": "8a7e53d4-a105-4fad-9ed5-4ceb5cec192c",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "9fe78c74-c3aa-40f4-bdc3-51aa9a59bf04",
+        "process_run_id": "a8f1f290-c3a3-4f9b-b24f-8831971cd557",
         "process_id": "nickel_extraction_meteorite_v0",
         "start_time": 1.0,
-        "duration_hours": 40.0,
-        "end_time": 41.0,
+        "duration_hours": 1.0,
+        "end_time": 2.0,
         "scale": 1.0,
         "inputs_consumed": {
           "meteorite_iron": 10.0
@@ -144,7 +209,15 @@
           "crucible_graphite": 1.0,
           "chemical_separation_equipment": 1.0
         },
-        "recipe_run_id": "34e518d8-95d5-4a21-8cea-8dee0c42b718",
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 10.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "meteorite_iron": "kg"
+        },
+        "recipe_run_id": "8a7e53d4-a105-4fad-9ed5-4ceb5cec192c",
         "step_index": 1,
         "energy_kwh": 120.0
       }
@@ -153,8 +226,8 @@
   },
   "orchestrator": {
     "recipe_runs": {
-      "34e518d8-95d5-4a21-8cea-8dee0c42b718": {
-        "recipe_run_id": "34e518d8-95d5-4a21-8cea-8dee0c42b718",
+      "8a7e53d4-a105-4fad-9ed5-4ceb5cec192c": {
+        "recipe_run_id": "8a7e53d4-a105-4fad-9ed5-4ceb5cec192c",
         "recipe_id": "recipe_nickel_metal_from_regolith_v0",
         "target_item_id": "nickel_metal",
         "recipe_def": {
@@ -271,7 +344,7 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 41.0
+        "completed_at": 2.0
       }
     }
   },

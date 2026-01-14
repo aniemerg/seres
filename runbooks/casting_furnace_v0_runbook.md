@@ -362,7 +362,7 @@ Commentary: produce insulation pack from regolith-based insulation where feasibl
 - cmd: sim.import
   args:
     item: electronic_components_set
-    quantity: 2
+    quantity: 4
     unit: kg
     ensure: true
 - cmd: sim.run-recipe

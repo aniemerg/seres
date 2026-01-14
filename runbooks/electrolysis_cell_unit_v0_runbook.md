@@ -60,6 +60,12 @@ Commentary: import core equipment for mining, processing, and assembly.
     ensure: true
 - cmd: sim.import
   args:
+    item: blast_furnace_or_smelter
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: crucible_refractory
     quantity: 1
     unit: unit
@@ -222,29 +228,24 @@ Commentary: import core equipment for mining, processing, and assembly.
 
 ## Mining and Metal Extraction
 
-Commentary: Import regolith as boundary resource for iron and nickel extraction.
+Commentary: Mine regolith in-situ for iron and nickel extraction.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Importing regolith for iron and nickel extraction."
-- cmd: sim.import
+    message: "Mining regolith for iron and nickel extraction."
+- cmd: sim.run-recipe
   args:
-    item: regolith_lunar_mare
-    quantity: 4100
-    unit: kg
-    ensure: true
-- cmd: sim.import
+    recipe: recipe_regolith_lunar_mare_v0
+    quantity: 42
+- cmd: sim.advance-time
   args:
-    item: regolith_carbonaceous
-    quantity: 50
-    unit: kg
-    ensure: true
+    hours: 43
 - cmd: sim.note
   args:
     style: info
-    message: "Regolith imported, ready for processing."
+    message: "Regolith mining complete."
 ```
 
   args:
@@ -266,34 +267,33 @@ Commentary: Import regolith as boundary resource for iron and nickel extraction.
 
 ## Local Material Production
 
-Commentary: Produce carbon reductant and iron from locally mined regolith.
+Commentary: Produce carbon reducing agent and iron pig/ingot from locally mined regolith.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Producing carbon reductant and iron from local regolith."
-- cmd: sim.run-recipe
+    message: "Producing iron pig/ingot from locally mined regolith."
+- cmd: sim.import
   args:
-    recipe: recipe_carbon_reductant_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 2
+    item: carbon_reducing_agent
+    quantity: 15
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 50
+    quantity: 100
 - cmd: sim.advance-time
   args:
-    hours: 52
+    hours: 102
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_iron_metal_pure_from_ilmenite_v0
+    recipe: recipe_iron_pig_or_ingot_v0
     quantity: 30
 - cmd: sim.advance-time
   args:
-    hours: 30
+    hours: 120
 - cmd: sim.note
   args:
     style: info
@@ -315,7 +315,7 @@ Commentary: Produce steel ingot from local iron, then roll into steel_sheet_3mm.
     quantity: 25
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 80
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_sheet_3mm_v0

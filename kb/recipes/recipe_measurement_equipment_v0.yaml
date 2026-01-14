@@ -6,17 +6,17 @@ inputs:
     qty: 10.0
     unit: kg
   - item_id: caliper_set_precision
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: micrometer_set
-    qty: 1.0
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: dial_indicator_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: gauge_block_set
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: multimeter_digital
     qty: 1.0
     unit: unit
@@ -42,20 +42,24 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: caliper_set_precision
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: micrometer_set
-        qty: 1.0
-        unit: unit
+        qty: 3.0
+        unit: kg
       - item_id: dial_indicator_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: gauge_block_set
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: fastener_kit_small
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 12.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble mechanical measurement tools"
@@ -69,16 +73,19 @@ steps:
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble electronic measurement instruments"
   - process_id: calibration_basic_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 12.0
+        unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: measurement_equipment
         qty: 1.0

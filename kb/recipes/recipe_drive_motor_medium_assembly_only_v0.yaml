@@ -1,0 +1,54 @@
+id: recipe_drive_motor_medium_assembly_only_v0
+kind: recipe
+target_item_id: drive_motor_medium
+variant_id: assembly_only_v0
+inputs:
+  - item_id: stator_rotor_lamination_set
+    qty: 36.0
+    unit: kg
+  - item_id: motor_coil_wound
+    qty: 27.0
+    unit: kg
+  - item_id: motor_housing_steel
+    qty: 18.0
+    unit: kg
+  - item_id: motor_shaft_steel
+    qty: 4.5
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: drive_motor_medium
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: drive_motor_medium_assembly_v0
+    inputs:
+      - item_id: stator_rotor_lamination_set
+        qty: 36.0
+        unit: kg
+      - item_id: motor_coil_wound
+        qty: 27.0
+        unit: kg
+      - item_id: motor_housing_steel
+        qty: 18.0
+        unit: kg
+      - item_id: motor_shaft_steel
+        qty: 4.5
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: drive_motor_medium
+        qty: 1.0
+        unit: unit
+    notes: "Assembly-only route using pre-fabricated laminations and coils."
+notes: "Assembly-only variant to combine motor subcomponents into drive_motor_medium."

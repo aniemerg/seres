@@ -38,7 +38,7 @@ run the assembly recipe as a baseline.
 - cmd: sim.import
   args:
     item: assembly_tools_basic
-    quantity: 1
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import
@@ -135,7 +135,7 @@ run the assembly recipe as a baseline.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 12
+    hours: 400
 - cmd: sim.note
   args:
     style: success
@@ -303,6 +303,12 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
+    item: stamping_press_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: rolling_mill_v0
     quantity: 1
     unit: unit
@@ -340,6 +346,12 @@ Commentary: import the minimum tooling and seed materials to allow local product
 - cmd: sim.import
   args:
     item: coil_winding_machine
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: lifting_equipment
     quantity: 1
     unit: unit
     ensure: true
@@ -406,7 +418,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
 - cmd: sim.import
   args:
     item: electrical_energy
-    quantity: 2000
+    quantity: 13000
     unit: kWh
     ensure: true
 - cmd: sim.note
@@ -435,6 +447,55 @@ Commentary: import the minimum tooling and seed materials to allow local product
     duration: 6
 - cmd: sim.advance-time
   args:
+    hours: 120
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_carbonaceous_v0
+    duration: 6
+- cmd: sim.advance-time
+  args:
     hours: 6
 - cmd: sim.start-process
   args:
@@ -453,10 +514,10 @@ Commentary: import the minimum tooling and seed materials to allow local product
 - cmd: sim.run-recipe
   args:
     recipe: recipe_metal_alloy_bulk_v0
-    quantity: 6
+    quantity: 30
 - cmd: sim.advance-time
   args:
-    hours: 8
+    hours: 240
 ```
 
 ## In-situ: casting parts for mill shell + trunnions + frame
@@ -499,17 +560,23 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     recipe: recipe_part_mill_shell_generic_v0
     quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 2
 - cmd: sim.run-recipe
   args:
     recipe: recipe_part_trunnion_supports_v0
-    quantity: 1
+    quantity: 2
+- cmd: sim.advance-time
+  args:
+    hours: 4
 - cmd: sim.run-recipe
   args:
     recipe: recipe_part_support_frame_welded_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 6
+    hours: 4
 ```
 
 ## In-situ: liner set from regolith fines
@@ -528,6 +595,64 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
     hours: 3
 ```
 
+## In-situ: steel stock for fasteners + motor shaft
+
+```sim-runbook
+- cmd: sim.note
+  args:
+    style: milestone
+    message: "Produce steel stock and sheet for fasteners and motor shaft."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_carbon_reductant_v0
+    quantity: 24
+- cmd: sim.advance-time
+  args:
+    hours: 40
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_carbon_reducing_agent_v0
+    quantity: 7
+- cmd: sim.advance-time
+  args:
+    hours: 6
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_ilmenite_from_regolith_v0
+    quantity: 44
+- cmd: sim.advance-time
+  args:
+    hours: 55
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_iron_pig_or_ingot_v0
+    quantity: 13
+- cmd: sim.advance-time
+  args:
+    hours: 55
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_ingot_v0
+    quantity: 12
+- cmd: sim.advance-time
+  args:
+    hours: 40
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_stock_bar_or_billet_v0
+    quantity: 9
+- cmd: sim.advance-time
+  args:
+    hours: 100
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_sheet_3mm_v0
+    quantity: 3
+- cmd: sim.advance-time
+  args:
+    hours: 2
+```
+
 ## In-situ: bearing set + fastener kit
 
 ```sim-runbook
@@ -538,14 +663,14 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.run-recipe
   args:
     recipe: recipe_bearing_set_heavy_v0
-    quantity: 1
+    quantity: 3
 - cmd: sim.run-recipe
   args:
     recipe: recipe_fastener_kit_medium_v0
-    quantity: 1
+    quantity: 3
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 20
 ```
 
 ## In-situ: iron and silicon feedstocks
@@ -555,26 +680,27 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     style: milestone
     message: "Produce iron and silicon feedstocks."
+- cmd: sim.start-process
+  args:
+    process: regolith_mining_simple_v0
+    duration: 2
+- cmd: sim.advance-time
+  args:
+    hours: 2
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reductant_v0
-    quantity: 8
+    quantity: 20
 - cmd: sim.advance-time
   args:
-    hours: 12
+    hours: 32
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 30
+    quantity: 100
 - cmd: sim.advance-time
   args:
-    hours: 30
-- cmd: sim.import
-  args:
-    item: iron_ore_or_ilmenite
-    quantity: 60
-    unit: kg
-    ensure: true
+    hours: 100
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_metal_pure_v0
@@ -585,16 +711,16 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.import
   args:
     item: regolith_lunar_highlands
-    quantity: 120
+    quantity: 650
     unit: kg
     ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_silicon_metal_from_regolith_carbothermic_v0
-    quantity: 2
+    quantity: 5
 - cmd: sim.advance-time
   args:
-    hours: 2
+    hours: 5
 ```
 
 ## In-situ: aluminum + insulation materials
@@ -607,13 +733,13 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.import
   args:
     item: sodium_chloride
-    quantity: 40
+    quantity: 120
     unit: kg
     ensure: true
 - cmd: sim.import
   args:
     item: water
-    quantity: 40
+    quantity: 120
     unit: kg
     ensure: true
 - cmd: sim.import
@@ -625,72 +751,72 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.import
   args:
     item: carbon_dioxide_gas
-    quantity: 5
+    quantity: 22
     unit: kg
     ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_sodium_hydroxide_v0
-    quantity: 20
+    quantity: 60
+- cmd: sim.advance-time
+  args:
+    hours: 36
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_hydrochloric_acid_v0
+    quantity: 60
+- cmd: sim.advance-time
+  args:
+    hours: 62
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_methane_gas_v1
+    quantity: 22
 - cmd: sim.advance-time
   args:
     hours: 12
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_hydrochloric_acid_v0
-    quantity: 20
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_methane_gas_v1
-    quantity: 5
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.run-recipe
-  args:
     recipe: recipe_alumina_powder_v0
-    quantity: 2
+    quantity: 6
 - cmd: sim.advance-time
   args:
-    hours: 20
+    hours: 62
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_anode_material_v0
-    quantity: 2
+    quantity: 22
 - cmd: sim.advance-time
   args:
-    hours: 2
+    hours: 18
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_anode_v0
-    quantity: 2
+    quantity: 16
 - cmd: sim.advance-time
   args:
-    hours: 3
+    hours: 25
 - cmd: sim.run-recipe
   args:
     recipe: recipe_cryolite_flux_v0
-    quantity: 2
-- cmd: sim.advance-time
-  args:
-    hours: 2
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_aluminum_alloy_ingot_v0
-    quantity: 5
-- cmd: sim.advance-time
-  args:
-    hours: 40
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_aluminum_wire_v0
-    quantity: 5
+    quantity: 3
 - cmd: sim.advance-time
   args:
     hours: 3
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_aluminum_alloy_ingot_v0
+    quantity: 30
+- cmd: sim.advance-time
+  args:
+    hours: 240
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_aluminum_wire_v0
+    quantity: 30
+- cmd: sim.advance-time
+  args:
+    hours: 16
 - cmd: sim.run-recipe
   args:
     recipe: recipe_silicon_powder_v0
@@ -725,7 +851,7 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 45
+    hours: 50
 ```
 
 ## In-situ: drive motor medium
@@ -739,12 +865,9 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     recipe: recipe_electrical_steel_sheet_v0
     quantity: 40
-- cmd: sim.import
+- cmd: sim.advance-time
   args:
-    item: steel_stock_bar_or_billet
-    quantity: 10
-    unit: kg
-    ensure: true
+    hours: 240
 - cmd: sim.run-recipe
   args:
     recipe: recipe_motor_housing_steel_v0
@@ -753,13 +876,23 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     recipe: recipe_motor_shaft_steel_v0
     quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 15
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_drive_motor_medium_v1
+    recipe: recipe_stator_rotor_lamination_set_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 4
+- cmd: sim.start-process
+  args:
+    process: drive_motor_medium_assembly_v0
+    duration: 4
+- cmd: sim.advance-time
+  args:
+    hours: 6
 ```
 
 ## In-situ: gearbox reducer medium
@@ -795,20 +928,29 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
     ensure: true
 - cmd: sim.run-recipe
   args:
+    recipe: recipe_shaft_set_medium_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_lubrication_pack_basic_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 10
+- cmd: sim.run-recipe
+  args:
     recipe: recipe_gearbox_housing_cast_v0
     quantity: 1
 - cmd: sim.run-recipe
   args:
     recipe: recipe_gear_set_medium_v0
     quantity: 1
-- cmd: sim.run-recipe
+- cmd: sim.advance-time
   args:
-    recipe: recipe_shaft_set_medium_v0
-    quantity: 1
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_lubrication_pack_basic_v0
-    quantity: 1
+    hours: 40
 - cmd: sim.run-recipe
   args:
     recipe: recipe_gearbox_reducer_medium_v0
@@ -821,6 +963,27 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 ## Final assembly from local parts
 
 ```sim-runbook
+- cmd: sim.note
+  args:
+    style: info
+    message: "Advance time to drain remaining queued processes before final assembly."
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.note
+  args:
+    style: info
+    message: "Final buffer advance to close out short batch steps."
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.note
+  args:
+    style: info
+    message: "Second buffer to flush any trailing assembly steps."
+- cmd: sim.advance-time
+  args:
+    hours: 5
 - cmd: sim.note
   args:
     style: milestone
@@ -836,27 +999,6 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     style: success
     message: "ball_mill_v0 local assembly attempt complete."
-- cmd: sim.advance-time
-  args:
-    hours: 200
-- cmd: sim.note
-  args:
-    style: info
-    message: "Advanced time to drain remaining queued processes."
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.note
-  args:
-    style: info
-    message: "Final buffer advance to close out short batch steps."
-- cmd: sim.advance-time
-  args:
-    hours: 5
-- cmd: sim.note
-  args:
-    style: info
-    message: "Second buffer to flush any trailing assembly steps."
 ```
 
 ## Checkpoint

@@ -71,8 +71,8 @@ Commentary: import all BOM parts and assemble a baseline unit to validate the re
 - cmd: sim.import
   args:
     item: fastener_kit_medium
-    quantity: 1
-    unit: unit
+    quantity: 1.0
+    unit: kg
     ensure: true
 - cmd: sim.import
   args:
@@ -414,7 +414,7 @@ Commentary: cast a rough valve body from imported metal feedstock.
 - cmd: sim.import
   args:
     item: metal_feedstock
-    quantity: 5.0
+    quantity: 6.3
     unit: kg
     ensure: true
 - cmd: sim.run-recipe
@@ -480,8 +480,8 @@ Commentary: assemble a gas scrubbing unit from steel stock, filter media, and ga
 - cmd: sim.import
   args:
     item: filter_cartridges_dust
-    quantity: 1
-    unit: unit
+    quantity: 14.5
+    unit: kg
     ensure: true
 - cmd: sim.import
   args:
@@ -559,6 +559,12 @@ Commentary: fabricate what we can locally, import the rest.
     quantity: 1.0
     unit: kg
     ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_small
+    quantity: 1.0
+    unit: unit
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_pressure_gauge_set_v0
@@ -585,43 +591,6 @@ Commentary: fabricate what we can locally, import the rest.
 - cmd: sim.advance-time
   args:
     hours: 3
-```
-
-## In-situ assembly
-
-Commentary: assemble a second unit using locally-produced components where possible.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble chemical_reactor_heated_v0 from locally-produced parts."
-- cmd: sim.import
-  args:
-    item: electronic_components_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_chemical_reactor_heated_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.note
-  args:
-    style: success
-    message: "Local chemical_reactor_heated_v0 assembly attempt complete."
 ```
 
 ## Post-run subcomponent build
@@ -682,6 +651,12 @@ Commentary: assemble compressor and vacuum pump locally, then build leak test eq
     quantity: 1.0
     unit: kg
     ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
+    quantity: 1.0
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_air_compressor_small_v0
@@ -734,4 +709,41 @@ Commentary: assemble compressor and vacuum pump locally, then build leak test eq
   args:
     style: success
     message: "Leak test equipment assembled with local compressor and vacuum pump."
+```
+
+## In-situ assembly (post-leak test)
+
+Commentary: assemble a second unit after local leak-test equipment is available.
+
+```sim-runbook
+- cmd: sim.note
+  args:
+    style: milestone
+    message: "Assemble chemical_reactor_heated_v0 from locally-produced parts."
+- cmd: sim.import
+  args:
+    item: electronic_components_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
+    quantity: 1.0
+    unit: kg
+    ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_chemical_reactor_heated_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.advance-time
+  args:
+    hours: 10
+- cmd: sim.note
+  args:
+    style: success
+    message: "Local chemical_reactor_heated_v0 assembly complete."
 ```

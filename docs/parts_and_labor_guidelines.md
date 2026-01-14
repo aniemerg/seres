@@ -175,7 +175,7 @@ kind: material
 material_class: regolith  # Same class
 ```
 
-The simulation engine matches materials in two steps:
+The simulation engine can match materials in two steps (disabled by default; exact match only unless explicitly enabled in the engine):
 
 1. **Exact match**: Try exact `item_id` in inventory
 2. **Class match**: If not found, search inventory for items with matching `material_class`

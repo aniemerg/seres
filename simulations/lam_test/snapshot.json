@@ -1,0 +1,184 @@
+{
+  "sim_id": "lam_test",
+  "state": {
+    "sim_id": "lam_test",
+    "current_time_hours": 2.0,
+    "inventory": {
+      "electrical_steel_sheet": {
+        "quantity": 39.0,
+        "unit": "kg"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "stamping_press_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "stator_rotor_lamination_set": {
+        "quantity": 36.0,
+        "unit": "kg"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "electrical_steel_sheet": {
+        "quantity": 40.0,
+        "unit": "kg"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "stamping_press_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "provenance": {
+      "electrical_steel_sheet": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 39.0,
+        "unknown_kg": 0.0
+      },
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 120.0,
+        "unknown_kg": 0.0
+      },
+      "stamping_press_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1000.0,
+        "unknown_kg": 0.0
+      },
+      "stator_rotor_lamination_set": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1.0,
+        "unknown_kg": 0.0
+      }
+    },
+    "total_energy_kwh": 0.3
+  },
+  "scheduler": {
+    "current_time": 2.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "fe0a9ab9-8d8f-49d0-b7a7-ef24856f5d8c",
+        "process_id": "lamination_stamping_v0",
+        "start_time": 0.0,
+        "duration_hours": 1.0,
+        "end_time": 1.0,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "electrical_steel_sheet": 1.0
+        },
+        "outputs_pending": {
+          "stator_rotor_lamination_set": 36.0
+        },
+        "outputs_pending_units": {
+          "stator_rotor_lamination_set": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "stamping_press_basic": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 1.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "electrical_steel_sheet": "kg"
+        },
+        "recipe_run_id": "3fd21124-db08-4307-b1cc-ec783048eb13",
+        "step_index": 0,
+        "energy_kwh": 0.3
+      }
+    ],
+    "total_events_processed": 2
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "3fd21124-db08-4307-b1cc-ec783048eb13": {
+        "recipe_run_id": "3fd21124-db08-4307-b1cc-ec783048eb13",
+        "recipe_id": "recipe_stator_rotor_lamination_set_v0",
+        "target_item_id": "stator_rotor_lamination_set",
+        "recipe_def": {
+          "id": "recipe_stator_rotor_lamination_set_v0",
+          "target_item_id": "stator_rotor_lamination_set",
+          "variant_id": null,
+          "steps": [
+            {
+              "process_id": "lamination_stamping_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [],
+              "outputs": [
+                {
+                  "item_id": "stator_rotor_lamination_set",
+                  "qty": 36.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": null,
+              "labor_hours": null,
+              "machine_hours": null,
+              "notes": null
+            }
+          ],
+          "inputs": [
+            {
+              "item_id": "electrical_steel_sheet",
+              "qty": 38.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "outputs": [
+            {
+              "item_id": "stator_rotor_lamination_set",
+              "qty": 36.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": null,
+          "notes": "Stamp electrical steel sheet into stator/rotor laminations for medium motor. 38 kg input → 36 kg laminations + 2 kg scrap.",
+          "kind": "recipe",
+          "byproducts": [
+            {
+              "item_id": "metal_scrap",
+              "qty": 2.0,
+              "unit": "kg"
+            }
+          ]
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 1.0
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "labor_bot_general_v0": 1.0,
+      "stamping_press_basic": 1.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

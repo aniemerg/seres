@@ -26,6 +26,7 @@ python -m src.cli sim start-process --sim-id my_sim --process mining_v0 --durati
 python -m src.cli sim advance-time --sim-id my_sim --hours 24
 python -m src.cli sim view-state --sim-id my_sim          # View state
 python -m src.cli sim status --sim-id my_sim              # Status summary
+python -m src.cli sim provenance --sim-id my_sim          # ISRU vs imported breakdown
 python -m src.cli sim list                                 # List simulations
 python -m src.cli sim plan --process crushing_basic_v0      # Preflight a process/recipe
 python -m src.cli sim scaffold --sim-id demo --bootstrap labor_bot_general_v0
@@ -507,6 +508,106 @@ python -m src.cli sim status --sim-id lunar_base_001
 # Snapshot: /path/to/simulations/lunar_base_001/snapshot.json
 # Events: /path/to/simulations/lunar_base_001/events.jsonl
 ```
+
+---
+
+### sim provenance
+
+Show provenance breakdown (ISRU vs imported materials) for simulation inventory.
+
+```bash
+python -m src.cli sim provenance --sim-id <name> [--item <item_id>] [--json]
+```
+
+**Arguments:**
+- `--sim-id`: Simulation ID (required)
+- `--item`: Show detailed breakdown for specific item (optional)
+- `--json`: Output JSON format for scripting (optional)
+
+**What It Shows:**
+- **Overall ISRU percentage**: How much of inventory mass is from local resources
+- **Top items by mass**: Largest contributors to total mass
+- **Mixed provenance items**: Items with both in-situ and imported content
+- **Per-item breakdown**: Detailed provenance for specific items
+
+**Example 1: Overall Summary**
+```bash
+python -m src.cli sim provenance --sim-id electrolysis_cell_v0_build_v2
+# === Provenance: electrolysis_cell_v0_build_v2 ===
+# Overall ISRU: 18.2% (4200.00 kg in-situ, 18820.20 kg imported)
+#
+# Top Items by Mass:
+#   blast_furnace_or_smelter                   5000.00 kg    0.0% ░░░░░░░░░░░░░░░░░░░░
+#   regolith_lunar_mare                        4100.00 kg  100.0% ████████████████████
+#   steel_forming_press                        2000.00 kg    0.0% ░░░░░░░░░░░░░░░░░░░░
+#   ...
+#
+# Items with Mixed Provenance (3 items):
+#   electrolysis_cell_unit_v0                 25.00 kg  (20.00 in-situ, 5.00 imported)
+#   iron_pig_or_ingot                         15.42 kg  (12.33 in-situ, 3.08 imported)
+#   slag                                      34.58 kg  (27.67 in-situ, 6.92 imported)
+```
+
+**Example 2: Specific Item**
+```bash
+python -m src.cli sim provenance --sim-id electrolysis_cell_v0_build_v2 --item electrolysis_cell_unit_v0
+# === Provenance: electrolysis_cell_v0_build_v2 ===
+# Overall ISRU: 18.2% (4200.00 kg in-situ, 18820.20 kg imported)
+#
+# === Item: electrolysis_cell_unit_v0 ===
+# Total mass: 25.00 kg
+#   In-situ:     20.00 kg ( 80.0%) ████████████████████████████████░░░░░░░░
+#   Imported:     5.00 kg ( 20.0%)
+```
+
+**Example 3: JSON Output**
+```bash
+python -m src.cli sim provenance --sim-id my_sim --json
+# {
+#   "sim_id": "my_sim",
+#   "overall": {
+#     "total_kg": 5000.0,
+#     "in_situ_kg": 4000.0,
+#     "imported_kg": 1000.0,
+#     "unknown_kg": 0.0,
+#     "isru_percent": 80.0
+#   },
+#   "items": {
+#     "item_id": {
+#       "total_kg": 100.0,
+#       "in_situ_kg": 80.0,
+#       "imported_kg": 20.0,
+#       "unknown_kg": 0.0,
+#       "isru_percent": 80.0
+#     }
+#   }
+# }
+```
+
+**Use In Runbooks:**
+```markdown
+## Check ISRU Progress
+
+\`\`\`sim-runbook
+- cmd: sim.provenance
+  args: {}
+\`\`\`
+
+## Check Specific Item
+
+\`\`\`sim-runbook
+- cmd: sim.provenance
+  args:
+    item: steel_ingot
+\`\`\`
+```
+
+**Notes:**
+- Provenance tracks material origin through all processing steps
+- Materials mined/collected via boundary processes (e.g., `regolith_mining_simple_v0`) are tagged as in-situ
+- Materials added via `sim.import` are tagged as imported
+- Provenance is blended proportionally when materials are processed together
+- Use this to optimize runbooks for maximum ISRU content
 
 ---
 
