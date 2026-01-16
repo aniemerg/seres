@@ -52,6 +52,70 @@ _COLOR_NOTE = "\033[38;2;0;216;235m"
 _COLOR_TIME = "\033[38;2;0;146;255m"
 _COLOR_ENERGY = "\033[38;2;255;210;66m"
 _COLOR_MASS = "\033[38;2;171;225;91m"
+_COLOR_ACCENT_A = "\033[38;2;255;120;70m"
+_COLOR_ACCENT_B = "\033[38;2;120;255;210m"
+_COLOR_ACCENT_C = "\033[38;2;190;190;255m"
+_COLOR_BASE = "\033[38;2;255;0;153m"
+
+_RUNBOOK_OUTPUT_MODE = "raw"
+_SUPPRESSING_PROCESS_BLOCK = False
+_SUPPRESSING_STATUS_BLOCK = False
+_LAST_ADVANCE_RESULT: Optional[dict[str, Any]] = None
+_DISPLAY_WIDTH = 120
+_ART_DELIM = "<<<ART>>>"
+
+_ASCII_ARTS = [
+    [
+        "   _.._",
+        " .' .-'",
+        "/  /",
+        "|  |",
+        "\\  \\_",
+        " '.__.'",
+    ],
+    [
+        "  _.._",
+        " /__\\",
+        " |  |",
+        " \\__/",
+    ],
+    [
+        "  [=]",
+        " .-.-.",
+        "( o o )",
+        " | ^ |",
+        " '---'",
+        " /| |\\",
+    ],
+    [
+        "  /\\",
+        " /__\\",
+        " \\  /",
+        "  \\/",
+    ],
+    [
+        "  .-.",
+        " (o o)",
+        " | O |",
+        " |   |",
+        " '~~~'",
+        " /|||\\",
+    ],
+]
+
+
+def _emit_story_footer() -> None:
+    left = "-⎽__⎽-⎻⎺⎺⎻-⎽__⎽--⎽__⎽-⎻⎺⎺⎻-⎽__⎽---⎽_"
+    right = "_⎽---"
+    base_top = "╭─────╮"
+    base_mid = "│ ▣ ▣ │"
+    base_bot = "╰─┬───╯"
+    line1 = _color(left, _COLOR_DIM) + _color(base_top, _COLOR_BASE) + _color(right, _COLOR_DIM)
+    line2 = _color(left, _COLOR_DIM) + _color(base_mid, _COLOR_BASE) + _color(right, _COLOR_DIM)
+    line3 = _color(left, _COLOR_DIM) + _color(base_bot, _COLOR_BASE) + _color(right, _COLOR_DIM)
+    _emit(line1)
+    _emit(line2)
+    _emit(line3)
 
 
 def _color(text: str, color_code: str) -> str:
@@ -60,7 +124,52 @@ def _color(text: str, color_code: str) -> str:
     return f"{color_code}{text}{_COLOR_RESET}"
 
 
+def _should_suppress(message: str) -> bool:
+    global _SUPPRESSING_PROCESS_BLOCK
+    global _SUPPRESSING_STATUS_BLOCK
+    if _RUNBOOK_OUTPUT_MODE != "story":
+        return False
+    raw_message = _strip_ansi(message)
+    stripped = raw_message.lstrip()
+    if stripped.startswith("↷ Skipped import"):
+        return True
+    if stripped.startswith("=== Simulation:"):
+        _SUPPRESSING_STATUS_BLOCK = True
+        return True
+    if _SUPPRESSING_STATUS_BLOCK:
+        if stripped.startswith("Events:"):
+            _SUPPRESSING_STATUS_BLOCK = False
+        return True
+    if stripped == "Completed processes:":
+        _SUPPRESSING_PROCESS_BLOCK = True
+        return True
+    if _SUPPRESSING_PROCESS_BLOCK:
+        if stripped.startswith("-") or stripped.startswith("→") or raw_message.startswith("  -") or raw_message.startswith("      →") or raw_message.startswith("    "):
+            return True
+        _SUPPRESSING_PROCESS_BLOCK = False
+    suppressed_prefixes = (
+        "✓ Started recipe",
+        "  Steps:",
+        "Steps:",
+        "  Duration:",
+        "Duration:",
+        "  Ends at:",
+        "Ends at:",
+        "✓ Advanced time by",
+        "  New time:",
+        "New time:",
+        "  Processes completed:",
+        "Processes completed:",
+        "  Total energy consumed:",
+        "Total energy consumed:",
+        "✓ Imported",
+    )
+    return stripped.startswith(suppressed_prefixes)
+
+
 def _emit(message: str, color_code: Optional[str] = None, is_error: bool = False) -> None:
+    if _should_suppress(message):
+        return
     if color_code:
         message = _color(message, color_code)
     print(message, file=sys.stderr if is_error else sys.stdout, flush=True)
@@ -114,19 +223,28 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
 # Runbook helpers
 # ============================================================================
 
-def _parse_runbook_blocks(md_text: str) -> list[str]:
-    blocks: list[str] = []
+def _parse_runbook_blocks(md_text: str) -> list[tuple[list[str], str]]:
+    blocks: list[tuple[list[str], str]] = []
     in_block = False
     current: list[str] = []
+    heading_path: list[str] = []
+    block_heading: list[str] = []
 
     for line in md_text.splitlines():
         stripped = line.strip()
+        if not in_block and stripped.startswith("#"):
+            level = len(stripped) - len(stripped.lstrip("#"))
+            title = stripped[level:].strip()
+            heading_path = heading_path[: max(level - 1, 0)]
+            if title:
+                heading_path.append(title)
         if stripped.startswith("```") and stripped[3:].strip() == "sim-runbook":
             in_block = True
             current = []
+            block_heading = heading_path.copy()
             continue
         if stripped.startswith("```") and in_block:
-            blocks.append("\n".join(current))
+            blocks.append((block_heading, "\n".join(current)))
             in_block = False
             current = []
             continue
@@ -134,6 +252,85 @@ def _parse_runbook_blocks(md_text: str) -> list[str]:
             current.append(line)
 
     return blocks
+
+
+def _parse_markdown_story_context(md_text: str) -> dict[str, Any]:
+    context: dict[tuple[str, ...], dict[str, Any]] = {}
+    in_block = False
+    in_admonition = False
+    heading_path: list[str] = []
+    intro_lines: list[str] = []
+    lines = md_text.splitlines()
+    idx = 0
+    while idx < len(lines):
+        line = lines[idx]
+        stripped = line.strip()
+        if stripped.startswith("```") and not in_block:
+            in_block = True
+            idx += 1
+            continue
+        if stripped.startswith("```") and in_block:
+            in_block = False
+            idx += 1
+            continue
+        if not in_block and stripped.startswith("#"):
+            level = len(stripped) - len(stripped.lstrip("#"))
+            title = stripped[level:].strip()
+            heading_path = heading_path[: max(level - 1, 0)]
+            if title:
+                heading_path.append(title)
+            idx += 1
+            continue
+        if not in_block and stripped.startswith("Goal:") and len(intro_lines) < 2:
+            intro_lines.append(stripped)
+        if not in_block and not heading_path and stripped and not stripped.startswith("Goal:"):
+            if len(intro_lines) < 2:
+                intro_lines.append(stripped)
+        if in_block:
+            idx += 1
+            continue
+        heading_key = tuple(heading_path)
+        entry = context.setdefault(
+            heading_key, {"admonitions": [], "tasks_done": 0, "tasks_total": 0, "story_lines": []}
+        )
+        if stripped.startswith("!!!"):
+            parts = stripped.split(maxsplit=2)
+            kind = parts[1] if len(parts) > 1 else "note"
+            title = ""
+            if len(parts) > 2:
+                title = parts[2].strip().strip('"')
+            body_lines: list[str] = []
+            idx += 1
+            in_admonition = True
+            while idx < len(lines):
+                next_line = lines[idx]
+                if next_line.startswith("    ") or next_line.startswith("\t"):
+                    body_lines.append(next_line.strip())
+                    idx += 1
+                    continue
+                break
+            in_admonition = False
+            entry["admonitions"].append(
+                {"kind": kind, "title": title, "body": " ".join(body_lines).strip()}
+            )
+            continue
+        if stripped.startswith("- [") and len(stripped) >= 5:
+            marker = stripped[3]
+            entry["tasks_total"] += 1
+            if marker.lower() == "x":
+                entry["tasks_done"] += 1
+        if not in_admonition and stripped and not stripped.startswith("-"):
+            if stripped.startswith("```") or stripped.startswith("Goal:"):
+                idx += 1
+                continue
+            if not stripped.startswith("Commentary:"):
+                line_text = stripped
+            else:
+                line_text = stripped.split("Commentary:", 1)[1].strip()
+            if line_text and len(entry["story_lines"]) < 2:
+                entry["story_lines"].append(line_text)
+        idx += 1
+    return {"sections": context, "intro_lines": intro_lines}
 
 
 def _load_runbook_commands(path: Path) -> list[dict]:
@@ -144,16 +341,18 @@ def _load_runbook_commands(path: Path) -> list[dict]:
     blocks = _parse_runbook_blocks(md_text)
     commands: list[dict] = []
 
-    for block in blocks:
+    for heading, block in blocks:
         data = yaml.safe_load(block)
         if data is None:
             continue
         if isinstance(data, dict):
+            data["_md_heading"] = heading
             commands.append(data)
             continue
         if isinstance(data, list):
             for entry in data:
                 if isinstance(entry, dict):
+                    entry["_md_heading"] = heading
                     commands.append(entry)
             continue
         raise RuntimeError(f"Invalid runbook block in {path}")
@@ -178,6 +377,330 @@ def _reset_simulation(sim_id: str, kb_loader: KBLoader) -> int:
         shutil.rmtree(sim_dir)
     return cmd_init(argparse.Namespace(sim_id=sim_id), kb_loader)
 
+
+def _get_import_mass_kgs(engine: SimulationEngine, kb_loader: KBLoader) -> tuple[float, int]:
+    total_mass = 0.0
+    unknown_mass_count = 0
+    for item_id, inv in engine.state.total_imports.items():
+        if inv.unit == "kg":
+            total_mass += inv.quantity
+            continue
+        if inv.unit == "unit":
+            item = kb_loader.get_item(item_id)
+            if item:
+                item_dict = item.model_dump() if hasattr(item, "model_dump") else item
+                item_mass = item_dict.get("mass")
+                if item_mass is not None:
+                    total_mass += item_mass * inv.quantity
+                else:
+                    unknown_mass_count += 1
+            else:
+                unknown_mass_count += 1
+            continue
+        unknown_mass_count += 1
+    return total_mass, unknown_mass_count
+
+
+def _emit_story_heading(heading: list[str], metrics: Optional[dict[str, float]]) -> None:
+    if not heading:
+        return
+    title = " / ".join(heading)
+    _emit(f"◈ {title}", _COLOR_INFO)
+    if not metrics:
+        return
+    time_hours = metrics.get("time_hours", 0.0)
+    energy_kwh = metrics.get("energy_kwh", 0.0)
+    import_mass = metrics.get("import_mass", 0.0)
+    if time_hours <= 0 and energy_kwh <= 0 and import_mass <= 0:
+        return
+    time_days = time_hours / 24.0
+    _emit(
+        f"  ⏱ {time_days:.1f}d  ⚡ {energy_kwh:.1f} kWh  ⇣ ~{import_mass:.1f} kg",
+        _COLOR_NOTE,
+    )
+
+
+def _strip_ansi(text: str) -> str:
+    if "\033[" not in text:
+        return text
+    parts: list[str] = []
+    i = 0
+    while i < len(text):
+        if text[i] == "\033":
+            end = text.find("m", i)
+            if end == -1:
+                break
+            i = end + 1
+            continue
+        parts.append(text[i])
+        i += 1
+    return "".join(parts)
+
+
+def _render_blocks(value: float, step: float = 1000.0, max_blocks: int = 10) -> str:
+    if value <= 0:
+        return "░" * max_blocks
+    blocks = min(max_blocks, max(1, int(value / step)))
+    return ("█" * blocks).ljust(max_blocks, "░")
+
+
+def _render_table(headers: list[str], rows: list[list[str]]) -> list[str]:
+    widths = [len(h) for h in headers]
+    for row in rows:
+        for idx, cell in enumerate(row):
+            widths[idx] = max(widths[idx], len(cell))
+    top = "┌" + "┬".join("─" * (w + 2) for w in widths) + "┐"
+    mid = "├" + "┼".join("─" * (w + 2) for w in widths) + "┤"
+    bot = "└" + "┴".join("─" * (w + 2) for w in widths) + "┘"
+    lines = [top]
+    header_cells = [" " + headers[i].ljust(widths[i]) + " " for i in range(len(headers))]
+    lines.append("│" + "│".join(header_cells) + "│")
+    lines.append(mid)
+    for row in rows:
+        cells = [" " + row[i].ljust(widths[i]) + " " for i in range(len(headers))]
+        lines.append("│" + "│".join(cells) + "│")
+    lines.append(bot)
+    return lines
+
+
+def _select_ascii_art(key: str, height: int) -> list[str]:
+    if height <= 0:
+        return []
+    candidates = [art for art in _ASCII_ARTS if len(art) <= height]
+    if not candidates:
+        candidates = _ASCII_ARTS[:]
+    idx = sum(ord(ch) for ch in key) % len(candidates)
+    art = candidates[idx]
+    pad_total = height - len(art)
+    pad_top = pad_total // 2
+    pad_bottom = pad_total - pad_top
+    blank = " " * len(art[0])
+    return ([blank] * pad_top) + art + ([blank] * pad_bottom)
+
+
+def _attach_ascii_art(lines: list[str], art: list[str], gap: int = 2, indent: int = 2) -> list[str]:
+    if not art:
+        return [(" " * indent) + line for line in lines]
+    width = max(len(line) for line in lines)
+    art_width = max(len(line) for line in art)
+    display_width = _get_display_width()
+    remaining = max(0, display_width - (width + indent))
+    if remaining > art_width + gap:
+        left_gap = max(gap, (remaining - art_width) // 2)
+    else:
+        left_gap = gap
+    art_col = indent + width + left_gap
+    out: list[str] = []
+    for idx, line in enumerate(lines):
+        art_line = art[idx] if idx < len(art) else ""
+        base = (" " * indent) + line.ljust(width)
+        if art_line:
+            pad = max(0, art_col - len(base))
+            out.append(base + (" " * pad) + _ART_DELIM + art_line)
+        else:
+            out.append(base)
+    return out
+
+
+def _center_lines(lines: list[str], width: int) -> list[str]:
+    out: list[str] = []
+    for line in lines:
+        pad = max(0, (width - len(line)) // 2)
+        out.append((" " * pad) + line)
+    return out
+
+
+def _format_imports_summary(imports: dict[str, dict[str, float]]) -> list[str]:
+    lines: list[str] = []
+    for item_id, entry in sorted(imports.items()):
+        qty = entry["quantity"]
+        unit = entry["unit"]
+        lines.append(f"{item_id} {qty:.2f} {unit}")
+    return lines
+
+
+def _emit_story_phase_summary(phase: dict[str, Any], sim_id: Optional[str], kb_loader: KBLoader, heading: Optional[list[str]] = None) -> None:
+    if not phase:
+        return
+    imports = phase.get("imports") or {}
+    recipes = phase.get("recipes") or {}
+    processes = phase.get("processes") or {}
+    outputs = phase.get("outputs") or {}
+    energy = phase.get("energy_delta", 0.0)
+    time_hours = phase.get("time_delta", 0.0)
+    import_mass = phase.get("import_mass_delta", 0.0)
+
+    complexity_map: dict[str, int] = {}
+    if sim_id:
+        engine = load_or_create_simulation(sim_id, kb_loader)
+        complexity_map = dict(engine.state.complexity_scores or {})
+
+    if outputs:
+        rows = []
+        output_items = []
+        for item_id, entry in outputs.items():
+            complexity = complexity_map.get(item_id, 1)
+            output_items.append((item_id, entry, complexity))
+        output_items.sort(key=lambda row: (-row[2], row[0]))
+        filtered = [row for row in output_items if row[2] >= 4]
+        if not filtered:
+            filtered = output_items[:1]
+        hero = filtered[0]
+        for item_id, entry, complexity in filtered[:8]:
+            badge = f"C{complexity}"
+            rows.append([item_id, f"+{entry['quantity']:.2f} {entry['unit']}", badge])
+        table = _render_table(["Made", "Qty", "Cx"], rows[:8])
+        art = _select_ascii_art("outputs", len(table))
+        table = _attach_ascii_art(table, art, indent=2)
+        if hero[2] >= 6:
+            _emit("  Outputs (priority):", _COLOR_SUCCESS)
+            _emit(f"  ★ CORE OUTPUT: {hero[0]} (C{hero[2]})", _COLOR_SUCCESS)
+        else:
+            _emit("  Outputs:", _COLOR_NOTE)
+        header_lines = 3
+        for idx, line in enumerate(table):
+            if _ART_DELIM in line:
+                left, art = line.split(_ART_DELIM, 1)
+                colored_left = _color(left, _COLOR_SUCCESS if hero[2] >= 6 else _COLOR_NOTE)
+                colored_art = _color(art, _COLOR_DIM)
+                _emit(colored_left + colored_art)
+                continue
+            if idx < header_lines:
+                _emit(f"{line}", _COLOR_SUCCESS if hero[2] >= 6 else _COLOR_NOTE)
+                continue
+            row_idx = idx - header_lines
+            if row_idx >= len(filtered[:8]):
+                _emit(f"{line}", _COLOR_SUCCESS if hero[2] >= 6 else _COLOR_NOTE)
+                continue
+            complexity = filtered[row_idx][2]
+            if complexity >= 6:
+                color = _COLOR_SUCCESS
+            elif complexity >= 4:
+                color = _COLOR_NOTE
+            else:
+                color = _COLOR_DIM
+            _emit(f"{line}", color)
+        if sim_id:
+            engine = load_or_create_simulation(sim_id, kb_loader)
+            for item_id, entry in outputs.items():
+                if not item_id.endswith("_v0"):
+                    continue
+                prov = engine.state.provenance.get(item_id)
+                if not prov:
+                    continue
+                total = prov.in_situ_kg + prov.imported_kg + prov.unknown_kg
+                if total <= 0:
+                    continue
+                isru_pct = (prov.in_situ_kg / total) * 100.0
+                bar = _render_blocks(isru_pct, step=10.0, max_blocks=10)
+                art_lines = [
+                    "      ┌───┐",
+                    "  ┌───┤███├───┐",
+                    "  │   └───┘   │",
+                    "  │  ┌─────┐  │",
+                    "  └──┤ ┼ ┼ ├──┘",
+                    "     └─────┘",
+                ]
+                art_lines = _center_lines(art_lines, _get_display_width())
+                _emit(f"  Machine: {item_id}  ISRU {isru_pct:.1f}% [{bar}]", _COLOR_SUCCESS)
+                _emit(
+                    f"  Local {prov.in_situ_kg:.1f} kg | Imported {prov.imported_kg:.1f} kg | Unknown {prov.unknown_kg:.1f} kg",
+                    _COLOR_DIM,
+                )
+                for line in art_lines:
+                    _emit(f"{line}", _COLOR_DIM)
+    if imports:
+        import_list = _format_imports_summary(imports)
+        if len(import_list) > 4:
+            rows = [entry.split(" ", 1) for entry in import_list[:8]]
+            table = _render_table(["Item", "Qty"], rows)
+            art = _select_ascii_art("imports", len(table))
+            table = _attach_ascii_art(table, art, indent=2)
+            label = "Incoming" if heading and any("Import" in part for part in heading) else "Imports"
+            _emit(f"  {label}:", _COLOR_NOTE)
+            for line in table:
+                if _ART_DELIM in line:
+                    left, art = line.split(_ART_DELIM, 1)
+                    colored_left = _color(left, _COLOR_NOTE)
+                    colored_art = _color(art, _COLOR_DIM)
+                    _emit(colored_left + colored_art)
+                    continue
+                _emit(f"{line}", _COLOR_NOTE)
+        else:
+            label = "Incoming" if heading and any("Import" in part for part in heading) else "Imports"
+            _emit(f"  {label}: " + ", ".join(import_list), _COLOR_NOTE)
+    if recipes:
+        recipe_lines = [f"{rid} x{qty}" for rid, qty in recipes.items()]
+        _emit(f"  Recipes: " + ", ".join(recipe_lines), _COLOR_NOTE)
+    if processes:
+        process_lines = [f"{pid} x{count}" for pid, count in processes.items()]
+        _emit(f"  Processes: " + ", ".join(process_lines), _COLOR_NOTE)
+    if energy or time_hours or import_mass:
+        bar = _render_blocks(energy)
+        _emit(
+            f"  Δ⏱ {time_hours:.1f}h  Δ⚡ {energy:.1f} kWh [{bar}]  Δ⇣ {import_mass:.1f} kg",
+            _COLOR_DIM,
+        )
+
+
+def _emit_story_markdown_context(context: dict[tuple[str, ...], dict[str, Any]], heading: list[str]) -> None:
+    entry = context.get(tuple(heading))
+    if not entry:
+        for end in range(len(heading) - 1, 0, -1):
+            entry = context.get(tuple(heading[:end]))
+            if entry:
+                break
+    if not entry:
+        return
+    total = entry.get("tasks_total", 0)
+    done = entry.get("tasks_done", 0)
+    if total:
+        bar = _render_blocks(done, step=1.0, max_blocks=min(10, total))
+        _emit(f"  Tasks: {done}/{total} [{bar}]", _COLOR_NOTE)
+    for admonition in entry.get("admonitions", []):
+        kind = admonition.get("kind", "note")
+        title = admonition.get("title", "").strip()
+        body = admonition.get("body", "").strip()
+        if kind == "note" and title.lower() == "imports":
+            continue
+        tag = kind.upper()
+        label = f"{tag}: {title}".strip().rstrip(":")
+        if body:
+            _emit(f"  {label} — {body}", _COLOR_WARN if kind == "warning" else _COLOR_NOTE)
+        else:
+            _emit(f"  {label}", _COLOR_WARN if kind == "warning" else _COLOR_NOTE)
+    for line in entry.get("story_lines", []):
+        _emit(f"  Story: {line}", _COLOR_INFO)
+
+
+def _get_sim_metrics(sim_id: str, kb_loader: KBLoader) -> Optional[dict[str, float]]:
+    sim_dir = SIMULATIONS_DIR / sim_id
+    if not (sim_dir / "snapshot.json").exists():
+        return None
+    engine = load_or_create_simulation(sim_id, kb_loader)
+    import_mass, _unknown = _get_import_mass_kgs(engine, kb_loader)
+    return {
+        "time_hours": engine.state.current_time_hours,
+        "energy_kwh": engine.state.total_energy_kwh,
+        "import_mass": import_mass,
+    }
+
+
+def _emit_checkpoint(sim_id: str, kb_loader: KBLoader) -> None:
+    sim_dir = SIMULATIONS_DIR / sim_id
+    if not (sim_dir / "snapshot.json").exists():
+        return
+    engine = load_or_create_simulation(sim_id, kb_loader)
+    time_days = engine.state.current_time_hours / 24.0
+    import_mass, _unknown = _get_import_mass_kgs(engine, kb_loader)
+    inventory_count = len(engine.state.inventory)
+    imports_count = len(engine.state.total_imports)
+    _emit(
+        f"◆ Checkpoint  ⏱ {time_days:.1f}d  ⚡ {engine.state.total_energy_kwh:.1f} kWh  ⇣ ~{import_mass:.1f} kg",
+        _COLOR_SUCCESS,
+    )
+    _emit(f"  Inventory: {inventory_count} items  |  Imports tracked: {imports_count}", _COLOR_DIM)
+
 # ============================================================================
 # Runbook command
 # ============================================================================
@@ -191,6 +714,7 @@ def _run_runbook(
     allow_control: bool,
     dry_run: bool,
     continue_on_error: bool,
+    story_mode: bool,
 ) -> int:
     if not runbook_path.exists():
         _emit(f"Error: runbook file not found: {runbook_path}", _COLOR_ERROR, is_error=True)
@@ -205,6 +729,7 @@ def _run_runbook(
         return 1
 
     try:
+        md_text = runbook_path.read_text(encoding="utf-8")
         commands = _load_runbook_commands(runbook_path)
     except Exception as exc:
         _emit(f"Error parsing runbook: {exc}", _COLOR_ERROR, is_error=True)
@@ -227,12 +752,40 @@ def _run_runbook(
         "sim.visualize": cmd_visualize,
     }
 
+    parsed_context = _parse_markdown_story_context(md_text) if story_mode else {"sections": {}, "intro_lines": []}
+    story_context = parsed_context.get("sections", {})
     _emit(f"== Runbook: {runbook_path} ==", _COLOR_INFO)
+    if story_mode and len(stack) == 0:
+        title = "SIMULATOR // STORY MODE"
+        width = 54
+        pad = max(0, (width - len(title)) // 2)
+        line = " " * pad + title
+        _emit("┏" + ("━" * width) + "┓", _COLOR_NOTE)
+        _emit("┃" + line.ljust(width) + "┃", _COLOR_NOTE)
+        _emit("┗" + ("━" * width) + "┛", _COLOR_NOTE)
+        for intro_line in parsed_context.get("intro_lines", [])[:2]:
+            _emit(intro_line, _COLOR_NOTE)
+        top_keys = [k for k in story_context.keys() if len(k) == 1]
+        if top_keys:
+            top_key = sorted(top_keys, key=lambda k: k[0])[0]
+            _emit_story_markdown_context(story_context, list(top_key))
     stack.append(resolved_path)
     try:
+        last_heading: list[str] = []
+        phase: dict[str, Any] = {
+            "imports": {},
+            "recipes": {},
+            "processes": {},
+            "outputs": {},
+            "energy_delta": 0.0,
+            "time_delta": 0.0,
+            "import_mass_delta": 0.0,
+        }
+        last_metrics: Optional[dict[str, float]] = None
         for idx, entry in enumerate(commands, start=1):
             cmd_name = entry.get("cmd")
             cmd_args = entry.get("args") or {}
+            heading = entry.get("_md_heading") or []
 
             if not cmd_name:
                 _emit(f"Error: missing cmd in runbook step {idx}", _COLOR_ERROR, is_error=True)
@@ -255,6 +808,7 @@ def _run_runbook(
                     allow_control=False,
                     dry_run=dry_run,
                     continue_on_error=continue_on_error,
+                    story_mode=story_mode,
                 )
                 if result != 0 and not continue_on_error:
                     return result
@@ -268,6 +822,8 @@ def _run_runbook(
                     _emit(f"Error: sim.use requires sim-id (step {idx})", _COLOR_ERROR, is_error=True)
                     return 1
                 default_sim_id = sim_id
+                if story_mode and sim_id and not dry_run:
+                    last_metrics = _get_sim_metrics(sim_id, kb_loader)
                 continue
 
             if cmd_name == "sim.reset":
@@ -281,6 +837,17 @@ def _run_runbook(
                     _emit(f"[dry-run] sim.reset --sim-id {sim_id}", _COLOR_DIM)
                     continue
                 result = _reset_simulation(sim_id, kb_loader)
+                if story_mode and sim_id:
+                    last_metrics = _get_sim_metrics(sim_id, kb_loader)
+                    phase = {
+                        "imports": {},
+                        "recipes": {},
+                        "processes": {},
+                        "outputs": {},
+                        "energy_delta": 0.0,
+                        "time_delta": 0.0,
+                        "import_mass_delta": 0.0,
+                    }
                 if result != 0 and not continue_on_error:
                     return result
                 continue
@@ -299,7 +866,34 @@ def _run_runbook(
                     "dim": _COLOR_DIM,
                     "note": _COLOR_NOTE,
                 }
-                _emit(str(message), color_map.get(style, _COLOR_INFO))
+                if story_mode and heading and heading != last_heading:
+                    _emit_story_phase_summary(phase, default_sim_id, kb_loader, last_heading)
+                    phase = {
+                        "imports": {},
+                        "recipes": {},
+                        "processes": {},
+                        "outputs": {},
+                        "energy_delta": 0.0,
+                        "time_delta": 0.0,
+                        "import_mass_delta": 0.0,
+                    }
+                    metrics = _get_sim_metrics(default_sim_id, kb_loader) if default_sim_id else None
+                    _emit_story_heading(heading, metrics)
+                    _emit_story_markdown_context(story_context, heading)
+                    last_heading = heading
+                if story_mode:
+                    icon_map = {
+                        "milestone": "◆",
+                        "success": "✔",
+                        "warning": "▲",
+                        "note": "•",
+                        "info": "•",
+                        "dim": "·",
+                    }
+                    icon = icon_map.get(style, "•")
+                    _emit(f"  {icon} {message}", color_map.get(style, _COLOR_INFO))
+                else:
+                    _emit(str(message), color_map.get(style, _COLOR_INFO))
                 continue
 
             handler = command_map.get(cmd_name)
@@ -315,13 +909,67 @@ def _run_runbook(
                 _emit(f"[dry-run] {cmd_name} {cmd_args}", _COLOR_DIM)
                 continue
 
+            if story_mode and cmd_name == "sim.import":
+                item = _get_arg(cmd_args, "item")
+                qty = _get_arg(cmd_args, "quantity") or 0.0
+                unit = _get_arg(cmd_args, "unit") or "unit"
+                if item:
+                    imports = phase["imports"]
+                    entry = imports.get(item, {"quantity": 0.0, "unit": unit})
+                    entry["quantity"] += float(qty)
+                    entry["unit"] = unit
+                    imports[item] = entry
+
+            if story_mode and cmd_name == "sim.run-recipe":
+                recipe = _get_arg(cmd_args, "recipe")
+                qty = _get_arg(cmd_args, "quantity") or 0
+                if recipe:
+                    recipes = phase["recipes"]
+                    recipes[recipe] = recipes.get(recipe, 0) + int(qty)
+
             result = handler(argparse.Namespace(**normalized_args), kb_loader)
             if result != 0 and not continue_on_error:
                 return result
+
+            if story_mode and cmd_name == "sim.advance-time":
+                if _LAST_ADVANCE_RESULT and _LAST_ADVANCE_RESULT.get("completed"):
+                    proc_counts = phase["processes"]
+                    output_totals = phase["outputs"]
+                    for proc in _LAST_ADVANCE_RESULT["completed"]:
+                        proc_id = proc.get("process_id")
+                        if not proc_id:
+                            continue
+                        proc_counts[proc_id] = proc_counts.get(proc_id, 0) + 1
+                        outputs = proc.get("outputs") or {}
+                        for item_id, inv_item in outputs.items():
+                            if isinstance(inv_item, (int, float)):
+                                qty = float(inv_item)
+                                unit = "unit"
+                            else:
+                                qty = inv_item.quantity if hasattr(inv_item, "quantity") else inv_item.get("quantity", 0)
+                                unit = inv_item.unit if hasattr(inv_item, "unit") else inv_item.get("unit", "unit")
+                            entry = output_totals.get(item_id, {"quantity": 0.0, "unit": unit})
+                            entry["quantity"] += float(qty)
+                            entry["unit"] = unit
+                            output_totals[item_id] = entry
+            if story_mode and cmd_name == "sim.status" and default_sim_id:
+                _emit_checkpoint(default_sim_id, kb_loader)
+
+            if story_mode and default_sim_id:
+                metrics = _get_sim_metrics(default_sim_id, kb_loader)
+                if metrics and last_metrics:
+                    phase["time_delta"] += metrics["time_hours"] - last_metrics["time_hours"]
+                    phase["energy_delta"] += metrics["energy_kwh"] - last_metrics["energy_kwh"]
+                    phase["import_mass_delta"] += metrics["import_mass"] - last_metrics["import_mass"]
+                if metrics:
+                    last_metrics = metrics
             sys.stdout.flush()
             sys.stderr.flush()
 
         if len(stack) == 1:
+            if story_mode:
+                _emit_story_phase_summary(phase, default_sim_id, kb_loader, last_heading)
+                _emit_story_footer()
             _emit("== Runbook complete ==", _COLOR_SUCCESS)
         return 0
     finally:
@@ -344,6 +992,9 @@ def cmd_runbook(args, kb_loader: KBLoader):
     builtins.print = runbook_print
 
     runbook_path = Path(args.file)
+    global _RUNBOOK_OUTPUT_MODE
+    previous_mode = _RUNBOOK_OUTPUT_MODE
+    _RUNBOOK_OUTPUT_MODE = args.format
     try:
         return _run_runbook(
             runbook_path,
@@ -353,8 +1004,10 @@ def cmd_runbook(args, kb_loader: KBLoader):
             allow_control=True,
             dry_run=args.dry_run,
             continue_on_error=args.continue_on_error,
+            story_mode=args.format == "story",
         )
     finally:
+        _RUNBOOK_OUTPUT_MODE = previous_mode
         builtins.print = original_print
 
 # ============================================================================
@@ -1116,6 +1769,8 @@ def cmd_advance_time(args, kb_loader: KBLoader):
     engine = load_or_create_simulation(args.sim_id, kb_loader)
 
     result = engine.advance_time(args.hours)
+    global _LAST_ADVANCE_RESULT
+    _LAST_ADVANCE_RESULT = result
 
     _emit(f"✓ Advanced time by {args.hours} hours", _COLOR_SUCCESS)
     _emit_kv("  New time:", f"{result['new_time']:.2f} hours ({result['new_time']/24:.1f} days)", _COLOR_TIME)
@@ -1570,6 +2225,7 @@ def add_sim_subcommands(subparsers):
     runbook_parser.add_argument('--file', required=True, help='Runbook markdown file path')
     runbook_parser.add_argument('--dry-run', action='store_true', help='Print commands without executing')
     runbook_parser.add_argument('--continue-on-error', action='store_true', help='Continue after errors')
+    runbook_parser.add_argument('--format', choices=['raw', 'story'], default='raw', help='Output format for runbook execution')
 
     return sim_parser
 
@@ -1610,3 +2266,9 @@ def run_sim_command(args, kb_loader: KBLoader):
         return 1
 
     return handler(args, kb_loader)
+def _get_display_width() -> int:
+    try:
+        width = shutil.get_terminal_size((120, 20)).columns
+        return max(120, width)
+    except Exception:
+        return _DISPLAY_WIDTH
