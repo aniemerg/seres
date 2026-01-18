@@ -25,38 +25,19 @@ Expected ISRU: ~100% (full chain from regolith)
     message: "Starting deburring tools runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Build: Deburring Tools from Regolith Metal
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import deburring_tools to validate usage."
+    message: "ISRU build: produce deburring_tools from regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: deburring_tools
-    quantity: 1
-    unit: kit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline deburring_tools imported (1 kit)."
-```
-
-## Stage 2: ISRU Production
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce deburring_tools from regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -189,24 +170,10 @@ Expected ISRU: ~100% (full chain from regolith)
 - cmd: sim.note
   args:
     style: success
-    message: "Deburring tools produced from regolith_metal_crude (1 kit)!"
+    message: "ISRU build complete: deburring_tools produced from regolith metal (1 kit)."
+- cmd: sim.provenance
+  args:
+    item: deburring_tools
+    quantity: 1
+    unit: kit
 ```
-
-## Results
-
-Successfully built deburring_tools with 100% ISRU:
-
-### ISRU Components Produced:
-- **deburring_tools** (1 kit): From regolith → regolith_metal_crude (22.8 kg via 1 MRE batch) → steel_stock_bar_or_billet (1.05 kg via ISRU rolling) → forged → machined → assembled
-
-### Zero Imports:
-- Deburring tools require only steel_stock_bar_or_billet, which is produced from regolith_metal_crude
-- No imported materials in the production chain
-- All mass from local regolith
-
-### ISRU Achievement:
-- **Per-item ISRU**: 50.0% (1 kit ISRU-produced + 1 kit imported baseline = 2 kits total)
-- **Stage 2 ISRU**: 100% (all material from regolith_metal_crude, zero imports)
-- **Overall simulation ISRU**: TBD (depends on machine imports)
-
-Deburring tools produced in Stage 2 are a pure ISRU product - 100% of the material comes from regolith via MRE.

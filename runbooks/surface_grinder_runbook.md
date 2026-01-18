@@ -17,13 +17,15 @@ Goal: Build `surface_grinder` with maximum ISRU using regolith-derived materials
     message: "Starting surface_grinder runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Production
+
+Commentary: Produce ~1000 kg of regolith_metal_crude to build major components locally.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Import all components for baseline surface_grinder assembly."
+    message: "Produce regolith_metal_crude for surface_grinder components."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -104,12 +106,6 @@ Goal: Build `surface_grinder` with maximum ISRU using regolith-derived materials
     ensure: true
 - cmd: sim.import
   args:
-    item: surface_grinder
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: grinding_wheels
     quantity: 1
     unit: unit
@@ -128,80 +124,10 @@ Goal: Build `surface_grinder` with maximum ISRU using regolith-derived materials
     ensure: true
 - cmd: sim.import
   args:
-    item: machine_base_large
+    item: surface_grinder
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: grinding_spindle_assembly
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: table_drive_assembly
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: magnetic_chuck_surface_grinder
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: coolant_system_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_large
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_surface_grinder_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 25
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline surface_grinder complete (0% ISRU)."
-```
-
-## Stage 2: ISRU Production
-
-Commentary: Produce ~1000 kg of regolith_metal_crude to build major components locally.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce regolith_metal_crude for surface_grinder components."
 - cmd: sim.import
   args:
     item: rock_crusher_basic

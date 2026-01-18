@@ -3,10 +3,9 @@
 Goal: build `generic_chemical_reactor_v0` while maximizing in-situ production of components.
 
 Approach:
-1) Import all top-level parts and assemble a baseline unit.
-2) Produce regolith_metal_crude from regolith where feasible.
-3) Attempt to produce other components locally (machined parts, enclosures).
-4) Assemble a second unit using locally-produced components where possible.
+1) Produce regolith_metal_crude from regolith
+2) Produce enclosure components locally (formed sheet metal parts)
+3) Assemble reactor using locally-produced components where possible
 
 ## Setup
 
@@ -151,66 +150,10 @@ Commentary: bring in the core production machines needed for mining, processing,
 - cmd: sim.note
   args:
     style: info
-    message: "Baseline production equipment imported."
-```
-
-## Baseline assembly (imported parts)
-
-Commentary: import all required parts and assemble a first unit to validate the recipe path.
-
-```sim-runbook
-- cmd: sim.import
-  args:
-    item: regolith_metal_crude
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: machined_part_raw
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: enclosure_steel_small
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembled_electrical_equipment
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_wire_and_connectors
-    quantity: 2
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_components
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_generic_chemical_reactor_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 4
-- cmd: sim.note
-  args:
-    style: info
-    message: "Baseline generic_chemical_reactor_v0 assembled from imported parts."
+    message: "Production equipment imported."
 ```
 
 ## In-situ production: regolith_metal_crude from regolith
-
-Commentary: produce regolith_metal_crude from regolith using the full processing chain.
 
 ```sim-runbook
 - cmd: sim.note
@@ -267,9 +210,6 @@ Commentary: produce regolith_metal_crude from regolith using the full processing
 
 ## In-situ production: enclosure_steel_small
 
-Commentary: produce formed sheet metal parts from steel plate using forming processes.
-Note that enclosure_steel_small is not directly produced by processes, so we use formed_sheet_metal_parts as a substitute.
-
 ```sim-runbook
 - cmd: sim.note
   args:
@@ -310,15 +250,23 @@ Note that enclosure_steel_small is not directly produced by processes, so we use
 
 ## Final assembly (local parts where possible)
 
-Commentary: import remaining hard-to-produce components (electronics, control systems) and assemble
-a second reactor. This demonstrates partial in-situ production - we've shown the path to produce
-metal components locally, while accepting that electronics must still be imported.
-
 ```sim-runbook
 - cmd: sim.note
   args:
-    style: milestone
-    message: "Assemble second reactor using locally-produced components."
+    style: info
+    message: "Assemble reactor using locally-produced components."
+- cmd: sim.import
+  args:
+    item: machined_part_raw
+    quantity: 1
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: enclosure_steel_small
+    quantity: 1
+    unit: kg
+    ensure: true
 - cmd: sim.import
   args:
     item: assembled_electrical_equipment
@@ -347,14 +295,10 @@ metal components locally, while accepting that electronics must still be importe
 - cmd: sim.note
   args:
     style: success
-    message: "Second generic_chemical_reactor_v0 assembled using in-situ components where possible."
-```
-
-## Checkpoint
-
-```sim-runbook
-- cmd: sim.status
-  args: {}
+    message: "Generic chemical reactor v0 assembled using in-situ components where possible."
+- cmd: sim.provenance
+  args:
+    item: generic_chemical_reactor_v0
 ```
 
 ## Summary
@@ -362,13 +306,12 @@ metal components locally, while accepting that electronics must still be importe
 This runbook successfully demonstrates building generic_chemical_reactor_v0 with partial in-situ resource utilization:
 
 **Accomplishments:**
-1. Assembled a baseline reactor from fully imported parts (validation)
-2. Produced regolith_metal_crude from lunar regolith via:
+1. Produced regolith_metal_crude from lunar regolith via:
    - Mining (regolith_lunar_mare: 1400 kg)
    - Screening and crushing (processed 840 kg)
    - Molten regolith electrolysis (produced 336 kg of metal alloy)
-3. Produced formed sheet metal parts locally from imported steel plate
-4. Assembled a second reactor demonstrating the production chain
+2. Produced formed sheet metal parts locally from imported steel plate
+3. Assembled reactor demonstrating the production chain
 
 **In-situ components demonstrated:**
 - Metal alloys (from regolith processing)

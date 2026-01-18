@@ -23,38 +23,19 @@ Expected ISRU: ~100% (only regolith_metal_crude needed)
     message: "Starting dies runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Build: Dies from Regolith Metal
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import dies to validate usage."
+    message: "ISRU build: produce dies from regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: dies
-    quantity: 40
-    unit: kg
-    ensure: true
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline dies imported (40 kg)."
-```
-
-## Stage 2: ISRU Production
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce dies from regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -158,25 +139,10 @@ Expected ISRU: ~100% (only regolith_metal_crude needed)
 - cmd: sim.note
   args:
     style: success
-    message: "Dies produced from regolith_metal_crude (40 kg output + 5 kg scrap)!"
+    message: "ISRU build complete: dies produced from regolith metal (40 kg + 5 kg scrap)."
+- cmd: sim.provenance
+  args:
+    item: dies
+    quantity: 40
+    unit: kg
 ```
-
-## Results
-
-Successfully built dies with 100% ISRU:
-
-### ISRU Components Produced:
-- **dies** (40 kg): From regolith → regolith_metal_crude (45.6 kg via 2 MRE batches) → casting → machining
-- **steel_scrap_v0** (5 kg): Byproduct from machining (total output 45 kg)
-
-### Zero Imports:
-- Dies require only regolith_metal_crude
-- No imported materials in the production chain
-- All mass from local regolith
-
-### ISRU Achievement:
-- **Per-item ISRU**: 50.0% (40 kg ISRU-produced + 40 kg imported baseline = 80 kg total)
-- **Stage 2 ISRU**: 100% (all 40 kg from regolith_metal_crude, zero imports)
-- **Overall simulation ISRU**: 3.8% (200 kg regolith vs 5120 kg imported machines)
-
-Dies produced in Stage 2 are a pure ISRU product - 100% of the material comes from regolith via MRE.

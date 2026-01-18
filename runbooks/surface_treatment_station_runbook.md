@@ -15,74 +15,6 @@
     message: "Simulation reset. Starting surface_treatment_station runbook."
 ```
 
-## Baseline assembly
-
-Commentary: import all subassemblies and assemble a baseline surface_treatment_station.
-
-```sim-runbook
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: chemical_bath_tank_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: agitation_system_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: chemical_bath_ventilation
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: circulation_pump_coolant
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_panel_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: support_frame_welded
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_surface_treatment_station_base_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 10
-```
-
 ## Local ISRU assembly
 
 Commentary: localize steel frame, agitation system, pump, and tank set using regolith metal and local steel plate. Import remaining controls/ventilation.
@@ -95,6 +27,12 @@ Commentary: localize steel frame, agitation system, pump, and tank set using reg
 - cmd: sim.import
   args:
     item: rock_crusher_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -191,6 +129,12 @@ Commentary: localize steel frame, agitation system, pump, and tank set using reg
 - cmd: sim.import
   args:
     item: milling_machine_general_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: assembly_tools_basic
     quantity: 1
     unit: unit
     ensure: true

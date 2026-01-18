@@ -22,92 +22,7 @@ Goal: Build `blast_furnace_or_smelter` (5000 kg heavy industrial furnace) using 
     message: "Simulation reset. Starting blast_furnace_or_smelter runbook."
 ```
 
-## Stage 1: Baseline (import all components)
-
-Commentary: Import all components to establish baseline performance.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Stage 1: Import baseline components for blast furnace."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 6
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_consumables
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_tools_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: structural_steel_sections
-    quantity: 4500
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: refractory_brick_set
-    quantity: 500
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gas_blower_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_large
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble blast_furnace_or_smelter from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_blast_furnace_or_smelter_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 50
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline blast_furnace_or_smelter complete."
-- cmd: sim.provenance
-  args:
-    item: blast_furnace_or_smelter
-    quantity: 1
-    unit: unit
-```
-
-## Stage 2: ISRU Phase 1 - Produce regolith steel for structural sections
+## ISRU Phase 1: Produce regolith steel for structural sections
 
 Commentary: Need 4500 kg steel for structural frame. This is the primary mass component. Produce from regolith steel via complete chain.
 
@@ -120,6 +35,12 @@ Commentary: Need 4500 kg steel for structural frame. This is the primary mass co
   args:
     item: blast_furnace_or_smelter
     quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
+    quantity: 4
     unit: unit
     ensure: true
 - cmd: sim.import
@@ -273,7 +194,7 @@ Commentary: Need 4500 kg steel for structural frame. This is the primary mass co
     message: "Produced 4500 kg structural steel from regolith for blast furnace frame."
 ```
 
-## Stage 3: ISRU Phase 2 - Produce refractory bricks from regolith
+## ISRU Phase 2: Produce refractory bricks from regolith
 
 Commentary: Need 500 kg refractory bricks. Produce from regolith-derived alumina powder and ceramic powder.
 
@@ -417,7 +338,7 @@ Commentary: Need 500 kg refractory bricks. Produce from regolith-derived alumina
     message: "Produced 500 kg refractory_brick_set from regolith materials."
 ```
 
-## Stage 4: ISRU Phase 3 - Produce fasteners from regolith steel
+## ISRU Phase 3: Produce fasteners from regolith steel
 
 Commentary: Produce fastener_kit_large from regolith steel. Need to produce additional carbon and iron ore first.
 
@@ -548,7 +469,7 @@ Commentary: Produce fastener_kit_large from regolith steel. Need to produce addi
     message: "Produced fastener_kit_large from regolith metal."
 ```
 
-## Stage 5: ISRU Phase 4 - Final assembly with ISRU components
+## ISRU Phase 4: Final assembly with ISRU components
 
 Commentary: Assemble blast_furnace_or_smelter using regolith-derived steel structure and refractory bricks. Import only the gas blower.
 

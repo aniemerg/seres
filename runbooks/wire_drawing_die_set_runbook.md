@@ -1,7 +1,6 @@
 # Wire Drawing Die Set Runbook
 
-Goal: build `wire_drawing_die_set` with a baseline import, then replace key
-feedstocks with ISRU where available.
+Goal: build `wire_drawing_die_set` using ISRU feedstocks where available.
 
 ## Setup
 
@@ -18,15 +17,15 @@ feedstocks with ISRU where available.
     message: "Simulation reset. Starting wire drawing die set runbook."
 ```
 
-## Baseline imports (equipment + feedstocks)
+## ISRU equipment imports
 
-Commentary: import required equipment and feedstocks to validate the recipe end-to-end.
+Commentary: import equipment and utilities needed for the ISRU path.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import equipment and feedstocks for wire_drawing_die_set."
+    message: "Import equipment for ISRU wire_drawing_die_set build."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -165,207 +164,7 @@ Commentary: import required equipment and feedstocks to validate the recipe end-
     quantity: 250
     unit: kWh
     ensure: true
-- cmd: sim.import
-  args:
-    item: tool_steel_high_carbon_v0
-    quantity: 2.1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: metal_part_surface_treated
-    quantity: 2.02
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: finished_part_deburred
-    quantity: 2.0
-    unit: kg
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Baseline: equipment + feedstocks imported."
 ```
-
-## Baseline build
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline: build wire_drawing_die_set."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_wire_drawing_die_set_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline build complete."
-```
-
-## ISRU reset (equipment only)
-
-Commentary: reset the sim to remove baseline import provenance, then re-import
-equipment needed for the ISRU path.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Reset for ISRU run; re-import equipment only."
-- cmd: sim.reset
-  args:
-    sim-id: wire_drawing_die_set_runbook
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_machine_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cutting_tools_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_treatment_furnace
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: surface_grinder
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: grinding_wheels
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: plate_rolling_mill
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: rolling_mill_or_brake
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_furnace
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: saw_or_cutting_tool
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hand_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hand_tools_mechanical
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: deburring_tools
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_press
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: surface_treatment_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: blast_furnace_or_smelter
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: crucible_refractory
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: reduction_furnace_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: high_temperature_power_supply_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: casting_furnace_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: casting_mold_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: furnace_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 250
-    unit: kWh
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "ISRU run reset complete; equipment imported."
-```
-
 ## ISRU: tool steel from regolith
 
 Commentary: replace imported tool steel with an ISRU chain using regolith-derived

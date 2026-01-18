@@ -28,92 +28,15 @@ Goal: Build `kiln_ceramic` using in-situ resources where possible.
     message: "Simulation reset. Starting kiln_ceramic runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Production: Build kiln with regolith-derived components
 
-Commentary: Import all components and assembly equipment to test if the recipe runs.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import baseline equipment and parts for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: refractory_installation_tools
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: refractory_castable
-    quantity: 50
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_element_resistive
-    quantity: 2
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_wire_and_connectors
-    quantity: 2
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_circuit_board_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble kiln from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_kiln_ceramic_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline kiln_ceramic complete."
-```
-
-## Stage 2: ISRU Components
-
-Commentary: Produce alumina and refractory castable in-situ, while importing binder, water, and electrical parts.
+Commentary: Produce alumina and refractory castable in-situ from regolith, while importing binder, water, and electrical parts.
 
 ```sim-runbook
-- cmd: sim.reset
-  args:
-    sim-id: kiln_ceramic_runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 2: Produce refractory_castable from local alumina."
+    message: "Produce refractory_castable from local alumina."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0

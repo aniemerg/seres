@@ -23,38 +23,19 @@ Expected ISRU: ~100% (only regolith_metal_crude needed)
     message: "Starting press ram set runbook."
 ```
 
-## Stage 1: Baseline (import all components)
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline: import press_ram_set to validate usage."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: press_ram_set
-    quantity: 30
-    unit: kg
-    ensure: true
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline press_ram_set imported (30 kg)."
-```
-
-## Stage 2: ISRU Production
+## Stage 1: ISRU Production
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
     message: "Produce press_ram_set from regolith_metal_crude via MRE."
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -204,7 +185,7 @@ Successfully built press_ram_set with 100% ISRU:
 - All mass from local regolith
 
 ### ISRU Achievement:
-- **Per-item ISRU**: 50.0% (30 kg ISRU-produced + 30 kg imported baseline = 60 kg total)
+- **Per-item ISRU**: 100.0% (30 kg ISRU-produced, zero imports)
 - **Stage 2 ISRU**: 100% (all 30 kg from regolith_metal_crude, zero imports)
 - **Overall simulation ISRU**: TBD (depends on machine imports)
 

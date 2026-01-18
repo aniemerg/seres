@@ -25,38 +25,19 @@ Expected ISRU: ~100% (full chain from regolith)
     message: "Starting crucible refractory runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Build: Crucible Refractory from Regolith Ceramics
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import crucible_refractory to validate usage."
+    message: "ISRU build: produce crucible_refractory from regolith via ceramic powder route."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: crucible_refractory
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline crucible_refractory imported (15 kg, 1 unit)."
-```
-
-## Stage 2: ISRU Production
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce crucible_refractory from regolith via ceramic powder route."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -195,24 +176,10 @@ Expected ISRU: ~100% (full chain from regolith)
 - cmd: sim.note
   args:
     style: success
-    message: "Crucible refractory produced from regolith (30 kg, 2 units)!"
+    message: "ISRU build complete: crucible_refractory produced from regolith ceramics (30 kg, 2 units)."
+- cmd: sim.provenance
+  args:
+    item: crucible_refractory
+    quantity: 2
+    unit: unit
 ```
-
-## Results
-
-Successfully built crucible_refractory with 100% ISRU:
-
-### ISRU Components Produced:
-- **crucible_refractory** (30 kg, 2 units): From regolith_lunar_mare (100 kg mined) → regolith_coarse_fraction (36 kg from 60 kg screening) → coarse_powder (36 kg) → ceramic_powder_mixture (34.2 kg after ball milling, drying, screening) → crucible_refractory (30 kg after forming, drying, firing, finishing)
-
-### Zero Imports:
-- Crucible refractory requires only ceramic_powder_mixture, which is produced entirely from regolith via screening, crushing, and ball milling
-- No imported materials in the production chain
-- All mass from local regolith
-
-### ISRU Achievement:
-- **Per-item ISRU**: 66.7% (30 kg ISRU-produced + 15 kg imported baseline = 45 kg total; 30/45 = 66.7%)
-- **Stage 2 ISRU**: 100% (all 30 kg from regolith, zero material imports)
-- **Overall simulation ISRU**: TBD (depends on machine imports)
-
-Crucible refractory produced in Stage 2 is a pure ISRU product - 100% of the material comes from regolith ceramic processing.

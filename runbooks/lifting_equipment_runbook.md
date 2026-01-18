@@ -41,6 +41,12 @@ Commentary: Need 63 kg steel_plate_or_sheet for structural_frame_large (60 kg fi
     message: "ISRU Phase 1: Produce iron ore and carbon for steel plate."
 - cmd: sim.import
   args:
+    item: labor_bot_general_v0
+    quantity: 2
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: blast_furnace_or_smelter
     quantity: 1
     unit: unit
@@ -376,6 +382,12 @@ Commentary: Convert steel_ingot to steel_plate_or_sheet, then manufacture struct
     ensure: true
 - cmd: sim.import
   args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: heat_treatment_furnace
     quantity: 1
     unit: unit
@@ -460,6 +472,24 @@ Commentary: Assemble lifting_equipment using regolith-derived steel components (
   args:
     style: milestone
     message: "ISRU Phase 4: Final assembly with ISRU steel components."
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
+    quantity: 2
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: assembly_station
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.import
   args:
     item: electric_motor_small

@@ -34,7 +34,7 @@ Goal: Build `hot_press_v0` and maximize ISRU by producing local steel, insulatio
     message: "Simulation reset. Starting hot_press_v0 runbook."
 ```
 
-## Stage 1: Import baseline equipment and non-ISRU components
+## ISRU Phase 1: Import equipment and non-ISRU components
 
 Commentary: Import tooling for mining, casting, machining, rolling, and assembly. Import electronics and specialty components that remain non-ISRU.
 
@@ -42,7 +42,7 @@ Commentary: Import tooling for mining, casting, machining, rolling, and assembly
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import baseline tooling and non-ISRU components."
+    message: "Import equipment and non-ISRU components."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -279,7 +279,7 @@ Commentary: Import tooling for mining, casting, machining, rolling, and assembly
     ensure: true
 ```
 
-## Stage 2: ISRU metal feedstocks (regolith metal + steel ingot chain)
+## ISRU Phase 2: Produce metal feedstocks (regolith metal + steel ingot chain)
 
 Commentary: Produce regolith metal for heating elements and bar stock, then produce steel ingots for plate and frame.
 
@@ -287,7 +287,7 @@ Commentary: Produce regolith metal for heating elements and bar stock, then prod
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 2: Produce regolith metal and steel ingots."
+    message: "Produce regolith metal and steel ingots."
 - cmd: sim.note
   args:
     style: info
@@ -440,7 +440,7 @@ Commentary: Produce regolith metal for heating elements and bar stock, then prod
     message: "Produced 650 kg steel_ingot."
 ```
 
-## Stage 3: ISRU steel stock for plates and machined parts
+## ISRU Phase 3: Produce steel stock for plates and machined parts
 
 Commentary: Roll plate for frame, platens, and machined parts.
 
@@ -496,7 +496,7 @@ Commentary: Roll plate for frame, platens, and machined parts.
     message: "Produced 80 kg machined_part_raw."
 ```
 
-## Stage 4: ISRU insulation pack (regolith-based)
+## ISRU Phase 4: Produce insulation pack (regolith-based)
 
 Commentary: Produce regolith powder and form insulation pack locally.
 
@@ -582,7 +582,7 @@ Commentary: Produce regolith powder and form insulation pack locally.
     message: "Produced 1 insulation_pack_high_temp."
 ```
 
-## Stage 5: Build ISRU subcomponents
+## ISRU Phase 5: Build ISRU subcomponents
 
 Commentary: Build hot press frame, hydraulic system, heated platens, and heating elements with local steel inputs.
 
@@ -653,7 +653,7 @@ Commentary: Build hot press frame, hydraulic system, heated platens, and heating
     message: "Produced 1 hydraulic_system_medium."
 ```
 
-## Stage 6: Final assembly
+## ISRU Phase 6: Final assembly
 
 Commentary: Assemble hot_press_v0 and verify provenance.
 

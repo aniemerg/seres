@@ -33,125 +33,15 @@ Goal: Build `inert_atmosphere_system` using in-situ resources where possible.
     message: "Simulation reset. Starting inert_atmosphere_system runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Production: Build inert atmosphere system with regolith materials
 
-Commentary: Import all components and assembly equipment to confirm the recipe runs.
+Commentary: Produce gas_supply_regulator, piping_components, and enclosure locally using regolith_metal_crude. Other components remain imported.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Import baseline equipment and parts for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: test_bench_electrical
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gas_cylinder_argon_or_nitrogen
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gas_supply_regulator
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gas_flow_controller
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: oxygen_sensor_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: piping_components
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: vacuum_pump_small
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_panel_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: enclosure_electrical_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_small
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Assemble inert_atmosphere_system from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_inert_atmosphere_system_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 40
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline inert_atmosphere_system complete."
-```
-
-## Stage 2: ISRU gas supply regulators (regolith metal)
-
-Commentary: Produce gas_supply_regulator locally using regolith_metal_crude. Other components remain imported.
-
-```sim-runbook
-- cmd: sim.use
-  args:
-    sim-id: inert_atmosphere_system_runbook
-- cmd: sim.reset
-  args:
-    sim-id: inert_atmosphere_system_runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Stage 2: Local gas supply regulators for inert atmosphere system."
+    message: "Build inert atmosphere system with local gas supply regulators."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0

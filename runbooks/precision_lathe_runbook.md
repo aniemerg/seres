@@ -3,9 +3,8 @@
 Goal: build `precision_lathe` while increasing ISRU coverage for heavy metal components.
 
 Approach:
-1) Baseline import all top-level parts to validate the recipe path.
-2) Produce regolith metal and fasteners locally.
-3) Assemble a second unit with locally-produced inputs where possible.
+1) Produce regolith metal and fasteners locally.
+2) Assemble with locally-produced inputs where possible.
 
 ## Setup
 
@@ -22,15 +21,15 @@ Approach:
     message: "Simulation reset. Starting precision_lathe runbook."
 ```
 
-## Baseline assembly (imports)
+## Local regolith metal + fasteners
 
-Commentary: import all top-level recipe inputs and assemble a baseline lathe.
+Commentary: produce regolith-derived metal and fasteners for a second assembly.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import top-level parts for precision_lathe."
+    message: "Import core equipment for regolith metal production and fasteners."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -43,100 +42,6 @@ Commentary: import all top-level recipe inputs and assemble a baseline lathe.
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: casting_furnace_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: surface_grinder
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: inspection_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: lathe_bed_and_headstock
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: lathe_leadscrew_and_feed_system
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: coolant_system_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: lathe_spindle_and_bearings
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: lathe_motor_and_drive
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_panel_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_large
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: regolith_metal_crude
-    quantity: 200
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 200
-    unit: kWh
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_precision_lathe_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 30
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline precision_lathe assembly complete."
-```
-
-## Local regolith metal + fasteners
-
-Commentary: produce regolith-derived metal and fasteners for a second assembly.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import core equipment for regolith metal production and fasteners."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -206,6 +111,12 @@ Commentary: produce regolith-derived metal and fasteners for a second assembly.
 - cmd: sim.import
   args:
     item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: surface_grinder
     quantity: 1
     unit: unit
     ensure: true
@@ -573,6 +484,12 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
     ensure: true
 - cmd: sim.import
   args:
+    item: precision_lathe
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: precision_levels
     quantity: 1
     unit: unit
@@ -796,6 +713,12 @@ Commentary: assemble a second lathe with local regolith metal and fasteners.
 - cmd: sim.import
   args:
     item: control_panel_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: inspection_tools_basic
     quantity: 1
     unit: unit
     ensure: true

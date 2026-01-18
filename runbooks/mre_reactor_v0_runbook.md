@@ -37,85 +37,19 @@ Expected ISRU: ~99% (only 9 kg electronics imports needed)
     message: "Simulation reset. Starting MRE reactor v0 build."
 ```
 
-## Phase 1: Baseline - Import and build MRE reactor
+## Phase 1: Import supporting infrastructure
 
-Prove the basic recipe works by importing all components.
+Import machines and raw materials for local steel and component production.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: section
-    message: "Phase 1: Baseline - Import all components and verify assembly"
+    message: "Phase 1: Import production machines and regolith feedstock"
 - cmd: sim.import
   args:
-    item: reactor_vessel_mre
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrode_set_mre
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_element_set_high_temp
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: insulation_pack_high_temp
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: offgas_manifold
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cooling_loop_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_bus_high_current
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_transport_loop_assembly
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: temperature_sensing
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
+    item: labor_bot_general_v0
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import
@@ -124,44 +58,6 @@ Prove the basic recipe works by importing all components.
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 100
-    unit: kWh
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Building baseline MRE reactor from imported components"
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_mre_reactor_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 5
-- cmd: sim.note
-  args:
-    style: success
-    message: "Phase 1 complete: Baseline MRE reactor built and verified (1260 kg, all imported)"
-```
-
-## Phase 2: Import supporting infrastructure
-
-Import machines and raw materials for local steel and component production.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 2: Import production machines and regolith feedstock"
 - cmd: sim.import
   args:
     item: blast_furnace_or_smelter
@@ -318,7 +214,7 @@ Import machines and raw materials for local steel and component production.
     message: "Supporting machines and materials imported"
 ```
 
-## Phase 2.5: Steel production from regolith
+## Phase 2: Steel production from regolith
 
 Produce ~900 kg of steel from regolith for reactor components.
 
@@ -326,7 +222,7 @@ Produce ~900 kg of steel from regolith for reactor components.
 - cmd: sim.note
   args:
     style: section
-    message: "Phase 2.5: Produce steel from local regolith"
+    message: "Phase 2: Produce steel from local regolith"
 - cmd: sim.note
   args:
     style: info
@@ -639,7 +535,7 @@ Assemble the final MRE reactor using ISRU components.
 ## Results
 
 Successfully built 2 MRE reactors:
-1. **Phase 1 baseline**: All components imported (1260 kg) - validates recipe works
+1. **Phase 1 imports**: Production machines and regolith feedstock
 2. **Phase 4 build**: Major components produced from regolith_metal_crude via MRE
 
 ### ISRU Components Produced:

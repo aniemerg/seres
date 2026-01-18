@@ -31,106 +31,11 @@ Goal: Build `steel_forming_press` using in-situ resources where possible.
     message: "Simulation reset. Starting steel_forming_press runbook."
 ```
 
-## Stage 1: Baseline (import all components)
-
-Commentary: Import all components and assembly equipment to test if the recipe runs.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import baseline equipment and parts for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: press_frame_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_cylinder_press
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_system_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: press_platen_set_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble steel forming press from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_forming_press_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline steel_forming_press complete."
-```
-
-## Stage 2: ISRU Components
+## ISRU Components
 
 Commentary: Produce regolith metal for the press frame and platens. Keep hydraulics, power, and controls imported.
 
 ```sim-runbook
-- cmd: sim.reset
-  args:
-    sim-id: steel_forming_press_runbook
 - cmd: sim.note
   args:
     style: milestone

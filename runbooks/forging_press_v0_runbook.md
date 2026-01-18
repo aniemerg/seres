@@ -23,13 +23,13 @@ Expected ISRU: ~60-70% (995 kg ISRU components out of ~1400 kg total inputs)
     message: "Starting forging press v0 runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## Build forging press with ISRU components
 
 ```sim-runbook
 - cmd: sim.note
   args:
-    style: milestone
-    message: "Baseline: import all forging_press_v0 components."
+    style: info
+    message: "Import machines for ISRU metal production."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -41,78 +41,6 @@ Expected ISRU: ~60-70% (995 kg ISRU components out of ~1400 kg total inputs)
     item: assembly_tools_basic
     quantity: 1
     unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: regolith_metal_crude
-    quantity: 900
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: steel_shell_thick
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: structural_steel_frame
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_pump_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_panel_basic
-    quantity: 2
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: press_platen_set_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: safety_guard_steel_mesh
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: pressure_test_gauge_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_control_valve_set
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: piping_components
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_wire_and_connectors
-    quantity: 5
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: kg
     ensure: true
 - cmd: sim.import
   args:
@@ -156,60 +84,6 @@ Expected ISRU: ~60-70% (995 kg ISRU components out of ~1400 kg total inputs)
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: fixturing_workbench
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_assembly_tools
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: soldering_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: wire_crimping_tools
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Assemble baseline forging press from imported components."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_forging_press_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 50
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline forging_press_v0 assembled (850 kg)."
-```
-
-## Stage 2: ISRU Production
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce ISRU components: regolith_metal_crude + press_platen_set_medium."
 - cmd: sim.import
   args:
     item: rock_crusher_basic

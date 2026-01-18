@@ -34,15 +34,15 @@ Goal: Build `heat_treatment_furnace_v0` with ISRU furnace shell and quench rack 
     message: "Simulation reset. Starting heat_treatment_furnace_v0 runbook."
 ```
 
-## Stage 1: Import baseline tooling and non-ISRU components
+## ISRU Phase 1: Import equipment and materials
 
-Commentary: Import mining/casting/machining tooling plus electronics and heating elements.
+Commentary: Import mining/casting/machining tooling plus electronics and materials that are not ISRU.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import tooling and non-ISRU components."
+    message: "Import equipment for ISRU production."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -225,7 +225,7 @@ Commentary: Import mining/casting/machining tooling plus electronics and heating
     ensure: true
 ```
 
-## Stage 2: ISRU regolith metal for shell + quench rack
+## ISRU Phase 2: Produce regolith metal and cast components
 
 Commentary: Produce regolith_metal_crude and cast the furnace shell plus quench rack.
 
@@ -233,7 +233,7 @@ Commentary: Produce regolith_metal_crude and cast the furnace shell plus quench 
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 2: Produce regolith metal and cast shell + quench rack."
+    message: "Produce regolith metal and cast shell + quench rack."
 - cmd: sim.note
   args:
     style: info
@@ -281,7 +281,7 @@ Commentary: Produce regolith_metal_crude and cast the furnace shell plus quench 
     message: "Produced 1 quench_rack_and_baskets."
 ```
 
-## Stage 3: Final assembly
+## ISRU Phase 3: Final assembly
 
 Commentary: Assemble heat_treatment_furnace_v0 and verify provenance.
 
@@ -289,7 +289,7 @@ Commentary: Assemble heat_treatment_furnace_v0 and verify provenance.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 3: Assemble heat_treatment_furnace_v0."
+    message: "Assemble heat_treatment_furnace_v0."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_heat_treatment_furnace_v0_target_v0

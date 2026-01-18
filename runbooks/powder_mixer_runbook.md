@@ -30,7 +30,7 @@ Goal: Build `powder_mixer` with ISRU steel for the frame, drum, and agitator whe
     message: "Simulation reset. Starting powder_mixer runbook."
 ```
 
-## Stage 1: Tooling and baseline imports
+## Stage 1: Tooling and imports
 
 Commentary: Import fabrication tooling and any non-ISRU electronics.
 
@@ -38,7 +38,7 @@ Commentary: Import fabrication tooling and any non-ISRU electronics.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import tooling and baseline components."
+    message: "Stage 1: Import tooling and components."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0

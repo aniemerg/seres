@@ -1,6 +1,6 @@
 # Screening Equipment Runbook
 
-Goal: Build `screening_equipment` and establish a baseline runbook; iterate toward ISRU later.
+Goal: Build `screening_equipment` with maximum ISRU.
 
 ## Machine Details
 - **Mass**: 60 kg
@@ -29,15 +29,15 @@ Goal: Build `screening_equipment` and establish a baseline runbook; iterate towa
     message: "Simulation reset. Starting screening_equipment runbook."
 ```
 
-## Stage 1: Baseline (import tooling and components)
+## ISRU steel plate and mesh
 
-Commentary: Import all required tooling and components to validate the recipe.
+Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import baseline tooling and components."
+    message: "ISRU steel plate and mesh stock (tooling + imports for non-steel parts)."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -140,17 +140,6 @@ Commentary: Import all required tooling and components to validate the recipe.
     quantity: 1
     unit: kg
     ensure: true
-```
-
-## Stage 2: ISRU steel plate and mesh
-
-Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Stage 2: ISRU steel plate and mesh stock."
 - cmd: sim.import
   args:
     item: blast_furnace_or_smelter
@@ -413,13 +402,13 @@ Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
     message: "Produced ~5.1 kg steel_mesh_sheet_material."
 ```
 
-## Stage 3: Assemble screening_equipment
+## Assemble screening_equipment
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 3: Assemble screening_equipment."
+    message: "Assemble screening_equipment."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_machine_screening_equipment_v0

@@ -42,7 +42,7 @@ Commentary: Produce sheet metal and fasteners from regolith-derived steel, plus 
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 3: ISRU sheet metal, fasteners, and spray body."
+    message: "ISRU build: sheet metal, fasteners, and spray body from regolith."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -444,7 +444,7 @@ Commentary: Produce sheet metal and fasteners from regolith-derived steel, plus 
 - cmd: sim.note
   args:
     style: success
-    message: "Stage 3 complete: coating_station_v0 with ISRU enclosures and spray body."
+    message: "ISRU build complete: coating_station_v0 with ISRU enclosures and spray body."
 - cmd: sim.provenance
   args:
     item: coating_station_v0

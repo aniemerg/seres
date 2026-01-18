@@ -1,8 +1,6 @@
 # Welding Consumables Runbook
 
-Goal: build `welding_consumables` with a baseline import, then replace aluminum wire,
-storage enclosure, and welding rods with locally produced regolith metal to increase
-ISRU.
+Goal: build `welding_consumables` with ISRU aluminum wire, storage enclosure, and welding rods where possible.
 
 ## Setup
 

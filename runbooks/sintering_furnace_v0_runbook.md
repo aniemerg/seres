@@ -33,15 +33,15 @@ Goal: Build `sintering_furnace_v0` and raise ISRU by producing the insulation pa
     message: "Simulation reset. Starting sintering_furnace_v0 runbook."
 ```
 
-## Stage 1: Import baseline equipment and components
+## ISRU Build: Tooling and Imported Components
 
-Commentary: Import assembly tooling and all non-insulation components.
+Commentary: Import assembly tooling and all non-insulation components needed for the ISRU run.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import baseline tooling and components."
+    message: "Import tooling and non-insulation components."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0

@@ -1,6 +1,6 @@
 # Plate Rolling Mill Runbook
 
-Goal: Build `plate_rolling_mill` (1500 kg heavy machinery) using maximum in-situ resources. Start with imported materials for baseline, then produce from regolith-derived steel and metal.
+Goal: Build `plate_rolling_mill` (1500 kg heavy machinery) using maximum in-situ resources from regolith-derived steel and metal.
 
 ## Machine Details
 - **Mass**: 1500 kg
@@ -22,15 +22,15 @@ Goal: Build `plate_rolling_mill` (1500 kg heavy machinery) using maximum in-situ
     message: "Simulation reset. Starting plate_rolling_mill runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## Stage 1: Import tooling and assembly equipment
 
-Commentary: Import all components and assembly equipment to test if the recipe runs.
+Commentary: Import fabrication tooling used throughout the ISRU build.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import baseline equipment and parts for assembly."
+    message: "Stage 1: Import tooling and assembly equipment."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0

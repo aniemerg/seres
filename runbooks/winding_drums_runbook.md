@@ -25,7 +25,7 @@ Goal: Build `winding_drums` with ISRU steel bar stock where possible.
     message: "Simulation reset. Starting winding_drums runbook."
 ```
 
-## Stage 1: Tooling and baseline imports
+## Stage 1: Tooling and support equipment
 
 Commentary: Import machining and assembly tooling, plus supporting equipment for ISRU steel.
 

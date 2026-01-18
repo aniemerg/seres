@@ -28,6 +28,48 @@ Commentary: Extract iron ore and carbon from lunar regolith. Need ~1.5 kg steel 
     message: "ISRU Phase 1: Mine regolith and extract materials for steel."
 - cmd: sim.import
   args:
+    item: labor_bot_general_v0
+    quantity: 4
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: forge_or_induction_heater_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: power_hammer_or_press
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: anvil_or_die_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: milling_machine_general_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: blast_furnace_or_smelter
     quantity: 1
     unit: unit

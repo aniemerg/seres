@@ -26,6 +26,12 @@ Goal: Build `rolling_mill_v0` with maximum ISRU using regolith-derived metal.
     message: "Produce regolith metal for local components."
 - cmd: sim.import
   args:
+    item: labor_bot_general_v0
+    quantity: 2
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: rock_crusher_basic
     quantity: 1
     unit: unit
@@ -104,6 +110,12 @@ Goal: Build `rolling_mill_v0` with maximum ISRU using regolith-derived metal.
   args:
     style: info
     message: "Build bearing_set from local regolith_metal_crude."
+- cmd: sim.import
+  args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.import
   args:
     item: crucible_refractory
@@ -249,6 +261,48 @@ Goal: Build `rolling_mill_v0` with maximum ISRU using regolith-derived metal.
   args:
     style: milestone
     message: "Assemble rolling mill from ISRU components (steel_drum, grinding_media, bearings, fasteners)."
+- cmd: sim.import
+  args:
+    item: milling_machine_general_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_power_supply_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_consumables
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_tools_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fixturing_workbench
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: assembly_station
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.import
   args:
     item: motor_assembly

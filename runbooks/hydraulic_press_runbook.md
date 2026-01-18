@@ -22,15 +22,15 @@ Goal: Build `hydraulic_press` (600 kg machine) using maximum in-situ resources. 
     message: "Simulation reset. Starting hydraulic_press runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Phase 1: Produce regolith steel for frame
 
-Commentary: Import all components and assembly equipment to test if the recipe runs.
+Commentary: Need 150 kg steel plate for frame. Produce from regolith steel via complete steel chain.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 1: Import baseline equipment and parts for assembly."
+    message: "Produce steel from regolith for frame."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -79,67 +79,6 @@ Commentary: Import all components and assembly equipment to test if the recipe r
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: steel_plate_raw
-    quantity: 150
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_cylinder_large
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_power_unit_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_large
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble hydraulic_press from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_hydraulic_press_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 60
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline hydraulic_press complete."
-- cmd: sim.provenance
-  args:
-    item: hydraulic_press
-    quantity: 1
-    unit: unit
-```
-
-## Stage 2: ISRU Phase 1 - Produce regolith steel for frame
-
-Commentary: Need 150 kg steel plate for frame. Produce from regolith steel via complete steel chain.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "ISRU Phase 1: Mine regolith and produce steel for frame."
 - cmd: sim.import
   args:
     item: blast_furnace_or_smelter
@@ -310,7 +249,7 @@ Commentary: Need 150 kg steel plate for frame. Produce from regolith steel via c
     message: "Produced 150 kg steel_plate_raw from regolith steel."
 ```
 
-## Stage 3: ISRU Phase 2 - Produce fasteners from regolith metal
+## ISRU Phase 2: Produce fasteners from regolith metal
 
 Commentary: Produce fastener_kit_large (1 unit) for the final assembly.
 
@@ -348,7 +287,7 @@ Commentary: Produce fastener_kit_large (1 unit) for the final assembly.
     message: "Produced fastener_kit_large from regolith metal."
 ```
 
-## Stage 4: ISRU Phase 3 - Final assembly with regolith frame
+## ISRU Phase 3: Final assembly with regolith frame
 
 Commentary: Assemble hydraulic_press using regolith-derived steel frame and fasteners. Import hydraulic components.
 

@@ -31,167 +31,15 @@ Goal: Build `dust_collection_system` using in-situ resources where possible.
     message: "Simulation reset. Starting dust_collection_system runbook."
 ```
 
-## Stage 1: Baseline (import all components)
-
-Commentary: Import all components and assembly equipment to test if the recipe runs.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import baseline equipment and parts for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: metal_shear_or_saw
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_consumables
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_machine_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cutting_tools_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: plate_rolling_mill
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: press_brake
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: punch_press_or_drill
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fixturing_workbench
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sheet_metal_or_structural_steel
-    quantity: 220
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cyclone_separator_body
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: filter_cartridges_dust
-    quantity: 4
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: vacuum_blower_industrial
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: drive_motor_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: ductwork_and_fittings
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: collection_hopper_drum
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble dust collection system from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_dust_collection_system_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 65
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline dust_collection_system complete."
-```
-
-## Stage 2: Local Steel Production (ISRU)
+## ISRU Build: Dust Collection System with Regolith Steel
 
 Commentary: Produce sheet_metal_or_structural_steel (220 kg) from regolith metal. Need 244 kg regolith_metal_crude total, which is ~11 batches of MRE.
 
 ```sim-runbook
-- cmd: sim.use
-  args:
-    sim-id: dust_collection_system_runbook
-- cmd: sim.reset
-  args:
-    sim-id: dust_collection_system_runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Stage 2: Local steel production from regolith"
+    message: "ISRU build: local steel production from regolith"
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -414,8 +262,10 @@ Commentary: Produce sheet_metal_or_structural_steel (220 kg) from regolith metal
 - cmd: sim.note
   args:
     style: success
-    message: "Stage 2 complete: Dust collection system with local steel ISRU"
+    message: "ISRU build complete: dust_collection_system with regolith-derived steel."
+- cmd: sim.provenance
+  args:
+    item: dust_collection_system
+    quantity: 1
+    unit: unit
 ```
-
-## Stage 3: Final Assembly
-*To be implemented - final build with maximum ISRU*

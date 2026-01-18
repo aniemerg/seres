@@ -1,8 +1,6 @@
 # Ball Mill v0 Runbook
 
-Goal: build `ball_mill_v0` using in-situ resources where possible. Start by importing
-all final parts for a baseline assembly, then attempt local production of each part
-and subassembly.
+Goal: build `ball_mill_v0` using in-situ resources where possible.
 
 ## Setup
 
@@ -16,133 +14,10 @@ and subassembly.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Simulation reset. Starting ball mill v0 runbook."
+    message: "Starting ball_mill_v0 ISRU build."
 ```
 
-## Baseline import + assembly
-
-Commentary: import all BOM parts to ensure the ball mill can be assembled once, then
-run the assembly recipe as a baseline.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import baseline equipment needed for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_machine_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cutting_tools_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_consumables
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fixturing_workbench
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_station
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: mill_shell_generic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: liner_set_abrasion_resistant
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: trunnion_supports
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: bearing_set_heavy
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: drive_motor_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gearbox_reducer_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: support_frame_welded
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Baseline: imported all ball_mill_v0 BOM parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_ball_mill_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 400
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline ball_mill_v0 assembly complete."
-```
-
-## In-situ equipment + core feedstocks
+## ISRU Build: Import Core Equipment
 
 Commentary: import the minimum tooling and seed materials to allow local production.
 
@@ -178,6 +53,30 @@ Commentary: import the minimum tooling and seed materials to allow local product
 - cmd: sim.import
   args:
     item: vibrating_screen_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: ball_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_power_supply_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_consumables
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fixturing_workbench
     quantity: 1
     unit: unit
     ensure: true
@@ -427,7 +326,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
     message: "Core equipment imported."
 ```
 
-## In-situ: regolith feedstocks + metal alloy bulk (MRE)
+## ISRU Build: Regolith Feedstocks + Metal Alloy (MRE)
 
 ```sim-runbook
 - cmd: sim.note
@@ -464,7 +363,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
     hours: 500
 ```
 
-## In-situ: casting parts for mill shell + trunnions + frame
+## ISRU Build: Casting Parts for Mill Shell + Trunnions + Frame
 
 Commentary: make core structural parts that depend on regolith_metal_crude.
 
@@ -523,7 +422,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 4
 ```
 
-## In-situ: liner set from regolith fines
+## ISRU Build: Liner Set from Regolith Fines
 
 ```sim-runbook
 - cmd: sim.note
@@ -539,7 +438,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 3
 ```
 
-## In-situ: steel stock for fasteners + motor shaft
+## ISRU Build: Steel Stock for Fasteners + Motor Shaft
 
 ```sim-runbook
 - cmd: sim.note
@@ -616,7 +515,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 40
 ```
 
-## In-situ: fastener kit + bearing set
+## ISRU Build: Fastener Kit + Bearing Set
 
 ```sim-runbook
 - cmd: sim.note
@@ -643,7 +542,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 40
 ```
 
-## In-situ: iron and silicon feedstocks
+## ISRU Build: Iron and Silicon Feedstocks
 
 ```sim-runbook
 - cmd: sim.note
@@ -693,7 +592,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 5
 ```
 
-## In-situ: aluminum + insulation materials
+## ISRU Build: Aluminum + Insulation Materials
 
 ```sim-runbook
 - cmd: sim.note
@@ -824,7 +723,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 50
 ```
 
-## In-situ: drive motor medium
+## ISRU Build: Drive Motor Medium
 
 ```sim-runbook
 - cmd: sim.note
@@ -865,7 +764,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 6
 ```
 
-## In-situ: gearbox reducer medium
+## ISRU Build: Gearbox Reducer Medium
 
 ```sim-runbook
 - cmd: sim.note
@@ -930,7 +829,7 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
     hours: 12
 ```
 
-## Final assembly from local parts
+## ISRU Build: Final Assembly
 
 ```sim-runbook
 - cmd: sim.note
@@ -968,12 +867,5 @@ Commentary: make core structural parts that depend on regolith_metal_crude.
 - cmd: sim.note
   args:
     style: success
-    message: "ball_mill_v0 local assembly attempt complete."
-```
-
-## Checkpoint
-
-```sim-runbook
-- cmd: sim.status
-  args: {}
+    message: "ball_mill_v0 ISRU assembly complete."
 ```

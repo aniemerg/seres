@@ -1,7 +1,6 @@
 # Welding Power Supply v0 Runbook
 
-Goal: build `welding_power_supply_v0` with increasing ISRU coverage. Start with a
-baseline import assembly, then produce subcomponents locally where possible.
+Goal: build `welding_power_supply_v0` with increasing ISRU coverage using local subcomponents where possible.
 
 ## Setup
 
@@ -18,15 +17,16 @@ baseline import assembly, then produce subcomponents locally where possible.
     message: "Simulation reset. Starting welding power supply v0 runbook."
 ```
 
-## Baseline import + assembly
+## Local subcomponents (partial ISRU)
 
-Commentary: import all top-level inputs to validate the assembly recipe.
+Commentary: produce metal-alloy feedstock in-situ, then build torch assembly,
+ground clamp, and power conditioning module locally. Electronics are still imported.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Baseline: import all welding_power_supply_v0 inputs."
+    message: "ISRU: produce regolith_metal_crude and build local subcomponents."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -39,71 +39,6 @@ Commentary: import all top-level inputs to validate the assembly recipe.
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_unit
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: torch_assembly
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: ground_clamp_and_cables
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: kg
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_welding_power_supply_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline welding_power_supply_v0 assembly attempt complete."
-```
-
-## Local subcomponents (partial ISRU)
-
-Commentary: produce metal-alloy feedstock in-situ, then build torch assembly,
-ground clamp, and power conditioning module locally. Electronics are still imported.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "ISRU: produce regolith_metal_crude and build local subcomponents."
 - cmd: sim.import
   args:
     item: vibrating_screen_v0

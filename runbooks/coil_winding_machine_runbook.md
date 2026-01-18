@@ -30,15 +30,15 @@ Goal: Build `coil_winding_machine` using in-situ resources where possible.
     message: "Simulation reset. Starting coil_winding_machine runbook."
 ```
 
-## Stage 1: Baseline (import all components)
+## ISRU Build: Machine Frame, Tensioning Mechanism, and Fasteners
 
-Commentary: Import all components and assembly equipment to test if the recipe runs.
+Commentary: Need 50 kg sheet_metal_or_structural_steel for machine_frame_small. Production chain: regolith → iron ore (119 kg) → pig iron (59.5 kg) → steel ingot (56 kg) → sheet metal (50.5 kg).
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Import baseline equipment and parts for assembly."
+    message: "Import equipment and produce steel for machine frame."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -57,74 +57,6 @@ Commentary: Import all components and assembly equipment to test if the recipe r
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: machine_frame_small
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: spindle_drive_motor_small
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: wire_tensioning_mechanism
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: turn_counter_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble coil winding machine from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_coil_winding_machine_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline coil_winding_machine_v0 complete."
-```
-
-## Stage 2: ISRU Phase 1 - Produce steel for machine frame
-
-Commentary: Need 50 kg sheet_metal_or_structural_steel for machine_frame_small. Production chain: regolith → iron ore (119 kg) → pig iron (59.5 kg) → steel ingot (56 kg) → sheet metal (50.5 kg).
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "ISRU Phase 1: Produce steel for machine frame."
 - cmd: sim.import
   args:
     item: blast_furnace_or_smelter
@@ -307,17 +239,10 @@ Commentary: Need 50 kg sheet_metal_or_structural_steel for machine_frame_small. 
   args:
     style: success
     message: "Produced 50.35 kg sheet_metal_or_structural_steel from regolith steel ingot."
-```
-
-## Stage 3: ISRU Phase 2 - Produce regolith metal for wire tensioning
-
-Commentary: Need 6 kg regolith_metal_crude for wire_tensioning_mechanism via MRE process.
-
-```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU Phase 2: Produce regolith metal for wire tensioning mechanism."
+    message: "Produce regolith metal for wire tensioning mechanism."
 - cmd: sim.import
   args:
     item: mre_reactor_v0
@@ -375,17 +300,10 @@ Commentary: Need 6 kg regolith_metal_crude for wire_tensioning_mechanism via MRE
   args:
     style: success
     message: "Produced ~23 kg regolith_metal_crude via MRE (need 6 kg)."
-```
-
-## Stage 4: ISRU Phase 3 - Produce steel stock for fasteners
-
-Commentary: Need 2 kg steel_stock for fastener_kit_medium. Use existing materials from Stage 2.
-
-```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU Phase 3: Produce steel stock for fasteners."
+    message: "Produce steel stock for fasteners."
 - cmd: sim.import
   args:
     item: heating_furnace
@@ -462,17 +380,10 @@ Commentary: Need 2 kg steel_stock for fastener_kit_medium. Use existing material
   args:
     style: success
     message: "Produced 2 kg steel_stock from regolith."
-```
-
-## Stage 5: ISRU Phase 4 - Manufacture ISRU components
-
-Commentary: Manufacture machine_frame_small, wire_tensioning_mechanism, and fastener_kit_medium from ISRU materials.
-
-```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU Phase 4: Manufacture components from ISRU materials."
+    message: "Manufacture components from ISRU materials."
 - cmd: sim.import
   args:
     item: metal_shear_or_saw
@@ -578,17 +489,10 @@ Commentary: Manufacture machine_frame_small, wire_tensioning_mechanism, and fast
   args:
     style: success
     message: "Manufactured fastener_kit_medium from regolith steel."
-```
-
-## Stage 6: ISRU Phase 5 - Final assembly with ISRU components
-
-Commentary: Assemble coil_winding_machine_v0 using ISRU components (machine_frame_small, wire_tensioning_mechanism, fastener_kit_medium) plus imported electronics and motor.
-
-```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU Phase 5: Final assembly with ISRU components."
+    message: "Final assembly with ISRU components."
 - cmd: sim.import
   args:
     item: spindle_drive_motor_small
@@ -622,8 +526,8 @@ Commentary: Assemble coil_winding_machine_v0 using ISRU components (machine_fram
     hours: 10
 - cmd: sim.note
   args:
-    style: milestone
-    message: "Coil winding machine built with ISRU components!"
+    style: success
+    message: "ISRU build complete: coil_winding_machine with ISRU components."
 - cmd: sim.provenance
   args:
     item: coil_winding_machine_v0
