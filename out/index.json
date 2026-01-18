@@ -39,6 +39,19 @@
       ],
       "status": "defined"
     },
+    "abrasive_mixture": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "abrasive_mixture",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "recipe_grinding_wheels_isru_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "accelerometer_mechanical_v0": {
       "aliases": [],
       "defined_in": "kb/items/parts/accelerometer_mechanical_v0.yaml",
@@ -553,8 +566,8 @@
         "recipe_silumin_alloy_v0"
       ],
       "refs_out": [
-        "metal_alloy_bulk",
-        "metal_feedstock"
+        "metal_feedstock",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -805,6 +818,7 @@
         "recipe_co2_gas_v0",
         "recipe_cryolite_flux_v0",
         "recipe_glass_batch_mix_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_refractory_brick_set_v0",
         "recipe_refractory_castable_v0",
         "recipe_refractory_lining_set_v0",
@@ -918,12 +932,10 @@
         "olivine_aluminothermic_reduction_v0",
         "robot_arm_link_fabrication_v0",
         "robot_wrist_fabrication_v0",
-        "wire_drawing_aluminum_v0",
         "recipe_aluminum_alloy_ingot_v0",
         "recipe_aluminum_shavings_v0_v0",
         "recipe_aluminum_sheet_2mm_v0",
         "recipe_aluminum_tube_stock_v0",
-        "recipe_aluminum_wire_v0",
         "recipe_co2_gas_v0",
         "recipe_compliant_element_machined_v0",
         "recipe_cooling_fan_assembly_v0",
@@ -1344,6 +1356,7 @@
         "recipe_drive_motor_medium_v1",
         "recipe_electric_motor_medium_v0",
         "recipe_electric_motor_small_v0",
+        "recipe_ground_clamp_and_cables_v0",
         "recipe_hammer_drive_motor_v0",
         "recipe_heat_treatment_furnace_v0",
         "recipe_heating_elements_basic_v0",
@@ -1359,9 +1372,11 @@
         "recipe_spindle_drive_motor_small_v0",
         "recipe_spinning_drive_motor_v0",
         "recipe_stepper_motor_precision_v0",
+        "recipe_torch_assembly_v0",
         "recipe_transformer_power_high_voltage_v0",
         "recipe_vibration_motor_set_v0",
-        "recipe_vibrator_motor_small_v0"
+        "recipe_vibrator_motor_small_v0",
+        "recipe_welding_power_supply_unit_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -2283,6 +2298,7 @@
         "recipe_flare_tool_set_v0",
         "recipe_forge_or_induction_heater_alias_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_seed_v0",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_formation_wiring_harness_import_v0",
@@ -2359,7 +2375,6 @@
         "recipe_machine_hot_wire_cutter_v0",
         "recipe_machine_material_handling_equipment_v0",
         "recipe_machine_milling_machine_cnc_v0",
-        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mixer_or_blender_v0",
         "recipe_machine_mixing_station_v0",
         "recipe_machine_plastic_extruder_v0",
@@ -2388,6 +2403,7 @@
         "recipe_magnetic_core_memory_array_v0",
         "recipe_magnetic_separator_v0",
         "recipe_magnetization_station_v0",
+        "recipe_measurement_equipment_v0",
         "recipe_micrometer_set_v0",
         "recipe_microstructure_analysis_system_v0_v0",
         "recipe_microstructure_analysis_system_v0_v1",
@@ -2754,6 +2770,7 @@
         "recipe_flier_and_bobbin_set_v0",
         "recipe_flow_controller_valve_set_v0",
         "recipe_flywheel_medium_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_formation_power_modules_import_v0",
         "recipe_formation_power_modules_v0",
         "recipe_formation_wiring_harness_import_v0",
@@ -4779,6 +4796,7 @@
         "recipe_cnc_mill_v0_seed_v0",
         "recipe_cnc_mill_v0_v0",
         "recipe_drilling_equipment_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_dynamic_balancing_stand_v0_alt_v0",
@@ -4786,6 +4804,7 @@
         "recipe_ebm_powder_handling_system_v0",
         "recipe_fabrication_station_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_gearbox_reducer_medium_v0",
         "recipe_hydraulic_pump_heavy_duty_v0",
@@ -4796,6 +4815,7 @@
         "recipe_machine_jaw_crusher_v0",
         "recipe_machine_labor_bot_specialist_v0",
         "recipe_machine_magnetic_separator_drum_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_plate_rolling_mill_v0",
         "recipe_machine_punch_press_drill_v0",
         "recipe_machine_resource_3d_printer_cartesian_v0",
@@ -12079,8 +12099,8 @@
         "press_ram_set"
       ],
       "refs_out": [
-        "metal_alloy_bulk",
-        "press_ram_set"
+        "press_ram_set",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -14715,7 +14735,7 @@
       "refs_out": [
         "brazing_alloy_generic",
         "flux_brazing",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -14865,7 +14885,7 @@
       ],
       "refs_out": [
         "bronze_block_material_v0",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -14960,7 +14980,6 @@
       "refs_in": [
         "import_receiving_basic_v0",
         "material_handling_v0",
-        "recipe_assembly_station_v0",
         "recipe_atomization_unit_module_v0",
         "recipe_base_grease_stock_v0",
         "recipe_bulk_material_or_parts_import_v0",
@@ -14980,7 +14999,6 @@
         "recipe_machine_crusher_basic_v0",
         "recipe_machine_filler_material_station_v0",
         "recipe_machine_heat_treatment_furnace_v0",
-        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_machine_quench_tank_v0",
         "recipe_magnetization_station_v0",
@@ -15049,7 +15067,7 @@
         "burner_or_heater_casting",
         "electronic_components_set",
         "fastener_kit_medium",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -16132,6 +16150,7 @@
         "recipe_carbon_reductant_v0",
         "recipe_conductive_additive_import_v0",
         "recipe_conductive_additive_v0",
+        "recipe_graphite_powder_from_carbon_v0",
         "recipe_silicon_carbide_ceramic_v0",
         "recipe_silicon_metal_from_regolith_carbothermic_v0",
         "recipe_stainless_steel_ingot_v0",
@@ -16373,6 +16392,7 @@
         "recipe_cryogenic_chiller_provider_v0_v0",
         "recipe_dies_v0",
         "recipe_drill_press_v1",
+        "recipe_drill_string_steel_isru_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_small_v0",
         "recipe_electric_motor_medium_v0",
@@ -16383,10 +16403,12 @@
         "recipe_extruder_head_basic_v0",
         "recipe_fastener_kit_large_v0",
         "recipe_fastener_kit_large_v1",
+        "recipe_fastener_kit_medium_v0",
         "recipe_fastener_kit_small_v0",
         "recipe_ffc_reactor_enhanced_v0",
         "recipe_ffc_reactor_unit_v0",
         "recipe_flywheel_medium_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forging_press_v0",
         "recipe_furnace_shell_insulated_v0",
         "recipe_furnace_shell_refractory_v0",
@@ -16487,17 +16509,21 @@
         "recipe_rover_suspension_rocker_bogie_v0",
         "recipe_rover_wheel_assembly_v0",
         "recipe_sabatier_reactor_co2_reduction_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_separator_frame_v0",
         "recipe_shaft_and_bearing_set_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
         "recipe_sheet_metal_or_structural_steel_v0",
         "recipe_sintering_furnace_shell_v0",
         "recipe_spindle_assembly_precision_v0",
         "recipe_spindle_drive_motor_small_v0",
         "recipe_spindle_head_basic_v0",
+        "recipe_steel_beam_i_section_isru_v0",
         "recipe_steel_frame_molding_press_v0",
         "recipe_steel_workbench_heavy_v0",
         "recipe_storage_enclosure_v0",
         "recipe_structural_frame_large_v0",
+        "recipe_structural_frame_steel_isru_v0",
         "recipe_table_drive_assembly_v0",
         "recipe_table_top_t_slot_v0",
         "recipe_tension_roller_set_v0",
@@ -17410,6 +17436,7 @@
         "recipe_crucible_refractory_import_v0",
         "recipe_crucible_refractory_v0",
         "recipe_encoder_magnetic_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_molten_salt_containment_v0",
         "recipe_oxygen_sensor_zirconia_alias_v0",
         "recipe_oxygen_sensor_zirconia_v0",
@@ -20496,6 +20523,7 @@
         "recipe_coil_winding_machine_v0",
         "recipe_coil_winding_machine_v1",
         "recipe_control_compute_module_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_gas_flow_controller_v0",
         "recipe_grinder_surface_v0",
         "recipe_hauler_v0",
@@ -20520,6 +20548,7 @@
         "recipe_machine_labor_bot_specialist_v0",
         "recipe_machine_loader_small_v0",
         "recipe_machine_magnetic_separator_drum_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mre_reactor_v0",
         "recipe_machine_plate_rolling_mill_v0",
         "recipe_machine_power_hammer_or_press_v0",
@@ -21155,7 +21184,7 @@
       "refs_out": [
         "cooling_loop_basic",
         "fastener_kit_small",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -21538,8 +21567,7 @@
         "recipe_relay_coil_assembly_v0",
         "recipe_solenoid_coil_assembly_v0",
         "recipe_transformer_power_medium_v0",
-        "recipe_welding_arc_welder_v0",
-        "recipe_welding_power_supply_unit_v0"
+        "recipe_welding_arc_welder_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -22669,7 +22697,8 @@
         "bom_milling_machine_general_v0",
         "bom_milling_machine_v0_v0",
         "recipe_cutting_tool_set_basic_v0",
-        "recipe_drilling_equipment_v0"
+        "recipe_drilling_equipment_v0",
+        "recipe_machine_milling_machine_general_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -23426,6 +23455,7 @@
       "name": "Steel drill string",
       "refs_in": [
         "bom_drilling_equipment_v0",
+        "recipe_drill_string_steel_isru_v0",
         "recipe_drill_string_steel_v0",
         "recipe_drilling_equipment_v0"
       ],
@@ -23546,6 +23576,7 @@
         "recipe_cnc_mill_v0_seed_v0",
         "recipe_cnc_mill_v0_v0",
         "recipe_cooling_fan_assembly_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_dust_collection_system_v0",
@@ -23558,6 +23589,7 @@
         "recipe_machine_jaw_crusher_v0",
         "recipe_machine_labor_bot_specialist_v0",
         "recipe_machine_magnetic_separator_drum_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_plastic_extruder_v0",
         "recipe_machine_powder_mill_and_mixer_v0",
         "recipe_machine_resource_3d_printer_cartesian_v0",
@@ -23582,6 +23614,7 @@
       ],
       "name": "Drive motor (medium) assembly",
       "refs_in": [
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v1"
       ],
       "refs_out": [
@@ -24252,7 +24285,6 @@
         "thermionic_converter_basic_v0",
         "thermionic_power_generation_v0",
         "recipe_electrical_energy_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_oxygen_gas_v0",
         "recipe_bulk_material_or_parts_import_v0",
         "recipe_electrical_energy_basic_v0",
@@ -24260,6 +24292,7 @@
         "recipe_lunar_regolith_in_situ_v0",
         "recipe_meteorite_iron_v0",
         "recipe_nife_meteorite_material_env_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_solar_radiation_v0",
         "recipe_stored_energy_v0",
         "recipe_waste_heat_v0",
@@ -24350,6 +24383,7 @@
         "recipe_motor_assembly_v0",
         "recipe_motor_electric_small_v0",
         "recipe_motor_general_5kw_v0",
+        "recipe_stator_rotor_lamination_set_v0",
         "recipe_steel_lamination_stack_v0"
       ],
       "refs_out": [],
@@ -24592,7 +24626,6 @@
         "recipe_tested_electrical_system_v0",
         "recipe_thermal_controller_basic_v0",
         "recipe_thermionic_generator_v0",
-        "recipe_torch_assembly_v0",
         "recipe_vacuum_furnace_v0_v0",
         "recipe_vacuum_gauge_set_v0",
         "recipe_vibration_sensor_set_v0",
@@ -26789,6 +26822,7 @@
         "recipe_cryogenic_separation_system_v0",
         "recipe_drill_press_v1",
         "recipe_drilling_equipment_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_drying_oven_v0",
@@ -26808,6 +26842,7 @@
         "recipe_fastener_kit_medium_v0",
         "recipe_filtration_unit_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_furnace_door_assembly_v0",
         "recipe_furnace_high_temp_v0",
@@ -26857,6 +26892,7 @@
         "recipe_machine_labor_bot_specialist_v0",
         "recipe_machine_magnetic_separator_drum_v0",
         "recipe_machine_milling_machine_cnc_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mre_reactor_v0",
         "recipe_machine_powder_mill_and_mixer_v0",
         "recipe_machine_powder_mixer_v0",
@@ -27149,7 +27185,6 @@
         "recipe_thermal_controller_basic_v0",
         "recipe_thermal_management_system_v0",
         "recipe_threading_needle_mechanism_v0",
-        "recipe_torch_assembly_v0",
         "recipe_torque_wrench_set_v0",
         "recipe_tracking_control_unit_v0",
         "recipe_trigon_hinge_motorized_v0",
@@ -27178,7 +27213,7 @@
       "refs_in": [],
       "refs_out": [
         "fastener_kit_small",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -28072,6 +28107,19 @@
       ],
       "status": "defined"
     },
+    "fired_ceramic_parts": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "fired_ceramic_parts",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "recipe_grinding_wheels_isru_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "firing_ceramic_basic_v0": {
       "aliases": [],
       "defined_in": "kb/processes/firing_ceramic_basic_v0.yaml",
@@ -28686,6 +28734,7 @@
       "refs_in": [
         "bom_forge_or_induction_heater_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_seed_v0",
         "recipe_forge_or_induction_heater_v0_v0"
       ],
@@ -28707,7 +28756,6 @@
         "recipe_bolt_hex_medium_steel_v0",
         "recipe_circuit_board_tools_v0",
         "recipe_deburring_tools_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_forged_steel_parts_v0",
         "recipe_glass_forming_tools_v0",
         "recipe_hand_tools_basic_v0",
@@ -28736,7 +28784,6 @@
         "recipe_circuit_board_tools_v0",
         "recipe_crucible_tongs_set_v0",
         "recipe_deburring_tools_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_forged_steel_parts_v0",
         "recipe_glass_forming_tools_v0",
         "recipe_hand_tools_basic_v0",
@@ -30350,6 +30397,7 @@
         "recipe_machine_ball_mill_v0",
         "recipe_machine_cement_mixer_small_v0",
         "recipe_machine_jaw_crusher_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_plastic_extruder_v0",
         "recipe_machine_powder_mill_and_mixer_v0",
         "recipe_machine_resource_3d_printer_cartesian_v0",
@@ -30618,6 +30666,7 @@
         "recipe_concentrating_mirror_set_v1",
         "recipe_fused_silica_glass_v0",
         "recipe_glass_bulk_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_parabolic_mirror_segment_v0"
       ],
       "refs_out": [],
@@ -31212,7 +31261,8 @@
         "recipe_glass_forming_tools_v0",
         "recipe_graphite_block_material_v0",
         "recipe_graphite_crucible_v0",
-        "recipe_graphite_dry_lubricant_high_temp_v0"
+        "recipe_graphite_dry_lubricant_high_temp_v0",
+        "recipe_graphite_powder_from_carbon_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -31553,6 +31603,7 @@
         "bom_precision_grinding_system_v0",
         "bom_precision_grinding_system_v0_v0",
         "recipe_bearing_grinding_machine_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_grinding_wheels_v0",
         "recipe_machine_bench_grinder_v0",
         "recipe_precision_grinding_system_v0"
@@ -32591,7 +32642,8 @@
       ],
       "name": "Heat treatment and graphitization",
       "refs_in": [
-        "recipe_graphite_block_material_v0"
+        "recipe_graphite_block_material_v0",
+        "recipe_graphite_powder_from_carbon_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -32911,6 +32963,7 @@
       "name": "Industrial heating element set",
       "refs_in": [
         "bom_pcb_etching_tank_set",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_heating_element_set_industrial_v0"
       ],
       "refs_out": [],
@@ -35031,7 +35084,6 @@
         "recipe_machine_gas_handling_loop_v0",
         "recipe_machine_heat_treatment_furnace_v0",
         "recipe_machine_hot_wire_cutter_v0",
-        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mixer_or_blender_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_machine_quench_tank_v0",
@@ -35395,6 +35447,7 @@
         "recipe_flare_tool_set_v0",
         "recipe_forge_or_induction_heater_alias_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_seed_v0",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_forged_steel_parts_v0",
@@ -35455,7 +35508,6 @@
         "recipe_machine_heat_treatment_furnace_v0",
         "recipe_machine_hot_wire_cutter_v0",
         "recipe_machine_milling_machine_cnc_v0",
-        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mixer_or_blender_v0",
         "recipe_machine_mixing_station_v0",
         "recipe_machine_power_hammer_or_press_v0",
@@ -35806,6 +35858,7 @@
         "bom_reduction_furnace_v0",
         "bom_sintering_furnace_v0",
         "recipe_chemical_reactor_basic_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_furnace_high_temp_v0",
         "recipe_heating_plate_or_induction_heater_v0",
         "recipe_hpht_furnace_v0",
@@ -38022,7 +38075,7 @@
       ],
       "refs_out": [
         "liquid_sodium_receiver_v0",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -39298,6 +39351,7 @@
         "recipe_drawing_rollers_precision_v0",
         "recipe_drill_press_v0",
         "recipe_drill_press_v1",
+        "recipe_drill_string_steel_isru_v0",
         "recipe_drive_assembly_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_small_v0",
@@ -39564,6 +39618,7 @@
         "recipe_sand_casting_large_v0",
         "recipe_saw_or_cutting_tool_v0",
         "recipe_scara_robot_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_screen_deck_basic_v0",
         "recipe_screw_conveyor_assembly_v0",
         "recipe_seal_mechanical_rotary_v0",
@@ -39573,6 +39628,7 @@
         "recipe_shaft_and_bearing_set_v0",
         "recipe_shear_blade_or_saw_band_v0",
         "recipe_shear_frame_and_bed_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
         "recipe_sheet_metal_or_structural_steel_v0",
         "recipe_sintered_tungsten_part_v0",
         "recipe_soldering_iron_base_assembly_v0",
@@ -39582,6 +39638,7 @@
         "recipe_spindle_head_basic_v0",
         "recipe_spinneret_block_basic_v0",
         "recipe_spinning_drive_motor_v0",
+        "recipe_steel_beam_i_section_isru_v0",
         "recipe_steel_casting_machine_base_v0",
         "recipe_steel_frame_microscope_body_v0",
         "recipe_steel_frame_molding_press_v0",
@@ -39592,9 +39649,9 @@
         "recipe_structural_frame_large_v0",
         "recipe_structural_frame_small_v0",
         "recipe_structural_frame_small_v1",
+        "recipe_structural_frame_steel_isru_v0",
         "recipe_structural_frame_steel_v0",
         "recipe_structural_steel_frame_v0",
-        "recipe_surface_grinder_v0",
         "recipe_table_drive_assembly_v0",
         "recipe_table_top_t_slot_v0",
         "recipe_tapping_hole_assembly_v0",
@@ -40890,8 +40947,8 @@
         "recipe_steel_casting_machine_base_v0"
       ],
       "refs_out": [
-        "metal_alloy_bulk",
-        "molten_material_or_preform"
+        "molten_material_or_preform",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -40967,199 +41024,6 @@
       "refs_out": [],
       "status": "defined"
     },
-    "metal_alloy_bulk": {
-      "aliases": [],
-      "defined_in": "kb/items/materials/metal_alloy_bulk.yaml",
-      "id": "metal_alloy_bulk",
-      "kind": "material",
-      "layer_tags": [],
-      "name": "Metal alloy bulk",
-      "refs_in": [
-        "bom_press_ram_set_v0",
-        "alloying_basic_v0",
-        "brazing_alloy_synthesis_v0",
-        "bronze_alloy_casting_v0",
-        "burner_or_heater_casting_fabrication_v0",
-        "cooling_loop_basic_fabrication_v0",
-        "fastener_kit_small_fabrication_v0",
-        "liquid_sodium_receiver_fabrication_v0",
-        "melting_basic_v0",
-        "metal_casting_basic_v0",
-        "metal_ingot_cast_v0",
-        "oxygen_extraction_molten_regolith_electrolysis_v0",
-        "power_conditioning_module_fabrication_v0",
-        "recipe_cutting_tool_set_basic_v0",
-        "recipe_magnetic_separator_drum_body_v0",
-        "recipe_metal_alloy_bulk_v0",
-        "recipe_metal_casting_finished_v0",
-        "recipe_oxygen_gas_v0",
-        "recipe_part_bearing_set_small_v0",
-        "recipe_part_mill_shell_generic_v0",
-        "recipe_part_support_frame_welded_v0",
-        "recipe_part_trunnion_supports_v0",
-        "recipe_agitation_pump_small_v0",
-        "recipe_agitation_system_basic_v0",
-        "recipe_air_tank_small_v0",
-        "recipe_amari_neural_field_hardware_v0",
-        "recipe_anvil_and_die_set_v0",
-        "recipe_anvil_block_basic_v0",
-        "recipe_bearing_race_set_v0",
-        "recipe_bearing_set_heavy_v0",
-        "recipe_bearing_set_medium_v0",
-        "recipe_bearing_set_v0",
-        "recipe_belt_and_pulley_set_v0",
-        "recipe_brazing_furnace_v0_v0",
-        "recipe_bronze_block_material_v0",
-        "recipe_burner_or_heater_casting_local_v1",
-        "recipe_burner_or_heater_casting_v0",
-        "recipe_cast_part_raw_v0",
-        "recipe_casting_furnace_shell_v0",
-        "recipe_charging_system_v0",
-        "recipe_chemical_bath_heaters_import_v0",
-        "recipe_chemical_bath_heaters_v0",
-        "recipe_circulation_pump_coolant_v0",
-        "recipe_compressor_pump_small_v0",
-        "recipe_coolant_loop_basic_v0",
-        "recipe_cryogenic_chiller_provider_v0_v0",
-        "recipe_depth_stop_mechanism_v0",
-        "recipe_dies_v0",
-        "recipe_drive_motor_medium_v0",
-        "recipe_drive_motor_small_v0",
-        "recipe_endplate_set_motor_v0",
-        "recipe_extruder_head_basic_v0",
-        "recipe_fastener_kit_large_v0",
-        "recipe_fastener_kit_large_v1",
-        "recipe_fastener_kit_small_v0",
-        "recipe_ffc_reactor_enhanced_v0",
-        "recipe_ffc_reactor_unit_v0",
-        "recipe_fittings_and_valves_v0",
-        "recipe_flywheel_medium_v0",
-        "recipe_forging_press_v0",
-        "recipe_furnace_shell_insulated_v0",
-        "recipe_furnace_shell_refractory_v0",
-        "recipe_gantry_axes_set_v0",
-        "recipe_gas_blower_basic_v0",
-        "recipe_gas_handling_system_v0",
-        "recipe_gas_loop_piping_set_v0",
-        "recipe_gas_supply_regulator_import_v0",
-        "recipe_gas_supply_regulator_v0",
-        "recipe_gauge_block_set_v0",
-        "recipe_gearbox_heavy_duty_v0",
-        "recipe_generic_chemical_reactor_v0",
-        "recipe_grinding_spindle_assembly_v0",
-        "recipe_ground_clamp_and_cables_v0",
-        "recipe_hammer_drive_motor_v0",
-        "recipe_hammer_head_basic_v0",
-        "recipe_hand_pump_hydraulic_v0",
-        "recipe_hauler_v0_alias_v0",
-        "recipe_heat_pipe_solar_receiver_advanced_v0",
-        "recipe_heat_pipe_solar_receiver_v0",
-        "recipe_heat_pipes_or_loop_v0",
-        "recipe_heat_treatment_furnace_v0",
-        "recipe_heating_element_set_high_temp_v0",
-        "recipe_helical_gear_set_v0",
-        "recipe_high_temp_power_supply_unit_v0",
-        "recipe_hpht_furnace_v0",
-        "recipe_hydraulic_boom_assembly_v0",
-        "recipe_hydraulic_cylinder_body_cast_v0",
-        "recipe_hydraulic_cylinder_medium_v0",
-        "recipe_hydraulic_cylinder_press_v0",
-        "recipe_jaw_plates_set_v0",
-        "recipe_lab_console_unit_v0",
-        "recipe_lab_v0_lab_v0",
-        "recipe_lab_v1",
-        "recipe_liquid_sodium_receiver_v0_v0",
-        "recipe_lubrication_pack_basic_v0",
-        "recipe_machine_base_large_v0",
-        "recipe_machine_drill_press_v0",
-        "recipe_machine_frame_medium_v0",
-        "recipe_machine_vacuum_pump_small_v0",
-        "recipe_magnetic_chuck_surface_grinder_v0",
-        "recipe_metal_ingot_v0",
-        "recipe_metal_ingot_v1",
-        "recipe_mixer_motor_small_v0",
-        "recipe_molding_press_unversioned_v0",
-        "recipe_molding_press_v0",
-        "recipe_molding_press_v1",
-        "recipe_molten_material_or_preform_v0",
-        "recipe_motion_gantry_basic_v0",
-        "recipe_motor_assembly_v0",
-        "recipe_motor_electric_medium_v0",
-        "recipe_motor_housing_cast_v0",
-        "recipe_nickel_sheet_rolling_v0",
-        "recipe_offgas_manifold_v0",
-        "recipe_packed_bed_distillation_v0",
-        "recipe_part_to_clean_import_v0",
-        "recipe_part_to_clean_v0",
-        "recipe_pellet_press_v1",
-        "recipe_permanent_mold_steel_set_v0",
-        "recipe_plastic_extruder_v0",
-        "recipe_powder_feedstock_v0",
-        "recipe_powder_metal_or_ceramic_v0",
-        "recipe_power_bus_high_current_v0",
-        "recipe_power_conditioning_module_v0",
-        "recipe_power_storage_pack_v0",
-        "recipe_power_supply_dc_controlled_v0",
-        "recipe_power_supply_unit_v0",
-        "recipe_precision_lathe_v0",
-        "recipe_press_frame_medium_v0",
-        "recipe_press_frame_small_v0",
-        "recipe_press_hydraulic_v0",
-        "recipe_press_hydraulic_v1",
-        "recipe_press_platen_set_medium_v0",
-        "recipe_press_platen_set_small_v0",
-        "recipe_press_platen_set_v0",
-        "recipe_press_platen_steel_v0",
-        "recipe_press_ram_set_v0",
-        "recipe_pressure_relief_valve_v0",
-        "recipe_quench_rack_and_baskets_v0",
-        "recipe_quenchant_circulation_pump_v0",
-        "recipe_radiator_panel_set_v0",
-        "recipe_ratchet_mechanism_v0",
-        "recipe_raw_metal_block_v0",
-        "recipe_reactor_heating_cooling_system_v0",
-        "recipe_reactor_vessel_mre_v0",
-        "recipe_reduction_furnace_shell_v0",
-        "recipe_refining_furnace_v1",
-        "recipe_roll_grinding_lathe_or_cylindrical_grinder_v0",
-        "recipe_rotor_shaft_medium_v0",
-        "recipe_rough_part_v0",
-        "recipe_rover_wheel_assembly_v0",
-        "recipe_sabatier_reactor_co2_reduction_v0",
-        "recipe_separator_frame_v0",
-        "recipe_shaft_and_bearing_set_v0",
-        "recipe_silver_ingot_v0",
-        "recipe_solder_paste_tin_lead_v0",
-        "recipe_spindle_assembly_precision_v0",
-        "recipe_spindle_drive_motor_small_v0",
-        "recipe_spindle_head_basic_v0",
-        "recipe_spinning_drive_motor_v0",
-        "recipe_steel_frame_molding_press_v0",
-        "recipe_steel_workbench_heavy_v0",
-        "recipe_storage_enclosure_v0",
-        "recipe_table_drive_assembly_v0",
-        "recipe_table_top_t_slot_v0",
-        "recipe_tension_roller_set_v1",
-        "recipe_tin_metal_pure_v0",
-        "recipe_toggle_mechanism_set_v0",
-        "recipe_torch_assembly_v0",
-        "recipe_vacuum_blower_industrial_v0",
-        "recipe_vacuum_pump_basic_v0",
-        "recipe_vacuum_pump_system_miniature_v0",
-        "recipe_valve_body_cast_rough_v0",
-        "recipe_vibration_motor_set_v0",
-        "recipe_vise_machinist_v0",
-        "recipe_weight_storage_analog_v0",
-        "recipe_welded_assemblies_v0",
-        "recipe_welded_fabrications_v0",
-        "recipe_wheel_set_industrial_v0",
-        "recipe_wire_crimping_tools_v0",
-        "recipe_wire_tensioning_mechanism_v0",
-        "recipe_workbench_frame_heavy_v0"
-      ],
-      "refs_out": [],
-      "status": "defined"
-    },
     "metal_casting_basic_v0": {
       "aliases": [],
       "defined_in": "kb/processes/metal_casting_basic_v0.yaml",
@@ -41214,6 +41078,7 @@
         "recipe_depth_stop_mechanism_v0",
         "recipe_dies_v0",
         "recipe_drawing_rollers_precision_v0",
+        "recipe_drill_string_steel_isru_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_small_v0",
         "recipe_electric_motor_medium_v0",
@@ -41224,11 +41089,13 @@
         "recipe_extruder_head_basic_v0",
         "recipe_fastener_kit_large_v0",
         "recipe_fastener_kit_large_v1",
+        "recipe_fastener_kit_medium_v0",
         "recipe_fastener_kit_small_v0",
         "recipe_ffc_reactor_enhanced_v0",
         "recipe_ffc_reactor_unit_v0",
         "recipe_fittings_and_valves_v0",
         "recipe_flywheel_medium_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forging_press_v0",
         "recipe_furnace_shell_insulated_v0",
         "recipe_furnace_shell_refractory_v0",
@@ -41329,8 +41196,10 @@
         "recipe_rotor_shaft_medium_v0",
         "recipe_rover_wheel_assembly_v0",
         "recipe_sabatier_reactor_co2_reduction_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_separator_frame_v0",
         "recipe_shaft_and_bearing_set_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
         "recipe_sheet_metal_or_structural_steel_v0",
         "recipe_silver_ingot_v0",
         "recipe_sintering_furnace_shell_v0",
@@ -41339,11 +41208,12 @@
         "recipe_spindle_drive_motor_small_v0",
         "recipe_spindle_head_basic_v0",
         "recipe_spinning_drive_motor_v0",
+        "recipe_steel_beam_i_section_isru_v0",
         "recipe_steel_frame_molding_press_v0",
         "recipe_steel_workbench_heavy_v0",
         "recipe_storage_enclosure_v0",
+        "recipe_structural_frame_steel_isru_v0",
         "recipe_supermalloy_v0",
-        "recipe_surface_grinder_v0",
         "recipe_table_drive_assembly_v0",
         "recipe_table_top_t_slot_v0",
         "recipe_tension_roller_set_v0",
@@ -41370,7 +41240,7 @@
       ],
       "refs_out": [
         "cast_metal_parts",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -41575,7 +41445,6 @@
         "recipe_fittings_and_valves_import_v0",
         "recipe_forged_steel_parts_v0",
         "recipe_glassworking_station_v0",
-        "recipe_hand_tools_basic_v0",
         "recipe_hand_tools_mechanical_v0",
         "recipe_hydraulic_pump_heavy_duty_v0",
         "recipe_hydraulic_pump_high_pressure_v0",
@@ -41586,8 +41455,7 @@
         "recipe_sealing_equipment_v0",
         "recipe_sintering_furnace_shell_v0",
         "recipe_substrate_part_or_wire_v0",
-        "recipe_valve_body_cast_rough_v1",
-        "recipe_welding_power_supply_unit_v0"
+        "recipe_valve_body_cast_rough_v1"
       ],
       "refs_out": [],
       "status": "defined"
@@ -41717,8 +41585,8 @@
         "recipe_tin_metal_pure_v0"
       ],
       "refs_out": [
-        "metal_alloy_bulk",
-        "metal_ingot"
+        "metal_ingot",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -42887,6 +42755,7 @@
       "refs_in": [
         "bom_milling_machine_general_v0",
         "bom_milling_machine_v0_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_milling_table_v0"
       ],
       "refs_out": [],
@@ -43206,6 +43075,7 @@
       "refs_in": [
         "recipe_geopolymer_cement_v0",
         "recipe_glass_raw_materials_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_inert_anode_v0",
         "recipe_mixed_batch_v0",
         "recipe_photoresist_solution_v0",
@@ -43563,6 +43433,7 @@
       ],
       "name": "Molding press operation (basic)",
       "refs_in": [
+        "recipe_grinding_wheels_isru_v0",
         "recipe_pressed_component_v0"
       ],
       "refs_out": [
@@ -43900,6 +43771,7 @@
         "bom_rolling_mill_v0_v0",
         "motor_assembly_fabrication_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_motor_assembly_v0",
         "recipe_rolling_mill_base_v0",
@@ -44029,6 +43901,7 @@
         "recipe_compressor_motor_small_import_v0",
         "recipe_compressor_motor_small_v0",
         "recipe_demonstrated_motor_2017_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_electric_motor_3_phase_5kw_v0",
@@ -44316,6 +44189,7 @@
         "test_missing_process_type",
         "recipe_compressor_motor_small_import_v0",
         "recipe_compressor_motor_small_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_electric_motor_3_phase_5kw_v0",
         "recipe_electric_motor_small_v0",
@@ -44390,6 +44264,7 @@
         "motor_shaft_machining_v0",
         "recipe_compressor_motor_small_import_v0",
         "recipe_compressor_motor_small_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_electric_motor_small_v0",
         "recipe_motor_assembly_v0",
@@ -46324,13 +46199,13 @@
       ],
       "name": "Molten regolith electrolysis (oxygen extraction)",
       "refs_in": [
-        "recipe_metal_alloy_bulk_v0",
-        "recipe_oxygen_gas_v0"
+        "recipe_oxygen_gas_v0",
+        "recipe_regolith_metal_crude_v0"
       ],
       "refs_out": [
         "electrical_energy",
-        "metal_alloy_bulk",
         "oxygen_gas",
+        "regolith_metal_crude",
         "regolith_powder"
       ],
       "status": "defined"
@@ -46363,7 +46238,6 @@
         "vacuum_pyrolysis_ilmenite_v0",
         "vacuum_pyrolysis_pyroxene_v0",
         "water_electrolysis_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_oxygen_gas_v0",
         "recipe_calcium_metal_pure_v0",
         "recipe_carbon_dioxide_gas_v0",
@@ -46373,6 +46247,7 @@
         "recipe_liquid_oxygen_v0",
         "recipe_magnesium_silicon_alloy_v0",
         "recipe_nitric_acid_concentrated_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_sulfuric_acid_concentrated_v0",
         "recipe_titanium_metal_v0",
         "recipe_reduced_metal_oxides_v0"
@@ -48660,7 +48535,9 @@
       ],
       "name": "Plate rolling (basic)",
       "refs_in": [
-        "recipe_sheet_metal_or_structural_steel_v0"
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
+        "recipe_sheet_metal_or_structural_steel_v0",
+        "recipe_steel_beam_i_section_isru_v0"
       ],
       "refs_out": [
         "slag",
@@ -49858,6 +49735,7 @@
         "recipe_coil_winding_machine_v0",
         "recipe_coil_winding_machine_v1",
         "recipe_fabrication_station_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_grinder_surface_v0",
         "recipe_heat_treatment_furnace_v0_target_v0",
         "recipe_heat_treatment_furnace_v0_v0",
@@ -49875,6 +49753,7 @@
         "recipe_machine_hot_press_v0",
         "recipe_machine_labor_bot_specialist_v0",
         "recipe_machine_low_temp_oven_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_machine_power_storage_bank_v0",
         "recipe_machine_press_hydraulic_v0",
@@ -49911,8 +49790,8 @@
       "refs_out": [
         "electronic_components_set",
         "fastener_kit_small",
-        "metal_alloy_bulk",
-        "power_conditioning_module"
+        "power_conditioning_module",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -50667,6 +50546,7 @@
         "recipe_fresnel_lens_large_scale_v0",
         "recipe_gauge_block_set_v0",
         "recipe_grinding_spindle_assembly_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_hydraulic_cylinder_press_v0",
         "recipe_inspection_tools_basic_v0",
         "recipe_lathe_leadscrew_simple_v0",
@@ -51142,6 +51022,7 @@
       "name": "Pressed green compact",
       "refs_in": [
         "pressing_and_forming_v0",
+        "recipe_grinding_wheels_isru_v0",
         "recipe_inert_anode_v0",
         "recipe_pressed_green_compact_v0",
         "recipe_tungsten_cathode_coated_v0"
@@ -52620,8 +52501,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -52640,8 +52521,8 @@
         "formed_sheet_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "sheet_metal_fabrication_v0",
         "sheet_metal_or_structural_steel"
       ],
@@ -52853,9 +52734,9 @@
       "refs_out": [
         "air_tank_small",
         "cast_metal_parts",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "pressure_testing_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -53231,9 +53112,9 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "aluminum_alloy_ingot",
         "aluminum_wire",
         "metal_scrap",
+        "regolith_metal_crude",
         "wire_drawing_aluminum_v0"
       ],
       "status": "defined"
@@ -53276,10 +53157,10 @@
         "machine_frame_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "neural_analog_tile",
         "power_electronics_module",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "wired_electrical_system",
@@ -53599,8 +53480,8 @@
         "heat_treatment_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -53621,8 +53502,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "surface_finishing_v0"
       ],
       "status": "defined"
@@ -53839,12 +53720,12 @@
         "assembled_equipment",
         "assembly_basic_v0",
         "assembly_station",
-        "bulk_material_or_parts",
         "control_compute_module_imported",
         "fastener_kit_medium",
         "import_receiving_basic_v0",
         "inspection_basic_v0",
         "power_conditioning_module",
+        "regolith_metal_crude",
         "sensor_suite_general",
         "tool_set_general",
         "tool_station_frame"
@@ -54704,8 +54585,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -54801,9 +54682,9 @@
         "finished_part_deburred",
         "machined_metal_block_v0",
         "machining_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "precision_grinding_basic_v0"
+        "precision_grinding_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -54818,8 +54699,8 @@
       "refs_out": [
         "assembly_basic_v0",
         "bearing_set_medium",
-        "metal_alloy_bulk",
-        "metal_scrap"
+        "metal_scrap",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -54870,12 +54751,12 @@
         "grease_bearing_high_temp",
         "heat_treatment_hardening_v0",
         "machining_process_turning_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "metal_forging_process_v0",
         "metal_forming_basic_v0",
         "metal_sheet_or_plate",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "seal_rubber_bearing",
         "steel_bar_stock"
       ],
@@ -54915,10 +54796,10 @@
         "machined_steel_part_precision",
         "machining_precision_v0",
         "machining_process_turning_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "molded_rubber_or_plastic_piece_v0",
         "molding_rubber_or_plastic_v0",
+        "regolith_metal_crude",
         "rough_part",
         "silicone_curing_agent",
         "silicone_polymer",
@@ -55291,10 +55172,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
         "prepared_mold",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -55367,7 +55248,7 @@
       "refs_out": [
         "bronze_alloy_casting_v0",
         "bronze_block_material_v0",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -55465,8 +55346,8 @@
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -55488,8 +55369,8 @@
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_fabrications",
         "welding_brazing_basic_v0"
       ],
@@ -56252,10 +56133,10 @@
       "refs_in": [],
       "refs_out": [
         "cast_part_raw",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "metal_scrap",
-        "prepared_mold"
+        "prepared_mold",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -56271,9 +56152,9 @@
         "cast_metal_parts",
         "casting_furnace_shell",
         "casting_furnace_shell_assembly_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "regolith_fine_fraction",
+        "regolith_metal_crude",
         "sintered_shapes",
         "sintering_and_hot_pressing_v0",
         "welded_assemblies",
@@ -56943,8 +56824,8 @@
         "cast_metal_parts",
         "charging_system",
         "charging_system_production_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -57035,9 +56916,9 @@
         "electronic_components_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "wiring_and_electronics_integration_v0"
       ],
       "status": "defined"
@@ -57061,9 +56942,9 @@
         "electrical_wire_and_connectors",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "wired_electrical_system",
         "wiring_and_electronics_integration_v0"
       ],
@@ -57552,9 +57433,9 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "motor_electric_small"
+        "motor_electric_small",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -58409,8 +58290,8 @@
         "hydraulic_seals_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -59312,8 +59193,8 @@
         "fittings_and_valves",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -60187,9 +60068,9 @@
         "machine_frame_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "pressure_gauge_set",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -60474,8 +60355,8 @@
         "cast_metal_parts",
         "cutting_tool_set_basic",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -60747,8 +60628,8 @@
         "machining_precision_v0",
         "machining_process_drilling_v0",
         "machining_process_turning_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "rough_part",
         "spring_compression_small",
         "steel_stock"
@@ -60821,9 +60702,9 @@
         "cast_metal_parts",
         "dies",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "steel_scrap_v0"
       ],
       "status": "defined"
@@ -61109,6 +60990,23 @@
       ],
       "status": "defined"
     },
+    "recipe_drill_string_steel_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_drill_string_steel_isru_v0.yaml",
+      "id": "recipe_drill_string_steel_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "cast_metal_parts",
+        "drill_string_steel",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
+      ],
+      "status": "defined"
+    },
     "recipe_drill_string_steel_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_drill_string_steel_v0.yaml",
@@ -61185,6 +61083,26 @@
       ],
       "status": "defined"
     },
+    "recipe_drive_motor_medium_assembly_only_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_drive_motor_medium_assembly_only_v0.yaml",
+      "id": "recipe_drive_motor_medium_assembly_only_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "bearing_set_heavy",
+        "drive_motor_medium",
+        "drive_motor_medium_assembly_v0",
+        "fastener_kit_medium",
+        "motor_coil_wound",
+        "motor_housing_steel",
+        "motor_shaft_steel",
+        "stator_rotor_lamination_set"
+      ],
+      "status": "defined"
+    },
     "recipe_drive_motor_medium_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_drive_motor_medium_v0.yaml",
@@ -61204,9 +61122,9 @@
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "spool_winding_basic_v0"
       ],
       "status": "defined"
@@ -61251,8 +61169,8 @@
         "drive_motor_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -62603,8 +62521,8 @@
         "endplate_set_motor",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -62906,8 +62824,8 @@
         "heating_element_set_basic",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -62946,8 +62864,8 @@
         "heat_treat_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -62966,8 +62884,8 @@
         "heat_treat_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -62999,17 +62917,14 @@
       "refs_in": [],
       "refs_out": [
         "assembly_basic_v0",
+        "cast_metal_parts",
         "fastener_kit_medium",
-        "forged_steel_parts",
-        "forging_basic_v0",
         "heat_treat_basic_v0",
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "sheet_metal_forming_process_v0",
-        "steel_chassis_sheet_metal",
-        "steel_sheet_3mm",
-        "steel_stock_bar_or_billet"
+        "metal_casting_basic_v0",
+        "steel_stock"
       ],
       "status": "defined"
     },
@@ -63027,8 +62942,8 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "steel_stock"
       ],
       "status": "defined"
     },
@@ -63227,9 +63142,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "molten_salt_containment_v0",
+        "regolith_metal_crude",
         "temperature_control_system_v0",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -63260,9 +63175,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "molten_salt_containment_v0",
+        "regolith_metal_crude",
         "temperature_control_system_v0",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -63443,9 +63358,9 @@
         "aluminum_tube_stock",
         "fittings_and_valves",
         "leak_testing_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "pipe_bent_sections",
+        "regolith_metal_crude",
         "tube_bending_process_v0",
         "valve_body_boring_v0",
         "valve_body_cast_rough",
@@ -63613,8 +63528,8 @@
         "flywheel_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -63791,6 +63706,35 @@
       ],
       "status": "defined"
     },
+    "recipe_forge_or_induction_heater_v0_isru": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_forge_or_induction_heater_v0_isru.yaml",
+      "id": "recipe_forge_or_induction_heater_v0_isru",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Forge or induction heater (ISRU-focused)",
+      "refs_in": [],
+      "refs_out": [
+        "assembled_equipment",
+        "assembly_basic_v0",
+        "bearing_set_heavy",
+        "cast_metal_parts",
+        "control_compute_module_imported",
+        "fastener_kit_medium",
+        "forge_or_induction_heater_v0",
+        "heating_element_set_industrial",
+        "inspection_basic_v0",
+        "insulation_pack_high_temp",
+        "metal_casting_basic_v0",
+        "motor_assembly",
+        "power_conditioning_module",
+        "regolith_metal_crude",
+        "shaft_and_bearing_set",
+        "welded_assemblies",
+        "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
     "recipe_forge_or_induction_heater_v0_seed_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_forge_or_induction_heater_v0_seed_v0.yaml",
@@ -63884,11 +63828,11 @@
         "hydraulic_system_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "piping_components",
         "press_platen_set_medium",
         "pressure_test_gauge_set",
+        "regolith_metal_crude",
         "safety_guard_steel_mesh",
         "sensor_suite_general",
         "steel_shell_thick",
@@ -64291,9 +64235,9 @@
         "furnace_shell_insulated",
         "insulation_thermal_blanket",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "silica_purified"
       ],
       "status": "defined"
@@ -64310,9 +64254,9 @@
         "assembly_basic_v0",
         "cast_metal_parts",
         "furnace_shell_refractory",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "regolith_fine_fraction",
+        "regolith_metal_crude",
         "sintered_shapes",
         "sintering_and_hot_pressing_v0",
         "welded_assemblies",
@@ -64418,8 +64362,8 @@
         "gantry_axes_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -64437,8 +64381,8 @@
         "gas_blower_basic",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -64581,8 +64525,8 @@
         "gas_handling_system",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -64633,9 +64577,9 @@
       "refs_out": [
         "assembly_basic_v0",
         "gas_loop_piping_set",
-        "metal_alloy_bulk",
         "piping_components",
         "pressure_gauge",
+        "regolith_metal_crude",
         "valve_set_gas_handling"
       ],
       "status": "defined"
@@ -64798,9 +64742,9 @@
         "gas_supply_regulator",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "sealing_gaskets"
       ],
       "status": "defined"
@@ -64820,9 +64764,9 @@
         "gas_supply_regulator",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "sealing_gaskets"
       ],
       "status": "defined"
@@ -64932,9 +64876,9 @@
         "heat_treatment_basic_v0",
         "inspection_basic_v0",
         "machined_part_raw",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "precision_grinding_basic_v0"
+        "precision_grinding_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -64993,8 +64937,8 @@
         "integration_test_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -65109,8 +65053,8 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "wired_electrical_system"
@@ -65500,6 +65444,22 @@
       ],
       "status": "defined"
     },
+    "recipe_graphite_powder_from_carbon_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_graphite_powder_from_carbon_v0.yaml",
+      "id": "recipe_graphite_powder_from_carbon_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": "Graphite powder from carbon reductant v0",
+      "refs_in": [],
+      "refs_out": [
+        "carbon_reductant",
+        "graphite_powder",
+        "heat_treatment_graphitization_v0",
+        "volatiles_off_gas"
+      ],
+      "status": "defined"
+    },
     "recipe_gravity_separator_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_gravity_separator_v0.yaml",
@@ -65693,10 +65653,32 @@
       "refs_out": [
         "cast_metal_parts",
         "grinding_spindle_assembly",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
-        "precision_grinding_basic_v0"
+        "precision_grinding_basic_v0",
+        "regolith_metal_crude"
+      ],
+      "status": "defined"
+    },
+    "recipe_grinding_wheels_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_grinding_wheels_isru_v0.yaml",
+      "id": "recipe_grinding_wheels_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "abrasive_mixture",
+        "alumina_powder",
+        "ceramic_firing_high_temp_v0",
+        "fired_ceramic_parts",
+        "glass_bulk",
+        "grinding_wheels",
+        "mixing_basic_v0",
+        "molding_press_operation_v0",
+        "precision_grinding_basic_v0",
+        "pressed_green_compact"
       ],
       "status": "defined"
     },
@@ -65724,15 +65706,15 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "aluminum_wire",
         "assembly_basic_v0",
         "cast_metal_parts",
         "fastener_kit_small",
         "ground_clamp_and_cables",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "wire_copper_insulated"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -65781,9 +65763,9 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "motor_coil_wound"
+        "motor_coil_wound",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -65821,8 +65803,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "surface_finishing_v0"
       ],
       "status": "defined"
@@ -65843,8 +65825,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -65864,7 +65846,7 @@
         "hand_tools_basic",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_feedstock"
+        "steel_stock"
       ],
       "status": "defined"
     },
@@ -66010,9 +65992,9 @@
         "machine_frame_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_electric_medium",
+        "regolith_metal_crude",
         "sensor_suite_general",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -66171,9 +66153,9 @@
         "heat_pipes_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "modular_machine_interface_v0",
+        "regolith_metal_crude",
         "steel_frame_heavy",
         "welded_assemblies",
         "welding_brazing_basic_v0"
@@ -66194,8 +66176,8 @@
         "heat_pipe_solar_receiver_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -66215,8 +66197,8 @@
         "heat_pipes_or_loop",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -66481,11 +66463,11 @@
         "electrical_wire_and_connectors",
         "electronic_components_set",
         "heat_treatment_furnace",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
         "refractory_castable",
         "refractory_lining_installation_v0",
+        "regolith_metal_crude",
         "wiring_and_electronics_integration_v0"
       ],
       "status": "defined"
@@ -66671,8 +66653,8 @@
         "heating_element_set_high_temp",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -66896,8 +66878,8 @@
         "cast_metal_parts",
         "helical_gear_cutting_basic_v0",
         "helical_gear_set_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -67093,9 +67075,9 @@
         "high_temp_power_supply_unit",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "power_supply_components_basic",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -67422,10 +67404,10 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "power_bus_high_current",
         "power_conditioning_module",
+        "regolith_metal_crude",
         "temperature_controller_basic",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -67588,8 +67570,8 @@
         "hydraulic_boom_assembly",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -67626,8 +67608,8 @@
       "refs_in": [],
       "refs_out": [
         "hydraulic_cylinder_body_cast",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -67711,8 +67693,8 @@
         "hydraulic_seals_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "steel_bar_stock"
       ],
       "status": "defined"
@@ -67734,9 +67716,9 @@
         "leak_test_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "precision_grinding_basic_v0"
+        "precision_grinding_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -69277,8 +69259,8 @@
         "jaw_plates_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -69537,8 +69519,8 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -69578,9 +69560,9 @@
         "machine_frame_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "power_electronics_module",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -69618,9 +69600,9 @@
         "machine_frame_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "power_electronics_module",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -70393,7 +70375,7 @@
       "refs_out": [
         "liquid_sodium_receiver_fabrication_v0",
         "liquid_sodium_receiver_v0",
-        "metal_alloy_bulk"
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -70506,8 +70488,8 @@
         "lubrication_pack_basic",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -70601,9 +70583,9 @@
       "refs_out": [
         "machine_base_large",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "stress_relief_basic_v0"
       ],
       "status": "defined"
@@ -71034,8 +71016,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "motor_general_5kw",
+        "regolith_metal_crude",
         "wired_electrical_system",
         "wiring_and_electronics_integration_v0"
       ],
@@ -71238,9 +71220,9 @@
         "cast_metal_parts",
         "machine_frame_medium",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "mold_preparation_basic_v0"
+        "mold_preparation_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -71714,12 +71696,18 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "assembled_equipment",
         "assembly_basic_v0",
-        "bulk_material_or_parts",
-        "import_receiving_basic_v0",
-        "inspection_basic_v0",
-        "milling_machine_general_v0"
+        "bearing_set_heavy",
+        "control_compute_module_imported",
+        "cutting_tool_set_basic",
+        "drive_motor_medium",
+        "fastener_kit_medium",
+        "gearbox_reducer_medium",
+        "milling_machine_general_v0",
+        "milling_table",
+        "power_conditioning_module",
+        "sensor_suite_general",
+        "spindle_head_basic"
       ],
       "status": "defined"
     },
@@ -72848,9 +72836,9 @@
         "leak_test_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_electric_small",
+        "regolith_metal_crude",
         "seal_o_ring_rubber",
         "vacuum_pump_small",
         "wired_electrical_system",
@@ -73373,10 +73361,10 @@
         "machined_part_raw",
         "machining_finish_basic_v0",
         "magnetic_chuck_surface_grinder",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
-        "precision_grinding_basic_v0"
+        "precision_grinding_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -73465,8 +73453,8 @@
       "refs_in": [],
       "refs_out": [
         "magnetic_separator_drum_body",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -73650,6 +73638,7 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "assembled_equipment",
         "assembly_basic_v0",
         "calibration_basic_v0",
         "caliper_set_precision",
@@ -73727,29 +73716,6 @@
       ],
       "status": "defined"
     },
-    "recipe_metal_alloy_bulk_v0": {
-      "aliases": [],
-      "defined_in": "kb/recipes/metal_alloy_bulk_v0.yaml",
-      "id": "recipe_metal_alloy_bulk_v0",
-      "kind": "recipe",
-      "layer_tags": [],
-      "name": null,
-      "refs_in": [],
-      "refs_out": [
-        "electrical_energy",
-        "metal_alloy_bulk",
-        "oxygen_extraction_molten_regolith_electrolysis_v0",
-        "oxygen_gas",
-        "regolith_coarse_fraction",
-        "regolith_crushing_grinding_v0",
-        "regolith_fine_fraction",
-        "regolith_lunar_mare",
-        "regolith_mining_simple_v0",
-        "regolith_powder",
-        "regolith_screening_sieving_v0"
-      ],
-      "status": "defined"
-    },
     "recipe_metal_casting_blank_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/metal_casting_blank_v0.yaml",
@@ -73781,10 +73747,10 @@
         "cast_metal_parts",
         "casting_mold_set",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "metal_casting_finished",
-        "mold_preparation_basic_v0"
+        "mold_preparation_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -73831,9 +73797,9 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "metal_ingot_v0"
+        "metal_ingot_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -73846,9 +73812,9 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_ingot",
-        "metal_ingot_cast_v0"
+        "metal_ingot_cast_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -74594,10 +74560,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mixer_motor_small",
-        "motor_coil_wound"
+        "motor_coil_wound",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -74845,9 +74811,9 @@
         "integration_test_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "molding_press",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -74872,11 +74838,11 @@
         "integration_test_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_platen_assembly_v0",
         "molding_press_v0",
         "motor_assembly_standard_v0",
+        "regolith_metal_crude",
         "steel_frame_molding_press_v0",
         "welded_assemblies",
         "welding_brazing_basic_v0"
@@ -74923,9 +74889,9 @@
         "integration_test_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "molding_press",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -74994,8 +74960,8 @@
       "refs_in": [],
       "refs_out": [
         "melting_basic_v0",
-        "metal_alloy_bulk",
-        "molten_material_or_preform"
+        "molten_material_or_preform",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -75046,9 +75012,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "motion_gantry_basic"
+        "motion_gantry_basic",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -75087,13 +75053,13 @@
         "lamination_stamping_v0",
         "machining_finish_basic_v0",
         "magnet_wire_copper",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_assembly",
         "motor_coil_wound",
         "motor_final_assembly_v0",
         "motor_housing_steel",
         "motor_shaft_steel",
+        "regolith_metal_crude",
         "stator_rotor_lamination_set"
       ],
       "status": "defined"
@@ -75172,10 +75138,10 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
-        "motor_electric_medium"
+        "motor_electric_medium",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -75239,9 +75205,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "motor_housing_cast"
+        "motor_housing_cast",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -75826,7 +75792,6 @@
       "refs_in": [],
       "refs_out": [
         "carbon_monoxide",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "metal_ingot",
         "metal_sheet",
@@ -75834,6 +75799,7 @@
         "nickel_metal",
         "nickel_metal_pure",
         "nickel_sheet_rolling_v0",
+        "regolith_metal_crude",
         "rolling_basic_v0",
         "surface_finishing_v0"
       ],
@@ -76197,9 +76163,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "offgas_manifold",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -76552,9 +76518,9 @@
       "refs_in": [],
       "refs_out": [
         "electrical_energy",
-        "metal_alloy_bulk",
         "oxygen_extraction_molten_regolith_electrolysis_v0",
         "oxygen_gas",
+        "regolith_metal_crude",
         "regolith_powder"
       ],
       "status": "defined"
@@ -76670,9 +76636,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "packed_bed_distillation_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "wired_electrical_system"
@@ -76809,8 +76775,8 @@
         "bearing_set_small",
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
-        "metal_casting_basic_v0"
+        "metal_casting_basic_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -76871,9 +76837,9 @@
       "name": "Mill shell generic production",
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "mill_shell_generic"
+        "mill_shell_generic",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -76887,8 +76853,8 @@
       "refs_in": [],
       "refs_out": [
         "cast_metal_parts",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "support_frame_welded",
         "welding_brazing_basic_v0"
       ],
@@ -76907,9 +76873,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "part_to_clean"
+        "part_to_clean",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -76926,9 +76892,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "part_to_clean"
+        "part_to_clean",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -76941,10 +76907,10 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "metal_scrap",
         "prepared_mold",
+        "regolith_metal_crude",
         "trunnion_supports"
       ],
       "status": "defined"
@@ -77356,9 +77322,9 @@
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "motor_general_5kw",
         "pellet_press",
+        "regolith_metal_crude",
         "welding_brazing_basic_v0"
       ],
       "status": "defined"
@@ -77427,11 +77393,11 @@
         "binder_material",
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
         "permanent_mold_steel_set",
         "prepared_mold",
+        "regolith_metal_crude",
         "silica_purified"
       ],
       "status": "defined"
@@ -77926,9 +77892,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "plastic_extruder_v0",
+        "regolith_metal_crude",
         "steel_frame_welded",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -78318,8 +78284,8 @@
         "drying_basic_v0",
         "grinding_basic_v0",
         "inspection_basic_v0",
-        "metal_alloy_bulk",
         "powder_feedstock",
+        "regolith_metal_crude",
         "screening_basic_v0"
       ],
       "status": "defined"
@@ -78333,8 +78299,8 @@
       "name": "Recipe for powder_metal_or_ceramic",
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "powder_metal_or_ceramic",
+        "regolith_metal_crude",
         "sizing_grinding_basic_v0"
       ],
       "status": "defined"
@@ -78383,9 +78349,9 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "power_bus_high_current"
+        "power_bus_high_current",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -78498,9 +78464,9 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "power_conditioning_module"
+        "power_conditioning_module",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -78736,9 +78702,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "power_storage_pack",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -78859,9 +78825,9 @@
         "electronic_components_set",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "power_supply_dc_controlled"
+        "power_supply_dc_controlled",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -78975,9 +78941,9 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "power_supply_unit_v0"
+        "power_supply_unit_v0",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79047,9 +79013,9 @@
         "lathe_leadscrew_and_feed_system",
         "lathe_motor_and_drive",
         "lathe_spindle_and_bearings",
-        "metal_alloy_bulk",
         "precision_grinding_and_scraping_v0",
-        "precision_lathe"
+        "precision_lathe",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79278,9 +79244,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "press_frame_medium"
+        "press_frame_medium",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79297,9 +79263,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "press_frame_small"
+        "press_frame_small",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79322,10 +79288,10 @@
         "hydraulic_system_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "piping_components",
         "press_hydraulic",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "wiring_and_electronics_integration_v0"
@@ -79351,10 +79317,10 @@
         "hydraulic_system_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "piping_components",
         "press_hydraulic",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "wiring_and_electronics_integration_v0"
@@ -79373,10 +79339,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
-        "press_platen_set_medium"
+        "press_platen_set_medium",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79392,10 +79358,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
-        "press_platen_set_small"
+        "press_platen_set_small",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79411,10 +79377,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
-        "press_platen_set"
+        "press_platen_set",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79430,10 +79396,10 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
-        "press_platen_steel"
+        "press_platen_steel",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79453,10 +79419,10 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
-        "press_ram_set"
+        "press_ram_set",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -79589,10 +79555,10 @@
         "fastener_kit_small",
         "machined_steel_part_precision",
         "machining_precision_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "pressure_relief_valve",
         "pressure_testing_v0",
+        "regolith_metal_crude",
         "seal_rubber_bearing",
         "spring_compression_small"
       ],
@@ -80123,10 +80089,10 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
-        "quench_rack_and_baskets"
+        "quench_rack_and_baskets",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -80163,10 +80129,10 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mixer_motor_small",
         "quenchant_circulation_pump",
+        "regolith_metal_crude",
         "seal_rubber_bearing"
       ],
       "status": "defined"
@@ -80203,9 +80169,9 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "radiator_panel_set",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -80243,10 +80209,10 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
-        "ratchet_mechanism"
+        "ratchet_mechanism",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -80294,9 +80260,9 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
-        "raw_metal_block"
+        "raw_metal_block",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },
@@ -80345,9 +80311,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "reactor_heating_cooling_system_v0",
+        "regolith_metal_crude",
         "steel_scrap_v0",
         "temperature_control_system_v0",
         "welded_assemblies",
@@ -80392,10 +80358,10 @@
       "refs_out": [
         "assembly_basic_v0",
         "cast_metal_parts",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "reactor_vessel_mre",
         "regolith_fine_fraction",
+        "regolith_metal_crude",
         "sintered_shapes",
         "sintering_and_hot_pressing_v0",
         "welded_assemblies",
@@ -80504,10 +80470,10 @@
       "refs_out": [
         "assembly_basic_v0",
         "cast_metal_parts",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "reduction_furnace_shell",
         "refractory_castable",
+        "regolith_metal_crude",
         "sintered_shapes",
         "sintering_and_hot_pressing_v0",
         "thermal_insulation_high_temp",
@@ -80555,10 +80521,10 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "refining_furnace",
         "refractory_lining_set",
+        "regolith_metal_crude",
         "temperature_controller_basic",
         "welded_assemblies",
         "welding_brazing_basic_v0",
@@ -80840,6 +80806,29 @@
       "refs_out": [
         "regolith_lunar_polar",
         "regolith_mining_polar_psc_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_regolith_metal_crude_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_regolith_metal_crude_v0.yaml",
+      "id": "recipe_regolith_metal_crude_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "electrical_energy",
+        "oxygen_extraction_molten_regolith_electrolysis_v0",
+        "oxygen_gas",
+        "regolith_coarse_fraction",
+        "regolith_crushing_grinding_v0",
+        "regolith_fine_fraction",
+        "regolith_lunar_mare",
+        "regolith_metal_crude",
+        "regolith_mining_simple_v0",
+        "regolith_powder",
+        "regolith_screening_sieving_v0"
       ],
       "status": "defined"
     },
@@ -81432,9 +81421,9 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mill_shell_generic",
+        "regolith_metal_crude",
         "roll_grinding_lathe_or_cylindrical_grinder_v0",
         "support_frame_welded",
         "trunnion_supports",
@@ -81675,8 +81664,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "rotor_shaft_medium"
       ],
       "status": "defined"
@@ -81693,7 +81682,7 @@
         "casting_basic_v0",
         "cut_parts",
         "machining_rough_v0",
-        "metal_alloy_bulk",
+        "regolith_metal_crude",
         "rough_part"
       ],
       "status": "defined"
@@ -81809,8 +81798,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "rover_wheel_assembly_v0"
       ],
       "status": "defined"
@@ -81890,8 +81879,8 @@
         "machine_assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "sabatier_reactor_co2_reduction_v0",
         "sealing_and_assembly_basic_v0",
         "welded_assemblies",
@@ -82118,6 +82107,25 @@
         "machining_finish_basic_v0",
         "scara_robot_v0",
         "steel_frame_heavy"
+      ],
+      "status": "defined"
+    },
+    "recipe_screen_deck_basic_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_screen_deck_basic_isru_v0.yaml",
+      "id": "recipe_screen_deck_basic_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "cast_metal_parts",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "regolith_metal_crude",
+        "screen_deck_basic",
+        "welded_assemblies",
+        "welding_brazing_basic_v0"
       ],
       "status": "defined"
     },
@@ -82536,8 +82544,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "separator_frame",
         "welded_assemblies",
         "welding_brazing_basic_v0"
@@ -82605,9 +82613,9 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "rough_part",
         "shaft_and_bearing_set",
         "steel_bar_raw",
@@ -82724,6 +82732,25 @@
         "steel_bar_raw",
         "welded_fabrications",
         "welding_and_fabrication_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_sheet_metal_or_structural_steel_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_sheet_metal_or_structural_steel_isru_v0.yaml",
+      "id": "recipe_sheet_metal_or_structural_steel_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "cast_metal_parts",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "plate_rolling_basic_v0",
+        "regolith_metal_crude",
+        "sheet_metal_or_structural_steel",
+        "steel_plate_or_sheet"
       ],
       "status": "defined"
     },
@@ -83206,8 +83233,8 @@
       "name": "Recipe for silver ingot v0",
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "silver_ingot"
       ],
       "status": "defined"
@@ -83693,8 +83720,8 @@
       "refs_in": [],
       "refs_out": [
         "melting_basic_v0",
-        "metal_alloy_bulk",
         "molten_material_or_preform",
+        "regolith_metal_crude",
         "solder_paste_casting_v0",
         "solder_paste_tin_lead"
       ],
@@ -83934,9 +83961,9 @@
         "finished_part_deburred",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "spindle_assembly_precision"
       ],
       "status": "defined"
@@ -83980,10 +84007,10 @@
         "lamination_stack_clamped",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
         "permanent_magnet_array",
+        "regolith_metal_crude",
         "spindle_drive_motor_small"
       ],
       "status": "defined"
@@ -84006,10 +84033,10 @@
         "machined_metal_block_v0",
         "machined_steel_part_precision",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_housing_steel",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "seal_mechanical_rotary",
         "shaft_steel_machined",
         "spindle_head_basic",
@@ -84102,9 +84129,9 @@
         "coil_winding_motor_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "spinning_drive_motor"
       ],
       "status": "defined"
@@ -84297,6 +84324,7 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "electrical_steel_sheet",
         "lamination_stamping_v0",
         "stator_rotor_lamination_set"
       ],
@@ -84346,6 +84374,25 @@
         "steel_bar_stock",
         "steel_bar_stock_rolling_v0",
         "steel_stock_bar_or_billet"
+      ],
+      "status": "defined"
+    },
+    "recipe_steel_beam_i_section_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_steel_beam_i_section_isru_v0.yaml",
+      "id": "recipe_steel_beam_i_section_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "cast_metal_parts",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "plate_rolling_basic_v0",
+        "regolith_metal_crude",
+        "steel_beam_i_section",
+        "steel_plate_or_sheet"
       ],
       "status": "defined"
     },
@@ -84559,8 +84606,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "steel_frame_molding_press_v0"
       ],
       "status": "defined"
@@ -84832,6 +84879,21 @@
       ],
       "status": "defined"
     },
+    "recipe_steel_stock_bar_or_billet_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_steel_stock_bar_or_billet_isru_v0.yaml",
+      "id": "recipe_steel_stock_bar_or_billet_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "regolith_metal_crude",
+        "rolling_basic_v0",
+        "steel_stock_bar_or_billet"
+      ],
+      "status": "defined"
+    },
     "recipe_steel_stock_bar_or_billet_v0": {
       "aliases": [],
       "defined_in": "kb/recipes/recipe_steel_stock_bar_or_billet_v0.yaml",
@@ -84898,8 +84960,8 @@
         "finishing_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "steel_workbench_heavy",
         "welded_assemblies",
         "welding_brazing_basic_v0"
@@ -85020,8 +85082,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "storage_enclosure",
         "welded_assemblies",
         "welding_brazing_basic_v0"
@@ -85180,6 +85242,23 @@
         "structural_frame_small",
         "welded_assemblies",
         "welding_brazing_basic_v0"
+      ],
+      "status": "defined"
+    },
+    "recipe_structural_frame_steel_isru_v0": {
+      "aliases": [],
+      "defined_in": "kb/recipes/recipe_structural_frame_steel_isru_v0.yaml",
+      "id": "recipe_structural_frame_steel_isru_v0",
+      "kind": "recipe",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [],
+      "refs_out": [
+        "cast_metal_parts",
+        "machining_finish_basic_v0",
+        "metal_casting_basic_v0",
+        "regolith_metal_crude",
+        "structural_frame_steel"
       ],
       "status": "defined"
     },
@@ -85395,9 +85474,7 @@
         "fastener_kit_large",
         "grinding_spindle_assembly",
         "machine_base_large",
-        "machining_finish_basic_v0",
         "magnetic_chuck_surface_grinder",
-        "metal_casting_basic_v0",
         "power_conditioning_module",
         "precision_alignment_and_leveling_v0",
         "sensor_suite_general",
@@ -85572,9 +85649,9 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "table_drive_assembly"
       ],
       "status": "defined"
@@ -85593,9 +85670,9 @@
         "finishing_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "precision_grinding_basic_v0",
+        "regolith_metal_crude",
         "rough_part",
         "table_top_t_slot",
         "unfinished_part"
@@ -86020,8 +86097,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "tension_roller_set"
       ],
       "status": "defined"
@@ -86591,8 +86668,8 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_ingot_cast_v0",
+        "regolith_metal_crude",
         "tin_metal_pure"
       ],
       "status": "defined"
@@ -86695,8 +86772,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "toggle_mechanism_set"
       ],
       "status": "defined"
@@ -86726,7 +86803,7 @@
       "refs_in": [],
       "refs_out": [
         "assembly_basic_v0",
-        "steel_bar_stock",
+        "steel_stock_bar_or_billet",
         "tool_set_general"
       ],
       "status": "defined"
@@ -86781,14 +86858,13 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "aluminum_wire",
         "assembly_basic_v0",
         "cast_metal_parts",
-        "electrical_wire_and_connectors",
-        "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "torch_assembly"
       ],
       "status": "defined"
@@ -87846,8 +87922,8 @@
         "formed_sheet_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "sheet_metal_fabrication_v0",
         "sheet_metal_or_structural_steel",
         "vacuum_blower_industrial"
@@ -87948,8 +88024,8 @@
         "fastener_kit_small",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "vacuum_pump_basic"
       ],
       "status": "defined"
@@ -87988,8 +88064,8 @@
         "assembly_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "vacuum_pump_system_miniature"
       ],
       "status": "defined"
@@ -88165,8 +88241,8 @@
       "name": "Recipe for valve body cast rough v0",
       "refs_in": [],
       "refs_out": [
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "valve_body_cast_rough_v0"
       ],
       "status": "defined"
@@ -88400,9 +88476,9 @@
         "coil_insulation_material",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "spool_winding_basic_v0",
         "vibration_motor_set"
       ],
@@ -88469,8 +88545,8 @@
         "heat_treatment_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "vise_machinist"
       ],
       "status": "defined"
@@ -88831,8 +88907,8 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "weight_storage_analog_v0"
       ],
       "status": "defined"
@@ -88849,8 +88925,8 @@
         "cast_metal_parts",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0"
       ],
@@ -88867,8 +88943,8 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welded_fabrications",
         "welding_brazing_basic_v0"
@@ -88943,16 +89019,16 @@
       "name": null,
       "refs_in": [],
       "refs_out": [
+        "aluminum_wire",
         "assembly_basic_v0",
         "cast_metal_parts",
-        "copper_wire_magnet",
         "electronic_components_set",
         "fastener_kit_medium",
         "machined_part_raw",
         "machining_finish_basic_v0",
         "metal_casting_basic_v0",
-        "metal_feedstock",
         "motor_coil_wound",
+        "regolith_metal_crude",
         "spool_winding_basic_v0",
         "welding_power_supply_unit"
       ],
@@ -89121,8 +89197,8 @@
         "inspection_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "wheel_set_industrial"
       ],
       "status": "defined"
@@ -89324,7 +89400,7 @@
         "heat_treatment_basic_v0",
         "machined_part_raw",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
+        "regolith_metal_crude",
         "wire_crimping_tools"
       ],
       "status": "defined"
@@ -89380,9 +89456,9 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
         "mold_preparation_basic_v0",
+        "regolith_metal_crude",
         "wire_tensioning_mechanism"
       ],
       "status": "defined"
@@ -89517,8 +89593,8 @@
       "refs_out": [
         "cast_metal_parts",
         "machining_finish_basic_v0",
-        "metal_alloy_bulk",
         "metal_casting_basic_v0",
+        "regolith_metal_crude",
         "welded_assemblies",
         "welding_brazing_basic_v0",
         "workbench_frame_heavy"
@@ -90146,8 +90222,8 @@
         "coarse_powder_production_v0",
         "regolith_crushing_grinding_v0",
         "regolith_screening_sieving_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_coarse_powder_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_v0",
         "recipe_sintered_shapes_v0",
         "recipe_reduced_metal_oxides_v0",
@@ -90238,7 +90314,7 @@
       ],
       "name": "Regolith crushing and grinding",
       "refs_in": [
-        "recipe_metal_alloy_bulk_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_v0",
         "recipe_reduced_metal_oxides_v0"
       ],
@@ -90307,7 +90383,6 @@
         "regolith_screening_sieving_v0",
         "sintering_and_hot_pressing_v0",
         "recipe_basalt_fiber_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_part_bearing_set_heavy_v0",
         "recipe_part_liner_set_abrasion_resistant_v0",
         "recipe_acid_resistant_lining_v0",
@@ -90320,6 +90395,7 @@
         "recipe_parabolic_mirror_segment_v0",
         "recipe_prepared_mold_v0",
         "recipe_reactor_vessel_mre_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_v0",
         "recipe_sintered_shapes_v0",
         "recipe_sintering_furnace_shell_v0",
@@ -90430,7 +90506,6 @@
         "regolith_pellet_pressing_process_v0",
         "regolith_screening_sieving_v0",
         "waste_generation_basic_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_basalt_aggregate_v0",
         "recipe_component_material_a_v0",
         "recipe_crushed_ore_v0",
@@ -90447,6 +90522,7 @@
         "recipe_raw_formation_control_material_v0_v0",
         "recipe_regolith_crushed_v0",
         "recipe_regolith_lunar_mare_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_pellet_dust_v0",
         "recipe_regolith_pellet_v0",
         "recipe_regolith_powder_v0",
@@ -90469,6 +90545,209 @@
       "name": "Polar lunar regolith",
       "refs_in": [
         "recipe_regolith_lunar_polar_v0"
+      ],
+      "refs_out": [],
+      "status": "defined"
+    },
+    "regolith_metal_crude": {
+      "aliases": [],
+      "defined_in": "kb/items/materials/regolith_metal_crude.yaml",
+      "id": "regolith_metal_crude",
+      "kind": "material",
+      "layer_tags": [],
+      "name": "Crude regolith metal alloy",
+      "refs_in": [
+        "bom_press_ram_set_v0",
+        "alloying_basic_v0",
+        "brazing_alloy_synthesis_v0",
+        "bronze_alloy_casting_v0",
+        "burner_or_heater_casting_fabrication_v0",
+        "cooling_loop_basic_fabrication_v0",
+        "fastener_kit_small_fabrication_v0",
+        "liquid_sodium_receiver_fabrication_v0",
+        "melting_basic_v0",
+        "metal_casting_basic_v0",
+        "metal_ingot_cast_v0",
+        "oxygen_extraction_molten_regolith_electrolysis_v0",
+        "power_conditioning_module_fabrication_v0",
+        "wire_drawing_aluminum_v0",
+        "recipe_cutting_tool_set_basic_v0",
+        "recipe_magnetic_separator_drum_body_v0",
+        "recipe_metal_casting_finished_v0",
+        "recipe_oxygen_gas_v0",
+        "recipe_part_bearing_set_small_v0",
+        "recipe_part_mill_shell_generic_v0",
+        "recipe_part_support_frame_welded_v0",
+        "recipe_part_trunnion_supports_v0",
+        "recipe_agitation_pump_small_v0",
+        "recipe_agitation_system_basic_v0",
+        "recipe_air_tank_small_v0",
+        "recipe_aluminum_wire_v0",
+        "recipe_amari_neural_field_hardware_v0",
+        "recipe_anvil_and_die_set_v0",
+        "recipe_anvil_block_basic_v0",
+        "recipe_assembly_station_v0",
+        "recipe_bearing_race_set_v0",
+        "recipe_bearing_set_heavy_v0",
+        "recipe_bearing_set_medium_v0",
+        "recipe_bearing_set_v0",
+        "recipe_belt_and_pulley_set_v0",
+        "recipe_brazing_furnace_v0_v0",
+        "recipe_bronze_block_material_v0",
+        "recipe_burner_or_heater_casting_local_v1",
+        "recipe_burner_or_heater_casting_v0",
+        "recipe_cast_part_raw_v0",
+        "recipe_casting_furnace_shell_v0",
+        "recipe_charging_system_v0",
+        "recipe_chemical_bath_heaters_import_v0",
+        "recipe_chemical_bath_heaters_v0",
+        "recipe_circulation_pump_coolant_v0",
+        "recipe_compressor_pump_small_v0",
+        "recipe_coolant_loop_basic_v0",
+        "recipe_cryogenic_chiller_provider_v0_v0",
+        "recipe_depth_stop_mechanism_v0",
+        "recipe_dies_v0",
+        "recipe_drill_string_steel_isru_v0",
+        "recipe_drive_motor_medium_v0",
+        "recipe_drive_motor_small_v0",
+        "recipe_endplate_set_motor_v0",
+        "recipe_extruder_head_basic_v0",
+        "recipe_fastener_kit_large_v0",
+        "recipe_fastener_kit_large_v1",
+        "recipe_ffc_reactor_enhanced_v0",
+        "recipe_ffc_reactor_unit_v0",
+        "recipe_fittings_and_valves_v0",
+        "recipe_flywheel_medium_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
+        "recipe_forging_press_v0",
+        "recipe_furnace_shell_insulated_v0",
+        "recipe_furnace_shell_refractory_v0",
+        "recipe_gantry_axes_set_v0",
+        "recipe_gas_blower_basic_v0",
+        "recipe_gas_handling_system_v0",
+        "recipe_gas_loop_piping_set_v0",
+        "recipe_gas_supply_regulator_import_v0",
+        "recipe_gas_supply_regulator_v0",
+        "recipe_gauge_block_set_v0",
+        "recipe_gearbox_heavy_duty_v0",
+        "recipe_generic_chemical_reactor_v0",
+        "recipe_grinding_spindle_assembly_v0",
+        "recipe_ground_clamp_and_cables_v0",
+        "recipe_hammer_drive_motor_v0",
+        "recipe_hammer_head_basic_v0",
+        "recipe_hand_pump_hydraulic_v0",
+        "recipe_hauler_v0_alias_v0",
+        "recipe_heat_pipe_solar_receiver_advanced_v0",
+        "recipe_heat_pipe_solar_receiver_v0",
+        "recipe_heat_pipes_or_loop_v0",
+        "recipe_heat_treatment_furnace_v0",
+        "recipe_heating_element_set_high_temp_v0",
+        "recipe_helical_gear_set_v0",
+        "recipe_high_temp_power_supply_unit_v0",
+        "recipe_hpht_furnace_v0",
+        "recipe_hydraulic_boom_assembly_v0",
+        "recipe_hydraulic_cylinder_body_cast_v0",
+        "recipe_hydraulic_cylinder_medium_v0",
+        "recipe_hydraulic_cylinder_press_v0",
+        "recipe_jaw_plates_set_v0",
+        "recipe_lab_console_unit_v0",
+        "recipe_lab_v0_lab_v0",
+        "recipe_lab_v1",
+        "recipe_liquid_sodium_receiver_v0_v0",
+        "recipe_lubrication_pack_basic_v0",
+        "recipe_machine_base_large_v0",
+        "recipe_machine_drill_press_v0",
+        "recipe_machine_frame_medium_v0",
+        "recipe_machine_vacuum_pump_small_v0",
+        "recipe_magnetic_chuck_surface_grinder_v0",
+        "recipe_metal_ingot_v0",
+        "recipe_metal_ingot_v1",
+        "recipe_mixer_motor_small_v0",
+        "recipe_molding_press_unversioned_v0",
+        "recipe_molding_press_v0",
+        "recipe_molding_press_v1",
+        "recipe_molten_material_or_preform_v0",
+        "recipe_motion_gantry_basic_v0",
+        "recipe_motor_assembly_v0",
+        "recipe_motor_electric_medium_v0",
+        "recipe_motor_housing_cast_v0",
+        "recipe_nickel_sheet_rolling_v0",
+        "recipe_offgas_manifold_v0",
+        "recipe_packed_bed_distillation_v0",
+        "recipe_part_to_clean_import_v0",
+        "recipe_part_to_clean_v0",
+        "recipe_pellet_press_v1",
+        "recipe_permanent_mold_steel_set_v0",
+        "recipe_plastic_extruder_v0",
+        "recipe_powder_feedstock_v0",
+        "recipe_powder_metal_or_ceramic_v0",
+        "recipe_power_bus_high_current_v0",
+        "recipe_power_conditioning_module_v0",
+        "recipe_power_storage_pack_v0",
+        "recipe_power_supply_dc_controlled_v0",
+        "recipe_power_supply_unit_v0",
+        "recipe_precision_lathe_v0",
+        "recipe_press_frame_medium_v0",
+        "recipe_press_frame_small_v0",
+        "recipe_press_hydraulic_v0",
+        "recipe_press_hydraulic_v1",
+        "recipe_press_platen_set_medium_v0",
+        "recipe_press_platen_set_small_v0",
+        "recipe_press_platen_set_v0",
+        "recipe_press_platen_steel_v0",
+        "recipe_press_ram_set_v0",
+        "recipe_pressure_relief_valve_v0",
+        "recipe_quench_rack_and_baskets_v0",
+        "recipe_quenchant_circulation_pump_v0",
+        "recipe_radiator_panel_set_v0",
+        "recipe_ratchet_mechanism_v0",
+        "recipe_raw_metal_block_v0",
+        "recipe_reactor_heating_cooling_system_v0",
+        "recipe_reactor_vessel_mre_v0",
+        "recipe_reduction_furnace_shell_v0",
+        "recipe_refining_furnace_v1",
+        "recipe_regolith_metal_crude_v0",
+        "recipe_roll_grinding_lathe_or_cylindrical_grinder_v0",
+        "recipe_rotor_shaft_medium_v0",
+        "recipe_rough_part_v0",
+        "recipe_rover_wheel_assembly_v0",
+        "recipe_sabatier_reactor_co2_reduction_v0",
+        "recipe_screen_deck_basic_isru_v0",
+        "recipe_separator_frame_v0",
+        "recipe_shaft_and_bearing_set_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
+        "recipe_silver_ingot_v0",
+        "recipe_solder_paste_tin_lead_v0",
+        "recipe_spindle_assembly_precision_v0",
+        "recipe_spindle_drive_motor_small_v0",
+        "recipe_spindle_head_basic_v0",
+        "recipe_spinning_drive_motor_v0",
+        "recipe_steel_beam_i_section_isru_v0",
+        "recipe_steel_frame_molding_press_v0",
+        "recipe_steel_stock_bar_or_billet_isru_v0",
+        "recipe_steel_workbench_heavy_v0",
+        "recipe_storage_enclosure_v0",
+        "recipe_structural_frame_steel_isru_v0",
+        "recipe_table_drive_assembly_v0",
+        "recipe_table_top_t_slot_v0",
+        "recipe_tension_roller_set_v1",
+        "recipe_tin_metal_pure_v0",
+        "recipe_toggle_mechanism_set_v0",
+        "recipe_torch_assembly_v0",
+        "recipe_vacuum_blower_industrial_v0",
+        "recipe_vacuum_pump_basic_v0",
+        "recipe_vacuum_pump_system_miniature_v0",
+        "recipe_valve_body_cast_rough_v0",
+        "recipe_vibration_motor_set_v0",
+        "recipe_vise_machinist_v0",
+        "recipe_weight_storage_analog_v0",
+        "recipe_welded_assemblies_v0",
+        "recipe_welded_fabrications_v0",
+        "recipe_welding_power_supply_unit_v0",
+        "recipe_wheel_set_industrial_v0",
+        "recipe_wire_crimping_tools_v0",
+        "recipe_wire_tensioning_mechanism_v0",
+        "recipe_workbench_frame_heavy_v0"
       ],
       "refs_out": [],
       "status": "defined"
@@ -90547,8 +90826,8 @@
       "layer_tags": [],
       "name": "Simple Regolith Surface Mining",
       "refs_in": [
-        "recipe_metal_alloy_bulk_v0",
         "recipe_regolith_lunar_mare_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_v0",
         "recipe_reduced_metal_oxides_v0"
       ],
@@ -90649,7 +90928,6 @@
         "troilite_concentration_v0",
         "recipe_ilmenite_concentrate_v0",
         "recipe_magnetic_concentrate_v0",
-        "recipe_metal_alloy_bulk_v0",
         "recipe_non_magnetic_tailings_v0",
         "recipe_oxygen_gas_v0",
         "recipe_calcium_oxide_v0",
@@ -90661,6 +90939,7 @@
         "recipe_plagioclase_feldspar_v0",
         "recipe_pyroxene_concentrate_v0",
         "recipe_regolith_concrete_polymer_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_hcl_leached_v0",
         "recipe_regolith_powder_hcl_treated_v0",
         "recipe_regolith_powder_v0",
@@ -90715,9 +90994,9 @@
       ],
       "name": "Regolith screening and sieving",
       "refs_in": [
-        "recipe_metal_alloy_bulk_v0",
         "recipe_anorthite_ore_v0",
         "recipe_plagioclase_feldspar_v0",
+        "recipe_regolith_metal_crude_v0",
         "recipe_regolith_powder_v0",
         "recipe_sintered_shapes_v0",
         "recipe_reduced_metal_oxides_v0",
@@ -91468,6 +91747,7 @@
         "recipe_steel_bar_raw_v0",
         "recipe_steel_plate_or_sheet_v0",
         "recipe_steel_plate_raw_v0",
+        "recipe_steel_stock_bar_or_billet_isru_v0",
         "recipe_steel_stock_bar_or_billet_v0"
       ],
       "refs_out": [
@@ -92230,6 +92510,7 @@
         "bom_vibrating_screen_v0",
         "recipe_machine_vibrating_screen_v0",
         "recipe_metal_powder_sieving_system_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_screen_deck_basic_v0"
       ],
       "refs_out": [],
@@ -92871,6 +93152,7 @@
         "recipe_machine_leak_test_equipment_v0",
         "recipe_machine_loader_small_v0",
         "recipe_machine_magnetic_separator_drum_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_machine_mre_reactor_v0",
         "recipe_machine_power_hammer_or_press_v0",
         "recipe_machine_power_storage_bank_v0",
@@ -93052,6 +93334,7 @@
         "flywheel_motor_generator_assembly_v0",
         "recipe_flywheel_motor_generator_v0",
         "recipe_forge_or_induction_heater_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forge_or_induction_heater_v0_v0",
         "recipe_shaft_and_bearing_set_v0",
         "recipe_transformer_step_down_high_current_v0",
@@ -93424,7 +93707,6 @@
       "name": "Sheet metal forming (3mm steel to chassis sheet)",
       "refs_in": [
         "recipe_cooling_water_jacket_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_impeller_assembly_welded_v0",
         "recipe_steel_chassis_sheet_metal_v0"
       ],
@@ -93532,6 +93814,7 @@
         "recipe_screen_deck_basic_v0",
         "recipe_screening_equipment_v0",
         "recipe_screw_conveyor_assembly_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
         "recipe_sheet_metal_or_structural_steel_v0",
         "recipe_soldering_iron_base_assembly_v0",
         "recipe_soldering_station_v0",
@@ -95659,6 +95942,7 @@
         "bom_milling_machine_v0_v0",
         "bom_punch_press_drill_v0",
         "recipe_drill_press_v0",
+        "recipe_machine_milling_machine_general_v0",
         "recipe_spindle_head_basic_v0"
       ],
       "refs_out": [],
@@ -96140,17 +96424,18 @@
     },
     "stator_rotor_lamination_set": {
       "aliases": [],
-      "defined_in": "kb/items/parts/stator_rotor_lamination_set.yaml",
+      "defined_in": "kb/items/materials/stator_rotor_lamination_set.yaml",
       "id": "stator_rotor_lamination_set",
-      "kind": "part",
+      "kind": "material",
       "layer_tags": [],
-      "name": "Stator-Rotor Lamination Set",
+      "name": "Stator and rotor lamination set",
       "refs_in": [
         "drive_motor_medium_assembly_v0",
         "lamination_stamping_v0",
         "motor_final_assembly_v0",
         "recipe_compressor_motor_small_import_v0",
         "recipe_compressor_motor_small_v0",
+        "recipe_drive_motor_medium_assembly_only_v0",
         "recipe_drive_motor_medium_v1",
         "recipe_electric_motor_3_phase_5kw_v0",
         "recipe_electric_motor_small_v0",
@@ -96311,7 +96596,6 @@
         "recipe_tensioner_frame_welded_v0",
         "recipe_threading_needle_mechanism_v0",
         "recipe_tool_holder_machined_v0",
-        "recipe_tool_set_general_v0",
         "recipe_torque_wrench_set_v0",
         "recipe_track_assembly_crawler_v0",
         "recipe_tracking_drive_assembly_v0",
@@ -96358,6 +96642,7 @@
         "recipe_loom_or_knitting_machine_v0",
         "recipe_metal_shear_or_saw_v0",
         "recipe_mixer_frame_small_v0",
+        "recipe_steel_beam_i_section_isru_v0",
         "recipe_structural_steel_frame_v0"
       ],
       "refs_out": [],
@@ -96454,7 +96739,6 @@
         "bom_radio_transmitter_vacuum_tube_v0",
         "sheet_metal_forming_process_v0",
         "recipe_cooling_water_jacket_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_steel_chassis_sheet_metal_v0"
       ],
       "refs_out": [],
@@ -96895,8 +97179,10 @@
         "recipe_sand_casting_flask_set_v0",
         "recipe_seal_mechanical_rotary_v0",
         "recipe_seal_set_high_temp_v0",
+        "recipe_sheet_metal_or_structural_steel_isru_v0",
         "recipe_sheet_metal_or_structural_steel_v0",
         "recipe_spinneret_heating_module_v0",
+        "recipe_steel_beam_i_section_isru_v0",
         "recipe_steel_frame_heavy_v0",
         "recipe_steel_plate_or_sheet_v0",
         "recipe_steel_strip_thin_v0",
@@ -97251,7 +97537,6 @@
         "recipe_discharge_chute_steel_v0",
         "recipe_electrolysis_cell_unit_shell_v0",
         "recipe_electrolysis_cell_unit_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_impeller_assembly_welded_v0",
         "recipe_impeller_blades_set_v0",
         "recipe_kiln_basic_v0",
@@ -97364,11 +97649,14 @@
         "recipe_electrical_feedthrough_vacuum_v0",
         "recipe_excavator_bucket_v0",
         "recipe_expansion_valve_cryogenic_v0",
+        "recipe_fastener_kit_medium_v0",
+        "recipe_fastener_kit_small_v0",
         "recipe_gas_cylinder_mount_v0",
         "recipe_gas_scrubbing_unit_v0",
         "recipe_general_purpose_fastener_v0",
         "recipe_glove_ports_and_gloves_v0",
         "recipe_gravity_separator_v0",
+        "recipe_hand_tools_basic_v0",
         "recipe_hand_tools_electrical_v0",
         "recipe_hose_end_fittings_v0",
         "recipe_hydraulic_press_small_v0",
@@ -97435,7 +97723,6 @@
         "recipe_crimping_die_set_v0",
         "recipe_deburring_tools_v0",
         "recipe_dispensing_nozzle_v0",
-        "recipe_fastener_kit_medium_v0",
         "recipe_fiber_collection_spool_v0",
         "recipe_glass_forming_tools_v0",
         "recipe_lathe_leadscrew_and_feed_system_v0",
@@ -97447,7 +97734,9 @@
         "recipe_rolling_mill_rolls_set_import_v0",
         "recipe_saw_or_cutting_tool_v0",
         "recipe_steel_bar_stock_v0",
+        "recipe_steel_stock_bar_or_billet_isru_v0",
         "recipe_steel_stock_bar_or_billet_v0",
+        "recipe_tool_set_general_v0",
         "recipe_tool_station_frame_v0",
         "recipe_vibration_drive_module_v0",
         "recipe_vise_mounting_hardware_v0",
@@ -97984,6 +98273,7 @@
         "recipe_drilling_equipment_v0",
         "recipe_extraction_unit_v0",
         "recipe_pete_photon_enhanced_thermionic_v0",
+        "recipe_structural_frame_steel_isru_v0",
         "recipe_structural_frame_steel_v0"
       ],
       "refs_out": [],
@@ -102754,6 +103044,19 @@
       ],
       "status": "defined"
     },
+    "volatiles_off_gas": {
+      "aliases": [],
+      "defined_in": null,
+      "id": "volatiles_off_gas",
+      "kind": "unknown",
+      "layer_tags": [],
+      "name": null,
+      "refs_in": [
+        "recipe_graphite_powder_from_carbon_v0"
+      ],
+      "refs_out": [],
+      "status": "referenced_only"
+    },
     "voltage_regulation_circuit": {
       "aliases": [],
       "defined_in": "kb/items/parts/voltage_regulation_circuit.yaml",
@@ -103294,6 +103597,7 @@
         "recipe_ffc_reactor_enhanced_v0",
         "recipe_ffc_reactor_unit_v0",
         "recipe_fittings_and_valves_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forging_press_v0",
         "recipe_frame_and_supports_basic_v0",
         "recipe_furnace_basic_v0",
@@ -103347,6 +103651,7 @@
         "recipe_rolling_mill_v0",
         "recipe_rolling_mill_v1",
         "recipe_sabatier_reactor_co2_reduction_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_screen_deck_basic_v0",
         "recipe_sealing_equipment_v0",
         "recipe_separator_frame_v0",
@@ -103748,6 +104053,7 @@
         "recipe_enclosure_steel_small_v0",
         "recipe_ffc_reactor_enhanced_v0",
         "recipe_ffc_reactor_unit_v0",
+        "recipe_forge_or_induction_heater_v0_isru",
         "recipe_forging_press_v0",
         "recipe_furnace_shell_refractory_v0",
         "recipe_furnace_v0",
@@ -103797,6 +104103,7 @@
         "recipe_rolling_mill_v0",
         "recipe_rolling_mill_v1",
         "recipe_sabatier_reactor_co2_reduction_v0",
+        "recipe_screen_deck_basic_isru_v0",
         "recipe_separator_frame_v0",
         "recipe_sintering_furnace_shell_v0",
         "recipe_steel_drum_v0",
@@ -104303,7 +104610,6 @@
         "recipe_formation_power_modules_import_v0",
         "recipe_formation_power_modules_v0",
         "recipe_furnace_chamber_equipped_v0",
-        "recipe_ground_clamp_and_cables_v0",
         "recipe_heating_element_soldering_v0",
         "recipe_heating_furnace_module_v0",
         "recipe_linear_actuator_precision_v0",
@@ -104436,9 +104742,9 @@
         "recipe_aluminum_wire_v0"
       ],
       "refs_out": [
-        "aluminum_alloy_ingot",
         "aluminum_wire",
-        "metal_scrap"
+        "metal_scrap",
+        "regolith_metal_crude"
       ],
       "status": "defined"
     },

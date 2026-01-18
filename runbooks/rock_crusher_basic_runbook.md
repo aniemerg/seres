@@ -18,96 +18,6 @@ Goal: build `rock_crusher_basic` with >50% ISRU mass by producing all
     message: "Simulation reset. Starting rock crusher basic runbook."
 ```
 
-## Baseline import + assembly
-
-Commentary: import required tooling and all `steel_plate_raw` to validate the recipe
-once, then assemble a baseline rock crusher.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline assembly with imported steel plate."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_machine_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cutting_tools_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_treatment_furnace
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_tools_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: test_bench_electrical
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: steel_plate_raw
-    quantity: 530
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 1200
-    unit: kWh
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_rock_crusher_basic_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 2400
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline rock crusher assembly complete."
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Reset simulation for ISRU-focused build."
-- cmd: sim.reset
-  args:
-    sim-id: rock_crusher_basic_runbook
-```
-
 ## In-situ equipment + feedstocks
 
 Commentary: import equipment needed to mine regolith and process steel locally.
@@ -203,6 +113,12 @@ Commentary: import equipment needed to mine regolith and process steel locally.
     ensure: true
 - cmd: sim.import
   args:
+    item: furnace_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: high_temperature_power_supply_v0
     quantity: 1
     unit: unit
@@ -210,6 +126,12 @@ Commentary: import equipment needed to mine regolith and process steel locally.
 - cmd: sim.import
   args:
     item: plate_rolling_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: rolling_mill_or_brake
     quantity: 1
     unit: unit
     ensure: true
@@ -236,146 +158,17 @@ Commentary: mine enough mare regolith to produce ~530 kg of steel plate locally.
   args:
     style: milestone
     message: "Mine mare regolith for ilmenite extraction."
-- cmd: sim.start-process
+- cmd: sim.run-recipe
   args:
-    process: regolith_mining_simple_v0
-    duration: 10
+    recipe: recipe_regolith_lunar_mare_v0
+    quantity: 20
 - cmd: sim.advance-time
   args:
-    hours: 10
-- cmd: sim.start-process
+    hours: 40
+- cmd: sim.note
   args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 10
-- cmd: sim.advance-time
-  args:
-    hours: 10
+    style: success
+    message: "Mined 2000 kg regolith_lunar_mare."
 ```
 
 ## In-situ: iron ore, pig iron, steel ingot, steel plate

@@ -5,11 +5,11 @@ inputs:
   - item_id: silica_purified
     qty: 10.0
     unit: kg
-  - item_id: metal_alloy_bulk
-    qty: 50.0
+  - item_id: regolith_metal_crude
+    qty: 263.0
     unit: kg
   - item_id: insulation_thermal_blanket
-    qty: 2.0
+    qty: 10.0
     unit: kg
 steps:
   - process_id: mold_preparation_basic_v0
@@ -22,23 +22,23 @@ steps:
     notes: "Prepare casting mold"
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
-        qty: 50.0
+      - item_id: regolith_metal_crude
+        qty: 263.0
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 47.5
+        qty: 250.0
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: "Cast furnace shell; ~5% casting loss"
+    notes: "Cast furnace shell; ~5% casting loss on gross melt"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 47.5
+        qty: 250.0
         unit: kg
       - item_id: insulation_thermal_blanket
-        qty: 2.0
+        qty: 10.0
         unit: kg
     outputs:
       - item_id: furnace_shell_insulated
@@ -47,5 +47,5 @@ steps:
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Finish shell and install insulation"
-assumptions: Cast insulated shell structure then finish; coarse times.
-notes: Coarse route; add insulation install details later.
+assumptions: Cast a ~250 kg steel shell from regolith metal, then install insulation blanket; coarse times.
+notes: Coarse route; mass aligns with furnace_shell_insulated part definition.

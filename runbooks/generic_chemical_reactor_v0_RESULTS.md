@@ -12,20 +12,20 @@
 
 ### Issue #1: Timing Problem
 **Problem:** Runbook advanced only 2300 hours, but oxygen extraction takes 2520 hours
-**Impact:** Second reactor build failed with "Insufficient metal_alloy_bulk"
+**Impact:** Second reactor build failed with "Insufficient regolith_metal_crude"
 **Fix:** Changed advance-time from 2300 → 2600 hours
 
 ### Issue #2: Faster Recipe Execution (From Recent Commit)
 **Observed:** First reactor now completes in 24 hours (was taking 500+ hours before)
 **Impact:** Good! Recipe execution is now much faster/more efficient
-**Result:** First reactor consumes imported metal_alloy_bulk immediately, making timing issue more obvious
+**Result:** First reactor consumes imported regolith_metal_crude immediately, making timing issue more obvious
 
 ## Material Flow Analysis
 
 ### First Reactor (Completed at 24 hours)
 ```
 Source: 100% IMPORTED
-- metal_alloy_bulk: 1.0 kg (imported)
+- regolith_metal_crude: 1.0 kg (imported)
 - machined_part_raw: 1.0 kg (imported)
 - enclosure_steel_small: 1.0 kg (imported)
 - assembled_electrical_equipment: 1.0 kg (imported)
@@ -38,7 +38,7 @@ Total: ~7 kg, 0% in-situ
 ### Second Reactor (In Progress)
 ```
 Source: 14.3% IN-SITU
-- metal_alloy_bulk: 1.0 kg (from regolith ✓)
+- regolith_metal_crude: 1.0 kg (from regolith ✓)
 - machined_part_raw: 1.0 kg (imported)
 - enclosure_steel_small: 1.0 kg (imported)
 - assembled_electrical_equipment: 1.0 kg (imported)
@@ -63,7 +63,7 @@ Total: ~7 kg, 1 kg in-situ (14.3%)
   → 840 kg regolith_powder
 
 ✓ oxygen_extraction_molten_regolith_electrolysis_v0 (2724h)
-  → 504 kg metal_alloy_bulk ✓
+  → 504 kg regolith_metal_crude ✓
   → 336 kg oxygen_gas ✓
 
 Energy: 8400 kWh (95% of total simulation energy)
@@ -77,7 +77,7 @@ Time: 2520 hours (105 days of the 117-day simulation)
 ## Current Inventory Highlights
 
 ```
-metal_alloy_bulk: 502 kg (enough for 502 more reactors!)
+regolith_metal_crude: 502 kg (enough for 502 more reactors!)
 oxygen_gas: 336 kg (byproduct)
 generic_chemical_reactor_v0: 1 unit (completed)
 formed_sheet_metal_parts: 1 kg (from imported steel)
@@ -92,8 +92,8 @@ welded_assemblies: 2 kg (intermediate components)
 
 **Remaining gaps:**
 - Electronics and controls: No in-situ production pathway
-- Machined parts: Need processes to convert metal_alloy_bulk → machined_part_raw
-- Enclosures: Need steel_plate_or_sheet production from metal_alloy_bulk
+- Machined parts: Need processes to convert regolith_metal_crude → machined_part_raw
+- Enclosures: Need steel_plate_or_sheet production from regolith_metal_crude
 
 ## Energy Analysis
 
@@ -121,7 +121,7 @@ Total energy: 8809.60 kWh
 
 1. ✅ **Fixed:** Runbook timing updated (2300h → 2600h)
 2. **TODO:** Add final advance-time to complete second reactor assembly
-3. **TODO:** Create steel processing recipes (metal_alloy_bulk → steel_plate_or_sheet)
+3. **TODO:** Create steel processing recipes (regolith_metal_crude → steel_plate_or_sheet)
 4. **TODO:** Create machining recipes (metal stock → machined_part_raw)
 5. **TODO:** Long-term: Electronics fabrication pathway
 

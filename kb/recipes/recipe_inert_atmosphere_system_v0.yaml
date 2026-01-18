@@ -18,8 +18,8 @@ inputs:
     qty: 1
     unit: unit
   - item_id: piping_components
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: vacuum_pump_small
     qty: 1
     unit: unit
@@ -32,21 +32,15 @@ inputs:
   - item_id: fastener_kit_small
     qty: 1
     unit: unit
-  - item_id: assembled_equipment
-    qty: 1
-    unit: unit
-  - item_id: assembled_electrical_equipment
-    qty: 1
-    unit: kg
 steps:
-- process_id: machine_assembly_basic_v0
+- process_id: assembly_basic_v0
   inputs:
     - item_id: enclosure_electrical_medium
       qty: 1
       unit: unit
     - item_id: piping_components
-      qty: 1
-      unit: unit
+      qty: 1.0
+      unit: kg
     - item_id: gas_cylinder_argon_or_nitrogen
       qty: 2
       unit: unit
@@ -59,38 +53,28 @@ steps:
     - item_id: vacuum_pump_small
       qty: 1
       unit: unit
-    - item_id: fastener_kit_small
-      qty: 1
-      unit: unit
-  outputs:
-    - item_id: assembled_equipment
-      qty: 1
-      unit: unit
-  notes: Assemble base inert atmosphere system frame + electronics into submodule
-- process_id: electrical_assembly_basic_v0
-  inputs:
     - item_id: control_panel_basic
       qty: 1
       unit: unit
     - item_id: oxygen_sensor_module
       qty: 1
       unit: unit
-  outputs:
-    - item_id: assembled_electrical_equipment
-      qty: 1
-      unit: kg
-  notes: Integrate gas controls, sensors, purge interface, and control electronics
-- process_id: assembly_basic_v0
-  inputs:
-    - item_id: assembled_equipment
+    - item_id: fastener_kit_small
       qty: 1
       unit: unit
-    - item_id: assembled_electrical_equipment
-      qty: 1
-      unit: kg
   outputs:
     - item_id: inert_atmosphere_system
       qty: 1
       unit: unit
-  notes: Final assembly and enclosure integration to form complete system
-notes: Basic 3-step assembly of the inert atmosphere system from BOM components; inputs provided by BOM.
+  notes: Assemble gas handling, enclosure, and controls into a single system.
+- process_id: integration_test_basic_v0
+  inputs:
+    - item_id: inert_atmosphere_system
+      qty: 1
+      unit: unit
+  outputs:
+    - item_id: inert_atmosphere_system
+      qty: 1
+      unit: unit
+  notes: Leak check, purge validation, and oxygen sensor calibration.
+notes: Basic assembly of the inert atmosphere system from BOM components; direct integration of gas handling and controls.

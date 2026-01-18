@@ -1,0 +1,416 @@
+{
+  "sim_id": "drawing_die_set_basic_runbook",
+  "state": {
+    "sim_id": "drawing_die_set_basic_runbook",
+    "current_time_hours": 12.0,
+    "inventory": {
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "milling_machine_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "cutting_tools_general": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "heat_treatment_furnace": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "surface_grinder": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "grinding_wheels": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "drawing_die_set_basic": {
+        "quantity": 5.0,
+        "unit": "kg"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "milling_machine_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "cutting_tools_general": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "heat_treatment_furnace": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "surface_grinder": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "grinding_wheels": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "machined_part_raw": {
+        "quantity": 5.0,
+        "unit": "kg"
+      }
+    },
+    "provenance": {
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 120.0,
+        "unknown_kg": 0.0
+      },
+      "milling_machine_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 600.0,
+        "unknown_kg": 0.0
+      },
+      "cutting_tools_general": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 30.0,
+        "unknown_kg": 0.0
+      },
+      "heat_treatment_furnace": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 537.0,
+        "unknown_kg": 0.0
+      },
+      "surface_grinder": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1200.0,
+        "unknown_kg": 0.0
+      },
+      "grinding_wheels": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 8.0,
+        "unknown_kg": 0.0
+      },
+      "machined_part_raw": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "finished_part_deburred": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "drawing_die_set_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 5.0,
+        "unknown_kg": 0.0
+      }
+    },
+    "complexity_scores": {
+      "machined_part_raw": 3,
+      "finished_part_deburred": 4,
+      "drawing_die_set_basic": 5
+    },
+    "total_energy_kwh": 20.0
+  },
+  "scheduler": {
+    "current_time": 12.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "7cfa2b01-8f77-4b4c-9fbe-59ea7281692b",
+        "process_id": "machining_finish_basic_v0",
+        "start_time": 0.0,
+        "duration_hours": 1.5001500150015001,
+        "end_time": 1.5001500150015001,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "machined_part_raw": 5.0
+        },
+        "outputs_pending": {
+          "machined_part_raw": 5.0
+        },
+        "outputs_pending_units": {
+          "machined_part_raw": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "milling_machine_general_v0": 1.0,
+          "cutting_tools_general": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 5.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "machined_part_raw": "kg"
+        },
+        "recipe_run_id": "a4a5bb06-2f68-46df-b04c-a475c3754a06",
+        "step_index": 0,
+        "energy_kwh": 7.5
+      },
+      {
+        "process_run_id": "548d3033-4197-4241-b736-80e2131ff9c4",
+        "process_id": "heat_treat_basic_v0",
+        "start_time": 1.5001500150015001,
+        "duration_hours": 7.496251874062968,
+        "end_time": 8.996401889064469,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "machined_part_raw": 5.0
+        },
+        "outputs_pending": {
+          "machined_part_raw": 5.0
+        },
+        "outputs_pending_units": {
+          "machined_part_raw": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "heat_treatment_furnace": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 5.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "machined_part_raw": "kg"
+        },
+        "recipe_run_id": "a4a5bb06-2f68-46df-b04c-a475c3754a06",
+        "step_index": 1,
+        "energy_kwh": 12.5
+      },
+      {
+        "process_run_id": "d56e7c9f-700e-49ed-ba71-d68493e3e98e",
+        "process_id": "precision_grinding_basic_v0",
+        "start_time": 8.996401889064469,
+        "duration_hours": 1.0,
+        "end_time": 9.996401889064469,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "machined_part_raw": 5.0
+        },
+        "outputs_pending": {
+          "finished_part_deburred": 5.0
+        },
+        "outputs_pending_units": {
+          "finished_part_deburred": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "surface_grinder": 1.0,
+          "grinding_wheels": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 5.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "machined_part_raw": "kg"
+        },
+        "recipe_run_id": "a4a5bb06-2f68-46df-b04c-a475c3754a06",
+        "step_index": 2,
+        "energy_kwh": 0.0
+      },
+      {
+        "process_run_id": "620e95c4-aac0-46c2-a269-d13100266fe3",
+        "process_id": "inspection_basic_v0",
+        "start_time": 9.996401889064469,
+        "duration_hours": 1.0,
+        "end_time": 10.996401889064469,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "finished_part_deburred": 5.0
+        },
+        "outputs_pending": {
+          "drawing_die_set_basic": 5.0
+        },
+        "outputs_pending_units": {
+          "drawing_die_set_basic": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 5.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "finished_part_deburred": "kg"
+        },
+        "recipe_run_id": "a4a5bb06-2f68-46df-b04c-a475c3754a06",
+        "step_index": 3,
+        "energy_kwh": 0.0
+      }
+    ],
+    "total_events_processed": 8
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "a4a5bb06-2f68-46df-b04c-a475c3754a06": {
+        "recipe_run_id": "a4a5bb06-2f68-46df-b04c-a475c3754a06",
+        "recipe_id": "recipe_drawing_die_set_basic_v0",
+        "target_item_id": "drawing_die_set_basic",
+        "recipe_def": {
+          "id": "recipe_drawing_die_set_basic_v0",
+          "target_item_id": "drawing_die_set_basic",
+          "variant_id": "v0",
+          "steps": [
+            {
+              "process_id": "machining_finish_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "machined_part_raw",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "machined_part_raw",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 4.0,
+              "labor_hours": null,
+              "machine_hours": 4.0,
+              "notes": "Machine die bodies and holders from tool steel blanks"
+            },
+            {
+              "process_id": "heat_treat_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "machined_part_raw",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "machined_part_raw",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 2.0,
+              "labor_hours": null,
+              "machine_hours": 2.0,
+              "notes": "Heat treat die bodies for hardness and wear resistance"
+            },
+            {
+              "process_id": "precision_grinding_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "machined_part_raw",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "finished_part_deburred",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 3.0,
+              "labor_hours": null,
+              "machine_hours": 3.0,
+              "notes": "Grind die apertures to precise dimensions for wire reduction"
+            },
+            {
+              "process_id": "inspection_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "finished_part_deburred",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "drawing_die_set_basic",
+                  "qty": 5.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 0.5,
+              "labor_hours": 0.5,
+              "machine_hours": null,
+              "notes": "Verify die aperture dimensions and surface finish"
+            }
+          ],
+          "inputs": [
+            {
+              "item_id": "machined_part_raw",
+              "qty": 5.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "outputs": [],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": "Tool steel dies with precision-ground apertures. Multiple sizes for progressive wire reduction.",
+          "notes": "Set of wire drawing dies for reducing wire diameter through progressive drawing steps."
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 10.996401889064469
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "labor_bot_general_v0": 1.0,
+      "milling_machine_general_v0": 1.0,
+      "cutting_tools_general": 1.0,
+      "heat_treatment_furnace": 1.0,
+      "surface_grinder": 1.0,
+      "grinding_wheels": 1.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

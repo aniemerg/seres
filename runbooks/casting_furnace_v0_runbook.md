@@ -4,7 +4,7 @@ Goal: build `casting_furnace_v0` while maximizing in-situ production of major su
 
 Approach:
 1) Import all top-level parts and assemble a baseline unit.
-2) Produce in-situ inputs where feasible (regolith -> metal_alloy_bulk -> shell).
+2) Produce in-situ inputs where feasible (regolith -> regolith_metal_crude -> shell).
 3) Assemble a second unit using locally-produced components where possible.
 
 ## Setup
@@ -245,13 +245,13 @@ Commentary: import all top-level parts and assemble a first unit to validate the
 
 ## In-situ production attempt
 
-Commentary: produce metal_alloy_bulk from regolith, then run the shell fabrication steps that can be executed directly.
+Commentary: produce regolith_metal_crude from regolith, then run the shell fabrication steps that can be executed directly.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith and prep shell subcomponents."
+    message: "Produce regolith_metal_crude from regolith and prep shell subcomponents."
 - cmd: sim.import
   args:
     item: electrical_energy
@@ -432,6 +432,24 @@ Commentary: produce insulation pack from regolith-based insulation where feasibl
 ## Final assembly (local parts where possible)
 
 ```sim-runbook
+- cmd: sim.import
+  args:
+    item: temperature_sensing
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: sensor_suite_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: control_compute_module_imported
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_machine_casting_furnace_v0

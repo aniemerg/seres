@@ -1,0 +1,41 @@
+id: steel_bar_hot_rolling_v0
+kind: process
+name: Steel bar hot rolling
+layer_tags:
+- layer_6
+inputs:
+- item_id: steel_billet_or_slab
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: steel_bar_raw
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+- machine_id: cutting_tools_general
+  qty: 1
+  unit: count
+- machine_id: plate_rolling_mill
+  qty: 1
+  unit: count
+- machine_id: heating_furnace
+  qty: 1
+  unit: count
+energy_model:
+  type: per_unit
+  value: 0.9
+  unit: kWh/kg
+  scaling_basis: steel_bar_raw
+  notes: Reheating and mill drive energy for reducing billets/slabs to bar stock.
+time_model:
+  type: linear_rate
+  rate: 4.0
+  rate_unit: kg/hr
+  scaling_basis: steel_bar_raw
+  notes: Multiple rolling passes plus handling for cutting to length.
+notes: Hot rolls steel billets/slabs into bar stock and cuts to length.
+process_type: continuous
+is_template: true

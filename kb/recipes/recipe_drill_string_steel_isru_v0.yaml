@@ -1,0 +1,41 @@
+id: recipe_drill_string_steel_isru_v0
+kind: recipe
+target_item_id: drill_string_steel
+variant_id: isru_v0
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 110.0
+    unit: kg
+    notes: "Regolith-derived metal for ISRU"
+outputs:
+  - item_id: drill_string_steel
+    qty: 100.0
+    unit: kg
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 110.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 105.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: "Cast metal for drill string"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 105.0
+        unit: kg
+    outputs:
+      - item_id: drill_string_steel
+        qty: 100.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    labor_hours: 4.0
+    notes: "Machine drill string sections and threading"
+assumptions: "Simple ISRU route using regolith metal; 5% casting loss, 5% machining loss"
+notes: "ISRU variant using regolith_metal_crude from regolith. Enables local production of drill string."

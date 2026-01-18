@@ -515,13 +515,24 @@ Commentary: produce aluminum ingots and wire from alumina via Hall-Heroult elect
 - cmd: sim.advance-time
   args:
     hours: 240
+- cmd: sim.note
+  args:
+    style: info
+    message: "Produce regolith metal for aluminum wire drawing."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 320
 - cmd: sim.run-recipe
   args:
     recipe: recipe_aluminum_wire_v0
-    quantity: 5
+    quantity: 20
 - cmd: sim.advance-time
   args:
-    hours: 3
+    hours: 12
 - cmd: sim.note
   args:
     style: info
@@ -530,28 +541,28 @@ Commentary: produce aluminum ingots and wire from alumina via Hall-Heroult elect
 
 ## In-situ: Metal alloy bulk production from regolith (MRE)
 
-Commentary: produce metal_alloy_bulk from mare regolith via molten regolith electrolysis (MRE).
+Commentary: produce regolith_metal_crude from mare regolith via molten regolith electrolysis (MRE).
 This is the key to maximizing in situ production - making structural metals from lunar resources.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith via MRE."
+    message: "Produce regolith_metal_crude from regolith via MRE."
 - cmd: sim.import
   args:
     item: electrical_energy
-    quantity: 14000
+    quantity: 18000
     unit: kWh
     ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Running metal_alloy_bulk production (~35 batches for 800 kg)."
+    message: "Running regolith_metal_crude production (~42 batches for 958 kg)."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
-    quantity: 35
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 42
 - cmd: sim.advance-time
   args:
     hours: 400
@@ -576,58 +587,18 @@ Commentary: produce steel from regolith ilmenite via iron smelting and refining.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce steel from regolith ilmenite."
-- cmd: sim.note
-  args:
-    style: info
-    message: "Mining additional mare regolith for steel production (300 kg needed)."
-- cmd: sim.import
-  args:
-    item: carbon_reductant
-    quantity: 30
-    unit: kg
-    ensure: true
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    output_quantity: 350
-    output_unit: kg
-    duration: null
-- cmd: sim.advance-time
-  args:
-    hours: 8
+    message: "Produce sheet metal/structural steel from regolith metal."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 210
-- cmd: sim.advance-time
-  args:
-    hours: 300
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 63
-- cmd: sim.advance-time
-  args:
-    hours: 260
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_ingot_v0
-    quantity: 60
-- cmd: sim.advance-time
-  args:
-    hours: 120
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_sheet_metal_or_structural_steel_v0
+    recipe: recipe_sheet_metal_or_structural_steel_isru_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 320
 - cmd: sim.note
   args:
     style: success
-    message: "Steel production complete from lunar ilmenite."
+    message: "Sheet metal/structural steel complete from regolith metal."
 ```
 
 ## In-situ: Mechanical structure parts
@@ -659,7 +630,7 @@ Commentary: produce robot arm links, frame, and motor housings from locally-prod
     quantity: 6
 - cmd: sim.advance-time
   args:
-    hours: 30
+    hours: 320
 - cmd: sim.note
   args:
     style: info
@@ -699,13 +670,19 @@ Commentary: attempt motor production with available materials; will need to impo
     quantity: 10
     unit: kg
     ensure: true
+- cmd: sim.import
+  args:
+    item: balancing_machine
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_motor_electric_medium_v0
     quantity: 4
 - cmd: sim.advance-time
   args:
-    hours: 65
+    hours: 600
 - cmd: sim.note
   args:
     style: warning

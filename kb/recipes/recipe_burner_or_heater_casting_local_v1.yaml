@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: burner_or_heater_casting
 variant_id: local_v1
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 80.0
     unit: kg
   - item_id: electronic_components_set
@@ -19,7 +19,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 80.0
         unit: kg
     outputs:
@@ -72,5 +72,5 @@ steps:
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly with electronics and fasteners.
-assumptions: "Local fabrication route using metal_alloy_bulk and standard welding/assembly."
+assumptions: "Local fabrication route using regolith_metal_crude and standard welding/assembly."
 notes: "Local burner/heater assembly variant to reduce metal_feedstock imports."

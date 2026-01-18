@@ -1,0 +1,242 @@
+{
+  "sim_id": "steel_bar_test",
+  "state": {
+    "sim_id": "steel_bar_test",
+    "current_time_hours": 100.0,
+    "inventory": {
+      "steel_billet_or_slab": {
+        "quantity": 6.5,
+        "unit": "kg"
+      },
+      "plate_rolling_mill": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "heating_furnace": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "cutting_tools_general": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "steel_bar_raw": {
+        "quantity": 70.0,
+        "unit": "kg"
+      },
+      "steel_scrap": {
+        "quantity": 3.5,
+        "unit": "kg"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "steel_billet_or_slab": {
+        "quantity": 80.0,
+        "unit": "kg"
+      },
+      "plate_rolling_mill": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "heating_furnace": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "cutting_tools_general": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "provenance": {
+      "steel_billet_or_slab": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 6.5,
+        "unknown_kg": 0.0
+      },
+      "plate_rolling_mill": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 1501.0,
+        "unknown_kg": 0.0
+      },
+      "heating_furnace": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 800.0,
+        "unknown_kg": 0.0
+      },
+      "cutting_tools_general": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 30.0,
+        "unknown_kg": 0.0
+      },
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 120.0,
+        "unknown_kg": 0.0
+      },
+      "steel_bar_raw": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 70.0,
+        "unknown_kg": 0.0
+      },
+      "steel_scrap": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 3.5,
+        "unknown_kg": 0.0
+      }
+    },
+    "complexity_scores": {
+      "steel_bar_raw": 2,
+      "steel_scrap": 2
+    },
+    "total_energy_kwh": 63.0
+  },
+  "scheduler": {
+    "current_time": 100.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "ce356c49-0476-40f0-b028-1a935d334bcc",
+        "process_id": "steel_bar_hot_rolling_v0",
+        "start_time": 0.0,
+        "duration_hours": 17.5,
+        "end_time": 17.5,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "steel_billet_or_slab": 73.5
+        },
+        "outputs_pending": {
+          "steel_bar_raw": 70.0,
+          "steel_scrap": 3.5
+        },
+        "outputs_pending_units": {
+          "steel_bar_raw": "kg",
+          "steel_scrap": "kg"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "cutting_tools_general": 1.0,
+          "plate_rolling_mill": 1.0,
+          "heating_furnace": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 73.5,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "steel_billet_or_slab": "kg"
+        },
+        "recipe_run_id": "245ac383-0854-4820-85f3-a274c4a662e2",
+        "step_index": 0,
+        "energy_kwh": 63.0
+      }
+    ],
+    "total_events_processed": 2
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "245ac383-0854-4820-85f3-a274c4a662e2": {
+        "recipe_run_id": "245ac383-0854-4820-85f3-a274c4a662e2",
+        "recipe_id": "recipe_steel_bar_raw_v0",
+        "target_item_id": "steel_bar_raw",
+        "recipe_def": {
+          "id": "recipe_steel_bar_raw_v0",
+          "target_item_id": "steel_bar_raw",
+          "variant_id": "v0",
+          "steps": [
+            {
+              "process_id": "steel_bar_hot_rolling_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "steel_billet_or_slab",
+                  "qty": 1.05,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "steel_bar_raw",
+                  "qty": 1.0,
+                  "unit": "kg",
+                  "notes": null
+                },
+                {
+                  "item_id": "steel_scrap",
+                  "qty": 0.05,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 1.0,
+              "labor_hours": null,
+              "machine_hours": 1.0,
+              "notes": "Hot or cold roll steel billet into bar stock",
+              "scale": 70.0
+            }
+          ],
+          "inputs": [
+            {
+              "item_id": "steel_billet_or_slab",
+              "qty": 1.05,
+              "unit": "kg",
+              "notes": "Steel billet for rolling"
+            }
+          ],
+          "outputs": [
+            {
+              "item_id": "steel_bar_raw",
+              "qty": 1.0,
+              "unit": "kg",
+              "notes": null
+            },
+            {
+              "item_id": "steel_scrap",
+              "qty": 0.05,
+              "unit": "kg",
+              "notes": "Rolling scale and trim losses"
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": null,
+          "notes": "Steel bar raw production via rolling mill. Converts steel billet/slab into bar stock for machining.",
+          "kind": "recipe"
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 17.5
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "plate_rolling_mill": 1.0,
+      "heating_furnace": 1.0,
+      "cutting_tools_general": 1.0,
+      "labor_bot_general_v0": 1.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

@@ -159,6 +159,18 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_or_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: furnace_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: plate_rolling_mill
     quantity: 1
     unit: unit
@@ -166,12 +178,6 @@ cutting, forging, heat treating, and assembly.
 - cmd: sim.import
   args:
     item: heating_furnace
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: furnace_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -296,7 +302,7 @@ regolith. Also roll steel into plate/sheet and bar stock for downstream parts.
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_stock_v0
-    quantity: 500
+    quantity: 510
 - cmd: sim.advance-time
   args:
     hours: 3200

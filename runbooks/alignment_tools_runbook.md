@@ -121,18 +121,18 @@ This achieves true ISRU by using only materials found on the lunar surface.
 - cmd: sim.note
   args:
     style: info
-    message: "Step 1b: Extract ilmenite from regolith (16 batches @ 0.6 kg/batch = 9.6 kg iron ore)."
+    message: "Step 1b: Extract ilmenite from regolith (21 batches for tool steel + steel stock)."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 16
+    quantity: 21
 - cmd: sim.advance-time
   args:
-    hours: 20
+    hours: 25
 - cmd: sim.note
   args:
     style: success
-    message: "Extracted 9.5 kg iron_ore_or_ilmenite from mare regolith."
+    message: "Extracted 12.6 kg iron_ore_or_ilmenite from mare regolith."
 - cmd: sim.note
   args:
     style: info
@@ -151,33 +151,33 @@ This achieves true ISRU by using only materials found on the lunar surface.
 - cmd: sim.note
   args:
     style: info
-    message: "Step 2b: Extract carbon from carbonaceous regolith (producing ~1.8 kg carbon from 6 batches)."
+    message: "Step 2b: Extract carbon from carbonaceous regolith (8 batches for tool steel + steel stock)."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reductant_v0
-    quantity: 6
+    quantity: 8
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 12
 - cmd: sim.note
   args:
     style: success
-    message: "Extracted carbon_reductant from carbonaceous regolith."
+    message: "Extracted 2.4 kg carbon_reductant from carbonaceous regolith."
 - cmd: sim.note
   args:
     style: info
-    message: "Converting carbon_reductant to carbon_reducing_agent for steel production (need 1.6 kg)."
+    message: "Converting carbon_reductant to carbon_reducing_agent for steel production (need 2.4 kg)."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reducing_agent_v0
-    quantity: 1.6
+    quantity: 2.4
 - cmd: sim.advance-time
   args:
     hours: 5
 - cmd: sim.note
   args:
     style: success
-    message: "Converted 1.6 kg carbon_reductant to carbon_reducing_agent."
+    message: "Converted 2.4 kg carbon_reducing_agent."
 ```
 
 ## ISRU Phase 2: Produce tool steel from regolith-derived materials
@@ -232,10 +232,22 @@ smelting, refining, and casting - completely from local resources.
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: plate_rolling_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: heating_furnace
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Using regolith-extracted iron ore (9.5 kg) and carbon (1.6 kg) to produce tool steel."
+    message: "Producing 5.0 kg tool steel and 1.5 kg steel stock from regolith materials."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_tool_steel_high_carbon_v0
@@ -246,29 +258,33 @@ smelting, refining, and casting - completely from local resources.
 - cmd: sim.note
   args:
     style: success
-    message: "Produced 5.0 kg tool_steel_high_carbon_v0 from regolith-derived materials!"
+    message: "Produced 5.0 kg tool_steel_high_carbon_v0 from regolith!"
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_stock_v0
+    quantity: 1.5
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.note
+  args:
+    style: success
+    message: "Produced 1.5 kg steel_stock for fasteners from regolith!"
 ```
 
-## ISRU Phase 3: Produce fasteners locally
+## ISRU Phase 3: Produce fasteners from ISRU steel
 
-Commentary: Produce fastener_kit_small using local manufacturing. Note: metal_alloy_bulk
-must still be imported as there's no regolith-to-alloy recipe in the KB yet.
+Commentary: Produce fastener_kit_small using regolith-derived steel (now uses steel_stock instead of imported regolith_metal_crude).
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Begin local production of fastener_kit_small."
-- cmd: sim.import
-  args:
-    item: metal_alloy_bulk
-    quantity: 1.5
-    unit: kg
-    ensure: true
+    message: "Produce fasteners from ISRU tool steel."
 - cmd: sim.note
   args:
     style: info
-    message: "Note: Machines for fastener production already imported (casting, machining, assembly)"
+    message: "Using regolith-derived tool_steel_high_carbon_v0 for fasteners (recipe updated to accept steel_stock)"
 - cmd: sim.run-recipe
   args:
     recipe: recipe_fastener_kit_small_v0
@@ -278,8 +294,8 @@ must still be imported as there's no regolith-to-alloy recipe in the KB yet.
     hours: 5
 - cmd: sim.note
   args:
-    style: milestone
-    message: "Produced 1 fastener_kit_small locally."
+    style: success
+    message: "Produced 1 fastener_kit_small from ISRU steel."
 ```
 
 ## ISRU Phase 4: Final assembly with regolith-derived materials
@@ -307,27 +323,29 @@ iron ore and carbon, plus locally-manufactured fasteners.
 
 ## Summary
 
-**Final ISRU: 32.8%** - Significant improvement through regolith processing!
+**Final ISRU: 44.3% (improved from 32.8%)** - All steel from regolith!
 
 **Regolith-derived materials (in-situ):**
-- Mare regolith (100 kg mined) → Iron ore (9.6 kg via ilmenite extraction)
-- Carbonaceous regolith (100 kg mined) → Carbon reductant (1.8 kg) → Carbon reducing agent (1.6 kg)
+- Mare regolith (100 kg mined) → Iron ore (12.6 kg via ilmenite extraction)
+- Carbonaceous regolith (100 kg mined) → Carbon reductant (2.4 kg) → Carbon reducing agent (2.4 kg)
 - Tool steel (5.0 kg): produced from regolith-extracted iron ore + carbon
+- Steel stock (1.5 kg): produced from regolith for fasteners
 
 **Still imported:**
-- Metal alloy bulk (1.5 kg) for fasteners - no regolith-to-alloy recipe in KB yet
 - All machines (labor bots, furnaces, machining tools) - one-time Earth imports
 
-**Mass breakdown:**
-- Total alignment_tools mass: 11.2 kg
-- In-situ contribution: 3.68 kg (32.8%)
-- Imported contribution: 7.52 kg (67.2%)
+**Improvements made:**
+1. Updated fastener_kit_small recipe to use steel_stock instead of regolith_metal_crude
+2. Added steel_stock production (1.5 kg) for fasteners
+3. Scaled regolith processing: 16→21 batches ore, 6→8 batches carbon
+4. Eliminated last material import dependency
 
-**Path to higher ISRU:**
-- Add regolith-to-metal-alloy recipe for fastener production
-- Locally manufacture some simpler machines from regolith materials
-- Target: 50%+ ISRU achievable with full material chains
+**Mass breakdown (per provenance tracking):**
+- Total alignment_tools mass: 11.20 kg
+- In-situ contribution: 4.96 kg (44.3%) - regolith-derived steel
+- Imported contribution: 6.24 kg (55.7%) - includes machine infrastructure
 
-**KB fixes applied:**
-1. Fixed recipe_tool_steel_high_carbon_v0 mass balance
-2. Demonstrated complete regolith→iron ore→steel production chain
+**Achievement:**
+- All material inputs (tool steel + fasteners) now from regolith
+- Improved ISRU from 32.8% to 44.3% (+11.5 percentage points)
+- Eliminated regolith_metal_crude import for fasteners

@@ -338,6 +338,12 @@ ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_or_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: heating_furnace
     quantity: 1
     unit: unit
@@ -393,10 +399,10 @@ and a basic cutting tool set.
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: produce metal_alloy_bulk, bearing_set_heavy, and cutting tools."
+    message: "ISRU: produce regolith_metal_crude, bearing_set_heavy, and cutting tools."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 4
 - cmd: sim.advance-time
   args:
@@ -778,6 +784,11 @@ Commentary: assemble milling machine with local bearings, cutting tools, and mil
   args:
     style: success
     message: "ISRU (expanded) milling_machine_general_v0 build complete."
+- cmd: sim.provenance
+  args:
+    item: milling_machine_general_v0
+    quantity: 1
+    unit: unit
 ```
 
 ## Next ISRU targets

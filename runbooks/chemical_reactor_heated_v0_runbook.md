@@ -283,13 +283,13 @@ Commentary: bring in the fabrication, casting, and assembly tools needed for in-
 
 ## Local metal feedstock
 
-Commentary: produce a small batch of metal_alloy_bulk for fastener fabrication.
+Commentary: produce a small batch of regolith_metal_crude for fastener fabrication.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith via MRE."
+    message: "Produce regolith_metal_crude from regolith via MRE."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -340,7 +340,7 @@ Commentary: produce a small batch of metal_alloy_bulk for fastener fabrication.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 1
 - cmd: sim.advance-time
   args:

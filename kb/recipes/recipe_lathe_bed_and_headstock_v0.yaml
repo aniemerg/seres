@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: lathe_bed_and_headstock
 variant_id: v0
 inputs:
-  - item_id: metal_feedstock
+  - item_id: regolith_metal_crude
     qty: 520.0
     unit: kg
   - item_id: cast_metal_parts
@@ -13,10 +13,10 @@ inputs:
     qty: 500.0
     unit: kg
   - item_id: machined_steel_part_precision
-    qty: 480.0
+    qty: 500.0
     unit: kg
   - item_id: finished_part
-    qty: 480.0
+    qty: 500.0
     unit: kg
 outputs:
   - item_id: lathe_bed_and_headstock
@@ -25,7 +25,7 @@ outputs:
 steps:
   - process_id: casting_basic_v0
     inputs:
-    - item_id: metal_feedstock
+    - item_id: regolith_metal_crude
       qty: 520.0
       unit: kg
     outputs:
@@ -56,7 +56,7 @@ steps:
       unit: kg
     outputs:
     - item_id: machined_steel_part_precision
-      qty: 480.0
+      qty: 500.0
       unit: kg
     est_time_hr: 60.0
     machine_hours: 60.0
@@ -65,11 +65,11 @@ steps:
   - process_id: precision_alignment_and_leveling_v0
     inputs:
     - item_id: machined_steel_part_precision
-      qty: 480.0
+      qty: 500.0
       unit: kg
     outputs:
     - item_id: machined_steel_part_precision
-      qty: 480.0
+      qty: 500.0
       unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
@@ -77,11 +77,11 @@ steps:
   - process_id: surface_finishing_basic_v0
     inputs:
     - item_id: machined_steel_part_precision
-      qty: 480.0
+      qty: 500.0
       unit: kg
     outputs:
     - item_id: finished_part
-      qty: 480.0
+      qty: 500.0
       unit: kg
     est_time_hr: 4.0
     labor_hours: 3.0
@@ -89,7 +89,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
     - item_id: finished_part
-      qty: 480.0
+      qty: 500.0
       unit: kg
     outputs:
     - item_id: lathe_bed_and_headstock

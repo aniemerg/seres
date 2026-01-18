@@ -2,7 +2,7 @@
   "sim_id": "rock_crusher_basic_runbook",
   "state": {
     "sim_id": "rock_crusher_basic_runbook",
-    "current_time_hours": 9700.0,
+    "current_time_hours": 9540.0,
     "inventory": {
       "labor_bot_general_v0": {
         "quantity": 2.0,
@@ -60,11 +60,19 @@
         "quantity": 1.0,
         "unit": "unit"
       },
+      "furnace_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
       "high_temperature_power_supply_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
       "plate_rolling_mill": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "rolling_mill_or_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -165,11 +173,19 @@
         "quantity": 1.0,
         "unit": "unit"
       },
+      "furnace_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
       "high_temperature_power_supply_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
       "plate_rolling_mill": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "rolling_mill_or_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -204,7 +220,7 @@
       },
       "heat_treatment_furnace": {
         "in_situ_kg": 0.0,
-        "imported_kg": 600.0,
+        "imported_kg": 537.0,
         "unknown_kg": 0.0
       },
       "welding_power_supply_v0": {
@@ -257,6 +273,11 @@
         "imported_kg": 100.0,
         "unknown_kg": 0.0
       },
+      "furnace_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 300.0,
+        "unknown_kg": 0.0
+      },
       "high_temperature_power_supply_v0": {
         "in_situ_kg": 0.0,
         "imported_kg": 320.0,
@@ -264,12 +285,17 @@
       },
       "plate_rolling_mill": {
         "in_situ_kg": 0.0,
-        "imported_kg": 1500.0,
+        "imported_kg": 1501.0,
+        "unknown_kg": 0.0
+      },
+      "rolling_mill_or_brake": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 800.0,
         "unknown_kg": 0.0
       },
       "heating_furnace": {
         "in_situ_kg": 0.0,
-        "imported_kg": 800.0,
+        "imported_kg": 512.0,
         "unknown_kg": 0.0
       },
       "regolith_lunar_mare": {
@@ -338,50 +364,37 @@
         "unknown_kg": 0.0
       }
     },
+    "complexity_scores": {
+      "regolith_lunar_mare": 1,
+      "iron_ore_or_ilmenite": 2,
+      "tailings": 2,
+      "iron_pig_or_ingot": 3,
+      "slag": 4,
+      "steel_billet_or_slab": 4,
+      "steel_ingot": 5,
+      "steel_plate_raw": 6,
+      "machined_part_raw": 7,
+      "welded_assemblies": 7,
+      "assembled_equipment": 7,
+      "rock_crusher_basic": 7
+    },
     "total_energy_kwh": 13923.5
   },
   "scheduler": {
-    "current_time": 9700.0,
+    "current_time": 9540.0,
     "event_queue": [],
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "2800ac8e-9ce5-494c-a15d-fcb7bdfd9dec",
+        "process_run_id": "10636a25-24d4-4541-98a2-297a65b50b31",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 0.0,
-        "duration_hours": 10.0,
-        "end_time": 10.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "5f9d3fe3-960a-403f-92b3-00c9627cb094",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 10.0,
-        "duration_hours": 10.0,
+        "duration_hours": 20.0,
         "end_time": 20.0,
         "scale": 1.0,
         "inputs_consumed": {},
         "outputs_pending": {
-          "regolith_lunar_mare": 100.0
+          "regolith_lunar_mare": 2000.0
         },
         "outputs_pending_units": {
           "regolith_lunar_mare": "kg"
@@ -395,502 +408,16 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
+        "recipe_run_id": "6ba44086-d859-4fb7-8b8f-0c714be003d6",
+        "step_index": 0,
+        "energy_kwh": 100.0
       },
       {
-        "process_run_id": "085c6f96-0da0-4b2b-a1d0-c5863ff80555",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 20.0,
-        "duration_hours": 10.0,
-        "end_time": 30.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "da56f7e7-aef4-419a-bcc6-c9f98928dce8",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 30.0,
-        "duration_hours": 10.0,
-        "end_time": 40.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "f78791bc-6211-471d-aad2-b8c5c9962d51",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 40.0,
-        "duration_hours": 10.0,
-        "end_time": 50.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "2f9967b9-8499-4c6d-a4a7-5fac0ff99cff",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 50.0,
-        "duration_hours": 10.0,
-        "end_time": 60.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "a266ea4f-8ccf-4120-bbac-ad4ee099fcd4",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 60.0,
-        "duration_hours": 10.0,
-        "end_time": 70.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "5a09d206-6e78-4751-b7c4-8f07a4b10fef",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 70.0,
-        "duration_hours": 10.0,
-        "end_time": 80.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "b09380fb-49b4-4d2e-a647-9df7b5570fb3",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 80.0,
-        "duration_hours": 10.0,
-        "end_time": 90.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "1959aeb2-6718-441c-bfb5-4e5a08a0be54",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 90.0,
-        "duration_hours": 10.0,
-        "end_time": 100.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "68a56b58-f4e3-4da9-85bc-d00de2a0a7d9",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 100.0,
-        "duration_hours": 10.0,
-        "end_time": 110.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "ae6b4c62-6d1f-476b-ac4a-2ed29be1b37b",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 110.0,
-        "duration_hours": 10.0,
-        "end_time": 120.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "a23ef279-39ca-4fff-8e89-f77ee5342889",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 120.0,
-        "duration_hours": 10.0,
-        "end_time": 130.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "79aaa1b9-8ba1-4d88-8233-c706df0bf44f",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 130.0,
-        "duration_hours": 10.0,
-        "end_time": 140.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "8bafee51-5659-4878-b11c-d5f802595521",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 140.0,
-        "duration_hours": 10.0,
-        "end_time": 150.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "7b8c1fbc-f135-49eb-b900-3d6cb19b141b",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 150.0,
-        "duration_hours": 10.0,
-        "end_time": 160.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "dcae530b-ae57-40c7-b111-907b4ca11dde",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 160.0,
-        "duration_hours": 10.0,
-        "end_time": 170.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "bde34a49-64e4-4df9-abd9-f79b315d7fad",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 170.0,
-        "duration_hours": 10.0,
-        "end_time": 180.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "88625a38-bc8b-4f83-b5d1-874340bb0919",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 180.0,
-        "duration_hours": 10.0,
-        "end_time": 190.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "afbd0acf-44f9-4dff-91a1-9c249183d2fd",
-        "process_id": "regolith_mining_simple_v0",
-        "start_time": 190.0,
-        "duration_hours": 10.0,
-        "end_time": 200.0,
-        "scale": 1.0,
-        "inputs_consumed": {},
-        "outputs_pending": {
-          "regolith_lunar_mare": 100.0
-        },
-        "outputs_pending_units": {
-          "regolith_lunar_mare": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 0.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {},
-        "recipe_run_id": null,
-        "step_index": null,
-        "energy_kwh": 5.0
-      },
-      {
-        "process_run_id": "99738a97-b60e-4d78-bd6c-d896fff98498",
+        "process_run_id": "093ece96-3cd4-43d2-81f6-1324ee034cda",
         "process_id": "ilmenite_extraction_from_regolith_v0",
-        "start_time": 200.0,
+        "start_time": 40.0,
         "duration_hours": 2000.0,
-        "end_time": 2200.0,
+        "end_time": 2040.0,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_lunar_mare": 2000.0
@@ -914,16 +441,16 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "4835c61a-ccac-4090-ae23-4aaad7a214dc",
+        "recipe_run_id": "a2f5e033-2255-4ac7-9e28-0f94261b00d3",
         "step_index": 0,
         "energy_kwh": 4000.0
       },
       {
-        "process_run_id": "df837ae7-1c26-4c5a-a70c-8c2397dd4fb9",
+        "process_run_id": "5c020051-7938-4b9e-8638-dad53df8f903",
         "process_id": "iron_smelting_reduction_v0",
-        "start_time": 2400.0,
+        "start_time": 2240.0,
         "duration_hours": 2340.0,
-        "end_time": 4740.0,
+        "end_time": 4580.0,
         "scale": 1.0,
         "inputs_consumed": {
           "iron_ore_or_ilmenite": 1170.0,
@@ -951,16 +478,16 @@
           "iron_ore_or_ilmenite": "kg",
           "carbon_reducing_agent": "kg"
         },
-        "recipe_run_id": "630a65bb-46a1-41da-b8c8-ed5019d89611",
+        "recipe_run_id": "179302fe-06f5-45c3-a68b-b574c8086ffa",
         "step_index": 0,
         "energy_kwh": 4680.0
       },
       {
-        "process_run_id": "7fc652fc-f274-4656-ba19-d84699f33e2c",
+        "process_run_id": "d1212414-5332-41ea-b7d2-d38bba5b0686",
         "process_id": "steel_refining_basic_v0",
-        "start_time": 5000.0,
+        "start_time": 4840.0,
         "duration_hours": 1114.0,
-        "end_time": 6114.0,
+        "end_time": 5954.0,
         "scale": 1.0,
         "inputs_consumed": {
           "iron_pig_or_ingot": 584.85
@@ -988,16 +515,16 @@
         "inputs_consumed_units": {
           "iron_pig_or_ingot": "kg"
         },
-        "recipe_run_id": "6427a98b-2c1c-4ac2-a257-ef58a8a7898f",
+        "recipe_run_id": "514eb7a2-030b-4a47-8200-a3701197b204",
         "step_index": 0,
         "energy_kwh": 835.5
       },
       {
-        "process_run_id": "de9de41a-f8e0-47ce-add8-bdd79bd527b8",
+        "process_run_id": "4316d4b1-af9d-4911-a0d0-443120138f2f",
         "process_id": "steel_ingot_cast_v0",
-        "start_time": 6114.0,
+        "start_time": 5954.0,
         "duration_hours": 557.0,
-        "end_time": 6671.0,
+        "end_time": 6511.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_billet_or_slab": 557.0
@@ -1019,16 +546,16 @@
         "inputs_consumed_units": {
           "steel_billet_or_slab": "kg"
         },
-        "recipe_run_id": "6427a98b-2c1c-4ac2-a257-ef58a8a7898f",
+        "recipe_run_id": "514eb7a2-030b-4a47-8200-a3701197b204",
         "step_index": 1,
         "energy_kwh": 2228.0
       },
       {
-        "process_run_id": "5e8018b1-0f3d-48bd-9bc0-a2270f9f6cf8",
-        "process_id": "rolling_basic_v0",
-        "start_time": 7000.0,
+        "process_run_id": "e23a4961-9d06-43a2-b672-520825ff6a88",
+        "process_id": "rolling_basic_shop_v0",
+        "start_time": 6840.0,
         "duration_hours": 1.0,
-        "end_time": 7001.0,
+        "end_time": 6841.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_ingot": 556.5
@@ -1041,8 +568,8 @@
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
-          "plate_rolling_mill": 1.0,
-          "heating_furnace": 1.0
+          "rolling_mill_or_brake": 1.0,
+          "furnace_basic": 1.0
         },
         "provenance_consumed_kg": {
           "in_situ_kg": 445.2,
@@ -1052,16 +579,16 @@
         "inputs_consumed_units": {
           "steel_ingot": "kg"
         },
-        "recipe_run_id": "69b0fac8-46c8-470a-9e56-cbc0e502d175",
+        "recipe_run_id": "5d426ee2-3734-4f4c-bd22-932518cc2493",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "800005fa-7945-4812-b06c-c31de3425ffa",
+        "process_run_id": "7a241c15-f3fc-4046-a42c-28976c4f93c1",
         "process_id": "machining_finish_basic_v0",
-        "start_time": 7500.0,
+        "start_time": 7340.0,
         "duration_hours": 156.015601560156,
-        "end_time": 7656.015601560156,
+        "end_time": 7496.015601560156,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_plate_raw": 530.0
@@ -1085,16 +612,16 @@
         "inputs_consumed_units": {
           "steel_plate_raw": "kg"
         },
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "step_index": 0,
         "energy_kwh": 780.0
       },
       {
-        "process_run_id": "5554ff65-643d-4436-aa7a-6fa6418e0dcc",
+        "process_run_id": "eee9a568-7a45-42d9-9291-e6174cb17404",
         "process_id": "heat_treat_basic_v0",
-        "start_time": 7656.015601560156,
+        "start_time": 7496.015601560156,
         "duration_hours": 772.1139430284857,
-        "end_time": 8428.129544588643,
+        "end_time": 8268.129544588643,
         "scale": 1.0,
         "inputs_consumed": {
           "machined_part_raw": 520.0
@@ -1117,16 +644,16 @@
         "inputs_consumed_units": {
           "machined_part_raw": "kg"
         },
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "step_index": 1,
         "energy_kwh": 1300.0
       },
       {
-        "process_run_id": "8b937ed9-6b8c-458f-8250-f84510f37239",
+        "process_run_id": "f82ea44e-01a6-4321-8f9e-f45879ab628a",
         "process_id": "welding_basic_v0",
-        "start_time": 8428.129544588643,
+        "start_time": 8268.129544588643,
         "duration_hours": 1.0,
-        "end_time": 8429.129544588643,
+        "end_time": 8269.129544588643,
         "scale": 1.0,
         "inputs_consumed": {
           "machined_part_raw": 515.0
@@ -1150,16 +677,16 @@
         "inputs_consumed_units": {
           "machined_part_raw": "kg"
         },
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "c754fa3b-7873-483f-9cae-2c7953837a4e",
+        "process_run_id": "4b9f3c5a-d71a-44e5-a0b0-522631b4f563",
         "process_id": "assembly_basic_v0",
-        "start_time": 8429.129544588643,
+        "start_time": 8269.129544588643,
         "duration_hours": 1.0,
-        "end_time": 8430.129544588643,
+        "end_time": 8270.129544588643,
         "scale": 1.0,
         "inputs_consumed": {
           "welded_assemblies": 510.0
@@ -1182,16 +709,16 @@
         "inputs_consumed_units": {
           "welded_assemblies": "kg"
         },
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "step_index": 3,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "abdc9e6d-3db2-4a24-a3dc-cfa01d0d9d5a",
+        "process_run_id": "5b15afb4-6168-4b8d-a747-d00e36a78d05",
         "process_id": "integration_test_basic_v0",
-        "start_time": 8430.129544588643,
+        "start_time": 8270.129544588643,
         "duration_hours": 1.0,
-        "end_time": 8431.129544588643,
+        "end_time": 8271.129544588643,
         "scale": 1.0,
         "inputs_consumed": {
           "assembled_equipment": 505.0
@@ -1214,17 +741,71 @@
         "inputs_consumed_units": {
           "assembled_equipment": "kg"
         },
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "step_index": 4,
         "energy_kwh": 0.0
       }
     ],
-    "total_events_processed": 60
+    "total_events_processed": 22
   },
   "orchestrator": {
     "recipe_runs": {
-      "4835c61a-ccac-4090-ae23-4aaad7a214dc": {
-        "recipe_run_id": "4835c61a-ccac-4090-ae23-4aaad7a214dc",
+      "6ba44086-d859-4fb7-8b8f-0c714be003d6": {
+        "recipe_run_id": "6ba44086-d859-4fb7-8b8f-0c714be003d6",
+        "recipe_id": "recipe_regolith_lunar_mare_v0",
+        "target_item_id": "regolith_lunar_mare",
+        "recipe_def": {
+          "id": "recipe_regolith_lunar_mare_v0",
+          "target_item_id": "regolith_lunar_mare",
+          "variant_id": null,
+          "steps": [
+            {
+              "process_id": "regolith_mining_simple_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [],
+              "outputs": [
+                {
+                  "item_id": "regolith_lunar_mare",
+                  "qty": 100.0,
+                  "unit": "kg",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": null,
+              "labor_hours": null,
+              "machine_hours": null,
+              "notes": null,
+              "scale": 20.0
+            }
+          ],
+          "inputs": [],
+          "outputs": [
+            {
+              "item_id": "regolith_lunar_mare",
+              "qty": 100.0,
+              "unit": "kg",
+              "notes": null
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": null,
+          "notes": "Bootstrap production path for mare regolith using the simple mining process.",
+          "kind": "recipe"
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 20.0
+      },
+      "a2f5e033-2255-4ac7-9e28-0f94261b00d3": {
+        "recipe_run_id": "a2f5e033-2255-4ac7-9e28-0f94261b00d3",
         "recipe_id": "recipe_ilmenite_from_regolith_v0",
         "target_item_id": "iron_ore_or_ilmenite",
         "recipe_def": {
@@ -1295,17 +876,17 @@
           "kind": "recipe",
           "name": "Recipe for ilmenite extraction from regolith"
         },
-        "started_at": 200.0,
+        "started_at": 40.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2200.0
+        "completed_at": 2040.0
       },
-      "630a65bb-46a1-41da-b8c8-ed5019d89611": {
-        "recipe_run_id": "630a65bb-46a1-41da-b8c8-ed5019d89611",
+      "179302fe-06f5-45c3-a68b-b574c8086ffa": {
+        "recipe_run_id": "179302fe-06f5-45c3-a68b-b574c8086ffa",
         "recipe_id": "recipe_iron_pig_or_ingot_v0",
         "target_item_id": "iron_pig_or_ingot",
         "recipe_def": {
@@ -1378,17 +959,17 @@
           "produces_qty": 1.0,
           "produces_unit": "kg"
         },
-        "started_at": 2400.0,
+        "started_at": 2240.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 4740.0
+        "completed_at": 4580.0
       },
-      "6427a98b-2c1c-4ac2-a257-ef58a8a7898f": {
-        "recipe_run_id": "6427a98b-2c1c-4ac2-a257-ef58a8a7898f",
+      "514eb7a2-030b-4a47-8200-a3701197b204": {
+        "recipe_run_id": "514eb7a2-030b-4a47-8200-a3701197b204",
         "recipe_id": "recipe_steel_ingot_v0",
         "target_item_id": "steel_ingot",
         "recipe_def": {
@@ -1486,7 +1067,7 @@
           "kind": "recipe",
           "name": "Recipe for steel ingot v0"
         },
-        "started_at": 5000.0,
+        "started_at": 4840.0,
         "completed_steps": [
           0,
           1
@@ -1494,10 +1075,10 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 6671.0
+        "completed_at": 6511.0
       },
-      "69b0fac8-46c8-470a-9e56-cbc0e502d175": {
-        "recipe_run_id": "69b0fac8-46c8-470a-9e56-cbc0e502d175",
+      "5d426ee2-3734-4f4c-bd22-932518cc2493": {
+        "recipe_run_id": "5d426ee2-3734-4f4c-bd22-932518cc2493",
         "recipe_id": "recipe_steel_plate_raw_v0",
         "target_item_id": "steel_plate_raw",
         "recipe_def": {
@@ -1506,7 +1087,7 @@
           "variant_id": "v0",
           "steps": [
             {
-              "process_id": "rolling_basic_v0",
+              "process_id": "rolling_basic_shop_v0",
               "time_model": null,
               "energy_model": null,
               "inputs": [
@@ -1559,17 +1140,17 @@
           "produces_qty": 1.0,
           "produces_unit": "kg"
         },
-        "started_at": 7000.0,
+        "started_at": 6840.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 7001.0
+        "completed_at": 6841.0
       },
-      "5f2d5f61-65a0-49b5-9c73-4113ae4320df": {
-        "recipe_run_id": "5f2d5f61-65a0-49b5-9c73-4113ae4320df",
+      "99e7e478-90d9-4685-aa7a-8795d3c446e4": {
+        "recipe_run_id": "99e7e478-90d9-4685-aa7a-8795d3c446e4",
         "recipe_id": "recipe_rock_crusher_basic_v0",
         "target_item_id": "rock_crusher_basic",
         "recipe_def": {
@@ -1729,7 +1310,7 @@
           "assumptions": "Heavy-duty jaw or cone crusher for primary size reduction. Requires heat-treated steel components for wear resistance.",
           "notes": "Rock crusher for regolith and ore processing. Reduces large rocks to smaller aggregate for downstream processing."
         },
-        "started_at": 7500.0,
+        "started_at": 7340.0,
         "completed_steps": [
           0,
           1,
@@ -1740,7 +1321,7 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 8431.129544588643
+        "completed_at": 8271.129544588643
       }
     }
   },
@@ -1760,8 +1341,10 @@
       "reduction_furnace_v0": 1.0,
       "casting_furnace_v0": 1.0,
       "casting_mold_set": 1.0,
+      "furnace_basic": 1.0,
       "high_temperature_power_supply_v0": 1.0,
       "plate_rolling_mill": 1.0,
+      "rolling_mill_or_brake": 1.0,
       "heating_furnace": 1.0
     },
     "reservations": [],

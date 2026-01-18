@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: aluminum_wire
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 1.0
     unit: kg
 outputs:
@@ -16,7 +16,7 @@ outputs:
 steps:
   - process_id: wire_drawing_aluminum_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:
@@ -28,4 +28,4 @@ steps:
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
-notes: "Placeholder recipe: produces aluminum_wire from metal_alloy_bulk via wire_drawing_aluminum_v0 (ISRU metal -> wire + scrap)."
+notes: "Placeholder recipe: produces aluminum_wire from regolith_metal_crude via wire_drawing_aluminum_v0 (ISRU metal -> wire + scrap)."

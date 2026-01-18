@@ -1,0 +1,75 @@
+id: recipe_grinding_wheels_isru_v0
+kind: recipe
+target_item_id: grinding_wheels
+variant_id: isru_v0
+inputs:
+  - item_id: alumina_powder
+    qty: 6.0
+    unit: kg
+    notes: Abrasive material from highlands regolith
+  - item_id: glass_bulk
+    qty: 2.5
+    unit: kg
+    notes: Vitrified bond material from regolith fines
+outputs:
+  - item_id: grinding_wheels
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: mixing_basic_v0
+    inputs:
+      - item_id: alumina_powder
+        qty: 6.0
+        unit: kg
+      - item_id: glass_bulk
+        qty: 2.5
+        unit: kg
+    outputs:
+      - item_id: abrasive_mixture
+        qty: 8.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 0.5
+    machine_hours: 1.0
+    notes: "Mix alumina abrasive with glass bond powder"
+  - process_id: molding_press_operation_v0
+    inputs:
+      - item_id: abrasive_mixture
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: pressed_green_compact
+        qty: 8.0
+        unit: kg
+    est_time_hr: 0.5
+    labor_hours: 0.3
+    machine_hours: 0.5
+    notes: "Press mixture into wheel blanks at high pressure"
+  - process_id: ceramic_firing_high_temp_v0
+    inputs:
+      - item_id: pressed_green_compact
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: fired_ceramic_parts
+        qty: 7.5
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    labor_hours: 1.0
+    notes: "Vitrify at 1200-1400°C to fuse glass bond with alumina"
+  - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: fired_ceramic_parts
+        qty: 7.5
+        unit: kg
+    outputs:
+      - item_id: grinding_wheels
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 1.0
+    notes: "Grind to final dimensions, balance, and dress wheel faces"
+assumptions: "Alumina-glass grinding wheels using vitrified bond. Highland regolith provides Al2O3, regolith fines provide glass bond."
+notes: "ISRU grinding wheel manufacture. Total time ~9.5 hours. Produces set of precision grinding wheels from regolith materials."

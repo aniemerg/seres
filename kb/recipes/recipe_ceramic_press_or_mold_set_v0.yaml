@@ -1,0 +1,65 @@
+id: recipe_ceramic_press_or_mold_set_v0
+target_item_id: ceramic_press_or_mold_set
+variant_id: v0
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 22.0
+    unit: kg
+outputs:
+  - item_id: ceramic_press_or_mold_set
+    qty: 1
+    unit: unit
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 21.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.5
+    notes: "Cast mold base plate, cavity plates, and ejector components (22 kg raw → 21 kg cast with ~5% loss)"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 21.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 20.5
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 1.5
+    notes: "Machine mold cavity surfaces, register features, and mounting holes"
+  - process_id: surface_finishing_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 20.5
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 20.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 1.0
+    notes: "Polish mold cavity surfaces for clean part release, deburr sharp edges"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: ceramic_press_or_mold_set
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble mold halves, install alignment pins and ejector mechanism, verify operation"
+assumptions: "Ceramic press/mold set for forming green ceramic parts. Steel construction is adequate - no hardening required since ceramic powder is non-abrasive. Set includes base, top plate, cavity inserts, and simple ejector mechanism."
+notes: "Total fabrication time ~7 hours. Mold set suitable for slip casting or dry pressing ceramic powder mixtures. Simpler than metal forming dies - no heat treatment needed."

@@ -71,6 +71,12 @@ Commentary: import required equipment and feedstocks to validate the recipe end-
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_or_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: heating_furnace
     quantity: 1
     unit: unit
@@ -255,6 +261,12 @@ equipment needed for the ISRU path.
 - cmd: sim.import
   args:
     item: plate_rolling_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: rolling_mill_or_brake
     quantity: 1
     unit: unit
     ensure: true

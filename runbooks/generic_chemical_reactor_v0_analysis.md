@@ -12,7 +12,7 @@
 
 Each generic_chemical_reactor_v0 requires:
 ```
-- metal_alloy_bulk: 1.0 kg
+- regolith_metal_crude: 1.0 kg
 - machined_part_raw: 1.0 kg
 - enclosure_steel_small: 1.0 kg
 - assembled_electrical_equipment: 1.0 kg
@@ -26,7 +26,7 @@ Total material mass per reactor (excluding discrete parts): **~6 kg**
 
 For 2 reactors (runbook attempted to build 2):
 ```
-- metal_alloy_bulk: 1.0 kg (only enough for 1 reactor!)
+- regolith_metal_crude: 1.0 kg (only enough for 1 reactor!)
 - machined_part_raw: 1.0 kg
 - enclosure_steel_small: 1.0 kg
 - assembled_electrical_equipment: 2.0 kg
@@ -42,11 +42,11 @@ For 2 reactors (runbook attempted to build 2):
 regolith_lunar_mare (1400 kg)
   → screening → regolith_coarse_fraction (840 kg) + regolith_fine_fraction (560 kg)
     → crushing → regolith_powder (840 kg)
-      → electrolysis → metal_alloy_bulk (336 kg) [STILL RUNNING - completes at 2724 hours]
+      → electrolysis → regolith_metal_crude (336 kg) [STILL RUNNING - completes at 2724 hours]
 ```
 
 **Status:** Electrolysis started at 204 hours, will complete at 2724 hours (2520 hour duration)
-**Result:** Would produce 336 kg metal_alloy_bulk (enough for 336 reactors!)
+**Result:** Would produce 336 kg regolith_metal_crude (enough for 336 reactors!)
 
 ### Sheet Metal Forming (COMPLETED)
 ```
@@ -69,7 +69,7 @@ The recipes need more time to complete their assembly steps.
 
 ## Theoretical In-Situ Analysis (If We Waited)
 
-If we waited for the oxygen extraction to complete and used that metal_alloy_bulk:
+If we waited for the oxygen extraction to complete and used that regolith_metal_crude:
 
 ### Option A: Use In-Situ Metal Alloy for Second Reactor
 
@@ -77,7 +77,7 @@ If we waited for the oxygen extraction to complete and used that metal_alloy_bul
 ```
 Component                          Mass    Source        In-Situ?
 ----------------------------------------  -------------  --------
-metal_alloy_bulk                   1.0 kg  Regolith      ✓ YES
+regolith_metal_crude                   1.0 kg  Regolith      ✓ YES
 machined_part_raw                  1.0 kg  Imported      ✗ NO
 enclosure_steel_small              1.0 kg  Imported      ✗ NO
 assembled_electrical_equipment     1.0 kg  Imported      ✗ NO
@@ -91,7 +91,7 @@ In-situ percentage:                14.3%
 
 ### Option B: Fully In-Situ Metal Components
 
-If we also produced steel plate from the metal_alloy_bulk and used it for enclosures:
+If we also produced steel plate from the regolith_metal_crude and used it for enclosures:
 
 **Additional processes needed:**
 1. Metal alloy → steel ingot (refining)
@@ -102,7 +102,7 @@ If we also produced steel plate from the metal_alloy_bulk and used it for enclos
 ```
 Component                          Mass    Source        In-Situ?
 ----------------------------------------  -------------  --------
-metal_alloy_bulk                   1.0 kg  Regolith      ✓ YES
+regolith_metal_crude                   1.0 kg  Regolith      ✓ YES
 machined_part_raw                  1.0 kg  Regolith*     ✓ YES*
 enclosure_steel_small              1.0 kg  Regolith*     ✓ YES*
 assembled_electrical_equipment     1.0 kg  Imported      ✗ NO
@@ -135,7 +135,7 @@ In-situ percentage:                42.9%
 ## Recommendations
 
 1. **Update runbook timing:** Add 220+ hours advance-time after second recipe start to see completion
-2. **Add steel processing chain:** Create recipes for metal_alloy_bulk → steel_plate_or_sheet
+2. **Add steel processing chain:** Create recipes for regolith_metal_crude → steel_plate_or_sheet
 3. **Connect forming to enclosures:** Map formed_sheet_metal_parts → enclosure_steel_small
 4. **Track material provenance:** Enhance simulation to track which kg came from which source
 5. **Electronics pathway:** Begin mapping processes for basic electronic component production

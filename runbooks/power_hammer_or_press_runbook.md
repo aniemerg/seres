@@ -61,6 +61,12 @@ Commentary: import basic equipment for mining and processing.
     ensure: true
 - cmd: sim.import
   args:
+    item: blast_furnace_or_smelter
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: casting_furnace_v0
     quantity: 1
     unit: unit
@@ -235,6 +241,12 @@ Commentary: import basic equipment for mining and processing.
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_or_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: electrical_energy
     quantity: 500
     unit: kWh
@@ -267,7 +279,7 @@ Commentary: mine regolith for iron extraction and metal alloy bulk for component
     message: "Regolith mining complete."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 2
 - cmd: sim.advance-time
   args:
@@ -322,10 +334,10 @@ Commentary: mine additional regolith and produce steel materials for frame using
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 460
+    quantity: 480
 - cmd: sim.advance-time
   args:
-    hours: 50
+    hours: 560
 - cmd: sim.note
   args:
     style: info
@@ -333,13 +345,13 @@ Commentary: mine additional regolith and produce steel materials for frame using
 - cmd: sim.import
   args:
     item: carbon_reductant
-    quantity: 70
+    quantity: 72
     unit: kg
     ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reducing_agent_v0
-    quantity: 70
+    quantity: 72
 - cmd: sim.advance-time
   args:
     hours: 10
@@ -350,10 +362,10 @@ Commentary: mine additional regolith and produce steel materials for frame using
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 140
+    quantity: 144
 - cmd: sim.advance-time
   args:
-    hours: 30
+    hours: 600
 - cmd: sim.note
   args:
     style: info
@@ -361,10 +373,10 @@ Commentary: mine additional regolith and produce steel materials for frame using
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_ingot_v0
-    quantity: 135
+    quantity: 137
 - cmd: sim.advance-time
   args:
-    hours: 30
+    hours: 430
 - cmd: sim.note
   args:
     style: info
@@ -454,6 +466,12 @@ Commentary: produce coil insulation material from silicon.
   args:
     item: silicon_purified
     quantity: 1
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: silicon_metal_v0
+    quantity: 1.5
     unit: kg
     ensure: true
 - cmd: sim.import
@@ -562,6 +580,17 @@ Commentary: build frame, head, and anvil sequentially to avoid machine conflicts
 - cmd: sim.note
   args:
     style: milestone
+    message: "Producing additional regolith_metal_crude for hammer head."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 2
+- cmd: sim.advance-time
+  args:
+    hours: 28
+- cmd: sim.note
+  args:
+    style: milestone
     message: "Building hammer head."
 - cmd: sim.run-recipe
   args:
@@ -574,6 +603,17 @@ Commentary: build frame, head, and anvil sequentially to avoid machine conflicts
   args:
     style: milestone
     message: "Building anvil block."
+- cmd: sim.note
+  args:
+    style: milestone
+    message: "Producing additional regolith_metal_crude for anvil block."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 4
+- cmd: sim.advance-time
+  args:
+    hours: 56
 - cmd: sim.run-recipe
   args:
     recipe: recipe_anvil_block_basic_v0
@@ -592,6 +632,12 @@ Commentary: assemble the hammer drive motor.
   args:
     style: milestone
     message: "Assembling hammer drive motor."
+- cmd: sim.import
+  args:
+    item: assembled_equipment
+    quantity: 1
+    unit: kg
+    ensure: true
 - cmd: sim.import
   args:
     item: electrical_wire_and_connectors

@@ -1,0 +1,53 @@
+id: recipe_screen_deck_basic_isru_v0
+target_item_id: screen_deck_basic
+variant_id: isru_v0
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 47.0
+    unit: kg
+    notes: "Regolith-derived metal for ISRU"
+outputs:
+  - item_id: screen_deck_basic
+    qty: 40.0
+    unit: kg
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 47.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 45.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast screen frame components"
+  - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 45.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 42.5
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    labor_hours: 2.0
+    notes: "Weld screen mesh to frame"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 42.5
+        unit: kg
+    outputs:
+      - item_id: screen_deck_basic
+        qty: 40.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    labor_hours: 1.0
+    notes: "Machine mounting brackets"
+assumptions: "Simple ISRU route using regolith metal; 5% casting loss, 5% welding loss, 6% machining loss"
+notes: "ISRU variant using regolith_metal_crude from regolith. Enables local production of screen decks."

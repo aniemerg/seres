@@ -8,7 +8,7 @@ Goal: Build `forge_or_induction_heater_v0` using in-situ resources where possibl
 - **Capabilities**: forging, induction_heating
 
 ## Required Components (Mass-Corrected Recipe)
-1. metal_alloy_bulk (1720 kg) - structural frame
+1. regolith_metal_crude (1720 kg) - structural frame
 2. heating_element_set_industrial (1 unit)
 3. insulation_pack_high_temp (1 unit)
 4. motor_assembly (12 kg)
@@ -33,15 +33,13 @@ Goal: Build `forge_or_induction_heater_v0` using in-situ resources where possibl
     message: "Simulation reset. Starting forge_or_induction_heater_v0 runbook."
 ```
 
-## Stage 1: Baseline (import all components)
-
-Commentary: Import all BOM parts and assembly equipment to ensure the forge can be assembled.
+## Build forge with local metal (ISRU)
 
 ```sim-runbook
 - cmd: sim.note
   args:
-    style: milestone
-    message: "Import baseline equipment and parts for assembly."
+    style: info
+    message: "Import machines for local metal production from regolith"
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -98,153 +96,19 @@ Commentary: Import all BOM parts and assembly equipment to ensure the forge can 
     ensure: true
 - cmd: sim.import
   args:
-    item: process_power
-    quantity: 2000
-    unit: kWh
-    ensure: true
-- cmd: sim.import
-  args:
-    item: metal_alloy_bulk
-    quantity: 1720.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_element_set_industrial
-    quantity: 20.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: insulation_pack_high_temp
-    quantity: 120.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: motor_assembly
-    quantity: 12.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: shaft_and_bearing_set
-    quantity: 15.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: bearing_set_heavy
-    quantity: 4.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1.0
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 2.0
-    unit: kg
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Assemble forge from imported parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_forge_or_induction_heater_v0_isru
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 50
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline forge_or_induction_heater_v0 complete."
-```
-
-## Stage 2: Local Metal Production (ISRU)
-
-Commentary: Produce metal_alloy_bulk from regolith using MRE process. Need 1720 kg, which is ~76 batches of recipe_metal_alloy_bulk_v0 (22.8 kg each).
-
-```sim-runbook
-- cmd: sim.use
-  args:
-    sim-id: forge_or_induction_heater_v0_runbook
-- cmd: sim.reset
-  args:
-    sim-id: forge_or_induction_heater_v0_runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Stage 2: Local metal production from regolith"
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
+    item: mre_reactor_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: assembly_station
+    item: high_temperature_power_supply_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: furnace_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: crucible_refractory
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: casting_mold_set
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_power_supply_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: welding_consumables
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fixturing_workbench
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrolysis_cell_unit_v0
+    item: electrodes
     quantity: 1
     unit: unit
     ensure: true
@@ -329,20 +193,20 @@ Commentary: Produce metal_alloy_bulk from regolith using MRE process. Need 1720 
 - cmd: sim.import
   args:
     item: electrical_energy
-    quantity: 25000
+    quantity: 30000
     unit: kWh
     ensure: true
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce 1720 kg metal_alloy_bulk from regolith (76 batches)"
+    message: "Produce 1720 kg regolith_metal_crude from regolith (76 batches)"
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 76
 - cmd: sim.advance-time
   args:
-    hours: 500
+    hours: 600
 - cmd: sim.note
   args:
     style: milestone
@@ -357,8 +221,8 @@ Commentary: Produce metal_alloy_bulk from regolith using MRE process. Need 1720 
 - cmd: sim.note
   args:
     style: success
-    message: "Stage 2 complete: Forge with local metal ISRU"
+    message: "Forge built with local metal ISRU"
+- cmd: sim.provenance
+  args:
+    item: forge_or_induction_heater_v0
 ```
-
-## Stage 3: Final Assembly
-*To be implemented - optimize remaining components for ISRU*

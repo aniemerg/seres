@@ -1,0 +1,313 @@
+{
+  "sim_id": "drying_oven_runbook",
+  "state": {
+    "sim_id": "drying_oven_runbook",
+    "current_time_hours": 12.0,
+    "inventory": {
+      "labor_bot_general_v0": {
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      "assembly_station": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "drying_oven": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "active_processes": [],
+    "machines_built": [],
+    "machines_in_use": {},
+    "total_imports": {
+      "labor_bot_general_v0": {
+        "quantity": 2.0,
+        "unit": "unit"
+      },
+      "assembly_station": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "structural_steel_frame": {
+        "quantity": 60.0,
+        "unit": "kg"
+      },
+      "insulation_panel_high_temp": {
+        "quantity": 30.0,
+        "unit": "kg"
+      },
+      "heating_element_resistive": {
+        "quantity": 4.0,
+        "unit": "unit"
+      },
+      "temperature_controller_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "power_electronics_module": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "fastener_kit_medium": {
+        "quantity": 1.0,
+        "unit": "unit"
+      }
+    },
+    "provenance": {
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 240.0,
+        "unknown_kg": 0.0
+      },
+      "assembly_station": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 80.0,
+        "unknown_kg": 0.0
+      },
+      "assembly_tools_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 50.0,
+        "unknown_kg": 0.0
+      },
+      "structural_steel_frame": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "insulation_panel_high_temp": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "heating_element_resistive": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "temperature_controller_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "power_electronics_module": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "fastener_kit_medium": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "drying_oven": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 131.0,
+        "unknown_kg": 0.0
+      }
+    },
+    "complexity_scores": {
+      "drying_oven": 2
+    },
+    "total_energy_kwh": 0.0
+  },
+  "scheduler": {
+    "current_time": 12.0,
+    "event_queue": [],
+    "active_processes": {},
+    "completed_processes": [
+      {
+        "process_run_id": "cadfbe9a-ffa1-4fdf-bda8-6246677d21c9",
+        "process_id": "assembly_basic_v0",
+        "start_time": 0.0,
+        "duration_hours": 1.0,
+        "end_time": 1.0,
+        "scale": 1.0,
+        "inputs_consumed": {
+          "structural_steel_frame": 60.0,
+          "insulation_panel_high_temp": 30.0,
+          "heating_element_resistive": 4.0,
+          "temperature_controller_basic": 1.0,
+          "power_electronics_module": 1.0,
+          "fastener_kit_medium": 1.0
+        },
+        "outputs_pending": {
+          "drying_oven": 1.0
+        },
+        "outputs_pending_units": {
+          "drying_oven": "unit"
+        },
+        "machines_reserved": {
+          "labor_bot_general_v0": 1.0,
+          "assembly_tools_basic": 1.0
+        },
+        "provenance_consumed_kg": {
+          "in_situ_kg": 0.0,
+          "imported_kg": 131.0,
+          "unknown_kg": 0.0
+        },
+        "inputs_consumed_units": {
+          "structural_steel_frame": "kg",
+          "insulation_panel_high_temp": "kg",
+          "heating_element_resistive": "unit",
+          "temperature_controller_basic": "unit",
+          "power_electronics_module": "unit",
+          "fastener_kit_medium": "unit"
+        },
+        "recipe_run_id": "997eaacc-c658-4fba-b48f-9f8634504db8",
+        "step_index": 0,
+        "energy_kwh": 0.0
+      }
+    ],
+    "total_events_processed": 2
+  },
+  "orchestrator": {
+    "recipe_runs": {
+      "997eaacc-c658-4fba-b48f-9f8634504db8": {
+        "recipe_run_id": "997eaacc-c658-4fba-b48f-9f8634504db8",
+        "recipe_id": "recipe_drying_oven_v0",
+        "target_item_id": "drying_oven",
+        "recipe_def": {
+          "id": "recipe_drying_oven_v0",
+          "target_item_id": "drying_oven",
+          "variant_id": "v0",
+          "steps": [
+            {
+              "process_id": "assembly_basic_v0",
+              "time_model": null,
+              "energy_model": null,
+              "inputs": [
+                {
+                  "item_id": "structural_steel_frame",
+                  "qty": 60.0,
+                  "unit": "kg",
+                  "notes": null
+                },
+                {
+                  "item_id": "insulation_panel_high_temp",
+                  "qty": 30.0,
+                  "unit": "kg",
+                  "notes": null
+                },
+                {
+                  "item_id": "heating_element_resistive",
+                  "qty": 4.0,
+                  "unit": "unit",
+                  "notes": null
+                },
+                {
+                  "item_id": "temperature_controller_basic",
+                  "qty": 1.0,
+                  "unit": "unit",
+                  "notes": null
+                },
+                {
+                  "item_id": "power_electronics_module",
+                  "qty": 1.0,
+                  "unit": "unit",
+                  "notes": null
+                },
+                {
+                  "item_id": "fastener_kit_medium",
+                  "qty": 1.0,
+                  "unit": "unit",
+                  "notes": null
+                }
+              ],
+              "outputs": [
+                {
+                  "item_id": "drying_oven",
+                  "qty": 1.0,
+                  "unit": "unit",
+                  "notes": null
+                }
+              ],
+              "byproducts": [],
+              "est_time_hr": 8.0,
+              "labor_hours": 6.0,
+              "machine_hours": 2.0,
+              "notes": "Assemble steel frame, install insulation panels, mount heating elements, integrate temperature controller and power electronics"
+            }
+          ],
+          "inputs": [
+            {
+              "item_id": "structural_steel_frame",
+              "qty": 60.0,
+              "unit": "kg",
+              "notes": null
+            },
+            {
+              "item_id": "insulation_panel_high_temp",
+              "qty": 30.0,
+              "unit": "kg",
+              "notes": null
+            },
+            {
+              "item_id": "heating_element_resistive",
+              "qty": 4.0,
+              "unit": "unit",
+              "notes": null
+            },
+            {
+              "item_id": "temperature_controller_basic",
+              "qty": 1.0,
+              "unit": "unit",
+              "notes": null
+            },
+            {
+              "item_id": "power_electronics_module",
+              "qty": 1.0,
+              "unit": "unit",
+              "notes": null
+            },
+            {
+              "item_id": "fastener_kit_medium",
+              "qty": 1.0,
+              "unit": "unit",
+              "notes": null
+            }
+          ],
+          "outputs": [
+            {
+              "item_id": "drying_oven",
+              "qty": 1.0,
+              "unit": "unit",
+              "notes": null
+            }
+          ],
+          "alternatives": [],
+          "dedupe_candidate": null,
+          "assumptions": "Drying oven assembled from structural frame, insulation, heating elements, and control systems",
+          "notes": "Assembly of drying oven for materials drying and heat treatment processes",
+          "kind": "recipe",
+          "name": "Recipe for drying oven"
+        },
+        "started_at": 0.0,
+        "completed_steps": [
+          0
+        ],
+        "active_steps": {},
+        "scheduled_steps": {},
+        "is_completed": true,
+        "completed_at": 1.0
+      }
+    }
+  },
+  "reservation_manager": {
+    "machine_capacities": {
+      "labor_bot_general_v0": 2.0,
+      "assembly_station": 1.0,
+      "assembly_tools_basic": 1.0
+    },
+    "reservations": [],
+    "current_time": 0.0
+  }
+}

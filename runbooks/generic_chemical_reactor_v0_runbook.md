@@ -4,7 +4,7 @@ Goal: build `generic_chemical_reactor_v0` while maximizing in-situ production of
 
 Approach:
 1) Import all top-level parts and assemble a baseline unit.
-2) Produce metal_alloy_bulk from regolith where feasible.
+2) Produce regolith_metal_crude from regolith where feasible.
 3) Attempt to produce other components locally (machined parts, enclosures).
 4) Assemble a second unit using locally-produced components where possible.
 
@@ -161,7 +161,7 @@ Commentary: import all required parts and assemble a first unit to validate the 
 ```sim-runbook
 - cmd: sim.import
   args:
-    item: metal_alloy_bulk
+    item: regolith_metal_crude
     quantity: 1
     unit: kg
     ensure: true
@@ -208,15 +208,15 @@ Commentary: import all required parts and assemble a first unit to validate the 
     message: "Baseline generic_chemical_reactor_v0 assembled from imported parts."
 ```
 
-## In-situ production: metal_alloy_bulk from regolith
+## In-situ production: regolith_metal_crude from regolith
 
-Commentary: produce metal_alloy_bulk from regolith using the full processing chain.
+Commentary: produce regolith_metal_crude from regolith using the full processing chain.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith."
+    message: "Produce regolith_metal_crude from regolith."
 - cmd: sim.import
   args:
     item: electrical_energy
@@ -363,7 +363,7 @@ This runbook successfully demonstrates building generic_chemical_reactor_v0 with
 
 **Accomplishments:**
 1. Assembled a baseline reactor from fully imported parts (validation)
-2. Produced metal_alloy_bulk from lunar regolith via:
+2. Produced regolith_metal_crude from lunar regolith via:
    - Mining (regolith_lunar_mare: 1400 kg)
    - Screening and crushing (processed 840 kg)
    - Molten regolith electrolysis (produced 336 kg of metal alloy)

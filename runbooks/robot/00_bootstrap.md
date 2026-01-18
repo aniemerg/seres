@@ -332,7 +332,7 @@ Commentary: form the steel housing locally from iron stock.
 
 ## Motor dependencies: bearing set
 
-Commentary: produce metal_alloy_bulk locally, then cast and finish a small bearing set.
+Commentary: produce regolith_metal_crude locally, then cast and finish a small bearing set.
 
 ```sim-runbook
 - cmd: sim.note
@@ -390,7 +390,7 @@ Commentary: produce metal_alloy_bulk locally, then cast and finish a small beari
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 1
 - cmd: sim.advance-time
   args:

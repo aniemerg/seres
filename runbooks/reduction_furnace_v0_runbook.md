@@ -117,7 +117,7 @@ Goal: Build `reduction_furnace_v0` with maximum ISRU percentage by producing maj
 
 ## Stage 2: Produce metal feedstock from regolith
 
-Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
+Commentary: Produce 1000 kg of regolith_metal_crude to supply all major components.
 
 !!! warning "Energy spike"
     This stage consumes the majority of total energy; expect a large delta in the summary.
@@ -126,7 +126,7 @@ Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce 1000 kg metal_alloy_bulk from regolith."
+    message: "Produce 1000 kg regolith_metal_crude from regolith."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -177,7 +177,7 @@ Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 44
 - cmd: sim.advance-time
   args:

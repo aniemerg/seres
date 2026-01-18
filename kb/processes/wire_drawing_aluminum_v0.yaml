@@ -2,7 +2,7 @@ id: wire_drawing_aluminum_v0
 kind: process
 name: Aluminum wire drawing v0
 inputs:
-- item_id: metal_alloy_bulk
+- item_id: regolith_metal_crude
   qty: 1.0
   unit: kg
 outputs:
@@ -24,12 +24,12 @@ energy_model:
   type: per_unit
   value: 1.5
   unit: kWh/kg
-  scaling_basis: metal_alloy_bulk
+  scaling_basis: regolith_metal_crude
 time_model:
   type: linear_rate
   rate: 2.0
   rate_unit: kg/hr
-  scaling_basis: metal_alloy_bulk
+  scaling_basis: regolith_metal_crude
 notes: Wire drawing through progressively smaller dies. Includes realistic waste/loss
   as metal scrap; 5% loss assumed.
 process_type: continuous

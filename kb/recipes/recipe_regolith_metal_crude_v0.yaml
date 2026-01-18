@@ -1,16 +1,13 @@
-id: recipe_metal_alloy_bulk_v0
+id: recipe_regolith_metal_crude_v0
 kind: recipe
-target_item_id: metal_alloy_bulk
+target_item_id: regolith_metal_crude
 variant_id: v0
 inputs:
   - item_id: regolith_lunar_mare
     qty: 100.0
     unit: kg
-  - item_id: electrical_energy
-    qty: 380.0
-    unit: kWh
 outputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 22.8
     unit: kg
   - item_id: oxygen_gas
@@ -64,14 +61,11 @@ steps:
       - item_id: regolith_powder
         qty: 38.0
         unit: kg
-      - item_id: electrical_energy
-        qty: 380.0
-        unit: kWh
     outputs:
       - item_id: oxygen_gas
         qty: 15.2
         unit: kg
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 22.8
         unit: kg
     est_time_hr: 4.0

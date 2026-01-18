@@ -234,15 +234,15 @@ Commentary: import subcomponents to validate the base recipe.
     message: "Baseline high_temperature_power_supply_v0 build complete."
 ```
 
-## ISRU: produce metal_alloy_bulk via MRE
+## ISRU: produce regolith_metal_crude via MRE
 
-Commentary: produce metal_alloy_bulk from regolith using molten regolith electrolysis.
+Commentary: produce regolith_metal_crude from regolith using molten regolith electrolysis.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: produce metal_alloy_bulk via MRE."
+    message: "ISRU: produce regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: electrical_energy
@@ -251,7 +251,7 @@ Commentary: produce metal_alloy_bulk from regolith using molten regolith electro
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 12
 - cmd: sim.advance-time
   args:
@@ -297,7 +297,7 @@ sensors, and small electronics imported for now.
   args:
     item: fastener_kit_small
     quantity: 1
-    unit: kg
+    unit: unit
     ensure: true
 - cmd: sim.run-recipe
   args:
@@ -305,7 +305,7 @@ sensors, and small electronics imported for now.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 40
+    hours: 80
 - cmd: sim.note
   args:
     style: milestone
@@ -337,6 +337,12 @@ sensors, and small electronics imported for now.
 - cmd: sim.advance-time
   args:
     hours: 20
+- cmd: sim.import
+  args:
+    item: fastener_kit_small
+    quantity: 1
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_power_bus_high_current_v0

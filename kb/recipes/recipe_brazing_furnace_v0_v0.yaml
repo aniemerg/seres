@@ -6,7 +6,7 @@ produces_unit: unit
 target_item_id: brazing_furnace_v0
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 350.0
     unit: kg
   - item_id: base_metal_parts
@@ -27,7 +27,7 @@ steps:
     notes: "Prepare mold for furnace shell"
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 350.0
         unit: kg
       - item_id: prepared_mold

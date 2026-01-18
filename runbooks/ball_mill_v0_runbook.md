@@ -433,96 +433,40 @@ Commentary: import the minimum tooling and seed materials to allow local product
 - cmd: sim.note
   args:
     style: milestone
-    message: "Mine regolith feedstocks and produce metal_alloy_bulk via MRE."
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    duration: 2
-- cmd: sim.advance-time
-  args:
-    hours: 2
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 120
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_carbonaceous_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_lunar_highlands_v0
-    duration: 6
-- cmd: sim.advance-time
-  args:
-    hours: 6
+    message: "Mine regolith feedstocks and produce regolith_metal_crude via MRE."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_lunar_mare_v0
+    quantity: 2
+- cmd: sim.advance-time
+  args:
+    hours: 4
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_carbonaceous_collection_v0
+    quantity: 54
+- cmd: sim.advance-time
+  args:
+    hours: 432
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_lunar_highlands_v0
+    quantity: 6
+- cmd: sim.advance-time
+  args:
+    hours: 12
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 30
 - cmd: sim.advance-time
   args:
-    hours: 240
+    hours: 500
 ```
 
 ## In-situ: casting parts for mill shell + trunnions + frame
 
-Commentary: make core structural parts that depend on metal_alloy_bulk.
+Commentary: make core structural parts that depend on regolith_metal_crude.
 
 ```sim-runbook
 - cmd: sim.note
@@ -605,24 +549,31 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reductant_v0
-    quantity: 24
+    quantity: 35
 - cmd: sim.advance-time
   args:
-    hours: 40
+    hours: 60
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reducing_agent_v0
-    quantity: 7
+    quantity: 10
 - cmd: sim.advance-time
   args:
     hours: 6
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 44
+    recipe: recipe_regolith_lunar_mare_v0
+    quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 55
+    hours: 2
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_ilmenite_from_regolith_v0
+    quantity: 66
+- cmd: sim.advance-time
+  args:
+    hours: 80
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_pig_or_ingot_v0
@@ -651,19 +602,27 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.advance-time
   args:
     hours: 2
+
+- cmd: sim.note
+  args:
+    style: info
+    message: "Produce steel_stock for bearings."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_stock_v0
+    quantity: 6
+- cmd: sim.advance-time
+  args:
+    hours: 40
 ```
 
-## In-situ: bearing set + fastener kit
+## In-situ: fastener kit + bearing set
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce bearing set and fastener kit."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_bearing_set_heavy_v0
-    quantity: 3
+    message: "Produce fastener kit."
 - cmd: sim.run-recipe
   args:
     recipe: recipe_fastener_kit_medium_v0
@@ -671,6 +630,17 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.advance-time
   args:
     hours: 20
+- cmd: sim.note
+  args:
+    style: milestone
+    message: "Produce bearing set."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_bearing_set_heavy_v0
+    quantity: 3
+- cmd: sim.advance-time
+  args:
+    hours: 40
 ```
 
 ## In-situ: iron and silicon feedstocks
@@ -680,13 +650,13 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
   args:
     style: milestone
     message: "Produce iron and silicon feedstocks."
-- cmd: sim.start-process
+- cmd: sim.run-recipe
   args:
-    process: regolith_mining_simple_v0
-    duration: 2
+    recipe: recipe_regolith_lunar_mare_v0
+    quantity: 2
 - cmd: sim.advance-time
   args:
-    hours: 2
+    hours: 4
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reductant_v0
@@ -886,10 +856,10 @@ Commentary: make core structural parts that depend on metal_alloy_bulk.
 - cmd: sim.advance-time
   args:
     hours: 4
-- cmd: sim.start-process
+- cmd: sim.run-recipe
   args:
-    process: drive_motor_medium_assembly_v0
-    duration: 4
+    recipe: recipe_drive_motor_medium_assembly_only_v0
+    quantity: 1
 - cmd: sim.advance-time
   args:
     hours: 6

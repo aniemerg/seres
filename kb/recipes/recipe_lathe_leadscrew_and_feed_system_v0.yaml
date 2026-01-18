@@ -3,7 +3,7 @@ target_item_id: lathe_leadscrew_and_feed_system
 variant_id: v0
 inputs:
   - item_id: steel_stock
-    qty: 8.0
+    qty: 50.0
     unit: kg
   - item_id: steel_stock_bar_or_billet
     qty: 7.5
@@ -21,11 +21,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
     - item_id: steel_stock
-      qty: 8.0
+      qty: 50.0
       unit: kg
     outputs:
     - item_id: machined_part_raw
-      qty: 7.5
+      qty: 45.0
       unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -46,6 +46,9 @@ steps:
     notes: "Cut/change gears for threading and feeds."
   - process_id: assembly_basic_v0
     inputs:
+    - item_id: machined_part_raw
+      qty: 45.0
+      unit: kg
     - item_id: spur_gear_set_v0
       qty: 7.0
       unit: kg

@@ -3,7 +3,7 @@ kind: recipe
 variant_id: v1
 target_item_id: refining_furnace
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 500.0
     unit: kg
   - item_id: furnace_shell_insulated
@@ -31,7 +31,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 500.0
         unit: kg
     outputs:

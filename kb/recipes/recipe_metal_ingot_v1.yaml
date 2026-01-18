@@ -3,13 +3,13 @@ kind: recipe
 target_item_id: metal_ingot
 variant_id: v1
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 1.05
     unit: kg
 steps:
   - process_id: metal_ingot_cast_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.05
         unit: kg
     outputs:
@@ -20,5 +20,5 @@ steps:
     machine_hours: 1.5
     labor_hours: 1.0
     notes: "Cast molten metal into ingot or billet molds"
-assumptions: "Local metal ingot production from metal_alloy_bulk; 5% loss during casting from slag and furnace residue."
+assumptions: "Local metal ingot production from regolith_metal_crude; 5% loss during casting from slag and furnace residue."
 notes: "Casting metal ingot from metal alloy bulk via metal_ingot_cast_v0 process; produces 1.0 kg standard ingot."

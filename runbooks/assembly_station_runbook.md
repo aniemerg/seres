@@ -47,7 +47,7 @@ Commentary: import all inputs to validate `recipe_assembly_station_v0`.
     ensure: true
 - cmd: sim.import
   args:
-    item: metal_alloy_bulk
+    item: regolith_metal_crude
     quantity: 80
     unit: kg
     ensure: true
@@ -117,7 +117,7 @@ still relies on imported feedstocks for metals and electronics.
 - cmd: sim.note
   args:
     style: info
-    message: "ISRU: produce metal_alloy_bulk via MRE for power conditioning."
+    message: "ISRU: produce regolith_metal_crude via MRE for power conditioning."
 - cmd: sim.import
   args:
     item: vibrating_screen_v0
@@ -168,7 +168,7 @@ still relies on imported feedstocks for metals and electronics.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 9
 - cmd: sim.advance-time
   args:
@@ -312,7 +312,7 @@ still relies on imported feedstocks for metals and electronics.
     message: "Final assembly using local subcomponents and remaining imports."
 - cmd: sim.import
   args:
-    item: metal_alloy_bulk
+    item: regolith_metal_crude
     quantity: 80
     unit: kg
     ensure: true

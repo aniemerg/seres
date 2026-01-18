@@ -337,7 +337,7 @@ Commentary: import tooling and MRE equipment, then produce metal alloy bulk loca
     message: "Produce metal alloy bulk from regolith."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 1
 - cmd: sim.advance-time
   args:

@@ -35,30 +35,6 @@ outputs:
     qty: 1.0
     unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
-    inputs:
-      - item_id: machine_base_large
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: machine_base_large
-        qty: 1.0
-        unit: unit
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Cast machine base, column, table"
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: machine_base_large
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: machine_base_large
-        qty: 1.0
-        unit: unit
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    notes: "Machine table ways, spindle mounting, precision surfaces"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machine_base_large
@@ -106,7 +82,10 @@ steps:
     notes: "Install spindle motor, table motors, chuck power, coolant pump"
   - process_id: precision_alignment_and_leveling_v0
     inputs:
-      - item_id: machine_base_large
+      - item_id: assembled_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: assembled_electrical_equipment
         qty: 1.0
         unit: unit
     outputs:

@@ -26,8 +26,8 @@ inputs:
     qty: 1
     unit: unit
   - item_id: assembled_equipment
-    qty: 1
-    unit: unit
+    qty: 16.0
+    unit: kg
     notes: "Intermediate for inspection"
 outputs:
   - item_id: hand_tools_mechanical
@@ -95,16 +95,16 @@ steps:
       unit: unit
     outputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 16.0
+      unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble multi-part tools (pliers with rivets, socket wrenches with ratchet mechanisms), install handles on screwdrivers and files"
   - process_id: inspection_basic_v0
     inputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 16.0
+      unit: kg
     outputs:
     - item_id: hand_tools_mechanical
       qty: 1

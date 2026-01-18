@@ -4,7 +4,7 @@ name: Forge or induction heater (ISRU-focused)
 target_item_id: forge_or_induction_heater_v0
 variant_id: isru_v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 1720.0
     unit: kg
     notes: "Structural frame and housing"
@@ -42,7 +42,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1720.0
         unit: kg
     outputs:
@@ -120,5 +120,5 @@ assumptions: |
   - Conservative labor and time estimates
 notes: |
   Mass-consistent recipe for 1800 kg forge/induction heater.
-  Enables ISRU by using metal_alloy_bulk for structure.
+  Enables ISRU by using regolith_metal_crude for structure.
   Source: ai_estimate based on industrial forge designs.
