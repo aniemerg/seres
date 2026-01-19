@@ -120,7 +120,7 @@ Commentary: import all parts and tooling to validate the recipe once.
 - cmd: sim.import
   args:
     item: wired_electrical_system
-    quantity: 15
+    quantity: 30
     unit: kg
     ensure: true
 - cmd: sim.import
@@ -398,7 +398,7 @@ Commentary: use local alloy for gauge blocks and fasteners; machine parts from s
 - cmd: sim.import
   args:
     item: wired_electrical_system
-    quantity: 15
+    quantity: 60
     unit: kg
     ensure: true
 - cmd: sim.run-recipe

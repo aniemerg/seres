@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import re
 import subprocess
 import sys
@@ -6,9 +7,14 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-QUEUE_PATH = ROOT / "runbooks" / "machine_runbook_queue_nextgen.md"
+QUEUE_PATH = ROOT / "runbooks" / "machine_runbook_queue_sequential.md"
 RUNBOOKS_DIR = ROOT / "runbooks"
-RUNBOOK_CMD = [str(ROOT / ".venv" / "bin" / "python"), "run_runbook_debug.py", "sim", "runbook"]
+RUNBOOK_CMD = [
+    str(ROOT / ".venv" / "bin" / "python"),
+    str(ROOT / "scripts" / "debug" / "run_runbook_debug.py"),
+    "sim",
+    "runbook",
+]
 
 
 def load_queue_rows():
@@ -34,7 +40,9 @@ def load_queue_rows():
 
 def run_runbook(runbook_path):
     cmd = RUNBOOK_CMD + ["--file", str(RUNBOOKS_DIR / runbook_path)]
-    result = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True)
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(ROOT)
+    result = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True, env=env)
     if result.returncode == 0:
         return True, ""
     combined = (result.stderr or "") + "\n" + (result.stdout or "")

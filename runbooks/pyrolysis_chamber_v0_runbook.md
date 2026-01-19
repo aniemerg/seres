@@ -75,7 +75,7 @@ Goal: Build `pyrolysis_chamber_v0` and replace fasteners with an ISRU chain in-p
 - cmd: sim.import
   args:
     item: refractory_brick_set
-    quantity: 1
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import
@@ -253,7 +253,7 @@ Goal: Build `pyrolysis_chamber_v0` and replace fasteners with an ISRU chain in-p
 - cmd: sim.import
   args:
     item: refractory_brick_set
-    quantity: 1
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import

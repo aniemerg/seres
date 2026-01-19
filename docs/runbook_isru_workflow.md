@@ -33,7 +33,7 @@ Create automated simulation scripts (runbooks) that build machines using maximum
 ## Key commands
 
 - Run a runbook:
-  - `.venv/bin/python run_runbook_debug.py sim runbook --file runbooks/<name>.md`
+  - `.venv/bin/python scripts/debug/run_runbook_debug.py sim runbook --file runbooks/<name>.md`
 - View state:
   - `.venv/bin/python -m src.cli sim view-state --sim-id <sim_id>`
 - Provenance breakdown:
@@ -75,7 +75,7 @@ Use the provenance CLI to:
 Example workflow:
 ```bash
 # Run the runbook
-.venv/bin/python run_runbook_debug.py sim runbook --file runbooks/reduction_furnace_v0_runbook.md
+.venv/bin/python scripts/debug/run_runbook_debug.py sim runbook --file runbooks/reduction_furnace_v0_runbook.md
 
 # Check the SPECIFIC MACHINE's ISRU (this is what matters!)
 .venv/bin/python -m src.cli sim provenance --sim-id reduction_furnace_v0_runbook --item reduction_furnace_v0

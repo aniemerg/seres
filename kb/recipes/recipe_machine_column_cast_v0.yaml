@@ -6,7 +6,7 @@ inputs:
     qty: 5.0
     unit: kg
   - item_id: molten_material_or_preform
-    qty: 50.0
+    qty: 150.0
     unit: kg
   - item_id: sand_casting_flask_set
     qty: 1.0
@@ -30,7 +30,7 @@ steps:
   - process_id: sand_casting_large_v0
     inputs:
       - item_id: molten_material_or_preform
-        qty: 50.0
+        qty: 150.0
         unit: kg
       - item_id: sand_casting_flask_set
         qty: 1.0
@@ -40,7 +40,7 @@ steps:
         unit: unit
     outputs:
       - item_id: sand_casting_large_v0
-        qty: 45.0
+        qty: 150.0
         unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
@@ -48,11 +48,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: sand_casting_large_v0
-        qty: 45.0
+        qty: 150.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 45.0
+        qty: 150.0
         unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
@@ -60,11 +60,11 @@ steps:
   - process_id: stress_relief_annealing_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 45.0
+        qty: 150.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 45.0
+        qty: 150.0
         unit: kg
     est_time_hr: 24.0
     machine_hours: 24.0
@@ -72,7 +72,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 45.0
+        qty: 150.0
         unit: kg
     outputs:
       - item_id: machine_column_cast

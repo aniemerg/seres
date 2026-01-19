@@ -213,11 +213,11 @@ Commentary: Produce steel_plate_or_sheet locally for the furnace shell from rego
 - cmd: sim.note
   args:
     style: info
-    message: "Import remaining components for final assembly."
+    message: "Import remaining components for final assembly (extra refractory bricks to cover process losses)."
 - cmd: sim.import
   args:
     item: refractory_brick_set
-    quantity: 1
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import

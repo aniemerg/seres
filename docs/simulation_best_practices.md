@@ -265,10 +265,10 @@ To replay/analyze an existing simulation:
 
 ```bash
 # View simulation summary
-python tools/analyze_simulations.py claude_base_001
+python scripts/analysis/analyze_simulations.py claude_base_001
 
 # Generate full report for all simulations
-python tools/analyze_simulations.py
+python scripts/analysis/analyze_simulations.py
 
 # View simulation events
 cat simulations/claude_base_001/events.jsonl | python -m json.tool
