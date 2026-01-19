@@ -35,7 +35,7 @@ for tool manufacturing. Need 3.0 kg steel for the tools.
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true

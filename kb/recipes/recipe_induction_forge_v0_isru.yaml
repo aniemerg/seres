@@ -1,0 +1,124 @@
+id: recipe_induction_forge_v0_isru
+kind: recipe
+name: Induction forge (ISRU-focused)
+target_item_id: induction_forge_v0
+variant_id: isru_v0
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 1720.0
+    unit: kg
+    notes: "Structural frame and housing"
+  - item_id: heating_element_set_industrial
+    qty: 1.0
+    unit: unit
+    notes: "Induction coil set"
+  - item_id: insulation_pack_high_temp
+    qty: 1.0
+    unit: unit
+    notes: "High-temperature insulation"
+  - item_id: motor_assembly
+    qty: 12.0
+    unit: kg
+    notes: "Drive motor for forging press"
+  - item_id: shaft_and_bearing_set
+    qty: 15.0
+    unit: kg
+  - item_id: bearing_set_heavy
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: induction_forge_v0
+    qty: 1800.0
+    unit: kg
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 1720.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 1634.0
+        unit: kg
+    est_time_hr: 20.0
+    machine_hours: 20.0
+    notes: "Cast large frame and structural components"
+  - process_id: welding_brazing_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 1634.0
+        unit: kg
+    outputs:
+      - item_id: welded_assemblies
+        qty: 1625.0
+        unit: kg
+    est_time_hr: 15.0
+    machine_hours: 15.0
+    labor_hours: 15.0
+    notes: "Weld frame sections together"
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: welded_assemblies
+        qty: 1625.0
+        unit: kg
+      - item_id: heating_element_set_industrial
+        qty: 20.0
+        unit: kg
+      - item_id: insulation_pack_high_temp
+        qty: 120.0
+        unit: kg
+      - item_id: motor_assembly
+        qty: 12.0
+        unit: kg
+      - item_id: shaft_and_bearing_set
+        qty: 15.0
+        unit: kg
+      - item_id: bearing_set_heavy
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+      - item_id: power_conditioning_module
+        qty: 1.0
+        unit: kg
+      - item_id: control_compute_module_imported
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
+    est_time_hr: 12.0
+    labor_hours: 12.0
+    notes: "Install heating elements, motor, bearings, controls into frame"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1800.0
+        unit: kg
+    outputs:
+      - item_id: induction_forge_v0
+        qty: 1800.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Final inspection and testing"
+assumptions: |
+  - 1500 kg structural frame from cast and welded steel
+  - Heating elements and insulation per industrial patterns
+  - 5% mass loss in casting and welding
+  - Conservative labor and time estimates
+notes: |
+  Mass-consistent recipe for 1800 kg induction forge.
+  Enables ISRU by using regolith_metal_crude for structure.
+  Source: ai_estimate based on industrial forge designs.

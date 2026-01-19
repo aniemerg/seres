@@ -116,7 +116,7 @@ Commentary: localize steel frame, agitation system, pump, and tank set using reg
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -152,7 +152,7 @@ Commentary: localize steel frame, agitation system, pump, and tank set using reg
     ensure: true
 - cmd: sim.import
   args:
-    item: punch_press_or_drill
+    item: drill_press
     quantity: 1
     unit: unit
     ensure: true

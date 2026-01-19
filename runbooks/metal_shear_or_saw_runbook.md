@@ -116,7 +116,7 @@ Commentary: Produce steel_beam_i_section (60 kg) from regolith metal. Need 70 kg
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

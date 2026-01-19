@@ -11,8 +11,7 @@ Instructions for agents: use a random number generator to pick a machine without
 | ball_mill_v0 | [runbook](ball_mill_v0_runbook.md) | TBD |
 | casting_furnace_v0 | [runbook](casting_furnace_v0_runbook.md) | TBD |
 | casting_mold_set | [runbook](casting_mold_set_runbook.md) | 0% baseline; ~46% estimated ISRU (regolith steel plate + MRE metal) |
-| chemical_reactor_heated_v0 | [runbook](chemical_reactor_heated_v0_runbook.md) | TBD |
-| chemical_reactor_unit_v0 | [runbook](chemical_reactor_unit_v0_runbook.md) | 75.0% (3 local units + 1 imported baseline; local steel + metal ingots via regolith mining and reduction) |
+| chemical_reactor_basic | [runbook](chemical_reactor_basic_runbook.md) | TBD |
 | coil_winding_machine | — | TBD |
 | crucible_refractory | [runbook](crucible_refractory_runbook.md) | TBD |
 | cutting_tools_general | [runbook](cutting_tools_general_runbook.md) | 50.0% (100% ISRU steel for all components) |
@@ -21,7 +20,7 @@ Instructions for agents: use a random number generator to pick a machine without
 | electrodes | [runbook](electrodes_runbook.md) | 87.5% (ISRU graphite from regolith carbon) |
 | electrolysis_cell_unit_v0 | [runbook](electrolysis_cell_unit_v0_runbook.md) | TBD |
 | fixturing_workbench | [runbook](fixturing_workbench_runbook.md) | 60.0% |
-| forge_or_induction_heater_v0 | [runbook](forge_or_induction_heater_v0_runbook.md) | 39.0% (regolith metal) |
+| induction_forge_v0 | [runbook](induction_forge_v0_runbook.md) | 39.0% (regolith metal) |
 | generic_chemical_reactor_v0 | [runbook](generic_chemical_reactor_v0_runbook.md) | TBD |
 | grinding_wheels | [runbook](grinding_wheels_runbook.md) | 93.6% (regolith-derived alumina abrasive + glass bond) |
 | hand_tools_basic | [runbook](hand_tools_basic_runbook.md) | 47.8% (ISRU steel for tools+fasteners; +17% improvement) |
@@ -34,7 +33,7 @@ Instructions for agents: use a random number generator to pick a machine without
 | mre_reactor_v0 | [runbook](mre_reactor_v0_runbook.md) | 8.9% (reactor_vessel_mre 650kg + power_bus 55kg from regolith_metal_crude; 99% potential with full component production) |
 | power_hammer_or_press | [runbook](power_hammer_or_press_runbook.md) | TBD |
 | press_brake | [runbook](press_brake_runbook.md) | 42.7% |
-| press_brake_v0 | [runbook](press_brake_v0_runbook.md) | 100.0% |
+| press_brake | [runbook](press_brake_runbook.md) | 100.0% |
 | reduction_furnace_v0 | [runbook](reduction_furnace_v0_runbook.md) | 52.4% (regolith metal, optimized) |
 | rock_crusher_basic | [runbook](rock_crusher_basic_runbook.md) | 80.0% |
 | rolling_mill_v0 | [runbook](rolling_mill_v0_runbook.md) | 0.5% (bearings use regolith_metal_crude but need imported steel_bar_stock; complex steel processing for other components) |

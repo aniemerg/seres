@@ -44,7 +44,7 @@ Commentary: Produce steel_stock_bar_or_billet (270 kg) from regolith metal. Need
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -56,7 +56,7 @@ Commentary: Produce steel_stock_bar_or_billet (270 kg) from regolith metal. Need
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

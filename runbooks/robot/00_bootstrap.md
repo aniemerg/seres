@@ -53,7 +53,7 @@ Commentary: import minimal equipment and one reagent to allow early processing.
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_heated_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -261,7 +261,7 @@ Commentary: produce electrical steel sheet locally from iron + silicon.
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -313,7 +313,7 @@ Commentary: form the steel housing locally from iron stock.
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
 
@@ -475,7 +475,7 @@ Commentary: produce coil insulation material locally from silicone polymer.
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_unit_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
 

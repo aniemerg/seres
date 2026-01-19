@@ -1,6 +1,6 @@
-# Heat Treatment Furnace Runbook
+# Heat Treatment Furnace v0 Runbook
 
-Goal: Build `heat_treatment_furnace` using in-situ resources where possible.
+Goal: Build `heat_treatment_furnace_v0` using in-situ resources where possible.
 
 ## Machine Details
 - **Mass**: 600 kg
@@ -32,7 +32,7 @@ Goal: Build `heat_treatment_furnace` using in-situ resources where possible.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Simulation reset. Starting heat_treatment_furnace runbook."
+    message: "Simulation reset. Starting heat_treatment_furnace_v0 runbook."
 ```
 
 ## ISRU Production: Build heat treatment furnace with regolith materials
@@ -43,7 +43,7 @@ Commentary: Produce quench_rack_and_baskets and furnace_shell_insulated from reg
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: Build heat_treatment_furnace with regolith materials."
+    message: "ISRU: Build heat_treatment_furnace_v0 with regolith materials."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -269,5 +269,5 @@ Commentary: Produce quench_rack_and_baskets and furnace_shell_insulated from reg
 - cmd: sim.note
   args:
     style: success
-    message: "ISRU heat_treatment_furnace complete."
+    message: "ISRU heat_treatment_furnace_v0 complete."
 ```

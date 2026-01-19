@@ -19,21 +19,21 @@ steps:
         qty: 63.0
         unit: kg
     outputs:
-      - item_id: cut_steel_parts
+      - item_id: cut_parts
         qty: 61.0
         unit: kg
   - process_id: welding_brazing_basic_v0
     inputs:
-      - item_id: cut_steel_parts
+      - item_id: cut_parts
         qty: 61.0
         unit: kg
     outputs:
-      - item_id: welded_frame_assembly
+      - item_id: steel_frame_welded
         qty: 60.5
         unit: kg
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: welded_frame_assembly
+      - item_id: steel_frame_welded
         qty: 60.5
         unit: kg
     outputs:

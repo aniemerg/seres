@@ -152,7 +152,7 @@ Goal: Build `furnace` using in-situ resources where possible.
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -449,6 +449,11 @@ Goal: Build `furnace` using in-situ resources where possible.
 - cmd: sim.advance-time
   args:
     hours: 200
+- cmd: sim.import
+  args:
+    item: drawing_die_set_basic
+    quantity: 1
+    unit: unit
 - cmd: sim.run-recipe
   args:
     recipe: recipe_metal_wire_feed_v0

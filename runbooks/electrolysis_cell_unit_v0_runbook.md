@@ -255,7 +255,7 @@ Commentary: Mine regolith in-situ for iron and nickel extraction.
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_heated_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true

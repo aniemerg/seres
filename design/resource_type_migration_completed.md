@@ -113,7 +113,6 @@ The migration script found 20 unmapped resource references that don't exist in t
 - `lab` - Lab equipment reference
 - `coil_winding_machine_v0` - May need machine creation
 - `precision_lathe` - Specialized lathe
-- `chemical_reactor_unit_v0` - Specific reactor variant
 - `pyrolysis_chamber` - Pyrolysis equipment
 - `solder_paste_dispenser` - Dispensing equipment
 - `furnace` - Generic furnace reference

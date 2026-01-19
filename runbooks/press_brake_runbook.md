@@ -92,7 +92,7 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -158,7 +158,13 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

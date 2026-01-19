@@ -68,7 +68,7 @@ Commentary: Produce steel plate, fasteners, and machined parts from regolith-der
     ensure: true
 - cmd: sim.import
   args:
-    item: milling_machine_cnc
+    item: cnc_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -188,7 +188,7 @@ Commentary: Produce steel plate, fasteners, and machined parts from regolith-der
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

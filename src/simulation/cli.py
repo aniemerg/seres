@@ -799,13 +799,14 @@ def _run_runbook(
                 if not child_file:
                     _emit(f"Error: sim.runbook requires file (step {idx})", _COLOR_ERROR, is_error=True)
                     return 1
+                allow_child_control = bool(_get_arg(cmd_args, "allow-control", "allow_control"))
                 child_path = (runbook_path.parent / child_file).resolve()
                 result = _run_runbook(
                     child_path,
                     kb_loader,
                     default_sim_id=default_sim_id,
                     stack=stack,
-                    allow_control=False,
+                    allow_control=allow_child_control,
                     dry_run=dry_run,
                     continue_on_error=continue_on_error,
                     story_mode=story_mode,

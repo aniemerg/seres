@@ -7,7 +7,7 @@ inputs:
     unit: kg
   - item_id: cutting_fluid
     qty: 0.4
-    unit: L
+    unit: kg
 outputs:
   - item_id: precision_levels
     qty: 1.0
@@ -20,7 +20,7 @@ steps:
         unit: kg
       - item_id: cutting_fluid
         qty: 0.4
-        unit: L
+        unit: kg
     outputs:
       - item_id: machined_steel_part_precision
         qty: 3.0
@@ -35,7 +35,7 @@ steps:
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: instrument_uncalibrated
         qty: 1.0
         unit: unit
     est_time_hr: 1.5
@@ -43,7 +43,7 @@ steps:
     notes: "Install spirit vials or electronic sensor modules in machined body"
   - process_id: calibration_basic_v0
     inputs:
-      - item_id: assembled_equipment
+      - item_id: instrument_uncalibrated
         qty: 1.0
         unit: unit
     outputs:

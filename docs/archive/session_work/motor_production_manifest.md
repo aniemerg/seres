@@ -10,9 +10,9 @@ Produce 1 `motor_electric_small` from lunar in-situ resources (highland regolith
 
 ## Required Machines (IMPORT THESE)
 All these machines exist in the KB and can be imported:
-1. ✅ `chemical_reactor_heated_v0` - For chemical reactions
+1. ✅ `chemical_reactor_basic` - For chemical reactions
 2. ✅ `electrolysis_cell_aluminum` - For Hall-Héroult aluminum smelting
-3. ✅ `forge_or_induction_heater` - For electrical steel production
+3. ✅ `induction_forge_v0` - For electrical steel production
 4. ✅ `rolling_mill_v0` - For rolling electrical steel sheets
 5. ✅ `lathe_engine_v0` - For shaft and bearing machining
 6. ✅ `press_brake_v0` - For stamping laminations and forming housing

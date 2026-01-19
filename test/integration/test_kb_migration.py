@@ -205,7 +205,7 @@ def test_full_bootstrap_chain(kb_loader, sim_dir):
 
     # Bootstrap imports
     engine.import_item("labor_bot_general_v0", 2.0, "unit")
-    engine.import_item("chemical_reactor_unit_v0", 1.0, "count")
+    engine.import_item("chemical_reactor_basic", 1.0, "count")
     engine.import_item("magnesium_metal_v0", 2.31, "kg")
     engine.import_item("methyl_chloride_gas", 1.0, "kg")
 

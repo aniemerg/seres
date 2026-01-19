@@ -95,7 +95,7 @@ Commentary: Need 63 kg steel_plate_or_sheet for structural_frame_large (60 kg fi
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

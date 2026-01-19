@@ -25,7 +25,7 @@ steps:
         qty: 2.5
         unit: kg
     outputs:
-      - item_id: abrasive_mixture
+      - item_id: ceramic_powder_mixture
         qty: 8.0
         unit: kg
     est_time_hr: 1.0
@@ -34,7 +34,7 @@ steps:
     notes: "Mix alumina abrasive with glass bond powder"
   - process_id: molding_press_operation_v0
     inputs:
-      - item_id: abrasive_mixture
+      - item_id: ceramic_powder_mixture
         qty: 8.0
         unit: kg
     outputs:
@@ -51,7 +51,7 @@ steps:
         qty: 8.0
         unit: kg
     outputs:
-      - item_id: fired_ceramic_parts
+      - item_id: sintered_parts
         qty: 7.5
         unit: kg
     est_time_hr: 6.0
@@ -60,7 +60,7 @@ steps:
     notes: "Vitrify at 1200-1400°C to fuse glass bond with alumina"
   - process_id: precision_grinding_basic_v0
     inputs:
-      - item_id: fired_ceramic_parts
+      - item_id: sintered_parts
         qty: 7.5
         unit: kg
     outputs:

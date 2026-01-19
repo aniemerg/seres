@@ -209,7 +209,7 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -391,7 +391,7 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
     ensure: true
 - cmd: sim.import
   args:
-    item: heating_plate_or_induction_heater
+    item: heating_plate_induction_heater
     quantity: 1
     unit: unit
     ensure: true
@@ -460,7 +460,7 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
     ensure: true
 - cmd: sim.import
   args:
-    item: milling_machine_cnc
+    item: cnc_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -576,12 +576,6 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
 - cmd: sim.import
   args:
     item: drill_press
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: drill_press_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -215,6 +215,12 @@ still relies on imported feedstocks for metals and electronics.
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: steel_stock_bar_or_billet
+    quantity: 85
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_tool_station_frame_v0
@@ -222,6 +228,12 @@ still relies on imported feedstocks for metals and electronics.
 - cmd: sim.advance-time
   args:
     hours: 80
+- cmd: sim.import
+  args:
+    item: steel_stock_bar_or_billet
+    quantity: 22
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_tool_set_general_v0

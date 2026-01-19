@@ -150,13 +150,13 @@ Commentary: import equipment for ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_unit_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -180,7 +180,7 @@ Commentary: import equipment for ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true
@@ -210,7 +210,7 @@ Commentary: import equipment for ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

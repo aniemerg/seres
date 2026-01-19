@@ -102,7 +102,7 @@ Commentary: Produce sheet_metal_or_structural_steel (220 kg) from regolith metal
     ensure: true
 - cmd: sim.import
   args:
-    item: punch_press_or_drill
+    item: drill_press
     quantity: 1
     unit: unit
     ensure: true

@@ -117,7 +117,7 @@ Commentary: Import fabrication tooling used throughout the ISRU build.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -141,19 +141,25 @@ Commentary: Import fabrication tooling used throughout the ISRU build.
     ensure: true
 - cmd: sim.import
   args:
-    item: roll_grinding_lathe_or_cylindrical_grinder_v0
+    item: grinder_cylindrical_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: dynamic_balancing_stand_v0
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: balancing_machine
     quantity: 1
     unit: unit
     ensure: true
@@ -165,7 +171,13 @@ Commentary: Import fabrication tooling used throughout the ISRU build.
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: press_brake
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true

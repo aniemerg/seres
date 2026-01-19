@@ -2,10 +2,10 @@
   "sim_id": "assembly_tools_basic_v0",
   "state": {
     "sim_id": "assembly_tools_basic_v0",
-    "current_time_hours": 2718.0,
+    "current_time_hours": 2708.0,
     "inventory": {
       "assembly_tools_basic": {
-        "quantity": 3.0,
+        "quantity": 2.0,
         "unit": "unit"
       },
       "labor_bot_general_v0": {
@@ -157,26 +157,6 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "tool_station_frame": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "tool_set_general": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "power_conditioning_module": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "sensor_suite_general": {
-        "quantity": 2.0,
-        "unit": "unit"
-      },
-      "control_compute_module_imported": {
-        "quantity": 3.0,
-        "unit": "unit"
-      },
       "metal_shear_or_saw": {
         "quantity": 1.0,
         "unit": "unit"
@@ -273,45 +253,28 @@
         "quantity": 10.0,
         "unit": "kg"
       },
+      "control_compute_module_imported": {
+        "quantity": 2.0,
+        "unit": "unit"
+      },
       "electrical_energy": {
         "quantity": 500.0,
         "unit": "kWh"
+      },
+      "sensor_suite_general": {
+        "quantity": 1.0,
+        "unit": "unit"
       }
     },
     "provenance": {
       "assembly_tools_basic": {
         "in_situ_kg": 0.0,
-        "imported_kg": 288.0,
+        "imported_kg": 169.0,
         "unknown_kg": 0.0
       },
       "labor_bot_general_v0": {
         "in_situ_kg": 0.0,
         "imported_kg": 120.0,
-        "unknown_kg": 0.0
-      },
-      "tool_station_frame": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 0.0,
-        "unknown_kg": 0.0
-      },
-      "tool_set_general": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 2.0,
-        "unknown_kg": 0.0
-      },
-      "power_conditioning_module": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 4.300000000000001,
-        "unknown_kg": 0.0
-      },
-      "sensor_suite_general": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 0.0,
-        "unknown_kg": 0.0
-      },
-      "control_compute_module_imported": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 2.0,
         "unknown_kg": 0.0
       },
       "metal_shear_or_saw": {
@@ -434,6 +397,11 @@
         "imported_kg": 10.0,
         "unknown_kg": 0.0
       },
+      "control_compute_module_imported": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 2.0,
+        "unknown_kg": 0.0
+      },
       "carbon_reductant": {
         "in_situ_kg": 0.0,
         "imported_kg": 0.09999999999999432,
@@ -494,6 +462,16 @@
         "imported_kg": 0.0,
         "unknown_kg": 0.0
       },
+      "tool_station_frame": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
+      },
+      "tool_set_general": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 2.0,
+        "unknown_kg": 0.0
+      },
       "cast_metal_parts": {
         "in_situ_kg": 0.0,
         "imported_kg": 1.0,
@@ -503,10 +481,19 @@
         "in_situ_kg": 0.0,
         "imported_kg": 1.0,
         "unknown_kg": 0.0
+      },
+      "power_conditioning_module": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 4.300000000000001,
+        "unknown_kg": 0.0
+      },
+      "sensor_suite_general": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
+        "unknown_kg": 0.0
       }
     },
     "complexity_scores": {
-      "assembly_tools_basic": 7,
       "carbon_reductant": 2,
       "tailings": 2,
       "carbon_reducing_agent": 3,
@@ -523,61 +510,22 @@
       "tool_set_general": 7,
       "cast_metal_parts": 2,
       "machined_part_raw": 3,
-      "power_conditioning_module": 4
+      "power_conditioning_module": 4,
+      "assembly_tools_basic": 7
     },
     "total_energy_kwh": 4493.545614035088
   },
   "scheduler": {
-    "current_time": 2718.0,
+    "current_time": 2708.0,
     "event_queue": [],
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "9d11d369-39c6-4fb0-8943-977f085e3b4d",
-        "process_id": "assembly_basic_v0",
-        "start_time": 0.0,
-        "duration_hours": 1.0,
-        "end_time": 1.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "tool_station_frame": 1.0,
-          "tool_set_general": 1.0,
-          "power_conditioning_module": 1.0,
-          "sensor_suite_general": 1.0,
-          "control_compute_module_imported": 1.0
-        },
-        "outputs_pending": {
-          "assembly_tools_basic": 1.0
-        },
-        "outputs_pending_units": {
-          "assembly_tools_basic": "unit"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "assembly_tools_basic": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 119.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "tool_station_frame": "unit",
-          "tool_set_general": "unit",
-          "power_conditioning_module": "unit",
-          "sensor_suite_general": "unit",
-          "control_compute_module_imported": "unit"
-        },
-        "recipe_run_id": "f808c75e-ae5e-4883-872a-357b464fc0c4",
-        "step_index": 0,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "c8bff7ab-59ff-44b7-9450-e4bf6c5bd141",
+        "process_run_id": "a4d745c2-093f-4121-8a6d-e35cd0962bef",
         "process_id": "carbon_extraction_from_carbonaceous_v0",
-        "start_time": 10.0,
+        "start_time": 0.0,
         "duration_hours": 10.5,
-        "end_time": 20.5,
+        "end_time": 10.5,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_carbonaceous": 70.0
@@ -601,16 +549,16 @@
         "inputs_consumed_units": {
           "regolith_carbonaceous": "kg"
         },
-        "recipe_run_id": "2f6688cd-5e76-48d9-aca9-ff7ec37abcb1",
+        "recipe_run_id": "8446b4c2-3b3b-431f-810b-33c80a93db4c",
         "step_index": 0,
         "energy_kwh": 14.000000000000002
       },
       {
-        "process_run_id": "d8163a77-231d-4002-b185-1cd6974466c3",
+        "process_run_id": "0d88ef9b-0f00-491b-bc51-111727e68c87",
         "process_id": "carbon_reducing_agent_production_v0",
-        "start_time": 25.0,
+        "start_time": 15.0,
         "duration_hours": 1.0,
-        "end_time": 26.0,
+        "end_time": 16.0,
         "scale": 1.0,
         "inputs_consumed": {
           "carbon_reductant": 2.0
@@ -632,16 +580,16 @@
         "inputs_consumed_units": {
           "carbon_reductant": "kg"
         },
-        "recipe_run_id": "4d4d369c-0424-44b8-b450-a5e32872ed16",
+        "recipe_run_id": "f752d4e2-abd3-41b2-9808-4b3c10742fcc",
         "step_index": 0,
         "energy_kwh": 0.8
       },
       {
-        "process_run_id": "a0f4adde-79fb-4434-8dc6-40e954db14c2",
+        "process_run_id": "ba55fe88-0888-4a04-8b16-35da9f3ba884",
         "process_id": "carbon_extraction_from_carbonaceous_v0",
-        "start_time": 33.0,
+        "start_time": 23.0,
         "duration_hours": 390.0,
-        "end_time": 423.0,
+        "end_time": 413.0,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_carbonaceous": 2600.0
@@ -665,16 +613,16 @@
         "inputs_consumed_units": {
           "regolith_carbonaceous": "kg"
         },
-        "recipe_run_id": "f575ef79-cbe7-4033-8c98-e57c5577049f",
+        "recipe_run_id": "7f75c524-373e-4d08-9c38-92a64e4cab93",
         "step_index": 0,
         "energy_kwh": 520.0
       },
       {
-        "process_run_id": "feb87305-f286-4efd-911f-b63d44c4fcba",
+        "process_run_id": "c0595e70-947f-4279-a2ea-d2f0cef230e4",
         "process_id": "carbon_reducing_agent_production_v0",
-        "start_time": 433.0,
+        "start_time": 423.0,
         "duration_hours": 1.0,
-        "end_time": 434.0,
+        "end_time": 424.0,
         "scale": 1.0,
         "inputs_consumed": {
           "carbon_reductant": 78.0
@@ -696,16 +644,16 @@
         "inputs_consumed_units": {
           "carbon_reductant": "kg"
         },
-        "recipe_run_id": "edd466cd-4006-4f0a-a5d1-6ecd8afed8bc",
+        "recipe_run_id": "34aa8e63-1e40-44e1-9949-f99443562029",
         "step_index": 0,
         "energy_kwh": 31.200000000000003
       },
       {
-        "process_run_id": "7fa6a0c6-2e65-48ea-9a27-302c2d1daa1e",
+        "process_run_id": "885afcd2-a0f2-4010-97a4-afb67c5ea84c",
         "process_id": "ilmenite_extraction_from_regolith_v0",
-        "start_time": 613.0,
+        "start_time": 603.0,
         "duration_hours": 530.0,
-        "end_time": 1143.0,
+        "end_time": 1133.0,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_lunar_mare": 530.0
@@ -729,16 +677,16 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "a1b513f8-d52e-4a83-afe9-18c6d6275df4",
+        "recipe_run_id": "51ebb5f1-a50f-4813-8cc5-74e75f4abaf1",
         "step_index": 0,
         "energy_kwh": 1766.6666666666667
       },
       {
-        "process_run_id": "710a652f-db46-4d15-958e-7a1876a81996",
+        "process_run_id": "e2c9b4cb-984a-42e5-99da-2d9d23375937",
         "process_id": "iron_smelting_reduction_v0",
-        "start_time": 1213.0,
+        "start_time": 1203.0,
         "duration_hours": 632.0,
-        "end_time": 1845.0,
+        "end_time": 1835.0,
         "scale": 1.0,
         "inputs_consumed": {
           "iron_ore_or_ilmenite": 316.0,
@@ -766,16 +714,16 @@
           "iron_ore_or_ilmenite": "kg",
           "carbon_reducing_agent": "kg"
         },
-        "recipe_run_id": "7ad7e51e-1660-450e-88f8-5c59ca6b0c0f",
+        "recipe_run_id": "59662afd-55be-44ff-b4a1-5251275f14a7",
         "step_index": 0,
         "energy_kwh": 1264.0
       },
       {
-        "process_run_id": "fb658bcb-aacf-4631-8b0b-f3aa7ef62ae1",
+        "process_run_id": "1267183d-f616-45ad-9001-88003d3450b3",
         "process_id": "steel_refining_basic_v0",
-        "start_time": 1913.0,
+        "start_time": 1903.0,
         "duration_hours": 300.0,
-        "end_time": 2213.0,
+        "end_time": 2203.0,
         "scale": 1.0,
         "inputs_consumed": {
           "iron_pig_or_ingot": 157.5
@@ -803,16 +751,16 @@
         "inputs_consumed_units": {
           "iron_pig_or_ingot": "kg"
         },
-        "recipe_run_id": "8442a294-2517-4ed1-bfe9-3a2fe9edc31c",
+        "recipe_run_id": "06f7b9c5-bae5-41fd-b75a-54e8bcc03e6d",
         "step_index": 0,
         "energy_kwh": 225.0
       },
       {
-        "process_run_id": "b635a0c4-c81f-423c-8afc-dec66f421dd3",
+        "process_run_id": "1ba412ea-455f-419e-8c7c-aac468f8e3b7",
         "process_id": "steel_ingot_cast_v0",
-        "start_time": 2213.0,
+        "start_time": 2203.0,
         "duration_hours": 150.0,
-        "end_time": 2363.0,
+        "end_time": 2353.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_billet_or_slab": 150.0
@@ -834,16 +782,16 @@
         "inputs_consumed_units": {
           "steel_billet_or_slab": "kg"
         },
-        "recipe_run_id": "8442a294-2517-4ed1-bfe9-3a2fe9edc31c",
+        "recipe_run_id": "06f7b9c5-bae5-41fd-b75a-54e8bcc03e6d",
         "step_index": 1,
         "energy_kwh": 600.0
       },
       {
-        "process_run_id": "55b7c142-9d25-4250-80a1-27200d54af72",
+        "process_run_id": "5d0eb723-b273-429d-a6cf-95f993ee66df",
         "process_id": "rolling_basic_v0",
-        "start_time": 2413.0,
+        "start_time": 2403.0,
         "duration_hours": 1.0,
-        "end_time": 2414.0,
+        "end_time": 2404.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_ingot": 150.0
@@ -867,16 +815,16 @@
         "inputs_consumed_units": {
           "steel_ingot": "kg"
         },
-        "recipe_run_id": "dfb9a0d3-fa1c-4167-a5e1-8c257f42ff95",
+        "recipe_run_id": "ab94623e-448a-43e0-81ee-7d3fbdc24a88",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "acf2a6ba-f8af-4cb3-a553-99f4331be631",
+        "process_run_id": "e44edb8f-cc7e-4c9c-911b-c39233a1a810",
         "process_id": "metal_cutting_basic_v0",
-        "start_time": 2663.0,
+        "start_time": 2653.0,
         "duration_hours": 1.0,
-        "end_time": 2664.0,
+        "end_time": 2654.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_stock_bar_or_billet": 85.0
@@ -902,16 +850,16 @@
         "inputs_consumed_units": {
           "steel_stock_bar_or_billet": "kg"
         },
-        "recipe_run_id": "1f40f56d-3c1d-4077-811d-69d04db80e33",
+        "recipe_run_id": "9ff0373a-3e23-474e-8da8-b8323c6c1c3b",
         "step_index": 0,
         "energy_kwh": 0.8
       },
       {
-        "process_run_id": "a5dfed0f-fc54-40db-8bf2-e57040c8d0de",
+        "process_run_id": "31c9e7bc-7f01-42c4-ade6-819f83757684",
         "process_id": "welding_and_fabrication_v0",
-        "start_time": 2664.0,
+        "start_time": 2654.0,
         "duration_hours": 1.0,
-        "end_time": 2665.0,
+        "end_time": 2655.0,
         "scale": 1.0,
         "inputs_consumed": {
           "cut_parts": 83.0
@@ -940,16 +888,16 @@
         "inputs_consumed_units": {
           "cut_parts": "kg"
         },
-        "recipe_run_id": "1f40f56d-3c1d-4077-811d-69d04db80e33",
+        "recipe_run_id": "9ff0373a-3e23-474e-8da8-b8323c6c1c3b",
         "step_index": 1,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "5036cc7e-409b-4d2d-8784-934fc738f125",
+        "process_run_id": "ea098ea2-772f-4aa8-a0e3-58059ea21b1d",
         "process_id": "machining_finish_basic_v0",
-        "start_time": 2665.0,
+        "start_time": 2655.0,
         "duration_hours": 1.0,
-        "end_time": 2666.0,
+        "end_time": 2656.0,
         "scale": 1.0,
         "inputs_consumed": {
           "welded_fabrications": 82.0
@@ -975,16 +923,16 @@
         "inputs_consumed_units": {
           "welded_fabrications": "kg"
         },
-        "recipe_run_id": "1f40f56d-3c1d-4077-811d-69d04db80e33",
+        "recipe_run_id": "9ff0373a-3e23-474e-8da8-b8323c6c1c3b",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "b0899b97-e17d-4dbb-891a-72e182c8947f",
+        "process_run_id": "1da4659a-1cf3-49d1-8998-9b390ccd03f8",
         "process_id": "assembly_basic_v0",
-        "start_time": 2673.0,
+        "start_time": 2663.0,
         "duration_hours": 1.0,
-        "end_time": 2674.0,
+        "end_time": 2664.0,
         "scale": 1.0,
         "inputs_consumed": {
           "steel_stock_bar_or_billet": 22.0
@@ -1007,16 +955,16 @@
         "inputs_consumed_units": {
           "steel_stock_bar_or_billet": "kg"
         },
-        "recipe_run_id": "683216b6-6652-4953-90ff-cbf6ad7d401a",
+        "recipe_run_id": "cef4f9d2-4c11-436b-bc3b-1b2451f6a34c",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "e0591639-8074-4acf-99f7-c8277520f177",
+        "process_run_id": "7bc50ce0-cb2f-4eba-9071-6928107896fa",
         "process_id": "metal_casting_basic_v0",
-        "start_time": 2698.0,
+        "start_time": 2688.0,
         "duration_hours": 1.5,
-        "end_time": 2699.5,
+        "end_time": 2689.5,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_metal_crude": 15.0
@@ -1041,16 +989,16 @@
         "inputs_consumed_units": {
           "regolith_metal_crude": "kg"
         },
-        "recipe_run_id": "478be6f8-4e9b-414c-8d37-43406ca73a0d",
+        "recipe_run_id": "6cc0d7d3-090e-4721-a08f-e8fed1f7d110",
         "step_index": 0,
         "energy_kwh": 51.578947368421055
       },
       {
-        "process_run_id": "95d7653f-ae07-46d9-9fa0-acbf3c06b871",
+        "process_run_id": "f379130d-5406-4ec5-8448-424dc0f6307b",
         "process_id": "machining_finish_basic_v0",
-        "start_time": 2699.5,
+        "start_time": 2689.5,
         "duration_hours": 3.9003900390039004,
-        "end_time": 2703.400390039004,
+        "end_time": 2693.400390039004,
         "scale": 1.0,
         "inputs_consumed": {
           "cast_metal_parts": 14.0
@@ -1074,16 +1022,16 @@
         "inputs_consumed_units": {
           "cast_metal_parts": "kg"
         },
-        "recipe_run_id": "478be6f8-4e9b-414c-8d37-43406ca73a0d",
+        "recipe_run_id": "6cc0d7d3-090e-4721-a08f-e8fed1f7d110",
         "step_index": 1,
         "energy_kwh": 19.5
       },
       {
-        "process_run_id": "1a4a36c7-9d70-4bed-a2f3-21339c698d28",
+        "process_run_id": "2d2887b9-0d1c-4d05-9b57-51a566caa6d1",
         "process_id": "assembly_basic_v0",
-        "start_time": 2703.400390039004,
+        "start_time": 2693.400390039004,
         "duration_hours": 1.0,
-        "end_time": 2704.400390039004,
+        "end_time": 2694.400390039004,
         "scale": 1.0,
         "inputs_consumed": {
           "machined_part_raw": 13.0,
@@ -1110,16 +1058,16 @@
           "electronic_components_set": "unit",
           "fastener_kit_small": "unit"
         },
-        "recipe_run_id": "478be6f8-4e9b-414c-8d37-43406ca73a0d",
+        "recipe_run_id": "6cc0d7d3-090e-4721-a08f-e8fed1f7d110",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "a2dec748-a0da-4fca-83fa-6e6eeac2e414",
+        "process_run_id": "f865b058-6170-42ab-9d27-8e9436e30766",
         "process_id": "assembly_basic_v0",
-        "start_time": 2713.0,
+        "start_time": 2703.0,
         "duration_hours": 1.0,
-        "end_time": 2714.0,
+        "end_time": 2704.0,
         "scale": 1.0,
         "inputs_consumed": {
           "tool_station_frame": 1.0,
@@ -1150,133 +1098,17 @@
           "sensor_suite_general": "unit",
           "control_compute_module_imported": "unit"
         },
-        "recipe_run_id": "56e5b2ce-c7c6-4d3f-83a7-16fa3213cad3",
+        "recipe_run_id": "ccf07d13-5987-4487-905e-6f0994b9ded0",
         "step_index": 0,
         "energy_kwh": 0.0
       }
     ],
-    "total_events_processed": 36
+    "total_events_processed": 34
   },
   "orchestrator": {
     "recipe_runs": {
-      "f808c75e-ae5e-4883-872a-357b464fc0c4": {
-        "recipe_run_id": "f808c75e-ae5e-4883-872a-357b464fc0c4",
-        "recipe_id": "recipe_assembly_tools_basic_v0",
-        "target_item_id": "assembly_tools_basic",
-        "recipe_def": {
-          "id": "recipe_assembly_tools_basic_v0",
-          "target_item_id": "assembly_tools_basic",
-          "variant_id": "v0",
-          "steps": [
-            {
-              "process_id": "assembly_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "tool_station_frame",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                },
-                {
-                  "item_id": "tool_set_general",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                },
-                {
-                  "item_id": "power_conditioning_module",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                },
-                {
-                  "item_id": "sensor_suite_general",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                },
-                {
-                  "item_id": "control_compute_module_imported",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "assembly_tools_basic",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 1.0,
-              "labor_hours": 0.7,
-              "machine_hours": 0.3,
-              "notes": null
-            }
-          ],
-          "inputs": [
-            {
-              "item_id": "tool_station_frame",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            },
-            {
-              "item_id": "tool_set_general",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            },
-            {
-              "item_id": "power_conditioning_module",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            },
-            {
-              "item_id": "sensor_suite_general",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            },
-            {
-              "item_id": "control_compute_module_imported",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            }
-          ],
-          "outputs": [
-            {
-              "item_id": "assembly_tools_basic",
-              "qty": 1.0,
-              "unit": "unit",
-              "notes": null
-            }
-          ],
-          "alternatives": [],
-          "dedupe_candidate": null,
-          "assumptions": null,
-          "notes": "Assemble basic assembly tools from BOM; placeholder assembly step.",
-          "kind": "recipe",
-          "name": "Basic assembly tools set"
-        },
-        "started_at": 0.0,
-        "completed_steps": [
-          0
-        ],
-        "active_steps": {},
-        "scheduled_steps": {},
-        "is_completed": true,
-        "completed_at": 1.0
-      },
-      "2f6688cd-5e76-48d9-aca9-ff7ec37abcb1": {
-        "recipe_run_id": "2f6688cd-5e76-48d9-aca9-ff7ec37abcb1",
+      "8446b4c2-3b3b-431f-810b-33c80a93db4c": {
+        "recipe_run_id": "8446b4c2-3b3b-431f-810b-33c80a93db4c",
         "recipe_id": "recipe_carbon_reductant_v0",
         "target_item_id": "carbon_reductant",
         "recipe_def": {
@@ -1345,17 +1177,17 @@
           "assumptions": "Carbonaceous regolith feedstock available for small-scale carbon recovery.",
           "notes": "ISRU extraction route for carbon reductant; drying and sizing steps deferred."
         },
-        "started_at": 10.0,
+        "started_at": 0.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 20.5
+        "completed_at": 10.5
       },
-      "4d4d369c-0424-44b8-b450-a5e32872ed16": {
-        "recipe_run_id": "4d4d369c-0424-44b8-b450-a5e32872ed16",
+      "f752d4e2-abd3-41b2-9808-4b3c10742fcc": {
+        "recipe_run_id": "f752d4e2-abd3-41b2-9808-4b3c10742fcc",
         "recipe_id": "recipe_carbon_reducing_agent_v0",
         "target_item_id": "carbon_reducing_agent",
         "recipe_def": {
@@ -1413,17 +1245,17 @@
           "notes": "Manufacturing recipe for carbon reducing agent using carbon_reductant input.",
           "kind": "recipe"
         },
-        "started_at": 25.0,
+        "started_at": 15.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 26.0
+        "completed_at": 16.0
       },
-      "f575ef79-cbe7-4033-8c98-e57c5577049f": {
-        "recipe_run_id": "f575ef79-cbe7-4033-8c98-e57c5577049f",
+      "7f75c524-373e-4d08-9c38-92a64e4cab93": {
+        "recipe_run_id": "7f75c524-373e-4d08-9c38-92a64e4cab93",
         "recipe_id": "recipe_carbon_reductant_v0",
         "target_item_id": "carbon_reductant",
         "recipe_def": {
@@ -1492,17 +1324,17 @@
           "assumptions": "Carbonaceous regolith feedstock available for small-scale carbon recovery.",
           "notes": "ISRU extraction route for carbon reductant; drying and sizing steps deferred."
         },
-        "started_at": 33.0,
+        "started_at": 23.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 423.0
+        "completed_at": 413.0
       },
-      "edd466cd-4006-4f0a-a5d1-6ecd8afed8bc": {
-        "recipe_run_id": "edd466cd-4006-4f0a-a5d1-6ecd8afed8bc",
+      "34aa8e63-1e40-44e1-9949-f99443562029": {
+        "recipe_run_id": "34aa8e63-1e40-44e1-9949-f99443562029",
         "recipe_id": "recipe_carbon_reducing_agent_v0",
         "target_item_id": "carbon_reducing_agent",
         "recipe_def": {
@@ -1560,17 +1392,17 @@
           "notes": "Manufacturing recipe for carbon reducing agent using carbon_reductant input.",
           "kind": "recipe"
         },
-        "started_at": 433.0,
+        "started_at": 423.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 434.0
+        "completed_at": 424.0
       },
-      "a1b513f8-d52e-4a83-afe9-18c6d6275df4": {
-        "recipe_run_id": "a1b513f8-d52e-4a83-afe9-18c6d6275df4",
+      "51ebb5f1-a50f-4813-8cc5-74e75f4abaf1": {
+        "recipe_run_id": "51ebb5f1-a50f-4813-8cc5-74e75f4abaf1",
         "recipe_id": "recipe_iron_ore_or_ilmenite_basic_v0",
         "target_item_id": "iron_ore_or_ilmenite",
         "recipe_def": {
@@ -1634,17 +1466,17 @@
           "kind": "recipe",
           "name": "Basic recipe for iron ore or ilmenite from regolith"
         },
-        "started_at": 613.0,
+        "started_at": 603.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 1143.0
+        "completed_at": 1133.0
       },
-      "7ad7e51e-1660-450e-88f8-5c59ca6b0c0f": {
-        "recipe_run_id": "7ad7e51e-1660-450e-88f8-5c59ca6b0c0f",
+      "59662afd-55be-44ff-b4a1-5251275f14a7": {
+        "recipe_run_id": "59662afd-55be-44ff-b4a1-5251275f14a7",
         "recipe_id": "recipe_iron_pig_or_ingot_v0",
         "target_item_id": "iron_pig_or_ingot",
         "recipe_def": {
@@ -1717,17 +1549,17 @@
           "produces_qty": 1.0,
           "produces_unit": "kg"
         },
-        "started_at": 1213.0,
+        "started_at": 1203.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 1845.0
+        "completed_at": 1835.0
       },
-      "8442a294-2517-4ed1-bfe9-3a2fe9edc31c": {
-        "recipe_run_id": "8442a294-2517-4ed1-bfe9-3a2fe9edc31c",
+      "06f7b9c5-bae5-41fd-b75a-54e8bcc03e6d": {
+        "recipe_run_id": "06f7b9c5-bae5-41fd-b75a-54e8bcc03e6d",
         "recipe_id": "recipe_steel_ingot_v0",
         "target_item_id": "steel_ingot",
         "recipe_def": {
@@ -1825,7 +1657,7 @@
           "kind": "recipe",
           "name": "Recipe for steel ingot v0"
         },
-        "started_at": 1913.0,
+        "started_at": 1903.0,
         "completed_steps": [
           0,
           1
@@ -1833,10 +1665,10 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2363.0
+        "completed_at": 2353.0
       },
-      "dfb9a0d3-fa1c-4167-a5e1-8c257f42ff95": {
-        "recipe_run_id": "dfb9a0d3-fa1c-4167-a5e1-8c257f42ff95",
+      "ab94623e-448a-43e0-81ee-7d3fbdc24a88": {
+        "recipe_run_id": "ab94623e-448a-43e0-81ee-7d3fbdc24a88",
         "recipe_id": "recipe_steel_stock_bar_or_billet_v0",
         "target_item_id": "steel_stock_bar_or_billet",
         "recipe_def": {
@@ -1893,17 +1725,17 @@
           "assumptions": "Semi-finished steel product from hot rolling of ingots. Standard stock sizes for machining and forging feedstock.",
           "notes": "Production of steel bar and billet stock from ingots. Processing time ~1.5 hours per kg. ~5% loss to scale and trim."
         },
-        "started_at": 2413.0,
+        "started_at": 2403.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2414.0
+        "completed_at": 2404.0
       },
-      "1f40f56d-3c1d-4077-811d-69d04db80e33": {
-        "recipe_run_id": "1f40f56d-3c1d-4077-811d-69d04db80e33",
+      "9ff0373a-3e23-474e-8da8-b8323c6c1c3b": {
+        "recipe_run_id": "9ff0373a-3e23-474e-8da8-b8323c6c1c3b",
         "recipe_id": "recipe_tool_station_frame_v0",
         "target_item_id": "tool_station_frame",
         "recipe_def": {
@@ -2048,7 +1880,7 @@
           "notes": "Frame for tool station or light assembly workbench. Sturdy construction for various manufacturing tasks.",
           "kind": "recipe"
         },
-        "started_at": 2663.0,
+        "started_at": 2653.0,
         "completed_steps": [
           0,
           1,
@@ -2057,10 +1889,10 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2666.0
+        "completed_at": 2656.0
       },
-      "683216b6-6652-4953-90ff-cbf6ad7d401a": {
-        "recipe_run_id": "683216b6-6652-4953-90ff-cbf6ad7d401a",
+      "cef4f9d2-4c11-436b-bc3b-1b2451f6a34c": {
+        "recipe_run_id": "cef4f9d2-4c11-436b-bc3b-1b2451f6a34c",
         "recipe_id": "recipe_tool_set_general_v0",
         "target_item_id": "tool_set_general",
         "recipe_def": {
@@ -2116,17 +1948,17 @@
           "assumptions": "Steel tools forged, heat treated, and machined. Typical hand tool set including wrenches, pliers, hammers, screwdrivers. Total mass ~20 kg.",
           "notes": "General purpose hand tool set for assembly and maintenance operations."
         },
-        "started_at": 2673.0,
+        "started_at": 2663.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2674.0
+        "completed_at": 2664.0
       },
-      "478be6f8-4e9b-414c-8d37-43406ca73a0d": {
-        "recipe_run_id": "478be6f8-4e9b-414c-8d37-43406ca73a0d",
+      "6cc0d7d3-090e-4721-a08f-e8fed1f7d110": {
+        "recipe_run_id": "6cc0d7d3-090e-4721-a08f-e8fed1f7d110",
         "recipe_id": "recipe_power_conditioning_module_v0",
         "target_item_id": "power_conditioning_module",
         "recipe_def": {
@@ -2258,7 +2090,7 @@
           "assumptions": "12 kg power conditioning module; includes imported electronics.",
           "notes": "Three-step recipe for power conditioning module."
         },
-        "started_at": 2698.0,
+        "started_at": 2688.0,
         "completed_steps": [
           0,
           1,
@@ -2267,10 +2099,10 @@
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2704.400390039004
+        "completed_at": 2694.400390039004
       },
-      "56e5b2ce-c7c6-4d3f-83a7-16fa3213cad3": {
-        "recipe_run_id": "56e5b2ce-c7c6-4d3f-83a7-16fa3213cad3",
+      "ccf07d13-5987-4487-905e-6f0994b9ded0": {
+        "recipe_run_id": "ccf07d13-5987-4487-905e-6f0994b9ded0",
         "recipe_id": "recipe_assembly_tools_basic_v0",
         "target_item_id": "assembly_tools_basic",
         "recipe_def": {
@@ -2376,20 +2208,20 @@
           "kind": "recipe",
           "name": "Basic assembly tools set"
         },
-        "started_at": 2713.0,
+        "started_at": 2703.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 2714.0
+        "completed_at": 2704.0
       }
     }
   },
   "reservation_manager": {
     "machine_capacities": {
-      "assembly_tools_basic": 2.0,
+      "assembly_tools_basic": 1.0,
       "labor_bot_general_v0": 1.0,
       "metal_shear_or_saw": 1.0,
       "welding_power_supply_v0": 1.0,

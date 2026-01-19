@@ -298,7 +298,7 @@ class ProcessScheduledEvent(Event):
 ```python
 [
     {
-        "machine_id": "cnc_mill_v0",
+        "machine_id": "cnc_mill",
         "start_time": 0.0,
         "end_time": 8.0,  # or release_time for PARTIAL
         "qty": 1.0,

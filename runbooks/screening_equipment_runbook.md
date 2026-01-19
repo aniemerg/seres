@@ -52,7 +52,7 @@ Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -64,7 +64,7 @@ Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
     ensure: true
 - cmd: sim.import
   args:
-    item: punch_press_or_drill
+    item: drill_press
     quantity: 1
     unit: unit
     ensure: true

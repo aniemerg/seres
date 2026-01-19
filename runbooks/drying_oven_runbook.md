@@ -100,7 +100,13 @@ Commentary: Produce structural_steel_frame, insulation_panel_high_temp, and fast
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true
@@ -268,6 +274,12 @@ Commentary: Produce structural_steel_frame, insulation_panel_high_temp, and fast
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_metal_crude_v0
@@ -390,13 +402,7 @@ Commentary: Produce structural_steel_frame, insulation_panel_high_temp, and fast
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: pressing_tools
+    item: hydraulic_press
     quantity: 1
     unit: unit
     ensure: true

@@ -103,7 +103,7 @@ Found **121 items with material_class='metal'** that could potentially accept ir
 **Imported from Earth (~315 kg total):**
 - 1x labor_bot_general_v0
 - 1x drill_press_v0
-- 1x forge_or_induction_heater
+- 1x induction_forge_v0
 - 12 kg heating_element_electric
 - 3 kg fastener_kit_medium
 

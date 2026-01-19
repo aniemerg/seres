@@ -6,7 +6,10 @@ name: Environmental resource source
 layer_tags:
 - layer_0
 inputs: []
-outputs: []
+outputs:
+- item_id: bulk_material_or_parts
+  qty: 1.0
+  unit: kg
 energy_model:
   type: fixed_per_batch
   value: 0.001
@@ -18,7 +21,7 @@ time_model:
   notes: No time required - environmental boundary condition
 notes: Represents freely available environmental resources (solar, regolith in situ).
   No manufacturing required - these are boundary conditions. Terminal node - no upstream
-  dependencies.
+  dependencies. Outputs are placeholders and are overridden by recipe step outputs.
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1

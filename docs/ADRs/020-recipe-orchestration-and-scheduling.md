@@ -60,7 +60,7 @@ Machines are validated for existence (ADR-005 Phase 1) but never tracked:
 
 - **No conflict detection**: Two recipes can "use" the same CNC mill at the same time without detection
 - **No utilization measurement**: Can't answer "how many machine-hours did this recipe consume?"
-- **No availability checking**: Can't determine "is cnc_mill_v0 available at t=5.0?"
+- **No availability checking**: Can't determine "is cnc_mill available at t=5.0?"
 - **No double-booking prevention**: System allows scheduling conflicting uses of single machines
 
 The simulation performs careful accounting of materials (consumed/produced) and energy (kWh consumed) but completely ignores machine utilization.
@@ -309,7 +309,7 @@ For each step's resource_requirements:
 - Find time windows when ALL required machines are free
 - If conflict detected, delay step start until machines available
 
-Example: Step needs cnc_mill_v0 for 2 hours starting at t=5.0. If cnc_mill_v0 is reserved 4.0-6.5, step delayed to start at t=6.5.
+Example: Step needs cnc_mill for 2 hours starting at t=5.0. If cnc_mill is reserved 4.0-6.5, step delayed to start at t=6.5.
 
 #### Step 4: Create Scheduled Processes
 
@@ -640,16 +640,16 @@ Agent: resume_recipe("recipe_X")
 
 ```
 Agent: run_recipe("recipe_A")
-  → Schedules step 3 using cnc_mill_v0 at t=5.0
+  → Schedules step 3 using cnc_mill at t=5.0
 
 Agent: run_recipe("recipe_B")
-  → Attempts to schedule step 2 using cnc_mill_v0 at t=5.0
-  → Conflict detected (cnc_mill_v0 already reserved)
+  → Attempts to schedule step 2 using cnc_mill at t=5.0
+  → Conflict detected (cnc_mill already reserved)
   → Step scheduled for t=7.0 instead (after recipe_A step completes)
 
 Alternative: Agent intervenes
 Agent: reschedule_step("recipe_A", step_index=3, new_start_time=10.0)
-  → Frees cnc_mill_v0 at t=5.0
+  → Frees cnc_mill at t=5.0
 
 Agent: run_recipe("recipe_B")
   → Now schedules successfully at t=5.0

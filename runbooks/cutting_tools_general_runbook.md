@@ -35,7 +35,7 @@ Need significant quantities: ~25 kg tool steel for shear blade, ~5 kg steel for 
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true

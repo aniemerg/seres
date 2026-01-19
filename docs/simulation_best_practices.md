@@ -229,7 +229,7 @@ python -m src.cli sim advance-time --sim-id $SIM_ID --hours 10
 **Goal**: Demonstrate self-sufficiency from regolith
 **Initial imports**:
 - `labor_bot_general_v0` × 1
-- Critical machines: `press_brake_v0`, `stamping_press_basic`, etc.
+- Critical machines: `press_brake`, `stamping_press_basic`, etc.
 - Minimal consumables for first-generation parts
 
 ---

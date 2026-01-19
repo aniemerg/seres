@@ -59,6 +59,30 @@ Commentary: import all inputs and tooling to validate the recipe once.
     ensure: true
 - cmd: sim.import
   args:
+    item: precision_lathe
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: surface_grinder
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: coordinate_measuring_machine
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: precision_tooling_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: cnc_mill
     quantity: 1
     unit: unit
@@ -117,9 +141,99 @@ Commentary: import all inputs and tooling to validate the recipe once.
     quantity: 1000
     unit: kWh
     ensure: true
+- cmd: sim.import
+  args:
+    item: iron_metal_pure
+    quantity: 800
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: steel_stock
+    quantity: 200
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cutting_fluid
+    quantity: 10
+    unit: L
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cut_parts
+    quantity: 400
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: filler_wire_basic
+    quantity: 20
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: electrical_wire_and_connectors
+    quantity: 20
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: electronic_components_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: structural_steel_frame
+    quantity: 400
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: linear_guide_rails
+    quantity: 4
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: ball_screw_assembly
+    quantity: 3
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: spindle_drive_motor_small
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: motor_electric_medium
+    quantity: 3
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: control_panel_assembly_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: power_supply_low_voltage
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
+    quantity: 1
+    unit: kit
+    ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_cnc_mill_v0
+    recipe: recipe_machine_milling_machine_cnc_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
@@ -174,6 +288,30 @@ cast the mill shell locally. Remaining components are imported for now.
 - cmd: sim.import
   args:
     item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: precision_lathe
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: surface_grinder
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: coordinate_measuring_machine
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: precision_tooling_set
     quantity: 1
     unit: unit
     ensure: true
@@ -275,7 +413,7 @@ cast the mill shell locally. Remaining components are imported for now.
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -323,13 +461,13 @@ cast the mill shell locally. Remaining components are imported for now.
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -677,7 +815,7 @@ cast the mill shell locally. Remaining components are imported for now.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_cnc_mill_v0
+    recipe: recipe_machine_milling_machine_cnc_v0
     quantity: 1
 - cmd: sim.advance-time
   args:

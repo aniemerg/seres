@@ -103,7 +103,7 @@ Expected ISRU: ~100% (full chain from regolith)
     message: "Produce 270 kg steel_stock_bar_or_billet from 284 kg regolith_metal_crude using ISRU recipe."
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -126,7 +126,7 @@ Expected ISRU: ~100% (full chain from regolith)
     message: "Produce deburring_tools from steel_stock_bar_or_billet (forge + machine + assemble)."
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true

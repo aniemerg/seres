@@ -124,7 +124,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_heated_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -148,7 +148,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_unit_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -184,7 +184,7 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -268,13 +268,13 @@ Commentary: import the minimum tooling and seed materials to allow local product
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

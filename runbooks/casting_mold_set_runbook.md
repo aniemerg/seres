@@ -202,7 +202,7 @@ Commentary: Need 180 kg steel plate total (3 sand flasks × 60 kg each). Produce
     ensure: true
 - cmd: sim.import
   args:
-    item: rolling_mill_or_brake
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true

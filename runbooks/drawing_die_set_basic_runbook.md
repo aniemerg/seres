@@ -191,7 +191,7 @@ Commentary: Produce machined_part_raw (5 kg) from regolith metal, then fabricate
     message: "Produce machined_part_raw from regolith metal (5 kg needed)."
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true

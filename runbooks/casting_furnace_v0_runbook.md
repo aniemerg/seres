@@ -101,7 +101,7 @@ Commentary: bring in the core production machines and tools needed for mining, p
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -113,7 +113,7 @@ Commentary: bring in the core production machines and tools needed for mining, p
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true

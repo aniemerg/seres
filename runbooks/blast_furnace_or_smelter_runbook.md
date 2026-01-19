@@ -205,7 +205,7 @@ Commentary: Need 500 kg refractory bricks. Produce from regolith-derived alumina
     message: "ISRU Phase 2: Produce refractory bricks from regolith materials."
 - cmd: sim.import
   args:
-    item: chemical_reactor_heated_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -422,12 +422,6 @@ Commentary: Produce fastener_kit_large from regolith steel. Need to produce addi
 - cmd: sim.import
   args:
     item: heat_treatment_furnace_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_treatment_furnace
     quantity: 1
     unit: unit
     ensure: true

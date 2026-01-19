@@ -1,6 +1,7 @@
 id: rolling_basic_shop_v0
 kind: process
 name: Rolling (basic, shop mill)
+process_type: continuous
 layer_tags:
 - layer_5
 - layer_6
@@ -16,7 +17,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: rolling_mill_or_brake
+- machine_id: rolling_mill_v0
   qty: 1
   unit: count
 - machine_id: furnace_basic
@@ -33,5 +34,5 @@ time_model:
   rate: 1.25
   rate_unit: kg/hr
   scaling_basis: metal_ingot
-  notes: Hot rolling with multiple passes on a shop mill or brake
-notes: Basic rolling process using a smaller rolling mill or brake instead of a full plate mill.
+  notes: Hot rolling with multiple passes on a shop mill
+notes: Basic rolling process using a smaller rolling mill instead of a full plate mill.
