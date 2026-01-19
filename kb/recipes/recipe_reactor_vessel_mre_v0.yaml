@@ -2,7 +2,7 @@ id: recipe_reactor_vessel_mre_v0
 target_item_id: reactor_vessel_mre
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 650.0
     unit: kg
   - item_id: regolith_fine_fraction
@@ -15,7 +15,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     outputs:

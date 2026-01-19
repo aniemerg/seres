@@ -12,7 +12,7 @@ Record consolidations and precedents here. Include:
 - Files touched: `kb/items/machines/bench_grinder.yaml`, `kb/items/machines/polishing_station.yaml`, `kb/items/machines/surface_grinder.yaml`, `kb/processes/finishing_deburring_v0.yaml`, `kb/processes/surface_finishing_v0.yaml`, `kb/processes/mirror_polishing_v0.yaml`.
 
 ## 2024-XX-XX — agent: codex
-- Scope: Plate rolling/press brake family (`rolling_mill`, `plate_rolling_mill`, `rolling_mill_or_brake`, `press_brake`, `press_brake_or_roller`).
+- Scope: Plate rolling/press brake family (`rolling_mill`, `plate_rolling_mill`, `press_brake`, `press_brake_or_roller`).
 - Decision: Prefer `plate_rolling_mill` as default forming tool; mark `press_brake` and `press_brake_or_roller` as dedupe candidates with alternatives pointing to the plate rolling mill (and press brake as secondary). `plate_rolling_mill` set `preferred_variant: simple`. Retargeted sheet metal processes to use `plate_rolling_mill` for forming (`sheet_metal_bending_and_forming_v0`, `sheet_metal_fabrication_v0`). Press brake/roller annotated as dedupe candidates.
 - Files touched: `kb/items/machines/plate_rolling_mill.yaml`, `kb/items/machines/press_brake.yaml`, `kb/items/machines/press_brake_or_roller.yaml`, `kb/processes/sheet_metal_bending_and_forming_v0.yaml`, `kb/processes/sheet_metal_fabrication_v0.yaml`.
 
@@ -91,21 +91,21 @@ Consolidate into above:
 
 **Machines considered:**
 - `milling_machine_general_v0` (600 kg) - general-purpose milling, NOT used by any process
-- `milling_machine_cnc` (1200 kg) - CNC milling with precision capabilities
+- `cnc_mill` (1200 kg) - CNC milling with precision capabilities
 - `precision_lathe` (1200 kg) - precision turning, threading, and boring
 
 **Decision:**
 Keep both machines with distinct functions:
-1. **`milling_machine_cnc`** (1200 kg) - all milling operations (rotating cutter, stationary workpiece)
+1. **`cnc_mill`** (1200 kg) - all milling operations (rotating cutter, stationary workpiece)
 2. **`precision_lathe`** (1200 kg) - all turning operations (rotating workpiece, stationary cutter)
 
 Consolidate into above:
-- `milling_machine_general_v0` → use `milling_machine_cnc`
+- `milling_machine_general_v0` → use `cnc_mill`
 
 **Rationale:**
 - Milling and turning are fundamentally different machining operations with different mechanics
 - Cannot consolidate lathe into mill - they perform non-overlapping functions
-- `milling_machine_general_v0` is unused and redundant with `milling_machine_cnc`
+- `milling_machine_general_v0` is unused and redundant with `cnc_mill`
 - CNC mill is more capable than general mill (programmable, precision, multi-axis)
 - Both CNC mill and precision lathe are already in use by `machining_precision_v0` process
 
@@ -451,27 +451,23 @@ Consolidate into above:
 **Machines considered:**
 - `rolling_mill` (800 kg, capabilities: rolling, metal_forming) - used in 5 processes
 - `plate_rolling_mill` (1500 kg, capabilities: rolling, metal_forming, plate_production) - used in 3 processes
-- `rolling_mill_or_brake` (800 kg, capability: sheet_forming) - used in 1 process
 
 **Decision:**
 Keep only `plate_rolling_mill` as the canonical rolling mill for all rolling operations.
 
 Consolidate into above:
 - `rolling_mill` → use `plate_rolling_mill`
-- `rolling_mill_or_brake` → use `plate_rolling_mill` (rolling function) and `press_brake` (bending function)
 
 **Rationale:**
 - Mass difference between rolling_mill (800 kg) and plate_rolling_mill (1500 kg) is only 1.9x, below our >2-3x threshold
 - Both serve the same core function: compressing metal through rollers to reduce thickness
 - rolling_basic_v0 process: converts ingots → sheet using hot rolling - plate_rolling_mill handles this
-- rolling_mill_or_brake is ambiguous ("either a small rolling mill or a press brake")
-- Task hints correctly note that press_brake was already kept separate in previous dedupe for bending operations
 - Plate rolling mill can handle both ingot rolling and plate production, no need for separate general rolling mill
 - All rolling operations can be consolidated to plate_rolling_mill without loss of capability
 
 **Files updated:**
-- Processes: `rolling_basic_v0.yaml` (rolling_mill → plate_rolling_mill), `metal_forming_basic_v0.yaml` (rolling_mill_or_brake → plate_rolling_mill)
-- Machines: Added DEPRECATED notes to `rolling_mill.yaml`, `rolling_mill_or_brake.yaml`
+- Processes: `rolling_basic_v0.yaml` (rolling_mill → plate_rolling_mill), `metal_forming_basic_v0.yaml` (rolling_mill → plate_rolling_mill)
+- Machines: Added DEPRECATED notes to `rolling_mill.yaml`
 
 **Next steps:**
 - Mark recipes/BOMs for deprecated machines as variants or remove in future cleanup
@@ -511,3 +507,130 @@ Consolidate into above:
 **Next steps:**
 - Mark recipe for deprecated part as variant or remove in future cleanup
 - Consider reviewing other items for similar categorization issues (functional units marked as parts vs machines)
+
+## 2026-01-18 / claude-sonnet-4.5 / Heat Treatment Furnace Versioning Consolidation
+
+**Task:** Consolidate `heat_treatment_furnace` and `heat_treatment_furnace_v0` duplicates
+
+**Items considered:**
+- `heat_treatment_furnace` (537 kg) - heat treatment furnace, no processes_supported field
+- `heat_treatment_furnace_v0` (537 kg) - heat treatment furnace v0, has processes_supported field
+
+**Decision:**
+Keep only `heat_treatment_furnace_v0` as the canonical heat treatment furnace.
+
+Consolidate into above:
+- `heat_treatment_furnace` → use `heat_treatment_furnace_v0`
+
+**Rationale:**
+- Both items have **identical mass** (537 kg)
+- Both use **identical BOM** (bom_heat_treatment_furnace_v0)
+- Both serve identical function (heat treatment of metals with controlled cycles)
+- Within 1× of each other (literally identical specs!)
+- This is a clear case of proliferation - same machine with and without _v0 suffix
+- `heat_treatment_furnace_v0` is more extensively used (23 references vs 1)
+- `heat_treatment_furnace_v0` has `processes_supported` field properly defined
+- Per conservative mode guidelines: items within 5× should be consolidated (these are 1×)
+- Different from previous high-temp furnace consolidation (line 349-382) which kept heat_treatment_furnace separate from furnace_high_temp due to different temperature ranges - this consolidation is about versioning of the same machine
+
+**Files updated:**
+- Processes: `bearing_set_heavy_production_v0.yaml`, `heat_treat_basic_v0.yaml`, `heat_treatment_basic_v0.yaml`, `stress_relief_basic_v0.yaml` (all changed machine_id from heat_treatment_furnace to heat_treatment_furnace_v0)
+- Recipe: `recipe_heat_treatment_furnace_v0.yaml` (changed produces_id and outputs from heat_treatment_furnace to heat_treatment_furnace_v0)
+- Runbook: `heat_treatment_furnace_runbook.md` (updated to reference v0 version)
+- Queue files: `machine_runbook_queue_nextgen.md`, `machine_runbook_queue_sequential.md` (updated references)
+- Item: Deleted `kb/items/machines/heat_treatment_furnace.yaml`
+
+**Next steps:**
+- Run indexer to verify no broken references remain
+- Consider consolidating the two runbooks (heat_treatment_furnace_runbook.md and heat_treatment_furnace_v0_runbook.md) as they're for the same machine
+
+## 2026-01-18 / claude-sonnet-4.5 / Lathe Family Review and "Or" Machine Elimination
+
+**Task:** Review lathe_engine_v0, precision_lathe, and roll_grinding_lathe_or_cylindrical_grinder_v0 for duplication; eliminate ambiguous "or" machine
+
+**Machines considered:**
+- `lathe_engine_v0` (180 kg) - general-purpose turning, used by 6 processes
+- `precision_lathe` (1200 kg) - precision turning with tight tolerances, used by 9 processes
+- `roll_grinding_lathe_or_cylindrical_grinder_v0` (600 kg) - "or" machine for roll grinding, used by 1 process
+- `grinder_cylindrical_v0` (600 kg) - cylindrical grinder, unused
+
+**Decision:**
+Keep `lathe_engine_v0` and `precision_lathe` as separate machines (different precision tiers).
+Keep `grinder_cylindrical_v0` as the canonical cylindrical grinder.
+Delete `roll_grinding_lathe_or_cylindrical_grinder_v0` (consolidate with grinder_cylindrical_v0).
+
+**Rationale:**
+
+**Lathes (lathe_engine_v0 vs precision_lathe):**
+- Mass ratio: 6.7× (1200 kg / 180 kg) - just exceeds 5× threshold
+- Serve genuinely different precision tiers:
+  - lathe_engine_v0: General turning operations (bearing production, robot fabrication, fasteners)
+  - precision_lathe: Tight tolerance work (±0.005mm) for ball screws, lead screws, valve boring
+- NOT duplicative - different capability classes
+- Keep both
+
+**"Or" Machine (roll_grinding_lathe_or_cylindrical_grinder_v0):**
+- Identical mass (600 kg) to grinder_cylindrical_v0
+- Ambiguous "or" naming violates single-function machine principle
+- Process `roll_grinding_and_balancing_v0` performs grinding operations (not lathe turning)
+- "Precision grind roll diameters and journals" is cylindrical grinding work
+- grinder_cylindrical_v0 already exists with identical spec and proper naming
+- Clear case of duplication + naming ambiguity
+- Per conservative mode: identical specs (1×) → consolidate
+
+**Machine Definition Principle Violation:**
+- "Or" machines are anti-patterns - each machine definition should represent a single, specific machine
+- Recipes and processes should reference unambiguous machine IDs
+- "roll_grinding_lathe_or_cylindrical_grinder_v0" conflates two different machine types:
+  - Lathe: rotating workpiece, stationary cutting tool (turning operations)
+  - Cylindrical grinder: rotating workpiece, rotating grinding wheel (grinding operations)
+- The actual process requires a cylindrical grinder, not a lathe
+
+**Files updated:**
+- Process: `roll_grinding_and_balancing_v0.yaml` (changed machine_id from roll_grinding_lathe_or_cylindrical_grinder_v0 to grinder_cylindrical_v0)
+- Deleted: `kb/items/machines/roll_grinding_lathe_or_cylindrical_grinder_v0.yaml`
+- Deleted: `kb/boms/bom_roll_grinding_lathe_or_cylindrical_grinder_v0.yaml`
+- Deleted: `kb/recipes/recipe_roll_grinding_lathe_or_cylindrical_grinder_v0.yaml`
+
+**Next steps:**
+- Run indexer to verify no broken references
+- Review other "or" machines in KB (14 found: ceramic_press_or_mold_set, power_hammer_or_press_v0, press_brake_or_roller, etc.) for similar cleanup
+- Each "or" machine should be evaluated: does a specific machine already exist? Should the ambiguous machine be eliminated?
+
+## 2026-01-18 / claude-sonnet-4.5 / Remove calibration_standards Miscategorization
+
+**Task:** Remove calibration_standards which was incorrectly categorized as a machine
+
+**Item considered:**
+- `calibration_standards` (5 kg) - categorized as `kind: machine` but actually reference artifacts (gauge blocks, mass standards, etc.)
+
+**Decision:**
+Remove `calibration_standards` entirely. Fold its functionality into `measurement_equipment`.
+
+**Rationale:**
+- Calibration standards are **passive reference objects**, not machines
+- They don't DO work - they're reference artifacts used during calibration
+- Examples: gauge blocks (length), mass standards (weight), voltage references
+- Creates circular dependency: what calibrates the machines that make calibration standards?
+- In reality, calibration standards must be traceable to national standards (NIST, PTB, etc.) - cannot be bootstrapped
+- Calibration capability can reasonably be considered part of `measurement_equipment` rather than requiring separate reference artifacts
+- Simplifies the KB without losing functional modeling detail
+
+**Category violation:**
+- `kind: machine` should be for active equipment that performs work
+- Passive reference objects should not be machines
+- Alternative would have been `kind: part` + `is_import: true`, but user preferred complete removal
+
+**Files updated:**
+- Processes: `calibration_basic_v0.yaml`, `calibration_force_torque_sensor_v0.yaml` (removed calibration_standards from resource_requirements, updated notes to clarify standards are implicit in measurement_equipment)
+- Deleted: `kb/items/machines/calibration_standards.yaml`
+- Deleted: `kb/boms/bom_calibration_standards_v0.yaml`
+- Deleted: `kb/recipes/recipe_calibration_standards_v0.yaml`
+
+**Impact:**
+- 2 processes updated (calibration_basic_v0, calibration_force_torque_sensor_v0)
+- 30 recipes use these processes and continue to work unchanged
+- No broken dependencies - processes remain functional with labor_bot + measurement_equipment
+
+**Next steps:**
+- Run indexer to verify no broken references

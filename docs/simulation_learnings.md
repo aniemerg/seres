@@ -16,11 +16,11 @@ Total simulations analyzed: 13
 **Key Insights:**
 - Simulation ran for 585.7 hours with 386 events (0.7 events/hour)
 - Required 52 imports totaling 929.2 kg
-- Key imports: labor_bot_general_v0, heating_element_electric, fastener_kit_medium, drill_press_v0, forge_or_induction_heater
+- Key imports: labor_bot_general_v0, heating_element_electric, fastener_kit_medium, drill_press, induction_forge_v0
 - Ran 20 recipes and 58 processes
 - Established 33 supply chains
 - Deepest supply chains (18 steps): tailings
-- Built 6 machines: forge_or_induction_heater_v0, chemical_reactor_heated_v0, press_brake_v0, labor_bot_general_v0, drill_press_v0, rolling_mill_v0
+- Built 6 machines: induction_forge_v0, chemical_reactor_basic, press_brake, labor_bot_general_v0, drill_press, rolling_mill_v0
 - Final inventory: 49 unique items
 
 **Supply Chains (33):**
@@ -46,7 +46,7 @@ Total simulations analyzed: 13
 **Key Insights:**
 - Simulation ran for 1.0 hours with 49 events (49.0 events/hour)
 - Required 20 imports totaling 199.6 kg
-- Key imports: labor_bot_general_v0, press_brake_v0, stamping_press_basic, coil_winding_machine, coil_insulation_material
+- Key imports: labor_bot_general_v0, press_brake, stamping_press_basic, coil_winding_machine, coil_insulation_material
 - Ran 2 recipes and 0 processes
 - Final inventory: 10 unique items
 
@@ -80,7 +80,7 @@ Total simulations analyzed: 13
 **Key Insights:**
 - Simulation ran for 513.0 hours with 228 events (0.4 events/hour)
 - Required 39 imports totaling 8290.0 kg
-- Key imports: labor_bot_general_v0, forge_or_induction_heater_v0, drill_press_v0, stamping_press_basic, coil_winding_machine
+- Key imports: labor_bot_general_v0, induction_forge_v0, drill_press, stamping_press_basic, coil_winding_machine
 - Ran 6 recipes and 31 processes
 - Established 25 supply chains
 - Deepest supply chains (5 steps): tailings
@@ -143,7 +143,7 @@ Total simulations analyzed: 13
 **Key Insights:**
 - Simulation ran for 3.0 hours with 42 events (14.0 events/hour)
 - Required 10 imports totaling 99.8 kg
-- Key imports: labor_bot_general_v0, stamping_press_basic, coil_winding_machine, press_brake_v0, electrical_steel_sheet
+- Key imports: labor_bot_general_v0, stamping_press_basic, coil_winding_machine, press_brake, electrical_steel_sheet
 - Ran 6 recipes and 0 processes
 - Final inventory: 10 unique items
 

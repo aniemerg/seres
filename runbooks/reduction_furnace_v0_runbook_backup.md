@@ -216,13 +216,13 @@ Commentary: bring in the fabrication, welding, machining, and casting tools for 
 
 ## Stage 3: Local metal feedstock
 
-Commentary: produce metal_alloy_bulk from regolith via processing chain.
+Commentary: produce regolith_metal_crude from regolith via processing chain.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith."
+    message: "Produce regolith_metal_crude from regolith."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -273,7 +273,7 @@ Commentary: produce metal_alloy_bulk from regolith via processing chain.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 22
 - cmd: sim.advance-time
   args:

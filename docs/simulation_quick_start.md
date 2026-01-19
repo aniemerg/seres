@@ -157,7 +157,7 @@ After simulation completes:
 
 ```bash
 # Generate analysis
-python tools/analyze_simulations.py robot_arm_test_dec21
+python scripts/analysis/analyze_simulations.py robot_arm_test_dec21
 
 # Review the report
 cat docs/simulation_learnings.md | grep -A 20 "robot_arm_test_dec21"
@@ -262,7 +262,7 @@ python -m src.cli sim view-state --sim-id $SIM_ID
 5. **Test recipes individually first**: Before chaining them together
 6. **Document your intent**: Add comments explaining what you're testing
 7. **Check past simulations**: Someone may have already tested what you need
-8. **Run analysis after**: `python tools/analyze_simulations.py [sim_name]`
+8. **Run analysis after**: `python scripts/analysis/analyze_simulations.py [sim_name]`
 
 ---
 
@@ -310,7 +310,7 @@ python -m src.cli sim view-state --sim-id $SIM_ID
 
 **Step 7**: Analyze
 ```bash
-python tools/analyze_simulations.py thermal_mgmt_test_dec21
+python scripts/analysis/analyze_simulations.py thermal_mgmt_test_dec21
 ```
 
 ---

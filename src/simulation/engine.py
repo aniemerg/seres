@@ -224,6 +224,15 @@ class SimulationEngine:
         if process_model:
             process_def = process_model.model_dump() if hasattr(process_model, "model_dump") else process_model
 
+        input_complexities = []
+        for item_id in process_run.inputs_consumed.keys():
+            input_complexities.append(self.state.complexity_scores.get(item_id, 1))
+        max_input_complexity = max(input_complexities) if input_complexities else 1
+        process_type = process_def.get("process_type") if isinstance(process_def, dict) else None
+        if process_type == "boundary" and not input_complexities:
+            max_input_complexity = 1
+        output_complexity = min(7, max_input_complexity + 1) if input_complexities else 1
+
         provenance_consumed = dict(process_run.provenance_consumed_kg or {})
         provenance_total = sum(provenance_consumed.values())
 
@@ -252,6 +261,10 @@ class SimulationEngine:
 
         for item_id, unit, qty in untracked_outputs:
             self.add_to_inventory(item_id, qty, unit)
+            if item_id in self.state.complexity_scores:
+                self.state.complexity_scores[item_id] = max(self.state.complexity_scores[item_id], output_complexity)
+            else:
+                self.state.complexity_scores[item_id] = output_complexity
 
         if total_output_kg <= 0:
             if not output_kg:
@@ -262,6 +275,10 @@ class SimulationEngine:
 
         for item_id, (mass_kg, unit, qty) in output_kg.items():
             self.add_to_inventory(item_id, qty, unit)
+            if item_id in self.state.complexity_scores:
+                self.state.complexity_scores[item_id] = max(self.state.complexity_scores[item_id], output_complexity)
+            else:
+                self.state.complexity_scores[item_id] = output_complexity
             if provenance_consumed:
                 if provenance_total <= 0:
                     self._add_provenance(item_id, {"in_situ_kg": mass_kg})

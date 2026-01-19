@@ -1,0 +1,35 @@
+id: steel_bar_stock_rolling_shop_v0
+kind: process
+name: Steel bar stock rolling from ingot (shop mill) v0
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: steel_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: steel_bar_stock
+  qty: 0.75
+  unit: kg
+byproducts:
+- item_id: slag
+  qty: 0.25
+  unit: kg
+resource_requirements:
+- machine_id: rolling_mill_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: per_unit
+  value: 0.6
+  unit: kWh/kg
+  scaling_basis: steel_ingot
+  notes: Energy intensity for rolling per kilogram of input material
+time_model:
+  type: linear_rate
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: steel_ingot
+notes: Shop-scale bar stock rolling using a smaller mill.
+process_type: continuous

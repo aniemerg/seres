@@ -3,13 +3,13 @@ kind: recipe
 target_item_id: table_drive_assembly
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 85.0
     unit: kg
 outputs:
   - item_id: table_drive_assembly
-    qty: 80.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: mold_preparation_basic_v0
     est_time_hr: 0.5
@@ -18,7 +18,7 @@ steps:
     est_time_hr: 1.0
     machine_hours: 1.0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 85.0
         unit: kg
     outputs:
@@ -34,7 +34,7 @@ steps:
         unit: kg
     outputs:
       - item_id: table_drive_assembly
-        qty: 80.0
-        unit: kg
+        qty: 1.0
+        unit: unit
 assumptions: Cast housing/drive parts then machine; bearings/gears assumed imported.
 notes: Coarse route; refine with gear/drive specifics later.

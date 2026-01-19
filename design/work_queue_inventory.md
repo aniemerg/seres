@@ -69,7 +69,6 @@ BOM files that are referenced but don't exist. Many of these are machine BOMs.
 
 **High-priority BOMs** (commonly referenced or for critical machines):
 ```
-bom_chemical_reactor_heated_v0_v0.yaml
 bom_cnc_mill_v0_v0.yaml
 bom_electrolysis_cell_aluminum_v0
 bom_electrolyzer_pem_v0_v0.yaml
@@ -617,7 +616,6 @@ Based on project principles (structure before precision, iteration guided by bot
 ### High Priority (After Bottleneck Analysis)
 
 3. **High-priority machine BOMs** → Only if these machines are bottlenecks
-   - chemical_reactor_heated_v0_v0
    - cnc_mill_v0_v0
    - electrolysis_cell_aluminum_v0
    - welding units

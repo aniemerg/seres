@@ -19,243 +19,9 @@ and subassembly.
     message: "Simulation reset. Starting labor_bot_general_v0 runbook."
 ```
 
-## Baseline import + assembly
+## ISRU Phase 1: Import core equipment
 
-Commentary: import all BOM parts to ensure the labor bot can be assembled once, then
-run the assembly recipe as a baseline.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import baseline equipment needed for assembly."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Import all BOM parts for baseline labor_bot_general_v0 assembly."
-
-# ===== MECHANICAL STRUCTURE (35 kg) =====
-- cmd: sim.import
-  args:
-    item: machine_frame_small
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: robot_arm_link_aluminum
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: robot_wrist_3axis
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: motor_housing_cast
-    quantity: 6
-    unit: unit
-    ensure: true
-
-# ===== ACTUATION SYSTEM (30 kg) =====
-- cmd: sim.import
-  args:
-    item: motor_electric_medium
-    quantity: 4
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: motor_electric_small
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: harmonic_drive_reducer_medium
-    quantity: 6
-    unit: unit
-    ensure: true
-
-# ===== POWER SYSTEM (8 kg) =====
-- cmd: sim.import
-  args:
-    item: power_supply_small_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_distribution_board
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: battery_backup_small
-    quantity: 1
-    unit: unit
-    ensure: true
-
-# ===== CONTROL SYSTEM (6 kg) =====
-- cmd: sim.import
-  args:
-    item: computer_core_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: servo_drive_controller
-    quantity: 6
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: safety_controller_plc
-    quantity: 1
-    unit: unit
-    ensure: true
-
-# ===== SENSING SYSTEM (12 kg) =====
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: force_torque_sensor_6axis
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: touch_sensor_capacitive
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: proximity_sensor_inductive
-    quantity: 4
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: instrument_mounts_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: led_ring_light
-    quantity: 2
-    unit: unit
-    ensure: true
-
-# ===== END EFFECTOR (8 kg) =====
-- cmd: sim.import
-  args:
-    item: electric_parallel_gripper
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: stepper_motor_precision
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: quick_change_tool_interface
-    quantity: 1
-    unit: unit
-    ensure: true
-
-# ===== WIRING AND INTEGRATION (15 kg) =====
-- cmd: sim.import
-  args:
-    item: assembled_cable_harness
-    quantity: 7
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cable_drag_chain
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_wire_and_connectors
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: thermal_management_system
-    quantity: 1
-    unit: unit
-    ensure: true
-
-# ===== SAFETY AND ENCLOSURE (6 kg) =====
-- cmd: sim.import
-  args:
-    item: control_components
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: safety_light_curtain
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: protective_cover_set
-    quantity: 1
-    unit: unit
-    ensure: true
-
-- cmd: sim.note
-  args:
-    style: info
-    message: "Baseline: imported all labor_bot_general_v0 BOM parts."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_labor_bot_general_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 140
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline labor_bot_general_v0 assembly complete."
-```
-
-## In-situ equipment + core feedstocks
-
-Commentary: import the minimum tooling and seed materials to allow local production.
+Commentary: Import the minimum tooling and seed materials to allow local production.
 
 ```sim-runbook
 - cmd: sim.note
@@ -453,7 +219,7 @@ Commentary: mine highland regolith and extract alumina for aluminum production.
     message: "Mine highland regolith and extract alumina."
 - cmd: sim.import
   args:
-    item: chemical_reactor_heated_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
@@ -515,13 +281,24 @@ Commentary: produce aluminum ingots and wire from alumina via Hall-Heroult elect
 - cmd: sim.advance-time
   args:
     hours: 240
+- cmd: sim.note
+  args:
+    style: info
+    message: "Produce regolith metal for aluminum wire drawing."
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 320
 - cmd: sim.run-recipe
   args:
     recipe: recipe_aluminum_wire_v0
-    quantity: 5
+    quantity: 20
 - cmd: sim.advance-time
   args:
-    hours: 3
+    hours: 12
 - cmd: sim.note
   args:
     style: info
@@ -530,28 +307,28 @@ Commentary: produce aluminum ingots and wire from alumina via Hall-Heroult elect
 
 ## In-situ: Metal alloy bulk production from regolith (MRE)
 
-Commentary: produce metal_alloy_bulk from mare regolith via molten regolith electrolysis (MRE).
+Commentary: produce regolith_metal_crude from mare regolith via molten regolith electrolysis (MRE).
 This is the key to maximizing in situ production - making structural metals from lunar resources.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce metal_alloy_bulk from regolith via MRE."
+    message: "Produce regolith_metal_crude from regolith via MRE."
 - cmd: sim.import
   args:
     item: electrical_energy
-    quantity: 14000
+    quantity: 18000
     unit: kWh
     ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Running metal_alloy_bulk production (~35 batches for 800 kg)."
+    message: "Running regolith_metal_crude production (~42 batches for 958 kg)."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
-    quantity: 35
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 42
 - cmd: sim.advance-time
   args:
     hours: 400
@@ -576,58 +353,18 @@ Commentary: produce steel from regolith ilmenite via iron smelting and refining.
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce steel from regolith ilmenite."
-- cmd: sim.note
-  args:
-    style: info
-    message: "Mining additional mare regolith for steel production (300 kg needed)."
-- cmd: sim.import
-  args:
-    item: carbon_reductant
-    quantity: 30
-    unit: kg
-    ensure: true
-- cmd: sim.start-process
-  args:
-    process: regolith_mining_simple_v0
-    output_quantity: 350
-    output_unit: kg
-    duration: null
-- cmd: sim.advance-time
-  args:
-    hours: 8
+    message: "Produce sheet metal/structural steel from regolith metal."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 210
-- cmd: sim.advance-time
-  args:
-    hours: 300
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 63
-- cmd: sim.advance-time
-  args:
-    hours: 260
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_ingot_v0
-    quantity: 60
-- cmd: sim.advance-time
-  args:
-    hours: 120
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_sheet_metal_or_structural_steel_v0
+    recipe: recipe_sheet_metal_or_structural_steel_isru_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 320
 - cmd: sim.note
   args:
     style: success
-    message: "Steel production complete from lunar ilmenite."
+    message: "Sheet metal/structural steel complete from regolith metal."
 ```
 
 ## In-situ: Mechanical structure parts
@@ -659,7 +396,7 @@ Commentary: produce robot arm links, frame, and motor housings from locally-prod
     quantity: 6
 - cmd: sim.advance-time
   args:
-    hours: 30
+    hours: 320
 - cmd: sim.note
   args:
     style: info
@@ -699,13 +436,19 @@ Commentary: attempt motor production with available materials; will need to impo
     quantity: 10
     unit: kg
     ensure: true
+- cmd: sim.import
+  args:
+    item: balancing_machine
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_motor_electric_medium_v0
     quantity: 4
 - cmd: sim.advance-time
   args:
-    hours: 65
+    hours: 600
 - cmd: sim.note
   args:
     style: warning

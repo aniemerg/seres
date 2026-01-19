@@ -178,6 +178,61 @@ Let users select how aggressive summarization is:
 - Lets UI focus on *meaning* without losing data.
 - Enables future “AI narrator” or report generator.
 
+## Decisions (current phase)
+
+- **Output mode**: Scroll-first, no live TUI.
+- **Primary scope**: Runbook output (other CLI commands keep simple direct output for now).
+- **Data contract**: We can add new event fields (phase, importance, deltas) to the stream.
+- **Summarization**: Default is low-verbosity; emphasize ISRU, energy, imports, and key outputs.
+- **Runbook compatibility**: Existing runbooks must remain valid; new markdown/story blocks are additive.
+- **Deliverable**: Design spec + plan, not heavy implementation yet.
+
+## Design spec (non-technical narrative)
+
+We want simulator output to read like a mission log, not a raw firehose. The runbook already contains the story; our output should surface that story with clarity and style.
+
+When a runbook runs, the system will still record all raw events, but the CLI will show a curated narrative:
+
+- **Each stage becomes a scene.** Headings and milestone notes in the runbook become scene headers, so the user always knows where they are in the story.
+- **Every scene has a “status line.”** This line always shows ISRU %, energy, time, imports, and local mass. It gives instant situational awareness without scrolling.
+- **Details are summarized, not spammed.** Repeated actions (like many mining steps) collapse into a single line with a count. Big changes rise to the top.
+- **Runbook notes become callouts.** If the author includes notes or story blocks, the output becomes more cinematic and intentional.
+
+The result is a scrolling console that is readable, cool, and decisive: high‑signal by default, with optional depth if you need it.
+
+## How this works at a high level
+
+We will introduce a “story renderer” that sits between raw sim events and the terminal output. It uses light heuristics to choose what to show and how to group it. This is not a black box; it is deterministic and aligned with runbook structure.
+
+Key mechanics:
+
+- **Phase mapping**: events inherit the nearest runbook heading or milestone note.
+- **Event importance**: errors and large deltas float to the top; routine events get summarized.
+- **Telemetry overlay**: ISRU, energy, imports, local mass always visible per scene.
+
+## What does “low‑verbosity” look like?
+
+- Only show milestones, phase summaries, and large deltas.
+- Hide “skipped import” lines unless debugging.
+- Collapse repetitive process lines.
+- Always show: ISRU %, energy, imports, local mass.
+
+## Using markdown to tell the story (without breaking anything)
+
+Runbooks can remain unchanged. If authors want richer output, they can optionally add:
+
+- **Admonitions** (callout blocks)
+- **Task lists** (phase checklists)
+- **Story blocks** (`sim-story`) that define how a scene should be presented
+
+These are additive; the renderer ignores them if absent.
+
+## Open questions (for later)
+
+- Should the renderer be usable for other CLI commands beyond runbooks?
+- What thresholds should trigger a “large delta”?
+- How much provenance detail should be visible by default?
+
 ## Information architecture (what to show)
 
 1) **Headline summary**

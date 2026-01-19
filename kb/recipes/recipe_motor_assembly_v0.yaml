@@ -2,7 +2,7 @@ id: recipe_motor_assembly_v0
 target_item_id: motor_assembly
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 20.0
     unit: kg
   - item_id: electrical_steel_sheet
@@ -39,7 +39,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 12.0
         unit: kg
     outputs:
@@ -76,7 +76,7 @@ steps:
     notes: "Stamp and stack stator and rotor laminations from electrical steel sheet."
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 4.0
         unit: kg
     outputs:

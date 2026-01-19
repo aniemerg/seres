@@ -1,8 +1,7 @@
 # Press Brake Runbook
 
-Goal: build `press_brake` using in-situ steel production where possible. Start with
-baseline imports to validate the recipe, then replace the bulk steel feedstock with
-regolith-derived steel stock.
+Goal: build `press_brake` using in-situ steel production where possible, replacing
+bulk steel feedstock with regolith-derived steel stock.
 
 ## Setup
 
@@ -19,7 +18,7 @@ regolith-derived steel stock.
     message: "Simulation reset. Starting press_brake runbook."
 ```
 
-## Baseline: import equipment
+## Import fabrication equipment
 
 Commentary: import the core fabrication equipment needed for welding, machining,
 cutting, forging, heat treating, and assembly.
@@ -93,7 +92,7 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -111,13 +110,7 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: steel_forming_press
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -159,13 +152,13 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: heating_furnace
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -175,70 +168,12 @@ cutting, forging, heat treating, and assembly.
     quantity: 1
     unit: unit
     ensure: true
-```
-
-## Baseline: import feedstocks and modules
-
-Commentary: import feedstocks and modules to validate the press_brake recipe.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline build: import feedstocks and modules."
 - cmd: sim.import
   args:
-    item: steel_stock
-    quantity: 500
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: filler_wire_basic
-    quantity: 25
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: machined_part_raw
-    quantity: 120
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: hydraulic_system_medium
+    item: heating_furnace
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: power_electronics_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_panel_assembly_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: kit
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_press_brake_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 12
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline press_brake build complete."
 ```
 
 ## ISRU: steel stock from regolith
@@ -296,7 +231,7 @@ regolith. Also roll steel into plate/sheet and bar stock for downstream parts.
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_stock_v0
-    quantity: 500
+    quantity: 510
 - cmd: sim.advance-time
   args:
     hours: 3200

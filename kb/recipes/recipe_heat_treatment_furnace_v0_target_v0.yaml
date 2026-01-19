@@ -36,22 +36,19 @@ inputs:
     qty: 1.0
     unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
+  - process_id: refractory_lining_installation_v0
+    notes: "Install ceramic fiber or brick refractory insulation lining"
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: furnace_shell_insulated
         qty: 1.0
         unit: unit
-    notes: "Cast outer shell and frame (approx 300 kg)"
-  - process_id: refractory_lining_installation_v0
-    notes: "Install ceramic fiber or brick refractory insulation lining"
-  - process_id: coil_winding_basic_v0
-    inputs:
+      - item_id: refractory_lining_set
+        qty: 1.0
+        unit: unit
       - item_id: heating_element_set_basic
         qty: 1.0
         unit: unit
-    notes: "Wind or install resistive heating elements (nichrome or silicon carbide)"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
       - item_id: temperature_controller_basic
         qty: 1.0
         unit: unit
@@ -65,18 +62,6 @@ steps:
         qty: 1.0
         unit: unit
       - item_id: power_conditioning_module
-        qty: 1.0
-        unit: unit
-    notes: "Install temperature controllers, thermocouples, power relays, safety interlocks"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: furnace_shell_insulated
-        qty: 1.0
-        unit: unit
-      - item_id: refractory_lining_set
-        qty: 1.0
-        unit: unit
-      - item_id: heating_element_set_basic
         qty: 1.0
         unit: unit
       - item_id: quench_rack_and_baskets

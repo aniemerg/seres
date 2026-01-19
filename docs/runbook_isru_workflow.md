@@ -10,10 +10,10 @@ Create automated simulation scripts (runbooks) that build machines using maximum
 
 1. **Start from the target machine recipe**
    - Identify the top-level recipe and its inputs.
-   - Draft a runbook that can build the machine (baseline imports are OK to prove the recipe runs).
+   - Draft a runbook that can build the machine using imports (prove the recipe runs).
 
-2. **Iterate toward ISRU**
-   - Replace imports with local recipes one by one.
+2. **Iterate toward ISRU (in place)**
+   - Modify the same runbook step-by-step to replace imports with local recipes.
    - Prefer in-situ chains already in the KB.
    - Add the tooling/energy imports required to run those local chains.
 
@@ -33,7 +33,7 @@ Create automated simulation scripts (runbooks) that build machines using maximum
 ## Key commands
 
 - Run a runbook:
-  - `.venv/bin/python run_runbook_debug.py sim runbook --file runbooks/<name>.md`
+  - `.venv/bin/python scripts/debug/run_runbook_debug.py sim runbook --file runbooks/<name>.md`
 - View state:
   - `.venv/bin/python -m src.cli sim view-state --sim-id <sim_id>`
 - Provenance breakdown:
@@ -55,10 +55,12 @@ If asked to use the queue:
 
 ## Runbook structure guidance
 
-Keep the runbook staged for clarity:
-- **Baseline imports + initial build** (proves the recipe works).
-- **Local subcomponents** (replace imports with in-situ recipes).
-- **Final assembly** (build the target machine with more ISRU coverage).
+Keep the runbook staged for clarity without resets or parallel baselines:
+- **Initial import build** (prove the recipe works once).
+- **ISRU upgrades** (replace imports with in-situ recipes incrementally in the same runbook).
+- **Final assembly** (build the target machine with improved ISRU coverage).
+
+Do not add multiple baseline sections or `sim.reset` between phases. Use a single run and modify it in place as you replace imports with ISRU steps.
 
 ## Provenance expectations
 
@@ -73,7 +75,7 @@ Use the provenance CLI to:
 Example workflow:
 ```bash
 # Run the runbook
-.venv/bin/python run_runbook_debug.py sim runbook --file runbooks/reduction_furnace_v0_runbook.md
+.venv/bin/python scripts/debug/run_runbook_debug.py sim runbook --file runbooks/reduction_furnace_v0_runbook.md
 
 # Check the SPECIFIC MACHINE's ISRU (this is what matters!)
 .venv/bin/python -m src.cli sim provenance --sim-id reduction_furnace_v0_runbook --item reduction_furnace_v0

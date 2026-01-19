@@ -1,0 +1,48 @@
+id: recipe_enclosure_electrical_medium_regolith_v1
+kind: recipe
+target_item_id: enclosure_electrical_medium
+variant_id: regolith_v1
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 22.0
+    unit: kg
+outputs:
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 22.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 20.9
+        unit: kg
+    est_time_hr: 2.0
+    notes: "Cast enclosure panels and frame sections from regolith metal."
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 20.9
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 19.0
+        unit: kg
+    est_time_hr: 1.5
+    notes: "Machine panel edges, door openings, and mounting holes."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 19.0
+        unit: kg
+    outputs:
+      - item_id: enclosure_electrical_medium
+        qty: 1.0
+        unit: unit
+    est_time_hr: 2.0
+    notes: "Assemble enclosure panels, hinges, and door hardware."
+assumptions: "Simplified cast-and-machine route for enclosure fabrication from regolith metal."
+notes: "ISRU variant for medium electrical enclosure using regolith metal feedstock."

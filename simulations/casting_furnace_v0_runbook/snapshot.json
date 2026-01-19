@@ -52,7 +52,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -60,7 +60,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "press_brake_v0": {
+      "press_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -112,7 +112,7 @@
         "quantity": 480.0,
         "unit": "kg"
       },
-      "metal_alloy_bulk": {
+      "regolith_metal_crude": {
         "quantity": 68.76315789473682,
         "unit": "kg"
       },
@@ -125,7 +125,7 @@
         "unit": "kg"
       },
       "fastener_kit_small": {
-        "quantity": 0.7333333333333334,
+        "quantity": 0.6923076923076923,
         "unit": "unit"
       }
     },
@@ -181,7 +181,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -189,7 +189,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "press_brake_v0": {
+      "press_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -242,15 +242,15 @@
         "unit": "unit"
       },
       "temperature_sensing": {
-        "quantity": 1.0,
+        "quantity": 2.0,
         "unit": "unit"
       },
       "sensor_suite_general": {
-        "quantity": 1.0,
+        "quantity": 2.0,
         "unit": "unit"
       },
       "control_compute_module_imported": {
-        "quantity": 1.0,
+        "quantity": 2.0,
         "unit": "unit"
       },
       "cooling_loop_basic": {
@@ -335,7 +335,7 @@
         "imported_kg": 100.0,
         "unknown_kg": 0.0
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "in_situ_kg": 0.0,
         "imported_kg": 1800.0,
         "unknown_kg": 0.0
@@ -345,7 +345,7 @@
         "imported_kg": 180.0,
         "unknown_kg": 0.0
       },
-      "press_brake_v0": {
+      "press_brake": {
         "in_situ_kg": 0.0,
         "imported_kg": 1200.0,
         "unknown_kg": 0.0
@@ -382,7 +382,7 @@
       },
       "sintering_furnace_v0": {
         "in_situ_kg": 0.0,
-        "imported_kg": 950.0,
+        "imported_kg": 1067.0,
         "unknown_kg": 0.0
       },
       "dies": {
@@ -437,7 +437,7 @@
       },
       "casting_furnace_v0": {
         "in_situ_kg": 717.7130848977305,
-        "imported_kg": 737.2869151022695,
+        "imported_kg": 746.2869151022695,
         "unknown_kg": 0.0
       },
       "regolith_lunar_mare": {
@@ -470,7 +470,7 @@
         "imported_kg": 0.0,
         "unknown_kg": 0.0
       },
-      "metal_alloy_bulk": {
+      "regolith_metal_crude": {
         "in_situ_kg": 68.76315789473688,
         "imported_kg": 0.0,
         "unknown_kg": 0.0
@@ -506,6 +506,26 @@
         "unknown_kg": 0.0
       }
     },
+    "complexity_scores": {
+      "casting_furnace_v0": 7,
+      "regolith_lunar_mare": 1,
+      "regolith_coarse_fraction": 2,
+      "regolith_fine_fraction": 2,
+      "regolith_powder": 3,
+      "thermal_insulation_regolith_based_v0": 4,
+      "oxygen_gas": 4,
+      "regolith_metal_crude": 4,
+      "cast_metal_parts": 5,
+      "welded_assemblies": 6,
+      "sintered_shapes": 3,
+      "casting_furnace_shell": 7,
+      "insulation_pack_high_temp": 5,
+      "fastener_kit_medium": 2,
+      "fastener_kit_small": 5,
+      "power_conditioning_module": 6,
+      "burner_or_heater_casting": 5,
+      "cooling_loop_basic": 6
+    },
     "total_energy_kwh": 15525.078947368422
   },
   "scheduler": {
@@ -514,7 +534,7 @@
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "d5b2ff25-a885-4ada-9224-b6248db54609",
+        "process_run_id": "7c9b8842-b715-4b67-a123-c4fbda815c20",
         "process_id": "assembly_basic_v0",
         "start_time": 0.0,
         "duration_hours": 1.0,
@@ -557,12 +577,12 @@
           "cooling_loop_basic": "unit",
           "fastener_kit_medium": "unit"
         },
-        "recipe_run_id": "18189ba3-c0ba-4d50-9aaa-6c59859c683a",
+        "recipe_run_id": "410b3d11-3c2c-439e-a099-8a6b60d9c93b",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "d8c7b0ae-2705-40a9-a1f5-a05c347eaef4",
+        "process_run_id": "0b916780-dd24-4ec4-8af8-1e7ee1c339b2",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 8.0,
         "duration_hours": 22.0,
@@ -589,7 +609,7 @@
         "energy_kwh": 110.0
       },
       {
-        "process_run_id": "27421d2b-e71e-4a87-a557-54beff0e96fa",
+        "process_run_id": "787b3607-7363-451c-bbe4-8da3d92ee8e7",
         "process_id": "regolith_screening_sieving_v0",
         "start_time": 30.0,
         "duration_hours": 0.05,
@@ -624,7 +644,7 @@
         "energy_kwh": 110.0
       },
       {
-        "process_run_id": "60d01094-4161-461e-a870-6715d056ed0b",
+        "process_run_id": "5fb3cf86-40c6-4dda-9950-dfd005382b92",
         "process_id": "regolith_crushing_grinding_v0",
         "start_time": 140.0,
         "duration_hours": 0.1,
@@ -658,7 +678,7 @@
         "energy_kwh": 396.0
       },
       {
-        "process_run_id": "1913ba29-2c46-4c69-88ad-89cea43e36ce",
+        "process_run_id": "54c9d23c-b11e-4581-97c8-9219d12b1e99",
         "process_id": "regolith_based_thermal_insulation_v0",
         "start_time": 272.0,
         "duration_hours": 120.0,
@@ -689,7 +709,7 @@
         "energy_kwh": 96.0
       },
       {
-        "process_run_id": "f5384802-beb2-4f2f-b15b-1fc4a72f8920",
+        "process_run_id": "a6bbaa9e-b716-4ec8-836a-20fb805d073b",
         "process_id": "oxygen_extraction_molten_regolith_electrolysis_v0",
         "start_time": 392.0,
         "duration_hours": 3600.0,
@@ -701,11 +721,11 @@
         },
         "outputs_pending": {
           "oxygen_gas": 480.0,
-          "metal_alloy_bulk": 720.0
+          "regolith_metal_crude": 720.0
         },
         "outputs_pending_units": {
           "oxygen_gas": "kg",
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
@@ -727,14 +747,14 @@
         "energy_kwh": 12000.0
       },
       {
-        "process_run_id": "9ef20f30-4444-4b43-b269-d83c8c9558a7",
+        "process_run_id": "93b83f5d-47d5-404b-9966-0d9f009ec3d8",
         "process_id": "metal_casting_basic_v0",
         "start_time": 4192.0,
         "duration_hours": 742.1052631578948,
         "end_time": 4934.105263157895,
         "scale": 494.7368421052632,
         "inputs_consumed": {
-          "metal_alloy_bulk": 494.7368421052632
+          "regolith_metal_crude": 494.7368421052632
         },
         "outputs_pending": {
           "cast_metal_parts": 470.0
@@ -754,14 +774,14 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
         "recipe_run_id": null,
         "step_index": null,
         "energy_kwh": 1731.578947368421
       },
       {
-        "process_run_id": "db9bdf94-3775-4785-bf24-02af51c1d8da",
+        "process_run_id": "f810973c-4cfd-4688-91df-3c8d2a84cd96",
         "process_id": "welding_brazing_basic_v0",
         "start_time": 4992.0,
         "duration_hours": 0.4,
@@ -795,7 +815,7 @@
         "energy_kwh": 920.0
       },
       {
-        "process_run_id": "0148bd7f-21e9-41b4-841b-7224a5376995",
+        "process_run_id": "77a48d37-6c6c-4bc8-981e-595d67288da2",
         "process_id": "sintering_and_hot_pressing_v0",
         "start_time": 5192.0,
         "duration_hours": 110.0,
@@ -829,7 +849,7 @@
         "energy_kwh": 110.0
       },
       {
-        "process_run_id": "a92b054e-053f-40fc-962f-d66b8587574d",
+        "process_run_id": "50d0ebe3-29f9-477e-a97e-b8b6926e47ed",
         "process_id": "casting_furnace_shell_assembly_v0",
         "start_time": 5332.0,
         "duration_hours": 2.0,
@@ -863,7 +883,7 @@
         "energy_kwh": 1.5
       },
       {
-        "process_run_id": "9f8773ba-2564-44a1-befe-5b43c8bca2a8",
+        "process_run_id": "b5f6a551-d446-41cb-83cd-c23e3efe5765",
         "process_id": "assembly_basic_v0",
         "start_time": 5336.0,
         "duration_hours": 1.0,
@@ -890,12 +910,12 @@
         "inputs_consumed_units": {
           "thermal_insulation_regolith_based_v0": "kg"
         },
-        "recipe_run_id": "4c77389e-01eb-4bdd-9810-30ed7dcb9e78",
+        "recipe_run_id": "f952763c-1375-46a5-932a-576246414c3d",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "af3dcab0-0390-4427-a99a-6490a0624be7",
+        "process_run_id": "b99fb530-f116-4c58-a251-cc6e25b060c6",
         "process_id": "fastener_kit_medium_production_v0",
         "start_time": 5344.0,
         "duration_hours": 4.0,
@@ -912,9 +932,9 @@
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
-          "forge_or_induction_heater_v0": 1.0,
+          "induction_forge_v0": 1.0,
           "lathe_engine_v0": 1.0,
-          "press_brake_v0": 1.0,
+          "press_brake": 1.0,
           "casting_mold_set": 1.0
         },
         "provenance_consumed_kg": {
@@ -930,14 +950,14 @@
         "energy_kwh": 10.0
       },
       {
-        "process_run_id": "61a8bde4-5c4d-4dc5-9e91-d66bc184e647",
+        "process_run_id": "f22b34c6-f673-48b2-8bba-eb8ffee11f3f",
         "process_id": "fastener_kit_small_fabrication_v0",
         "start_time": 5348.0,
         "duration_hours": 2.0,
         "end_time": 5350.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 1.5
+          "regolith_metal_crude": 1.5
         },
         "outputs_pending": {
           "fastener_kit_small": 1.0
@@ -956,21 +976,21 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
         "recipe_run_id": null,
         "step_index": null,
         "energy_kwh": 2.0
       },
       {
-        "process_run_id": "b57c3af2-c918-4898-b122-ba46fe75448e",
+        "process_run_id": "8abbd7cc-f76d-4b88-907d-a9f7595764e4",
         "process_id": "power_conditioning_module_fabrication_v0",
         "start_time": 5352.0,
         "duration_hours": 6.0,
         "end_time": 5358.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 15.0,
+          "regolith_metal_crude": 15.0,
           "electronic_components_set": 1.0,
           "fastener_kit_small": 0.2
         },
@@ -993,7 +1013,7 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg",
+          "regolith_metal_crude": "kg",
           "electronic_components_set": "unit",
           "fastener_kit_small": "kg"
         },
@@ -1002,14 +1022,14 @@
         "energy_kwh": 8.0
       },
       {
-        "process_run_id": "7d6acafc-7b73-44be-902a-ac7402b31797",
+        "process_run_id": "d57c6f66-0cbb-4741-bb60-97a61cd4bc64",
         "process_id": "burner_or_heater_casting_fabrication_v0",
         "start_time": 5362.0,
         "duration_hours": 8.0,
         "end_time": 5370.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 80.0,
+          "regolith_metal_crude": 80.0,
           "electronic_components_set": 1.0,
           "fastener_kit_medium": 1.0
         },
@@ -1033,7 +1053,7 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg",
+          "regolith_metal_crude": "kg",
           "electronic_components_set": "unit",
           "fastener_kit_medium": "unit"
         },
@@ -1042,14 +1062,14 @@
         "energy_kwh": 20.0
       },
       {
-        "process_run_id": "00b0f05b-16f2-41f8-8cbf-7c0722d1bad3",
+        "process_run_id": "2042484a-6b0c-48fb-9d86-903e5d627915",
         "process_id": "cooling_loop_basic_fabrication_v0",
         "start_time": 5374.0,
         "duration_hours": 8.0,
         "end_time": 5382.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 60.0,
+          "regolith_metal_crude": 60.0,
           "fastener_kit_small": 0.2
         },
         "outputs_pending": {
@@ -1070,7 +1090,7 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg",
+          "regolith_metal_crude": "kg",
           "fastener_kit_small": "kg"
         },
         "recipe_run_id": null,
@@ -1078,7 +1098,7 @@
         "energy_kwh": 10.0
       },
       {
-        "process_run_id": "9b488693-ec04-4b29-b3b8-789131a8eb3c",
+        "process_run_id": "820a8dec-2a88-4aa8-8e9c-0e4018f0733d",
         "process_id": "assembly_basic_v0",
         "start_time": 5386.0,
         "duration_hours": 1.0,
@@ -1089,6 +1109,9 @@
           "burner_or_heater_casting": 1.0,
           "insulation_pack_high_temp": 1.0,
           "power_conditioning_module": 1.0,
+          "temperature_sensing": 1.0,
+          "sensor_suite_general": 1.0,
+          "control_compute_module_imported": 1.0,
           "cooling_loop_basic": 1.0,
           "fastener_kit_medium": 1.0
         },
@@ -1104,7 +1127,7 @@
         },
         "provenance_consumed_kg": {
           "in_situ_kg": 717.7130848977305,
-          "imported_kg": 5.2869151022695435,
+          "imported_kg": 14.286915102269543,
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
@@ -1112,10 +1135,13 @@
           "burner_or_heater_casting": "unit",
           "insulation_pack_high_temp": "unit",
           "power_conditioning_module": "unit",
+          "temperature_sensing": "unit",
+          "sensor_suite_general": "unit",
+          "control_compute_module_imported": "unit",
           "cooling_loop_basic": "unit",
           "fastener_kit_medium": "unit"
         },
-        "recipe_run_id": "a4d17e65-567e-49e7-88d5-d8f3223e32ce",
+        "recipe_run_id": "e8b6e960-3ee7-480b-b1d6-19071d37456e",
         "step_index": 0,
         "energy_kwh": 0.0
       }
@@ -1124,8 +1150,8 @@
   },
   "orchestrator": {
     "recipe_runs": {
-      "18189ba3-c0ba-4d50-9aaa-6c59859c683a": {
-        "recipe_run_id": "18189ba3-c0ba-4d50-9aaa-6c59859c683a",
+      "410b3d11-3c2c-439e-a099-8a6b60d9c93b": {
+        "recipe_run_id": "410b3d11-3c2c-439e-a099-8a6b60d9c93b",
         "recipe_id": "recipe_machine_casting_furnace_v0",
         "target_item_id": "casting_furnace_v0",
         "recipe_def": {
@@ -1287,8 +1313,8 @@
         "is_completed": true,
         "completed_at": 1.0
       },
-      "4c77389e-01eb-4bdd-9810-30ed7dcb9e78": {
-        "recipe_run_id": "4c77389e-01eb-4bdd-9810-30ed7dcb9e78",
+      "f952763c-1375-46a5-932a-576246414c3d": {
+        "recipe_run_id": "f952763c-1375-46a5-932a-576246414c3d",
         "recipe_id": "recipe_insulation_pack_high_temp_regolith_v0",
         "target_item_id": "insulation_pack_high_temp",
         "recipe_def": {
@@ -1355,8 +1381,8 @@
         "is_completed": true,
         "completed_at": 5337.0
       },
-      "a4d17e65-567e-49e7-88d5-d8f3223e32ce": {
-        "recipe_run_id": "a4d17e65-567e-49e7-88d5-d8f3223e32ce",
+      "e8b6e960-3ee7-480b-b1d6-19071d37456e": {
+        "recipe_run_id": "e8b6e960-3ee7-480b-b1d6-19071d37456e",
         "recipe_id": "recipe_machine_casting_furnace_v0",
         "target_item_id": "casting_furnace_v0",
         "recipe_def": {
@@ -1534,9 +1560,9 @@
       "furnace_basic": 1.0,
       "crucible_refractory": 1.0,
       "casting_mold_set": 1.0,
-      "forge_or_induction_heater_v0": 1.0,
+      "induction_forge_v0": 1.0,
       "lathe_engine_v0": 1.0,
-      "press_brake_v0": 1.0,
+      "press_brake": 1.0,
       "welding_power_supply_v0": 1.0,
       "welding_consumables": 1.0,
       "fixturing_workbench": 1.0,
@@ -1545,7 +1571,9 @@
       "hot_press_v0": 1.0,
       "sintering_furnace_v0": 1.0,
       "dies": 1.0,
-      "casting_furnace_v0": 1.0
+      "casting_furnace_v0": 1.0,
+      "temperature_sensing": 1.0,
+      "control_compute_module_imported": 1.0
     },
     "reservations": [],
     "current_time": 0.0

@@ -44,6 +44,7 @@ class SimulationState(BaseModel):
     machines_in_use: Dict[str, int] = Field(default_factory=dict)
     total_imports: Dict[str, InventoryItem] = Field(default_factory=dict)
     provenance: Dict[str, ProvenanceTotals] = Field(default_factory=dict)
+    complexity_scores: Dict[str, int] = Field(default_factory=dict)
     total_energy_kwh: float = 0.0  # Cumulative energy consumed
 
 

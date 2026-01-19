@@ -1,10 +1,10 @@
 id: recipe_heat_treatment_furnace_v0
 kind: recipe
-produces_id: heat_treatment_furnace
+produces_id: heat_treatment_furnace_v0
 produces_qty: 1.0
 produces_unit: unit
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 300.0
     unit: kg
   - item_id: refractory_castable
@@ -29,13 +29,13 @@ inputs:
     qty: 1.0
     unit: unit
 outputs:
-  - item_id: heat_treatment_furnace
+  - item_id: heat_treatment_furnace_v0
     qty: 1.0
     unit: unit
 steps:
 - process_id: metal_casting_basic_v0
   inputs:
-    - item_id: metal_alloy_bulk
+    - item_id: regolith_metal_crude
       qty: 300.0
       unit: kg
   outputs:
@@ -94,9 +94,9 @@ steps:
       qty: 1.0
       unit: unit
   outputs:
-    - item_id: heat_treatment_furnace
+    - item_id: heat_treatment_furnace_v0
       qty: 1.0
       unit: unit
   notes: Assemble door, hinges, seals, ventilation system
-notes: Versioned recipe mapping to heat_treatment_furnace; aligns with unversioned machine id
-target_item_id: heat_treatment_furnace
+notes: Recipe for producing heat_treatment_furnace_v0 from regolith-derived materials and components
+target_item_id: heat_treatment_furnace_v0

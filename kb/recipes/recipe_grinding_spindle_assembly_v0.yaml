@@ -2,20 +2,20 @@ id: recipe_grinding_spindle_assembly_v0
 target_item_id: grinding_spindle_assembly
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 130.0
     unit: kg
 outputs:
   - item_id: grinding_spindle_assembly
-    qty: 120.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: mold_preparation_basic_v0
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 130.0
         unit: kg
     outputs:
@@ -31,8 +31,8 @@ steps:
         unit: kg
     outputs:
       - item_id: grinding_spindle_assembly
-        qty: 120.0
-        unit: kg
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     machine_hours: 1.0
 assumptions: Cast spindle housing then grind/finish; bearings assumed imported.

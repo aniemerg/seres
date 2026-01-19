@@ -2,16 +2,13 @@ id: recipe_heating_element_set_high_temp_v0
 target_item_id: heating_element_set_high_temp
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
-    qty: 80.0
-    unit: kg
-  - item_id: machined_part_raw
+  - item_id: regolith_metal_crude
     qty: 80.0
     unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 80.0
         unit: kg
     outputs:
@@ -23,12 +20,12 @@ steps:
     notes: Cast heating element blanks from high-temp alloy
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: machined_part_raw
-        qty: 80.0
+      - item_id: cast_metal_parts
+        qty: 76.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 80.0
+        qty: 74.5
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -36,7 +33,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 80.0
+        qty: 74.5
         unit: kg
     outputs:
       - item_id: heating_element_set_high_temp

@@ -4,10 +4,10 @@ name: Recipe for reactor heating/cooling system v0
 target_item_id: reactor_heating_cooling_system_v0
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 1.0
     unit: kg
-  - item_id: heating_plate_or_induction_heater
+  - item_id: heating_plate_induction_heater
     qty: 1.0
     unit: unit
   - item_id: cryocooler_active_v0
@@ -32,7 +32,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:
@@ -65,7 +65,7 @@ steps:
       - item_id: machined_part_raw
         qty: 0.9
         unit: kg
-      - item_id: heating_plate_or_induction_heater
+      - item_id: heating_plate_induction_heater
         qty: 1.0
         unit: unit
       - item_id: cryocooler_active_v0

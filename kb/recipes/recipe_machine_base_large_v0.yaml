@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: machine_base_large
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 650.0
     unit: kg
 outputs:
@@ -13,11 +13,11 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     est_time_hr: 8.0
@@ -25,11 +25,11 @@ steps:
     notes: "Cast large machine base from cast iron or steel (600-700 kg raw)"
   - process_id: stress_relief_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     est_time_hr: 6.0
@@ -37,11 +37,11 @@ steps:
     notes: "Stress relieve casting to prevent warping"
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     est_time_hr: 12.0
@@ -49,7 +49,7 @@ steps:
     notes: "Machine mounting surfaces, T-slots, bolt holes, leveling pads"
   - process_id: precision_grinding_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 650.0
         unit: kg
     outputs:

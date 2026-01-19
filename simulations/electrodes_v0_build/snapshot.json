@@ -2,24 +2,8 @@
   "sim_id": "electrodes_v0_build",
   "state": {
     "sim_id": "electrodes_v0_build",
-    "current_time_hours": 340.0,
+    "current_time_hours": 320.0,
     "inventory": {
-      "assembly_tools_basic": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "labor_bot_general_v0": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "electrical_energy": {
-        "quantity": 1000.0,
-        "unit": "kWh"
-      },
-      "electrodes": {
-        "quantity": 30.0,
-        "unit": "kg"
-      },
       "furnace_high_temp": {
         "quantity": 1.0,
         "unit": "unit"
@@ -36,9 +20,21 @@
         "quantity": 1.0,
         "unit": "unit"
       },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
       "regolith_carbonaceous": {
         "quantity": 40.0,
         "unit": "kg"
+      },
+      "electrical_energy": {
+        "quantity": 1000.0,
+        "unit": "kWh"
       },
       "carbon_reductant": {
         "quantity": 0.8000000000000007,
@@ -52,8 +48,8 @@
         "quantity": 0.40000000000000036,
         "unit": "kg"
       },
-      "volatiles_off_gas": {
-        "quantity": 1.6,
+      "electrodes": {
+        "quantity": 15.0,
         "unit": "kg"
       }
     },
@@ -61,26 +57,6 @@
     "machines_built": [],
     "machines_in_use": {},
     "total_imports": {
-      "graphite_powder": {
-        "quantity": 14.0,
-        "unit": "kg"
-      },
-      "binder_material": {
-        "quantity": 4.0,
-        "unit": "kg"
-      },
-      "assembly_tools_basic": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "labor_bot_general_v0": {
-        "quantity": 1.0,
-        "unit": "unit"
-      },
-      "electrical_energy": {
-        "quantity": 1000.0,
-        "unit": "kWh"
-      },
       "furnace_high_temp": {
         "quantity": 1.0,
         "unit": "unit"
@@ -97,37 +73,28 @@
         "quantity": 1.0,
         "unit": "unit"
       },
+      "assembly_tools_basic": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
+      "labor_bot_general_v0": {
+        "quantity": 1.0,
+        "unit": "unit"
+      },
       "regolith_carbonaceous": {
         "quantity": 600.0,
+        "unit": "kg"
+      },
+      "electrical_energy": {
+        "quantity": 1000.0,
+        "unit": "kWh"
+      },
+      "binder_material": {
+        "quantity": 2.0,
         "unit": "kg"
       }
     },
     "provenance": {
-      "graphite_powder": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 0.40000000000000036,
-        "unknown_kg": 0.0
-      },
-      "binder_material": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 0.0,
-        "unknown_kg": 0.0
-      },
-      "assembly_tools_basic": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 50.0,
-        "unknown_kg": 0.0
-      },
-      "labor_bot_general_v0": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 120.0,
-        "unknown_kg": 0.0
-      },
-      "electrodes": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 32.0,
-        "unknown_kg": 0.0
-      },
       "furnace_high_temp": {
         "in_situ_kg": 0.0,
         "imported_kg": 800.0,
@@ -148,9 +115,24 @@
         "imported_kg": 250.0,
         "unknown_kg": 0.0
       },
+      "assembly_tools_basic": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 50.0,
+        "unknown_kg": 0.0
+      },
+      "labor_bot_general_v0": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 120.0,
+        "unknown_kg": 0.0
+      },
       "regolith_carbonaceous": {
         "in_situ_kg": 0.0,
         "imported_kg": 40.0,
+        "unknown_kg": 0.0
+      },
+      "binder_material": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 0.0,
         "unknown_kg": 0.0
       },
       "carbon_reductant": {
@@ -163,59 +145,36 @@
         "imported_kg": 543.2,
         "unknown_kg": 0.0
       },
-      "volatiles_off_gas": {
+      "graphite_powder": {
         "in_situ_kg": 0.0,
-        "imported_kg": 1.6,
+        "imported_kg": 2.0,
+        "unknown_kg": 0.0
+      },
+      "electrodes": {
+        "in_situ_kg": 0.0,
+        "imported_kg": 16.0,
         "unknown_kg": 0.0
       }
+    },
+    "complexity_scores": {
+      "carbon_reductant": 2,
+      "tailings": 2,
+      "graphite_powder": 3,
+      "electrodes": 4
     },
     "total_energy_kwh": 162.0
   },
   "scheduler": {
-    "current_time": 340.0,
+    "current_time": 320.0,
     "event_queue": [],
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "42d684b1-a77f-43ce-b838-4f376df7fc77",
-        "process_id": "assembly_basic_v0",
-        "start_time": 0.0,
-        "duration_hours": 1.0,
-        "end_time": 1.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "graphite_powder": 14.0,
-          "binder_material": 2.0
-        },
-        "outputs_pending": {
-          "electrodes": 15.0
-        },
-        "outputs_pending_units": {
-          "electrodes": "kg"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "assembly_tools_basic": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 16.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "graphite_powder": "kg",
-          "binder_material": "kg"
-        },
-        "recipe_run_id": "3dbe5408-7370-4867-b55c-75af9a9f61bf",
-        "step_index": 0,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "bdae2caf-0d04-4feb-b1dd-3df7350d9d00",
+        "process_run_id": "743e47f5-38b5-46eb-b875-315bcc83d348",
         "process_id": "carbon_extraction_from_carbonaceous_v0",
-        "start_time": 20.0,
+        "start_time": 0.0,
         "duration_hours": 84.0,
-        "end_time": 104.0,
+        "end_time": 84.0,
         "scale": 1.0,
         "inputs_consumed": {
           "regolith_carbonaceous": 560.0
@@ -239,27 +198,25 @@
         "inputs_consumed_units": {
           "regolith_carbonaceous": "kg"
         },
-        "recipe_run_id": "516bf073-39de-4604-a80e-545447120cb4",
+        "recipe_run_id": "bec40b20-8f54-47f1-9bb5-4e836098db1c",
         "step_index": 0,
         "energy_kwh": 112.00000000000001
       },
       {
-        "process_run_id": "ec2adbe9-fa51-4660-965b-320ef77bc5aa",
+        "process_run_id": "3ffa19ac-a536-48ea-bce0-47b1bebe6155",
         "process_id": "heat_treatment_graphitization_v0",
-        "start_time": 120.0,
+        "start_time": 100.0,
         "duration_hours": 64.0,
-        "end_time": 184.0,
+        "end_time": 164.0,
         "scale": 1.0,
         "inputs_consumed": {
           "carbon_reductant": 16.0
         },
         "outputs_pending": {
-          "graphite_powder": 14.4,
-          "volatiles_off_gas": 1.6
+          "graphite_powder": 14.4
         },
         "outputs_pending_units": {
-          "graphite_powder": "kg",
-          "volatiles_off_gas": "kg"
+          "graphite_powder": "kg"
         },
         "machines_reserved": {
           "furnace_high_temp": 1.0
@@ -272,16 +229,16 @@
         "inputs_consumed_units": {
           "carbon_reductant": "kg"
         },
-        "recipe_run_id": "c418d33e-dcca-4b3d-a1d9-466ccf95878a",
+        "recipe_run_id": "0a74f3d3-6d96-4fd0-9fef-869224d24fc5",
         "step_index": 0,
         "energy_kwh": 50.0
       },
       {
-        "process_run_id": "438ffa6f-6397-413a-b5d3-65e448b471b9",
+        "process_run_id": "c5750fc7-dc01-4bb4-aa40-205071c304df",
         "process_id": "assembly_basic_v0",
-        "start_time": 320.0,
+        "start_time": 300.0,
         "duration_hours": 1.0,
-        "end_time": 321.0,
+        "end_time": 301.0,
         "scale": 1.0,
         "inputs_consumed": {
           "graphite_powder": 14.0,
@@ -306,95 +263,17 @@
           "graphite_powder": "kg",
           "binder_material": "kg"
         },
-        "recipe_run_id": "7b1a3b18-7602-46fd-bf3d-b227fa053009",
+        "recipe_run_id": "14c157b0-9d12-4b21-ae7e-4b6d7cc8e012",
         "step_index": 0,
         "energy_kwh": 0.0
       }
     ],
-    "total_events_processed": 8
+    "total_events_processed": 6
   },
   "orchestrator": {
     "recipe_runs": {
-      "3dbe5408-7370-4867-b55c-75af9a9f61bf": {
-        "recipe_run_id": "3dbe5408-7370-4867-b55c-75af9a9f61bf",
-        "recipe_id": "recipe_electrodes_v0",
-        "target_item_id": "electrodes",
-        "recipe_def": {
-          "id": "recipe_electrodes_v0",
-          "target_item_id": "electrodes",
-          "variant_id": "v0",
-          "steps": [
-            {
-              "process_id": "assembly_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "graphite_powder",
-                  "qty": 14.0,
-                  "unit": "kg",
-                  "notes": null
-                },
-                {
-                  "item_id": "binder_material",
-                  "qty": 2.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "electrodes",
-                  "qty": 15.0,
-                  "unit": "kg",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 17.5,
-              "labor_hours": 3.5,
-              "machine_hours": 17.0,
-              "notes": "Process carbon/graphite powder with binder, hot press and sinter to form dense electrode blanks, machine to final dimensions with connection points, inspect dimensions and integrity"
-            }
-          ],
-          "inputs": [
-            {
-              "item_id": "graphite_powder",
-              "qty": 14.0,
-              "unit": "kg",
-              "notes": null
-            },
-            {
-              "item_id": "binder_material",
-              "qty": 2.0,
-              "unit": "kg",
-              "notes": null
-            }
-          ],
-          "outputs": [
-            {
-              "item_id": "electrodes",
-              "qty": 15.0,
-              "unit": "kg",
-              "notes": null
-            }
-          ],
-          "alternatives": [],
-          "dedupe_candidate": null,
-          "assumptions": "Graphite/carbon construction formed from powder processing and sintering. High-temperature resistant for molten regolith electrolysis operations",
-          "notes": "Fabrication of carbon/graphite electrodes for molten regolith electrolysis with high temperature operation capability"
-        },
-        "started_at": 0.0,
-        "completed_steps": [
-          0
-        ],
-        "active_steps": {},
-        "scheduled_steps": {},
-        "is_completed": true,
-        "completed_at": 1.0
-      },
-      "516bf073-39de-4604-a80e-545447120cb4": {
-        "recipe_run_id": "516bf073-39de-4604-a80e-545447120cb4",
+      "bec40b20-8f54-47f1-9bb5-4e836098db1c": {
+        "recipe_run_id": "bec40b20-8f54-47f1-9bb5-4e836098db1c",
         "recipe_id": "recipe_carbon_reductant_v0",
         "target_item_id": "carbon_reductant",
         "recipe_def": {
@@ -463,17 +342,17 @@
           "assumptions": "Carbonaceous regolith feedstock available for small-scale carbon recovery.",
           "notes": "ISRU extraction route for carbon reductant; drying and sizing steps deferred."
         },
-        "started_at": 20.0,
+        "started_at": 0.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 104.0
+        "completed_at": 84.0
       },
-      "c418d33e-dcca-4b3d-a1d9-466ccf95878a": {
-        "recipe_run_id": "c418d33e-dcca-4b3d-a1d9-466ccf95878a",
+      "0a74f3d3-6d96-4fd0-9fef-869224d24fc5": {
+        "recipe_run_id": "0a74f3d3-6d96-4fd0-9fef-869224d24fc5",
         "recipe_id": "recipe_graphite_powder_from_carbon_v0",
         "target_item_id": "graphite_powder",
         "recipe_def": {
@@ -497,12 +376,6 @@
                 {
                   "item_id": "graphite_powder",
                   "qty": 0.9,
-                  "unit": "kg",
-                  "notes": null
-                },
-                {
-                  "item_id": "volatiles_off_gas",
-                  "qty": 0.1,
                   "unit": "kg",
                   "notes": null
                 }
@@ -529,12 +402,6 @@
               "qty": 0.9,
               "unit": "kg",
               "notes": null
-            },
-            {
-              "item_id": "volatiles_off_gas",
-              "qty": 0.1,
-              "unit": "kg",
-              "notes": null
             }
           ],
           "alternatives": [],
@@ -544,17 +411,17 @@
           "kind": "recipe",
           "name": "Graphite powder from carbon reductant v0"
         },
-        "started_at": 120.0,
+        "started_at": 100.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 184.0
+        "completed_at": 164.0
       },
-      "7b1a3b18-7602-46fd-bf3d-b227fa053009": {
-        "recipe_run_id": "7b1a3b18-7602-46fd-bf3d-b227fa053009",
+      "14c157b0-9d12-4b21-ae7e-4b6d7cc8e012": {
+        "recipe_run_id": "14c157b0-9d12-4b21-ae7e-4b6d7cc8e012",
         "recipe_id": "recipe_electrodes_v0",
         "target_item_id": "electrodes",
         "recipe_def": {
@@ -622,25 +489,25 @@
           "assumptions": "Graphite/carbon construction formed from powder processing and sintering. High-temperature resistant for molten regolith electrolysis operations",
           "notes": "Fabrication of carbon/graphite electrodes for molten regolith electrolysis with high temperature operation capability"
         },
-        "started_at": 320.0,
+        "started_at": 300.0,
         "completed_steps": [
           0
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 321.0
+        "completed_at": 301.0
       }
     }
   },
   "reservation_manager": {
     "machine_capacities": {
-      "assembly_tools_basic": 1.0,
-      "labor_bot_general_v0": 1.0,
       "furnace_high_temp": 1.0,
       "rock_crusher_basic": 1.0,
       "ball_mill_v0": 1.0,
-      "generic_chemical_reactor_v0": 1.0
+      "generic_chemical_reactor_v0": 1.0,
+      "assembly_tools_basic": 1.0,
+      "labor_bot_general_v0": 1.0
     },
     "reservations": [],
     "current_time": 0.0

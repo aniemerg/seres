@@ -18,12 +18,15 @@ with in-situ production where possible.
     message: "Simulation reset. Starting high_temperature_power_supply_v0 runbook."
 ```
 
-## Baseline: import equipment
+## ISRU Phase 1: Import equipment
 
-Commentary: import core fabrication and MRE equipment needed for casting, machining,
-and metal alloy production.
+Commentary: Import core fabrication and MRE equipment needed for casting, machining, and metal alloy production.
 
 ```sim-runbook
+- cmd: sim.note
+  args:
+    style: milestone
+    message: "Import equipment for ISRU production."
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -170,79 +173,15 @@ and metal alloy production.
     ensure: true
 ```
 
-## Baseline: import subcomponents and assemble
+## ISRU Phase 2: Produce regolith metal
 
-Commentary: import subcomponents to validate the base recipe.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline build: import subcomponents."
-- cmd: sim.import
-  args:
-    item: high_temp_power_supply_unit
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_bus_high_current
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cooling_loop_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_high_temperature_power_supply_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 6
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline high_temperature_power_supply_v0 build complete."
-```
-
-## ISRU: produce metal_alloy_bulk via MRE
-
-Commentary: produce metal_alloy_bulk from regolith using molten regolith electrolysis.
+Commentary: Produce regolith_metal_crude from regolith using molten regolith electrolysis.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: produce metal_alloy_bulk via MRE."
+    message: "Produce regolith_metal_crude via MRE."
 - cmd: sim.import
   args:
     item: electrical_energy
@@ -251,23 +190,22 @@ Commentary: produce metal_alloy_bulk from regolith using molten regolith electro
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 12
 - cmd: sim.advance-time
   args:
     hours: 200
 ```
 
-## ISRU: fabricate subcomponents and assemble
+## ISRU Phase 3: Fabricate subcomponents and assemble
 
-Commentary: replace metal-heavy subcomponents with in-situ metal alloy; keep compute,
-sensors, and small electronics imported for now.
+Commentary: Replace metal-heavy subcomponents with in-situ metal alloy; keep compute, sensors, and small electronics imported for now.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: fabricate subcomponents from local metal alloy."
+    message: "Fabricate subcomponents from local metal alloy."
 - cmd: sim.import
   args:
     item: power_supply_components_basic
@@ -297,7 +235,7 @@ sensors, and small electronics imported for now.
   args:
     item: fastener_kit_small
     quantity: 1
-    unit: kg
+    unit: unit
     ensure: true
 - cmd: sim.run-recipe
   args:
@@ -305,7 +243,7 @@ sensors, and small electronics imported for now.
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 40
+    hours: 80
 - cmd: sim.note
   args:
     style: milestone
@@ -337,6 +275,12 @@ sensors, and small electronics imported for now.
 - cmd: sim.advance-time
   args:
     hours: 20
+- cmd: sim.import
+  args:
+    item: fastener_kit_small
+    quantity: 1
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_power_bus_high_current_v0

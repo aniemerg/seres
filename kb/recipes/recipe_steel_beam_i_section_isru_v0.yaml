@@ -1,0 +1,51 @@
+id: recipe_steel_beam_i_section_isru_v0
+target_item_id: steel_beam_i_section
+variant_id: isru_v0
+inputs:
+  - item_id: regolith_metal_crude
+    qty: 70.0
+    unit: kg
+    notes: "Regolith-derived metal for ISRU"
+outputs:
+  - item_id: steel_beam_i_section
+    qty: 60.0
+    unit: kg
+steps:
+  - process_id: metal_casting_basic_v0
+    inputs:
+      - item_id: regolith_metal_crude
+        qty: 70.0
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 66.5
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Cast metal billets for beam stock"
+  - process_id: rolling_basic_shop_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 66.5
+        unit: kg
+    outputs:
+      - item_id: steel_plate_or_sheet
+        qty: 65.0
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: "Roll to I-beam profile"
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 65.0
+        unit: kg
+    outputs:
+      - item_id: steel_beam_i_section
+        qty: 60.0
+        unit: kg
+    est_time_hr: 1.0
+    machine_hours: 1.0
+    notes: "Machine/cut to length"
+assumptions: "ISRU route using regolith metal; 5% casting loss, 2% rolling loss, 8% machining loss"
+notes: "ISRU variant using regolith_metal_crude from regolith. Enables local production of structural I-beams."

@@ -3,34 +3,26 @@ kind: recipe
 target_item_id: gas_supply_regulator
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 3.5
     unit: kg
-  - item_id: cast_metal_parts
-    qty: 3.3
-    unit: kg
-    notes: "Intermediate for machining step"
-  - item_id: machined_part_raw
-    qty: 3.0
-    unit: kg
-    notes: "Intermediate for final assembly"
   - item_id: sealing_gaskets
     qty: 0.2
     unit: kg
   - item_id: fastener_kit_small
-    qty: 0.2
-    unit: kg
+    qty: 1.0
+    unit: unit
 outputs:
   - item_id: gas_supply_regulator
-    qty: 3.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: mold_preparation_basic_v0
     est_time_hr: 0.5
     notes: "Prepare molds for regulator casting"
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 3.5
         unit: kg
     outputs:
@@ -59,12 +51,12 @@ steps:
         qty: 0.2
         unit: kg
       - item_id: fastener_kit_small
-        qty: 0.2
-        unit: kg
+        qty: 1.0
+        unit: unit
     outputs:
       - item_id: gas_supply_regulator
-        qty: 3.0
-        unit: kg
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     notes: "Install seals, hardware, and adjusters"
 notes: "Local manufacturing of gas_supply_regulator from cast body, machining, and assembly."

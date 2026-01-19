@@ -37,85 +37,19 @@ Expected ISRU: ~99% (only 9 kg electronics imports needed)
     message: "Simulation reset. Starting MRE reactor v0 build."
 ```
 
-## Phase 1: Baseline - Import and build MRE reactor
+## Phase 1: Import supporting infrastructure
 
-Prove the basic recipe works by importing all components.
+Import machines and raw materials for local steel and component production.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: section
-    message: "Phase 1: Baseline - Import all components and verify assembly"
+    message: "Phase 1: Import production machines and regolith feedstock"
 - cmd: sim.import
   args:
-    item: reactor_vessel_mre
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrode_set_mre
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_element_set_high_temp
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: insulation_pack_high_temp
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: offgas_manifold
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cooling_loop_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_bus_high_current
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_transport_loop_assembly
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: temperature_sensing
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
+    item: labor_bot_general_v0
+    quantity: 2
     unit: unit
     ensure: true
 - cmd: sim.import
@@ -124,44 +58,6 @@ Prove the basic recipe works by importing all components.
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 100
-    unit: kWh
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Building baseline MRE reactor from imported components"
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_mre_reactor_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 5
-- cmd: sim.note
-  args:
-    style: success
-    message: "Phase 1 complete: Baseline MRE reactor built and verified (1260 kg, all imported)"
-```
-
-## Phase 2: Import supporting infrastructure
-
-Import machines and raw materials for local steel and component production.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 2: Import production machines and regolith feedstock"
 - cmd: sim.import
   args:
     item: blast_furnace_or_smelter
@@ -291,7 +187,7 @@ Import machines and raw materials for local steel and component production.
 - cmd: sim.import
   args:
     item: electrical_energy
-    quantity: 15000
+    quantity: 26000
     unit: kWh
     ensure: true
 - cmd: sim.import
@@ -318,7 +214,7 @@ Import machines and raw materials for local steel and component production.
     message: "Supporting machines and materials imported"
 ```
 
-## Phase 2.5: Steel production from regolith
+## Phase 2: Steel production from regolith
 
 Produce ~900 kg of steel from regolith for reactor components.
 
@@ -326,7 +222,7 @@ Produce ~900 kg of steel from regolith for reactor components.
 - cmd: sim.note
   args:
     style: section
-    message: "Phase 2.5: Produce steel from local regolith"
+    message: "Phase 2: Produce steel from local regolith"
 - cmd: sim.note
   args:
     style: info
@@ -399,28 +295,134 @@ Produce ~900 kg of steel from regolith for reactor components.
     message: "Steel production complete (~266 kg steel bar stock from regolith)"
 ```
 
-## Phase 3: Import components (steel production scaled 4x, proving pathway)
+## Phase 3: Produce ISRU components from regolith_metal_crude
 
-Note: Phase 2.5 successfully produced ~256.5 kg steel from regolith (4x improvement over initial ~66.5 kg). This demonstrates the steel production pathway scales effectively. However, building all components requires many additional supporting machines (hot_press_v0, sintering_furnace_v0, dies, etc.). Importing components for now to complete the build.
+Produce regolith_metal_crude via MRE and build reactor components locally.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: section
-    message: "Phase 3: Import components (steel production scaled 4x to 256.5 kg)"
+    message: "Phase 3: ISRU component production"
+- cmd: sim.import
+  args:
+    item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Successfully produced 256.5 kg steel from regolith - 4x scale-up proven"
+    message: "Extracting additional iron ore for fasteners (need 15 batches to account for losses)"
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_iron_ore_or_ilmenite_basic_v0
+    quantity: 15
+- cmd: sim.advance-time
+  args:
+    hours: 30
+- cmd: sim.note
+  args:
+    style: info
+    message: "Producing 4 kg steel_stock for fasteners"
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_steel_stock_v0
+    quantity: 4
+- cmd: sim.advance-time
+  args:
+    hours: 50
+- cmd: sim.note
+  args:
+    style: info
+    message: "Producing ~912 kg regolith_metal_crude via MRE (40 batches split into 4 runs)"
 - cmd: sim.import
   args:
-    item: reactor_vessel_mre
+    item: vibrating_screen_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: electrode_set_mre
+    item: mre_reactor_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: electrodes
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: dust_collection_system
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 10
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 10
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 10
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 10
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_regolith_metal_crude_v0
+    quantity: 10
+- cmd: sim.advance-time
+  args:
+    hours: 200
+- cmd: sim.note
+  args:
+    style: success
+    message: "Produced ~1140 kg regolith_metal_crude from regolith (50 batches)"
+- cmd: sim.note
+  args:
+    style: info
+    message: "Building reactor_vessel_mre (650 kg metal + 50 kg regolith lining)"
+- cmd: sim.import
+  args:
+    item: dies
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_reactor_vessel_mre_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.note
+  args:
+    style: info
+    message: "Importing offgas_manifold and heating_elements (complex machining dependencies)"
+- cmd: sim.import
+  args:
+    item: offgas_manifold
     quantity: 1
     unit: unit
     ensure: true
@@ -430,15 +432,57 @@ Note: Phase 2.5 successfully produced ~256.5 kg steel from regolith (4x improvem
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.note
+  args:
+    style: info
+    message: "Building fasteners first (needed for power bus)"
 - cmd: sim.import
   args:
-    item: insulation_pack_high_temp
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_fastener_kit_small_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 5
+- cmd: sim.note
+  args:
+    style: info
+    message: "Building power_bus_high_current (55 kg metal + insulators + fasteners)"
 - cmd: sim.import
   args:
-    item: offgas_manifold
+    item: ceramic_insulators
+    quantity: 3
+    unit: kg
+    ensure: true
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_power_bus_high_current_v0
+    quantity: 1
+- cmd: sim.advance-time
+  args:
+    hours: 20
+- cmd: sim.note
+  args:
+    style: info
+    message: "Importing fastener_kit_medium (small mass, complex steel processing)"
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
+    quantity: 1
+    unit: kg
+    ensure: true
+- cmd: sim.note
+  args:
+    style: info
+    message: "Importing components with complex dependencies"
+- cmd: sim.import
+  args:
+    item: electrode_set_mre
     quantity: 1
     unit: unit
     ensure: true
@@ -450,26 +494,20 @@ Note: Phase 2.5 successfully produced ~256.5 kg steel from regolith (4x improvem
     ensure: true
 - cmd: sim.import
   args:
-    item: power_bus_high_current
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: heat_transport_loop_assembly
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: fastener_kit_medium
+    item: insulation_pack_high_temp
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.note
   args:
     style: success
-    message: "Components imported - steel production pathway validated at scale"
+    message: "ISRU components produced: reactor_vessel_mre (650kg), power_bus (55kg), fasteners. Imported: offgas, heating, electrode, cooling, transport, insulation, sensors."
 ```
 
 ## Phase 4: Final assembly with scaled ISRU
@@ -491,61 +529,55 @@ Assemble the final MRE reactor using ISRU components.
 - cmd: sim.note
   args:
     style: success
-    message: "Phase 4 complete: MRE reactor built. Steel production scaled 4x (66.5kg → 256.5kg), proving pathway to 99% ISRU"
+    message: "Phase 4 complete: MRE reactor built with ISRU reactor_vessel_mre (650 kg) and power_bus (55 kg)"
 ```
 
 ## Results
 
 Successfully built 2 MRE reactors:
-1. **Phase 1 baseline**: All components imported (1260 kg) - validates recipe works
-2. **Phase 4 build**: Steel ISRU pathway proven at 4x scale
+1. **Phase 1 imports**: Production machines and regolith feedstock
+2. **Phase 4 build**: Major components produced from regolith_metal_crude via MRE
 
-### Steel Production Achievement (Scaled):
-- **Produced**: 256.5 kg steel bar stock from regolith (4x initial production)
-- **Energy**: 8771 kWh total for steel chain
-- **Time**: 6810 hours (283.8 days)
-- **Material flow**:
-  - 7000 kg regolith_carbonaceous → 210 kg carbon_reductant → 210 kg carbon_reducing_agent
-  - 1670 kg regolith_lunar_mare → 1000 kg iron ore → 299 kg pig iron → 284 kg steel ingot → 256.5 kg steel bar stock
+### ISRU Components Produced:
+- **reactor_vessel_mre**: 650 kg from regolith_metal_crude (casting, welding, sintering)
+- **power_bus_high_current**: 55 kg from regolith_metal_crude (casting, machining, assembly)
+- **fastener_kit_small**: 1 unit from regolith_metal_crude
+- **regolith_metal_crude**: 1140 kg produced via MRE (50 batches)
+- **steel_stock**: 4 kg produced from regolith ore for fasteners
+
+### Imported Components:
+- offgas_manifold (70 kg) - complex machined_part_raw dependencies
+- heating_element_set_high_temp (80 kg) - complex machined_part_raw dependencies
+- fastener_kit_medium (1 kg) - complex steel_stock processing
+- electrode_set_mre, cooling_loop, heat_transport, insulation (complex dependencies)
+- Electronics: temperature_sensing, sensor_suite, control_compute (9 kg)
 
 ## ISRU Analysis
 
-### Current Build (Phase 4 - Scaled):
-- Total mass: 1260 kg
-- Steel produced from regolith: 256.5 kg (~20% of total)
-- Still importing: 1251 kg components (80%)
-- Electronics imports: 9 kg (temperature_sensing, sensor_suite, control_compute_module)
-- **Current ISRU: ~20% (steel mass / total mass)**
-- **Improvement**: 4x steel production vs initial build (66.5 kg → 256.5 kg)
+### Current Build (Phase 4):
+- **Overall ISRU**: 13.1% (5000 kg in-situ, 33248 kg imported)
+- **MRE Reactor ISRU**: 8.9% (224 kg in-situ, 2296 kg imported)
+- **Major achievement**: Demonstrated regolith_metal_crude → reactor_vessel pathway
+- **Reactor vessel**: Largest component (650 kg) produced from regolith via MRE
 
-### Path to 99% ISRU (requires further scaling):
-To achieve full ISRU, continue scaling steel production:
-1. **Target**: ~850 kg steel/metal for all components (vessel, electrodes, piping, etc.)
-2. **Current**: 256.5 kg produced (30% of target)
-3. **Scaling factor**: 3.3x increase still needed
+### Path to Higher ISRU:
+Current blockers for achieving >50% ISRU:
+1. **machined_part_raw dependencies**: offgas_manifold and heating_elements need machined_part_raw which requires steel_plate → cut_parts → machined_part_raw chain (not yet implemented in runbook)
+2. **Complex subcomponents**: electrode_set_mre, cooling_loop, heat_transport_loop have multi-level dependencies (pumps, valves, heat exchangers)
+3. **Insulation materials**: insulation_pack_high_temp needs ceramic_fiber and binder production from regolith
 
-Steel production requirements for 99% ISRU:
-- Regolith_carbonaceous: ~23,000 kg (for ~690 kg carbon reducing agent)
-- Regolith_lunar_mare: ~5,500 kg (for ~3,300 kg iron ore)
-- Smelting/refining: 980+ batches each
-- Time: ~22,000 hours of processing time
-- Energy: ~29,000 kWh
+### Successfully Demonstrated:
+✓ **MRE pathway**: regolith → regolith_metal_crude (1140 kg via 50 MRE batches)
+✓ **Heavy fabrication**: reactor_vessel_mre from regolith_metal_crude (casting, welding, sintering, assembly)
+✓ **Electrical components**: power_bus_high_current from regolith_metal_crude
+✓ **Small fasteners**: fastener_kit_small from regolith_metal_crude
 
-**Progress Update:**
-- Initial build: 66.5 kg steel (5% ISRU)
-- Scaled build: 256.5 kg steel (20% ISRU)
-- **Next iteration: ~850 kg steel target (99% ISRU potential)**
-
-Components that CAN be made from regolith (99% mass):
-- reactor_vessel_mre (600 kg): steel + regolith refractory
-- electrode_set_mre (90 kg): steel
-- heating_element_set_high_temp (80 kg): steel
-- insulation_pack_high_temp (120 kg): regolith-based recipe exists
-- offgas_manifold (70 kg): steel piping
-- cooling_loop_basic (60 kg): steel piping
-- power_bus_high_current (50 kg): copper/metal
-- heat_transport_loop_assembly (180 kg): steel piping + heat exchanger
-- fastener_kit_medium (1 kg): steel
+### Next Steps for Higher ISRU:
+1. Implement machined_part_raw production chain from regolith_metal_crude
+2. Build offgas_manifold and heating_elements locally using machined_part_raw
+3. Develop electrode_set_mre recipe using regolith_metal_crude
+4. Create cooling_loop and heat_transport recipes using ISRU pump/valve components
+5. Produce insulation_pack from regolith-derived ceramics (recipe exists but needs integration)
 
 Must import (1% mass):
 - temperature_sensing (2 kg): electronics

@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: powder_feedstock
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 1.0
     unit: kg
 outputs:
@@ -13,11 +13,11 @@ outputs:
 steps:
   - process_id: grinding_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     est_time_hr: 3.0
@@ -25,11 +25,11 @@ steps:
     notes: "Mechanical grinding or ball milling to produce fine powder from bulk material"
   - process_id: screening_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     est_time_hr: 2.0
@@ -37,11 +37,11 @@ steps:
     notes: "Classify powder by particle size using vibrating screens or air classification"
   - process_id: drying_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     est_time_hr: 2.0
@@ -49,7 +49,7 @@ steps:
     notes: "Remove moisture to prevent powder agglomeration and oxidation"
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 1.0
         unit: kg
     outputs:

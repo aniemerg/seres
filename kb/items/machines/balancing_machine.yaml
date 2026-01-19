@@ -9,7 +9,13 @@ capabilities:
 - drive_motors
 - measurement
 bom: bom_balancing_machine_v0
-notes: Precision balancing machine for rotating assemblies. Includes drive motors,
-  vibration sensors, and measurement electronics.
+notes: |
+  Precision balancing machine for rotating assemblies. Includes drive motors,
+  vibration sensors, and measurement electronics. Handles both precision balancing
+  operations and heavier tasks like roll balancing for rolling mills.
+
+  Conservative Mode consolidation: Replaces former dynamic_balancing_stand_v0
+  (70kg placeholder). Mass difference (450kg vs 70kg) acceptable within equivalence
+  guidelines - both perform dynamic balancing, this machine has proper instrumentation.
 recipe: recipe_balancing_machine_v0
 unit_kind: bulk

@@ -4,20 +4,20 @@ name: Recipe for powder_metal_or_ceramic
 target_item_id: powder_metal_or_ceramic
 variant_id: v0
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 10.0
     unit: kg
 outputs:
   - item_id: powder_metal_or_ceramic
     qty: 9.8
     unit: kg
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 0.2
     unit: kg
 steps:
   - process_id: sizing_grinding_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 10.0
         unit: kg
         notes: "Coarse metal feedstock for grinding"
@@ -26,7 +26,7 @@ steps:
         qty: 9.8
         unit: kg
         notes: "Fine metal powder (1-100 micron particle size)"
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 0.2
         unit: kg
         notes: "Oversized particles returned for reprocessing"
@@ -35,4 +35,4 @@ steps:
     labor_hours: 0.5
     notes: "Ball mill coarse metal feedstock to fine powder (1-100 micron particle size)"
 assumptions: "Powder production from metal alloy bulk. Particle size controlled through grinding time and screen selection. ~2% loss to oversized particles."
-notes: "Production of fine metal powder for sintering, hot pressing, or additive manufacturing applications. Uses metal_alloy_bulk as feedstock (mixed metal from MRE). For ceramic powders, use ceramic-specific grinding recipes."
+notes: "Production of fine metal powder for sintering, hot pressing, or additive manufacturing applications. Uses regolith_metal_crude as feedstock (mixed metal from MRE). For ceramic powders, use ceramic-specific grinding recipes."

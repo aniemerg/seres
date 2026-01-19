@@ -5,9 +5,6 @@ inputs:
   - item_id: steel_stock_bar_or_billet
     qty: 240.0
     unit: kg
-  - item_id: finished_part
-    qty: 1.0
-    unit: set
 outputs:
   - item_id: rolling_mill_rolls_set
     qty: 1.0
@@ -19,38 +16,12 @@ steps:
         qty: 240.0
         unit: kg
     outputs:
-      - item_id: finished_part
+      - item_id: rolling_mill_rolls_set
         qty: 1.0
         unit: set
     est_time_hr: 6.5
     machine_hours: 4.0
     labor_hours: 6.0
     notes: "Forge roll blanks and journals from steel billets using press/hammer and dies."
-  - process_id: heat_treatment_basic_v0
-    inputs:
-      - item_id: finished_part
-        qty: 1.0
-        unit: set
-    outputs:
-      - item_id: finished_part
-        qty: 1.0
-        unit: set
-    est_time_hr: 3.0
-    machine_hours: 2.5
-    labor_hours: 0.5
-    notes: "Harden/temper roll surfaces and journals."
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: finished_part
-        qty: 1.0
-        unit: set
-    outputs:
-      - item_id: rolling_mill_rolls_set
-        qty: 1.0
-        unit: set
-    est_time_hr: 1.5
-    machine_hours: 0.5
-    labor_hours: 1.5
-    notes: "Install bearings, seals, and end hardware; final inspection (grinding done separately if needed)."
-assumptions: "Local forging, heat treat, and grinding route for roll pair. Bearings may still be imported; refine masses and machine models later."
-notes: "Local manufacturing path for rolling mill rolls set; replaces import placeholder."
+assumptions: "Local forging route for roll pair. Heat treatment and final assembly are covered in downstream roll grinding/balancing steps."
+notes: "Local manufacturing path for rolling mill rolls set; simplified to align provenance mass with roll set output."

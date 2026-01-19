@@ -1,0 +1,38 @@
+id: rolling_basic_shop_v0
+kind: process
+name: Rolling (basic, shop mill)
+process_type: continuous
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: metal_ingot
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: metal_sheet
+  qty: 1.0
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+- machine_id: rolling_mill_v0
+  qty: 1
+  unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+energy_model:
+  type: per_unit
+  value: 0.5
+  unit: kWh/kg
+  scaling_basis: metal_ingot
+  notes: Rolling mill power and reheating between passes
+time_model:
+  type: linear_rate
+  rate: 1.25
+  rate_unit: kg/hr
+  scaling_basis: metal_ingot
+  notes: Hot rolling with multiple passes on a shop mill
+notes: Basic rolling process using a smaller rolling mill instead of a full plate mill.

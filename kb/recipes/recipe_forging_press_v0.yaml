@@ -5,7 +5,7 @@ target_item_id: forging_press_v0
 produces_qty: 1.0
 produces_unit: unit
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: regolith_metal_crude
     qty: 900.0
     unit: kg
   - item_id: steel_shell_thick
@@ -43,13 +43,13 @@ inputs:
     unit: kg
 outputs:
   - item_id: forging_press_v0
-    qty: 850.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
     notes: "Cast main frame, base, and supports"
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: regolith_metal_crude
         qty: 900.0
         unit: kg
     outputs:
@@ -131,6 +131,6 @@ steps:
         unit: kg
     outputs:
       - item_id: forging_press_v0
-        qty: 850.0
-        unit: kg
+        qty: 1.0
+        unit: unit
 notes: "Basic forging press manufacturing recipe; components and BOM to be expanded."

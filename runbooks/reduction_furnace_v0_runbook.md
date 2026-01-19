@@ -2,6 +2,17 @@
 
 Goal: Build `reduction_furnace_v0` with maximum ISRU percentage by producing major metal components from regolith.
 
+!!! info "Narrative"
+    This runbook is a staged story: import core tooling, smelt local feedstock, fabricate subassemblies, then final assembly.
+
+## Storyboard
+
+- [x] Setup and reset
+- [ ] Import fabrication equipment
+- [ ] Produce regolith feedstock (MRE)
+- [ ] Build shell + gas handling + power bus
+- [ ] Final assembly
+
 ## Setup
 
 ```sim-runbook
@@ -106,13 +117,16 @@ Goal: Build `reduction_furnace_v0` with maximum ISRU percentage by producing maj
 
 ## Stage 2: Produce metal feedstock from regolith
 
-Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
+Commentary: Produce 1000 kg of regolith_metal_crude to supply all major components.
+
+!!! warning "Energy spike"
+    This stage consumes the majority of total energy; expect a large delta in the summary.
 
 ```sim-runbook
 - cmd: sim.note
   args:
     style: milestone
-    message: "Produce 1000 kg metal_alloy_bulk from regolith."
+    message: "Produce 1000 kg regolith_metal_crude from regolith."
 - cmd: sim.import
   args:
     item: rock_crusher_basic
@@ -163,7 +177,7 @@ Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
     ensure: true
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 44
 - cmd: sim.advance-time
   args:
@@ -175,6 +189,9 @@ Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
 ```
 
 ## Stage 3: Reduction furnace shell (local)
+
+!!! info "Local fabrication"
+    This is the first major local fabrication step. Watch outputs and deltas.
 
 ```sim-runbook
 - cmd: sim.note
@@ -284,6 +301,9 @@ Commentary: Produce 1000 kg of metal_alloy_bulk to supply all major components.
 
 Commentary: Import components that require complex supply chains or electronics.
 
+!!! note "Imports"
+    These are intentionally imported to keep the runbook feasible.
+
 ```sim-runbook
 - cmd: sim.note
   args:
@@ -351,4 +371,20 @@ Commentary: Import components that require complex supply chains or electronics.
   args:
     style: success
     message: "Reduction furnace v0 complete with optimized ISRU."
+```
+
+```sim-story
+title: "Reduction Furnace v0 Overview"
+focus: item:reduction_furnace_v0
+show: [isru, energy, imports, provenance]
+table:
+  - step: shell_fabrication
+    output: reduction_furnace_shell
+    delta: "+1 unit"
+  - step: gas_handling_system
+    output: gas_handling_system
+    delta: "+1 unit"
+  - step: power_bus_high_current
+    output: power_bus_high_current
+    delta: "+50 units"
 ```

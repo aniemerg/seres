@@ -1,7 +1,6 @@
 # Milling Machine (General) v0 Runbook
 
-Goal: build `milling_machine_general_v0` with a baseline import, then replace select
-subcomponents with ISRU-produced inputs where possible.
+Goal: build `milling_machine_general_v0` using ISRU-produced inputs where possible.
 
 ## Setup
 
@@ -18,138 +17,11 @@ subcomponents with ISRU-produced inputs where possible.
     message: "Simulation reset. Starting milling_machine_general_v0 runbook."
 ```
 
-## Baseline imports (equipment + components)
+## ISRU equipment imports
 
-Commentary: import equipment and all BOM components to validate the assembly recipe.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline: import equipment and BOM components."
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_machine_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 500
-    unit: kWh
-    ensure: true
-- cmd: sim.import
-  args:
-    item: milling_table
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: spindle_head_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: drive_motor_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: gearbox_reducer_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: bearing_set_heavy
-    quantity: 2
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: cutting_tool_set_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: fastener_kit_medium
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: power_conditioning_module
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: control_compute_module_imported
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: sensor_suite_general
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.note
-  args:
-    style: info
-    message: "Baseline: equipment and components imported."
-```
-
-## Baseline build
+Commentary: import equipment for ISRU chains and final assembly.
 
 ```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Baseline: assemble milling_machine_general_v0."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_machine_milling_machine_general_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 24
-- cmd: sim.note
-  args:
-    style: success
-    message: "Baseline build complete."
-```
-
-## ISRU reset (equipment only)
-
-Commentary: reset to remove baseline import provenance, then re-import equipment for
-ISRU chains and final assembly.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Reset for ISRU run; re-import equipment only."
-- cmd: sim.reset
-  args:
-    sim-id: milling_machine_general_v0_runbook
 - cmd: sim.import
   args:
     item: labor_bot_general_v0
@@ -278,13 +150,13 @@ ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: chemical_reactor_unit_v0
+    item: chemical_reactor_basic
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -308,7 +180,7 @@ ISRU chains and final assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: press_brake_v0
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true
@@ -333,6 +205,12 @@ ISRU chains and final assembly.
 - cmd: sim.import
   args:
     item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
@@ -381,7 +259,7 @@ ISRU chains and final assembly.
 - cmd: sim.note
   args:
     style: info
-    message: "ISRU run reset complete; equipment imported."
+    message: "ISRU equipment imported."
 ```
 
 ## ISRU: metal alloy bulk + bearings
@@ -393,10 +271,10 @@ and a basic cutting tool set.
 - cmd: sim.note
   args:
     style: milestone
-    message: "ISRU: produce metal_alloy_bulk, bearing_set_heavy, and cutting tools."
+    message: "ISRU: produce regolith_metal_crude, bearing_set_heavy, and cutting tools."
 - cmd: sim.run-recipe
   args:
-    recipe: recipe_metal_alloy_bulk_v0
+    recipe: recipe_regolith_metal_crude_v0
     quantity: 4
 - cmd: sim.advance-time
   args:
@@ -778,6 +656,11 @@ Commentary: assemble milling machine with local bearings, cutting tools, and mil
   args:
     style: success
     message: "ISRU (expanded) milling_machine_general_v0 build complete."
+- cmd: sim.provenance
+  args:
+    item: milling_machine_general_v0
+    quantity: 1
+    unit: unit
 ```
 
 ## Next ISRU targets

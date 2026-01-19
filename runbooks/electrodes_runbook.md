@@ -5,14 +5,13 @@ Target: Build electrodes machine with local graphite production from regolith ca
 ## Strategy
 
 Electrodes require:
-- 14 kg graphite_powder (producible from regolith carbon via new recipe)
-- 2 kg binder_material (import for now - organic chemistry challenging for ISRU)
+- 14 kg graphite_powder (producible from regolith carbon)
+- 2 kg binder_material (import - organic chemistry challenging for ISRU)
 
 ISRU approach:
-1. Phase 1: Import baseline electrodes to prove recipe works
-2. Phase 2: Import supporting machines and raw regolith
-3. Phase 2.5: Produce graphite_powder from carbon_reductant extracted from regolith
-4. Phase 3: Assemble electrodes with local graphite
+1. Import supporting machines
+2. Produce graphite_powder from carbon_reductant extracted from regolith
+3. Assemble electrodes with local graphite
 
 Expected ISRU: ~87% by input mass (14 kg local graphite / 16 kg total inputs)
 
@@ -33,71 +32,13 @@ Expected ISRU: ~87% by input mass (14 kg local graphite / 16 kg total inputs)
     message: "Simulation reset. Starting electrodes v0 build with ISRU graphite."
 ```
 
-## Phase 1: Baseline - Import and build electrodes
-
-Prove the basic electrodes recipe works by importing all inputs.
+## Build electrodes with ISRU graphite
 
 ```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 1: Baseline - Import electrodes and verify"
-- cmd: sim.import
-  args:
-    item: graphite_powder
-    quantity: 14
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: binder_material
-    quantity: 2
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: assembly_tools_basic
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: labor_bot_general_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 100
-    unit: kWh
-    ensure: true
 - cmd: sim.note
   args:
     style: info
-    message: "Building baseline electrodes from imported materials"
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_electrodes_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 20
-- cmd: sim.note
-  args:
-    style: success
-    message: "Phase 1 complete: Baseline electrodes built and verified"
-```
-
-## Phase 2: Import supporting infrastructure
-
-Import machines and raw materials for local graphite production.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 2: Import supporting machines and regolith feedstock"
+    message: "Import supporting machines and materials"
 - cmd: sim.import
   args:
     item: furnace_high_temp
@@ -124,6 +65,18 @@ Import machines and raw materials for local graphite production.
     ensure: true
 - cmd: sim.import
   args:
+    item: assembly_tools_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: labor_bot_general_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: regolith_carbonaceous
     quantity: 600
     unit: kg
@@ -140,21 +93,6 @@ Import machines and raw materials for local graphite production.
     quantity: 2
     unit: kg
     ensure: true
-- cmd: sim.note
-  args:
-    style: success
-    message: "Supporting machines and materials imported"
-```
-
-## Phase 2.5: Produce graphite from regolith carbon
-
-Extract carbon reductant from regolith and convert to graphite powder via graphitization.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 2.5: Produce graphite powder from local regolith carbon"
 - cmd: sim.note
   args:
     style: info
@@ -183,21 +121,6 @@ Extract carbon reductant from regolith and convert to graphite powder via graphi
     hours: 200
 - cmd: sim.note
   args:
-    style: success
-    message: "Graphite powder produced from local regolith carbon (~14 kg graphite from 16 kg carbon input, 90% yield)"
-```
-
-## Phase 3: Assemble electrodes with local graphite
-
-Build final electrodes using ISRU graphite and imported binder.
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 3: Build electrodes using local graphite powder"
-- cmd: sim.note
-  args:
     style: info
     message: "Assembling electrodes with ISRU graphite (14 kg) and imported binder (2 kg)"
 - cmd: sim.run-recipe
@@ -210,16 +133,7 @@ Build final electrodes using ISRU graphite and imported binder.
 - cmd: sim.note
   args:
     style: success
-    message: "Phase 3 complete: Electrodes built with ~87% ISRU materials (14 kg local graphite / 16 kg total)"
-```
-
-## Phase 4: ISRU Analysis
-
-```sim-runbook
-- cmd: sim.note
-  args:
-    style: section
-    message: "Phase 4: ISRU Analysis Summary"
+    message: "Electrodes built with ~87% ISRU materials (14 kg local graphite / 16 kg total)"
 - cmd: sim.note
   args:
     style: info

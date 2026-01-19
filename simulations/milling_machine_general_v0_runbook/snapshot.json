@@ -17,7 +17,7 @@
         "unit": "unit"
       },
       "electrical_energy": {
-        "quantity": 480.0,
+        "quantity": 2000.0,
         "unit": "kWh"
       },
       "vibrating_screen_v0": {
@@ -88,11 +88,11 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "chemical_reactor_unit_v0": {
+      "chemical_reactor_basic": {
         "quantity": 1.0,
         "unit": "unit"
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -108,7 +108,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "press_brake_v0": {
+      "press_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -168,7 +168,7 @@
         "quantity": 60.8,
         "unit": "kg"
       },
-      "metal_alloy_bulk": {
+      "regolith_metal_crude": {
         "quantity": 19.200000000000003,
         "unit": "kg"
       },
@@ -341,11 +341,11 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "chemical_reactor_unit_v0": {
+      "chemical_reactor_basic": {
         "quantity": 1.0,
         "unit": "unit"
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -361,7 +361,7 @@
         "quantity": 1.0,
         "unit": "unit"
       },
-      "press_brake_v0": {
+      "press_brake": {
         "quantity": 1.0,
         "unit": "unit"
       },
@@ -531,12 +531,12 @@
         "imported_kg": 250.0,
         "unknown_kg": 0.0
       },
-      "chemical_reactor_unit_v0": {
+      "chemical_reactor_basic": {
         "in_situ_kg": 0.0,
-        "imported_kg": 1200.0,
+        "imported_kg": 500.0,
         "unknown_kg": 0.0
       },
-      "forge_or_induction_heater_v0": {
+      "induction_forge_v0": {
         "in_situ_kg": 0.0,
         "imported_kg": 1800.0,
         "unknown_kg": 0.0
@@ -556,14 +556,14 @@
         "imported_kg": 850.0,
         "unknown_kg": 0.0
       },
-      "press_brake_v0": {
+      "press_brake": {
         "in_situ_kg": 0.0,
         "imported_kg": 1200.0,
         "unknown_kg": 0.0
       },
       "cnc_mill": {
         "in_situ_kg": 0.0,
-        "imported_kg": 600.0,
+        "imported_kg": 1200.0,
         "unknown_kg": 0.0
       },
       "cutting_tools_general": {
@@ -573,7 +573,7 @@
       },
       "plate_rolling_mill": {
         "in_situ_kg": 0.0,
-        "imported_kg": 1500.0,
+        "imported_kg": 1501.0,
         "unknown_kg": 0.0
       },
       "rolling_mill_v0": {
@@ -583,7 +583,7 @@
       },
       "heating_furnace": {
         "in_situ_kg": 0.0,
-        "imported_kg": 800.0,
+        "imported_kg": 512.0,
         "unknown_kg": 0.0
       },
       "precision_lathe": {
@@ -608,7 +608,7 @@
       },
       "heat_treatment_furnace_v0": {
         "in_situ_kg": 0.0,
-        "imported_kg": 600.0,
+        "imported_kg": 537.0,
         "unknown_kg": 0.0
       },
       "lifting_equipment": {
@@ -641,7 +641,7 @@
         "imported_kg": 0.0,
         "unknown_kg": 0.0
       },
-      "metal_alloy_bulk": {
+      "regolith_metal_crude": {
         "in_situ_kg": 19.200000000000003,
         "imported_kg": 0.0,
         "unknown_kg": 0.0
@@ -887,6 +887,58 @@
         "unknown_kg": 0.0
       }
     },
+    "complexity_scores": {
+      "regolith_lunar_mare": 1,
+      "regolith_coarse_fraction": 2,
+      "regolith_fine_fraction": 2,
+      "regolith_powder": 3,
+      "oxygen_gas": 4,
+      "regolith_metal_crude": 4,
+      "cast_metal_parts": 5,
+      "machined_metal_block_v0": 6,
+      "finished_part_deburred": 7,
+      "bearing_set_heavy": 7,
+      "cutting_tool_set_basic": 6,
+      "regolith_carbonaceous": 1,
+      "carbon_reductant": 2,
+      "tailings": 2,
+      "carbon_reducing_agent": 3,
+      "iron_ore_or_ilmenite": 2,
+      "iron_pig_or_ingot": 4,
+      "slag": 5,
+      "steel_billet_or_slab": 5,
+      "steel_ingot": 6,
+      "steel_stock_bar_or_billet": 7,
+      "steel_bar_stock": 7,
+      "bearing_ball_steel": 7,
+      "ball_screw_assembly": 7,
+      "forged_steel_parts": 7,
+      "bolt_hex_medium_steel": 7,
+      "steel_sheet_1mm": 7,
+      "washer_flat_medium_steel": 7,
+      "formed_metal_part": 7,
+      "metal_scrap": 7,
+      "washer_lock_medium_steel": 7,
+      "nut_hex_medium_steel": 7,
+      "fastener_kit_medium": 7,
+      "iron_metal_pure": 3,
+      "machined_part_raw": 7,
+      "milling_table": 7,
+      "regolith_lunar_highlands": 1,
+      "silicon_metal_v0": 3,
+      "silicon_powder_v0": 4,
+      "silicone_precursor": 5,
+      "silicone_polymer": 6,
+      "coil_insulation_material": 7,
+      "electrical_steel_sheet": 4,
+      "motor_housing_steel": 4,
+      "motor_shaft_steel": 7,
+      "aluminum_wire": 5,
+      "stator_rotor_lamination_set": 5,
+      "motor_coil_wound": 7,
+      "drive_motor_medium": 7,
+      "milling_machine_general_v0": 7
+    },
     "total_energy_kwh": 4065.6515789473688
   },
   "scheduler": {
@@ -895,7 +947,7 @@
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "d5a0b241-97c5-45f0-9c40-baec8ca0ee86",
+        "process_run_id": "6746ad51-e850-4128-9b68-7400ec1b6f71",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 0.0,
         "duration_hours": 4.0,
@@ -917,12 +969,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "f913e8ee-735b-40c9-95a6-d416e38b54d6",
+        "recipe_run_id": "920aa2af-65a6-4dfe-b450-8f3126ead3d4",
         "step_index": 0,
         "energy_kwh": 20.0
       },
       {
-        "process_run_id": "0af383b7-ad80-46ca-a536-0f87f0c9f0f5",
+        "process_run_id": "6b2709d3-758c-4c07-89da-ea601681ba60",
         "process_id": "regolith_screening_sieving_v0",
         "start_time": 4.0,
         "duration_hours": 1.0,
@@ -952,12 +1004,12 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "f913e8ee-735b-40c9-95a6-d416e38b54d6",
+        "recipe_run_id": "920aa2af-65a6-4dfe-b450-8f3126ead3d4",
         "step_index": 1,
         "energy_kwh": 20.0
       },
       {
-        "process_run_id": "52ee796f-04fa-4c79-81ae-8a163a1ced94",
+        "process_run_id": "d3e097aa-25d1-4da6-8dfa-bf9fefffecf6",
         "process_id": "regolith_crushing_grinding_v0",
         "start_time": 5.0,
         "duration_hours": 1.0,
@@ -986,28 +1038,27 @@
         "inputs_consumed_units": {
           "regolith_coarse_fraction": "kg"
         },
-        "recipe_run_id": "f913e8ee-735b-40c9-95a6-d416e38b54d6",
+        "recipe_run_id": "920aa2af-65a6-4dfe-b450-8f3126ead3d4",
         "step_index": 2,
         "energy_kwh": 48.0
       },
       {
-        "process_run_id": "b69097d3-6f3a-457b-8020-969a1cddcb2a",
+        "process_run_id": "aff6dd56-d525-4977-a301-2b755d61f448",
         "process_id": "oxygen_extraction_molten_regolith_electrolysis_v0",
         "start_time": 6.0,
         "duration_hours": 12.0,
         "end_time": 18.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "regolith_powder": 152.0,
-          "electrical_energy": 1520.0
+          "regolith_powder": 152.0
         },
         "outputs_pending": {
           "oxygen_gas": 60.8,
-          "metal_alloy_bulk": 91.2
+          "regolith_metal_crude": 91.2
         },
         "outputs_pending_units": {
           "oxygen_gas": "kg",
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
@@ -1021,22 +1072,21 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "regolith_powder": "kg",
-          "electrical_energy": "kWh"
+          "regolith_powder": "kg"
         },
-        "recipe_run_id": "f913e8ee-735b-40c9-95a6-d416e38b54d6",
+        "recipe_run_id": "920aa2af-65a6-4dfe-b450-8f3126ead3d4",
         "step_index": 3,
         "energy_kwh": 1519.9999999999998
       },
       {
-        "process_run_id": "1b3f95ed-31a7-4171-93ed-b0cb6c8555da",
+        "process_run_id": "519a787e-3e81-41f8-b766-56dcfa193899",
         "process_id": "metal_casting_basic_v0",
         "start_time": 24.0,
         "duration_hours": 4.5,
         "end_time": 28.5,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 15.0
+          "regolith_metal_crude": 15.0
         },
         "outputs_pending": {
           "cast_metal_parts": 14.25
@@ -1056,14 +1106,14 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
-        "recipe_run_id": "f32d20d9-d096-4be7-b458-bec828bfdaab",
+        "recipe_run_id": "6f21c45a-5fab-4b57-8c81-50a4c77444d2",
         "step_index": 0,
         "energy_kwh": 52.5
       },
       {
-        "process_run_id": "7dc67014-53be-4b99-924e-01228171a21c",
+        "process_run_id": "49054e77-96a8-4030-80e9-60ff976d8f57",
         "process_id": "machining_basic_v0",
         "start_time": 28.5,
         "duration_hours": 1.0,
@@ -1089,12 +1139,12 @@
         "inputs_consumed_units": {
           "cast_metal_parts": "kg"
         },
-        "recipe_run_id": "f32d20d9-d096-4be7-b458-bec828bfdaab",
+        "recipe_run_id": "6f21c45a-5fab-4b57-8c81-50a4c77444d2",
         "step_index": 1,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "dbba2a8b-ff24-4ba6-a658-65928e796d9e",
+        "process_run_id": "1aaebfc1-1639-4b60-88ad-736e0203bc39",
         "process_id": "precision_grinding_basic_v0",
         "start_time": 29.5,
         "duration_hours": 1.0,
@@ -1122,12 +1172,12 @@
         "inputs_consumed_units": {
           "machined_metal_block_v0": "kg"
         },
-        "recipe_run_id": "f32d20d9-d096-4be7-b458-bec828bfdaab",
+        "recipe_run_id": "6f21c45a-5fab-4b57-8c81-50a4c77444d2",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "22ed340a-083e-41ae-887a-b9a487a8b8b7",
+        "process_run_id": "b6b6dee1-3509-4583-9322-cd6c8e2d7e1a",
         "process_id": "assembly_basic_v0",
         "start_time": 30.5,
         "duration_hours": 1.0,
@@ -1154,19 +1204,19 @@
         "inputs_consumed_units": {
           "finished_part_deburred": "kg"
         },
-        "recipe_run_id": "f32d20d9-d096-4be7-b458-bec828bfdaab",
+        "recipe_run_id": "6f21c45a-5fab-4b57-8c81-50a4c77444d2",
         "step_index": 3,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "cdaecef9-cb11-44b7-9675-66b6d9a111de",
+        "process_run_id": "c0dfcc46-e9c8-4796-bccb-0f3f8ae38adb",
         "process_id": "metal_casting_basic_v0",
         "start_time": 54.0,
         "duration_hours": 1.5,
         "end_time": 55.5,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 27.0
+          "regolith_metal_crude": 27.0
         },
         "outputs_pending": {
           "cast_metal_parts": 26.0
@@ -1186,14 +1236,14 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
-        "recipe_run_id": "9ccf24c1-71c6-4ac8-9a5e-332cfcf3c704",
+        "recipe_run_id": "826897d0-8d78-4e80-851f-52977493d394",
         "step_index": 0,
         "energy_kwh": 95.78947368421052
       },
       {
-        "process_run_id": "31e1d56a-ff71-4602-8b9b-c306a7ad8fb0",
+        "process_run_id": "b13a3b64-f61c-46d9-b541-5c6a5a4f699c",
         "process_id": "machining_finish_basic_v0",
         "start_time": 55.5,
         "duration_hours": 1.0,
@@ -1221,12 +1271,12 @@
         "inputs_consumed_units": {
           "cast_metal_parts": "kg"
         },
-        "recipe_run_id": "9ccf24c1-71c6-4ac8-9a5e-332cfcf3c704",
+        "recipe_run_id": "826897d0-8d78-4e80-851f-52977493d394",
         "step_index": 1,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "f843d992-2159-43b6-b20d-bb80d0e7802a",
+        "process_run_id": "f53610b0-8c75-40ad-9ad9-be78f332d898",
         "process_id": "regolith_mining_carbonaceous_v0",
         "start_time": 138.0,
         "duration_hours": 90.00360014400576,
@@ -1248,12 +1298,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "a87acd0d-7392-497e-ac07-568ef73dc8da",
+        "recipe_run_id": "33dcb32d-d1bc-4052-bd9f-7af7023a6578",
         "step_index": 0,
         "energy_kwh": 375.0
       },
       {
-        "process_run_id": "bc8f9f26-df09-45fe-bb44-f057b2fc2e3b",
+        "process_run_id": "b1a67ea0-39cc-4fd6-ada9-2db1886560be",
         "process_id": "carbon_extraction_from_carbonaceous_v0",
         "start_time": 238.0,
         "duration_hours": 112.5,
@@ -1281,12 +1331,12 @@
         "inputs_consumed_units": {
           "regolith_carbonaceous": "kg"
         },
-        "recipe_run_id": "946a4e44-adac-4a8e-8503-708fe4d4d88e",
+        "recipe_run_id": "f55e9cee-6476-497a-9e42-9a9ff6d98f99",
         "step_index": 0,
         "energy_kwh": 150.0
       },
       {
-        "process_run_id": "045a5062-8bfd-4105-8f78-8493445be251",
+        "process_run_id": "8518f02a-c5d2-42ce-885a-04b083dbbfc9",
         "process_id": "carbon_reducing_agent_production_v0",
         "start_time": 358.0,
         "duration_hours": 1.0,
@@ -1312,12 +1362,12 @@
         "inputs_consumed_units": {
           "carbon_reductant": "kg"
         },
-        "recipe_run_id": "f2e2857a-5384-4f79-8d83-ba0062ea3c0b",
+        "recipe_run_id": "8d138514-1017-46f4-8068-177c9a06d0ff",
         "step_index": 0,
         "energy_kwh": 6.4
       },
       {
-        "process_run_id": "1f989911-70e0-4882-ba58-97ef9e2fefe2",
+        "process_run_id": "085cb557-038e-4828-bfcc-ebd411f81647",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 398.0,
         "duration_hours": 2.0,
@@ -1339,12 +1389,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "db84e45b-ff6c-4d7a-8c39-68a1d3de1a82",
+        "recipe_run_id": "05ee6a56-8b46-4a56-ad59-785216954ce8",
         "step_index": 0,
         "energy_kwh": 10.0
       },
       {
-        "process_run_id": "12143892-4371-4d50-b4c3-3f61bb2469fd",
+        "process_run_id": "c1546d5c-b68c-459b-8aa8-49c61c9f0181",
         "process_id": "ilmenite_extraction_from_regolith_v0",
         "start_time": 400.0,
         "duration_hours": 110.0,
@@ -1372,12 +1422,12 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "4a89a6ae-d956-4cee-a74a-0d4c5b1016d3",
+        "recipe_run_id": "c315cf6d-e631-4249-8556-fb4932650b2e",
         "step_index": 0,
         "energy_kwh": 220.0
       },
       {
-        "process_run_id": "1993f129-540e-4918-a443-d3d57afbb1e6",
+        "process_run_id": "5154da16-a9c7-4a90-8e4d-f85ff08113a9",
         "process_id": "iron_smelting_reduction_v0",
         "start_time": 530.0,
         "duration_hours": 128.0,
@@ -1409,12 +1459,12 @@
           "iron_ore_or_ilmenite": "kg",
           "carbon_reducing_agent": "kg"
         },
-        "recipe_run_id": "7b7ea248-df6f-4c17-baf5-499a3c521635",
+        "recipe_run_id": "90d3abe7-fcc1-4546-b006-cc3b3ac46a1e",
         "step_index": 0,
         "energy_kwh": 256.0
       },
       {
-        "process_run_id": "65f869ad-56c1-48e7-a4c1-59de845b504a",
+        "process_run_id": "248aec54-34fd-4dde-a4ae-8a9f661c62af",
         "process_id": "steel_refining_basic_v0",
         "start_time": 660.0,
         "duration_hours": 60.0,
@@ -1446,12 +1496,12 @@
         "inputs_consumed_units": {
           "iron_pig_or_ingot": "kg"
         },
-        "recipe_run_id": "a00bde3f-0af6-4a73-a103-ed6b6fc7d2db",
+        "recipe_run_id": "448cddcc-d0a2-42b1-87b4-7e56e0b6126c",
         "step_index": 0,
         "energy_kwh": 45.0
       },
       {
-        "process_run_id": "c1b3054d-2c96-4ec4-beb0-8ce0bfe7c740",
+        "process_run_id": "058fea2a-c172-4482-90b9-a568320feeeb",
         "process_id": "steel_ingot_cast_v0",
         "start_time": 720.0,
         "duration_hours": 30.0,
@@ -1477,12 +1527,12 @@
         "inputs_consumed_units": {
           "steel_billet_or_slab": "kg"
         },
-        "recipe_run_id": "a00bde3f-0af6-4a73-a103-ed6b6fc7d2db",
+        "recipe_run_id": "448cddcc-d0a2-42b1-87b4-7e56e0b6126c",
         "step_index": 1,
         "energy_kwh": 120.0
       },
       {
-        "process_run_id": "a38d974f-0e28-493e-bd95-7b64e6f19eb9",
+        "process_run_id": "9f8b9d3c-1d2e-4c64-9a72-cb9a37e84c01",
         "process_id": "rolling_basic_v0",
         "start_time": 750.0,
         "duration_hours": 1.0,
@@ -1510,13 +1560,13 @@
         "inputs_consumed_units": {
           "steel_ingot": "kg"
         },
-        "recipe_run_id": "36454770-f5fa-4d33-86a8-16d5dc1e1b8e",
+        "recipe_run_id": "ce353e0e-98b7-4110-9ae0-680d526c9a0a",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "3b45db9d-93d8-4284-bcb9-5387a7a28f0b",
-        "process_id": "steel_bar_stock_rolling_v0",
+        "process_run_id": "b7928c3e-1cc1-48df-b789-01ec91bd86cc",
+        "process_id": "steel_bar_stock_rolling_shop_v0",
         "start_time": 780.0,
         "duration_hours": 1.0,
         "end_time": 781.0,
@@ -1531,7 +1581,7 @@
           "steel_bar_stock": "kg"
         },
         "machines_reserved": {
-          "plate_rolling_mill": 1.0
+          "rolling_mill_v0": 1.0
         },
         "provenance_consumed_kg": {
           "in_situ_kg": 15.750000000000002,
@@ -1541,12 +1591,12 @@
         "inputs_consumed_units": {
           "steel_stock_bar_or_billet": "kg"
         },
-        "recipe_run_id": "d17b352c-b369-4445-b369-6e17731edf07",
+        "recipe_run_id": "e0296a29-b28a-45ce-a044-622410e7853f",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "d59b8254-2ad7-4bca-b9f4-f2a71aa92fce",
+        "process_run_id": "6d01e601-ba13-4c96-a85f-f8c794b07944",
         "process_id": "bearing_ball_steel_cast_v0",
         "start_time": 820.0,
         "duration_hours": 1.0,
@@ -1572,12 +1622,12 @@
         "inputs_consumed_units": {
           "steel_ingot": "kg"
         },
-        "recipe_run_id": "0f335fa2-47da-4a26-ac53-c9bc7f085b06",
+        "recipe_run_id": "b2f7165d-0940-45d9-9fc2-983d466d4225",
         "step_index": 0,
         "energy_kwh": 1.8
       },
       {
-        "process_run_id": "57ad784c-b791-4bc0-a840-c1049b30a3f0",
+        "process_run_id": "1068b278-e5c7-4aed-b1e6-45446c5359a6",
         "process_id": "ball_screw_fabrication_v0",
         "start_time": 822.0,
         "duration_hours": 3.0,
@@ -1606,12 +1656,12 @@
           "steel_bar_stock": "kg",
           "bearing_ball_steel": "kg"
         },
-        "recipe_run_id": "ae82be34-600b-4ef0-9cb3-7a508af486aa",
+        "recipe_run_id": "4fec52e1-ad7f-43fc-bf21-f9c5c79120f5",
         "step_index": 0,
         "energy_kwh": 1.2
       },
       {
-        "process_run_id": "4be652fb-036e-472e-a8cb-2722c666d19f",
+        "process_run_id": "740a5118-7586-4618-9bd1-bc0000dacec9",
         "process_id": "forging_basic_v0",
         "start_time": 828.0,
         "duration_hours": 1.0,
@@ -1628,7 +1678,7 @@
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
-          "forge_or_induction_heater_v0": 1.0,
+          "induction_forge_v0": 1.0,
           "power_hammer_or_press": 1.0,
           "anvil_or_die_set": 1.0
         },
@@ -1640,12 +1690,12 @@
         "inputs_consumed_units": {
           "steel_stock_bar_or_billet": "kg"
         },
-        "recipe_run_id": "94a06173-6b37-4b85-bb1b-81855ce4550e",
+        "recipe_run_id": "a4f79d74-b17b-4148-92a5-f2247d8f04fa",
         "step_index": 0,
         "energy_kwh": 8.64
       },
       {
-        "process_run_id": "47750cfa-2bc1-4b11-bec8-58311734142e",
+        "process_run_id": "2f0033b0-1da0-4fb1-9394-02ae38a8b782",
         "process_id": "machining_finish_basic_v0",
         "start_time": 829.0,
         "duration_hours": 1.0,
@@ -1673,12 +1723,12 @@
         "inputs_consumed_units": {
           "forged_steel_parts": "kg"
         },
-        "recipe_run_id": "94a06173-6b37-4b85-bb1b-81855ce4550e",
+        "recipe_run_id": "a4f79d74-b17b-4148-92a5-f2247d8f04fa",
         "step_index": 1,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "62dd7d86-b5c7-49eb-a739-fc5b2fbf7ad1",
+        "process_run_id": "715bd57a-0f57-400a-b2ba-12e493e313c2",
         "process_id": "sheet_making_from_ingot_1mm_v0",
         "start_time": 850.0,
         "duration_hours": 0.25,
@@ -1704,12 +1754,12 @@
         "inputs_consumed_units": {
           "steel_ingot": "kg"
         },
-        "recipe_run_id": "14979277-7e74-470d-ba2b-9779f18e8cf7",
+        "recipe_run_id": "cc787333-4670-42cd-b13e-90289b0a1cee",
         "step_index": 0,
         "energy_kwh": 0.25
       },
       {
-        "process_run_id": "d87bd683-2b18-46b6-8a3e-5e5f962ab1bd",
+        "process_run_id": "7cd57342-73c2-4cb8-ab5a-e77b12562846",
         "process_id": "metal_stamping_process_v0",
         "start_time": 851.0,
         "duration_hours": 0.75,
@@ -1735,12 +1785,12 @@
         "inputs_consumed_units": {
           "steel_sheet_1mm": "kg"
         },
-        "recipe_run_id": "5f1cfdfd-476d-4b47-bb20-246c26b70f8d",
+        "recipe_run_id": "e07d6275-e9e3-4098-9c33-c11f8ccc932e",
         "step_index": 0,
         "energy_kwh": 0.04
       },
       {
-        "process_run_id": "d80d6fa9-1f51-4dcc-b57e-4d18179400f3",
+        "process_run_id": "7e124fa5-0c6b-4386-850e-e0c81c4d99b9",
         "process_id": "metal_stamping_process_v0",
         "start_time": 852.0,
         "duration_hours": 0.0225,
@@ -1768,12 +1818,12 @@
         "inputs_consumed_units": {
           "steel_sheet_1mm": "kg"
         },
-        "recipe_run_id": "bc780af8-d93e-42a5-bdd8-5fd869f5dba3",
+        "recipe_run_id": "408ad453-bd0d-40c1-bf77-4d177040648f",
         "step_index": 0,
         "energy_kwh": 0.04
       },
       {
-        "process_run_id": "6be2fe80-b69c-42ca-8748-bb8639eb8c3c",
+        "process_run_id": "bf08eaab-efb4-45a6-92da-9b880ac238d1",
         "process_id": "heat_treatment_hardening_v0",
         "start_time": 852.0225,
         "duration_hours": 0.18,
@@ -1799,12 +1849,12 @@
         "inputs_consumed_units": {
           "formed_metal_part": "kg"
         },
-        "recipe_run_id": "bc780af8-d93e-42a5-bdd8-5fd869f5dba3",
+        "recipe_run_id": "408ad453-bd0d-40c1-bf77-4d177040648f",
         "step_index": 1,
         "energy_kwh": 3.3
       },
       {
-        "process_run_id": "65ac11f0-9deb-49ce-ab4f-7b0f944dc840",
+        "process_run_id": "7c1da624-faf8-4cd7-88ec-d22f2427e214",
         "process_id": "metal_forging_process_v0",
         "start_time": 848.0,
         "duration_hours": 4.5,
@@ -1830,12 +1880,12 @@
         "inputs_consumed_units": {
           "steel_bar_stock": "kg"
         },
-        "recipe_run_id": "4760074c-d587-4026-8d60-80a616a66220",
+        "recipe_run_id": "1ffa501a-b4db-4b21-9736-aca425821aed",
         "step_index": 0,
         "energy_kwh": 0.8
       },
       {
-        "process_run_id": "3470696f-f1e1-42fe-832f-81da01861ff3",
+        "process_run_id": "820f084a-70a2-4356-beb3-f5f959a79afd",
         "process_id": "assembly_basic_v0",
         "start_time": 853.0,
         "duration_hours": 1.0,
@@ -1868,12 +1918,12 @@
           "washer_flat_medium_steel": "kg",
           "washer_lock_medium_steel": "kg"
         },
-        "recipe_run_id": "7f373022-522e-4ce5-b71f-49d16b1675f2",
+        "recipe_run_id": "4be38b95-4e69-47cb-936d-2c01db32b9d0",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "01cdd1a7-04e4-46ad-b919-78de192386a8",
+        "process_run_id": "66e5a9a9-653b-4025-b87a-1ea80abfbe17",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 854.0,
         "duration_hours": 1.0,
@@ -1895,12 +1945,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "79f13189-98cd-498c-a1fa-f4b5bb1d2650",
+        "recipe_run_id": "5233b992-c04e-4f55-9567-c232d8b5f190",
         "step_index": 0,
         "energy_kwh": 5.0
       },
       {
-        "process_run_id": "f127c664-3ab0-4df9-852e-ff3a29387747",
+        "process_run_id": "9871bba4-8f05-46ac-a943-cfca96bd7704",
         "process_id": "ilmenite_extraction_from_regolith_v0",
         "start_time": 855.0,
         "duration_hours": 84.0,
@@ -1928,12 +1978,12 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "97040126-06a8-4660-89a2-60b8c07b4749",
+        "recipe_run_id": "83f03f2e-d25a-4ae5-a896-8dc7ca68158d",
         "step_index": 0,
         "energy_kwh": 168.0
       },
       {
-        "process_run_id": "d8c7f0d4-3ff2-4513-a9a4-07a07c984b55",
+        "process_run_id": "610293c0-cebb-44bd-8956-7f9abfa84398",
         "process_id": "iron_pure_production_from_ilmenite_v0",
         "start_time": 939.0,
         "duration_hours": 50.0,
@@ -1959,12 +2009,12 @@
         "inputs_consumed_units": {
           "iron_ore_or_ilmenite": "kg"
         },
-        "recipe_run_id": "d6709b90-5dd8-42dd-9b3b-071463ab1dcb",
+        "recipe_run_id": "6d456849-c873-4d41-a65a-d26c8abc3459",
         "step_index": 0,
         "energy_kwh": 50.0
       },
       {
-        "process_run_id": "fa5085c4-cc18-408e-8267-6f97d4f04b51",
+        "process_run_id": "c971868a-c901-43b2-b9d0-07406e510551",
         "process_id": "metal_casting_basic_v0",
         "start_time": 989.0,
         "duration_hours": 1.5,
@@ -1993,12 +2043,12 @@
         "inputs_consumed_units": {
           "iron_metal_pure": "kg"
         },
-        "recipe_run_id": "2fdbfd08-7e51-49da-9e73-fed6930bb6f9",
+        "recipe_run_id": "414d182a-a44b-431a-8997-736c80588d5e",
         "step_index": 0,
         "energy_kwh": 176.8421052631579
       },
       {
-        "process_run_id": "b6529d16-1cdd-43ea-b7d7-776906698538",
+        "process_run_id": "51ae0328-b402-4d72-a241-e366ac5c893d",
         "process_id": "machining_finish_basic_v0",
         "start_time": 990.5,
         "duration_hours": 13.501350135013501,
@@ -2026,12 +2076,12 @@
         "inputs_consumed_units": {
           "cast_metal_parts": "kg"
         },
-        "recipe_run_id": "2fdbfd08-7e51-49da-9e73-fed6930bb6f9",
+        "recipe_run_id": "414d182a-a44b-431a-8997-736c80588d5e",
         "step_index": 1,
         "energy_kwh": 67.5
       },
       {
-        "process_run_id": "fc6be799-7a4a-4bec-85aa-6150da4681cf",
+        "process_run_id": "01cdf3c3-d387-46c8-abd8-59a13d95fcab",
         "process_id": "precision_grinding_basic_v0",
         "start_time": 1004.0013501350135,
         "duration_hours": 1.0,
@@ -2059,12 +2109,12 @@
         "inputs_consumed_units": {
           "machined_part_raw": "kg"
         },
-        "recipe_run_id": "2fdbfd08-7e51-49da-9e73-fed6930bb6f9",
+        "recipe_run_id": "414d182a-a44b-431a-8997-736c80588d5e",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "2a13e67a-686e-474c-99e2-dd2314adbea6",
+        "process_run_id": "31f95fbd-1404-41be-89b3-e12c06d44dff",
         "process_id": "assembly_basic_v0",
         "start_time": 1005.0013501350135,
         "duration_hours": 1.0,
@@ -2095,12 +2145,12 @@
           "ball_screw_assembly": "unit",
           "fastener_kit_medium": "unit"
         },
-        "recipe_run_id": "2fdbfd08-7e51-49da-9e73-fed6930bb6f9",
+        "recipe_run_id": "414d182a-a44b-431a-8997-736c80588d5e",
         "step_index": 3,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "2389520b-fbcc-40af-bb25-5eb4b74f3ea1",
+        "process_run_id": "e4c8d311-d4ab-44e0-b79c-9ba9abdca489",
         "process_id": "regolith_mining_lunar_highlands_v0",
         "start_time": 1089.0,
         "duration_hours": 0.35,
@@ -2122,12 +2172,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "72e9f65f-def5-43c8-b9d7-e7930fc74d42",
+        "recipe_run_id": "7cca2396-19e4-4fff-ad37-d35cd5b3a2cf",
         "step_index": 0,
         "energy_kwh": 1.75
       },
       {
-        "process_run_id": "e7a33748-6899-4dcf-9014-75281ba1fc4f",
+        "process_run_id": "a1feb862-64b7-4a53-a89c-6012667a27a1",
         "process_id": "silicon_extraction_from_regolith_carbothermic_v0",
         "start_time": 1090.0,
         "duration_hours": 4.5,
@@ -2155,12 +2205,12 @@
           "regolith_lunar_highlands": "kg",
           "carbon_reductant": "kg"
         },
-        "recipe_run_id": "a65ff2b6-46fb-471b-b5e4-f0ac4ee39114",
+        "recipe_run_id": "bedabc86-52cb-4a39-814d-f5dd578d1aa7",
         "step_index": 0,
         "energy_kwh": 55.0
       },
       {
-        "process_run_id": "dfb69bbb-a49b-469c-9944-869e7c411206",
+        "process_run_id": "321cd8e4-bbf5-42a6-956a-210138c94573",
         "process_id": "grinding_silicon_powder_v0",
         "start_time": 1096.0,
         "duration_hours": 1.0,
@@ -2186,12 +2236,12 @@
         "inputs_consumed_units": {
           "silicon_metal_v0": "kg"
         },
-        "recipe_run_id": "6f323b27-ab86-4068-b71a-2ac5c5a5dcc2",
+        "recipe_run_id": "877d01dd-1569-42cd-a387-bb5dabad627f",
         "step_index": 0,
         "energy_kwh": 4.0
       },
       {
-        "process_run_id": "a9c26bac-dd7f-4194-9821-b35415f1a540",
+        "process_run_id": "265378c1-085c-4840-a331-70ac87ddb629",
         "process_id": "silicone_precursor_synthesis_v0",
         "start_time": 1098.0,
         "duration_hours": 2.0,
@@ -2219,12 +2269,12 @@
           "silicon_metal_v0": "kg",
           "silicon_powder_v0": "kg"
         },
-        "recipe_run_id": "aaaf6124-2094-4c11-874d-ebf69f1bf15a",
+        "recipe_run_id": "250eb1e9-8c21-451d-bb1f-6824a26859d9",
         "step_index": 0,
         "energy_kwh": 6.0
       },
       {
-        "process_run_id": "91eb580e-e36f-49f0-b99f-c6f6b4cc4adf",
+        "process_run_id": "14b551fb-986d-4b6c-b680-078d1a618935",
         "process_id": "silicone_polymer_synthesis_v0",
         "start_time": 1100.0,
         "duration_hours": 4.0,
@@ -2250,12 +2300,12 @@
         "inputs_consumed_units": {
           "silicone_precursor": "kg"
         },
-        "recipe_run_id": "d7745cb1-77e7-4cc5-925d-ed2fc1f3f5a8",
+        "recipe_run_id": "2e3be1fd-a437-4504-8053-bc612ec7eb77",
         "step_index": 0,
         "energy_kwh": 12.0
       },
       {
-        "process_run_id": "8fde6aa4-085d-41d4-ab77-2bc632d88931",
+        "process_run_id": "a97d5fa5-5b5c-4aa1-a4bd-32012ab5d70a",
         "process_id": "coil_insulation_production_v0",
         "start_time": 1104.0,
         "duration_hours": 1.0,
@@ -2271,7 +2321,7 @@
           "coil_insulation_material": "kg"
         },
         "machines_reserved": {
-          "chemical_reactor_unit_v0": 1.0,
+          "chemical_reactor_basic": 1.0,
           "labor_bot_general_v0": 1.0
         },
         "provenance_consumed_kg": {
@@ -2282,12 +2332,12 @@
         "inputs_consumed_units": {
           "silicone_polymer": "kg"
         },
-        "recipe_run_id": "b9a44058-e93f-4ec1-acd9-9061e285ada8",
+        "recipe_run_id": "ce615ba0-bab9-4295-a685-b79d2c324107",
         "step_index": 0,
         "energy_kwh": 4.0
       },
       {
-        "process_run_id": "4a6e897e-d296-4dfe-b9f7-08b2c36ad830",
+        "process_run_id": "5ff392e4-7f0c-4c21-88b5-74db1b094846",
         "process_id": "regolith_mining_simple_v0",
         "start_time": 1106.0,
         "duration_hours": 1.0,
@@ -2309,12 +2359,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "8f6a3241-87cf-48d7-b161-a5c1946ff782",
+        "recipe_run_id": "90f15a68-a3a9-44ab-ab8b-d319a18c125a",
         "step_index": 0,
         "energy_kwh": 5.0
       },
       {
-        "process_run_id": "eede5a6c-c013-461c-969e-151bda77da35",
+        "process_run_id": "d67c5a78-3770-4b73-992c-9601e73b4939",
         "process_id": "ilmenite_extraction_from_regolith_v0",
         "start_time": 1107.0,
         "duration_hours": 100.0,
@@ -2342,12 +2392,12 @@
         "inputs_consumed_units": {
           "regolith_lunar_mare": "kg"
         },
-        "recipe_run_id": "36c265ec-1c6e-4ae1-b3a2-763e3c3511a2",
+        "recipe_run_id": "78c41331-ffd2-48ee-8ece-f91a49a68135",
         "step_index": 0,
         "energy_kwh": 200.0
       },
       {
-        "process_run_id": "e8280b02-e8ee-4958-a892-7c7c39993cd7",
+        "process_run_id": "0fb6a163-93a9-4ac5-aea5-f2b2207ca31d",
         "process_id": "iron_pure_production_from_ilmenite_v0",
         "start_time": 1217.0,
         "duration_hours": 60.0,
@@ -2373,12 +2423,12 @@
         "inputs_consumed_units": {
           "iron_ore_or_ilmenite": "kg"
         },
-        "recipe_run_id": "2e601a58-a201-467d-a50f-8f244bffd4da",
+        "recipe_run_id": "d11744c8-fe05-4811-bd4e-bbf50ad1c571",
         "step_index": 0,
         "energy_kwh": 60.0
       },
       {
-        "process_run_id": "5ccd8656-d17d-4a90-bf71-4d3a867d267c",
+        "process_run_id": "e4357e6c-20a2-4b16-9d05-7a99ddd5ddd7",
         "process_id": "electrical_steel_production_v0",
         "start_time": 1277.0,
         "duration_hours": 240.0,
@@ -2396,7 +2446,7 @@
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
-          "forge_or_induction_heater_v0": 1.0,
+          "induction_forge_v0": 1.0,
           "rolling_mill_v0": 1.0
         },
         "provenance_consumed_kg": {
@@ -2408,12 +2458,12 @@
           "iron_metal_pure": "kg",
           "silicon_metal_v0": "kg"
         },
-        "recipe_run_id": "67f7eaa7-e596-4b7c-93e1-03382c38ac11",
+        "recipe_run_id": "5ecda4f4-4e48-4562-bf79-9c650a8f04d6",
         "step_index": 0,
         "energy_kwh": 200.0
       },
       {
-        "process_run_id": "6e092dcc-b6ec-49e9-b413-3b3ce4937cb7",
+        "process_run_id": "8200d7ca-8e28-4a49-a0ed-c0fd78f77c5e",
         "process_id": "motor_housing_forming_v0",
         "start_time": 1537.0,
         "duration_hours": 1.0,
@@ -2431,7 +2481,7 @@
           "metal_scrap": "kg"
         },
         "machines_reserved": {
-          "press_brake_v0": 1.0,
+          "press_brake": 1.0,
           "labor_bot_general_v0": 1.0
         },
         "provenance_consumed_kg": {
@@ -2442,12 +2492,12 @@
         "inputs_consumed_units": {
           "iron_metal_pure": "kg"
         },
-        "recipe_run_id": "68019db6-760f-4138-9f51-1443ad691e43",
+        "recipe_run_id": "8dc849e7-7982-42c1-afad-a7456e771d62",
         "step_index": 0,
         "energy_kwh": 12.48
       },
       {
-        "process_run_id": "0c34890b-57ed-4adc-88fd-75819c659200",
+        "process_run_id": "32b3cbb6-3dd0-4f6a-9345-5f240be5849e",
         "process_id": "forging_basic_v0",
         "start_time": 1541.0,
         "duration_hours": 1.0,
@@ -2464,7 +2514,7 @@
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
-          "forge_or_induction_heater_v0": 1.0,
+          "induction_forge_v0": 1.0,
           "power_hammer_or_press": 1.0,
           "anvil_or_die_set": 1.0
         },
@@ -2476,12 +2526,12 @@
         "inputs_consumed_units": {
           "steel_stock_bar_or_billet": "kg"
         },
-        "recipe_run_id": "9b01c4dc-7103-4c13-9211-32d01a98ca2f",
+        "recipe_run_id": "c0feb7b8-8d7c-48b8-af90-f28216ab722b",
         "step_index": 0,
         "energy_kwh": 10.0
       },
       {
-        "process_run_id": "00f9d99b-97de-411c-89f2-a965bf8ca0d7",
+        "process_run_id": "d1899565-3940-4676-97b2-9ff256bf2b88",
         "process_id": "machining_finish_basic_v0",
         "start_time": 1542.0,
         "duration_hours": 1.38013801380138,
@@ -2509,12 +2559,12 @@
         "inputs_consumed_units": {
           "forged_steel_parts": "kg"
         },
-        "recipe_run_id": "9b01c4dc-7103-4c13-9211-32d01a98ca2f",
+        "recipe_run_id": "c0feb7b8-8d7c-48b8-af90-f28216ab722b",
         "step_index": 1,
         "energy_kwh": 6.8999999999999995
       },
       {
-        "process_run_id": "75a5b18e-db59-4b4b-beae-88899cce1ee1",
+        "process_run_id": "f4361f6d-6248-402c-9c9c-79e0e976355a",
         "process_id": "precision_grinding_basic_v0",
         "start_time": 1543.3801380138013,
         "duration_hours": 1.0,
@@ -2542,19 +2592,19 @@
         "inputs_consumed_units": {
           "machined_part_raw": "kg"
         },
-        "recipe_run_id": "9b01c4dc-7103-4c13-9211-32d01a98ca2f",
+        "recipe_run_id": "c0feb7b8-8d7c-48b8-af90-f28216ab722b",
         "step_index": 2,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "1d4a5cf0-80c3-4144-ba22-1c530d638184",
+        "process_run_id": "33743cf6-a829-4522-9848-99d336142dbc",
         "process_id": "wire_drawing_aluminum_v0",
         "start_time": 1545.0,
         "duration_hours": 1.0,
         "end_time": 1546.0,
         "scale": 1.0,
         "inputs_consumed": {
-          "metal_alloy_bulk": 30.0
+          "regolith_metal_crude": 30.0
         },
         "outputs_pending": {
           "aluminum_wire": 28.5,
@@ -2574,14 +2624,14 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {
-          "metal_alloy_bulk": "kg"
+          "regolith_metal_crude": "kg"
         },
-        "recipe_run_id": "5c3e2ed5-ccce-4f9e-bd0d-3330c7b3d113",
+        "recipe_run_id": "f8638ec3-5aea-4c24-93f4-b89b1f3228b0",
         "step_index": 0,
         "energy_kwh": 45.0
       },
       {
-        "process_run_id": "4488460b-a164-4073-b549-51e8aff2dfc3",
+        "process_run_id": "a9d73954-6e7f-4d3e-9662-9f37bef8943e",
         "process_id": "lamination_stamping_v0",
         "start_time": 1561.0,
         "duration_hours": 1.0,
@@ -2608,12 +2658,12 @@
         "inputs_consumed_units": {
           "electrical_steel_sheet": "kg"
         },
-        "recipe_run_id": "4e786975-b4ba-4726-ac63-66b283e18d4c",
+        "recipe_run_id": "12844f43-1eae-487a-b158-eb028c715c30",
         "step_index": 0,
         "energy_kwh": 11.4
       },
       {
-        "process_run_id": "eb84bb5c-d52d-499c-8940-4e6212ba77a1",
+        "process_run_id": "156c910d-2109-44bb-9fae-64a8e907c07a",
         "process_id": "coil_winding_basic_v0",
         "start_time": 1565.0,
         "duration_hours": 1.0,
@@ -2644,12 +2694,12 @@
           "aluminum_wire": "kg",
           "coil_insulation_material": "kg"
         },
-        "recipe_run_id": "fa11ba56-4ff1-419f-9959-0453f8ad4f93",
+        "recipe_run_id": "ebc81963-0e9a-4de6-b825-6a6532e2fb1a",
         "step_index": 0,
         "energy_kwh": 8.52
       },
       {
-        "process_run_id": "43faf385-5fc2-4b53-b296-23b8185b1afa",
+        "process_run_id": "ab3d4c9e-7a91-4910-b26c-d2c50c0f5ed7",
         "process_id": "drive_motor_medium_assembly_v0",
         "start_time": 1615.0,
         "duration_hours": 4.0,
@@ -2687,12 +2737,12 @@
           "bearing_set_heavy": "unit",
           "fastener_kit_medium": "kg"
         },
-        "recipe_run_id": "1f88a476-aef1-451d-95c8-a1fb8ff22b63",
+        "recipe_run_id": "eaf0af04-9a70-45d8-b4fb-86426cb2e35a",
         "step_index": 0,
         "energy_kwh": 1.5
       },
       {
-        "process_run_id": "8b755693-f139-4611-9e5c-8bc6b90223a1",
+        "process_run_id": "241b5609-ca5e-4071-9dc1-9642332ca739",
         "process_id": "assembly_basic_v0",
         "start_time": 1621.0,
         "duration_hours": 1.0,
@@ -2737,7 +2787,7 @@
           "control_compute_module_imported": "unit",
           "sensor_suite_general": "unit"
         },
-        "recipe_run_id": "01547f9a-cf88-4405-9b74-5e48476fedd2",
+        "recipe_run_id": "15a2994d-bb60-47af-bd2c-90b978736760",
         "step_index": 0,
         "energy_kwh": 0.0
       }
@@ -2746,13 +2796,13 @@
   },
   "orchestrator": {
     "recipe_runs": {
-      "f913e8ee-735b-40c9-95a6-d416e38b54d6": {
-        "recipe_run_id": "f913e8ee-735b-40c9-95a6-d416e38b54d6",
-        "recipe_id": "recipe_metal_alloy_bulk_v0",
-        "target_item_id": "metal_alloy_bulk",
+      "920aa2af-65a6-4dfe-b450-8f3126ead3d4": {
+        "recipe_run_id": "920aa2af-65a6-4dfe-b450-8f3126ead3d4",
+        "recipe_id": "recipe_regolith_metal_crude_v0",
+        "target_item_id": "regolith_metal_crude",
         "recipe_def": {
-          "id": "recipe_metal_alloy_bulk_v0",
-          "target_item_id": "metal_alloy_bulk",
+          "id": "recipe_regolith_metal_crude_v0",
+          "target_item_id": "regolith_metal_crude",
           "variant_id": "v0",
           "steps": [
             {
@@ -2845,12 +2895,6 @@
                   "qty": 38.0,
                   "unit": "kg",
                   "notes": null
-                },
-                {
-                  "item_id": "electrical_energy",
-                  "qty": 380.0,
-                  "unit": "kWh",
-                  "notes": null
                 }
               ],
               "outputs": [
@@ -2861,7 +2905,7 @@
                   "notes": null
                 },
                 {
-                  "item_id": "metal_alloy_bulk",
+                  "item_id": "regolith_metal_crude",
                   "qty": 22.8,
                   "unit": "kg",
                   "notes": null
@@ -2881,17 +2925,11 @@
               "qty": 100.0,
               "unit": "kg",
               "notes": null
-            },
-            {
-              "item_id": "electrical_energy",
-              "qty": 380.0,
-              "unit": "kWh",
-              "notes": null
             }
           ],
           "outputs": [
             {
-              "item_id": "metal_alloy_bulk",
+              "item_id": "regolith_metal_crude",
               "qty": 22.8,
               "unit": "kg",
               "notes": null
@@ -2933,8 +2971,8 @@
         "is_completed": true,
         "completed_at": 18.0
       },
-      "f32d20d9-d096-4be7-b458-bec828bfdaab": {
-        "recipe_run_id": "f32d20d9-d096-4be7-b458-bec828bfdaab",
+      "6f21c45a-5fab-4b57-8c81-50a4c77444d2": {
+        "recipe_run_id": "6f21c45a-5fab-4b57-8c81-50a4c77444d2",
         "recipe_id": "recipe_bearing_set_heavy_v0",
         "target_item_id": "bearing_set_heavy",
         "recipe_def": {
@@ -2948,7 +2986,7 @@
               "energy_model": null,
               "inputs": [
                 {
-                  "item_id": "metal_alloy_bulk",
+                  "item_id": "regolith_metal_crude",
                   "qty": 5.0,
                   "unit": "kg",
                   "notes": null
@@ -3053,7 +3091,7 @@
           ],
           "inputs": [
             {
-              "item_id": "metal_alloy_bulk",
+              "item_id": "regolith_metal_crude",
               "qty": 5.0,
               "unit": "kg",
               "notes": "High-carbon bearing steel"
@@ -3084,8 +3122,8 @@
         "is_completed": true,
         "completed_at": 31.5
       },
-      "9ccf24c1-71c6-4ac8-9a5e-332cfcf3c704": {
-        "recipe_run_id": "9ccf24c1-71c6-4ac8-9a5e-332cfcf3c704",
+      "826897d0-8d78-4e80-851f-52977493d394": {
+        "recipe_run_id": "826897d0-8d78-4e80-851f-52977493d394",
         "recipe_id": "recipe_cutting_tool_set_basic_v0",
         "target_item_id": "cutting_tool_set_basic",
         "recipe_def": {
@@ -3099,7 +3137,7 @@
               "energy_model": null,
               "inputs": [
                 {
-                  "item_id": "metal_alloy_bulk",
+                  "item_id": "regolith_metal_crude",
                   "qty": 27.0,
                   "unit": "kg",
                   "notes": null
@@ -3148,7 +3186,7 @@
           ],
           "inputs": [
             {
-              "item_id": "metal_alloy_bulk",
+              "item_id": "regolith_metal_crude",
               "qty": 27.0,
               "unit": "kg",
               "notes": null
@@ -3177,8 +3215,8 @@
         "is_completed": true,
         "completed_at": 56.5
       },
-      "a87acd0d-7392-497e-ac07-568ef73dc8da": {
-        "recipe_run_id": "a87acd0d-7392-497e-ac07-568ef73dc8da",
+      "33dcb32d-d1bc-4052-bd9f-7af7023a6578": {
+        "recipe_run_id": "33dcb32d-d1bc-4052-bd9f-7af7023a6578",
         "recipe_id": "recipe_regolith_carbonaceous_collection_v0",
         "target_item_id": "regolith_carbonaceous",
         "recipe_def": {
@@ -3231,8 +3269,8 @@
         "is_completed": true,
         "completed_at": 228.00360014400576
       },
-      "946a4e44-adac-4a8e-8503-708fe4d4d88e": {
-        "recipe_run_id": "946a4e44-adac-4a8e-8503-708fe4d4d88e",
+      "f55e9cee-6476-497a-9e42-9a9ff6d98f99": {
+        "recipe_run_id": "f55e9cee-6476-497a-9e42-9a9ff6d98f99",
         "recipe_id": "recipe_carbon_reductant_v0",
         "target_item_id": "carbon_reductant",
         "recipe_def": {
@@ -3310,8 +3348,8 @@
         "is_completed": true,
         "completed_at": 350.5
       },
-      "f2e2857a-5384-4f79-8d83-ba0062ea3c0b": {
-        "recipe_run_id": "f2e2857a-5384-4f79-8d83-ba0062ea3c0b",
+      "8d138514-1017-46f4-8068-177c9a06d0ff": {
+        "recipe_run_id": "8d138514-1017-46f4-8068-177c9a06d0ff",
         "recipe_id": "recipe_carbon_reducing_agent_v0",
         "target_item_id": "carbon_reducing_agent",
         "recipe_def": {
@@ -3378,8 +3416,8 @@
         "is_completed": true,
         "completed_at": 359.0
       },
-      "db84e45b-ff6c-4d7a-8c39-68a1d3de1a82": {
-        "recipe_run_id": "db84e45b-ff6c-4d7a-8c39-68a1d3de1a82",
+      "05ee6a56-8b46-4a56-ad59-785216954ce8": {
+        "recipe_run_id": "05ee6a56-8b46-4a56-ad59-785216954ce8",
         "recipe_id": "recipe_regolith_lunar_mare_v0",
         "target_item_id": "regolith_lunar_mare",
         "recipe_def": {
@@ -3432,8 +3470,8 @@
         "is_completed": true,
         "completed_at": 400.0
       },
-      "4a89a6ae-d956-4cee-a74a-0d4c5b1016d3": {
-        "recipe_run_id": "4a89a6ae-d956-4cee-a74a-0d4c5b1016d3",
+      "c315cf6d-e631-4249-8556-fb4932650b2e": {
+        "recipe_run_id": "c315cf6d-e631-4249-8556-fb4932650b2e",
         "recipe_id": "recipe_ilmenite_from_regolith_v0",
         "target_item_id": "iron_ore_or_ilmenite",
         "recipe_def": {
@@ -3513,8 +3551,8 @@
         "is_completed": true,
         "completed_at": 510.0
       },
-      "7b7ea248-df6f-4c17-baf5-499a3c521635": {
-        "recipe_run_id": "7b7ea248-df6f-4c17-baf5-499a3c521635",
+      "90d3abe7-fcc1-4546-b006-cc3b3ac46a1e": {
+        "recipe_run_id": "90d3abe7-fcc1-4546-b006-cc3b3ac46a1e",
         "recipe_id": "recipe_iron_pig_or_ingot_v0",
         "target_item_id": "iron_pig_or_ingot",
         "recipe_def": {
@@ -3596,8 +3634,8 @@
         "is_completed": true,
         "completed_at": 658.0
       },
-      "a00bde3f-0af6-4a73-a103-ed6b6fc7d2db": {
-        "recipe_run_id": "a00bde3f-0af6-4a73-a103-ed6b6fc7d2db",
+      "448cddcc-d0a2-42b1-87b4-7e56e0b6126c": {
+        "recipe_run_id": "448cddcc-d0a2-42b1-87b4-7e56e0b6126c",
         "recipe_id": "recipe_steel_ingot_v0",
         "target_item_id": "steel_ingot",
         "recipe_def": {
@@ -3705,8 +3743,8 @@
         "is_completed": true,
         "completed_at": 750.0
       },
-      "36454770-f5fa-4d33-86a8-16d5dc1e1b8e": {
-        "recipe_run_id": "36454770-f5fa-4d33-86a8-16d5dc1e1b8e",
+      "ce353e0e-98b7-4110-9ae0-680d526c9a0a": {
+        "recipe_run_id": "ce353e0e-98b7-4110-9ae0-680d526c9a0a",
         "recipe_id": "recipe_steel_stock_bar_or_billet_v0",
         "target_item_id": "steel_stock_bar_or_billet",
         "recipe_def": {
@@ -3772,8 +3810,8 @@
         "is_completed": true,
         "completed_at": 751.0
       },
-      "d17b352c-b369-4445-b369-6e17731edf07": {
-        "recipe_run_id": "d17b352c-b369-4445-b369-6e17731edf07",
+      "e0296a29-b28a-45ce-a044-622410e7853f": {
+        "recipe_run_id": "e0296a29-b28a-45ce-a044-622410e7853f",
         "recipe_id": "recipe_steel_bar_stock_v0",
         "target_item_id": "steel_bar_stock",
         "recipe_def": {
@@ -3782,7 +3820,7 @@
           "variant_id": null,
           "steps": [
             {
-              "process_id": "steel_bar_stock_rolling_v0",
+              "process_id": "steel_bar_stock_rolling_shop_v0",
               "time_model": null,
               "energy_model": null,
               "inputs": [
@@ -3840,8 +3878,8 @@
         "is_completed": true,
         "completed_at": 781.0
       },
-      "0f335fa2-47da-4a26-ac53-c9bc7f085b06": {
-        "recipe_run_id": "0f335fa2-47da-4a26-ac53-c9bc7f085b06",
+      "b2f7165d-0940-45d9-9fc2-983d466d4225": {
+        "recipe_run_id": "b2f7165d-0940-45d9-9fc2-983d466d4225",
         "recipe_id": "recipe_bearing_ball_steel_v0",
         "target_item_id": "bearing_ball_steel",
         "recipe_def": {
@@ -3908,8 +3946,8 @@
         "is_completed": true,
         "completed_at": 821.0
       },
-      "ae82be34-600b-4ef0-9cb3-7a508af486aa": {
-        "recipe_run_id": "ae82be34-600b-4ef0-9cb3-7a508af486aa",
+      "4fec52e1-ad7f-43fc-bf21-f9c5c79120f5": {
+        "recipe_run_id": "4fec52e1-ad7f-43fc-bf21-f9c5c79120f5",
         "recipe_id": "recipe_ball_screw_assembly_v0",
         "target_item_id": "ball_screw_assembly",
         "recipe_def": {
@@ -3989,8 +4027,8 @@
         "is_completed": true,
         "completed_at": 825.0
       },
-      "94a06173-6b37-4b85-bb1b-81855ce4550e": {
-        "recipe_run_id": "94a06173-6b37-4b85-bb1b-81855ce4550e",
+      "a4f79d74-b17b-4148-92a5-f2247d8f04fa": {
+        "recipe_run_id": "a4f79d74-b17b-4148-92a5-f2247d8f04fa",
         "recipe_id": "recipe_bolt_hex_medium_steel_v0",
         "target_item_id": "bolt_hex_medium_steel",
         "recipe_def": {
@@ -4085,8 +4123,8 @@
         "is_completed": true,
         "completed_at": 830.0
       },
-      "4760074c-d587-4026-8d60-80a616a66220": {
-        "recipe_run_id": "4760074c-d587-4026-8d60-80a616a66220",
+      "1ffa501a-b4db-4b21-9736-aca425821aed": {
+        "recipe_run_id": "1ffa501a-b4db-4b21-9736-aca425821aed",
         "recipe_id": "recipe_nut_hex_medium_steel_v0",
         "target_item_id": "nut_hex_medium_steel",
         "recipe_def": {
@@ -4152,8 +4190,8 @@
         "is_completed": true,
         "completed_at": 852.5
       },
-      "14979277-7e74-470d-ba2b-9779f18e8cf7": {
-        "recipe_run_id": "14979277-7e74-470d-ba2b-9779f18e8cf7",
+      "cc787333-4670-42cd-b13e-90289b0a1cee": {
+        "recipe_run_id": "cc787333-4670-42cd-b13e-90289b0a1cee",
         "recipe_id": "recipe_steel_sheet_1mm_v0",
         "target_item_id": "steel_sheet_1mm",
         "recipe_def": {
@@ -4223,8 +4261,8 @@
         "is_completed": true,
         "completed_at": 850.25
       },
-      "5f1cfdfd-476d-4b47-bb20-246c26b70f8d": {
-        "recipe_run_id": "5f1cfdfd-476d-4b47-bb20-246c26b70f8d",
+      "e07d6275-e9e3-4098-9c33-c11f8ccc932e": {
+        "recipe_run_id": "e07d6275-e9e3-4098-9c33-c11f8ccc932e",
         "recipe_id": "recipe_washer_flat_medium_steel_v0",
         "target_item_id": "washer_flat_medium_steel",
         "recipe_def": {
@@ -4283,8 +4321,8 @@
         "is_completed": true,
         "completed_at": 851.75
       },
-      "bc780af8-d93e-42a5-bdd8-5fd869f5dba3": {
-        "recipe_run_id": "bc780af8-d93e-42a5-bdd8-5fd869f5dba3",
+      "408ad453-bd0d-40c1-bf77-4d177040648f": {
+        "recipe_run_id": "408ad453-bd0d-40c1-bf77-4d177040648f",
         "recipe_id": "recipe_washer_lock_medium_steel_v0",
         "target_item_id": "washer_lock_medium_steel",
         "recipe_def": {
@@ -4397,8 +4435,8 @@
         "is_completed": true,
         "completed_at": 852.2025
       },
-      "7f373022-522e-4ce5-b71f-49d16b1675f2": {
-        "recipe_run_id": "7f373022-522e-4ce5-b71f-49d16b1675f2",
+      "4be38b95-4e69-47cb-936d-2c01db32b9d0": {
+        "recipe_run_id": "4be38b95-4e69-47cb-936d-2c01db32b9d0",
         "recipe_id": "recipe_fastener_kit_medium_assembly_v0",
         "target_item_id": "fastener_kit_medium",
         "recipe_def": {
@@ -4500,8 +4538,8 @@
         "is_completed": true,
         "completed_at": 854.0
       },
-      "79f13189-98cd-498c-a1fa-f4b5bb1d2650": {
-        "recipe_run_id": "79f13189-98cd-498c-a1fa-f4b5bb1d2650",
+      "5233b992-c04e-4f55-9567-c232d8b5f190": {
+        "recipe_run_id": "5233b992-c04e-4f55-9567-c232d8b5f190",
         "recipe_id": "recipe_regolith_lunar_mare_v0",
         "target_item_id": "regolith_lunar_mare",
         "recipe_def": {
@@ -4553,8 +4591,8 @@
         "is_completed": true,
         "completed_at": 855.0
       },
-      "97040126-06a8-4660-89a2-60b8c07b4749": {
-        "recipe_run_id": "97040126-06a8-4660-89a2-60b8c07b4749",
+      "83f03f2e-d25a-4ae5-a896-8dc7ca68158d": {
+        "recipe_run_id": "83f03f2e-d25a-4ae5-a896-8dc7ca68158d",
         "recipe_id": "recipe_ilmenite_from_regolith_v0",
         "target_item_id": "iron_ore_or_ilmenite",
         "recipe_def": {
@@ -4634,8 +4672,8 @@
         "is_completed": true,
         "completed_at": 939.0
       },
-      "d6709b90-5dd8-42dd-9b3b-071463ab1dcb": {
-        "recipe_run_id": "d6709b90-5dd8-42dd-9b3b-071463ab1dcb",
+      "6d456849-c873-4d41-a65a-d26c8abc3459": {
+        "recipe_run_id": "6d456849-c873-4d41-a65a-d26c8abc3459",
         "recipe_id": "recipe_iron_metal_pure_v0",
         "target_item_id": "iron_metal_pure",
         "recipe_def": {
@@ -4702,8 +4740,8 @@
         "is_completed": true,
         "completed_at": 989.0
       },
-      "2fdbfd08-7e51-49da-9e73-fed6930bb6f9": {
-        "recipe_run_id": "2fdbfd08-7e51-49da-9e73-fed6930bb6f9",
+      "414d182a-a44b-431a-8997-736c80588d5e": {
+        "recipe_run_id": "414d182a-a44b-431a-8997-736c80588d5e",
         "recipe_id": "recipe_milling_table_v0",
         "target_item_id": "milling_table",
         "recipe_def": {
@@ -4873,8 +4911,8 @@
         "is_completed": true,
         "completed_at": 1006.0013501350135
       },
-      "72e9f65f-def5-43c8-b9d7-e7930fc74d42": {
-        "recipe_run_id": "72e9f65f-def5-43c8-b9d7-e7930fc74d42",
+      "7cca2396-19e4-4fff-ad37-d35cd5b3a2cf": {
+        "recipe_run_id": "7cca2396-19e4-4fff-ad37-d35cd5b3a2cf",
         "recipe_id": "recipe_regolith_lunar_highlands_v0",
         "target_item_id": "regolith_lunar_highlands",
         "recipe_def": {
@@ -4927,8 +4965,8 @@
         "is_completed": true,
         "completed_at": 1089.35
       },
-      "a65ff2b6-46fb-471b-b5e4-f0ac4ee39114": {
-        "recipe_run_id": "a65ff2b6-46fb-471b-b5e4-f0ac4ee39114",
+      "bedabc86-52cb-4a39-814d-f5dd578d1aa7": {
+        "recipe_run_id": "bedabc86-52cb-4a39-814d-f5dd578d1aa7",
         "recipe_id": "recipe_silicon_metal_from_regolith_carbothermic_v0",
         "target_item_id": "silicon_metal_v0",
         "recipe_def": {
@@ -5011,8 +5049,8 @@
         "is_completed": true,
         "completed_at": 1094.5
       },
-      "6f323b27-ab86-4068-b71a-2ac5c5a5dcc2": {
-        "recipe_run_id": "6f323b27-ab86-4068-b71a-2ac5c5a5dcc2",
+      "877d01dd-1569-42cd-a387-bb5dabad627f": {
+        "recipe_run_id": "877d01dd-1569-42cd-a387-bb5dabad627f",
         "recipe_id": "recipe_silicon_powder_v0",
         "target_item_id": "silicon_powder_v0",
         "recipe_def": {
@@ -5079,8 +5117,8 @@
         "is_completed": true,
         "completed_at": 1097.0
       },
-      "aaaf6124-2094-4c11-874d-ebf69f1bf15a": {
-        "recipe_run_id": "aaaf6124-2094-4c11-874d-ebf69f1bf15a",
+      "250eb1e9-8c21-451d-bb1f-6824a26859d9": {
+        "recipe_run_id": "250eb1e9-8c21-451d-bb1f-6824a26859d9",
         "recipe_id": "recipe_silicone_precursor_v0",
         "target_item_id": "silicone_precursor",
         "recipe_def": {
@@ -5163,8 +5201,8 @@
         "is_completed": true,
         "completed_at": 1100.0
       },
-      "d7745cb1-77e7-4cc5-925d-ed2fc1f3f5a8": {
-        "recipe_run_id": "d7745cb1-77e7-4cc5-925d-ed2fc1f3f5a8",
+      "2e3be1fd-a437-4504-8053-bc612ec7eb77": {
+        "recipe_run_id": "2e3be1fd-a437-4504-8053-bc612ec7eb77",
         "recipe_id": "recipe_silicone_polymer_v0",
         "target_item_id": "silicone_polymer",
         "recipe_def": {
@@ -5231,8 +5269,8 @@
         "is_completed": true,
         "completed_at": 1104.0
       },
-      "b9a44058-e93f-4ec1-acd9-9061e285ada8": {
-        "recipe_run_id": "b9a44058-e93f-4ec1-acd9-9061e285ada8",
+      "ce615ba0-bab9-4295-a685-b79d2c324107": {
+        "recipe_run_id": "ce615ba0-bab9-4295-a685-b79d2c324107",
         "recipe_id": "recipe_coil_insulation_material_v0",
         "target_item_id": "coil_insulation_material",
         "recipe_def": {
@@ -5299,8 +5337,8 @@
         "is_completed": true,
         "completed_at": 1105.0
       },
-      "8f6a3241-87cf-48d7-b161-a5c1946ff782": {
-        "recipe_run_id": "8f6a3241-87cf-48d7-b161-a5c1946ff782",
+      "90f15a68-a3a9-44ab-ab8b-d319a18c125a": {
+        "recipe_run_id": "90f15a68-a3a9-44ab-ab8b-d319a18c125a",
         "recipe_id": "recipe_regolith_lunar_mare_v0",
         "target_item_id": "regolith_lunar_mare",
         "recipe_def": {
@@ -5352,8 +5390,8 @@
         "is_completed": true,
         "completed_at": 1107.0
       },
-      "36c265ec-1c6e-4ae1-b3a2-763e3c3511a2": {
-        "recipe_run_id": "36c265ec-1c6e-4ae1-b3a2-763e3c3511a2",
+      "78c41331-ffd2-48ee-8ece-f91a49a68135": {
+        "recipe_run_id": "78c41331-ffd2-48ee-8ece-f91a49a68135",
         "recipe_id": "recipe_ilmenite_from_regolith_v0",
         "target_item_id": "iron_ore_or_ilmenite",
         "recipe_def": {
@@ -5433,8 +5471,8 @@
         "is_completed": true,
         "completed_at": 1207.0
       },
-      "2e601a58-a201-467d-a50f-8f244bffd4da": {
-        "recipe_run_id": "2e601a58-a201-467d-a50f-8f244bffd4da",
+      "d11744c8-fe05-4811-bd4e-bbf50ad1c571": {
+        "recipe_run_id": "d11744c8-fe05-4811-bd4e-bbf50ad1c571",
         "recipe_id": "recipe_iron_metal_pure_v0",
         "target_item_id": "iron_metal_pure",
         "recipe_def": {
@@ -5501,8 +5539,8 @@
         "is_completed": true,
         "completed_at": 1277.0
       },
-      "67f7eaa7-e596-4b7c-93e1-03382c38ac11": {
-        "recipe_run_id": "67f7eaa7-e596-4b7c-93e1-03382c38ac11",
+      "5ecda4f4-4e48-4562-bf79-9c650a8f04d6": {
+        "recipe_run_id": "5ecda4f4-4e48-4562-bf79-9c650a8f04d6",
         "recipe_id": "recipe_electrical_steel_sheet_v0",
         "target_item_id": "electrical_steel_sheet",
         "recipe_def": {
@@ -5581,8 +5619,8 @@
         "is_completed": true,
         "completed_at": 1517.0
       },
-      "68019db6-760f-4138-9f51-1443ad691e43": {
-        "recipe_run_id": "68019db6-760f-4138-9f51-1443ad691e43",
+      "8dc849e7-7982-42c1-afad-a7456e771d62": {
+        "recipe_run_id": "8dc849e7-7982-42c1-afad-a7456e771d62",
         "recipe_id": "recipe_motor_housing_steel_v0",
         "target_item_id": "motor_housing_steel",
         "recipe_def": {
@@ -5661,8 +5699,8 @@
         "is_completed": true,
         "completed_at": 1538.0
       },
-      "9b01c4dc-7103-4c13-9211-32d01a98ca2f": {
-        "recipe_run_id": "9b01c4dc-7103-4c13-9211-32d01a98ca2f",
+      "c0feb7b8-8d7c-48b8-af90-f28216ab722b": {
+        "recipe_run_id": "c0feb7b8-8d7c-48b8-af90-f28216ab722b",
         "recipe_id": "recipe_motor_shaft_steel_v0",
         "target_item_id": "motor_shaft_steel",
         "recipe_def": {
@@ -5790,8 +5828,8 @@
         "is_completed": true,
         "completed_at": 1544.3801380138013
       },
-      "5c3e2ed5-ccce-4f9e-bd0d-3330c7b3d113": {
-        "recipe_run_id": "5c3e2ed5-ccce-4f9e-bd0d-3330c7b3d113",
+      "f8638ec3-5aea-4c24-93f4-b89b1f3228b0": {
+        "recipe_run_id": "f8638ec3-5aea-4c24-93f4-b89b1f3228b0",
         "recipe_id": "recipe_aluminum_wire_v0",
         "target_item_id": "aluminum_wire",
         "recipe_def": {
@@ -5805,7 +5843,7 @@
               "energy_model": null,
               "inputs": [
                 {
-                  "item_id": "metal_alloy_bulk",
+                  "item_id": "regolith_metal_crude",
                   "qty": 1.0,
                   "unit": "kg",
                   "notes": null
@@ -5835,7 +5873,7 @@
           ],
           "inputs": [
             {
-              "item_id": "metal_alloy_bulk",
+              "item_id": "regolith_metal_crude",
               "qty": 1.0,
               "unit": "kg",
               "notes": null
@@ -5858,7 +5896,7 @@
           "alternatives": [],
           "dedupe_candidate": null,
           "assumptions": null,
-          "notes": "Placeholder recipe: produces aluminum_wire from metal_alloy_bulk via wire_drawing_aluminum_v0 (ISRU metal -> wire + scrap).",
+          "notes": "Placeholder recipe: produces aluminum_wire from regolith_metal_crude via wire_drawing_aluminum_v0 (ISRU metal -> wire + scrap).",
           "kind": "recipe"
         },
         "started_at": 1545.0,
@@ -5870,8 +5908,8 @@
         "is_completed": true,
         "completed_at": 1546.0
       },
-      "4e786975-b4ba-4726-ac63-66b283e18d4c": {
-        "recipe_run_id": "4e786975-b4ba-4726-ac63-66b283e18d4c",
+      "12844f43-1eae-487a-b158-eb028c715c30": {
+        "recipe_run_id": "12844f43-1eae-487a-b158-eb028c715c30",
         "recipe_id": "recipe_stator_rotor_lamination_set_v0",
         "target_item_id": "stator_rotor_lamination_set",
         "recipe_def": {
@@ -5944,8 +5982,8 @@
         "is_completed": true,
         "completed_at": 1562.0
       },
-      "fa11ba56-4ff1-419f-9959-0453f8ad4f93": {
-        "recipe_run_id": "fa11ba56-4ff1-419f-9959-0453f8ad4f93",
+      "ebc81963-0e9a-4de6-b825-6a6532e2fb1a": {
+        "recipe_run_id": "ebc81963-0e9a-4de6-b825-6a6532e2fb1a",
         "recipe_id": "recipe_motor_coil_wound_v0",
         "target_item_id": "motor_coil_wound",
         "recipe_def": {
@@ -6036,8 +6074,8 @@
         "is_completed": true,
         "completed_at": 1566.0
       },
-      "1f88a476-aef1-451d-95c8-a1fb8ff22b63": {
-        "recipe_run_id": "1f88a476-aef1-451d-95c8-a1fb8ff22b63",
+      "eaf0af04-9a70-45d8-b4fb-86426cb2e35a": {
+        "recipe_run_id": "eaf0af04-9a70-45d8-b4fb-86426cb2e35a",
         "recipe_id": "recipe_drive_motor_medium_assembly_only_v0",
         "target_item_id": "drive_motor_medium",
         "recipe_def": {
@@ -6163,8 +6201,8 @@
         "is_completed": true,
         "completed_at": 1619.0
       },
-      "01547f9a-cf88-4405-9b74-5e48476fedd2": {
-        "recipe_run_id": "01547f9a-cf88-4405-9b74-5e48476fedd2",
+      "15a2994d-bb60-47af-bd2c-90b978736760": {
+        "recipe_run_id": "15a2994d-bb60-47af-bd2c-90b978736760",
         "recipe_id": "recipe_machine_milling_machine_general_v0",
         "target_item_id": "milling_machine_general_v0",
         "recipe_def": {
@@ -6362,12 +6400,12 @@
       "stamping_press_basic": 1.0,
       "coil_winding_machine": 1.0,
       "generic_chemical_reactor_v0": 1.0,
-      "chemical_reactor_unit_v0": 1.0,
-      "forge_or_induction_heater_v0": 1.0,
+      "chemical_reactor_basic": 1.0,
+      "induction_forge_v0": 1.0,
       "power_hammer_or_press": 1.0,
       "anvil_or_die_set": 1.0,
       "forging_press_v0": 1.0,
-      "press_brake_v0": 1.0,
+      "press_brake": 1.0,
       "cnc_mill": 1.0,
       "cutting_tools_general": 1.0,
       "plate_rolling_mill": 1.0,

@@ -14,7 +14,7 @@ inputs:
     unit: unit
   - item_id: insulation_thermal_blanket
     qty: 1
-    unit: unit
+    unit: kg
   - item_id: furnace_door_assembly
     qty: 1
     unit: unit
@@ -32,8 +32,8 @@ inputs:
     unit: unit
 outputs:
   - item_id: heating_furnace
-    qty: 800.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: sheet_metal_forming_v0
     inputs:
@@ -76,7 +76,7 @@ steps:
         unit: unit
       - item_id: insulation_thermal_blanket
         qty: 1
-        unit: unit
+        unit: kg
       - item_id: furnace_door_assembly
         qty: 1
         unit: unit
@@ -93,23 +93,11 @@ steps:
         qty: 1
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 800.0
-        unit: kg
+      - item_id: heating_furnace
+        qty: 1.0
+        unit: unit
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install heating elements, temperature controller, door, and insulation"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 800.0
-        unit: kg
-    outputs:
-      - item_id: heating_furnace
-        qty: 800.0
-        unit: kg
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Test heating performance, temperature uniformity, and controller operation"
 assumptions: Electric resistance furnace with refractory lining for temperatures up to 1200°C. Suitable for metal melting, heat treatment, and ceramic firing.
 notes: Base heating furnace assembly v0 aligned with furnace_basic_v0 and heating_furnace_module patterns.

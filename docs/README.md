@@ -32,6 +32,7 @@ These documents are **mandatory prerequisites** for contributing to the knowledg
 ## Additional Required Reading
 - `design/build_v0.md` (pipeline/queue/index design)
 - `README.md` (repo layout + commands)
+ - `docs/mold_migration_notes.md` (note on migrating to part-specific mold tooling)
 
 ## Before Creating Parts or BOMs: Check Inventory First
 

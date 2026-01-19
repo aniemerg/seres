@@ -229,7 +229,7 @@ python -m src.cli sim advance-time --sim-id $SIM_ID --hours 10
 **Goal**: Demonstrate self-sufficiency from regolith
 **Initial imports**:
 - `labor_bot_general_v0` × 1
-- Critical machines: `press_brake_v0`, `stamping_press_basic`, etc.
+- Critical machines: `press_brake`, `stamping_press_basic`, etc.
 - Minimal consumables for first-generation parts
 
 ---
@@ -265,10 +265,10 @@ To replay/analyze an existing simulation:
 
 ```bash
 # View simulation summary
-python tools/analyze_simulations.py claude_base_001
+python scripts/analysis/analyze_simulations.py claude_base_001
 
 # Generate full report for all simulations
-python tools/analyze_simulations.py
+python scripts/analysis/analyze_simulations.py
 
 # View simulation events
 cat simulations/claude_base_001/events.jsonl | python -m json.tool

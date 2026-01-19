@@ -3,7 +3,7 @@ target_item_id: fastener_kit_medium
 variant_id: v0
 
 inputs:
-  - item_id: metal_alloy_bulk
+  - item_id: steel_stock
     qty: 2.0
     unit: kg
 outputs:
@@ -14,7 +14,7 @@ outputs:
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
-      - item_id: metal_alloy_bulk
+      - item_id: steel_stock
         qty: 2.0
         unit: kg
     outputs:
@@ -84,7 +84,7 @@ assumptions: |
   - Heat treat for strength and spring properties
   - Final inspection and kitting
 
-  Input materials: 2.0 kg metal_alloy_bulk
+  Input materials: 2.0 kg steel_stock
   Output: 1.0 kg complete fastener kit per BOM specification
   Scrap rate: ~50% from casting/machining losses (conservative placeholder)
 
