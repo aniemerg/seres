@@ -122,12 +122,6 @@ Commentary: produce regolith-derived metal and fasteners for a second assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
@@ -209,7 +203,7 @@ Commentary: build local steel stock, leadscrew/feed system, and coolant subassem
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

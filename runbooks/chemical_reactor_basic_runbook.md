@@ -207,52 +207,52 @@ Commentary: produce steel plate locally from regolith-derived steel ingots.
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_lunar_mare_v0
-    quantity: 10
+    quantity: 12
 - cmd: sim.advance-time
   args:
-    hours: 20
+    hours: 25
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_carbonaceous_collection_v0
-    quantity: 80
-- cmd: sim.advance-time
-  args:
-    hours: 600
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_carbon_reductant_v0
-    quantity: 362
-- cmd: sim.advance-time
-  args:
-    hours: 600
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_carbon_reducing_agent_v0
-    quantity: 105
-- cmd: sim.advance-time
-  args:
-    hours: 240
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 700
-- cmd: sim.advance-time
-  args:
-    hours: 800
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 210
+    quantity: 120
 - cmd: sim.advance-time
   args:
     hours: 900
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_carbon_reductant_v0
+    quantity: 600
+- cmd: sim.advance-time
+  args:
+    hours: 900
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_carbon_reducing_agent_v0
+    quantity: 170
+- cmd: sim.advance-time
+  args:
+    hours: 400
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_ilmenite_from_regolith_v0
+    quantity: 1120
+- cmd: sim.advance-time
+  args:
+    hours: 1220
+- cmd: sim.run-recipe
+  args:
+    recipe: recipe_iron_pig_or_ingot_v0
+    quantity: 335
+- cmd: sim.advance-time
+  args:
+    hours: 1400
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_ingot_v0
     quantity: 315
 - cmd: sim.advance-time
   args:
-    hours: 700
+    hours: 1000
 - cmd: sim.run-recipe
   args:
     recipe: recipe_steel_plate_or_sheet_v0

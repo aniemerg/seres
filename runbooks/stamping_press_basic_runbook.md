@@ -179,6 +179,12 @@ Commentary: Produce regolith metal locally and replace selected imports (piping,
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: furnace_basic
     quantity: 1
     unit: unit

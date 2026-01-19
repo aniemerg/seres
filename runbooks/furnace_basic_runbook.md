@@ -150,13 +150,13 @@ Commentary: Produce steel plate and stock from regolith (ore + carbon chain), th
     ensure: true
 - cmd: sim.import
   args:
-    item: heating_furnace
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: heating_furnace
     quantity: 1
     unit: unit
     ensure: true

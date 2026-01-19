@@ -204,7 +204,7 @@ Need significant quantities: ~25 kg tool steel for shear blade, ~5 kg steel for 
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -240,6 +240,12 @@ Goal: Build `controlled_atmosphere_chamber` and replace the chamber shell feedst
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
 - cmd: sim.note
   args:
     style: info

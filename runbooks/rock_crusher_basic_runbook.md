@@ -47,7 +47,7 @@ Commentary: import equipment needed to mine regolith and process steel locally.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -125,13 +125,7 @@ Commentary: import equipment needed to mine regolith and process steel locally.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

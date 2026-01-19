@@ -263,24 +263,24 @@ Goal: build `drill_press` with an import baseline, then rebuild with an ISRU mac
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_metal_crude_v0
-    quantity: 3
+    quantity: 7
 - cmd: sim.advance-time
   args:
     hours: 120
 - cmd: sim.run-recipe
   args:
     recipe: recipe_molten_material_or_preform_v0
-    quantity: 50
+    quantity: 150
 - cmd: sim.advance-time
   args:
-    hours: 150
+    hours: 350
 - cmd: sim.run-recipe
   args:
     recipe: recipe_machine_column_cast_v0
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 80
+    hours: 120
 ```
 
 ## Final assembly with ISRU column

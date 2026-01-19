@@ -438,7 +438,7 @@ Produce regolith_metal_crude via MRE and build reactor components locally.
     message: "Building fasteners first (needed for power bus)"
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

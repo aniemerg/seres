@@ -58,7 +58,7 @@ Commentary: Produce steel plate and mesh stock in-situ for the frame and screen.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -96,6 +96,12 @@ Commentary: Produce sheet_metal_or_structural_steel (220 kg) from regolith metal
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: press_brake
     quantity: 1
     unit: unit

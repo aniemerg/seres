@@ -111,10 +111,10 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_lunar_mare_v0
-    quantity: 500
+    quantity: 2
 - cmd: sim.advance-time
   args:
-    hours: 70
+    hours: 2
 ```
 
 ## Iron production chain
@@ -145,10 +145,10 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
 - cmd: sim.run-recipe
   args:
     recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 120
+    quantity: 150
 - cmd: sim.advance-time
   args:
-    hours: 100
+    hours: 150
 - cmd: sim.note
   args:
     style: info
@@ -156,24 +156,24 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
 - cmd: sim.run-recipe
   args:
     recipe: recipe_regolith_carbonaceous_collection_v0
-    quantity: 30
+    quantity: 16
 - cmd: sim.advance-time
   args:
-    hours: 50
+    hours: 100
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reductant_v0
-    quantity: 25
+    quantity: 78
 - cmd: sim.advance-time
   args:
-    hours: 50
+    hours: 120
 - cmd: sim.run-recipe
   args:
     recipe: recipe_carbon_reducing_agent_v0
-    quantity: 25
+    quantity: 22.5
 - cmd: sim.advance-time
   args:
-    hours: 50
+    hours: 45
 - cmd: sim.note
   args:
     style: milestone
@@ -193,7 +193,7 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 50
+    quantity: 45
 - cmd: sim.advance-time
   args:
     hours: 250
@@ -267,12 +267,6 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
     hours: 150
 - cmd: sim.import
   args:
-    item: lathe_engine_v0
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
@@ -285,7 +279,25 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
     ensure: true
 - cmd: sim.import
   args:
-    item: forge_or_induction_heater_v0
+    item: induction_forge_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: furnace_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cnc_mill
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: grinding_wheels
     quantity: 1
     unit: unit
     ensure: true
@@ -368,6 +380,12 @@ Commentary: Produce the lathe bed from local iron (via regolith → ilmenite →
 - cmd: sim.import
   args:
     item: safety_guard_steel_mesh
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
     quantity: 1
     unit: unit
     ensure: true

@@ -475,6 +475,12 @@ Commentary: Import sensors and control modules (no ISRU recipes available). Asse
     message: "ISRU Phase 5: Import electronics and assemble quench_tank."
 - cmd: sim.import
   args:
+    item: tank_lid_and_basket
+    quantity: 7
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: level_sensor_basic
     quantity: 5
     unit: kg
@@ -513,7 +519,7 @@ Commentary: Import sensors and control modules (no ISRU recipes available). Asse
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 10
+    hours: 70
 - cmd: sim.note
   args:
     style: milestone

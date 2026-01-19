@@ -56,6 +56,12 @@ Goal: Build `pyrolysis_chamber_v0` and replace fasteners with an ISRU chain in-p
     ensure: true
 - cmd: sim.import
   args:
+    item: rolling_mill_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: drill_press
     quantity: 1
     unit: unit
@@ -213,6 +219,12 @@ Goal: Build `pyrolysis_chamber_v0` and replace fasteners with an ISRU chain in-p
 - cmd: sim.import
   args:
     item: cutting_tools_general
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -77,7 +77,7 @@ Commentary: Need 63 kg steel_plate_or_sheet for structural_frame_large (60 kg fi
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -95,7 +95,7 @@ Commentary: Need 63 kg steel_plate_or_sheet for structural_frame_large (60 kg fi
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -388,7 +388,7 @@ Commentary: Convert steel_ingot to steel_plate_or_sheet, then manufacture struct
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

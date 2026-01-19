@@ -134,7 +134,7 @@ Commentary: Produce steel_plate_or_sheet locally for the furnace shell from rego
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -256,11 +256,6 @@ Commentary: Produce steel_plate_or_sheet locally for the furnace shell from rego
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.import
-  args:
-    item: refractory_brick_set
-    quantity: 1
-    unit: unit
 - cmd: sim.import
   args:
     item: fastener_kit_large

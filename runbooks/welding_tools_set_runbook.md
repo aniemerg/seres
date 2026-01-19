@@ -92,12 +92,6 @@ Commentary: Produce steel plate, fasteners, and machined parts from regolith-der
     ensure: true
 - cmd: sim.import
   args:
-    item: calibration_standards
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: measurement_equipment
     quantity: 1
     unit: unit
@@ -188,7 +182,7 @@ Commentary: Produce steel plate, fasteners, and machined parts from regolith-der
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

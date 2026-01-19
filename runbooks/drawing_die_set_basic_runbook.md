@@ -65,7 +65,7 @@ Commentary: Produce machined_part_raw (5 kg) from regolith metal, then fabricate
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -65,9 +65,9 @@ Commentary: import all parts and tooling to validate the recipe once.
     ensure: true
 - cmd: sim.import
   args:
-    item: calibration_standards
+    item: calibration_artifacts
     quantity: 1
-    unit: unit
+    unit: kit
     ensure: true
 - cmd: sim.import
   args:
@@ -238,7 +238,7 @@ Commentary: import tooling and MRE equipment, then produce metal alloy bulk loca
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -268,9 +268,9 @@ Commentary: import tooling and MRE equipment, then produce metal alloy bulk loca
     ensure: true
 - cmd: sim.import
   args:
-    item: calibration_standards
+    item: calibration_artifacts
     quantity: 1
-    unit: unit
+    unit: kit
     ensure: true
 - cmd: sim.import
   args:
@@ -363,6 +363,12 @@ Commentary: use local alloy for gauge blocks and fasteners; machine parts from s
   args:
     item: steel_bar_stock
     quantity: 8
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: steel_stock
+    quantity: 5
     unit: kg
     ensure: true
 - cmd: sim.import

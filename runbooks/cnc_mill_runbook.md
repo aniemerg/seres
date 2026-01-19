@@ -157,7 +157,7 @@ Commentary: import all inputs and tooling to validate the recipe once.
   args:
     item: cutting_fluid
     quantity: 10
-    unit: L
+    unit: kg
     ensure: true
 - cmd: sim.import
   args:
@@ -230,6 +230,78 @@ Commentary: import all inputs and tooling to validate the recipe once.
     item: fastener_kit_medium
     quantity: 1
     unit: kit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: furnace_basic
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: casting_mold_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_power_supply_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_tools_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fixturing_workbench
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: welding_consumables
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: soldering_station
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: wire_crimping_tools
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: alignment_tools
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: precision_levels
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: test_bench_electrical
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: measurement_equipment
+    quantity: 1
+    unit: unit
     ensure: true
 - cmd: sim.run-recipe
   args:
@@ -425,7 +497,7 @@ cast the mill shell locally. Remaining components are imported for now.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -812,6 +884,96 @@ cast the mill shell locally. Remaining components are imported for now.
     item: coolant_pump_system
     quantity: 1
     unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: iron_metal_pure
+    quantity: 800
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: steel_stock
+    quantity: 200
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cutting_fluid
+    quantity: 10
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: cut_parts
+    quantity: 400
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: filler_wire_basic
+    quantity: 20
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: electrical_wire_and_connectors
+    quantity: 20
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: electronic_components_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: structural_steel_frame
+    quantity: 400
+    unit: kg
+    ensure: true
+- cmd: sim.import
+  args:
+    item: linear_guide_rails
+    quantity: 4
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: ball_screw_assembly
+    quantity: 3
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: spindle_drive_motor_small
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: motor_electric_medium
+    quantity: 3
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: control_panel_assembly_v0
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: power_supply_low_voltage
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
+    item: fastener_kit_medium
+    quantity: 1
+    unit: kit
     ensure: true
 - cmd: sim.run-recipe
   args:

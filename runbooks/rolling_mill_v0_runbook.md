@@ -154,7 +154,7 @@ Goal: Build `rolling_mill_v0` with maximum ISRU using regolith-derived metal.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

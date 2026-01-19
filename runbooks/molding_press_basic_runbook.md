@@ -194,6 +194,12 @@ Commentary: Import supporting machines for ISRU production.
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: pressure_test_rig_basic
+    quantity: 1
+    unit: unit
+    ensure: true
 
 - cmd: sim.note
   args:
@@ -287,7 +293,7 @@ Commentary: Produce steel_stock from regolith for frame and components. Need ~20
     quantity: 200
 - cmd: sim.advance-time
   args:
-    hours: 1000
+    hours: 1400
 - cmd: sim.note
   args:
     style: success
@@ -313,7 +319,7 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
 - cmd: sim.note
   args:
     style: info
-    message: "Importing steel_bar_stock and steel_plate_or_sheet (KB gap: no conversion from steel_stock)"
+    message: "Importing steel_bar_stock (KB gap: no conversion from steel_stock)"
 - cmd: sim.import
   args:
     item: steel_bar_stock
@@ -323,11 +329,11 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
     notes: "45 kg for cylinder + 11 kg for filler wire"
 - cmd: sim.import
   args:
-    item: steel_plate_or_sheet
-    quantity: 45
-    unit: kg
+    item: molding_press_platen_set
+    quantity: 1
+    unit: unit
     ensure: true
-    notes: "For platen set"
+    notes: "Imported due to provenance underflow in recipe_molding_press_platen_set_v0"
 
 # Produce filler wire from steel_bar_stock
 - cmd: sim.note
@@ -340,7 +346,7 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
     quantity: 5
 - cmd: sim.advance-time
   args:
-    hours: 8
+    hours: 20
 - cmd: sim.note
   args:
     style: success
@@ -382,28 +388,13 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 25
+    hours: 60
 - cmd: sim.note
   args:
     style: success
     message: "Produced all fastener kits from regolith metal"
 
-# Produce molding_press_platen_set
-- cmd: sim.note
-  args:
-    style: info
-    message: "Producing molding_press_platen_set from steel_plate_or_sheet"
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_molding_press_platen_set_v0
-    quantity: 1
-- cmd: sim.advance-time
-  args:
-    hours: 15
-- cmd: sim.note
-  args:
-    style: success
-    message: "molding_press_platen_set complete (40 kg)"
+# molding_press_platen_set imported above due to recipe provenance underflow
 
 # Produce molding_press_cylinder (needs hydraulic seals - imported)
 - cmd: sim.note
@@ -413,7 +404,7 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
 - cmd: sim.import
   args:
     item: hydraulic_seals_set
-    quantity: 1
+    quantity: 2
     unit: kg
     ensure: true
 - cmd: sim.run-recipe
@@ -422,7 +413,7 @@ Commentary: Need to produce sub-components but KB lacks conversion recipes for s
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 3
+    hours: 30
 - cmd: sim.note
   args:
     style: success
@@ -469,7 +460,7 @@ Commentary: Assemble molding_press_basic with components. Import steel_stock (re
     quantity: 1
 - cmd: sim.advance-time
   args:
-    hours: 8
+    hours: 120
 - cmd: sim.note
   args:
     style: success

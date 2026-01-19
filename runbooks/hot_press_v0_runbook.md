@@ -117,7 +117,7 @@ Commentary: Import tooling for mining, casting, machining, rolling, and assembly
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

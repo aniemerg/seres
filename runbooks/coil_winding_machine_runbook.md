@@ -410,7 +410,7 @@ Commentary: Need 50 kg sheet_metal_or_structural_steel for machine_frame_small. 
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

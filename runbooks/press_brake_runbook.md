@@ -110,13 +110,7 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: steel_forming_press
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -158,25 +152,19 @@ cutting, forging, heat treating, and assembly.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
-    quantity: 1
-    unit: unit
-    ensure: true
-- cmd: sim.import
-  args:
     item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: furnace_basic
+    item: plate_rolling_mill
     quantity: 1
     unit: unit
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: furnace_basic
     quantity: 1
     unit: unit
     ensure: true

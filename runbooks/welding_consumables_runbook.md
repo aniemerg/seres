@@ -119,6 +119,12 @@ storage enclosure, then refine steel from ilmenite to form welding rods.
     ensure: true
 - cmd: sim.import
   args:
+    item: welding_tools_set
+    quantity: 1
+    unit: unit
+    ensure: true
+- cmd: sim.import
+  args:
     item: welding_consumables
     quantity: 1
     unit: unit
@@ -143,7 +149,7 @@ storage enclosure, then refine steel from ilmenite to form welding rods.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: press_brake
     quantity: 1
     unit: unit
     ensure: true

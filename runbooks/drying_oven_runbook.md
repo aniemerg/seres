@@ -124,7 +124,7 @@ Commentary: Produce structural_steel_frame, insulation_panel_high_temp, and fast
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -307,13 +307,11 @@ Commentary: Produce structural_steel_frame, insulation_panel_high_temp, and fast
     item: iron_ore_or_ilmenite
     quantity: 330
     unit: kg
-    ensure: true
 - cmd: sim.import
   args:
     item: carbon_reducing_agent
     quantity: 83
     unit: kg
-    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_iron_pig_or_ingot_v0

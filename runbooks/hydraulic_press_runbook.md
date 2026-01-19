@@ -123,7 +123,7 @@ Commentary: Need 150 kg steel plate for frame. Produce from regolith steel via c
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -264,7 +264,7 @@ Commentary: Produce fastener_kit_large (1 unit) for the final assembly.
     message: "Step 4a: Manufacture fastener_kit_large for assembly."
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true

@@ -77,7 +77,7 @@ Commentary: Import fabrication tooling and any non-ISRU electronics.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true

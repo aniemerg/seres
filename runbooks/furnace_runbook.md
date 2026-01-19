@@ -53,7 +53,6 @@ Goal: Build `furnace` using in-situ resources where possible.
     item: assembly_station
     quantity: 1
     unit: unit
-    ensure: true
 - cmd: sim.import
   args:
     item: welding_power_supply_v0
@@ -152,7 +151,7 @@ Goal: Build `furnace` using in-situ resources where possible.
     ensure: true
 - cmd: sim.import
   args:
-    item: plate_rolling_mill
+    item: rolling_mill_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -164,7 +163,7 @@ Goal: Build `furnace` using in-situ resources where possible.
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
@@ -210,114 +209,6 @@ Goal: Build `furnace` using in-situ resources where possible.
     quantity: 1
     unit: unit
     ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Collect regolith feedstock locally."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_regolith_lunar_mare_v0
-    quantity: 6
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_regolith_carbonaceous_collection_v0
-    quantity: 40
-- cmd: sim.advance-time
-  args:
-    hours: 700
-- cmd: sim.import
-  args:
-    item: electrical_energy
-    quantity: 12000
-    unit: kWh
-    ensure: true
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce steel ingot feedstock for plate."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_ilmenite_from_regolith_v0
-    quantity: 370
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_carbon_reductant_v0
-    quantity: 190
-- cmd: sim.advance-time
-  args:
-    hours: 900
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_carbon_reducing_agent_v0
-    quantity: 56
-- cmd: sim.advance-time
-  args:
-    hours: 150
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_iron_pig_or_ingot_v0
-    quantity: 111
-- cmd: sim.advance-time
-  args:
-    hours: 600
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_ingot_v0
-    quantity: 105
-- cmd: sim.advance-time
-  args:
-    hours: 700
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_steel_plate_raw_v0
-    quantity: 100
-- cmd: sim.advance-time
-  args:
-    hours: 600
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Produce regolith metal for large fasteners."
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_regolith_metal_crude_v0
-    quantity: 4
-- cmd: sim.advance-time
-  args:
-    hours: 400
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_fastener_kit_large_v1
-    quantity: 2
-- cmd: sim.advance-time
-  args:
-    hours: 200
-- cmd: sim.note
-  args:
-    style: milestone
-    message: "Import remaining non-steel components and assemble furnace."
-- cmd: sim.import
-  args:
-    item: insulation_ceramic
-    quantity: 50
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: heating_elements_basic
-    quantity: 5
-    unit: kg
-    ensure: true
-- cmd: sim.import
-  args:
-    item: electrical_wire_and_connectors
-    quantity: 3
-    unit: kg
-    ensure: true
-- cmd: sim.run-recipe
-  args:
-    recipe: recipe_furnace_v0
-    quantity: 1
 - cmd: sim.import
   args:
     item: drawing_die_set_basic
@@ -449,11 +340,6 @@ Goal: Build `furnace` using in-situ resources where possible.
 - cmd: sim.advance-time
   args:
     hours: 200
-- cmd: sim.import
-  args:
-    item: drawing_die_set_basic
-    quantity: 1
-    unit: unit
 - cmd: sim.run-recipe
   args:
     recipe: recipe_metal_wire_feed_v0

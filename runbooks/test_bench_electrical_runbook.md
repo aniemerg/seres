@@ -161,7 +161,7 @@ Commentary: Collect regolith locally and produce steel-based parts (frame and mo
     ensure: true
 - cmd: sim.import
   args:
-    item: heat_treatment_furnace
+    item: heat_treatment_furnace_v0
     quantity: 1
     unit: unit
     ensure: true
