@@ -14,28 +14,38 @@ At a high level, SERES has two tightly coupled layers:
 
 If you are an AI agent or working the queue, see `AGENTS.md`.
 
-## Quick start (uv)
+## Quick start
 
 Prerequisites: Python 3.10+ and `uv` (see https://docs.astral.sh/uv/ for install).
 
+Install dependencies:
 ```bash
 uv sync
 ```
 
-Index the knowledge base and generate reports:
-
+Run a simulation that builds a machine tool from regolith:
 ```bash
-python -m src.cli index
+.venv/bin/python -m src.cli sim runbook --file runbooks/metal_shear_or_saw_runbook.md
 ```
 
-Run a minimal simulation:
+This builds a metal shear/saw machine from lunar regolith, demonstrating how raw materials are processed into metal and then fabricated into working machinery. The simulation shows ISRU (In-Situ Resource Utilization) - producing 20.5% of the machine from local resources.
 
+### Manual simulation and indexing
+
+If you want to work with the knowledge base directly or build simulations from scratch:
+
+Index the knowledge base and generate reports:
 ```bash
-python -m src.cli sim init --sim-id demo
-python -m src.cli sim import --sim-id demo --item labor_bot_general_v0 --quantity 1 --unit unit
-python -m src.cli sim start-process --sim-id demo --process regolith_mining_highlands_v0 --duration 24
-python -m src.cli sim advance-time --sim-id demo --hours 24
-python -m src.cli sim view-state --sim-id demo
+.venv/bin/python -m src.cli index
+```
+
+Run a minimal simulation using CLI commands:
+```bash
+.venv/bin/python -m src.cli sim init --sim-id demo
+.venv/bin/python -m src.cli sim import --sim-id demo --item labor_bot_general_v0 --quantity 1 --unit unit
+.venv/bin/python -m src.cli sim start-process --sim-id demo --process regolith_mining_highlands_v0 --duration 24
+.venv/bin/python -m src.cli sim advance-time --sim-id demo --hours 24
+.venv/bin/python -m src.cli sim view-state --sim-id demo
 ```
 
 ## How the project is organized
