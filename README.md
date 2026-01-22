@@ -30,6 +30,12 @@ Run a simulation that builds a machine tool from regolith:
 
 This builds a metal shear/saw machine from lunar regolith, demonstrating how raw materials are processed into metal and then fabricated into working machinery. The simulation shows ISRU (In-Situ Resource Utilization) - producing 20.5% of the machine from local resources.
 
+For the largest current simulation, run the runbook queue aggregator:
+```bash
+.venv/bin/python -m src.cli sim runbook --file runbooks/runbook_queue_sequential.md
+```
+This chains most machine runbooks in sequence (each runbook manages its own reset/use).
+
 ### Manual simulation and indexing
 
 If you want to work with the knowledge base directly or build simulations from scratch:
