@@ -58,7 +58,7 @@ from src.simulation.persistence import (
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
-from src.kb_core.calculations import calculate_duration, calculate_energy
+from src.kb_core.calculations import calculate_duration, calculate_energy, is_mass_tracked_unit
 from src.kb_core.schema import Quantity, RawProcess, RawEnergyModel
 from src.kb_core.override_resolver import resolve_recipe_step_with_kb
 from src.kb_core.validators import validate_process, ValidationLevel
@@ -478,9 +478,7 @@ class SimulationEngine:
         return entry
 
     def _should_track_mass(self, item_id: str, unit: str) -> bool:
-        if unit in ("kWh", "MWh", "Wh", "J", "MJ", "GJ"):
-            return False
-        return True
+        return is_mass_tracked_unit(unit)
 
     def _require_kg(self, item_id: str, quantity: float, unit: str, context: str) -> float:
         if not self._should_track_mass(item_id, unit):

@@ -9,7 +9,7 @@ Provides:
 """
 from __future__ import annotations
 
-from typing import Dict, Optional
+from typing import Dict, Optional, Iterable, Tuple, Any
 
 from .schema import Process, Quantity
 from .unit_converter import (
@@ -22,6 +22,63 @@ from .unit_converter import (
 class CalculationError(Exception):
     """Raised when time/energy calculation fails."""
     pass
+
+
+NON_MASS_UNITS = {"kWh", "MWh", "Wh", "J", "MJ", "GJ"}
+
+
+def is_mass_tracked_unit(unit: Optional[str]) -> bool:
+    if not unit:
+        return True
+    return unit not in NON_MASS_UNITS
+
+
+def _sum_mass_kg(
+    entries: Iterable[Dict[str, Any]],
+    converter: UnitConverter
+) -> Tuple[float, bool]:
+    total_kg = 0.0
+    all_nonmass = True
+    for entry in entries:
+        item_id = entry.get("item_id")
+        qty = entry.get("quantity") if entry.get("quantity") is not None else entry.get("qty")
+        unit = entry.get("unit", "kg")
+        if item_id is None or qty is None:
+            continue
+        if not is_mass_tracked_unit(unit):
+            continue
+        all_nonmass = False
+        if unit == "kg":
+            total_kg += float(qty)
+            continue
+        converted = converter.convert(float(qty), unit, "kg", item_id=item_id)
+        if converted is None:
+            raise CalculationError(
+                f"Cannot convert {qty} {unit} of '{item_id}' to kg"
+            )
+        total_kg += converted
+    return total_kg, all_nonmass
+
+
+def calculate_mass_balance(
+    inputs: Iterable[Dict[str, Any]],
+    outputs: Iterable[Dict[str, Any]],
+    converter: UnitConverter
+) -> Dict[str, Any]:
+    """
+    Calculate mass balance (kg) for a process or recipe step.
+
+    Returns:
+        dict with input_kg, output_kg, inputs_all_nonmass, outputs_all_nonmass
+    """
+    input_kg, inputs_all_nonmass = _sum_mass_kg(inputs, converter)
+    output_kg, outputs_all_nonmass = _sum_mass_kg(outputs, converter)
+    return {
+        "input_kg": input_kg,
+        "output_kg": output_kg,
+        "inputs_all_nonmass": inputs_all_nonmass,
+        "outputs_all_nonmass": outputs_all_nonmass,
+    }
 
 
 def calculate_duration(

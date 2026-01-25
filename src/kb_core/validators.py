@@ -21,6 +21,7 @@ from .unit_converter import (
     COUNT_UNITS,
 )
 from .override_resolver import resolve_recipe_step_with_kb
+from .calculations import calculate_mass_balance, CalculationError
 
 
 class ValidationLevel(Enum):
@@ -1567,6 +1568,48 @@ def validate_recipe(
         # Issue #9: Validate step inputs are satisfied
         step_inputs_issues = validate_recipe_step_inputs(recipe, kb)
         issues.extend(step_inputs_issues)
+
+        # Mass balance check for each resolved step (shared with simulation)
+        for step_idx, step in enumerate(steps):
+            resolved_step = resolve_recipe_step_with_kb(step, kb)
+            inputs = resolved_step.get("inputs", []) or []
+            outputs = resolved_step.get("outputs", []) or []
+            if not inputs or not outputs:
+                continue
+            try:
+                balance = calculate_mass_balance(inputs, outputs, converter)
+            except CalculationError as exc:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="recipe",
+                    rule="recipe_step_mass_balance_unconvertible",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Step {step_idx} mass balance conversion failed: {exc}",
+                    field_path=f"steps[{step_idx}]",
+                    fix_hint="Fix unit/mass so inputs and outputs can convert to kg"
+                ))
+                continue
+
+            if balance["inputs_all_nonmass"] and balance["outputs_all_nonmass"]:
+                continue
+
+            input_kg = balance["input_kg"]
+            output_kg = balance["output_kg"]
+            if output_kg > input_kg + 1e-3:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="recipe",
+                    rule="recipe_step_mass_imbalance",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=(
+                        f"Step {step_idx} outputs exceed inputs "
+                        f"({output_kg:.3f} kg > {input_kg:.3f} kg)"
+                    ),
+                    field_path=f"steps[{step_idx}]",
+                    fix_hint="Adjust step inputs/outputs to conserve mass"
+                ))
 
     return issues
 
