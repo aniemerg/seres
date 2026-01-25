@@ -241,10 +241,21 @@ class SimulationEngine:
             if process_type == "boundary":
                 provenance_consumed = {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": 0.0}
             elif process_def and process_def.get("inputs"):
-                raise ValueError(
-                    f"Missing provenance for process outputs: "
-                    f"process={process_run.process_id}, run={process_run.process_run_id}"
-                )
+                inputs_all_nonmass = True
+                outputs_all_nonmass = True
+                for item_id, unit in process_run.inputs_consumed_units.items():
+                    if self._should_track_mass(item_id, unit):
+                        inputs_all_nonmass = False
+                        break
+                for item_id, unit in output_units.items():
+                    if self._should_track_mass(item_id, unit):
+                        outputs_all_nonmass = False
+                        break
+                if not (inputs_all_nonmass and outputs_all_nonmass):
+                    raise ValueError(
+                        f"Missing provenance for process outputs: "
+                        f"process={process_run.process_id}, run={process_run.process_run_id}"
+                    )
 
         output_kg = {}
         untracked_outputs = []

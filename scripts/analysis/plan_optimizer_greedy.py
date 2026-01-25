@@ -517,6 +517,7 @@ def main() -> int:
         result = execute_plan(trial_plan, kb_root, Path(args.sim_root), reset=True, dry_run=False)
         if not result.get("success"):
             print(f"Trial failed for {item_id}: {result}")
+            rejected.add(item_id)
             continue
         isru_pct = result.get("isru", {}).get("isru_percent", 0.0)
         print(f"Trial expand {item_id}: ISRU {isru_pct:.1f}%")

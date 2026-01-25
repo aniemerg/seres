@@ -83,6 +83,22 @@ Optimizer behavior:
 - Shared input demand is aggregated before execution.
 - Trial plans are saved to `out/plan_<machine>_trial_<n>.json` for inspection.
 
+## Candidate Scoring (future improvement)
+
+To avoid running costly trials that reduce ISRU, add a lightweight scoring pass
+before selecting candidates:
+
+- **Baseline cost**: imported mass of the item as currently imported.
+- **Local cost (estimate)**: sum of imported input mass needed to produce the
+  item locally, ignoring tools/machines.
+
+```
+score = baseline_import_mass - estimated_imported_inputs_mass
+```
+
+If `score < 0`, skip or deprioritize the candidate (likely worsens ISRU).
+If `score > 0`, prioritize the candidate for trials.
+
 ## Notes
 
 - Plans run directly against `SimulationEngine` and the current KB.

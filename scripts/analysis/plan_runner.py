@@ -19,7 +19,7 @@ from src.kb_core.kb_loader import KBLoader
 from src.simulation.engine import SimulationEngine
 
 
-def _advance_until_idle(engine: SimulationEngine) -> None:
+def _advance_until_idle(engine: SimulationEngine) -> Optional[str]:
     while engine.scheduler.event_queue:
         next_event = engine.scheduler.event_queue.peek()
         if not next_event:
@@ -28,7 +28,11 @@ def _advance_until_idle(engine: SimulationEngine) -> None:
         if delta <= 0:
             # Guard against zero/negative jumps
             delta = 0.0
-        engine.advance_time(delta)
+        try:
+            engine.advance_time(delta)
+        except Exception as exc:
+            return str(exc)
+    return None
 
 
 def _get_item_isru(engine: SimulationEngine, item_id: str) -> Dict[str, Any]:
@@ -201,7 +205,14 @@ def execute_plan(
                 "recipe_id": recipe.recipe_id,
                 "detail": result,
             }
-        _advance_until_idle(engine)
+        error = _advance_until_idle(engine)
+        if error:
+            return {
+                "success": False,
+                "error": "advance_failed",
+                "recipe_id": recipe.recipe_id,
+                "detail": error,
+            }
 
     # Target recipe last (if present)
     if plan.target_recipe_id:
@@ -217,7 +228,14 @@ def execute_plan(
                     "recipe_id": plan.target_recipe_id,
                     "detail": result,
                 }
-            _advance_until_idle(engine)
+            error = _advance_until_idle(engine)
+            if error:
+                return {
+                    "success": False,
+                    "error": "advance_failed",
+                    "recipe_id": plan.target_recipe_id,
+                    "detail": error,
+                }
 
     # Build machine
     if plan.build_machine:
