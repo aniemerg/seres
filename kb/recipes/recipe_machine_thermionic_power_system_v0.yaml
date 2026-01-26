@@ -9,14 +9,14 @@ inputs:
     qty: 4.0
     unit: unit
   - item_id: thermal_receiver_assembly
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
   - item_id: thermionic_converter
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: heat_pipes_set
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: power_conditioning_equipment
     qty: 1.0
     unit: unit
@@ -35,8 +35,8 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 220.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     machine_hours: 3.0
@@ -44,92 +44,92 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 220.0
+        unit: kg
       - item_id: thermal_receiver_assembly
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 270.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Mount thermal receiver assembly at focal point of concentrator"
   - process_id: concentrator_alignment_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 270.0
+        unit: kg
     outputs:
       - item_id: aligned_solar_concentrator
-        qty: 1.0
-        unit: unit
+        qty: 270.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Align Fresnel lens segments and thermal receiver for optimal solar concentration"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: aligned_solar_concentrator
-        qty: 1.0
-        unit: unit
+        qty: 270.0
+        unit: kg
       - item_id: thermionic_converter
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 278.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Install thermionic converter unit at thermal receiver output"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 278.0
+        unit: kg
       - item_id: heat_pipes_set
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 293.0
+        unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Integrate heat pipes and thermal management system for waste heat rejection"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 293.0
+        unit: kg
       - item_id: power_conditioning_equipment
         qty: 1.0
         unit: unit
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 373.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install power conditioning equipment and electrical connections from converter to output terminals"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 373.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 373.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test concentrator focusing, verify thermionic converter operation, and measure power output"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 373.0
+        unit: kg
     outputs:
       - item_id: thermionic_power_system_v0
         qty: 1.0

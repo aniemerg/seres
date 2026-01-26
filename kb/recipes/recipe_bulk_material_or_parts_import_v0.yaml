@@ -2,27 +2,20 @@ id: recipe_bulk_material_or_parts_import_v0
 kind: recipe
 target_item_id: bulk_material_or_parts
 variant_id: v0
-inputs:
-- item_id: electrical_energy
-  qty: 1.0
-  unit: kWh
+inputs: []
 outputs:
   - item_id: bulk_material_or_parts
     qty: 1.0
     unit: kg
 steps:
 - process_id: environment_source_v0
-  inputs:
-    - item_id: electrical_energy
-      qty: 1.0
-      unit: kWh
+  inputs: []
   outputs:
     - item_id: bulk_material_or_parts
       qty: 1.0
       unit: kg
   est_time_hr: 0.1
-  notes: Assume bulk material/parts sourced externally or from environment without
-    further modeling.
+  notes: Boundary source - bulk material/parts sourced externally or from environment without further modeling. No mass inputs required for environment boundary condition.
 assumptions: Placeholder feedstock; treated as boundary/environment source until replaced
   with specific items.
 notes: Boundary placeholder recipe to keep dependency chain runnable.

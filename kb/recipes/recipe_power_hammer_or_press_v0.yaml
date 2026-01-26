@@ -11,16 +11,7 @@ inputs:
   - item_id: casting_mold_set
     qty: 1.0
     unit: unit
-  - item_id: hammer_frame_basic
-    qty: 1.0
-    unit: unit
-  - item_id: hammer_head_basic
-    qty: 1.0
-    unit: unit
   - item_id: hammer_drive_motor
-    qty: 1.0
-    unit: unit
-  - item_id: anvil_block_basic
     qty: 1.0
     unit: unit
   - item_id: control_compute_module_imported
@@ -99,16 +90,7 @@ steps:
       - item_id: welded_assemblies
         qty: 495.0
         unit: kg
-      - item_id: hammer_frame_basic
-        qty: 1.0
-        unit: unit
-      - item_id: hammer_head_basic
-        qty: 1.0
-        unit: unit
       - item_id: hammer_drive_motor
-        qty: 1.0
-        unit: unit
-      - item_id: anvil_block_basic
         qty: 1.0
         unit: unit
       - item_id: control_compute_module_imported
@@ -124,23 +106,11 @@ steps:
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 30.0
-    labor_hours: 30.0
-    notes: "Assemble frame, anvil, hammer head, drive mechanism, and motor"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: power_hammer_or_press
         qty: 1.0
         unit: unit
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Test hammer operation, impact force, and safety systems"
+    est_time_hr: 34.0
+    labor_hours: 34.0
+    notes: "Assemble cast frame/anvil/head structure (495 kg from previous steps) with drive motor, controls, sensors, and power conditioning. Test hammer operation, impact force, and safety systems. Cast components provide the main structure (frame, hammer head, anvil); discrete components add drive and control systems (50 kg). Total assembly and testing time: ~34 hours."
 assumptions: Heavy forging equipment for hot metal forming. Requires massive frame and components for repeated impact loading. Critical for producing forged components with enhanced mechanical properties.
 notes: Power hammer provides repeated impact for hot forging operations. Essential for making tools, machine components, and structural parts with superior grain structure and strength compared to cast parts.

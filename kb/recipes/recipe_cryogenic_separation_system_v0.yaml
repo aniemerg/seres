@@ -7,39 +7,42 @@ produces_unit: unit
 inputs:
   - item_id: cryocooler_active_v0
     qty: 1
-    unit: kg
+    unit: unit
   - item_id: pressure_vessel_steel
-    qty: 200.0
-    unit: kg
+    qty: 1.0
+    unit: unit
   - item_id: distillation_column_module_v0
-    qty: 1
+    qty: 15.0
     unit: kg
   - item_id: thermal_insulation_basic
     qty: 50.0
     unit: kg
   - item_id: vacuum_pump_station
     qty: 1
-    unit: kg
+    unit: unit
   - item_id: valve_set_gas_handling
-    qty: 1
+    qty: 2.5
     unit: kg
   - item_id: piping_and_fittings_thermal
     qty: 100.0
     unit: kg
   - item_id: control_panel_basic
-    qty: 1
-    unit: kg
+    qty: 1.0
+    unit: unit
   - item_id: sensor_suite_general
-    qty: 1
+    qty: 5.0
     unit: kg
   - item_id: structural_frame_steel
     qty: 150.0
     unit: kg
   - item_id: fastener_kit_medium
-    qty: 2
+    qty: 2.0
     unit: kg
   - item_id: filler_wire_basic
     qty: 5.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 246.0
     unit: kg
 outputs:
   - item_id: cryogenic_separation_system_v0
@@ -64,43 +67,46 @@ steps:
         qty: 150.0
         unit: kg
       - item_id: pressure_vessel_steel
-        qty: 200.0
-        unit: kg
+        qty: 1.0
+        unit: unit
       - item_id: piping_and_fittings_thermal
         qty: 100.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 450.0
+        qty: 400.0
         unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 450.0
+        qty: 400.0
         unit: kg
       - item_id: cryocooler_active_v0
         qty: 1
-        unit: kg
+        unit: unit
       - item_id: distillation_column_module_v0
-        qty: 1
+        qty: 15.0
         unit: kg
       - item_id: thermal_insulation_basic
         qty: 50.0
         unit: kg
       - item_id: vacuum_pump_station
         qty: 1
-        unit: kg
+        unit: unit
       - item_id: valve_set_gas_handling
-        qty: 1
+        qty: 2.5
         unit: kg
       - item_id: control_panel_basic
-        qty: 1
-        unit: kg
+        qty: 1.0
+        unit: unit
       - item_id: sensor_suite_general
-        qty: 1
+        qty: 5.0
         unit: kg
       - item_id: fastener_kit_medium
-        qty: 2
+        qty: 2.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 246.0
         unit: kg
     outputs:
       - item_id: cryogenic_separation_system_v0

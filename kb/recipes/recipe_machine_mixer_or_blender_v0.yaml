@@ -30,53 +30,6 @@ outputs:
     qty: 1
     unit: unit
 steps:
-  - process_id: import_receiving_basic_v0
-    inputs:
-      - item_id: mixer_drum_small
-        qty: 1
-        unit: unit
-      - item_id: mixer_agitator_shaft_and_paddles
-        qty: 1
-        unit: unit
-      - item_id: drive_motor_small
-        qty: 1
-        unit: unit
-      - item_id: gearbox_reducer_small
-        qty: 1
-        unit: unit
-      - item_id: support_frame_small
-        qty: 1
-        unit: unit
-      - item_id: control_panel_basic
-        qty: 1
-        unit: unit
-      - item_id: fastener_kit_small
-        qty: 1
-        unit: unit
-    outputs:
-      - item_id: mixer_drum_small
-        qty: 1
-        unit: unit
-      - item_id: mixer_agitator_shaft_and_paddles
-        qty: 1
-        unit: unit
-      - item_id: drive_motor_small
-        qty: 1
-        unit: unit
-      - item_id: gearbox_reducer_small
-        qty: 1
-        unit: unit
-      - item_id: support_frame_small
-        qty: 1
-        unit: unit
-      - item_id: control_panel_basic
-        qty: 1
-        unit: unit
-      - item_id: fastener_kit_small
-        qty: 1
-        unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
   - process_id: assembly_basic_v0
     inputs:
       - item_id: mixer_drum_small
@@ -101,20 +54,15 @@ steps:
         qty: 1
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 2.0
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    outputs:
       - item_id: mixer_or_blender
         qty: 1
         unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
+    est_time_hr: 2.5
+    labor_hours: 2.5
+    notes: "Assemble mixer drum, agitator shaft, motor, gearbox, frame, control panel, and fasteners. Perform final inspection. Total assembly and inspection time: ~2.5 hours."
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed useless import_receiving step that just passed components through
+  - Removed inspection step that created self-reference (mixer_or_blender → mixer_or_blender)
+  - Consolidated assembly and inspection into single step
+  - Total time: ~2.5 hours

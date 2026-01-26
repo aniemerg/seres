@@ -4,7 +4,7 @@ target_item_id: press_cylinder_small
 variant_id: v0
 inputs:
   - item_id: steel_stock_bar_or_billet
-    qty: 15.0
+    qty: 16.0
     unit: kg
     notes: Steel for cylinder body and piston rod
   - item_id: metal_tubing_stock
@@ -15,10 +15,6 @@ inputs:
     qty: 1.0
     unit: kg
     notes: Seals and o-rings for hydraulic cylinder
-  - item_id: assembled_equipment
-    qty: 19.0
-    unit: kg
-    notes: Placeholder assembled cylinder for pressure test step
 outputs:
   - item_id: press_cylinder_small
     qty: 1.0
@@ -27,35 +23,39 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_stock_bar_or_billet
-        qty: 15.0
+        qty: 16.0
         unit: kg
       - item_id: metal_tubing_stock
         qty: 5.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 19.0
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 2.0
         unit: kg
   - process_id: sealing_and_assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 19.0
         unit: kg
       - item_id: hydraulic_seals_set
         qty: 1.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 19.0
+        qty: 20.0
         unit: kg
   - process_id: pressure_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 19.0
+        qty: 20.0
         unit: kg
     outputs:
       - item_id: press_cylinder_small
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
 assumptions: "Small press cylinder build uses standard machining, sealing, and pressure testing steps; tolerances aligned for press application."
 notes: "Manufacture press_cylinder_small via typical hydraulic cylinder process chain; adapted for small press usage."

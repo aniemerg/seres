@@ -3,10 +3,10 @@ target_item_id: hydraulic_pump_small
 variant_id: v0
 inputs:
   - item_id: steel_bar_stock
-    qty: 8.0
+    qty: 28.0
     unit: kg
   - item_id: seal_rubber_o_ring
-    qty: 0.1
+    qty: 0.2
     unit: kg
   - item_id: bearing_set_small
     qty: 1
@@ -16,13 +16,29 @@ outputs:
     qty: 1
     unit: unit
 steps:
-  - process_id: assembly_basic_v0
+  - process_id: machining_basic_v0
     inputs:
       - item_id: steel_bar_stock
-        qty: 8.0
+        qty: 28.0
+        unit: kg
+    outputs:
+      - item_id: machined_steel_part_precision
+        qty: 24.5
+        unit: kg
+      - item_id: metal_swarf
+        qty: 3.5
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 6.0
+    labor_hours: 2.0
+    notes: "Machine pump body, end caps, gears, and drive shaft to tight tolerances. Using generic machined_steel_part_precision per Conservative Mode (consolidation of machined_pump_components)."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_steel_part_precision
+        qty: 24.5
         unit: kg
       - item_id: seal_rubber_o_ring
-        qty: 0.1
+        qty: 0.2
         unit: kg
       - item_id: bearing_set_small
         qty: 1
@@ -31,9 +47,12 @@ steps:
       - item_id: hydraulic_pump_small
         qty: 1
         unit: unit
-    est_time_hr: 11.0
-    machine_hours: 6.0
-    labor_hours: 7.5
-    notes: "Machine pump body/end caps/gears/drive shaft to tight tolerances, assemble internal gears with seals and bearings, pressure test pump for leaks and verify flow rate, inspect pump operation and seal integrity"
-assumptions: "Small hydraulic pump for auxiliary systems and light-duty machinery - gear or piston pump design with precision machined components"
-notes: "Fabrication of small hydraulic pump requiring precision machining for tight internal clearances and pressure testing for leak verification"
+      - item_id: metal_scrap
+        qty: 0.0
+        unit: kg
+    est_time_hr: 5.0
+    labor_hours: 4.0
+    machine_hours: 1.0
+    notes: "Assemble internal gears with seals and bearings, pressure test pump for leaks, verify flow rate and seal integrity"
+assumptions: "Small hydraulic pump (25 kg) for auxiliary systems and light-duty machinery. Gear or piston pump design requiring precision machined components. Increased steel input from 8 kg to 28 kg to account for pump body, gears, shaft mass plus 3.5 kg machining waste."
+notes: "Small hydraulic pump fabrication from machined steel components, seals, and bearings. Two-step process: precision machining of pump internals followed by assembly and testing. Critical for maintaining tight internal clearances and pressure integrity."

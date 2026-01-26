@@ -3,13 +3,28 @@ kind: recipe
 name: Recipe for digital pheromone system v0
 target_item_id: pheromone_digital_system_v0
 variant_id: v0
+inputs:
+  - item_id: microcontroller_or_embedded_board
+    qty: 1
+    unit: unit
+  - item_id: magnetic_core_memory_array_v0
+    qty: 1
+    unit: unit
 outputs:
   - item_id: pheromone_digital_system_v0
     qty: 1.0
     unit: unit
 steps:
   - process_id: pheromone_digital_system_assembly_v0
+    inputs:
+      - item_id: microcontroller_or_embedded_board
+        qty: 1
+        unit: unit
+      - item_id: magnetic_core_memory_array_v0
+        qty: 1
+        unit: unit
     outputs:
       - item_id: pheromone_digital_system_v0
         qty: 1.0
         unit: unit
+notes: "Hardware platform assembly for digital pheromone system. Note: radio_communication_module from BOM not yet defined, omitted from initial recipe."

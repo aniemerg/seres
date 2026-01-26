@@ -15,7 +15,7 @@ outputs:
     qty: 1.0
     unit: unit
   - item_id: assembly_loss
-    qty: 0.5
+    qty: 0.25
     unit: kg
 steps:
   - process_id: electronic_assembly_v0
@@ -32,7 +32,7 @@ steps:
         unit: unit
     byproducts:
       - item_id: assembly_loss
-        qty: 0.5
+        qty: 0.25
         unit: kg
 assumptions: "Electronic assembly produced by electronic_assembly_v0 process; baseline production path."
 notes: "Adds an alternative recipe entry to satisfy no_recipe gap for electronic_assembly."

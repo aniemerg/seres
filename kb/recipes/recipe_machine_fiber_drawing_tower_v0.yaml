@@ -11,9 +11,6 @@ inputs:
   - item_id: steel_stock
     qty: 100.0
     unit: kg
-  - item_id: cutting_fluid
-    qty: 10.0
-    unit: L
   - item_id: machine_frame_small
     qty: 1.0
     unit: kg
@@ -49,17 +46,17 @@ steps:
       - item_id: steel_stock
         qty: 100.0
         unit: kg
-      - item_id: cutting_fluid
-        qty: 10.0
-        unit: L
     outputs:
       - item_id: machined_steel_part_precision
         qty: 70.0
         unit: kg
+      - item_id: metal_swarf
+        qty: 30.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
-    notes: "Machine mounting surfaces for heating furnace, drawing rollers, and motor mounting brackets"
+    notes: "Machine mounting surfaces for heating furnace, drawing rollers, and motor mounting brackets. Uses cutting_fluid as process consumable (not tracked in material flow)."
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_fabrications
@@ -70,8 +67,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 580.0
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install heating furnace module at top of tower, mount drawing rollers at multiple levels, install drive motors and tension control system"
@@ -85,39 +82,45 @@ steps:
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Wire control panel to heating elements, motors, and tension sensors; install power distribution and safety interlocks"
+    notes: "Wire control panel to heating elements, motors, and tension sensors; install power distribution and safety interlocks. Assume electronic_components_set ≈ 1 kg."
   - process_id: precision_alignment_and_leveling_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 580.0
+        unit: kg
+      - item_id: wired_electrical_system
+        qty: 6.0
+        unit: kg
       - item_id: machine_frame_small
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: machine_frame_small
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 587.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
-    notes: "Align drawing rollers vertically to ensure concentric fiber path; level tower frame for proper fiber tension"
+    notes: "Align drawing rollers vertically to ensure concentric fiber path; level tower frame for proper fiber tension; integrate electrical system with mechanical structure on base frame"
   - process_id: integration_test_basic_v0
     inputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 587.0
+        unit: kg
     outputs:
-      - item_id: assembled_electronics
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 587.0
         unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test heating system, verify drawing roller speed control and synchronization, test fiber collection system"
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: assembled_electronics
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 587.0
         unit: kg
     outputs:
       - item_id: fiber_drawing_tower
@@ -125,6 +128,6 @@ steps:
         unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Verify all safety systems, check fiber path alignment, ensure proper temperature control"
+    notes: "Verify all safety systems, check fiber path alignment, ensure proper temperature control. Final assembled mass ~587 kg (revised from 500 kg assumption based on detailed BOM)."
 assumptions: "Vertical fiber drawing tower for continuous fiber production from molten glass, basalt, or polymers. 500 kg system with 6-8 meter vertical height. Includes heating furnace module (up to 1500°C), precision drawing rollers with speed control, tension control system, and fiber collection spools. Critical for producing reinforcement fibers for composites."
 notes: "Assembly of fiber drawing tower. Total fabrication time ~44 hours. Requires vertical assembly space and structural support for tall tower frame. Precision alignment of rollers critical for fiber quality. Drawing speed typically 100-1000 m/min depending on fiber type."

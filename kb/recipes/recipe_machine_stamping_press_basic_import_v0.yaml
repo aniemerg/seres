@@ -3,10 +3,7 @@ target_item_id: stamping_press_basic
 variant_id: v0
 inputs:
   - item_id: steel_plate_or_sheet
-    qty: 1000.0
-    unit: kg
-  - item_id: steel_stock
-    qty: 950.0
+    qty: 1050.0
     unit: kg
   - item_id: filler_wire_basic
     qty: 50.0
@@ -21,59 +18,72 @@ inputs:
     qty: 1.0
     unit: kg
   - item_id: piping_components
-    qty: 1.0
+    qty: 10.0
     unit: kg
   - item_id: control_panel_basic
     qty: 1.0
     unit: unit
-  - item_id: assembled_equipment
+outputs:
+  - item_id: stamping_press_basic
     qty: 1.0
-    unit: kg
+    unit: unit
 steps:
   - process_id: cutting_basic_v0
     inputs:
       - item_id: steel_plate_or_sheet
-        qty: 1000.0
+        qty: 1050.0
         unit: kg
     outputs:
       - item_id: cut_parts
-        qty: 950.0
+        qty: 1000.0
         unit: kg
-    est_time_hr: 2.5
-    machine_hours: 2.5
-    labor_hours: 1.2
-    notes: "Cut plate/structural members for press frame and platen mounts."
+      - item_id: metal_swarf
+        qty: 50.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    labor_hours: 1.5
+    notes: "Cut steel plate for press frame, base, platen, and cylinder mounts"
   - process_id: welded_fabrication_basic_v0
     inputs:
-      - item_id: steel_stock
-        qty: 950.0
+      - item_id: cut_parts
+        qty: 1000.0
         unit: kg
       - item_id: filler_wire_basic
         qty: 50.0
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 1000.0
+        qty: 1040.0
         unit: kg
-    est_time_hr: 4.0
-    machine_hours: 3.0
-    labor_hours: 3.0
-    notes: "Weld frame, platen supports, and cylinder mounts."
+      - item_id: slag
+        qty: 10.0
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 4.0
+    labor_hours: 4.0
+    notes: "Weld C-frame structure, base, platen supports, and hydraulic cylinder mounts"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 1000.0
+        qty: 1040.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1000.0
+        qty: 1020.0
         unit: kg
-    est_time_hr: 2.5
-    machine_hours: 2.0
-    labor_hours: 1.5
-    notes: "Machine platen surfaces, mounting holes, and guide surfaces."
-  - process_id: hydraulic_system_assembly_v0
+      - item_id: metal_swarf
+        qty: 20.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 3.0
+    labor_hours: 2.0
+    notes: "Machine platen surfaces flat, drill mounting holes, machine guide surfaces"
+  - process_id: assembly_basic_v0
     inputs:
+      - item_id: machined_part_raw
+        qty: 1020.0
+        unit: kg
       - item_id: hydraulic_cylinder_medium
         qty: 1.0
         unit: unit
@@ -84,53 +94,25 @@ steps:
         qty: 1.0
         unit: kg
       - item_id: piping_components
-        qty: 1.0
+        qty: 10.0
         unit: kg
-    outputs:
-      - item_id: hydraulic_system_medium
-        qty: 1.0
-        unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble cylinder, hoses, valves, and power unit."
-  - process_id: hydraulic_system_integration_v0
-    inputs:
-      - item_id: hydraulic_control_valve_set
-        qty: 1.0
-        unit: kg
-      - item_id: piping_components
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: hydraulic_system_medium
-        qty: 1.0
-        unit: kg
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Fill/bleed hydraulics, set relief valve, perform leak and function checks."
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Wire controls, interlocks, and gauges."
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-    outputs:
       - item_id: stamping_press_basic
         qty: 1.0
         unit: unit
-    est_time_hr: 1.0
-    labor_hours: 0.8
-    notes: "Cycle press under load, verify stroke, pressure, and safety systems."
-assumptions: "Small/medium hydraulic stamping press; precision limited by coarse machining; controls minimal."
-notes: Local build route for basic stamping press.
+      - item_id: metal_scrap
+        qty: 176.0
+        unit: kg
+    est_time_hr: 8.0
+    labor_hours: 6.0
+    machine_hours: 2.0
+    notes: "Mount hydraulic cylinder to frame, install hydraulic pump and power unit, connect piping and valves, wire control panel, fill and bleed hydraulic system, set relief valves, test press under load. Assembly scrap from hydraulic fluid, packaging, wire trimming, and commissioning waste."
+notes: |
+  Assumptions:
+  - Use machined_part_raw as generic machined frame output in lieu of a dedicated machined_press_frame item.
+  Rationale:
+  - Resolve referenced_only for machined_press_frame while keeping mass flow intact.
+assumptions: "Small/medium hydraulic stamping press with C-frame construction. Frame accounts for majority of mass (1020 kg). Hydraulic cylinder (120 kg), pump (25 kg), valves/piping (11 kg), control panel (15 kg). Total input 1176 kg yields 1000 kg press + 176 kg waste. Removed redundant steel_stock input and duplicate hydraulic assembly steps."

@@ -8,7 +8,7 @@ produces_qty: 1.0
 produces_unit: unit
 inputs:
   - item_id: structural_steel_sections
-    qty: 55.0
+    qty: 485.0
     unit: kg
   - item_id: fastener_kit_heavy
     qty: 1
@@ -24,7 +24,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: structural_steel_sections
-        qty: 55.0
+        qty: 485.0
         unit: kg
       - item_id: fastener_kit_heavy
         qty: 1
@@ -40,4 +40,7 @@ steps:
     machine_hours: 2.0
     labor_hours: 6.0
     notes: "Cut structural steel sections to length, weld steel frame members together to form rigid structure, fabricate mounting brackets and reinforcements, grind and finish weld seams"
-notes: "Converted to a local v0 recipe; uses cutting_basic_v0, welding_structural_v0, and fabricate_structural_steel_frame_v0 to produce structural_steel_frame."
+notes: |
+  Assumptions:
+  - Structural steel section input scaled to match frame mass + scrap.
+  Converted to a local v0 recipe; uses cutting_basic_v0, welding_structural_v0, and fabricate_structural_steel_frame_v0 to produce structural_steel_frame.

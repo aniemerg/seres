@@ -27,6 +27,9 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 1.0
     unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 200.0
+    unit: kg
 outputs:
   - item_id: balancing_machine
     qty: 1.0
@@ -70,10 +73,13 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 200.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 436.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble base, drive motors, mounting fixtures"
@@ -93,22 +99,29 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install vibration sensors, measurement electronics, control system"
   - process_id: calibration_basic_v0
     inputs:
-      - item_id: vibration_sensor_set
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 436.0
+        unit: kg
+      - item_id: assembled_electrical_equipment
+        qty: 20.0
+        unit: kg
     outputs:
       - item_id: balancing_machine
         qty: 1.0
         unit: unit
+    byproducts:
+      - item_id: assembly_loss
+        qty: 6.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Calibrate vibration sensors with known unbalanced reference"
+    notes: "Integrate mechanical and electrical assemblies, calibrate vibration sensors with known unbalanced reference"
 assumptions: Vibration sensors and electronics fabricated or imported.
 notes: Precision balancing machine for rotating assemblies.

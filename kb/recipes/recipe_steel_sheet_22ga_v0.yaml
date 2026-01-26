@@ -1,0 +1,26 @@
+id: recipe_steel_sheet_22ga_v0
+kind: recipe
+name: Recipe for steel sheet 22ga
+target_item_id: steel_sheet_22ga
+produces_qty: 0.1
+produces_unit: kg
+variant_id: v0
+inputs:
+  - item_id: steel_ingot
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: steel_sheet_22ga
+    qty: 0.1
+    unit: kg
+steps:
+  - process_id: sheet_making_from_ingot_1mm_v0
+    inputs:
+      - item_id: steel_ingot
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: steel_sheet_22ga
+        qty: 0.1
+        unit: kg
+notes: "Alias recipe for 22ga sheet; reuses 1mm sheet process."

@@ -2,7 +2,7 @@
 
 **Status:** Implemented
 **Date:** 2026-01-02
-**Last Updated:** 2026-01-02
+**Last Updated:** 2026-01-25
 **Decision Makers:** Project team
 **Related ADRs:** 018 (Recipe Inputs/Outputs Validation), 017 (Validation and Error Detection)
 
@@ -279,3 +279,8 @@ This ADR establishes BOMs and recipes as **complementary, not redundant**:
 Auto-inference from BOMs fixes 104 machine recipes while maintaining clean architecture and supporting future flexibility. Validation ensures consistency and guides users toward best practices.
 
 **Status:** Fully implemented and tested. GitHub Issue #3 resolved.
+
+**Update 2026-01-25:** When BOM-based inference is used for `unit_kind: discrete`
+items, do not rely on fractional `unit` counts to balance mass. Keep discrete
+counts integral and balance remaining mass with bulk inputs and explicit scrap,
+or adjust item `mass` to align with BOM sums.

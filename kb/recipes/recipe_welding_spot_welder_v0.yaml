@@ -6,6 +6,38 @@ produces_qty: 1.0
 produces_unit: unit
 target_item_id: welding_spot_welder_v0
 variant_id: v0
+inputs:
+  - item_id: transformer_step_down_welding
+    qty: 1.0
+    unit: unit
+  - item_id: electrode_copper_welding
+    qty: 2.0
+    unit: unit
+  - item_id: actuator_pneumatic_linear
+    qty: 1.0
+    unit: unit
+  - item_id: structural_frame_small
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_cable_assembly
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: steel_stock
+    qty: 60.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: welding_spot_welder_v0
+    qty: 1.0
+    unit: unit
 steps:
 - process_id: machine_assembly_spot_welder_v0
   inputs:
@@ -30,6 +62,12 @@ steps:
     - item_id: fastener_kit_medium
       qty: 1.0
       unit: unit
+    - item_id: steel_stock
+      qty: 60.0
+      unit: kg
+    - item_id: electrical_wire_and_connectors
+      qty: 5.0
+      unit: kg
   outputs:
     - item_id: welding_spot_welder_v0
       qty: 1.0

@@ -2,6 +2,9 @@ id: recipe_analog_test_bench_neural_v0
 kind: recipe
 variant_id: v0
 inputs:
+  - item_id: bulk_material_or_parts
+    qty: 32.5
+    unit: kg
   - item_id: machine_frame_small
     qty: 1.0
     unit: unit
@@ -15,6 +18,9 @@ outputs:
 steps:
 - process_id: machine_assembly_basic_v0
   inputs:
+    - item_id: bulk_material_or_parts
+      qty: 32.5
+      unit: kg
     - item_id: machine_frame_small
       qty: 1.0
       unit: unit

@@ -4,7 +4,7 @@ target_item_id: yn_mlp_network_hardware_v0
 variant_id: v0
 inputs:
   - item_id: neural_analog_tile
-    qty: 4.0
+    qty: 160.0
     unit: unit
 outputs:
   - item_id: yn_mlp_network_hardware_v0
@@ -14,10 +14,12 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: neural_analog_tile
-        qty: 4.0
+        qty: 160.0
         unit: unit
     outputs:
       - item_id: yn_mlp_network_hardware_v0
         qty: 1.0
         unit: unit
-notes: "Basic assembly recipe to produce yn_mlp_network_hardware_v0 from its BOM components."
+notes: |
+  Basic assembly recipe to produce yn_mlp_network_hardware_v0 from its BOM components.
+  Mass balance: neural_analog_tile scaled to 160 units to match 40 kg output mass.

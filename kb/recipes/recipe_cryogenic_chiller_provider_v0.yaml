@@ -4,37 +4,47 @@ target_item_id: cryogenic_chiller_provider_v0
 variant_id: v0
 inputs:
   - item_id: cryogenic_chiller_v0
-    qty: 1
-    unit: unit
+    qty: 300.0
+    unit: kg
   - item_id: control_panel_basic
     qty: 1
     unit: unit
   - item_id: pressure_gauge_set
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 280.0
+    unit: kg
 outputs:
   - item_id: cryogenic_chiller_provider_v0
-    qty: 1
-    unit: unit
+    qty: 600.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: cryogenic_chiller_v0
-        qty: 1
-        unit: unit
+        qty: 300.0
+        unit: kg
       - item_id: control_panel_basic
         qty: 1
         unit: unit
       - item_id: pressure_gauge_set
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 280.0
+        unit: kg
     outputs:
       - item_id: cryogenic_chiller_provider_v0
-        qty: 1
-        unit: unit
+        qty: 600.0
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 2.0
     labor_hours: 6.0
     notes: "Assemble cryogenic chiller unit with control panel and pressure monitoring into provider machine configuration"
 assumptions: "Seed provider machine that offers the cryogenic_chiller_v0 resource capability"
-notes: "Assembly of cryogenic chiller provider from main chiller unit and control systems"
+notes: |
+  Assumptions:
+  - Added steel plate for skid, enclosure, and mounting structure not captured in base chiller BOM.
+  Rationale:
+  - Balances provider mass to 600 kg output.

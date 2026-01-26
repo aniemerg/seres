@@ -26,12 +26,12 @@ inputs:
     qty: 1
     unit: unit
   - item_id: assembled_electrical_equipment
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
 outputs:
   - item_id: gas_chromatograph_simple_v0
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
     inputs:
@@ -71,9 +71,9 @@ steps:
         qty: 23.0
         unit: kg
     outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 28.0
+        unit: kg
     est_time_hr: 0.7
     machine_hours: 0.5
     labor_hours: 0.5
@@ -91,24 +91,28 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     est_time_hr: 0.6
     machine_hours: 0.5
     labor_hours: 0.5
     notes: "Wiring harness and control module assembly"
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 28.0
+        unit: kg
       - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
+    byproducts:
+      - item_id: assembly_waste
+        qty: 18.0
+        unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.4
@@ -116,12 +120,12 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: gas_chromatograph_simple_v0
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 0.4
     machine_hours: 0.3
     labor_hours: 0.3

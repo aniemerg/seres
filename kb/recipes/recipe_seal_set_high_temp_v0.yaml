@@ -7,7 +7,7 @@ inputs:
     qty: 10.0
     unit: kg
   - item_id: steel_sheet_1mm
-    qty: 0.1
+    qty: 1.0
     unit: kg
   - item_id: formed_metal_part
     qty: 1.0
@@ -32,7 +32,7 @@ steps:
   - process_id: metal_stamping_process_v0
     inputs:
       - item_id: steel_sheet_1mm
-        qty: 0.1
+        qty: 1.0
         unit: kg
     outputs:
       - item_id: formed_metal_part
@@ -85,3 +85,4 @@ notes: |
   Manufacturing recipe for high-temperature seal set.
   Critical for solenoid valves, furnace ports, and high-temp piping.
   Total production time ~9 hours.
+  Mass balance: set steel_sheet_1mm input to 1.0 kg to match stamped output.

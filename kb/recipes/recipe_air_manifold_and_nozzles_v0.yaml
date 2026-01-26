@@ -3,7 +3,7 @@ target_item_id: air_manifold_and_nozzles
 variant_id: v0
 inputs:
   - item_id: steel_plate_or_sheet
-    qty: 8.0
+    qty: 16.0
     unit: kg
   - item_id: filler_wire_basic
     qty: 0.4
@@ -16,36 +16,36 @@ steps:
   - process_id: cutting_basic_v0
     inputs:
       - item_id: steel_plate_or_sheet
-        qty: 8.0
+        qty: 16.0
         unit: kg
     outputs:
       - item_id: cut_parts
-        qty: 7.5
+        qty: 15.5
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
     labor_hours: 0.2
-    notes: "Cut pipe/tube sections and plates for manifold."
+    notes: "Cut pipe/tube sections and plates for manifold (0.5 kg cutting loss)"
   - process_id: welded_fabrication_basic_v0
     inputs:
       - item_id: cut_parts
-        qty: 7.5
+        qty: 15.5
         unit: kg
       - item_id: filler_wire_basic
         qty: 0.4
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 7.5
+        qty: 15.4
         unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.8
-    notes: "Assemble manifold headers, branch ports, and mounts."
+    notes: "Assemble manifold headers, branch ports, and mounts (0.5 kg weld spatter loss)"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 7.5
+        qty: 15.4
         unit: kg
     outputs:
       - item_id: air_manifold_and_nozzles

@@ -1,11 +1,14 @@
 id: coating_station_v0
 name: Coating station v0
 kind: machine
-mass: 120.0
-unit: kg
+mass: 166.0
+unit: unit
 bom: bom_coating_station_v0
-notes: Version 0 coating station; applies coatings and surface treatments (e.g., paints,
+notes: |
+  Version 0 coating station; applies coatings and surface treatments (e.g., paints,
   powders, sealants). Placeholder to resolve gap for coating_station_v0.
+  Assumptions:
+  - Mass aligned with recipe input mass (~166 kg).
 processes_supported:
 - cathode_oxide_coating_process_v0
 capabilities:
@@ -13,4 +16,4 @@ capabilities:
 - spray_coating
 - drying_and_curing
 recipe: recipe_coating_station_v0
-unit_kind: bulk
+unit_kind: discrete

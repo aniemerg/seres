@@ -3,26 +3,29 @@ kind: recipe
 target_item_id: optical_comparator_v0
 inputs:
   - item_id: light_source_bright
-    qty: 1
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: lens_assembly_magnifying
-    qty: 1
-    unit: unit
+    qty: 0.4
+    unit: kg
   - item_id: projection_screen_translucent
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: worktable_adjustable
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: measuring_scale_linear
-    qty: 2
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: structural_frame_medium
-    qty: 1
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 30.1
+    unit: kg
 outputs:
   - item_id: optical_comparator_v0
     qty: 1
@@ -31,32 +34,46 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: light_source_bright
-        qty: 1
-        unit: unit
+        qty: 0.5
+        unit: kg
       - item_id: lens_assembly_magnifying
-        qty: 1
-        unit: unit
+        qty: 0.4
+        unit: kg
       - item_id: projection_screen_translucent
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
       - item_id: worktable_adjustable
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: measuring_scale_linear
-        qty: 2
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: structural_frame_medium
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 30.1
+        unit: kg
     outputs:
-      - item_id: optical_comparator_v0
-        qty: 1
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
     est_time_hr: 9.0
     machine_hours: 3.5
     labor_hours: 5.5
     notes: "Assemble optical comparator frame with BOM components, connect wiring/conduits/control panels/sensors, calibrate alignment scales/references/sensors, align optical axis and perform functional tests"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 80.0
+        unit: kg
+    outputs:
+      - item_id: optical_comparator_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
 notes: "Converted legacy recipe to modern per-step object format. Placeholder steps to manufacture optical_comparator_v0 from BOM components."

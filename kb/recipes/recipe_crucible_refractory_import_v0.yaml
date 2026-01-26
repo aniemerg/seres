@@ -33,12 +33,16 @@ steps:
     notes: "Slow dry formed crucible to prevent cracking"
   - process_id: ceramic_firing_high_temp_v0
     inputs:
-      - item_id: green_ceramic_parts
+      - item_id: dried_material
         qty: 15.0
         unit: kg
     outputs:
       - item_id: sintered_shapes
-        qty: 14.25
+        qty: 14.95
+        unit: kg
+    byproducts:
+      - item_id: firing_loss
+        qty: 0.05
         unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
@@ -46,7 +50,7 @@ steps:
   - process_id: surface_finishing_basic_v0
     inputs:
       - item_id: sintered_shapes
-        qty: 14.25
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: crucible_refractory

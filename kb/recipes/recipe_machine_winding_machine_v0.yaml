@@ -3,8 +3,8 @@ target_item_id: winding_machine
 variant_id: v0
 inputs:
   - item_id: import_misc_components_set
-    qty: 1.0
-    unit: unit
+    qty: 150.0
+    unit: kg
 outputs:
   - item_id: winding_machine
     qty: 1.0
@@ -13,31 +13,31 @@ steps:
   - process_id: import_receiving_basic_v0
     inputs:
       - item_id: import_misc_components_set
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     outputs:
       - item_id: import_misc_components_set
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
     inputs:
       - item_id: import_misc_components_set
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     machine_hours: 2.0
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     outputs:
       - item_id: winding_machine
         qty: 1.0
@@ -45,4 +45,7 @@ steps:
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble winding machine per BOM; imported compute/sensors.
-notes: Coarse route; refine with calibration later.
+notes: |
+  Coarse route; refine with calibration later.
+  Mass balance: inspection step uses 3x assembled_equipment to match 150 kg output mass.
+  Mass balance: import_misc_components_set scaled to 50 kg to match assembly output mass.

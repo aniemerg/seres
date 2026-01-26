@@ -11,8 +11,8 @@ inputs:
     unit: kg
     notes: "Intermediate for precision machining"
   - item_id: cutting_fluid
-    qty: 1.0
-    unit: L
+    qty: 0.95
+    unit: kg
   - item_id: hydraulic_seals_set
     qty: 2.0
     unit: kg
@@ -51,11 +51,18 @@ steps:
         qty: 60.0
         unit: kg
       - item_id: cutting_fluid
-        qty: 1.0
-        unit: L
+        qty: 0.95
+        unit: kg
     outputs:
       - item_id: machined_part_raw
         qty: 58.0
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 2.0
+        unit: kg
+      - item_id: waste
+        qty: 0.95
         unit: kg
     est_time_hr: 22.0
     machine_hours: 22.0

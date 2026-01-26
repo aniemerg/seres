@@ -35,35 +35,17 @@ steps:
         qty: 3.0
         unit: kg
     outputs:
-      - item_id: instrument_uncalibrated
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Install spirit vials or electronic sensor modules in machined body"
-  - process_id: calibration_basic_v0
-    inputs:
-      - item_id: instrument_uncalibrated
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: instrument_calibrated
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Calibrate levels against reference surface to 0.02 mm/m accuracy"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: instrument_calibrated
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: precision_levels
-        qty: 1.0
+        qty: 1
         unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Verify accuracy and repeatability of level readings"
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Install spirit vials or electronic sensor modules in machined body, calibrate against reference surface to 0.02 mm/m accuracy, verify accuracy and repeatability. Total post-machining time: 4 hours (assembly + calibration + inspection)."
 assumptions: "Precision levels for machine tool alignment. Includes both spirit vials and optional electronic sensors. 0.02 mm/m accuracy requirement."
-notes: "Manufacturing of precision levels. Total fabrication time ~8 hours. Requires precision machining and calibration against known reference."
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed redundant calibration_basic_v0 and inspection_basic_v0 steps that created self-reference
+  - Consolidated calibration and inspection into final assembly step
+  - Total fabrication time unchanged: ~8 hours (4 hr machining + 4 hr assembly/calibration/inspection)
+
+  Manufacturing of precision levels requires precision machining and calibration against known reference.

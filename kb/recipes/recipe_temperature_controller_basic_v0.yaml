@@ -42,8 +42,8 @@ steps:
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Wire multi-zone temperature controllers, power relays, safety interlocks, and indicators"
@@ -53,11 +53,11 @@ steps:
         qty: 9.5
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 11.5
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
@@ -65,11 +65,11 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 11.5
         unit: kg
     outputs:
       - item_id: temperature_controller_basic
-        qty: 12.0
+        qty: 11.5
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
@@ -88,4 +88,10 @@ steps:
         unit: unit
     notes: "Assemble electronics modules into assembled_electronics; replaces placeholder"
 assumptions: "Multi-zone temperature control panel with assembled electronics. Locally fabricated panel and wiring harness."
-notes: "Basic temperature control system for furnaces. Provides multi-zone control and safety monitoring."
+notes: |
+  Assumptions:
+  - Wiring/electronics mass set to 2.0 kg to match 12 kg controller output.
+  Rationale:
+  - Preserve mass balance in assembly and test steps.
+  Uncertainty:
+  - Electronics mass split should be refined with BOM detail.

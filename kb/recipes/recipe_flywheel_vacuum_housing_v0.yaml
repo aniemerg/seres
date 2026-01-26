@@ -7,7 +7,7 @@ inputs:
     unit: kg
   - item_id: cutting_fluid
     qty: 1.5
-    unit: L
+    unit: kg
 outputs:
   - item_id: flywheel_vacuum_housing_v0
     qty: 20.0
@@ -19,6 +19,13 @@ steps:
         qty: 22.0
         unit: kg
   - process_id: flywheel_vacuum_housing_machining_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 20.0
+        unit: kg
+      - item_id: cutting_fluid
+        qty: 1.5
+        unit: kg
     outputs:
       - item_id: flywheel_vacuum_housing_v0
         qty: 20.0

@@ -66,24 +66,24 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     notes: "Assemble gripper: install bearings, ball screw, stepper motor, fingers"
   - process_id: alignment_and_testing_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     outputs:
       - item_id: aligned_tested_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     notes: "Test stroke and gripping force"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: aligned_tested_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     outputs:
       - item_id: electric_parallel_gripper
         qty: 1

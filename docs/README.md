@@ -34,6 +34,34 @@ These documents are **mandatory prerequisites** for contributing to the knowledg
 - `README.md` (repo layout + commands)
  - `docs/mold_migration_notes.md` (note on migrating to part-specific mold tooling)
 
+## Notes Best Practices (IMPORTANT)
+
+When you edit a recipe, process, or item, **update the `notes` field** to capture
+assumptions and rationale. This keeps decisions auditable and prevents silent drift.
+
+**Use multiline notes** with short labeled lines:
+```yaml
+notes: |
+  Assumptions:
+  - Medium-duty unit (~10–15 kW), scaled from drive_motor_small_v0 by 4× mass.
+  - Housing thickness increased for vacuum thermal cycling.
+  Rationale:
+  - Chose steel over aluminum due to high-temp environment.
+  Uncertainty:
+  - Coil insulation likely import in Phase 1.
+```
+
+**What to capture in notes:**
+- **Assumptions** (operating conditions, size class, tech level)
+- **Rationale** (why a mass/qty/unit was chosen)
+- **Analogies/scaling** (what it was scaled from)
+- **Known gaps** or **uncertainty** (what needs future refinement)
+
+**Examples:**
+- Recipe change: “Assuming regolith_metal_crude yield ~0.9; input mass +10%.”
+- Part mass update: “Assuming 8 mm wall thickness for vacuum stability; aligned with steel_frame_heavy_duty.”
+- Template step override: “Assembly uses template process; step inputs overridden to BOM components.”
+
 ## Before Creating Parts or BOMs: Check Inventory First
 
 **CRITICAL: Always check existing parts before creating new ones.** Part reuse is essential for keeping the knowledge base tractable.
@@ -433,6 +461,16 @@ energy_model:
 - Batches: 10 motors / 1 motor per batch = 10 batches
 - Time: 10 × (0.1 + 0.9) = 10 hours
 - Energy: 10 unit × 0.2 kWh/unit = 2 kWh
+
+### Discrete vs Bulk Units (Machines and Parts)
+
+**Rule of thumb:** Machines and parts should be `unit_kind: discrete` and their
+recipes should output `unit`, not `kg`. Mass belongs on the item (`mass` in kg)
+and is used for conversions when needed.
+
+Common mistake:
+- ❌ Changing a machine/part recipe output to `kg` to "balance mass"
+- ✅ Keep output `unit` and ensure the item has a realistic `mass` in kg
 
 ### Boundary/Terminal Processes
 

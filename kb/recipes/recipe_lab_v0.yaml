@@ -12,10 +12,13 @@ inputs:
   - item_id: circuit_breaker_thermal_v0
     qty: 1
     unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 54.85
+    unit: kg
 outputs:
   - item_id: lab_v0
-    qty: 1
-    unit: unit
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
@@ -28,9 +31,16 @@ steps:
       - item_id: circuit_breaker_thermal_v0
         qty: 1
         unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 54.85
+        unit: kg
     outputs:
       - item_id: lab_v0
-        qty: 1
-        unit: unit
+        qty: 60.0
+        unit: kg
     notes: "Assemble lab equipment with enclosure and safety components"
-notes: "Updated to current recipe schema; uses standard unit operations to produce lab_v0 from base processes."
+notes: |
+  Assumptions:
+  - Added sheet/plate steel for bench structure and internal mounting not captured by small enclosure.
+  Rationale:
+  - Balances lab_v0 assembly mass to 60 kg output.

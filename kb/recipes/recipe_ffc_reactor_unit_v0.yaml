@@ -7,8 +7,8 @@ inputs:
     qty: 170.0
     unit: kg
   - item_id: molten_salt_containment_v0
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
   - item_id: graphite_anode_assembly_v0
     qty: 1.0
     unit: unit
@@ -16,14 +16,14 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: enclosure_steel_small
-    qty: 1.0
-    unit: unit
+    qty: 6.0
+    unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 2.0
     unit: kg
   - item_id: control_components
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
 outputs:
   - item_id: ffc_reactor_unit_v0
     qty: 1.0
@@ -36,34 +36,34 @@ steps:
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 161.5
+        qty: 169.0
         unit: kg
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 161.5
+        qty: 169.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 161.5
+        qty: 169.0
         unit: kg
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 161.5
+        qty: 169.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 161.5
+        qty: 169.0
         unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 161.5
+        qty: 169.0
         unit: kg
       - item_id: molten_salt_containment_v0
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
       - item_id: graphite_anode_assembly_v0
         qty: 1.0
         unit: unit
@@ -72,40 +72,40 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 237.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 237.0
+        unit: kg
       - item_id: enclosure_steel_small
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 243.0
+        unit: kg
   - process_id: electrical_wiring_and_controls_v0
     inputs:
       - item_id: electrical_wire_and_connectors
         qty: 2.0
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 7.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 243.0
+        unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 7.0
+        unit: kg
     outputs:
       - item_id: ffc_reactor_unit_v0
         qty: 1.0

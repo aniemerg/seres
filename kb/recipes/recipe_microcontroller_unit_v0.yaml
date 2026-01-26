@@ -19,6 +19,9 @@ inputs:
   - item_id: copper_clad_laminate
     qty: 0.5
     unit: kg
+  - item_id: electronic_components_set
+    qty: 0.46
+    unit: kg
   - item_id: pcb_bare_board
     qty: 1.0
     unit: unit
@@ -59,20 +62,29 @@ steps:
       - item_id: pcb_bare_board
         qty: 1.0
         unit: unit
+      - item_id: electronic_components_set
+        qty: 0.46
+        unit: kg
     outputs:
       - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
   - process_id: microcontroller_unit_assembly_v0
     inputs:
       - item_id: microcontroller_ic_generic
         qty: 1.0
         unit: unit
       - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
     outputs:
       - item_id: microcontroller_unit_v0
         qty: 1.0
         unit: unit
-notes: "End-to-end path to produce microcontroller_unit_v0 from MCU IC generic and PCB."
+notes: |
+  Assumptions:
+  - PCB population includes 0.46 kg electronic_components_set to balance 0.5 kg populated board mass.
+  Rationale:
+  - Preserve mass balance while keeping existing PCB and MCU IC steps.
+  Uncertainty:
+  - Electronic component mass split is placeholder pending detailed BOM.

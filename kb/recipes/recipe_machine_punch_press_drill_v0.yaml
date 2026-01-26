@@ -27,11 +27,11 @@ inputs:
     qty: 1
     unit: kg
   - item_id: assembled_equipment
-    qty: 1
-    unit: unit
+    qty: 340.0
+    unit: kg
   - item_id: assembled_electrical_system
-    qty: 1
-    unit: unit
+    qty: 340.0
+    unit: kg
 outputs:
   - item_id: punch_press_drill
     qty: 1
@@ -78,16 +78,16 @@ steps:
       unit: unit
     outputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 340.0
+      unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Assemble press mechanism, drive system, and tooling mounts"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 340.0
+      unit: kg
     - item_id: electronic_components_set
       qty: 1
       unit: kg
@@ -96,16 +96,16 @@ steps:
       unit: kg
     outputs:
     - item_id: assembled_electrical_system
-      qty: 1
-      unit: unit
+      qty: 340.0
+      unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Wire motor controls and safety interlocks"
   - process_id: integration_test_basic_v0
     inputs:
     - item_id: assembled_electrical_system
-      qty: 1
-      unit: unit
+      qty: 340.0
+      unit: kg
     outputs:
     - item_id: punch_press_drill
       qty: 1

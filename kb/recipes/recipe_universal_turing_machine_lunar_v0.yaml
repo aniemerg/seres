@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: universal_turing_machine_lunar_v0
 inputs:
   - item_id: raw_metal_block
-    qty: 1.0
+    qty: 35.0
     unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
@@ -24,8 +24,8 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
 outputs:
   - item_id: universal_turing_machine_lunar_v0
     qty: 1.0
@@ -34,15 +34,15 @@ steps:
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: raw_metal_block
-        qty: 1.0
+        qty: 35.0
         unit: kg
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
   - process_id: electronics_assembly_v0
     inputs:
       - item_id: pcb_populated
@@ -70,22 +70,25 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
       - item_id: enclosure_electrical_medium
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: universal_turing_machine_lunar_v0
         qty: 1.0
         unit: unit
-notes: "Seeded assembly path for universal_turing_machine_lunar_v0 using existing unit operations. Placeholder chain to enable local manufacturing modeling."
+notes: |
+  Assumptions:
+  - Raw metal block scaled to 35 kg to balance assembled_equipment output mass.
+  Seeded assembly path for universal_turing_machine_lunar_v0 using existing unit operations. Placeholder chain to enable local manufacturing modeling.

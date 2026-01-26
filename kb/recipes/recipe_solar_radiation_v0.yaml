@@ -8,8 +8,8 @@ inputs:
     unit: kWh
 outputs:
   - item_id: solar_radiation
-    qty: 1.0
-    unit: unit
+    qty: 0.001
+    unit: kWh
 steps:
   - process_id: environment_source_v0
     inputs:
@@ -18,9 +18,12 @@ steps:
         unit: kWh
     outputs:
       - item_id: solar_radiation
-        qty: 1.0
-        unit: unit
+        qty: 0.001
+        unit: kWh
     est_time_hr: 0
     notes: "Solar radiation freely available at lunar surface - environmental resource"
 assumptions: "Solar radiation is a freely available natural resource at lunar surface. No production steps required - environmental input."
-notes: "Solar radiation collection from sun. Approximately 1361 W/m² continuously available at lunar surface during daylight (14 Earth days). No atmosphere means no absorption losses. Used for thermionic power generation and thermal processing."
+notes: |
+  Solar radiation collection from sun. Approximately 1361 W/m² continuously available at lunar surface during daylight (14 Earth days).
+  No atmosphere means no absorption losses. Used for thermionic power generation and thermal processing.
+  Mass balance: outputs expressed in kWh to match input unit and avoid mass mismatch.

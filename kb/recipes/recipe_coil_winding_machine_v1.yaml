@@ -25,6 +25,9 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 1
     unit: unit
+  - item_id: sheet_metal_or_structural_steel
+    qty: 32.0
+    unit: kg
 outputs:
   - item_id: coil_winding_machine
     qty: 1
@@ -53,13 +56,27 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
+      - item_id: sheet_metal_or_structural_steel
+        qty: 32.0
+        unit: kg
     outputs:
-      - item_id: coil_winding_machine
-        qty: 1
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 120.0
+        unit: kg
     est_time_hr: 8.5
     machine_hours: 4.5
     labor_hours: 6.0
     notes: "Cast and machine frame and base, machine spindle mounting and bearing journals, assemble frame with spindle drive motor and wire tensioning mechanism, install motor controller, turn counter, and speed control electronics"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 120.0
+        unit: kg
+    outputs:
+      - item_id: coil_winding_machine
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
 assumptions: "Motor controller and turn counter electronics fabricated or imported"
 notes: "Assembly of coil winding machine from BOM components with motorized spindle, wire tensioning, and turn counting control"

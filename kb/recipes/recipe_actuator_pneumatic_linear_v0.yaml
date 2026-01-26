@@ -11,8 +11,8 @@ inputs:
     qty: 3.0
     unit: kg
   - item_id: seal_set_high_temp
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: fittings_and_valves
     qty: 0.5
     unit: kg
@@ -23,11 +23,11 @@ inputs:
     qty: 10.0
     unit: kg
   - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
+    qty: 11.2
+    unit: kg
   - item_id: wired_electrical_system
-    qty: 1.0
-    unit: unit
+    qty: 11.2
+    unit: kg
 outputs:
   - item_id: actuator_pneumatic_linear
     qty: 1.0
@@ -51,8 +51,8 @@ steps:
         qty: 10.0
         unit: kg
       - item_id: seal_set_high_temp
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
       - item_id: fittings_and_valves
         qty: 0.5
         unit: kg
@@ -61,22 +61,22 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 11.2
+        unit: kg
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 11.2
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 11.2
+        unit: kg
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 11.2
+        unit: kg
     outputs:
       - item_id: actuator_pneumatic_linear
         qty: 1.0

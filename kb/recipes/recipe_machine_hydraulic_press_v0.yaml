@@ -3,7 +3,7 @@ target_item_id: hydraulic_press
 variant_id: v0
 inputs:
   - item_id: steel_plate_raw
-    qty: 150.0
+    qty: 424.0
     unit: kg
   - item_id: hydraulic_cylinder_large
     qty: 1
@@ -16,7 +16,7 @@ inputs:
     unit: unit
   - item_id: fastener_kit_large
     qty: 2.0
-    unit: kg
+    unit: unit
 outputs:
   - item_id: hydraulic_press
     qty: 1
@@ -25,11 +25,11 @@ steps:
   - process_id: welded_fabrication_basic_v0
     inputs:
       - item_id: steel_plate_raw
-        qty: 150.0
+        qty: 424.0
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 145.0
+        qty: 410.0
         unit: kg
     est_time_hr: 5.0
     machine_hours: 3.5
@@ -38,11 +38,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 145.0
+        qty: 410.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 140.0
+        qty: 398.0
         unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
@@ -51,7 +51,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 140.0
+        qty: 398.0
         unit: kg
       - item_id: hydraulic_cylinder_large
         qty: 1
@@ -64,7 +64,7 @@ steps:
         unit: unit
       - item_id: fastener_kit_large
         qty: 2.0
-        unit: kg
+        unit: unit
     outputs:
       - item_id: hydraulic_press
         qty: 1

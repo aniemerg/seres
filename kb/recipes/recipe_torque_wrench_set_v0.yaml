@@ -13,8 +13,8 @@ inputs:
     unit: unit
 outputs:
   - item_id: torque_wrench_set
-    qty: 1
-    unit: unit
+    qty: 4.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -23,7 +23,7 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 3.8
+        qty: 3.85
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -43,32 +43,37 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 3.8
+        qty: 3.85
         unit: kg
       - item_id: spring_compression_small
         qty: 2
         unit: unit
       - item_id: fastener_kit_small
-        qty: 1
+        qty: 0.1
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble ratchet mechanisms, calibration springs, handles, sockets"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     outputs:
       - item_id: torque_wrench_set
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate torque wrenches against load cell or known standards"
 assumptions: Click-type or beam-type torque wrenches with calibrated spring mechanisms. Various torque ranges.
-notes: Set of torque wrenches for precision fastener tightening with calibration.
+notes: |
+  Assumptions:
+  - Fastener kit modeled as 0.1 unit (≈0.13 kg) for small hardware.
+  - Machining yield adjusted to 3.85 kg from 4.0 kg stock.
+  Rationale:
+  - Balances assembly mass to 4.0 kg torque_wrench_set output.

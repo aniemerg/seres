@@ -5,61 +5,67 @@ target_item_id: neural_network_training_system_v0
 variant_id: v0
 inputs:
   - item_id: computer_workstation
-    qty: 1
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: control_compute_module_imported
-    qty: 4
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: computer_core_imported
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: control_components
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: power_supply_dc_high_current
-    qty: 1
-    unit: unit
+    qty: 40.0
+    unit: kg
   - item_id: cooling_loop_basic
-    qty: 1
-    unit: unit
+    qty: 60.0
+    unit: kg
   - item_id: storage_enclosure
-    qty: 1
-    unit: unit
+    qty: 370.0
+    unit: kg
 outputs:
   - item_id: neural_network_training_system_v0
-    qty: 1
-    unit: unit
+    qty: 500.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: computer_workstation
-        qty: 1
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 4
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: computer_core_imported
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: control_components
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: power_supply_dc_high_current
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: cooling_loop_basic
-        qty: 1
-        unit: unit
+        qty: 60.0
+        unit: kg
       - item_id: storage_enclosure
-        qty: 1
-        unit: unit
+        qty: 370.0
+        unit: kg
     outputs:
       - item_id: neural_network_training_system_v0
-        qty: 1
-        unit: unit
+        qty: 500.0
+        unit: kg
     est_time_hr: 12.0
     machine_hours: 2.0
     labor_hours: 10.0
     notes: "Install workstation in rack, install GPU accelerator cards, connect storage module, install network switch and cabling, connect high-capacity power supply, install cooling system, configure and test all components"
 assumptions: "Legacy step format updated to process_id dictionaries"
-notes: "Initial placeholder recipe to enable manufacturing modeling for neural_network_training_system_v0"
+notes: |
+  Assumptions:
+  - Storage enclosure mass scaled to balance 500 kg system placeholder.
+  Rationale:
+  - Preserve mass balance and align inputs with item mass units.
+  Uncertainty:
+  - Actual compute/storage mass split needs refinement.

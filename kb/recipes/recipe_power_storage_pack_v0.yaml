@@ -3,20 +3,24 @@ target_item_id: power_storage_pack
 variant_id: v0
 inputs:
   - item_id: regolith_metal_crude
-    qty: 20.0
+    qty: 50.0
     unit: kg
   - item_id: battery_pack_nife
-    qty: 2
-    unit: unit
+    qty: 20.0
+    unit: kg
+outputs:
+  - item_id: power_storage_pack
+    qty: 60.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 20.0
+        qty: 50.0
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 19.0
+        qty: 47.5
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -24,11 +28,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 19.0
+        qty: 47.5
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 17.0
+        qty: 42.75
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
@@ -36,11 +40,11 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 17.0
+        qty: 42.75
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 17.0
+        qty: 42.75
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
@@ -49,15 +53,15 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 17.0
+        qty: 42.75
         unit: kg
       - item_id: battery_pack_nife
-        qty: 2
-        unit: unit
+        qty: 20.0
+        unit: kg
     outputs:
       - item_id: power_storage_pack
-        qty: 1
-        unit: unit
+        qty: 60.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble pack with battery modules; enclosure + 2 NiFe battery modules"

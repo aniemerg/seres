@@ -19,8 +19,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: inert_gas_manifold
-    qty: 1.0
-    unit: unit
+    qty: 38.32
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -50,37 +50,37 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 33.32
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install valves, pressure regulators, gauges, and fittings"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 33.32
+        unit: kg
       - item_id: piping_components
         qty: 5.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 38.32
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Weld pipe connections and mounting brackets"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 38.32
+        unit: kg
     outputs:
       - item_id: inert_gas_manifold
-        qty: 1.0
-        unit: unit
+        qty: 38.32
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Pressure test all connections for leak-tight operation"
-assumptions: Machined manifold block with installed valves and fittings. Welded pipe connections. Leak tested for controlled atmosphere applications. Mass ~20 kg.
+assumptions: Machined manifold block with installed valves and fittings. Welded pipe connections. Leak tested for controlled atmosphere applications. Mass ~38 kg.
 notes: Gas manifold and valving system for controlled atmosphere chambers. Distributes inert gas (argon, nitrogen) with pressure control.

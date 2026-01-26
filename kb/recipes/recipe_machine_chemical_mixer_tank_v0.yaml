@@ -3,7 +3,7 @@ target_item_id: chemical_mixer_tank
 variant_id: v0
 inputs:
   - item_id: sheet_metal_or_structural_steel
-    qty: 150.0
+    qty: 153.02
     unit: kg
 outputs:
   - item_id: chemical_mixer_tank
@@ -13,11 +13,14 @@ steps:
   - process_id: sheet_metal_cutting_v0
     inputs:
       - item_id: sheet_metal_or_structural_steel
-        qty: 150.0
+        qty: 153.02
         unit: kg
     outputs:
       - item_id: metal_sheet_or_plate
-        qty: 147.0
+        qty: 150.0
+        unit: kg
+      - item_id: steel_scrap_v0
+        qty: 3.0
         unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
@@ -26,11 +29,11 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: metal_sheet_or_plate
-        qty: 147.0
+        qty: 150.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 147.0
+        qty: 150.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.2
@@ -39,7 +42,7 @@ steps:
   - process_id: pressure_testing_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 147.0
+        qty: 150.0
         unit: kg
     outputs:
       - item_id: chemical_mixer_tank

@@ -4,7 +4,7 @@ target_item_id: seal_rubber_bearing
 variant_id: v0
 inputs:
   - item_id: silicone_rubber
-    qty: 0.06
+    qty: 0.26
     unit: kg
     notes: Silicone rubber proxy for molding seals
 outputs:
@@ -15,12 +15,16 @@ steps:
   - process_id: elastomer_molding_basic_v0
     inputs:
       - item_id: silicone_rubber
-        qty: 0.06
+        qty: 0.26
         unit: kg
     outputs:
       - item_id: molded_rubber_or_plastic_piece_v0
         qty: 1.0
         unit: unit
+    byproducts:
+      - item_id: waste
+        qty: 0.01
+        unit: kg
   - process_id: inspection_basic_v0
     inputs:
       - item_id: molded_rubber_or_plastic_piece_v0

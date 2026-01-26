@@ -9,8 +9,8 @@ inputs:
     qty: 1
     unit: unit
   - item_id: electrical_wiring_kit
-    qty: 1
-    unit: unit
+    qty: 0.5
+    unit: kg
 outputs:
   - item_id: hv_enclosure_and_interlocks
     qty: 15.0
@@ -75,11 +75,11 @@ steps:
         qty: 14.5
         unit: kg
       - item_id: electrical_wiring_kit
-        qty: 1
-        unit: unit
+        qty: 0.5
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 14.8
+        qty: 15.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -87,7 +87,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 14.8
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: hv_enclosure_and_interlocks

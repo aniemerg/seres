@@ -3,77 +3,88 @@ target_item_id: water_electrolysis_system_v0
 variant_id: v0
 inputs:
   - item_id: steel_sheet_3mm
-    qty: 50.0
+    qty: 47.08
     unit: kg
   - item_id: sealing_gaskets
-    qty: 20.0
-    unit: each
+    qty: 10.0
+    unit: kg
   - item_id: electrolyzer_cell_stack
-    qty: 1.0
-    unit: each
+    qty: 25.0
+    unit: kg
   - item_id: piping_and_valves_set
     qty: 10.0
     unit: kg
   - item_id: gas_collection_system
-    qty: 2.0
-    unit: each
+    qty: 60.0
+    unit: kg
   - item_id: power_supply_dc_controlled
-    qty: 1.0
-    unit: each
+    qty: 2.0
+    unit: kg
   - item_id: pressure_gauge
-    qty: 2.0
-    unit: each
+    qty: 0.82
+    unit: kg
   - item_id: thermocouple_type_k_v0
-    qty: 2.0
-    unit: each
+    qty: 0.1
+    unit: kg
 outputs:
   - item_id: water_electrolysis_system_v0
-    qty: 150.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_fabrication_welding_v0
     inputs:
       - item_id: steel_sheet_3mm
-        qty: 50.0
+        qty: 47.08
         unit: kg
     outputs:
       - item_id: gas_separation_chamber
-        qty: 45.0
+        qty: 42.08
         unit: kg
     est_time_hr: 8.0
     notes: Fabricate and weld main electrolyzer tank
   - process_id: assembly_process_general_v0
     inputs:
       - item_id: gas_separation_chamber
-        qty: 45.0
+        qty: 42.08
         unit: kg
       - item_id: sealing_gaskets
-        qty: 20.0
-        unit: each
+        qty: 10.0
+        unit: kg
       - item_id: electrolyzer_cell_stack
-        qty: 1.0
-        unit: each
+        qty: 25.0
+        unit: kg
       - item_id: piping_and_valves_set
         qty: 10.0
         unit: kg
       - item_id: gas_collection_system
-        qty: 2.0
-        unit: each
+        qty: 60.0
+        unit: kg
       - item_id: power_supply_dc_controlled
-        qty: 1.0
-        unit: each
+        qty: 2.0
+        unit: kg
       - item_id: pressure_gauge
-        qty: 2.0
-        unit: each
+        qty: 0.82
+        unit: kg
       - item_id: thermocouple_type_k_v0
-        qty: 2.0
-        unit: each
+        qty: 0.1
+        unit: kg
     outputs:
-      - item_id: water_electrolysis_system_v0
+      - item_id: assembled_equipment
         qty: 150.0
         unit: kg
     est_time_hr: 12.0
     notes: Assemble electrolyzer stack, plumbing, power supply, instrumentation, test for leaks
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 150.0
+        unit: kg
+    outputs:
+      - item_id: water_electrolysis_system_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
 assumptions: |
   Alkaline electrolyzer design with KOH electrolyte.
   Multiple electrode plates in bipolar stack configuration.

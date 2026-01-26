@@ -4,81 +4,87 @@ target_item_id: atomization_unit_v0
 variant_id: v0
 inputs:
   - item_id: atomization_unit_module_v0
-    qty: 1
-    unit: unit
+    qty: 872.0
+    unit: kg
   - item_id: gas_inlet_manifold_v0
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: structural_frame_small_v0
-    qty: 2
-    unit: unit
+    qty: 24.0
+    unit: kg
   - item_id: general_purpose_fastener_v0
-    qty: 4
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: atomization_unit_v0
-    qty: 1
-    unit: unit
+    qty: 900.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     inputs:
       - item_id: atomization_unit_module_v0
-        qty: 1
-        unit: unit
+        qty: 872.0
+        unit: kg
       - item_id: gas_inlet_manifold_v0
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: structural_frame_small_v0
-        qty: 2
-        unit: unit
+        qty: 24.0
+        unit: kg
       - item_id: general_purpose_fastener_v0
-        qty: 4
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: atomization_unit_module_v0
-        qty: 1
-        unit: unit
+        qty: 872.0
+        unit: kg
       - item_id: gas_inlet_manifold_v0
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: structural_frame_small_v0
-        qty: 2
-        unit: unit
+        qty: 24.0
+        unit: kg
       - item_id: general_purpose_fastener_v0
-        qty: 4
-        unit: unit
+        qty: 2.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
     inputs:
       - item_id: atomization_unit_module_v0
-        qty: 1
-        unit: unit
+        qty: 872.0
+        unit: kg
       - item_id: gas_inlet_manifold_v0
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: structural_frame_small_v0
-        qty: 2
-        unit: unit
+        qty: 24.0
+        unit: kg
       - item_id: general_purpose_fastener_v0
-        qty: 4
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 900.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 900.0
+        unit: kg
     outputs:
       - item_id: atomization_unit_v0
-        qty: 1
-        unit: unit
+        qty: 900.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: Assemble atomization_unit_v0 per BOM; uses base_metal_parts from BOM as input; placeholder fabrication path
-notes: Placeholder recipe to manufacture atomization_unit_v0; to be refined with a detailed BOM and assembly steps
+notes: |
+  Assumptions:
+  - Module mass scaled to balance 900 kg atomization unit placeholder.
+  Rationale:
+  - Preserve mass balance and align inputs with item mass units.
+  Uncertainty:
+  - Module mass and frame sizing need refinement.

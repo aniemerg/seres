@@ -52,6 +52,11 @@ We will implement a **comprehensive, layered validation system** with the follow
 
 **2026-01-01:** Indexer queue generation skips `no_recipe` gaps for items marked `is_scrap: true` so byproducts do not enqueue recipe work.
 
+**2026-01-25:** Mass-balance fixes must not change discrete item outputs to `kg` or
+use fractional `unit` quantities for `unit_kind: discrete` items. Prefer bulk
+material inputs and explicit scrap/byproduct outputs to close mass, or adjust the
+item’s `mass`/`mass_kg` to match the recipe.
+
 ### 1. Validation Levels
 
 Define three severity levels for validation issues:

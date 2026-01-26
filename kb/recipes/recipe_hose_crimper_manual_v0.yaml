@@ -2,54 +2,55 @@ id: recipe_hose_crimper_manual_v0
 target_item_id: hose_crimper_manual
 variant_id: v0
 inputs:
+- item_id: steel_bar_stock
+  qty: 3.5
+  unit: kg
+  notes: Steel for frame, jaws, and dies
+outputs:
+- item_id: hose_crimper_manual
+  qty: 1.0
+  unit: unit
+- item_id: steel_scrap
+  qty: 0.5
+  unit: kg
+  notes: Machining waste
+steps:
+- process_id: machining_finish_basic_v0
+  inputs:
   - item_id: steel_bar_stock
     qty: 3.5
     unit: kg
-    notes: Steel for frame, jaws, and dies
-outputs:
-  - item_id: hose_crimper_manual
+  outputs:
+  - item_id: machined_part_raw
     qty: 3.0
     unit: kg
-  - item_id: steel_scrap
-    qty: 0.5
+  est_time_hr: 4.0
+  machine_hours: 4.0
+  notes: Machine crimper frame, jaws, screw mechanism, dies
+- process_id: heat_treat_basic_v0
+  inputs:
+  - item_id: machined_part_raw
+    qty: 3.0
     unit: kg
-    notes: Machining waste
-steps:
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 3.5
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 3.0
-        unit: kg
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Machine crimper frame, jaws, screw mechanism, dies"
-  - process_id: heat_treat_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 3.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 3.0
-        unit: kg
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Heat treat dies and jaws for wear resistance"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 3.0
-        unit: kg
-    outputs:
-      - item_id: hose_crimper_manual
-        qty: 3.0
-        unit: kg
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble frame, screw press, jaws, interchangeable dies"
-assumptions: Manual screw-type or lever-type crimper. Interchangeable dies for various hose sizes.
+  outputs:
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  notes: Heat treat dies and jaws for wear resistance
+- process_id: assembly_basic_v0
+  inputs:
+  - item_id: machined_part_raw
+    qty: 3.0
+    unit: kg
+  outputs:
+  - item_id: hose_crimper_manual
+    qty: 1.0
+    unit: unit
+  est_time_hr: 1.5
+  labor_hours: 1.5
+  notes: Assemble frame, screw press, jaws, interchangeable dies
+assumptions: Manual screw-type or lever-type crimper. Interchangeable dies for various
+  hose sizes.
 notes: Manual hydraulic hose crimper with interchangeable dies for hose fittings.

@@ -60,18 +60,6 @@ steps:
       - item_id: machined_part_raw
         qty: 402.0
         unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 401.0
-        unit: kg
-    est_time_hr: 1.2
-    labor_hours: 1.2
-    notes: "Install belt, idlers, gearbox, motor, and guards"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 401.0
-        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
@@ -79,23 +67,18 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Wire motor, controls, and safety switches"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: material_handling_equipment
         qty: 1
         unit: unit
-    est_time_hr: 0.6
-    labor_hours: 0.5
-    notes: "Run belt, verify tracking, safety interlocks, and load test"
+    est_time_hr: 3.8
+    labor_hours: 3.7
+    notes: "Install belt, idlers, gearbox, motor, and guards. Wire motor, controls, and safety switches. Run belt, verify tracking, safety interlocks, and load test. Total assembly, wiring, and testing time: ~3.8 hours."
 assumptions: "Small powered conveyor module used as generic material handling equipment for internal moves."
-notes: Local build for material handling equipment (powered conveyor module) from steel plate.
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Consolidated steps 3-5 (assembly → wiring → testing) into single final assembly step
+  - Removed generic intermediates (assembled_equipment, wired_electrical_system) causing mass issues
+  - Updated item mass from 400 kg to 404 kg to match component total
+  - Total time: ~6.9 hours (1 hr cutting + 1.5 hr welding + 0.6 hr machining + 3.8 hr assembly/wiring/testing)
+
+  Local build for material handling equipment (powered conveyor module) from steel plate.

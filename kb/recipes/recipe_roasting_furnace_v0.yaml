@@ -7,7 +7,7 @@ inputs:
     qty: 200.0
     unit: kg
   - item_id: structural_steel_frame
-    qty: 300.0
+    qty: 344.4
     unit: kg
   - item_id: heating_element_set_high_temp
     qty: 2
@@ -35,8 +35,8 @@ inputs:
     unit: unit
 outputs:
   - item_id: roasting_furnace_v0
-    qty: 1
-    unit: unit
+    qty: 900.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
@@ -44,7 +44,7 @@ steps:
         qty: 200.0
         unit: kg
       - item_id: structural_steel_frame
-        qty: 300.0
+        qty: 344.4
         unit: kg
       - item_id: heating_element_set_high_temp
         qty: 2
@@ -72,10 +72,16 @@ steps:
         unit: unit
     outputs:
       - item_id: roasting_furnace_v0
-        qty: 1
-        unit: unit
+        qty: 900.0
+        unit: kg
     est_time_hr: 44.0
     machine_hours: 44.0
     notes: "Fabricate steel shell and support frame, install refractory brick lining, install heating elements/insulation/gas handling system, install temperature control and monitoring"
 assumptions: "Roasting furnace for oxidizing sulfide ores to produce metal oxides + SO2"
-notes: "Assembly of roasting furnace with refractory lining, heating, and gas handling - critical equipment for sulfide ore oxidation and sulfur recovery"
+notes: |
+  Assumptions:
+  - Structural steel frame scaled to balance 900 kg furnace mass.
+  Rationale:
+  - Preserve mass balance while keeping existing BOM components.
+  Uncertainty:
+  - Frame mass and insulation requirements need refinement with design details.

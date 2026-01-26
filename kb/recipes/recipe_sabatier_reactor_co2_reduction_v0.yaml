@@ -2,68 +2,74 @@ id: recipe_sabatier_reactor_co2_reduction_v0
 kind: recipe
 target_item_id: sabatier_reactor_co2_reduction_v0
 inputs:
-  - item_id: regolith_metal_crude
+  - item_id: pressure_vessel_steel
+    qty: 1
+    unit: unit
+  - item_id: catalyst_bed_assembly
+    qty: 1
+    unit: unit
+  - item_id: heating_element_electric
+    qty: 1
+    unit: unit
+  - item_id: heat_exchanger_compact
+    qty: 1
+    unit: unit
+  - item_id: gas_inlet_manifold
+    qty: 1
+    unit: unit
+  - item_id: gas_outlet_manifold
+    qty: 1
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1
+    unit: unit
+  - item_id: pressure_gauge_set
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: sabatier_reactor_co2_reduction_v0
     qty: 1.0
-    unit: kg
+    unit: unit
 steps:
-  - process_id: metal_casting_basic_v0
-    inputs:
-      - item_id: regolith_metal_crude
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: cast_metal_parts
-        qty: 1.0
-        unit: kg
-    notes: "Cast housing and major subcomponents"
-  - process_id: welding_brazing_basic_v0
-    inputs:
-      - item_id: cast_metal_parts
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: welded_assemblies
-        qty: 1.0
-        unit: kg
-    notes: "Weld frame and major assemblies"
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: welded_assemblies
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-    notes: "Machine tolerances on mating surfaces"
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: machined_part_raw
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-    notes: "Assemble subassemblies into reactor housing"
-  - process_id: sealing_and_assembly_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-    notes: "Seal interfaces; install manifolds and sensors"
-  - process_id: machine_assembly_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
+      - item_id: pressure_vessel_steel
+        qty: 1
+        unit: unit
+      - item_id: catalyst_bed_assembly
+        qty: 1
+        unit: unit
+      - item_id: heating_element_electric
+        qty: 1
+        unit: unit
+      - item_id: heat_exchanger_compact
+        qty: 1
+        unit: unit
+      - item_id: gas_inlet_manifold
+        qty: 1
+        unit: unit
+      - item_id: gas_outlet_manifold
+        qty: 1
+        unit: unit
+      - item_id: temperature_controller_basic
+        qty: 1
+        unit: unit
+      - item_id: pressure_gauge_set
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
     outputs:
       - item_id: sabatier_reactor_co2_reduction_v0
         qty: 1.0
         unit: unit
-    notes: "Final assembly, inspection, and testing"
-notes: "Placeholder recipe to manufacture sabatier reactor (high-level assembly chain). BOM details defined separately in bom_sabatier_reactor_co2_reduction_v0.yaml"
+    est_time_hr: 12.0
+    labor_hours: 10.0
+    machine_hours: 2.0
+    notes: "Complete Sabatier reactor assembly: install catalyst bed in pressure vessel, mount heat exchanger, attach heating elements, connect gas manifolds, install temperature controller and pressure gauges, seal all interfaces, pressure test, commission reactor."
+notes: "Sabatier reactor assembly from BOM components. Converts CO2 + 4H2 → CH4 + 2H2O using Ni or Ru catalyst at 300-400°C and elevated pressure. Critical for life support (O2 recovery) and propellant production (methane fuel). Simplified from multi-step placeholder to single-step BOM-based assembly."
+assumptions: "150 kg reactor assembled from pressure vessel, catalyst bed, heat exchanger, heating elements, gas manifolds, temperature controller, pressure gauges, and fasteners per BOM. All components pre-fabricated. Replaced placeholder 1 kg metal casting approach with realistic BOM-based assembly."

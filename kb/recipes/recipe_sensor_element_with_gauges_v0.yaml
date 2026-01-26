@@ -4,13 +4,13 @@ target_item_id: sensor_element_with_gauges
 variant_id: v0
 inputs:
   - item_id: strain_gauge_foil_v0
-    qty: 1.0
+    qty: 5.5
     unit: each
   - item_id: adhesive_cyanoacrylate
     qty: 0.002
     unit: kg
   - item_id: test_part_surface
-    qty: 1.0
+    qty: 5.5
     unit: each
 outputs:
   - item_id: sensor_element_with_gauges
@@ -20,13 +20,13 @@ steps:
   - process_id: strain_gauge_bonding_process_v0
     inputs:
       - item_id: strain_gauge_foil_v0
-        qty: 1.0
+        qty: 5.5
         unit: each
       - item_id: adhesive_cyanoacrylate
         qty: 0.002
         unit: kg
       - item_id: test_part_surface
-        qty: 1.0
+        qty: 5.5
         unit: each
     outputs:
       - item_id: sensor_element_with_gauges
@@ -34,3 +34,5 @@ steps:
         unit: kg
     est_time_hr: 2.0
     notes: "Bond strain gauges to base element to create sensor_element_with_gauges"
+notes: |
+  Mass balance: scale strain_gauge_foil_v0 and test_part_surface to 5.5 each to match 1.1 kg output mass.

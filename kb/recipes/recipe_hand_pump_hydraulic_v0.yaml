@@ -7,8 +7,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: hand_pump_hydraulic
-    qty: 1
-    unit: unit
+    qty: 7.2
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -40,23 +40,11 @@ steps:
         qty: 7.2
         unit: kg
     outputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble piston, valves, seals, handle linkage, and fittings"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    outputs:
       - item_id: hand_pump_hydraulic
-        qty: 1
-        unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Pressure test pump, check seal integrity and valve operation"
+        qty: 7.2
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Assemble piston, valves, seals, handle linkage, and fittings. Pressure test pump, check seal integrity and valve operation."
 assumptions: Manual single-acting or double-acting hydraulic pump with check valves. Steel construction with replaceable seals.
 notes: Hydraulic hand pump for manual hydraulic system operation, testing, and bleeding. Provides high pressure from manual actuation.

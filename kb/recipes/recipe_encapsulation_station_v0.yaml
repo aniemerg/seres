@@ -3,57 +3,57 @@ target_item_id: encapsulation_station
 variant_id: v0
 inputs:
   - item_id: potting_dispensers
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: potting_vacuum_chamber_small
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: potting_curing_oven_small
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: potting_fixtures_and_molds
-    qty: 1.0
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: chemical_bath_ventilation
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: control_panel_basic
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: fastener_kit_small
-    qty: 1.0
-    unit: unit
+    qty: 1.3
+    unit: kg
 outputs:
   - item_id: encapsulation_station
-    qty: 1.0
-    unit: unit
+    qty: 83.3
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: potting_dispensers
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: potting_vacuum_chamber_small
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: potting_curing_oven_small
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: potting_fixtures_and_molds
-        qty: 1.0
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: chemical_bath_ventilation
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: control_panel_basic
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
       - item_id: fastener_kit_small
-        qty: 1.0
-        unit: unit
+        qty: 1.3
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 83.3
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -61,11 +61,11 @@ steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 83.3
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 83.3
         unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
@@ -73,12 +73,12 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 83.3
         unit: kg
     outputs:
       - item_id: encapsulation_station
-        qty: 1.0
-        unit: unit
+        qty: 83.3
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Test vacuum degassing, curing cycle, and ventilation airflow."

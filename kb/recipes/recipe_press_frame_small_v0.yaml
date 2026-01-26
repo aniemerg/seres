@@ -3,40 +3,41 @@ kind: recipe
 target_item_id: press_frame_small
 inputs:
   - item_id: regolith_metal_crude
-    qty: 10.0
-    unit: kg
-  - item_id: machined_part_raw
-    qty: 10.0
+    qty: 85.0
     unit: kg
 steps:
 - process_id: metal_casting_basic_v0
   inputs:
     - item_id: regolith_metal_crude
-      qty: 10.0
+      qty: 85.0
       unit: kg
   outputs:
     - item_id: cast_metal_parts
-      qty: 9.5
+      qty: 80.0
       unit: kg
   notes: Cast press frame blank
 - process_id: machining_finish_basic_v0
   inputs:
-    - item_id: machined_part_raw
-      qty: 10.0
+    - item_id: cast_metal_parts
+      qty: 80.0
       unit: kg
   outputs:
     - item_id: machined_part_raw
-      qty: 10.0
+      qty: 80.0
       unit: kg
   notes: Machine finishing of frame features
 - process_id: assembly_basic_v0
   inputs:
     - item_id: machined_part_raw
-      qty: 10.0
+      qty: 80.0
       unit: kg
   outputs:
     - item_id: press_frame_small
-      qty: 1.0
-      unit: unit
+      qty: 80.0
+      unit: kg
   notes: Assemble components into final frame
-notes: '3-step production path: cast -> machine finish -> assemble'
+notes: |
+  Assumptions:
+  - Casting yield ~94% from regolith_metal_crude to cast_metal_parts.
+  Rationale:
+  - Scale casting/machining steps to match 80 kg press_frame_small output.

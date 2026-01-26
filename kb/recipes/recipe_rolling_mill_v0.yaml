@@ -8,6 +8,9 @@ inputs:
   - item_id: steel_drum
     qty: 20.0
     unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 1113.0
+    unit: kg
   - item_id: motor_assembly
     qty: 12.0
     unit: kg
@@ -30,6 +33,9 @@ steps:
       - item_id: steel_drum
         qty: 20.0
         unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 1113.0
+        unit: kg
       - item_id: motor_assembly
         qty: 12.0
         unit: kg
@@ -44,30 +50,30 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 87.0
+        qty: 1200.0
         unit: kg
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 87.0
+        qty: 1200.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 87.0
+        qty: 1200.0
         unit: kg
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 87.0
+        qty: 1200.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 87.0
+        qty: 1200.0
         unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 87.0
+        qty: 1200.0
         unit: kg
     outputs:
       - item_id: rolling_mill_v0

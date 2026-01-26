@@ -21,6 +21,9 @@ inputs:
   - item_id: structural_frame_steel
     qty: 100.0
     unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 43.5
+    unit: kg
   - item_id: thermal_insulation_basic
     qty: 30.0
     unit: kg
@@ -55,6 +58,9 @@ steps:
       - item_id: structural_frame_steel
         qty: 100.0
         unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 43.5
+        unit: kg
       - item_id: thermal_insulation_basic
         qty: 30.0
         unit: kg
@@ -70,5 +76,9 @@ steps:
         unit: unit
     notes: "Assemble ammonia recovery unit per BOM"
 notes: |
+  Assumptions:
+  - Added sheet/plate steel for enclosure and service panels not captured in BOM.
+  Rationale:
+  - Balances assembly mass to match 400 kg ammonia_recovery_unit_v0.
   Recipe for assembling ammonia recovery unit.
   Used in Solvay process for NH3 recycling.

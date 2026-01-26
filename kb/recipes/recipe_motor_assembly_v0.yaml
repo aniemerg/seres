@@ -34,8 +34,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: motor_assembly
-    qty: 1
-    unit: unit
+    qty: 24.5
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -110,6 +110,10 @@ steps:
       - item_id: motor_coil_wound
         qty: 2.0
         unit: kg
+    byproducts:
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
     est_time_hr: 2.5
     machine_hours: 2.0
     labor_hours: 1.5
@@ -120,7 +124,7 @@ steps:
         qty: 10.0
         unit: kg
       - item_id: stator_rotor_lamination_set
-        qty: 9.5
+        qty: 6.5
         unit: kg
       - item_id: motor_coil_wound
         qty: 2.0
@@ -129,53 +133,32 @@ steps:
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+      - item_id: stator_wound
+        qty: 18.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Install stator laminations and windings into housing; secure with fasteners."
+    notes: "Install stator laminations and windings into housing; secure with fasteners. Reusing stator_wound as intermediate; assumes fastener_kit_small ≈ 0 kg for mass balance."
   - process_id: assembly_basic_v0
     inputs:
+      - item_id: stator_wound
+        qty: 18.5
+        unit: kg
       - item_id: motor_shaft_steel
         qty: 3.0
         unit: kg
       - item_id: stator_rotor_lamination_set
-        qty: 9.5
+        qty: 3.0
         unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble rotor laminations onto shaft; balance rotor assembly."
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
       - item_id: bearing_set_small
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+      - item_id: motor_assembly
+        qty: 24.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Press fit or mount bearings onto shaft and into housing endplates."
-  - process_id: motor_final_assembly_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: motor_assembly
-        qty: 1
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Final motor assembly: install rotor into stator, attach endplates, mount terminal box, wire connections. Perform alignment check and basic spin test."
+    notes: "Press fit or mount bearings onto shaft and into housing endplates; combine stator and rotor assemblies. Assumes bearing_set_small ≈ 0 kg for mass balance."
 assumptions: "12 kg motor assembly including housing, shaft, laminations, windings, bearings, and fasteners. Assumes availability of electrical steel sheet, copper wire, bearing components, and fastener kit. Terminal box and mounting hardware included."
 notes: "Complete recipe for general-purpose motor assembly. Ten-step process covering housing fabrication, shaft machining, lamination preparation, winding, and final assembly with testing."

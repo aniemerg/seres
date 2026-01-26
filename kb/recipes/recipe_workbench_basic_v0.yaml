@@ -8,6 +8,9 @@ inputs:
   - item_id: steel_bar_stock
     qty: 2.0
     unit: kg
+  - item_id: bulk_material_or_parts
+    qty: 50.0
+    unit: kg
   - item_id: fastener_kit_small
     qty: 1
     unit: unit
@@ -40,9 +43,12 @@ steps:
     - item_id: fastener_kit_small
       qty: 1
       unit: unit
+    - item_id: bulk_material_or_parts
+      qty: 50.0
+      unit: kg
     outputs:
     - item_id: assembled_equipment
-      qty: 10.0
+      qty: 60.0
       unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -50,7 +56,7 @@ steps:
   - process_id: finishing_basic_v0
     inputs:
     - item_id: assembled_equipment
-      qty: 10.0
+      qty: 60.0
       unit: kg
     outputs:
     - item_id: workbench_basic

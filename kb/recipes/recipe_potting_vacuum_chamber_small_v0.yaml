@@ -7,13 +7,13 @@ inputs:
     unit: kg
   - item_id: gasket_sheet_part_v0
     qty: 0.5
-    unit: unit
+    unit: kg
   - item_id: valve_set_gas_handling
-    qty: 1
-    unit: unit
+    qty: 2.5
+    unit: kg
   - item_id: pressure_gauge
-    qty: 1
-    unit: unit
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
     inputs:
@@ -61,31 +61,37 @@ steps:
         unit: kg
       - item_id: gasket_sheet_part_v0
         qty: 0.5
-        unit: unit
+        unit: kg
       - item_id: valve_set_gas_handling
-        qty: 1
-        unit: unit
+        qty: 2.5
+        unit: kg
       - item_id: pressure_gauge
-        qty: 1
-        unit: unit
+        qty: 0.5
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 29.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Install gaskets, vacuum valve, gauge, and pump connection"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 29.0
+        unit: kg
     outputs:
       - item_id: potting_vacuum_chamber_small
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 0.4
     labor_hours: 0.3
     notes: "Pump-down and leak check"
 assumptions: "Bench-top vacuum potting chamber sized for degassing resins; uses welded steel body with simple seals."
-notes: Local fabrication for small potting vacuum chamber.
+notes: |
+  Assumptions:
+  - Valve/gauge/gasket masses aligned to item definitions.
+  Rationale:
+  - Preserve mass balance and align units with item mass units.
+  Uncertainty:
+  - Final chamber mass may need refinement with detailed design.

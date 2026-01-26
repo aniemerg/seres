@@ -3,17 +3,17 @@ target_item_id: thermionic_converter_v0
 variant_id: v0
 inputs:
   - item_id: ceramic_tube_body
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: refractory_metal_electrodes
-    qty: 2
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: ceramic_insulators
-    qty: 4
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: cesium_ampule
-    qty: 1
-    unit: unit
+    qty: 0.1
+    unit: kg
   - item_id: tungsten_cathode_coated
     qty: 1.0
     unit: unit
@@ -34,48 +34,48 @@ inputs:
     unit: unit
 outputs:
   - item_id: thermionic_converter_v0
-    qty: 1.0
-    unit: unit
+    qty: 294.3
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: ceramic_tube_body
-        qty: 1
-        unit: unit
+        qty: 3.0
+        unit: kg
       - item_id: refractory_metal_electrodes
-        qty: 2
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: ceramic_insulators
-        qty: 4
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: cesium_ampule
-        qty: 1
-        unit: unit
+        qty: 0.1
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 17.1
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble converter housing with thermal insulation and mounting structure"
   - process_id: vacuum_tube_assembly_v0
     inputs:
       - item_id: tungsten_cathode_coated
-        qty: 1.0
-        unit: unit
+        qty: 0.2
+        unit: kg
       - item_id: nickel_anode_plate
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: fused_silica_envelope
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: vacuum_seal_assembly
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: thermionic_vacuum_tube
-        qty: 1.0
-        unit: unit
+        qty: 12.2
+        unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
     labor_hours: 4.0
@@ -83,48 +83,48 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 17.1
+        unit: kg
       - item_id: thermionic_vacuum_tube
-        qty: 1.0
-        unit: unit
+        qty: 12.2
+        unit: kg
       - item_id: converter_housing_assembly
-        qty: 1.0
-        unit: unit
+        qty: 10.0
+        unit: kg
       - item_id: vacuum_seal_assembly
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 44.3
+        unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install 4-8 vacuum tube converters in array configuration with electrical series/parallel connections"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 44.3
+        unit: kg
       - item_id: heat_rejection_radiator
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Integrate heat rejection radiator and thermal management components"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Wire power output terminals and install monitoring sensors"
@@ -135,24 +135,24 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Test converter operation with heat source, verify electron emission and power output"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     outputs:
       - item_id: thermionic_converter_v0
-        qty: 1.0
-        unit: unit
+        qty: 294.3
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify vacuum integrity and electrical output"

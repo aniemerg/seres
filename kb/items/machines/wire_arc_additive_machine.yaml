@@ -2,25 +2,22 @@ id: wire_arc_additive_machine
 kind: machine
 name: Wire Arc Additive Manufacturing Machine
 mass: 1800.0
-unit: kg
+unit: unit
+is_import: true
 bom: bom_wire_arc_additive_machine_v1
-notes: 'Wire arc additive manufacturing (WAAM) machine. Deposits metal from a continuous
-  welding wire
+notes: 'Wire arc additive manufacturing (WAAM) machine. Deposits metal from continuous
+  welding wire using arc welding, suitable for rapid metallic part fabrication on
+  lunar surfaces.
 
-  using arc welding, suitable for rapid metallic part fabrication on lunar surfaces.
-  Mass is an
 
-  estimate based on large WAAM frames; actual mass may vary with configuration. Assumed
-  to be a
+  Mass is an estimate based on large WAAM frames; actual mass may vary with configuration.
+  Assumed to be a fixed-capacity fabricator with onboard drive & positioning.
 
-  fixed-capacity fabricator with onboard drive & positioning. This entry resolves
-  the gap for
 
-  referenced machine used in seeds/recipes; further operational parameters will be
-  refined as more
-
-  data becomes available.
+  Marked as import 2026-01: Currently no local manufacturing capability. Import-only
+  until BOM v1 is refined and local production recipe developed. See recipe_wire_arc_additive_machine_v2
+  notes.
 
   '
 recipe: recipe_wire_arc_additive_machine_v2
-unit_kind: bulk
+unit_kind: discrete

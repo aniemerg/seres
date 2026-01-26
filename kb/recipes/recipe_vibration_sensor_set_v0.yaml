@@ -3,30 +3,30 @@ target_item_id: vibration_sensor_set
 variant_id: v0
 inputs:
   - item_id: accelerometer_mechanical_v0
-    qty: 4.0
-    unit: each
+    qty: 0.8
+    unit: kg
   - item_id: steel_plate_or_sheet
-    qty: 1.0
+    qty: 0.1
     unit: kg
   - item_id: electrical_wire_and_connectors
-    qty: 0.2
+    qty: 0.05
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 0.05
+    unit: kg
 outputs:
   - item_id: vibration_sensor_set
     qty: 1.0
-    unit: unit
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_plate_or_sheet
-        qty: 1.0
+        qty: 0.1
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.1
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
@@ -34,15 +34,15 @@ steps:
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 0.2
+        qty: 0.05
         unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 0.05
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 0.1
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wire accelerometer elements, assemble signal conditioning circuits, install connectors"
@@ -51,28 +51,28 @@ steps:
     labor_hours: 1.0
     inputs:
       - item_id: accelerometer_mechanical_v0
-        qty: 4.0
-        unit: each
+        qty: 0.8
+        unit: kg
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.1
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 0.1
+        unit: kg
     outputs:
       - item_id: assembled_equipment
         qty: 1.0
-        unit: unit
+        unit: kg
     notes: "Mount sensors in housings, attach mounting hardware, complete cable assemblies"
   - process_id: calibration_basic_v0
     inputs:
       - item_id: assembled_equipment
         qty: 1.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: vibration_sensor_set
         qty: 1.0
-        unit: unit
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate vibration sensors against known vibration sources or reference accelerometers"

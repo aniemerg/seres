@@ -19,7 +19,7 @@ inputs:
     unit: kit
 outputs:
   - item_id: test_equipment_electronics
-    qty: 30.0
+    qty: 9.6
     unit: kg
 steps:
   - process_id: electronics_assembly_v0
@@ -41,7 +41,7 @@ steps:
         unit: kit
     outputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     est_time_hr: 12.0
     labor_hours: 10.0
@@ -49,11 +49,11 @@ steps:
   - process_id: calibration_basic_v0
     inputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     outputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     est_time_hr: 8.0
     labor_hours: 6.0
@@ -61,11 +61,11 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     outputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
@@ -73,14 +73,14 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     outputs:
       - item_id: test_equipment_electronics
-        qty: 30.0
+        qty: 9.6
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify calibration and operational status"
-assumptions: "Electronics test and measurement equipment set. Includes multimeters, oscilloscopes, signal generators, and power supplies. 30 kg collection of test instruments."
+assumptions: "Electronics test and measurement equipment set. Includes multimeters, oscilloscopes, signal generators, and power supplies. 9.6 kg collection of test instruments."
 notes: "Assembly of electronics test equipment set. Total assembly time ~23 hours. Requires calibration against known standards. Essential for electronics development and quality control."

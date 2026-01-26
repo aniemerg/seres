@@ -3,24 +3,24 @@ target_item_id: tension_roller_set
 variant_id: v1
 inputs:
   - item_id: regolith_metal_crude
-    qty: 1.0
+    qty: 15.4
     unit: kg
   - item_id: bearing_set_small
-    qty: 2.0
-    unit: unit
+    qty: 0.6
+    unit: kg
 outputs:
   - item_id: tension_roller_set
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
 steps:
 - process_id: metal_casting_basic_v0
   inputs:
     - item_id: regolith_metal_crude
-      qty: 1.0
+      qty: 15.4
       unit: kg
   outputs:
     - item_id: cast_metal_parts
-      qty: 0.95
+      qty: 14.6
       unit: kg
   est_time_hr: 1.5
   machine_hours: 1.5
@@ -29,11 +29,11 @@ steps:
 - process_id: machining_finish_basic_v0
   inputs:
     - item_id: cast_metal_parts
-      qty: 0.95
+      qty: 14.6
       unit: kg
   outputs:
     - item_id: machined_part_raw
-      qty: 1.0
+      qty: 14.4
       unit: kg
   est_time_hr: 2.0
   machine_hours: 2.0
@@ -42,15 +42,15 @@ steps:
 - process_id: assembly_basic_v0
   inputs:
     - item_id: machined_part_raw
-      qty: 1.0
+      qty: 14.4
       unit: kg
     - item_id: bearing_set_small
-      qty: 2.0
-      unit: unit
+      qty: 0.6
+      unit: kg
   outputs:
     - item_id: tension_roller_set
-      qty: 1.0
-      unit: unit
+      qty: 15.0
+      unit: kg
   est_time_hr: 0.8
   labor_hours: 0.8
   notes: "Install bearings and assemble roller set with tension springs/adjusters."

@@ -3,24 +3,24 @@ variant_id: v0
 target_item_id: conveyor_idler_set
 inputs:
   - item_id: steel_bar_raw
-    qty: 14.0
+    qty: 15.5
     unit: kg
   - item_id: bearing_set_small
     qty: 0.5
     unit: kg
 outputs:
   - item_id: conveyor_idler_set
-    qty: 1
-    unit: unit
+    qty: 15.0
+    unit: kg
 steps:
   - process_id: welded_fabrication_basic_v0
     inputs:
       - item_id: steel_bar_raw
-        qty: 14.0
+        qty: 15.5
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 13.5
+        qty: 15.0
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.8
@@ -29,11 +29,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 13.5
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 13.0
+        qty: 14.5
         unit: kg
     est_time_hr: 0.6
     machine_hours: 0.6
@@ -42,14 +42,14 @@ steps:
   - process_id: bearing_installation_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 13.0
+        qty: 14.5
         unit: kg
       - item_id: bearing_set_small
         qty: 0.5
         unit: kg
     outputs:
       - item_id: finished_part
-        qty: 13.5
+        qty: 15.0
         unit: kg
     est_time_hr: 0.4
     machine_hours: 0.2
@@ -58,12 +58,12 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: finished_part
-        qty: 13.5
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: conveyor_idler_set
-        qty: 1
-        unit: unit
+        qty: 15.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Assemble idler rollers and brackets into conveyor idler set"

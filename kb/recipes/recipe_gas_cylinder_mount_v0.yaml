@@ -7,10 +7,6 @@ inputs:
     qty: 4.5
     unit: kg
     notes: Steel plate for bracket fabrication
-  - item_id: steel_stock
-    qty: 2.0
-    unit: kg
-    notes: Stock material for mount fabrication
   - item_id: fastener_kit_medium
     qty: 0.3
     unit: kg
@@ -22,10 +18,20 @@ outputs:
 steps:
   - process_id: gas_cylinder_mount_basic_v0
     inputs:
-      - item_id: steel_stock
-        qty: 2.0
+      - item_id: steel_plate_or_sheet
+        qty: 4.5
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 0.3
         unit: kg
     outputs:
       - item_id: gas_cylinder_mount
         qty: 1.0
         unit: unit
+    byproducts:
+      - item_id: steel_scrap_v0
+        qty: 0.8
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Cut, form, weld, and drill steel plate to create cylinder mount bracket with mounting holes and retention straps. Includes hardware."

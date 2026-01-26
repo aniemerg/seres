@@ -27,19 +27,13 @@ steps:
       - item_id: machined_metal_block_v0
         qty: 50.0
         unit: kg
+      - item_id: metal_swarf
+        qty: 5.0
+        unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_metal_block_v0
         qty: 50.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
         unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 1.0
@@ -48,26 +42,11 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: kg
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: kg
-    outputs:
       - item_id: heliostat_actuator_unit_v0
         qty: 50.0
         unit: kg
-assumptions: "Assembles heliostat actuator unit from machined metal blocks and actuator subcomponents using standard assembly and wiring steps. Placeholder timings."
-notes: "Basic manufacturing chain for heliostat_actuator_unit_v0; downstream BOMs may refine inputs/outputs."
+      - item_id: metal_scrap
+        qty: 2.0
+        unit: kg
+assumptions: "Assembles heliostat actuator unit from machined metal blocks and actuator subcomponents using standard assembly and wiring steps. Generates 5 kg machining waste and 2 kg assembly scrap."
+notes: "Simplified manufacturing chain for heliostat_actuator_unit_v0 combining machining, assembly, wiring, and testing into two main steps."

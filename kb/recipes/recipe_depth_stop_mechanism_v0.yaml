@@ -6,27 +6,12 @@ inputs:
   - item_id: regolith_metal_crude
     qty: 2.1
     unit: kg
-  - item_id: rough_part
-    qty: 0.08
-    unit: kg
-  - item_id: center_insulator_ceramic
-    qty: 0.08
-    unit: kg
-  - item_id: machined_part_raw
-    qty: 0.075
-    unit: kg
   - item_id: steel_stock
     qty: 2.0
     unit: kg
-  - item_id: cutting_fluid
-    qty: 0.2
-    unit: L
   - item_id: spring_compression_small
     qty: 1.0
     unit: unit
-  - item_id: machined_steel_part_precision
-    qty: 1.4
-    unit: kg
 outputs:
   - item_id: depth_stop_mechanism
     qty: 1.0
@@ -47,23 +32,23 @@ steps:
   - process_id: machining_process_turning_v0
     inputs:
       - item_id: rough_part
-        qty: 0.08
+        qty: 2.0
         unit: kg
     outputs:
-      - item_id: machined_steel_part_precision
-        qty: 0.075
+      - item_id: machined_part_raw
+        qty: 1.8
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: Turn stop collar OD/ID, adjustment screw threads (M12-M16), and mounting surfaces on lathe
   - process_id: machining_process_drilling_v0
     inputs:
-      - item_id: center_insulator_ceramic
-        qty: 0.08
+      - item_id: machined_part_raw
+        qty: 1.8
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 0.075
+        qty: 1.7
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
@@ -71,11 +56,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 0.075
+        qty: 1.7
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 0.075
+        qty: 1.6
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
@@ -85,23 +70,20 @@ steps:
       - item_id: steel_stock
         qty: 2.0
         unit: kg
-      - item_id: cutting_fluid
-        qty: 0.2
-        unit: L
     outputs:
       - item_id: machined_steel_part_precision
         qty: 1.4
         unit: kg
     est_time_hr: 0.75
     machine_hours: 0.75
-    notes: Precision grind adjustment screw threads and stop collar contact surfaces for ±0.05mm repeatability
+    notes: Precision grind adjustment screw threads and stop collar contact surfaces for ±0.05mm repeatability. Cutting fluid used as process consumable.
   - process_id: assembly_basic_v0
     inputs:
+      - item_id: machined_part_raw
+        qty: 1.6
+        unit: kg
       - item_id: machined_steel_part_precision
         qty: 1.4
-        unit: kg
-      - item_id: machined_part_raw
-        qty: 0.075
         unit: kg
       - item_id: spring_compression_small
         qty: 1.0
@@ -112,6 +94,6 @@ steps:
         unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: Assemble adjustment screw, lock nut, compression spring (preload), stop collar, and mounting hardware. Test depth adjustment mechanism and verify repeatability
-assumptions: "2 kg depth stop mechanism assembly including precision adjustment screw (M12-M16 thread pitch), stop collar (50-80mm diameter), compression spring for preload, lock nut, and steel mounting bracket. Machined from cast steel blanks with precision grinding on critical surfaces for ±0.05mm depth control accuracy."
+    notes: Assemble adjustment screw, lock nut, compression spring (preload), stop collar, and mounting hardware. Test depth adjustment mechanism and verify repeatability. Assumes spring ≈ 0.1 kg for mass balance (1.6 + 1.4 + 0.1 ≈ 3.1 kg total, revised from 2 kg assumption)."
+assumptions: "~3 kg depth stop mechanism assembly including precision adjustment screw (M12-M16 thread pitch), stop collar (50-80mm diameter), compression spring for preload, lock nut, and steel mounting bracket. Machined from cast steel blanks with precision grinding on critical surfaces for ±0.05mm depth control accuracy. Mass revised from 2 kg to 3.1 kg based on detailed material flow."
 notes: "Complete six-step fabrication recipe for depth stop mechanism. Process flow: (1) cast metal component blanks, (2) turn cylindrical features and threads, (3) drill mounting and pin holes, (4) mill flat surfaces and finish threads, (5) precision grind critical contact surfaces, (6) final assembly with spring and hardware. Mechanism provides repeatable depth control for drill presses, vertical milling machines, and punch presses."

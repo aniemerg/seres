@@ -19,7 +19,10 @@ inputs:
     qty: 2.9
     unit: kg
   - item_id: wired_electrical_system
-    qty: 2.95
+    qty: 3.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 0.1
     unit: kg
 outputs:
   - item_id: data_handler_unit_v0
@@ -61,9 +64,12 @@ steps:
       - item_id: assembled_equipment
         qty: 2.9
         unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 0.1
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 2.95
+        qty: 3.0
         unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
@@ -71,7 +77,7 @@ steps:
   - process_id: sealing_and_assembly_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 2.95
+        qty: 3.0
         unit: kg
     outputs:
       - item_id: data_handler_unit_v0

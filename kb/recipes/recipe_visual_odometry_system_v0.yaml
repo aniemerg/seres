@@ -3,17 +3,17 @@ kind: recipe
 target_item_id: visual_odometry_system_v0
 inputs:
   - item_id: camera_vacuum_tube_vidicon_v0
-    qty: 2.0
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: control_panel_basic
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: bearing_set_heavy
-    qty: 1.0
-    unit: unit
+    qty: 4.0
+    unit: kg
   - item_id: steel_frame_heavy
-    qty: 1.0
-    unit: unit
+    qty: 140.0
+    unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
     unit: kg
@@ -28,30 +28,30 @@ steps:
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: steel_frame_heavy
-        qty: 1.0
-        unit: unit
+        qty: 140.0
+        unit: kg
       - item_id: bearing_set_heavy
-        qty: 1.0
-        unit: unit
+        qty: 4.0
+        unit: kg
       - item_id: control_panel_basic
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 159.0
+        unit: kg
     notes: Assemble VO sensor module base frame, housing, and electronics into submodule
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 159.0
+        unit: kg
       - item_id: camera_vacuum_tube_vidicon_v0
-        qty: 2.0
-        unit: unit
+        qty: 1.0
+        unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
-        qty: 1.0
+        qty: 160.0
         unit: kg
     notes: Mount VO submodule into enclosure and attach shielding
   - process_id: wiring_and_electronics_integration_v0
@@ -63,11 +63,15 @@ steps:
         qty: 1.0
         unit: kg
       - item_id: enclosure_electrical_medium
-        qty: 1.0
+        qty: 160.0
         unit: kg
     outputs:
       - item_id: visual_odometry_system_v0
         qty: 1.0
         unit: unit
     notes: Integrate wiring, sensors, and camera interface for visual odometry
-notes: Basic manufacturing path for Visual Odometry System v0; placeholder until BOMs defined.
+notes: |
+  Assumptions:
+  - Enclosure mass includes shielding and camera mount structure beyond electronics.
+  Rationale:
+  - Increased enclosure_electrical_medium mass to balance final assembly mass.

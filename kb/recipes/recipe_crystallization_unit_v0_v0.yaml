@@ -4,26 +4,32 @@ target_item_id: crystallization_unit_v0
 variant_id: v0
 inputs:
   - item_id: structural_frame_steel
-    qty: 1.0
-    unit: unit
+    qty: 425.0
+    unit: kg
   - item_id: aluminum_housing_machined_v0
-    qty: 1.0
-    unit: unit
+    qty: 75.0
+    unit: kg
 outputs:
   - item_id: crystallization_unit_v0
-    qty: 1.0
-    unit: unit
+    qty: 500.0
+    unit: kg
 steps:
   - process_id: crystallization_unit_assembly_v0
     inputs:
       - item_id: structural_frame_steel
-        qty: 1.0
-        unit: unit
+        qty: 425.0
+        unit: kg
       - item_id: aluminum_housing_machined_v0
-        qty: 1.0
-        unit: unit
+        qty: 75.0
+        unit: kg
     outputs:
       - item_id: crystallization_unit_v0
-        qty: 1.0
-        unit: unit
-notes: "Assemble crystallization unit from BOM components via final assembly step"
+        qty: 500.0
+        unit: kg
+notes: |
+  Assumptions:
+  - Structural frame mass scaled to 425 kg and housing to 75 kg to match 500 kg unit.
+  Rationale:
+  - Preserve mass balance with existing BOM components.
+  Uncertainty:
+  - Actual crystallization vessel and insulation masses are missing.

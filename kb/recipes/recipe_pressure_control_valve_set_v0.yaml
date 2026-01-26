@@ -19,11 +19,18 @@ steps:
       qty: 5.0
       unit: kg
       notes: "Stainless steel for valve bodies and fittings"
+  outputs:
+    - item_id: machined_part_raw
+      qty: 5.0
+      unit: kg
   est_time_hr: 2.0
   machine_hours: 2.0
   notes: "Machine valve bodies, seats, and pressure regulation components"
 - process_id: pressure_control_valve_assembly_v0
   inputs:
+    - item_id: machined_part_raw
+      qty: 5.0
+      unit: kg
     - item_id: steel_stock
       qty: 0.5
       unit: kg

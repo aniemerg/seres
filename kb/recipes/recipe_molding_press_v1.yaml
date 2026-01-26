@@ -65,12 +65,18 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 285.0
         unit: kg
     outputs:
       - item_id: molding_press
-        qty: 300.0
+        qty: 285.0
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
-notes: "Seeded new version; aligns with standard molding_press_v0 chain."
+notes: |
+  Assumptions:
+  - Final press mass set to 285 kg to match assembled equipment output.
+  Rationale:
+  - Preserve mass balance for integration test step.
+  Uncertainty:
+  - Press mass and scrap rate should be refined with detailed BOM.

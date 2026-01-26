@@ -268,6 +268,14 @@ notes: "Simplified BOM; grinding media not yet included"
      - Item is a bottleneck machine
      - Item is needed for simulation/recipe validation
 
+6. **Software and digital items are NOT BOM components**
+   - ❌ DO NOT include: software, source code, executables, algorithms, licenses
+   - ❌ DO NOT include: abstract resources (compute time, data streams)
+   - ✅ DO include: programmed microcontrollers (physical hardware with loaded firmware)
+   - ✅ DO include: storage media with data if physically manufactured (ROM chips, etc.)
+   - **Rationale**: BOMs track physical mass flow; software has no mass and breaks material closure analysis
+   - **For firmware**: Treat programming as a recipe process step, not a BOM component
+
 ---
 
 ## Labor Modeling

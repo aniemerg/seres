@@ -5,7 +5,7 @@ produces_qty: 40.0
 produces_unit: kg
 inputs:
   - item_id: regolith_metal_crude
-    qty: 40.0
+    qty: 42.4
     unit: kg
   - item_id: mixer_motor_small
     qty: 1.0
@@ -24,11 +24,11 @@ steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 40.0
+        qty: 42.4
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 38.0
+        qty: 40.4
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
@@ -36,11 +36,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 38.0
+        qty: 40.4
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 36.0
+        qty: 38.4
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -48,7 +48,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 36.0
+        qty: 38.4
         unit: kg
       - item_id: mixer_motor_small
         qty: 1.0

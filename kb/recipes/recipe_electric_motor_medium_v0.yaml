@@ -12,11 +12,14 @@ inputs:
     qty: 0.2
     unit: kg
   - item_id: bearing_set_small
-    qty: 2
-    unit: unit
+    qty: 0.6
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 6.9
+    unit: kg
 outputs:
   - item_id: electric_motor_medium
     qty: 1
@@ -73,27 +76,30 @@ steps:
         qty: 7.5
         unit: kg
       - item_id: bearing_set_small
-        qty: 2
-        unit: unit
+        qty: 0.6
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 6.9
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble motor with bearings, cooling fan, terminal box, and electrical connections"
   - process_id: balancing_dynamic_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     labor_hours: 1.0
@@ -101,8 +107,8 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
     outputs:
       - item_id: electric_motor_medium
         qty: 1

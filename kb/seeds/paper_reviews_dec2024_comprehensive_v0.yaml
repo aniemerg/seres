@@ -368,11 +368,11 @@ requires_ids:
   - rover_communication_system_v0              # Radio communication
 
   # Autonomy and AI
-  - slam_algorithm_implementation_v0           # Simultaneous Localization and Mapping
+  # slam_algorithm_implementation_v0 - REMOVED: software not modeled in KB
   - visual_odometry_system_v0                  # Camera-based dead reckoning
   - lidar_time_of_flight_simple_v0             # LiDAR for 3D mapping
   # terrain_analysis_ai_v0 - REMOVED: out of scope for self-replicating system
-  - path_planning_algorithm_v0                 # A* or similar path planning
+  # path_planning_algorithm_v0 - REMOVED: software not modeled in KB
   - obstacle_avoidance_ai_v0                   # Real-time obstacle avoidance
   - multi_rover_coordination_v0                # Multi-agent coordination
   - resource_prospecting_ai_v0                 # AI for resource identification
@@ -416,12 +416,12 @@ requires_ids:
   - cellular_manufacturing_layout_v0           # Cell-based production layout
   - manufacturing_cell_v0                      # Single manufacturing cell
 
-  # Holonic control (PROSA)
-  - holonic_control_prosa_v0                   # PROSA holonic architecture
-  - product_holon_v0                           # Product holon (knows product requirements)
-  - resource_holon_v0                          # Resource holon (machine agent)
-  - order_holon_v0                             # Order holon (task manager)
-  - staff_holon_v0                             # Staff holon (advisor/optimizer)
+  # Holonic control (PROSA) - REMOVED: software abstractions not modeled in KB
+  # holonic_control_prosa_v0 - REMOVED: software framework not modeled in KB
+  # product_holon_v0 - REMOVED: software abstraction not modeled in KB
+  # resource_holon_v0 - REMOVED: software abstraction not modeled in KB
+  # order_holon_v0 - REMOVED: software abstraction not modeled in KB
+  # staff_holon_v0 - REMOVED: software abstraction not modeled in KB
 
   # Stigmergy and swarm
   - stigmergy_coordination_system_v0           # Ant colony optimization variant

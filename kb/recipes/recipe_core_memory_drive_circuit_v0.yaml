@@ -2,84 +2,64 @@ id: recipe_core_memory_drive_circuit_v0
 kind: recipe
 name: Recipe for core memory drive circuit
 produces_id: core_memory_drive_circuit_v0
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 9.5
+produces_unit: kg
 target_item_id: core_memory_drive_circuit_v0
 inputs:
   - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: enclosure_steel_small
-    qty: 1.0
+    qty: 6.0
     unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
     unit: kg
 outputs:
   - item_id: core_memory_drive_circuit_v0
-    qty: 1.0
-    unit: unit
+    qty: 9.5
+    unit: kg
 steps:
 - process_id: electronics_assembly_v0
   inputs:
     - item_id: pcb_populated
-      qty: 1.0
-      unit: unit
+      qty: 0.5
+      unit: kg
     - item_id: electronic_components_set
-      qty: 1.0
-      unit: unit
+      qty: 2.0
+      unit: kg
   outputs:
     - item_id: assembled_electronics
-      qty: 1.0
-      unit: unit
+      qty: 2.5
+      unit: kg
   notes: Electronics assembly from PCB populated + electronic components set
 - process_id: enclosure_assembly_basic_v0
   inputs:
     - item_id: assembled_electronics
-      qty: 1.0
-      unit: unit
+      qty: 2.5
+      unit: kg
     - item_id: enclosure_steel_small
-      qty: 1.0
-      unit: kg
-  outputs:
-    - item_id: enclosure_electrical_medium
-      qty: 1.0
-      unit: kg
-  notes: Enclose electronics into a protective enclosure
-- process_id: wiring_and_electronics_integration_v0
-  inputs:
-    - item_id: enclosure_electrical_medium
-      qty: 1.0
+      qty: 6.0
       unit: kg
     - item_id: electrical_wire_and_connectors
       qty: 1.0
       unit: kg
   outputs:
     - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
-  notes: Wire harness integration and connectivity checks
+      qty: 9.5
+      unit: kg
+  notes: Enclose electronics and integrate wiring harness
 - process_id: calibration_and_test_basic_v0
   inputs:
     - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
-  outputs:
-    - item_id: device_calibrated
-      qty: 1.0
-      unit: unit
-  notes: Basic calibration and functional testing
-- process_id: assembly_basic_v0
-  inputs:
-    - item_id: device_calibrated
-      qty: 1.0
-      unit: unit
+      qty: 9.5
+      unit: kg
   outputs:
     - item_id: core_memory_drive_circuit_v0
-      qty: 1.0
-      unit: unit
-  notes: Final generic assembly/backfill step
+      qty: 9.5
+      unit: kg
+  notes: Basic calibration and functional testing
 notes: "Assembles core memory drive circuit from standard electronics subassemblies, enclosure, and wiring."

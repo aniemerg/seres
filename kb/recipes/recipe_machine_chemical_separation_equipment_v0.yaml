@@ -2,130 +2,101 @@ id: recipe_machine_chemical_separation_equipment_v0
 target_item_id: chemical_separation_equipment
 variant_id: v0
 inputs:
-  - item_id: steel_plate_or_sheet
-    qty: 180.0
+  - item_id: chemical_bath_tank_set
+    qty: 80.0
     unit: kg
-  - item_id: steel_stock
-    qty: 40.0
+  - item_id: agitation_pump_small
+    qty: 15.0
     unit: kg
-  - item_id: filler_wire_basic
-    qty: 4.0
+  - item_id: piping_and_valves_set
+    qty: 8.0
     unit: kg
-  - item_id: piping_components
-    qty: 5.0
+  - item_id: heating_element_set_basic
+    qty: 80.0
     unit: kg
-  - item_id: fittings_and_valves
-    qty: 1.0
-    unit: unit
-  - item_id: furnace_chamber_unequipped
-    qty: 1.0
-    unit: unit
-  - item_id: heating_element_resistive
-    qty: 1.0
-    unit: unit
-  - item_id: electrical_wire_and_connectors
+  - item_id: temperature_controller_basic
+    qty: 12.0
+    unit: kg
+  - item_id: control_circuit_board_basic
     qty: 2.0
     unit: kg
-  - item_id: electronic_components_set
-    qty: 1.0
+  - item_id: level_sensor_basic
+    qty: 5.0
+    unit: kg
+  - item_id: machine_frame_medium
+    qty: 200.0
     unit: kg
 outputs:
   - item_id: chemical_separation_equipment
-    qty: 1.0
-    unit: unit
+    qty: 402.0
+    unit: kg
 steps:
-  - process_id: cutting_basic_v0
+  - process_id: assembly_basic_v0
     inputs:
-      - item_id: steel_plate_or_sheet
-        qty: 180.0
+      - item_id: chemical_bath_tank_set
+        qty: 80.0
+        unit: kg
+      - item_id: agitation_pump_small
+        qty: 15.0
+        unit: kg
+      - item_id: piping_and_valves_set
+        qty: 8.0
+        unit: kg
+      - item_id: machine_frame_medium
+        qty: 200.0
         unit: kg
     outputs:
-      - item_id: cut_parts
-        qty: 180.0
+      - item_id: assembled_equipment
+        qty: 303.0
         unit: kg
-    est_time_hr: 1.5
-    machine_hours: 1.5
-    labor_hours: 0.7
-    notes: "Cut stainless/carbon steel sheet and tube for tank, frame, and piping."
-  - process_id: welded_fabrication_basic_v0
-    inputs:
-      - item_id: steel_stock
-        qty: 40.0
-        unit: kg
-      - item_id: filler_wire_basic
-        qty: 4.0
-        unit: kg
-      - item_id: cut_parts
-        qty: 180.0
-        unit: kg
-    outputs:
-      - item_id: welded_fabrications
-        qty: 220.0
-        unit: kg
-      - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.5
-    machine_hours: 2.0
-    labor_hours: 2.0
-    notes: "Fabricate vessel, mounts, and pipe spools; add nozzles and brackets."
-  - process_id: plumbing_and_pneumatics_v0
-    inputs:
-      - item_id: piping_components
-        qty: 5.0
-        unit: kg
-      - item_id: fittings_and_valves
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: plumbing_system_assembly
-        qty: 1.0
-        unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Assemble piping, valves, seals, and pump connections; leak check."
+    notes: "Assemble tank, pump, valves, and frame."
   - process_id: heating_element_installation_v0
     inputs:
-      - item_id: heating_element_resistive
-        qty: 1.0
-        unit: unit
-      - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 303.0
+        unit: kg
+      - item_id: heating_element_set_basic
+        qty: 80.0
+        unit: kg
     outputs:
-      - item_id: furnace_chamber_equipped
-        qty: 1.0
-        unit: unit
-    est_time_hr: 0.7
-    labor_hours: 0.7
-    notes: "Install heat tracing or immersion heaters and sensors."
+      - item_id: assembled_equipment
+        qty: 383.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Install heat tracing or immersion heaters."
   - process_id: wiring_and_electronics_integration_v0
     inputs:
-      - item_id: electrical_wire_and_connectors
+      - item_id: assembled_equipment
+        qty: 383.0
+        unit: kg
+      - item_id: temperature_controller_basic
+        qty: 12.0
+        unit: kg
+      - item_id: control_circuit_board_basic
         qty: 2.0
         unit: kg
-      - item_id: electronic_components_set
-        qty: 1.0
+      - item_id: level_sensor_basic
+        qty: 5.0
         unit: kg
-      - item_id: plumbing_system_assembly
-        qty: 1.0
-        unit: unit
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 402.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: "Wire temperature/flow/pH instruments, controls, and safety interlocks."
+    notes: "Wire temperature/level instrumentation and controls."
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 402.0
+        unit: kg
     outputs:
       - item_id: chemical_separation_equipment
-        qty: 1.0
-        unit: unit
+        qty: 402.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Water run/leak test and functional checks for pumps, heaters, and sensors."

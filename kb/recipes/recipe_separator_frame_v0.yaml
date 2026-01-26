@@ -5,9 +5,6 @@ inputs:
   - item_id: regolith_metal_crude
     qty: 140.0
     unit: kg
-  - item_id: machined_part_raw
-    qty: 140.0
-    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -16,14 +13,14 @@ steps:
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 133.0
+        qty: 140.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
     notes: Cast frame sections
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: machined_part_raw
+      - item_id: cast_metal_parts
         qty: 140.0
         unit: kg
     outputs:
@@ -35,12 +32,12 @@ steps:
     notes: Machine mounting surfaces and bearing seats
   - process_id: welding_brazing_basic_v0
     inputs:
-      - item_id: cast_metal_parts
-        qty: 133.0
+      - item_id: machined_part_raw
+        qty: 140.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 133.0
+        qty: 140.0
         unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
@@ -49,12 +46,12 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 133.0
+        qty: 140.0
         unit: kg
     outputs:
       - item_id: separator_frame
-        qty: 1.0
-        unit: unit
+        qty: 140.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: Final assembly with fasteners

@@ -62,8 +62,8 @@ steps:
       unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 247.0
+      unit: kg
   notes: Assemble hydraulic cylinders, rams, platens, pressure gauges
 - process_id: hydraulic_system_integration_v0
   inputs:
@@ -81,8 +81,8 @@ steps:
 - process_id: wiring_and_electronics_integration_v0
   inputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 247.0
+      unit: kg
     - item_id: hydraulic_system_medium
       qty: 1.0
       unit: kg
@@ -96,6 +96,10 @@ steps:
     - item_id: press_hydraulic
       qty: 1.0
       unit: unit
+  byproducts:
+    - item_id: assembly_waste
+      qty: 1.0
+      unit: kg
   notes: Install electrical controls, safety interlocks, pressure sensors
 notes: Multi-purpose hydraulic press for bearing installation, forming, and press fit operations.
 target_item_id: press_hydraulic

@@ -5,93 +5,74 @@ variant_id: v0
 target_item_id: electrolyzer_pem_v0_v0
 inputs:
   - item_id: electrolyzer_cell_stack
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: separator_membrane_porous
-    qty: 1.0
-    unit: unit
+    qty: 0.15
+    unit: kg
   - item_id: gas_collection_system
-    qty: 1.0
-    unit: unit
+    qty: 30.0
+    unit: kg
   - item_id: power_supply_dc_high_current
-    qty: 1.0
-    unit: unit
+    qty: 40.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1.0
-    unit: unit
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
-    notes: "Intermediate for enclosure and sealing steps"
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
-    unit: unit
-    notes: "Intermediate for enclosure step"
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 4.0
+    unit: kg
 outputs:
   - item_id: electrolyzer_pem_v0_v0
-    qty: 1.0
-    unit: unit
+    qty: 100.0
+    unit: kg
 steps:
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: electrolyzer_cell_stack
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: separator_membrane_porous
-        qty: 1.0
-        unit: unit
+        qty: 0.15
+        unit: kg
+      - item_id: power_supply_dc_high_current
+        qty: 40.0
+        unit: kg
+      - item_id: gas_collection_system
+        qty: 30.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1.0
-        unit: unit
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 4.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 4.0
-    machine_hours: 3.0
-    labor_hours: 3.0
-    notes: "Assemble PEM electrolyzer base frame and PEM stack components"
-  - process_id: electrical_assembly_basic_v0
+        qty: 100.0
+        unit: kg
+    est_time_hr: 6.0
+    machine_hours: 4.0
+    labor_hours: 5.0
+    notes: "Fabricate housing from steel plate, assemble PEM stack, install membrane, mount power supply and gas collection system, wire electrical connections. Total: 25 kg (stack) + 40 kg (power) + 30 kg (gas) + 0.15 kg (membrane) + 1 kg (fasteners) + 4 kg (housing) = 100.15 kg ≈ 100 kg."
+  - process_id: leak_test_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-      - item_id: power_supply_dc_high_current
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 1.5
-    notes: "Electrical harness and control module integration"
-  - process_id: enclosure_assembly_basic_v0
-    inputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-      - item_id: gas_collection_system
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.0
-    machine_hours: 0.5
-    labor_hours: 0.7
-    notes: "Mount in enclosure and secure"
-  - process_id: sealing_and_assembly_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 100.0
+        unit: kg
     outputs:
       - item_id: electrolyzer_pem_v0_v0
-        qty: 1.0
-        unit: unit
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Seal and finalize housing"
-notes: Placeholder recipe to manufacture PEM electrolyzer v0_v0; uses basic assembly and enclosure steps.
+        qty: 100.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Pressure test housing seals, verify electrical connections and gas output quality."
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Removed generic intermediate items (assembled_equipment, assembled_electrical_equipment)
+  - Consolidated 4 steps into 2: assembly + sealing/testing
+  - Updated machine mass from 260 kg to 100 kg to match component total
+  - All components now directly assembled in single step
+  - Total time: ~7 hours (6 hr assembly + 1 hr seal/test)
+
+  Placeholder recipe; BOM to be refined with actual PEM stack component data.

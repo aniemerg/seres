@@ -8,9 +8,6 @@ inputs:
   - item_id: filler_wire_basic
     qty: 1.0
     unit: kg
-  - item_id: furnace_chamber_unequipped
-    qty: 1.0
-    unit: unit
   - item_id: heating_element_resistive
     qty: 1.0
     unit: unit
@@ -41,9 +38,9 @@ steps:
         qty: 1.0
         unit: kg
     outputs:
-      - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
+      - item_id: welded_fabrications
+        qty: 46.0
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
     labor_hours: 0.8
@@ -53,9 +50,9 @@ steps:
       - item_id: heating_element_resistive
         qty: 1.0
         unit: unit
-      - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
+      - item_id: welded_fabrications
+        qty: 46.0
+        unit: kg
     outputs:
       - item_id: coating_drying_oven
         qty: 1.0
@@ -64,4 +61,6 @@ steps:
     labor_hours: 0.7
     notes: "Install heating elements, sensor, and wiring."
 assumptions: Low-temp forced-air oven; control via thermal_controller_basic; insulation optional.
-notes: Drying/curing oven for coating station.
+notes: |
+  Drying/curing oven for coating station.
+  Mass balance: use welded_fabrications output as oven shell; heating element qty restored to 1 unit.

@@ -9,7 +9,7 @@ inputs:
     qty: 0.05
     unit: kg
   - item_id: transformer_core
-    qty: 15.0
+    qty: 18.0
     unit: kg
   - item_id: potting_compound
     qty: 0.5
@@ -52,7 +52,7 @@ steps:
         qty: 2.0
         unit: kg
       - item_id: transformer_core
-        qty: 15.0
+        qty: 18.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
@@ -63,6 +63,9 @@ steps:
     notes: "Install laminated iron core, mount coils, add end insulation"
   - process_id: potting_and_sealing_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 20.0
+        unit: kg
       - item_id: potting_compound
         qty: 0.5
         unit: kg
@@ -113,4 +116,6 @@ steps:
     labor_hours: 0.5
     notes: "Verify all connections and insulation integrity"
 assumptions: "High-voltage transformer with high turns ratio and appropriate insulation. 20 kg unit for HV power supplies. Requires careful winding and insulation to prevent breakdown."
-notes: "Manufacturing of high-voltage transformer. Total fabrication time ~16.5 hours. Critical for HV testing equipment."
+notes: |
+  Manufacturing of high-voltage transformer. Total fabrication time ~16.5 hours. Critical for HV testing equipment.
+  Mass balance: potting step now includes assembled_equipment input.

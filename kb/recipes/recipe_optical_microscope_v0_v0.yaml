@@ -3,12 +3,62 @@ kind: recipe
 name: Recipe for optical microscope v0
 target_item_id: optical_microscope_v0
 variant_id: v0
+inputs:
+  - item_id: glass_lens_objective_set
+    qty: 0.6
+    unit: kg
+  - item_id: glass_lens_eyepiece
+    qty: 0.08
+    unit: kg
+  - item_id: prism_glass_optical
+    qty: 0.25
+    unit: kg
+  - item_id: illumination_lamp_led
+    qty: 0.05
+    unit: kg
+  - item_id: condenser_lens_assembly
+    qty: 0.3
+    unit: kg
+  - item_id: mechanical_stage_xy
+    qty: 2.0
+    unit: kg
+  - item_id: focusing_mechanism_coarse_fine
+    qty: 3.0
+    unit: kg
+  - item_id: steel_frame_microscope_body
+    qty: 8.0
+    unit: kg
 outputs:
   - item_id: optical_microscope_v0
     qty: 1.0
     unit: unit
 steps:
   - process_id: optical_microscope_assembly_v0
+    inputs:
+      - item_id: glass_lens_objective_set
+        qty: 0.6
+        unit: kg
+      - item_id: glass_lens_eyepiece
+        qty: 0.08
+        unit: kg
+      - item_id: prism_glass_optical
+        qty: 0.25
+        unit: kg
+      - item_id: illumination_lamp_led
+        qty: 0.05
+        unit: kg
+      - item_id: condenser_lens_assembly
+        qty: 0.3
+        unit: kg
+      - item_id: mechanical_stage_xy
+        qty: 2.0
+        unit: kg
+      - item_id: focusing_mechanism_coarse_fine
+        qty: 3.0
+        unit: kg
+      - item_id: steel_frame_microscope_body
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: optical_microscope_v0
         qty: 1.0

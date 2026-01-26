@@ -3,71 +3,77 @@ target_item_id: sintering_furnace_v0
 variant_id: v0
 inputs:
   - item_id: sintering_furnace_shell
-    qty: 1.0
-    unit: unit
+    qty: 790.5
+    unit: kg
   - item_id: heating_element_set_high_temp
-    qty: 1.0
-    unit: unit
+    qty: 74.5
+    unit: kg
   - item_id: insulation_pack_high_temp
-    qty: 1.0
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: temperature_sensing
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: sensor_suite_general
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: control_compute_module_imported
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: power_conditioning_module
-    qty: 1.0
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: cooling_loop_basic
-    qty: 1.0
-    unit: unit
+    qty: 60.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: sintering_furnace_v0
-    qty: 1.0
-    unit: unit
+    qty: 1067.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: sintering_furnace_shell
-        qty: 1.0
-        unit: unit
+        qty: 790.5
+        unit: kg
       - item_id: heating_element_set_high_temp
-        qty: 1.0
-        unit: unit
+        qty: 74.5
+        unit: kg
       - item_id: insulation_pack_high_temp
-        qty: 1.0
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: temperature_sensing
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: power_conditioning_module
-        qty: 1.0
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: cooling_loop_basic
-        qty: 1.0
-        unit: unit
+        qty: 60.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: sintering_furnace_v0
-        qty: 1.0
-        unit: unit
+        qty: 1067.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
 assumptions: Assemble per BOM; parts produced via part-level routes.
-notes: Coarse assembly route; add detailed steps later.
+notes: |
+  Assumptions:
+  - Shell mass scaled to balance 1067 kg furnace placeholder.
+  Rationale:
+  - Preserve mass balance and align inputs with item mass units.
+  Uncertainty:
+  - Shell and insulation mass split needs refinement.

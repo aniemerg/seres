@@ -7,17 +7,23 @@ produces_unit: unit
 target_item_id: power_electronics_module_v0
 variant_id: v0
 inputs:
-  - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+  - item_id: bare_pcb
+    qty: 3.0
+    unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
+    qty: 5.0
     unit: unit
-  - item_id: heat_sink
+  - item_id: heat_sink_assembly_large
     qty: 1.0
     unit: unit
   - item_id: thermal_interface_material
-    qty: 0.01
+    qty: 0.1
+    unit: kg
+  - item_id: enclosure_electrical_medium
+    qty: 1.0
+    unit: unit
+  - item_id: wire_copper_insulated
+    qty: 2.0
     unit: kg
 outputs:
   - item_id: power_electronics_module_v0
@@ -26,71 +32,49 @@ outputs:
 steps:
   - process_id: pcb_assembly_basic_v0
     inputs:
-      - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: pcb_with_control_circuits
-        qty: 1.0
-        unit: unit
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Assemble power PCB with microcontroller, gate drivers, sensing circuits"
-  - process_id: power_component_assembly_v0
-    inputs:
-      - item_id: pcb_with_control_circuits
-        qty: 1.0
-        unit: unit
+      - item_id: bare_pcb
+        qty: 3.0
+        unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
+        qty: 5.0
         unit: unit
     outputs:
-      - item_id: electronic_component_or_module
+      - item_id: pcb_populated
+        qty: 12.0
+        unit: kg
+      - item_id: metal_scrap
         qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
+        unit: kg
+    est_time_hr: 5.0
+    machine_hours: 4.0
     labor_hours: 2.0
-    notes: "Install power MOSFETs, inductors, capacitors, transformers"
-  - process_id: heat_sink_installation_v0
+    notes: "Populate PCBs with microcontroller, gate drivers, power MOSFETs, inductors, capacitors, transformers. Assembly waste from component trimming."
+  - process_id: assembly_basic_v0
     inputs:
-      - item_id: electronic_component_or_module
-        qty: 1.0
-        unit: unit
-      - item_id: heat_sink
+      - item_id: pcb_populated
+        qty: 12.0
+        unit: kg
+      - item_id: heat_sink_assembly_large
         qty: 1.0
         unit: unit
       - item_id: thermal_interface_material
-        qty: 0.01
+        qty: 0.1
         unit: kg
-    outputs:
-      - item_id: component_with_heat_sink
+      - item_id: enclosure_electrical_medium
         qty: 1.0
         unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Mount heat sinks to power semiconductors with thermal interface"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: component_with_heat_sink
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Mount in enclosure, wire connections, install cooling fan"
-  - process_id: electrical_testing_and_burn_in_v0
-    inputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
+      - item_id: wire_copper_insulated
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: power_electronics_module_v0
         qty: 1.0
         unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Test charge control, voltage regulation, load response"
-notes: "Integrated power electronics module for battery charging and voltage regulation in power management systems. Placeholder recipe; chain aligns with existing module design."
+      - item_id: metal_scrap
+        qty: 2.1
+        unit: kg
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Mount heat sinks to PCB, install in enclosure, wire connections, test charge control and voltage regulation. Generates scrap from wire trimming and thermal material excess."
+notes: "Power electronics module for battery charging and voltage regulation. Consolidated assembly from populated PCBs, heat sinks, enclosure, and wiring. Total input mass 53.1 kg, output 20 kg product + 3.1 kg waste. Simplified from multi-step placeholder recipe."
+assumptions: "20 kg module requires substantial PCB area (3 kg bare boards), power components (10 kg from electronic_components_set), heat sink (30 kg), enclosure (15 kg), wiring (2 kg), and thermal material (0.1 kg). 3.1 kg assembly waste from soldering flux, wire trimming, component packaging, and thermal paste excess."

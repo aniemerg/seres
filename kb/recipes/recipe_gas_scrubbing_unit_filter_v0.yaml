@@ -9,8 +9,8 @@ inputs:
     notes: "Porous ceramic media stock"
   - item_id: water
     qty: 2.4
-    unit: L
-    notes: "Water for ceramic slurry during forming"
+    unit: kg
+    notes: "Water for ceramic slurry during forming (2.4 L ≈ 2.4 kg)"
   - item_id: steel_plate_or_sheet
     qty: 0.5
     unit: kg
@@ -47,12 +47,15 @@ steps:
         unit: kg
       - item_id: water
         qty: 2.4
-        unit: L
+        unit: kg
     outputs:
       - item_id: green_ceramic_part
         qty: 12.0
         unit: kg
-    notes: "Form porous ceramic filter body from powder and binder"
+      - item_id: waste
+        qty: 2.4
+        unit: kg
+    notes: "Form porous ceramic filter body from powder and binder. Water evaporates during forming."
   - process_id: ceramic_sintering_v0
     inputs:
       - item_id: green_ceramic_part

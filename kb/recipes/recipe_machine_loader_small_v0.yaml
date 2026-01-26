@@ -3,69 +3,73 @@ target_item_id: loader_small
 variant_id: v0
 inputs:
   - item_id: machine_frame_medium
-    qty: 1.0
-    unit: unit
+    qty: 200.0
+    unit: kg
   - item_id: motor_electric_large
-    qty: 1.0
-    unit: unit
+    qty: 150.0
+    unit: kg
   - item_id: bucket_assembly_small
-    qty: 1.0
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: wheel_set_industrial
-    qty: 4.0
-    unit: unit
+    qty: 200.0
+    unit: kg
   - item_id: fastener_kit_large
-    qty: 2.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: hydraulic_cylinder_medium
-    qty: 4.0
-    unit: unit
+    qty: 480.0
+    unit: kg
   - item_id: hydraulic_pump_basic
-    qty: 1.0
-    unit: unit
+    qty: 30.0
+    unit: kg
   - item_id: hydraulic_hoses_and_fittings
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: hydraulic_control_valve_set
-    qty: 1.0
-    unit: unit
+    qty: 6.0
+    unit: kg
   - item_id: piping_components
     qty: 1.0
     unit: kg
   - item_id: control_compute_module_imported
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: sensor_suite_general
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: loader_small
-    qty: 1.0
-    unit: unit
+    qty: 1185.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machine_frame_medium
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
       - item_id: motor_electric_large
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
       - item_id: bucket_assembly_small
-        qty: 1.0
-        unit: unit
+        qty: 80.0
+        unit: kg
       - item_id: wheel_set_industrial
-        qty: 4.0
-        unit: unit
+        qty: 200.0
+        unit: kg
       - item_id: fastener_kit_large
-        qty: 2.0
-        unit: unit
+        qty: 20.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 650.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     machine_hours: 4.0
@@ -73,41 +77,51 @@ steps:
   - process_id: hydraulic_system_integration_v0
     inputs:
       - item_id: hydraulic_cylinder_medium
-        qty: 4.0
-        unit: unit
+        qty: 480.0
+        unit: kg
       - item_id: hydraulic_pump_basic
-        qty: 1.0
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: hydraulic_hoses_and_fittings
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: hydraulic_control_valve_set
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: piping_components
         qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: hydraulic_system_medium
+        qty: 525.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Install and test hydraulic system for bucket and arm operation"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 650.0
+        unit: kg
+      - item_id: hydraulic_system_medium
+        qty: 525.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: loader_small
-        qty: 1.0
-        unit: unit
+        qty: 1185.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Wire control systems and operator controls"

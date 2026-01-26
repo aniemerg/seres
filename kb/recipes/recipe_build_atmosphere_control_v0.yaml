@@ -31,6 +31,12 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 1
     unit: unit
+  - item_id: steel_frame_welded
+    qty: 30.2
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 6.53
+    unit: kg
 outputs:
   - item_id: build_atmosphere_control_v0
     qty: 1
@@ -65,10 +71,20 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
+      - item_id: steel_frame_welded
+        qty: 30.2
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 6.53
+        unit: kg
     outputs:
       - item_id: build_atmosphere_control_v0
         qty: 1
         unit: unit
+    byproducts:
+      - item_id: waste
+        qty: 0.2
+        unit: kg
     est_time_hr: 9.5
     labor_hours: 7.0
     machine_hours: 3.5

@@ -12,7 +12,7 @@ inputs:
     unit: kg
     notes: Ceramic forms and insulators
   - item_id: steel_frame_heavy
-    qty: 20.0
+    qty: 20.15
     unit: kg
     notes: Element mounting frames
   - item_id: terminal_block_set
@@ -24,7 +24,7 @@ inputs:
     unit: kg
     notes: Assembly hardware
   - item_id: heating_elements_basic
-    qty: 55.0
+    qty: 54.85
     unit: kg
     notes: Coil elements on ceramic forms
 
@@ -56,7 +56,7 @@ steps:
         unit: kg
     outputs:
       - item_id: heating_elements_basic
-        qty: 55.0
+        qty: 54.85
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -64,10 +64,10 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: heating_elements_basic
-        qty: 55.0
+        qty: 54.85
         unit: kg
       - item_id: steel_frame_heavy
-        qty: 20.0
+        qty: 20.15
         unit: kg
       - item_id: terminal_block_set
         qty: 3.0
@@ -77,16 +77,16 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 80.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount coil elements on support frames, install terminals and insulators"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 80.0
+        unit: kg
     outputs:
       - item_id: heating_element_set_basic
         qty: 80.0

@@ -13,8 +13,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: hv_rectifier_stack
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: electronics_assembly_v0
     inputs:
@@ -26,7 +26,7 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_electronics
-        qty: 4.0
+        qty: 2.5
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
@@ -41,7 +41,7 @@ steps:
         unit: kg
     outputs:
       - item_id: potted_electronic_assembly
-        qty: 4.5
+        qty: 3.0
         unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
@@ -49,12 +49,12 @@ steps:
   - process_id: electrical_testing_and_burn_in_v0
     inputs:
       - item_id: potted_electronic_assembly
-        qty: 4.5
+        qty: 3.0
         unit: kg
     outputs:
       - item_id: hv_rectifier_stack
-        qty: 1
-        unit: unit
+        qty: 3.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Test voltage withstand, leakage current, forward voltage drop, burn-in at rated current"

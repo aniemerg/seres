@@ -2,12 +2,20 @@ id: recipe_optical_microscope_v0
 kind: recipe
 name: Optical microscope v0 (modern steps)
 target_item_id: optical_microscope_v0
+inputs:
+  - item_id: import_misc_components_set
+    qty: 15.0
+    unit: kg
 outputs:
   - item_id: optical_microscope_v0
     qty: 1.0
     unit: unit
 steps:
   - process_id: optical_microscope_assembly_v0
+    inputs:
+      - item_id: import_misc_components_set
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: optical_microscope_v0
         qty: 1.0

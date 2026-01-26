@@ -1,0 +1,28 @@
+id: build_atmosphere_control_v0
+kind: machine
+name: Build atmosphere control system v0
+mass: 100.0
+unit: kg
+bom: bom_build_atmosphere_control_v0
+material_class: steel
+capabilities:
+- gas_handling
+- vacuum_control
+- sensors
+notes: 'Atmosphere control system for additive manufacturing build chambers.
+
+  Source: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md (AM process parameters)
+
+  Functions: Inert gas purging, vacuum control, oxygen monitoring
+
+  Gas types: Argon, nitrogen, or vacuum depending on material
+
+  Purpose: Prevents oxidation during metal AM processes
+
+  Components: Gas supply, flow controllers, vacuum pump, sensors
+
+  Critical for reactive metals (Ti, Al) and high-quality builds
+
+  '
+recipe: recipe_build_atmosphere_control_v0
+unit_kind: discrete

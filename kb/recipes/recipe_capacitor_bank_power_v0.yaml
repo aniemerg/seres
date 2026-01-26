@@ -6,7 +6,7 @@ inputs:
     qty: 10.0
     unit: kg
   - item_id: electrical_wire_and_connectors
-    qty: 1.0
+    qty: 14.0
     unit: kg
   - item_id: electronic_components_set
     qty: 1.0
@@ -30,7 +30,7 @@ steps:
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 1.0
+        qty: 14.0
         unit: kg
       - item_id: electronic_components_set
         qty: 1.0
@@ -48,29 +48,24 @@ steps:
         qty: 9.5
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: capacitor_bank_filter_v0
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Mount capacitors in enclosure, install safety discharge circuits and connections"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
+        qty: 1
         unit: unit
     outputs:
       - item_id: capacitor_bank_power
-        qty: 1.0
+        qty: 1
         unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Test capacitance, voltage rating, and verify safety discharge functions"
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    notes: "Mount capacitors in enclosure, install safety discharge circuits and connections, test capacitance/voltage rating, verify safety discharge functions. Total post-wiring time: 2 hours (assembly + testing)."
 assumptions: "Capacitor bank assembled from imported capacitor elements. Locally fabricated enclosure, wiring, and safety systems."
-notes: "Power capacitor bank for energy storage and power smoothing. Used in power conditioning and solar energy systems."
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed redundant integration_test_basic_v0 step that created self-reference
+  - Consolidated testing into final assembly step
+  - Total time unchanged: ~4.5 hours (1 hr fabrication + 2.5 hr wiring + 2 hr assembly/test)
+
+  Power capacitor bank for energy storage and power smoothing. Used in power conditioning and solar energy systems.
+  Mass balance: assembly step outputs capacitor_bank_power directly to avoid assembled_equipment mass mismatch.

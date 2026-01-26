@@ -4,23 +4,23 @@ target_item_id: chemical_reactor_unit_v1
 variant_id: v1
 inputs:
   - item_id: bulk_material_or_parts
-    qty: 1.0
+    qty: 47.0
     unit: kg
   - item_id: import_misc_components_set
     qty: 1.0
-    unit: unit
+    unit: kg
   - item_id: gas_inlet_manifold_v0
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: chemical_reactor_unit_v1
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     inputs:
       - item_id: bulk_material_or_parts
-        qty: 1.0
+        qty: 47.0
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
@@ -28,26 +28,32 @@ steps:
     inputs:
       - item_id: import_misc_components_set
         qty: 1.0
-        unit: unit
+        unit: kg
       - item_id: gas_inlet_manifold_v0
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
+      - item_id: bulk_material_or_parts
+        qty: 47.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: chemical_reactor_unit_v1
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
 assumptions: "Assemble chemical_reactor_unit_v1 from BOM components; placeholder steps for now."
-notes: "Placeholder machine-assembly path to close no_recipe gap for chemical_reactor_unit_v1."
+notes: |
+  Assumptions:
+  - Output mass aligned to assembled_equipment placeholder (50 kg).
+  Placeholder machine-assembly path to close no_recipe gap for chemical_reactor_unit_v1.

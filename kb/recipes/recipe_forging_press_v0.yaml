@@ -76,61 +76,54 @@ steps:
       - item_id: machined_part_raw
         qty: 850.0
         unit: kg
-  - process_id: hip_press_unit_assembly_v0
-    notes: "Assemble press unit from frame, hydraulic components, and control panels"
+  - process_id: assembly_basic_v0
+    notes: "Assemble complete forging press from frame and all components"
     inputs:
+      - item_id: machined_part_raw
+        qty: 850.0
+        unit: kg
       - item_id: steel_shell_thick
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: structural_steel_frame
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: hydraulic_pump_basic
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: control_panel_basic
-        qty: 1.0
+        qty: 1
         unit: kg
       - item_id: press_platen_set_medium
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: safety_guard_steel_mesh
-        qty: 2.0
+        qty: 2
         unit: unit
       - item_id: pressure_test_gauge_set
-        qty: 1.0
+        qty: 1
         unit: unit
-    outputs:
-      - item_id: hip_press_unit_v0
-        qty: 1.0
-        unit: unit
-  - process_id: hydraulic_system_integration_v0
-    notes: "Install hydraulic pump, hoses, manifolds, and controls"
-    inputs:
       - item_id: hydraulic_control_valve_set
-        qty: 1.0
+        qty: 1
         unit: kg
       - item_id: piping_components
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: hydraulic_system_medium
-        qty: 1.0
-        unit: kg
-  - process_id: wiring_and_electronics_integration_v0
-    notes: "Install electrical controls, interlocks, and sensors"
-    inputs:
-      - item_id: control_panel_basic
-        qty: 1.0
+        qty: 1
         unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 5.0
         unit: kg
       - item_id: sensor_suite_general
-        qty: 1.0
+        qty: 1
         unit: kg
     outputs:
       - item_id: forging_press_v0
-        qty: 1.0
+        qty: 1
         unit: unit
-notes: "Basic forging press manufacturing recipe; components and BOM to be expanded."
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Consolidated steps 3-5 (hip_press assembly, hydraulic integration, wiring) into single final assembly
+  - Previous structure had parallel component builds that never combined
+  - Final step now includes 850 kg machined frame + all components
+  - Total time: ~10 hours (casting + welding + machining + final assembly)
+
+  Basic forging press manufacturing recipe; components and BOM to be expanded.

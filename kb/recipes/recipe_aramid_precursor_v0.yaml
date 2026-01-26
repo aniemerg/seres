@@ -7,7 +7,7 @@ inputs:
     unit: kg
 outputs:
   - item_id: aramid_precursor_v0
-    qty: 1.0
+    qty: 0.8
     unit: kg
 steps:
   - process_id: aramid_precursor_synthesis_v0
@@ -17,9 +17,11 @@ steps:
         unit: kg
     outputs:
       - item_id: aramid_precursor_v0
-        qty: 1.0
+        qty: 0.8
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.3
     notes: "Synthesize aramid precursor from polymer feedstock"
-notes: "Aramid precursor synthesis for advanced materials production."
+notes: |
+  Aramid precursor synthesis for advanced materials production.
+  Mass balance: output set to 0.8 kg to match feedstock input mass.

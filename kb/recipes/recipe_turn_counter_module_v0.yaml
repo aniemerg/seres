@@ -30,6 +30,10 @@ steps:
         qty: 0.1
         unit: kg
         notes: "Counter IC, display driver, passive components"
+    outputs:
+      - item_id: pcb_populated
+        qty: 0.2
+        unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     notes: "Assemble circuit board with counter IC, display driver"
@@ -39,11 +43,23 @@ steps:
         qty: 0.1
         unit: kg
         notes: "Encoder sensor for rotation counting"
+    outputs:
+      - item_id: sensor_suite_general
+        qty: 0.1
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install encoder sensor or optical pickup"
   - process_id: assembly_basic_v0
     inputs:
+      - item_id: pcb_populated
+        qty: 0.2
+        unit: kg
+        notes: "Assembled counter PCB"
+      - item_id: sensor_suite_general
+        qty: 0.1
+        unit: kg
+        notes: "Integrated encoder sensor"
       - item_id: enclosure_small
         qty: 0.2
         unit: kg
@@ -56,4 +72,7 @@ steps:
     labor_hours: 0.5
     notes: "Mount in enclosure, wire display, test functionality"
 assumptions: Electronic counter module with rotary encoder or optical sensor, digital display, and simple enclosure.
-notes: Turn counter module for coil winding machines. Counts and displays rotation count via encoder sensor.
+notes: |
+  Assumptions:
+  - Mass balance uses pcb_populated output from PCB assembly step.
+  Turn counter module for coil winding machines. Counts and displays rotation count via encoder sensor.

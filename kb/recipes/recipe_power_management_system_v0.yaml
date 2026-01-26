@@ -1,64 +1,61 @@
 id: recipe_power_management_system_v0
 target_item_id: power_management_system
 variant_id: v0
-produces_qty: 1
-produces_unit: unit
+produces_qty: 84.05
+produces_unit: kg
 inputs:
   - item_id: power_management_control_unit
-    qty: 1
+    qty: 8.0
     unit: kg
   - item_id: power_distribution_panel_basic
-    qty: 1
+    qty: 20.0
     unit: kg
   - item_id: charge_controller_set
-    qty: 1
+    qty: 10.0
     unit: kg
   - item_id: power_output_terminals
-    qty: 1
+    qty: 2.0
     unit: kg
   - item_id: power_conditioning_module
-    qty: 1
+    qty: 12.0
     unit: kg
   - item_id: power_electronics_module
-    qty: 1
+    qty: 20.0
     unit: kg
   - item_id: cooling_fan_and_ducting
-    qty: 1
-    unit: unit
+    qty: 6.0
+    unit: kg
   - item_id: enclosure_small
-    qty: 1
+    qty: 4.75
     unit: kg
   - item_id: fastener_kit_small
-    qty: 1
-    unit: kg
-  - item_id: assembled_electronics
-    qty: 1
+    qty: 1.3
     unit: kg
 outputs:
   - item_id: power_management_system
-    qty: 1
-    unit: unit
+    qty: 84.05
+    unit: kg
 steps:
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: enclosure_small
-        qty: 1
+        qty: 4.75
         unit: kg
       - item_id: power_distribution_panel_basic
-        qty: 1
+        qty: 20.0
         unit: kg
       - item_id: power_output_terminals
-        qty: 1
+        qty: 2.0
         unit: kg
       - item_id: cooling_fan_and_ducting
-        qty: 1
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: fastener_kit_small
-        qty: 1
+        qty: 1.3
         unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
-        qty: 1
+        qty: 34.05
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
@@ -66,23 +63,23 @@ steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: enclosure_electrical_medium
-        qty: 1
+        qty: 34.05
         unit: kg
       - item_id: power_management_control_unit
-        qty: 1
+        qty: 8.0
         unit: kg
       - item_id: charge_controller_set
-        qty: 1
+        qty: 10.0
         unit: kg
       - item_id: power_conditioning_module
-        qty: 1
+        qty: 12.0
         unit: kg
       - item_id: power_electronics_module
-        qty: 1
+        qty: 20.0
         unit: kg
     outputs:
       - item_id: assembled_electronics
-        qty: 1
+        qty: 84.05
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -90,12 +87,12 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_electronics
-        qty: 1
+        qty: 84.05
         unit: kg
     outputs:
       - item_id: power_management_system
-        qty: 1
-        unit: unit
+        qty: 84.05
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Test charging, regulation, and load switching functions."

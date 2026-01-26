@@ -3,27 +3,12 @@ target_item_id: thermal_controller_basic
 variant_id: v0
 inputs:
   - item_id: enclosure_electrical_medium
-    qty: 12.0
+    qty: 3.0
     unit: kg
   - item_id: control_circuit_board_basic
-    qty: 2.0
+    qty: 1.0
     unit: kg
   - item_id: relay_electromagnetic_v0
-    qty: 2.0
-    unit: kg
-  - item_id: control_components
-    qty: 3.0
-    unit: kg
-  - item_id: assembled_wire_harness
-    qty: 3.0
-    unit: kg
-  - item_id: terminal_block_set
-    qty: 2.0
-    unit: kg
-  - item_id: fastener_kit_small
-    qty: 0.5
-    unit: kg
-  - item_id: din_rail_steel
     qty: 0.5
     unit: kg
   - item_id: sensor_suite_general
@@ -35,51 +20,24 @@ inputs:
   - item_id: electrical_wire_and_connectors
     qty: 1.0
     unit: kg
-  - item_id: assembled_electronics
-    qty: 1.0
-    unit: unit
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
 outputs:
   - item_id: thermal_controller_basic
     qty: 1.0
     unit: unit
 steps:
-  - process_id: control_panel_assembly_v0
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: enclosure_electrical_medium
-        qty: 12.0
+        qty: 3.0
         unit: kg
       - item_id: control_circuit_board_basic
-        qty: 2.0
+        qty: 1.0
         unit: kg
       - item_id: relay_electromagnetic_v0
-        qty: 2.0
-        unit: kg
-      - item_id: control_components
-        qty: 3.0
-        unit: kg
-      - item_id: assembled_wire_harness
-        qty: 3.0
-        unit: kg
-      - item_id: terminal_block_set
-        qty: 2.0
-        unit: kg
-      - item_id: fastener_kit_small
         qty: 0.5
-        unit: kg
-      - item_id: din_rail_steel
-        qty: 0.5
-        unit: kg
-    outputs:
-      - item_id: control_panel_assembly_v0
-        qty: 25.0
-        unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Assemble enclosure, terminals, and mounting hardware."
-  - process_id: electrical_assembly_basic_v0
-    inputs:
-      - item_id: control_panel_assembly_v0
-        qty: 25.0
         unit: kg
       - item_id: sensor_suite_general
         qty: 1.0
@@ -90,24 +48,18 @@ steps:
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
-    outputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install sensors, wiring, relays/SSRs, and compute module."
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
     outputs:
       - item_id: thermal_controller_basic
         qty: 1.0
         unit: unit
-    est_time_hr: 0.5
-    labor_hours: 0.5
-    notes: "Bench test temperature control, sensor feedback, and safety interlocks."
-assumptions: Control compute imported; sensors available; enclosure fabricated locally.
-notes: Basic thermal controller for chamber/furnace temperature regulation.
+      - item_id: metal_scrap
+        qty: 3.7
+        unit: kg
+    est_time_hr: 2.5
+    labor_hours: 2.5
+    notes: "Assemble thermal controller: mount circuit boards, relays, and sensors in enclosure, install compute module, wire connections, test temperature control loops. Generates scrap from wire trimming, component packaging, and calibration waste."
+assumptions: "8 kg thermal controller requires enclosure (3 kg), control board (1 kg), relay (0.5 kg), sensors (5 kg), compute module (2 kg), wiring (1 kg), and fasteners (0.2 kg). Total input 12.7 kg yields 8 kg product + 3.7 kg waste. Control compute module imported; sensors and enclosure fabricated locally. Simplified from multi-step assembly."
+notes: "Basic thermal controller for chamber/furnace temperature regulation. Single-step assembly consolidating panel assembly, electrical integration, and testing. Reduced input quantities from original 34 kg to 12.7 kg to match 8 kg product mass."

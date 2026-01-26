@@ -8,26 +8,26 @@ target_item_id: water_auger_dryer_ladi_v0
 variant_id: v0
 inputs:
   - item_id: auger_drill_assembly
-    qty: 1.0
-    unit: unit
+    qty: 10.0
+    unit: kg
   - item_id: electric_motor_medium
-    qty: 1.0
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: heating_element_electric
     qty: 1.0
     unit: unit
   - item_id: insulation_thermal_blanket
     qty: 1.0
-    unit: unit
+    unit: kg
   - item_id: vapor_condenser_cold_trap
     qty: 1.0
     unit: unit
   - item_id: piping_assembly_small
-    qty: 1.0
-    unit: unit
+    qty: 4.92
+    unit: kg
   - item_id: structural_frame_medium
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: control_panel_basic
     qty: 1.0
     unit: unit
@@ -37,75 +37,81 @@ inputs:
   - item_id: machined_part_raw
     qty: 1.0
     unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 165.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: auger_drill_assembly
-        qty: 1.0
-        unit: unit
+        qty: 10.0
+        unit: kg
       - item_id: electric_motor_medium
-        qty: 1.0
-        unit: unit
+        qty: 80.0
+        unit: kg
       - item_id: heating_element_electric
         qty: 1.0
         unit: unit
       - item_id: insulation_thermal_blanket
         qty: 1.0
-        unit: unit
+        unit: kg
       - item_id: vapor_condenser_cold_trap
         qty: 1.0
         unit: unit
       - item_id: piping_assembly_small
-        qty: 1.0
-        unit: unit
+        qty: 4.92
+        unit: kg
       - item_id: structural_frame_medium
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: unit
+      - item_id: sheet_metal_or_structural_steel
+        qty: 165.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 300.0
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Assemble base components per BOM into water auger dryer subassembly"
+    notes: "Assemble base components per BOM into water auger dryer subassembly; add sheet metal for housing/structure"
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 300.0
         unit: kg
     outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 300.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount subassembly into enclosure and attach shielding"
   - process_id: electrical_assembly_basic_v0
     inputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 300.0
         unit: kg
     outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 300.0
         unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Electrical wiring and control interfaces"
   - process_id: sealing_and_assembly_basic_v0
     inputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 300.0
         unit: kg
     outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 300.0
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
@@ -124,6 +130,9 @@ steps:
     notes: "Deburr and finish surfaces"
   - process_id: inspection_basic_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 300.0
+        unit: kg
       - item_id: finished_part_deburred
         qty: 1.0
         unit: kg

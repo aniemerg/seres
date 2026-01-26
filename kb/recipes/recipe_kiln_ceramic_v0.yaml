@@ -5,34 +5,34 @@ target_item_id: kiln_ceramic
 variant_id: v0
 inputs:
   - item_id: refractory_castable
-    qty: 50.0
+    qty: 400.0
     unit: kg
   - item_id: furnace_chamber_unequipped
-    qty: 1.0
-    unit: unit
+    qty: 0.0
+    unit: kg
   - item_id: heating_element_resistive
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 2.0
     unit: kg
   - item_id: control_circuit_board_basic
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: kiln_ceramic
-    qty: 1.0
-    unit: unit
+    qty: 400.0
+    unit: kg
 steps:
   - process_id: refractory_casting_v0
     inputs:
       - item_id: refractory_castable
-        qty: 50.0
+        qty: 400.0
         unit: kg
     outputs:
       - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
+        qty: 396.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 1.0
@@ -40,35 +40,41 @@ steps:
   - process_id: heating_element_installation_v0
     inputs:
       - item_id: heating_element_resistive
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: furnace_chamber_unequipped
-        qty: 1.0
-        unit: unit
+        qty: 396.0
+        unit: kg
     outputs:
       - item_id: furnace_chamber_equipped
-        qty: 1.0
-        unit: unit
+        qty: 398.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install and fixture heating elements within kiln chamber."
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: furnace_chamber_equipped
-        qty: 1.0
-        unit: unit
+        qty: 398.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 2.0
         unit: kg
       - item_id: control_circuit_board_basic
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: kiln_ceramic
-        qty: 1.0
-        unit: unit
+        qty: 400.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire control unit, sensors, and power connections."
 assumptions: Electric heating; refractory materials available; compute imported.
-notes: Ceramic kiln assembly for firing and annealing.
+notes: |
+  Assumptions:
+  - Refractory mass scaled to match 400 kg kiln placeholder.
+  Rationale:
+  - Preserve mass balance and align units with item definitions.
+  Uncertainty:
+  - Furnace chamber mass and insulation details need refinement.

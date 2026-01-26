@@ -3,25 +3,23 @@ kind: recipe
 target_item_id: epoxy_synthesis_unit
 variant_id: v0
 inputs:
-  - item_id: epoxy_resin_base
-    qty: 1.0
-    unit: unit
-  - item_id: epoxy_precursor_block_v0
-    qty: 1.0
-    unit: unit
+  - item_id: bulk_material_or_parts
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: epoxy_resin_base
-        qty: 1.0
-        unit: unit
-      - item_id: epoxy_precursor_block_v0
-        qty: 1.0
-        unit: unit
+      - item_id: bulk_material_or_parts
+        qty: 200.0
+        unit: kg
     outputs:
       - item_id: epoxy_synthesis_unit
         qty: 1
         unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
-notes: "Assemble epoxy synthesis unit from BOM; placeholder assembly recipe."
+notes: |
+  Assumptions:
+  - Placeholder assembly uses 200 kg bulk material to match epoxy_synthesis_unit mass.
+  Rationale:
+  - Balances assembly mass while BOM is refined.

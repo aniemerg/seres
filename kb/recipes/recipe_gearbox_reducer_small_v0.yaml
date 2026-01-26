@@ -8,12 +8,12 @@ inputs:
     unit: kg
     notes: Precision gears for reduction stages
   - item_id: steel_bar_stock
-    qty: 10.0
+    qty: 17.3
     unit: kg
     notes: Steel for shafts and housing
   - item_id: bearing_set_small
-    qty: 4
-    unit: unit
+    qty: 1.2
+    unit: kg
     notes: Bearings for shaft support
   - item_id: grease_bearing_high_temp
     qty: 0.5
@@ -35,11 +35,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_bar_stock
-        qty: 10.0
+        qty: 17.3
         unit: kg
     outputs:
       - item_id: steel_bar_stock
-        qty: 10.0
+        qty: 17.3
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
@@ -64,11 +64,11 @@ steps:
         qty: 15.0
         unit: kg
       - item_id: steel_bar_stock
-        qty: 10.0
+        qty: 17.3
         unit: kg
       - item_id: bearing_set_small
-        qty: 4
-        unit: unit
+        qty: 1.2
+        unit: kg
       - item_id: grease_bearing_high_temp
         qty: 0.5
         unit: kg
@@ -82,17 +82,11 @@ steps:
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble gears, shafts, bearings, and housing with proper lubrication"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: gear_set_medium
-        qty: 15.0
-        unit: kg
-    outputs:
-      - item_id: gearbox_reducer_small
-        qty: 35.0
-        unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Test gear reduction ratio and verify smooth operation"
 assumptions: "Steel gear construction with hardened teeth. Sealed housing with bearing support."
-notes: "Small gearbox speed reducer for motor speed reduction and torque multiplication."
+notes: |
+  Assumptions:
+  - Steel stock mass scaled to balance 35 kg gearbox output.
+  Rationale:
+  - Preserve mass balance and align bearing inputs with kg units.
+  Uncertainty:
+  - Actual housing/shaft mass split needs refinement.

@@ -26,6 +26,9 @@ inputs:
   - item_id: din_rail_steel
     qty: 0.5
     unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 35.0
+    unit: kg
 outputs:
   - item_id: power_supply_high_voltage
     qty: 60.0
@@ -57,9 +60,12 @@ steps:
       - item_id: din_rail_steel
         qty: 0.5
         unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 35.0
+        unit: kg
     outputs:
       - item_id: control_panel_assembly_v0
-        qty: 25.0
+        qty: 60.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -67,11 +73,11 @@ steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: control_panel_assembly_v0
-        qty: 25.0
+        qty: 60.0
         unit: kg
     outputs:
       - item_id: control_panel_assembly_v0
-        qty: 25.0
+        qty: 60.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -79,7 +85,7 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: control_panel_assembly_v0
-        qty: 25.0
+        qty: 60.0
         unit: kg
     outputs:
       - item_id: power_supply_high_voltage

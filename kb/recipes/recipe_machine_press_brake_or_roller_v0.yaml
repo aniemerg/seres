@@ -94,6 +94,9 @@ steps:
     notes: "Fill/bleed hydraulics and perform basic motion checks."
   - process_id: wiring_and_electronics_integration_v0
     inputs:
+      - item_id: machined_part_raw
+        qty: 320.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 2.0
         unit: kg
@@ -105,16 +108,16 @@ steps:
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 320.0
+        unit: kg
     est_time_hr: 0.7
     labor_hours: 0.7
     notes: "Wire controls, safety interlocks, and limit switches."
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 320.0
+        unit: kg
     outputs:
       - item_id: press_brake_or_roller
         qty: 1.0

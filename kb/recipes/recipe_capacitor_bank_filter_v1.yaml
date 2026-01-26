@@ -42,7 +42,7 @@ steps:
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1
+        qty: 0.2
         unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
@@ -53,7 +53,7 @@ steps:
         qty: 4.8
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1
+        qty: 0.2
         unit: unit
       - item_id: fastener_kit_small
         qty: 1
@@ -76,4 +76,5 @@ notes: |
   Currently assumes filter capacitors are imported but not modeled separately.
 
   Parallel processing: enclosure (step 0) and electronics (step 1), then final assembly (step 2).
+  Mass balance: wiring step outputs 0.2x wired_electrical_system to match 3 kg inputs.
 assumptions: "Capacitor bank filter v1 assembled from imported filter elements; local enclosure fabrication"

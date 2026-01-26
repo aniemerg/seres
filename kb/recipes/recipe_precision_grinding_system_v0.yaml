@@ -2,6 +2,38 @@ id: recipe_precision_grinding_system_v0
 kind: recipe
 target_item_id: precision_grinding_system_v0
 variant_id: v0
+inputs:
+  - item_id: grinding_wheels
+    qty: 1.0
+    unit: unit
+  - item_id: spindle_assembly_precision
+    qty: 40.0
+    unit: kg
+  - item_id: bearing_ball_precision
+    qty: 0.16
+    unit: kg
+  - item_id: bearing_rings_hardened
+    qty: 0.4
+    unit: kg
+  - item_id: coolant_pump_system
+    qty: 25.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: precision_mounts_and_fixtures
+    qty: 6.0
+    unit: kg
+  - item_id: linear_stage_xyz_precision
+    qty: 6.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 500.0
+    unit: kg
+outputs:
+  - item_id: precision_grinding_system_v0
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:
@@ -9,26 +41,29 @@ steps:
         qty: 1.0
         unit: unit
       - item_id: spindle_assembly_precision
-        qty: 1.0
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: bearing_ball_precision
-        qty: 8.0
-        unit: unit
+        qty: 0.16
+        unit: kg
       - item_id: bearing_rings_hardened
-        qty: 2.0
-        unit: unit
+        qty: 0.4
+        unit: kg
       - item_id: coolant_pump_system
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
       - item_id: precision_mounts_and_fixtures
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: linear_stage_xyz_precision
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 500.0
+        unit: kg
     outputs:
       - item_id: precision_grinding_system_v0
         qty: 1.0

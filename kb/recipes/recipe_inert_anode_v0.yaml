@@ -2,72 +2,77 @@ id: recipe_inert_anode_v0
 target_item_id: inert_anode_v0
 variant_id: v0
 inputs:
+- item_id: titanium_oxide
+  qty: 0.9
+  unit: kg
+- item_id: binder_material
+  qty: 0.1
+  unit: kg
+outputs:
+- item_id: inert_anode_v0
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: mixing_basic_v0
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  inputs:
   - item_id: titanium_oxide
     qty: 0.9
     unit: kg
   - item_id: binder_material
     qty: 0.1
     unit: kg
-outputs:
-  - item_id: inert_anode_v0
+  outputs:
+  - item_id: mixed_batch
+    qty: 1.0
+    unit: kg
+  notes: Mix titanium oxide or tin oxide powder with binders
+- process_id: pressing_and_forming_v0
+  inputs:
+  - item_id: mixed_batch
+    qty: 1.0
+    unit: kg
+  outputs:
+  - item_id: pressed_green_compact
+    qty: 0.95
+    unit: kg
+  est_time_hr: 4.0
+  machine_hours: 4.0
+  notes: Press oxide powder into anode shape
+- process_id: sintering_and_hot_pressing_v0
+  inputs:
+  - item_id: pressed_green_compact
+    qty: 0.95
+    unit: kg
+  outputs:
+  - item_id: sintered_shapes
     qty: 0.9
     unit: kg
-steps:
-  - process_id: mixing_basic_v0
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    inputs:
-      - item_id: titanium_oxide
-        qty: 0.9
-        unit: kg
-      - item_id: binder_material
-        qty: 0.1
-        unit: kg
-    outputs:
-      - item_id: mixed_batch
-        qty: 1.0
-        unit: kg
-    notes: "Mix titanium oxide or tin oxide powder with binders"
-  - process_id: pressing_and_forming_v0
-    inputs:
-      - item_id: mixed_batch
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: pressed_green_compact
-        qty: 0.95
-        unit: kg
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: "Press oxide powder into anode shape"
-  - process_id: sintering_and_hot_pressing_v0
-    inputs:
-      - item_id: pressed_green_compact
-        qty: 0.95
-        unit: kg
-    outputs:
-      - item_id: sintered_shapes
-        qty: 0.9
-        unit: kg
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Sinter at high temperature to densify ceramic"
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: sintered_shapes
-        qty: 0.9
-        unit: kg
-    outputs:
-      - item_id: inert_anode_v0
-        qty: 0.9
-        unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: "Machine to final dimensions and surface finish"
-assumptions: |
-  Inert anode production from titanium oxide or tin oxide ceramics.
+  est_time_hr: 12.0
+  machine_hours: 12.0
+  notes: Sinter at high temperature to densify ceramic
+- process_id: machining_finish_basic_v0
+  inputs:
+  - item_id: sintered_shapes
+    qty: 0.9
+    unit: kg
+  outputs:
+  - item_id: inert_anode_v0
+    qty: 1.0
+    unit: unit
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: Machine to final dimensions and surface finish
+assumptions: 'Inert anode production from titanium oxide or tin oxide ceramics.
+
   Sintered at high temperature for density and electrical conductivity.
-notes: |
-  Manufacturing recipe for inert anode for FFC Cambridge process.
+
+  '
+notes: 'Manufacturing recipe for inert anode for FFC Cambridge process.
+
   Critical for sustainable molten salt electrolysis without carbon consumption.
+
   Total production time ~21 hours.
+
+  '

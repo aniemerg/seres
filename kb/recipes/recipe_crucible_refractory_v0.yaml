@@ -4,66 +4,68 @@ variant_id: v0
 produces_qty: 15.0
 produces_unit: kg
 inputs:
+- item_id: ceramic_powder_mixture
+  qty: 16.0
+  unit: kg
+outputs:
+- item_id: crucible_refractory
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: ceramic_forming_basic_v0
+  inputs:
   - item_id: ceramic_powder_mixture
     qty: 16.0
     unit: kg
-outputs:
-  - item_id: crucible_refractory
+  outputs:
+  - item_id: green_ceramic_parts
+    qty: 16.0
+    unit: kg
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  notes: Form refractory crucible shape from ceramic mixture (clay-alumina, etc.)
+- process_id: drying_basic_v0
+  inputs:
+  - item_id: green_ceramic_parts
+    qty: 16.0
+    unit: kg
+  outputs:
+  - item_id: dried_material
+    qty: 15.5
+    unit: kg
+  est_time_hr: 12.0
+  machine_hours: 12.0
+  notes: Slow dry formed crucible to prevent cracking
+- process_id: ceramic_firing_high_temp_v0
+  inputs:
+  - item_id: dried_material
+    qty: 15.5
+    unit: kg
+  outputs:
+  - item_id: sintered_shapes
     qty: 15.0
     unit: kg
-steps:
-  - process_id: ceramic_forming_basic_v0
-    inputs:
-    - item_id: ceramic_powder_mixture
-      qty: 16.0
-      unit: kg
-    outputs:
-    - item_id: green_ceramic_parts
-      qty: 16.0
-      unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Form refractory crucible shape from ceramic mixture (clay-alumina, etc.)"
-  - process_id: drying_basic_v0
-    inputs:
-    - item_id: green_ceramic_parts
-      qty: 16.0
-      unit: kg
-    outputs:
-    - item_id: dried_material
-      qty: 15.5
-      unit: kg
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    notes: "Slow dry formed crucible to prevent cracking"
-  - process_id: ceramic_firing_high_temp_v0
-    inputs:
-    - item_id: dried_material
-      qty: 15.5
-      unit: kg
-    outputs:
-    - item_id: sintered_shapes
-      qty: 15.0
-      unit: kg
-    est_time_hr: 16.0
-    machine_hours: 16.0
-    notes: "Fire crucible at high temperature to vitrify and strengthen"
-  - process_id: surface_finishing_basic_v0
-    inputs:
-    - item_id: sintered_shapes
-      qty: 15.0
-      unit: kg
-    outputs:
-    - item_id: crucible_refractory
-      qty: 15.0
-      unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Clean and inspect fired crucible"
-assumptions: |
-  Refractory ceramic materials (e.g., clay-graphite or alumina) formed, dried, and fired.
-  Target mass ~15 kg.
-notes: |
-  Ceramic refractory crucible for high-temperature metal casting operations. This replaces the import placeholder with a local fabrication route.
+  est_time_hr: 16.0
+  machine_hours: 16.0
+  notes: Fire crucible at high temperature to vitrify and strengthen
+- process_id: surface_finishing_basic_v0
+  inputs:
+  - item_id: sintered_shapes
+    qty: 15.0
+    unit: kg
+  outputs:
+  - item_id: crucible_refractory
+    qty: 1.0
+    unit: unit
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: Clean and inspect fired crucible
+assumptions: 'Refractory ceramic materials (e.g., clay-graphite or alumina) formed,
+  dried, and fired.
 
-  Sequential flow: form → dry → fire → finish.
+  Target mass ~15 kg.
+
+  '
+notes: "Ceramic refractory crucible for high-temperature metal casting operations.\
+  \ This replaces the import placeholder with a local fabrication route.\n\nSequential\
+  \ flow: form \u2192 dry \u2192 fire \u2192 finish.\n"

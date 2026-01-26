@@ -2,37 +2,48 @@ id: recipe_scara_robot_v0
 kind: recipe
 target_item_id: scara_robot_v0
 inputs:
-  - item_id: steel_frame_heavy
-    qty: 1
-    unit: unit
+  - item_id: steel_frame_welded
+    qty: 36.0
+    unit: kg
   - item_id: bearing_set_heavy
     qty: 1
     unit: unit
+  - item_id: drive_motor_small
+    qty: 20.0
+    unit: kg
 outputs:
   - item_id: scara_robot_v0
-    qty: 1
+    qty: 1.0
     unit: unit
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: steel_frame_heavy
-        qty: 1
-        unit: unit
+      - item_id: steel_frame_welded
+        qty: 36.0
+        unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1
-        unit: unit
+        qty: 36.0
+        unit: kg
     notes: "Machine mounting holes and precision surfaces on frame"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1
-        unit: unit
+        qty: 36.0
+        unit: kg
       - item_id: bearing_set_heavy
         qty: 1
         unit: unit
+      - item_id: drive_motor_small
+        qty: 20.0
+        unit: kg
     outputs:
       - item_id: scara_robot_v0
-        qty: 1
+        qty: 1.0
         unit: unit
     notes: "Assemble frame with bearings and actuators"
+notes: |
+  Assumptions:
+  - SCARA robot mass is dominated by frame structure and a small drive motor.
+  Rationale:
+  - Swapped to steel_frame_welded and added drive_motor_small to balance output mass.

@@ -7,7 +7,7 @@ inputs:
     unit: kg
     notes: "Sheet metal for control panel enclosure"
   - item_id: formed_sheet_metal_parts
-    qty: 2.9
+    qty: 3.0
     unit: kg
   - item_id: switch_set_industrial
     qty: 0.3
@@ -27,8 +27,8 @@ inputs:
     notes: "Internal wiring and connectors"
 outputs:
   - item_id: control_panel_basic_v0
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
 steps:
   - process_id: metal_fabrication_basic_v0
     inputs:
@@ -54,7 +54,7 @@ steps:
         notes: "Internal wiring and connectors"
     outputs:
       - item_id: formed_sheet_metal_parts
-        qty: 2.9
+        qty: 3.0
         unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
@@ -63,7 +63,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: formed_sheet_metal_parts
-        qty: 2.9
+        qty: 3.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
@@ -91,10 +91,16 @@ steps:
         unit: kg
     outputs:
       - item_id: control_panel_basic_v0
-        qty: 1
-        unit: unit
+        qty: 3.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify all switches operate correctly, check indicator light function, ensure proper grounding and safety compliance"
 assumptions: "Basic operator control panel for machine operation and monitoring. 15 kg steel enclosure with door or hinged lid. Includes control switches (pushbuttons, selector switches, emergency stop), indicator lights (LED or incandescent), terminal blocks for wiring connections, and mounting provisions. Typical dimensions 300x400x200 mm. Used on industrial machines, process equipment, and automated systems for operator interface."
-notes: "Manufacturing of basic control panel. Total fabrication time ~14 hours. Includes sheet metal enclosure fabrication, installation of control and indicator components, internal wiring, and functional testing. Customizable with different switch/indicator configurations for specific machine requirements."
+notes: |
+  Assumptions:
+  - Formed parts output normalized to 3.0 kg to match control panel mass.
+  Rationale:
+  - Preserve mass balance across assembly, wiring, and inspection steps.
+  Uncertainty:
+  - Enclosure mass and component mix should be refined with detailed BOMs.

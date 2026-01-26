@@ -20,6 +20,9 @@ inputs:
   - item_id: motor_housing_steel
     qty: 3.0
     unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.3
+    unit: kg
 outputs:
   - item_id: motor_electric_small
     qty: 1.0
@@ -33,6 +36,10 @@ steps:
     outputs:
       - item_id: stator_rotor_lamination_set
         qty: 5.7
+        unit: kg
+    byproducts:
+      - item_id: steel_scrap
+        qty: 0.3
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
@@ -49,6 +56,10 @@ steps:
     outputs:
       - item_id: motor_coil_wound
         qty: 2.0
+        unit: kg
+    byproducts:
+      - item_id: wire_scrap
+        qty: 0.15
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0
@@ -71,10 +82,17 @@ steps:
       - item_id: motor_housing_steel
         qty: 3.0
         unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.3
+        unit: kg
     outputs:
       - item_id: motor_electric_small
         qty: 1.0
         unit: unit
+    byproducts:
+      - item_id: assembly_loss
+        qty: 0.5
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble laminations, shaft, bearings, housing, and terminal box; perform basic spin test."

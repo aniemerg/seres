@@ -4,24 +4,30 @@ target_item_id: kiln_basic
 produces_qty: 1.0
 produces_unit: unit
 inputs:
-  - item_id: steel_plate_or_sheet
-    qty: 200.0
+  - item_id: steel_shell_thick
+    qty: 300.0
     unit: kg
   - item_id: refractory_brick_set
-    qty: 300.0
+    qty: 200.0
     unit: kg
   - item_id: heating_element_set_basic
     qty: 1
     unit: unit
   - item_id: insulation_pack_high_temp
-    qty: 50.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: temperature_controller_basic
     qty: 1
     unit: unit
   - item_id: power_conditioning_module
     qty: 1
     unit: unit
+  - item_id: fastener_kit_medium
+    qty: 50.0
+    unit: kg
+  - item_id: welding_rod_steel
+    qty: 26.0
+    unit: kg
 outputs:
   - item_id: kiln_basic
     qty: 1
@@ -29,24 +35,30 @@ outputs:
 steps:
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: steel_plate_or_sheet
-        qty: 200.0
+      - item_id: steel_shell_thick
+        qty: 300.0
         unit: kg
       - item_id: refractory_brick_set
-        qty: 300.0
+        qty: 200.0
         unit: kg
       - item_id: heating_element_set_basic
         qty: 1
         unit: unit
       - item_id: insulation_pack_high_temp
-        qty: 50.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: temperature_controller_basic
         qty: 1
         unit: unit
       - item_id: power_conditioning_module
         qty: 1
         unit: unit
+      - item_id: fastener_kit_medium
+        qty: 50.0
+        unit: kg
+      - item_id: welding_rod_steel
+        qty: 26.0
+        unit: kg
     outputs:
       - item_id: kiln_basic
         qty: 1

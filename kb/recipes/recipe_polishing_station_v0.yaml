@@ -3,60 +3,70 @@ target_item_id: polishing_station
 variant_id: v0
 inputs:
   - item_id: steel_frame_welded
-    qty: 1
-    unit: unit
+    qty: 50.0
+    unit: kg
   - item_id: motor_electric_small
-    qty: 2
-    unit: unit
+    qty: 24.0
+    unit: kg
   - item_id: polishing_head_assembly
-    qty: 2
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: compound_applicator
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: work_rest_adjustable
     qty: 1
     unit: unit
   - item_id: dust_collection_hood
-    qty: 1
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: speed_control_module
-    qty: 2
-    unit: unit
+    qty: 8.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 1.0
+    unit: kg
 outputs:
   - item_id: polishing_station
-    qty: 1
-    unit: unit
+    qty: 120.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_frame_welded
-        qty: 1
-        unit: unit
+        qty: 50.0
+        unit: kg
       - item_id: motor_electric_small
-        qty: 2
-        unit: unit
+        qty: 24.0
+        unit: kg
       - item_id: polishing_head_assembly
-        qty: 2
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: compound_applicator
-        qty: 1
-        unit: unit
+        qty: 3.0
+        unit: kg
       - item_id: work_rest_adjustable
         qty: 1
         unit: unit
       - item_id: dust_collection_hood
-        qty: 1
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: speed_control_module
-        qty: 2
-        unit: unit
+        qty: 8.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 1.0
+        unit: kg
     outputs:
       - item_id: polishing_station
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
     est_time_hr: 11.0
     labor_hours: 11.0
     notes: "Weld work table frame and mount motor brackets, install motors and polishing heads, attach work rests and dust collection, wire motors and speed controls, align spindles and test operation"
 assumptions: "Fabricated steel frame with dual rotating polishing heads and compound application with variable speed control"
-notes: "Assembly of polishing station for high-quality surface finishing on metals and optics, used for mirror polishing and precision surface preparation"
+notes: |
+  Assumptions:
+  - Added sheet/plate steel for guards and small structural panels.
+  Rationale:
+  - Balances assembly mass to match polishing_station output.

@@ -762,6 +762,117 @@ class TestProvenanceTracking:
         with pytest.raises(ValueError, match="Provenance conversion failed"):
             engine.advance_time(0.0)
 
+    def test_nonmass_process_skips_provenance_error(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "processes" / "energy_only.yaml", {
+            'id': 'energy_only',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'electricity', 'qty': 5.0, 'unit': 'kWh'}
+            ],
+            'outputs': [
+                {'item_id': 'stored_energy', 'qty': 5.0, 'unit': 'kWh'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            }
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "electricity.yaml", {
+            'id': 'electricity',
+            'kind': 'material',
+            'unit': 'kWh'
+        })
+        write_yaml(temp_kb / "items" / "materials" / "stored_energy.yaml", {
+            'id': 'stored_energy',
+            'kind': 'material',
+            'unit': 'kWh'
+        })
+        write_yaml(temp_kb / "items" / "machines" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'mass': 10.0,
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("electricity", 5.0, "kWh")
+        engine.import_item("test_machine", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="energy_only",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert result["success"] is True
+
+        engine.advance_time(1.0)
+
+        assert engine.has_item("stored_energy", 5.0, "kWh")
+        assert "stored_energy" not in engine.state.provenance
+
+    def test_nonmass_input_mass_output_requires_provenance(self, temp_kb, temp_sim_dir):
+        write_yaml(temp_kb / "processes" / "energy_to_mass.yaml", {
+            'id': 'energy_to_mass',
+            'kind': 'process',
+            'process_type': 'batch',
+            'inputs': [
+                {'item_id': 'electricity', 'qty': 5.0, 'unit': 'kWh'}
+            ],
+            'outputs': [
+                {'item_id': 'metal', 'qty': 1.0, 'unit': 'kg'}
+            ],
+            'resource_requirements': [
+                {'machine_id': 'test_machine', 'qty': 1.0, 'unit': 'count'}
+            ],
+            'time_model': {
+                'type': 'batch',
+                'hr_per_batch': 1.0
+            }
+        })
+
+        write_yaml(temp_kb / "items" / "materials" / "electricity.yaml", {
+            'id': 'electricity',
+            'kind': 'material',
+            'unit': 'kWh'
+        })
+        write_yaml(temp_kb / "items" / "materials" / "metal.yaml", {
+            'id': 'metal',
+            'kind': 'material',
+            'mass': 1.0,
+            'unit': 'kg'
+        })
+        write_yaml(temp_kb / "items" / "machines" / "test_machine.yaml", {
+            'id': 'test_machine',
+            'kind': 'machine',
+            'mass': 10.0,
+            'unit': 'count'
+        })
+
+        kb = KBLoader(temp_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, temp_sim_dir)
+        engine.import_item("electricity", 5.0, "kWh")
+        engine.import_item("test_machine", 1.0, "count")
+
+        result = engine.start_process(
+            process_id="energy_to_mass",
+            scale=1.0,
+            duration_hours=1.0
+        )
+        assert result["success"] is True
+
+        with pytest.raises(ValueError, match="Missing provenance for process outputs"):
+            engine.advance_time(1.0)
+
 
 class TestInventoryManagement:
     """Test inventory operations."""

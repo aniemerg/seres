@@ -1,0 +1,19 @@
+id: cnc_mill
+name: CNC Milling Machine
+kind: machine
+mass: 1200.0
+unit: kg
+bom: bom_milling_machine_cnc_v0
+material_class: steel
+notes: Consolidated CNC milling machine (formerly milling_machine_cnc). 3-axis or
+  multi-axis motion control with spindle speeds up to 10,000+ RPM, CNC controller,
+  servo motors, and tool changer. Use for precision milling operations.
+processes_supported:
+- machining_basic_v0
+- machining_process_milling_v0
+- machining_precision_v0
+capabilities:
+- machining
+- milling
+recipe: recipe_machine_milling_machine_cnc_v0
+unit_kind: discrete

@@ -245,6 +245,80 @@ Each intelligence file has:
 
 ## Common Patterns
 
+### Mass Balance Validation (New)
+
+If you see `recipe_step_mass_imbalance` or `recipe_step_mass_balance_unconvertible`,
+see **`docs/closure_error_guidance.md`** for fixes and examples. These rules check
+step input/output mass balance and unit convertibility to prevent simulation
+provenance errors.
+
+**Note for machines/parts (discrete items):**
+- Keep recipe outputs in `unit` and ensure the target item has `unit_kind: discrete`
+  with a realistic `mass` in kg.
+- Do **not** change discrete outputs to `kg` just to balance mass.
+- Do **not** use fractional `unit` counts (e.g., 2.16 units of a frame).
+- **Common pitfall:** Converting discrete outputs to `kg` to satisfy mass balance
+  creates `unit_kind_discrete_unit_mismatch` errors and breaks inventory semantics.
+- If mass is short, use bulk material inputs (kg) and explicit scrap/byproduct
+  outputs, or adjust the item `mass` to align with the recipe/BOM.
+- See ADR-016, ADR-017, ADR-018, ADR-019.
+
+**Why this matters (realism + runbooks):**
+- Fractional discrete counts are physically implausible and make runbooks fail
+  (they typically produce integer quantities).
+- Switching discrete outputs to kg breaks unit semantics and creates downstream
+  unit confusion.
+
+**Decision checklist for mass balance fixes:**
+1. Is the target item `unit_kind: discrete`?
+   - Yes: keep outputs in `unit`.
+2. Are you tempted to scale a discrete part to a fractional count?
+   - Stop. Use bulk inputs/scrap or adjust the item `mass`.
+3. Is the mismatch small and clearly due to placeholder mass?
+   - Adjust the item `mass` (and note the assumption).
+4. Is the mismatch large and due to missing stock material?
+   - Add bulk material inputs (kg) and scrap outputs in the relevant step.
+
+**Common fix patterns:**
+- **Add bulk stock + scrap**:
+  - Use a bulk input (e.g., `steel_plate_or_sheet` in kg) for the missing mass.
+  - Add a scrap/byproduct output (`metal_scrap`, `steel_scrap_v0`, `metal_swarf`,
+    or universal `waste`) to close the balance.
+  - **Use `waste` only in step outputs/byproducts, not recipe outputs.**
+- **Adjust item mass**:
+  - If the discrete part's defined mass is inconsistent with the BOM sum, update
+    the item `mass` and note why.
+
+**Bad vs good (discrete item mass balance):**
+```yaml
+# BAD: fractional discrete input
+inputs:
+  - item_id: structural_frame_large
+    qty: 2.16
+    unit: unit
+
+# GOOD: keep discrete count integral, add bulk mass
+inputs:
+  - item_id: structural_frame_large
+    qty: 1.0
+    unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 90.0
+    unit: kg
+outputs:
+  - item_id: lifting_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: metal_scrap
+    qty: 10.0
+    unit: kg
+```
+
+**Unconvertible mass balance errors (`*_unconvertible`):**
+- If an input is in `L` but the item is defined in `kg`, convert the recipe input
+  to `kg` unless the item has density defined and the conversion is intended.
+- Avoid count-like units for bulk materials unless mass conversion is explicit.
+
 ### Pattern 1: Final Assembly/Test Steps
 
 **Scenario:** Recipe ends with assembly/calibration/test of final product

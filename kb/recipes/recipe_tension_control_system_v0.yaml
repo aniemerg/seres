@@ -50,8 +50,8 @@ steps:
         unit: unit
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 3.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wire tension sensors, brake actuators, and control electronics"
@@ -76,14 +76,14 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 35.3
+        unit: kg
     notes: "Assemble brake mechanism, mount sensors, integrate control system"
   - process_id: calibration_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 35.3
+        unit: kg
     outputs:
       - item_id: tension_control_system
         qty: 1.0
@@ -92,4 +92,7 @@ steps:
     labor_hours: 1.0
     notes: "Calibrate tension feedback and brake response"
 assumptions: Mechanical tension control with electronic feedback. Brake mechanism provides variable resistance to maintain constant tension.
-notes: Tension control system for wire and fiber winding operations. Maintains consistent tension during spooling.
+notes: |
+  Assumptions:
+  - Assembled equipment mass set to sum of assembly inputs (35.3 kg).
+  Tension control system for wire and fiber winding operations. Maintains consistent tension during spooling.

@@ -7,7 +7,7 @@ inputs:
     qty: 0.2
     unit: kg
   - item_id: electronic_components_set
-    qty: 0.5
+    qty: 0.75
     unit: kg
   - item_id: assembled_electronics
     qty: 0.95
@@ -32,18 +32,18 @@ steps:
         qty: 0.2
         unit: kg
       - item_id: electronic_components_set
-        qty: 0.5
+        qty: 0.75
         unit: kg
     outputs:
       - item_id: pcb_populated
-        qty: 0.68
+        qty: 0.95
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
   - process_id: electronic_component_assembly_v0
     inputs:
       - item_id: pcb_populated
-        qty: 0.68
+        qty: 0.95
         unit: kg
     outputs:
       - item_id: assembled_electronics

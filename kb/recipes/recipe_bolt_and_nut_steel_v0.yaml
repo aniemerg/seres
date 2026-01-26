@@ -2,28 +2,28 @@ id: recipe_bolt_and_nut_steel_v0
 kind: recipe
 name: Bolt and nut (steel) v0
 produces_id: bolt_and_nut_steel_v0
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 0.5
+produces_unit: kg
 
 target_item_id: bolt_and_nut_steel_v0
 variant_id: v0
 inputs:
   - item_id: machined_part_raw
-    qty: 0.05
+    qty: 0.5
     unit: kg
 outputs:
   - item_id: bolt_and_nut_steel_v0
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 0.05
+        qty: 0.5
         unit: kg
     outputs:
       - item_id: bolt_and_nut_steel_v0
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
     notes: "Placeholder finish step for bolt_and_nut_steel_v0"
 notes: "Placeholder recipe to resolve no_recipe gap for bolt_and_nut_steel_v0; uses a generic machining finish step."

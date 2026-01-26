@@ -1,12 +1,26 @@
 id: steel_forming_press
 kind: machine
 name: Steel forming press
-mass: 2000.0
-unit: kg
+mass: 670.0
+unit: unit
 material_class: steel
 processes_supported: []
-notes: Stub machine created during ADR 003 migration. Referenced by processes but
+notes: 'Mass updated 2026-01 from 2000 kg to 670 kg based on BOM component analysis.
+
+  Component total: press_frame_medium (300) + hydraulic_cylinder_press (90) +
+
+  hydraulic_system_medium (180) + press_platen_set_medium (80) +
+
+  power_conditioning_module (12) + control_compute_module_imported (2) +
+
+  sensor_suite_general (5) + fastener_kit_medium (1) = 670 kg.
+
+
+  Stub machine created during ADR 003 migration. Referenced by processes but
+
   was not defined.
+
+  '
 bom: bom_steel_forming_press
 recipe: recipe_steel_forming_press_v0
-unit_kind: bulk
+unit_kind: discrete

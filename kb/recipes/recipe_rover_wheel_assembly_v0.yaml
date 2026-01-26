@@ -3,85 +3,83 @@ kind: recipe
 name: Recipe for rover_wheel_assembly_v0
 produces_id: rover_wheel_assembly_v0
 produces_qty: 1.0
-produces_unit: unit
+produces_unit: kg
 target_item_id: rover_wheel_assembly_v0
 variant_id: v0
 inputs:
   - item_id: regolith_metal_crude
-    qty: 10.0
+    qty: 2.5
     unit: kg
   - item_id: bearing_set_small
-    qty: 0.6
+    qty: 0.2
     unit: kg
 outputs:
   - item_id: rover_wheel_assembly_v0
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 10.0
+        qty: 2.5
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 9.5
+        qty: 2.3
         unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    labor_hours: 1.5
+      - item_id: metal_scrap
+        qty: 0.2
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.75
     notes: "Cast wheel hub/body components"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 9.5
+        qty: 2.3
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 9.0
+        qty: 2.15
         unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    labor_hours: 1.5
-    notes: "Machine bearings journals, hubs, and mounting surfaces"
+      - item_id: metal_swarf
+        qty: 0.15
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.75
+    notes: "Machine bearing journals, hubs, and mounting surfaces"
   - process_id: bearing_installation_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 9.0
+        qty: 2.15
         unit: kg
       - item_id: bearing_set_small
-        qty: 0.6
+        qty: 0.2
         unit: kg
     outputs:
       - item_id: finished_part
-        qty: 9.6
+        qty: 2.35
         unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
+    est_time_hr: 1.0
+    labor_hours: 1.0
     notes: "Install wheel bearings into hubs"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: finished_part
-        qty: 9.6
+        qty: 2.35
         unit: kg
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble wheel subcomponents into rover_wheel_assembly_v0"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: rover_wheel_assembly_v0
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
+    byproducts:
+      - item_id: waste
+        qty: 0.35
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Verify wheel runout and capacity"
+    notes: "Assemble wheel subcomponents; trim excess material"
 assumptions: "Patterned after industrial wheel set; rover-specific subcomponents may be placeholders until BOMs are refined."
 notes: "Produces a rover_wheel_assembly_v0; this is a minimal local path to enable model closure for rover wheels. See seeds paper for rover context."

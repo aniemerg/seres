@@ -89,35 +89,17 @@ steps:
       qty: 1
       unit: unit
     outputs:
-    - item_id: assembled_equipment
-      qty: 1
-      unit: unit
-    est_time_hr: 10.0
-    labor_hours: 10.0
-    notes: "Assemble internal gears/pistons in pump body, install bearings and seals, attach end caps with high-strength fasteners, install drive shaft"
-  - process_id: leak_test_v0
-    inputs:
-    - item_id: assembled_equipment
-      qty: 1
-      unit: unit
-    outputs:
-    - item_id: assembled_equipment
-      qty: 1
-      unit: unit
-    est_time_hr: 4.0
-    labor_hours: 3.0
-    notes: "Pressure test pump at rated pressure (200+ bar), verify flow rate and pressure output, check seal integrity under load"
-  - process_id: inspection_basic_v0
-    inputs:
-    - item_id: assembled_equipment
-      qty: 1
-      unit: unit
-    outputs:
     - item_id: hydraulic_pump_heavy_duty
       qty: 1
       unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Verify pump displacement, pressure rating, volumetric efficiency, and absence of leaks or noise"
+    est_time_hr: 16.0
+    labor_hours: 15.0
+    notes: "Assemble internal gears/pistons in pump body, install bearings and seals, attach end caps with high-strength fasteners, install drive shaft. Pressure test pump at rated pressure (200+ bar), verify flow rate and pressure output, check seal integrity under load. Verify pump displacement, pressure rating, volumetric efficiency, and absence of leaks or noise. Total assembly, testing, and inspection time: ~16 hours."
 assumptions: "Heavy-duty hydraulic pump for high-pressure, high-flow industrial applications. 80 kg gear or piston pump rated for 200-350 bar operating pressure. Displacement typically 40-100 cc/rev. Used in excavators, large presses, injection molding machines, and heavy mobile equipment. Includes precision-machined pump body, hardened gears/pistons, drive shaft with bearings, high-pressure seals, and mounting flange. Flow rate typically 40-120 L/min."
-notes: "Manufacturing of heavy-duty hydraulic pump. Total fabrication time ~64 hours. Requires extensive precision machining for tight internal clearances (critical for high pressure), heat treatment for wear resistance, and rigorous leak testing. More demanding than standard hydraulic pumps due to higher pressures and flows. Critical component for heavy industrial machinery."
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed steps 5-6 which created self-references (hydraulic_pump_heavy_duty → hydraulic_pump_heavy_duty)
+  - Consolidated leak testing and inspection into final assembly step
+  - Total time: ~64 hours (8 hr casting + 20 hr machining + 12 hr precision machining + 8 hr heat treatment + 16 hr assembly/test/inspection)
+
+  Manufacturing of heavy-duty hydraulic pump. Requires extensive precision machining for tight internal clearances (critical for high pressure), heat treatment for wear resistance, and rigorous leak testing. More demanding than standard hydraulic pumps due to higher pressures and flows. Critical component for heavy industrial machinery.

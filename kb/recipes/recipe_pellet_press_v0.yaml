@@ -15,10 +15,10 @@ inputs:
   unit: kg
 outputs:
 - item_id: pellet_press
-  qty: 800.0
-  unit: kg
+  qty: 1
+  unit: unit
 steps:
-- process_id: assembly_basic_v0
+- process_id: machining_finish_basic_v0
   inputs:
   - item_id: steel_ingot
     qty: 8.0
@@ -30,27 +30,28 @@ steps:
     qty: 12.0
     unit: kg
   outputs:
-  - item_id: assembled_equipment
-    qty: 800.0
-    unit: kg
-- process_id: machining_finish_basic_v0
-  inputs:
-  - item_id: assembled_equipment
-    qty: 800.0
-    unit: kg
-  outputs:
   - item_id: machined_part_raw
-    qty: 780.0
+    qty: 23.0
     unit: kg
+  notes: "Machine steel components for pellet press frame (4% scrap: 24 kg → 23 kg)"
 - process_id: welding_brazing_basic_v0
   inputs:
   - item_id: machined_part_raw
-    qty: 780.0
+    qty: 23.0
     unit: kg
   outputs:
   - item_id: pellet_press
-    qty: 800.0
-    unit: kg
-notes: Prototype recipe for pellet_press; migrated to produces_id pattern for indexer compatibility. Uses basic assembly steps
-  and welds.
+    qty: 1
+    unit: unit
+  notes: "Weld frame components together (~4% loss: 23 kg → 22 kg final)"
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Removed impossible step 0 (24 kg → 800 kg assembly)
+  - Fixed step flow: machine → weld (not assemble → machine → weld)
+  - Updated outputs to use unit count instead of kg
+  - Updated machine mass from 800 kg to 22 kg to match BOM
+
+  WARNING: This is an incomplete recipe! Current BOM only includes basic frame components.
+  Functional pellet press needs hydraulics, motor, controls, die set, hopper.
+  Recipe should be expanded when complete BOM is available.
 target_item_id: pellet_press

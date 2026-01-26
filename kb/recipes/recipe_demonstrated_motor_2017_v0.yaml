@@ -17,9 +17,6 @@ inputs:
   - item_id: fastener_kit_small
     qty: 1.0
     unit: unit
-  - item_id: assembled_electrical_system
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: demonstrated_motor_2017_v0
     qty: 1.0
@@ -68,35 +65,17 @@ steps:
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Assemble rotor, stator, bearings, and housing."
-  - process_id: electrical_testing_v0
-    inputs:
-      - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: tested_electrical_system
-        qty: 1.0
-        unit: unit
-    est_time_hr: 0.4
-    labor_hours: 0.4
-    notes: "Continuity and spin test."
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: tested_electrical_system
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: demonstrated_motor_2017_v0
         qty: 1.0
         unit: unit
-    est_time_hr: 0.3
-    labor_hours: 0.3
-    notes: "Final inspection and acceptance"
+    est_time_hr: 1.5
+    labor_hours: 1.5
+    notes: "Assemble rotor, stator, bearings, and housing. Perform electrical continuity and spin test. Conduct final inspection and acceptance. Total assembly, testing, and inspection time: ~1.5 hours."
 assumptions: "Generic small motor build aligned to 2017 demonstration; specifics TBD."
-notes: Local build route for demonstrated motor placeholder.
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed steps 3-4 which created self-references (demonstrated_motor_2017_v0 → demonstrated_motor_2017_v0)
+  - Consolidated electrical testing and inspection into final assembly step notes
+  - Total time: ~2.0 hours (0.6 hr coil winding + 0.6 hr machining + 1.5 hr assembly/test/inspection)
+
+  Local build route for demonstrated motor placeholder.

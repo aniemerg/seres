@@ -4,25 +4,28 @@ target_item_id: formation_rack
 variant_id: v0
 inputs:
   - item_id: formation_rack_frame
-    qty: 1.0
-    unit: unit
+    qty: 200.0
+    unit: kg
   - item_id: formation_power_modules
-    qty: 1.0
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: formation_wiring_harness
-    qty: 1.0
-    unit: unit
+    qty: 30.0
+    unit: kg
   - item_id: formation_control_unit
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: cooling_fan_and_ducting
-    qty: 1.0
-    unit: unit
+    qty: 6.0
+    unit: kg
   - item_id: power_output_terminals
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 21.0
     unit: kg
 outputs:
   - item_id: formation_rack
@@ -32,12 +35,12 @@ steps:
   - process_id: welded_fabrication_basic_v0
     inputs:
       - item_id: formation_rack_frame
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
     outputs:
       - item_id: formation_rack_frame
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 2.0
@@ -45,44 +48,65 @@ steps:
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: formation_power_modules
-        qty: 1.0
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: formation_control_unit
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: cooling_fan_and_ducting
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+        qty: 147.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install power modules, harnesses, cooling, and control unit in rack."
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: formation_wiring_harness
-        qty: 1.0
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: power_output_terminals
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 32.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Wire channels, connectors, sensors, and power input/output."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formation_rack_frame
+        qty: 200.0
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 147.0
+        unit: kg
+      - item_id: assembled_electrical_equipment
+        qty: 32.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 21.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 400.0
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble rack frame, enclosure, wiring, and panels into formation rack."
   - process_id: integration_test_basic_v0
     inputs:
-      - item_id: formation_control_unit
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 400.0
+        unit: kg
     outputs:
       - item_id: formation_rack
         qty: 1.0

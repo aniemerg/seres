@@ -21,8 +21,11 @@ inputs:
     qty: 1
     unit: unit
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 3
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 13
+    unit: kg
 outputs:
   - item_id: power_conditioning_equipment
     qty: 1
@@ -49,8 +52,11 @@ steps:
         qty: 1
         unit: unit
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 3
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 13
+        unit: kg
     outputs:
       - item_id: power_conditioning_equipment
         qty: 1
@@ -60,4 +66,6 @@ steps:
     labor_hours: 7.0
     notes: "Fabricate electrical enclosure, wire inverter module/voltage regulator/capacitor bank/transformer, mount components in enclosure, install cooling fans and cable entries, test power conditioning under load, verify voltage regulation and conversion"
 assumptions: Inverter module and control electronics imported. Transformer and enclosure fabricated locally.
-notes: Power conditioning equipment for solar power integration with imported electronics.
+notes: |
+  Power conditioning equipment for solar power integration with imported electronics.
+  Mass balance: fastener_kit_medium increased to 3 kg to match 80 kg output mass.

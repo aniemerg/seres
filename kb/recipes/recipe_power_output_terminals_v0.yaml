@@ -20,7 +20,11 @@ inputs:
     notes: Terminal mounting plate
 outputs:
   - item_id: power_output_terminals
-    qty: 2.0
+    qty: 1.9
+    unit: kg
+byproducts:
+  - item_id: metal_swarf
+    qty: 0.1
     unit: kg
 steps:
   - process_id: machining_finish_basic_v0
@@ -34,6 +38,10 @@ steps:
     outputs:
       - item_id: machined_part_raw
         qty: 1.4
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 0.1
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
@@ -51,7 +59,7 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 2.0
+        qty: 1.9
         unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
@@ -59,11 +67,11 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 2.0
+        qty: 1.9
         unit: kg
     outputs:
       - item_id: power_output_terminals
-        qty: 2.0
+        qty: 1.9
         unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25

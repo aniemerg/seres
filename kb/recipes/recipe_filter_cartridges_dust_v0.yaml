@@ -5,6 +5,12 @@ inputs:
   - item_id: fiber_material
     qty: 5.0
     unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.4
+    unit: kg
+  - item_id: adhesive_cyanoacrylate
+    qty: 0.1
+    unit: kg
 outputs:
   - item_id: filter_cartridges_dust
     qty: 5.0
@@ -27,24 +33,18 @@ steps:
       - item_id: textile_fabric
         qty: 4.5
         unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 5.0
+      - item_id: sheet_metal_or_structural_steel
+        qty: 0.4
         unit: kg
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Pleat fabric, install in cartridge frames, seal edges"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 5.0
+      - item_id: adhesive_cyanoacrylate
+        qty: 0.1
         unit: kg
     outputs:
       - item_id: filter_cartridges_dust
         qty: 5.0
         unit: kg
-    est_time_hr: 0.25
-    labor_hours: 0.25
-    notes: "Test airflow and filtration efficiency"
+    est_time_hr: 1.75
+    labor_hours: 1.75
+    notes: "Pleat fabric, install in cartridge frames (0.4 kg steel), seal edges with adhesive (0.1 kg). Test airflow and filtration efficiency. Total assembly and testing time: ~1.75 hours."
 assumptions: Pleated fabric filter cartridges with metal or plastic frames. Replaceable elements for dust collection systems.
 notes: Dust filter cartridges for cyclone separators and dust collection systems. Captures fine particles from air stream.

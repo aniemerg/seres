@@ -9,9 +9,6 @@ outputs:
   - item_id: deposited_metal_structure
     qty: 0.95
     unit: kg
-  - item_id: slag
-    qty: 0.05
-    unit: kg
 steps:
   - process_id: wire_arc_additive_process_v0
     inputs:
@@ -22,7 +19,4 @@ steps:
       - item_id: deposited_metal_structure
         qty: 0.95
         unit: kg
-      - item_id: slag
-        qty: 0.05
-        unit: kg
-notes: "WAAM deposition step that yields 0.95 kg of deposited_metal_structure per batch from 1.0 kg metal_wire_feed; aligns with wire_arc_additive_process_v0 output."
+notes: "WAAM deposition step that yields 0.95 kg of deposited_metal_structure per batch from 1.0 kg metal_wire_feed; slag byproduct handled by wire_arc_additive_process_v0."

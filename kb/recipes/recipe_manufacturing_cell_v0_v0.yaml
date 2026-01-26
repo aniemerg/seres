@@ -5,7 +5,7 @@ target_item_id: manufacturing_cell_v0
 variant_id: v0
 inputs:
   - item_id: steel_frame_heavy
-    qty: 1
+    qty: 10.7143
     unit: unit
 outputs:
   - item_id: manufacturing_cell_v0
@@ -15,7 +15,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_frame_heavy
-        qty: 1
+        qty: 10.7143
         unit: unit
     outputs:
       - item_id: manufacturing_cell_v0
@@ -24,6 +24,6 @@ steps:
     est_time_hr: 16.0
     machine_hours: 4.0
     labor_hours: 12.0
-    notes: "Assemble heavy steel frame into manufacturing cell configuration"
+    notes: "Assemble heavy steel frame into manufacturing cell configuration; frame qty scaled to match mass"
 assumptions: "Placeholder manufacturing cell; detailed component list to be expanded later"
 notes: "Assembly of modular manufacturing cell from structural frame components"

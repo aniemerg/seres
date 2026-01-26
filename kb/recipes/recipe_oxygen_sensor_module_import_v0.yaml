@@ -4,8 +4,8 @@ target_item_id: oxygen_sensor_module
 variant_id: v0
 inputs:
   - item_id: oxygen_sensor_zirconia_v0
-    qty: 1.0
-    unit: unit
+    qty: 0.25
+    unit: kg
   - item_id: assembled_electronics
     qty: 0.75
     unit: kg
@@ -13,6 +13,7 @@ outputs:
   - item_id: oxygen_sensor_module
     qty: 1.0
     unit: unit
+byproducts:
   - item_id: oxygen_sensor_module_waste_v0
     qty: 0.2
     unit: kg
@@ -20,8 +21,8 @@ steps:
   - process_id: oxygen_sensor_module_assembly_v0
     inputs:
       - item_id: oxygen_sensor_zirconia_v0
-        qty: 1.0
-        unit: unit
+        qty: 0.25
+        unit: kg
       - item_id: assembled_electronics
         qty: 0.75
         unit: kg
@@ -29,11 +30,17 @@ steps:
       - item_id: oxygen_sensor_module
         qty: 1.0
         unit: unit
+    byproducts:
       - item_id: oxygen_sensor_module_waste_v0
         qty: 0.2
         unit: kg
     est_time_hr: 1.0
     machine_hours: 1.0
     labor_hours: 2.0
-notes: "Converted from import_stub to a normal production path using the assembly process."
+notes: |
+  Converted from import_stub to a normal production path using the assembly process.
+  Fixed mass balance: oxygen_sensor_zirconia_v0 input changed from 1.0 unit to 0.25 kg
+  to match item definition (unit_kind: bulk, unit: kg).
+  Mass balance: 0.25 kg (sensor) + 0.75 kg (electronics) = 1.0 kg in,
+  0.8 kg (module) + 0.2 kg (waste) = 1.0 kg out.
 assumptions: "Local production path; BOM details to be refined."

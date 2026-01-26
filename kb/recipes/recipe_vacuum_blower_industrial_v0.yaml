@@ -3,7 +3,7 @@ target_item_id: vacuum_blower_industrial
 variant_id: v0
 inputs:
   - item_id: regolith_metal_crude
-    qty: 35.0
+    qty: 45.0
     unit: kg
   - item_id: sheet_metal_or_structural_steel
     qty: 15.0
@@ -14,6 +14,9 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 1.0
     unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 3.0
+    unit: kg
 outputs:
   - item_id: vacuum_blower_industrial
     qty: 60.0
@@ -22,11 +25,15 @@ steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 35.0
+        qty: 45.0
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 35.0
+        qty: 43.0
+        unit: kg
+    byproducts:
+      - item_id: casting_slag
+        qty: 2.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -34,11 +41,15 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 35.0
+        qty: 43.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 33.0
+        qty: 41.0
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 2.0
         unit: kg
     est_time_hr: 5.0
     machine_hours: 5.0
@@ -58,7 +69,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 33.0
+        qty: 41.0
         unit: kg
       - item_id: formed_sheet_metal_parts
         qty: 14.25
@@ -69,9 +80,16 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 3.0
+        unit: kg
     outputs:
       - item_id: vacuum_blower_industrial
         qty: 60.0
+        unit: kg
+    byproducts:
+      - item_id: assembly_waste
+        qty: 1.25
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0

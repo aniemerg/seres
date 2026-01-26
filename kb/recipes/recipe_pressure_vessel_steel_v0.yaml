@@ -2,134 +2,145 @@ id: recipe_pressure_vessel_steel_v0
 kind: recipe
 target_item_id: pressure_vessel_steel
 variant_id: v0
-
 inputs:
+- item_id: steel_plate_raw
+  qty: 137.0
+  unit: kg
+  notes: Heavy gauge pressure vessel plate (137 kg to account for 7 kg total processing losses)
+- item_id: fittings_and_valves
+  qty: 12.0
+  unit: kg
+  notes: Pressure-rated flanges, closures, and fittings
+- item_id: welding_rod_steel
+  qty: 3.0
+  unit: kg
+  notes: High-strength welding consumables
+- item_id: fastener_kit_large
+  qty: 3.0
+  unit: kg
+  notes: Pressure-rated bolting (3 kg to balance final mass)
+- item_id: gasket_sheet_material_v0
+  qty: 3.0
+  unit: kg
+  notes: Sealing gaskets
+outputs:
+- item_id: pressure_vessel_steel
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: cutting_basic_v0
+  inputs:
   - item_id: steel_plate_raw
-    qty: 130.0
+    qty: 137.0
     unit: kg
-    notes: Heavy gauge pressure vessel plate
-  - item_id: fittings_and_valves
-    qty: 12.0
+  outputs:
+  - item_id: cut_parts
+    qty: 133.0
     unit: kg
-    notes: Pressure-rated flanges, closures, and fittings
+  - item_id: metal_scrap
+    qty: 4.0
+    unit: kg
+  est_time_hr: 3.0
+  machine_hours: 3.0
+  notes: Cut heavy plate to vessel dimensions (3 kg cutting scrap)
+- process_id: metal_forming_basic_v0
+  inputs:
+  - item_id: cut_parts
+    qty: 133.0
+    unit: kg
+  outputs:
+  - item_id: formed_metal_part
+    qty: 132.0
+    unit: kg
+  - item_id: waste
+    qty: 1.0
+    unit: kg
+  est_time_hr: 8.0
+  machine_hours: 8.0
+  labor_hours: 4.0
+  notes: Roll or press heavy plate into cylindrical or spherical vessel sections (1 kg forming loss)
+- process_id: welding_brazing_basic_v0
+  inputs:
+  - item_id: formed_metal_part
+    qty: 132.0
+    unit: kg
   - item_id: welding_rod_steel
     qty: 3.0
     unit: kg
-    notes: High-strength welding consumables
-  - item_id: fastener_kit_large
+  outputs:
+  - item_id: welded_assemblies
+    qty: 134.0
+    unit: kg
+  - item_id: waste
+    qty: 1.0
+    unit: kg
+  est_time_hr: 12.0
+  machine_hours: 12.0
+  labor_hours: 12.0
+  notes: Multi-pass welding of pressure vessel seams per code requirements (1 kg slag/spatter loss)
+- process_id: heat_treatment_stress_relief_v0
+  inputs:
+  - item_id: welded_assemblies
+    qty: 134.0
+    unit: kg
+  outputs:
+  - item_id: welded_assemblies
+    qty: 134.0
+    unit: kg
+  est_time_hr: 6.0
+  machine_hours: 6.0
+  notes: Stress relief heat treatment of welded vessel
+- process_id: machining_finish_basic_v0
+  inputs:
+  - item_id: welded_assemblies
+    qty: 134.0
+    unit: kg
+  outputs:
+  - item_id: machined_part_raw
+    qty: 132.0
+    unit: kg
+  - item_id: metal_swarf
     qty: 2.0
     unit: kg
-    notes: Pressure-rated bolting
+  est_time_hr: 4.0
+  machine_hours: 4.0
+  notes: Machine flange faces, nozzle openings, and mounting features (2 kg swarf)
+- process_id: pressure_test_basic_v0
+  inputs:
+  - item_id: machined_part_raw
+    qty: 132.0
+    unit: kg
+  outputs:
+  - item_id: machined_part_raw
+    qty: 132.0
+    unit: kg
+  est_time_hr: 2.0
+  machine_hours: 2.0
+  labor_hours: 2.0
+  notes: Hydrostatic pressure test to code requirements
+- process_id: assembly_basic_v0
+  inputs:
+  - item_id: machined_part_raw
+    qty: 132.0
+    unit: kg
+  - item_id: fittings_and_valves
+    qty: 12.0
+    unit: kg
   - item_id: gasket_sheet_material_v0
     qty: 3.0
     unit: kg
-    notes: Sealing gaskets
-
-outputs:
-  - item_id: pressure_vessel_steel
-    qty: 150.0
+  - item_id: fastener_kit_large
+    qty: 3.0
     unit: kg
-
-steps:
-  - process_id: cutting_basic_v0
-    inputs:
-      - item_id: steel_plate_raw
-        qty: 130.0
-        unit: kg
-    outputs:
-      - item_id: cut_parts
-        qty: 128.0
-        unit: kg
-    est_time_hr: 3.0
-    machine_hours: 3.0
-    notes: Cut heavy plate to vessel dimensions
-  - process_id: metal_forming_basic_v0
-    inputs:
-      - item_id: cut_parts
-        qty: 128.0
-        unit: kg
-    outputs:
-      - item_id: formed_metal_part
-        qty: 127.0
-        unit: kg
-    est_time_hr: 8.0
-    machine_hours: 8.0
-    labor_hours: 4.0
-    notes: Roll or press heavy plate into cylindrical or spherical vessel sections
-  - process_id: welding_brazing_basic_v0
-    inputs:
-      - item_id: formed_metal_part
-        qty: 127.0
-        unit: kg
-      - item_id: welding_rod_steel
-        qty: 3.0
-        unit: kg
-    outputs:
-      - item_id: welded_assemblies
-        qty: 129.0
-        unit: kg
-    est_time_hr: 12.0
-    machine_hours: 12.0
-    labor_hours: 12.0
-    notes: Multi-pass welding of pressure vessel seams per code requirements
-  - process_id: heat_treatment_stress_relief_v0
-    inputs:
-      - item_id: welded_assemblies
-        qty: 129.0
-        unit: kg
-    outputs:
-      - item_id: welded_assemblies
-        qty: 129.0
-        unit: kg
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    notes: Stress relief heat treatment of welded vessel
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: welded_assemblies
-        qty: 129.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 127.0
-        unit: kg
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    notes: Machine flange faces, nozzle openings, and mounting features
-  - process_id: pressure_test_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 127.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 127.0
-        unit: kg
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    labor_hours: 2.0
-    notes: Hydrostatic pressure test to code requirements
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 127.0
-        unit: kg
-      - item_id: fittings_and_valves
-        qty: 12.0
-        unit: kg
-      - item_id: gasket_sheet_material_v0
-        qty: 3.0
-        unit: kg
-      - item_id: fastener_kit_large
-        qty: 2.0
-        unit: kg
-    outputs:
-      - item_id: pressure_vessel_steel
-        qty: 144.0
-        unit: kg
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: Install flanges, gaskets, and pressure fittings
-
-assumptions: "150 kg pressure vessel for chemical reactor. Heavy-gauge steel construction with code-compliant welding, heat treatment, and pressure testing."
-notes: "Seven-step fabrication process for pressure vessel including forming, welding, stress relief, machining, pressure testing, and final assembly per pressure vessel codes."
+  outputs:
+  - item_id: pressure_vessel_steel
+    qty: 1.0
+    unit: unit
+  est_time_hr: 3.0
+  labor_hours: 3.0
+  notes: Install flanges, gaskets, and pressure fittings
+assumptions: 150 kg pressure vessel for chemical reactor. Heavy-gauge steel construction
+  with code-compliant welding, heat treatment, and pressure testing.
+notes: Seven-step fabrication process for pressure vessel including forming, welding,
+  stress relief, machining, pressure testing, and final assembly per pressure vessel
+  codes.

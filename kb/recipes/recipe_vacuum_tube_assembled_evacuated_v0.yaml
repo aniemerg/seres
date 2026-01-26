@@ -20,7 +20,7 @@ inputs:
     unit: kg
 outputs:
   - item_id: vacuum_tube_assembled_evacuated
-    qty: 0.04
+    qty: 0.038
     unit: kg
 steps:
 - process_id: tube_assembly_and_evacuation_v0
@@ -39,6 +39,8 @@ steps:
       unit: kg
   outputs:
     - item_id: vacuum_tube_assembled_evacuated
-      qty: 0.04
+      qty: 0.038
       unit: kg
-notes: "Chain: assemble envelope components and evacuate to form vacuum_tube_assembled_evacuated."
+notes: |
+  Chain: assemble envelope components and evacuate to form vacuum_tube_assembled_evacuated.
+  Mass balance: output set to 0.038 kg to match summed inputs.

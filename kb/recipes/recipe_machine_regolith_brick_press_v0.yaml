@@ -5,27 +5,24 @@ target_item_id: regolith_brick_press_v0
 variant_id: v0
 inputs:
   - item_id: press_frame_medium
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: press_platen_set
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: press_cylinder_medium
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: hydraulic_power_unit_basic
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: hydraulic_hoses_and_fittings
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: pressing_mold_set
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: control_circuit_board_basic
-    qty: 1
-    unit: unit
-  - item_id: assembled_equipment
     qty: 1
     unit: unit
 outputs:
@@ -36,38 +33,38 @@ steps:
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: press_frame_medium
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: press_platen_set
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: press_cylinder_medium
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: hydraulic_power_unit_basic
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: hydraulic_hoses_and_fittings
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: pressing_mold_set
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: control_circuit_board_basic
         qty: 1
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 1200
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 8.0
     notes: "Assemble regolith brick press from BOM components: frame, platens, cylinder, hydraulics, mold, and controls"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 1200
+        unit: kg
     outputs:
       - item_id: regolith_brick_press_v0
         qty: 1
@@ -76,4 +73,6 @@ steps:
     labor_hours: 0.6
     notes: "Cycle press with mold, verify pressure and ejection; final QA and acceptance test"
 assumptions: "Hydraulic press dedicated to regolith block forming; mold set included. Simplified to BOM-based assembly from 7 components."
-notes: "Local build route for regolith brick press v0; simplified from complex fabrication to direct BOM assembly."
+notes: |
+  Local build route for regolith brick press v0; simplified from complex fabrication to direct BOM assembly.
+  Mass balance: assembled_equipment scaled to 24 units; major components doubled to reach ~1200 kg.

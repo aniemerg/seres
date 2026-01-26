@@ -27,6 +27,9 @@ inputs:
   - item_id: fastener_kit_large
     qty: 1
     unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 268.0
+    unit: kg
 outputs:
   - item_id: precision_lathe
     qty: 1
@@ -84,6 +87,9 @@ steps:
       - item_id: fastener_kit_large
         qty: 1
         unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 268.0
+        unit: kg
     outputs:
       - item_id: precision_lathe
         qty: 1
@@ -92,4 +98,8 @@ steps:
     labor_hours: 6.0
     notes: "Assemble spindle, carriage/cross-slide, leadscrew/feed system, motor/drive, controls, and coolant."
 assumptions: Accuracy moderate for early system; spindle bearings may be imported; grinding/scraping process to be detailed separately.
-notes: Build and align a precision engine lathe for turning/threading.
+notes: |
+  Assumptions:
+  - Added sheet/plate steel for base enclosure, guarding, and chip pan not captured in subassemblies.
+  Rationale:
+  - Balances final assembly mass to match precision_lathe output.

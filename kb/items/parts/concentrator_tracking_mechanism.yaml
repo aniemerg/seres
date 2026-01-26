@@ -1,11 +1,21 @@
 id: concentrator_tracking_mechanism
 kind: part
 name: Concentrator tracking mechanism
-mass: 30.0
+mass: 40.0
 unit: kg
 material_class: steel
-notes: 'Optional dual-axis solar tracking mechanism for concentrator systems. Enables
-  concentrator to follow sun''s path across sky for maximum solar energy capture.
-  Includes motors, gears, position sensors, and control system. See: design/solar_thermionics_report.md'
+notes: |
+  Optional dual-axis solar tracking mechanism for concentrator systems. Enables concentrator to follow sun's path across sky for maximum solar energy capture.
+  Includes motors, gears, position sensors, and control system. See: design/solar_thermionics_report.md
+
+  Mass updated 2026-01 from 30 kg to 40 kg based on recipe component analysis:
+  - Motor (1× small motor): 12 kg
+  - Gears (1× gear set): 6 kg
+  - Bearings (2× sets): 0.6 kg
+  - Sensors (1× suite): 5 kg
+  - Electronics (1× set): 2 kg
+  - Wire: 0.5 kg
+  - Steel structure: 14 kg
+  Total: ~40 kg
 recipe: recipe_concentrator_tracking_mechanism_v0
 unit_kind: bulk

@@ -2,95 +2,85 @@ id: recipe_generic_chemical_reactor_v0
 kind: recipe
 target_item_id: generic_chemical_reactor_v0
 inputs:
-  - item_id: regolith_metal_crude
-    qty: 1.0
+  - item_id: steel_plate_or_sheet
+    qty: 200.0
     unit: kg
   - item_id: machined_part_raw
-    qty: 1.0
+    qty: 20.0
     unit: kg
-  - item_id: enclosure_steel_small
-    qty: 1.0
-    unit: kg
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
+  - item_id: control_panel_basic
+    qty: 20.0
     unit: kg
   - item_id: electrical_wire_and_connectors
-    qty: 2.0
+    qty: 10.0
     unit: kg
-  - item_id: control_components
-    qty: 1.0
-    unit: unit
+  - item_id: piping_assembly_small
+    qty: 10.0
+    unit: kg
 steps:
-  - process_id: metal_casting_basic_v0
+  - process_id: welded_fabrication_basic_v0
     inputs:
-      - item_id: regolith_metal_crude
-        qty: 1.0
+      - item_id: steel_plate_or_sheet
+        qty: 200.0
         unit: kg
     outputs:
-      - item_id: cast_metal_parts
-        qty: 1.0
+      - item_id: welded_fabrications
+        qty: 190.0
         unit: kg
-  - process_id: welding_brazing_basic_v0
-    inputs:
-      - item_id: cast_metal_parts
-        qty: 1.0
+      - item_id: metal_scrap
+        qty: 10.0
         unit: kg
-    outputs:
-      - item_id: welded_assemblies
-        qty: 1.0
-        unit: kg
+    notes: "Fabricate reactor vessel and shell from steel plate (10 kg scrap)"
   - process_id: machining_finish_basic_v0
     inputs:
+      - item_id: welded_fabrications
+        qty: 190.0
+        unit: kg
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 20.0
         unit: kg
     outputs:
-      - item_id: machined_part_raw
-        qty: 1.0
+      - item_id: welded_fabrications
+        qty: 210.0
         unit: kg
+    notes: "Machine and install internal components, baffles, mounting points"
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: machined_part_raw
-        qty: 1.0
+      - item_id: welded_fabrications
+        qty: 210.0
+        unit: kg
+      - item_id: piping_assembly_small
+        qty: 10.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 220.0
         unit: kg
-  - process_id: enclosure_assembly_basic_v0
+    notes: "Install piping, valves, and mechanical fittings"
+  - process_id: electrical_assembly_basic_v0
     inputs:
-      - item_id: enclosure_steel_small
-        qty: 1.0
+      - item_id: assembled_equipment
+        qty: 220.0
         unit: kg
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
+      - item_id: control_panel_basic
+        qty: 20.0
         unit: kg
-    outputs:
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: kg
-  - process_id: electrical_wiring_and_controls_v0
-    inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 2.0
+        qty: 10.0
         unit: kg
-      - item_id: control_components
-        qty: 1.0
-        unit: unit
     outputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-  - process_id: machine_assembly_basic_v0
+      - item_id: assembled_equipment
+        qty: 250.0
+        unit: kg
+    notes: "Install control panel, wire sensors and controls (total: 250 kg)"
+  - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: kg
-      - item_id: enclosure_electrical_medium
-        qty: 1.0
+        qty: 250.0
         unit: kg
     outputs:
       - item_id: generic_chemical_reactor_v0
         qty: 1.0
         unit: unit
+    notes: "Final testing and calibration"
 notes: "Standard machine-assembly chain to manufacture generic_chemical_reactor_v0 using existing unit operations."

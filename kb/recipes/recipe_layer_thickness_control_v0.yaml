@@ -38,17 +38,17 @@ steps:
         qty: 0.2
         unit: kg
     outputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+      - item_id: assembled_electronics
+        qty: 2.48
+        unit: kg
     est_time_hr: 0.6
     labor_hours: 0.6
-    notes: "Install control electronics and connectors"
+    notes: "Install control electronics and connectors. Assumes electronic_components_set ≈ 2 kg, total assembly 2.48 kg."
   - process_id: electrical_testing_v0
     inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+      - item_id: assembled_electronics
+        qty: 2.48
+        unit: kg
     outputs:
       - item_id: layer_thickness_control_v0
         qty: 1

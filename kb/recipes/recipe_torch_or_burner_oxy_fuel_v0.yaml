@@ -4,19 +4,11 @@ target_item_id: torch_or_burner_oxy_fuel
 variant_id: v0
 inputs:
   - item_id: rough_part
-    qty: 0.08
+    qty: 6.9
     unit: kg
   - item_id: center_insulator_ceramic
-    qty: 0.08
+    qty: 1.6
     unit: kg
-  - item_id: machined_steel_part_precision
-    qty: 0.075
-    unit: kg
-    notes: "Intermediate for assembly step"
-  - item_id: insulator_drilled
-    qty: 0.075
-    unit: kg
-    notes: "Intermediate for assembly step"
 outputs:
   - item_id: torch_or_burner_oxy_fuel
     qty: 1.0
@@ -25,14 +17,15 @@ steps:
   - process_id: machining_process_turning_v0
     inputs:
       - item_id: rough_part
-        qty: 0.08
+        qty: 6.9
         unit: kg
     outputs:
       - item_id: machined_steel_part_precision
-        qty: 0.075
+        qty: 6.5
         unit: kg
+    byproducts:
       - item_id: turning_chip_waste
-        qty: 0.005
+        qty: 0.4
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
@@ -40,14 +33,15 @@ steps:
   - process_id: machining_process_drilling_v0
     inputs:
       - item_id: center_insulator_ceramic
-        qty: 0.08
+        qty: 1.6
         unit: kg
     outputs:
       - item_id: insulator_drilled
-        qty: 0.075
+        qty: 1.5
         unit: kg
+    byproducts:
       - item_id: ceramic_drill_chip_waste
-        qty: 0.005
+        qty: 0.1
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
@@ -55,10 +49,10 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_steel_part_precision
-        qty: 0.075
+        qty: 6.5
         unit: kg
       - item_id: insulator_drilled
-        qty: 0.075
+        qty: 1.5
         unit: kg
     outputs:
       - item_id: torch_or_burner_oxy_fuel
@@ -68,4 +62,8 @@ steps:
     labor_hours: 0.75
     notes: Assemble torch body, hoses, and components into torch_or_burner_oxy_fuel
 assumptions: "Local fabrication path to produce oxy-fuel torch or burner; replaces import"
-notes: "Local torch/burner fabrication path replacing import stub."
+notes: |
+  Assumptions:
+  - Scaled torch body and ceramic insulator masses to match 8 kg torch output.
+  Rationale:
+  - Aligns machining and assembly steps with torch_or_burner_oxy_fuel mass.

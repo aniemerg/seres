@@ -4,55 +4,92 @@ name: Pressure test rig basic alias
 target_item_id: pressure_test_rig_basic
 variant_id: v0
 inputs:
-  - item_id: machine_frame_small
-    qty: 1
-    unit: unit
-  - item_id: pump_water_small
-    qty: 1
-    unit: unit
-  - item_id: pressure_gauge
-    qty: 1
-    unit: unit
-  - item_id: fittings_and_valves
-    qty: 2.0
+  - item_id: hydraulic_pump_high_pressure
+    qty: 60.0
     unit: kg
-  - item_id: piping_assembly_small
-    qty: 1
+  - item_id: pressure_vessel_steel
+    qty: 150.0
+    unit: kg
+  - item_id: press_platen_steel
+    qty: 200.0
+    unit: kg
+  - item_id: brick_mold_steel_set
+    qty: 100.0
+    unit: kg
+  - item_id: hydraulic_hoses_and_fittings
+    qty: 8.0
+    unit: kg
+  - item_id: pressure_gauge_set
+    qty: 5.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1.0
     unit: unit
-  - item_id: fastener_kit_medium
-    qty: 1
+  - item_id: electric_motor_3_phase_5kw
+    qty: 1.0
     unit: unit
+  - item_id: steel_frame_heavy_duty
+    qty: 1200.0
+    unit: kg
+  - item_id: hydraulic_cylinder_large
+    qty: 40.0
+    unit: kg
+  - item_id: pressure_control_valve_set
+    qty: 6.0
+    unit: kg
 outputs:
   - item_id: pressure_test_rig_basic
-    qty: 1
+    qty: 1.0
     unit: unit
 steps:
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: machine_frame_small
-        qty: 1
-        unit: unit
-      - item_id: pump_water_small
-        qty: 1
-        unit: unit
-      - item_id: pressure_gauge
-        qty: 1
-        unit: unit
-      - item_id: fittings_and_valves
-        qty: 2.0
+      - item_id: hydraulic_pump_high_pressure
+        qty: 60.0
         unit: kg
-      - item_id: piping_assembly_small
-        qty: 1
+      - item_id: pressure_vessel_steel
+        qty: 150.0
+        unit: kg
+      - item_id: press_platen_steel
+        qty: 200.0
+        unit: kg
+      - item_id: brick_mold_steel_set
+        qty: 100.0
+        unit: kg
+      - item_id: hydraulic_hoses_and_fittings
+        qty: 8.0
+        unit: kg
+      - item_id: pressure_gauge_set
+        qty: 5.0
+        unit: kg
+      - item_id: control_panel_basic
+        qty: 1.0
         unit: unit
-      - item_id: fastener_kit_medium
-        qty: 1
+      - item_id: electric_motor_3_phase_5kw
+        qty: 1.0
         unit: unit
+      - item_id: steel_frame_heavy_duty
+        qty: 1200.0
+        unit: kg
+      - item_id: hydraulic_cylinder_large
+        qty: 40.0
+        unit: kg
+      - item_id: pressure_control_valve_set
+        qty: 6.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1774.0
+        unit: kg
+    notes: "Assemble components for the pressure test rig"
+  - process_id: pressure_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1774.0
+        unit: kg
     outputs:
       - item_id: pressure_test_rig_basic
-        qty: 1
+        qty: 1.0
         unit: unit
-    est_time_hr: 6.0
-    machine_hours: 1.0
-    labor_hours: 5.0
-    notes: "Assemble pressure test rig components on frame, install pump and piping with fittings and valves, mount pressure gauge, connect all systems, test for leaks and calibrate"
-notes: "Alias recipe to manufacture base pressure_test_rig_basic using existing v0 assembly and basic pressure test processes. This resolves the no_recipe gap for the base item; downstream BOM and variant handling may be refined later."
+    notes: "Run basic pressure test on the assembled rig"
+notes: "Alias recipe to manufacture pressure_test_rig_basic using the v0 assembly and test flow."

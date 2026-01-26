@@ -2,12 +2,56 @@ id: recipe_hip_press_unit_v0
 kind: recipe
 name: HIP densification chamber local production v0
 target_item_id: hip_press_unit_v0
+inputs:
+  - item_id: steel_shell_thick
+    qty: 400.0
+    unit: kg
+  - item_id: structural_steel_frame
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: press_platen_set_medium
+    qty: 1
+    unit: unit
+  - item_id: safety_guard_steel_mesh
+    qty: 2
+    unit: unit
+  - item_id: pressure_test_gauge_set
+    qty: 1
+    unit: unit
 outputs:
   - item_id: hip_press_unit_v0
     qty: 1.0
     unit: unit
 steps:
   - process_id: hip_press_unit_assembly_v0
+    inputs:
+      - item_id: steel_shell_thick
+        qty: 400.0
+        unit: kg
+      - item_id: structural_steel_frame
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: press_platen_set_medium
+        qty: 1
+        unit: unit
+      - item_id: safety_guard_steel_mesh
+        qty: 2
+        unit: unit
+      - item_id: pressure_test_gauge_set
+        qty: 1
+        unit: unit
     outputs:
       - item_id: hip_press_unit_v0
         qty: 1.0

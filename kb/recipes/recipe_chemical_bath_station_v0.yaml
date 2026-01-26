@@ -3,45 +3,45 @@ target_item_id: chemical_bath_station
 variant_id: v0
 inputs:
   - item_id: steel_beam_i_section
-    qty: 50.0
+    qty: 55.0
     unit: kg
   - item_id: chemical_bath_tank_set
-    qty: 1
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: chemical_bath_heaters
-    qty: 1
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: chemical_bath_agitation_system
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: chemical_bath_ventilation
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: control_panel_basic
-    qty: 1
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: power_output_terminals
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: electronic_components_set
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: chemical_bath_station
-    qty: 1
-    unit: unit
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: welded_fabrication_basic_v0
     inputs:
     - item_id: steel_beam_i_section
-      qty: 50.0
+      qty: 55.0
       unit: kg
     outputs:
     - item_id: welded_fabrications
-      qty: 48.0
+      qty: 53.0
       unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
@@ -50,50 +50,56 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
     - item_id: welded_fabrications
-      qty: 48.0
+      qty: 53.0
       unit: kg
     - item_id: chemical_bath_tank_set
-      qty: 1
-      unit: unit
+      qty: 80.0
+      unit: kg
     - item_id: chemical_bath_heaters
-      qty: 1
-      unit: unit
+      qty: 20.0
+      unit: kg
     - item_id: chemical_bath_agitation_system
-      qty: 1
-      unit: unit
+      qty: 25.0
+      unit: kg
     - item_id: chemical_bath_ventilation
-      qty: 1
-      unit: unit
+      qty: 2.0
+      unit: kg
     - item_id: fastener_kit_medium
-      qty: 1
-      unit: unit
+      qty: 1.0
+      unit: kg
     outputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 181.0
+      unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install tanks, heaters, agitation, and ventilation hardware."
   - process_id: electrical_assembly_basic_v0
     inputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 181.0
+      unit: kg
     - item_id: control_panel_basic
-      qty: 1
-      unit: unit
+      qty: 15.0
+      unit: kg
     - item_id: power_output_terminals
-      qty: 1
-      unit: unit
+      qty: 2.0
+      unit: kg
     - item_id: electronic_components_set
-      qty: 1
-      unit: unit
+      qty: 2.0
+      unit: kg
     outputs:
     - item_id: chemical_bath_station
-      qty: 1
-      unit: unit
+      qty: 200.0
+      unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Wire controls, heaters, and fans; verify safety interlocks."
 assumptions: Tanks corrosion-resistant; ventilation adequate for fumes; heaters and agitation sized for small baths.
-notes: Chemical bath station assembly for cleaning/etching/coating operations.
+notes: |
+  Assumptions:
+  - Component masses scaled to match 200 kg station placeholder.
+  Rationale:
+  - Preserve mass balance and align inputs with item mass units.
+  Uncertainty:
+  - Structural frame mass and subsystem sizing need refinement.

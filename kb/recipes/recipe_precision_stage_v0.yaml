@@ -11,9 +11,6 @@ inputs:
   - item_id: electronic_components_set
     qty: 1.0
     unit: kg
-  - item_id: device_uncalibrated
-    qty: 1.0
-    unit: unit
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -34,8 +31,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 74.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Assemble XYZ stages, ball screws, and linear bearings"
@@ -50,19 +47,22 @@ steps:
     outputs:
       - item_id: assembled_electronics
         qty: 1.0
-        unit: unit
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install stepper motors, encoders, and control electronics"
   - process_id: calibration_and_test_basic_v0
     inputs:
-      - item_id: device_uncalibrated
+      - item_id: assembled_equipment
+        qty: 74.0
+        unit: kg
+      - item_id: assembled_electronics
         qty: 1.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: precision_stage
-        qty: 1.0
-        unit: unit
+        qty: 75.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Calibrate positioning accuracy and repeatability"

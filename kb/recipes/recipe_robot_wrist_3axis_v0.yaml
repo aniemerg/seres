@@ -102,24 +102,12 @@ steps:
         qty: 1
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: robot_wrist_3axis
         qty: 1
         unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble wrist housing, install bearings and shafts"
-  - process_id: alignment_and_testing_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    outputs:
-      - item_id: robot_wrist_3axis
-        qty: 1
-        unit: unit
-    est_time_hr: 3.0
-    labor_hours: 2.0
-    notes: "Align joints and test range of motion"
 notes: |
   Manufactures 3-axis robot wrist module from lunar materials.
 
@@ -141,3 +129,5 @@ notes: |
   Phase 2: Manufacture bearings from lunar materials.
 
   Design reference: docs/labor_bot_design_memo.md section 3.1.4.
+
+  Mass balance: assembly outputs robot_wrist_3axis directly; alignment step reuses same item.

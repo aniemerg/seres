@@ -3,81 +3,83 @@ kind: recipe
 target_item_id: inspection_tools_basic
 variant_id: v0
 inputs:
+- item_id: steel_bar_stock
+  qty: 10.0
+  unit: kg
+- item_id: fastener_kit_small
+  qty: 0.5
+  unit: kg
+outputs:
+- item_id: inspection_tools_basic
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: machining_finish_basic_v0
+  inputs:
   - item_id: steel_bar_stock
     qty: 10.0
+    unit: kg
+  outputs:
+  - item_id: machined_part_raw
+    qty: 9.0
+    unit: kg
+  est_time_hr: 6.0
+  machine_hours: 6.0
+  labor_hours: 3.0
+  notes: Machine straightedges, gauge blocks, and caliper components
+- process_id: precision_grinding_basic_v0
+  inputs:
+  - item_id: machined_part_raw
+    qty: 9.0
+    unit: kg
+  outputs:
+  - item_id: finished_part_deburred
+    qty: 8.5
+    unit: kg
+  est_time_hr: 4.0
+  machine_hours: 4.0
+  labor_hours: 2.0
+  notes: Grind reference surfaces to high flatness and precision
+- process_id: assembly_basic_v0
+  inputs:
+  - item_id: finished_part_deburred
+    qty: 8.5
     unit: kg
   - item_id: fastener_kit_small
     qty: 0.5
     unit: kg
-outputs:
-  - item_id: inspection_tools_basic
+  outputs:
+  - item_id: assembled_equipment
     qty: 8.0
     unit: kg
-steps:
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 10.0
-        unit: kg
-    outputs:
-      - item_id: steel_bar_stock
-        qty: 10.0
-        unit: kg
-    est_time_hr: 6.0
-    machine_hours: 6.0
-    labor_hours: 3.0
-    notes: "Machine straightedges, gauge blocks, and caliper components"
-  - process_id: precision_grinding_basic_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 10.0
-        unit: kg
-    outputs:
-      - item_id: steel_bar_stock
-        qty: 10.0
-        unit: kg
-    est_time_hr: 4.0
-    machine_hours: 4.0
-    labor_hours: 2.0
-    notes: "Grind reference surfaces to high flatness and precision"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: steel_bar_stock
-        qty: 10.0
-        unit: kg
-      - item_id: fastener_kit_small
-        qty: 0.5
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 8.0
-        unit: kg
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: "Assemble calipers, install magnifying lenses, package tool set"
-  - process_id: calibration_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 8.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 8.0
-        unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Calibrate measuring tools against reference standards"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 8.0
-        unit: kg
-    outputs:
-      - item_id: inspection_tools_basic
-        qty: 8.0
-        unit: kg
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Verify tool accuracy and functionality"
-assumptions: "Basic inspection and QC tool set including magnifiers, straightedges, gauges, and calipers. 8 kg tool set for manual inspection operations."
-notes: "Manufacturing of basic inspection tools. Total fabrication time ~16 hours. Essential for quality control and manual inspection."
+  est_time_hr: 3.0
+  labor_hours: 3.0
+  notes: Assemble calipers, install magnifying lenses, package tool set
+- process_id: calibration_basic_v0
+  inputs:
+  - item_id: assembled_equipment
+    qty: 8.0
+    unit: kg
+  outputs:
+  - item_id: assembled_equipment
+    qty: 8.0
+    unit: kg
+  est_time_hr: 2.0
+  labor_hours: 2.0
+  notes: Calibrate measuring tools against reference standards
+- process_id: inspection_basic_v0
+  inputs:
+  - item_id: assembled_equipment
+    qty: 8.0
+    unit: kg
+  outputs:
+  - item_id: inspection_tools_basic
+    qty: 1.0
+    unit: unit
+  est_time_hr: 1.0
+  labor_hours: 1.0
+  notes: Verify tool accuracy and functionality
+assumptions: Basic inspection and QC tool set including magnifiers, straightedges,
+  gauges, and calipers. 8 kg tool set for manual inspection operations.
+notes: Manufacturing of basic inspection tools. Total fabrication time ~16 hours.
+  Essential for quality control and manual inspection.

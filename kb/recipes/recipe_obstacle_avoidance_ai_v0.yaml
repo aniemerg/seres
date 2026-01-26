@@ -5,14 +5,14 @@ produces_qty: 1.0
 produces_unit: unit
 inputs:
   - item_id: electrical_wire_and_connectors
-    qty: 1.0
+    qty: 8.0
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
+    qty: 7.0
     unit: kg
   - item_id: sensor_suite_general
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
 outputs:
   - item_id: obstacle_avoidance_ai_v0
     qty: 1.0
@@ -21,10 +21,10 @@ steps:
 - process_id: wiring_and_electronics_integration_v0
   inputs:
     - item_id: electrical_wire_and_connectors
-      qty: 1.0
+      qty: 8.0
       unit: kg
     - item_id: electronic_components_set
-      qty: 1.0
+      qty: 7.0
       unit: kg
   outputs:
     - item_id: wired_electrical_system
@@ -34,8 +34,8 @@ steps:
 - process_id: sensor_integration_v0
   inputs:
     - item_id: sensor_suite_general
-      qty: 1.0
-      unit: unit
+      qty: 8.0
+      unit: kg
   outputs:
     - item_id: sensor_equipped_system
       qty: 1.0
@@ -51,5 +51,12 @@ steps:
       qty: 1.0
       unit: unit
   notes: Basic integration test of AI obstacle avoidance functionality
-notes: Standard recipe to assemble obstacle avoidance AI v0 using existing integration processes.
+notes: |
+  Assumptions:
+  - Sensor suite mass scaled to 8 kg to match sensor_equipped_system output mass.
+  - Wiring/components mass scaled to match 15 kg wired_electrical_system output.
+  Rationale:
+  - Preserve mass balance for sensor integration step.
+  Uncertainty:
+  - Sensor suite mass and composition need refinement.
 target_item_id: obstacle_avoidance_ai_v0

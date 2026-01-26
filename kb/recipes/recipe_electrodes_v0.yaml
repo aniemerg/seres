@@ -2,32 +2,36 @@ id: recipe_electrodes_v0
 target_item_id: electrodes
 variant_id: v0
 inputs:
+- item_id: graphite_powder
+  qty: 14.0
+  unit: kg
+- item_id: binder_material
+  qty: 2.0
+  unit: kg
+outputs:
+- item_id: electrodes
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs:
   - item_id: graphite_powder
     qty: 14.0
     unit: kg
   - item_id: binder_material
     qty: 2.0
     unit: kg
-outputs:
+  outputs:
   - item_id: electrodes
-    qty: 15.0
-    unit: kg
-steps:
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: graphite_powder
-        qty: 14.0
-        unit: kg
-      - item_id: binder_material
-        qty: 2.0
-        unit: kg
-    outputs:
-      - item_id: electrodes
-        qty: 15.0
-        unit: kg
-    est_time_hr: 17.5
-    machine_hours: 17.0
-    labor_hours: 3.5
-    notes: "Process carbon/graphite powder with binder, hot press and sinter to form dense electrode blanks, machine to final dimensions with connection points, inspect dimensions and integrity"
-assumptions: "Graphite/carbon construction formed from powder processing and sintering. High-temperature resistant for molten regolith electrolysis operations"
-notes: "Fabrication of carbon/graphite electrodes for molten regolith electrolysis with high temperature operation capability"
+    qty: 1.0
+    unit: unit
+  est_time_hr: 17.5
+  machine_hours: 17.0
+  labor_hours: 3.5
+  notes: Process carbon/graphite powder with binder, hot press and sinter to form
+    dense electrode blanks, machine to final dimensions with connection points, inspect
+    dimensions and integrity
+assumptions: Graphite/carbon construction formed from powder processing and sintering.
+  High-temperature resistant for molten regolith electrolysis operations
+notes: Fabrication of carbon/graphite electrodes for molten regolith electrolysis
+  with high temperature operation capability

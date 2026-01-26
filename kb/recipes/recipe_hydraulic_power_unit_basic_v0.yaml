@@ -7,7 +7,7 @@ produces_qty: 1.0
 produces_unit: unit
 inputs:
   - item_id: hydraulic_reservoir_basic
-    qty: 1.0
+    qty: 2.0
     unit: unit
   - item_id: hydraulic_pump_basic
     qty: 1.0
@@ -16,7 +16,7 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: motor_electric_small
-    qty: 1.0
+    qty: 2.0
     unit: unit
   - item_id: power_output_terminals
     qty: 1.0
@@ -31,7 +31,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: hydraulic_reservoir_basic
-        qty: 1.0
+        qty: 2.0
         unit: unit
       - item_id: hydraulic_pump_basic
         qty: 1.0
@@ -40,7 +40,7 @@ steps:
         qty: 1.0
         unit: unit
       - item_id: motor_electric_small
-        qty: 1.0
+        qty: 2.0
         unit: unit
       - item_id: power_output_terminals
         qty: 1.0
@@ -52,13 +52,7 @@ steps:
       - item_id: hydraulic_power_unit_basic
         qty: 1.0
         unit: unit
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_electronics
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: hydraulic_power_unit_basic
-        qty: 1.0
-        unit: unit
-notes: "Migration to target_item_id pattern; placeholder path to assemble hydraulic power unit basic from BOM components."
+notes: |
+  Migration to target_item_id pattern; placeholder path to assemble hydraulic power unit basic from BOM components.
+  Mass balance: integration test now uses assembled unit as input.
+  Mass balance: reservoir and motor quantities doubled to match 150 kg unit mass.

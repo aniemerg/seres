@@ -7,7 +7,7 @@ inputs:
     unit: kg
 outputs:
   - item_id: gas_outlet_manifold
-    qty: 2.0
+    qty: 1.995
     unit: kg
   - item_id: steel_scrap_v0
     qty: 0.2
@@ -45,15 +45,19 @@ steps:
         unit: kg
     outputs:
       - item_id: metal_part_drilled
-        qty: 2.0
+        qty: 1.995
+        unit: kg
+    byproducts:
+      - item_id: turning_chip_waste
+        qty: 0.005
         unit: kg
   - process_id: inspection_basic_v0
     inputs:
       - item_id: metal_part_drilled
-        qty: 2.0
+        qty: 1.995
         unit: kg
     outputs:
       - item_id: gas_outlet_manifold
-        qty: 2.0
+        qty: 1.995
         unit: kg
 notes: "Placeholder recipe to manufacture gas_outlet_manifold from metal stock; sequence uses forming, finishing, drilling, and inspection."

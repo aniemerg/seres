@@ -5,12 +5,9 @@ target_item_id: dust_fines
 variant_id: v0
 inputs:
   - item_id: powder_feedstock
-    qty: 0.1
+    qty: 1.5
     unit: kg
 outputs:
-  - item_id: dust_fines_v0
-    qty: 0.1
-    unit: kg
   - item_id: dust_fines
     qty: 0.1
     unit: kg
@@ -18,12 +15,13 @@ steps:
   - process_id: powder_pressing_process_v0
     inputs:
       - item_id: powder_feedstock
-        qty: 0.1
+        qty: 1.5
         unit: kg
     outputs:
-      - item_id: dust_fines_v0
-        qty: 0.1
+      - item_id: green_ceramic_parts
+        qty: 1.4
         unit: kg
+    byproducts:
       - item_id: dust_fines
         qty: 0.1
         unit: kg

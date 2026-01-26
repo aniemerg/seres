@@ -1,0 +1,21 @@
+id: stepper_motor_v0
+kind: machine
+name: Stepper motor v0
+mass: 2.0
+unit: kg
+bom: bom_stepper_motor_v0
+material_class: composite
+notes: "Stepper motor for precise positioning without feedback.\nSource: Referenced\
+  \ by various positioning systems (XY tables, threading machines, etc.)\nPrinciple:\
+  \ Electromagnetic coils energized in sequence rotate rotor in discrete steps\nStep\
+  \ angle: 0.9\xB0, 1.8\xB0, or 3.6\xB0 typical (400, 200, or 100 steps/rev)\nTypes:\
+  \ Permanent magnet, variable reluctance, hybrid\nTorque: Holding torque higher than\
+  \ running torque\nControl: Requires stepper driver with step/direction signals\n\
+  Advantages: Open-loop positioning, no encoder needed, holds position at rest\nDisadvantages:\
+  \ Can lose steps under overload, resonance at certain speeds\nApplications: 3D printers,\
+  \ CNC machines, robotics, precision stages\nMicrostepping: Driver technique for\
+  \ smoother motion and higher resolution\nTypical size: NEMA 17 (42mm) or NEMA 23\
+  \ (57mm)\nLunar context: Reliable positioning without complex feedback systems\n\
+  Critical for: Precision motion control, automated machinery\n"
+recipe: recipe_machine_stepper_motor_v0
+unit_kind: discrete

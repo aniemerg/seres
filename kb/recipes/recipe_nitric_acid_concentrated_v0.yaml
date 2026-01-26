@@ -11,10 +11,10 @@ inputs:
     unit: kg
 outputs:
   - item_id: nitric_acid_concentrated
-    qty: 3.71
+    qty: 2.61
     unit: kg
   - item_id: water
-    qty: 0.32
+    qty: 0.74
     unit: kg
 steps:
   - process_id: ostwald_process_nitric_acid_v0
@@ -27,10 +27,10 @@ steps:
         unit: kg
     outputs:
       - item_id: nitric_acid_concentrated
-        qty: 3.71
+        qty: 2.61
         unit: kg
       - item_id: water
-        qty: 0.32
+        qty: 0.74
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
@@ -45,3 +45,4 @@ notes: |
   Ostwald process: NH3 + 2O2 → HNO3 + H2O.
   Critical for chlorine chemistry on the Moon (HCl production from NaCl).
   See ostwald_process_nitric_acid_v0 for detailed chemistry.
+  Mass balance: outputs scaled to conserve mass from NH3 + O2 inputs.

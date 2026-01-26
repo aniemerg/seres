@@ -6,7 +6,7 @@ inputs:
     qty: 3.0
     unit: kg
   - item_id: nickel_chromium_alloy
-    qty: 0.2
+    qty: 0.3
     unit: kg
   - item_id: coil_insulation_material
     qty: 0.05
@@ -25,6 +25,9 @@ inputs:
     unit: unit
   - item_id: electrical_wire_and_connectors
     qty: 0.2
+    unit: kg
+  - item_id: steel_sheet_22ga
+    qty: 1.3
     unit: kg
 outputs:
   - item_id: soldering_station
@@ -46,7 +49,7 @@ steps:
   - process_id: coil_winding_basic_v0
     inputs:
       - item_id: nickel_chromium_alloy
-        qty: 0.2
+        qty: 0.3
         unit: kg
       - item_id: coil_insulation_material
         qty: 0.05
@@ -92,6 +95,9 @@ steps:
         unit: unit
       - item_id: electrical_wire_and_connectors
         qty: 0.2
+        unit: kg
+      - item_id: steel_sheet_22ga
+        qty: 1.3
         unit: kg
     outputs:
       - item_id: soldering_station

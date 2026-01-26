@@ -3,14 +3,11 @@ target_item_id: stewart_platform_control_unit
 variant_id: v0
 inputs:
   - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+    qty: 0.3
+    unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
-  - item_id: assembled_electronics
-    qty: 1.0
-    unit: unit
+    qty: 0.7
+    unit: kg
   - item_id: enclosure_small
     qty: 1.0
     unit: unit
@@ -18,40 +15,33 @@ inputs:
     qty: 0.2
     unit: kg
   - item_id: control_components
-    qty: 1.0
-    unit: unit
-  - item_id: assembled_electrical_system
-    qty: 1.0
-    unit: unit
+    qty: 0.05
+    unit: kg
 outputs:
   - item_id: stewart_platform_control_unit
-    qty: 1.0
-    unit: unit
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: pcb_assembly_basic_v0
     inputs:
       - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
+        qty: 0.3
+        unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 0.7
+        unit: kg
     outputs:
       - item_id: assembled_electronics
         qty: 1.0
-        unit: unit
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Assemble control PCB with microcontroller, motor drivers, sensor interfaces"
-  - process_id: software_programming_v0
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Program kinematics algorithms and control firmware (imported compute)"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_electronics
         qty: 1.0
-        unit: unit
+        unit: kg
       - item_id: enclosure_small
         qty: 1.0
         unit: unit
@@ -59,26 +49,26 @@ steps:
         qty: 0.2
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 0.05
+        unit: kg
     outputs:
       - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Mount in enclosure, wire connectors, install cooling"
   - process_id: electrical_testing_v0
     inputs:
       - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     outputs:
       - item_id: stewart_platform_control_unit
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Test all six axis controls, calibrate positioning"
+        qty: 6.0
+        unit: kg
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: "Program kinematics algorithms and control firmware (1.5 hr), test all six axis controls, calibrate positioning (1.5 hr). Firmware programming is part of commissioning."
 assumptions: Electronic control unit with PCB, microcontroller, and motor drivers. Kinematics software for 6-DOF positioning. Mass ~6 kg.
 notes: Control electronics for Stewart platform six-axis positioning system. Coordinates actuators for precise alignment.

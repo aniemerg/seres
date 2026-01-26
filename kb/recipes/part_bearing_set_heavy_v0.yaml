@@ -10,8 +10,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: bearing_set_heavy
-    qty: 1
-    unit: unit
+    qty: 4.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -26,14 +26,23 @@ steps:
     machine_hours: 1.5
   - process_id: sintering_and_hot_pressing_v0
     inputs:
+      - item_id: cast_metal_parts
+        qty: 2.4
+        unit: kg
       - item_id: regolith_fine_fraction
         qty: 2.0
         unit: kg
     outputs:
       - item_id: bearing_set_heavy
-        qty: 1
-        unit: unit
+        qty: 4.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
 assumptions: Cast races; sinter/warm-form rolling elements; assembly/finishing not modeled yet.
-notes: Coarse local route; add grinding/finishing later.
+notes: |
+  Assumptions:
+  - Bearing set mass set to 4.0 kg to match item definition.
+  Rationale:
+  - Combine cast races and sintered elements to preserve mass balance.
+  Uncertainty:
+  - Material split between races and rolling elements needs refinement.

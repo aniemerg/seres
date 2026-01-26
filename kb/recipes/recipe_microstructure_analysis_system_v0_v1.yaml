@@ -30,8 +30,8 @@ inputs:
     qty: 0.1
     unit: kg
   - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
+    qty: 56.3
+    unit: kg
 outputs:
   - item_id: microstructure_analysis_system_v0
     qty: 1.0
@@ -50,21 +50,21 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 56.3
+        unit: kg
     notes: Assemble base frame and mount bearing set as subassembly
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 56.3
+        unit: kg
       - item_id: enclosure_small
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 56.3
+        unit: kg
     notes: Mount subassembly into enclosure and apply shielding
   - process_id: electronic_assembly_v0
     inputs:
@@ -76,8 +76,8 @@ steps:
         unit: unit
     outputs:
       - item_id: electronic_assembly
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     notes: Install electronics and sensor suite
   - process_id: electrical_wiring_assembly_v0
     inputs:
@@ -98,11 +98,11 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 56.3
+        unit: kg
       - item_id: electronic_assembly
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: sensor_wired_assembly
         qty: 1.3
         unit: kg

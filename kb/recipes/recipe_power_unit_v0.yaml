@@ -4,79 +4,79 @@ kind: recipe
 target_item_id: power_unit
 inputs:
   - item_id: power_supply_unit_v0
-    qty: 1.0
-    unit: unit
+    qty: 60.0
+    unit: kg
   - item_id: control_circuit_board_power
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: transformer_power_medium
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: busbar_distribution_system_v0
-    qty: 1.0
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: power_output_terminals
-    qty: 2.0
-    unit: unit
+    qty: 4.0
+    unit: kg
   - item_id: power_management_control_unit
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: power_distribution_panel_basic
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: capacitor_bank_power
-    qty: 2.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 4.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: power_unit
-    qty: 1.0
-    unit: unit
+    qty: 155.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: power_supply_unit_v0
-        qty: 1.0
-        unit: unit
+        qty: 60.0
+        unit: kg
       - item_id: control_circuit_board_power
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: transformer_power_medium
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: busbar_distribution_system_v0
-        qty: 1.0
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: power_output_terminals
-        qty: 2.0
-        unit: unit
+        qty: 4.0
+        unit: kg
       - item_id: power_management_control_unit
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: power_distribution_panel_basic
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: capacitor_bank_power
-        qty: 2.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 4.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 155.0
+        unit: kg
     notes: "Assemble power unit from BOM components"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 155.0
+        unit: kg
     outputs:
       - item_id: power_unit
-        qty: 1.0
-        unit: unit
+        qty: 155.0
+        unit: kg
     notes: "Run integration tests for power_unit"
 notes: "Placeholder recipe to assemble a generic power unit from BOM components; mirrors hydraulic power unit pattern."

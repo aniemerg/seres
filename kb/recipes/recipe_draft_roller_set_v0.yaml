@@ -20,12 +20,12 @@ inputs:
     notes: "Assembly hardware"
 outputs:
   - item_id: draft_roller_set
-    qty: 25.0
+    qty: 24.5
     unit: kg
   - item_id: steel_scrap
-    qty: 3.5
+    qty: 4.0
     unit: kg
-    notes: "Machining and grinding waste"
+    notes: "Machining and grinding waste (3 kg from step 0, 1 kg from step 1)"
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -69,30 +69,34 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 24.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install bearings, mount rollers in frame with adjustable spacing"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 24.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 24.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Test roller rotation, alignment, and gap uniformity"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 24.5
+        unit: kg
     outputs:
       - item_id: draft_roller_set
-        qty: 25.0
+        qty: 24.5
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: "Verify roller surface finish and parallel alignment"
+    notes: "Verify roller surface finish and parallel alignment (final mass 24.5 kg)"
 assumptions: "Draft roller set for fiber spinning machine. Multiple roller pairs with adjustable spacing for fiber stretching and thinning. 25 kg assembly."
 notes: "Manufacturing of draft roller set. Total fabrication time ~11.5 hours. Critical for uniform fiber production in spinning operations."

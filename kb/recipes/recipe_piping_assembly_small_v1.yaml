@@ -3,8 +3,8 @@ kind: recipe
 name: Recipe for piping assembly small v1
 variant_id: v1
 produces_id: piping_assembly_small
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 4.92
+produces_unit: kg
 inputs:
 - item_id: metal_tubing_stock
   qty: 1.0
@@ -17,7 +17,7 @@ inputs:
   unit: kg
 outputs:
 - item_id: piping_assembly_small
-  qty: 1.0
+  qty: 4.92
   unit: kg
 steps:
 - process_id: tube_bending_and_cutting_v0
@@ -41,18 +41,18 @@ steps:
     unit: kg
   outputs:
   - item_id: piping_and_valves_set
-    qty: 6.5
+    qty: 4.92
     unit: kg
   est_time_hr: 2.0
   notes: Weld bent sections with valve bodies to form piping/valves subset
 - process_id: assembly_basic_v0
   inputs:
   - item_id: piping_and_valves_set
-    qty: 6.5
+    qty: 4.92
     unit: kg
   outputs:
   - item_id: piping_assembly_small
-    qty: 1.0
+    qty: 4.92
     unit: kg
   est_time_hr: 1.0
   notes: Assemble piping components into final piping assembly small

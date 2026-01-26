@@ -3,8 +3,11 @@ kind: recipe
 target_item_id: chemical_mixer_tank
 variant_id: v0
 inputs:
-  - item_id: sheet_metal_or_structural_steel
-    qty: 1.0
+  - item_id: steel_plate_raw
+    qty: 160.0
+    unit: kg
+  - item_id: welding_consumables
+    qty: 2.0
     unit: kg
 outputs:
   - item_id: chemical_mixer_tank
@@ -13,42 +16,52 @@ outputs:
 steps:
   - process_id: sheet_metal_cutting_v0
     inputs:
-      - item_id: sheet_metal_or_structural_steel
-        qty: 1.0
+      - item_id: steel_plate_raw
+        qty: 160.0
         unit: kg
     outputs:
-      - item_id: metal_sheet_or_plate
-        qty: 0.98
+      - item_id: formed_sheet_metal_parts
+        qty: 156.0
         unit: kg
-    est_time_hr: 2.0
-    labor_hours: 1.5
-    machine_hours: 1.5
-    notes: Cut shell and head panels plus baffles and nozzle plates.
-  - process_id: welding_brazing_basic_v0
+    byproducts:
+      - item_id: metal_swarf
+        qty: 4.0
+        unit: kg
+    est_time_hr: 3.0
+    labor_hours: 2.0
+    machine_hours: 2.0
+    notes: "Cut shell and head panels, baffles, and nozzle plates from steel plate"
+  - process_id: welding_and_fabrication_v0
     inputs:
-      - item_id: metal_sheet_or_plate
-        qty: 0.98
+      - item_id: formed_sheet_metal_parts
+        qty: 156.0
+        unit: kg
+      - item_id: welding_consumables
+        qty: 2.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.5
-    labor_hours: 1.2
-    machine_hours: 1.2
-    notes: Weld shell seams, nozzles, and mounting pads; attach legs/brackets.
+      - item_id: welded_fabrications
+        qty: 152.0
+        unit: kg
+      - item_id: slag
+        qty: 6.0
+        unit: kg
+    est_time_hr: 6.0
+    labor_hours: 5.0
+    machine_hours: 2.0
+    notes: "Weld shell seams, attach heads, install nozzles and mounting pads, add legs/brackets"
   - process_id: pressure_testing_v0
     inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+      - item_id: welded_fabrications
+        qty: 152.0
+        unit: kg
     outputs:
       - item_id: chemical_mixer_tank
         qty: 1.0
         unit: unit
-    est_time_hr: 0.7
-    labor_hours: 0.7
-    machine_hours: 0.3
-    notes: Leak/pressure test completed tank before service.
-assumptions: Agitator motor/gearbox imported initially; focus on tank fabrication. Seals/gaskets assumed available. Replace with detailed BOM when ready.
-notes: Replaced with local v0 recipe for chemical mixer tank.
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    machine_hours: 0.5
+    notes: "Hydrostatic pressure test, leak check, surface cleaning. Testing waste from cleanup and flushing."
+assumptions: "150 kg tank fabricated from raw steel plate. Agitator motor/gearbox imported initially. Seals/gaskets assumed available. Increased steel input from 1 kg to 160 kg to match final tank mass plus fabrication waste (4 kg cutting + 6 kg welding + 2 kg testing = 12 kg total waste)."
+notes: "Chemical mixer tank fabrication from steel plate via cutting, welding, and pressure testing. Total waste 12 kg (cutting swarf, welding slag, testing cleanup). Import variant placeholder; refine with detailed mechanical design and BOM when mixer/agitator components are specified."

@@ -9,7 +9,13 @@ inputs:
     qty: 10
     unit: unit
   - item_id: fastener_kit_large
-    qty: 5.0
+    qty: 5
+    unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 300.0
+    unit: kg
+  - item_id: steel_frame_welded
+    qty: 100.0
     unit: kg
 outputs:
   - item_id: track_assembly_crawler
@@ -25,15 +31,28 @@ steps:
         qty: 10
         unit: unit
       - item_id: fastener_kit_large
-        qty: 5.0
+        qty: 5
+        unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 300.0
+        unit: kg
+      - item_id: steel_frame_welded
+        qty: 100.0
         unit: kg
     outputs:
       - item_id: track_assembly_crawler
         qty: 1
         unit: unit
+    byproducts:
+      - item_id: waste
+        qty: 15.0
+        unit: kg
     est_time_hr: 13.0
     machine_hours: 8.0
     labor_hours: 8.0
     notes: "Cast/fabricate track links, rollers, and sprockets; machine pin bores, bearing seats, and sprocket teeth; assemble track links with pins/bushings; install rollers, idlers, and sprockets"
 assumptions: Steel construction; bearings/pins may be imported; coarse but functional tracked mobility.
-notes: Track assembly for crawler-type vehicles.
+notes: |
+  Track assembly for crawler-type vehicles.
+  Conservative Mode: Changed steel_plate_thick (not found) to steel_plate_or_sheet (generic
+  structural steel, acceptable for track links per 5× equivalence rule).

@@ -7,13 +7,10 @@ inputs:
   - item_id: sheet_metal_or_structural_steel
     qty: 27.0
     unit: kg
-  - item_id: assembled_equipment
-    qty: 1
-    unit: unit
 outputs:
   - item_id: reservoir_tank_formed
-    qty: 1
-    unit: unit
+    qty: 25.5
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
     inputs:
@@ -33,19 +30,19 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 25.5
+        unit: kg
     est_time_hr: 1.5
     notes: "Weld seams, add ports and mounting tabs"
   - process_id: leak_test_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 25.5
+        unit: kg
     outputs:
       - item_id: reservoir_tank_formed
-        qty: 1
-        unit: unit
+        qty: 25.5
+        unit: kg
     est_time_hr: 0.5
     notes: "Pressure test tank for leaks"
 notes: "Local fabrication route for formed reservoir tank"

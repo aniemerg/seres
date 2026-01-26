@@ -3,10 +3,10 @@ target_item_id: fresnel_lens_segment
 variant_id: v0
 inputs:
   - item_id: silica_purified
-    qty: 2.0
+    qty: 4.0
     unit: kg
   - item_id: sodium_carbonate
-    qty: 0.5
+    qty: 1.0
     unit: kg
 outputs:
   - item_id: fresnel_lens_segment
@@ -16,10 +16,10 @@ steps:
   - process_id: glass_melting_v0
     inputs:
       - item_id: silica_purified
-        qty: 2.0
+        qty: 4.0
         unit: kg
       - item_id: sodium_carbonate
-        qty: 0.5
+        qty: 1.0
         unit: kg
     outputs:
       - item_id: fresnel_lens_segment
@@ -30,4 +30,8 @@ steps:
     labor_hours: 0.5
     notes: "Integrated process: Melt and refine glass, cast into fresnel lens mold with grooved pattern, anneal to relieve stresses, polish optical surfaces, and test focal properties"
 assumptions: Cast glass fresnel lens with molded groove pattern. Precision optical component for solar concentration.
-notes: Fresnel lens segment for solar concentrator. Flat profile with concentric grooves provides concentration with reduced mass.
+notes: |
+  Assumptions:
+  - Glass batch scaled to 5 kg to match fresnel_lens_segment mass.
+  Rationale:
+  - Aligns glass melting inputs with segment output mass.

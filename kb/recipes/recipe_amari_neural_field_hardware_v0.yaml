@@ -22,8 +22,8 @@ inputs:
     qty: 0.2
     unit: kg
   - item_id: control_components
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: machine_frame_small
     qty: 1.0
     unit: unit
@@ -75,16 +75,16 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 42.5
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: enclosure_steel_small
         qty: 1.0
         unit: kg
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 42.5
+        unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
         qty: 1.0
@@ -95,12 +95,12 @@ steps:
         qty: 0.2
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 5.2
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: machine_frame_small

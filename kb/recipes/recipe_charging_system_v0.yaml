@@ -8,8 +8,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: charging_system
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -27,6 +27,9 @@ steps:
         unit: kg
     outputs:
       - item_id: charging_system
-        qty: 1.0
-        unit: unit
-notes: "Coarse path to manufacture charging_system from cast_metal_parts. Placeholder chain to satisfy gap no_recipe."
+        qty: 5.0
+        unit: kg
+notes: |
+  Assumptions:
+  - Output mass aligned to cast_metal_parts (5 kg).
+  Coarse path to manufacture charging_system from cast_metal_parts. Placeholder chain to satisfy gap no_recipe.

@@ -21,7 +21,7 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.39
         unit: kg
     byproducts:
       - item_id: metal_swarf
@@ -34,11 +34,11 @@ steps:
   - process_id: machining_process_drilling_v0
     inputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.39
         unit: kg
     outputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.38
         unit: kg
     est_time_hr: 1.0
     machine_hours: 0.5
@@ -47,11 +47,11 @@ steps:
   - process_id: heat_treatment_hardening_v0
     inputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.38
         unit: kg
     outputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.37
         unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
@@ -60,11 +60,15 @@ steps:
   - process_id: precision_grinding_basic_v0
     inputs:
       - item_id: machined_metal_block_v0
-        qty: 4.5
+        qty: 4.37
         unit: kg
     outputs:
       - item_id: finished_part_deburred
         qty: 2.0
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 2.37
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.0

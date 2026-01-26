@@ -7,18 +7,24 @@ inputs:
   - item_id: power_supply_components_basic
     qty: 1
     unit: unit
+  - item_id: enclosure_small
+    qty: 1
+    unit: unit
 steps:
   - process_id: power_supply_benchtop_assembly_v0
     inputs:
       - item_id: power_supply_components_basic
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: kg
     outputs:
       - item_id: power_supply_benchtop
         qty: 1
         unit: unit
     est_time_hr: 0.5
     machine_hours: 0.5
-    notes: "Assemble bench-top power supply from basic components"
+    notes: "Assemble bench-top power supply from basic components in small enclosure (2 kg total)"
 assumptions: "Assemble power_supply_benchtop from power_supply_components_basic via assembly; components include regulators, capacitors, transformers, and connectors."
 notes: "Manufacture bench-top power supply from basic power supply components; 0.5 hr assembly time."

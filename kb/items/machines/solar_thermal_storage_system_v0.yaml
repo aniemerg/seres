@@ -1,15 +1,32 @@
 id: solar_thermal_storage_system_v0
 kind: machine
 name: Solar thermal storage system v0
-mass: 2000.0
-unit: kg
+mass: 1896.0
+unit: unit
 bom: bom_solar_thermal_storage_system_v0
 material_class: composite
-notes: "Thermal energy storage for solar thermal systems.\nSource: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md\n\
-  Storage types: Sensible heat (heated rocks/regolith) or latent heat (phase change\
-  \ materials)\nPurpose: Store heat during day for nighttime or cloudy period operation\n\
-  Typical media: Regolith, basalt rock, iron oxide, or lunar minerals\nTemperature\
-  \ range: 600-1200\xB0C for industrial processes\nInsulation: Regolith-based or vacuum\
-  \ gap insulation\nCritical for: Continuous FFC operation, 24/7 power generation\n"
+notes: 'Mass updated 2026-01 from 2000 kg to 1896 kg based on recipe analysis:
+
+  Tank shell (450) + refractory lining (95) + insulation (280) + regolith media (950)
+
+  + heat exchanger (100) + thermocouples (0.5) + piping (20) = 1895.5 kg ≈ 1896 kg.
+
+
+  Thermal energy storage for solar thermal systems.
+
+  Source: docs/paper_reviews/ellery-2022-metalysis_missing_tech.md
+
+  Storage types: Sensible heat (heated rocks/regolith) or latent heat (phase change
+  materials)
+
+  Purpose: Store heat during day for nighttime or cloudy period operation
+
+  Typical media: Regolith, basalt rock, iron oxide, or lunar minerals
+
+  Temperature range: 600-1200°C for industrial processes
+
+  Insulation: Regolith-based or vacuum gap insulation
+
+  Critical for: Continuous FFC operation, 24/7 power generation'
 recipe: recipe_machine_solar_thermal_storage_system_v0
-unit_kind: bulk
+unit_kind: discrete

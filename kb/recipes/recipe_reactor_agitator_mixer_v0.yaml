@@ -3,7 +3,7 @@ kind: recipe
 name: Recipe for reactor agitator mixer v0
 produces_id: reactor_agitator_mixer_v0
 produces_qty: 1.0
-produces_unit: unit
+produces_unit: kg
 target_item_id: reactor_agitator_mixer_v0
 variant_id: v0
 inputs:
@@ -14,12 +14,12 @@ inputs:
     qty: 2.0
     unit: kg
   - item_id: bearing_ball_precision
-    qty: 2.0
-    unit: unit
+    qty: 0.04
+    unit: kg
 outputs:
   - item_id: reactor_agitator_mixer_v0
-    qty: 1.0
-    unit: unit
+    qty: 8.54
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -60,12 +60,12 @@ steps:
         qty: 8.5
         unit: kg
       - item_id: bearing_ball_precision
-        qty: 2.0
-        unit: unit
+        qty: 0.04
+        unit: kg
     outputs:
       - item_id: reactor_agitator_mixer_v0
-        qty: 1.0
-        unit: unit
+        qty: 8.54
+        unit: kg
     notes: "Install bearings and finalize assembly"
 assumptions: "Generic recipe to fabricate reactor agitator/mixer from standard unit operations; BOM/subcomponents to be refined."
 notes: "Placeholder recipe to enable modeling of reactor agitator_mixer_v0 manufacturing."

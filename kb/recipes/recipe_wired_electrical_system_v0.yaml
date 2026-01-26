@@ -3,7 +3,7 @@ target_item_id: wired_electrical_system
 variant_id: v0
 inputs:
   - item_id: electrical_wire_and_connectors
-    qty: 12.0
+    qty: 13.0
     unit: kg
   - item_id: electronic_components_set
     qty: 1.0
@@ -16,7 +16,7 @@ steps:
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 12.0
+        qty: 13.0
         unit: kg
       - item_id: electronic_components_set
         qty: 1.0
@@ -29,4 +29,6 @@ steps:
     labor_hours: 12.0
     notes: "Route and install power and control wiring, connectors, and terminal blocks"
 assumptions: Complete electrical wiring system assembled as harness or integrated system. Tested and ready for installation in larger equipment.
-notes: Pre-wired electrical system reduces installation time and improves reliability. All wiring tested before installation into final equipment.
+notes: |
+  Pre-wired electrical system reduces installation time and improves reliability. All wiring tested before installation into final equipment.
+  Mass balance: increase wire input to 13 kg to match 15 kg output mass.

@@ -7,6 +7,9 @@ produces_qty: 1.0
 produces_unit: unit
 variant_id: v0
 inputs:
+  - item_id: steel_frame_heavy
+    qty: 1762.0
+    unit: kg
   - item_id: motor_assembly
     qty: 1.0
     unit: count
@@ -17,14 +20,8 @@ inputs:
     qty: 4.0
     unit: kg
   - item_id: fastener_kit_medium
-    qty: 1.0
+    qty: 7.0
     unit: kg
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: induction_forge_v0
     qty: 1.0
@@ -32,6 +29,9 @@ outputs:
 steps:
   - process_id: machine_assembly_basic_v0
     inputs:
+      - item_id: steel_frame_heavy
+        qty: 1762.0
+        unit: kg
       - item_id: motor_assembly
         qty: 1.0
         unit: count
@@ -42,46 +42,17 @@ steps:
         qty: 4.0
         unit: kg
       - item_id: fastener_kit_medium
-        qty: 1.0
+        qty: 7.0
         unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-  - process_id: enclosure_assembly_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-  - process_id: electrical_assembly_basic_v0
-    inputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-  - process_id: sealing_and_assembly_basic_v0
-    inputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
     outputs:
       - item_id: induction_forge_v0
         qty: 1.0
         unit: unit
-notes: "Canonical recipe for induction_forge_v0 to satisfy no_recipe gap and align with KB patterns."
+    notes: "Assemble steel frame with motor, shafts, bearings, and fasteners. Install enclosure components, complete electrical wiring and connections, install seals and gaskets, and perform final inspection. Complete assembly process consolidated into single step."
+notes: |
+  Recipe corrected 2026-01 to fix circular dependency:
+  - Removed steps 1-4 which created self-references (induction_forge_v0 → induction_forge_v0)
+  - Consolidated assembly, enclosure, electrical, sealing, and inspection into single step notes
+  - Total assembly now in one step to avoid circular dependency
+
+  Canonical recipe for induction_forge_v0 to satisfy no_recipe gap and align with KB patterns.

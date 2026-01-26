@@ -10,12 +10,12 @@ inputs:
     qty: 9.0
     unit: kg
   - item_id: lead_screw_assembly
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
 outputs:
   - item_id: lathe_leadscrew_simple
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
 steps:
   - process_id: machining_process_turning_v0
     inputs:
@@ -37,8 +37,8 @@ steps:
         unit: kg
     outputs:
       - item_id: lead_screw_assembly
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.5
     labor_hours: 2.0
@@ -46,12 +46,12 @@ steps:
   - process_id: precision_grinding_basic_v0
     inputs:
       - item_id: lead_screw_assembly
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: lead_screw_assembly
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.0
@@ -59,15 +59,16 @@ steps:
   - process_id: heat_treatment_hardening_v0
     inputs:
       - item_id: lead_screw_assembly
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: lathe_leadscrew_simple
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.5
     labor_hours: 1.0
     notes: "Heat treat to increase surface hardness and wear resistance. Case harden threads and journals while maintaining core toughness."
 assumptions: Steel bar stock available in appropriate diameter. ACME threading tooling available for lathe operations. Heat treatment capability for hardening.
 notes: Fabrication of precision leadscrew for manual lathe carriage drive. ACME thread provides efficient power transmission with good wear characteristics.
+  Mass set to 8.0 kg to match lathe_leadscrew_simple placeholder.

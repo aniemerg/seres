@@ -3,7 +3,7 @@ target_item_id: heat_transport_system
 variant_id: v0
 inputs:
   - item_id: sheet_metal_or_structural_steel
-    qty: 45.0
+    qty: 125.0
     unit: kg
   - item_id: fastener_kit_medium
     qty: 1
@@ -16,11 +16,11 @@ steps:
   - process_id: sheet_metal_fabrication_v0
     inputs:
       - item_id: sheet_metal_or_structural_steel
-        qty: 45.0
+        qty: 125.0
         unit: kg
     outputs:
       - item_id: formed_sheet_metal_parts
-        qty: 43.0
+        qty: 120.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -28,11 +28,11 @@ steps:
   - process_id: welding_and_fabrication_v0
     inputs:
       - item_id: formed_sheet_metal_parts
-        qty: 43.0
+        qty: 120.0
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 43.0
+        qty: 120.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
@@ -40,11 +40,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 43.0
+        qty: 120.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 41.0
+        qty: 120.0
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -52,29 +52,31 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 41.0
+        qty: 120.0
         unit: kg
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
-    notes: "Assemble heat pipes, pump, radiators, piping, reservoir"
+    notes: "Assemble heat pipes, pump, radiators, piping, reservoir (untested)"
   - process_id: leak_test_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
     outputs:
       - item_id: heat_transport_system
         qty: 1
         unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Pressure test system for leaks"
+    notes: "Pressure test system for leaks (120 kg → 1 unit after testing/acceptance)"
 assumptions: Heat pipes with wick structure. Fluid loop with circulation pump and radiators.
-notes: Heat transport system for thermal management with heat pipes and fluid cooling loops.
+notes: |
+  Heat transport system for thermal management with heat pipes and fluid cooling loops.
+  Mass balance: scale sheet metal input to 125 kg to yield 120 kg system mass.

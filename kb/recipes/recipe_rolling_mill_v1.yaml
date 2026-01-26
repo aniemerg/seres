@@ -15,6 +15,9 @@ inputs:
   - item_id: grinding_media_steel
     qty: 50.0
     unit: kg
+  - item_id: bulk_material_or_parts
+    qty: 750.0
+    unit: kg
 outputs:
   - item_id: rolling_mill
     qty: 1.0
@@ -36,31 +39,34 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
+      - item_id: bulk_material_or_parts
+        qty: 750.0
+        unit: kg
     outputs:
       - item_id: rolling_mill
         qty: 1.0

@@ -22,15 +22,15 @@ inputs:
     unit: kg
     notes: Heat dissipation components for power electronics
   - item_id: aluminum_housing_machined
-    qty: 2.5
+    qty: 6.0
     unit: kg
     notes: Electronics enclosure
   - item_id: cooling_fan_assembly
-    qty: 0.5
+    qty: 15.0
     unit: kg
     notes: Cooling fan
   - item_id: assembled_wire_harness
-    qty: 0.8
+    qty: 3.0
     unit: kg
     notes: Power wiring and connections
   - item_id: thermal_interface_material
@@ -38,7 +38,7 @@ inputs:
     unit: kg
     notes: Thermal interface material for heat sink mounting
   - item_id: fastener_kit_small
-    qty: 0.1
+    qty: 1.3
     unit: kg
     notes: Assembly hardware
   - item_id: assembled_electrical_system
@@ -92,8 +92,8 @@ steps:
         unit: kg
     outputs:
       - item_id: component_with_heat_sink
-        qty: 1.0
-        unit: unit
+        qty: 0.35
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Mount heat sinks to power semiconductors with thermal interface"
@@ -103,36 +103,36 @@ steps:
         qty: 2.0
         unit: kg
       - item_id: component_with_heat_sink
-        qty: 1.0
-        unit: unit
+        qty: 0.35
+        unit: kg
       - item_id: aluminum_housing_machined
-        qty: 2.5
+        qty: 6.0
         unit: kg
       - item_id: cooling_fan_assembly
-        qty: 0.5
+        qty: 15.0
         unit: kg
       - item_id: assembled_wire_harness
-        qty: 0.8
+        qty: 3.0
         unit: kg
       - item_id: fastener_kit_small
-        qty: 0.1
+        qty: 1.3
         unit: kg
     outputs:
       - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Mount in enclosure, wire connections, install cooling fan"
   - process_id: electrical_testing_v0
     inputs:
       - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
     outputs:
       - item_id: power_electronics_module
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test charge control, voltage regulation, load response"

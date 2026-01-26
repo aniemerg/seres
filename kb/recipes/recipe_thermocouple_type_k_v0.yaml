@@ -4,20 +4,20 @@ target_item_id: thermocouple_type_k_v0
 variant_id: v0
 inputs:
   - item_id: nickel_metal_pure
-    qty: 0.8
+    qty: 1.6
     unit: kg
   - item_id: chromium_metal_pure
-    qty: 0.2
+    qty: 0.4
     unit: kg
   - item_id: aluminum_metal_pure
-    qty: 0.2
+    qty: 0.4
     unit: kg
   - item_id: thermocouple_alloy_mix
-    qty: 1.2
+    qty: 2.4
     unit: kg
     notes: "Intermediate for wire drawing"
   - item_id: metal_wire_feed
-    qty: 1.0
+    qty: 2.4
     unit: kg
     notes: "Intermediate for assembly step"
   - item_id: ceramic_insulator_tube
@@ -31,17 +31,17 @@ steps:
   - process_id: alloy_mixing_v0
     inputs:
       - item_id: nickel_metal_pure
-        qty: 0.8
+        qty: 1.6
         unit: kg
       - item_id: chromium_metal_pure
-        qty: 0.2
+        qty: 0.4
         unit: kg
       - item_id: aluminum_metal_pure
-        qty: 0.2
+        qty: 0.4
         unit: kg
     outputs:
       - item_id: thermocouple_alloy_mix
-        qty: 1.2
+        qty: 2.4
         unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
@@ -49,11 +49,11 @@ steps:
   - process_id: metal_wire_drawing_v0
     inputs:
       - item_id: thermocouple_alloy_mix
-        qty: 1.2
+        qty: 2.4
         unit: kg
     outputs:
       - item_id: metal_wire_feed
-        qty: 1.0
+        qty: 2.4
         unit: kg
     est_time_hr: 1.0
     labor_hours: 0.5
@@ -61,7 +61,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: metal_wire_feed
-        qty: 1.0
+        qty: 2.4
         unit: kg
       - item_id: ceramic_insulator_tube
         qty: 0.1

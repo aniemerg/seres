@@ -1,10 +1,16 @@
 id: milling_machine_general_v0
 kind: machine
 name: Milling machine (general) v0
-mass: 600.0
-unit: kg
+mass: 370.0
+unit: unit
 bom: bom_milling_machine_general_v0
-notes: DEPRECATED - Consolidated into cnc_mill. General-purpose milling machine;
-  coarse mass estimate.
+notes: |
+  Mass updated 2026-01 from 600 kg to 370 kg based on BOM component analysis:
+  milling_table (57) + spindle_head_basic (60) + drive_motor_medium (90) +
+  gearbox_reducer_medium (110) + bearing_set_heavy×2 (8) + cutting_tool_set_basic (25) +
+  fastener_kit_medium (1) + power_conditioning_module (12) + control_compute_module_imported (2) +
+  sensor_suite_general (5) = 370 kg.
+
+  DEPRECATED - Consolidated into cnc_mill. General-purpose milling machine; coarse mass estimate.
 recipe: recipe_machine_milling_machine_general_v0
-unit_kind: bulk
+unit_kind: discrete

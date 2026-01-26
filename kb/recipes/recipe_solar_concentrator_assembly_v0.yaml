@@ -26,16 +26,16 @@ steps:
         unit: unit
     outputs:
       - item_id: welded_fabrications
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Fabricate and weld concentrator frame structure"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
       - item_id: parabolic_mirror_dish_v0
         qty: 1.0
         unit: unit
@@ -44,31 +44,31 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install Fresnel lens segments or parabolic mirror segments into frame"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
       - item_id: concentrator_tracking_mechanism
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Mount thermal receiver and tracking mechanism hardware"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     outputs:
       - item_id: solar_concentrator_assembly
         qty: 1.0

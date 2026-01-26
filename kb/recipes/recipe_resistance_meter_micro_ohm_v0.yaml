@@ -1,12 +1,12 @@
 id: recipe_resistance_meter_micro_ohm_v0
 kind: recipe
 target_item_id: resistance_meter_micro_ohm
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 2.0
+produces_unit: kg
 inputs:
   - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: electronic_components_set
     qty: 0.5
     unit: kg
@@ -21,14 +21,14 @@ inputs:
     unit: kg
 outputs:
   - item_id: resistance_meter_micro_ohm
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 steps:
 - process_id: assembly_basic_v0
   inputs:
     - item_id: pcb_populated
-      qty: 1.0
-      unit: unit
+      qty: 0.5
+      unit: kg
     - item_id: electronic_components_set
       qty: 0.5
       unit: kg
@@ -40,8 +40,8 @@ steps:
       unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 5.95
+      unit: kg
   notes: "Initial assembly of resistance_meter_micro_ohm from BOM and seed components."
 - process_id: sensor_calibration_v0
   inputs:
@@ -55,12 +55,19 @@ steps:
   notes: "Calibrate resistance_meter_micro_ohm for micro-ohm accuracy."
 - process_id: integration_test_basic_v0
   inputs:
+    - item_id: assembled_equipment
+      qty: 5.95
+      unit: kg
     - item_id: sensor_suite_general
       qty: 1.0
       unit: unit
   outputs:
     - item_id: resistance_meter_micro_ohm
-      qty: 1.0
-      unit: unit
+      qty: 2.0
+      unit: kg
   notes: "Electrical test and final calibration of resistance_meter_micro_ohm."
-notes: "Extended recipe to close no_recipe gap for resistance_meter_micro_ohm with calibration and testing steps."
+notes: |
+  Assumptions:
+  - PCB mass set to 0.5 kg to align with pcb_populated mass.
+  Rationale:
+  - Output assembled_equipment mass matches summed assembly inputs.

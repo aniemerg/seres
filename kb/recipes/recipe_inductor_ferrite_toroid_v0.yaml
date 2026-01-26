@@ -15,9 +15,6 @@ inputs:
   - item_id: coil_insulation_material
     qty: 0.01
     unit: kg
-  - item_id: motor_coil_wound
-    qty: 0.2
-    unit: kg
 outputs:
   - item_id: inductor_ferrite_toroid_v0
     qty: 1.0
@@ -34,6 +31,10 @@ steps:
   outputs:
     - item_id: motor_coil_wound
       qty: 0.2
+      unit: kg
+  byproducts:
+    - item_id: wire_scrap
+      qty: 0.01
       unit: kg
 - process_id: assembly_basic_v0
   inputs:

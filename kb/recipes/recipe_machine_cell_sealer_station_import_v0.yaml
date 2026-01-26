@@ -4,20 +4,17 @@ target_item_id: cell_sealer_station
 variant_id: v0
 inputs:
   - item_id: base_metal_parts
-    qty: 1.0
+    qty: 260.0
     unit: kg
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
 steps:
   - process_id: metal_parts_fabrication_v0
     inputs:
       - item_id: base_metal_parts
-        qty: 1.0
+        qty: 260.0
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 1.0
+        qty: 250.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 2.0
@@ -25,10 +22,10 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 1.0
+        qty: 250.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: cell_sealer_station
         qty: 1.0
         unit: unit
     est_time_hr: 3.0
@@ -36,7 +33,7 @@ steps:
     notes: Assemble frame, sealing mechanisms, controls
   - process_id: alignment_and_testing_basic_v0
     inputs:
-      - item_id: assembled_equipment
+      - item_id: cell_sealer_station
         qty: 1.0
         unit: unit
     outputs:

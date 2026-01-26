@@ -2,35 +2,35 @@ id: recipe_plumbing_system_assembly_v0
 kind: recipe
 name: Recipe for plumbing system assembly
 produces_id: plumbing_system_assembly
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 15.0
+produces_unit: kg
 target_item_id: plumbing_system_assembly
 variant_id: v0
 inputs:
   - item_id: piping_and_valves_set
-    qty: 1.0
-    unit: set
+    qty: 8.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 0.2
+    qty: 7.0
     unit: kg
 outputs:
   - item_id: plumbing_system_assembly
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
 steps:
 - process_id: assembly_process_general_v0
   inputs:
     - item_id: piping_and_valves_set
-      qty: 1.0
-      unit: set
+      qty: 8.0
+      unit: kg
       notes: "Pipes, tubes, valves, and fittings for plumbing system"
     - item_id: fastener_kit_medium
-      qty: 0.2
+      qty: 7.0
       unit: kg
       notes: "Mounting hardware and connections"
   outputs:
     - item_id: plumbing_system_assembly
-      qty: 1.0
-      unit: unit
+      qty: 15.0
+      unit: kg
   est_time_hr: 2.0
   notes: "Assemble pipes, valves, and fittings into integrated plumbing system"

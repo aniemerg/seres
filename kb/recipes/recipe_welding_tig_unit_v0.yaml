@@ -3,11 +3,11 @@ kind: recipe
 target_item_id: welding_tig_unit_v0
 inputs:
   - item_id: torch_assembly
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: welding_power_supply_unit
-    qty: 1.0
-    unit: unit
+    qty: 65.0
+    unit: kg
   - item_id: gas_supply_regulator
     qty: 1.0
     unit: unit
@@ -18,17 +18,17 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: gas_inlet_manifold
-    qty: 1.0
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: inert_gas_manifold
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: coolant_loop_basic
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: circulation_pump_coolant
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: control_panel_basic
     qty: 1.0
     unit: unit
@@ -39,8 +39,8 @@ inputs:
     qty: 1.0
     unit: kg
   - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
+    qty: 166.9
+    unit: kg
 outputs:
   - item_id: welding_tig_unit_v0
     qty: 1.0
@@ -49,20 +49,20 @@ steps:
 - process_id: machine_assembly_basic_v0
   inputs:
     - item_id: welding_power_supply_unit
-      qty: 1.0
-      unit: unit
+      qty: 65.0
+      unit: kg
     - item_id: control_panel_basic
       qty: 1.0
       unit: unit
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 80.0
+      unit: kg
 - process_id: assembly_basic_v0
   inputs:
     - item_id: torch_assembly
-      qty: 1.0
-      unit: unit
+      qty: 8.0
+      unit: kg
     - item_id: gas_supply_regulator
       qty: 1.0
       unit: unit
@@ -73,33 +73,33 @@ steps:
       qty: 1.0
       unit: unit
     - item_id: gas_inlet_manifold
-      qty: 1.0
-      unit: unit
+      qty: 3.0
+      unit: kg
     - item_id: inert_gas_manifold
-      qty: 1.0
-      unit: unit
+      qty: 20.0
+      unit: kg
     - item_id: coolant_loop_basic
-      qty: 1.0
-      unit: unit
+      qty: 2.0
+      unit: kg
     - item_id: circulation_pump_coolant
-      qty: 1.0
-      unit: unit
+      qty: 15.0
+      unit: kg
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 80.0
+      unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 166.9
+      unit: kg
 - process_id: electrical_assembly_basic_v0
   inputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 166.9
+      unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 166.9
+      unit: kg
 - process_id: wiring_and_electronics_integration_v0
   inputs:
     - item_id: electrical_wire_and_connectors
@@ -109,8 +109,8 @@ steps:
       qty: 1.0
       unit: kg
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 166.9
+      unit: kg
   outputs:
     - item_id: welding_tig_unit_v0
       qty: 1.0

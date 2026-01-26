@@ -8,88 +8,109 @@ target_item_id: contactor_high_power_v0
 variant_id: v0
 inputs:
   - item_id: steel_sheet_1mm
-    qty: 0.05
+    qty: 1.2
     unit: kg
   - item_id: copper_wire_magnet
-    qty: 0.04
+    qty: 0.8
     unit: kg
   - item_id: iron_core_laminated
-    qty: 0.03
+    qty: 0.6
     unit: kg
   - item_id: silver_contact_material
-    qty: 0.005
+    qty: 0.1
     unit: kg
   - item_id: plastic_housing_molded
-    qty: 0.015
+    qty: 0.3
     unit: kg
   - item_id: spring_compression_small
-    qty: 1.0
+    qty: 2.0
     unit: each
+  - item_id: fastener_kit_small
+    qty: 0.25
+    unit: kg
 outputs:
   - item_id: contactor_high_power_v0
     qty: 1.0
-    unit: kg
+    unit: unit
 steps:
   - process_id: metal_stamping_process_v0
     est_time_hr: 0.5
     inputs:
       - item_id: steel_sheet_1mm
-        qty: 0.05
+        qty: 1.2
         unit: kg
     outputs:
-      - item_id: steel_sheet_1mm
-        qty: 0.04
+      - item_id: formed_sheet_metal_parts
+        qty: 1.1
         unit: kg
-    notes: "Stamp armature and frame for contactor_high_power_v0"
+      - item_id: metal_swarf
+        qty: 0.1
+        unit: kg
+    notes: "Stamp armature and frame from steel sheet"
   - process_id: wire_winding_process_v0
     est_time_hr: 1.0
     inputs:
       - item_id: copper_wire_magnet
-        qty: 0.04
+        qty: 0.8
         unit: kg
       - item_id: iron_core_laminated
-        qty: 0.03
+        qty: 0.6
         unit: kg
     outputs:
       - item_id: relay_coil_assembly
-        qty: 0.05
+        qty: 1.3
         unit: kg
-    notes: "Wind coil for electromagnet"
+      - item_id: copper_scrap_v0
+        qty: 0.1
+        unit: kg
+    notes: "Wind electromagnet coil around iron core"
   - process_id: contact_material_application_v0
     est_time_hr: 0.5
     inputs:
-      - item_id: steel_sheet_1mm
-        qty: 0.04
+      - item_id: formed_sheet_metal_parts
+        qty: 0.2
         unit: kg
       - item_id: silver_contact_material
-        qty: 0.005
+        qty: 0.1
         unit: kg
     outputs:
       - item_id: contacts_with_applied_material_v0
-        qty: 0.045
+        qty: 0.28
         unit: kg
-    notes: "Apply contact material to contact surfaces"
+      - item_id: process_waste
+        qty: 0.02
+        unit: kg
+    notes: "Apply silver contact material to contact surfaces"
   - process_id: assembly_process_general_v0
     est_time_hr: 0.8
     inputs:
       - item_id: relay_coil_assembly
-        qty: 0.05
+        qty: 1.3
         unit: kg
       - item_id: contacts_with_applied_material_v0
-        qty: 0.045
+        qty: 0.28
+        unit: kg
+      - item_id: formed_sheet_metal_parts
+        qty: 0.9
         unit: kg
       - item_id: plastic_housing_molded
-        qty: 0.015
+        qty: 0.3
         unit: kg
       - item_id: spring_compression_small
-        qty: 1.0
+        qty: 2.0
         unit: each
+      - item_id: fastener_kit_small
+        qty: 0.25
+        unit: kg
     outputs:
       - item_id: contactor_high_power_v0
         qty: 1.0
+        unit: unit
+      - item_id: metal_scrap
+        qty: 0.02
         unit: kg
-    notes: "Assemble coil, contacts, housing, and springs into contactor_high_power_v0"
+    notes: "Assemble coil, contacts, frame, housing, and springs into high-power contactor"
 assumptions: |
-  Placeholder approach based on contator_high_power_v0 workflow; this recipe closes the no_recipe gap for contactor_high_power_v0.
+  High-power contactor (3 kg) requires substantial steel frame (1.2 kg), copper coil (0.8 kg), iron core (0.6 kg), silver contacts (0.1 kg), plastic housing (0.3 kg), springs (2 * 0.01 kg), and fasteners (0.25 kg). Total input 3.27 kg scaled up from original 0.15 kg placeholder values to match 3 kg target mass. Generates 0.27 kg waste from stamping, winding, contact application, and assembly.
 notes: |
-  Placeholder recipe to close no_recipe gap for contactor_high_power_v0; refine BOM and timing as BOM details become available.
+  High-power electrical contactor assembly from stamped steel frame, wound electromagnet coil, silver-plated contacts, plastic housing, and compression springs. Used for heavy-duty electrical switching in power systems. Scaled component masses 20x from original placeholder recipe to match 3 kg target.

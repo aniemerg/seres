@@ -20,12 +20,15 @@ inputs:
   - item_id: machined_part_raw
     qty: 23.5
     unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 69.0
+    unit: kg
   - item_id: piping_components
     qty: 5.0
     unit: kg
   - item_id: fittings_and_valves
-    qty: 1.0
-    unit: unit
+    qty: 10.0
+    unit: kg
 steps:
   - process_id: cutting_basic_v0
     inputs:
@@ -88,19 +91,48 @@ steps:
         qty: 5.0
         unit: kg
       - item_id: fittings_and_valves
-        qty: 1.0
-        unit: unit
+        qty: 10.0
+        unit: kg
     outputs:
       - item_id: plumbing_system_assembly
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Install internals, trays/packing, valves, and instrumentation ports."
-  - process_id: integration_test_basic_v0
+  - process_id: assembly_basic_v0
     inputs:
+      - item_id: cut_parts
+        qty: 24.5
+        unit: kg
+      - item_id: formed_metal_part
+        qty: 24.0
+        unit: kg
+      - item_id: welded_fabrications
+        qty: 23.5
+        unit: kg
+      - item_id: machined_part_raw
+        qty: 23.0
+        unit: kg
+      - item_id: plumbing_system_assembly
+        qty: 15.0
+        unit: kg
       - item_id: assembled_electronics
         qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 69.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 180.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+  - process_id: integration_test_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 180.0
         unit: kg
     outputs:
       - item_id: distillation_column_simple_v0

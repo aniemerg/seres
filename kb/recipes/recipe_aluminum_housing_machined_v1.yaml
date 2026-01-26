@@ -10,11 +10,11 @@ inputs:
     unit: kg
   - item_id: cutting_fluid
     qty: 1.0
-    unit: L
+    unit: kg
 outputs:
   - item_id: aluminum_housing_machined
-    qty: 6.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: machining_raw_to_machined_part_v1
     inputs:
@@ -32,9 +32,9 @@ steps:
         unit: kg
       - item_id: cutting_fluid
         qty: 1.0
-        unit: L
+        unit: kg
     outputs:
       - item_id: aluminum_housing_machined
-        qty: 6.0
-        unit: kg
+        qty: 1.0
+        unit: unit
 notes: "Two-step path to produce base aluminum_housing_machined from raw stock using intermediate machined_part_raw."

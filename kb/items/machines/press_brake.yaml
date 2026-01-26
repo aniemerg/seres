@@ -1,14 +1,21 @@
 id: press_brake
 kind: machine
 name: Press brake
-mass: 1200.0
-unit: kg
+mass: 846.0
+unit: unit
 material_class: steel
 bom: bom_press_brake_v0
-notes: Machine for bending sheet and plate stock; used for enclosures, ducts, and
+notes: 'Assumptions:
+
+  - Mass aligned to current recipe inputs (846 kg) for assembly conservation.
+
+  Machine for bending sheet and plate stock; used for enclosures, ducts, and
+
   structural brackets. Mass is coarse placeholder for a light industrial unit.
+
+  '
 alternatives:
 - plate_rolling_mill
 dedupe_candidate: true
 recipe: recipe_machine_press_brake_v0
-unit_kind: bulk
+unit_kind: discrete

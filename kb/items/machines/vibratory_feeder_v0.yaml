@@ -1,9 +1,22 @@
 id: vibratory_feeder_v0
 kind: machine
 name: Vibratory feeder v0
-mass: 320.0
-unit: kg
+mass: 240.0
+unit: unit
 bom: bom_vibratory_feeder_v0
-notes: Vibratory feeder for metering material; coarse mass estimate.
+notes: 'Mass updated 2026-01 from 320 kg to 240 kg based on BOM component analysis.
+
+  Component total: feeder_trough (60) + vibration_motor_set (40) + support_frame_welded
+  (120) +
+
+  control_compute_module_imported (2) + sensor_suite_general (5) + power_conditioning_module
+  (12) +
+
+  fastener_kit_medium (1) = 240 kg.
+
+
+  Vibratory feeder for metering material; coarse mass estimate.
+
+  '
 recipe: recipe_machine_vibratory_feeder_v0
-unit_kind: bulk
+unit_kind: discrete

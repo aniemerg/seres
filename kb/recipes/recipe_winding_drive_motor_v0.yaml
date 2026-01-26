@@ -3,7 +3,7 @@ target_item_id: winding_drive_motor
 variant_id: v0
 inputs:
   - item_id: aluminum_ingot
-    qty: 25.0
+    qty: 28.7
     unit: kg
   - item_id: wire_copper_insulated
     qty: 8.0
@@ -28,7 +28,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: aluminum_ingot
-        qty: 25.0
+        qty: 28.7
         unit: kg
       - item_id: wire_copper_insulated
         qty: 8.0
@@ -54,4 +54,8 @@ steps:
     labor_hours: 2.5
     notes: "Cast motor housing and end bells from aluminum, machine housing bore, bearing journals, mounting faces, wind stator coils and rotor windings with copper wire, assemble stator, rotor, bearings, end bells, test motor"
 assumptions: AC induction motor design. Cast housing, machined, with wound copper coils. Includes bearings and shaft. Mass ~40 kg.
-notes: Variable speed electric motor for winding machine drive. Provides precise speed control for fiber/wire winding operations.
+notes: |
+  Assumptions:
+  - Added extra aluminum stock to cover machining loss and scrap generation.
+  Rationale:
+  - Increase aluminum_ingot to balance outputs (motor + scrap).

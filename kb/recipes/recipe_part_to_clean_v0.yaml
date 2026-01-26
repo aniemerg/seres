@@ -7,7 +7,14 @@ inputs:
     unit: kg
 outputs:
   - item_id: part_to_clean
-    qty: 1.0
+    qty: 0.9
+    unit: kg
+byproducts:
+  - item_id: metal_swarf
+    qty: 0.05
+    unit: kg
+  - item_id: casting_slag
+    qty: 0.05
     unit: kg
 steps:
   - process_id: metal_casting_basic_v0
@@ -27,15 +34,19 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.9
+        unit: kg
+    byproducts:
+      - item_id: metal_swarf
+        qty: 0.05
         unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.9
         unit: kg
     outputs:
       - item_id: part_to_clean
-        qty: 1.0
+        qty: 0.9
         unit: kg
 notes: "Converted to dict-form steps to satisfy invalid_recipe_schema gap; local manufacturing path for part_to_clean."

@@ -31,7 +31,7 @@ steps:
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 39.5
+        qty: 40.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -39,11 +39,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 39.5
+        qty: 40.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 39.0
+        qty: 40.0
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
@@ -51,7 +51,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 39.0
+        qty: 40.0
         unit: kg
     outputs:
       - item_id: hydraulic_reservoir_basic
@@ -61,4 +61,6 @@ steps:
     labor_hours: 0.25
     notes: "Pressure test for leaks and verify capacity"
 assumptions: Welded sheet metal tank with threaded fittings. Includes level sight glass or indicator.
-notes: Hydraulic reservoir for basic hydraulic power unit; capacity aligned with standard 40 kg mass proxy.
+notes: |
+  Hydraulic reservoir for basic hydraulic power unit; capacity aligned with standard 40 kg mass proxy.
+  Mass balance: keep welded/machined outputs at 40 kg to match reservoir mass.

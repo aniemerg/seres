@@ -18,8 +18,8 @@ inputs:
     qty: 1
     unit: unit
   - item_id: humidity_sensor_set
-    qty: 1
-    unit: unit
+    qty: 0.75
+    unit: kg
   - item_id: sealing_gaskets
     qty: 3
     unit: kg
@@ -81,8 +81,8 @@ steps:
         qty: 1
         unit: unit
       - item_id: humidity_sensor_set
-        qty: 1
-        unit: unit
+        qty: 0.75
+        unit: kg
       - item_id: sealing_gaskets
         qty: 3
         unit: kg
@@ -90,23 +90,12 @@ steps:
         qty: 1
         unit: unit
     outputs:
-      - item_id: assembled_equipment
+      - item_id: glove_box_or_dry_room
         qty: 1
         unit: unit
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Install glove ports, windows, gas systems, sensors, and airlock; complete assembly"
   - process_id: pressure_testing_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    outputs:
-      - item_id: glove_box_or_dry_room
-        qty: 1
-        unit: unit
-    est_time_hr: 2.0
-    machine_hours: 2.0
-    notes: "Leak test enclosure and verify atmosphere control performance"
 assumptions: "Sealed glove box enclosure for controlled atmosphere work. Critical for handling lithium, sodium, or other reactive materials, and for moisture-sensitive assembly operations. Fabricates enclosure from sheet metal, then assembles with BOM components."
 notes: "Glove box maintains inert atmosphere for handling reactive or moisture-sensitive materials. Essential for battery manufacturing, chemical synthesis, and precision electronics assembly. 5-step process: form → weld → machine → assemble → test."

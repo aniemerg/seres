@@ -7,19 +7,13 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: wire_copper_insulated
-    qty: 0.3
+    qty: 0.6
     unit: kg
   - item_id: enclosure_small
     qty: 1.0
     unit: unit
   - item_id: fastener_kit_small
-    qty: 0.2
-    unit: kg
-  - item_id: assembled_electronics
-    qty: 1.0
-    unit: kg
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
+    qty: 0.4
     unit: kg
 outputs:
   - item_id: power_management_control_unit
@@ -34,9 +28,6 @@ steps:
       - item_id: wire_copper_insulated
         qty: 0.3
         unit: kg
-      - item_id: enclosure_small
-        qty: 1.0
-        unit: unit
       - item_id: fastener_kit_small
         qty: 0.2
         unit: kg
@@ -44,7 +35,7 @@ steps:
       - item_id: assembled_electronics
         qty: 1.0
         unit: kg
-    notes: "PCB assembly for power management control unit"
+    notes: "PCB assembly for power management control unit (removed enclosure_small - added in final step)"
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: assembled_electronics
@@ -58,13 +49,13 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
+        qty: 1.5
         unit: kg
-    notes: "Electrical assembly and wiring for power management control unit"
+    notes: "Electrical assembly and wiring for power management control unit (mass conserved: 1.0 + 0.3 + 0.2 = 1.5 kg)"
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
+        qty: 1.5
         unit: kg
       - item_id: enclosure_small
         qty: 1.0
@@ -73,5 +64,5 @@ steps:
       - item_id: power_management_control_unit
         qty: 1.0
         unit: unit
-    notes: "Enclosure assembly and mounting for power management control unit"
+    notes: "Enclosure assembly and mounting for power management control unit (total: 1.5 kg electronics + 4.75 kg enclosure = 6.25 kg)"
 notes: "Simple production route for power management control unit using PCB, electrical assembly, and enclosure steps."

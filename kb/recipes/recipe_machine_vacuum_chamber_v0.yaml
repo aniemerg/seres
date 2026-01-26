@@ -18,7 +18,7 @@ inputs:
     qty: 1.0
     unit: unit
   - item_id: electrical_wire_and_connectors
-    qty: 1.0
+    qty: 13.0
     unit: kg
   - item_id: electronic_components_set
     qty: 1.0
@@ -86,15 +86,15 @@ steps:
   - process_id: seal_installation_v0
     inputs:
       - item_id: hydraulic_seals_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     outputs:
       - item_id: sealed_component
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     est_time_hr: 0.7
     labor_hours: 0.7
     notes: "Install gaskets/seals on doors and ports; assemble viewports/feedthroughs."
@@ -119,7 +119,7 @@ steps:
         qty: 1.0
         unit: unit
       - item_id: electrical_wire_and_connectors
-        qty: 1.0
+        qty: 13.0
         unit: kg
     outputs:
       - item_id: wired_electrical_system
@@ -134,8 +134,8 @@ steps:
         qty: 1.0
         unit: unit
       - item_id: sealed_component
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
       - item_id: plumbing_system_assembly
         qty: 1.0
         unit: unit
@@ -147,4 +147,7 @@ steps:
     labor_hours: 0.6
     notes: "Leak check, pump-down test, and basic functionality verification."
 assumptions: "Bench-scale vacuum chamber build with welded shell, machined flanges, and basic valve/gauge set; pumps handled separately."
-notes: Local fabrication route for vacuum chamber.
+notes: |
+  Local fabrication route for vacuum chamber.
+  Mass balance: seal_installation and integration_test now use 150 kg sealed shell mass.
+  Mass balance: wiring step uses 13 kg wire to match 15 kg wired system.

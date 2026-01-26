@@ -14,9 +14,12 @@ inputs:
   - item_id: pressure_gauge_set
     qty: 1
     unit: unit
-  - item_id: machine_frame_small
+  - item_id: machine_frame_heavy
     qty: 1
     unit: unit
+  - item_id: passive_thermal_insulation_v0
+    qty: 80.0
+    unit: kg
 outputs:
   - item_id: cryogenic_chiller_provider_v0_v0
     qty: 1
@@ -58,13 +61,13 @@ steps:
         qty: 600.0
         unit: kg
     outputs:
-      - item_id: machine_frame_small
+      - item_id: machine_frame_heavy
         qty: 1
         unit: unit
     notes: "Pre-assembly of subcomponents into machine shell"
   - process_id: machine_assembly_basic_v0
     inputs:
-      - item_id: machine_frame_small
+      - item_id: machine_frame_heavy
         qty: 1
         unit: unit
       - item_id: cryogenic_chiller_v0
@@ -76,6 +79,9 @@ steps:
       - item_id: pressure_gauge_set
         qty: 1
         unit: unit
+      - item_id: passive_thermal_insulation_v0
+        qty: 80.0
+        unit: kg
     outputs:
       - item_id: cryogenic_chiller_provider_v0_v0
         qty: 1

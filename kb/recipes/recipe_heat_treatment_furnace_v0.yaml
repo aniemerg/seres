@@ -5,7 +5,7 @@ produces_qty: 1.0
 produces_unit: unit
 inputs:
   - item_id: regolith_metal_crude
-    qty: 300.0
+    qty: 500.0
     unit: kg
   - item_id: refractory_castable
     qty: 50.0
@@ -22,12 +22,6 @@ inputs:
   - item_id: electronic_components_set
     qty: 2.0
     unit: kg
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
-  - item_id: assembled_electrical_system
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: heat_treatment_furnace_v0
     qty: 1.0
@@ -36,25 +30,25 @@ steps:
 - process_id: metal_casting_basic_v0
   inputs:
     - item_id: regolith_metal_crude
-      qty: 300.0
+      qty: 500.0
       unit: kg
   outputs:
     - item_id: cast_metal_parts
-      qty: 285.0
+      qty: 475.0
       unit: kg
   notes: Cast outer shell and frame (approx 300 kg)
 - process_id: refractory_lining_installation_v0
   inputs:
     - item_id: cast_metal_parts
-      qty: 285.0
+      qty: 475.0
       unit: kg
     - item_id: refractory_castable
       qty: 50.0
       unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 525.0
+      unit: kg
   notes: Install ceramic fiber or brick refractory insulation lining
 - process_id: coil_winding_basic_v0
   inputs:
@@ -72,8 +66,11 @@ steps:
 - process_id: wiring_and_electronics_integration_v0
   inputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
+      qty: 525.0
+      unit: kg
+    - item_id: motor_coil_wound
+      qty: 9.5
+      unit: kg
     - item_id: electrical_wire_and_connectors
       qty: 5.0
       unit: kg
@@ -81,18 +78,15 @@ steps:
       qty: 2.0
       unit: kg
   outputs:
-    - item_id: assembled_electrical_system
-      qty: 1.0
-      unit: unit
+    - item_id: assembled_equipment
+      qty: 537.0
+      unit: kg
   notes: Install temperature controllers, thermocouples, power relays, safety interlocks
 - process_id: assembly_basic_v0
   inputs:
     - item_id: assembled_equipment
-      qty: 1.0
-      unit: unit
-    - item_id: assembled_electrical_system
-      qty: 1.0
-      unit: unit
+      qty: 537.0
+      unit: kg
   outputs:
     - item_id: heat_treatment_furnace_v0
       qty: 1.0

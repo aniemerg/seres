@@ -5,24 +5,24 @@ target_item_id: water_purification_distillation_v0
 variant_id: v0
 inputs:
   - item_id: steel_plate_or_sheet
-    qty: 45.0
+    qty: 117.0
     unit: kg
   - item_id: piping_assembly_small
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: heating_element_electric
-    qty: 4
+    qty: 4.0
     unit: unit
   - item_id: heat_exchanger_compact
     qty: 2.0
-    unit: kg
+    unit: unit
   - item_id: fastener_kit_medium
-    qty: 1
+    qty: 1.0
     unit: unit
 outputs:
   - item_id: water_purification_distillation_v0
-    qty: 1
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: metal_scrap
     qty: 5.0
     unit: kg
@@ -30,24 +30,24 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_plate_or_sheet
-        qty: 45.0
+        qty: 117.0
         unit: kg
       - item_id: piping_assembly_small
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
       - item_id: heating_element_electric
-        qty: 4
+        qty: 4.0
         unit: unit
       - item_id: heat_exchanger_compact
         qty: 2.0
-        unit: kg
+        unit: unit
       - item_id: fastener_kit_medium
-        qty: 1
+        qty: 1.0
         unit: unit
     outputs:
       - item_id: water_purification_distillation_v0
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: metal_scrap
         qty: 5.0
         unit: kg
@@ -56,4 +56,11 @@ steps:
     labor_hours: 4.4
     notes: "Cut shell sections and supports from steel plate, form shell panels and mounting surfaces, weld shell with brackets and internal supports, machine ports and mounting faces, install plumbing for water in/out, install heating elements and condenser coil, leak test and verify operation"
 assumptions: "Basic distillation column path for water purification; external condenser and reflux unknowns treated as placeholders."
-notes: "Prototype recipe to manufacture water_purification_distillation_v0; BOM details to be refined."
+notes: |
+  Assumptions:
+  - Steel plate mass scaled to match 120 kg unit plus 5 kg scrap.
+  - Heat exchanger count set to 2 units for condenser loop.
+  Rationale:
+  - Preserve mass balance while keeping existing BOM items.
+  Uncertainty:
+  - Piping/heat exchanger sizing and scrap rate need refinement.

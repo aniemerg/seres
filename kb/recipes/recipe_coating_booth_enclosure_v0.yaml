@@ -4,7 +4,7 @@ target_item_id: coating_booth_enclosure
 variant_id: v0
 inputs:
   - item_id: sheet_metal_or_structural_steel
-    qty: 40.0
+    qty: 62.0
     unit: kg
   - item_id: sealing_gaskets
     qty: 2.0
@@ -20,11 +20,15 @@ steps:
   - process_id: sheet_metal_cutting_v0
     inputs:
     - item_id: sheet_metal_or_structural_steel
-      qty: 40.0
+      qty: 62.0
       unit: kg
     outputs:
     - item_id: metal_sheet_or_plate
-      qty: 39.2
+      qty: 60.8
+      unit: kg
+    byproducts:
+    - item_id: metal_scrap
+      qty: 1.2
       unit: kg
     est_time_hr: 1.5
     labor_hours: 1.2
@@ -33,11 +37,15 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
     - item_id: metal_sheet_or_plate
-      qty: 39.2
+      qty: 60.8
       unit: kg
     outputs:
     - item_id: welded_assemblies
-      qty: 38.0
+      qty: 59.0
+      unit: kg
+    byproducts:
+    - item_id: welding_slag
+      qty: 1.8
       unit: kg
     est_time_hr: 1.5
     labor_hours: 1.2
@@ -46,7 +54,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
     - item_id: welded_assemblies
-      qty: 38.0
+      qty: 59.0
       unit: kg
     - item_id: sealing_gaskets
       qty: 2.0
@@ -58,6 +66,10 @@ steps:
     - item_id: coating_booth_enclosure
       qty: 1
       unit: unit
+    byproducts:
+    - item_id: assembly_waste
+      qty: 2.0
+      unit: kg
     est_time_hr: 0.8
     labor_hours: 0.8
     machine_hours: 0.3

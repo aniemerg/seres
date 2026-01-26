@@ -4,27 +4,27 @@ name: Recipe for vacuum tube subassembly v0
 variant_id: v0
 inputs:
   - item_id: vacuum_tube_triode_v0
-    qty: 1.0
-    unit: unit
+    qty: 0.05
+    unit: kg
   - item_id: vacuum_envelope_quartz
     qty: 1.0
     unit: unit
 outputs:
   - item_id: vacuum_tube_subassembly
-    qty: 1.0
-    unit: unit
+    qty: 1.05
+    unit: kg
 steps:
 - process_id: tube_subassembly_assembly_v0
   inputs:
     - item_id: vacuum_tube_triode_v0
-      qty: 1.0
-      unit: unit
+      qty: 0.05
+      unit: kg
     - item_id: vacuum_envelope_quartz
       qty: 1.0
       unit: unit
   outputs:
     - item_id: vacuum_tube_subassembly
-      qty: 1.0
-      unit: unit
-notes: Assemble vacuum_tube_subassembly from triode and envelope
+      qty: 1.05
+      unit: kg
+notes: Assemble vacuum_tube_subassembly from triode and envelope (mass-based output)
 target_item_id: vacuum_tube_subassembly

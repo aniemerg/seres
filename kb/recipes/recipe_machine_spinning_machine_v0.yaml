@@ -3,32 +3,35 @@ target_item_id: spinning_machine_v0
 variant_id: v0
 inputs:
   - item_id: spinning_frame_basic
-    qty: 1
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: spindle_assembly_spinning
-    qty: 1
-    unit: unit
+    qty: 30.0
+    unit: kg
   - item_id: draft_roller_set
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: flier_and_bobbin_set
-    qty: 1
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: spinning_drive_motor
-    qty: 1
-    unit: unit
+    qty: 40.0
+    unit: kg
   - item_id: control_compute_module_imported
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: sensor_suite_general
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: power_conditioning_module
-    qty: 1
-    unit: unit
+    qty: 12.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 45.0
+    unit: kg
 outputs:
   - item_id: spinning_machine_v0
     qty: 1
@@ -37,103 +40,112 @@ steps:
   - process_id: import_receiving_basic_v0
     inputs:
       - item_id: spinning_frame_basic
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: spindle_assembly_spinning
-        qty: 1
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: draft_roller_set
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: flier_and_bobbin_set
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: spinning_drive_motor
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: power_conditioning_module
-        qty: 1
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 45.0
+        unit: kg
     outputs:
       - item_id: spinning_frame_basic
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: spindle_assembly_spinning
-        qty: 1
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: draft_roller_set
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: flier_and_bobbin_set
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: spinning_drive_motor
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: power_conditioning_module
-        qty: 1
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 45.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: assembly_basic_v0
     inputs:
       - item_id: spinning_frame_basic
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: spindle_assembly_spinning
-        qty: 1
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: draft_roller_set
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: flier_and_bobbin_set
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: spinning_drive_motor
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: control_compute_module_imported
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: power_conditioning_module
-        qty: 1
-        unit: unit
+        qty: 12.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 45.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 300.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     machine_hours: 3.0
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 300.0
+        unit: kg
     outputs:
       - item_id: spinning_machine_v0
         qty: 1

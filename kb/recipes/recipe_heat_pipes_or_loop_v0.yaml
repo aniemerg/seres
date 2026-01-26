@@ -3,17 +3,17 @@ target_item_id: heat_pipes_or_loop
 variant_id: v0
 inputs:
   - item_id: regolith_metal_crude
-    qty: 90.0
+    qty: 94.5
     unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 90.0
+        qty: 94.5
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 85.5
+        qty: 90.0
         unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
@@ -21,11 +21,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 85.5
+        qty: 90.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 85.5
+        qty: 90.0
         unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
@@ -33,11 +33,11 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 85.5
+        qty: 90.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 85.5
+        qty: 90.0
         unit: kg
     est_time_hr: 2.5
     machine_hours: 2.5
@@ -46,7 +46,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 85.5
+        qty: 90.0
         unit: kg
     outputs:
       - item_id: heat_pipes_or_loop

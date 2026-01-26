@@ -37,6 +37,10 @@ steps:
       - item_id: motor_coil_wound
         qty: 3.0
         unit: kg
+    byproducts:
+      - item_id: wire_scrap
+        qty: 0.1
+        unit: kg
     est_time_hr: 1.5
     machine_hours: 1.5
     notes: "Wind coil on ceramic or air core former for induction or resistive heating"
@@ -47,7 +51,7 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 3.0
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
@@ -55,7 +59,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 3.0
         unit: kg
     outputs:
       - item_id: induction_coil_or_heating_element

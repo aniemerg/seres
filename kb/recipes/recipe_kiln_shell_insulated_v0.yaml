@@ -17,8 +17,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: kiln_shell_insulated
-    qty: 1
-    unit: unit
+    qty: 200.0
+    unit: kg
 steps:
   - process_id: sheet_metal_fabrication_v0
     inputs:
@@ -70,7 +70,7 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 198.0
+        qty: 200.0
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
@@ -78,12 +78,12 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 198.0
+        qty: 200.0
         unit: kg
     outputs:
       - item_id: kiln_shell_insulated
-        qty: 1
-        unit: unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify lining integrity and thermal insulation"

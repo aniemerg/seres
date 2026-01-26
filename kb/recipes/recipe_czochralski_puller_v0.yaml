@@ -3,136 +3,136 @@ target_item_id: czochralski_puller_v0
 variant_id: v0
 inputs:
   - item_id: structural_frame_steel
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: vacuum_chamber
-    qty: 1.0
-    unit: unit
+    qty: 150.0
+    unit: kg
   - item_id: support_frame_welded
-    qty: 1.0
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: mounting_fixtures_adjustable
-    qty: 1.0
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: linear_actuator_precision
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: spindle_assembly_precision
-    qty: 2.0
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: heating_element_set_high_temp
-    qty: 1.0
-    unit: unit
+    qty: 74.5
+    unit: kg
   - item_id: temperature_controller_module
     qty: 1.0
-    unit: unit
+    unit: kg
   - item_id: sensor_suite_general
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: motor_servo_precision
-    qty: 3.0
-    unit: unit
+    qty: 36.0
+    unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 5.0
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: czochralski_puller_v0
-    qty: 1.0
-    unit: unit
+    qty: 521.5
+    unit: kg
 steps:
   - process_id: welding_and_fabrication_v0
     inputs:
       - item_id: structural_frame_steel
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: support_frame_welded
-        qty: 1.0
-        unit: unit
+        qty: 120.0
+        unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 1.0
-        unit: unit
+        qty: 145.0
+        unit: kg
     est_time_hr: 30.0
     labor_hours: 30.0
     notes: "Fabricate structural frame and vacuum chamber"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 1.0
-        unit: unit
+        qty: 145.0
+        unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: unit
+        qty: 145.0
+        unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
     notes: "Machine precision components for pull and rotation mechanisms"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
-        unit: unit
+        qty: 145.0
+        unit: kg
       - item_id: vacuum_chamber
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
       - item_id: mounting_fixtures_adjustable
-        qty: 1.0
-        unit: unit
+        qty: 15.0
+        unit: kg
       - item_id: linear_actuator_precision
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: spindle_assembly_precision
-        qty: 2.0
-        unit: unit
+        qty: 80.0
+        unit: kg
       - item_id: heating_element_set_high_temp
-        qty: 1.0
-        unit: unit
+        qty: 74.5
+        unit: kg
       - item_id: temperature_controller_module
         qty: 1.0
-        unit: unit
+        unit: kg
       - item_id: sensor_suite_general
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: motor_servo_precision
-        qty: 3.0
-        unit: unit
+        qty: 36.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 514.5
+        unit: kg
     est_time_hr: 24.0
     labor_hours: 24.0
     notes: "Assemble crucible support, seed holder, pull mechanism, and heating elements"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 514.5
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 5.0
         unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 521.5
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Install servo motors, sensors, temperature controllers, and control systems"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 521.5
+        unit: kg
     outputs:
       - item_id: czochralski_puller_v0
-        qty: 1.0
-        unit: unit
+        qty: 521.5
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Test pull rate control, rotation precision, temperature stability, and vacuum integrity"

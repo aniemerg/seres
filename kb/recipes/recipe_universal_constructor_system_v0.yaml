@@ -2,105 +2,118 @@ id: recipe_universal_constructor_system_v0
 kind: recipe
 target_item_id: universal_constructor_system_v0
 produces_id: universal_constructor_system_v0
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 1000.0
+produces_unit: kg
 inputs:
   - item_id: machine_frame_medium
-    qty: 1.0
-    unit: unit
+    qty: 200.0
+    unit: kg
   - item_id: frame_and_supports_basic
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
   - item_id: control_panel_basic
     qty: 1.0
     unit: unit
   - item_id: drive_motor_medium
-    qty: 1.0
-    unit: unit
+    qty: 90.0
+    unit: kg
   - item_id: structural_steel_frame
-    qty: 1.0
-    unit: unit
+    qty: 500.0
+    unit: kg
   - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: enclosure_steel_small
-    qty: 1.0
+    qty: 6.0
     unit: kg
   - item_id: analog_test_bench_neural_circuits_v0
-    qty: 1.0
-    unit: unit
+    qty: 60.0
+    unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 76.5
+    unit: kg
 outputs:
   - item_id: universal_constructor_system_v0
-    qty: 1.0
-    unit: unit
+    qty: 1000.0
+    unit: kg
 steps:
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: machine_frame_medium
-        qty: 1.0
-        unit: unit
+        qty: 200.0
+        unit: kg
       - item_id: frame_and_supports_basic
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
       - item_id: drive_motor_medium
-        qty: 1.0
-        unit: unit
+        qty: 90.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 340.0
+        unit: kg
   - process_id: electronics_assembly_v0
     inputs:
       - item_id: pcb_populated
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
+        qty: 2.5
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: enclosure_steel_small
-        qty: 1.0
+        qty: 6.0
         unit: kg
       - item_id: assembled_electronics
-        qty: 1.0
-        unit: unit
+        qty: 2.5
+        unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+        qty: 8.5
+        unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: analog_test_bench_neural_circuits_v0
-        qty: 1.0
-        unit: unit
+        qty: 60.0
+        unit: kg
       - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+        qty: 8.5
+        unit: kg
       - item_id: control_panel_basic
         qty: 1.0
         unit: unit
       - item_id: structural_steel_frame
-        qty: 1.0
-        unit: unit
+        qty: 500.0
+        unit: kg
+      - item_id: assembled_equipment
+        qty: 340.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 76.5
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1000.0
+        unit: kg
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1000.0
+        unit: kg
     outputs:
       - item_id: universal_constructor_system_v0
-        qty: 1.0
-        unit: unit
-notes: "Seeded assembly path for universal_constructor_system_v0 using existing unit operations. Placeholder chain to enable local manufacturing modeling."
+        qty: 1000.0
+        unit: kg
+notes: |
+  Assumptions:
+  - Scaled component masses to total 1000 kg universal_constructor_system_v0 output.
+  Rationale:
+  - Aligns assembly and integration mass flow for placeholder system.

@@ -6,7 +6,7 @@ inputs:
     qty: 310.0
     unit: kg
   - item_id: furnace_chamber_unequipped
-    qty: 1
+    qty: 0.4166
     unit: unit
     notes: "Intermediate for heating element installation"
   - item_id: refractory_brick_set
@@ -52,7 +52,7 @@ steps:
         unit: kg
     outputs:
       - item_id: furnace_chamber_unequipped
-        qty: 1
+        qty: 0.4166
         unit: unit
     est_time_hr: 12.0
     machine_hours: 8.0
@@ -61,7 +61,7 @@ steps:
   - process_id: heating_element_installation_v0
     inputs:
       - item_id: furnace_chamber_unequipped
-        qty: 1
+        qty: 0.4166
         unit: unit
       - item_id: heating_element_set_basic
         qty: 1
@@ -89,25 +89,14 @@ steps:
         qty: 1
         unit: unit
     outputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    est_time_hr: 4.0
-    machine_hours: 2.0
-    labor_hours: 2.0
-    notes: "Assemble insulation pack_high_temp, temperature_controller_basic, and power_conditioning_module"
-  - process_id: calibration_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    outputs:
       - item_id: kiln_basic
         qty: 1
         unit: unit
-    est_time_hr: 2.0
-    machine_hours: 1.0
-    labor_hours: 1.0
-    notes: "Calibrate temperature controller and sensors"
+    est_time_hr: 6.0
+    machine_hours: 3.0
+    labor_hours: 3.0
+    notes: "Assemble insulation pack, temperature controller, and power conditioning module. Calibrate temperature controller and sensors, verify heating uniformity and control accuracy."
 assumptions: "Local fabrication path for basic kiln; uses steel_shell_thick, refractory lining, heating elements, insulation, temperature control, and power conditioning modules."
-notes: "Concrete production path to replace import placeholder for kiln_basic."
+notes: |
+  Concrete production path to replace import placeholder for kiln_basic.
+  Builds a basic kiln from steel shell, refractory lining, heating elements, insulation, and control systems.

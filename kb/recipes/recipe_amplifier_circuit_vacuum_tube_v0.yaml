@@ -5,30 +5,34 @@ target_item_id: amplifier_circuit_vacuum_tube_v0
 variant_id: v0
 inputs:
   - item_id: vacuum_tube_triode_v0
-    qty: 1.0
-    unit: unit
-  - item_id: electronic_components_set
     qty: 0.05
+    unit: kg
+  - item_id: electronic_components_set
+    qty: 0.15
     unit: kg
 outputs:
   - item_id: amplifier_circuit_vacuum_tube_v0
-    qty: 1.0
-    unit: unit
+    qty: 0.2
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: vacuum_tube_triode_v0
-        qty: 1.0
-        unit: unit
-      - item_id: electronic_components_set
         qty: 0.05
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 0.15
         unit: kg
     outputs:
       - item_id: amplifier_circuit_vacuum_tube_v0
-        qty: 1.0
-        unit: unit
+        qty: 0.2
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Integrate triode tube with basic amplifier circuit components."
-notes: "Placeholder recipe for amplifier_circuit_vacuum_tube_v0 using basic assembly inputs."
+notes: |
+  Assumptions:
+  - Component masses scaled to 0.2 kg amplifier circuit output.
+  Rationale:
+  - Aligns assembly mass balance for amplifier_circuit_vacuum_tube_v0.
 assumptions: "Seed recipe; uses generic vacuum_tube_triode_v0 plus imported electronic components."

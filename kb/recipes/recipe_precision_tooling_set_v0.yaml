@@ -3,21 +3,21 @@ target_item_id: precision_tooling_set
 variant_id: v0
 inputs:
   - item_id: tool_steel_high_carbon_v0
-    qty: 20.0
+    qty: 30.0
     unit: kg
 outputs:
   - item_id: precision_tooling_set
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: tool_steel_high_carbon_v0
-        qty: 20.0
+        qty: 30.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 27.0
         unit: kg
     est_time_hr: 20.0
     machine_hours: 20.0
@@ -25,11 +25,11 @@ steps:
   - process_id: heat_treat_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 27.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 27.0
         unit: kg
     est_time_hr: 8.0
     machine_hours: 8.0
@@ -37,11 +37,11 @@ steps:
   - process_id: precision_grinding_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 18.0
+        qty: 27.0
         unit: kg
     outputs:
       - item_id: finished_part_deburred
-        qty: 17.0
+        qty: 25.0
         unit: kg
     est_time_hr: 15.0
     machine_hours: 15.0
@@ -49,14 +49,20 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: finished_part_deburred
-        qty: 17.0
+        qty: 25.0
         unit: kg
     outputs:
       - item_id: precision_tooling_set
-        qty: 1.0
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify dimensions, cutting edge geometry, and surface finish"
 assumptions: Precision tool manufacturing requires hardened tool steel or carbide, heat treatment, and precision grinding. Initial tools may be imported, later manufactured locally.
-notes: Comprehensive tooling set for machine tool operations. Includes HSS and carbide cutting tools for turning, milling, drilling, and threading operations.
+notes: |
+  Assumptions:
+  - Tool steel input scaled to yield 25 kg finished tooling set.
+  Rationale:
+  - Preserve mass balance and align with tooling set mass placeholder.
+  Uncertainty:
+  - Actual scrap rate and carbide insert mass need refinement.

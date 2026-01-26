@@ -3,101 +3,105 @@ kind: recipe
 target_item_id: packed_bed_distillation_v0
 inputs:
   - item_id: regolith_metal_crude
-    qty: 1.0
-    unit: kg
-  - item_id: machined_part_raw
-    qty: 1.0
+    qty: 1000.0
     unit: kg
   - item_id: enclosure_steel_small
-    qty: 1.0
+    qty: 150.0
     unit: kg
   - item_id: assembled_electrical_equipment
-    qty: 1.0
+    qty: 80.0
     unit: kg
   - item_id: electrical_wire_and_connectors
-    qty: 2.0
+    qty: 15.0
     unit: kg
   - item_id: control_components
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
       - item_id: regolith_metal_crude
-        qty: 1.0
+        qty: 1000.0
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 1.0
+        qty: 950.0
         unit: kg
     notes: "Cast base frame components for packed bed distillation"
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 1.0
+        qty: 950.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 1.0
+        qty: 950.0
         unit: kg
     notes: "Weld frame components and support structures"
   - process_id: machining_finish_basic_v0
     inputs:
-      - item_id: machined_part_raw
-        qty: 1.0
+      - item_id: welded_assemblies
+        qty: 950.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 950.0
         unit: kg
     notes: "Finish machining for interfaces and mounting holes"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 950.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 950.0
         unit: kg
     notes: "Pre-assembly of subcomponents into the machine shell"
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: enclosure_steel_small
-        qty: 1.0
+        qty: 150.0
         unit: kg
       - item_id: assembled_electrical_equipment
-        qty: 1.0
+        qty: 80.0
         unit: kg
     outputs:
       - item_id: enclosure_electrical_medium
-        qty: 1.0
+        qty: 230.0
         unit: kg
     notes: "Assemble enclosure for electronics and control hardware"
   - process_id: electrical_wiring_and_controls_v0
     inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 2.0
+        qty: 15.0
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
     notes: "Install wiring, control panels, sensors, and interlocks"
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 950.0
         unit: kg
       - item_id: enclosure_electrical_medium
-        qty: 1.0
+        qty: 230.0
+        unit: kg
+      - item_id: wired_electrical_system
+        qty: 20.0
         unit: kg
     outputs:
       - item_id: packed_bed_distillation_v0
-        qty: 1.0
-        unit: unit
+        qty: 1200.0
+        unit: kg
     notes: "Final assembly: frame, enclosure, wiring into packed bed distillation machine"
-notes: "Prototype recipe to manufacture packed bed distillation; BOM details to be refined."
+notes: |
+  Assumptions:
+  - Scaled placeholder mass flows to match 1200 kg packed_bed_distillation_v0.
+  Rationale:
+  - Connects casting, welding, machining, and assembly steps into a consistent mass chain.

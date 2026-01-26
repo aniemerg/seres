@@ -5,6 +5,9 @@ inputs:
   - item_id: sheet_metal_or_structural_steel
     qty: 60.0
     unit: kg
+  - item_id: bulk_material_or_parts
+    qty: 92.0
+    unit: kg
   - item_id: formed_sheet_metal_parts
     qty: 57.0
     unit: kg
@@ -56,16 +59,19 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 55.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install fans, motors, temperature controller, ducting, dampers"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 55.0
+        unit: kg
+      - item_id: bulk_material_or_parts
+        qty: 92.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 2.0
         unit: kg
@@ -78,6 +84,6 @@ steps:
         unit: unit
     est_time_hr: 1.5
     labor_hours: 1.5
-    notes: "Wire temperature controller, fan motors, sensors"
+    notes: "Wire temperature controller, fan motors, sensors (150 kg final mass)"
 assumptions: Insulated chamber with forced air circulation. Temperature controller regulates cooling rate.
 notes: Controlled cooling chamber for fiber drawing and processes requiring precise cooling profiles.

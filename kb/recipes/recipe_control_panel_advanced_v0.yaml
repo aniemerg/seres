@@ -10,19 +10,11 @@ inputs:
     qty: 19.0
     unit: kg
     notes: "Intermediate for control panel assembly"
-  - item_id: assembled_equipment
-    qty: 1
-    unit: unit
-    notes: "Intermediate for electronics assembly"
-  - item_id: assembled_electronics
-    qty: 1
-    unit: unit
-    notes: "Intermediate for wiring integration"
   - item_id: electronic_components_set
-    qty: 5.0
+    qty: 13.0
     unit: kg
   - item_id: wire_copper_insulated
-    qty: 3.0
+    qty: 6.0
     unit: kg
   - item_id: fastener_kit_medium
     qty: 2.0
@@ -55,8 +47,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 21.0
+        unit: kg
     est_time_hr: 2.0
     machine_hours: 1.5
     labor_hours: 1.5
@@ -64,31 +56,31 @@ steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 21.0
+        unit: kg
       - item_id: electronic_components_set
-        qty: 5.0
+        qty: 13.0
         unit: kg
     outputs:
-      - item_id: assembled_electronics
-        qty: 1
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 34.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 2.0
     notes: "Install power supplies, controllers, and interfaces"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
-      - item_id: assembled_electronics
-        qty: 1
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 34.0
+        unit: kg
       - item_id: wire_copper_insulated
-        qty: 3.0
+        qty: 6.0
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 2.0
     labor_hours: 2.0
@@ -96,8 +88,8 @@ steps:
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 1
-        unit: unit
+        qty: 40.0
+        unit: kg
     outputs:
       - item_id: control_panel_advanced
         qty: 1

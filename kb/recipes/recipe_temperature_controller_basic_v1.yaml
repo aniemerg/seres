@@ -4,7 +4,7 @@ target_item_id: temperature_controller_basic
 variant_id: v1
 inputs:
   - item_id: sheet_metal_or_structural_steel
-    qty: 10.0
+    qty: 9.5
     unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
@@ -13,8 +13,8 @@ inputs:
     qty: 1.0
     unit: kg
   - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
 outputs:
   - item_id: temperature_controller_basic
     qty: 12.0
@@ -40,8 +40,8 @@ steps:
       unit: kg
   outputs:
     - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
+      qty: 1.5
+      unit: kg
   notes: "Wire multi-zone temperature controllers, power relays, safety interlocks, and indicators"
 - process_id: assembly_basic_v0
   inputs:
@@ -49,35 +49,35 @@ steps:
       qty: 9.5
       unit: kg
     - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
+      qty: 1.5
+      unit: kg
   outputs:
     - item_id: assembled_equipment
-      qty: 1.0
+      qty: 11.0
       unit: kg
   notes: "Mount controllers, switches, displays, and terminals in control panel"
 - process_id: integration_test_basic_v0
   inputs:
     - item_id: assembled_equipment
-      qty: 1.0
+      qty: 11.0
       unit: kg
   outputs:
     - item_id: temperature_controller_basic
-      qty: 12.0
+      qty: 11.0
       unit: kg
   notes: "Test all control zones, safety systems, and verify proper operation"
 - process_id: electronics_assembly_v0
   inputs:
     - item_id: pcb_populated
-      qty: 1.0
-      unit: unit
+      qty: 0.5
+      unit: kg
     - item_id: electronic_components_set
       qty: 1.0
       unit: kg
   outputs:
     - item_id: assembled_electronics
-      qty: 1.0
-      unit: unit
+      qty: 1.5
+      unit: kg
   notes: "Assemble electronics modules into assembled_electronics; replaces placeholder"
 assumptions: "Multi-zone temperature control panel with assembled electronics. Locally fabricated panel and wiring harness."
 notes: "Alternative production variant for temperature controller basic."

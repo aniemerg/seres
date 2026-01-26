@@ -21,7 +21,7 @@ outputs:
     qty: 1.0
     unit: unit
 steps:
-  - process_id: assembly_basic_v0
+  - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: temperature_controller_basic
         qty: 1.0
@@ -29,14 +29,6 @@ steps:
       - item_id: temperature_controller_module
         qty: 1.0
         unit: unit
-    outputs:
-      - item_id: temperature_control_system_v0
-        qty: 1.0
-        unit: unit
-    est_time_hr: 2.0
-    notes: "Assemble temperature control subsystem from controller and module"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg

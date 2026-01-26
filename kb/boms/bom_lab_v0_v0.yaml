@@ -5,6 +5,22 @@ components:
   - item_id: lab_console_unit_v0
     qty: 1.0
     unit: unit
+  - item_id: steel_frame_welded
+    qty: 25.0
+    unit: kg
+  - item_id: enclosure_steel_small
+    qty: 8.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: adhesive_cyanoacrylate_v0
+    qty: 0.7
+    unit: kg
 requires_ids:
   - lab_console_unit_v0
-notes: "Seed BOM mirroring bom_lab_v0_v0 to resolve referenced_only gap for lab_v0_v0."
+  - steel_frame_welded
+  - enclosure_steel_small
+  - fastener_kit_medium
+  - adhesive_cyanoacrylate_v0
+notes: "Laboratory workstation BOM: console unit (25.3 kg), structural frame/workbench (25 kg), steel enclosures (8 kg), fasteners (1 kg), and structural adhesive (0.7 kg) = 60 kg total. Components match recipe_lab_v0_v0."

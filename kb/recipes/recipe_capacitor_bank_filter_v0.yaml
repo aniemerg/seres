@@ -3,8 +3,8 @@ kind: recipe
 target_item_id: capacitor_bank_filter_v0
 variant_id: v0
 inputs:
-  - item_id: sheet_metal_or_structural_steel
-    qty: 5.0
+  - item_id: steel_sheet_1mm
+    qty: 2.0
     unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
@@ -12,9 +12,6 @@ inputs:
   - item_id: electronic_components_set
     qty: 1.0
     unit: unit
-  - item_id: bulk_material_or_parts
-    qty: 1.0
-    unit: kg
 outputs:
   - item_id: capacitor_bank_filter_v0
     qty: 1.0
@@ -22,18 +19,24 @@ outputs:
 steps:
   - process_id: sheet_metal_fabrication_v0
     inputs:
-      - item_id: sheet_metal_or_structural_steel
-        qty: 5.0
+      - item_id: steel_sheet_1mm
+        qty: 2.0
         unit: kg
     outputs:
       - item_id: formed_sheet_metal_parts
-        qty: 4.75
+        qty: 1.9
         unit: kg
-    est_time_hr: 1.0
-    machine_hours: 1.0
-    notes: "Fabricate capacitor bank enclosure"
-  - process_id: wiring_and_electronics_integration_v0
+      - item_id: metal_swarf
+        qty: 0.1
+        unit: kg
+    est_time_hr: 0.5
+    machine_hours: 0.5
+    notes: "Fabricate small capacitor bank enclosure from sheet metal"
+  - process_id: assembly_basic_v0
     inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 1.9
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
@@ -41,33 +44,21 @@ steps:
         qty: 1.0
         unit: unit
     outputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Assemble filter components and connect to bus"
-  - process_id: assembly_basic_v0
-    inputs:
-      - item_id: formed_sheet_metal_parts
-        qty: 4.75
-        unit: kg
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    outputs:
       - item_id: capacitor_bank_filter_v0
         qty: 1.0
         unit: unit
-    est_time_hr: 0.8
-    labor_hours: 0.8
-    notes: "Mount filter assembly inside enclosure"
-  - process_id: import_receiving_basic_v0
-    inputs:
-      - item_id: bulk_material_or_parts
-        qty: 1.0
+      - item_id: metal_scrap
+        qty: 0.9
         unit: kg
-    est_time_hr: 0.2
-    labor_hours: 0.2
-notes: "Placeholder for v0 variant; refine components later"
-assumptions: "Capacitor bank filter v0 assembled from imported filter elements; local enclosure fabrication"
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: "Assemble filter components, wire to bus, and install in enclosure"
+notes: |
+  Assumptions:
+  - Replaced steel_sheet_22ga with steel_sheet_1mm as equivalent stock.
+  Rationale:
+  - 22 ga (~0.8 mm) approximated by 1 mm sheet within 5× rule.
+  - Prior simplification replaced generic placeholders and consolidated assembly.
+  Uncertainty:
+  - Sheet thickness should be refined if enclosure spec is known.
+assumptions: "Capacitor bank filter v0 assembled from fabricated enclosure and electrical components; placeholder mass estimate for BOM balance."

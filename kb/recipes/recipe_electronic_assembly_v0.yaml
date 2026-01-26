@@ -14,23 +14,25 @@ outputs:
   - item_id: electronic_assembly
     qty: 1.0
     unit: unit
+byproducts:
   - item_id: assembly_loss
-    qty: 0.5
+    qty: 0.25
     unit: kg
 steps:
 - process_id: electronic_assembly_v0
   inputs:
-  - item_id: pcb_populated
-    qty: 1.0
-    unit: unit
-  - item_id: enclosure_small
-    qty: 1.0
-    unit: unit
+    - item_id: pcb_populated
+      qty: 1.0
+      unit: unit
+    - item_id: enclosure_small
+      qty: 1.0
+      unit: unit
   outputs:
-  - item_id: electronic_assembly
-    qty: 1.0
-    unit: unit
-  - item_id: assembly_loss
-    qty: 0.5
-    unit: kg
+    - item_id: electronic_assembly
+      qty: 1.0
+      unit: unit
+  byproducts:
+    - item_id: assembly_loss
+      qty: 0.25
+      unit: kg
 target_item_id: electronic_assembly

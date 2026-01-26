@@ -21,6 +21,9 @@ inputs:
   - item_id: getter_material_raw
     qty: 0.01
     unit: kg
+  - item_id: bulk_material_or_parts
+    qty: 0.03
+    unit: kg
 outputs:
   - item_id: vacuum_tube_triode_power
     qty: 0.25
@@ -33,7 +36,11 @@ steps:
         unit: kg
     outputs:
       - item_id: tube_envelope_blown
-        qty: 0.09
+        qty: 0.098
+        unit: kg
+    byproducts:
+      - item_id: glass_scrap
+        qty: 0.002
         unit: kg
     est_time_hr: 0.5
     notes: Blow glass envelope for tube (scaled)
@@ -75,25 +82,36 @@ steps:
         qty: 0.04
         unit: kg
       - item_id: tube_base_ceramic
-        qty: 0.05
+        qty: 0.06
         unit: kg
       - item_id: getter_material_raw
-        qty: 0.01
+        qty: 0.03
+        unit: kg
+      - item_id: bulk_material_or_parts
+        qty: 0.03
         unit: kg
     outputs:
       - item_id: tube_assembled_evacuated
-        qty: 0.20
+        qty: 0.25
+        unit: kg
+    byproducts:
+      - item_id: dust_fines_v0
+        qty: 0.0
         unit: kg
     est_time_hr: 3.0
     notes: Assemble and evacuate (scaled)
   - process_id: getter_material_activation_v0
     inputs:
       - item_id: tube_assembled_evacuated
-        qty: 0.20
+        qty: 0.25
         unit: kg
     outputs:
       - item_id: vacuum_tube_triode_power
         qty: 0.25
+        unit: kg
+    byproducts:
+      - item_id: dust_fines_v0
+        qty: 0.0
         unit: kg
     est_time_hr: 1.0
     notes: Activate getter; final vacuum; mass 0.25 kg

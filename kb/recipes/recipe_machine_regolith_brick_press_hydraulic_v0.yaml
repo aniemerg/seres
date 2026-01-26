@@ -2,8 +2,8 @@ id: recipe_machine_regolith_brick_press_hydraulic_v0
 kind: recipe
 name: Recipe for regolith brick hydraulic press
 produces_id: regolith_brick_press_hydraulic_v0
-produces_qty: 1.0
-produces_unit: unit
+produces_qty: 1685.551
+produces_unit: kg
 target_item_id: regolith_brick_press_hydraulic_v0
 variant_id: v0
 inputs:
@@ -20,22 +20,22 @@ inputs:
     qty: 50.0
     unit: kg
   - item_id: hydraulic_cylinder_large
-    qty: 1.0
-    unit: each
+    qty: 40.0
+    unit: kg
   - item_id: hydraulic_pump_high_pressure
-    qty: 1.0
-    unit: each
+    qty: 60.0
+    unit: kg
   - item_id: electric_motor_3_phase_5kw
-    qty: 1.0
-    unit: each
+    qty: 25.0
+    unit: kg
   - item_id: control_circuit_hydraulic_press
-    qty: 1.0
-    unit: each
+    qty: 1.551
+    unit: kg
   - item_id: pressure_gauge
-    qty: 2.0
-    unit: each
-  - item_id: hydraulic_control_valve_set
     qty: 1.0
+    unit: kg
+  - item_id: hydraulic_control_valve_set
+    qty: 6.0
     unit: kg
   - item_id: piping_components
     qty: 1.0
@@ -45,8 +45,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: regolith_brick_press_hydraulic_v0
-    qty: 1.0
-    unit: unit
+    qty: 1685.551
+    unit: kg
 steps:
 - process_id: cutting_basic_v0
   inputs:
@@ -64,7 +64,7 @@ steps:
       unit: kg
   outputs:
     - item_id: cut_parts
-      qty: 9.5
+      qty: 1550.0
       unit: kg
   est_time_hr: 2.0
   machine_hours: 2.0
@@ -73,11 +73,11 @@ steps:
 - process_id: welded_fabrication_basic_v0
   inputs:
     - item_id: cut_parts
-      qty: 9.5
+      qty: 1550.0
       unit: kg
   outputs:
     - item_id: welded_fabrications
-      qty: 1.0
+      qty: 1550.0
       unit: kg
   est_time_hr: 3.0
   machine_hours: 2.5
@@ -86,11 +86,11 @@ steps:
 - process_id: machining_finish_basic_v0
   inputs:
     - item_id: welded_fabrications
-      qty: 1.0
+      qty: 1550.0
       unit: kg
   outputs:
     - item_id: machined_part_raw
-      qty: 1.0
+      qty: 1550.0
       unit: kg
   est_time_hr: 2.0
   machine_hours: 1.5
@@ -99,28 +99,35 @@ steps:
 - process_id: hydraulic_system_assembly_v0
   inputs:
     - item_id: hydraulic_cylinder_large
-      qty: 1.0
-      unit: each
+      qty: 40.0
+      unit: kg
     - item_id: hydraulic_pump_high_pressure
-      qty: 1.0
-      unit: each
+      qty: 60.0
+      unit: kg
     - item_id: electric_motor_3_phase_5kw
-      qty: 1.0
-      unit: each
+      qty: 25.0
+      unit: kg
+  outputs:
+    - item_id: hydraulic_power_unit_basic
+      qty: 125.0
+      unit: kg
   est_time_hr: 1.5
   labor_hours: 1.5
   notes: "Install cylinder, hoses, valves, and power unit."
 - process_id: hydraulic_system_integration_v0
   inputs:
+    - item_id: hydraulic_power_unit_basic
+      qty: 125.0
+      unit: kg
     - item_id: hydraulic_control_valve_set
-      qty: 1.0
+      qty: 6.0
       unit: kg
     - item_id: piping_components
       qty: 1.0
       unit: kg
   outputs:
     - item_id: hydraulic_system_medium
-      qty: 1.0
+      qty: 132.0
       unit: kg
   est_time_hr: 1.0
   labor_hours: 1.0
@@ -128,33 +135,36 @@ steps:
 - process_id: wiring_and_electronics_integration_v0
   inputs:
     - item_id: control_circuit_hydraulic_press
-      qty: 1.0
-      unit: each
+      qty: 1.551
+      unit: kg
     - item_id: pressure_gauge
-      qty: 2.0
-      unit: each
+      qty: 1.0
+      unit: kg
     - item_id: electrical_wire_and_connectors
       qty: 1.0
       unit: kg
   outputs:
     - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
+      qty: 3.551
+      unit: kg
   est_time_hr: 0.8
   labor_hours: 0.8
   notes: "Wire controls, limit switches, safety interlocks."
 - process_id: integration_test_basic_v0
   inputs:
-    - item_id: wired_electrical_system
-      qty: 1.0
-      unit: unit
+    - item_id: machined_part_raw
+      qty: 1550.0
+      unit: kg
     - item_id: hydraulic_system_medium
-      qty: 1.0
+      qty: 132.0
+      unit: kg
+    - item_id: wired_electrical_system
+      qty: 3.551
       unit: kg
   outputs:
     - item_id: regolith_brick_press_hydraulic_v0
-      qty: 1.0
-      unit: unit
+      qty: 1685.551
+      unit: kg
   est_time_hr: 0.8
   labor_hours: 0.6
   notes: "Cycle press with mold, verify pressure and ejection."

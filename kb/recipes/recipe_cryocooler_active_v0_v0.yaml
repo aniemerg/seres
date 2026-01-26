@@ -7,24 +7,45 @@ produces_unit: unit
 target_item_id: cryocooler_active_v0
 inputs:
   - item_id: machined_metal_block_v0
-    qty: 2.0
+    qty: 23.0
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
 outputs:
   - item_id: cryocooler_active_v0
-    qty: 1.0
-    unit: unit
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: cryocooler_core_unit_assembly_v0
+    inputs:
+      - item_id: machined_metal_block_v0
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: cryocooler_core_unit_v0
         qty: 2.0
         unit: kg
   - process_id: cryocooler_active_assembly_v0
+    inputs:
+      - item_id: cryocooler_core_unit_v0
+        qty: 2.0
+        unit: kg
+      - item_id: machined_metal_block_v0
+        qty: 21.0
+        unit: kg
+      - item_id: electronic_components_set
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: cryocooler_active_v0
-        qty: 1.0
-        unit: unit
-notes: "Assembles cryocooler_active_v0 by first fabricating the core unit, then assembling the full active cryocooler."
+        qty: 25.0
+        unit: kg
+notes: |
+  Assumptions:
+  - Core unit uses 2 kg machined metal; remaining structure uses 21 kg machined metal.
+  - Electronics mass set to 2 kg for control and drive components.
+  Rationale:
+  - Preserve mass balance for 25 kg cryocooler placeholder.
+  Uncertainty:
+  - Component mass split needs refinement once detailed BOM exists.

@@ -4,17 +4,17 @@ target_item_id: mining_equipment
 variant_id: v0
 inputs:
   - item_id: bulk_material_or_parts
-    qty: 1.0
+    qty: 4516.0
     unit: kg
   - item_id: steel_frame_heavy
-    qty: 2
-    unit: unit
+    qty: 280.0
+    unit: kg
   - item_id: motor_electric_large
-    qty: 1
-    unit: unit
+    qty: 150.0
+    unit: kg
   - item_id: hydraulic_pump_basic
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: bearing_set_heavy
     qty: 2
     unit: unit
@@ -23,7 +23,7 @@ inputs:
     unit: unit
   - item_id: fastener_kit_medium
     qty: 6
-    unit: unit
+    unit: kg
 outputs:
   - item_id: mining_equipment
     qty: 1.0
@@ -32,23 +32,26 @@ steps:
   - process_id: import_receiving_basic_v0
     inputs:
       - item_id: bulk_material_or_parts
-        qty: 1.0
+        qty: 4516.0
         unit: kg
     outputs:
       - item_id: bulk_material_or_parts
-        qty: 1.0
+        qty: 4516.0
         unit: kg
   - process_id: assembly_basic_v0
     inputs:
+      - item_id: bulk_material_or_parts
+        qty: 4516.0
+        unit: kg
       - item_id: steel_frame_heavy
-        qty: 2
-        unit: unit
+        qty: 280.0
+        unit: kg
       - item_id: motor_electric_large
-        qty: 1
-        unit: unit
+        qty: 150.0
+        unit: kg
       - item_id: hydraulic_pump_basic
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
       - item_id: bearing_set_heavy
         qty: 2
         unit: unit
@@ -57,7 +60,7 @@ steps:
         unit: unit
       - item_id: fastener_kit_medium
         qty: 6
-        unit: unit
+        unit: kg
     outputs:
       - item_id: mining_equipment
         qty: 1.0

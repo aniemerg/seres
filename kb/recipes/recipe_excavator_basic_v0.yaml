@@ -82,14 +82,21 @@ steps:
   - process_id: load_testing_and_commissioning_v0
     inputs:
       - item_id: assembled_equipment
+        qty: 3000.0
+        unit: kg
+      - item_id: wired_electrical_system
         qty: 1.0
         unit: unit
     outputs:
       - item_id: excavator_basic
         qty: 1.0
         unit: unit
+    byproducts:
+      - item_id: assembly_loss
+        qty: 15.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
-    notes: "Test all hydraulic functions, verify boom reach and digging force, load test, operator training"
+    notes: "Test all hydraulic functions, verify boom reach and digging force, load test, operator training. Note: assembled_equipment mass override to 3000 kg to match excavator final mass. 15 kg assembly waste from packaging/trim."
 assumptions: Heavy welded steel construction with electric-hydraulic drive system. Four hydraulic cylinders for boom/stick/bucket/swing. Total mass ~3000 kg.
 notes: Excavator assembly from fabricated and machined components. Electric-hydraulic excavator for mining and earthmoving on the lunar surface.

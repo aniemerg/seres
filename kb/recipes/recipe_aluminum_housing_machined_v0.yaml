@@ -8,7 +8,7 @@ inputs:
     unit: kg
   - item_id: cutting_fluid
     qty: 0.5
-    unit: L
+    unit: kg
 outputs:
   - item_id: aluminum_housing_machined_v0
     qty: 3.0
@@ -30,9 +30,13 @@ steps:
         unit: kg
       - item_id: cutting_fluid
         qty: 0.5
-        unit: L
+        unit: kg
     outputs:
       - item_id: aluminum_housing_machined_v0
         qty: 3.0
         unit: kg
-notes: "Two-step path: rough stock -> machined_part -> final aluminum housing machined. Mass balance assumed with 3 kg final mass; adjust if needed."
+notes: |
+  Assumptions:
+  - Cutting fluid modeled in kg for mass balance (density ~1 kg/L).
+  Rationale:
+  - Convert units to avoid mass balance conversion errors.

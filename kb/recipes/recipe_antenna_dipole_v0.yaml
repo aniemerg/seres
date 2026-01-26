@@ -3,14 +3,14 @@ target_item_id: antenna_dipole_v0
 variant_id: v0
 inputs:
   - item_id: antenna_elements_cut
-    qty: 0.48
+    qty: 0.825
     unit: kg
   - item_id: insulator_drilled
     qty: 0.075
     unit: kg
   - item_id: coaxial_connector_n_type
-    qty: 1.0
-    unit: each
+    qty: 0.05
+    unit: kg
   - item_id: wire_copper_insulated
     qty: 0.05
     unit: kg
@@ -22,14 +22,14 @@ steps:
   - process_id: assembly_process_general_v0
     inputs:
       - item_id: antenna_elements_cut
-        qty: 0.48
+        qty: 0.825
         unit: kg
       - item_id: insulator_drilled
         qty: 0.075
         unit: kg
       - item_id: coaxial_connector_n_type
-        qty: 1.0
-        unit: each
+        qty: 0.05
+        unit: kg
       - item_id: wire_copper_insulated
         qty: 0.05
         unit: kg
@@ -49,3 +49,4 @@ notes: |
   Simple, effective antenna design for radio communications.
   Length adjusted for operating frequency (λ/2).
   VSWR testing recommended to verify resonance.
+  Element mass scaled to match 1.0 kg output placeholder.

@@ -25,6 +25,9 @@ inputs:
   - item_id: support_frame_welded
     qty: 1
     unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 37
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1
     unit: unit
@@ -53,6 +56,9 @@ steps:
       - item_id: support_frame_welded
         qty: 1
         unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 37
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
@@ -63,4 +69,8 @@ steps:
     est_time_hr: 6.0
     notes: Local fabrication path via assembly for unversioned target.
 assumptions: None
-notes: Placeholder recipe to resolve no_recipe gap for surface_treatment_station (unversioned).
+notes: |
+  Assumptions:
+  - Added sheet/plate steel for enclosure/guards not captured in component set.
+  Rationale:
+  - Balances assembly mass to match surface_treatment_station output.

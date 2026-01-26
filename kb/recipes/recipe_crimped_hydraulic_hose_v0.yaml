@@ -4,7 +4,7 @@ target_item_id: crimped_hydraulic_hose_v0
 variant_id: v0
 inputs:
   - item_id: hydraulic_hose_segment_v0
-    qty: 1.0
+    qty: 5.0
     unit: unit
   - item_id: hose_end_fittings_v0
     qty: 2.0
@@ -17,7 +17,7 @@ steps:
   - process_id: hose_crimping_v0
     inputs:
       - item_id: hydraulic_hose_segment_v0
-        qty: 1.0
+        qty: 5.0
         unit: unit
       - item_id: hose_end_fittings_v0
         qty: 2.0
@@ -26,4 +26,8 @@ steps:
       - item_id: crimped_hydraulic_hose_v0
         qty: 1.0
         unit: unit
-notes: "Basic recipe to manufacture a crimped hydraulic hose by crimping a hydraulic hose segment with hose end fittings. Inputs are produced by their respective recipes."
+    est_time_hr: 0.3
+    labor_hours: 0.3
+    notes: "Crimp multiple hose segments together with end fittings to create crimped hydraulic hose assembly"
+notes: "Crimped hydraulic hose assembly from 5 hose segments (0.5 kg total) and 2 end fittings (0.5 kg total) = 1 kg total. Increased hose segment quantity from 1 to 5 units to match output mass."
+assumptions: "Simple hose crimping operation. Uses 5 hose segments joined with 2 end fittings to create a 1 kg hydraulic hose assembly for use in hydraulic systems."

@@ -23,8 +23,8 @@ inputs:
     unit: unit
 outputs:
   - item_id: hot_wire_cutter_v0
-    qty: 1.0
-    unit: unit
+    qty: 37.3
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     inputs:
@@ -65,19 +65,19 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 37.3
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 37.3
+        unit: kg
     outputs:
       - item_id: hot_wire_cutter_v0
-        qty: 1.0
-        unit: unit
+        qty: 37.3
+        unit: kg
     est_time_hr: 0.25
     labor_hours: 0.25
 assumptions: Assemble hot wire cutter from BOM; imported compute/sensors.

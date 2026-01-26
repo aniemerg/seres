@@ -27,6 +27,9 @@ steps:
     notes: "Cut sheet for hood panels and flange."
   - process_id: welded_fabrication_basic_v0
     inputs:
+      - item_id: cut_parts
+        qty: 9.5
+        unit: kg
       - item_id: steel_stock
         qty: 10.0
         unit: kg
@@ -35,7 +38,7 @@ steps:
         unit: kg
     outputs:
       - item_id: welded_fabrications
-        qty: 9.5
+        qty: 12.0
         unit: kg
     est_time_hr: 1.0
     machine_hours: 0.8
@@ -44,14 +47,20 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_fabrications
-        qty: 9.5
+        qty: 12.0
         unit: kg
     outputs:
       - item_id: dust_collection_hood
-        qty: 1.0
-        unit: unit
+        qty: 12.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Fit gaskets, clamps, and interface to ducting."
 assumptions: Steel sheet; sized for small/medium grinders/saws.
-notes: Fabrication of dust collection hood for source capture.
+notes: |
+  Assumptions:
+  - Welded fabrications output set to 12 kg to match hood mass placeholder.
+  Rationale:
+  - Connect cut parts into welding step and preserve mass balance.
+  Uncertainty:
+  - Actual scrap rate and accessory mass (gaskets/clamps) need refinement.

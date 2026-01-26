@@ -8,8 +8,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: laser_power_control_system_v0
-    qty: 1
-    unit: unit
+    qty: 8.0
+    unit: kg
 steps:
   - process_id: import_receiving_basic_v0
     inputs:
@@ -25,23 +25,23 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: equipment_imported
-        qty: 1
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: equipment_imported
-        qty: 1
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
   - process_id: calibration_basic_v0
     inputs:
       - item_id: equipment_imported
-        qty: 1
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: laser_power_control_system_v0
-        qty: 1
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
 assumptions: "Local manufacture path for laser power control system v0; replaces import placeholder."

@@ -17,8 +17,8 @@ inputs:
     qty: 0.5
     unit: kg
   - item_id: control_components
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
 outputs:
   - item_id: chemical_bath_heaters
     qty: 1.0
@@ -60,6 +60,10 @@ steps:
       - item_id: motor_coil_wound
         qty: 2.0
         unit: kg
+    byproducts:
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Wind heating coil or install heating elements"
@@ -69,12 +73,12 @@ steps:
         qty: 0.5
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 5.5
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install power electronics, temperature controller, safety interlocks"
@@ -87,8 +91,8 @@ steps:
         qty: 2.0
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 5.5
+        unit: kg
     outputs:
       - item_id: chemical_bath_heaters
         qty: 1.0

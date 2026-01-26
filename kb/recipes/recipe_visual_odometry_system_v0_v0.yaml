@@ -21,13 +21,13 @@ inputs:
   - item_id: electronic_components_set
     qty: 1.0
     unit: kg
-  - item_id: assembled_equipment
+  - item_id: steel_plate_or_sheet
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: visual_odometry_system_v0_v0
-    qty: 1.0
-    unit: unit
+    qty: 6.0
+    unit: kg
 steps:
   - process_id: machine_assembly_basic_v0
     inputs:
@@ -45,24 +45,27 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 4.0
+        unit: kg
     notes: Assemble VO sensor module base frame, housing, and electronics into submodule
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: enclosure_electrical_medium
+        qty: 4.0
+        unit: kg
+      - item_id: steel_plate_or_sheet
         qty: 1.0
         unit: kg
+    outputs:
+      - item_id: enclosure_small
+        qty: 1.0
+        unit: unit
     notes: Mount VO submodule into enclosure and attach shielding
   - process_id: wiring_and_electronics_integration_v0
     inputs:
-      - item_id: enclosure_electrical_medium
+      - item_id: enclosure_small
         qty: 1.0
-        unit: kg
+        unit: unit
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
@@ -71,7 +74,14 @@ steps:
         unit: kg
     outputs:
       - item_id: visual_odometry_system_v0_v0
+        qty: 6.0
+        unit: kg
+    byproducts:
+      - item_id: assembly_waste
         qty: 1.0
-        unit: unit
+        unit: kg
     notes: Integrate wiring, sensors, and camera interface for visual odometry
-notes: Basic manufacturing path for Visual Odometry System v0_v0; placeholder until BOMs defined.
+notes: |
+  Assumptions:
+  - Output mass aligned to current item mass (6 kg); enclosure output uses unit to match item definition.
+  Basic manufacturing path for Visual Odometry System v0_v0; placeholder until BOMs defined.

@@ -38,62 +38,45 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machine_base_large
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: grinding_spindle_assembly
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: table_drive_assembly
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: magnetic_chuck_surface_grinder
-        qty: 1.0
-        unit: unit
-      - item_id: fastener_kit_large
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Assemble grinding spindle, table drive, column, magnetic chuck"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: control_compute_module_imported
-        qty: 1.0
-        unit: unit
-      - item_id: sensor_suite_general
-        qty: 1.0
-        unit: unit
-      - item_id: power_conditioning_module
-        qty: 1.0
+        qty: 1
         unit: unit
       - item_id: coolant_system_basic
-        qty: 1.0
+        qty: 1
         unit: unit
-    outputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
+      - item_id: control_compute_module_imported
+        qty: 1
         unit: unit
-    est_time_hr: 3.0
-    labor_hours: 3.0
-    notes: "Install spindle motor, table motors, chuck power, coolant pump"
-  - process_id: precision_alignment_and_leveling_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
+      - item_id: sensor_suite_general
+        qty: 1
         unit: unit
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
+      - item_id: power_conditioning_module
+        qty: 1
         unit: unit
+      - item_id: fastener_kit_large
+        qty: 1
+        unit: kg
     outputs:
       - item_id: surface_grinder
-        qty: 1.0
+        qty: 1
         unit: unit
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Align spindle perpendicularity, level machine base"
+    est_time_hr: 11.0
+    labor_hours: 11.0
+    notes: "Assemble grinding spindle, table drive, column, and magnetic chuck onto machine base. Install spindle motor, table motors, chuck power, and coolant pump. Wire control module, sensors, and power conditioning. Align spindle perpendicularity and level machine base. Total assembly, wiring, and alignment time: ~11 hours."
 assumptions: Grinding spindle and magnetic chuck fabricated separately.
-notes: Precision surface grinding machine for tight tolerances.
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Consolidated 3 steps (assembly → wiring → alignment) into single final assembly step
+  - Previous structure had parallel component builds (assembled_equipment, assembled_electrical_equipment) that never properly combined
+  - Final step now includes all components directly: base, spindle, table drive, chuck, coolant, controls, sensors, power, fasteners
+  - Total time: ~11 hours (assembly + wiring + alignment)
+
+  Precision surface grinding machine for tight tolerances.

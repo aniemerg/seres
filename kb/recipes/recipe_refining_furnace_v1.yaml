@@ -6,6 +6,9 @@ inputs:
   - item_id: regolith_metal_crude
     qty: 500.0
     unit: kg
+  - item_id: steel_frame_heavy
+    qty: 280.0
+    unit: kg
   - item_id: furnace_shell_insulated
     qty: 1.0
     unit: unit
@@ -70,6 +73,10 @@ steps:
       - item_id: heating_element_set_basic
         qty: 1.0
         unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 900.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: furnace_shell_insulated
@@ -88,25 +95,32 @@ steps:
         qty: 2.0
         unit: kg
       - item_id: control_components
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 7.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: enclosure_electrical_medium
-        qty: 1.0
-        unit: unit
+        qty: 4.0
+        unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 7.0
+        unit: kg
       - item_id: temperature_controller_basic
-        qty: 1.0
-        unit: unit
+        qty: 12.0
+        unit: kg
+      - item_id: assembled_equipment
+        qty: 900.0
+        unit: kg
+      - item_id: steel_frame_heavy
+        qty: 277.0
+        unit: kg
     outputs:
       - item_id: refining_furnace
-        qty: 1.0
-        unit: unit
+        qty: 1200.0
+        unit: kg
+    notes: "Final assembly: 4 + 7 + 12 + 900 + 277 = 1200 kg"
 notes: "Non-v0 recipe to manufacture refining_furnace using furnace fabrication pattern."

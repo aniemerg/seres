@@ -7,10 +7,10 @@ inputs:
     qty: 1
     unit: unit
   - item_id: saw_or_cutting_tool
-    qty: 2
+    qty: 4
     unit: unit
   - item_id: shear_blade_or_saw_band
-    qty: 1
+    qty: 2
     unit: unit
   - item_id: fastener_kit_small
     qty: 1
@@ -26,10 +26,10 @@ steps:
         qty: 1
         unit: unit
       - item_id: saw_or_cutting_tool
-        qty: 2
+        qty: 4
         unit: unit
       - item_id: shear_blade_or_saw_band
-        qty: 1
+        qty: 2
         unit: unit
       - item_id: fastener_kit_small
         qty: 1
@@ -41,4 +41,10 @@ steps:
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble cutting tools from BOM components"
-notes: "Assemble cutting tools from BOM components; placeholder assembly recipe."
+notes: |
+  Assumptions:
+  - Tool set mass balanced by increasing saw/blade quantities within kit.
+  Rationale:
+  - Matches cutting_tools_general mass (30 kg) without introducing new items.
+  Uncertainty:
+  - Actual composition of cutting tool set needs refinement.

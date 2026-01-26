@@ -14,12 +14,9 @@ steps:
         unit: kg
     outputs:
       - item_id: cathode_oxide_layer_v0
-        qty: 1.0
-        unit: kg
-      - item_id: nickel_oxide_waste_v0
-        qty: 0.1
+        qty: 0.9
         unit: kg
     est_time_hr: 0.5
     machine_hours: 0.5
-    notes: "Coat nickel sheet with oxide layer; produces waste oxide as byproduct"
+    notes: "Coat nickel sheet with oxide layer; 0.1 kg becomes waste oxide byproduct (conserves mass: 1.0 kg input → 0.9 kg output + 0.1 kg waste)"
 notes: "Generate nickel oxide waste as a byproduct of cathode oxide coating; placeholder to enable waste mass balance for nickel_oxide_waste_v0."

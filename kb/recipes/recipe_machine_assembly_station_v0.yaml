@@ -3,60 +3,66 @@ target_item_id: assembly_station_v0
 variant_id: v0
 inputs:
   - item_id: tool_station_frame
-    qty: 1
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: tool_set_general
-    qty: 1
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
   - item_id: power_conditioning_module
     qty: 1
     unit: unit
   - item_id: sensor_suite_general
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: control_compute_module_imported
     qty: 1
     unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 80.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: tool_station_frame
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
       - item_id: tool_set_general
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
       - item_id: power_conditioning_module
         qty: 1
         unit: unit
       - item_id: sensor_suite_general
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: control_compute_module_imported
         qty: 1
         unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 80.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble assembly station from BOM components"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 200.0
+        unit: kg
     outputs:
       - item_id: assembly_station_v0
-        qty: 1
-        unit: unit
+        qty: 200.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Inspect and test assembly station"

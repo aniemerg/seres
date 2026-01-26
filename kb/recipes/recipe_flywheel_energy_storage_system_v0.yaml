@@ -3,33 +3,37 @@ kind: recipe
 target_item_id: flywheel_energy_storage_system_v0
 inputs:
   - item_id: flywheel_rotor_composite_v0
-    qty: 1.0
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: flywheel_vacuum_housing_v0
-    qty: 1.0
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: magnetic_bearing_passive_v0
-    qty: 1.0
-    unit: unit
+    qty: 10.0
+    unit: kg
 outputs:
   - item_id: flywheel_energy_storage_system_v0
-    qty: 1.0
-    unit: unit
+    qty: 150.0
+    unit: kg
 steps:
   - process_id: flywheel_energy_storage_system_assembly_v0
     inputs:
       - item_id: flywheel_rotor_composite_v0
-        qty: 1.0
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: flywheel_vacuum_housing_v0
-        qty: 1.0
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: magnetic_bearing_passive_v0
-        qty: 1.0
-        unit: unit
+        qty: 10.0
+        unit: kg
     outputs:
       - item_id: flywheel_energy_storage_system_v0
-        qty: 1.0
-        unit: unit
+        qty: 150.0
+        unit: kg
     notes: "Assembles energy storage flywheel from rotor composite, vacuum housing, and bearing"
-notes: "Assembles energy storage flywheel from rotor composite, vacuum housing, and bearing"
+notes: |
+  Assumptions:
+  - Scaled rotor composite, housing, and bearing masses to total 150 kg output.
+  Rationale:
+  - Aligns assembly mass balance for flywheel_energy_storage_system_v0.

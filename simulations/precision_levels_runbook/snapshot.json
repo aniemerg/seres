@@ -156,7 +156,7 @@
       },
       "surface_grinder": {
         "in_situ_kg": 0.0,
-        "imported_kg": 1200.0,
+        "imported_kg": 950.0,
         "unknown_kg": 0.0
       },
       "coordinate_measuring_machine": {
@@ -194,19 +194,9 @@
         "imported_kg": 1.4751049861004322,
         "unknown_kg": 0.0
       },
-      "instrument_uncalibrated": {
-        "in_situ_kg": 1.1356242976282012,
-        "imported_kg": 2.864375702371799,
-        "unknown_kg": 0.0
-      },
-      "instrument_calibrated": {
-        "in_situ_kg": 0.0,
-        "imported_kg": 0.0,
-        "unknown_kg": 0.0
-      },
       "precision_levels": {
-        "in_situ_kg": 0.2839060744070503,
-        "imported_kg": 1.7160939255929497,
+        "in_situ_kg": 1.4195303720352515,
+        "imported_kg": 4.5804696279647485,
         "unknown_kg": 0.0
       },
       "chemical_reactor_basic": {
@@ -257,9 +247,7 @@
     },
     "complexity_scores": {
       "machined_steel_part_precision": 4,
-      "instrument_uncalibrated": 5,
-      "instrument_calibrated": 6,
-      "precision_levels": 7,
+      "precision_levels": 5,
       "regolith_lunar_highlands": 1,
       "alumina_powder": 2,
       "processed_tailings_v0": 2,
@@ -267,7 +255,7 @@
       "co2_gas": 3,
       "cryolite_flux": 3
     },
-    "total_energy_kwh": 101.19999999999999
+    "total_energy_kwh": 101.0
   },
   "scheduler": {
     "current_time": 68.0,
@@ -275,7 +263,7 @@
     "active_processes": {},
     "completed_processes": [
       {
-        "process_run_id": "0e7524b5-ff59-4ab2-b954-57f374f89a8d",
+        "process_run_id": "44aa251a-8d8c-43a1-816e-24b2902e191a",
         "process_id": "machining_precision_v0",
         "start_time": 0.0,
         "duration_hours": 1.0,
@@ -308,12 +296,12 @@
           "aluminum_alloy_ingot": "kg",
           "cutting_fluid": "kg"
         },
-        "recipe_run_id": "a12d55ab-1ebf-499f-a8a7-f5762753d957",
+        "recipe_run_id": "661adab0-8720-49cb-85f8-b96cb937d730",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "ee96e0b1-af3b-434d-8693-a4594ddd298d",
+        "process_run_id": "27e59155-cc2b-403a-b20e-5bd978f52324",
         "process_id": "assembly_basic_v0",
         "start_time": 1.0,
         "duration_hours": 1.0,
@@ -323,10 +311,10 @@
           "machined_steel_part_precision": 3.0
         },
         "outputs_pending": {
-          "instrument_uncalibrated": 1.0
+          "precision_levels": 1.0
         },
         "outputs_pending_units": {
-          "instrument_uncalibrated": "unit"
+          "precision_levels": "unit"
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
@@ -340,75 +328,12 @@
         "inputs_consumed_units": {
           "machined_steel_part_precision": "kg"
         },
-        "recipe_run_id": "a12d55ab-1ebf-499f-a8a7-f5762753d957",
+        "recipe_run_id": "661adab0-8720-49cb-85f8-b96cb937d730",
         "step_index": 1,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "d7b13535-c6d5-4e6f-94ae-3601e51eb54a",
-        "process_id": "calibration_basic_v0",
-        "start_time": 2.0,
-        "duration_hours": 1.0,
-        "end_time": 3.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "instrument_uncalibrated": 1.0
-        },
-        "outputs_pending": {
-          "instrument_calibrated": 1.0
-        },
-        "outputs_pending_units": {
-          "instrument_calibrated": "unit"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "measurement_equipment": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 1.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "instrument_uncalibrated": "unit"
-        },
-        "recipe_run_id": "a12d55ab-1ebf-499f-a8a7-f5762753d957",
-        "step_index": 2,
-        "energy_kwh": 0.1
-      },
-      {
-        "process_run_id": "b98a702b-bb2c-4876-ba09-5640dff4a725",
-        "process_id": "inspection_basic_v0",
-        "start_time": 3.0,
-        "duration_hours": 1.0,
-        "end_time": 4.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "instrument_calibrated": 1.0
-        },
-        "outputs_pending": {
-          "precision_levels": 1.0
-        },
-        "outputs_pending_units": {
-          "precision_levels": "unit"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.0,
-          "imported_kg": 1.0,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "instrument_calibrated": "unit"
-        },
-        "recipe_run_id": "a12d55ab-1ebf-499f-a8a7-f5762753d957",
-        "step_index": 3,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "c2a567f0-c52f-43cd-96a7-5a83b5d19007",
+        "process_run_id": "92b0441d-2af6-48b1-9da8-3f9aa49c68fc",
         "process_id": "regolith_mining_lunar_highlands_v0",
         "start_time": 8.0,
         "duration_hours": 1.0,
@@ -430,12 +355,12 @@
           "unknown_kg": 0.0
         },
         "inputs_consumed_units": {},
-        "recipe_run_id": "440f47e0-5c80-4357-b244-ca33d1352145",
+        "recipe_run_id": "3576dbba-6b8e-45be-bb0f-2e41951bad66",
         "step_index": 0,
         "energy_kwh": 5.0
       },
       {
-        "process_run_id": "e8ab9486-931e-43b7-a8f0-f92865e7d932",
+        "process_run_id": "549805cf-7b13-45d7-bf17-dfa4a69480f9",
         "process_id": "alumina_extraction_from_highlands_v0",
         "start_time": 10.0,
         "duration_hours": 10.0,
@@ -466,12 +391,12 @@
           "regolith_lunar_highlands": "kg",
           "hydrochloric_acid": "kg"
         },
-        "recipe_run_id": "e2ca7217-76a1-48bc-9a06-d430800c3283",
+        "recipe_run_id": "fd14bd86-fd2a-4cba-9410-c8c55bb625b2",
         "step_index": 0,
         "energy_kwh": 36.0
       },
       {
-        "process_run_id": "f037f5bb-2814-435f-aeac-ae15d378d812",
+        "process_run_id": "d0505683-f081-49b6-8ad0-956f57ff097a",
         "process_id": "aluminum_smelting_hall_heroult_v0",
         "start_time": 20.0,
         "duration_hours": 32.0,
@@ -506,12 +431,12 @@
           "carbon_anode": "kg",
           "cryolite_flux": "kg"
         },
-        "recipe_run_id": "3a6deda8-c286-46a5-b8a0-995c1edac6a9",
+        "recipe_run_id": "395dd670-5301-43c8-b3a1-d4277273b618",
         "step_index": 0,
         "energy_kwh": 60.0
       },
       {
-        "process_run_id": "c19540a8-fdca-4715-967b-b4ed729173ff",
+        "process_run_id": "98557dd7-e62d-44a6-9ab1-287fe664341a",
         "process_id": "machining_precision_v0",
         "start_time": 60.0,
         "duration_hours": 1.0,
@@ -544,12 +469,12 @@
           "aluminum_alloy_ingot": "kg",
           "cutting_fluid": "kg"
         },
-        "recipe_run_id": "83b9b1da-88a8-4aac-b051-33815416339a",
+        "recipe_run_id": "1f94a4fb-28f6-4d9a-ad07-9aa37cfb350c",
         "step_index": 0,
         "energy_kwh": 0.0
       },
       {
-        "process_run_id": "01d1c8aa-9274-4830-a72a-d82be747f2f2",
+        "process_run_id": "6e9d0fc4-ed32-4a38-a08b-58a055fc44b8",
         "process_id": "assembly_basic_v0",
         "start_time": 61.0,
         "duration_hours": 1.0,
@@ -559,10 +484,10 @@
           "machined_steel_part_precision": 3.0
         },
         "outputs_pending": {
-          "instrument_uncalibrated": 1.0
+          "precision_levels": 1.0
         },
         "outputs_pending_units": {
-          "instrument_uncalibrated": "unit"
+          "precision_levels": "unit"
         },
         "machines_reserved": {
           "labor_bot_general_v0": 1.0,
@@ -576,80 +501,17 @@
         "inputs_consumed_units": {
           "machined_steel_part_precision": "kg"
         },
-        "recipe_run_id": "83b9b1da-88a8-4aac-b051-33815416339a",
+        "recipe_run_id": "1f94a4fb-28f6-4d9a-ad07-9aa37cfb350c",
         "step_index": 1,
-        "energy_kwh": 0.0
-      },
-      {
-        "process_run_id": "2e84cba8-2776-4e54-a762-b0adba8563ef",
-        "process_id": "calibration_basic_v0",
-        "start_time": 62.0,
-        "duration_hours": 1.0,
-        "end_time": 63.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "instrument_uncalibrated": 1.0
-        },
-        "outputs_pending": {
-          "instrument_calibrated": 1.0
-        },
-        "outputs_pending_units": {
-          "instrument_calibrated": "unit"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0,
-          "measurement_equipment": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.2839060744070503,
-          "imported_kg": 0.7160939255929497,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "instrument_uncalibrated": "unit"
-        },
-        "recipe_run_id": "83b9b1da-88a8-4aac-b051-33815416339a",
-        "step_index": 2,
-        "energy_kwh": 0.1
-      },
-      {
-        "process_run_id": "805bb825-3709-4aa4-8944-f561b7e0453e",
-        "process_id": "inspection_basic_v0",
-        "start_time": 63.0,
-        "duration_hours": 1.0,
-        "end_time": 64.0,
-        "scale": 1.0,
-        "inputs_consumed": {
-          "instrument_calibrated": 1.0
-        },
-        "outputs_pending": {
-          "precision_levels": 1.0
-        },
-        "outputs_pending_units": {
-          "precision_levels": "unit"
-        },
-        "machines_reserved": {
-          "labor_bot_general_v0": 1.0
-        },
-        "provenance_consumed_kg": {
-          "in_situ_kg": 0.2839060744070503,
-          "imported_kg": 0.7160939255929497,
-          "unknown_kg": 0.0
-        },
-        "inputs_consumed_units": {
-          "instrument_calibrated": "unit"
-        },
-        "recipe_run_id": "83b9b1da-88a8-4aac-b051-33815416339a",
-        "step_index": 3,
         "energy_kwh": 0.0
       }
     ],
-    "total_events_processed": 22
+    "total_events_processed": 14
   },
   "orchestrator": {
     "recipe_runs": {
-      "a12d55ab-1ebf-499f-a8a7-f5762753d957": {
-        "recipe_run_id": "a12d55ab-1ebf-499f-a8a7-f5762753d957",
+      "661adab0-8720-49cb-85f8-b96cb937d730": {
+        "recipe_run_id": "661adab0-8720-49cb-85f8-b96cb937d730",
         "recipe_id": "recipe_precision_levels_v0",
         "target_item_id": "precision_levels",
         "recipe_def": {
@@ -703,58 +565,6 @@
               ],
               "outputs": [
                 {
-                  "item_id": "instrument_uncalibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 1.5,
-              "labor_hours": 1.5,
-              "machine_hours": null,
-              "notes": "Install spirit vials or electronic sensor modules in machined body"
-            },
-            {
-              "process_id": "calibration_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "instrument_uncalibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "instrument_calibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 2.0,
-              "labor_hours": 2.0,
-              "machine_hours": null,
-              "notes": "Calibrate levels against reference surface to 0.02 mm/m accuracy"
-            },
-            {
-              "process_id": "inspection_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "instrument_calibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
                   "item_id": "precision_levels",
                   "qty": 1.0,
                   "unit": "unit",
@@ -762,10 +572,10 @@
                 }
               ],
               "byproducts": [],
-              "est_time_hr": 0.5,
-              "labor_hours": 0.5,
+              "est_time_hr": 4.0,
+              "labor_hours": 4.0,
               "machine_hours": null,
-              "notes": "Verify accuracy and repeatability of level readings"
+              "notes": "Install spirit vials or electronic sensor modules in machined body, calibrate against reference surface to 0.02 mm/m accuracy, verify accuracy and repeatability. Total post-machining time: 4 hours (assembly + calibration + inspection)."
             }
           ],
           "inputs": [
@@ -793,22 +603,20 @@
           "alternatives": [],
           "dedupe_candidate": null,
           "assumptions": "Precision levels for machine tool alignment. Includes both spirit vials and optional electronic sensors. 0.02 mm/m accuracy requirement.",
-          "notes": "Manufacturing of precision levels. Total fabrication time ~8 hours. Requires precision machining and calibration against known reference."
+          "notes": "Recipe corrected 2026-01 to fix circular dependency:\n- Removed redundant calibration_basic_v0 and inspection_basic_v0 steps that created self-reference\n- Consolidated calibration and inspection into final assembly step\n- Total fabrication time unchanged: ~8 hours (4 hr machining + 4 hr assembly/calibration/inspection)\n\nManufacturing of precision levels requires precision machining and calibration against known reference.\n"
         },
         "started_at": 0.0,
         "completed_steps": [
           0,
-          1,
-          2,
-          3
+          1
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 4.0
+        "completed_at": 2.0
       },
-      "440f47e0-5c80-4357-b244-ca33d1352145": {
-        "recipe_run_id": "440f47e0-5c80-4357-b244-ca33d1352145",
+      "3576dbba-6b8e-45be-bb0f-2e41951bad66": {
+        "recipe_run_id": "3576dbba-6b8e-45be-bb0f-2e41951bad66",
         "recipe_id": "recipe_regolith_lunar_highlands_v0",
         "target_item_id": "regolith_lunar_highlands",
         "recipe_def": {
@@ -861,8 +669,8 @@
         "is_completed": true,
         "completed_at": 9.0
       },
-      "e2ca7217-76a1-48bc-9a06-d430800c3283": {
-        "recipe_run_id": "e2ca7217-76a1-48bc-9a06-d430800c3283",
+      "fd14bd86-fd2a-4cba-9410-c8c55bb625b2": {
+        "recipe_run_id": "fd14bd86-fd2a-4cba-9410-c8c55bb625b2",
         "recipe_id": "recipe_alumina_powder_v0",
         "target_item_id": "alumina_powder",
         "recipe_def": {
@@ -939,8 +747,8 @@
         "is_completed": true,
         "completed_at": 20.0
       },
-      "3a6deda8-c286-46a5-b8a0-995c1edac6a9": {
-        "recipe_run_id": "3a6deda8-c286-46a5-b8a0-995c1edac6a9",
+      "395dd670-5301-43c8-b3a1-d4277273b618": {
+        "recipe_run_id": "395dd670-5301-43c8-b3a1-d4277273b618",
         "recipe_id": "recipe_aluminum_alloy_ingot_v0",
         "target_item_id": "aluminum_alloy_ingot",
         "recipe_def": {
@@ -1036,8 +844,8 @@
         "is_completed": true,
         "completed_at": 52.0
       },
-      "83b9b1da-88a8-4aac-b051-33815416339a": {
-        "recipe_run_id": "83b9b1da-88a8-4aac-b051-33815416339a",
+      "1f94a4fb-28f6-4d9a-ad07-9aa37cfb350c": {
+        "recipe_run_id": "1f94a4fb-28f6-4d9a-ad07-9aa37cfb350c",
         "recipe_id": "recipe_precision_levels_v0",
         "target_item_id": "precision_levels",
         "recipe_def": {
@@ -1091,58 +899,6 @@
               ],
               "outputs": [
                 {
-                  "item_id": "instrument_uncalibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 1.5,
-              "labor_hours": 1.5,
-              "machine_hours": null,
-              "notes": "Install spirit vials or electronic sensor modules in machined body"
-            },
-            {
-              "process_id": "calibration_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "instrument_uncalibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
-                  "item_id": "instrument_calibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "byproducts": [],
-              "est_time_hr": 2.0,
-              "labor_hours": 2.0,
-              "machine_hours": null,
-              "notes": "Calibrate levels against reference surface to 0.02 mm/m accuracy"
-            },
-            {
-              "process_id": "inspection_basic_v0",
-              "time_model": null,
-              "energy_model": null,
-              "inputs": [
-                {
-                  "item_id": "instrument_calibrated",
-                  "qty": 1.0,
-                  "unit": "unit",
-                  "notes": null
-                }
-              ],
-              "outputs": [
-                {
                   "item_id": "precision_levels",
                   "qty": 1.0,
                   "unit": "unit",
@@ -1150,10 +906,10 @@
                 }
               ],
               "byproducts": [],
-              "est_time_hr": 0.5,
-              "labor_hours": 0.5,
+              "est_time_hr": 4.0,
+              "labor_hours": 4.0,
               "machine_hours": null,
-              "notes": "Verify accuracy and repeatability of level readings"
+              "notes": "Install spirit vials or electronic sensor modules in machined body, calibrate against reference surface to 0.02 mm/m accuracy, verify accuracy and repeatability. Total post-machining time: 4 hours (assembly + calibration + inspection)."
             }
           ],
           "inputs": [
@@ -1181,19 +937,17 @@
           "alternatives": [],
           "dedupe_candidate": null,
           "assumptions": "Precision levels for machine tool alignment. Includes both spirit vials and optional electronic sensors. 0.02 mm/m accuracy requirement.",
-          "notes": "Manufacturing of precision levels. Total fabrication time ~8 hours. Requires precision machining and calibration against known reference."
+          "notes": "Recipe corrected 2026-01 to fix circular dependency:\n- Removed redundant calibration_basic_v0 and inspection_basic_v0 steps that created self-reference\n- Consolidated calibration and inspection into final assembly step\n- Total fabrication time unchanged: ~8 hours (4 hr machining + 4 hr assembly/calibration/inspection)\n\nManufacturing of precision levels requires precision machining and calibration against known reference.\n"
         },
         "started_at": 60.0,
         "completed_steps": [
           0,
-          1,
-          2,
-          3
+          1
         ],
         "active_steps": {},
         "scheduled_steps": {},
         "is_completed": true,
-        "completed_at": 64.0
+        "completed_at": 62.0
       }
     }
   },

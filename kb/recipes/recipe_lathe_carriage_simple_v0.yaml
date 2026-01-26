@@ -9,8 +9,8 @@ inputs:
     notes: "Cast iron or steel for carriage components"
 outputs:
   - item_id: lathe_carriage_simple
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
 steps:
   - process_id: casting_or_fabrication_machine_frame_v0
     inputs:
@@ -19,8 +19,8 @@ steps:
         unit: kg
     outputs:
       - item_id: lathe_carriage_and_cross_slide
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 3.5
     machine_hours: 2.5
     labor_hours: 2.0
@@ -28,12 +28,12 @@ steps:
   - process_id: machining_basic_v0
     inputs:
       - item_id: lathe_carriage_and_cross_slide
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: machined_metal_block_v0
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 3.5
     labor_hours: 2.0
@@ -41,12 +41,12 @@ steps:
   - process_id: precision_grinding_and_scraping_v0
     inputs:
       - item_id: machined_metal_block_v0
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: finished_part
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 5.0
     machine_hours: 3.5
     labor_hours: 3.0
@@ -54,14 +54,18 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: finished_part
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: lathe_carriage_simple
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Assemble carriage components: install leadscrew nut, cross-slide with feed screw and handwheel, compound rest with angle scale, apron with manual feed mechanism"
 assumptions: Bronze or cast iron gibs fabricated separately. Cross-slide and compound feed screws machined from steel bar stock.
-notes: Complete carriage assembly fabrication for manual engine lathe. Enables precise tool positioning in longitudinal, cross, and compound directions.
+notes: |
+  Assumptions:
+  - Intermediate mass flows scaled to 25 kg final carriage mass.
+  Rationale:
+  - Aligns assembly step mass balance with lathe_carriage_simple output.

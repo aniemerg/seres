@@ -12,7 +12,7 @@ inputs:
     unit: kg
   - item_id: water
     qty: 0.01
-    unit: L
+    unit: kg
 outputs:
   - item_id: capacitor_ceramic_generic
     qty: 0.05
@@ -25,7 +25,7 @@ steps:
         unit: kg
       - item_id: water
         qty: 0.01
-        unit: L
+        unit: kg
     outputs:
       - item_id: capacitor_ceramic_generic
         qty: 0.05
@@ -34,4 +34,6 @@ steps:
     machine_hours: 6.0
     labor_hours: 2.8
     notes: "Form green ceramic capacitor body, dry, fire to densify, machine finish, and inspect"
-notes: "Placeholder recipe to manufacture capacitor_ceramic_generic via ceramic forming and firing; mass and properties may be adjusted as BOMs mature."
+notes: |
+  Placeholder recipe to manufacture capacitor_ceramic_generic via ceramic forming and firing; mass and properties may be adjusted as BOMs mature.
+  Mass balance: water input set to kg to avoid L→kg conversion without density.

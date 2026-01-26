@@ -5,7 +5,7 @@ target_item_id: mineral_processing_unit
 variant_id: v0
 inputs:
   - item_id: machine_frame_heavy
-    qty: 1.0
+    qty: 4.0
     unit: unit
   - item_id: power_conditioning_module
     qty: 1.0
@@ -27,7 +27,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machine_frame_heavy
-        qty: 1.0
+        qty: 4.0
         unit: unit
       - item_id: power_conditioning_module
         qty: 1.0
@@ -46,4 +46,10 @@ steps:
         qty: 1.0
         unit: unit
     est_time_hr: 4.0
-notes: "Assemble mineral processing unit from BOM; placeholder assembly step."
+notes: |
+  Assumptions:
+  - Frame quantity scaled to balance 800 kg output mass placeholder.
+  Rationale:
+  - Avoids introducing new parts while preserving mass balance.
+  Uncertainty:
+  - Major subassemblies likely missing from BOM; needs refinement.

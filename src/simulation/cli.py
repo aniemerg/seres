@@ -1807,6 +1807,13 @@ def cmd_provenance(args, kb_loader: KBLoader):
     engine = load_or_create_simulation(args.sim_id, kb_loader)
     state = engine.get_state_dict()
     converter = UnitConverter(kb_loader)
+    def _is_scrap_item(item_id: str) -> bool:
+        item = kb_loader.get_item(item_id)
+        if item is None:
+            return False
+        if isinstance(item, dict):
+            return bool(item.get("is_scrap", False))
+        return bool(getattr(item, "is_scrap", False))
 
     # Handle JSON output
     if hasattr(args, 'json') and args.json:
@@ -1818,6 +1825,8 @@ def cmd_provenance(args, kb_loader: KBLoader):
 
         total_in_situ, total_imported, total_unknown = 0.0, 0.0, 0.0
         for item_id, prov_dict in state.get('provenance', {}).items():
+            if _is_scrap_item(item_id):
+                continue
             in_situ = prov_dict.get('in_situ_kg', 0.0)
             imported = prov_dict.get('imported_kg', 0.0)
             unknown = prov_dict.get('unknown_kg', 0.0)
@@ -1853,6 +1862,8 @@ def cmd_provenance(args, kb_loader: KBLoader):
     item_provenance = []
 
     for item_id, prov_dict in state.get('provenance', {}).items():
+        if _is_scrap_item(item_id):
+            continue
         in_situ = prov_dict.get('in_situ_kg', 0.0)
         imported = prov_dict.get('imported_kg', 0.0)
         unknown = prov_dict.get('unknown_kg', 0.0)

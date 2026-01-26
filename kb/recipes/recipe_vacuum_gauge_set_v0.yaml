@@ -15,12 +15,12 @@ inputs:
     unit: kg
     notes: "Viewing window or sensor glass elements"
   - item_id: electronic_components_set
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
     notes: "Signal conditioning, amplifier, and control electronics (imported)"
   - item_id: display_screen_small
-    qty: 1
-    unit: unit
+    qty: 0.5
+    unit: kg
     notes: "Readout display module (imported)"
   - item_id: electrical_wire_and_connectors
     qty: 0.2
@@ -32,8 +32,8 @@ inputs:
     notes: "Mounting hardware and seals"
 outputs:
   - item_id: vacuum_gauge_set
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: steel_scrap
     qty: 0.2
     unit: kg
@@ -49,7 +49,7 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.9
         unit: kg
       - item_id: steel_scrap
         qty: 0.2
@@ -60,48 +60,48 @@ steps:
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: display_screen_small
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 0.2
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 2.7
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install vacuum sensor, display electronics, and signal conditioning"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 0.9
         unit: kg
       - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
+        qty: 2.7
+        unit: kg
       - item_id: fastener_kit_small
         qty: 1.0
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 3.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Assemble gauge with sensor, display, and mounting hardware"
   - process_id: calibration_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 3.0
         unit: kg
     outputs:
       - item_id: vacuum_gauge_set
-        qty: 1.0
-        unit: unit
+        qty: 3.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Calibrate gauge against reference vacuum standards"

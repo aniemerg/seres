@@ -1061,6 +1061,18 @@ def validate_recipe_inputs_outputs(
     recipe_outputs = recipe_dict.get("outputs", [])
     steps = recipe_dict.get("steps", [])
 
+    if any(out.get("item_id") == "waste" for out in (recipe_outputs or [])):
+        issues.append(ValidationIssue(
+            level=ValidationLevel.ERROR,
+            category="recipe",
+            rule="recipe_outputs_waste_not_allowed",
+            entity_type="recipe",
+            entity_id=recipe_id,
+            message="Recipe outputs must not include 'waste' (use step outputs/byproducts only)",
+            field_path="outputs",
+            fix_hint="Remove 'waste' from recipe outputs and emit it in a step output/byproduct instead"
+        ))
+
     # Check if inputs resolvable
     if not recipe_inputs:
         # Check if ANY step has inputs (explicit or from process)
@@ -1574,10 +1586,12 @@ def validate_recipe(
             resolved_step = resolve_recipe_step_with_kb(step, kb)
             inputs = resolved_step.get("inputs", []) or []
             outputs = resolved_step.get("outputs", []) or []
-            if not inputs or not outputs:
+            byproducts = resolved_step.get("byproducts", []) or []
+            all_outputs = outputs + byproducts
+            if not inputs or not all_outputs:
                 continue
             try:
-                balance = calculate_mass_balance(inputs, outputs, converter)
+                balance = calculate_mass_balance(inputs, all_outputs, converter)
             except CalculationError as exc:
                 issues.append(ValidationIssue(
                     level=ValidationLevel.ERROR,

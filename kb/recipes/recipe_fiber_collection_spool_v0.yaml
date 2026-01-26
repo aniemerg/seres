@@ -4,23 +4,23 @@ variant_id: v0
 kind: recipe
 inputs:
   - item_id: steel_stock_bar_or_billet
-    qty: 15.0
+    qty: 9.0
     unit: kg
   - item_id: ball_bearing_steel_v0
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: motor_electric_small
-    qty: 2.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: sensor_suite_general
-    qty: 0.5
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: electrical_wire_and_connectors
     qty: 1.0
     unit: kg
   - item_id: electronic_components_set
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
 outputs:
   - item_id: fiber_collection_spool
     qty: 1
@@ -29,16 +29,16 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_stock_bar_or_billet
-        qty: 15.0
+        qty: 9.0
         unit: kg
         notes: "Steel for spool drum, shaft, and mounting hardware"
       - item_id: ball_bearing_steel_v0
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
         notes: "Bearings for spool shaft rotation"
     outputs:
       - item_id: machined_part_raw
-        qty: 15.5
+        qty: 9.5
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -47,52 +47,36 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 15.5
+        qty: 9.5
         unit: kg
       - item_id: motor_electric_small
-        qty: 2.0
-        unit: kg
+        qty: 1
+        unit: unit
         notes: "Drive motor for spool winding"
       - item_id: sensor_suite_general
-        qty: 0.5
-        unit: kg
+        qty: 1
+        unit: unit
         notes: "Tension control sensor"
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    notes: "Assemble spool drum on shaft, install bearings and motor coupling"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1
-        unit: unit
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg
       - item_id: electronic_components_set
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: wired_electrical_system
-        qty: 1
-        unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install tension control sensor and motor connection"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: wired_electrical_system
         qty: 1
         unit: unit
     outputs:
       - item_id: fiber_collection_spool
         qty: 1
         unit: unit
-    est_time_hr: 1.0
-    labor_hours: 0.8
-    notes: "Test spool rotation and tension control system"
+    est_time_hr: 4.0
+    labor_hours: 3.8
+    notes: "Assemble spool drum on shaft, install bearings and motor coupling, wire tension control sensor and motor connection, test spool rotation and tension control system. Total assembly and test time: ~4 hours."
 assumptions: "Motorized fiber collection spool with tension-controlled winding. Used in fiber drawing and textile operations. 20 kg assembly with drive motor connection and tension sensing."
-notes: "Manufacturing of fiber collection spool. Total fabrication time ~8.5 hours. Essential for continuous fiber production."
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Changed discrete components from kg to unit counts (motor, sensor, bearings, electronics)
+  - Reduced steel input from 15 kg to 9 kg based on actual assembly needs
+  - Consolidated 4 steps into 2: machining → final assembly+wiring+test
+  - Removed generic intermediates (assembled_equipment, wired_electrical_system) causing mass issues
+  - Total time: ~8 hours (4 hr machining + 4 hr assembly/wiring/test)
+
+  Manufacturing of fiber collection spool. Essential for continuous fiber production.

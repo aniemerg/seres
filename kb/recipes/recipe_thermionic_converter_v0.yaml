@@ -4,7 +4,7 @@ target_item_id: thermionic_converter
 variant_id: v0
 inputs:
   - item_id: ceramic_powder
-    qty: 5.0
+    qty: 8.0
     unit: kg
   - item_id: tube_electrode_set
     qty: 1.0
@@ -17,11 +17,11 @@ steps:
   - process_id: ceramic_forming_basic_v0
     inputs:
       - item_id: ceramic_powder
-        qty: 5.0
+        qty: 8.0
         unit: kg
     outputs:
       - item_id: ceramic_powder
-        qty: 5.0
+        qty: 8.0
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -29,11 +29,11 @@ steps:
   - process_id: sintering_basic_v0
     inputs:
       - item_id: ceramic_powder
-        qty: 5.0
+        qty: 8.0
         unit: kg
     outputs:
       - item_id: ceramic_powder
-        qty: 5.0
+        qty: 8.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -53,7 +53,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: ceramic_powder
-        qty: 5.0
+        qty: 8.0
         unit: kg
       - item_id: tube_electrode_set
         qty: 1.0
@@ -67,7 +67,7 @@ steps:
     notes: "Assemble electrodes in tube, evacuate, charge with cesium vapor, seal tube"
   - process_id: integration_test_basic_v0
     inputs:
-      - item_id: tube_electrode_set
+      - item_id: thermionic_converter
         qty: 1.0
         unit: unit
     outputs:
@@ -78,4 +78,6 @@ steps:
     labor_hours: 1.0
     notes: "Test converter electrical output and thermal performance"
 assumptions: Vacuum tube construction with refractory metal electrodes. Cesium vapor fill for space charge neutralization. Advanced high-temperature power generation device.
-notes: Thermionic converter for direct thermal-to-electrical energy conversion. 10-30% efficiency at high temperatures (1500-2000K).
+notes: |
+  Thermionic converter for direct thermal-to-electrical energy conversion. 10-30% efficiency at high temperatures (1500-2000K).
+  Mass balance: ceramic_powder scaled to 8 kg; integration test uses assembled converter.

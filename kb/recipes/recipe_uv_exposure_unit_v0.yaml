@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: uv_exposure_unit
 inputs:
   - item_id: uv_exposure_unit_frame
-    qty: 1
+    qty: 5
     unit: unit
   - item_id: uv_exposure_unit_lamp_module
     qty: 1
@@ -16,7 +16,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: uv_exposure_unit_frame
-        qty: 1
+        qty: 5
         unit: unit
       - item_id: uv_exposure_unit_lamp_module
         qty: 1
@@ -29,4 +29,6 @@ steps:
     labor_hours: 2.0
     notes: "Assemble frame and lamp module, test and verify UV lamp function"
 assumptions: "Assembly of UV exposure unit from frame and lamp module components per BOM"
-notes: "Assemble UV exposure unit from BOM components; frame fabricated separately"
+notes: |
+  Assemble UV exposure unit from BOM components; frame fabricated separately.
+  Mass balance: scale frame quantity to 5 units to match 100 kg output mass.

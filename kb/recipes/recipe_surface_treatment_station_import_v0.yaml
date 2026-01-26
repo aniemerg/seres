@@ -7,56 +7,73 @@ produces_unit: unit
 target_item_id: surface_treatment_station
 inputs:
   - item_id: chemical_bath_tank_set
-    qty: 1
-    unit: unit
+    qty: 80.0
+    unit: kg
   - item_id: agitation_system_basic
-    qty: 1
-    unit: unit
+    qty: 30.0
+    unit: kg
   - item_id: chemical_bath_ventilation
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: circulation_pump_coolant
-    qty: 1
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: control_panel_basic
-    qty: 1
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: support_frame_welded
-    qty: 1
-    unit: unit
+    qty: 120.0
+    unit: kg
   - item_id: fastener_kit_medium
-    qty: 1
-    unit: unit
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 37.0
+    unit: kg
 steps:
   - process_id: surface_treatment_station_assembly_v0
     inputs:
       - item_id: chemical_bath_tank_set
-        qty: 1
-        unit: unit
+        qty: 80.0
+        unit: kg
       - item_id: agitation_system_basic
-        qty: 1
-        unit: unit
+        qty: 30.0
+        unit: kg
       - item_id: chemical_bath_ventilation
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: circulation_pump_coolant
-        qty: 1
-        unit: unit
+        qty: 15.0
+        unit: kg
       - item_id: control_panel_basic
-        qty: 1
-        unit: unit
+        qty: 15.0
+        unit: kg
       - item_id: support_frame_welded
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
       - item_id: fastener_kit_medium
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 37.0
+        unit: kg
     outputs:
-      - item_id: surface_treatment_station
-        qty: 1
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 300.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
     labor_hours: 4.0
     notes: "Assemble surface treatment station from BOM components"
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 300.0
+        unit: kg
+    outputs:
+      - item_id: surface_treatment_station
+        qty: 1
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
 notes: "Import-path replacement to localize surface_treatment_station manufacturing; assembles from 7 BOM components."

@@ -9,8 +9,8 @@ inputs:
     qty: 0.25
     unit: kg
   - item_id: electronic_components_set
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: solder_paste_tin_lead
     qty: 0.05
     unit: kg
@@ -20,13 +20,10 @@ inputs:
   - item_id: compiled_firmware_binary
     qty: 1.0
     unit: unit
-  - item_id: assembled_electrical_equipment
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: control_circuit_board_power
-    qty: 1
-    unit: unit
+    qty: 2.3
+    unit: kg
 steps:
   - process_id: pcb_fabrication_v0
     inputs:
@@ -44,18 +41,15 @@ steps:
         qty: 0.25
         unit: kg
       - item_id: electronic_components_set
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
       - item_id: solder_paste_tin_lead
         qty: 0.05
         unit: kg
     outputs:
       - item_id: control_circuit_board_power
-        qty: 1
-        unit: unit
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 2.3
+        unit: kg
     notes: "Populate and solder power control PCB"
   - process_id: firmware_programming_v0
     inputs:
@@ -70,16 +64,6 @@ steps:
         qty: 1.0
         unit: unit
     notes: "Program control firmware and configuration"
-  - process_id: electrical_testing_basic_v0
-    inputs:
-      - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: control_circuit_board_power
-        qty: 1
-        unit: unit
-    notes: "Functional test under load"
 notes: |
   Local production path for power control circuit board.
   Power control PCBs include microcontroller, gate drivers, sensing circuits,

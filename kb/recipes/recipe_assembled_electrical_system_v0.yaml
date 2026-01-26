@@ -22,10 +22,6 @@ inputs:
     qty: 5.0
     unit: kg
     notes: Electrical enclosures and junction boxes
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
-    notes: "Intermediate for inspection step"
 outputs:
   - item_id: assembled_electrical_system
     qty: 1.0
@@ -49,23 +45,15 @@ steps:
         qty: 5.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
+      - item_id: assembled_electrical_system
         qty: 1.0
         unit: unit
     est_time_hr: 4.0
     labor_hours: 4.0
     notes: "Assemble and wire electrical components, install circuit protection and control panels"
   - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Inspect wiring and component installation (testing occurs separately)"
+    notes: "Inspect wiring and component installation of completed assembled_electrical_system (testing occurs separately)"
 assumptions: "Assembled electrical system ready for testing. Includes wiring, controls, and circuit protection."
 notes: "Assembly of electrical system. Total time ~5 hours. Requires subsequent electrical testing."

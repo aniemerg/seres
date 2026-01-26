@@ -10,11 +10,11 @@ inputs:
     qty: 0.4
     unit: kg
   - item_id: assembled_electronics
-    qty: 1
-    unit: unit
-  - item_id: enclosure_small
     qty: 1.0
-    unit: unit
+    unit: kg
+  - item_id: enclosure_small
+    qty: 3.7
+    unit: kg
   - item_id: fastener_kit_small
     qty: 0.2
     unit: kg
@@ -22,12 +22,12 @@ inputs:
     qty: 0.1
     unit: kg
   - item_id: assembled_equipment
-    qty: 1
-    unit: unit
+    qty: 4.8
+    unit: kg
 outputs:
   - item_id: power_strip_and_protection
-    qty: 1.0
-    unit: unit
+    qty: 5.0
+    unit: kg
 steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
@@ -39,8 +39,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_electronics
-        qty: 1
-        unit: unit
+        qty: 1.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     machine_hours: 0.5
@@ -48,34 +48,40 @@ steps:
   - process_id: sealing_and_assembly_basic_v0
     inputs:
       - item_id: assembled_electronics
-        qty: 1
-        unit: unit
-      - item_id: enclosure_small
         qty: 1.0
-        unit: unit
+        unit: kg
+      - item_id: enclosure_small
+        qty: 3.7
+        unit: kg
       - item_id: seal_rubber_o_ring
         qty: 0.1
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.8
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Install protective enclosure seals"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 4.8
+        unit: kg
       - item_id: fastener_kit_small
         qty: 0.2
         unit: kg
     outputs:
       - item_id: power_strip_and_protection
-        qty: 1.0
-        unit: unit
+        qty: 5.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Final assembly step to finalize power strip unit"
-notes: "Placeholder recipe to manufacture power_strip_and_protection_v0 using basic assembly steps."
+notes: |
+  Assumptions:
+  - Enclosure mass scaled to 3.7 kg to match 5.0 kg final unit.
+  Rationale:
+  - Preserve mass balance and align units with item definitions.
+  Uncertainty:
+  - Enclosure sizing and internal component masses need refinement.

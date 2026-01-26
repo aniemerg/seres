@@ -83,6 +83,11 @@ canonical unit via `unit_kind`:
 Conversions between `unit` and `kg` remain allowed when `mass_kg` is defined, but
 recipe inputs/outputs should prefer the canonical unit for clarity and validation.
 
+**Update 2026-01-25:** For items with `unit_kind: discrete`, avoid fractional `unit`
+quantities in recipes as a mass-balance workaround. Keep discrete outputs in `unit`
+and balance mass by (a) adjusting the item's `mass`/`mass_kg`, or (b) adding bulk
+material inputs and explicit scrap/byproduct outputs in `kg`.
+
 ### 2. Compound Unit Parsing
 
 **Format:** `<numerator_unit>/<denominator_unit>`

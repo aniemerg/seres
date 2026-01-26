@@ -2,7 +2,7 @@
 
 **Status:** Implemented
 **Date:** 2024-12-31
-**Last Updated:** 2024-12-31
+**Last Updated:** 2026-01-25
 **Decision Makers:** Project team
 **Related ADRs:** 013 (Recipe Override Mechanics), 017 (Validation and Error Detection)
 
@@ -667,6 +667,11 @@ outputs:
 ## Implementation Status
 
 **Status:** ✅ **IMPLEMENTED** (2024-12-31)
+
+**Update 2026-01-25:** For `unit_kind: discrete` targets, keep recipe outputs in
+`unit` and avoid fractional `unit` quantities to solve mass balance. Use bulk
+material inputs and explicit scrap/byproduct outputs, or adjust item `mass` to
+align with the recipe.
 
 ### Phase 2: Validation Rules - COMPLETED
 

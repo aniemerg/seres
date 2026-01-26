@@ -328,7 +328,9 @@ steps:
 
 **Problem:** Recipe inputs total mass doesn't match outputs.
 
-**Solution:** Add waste/loss items or adjust quantities.
+**Solution:** Add waste/loss items or adjust quantities. You can use the universal
+`waste` item (marked `is_scrap: true`) as a generic sink when a material-specific
+scrap stream isn’t modeled yet.
 
 ```yaml
 id: recipe_part_machined_v0
@@ -344,6 +346,52 @@ outputs:
     qty: 0.5
     unit: kg
 ```
+
+#### Validation Rule: `recipe_step_mass_imbalance`
+
+**What it means:** A recipe step outputs more mass than it consumes
+(after converting units to kg). This will fail simulation provenance checks.
+
+**How to fix:**
+1. **Adjust step inputs** so total input mass ≥ total output mass.
+2. **Add a waste/byproduct output** (e.g., `metal_swarf`, `assembly_loss`, or `waste`).
+   - Emit `waste` only in step outputs/byproducts (not recipe outputs).
+3. **Align step override inputs** with the process definition if you changed them.
+4. **If the target item is a machine/part, keep outputs in `unit`** and fix mass
+   on the item (`unit_kind: discrete`, `mass` in kg). Do not switch outputs to `kg`
+   just to balance mass.
+
+**Example fix (add waste):**
+```yaml
+steps:
+  - process_id: machining_basic_v0
+    inputs:
+      - item_id: steel_bar
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: part_machined
+        qty: 1.5
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.5
+        unit: kg
+```
+
+#### Validation Rule: `recipe_step_mass_balance_unconvertible`
+
+**What it means:** The validator could not convert one or more step inputs/outputs
+to kg (unit mismatch or missing mass/unit data).
+
+**How to fix:**
+1. **Use consistent units** across step inputs/outputs (prefer `kg`).
+2. **Ensure item mass + unit are defined** so conversion can occur.
+3. **Avoid count-like units for bulk materials** unless a mass is defined.
+4. **If truly non-mass (energy), use energy units** (kWh, MJ, etc.).
+
+**Notes:**
+- Energy-only steps (all inputs/outputs in kWh/MJ/etc.) are exempt.
+- If conversion fails, check `kb/items/<item>.yaml` for `mass` and `unit`.
 
 ---
 

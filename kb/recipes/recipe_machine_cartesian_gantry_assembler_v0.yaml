@@ -42,35 +42,17 @@ steps:
         qty: 202.0
         unit: kg
     outputs:
-      - item_id: assembled_equipment
-        qty: 201.0
-        unit: kg
-    est_time_hr: 1.5
-    labor_hours: 1.5
-    notes: "Assemble frame, rails, carriages, screws/belts, and end effector mount"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 201.0
-        unit: kg
-    outputs:
-      - item_id: wired_electrical_system
-        qty: 1
-        unit: unit
-    est_time_hr: 1.0
-    labor_hours: 1.0
-    notes: "Install motors, limit switches, controllers, and cable management"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: wired_electrical_system
-        qty: 1
-        unit: unit
-    outputs:
       - item_id: cartesian_gantry_assembler_v0
         qty: 1
         unit: unit
-    est_time_hr: 0.7
-    labor_hours: 0.6
-    notes: "Axis motion and accuracy check, safety interlocks"
+    est_time_hr: 3.2
+    labor_hours: 3.1
+    notes: "Assemble frame, rails, carriages, screws/belts, and end effector mount. Install motors, limit switches, controllers, and cable management. Perform axis motion and accuracy check, verify safety interlocks. Total assembly, wiring, and testing time: ~3.2 hours."
 assumptions: "Light-duty cartesian gantry for assembly/pick-and-place; electronics imported/coarse."
-notes: Local assembly route for cartesian gantry assembler from steel plate.
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Consolidated steps 2-4 (assembly → wiring → testing) into single final assembly step
+  - Removed generic intermediates (assembled_equipment, wired_electrical_system) causing mass issues
+  - Total time: ~5.2 hours (1 hr cutting + 1 hr machining + 3.2 hr assembly/wiring/testing)
+
+  Local assembly route for cartesian gantry assembler from steel plate.

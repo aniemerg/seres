@@ -3,7 +3,7 @@ target_item_id: hydraulic_assembly_tools
 variant_id: v0
 inputs:
   - item_id: machined_part_raw
-    qty: 1.0
+    qty: 13.0
     unit: kg
   - item_id: electrical_wire_and_connectors
     qty: 1.0
@@ -15,11 +15,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 13.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 13.0
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -27,17 +27,20 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 1.0
+        qty: 13.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 13.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Assemble torque wrenches, flare tools, hand pumps"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
+      - item_id: assembled_equipment
+        qty: 13.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 1.0
         unit: kg

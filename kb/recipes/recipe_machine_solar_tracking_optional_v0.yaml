@@ -4,49 +4,49 @@ target_item_id: solar_tracking_optional
 variant_id: v0
 inputs:
   - item_id: tracking_mount_structure
-    qty: 1.0
-    unit: unit
+    qty: 70.0
+    unit: kg
   - item_id: tracking_drive_assembly
-    qty: 1.0
-    unit: unit
+    qty: 40.0
+    unit: kg
   - item_id: tracking_control_unit
-    qty: 1.0
-    unit: unit
+    qty: 8.0
+    unit: kg
   - item_id: position_sensor_set
-    qty: 1.0
-    unit: unit
+    qty: 0.5
+    unit: kg
   - item_id: power_output_terminals
-    qty: 1.0
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1.0
     unit: kg
 outputs:
   - item_id: solar_tracking_optional
-    qty: 1.0
-    unit: unit
+    qty: 121.5
+    unit: kg
 steps:
   - process_id: welding_and_fabrication_v0
     inputs:
       - item_id: tracking_mount_structure
-        qty: 1.0
-        unit: unit
+        qty: 70.0
+        unit: kg
     outputs:
       - item_id: tracking_mount_structure
-        qty: 1.0
-        unit: unit
+        qty: 70.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Fabricate and weld tracking frame structure and mounting points for solar panels or concentrators"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: tracking_drive_assembly
-        qty: 1.0
-        unit: unit
+        qty: 40.0
+        unit: kg
     outputs:
       - item_id: tracking_drive_assembly
-        qty: 1.0
-        unit: unit
+        qty: 40.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
@@ -54,62 +54,68 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: tracking_mount_structure
-        qty: 1.0
-        unit: unit
+        qty: 70.0
+        unit: kg
       - item_id: tracking_drive_assembly
-        qty: 1.0
-        unit: unit
+        qty: 40.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 111.0
+        unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
     notes: "Assemble drive motors, gears, bearings, and pivot mechanisms for single or dual-axis tracking"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: tracking_control_unit
-        qty: 1.0
-        unit: unit
+        qty: 8.0
+        unit: kg
       - item_id: position_sensor_set
-        qty: 1.0
-        unit: unit
+        qty: 0.5
+        unit: kg
       - item_id: power_output_terminals
-        qty: 1.0
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_electrical_equipment
-        qty: 1.0
-        unit: unit
+        qty: 10.5
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Install position sensors, wire motors to control system, integrate sun-tracking algorithm or timer"
   - process_id: integration_test_basic_v0
     inputs:
-      - item_id: position_sensor_set
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 111.0
+        unit: kg
+      - item_id: assembled_electrical_equipment
+        qty: 10.5
+        unit: kg
     outputs:
-      - item_id: solar_tracking_optional
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 121.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Test tracking motion, verify position accuracy, calibrate sun-following algorithm"
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: tracking_mount_structure
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 121.5
+        unit: kg
     outputs:
       - item_id: solar_tracking_optional
-        qty: 1.0
-        unit: unit
+        qty: 121.5
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify smooth tracking motion and structural integrity under load"
 assumptions: "Optional solar tracking system for improved power generation. Can track sun's path for PV arrays or solar concentrators. Increases energy capture during lunar day."
-notes: "Solar tracking system assembly. Provides single or dual-axis sun tracking to maximize solar energy collection. Can be used with PV arrays or solar concentrators for thermionic systems. Total assembly time ~20-21 hours."
+notes: |
+  Assumptions:
+  - Masses aligned to component sum (121.5 kg) for assembly balance.
+  Solar tracking system assembly. Provides single or dual-axis sun tracking to maximize solar energy collection. Can be used with PV arrays or solar concentrators for thermionic systems. Total assembly time ~20-21 hours.

@@ -8,7 +8,7 @@ target_item_id: air_bearing_assembly
 variant_id: v0
 inputs:
   - item_id: bearing_set
-    qty: 1.0
+    qty: 2.0
     unit: kg
 outputs:
   - item_id: air_bearing_assembly
@@ -18,7 +18,7 @@ steps:
   - process_id: air_bearing_assembly_basic_v0
     inputs:
       - item_id: bearing_set
-        qty: 1.0
+        qty: 2.0
         unit: kg
     outputs:
       - item_id: air_bearing_assembly
@@ -26,4 +26,6 @@ steps:
         unit: unit
     est_time_hr: 0.5
     machine_hours: 0.5
-notes: Manufacturing recipe for air bearing assembly (placeholder)
+notes: |
+  Manufacturing recipe for air bearing assembly (placeholder).
+  Mass balance: bearing_set input set to 2.0 kg to match assembly mass.

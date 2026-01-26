@@ -19,7 +19,7 @@ inputs:
     qty: 0.5
     unit: kg
   - item_id: motor_housing_steel
-    qty: 3.0
+    qty: 6.3
     unit: kg
 outputs:
   - item_id: compressor_motor_small
@@ -70,7 +70,7 @@ steps:
         qty: 0.5
         unit: kg
       - item_id: motor_housing_steel
-        qty: 3.0
+        qty: 6.3
         unit: kg
     outputs:
       - item_id: compressor_motor_small
@@ -78,6 +78,9 @@ steps:
         unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
+    notes: "Assemble motor; 15.5 kg inputs → 15.0 kg motor + 0.5 kg assembly_loss byproduct"
 assumptions: |
   Uses stamped laminations from lamination_stamping_v0; bearings are imported.
-notes: Local implementation of compressor motor small import_v0 using standard motor build steps.
+notes: |
+  Local implementation of compressor motor small import_v0 using standard motor build steps.
+  Mass balance: increase motor_housing_steel to 5.8 kg to match 15 kg output mass.

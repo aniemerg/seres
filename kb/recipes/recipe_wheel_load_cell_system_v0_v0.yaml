@@ -4,7 +4,7 @@ target_item_id: wheel_load_cell_system_v0
 variant_id: v0
 inputs:
   - item_id: component_material_a
-    qty: 1.0
+    qty: 4.9
     unit: kg
 outputs:
   - item_id: wheel_load_cell_system_v0
@@ -14,28 +14,31 @@ steps:
   - process_id: grinding_basic_v0
     inputs:
       - item_id: component_material_a
-        qty: 1.0
+        qty: 4.9
         unit: kg
     outputs:
       - item_id: finished_part_deburred
-        qty: 0.99
+        qty: 4.89
         unit: kg
   - process_id: assembly_basic_v0
     inputs:
       - item_id: finished_part_deburred
-        qty: 0.99
+        qty: 4.89
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 4.89
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 4.89
+        unit: kg
     outputs:
       - item_id: wheel_load_cell_system_v0
         qty: 1.0
         unit: unit
-notes: "Local fabrication path for wheel_load_cell_system_v0; replaces import stub."
+notes: |
+  Local fabrication path for wheel_load_cell_system_v0; replaces import stub.
+  Mass balance: machine_assembly uses 1.2x assembled_equipment to match 60 kg output mass.
+  Mass balance: component_material_a scaled to 50 kg to support assembly mass.

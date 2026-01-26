@@ -16,7 +16,7 @@ steps:
         unit: kg
     outputs:
       - item_id: cast_metal_parts
-        qty: 209.0
+        qty: 220.0
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -36,11 +36,11 @@ steps:
   - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: cast_metal_parts
-        qty: 209.0
+        qty: 220.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 209.0
+        qty: 220.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -49,7 +49,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 209.0
+        qty: 220.0
         unit: kg
     outputs:
       - item_id: radiator_panel_set
@@ -59,4 +59,6 @@ steps:
     labor_hours: 1.5
     notes: Final assembly with headers and mounting hardware
 assumptions: "220 kg radiator panel set for thermal rejection."
-notes: "Four-step recipe for radiator panel set."
+notes: |
+  Four-step recipe for radiator panel set.
+  Mass balance: set cast/weld outputs to 220 kg to match final panel mass.

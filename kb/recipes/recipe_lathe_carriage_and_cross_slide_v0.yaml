@@ -3,7 +3,7 @@ target_item_id: lathe_carriage_and_cross_slide
 variant_id: v0
 inputs:
   - item_id: raw_metal_block
-    qty: 3.0
+    qty: 200.0
     unit: kg
 outputs:
   - item_id: lathe_carriage_and_cross_slide
@@ -13,12 +13,15 @@ steps:
   - process_id: casting_or_fabrication_machine_frame_v0
     inputs:
       - item_id: raw_metal_block
-        qty: 3.0
+        qty: 200.0
         unit: kg
     outputs:
       - item_id: lathe_carriage_and_cross_slide
         qty: 1
         unit: unit
+      - item_id: metal_swarf
+        qty: 20.0
+        unit: kg
     est_time_hr: 3.0
     machine_hours: 2.0
     labor_hours: 1.5

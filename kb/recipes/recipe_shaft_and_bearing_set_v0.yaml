@@ -119,11 +119,11 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembly_components
-        qty: 1.0
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 15.0
         unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
@@ -144,18 +144,18 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
+        qty: 15.0
         unit: kg
     outputs:
       - item_id: shaft_and_bearing_set
-        qty: 1.0
-        unit: count
+        qty: 15.0
+        unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5
     notes: "Verify runout, bearing smoothness, dimensional accuracy, and hardness"
 outputs:
   - item_id: shaft_and_bearing_set
-    qty: 1
-    unit: count
+    qty: 15.0
+    unit: kg
 assumptions: "15 kg precision shaft and bearing assembly for rotating machinery. Includes steel casting, turning, grinding, heat treatment for wear resistance. Ground bearing surfaces with proper bearing fits for smooth, reliable operation."
 notes: "Complete shaft and bearing set for power transmission in machinery. Includes casting, precision machining (turning and grinding), heat treatment (hardening), bearing fabrication and installation, final assembly with housings and seals, dynamic balancing, and inspection. Total fabrication time ~15.5 hours. Suitable for motors, gearboxes, and other rotating equipment."

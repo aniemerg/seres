@@ -6,6 +6,10 @@ inputs:
     qty: 100.0
     unit: kg
     notes: Steel for furnace body and structure
+  - item_id: refractory_brick_set
+    qty: 4.0
+    unit: unit
+    notes: High-temperature refractory brick lining
   - item_id: insulation_ceramic
     qty: 50.0
     unit: kg
@@ -59,6 +63,9 @@ steps:
       - item_id: machined_part_raw
         qty: 72.0
         unit: kg
+      - item_id: refractory_brick_set
+        qty: 4.0
+        unit: unit
       - item_id: insulation_ceramic
         qty: 50.0
         unit: kg
@@ -67,13 +74,13 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 887.0
+        unit: kg
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 887.0
+        unit: kg
       - item_id: steel_plate_raw
         qty: 20.0
         unit: kg
@@ -82,27 +89,31 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 909.0
+        unit: kg
   - process_id: electrical_wiring_and_controls_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 909.0
+        unit: kg
       - item_id: electrical_wire_and_connectors
         qty: 3.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 912.0
+        unit: kg
   - process_id: machine_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 912.0
+        unit: kg
     outputs:
       - item_id: furnace
         qty: 1
         unit: unit
+      - item_id: waste
+        qty: 12.0
+        unit: kg
+    notes: "Final assembly and testing (12 kg assembly waste/trim to reach 900 kg target mass)"
 notes: "Placeholder recipe to manufacture generic furnace; follows common shell->frame->assembly path. Refine with BOM and energy/time estimates."

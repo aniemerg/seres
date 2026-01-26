@@ -12,8 +12,8 @@ inputs:
     unit: kg
     notes: Gauge body and dial
   - item_id: spring_compression_small
-    qty: 1
-    unit: unit
+    qty: 0.01
+    unit: kg
     notes: Return spring for needle mechanism
   - item_id: fastener_kit_small
     qty: 0.05
@@ -23,11 +23,11 @@ inputs:
     qty: 0.5
     unit: kg
   - item_id: instrument_uncalibrated
-    qty: 1
-    unit: unit
+    qty: 0.56
+    unit: kg
   - item_id: instrument_calibrated
-    qty: 1
-    unit: unit
+    qty: 0.56
+    unit: kg
 outputs:
   - item_id: pressure_gauge
     qty: 0.5
@@ -47,7 +47,7 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 0.5
+        qty: 0.35
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -56,53 +56,53 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 0.5
+        qty: 0.35
         unit: kg
       - item_id: spring_compression_small
-        qty: 1
-        unit: unit
+        qty: 0.01
+        unit: kg
       - item_id: fastener_kit_small
         qty: 0.05
         unit: kg
     outputs:
       - item_id: instrument_uncalibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Install dial, needle, and connection fittings"
   - process_id: calibration_basic_v0
     inputs:
       - item_id: instrument_uncalibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     outputs:
       - item_id: instrument_calibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 2.5
     notes: "Calibrate gauge against reference standards"
   - process_id: leak_test_v0
     inputs:
       - item_id: instrument_calibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     outputs:
       - item_id: instrument_calibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 0.8
     notes: "Test gauge for leaks"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: instrument_calibrated
-        qty: 1
-        unit: unit
+        qty: 0.41
+        unit: kg
     outputs:
       - item_id: pressure_gauge
-        qty: 0.5
+        qty: 0.41
         unit: kg
     est_time_hr: 0.5
     labor_hours: 0.5

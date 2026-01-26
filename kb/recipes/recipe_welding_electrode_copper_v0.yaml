@@ -5,7 +5,7 @@ target_item_id: welding_electrode_copper
 variant_id: v0
 inputs:
   - item_id: copper_rod_ingot
-    qty: 0.25
+    qty: 1.0
     unit: kg
 outputs:
   - item_id: welding_electrode_copper
@@ -18,7 +18,7 @@ steps:
   - process_id: electrode_fabrication_copper_v0
     inputs:
       - item_id: copper_rod_ingot
-        qty: 0.25
+        qty: 1.0
         unit: kg
     outputs:
       - item_id: welding_electrode_copper
@@ -28,3 +28,7 @@ steps:
       - item_id: copper_scrap_v0
         qty: 0.75
         unit: kg
+notes: |
+  Mass balance fix: Input increased from 0.25 kg to 1.0 kg to match outputs
+  (0.25 kg electrode + 0.75 kg scrap). High scrap rate (75%) reflects precision
+  machining/forming of electrode from copper rod stock.

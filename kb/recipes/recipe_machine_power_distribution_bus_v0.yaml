@@ -15,6 +15,15 @@ inputs:
   - item_id: power_output_terminals
     qty: 12.0
     unit: kg
+  - item_id: steel_plate_or_sheet
+    qty: 120.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 30.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 5.0
+    unit: kg
 outputs:
   - item_id: power_distribution_bus
     qty: 200.0
@@ -34,8 +43,25 @@ steps:
       - item_id: power_output_terminals
         qty: 12.0
         unit: kg
+      - item_id: steel_plate_or_sheet
+        qty: 120.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 30.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: power_distribution_bus
         qty: 200.0
         unit: kg
-notes: "Assemble power distribution bus from BOM components; placeholder assembly recipe."
+    byproducts:
+      - item_id: waste
+        qty: 5.0
+        unit: kg
+notes: |
+  Assemble power distribution bus from BOM components plus enclosure and wiring.
+  BOM lists core electrical components (50 kg). Added steel enclosure (120 kg),
+  wiring/connectors (30 kg), and fasteners (5 kg) to reach 200 kg system mass
+  with 5 kg assembly waste.

@@ -3,23 +3,23 @@ target_item_id: drill_press
 variant_id: v0
 inputs:
   - item_id: machine_column_cast
-    qty: 1
-    unit: unit
+    qty: 60.0
+    unit: kg
   - item_id: spindle_head_basic
-    qty: 1
-    unit: unit
+    qty: 20.0
+    unit: kg
   - item_id: motor_electric_small
-    qty: 1
-    unit: unit
+    qty: 10.0
+    unit: kg
   - item_id: table_top_t_slot
-    qty: 1
-    unit: unit
+    qty: 25.0
+    unit: kg
   - item_id: depth_stop_mechanism
-    qty: 1
-    unit: unit
+    qty: 2.0
+    unit: kg
   - item_id: belt_and_pulley_set
-    qty: 1
-    unit: unit
+    qty: 3.0
+    unit: kg
 outputs:
   - item_id: drill_press
     qty: 1
@@ -28,59 +28,59 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: machine_column_cast
-        qty: 1
-        unit: unit
+        qty: 60.0
+        unit: kg
       - item_id: table_top_t_slot
-        qty: 1
-        unit: unit
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 2
-        unit: unit
+        qty: 85.0
+        unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     notes: "Machine mounting surfaces, align column bore, finish table T-slots"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 2
-        unit: unit
+        qty: 85.0
+        unit: kg
       - item_id: spindle_head_basic
-        qty: 1
-        unit: unit
+        qty: 20.0
+        unit: kg
       - item_id: depth_stop_mechanism
-        qty: 1
-        unit: unit
+        qty: 2.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 107.0
+        unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
     notes: "Mount spindle head to column, install table height adjustment, attach depth stop"
   - process_id: belt_installation_and_tensioning_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 107.0
+        unit: kg
       - item_id: motor_electric_small
-        qty: 1
-        unit: unit
+        qty: 10.0
+        unit: kg
       - item_id: belt_and_pulley_set
-        qty: 1
-        unit: unit
+        qty: 3.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Install motor, mount belt and pulleys, tension drive belt, check speed adjustment"
   - process_id: alignment_and_testing_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 120.0
+        unit: kg
     outputs:
       - item_id: drill_press
         qty: 1

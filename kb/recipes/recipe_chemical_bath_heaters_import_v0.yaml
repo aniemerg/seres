@@ -18,7 +18,7 @@ inputs:
     unit: kg
   - item_id: electronic_components_set
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: chemical_bath_heaters
     qty: 20.0
@@ -73,7 +73,11 @@ steps:
         unit: kg
       - item_id: electronic_components_set
         qty: 1.0
-        unit: unit
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 3.5
+        unit: kg
     est_time_hr: 1.5
     labor_hours: 1.5
     notes: "Install power electronics, temperature controller, safety interlocks"
@@ -85,6 +89,9 @@ steps:
       - item_id: motor_coil_wound
         qty: 2.0
         unit: kg
+      - item_id: wired_electrical_system
+        qty: 3.5
+        unit: kg
     outputs:
       - item_id: chemical_bath_heaters
         qty: 20.0
@@ -93,4 +100,8 @@ steps:
     labor_hours: 0.5
     notes: "Final assembly; mount/attach heating element to housing"
 assumptions: "Local fabrication path for chemical bath heaters; uses coil winding and standard electronics"
-notes: "Replaces import stub with canonical v0 steps; local fabrication path; no longer an import."
+notes: |
+  Assumptions:
+  - Wired electrical system mass matched to wiring inputs for this heater.
+  Rationale:
+  - Add explicit wired_electrical_system output/input to close wiring step mass balance.

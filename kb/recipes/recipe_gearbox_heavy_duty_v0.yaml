@@ -6,14 +6,14 @@ inputs:
     qty: 60.0
     unit: kg
   - item_id: gear_set_medium
-    qty: 2.0
-    unit: unit
+    qty: 6.0
+    unit: kg
   - item_id: bearing_set
-    qty: 2.0
-    unit: unit
+    qty: 3.0
+    unit: kg
   - item_id: fastener_kit_medium
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: gearbox_heavy_duty
     qty: 1.0
@@ -39,21 +39,21 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 56.0
+        qty: 40.0
         unit: kg
     est_time_hr: 12.0
     machine_hours: 12.0
     labor_hours: 6.0
-    notes: "Machine housing bores, bearing seats, and mounting surfaces"
+    notes: "Machine housing bores, bearing seats, and mounting surfaces (18 kg machining waste)"
   - process_id: gear_cutting_v0
     inputs:
       - item_id: gear_set_medium
-        qty: 2.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     outputs:
       - item_id: gear_set_medium
-        qty: 2.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     est_time_hr: 16.0
     machine_hours: 16.0
     labor_hours: 8.0
@@ -61,11 +61,11 @@ steps:
   - process_id: heat_treatment_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 56.0
+        qty: 40.0
         unit: kg
     outputs:
       - item_id: finished_part
-        qty: 56.0
+        qty: 40.0
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -74,29 +74,29 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: finished_part
-        qty: 56.0
+        qty: 40.0
         unit: kg
       - item_id: gear_set_medium
-        qty: 2.0
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: bearing_set
-        qty: 2.0
-        unit: unit
+        qty: 3.0
+        unit: kg
       - item_id: fastener_kit_medium
         qty: 1.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Assemble gears, shafts, bearings in housing, fill with lubricant"
+    notes: "Assemble gears, bearings, fasteners in housing with lubricant"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     outputs:
       - item_id: gearbox_heavy_duty
         qty: 1.0

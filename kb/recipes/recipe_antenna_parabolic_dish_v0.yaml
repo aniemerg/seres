@@ -9,26 +9,26 @@ inputs:
     unit: kg
   - item_id: feed_horn_antenna_v0
     qty: 1.0
-    unit: each
+    unit: kg
   - item_id: support_struts_aluminum
     qty: 10.0
     unit: kg
   - item_id: mounting_bracket_azimuth_elevation
-    qty: 1.0
-    unit: each
+    qty: 15.0
+    unit: kg
   - item_id: bearing_ball_steel
-    qty: 4.0
-    unit: each
+    qty: 1.2
+    unit: kg
   - item_id: coaxial_cable_low_loss
-    qty: 20.0
-    unit: m
+    qty: 1.0
+    unit: unit
   - item_id: protective_coating_aluminum
     qty: 0.5
     unit: kg
 outputs:
   - item_id: antenna_parabolic_dish_v0
-    qty: 1.0
-    unit: unit
+    qty: 50.0
+    unit: kg
 steps:
   - process_id: assembly_basic_v0
     inputs:
@@ -37,29 +37,36 @@ steps:
         unit: kg
       - item_id: feed_horn_antenna_v0
         qty: 1.0
-        unit: each
+        unit: kg
       - item_id: support_struts_aluminum
         qty: 10.0
         unit: kg
       - item_id: mounting_bracket_azimuth_elevation
-        qty: 1.0
-        unit: each
+        qty: 15.0
+        unit: kg
       - item_id: bearing_ball_steel
-        qty: 4.0
-        unit: each
+        qty: 1.2
+        unit: kg
       - item_id: coaxial_cable_low_loss
-        qty: 20.0
-        unit: m
+        qty: 1.0
+        unit: unit
       - item_id: protective_coating_aluminum
         qty: 0.5
         unit: kg
     outputs:
       - item_id: antenna_parabolic_dish_v0
-        qty: 1.0
-        unit: unit
+        qty: 50.0
+        unit: kg
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 2.0
     notes: "Assemble parabolic dish from BOM components (reflector, feed, struts, mount, connectors)."
 assumptions: "Dish assembled from provided BOM components using standard assembly steps."
-notes: "Placeholder recipe to close no_recipe gap for antenna_parabolic_dish_v0."
+notes: |
+  Assumptions:
+  - Coaxial cable represented as 1 unit (approx. 20 m) for mass conversion.
+  - Bearing ball mass approximated as 1.2 kg total.
+  Rationale:
+  - Replace non-convertible length unit and align inputs with bulk mass units.
+  Uncertainty:
+  - Cable length and bearing mass should be updated with detailed specs.

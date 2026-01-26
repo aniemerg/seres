@@ -29,6 +29,9 @@ inputs:
   - item_id: fastener_kit_medium
     qty: 1
     unit: unit
+  - item_id: thermal_insulation_basic
+    qty: 25.0
+    unit: kg
 outputs:
   - item_id: controlled_atmosphere_chamber
     qty: 1
@@ -63,18 +66,21 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
+      - item_id: thermal_insulation_basic
+        qty: 25.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 250.0
+        unit: kg
     est_time_hr: 2.5
     labor_hours: 2.5
     machine_hours: 2.5
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1
-        unit: unit
+        qty: 250.0
+        unit: kg
     outputs:
       - item_id: controlled_atmosphere_chamber
         qty: 1

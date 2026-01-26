@@ -6,7 +6,7 @@ inputs:
     qty: 6.0
     unit: kg
   - item_id: aluminum_wire
-    qty: 2.0
+    qty: 2.1
     unit: kg
   - item_id: coil_insulation_material
     qty: 0.05
@@ -18,7 +18,7 @@ inputs:
     qty: 0.5
     unit: kg
   - item_id: motor_housing_steel
-    qty: 3.0
+    qty: 5.8
     unit: kg
 outputs:
   - item_id: compressor_motor_small
@@ -41,7 +41,7 @@ steps:
 - process_id: coil_winding_basic_v0
   inputs:
     - item_id: aluminum_wire
-      qty: 2.0
+      qty: 2.1
       unit: kg
     - item_id: coil_insulation_material
       qty: 0.05
@@ -69,12 +69,16 @@ steps:
       qty: 0.5
       unit: kg
     - item_id: motor_housing_steel
-      qty: 3.0
+      qty: 5.8
       unit: kg
   outputs:
     - item_id: compressor_motor_small
       qty: 1.0
       unit: unit
+  byproducts:
+    - item_id: assembly_loss
+      qty: 0.0
+      unit: kg
   est_time_hr: 1.0
   labor_hours: 1.0
   notes: "Assemble laminations, shaft, bearings, housing, and terminal box; basic spin test."

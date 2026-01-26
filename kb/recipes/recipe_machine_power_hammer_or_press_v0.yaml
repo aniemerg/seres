@@ -1,95 +1,79 @@
 id: recipe_machine_power_hammer_or_press_v0
 target_item_id: power_hammer_or_press_v0
 variant_id: v0
-produces_qty: 200.0
-produces_unit: kg
+produces_qty: 1
+produces_unit: unit
 inputs:
-  - item_id: bulk_material_or_parts
-    qty: 200.0
-    unit: kg
   - item_id: hammer_frame_basic
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: hammer_head_basic
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: hammer_drive_motor
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: anvil_block_basic
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: control_compute_module_imported
-    qty: 2.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: sensor_suite_general
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: power_conditioning_module
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
   - item_id: fastener_kit_medium
-    qty: 1.0
-    unit: kg
+    qty: 1
+    unit: unit
 outputs:
   - item_id: power_hammer_or_press_v0
-    qty: 200.0
-    unit: kg
+    qty: 1
+    unit: unit
 steps:
-  - process_id: import_receiving_basic_v0
-    inputs:
-      - item_id: bulk_material_or_parts
-        qty: 200.0
-        unit: kg
-    outputs:
-      - item_id: bulk_material_or_parts
-        qty: 200.0
-        unit: kg
-    est_time_hr: 0.5
-    labor_hours: 0.5
   - process_id: assembly_basic_v0
     inputs:
       - item_id: hammer_frame_basic
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: hammer_head_basic
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: hammer_drive_motor
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: anvil_block_basic
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: control_compute_module_imported
-        qty: 2.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: sensor_suite_general
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: power_conditioning_module
-        qty: 1.0
-        unit: kg
+        qty: 1
+        unit: unit
       - item_id: fastener_kit_medium
-        qty: 1.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 200.0
-        unit: kg
-    est_time_hr: 2.0
-    labor_hours: 2.0
-    machine_hours: 2.0
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 200.0
-        unit: kg
+        qty: 1
+        unit: unit
     outputs:
       - item_id: power_hammer_or_press_v0
-        qty: 200.0
-        unit: kg
-    est_time_hr: 0.5
-    labor_hours: 0.5
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: "Assemble frame, mount anvil, install hammer head and drive motor, integrate controls and sensors. Major components: 120 kg frame + 40 kg head + 30 kg motor + 80 kg anvil + electronics ≈ 280 kg total. Testing and calibration included in assembly time."
 assumptions: Assemble hammer/press per BOM; imported compute/sensors.
-notes: Coarse route; refine with tuning later.
+notes: |
+  Recipe corrected 2026-01 to fix mass balance errors:
+  - Removed unused bulk_material_or_parts import step
+  - Changed all component specifications from kg to unit counts
+  - Updated machine mass from 200 kg to 290 kg to match component total
+  - Removed inspection step to eliminate circular dependency (testing included in assembly)
+  - Simplified to 1 step: assembly with integrated testing
+  - Total time: ~4 hours
+
+  Note: Item marked DEPRECATED - consolidated into hydraulic_press.

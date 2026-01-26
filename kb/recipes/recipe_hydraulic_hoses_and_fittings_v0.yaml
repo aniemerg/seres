@@ -4,7 +4,7 @@ target_item_id: hydraulic_hoses_and_fittings
 variant_id: v0
 inputs:
   - item_id: hydraulic_hose_segment_v0
-    qty: 5.0
+    qty: 7.0
     unit: kg
     notes: "Reinforced hose segments for cutting and crimping"
   - item_id: metal_fittings_raw
@@ -40,7 +40,7 @@ steps:
   - process_id: hose_cutting_and_crimping_v0
     inputs:
       - item_id: hydraulic_hose_segment_v0
-        qty: 5.0
+        qty: 7.0
         unit: kg
         notes: "Reinforced hose stock"
       - item_id: hose_fittings
@@ -49,8 +49,8 @@ steps:
         notes: "Fittings assembled for crimping"
     outputs:
       - item_id: hydraulic_hose_assembly
-        qty: 5.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     est_time_hr: 0.7
     machine_hours: 0.5
     labor_hours: 0.5
@@ -58,8 +58,8 @@ steps:
   - process_id: pressure_test_basic_v0
     inputs:
       - item_id: hydraulic_hose_assembly
-        qty: 5.0
-        unit: unit
+        qty: 8.0
+        unit: kg
     outputs:
       - item_id: hydraulic_hoses_and_fittings
         qty: 8.0

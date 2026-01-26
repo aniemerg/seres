@@ -3,20 +3,17 @@ target_item_id: power_distribution
 variant_id: v0
 inputs:
   - item_id: sheet_metal_or_structural_steel
-    qty: 10.0
+    qty: 80.0
     unit: kg
   - item_id: electrical_wire_and_connectors
-    qty: 1.0
-    unit: kg
-  - item_id: cable_ties_and_sleeving
-    qty: 0.2
-    unit: kg
-  - item_id: control_components
     qty: 5.0
     unit: kg
-  - item_id: assembled_electrical_system
+  - item_id: cable_ties_and_sleeving
     qty: 1.0
-    unit: unit
+    unit: kg
+  - item_id: control_components
+    qty: 18.0
+    unit: kg
 outputs:
   - item_id: power_distribution
     qty: 1.0
@@ -25,11 +22,11 @@ steps:
   - process_id: sheet_metal_fabrication_v0
     inputs:
       - item_id: sheet_metal_or_structural_steel
-        qty: 10.0
+        qty: 80.0
         unit: kg
     outputs:
       - item_id: formed_sheet_metal_parts
-        qty: 9.5
+        qty: 76.0
         unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
@@ -37,41 +34,41 @@ steps:
   - process_id: cable_harness_assembly_v0
     inputs:
       - item_id: electrical_wire_and_connectors
-        qty: 1.0
+        qty: 5.0
         unit: kg
       - item_id: cable_ties_and_sleeving
-        qty: 0.2
+        qty: 1.0
         unit: kg
     outputs:
       - item_id: assembled_cable_harness
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Assemble power cables, terminals, and bus bars"
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: formed_sheet_metal_parts
-        qty: 9.5
+        qty: 76.0
         unit: kg
       - item_id: assembled_cable_harness
-        qty: 1.0
-        unit: unit
+        qty: 6.0
+        unit: kg
       - item_id: control_components
-        qty: 5.0
+        qty: 18.0
         unit: kg
     outputs:
-      - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 100.0
+        unit: kg
     est_time_hr: 10.0
     labor_hours: 10.0
     notes: "Install circuit breakers, distribution panels, wire connections"
   - process_id: electrical_testing_v0
     inputs:
-      - item_id: assembled_electrical_system
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 100.0
+        unit: kg
     outputs:
       - item_id: power_distribution
         qty: 1.0

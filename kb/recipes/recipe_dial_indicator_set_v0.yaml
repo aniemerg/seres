@@ -20,12 +20,11 @@ inputs:
     notes: Assembly hardware
 outputs:
   - item_id: dial_indicator_set
-    qty: 2.0
-    unit: kg
-  - item_id: steel_scrap
+    qty: 1.0
+    unit: unit
+  - item_id: metal_swarf
     qty: 0.3
     unit: kg
-    notes: Machining waste
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
@@ -37,7 +36,10 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 2.0
+        qty: 1.2
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.3
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
@@ -46,7 +48,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 2.0
+        qty: 1.2
         unit: kg
       - item_id: spring_compression_small
         qty: 3.0
@@ -56,34 +58,38 @@ steps:
         unit: unit
     outputs:
       - item_id: assembled_equipment
-        qty: 2.0
+        qty: 1.5
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
-    notes: "Assemble indicator mechanisms with precision gearing and spring return"
+    notes: "Assemble indicator mechanisms with precision gearing and spring return. Assumes springs and fasteners ≈ 0.3 kg combined."
   - process_id: calibration_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 2.0
+        qty: 1.5
         unit: kg
     outputs:
-      - item_id: instrument_calibrated
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 1.5
+        unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate dial indicators against gauge blocks for accuracy verification"
   - process_id: inspection_basic_v0
     inputs:
-      - item_id: instrument_calibrated
-        qty: 1.0
-        unit: unit
+      - item_id: assembled_equipment
+        qty: 1.5
+        unit: kg
     outputs:
       - item_id: dial_indicator_set
-        qty: 2.0
-        unit: kg
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Verify measurement accuracy and repeatability across full range"
-assumptions: "Mechanical dial indicators with gear-driven display. Steel construction with hardened measurement surfaces."
-notes: "Dial indicator set for precision dimensional measurement. Used in machining, inspection, and quality control."
+    notes: "Verify measurement accuracy and repeatability across full range. Final set ~1.5 kg."
+assumptions: "Mechanical dial indicators with gear-driven display. Steel construction with hardened measurement surfaces. Total mass ~1.5 kg (revised from 2.0 kg to match material inputs)."
+notes: |
+  Assumptions:
+  - Use assembled_equipment as the intermediate between assembly, calibration, and inspection.
+  Rationale:
+  - Removes pure-intermediate items while keeping calibration and inspection steps explicit.

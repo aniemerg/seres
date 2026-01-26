@@ -3,20 +3,20 @@ target_item_id: battery_pack_large
 variant_id: v0
 inputs:
   - item_id: battery_cell
-    qty: 250
-    unit: unit
+    qty: 375.0
+    unit: kg
   - item_id: steel_plate_raw
     qty: 100.0
     unit: kg
   - item_id: battery_management_system
-    qty: 1
-    unit: unit
+    qty: 5.0
+    unit: kg
   - item_id: thermal_management_components
-    qty: 1
-    unit: unit
+    qty: 15.0
+    unit: kg
   - item_id: electrical_wiring_kit
-    qty: 2
-    unit: unit
+    qty: 10.0
+    unit: kg
 outputs:
   - item_id: battery_pack_large
     qty: 500.0
@@ -25,11 +25,11 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: battery_cell
-        qty: 250
-        unit: unit
+        qty: 375.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 300.0
+        qty: 375.0
         unit: kg
     est_time_hr: 12.0
     labor_hours: 8.0
@@ -52,14 +52,14 @@ steps:
         qty: 95.0
         unit: kg
       - item_id: assembled_equipment
-        qty: 300.0
+        qty: 375.0
         unit: kg
       - item_id: thermal_management_components
-        qty: 1
-        unit: unit
+        qty: 15.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 470.0
+        qty: 485.0
         unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
@@ -67,17 +67,17 @@ steps:
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 470.0
+        qty: 485.0
         unit: kg
       - item_id: battery_management_system
-        qty: 1
-        unit: unit
+        qty: 5.0
+        unit: kg
       - item_id: electrical_wiring_kit
-        qty: 2
-        unit: unit
+        qty: 10.0
+        unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 490.0
+        qty: 500.0
         unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
@@ -85,11 +85,11 @@ steps:
   - process_id: electrical_testing_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 490.0
+        qty: 500.0
         unit: kg
     outputs:
       - item_id: wired_electrical_system
-        qty: 495.0
+        qty: 500.0
         unit: kg
     est_time_hr: 3.0
     labor_hours: 2.0
@@ -97,7 +97,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: wired_electrical_system
-        qty: 495.0
+        qty: 500.0
         unit: kg
     outputs:
       - item_id: battery_pack_large
@@ -107,4 +107,11 @@ steps:
     labor_hours: 1.0
     notes: "Verify all connections, thermal management operation, and safety systems"
 assumptions: "Large battery pack for electric mobile equipment. 500 kg includes cells, BMS, thermal management, and structural enclosure. Assumes lithium-ion or similar chemistry requiring thermal management and monitoring."
-notes: "Manufacturing of large battery pack for electric vehicles and equipment. Total assembly time ~31 hours. Requires cell fabrication, BMS integration, and thermal management system."
+notes: |
+  Assumptions:
+  - Battery cell mass scaled to 375 kg to align with 500 kg pack total.
+  - BMS (5 kg), thermal components (15 kg), and wiring (10 kg) treated as bulk inputs.
+  Rationale:
+  - Preserve mass balance and align units with item definitions.
+  Uncertainty:
+  - Cell count and enclosure mass need refinement from detailed design.

@@ -11,9 +11,6 @@ inputs:
   - item_id: coolant_piping
     qty: 10.0
     unit: kg
-  - item_id: assembled_equipment
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: heat_rejection_system
     qty: 1.0
@@ -59,6 +56,9 @@ steps:
     notes: "Machine pump mounting, fittings, and connection ports"
   - process_id: heat_rejection_system_assembly_v0
     inputs:
+      - item_id: machined_part_raw
+        qty: 225.0
+        unit: kg
       - item_id: radiator_panel
         qty: 1.0
         unit: unit
@@ -67,28 +67,28 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 300.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Assemble radiator panels, coolant loops, pumps, and thermal management components"
   - process_id: leak_test_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 300.0
+        unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 300.0
+        unit: kg
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Pressure test coolant loops for leaks"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 300.0
+        unit: kg
     outputs:
       - item_id: heat_rejection_system
         qty: 1.0

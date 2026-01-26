@@ -18,8 +18,8 @@ inputs:
     qty: 1
     unit: unit
   - item_id: assembled_equipment
-    qty: 1
-    unit: unit
+    qty: 80.0
+    unit: kg
     notes: "Intermediate for integration test"
 outputs:
   - item_id: glassworking_station
@@ -60,16 +60,16 @@ steps:
       unit: unit
     outputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 80.0
+      unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
     notes: "Assemble workbench, torch/burner, annealing oven, and tool storage"
   - process_id: integration_test_basic_v0
     inputs:
     - item_id: assembled_equipment
-      qty: 1
-      unit: unit
+      qty: 80.0
+      unit: kg
     outputs:
     - item_id: glassworking_station
       qty: 1
@@ -78,4 +78,7 @@ steps:
     labor_hours: 2.0
     notes: "Test torch operation, gas flow control, and annealing oven temperature"
 assumptions: Glassworking station for lampworking and glass fabrication. Uses oxy-fuel or hydrogen-oxygen torch for heating glass. Annealing oven required to relieve thermal stress.
-notes: Versatile glassworking station for making vacuum tubes, insulators, laboratory glassware, and optical components. Critical for electronics manufacturing (vacuum tube envelopes) and chemical processing (lab glassware).
+notes: |
+  Versatile glassworking station for making vacuum tubes, insulators, laboratory glassware, and optical components.
+  Critical for electronics manufacturing (vacuum tube envelopes) and chemical processing (lab glassware).
+  Mass balance: set assembled_equipment output to 80 kg to match station mass.

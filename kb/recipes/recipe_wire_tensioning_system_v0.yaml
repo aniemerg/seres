@@ -3,10 +3,10 @@ target_item_id: wire_tensioning_system
 variant_id: v0
 inputs:
   - item_id: steel_bar_stock
-    qty: 3.5
+    qty: 4.0
     unit: kg
   - item_id: steel_sheet_3mm
-    qty: 0.5
+    qty: 0.7
     unit: kg
   - item_id: spring_compression_small
     qty: 2.0
@@ -25,37 +25,43 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: steel_bar_stock
-        qty: 2.0
+        qty: 2.3
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 1.8
+        qty: 2.0
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.3
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
-    notes: Machine pulley for wire guidance
+    notes: Machine pulley for wire guidance (0.3 kg swarf)
   - process_id: welding_basic_v0
     inputs:
       - item_id: steel_bar_stock
-        qty: 1.5
+        qty: 1.7
         unit: kg
       - item_id: steel_sheet_3mm
-        qty: 0.5
+        qty: 0.7
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 1.9
+        qty: 2.36
+        unit: kg
+      - item_id: waste
+        qty: 0.04
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: Fabricate frame and mounting brackets
+    notes: Fabricate frame and mounting brackets (0.04 kg welding loss)
   - process_id: assembly_process_general_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 1.9
+        qty: 2.36
         unit: kg
       - item_id: machined_part_raw
-        qty: 1.8
+        qty: 2.0
         unit: kg
       - item_id: spring_compression_small
         qty: 2.0

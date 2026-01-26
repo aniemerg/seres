@@ -1,13 +1,17 @@
 id: surface_grinder
 kind: machine
 name: Surface grinder
-mass: 1200.0
-unit: kg
+mass: 950.0
+unit: unit
 bom: bom_surface_grinder_v0
-notes: Precision surface grinder for tight tolerances and fine surface finishes. Includes
-  grinding spindle, magnetic chuck, and coolant system.
+notes: "Mass updated 2026-01 from 1200 kg to 950 kg based on BOM component analysis.\n\
+  Component total: machine_base_large + grinding_spindle_assembly + table_drive_assembly\
+  \ +\nmagnetic_chuck_surface_grinder + coolant_system_basic + control_compute_module_imported\
+  \ +\nsensor_suite_general + power_conditioning_module + fastener_kit_large \u2248\
+  \ 950 kg.\n\nPrecision surface grinder for tight tolerances and fine surface finishes.\
+  \ Includes\ngrinding spindle, magnetic chuck, and coolant system.\n"
 preferred_variant: simple
 processes_supported:
 - alnico_machining_grinding_v0
 recipe: recipe_surface_grinder_v0
-unit_kind: bulk
+unit_kind: discrete

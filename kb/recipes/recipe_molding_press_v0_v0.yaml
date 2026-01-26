@@ -11,26 +11,26 @@ inputs:
     qty: 6.0
     unit: kg
   - item_id: steel_frame_molding_press_v0
-    qty: 1.0
+    qty: 9.0
     unit: unit
     notes: "Intermediate for machining/assembly steps"
   - item_id: hydraulic_pump_unit_v0
-    qty: 1.0
+    qty: 9.0
     unit: unit
   - item_id: mold_platen_assembly_v0
-    qty: 2.0
+    qty: 18.0
     unit: unit
   - item_id: control_panel_basic_v0
-    qty: 1.0
+    qty: 9.0
     unit: unit
   - item_id: bearing_set_v0
-    qty: 4.0
+    qty: 36.0
     unit: unit
   - item_id: fastener_kit_large_v0
-    qty: 1.0
+    qty: 9.0
     unit: unit
   - item_id: motor_assembly_standard_v0
-    qty: 1.0
+    qty: 9.0
     unit: unit
 outputs:
   - item_id: molding_press_v0
@@ -69,25 +69,25 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: steel_frame_molding_press_v0
-        qty: 1.0
+        qty: 9.0
         unit: unit
       - item_id: hydraulic_pump_unit_v0
-        qty: 1.0
+        qty: 9.0
         unit: unit
       - item_id: mold_platen_assembly_v0
-        qty: 2.0
+        qty: 18.0
         unit: unit
       - item_id: control_panel_basic_v0
-        qty: 1.0
+        qty: 9.0
         unit: unit
       - item_id: bearing_set_v0
-        qty: 4.0
+        qty: 36.0
         unit: unit
       - item_id: fastener_kit_large_v0
-        qty: 1.0
+        qty: 9.0
         unit: unit
       - item_id: motor_assembly_standard_v0
-        qty: 1.0
+        qty: 9.0
         unit: unit
     outputs:
       - item_id: molding_press_v0
@@ -97,4 +97,6 @@ steps:
     machine_hours: 0.0
     labor_hours: 2.0
     notes: "Assemble base frame, cylinder mounts, hydraulic power unit, and controls."
-notes: "Seed recipe to manufacture molding_press_v0 consistent with other top-level machine recipes."
+notes: |
+  Seed recipe to manufacture molding_press_v0 consistent with other top-level machine recipes.
+  Mass balance: scaled major subassemblies by ~9× to approximate 1500 kg press mass.
