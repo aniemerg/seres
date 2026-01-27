@@ -89,6 +89,9 @@ resource_requirements:
     qty: 2.0
     unit: hr
 ```
+Machines are not consumable inputs. Do not list reusable machines in
+`inputs`/`outputs`; put them in `resource_requirements` so the simulator treats
+them as capacity requirements rather than materials.
 
 ## Recipes
 

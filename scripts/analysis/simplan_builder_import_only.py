@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Build an import-only RunbookPlan for a target machine.
-Imports all BOM components and then builds the machine.
+Build an import-only SimPlan for a target machine.
+Imports all recipe inputs (or BOM components if no recipe).
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.analysis.runbook_plan import RunbookPlan
+from scripts.analysis.simplan import SimPlan
 from src.kb_core.kb_loader import KBLoader
 
 
@@ -45,13 +45,18 @@ def main() -> int:
     parser.add_argument("--sim-id", required=True, help="Simulation id to use")
     parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
     parser.add_argument("--out", help="Output plan JSON path")
+    parser.add_argument(
+        "--allow-bom",
+        action="store_true",
+        help="Allow BOM fallback when no recipe is available (default: error).",
+    )
     args = parser.parse_args()
 
     kb_root = Path(args.kb_root)
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
 
-    plan = RunbookPlan(sim_id=args.sim_id, target_machine_id=args.machine_id)
+    plan = SimPlan(sim_id=args.sim_id, target_machine_id=args.machine_id)
     plan.add_note(f"Import-only plan for {args.machine_id}")
 
     machine_model = kb.get_item(args.machine_id)
@@ -90,6 +95,13 @@ def main() -> int:
         plan.target_recipe_id = recipe_id
         plan.build_machine = False
     else:
+        if not args.allow_bom:
+            print(
+                f"Error: no recipe for machine '{args.machine_id}'. "
+                "Add a recipe or pass --allow-bom to fallback.",
+                file=sys.stderr,
+            )
+            return 1
         bom = kb.get_bom(args.machine_id)
         if not bom:
             print(f"Error: BOM not found for machine '{args.machine_id}'", file=sys.stderr)

@@ -1,6 +1,6 @@
-# ISRU Plan Automation (RunbookPlan)
+# ISRU Plan Automation (SimPlan)
 
-This document describes the new **RunbookPlan** automation scripts for building,
+This document describes the new **SimPlan** automation scripts for building,
 running, and optimizing simulations without editing Markdown runbooks directly.
 Plans can still be exported later, but the internal plan is the primary API.
 
@@ -12,20 +12,23 @@ Plans can still be exported later, but the internal plan is the primary API.
 
 ## Files
 
-- `scripts/analysis/runbook_plan.py`  
-  Defines the RunbookPlan data structure and JSON serialization.
+- `scripts/analysis/simplan.py`  
+  Defines the SimPlan data structure and JSON serialization.
 
-- `scripts/analysis/plan_builder_import_only.py`  
+- `scripts/analysis/simplan_builder_import_only.py`  
   Builds an import-only plan from the machine's recipe inputs (or BOM if no recipe).
 
-- `scripts/analysis/plan_runner.py`  
-  Executes a RunbookPlan directly and reports target-machine ISRU.
+- `scripts/analysis/simplan_runner.py`  
+  Executes a SimPlan directly and reports target-machine ISRU.
 
-- `scripts/analysis/plan_optimizer_greedy.py`  
+- `scripts/analysis/simplan_optimizer_greedy.py`  
   Greedy optimizer that expands imported items into local recipes, re-plans,
   and re-runs to measure ISRU improvement.
 
-## RunbookPlan Summary
+- `scripts/analysis/simplan_batch_optimize.py`  
+  Batch optimizer for running short greedy optimization across many machines.
+
+## SimPlan Summary
 
 A plan includes:
 
@@ -42,7 +45,7 @@ A plan includes:
 Build a baseline plan that imports all recipe inputs and required machines.
 
 ```bash
-.venv/bin/python scripts/analysis/plan_builder_import_only.py \
+.venv/bin/python scripts/analysis/simplan_builder_import_only.py \
   --machine-id reduction_furnace_v0 \
   --sim-id rf_import_only
 ```
@@ -57,7 +60,7 @@ out/plan_reduction_furnace_v0_import_only.json
 Run the plan directly and get provenance-based ISRU for the target machine:
 
 ```bash
-.venv/bin/python scripts/analysis/plan_runner.py \
+.venv/bin/python scripts/analysis/simplan_runner.py \
   --plan out/plan_reduction_furnace_v0_import_only.json \
   --reset
 ```
@@ -67,7 +70,7 @@ Run the plan directly and get provenance-based ISRU for the target machine:
 Expand imported items into local recipes, one step at a time.
 
 ```bash
-.venv/bin/python scripts/analysis/plan_optimizer_greedy.py \
+.venv/bin/python scripts/analysis/simplan_optimizer_greedy.py \
   --machine-id reduction_furnace_v0 \
   --sim-id rf_opt \
   --iterations 3

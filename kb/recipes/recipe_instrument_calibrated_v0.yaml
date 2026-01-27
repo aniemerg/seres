@@ -3,7 +3,7 @@ kind: recipe
 target_item_id: instrument_calibrated
 variant_id: v0
 inputs:
-  - item_id: instrument_uncalibrated
+  - item_id: instrument_calibrated
     qty: 1.0
     unit: unit
 outputs:
@@ -13,7 +13,7 @@ outputs:
 steps:
   - process_id: calibration_basic_v0
     inputs:
-      - item_id: instrument_uncalibrated
+      - item_id: instrument_calibrated
         qty: 1.0
         unit: unit
     outputs:

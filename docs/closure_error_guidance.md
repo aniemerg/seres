@@ -324,6 +324,13 @@ steps:
   - process_id: wire_drawing_v0     # rod → wire
 ```
 
+**Note on placeholders:** Avoid generic placeholder intermediates (e.g.,
+`instrument_uncalibrated`) unless you explicitly define them as real items with
+consistent units. If an intermediate should always be recipe-specific, inline
+the chain or use a template process with explicit step inputs/outputs for the
+concrete item IDs. Do not mark placeholder intermediates as `is_import` unless
+they are true imports.
+
 ### Pattern 3: Mass Balance Issues
 
 **Problem:** Recipe inputs total mass doesn't match outputs.

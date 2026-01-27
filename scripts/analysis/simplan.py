@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-RunbookPlan: internal representation of a simulation plan that can be executed
+SimPlan: internal representation of a simulation plan that can be executed
 directly (no markdown runbook required).
 """
 from __future__ import annotations
@@ -39,7 +39,7 @@ class PlanNote:
 
 
 @dataclass
-class RunbookPlan:
+class SimPlan:
     sim_id: str
     target_machine_id: str
     target_recipe_id: Optional[str] = None
@@ -92,8 +92,8 @@ class RunbookPlan:
         }
 
     @staticmethod
-    def from_dict(data: Dict[str, Any]) -> "RunbookPlan":
-        plan = RunbookPlan(
+    def from_dict(data: Dict[str, Any]) -> "SimPlan":
+        plan = SimPlan(
             sim_id=data["sim_id"],
             target_machine_id=data["target_machine_id"],
             target_recipe_id=data.get("target_recipe_id"),
@@ -113,6 +113,6 @@ class RunbookPlan:
         path.write_text(json.dumps(self.to_dict(), indent=2), encoding="utf-8")
 
     @staticmethod
-    def load(path: Path) -> "RunbookPlan":
+    def load(path: Path) -> "SimPlan":
         data = json.loads(path.read_text(encoding="utf-8"))
-        return RunbookPlan.from_dict(data)
+        return SimPlan.from_dict(data)

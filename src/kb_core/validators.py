@@ -1662,21 +1662,91 @@ def validate_machine_completeness(kb: Any) -> List[ValidationIssue]:
 
     # Check: Every machine recipe should have a BOM
     for recipe_id, recipe in kb.recipes.items():
-        if recipe_id.startswith('recipe_machine_'):
-            target = recipe.get('target_item_id')
-            if target:
-                bom = kb.get_bom(target)
-                if not bom:
-                    issues.append(ValidationIssue(
-                        level=ValidationLevel.WARNING,
-                        category="machine",
-                        rule="machine_recipe_missing_bom",
-                        entity_type="recipe",
-                        entity_id=recipe_id,
-                        message=f"Machine recipe '{recipe_id}' targets '{target}' but no BOM exists",
-                        field_path="target_item_id",
-                        fix_hint=f"Create BOM bom_{target}.yaml listing components for this machine"
-                    ))
+        target = recipe.get('target_item_id')
+        if not target:
+            continue
+
+        is_machine_target = False
+        target_item = kb.get_item(target)
+        if target_item:
+            target_dict = target_item if isinstance(target_item, dict) else target_item.model_dump()
+            is_machine_target = target_dict.get("kind") == "machine"
+        elif recipe_id.startswith('recipe_machine_'):
+            # Fallback to naming convention if target item isn't resolvable.
+            is_machine_target = True
+
+        if is_machine_target:
+            bom = kb.get_bom(target)
+            if not bom:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.WARNING,
+                    category="machine",
+                    rule="machine_recipe_missing_bom",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Machine recipe '{recipe_id}' targets '{target}' but no BOM exists",
+                    field_path="target_item_id",
+                    fix_hint=f"Create BOM bom_{target}.yaml listing components for this machine"
+                ))
+
+    return issues
+
+
+def validate_item_bom_consistency(kb: Any) -> List[ValidationIssue]:
+    """
+    Validate that item->BOM references resolve to the same owner_item_id.
+
+    Flags cases where an item declares a BOM but KB indexing maps that BOM
+    to a different owner_item_id, which can break BOM-based lookups.
+    """
+    issues: List[ValidationIssue] = []
+
+    for item_id, item in kb.items.items():
+        item_dict = item if isinstance(item, dict) else item.model_dump()
+        bom_id = item_dict.get("bom")
+        if not bom_id:
+            continue
+
+        # If the item_id resolves to a BOM via owner_item_id, we are good.
+        if kb.get_bom(item_id):
+            continue
+
+        # Try to locate the BOM by id to provide a more helpful message.
+        bom_match = None
+        for bom in kb.boms.values():
+            bom_dict = bom if isinstance(bom, dict) else bom.model_dump()
+            if bom_dict.get("id") == bom_id:
+                bom_match = bom_dict
+                break
+
+        if bom_match:
+            owner = bom_match.get("owner_item_id")
+            issues.append(ValidationIssue(
+                level=ValidationLevel.WARNING,
+                category="item",
+                rule="item_bom_owner_mismatch",
+                entity_type="item",
+                entity_id=item_id,
+                message=(
+                    f"Item '{item_id}' references BOM '{bom_id}' owned by '{owner}', "
+                    f"so item_id-based BOM lookup will fail"
+                ),
+                field_path="bom",
+                fix_hint=(
+                    f"Update item id to '{owner}', or change bom owner_item_id to '{item_id}'"
+                )
+            ))
+        else:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.WARNING,
+                category="item",
+                rule="item_bom_not_found",
+                entity_type="item",
+                entity_id=item_id,
+                message=f"Item '{item_id}' references BOM '{bom_id}' but no such BOM exists",
+                field_path="bom",
+                fix_hint=f"Create BOM '{bom_id}' or remove bom reference from '{item_id}'"
+            ))
 
     return issues
 

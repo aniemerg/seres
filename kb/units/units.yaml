@@ -24,6 +24,8 @@ units:
   count:
     - count   # discrete count (standard)
     - unit    # synonym for count
+    - set     # synonym for count
+    - kit     # synonym for count
 
   time:
     - minute  # minute
@@ -57,6 +59,15 @@ conversions:
   - from: hour
     to: minute
     factor: 60
+
+  # Count conversions
+  - from: set
+    to: unit
+    factor: 1.0
+
+  - from: kit
+    to: unit
+    factor: 1.0
 
 notes: |
   - All conversions are bi-directional (system auto-reverses if needed)

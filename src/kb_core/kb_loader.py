@@ -172,8 +172,11 @@ class KBLoader:
                 data = self._load_yaml_file(bom_file)
                 if data:
                     bom_id = data.get("id", bom_file.stem)
-                    # Extract machine_id from "bom_<machine_id>"
-                    if bom_id.startswith("bom_"):
+                    owner_item_id = data.get("owner_item_id")
+                    # Prefer explicit owner_item_id when provided; fallback to bom_<machine_id> convention.
+                    if owner_item_id:
+                        machine_id = owner_item_id
+                    elif bom_id.startswith("bom_"):
                         machine_id = bom_id[4:]
                     else:
                         machine_id = bom_id

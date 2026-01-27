@@ -57,7 +57,7 @@ from src.simulation.persistence import (
 )
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 from src.kb_core.kb_loader import KBLoader
-from src.kb_core.unit_converter import UnitConverter
+from src.kb_core.unit_converter import UnitConverter, COUNT_UNITS
 from src.kb_core.calculations import calculate_duration, calculate_energy, is_mass_tracked_unit
 from src.kb_core.schema import Quantity, RawProcess, RawEnergyModel
 from src.kb_core.override_resolver import resolve_recipe_step_with_kb
@@ -429,8 +429,12 @@ class SimulationEngine:
             if item_model:
                 item_def = item_model.model_dump() if hasattr(item_model, 'model_dump') else item_model
                 if item_def.get('kind') == 'machine':
-                    if inv_item.unit in ('count', 'unit'):
+                    if inv_item.unit in COUNT_UNITS:
                         machine_capacities[item_id] = inv_item.quantity
+                    else:
+                        converted = self.converter.convert(inv_item.quantity, inv_item.unit, "count", item_id)
+                        if converted is not None:
+                            machine_capacities[item_id] = converted
 
         self.reservation_manager = MachineReservationManager(machine_capacities)
 
@@ -446,8 +450,12 @@ class SimulationEngine:
             if item_model:
                 item_def = item_model.model_dump() if hasattr(item_model, 'model_dump') else item_model
                 if item_def.get('kind') == 'machine':
-                    if inv_item.unit in ('count', 'unit'):
+                    if inv_item.unit in COUNT_UNITS:
                         machine_capacities[item_id] = inv_item.quantity
+                    else:
+                        converted = self.converter.convert(inv_item.quantity, inv_item.unit, "count", item_id)
+                        if converted is not None:
+                            machine_capacities[item_id] = converted
 
         self.reservation_manager.machine_capacities = machine_capacities
 

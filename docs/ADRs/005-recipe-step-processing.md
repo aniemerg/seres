@@ -229,6 +229,13 @@ The flexibility helps with:
 - Prototyping new processes before generalizing
 - Handling variations without creating process proliferation
 
+### Placeholder Semantics (Clarification)
+
+There is **no recipe-level placeholder flag** for inputs/outputs. If a process
+uses generic or placeholder inputs, it **must** be marked `is_template: true`
+and each recipe step must override the inputs/outputs with concrete item IDs.
+Recipe-level inputs/outputs are treated as real materials, not placeholders.
+
 ## Implementation Plan
 
 ### Phase 1: Process step resolution (required for machine checking) ✅ COMPLETE

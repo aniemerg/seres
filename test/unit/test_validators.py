@@ -9,6 +9,7 @@ from src.kb_core.validators import (
     validate_process,
     validate_recipe,
     validate_item,
+    validate_item_bom_consistency,
     validate_process_schema,
     validate_process_semantics,
     validate_process_unit_conversion,
@@ -113,6 +114,26 @@ class MockKBLoader:
         return self.boms.get(machine_id)
 
 
+class MockKBLoaderWithBoms:
+    """Mock KB loader with BOM ownership mismatch for testing."""
+
+    def __init__(self):
+        self.items = {
+            "hauler": {"id": "hauler", "bom": "bom_hauler_v0"},
+            "hauler_v0": {"id": "hauler_v0", "bom": "bom_hauler_v0"},
+        }
+        self.boms = {
+            "hauler_v0": {
+                "id": "bom_hauler_v0",
+                "owner_item_id": "hauler_v0",
+                "components": [{"item_id": "frame", "qty": 1, "unit": "count"}],
+            }
+        }
+
+    def get_bom(self, machine_id):
+        return self.boms.get(machine_id)
+
+
 @pytest.fixture
 def kb_loader():
     return MockKBLoader()
@@ -145,6 +166,15 @@ class TestSchemaValidation:
         error = next((i for i in issues if i.rule == "process_type_required"), None)
         assert error is not None
         assert error.level == ValidationLevel.ERROR
+
+
+def test_item_bom_owner_mismatch():
+    kb = MockKBLoaderWithBoms()
+    issues = validate_item_bom_consistency(kb)
+    mismatch = next((i for i in issues if i.rule == "item_bom_owner_mismatch"), None)
+    assert mismatch is not None
+    assert mismatch.entity_id == "hauler"
+    assert mismatch.level == ValidationLevel.WARNING
 
     def test_invalid_process_type(self):
         """ERROR: process_type must be batch or continuous."""

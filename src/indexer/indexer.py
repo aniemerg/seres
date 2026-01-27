@@ -28,7 +28,13 @@ except ImportError:  # pragma: no cover
 from src.kb_core.queue_manager import _locked_queue
 from src.kb_core.queue_filter_config import QueueFilterConfig
 from src.kb_core.kb_loader import KBLoader
-from src.kb_core.validators import validate_process, validate_recipe, validate_item, ValidationLevel
+from src.kb_core.validators import (
+    validate_process,
+    validate_recipe,
+    validate_item,
+    validate_item_bom_consistency,
+    ValidationLevel,
+)
 from src.kb_core.unit_converter import UnitConverter
 from src.simulation.adr020_validators import validate_process_adr020, validate_recipe_adr020
 
@@ -891,6 +897,43 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
                 }
                 issue_map[signature] = queue_item
                 all_issues.append(issue)
+
+    # Cross-item BOM consistency checks (requires KB context)
+    for issue in validate_item_bom_consistency(kb_loader):
+        if issue.level not in (ValidationLevel.ERROR, ValidationLevel.WARNING):
+            continue
+        signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
+        if signature in issue_map:
+            continue
+
+        is_auto_fixable = False
+        priority = {
+            ValidationLevel.ERROR: 100,
+            ValidationLevel.WARNING: 50,
+            ValidationLevel.INFO: 10,
+        }.get(issue.level, 0)
+
+        queue_item = {
+            "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
+            "kind": issue.entity_type,
+            "reason": f"validation_{issue.level.value}",
+            "gap_type": f"validation_{issue.rule}",
+            "item_id": issue.entity_id,
+            "priority": priority,
+            "auto_fixable": is_auto_fixable,
+            "context": {
+                "validation_level": issue.level.value,
+                "category": issue.category,
+                "rule": issue.rule,
+                "message": issue.message,
+                "field_path": issue.field_path,
+                "fix_hint": issue.fix_hint,
+                "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                "auto_fixable": is_auto_fixable,
+            }
+        }
+        issue_map[signature] = queue_item
+        all_issues.append(issue)
 
     # Validate all recipes
     recipe_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'recipe']

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Execute a RunbookPlan directly with SimulationEngine.
+Execute a SimPlan directly with SimulationEngine.
 """
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.analysis.runbook_plan import RunbookPlan
+from scripts.analysis.simplan import SimPlan
 from src.kb_core.kb_loader import KBLoader
 from src.simulation.engine import SimulationEngine
 
@@ -93,7 +93,10 @@ def _get_recipe_outputs(recipe: Dict[str, Any]) -> Set[str]:
     return outputs
 
 
-def _order_recipes(plan: RunbookPlan, kb: KBLoader) -> List[str]:
+ 
+
+
+def _order_recipes(plan: SimPlan, kb: KBLoader) -> List[str]:
     recipe_ids = [r.recipe_id for r in plan.recipes]
     if not recipe_ids:
         return []
@@ -155,7 +158,7 @@ def _order_recipes(plan: RunbookPlan, kb: KBLoader) -> List[str]:
 
 
 def execute_plan(
-    plan: RunbookPlan,
+    plan: SimPlan,
     kb_root: Path,
     sim_root: Path,
     reset: bool = False,
@@ -255,7 +258,7 @@ def execute_plan(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Execute a RunbookPlan.")
+    parser = argparse.ArgumentParser(description="Execute a SimPlan.")
     parser.add_argument("--plan", required=True, help="Path to plan JSON")
     parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
     parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
@@ -264,7 +267,7 @@ def main() -> int:
     args = parser.parse_args()
 
     plan_path = Path(args.plan)
-    plan = RunbookPlan.load(plan_path)
+    plan = SimPlan.load(plan_path)
 
     if args.dry_run:
         print("Dry run plan actions:")

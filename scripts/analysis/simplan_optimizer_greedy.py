@@ -15,8 +15,8 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.analysis.runbook_plan import RunbookPlan
-from scripts.analysis.plan_runner import execute_plan
+from scripts.analysis.simplan import SimPlan
+from scripts.analysis.simplan_runner import execute_plan
 from src.kb_core.kb_loader import KBLoader
 from src.kb_core.unit_converter import UnitConverter
 from src.indexer.closure_analysis import ClosureAnalyzer
@@ -125,7 +125,7 @@ def _compute_recipe_runs(
 
 
 def _normalize_plan_quantities(
-    plan: RunbookPlan,
+    plan: SimPlan,
     kb: KBLoader,
     converter: UnitConverter,
 ) -> None:
@@ -228,7 +228,7 @@ def _normalize_plan_quantities(
             plan.add_import(item_id, req["qty"], req["unit"], reason="input_cover")
 
 
-def _diff_plans(before: RunbookPlan, after: RunbookPlan) -> Dict[str, List[str]]:
+def _diff_plans(before: SimPlan, after: SimPlan) -> Dict[str, List[str]]:
     before_imports = before.imports
     after_imports = after.imports
     before_recipes = {r.recipe_id: r.quantity for r in before.recipes}
@@ -261,7 +261,7 @@ def _diff_plans(before: RunbookPlan, after: RunbookPlan) -> Dict[str, List[str]]
 
 
 def _expand_item(
-    plan: RunbookPlan,
+    plan: SimPlan,
     item_id: str,
     qty: float,
     unit: str,
@@ -348,8 +348,13 @@ def _expand_item(
     return True
 
 
-def _build_import_only_plan(machine_id: str, sim_id: str, kb: KBLoader) -> RunbookPlan:
-    plan = RunbookPlan(sim_id=sim_id, target_machine_id=machine_id)
+def _build_import_only_plan(
+    machine_id: str,
+    sim_id: str,
+    kb: KBLoader,
+    allow_bom: bool = False,
+) -> SimPlan:
+    plan = SimPlan(sim_id=sim_id, target_machine_id=machine_id)
     plan.add_note(f"Import-only plan for {machine_id}")
 
     machine_model = kb.get_item(machine_id)
@@ -385,6 +390,10 @@ def _build_import_only_plan(machine_id: str, sim_id: str, kb: KBLoader) -> Runbo
         plan.target_recipe_id = recipe_id
         plan.build_machine = False
         return plan
+    if not allow_bom:
+        raise RuntimeError(
+            f"No recipe for machine '{machine_id}'. Add a recipe or pass --allow-bom."
+        )
 
     bom = kb.get_bom(machine_id)
     if not bom:
@@ -412,6 +421,11 @@ def main() -> int:
     parser.add_argument("--out", help="Output plan path")
     parser.add_argument("--candidate", help="Force expansion of a specific import item")
     parser.add_argument("--verbose", action="store_true", help="Verbose decision logs")
+    parser.add_argument(
+        "--allow-bom",
+        action="store_true",
+        help="Allow BOM fallback when no recipe is available (default: error).",
+    )
     args = parser.parse_args()
 
     kb_root = Path(args.kb_root)
@@ -419,7 +433,9 @@ def main() -> int:
     kb.load_all()
     converter = UnitConverter(kb)
 
-    base_plan = _build_import_only_plan(args.machine_id, args.sim_id, kb)
+    base_plan = _build_import_only_plan(
+        args.machine_id, args.sim_id, kb, allow_bom=args.allow_bom
+    )
     base_result = execute_plan(
         base_plan, kb_root, Path(args.sim_root), reset=True, dry_run=False
     )

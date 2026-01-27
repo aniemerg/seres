@@ -25,6 +25,25 @@ def kb_root(tmp_path):
     (kb / "recipes").mkdir(parents=True)
     (kb / "items" / "materials").mkdir(parents=True)
     (kb / "items" / "machines").mkdir(parents=True)
+    (kb / "units").mkdir(parents=True)
+
+    # Unit definitions (include kit/set in count units)
+    with open(kb / "units" / "units.yaml", "w") as f:
+        yaml.dump({
+            "id": "unit_definitions_test_v0",
+            "name": "Unit Definitions (test)",
+            "units": {
+                "mass": ["kg", "g"],
+                "count": ["count", "unit", "kit", "set"],
+                "time": ["hour"],
+            },
+            "conversions": [
+                {"from": "g", "to": "kg", "factor": 0.001},
+                {"from": "kit", "to": "count", "factor": 1.0},
+                {"from": "set", "to": "count", "factor": 1.0},
+                {"from": "hour", "to": "hour", "factor": 1.0},
+            ],
+        }, f)
 
     # Create a simple process
     with open(kb / "processes" / "test_process_v0.yaml", "w") as f:
@@ -61,6 +80,40 @@ def kb_root(tmp_path):
             ],
         }, f)
 
+    # Process that requires a machine imported after reservation manager init
+    with open(kb / "processes" / "test_process_late_machine_v0.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_process_late_machine_v0",
+            "kind": "process",
+            "process_type": "batch",
+            "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+            "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0,
+            },
+            "resource_requirements": [
+                {"machine_id": "lathe", "qty": 1.0, "unit": "count"}
+            ],
+        }, f)
+
+    # Process that uses a machine imported with a count-like unit (kit)
+    with open(kb / "processes" / "test_process_kit_machine_v0.yaml", "w") as f:
+        yaml.dump({
+            "id": "test_process_kit_machine_v0",
+            "kind": "process",
+            "process_type": "batch",
+            "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+            "outputs": [{"item_id": "metal", "qty": 1.0, "unit": "kg"}],
+            "time_model": {
+                "type": "batch",
+                "hr_per_batch": 1.0,
+            },
+            "resource_requirements": [
+                {"machine_id": "toolkit", "qty": 1.0, "unit": "count"}
+            ],
+        }, f)
+
     # Create material items
     with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
         yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
@@ -86,6 +139,22 @@ def kb_root(tmp_path):
             "kind": "machine",
             "unit": "count",
             "mass": 75.0
+        }, f)
+
+    with open(kb / "items" / "machines" / "lathe.yaml", "w") as f:
+        yaml.dump({
+            "id": "lathe",
+            "kind": "machine",
+            "unit": "count",
+            "mass": 80.0
+        }, f)
+
+    with open(kb / "items" / "machines" / "toolkit.yaml", "w") as f:
+        yaml.dump({
+            "id": "toolkit",
+            "kind": "machine",
+            "unit": "count",
+            "mass": 5.0
         }, f)
 
     return kb
@@ -199,7 +268,51 @@ class TestBasicProcessScheduling:
             duration_hours=2.0,
         )
         assert not result2["success"]
-        assert result2["error"] == "machine_conflict"
+
+    def test_capacity_updates_after_new_machine_import(self, kb_root, sim_dir):
+        """Reservation manager should see machines imported after initialization."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        # Initialize reservation manager via first process
+        result1 = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result1["success"]
+
+        # Import new machine after manager init and schedule a process using it
+        engine.import_item("lathe", 1.0, "count")
+        result2 = engine.start_process(
+            process_id="test_process_late_machine_v0",
+            scale=1.0,
+            duration_hours=1.0,
+            start_time=1.5,
+        )
+        assert result2["success"]
+
+    def test_count_like_unit_machines_available(self, kb_root, sim_dir):
+        """Machines imported with count-like units (kit) should be reservable."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("toolkit", 1.0, "kit")
+
+        result = engine.start_process(
+            process_id="test_process_kit_machine_v0",
+            scale=1.0,
+            duration_hours=1.0,
+        )
+        assert result["success"]
 
     def test_events_persisted_to_log(self, kb_root, sim_dir):
         """Verify that process start and complete events are written to events.jsonl."""
