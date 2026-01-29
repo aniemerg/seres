@@ -8,7 +8,7 @@ import argparse
 import shutil
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Set
+from typing import Any, Dict, List, Set, Optional
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
@@ -163,6 +163,7 @@ def execute_plan(
     sim_root: Path,
     reset: bool = False,
     dry_run: bool = False,
+    trace: bool = False,
 ) -> Dict[str, Any]:
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
@@ -175,8 +176,36 @@ def execute_plan(
     if sim_dir.exists() and (sim_dir / "snapshot.json").exists():
         engine.load()
 
+    def _trace(msg: str) -> None:
+        if trace:
+            print(msg)
+
+    def _get_item_unit(item_id: str) -> str:
+        model = kb.get_item(item_id)
+        if not model:
+            return "unit"
+        item_dict = model.model_dump() if hasattr(model, "model_dump") else model
+        return item_dict.get("unit") or "unit"
+
+    def _verify_target_output() -> Optional[str]:
+        unit = _get_item_unit(plan.target_machine_id)
+        if engine.has_item(plan.target_machine_id, 1.0, unit):
+            return None
+        inv_item = engine.state.inventory.get(plan.target_machine_id)
+        if inv_item and getattr(inv_item, "quantity", 0) > 0:
+            return None
+        return f"Target output not found in inventory: {plan.target_machine_id}"
+
+    _trace(
+        f"PLAN target={plan.target_machine_id} "
+        f"recipe={plan.target_recipe_id or 'none'} "
+        f"build_machine={plan.build_machine} "
+        f"imports={len(plan.imports)} "
+        f"recipes={len(plan.recipes)}"
+    )
+
     # Notes (no-op for engine; printed only if dry_run)
-    if dry_run:
+    if dry_run or trace:
         for note in plan.notes:
             print(f"NOTE [{note.style}]: {note.message}")
 
@@ -185,6 +214,7 @@ def execute_plan(
         if dry_run:
             print(f"IMPORT {item_id} {imp.qty} {imp.unit} ({imp.reason or ''})")
             continue
+        _trace(f"IMPORT {item_id} {imp.qty} {imp.unit}")
         if engine.has_item(item_id, imp.qty, imp.unit):
             continue
         result = engine.import_item(item_id, imp.qty, imp.unit)
@@ -200,6 +230,7 @@ def execute_plan(
             print(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity} ({recipe.reason or ''})")
             print("ADVANCE_UNTIL_IDLE")
             continue
+        _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
         result = engine.run_recipe(recipe.recipe_id, recipe.quantity)
         if not result.get("success"):
             return {
@@ -216,6 +247,7 @@ def execute_plan(
                 "recipe_id": recipe.recipe_id,
                 "detail": error,
             }
+        _trace(f"RECIPE_DONE {recipe.recipe_id}")
 
     # Target recipe last (if present)
     if plan.target_recipe_id:
@@ -223,6 +255,7 @@ def execute_plan(
             print(f"RUN_RECIPE {plan.target_recipe_id} x1 (target_recipe)")
             print("ADVANCE_UNTIL_IDLE")
         else:
+            _trace(f"RUN_TARGET_RECIPE {plan.target_recipe_id} x1")
             result = engine.run_recipe(plan.target_recipe_id, 1)
             if not result.get("success"):
                 return {
@@ -239,15 +272,23 @@ def execute_plan(
                     "recipe_id": plan.target_recipe_id,
                     "detail": error,
                 }
+            _trace(f"TARGET_RECIPE_DONE {plan.target_recipe_id}")
 
     # Build machine
     if plan.build_machine:
         if dry_run:
             print(f"BUILD_MACHINE {plan.target_machine_id}")
         else:
+            _trace(f"BUILD_MACHINE {plan.target_machine_id}")
             result = engine.build_machine(plan.target_machine_id)
             if not result.get("success"):
                 return {"success": False, "error": "build_failed", "detail": result}
+            _trace(f"BUILD_DONE {plan.target_machine_id}")
+
+    if not dry_run and (plan.target_recipe_id or plan.build_machine):
+        verify_error = _verify_target_output()
+        if verify_error:
+            return {"success": False, "error": "missing_target_output", "detail": verify_error}
 
     if not dry_run:
         engine.save()
@@ -264,6 +305,7 @@ def main() -> int:
     parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
     parser.add_argument("--reset", action="store_true", help="Delete existing sim directory first")
     parser.add_argument("--dry-run", action="store_true", help="Print actions without executing")
+    parser.add_argument("--trace", action="store_true", help="Print step-by-step execution trace")
     args = parser.parse_args()
 
     plan_path = Path(args.plan)
@@ -278,6 +320,7 @@ def main() -> int:
         sim_root=Path(args.sim_root),
         reset=args.reset,
         dry_run=args.dry_run,
+        trace=args.trace,
     )
 
     if not result.get("success"):

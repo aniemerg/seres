@@ -173,6 +173,11 @@ def main() -> int:
         help="Directory to store checkpoints (default: <sim_root>/<sim_id>/checkpoints)",
     )
     parser.add_argument(
+        "--trace",
+        action="store_true",
+        help="Print step-by-step execution trace for each plan",
+    )
+    parser.add_argument(
         "--resume",
         action="store_true",
         help="Resume from latest checkpoint and skip completed machines",
@@ -263,6 +268,7 @@ def main() -> int:
             sim_root=sim_root,
             reset=args.reset and idx == 1,
             dry_run=args.dry_run,
+            trace=args.trace,
         )
         if not result.get("success"):
             failures += 1

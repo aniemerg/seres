@@ -104,6 +104,12 @@ class SimulationEngine:
         # ADR-020 components
         self.scheduler = Scheduler()
         self.orchestrator = RecipeOrchestrator(self.scheduler)
+
+        # Recipe event tracking (runtime only; not persisted)
+        self._recipe_quantities: Dict[str, int] = {}
+        self._recipe_outputs_accum: Dict[str, Dict[str, InventoryItem]] = {}
+        self._recipe_energy_accum: Dict[str, float] = {}
+        self._logged_recipe_completions: set[str] = set()
         # Reservation manager will be initialized when machines are available
         self.reservation_manager = None
         # Enable ADR-020 mode (event-driven scheduling, machine reservations, recipe orchestration)
@@ -1141,6 +1147,16 @@ class SimulationEngine:
             start_time=start_time,
         )
 
+        # Track and log recipe start for traceability
+        self._recipe_quantities[recipe_run_id] = quantity
+        self._log_event(
+            RecipeStartEvent(
+                recipe_id=recipe_id,
+                quantity=quantity,
+                duration_hours=0.0,
+            )
+        )
+
         # Schedule ready steps
         ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
 
@@ -1762,6 +1778,48 @@ class SimulationEngine:
                             energy_kwh=energy_kwh,
                         )
                     )
+
+                    # Accumulate per-recipe outputs and energy, then emit recipe_complete if finished.
+                    recipe_run_id = process_run.recipe_run_id
+                    if recipe_run_id:
+                        acc_outputs = self._recipe_outputs_accum.setdefault(recipe_run_id, {})
+                        for item_id, inv_item in outputs_with_units.items():
+                            existing = acc_outputs.get(item_id)
+                            if existing:
+                                if existing.unit == inv_item.unit:
+                                    existing.quantity += inv_item.quantity
+                                else:
+                                    converted = self.converter.convert(
+                                        inv_item.quantity, inv_item.unit, existing.unit, item_id
+                                    )
+                                    if converted is not None:
+                                        existing.quantity += converted
+                            else:
+                                acc_outputs[item_id] = InventoryItem(
+                                    quantity=inv_item.quantity,
+                                    unit=inv_item.unit,
+                                )
+
+                        self._recipe_energy_accum[recipe_run_id] = (
+                            self._recipe_energy_accum.get(recipe_run_id, 0.0) + energy_kwh
+                        )
+
+                        if (
+                            self.orchestrator.is_recipe_complete(recipe_run_id)
+                            and recipe_run_id not in self._logged_recipe_completions
+                        ):
+                            recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                            recipe_id = recipe_run.recipe_id if recipe_run else "unknown"
+                            quantity = self._recipe_quantities.get(recipe_run_id, 1)
+                            self._log_event(
+                                RecipeCompleteEvent(
+                                    recipe_id=recipe_id,
+                                    quantity=quantity,
+                                    outputs=acc_outputs,
+                                    energy_kwh=self._recipe_energy_accum.get(recipe_run_id),
+                                )
+                            )
+                            self._logged_recipe_completions.add(recipe_run_id)
 
                     completed_processes.append({
                         "process_run_id": process_run_id,

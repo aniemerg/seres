@@ -62,16 +62,16 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1340.0
+        unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
     notes: "Assemble chassis, undercarriage, and upper structure; mount slewing bearing and cabin"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1340.0
+        unit: kg
       - item_id: hydraulic_boom_assembly
         qty: 1.0
         unit: unit
@@ -83,16 +83,16 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1850.0
+        unit: kg
     est_time_hr: 12.0
     labor_hours: 12.0
     notes: "Install boom, bucket, and hydraulic cylinders"
   - process_id: hydraulic_system_assembly_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1850.0
+        unit: kg
       - item_id: hydraulic_pump_heavy_duty
         qty: 80.0
         unit: kg
@@ -104,8 +104,8 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 1.0
-        unit: unit
+        qty: 1986.0
+        unit: kg
     est_time_hr: 8.0
     labor_hours: 8.0
     notes: "Install hydraulic pump, connect hoses, mount control valves, fill and test hydraulic system"
@@ -130,7 +130,7 @@ steps:
   - process_id: load_testing_and_commissioning_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 3000.0
+        qty: 1986.0
         unit: kg
       - item_id: wired_electrical_system
         qty: 1.0
