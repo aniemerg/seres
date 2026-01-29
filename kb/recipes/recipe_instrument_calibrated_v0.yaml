@@ -3,9 +3,9 @@ kind: recipe
 target_item_id: instrument_calibrated
 variant_id: v0
 inputs:
-  - item_id: instrument_calibrated
+  - item_id: device_uncalibrated
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: instrument_calibrated
     qty: 1.0
@@ -13,9 +13,9 @@ outputs:
 steps:
   - process_id: calibration_basic_v0
     inputs:
-      - item_id: instrument_calibrated
+      - item_id: device_uncalibrated
         qty: 1.0
-        unit: unit
+        unit: kg
     outputs:
       - item_id: instrument_calibrated
         qty: 1.0
@@ -23,5 +23,5 @@ steps:
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Calibrate instrument against standards"
-assumptions: Instrument is assembled and uncalibrated before this step.
+assumptions: Instrument is assembled and uncalibrated before this step; uses generic uncalibrated device placeholder.
 notes: "Calibrated instrument output from calibration_basic_v0."

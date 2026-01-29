@@ -4,12 +4,26 @@ target_item_id: powder_quality_analysis_v0
 produces_id: powder_quality_analysis_v0
 produces_qty: 1.0
 produces_unit: unit
+inputs:
+  - item_id: optical_microscope_v0
+    qty: 1.0
+    unit: unit
+  - item_id: screening_equipment
+    qty: 1.0
+    unit: unit
 outputs:
   - item_id: powder_quality_analysis_v0
     qty: 1.0
     unit: unit
 steps:
 - process_id: powder_quality_machine_assembly_v0
+  inputs:
+    - item_id: optical_microscope_v0
+      qty: 1.0
+      unit: unit
+    - item_id: screening_equipment
+      qty: 1.0
+      unit: unit
   outputs:
     - item_id: powder_quality_analysis_v0
       qty: 1.0

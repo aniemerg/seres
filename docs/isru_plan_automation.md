@@ -21,6 +21,9 @@ Plans can still be exported later, but the internal plan is the primary API.
 - `scripts/analysis/simplan_runner.py`  
   Executes a SimPlan directly and reports target-machine ISRU.
 
+- `scripts/analysis/simplan_run_sequence_checkpointed.py`  
+  Runs per-machine SimPlans sequentially with per-machine checkpoints (resume-friendly).
+
 - `scripts/analysis/simplan_optimizer_greedy.py`  
   Greedy optimizer that expands imported items into local recipes, re-plans,
   and re-runs to measure ISRU improvement.
@@ -101,6 +104,26 @@ score = baseline_import_mass - estimated_imported_inputs_mass
 
 If `score < 0`, skip or deprioritize the candidate (likely worsens ISRU).
 If `score > 0`, prioritize the candidate for trials.
+
+## Phase D: Sequential Run with Checkpoints
+
+Run a machine list sequentially and checkpoint after each successful build.
+Useful for long sequences where you want to resume after a failure.
+
+```bash
+.venv/bin/python scripts/analysis/simplan_run_sequence_checkpointed.py \
+  --machine-list out/next_round_machines_round11.txt \
+  --sim-id minimal_self_repro_seq_2
+```
+
+Resume from the latest checkpoint:
+
+```bash
+.venv/bin/python scripts/analysis/simplan_run_sequence_checkpointed.py \
+  --machine-list out/next_round_machines_round11.txt \
+  --sim-id minimal_self_repro_seq_2 \
+  --resume
+```
 
 ## Notes
 

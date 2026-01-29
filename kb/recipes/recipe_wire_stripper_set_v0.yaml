@@ -1,0 +1,70 @@
+id: recipe_wire_stripper_set_v0
+target_item_id: wire_stripper_set
+variant_id: v0
+inputs:
+  - item_id: steel_stock
+    qty: 1.0
+    unit: kg
+  - item_id: insulated_part_or_wire
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: wire_stripper_set
+    qty: 1
+    unit: unit
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: steel_stock
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    labor_hours: 0.8
+    notes: Machine jaws, blades, and tool bodies for wire strippers.
+  - process_id: heat_treatment_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+    est_time_hr: 0.6
+    machine_hours: 0.6
+    labor_hours: 0.3
+    notes: Harden cutting edges and jaws.
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: finished_part
+        qty: 1.0
+        unit: kg
+      - item_id: insulated_part_or_wire
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 1.5
+        unit: kg
+    est_time_hr: 0.8
+    labor_hours: 0.8
+    notes: Assemble handles, springs, and blades into a tool set.
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: wire_stripper_set
+        qty: 1
+        unit: unit
+    est_time_hr: 0.2
+    labor_hours: 0.2
+    notes: Verify stripping performance across wire sizes.
+assumptions: Local fabrication of steel tool components with insulated handles.
+notes: Real manufacturing route for wire_stripper_set (not import-only).

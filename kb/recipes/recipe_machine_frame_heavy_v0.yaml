@@ -3,21 +3,21 @@ target_item_id: machine_frame_heavy
 variant_id: v0
 inputs:
   - item_id: steel_billet_or_slab
-    qty: 210.0
+    qty: 315.0
     unit: kg
   - item_id: welded_assemblies
-    qty: 205.0
+    qty: 307.5
     unit: kg
     notes: "Intermediate for machining step"
 steps:
   - process_id: welding_and_fabrication_v0
     inputs:
       - item_id: steel_billet_or_slab
-        qty: 210.0
+        qty: 315.0
         unit: kg
     outputs:
       - item_id: welded_assemblies
-        qty: 205.0
+        qty: 307.5
         unit: kg
     est_time_hr: 16.0
     labor_hours: 16.0
@@ -25,11 +25,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_assemblies
-        qty: 205.0
+        qty: 307.5
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 200.0
+        qty: 300.0
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
@@ -37,7 +37,7 @@ steps:
   - process_id: surface_finishing_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 200.0
+        qty: 300.0
         unit: kg
     outputs:
       - item_id: machine_frame_heavy
@@ -46,5 +46,5 @@ steps:
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Deburr, clean, apply protective coating"
-assumptions: Heavy welded steel frame from thick structural sections. Precision machined surfaces for mounting industrial equipment. Mass ~200 kg.
+assumptions: Heavy welded steel frame from thick structural sections. Precision machined surfaces for mounting industrial equipment. Mass ~300 kg.
 notes: Heavy-duty welded steel frame for industrial presses, mills, and heavy processing equipment.

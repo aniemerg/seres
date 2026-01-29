@@ -3,7 +3,7 @@
 Build a combined SimPlan for a list of machines.
 
 Steps:
-- Parse machine IDs from a runbook queue markdown file.
+- Parse machine IDs from a runbook queue markdown file or a plain list.
 - Run greedy optimizer per machine to generate optimized plans.
 - Merge plans into a single combined plan.
 """
@@ -36,6 +36,17 @@ def _load_machine_ids(runbook_path: Path) -> List[str]:
             machine_id = parts[0]
             if machine_id and machine_id not in {"—", "---"}:
                 machines.append(machine_id)
+    return machines
+
+
+def _load_machine_list(list_path: Path) -> List[str]:
+    machines: List[str] = []
+    with list_path.open(encoding="utf-8") as f:
+        for line in f:
+            entry = line.strip()
+            if not entry or entry.startswith("#"):
+                continue
+            machines.append(entry)
     return machines
 
 
@@ -111,22 +122,34 @@ def _merge_import(
     )
 
 
-def _merge_plans(plans: List[SimPlan], kb: KBLoader, sim_id: str) -> SimPlan:
+def _merge_plans(
+    plans: List[SimPlan],
+    kb: KBLoader,
+    sim_id: str,
+    allow_bom: bool,
+) -> SimPlan:
     converter = UnitConverter(kb)
     merged = SimPlan(sim_id=sim_id, target_machine_id="multi_machine_plan")
     merged.build_machine = False
 
     for plan in plans:
         if plan.build_machine or not plan.target_recipe_id:
-            raise RuntimeError(
-                f"Plan for '{plan.target_machine_id}' is missing a recipe target; "
-                "add a recipe or enable --allow-bom."
-            )
+            if not allow_bom:
+                raise RuntimeError(
+                    f"Plan for '{plan.target_machine_id}' is missing a recipe target; "
+                    "add a recipe or enable --allow-bom."
+                )
         for item_id, imp in plan.imports.items():
             _merge_import(merged, item_id, imp.qty, imp.unit, imp.reason, converter)
         for recipe in plan.recipes:
             merged.add_recipe(recipe.recipe_id, recipe.quantity, reason=recipe.reason)
-        merged.add_recipe(plan.target_recipe_id, 1, reason="target_recipe")
+        if plan.target_recipe_id:
+            merged.add_recipe(plan.target_recipe_id, 1, reason="target_recipe")
+        elif allow_bom:
+            merged.add_note(
+                f"Import-only machine '{plan.target_machine_id}' has no recipe target.",
+                style="warning",
+            )
         for note in plan.notes:
             merged.add_note(note.message, style=note.style)
 
@@ -134,11 +157,15 @@ def _merge_plans(plans: List[SimPlan], kb: KBLoader, sim_id: str) -> SimPlan:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Build combined SimPlan from runbook list.")
+    parser = argparse.ArgumentParser(description="Build combined SimPlan from machine list.")
     parser.add_argument(
         "--runbook",
         default=str(REPO_ROOT / "runbooks" / "machine_runbook_queue_sequential.md"),
         help="Runbook markdown file with machine list",
+    )
+    parser.add_argument(
+        "--machine-list",
+        help="Plaintext file with one machine id per line",
     )
     parser.add_argument("--sim-id", required=True, help="Simulation id for combined plan")
     parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
@@ -161,11 +188,15 @@ def main() -> int:
     args = parser.parse_args()
 
     runbook_path = Path(args.runbook)
-    machines = _load_machine_ids(runbook_path)
+    list_path = Path(args.machine_list) if args.machine_list else None
+    if list_path:
+        machines = _load_machine_list(list_path)
+    else:
+        machines = _load_machine_ids(runbook_path)
     if args.limit:
         machines = machines[: args.limit]
     if not machines:
-        print("No machines found in runbook.", file=sys.stderr)
+        print("No machines found in list.", file=sys.stderr)
         return 1
 
     kb_root = Path(args.kb_root)
@@ -199,12 +230,16 @@ def main() -> int:
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
 
-    merged = _merge_plans(plans, kb, sim_id=args.sim_id)
-    merged.metadata.update({
-        "source_runbook": str(runbook_path),
+    merged = _merge_plans(plans, kb, sim_id=args.sim_id, allow_bom=args.allow_bom)
+    metadata = {
         "machine_count": len(machines),
         "machines": machines,
-    })
+    }
+    if list_path:
+        metadata["source_machine_list"] = str(list_path)
+    else:
+        metadata["source_runbook"] = str(runbook_path)
+    merged.metadata.update(metadata)
 
     out_path = Path(args.out) if args.out else (REPO_ROOT / "out" / f"plan_{args.sim_id}_combined.json")
     merged.save(out_path)

@@ -18,7 +18,7 @@ Imported components:
 - touch_probe_assembly (1 unit) - measurement probe
 - linear_encoder_set (3 units) - position encoders
 - stepper_motor_precision (3 units) - axis motors
-- computer_workstation (1 unit) - control computer
+- control_compute_module_imported (1 unit) - control computer
 - air_bearing_assembly (3 units) - precision bearings
 - calibration_artifacts (1 unit) - calibration standards
 
@@ -165,7 +165,7 @@ Commentary: Produce granite_surface_plate_large from regolith-derived rock feeds
     ensure: true
 - cmd: sim.import
   args:
-    item: computer_workstation
+    item: control_compute_module_imported
     quantity: 1
     unit: unit
     ensure: true

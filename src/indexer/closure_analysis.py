@@ -79,9 +79,16 @@ class ClosureAnalyzer:
             result['errors'].append(f"Machine '{machine_id}' has no BOM defined")
             return result
 
-        # BOM lookup key: strip "bom_" prefix if present
-        lookup_key = bom_id[4:] if bom_id.startswith('bom_') else bom_id
-        bom = self.kb.get_bom(lookup_key)
+        # Prefer machine_id lookup to align with simulation/validation behavior.
+        bom = self.kb.get_bom(machine_id)
+        if not bom:
+            # Fallback: try to normalize bom_id-based lookup.
+            lookup_key = bom_id
+            if lookup_key.endswith(".yaml"):
+                lookup_key = lookup_key[:-5]
+            if lookup_key.startswith("bom_"):
+                lookup_key = lookup_key[4:]
+            bom = self.kb.get_bom(lookup_key)
         if not bom:
             result['errors'].append(f"BOM '{bom_id}' not found in KB")
             return result

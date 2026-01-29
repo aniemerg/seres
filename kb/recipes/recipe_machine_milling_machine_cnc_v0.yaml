@@ -2,29 +2,8 @@ id: recipe_machine_milling_machine_cnc_v0
 target_item_id: cnc_mill
 variant_id: v0
 inputs:
-  - item_id: iron_metal_pure
-    qty: 800.0
-    unit: kg
-  - item_id: steel_stock
-    qty: 200.0
-    unit: kg
-  - item_id: cutting_fluid
-    qty: 10.0
-    unit: kg
-  - item_id: cut_parts
-    qty: 400.0
-    unit: kg
-  - item_id: filler_wire_basic
-    qty: 20.0
-    unit: kg
-  - item_id: electrical_wire_and_connectors
-    qty: 20.0
-    unit: kg
-  - item_id: electronic_components_set
-    qty: 1.0
-    unit: unit
   - item_id: structural_steel_frame
-    qty: 1200.0
+    qty: 400
     unit: kg
   - item_id: linear_guide_rails
     qty: 4
@@ -52,54 +31,10 @@ outputs:
     qty: 1.0
     unit: unit
 steps:
-  - process_id: casting_basic_v0
-    inputs:
-      - item_id: iron_metal_pure
-        qty: 800.0
-        unit: kg
-    est_time_hr: 20.0
-    machine_hours: 15.0
-    labor_hours: 12.0
-    notes: "Cast machine base, column, and table from cast iron for vibration damping and rigidity (total ~600-800 kg castings)"
-  - process_id: machining_precision_v0
-    inputs:
-      - item_id: steel_stock
-        qty: 200.0
-        unit: kg
-      - item_id: cutting_fluid
-        qty: 10.0
-        unit: kg
-    outputs:
-      - item_id: machined_steel_part_precision
-        qty: 140.0
-        unit: kg
-    est_time_hr: 40.0
-    machine_hours: 40.0
-    labor_hours: 25.0
-    notes: "Precision machine all mating surfaces, linear guide ways, spindle housing bore, and mounting surfaces; scrape ways to precision tolerances (±0.005 mm)"
-  - process_id: welding_structural_v0
-    inputs:
-      - item_id: cut_parts
-        qty: 400.0
-        unit: kg
-      - item_id: filler_wire_basic
-        qty: 20.0
-        unit: kg
-    outputs:
-      - item_id: welded_fabrications
-        qty: 400.0
-        unit: kg
-    est_time_hr: 15.0
-    machine_hours: 10.0
-    labor_hours: 12.0
-    notes: "Fabricate and weld structural support frame, coolant tank, chip guard, and enclosure panels"
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: welded_fabrications
-        qty: 400.0
-        unit: kg
-      - item_id: machined_steel_part_precision
-        qty: 140.0
+      - item_id: structural_steel_frame
+        qty: 400
         unit: kg
       - item_id: linear_guide_rails
         qty: 4
@@ -122,67 +57,12 @@ steps:
       - item_id: fastener_kit_medium
         qty: 1
         unit: kit
-    est_time_hr: 30.0
-    labor_hours: 30.0
-    notes: "Install linear guides and ball screws on X/Y/Z axes, mount servo motors and encoders, install spindle assembly with bearings, integrate coolant system"
-  - process_id: wiring_and_electronics_integration_v0
-    inputs:
-      - item_id: electrical_wire_and_connectors
-        qty: 20.0
-        unit: kg
-      - item_id: electronic_components_set
-        qty: 1.0
-        unit: unit
-    outputs:
-      - item_id: wired_electrical_system
-        qty: 1.0
-        unit: unit
-    est_time_hr: 20.0
-    labor_hours: 20.0
-    notes: "Wire CNC controller to servo drives and motors, install limit switches and home sensors, integrate spindle control and tool changer, connect operator panel"
-  - process_id: precision_alignment_and_leveling_v0
-    inputs:
-      - item_id: structural_steel_frame
-        qty: 1200.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 1200.0
-        unit: kg
-    est_time_hr: 12.0
-    labor_hours: 12.0
-    notes: "Align axes for perpendicularity and parallelism (within ±0.01 mm), level machine base, adjust backlash in ball screws"
-  - process_id: integration_test_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1200.0
-        unit: kg
-    est_time_hr: 8.0
-    labor_hours: 8.0
-    notes: "Program test toolpaths, verify axis motion and positioning accuracy, test spindle operation and tool changing, run test parts"
-  - process_id: calibration_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1200.0
-        unit: kg
-    outputs:
-      - item_id: instrument_calibrated
-        qty: 1.0
-        unit: unit
-    est_time_hr: 6.0
-    labor_hours: 6.0
-    notes: "Calibrate axes using laser interferometer or precision gauge blocks, tune servo parameters for optimal performance"
-  - process_id: inspection_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 1200.0
-        unit: kg
     outputs:
       - item_id: cnc_mill
         qty: 1.0
         unit: unit
-    est_time_hr: 4.0
-    labor_hours: 4.0
-    notes: "Verify positioning accuracy (±0.01-0.02 mm), repeatability, surface finish capability, and safety interlocks"
-assumptions: "CNC milling machine for automated precision machining. 1200 kg system with cast iron base/column/table for rigidity. 3-axis (X/Y/Z) motion control with ball screws and linear guides. Spindle speeds 100-10,000+ RPM, power 3-7.5 kW. Travel typically 500x400x400 mm. Includes CNC controller (3+ axis), servo motors with encoders, automatic tool changer (optional), coolant system, and chip guard. Positioning accuracy ±0.01-0.02 mm."
-notes: "Assembly of CNC milling machine. Total fabrication time ~155 hours. Extensive precision machining of base components, complex mechanical and electrical integration, and rigorous alignment/calibration required. Critical machine tool for precision manufacturing and prototyping. Much more complex than manual milling machine due to CNC control system and automated features."
+    est_time_hr: 40.0
+    labor_hours: 40.0
+    notes: "Assemble CNC mill from frame, motion components, motors, and controls per BOM."
+assumptions: Assembly-only; subcomponents sourced via their own recipes or imports.
+notes: "Simplified CNC mill assembly recipe using BOM components."

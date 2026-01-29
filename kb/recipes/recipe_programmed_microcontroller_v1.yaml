@@ -18,7 +18,7 @@ outputs:
     qty: 1.0
     unit: unit
 steps:
-- process_id: firmware_programming_v0
+- process_id: assembly_basic_v0
   inputs:
     - item_id: microcontroller_or_embedded_board
       qty: 1.0
@@ -30,7 +30,7 @@ steps:
     - item_id: programmed_microcontroller
       qty: 1.0
       unit: unit
-notes: Direct firmware programming using the firmware_programming_v0 process; replaces import placeholder in v0
+notes: Direct firmware programming step modeled as basic assembly; replaces import placeholder in v0
 assumptions: Firmware binary must be compiled and ready for upload; programming adapter available
 source_tags:
   - ellery_seed

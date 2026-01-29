@@ -1,0 +1,48 @@
+id: recipe_multimeter_set_v0
+target_item_id: multimeter_set
+variant_id: v0
+inputs:
+  - item_id: pcb_populated
+    qty: 0.5
+    unit: kg
+  - item_id: test_lead_set
+    qty: 1.0
+    unit: kg
+  - item_id: potentiometer_wirewound_v0
+    qty: 0.1
+    unit: kg
+  - item_id: knob_control_dial_v0
+    qty: 0.1
+    unit: kg
+  - item_id: formed_metal_part
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: multimeter_set
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: pcb_populated
+        qty: 0.5
+        unit: kg
+      - item_id: test_lead_set
+        qty: 1.0
+        unit: kg
+      - item_id: potentiometer_wirewound_v0
+        qty: 0.1
+        unit: kg
+      - item_id: knob_control_dial_v0
+        qty: 0.1
+        unit: kg
+      - item_id: formed_metal_part
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: multimeter_set
+        qty: 1
+        unit: unit
+    notes: Assemble multimeter PCB, leads, enclosure, and controls; perform calibration.
+assumptions: Uses existing PCB population and fabricated metal/plastic components; electronics still coarse.
+notes: Assembly recipe using existing parts to avoid import-only multimeter set.

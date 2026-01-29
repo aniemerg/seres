@@ -1,0 +1,56 @@
+id: recipe_machine_drying_basic_v0
+target_item_id: drying_basic_v0
+variant_id: v0
+inputs:
+  - item_id: structural_steel_frame
+    qty: 200.0
+    unit: kg
+  - item_id: insulation_panel_high_temp
+    qty: 100.0
+    unit: kg
+  - item_id: heating_element_resistive
+    qty: 16.0
+    unit: kg
+  - item_id: temperature_controller_basic
+    qty: 1.0
+    unit: unit
+  - item_id: power_electronics_module
+    qty: 40.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 2.0
+    unit: kit
+outputs:
+  - item_id: drying_basic_v0
+    qty: 1
+    unit: count
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: structural_steel_frame
+        qty: 200.0
+        unit: kg
+      - item_id: insulation_panel_high_temp
+        qty: 100.0
+        unit: kg
+      - item_id: heating_element_resistive
+        qty: 16.0
+        unit: kg
+      - item_id: temperature_controller_basic
+        qty: 1.0
+        unit: unit
+      - item_id: power_electronics_module
+        qty: 40.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 2.0
+        unit: kit
+    outputs:
+      - item_id: drying_basic_v0
+        qty: 1
+        unit: count
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: Assemble drying chamber, insulation, heating elements, and controls per BOM.
+assumptions: Assembly-only; subcomponents sourced via their own recipes or imports.
+notes: Basic drying/curing chamber assembly from BOM components.

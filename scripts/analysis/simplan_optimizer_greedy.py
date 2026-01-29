@@ -462,7 +462,12 @@ def main() -> int:
             else:
                 if item and "mass" in item:
                     if imp.unit in ("count", "unit"):
-                        mass_kg = imp.qty * float(item.get("mass", 0.0))
+                        mass_value = item.get("mass")
+                        if mass_value is None:
+                            mass_value = item.get("mass_kg")
+                        if mass_value is None:
+                            mass_value = 0.0
+                        mass_kg = imp.qty * float(mass_value)
                     else:
                         converted = converter.convert(imp.qty, imp.unit, "kg", item_id)
                         if converted is not None:

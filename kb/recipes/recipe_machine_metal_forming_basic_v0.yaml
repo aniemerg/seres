@@ -1,0 +1,80 @@
+id: recipe_machine_metal_forming_basic_v0
+target_item_id: metal_forming_basic_v0
+variant_id: v0
+inputs:
+  - item_id: machine_frame_heavy
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_cylinder_industrial
+    qty: 2
+    unit: unit
+  - item_id: hydraulic_pump_basic
+    qty: 1
+    unit: unit
+  - item_id: press_frame_medium
+    qty: 1
+    unit: unit
+  - item_id: roller_set_forming
+    qty: 1
+    unit: unit
+  - item_id: drive_motor_medium
+    qty: 1
+    unit: unit
+  - item_id: anvil_block_basic
+    qty: 1
+    unit: unit
+  - item_id: fixture_mounting_plate_set
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 2
+    unit: unit
+outputs:
+  - item_id: metal_forming_basic_v0
+    qty: 1
+    unit: count
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_frame_heavy
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_cylinder_industrial
+        qty: 2
+        unit: unit
+      - item_id: hydraulic_pump_basic
+        qty: 1
+        unit: unit
+      - item_id: press_frame_medium
+        qty: 1
+        unit: unit
+      - item_id: roller_set_forming
+        qty: 1
+        unit: unit
+      - item_id: drive_motor_medium
+        qty: 1
+        unit: unit
+      - item_id: anvil_block_basic
+        qty: 1
+        unit: unit
+      - item_id: fixture_mounting_plate_set
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 2
+        unit: unit
+    outputs:
+      - item_id: metal_forming_basic_v0
+        qty: 1
+        unit: count
+    est_time_hr: 6.0
+    labor_hours: 6.0
+    notes: Assemble press, rollers, hydraulics, fixtures, and controls per BOM.
+assumptions: Assembly-only; subcomponents sourced via their own recipes or imports.
+notes: Basic metal forming equipment assembly from BOM components.
