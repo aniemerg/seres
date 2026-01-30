@@ -14,6 +14,16 @@ The demo is successful when:
 - **Requested == Produced**
 - **Imports ⊆ Produced** (imports are not outside the produced set)
 
+## Scale snapshot
+
+This demo shows a **self‑reproduction chain** at scale: the simulation
+**produced 135 machines**, executed **2,787 processes**, and accumulated
+**~908,136 machine‑hours** of simulated work, consuming
+**~3.53 million kWh** of energy. These metrics reflect the depth and
+complexity of the modeled production system, while keeping the focus on
+what the demo actually proves—machine self‑reproduction under the current
+model assumptions.
+
 ## One‑command run
 
 ```bash
@@ -33,6 +43,20 @@ out/self_repro_demo/
 - `imported_machines.txt` — what the sim imported
 - `requested_not_produced.txt` — should be empty at this milestone
 - `imported_not_produced.txt` — should be empty at this milestone
+
+## Produced‑machine ISRU (mass‑weighted)
+
+From the current self‑reproduction demo run:
+
+- Produced machines with provenance: 135
+- In‑situ mass: 25,318.14 kg
+- Imported mass: 437,038.42 kg
+- Unknown mass: 0.0 kg
+- Produced‑machines ISRU (mass‑weighted): 5.48%
+
+So by mass, the produced machines are still dominated by imported material, even
+though the overall inventory can be much more ISRU‑heavy. This is expected until
+electronics and precision components have local manufacturing paths.
 
 ## Assumptions & limitations
 

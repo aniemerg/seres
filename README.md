@@ -53,6 +53,14 @@ out/self_repro_demo/
 Read the full story and validation steps:
 - `docs/self_reproduction_demo.md`
 
+This demo shows a **self‑reproduction chain** at scale: the simulation
+**produced 135 machines**, executed **2,787 processes**, and accumulated
+**~908,136 machine‑hours** of simulated work, consuming
+**~3.53 million kWh** of energy. These metrics reflect the depth and
+complexity of the modeled production system, while keeping the focus on
+what the demo actually proves—machine self‑reproduction under the current
+model assumptions.
+
 ### Manual simulation and indexing
 
 If you want to work with the knowledge base directly or build simulations from scratch:

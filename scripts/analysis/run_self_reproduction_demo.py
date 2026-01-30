@@ -85,6 +85,11 @@ def main() -> int:
     parser.add_argument("--plans-dir", default=str(REPO_ROOT / "out" / "simplans"))
     parser.add_argument("--reset", action="store_true", help="Reset sim before first plan")
     parser.add_argument("--trace", action="store_true", help="Print step-by-step execution trace")
+    parser.add_argument(
+        "--report-only",
+        action="store_true",
+        help="Skip execution and only generate the report for an existing sim",
+    )
     args = parser.parse_args()
 
     machine_list = _load_machine_list(Path(args.machine_list))
@@ -92,35 +97,36 @@ def main() -> int:
         print("No machines found in list.", file=sys.stderr)
         return 1
 
-    failures = 0
-    plans_dir = Path(args.plans_dir)
-    for idx, machine_id in enumerate(machine_list, start=1):
-        plan_path = plans_dir / f"{machine_id}_optimized.json"
-        if not plan_path.exists():
-            print(f"[{idx}/{len(machine_list)}] Missing plan for {machine_id}: {plan_path}", file=sys.stderr)
-            failures += 1
-            continue
+    if not args.report_only:
+        failures = 0
+        plans_dir = Path(args.plans_dir)
+        for idx, machine_id in enumerate(machine_list, start=1):
+            plan_path = plans_dir / f"{machine_id}_optimized.json"
+            if not plan_path.exists():
+                print(f"[{idx}/{len(machine_list)}] Missing plan for {machine_id}: {plan_path}", file=sys.stderr)
+                failures += 1
+                continue
 
-        plan = SimPlan.load(plan_path)
-        plan.sim_id = args.sim_id
+            plan = SimPlan.load(plan_path)
+            plan.sim_id = args.sim_id
 
-        print(f"[{idx}/{len(machine_list)}] Executing {machine_id}")
-        result = execute_plan(
-            plan=plan,
-            kb_root=Path(args.kb_root),
-            sim_root=Path(args.sim_root),
-            reset=args.reset and idx == 1,
-            trace=args.trace,
-        )
-        if not result.get("success"):
-            failures += 1
-            print(f"FAIL: {machine_id} -> {result}", file=sys.stderr)
-        else:
-            print(f"OK: {machine_id}")
+            print(f"[{idx}/{len(machine_list)}] Executing {machine_id}")
+            result = execute_plan(
+                plan=plan,
+                kb_root=Path(args.kb_root),
+                sim_root=Path(args.sim_root),
+                reset=args.reset and idx == 1,
+                trace=args.trace,
+            )
+            if not result.get("success"):
+                failures += 1
+                print(f"FAIL: {machine_id} -> {result}", file=sys.stderr)
+            else:
+                print(f"OK: {machine_id}")
 
-    if failures:
-        print(f"Completed with {failures} failure(s).", file=sys.stderr)
-        return 1
+        if failures:
+            print(f"Completed with {failures} failure(s).", file=sys.stderr)
+            return 1
 
     # Report section
     sim_dir = Path(args.sim_root) / args.sim_id
@@ -172,6 +178,21 @@ def main() -> int:
     produced_not_imported = sorted(produced - imported)
     requested_not_imported = sorted(requested - imported)
 
+    # Produced-machine ISRU (mass-weighted by provenance)
+    provenance = state.get("provenance", {}) or {}
+    produced_in_situ = 0.0
+    produced_imported = 0.0
+    produced_unknown = 0.0
+    for machine_id in produced:
+        entry = provenance.get(machine_id)
+        if not isinstance(entry, dict):
+            continue
+        produced_in_situ += float(entry.get("in_situ_kg", 0) or 0)
+        produced_imported += float(entry.get("imported_kg", 0) or 0)
+        produced_unknown += float(entry.get("unknown_kg", 0) or 0)
+    produced_total = produced_in_situ + produced_imported + produced_unknown
+    produced_isru_pct = (produced_in_situ / produced_total * 100.0) if produced_total else 0.0
+
     _write_list(out_dir / "requested_machines.txt", sorted(requested))
     _write_list(out_dir / "produced_machines.txt", produced_machines)
     _write_list(out_dir / "imported_machines.txt", imported_machines)
@@ -192,6 +213,13 @@ def main() -> int:
         "imported_not_produced": len(imported_not_produced),
         "produced_not_imported": len(produced_not_imported),
         "requested_not_imported": len(requested_not_imported),
+        "produced_isru": {
+            "in_situ_kg": produced_in_situ,
+            "imported_kg": produced_imported,
+            "unknown_kg": produced_unknown,
+            "total_kg": produced_total,
+            "isru_percent": produced_isru_pct,
+        },
         "success": {
             "requested_equals_produced": len(requested_not_produced) == 0 and len(produced_not_requested) == 0,
             "imports_subset_of_produced": len(imported_not_produced) == 0,
@@ -213,6 +241,13 @@ def main() -> int:
         f"- Imported not produced: {summary['imported_not_produced']}",
         f"- Produced not imported: {summary['produced_not_imported']}",
         f"- Requested not imported: {summary['requested_not_imported']}",
+        "",
+        "Produced-machine ISRU (mass-weighted by provenance):",
+        f"- In-situ mass: {summary['produced_isru']['in_situ_kg']:.2f} kg",
+        f"- Imported mass: {summary['produced_isru']['imported_kg']:.2f} kg",
+        f"- Unknown mass: {summary['produced_isru']['unknown_kg']:.2f} kg",
+        f"- Total mass: {summary['produced_isru']['total_kg']:.2f} kg",
+        f"- ISRU: {summary['produced_isru']['isru_percent']:.2f}%",
         "",
         f"Requested == Produced: {summary['success']['requested_equals_produced']}",
         f"Imports ⊆ Produced: {summary['success']['imports_subset_of_produced']}",
