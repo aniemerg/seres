@@ -14,6 +14,11 @@
 
 These documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
 
+## Milestone Artifacts
+- `docs/self_reproduction_demo.md` — Self‑reproduction demo story and how to run it
+- `docs/self_reproducing_set.txt` — Canonical target machine list for the demo
+- `docs/minimal_self_reproducing_set.md` — Current minimal self‑reproducing machine set (reference)
+
 ### Conservative Mode: The Default Approach
 
 **All queue work should follow Conservative Mode** - treating queue items as potential symptoms rather than direct fix requests.

@@ -36,6 +36,23 @@ For the largest current simulation, run the runbook queue aggregator:
 ```
 This chains most machine runbooks in sequence (each runbook manages its own reset/use).
 
+## Self‑Reproduction Demo (Run It)
+
+This demo shows SERES reaching a **self‑reproducing machine set**: the machines
+you request are the machines the simulation produces.
+
+```bash
+.venv/bin/python scripts/analysis/run_self_reproduction_demo.py --reset
+```
+
+Outputs and summary are written to:
+```
+out/self_repro_demo/
+```
+
+Read the full story and validation steps:
+- `docs/self_reproduction_demo.md`
+
 ### Manual simulation and indexing
 
 If you want to work with the knowledge base directly or build simulations from scratch:
