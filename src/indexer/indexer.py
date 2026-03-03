@@ -33,6 +33,7 @@ from src.kb_core.validators import (
     validate_recipe,
     validate_item,
     validate_item_bom_consistency,
+    validate_deprecated_references,
     ValidationLevel,
 )
 from src.kb_core.unit_converter import UnitConverter
@@ -900,6 +901,43 @@ def _collect_validation_issues(entries: Dict[str, dict], kb_loader) -> List[dict
 
     # Cross-item BOM consistency checks (requires KB context)
     for issue in validate_item_bom_consistency(kb_loader):
+        if issue.level not in (ValidationLevel.ERROR, ValidationLevel.WARNING):
+            continue
+        signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"
+        if signature in issue_map:
+            continue
+
+        is_auto_fixable = False
+        priority = {
+            ValidationLevel.ERROR: 100,
+            ValidationLevel.WARNING: 50,
+            ValidationLevel.INFO: 10,
+        }.get(issue.level, 0)
+
+        queue_item = {
+            "id": f"validation:{issue.level.value}:{issue.entity_type}:{issue.entity_id}:{issue.rule}",
+            "kind": issue.entity_type,
+            "reason": f"validation_{issue.level.value}",
+            "gap_type": f"validation_{issue.rule}",
+            "item_id": issue.entity_id,
+            "priority": priority,
+            "auto_fixable": is_auto_fixable,
+            "context": {
+                "validation_level": issue.level.value,
+                "category": issue.category,
+                "rule": issue.rule,
+                "message": issue.message,
+                "field_path": issue.field_path,
+                "fix_hint": issue.fix_hint,
+                "file": entries.get(issue.entity_id, {}).get("defined_in"),
+                "auto_fixable": is_auto_fixable,
+            }
+        }
+        issue_map[signature] = queue_item
+        all_issues.append(issue)
+
+    # KB-global deprecated reference checks (ADR-025)
+    for issue in validate_deprecated_references(kb_loader):
         if issue.level not in (ValidationLevel.ERROR, ValidationLevel.WARNING):
             continue
         signature = f"{issue.entity_type}:{issue.entity_id}:{issue.rule}:{issue.field_path or ''}"

@@ -211,7 +211,11 @@ def load_or_create_simulation(sim_id: str, kb_loader: KBLoader, create: bool = F
 
     # Load existing state if not creating
     if not create:
-        success = engine.load()
+        try:
+            success = engine.load()
+        except ValueError as exc:
+            _emit(f"Error: {exc}", _COLOR_ERROR, is_error=True)
+            sys.exit(1)
         if not success:
             _emit(f"Error: Failed to load simulation '{sim_id}'", _COLOR_ERROR, is_error=True)
             sys.exit(1)

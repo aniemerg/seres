@@ -5,6 +5,13 @@ modeling rules. It consolidates 012/013/014/016/017 for daily use.
 
 ## Items
 
+### Deprecated/Upgraded IDs (ADR-025)
+
+When an ID is upgraded, keep the deprecated entry in KB and annotate it (for
+example with `deprecated`, `upgraded_to`, `upgrade_note`, `upgrade_since`).
+Do not rely on silent aliasing for simulation behavior; deprecated references are
+intended to fail fast at runtime so users/agents manually update references.
+
 ### Materials
 Required:
 - `id`, `name`, `kind: material`, `unit`, `unit_kind: bulk`, `notes`
@@ -156,3 +163,4 @@ Common boundaries:
 - `docs/ADRs/014-energy-model-redesign.md`
 - `docs/ADRs/016-unit-conversion-system.md`
 - `docs/ADRs/017-validation-and-error-detection.md`
+- `docs/ADRs/025-deprecated-id-enforcement-and-manual-migration.md`

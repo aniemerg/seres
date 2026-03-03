@@ -21,6 +21,12 @@ The simulation engine allows you to:
 - ✅ Preflight planning (`sim plan`)
 - ✅ Simulation scaffolding (`sim scaffold`)
 
+## Deprecated ID Enforcement (ADR-025)
+
+Simulation should fail fast when a deprecated/upgraded ID is referenced.
+Deprecated IDs are kept in KB for readability, but users/agents must manually
+update scenario/recipe/process/item references rather than relying on auto-migration.
+
 ## Quick Start
 
 ### 1. Create a Simulation
@@ -119,6 +125,8 @@ python -m src.cli sim import --sim-id lunar_base_001 --item steel_plate --quanti
 - Imports are tracked separately (shown in `total_imports`)
 - Use for bootstrap items that can't be manufactured yet
 - Avoid over-importing - the goal is local production
+- If an import ID has been marked deprecated/upgraded, simulation should stop and
+  report the replacement guidance (ADR-025)
 
 ### start-process
 

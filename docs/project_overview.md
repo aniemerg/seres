@@ -41,3 +41,4 @@ Out of scope (for now):
 - Queue work approach: `docs/conservative_mode_guide.md`
 - Parts and labor modeling: `docs/parts_and_labor_guidelines.md`
 - Knowledge acquisition workflow: `docs/knowledge_acquisition_protocol.md`
+- Deprecated/upgraded ID policy: `docs/ADRs/025-deprecated-id-enforcement-and-manual-migration.md`
