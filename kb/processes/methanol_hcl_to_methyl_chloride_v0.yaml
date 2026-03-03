@@ -1,0 +1,44 @@
+id: methanol_hcl_to_methyl_chloride_v0
+kind: process
+name: Methanol chlorination to methyl chloride
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: methanol_liquid
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_chloride
+  qty: 1.14
+  unit: kg
+outputs:
+- item_id: methyl_chloride_gas
+  qty: 1.58
+  unit: kg
+- item_id: water
+  qty: 0.56
+  unit: kg
+resource_requirements:
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
+  notes: Methanol chlorination and gas recovery.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Catalytic chlorination at elevated temperature.
+notes: |
+  Explicit representation of reaction 40:
+  CH3OH + HCl -> CH3Cl + H2O.
+

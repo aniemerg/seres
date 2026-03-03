@@ -1,0 +1,37 @@
+id: calcium_oxide_hydration_v0
+kind: process
+name: Calcium oxide hydration to calcium hydroxide
+process_type: batch
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: calcium_oxide
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.321
+  unit: kg
+outputs:
+- item_id: calcium_hydroxide
+  qty: 1.321
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
+  notes: Hydration and thermal control.
+time_model:
+  type: batch
+  hr_per_batch: 0.5
+  notes: Hydration and conditioning cycle.
+notes: |
+  Explicit representation of reaction 23:
+  CaO + H2O -> Ca(OH)2.

@@ -1,0 +1,37 @@
+id: hematite_iron_comproportionation_to_magnetite_v0
+kind: process
+name: Hematite-iron comproportionation to magnetite
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: hematite_ore
+  qty: 1.0
+  unit: kg
+- item_id: iron_product
+  qty: 0.087
+  unit: kg
+outputs:
+- item_id: magnetite_ore
+  qty: 1.198
+  unit: kg
+resource_requirements:
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: High-temperature solid-state conversion.
+time_model:
+  type: batch
+  hr_per_batch: 1.5
+  notes: Thermal reaction hold and cooldown.
+notes: |
+  Explicit representation of reaction 6 in list_of_reactions.md:
+  4Fe2O3 + Fe -> 3Fe3O4.

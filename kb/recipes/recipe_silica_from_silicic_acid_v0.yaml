@@ -1,0 +1,29 @@
+id: recipe_silica_from_silicic_acid_v0
+kind: recipe
+target_item_id: silica_purified
+variant_id: silicic_acid_precipitation_v0
+inputs:
+  - item_id: silicic_acid
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: silica_purified
+    qty: 0.70
+    unit: kg
+  - item_id: water
+    qty: 0.30
+    unit: kg
+steps:
+  - process_id: silicic_acid_precipitation_to_silica_v0
+    inputs:
+      - item_id: silicic_acid
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: silica_purified
+        qty: 0.70
+        unit: kg
+      - item_id: water
+        qty: 0.30
+        unit: kg
+notes: "Explicit silicic-acid-to-silica route for reaction 19 coverage."

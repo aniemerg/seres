@@ -1,0 +1,41 @@
+id: recipe_nickel_carbonyl_v0
+kind: recipe
+target_item_id: nickel_carbonyl_v0
+variant_id: mond_stage_v0
+inputs:
+  - item_id: nickel_metal
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 4.0
+    unit: kg
+  - item_id: sulfur_elemental
+    qty: 0.01
+    unit: kg
+outputs:
+  - item_id: nickel_carbonyl_v0
+    qty: 5.0
+    unit: kg
+  - item_id: sulfur_elemental
+    qty: 0.01
+    unit: kg
+steps:
+  - process_id: nickel_carbonyl_synthesis_v0
+    inputs:
+      - item_id: nickel_metal
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 4.0
+        unit: kg
+      - item_id: sulfur_elemental
+        qty: 0.01
+        unit: kg
+    outputs:
+      - item_id: nickel_carbonyl_v0
+        qty: 5.0
+        unit: kg
+      - item_id: sulfur_elemental
+        qty: 0.01
+        unit: kg
+notes: "Explicit Ni(CO)4 intermediate stage for Mond process modeling."

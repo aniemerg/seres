@@ -1,0 +1,37 @@
+id: recipe_selenium_refined_h2_route_v0
+kind: recipe
+target_item_id: selenium_refined
+variant_id: selenous_acid_h2_v0
+inputs:
+  - item_id: selenous_acid
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.026
+    unit: kg
+outputs:
+  - item_id: selenium_refined
+    qty: 0.79
+    unit: kg
+  - item_id: water
+    qty: 0.236
+    unit: kg
+steps:
+  - process_id: selenous_acid_h2_reduction_v0
+    inputs:
+      - item_id: selenous_acid
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.026
+        unit: kg
+    outputs:
+      - item_id: selenium_refined
+        qty: 0.79
+        unit: kg
+      - item_id: water
+        qty: 0.236
+        unit: kg
+notes: |
+  Addendum-corrected selenium route using hydrogen reductant.
+  Alternate to existing generic selenium extraction recipe.

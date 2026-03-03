@@ -1,0 +1,42 @@
+id: recipe_sulfur_dioxide_from_troilite_v0
+kind: recipe
+target_item_id: sulfur_dioxide_gas
+variant_id: troilite_roast_stage1_v0
+inputs:
+  - item_id: mineral_ore_sulfide
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 1.3
+    unit: kg
+outputs:
+  - item_id: sulfur_dioxide_gas
+    qty: 1.3
+    unit: kg
+  - item_id: iron_oxide_powder
+    qty: 0.9
+    unit: kg
+  - item_id: tailings
+    qty: 0.1
+    unit: kg
+steps:
+  - process_id: troilite_roasting_stage1_v0
+    inputs:
+      - item_id: mineral_ore_sulfide
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 1.3
+        unit: kg
+    outputs:
+      - item_id: sulfur_dioxide_gas
+        qty: 1.3
+        unit: kg
+      - item_id: iron_oxide_powder
+        qty: 0.9
+        unit: kg
+      - item_id: tailings
+        qty: 0.1
+        unit: kg
+notes: "Claus stage-1 roast route generating sulfur dioxide off-gas."
+

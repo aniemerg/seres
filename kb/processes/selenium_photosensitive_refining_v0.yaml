@@ -1,0 +1,40 @@
+id: selenium_photosensitive_refining_v0
+kind: process
+name: Selenium photosensitive grade refining
+process_type: batch
+layer_tags:
+- layer_5
+inputs:
+- item_id: selenium_refined
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: selenium_photosensitive_v0
+  qty: 0.95
+  unit: kg
+byproducts:
+- item_id: waste
+  qty: 0.05
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Purification and impurity removal for photosensitive grade.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Refining and product conditioning.
+notes: |
+  Grade-separation process to distinguish photosensitive selenium from generic
+  selenium_refined per reaction inclusion plan guidance.

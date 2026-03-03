@@ -1,0 +1,49 @@
+id: anorthite_hcl_leach_to_chlorides_v0
+kind: process
+name: Anorthite HCl leach to chlorides
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: anorthite_ore
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.65
+  unit: kg
+- item_id: water
+  qty: 0.35
+  unit: kg
+outputs:
+- item_id: calcium_chloride
+  qty: 0.28
+  unit: kg
+- item_id: aluminum_chloride_hydrate
+  qty: 0.46
+  unit: kg
+- item_id: silica_purified
+  qty: 0.26
+  unit: kg
+resource_requirements:
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: Acid leach and separation steps.
+time_model:
+  type: batch
+  hr_per_batch: 6.0
+  notes: Leaching and fractionation cycle.
+notes: |
+  Explicit representation of reaction 25 block:
+  anorthite + HCl + H2O -> CaCl2 + AlCl3·6H2O + SiO2.

@@ -1,0 +1,30 @@
+id: recipe_nickel_metal_pure_carbonyldecomp_v1
+kind: recipe
+target_item_id: nickel_metal_pure
+variant_id: carbonyldecomp_v1
+inputs:
+  - item_id: nickel_carbonyl_v0
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: nickel_metal_pure
+    qty: 1.0
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 4.0
+    unit: kg
+steps:
+  - process_id: nickel_carbonyl_decomposition_v0
+    inputs:
+      - item_id: nickel_carbonyl_v0
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: nickel_metal_pure
+        qty: 1.0
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 4.0
+        unit: kg
+notes: "Explicit decomposition variant for Ni(CO)4 -> Ni + CO recycle."
+

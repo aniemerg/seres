@@ -1,0 +1,44 @@
+id: rochow_dimethyldichlorosilane_variant_v0
+kind: process
+name: Rochow variant to dimethyldichlorosilane
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: methyl_chloride_gas
+  qty: 1.0
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.42
+  unit: kg
+outputs:
+- item_id: dimethyldichlorosilane
+  qty: 1.4
+  unit: kg
+- item_id: tailings
+  qty: 0.02
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
+  notes: Rochow organosilicon synthesis stage.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Catalytic gas-solid reaction cycle.
+notes: |
+  Explicit representation of reaction 41 route:
+  CH3Cl + Si -> (CH3)2SiCl2.
+

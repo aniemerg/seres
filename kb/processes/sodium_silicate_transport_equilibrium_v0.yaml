@@ -1,0 +1,44 @@
+id: sodium_silicate_transport_equilibrium_v0
+kind: process
+name: Sodium silicate transport equilibrium
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: sodium_carbonate
+  qty: 1.0
+  unit: kg
+- item_id: silica_purified
+  qty: 0.57
+  unit: kg
+outputs:
+- item_id: sodium_silicate
+  qty: 1.35
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.22
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 4.0
+  unit: kWh
+  notes: Thermal equilibrium setup for sodium silicate formation.
+time_model:
+  type: batch
+  hr_per_batch: 3.0
+  notes: Melt/equilibrium and gas management cycle.
+notes: |
+  Explicit representation of reaction 49 transport chemistry:
+  Na2CO3 + SiO2 <-> Na2SiO3 + CO2.
+

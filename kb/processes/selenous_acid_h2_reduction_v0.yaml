@@ -1,0 +1,43 @@
+id: selenous_acid_h2_reduction_v0
+kind: process
+name: Selenous acid hydrogen reduction to selenium
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: selenous_acid
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.026
+  unit: kg
+outputs:
+- item_id: selenium_refined
+  qty: 0.79
+  unit: kg
+- item_id: water
+  qty: 0.236
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.5
+  unit: kWh
+  notes: Gas-liquid reduction and product recovery.
+time_model:
+  type: batch
+  hr_per_batch: 1.5
+  notes: Reduction, precipitation, and filtration.
+notes: |
+  Addendum-corrected selenium route step:
+  H2SeO3 + 2H2 -> Se + 3H2O.

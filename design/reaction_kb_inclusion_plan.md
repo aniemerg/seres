@@ -315,12 +315,10 @@ Attribution for source intent: **"My Dastardly Plan to Colonise the Universe" by
 ## ID Stability and Upgrade Handling
 - Current intent: no forced rename of stable existing IDs in this reaction pass.
 - Planned approach: avoid destructive ID renames in this phase whenever possible.
-- Where canonicalization is needed, keep old IDs as compatibility items/aliases (or compatibility recipes) and route to canonical IDs.
-- If a true rename is unavoidable, add an explicit ID-upgrade map and runtime guard behavior:
-  - simulation start checks for deprecated IDs in scenario/inventory/process references,
-  - simulation stops with a structured note listing old ID, new ID, and migration hint,
-  - map stored in a versioned file (proposed: `config/id_upgrades.yaml`).
-- Existing simulations should be migratable via a script that rewrites old IDs to new IDs using the same map.
+- Where canonicalization is needed, keep deprecated IDs in KB entries with explicit upgrade metadata (`deprecated`, `upgraded_to`, `upgrade_note`, `upgrade_since`) per ADR-025.
+- Deprecated/upgraded IDs are not treated as silently compatible for execution.
+- Simulator behavior is fail-fast on deprecated ID references (including runbooks/saved simulations): execution stops with structured upgrade guidance.
+- No automatic migration/rewrite tool is planned; users/agents must investigate and update references intentionally.
 
 ## Proposed Implementation Sequence (No Priority Tiering, Full Coverage Pass)
 1. Normalize IDs and aliases used by this chemistry domain (chlorides/nitrates/gases).
@@ -378,3 +376,20 @@ Planned `resource_requirements` for each new process (reusing existing machine I
 - For catalyst handling (S catalyst, NH3 oxidation catalyst), use catalyst as process requirement or recycled catalytic input/output, not one-way consumable mass.
 - For W inclusions, keep extraction as beneficiation + purification chain from `nife_alloy_byproduct`, then retire direct import dependency of `tungsten_powder` in thermionic paths.
 - For addendum-corrected selenium, use two-step acidification/reduction process with explicit reductant source (default H2 route).
+
+## Implementation Status (2026-03-03)
+- Completed direct KB inclusion for all reaction groups in `design/list_of_reactions.md` using existing plus new process variants.
+- Added explicit process/recipe coverage for missing chains:
+  - Ferrofluid precursor + seal formulation (`ferrofluid_precursor_synthesis_v0`, `ferrofluid_seal_formulation_v0`).
+  - Tungsten inclusion refinement to local `tungsten_powder` (`tungsten_concentrate_refining_v0`, `recipe_tungsten_powder_v0`).
+  - Carbonyl explicit stages (`nickel_carbonyl_synthesis_v0`, `nickel_carbonyl_decomposition_v0`, `cobalt_carbonyl_decomposition_to_metal_v0`) with sulfur catalyst modeled as recycled material in nickel synthesis.
+  - Claus split stages (`troilite_roasting_stage1_v0`, `claus_stage2_sulfur_recovery_v0`).
+  - Orthoclase/illite/kaolinite chain, selenium split chain, and anorthite explicit subchain from prior chunk.
+  - Forsterite, augite, and enstatite explicit routes (`forsterite_methane_reduction_v0`, `augite_hcl_to_montmorillonite_v0`, `enstatite_hydrothermal_serpentine_talc_v0`).
+  - Methanol->methyl chloride, Rochow dimethyldichlorosilane, and silicone hydrolysis/polycondensation (`methanol_hcl_to_methyl_chloride_v0`, `rochow_dimethyldichlorosilane_variant_v0`, `dimethyldichlorosilane_hydrolysis_polycondensation_v0`).
+  - Ostwald staged intermediates (`ostwald_stage1_ammonia_oxidation_v0`, `ostwald_stage2_no_oxidation_v0`, `ostwald_stage3_no2_absorption_v0`) and sodium silicate transport chemistry (`sodium_silicate_transport_equilibrium_v0`).
+- Addendum-driven normalization applied:
+  - Selenite -> Se represented as acidification + reduction stages.
+  - Quartz-related sodium silicate chemistry represented as transport/equilibrium step, separate from crystallization.
+  - C-type reaction 38 mapped to existing steam-reforming representation (`syngas_generation_steam_reforming_v0`) per addendum normalization.
+- Index status after these edits: no new validation failures introduced; repository still has one pre-existing unrelated error (`recipe_excavator_basic_v0` mass imbalance).

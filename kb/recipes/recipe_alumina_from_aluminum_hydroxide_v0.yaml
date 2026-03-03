@@ -1,0 +1,29 @@
+id: recipe_alumina_from_aluminum_hydroxide_v0
+kind: recipe
+target_item_id: alumina_powder
+variant_id: aluminum_hydroxide_calcination_v0
+inputs:
+  - item_id: aluminum_hydroxide
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: alumina_powder
+    qty: 0.65
+    unit: kg
+  - item_id: water
+    qty: 0.35
+    unit: kg
+steps:
+  - process_id: aluminum_hydroxide_calcination_v0
+    inputs:
+      - item_id: aluminum_hydroxide
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: alumina_powder
+        qty: 0.65
+        unit: kg
+      - item_id: water
+        qty: 0.35
+        unit: kg
+notes: "Explicit Al(OH)3 calcination route to alumina (reaction 27)."

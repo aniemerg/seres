@@ -1,0 +1,30 @@
+id: recipe_ferrofluid_slurry_v0
+kind: recipe
+target_item_id: ferrofluid_slurry_v0
+variant_id: v0
+inputs:
+  - item_id: iron_oxide_powder
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: ferrofluid_slurry_v0
+    qty: 1.45
+    unit: kg
+steps:
+  - process_id: ferrofluid_precursor_synthesis_v0
+    inputs:
+      - item_id: iron_oxide_powder
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: ferrofluid_slurry_v0
+        qty: 1.45
+        unit: kg
+notes: "Ferrofluid precursor route from iron oxide and water."
+

@@ -1,0 +1,30 @@
+id: recipe_ferrofluid_sealant_v0
+kind: recipe
+target_item_id: ferrofluid_sealant_v0
+variant_id: v0
+inputs:
+  - item_id: ferrofluid_slurry_v0
+    qty: 1.0
+    unit: kg
+  - item_id: silicone_polymer
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: ferrofluid_sealant_v0
+    qty: 1.18
+    unit: kg
+steps:
+  - process_id: ferrofluid_seal_formulation_v0
+    inputs:
+      - item_id: ferrofluid_slurry_v0
+        qty: 1.0
+        unit: kg
+      - item_id: silicone_polymer
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: ferrofluid_sealant_v0
+        qty: 1.18
+        unit: kg
+notes: "Ferrofluidic seal formulation for vacuum seal applications."
+

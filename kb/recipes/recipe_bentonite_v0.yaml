@@ -1,0 +1,54 @@
+id: recipe_bentonite_v0
+kind: recipe
+target_item_id: bentonite
+variant_id: augite_hcl_v0
+inputs:
+  - item_id: pyroxene_concentrate
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.6
+    unit: kg
+  - item_id: water
+    qty: 0.5
+    unit: kg
+outputs:
+  - item_id: bentonite
+    qty: 0.7
+    unit: kg
+  - item_id: silicic_acid
+    qty: 0.4
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.3
+    unit: kg
+  - item_id: iron_oxide_powder
+    qty: 0.7
+    unit: kg
+steps:
+  - process_id: augite_hcl_to_montmorillonite_v0
+    inputs:
+      - item_id: pyroxene_concentrate
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.6
+        unit: kg
+      - item_id: water
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: bentonite
+        qty: 0.7
+        unit: kg
+      - item_id: silicic_acid
+        qty: 0.4
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.3
+        unit: kg
+      - item_id: iron_oxide_powder
+        qty: 0.7
+        unit: kg
+notes: "Augite-to-montmorillonite (bentonite) route for binder production."
+

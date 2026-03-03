@@ -1,0 +1,52 @@
+id: augite_hcl_to_montmorillonite_v0
+kind: process
+name: Augite HCl conversion to montmorillonite-rich clay
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: pyroxene_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.6
+  unit: kg
+- item_id: water
+  qty: 0.5
+  unit: kg
+outputs:
+- item_id: bentonite
+  qty: 0.7
+  unit: kg
+- item_id: silicic_acid
+  qty: 0.4
+  unit: kg
+- item_id: calcium_chloride
+  qty: 0.3
+  unit: kg
+- item_id: iron_oxide_powder
+  qty: 0.7
+  unit: kg
+resource_requirements:
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 4.0
+  unit: kWh
+  notes: Acid weathering and separation steps.
+time_model:
+  type: batch
+  hr_per_batch: 4.0
+  notes: Reaction plus settling/filtration.
+notes: |
+  Explicit representation of reaction 36 as an engineered acid-weathering route:
+  augite feed to montmorillonite-class binder + soluble/precipitated byproducts.

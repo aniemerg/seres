@@ -1,0 +1,41 @@
+id: ostwald_stage2_no_oxidation_v0
+kind: process
+name: Ostwald stage 2 nitric oxide oxidation
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: nitric_oxide_gas
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.53
+  unit: kg
+outputs:
+- item_id: nitrogen_dioxide_gas
+  qty: 1.53
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Gas-phase NO oxidation.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Oxidation and conditioning cycle.
+notes: |
+  Explicit Ostwald intermediate stage:
+  2NO + O2 -> 2NO2.
+

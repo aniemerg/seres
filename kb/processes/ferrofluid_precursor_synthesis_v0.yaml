@@ -1,0 +1,39 @@
+id: ferrofluid_precursor_synthesis_v0
+kind: process
+name: Ferrofluid precursor synthesis
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: iron_oxide_powder
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.5
+  unit: kg
+outputs:
+- item_id: ferrofluid_slurry_v0
+  qty: 1.45
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: Mixing and wet milling of magnetic particles.
+time_model:
+  type: batch
+  hr_per_batch: 1.5
+  notes: Slurry synthesis and homogenization.
+notes: |
+  Explicit representation of reaction-group callout 1:
+  FeO + H2O feed route represented as iron-oxide slurry preparation for
+  ferrofluidic sealing chains.
+

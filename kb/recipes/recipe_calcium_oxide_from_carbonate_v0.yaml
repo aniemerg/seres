@@ -1,0 +1,29 @@
+id: recipe_calcium_oxide_from_carbonate_v0
+kind: recipe
+target_item_id: calcium_oxide
+variant_id: carbonate_calcination_v0
+inputs:
+  - item_id: calcium_carbonate
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: calcium_oxide
+    qty: 0.56
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.44
+    unit: kg
+steps:
+  - process_id: calcium_carbonate_calcination_v0
+    inputs:
+      - item_id: calcium_carbonate
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: calcium_oxide
+        qty: 0.56
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.44
+        unit: kg
+notes: "Explicit CaCO3 calcination route (reaction 50)."

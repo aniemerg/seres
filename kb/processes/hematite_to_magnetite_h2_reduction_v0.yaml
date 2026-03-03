@@ -1,0 +1,43 @@
+id: hematite_to_magnetite_h2_reduction_v0
+kind: process
+name: Hematite reduction to magnetite (H2)
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: hematite_ore
+  qty: 1.0
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.0042
+  unit: kg
+outputs:
+- item_id: magnetite_ore
+  qty: 0.967
+  unit: kg
+- item_id: water
+  qty: 0.038
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Moderate-temperature gas-solid reduction.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Reduction and hold cycle.
+notes: |
+  Explicit route for reaction 5 in list_of_reactions.md:
+  3Fe2O3 + H2 -> 2Fe3O4 + H2O.

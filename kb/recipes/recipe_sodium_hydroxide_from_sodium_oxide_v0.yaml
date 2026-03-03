@@ -1,0 +1,31 @@
+id: recipe_sodium_hydroxide_from_sodium_oxide_v0
+kind: recipe
+target_item_id: sodium_hydroxide
+variant_id: sodium_oxide_hydration_v0
+inputs:
+  - item_id: sodium_oxide
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.29
+    unit: kg
+outputs:
+  - item_id: sodium_hydroxide
+    qty: 1.29
+    unit: kg
+steps:
+  - process_id: sodium_oxide_hydration_v0
+    inputs:
+      - item_id: sodium_oxide
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.29
+        unit: kg
+    outputs:
+      - item_id: sodium_hydroxide
+        qty: 1.29
+        unit: kg
+notes: |
+  Alternate NaOH route explicitly representing Na2O hydration reaction from
+  list_of_reactions.md (reaction 16).

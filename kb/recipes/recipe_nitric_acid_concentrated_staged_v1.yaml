@@ -1,0 +1,36 @@
+id: recipe_nitric_acid_concentrated_staged_v1
+kind: recipe
+target_item_id: nitric_acid_concentrated
+variant_id: ostwald_staged_v1
+inputs:
+  - item_id: nitrogen_dioxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.14
+    unit: kg
+outputs:
+  - item_id: nitric_acid_concentrated
+    qty: 0.8
+    unit: kg
+  - item_id: nitric_oxide_gas
+    qty: 0.34
+    unit: kg
+steps:
+  - process_id: ostwald_stage3_no2_absorption_v0
+    inputs:
+      - item_id: nitrogen_dioxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.14
+        unit: kg
+    outputs:
+      - item_id: nitric_acid_concentrated
+        qty: 0.8
+        unit: kg
+      - item_id: nitric_oxide_gas
+        qty: 0.34
+        unit: kg
+notes: "Staged Ostwald stage-3 absorption route for nitric acid."
+

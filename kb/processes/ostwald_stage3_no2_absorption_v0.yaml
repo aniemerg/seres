@@ -1,0 +1,44 @@
+id: ostwald_stage3_no2_absorption_v0
+kind: process
+name: Ostwald stage 3 NO2 absorption
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: nitrogen_dioxide_gas
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.14
+  unit: kg
+outputs:
+- item_id: nitric_acid_concentrated
+  qty: 0.8
+  unit: kg
+- item_id: nitric_oxide_gas
+  qty: 0.34
+  unit: kg
+resource_requirements:
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Absorption and acid concentration.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Gas absorption and recycle split.
+notes: |
+  Explicit representation of reaction 45 form:
+  3NO2 + H2O -> 2HNO3 + NO.
+

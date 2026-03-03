@@ -1,0 +1,38 @@
+id: sodium_oxide_hydration_v0
+kind: process
+name: Sodium oxide hydration to sodium hydroxide
+process_type: batch
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: sodium_oxide
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.29
+  unit: kg
+outputs:
+- item_id: sodium_hydroxide
+  qty: 1.29
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 0.5
+  unit: kWh
+  notes: Mild exothermic hydration with controlled mixing and handling.
+time_model:
+  type: batch
+  hr_per_batch: 0.5
+  notes: Batch hydration and stabilization.
+notes: |
+  Explicit representation of reaction in list_of_reactions.md addendum chain:
+  Na2O + H2O -> 2NaOH.
+  Added as alternate NaOH production path alongside chloralkali route.

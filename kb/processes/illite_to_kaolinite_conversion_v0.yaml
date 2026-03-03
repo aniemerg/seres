@@ -1,0 +1,46 @@
+id: illite_to_kaolinite_conversion_v0
+kind: process
+name: Illite conversion to kaolinite
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: illite_clay
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.1
+  unit: kg
+- item_id: water
+  qty: 0.2
+  unit: kg
+outputs:
+- item_id: kaolinite_clay
+  qty: 0.92
+  unit: kg
+- item_id: potassium_chloride
+  qty: 0.12
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.2
+  unit: kWh
+  notes: Aqueous conversion and post-treatment.
+time_model:
+  type: batch
+  hr_per_batch: 3.0
+  notes: Conversion and wash cycle.
+notes: |
+  Explicit representation of reaction 20 (illite -> kaolinite conversion route)
+  with KCl coproduct.

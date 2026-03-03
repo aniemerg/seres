@@ -1,0 +1,41 @@
+id: tungsten_concentrate_refining_v0
+kind: process
+name: Tungsten concentrate refining to powder
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: tungsten_concentrate
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: tungsten_powder
+  qty: 0.9
+  unit: kg
+- item_id: tailings
+  qty: 0.1
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 5.0
+  unit: kWh
+  notes: Concentrate cleanup and powder finishing.
+time_model:
+  type: batch
+  hr_per_batch: 3.0
+  notes: Refinement and powder recovery.
+notes: |
+  Downstream refining of tungsten-rich concentrate from NiFe meteorite chains
+  into tungsten powder feedstock for thermionic and tooling routes.
+

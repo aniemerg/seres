@@ -1,0 +1,50 @@
+id: forsterite_methane_reduction_v0
+kind: process
+name: Forsterite methane reduction
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: forsterite_extraction_v0
+  qty: 1.0
+  unit: kg
+- item_id: methane_gas
+  qty: 0.32
+  unit: kg
+outputs:
+- item_id: magnesium_oxide
+  qty: 0.57
+  unit: kg
+- item_id: silicon_metal_v0
+  qty: 0.2
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 0.45
+  unit: kg
+- item_id: hydrogen_gas
+  qty: 0.1
+  unit: kg
+resource_requirements:
+- machine_id: high_temp_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 12.0
+  unit: kWh
+  notes: High-temperature silicate reduction (reaction 29 route).
+time_model:
+  type: batch
+  hr_per_batch: 5.0
+  notes: Reduction and gas separation cycle.
+notes: |
+  Explicit reaction-29 chain representation:
+  Mg2SiO4 + CH4 -> MgO + Si + CO/H2 stream.
+
