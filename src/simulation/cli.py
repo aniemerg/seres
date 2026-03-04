@@ -800,6 +800,8 @@ def _run_runbook(
                     _emit(f"Error: sim.runbook requires file (step {idx})", _COLOR_ERROR, is_error=True)
                     return 1
                 allow_child_control = bool(_get_arg(cmd_args, "allow-control", "allow_control"))
+                child_continue_arg = _get_arg(cmd_args, "continue-on-error", "continue_on_error")
+                child_continue_on_error = continue_on_error if child_continue_arg is None else bool(child_continue_arg)
                 child_path = (runbook_path.parent / child_file).resolve()
                 result = _run_runbook(
                     child_path,
@@ -808,7 +810,7 @@ def _run_runbook(
                     stack=stack,
                     allow_control=allow_child_control,
                     dry_run=dry_run,
-                    continue_on_error=continue_on_error,
+                    continue_on_error=child_continue_on_error,
                     story_mode=story_mode,
                 )
                 if result != 0 and not continue_on_error:
@@ -2197,7 +2199,7 @@ def add_sim_subcommands(subparsers):
     recipe_parser = sim_subparsers.add_parser('run-recipe', help='Run a recipe')
     recipe_parser.add_argument('--sim-id', required=True, help='Simulation ID')
     recipe_parser.add_argument('--recipe', required=True, help='Recipe ID')
-    recipe_parser.add_argument('--quantity', type=int, default=1, help='Batch quantity')
+    recipe_parser.add_argument('--quantity', type=float, default=1.0, help='Recipe scale quantity')
 
     # build-machine
     build_parser = sim_subparsers.add_parser('build-machine', help='Build a machine')

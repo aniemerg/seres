@@ -335,6 +335,12 @@ Commentary: Produce machine_frame_medium and fastener_kit_medium from regolith. 
     quantity: 1
     unit: unit
     ensure: true
+- cmd: sim.import
+  args:
+    item: steel_plate_or_sheet
+    quantity: 200
+    unit: kg
+    ensure: true
 - cmd: sim.run-recipe
   args:
     recipe: recipe_balancing_machine_v0

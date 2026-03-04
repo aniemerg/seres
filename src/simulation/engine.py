@@ -106,7 +106,7 @@ class SimulationEngine:
         self.orchestrator = RecipeOrchestrator(self.scheduler)
 
         # Recipe event tracking (runtime only; not persisted)
-        self._recipe_quantities: Dict[str, int] = {}
+        self._recipe_quantities: Dict[str, float] = {}
         self._recipe_outputs_accum: Dict[str, Dict[str, InventoryItem]] = {}
         self._recipe_energy_accum: Dict[str, float] = {}
         self._logged_recipe_completions: set[str] = set()
@@ -1091,7 +1091,7 @@ class SimulationEngine:
     def run_recipe(
         self,
         recipe_id: str,
-        quantity: int = 1,
+        quantity: float = 1.0,
         start_time: Optional[float] = None,
     ) -> Dict[str, Any]:
         """

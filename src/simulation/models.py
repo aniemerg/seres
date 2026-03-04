@@ -120,7 +120,7 @@ class RecipeStartEvent(Event):
     """Recipe started."""
     type: Literal["recipe_start"] = "recipe_start"
     recipe_id: str
-    quantity: int
+    quantity: float
     duration_hours: float
 
 
@@ -128,7 +128,7 @@ class RecipeCompleteEvent(Event):
     """Recipe completed."""
     type: Literal["recipe_complete"] = "recipe_complete"
     recipe_id: str
-    quantity: int
+    quantity: float
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this recipe
 
