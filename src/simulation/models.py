@@ -90,6 +90,7 @@ class ProcessScheduledEvent(Event):
     machine_reservations: List[Dict[str, Any]]
 
     recipe_run_id: Optional[str] = None
+    recipe_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
 
@@ -99,6 +100,9 @@ class ProcessStartEvent(Event):
     type: Literal["process_start"] = "process_start"
     process_id: str
     process_run_id: str
+    recipe_run_id: Optional[str] = None
+    recipe_id: Optional[str] = None
+    step_index: Optional[int] = None
     actual_start_time: float
     scale: float
     scheduled_end_time: Optional[float] = None
@@ -110,6 +114,8 @@ class ProcessCompleteEvent(Event):
     process_id: str
     process_run_id: Optional[str] = None  # Runtime process instance ID
     recipe_run_id: Optional[str] = None  # Recipe run ID if part of a recipe
+    recipe_id: Optional[str] = None
+    step_index: Optional[int] = None
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this process
     time_hours: float

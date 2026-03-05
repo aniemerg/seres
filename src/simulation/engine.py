@@ -1052,6 +1052,11 @@ class SimulationEngine:
                 outputs_pending=outputs_pending_with_units,
                 machine_reservations=machine_reservations_list,
                 recipe_run_id=recipe_run_id,
+                recipe_id=(
+                    self.orchestrator.get_recipe_run(recipe_run_id).recipe_id
+                    if recipe_run_id and self.orchestrator.get_recipe_run(recipe_run_id)
+                    else None
+                ),
                 step_index=step_index,
                 energy_kwh=energy_kwh,
             )
@@ -1700,10 +1705,19 @@ class SimulationEngine:
                 self._process_energy[process_run_id] = energy_kwh
 
                 # Log activation event for lifecycle tracking
+                recipe_run_id = process_run.recipe_run_id
+                recipe_id = None
+                if recipe_run_id:
+                    recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                    if recipe_run:
+                        recipe_id = recipe_run.recipe_id
                 self._log_event(
                     ProcessStartEvent(
                         process_id=process_run.process_id,
                         process_run_id=process_run_id,
+                        recipe_run_id=recipe_run_id,
+                        recipe_id=recipe_id,
+                        step_index=process_run.step_index,
                         actual_start_time=event.time,
                         scale=process_run.scale,
                         scheduled_end_time=process_run.end_time,
@@ -1767,11 +1781,19 @@ class SimulationEngine:
                     self.state.total_energy_kwh += energy_kwh
 
                     # Log completion event
+                    recipe_run_id = process_run.recipe_run_id
+                    recipe_id = None
+                    if recipe_run_id:
+                        recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                        if recipe_run:
+                            recipe_id = recipe_run.recipe_id
                     self._log_event(
                         ProcessCompleteEvent(
                             process_id=process_run.process_id,
                             process_run_id=process_run_id,
-                            recipe_run_id=process_run.recipe_run_id,
+                            recipe_run_id=recipe_run_id,
+                            recipe_id=recipe_id,
+                            step_index=process_run.step_index,
                             time_hours=event.time,
                             start_time=process_run.start_time,
                             outputs=outputs_with_units,
@@ -1780,7 +1802,6 @@ class SimulationEngine:
                     )
 
                     # Accumulate per-recipe outputs and energy, then emit recipe_complete if finished.
-                    recipe_run_id = process_run.recipe_run_id
                     if recipe_run_id:
                         acc_outputs = self._recipe_outputs_accum.setdefault(recipe_run_id, {})
                         for item_id, inv_item in outputs_with_units.items():

@@ -2135,6 +2135,35 @@ def cmd_visualize(args, kb_loader: KBLoader):
         return 1
 
 
+def cmd_export_view(args, kb_loader: KBLoader):
+    """Export simulation + KB + article data for the static simviewer frontend."""
+    from src.simviewer.config import load_config
+    from src.simviewer.exporter import export_simviewer
+
+    sim_id = args.sim_id
+    config_path = Path(args.config) if getattr(args, "config", None) else None
+    out_dir = Path(args.out) if getattr(args, "out", None) else (REPO_ROOT / "out" / "simviewer" / sim_id / "dist")
+
+    try:
+        config = load_config(config_path, sim_id)
+        result = export_simviewer(REPO_ROOT, config, out_dir)
+    except Exception as exc:
+        _emit(f"✗ Failed to export simviewer data: {exc}", _COLOR_ERROR, is_error=True)
+        return 1
+
+    summary = result.get("summary", {})
+    warnings = result.get("warnings", {})
+    _emit(f"✓ Exported simviewer data for '{sim_id}'", _COLOR_SUCCESS)
+    _emit_kv("  Output:", str(result.get("out_dir")), _COLOR_INFO)
+    _emit_kv("  Data:", str(result.get("data_dir")), _COLOR_INFO)
+    _emit_kv("  Time:", f"{summary.get('time_hours', 0.0):.2f} h", _COLOR_TIME)
+    _emit_kv("  Energy:", f"{summary.get('total_energy_kwh', 0.0):.2f} kWh", _COLOR_ENERGY)
+    _emit_kv("  Process runs:", f"{summary.get('process_runs_total', 0)}", _COLOR_INFO)
+    _emit_kv("  Unresolved wiki-links:", f"{len(warnings.get('unresolved_wiki_links', []))}", _COLOR_WARN)
+    _emit_kv("  Missing machine categories:", f"{len(warnings.get('missing_kb_categories', []))}", _COLOR_WARN)
+    return 0
+
+
 # ============================================================================
 # Main CLI setup
 # ============================================================================
@@ -2234,6 +2263,12 @@ def add_sim_subcommands(subparsers):
     visualize_parser.add_argument('--sim-id', required=True, help='Simulation ID')
     visualize_parser.add_argument('--output', help='Output directory for plots (default: sim_dir/plots)')
 
+    # export-view
+    export_view_parser = sim_subparsers.add_parser('export-view', help='Export static data for simviewer')
+    export_view_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    export_view_parser.add_argument('--out', help='Output dist directory (default: out/simviewer/<sim-id>/dist)')
+    export_view_parser.add_argument('--config', help='Optional simviewer config YAML')
+
     # runbook
     runbook_parser = sim_subparsers.add_parser('runbook', help='Run a simulation runbook (Markdown)')
     runbook_parser.add_argument('--file', required=True, help='Runbook markdown file path')
@@ -2271,6 +2306,7 @@ def run_sim_command(args, kb_loader: KBLoader):
         'provenance': cmd_provenance,
         'list': cmd_list,
         'visualize': cmd_visualize,
+        'export-view': cmd_export_view,
         'runbook': cmd_runbook,
     }
 
