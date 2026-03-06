@@ -15,7 +15,6 @@ assembly_tools_basic
 balancing_machine
 ball_mill_v0
 basic_fabrication_station
-basic_fabrication_station_v0
 bending_machine_v0
 blast_furnace_or_smelter
 casting_furnace_v0
@@ -48,7 +47,6 @@ fiber_drawing_tower
 filtration_unit
 fixturing_workbench
 forging_press_v0
-furnace
 furnace_basic
 furnace_high_temp
 generic_chemical_reactor_v0
@@ -76,7 +74,6 @@ lathe_engine_v0
 leak_test_equipment
 lifting_equipment
 magnetic_separator_drum_v0
-manual_labour
 measurement_equipment
 metal_forming_basic_v0
 metal_shear_or_saw
@@ -115,7 +112,6 @@ rolling_mill_v0
 sand_casting_flask_set
 saw_or_cutting_tool
 screening_equipment
-screening_equipment_v0
 sintering_furnace_v0
 solar_array_v0
 solar_tracking_optional

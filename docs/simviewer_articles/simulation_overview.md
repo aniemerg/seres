@@ -24,7 +24,8 @@ You can also jump via Markdown link: [Runbook Queue Definition](runbook_queue_de
 > Process runs: {{ sim.value key="sim.summary.process_runs_total" format="number" }}  
 > Seeded machine types: {{ sim.value key="sim.replication.seed_machine_types" format="number" }}  
 > Covered machine types: {{ sim.value key="sim.replication.covered_machine_types" format="number" }}  
-> Coverage: {{ sim.value key="sim.replication.coverage_percent" format="number:1" unit="%" }}
+> Coverage: {{ sim.value key="sim.replication.coverage_percent" format="number:1" unit="%" }}  
+> Avg machine utilization: {{ sim.value key="sim.machines.avg_utilization_percent" format="number:1" unit="%" }}
 
 ## Seed vs Produced
 
@@ -44,6 +45,13 @@ type: table
 source: sim.machines.coverage
 title: Replication Coverage by Machine
 columns: [id, name, imported_quantity, produced_quantity, covered]
+```
+
+```sim-query
+type: table
+source: sim.machines.utilization
+title: Machine Utilization (Ranked)
+columns: [id, name, run_count, busy_hours, window_hours, utilization_percent, total_energy_kwh]
 ```
 
 ## What This Scenario Is Testing

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type {
   Article,
   ArticlesPayload,
@@ -21,6 +21,7 @@ type Route =
 
 const BAR_MIN_PX = 3
 const ROW_HEIGHT = 28
+const WIKI_HOME_ID = 'about_seres'
 type ColorMode = 'status' | 'process' | 'recipe'
 
 function parseRoute(hash: string): Route {
@@ -30,12 +31,12 @@ function parseRoute(hash: string): Route {
   if (parts[0] === 'wiki') return { view: 'wiki', id: parts[1] }
   if (parts[0] === 'kb-search') return { view: 'kbsearch' }
   if (parts[0] === 'home') return { view: 'home' }
-  return { view: 'wiki', id: 'simulation_overview' }
+  return { view: 'wiki', id: WIKI_HOME_ID }
 }
 
 function hashTo(route: Route): string {
   if (route.view === 'gantt') return '#/gantt'
-  if (route.view === 'wiki') return route.id ? `#/wiki/${route.id}` : '#/wiki/simulation_overview'
+  if (route.view === 'wiki') return route.id ? `#/wiki/${route.id}` : `#/wiki/${WIKI_HOME_ID}`
   if (route.view === 'kbsearch') return '#/kb-search'
   return '#/home'
 }
@@ -543,7 +544,7 @@ function collectRefIds(node: unknown, out: Set<string>): void {
 }
 
 export function App() {
-  const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash || '#/wiki/simulation_overview'))
+  const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash || `#/wiki/${WIKI_HOME_ID}`))
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [simData, setSimData] = useState<SimData | null>(null)
   const [simQuery, setSimQuery] = useState<SimQueryData | null>(null)
@@ -556,7 +557,7 @@ export function App() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    const onHash = () => setRoute(parseRoute(window.location.hash || '#/wiki/simulation_overview'))
+    const onHash = () => setRoute(parseRoute(window.location.hash || `#/wiki/${WIKI_HOME_ID}`))
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
@@ -836,7 +837,7 @@ export function App() {
         <button className={route.view === 'gantt' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'gantt' })}>
           {sidebarCollapsed ? 'T' : 'Timeline'}
         </button>
-        <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'wiki', id: 'simulation_overview' })}>
+        <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'wiki', id: WIKI_HOME_ID })}>
           {sidebarCollapsed ? 'W' : 'Wiki'}
         </button>
         <button className={route.view === 'kbsearch' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'kbsearch' })}>
@@ -937,7 +938,7 @@ function HomeView({
   simQuery: SimQueryData | null
   onJumpKB: (id: string) => void
 }) {
-  const article = articles.find((a) => a.id === 'simulation_overview') ?? articles[0]
+  const article = articles.find((a) => a.id === WIKI_HOME_ID) ?? articles[0]
   const simId = typeof simQuery?.scalars['sim.id'] === 'string' ? String(simQuery?.scalars['sim.id']) : (simData?.sim_id || 'unknown')
   const pageTitle = article?.title || `SERES Simulation: ${simId}`
 
@@ -995,6 +996,7 @@ function GanttView({
     return m
   }, [simData, lanes])
 
+  const leftRef = useRef<HTMLDivElement>(null)
   const totalHours = Math.max(simData.summary.time_hours, ...simData.process_runs.map((r) => r.end_time ?? 0))
   const widthPx = Math.max(1200, totalHours * zoom)
   const processLabel = (run: ProcessRun) => {
@@ -1022,7 +1024,7 @@ function GanttView({
         <span>Total: {totalHours.toFixed(1)} h</span>
       </div>
       <div className="gantt-wrap">
-        <div className="gantt-left">
+        <div className="gantt-left" ref={leftRef}>
           {lanes.map((lane) => {
             const cat = entitiesById[lane.machine_type]?.category || 'Uncategorized'
             return (
@@ -1033,7 +1035,7 @@ function GanttView({
             )
           })}
         </div>
-        <div className="gantt-right">
+        <div className="gantt-right" onScroll={(e) => { if (leftRef.current) leftRef.current.scrollTop = e.currentTarget.scrollTop }}>
           <div className="gantt-canvas" style={{ width: widthPx, height: lanes.length * ROW_HEIGHT }}>
             {lanes.map((lane, row) => {
               const runs = laneRuns.get(lane.lane_id) ?? []

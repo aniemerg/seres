@@ -508,6 +508,63 @@ def _build_simquery(
     seed_total = len(seeded_rows)
     coverage_ratio = (covered_count / seed_total) if seed_total > 0 else 0.0
 
+    # Machine utilization by machine type (success runs only).
+    # Utilization window is simulation [0, summary.time_hours].
+    sim_window_hours = max(0.0, float(summary.get("time_hours", 0.0) or 0.0))
+    intervals_by_machine: Dict[str, List[Tuple[float, float]]] = defaultdict(list)
+    run_count_by_machine: Dict[str, int] = defaultdict(int)
+    energy_by_machine: Dict[str, float] = defaultdict(float)
+
+    for run in process_runs:
+        if run.status != "success":
+            continue
+        if not run.machine_type:
+            continue
+        if run.start_time is None or run.end_time is None:
+            continue
+        start = max(0.0, float(run.start_time))
+        end = max(start, float(run.end_time))
+        intervals_by_machine[run.machine_type].append((start, end))
+        run_count_by_machine[run.machine_type] += 1
+        energy_by_machine[run.machine_type] += float(run.energy_kwh or 0.0)
+
+    utilization_rows: List[dict] = []
+    for machine_id, intervals in intervals_by_machine.items():
+        if not intervals:
+            continue
+        intervals.sort(key=lambda x: (x[0], x[1]))
+        merged: List[Tuple[float, float]] = []
+        for start, end in intervals:
+            if not merged:
+                merged.append((start, end))
+                continue
+            last_start, last_end = merged[-1]
+            if start <= last_end:
+                merged[-1] = (last_start, max(last_end, end))
+            else:
+                merged.append((start, end))
+        busy_hours = sum(end - start for start, end in merged)
+        utilization = (busy_hours / sim_window_hours) if sim_window_hours > 0 else 0.0
+        utilization_rows.append(
+            {
+                "id": machine_id,
+                "name": kb_entities.get(machine_id, {}).get("name", machine_id),
+                "run_count": int(run_count_by_machine.get(machine_id, 0)),
+                "busy_hours": busy_hours,
+                "window_hours": sim_window_hours,
+                "utilization_ratio": utilization,
+                "utilization_percent": utilization * 100.0,
+                "total_energy_kwh": float(energy_by_machine.get(machine_id, 0.0)),
+            }
+        )
+
+    utilization_rows.sort(key=lambda row: (float(row["utilization_ratio"]), float(row["busy_hours"])), reverse=True)
+    avg_utilization = (
+        sum(float(r["utilization_ratio"]) for r in utilization_rows) / len(utilization_rows)
+        if utilization_rows
+        else 0.0
+    )
+
     return {
         "version": "simquery.v0",
         "scalars": {
@@ -521,11 +578,14 @@ def _build_simquery(
             "sim.replication.covered_machine_types": covered_count,
             "sim.replication.coverage_ratio": coverage_ratio,
             "sim.replication.coverage_percent": coverage_ratio * 100.0,
+            "sim.machines.avg_utilization_ratio": avg_utilization,
+            "sim.machines.avg_utilization_percent": avg_utilization * 100.0,
         },
         "tables": {
             "sim.machines.seeded": seeded_rows,
             "sim.machines.produced": produced_rows,
             "sim.machines.coverage": coverage_rows,
+            "sim.machines.utilization": utilization_rows,
             "sim.annotations": annotations,
             "sim.markers": markers,
         },

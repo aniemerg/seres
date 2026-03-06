@@ -588,12 +588,12 @@ class SimulationEngine:
             if quantity is None:
                 return False
 
-        # Check if enough
-        if existing.quantity < quantity:
+        # Check if enough (epsilon tolerance for floating-point precision)
+        if existing.quantity < quantity - 1e-9:
             return False
 
-        # Subtract
-        existing.quantity -= quantity
+        # Subtract (clamp to avoid tiny negative values from float rounding)
+        existing.quantity = max(0.0, existing.quantity - quantity)
 
         # Remove if empty
         if existing.quantity <= 0:
@@ -614,7 +614,7 @@ class SimulationEngine:
             if quantity is None:
                 return False
 
-        return existing.quantity >= quantity
+        return existing.quantity >= quantity - 1e-9
 
     def _get_machine_available_count(self, machine_id: str) -> float:
         """Return available count for a machine, accounting for current reservations."""

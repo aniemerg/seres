@@ -13,7 +13,7 @@ class SimviewerConfig:
     article_paths: List[str]
     checkpoint_every_processes: int = 150
     checkpoint_every_hours: float = 24.0
-    homepage_article_id: str = "simulation_overview"
+    homepage_article_id: str = "about_seres"
     strict: bool = False
 
     def to_dict(self) -> dict:
@@ -46,6 +46,6 @@ def load_config(config_path: Path | None, sim_id: str) -> SimviewerConfig:
         article_paths=[str(p) for p in article_paths],
         checkpoint_every_processes=int(raw.get("checkpoint_every_processes", 150)),
         checkpoint_every_hours=float(raw.get("checkpoint_every_hours", 24.0)),
-        homepage_article_id=str(raw.get("homepage_article_id", "simulation_overview")),
+        homepage_article_id=str(raw.get("homepage_article_id", "about_seres")),
         strict=bool(raw.get("strict", False)),
     )
