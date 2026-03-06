@@ -750,6 +750,8 @@ def _run_runbook(
         "sim.list": cmd_list,
         "sim.plan": cmd_plan,
         "sim.visualize": cmd_visualize,
+        "sim.annotate": cmd_annotate,
+        "sim.mark": cmd_mark,
     }
 
     parsed_context = _parse_markdown_story_context(md_text) if story_mode else {"sections": {}, "intro_lines": []}
@@ -2062,6 +2064,68 @@ def cmd_status(args, kb_loader: KBLoader):
     return 0
 
 
+def _parse_tag_list(raw: Any) -> list[str]:
+    if raw is None:
+        return []
+    if isinstance(raw, list):
+        return [str(x).strip() for x in raw if str(x).strip()]
+    return [part.strip() for part in str(raw).split(",") if part.strip()]
+
+
+def _parse_json_obj(raw: Any) -> dict[str, Any]:
+    if raw is None:
+        return {}
+    if isinstance(raw, dict):
+        return raw
+    text = str(raw).strip()
+    if not text:
+        return {}
+    try:
+        parsed = json.loads(text)
+    except Exception:
+        return {}
+    return parsed if isinstance(parsed, dict) else {}
+
+
+def cmd_annotate(args, kb_loader: KBLoader):
+    """Add a structured annotation event to simulation history."""
+    key = str(getattr(args, "key", "") or "").strip()
+    if not key:
+        _emit("Error: --key is required for sim annotate", _COLOR_ERROR, is_error=True)
+        return 1
+
+    engine = load_or_create_simulation(args.sim_id, kb_loader)
+    engine.log_annotation(
+        key=key,
+        value=getattr(args, "value", None),
+        tags=_parse_tag_list(getattr(args, "tags", None)),
+        source=str(getattr(args, "source", "runbook") or "runbook"),
+        metadata=_parse_json_obj(getattr(args, "metadata", None)),
+    )
+    engine.save()
+    _emit(f"✓ Annotation added: {key}", _COLOR_SUCCESS)
+    return 0
+
+
+def cmd_mark(args, kb_loader: KBLoader):
+    """Add a named marker event to simulation history."""
+    name = str(getattr(args, "name", "") or "").strip()
+    if not name:
+        _emit("Error: --name is required for sim mark", _COLOR_ERROR, is_error=True)
+        return 1
+
+    engine = load_or_create_simulation(args.sim_id, kb_loader)
+    engine.log_marker(
+        name=name,
+        tags=_parse_tag_list(getattr(args, "tags", None)),
+        source=str(getattr(args, "source", "runbook") or "runbook"),
+        metadata=_parse_json_obj(getattr(args, "metadata", None)),
+    )
+    engine.save()
+    _emit(f"✓ Marker added: {name}", _COLOR_SUCCESS)
+    return 0
+
+
 def cmd_list(args, kb_loader: KBLoader):
     """List all simulations."""
     if not SIMULATIONS_DIR.exists():
@@ -2255,6 +2319,23 @@ def add_sim_subcommands(subparsers):
     provenance_parser.add_argument('--item', help='Show detailed breakdown for specific item')
     provenance_parser.add_argument('--json', action='store_true', help='Output JSON format')
 
+    # annotate
+    annotate_parser = sim_subparsers.add_parser('annotate', help='Add structured annotation event')
+    annotate_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    annotate_parser.add_argument('--key', required=True, help='Annotation key (recommended namespaced)')
+    annotate_parser.add_argument('--value', help='Annotation value (string for MVP)')
+    annotate_parser.add_argument('--tags', help='Comma-separated tags')
+    annotate_parser.add_argument('--source', default='manual', help='Annotation source label')
+    annotate_parser.add_argument('--metadata', help='JSON object metadata')
+
+    # mark
+    mark_parser = sim_subparsers.add_parser('mark', help='Add named marker event')
+    mark_parser.add_argument('--sim-id', required=True, help='Simulation ID')
+    mark_parser.add_argument('--name', required=True, help='Marker name')
+    mark_parser.add_argument('--tags', help='Comma-separated tags')
+    mark_parser.add_argument('--source', default='manual', help='Marker source label')
+    mark_parser.add_argument('--metadata', help='JSON object metadata')
+
     # list
     list_parser = sim_subparsers.add_parser('list', help='List all simulations')
 
@@ -2304,6 +2385,8 @@ def run_sim_command(args, kb_loader: KBLoader):
         'advance-time': cmd_advance_time,
         'status': cmd_status,
         'provenance': cmd_provenance,
+        'annotate': cmd_annotate,
+        'mark': cmd_mark,
         'list': cmd_list,
         'visualize': cmd_visualize,
         'export-view': cmd_export_view,

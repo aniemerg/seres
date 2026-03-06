@@ -86,3 +86,9 @@ export type Warnings = {
   missing_kb_categories: string[]
   undefined_references: string[]
 }
+
+export type SimQueryData = {
+  version: string
+  scalars: Record<string, string | number | boolean | null>
+  tables: Record<string, Array<Record<string, unknown>>>
+}

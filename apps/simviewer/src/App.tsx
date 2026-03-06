@@ -8,6 +8,7 @@ import type {
   KBEntity,
   ProcessRun,
   QuantityMap,
+  SimQueryData,
   SimData,
   Warnings,
 } from './types'
@@ -51,6 +52,19 @@ type MarkdownBlock =
   | { type: 'blockquote'; lines: string[] }
   | { type: 'hr' }
   | { type: 'table'; headers: string[]; rows: string[][] }
+  | {
+      type: 'simquery'
+      queryType: 'table' | 'two-table'
+      title?: string
+      source?: string
+      columns?: string[]
+      left_source?: string
+      right_source?: string
+      left_title?: string
+      right_title?: string
+      left_columns?: string[]
+      right_columns?: string[]
+    }
   | { type: 'code'; lang: string; code: string }
 
 function splitTableRow(line: string): string[] {
@@ -82,62 +96,144 @@ function parseInternalTarget(rawHref: string, validTargets: Set<string>): string
   return validTargets.has(candidate) ? candidate : null
 }
 
-function renderInlineMarkdown(text: string, onJump: (id: string) => void, validTargets: Set<string>): ReactNode[] {
+function parseInlineArgs(raw: string): Record<string, string> {
+  const out: Record<string, string> = {}
+  const re = /([a-zA-Z_][a-zA-Z0-9_-]*)="([^"]*)"/g
+  let match: RegExpExecArray | null
+  while ((match = re.exec(raw)) !== null) out[match[1]] = match[2]
+  return out
+}
+
+function formatScalarValue(value: unknown, format?: string, unit?: string): string {
+  let rendered: string
+  if (typeof value === 'number') {
+    if (format?.startsWith('number:')) {
+      const decimals = Number(format.split(':')[1] || '2')
+      rendered = value.toFixed(Number.isFinite(decimals) ? decimals : 2)
+    } else if (format === 'number') {
+      rendered = value.toLocaleString()
+    } else if (format === 'percent') {
+      rendered = `${(value * 100).toFixed(2)}%`
+    } else {
+      rendered = String(value)
+    }
+  } else if (typeof value === 'boolean') {
+    rendered = value ? 'true' : 'false'
+  } else if (value === null || value === undefined) {
+    rendered = ''
+  } else {
+    rendered = String(value)
+  }
+  return unit ? `${rendered} ${unit}` : rendered
+}
+
+function renderInlineMarkdown(
+  text: string,
+  onJump: (id: string) => void,
+  validTargets: Set<string>,
+  simQuery: SimQueryData | null,
+): ReactNode[] {
   const out: ReactNode[] = []
-  const re = /(\[\[([^\]]+)\]\]|\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|__([^_]+)__|\*([^*]+)\*|_([^_]+)_|~~([^~]+)~~)/g
+  const re = /(\{\{\s*sim\.value\s+([^}]+)\}\}|\[\[([^\]]+)\]\]|\[([^\]]+)\]\(([^)]+)\)|`([^`]+)`|\*\*\*([^*]+)\*\*\*|\*\*([^*]+)\*\*|__([^_]+)__|\*([^*]+)\*|_([^_]+)_|~~([^~]+)~~)/g
   let idx = 0
   let match: RegExpExecArray | null
-  let key = 0
+  let nodeKey = 0
 
   const pushText = (start: number, end: number) => {
-    if (end > start) out.push(<span key={`t-${key++}`}>{text.slice(start, end)}</span>)
+    if (end > start) out.push(<span key={`t-${nodeKey++}`}>{text.slice(start, end)}</span>)
   }
 
   while ((match = re.exec(text)) !== null) {
     pushText(idx, match.index)
 
     if (match[2]) {
-      const target = match[2].trim()
+      const args = parseInlineArgs(match[2])
+      const scalarKey = args.key
+      const value = scalarKey && simQuery ? simQuery.scalars[scalarKey] : undefined
+      const rendered = scalarKey ? formatScalarValue(value, args.format, args.unit) : ''
+      out.push(<span key={`sv-${nodeKey++}`} className="sim-inline-value">{rendered || `[unknown:${scalarKey ?? 'key'}]`}</span>)
+    } else if (match[3]) {
+      const target = match[3].trim()
       out.push(
-        <button key={`w-${key++}`} className="wiki-link" onClick={() => onJump(target)}>
+        <button key={`w-${nodeKey++}`} className="wiki-link" onClick={() => onJump(target)}>
           {target}
         </button>,
       )
-    } else if (match[3] && match[4]) {
-      const internal = parseInternalTarget(match[4], validTargets)
+    } else if (match[4] && match[5]) {
+      const internal = parseInternalTarget(match[5], validTargets)
       if (internal) {
         out.push(
-          <button key={`il-${key++}`} className="wiki-link" onClick={() => onJump(internal)}>
-            {match[3]}
+          <button key={`il-${nodeKey++}`} className="wiki-link" onClick={() => onJump(internal)}>
+            {match[4]}
           </button>,
         )
       } else {
         out.push(
-          <a key={`a-${key++}`} className="md-link" href={match[4]} target="_blank" rel="noreferrer">
-            {match[3]}
+          <a key={`a-${nodeKey++}`} className="md-link" href={match[5]} target="_blank" rel="noreferrer">
+            {match[4]}
           </a>,
         )
       }
-    } else if (match[5]) {
-      out.push(<code key={`c-${key++}`}>{match[5]}</code>)
     } else if (match[6]) {
-      out.push(<strong key={`b3-${key++}`}><em>{renderInlineMarkdown(match[6], onJump, validTargets)}</em></strong>)
+      out.push(<code key={`c-${nodeKey++}`}>{match[6]}</code>)
     } else if (match[7]) {
-      out.push(<strong key={`b2-${key++}`}>{renderInlineMarkdown(match[7], onJump, validTargets)}</strong>)
+      out.push(<strong key={`b3-${nodeKey++}`}><em>{renderInlineMarkdown(match[7], onJump, validTargets, simQuery)}</em></strong>)
     } else if (match[8]) {
-      out.push(<strong key={`bu-${key++}`}>{renderInlineMarkdown(match[8], onJump, validTargets)}</strong>)
+      out.push(<strong key={`b2-${nodeKey++}`}>{renderInlineMarkdown(match[8], onJump, validTargets, simQuery)}</strong>)
     } else if (match[9]) {
-      out.push(<em key={`i1-${key++}`}>{renderInlineMarkdown(match[9], onJump, validTargets)}</em>)
+      out.push(<strong key={`bu-${nodeKey++}`}>{renderInlineMarkdown(match[9], onJump, validTargets, simQuery)}</strong>)
     } else if (match[10]) {
-      out.push(<em key={`i2-${key++}`}>{renderInlineMarkdown(match[10], onJump, validTargets)}</em>)
+      out.push(<em key={`i1-${nodeKey++}`}>{renderInlineMarkdown(match[10], onJump, validTargets, simQuery)}</em>)
     } else if (match[11]) {
-      out.push(<del key={`d-${key++}`}>{renderInlineMarkdown(match[11], onJump, validTargets)}</del>)
+      out.push(<em key={`i2-${nodeKey++}`}>{renderInlineMarkdown(match[11], onJump, validTargets, simQuery)}</em>)
+    } else if (match[12]) {
+      out.push(<del key={`d-${nodeKey++}`}>{renderInlineMarkdown(match[12], onJump, validTargets, simQuery)}</del>)
     }
 
     idx = re.lastIndex
   }
   pushText(idx, text.length)
   return out
+}
+
+function parseListValue(raw: string | undefined): string[] | undefined {
+  if (!raw) return undefined
+  const trimmed = raw.trim()
+  if (!trimmed.startsWith('[') || !trimmed.endsWith(']')) return undefined
+  const body = trimmed.slice(1, -1).trim()
+  if (!body) return []
+  return body.split(',').map((p) => p.trim()).filter(Boolean)
+}
+
+function parseSimQueryBlock(lang: string, code: string): MarkdownBlock | null {
+  if (!(lang === 'sim-query' || lang === 'sim-table')) return null
+  const kv: Record<string, string> = {}
+  for (const rawLine of code.split('\n')) {
+    const line = rawLine.trim()
+    if (!line || line.startsWith('#')) continue
+    const idx = line.indexOf(':')
+    if (idx <= 0) continue
+    const key = line.slice(0, idx).trim()
+    const value = line.slice(idx + 1).trim()
+    kv[key] = value
+  }
+
+  const queryType = (kv.type || (lang === 'sim-table' ? 'table' : 'table')) as 'table' | 'two-table'
+  if (queryType !== 'table' && queryType !== 'two-table') return null
+
+  return {
+    type: 'simquery',
+    queryType,
+    title: kv.title,
+    source: kv.source,
+    columns: parseListValue(kv.columns),
+    left_source: kv.left_source,
+    right_source: kv.right_source,
+    left_title: kv.left_title,
+    right_title: kv.right_title,
+    left_columns: parseListValue(kv.left_columns),
+    right_columns: parseListValue(kv.right_columns),
+  }
 }
 
 function parseMarkdownBlocks(content: string): MarkdownBlock[] {
@@ -152,7 +248,7 @@ function parseMarkdownBlocks(content: string): MarkdownBlock[] {
       continue
     }
 
-    const codeFence = line.match(/^```(\w+)?\s*$/)
+    const codeFence = line.match(/^```([A-Za-z0-9_-]+)?\s*$/)
     if (codeFence) {
       const lang = codeFence[1] ?? ''
       i += 1
@@ -162,6 +258,11 @@ function parseMarkdownBlocks(content: string): MarkdownBlock[] {
         i += 1
       }
       if (i < lines.length) i += 1
+      const simQueryBlock = parseSimQueryBlock(lang, buf.join('\n'))
+      if (simQueryBlock) {
+        blocks.push(simQueryBlock)
+        continue
+      }
       blocks.push({ type: 'code', lang, code: buf.join('\n') })
       continue
     }
@@ -254,14 +355,57 @@ function parseMarkdownBlocks(content: string): MarkdownBlock[] {
   return blocks
 }
 
+function renderSimTable(
+  rows: Array<Record<string, unknown>>,
+  columns: string[] | undefined,
+  onJump: (id: string) => void,
+  validTargets: Set<string>,
+  simQuery: SimQueryData | null,
+) {
+  const cols = columns && columns.length > 0 ? columns : Object.keys(rows[0] ?? {})
+  return (
+    <div className="table-wrap">
+      <table>
+        <thead>
+          <tr>{cols.map((h, i) => <th key={i}>{h}</th>)}</tr>
+        </thead>
+        <tbody>
+          {rows.map((row, ridx) => (
+            <tr key={ridx}>
+              {cols.map((col) => {
+                const val = row[col]
+                if (typeof val === 'boolean') return <td key={col}>{val ? 'yes' : 'no'}</td>
+                if (typeof val === 'number') return <td key={col}>{Number.isInteger(val) ? String(val) : val.toFixed(2)}</td>
+                const text = val == null ? '' : String(val)
+                if ((col === 'id' || col.endsWith('_id')) && validTargets.has(text)) {
+                  return (
+                    <td key={col}>
+                      <button className="wiki-link" onClick={() => onJump(text)}>
+                        {text}
+                      </button>
+                    </td>
+                  )
+                }
+                return <td key={col}>{renderInlineMarkdown(text, onJump, validTargets, simQuery)}</td>
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
 function MarkdownArticle({
   content,
   onJump,
   validTargets,
+  simQuery,
 }: {
   content: string
   onJump: (id: string) => void
   validTargets: Set<string>
+  simQuery: SimQueryData | null
 }) {
   const blocks = useMemo(() => parseMarkdownBlocks(content), [content])
   return (
@@ -270,34 +414,34 @@ function MarkdownArticle({
         if (b.type === 'heading') {
           const tag = `h${Math.min(6, Math.max(1, b.level))}` as keyof JSX.IntrinsicElements
           return tag === 'h1' ? (
-            <h1 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h1>
+            <h1 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h1>
           ) : tag === 'h2' ? (
-            <h2 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h2>
+            <h2 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h2>
           ) : tag === 'h3' ? (
-            <h3 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h3>
+            <h3 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h3>
           ) : tag === 'h4' ? (
-            <h4 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h4>
+            <h4 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h4>
           ) : tag === 'h5' ? (
-            <h5 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h5>
+            <h5 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h5>
           ) : (
-            <h6 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</h6>
+            <h6 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h6>
           )
         }
-        if (b.type === 'ul') return <ul key={idx}>{b.items.map((it, i) => <li key={i}>{renderInlineMarkdown(it, onJump, validTargets)}</li>)}</ul>
-        if (b.type === 'ol') return <ol key={idx}>{b.items.map((it, i) => <li key={i}>{renderInlineMarkdown(it, onJump, validTargets)}</li>)}</ol>
-        if (b.type === 'blockquote') return <blockquote key={idx}>{b.lines.map((l, i) => <p key={i}>{renderInlineMarkdown(l, onJump, validTargets)}</p>)}</blockquote>
+        if (b.type === 'ul') return <ul key={idx}>{b.items.map((it, i) => <li key={i}>{renderInlineMarkdown(it, onJump, validTargets, simQuery)}</li>)}</ul>
+        if (b.type === 'ol') return <ol key={idx}>{b.items.map((it, i) => <li key={i}>{renderInlineMarkdown(it, onJump, validTargets, simQuery)}</li>)}</ol>
+        if (b.type === 'blockquote') return <blockquote key={idx}>{b.lines.map((l, i) => <p key={i}>{renderInlineMarkdown(l, onJump, validTargets, simQuery)}</p>)}</blockquote>
         if (b.type === 'hr') return <hr key={idx} />
         if (b.type === 'table') {
           return (
             <div key={idx} className="table-wrap">
               <table>
                 <thead>
-                  <tr>{b.headers.map((h, i) => <th key={i}>{renderInlineMarkdown(h, onJump, validTargets)}</th>)}</tr>
+                  <tr>{b.headers.map((h, i) => <th key={i}>{renderInlineMarkdown(h, onJump, validTargets, simQuery)}</th>)}</tr>
                 </thead>
                 <tbody>
                   {b.rows.map((row, rIdx) => (
                     <tr key={rIdx}>
-                      {b.headers.map((_, cIdx) => <td key={cIdx}>{renderInlineMarkdown(row[cIdx] ?? '', onJump, validTargets)}</td>)}
+                      {b.headers.map((_, cIdx) => <td key={cIdx}>{renderInlineMarkdown(row[cIdx] ?? '', onJump, validTargets, simQuery)}</td>)}
                     </tr>
                   ))}
                 </tbody>
@@ -305,8 +449,37 @@ function MarkdownArticle({
             </div>
           )
         }
+        if (b.type === 'simquery') {
+          if (!simQuery) return <div key={idx} className="simquery-warning">SimQuery data unavailable.</div>
+          if (b.queryType === 'table') {
+            const rows = (b.source ? simQuery.tables[b.source] : null) ?? []
+            return (
+              <section key={idx} className="simquery-block">
+                {b.title && <h3>{b.title}</h3>}
+                {renderSimTable(rows, b.columns, onJump, validTargets, simQuery)}
+              </section>
+            )
+          }
+          const leftRows = (b.left_source ? simQuery.tables[b.left_source] : null) ?? []
+          const rightRows = (b.right_source ? simQuery.tables[b.right_source] : null) ?? []
+          return (
+            <section key={idx} className="simquery-block">
+              {b.title && <h3>{b.title}</h3>}
+              <div className="sim-two-table">
+                <div>
+                  <h4>{b.left_title || b.left_source || 'Left'}</h4>
+                  {renderSimTable(leftRows, b.left_columns, onJump, validTargets, simQuery)}
+                </div>
+                <div>
+                  <h4>{b.right_title || b.right_source || 'Right'}</h4>
+                  {renderSimTable(rightRows, b.right_columns, onJump, validTargets, simQuery)}
+                </div>
+              </div>
+            </section>
+          )
+        }
         if (b.type === 'code') return <pre key={idx}><code>{b.code}</code></pre>
-        return <p key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets)}</p>
+        return <p key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</p>
       })}
     </article>
   )
@@ -353,6 +526,7 @@ export function App() {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash || '#/wiki/simulation_overview'))
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [simData, setSimData] = useState<SimData | null>(null)
+  const [simQuery, setSimQuery] = useState<SimQueryData | null>(null)
   const [entities, setEntities] = useState<KBEntity[]>([])
   const [articles, setArticles] = useState<Article[]>([])
   const [warnings, setWarnings] = useState<Warnings | null>(null)
@@ -373,12 +547,14 @@ export function App() {
       fetch('./data/kb_entities.json').then((r) => r.json() as Promise<KBEntitiesPayload>),
       fetch('./data/articles.json').then((r) => r.json() as Promise<ArticlesPayload>),
       fetch('./data/warnings.json').then((r) => r.json() as Promise<Warnings>),
+      fetch('./data/simquery.json').then((r) => r.json() as Promise<SimQueryData>).catch(() => null),
     ])
-      .then(([sim, kb, art, warn]) => {
+      .then(([sim, kb, art, warn, query]) => {
         setSimData(sim)
         setEntities(kb.entities)
         setArticles(art.articles)
         setWarnings(warn)
+        setSimQuery(query)
       })
       .catch((err) => {
         console.error(err)
@@ -480,11 +656,60 @@ export function App() {
   const openWiki = (id: string) => navigate({ view: 'wiki', id })
 
   const kbIndex = useMemo(() => {
-    const q = search.trim().toLowerCase()
     const kbRows = entities.map((e) => ({ id: e.id, label: e.name || e.id, type: e.kind }))
     const articleRows = articles.map((a) => ({ id: a.id, label: a.title, type: 'article' }))
-    return [...kbRows, ...articleRows].filter((r) => !q || r.id.toLowerCase().includes(q) || r.label.toLowerCase().includes(q))
-  }, [entities, articles, search])
+    return [...kbRows, ...articleRows]
+  }, [entities, articles])
+
+  const topMachineRows = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const run of simData?.process_runs ?? []) {
+      if (!run.machine_type) continue
+      counts.set(run.machine_type, (counts.get(run.machine_type) ?? 0) + 1)
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([id, count]) => ({
+        id,
+        label: entitiesById[id]?.name || id,
+        count,
+        type: 'machine',
+      }))
+  }, [simData, entitiesById])
+
+  const topProcessRows = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const run of simData?.process_runs ?? []) {
+      counts.set(run.process_id, (counts.get(run.process_id) ?? 0) + 1)
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([id, count]) => ({
+        id,
+        label: entitiesById[id]?.name || id,
+        count,
+        type: 'process',
+      }))
+  }, [simData, entitiesById])
+
+  const topRecipeRows = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const run of simData?.process_runs ?? []) {
+      if (!run.recipe_id) continue
+      counts.set(run.recipe_id, (counts.get(run.recipe_id) ?? 0) + 1)
+    }
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([id, count]) => ({
+        id,
+        label: entitiesById[id]?.name || id,
+        count,
+        type: 'recipe',
+      }))
+  }, [simData, entitiesById])
 
   return (
     <div className={`app ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
@@ -527,8 +752,8 @@ export function App() {
             articles={articles}
             warnings={warnings}
             markdownTargets={markdownTargets}
+            simQuery={simQuery}
             onJumpKB={openWiki}
-            onOpenGantt={() => navigate({ view: 'gantt' })}
           />
         )}
 
@@ -551,6 +776,7 @@ export function App() {
             entitiesById={entitiesById}
             articlesById={articlesById}
             markdownTargets={markdownTargets}
+            simQuery={simQuery}
             onWikiJump={(id) => navigate({ view: 'wiki', id })}
             allEntities={entities}
           />
@@ -561,6 +787,9 @@ export function App() {
             indexRows={kbIndex}
             search={search}
             onSearch={setSearch}
+            topMachines={topMachineRows}
+            topProcesses={topProcessRows}
+            topRecipes={topRecipeRows}
             onSelect={(id) => navigate({ view: 'wiki', id })}
           />
         )}
@@ -585,43 +814,28 @@ function HomeView({
   articles,
   warnings,
   markdownTargets,
+  simQuery,
   onJumpKB,
-  onOpenGantt,
 }: {
   simData: SimData | null
   articles: Article[]
   warnings: Warnings | null
   markdownTargets: Set<string>
+  simQuery: SimQueryData | null
   onJumpKB: (id: string) => void
-  onOpenGantt: () => void
 }) {
   const article = articles.find((a) => a.id === 'simulation_overview') ?? articles[0]
+  const simId = typeof simQuery?.scalars['sim.id'] === 'string' ? String(simQuery?.scalars['sim.id']) : (simData?.sim_id || 'unknown')
+  const pageTitle = article?.title || `SERES Simulation: ${simId}`
 
   return (
     <div className="panel-wrap">
-      <div className="panel">
-        <h2>Simulation Summary</h2>
-        {simData ? (
-          <div className="stats-grid">
-            <div><label>Simulation</label><strong>{simData.sim_id}</strong></div>
-            <div><label>Duration</label><strong>{simData.summary.time_hours.toFixed(2)} h</strong></div>
-            <div><label>Processes</label><strong>{simData.summary.process_runs_total}</strong></div>
-            <div><label>Completed</label><strong>{simData.summary.process_runs_completed}</strong></div>
-            <div><label>Energy</label><strong>{simData.summary.total_energy_kwh.toLocaleString()} kWh</strong></div>
-            <div><label>Inventory Items</label><strong>{simData.summary.inventory_items}</strong></div>
-          </div>
-        ) : (
-          <p>Loading...</p>
-        )}
-        <div className="actions">
-          <button onClick={onOpenGantt}>Open Timeline</button>
-          <button onClick={() => onJumpKB('simulation_overview')}>Open Wiki</button>
-        </div>
+      <div className="panel home-title-panel">
+        <h1 className="home-title">{pageTitle}</h1>
       </div>
-      <div className="panel">
-        <h2>Overview Article</h2>
+      <div className="panel article-shell">
         {article ? (
-          <MarkdownArticle content={article.content} onJump={onJumpKB} validTargets={markdownTargets} />
+          <MarkdownArticle content={article.content} onJump={onJumpKB} validTargets={markdownTargets} simQuery={simQuery} />
         ) : (
           <p>No article configured.</p>
         )}
@@ -751,6 +965,7 @@ function WikiView({
   articlesById,
   allEntities,
   markdownTargets,
+  simQuery,
   onWikiJump,
 }: {
   selectedId?: string
@@ -758,6 +973,7 @@ function WikiView({
   articlesById: Record<string, Article>
   allEntities: KBEntity[]
   markdownTargets: Set<string>
+  simQuery: SimQueryData | null
   onWikiJump: (id: string) => void
 }) {
   const entity = selectedId ? entitiesById[selectedId] : undefined
@@ -924,7 +1140,7 @@ function WikiView({
         {article && (
           <>
             <h2>{article.title}</h2>
-            <MarkdownArticle content={article.content} onJump={onWikiJump} validTargets={markdownTargets} />
+            <MarkdownArticle content={article.content} onJump={onWikiJump} validTargets={markdownTargets} simQuery={simQuery} />
           </>
         )}
         {selectedId && !entity && !article && (
@@ -942,27 +1158,91 @@ function KBSearchView({
   indexRows,
   search,
   onSearch,
+  topMachines,
+  topProcesses,
+  topRecipes,
   onSelect,
 }: {
   indexRows: Array<{ id: string; label: string; type: string }>
   search: string
   onSearch: (s: string) => void
+  topMachines: Array<{ id: string; label: string; count: number; type: string }>
+  topProcesses: Array<{ id: string; label: string; count: number; type: string }>
+  topRecipes: Array<{ id: string; label: string; count: number; type: string }>
   onSelect: (id: string) => void
 }) {
+  const query = search.trim().toLowerCase()
+  const suggestions = useMemo(
+    () =>
+      indexRows
+        .filter((row) => !query || row.id.toLowerCase().includes(query) || row.label.toLowerCase().includes(query))
+        .slice(0, 12),
+    [indexRows, query],
+  )
+  const showSuggestions = query.length > 0
+
   return (
     <div className="kb-page">
-      <aside className="kb-index kb-index-full">
-        <h2>Knowledge Base Search</h2>
-        <input value={search} onChange={(e) => onSearch(e.target.value)} placeholder="Search KB/articles" />
-        <div className="kb-list">
-          {indexRows.map((row) => (
-            <button key={`${row.type}:${row.id}`} className="kb-row" onClick={() => onSelect(row.id)}>
-              <span>{row.label}</span>
-              <small>{row.type}</small>
-            </button>
-          ))}
+      <section className="kb-search-shell">
+        <div className="kb-search-center">
+          <h1>Knowledge Base Search</h1>
+          <div className="kb-search-input-wrap">
+            <input
+              className="kb-search-input"
+              value={search}
+              onChange={(e) => onSearch(e.target.value)}
+              placeholder="Search machines, processes, recipes, and articles"
+            />
+            {showSuggestions && (
+              <div className="kb-suggest">
+                {suggestions.length === 0 && <div className="kb-suggest-empty">No matches.</div>}
+                {suggestions.map((row) => (
+                  <button key={`${row.type}:${row.id}`} className="kb-suggest-row" onClick={() => onSelect(row.id)}>
+                    <span>{row.label}</span>
+                    <small>{row.type}</small>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-      </aside>
+
+        <div className="kb-featured-grid">
+          <section className="kb-featured-panel">
+            <h3>Most Used Machines</h3>
+            <div className="kb-list">
+              {topMachines.map((row) => (
+                <button key={`${row.type}:${row.id}`} className="kb-row" onClick={() => onSelect(row.id)}>
+                  <span>{row.label}</span>
+                  <small>{row.count} runs</small>
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="kb-featured-panel">
+            <h3>Most Used Processes</h3>
+            <div className="kb-list">
+              {topProcesses.map((row) => (
+                <button key={`${row.type}:${row.id}`} className="kb-row" onClick={() => onSelect(row.id)}>
+                  <span>{row.label}</span>
+                  <small>{row.count} runs</small>
+                </button>
+              ))}
+            </div>
+          </section>
+          <section className="kb-featured-panel">
+            <h3>Most Used Recipes</h3>
+            <div className="kb-list">
+              {topRecipes.map((row) => (
+                <button key={`${row.type}:${row.id}`} className="kb-row" onClick={() => onSelect(row.id)}>
+                  <span>{row.label}</span>
+                  <small>{row.count} runs</small>
+                </button>
+              ))}
+            </div>
+          </section>
+        </div>
+      </section>
     </div>
   )
 }

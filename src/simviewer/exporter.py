@@ -397,6 +397,141 @@ def _augment_kb_entities_with_stats(entities: Dict[str, dict], process_runs: Lis
             bucket["produced_quantity_total"] = qty
 
 
+def _build_simquery(
+    config: SimviewerConfig,
+    summary: dict,
+    events: List[dict],
+    process_runs: List[ProcessRunRecord],
+    kb_entities: Dict[str, dict],
+) -> dict:
+    machine_ids = {eid for eid, entity in kb_entities.items() if entity.get("kind") == "machine"}
+
+    seeded_by_id: Dict[str, dict] = {}
+    for event in events:
+        if event.get("type") != "import":
+            continue
+        item_id = str(event.get("item_id") or "")
+        if not item_id or item_id not in machine_ids:
+            continue
+        qty = float(event.get("quantity", 0.0) or 0.0)
+        unit = str(event.get("unit", "unit") or "unit")
+        sim_time = float(event.get("sim_time_hours", 0.0) or 0.0)
+        row = seeded_by_id.get(item_id)
+        if row is None:
+            seeded_by_id[item_id] = {
+                "id": item_id,
+                "name": kb_entities.get(item_id, {}).get("name", item_id),
+                "imported_quantity": qty,
+                "unit": unit,
+                "first_seen_time_hours": sim_time,
+            }
+        else:
+            row["imported_quantity"] += qty
+            row["first_seen_time_hours"] = min(float(row["first_seen_time_hours"]), sim_time)
+
+    produced_by_id: Dict[str, dict] = {}
+    for run in process_runs:
+        if run.status != "success":
+            continue
+        for item_id, payload in run.outputs.items():
+            if item_id not in machine_ids or not isinstance(payload, dict):
+                continue
+            qty = float(payload.get("quantity", 0.0) or 0.0)
+            if qty <= 0:
+                continue
+            unit = str(payload.get("unit", "unit") or "unit")
+            sim_time = float(run.end_time or run.start_time or 0.0)
+            row = produced_by_id.get(item_id)
+            if row is None:
+                produced_by_id[item_id] = {
+                    "id": item_id,
+                    "name": kb_entities.get(item_id, {}).get("name", item_id),
+                    "produced_quantity": qty,
+                    "unit": unit,
+                    "first_seen_time_hours": sim_time,
+                }
+            else:
+                row["produced_quantity"] += qty
+                row["first_seen_time_hours"] = min(float(row["first_seen_time_hours"]), sim_time)
+
+    seeded_rows = sorted(seeded_by_id.values(), key=lambda r: str(r["id"]))
+    produced_rows = sorted(produced_by_id.values(), key=lambda r: str(r["id"]))
+
+    coverage_rows: List[dict] = []
+    covered_count = 0
+    for seeded in seeded_rows:
+        produced = produced_by_id.get(str(seeded["id"]))
+        produced_qty = float(produced["produced_quantity"]) if produced else 0.0
+        covered = produced_qty >= 1.0
+        if covered:
+            covered_count += 1
+        coverage_rows.append(
+            {
+                "id": seeded["id"],
+                "name": seeded["name"],
+                "imported_quantity": float(seeded["imported_quantity"]),
+                "produced_quantity": produced_qty,
+                "unit": seeded["unit"],
+                "covered": covered,
+            }
+        )
+
+    annotations: List[dict] = []
+    markers: List[dict] = []
+    for event in events:
+        etype = event.get("type")
+        if etype == "sim_annotation":
+            annotations.append(
+                {
+                    "sim_time_hours": float(event.get("sim_time_hours", 0.0) or 0.0),
+                    "key": str(event.get("key", "")),
+                    "value": event.get("value"),
+                    "tags": list(event.get("tags", []) or []),
+                    "source": str(event.get("source", "runbook")),
+                    "metadata": event.get("metadata") if isinstance(event.get("metadata"), dict) else {},
+                }
+            )
+        elif etype == "sim_marker":
+            markers.append(
+                {
+                    "sim_time_hours": float(event.get("sim_time_hours", 0.0) or 0.0),
+                    "name": str(event.get("name", "")),
+                    "tags": list(event.get("tags", []) or []),
+                    "source": str(event.get("source", "runbook")),
+                    "metadata": event.get("metadata") if isinstance(event.get("metadata"), dict) else {},
+                }
+            )
+
+    annotations.sort(key=lambda row: float(row.get("sim_time_hours", 0.0)))
+    markers.sort(key=lambda row: float(row.get("sim_time_hours", 0.0)))
+
+    seed_total = len(seeded_rows)
+    coverage_ratio = (covered_count / seed_total) if seed_total > 0 else 0.0
+
+    return {
+        "version": "simquery.v0",
+        "scalars": {
+            "sim.id": config.sim_id,
+            "sim.summary.time_hours": float(summary.get("time_hours", 0.0) or 0.0),
+            "sim.summary.time_days": float(summary.get("time_days", 0.0) or 0.0),
+            "sim.summary.total_energy_kwh": float(summary.get("total_energy_kwh", 0.0) or 0.0),
+            "sim.summary.process_runs_total": int(summary.get("process_runs_total", 0) or 0),
+            "sim.summary.process_runs_completed": int(summary.get("process_runs_completed", 0) or 0),
+            "sim.replication.seed_machine_types": seed_total,
+            "sim.replication.covered_machine_types": covered_count,
+            "sim.replication.coverage_ratio": coverage_ratio,
+            "sim.replication.coverage_percent": coverage_ratio * 100.0,
+        },
+        "tables": {
+            "sim.machines.seeded": seeded_rows,
+            "sim.machines.produced": produced_rows,
+            "sim.machines.coverage": coverage_rows,
+            "sim.annotations": annotations,
+            "sim.markers": markers,
+        },
+    }
+
+
 def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) -> dict:
     """Export static data artifacts for the simviewer frontend."""
     sim_dir = repo_root / "simulations" / config.sim_id
@@ -457,6 +592,13 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
     )
 
     summary = _summarize_simulation(snapshot, process_runs, completed_count)
+    simquery = _build_simquery(
+        config=config,
+        summary=summary,
+        events=events,
+        process_runs=process_runs,
+        kb_entities=kb_entities,
+    )
 
     data_dir = out_dir / "data"
     data_dir.mkdir(parents=True, exist_ok=True)
@@ -480,6 +622,7 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
     (data_dir / "backlinks.json").write_text(json.dumps(backlinks, indent=2), encoding="utf-8")
     (data_dir / "articles.json").write_text(json.dumps({"articles": articles}, indent=2), encoding="utf-8")
     (data_dir / "warnings.json").write_text(json.dumps(warnings.to_dict(), indent=2), encoding="utf-8")
+    (data_dir / "simquery.json").write_text(json.dumps(simquery, indent=2), encoding="utf-8")
     (data_dir / "export_meta.json").write_text(
         json.dumps(
             {

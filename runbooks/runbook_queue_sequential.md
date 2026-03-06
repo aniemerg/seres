@@ -9,6 +9,20 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
 - cmd: sim.reset
   args:
     sim-id: runbook_queue_sequential
+- cmd: sim.annotate
+  args:
+    key: scenario.id
+    value: runbook_queue_sequential
+    tags: scenario,queue
+- cmd: sim.annotate
+  args:
+    key: scenario.goal
+    value: reproduce_seed_machine_set
+    tags: scenario,self_replication
+- cmd: sim.mark
+  args:
+    name: queue_start
+    tags: milestone,queue,phase
 - cmd: sim.runbook
   args:
     file: alignment_tools_runbook.md
@@ -25,6 +39,10 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: balancing_machine_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: materials_chain_bootstrap
+    tags: phase,materials,isru
 - cmd: sim.runbook
   args:
     file: ball_mill_v0_runbook.md
@@ -77,6 +95,10 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: drawing_die_set_basic_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: fabrication_precision_phase
+    tags: phase,fabrication,tooling
 - cmd: sim.runbook
   args:
     file: drill_press_runbook.md
@@ -165,6 +187,10 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: kiln_ceramic_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: automation_labor_bootstrap
+    tags: phase,automation
 - cmd: sim.runbook
   args:
     file: labor_bot_general_v0_runbook.md
@@ -209,6 +235,10 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: powder_mixer_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: power_distribution_integration
+    tags: phase,power,integration
 - cmd: sim.runbook
   args:
     file: power_distribution_bus_runbook.md
@@ -285,6 +315,10 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: surface_treatment_station_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: validation_and_test_phase
+    tags: phase,validation,test
 - cmd: sim.runbook
   args:
     file: test_bench_electrical_runbook.md
@@ -309,4 +343,13 @@ Runs all machine_runbook_queue_sequential runbooks sequentially. This does not r
   args:
     file: wire_crimping_tools_runbook.md
     continue-on-error: true
+- cmd: sim.mark
+  args:
+    name: queue_complete
+    tags: milestone,queue,complete
+- cmd: sim.annotate
+  args:
+    key: scenario.status
+    value: complete
+    tags: scenario,status
 ```

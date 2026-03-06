@@ -44,6 +44,8 @@ from src.simulation.models import (
     StateSnapshotEvent,
     ErrorEvent,
     KBGapEvent,
+    SimAnnotationEvent,
+    SimMarkerEvent,
 )
 from src.simulation.scheduler import Scheduler, EventType
 from src.simulation.machine_reservations import MachineReservationManager
@@ -1883,6 +1885,48 @@ class SimulationEngine:
     def _log_event(self, event: Any) -> None:
         """Add event to buffer."""
         self.event_buffer.append(event)
+
+    def log_annotation(
+        self,
+        *,
+        key: str,
+        value: Any = None,
+        tags: Optional[List[str]] = None,
+        source: str = "runbook",
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        """Emit a structured simulation annotation event."""
+        self._log_event(
+            SimAnnotationEvent(
+                sim_id=self.sim_id,
+                sim_time_hours=self.state.current_time_hours,
+                key=key,
+                value=value,
+                tags=tags or [],
+                source=source,
+                metadata=metadata or {},
+            )
+        )
+
+    def log_marker(
+        self,
+        *,
+        name: str,
+        tags: Optional[List[str]] = None,
+        source: str = "runbook",
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        """Emit a named simulation marker event."""
+        self._log_event(
+            SimMarkerEvent(
+                sim_id=self.sim_id,
+                sim_time_hours=self.state.current_time_hours,
+                name=name,
+                tags=tags or [],
+                source=source,
+                metadata=metadata or {},
+            )
+        )
 
     def save(self) -> None:
         """Persist snapshot and flush event buffer to sidecar log."""

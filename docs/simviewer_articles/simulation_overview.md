@@ -1,6 +1,6 @@
 ---
 id: simulation_overview
-title: Runbook Queue Sequential — Scenario Overview
+title: Runbook Queue Sequential - Self-Replication Scenario
 type: article
 related_kb_entries:
   - runbook_queue_sequential
@@ -11,20 +11,40 @@ related_kb_entries:
 
 This build is based on the **runbook queue aggregator** scenario: `runbooks/runbook_queue_sequential.md`.
 
-The scenario executes a large queue of machine-focused runbooks in sequence, each aimed at building or improving one machine using a mix of imported inputs and local (ISRU) production where possible.
+The core scenario question is: can an initial imported machine seed set be used to produce that same machine set locally over time?
 
 See `[[runbook_queue_definition]]` for the command structure and queue execution semantics.
 You can also jump via Markdown link: [Runbook Queue Definition](runbook_queue_definition).
 
-## Snapshot Metrics
+## Live Snapshot
 
-| Metric | Value | Notes |
-|---|---:|---|
-| Sim ID | `runbook_queue_sequential` | Shared simulation instance for the queue run |
-| Total process runs | `1641` | Includes successful and failed process runs |
-| Simulated time | `353197.00 h` | Long-horizon aggregate timeline |
-| Total energy | `1209372.13 kWh` | Aggregate process energy from completed runs |
-| Missing machine categories | `397` | KB hygiene issue highlighted in warnings |
+> Sim ID: {{ sim.value key="sim.id" }}  
+> Simulated time: {{ sim.value key="sim.summary.time_hours" format="number:2" unit="h" }}  
+> Total energy: {{ sim.value key="sim.summary.total_energy_kwh" format="number:2" unit="kWh" }}  
+> Process runs: {{ sim.value key="sim.summary.process_runs_total" format="number" }}  
+> Seeded machine types: {{ sim.value key="sim.replication.seed_machine_types" format="number" }}  
+> Covered machine types: {{ sim.value key="sim.replication.covered_machine_types" format="number" }}  
+> Coverage: {{ sim.value key="sim.replication.coverage_percent" format="number:1" unit="%" }}
+
+## Seed vs Produced
+
+```sim-query
+type: two-table
+title: Seeded Imports vs Produced Machines
+left_source: sim.machines.seeded
+left_title: Imported Seed Machines
+left_columns: [id, name, imported_quantity, unit]
+right_source: sim.machines.produced
+right_title: Machines Produced During Simulation
+right_columns: [id, name, produced_quantity, unit]
+```
+
+```sim-query
+type: table
+source: sim.machines.coverage
+title: Replication Coverage by Machine
+columns: [id, name, imported_quantity, produced_quantity, covered]
+```
 
 ## What This Scenario Is Testing
 
@@ -67,3 +87,12 @@ You will see this reflected in recipes like `[[recipe_regolith_metal_crude_v0]]`
 - Use process drawer links to jump into machine/process/recipe KB entries.
 - Use **Wiki** pages to inspect full YAML-derived entries, especially recipe steps and process IO definitions.
 - Use **KB Search** to quickly find an entity/article by ID or title.
+
+## Markers and Annotations (If Present)
+
+```sim-query
+type: table
+source: sim.markers
+title: Scenario Markers
+columns: [sim_time_hours, name, tags, source]
+```

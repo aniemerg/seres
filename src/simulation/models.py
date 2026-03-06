@@ -202,3 +202,26 @@ class KBFixCompleteEvent(Event):
     type: Literal["kb_fix_complete"] = "kb_fix_complete"
     created_files: List[str] = Field(default_factory=list)
     modified_files: List[str] = Field(default_factory=list)
+
+
+class SimAnnotationEvent(Event):
+    """Structured simulation annotation for runbook/scenario metadata."""
+    type: Literal["sim_annotation"] = "sim_annotation"
+    sim_id: str
+    sim_time_hours: float
+    key: str
+    value: Any = None
+    tags: List[str] = Field(default_factory=list)
+    source: str = "runbook"
+    metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class SimMarkerEvent(Event):
+    """Named simulation marker (milestones, phase boundaries, checkpoints)."""
+    type: Literal["sim_marker"] = "sim_marker"
+    sim_id: str
+    sim_time_hours: float
+    name: str
+    tags: List[str] = Field(default_factory=list)
+    source: str = "runbook"
+    metadata: Dict[str, Any] = Field(default_factory=dict)
