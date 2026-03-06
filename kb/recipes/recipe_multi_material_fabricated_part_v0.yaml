@@ -1,0 +1,38 @@
+id: recipe_multi_material_fabricated_part_v0
+kind: recipe
+target_item_id: multi_material_fabricated_part_v0
+variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 6.0
+    unit: kg
+  - item_id: regolith_powder
+    qty: 4.0
+    unit: kg
+outputs:
+  - item_id: multi_material_fabricated_part_v0
+    qty: 9.0
+    unit: kg
+  - item_id: tailings
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: multi_material_additive_manufacturing_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 6.0
+        unit: kg
+      - item_id: regolith_powder
+        qty: 4.0
+        unit: kg
+    outputs:
+      - item_id: multi_material_fabricated_part_v0
+        qty: 9.0
+        unit: kg
+      - item_id: tailings
+        qty: 1.0
+        unit: kg
+    notes: Multi-material additive fabrication run.
+notes: >
+  Recipe for composite multi-material part on modular printer platform.
+

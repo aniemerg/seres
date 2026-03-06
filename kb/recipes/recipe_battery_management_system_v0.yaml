@@ -1,0 +1,75 @@
+id: recipe_battery_management_system_v0
+kind: recipe
+target_item_id: battery_management_system
+variant_id: v0
+inputs:
+  - item_id: control_circuit_board_basic
+    qty: 1.2
+    unit: kg
+  - item_id: microcontroller_or_embedded_board
+    qty: 0.2
+    unit: kg
+  - item_id: signal_amplifier_module
+    qty: 0.5
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 0.8
+    unit: kg
+  - item_id: connector_electrical_small
+    qty: 0.16
+    unit: kg
+  - item_id: aluminum_housing_machined_v0
+    qty: 2.8
+    unit: kg
+outputs:
+  - item_id: battery_management_system
+    qty: 5.0
+    unit: kg
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: aluminum_housing_machined_v0
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.6
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.2
+        unit: kg
+    est_time_hr: 1.2
+    labor_hours: 0.8
+    machine_hours: 1.0
+    notes: "Machine enclosure ports and mounting rails for BMS electronics."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: control_circuit_board_basic
+        qty: 1.2
+        unit: kg
+      - item_id: microcontroller_or_embedded_board
+        qty: 0.2
+        unit: kg
+      - item_id: signal_amplifier_module
+        qty: 0.5
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 0.8
+        unit: kg
+      - item_id: connector_electrical_small
+        qty: 0.16
+        unit: kg
+      - item_id: machined_part_raw
+        qty: 2.6
+        unit: kg
+    outputs:
+      - item_id: battery_management_system
+        qty: 5.0
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    machine_hours: 1.0
+    notes: "Assemble monitoring boards, connector harnessing, and protective enclosure."
+notes: >
+  Local assembly route for battery management system with imported semiconductor
+  leaves embedded in board-level parts.

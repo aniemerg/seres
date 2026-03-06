@@ -1,0 +1,31 @@
+id: recipe_enamel_glass_insulation_v0
+kind: recipe
+target_item_id: enamel_glass_insulation_v0
+variant_id: v0
+inputs:
+  - item_id: silica_purified
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: enamel_glass_insulation_v0
+    qty: 9.0
+    unit: kg
+  - item_id: tailings
+    qty: 1.0
+    unit: kg
+steps:
+  - process_id: enamel_glass_insulation_coating_v0
+    inputs:
+      - item_id: silica_purified
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: enamel_glass_insulation_v0
+        qty: 9.0
+        unit: kg
+      - item_id: tailings
+        qty: 1.0
+        unit: kg
+    notes: Fused-glass insulation material production batch.
+notes: Enamel-glass insulation production route.
+

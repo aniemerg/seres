@@ -1,0 +1,32 @@
+id: recipe_magnetic_anomaly_map_v0
+target_item_id: magnetic_anomaly_map_v0
+variant_id: v0
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: magnetic_anomaly_map_v0
+    qty: 1.0
+    unit: kg
+byproducts:
+  - item_id: regolith_sample_characterized_v0
+    qty: 2.0
+    unit: kg
+steps:
+  - process_id: magnetic_anomaly_survey_v0
+    inputs:
+      - item_id: regolith_lunar_mare
+        qty: 3.0
+        unit: kg
+    outputs:
+      - item_id: magnetic_anomaly_map_v0
+        qty: 1.0
+        unit: kg
+      - item_id: regolith_sample_characterized_v0
+        qty: 2.0
+        unit: kg
+    notes: >
+      Survey operation producing magnetic anomaly map and characterized sample
+      stream from local regolith.
+notes: Canonical recipe binding magnetic anomaly survey output to item production.

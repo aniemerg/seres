@@ -1,0 +1,38 @@
+id: recipe_prospecting_dust_thermal_protection_v0
+kind: recipe
+target_item_id: prospecting_dust_thermal_protection_v0
+variant_id: v0
+inputs:
+  - item_id: aluminum_sheet_2mm
+    qty: 0.8
+    unit: kg
+  - item_id: insulation_material
+    qty: 0.5
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: prospecting_dust_thermal_protection_v0
+    qty: 1.1
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: aluminum_sheet_2mm
+        qty: 0.8
+        unit: kg
+      - item_id: insulation_material
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: prospecting_dust_thermal_protection_v0
+        qty: 1.1
+        unit: kg
+      - item_id: waste
+        qty: 0.3
+        unit: kg
+

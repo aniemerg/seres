@@ -1,0 +1,36 @@
+id: electron_beam_additive_manufacturing_v0
+kind: process
+name: Electron beam additive manufacturing v0
+process_type: continuous
+inputs:
+  - item_id: metal_wire_feed
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: ebam_deposited_metal_blank_v0
+    qty: 0.93
+    unit: kg
+  - item_id: metal_swarf
+    qty: 0.07
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: ebf3_wire_feed_machine_v0
+    qty: 1
+    unit: count
+energy_model:
+  type: per_unit
+  value: 2.1
+  unit: kWh/kg
+  scaling_basis: metal_wire_feed
+time_model:
+  type: linear_rate
+  rate: 2.0
+  rate_unit: kg/hr
+  scaling_basis: metal_wire_feed
+notes: >
+  Wire-feed electron beam additive deposition process in controlled vacuum machine
+  environment.
+

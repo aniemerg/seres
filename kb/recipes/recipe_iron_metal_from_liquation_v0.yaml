@@ -1,0 +1,39 @@
+id: recipe_iron_metal_from_liquation_v0
+kind: recipe
+target_item_id: iron_metal_pure
+variant_id: liquation_v0
+inputs:
+  - item_id: reduced_ilmenite_residue_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: iron_metal_pure
+    qty: 3.4
+    unit: kg
+  - item_id: titanium_oxide
+    qty: 5.1
+    unit: kg
+  - item_id: tailings
+    qty: 1.5
+    unit: kg
+steps:
+  - process_id: liquation_fe_tio2_separation_v0
+    inputs:
+      - item_id: reduced_ilmenite_residue_v0
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: iron_metal_pure
+        qty: 3.4
+        unit: kg
+      - item_id: titanium_oxide
+        qty: 5.1
+        unit: kg
+      - item_id: tailings
+        qty: 1.5
+        unit: kg
+    notes: Liquation variant emphasizing Fe-rich product route.
+notes: >
+  Liquation separation variant for `iron_metal_pure` production from reduced ilmenite
+  residue.
+

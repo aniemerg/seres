@@ -1,0 +1,131 @@
+id: recipe_machine_electrostatic_separator_v0
+kind: recipe
+target_item_id: electrostatic_separator_v0
+variant_id: v0
+inputs:
+  - item_id: separator_frame
+    qty: 140.0
+    unit: kg
+  - item_id: vibratory_feeder_v0
+    qty: 1
+    unit: unit
+  - item_id: hopper_feed_system
+    qty: 80.0
+    unit: kg
+  - item_id: tribocharger_module_v0
+    qty: 32.0
+    unit: kg
+  - item_id: separator_plate_electrode_set_v0
+    qty: 58.0
+    unit: kg
+  - item_id: hv_supply_module_30kv_v0
+    qty: 48.0
+    unit: kg
+  - item_id: sealed_bin_carousel_v0
+    qty: 48.0
+    unit: kg
+  - item_id: hv_enclosure_and_interlocks
+    qty: 15.0
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 5.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: electrostatic_separator_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: separator_frame
+        qty: 140.0
+        unit: kg
+      - item_id: vibratory_feeder_v0
+        qty: 1
+        unit: unit
+      - item_id: hopper_feed_system
+        qty: 80.0
+        unit: kg
+      - item_id: tribocharger_module_v0
+        qty: 32.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 492.0
+        unit: kg
+    est_time_hr: 3.5
+    labor_hours: 2.6
+    machine_hours: 1.4
+    notes: Build feed train and tribocharger path onto structural frame.
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 492.0
+        unit: kg
+      - item_id: separator_plate_electrode_set_v0
+        qty: 58.0
+        unit: kg
+      - item_id: hv_supply_module_30kv_v0
+        qty: 48.0
+        unit: kg
+      - item_id: sealed_bin_carousel_v0
+        qty: 48.0
+        unit: kg
+      - item_id: hv_enclosure_and_interlocks
+        qty: 15.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 660.0
+        unit: kg
+    est_time_hr: 3.0
+    labor_hours: 2.2
+    machine_hours: 1.2
+    notes: Install plate field assembly, HV module, and sealed collection carousel.
+  - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 660.0
+        unit: kg
+      - item_id: sensor_suite_general
+        qty: 5.0
+        unit: kg
+      - item_id: control_compute_module_imported
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 667.0
+        unit: kg
+    est_time_hr: 2.4
+    labor_hours: 1.9
+    machine_hours: 1.0
+    notes: Integrate instrumentation, control logic, and interlocked HV command path.
+  - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 667.0
+        unit: kg
+    outputs:
+      - item_id: electrostatic_separator_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 1.6
+    machine_hours: 3.0
+    notes: Commission HV safety and separator readiness before beneficiation operations.
+notes: >
+  Electrostatic separator machine assembly route aligned to tribocharging plus
+  parallel-plate architecture and explicit HV safety integration.

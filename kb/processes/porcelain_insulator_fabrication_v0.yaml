@@ -1,0 +1,30 @@
+id: porcelain_insulator_fabrication_v0
+kind: process
+name: Porcelain insulator fabrication v0
+process_type: batch
+inputs:
+  - item_id: alumina_ceramic_v0
+    qty: 2.2
+    unit: kg
+outputs:
+  - item_id: porcelain_insulator_v0
+    qty: 1
+    unit: unit
+  - item_id: tailings
+    qty: 0.2
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: sintering_furnace_v0
+    qty: 1
+    unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.6
+  unit: kWh
+time_model:
+  type: batch
+  hr_per_batch: 1.4
+notes: Forming/firing route for porcelain-style rigid ceramic insulator hardware.

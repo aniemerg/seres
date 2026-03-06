@@ -4,37 +4,65 @@ target_item_id: rover_chassis_structure_v0
 variant_id: v0
 inputs:
   - item_id: aluminum_tube_stock
-    qty: 100.0
+    qty: 80.0
     unit: kg
   - item_id: aluminum_sheet_2mm
-    qty: 25.0
+    qty: 18.0
     unit: kg
-  - item_id: protective_coating_aluminum
-    qty: 1.0
+  - item_id: rover_payload_hardpoint_set_v0
+    qty: 1.6
+    unit: kg
+  - item_id: rover_dust_guard_set_v0
+    qty: 1.2
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 0.8
     unit: kg
 outputs:
   - item_id: rover_chassis_structure_v0
     qty: 1
     unit: unit
 steps:
-  - process_id: assembly_basic_v0
+  - process_id: welding_brazing_basic_v0
     inputs:
       - item_id: aluminum_tube_stock
-        qty: 100.0
+        qty: 80.0
         unit: kg
       - item_id: aluminum_sheet_2mm
-        qty: 25.0
+        qty: 18.0
         unit: kg
-      - item_id: protective_coating_aluminum
-        qty: 1.0
+      - item_id: fastener_kit_medium
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 97.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 2.5
+    labor_hours: 2.5
+    notes: "Form and weld chassis rails, crossmembers, and deck plates."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 97.0
+        unit: kg
+      - item_id: rover_payload_hardpoint_set_v0
+        qty: 1.6
+        unit: kg
+      - item_id: rover_dust_guard_set_v0
+        qty: 1.2
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 0.5
         unit: kg
     outputs:
       - item_id: rover_chassis_structure_v0
         qty: 1
         unit: unit
-    est_time_hr: 4.9
-    machine_hours: 3.4
-    labor_hours: 3.5
-    notes: "Cut tube/channel members and mounting plates, weld chassis frame with crossmembers and brackets, drill mounting holes for suspension/battery/payload, apply protective coating, inspect alignment and dimensions"
-assumptions: "Welded aluminum chassis for small lunar rover with protective coating"
-notes: "Local fabrication of lightweight rover chassis frame with mounting points for wheels, suspension, battery, and payload"
+    est_time_hr: 2.4
+    machine_hours: 1.2
+    labor_hours: 2.0
+    notes: "Install payload hardpoints, dust guards, and final bracket interfaces."
+assumptions: "Welded aluminum chassis with explicit payload interface and dust-guard subassemblies."
+notes: "Detailed local rover chassis build with hardpoint and guard integration."

@@ -1,0 +1,124 @@
+id: recipe_kapvik_microrover_v0
+kind: recipe
+target_item_id: kapvik_microrover_v0
+variant_id: v0
+inputs:
+  - item_id: rover_chassis_structure_v0
+    qty: 1
+    unit: unit
+  - item_id: rover_suspension_rocker_bogie_v0
+    qty: 15.0
+    unit: kg
+  - item_id: rover_wheel_drive_module_v0
+    qty: 6
+    unit: unit
+  - item_id: rover_power_system_battery_v0
+    qty: 12.8
+    unit: kg
+  - item_id: rover_solar_array_v0
+    qty: 1
+    unit: unit
+  - item_id: rover_avionics_computer_v0
+    qty: 1
+    unit: unit
+  - item_id: assembled_wire_harness
+    qty: 2.0
+    unit: kg
+  - item_id: connector_electrical_multi_pin
+    qty: 8
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.5
+    unit: kg
+outputs:
+  - item_id: kapvik_microrover_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: rover_chassis_structure_v0
+        qty: 1
+        unit: unit
+      - item_id: rover_suspension_rocker_bogie_v0
+        qty: 15.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 0.6
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 115.0
+        unit: kg
+    est_time_hr: 4.0
+    labor_hours: 3.0
+    machine_hours: 2.0
+    notes: "Integrate rocker-bogie suspension into chassis and verify articulation travel."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 115.0
+        unit: kg
+      - item_id: rover_wheel_drive_module_v0
+        qty: 6
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 0.4
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 150.0
+        unit: kg
+    est_time_hr: 4.0
+    labor_hours: 3.0
+    machine_hours: 2.0
+    notes: "Install six wheel-drive modules and set wheel alignment references."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 150.0
+        unit: kg
+      - item_id: rover_power_system_battery_v0
+        qty: 12.8
+        unit: kg
+      - item_id: rover_solar_array_v0
+        qty: 1
+        unit: unit
+      - item_id: rover_avionics_computer_v0
+        qty: 1
+        unit: unit
+      - item_id: assembled_wire_harness
+        qty: 2.0
+        unit: kg
+      - item_id: connector_electrical_multi_pin
+        qty: 8
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 0.5
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 188.0
+        unit: kg
+    est_time_hr: 6.0
+    labor_hours: 5.0
+    machine_hours: 2.0
+    notes: "Install power and avionics subsystems, route harnesses, and terminate connectors."
+  - process_id: alignment_and_testing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 188.0
+        unit: kg
+    outputs:
+      - item_id: kapvik_microrover_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    machine_hours: 1.0
+    notes: "Run mobility, steering, encoder, and power-distribution acceptance tests."
+assumptions: >
+  Detailed staged rover integration using explicit subsystem assemblies. Masses in
+  intermediate steps represent assembly handling mass, not final exported machine mass.
+notes: >
+  Canonical Kapvik rover recipe replacing legacy single-step placeholder assembly.

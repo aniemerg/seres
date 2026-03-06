@@ -1,0 +1,67 @@
+id: recipe_magnetometer_boom_module_v0
+kind: recipe
+target_item_id: magnetometer_boom_module_v0
+variant_id: v0
+inputs:
+  - item_id: aluminum_tube_stock
+    qty: 1.2
+    unit: kg
+  - item_id: fluxgate_sensor_head_v0
+    qty: 0.9
+    unit: kg
+  - item_id: magnetometer_afe_adc_board_v0
+    qty: 0.35
+    unit: kg
+  - item_id: magnetometer_calibration_set_v0
+    qty: 0.4
+    unit: kg
+  - item_id: assembled_cable_harness
+    qty: 0.25
+    unit: kg
+  - item_id: connector_electrical_multi_pin
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: magnetometer_boom_module_v0
+    qty: 2.2
+    unit: kg
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: aluminum_tube_stock
+        qty: 1.2
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 1.05
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.15
+        unit: kg
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 1.05
+        unit: kg
+      - item_id: fluxgate_sensor_head_v0
+        qty: 0.9
+        unit: kg
+      - item_id: magnetometer_afe_adc_board_v0
+        qty: 0.35
+        unit: kg
+      - item_id: magnetometer_calibration_set_v0
+        qty: 0.4
+        unit: kg
+      - item_id: assembled_cable_harness
+        qty: 0.25
+        unit: kg
+      - item_id: connector_electrical_multi_pin
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: magnetometer_boom_module_v0
+        qty: 2.2
+        unit: kg
+      - item_id: waste
+        qty: 0.75
+        unit: kg

@@ -1,0 +1,56 @@
+id: recipe_shallow_sampler_geotech_head_v0
+kind: recipe
+target_item_id: shallow_sampler_geotech_head_v0
+variant_id: v0
+inputs:
+  - item_id: auger_drill_assembly
+    qty: 3.0
+    unit: kg
+  - item_id: load_cell_strain_gauge_v0
+    qty: 0.5
+    unit: kg
+  - item_id: signal_amplifier_module
+    qty: 0.5
+    unit: kg
+  - item_id: thermal_probe_regolith_v0
+    qty: 0.35
+    unit: kg
+  - item_id: depth_stop_mechanism
+    qty: 0.6
+    unit: kg
+  - item_id: aluminum_housing_machined_v0
+    qty: 1.5
+    unit: kg
+outputs:
+  - item_id: shallow_sampler_geotech_head_v0
+    qty: 4.8
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: auger_drill_assembly
+        qty: 3.0
+        unit: kg
+      - item_id: load_cell_strain_gauge_v0
+        qty: 0.5
+        unit: kg
+      - item_id: signal_amplifier_module
+        qty: 0.5
+        unit: kg
+      - item_id: thermal_probe_regolith_v0
+        qty: 0.35
+        unit: kg
+      - item_id: depth_stop_mechanism
+        qty: 0.6
+        unit: kg
+      - item_id: aluminum_housing_machined_v0
+        qty: 1.5
+        unit: kg
+    outputs:
+      - item_id: shallow_sampler_geotech_head_v0
+        qty: 4.8
+        unit: kg
+      - item_id: waste
+        qty: 1.65
+        unit: kg
+

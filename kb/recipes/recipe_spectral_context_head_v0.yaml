@@ -1,0 +1,50 @@
+id: recipe_spectral_context_head_v0
+kind: recipe
+target_item_id: spectral_context_head_v0
+variant_id: v0
+inputs:
+  - item_id: machine_vision_camera_v0
+    qty: 0.6
+    unit: kg
+  - item_id: lidar_sensor_module_v0
+    qty: 0.5
+    unit: kg
+  - item_id: calibration_artifacts
+    qty: 0.3
+    unit: kg
+  - item_id: aluminum_housing_machined_v0
+    qty: 0.9
+    unit: kg
+  - item_id: connector_electrical_multi_pin
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: spectral_context_head_v0
+    qty: 2.1
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machine_vision_camera_v0
+        qty: 0.6
+        unit: kg
+      - item_id: lidar_sensor_module_v0
+        qty: 0.5
+        unit: kg
+      - item_id: calibration_artifacts
+        qty: 0.3
+        unit: kg
+      - item_id: aluminum_housing_machined_v0
+        qty: 0.9
+        unit: kg
+      - item_id: connector_electrical_multi_pin
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: spectral_context_head_v0
+        qty: 2.1
+        unit: kg
+      - item_id: waste
+        qty: 0.2
+        unit: kg
+

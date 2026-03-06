@@ -1,0 +1,32 @@
+id: magnetic_anomaly_survey_v0
+kind: process
+name: Magnetic anomaly survey v0
+process_type: batch
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 3.0
+    unit: kg
+outputs:
+  - item_id: magnetic_anomaly_map_v0
+    qty: 1.0
+    unit: kg
+  - item_id: regolith_sample_characterized_v0
+    qty: 2.0
+    unit: kg
+resource_requirements:
+  - machine_id: kapvik_microrover_v0
+    qty: 1
+    unit: count
+  - machine_id: magnetometer_payload_v0
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 1.2
+energy_model:
+  type: fixed_per_batch
+  value: 0.09
+  unit: kWh
+notes: >
+  Station-mode magnetic survey process that generates anomaly map artifact and
+  characterized sample stream for follow-up prospecting decisions.

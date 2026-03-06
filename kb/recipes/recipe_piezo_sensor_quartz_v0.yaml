@@ -1,0 +1,44 @@
+id: recipe_piezo_sensor_quartz_v0
+kind: recipe
+target_item_id: piezo_sensor_quartz_v0
+variant_id: v0
+inputs:
+  - item_id: quartz_crystal
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.2
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: piezo_sensor_quartz_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 0.03
+    unit: kg
+steps:
+  - process_id: quartz_piezo_sensor_fabrication_v0
+    inputs:
+      - item_id: quartz_crystal
+        qty: 1.0
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 0.2
+        unit: kg
+      - item_id: ceramic_insulators
+        qty: 0.1
+        unit: kg
+    outputs:
+      - item_id: piezo_sensor_quartz_v0
+        qty: 1
+        unit: unit
+      - item_id: metal_swarf
+        qty: 0.03
+        unit: kg
+    notes: Quartz piezo sensor fabrication and bench calibration.
+notes: >
+  Quartz piezo sensor recipe mapped to dedicated fabrication process.
+

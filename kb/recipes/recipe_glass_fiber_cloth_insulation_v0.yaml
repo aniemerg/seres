@@ -1,0 +1,31 @@
+id: recipe_glass_fiber_cloth_insulation_v0
+kind: recipe
+target_item_id: glass_fiber_cloth_insulation_v0
+variant_id: v0
+inputs:
+  - item_id: basalt_fiber
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: glass_fiber_cloth_insulation_v0
+    qty: 9.4
+    unit: kg
+  - item_id: tailings
+    qty: 0.6
+    unit: kg
+steps:
+  - process_id: glass_fiber_cloth_fabrication_v0
+    inputs:
+      - item_id: basalt_fiber
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: glass_fiber_cloth_insulation_v0
+        qty: 9.4
+        unit: kg
+      - item_id: tailings
+        qty: 0.6
+        unit: kg
+    notes: Cloth/sleeve insulation fabrication batch.
+notes: Glass fiber cloth insulation production route.
+

@@ -1,0 +1,91 @@
+id: recipe_hv_supply_module_30kv_v0
+kind: recipe
+target_item_id: hv_supply_module_30kv_v0
+variant_id: v0
+inputs:
+  - item_id: transformer_power_high_voltage
+    qty: 20.0
+    unit: kg
+  - item_id: hv_rectifier_stack
+    qty: 3.0
+    unit: kg
+  - item_id: hv_enclosure_and_interlocks
+    qty: 15.0
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 2.0
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 1
+    unit: unit
+  - item_id: interlock_switch_set
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: hv_supply_module_30kv_v0
+    qty: 48.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: transformer_power_high_voltage
+        qty: 20.0
+        unit: kg
+      - item_id: hv_rectifier_stack
+        qty: 3.0
+        unit: kg
+      - item_id: power_conditioning_module
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: assembled_equipment
+        qty: 30.0
+        unit: kg
+    est_time_hr: 2.2
+    labor_hours: 1.6
+    machine_hours: 1.0
+    notes: Integrate transformer/rectifier/power conditioning stack.
+  - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 30.0
+        unit: kg
+      - item_id: hv_enclosure_and_interlocks
+        qty: 15.0
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 2.0
+        unit: kg
+      - item_id: interlock_switch_set
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 48.0
+        unit: kg
+    est_time_hr: 2.8
+    labor_hours: 2.1
+    machine_hours: 1.1
+    notes: Install HV routing, interlock loop, and discharge-safe enclosure wiring.
+  - process_id: electrical_testing_and_burn_in_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 48.0
+        unit: kg
+    outputs:
+      - item_id: hv_supply_module_30kv_v0
+        qty: 48.0
+        unit: kg
+    est_time_hr: 3.0
+    labor_hours: 1.5
+    machine_hours: 3.0
+    notes: Verify leakage, trip response, and stable high-voltage output under load.
+notes: >
+  Integrated HV module for electrostatic separator plate operation with enclosure and
+  interlock-protected architecture.

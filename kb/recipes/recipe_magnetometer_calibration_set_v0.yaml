@@ -1,0 +1,43 @@
+id: recipe_magnetometer_calibration_set_v0
+kind: recipe
+target_item_id: magnetometer_calibration_set_v0
+variant_id: v0
+inputs:
+  - item_id: copper_wire_magnet
+    qty: 0.2
+    unit: kg
+  - item_id: calibration_artifacts
+    qty: 0.15
+    unit: kg
+  - item_id: connector_electrical_small
+    qty: 0.04
+    unit: kg
+outputs:
+  - item_id: magnetometer_calibration_set_v0
+    qty: 0.4
+    unit: kg
+steps:
+  - process_id: spool_winding_basic_v0
+    inputs:
+      - item_id: copper_wire_magnet
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 0.2
+        unit: kg
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 0.2
+        unit: kg
+      - item_id: calibration_artifacts
+        qty: 0.15
+        unit: kg
+      - item_id: connector_electrical_small
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: magnetometer_calibration_set_v0
+        qty: 0.39
+        unit: kg

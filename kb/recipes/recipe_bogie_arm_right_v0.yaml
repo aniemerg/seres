@@ -1,0 +1,38 @@
+id: recipe_bogie_arm_right_v0
+kind: recipe
+target_item_id: bogie_arm_right_v0
+variant_id: v0
+inputs:
+  - item_id: base_metal_parts
+    qty: 2.8
+    unit: kg
+outputs:
+  - item_id: bogie_arm_right_v0
+    qty: 2.5
+    unit: kg
+steps:
+  - process_id: metal_parts_fabrication_v0
+    inputs:
+      - item_id: base_metal_parts
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: cast_metal_parts
+        qty: 2.7
+        unit: kg
+      - item_id: metal_scrap
+        qty: 0.1
+        unit: kg
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cast_metal_parts
+        qty: 2.7
+        unit: kg
+    outputs:
+      - item_id: bogie_arm_right_v0
+        qty: 2.5
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.2
+        unit: kg
+

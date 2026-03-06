@@ -1,0 +1,31 @@
+id: glass_fiber_cloth_fabrication_v0
+kind: process
+name: Glass fiber cloth fabrication v0
+process_type: continuous
+inputs:
+  - item_id: basalt_fiber
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: glass_fiber_cloth_insulation_v0
+    qty: 0.94
+    unit: kg
+  - item_id: tailings
+    qty: 0.06
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+energy_model:
+  type: per_unit
+  value: 0.35
+  unit: kWh/kg
+  scaling_basis: basalt_fiber
+time_model:
+  type: linear_rate
+  rate: 6.0
+  rate_unit: kg/hr
+  scaling_basis: basalt_fiber
+notes: Weave/braid style conversion from fiber feedstock to insulation cloth form.
+

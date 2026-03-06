@@ -188,6 +188,11 @@ def _collect_nulls(kind: str, data: dict) -> List[dict]:
 
 def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
     missing: List[dict] = []
+    is_deprecated = bool(
+        data.get("deprecated")
+        or data.get("is_deprecated")
+        or str(data.get("status", "")).lower() in ("deprecated", "superseded")
+    )
 
     if kind == "process":
         if not data.get("energy_model"):
@@ -198,6 +203,8 @@ def _collect_missing_fields(kind: str, data: dict) -> List[dict]:
         if not data.get("material_class"):
             missing.append({"field": "material_class", "severity": "soft"})
     elif kind == "machine":
+        if is_deprecated:
+            return missing
         if not data.get("capabilities"):
             missing.append({"field": "capabilities", "severity": "soft"})
         if not data.get("bom"):
@@ -673,6 +680,16 @@ def _collect_closure_errors(entries: Dict[str, dict], kb_loader) -> List[dict]:
     machine_ids = [eid for eid, entry in entries.items() if entry.get('kind') == 'machine']
 
     for machine_id in machine_ids:
+        machine_model = kb_loader.get_item(machine_id)
+        if machine_model is not None:
+            machine_data = machine_model.model_dump()
+            is_deprecated = bool(
+                machine_data.get('deprecated')
+                or machine_data.get('is_deprecated')
+                or str(machine_data.get('status', '')).lower() in ('deprecated', 'superseded')
+            )
+            if is_deprecated:
+                continue
         result = analyzer.analyze_machine(machine_id)
 
         for error in result.get('errors', []):

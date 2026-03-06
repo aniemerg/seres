@@ -1,0 +1,34 @@
+id: kovar_wire_drawing_v0
+kind: process
+name: Kovar wire drawing v0
+process_type: continuous
+inputs:
+  - item_id: kovar_alloy_fe_ni_co_v0
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: kovar_wire_v0
+    qty: 0.94
+    unit: kg
+  - item_id: tailings
+    qty: 0.06
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: drawing_die_set_basic
+    qty: 1
+    unit: count
+energy_model:
+  type: per_unit
+  value: 1.7
+  unit: kWh/kg
+  scaling_basis: kovar_alloy_fe_ni_co_v0
+time_model:
+  type: linear_rate
+  rate: 8.0
+  rate_unit: kg/hr
+  scaling_basis: kovar_alloy_fe_ni_co_v0
+notes: Multi-pass drawing and conditioning route for Kovar wire form-factor production.
+

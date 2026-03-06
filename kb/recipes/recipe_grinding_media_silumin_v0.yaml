@@ -1,0 +1,31 @@
+id: recipe_grinding_media_silumin_v0
+kind: recipe
+target_item_id: grinding_media_silumin_v0
+variant_id: v0
+inputs:
+  - item_id: silumin_alloy
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: grinding_media_silumin_v0
+    qty: 9.2
+    unit: kg
+  - item_id: tailings
+    qty: 0.8
+    unit: kg
+steps:
+  - process_id: grinding_media_silumin_casting_v0
+    inputs:
+      - item_id: silumin_alloy
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: grinding_media_silumin_v0
+        qty: 9.2
+        unit: kg
+      - item_id: tailings
+        qty: 0.8
+        unit: kg
+    notes: Silumin media casting batch.
+notes: Silumin grinding media production route.
+
