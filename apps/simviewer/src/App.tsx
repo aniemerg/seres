@@ -522,6 +522,26 @@ function isMachineEntity(entity: KBEntity): boolean {
   return entity.kind === 'machine'
 }
 
+function collectRefIds(node: unknown, out: Set<string>): void {
+  if (Array.isArray(node)) {
+    for (const entry of node) collectRefIds(entry, out)
+    return
+  }
+  if (!node || typeof node !== 'object') return
+  const obj = node as Record<string, unknown>
+  for (const [key, value] of Object.entries(obj)) {
+    if (key === 'item_id' || key === 'machine_id' || key === 'process_id' || key === 'recipe_id' || key === 'target_item_id') {
+      if (typeof value === 'string' && value.trim()) out.add(value.trim())
+      continue
+    }
+    if ((key === 'requires_ids' || key === 'requires_id') && Array.isArray(value)) {
+      for (const v of value) if (typeof v === 'string' && v.trim()) out.add(v.trim())
+      continue
+    }
+    collectRefIds(value, out)
+  }
+}
+
 export function App() {
   const [route, setRoute] = useState<Route>(() => parseRoute(window.location.hash || '#/wiki/simulation_overview'))
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
@@ -564,6 +584,96 @@ export function App() {
   const entitiesById = useMemo(() => Object.fromEntries(entities.map((e) => [e.id, e])), [entities])
   const articlesById = useMemo(() => Object.fromEntries(articles.map((a) => [a.id, a])), [articles])
   const markdownTargets = useMemo(() => new Set<string>([...entities.map((e) => e.id), ...articles.map((a) => a.id)]), [entities, articles])
+  const kbBacklinks = useMemo(() => {
+    const map = new Map<string, Array<{ id: string; name: string; kind: string }>>()
+    for (const entity of entities) {
+      const refs = new Set<string>()
+      collectRefIds(entity.raw, refs)
+      refs.delete(entity.id)
+      for (const target of refs) {
+        const list = map.get(target) ?? []
+        list.push({ id: entity.id, name: entity.name || entity.id, kind: entity.kind })
+        map.set(target, list)
+      }
+    }
+    for (const article of articles) {
+      for (const target of article.wiki_links ?? []) {
+        const list = map.get(target) ?? []
+        list.push({ id: article.id, name: article.title || article.id, kind: 'article' })
+        map.set(target, list)
+      }
+    }
+    for (const [k, list] of map.entries()) {
+      list.sort((a, b) => (a.kind + a.id).localeCompare(b.kind + b.id))
+      map.set(k, list)
+    }
+    return map
+  }, [entities, articles])
+  const simItemUsage = useMemo(() => {
+    type UsageRow = { id: string; label: string; kind: 'process' | 'recipe'; count: number; quantity: number; units: string[] }
+    const byItem = new Map<string, { consumers: Map<string, UsageRow>; recipes: Map<string, UsageRow> }>()
+    for (const run of simData?.process_runs ?? []) {
+      for (const [itemId, q] of Object.entries(run.inputs)) {
+        const bucket = byItem.get(itemId) ?? { consumers: new Map(), recipes: new Map() }
+        const processKey = run.process_id
+        const processRow = bucket.consumers.get(processKey) ?? {
+          id: processKey,
+          label: entitiesById[processKey]?.name || processKey,
+          kind: 'process',
+          count: 0,
+          quantity: 0,
+          units: [],
+        }
+        processRow.count += 1
+        processRow.quantity += q.quantity
+        if (!processRow.units.includes(q.unit)) processRow.units.push(q.unit)
+        bucket.consumers.set(processKey, processRow)
+
+        if (run.recipe_id) {
+          const recipeKey = run.recipe_id
+          const recipeRow = bucket.recipes.get(recipeKey) ?? {
+            id: recipeKey,
+            label: entitiesById[recipeKey]?.name || recipeKey,
+            kind: 'recipe',
+            count: 0,
+            quantity: 0,
+            units: [],
+          }
+          recipeRow.count += 1
+          recipeRow.quantity += q.quantity
+          if (!recipeRow.units.includes(q.unit)) recipeRow.units.push(q.unit)
+          bucket.recipes.set(recipeKey, recipeRow)
+        }
+        byItem.set(itemId, bucket)
+      }
+    }
+    return byItem
+  }, [simData, entitiesById])
+  const machineProcessUsage = useMemo(() => {
+    const byMachine = new Map<string, Map<string, { processId: string; label: string; count: number; totalEnergy: number }>>()
+    for (const run of simData?.process_runs ?? []) {
+      if (!run.machine_type) continue
+      const bucket = byMachine.get(run.machine_type) ?? new Map<string, { processId: string; label: string; count: number; totalEnergy: number }>()
+      const cur = bucket.get(run.process_id) ?? {
+        processId: run.process_id,
+        label: entitiesById[run.process_id]?.name || run.process_id,
+        count: 0,
+        totalEnergy: 0,
+      }
+      cur.count += 1
+      cur.totalEnergy += run.energy_kwh ?? 0
+      bucket.set(run.process_id, cur)
+      byMachine.set(run.machine_type, bucket)
+    }
+    const out = new Map<string, Array<{ processId: string; label: string; count: number; totalEnergy: number }>>()
+    for (const [machineId, bucket] of byMachine.entries()) {
+      out.set(
+        machineId,
+        Array.from(bucket.values()).sort((a, b) => b.count - a.count || b.totalEnergy - a.totalEnergy),
+      )
+    }
+    return out
+  }, [simData, entitiesById])
 
   const selectedRun = useMemo(() => simData?.process_runs.find((r) => r.process_run_id === selectedRunId) ?? null, [simData, selectedRunId])
 
@@ -777,6 +887,9 @@ export function App() {
             articlesById={articlesById}
             markdownTargets={markdownTargets}
             simQuery={simQuery}
+            kbBacklinks={kbBacklinks}
+            simItemUsage={simItemUsage}
+            machineProcessUsage={machineProcessUsage}
             onWikiJump={(id) => navigate({ view: 'wiki', id })}
             allEntities={entities}
           />
@@ -966,6 +1079,9 @@ function WikiView({
   allEntities,
   markdownTargets,
   simQuery,
+  kbBacklinks,
+  simItemUsage,
+  machineProcessUsage,
   onWikiJump,
 }: {
   selectedId?: string
@@ -974,11 +1090,32 @@ function WikiView({
   allEntities: KBEntity[]
   markdownTargets: Set<string>
   simQuery: SimQueryData | null
+  kbBacklinks: Map<string, Array<{ id: string; name: string; kind: string }>>
+  simItemUsage: Map<string, { consumers: Map<string, { id: string; label: string; kind: 'process' | 'recipe'; count: number; quantity: number; units: string[] }>; recipes: Map<string, { id: string; label: string; kind: 'process' | 'recipe'; count: number; quantity: number; units: string[] }> }>
+  machineProcessUsage: Map<string, Array<{ processId: string; label: string; count: number; totalEnergy: number }>>
   onWikiJump: (id: string) => void
 }) {
   const entity = selectedId ? entitiesById[selectedId] : undefined
   const article = selectedId ? articlesById[selectedId] : undefined
   const raw = asObject(entity?.raw)
+  const references = useMemo(() => (selectedId ? kbBacklinks.get(selectedId) ?? [] : []), [selectedId, kbBacklinks])
+  const simConsumers = useMemo(() => {
+    if (!selectedId) return []
+    const bucket = simItemUsage.get(selectedId)
+    if (!bucket) return []
+    return Array.from(bucket.consumers.values()).sort((a, b) => b.count - a.count || b.quantity - a.quantity)
+  }, [selectedId, simItemUsage])
+  const simRecipes = useMemo(() => {
+    if (!selectedId) return []
+    const bucket = simItemUsage.get(selectedId)
+    if (!bucket) return []
+    return Array.from(bucket.recipes.values()).sort((a, b) => b.count - a.count || b.quantity - a.quantity)
+  }, [selectedId, simItemUsage])
+  const machineUsage = useMemo(() => {
+    if (!selectedId) return []
+    return machineProcessUsage.get(selectedId) ?? []
+  }, [selectedId, machineProcessUsage])
+  const deferRefs = Boolean(entity && (isMachineEntity(entity) || isProcessEntity(entity)))
   const recipesTargetingEntity = useMemo(
     () =>
       entity
@@ -1019,11 +1156,102 @@ function WikiView({
                 {entity.sim_stats.produced_quantity_total !== undefined && <div><label>Produced</label><strong>{entity.sim_stats.produced_quantity_total.toFixed(2)}</strong></div>}
               </div>
             )}
+            {!deferRefs && references.length > 0 && (
+              <div className="kb-block">
+                <h3>Referenced By (KB + Articles)</h3>
+                <ul>
+                  {references.slice(0, 80).map((ref, i) => (
+                    <li key={`${ref.kind}:${ref.id}:${i}`}>
+                      <button className="wiki-link" onClick={() => onWikiJump(ref.id)}>{ref.name}</button> <small>({ref.kind})</small>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {simConsumers.length > 0 && (
+              <div className="kb-block">
+                <h3>Used In Simulation (Consumed Inputs, Ranked)</h3>
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Process</th>
+                        <th>Runs</th>
+                        <th>Total Qty</th>
+                        <th>Units</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {simConsumers.slice(0, 40).map((row) => (
+                        <tr key={row.id}>
+                          <td><button className="wiki-link" onClick={() => onWikiJump(row.id)}>{row.label}</button></td>
+                          <td>{row.count}</td>
+                          <td>{row.quantity.toFixed(2)}</td>
+                          <td>{row.units.join(', ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
+            {simRecipes.length > 0 && (
+              <div className="kb-block">
+                <h3>Used In Recipes (Ranked by Consuming Runs)</h3>
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Recipe</th>
+                        <th>Runs</th>
+                        <th>Total Qty</th>
+                        <th>Units</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {simRecipes.slice(0, 40).map((row) => (
+                        <tr key={row.id}>
+                          <td><button className="wiki-link" onClick={() => onWikiJump(row.id)}>{row.label}</button></td>
+                          <td>{row.count}</td>
+                          <td>{row.quantity.toFixed(2)}</td>
+                          <td>{row.units.join(', ')}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
             {isMachineEntity(entity) && raw && (
               <div className="kb-block">
                 <h3>Machine Entry</h3>
                 <p><strong>Capabilities:</strong> {JSON.stringify(raw.capabilities ?? raw.resource_types ?? [])}</p>
                 <p><strong>Requires IDs:</strong> {JSON.stringify(raw.requires_ids ?? [])}</p>
+                {machineUsage.length > 0 && (
+                  <>
+                    <h4>Processes Run On This Machine (Simulation)</h4>
+                    <div className="table-wrap">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Process</th>
+                            <th>Runs</th>
+                            <th>Total Energy (kWh)</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {machineUsage.slice(0, 40).map((row) => (
+                            <tr key={row.processId}>
+                              <td><button className="wiki-link" onClick={() => onWikiJump(row.processId)}>{row.label}</button></td>
+                              <td>{row.count}</td>
+                              <td>{row.totalEnergy.toFixed(2)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </>
+                )}
               </div>
             )}
             {isRecipeEntity(entity) && raw && (
@@ -1126,6 +1354,18 @@ function WikiView({
                       </li>
                     )
                   })}
+                </ul>
+              </div>
+            )}
+            {deferRefs && references.length > 0 && (
+              <div className="kb-block">
+                <h3>Referenced By (KB + Articles)</h3>
+                <ul>
+                  {references.slice(0, 80).map((ref, i) => (
+                    <li key={`${ref.kind}:${ref.id}:${i}`}>
+                      <button className="wiki-link" onClick={() => onWikiJump(ref.id)}>{ref.name}</button> <small>({ref.kind})</small>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}

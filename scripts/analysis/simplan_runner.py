@@ -176,6 +176,37 @@ def execute_plan(
     if sim_dir.exists() and (sim_dir / "snapshot.json").exists():
         engine.load()
 
+    if not dry_run:
+        engine.log_annotation(
+            key="scenario.id",
+            value=plan.sim_id,
+            tags=["scenario", "simplan"],
+            source="simplan_runner",
+        )
+        engine.log_annotation(
+            key="scenario.goal_target",
+            value=plan.target_machine_id,
+            tags=["scenario", "target"],
+            source="simplan_runner",
+        )
+        engine.log_annotation(
+            key="scenario.plan_type",
+            value="simplan_combined",
+            tags=["scenario", "plan"],
+            source="simplan_runner",
+        )
+        engine.log_marker(
+            name="simplan_start",
+            tags=["milestone", "simplan", "phase"],
+            source="simplan_runner",
+            metadata={
+                "imports_count": len(plan.imports),
+                "recipes_count": len(plan.recipes),
+                "build_machine": bool(plan.build_machine),
+                "target_recipe_id": plan.target_recipe_id,
+            },
+        )
+
     def _trace(msg: str) -> None:
         if trace:
             print(msg)
@@ -219,7 +250,28 @@ def execute_plan(
             continue
         result = engine.import_item(item_id, imp.qty, imp.unit)
         if not result.get("success"):
+            if not dry_run:
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_import",
+                    tags=["milestone", "error", "imports"],
+                    source="simplan_runner",
+                    metadata={"item_id": item_id},
+                )
+                engine.save()
             return {"success": False, "error": "import_failed", "detail": result}
+
+    if not dry_run:
+        engine.log_marker(
+            name="imports_complete",
+            tags=["milestone", "imports", "phase"],
+            source="simplan_runner",
+        )
 
     # Recipes (non-target first, dependency-ordered)
     recipe_order = _order_recipes(plan, kb)
@@ -233,6 +285,20 @@ def execute_plan(
         _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
         result = engine.run_recipe(recipe.recipe_id, recipe.quantity)
         if not result.get("success"):
+            if not dry_run:
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_recipe",
+                    tags=["milestone", "error", "recipes"],
+                    source="simplan_runner",
+                    metadata={"recipe_id": recipe.recipe_id},
+                )
+                engine.save()
             return {
                 "success": False,
                 "error": "recipe_failed",
@@ -241,6 +307,20 @@ def execute_plan(
             }
         error = _advance_until_idle(engine)
         if error:
+            if not dry_run:
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_advance",
+                    tags=["milestone", "error", "recipes"],
+                    source="simplan_runner",
+                    metadata={"recipe_id": recipe.recipe_id},
+                )
+                engine.save()
             return {
                 "success": False,
                 "error": "advance_failed",
@@ -248,6 +328,13 @@ def execute_plan(
                 "detail": error,
             }
         _trace(f"RECIPE_DONE {recipe.recipe_id}")
+
+    if not dry_run:
+        engine.log_marker(
+            name="recipes_complete",
+            tags=["milestone", "recipes", "phase"],
+            source="simplan_runner",
+        )
 
     # Target recipe last (if present)
     if plan.target_recipe_id:
@@ -258,6 +345,19 @@ def execute_plan(
             _trace(f"RUN_TARGET_RECIPE {plan.target_recipe_id} x1")
             result = engine.run_recipe(plan.target_recipe_id, 1)
             if not result.get("success"):
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_target_recipe",
+                    tags=["milestone", "error", "target"],
+                    source="simplan_runner",
+                    metadata={"recipe_id": plan.target_recipe_id},
+                )
+                engine.save()
                 return {
                     "success": False,
                     "error": "recipe_failed",
@@ -266,6 +366,19 @@ def execute_plan(
                 }
             error = _advance_until_idle(engine)
             if error:
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_target_advance",
+                    tags=["milestone", "error", "target"],
+                    source="simplan_runner",
+                    metadata={"recipe_id": plan.target_recipe_id},
+                )
+                engine.save()
                 return {
                     "success": False,
                     "error": "advance_failed",
@@ -273,6 +386,12 @@ def execute_plan(
                     "detail": error,
                 }
             _trace(f"TARGET_RECIPE_DONE {plan.target_recipe_id}")
+            engine.log_marker(
+                name="target_recipe_complete",
+                tags=["milestone", "target", "phase"],
+                source="simplan_runner",
+                metadata={"recipe_id": plan.target_recipe_id},
+            )
 
     # Build machine
     if plan.build_machine:
@@ -282,15 +401,58 @@ def execute_plan(
             _trace(f"BUILD_MACHINE {plan.target_machine_id}")
             result = engine.build_machine(plan.target_machine_id)
             if not result.get("success"):
+                engine.log_annotation(
+                    key="scenario.status",
+                    value="failed",
+                    tags=["scenario", "status", "error"],
+                    source="simplan_runner",
+                )
+                engine.log_marker(
+                    name="simplan_failed_build",
+                    tags=["milestone", "error", "build"],
+                    source="simplan_runner",
+                    metadata={"machine_id": plan.target_machine_id},
+                )
+                engine.save()
                 return {"success": False, "error": "build_failed", "detail": result}
             _trace(f"BUILD_DONE {plan.target_machine_id}")
+            engine.log_marker(
+                name="target_build_complete",
+                tags=["milestone", "target", "build"],
+                source="simplan_runner",
+                metadata={"machine_id": plan.target_machine_id},
+            )
 
     if not dry_run and (plan.target_recipe_id or plan.build_machine):
         verify_error = _verify_target_output()
         if verify_error:
+            engine.log_annotation(
+                key="scenario.status",
+                value="failed",
+                tags=["scenario", "status", "error"],
+                source="simplan_runner",
+            )
+            engine.log_marker(
+                name="simplan_missing_target_output",
+                tags=["milestone", "error", "target"],
+                source="simplan_runner",
+                metadata={"target_machine_id": plan.target_machine_id},
+            )
+            engine.save()
             return {"success": False, "error": "missing_target_output", "detail": verify_error}
 
     if not dry_run:
+        engine.log_annotation(
+            key="scenario.status",
+            value="complete",
+            tags=["scenario", "status"],
+            source="simplan_runner",
+        )
+        engine.log_marker(
+            name="simplan_complete",
+            tags=["milestone", "simplan", "complete"],
+            source="simplan_runner",
+        )
         engine.save()
         isru = _get_item_isru(engine, plan.target_machine_id)
         return {"success": True, "isru": isru}
