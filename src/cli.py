@@ -45,6 +45,8 @@ def main():
     # =========================================================================
     from src.simulation.cli import add_sim_subcommands
     add_sim_subcommands(subparsers)
+    from src.simulation_parallel.cli import add_sim2_subcommands
+    add_sim2_subcommands(subparsers)
 
     # =========================================================================
     # INDEX command
@@ -253,6 +255,10 @@ def main():
             kb_loader = KBLoader(Path('kb'), use_validated_models=False)
             print("KB loader ready.", flush=True)
             return run_sim_command(args, kb_loader)
+
+        elif args.command == 'sim2':
+            from src.simulation_parallel.cli import run_sim2_command
+            return run_sim2_command(args)
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
