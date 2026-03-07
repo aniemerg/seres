@@ -11,6 +11,7 @@ import yaml
 class SimviewerConfig:
     sim_id: str
     article_paths: List[str]
+    simulation_root: str = "simulations"
     checkpoint_every_processes: int = 150
     checkpoint_every_hours: float = 24.0
     homepage_article_id: str = "about_seres"
@@ -44,6 +45,7 @@ def load_config(config_path: Path | None, sim_id: str) -> SimviewerConfig:
     return SimviewerConfig(
         sim_id=resolved_sim_id,
         article_paths=[str(p) for p in article_paths],
+        simulation_root=str(raw.get("simulation_root", "simulations")),
         checkpoint_every_processes=int(raw.get("checkpoint_every_processes", 150)),
         checkpoint_every_hours=float(raw.get("checkpoint_every_hours", 24.0)),
         homepage_article_id=str(raw.get("homepage_article_id", "about_seres")),

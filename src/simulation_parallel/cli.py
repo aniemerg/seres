@@ -103,6 +103,34 @@ def cmd_sim2_status(args) -> int:
     return 0
 
 
+def cmd_sim2_export_view(args) -> int:
+    from src.simviewer.config import load_config
+    from src.simviewer.exporter import export_simviewer
+
+    sim_id = args.sim_id
+    config_path = Path(args.config) if getattr(args, "config", None) else None
+    out_dir = Path(args.out) if getattr(args, "out", None) else (Path("out") / "simviewer" / sim_id / "dist")
+
+    try:
+        config = load_config(config_path, sim_id)
+        if getattr(args, "sim_root", None):
+            config.simulation_root = str(args.sim_root)
+        else:
+            config.simulation_root = "simulations_parallel"
+        result = export_simviewer(Path("."), config, out_dir)
+    except Exception as exc:
+        print(f"Export failed: {exc}", file=sys.stderr)
+        return 1
+
+    summary = result.get("summary", {})
+    print(
+        f"exported sim2={sim_id} out={result.get('out_dir')} "
+        f"time={summary.get('time_hours', 0.0)} "
+        f"process_runs={summary.get('process_runs_total', 0)}"
+    )
+    return 0
+
+
 def add_sim2_subcommands(subparsers):
     sim2_parser = subparsers.add_parser("sim2", help="Concurrent DES runner commands")
     sim2_sub = sim2_parser.add_subparsers(dest="sim2_command", help="sim2 command")
@@ -131,6 +159,12 @@ def add_sim2_subcommands(subparsers):
     p_status = sim2_sub.add_parser("status", help="Show sim2 status")
     p_status.add_argument("--sim-id", required=True)
 
+    p_export = sim2_sub.add_parser("export-view", help="Export sim2 data for simviewer")
+    p_export.add_argument("--sim-id", required=True)
+    p_export.add_argument("--out", help="Output dist directory (default: out/simviewer/<sim-id>/dist)")
+    p_export.add_argument("--config", help="Optional simviewer config YAML")
+    p_export.add_argument("--sim-root", help="Optional simulation root override (default: simulations_parallel)")
+
 
 def run_sim2_command(args):
     if not getattr(args, "sim2_command", None):
@@ -142,6 +176,7 @@ def run_sim2_command(args):
         "submit-process": cmd_sim2_submit_process,
         "run-to-completion": cmd_sim2_run_to_completion,
         "status": cmd_sim2_status,
+        "export-view": cmd_sim2_export_view,
     }
     handler = commands.get(args.sim2_command)
     if not handler:

@@ -594,7 +594,7 @@ def _build_simquery(
 
 def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) -> dict:
     """Export static data artifacts for the simviewer frontend."""
-    sim_dir = repo_root / "simulations" / config.sim_id
+    sim_dir = repo_root / config.simulation_root / config.sim_id
     event_log_path = sim_dir / "events.jsonl"
     snapshot_path = sim_dir / "snapshot.json"
 
@@ -683,14 +683,20 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
     (data_dir / "articles.json").write_text(json.dumps({"articles": articles}, indent=2), encoding="utf-8")
     (data_dir / "warnings.json").write_text(json.dumps(warnings.to_dict(), indent=2), encoding="utf-8")
     (data_dir / "simquery.json").write_text(json.dumps(simquery, indent=2), encoding="utf-8")
+    def _rel(path: Path) -> str:
+        try:
+            return str(path.relative_to(repo_root))
+        except Exception:
+            return str(path)
+
     (data_dir / "export_meta.json").write_text(
         json.dumps(
             {
                 "config": config.to_dict(),
                 "paths": {
-                    "simulation_dir": str(sim_dir.relative_to(repo_root)),
-                    "event_log": str(event_log_path.relative_to(repo_root)),
-                    "snapshot": str(snapshot_path.relative_to(repo_root)),
+                    "simulation_dir": _rel(sim_dir),
+                    "event_log": _rel(event_log_path),
+                    "snapshot": _rel(snapshot_path),
                 },
             },
             indent=2,
