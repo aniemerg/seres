@@ -79,6 +79,8 @@ class SimulationEngine:
     - Override resolution per ADR-013
     """
 
+    RECIPE_RETRY_DELAY_HOURS = 1.0
+
     def __init__(self, sim_id: str, kb_loader: KBLoader, sim_dir: Optional[Path] = None):
         self.sim_id = sim_id
         self.kb = kb_loader
@@ -130,6 +132,10 @@ class SimulationEngine:
         self.scheduler.register_handler(
             EventType.PROCESS_COMPLETE,
             self._schedule_dependent_recipe_steps  # THEN: schedule dependent steps
+        )
+        self.scheduler.register_handler(
+            EventType.RECIPE_STEP_READY,
+            self._on_recipe_step_ready,
         )
 
     def _validate_process_inputs(self, event) -> None:
@@ -333,98 +339,231 @@ class SimulationEngine:
             return  # Not a recipe step
 
         recipe_run_id = process_run.recipe_run_id
+        outcome = self._attempt_schedule_ready_recipe_steps(
+            recipe_run_id=recipe_run_id,
+            schedule_time=event.time,
+        )
+        self._handle_recipe_schedule_outcome(
+            recipe_run_id=recipe_run_id,
+            outcome=outcome,
+            trigger_time=event.time,
+        )
 
-        # Get ready steps from orchestrator
-        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
-
-        if not ready_steps:
+    def _on_recipe_step_ready(self, event) -> None:
+        """Retry scheduling ready recipe steps after a defer event."""
+        recipe_run_id = event.data.get("recipe_run_id")
+        if not recipe_run_id:
             return
+        outcome = self._attempt_schedule_ready_recipe_steps(
+            recipe_run_id=recipe_run_id,
+            schedule_time=event.time,
+        )
+        self._handle_recipe_schedule_outcome(
+            recipe_run_id=recipe_run_id,
+            outcome=outcome,
+            trigger_time=event.time,
+        )
 
-
-        # Schedule ready steps
+    def _queue_recipe_step_retry(
+        self,
+        recipe_run_id: str,
+        retry_time: float,
+        reason: str,
+    ) -> None:
+        """Schedule a single deferred retry for blocked recipe steps."""
         recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
-        if not recipe_run:
+        if not recipe_run or recipe_run.is_completed:
             return
+
+        # Avoid piling up duplicate retry events for the same recipe run.
+        for queued in self.scheduler.event_queue.to_list():
+            if queued.event_type != EventType.RECIPE_STEP_READY:
+                continue
+            if queued.data.get("recipe_run_id") != recipe_run_id:
+                continue
+            if queued.time <= retry_time:
+                return
+
+        retry_time = max(retry_time, self.scheduler.current_time)
+        event_id = f"recipe_ready_{recipe_run_id}_{uuid.uuid4()}"
+        self.scheduler.schedule_event(
+            time=retry_time,
+            event_type=EventType.RECIPE_STEP_READY,
+            event_id=event_id,
+            priority=15,
+            data={
+                "recipe_run_id": recipe_run_id,
+                "reason": reason,
+            },
+        )
+
+    def _resolve_recipe_step_schedule(
+        self,
+        recipe_def: Dict[str, Any],
+        step_idx: int,
+    ) -> Optional[Dict[str, Any]]:
+        """Resolve a step into process scheduling parameters."""
+        if step_idx >= len(recipe_def.get("steps", [])):
+            return None
+
+        step = recipe_def["steps"][step_idx]
+        resolved_process = self.resolve_step(step)
+        process_id = resolved_process.get("id") or step.get("process_id")
+        if not process_id:
+            return None
+
+        scale = 1.0
+        duration_hours = None
+        output_quantity = None
+        output_unit = None
+        step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
+
+        time_model = resolved_process.get("time_model", {})
+        if time_model.get("type") == "batch":
+            duration_hours = time_model.get("hr_per_batch", 1.0)
+            step_scale = step.get("scale", 1.0)
+            if step_scale != 1.0:
+                duration_hours *= step_scale
+
+        outputs = resolved_process.get("outputs", [])
+        if outputs:
+            first_output = outputs[0]
+            output_quantity = first_output.get("qty", first_output.get("quantity", 1.0))
+            output_unit = first_output.get("unit", "kg")
+
+            if not step_has_io_override:
+                base_process = self.kb.get_process(process_id)
+                if base_process:
+                    base_def = base_process.model_dump() if hasattr(base_process, "model_dump") else base_process
+                    base_outputs = base_def.get("outputs", [])
+                    if base_outputs:
+                        base_output = base_outputs[0]
+                        base_qty = base_output.get("qty", base_output.get("quantity", 1.0))
+                        if base_qty:
+                            scale = output_quantity / base_qty
+
+            if time_model.get("type") == "linear_rate" and duration_hours is None:
+                rate = time_model.get("rate", 1.0)
+                scaling_basis = time_model.get("scaling_basis")
+                if scaling_basis and scaling_basis in [o.get("item_id") for o in outputs]:
+                    for outp in outputs:
+                        if outp.get("item_id") == scaling_basis:
+                            outp_qty = outp.get("qty", outp.get("quantity", 1.0))
+                            duration_hours = outp_qty / rate if rate > 0 else 1.0
+                            break
+
+        if duration_hours is None:
+            duration_hours = 1.0
+
+        return {
+            "step_idx": step_idx,
+            "process_id": process_id,
+            "scale": scale,
+            "duration_hours": duration_hours,
+            "output_quantity": output_quantity,
+            "output_unit": output_unit,
+            "process_def_override": resolved_process,
+        }
+
+    def _attempt_schedule_ready_recipe_steps(
+        self,
+        recipe_run_id: str,
+        schedule_time: float,
+    ) -> Dict[str, Any]:
+        """
+        Try to schedule all currently-ready steps for a recipe run.
+
+        Returns outcome with counts and optional fatal_error.
+        """
+        recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+        if not recipe_run or recipe_run.is_completed:
+            return {"scheduled": 0, "blocked": 0, "fatal_error": None, "failed_step": None}
 
         recipe_def = recipe_run.recipe_def
+        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
+        outcome = {"scheduled": 0, "blocked": 0, "fatal_error": None, "failed_step": None}
 
         for step_idx in ready_steps:
-            if step_idx >= len(recipe_def.get('steps', [])):
+            schedule_def = self._resolve_recipe_step_schedule(recipe_def, step_idx)
+            if not schedule_def:
                 continue
-
-            step = recipe_def['steps'][step_idx]
-
-            resolved_process = self.resolve_step(step)
-            process_id = resolved_process.get('id') or step.get('process_id')
-
-            if not process_id:
-                continue
-
-            # Calculate scale and duration
-            scale = 1.0
-            duration_hours = None
-            output_quantity = None
-            output_unit = None
-            step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
-
-            time_model = resolved_process.get('time_model', {})
-            if time_model.get('type') == 'batch':
-                duration_hours = time_model.get('hr_per_batch', 1.0)
-                step_scale = step.get("scale", 1.0)
-                if step_scale != 1.0:
-                    duration_hours *= step_scale
-            elif time_model.get('type') == 'linear_rate':
-                pass
-
-            outputs = resolved_process.get('outputs', [])
-            if outputs:
-                first_output = outputs[0]
-                output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
-                output_unit = first_output.get('unit', 'kg')
-
-                if not step_has_io_override:
-                    base_process = self.kb.get_process(process_id)
-                    if base_process:
-                        base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
-                        base_outputs = base_def.get('outputs', [])
-                        if base_outputs:
-                            base_output = base_outputs[0]
-                            base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
-                            if base_qty:
-                                scale = output_quantity / base_qty
-
-                if time_model.get('type') == 'linear_rate' and duration_hours is None:
-                    rate = time_model.get('rate', 1.0)
-                    scaling_basis = time_model.get('scaling_basis')
-                    if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
-                        for outp in outputs:
-                            if outp.get('item_id') == scaling_basis:
-                                outp_qty = outp.get('qty', outp.get('quantity', 1.0))
-                                duration_hours = outp_qty / rate if rate > 0 else 1.0
-                                break
-
-            if duration_hours is None:
-                duration_hours = 1.0
-
-            # Schedule at event.time (when dependency was satisfied)
-            # Since we're in an event handler, scheduler.current_time = event.time,
-            # so this won't cause "past" errors
-            schedule_time = event.time
 
             result = self.start_process(
-                process_id=process_id,
-                scale=scale,
+                process_id=schedule_def["process_id"],
+                scale=schedule_def["scale"],
                 start_time=schedule_time,
-                duration_hours=duration_hours,
-                output_quantity=output_quantity,
-                output_unit=output_unit,
+                duration_hours=schedule_def["duration_hours"],
+                output_quantity=schedule_def["output_quantity"],
+                output_unit=schedule_def["output_unit"],
                 recipe_run_id=recipe_run_id,
                 step_index=step_idx,
-                process_def_override=resolved_process,
+                process_def_override=schedule_def["process_def_override"],
             )
 
-            if result['success']:
-                self.orchestrator.schedule_step(recipe_run_id, step_idx, result['process_run_id'])
+            if result["success"]:
+                self.orchestrator.schedule_step(recipe_run_id, step_idx, result["process_run_id"])
+                outcome["scheduled"] += 1
+                continue
+
+            if result.get("error") in {"machine_conflict", "insufficient_inputs"}:
+                outcome["blocked"] += 1
+                continue
+
+            outcome["fatal_error"] = result.get("message", "unknown step scheduling failure")
+            outcome["failed_step"] = step_idx
+            return outcome
+
+        return outcome
+
+    def _handle_recipe_schedule_outcome(
+        self,
+        recipe_run_id: str,
+        outcome: Dict[str, Any],
+        trigger_time: float,
+    ) -> None:
+        """Handle deferred retries and fatal errors after scheduling attempts."""
+        if outcome.get("fatal_error"):
+            self.orchestrator.cancel_recipe(recipe_run_id)
+            self._log_event(
+                ErrorEvent(
+                    error_type="recipe_step_scheduling_failed",
+                    message=str(outcome["fatal_error"]),
+                    details={
+                        "recipe_run_id": recipe_run_id,
+                        "failed_step": outcome.get("failed_step"),
+                    },
+                )
+            )
+            return
+
+        if outcome.get("blocked", 0) <= 0:
+            return
+
+        recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+        if not recipe_run or recipe_run.is_completed:
+            return
+
+        # If blocked steps remain and there is no active/scheduled step to trigger
+        # future dependency callbacks, explicitly queue a retry.
+        if recipe_run.active_steps or recipe_run.scheduled_steps:
+            return
+
+        self._queue_recipe_step_retry(
+            recipe_run_id=recipe_run_id,
+            retry_time=trigger_time + self.RECIPE_RETRY_DELAY_HOURS,
+            reason="blocked_step_retry",
+        )
+
+    def _ensure_recipe_retry_events(self) -> None:
+        """Queue retry events for active recipe runs that would otherwise stall."""
+        for recipe_run in self.orchestrator.get_active_recipe_runs():
+            if recipe_run.active_steps or recipe_run.scheduled_steps:
+                continue
+            self._queue_recipe_step_retry(
+                recipe_run_id=recipe_run.recipe_run_id,
+                retry_time=self.scheduler.current_time,
+                reason="recovery_orphan_active_recipe",
+            )
 
     def _init_reservation_manager(self) -> None:
         """Initialize reservation manager with current machine inventory."""
@@ -1164,113 +1303,24 @@ class SimulationEngine:
             )
         )
 
-        # Schedule ready steps
-        ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
+        outcome = self._attempt_schedule_ready_recipe_steps(
+            recipe_run_id=recipe_run_id,
+            schedule_time=start_time,
+        )
+        if outcome.get("fatal_error"):
+            self.orchestrator.cancel_recipe(recipe_run_id)
+            return {
+                "success": False,
+                "error": "step_scheduling_failed",
+                "message": f"Failed to schedule step {outcome.get('failed_step')}: {outcome.get('fatal_error')}",
+                "failed_step": outcome.get("failed_step"),
+            }
 
-        scheduled_count = 0
-        for step_idx in ready_steps:
-            recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
-            step = dict(recipe_def['steps'][step_idx])
-
-            # Resolve step to apply overrides (ADR-013)
-            resolved_process = self.resolve_step(step)
-
-            # Get process_id from resolved process
-            process_id = resolved_process.get('id') or step.get('process_id')
-            if not process_id:
-                return {
-                    "success": False,
-                    "error": "invalid_recipe",
-                    "message": f"Step {step_idx} missing process_id",
-                    "failed_step": step_idx,
-                }
-
-            # Calculate duration from resolved process (respects step overrides)
-            # Get default output quantity and unit from first output
-            outputs = resolved_process.get('outputs', [])
-            output_quantity = None
-            output_unit = None
-            duration_hours = None
-            scale = 1.0
-            step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
-
-            # Always try to calculate duration_hours from time_model
-            time_model = resolved_process.get('time_model', {})
-            if time_model.get('type') == 'batch':
-                duration_hours = time_model.get('hr_per_batch', 1.0)
-                step_scale = step.get("scale", 1.0)
-                if step_scale != 1.0:
-                    duration_hours *= step_scale
-            elif time_model.get('type') == 'linear_rate':
-                # Need outputs to calculate from rate
-                pass
-
-            if outputs:
-                first_output = outputs[0]
-                output_quantity = first_output.get('qty', first_output.get('quantity', 1.0))
-                output_unit = first_output.get('unit', 'kg')
-
-                if not step_has_io_override:
-                    base_process = self.kb.get_process(process_id)
-                    if base_process:
-                        base_def = base_process.model_dump() if hasattr(base_process, 'model_dump') else base_process
-                        base_outputs = base_def.get('outputs', [])
-                        if base_outputs:
-                            base_output = base_outputs[0]
-                            base_qty = base_output.get('qty', base_output.get('quantity', 1.0))
-                            if base_qty:
-                                scale = output_quantity / base_qty
-
-                # For linear_rate, calculate duration from outputs
-                if time_model.get('type') == 'linear_rate' and duration_hours is None:
-                    rate = time_model.get('rate', 1.0)
-                    scaling_basis = time_model.get('scaling_basis')
-                    if scaling_basis and scaling_basis in [o.get('item_id') for o in outputs]:
-                        # Find output with this basis
-                        for outp in outputs:
-                            if outp.get('item_id') == scaling_basis:
-                                outp_qty = outp.get('qty', outp.get('quantity', 1.0))
-                                duration_hours = outp_qty / rate if rate > 0 else 1.0
-                                break
-
-            # Fallback if duration still not set
-            if duration_hours is None:
-                duration_hours = 1.0
-
-            # Schedule step process with calculated duration
-            result = self.start_process(
-                process_id=process_id,
-                scale=scale,
-                start_time=start_time,
-                duration_hours=duration_hours,
-                output_quantity=output_quantity,
-                output_unit=output_unit,
-                recipe_run_id=recipe_run_id,
-                step_index=step_idx,
-                process_def_override=resolved_process,
-            )
-
-            if result['success']:
-                self.orchestrator.schedule_step(
-                    recipe_run_id,
-                    step_idx,
-                    result['process_run_id']
-                )
-                scheduled_count += 1
-            elif result.get('error') == 'machine_conflict':
-                # Machine conflict - don't fail recipe, just skip this step for now
-                # It will be retried later when machines become available
-                # Don't mark step as failed, leave it pending
-                continue
-            else:
-                # Other failure - cancel recipe
-                self.orchestrator.cancel_recipe(recipe_run_id)
-                return {
-                    "success": False,
-                    "error": "step_scheduling_failed",
-                    "message": f"Failed to schedule step {step_idx}: {result.get('message')}",
-                    "failed_step": step_idx,
-                }
+        self._handle_recipe_schedule_outcome(
+            recipe_run_id=recipe_run_id,
+            outcome=outcome,
+            trigger_time=start_time,
+        )
 
         return {
             "success": True,
@@ -1278,7 +1328,7 @@ class SimulationEngine:
             "recipe_id": recipe_id,
             "start_time": start_time,
             "total_steps": len(recipe_def['steps']),
-            "scheduled_steps": scheduled_count,
+            "scheduled_steps": outcome.get("scheduled", 0),
         }
     def build_machine(self, machine_id: str) -> Dict[str, Any]:
         """
@@ -1977,6 +2027,11 @@ class SimulationEngine:
             EventType.PROCESS_COMPLETE,
             self._schedule_dependent_recipe_steps
         )
+        self.scheduler.register_handler(
+            EventType.RECIPE_STEP_READY,
+            self._on_recipe_step_ready,
+        )
+        self._ensure_recipe_retry_events()
 
         return True
 

@@ -1240,3 +1240,78 @@ class TestAdr020Gaps:
             if e.event_type == EventType.MACHINE_RELEASE
         ]
         assert release_events
+
+    def test_recipe_step_retry_prevents_stuck_active_recipe(self, tmp_path, sim_dir):
+        """A blocked recipe step should not leave recipe active with an empty event queue."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "blocking_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "blocking_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "ingot", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 5.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "processes" / "recipe_proc.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_proc",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "ore", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "plate", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "furnace", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_single_step.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_single_step",
+                "target_item_id": "plate",
+                "variant_id": "v0",
+                "steps": [{"process_id": "recipe_proc", "dependencies": []}],
+            }, f)
+
+        with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
+            yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "ingot.yaml", "w") as f:
+            yaml.dump({"id": "ingot", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "plate.yaml", "w") as f:
+            yaml.dump({"id": "plate", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
+            yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+
+        kb_loader = KBLoader(kb, use_validated_models=False)
+        kb_loader.load_all()
+        engine = SimulationEngine("test_sim", kb_loader, sim_dir)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        block = engine.start_process(
+            process_id="blocking_proc",
+            scale=1.0,
+            duration_hours=5.0,
+        )
+        assert block["success"]
+
+        result = engine.run_recipe(recipe_id="recipe_single_step")
+        assert result["success"]
+        assert result["scheduled_steps"] == 0  # initially blocked by machine conflict
+
+        # Advance through the blocker duration.
+        engine.advance_time(5.0)
+        summary = engine.get_schedule_summary()
+
+        # Regression guard: recipe must not be left active with no future events.
+        assert not (summary["active_recipes"] > 0 and summary["queued_events"] == 0)
