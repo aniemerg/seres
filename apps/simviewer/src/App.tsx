@@ -873,7 +873,6 @@ export function App() {
           <GanttView
             simData={simData}
             entitiesById={entitiesById}
-            simQuery={simQuery}
             onSelectRun={(id) => setSelectedRunId(id)}
             zoom={zoom}
             onZoom={setZoom}
@@ -970,7 +969,6 @@ function HomeView({
 function GanttView({
   simData,
   entitiesById,
-  simQuery,
   onSelectRun,
   zoom,
   onZoom,
@@ -980,7 +978,6 @@ function GanttView({
 }: {
   simData: SimData
   entitiesById: Record<string, KBEntity>
-  simQuery: SimQueryData | null
   onSelectRun: (id: string) => void
   zoom: number
   onZoom: (z: number) => void
@@ -1031,32 +1028,6 @@ function GanttView({
   const leftRef = useRef<HTMLDivElement>(null)
   const totalHours = Math.max(simData.summary.time_hours, ...simData.process_runs.map((r) => r.end_time ?? 0))
   const widthPx = Math.max(1200, totalHours * zoom)
-  const seededMachineQtyById = useMemo(() => {
-    const out = new Map<string, number>()
-    const rows = simQuery?.tables?.['sim.machines.seeded']
-    if (!Array.isArray(rows)) return out
-    for (const row of rows) {
-      const id = typeof row.id === 'string' ? row.id : ''
-      const qty = typeof row.imported_quantity === 'number' ? row.imported_quantity : Number(row.imported_quantity ?? 0)
-      if (id && Number.isFinite(qty)) out.set(id, qty)
-    }
-    return out
-  }, [simQuery])
-  const usedLaneCountByMachine = useMemo(() => {
-    const out = new Map<string, number>()
-    for (const lane of lanes) out.set(lane.machine_type, (out.get(lane.machine_type) ?? 0) + 1)
-    return out
-  }, [lanes])
-  const machinePoolRows = useMemo(() => {
-    const ids = new Set<string>([...usedLaneCountByMachine.keys(), ...seededMachineQtyById.keys()])
-    const rows = Array.from(ids).map((id) => ({
-      id,
-      used: usedLaneCountByMachine.get(id) ?? 0,
-      imported: seededMachineQtyById.get(id) ?? null,
-    }))
-    rows.sort((a, b) => b.used - a.used || a.id.localeCompare(b.id))
-    return rows
-  }, [seededMachineQtyById, usedLaneCountByMachine])
   const processLabel = (run: ProcessRun) => {
     const name = entitiesById[run.process_id]?.name
     if (name && name !== run.process_id) return `${name} (${run.process_id})`
@@ -1080,13 +1051,6 @@ function GanttView({
           ))}
         </div>
         <span>Total: {totalHours.toFixed(1)} h</span>
-      </div>
-      <div className="gantt-pools">
-        {machinePoolRows.slice(0, 12).map((row) => (
-          <span key={row.id} className="pool-chip">
-            {row.id}: {row.used}/{row.imported ?? "?"}
-          </span>
-        ))}
       </div>
       <div className="gantt-wrap">
         <div className="gantt-left" ref={leftRef}>
