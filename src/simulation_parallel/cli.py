@@ -73,7 +73,25 @@ def cmd_sim2_run_to_completion(args) -> int:
     kb = _load_kb()
     session = load_session(args.sim_id, kb, create=False)
     runner = ConcurrentDESRunner(session)
-    result = runner.run_to_completion(max_no_progress=args.max_no_progress)
+
+    def _progress(update):
+        print(
+            "progress "
+            f"step={update.get('step')} "
+            f"time={update.get('time')} "
+            f"queued_events={update.get('queued_events')} "
+            f"active_processes={update.get('active_processes')} "
+            f"completed_processes={update.get('completed_processes')} "
+            f"deferred_intents={update.get('deferred_intents')} "
+            f"promoted={update.get('promoted')}",
+            flush=True,
+        )
+
+    result = runner.run_to_completion_with_progress(
+        max_no_progress=args.max_no_progress,
+        progress_callback=_progress,
+        progress_every_steps=args.progress_every_steps,
+    )
     session.save()
     print(f"status={result.get('status')} steps={result.get('steps')}")
     summary = result.get("summary", {})
@@ -87,6 +105,17 @@ def cmd_sim2_run_to_completion(args) -> int:
         )
     if result.get("blocked_intents"):
         print(f"blocked_intents={len(result['blocked_intents'])}")
+    blocked_recipes = result.get("blocked_recipes") or []
+    if blocked_recipes:
+        print(f"blocked_recipes={len(blocked_recipes)}")
+        for row in blocked_recipes[:5]:
+            issues = row.get("issues") or []
+            first_issue = issues[0] if issues else "no_issue_details"
+            print(
+                f"  recipe_id={row.get('recipe_id')} run_id={row.get('recipe_run_id')} "
+                f"ready_steps={row.get('ready_steps')} issue={first_issue}",
+                flush=True,
+            )
     return 0 if result.get("status") == "completed" else 2
 
 
@@ -155,6 +184,7 @@ def add_sim2_subcommands(subparsers):
     p_run = sim2_sub.add_parser("run-to-completion", help="Advance sim2 until completion or blocked")
     p_run.add_argument("--sim-id", required=True)
     p_run.add_argument("--max-no-progress", type=int, default=1000)
+    p_run.add_argument("--progress-every-steps", type=int, default=1000)
 
     p_status = sim2_sub.add_parser("status", help="Show sim2 status")
     p_status.add_argument("--sim-id", required=True)
