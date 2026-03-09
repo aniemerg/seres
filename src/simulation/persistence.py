@@ -78,6 +78,7 @@ class ReservationSnapshot(BaseModel):
     end_time: float
     qty_reserved: float
     hr_reserved: Optional[float] = None
+    machine_instance_id: Optional[str] = None
 
 
 class ReservationManagerSnapshot(BaseModel):
@@ -191,6 +192,7 @@ def build_snapshot(engine) -> SimulationSnapshot:
                     end_time=res.end_time,
                     qty_reserved=res.qty_reserved,
                     hr_reserved=res.hr_reserved,
+                    machine_instance_id=res.machine_instance_id,
                 )
             )
         reservation_snapshot = ReservationManagerSnapshot(
@@ -275,6 +277,7 @@ def restore_reservation_manager(
             end_time=res.end_time,
             qty_reserved=res.qty_reserved,
             hr_reserved=res.hr_reserved,
+            machine_instance_id=res.machine_instance_id,
         )
         manager.reservations.append(reservation)
     return manager

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import logging
+import math
 import os
 import sys
 import uuid
@@ -80,6 +81,7 @@ class SimulationEngine:
     """
 
     RECIPE_RETRY_DELAY_HOURS = 1.0
+    RECIPE_CONTINUOUS_CHUNK_MAX_HOURS = 100.0
 
     def __init__(self, sim_id: str, kb_loader: KBLoader, sim_dir: Optional[Path] = None):
         self.sim_id = sim_id
@@ -114,6 +116,10 @@ class SimulationEngine:
         self._recipe_outputs_accum: Dict[str, Dict[str, InventoryItem]] = {}
         self._recipe_energy_accum: Dict[str, float] = {}
         self._logged_recipe_completions: set[str] = set()
+        self._resolved_step_schedule_cache: Dict[tuple[str, int], Dict[str, Any]] = {}
+        # Snapshot cadence: 0 means emit on every state-changing call.
+        self.state_snapshot_interval_hours: float = 0.0
+        self._last_state_snapshot_time: Optional[float] = None
         # Reservation manager will be initialized when machines are available
         self.reservation_manager = None
         # Enable ADR-020 mode (event-driven scheduling, machine reservations, recipe orchestration)
@@ -399,10 +405,16 @@ class SimulationEngine:
 
     def _resolve_recipe_step_schedule(
         self,
+        recipe_run_id: str,
         recipe_def: Dict[str, Any],
         step_idx: int,
     ) -> Optional[Dict[str, Any]]:
         """Resolve a step into process scheduling parameters."""
+        cache_key = (recipe_run_id, step_idx)
+        cached = self._resolved_step_schedule_cache.get(cache_key)
+        if cached is not None:
+            return dict(cached)
+
         if step_idx >= len(recipe_def.get("steps", [])):
             return None
 
@@ -417,6 +429,7 @@ class SimulationEngine:
         output_quantity = None
         output_unit = None
         step_has_io_override = bool(step.get("inputs") or step.get("outputs") or step.get("byproducts"))
+        step_has_explicit_scale = "scale" in step
 
         time_model = resolved_process.get("time_model", {})
         if time_model.get("type") == "batch":
@@ -431,7 +444,7 @@ class SimulationEngine:
             output_quantity = first_output.get("qty", first_output.get("quantity", 1.0))
             output_unit = first_output.get("unit", "kg")
 
-            if not step_has_io_override:
+            if not step_has_io_override and not step_has_explicit_scale:
                 base_process = self.kb.get_process(process_id)
                 if base_process:
                     base_def = base_process.model_dump() if hasattr(base_process, "model_dump") else base_process
@@ -455,7 +468,7 @@ class SimulationEngine:
         if duration_hours is None:
             duration_hours = 1.0
 
-        return {
+        schedule = {
             "step_idx": step_idx,
             "process_id": process_id,
             "scale": scale,
@@ -464,6 +477,206 @@ class SimulationEngine:
             "output_unit": output_unit,
             "process_def_override": resolved_process,
         }
+        self._resolved_step_schedule_cache[cache_key] = dict(schedule)
+        return schedule
+
+    def _estimate_step_duration_hours(self, step_def: Dict[str, Any]) -> Optional[float]:
+        """Estimate duration for a resolved recipe step."""
+        resolved = self.resolve_step(step_def)
+        time_model = resolved.get("time_model", {}) or {}
+
+        if time_model.get("type") == "linear_rate":
+            rate = float(time_model.get("rate", 0.0) or 0.0)
+            if rate <= 0:
+                return None
+
+            outputs = resolved.get("outputs", []) or []
+            if not outputs:
+                return None
+
+            scaling_basis = time_model.get("scaling_basis")
+            basis_output = None
+            if scaling_basis:
+                for outp in outputs:
+                    if outp.get("item_id") == scaling_basis:
+                        basis_output = outp
+                        break
+            if basis_output is None:
+                basis_output = outputs[0]
+
+            qty = float(basis_output.get("qty", basis_output.get("quantity", 0.0)) or 0.0)
+            if qty <= 0:
+                return None
+            return qty / rate
+
+        if time_model.get("type") == "batch":
+            hr_per_batch = float(time_model.get("hr_per_batch", 0.0) or 0.0)
+            if hr_per_batch <= 0:
+                return None
+            step_scale = float(step_def.get("scale", 1.0) or 1.0)
+            return hr_per_batch * step_scale
+
+        return None
+
+    def _step_would_fractionalize_discrete_outputs(
+        self,
+        step_def: Dict[str, Any],
+        chunks: int,
+    ) -> bool:
+        """Return True if splitting would create fractional discrete outputs."""
+        if chunks <= 1:
+            return False
+
+        resolved = self.resolve_step(step_def)
+        outputs = resolved.get("outputs", []) or []
+        if not outputs:
+            return False
+
+        step_scale = float(step_def.get("scale", 1.0) or 1.0)
+        for outp in outputs:
+            item_id = outp.get("item_id")
+            unit = str(outp.get("unit", "kg"))
+            qty = float(outp.get("qty", outp.get("quantity", 0.0)) or 0.0)
+            if qty <= 0:
+                continue
+
+            item_model = self.kb.get_item(item_id) if item_id else None
+            item_def = item_model.model_dump() if hasattr(item_model, "model_dump") else (item_model or {})
+            is_discrete = unit in COUNT_UNITS or item_def.get("unit_kind") == "discrete"
+            if not is_discrete:
+                continue
+
+            total_qty = qty * step_scale
+            per_chunk = total_qty / float(chunks)
+            if abs(per_chunk - round(per_chunk)) > 1e-9:
+                return True
+
+        return False
+
+    def _estimate_step_parallel_slots(self, step_def: Dict[str, Any]) -> int:
+        """
+        Estimate safe parallel slots for a step from currently available machine capacity.
+
+        Returns a conservative lower bound (>=1).
+        """
+        resolved = self.resolve_step(step_def)
+        requirements = resolved.get("resource_requirements", []) or []
+        if not requirements:
+            return 1
+
+        slots: Optional[int] = None
+        for req in requirements:
+            if not isinstance(req, dict):
+                continue
+            machine_id = req.get("machine_id")
+            if not machine_id:
+                continue
+            qty = float(req.get("qty", req.get("quantity", 1.0)) or 1.0)
+            if qty <= 0:
+                continue
+            unit = str(req.get("unit", "count"))
+            if unit not in COUNT_UNITS:
+                continue
+
+            capacity = self._get_machine_available_count(machine_id)
+            machine_slots = int(capacity // qty)
+            if slots is None:
+                slots = machine_slots
+            else:
+                slots = min(slots, machine_slots)
+
+        if slots is None:
+            return 1
+        return max(1, slots)
+
+    def _chunk_recipe_steps_for_long_continuous_runs(self, recipe_def: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Split long linear-rate/batch steps into dependency-chained chunks.
+
+        This keeps each reservation duration bounded while preserving total work
+        and dependency ordering. For discrete outputs, avoid chunking that would
+        create fractional unit/count outputs.
+        """
+        max_chunk_hours = float(self.RECIPE_CONTINUOUS_CHUNK_MAX_HOURS or 0.0)
+        if max_chunk_hours <= 0:
+            return recipe_def
+
+        original_steps = list(recipe_def.get("steps", []) or [])
+        if not original_steps:
+            return recipe_def
+
+        chunk_counts: List[int] = []
+        chunk_widths: List[int] = []
+        for step in original_steps:
+            duration = self._estimate_step_duration_hours(step)
+            if duration is None or duration <= max_chunk_hours + 1e-9:
+                chunk_counts.append(1)
+                chunk_widths.append(1)
+                continue
+
+            count = max(1, int(math.ceil(duration / max_chunk_hours)))
+            if self._step_would_fractionalize_discrete_outputs(step, count):
+                chunk_counts.append(1)
+                chunk_widths.append(1)
+                continue
+
+            width = min(count, self._estimate_step_parallel_slots(step))
+            chunk_counts.append(count)
+            chunk_widths.append(max(1, width))
+
+        if all(count == 1 for count in chunk_counts):
+            return recipe_def
+
+        explicit_dependencies: List[List[int]] = []
+        for idx, step in enumerate(original_steps):
+            deps = step.get("dependencies")
+            if isinstance(deps, list):
+                explicit_dependencies.append([int(d) for d in deps])
+            elif idx > 0:
+                explicit_dependencies.append([idx - 1])
+            else:
+                explicit_dependencies.append([])
+
+        expanded_steps: List[Dict[str, Any]] = []
+        old_to_new_indices: Dict[int, List[int]] = {}
+
+        for old_idx, step in enumerate(original_steps):
+            count = chunk_counts[old_idx]
+            width = chunk_widths[old_idx]
+            original_scale = float(step.get("scale", 1.0) or 1.0)
+            created_indices: List[int] = []
+
+            for chunk_idx in range(count):
+                chunk_step = deepcopy(step)
+                if count > 1:
+                    chunk_step["scale"] = original_scale / float(count)
+
+                if chunk_idx == 0:
+                    mapped_deps = []
+                    for dep in explicit_dependencies[old_idx]:
+                        mapped = old_to_new_indices.get(dep)
+                        if mapped:
+                            mapped_deps.append(mapped[-1])
+                    chunk_step["dependencies"] = mapped_deps
+                else:
+                    deps = []
+                    for dep in explicit_dependencies[old_idx]:
+                        mapped = old_to_new_indices.get(dep)
+                        if mapped:
+                            deps.append(mapped[-1])
+                    if width <= 1:
+                        deps.append(created_indices[-1])
+                    elif chunk_idx >= width:
+                        deps.append(created_indices[chunk_idx - width])
+                    chunk_step["dependencies"] = deps
+
+                expanded_steps.append(chunk_step)
+                created_indices.append(len(expanded_steps) - 1)
+
+            old_to_new_indices[old_idx] = created_indices
+
+        recipe_def["steps"] = expanded_steps
+        return recipe_def
 
     def _attempt_schedule_ready_recipe_steps(
         self,
@@ -484,7 +697,7 @@ class SimulationEngine:
         outcome = {"scheduled": 0, "blocked": 0, "fatal_error": None, "failed_step": None}
 
         for step_idx in ready_steps:
-            schedule_def = self._resolve_recipe_step_schedule(recipe_def, step_idx)
+            schedule_def = self._resolve_recipe_step_schedule(recipe_run_id, recipe_def, step_idx)
             if not schedule_def:
                 continue
 
@@ -604,7 +817,7 @@ class SimulationEngine:
                         if converted is not None:
                             machine_capacities[item_id] = converted
 
-        self.reservation_manager.machine_capacities = machine_capacities
+        self.reservation_manager.update_machine_capacities(machine_capacities)
 
     # ========================================================================
     # State queries
@@ -1092,6 +1305,8 @@ class SimulationEngine:
                     qty=qty,
                 )
 
+        machine_instance_assignments = self.reservation_manager.get_assigned_instances_for_process(process_run_id)
+
         # Convert InventoryItem objects to simple dicts for scheduler
         inputs_dict = {
             item_id: inv_item.quantity
@@ -1177,6 +1392,7 @@ class SimulationEngine:
                 "end_time": reservation_end,
                 "qty": qty,
                 "unit": unit,
+                "machine_instance_ids": machine_instance_assignments.get(machine_id, []),
                 "reservation_type": reservation_type,
                 "release_time": release_time,
             })
@@ -1215,6 +1431,7 @@ class SimulationEngine:
             "inputs_consumed": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in inputs_consumed.items()},
             "outputs_pending": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in outputs_pending.items()},
             "machines_reserved": machines_reserved,
+            "machine_instance_assignments": machine_instance_assignments,
         }
 
     def resolve_step(self, step_def: Dict[str, Any]) -> Dict[str, Any]:
@@ -1267,6 +1484,7 @@ class SimulationEngine:
         if quantity != 1:
             for step in recipe_def.get("steps", []):
                 step["scale"] = step.get("scale", 1.0) * quantity
+        recipe_def = self._chunk_recipe_steps_for_long_continuous_runs(recipe_def)
 
         # ADR-020 validation
         validation_issues = validate_recipe_adr020(recipe_def)
@@ -1398,17 +1616,7 @@ class SimulationEngine:
             )
         )
 
-        self._log_event(
-            StateSnapshotEvent(
-                time_hours=self.state.current_time_hours,
-                inventory=self.state.inventory,
-                active_processes=self.state.active_processes,
-                machines_built=self.state.machines_built,
-                machines_in_use=self.state.machines_in_use,
-                total_imports=self.state.total_imports,
-                total_energy_kwh=self.state.total_energy_kwh,
-            )
-        )
+        self._log_state_snapshot(time_hours=self.state.current_time_hours)
 
         return {
             "success": True,
@@ -1582,17 +1790,7 @@ class SimulationEngine:
         )
 
         # Create state snapshot so import persists
-        self._log_event(
-            StateSnapshotEvent(
-                time_hours=self.state.current_time_hours,
-                inventory=self.state.inventory,
-                active_processes=self.state.active_processes,
-                machines_built=self.state.machines_built,
-                machines_in_use=self.state.machines_in_use,
-                total_imports=self.state.total_imports,
-                total_energy_kwh=self.state.total_energy_kwh,
-            )
-        )
+        self._log_state_snapshot(time_hours=self.state.current_time_hours)
 
         return {
             "success": True,
@@ -1910,17 +2108,7 @@ class SimulationEngine:
         self.state.current_time_hours = target_time
 
         # Log state snapshot
-        self._log_event(
-            StateSnapshotEvent(
-                time_hours=target_time,
-                inventory=self.state.inventory,
-                active_processes=self.state.active_processes,
-                machines_built=self.state.machines_built,
-                machines_in_use=self.state.machines_in_use,
-                total_imports=self.state.total_imports,
-                total_energy_kwh=self.state.total_energy_kwh,
-            )
-        )
+        self._log_state_snapshot(time_hours=target_time)
 
         return {
             "new_time": target_time,
@@ -1935,6 +2123,27 @@ class SimulationEngine:
     def _log_event(self, event: Any) -> None:
         """Add event to buffer."""
         self.event_buffer.append(event)
+
+    def _log_state_snapshot(self, *, time_hours: float, force: bool = False) -> None:
+        """Emit state snapshot event with optional cadence throttling."""
+        interval = float(self.state_snapshot_interval_hours or 0.0)
+        if not force and interval > 0:
+            if self._last_state_snapshot_time is not None:
+                if (time_hours - self._last_state_snapshot_time) < interval:
+                    return
+
+        self._log_event(
+            StateSnapshotEvent(
+                time_hours=time_hours,
+                inventory=self.state.inventory,
+                active_processes=self.state.active_processes,
+                machines_built=self.state.machines_built,
+                machines_in_use=self.state.machines_in_use,
+                total_imports=self.state.total_imports,
+                total_energy_kwh=self.state.total_energy_kwh,
+            )
+        )
+        self._last_state_snapshot_time = time_hours
 
     def log_annotation(
         self,
@@ -2032,6 +2241,7 @@ class SimulationEngine:
             self._on_recipe_step_ready,
         )
         self._ensure_recipe_retry_events()
+        self._last_state_snapshot_time = self.state.current_time_hours
 
         return True
 

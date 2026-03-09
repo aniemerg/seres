@@ -6,6 +6,7 @@ import type {
   InventoryDelta,
   KBEntitiesPayload,
   KBEntity,
+  MachineAssignment,
   ProcessRun,
   QuantityMap,
   SimQueryData,
@@ -985,16 +986,44 @@ function GanttView({
   onOpenKB: (id: string) => void
 }) {
   const lanes = simData.machine_lanes
-  const laneRuns = useMemo(() => {
-    const m = new Map<string, ProcessRun[]>()
-    for (const lane of lanes) m.set(lane.lane_id, [])
+  const runsById = useMemo(() => {
+    const m = new Map<string, ProcessRun>()
+    for (const run of simData.process_runs) m.set(run.process_run_id, run)
+    return m
+  }, [simData.process_runs])
+  const machineAssignments = useMemo<MachineAssignment[]>(() => {
+    if (simData.machine_assignments && simData.machine_assignments.length > 0) {
+      return simData.machine_assignments
+    }
+    const fallback: MachineAssignment[] = []
     for (const run of simData.process_runs) {
-      if (!run.lane_id) continue
-      const arr = m.get(run.lane_id)
-      if (arr) arr.push(run)
+      if (!run.lane_id || !run.machine_type) continue
+      fallback.push({
+        assignment_id: `${run.process_run_id}:${run.machine_type}:0`,
+        process_run_id: run.process_run_id,
+        machine_id: run.machine_type,
+        machine_instance_id: null,
+        start_time: run.start_time,
+        end_time: run.end_time,
+        duration_hours: run.duration_hours,
+        lane_id: run.lane_id,
+        lane_index: null,
+      })
+    }
+    return fallback
+  }, [simData.machine_assignments, simData.process_runs])
+  const laneRuns = useMemo(() => {
+    const m = new Map<string, Array<{ run: ProcessRun; assignment: MachineAssignment }>>()
+    for (const lane of lanes) m.set(lane.lane_id, [])
+    for (const assignment of machineAssignments) {
+      if (!assignment.lane_id) continue
+      const run = runsById.get(assignment.process_run_id)
+      if (!run) continue
+      const arr = m.get(assignment.lane_id)
+      if (arr) arr.push({ run, assignment })
     }
     return m
-  }, [simData, lanes])
+  }, [lanes, machineAssignments, runsById])
 
   const leftRef = useRef<HTMLDivElement>(null)
   const totalHours = Math.max(simData.summary.time_hours, ...simData.process_runs.map((r) => r.end_time ?? 0))
@@ -1010,7 +1039,7 @@ function GanttView({
       <div className="gantt-toolbar">
         <label>
           Zoom
-          <input type="range" min="0.005" max="0.2" step="0.005" value={zoom} onChange={(e) => onZoom(Number(e.target.value))} />
+          <input type="range" min="0.005" max="0.5" step="0.005" value={zoom} onChange={(e) => onZoom(Number(e.target.value))} />
           <span>{zoom.toFixed(3)} px/hr</span>
         </label>
         <div className="color-toggle">
@@ -1026,11 +1055,9 @@ function GanttView({
       <div className="gantt-wrap">
         <div className="gantt-left" ref={leftRef}>
           {lanes.map((lane) => {
-            const cat = entitiesById[lane.machine_type]?.category || 'Uncategorized'
             return (
               <div key={lane.lane_id} className="lane-label" style={{ height: ROW_HEIGHT }}>
                 <button className="lane-link" onClick={() => onOpenKB(lane.machine_type)}>{lane.lane_id}</button>
-                <span className="lane-cat">{cat}</span>
               </div>
             )
           })}
@@ -1041,14 +1068,14 @@ function GanttView({
               const runs = laneRuns.get(lane.lane_id) ?? []
               return (
                 <div key={lane.lane_id} className="lane-row" style={{ top: row * ROW_HEIGHT, height: ROW_HEIGHT }}>
-                  {runs.map((run) => {
-                    const start = run.start_time ?? 0
-                    const dur = run.duration_hours ?? ((run.end_time ?? start) - start)
+                  {runs.map(({ run, assignment }) => {
+                    const start = assignment.start_time ?? run.start_time ?? 0
+                    const dur = assignment.duration_hours ?? run.duration_hours ?? ((assignment.end_time ?? run.end_time ?? start) - start)
                     const left = start * zoom
                     const width = Math.max(BAR_MIN_PX, dur * zoom)
                     return (
                       <button
-                        key={run.process_run_id}
+                        key={assignment.assignment_id}
                         className={`bar ${run.status}`}
                         style={{
                           left,
@@ -1057,7 +1084,7 @@ function GanttView({
                           color: run.status === 'failed' ? '#fff' : '#0c1220',
                           border: run.status === 'failed' ? '1px solid #ffb3b3' : '1px solid rgba(0,0,0,0.15)',
                         }}
-                        title={`${processLabel(run)} (${run.status})`}
+                        title={`${processLabel(run)} on ${assignment.machine_id} (${run.status})`}
                         onClick={() => onSelectRun(run.process_run_id)}
                       >
                         {zoom > 0.03 ? processLabel(run) : ''}
@@ -1518,6 +1545,18 @@ function Drawer({
         {hasDistinctName && <p><strong>Process ID:</strong> {run.process_id}</p>}
         <p><strong>Status:</strong> {run.status}</p>
         <p><strong>Machine:</strong> {run.machine_type ?? 'n/a'}</p>
+        {run.reserved_machines && run.reserved_machines.length > 0 && (
+          <>
+            <p><strong>Reserved Machines:</strong></p>
+            <ul>
+              {run.reserved_machines.map((m, idx) => (
+                <li key={`${m.machine_id}:${idx}`}>
+                  {m.machine_id}: {m.qty} {m.unit}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
         <p><strong>Recipe:</strong> {run.recipe_id ?? 'unknown'}</p>
         <p><strong>Time:</strong> {(run.start_time ?? 0).toFixed(2)}h → {(run.end_time ?? 0).toFixed(2)}h</p>
         <p><strong>Duration:</strong> {(run.duration_hours ?? 0).toFixed(2)}h</p>

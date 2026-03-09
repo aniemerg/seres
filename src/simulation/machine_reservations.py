@@ -45,6 +45,7 @@ class Reservation:
     # For partial reservations
     hr_reserved: Optional[float] = None  # Hours reserved (for partial only)
     release_time: Optional[float] = None  # When partial reservation releases
+    machine_instance_id: Optional[str] = None  # Concrete machine copy assigned
 
     def __post_init__(self):
         """Compute release time for partial reservations."""
@@ -141,9 +142,78 @@ class MachineReservationManager:
         Args:
             machine_capacities: Dict of machine_id -> total capacity (count)
         """
-        self.machine_capacities = machine_capacities.copy()
+        self.machine_capacities: Dict[str, float] = {}
+        self.machine_instances: Dict[str, List[str]] = {}
         self.reservations: List[Reservation] = []
         self.current_time: float = 0.0
+        self.update_machine_capacities(machine_capacities)
+
+    @staticmethod
+    def _capacity_to_instance_count(capacity: float) -> int:
+        """Convert capacity to concrete machine instance count."""
+        if capacity <= 0:
+            return 0
+        rounded = round(capacity)
+        if abs(capacity - rounded) < 1e-9:
+            return int(rounded)
+        return int(capacity)
+
+    def _build_default_instance_ids(self, machine_id: str, count: int) -> List[str]:
+        return [f"{machine_id}#{idx}" for idx in range(1, count + 1)]
+
+    def update_machine_capacities(self, machine_capacities: Dict[str, float]) -> None:
+        """
+        Update machine capacities and keep a deterministic instance pool.
+
+        Existing reserved instance IDs are preserved even if capacity decreases,
+        so active reservations remain consistent.
+        """
+        self.machine_capacities = machine_capacities.copy()
+        next_instances: Dict[str, List[str]] = {}
+
+        reserved_by_machine: Dict[str, Set[str]] = {}
+        for res in self.reservations:
+            if not res.machine_instance_id:
+                continue
+            reserved_by_machine.setdefault(res.machine_id, set()).add(res.machine_instance_id)
+
+        for machine_id, capacity in self.machine_capacities.items():
+            target_count = self._capacity_to_instance_count(capacity)
+            ids = self._build_default_instance_ids(machine_id, target_count)
+            for reserved_id in sorted(reserved_by_machine.get(machine_id, set())):
+                if reserved_id not in ids:
+                    ids.append(reserved_id)
+            next_instances[machine_id] = ids
+
+        self.machine_instances = next_instances
+
+    def _find_available_instance_ids(
+        self,
+        machine_id: str,
+        start_time: float,
+        release_time: float,
+        qty: int,
+    ) -> Optional[List[str]]:
+        if qty <= 0:
+            return []
+        pool = self.machine_instances.get(machine_id, [])
+        if len(pool) < qty:
+            return None
+
+        occupied: Set[str] = set()
+        for existing in self.reservations:
+            if existing.machine_id != machine_id:
+                continue
+            if existing.machine_instance_id is None:
+                continue
+            overlaps = not (existing.release_time <= start_time or release_time <= existing.start_time)
+            if overlaps:
+                occupied.add(existing.machine_instance_id)
+
+        available = [instance_id for instance_id in pool if instance_id not in occupied]
+        if len(available) < qty:
+            return None
+        return available[:qty]
 
     def add_reservation(
         self,
@@ -189,7 +259,7 @@ class MachineReservationManager:
         else:
             raise ValueError(f"Invalid reservation unit: {unit}")
 
-        # Create reservation
+        # Create template reservation
         reservation = Reservation(
             machine_id=machine_id,
             process_run_id=process_run_id,
@@ -200,13 +270,53 @@ class MachineReservationManager:
             hr_reserved=hr_res,
         )
 
-        # Check for conflicts
+        if res_type == ReservationType.FULL_DURATION:
+            needed_instances = self._capacity_to_instance_count(reservation.qty_reserved)
+            if abs(reservation.qty_reserved - needed_instances) > 1e-9:
+                raise ValueError(
+                    f"Reservation qty for unit '{unit}' must be whole count; got {reservation.qty_reserved}"
+                )
+        else:
+            needed_instances = 1
+
+        instance_ids = self._find_available_instance_ids(
+            machine_id=machine_id,
+            start_time=reservation.start_time,
+            release_time=reservation.release_time,
+            qty=needed_instances,
+        )
+        if instance_ids is None:
+            return False
+
+        # Preserve aggregate conflict checks as an extra invariant guard.
         if not self._can_reserve(reservation):
             return False
 
-        # Add reservation
-        self.reservations.append(reservation)
+        for instance_id in instance_ids:
+            self.reservations.append(
+                Reservation(
+                    machine_id=machine_id,
+                    process_run_id=process_run_id,
+                    reservation_type=res_type,
+                    start_time=start_time,
+                    end_time=end_time,
+                    qty_reserved=1.0,
+                    hr_reserved=hr_res,
+                    machine_instance_id=instance_id,
+                )
+            )
         return True
+
+    def get_assigned_instances_for_process(self, process_run_id: str) -> Dict[str, List[str]]:
+        """Return concrete machine instance IDs reserved for a process."""
+        assignments: Dict[str, List[str]] = {}
+        for res in self.reservations:
+            if res.process_run_id != process_run_id or not res.machine_instance_id:
+                continue
+            assignments.setdefault(res.machine_id, []).append(res.machine_instance_id)
+        for machine_id in assignments:
+            assignments[machine_id] = sorted(assignments[machine_id])
+        return assignments
 
     def _can_reserve(self, new_reservation: Reservation) -> bool:
         """

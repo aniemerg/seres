@@ -477,3 +477,61 @@ class TestReservationManager:
         expired = manager.advance_time(11.0)
         assert len(expired) == 1
         assert expired[0].process_run_id == 'proc_2'
+
+    def test_assigns_concrete_machine_instances(self):
+        """Reservations should bind to concrete machine instances."""
+        manager = MachineReservationManager({'labor_bot_general_v0': 3.0})
+
+        success = manager.add_reservation(
+            machine_id='labor_bot_general_v0',
+            process_run_id='proc_1',
+            start_time=0.0,
+            end_time=5.0,
+            qty=2.0,
+            unit='count',
+        )
+
+        assert success
+        process_reservations = manager.get_reservations_for_process('proc_1')
+        assert len(process_reservations) == 2
+        instance_ids = {res.machine_instance_id for res in process_reservations}
+        assert instance_ids == {'labor_bot_general_v0#1', 'labor_bot_general_v0#2'}
+
+        assigned = manager.get_assigned_instances_for_process('proc_1')
+        assert assigned == {'labor_bot_general_v0': ['labor_bot_general_v0#1', 'labor_bot_general_v0#2']}
+
+    def test_overlapping_reservation_fails_without_partial_allocation(self):
+        """A conflicting reservation should fail and not allocate any instance for that process."""
+        manager = MachineReservationManager({'labor_bot_general_v0': 2.0})
+
+        assert manager.add_reservation(
+            machine_id='labor_bot_general_v0',
+            process_run_id='proc_1',
+            start_time=0.0,
+            end_time=10.0,
+            qty=2.0,
+            unit='count',
+        )
+
+        assert not manager.add_reservation(
+            machine_id='labor_bot_general_v0',
+            process_run_id='proc_2',
+            start_time=1.0,
+            end_time=9.0,
+            qty=1.0,
+            unit='count',
+        )
+
+        assert manager.get_reservations_for_process('proc_2') == []
+
+    def test_capacity_update_adds_new_instance_ids(self):
+        """Increasing machine capacity should extend concrete pool IDs."""
+        manager = MachineReservationManager({'labor_bot_general_v0': 1.0})
+        assert manager.machine_instances['labor_bot_general_v0'] == ['labor_bot_general_v0#1']
+
+        manager.update_machine_capacities({'labor_bot_general_v0': 3.0})
+        assert manager.machine_instances['labor_bot_general_v0'] == [
+            'labor_bot_general_v0#1',
+            'labor_bot_general_v0#2',
+            'labor_bot_general_v0#3',
+        ]

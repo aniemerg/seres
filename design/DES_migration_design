@@ -1,0 +1,280 @@
+# SERES Simulator: DES Migration Design
+*Architecture document for coding agent handoff*
+
+---
+
+## 1. Problem Statement
+
+The current SERES simulator achieves correct sequential simulation but systematically underutilizes machines. Visualization of simulation runs shows only one machine working at a time. The root cause is the scenario runner pattern: submit a recipe, advance until idle, submit next recipe. This serializes work that should overlap, defeating the purpose of modeling a factory with many concurrent machines.
+
+The goal of this migration is to enable genuine concurrency: multiple machines run simultaneously, the simulator clock advances through real event times, and idle gaps between phases are eliminated. This is achieved by replacing the advance-until-idle pattern with parallel submission and a proper event-driven scheduler, while keeping the existing engine internals and KB schema intact.
+
+---
+
+## 2. What Changes and What Does Not
+
+### 2.1 Do Not Touch
+
+- KB schema (YAML): items, processes, recipes, BOMs — unchanged
+- `engine.py` internals: `start_process`, `run_recipe`, `_schedule_dependent_recipe_steps`, `_attempt_schedule_ready_recipe_steps`
+- `machine_reservations.py`: `MachineReservationManager`, `Reservation`, `MachineAvailability`
+- `scheduler.py` event queue mechanics: `schedule_process_start`, `advance_to`, `_process_event`
+- All existing runbook and SimPlan runner files — they continue to work as before
+- CLI commands — preserved; compatibility is nice-to-have, not required
+
+### 2.2 New Code to Write
+
+- **`ParallelSimPlanRunner`**: a new scenario runner that submits all work upfront then advances once
+- **`EventDrivenScheduler` wrapper** (thin): exposes `advance_to_completion()` and `next_event_time()`
+- **`OptimizationLoop`**: Optuna-based outer loop that treats the sim as a black-box objective function (Phase 3)
+- **`MachineUtilizationReport`**: post-run analytics that reads the event log and computes per-machine utilization timeline
+
+---
+
+## 3. Core Architectural Concepts
+
+### 3.1 The Two Queues
+
+There are two distinct queue structures. Understanding both is essential.
+
+| Queue | Purpose |
+|---|---|
+| **Global event queue** | Priority queue sorted by simulated time. Contains scheduled events with known timestamps: `process_start`, `process_end`, `recipe_step_ready`. This drives the simulation clock forward. Already exists in `scheduler.py`. |
+| **Per-machine wait queue** | List of processes that want a machine but cannot have it yet due to capacity conflict. When a machine completes a process, it checks its wait queue and promotes the next waiter into the global event queue. This is the key missing piece. |
+
+The global queue contains things that **will** happen at a known time. The per-machine queue contains things that **want** to happen but are blocked. A process moves from per-machine queue to global queue the moment its required machine becomes free.
+
+### 3.2 How Simulated Time Works
+
+Time is never incremented by a fixed step. The simulation clock jumps directly from one event time to the next. Between events, no computation occurs. This means:
+
+- **Exact timestamps**: every process start and end is recorded to floating-point precision
+- **No approximation**: a process ending at `t=24.0` makes its machine available at exactly `t=24.0`
+- **Concurrency is implicit**: multiple machines running simultaneously are just multiple future events sitting in the global queue at different times
+
+Example — three machines running concurrently appear in the global queue as:
+
+```
+t=24.0  process_end(roll_sheet,   machine=rolling_mill)
+t=36.0  process_end(press_plate,  machine=hydraulic_press)
+t=48.0  process_end(smelt_al,     machine=smelter)
+```
+
+The sim pops `t=24`, handles it, pops `t=36`, handles it, etc. It never thinks about them simultaneously. Concurrency is a property of the event queue, not of parallel execution threads.
+
+### 3.3 The `advance_until_idle` Anti-Pattern
+
+The current `SimPlanRunner` does:
+
+```python
+for recipe in plan:
+    engine.run_recipe(recipe)   # submit one recipe
+    advance_until_idle()        # wait for ALL machines to go idle
+                                # then submit next recipe
+```
+
+This guarantees machines are idle between phases. The new pattern is:
+
+```python
+for recipe in plan:
+    engine.run_recipe(recipe)   # submit all recipes upfront
+                                # engine queues if machines are busy
+advance_to_completion()         # one advance at the end
+```
+
+The engine's existing dependency machinery (recipe DAG, `RECIPE_STEP_READY` events) handles ordering within and between recipes. The scenario runner steps back and lets the engine do its job.
+
+---
+
+## 4. Implementation Plan
+
+### Phase 1: Parallel Submission (Priority 1)
+
+Write `ParallelSimPlanRunner` in `src/sim/parallel_runner.py`. This is the highest priority change and is self-contained.
+
+#### 4.1.1 Interface
+
+```python
+class ParallelSimPlanRunner:
+    def __init__(self, engine, scheduler):
+        ...
+
+    def execute_plan(self, plan: SimPlan) -> SimPlanResult:
+        # 1. Submit all recipes/imports without advancing time
+        for step in plan.steps:
+            if step.kind == 'import':
+                engine.import_items(step.item_id, step.qty)
+            elif step.kind == 'recipe':
+                engine.run_recipe(step.recipe_id, step.qty)
+            # Do NOT call advance_until_idle here
+
+        # 2. Advance once to completion
+        scheduler.advance_to_completion()
+
+        # 3. Collect and return results
+        return self._build_result()
+```
+
+#### 4.1.2 `advance_to_completion`
+
+Add this method to the scheduler (or as a thin wrapper). It advances until the event queue is empty:
+
+```python
+def advance_to_completion(self) -> float:
+    """Advance until no events remain. Returns final sim time."""
+    while self.has_pending_events():
+        next_time = self.next_event_time()
+        self.advance_to(next_time)
+    return self.current_time
+```
+
+#### 4.1.3 Machine Wait Queue
+
+This is the key enabler for parallel submission. Currently `add_reservation` returns `False` on conflict. Instead, the engine should queue the process and retry when the machine releases.
+
+The retry mechanism partially exists (`RECIPE_STEP_READY` events, `engine.py:367`). The change is: instead of returning a `machine_conflict` error to the runner, the engine should always queue a retry event and return a `'deferred'` status. The runner treats `'deferred'` as success and moves on.
+
+**Key files:** `engine.py:468` (`_attempt_schedule_ready_recipe_steps`), `engine.py:525` (conflict handling), `engine.py:551` (`RECIPE_RETRY_DELAY_HOURS`)
+
+**Important:** The retry delay (`RECIPE_RETRY_DELAY_HOURS`) should be set to 0 or near-zero. A large retry delay means a process that could start at `t=24` waits until `t=24+delay`. For a proper DES, the process should start the moment its machine is free.
+
+**Preferred fix:** Instead of a fixed retry delay, subscribe to machine release events. When a machine completes a process, immediately check the wait queue for that machine and schedule waiting processes. This is O(1) per machine release and eliminates retry polling entirely.
+
+---
+
+### Phase 2: Formalize Event Queue Architecture (Priority 2)
+
+The event queue already exists in `scheduler.py` but is not documented or surfaced cleanly. This phase makes the architecture explicit and inspectable.
+
+#### 4.2.1 Event Types to Formalize
+
+| Event Type | Meaning |
+|---|---|
+| `PROCESS_START` | A process begins. Machine is reserved. Enqueues `PROCESS_END`. |
+| `PROCESS_END` | A process completes. Machine is released. Triggers dependent step scheduling. Checks machine wait queue. |
+| `RECIPE_STEP_READY` | A recipe step is unblocked (dependencies completed). Attempt to schedule it now. |
+| `MACHINE_RELEASED` | Optional explicit event when a machine becomes free. Used to notify waiting processes without polling. |
+
+#### 4.2.2 Event Log
+
+Every event processed should be appended to an event log with: `event_type`, `sim_time`, `machine_id` (if applicable), `process_id`, `recipe_id`. This log is the basis for all post-run analytics and is essential for the optimization loop in Phase 3.
+
+#### 4.2.3 Inspectability
+
+Add a method to the scheduler: `peek_queue() -> list[tuple[float, str, str]]` returning `(time, event_type, id)`. This lets the agent or optimizer inspect what is scheduled without advancing time. Useful for debugging and for assessing plan feasibility before running.
+
+---
+
+### Phase 3: Optimization Loop (Priority 3)
+
+Once the sim is event-driven and fast, it becomes an objective function that an optimizer can call thousands of times.
+
+#### 4.3.1 What Gets Optimized
+
+The optimization target is a **policy**: a set of parameters that control how the scenario is constructed. Examples:
+
+- **Machine counts**: how many units of each machine type to import
+- **Batch sizes**: how many units of a recipe to run per invocation
+- **Sequencing priority**: which recipes to submit first when multiple are ready
+- **Resource allocation**: which machines to assign to which processes when multiple options exist
+
+#### 4.3.2 The Optimization Loop Structure
+
+```python
+import optuna
+
+def objective(trial):
+    # Sample policy parameters
+    n_smelters = trial.suggest_int('n_smelters', 1, 8)
+    n_mills    = trial.suggest_int('n_mills', 1, 8)
+    batch_size = trial.suggest_int('batch_size', 1, 16)
+
+    # Build plan from policy
+    plan = build_plan(n_smelters, n_mills, batch_size)
+
+    # Run sim (fast: milliseconds per run)
+    result = ParallelSimPlanRunner(engine, scheduler).execute_plan(plan)
+
+    # Return scalar metric to minimize
+    return result.total_makespan_hours
+
+study = optuna.create_study(direction='minimize')
+study.optimize(objective, n_trials=500)
+```
+
+#### 4.3.3 Sim Must Be Stateless Per Run
+
+For the optimizer to work, each trial must start from a clean sim state. The engine and scheduler must be resettable (or re-instantiated) between trials. Add a `reset()` method or use a factory function.
+
+The KB does not need to be reloaded between trials — only the sim state (inventory, reservations, event queue, current time) needs to reset. This is the most important architectural requirement for Phase 3, and the thing most likely to be overlooked and become a painful retrofit.
+
+---
+
+## 5. Agent API: What Stays Declarative
+
+The agent-facing API does not change. The agent still writes:
+
+```python
+plan = SimPlan([
+    SimStep(kind='import', item_id='labor_bot_general_v0', qty=4),
+    SimStep(kind='recipe', recipe_id='aluminum_smelting_v0', qty=100),
+    SimStep(kind='recipe', recipe_id='rolling_mill_fabrication_v0', qty=1),
+    SimStep(kind='recipe', recipe_id='metal_shear_fabrication_v0', qty=2),
+])
+result = ParallelSimPlanRunner(engine, scheduler).execute_plan(plan)
+```
+
+The runner figures out concurrency, the engine figures out dependencies, the scheduler figures out timing. The agent specifies intent only.
+
+The agent can still use the synchronous API for quick checks (import items, inspect state), but does not need to manage time explicitly. Explicit ordering constraints are expressed as data dependencies, not as `advance_time()` calls:
+
+```python
+# Express ordering as a data dependency, not as advance_time()
+SimStep(kind='recipe', recipe_id='phase2_recipe', depends_on='phase1_recipe')
+```
+
+---
+
+## 6. File Map
+
+| File | Action |
+|---|---|
+| `src/sim/parallel_runner.py` | **CREATE.** `ParallelSimPlanRunner` class. Phase 1. |
+| `src/sim/scheduler.py` | **EXTEND.** Add `advance_to_completion()`, `peek_queue()`, machine wait queue logic. Phases 1 & 2. |
+| `src/sim/engine.py:468` | **MODIFY.** `_attempt_schedule_ready_recipe_steps`: return `'deferred'` instead of conflict error. Phase 1. |
+| `src/sim/engine.py:551` | **MODIFY.** Set `RECIPE_RETRY_DELAY_HOURS=0` or replace with machine-release subscription. Phase 1. |
+| `src/sim/event_log.py` | **CREATE.** Append-only event log with structured records. Phase 2. |
+| `src/sim/optimization.py` | **CREATE.** Optuna objective function + study runner. Phase 3. |
+| `src/analysis/utilization.py` | **CREATE or EXTEND.** Read event log, compute per-machine utilization timeline. Phase 2. |
+| `simplan_runner.py` | **DO NOT TOUCH.** Existing runner stays intact. |
+| `machine_reservations.py` | **DO NOT TOUCH.** `MachineReservationManager` unchanged. |
+
+---
+
+## 7. Acceptance Criteria
+
+### Phase 1 Done When:
+- Running a `SimPlan` with 3+ independent recipes shows overlapping machine usage in the utilization timeline
+- Total makespan is less than the sum of individual recipe durations
+- Existing runbook tests still pass
+
+### Phase 2 Done When:
+- Every process start and end is recorded in the event log with exact sim time
+- `peek_queue()` returns correct upcoming events
+- `MachineUtilizationReport` generates a per-machine timeline from the event log
+
+### Phase 3 Done When:
+- `engine.reset()` restores sim to initial state in < 10ms
+- Optuna study completes 100 trials in < 60 seconds wall time
+- Optimized policy shows measurably lower makespan than hand-authored baseline
+
+---
+
+## 8. Key Risks and Mitigations
+
+| Risk | Mitigation |
+|---|---|
+| **Retry delay causes missed concurrency** | Set `RECIPE_RETRY_DELAY_HOURS=0` immediately. Replace polling with machine-release event subscription in Phase 2. |
+| **Engine state not fully resettable** | Audit `engine.__init__` and identify all mutable state. Add `reset()` that clears inventory, reservations, event queue, and current time. Test by running the same plan twice and verifying identical results. |
+| **Recipe DAG deadlock with parallel submission** | If recipe A needs output of recipe B and both are submitted simultaneously, the dependency graph must block A until B produces output. Verify `_schedule_dependent_recipe_steps` handles this. Add a deadlock detector: if all pending events are `RECIPE_STEP_READY` and none can proceed, raise `DeadlockError`. |
+| **Optimizer finds degenerate solutions** | Add constraints to the Optuna objective: penalize solutions that leave required outputs unproduced, or add a feasibility check before scoring. |

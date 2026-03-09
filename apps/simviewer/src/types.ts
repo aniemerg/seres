@@ -12,6 +12,14 @@ export type ProcessRun = {
   status: 'success' | 'failed' | 'pending'
   machine_type: string | null
   lane_id: string | null
+  reserved_machines: Array<{
+    machine_id: string
+    qty: number
+    unit: string
+    start_time: number | null
+    end_time: number | null
+    machine_instance_ids: string[]
+  }>
   inputs: QuantityMap
   outputs: QuantityMap
   error_message?: string | null
@@ -36,6 +44,18 @@ export type InventoryDelta = {
   delta: QuantityMap
 }
 
+export type MachineAssignment = {
+  assignment_id: string
+  process_run_id: string
+  machine_id: string
+  machine_instance_id: string | null
+  start_time: number | null
+  end_time: number | null
+  duration_hours: number | null
+  lane_id: string | null
+  lane_index: number | null
+}
+
 export type SimData = {
   sim_id: string
   summary: {
@@ -51,6 +71,7 @@ export type SimData = {
   }
   machine_lanes: MachineLane[]
   process_runs: ProcessRun[]
+  machine_assignments?: MachineAssignment[]
   inventory_checkpoints: InventoryCheckpoint[]
   inventory_deltas: InventoryDelta[]
 }
