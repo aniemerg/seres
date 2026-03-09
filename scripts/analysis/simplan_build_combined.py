@@ -90,6 +90,7 @@ def _merge_import(
     unit: str,
     reason: Optional[str],
     converter: UnitConverter,
+    prefer_max: bool = False,
 ) -> None:
     existing = merged.imports.get(item_id)
     if not existing:
@@ -97,21 +98,27 @@ def _merge_import(
         return
 
     if existing.unit == unit:
-        existing.qty += qty
+        if prefer_max:
+            existing.qty = max(existing.qty, qty)
+        else:
+            existing.qty += qty
         if reason and existing.reason != reason:
             existing.reason = f"{existing.reason}; {reason}" if existing.reason else reason
         return
 
     converted = converter.convert(qty, unit, existing.unit, item_id)
     if converted is not None:
-        existing.qty += converted
+        if prefer_max:
+            existing.qty = max(existing.qty, converted)
+        else:
+            existing.qty += converted
         if reason and existing.reason != reason:
             existing.reason = f"{existing.reason}; {reason}" if existing.reason else reason
         return
 
     reverse = converter.convert(existing.qty, existing.unit, unit, item_id)
     if reverse is not None:
-        existing.qty = reverse + qty
+        existing.qty = max(reverse, qty) if prefer_max else (reverse + qty)
         existing.unit = unit
         if reason and existing.reason != reason:
             existing.reason = f"{existing.reason}; {reason}" if existing.reason else reason
@@ -132,6 +139,12 @@ def _merge_plans(
     merged = SimPlan(sim_id=sim_id, target_machine_id="multi_machine_plan")
     merged.build_machine = False
 
+    machine_ids = {
+        item_id
+        for item_id, model in kb.items.items()
+        if (model.model_dump() if hasattr(model, "model_dump") else model).get("kind") == "machine"
+    }
+
     for plan in plans:
         if plan.build_machine or not plan.target_recipe_id:
             if not allow_bom:
@@ -140,7 +153,15 @@ def _merge_plans(
                     "add a recipe or enable --allow-bom."
                 )
         for item_id, imp in plan.imports.items():
-            _merge_import(merged, item_id, imp.qty, imp.unit, imp.reason, converter)
+            _merge_import(
+                merged,
+                item_id,
+                imp.qty,
+                imp.unit,
+                imp.reason,
+                converter,
+                prefer_max=item_id in machine_ids,
+            )
         for recipe in plan.recipes:
             merged.add_recipe(recipe.recipe_id, recipe.quantity, reason=recipe.reason)
         if plan.target_recipe_id:
