@@ -81,7 +81,7 @@ class SimulationEngine:
     """
 
     RECIPE_RETRY_DELAY_HOURS = 1.0
-    RECIPE_CONTINUOUS_CHUNK_MAX_HOURS = 1000.0
+    RECIPE_CONTINUOUS_CHUNK_MAX_HOURS = 100.0
 
     def __init__(self, sim_id: str, kb_loader: KBLoader, sim_dir: Optional[Path] = None):
         self.sim_id = sim_id
@@ -817,7 +817,7 @@ class SimulationEngine:
                         if converted is not None:
                             machine_capacities[item_id] = converted
 
-        self.reservation_manager.machine_capacities = machine_capacities
+        self.reservation_manager.update_machine_capacities(machine_capacities)
 
     # ========================================================================
     # State queries
@@ -1305,6 +1305,8 @@ class SimulationEngine:
                     qty=qty,
                 )
 
+        machine_instance_assignments = self.reservation_manager.get_assigned_instances_for_process(process_run_id)
+
         # Convert InventoryItem objects to simple dicts for scheduler
         inputs_dict = {
             item_id: inv_item.quantity
@@ -1390,6 +1392,7 @@ class SimulationEngine:
                 "end_time": reservation_end,
                 "qty": qty,
                 "unit": unit,
+                "machine_instance_ids": machine_instance_assignments.get(machine_id, []),
                 "reservation_type": reservation_type,
                 "release_time": release_time,
             })
@@ -1428,6 +1431,7 @@ class SimulationEngine:
             "inputs_consumed": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in inputs_consumed.items()},
             "outputs_pending": {k: {"quantity": v.quantity, "unit": v.unit} for k, v in outputs_pending.items()},
             "machines_reserved": machines_reserved,
+            "machine_instance_assignments": machine_instance_assignments,
         }
 
     def resolve_step(self, step_def: Dict[str, Any]) -> Dict[str, Any]:

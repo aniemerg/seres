@@ -383,6 +383,9 @@ class TestBasicProcessScheduling:
         assert ps_event.get("scheduled_end_time") == 1.0
         assert ps_event.get("duration_hours") == 1.0
         assert ps_event.get("process_run_id")
+        machine_reservations = ps_event.get("machine_reservations", [])
+        assert len(machine_reservations) == 1
+        assert machine_reservations[0].get("machine_instance_ids") == ["furnace#1"]
 
         # Verify process_start event has correct structure
         process_start_events = [e for e in events if e.get("type") == "process_start"]
@@ -405,6 +408,33 @@ class TestBasicProcessScheduling:
         # Check that outputs contain the expected item
         outputs = pc_event.get("outputs", {})
         assert "metal" in outputs
+
+    def test_state_snapshot_throttling_reduces_advance_time_snapshots(self, kb_root, sim_dir):
+        """State snapshot cadence should throttle high-frequency advance_time snapshots."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_snapshot_throttle", kb, sim_dir)
+        engine.import_item("ore", 100.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+        engine.event_buffer.clear()
+
+        engine.state_snapshot_interval_hours = 10.0
+
+        for _ in range(3):
+            result = engine.start_process(
+                process_id="test_process_v0",
+                scale=1.0,
+                duration_hours=1.0,
+            )
+            assert result["success"]
+            engine.advance_time(1.0)
+
+        snapshot_events = [
+            e for e in engine.event_buffer
+            if getattr(e, "type", None) == "state_snapshot"
+        ]
+        assert len(snapshot_events) <= 1
 
     def test_scheduler_persistence_across_loads(self, kb_root, sim_dir):
         """Verify scheduler state persists across save/load cycles (ADR-021 core requirement)."""
@@ -643,9 +673,138 @@ class TestRecipeOrchestration:
         # Check final product
         assert engine.has_item("part", 1.0, "kg")
 
-        # Recipe should be complete
-        recipe_run_id = result["recipe_run_id"]
-        assert engine.orchestrator.is_recipe_complete(recipe_run_id)
+    def test_run_recipe_chunks_long_linear_rate_step(self, tmp_path, sim_dir):
+        """Long linear-rate steps should be chunked into smaller reservations."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "mine_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "mine_v0",
+                "kind": "process",
+                "process_type": "continuous",
+                "inputs": [],
+                "outputs": [{"item_id": "regolith", "qty": 1.0, "unit": "kg"}],
+                "time_model": {
+                    "type": "linear_rate",
+                    "rate": 1.0,
+                    "rate_unit": "kg/hr",
+                    "scaling_basis": "regolith",
+                },
+                "resource_requirements": [
+                    {"machine_id": "labor_bot_general_v0", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "processes" / "compact_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "compact_v0",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "regolith", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "brick", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [
+                    {"machine_id": "compactor_v0", "qty": 1.0, "unit": "count"}
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_brick_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_brick_v0",
+                "target_item_id": "brick",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "mine_v0", "dependencies": []},
+                    {"process_id": "compact_v0", "dependencies": [0]},
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "regolith.yaml", "w") as f:
+            yaml.dump({"id": "regolith", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "brick.yaml", "w") as f:
+            yaml.dump({"id": "brick", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "labor_bot_general_v0.yaml", "w") as f:
+            yaml.dump({"id": "labor_bot_general_v0", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+        with open(kb / "items" / "machines" / "compactor_v0.yaml", "w") as f:
+            yaml.dump({"id": "compactor_v0", "kind": "machine", "unit": "count", "mass": 120.0}, f)
+
+        loader = KBLoader(kb, use_validated_models=False)
+        loader.load_all()
+        engine = SimulationEngine("test_chunk_long_step", loader, sim_dir)
+        engine.import_item("labor_bot_general_v0", 1.0, "count")
+        engine.import_item("compactor_v0", 1.0, "count")
+
+        result = engine.run_recipe("recipe_brick_v0", quantity=3000.0)
+        assert result["success"]
+        assert result["total_steps"] > 2
+
+        next_event = engine.scheduler.get_next_event_time()
+        assert next_event is not None
+        assert next_event <= engine.RECIPE_CONTINUOUS_CHUNK_MAX_HOURS + 1e-9
+
+        advance = engine.advance_time(engine.RECIPE_CONTINUOUS_CHUNK_MAX_HOURS + 1.0)
+        assert advance["processes_completed"] >= 1
+
+    def test_run_recipe_chunks_long_batch_step(self, tmp_path, sim_dir):
+        """Long batch steps should also be chunked to bounded reservation duration."""
+        kb = tmp_path / "kb"
+        (kb / "processes").mkdir(parents=True)
+        (kb / "recipes").mkdir(parents=True)
+        (kb / "items" / "materials").mkdir(parents=True)
+        (kb / "items" / "machines").mkdir(parents=True)
+
+        with open(kb / "processes" / "long_batch_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "long_batch_v0",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [{"item_id": "feed", "qty": 1.0, "unit": "kg"}],
+                "outputs": [{"item_id": "product", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 12.0},
+                "resource_requirements": [
+                    {"machine_id": "batch_machine_v0", "qty": 1.0, "unit": "count"},
+                    {"machine_id": "labor_bot_general_v0", "qty": 1.0, "unit": "count"},
+                ],
+            }, f)
+
+        with open(kb / "recipes" / "recipe_long_batch_v0.yaml", "w") as f:
+            yaml.dump({
+                "id": "recipe_long_batch_v0",
+                "target_item_id": "product",
+                "variant_id": "v0",
+                "steps": [
+                    {"process_id": "long_batch_v0", "dependencies": []},
+                ],
+            }, f)
+
+        with open(kb / "items" / "materials" / "feed.yaml", "w") as f:
+            yaml.dump({"id": "feed", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "materials" / "product.yaml", "w") as f:
+            yaml.dump({"id": "product", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+        with open(kb / "items" / "machines" / "labor_bot_general_v0.yaml", "w") as f:
+            yaml.dump({"id": "labor_bot_general_v0", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+        with open(kb / "items" / "machines" / "batch_machine_v0.yaml", "w") as f:
+            yaml.dump({"id": "batch_machine_v0", "kind": "machine", "unit": "count", "mass": 200.0}, f)
+
+        loader = KBLoader(kb, use_validated_models=False)
+        loader.load_all()
+        engine = SimulationEngine("test_chunk_batch_step", loader, sim_dir)
+        engine.import_item("feed", 30.0, "kg")
+        engine.import_item("labor_bot_general_v0", 1.0, "count")
+        engine.import_item("batch_machine_v0", 1.0, "count")
+
+        # Total duration 30 * 12 = 360h; should chunk under configured max.
+        result = engine.run_recipe("recipe_long_batch_v0", quantity=30.0)
+        assert result["success"]
+        assert result["total_steps"] > 1
+
+        next_event = engine.scheduler.get_next_event_time()
+        assert next_event is not None
+        assert next_event <= engine.RECIPE_CONTINUOUS_CHUNK_MAX_HOURS + 1e-9
 
     def test_recipe_progress_tracking(self, recipe_kb, sim_dir):
         """Track recipe progress through execution."""

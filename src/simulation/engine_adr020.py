@@ -75,7 +75,7 @@ class SimulationEngineADR020(SimulationEngine):
     def _update_machine_capacities(self) -> None:
         """Update reservation manager with current machine inventory."""
         capacities = self._build_machine_capacities()
-        self.reservation_manager.machine_capacities = capacities
+        self.reservation_manager.update_machine_capacities(capacities)
 
     def _collect_required_machines_from_process_def(self, process_def: Dict[str, Any]) -> Dict[str, float]:
         """

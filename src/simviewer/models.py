@@ -5,6 +5,19 @@ from typing import Dict, List
 
 
 @dataclass
+class ReservedMachine:
+    machine_id: str
+    qty: float
+    unit: str
+    start_time: float | None
+    end_time: float | None
+    machine_instance_ids: List[str]
+
+    def to_dict(self) -> dict:
+        return asdict(self)
+
+
+@dataclass
 class ProcessRunRecord:
     process_run_id: str
     process_id: str
@@ -19,7 +32,26 @@ class ProcessRunRecord:
     lane_id: str | None
     inputs: Dict[str, dict]
     outputs: Dict[str, dict]
+    reserved_machines: List[ReservedMachine]
     error_message: str | None = None
+
+    def to_dict(self) -> dict:
+        payload = asdict(self)
+        payload["reserved_machines"] = [m.to_dict() for m in self.reserved_machines]
+        return payload
+
+
+@dataclass
+class MachineAssignment:
+    assignment_id: str
+    process_run_id: str
+    machine_id: str
+    machine_instance_id: str | None
+    start_time: float | None
+    end_time: float | None
+    duration_hours: float | None
+    lane_id: str | None
+    lane_index: int | None
 
     def to_dict(self) -> dict:
         return asdict(self)

@@ -10,7 +10,14 @@ import yaml
 
 from src.simviewer.articles import discover_article_files, merge_backlinks, parse_articles
 from src.simviewer.config import SimviewerConfig
-from src.simviewer.models import ExportWarnings, InventoryCheckpoint, InventoryDelta, ProcessRunRecord
+from src.simviewer.models import (
+    ExportWarnings,
+    InventoryCheckpoint,
+    InventoryDelta,
+    MachineAssignment,
+    ProcessRunRecord,
+    ReservedMachine,
+)
 
 
 def _read_json(path: Path) -> dict:
@@ -138,6 +145,127 @@ def _assign_machine_lanes(process_runs: List[ProcessRunRecord]) -> List[dict]:
     return lanes
 
 
+def _build_machine_assignments(process_runs: List[ProcessRunRecord]) -> List[MachineAssignment]:
+    assignments: List[MachineAssignment] = []
+    for run in process_runs:
+        for idx, reservation in enumerate(run.reserved_machines):
+            start_time = reservation.start_time if reservation.start_time is not None else run.start_time
+            end_time = reservation.end_time if reservation.end_time is not None else run.end_time
+            duration = None
+            if start_time is not None and end_time is not None:
+                duration = max(0.0, end_time - start_time)
+            instance_ids = reservation.machine_instance_ids or []
+            if instance_ids:
+                for instance_idx, instance_id in enumerate(instance_ids):
+                    assignments.append(
+                        MachineAssignment(
+                            assignment_id=f"{run.process_run_id}:{reservation.machine_id}:{idx}:{instance_idx}",
+                            process_run_id=run.process_run_id,
+                            machine_id=reservation.machine_id,
+                            machine_instance_id=instance_id,
+                            start_time=start_time,
+                            end_time=end_time,
+                            duration_hours=duration,
+                            lane_id=None,
+                            lane_index=None,
+                        )
+                    )
+                continue
+
+            assignments.append(
+                MachineAssignment(
+                    assignment_id=f"{run.process_run_id}:{reservation.machine_id}:{idx}",
+                    process_run_id=run.process_run_id,
+                    machine_id=reservation.machine_id,
+                    machine_instance_id=None,
+                    start_time=start_time,
+                    end_time=end_time,
+                    duration_hours=duration,
+                    lane_id=None,
+                    lane_index=None,
+                )
+            )
+
+    return assignments
+
+
+def _assign_machine_lanes_from_assignments(assignments: List[MachineAssignment]) -> List[dict]:
+    # Prefer concrete instance IDs when present.
+    lane_rows: List[dict] = []
+    rows_with_instance = [a for a in assignments if a.machine_instance_id]
+    rows_without_instance = [a for a in assignments if not a.machine_instance_id]
+
+    if rows_with_instance:
+        lane_by_instance: Dict[str, Tuple[str, int]] = {}
+        for row in sorted(rows_with_instance, key=lambda r: (r.machine_id, r.machine_instance_id or "")):
+            instance_id = str(row.machine_instance_id)
+            lane = lane_by_instance.get(instance_id)
+            if lane is None:
+                used_for_machine = sum(1 for m, _ in lane_by_instance.values() if m == row.machine_id)
+                lane = (row.machine_id, used_for_machine)
+                lane_by_instance[instance_id] = lane
+                lane_rows.append(
+                    {
+                        "machine_type": row.machine_id,
+                        "lane_id": instance_id,
+                        "lane_index": used_for_machine,
+                    }
+                )
+            row.lane_id = instance_id
+            row.lane_index = lane[1]
+
+    # Fallback for legacy data without instance IDs (overlap-based synthetic lanes).
+    if not rows_without_instance:
+        lane_rows.sort(key=lambda x: (x["machine_type"], x["lane_index"]))
+        return lane_rows
+
+    by_machine: Dict[str, List[MachineAssignment]] = defaultdict(list)
+    for assignment in rows_without_instance:
+        if not assignment.machine_id:
+            continue
+        by_machine[assignment.machine_id].append(assignment)
+
+    for machine_id, rows in by_machine.items():
+        rows.sort(
+            key=lambda r: (
+                r.start_time if r.start_time is not None else 0.0,
+                r.end_time if r.end_time is not None else float("inf"),
+                r.process_run_id,
+            )
+        )
+        lane_end_times: List[float] = []
+        for row in rows:
+            start = row.start_time if row.start_time is not None else 0.0
+            end = row.end_time if row.end_time is not None else start
+            assigned = False
+            for idx, last_end in enumerate(lane_end_times):
+                if start <= last_end:
+                    continue
+                row.lane_index = idx
+                row.lane_id = f"{machine_id}#{idx + 1}"
+                lane_end_times[idx] = end
+                assigned = True
+                break
+            if assigned:
+                continue
+            idx = len(lane_end_times)
+            lane_end_times.append(end)
+            row.lane_index = idx
+            row.lane_id = f"{machine_id}#{idx + 1}"
+
+        for idx, _ in enumerate(lane_end_times):
+            lane_rows.append(
+                {
+                    "machine_type": machine_id,
+                    "lane_id": f"{machine_id}#{idx + 1}",
+                    "lane_index": idx,
+                }
+            )
+
+    lane_rows.sort(key=lambda x: (x["machine_type"], x["lane_index"]))
+    return lane_rows
+
+
 def _extract_process_runs(
     events: List[dict],
     recipe_id_by_run_id: Dict[str, str],
@@ -217,6 +345,28 @@ def _extract_process_runs(
 
         inputs = sched.get("inputs_consumed", {}) if isinstance(sched, dict) else {}
         outputs = done_ev.get("outputs", {}) if isinstance(done_ev, dict) else {}
+        reserved_machines: List[ReservedMachine] = []
+        if isinstance(sched, dict):
+            for row in sched.get("machine_reservations", []) or []:
+                if not isinstance(row, dict):
+                    continue
+                machine_id = row.get("machine_id")
+                if not machine_id:
+                    continue
+                reserved_machines.append(
+                    ReservedMachine(
+                        machine_id=str(machine_id),
+                        qty=float(row.get("qty", 1.0) or 1.0),
+                        unit=str(row.get("unit", "count")),
+                        start_time=float(row["start_time"]) if row.get("start_time") is not None else None,
+                        end_time=float(row["end_time"]) if row.get("end_time") is not None else None,
+                        machine_instance_ids=[
+                            str(instance_id)
+                            for instance_id in (row.get("machine_instance_ids", []) or [])
+                            if instance_id
+                        ],
+                    )
+                )
 
         recipe_run_id = str(done_ev.get("recipe_run_id")) if isinstance(done_ev, dict) and done_ev.get("recipe_run_id") else (
             str(sched.get("recipe_run_id")) if isinstance(sched, dict) and sched.get("recipe_run_id") else None
@@ -243,6 +393,7 @@ def _extract_process_runs(
             lane_id=None,
             inputs=inputs if isinstance(inputs, dict) else {},
             outputs=outputs if isinstance(outputs, dict) else {},
+            reserved_machines=reserved_machines,
             error_message=error_message,
         )
         process_runs.append(record)
@@ -619,7 +770,16 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
                     recipe_id_by_run_id[str(run_id)] = str(recipe_id)
 
     process_runs, inventory_deltas, completed_count = _extract_process_runs(events, recipe_id_by_run_id)
-    machine_lanes = _assign_machine_lanes(process_runs)
+    machine_assignments = _build_machine_assignments(process_runs)
+    machine_lanes = _assign_machine_lanes_from_assignments(machine_assignments)
+    lane_by_run_id: Dict[str, str] = {}
+    for row in machine_assignments:
+        if not row.process_run_id or not row.lane_id:
+            continue
+        lane_by_run_id.setdefault(row.process_run_id, row.lane_id)
+    for run in process_runs:
+        if run.process_run_id in lane_by_run_id:
+            run.lane_id = lane_by_run_id[run.process_run_id]
     checkpoints = _select_checkpoints(
         events,
         checkpoint_every_processes=config.checkpoint_every_processes,
@@ -668,6 +828,7 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
         "summary": summary,
         "machine_lanes": machine_lanes,
         "process_runs": [r.to_dict() for r in process_runs],
+        "machine_assignments": [a.to_dict() for a in machine_assignments],
         "inventory_checkpoints": [c.to_dict() for c in checkpoints],
         "inventory_deltas": [d.to_dict() for d in inventory_deltas],
     }
