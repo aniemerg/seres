@@ -1,0 +1,39 @@
+id: silicic_acid_precipitation_to_silica_v0
+kind: process
+name: Silicic acid precipitation to silica
+process_type: batch
+layer_tags:
+- layer_4
+inputs:
+- item_id: silicic_acid
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: silica_purified
+  qty: 0.70
+  unit: kg
+- item_id: water
+  qty: 0.30
+  unit: kg
+resource_requirements:
+- machine_id: crystallization_unit_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Precipitation, drying, and filtration.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Precipitation and dehydration cycle.
+notes: |
+  Explicit representation of reaction 19:
+  H4SiO4 -> SiO2 + H2O.

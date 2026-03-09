@@ -39,6 +39,8 @@ Use three passes per source:
 - Use flexible units and scaling_basis as required by 012/014/016.
 - Recipe overrides follow 013 (complete override if `type` is set).
 - Validation is authoritative (017).
+- ID lifecycle follows ADR-025: if an ID is upgraded, retain deprecated entry
+  metadata and update references explicitly (do not depend on silent aliasing).
 
 ## Provenance and Uncertainty
 
@@ -76,3 +78,4 @@ Each extraction yields:
 - `docs/kb_schema_reference.md`
 - `docs/conservative_mode_guide.md`
 - `docs/parts_and_labor_guidelines.md`
+- `docs/ADRs/025-deprecated-id-enforcement-and-manual-migration.md`

@@ -1,0 +1,36 @@
+id: recipe_toolhead_wire_deposition_v0
+kind: recipe
+target_item_id: toolhead_wire_deposition_v0
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 23.0
+    unit: kg
+  - item_id: wire_feed_system_basic
+    qty: 4.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: toolhead_wire_deposition_v0
+    qty: 28.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 23.0
+        unit: kg
+      - item_id: wire_feed_system_basic
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: toolhead_wire_deposition_v0
+        qty: 28.0
+        unit: kg
+    notes: Assemble wire feed deposition head subassembly.
+notes: Toolhead assembly for wire deposition path.

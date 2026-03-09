@@ -1,0 +1,47 @@
+id: troilite_roasting_stage1_v0
+kind: process
+name: Troilite roasting stage 1
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: mineral_ore_sulfide
+  qty: 1.0
+  unit: kg
+- item_id: oxygen_gas
+  qty: 1.3
+  unit: kg
+outputs:
+- item_id: iron_oxide_powder
+  qty: 0.9
+  unit: kg
+- item_id: sulfur_dioxide_gas
+  qty: 1.3
+  unit: kg
+- item_id: tailings
+  qty: 0.1
+  unit: kg
+resource_requirements:
+- machine_id: roasting_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 4.0
+  unit: kWh
+  notes: Sulfide roast with off-gas handling.
+time_model:
+  type: batch
+  hr_per_batch: 3.0
+  notes: Roast and gas separation.
+notes: |
+  Explicit representation of reaction 12 stage:
+  FeS oxidation to iron oxide and sulfur dioxide.
+

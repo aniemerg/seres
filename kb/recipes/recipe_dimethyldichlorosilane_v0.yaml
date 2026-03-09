@@ -1,0 +1,36 @@
+id: recipe_dimethyldichlorosilane_v0
+kind: recipe
+target_item_id: dimethyldichlorosilane
+variant_id: rochow_variant_v0
+inputs:
+  - item_id: methyl_chloride_gas
+    qty: 1.0
+    unit: kg
+  - item_id: silicon_metal_v0
+    qty: 0.42
+    unit: kg
+outputs:
+  - item_id: dimethyldichlorosilane
+    qty: 1.4
+    unit: kg
+  - item_id: tailings
+    qty: 0.02
+    unit: kg
+steps:
+  - process_id: rochow_dimethyldichlorosilane_variant_v0
+    inputs:
+      - item_id: methyl_chloride_gas
+        qty: 1.0
+        unit: kg
+      - item_id: silicon_metal_v0
+        qty: 0.42
+        unit: kg
+    outputs:
+      - item_id: dimethyldichlorosilane
+        qty: 1.4
+        unit: kg
+      - item_id: tailings
+        qty: 0.02
+        unit: kg
+notes: "Rochow variant producing dimethyldichlorosilane intermediate."
+

@@ -1,0 +1,49 @@
+id: orthoclase_hcl_weathering_to_illite_v0
+kind: process
+name: Orthoclase HCl weathering to illite
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: orthoclase_feldspar
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.2
+  unit: kg
+- item_id: water
+  qty: 0.3
+  unit: kg
+outputs:
+- item_id: illite_clay
+  qty: 0.55
+  unit: kg
+- item_id: silicic_acid
+  qty: 0.35
+  unit: kg
+- item_id: potassium_chloride
+  qty: 0.20
+  unit: kg
+resource_requirements:
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: packed_bed_distillation_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.5
+  unit: kWh
+  notes: Acid weathering and slurry separation.
+time_model:
+  type: batch
+  hr_per_batch: 4.0
+  notes: Leach and settling cycle.
+notes: |
+  Explicit representation of orthoclase weathering block (reaction 18) with
+  practical process-level outputs (illite + silicic acid + KCl).

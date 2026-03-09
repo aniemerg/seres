@@ -144,6 +144,157 @@ class SimulationEngine:
             self._on_recipe_step_ready,
         )
 
+    # ========================================================================
+    # Deprecated ID enforcement (ADR-025)
+    # ========================================================================
+
+    def _as_dict(self, model: Any) -> Dict[str, Any]:
+        """Convert model/dict to plain dict."""
+        if model is None:
+            return {}
+        if hasattr(model, "model_dump"):
+            return model.model_dump()
+        if isinstance(model, dict):
+            return dict(model)
+        return dict(model)
+
+    def _deprecated_metadata(self, model: Any) -> Dict[str, Any]:
+        """Extract deprecated/upgraded metadata from a KB entity."""
+        data = self._as_dict(model)
+        upgraded_raw = (
+            data.get("upgraded_to")
+            or data.get("superseded_by")
+            or data.get("replacement_id")
+            or data.get("replaced_by")
+        )
+
+        if isinstance(upgraded_raw, list):
+            upgraded_to = [str(x) for x in upgraded_raw if x]
+        elif upgraded_raw:
+            upgraded_to = [str(upgraded_raw)]
+        else:
+            upgraded_to = []
+
+        status = str(data.get("status", "")).lower()
+        deprecated_flag = bool(data.get("deprecated") or data.get("is_deprecated"))
+        if status in ("deprecated", "superseded"):
+            deprecated_flag = True
+
+        return {
+            "is_deprecated": deprecated_flag or bool(upgraded_to),
+            "upgraded_to": upgraded_to,
+            "upgrade_note": data.get("upgrade_note") or data.get("deprecation_note"),
+            "upgrade_since": data.get("upgrade_since") or data.get("deprecated_since"),
+        }
+
+    def _deprecated_reference_error(
+        self,
+        *,
+        entity_type: str,
+        deprecated_id: str,
+        reference_path: str,
+        metadata: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """Build a structured error payload for deprecated ID references."""
+        upgraded_to = metadata.get("upgraded_to") or []
+        note = metadata.get("upgrade_note")
+        since = metadata.get("upgrade_since")
+        replacement = ", ".join(upgraded_to) if upgraded_to else "none specified"
+        message = (
+            f"Deprecated {entity_type} ID '{deprecated_id}' referenced at '{reference_path}'. "
+            f"Upgraded to: {replacement}. "
+            f"Manual update required (ADR-025)."
+        )
+        if since:
+            message += f" Since: {since}."
+        if note:
+            message += f" Note: {note}"
+
+        return {
+            "success": False,
+            "error": "deprecated_id_reference",
+            "message": message,
+            "entity_type": entity_type,
+            "deprecated_id": deprecated_id,
+            "reference_path": reference_path,
+            "upgraded_to": upgraded_to,
+            "upgrade_note": note,
+            "upgrade_since": since,
+        }
+
+    def _check_not_deprecated(
+        self,
+        *,
+        entity_type: str,
+        entity_id: str,
+        model: Any,
+        reference_path: str,
+    ) -> Optional[Dict[str, Any]]:
+        """Return structured error if entity is deprecated/upgraded."""
+        metadata = self._deprecated_metadata(model)
+        if not metadata["is_deprecated"]:
+            return None
+        return self._deprecated_reference_error(
+            entity_type=entity_type,
+            deprecated_id=entity_id,
+            reference_path=reference_path,
+            metadata=metadata,
+        )
+
+    def _check_process_definition_references(
+        self,
+        process_def: Dict[str, Any],
+        process_id: str,
+    ) -> Optional[Dict[str, Any]]:
+        """Check process I/O references for deprecated item/machine IDs."""
+        for field in ("inputs", "outputs", "byproducts"):
+            for idx, qty in enumerate(process_def.get(field, []) or []):
+                item_id = qty.get("item_id")
+                if not item_id:
+                    continue
+                item_model = self.kb.get_item(item_id)
+                if not item_model:
+                    continue
+                dep_err = self._check_not_deprecated(
+                    entity_type="item",
+                    entity_id=item_id,
+                    model=item_model,
+                    reference_path=f"process:{process_id}.{field}[{idx}].item_id",
+                )
+                if dep_err:
+                    return dep_err
+
+        for idx, req in enumerate(process_def.get("resource_requirements", []) or []):
+            machine_id = req.get("machine_id")
+            if not machine_id:
+                continue
+            machine_model = self.kb.get_item(machine_id)
+            if not machine_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="machine",
+                entity_id=machine_id,
+                model=machine_model,
+                reference_path=f"process:{process_id}.resource_requirements[{idx}].machine_id",
+            )
+            if dep_err:
+                return dep_err
+
+        for idx, machine_id in enumerate(process_def.get("requires_ids", []) or []):
+            machine_model = self.kb.get_item(machine_id)
+            if not machine_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="machine",
+                entity_id=machine_id,
+                model=machine_model,
+                reference_path=f"process:{process_id}.requires_ids[{idx}]",
+            )
+            if dep_err:
+                return dep_err
+
+        return None
+
     def _validate_process_inputs(self, event) -> None:
         """
         Event handler to validate inputs when process starts.
@@ -1125,10 +1276,21 @@ class SimulationEngine:
                 "error": "kb_gap",
                 "message": f"Process '{process_id}' not found in KB",
             }
+        dep_err = self._check_not_deprecated(
+            entity_type="process",
+            entity_id=process_id,
+            model=process_model,
+            reference_path=f"start_process.process_id[{process_id}]",
+        )
+        if dep_err:
+            return dep_err
 
         process_def = process_model.model_dump() if hasattr(process_model, 'model_dump') else process_model
         if process_def_override:
             process_def = process_def_override
+        dep_err = self._check_process_definition_references(process_def, process_id)
+        if dep_err:
+            return dep_err
 
         # ADR-020 validation
         validation_issues = validate_process_adr020(process_def, self.kb.items)
@@ -1449,6 +1611,18 @@ class SimulationEngine:
         Returns:
             Resolved process definition with all fields populated
         """
+        process_id = step_def.get("process_id")
+        if process_id:
+            process_model = self.kb.get_process(process_id)
+            if process_model:
+                dep_err = self._check_not_deprecated(
+                    entity_type="process",
+                    entity_id=process_id,
+                    model=process_model,
+                    reference_path=f"recipe_step.process_id[{process_id}]",
+                )
+                if dep_err:
+                    raise ValueError(dep_err["message"])
         return resolve_recipe_step_with_kb(step_def, self.kb)
 
     def run_recipe(
@@ -1479,8 +1653,49 @@ class SimulationEngine:
                 "error": "kb_gap",
                 "message": f"Recipe '{recipe_id}' not found in KB",
             }
+        dep_err = self._check_not_deprecated(
+            entity_type="recipe",
+            entity_id=recipe_id,
+            model=recipe_model,
+            reference_path=f"run_recipe.recipe_id[{recipe_id}]",
+        )
+        if dep_err:
+            return dep_err
 
         recipe_def = recipe_model.model_dump() if hasattr(recipe_model, 'model_dump') else recipe_model
+        target_item_id = recipe_def.get("target_item_id")
+        if target_item_id:
+            target_item = self.kb.get_item(target_item_id)
+            if target_item:
+                dep_err = self._check_not_deprecated(
+                    entity_type="item",
+                    entity_id=target_item_id,
+                    model=target_item,
+                    reference_path=f"recipe:{recipe_id}.target_item_id",
+                )
+                if dep_err:
+                    return dep_err
+
+        for idx, step in enumerate(recipe_def.get("steps", []) or []):
+            process_id = step.get("process_id")
+            if not process_id:
+                continue
+            process_model = self.kb.get_process(process_id)
+            if not process_model:
+                return {
+                    "success": False,
+                    "error": "kb_gap",
+                    "message": f"Recipe '{recipe_id}' step {idx} references missing process '{process_id}'",
+                }
+            dep_err = self._check_not_deprecated(
+                entity_type="process",
+                entity_id=process_id,
+                model=process_model,
+                reference_path=f"recipe:{recipe_id}.steps[{idx}].process_id",
+            )
+            if dep_err:
+                return dep_err
+
         if quantity != 1:
             for step in recipe_def.get("steps", []):
                 step["scale"] = step.get("scale", 1.0) * quantity
@@ -1571,6 +1786,16 @@ class SimulationEngine:
                 "gap_type": "missing_bom",
                 "message": f"BOM for machine '{machine_id}' not found in KB",
             }
+        machine_model = self.kb.get_item(machine_id)
+        if machine_model:
+            dep_err = self._check_not_deprecated(
+                entity_type="machine",
+                entity_id=machine_id,
+                model=machine_model,
+                reference_path=f"build_machine.machine_id[{machine_id}]",
+            )
+            if dep_err:
+                return dep_err
 
         # Get components
         components = bom.get("components", [])
@@ -1587,6 +1812,16 @@ class SimulationEngine:
             item_id = comp.get("item_id") or comp.get("id")
             quantity = comp.get("qty") or comp.get("quantity") or 1
             unit = comp.get("unit", "count")
+            comp_model = self.kb.get_item(item_id)
+            if comp_model:
+                dep_err = self._check_not_deprecated(
+                    entity_type="item",
+                    entity_id=item_id,
+                    model=comp_model,
+                    reference_path=f"bom:{machine_id}.components[{item_id}]",
+                )
+                if dep_err:
+                    return dep_err
 
             if not self.has_item(item_id, quantity, unit):
                 return {
@@ -1745,6 +1980,14 @@ class SimulationEngine:
                 "gap_type": "missing_item",
                 "message": f"Item '{item_id}' not found in KB",
             }
+        dep_err = self._check_not_deprecated(
+            entity_type="item",
+            entity_id=item_id,
+            model=item_model,
+            reference_path=f"import_item.item_id[{item_id}]",
+        )
+        if dep_err:
+            return dep_err
 
         # Add to inventory
         self.add_to_inventory(item_id, quantity, unit)
@@ -2242,6 +2485,125 @@ class SimulationEngine:
         )
         self._ensure_recipe_retry_events()
         self._last_state_snapshot_time = self.state.current_time_hours
+
+        # ADR-025: fail fast if loaded state references deprecated/upgraded IDs.
+        for item_id in self.state.inventory.keys():
+            item_model = self.kb.get_item(item_id)
+            if not item_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="item",
+                entity_id=item_id,
+                model=item_model,
+                reference_path=f"snapshot.state.inventory[{item_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for item_id in self.state.total_imports.keys():
+            item_model = self.kb.get_item(item_id)
+            if not item_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="item",
+                entity_id=item_id,
+                model=item_model,
+                reference_path=f"snapshot.state.total_imports[{item_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for machine_id in self.state.machines_built:
+            machine_model = self.kb.get_item(machine_id)
+            if not machine_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="machine",
+                entity_id=machine_id,
+                model=machine_model,
+                reference_path=f"snapshot.state.machines_built[{machine_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for proc in self.state.active_processes:
+            process_model = self.kb.get_process(proc.process_id)
+            if not process_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="process",
+                entity_id=proc.process_id,
+                model=process_model,
+                reference_path=f"snapshot.state.active_processes[{proc.process_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for process_run in self.scheduler.active_processes.values():
+            process_model = self.kb.get_process(process_run.process_id)
+            if not process_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="process",
+                entity_id=process_run.process_id,
+                model=process_model,
+                reference_path=f"snapshot.scheduler.active_processes[{process_run.process_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for process_run in self.scheduler.completed_processes:
+            process_model = self.kb.get_process(process_run.process_id)
+            if not process_model:
+                continue
+            dep_err = self._check_not_deprecated(
+                entity_type="process",
+                entity_id=process_run.process_id,
+                model=process_model,
+                reference_path=f"snapshot.scheduler.completed_processes[{process_run.process_id}]",
+            )
+            if dep_err:
+                raise ValueError(dep_err["message"])
+
+        for recipe_run in self.orchestrator.recipe_runs.values():
+            recipe_model = self.kb.get_recipe(recipe_run.recipe_id)
+            if recipe_model:
+                dep_err = self._check_not_deprecated(
+                    entity_type="recipe",
+                    entity_id=recipe_run.recipe_id,
+                    model=recipe_model,
+                    reference_path=f"snapshot.orchestrator.recipe_runs[{recipe_run.recipe_id}]",
+                )
+                if dep_err:
+                    raise ValueError(dep_err["message"])
+            target_item = self.kb.get_item(recipe_run.target_item_id)
+            if target_item:
+                dep_err = self._check_not_deprecated(
+                    entity_type="item",
+                    entity_id=recipe_run.target_item_id,
+                    model=target_item,
+                    reference_path=f"snapshot.orchestrator.recipe_runs[{recipe_run.recipe_id}].target_item_id",
+                )
+                if dep_err:
+                    raise ValueError(dep_err["message"])
+            for idx, step in enumerate(recipe_run.recipe_def.get("steps", []) or []):
+                process_id = step.get("process_id")
+                if not process_id:
+                    continue
+                process_model = self.kb.get_process(process_id)
+                if not process_model:
+                    continue
+                dep_err = self._check_not_deprecated(
+                    entity_type="process",
+                    entity_id=process_id,
+                    model=process_model,
+                    reference_path=(
+                        f"snapshot.orchestrator.recipe_runs[{recipe_run.recipe_id}]"
+                        f".recipe_def.steps[{idx}].process_id"
+                    ),
+                )
+                if dep_err:
+                    raise ValueError(dep_err["message"])
 
         return True
 

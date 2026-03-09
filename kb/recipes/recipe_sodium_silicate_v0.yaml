@@ -1,0 +1,36 @@
+id: recipe_sodium_silicate_v0
+kind: recipe
+target_item_id: sodium_silicate
+variant_id: transport_equilibrium_v0
+inputs:
+  - item_id: sodium_carbonate
+    qty: 1.0
+    unit: kg
+  - item_id: silica_purified
+    qty: 0.57
+    unit: kg
+outputs:
+  - item_id: sodium_silicate
+    qty: 1.35
+    unit: kg
+  - item_id: carbon_dioxide_gas
+    qty: 0.22
+    unit: kg
+steps:
+  - process_id: sodium_silicate_transport_equilibrium_v0
+    inputs:
+      - item_id: sodium_carbonate
+        qty: 1.0
+        unit: kg
+      - item_id: silica_purified
+        qty: 0.57
+        unit: kg
+    outputs:
+      - item_id: sodium_silicate
+        qty: 1.35
+        unit: kg
+      - item_id: carbon_dioxide_gas
+        qty: 0.22
+        unit: kg
+notes: "Sodium silicate transport chemistry route (reaction 49)."
+

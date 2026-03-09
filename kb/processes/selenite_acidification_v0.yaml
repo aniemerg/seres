@@ -1,0 +1,40 @@
+id: selenite_acidification_v0
+kind: process
+name: Sodium selenite acidification
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: sodium_selenite
+  qty: 1.0
+  unit: kg
+- item_id: sulfuric_acid
+  qty: 0.74
+  unit: kg
+outputs:
+- item_id: selenous_acid
+  qty: 0.86
+  unit: kg
+- item_id: sodium_sulfate
+  qty: 0.88
+  unit: kg
+resource_requirements:
+- machine_id: acid_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Mixing and controlled acidification.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Acidification and settling cycle.
+notes: |
+  Addendum-corrected selenium route step:
+  Na2SeO3 + H2SO4 -> H2SeO3 + Na2SO4.

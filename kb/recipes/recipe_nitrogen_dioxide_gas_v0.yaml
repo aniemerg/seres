@@ -1,0 +1,30 @@
+id: recipe_nitrogen_dioxide_gas_v0
+kind: recipe
+target_item_id: nitrogen_dioxide_gas
+variant_id: ostwald_stage2_v0
+inputs:
+  - item_id: nitric_oxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.53
+    unit: kg
+outputs:
+  - item_id: nitrogen_dioxide_gas
+    qty: 1.53
+    unit: kg
+steps:
+  - process_id: ostwald_stage2_no_oxidation_v0
+    inputs:
+      - item_id: nitric_oxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 0.53
+        unit: kg
+    outputs:
+      - item_id: nitrogen_dioxide_gas
+        qty: 1.53
+        unit: kg
+notes: "Staged Ostwald stage-2 route to NO2."
+

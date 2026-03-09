@@ -1,0 +1,31 @@
+id: recipe_kovar_wire_v0
+kind: recipe
+target_item_id: kovar_wire_v0
+variant_id: v0
+inputs:
+  - item_id: kovar_alloy_fe_ni_co_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: kovar_wire_v0
+    qty: 9.4
+    unit: kg
+  - item_id: tailings
+    qty: 0.6
+    unit: kg
+steps:
+  - process_id: kovar_wire_drawing_v0
+    inputs:
+      - item_id: kovar_alloy_fe_ni_co_v0
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: kovar_wire_v0
+        qty: 9.4
+        unit: kg
+      - item_id: tailings
+        qty: 0.6
+        unit: kg
+    notes: Kovar wire drawing batch.
+notes: Kovar wire form-factor production route.
+

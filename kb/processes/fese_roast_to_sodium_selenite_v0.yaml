@@ -1,0 +1,49 @@
+id: fese_roast_to_sodium_selenite_v0
+kind: process
+name: FeSe roast to sodium selenite
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: iron_selenide
+  qty: 1.0
+  unit: kg
+- item_id: sodium_carbonate
+  qty: 0.8
+  unit: kg
+- item_id: oxygen_gas
+  qty: 0.3
+  unit: kg
+outputs:
+- item_id: sodium_selenite
+  qty: 0.9
+  unit: kg
+- item_id: iron_oxide_powder
+  qty: 0.4
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.4
+  unit: kg
+resource_requirements:
+- machine_id: roasting_furnace_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 3.0
+  unit: kWh
+  notes: Oxidative roasting and carbonate conversion.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Roast and separation cycle.
+notes: |
+  Explicit representation of reaction 14 route:
+  FeSe + Na2CO3 + O2 -> sodium_selenite + iron oxide + CO2.

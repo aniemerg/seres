@@ -1,0 +1,50 @@
+id: recipe_wheatstone_bridge_module_v0
+kind: recipe
+target_item_id: wheatstone_bridge_module_v0
+variant_id: v0
+inputs:
+  - item_id: signal_amplifier_module
+    qty: 0.2
+    unit: kg
+  - item_id: resistor_wire_wound_v0
+    qty: 0.06
+    unit: kg
+  - item_id: potentiometer_wirewound_v0
+    qty: 0.03
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 0.08
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.08
+    unit: kg
+outputs:
+  - item_id: wheatstone_bridge_module_v0
+    qty: 0.35
+    unit: kg
+steps:
+  - process_id: wheatstone_bridge_module_assembly_v0
+    inputs:
+      - item_id: signal_amplifier_module
+        qty: 0.2
+        unit: kg
+      - item_id: resistor_wire_wound_v0
+        qty: 0.06
+        unit: kg
+      - item_id: potentiometer_wirewound_v0
+        qty: 0.03
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 0.08
+        unit: kg
+      - item_id: sheet_metal_or_structural_steel
+        qty: 0.08
+        unit: kg
+    outputs:
+      - item_id: wheatstone_bridge_module_v0
+        qty: 0.35
+        unit: kg
+    notes: Assemble and calibrate wheatstone bridge conditioning module.
+notes: >
+  Wheatstone bridge module recipe using dedicated assembly/calibration process.
+

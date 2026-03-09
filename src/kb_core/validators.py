@@ -95,6 +95,48 @@ def _get_entity_dict(entity: Any) -> Dict[str, Any]:
     return entity
 
 
+def _deprecation_metadata(entity: Any) -> Dict[str, Any]:
+    """Extract deprecated/upgraded metadata from an entity."""
+    data = _get_entity_dict(entity) if entity is not None else {}
+    upgraded_raw = (
+        data.get("upgraded_to")
+        or data.get("superseded_by")
+        or data.get("replacement_id")
+        or data.get("replaced_by")
+    )
+
+    if isinstance(upgraded_raw, list):
+        upgraded_to = [str(x) for x in upgraded_raw if x]
+    elif upgraded_raw:
+        upgraded_to = [str(upgraded_raw)]
+    else:
+        upgraded_to = []
+
+    status = str(data.get("status", "")).lower()
+    deprecated = bool(data.get("deprecated") or data.get("is_deprecated"))
+    if status in ("deprecated", "superseded"):
+        deprecated = True
+
+    return {
+        "is_deprecated": deprecated or bool(upgraded_to),
+        "upgraded_to": upgraded_to,
+        "upgrade_note": data.get("upgrade_note") or data.get("deprecation_note"),
+    }
+
+
+def _deprecated_fix_hint(metadata: Dict[str, Any]) -> str:
+    """Build a concise fix hint for deprecated reference issues."""
+    upgraded_to = metadata.get("upgraded_to") or []
+    note = metadata.get("upgrade_note")
+    if upgraded_to:
+        hint = f"Replace with: {', '.join(upgraded_to)}"
+    else:
+        hint = "Replace reference with a non-deprecated ID"
+    if note:
+        hint += f". Note: {note}"
+    return hint
+
+
 # =============================================================================
 # Schema Validation (Category 1)
 # =============================================================================
@@ -936,6 +978,19 @@ def validate_process_references(
                     field_path=f"inputs[item_id={item_id}]",
                     fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
                 ))
+            else:
+                dep = _deprecation_metadata(item)
+                if dep["is_deprecated"]:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="deprecated_reference",
+                        entity_type="process",
+                        entity_id=process_id,
+                        message=f"Input item '{item_id}' is deprecated/upgraded and must be replaced",
+                        field_path=f"inputs[item_id={item_id}]",
+                        fix_hint=_deprecated_fix_hint(dep)
+                    ))
 
     for output_item in process_dict.get('outputs', []) or []:
         item_id = output_item.get('item_id')
@@ -952,6 +1007,19 @@ def validate_process_references(
                     field_path=f"outputs[item_id={item_id}]",
                     fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
                 ))
+            else:
+                dep = _deprecation_metadata(item)
+                if dep["is_deprecated"]:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="deprecated_reference",
+                        entity_type="process",
+                        entity_id=process_id,
+                        message=f"Output item '{item_id}' is deprecated/upgraded and must be replaced",
+                        field_path=f"outputs[item_id={item_id}]",
+                        fix_hint=_deprecated_fix_hint(dep)
+                    ))
 
     for byproduct_item in process_dict.get('byproducts', []) or []:
         item_id = byproduct_item.get('item_id')
@@ -968,6 +1036,19 @@ def validate_process_references(
                     field_path=f"byproducts[item_id={item_id}]",
                     fix_hint=f"Create item definition for '{item_id}' or mark process with is_template: true if this is a template"
                 ))
+            else:
+                dep = _deprecation_metadata(item)
+                if dep["is_deprecated"]:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="deprecated_reference",
+                        entity_type="process",
+                        entity_id=process_id,
+                        message=f"Byproduct item '{item_id}' is deprecated/upgraded and must be replaced",
+                        field_path=f"byproducts[item_id={item_id}]",
+                        fix_hint=_deprecated_fix_hint(dep)
+                    ))
 
     # Rule 2: Resource machines exist (WARNING)
     # Check all machine_id in resource_requirements
@@ -986,6 +1067,36 @@ def validate_process_references(
                     message=f"Resource machine '{machine_id}' not found in KB",
                     field_path=f"resource_requirements[machine_id={machine_id}]",
                     fix_hint=f"Create machine definition for '{machine_id}'"
+                ))
+            else:
+                dep = _deprecation_metadata(machine)
+                if dep["is_deprecated"]:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="deprecated_reference",
+                        entity_type="process",
+                        entity_id=process_id,
+                        message=f"Resource machine '{machine_id}' is deprecated/upgraded and must be replaced",
+                        field_path=f"resource_requirements[machine_id={machine_id}]",
+                        fix_hint=_deprecated_fix_hint(dep)
+                    ))
+
+    # Legacy machine references (requires_ids) should not point to deprecated entities
+    for machine_id in process_dict.get('requires_ids', []) or []:
+        machine = kb.get_item(machine_id)
+        if machine:
+            dep = _deprecation_metadata(machine)
+            if dep["is_deprecated"]:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="reference",
+                    rule="deprecated_reference",
+                    entity_type="process",
+                    entity_id=process_id,
+                    message=f"Legacy machine reference '{machine_id}' is deprecated/upgraded and must be replaced",
+                    field_path=f"requires_ids[machine_id={machine_id}]",
+                    fix_hint=_deprecated_fix_hint(dep)
                 ))
 
     return issues
@@ -1552,6 +1663,63 @@ def validate_recipe(
     # Reference validation: process_id must exist (ERROR - ADR-017 Category 6 Rule 3)
     if converter:
         kb = converter.kb
+        target_item_id = recipe_dict.get("target_item_id")
+        if target_item_id:
+            target_item = kb.get_item(target_item_id)
+            if target_item:
+                dep = _deprecation_metadata(target_item)
+                if dep["is_deprecated"]:
+                    issues.append(ValidationIssue(
+                        level=ValidationLevel.ERROR,
+                        category="reference",
+                        rule="deprecated_reference",
+                        entity_type="recipe",
+                        entity_id=recipe_id,
+                        message=f"target_item_id '{target_item_id}' is deprecated/upgraded and must be replaced",
+                        field_path="target_item_id",
+                        fix_hint=_deprecated_fix_hint(dep)
+                    ))
+
+        for i, inp in enumerate(recipe_dict.get("inputs", []) or []):
+            item_id = inp.get("item_id")
+            if not item_id:
+                continue
+            item = kb.get_item(item_id)
+            if not item:
+                continue
+            dep = _deprecation_metadata(item)
+            if dep["is_deprecated"]:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="reference",
+                    rule="deprecated_reference",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Recipe input '{item_id}' is deprecated/upgraded and must be replaced",
+                    field_path=f"inputs[{i}].item_id",
+                    fix_hint=_deprecated_fix_hint(dep)
+                ))
+
+        for i, outp in enumerate(recipe_dict.get("outputs", []) or []):
+            item_id = outp.get("item_id")
+            if not item_id:
+                continue
+            item = kb.get_item(item_id)
+            if not item:
+                continue
+            dep = _deprecation_metadata(item)
+            if dep["is_deprecated"]:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="reference",
+                    rule="deprecated_reference",
+                    entity_type="recipe",
+                    entity_id=recipe_id,
+                    message=f"Recipe output '{item_id}' is deprecated/upgraded and must be replaced",
+                    field_path=f"outputs[{i}].item_id",
+                    fix_hint=_deprecated_fix_hint(dep)
+                ))
+
         for i, step in enumerate(steps):
             process_id = step.get('process_id')
             if process_id:
@@ -1568,6 +1736,19 @@ def validate_recipe(
                         field_path=f"steps[{i}].process_id",
                         fix_hint=f"Create process definition for '{process_id}' or correct the process_id"
                     ))
+                else:
+                    dep = _deprecation_metadata(process)
+                    if dep["is_deprecated"]:
+                        issues.append(ValidationIssue(
+                            level=ValidationLevel.ERROR,
+                            category="reference",
+                            rule="deprecated_reference",
+                            entity_type="recipe",
+                            entity_id=recipe_id,
+                            message=f"Step {i} references deprecated/upgraded process '{process_id}'",
+                            field_path=f"steps[{i}].process_id",
+                            fix_hint=_deprecated_fix_hint(dep)
+                        ))
 
         # ADR-018: Validate recipe inputs/outputs are resolvable
         inputs_outputs_issues = validate_recipe_inputs_outputs(recipe, kb)
@@ -1835,5 +2016,74 @@ def validate_bom_recipe_consistency(kb: Any) -> List[ValidationIssue]:
                             field_path="inputs",
                             fix_hint="Verify correct quantity - may account for scrap/loss or be an error"
                         ))
+
+    return issues
+
+
+def validate_deprecated_references(kb: Any) -> List[ValidationIssue]:
+    """
+    Validate deprecated/upgraded references in BOMs and item BOM pointers.
+
+    These checks are KB-global and complement per-process/per-recipe validation.
+    """
+    issues: List[ValidationIssue] = []
+
+    # Item->BOM pointers: item itself should not be deprecated when actively referenced.
+    for item_id, item in kb.items.items():
+        item_dict = _get_entity_dict(item)
+        if not item_dict.get("bom"):
+            continue
+        dep = _deprecation_metadata(item_dict)
+        if dep["is_deprecated"]:
+            issues.append(ValidationIssue(
+                level=ValidationLevel.ERROR,
+                category="reference",
+                rule="deprecated_reference",
+                entity_type="item",
+                entity_id=item_id,
+                message=f"Item '{item_id}' has BOM reference but item is deprecated/upgraded",
+                field_path="bom",
+                fix_hint=_deprecated_fix_hint(dep)
+            ))
+
+    # BOM owner/components should not reference deprecated entities.
+    for owner_item_id, bom in kb.boms.items():
+        bom_dict = _get_entity_dict(bom)
+        bom_id = bom_dict.get("id", f"bom_{owner_item_id}")
+
+        owner_item = kb.get_item(owner_item_id)
+        if owner_item:
+            dep = _deprecation_metadata(owner_item)
+            if dep["is_deprecated"]:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="reference",
+                    rule="deprecated_reference",
+                    entity_type="bom",
+                    entity_id=bom_id,
+                    message=f"BOM owner '{owner_item_id}' is deprecated/upgraded",
+                    field_path="owner_item_id",
+                    fix_hint=_deprecated_fix_hint(dep)
+                ))
+
+        for idx, comp in enumerate(bom_dict.get("components", []) or []):
+            comp_item_id = comp.get("item_id") or comp.get("id")
+            if not comp_item_id:
+                continue
+            comp_item = kb.get_item(comp_item_id)
+            if not comp_item:
+                continue
+            dep = _deprecation_metadata(comp_item)
+            if dep["is_deprecated"]:
+                issues.append(ValidationIssue(
+                    level=ValidationLevel.ERROR,
+                    category="reference",
+                    rule="deprecated_reference",
+                    entity_type="bom",
+                    entity_id=bom_id,
+                    message=f"BOM component '{comp_item_id}' is deprecated/upgraded",
+                    field_path=f"components[{idx}].item_id",
+                    fix_hint=_deprecated_fix_hint(dep)
+                ))
 
     return issues

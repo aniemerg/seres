@@ -1,0 +1,47 @@
+id: nickel_carbonyl_synthesis_v0
+kind: process
+name: Nickel carbonyl synthesis
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: nickel_metal
+  qty: 1.0
+  unit: kg
+- item_id: carbon_monoxide
+  qty: 4.0
+  unit: kg
+- item_id: sulfur_elemental
+  qty: 0.01
+  unit: kg
+outputs:
+- item_id: nickel_carbonyl_v0
+  qty: 5.0
+  unit: kg
+- item_id: sulfur_elemental
+  qty: 0.01
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: Pressurized carbonyl formation stage.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Carbonyl synthesis hold at Mond conditions.
+notes: |
+  Explicit stage for reaction 9 forward direction:
+  Ni + 4CO -> Ni(CO)4.
+  Sulfur catalyst is represented as an unmodified recycled material.

@@ -1,0 +1,37 @@
+id: ferrofluid_seal_formulation_v0
+kind: process
+name: Ferrofluid seal formulation
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: ferrofluid_slurry_v0
+  qty: 1.0
+  unit: kg
+- item_id: silicone_polymer
+  qty: 0.2
+  unit: kg
+outputs:
+- item_id: ferrofluid_sealant_v0
+  qty: 1.18
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Low-temperature blending and conditioning.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Sealant compounding batch cycle.
+notes: |
+  Formulates ferrofluidic sealing compound from magnetic slurry and silicone binder.
+

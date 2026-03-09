@@ -1,0 +1,40 @@
+id: recipe_reduced_ilmenite_residue_v0
+kind: recipe
+target_item_id: reduced_ilmenite_residue_v0
+variant_id: v0
+inputs:
+  - item_id: ilmenite_concentrate
+    qty: 10.0
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: reduced_ilmenite_residue_v0
+    qty: 9.0
+    unit: kg
+  - item_id: water
+    qty: 2.0
+    unit: kg
+steps:
+  - process_id: iron_reduction_from_ilmenite_v0
+    inputs:
+      - item_id: ilmenite_concentrate
+        qty: 10.0
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: reduced_ilmenite_residue_v0
+        qty: 9.0
+        unit: kg
+      - item_id: water
+        qty: 2.0
+        unit: kg
+    notes: >
+      Reduction-stage variant that captures mixed reduced residue stream before Fe/Ti
+      phase separation.
+notes: >
+  Produces mixed reduced-ilmenite residue feed for downstream liquation separation.
+

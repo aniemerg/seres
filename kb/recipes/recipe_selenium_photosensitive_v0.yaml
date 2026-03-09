@@ -1,0 +1,27 @@
+id: recipe_selenium_photosensitive_v0
+kind: recipe
+target_item_id: selenium_photosensitive_v0
+variant_id: photosensitive_grade_v0
+inputs:
+  - item_id: selenium_refined
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: selenium_photosensitive_v0
+    qty: 0.95
+    unit: kg
+steps:
+  - process_id: selenium_photosensitive_refining_v0
+    inputs:
+      - item_id: selenium_refined
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: selenium_photosensitive_v0
+        qty: 0.95
+        unit: kg
+    byproducts:
+      - item_id: waste
+        qty: 0.05
+        unit: kg
+notes: "Photosensitive selenium refinement path for sensor/photodiode use."

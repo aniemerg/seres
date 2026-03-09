@@ -1,0 +1,36 @@
+id: recipe_nitric_oxide_gas_v0
+kind: recipe
+target_item_id: nitric_oxide_gas
+variant_id: ostwald_stage1_v0
+inputs:
+  - item_id: ammonia_gas
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 2.35
+    unit: kg
+outputs:
+  - item_id: nitric_oxide_gas
+    qty: 1.76
+    unit: kg
+  - item_id: water
+    qty: 1.59
+    unit: kg
+steps:
+  - process_id: ostwald_stage1_ammonia_oxidation_v0
+    inputs:
+      - item_id: ammonia_gas
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 2.35
+        unit: kg
+    outputs:
+      - item_id: nitric_oxide_gas
+        qty: 1.76
+        unit: kg
+      - item_id: water
+        qty: 1.59
+        unit: kg
+notes: "Staged Ostwald stage-1 route to nitric oxide."
+

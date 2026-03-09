@@ -1,0 +1,47 @@
+id: recipe_illite_clay_v0
+kind: recipe
+target_item_id: illite_clay
+variant_id: orthoclase_weathering_v0
+inputs:
+  - item_id: orthoclase_feldspar
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.2
+    unit: kg
+  - item_id: water
+    qty: 0.3
+    unit: kg
+outputs:
+  - item_id: illite_clay
+    qty: 0.55
+    unit: kg
+  - item_id: silicic_acid
+    qty: 0.35
+    unit: kg
+  - item_id: potassium_chloride
+    qty: 0.20
+    unit: kg
+steps:
+  - process_id: orthoclase_hcl_weathering_to_illite_v0
+    inputs:
+      - item_id: orthoclase_feldspar
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.2
+        unit: kg
+      - item_id: water
+        qty: 0.3
+        unit: kg
+    outputs:
+      - item_id: illite_clay
+        qty: 0.55
+        unit: kg
+      - item_id: silicic_acid
+        qty: 0.35
+        unit: kg
+      - item_id: potassium_chloride
+        qty: 0.20
+        unit: kg
+notes: "Orthoclase weathering route for illite and KCl generation."

@@ -1,0 +1,41 @@
+id: wheatstone_bridge_module_assembly_v0
+kind: process
+name: Wheatstone bridge module assembly v0
+process_type: batch
+inputs:
+  - item_id: signal_amplifier_module
+    qty: 0.2
+    unit: kg
+  - item_id: resistor_wire_wound_v0
+    qty: 0.06
+    unit: kg
+  - item_id: potentiometer_wirewound_v0
+    qty: 0.03
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 0.08
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.08
+    unit: kg
+outputs:
+  - item_id: wheatstone_bridge_module_v0
+    qty: 0.35
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: signal_generator_analog_v0
+    qty: 1
+    unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 0.22
+  unit: kWh
+time_model:
+  type: batch
+  hr_per_batch: 1.2
+notes: >
+  Module assembly process for bridge completion, wiring, and calibration trim.
+

@@ -1,0 +1,31 @@
+id: recipe_porcelain_insulator_v0
+kind: recipe
+target_item_id: porcelain_insulator_v0
+variant_id: v0
+inputs:
+  - item_id: alumina_ceramic_v0
+    qty: 2.2
+    unit: kg
+outputs:
+  - item_id: porcelain_insulator_v0
+    qty: 1
+    unit: unit
+  - item_id: tailings
+    qty: 0.2
+    unit: kg
+steps:
+  - process_id: porcelain_insulator_fabrication_v0
+    inputs:
+      - item_id: alumina_ceramic_v0
+        qty: 2.2
+        unit: kg
+    outputs:
+      - item_id: porcelain_insulator_v0
+        qty: 1
+        unit: unit
+      - item_id: tailings
+        qty: 0.2
+        unit: kg
+    notes: Fabricate and fire rigid porcelain-form insulator part.
+notes: Porcelain insulator fabrication route.
+

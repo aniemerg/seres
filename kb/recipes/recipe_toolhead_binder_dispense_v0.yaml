@@ -1,0 +1,36 @@
+id: recipe_toolhead_binder_dispense_v0
+kind: recipe
+target_item_id: toolhead_binder_dispense_v0
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 15.0
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 2.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: toolhead_binder_dispense_v0
+    qty: 18.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 15.0
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 2.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: toolhead_binder_dispense_v0
+        qty: 18.0
+        unit: kg
+    notes: Assemble binder dispense and line routing interfaces.
+notes: Toolhead assembly for binder/ceramic slurry dispense path.

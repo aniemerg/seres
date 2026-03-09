@@ -1,0 +1,48 @@
+id: recipe_magnesium_oxide_forsterite_reduction_v1
+kind: recipe
+target_item_id: magnesium_oxide
+variant_id: forsterite_methane_reduction_v1
+inputs:
+  - item_id: forsterite_extraction_v0
+    qty: 1.0
+    unit: kg
+  - item_id: methane_gas
+    qty: 0.32
+    unit: kg
+outputs:
+  - item_id: magnesium_oxide
+    qty: 0.57
+    unit: kg
+  - item_id: silicon_metal_v0
+    qty: 0.2
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 0.45
+    unit: kg
+  - item_id: hydrogen_gas
+    qty: 0.1
+    unit: kg
+steps:
+  - process_id: forsterite_methane_reduction_v0
+    inputs:
+      - item_id: forsterite_extraction_v0
+        qty: 1.0
+        unit: kg
+      - item_id: methane_gas
+        qty: 0.32
+        unit: kg
+    outputs:
+      - item_id: magnesium_oxide
+        qty: 0.57
+        unit: kg
+      - item_id: silicon_metal_v0
+        qty: 0.2
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 0.45
+        unit: kg
+      - item_id: hydrogen_gas
+        qty: 0.1
+        unit: kg
+notes: "Forsterite-specific methane reduction route (reaction 29 variant)."
+

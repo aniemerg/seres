@@ -1,0 +1,40 @@
+id: calcium_carbonate_calcination_v0
+kind: process
+name: Calcium carbonate calcination to calcium oxide
+process_type: batch
+layer_tags:
+- layer_3
+- layer_4
+inputs:
+- item_id: calcium_carbonate
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: calcium_oxide
+  qty: 0.56
+  unit: kg
+- item_id: carbon_dioxide_gas
+  qty: 0.44
+  unit: kg
+resource_requirements:
+- machine_id: kiln_ceramic
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.5
+  unit: kWh
+  notes: Calcination heat duty.
+time_model:
+  type: batch
+  hr_per_batch: 2.5
+  notes: Heat, hold, and cooldown.
+notes: |
+  Explicit representation of reaction 50:
+  CaCO3 -> CaO + CO2.

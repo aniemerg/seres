@@ -1,0 +1,43 @@
+id: recipe_solar_sinter_optics_head_v0
+kind: recipe
+target_item_id: solar_sinter_optics_head_v0
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 40.0
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 3.0
+    unit: kg
+  - item_id: machine_vision_camera_v0
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: solar_sinter_optics_head_v0
+    qty: 42.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 40.0
+        unit: kg
+      - item_id: ceramic_insulators
+        qty: 3.0
+        unit: kg
+      - item_id: machine_vision_camera_v0
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: solar_sinter_optics_head_v0
+        qty: 42.0
+        unit: kg
+    notes: Assemble optical head housing and sensing aperture interface.
+notes: >
+  Solar sinter optics head assembly route.

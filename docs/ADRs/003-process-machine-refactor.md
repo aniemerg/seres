@@ -1,8 +1,50 @@
 # ADR 003: Process-Machine Schema Harmonization
 
-**Status:** Partially Implemented
+**Status:** Partially Implemented, Partially Deprecated
 **Date:** 2025-12-18 (Draft), 2026-01-08 (Partial Implementation)
 **Update 2026-01-11:** Schema references updated to `src/kb_core/schema.py`.
+**Update 2026-03-03:** ADR marked partially deprecated pending ADR-003 completion hardening.
+
+---
+
+## Status Update (2026-03-03): Partial Deprecation and Current Runtime Reality
+
+This ADR remains directionally correct but is now **partially deprecated as an implementation guide** because the codebase currently runs in a hybrid compatibility mode.
+
+### What is true today (observed in repo)
+
+1. **Process data migration is mostly complete**:
+   - `kb/processes` contains `requires_ids` fields, but all observed entries are empty lists (`[]`).
+   - `resource_requirements.machine_id` is broadly used and validated.
+
+2. **Simulator still supports legacy fields at runtime**:
+   - `src/simulation/engine.py` still reads legacy `requires_ids` and `required_machines` for backward compatibility, in addition to `resource_requirements.machine_id`.
+   - `src/simulation/cli.py` machine requirement display also still reads legacy fields.
+
+3. **Schema still permits deprecated patterns**:
+   - `src/kb_core/schema.py` keeps `requires_ids` in validated `Process`.
+   - `RawRequirement` still aliases `resource_type` -> `machine_id` for compatibility.
+
+4. **Indexer remains partially pre-migration in internals**:
+   - `src/indexer/indexer.py` still checks `resource_type/resource` in `resource_requirements` reference collection/null reporting paths.
+   - Orphan resource-type logic remains active.
+
+### Deprecation meaning for this ADR
+
+This ADR is **not withdrawn**. Its target architecture remains active, but sections describing migration as effectively complete should be treated as stale until final hardening is done.
+
+Use this ADR as:
+- **Normative target state** for machine/process modeling (`resource_requirements.machine_id`).
+- **Historical migration context** for why compatibility code exists.
+
+Do **not** assume from this ADR alone that legacy fields are fully removed from runtime/indexer behavior.
+
+### Completion criteria to remove partial deprecation label
+
+- Remove runtime dependency on `requires_ids`/`required_machines` in simulation paths.
+- Remove indexer dependence on `resource_type/resource` in process requirement reference collection.
+- Keep or provide explicit one-shot migration tooling for legacy YAML.
+- Update this ADR status to either `Implemented` (if finalized) or superseded by a replacement ADR.
 
 ---
 
@@ -423,5 +465,6 @@ notes: |
 - `design/memo_a.md` - Core specification
 - `docs/README.md` - Workflow documentation
 - `design/memos/parts_and_labor_guidelines.md` - Worker guidelines
+- `ADR 018: Recipe Inputs/Outputs Validation and Tracking` - Canonical behavior for recipe/process inputs/outputs resolution and validation; complements ADR-003's machine/resource modeling split.
 - `ADR 001: Dedupe Initiative` - Related cleanup
 - `ADR 002: Autonomous Queue Agent` - Queue workflow

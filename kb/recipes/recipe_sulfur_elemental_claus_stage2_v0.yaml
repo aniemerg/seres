@@ -1,0 +1,36 @@
+id: recipe_sulfur_elemental_claus_stage2_v0
+kind: recipe
+target_item_id: sulfur_elemental
+variant_id: claus_stage2_v0
+inputs:
+  - item_id: sulfur_dioxide_gas
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_sulfide_gas
+    qty: 0.53
+    unit: kg
+outputs:
+  - item_id: sulfur_elemental
+    qty: 0.73
+    unit: kg
+  - item_id: water
+    qty: 0.8
+    unit: kg
+steps:
+  - process_id: claus_stage2_sulfur_recovery_v0
+    inputs:
+      - item_id: sulfur_dioxide_gas
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_sulfide_gas
+        qty: 0.53
+        unit: kg
+    outputs:
+      - item_id: sulfur_elemental
+        qty: 0.73
+        unit: kg
+      - item_id: water
+        qty: 0.8
+        unit: kg
+notes: "Explicit Claus stage-2 sulfur recovery route."
+

@@ -1,0 +1,40 @@
+id: aluminum_hydroxide_calcination_v0
+kind: process
+name: Aluminum hydroxide calcination to alumina
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: aluminum_hydroxide
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: alumina_powder
+  qty: 0.65
+  unit: kg
+- item_id: water
+  qty: 0.35
+  unit: kg
+resource_requirements:
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+  notes: Calcination near 400C.
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+  notes: Heating and dehydration.
+notes: |
+  Explicit representation of reaction 27:
+  Al(OH)3 -> Al2O3 + H2O.

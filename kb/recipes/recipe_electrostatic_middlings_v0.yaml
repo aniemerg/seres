@@ -1,0 +1,49 @@
+id: recipe_electrostatic_middlings_v0
+kind: recipe
+target_item_id: electrostatic_middlings_v0
+variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 100.0
+    unit: kg
+outputs:
+  - item_id: electrostatic_middlings_v0
+    qty: 10.0
+    unit: kg
+  - item_id: anorthite_ore
+    qty: 45.0
+    unit: kg
+  - item_id: pyroxene_concentrate
+    qty: 20.0
+    unit: kg
+  - item_id: ilmenite_concentrate
+    qty: 12.0
+    unit: kg
+  - item_id: tailings
+    qty: 13.0
+    unit: kg
+steps:
+  - process_id: electrostatic_beneficiation_regolith_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 100.0
+        unit: kg
+    outputs:
+      - item_id: electrostatic_middlings_v0
+        qty: 10.0
+        unit: kg
+      - item_id: anorthite_ore
+        qty: 45.0
+        unit: kg
+      - item_id: pyroxene_concentrate
+        qty: 20.0
+        unit: kg
+      - item_id: ilmenite_concentrate
+        qty: 12.0
+        unit: kg
+      - item_id: tailings
+        qty: 13.0
+        unit: kg
+    notes: Capture middlings stream for recycle and grade/recovery optimization loops.
+notes: >
+  Explicit middlings stream route from electrostatic beneficiation.

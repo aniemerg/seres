@@ -1,0 +1,40 @@
+id: recipe_thermal_probe_regolith_v0
+kind: recipe
+target_item_id: thermal_probe_regolith_v0
+variant_id: v0
+inputs:
+  - item_id: stainless_steel_sheath
+    qty: 0.2
+    unit: kg
+  - item_id: control_circuit_board_basic
+    qty: 0.1
+    unit: kg
+  - item_id: connector_electrical_small
+    qty: 0.02
+    unit: kg
+  - item_id: insulation_material
+    qty: 0.03
+    unit: kg
+outputs:
+  - item_id: thermal_probe_regolith_v0
+    qty: 0.35
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: stainless_steel_sheath
+        qty: 0.2
+        unit: kg
+      - item_id: control_circuit_board_basic
+        qty: 0.1
+        unit: kg
+      - item_id: connector_electrical_small
+        qty: 0.02
+        unit: kg
+      - item_id: insulation_material
+        qty: 0.03
+        unit: kg
+    outputs:
+      - item_id: thermal_probe_regolith_v0
+        qty: 0.35
+        unit: kg

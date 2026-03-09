@@ -1,0 +1,33 @@
+id: prospecting_site_qualification_v0
+kind: process
+name: Prospecting site qualification v0
+process_type: batch
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: regolith_sample_characterized_v0
+    qty: 4.0
+    unit: kg
+  - item_id: tailings
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: kapvik_microrover_v0
+    qty: 1
+    unit: count
+  - machine_id: prospecting_module_v0
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 2.0
+energy_model:
+  type: fixed_per_batch
+  value: 0.35
+  unit: kWh
+notes: >
+  Full site qualification operation combining shallow sampling, geotechnical
+  probing, and in-situ sensing to produce characterized regolith samples for
+  downstream extraction planning.

@@ -1,0 +1,41 @@
+id: recipe_kaolinite_clay_v0
+kind: recipe
+target_item_id: kaolinite_clay
+variant_id: illite_conversion_v0
+inputs:
+  - item_id: illite_clay
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.1
+    unit: kg
+  - item_id: water
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: kaolinite_clay
+    qty: 0.92
+    unit: kg
+  - item_id: potassium_chloride
+    qty: 0.12
+    unit: kg
+steps:
+  - process_id: illite_to_kaolinite_conversion_v0
+    inputs:
+      - item_id: illite_clay
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.1
+        unit: kg
+      - item_id: water
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: kaolinite_clay
+        qty: 0.92
+        unit: kg
+      - item_id: potassium_chloride
+        qty: 0.12
+        unit: kg
+notes: "Local kaolinite production route from illite (reaction 20 coverage)."

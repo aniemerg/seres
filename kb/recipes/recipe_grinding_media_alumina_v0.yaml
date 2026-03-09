@@ -1,0 +1,31 @@
+id: recipe_grinding_media_alumina_v0
+kind: recipe
+target_item_id: grinding_media_alumina_v0
+variant_id: v0
+inputs:
+  - item_id: alumina_ceramic_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: grinding_media_alumina_v0
+    qty: 9.5
+    unit: kg
+  - item_id: tailings
+    qty: 0.5
+    unit: kg
+steps:
+  - process_id: grinding_media_alumina_fabrication_v0
+    inputs:
+      - item_id: alumina_ceramic_v0
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: grinding_media_alumina_v0
+        qty: 9.5
+        unit: kg
+      - item_id: tailings
+        qty: 0.5
+        unit: kg
+    notes: Alumina media forming/sintering batch.
+notes: Alumina grinding media production route.
+

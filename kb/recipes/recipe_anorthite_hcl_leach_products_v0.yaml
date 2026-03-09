@@ -1,0 +1,47 @@
+id: recipe_anorthite_hcl_leach_products_v0
+kind: recipe
+target_item_id: aluminum_chloride_hydrate
+variant_id: anorthite_hcl_leach_v0
+inputs:
+  - item_id: anorthite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.65
+    unit: kg
+  - item_id: water
+    qty: 0.35
+    unit: kg
+outputs:
+  - item_id: aluminum_chloride_hydrate
+    qty: 0.46
+    unit: kg
+  - item_id: calcium_chloride
+    qty: 0.28
+    unit: kg
+  - item_id: silica_purified
+    qty: 0.26
+    unit: kg
+steps:
+  - process_id: anorthite_hcl_leach_to_chlorides_v0
+    inputs:
+      - item_id: anorthite_ore
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.65
+        unit: kg
+      - item_id: water
+        qty: 0.35
+        unit: kg
+    outputs:
+      - item_id: aluminum_chloride_hydrate
+        qty: 0.46
+        unit: kg
+      - item_id: calcium_chloride
+        qty: 0.28
+        unit: kg
+      - item_id: silica_purified
+        qty: 0.26
+        unit: kg
+notes: "Explicit anorthite acid-leach coproduct route (reaction 25 block)."

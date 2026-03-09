@@ -1,0 +1,29 @@
+id: recipe_hematite_ore_v0
+kind: recipe
+target_item_id: hematite_ore
+variant_id: iron_oxidation_v0
+inputs:
+  - item_id: iron_product
+    qty: 1.0
+    unit: kg
+  - item_id: oxygen_gas
+    qty: 0.429
+    unit: kg
+outputs:
+  - item_id: hematite_ore
+    qty: 1.429
+    unit: kg
+steps:
+  - process_id: iron_to_hematite_oxidation_v0
+    inputs:
+      - item_id: iron_product
+        qty: 1.0
+        unit: kg
+      - item_id: oxygen_gas
+        qty: 0.429
+        unit: kg
+    outputs:
+      - item_id: hematite_ore
+        qty: 1.429
+        unit: kg
+notes: "Explicit hematite route for ferrite/magnetite precursor chain."

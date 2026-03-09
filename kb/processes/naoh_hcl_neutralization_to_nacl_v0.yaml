@@ -1,0 +1,41 @@
+id: naoh_hcl_neutralization_to_nacl_v0
+kind: process
+name: NaOH and HCl neutralization to sodium chloride
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: sodium_hydroxide
+  qty: 1.0
+  unit: kg
+- item_id: hydrochloric_acid
+  qty: 0.91
+  unit: kg
+outputs:
+- item_id: sodium_chloride
+  qty: 1.46
+  unit: kg
+- item_id: water
+  qty: 0.45
+  unit: kg
+resource_requirements:
+- machine_id: chemical_reactor_basic
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.0
+  unit: kWh
+  notes: Neutralization and evaporation/drying.
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+  notes: Reaction and salt recovery cycle.
+notes: |
+  Explicit representation of reaction 17 neutralization route:
+  NaOH + HCl -> NaCl + H2O.
+

@@ -1,0 +1,29 @@
+id: magnetometer_station_calibration_v0
+kind: process
+name: Magnetometer station calibration v0
+process_type: batch
+inputs:
+  - item_id: magnetometer_calibration_set_v0
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: magnetometer_calibration_set_v0
+    qty: 0.1
+    unit: kg
+resource_requirements:
+  - machine_id: kapvik_microrover_v0
+    qty: 1
+    unit: count
+  - machine_id: prospecting_module_v0
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 0.5
+energy_model:
+  type: fixed_per_batch
+  value: 0.05
+  unit: kWh
+notes: >
+  Stationary calibration check for dual-head magnetic sensing chain prior to
+  low-noise prospecting runs.

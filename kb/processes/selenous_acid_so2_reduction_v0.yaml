@@ -1,0 +1,46 @@
+id: selenous_acid_so2_reduction_v0
+kind: process
+name: Selenous acid SO2 reduction to selenium
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: selenous_acid
+  qty: 1.0
+  unit: kg
+- item_id: sulfur_dioxide_gas
+  qty: 0.64
+  unit: kg
+- item_id: water
+  qty: 0.10
+  unit: kg
+outputs:
+- item_id: selenium_refined
+  qty: 0.79
+  unit: kg
+- item_id: sulfuric_acid
+  qty: 0.95
+  unit: kg
+resource_requirements:
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.5
+  unit: kWh
+  notes: SO2-assisted reduction with acid recycle.
+time_model:
+  type: batch
+  hr_per_batch: 1.5
+  notes: Reduction and separation cycle.
+notes: |
+  Alternate addendum-corrected selenium step:
+  H2SeO3 + 2SO2 + H2O -> Se + 2H2SO4.

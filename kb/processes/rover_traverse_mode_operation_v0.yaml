@@ -1,0 +1,33 @@
+id: rover_traverse_mode_operation_v0
+kind: process
+name: Rover traverse mode operation v0
+process_type: continuous
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 5.0
+    unit: kg
+outputs:
+  - item_id: regolith_lunar_mare
+    qty: 5.0
+    unit: kg
+resource_requirements:
+  - machine_id: kapvik_microrover_v0
+    qty: 1
+    unit: count
+  - machine_id: prospecting_module_v0
+    qty: 1
+    unit: count
+time_model:
+  type: linear_rate
+  rate: 20.0
+  rate_unit: kg/hr
+  scaling_basis: regolith_lunar_mare
+energy_model:
+  type: per_unit
+  value: 0.08
+  unit: kWh/kg
+  scaling_basis: regolith_lunar_mare
+notes: >
+  Traverse-mode operation for regional scanning and anomaly trend mapping while
+  driving between candidate sites.
+

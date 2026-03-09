@@ -11,8 +11,15 @@
 5. **`docs/conservative_mode_guide.md`** — Queue work philosophy and decision trees (DEFAULT APPROACH)
 6. **`docs/closure_error_guidance.md`** — Closure analysis error resolution (material flow gaps)
 7. **`docs/fixing-template-validation-errors.md`** — Guide for fixing template process errors (4,609 errors)
+8. **`docs/ADRs/025-deprecated-id-enforcement-and-manual-migration.md`** — Deprecated/upgraded ID policy (simulator hard-stop + manual reference updates)
 
 These documents are **mandatory prerequisites** for contributing to the knowledge base. They define the scope, constraints, and methodology for building the self-replicating system model.
+
+## ID Upgrade Policy (ADR-025)
+
+When IDs are upgraded/deprecated, keep deprecated entries in KB with upgrade metadata.
+Simulation behavior is fail-fast: deprecated ID references should stop execution and
+require manual investigation/update of references.
 
 ## Milestone Artifacts
 - `docs/self_reproduction_demo.md` — Self‑reproduction demo story and how to run it

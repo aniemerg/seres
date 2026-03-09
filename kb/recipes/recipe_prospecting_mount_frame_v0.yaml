@@ -1,0 +1,44 @@
+id: recipe_prospecting_mount_frame_v0
+kind: recipe
+target_item_id: prospecting_mount_frame_v0
+variant_id: v0
+inputs:
+  - item_id: aluminum_alloy_bar
+    qty: 2.8
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: prospecting_mount_frame_v0
+    qty: 2.4
+    unit: kg
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: aluminum_alloy_bar
+        qty: 2.8
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 2.5
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.3
+        unit: kg
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 2.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: prospecting_mount_frame_v0
+        qty: 2.4
+        unit: kg
+      - item_id: waste
+        qty: 0.3
+        unit: kg
+

@@ -1,0 +1,36 @@
+id: recipe_silicone_polymer_from_dimethyldichlorosilane_v1
+kind: recipe
+target_item_id: silicone_polymer
+variant_id: dimethyldichlorosilane_hydrolysis_v1
+inputs:
+  - item_id: dimethyldichlorosilane
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.26
+    unit: kg
+outputs:
+  - item_id: silicone_polymer
+    qty: 0.64
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 0.62
+    unit: kg
+steps:
+  - process_id: dimethyldichlorosilane_hydrolysis_polycondensation_v0
+    inputs:
+      - item_id: dimethyldichlorosilane
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.26
+        unit: kg
+    outputs:
+      - item_id: silicone_polymer
+        qty: 0.64
+        unit: kg
+      - item_id: hydrogen_chloride
+        qty: 0.62
+        unit: kg
+notes: "Silicone polymer route with explicit HCl recycle byproduct."
+

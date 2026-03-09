@@ -1,0 +1,35 @@
+id: recipe_selenous_acid_v0
+kind: recipe
+target_item_id: selenous_acid
+variant_id: acidification_v0
+inputs:
+  - item_id: sodium_selenite
+    qty: 1.0
+    unit: kg
+  - item_id: sulfuric_acid
+    qty: 0.74
+    unit: kg
+outputs:
+  - item_id: selenous_acid
+    qty: 0.86
+    unit: kg
+  - item_id: sodium_sulfate
+    qty: 0.88
+    unit: kg
+steps:
+  - process_id: selenite_acidification_v0
+    inputs:
+      - item_id: sodium_selenite
+        qty: 1.0
+        unit: kg
+      - item_id: sulfuric_acid
+        qty: 0.74
+        unit: kg
+    outputs:
+      - item_id: selenous_acid
+        qty: 0.86
+        unit: kg
+      - item_id: sodium_sulfate
+        qty: 0.88
+        unit: kg
+notes: "Sodium selenite acidification to selenous acid intermediate."

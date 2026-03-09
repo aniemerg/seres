@@ -1,0 +1,37 @@
+id: recipe_powder_recoater_module_v0
+kind: recipe
+target_item_id: powder_recoater_module_v0
+variant_id: v0
+inputs:
+  - item_id: sheet_metal_or_structural_steel
+    qty: 31.0
+    unit: kg
+  - item_id: lead_screw_assembly
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: powder_recoater_module_v0
+    qty: 36.0
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: sheet_metal_or_structural_steel
+        qty: 31.0
+        unit: kg
+      - item_id: lead_screw_assembly
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: powder_recoater_module_v0
+        qty: 36.0
+        unit: kg
+    notes: Assemble recoater blade carriage and layer-positioning drive.
+notes: >
+  Powder recoater module assembly route.

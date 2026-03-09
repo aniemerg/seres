@@ -1,0 +1,29 @@
+id: prospecting_station_measurement_v0
+kind: process
+name: Prospecting station measurement v0
+process_type: batch
+inputs:
+  - item_id: regolith_lunar_mare
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: regolith_sample_characterized_v0
+    qty: 2.0
+    unit: kg
+resource_requirements:
+  - machine_id: kapvik_microrover_v0
+    qty: 1
+    unit: count
+  - machine_id: prospecting_module_v0
+    qty: 1
+    unit: count
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+energy_model:
+  type: fixed_per_batch
+  value: 0.12
+  unit: kWh
+notes: >
+  Station-mode prospecting measurement with reduced rover motion and prioritized
+  low-noise magnetic and spectral acquisition.

@@ -1,0 +1,35 @@
+id: recipe_iron_metal_thermite_v0
+kind: recipe
+target_item_id: iron_metal_pure
+variant_id: thermite_v0
+inputs:
+  - item_id: hematite_ore
+    qty: 1.0
+    unit: kg
+  - item_id: aluminum_metal_pure
+    qty: 0.34
+    unit: kg
+outputs:
+  - item_id: iron_metal_pure
+    qty: 0.70
+    unit: kg
+  - item_id: alumina_powder
+    qty: 0.64
+    unit: kg
+steps:
+  - process_id: thermite_reduction_iron_from_hematite_v0
+    inputs:
+      - item_id: hematite_ore
+        qty: 1.0
+        unit: kg
+      - item_id: aluminum_metal_pure
+        qty: 0.34
+        unit: kg
+    outputs:
+      - item_id: iron_metal_pure
+        qty: 0.70
+        unit: kg
+      - item_id: alumina_powder
+        qty: 0.64
+        unit: kg
+notes: "Alternate thermite route for iron production (reaction 28)."

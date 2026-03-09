@@ -1,0 +1,47 @@
+id: enstatite_hydrothermal_serpentine_talc_v0
+kind: process
+name: Enstatite hydrothermal conversion to serpentine and talc
+process_type: batch
+layer_tags:
+- layer_4
+- layer_5
+inputs:
+- item_id: pyroxene_concentrate
+  qty: 1.0
+  unit: kg
+- item_id: water
+  qty: 0.4
+  unit: kg
+outputs:
+- item_id: serpentinite
+  qty: 0.7
+  unit: kg
+- item_id: talc
+  qty: 0.68
+  unit: kg
+- item_id: tailings
+  qty: 0.02
+  unit: kg
+resource_requirements:
+- machine_id: pressure_vessel_steel
+  qty: 1
+  unit: count
+- machine_id: generic_chemical_reactor_v0
+  qty: 1
+  unit: count
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 4.0
+  unit: kWh
+  notes: Hydrothermal reaction with controlled pressure/temperature.
+time_model:
+  type: batch
+  hr_per_batch: 6.0
+  notes: Long hydrothermal residence time.
+notes: |
+  Explicit representation of reaction 37:
+  enstatite-rich pyroxene + water -> serpentine + talc products.
+

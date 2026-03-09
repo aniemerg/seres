@@ -1,0 +1,36 @@
+id: recipe_sodium_chloride_neutralization_v1
+kind: recipe
+target_item_id: sodium_chloride
+variant_id: naoh_hcl_neutralization_v1
+inputs:
+  - item_id: sodium_hydroxide
+    qty: 1.0
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.91
+    unit: kg
+outputs:
+  - item_id: sodium_chloride
+    qty: 1.46
+    unit: kg
+  - item_id: water
+    qty: 0.45
+    unit: kg
+steps:
+  - process_id: naoh_hcl_neutralization_to_nacl_v0
+    inputs:
+      - item_id: sodium_hydroxide
+        qty: 1.0
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.91
+        unit: kg
+    outputs:
+      - item_id: sodium_chloride
+        qty: 1.46
+        unit: kg
+      - item_id: water
+        qty: 0.45
+        unit: kg
+notes: "Explicit neutralization route for NaCl regeneration (reaction 17)."
+

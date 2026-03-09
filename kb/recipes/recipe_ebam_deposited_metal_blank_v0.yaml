@@ -1,0 +1,32 @@
+id: recipe_ebam_deposited_metal_blank_v0
+kind: recipe
+target_item_id: ebam_deposited_metal_blank_v0
+variant_id: v0
+inputs:
+  - item_id: metal_wire_feed
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: ebam_deposited_metal_blank_v0
+    qty: 9.3
+    unit: kg
+  - item_id: metal_swarf
+    qty: 0.7
+    unit: kg
+steps:
+  - process_id: electron_beam_additive_manufacturing_v0
+    inputs:
+      - item_id: metal_wire_feed
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: ebam_deposited_metal_blank_v0
+        qty: 9.3
+        unit: kg
+      - item_id: metal_swarf
+        qty: 0.7
+        unit: kg
+    notes: EBAM deposition run producing near-net metal blank.
+notes: >
+  Recipe for near-net metal blank via electron-beam wire-feed additive manufacturing.
+

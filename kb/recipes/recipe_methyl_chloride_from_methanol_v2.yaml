@@ -1,0 +1,36 @@
+id: recipe_methyl_chloride_from_methanol_v2
+kind: recipe
+target_item_id: methyl_chloride_gas
+variant_id: methanol_hcl_v2
+inputs:
+  - item_id: methanol_liquid
+    qty: 1.0
+    unit: kg
+  - item_id: hydrogen_chloride
+    qty: 1.14
+    unit: kg
+outputs:
+  - item_id: methyl_chloride_gas
+    qty: 1.58
+    unit: kg
+  - item_id: water
+    qty: 0.56
+    unit: kg
+steps:
+  - process_id: methanol_hcl_to_methyl_chloride_v0
+    inputs:
+      - item_id: methanol_liquid
+        qty: 1.0
+        unit: kg
+      - item_id: hydrogen_chloride
+        qty: 1.14
+        unit: kg
+    outputs:
+      - item_id: methyl_chloride_gas
+        qty: 1.58
+        unit: kg
+      - item_id: water
+        qty: 0.56
+        unit: kg
+notes: "Methanol chlorination variant for methyl chloride production (reaction 40)."
+

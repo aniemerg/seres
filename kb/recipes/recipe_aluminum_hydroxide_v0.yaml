@@ -1,0 +1,41 @@
+id: recipe_aluminum_hydroxide_v0
+kind: recipe
+target_item_id: aluminum_hydroxide
+variant_id: alcl3_hydrate_hydrolysis_v0
+inputs:
+  - item_id: aluminum_chloride_hydrate
+    qty: 1.0
+    unit: kg
+  - item_id: water
+    qty: 0.2
+    unit: kg
+outputs:
+  - item_id: aluminum_hydroxide
+    qty: 0.56
+    unit: kg
+  - item_id: hydrochloric_acid
+    qty: 0.52
+    unit: kg
+  - item_id: water
+    qty: 0.12
+    unit: kg
+steps:
+  - process_id: aluminum_chloride_hydrate_to_aluminum_hydroxide_v0
+    inputs:
+      - item_id: aluminum_chloride_hydrate
+        qty: 1.0
+        unit: kg
+      - item_id: water
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: aluminum_hydroxide
+        qty: 0.56
+        unit: kg
+      - item_id: hydrochloric_acid
+        qty: 0.52
+        unit: kg
+      - item_id: water
+        qty: 0.12
+        unit: kg
+notes: "Explicit AlCl3 hydrate to Al(OH)3 route (reaction 26 block)."

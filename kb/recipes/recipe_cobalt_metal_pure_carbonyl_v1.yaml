@@ -1,0 +1,30 @@
+id: recipe_cobalt_metal_pure_carbonyl_v1
+kind: recipe
+target_item_id: cobalt_metal_pure
+variant_id: carbonyl_decomp_v1
+inputs:
+  - item_id: dicobalt_octacarbonyl
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: cobalt_metal_pure
+    qty: 0.4
+    unit: kg
+  - item_id: carbon_monoxide
+    qty: 0.6
+    unit: kg
+steps:
+  - process_id: cobalt_carbonyl_decomposition_to_metal_v0
+    inputs:
+      - item_id: dicobalt_octacarbonyl
+        qty: 1.0
+        unit: kg
+    outputs:
+      - item_id: cobalt_metal_pure
+        qty: 0.4
+        unit: kg
+      - item_id: carbon_monoxide
+        qty: 0.6
+        unit: kg
+notes: "Explicit decomposition variant for Co2(CO)8 -> cobalt metal + CO."
+

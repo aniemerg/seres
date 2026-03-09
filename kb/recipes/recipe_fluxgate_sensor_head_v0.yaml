@@ -1,0 +1,46 @@
+id: recipe_fluxgate_sensor_head_v0
+kind: recipe
+target_item_id: fluxgate_sensor_head_v0
+variant_id: v0
+inputs:
+  - item_id: encoder_magnetic_v0
+    qty: 0.2
+    unit: kg
+  - item_id: control_circuit_board_basic
+    qty: 0.1
+    unit: kg
+  - item_id: stainless_steel_sheath
+    qty: 0.2
+    unit: kg
+  - item_id: connector_electrical_small
+    qty: 0.04
+    unit: kg
+outputs:
+  - item_id: fluxgate_sensor_head_v0
+    qty: 0.45
+    unit: kg
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: encoder_magnetic_v0
+        qty: 0.2
+        unit: kg
+      - item_id: control_circuit_board_basic
+        qty: 0.1
+        unit: kg
+      - item_id: stainless_steel_sheath
+        qty: 0.2
+        unit: kg
+      - item_id: connector_electrical_small
+        qty: 0.04
+        unit: kg
+    outputs:
+      - item_id: fluxgate_sensor_head_v0
+        qty: 0.45
+        unit: kg
+      - item_id: waste
+        qty: 0.05
+        unit: kg
+notes: >
+  Uses magnetic sensing and electronics leaves to form a ruggedized fluxgate-like
+  sensing head for rover anomaly mapping.

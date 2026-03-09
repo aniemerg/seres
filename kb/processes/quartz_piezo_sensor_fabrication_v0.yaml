@@ -1,0 +1,42 @@
+id: quartz_piezo_sensor_fabrication_v0
+kind: process
+name: Quartz piezo sensor fabrication v0
+process_type: batch
+inputs:
+  - item_id: quartz_crystal
+    qty: 1.0
+    unit: kg
+  - item_id: sheet_metal_or_structural_steel
+    qty: 0.2
+    unit: kg
+  - item_id: ceramic_insulators
+    qty: 0.1
+    unit: kg
+outputs:
+  - item_id: piezo_sensor_quartz_v0
+    qty: 1
+    unit: unit
+  - item_id: metal_swarf
+    qty: 0.03
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: polishing_station
+    qty: 1
+    unit: count
+  - machine_id: signal_generator_analog_v0
+    qty: 1
+    unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 0.45
+  unit: kWh
+time_model:
+  type: batch
+  hr_per_batch: 1.6
+notes: >
+  Fabrication route for quartz piezo sensing element including face preparation,
+  contact stack assembly, and calibration check.
+

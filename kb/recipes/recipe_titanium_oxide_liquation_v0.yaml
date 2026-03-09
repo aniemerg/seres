@@ -1,0 +1,38 @@
+id: recipe_titanium_oxide_liquation_v0
+kind: recipe
+target_item_id: titanium_oxide
+variant_id: liquation_v0
+inputs:
+  - item_id: reduced_ilmenite_residue_v0
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: titanium_oxide
+    qty: 5.1
+    unit: kg
+  - item_id: iron_metal_pure
+    qty: 3.4
+    unit: kg
+  - item_id: tailings
+    qty: 1.5
+    unit: kg
+steps:
+  - process_id: liquation_fe_tio2_separation_v0
+    inputs:
+      - item_id: reduced_ilmenite_residue_v0
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: titanium_oxide
+        qty: 5.1
+        unit: kg
+      - item_id: iron_metal_pure
+        qty: 3.4
+        unit: kg
+      - item_id: tailings
+        qty: 1.5
+        unit: kg
+    notes: Liquation variant emphasizing TiO2-rich product route.
+notes: >
+  Liquation separation variant for `titanium_oxide` production from reduced ilmenite
+  residue.

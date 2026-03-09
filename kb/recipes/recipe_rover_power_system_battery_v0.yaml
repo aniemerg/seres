@@ -9,15 +9,27 @@ inputs:
   - item_id: bus_bar_copper
     qty: 0.5
     unit: kg
+  - item_id: battery_management_system
+    qty: 0.8
+    unit: kg
+  - item_id: charge_controller_set
+    qty: 0.6
+    unit: kg
+  - item_id: assembled_wire_harness
+    qty: 0.5
+    unit: kg
   - item_id: insulation_material
     qty: 0.3
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.2
     unit: kg
 outputs:
   - item_id: rover_power_system_battery_v0
     qty: 12.8
     unit: kg
 steps:
-  - process_id: battery_pack_assembly_nife
+  - process_id: assembly_basic_v0
     inputs:
       - item_id: nife_battery_cell
         qty: 12.0
@@ -29,7 +41,53 @@ steps:
         qty: 0.3
         unit: kg
     outputs:
+      - item_id: assembled_equipment
+        qty: 12.4
+        unit: kg
+    est_time_hr: 2.0
+    labor_hours: 2.0
+    machine_hours: 1.0
+    notes: "Stack and interconnect NiFe cells into insulated module block."
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 12.4
+        unit: kg
+      - item_id: battery_management_system
+        qty: 0.8
+        unit: kg
+      - item_id: charge_controller_set
+        qty: 0.6
+        unit: kg
+      - item_id: assembled_wire_harness
+        qty: 0.5
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.2
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 14.0
+        unit: kg
+    est_time_hr: 2.5
+    labor_hours: 2.0
+    machine_hours: 1.0
+    notes: "Install BMS, charge interface, and pack harnessing."
+  - process_id: alignment_and_testing_basic_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 14.0
+        unit: kg
+    outputs:
       - item_id: rover_power_system_battery_v0
         qty: 12.8
         unit: kg
-notes: "Local Ni-Fe rover battery pack assembly path to satisfy no_recipe gap; seed linkage from battery_system_nife_v0."
+      - item_id: waste
+        qty: 1.2
+        unit: kg
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    machine_hours: 0.5
+    notes: "Perform balancing, insulation verification, and load test; remove temporary fixtures."
+assumptions: "Detailed rover battery assembly with local NiFe cell path and onboard control electronics."
+notes: "Multi-step rover NiFe battery pack build path with explicit electrical integration and test."

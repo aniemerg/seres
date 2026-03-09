@@ -1,0 +1,43 @@
+id: recipe_selenium_refined_so2_route_v0
+kind: recipe
+target_item_id: selenium_refined
+variant_id: selenous_acid_so2_v0
+inputs:
+  - item_id: selenous_acid
+    qty: 1.0
+    unit: kg
+  - item_id: sulfur_dioxide_gas
+    qty: 0.64
+    unit: kg
+  - item_id: water
+    qty: 0.10
+    unit: kg
+outputs:
+  - item_id: selenium_refined
+    qty: 0.79
+    unit: kg
+  - item_id: sulfuric_acid
+    qty: 0.95
+    unit: kg
+steps:
+  - process_id: selenous_acid_so2_reduction_v0
+    inputs:
+      - item_id: selenous_acid
+        qty: 1.0
+        unit: kg
+      - item_id: sulfur_dioxide_gas
+        qty: 0.64
+        unit: kg
+      - item_id: water
+        qty: 0.10
+        unit: kg
+    outputs:
+      - item_id: selenium_refined
+        qty: 0.79
+        unit: kg
+      - item_id: sulfuric_acid
+        qty: 0.95
+        unit: kg
+notes: |
+  Alternate addendum-corrected selenium route using SO2 as reductant and
+  sulfuric acid recycle.

@@ -1,0 +1,32 @@
+id: recipe_regolith_sinter_featured_part_v0
+kind: recipe
+target_item_id: regolith_sinter_featured_part_v0
+variant_id: v0
+inputs:
+  - item_id: regolith_powder
+    qty: 10.0
+    unit: kg
+outputs:
+  - item_id: regolith_sinter_featured_part_v0
+    qty: 9.2
+    unit: kg
+  - item_id: tailings
+    qty: 0.8
+    unit: kg
+steps:
+  - process_id: selective_solar_sintering_v0
+    inputs:
+      - item_id: regolith_powder
+        qty: 10.0
+        unit: kg
+    outputs:
+      - item_id: regolith_sinter_featured_part_v0
+        qty: 9.2
+        unit: kg
+      - item_id: tailings
+        qty: 0.8
+        unit: kg
+    notes: Selective solar sintering production run.
+notes: >
+  Recipe for geometry-controlled regolith sintered parts using selective solar path.
+
