@@ -20,6 +20,13 @@ From repo root:
 .venv/bin/python -m src.cli sim export-view --sim-id runbook_queue_sequential --out apps/simviewer/public
 ```
 
+For sim2 runs:
+```bash
+.venv/bin/python -m src.cli sim2 export-view --sim-id <sim_id> --sim-root simulations_parallel --out apps/simviewer/public
+```
+
+`npm run build` and `npm run preview` use `apps/simviewer/public/data/*` as the source dataset.
+
 ## Run dev server
 ```bash
 cd apps/simviewer

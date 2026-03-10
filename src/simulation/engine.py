@@ -844,6 +844,7 @@ class SimulationEngine:
             return {"scheduled": 0, "blocked": 0, "fatal_error": None, "failed_step": None}
 
         recipe_def = recipe_run.recipe_def
+        goal_context = dict(recipe_run.goal_context or {})
         ready_steps = self.orchestrator.get_ready_steps(recipe_run_id)
         outcome = {"scheduled": 0, "blocked": 0, "fatal_error": None, "failed_step": None}
 
@@ -862,6 +863,7 @@ class SimulationEngine:
                 recipe_run_id=recipe_run_id,
                 step_index=step_idx,
                 process_def_override=schedule_def["process_def_override"],
+                goal_context=goal_context,
             )
 
             if result["success"]:
@@ -1251,6 +1253,7 @@ class SimulationEngine:
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
         process_def_override: Optional[Dict[str, Any]] = None,
+        goal_context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Start a process using ADR-020 event-driven scheduling.
@@ -1264,6 +1267,7 @@ class SimulationEngine:
             start_time: When to start (default: now)
             recipe_run_id: Parent recipe run ID (if part of recipe)
             step_index: Step index in recipe (if applicable)
+            goal_context: Optional goal/tag metadata to attach to process lifecycle
 
         Returns:
             Dict with success, process_run_id, and scheduling info
@@ -1522,6 +1526,7 @@ class SimulationEngine:
             recipe_run_id=recipe_run_id,
             step_index=step_index,
             energy_kwh=energy_kwh,
+            goal_context=goal_context,
         )
 
         # Log the process scheduling immediately so it can be reconstructed on load
@@ -1578,6 +1583,7 @@ class SimulationEngine:
                 ),
                 step_index=step_index,
                 energy_kwh=energy_kwh,
+                goal_context=dict(goal_context or {}),
             )
         )
 
@@ -1630,6 +1636,7 @@ class SimulationEngine:
         recipe_id: str,
         quantity: float = 1.0,
         start_time: Optional[float] = None,
+        goal_context: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
         Run a recipe using ADR-020 orchestration.
@@ -1641,6 +1648,7 @@ class SimulationEngine:
             recipe_id: Recipe definition ID
             quantity: Number of recipe instances to run
             start_time: When recipe starts (default: now)
+            goal_context: Optional goal/tag metadata to propagate to child process events
 
         Returns:
             Dict with success, recipe_run_id, and orchestration info
@@ -1718,12 +1726,17 @@ class SimulationEngine:
         if start_time is None:
             start_time = self.scheduler.current_time
 
+        resolved_goal_context = dict(goal_context or {})
+        if target_item_id and "goal_target_item_id" not in resolved_goal_context:
+            resolved_goal_context["goal_target_item_id"] = target_item_id
+
         # Start recipe with orchestrator
         recipe_run_id = self.orchestrator.start_recipe(
             recipe_id=recipe_id,
             recipe_dict=recipe_def,
             target_item_id=recipe_def.get('target_item_id', 'unknown'),
             start_time=start_time,
+            goal_context=resolved_goal_context,
         )
 
         # Track and log recipe start for traceability
@@ -1731,8 +1744,11 @@ class SimulationEngine:
         self._log_event(
             RecipeStartEvent(
                 recipe_id=recipe_id,
+                recipe_run_id=recipe_run_id,
+                target_item_id=recipe_def.get("target_item_id"),
                 quantity=quantity,
                 duration_hours=0.0,
+                goal_context=resolved_goal_context,
             )
         )
 
@@ -2214,6 +2230,7 @@ class SimulationEngine:
                         actual_start_time=event.time,
                         scale=process_run.scale,
                         scheduled_end_time=process_run.end_time,
+                        goal_context=dict(process_run.goal_context or {}),
                     )
                 )
 
@@ -2291,6 +2308,7 @@ class SimulationEngine:
                             start_time=process_run.start_time,
                             outputs=outputs_with_units,
                             energy_kwh=energy_kwh,
+                            goal_context=dict(process_run.goal_context or {}),
                         )
                     )
 
@@ -2328,9 +2346,12 @@ class SimulationEngine:
                             self._log_event(
                                 RecipeCompleteEvent(
                                     recipe_id=recipe_id,
+                                    recipe_run_id=recipe_run_id,
+                                    target_item_id=recipe_run.target_item_id if recipe_run else None,
                                     quantity=quantity,
                                     outputs=acc_outputs,
                                     energy_kwh=self._recipe_energy_accum.get(recipe_run_id),
+                                    goal_context=dict(recipe_run.goal_context or {}) if recipe_run else {},
                                 )
                             )
                             self._logged_recipe_completions.add(recipe_run_id)

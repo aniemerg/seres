@@ -163,9 +163,29 @@ def _merge_plans(
                 prefer_max=item_id in machine_ids,
             )
         for recipe in plan.recipes:
-            merged.add_recipe(recipe.recipe_id, recipe.quantity, reason=recipe.reason)
+            recipe_metadata = dict(recipe.metadata or {})
+            tags = recipe_metadata.get("tags") if isinstance(recipe_metadata.get("tags"), dict) else {}
+            merged_tags = dict(tags)
+            merged_tags["goal.machine_id"] = plan.target_machine_id
+            recipe_metadata["tags"] = merged_tags
+            merged.add_recipe(
+                recipe.recipe_id,
+                recipe.quantity,
+                reason=recipe.reason,
+                metadata=recipe_metadata,
+            )
         if plan.target_recipe_id:
-            merged.add_recipe(plan.target_recipe_id, 1, reason="target_recipe")
+            merged.add_recipe(
+                plan.target_recipe_id,
+                1,
+                reason="target_recipe",
+                metadata={
+                    "tags": {
+                        "goal.machine_id": plan.target_machine_id,
+                        "goal.phase": "target_recipe",
+                    }
+                },
+            )
         elif allow_bom:
             merged.add_note(
                 f"Import-only machine '{plan.target_machine_id}' has no recipe target.",

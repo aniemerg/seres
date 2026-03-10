@@ -22,6 +22,7 @@ export type ProcessRun = {
   }>
   inputs: QuantityMap
   outputs: QuantityMap
+  goal_context?: Record<string, unknown>
   error_message?: string | null
 }
 

@@ -43,6 +43,7 @@ class ProcessRunSnapshot(BaseModel):
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class SchedulerSnapshot(BaseModel):
@@ -64,6 +65,7 @@ class RecipeRunSnapshot(BaseModel):
     scheduled_steps: Dict[int, str] = Field(default_factory=dict)
     is_completed: bool = False
     completed_at: Optional[float] = None
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class OrchestratorSnapshot(BaseModel):
@@ -112,6 +114,7 @@ def _process_run_to_snapshot(proc: ProcessRun) -> ProcessRunSnapshot:
         recipe_run_id=proc.recipe_run_id,
         step_index=proc.step_index,
         energy_kwh=proc.energy_kwh,
+        goal_context=dict(proc.goal_context),
     )
 
 
@@ -132,6 +135,7 @@ def _snapshot_to_process_run(snapshot: ProcessRunSnapshot) -> ProcessRun:
         recipe_run_id=snapshot.recipe_run_id,
         step_index=snapshot.step_index,
         energy_kwh=snapshot.energy_kwh,
+        goal_context=dict(snapshot.goal_context),
     )
 
 
@@ -177,6 +181,7 @@ def build_snapshot(engine) -> SimulationSnapshot:
             scheduled_steps=dict(run.scheduled_steps),
             is_completed=run.is_completed,
             completed_at=run.completed_at,
+            goal_context=dict(run.goal_context),
         )
     orchestrator_snapshot = OrchestratorSnapshot(recipe_runs=recipe_runs)
 
@@ -258,6 +263,7 @@ def restore_orchestrator(
             scheduled_steps=dict(run.scheduled_steps),
             is_completed=run.is_completed,
             completed_at=run.completed_at,
+            goal_context=dict(run.goal_context),
         )
         orchestrator.recipe_runs[run_id] = recipe_run
     return orchestrator

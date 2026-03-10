@@ -140,6 +140,7 @@ class ProcessRun:
     recipe_run_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
+    goal_context: Dict[str, Any] = field(default_factory=dict)
 
     def __repr__(self) -> str:
         return (
@@ -245,6 +246,7 @@ class Scheduler:
         recipe_run_id: Optional[str] = None,
         step_index: Optional[int] = None,
         energy_kwh: Optional[float] = None,
+        goal_context: Optional[Dict[str, Any]] = None,
     ) -> SchedulerEvent:
         """
         Schedule a process to start.
@@ -284,6 +286,7 @@ class Scheduler:
                 'recipe_run_id': recipe_run_id,
                 'step_index': step_index,
                 'energy_kwh': energy_kwh,
+                'goal_context': dict(goal_context or {}),
             }
         )
 
@@ -315,6 +318,7 @@ class Scheduler:
                 recipe_run_id=recipe_run_id,
                 step_index=step_index,
                 energy_kwh=energy_kwh,
+                goal_context=dict(goal_context or {}),
             )
 
         return start_event
@@ -468,6 +472,7 @@ class Scheduler:
             recipe_run_id=data.get('recipe_run_id'),
             step_index=data.get('step_index'),
             energy_kwh=data.get('energy_kwh'),
+            goal_context=dict(data.get('goal_context') or {}),
         )
 
         # Add to active processes

@@ -93,6 +93,7 @@ class ProcessScheduledEvent(Event):
     recipe_id: Optional[str] = None
     step_index: Optional[int] = None
     energy_kwh: Optional[float] = None
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ProcessStartEvent(Event):
@@ -106,6 +107,7 @@ class ProcessStartEvent(Event):
     actual_start_time: float
     scale: float
     scheduled_end_time: Optional[float] = None
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class ProcessCompleteEvent(Event):
@@ -120,23 +122,30 @@ class ProcessCompleteEvent(Event):
     energy_kwh: Optional[float] = None  # Energy consumed by this process
     time_hours: float
     start_time: Optional[float] = None
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class RecipeStartEvent(Event):
     """Recipe started."""
     type: Literal["recipe_start"] = "recipe_start"
     recipe_id: str
+    recipe_run_id: Optional[str] = None
+    target_item_id: Optional[str] = None
     quantity: float
     duration_hours: float
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class RecipeCompleteEvent(Event):
     """Recipe completed."""
     type: Literal["recipe_complete"] = "recipe_complete"
     recipe_id: str
+    recipe_run_id: Optional[str] = None
+    target_item_id: Optional[str] = None
     quantity: float
     outputs: Dict[str, InventoryItem]
     energy_kwh: Optional[float] = None  # Energy consumed by this recipe
+    goal_context: Dict[str, Any] = Field(default_factory=dict)
 
 
 class BuildEvent(Event):

@@ -121,3 +121,27 @@ def test_execute_plan_imports_only_missing_delta(tmp_path: Path):
     assert engine.load()
     assert engine.state.inventory["ore"].quantity == 7.0
 
+
+def test_merge_plans_splits_same_recipe_by_machine_goal(tmp_path: Path):
+    kb_root = _build_kb(tmp_path)
+    kb = KBLoader(kb_root, use_validated_models=False)
+    kb.load_all()
+
+    p1 = SimPlan(sim_id="s1", target_machine_id="machine_alpha", target_recipe_id="recipe_alpha", build_machine=False)
+    p1.add_recipe("recipe_ingot_v0", 3, reason="expand:ingot")
+
+    p2 = SimPlan(sim_id="s2", target_machine_id="machine_beta", target_recipe_id="recipe_beta", build_machine=False)
+    p2.add_recipe("recipe_ingot_v0", 5, reason="expand:ingot")
+
+    merged = _merge_plans([p1, p2], kb, sim_id="merged_split", allow_bom=False)
+
+    ingot_entries = [r for r in merged.recipes if r.recipe_id == "recipe_ingot_v0"]
+    assert len(ingot_entries) == 2
+
+    by_goal = {}
+    for entry in ingot_entries:
+        tags = entry.metadata.get("tags", {}) if isinstance(entry.metadata, dict) else {}
+        by_goal[tags.get("goal.machine_id")] = entry.quantity
+
+    assert by_goal["machine_alpha"] == 3
+    assert by_goal["machine_beta"] == 5

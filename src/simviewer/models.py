@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Dict, List
+from typing import Any, Dict, List
 
 
 @dataclass
@@ -33,6 +33,7 @@ class ProcessRunRecord:
     inputs: Dict[str, dict]
     outputs: Dict[str, dict]
     reserved_machines: List[ReservedMachine]
+    goal_context: Dict[str, Any]
     error_message: str | None = None
 
     def to_dict(self) -> dict:

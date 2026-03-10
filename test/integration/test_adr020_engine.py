@@ -841,6 +841,42 @@ class TestRecipeOrchestration:
         assert progress["progress_percent"] == pytest.approx(100.0)
         assert progress["is_completed"]
 
+    def test_run_recipe_propagates_goal_context_to_process_scheduled(self, recipe_kb, sim_dir):
+        """Goal/tag context passed to run_recipe should propagate to process scheduling events."""
+        kb = KBLoader(recipe_kb, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_goal_context", kb, sim_dir)
+        engine.import_item("ore", 10.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+        engine.import_item("forge", 1.0, "count")
+
+        result = engine.run_recipe(
+            recipe_id="recipe_part_v0",
+            goal_context={
+                "goal_id": "goal-machine-part",
+                "goal_type": "machine_build",
+                "goal_target_item_id": "part",
+                "tags": {
+                    "exp.variant": "labor20_chunk100",
+                    "priority": "critical_path",
+                },
+                "tag_policies": {
+                    "priority": "override",
+                },
+            },
+        )
+        assert result["success"]
+
+        scheduled_events = [e for e in engine.event_buffer if getattr(e, "type", "") == "process_scheduled"]
+        assert scheduled_events, "Expected at least one process_scheduled event"
+        goal_context = getattr(scheduled_events[0], "goal_context", {}) or {}
+        tags = goal_context.get("tags", {})
+        assert goal_context.get("goal_id") == "goal-machine-part"
+        assert goal_context.get("goal_target_item_id") == "part"
+        assert tags.get("exp.variant") == "labor20_chunk100"
+        assert tags.get("priority") == "critical_path"
+
 
 class TestUtilityMethods:
     """Test utility and query methods."""

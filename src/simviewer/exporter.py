@@ -379,6 +379,15 @@ def _extract_process_runs(
         if recipe_id is None and recipe_run_id:
             recipe_id = recipe_id_by_run_id.get(recipe_run_id)
 
+        goal_context: Dict[str, Any] = {}
+        for source in (done_ev, start_ev, sched):
+            if not isinstance(source, dict):
+                continue
+            raw_goal_context = source.get("goal_context")
+            if isinstance(raw_goal_context, dict):
+                goal_context = raw_goal_context
+                break
+
         record = ProcessRunRecord(
             process_run_id=run_id,
             process_id=process_id,
@@ -394,6 +403,7 @@ def _extract_process_runs(
             inputs=inputs if isinstance(inputs, dict) else {},
             outputs=outputs if isinstance(outputs, dict) else {},
             reserved_machines=reserved_machines,
+            goal_context=goal_context,
             error_message=error_message,
         )
         process_runs.append(record)

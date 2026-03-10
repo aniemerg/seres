@@ -32,6 +32,7 @@ class RecipeRun:
     recipe_def: Dict[str, Any]
     dependency_graph: DependencyGraph
     started_at: float
+    goal_context: Dict[str, Any] = field(default_factory=dict)
 
     # Step tracking
     completed_steps: Set[int] = field(default_factory=set)
@@ -131,6 +132,7 @@ class RecipeOrchestrator:
         recipe_dict: Dict[str, Any],
         target_item_id: str,
         start_time: float,
+        goal_context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """
         Start a recipe execution.
@@ -140,6 +142,7 @@ class RecipeOrchestrator:
             recipe_dict: Recipe dict with steps
             target_item_id: Target item being produced
             start_time: When recipe starts
+            goal_context: Optional goal/tag metadata for this recipe run
 
         Returns:
             recipe_run_id for this execution instance
@@ -158,6 +161,7 @@ class RecipeOrchestrator:
             recipe_def=recipe_dict,
             dependency_graph=dependency_graph,
             started_at=start_time,
+            goal_context=dict(goal_context or {}),
         )
 
         # Track recipe run

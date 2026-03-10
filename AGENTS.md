@@ -35,6 +35,8 @@ Quick examples:
 
 ## Quick start
 - Install deps with uv: `uv sync` (creates `.venv`).
+- **SimViewer JS tooling**: always run Node commands through `nvm` first.
+  - Example: `source ~/.nvm/nvm.sh && nvm use 24 && cd apps/simviewer && npm run build`
 - **KB Core Tools** (new unified CLI):
   - Run indexer: `python -m src.cli index`
     - Outputs: `out/index.json`, `out/validation_report.md`, `out/work_queue.jsonl`, etc.

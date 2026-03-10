@@ -30,6 +30,7 @@ class PlanRecipe:
     recipe_id: str
     quantity: int
     reason: Optional[str] = None
+    metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -67,14 +68,55 @@ class SimPlan:
         if item_id in self.imports:
             del self.imports[item_id]
 
-    def add_recipe(self, recipe_id: str, quantity: int, reason: Optional[str] = None) -> None:
+    def add_recipe(
+        self,
+        recipe_id: str,
+        quantity: int,
+        reason: Optional[str] = None,
+        metadata: Optional[Dict[str, Any]] = None,
+    ) -> None:
+        incoming_metadata = dict(metadata or {})
+        incoming_tags = incoming_metadata.get("tags") if isinstance(incoming_metadata.get("tags"), dict) else {}
+        incoming_goal_machine = incoming_tags.get("goal.machine_id")
         for entry in self.recipes:
+            if entry.recipe_id != recipe_id:
+                continue
+            existing_tags = entry.metadata.get("tags") if isinstance(entry.metadata.get("tags"), dict) else {}
+            existing_goal_machine = existing_tags.get("goal.machine_id")
+            # Preserve per-machine attribution by keeping separate entries when goal differs.
+            if existing_goal_machine != incoming_goal_machine:
+                continue
             if entry.recipe_id == recipe_id:
                 entry.quantity += quantity
                 if reason and entry.reason != reason:
                     entry.reason = f"{entry.reason}; {reason}" if entry.reason else reason
+                if incoming_metadata:
+                    if isinstance(existing_tags, dict) and isinstance(incoming_tags, dict):
+                        merged_tags = dict(existing_tags)
+                        for key, value in incoming_tags.items():
+                            if key not in merged_tags:
+                                merged_tags[key] = value
+                                continue
+                            prev = merged_tags[key]
+                            if prev == value:
+                                continue
+                            prev_parts = {p for p in str(prev).split("|") if p}
+                            prev_parts.add(str(value))
+                            merged_tags[key] = "|".join(sorted(prev_parts))
+                        entry.metadata["tags"] = merged_tags
+                    else:
+                        for key, value in incoming_metadata.items():
+                            if key not in entry.metadata:
+                                entry.metadata[key] = value
                 return
-        self.recipes.append(PlanRecipe(recipe_id=recipe_id, quantity=quantity, reason=reason))
+        self.recipes.append(
+            PlanRecipe(
+                recipe_id=recipe_id,
+                quantity=quantity,
+                reason=reason,
+                metadata=incoming_metadata,
+            )
+        )
 
     def add_note(self, message: str, style: str = "info") -> None:
         self.notes.append(PlanNote(message=message, style=style))

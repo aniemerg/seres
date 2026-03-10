@@ -15,7 +15,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from scripts.analysis.simplan import SimPlan
+from scripts.analysis.simplan import SimPlan, PlanRecipe
 from src.kb_core.kb_loader import KBLoader
 from src.simulation.engine import SimulationEngine
 from src.simulation_parallel.intent_queue import DeferredIntentQueue
@@ -101,7 +101,13 @@ def _get_recipe_outputs(recipe: Dict[str, Any]) -> Set[str]:
 
 
 def _order_recipes(plan: SimPlan, kb: KBLoader) -> List[str]:
-    recipe_ids = [r.recipe_id for r in plan.recipes]
+    recipe_ids: List[str] = []
+    seen_ids: Set[str] = set()
+    for entry in plan.recipes:
+        if entry.recipe_id in seen_ids:
+            continue
+        seen_ids.add(entry.recipe_id)
+        recipe_ids.append(entry.recipe_id)
     if not recipe_ids:
         return []
 
@@ -159,6 +165,40 @@ def _order_recipes(plan: SimPlan, kb: KBLoader) -> List[str]:
         ordered.extend(remaining)
 
     return ordered
+
+
+def _build_recipe_goal_context(
+    *,
+    recipe_id: str,
+    plan_goal_context: Dict[str, Any],
+    recipe_metadata: Dict[str, Any],
+    recipe_target_item_id: Optional[str],
+    recipe_target_is_machine: bool,
+) -> Dict[str, Any]:
+    goal_context = dict(plan_goal_context)
+    goal_context["tags"] = dict(plan_goal_context.get("tags") or {})
+    goal_context["tag_policies"] = dict(plan_goal_context.get("tag_policies") or {})
+
+    if recipe_target_item_id:
+        goal_context["goal_target_item_id"] = recipe_target_item_id
+        if recipe_target_is_machine:
+            goal_context["goal_type"] = "machine_build"
+            goal_context["goal_id"] = f"machine:{recipe_target_item_id}"
+            goal_context["tags"]["goal.machine_id"] = recipe_target_item_id
+
+    goal_context["tags"]["goal.recipe_id"] = recipe_id
+
+    incoming_tags = recipe_metadata.get("tags")
+    if isinstance(incoming_tags, dict):
+        for key, value in incoming_tags.items():
+            goal_context["tags"][key] = value
+
+    incoming_tag_policies = recipe_metadata.get("tag_policies")
+    if isinstance(incoming_tag_policies, dict):
+        for key, value in incoming_tag_policies.items():
+            goal_context["tag_policies"][key] = value
+
+    return goal_context
 
 
 def execute_plan(
@@ -232,6 +272,21 @@ def execute_plan(
                 "target_recipe_id": plan.target_recipe_id,
             },
         )
+
+    raw_plan_metadata = plan.metadata if isinstance(getattr(plan, "metadata", None), dict) else {}
+    raw_tags = raw_plan_metadata.get("tags") if isinstance(raw_plan_metadata.get("tags"), dict) else {}
+    raw_tag_policies = (
+        raw_plan_metadata.get("tag_policies")
+        if isinstance(raw_plan_metadata.get("tag_policies"), dict)
+        else {}
+    )
+    plan_goal_context: Dict[str, Any] = {
+        "goal_id": f"simplan:{plan.sim_id}",
+        "goal_type": "scenario_target",
+        "goal_target_item_id": plan.target_machine_id,
+        "tags": dict(raw_tags),
+        "tag_policies": dict(raw_tag_policies),
+    }
 
     def _trace(msg: str) -> None:
         if trace:
@@ -361,8 +416,22 @@ def execute_plan(
             f"deferred_intents={result.get('summary', {}).get('deferred_intents')}"
         )
 
-    def _run_recipe_and_advance(recipe_id: str, quantity: int) -> Dict[str, Any]:
-        result = engine.run_recipe(recipe_id, quantity)
+    def _run_recipe_and_advance(recipe: PlanRecipe) -> Dict[str, Any]:
+        recipe_id = recipe.recipe_id
+        quantity = recipe.quantity
+        recipe_model = kb.get_recipe(recipe_id)
+        recipe_def = _model_to_dict(recipe_model)
+        target_item_id = recipe_def.get("target_item_id") if isinstance(recipe_def, dict) else None
+        target_item = kb.get_item(target_item_id) if target_item_id else None
+        target_item_def = _model_to_dict(target_item)
+        recipe_goal_context = _build_recipe_goal_context(
+            recipe_id=recipe_id,
+            plan_goal_context=plan_goal_context,
+            recipe_metadata=recipe.metadata if isinstance(recipe.metadata, dict) else {},
+            recipe_target_item_id=target_item_id if isinstance(target_item_id, str) else None,
+            recipe_target_is_machine=target_item_def.get("kind") == "machine",
+        )
+        result = engine.run_recipe(recipe_id, quantity, goal_context=recipe_goal_context)
         if not result.get("success"):
             return result
         if engine_mode == "sim2":
@@ -373,9 +442,23 @@ def execute_plan(
             return {"success": False, "error": "advance_failed", "message": err}
         return {"success": True}
 
-    def _run_upfront_and_advance(recipe_batch: List[tuple[str, int]]) -> Optional[str]:
-        for recipe_id, quantity in recipe_batch:
-            result = engine.run_recipe(recipe_id, quantity)
+    def _run_upfront_and_advance(recipe_batch: List[PlanRecipe]) -> Optional[str]:
+        for recipe in recipe_batch:
+            recipe_id = recipe.recipe_id
+            quantity = recipe.quantity
+            recipe_model = kb.get_recipe(recipe_id)
+            recipe_def = _model_to_dict(recipe_model)
+            target_item_id = recipe_def.get("target_item_id") if isinstance(recipe_def, dict) else None
+            target_item = kb.get_item(target_item_id) if target_item_id else None
+            target_item_def = _model_to_dict(target_item)
+            recipe_goal_context = _build_recipe_goal_context(
+                recipe_id=recipe_id,
+                plan_goal_context=plan_goal_context,
+                recipe_metadata=recipe.metadata if isinstance(recipe.metadata, dict) else {},
+                recipe_target_item_id=target_item_id if isinstance(target_item_id, str) else None,
+                recipe_target_is_machine=target_item_def.get("kind") == "machine",
+            )
+            result = engine.run_recipe(recipe_id, quantity, goal_context=recipe_goal_context)
             if not result.get("success"):
                 return f"recipe_failed:{recipe_id}:{result.get('message')}"
         if engine_mode == "sim2":
@@ -384,16 +467,22 @@ def execute_plan(
 
     # Recipes (non-target first, dependency-ordered)
     recipe_order = _order_recipes(plan, kb)
-    recipe_map = {r.recipe_id: r for r in plan.recipes}
+    recipe_entries_by_id: Dict[str, List[PlanRecipe]] = {}
+    for recipe in plan.recipes:
+        bucket = recipe_entries_by_id.get(recipe.recipe_id)
+        if bucket is None:
+            recipe_entries_by_id[recipe.recipe_id] = [recipe]
+        else:
+            bucket.append(recipe)
     if strategy == "upfront":
-        upfront_batch: List[tuple[str, int]] = []
+        upfront_batch: List[PlanRecipe] = []
         for rid in recipe_order:
-            recipe = recipe_map[rid]
-            if dry_run:
-                print(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity} ({recipe.reason or ''})")
-                continue
-            _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
-            upfront_batch.append((recipe.recipe_id, recipe.quantity))
+            for recipe in recipe_entries_by_id.get(rid, []):
+                if dry_run:
+                    print(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity} ({recipe.reason or ''})")
+                    continue
+                _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
+                upfront_batch.append(recipe)
         if dry_run:
             print("ADVANCE_UNTIL_IDLE")
         else:
@@ -422,41 +511,42 @@ def execute_plan(
                     "detail": error,
                 }
             for rid in recipe_order:
-                _trace(f"RECIPE_DONE {rid}")
+                for recipe in recipe_entries_by_id.get(rid, []):
+                    _trace(f"RECIPE_DONE {recipe.recipe_id}")
     else:
         for rid in recipe_order:
-            recipe = recipe_map[rid]
-            if dry_run:
-                print(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity} ({recipe.reason or ''})")
-                print("ADVANCE_UNTIL_IDLE")
-                continue
-            _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
-            result = _run_recipe_and_advance(recipe.recipe_id, recipe.quantity)
-            if not result.get("success"):
-                if not dry_run:
-                    engine.log_annotation(
-                        key="scenario.status",
-                        value="failed",
-                        tags=["scenario", "status", "error"],
-                        source="simplan_runner",
-                    )
-                    engine.log_marker(
-                        name="simplan_failed_recipe",
-                        tags=["milestone", "error", "recipes"],
-                        source="simplan_runner",
-                        metadata={"recipe_id": recipe.recipe_id},
-                    )
-                    if sim2_session:
-                        sim2_session.save()
-                    else:
-                        engine.save()
-                return {
-                    "success": False,
-                    "error": result.get("error", "recipe_failed"),
-                    "recipe_id": recipe.recipe_id,
-                    "detail": result,
-                }
-            _trace(f"RECIPE_DONE {recipe.recipe_id}")
+            for recipe in recipe_entries_by_id.get(rid, []):
+                if dry_run:
+                    print(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity} ({recipe.reason or ''})")
+                    print("ADVANCE_UNTIL_IDLE")
+                    continue
+                _trace(f"RUN_RECIPE {recipe.recipe_id} x{recipe.quantity}")
+                result = _run_recipe_and_advance(recipe)
+                if not result.get("success"):
+                    if not dry_run:
+                        engine.log_annotation(
+                            key="scenario.status",
+                            value="failed",
+                            tags=["scenario", "status", "error"],
+                            source="simplan_runner",
+                        )
+                        engine.log_marker(
+                            name="simplan_failed_recipe",
+                            tags=["milestone", "error", "recipes"],
+                            source="simplan_runner",
+                            metadata={"recipe_id": recipe.recipe_id},
+                        )
+                        if sim2_session:
+                            sim2_session.save()
+                        else:
+                            engine.save()
+                    return {
+                        "success": False,
+                        "error": result.get("error", "recipe_failed"),
+                        "recipe_id": recipe.recipe_id,
+                        "detail": result,
+                    }
+                _trace(f"RECIPE_DONE {recipe.recipe_id}")
 
     if not dry_run:
         engine.log_marker(
@@ -472,7 +562,9 @@ def execute_plan(
             print("ADVANCE_UNTIL_IDLE")
         else:
             _trace(f"RUN_TARGET_RECIPE {plan.target_recipe_id} x1")
-            result = _run_recipe_and_advance(plan.target_recipe_id, 1)
+            result = _run_recipe_and_advance(
+                PlanRecipe(recipe_id=plan.target_recipe_id, quantity=1, reason="target_recipe")
+            )
             if not result.get("success"):
                 engine.log_annotation(
                     key="scenario.status",

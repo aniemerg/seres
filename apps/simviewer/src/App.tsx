@@ -17,18 +17,20 @@ import type {
 type Route =
   | { view: 'home' }
   | { view: 'gantt' }
+  | { view: 'recipes' }
   | { view: 'wiki'; id?: string }
   | { view: 'kbsearch' }
 
 const BAR_MIN_PX = 3
 const ROW_HEIGHT = 28
 const WIKI_HOME_ID = 'about_seres'
-type ColorMode = 'status' | 'process' | 'recipe'
+type ColorMode = 'status' | 'process' | 'recipe' | 'goal'
 
 function parseRoute(hash: string): Route {
   const clean = hash.replace(/^#\/?/, '')
   const parts = clean.split('/').filter(Boolean)
   if (parts[0] === 'gantt') return { view: 'gantt' }
+  if (parts[0] === 'recipes') return { view: 'recipes' }
   if (parts[0] === 'wiki') return { view: 'wiki', id: parts[1] }
   if (parts[0] === 'kb-search') return { view: 'kbsearch' }
   if (parts[0] === 'home') return { view: 'home' }
@@ -37,6 +39,7 @@ function parseRoute(hash: string): Route {
 
 function hashTo(route: Route): string {
   if (route.view === 'gantt') return '#/gantt'
+  if (route.view === 'recipes') return '#/recipes'
   if (route.view === 'wiki') return route.id ? `#/wiki/${route.id}` : `#/wiki/${WIKI_HOME_ID}`
   if (route.view === 'kbsearch') return '#/kb-search'
   return '#/home'
@@ -501,7 +504,29 @@ function runColor(run: ProcessRun, mode: ColorMode): string {
     return '#74d16a'
   }
   if (mode === 'process') return hashColor(run.process_id || 'process')
+  if (mode === 'goal') {
+    const tags = getGoalTags(run)
+    const goalMachine = tags['goal.machine_id']
+    if (goalMachine) return hashColor(goalMachine.split('|')[0].trim() || 'goal-machine')
+    const goalRecipe = tags['goal.recipe_id']
+    if (goalRecipe) return hashColor(goalRecipe)
+    return hashColor(run.recipe_id || run.recipe_run_id || run.process_id || 'goal')
+  }
   return hashColor(run.recipe_id || run.recipe_run_id || 'recipe')
+}
+
+function getGoalTags(run: ProcessRun): Record<string, string> {
+  const ctx = asObject(run.goal_context)
+  if (!ctx) return {}
+  const tags = asObject(ctx.tags)
+  if (!tags) return {}
+  const out: Record<string, string> = {}
+  for (const [k, v] of Object.entries(tags)) {
+    if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
+      out[k] = String(v)
+    }
+  }
+  return out
 }
 
 function asObject(v: unknown): Record<string, unknown> | null {
@@ -553,8 +578,10 @@ export function App() {
   const [articles, setArticles] = useState<Article[]>([])
   const [warnings, setWarnings] = useState<Warnings | null>(null)
   const [selectedRunId, setSelectedRunId] = useState<string | null>(null)
-  const [zoom, setZoom] = useState(0.02)
-  const [colorMode, setColorMode] = useState<ColorMode>('status')
+  const [selectedRunSource, setSelectedRunSource] = useState<'timeline' | 'recipes' | null>(null)
+  const [selectedTimeHours, setSelectedTimeHours] = useState<number | null>(null)
+  const [zoom, setZoom] = useState(0.28)
+  const [colorMode, setColorMode] = useState<ColorMode>('process')
   const [search, setSearch] = useState('')
 
   useEffect(() => {
@@ -678,6 +705,14 @@ export function App() {
   }, [simData, entitiesById])
 
   const selectedRun = useMemo(() => simData?.process_runs.find((r) => r.process_run_id === selectedRunId) ?? null, [simData, selectedRunId])
+  const selectedRecipeRuns = useMemo(
+    () => (
+      selectedRun?.recipe_run_id
+        ? (simData?.process_runs.filter((r) => r.recipe_run_id === selectedRun.recipe_run_id) ?? [])
+        : []
+    ),
+    [selectedRun, simData],
+  )
 
   const recipeContextByRunId = useMemo(() => {
     const byRecipe = new Map<string, ProcessRun[]>()
@@ -760,6 +795,52 @@ export function App() {
     () => (selectedRun ? resolveInventoryAtRun(selectedRun.process_run_id) : {}),
     [selectedRun, simData],
   )
+  const selectedRecipeBounds = useMemo(() => {
+    if (!selectedRun || selectedRecipeRuns.length === 0) return null
+    const start = Math.min(...selectedRecipeRuns.map((r) => r.start_time ?? 0))
+    const end = Math.max(...selectedRecipeRuns.map((r) => (r.end_time ?? r.start_time ?? 0)))
+    return { start, end }
+  }, [selectedRun, selectedRecipeRuns])
+  const resolveInventoryAtTime = (timeHours: number): QuantityMap => {
+    if (!simData) return {}
+    const targetTime = Math.max(0, timeHours)
+    const checkpoints = simData.inventory_checkpoints
+    let checkpoint: InventoryCheckpoint | null = null
+    for (const c of checkpoints) {
+      if (c.time_hours <= targetTime) checkpoint = c
+      else break
+    }
+    const inv: QuantityMap = checkpoint ? JSON.parse(JSON.stringify(checkpoint.inventory)) : {}
+    const startIdx = checkpoint ? Math.max(0, checkpoint.process_complete_count) : 0
+    for (let i = startIdx; i < simData.inventory_deltas.length; i += 1) {
+      const d = simData.inventory_deltas[i]
+      if (!d) continue
+      const t = d.time_hours ?? 0
+      if (t > targetTime) break
+      for (const [itemId, q] of Object.entries(d.delta)) {
+        const cur = inv[itemId]
+        if (!cur) inv[itemId] = { quantity: q.quantity, unit: q.unit }
+        else if (cur.unit === q.unit) inv[itemId] = { quantity: cur.quantity + q.quantity, unit: cur.unit }
+      }
+    }
+    return Object.fromEntries(
+      Object.entries(inv)
+        .filter(([, q]) => Math.abs(q.quantity) > 1e-9)
+        .sort((a, b) => a[0].localeCompare(b[0])),
+    )
+  }
+  const inventoryAtSelectedTime = useMemo(
+    () => (selectedTimeHours === null ? {} : resolveInventoryAtTime(selectedTimeHours)),
+    [selectedTimeHours, simData],
+  )
+  const inventoryAtRecipeStart = useMemo(
+    () => (selectedRecipeBounds ? resolveInventoryAtTime(selectedRecipeBounds.start) : {}),
+    [selectedRecipeBounds, simData],
+  )
+  const inventoryAtRecipeEnd = useMemo(
+    () => (selectedRecipeBounds ? resolveInventoryAtTime(selectedRecipeBounds.end) : {}),
+    [selectedRecipeBounds, simData],
+  )
 
   const navigate = (next: Route) => {
     window.location.hash = hashTo(next)
@@ -833,16 +914,19 @@ export function App() {
           {!sidebarCollapsed && <div className="brand">SERES Simviewer</div>}
         </div>
         <button className={route.view === 'home' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'home' })}>
-          {sidebarCollapsed ? 'H' : 'Home'}
+          {sidebarCollapsed ? '🏠' : '🏠 Home'}
         </button>
         <button className={route.view === 'gantt' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'gantt' })}>
-          {sidebarCollapsed ? 'T' : 'Timeline'}
+          {sidebarCollapsed ? '📈' : '📈 Timeline'}
+        </button>
+        <button className={route.view === 'recipes' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'recipes' })}>
+          {sidebarCollapsed ? '🧪' : '🧪 Recipes'}
         </button>
         <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'wiki', id: WIKI_HOME_ID })}>
-          {sidebarCollapsed ? 'W' : 'Wiki'}
+          {sidebarCollapsed ? '📚' : '📚 Wiki'}
         </button>
         <button className={route.view === 'kbsearch' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'kbsearch' })}>
-          {sidebarCollapsed ? 'S' : 'KB Search'}
+          {sidebarCollapsed ? '🔎' : '🔎 KB Search'}
         </button>
         <div className="meta">
           {simData ? (
@@ -873,11 +957,39 @@ export function App() {
           <GanttView
             simData={simData}
             entitiesById={entitiesById}
-            onSelectRun={(id) => setSelectedRunId(id)}
+            onSelectRun={(id) => {
+              setSelectedRunId(id)
+              setSelectedRunSource('timeline')
+            }}
+            selectedTimeHours={selectedTimeHours}
+            onSelectTime={(t) => {
+              setSelectedRunId(null)
+              setSelectedRunSource(null)
+              setSelectedTimeHours(t)
+            }}
             zoom={zoom}
             onZoom={setZoom}
             colorMode={colorMode}
             onColorMode={setColorMode}
+            onOpenKB={openWiki}
+          />
+        )}
+        {route.view === 'recipes' && simData && (
+          <RecipeTimelineView
+            simData={simData}
+            entitiesById={entitiesById}
+            onSelectRun={(id) => {
+              setSelectedRunId(id)
+              setSelectedRunSource('recipes')
+            }}
+            selectedTimeHours={selectedTimeHours}
+            onSelectTime={(t) => {
+              setSelectedRunId(null)
+              setSelectedRunSource(null)
+              setSelectedTimeHours(t)
+            }}
+            zoom={zoom}
+            onZoom={setZoom}
             onOpenKB={openWiki}
           />
         )}
@@ -914,10 +1026,24 @@ export function App() {
         <Drawer
           run={selectedRun}
           entitiesById={entitiesById}
-          inventory={inventoryForSelected}
+          mode={selectedRunSource === 'recipes' ? 'recipe' : 'process'}
+          recipeRuns={selectedRecipeRuns}
+          inventory={selectedRunSource === 'recipes' ? inventoryAtRecipeEnd : inventoryForSelected}
+          inventoryStart={selectedRunSource === 'recipes' ? inventoryAtRecipeStart : undefined}
+          inventoryLabel={selectedRunSource === 'recipes' ? 'end of recipe' : 'end of process'}
           recipeContext={recipeContextByRunId.get(selectedRun.process_run_id)}
-          onClose={() => setSelectedRunId(null)}
+          onClose={() => {
+            setSelectedRunId(null)
+            setSelectedRunSource(null)
+          }}
           onOpenKB={openWiki}
+        />
+      )}
+      {!selectedRun && selectedTimeHours !== null && (
+        <TimeDrawer
+          timeHours={selectedTimeHours}
+          inventory={inventoryAtSelectedTime}
+          onClose={() => setSelectedTimeHours(null)}
         />
       )}
     </div>
@@ -970,6 +1096,8 @@ function GanttView({
   simData,
   entitiesById,
   onSelectRun,
+  selectedTimeHours,
+  onSelectTime,
   zoom,
   onZoom,
   colorMode,
@@ -979,6 +1107,8 @@ function GanttView({
   simData: SimData
   entitiesById: Record<string, KBEntity>
   onSelectRun: (id: string) => void
+  selectedTimeHours: number | null
+  onSelectTime: (timeHours: number) => void
   zoom: number
   onZoom: (z: number) => void
   colorMode: ColorMode
@@ -1026,6 +1156,7 @@ function GanttView({
   }, [lanes, machineAssignments, runsById])
 
   const leftRef = useRef<HTMLDivElement>(null)
+  const rightRef = useRef<HTMLDivElement>(null)
   const totalHours = Math.max(simData.summary.time_hours, ...simData.process_runs.map((r) => r.end_time ?? 0))
   const widthPx = Math.max(1200, totalHours * zoom)
   const processLabel = (run: ProcessRun) => {
@@ -1039,12 +1170,12 @@ function GanttView({
       <div className="gantt-toolbar">
         <label>
           Zoom
-          <input type="range" min="0.005" max="0.5" step="0.005" value={zoom} onChange={(e) => onZoom(Number(e.target.value))} />
+          <input type="range" min="0.005" max="1.5" step="0.005" value={zoom} onChange={(e) => onZoom(Number(e.target.value))} />
           <span>{zoom.toFixed(3)} px/hr</span>
         </label>
         <div className="color-toggle">
           <span>Color:</span>
-          {(['status', 'process', 'recipe'] as const).map((m) => (
+          {(['status', 'process', 'recipe', 'goal'] as const).map((m) => (
             <button key={m} className={colorMode === m ? 'toggle active' : 'toggle'} onClick={() => onColorMode(m)}>
               {m}
             </button>
@@ -1062,8 +1193,17 @@ function GanttView({
             )
           })}
         </div>
-        <div className="gantt-right" onScroll={(e) => { if (leftRef.current) leftRef.current.scrollTop = e.currentTarget.scrollTop }}>
-          <div className="gantt-canvas" style={{ width: widthPx, height: lanes.length * ROW_HEIGHT }}>
+        <div className="gantt-right" ref={rightRef} onScroll={(e) => { if (leftRef.current) leftRef.current.scrollTop = e.currentTarget.scrollTop }}>
+          <div
+            className="gantt-canvas"
+            style={{ width: widthPx, height: lanes.length * ROW_HEIGHT }}
+            onClick={(e) => {
+              if (!rightRef.current) return
+              const rect = rightRef.current.getBoundingClientRect()
+              const x = rightRef.current.scrollLeft + (e.clientX - rect.left)
+              onSelectTime(Math.max(0, x / zoom))
+            }}
+          >
             {lanes.map((lane, row) => {
               const runs = laneRuns.get(lane.lane_id) ?? []
               return (
@@ -1085,7 +1225,10 @@ function GanttView({
                           border: run.status === 'failed' ? '1px solid #ffb3b3' : '1px solid rgba(0,0,0,0.15)',
                         }}
                         title={`${processLabel(run)} on ${assignment.machine_id} (${run.status})`}
-                        onClick={() => onSelectRun(run.process_run_id)}
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          onSelectRun(run.process_run_id)
+                        }}
                       >
                         {zoom > 0.03 ? processLabel(run) : ''}
                       </button>
@@ -1094,6 +1237,273 @@ function GanttView({
                 </div>
               )
             })}
+            {selectedTimeHours !== null && (
+              <div className="time-cursor" style={{ left: selectedTimeHours * zoom }} />
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+type RecipeTimelineRow = {
+  recipe_run_id: string
+  recipe_id: string | null
+  lane_key: string
+  lane_label: string
+  lane_slot: number
+  start_time: number
+  end_time: number
+  duration_hours: number
+  status: 'success' | 'failed' | 'pending'
+  anchor_process_run_id: string
+}
+
+type RecipeDisplayLane = {
+  lane_row_key: string
+  lane_key: string
+  lane_label: string
+  lane_slot: number
+  lane_slot_count: number
+}
+
+const UNATTRIBUTED_RECIPE_LANE_KEY = '__unattributed_machine_goal__'
+const UNATTRIBUTED_RECIPE_LANE_LABEL = 'Unattributed Machine Goal'
+
+function RecipeTimelineView({
+  simData,
+  entitiesById,
+  onSelectRun,
+  selectedTimeHours,
+  onSelectTime,
+  zoom,
+  onZoom,
+  onOpenKB,
+}: {
+  simData: SimData
+  entitiesById: Record<string, KBEntity>
+  onSelectRun: (id: string) => void
+  selectedTimeHours: number | null
+  onSelectTime: (timeHours: number) => void
+  zoom: number
+  onZoom: (z: number) => void
+  onOpenKB: (id: string) => void
+}) {
+  const rows = useMemo<RecipeTimelineRow[]>(() => {
+    const byRecipeRun = new Map<string, ProcessRun[]>()
+    for (const run of simData.process_runs) {
+      if (!run.recipe_run_id) continue
+      const arr = byRecipeRun.get(run.recipe_run_id)
+      if (arr) arr.push(run)
+      else byRecipeRun.set(run.recipe_run_id, [run])
+    }
+
+    const out: RecipeTimelineRow[] = []
+    for (const [recipeRunId, runs] of byRecipeRun.entries()) {
+      if (runs.length === 0) continue
+      const sorted = runs.slice().sort((a, b) => (a.start_time ?? 0) - (b.start_time ?? 0))
+      const first = sorted[0]
+      const recipeId = first.recipe_id ?? null
+      const recipeEntity = recipeId ? entitiesById[recipeId] : undefined
+      const rawRecipe = recipeEntity?.raw as Record<string, unknown> | undefined
+      const targetItemId = typeof rawRecipe?.target_item_id === 'string' ? rawRecipe.target_item_id : null
+      const targetEntity = targetItemId ? entitiesById[targetItemId] : undefined
+      let goalMachineId: string | null = null
+      for (const run of sorted) {
+        const goalMachineRaw = getGoalTags(run)['goal.machine_id']
+        if (!goalMachineRaw) continue
+        const parsed = goalMachineRaw.split('|')[0].trim()
+        if (!parsed) continue
+        goalMachineId = parsed
+        break
+      }
+      const goalMachineEntity = goalMachineId ? entitiesById[goalMachineId] : undefined
+
+      const laneKey = goalMachineId || (targetEntity?.kind === 'machine' && targetItemId ? targetItemId : UNATTRIBUTED_RECIPE_LANE_KEY)
+      const laneLabel =
+        goalMachineId
+          ? `${goalMachineEntity?.name || goalMachineId} (${goalMachineId})`
+          : targetEntity?.kind === 'machine' && targetItemId
+            ? `${targetEntity.name || targetItemId} (${targetItemId})`
+            : UNATTRIBUTED_RECIPE_LANE_LABEL
+
+      const start = Math.min(...sorted.map((r) => r.start_time ?? 0))
+      const end = Math.max(...sorted.map((r) => r.end_time ?? r.start_time ?? 0))
+      const duration = Math.max(0, end - start)
+      const status = sorted.some((r) => r.status === 'failed')
+        ? 'failed'
+        : sorted.some((r) => r.status === 'pending')
+          ? 'pending'
+          : 'success'
+
+      out.push({
+        recipe_run_id: recipeRunId,
+        recipe_id: recipeId,
+        lane_key: laneKey,
+        lane_label: laneLabel,
+        lane_slot: 0,
+        start_time: start,
+        end_time: end,
+        duration_hours: duration,
+        status,
+        anchor_process_run_id: first.process_run_id,
+      })
+    }
+
+    const groupedByLane = new Map<string, RecipeTimelineRow[]>()
+    for (const row of out) {
+      const bucket = groupedByLane.get(row.lane_key)
+      if (bucket) bucket.push(row)
+      else groupedByLane.set(row.lane_key, [row])
+    }
+
+    for (const laneRows of groupedByLane.values()) {
+      laneRows.sort((a, b) => a.start_time - b.start_time || a.recipe_run_id.localeCompare(b.recipe_run_id))
+      const slotEndTimes: number[] = []
+      for (const row of laneRows) {
+        let assignedSlot = -1
+        for (let i = 0; i < slotEndTimes.length; i += 1) {
+          if (row.start_time >= slotEndTimes[i]) {
+            assignedSlot = i
+            break
+          }
+        }
+        if (assignedSlot < 0) {
+          assignedSlot = slotEndTimes.length
+          slotEndTimes.push(row.end_time)
+        } else {
+          slotEndTimes[assignedSlot] = row.end_time
+        }
+        row.lane_slot = assignedSlot
+      }
+    }
+
+    out.sort(
+      (a, b) => a.lane_label.localeCompare(b.lane_label)
+        || a.lane_slot - b.lane_slot
+        || a.start_time - b.start_time
+        || a.recipe_run_id.localeCompare(b.recipe_run_id),
+    )
+    return out
+  }, [entitiesById, simData.process_runs])
+
+  const lanes = useMemo<RecipeDisplayLane[]>(() => {
+    const byKey = new Map<string, { lane_key: string; lane_label: string; lane_slot_count: number }>()
+    for (const row of rows) {
+      const slotCount = row.lane_slot + 1
+      const existing = byKey.get(row.lane_key)
+      if (!existing) {
+        byKey.set(row.lane_key, {
+          lane_key: row.lane_key,
+          lane_label: row.lane_label,
+          lane_slot_count: slotCount,
+        })
+      } else if (slotCount > existing.lane_slot_count) {
+        existing.lane_slot_count = slotCount
+      }
+    }
+    const expanded: RecipeDisplayLane[] = []
+    for (const lane of Array.from(byKey.values()).sort((a, b) => a.lane_label.localeCompare(b.lane_label))) {
+      for (let slot = 0; slot < lane.lane_slot_count; slot += 1) {
+        expanded.push({
+          lane_row_key: `${lane.lane_key}#${slot}`,
+          lane_key: lane.lane_key,
+          lane_label: lane.lane_label,
+          lane_slot: slot,
+          lane_slot_count: lane.lane_slot_count,
+        })
+      }
+    }
+    return expanded
+  }, [rows])
+
+  const laneIndexByKey = useMemo(() => new Map(lanes.map((lane, idx) => [lane.lane_row_key, idx])), [lanes])
+
+  const leftRef = useRef<HTMLDivElement>(null)
+  const rightRef = useRef<HTMLDivElement>(null)
+  const totalHours = Math.max(simData.summary.time_hours, ...rows.map((r) => r.end_time))
+  const widthPx = Math.max(1200, totalHours * zoom)
+
+  return (
+    <div className="gantt-page">
+      <div className="gantt-toolbar">
+        <label>
+          Zoom
+          <input type="range" min="0.005" max="1.5" step="0.005" value={zoom} onChange={(e) => onZoom(Number(e.target.value))} />
+          <span>{zoom.toFixed(3)} px/hr</span>
+        </label>
+        <span>Recipe Runs: {rows.length}</span>
+        <span>Total: {totalHours.toFixed(1)} h</span>
+      </div>
+      <div className="gantt-wrap">
+        <div className="gantt-left" ref={leftRef}>
+          {lanes.map((lane) => (
+            <div key={lane.lane_row_key} className="lane-label" style={{ height: ROW_HEIGHT }}>
+              {lane.lane_key === UNATTRIBUTED_RECIPE_LANE_KEY ? (
+                <span>
+                  {lane.lane_label}
+                  {lane.lane_slot_count > 1 ? ` #${lane.lane_slot + 1}` : ''}
+                </span>
+              ) : (
+                <button className="lane-link" onClick={() => onOpenKB(lane.lane_key)}>
+                  {lane.lane_label}
+                  {lane.lane_slot_count > 1 ? ` #${lane.lane_slot + 1}` : ''}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="gantt-right" ref={rightRef} onScroll={(e) => { if (leftRef.current) leftRef.current.scrollTop = e.currentTarget.scrollTop }}>
+          <div
+            className="gantt-canvas"
+            style={{ width: widthPx, height: lanes.length * ROW_HEIGHT }}
+            onClick={(e) => {
+              if (!rightRef.current) return
+              const rect = rightRef.current.getBoundingClientRect()
+              const x = rightRef.current.scrollLeft + (e.clientX - rect.left)
+              onSelectTime(Math.max(0, x / zoom))
+            }}
+          >
+            {lanes.map((lane, row) => (
+              <div key={lane.lane_row_key} className="lane-row" style={{ top: row * ROW_HEIGHT, height: ROW_HEIGHT }} />
+            ))}
+            {rows.map((row) => {
+              const laneIndex = laneIndexByKey.get(`${row.lane_key}#${row.lane_slot}`)
+              if (laneIndex === undefined) return null
+              const left = row.start_time * zoom
+              const width = Math.max(BAR_MIN_PX, row.duration_hours * zoom)
+              const top = laneIndex * ROW_HEIGHT + 4
+              const label = row.recipe_id || row.recipe_run_id
+              return (
+                <button
+                  key={row.recipe_run_id}
+                  className={`bar ${row.status}`}
+                  style={{
+                    left,
+                    top,
+                    width,
+                    background: row.status === 'failed'
+                      ? 'linear-gradient(90deg, #d55a5a, #ff8585)'
+                      : row.status === 'pending'
+                        ? 'linear-gradient(90deg, #a2a2a2, #c6c6c6)'
+                        : 'linear-gradient(90deg, #6bb8ff, #99d0ff)',
+                    color: row.status === 'failed' ? '#fff' : '#0c1220',
+                    border: row.status === 'failed' ? '1px solid #ffb3b3' : '1px solid rgba(0,0,0,0.15)',
+                  }}
+                  title={`${label} (${row.status})`}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    onSelectRun(row.anchor_process_run_id)
+                  }}
+                >
+                  {zoom > 0.03 ? label : ''}
+                </button>
+              )
+            })}
+            {selectedTimeHours !== null && (
+              <div className="time-cursor" style={{ left: selectedTimeHours * zoom }} />
+            )}
           </div>
         </div>
       </div>
@@ -1519,95 +1929,245 @@ function KBSearchView({
 function Drawer({
   run,
   entitiesById,
+  mode,
+  recipeRuns,
   inventory,
+  inventoryStart,
+  inventoryLabel,
   recipeContext,
   onClose,
   onOpenKB,
 }: {
   run: ProcessRun
   entitiesById: Record<string, KBEntity>
+  mode: 'process' | 'recipe'
+  recipeRuns: ProcessRun[]
   inventory: QuantityMap
+  inventoryStart?: QuantityMap
+  inventoryLabel: string
   recipeContext?: { finalOutputs: QuantityMap; consumedOutputIds: Set<string> }
   onClose: () => void
   onOpenKB: (id: string) => void
 }) {
-  const isIntermediate = Object.keys(run.outputs).some((id) => recipeContext?.consumedOutputIds.has(id))
-  const hasIdentityTransform = Object.keys(run.outputs).some((id) => id in run.inputs)
+  const sortedRecipeRuns = recipeRuns
+    .slice()
+    .sort((a, b) => (a.start_time ?? 0) - (b.start_time ?? 0))
+  const aggregateStart = sortedRecipeRuns.length > 0 ? Math.min(...sortedRecipeRuns.map((r) => r.start_time ?? 0)) : (run.start_time ?? 0)
+  const aggregateEnd = sortedRecipeRuns.length > 0
+    ? Math.max(...sortedRecipeRuns.map((r) => (r.end_time ?? r.start_time ?? 0)))
+    : (run.end_time ?? run.start_time ?? 0)
+  const aggregateDuration = Math.max(0, aggregateEnd - aggregateStart)
+  const aggregateEnergy = sortedRecipeRuns.reduce((acc, r) => acc + (r.energy_kwh ?? 0), 0)
+  const hasFailedStep = sortedRecipeRuns.some((r) => r.status === 'failed')
+  const hasPendingStep = sortedRecipeRuns.some((r) => r.status === 'pending')
+  const aggregateStatus: ProcessRun['status'] = hasFailedStep ? 'failed' : (hasPendingStep ? 'pending' : 'success')
+  const recipeTitle = run.recipe_id ? (entitiesById[run.recipe_id]?.name || run.recipe_id) : 'Recipe Run'
   const processName = entitiesById[run.process_id]?.name
   const hasDistinctName = Boolean(processName && processName !== run.process_id)
+  const title = mode === 'recipe'
+    ? recipeTitle
+    : (hasDistinctName ? String(processName) : run.process_id)
+  const status = mode === 'recipe' ? aggregateStatus : run.status
+  const displayStart = mode === 'recipe' ? aggregateStart : (run.start_time ?? 0)
+  const displayEnd = mode === 'recipe' ? aggregateEnd : (run.end_time ?? run.start_time ?? 0)
+  const displayDuration = mode === 'recipe' ? aggregateDuration : (run.duration_hours ?? 0)
+  const displayEnergy = mode === 'recipe' ? aggregateEnergy : (run.energy_kwh ?? 0)
+  const goalTags = getGoalTags(run)
+  const infoCards: Array<{ label: string; value: string }> = [
+    { label: 'Time', value: `${displayStart.toFixed(2)}h -> ${displayEnd.toFixed(2)}h` },
+    { label: 'Duration', value: `${displayDuration.toFixed(2)}h` },
+    { label: 'Energy', value: `${displayEnergy.toFixed(2)} kWh` },
+  ]
+  if (mode === 'process') infoCards.unshift({ label: 'Machine', value: run.machine_type ?? 'n/a' })
+  const statusLabel = status === 'success' ? 'OK' : (status === 'failed' ? 'FAILED' : 'PENDING')
+  const goalMachineTag = goalTags['goal.machine_id']
+  const goalMachineIds = goalMachineTag
+    ? goalMachineTag.split('|').map((x) => x.trim()).filter(Boolean)
+    : []
+  const linkedId = (id: string) => (
+    <button className="drawer-link-btn" onClick={() => onOpenKB(id)}>{id}</button>
+  )
   return (
     <aside className="drawer">
       <div className="drawer-head">
-        <h3>{hasDistinctName ? String(processName) : run.process_id}</h3>
+        <div className="drawer-title-wrap">
+          <h3>{title}</h3>
+          <span className={`status-pill ${status}`}>{statusLabel}</span>
+        </div>
         <button onClick={onClose}>Close</button>
       </div>
       <div className="drawer-body">
-        {hasDistinctName && <p><strong>Process ID:</strong> {run.process_id}</p>}
-        <p><strong>Status:</strong> {run.status}</p>
-        <p><strong>Machine:</strong> {run.machine_type ?? 'n/a'}</p>
-        {run.reserved_machines && run.reserved_machines.length > 0 && (
-          <>
-            <p><strong>Reserved Machines:</strong></p>
-            <ul>
-              {run.reserved_machines.map((m, idx) => (
-                <li key={`${m.machine_id}:${idx}`}>
-                  {m.machine_id}: {m.qty} {m.unit}
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-        <p><strong>Recipe:</strong> {run.recipe_id ?? 'unknown'}</p>
-        <p><strong>Time:</strong> {(run.start_time ?? 0).toFixed(2)}h → {(run.end_time ?? 0).toFixed(2)}h</p>
-        <p><strong>Duration:</strong> {(run.duration_hours ?? 0).toFixed(2)}h</p>
-        <p><strong>Energy:</strong> {(run.energy_kwh ?? 0).toFixed(2)} kWh</p>
-        <div className="drawer-links">
-          {run.machine_type && <button onClick={() => onOpenKB(run.machine_type!)}>Open Machine KB</button>}
-          {run.recipe_id && <button onClick={() => onOpenKB(run.recipe_id!)}>Open Recipe KB</button>}
-        </div>
-        {run.error_message && <p className="error-text">{run.error_message}</p>}
-
-        <h4>Inputs</h4>
-        <ul>
-          {Object.entries(run.inputs).map(([id, q]) => <li key={id}>{id}: {formatQty(q)}</li>)}
-          {Object.keys(run.inputs).length === 0 && <li>None</li>}
-        </ul>
-
-        <h4>Outputs</h4>
-        <ul>
-          {Object.entries(run.outputs).map(([id, q]) => <li key={id}>{id}: {formatQty(q)}</li>)}
-          {Object.keys(run.outputs).length === 0 && <li>None</li>}
-        </ul>
-
-        {run.recipe_run_id && recipeContext && (
-          <>
-            <h4>Recipe Context</h4>
-            <p>
-              <strong>Recipe Run:</strong> {run.recipe_run_id}
-            </p>
-            <p>
-              <strong>Step role:</strong> {isIntermediate ? 'intermediate transformation step' : 'terminal step in recipe'}
-            </p>
-            {hasIdentityTransform && (
-              <p>
-                <strong>Note:</strong> Output item uses the same ID as an input (state/geometry transformation).
-              </p>
-            )}
-            <p><strong>Final output(s) of this recipe run:</strong></p>
-            <ul>
-              {Object.entries(recipeContext.finalOutputs).map(([id, q]) => <li key={id}>{id}: {formatQty(q)}</li>)}
-            </ul>
-          </>
-        )}
-
-        <h4>Inventory Snapshot</h4>
-        <div className="inventory-snapshot">
-          {Object.entries(inventory).map(([id, q]) => (
-            <div key={id} className="inv-row">
-              <span>{id}</span>
-              <span>{formatQty(q)}</span>
+        <div className="drawer-meta-grid">
+          {infoCards.map((card) => (
+            <div key={card.label} className="drawer-meta-card">
+              <label>{card.label}</label>
+              <strong>{card.value}</strong>
             </div>
           ))}
+        </div>
+        {mode === 'recipe' && (
+          <div className="drawer-section">
+            <p className="drawer-subtle"><strong>Recipe:</strong> {run.recipe_id ? linkedId(run.recipe_id) : 'unknown'}</p>
+            {run.recipe_run_id && <p className="drawer-subtle"><strong>Run ID:</strong> {run.recipe_run_id}</p>}
+            {goalMachineIds.length > 0 && (
+              <p className="drawer-subtle">
+                <strong>Goal Machine{goalMachineIds.length > 1 ? 's' : ''}:</strong>{' '}
+                {goalMachineIds.map((id, idx) => (
+                  <span key={id}>
+                    {idx > 0 ? ', ' : ''}
+                    {linkedId(id)}
+                  </span>
+                ))}
+              </p>
+            )}
+            {run.recipe_id && (
+              <div className="drawer-links">
+                <button className="drawer-link-btn" onClick={() => onOpenKB(run.recipe_id!)}>Open Recipe KB</button>
+              </div>
+            )}
+            {recipeContext && (
+              <>
+                <h4>Final Outputs</h4>
+                <ul>
+                  {Object.entries(recipeContext.finalOutputs).map(([id, q]) => <li key={id}>{linkedId(id)}: {formatQty(q)}</li>)}
+                </ul>
+              </>
+            )}
+            <h4>Selected Step Inputs</h4>
+            <ul>
+              {Object.entries(run.inputs).map(([id, q]) => <li key={id}>{linkedId(id)}: {formatQty(q)}</li>)}
+              {Object.keys(run.inputs).length === 0 && <li>None</li>}
+            </ul>
+            {sortedRecipeRuns.length > 0 && (
+              <>
+                <h4>Steps</h4>
+                <ul>
+                  {sortedRecipeRuns.map((step) => {
+                    const stepName = entitiesById[step.process_id]?.name
+                    return (
+                      <li key={step.process_run_id}>
+                        <span className={`step-pill ${step.status}`}>{step.status}</span> {stepName && stepName !== step.process_id ? `${stepName} (` : ''}{linkedId(step.process_id)}{stepName && stepName !== step.process_id ? ')' : ''}: {(step.start_time ?? 0).toFixed(2)}h {'->'} {(step.end_time ?? 0).toFixed(2)}h
+                      </li>
+                    )
+                  })}
+                </ul>
+              </>
+            )}
+          </div>
+        )}
+        <div className="drawer-section">
+          {hasDistinctName && <p className="drawer-subtle"><strong>Process ID:</strong> {linkedId(run.process_id)}</p>}
+          <p className="drawer-subtle"><strong>Recipe:</strong> {run.recipe_id ? linkedId(run.recipe_id) : 'unknown'}</p>
+          <div className="drawer-links">
+            {run.machine_type && <button className="drawer-link-btn" onClick={() => onOpenKB(run.machine_type!)}>Open Machine KB</button>}
+            {run.recipe_id && <button className="drawer-link-btn" onClick={() => onOpenKB(run.recipe_id!)}>Open Recipe KB</button>}
+          </div>
+          {run.reserved_machines && run.reserved_machines.length > 0 && (
+            <>
+              <h4>Reserved Machines</h4>
+              <ul>
+                {run.reserved_machines.map((m, idx) => (
+                  <li key={`${m.machine_id}:${idx}`}>
+                    {linkedId(m.machine_id)}: {m.qty} {m.unit}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+        {run.error_message && <p className="error-text">{run.error_message}</p>}
+        {mode === 'process' && (
+          <div className="drawer-section">
+            <h4>Inputs</h4>
+            <ul>
+              {Object.entries(run.inputs).map(([id, q]) => <li key={id}>{linkedId(id)}: {formatQty(q)}</li>)}
+              {Object.keys(run.inputs).length === 0 && <li>None</li>}
+            </ul>
+            <h4>Outputs</h4>
+            <ul>
+              {Object.entries(run.outputs).map(([id, q]) => <li key={id}>{linkedId(id)}: {formatQty(q)}</li>)}
+              {Object.keys(run.outputs).length === 0 && <li>None</li>}
+            </ul>
+          </div>
+        )}
+        <div className="drawer-section">
+          <h4>Inventory Snapshot ({inventoryLabel})</h4>
+          <div className="inventory-snapshot">
+            {Object.entries(inventory).map(([id, q]) => (
+              <div key={id} className="inv-row">
+                <span>{linkedId(id)}</span>
+                <span>{formatQty(q)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        {mode === 'recipe' && inventoryStart && (
+          <details className="drawer-section">
+            <summary>Inventory Snapshot (beginning of recipe)</summary>
+            <div className="inventory-snapshot">
+              {Object.entries(inventoryStart).map(([id, q]) => (
+                <div key={id} className="inv-row">
+                  <span>{linkedId(id)}</span>
+                  <span>{formatQty(q)}</span>
+                </div>
+              ))}
+            </div>
+          </details>
+        )}
+        {Object.keys(goalTags).length > 0 && (
+          <details className="drawer-section">
+            <summary>Context Tags</summary>
+            <ul>
+              {Object.entries(goalTags).map(([key, value]) => (
+                <li key={key}>{key}={value}</li>
+              ))}
+            </ul>
+          </details>
+        )}
+      </div>
+    </aside>
+  )
+}
+
+function TimeDrawer({
+  timeHours,
+  inventory,
+  onClose,
+}: {
+  timeHours: number
+  inventory: QuantityMap
+  onClose: () => void
+}) {
+  return (
+    <aside className="drawer">
+      <div className="drawer-head">
+        <div className="drawer-title-wrap">
+          <h3>Time Cursor</h3>
+          <span className="status-pill pending">{timeHours.toFixed(2)}h</span>
+        </div>
+        <button onClick={onClose}>Close</button>
+      </div>
+      <div className="drawer-body">
+        <div className="drawer-meta-grid">
+          <div className="drawer-meta-card">
+            <label>Snapshot Time</label>
+            <strong>{timeHours.toFixed(2)}h</strong>
+          </div>
+          <div className="drawer-meta-card">
+            <label>Unique Items</label>
+            <strong>{Object.keys(inventory).length}</strong>
+          </div>
+        </div>
+        <div className="drawer-section">
+          <h4>Inventory At Cursor</h4>
+          <div className="inventory-snapshot">
+            {Object.entries(inventory).map(([id, q]) => (
+              <div key={id} className="inv-row">
+                <span>{id}</span>
+                <span>{formatQty(q)}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </aside>
