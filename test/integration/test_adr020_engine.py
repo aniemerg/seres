@@ -1204,6 +1204,53 @@ class TestAdr020Gaps:
         assert engine.has_item("metal", 1.0, "kg")
         assert not engine.has_item("metal", 2.0, "kg")
 
+    def test_cancelled_recipe_step_is_removed_from_active_and_retried(self, kb_root, sim_dir):
+        """If PROCESS_START validation cancels a step, orchestrator must not keep a ghost active step."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 2.0, "count")
+
+        recipe_def = {
+            "id": "race_recipe",
+            "target_item_id": "metal",
+            "steps": [
+                {"process_id": "test_process_v0", "dependencies": []},
+                {"process_id": "test_process_v0", "dependencies": []},
+            ],
+        }
+        recipe_run_id = engine.orchestrator.start_recipe(
+            recipe_id="race_recipe",
+            recipe_dict=recipe_def,
+            target_item_id="metal",
+            start_time=0.0,
+        )
+
+        outcome = engine._attempt_schedule_ready_recipe_steps(recipe_run_id, 0.0)
+        assert outcome["scheduled"] == 2
+        assert outcome["fatal_error"] is None
+
+        engine.advance_time(0.0)
+
+        recipe_run = engine.orchestrator.get_recipe_run(recipe_run_id)
+        assert recipe_run is not None
+
+        active_process_ids = set(engine.scheduler.active_processes.keys())
+        recipe_active_ids = set(recipe_run.active_steps.values())
+        assert recipe_active_ids == active_process_ids
+        availability = engine.reservation_manager.get_availability_at("furnace", engine.scheduler.current_time)
+        assert availability.available == pytest.approx(1.0)
+
+        retry_events = [
+            event
+            for event in engine.scheduler.event_queue._heap
+            if event.event_type == EventType.RECIPE_STEP_READY
+            and event.data.get("recipe_run_id") == recipe_run_id
+        ]
+        assert retry_events
+
     def test_output_units_preserved(self, tmp_path, sim_dir):
         """Outputs should be added using their declared unit, not forced to kg."""
         kb = tmp_path / "kb"
@@ -1248,6 +1295,35 @@ class TestAdr020Gaps:
 
         assert "widget" in engine.state.inventory
         assert engine.state.inventory["widget"].unit == "count"
+
+    def test_provenance_underflow_does_not_cancel_process_start(self, kb_root, sim_dir):
+        """Inventory/provenance drift should not cancel a runnable process at PROCESS_START."""
+        kb = KBLoader(kb_root, use_validated_models=False)
+        kb.load_all()
+
+        engine = SimulationEngine("test_sim", kb, sim_dir)
+        engine.import_item("ore", 1.0, "kg")
+        engine.import_item("furnace", 1.0, "count")
+
+        ore_prov = engine.state.provenance.get("ore")
+        assert ore_prov is not None
+        ore_prov.in_situ_kg = 0.0
+        ore_prov.imported_kg = 0.0
+        ore_prov.unknown_kg = 0.0
+
+        result = engine.start_process(
+            process_id="test_process_v0",
+            scale=1.0,
+            duration_hours=1.0,
+            start_time=0.0,
+        )
+        assert result["success"]
+
+        engine.advance_time(0.0)
+        assert len(engine.scheduler.active_processes) == 1
+
+        engine.advance_time(1.0)
+        assert engine.has_item("metal", 1.0, "kg")
 
     def test_energy_booked_on_process_start(self, tmp_path, sim_dir):
         """Energy usage should be accumulated when a process starts."""

@@ -122,6 +122,51 @@ def test_execute_plan_imports_only_missing_delta(tmp_path: Path):
     assert engine.state.inventory["ore"].quantity == 7.0
 
 
+def test_execute_plan_additive_non_machines_import_mode(tmp_path: Path):
+    kb_root = _build_kb(tmp_path)
+    sim_root = tmp_path / "simulations"
+
+    initial = SimPlan(sim_id="delta_mixed", target_machine_id="ingot", build_machine=False)
+    initial.add_import("ore", 5.0, "kg")
+    initial.add_import("labor_bot_general_v0", 1.0, "count")
+    result1 = execute_plan(
+        plan=initial,
+        kb_root=kb_root,
+        sim_root=sim_root,
+        reset=True,
+        dry_run=False,
+        trace=False,
+        engine_mode="sim",
+        strategy="sequential",
+    )
+    assert result1["success"]
+
+    followup = SimPlan(sim_id="delta_mixed", target_machine_id="ingot", build_machine=False)
+    followup.add_import("ore", 7.0, "kg")
+    followup.add_import("labor_bot_general_v0", 1.0, "count")
+    result2 = execute_plan(
+        plan=followup,
+        kb_root=kb_root,
+        sim_root=sim_root,
+        reset=False,
+        dry_run=False,
+        trace=False,
+        engine_mode="sim",
+        strategy="sequential",
+        import_mode="additive_non_machines",
+    )
+    assert result2["success"]
+
+    kb = KBLoader(kb_root, use_validated_models=False)
+    kb.load_all()
+    from src.simulation.engine import SimulationEngine
+
+    engine = SimulationEngine("delta_mixed", kb, sim_root / "delta_mixed")
+    assert engine.load()
+    assert engine.state.inventory["ore"].quantity == 12.0
+    assert engine.state.inventory["labor_bot_general_v0"].quantity == 1.0
+
+
 def test_merge_plans_splits_same_recipe_by_machine_goal(tmp_path: Path):
     kb_root = _build_kb(tmp_path)
     kb = KBLoader(kb_root, use_validated_models=False)

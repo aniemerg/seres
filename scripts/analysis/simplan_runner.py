@@ -214,6 +214,8 @@ def execute_plan(
     progress_every_steps: int = 1000,
     snapshot_interval_hours: Optional[float] = None,
     recipe_retry_delay_hours: Optional[float] = None,
+    import_mode: str = "topup",
+    verify_target_output: bool = True,
 ) -> Dict[str, Any]:
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
@@ -292,6 +294,14 @@ def execute_plan(
         if trace:
             print(msg)
 
+    valid_import_modes = {"topup", "additive", "additive_non_machines"}
+    if import_mode not in valid_import_modes:
+        return {
+            "success": False,
+            "error": "invalid_import_mode",
+            "detail": f"Unsupported import_mode '{import_mode}' (expected one of {sorted(valid_import_modes)})",
+        }
+
     def _get_item_unit(item_id: str) -> str:
         model = kb.get_item(item_id)
         if not model:
@@ -336,7 +346,18 @@ def execute_plan(
             print(f"IMPORT {item_id} {imp.qty} {imp.unit} ({imp.reason or ''})")
             continue
         current_qty = _current_quantity_in_unit(item_id, imp.unit)
-        needed_qty = max(0.0, float(imp.qty) - current_qty)
+        requested_qty = float(imp.qty)
+        if import_mode == "additive":
+            needed_qty = requested_qty
+        elif import_mode == "additive_non_machines":
+            item_model = kb.get_item(item_id)
+            item_def = item_model.model_dump() if hasattr(item_model, "model_dump") else (item_model or {})
+            if item_def.get("kind") == "machine":
+                needed_qty = max(0.0, requested_qty - current_qty)
+            else:
+                needed_qty = requested_qty
+        else:
+            needed_qty = max(0.0, requested_qty - current_qty)
         if needed_qty <= 0.0:
             continue
         _trace(f"IMPORT {item_id} {needed_qty} {imp.unit} (target={imp.qty})")
@@ -623,7 +644,7 @@ def execute_plan(
                 metadata={"machine_id": plan.target_machine_id},
             )
 
-    if not dry_run and (plan.target_recipe_id or plan.build_machine):
+    if verify_target_output and not dry_run and (plan.target_recipe_id or plan.build_machine):
         verify_error = _verify_target_output()
         if verify_error:
             engine.log_annotation(
@@ -687,6 +708,17 @@ def main() -> int:
         default=None,
         help="Blocked recipe retry delay in hours (sim2 mode; default 24h)",
     )
+    parser.add_argument(
+        "--import-mode",
+        choices=["topup", "additive", "additive_non_machines"],
+        default="topup",
+        help="Import semantics: topup to target, always additive, or additive for non-machines only",
+    )
+    parser.add_argument(
+        "--no-verify-target-output",
+        action="store_true",
+        help="Skip end-of-plan verification that target output remains in inventory",
+    )
     args = parser.parse_args()
 
     plan_path = Path(args.plan)
@@ -708,6 +740,8 @@ def main() -> int:
         progress_every_steps=args.progress_every_steps,
         snapshot_interval_hours=args.snapshot_interval_hours,
         recipe_retry_delay_hours=args.recipe_retry_delay_hours,
+        import_mode=args.import_mode,
+        verify_target_output=not args.no_verify_target_output,
     )
 
     if not result.get("success"):

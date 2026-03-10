@@ -19,7 +19,25 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.analysis.simplan import SimPlan
+from scripts.analysis.simplan_build_combined import _merge_plans
 from scripts.analysis.simplan_runner import execute_plan
+from src.kb_core.kb_loader import KBLoader
+
+
+def _apply_goal_tags(plan: SimPlan, machine_id: str) -> None:
+    """Ensure per-machine goal tags exist for plan-level and recipe-level attribution."""
+    if not isinstance(plan.metadata, dict):
+        plan.metadata = {}
+    plan_tags = plan.metadata.get("tags") if isinstance(plan.metadata.get("tags"), dict) else {}
+    plan_tags.setdefault("goal.machine_id", machine_id)
+    plan.metadata["tags"] = plan_tags
+
+    for recipe in plan.recipes:
+        if not isinstance(recipe.metadata, dict):
+            recipe.metadata = {}
+        recipe_tags = recipe.metadata.get("tags") if isinstance(recipe.metadata.get("tags"), dict) else {}
+        recipe_tags.setdefault("goal.machine_id", machine_id)
+        recipe.metadata["tags"] = recipe_tags
 
 
 def _load_machine_list(path: Path) -> List[str]:
@@ -33,8 +51,6 @@ def _load_machine_list(path: Path) -> List[str]:
 
 
 def _load_kb_machine_ids(kb_root: Path) -> Set[str]:
-    from src.kb_core.kb_loader import KBLoader
-
     kb = KBLoader(kb_root, use_validated_models=False)
     kb.load_all()
     machine_ids: Set[str] = set()
@@ -80,11 +96,88 @@ def main() -> int:
         default="self_repro_demo",
         help="Simulation id",
     )
+    parser.add_argument(
+        "--mode",
+        choices=["sequential", "combined"],
+        default="sequential",
+        help="Execution mode: per-machine sequential plans or one combined merged plan",
+    )
     parser.add_argument("--kb-root", default=str(REPO_ROOT / "kb"), help="KB root")
     parser.add_argument("--sim-root", default=str(REPO_ROOT / "simulations"), help="Sim root")
     parser.add_argument("--plans-dir", default=str(REPO_ROOT / "out" / "simplans"))
     parser.add_argument("--reset", action="store_true", help="Reset sim before first plan")
     parser.add_argument("--trace", action="store_true", help="Print step-by-step execution trace")
+    parser.add_argument(
+        "--engine",
+        choices=["sim", "sim2"],
+        default="sim",
+        help="Execution engine mode",
+    )
+    parser.add_argument(
+        "--strategy",
+        choices=["sequential", "upfront"],
+        default="sequential",
+        help="Recipe submission strategy",
+    )
+    parser.add_argument(
+        "--max-no-progress",
+        type=int,
+        default=1000,
+        help="No-progress guard for sim2 advancement",
+    )
+    parser.add_argument(
+        "--progress-every-steps",
+        type=int,
+        default=1000,
+        help="Progress print cadence for sim2 (trace mode)",
+    )
+    parser.add_argument(
+        "--snapshot-interval-hours",
+        type=float,
+        default=None,
+        help="State snapshot cadence in hours (sim2 mode; default 50h, 0=every step)",
+    )
+    parser.add_argument(
+        "--recipe-retry-delay-hours",
+        type=float,
+        default=None,
+        help="Blocked recipe retry delay in hours (sim2 mode; default 24h)",
+    )
+    parser.add_argument(
+        "--import-mode",
+        choices=["topup", "additive", "additive_non_machines"],
+        default="additive_non_machines",
+        help="Import semantics for each machine plan (default keeps machines topped-up, adds consumables)",
+    )
+    parser.add_argument(
+        "--verify-target-output",
+        action="store_true",
+        help="Require each machine plan target item to remain in inventory at end of that plan",
+    )
+    parser.add_argument(
+        "--fail-fast",
+        dest="fail_fast",
+        action="store_true",
+        default=True,
+        help="Stop immediately on first execution failure (default)",
+    )
+    parser.add_argument(
+        "--continue-on-failure",
+        dest="fail_fast",
+        action="store_false",
+        help="Continue executing remaining machines after failures",
+    )
+    parser.add_argument(
+        "--start-at-machine",
+        default=None,
+        help="Resume from this machine id in the machine list",
+    )
+    parser.add_argument(
+        "--start-index",
+        type=int,
+        default=1,
+        help="1-based index to start from in the machine list",
+    )
     parser.add_argument(
         "--report-only",
         action="store_true",
@@ -97,32 +190,105 @@ def main() -> int:
         print("No machines found in list.", file=sys.stderr)
         return 1
 
+    start_idx = max(1, int(args.start_index)) - 1
+    if args.start_at_machine:
+        try:
+            start_idx = machine_list.index(args.start_at_machine)
+        except ValueError:
+            print(f"--start-at-machine not found in list: {args.start_at_machine}", file=sys.stderr)
+            return 1
+    if start_idx > 0:
+        machine_list = machine_list[start_idx:]
+
     if not args.report_only:
         failures = 0
         plans_dir = Path(args.plans_dir)
-        for idx, machine_id in enumerate(machine_list, start=1):
-            plan_path = plans_dir / f"{machine_id}_optimized.json"
-            if not plan_path.exists():
-                print(f"[{idx}/{len(machine_list)}] Missing plan for {machine_id}: {plan_path}", file=sys.stderr)
-                failures += 1
-                continue
+        if args.mode == "combined":
+            plans: List[SimPlan] = []
+            for idx, machine_id in enumerate(machine_list, start=1):
+                plan_path = plans_dir / f"{machine_id}_optimized.json"
+                if not plan_path.exists():
+                    print(f"[{idx}/{len(machine_list)}] Missing plan for {machine_id}: {plan_path}", file=sys.stderr)
+                    failures += 1
+                    if args.fail_fast:
+                        return 1
+                    continue
+                plan = SimPlan.load(plan_path)
+                plan.sim_id = args.sim_id
+                _apply_goal_tags(plan, machine_id)
+                plans.append(plan)
 
-            plan = SimPlan.load(plan_path)
-            plan.sim_id = args.sim_id
+            if not plans:
+                print("No runnable plans available for combined mode.", file=sys.stderr)
+                return 1
 
-            print(f"[{idx}/{len(machine_list)}] Executing {machine_id}")
+            kb = KBLoader(Path(args.kb_root), use_validated_models=False)
+            kb.load_all()
+            combined_plan = _merge_plans(plans=plans, kb=kb, sim_id=args.sim_id, allow_bom=True)
+            combined_plan.sim_id = args.sim_id
+            combined_plan.target_machine_id = "multi_machine_plan"
+            combined_plan.build_machine = False
+
+            print(f"[combined] Executing merged plan for {len(plans)} machines")
             result = execute_plan(
-                plan=plan,
+                plan=combined_plan,
                 kb_root=Path(args.kb_root),
                 sim_root=Path(args.sim_root),
-                reset=args.reset and idx == 1,
+                reset=args.reset,
                 trace=args.trace,
+                engine_mode=args.engine,
+                strategy=args.strategy,
+                max_no_progress=args.max_no_progress,
+                progress_every_steps=args.progress_every_steps,
+                snapshot_interval_hours=args.snapshot_interval_hours,
+                recipe_retry_delay_hours=args.recipe_retry_delay_hours,
+                import_mode=args.import_mode,
+                verify_target_output=args.verify_target_output,
             )
             if not result.get("success"):
                 failures += 1
-                print(f"FAIL: {machine_id} -> {result}", file=sys.stderr)
+                print(f"FAIL: combined -> {result}", file=sys.stderr)
+                if args.fail_fast:
+                    return 1
             else:
-                print(f"OK: {machine_id}")
+                print("OK: combined")
+        else:
+            for idx, machine_id in enumerate(machine_list, start=1):
+                plan_path = plans_dir / f"{machine_id}_optimized.json"
+                if not plan_path.exists():
+                    print(f"[{idx}/{len(machine_list)}] Missing plan for {machine_id}: {plan_path}", file=sys.stderr)
+                    failures += 1
+                    if args.fail_fast:
+                        return 1
+                    continue
+
+                plan = SimPlan.load(plan_path)
+                plan.sim_id = args.sim_id
+                _apply_goal_tags(plan, machine_id)
+
+                print(f"[{idx}/{len(machine_list)}] Executing {machine_id}")
+                result = execute_plan(
+                    plan=plan,
+                    kb_root=Path(args.kb_root),
+                    sim_root=Path(args.sim_root),
+                    reset=args.reset and idx == 1,
+                    trace=args.trace,
+                    engine_mode=args.engine,
+                    strategy=args.strategy,
+                    max_no_progress=args.max_no_progress,
+                    progress_every_steps=args.progress_every_steps,
+                    snapshot_interval_hours=args.snapshot_interval_hours,
+                    recipe_retry_delay_hours=args.recipe_retry_delay_hours,
+                    import_mode=args.import_mode,
+                    verify_target_output=args.verify_target_output,
+                )
+                if not result.get("success"):
+                    failures += 1
+                    print(f"FAIL: {machine_id} -> {result}", file=sys.stderr)
+                    if args.fail_fast:
+                        return 1
+                else:
+                    print(f"OK: {machine_id}")
 
         if failures:
             print(f"Completed with {failures} failure(s).", file=sys.stderr)

@@ -52,6 +52,22 @@ def _build_kb(tmp_path: Path) -> Path:
             },
             f,
         )
+    with open(kb / "processes" / "cast_tool_sensitive_v0.yaml", "w") as f:
+        yaml.dump(
+            {
+                "id": "cast_tool_sensitive_v0",
+                "kind": "process",
+                "process_type": "batch",
+                "inputs": [
+                    {"item_id": "molten", "qty": 1.0, "unit": "kg"},
+                    {"item_id": "flask_machine", "qty": 1.0, "unit": "count"},
+                ],
+                "outputs": [{"item_id": "cast_part", "qty": 1.0, "unit": "kg"}],
+                "time_model": {"type": "batch", "hr_per_batch": 1.0},
+                "resource_requirements": [{"machine_id": "flask_machine", "qty": 1.0, "unit": "count"}],
+            },
+            f,
+        )
 
     with open(kb / "recipes" / "recipe_ingot_v0.yaml", "w") as f:
         yaml.dump(
@@ -73,6 +89,26 @@ def _build_kb(tmp_path: Path) -> Path:
             },
             f,
         )
+    with open(kb / "recipes" / "recipe_cast_tool_sensitive_v0.yaml", "w") as f:
+        yaml.dump(
+            {
+                "id": "recipe_cast_tool_sensitive_v0",
+                "target_item_id": "cast_part",
+                "variant_id": "v0",
+                "steps": [
+                    {
+                        "process_id": "cast_tool_sensitive_v0",
+                        "dependencies": [],
+                        "inputs": [
+                            {"item_id": "molten", "qty": 3.0, "unit": "kg"},
+                            {"item_id": "flask_machine", "qty": 1.0, "unit": "count"},
+                        ],
+                        "outputs": [{"item_id": "cast_part", "qty": 3.0, "unit": "kg"}],
+                    }
+                ],
+            },
+            f,
+        )
 
     with open(kb / "items" / "materials" / "ore.yaml", "w") as f:
         yaml.dump({"id": "ore", "kind": "material", "unit": "kg", "mass": 1.0}, f)
@@ -80,10 +116,16 @@ def _build_kb(tmp_path: Path) -> Path:
         yaml.dump({"id": "ingot", "kind": "material", "unit": "kg", "mass": 1.0}, f)
     with open(kb / "items" / "materials" / "part.yaml", "w") as f:
         yaml.dump({"id": "part", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+    with open(kb / "items" / "materials" / "molten.yaml", "w") as f:
+        yaml.dump({"id": "molten", "kind": "material", "unit": "kg", "mass": 1.0}, f)
+    with open(kb / "items" / "materials" / "cast_part.yaml", "w") as f:
+        yaml.dump({"id": "cast_part", "kind": "material", "unit": "kg", "mass": 1.0}, f)
     with open(kb / "items" / "machines" / "furnace.yaml", "w") as f:
         yaml.dump({"id": "furnace", "kind": "machine", "unit": "count", "mass": 100.0}, f)
     with open(kb / "items" / "machines" / "forge.yaml", "w") as f:
         yaml.dump({"id": "forge", "kind": "machine", "unit": "count", "mass": 100.0}, f)
+    with open(kb / "items" / "machines" / "flask_machine.yaml", "w") as f:
+        yaml.dump({"id": "flask_machine", "kind": "machine", "unit": "count", "mass": 100.0, "unit_kind": "discrete"}, f)
 
     return kb
 
@@ -210,3 +252,27 @@ def test_execute_plan_sim2_propagates_per_recipe_machine_goal_tags(tmp_path: Pat
     assert smelt_tags.get("goal.recipe_id") == "recipe_ingot_v0"
     assert forge_tags.get("goal.machine_id") == "machine_beta"
     assert forge_tags.get("goal.recipe_id") == "recipe_part_v0"
+
+
+def test_execute_plan_sim2_does_not_scale_machine_kind_inputs_in_recipe_overrides(tmp_path: Path):
+    kb_root = _build_kb(tmp_path)
+    sim_root = tmp_path / "simulations_parallel"
+
+    plan = SimPlan(sim_id="plan_sim2_tool_input_scale", target_machine_id="cast_part", build_machine=False)
+    plan.add_import("molten", 6.0, "kg")
+    plan.add_import("flask_machine", 1.0, "count")
+    plan.add_recipe("recipe_cast_tool_sensitive_v0", 1, metadata={"tags": {"goal.machine_id": "alpha"}})
+    plan.add_recipe("recipe_cast_tool_sensitive_v0", 1, metadata={"tags": {"goal.machine_id": "beta"}})
+
+    result = execute_plan(
+        plan=plan,
+        kb_root=kb_root,
+        sim_root=sim_root,
+        reset=True,
+        dry_run=False,
+        trace=False,
+        engine_mode="sim2",
+        strategy="sequential",
+    )
+
+    assert result["success"]

@@ -334,7 +334,26 @@ class SimulationEngine:
             if success:
                 consumed_inputs.append((item_id, qty, unit))
                 context = f"process={process_run.process_id}, run={process_run.process_run_id}, input={item_id}"
-                consumed = self._consume_provenance(item_id, qty, unit, context)
+                try:
+                    consumed = self._consume_provenance(item_id, qty, unit, context)
+                except ValueError as exc:
+                    # Keep simulation progressing when provenance accounting lags inventory.
+                    # If we have inventory but provenance underflow, consume recorded provenance
+                    # and attribute the remainder to unknown.
+                    if "Provenance underflow" not in str(exc):
+                        inputs_available = False
+                        break
+                    consumed_kg = self._require_kg(item_id, qty, unit, context)
+                    entry = self._get_provenance_entry(item_id)
+                    known_kg = entry.in_situ_kg + entry.imported_kg + entry.unknown_kg
+                    consumed = {
+                        "in_situ_kg": entry.in_situ_kg,
+                        "imported_kg": entry.imported_kg,
+                        "unknown_kg": max(0.0, consumed_kg - known_kg) + entry.unknown_kg,
+                    }
+                    entry.in_situ_kg = 0.0
+                    entry.imported_kg = 0.0
+                    entry.unknown_kg = 0.0
                 provenance_consumed.append((item_id, consumed))
                 for key in provenance_totals:
                     provenance_totals[key] += consumed[key]
@@ -349,7 +368,26 @@ class SimulationEngine:
             for item_id, consumed in provenance_consumed:
                 self._add_provenance(item_id, consumed)
 
+            # If this was a recipe step, clear orchestration state so it can retry.
+            recipe_run_id = getattr(process_run, "recipe_run_id", None)
+            step_index = getattr(process_run, "step_index", None)
+            if recipe_run_id and step_index is not None:
+                recipe_run = self.orchestrator.get_recipe_run(recipe_run_id)
+                if recipe_run and not recipe_run.is_completed:
+                    if recipe_run.scheduled_steps.get(step_index) == process_run_id:
+                        del recipe_run.scheduled_steps[step_index]
+                    if recipe_run.active_steps.get(step_index) == process_run_id:
+                        del recipe_run.active_steps[step_index]
+                    if step_index not in recipe_run.completed_steps:
+                        self._queue_recipe_step_retry(
+                            recipe_run_id=recipe_run_id,
+                            retry_time=self.scheduler.current_time + self.RECIPE_RETRY_DELAY_HOURS,
+                            reason="inputs_unavailable_at_start",
+                        )
+
             # Cancel this process (removes from active_processes and event queue)
+            if self.reservation_manager is not None:
+                self.reservation_manager.remove_reservation(process_run_id)
             self.scheduler.cancel_process(process_run_id)
         else:
             process_run.provenance_consumed_kg = provenance_totals
@@ -406,6 +444,7 @@ class SimulationEngine:
 
         provenance_consumed = dict(process_run.provenance_consumed_kg or {})
         provenance_total = sum(provenance_consumed.values())
+        missing_input_provenance = False
 
         if provenance_total <= 0:
             process_type = process_def.get("process_type") if isinstance(process_def, dict) else None
@@ -423,10 +462,10 @@ class SimulationEngine:
                         outputs_all_nonmass = False
                         break
                 if not (inputs_all_nonmass and outputs_all_nonmass):
-                    raise ValueError(
-                        f"Missing provenance for process outputs: "
-                        f"process={process_run.process_id}, run={process_run.process_run_id}"
-                    )
+                    # Keep simulation progressing if provenance is missing unexpectedly.
+                    # Outputs are tracked as unknown provenance instead of crashing.
+                    missing_input_provenance = True
+                    provenance_consumed = {"in_situ_kg": 0.0, "imported_kg": 0.0, "unknown_kg": 0.0}
 
         output_kg = {}
         untracked_outputs = []
@@ -463,7 +502,10 @@ class SimulationEngine:
                 self.state.complexity_scores[item_id] = output_complexity
             if provenance_consumed:
                 if provenance_total <= 0:
-                    self._add_provenance(item_id, {"in_situ_kg": mass_kg})
+                    if missing_input_provenance:
+                        self._add_provenance(item_id, {"unknown_kg": mass_kg})
+                    else:
+                        self._add_provenance(item_id, {"in_situ_kg": mass_kg})
                 else:
                     share = mass_kg / total_output_kg
                     self._add_provenance(item_id, {
@@ -1368,7 +1410,12 @@ class SimulationEngine:
             requested_item_id = inp.get("item_id")
             base_quantity = inp.get("quantity") or inp.get("qty", 0)
             unit = inp.get("unit", "kg")
-            needed_quantity = base_quantity * scale
+            requested_item_model = self.kb.get_item(requested_item_id) if requested_item_id else None
+            requested_item_def = (
+                requested_item_model.model_dump() if hasattr(requested_item_model, "model_dump") else requested_item_model
+            ) if requested_item_model else {}
+            is_machine_input = requested_item_def.get("kind") == "machine"
+            needed_quantity = base_quantity if is_machine_input else (base_quantity * scale)
 
             # Exact match only (material_class substitution disabled by default)
             actual_item_id = None
@@ -1396,6 +1443,10 @@ class SimulationEngine:
                     "error": "insufficient_inputs",
                     "message": f"Insufficient {requested_item_id}: need {needed_quantity} {unit}",
                 }
+
+            # Machine-kind inputs are treated as non-consumable tooling/capacity checks.
+            if is_machine_input:
+                continue
 
             inputs_consumed[actual_item_id] = InventoryItem(
                 quantity=needed_quantity, unit=unit
