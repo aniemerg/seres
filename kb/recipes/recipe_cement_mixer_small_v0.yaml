@@ -3,7 +3,7 @@ target_item_id: cement_mixer_small
 variant_id: v0
 inputs:
   - item_id: metal_feedstock
-    qty: 110.0
+    qty: 299.5
     unit: kg
   - item_id: motor_electric_small
     qty: 12.0
@@ -16,17 +16,17 @@ inputs:
     unit: kg
 outputs:
   - item_id: cement_mixer_small
-    qty: 120.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
     - item_id: metal_feedstock
-      qty: 110.0
+      qty: 299.5
       unit: kg
     outputs:
     - item_id: cast_metal_parts
-      qty: 108.0
+      qty: 297.5
       unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -34,11 +34,11 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
     - item_id: cast_metal_parts
-      qty: 108.0
+      qty: 297.5
       unit: kg
     outputs:
     - item_id: machined_part_raw
-      qty: 107.0
+      qty: 296.5
       unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -46,11 +46,11 @@ steps:
   - process_id: welding_and_fabrication_v0
     inputs:
     - item_id: machined_part_raw
-      qty: 107.0
+      qty: 296.5
       unit: kg
     outputs:
     - item_id: welded_fabrications
-      qty: 106.7
+      qty: 296.2
       unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
@@ -58,7 +58,7 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
     - item_id: welded_fabrications
-      qty: 106.7
+      qty: 296.2
       unit: kg
     - item_id: motor_electric_small
       qty: 12.0
@@ -71,16 +71,16 @@ steps:
       unit: kg
     outputs:
     - item_id: cement_mixer_small
-      qty: 120.0
-      unit: kg
+      qty: 1.0
+      unit: unit
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Assemble motor, gearbox, drum, frame, wheels"
 assumptions: Electric motor (0.5-1 HP) for drum rotation. Drum capacity ~0.1-0.2 m³.
 notes: |
   Assumptions:
-  - Metal feedstock scaled to produce 106.7 kg welded structure for 120 kg mixer.
+  - Metal feedstock scaled to produce 296.2 kg welded structure for 309.5 kg mixer.
   Rationale:
-  - Preserve mass balance and align component masses with item definitions.
+  - Preserve discrete output units; intermediate fabricated mass remains approximate.
   Uncertainty:
   - Frame/drum mass split should be refined with detailed design.

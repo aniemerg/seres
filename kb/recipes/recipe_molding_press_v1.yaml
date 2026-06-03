@@ -8,8 +8,8 @@ inputs:
     unit: kg
 outputs:
   - item_id: molding_press
-    qty: 300.0
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: metal_casting_basic_v0
     inputs:
@@ -69,14 +69,14 @@ steps:
         unit: kg
     outputs:
       - item_id: molding_press
-        qty: 285.0
-        unit: kg
+        qty: 1.0
+        unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
 notes: |
   Assumptions:
-  - Final press mass set to 285 kg to match assembled equipment output.
+  - Final press is modeled as one discrete unit; intermediate fabricated mass remains kg.
   Rationale:
-  - Preserve mass balance for integration test step.
+  - Preserve discrete item canonical units per ADR-016 while retaining coarse intermediate mass flow.
   Uncertainty:
   - Press mass and scrap rate should be refined with detailed BOM.
