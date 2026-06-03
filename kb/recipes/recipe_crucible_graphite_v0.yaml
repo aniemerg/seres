@@ -6,12 +6,12 @@ inputs:
     qty: 10.0
     unit: kg
   - item_id: machined_part_raw
-    qty: 9.5
+    qty: 10.0
     unit: kg
 outputs:
   - item_id: crucible_graphite
-    qty: 9.5
-    unit: kg
+    qty: 1.0
+    unit: unit
 steps:
   - process_id: graphite_molding_v0
     inputs:
@@ -20,7 +20,7 @@ steps:
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 9.5
+        qty: 10.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
@@ -28,11 +28,11 @@ steps:
   - process_id: sintering_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 9.5
+        qty: 10.0
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 9.5
+        qty: 10.0
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
@@ -40,12 +40,12 @@ steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 9.5
+        qty: 10.0
         unit: kg
     outputs:
       - item_id: crucible_graphite
-        qty: 9.5
-        unit: kg
+        qty: 1.0
+        unit: unit
     est_time_hr: 2.0
     machine_hours: 2.0
     notes: "Machine interior cavity and outer surface to final dimensions"
