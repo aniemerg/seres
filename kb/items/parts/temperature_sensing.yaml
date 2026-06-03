@@ -8,8 +8,18 @@ capabilities:
   - temperature_measurement
   - thermal_sensing
 is_import: true
+deprecated: true
+replaced_by:
+  default:
+    - thermocouple_contact_temperature_sensor_v0
+    - temperature_controller_module
+  low_medium_temperature_contact:
+    - rtd_contact_temperature_sensor_v0
+    - temperature_controller_module
+  high_temperature_non_contact:
+    - optical_pyrometer_temperature_sensor_v0
+    - temperature_controller_module
 notes: Set of temperature sensors including thermocouples, RTDs, pyrometers, and associated
-  signal conditioning electronics for high-temperature processes. Imported until signal-conditioning
-  electronics are locally manufacturable.
-bom: bom_temperature_sensing
+  signal conditioning electronics for high-temperature processes. Deprecated generic
+  bundle; replace with a specific sensor assembly plus the shared temperature_controller_module.
 unit_kind: discrete
