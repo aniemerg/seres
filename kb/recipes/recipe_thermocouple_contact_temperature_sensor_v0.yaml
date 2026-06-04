@@ -1,0 +1,48 @@
+id: recipe_thermocouple_contact_temperature_sensor_v0
+kind: recipe
+target_item_id: thermocouple_contact_temperature_sensor_v0
+variant_id: v0
+inputs:
+  - item_id: thermocouple_type_k_v0
+    qty: 2
+    unit: unit
+  - item_id: stainless_steel_sheath
+    qty: 2
+    unit: unit
+  - item_id: electrical_wire_and_connectors
+    qty: 0.2
+    unit: kg
+  - item_id: fastener_kit_small
+    qty: 0.034
+    unit: kg
+outputs:
+  - item_id: thermocouple_contact_temperature_sensor_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: thermocouple_type_k_v0
+        qty: 2
+        unit: unit
+      - item_id: stainless_steel_sheath
+        qty: 2
+        unit: unit
+      - item_id: electrical_wire_and_connectors
+        qty: 0.2
+        unit: kg
+      - item_id: fastener_kit_small
+        qty: 0.034
+        unit: kg
+    outputs:
+      - item_id: thermocouple_contact_temperature_sensor_v0
+        qty: 1
+        unit: unit
+    notes: Assemble thermocouple probes, sheaths, high-temperature leads, and mounting hardware.
+assumptions: >
+  Coarse assembly route for a reusable two-probe Type K contact temperature
+  sensing package. Controller/signal-conditioning electronics are modeled
+  separately as temperature_controller_module.
+notes: >
+  Local assembly is plausible once thermocouple wire/probes, sheaths, wiring,
+  and small hardware are available locally.

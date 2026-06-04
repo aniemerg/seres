@@ -1,0 +1,31 @@
+id: thermocouple_contact_temperature_sensor_v0
+kind: machine
+name: Thermocouple contact temperature sensor assembly
+mass: 0.35
+mass_kg: 0.35
+unit: unit
+unit_kind: discrete
+material_class: electronic
+capabilities:
+  - temperature_measurement
+  - thermal_sensing
+  - contact_temperature_measurement
+  - thermocouple_temperature_measurement
+  - furnace_temperature_monitoring
+  - high_temperature_process_feedback
+is_import: false
+bom: bom_thermocouple_contact_temperature_sensor_v0
+recipe: recipe_thermocouple_contact_temperature_sensor_v0
+notes: >
+  Reusable contact temperature sensing assembly for furnaces, casting furnaces,
+  sintering furnaces, and hot presses. Default SERES implementation uses two
+  Type K thermocouple probes with high-temperature leads, protection sheaths,
+  and mounting hardware. Suitable for ordinary furnace-zone, crucible, die,
+  platen, shell, guard, and heater feedback within the installed thermocouple
+  and sheath limits. Do not use as the sole process-temperature sensor for
+  molten regolith electrolysis or molten-glass hot zones near 1600 C; use
+  optical pyrometry for those process temperatures and retain thermocouples for
+  wall, guard, refractory, and heater-zone feedback. Marked non-import because
+  the assembly contains no precision optics or semiconductor electronics,
+  assuming local thermocouple alloy wire, welded junctions, ceramic/metal
+  protection tubes, and calibration fixtures are available.
