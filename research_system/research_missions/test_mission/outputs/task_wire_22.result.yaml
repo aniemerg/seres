@@ -1,0 +1,48 @@
+task_id: task_wire_22
+part_name: 22 AWG stranded hook-up wire
+source_bom_rows:
+  - "10"
+mass:
+  value: 0.008
+  unit: kg/m
+  confidence: high
+  basis: "Fake spool note lists 0.008 kg per meter."
+function:
+  summary: "Carries low-voltage power and signals between electronics and sensors."
+  subsystem_role: "Low-voltage wiring harness material for electronics interconnects."
+material_composition:
+  confidence: medium
+  materials:
+    - material: "stranded copper"
+      role: "Electrical conductor."
+      source_file: input/sources/wire22_hookup_wire_note.txt
+    - material: "PVC or silicone insulation"
+      role: "Electrical insulation around the conductor."
+      source_file: input/sources/wire22_hookup_wire_note.txt
+how_to_make:
+  summary: "Draw copper wire, strand conductors, extrude insulation, cool, mark, spool, and electrically test."
+  manufacturing_steps:
+    - "Draw copper wire."
+    - "Strand conductors."
+    - "Extrude insulation."
+    - "Cool."
+    - "Mark."
+    - "Spool."
+    - "Electrically test."
+  local_make_assessment: difficult
+  source_file: input/sources/wire22_hookup_wire_note.txt
+evidence:
+  - claim: "BOM row 10 identifies WIRE-22 as 5 m of 22 AWG stranded hook-up wire used for a low-voltage wiring harness."
+    source_file: input/bom.csv
+  - claim: "Mass is 0.008 kg per meter."
+    source_file: input/sources/wire22_hookup_wire_note.txt
+  - claim: "The wire carries low-voltage power and signals between electronics and sensors."
+    source_file: input/sources/wire22_hookup_wire_note.txt
+  - claim: "Likely materials are stranded copper conductor and PVC or silicone insulation."
+    source_file: input/sources/wire22_hookup_wire_note.txt
+  - claim: "Manufacturing route is copper wire drawing, conductor stranding, insulation extrusion, cooling, marking, spooling, and electrical testing."
+    source_file: input/sources/wire22_hookup_wire_note.txt
+confidence: high
+uncertainty_notes:
+  - "The source does not identify the insulation polymer exactly."
+needs_human_review: false

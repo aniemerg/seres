@@ -1,0 +1,50 @@
+task_id: task_gt2_200
+part_name: GT2 timing belt 200 mm loop
+source_bom_rows:
+  - "7"
+mass:
+  value: 0.018
+  unit: kg/unit
+  confidence: high
+  basis: "Fake vendor note lists one 200 mm closed-loop belt at 0.018 kg."
+function:
+  summary: "Closed-loop timing belt that transmits motion from pulley to axis carriage."
+  subsystem_role: "Axis belt drive element in the motion subsystem."
+material_composition:
+  confidence: medium
+  materials:
+    - material: "neoprene or polyurethane elastomer"
+      role: "Primary toothed belt body."
+      source_file: input/sources/gt2_200_belt_note.txt
+    - material: "fiberglass or steel tensile cords"
+      role: "Internal reinforcement carrying belt tension."
+      source_file: input/sources/gt2_200_belt_note.txt
+    - material: "tooth facing fabric"
+      role: "Wear-facing layer on belt teeth."
+      source_file: input/sources/gt2_200_belt_note.txt
+how_to_make:
+  summary: "Prepare cord reinforcement, form the toothed elastomer body by molding or extrusion, cure it, cut the closed loop to width, and inspect tooth pitch."
+  manufacturing_steps:
+    - "Prepare cord reinforcement."
+    - "Mold or extrude the toothed belt body."
+    - "Cure elastomer."
+    - "Cut loop to width."
+    - "Inspect tooth pitch."
+  local_make_assessment: difficult
+  source_file: input/sources/gt2_200_belt_note.txt
+evidence:
+  - claim: "BOM row 7 identifies GT2-200 as two units of GT2 timing belt 200 mm loop for the axis belt drive."
+    source_file: input/bom.csv
+  - claim: "One 200 mm closed-loop belt has mass 0.018 kg."
+    source_file: input/sources/gt2_200_belt_note.txt
+  - claim: "The belt transmits motion from pulley to axis carriage."
+    source_file: input/sources/gt2_200_belt_note.txt
+  - claim: "Likely materials include neoprene or polyurethane body, fiberglass or steel tensile cords, and tooth facing fabric."
+    source_file: input/sources/gt2_200_belt_note.txt
+  - claim: "Manufacturing uses cord reinforcement, molded or extruded toothed belt body, elastomer curing, loop cutting, and tooth pitch inspection."
+    source_file: input/sources/gt2_200_belt_note.txt
+confidence: high
+uncertainty_notes:
+  - "The exact elastomer type is unknown in the fake source."
+  - "The source gives alternative tensile cord materials, so the exact cord material is uncertain."
+needs_human_review: false

@@ -1,0 +1,70 @@
+task_id: task_psu_24v
+part_name: 24 V DC power supply module
+source_bom_rows:
+  - "9"
+mass:
+  value: 0.220
+  unit: kg
+  confidence: high
+  basis: "The synthetic module note for PSU-24V lists mass as 0.220 kg."
+function:
+  summary: "Converts input power to regulated 24 V DC for motors and electronics."
+  subsystem_role: "Motion electronics power supply in the parent assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: FR-4 PCB
+      role: "Printed circuit board substrate."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: copper
+      role: "PCB conductors and electrical windings."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: ferrite
+      role: "Transformer and inductor cores."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: aluminum
+      role: "Heat sink."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: steel
+      role: "Enclosure."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: capacitors
+      role: "Electrical energy storage and filtering."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: semiconductors
+      role: "Power conversion and control electronics."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: solder
+      role: "Electrical and mechanical joining."
+      source_file: input/sources/psu24v_power_supply_note.txt
+    - material: polymers
+      role: "Insulation, connector, and component materials."
+      source_file: input/sources/psu24v_power_supply_note.txt
+how_to_make:
+  summary: "Industrially made as an electronics and magnetics assembly with fabricated PCB, wound magnetic components, enclosure, and electrical qualification."
+  manufacturing_steps:
+    - "Fabricate PCB."
+    - "Wind magnetic components."
+    - "Perform SMT and THT assembly."
+    - "Fabricate enclosure."
+    - "Run electrical safety testing."
+    - "Burn in."
+    - "Perform final inspection."
+  local_make_assessment: difficult
+  source_file: input/sources/psu24v_power_supply_note.txt
+evidence:
+  - claim: "The BOM identifies PSU-24V as a 24 V DC power supply module with quantity 1 and row ID 9."
+    source_file: input/bom.csv
+  - claim: "The source lists mass as 0.220 kg."
+    source_file: input/sources/psu24v_power_supply_note.txt
+  - claim: "The source describes the function as converting input power to regulated 24 V DC for motors and electronics."
+    source_file: input/sources/psu24v_power_supply_note.txt
+  - claim: "The source lists likely materials including FR-4 PCB, copper, ferrite cores, aluminum heat sink, steel enclosure, capacitors, semiconductors, solder, and polymers."
+    source_file: input/sources/psu24v_power_supply_note.txt
+  - claim: "The source lists manufacturing steps including PCB fabrication, magnetic component winding, SMT/THT assembly, enclosure fabrication, electrical safety testing, burn-in, and final inspection."
+    source_file: input/sources/psu24v_power_supply_note.txt
+confidence: medium
+uncertainty_notes:
+  - "Material composition is qualitative and not mass-fractioned."
+  - "The source says electronics and magnetics are high-complexity and should be treated as import or review in this fake mission."
+needs_human_review: true

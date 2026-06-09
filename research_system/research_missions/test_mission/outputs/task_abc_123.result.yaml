@@ -1,0 +1,61 @@
+task_id: task_abc_123
+part_name: NEMA 17 stepper motor
+source_bom_rows:
+  - "3"
+mass:
+  value: 0.280
+  unit: kg
+  confidence: high
+  basis: "The synthetic datasheet for ABC-123 lists mass as 0.280 kg per motor."
+function:
+  summary: "Controlled rotary actuation for a motion axis."
+  subsystem_role: "Axis drive actuator in the parent motion assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: steel
+      role: "Laminations and shaft."
+      source_file: input/sources/abc123_motor_datasheet.txt
+    - material: copper
+      role: "Motor windings."
+      source_file: input/sources/abc123_motor_datasheet.txt
+    - material: aluminum
+      role: "End caps."
+      source_file: input/sources/abc123_motor_datasheet.txt
+    - material: permanent magnets
+      role: "Rotor magnetic field."
+      source_file: input/sources/abc123_motor_datasheet.txt
+    - material: bearings
+      role: "Rotor support."
+      source_file: input/sources/abc123_motor_datasheet.txt
+    - material: polymer
+      role: "Insulation and connector."
+      source_file: input/sources/abc123_motor_datasheet.txt
+how_to_make:
+  summary: "Industrially made as a high-complexity electromechanical motor assembly."
+  manufacturing_steps:
+    - "Stamp steel laminations."
+    - "Wind copper coils."
+    - "Assemble rotor and shaft."
+    - "Install bearings."
+    - "Assemble housing."
+    - "Wire connector."
+    - "Test electrically."
+  local_make_assessment: difficult
+  source_file: input/sources/abc123_motor_datasheet.txt
+evidence:
+  - claim: "The BOM identifies ABC-123 as a NEMA 17 stepper motor with quantity 2 and row ID 3."
+    source_file: input/bom.csv
+  - claim: "The source lists mass as 0.280 kg per motor."
+    source_file: input/sources/abc123_motor_datasheet.txt
+  - claim: "The source describes the function as controlled rotary actuation for a motion axis."
+    source_file: input/sources/abc123_motor_datasheet.txt
+  - claim: "The source lists likely materials including steel, copper, aluminum, permanent magnets, bearings, polymer insulation, and connector."
+    source_file: input/sources/abc123_motor_datasheet.txt
+  - claim: "The source gives the manufacturing route: stamp laminations, wind coils, assemble rotor and shaft, install bearings, assemble housing, wire connector, and test electrically."
+    source_file: input/sources/abc123_motor_datasheet.txt
+confidence: high
+uncertainty_notes:
+  - "Material composition is described as likely, not as a quantified bill of materials."
+  - "The source recommends treating this as an import or high-level candidate subassembly in an early KB pass."
+needs_human_review: false

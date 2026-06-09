@@ -47,6 +47,8 @@ def main():
     add_sim_subcommands(subparsers)
     from src.simulation_parallel.cli import add_sim2_subcommands
     add_sim2_subcommands(subparsers)
+    from src.research_system.cli import add_research_subcommands
+    add_research_subcommands(subparsers)
 
     # =========================================================================
     # INDEX command
@@ -247,6 +249,10 @@ def main():
 
         elif args.command == 'queue':
             return run_queue_command(args)
+
+        elif args.command == 'research':
+            from src.research_system.cli import run_research_command
+            return run_research_command(args)
 
         elif args.command == 'sim':
             from src.simulation.cli import run_sim_command

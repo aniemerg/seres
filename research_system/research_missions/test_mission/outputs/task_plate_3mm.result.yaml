@@ -1,0 +1,47 @@
+task_id: task_plate_3mm
+part_name: 3 mm aluminum mounting plate
+source_bom_rows:
+  - "11"
+mass:
+  value: 0.18
+  unit: kg/unit
+  confidence: high
+  basis: "Fake drawing note estimates one mounting plate at 0.180 kg."
+function:
+  summary: "Flat mounting plate for motors and electronics."
+  subsystem_role: "Provides a rigid mounting surface in the mechanical and electronics support structure."
+material_composition:
+  confidence: medium
+  materials:
+    - material: "aluminum alloy plate"
+      role: "Primary structural plate material."
+      source_file: input/sources/plate3mm_aluminum_plate_note.txt
+    - material: "optional oxide surface"
+      role: "Optional surface finish or passivation layer."
+      source_file: input/sources/plate3mm_aluminum_plate_note.txt
+how_to_make:
+  summary: "Roll aluminum sheet or plate, cut a blank, drill mounting holes, deburr, optionally anodize, and inspect dimensions."
+  manufacturing_steps:
+    - "Roll aluminum sheet or plate."
+    - "Cut blank."
+    - "Drill mounting holes."
+    - "Deburr."
+    - "Optionally anodize."
+    - "Inspect dimensions."
+  local_make_assessment: moderate
+  source_file: input/sources/plate3mm_aluminum_plate_note.txt
+evidence:
+  - claim: "BOM row 11 identifies PLATE-3MM as two units of 3 mm aluminum mounting plate for motor and electronics mounting."
+    source_file: input/bom.csv
+  - claim: "One mounting plate is estimated at 0.180 kg."
+    source_file: input/sources/plate3mm_aluminum_plate_note.txt
+  - claim: "The plate provides a flat mounting surface for motors and electronics."
+    source_file: input/sources/plate3mm_aluminum_plate_note.txt
+  - claim: "Likely materials are aluminum alloy plate with optional oxide surface."
+    source_file: input/sources/plate3mm_aluminum_plate_note.txt
+  - claim: "Manufacturing route is rolling sheet or plate, cutting blank, drilling mounting holes, deburring, optional anodizing, and dimensional inspection."
+    source_file: input/sources/plate3mm_aluminum_plate_note.txt
+confidence: high
+uncertainty_notes:
+  - "The exact aluminum alloy is not specified in the fake source."
+needs_human_review: false

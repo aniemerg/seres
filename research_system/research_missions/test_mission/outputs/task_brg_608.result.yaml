@@ -1,0 +1,57 @@
+task_id: task_brg_608
+part_name: 608ZZ radial ball bearing
+source_bom_rows:
+  - "6"
+mass:
+  value: 0.012
+  unit: kg
+  confidence: high
+  basis: "The synthetic catalog note for BRG-608 lists one bearing at 0.012 kg."
+function:
+  summary: "Supports rotating shafts and idlers with low friction."
+  subsystem_role: "Idler and shaft support bearing in the parent motion assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: chrome steel
+      role: "Bearing rings and balls."
+      source_file: input/sources/brg608_bearing_note.txt
+    - material: steel
+      role: "Bearing shields."
+      source_file: input/sources/brg608_bearing_note.txt
+    - material: polymer or steel
+      role: "Small cage separating rolling elements."
+      source_file: input/sources/brg608_bearing_note.txt
+    - material: lubricant
+      role: "Trace lubrication for rolling contact."
+      source_file: input/sources/brg608_bearing_note.txt
+how_to_make:
+  summary: "Industrially made through precision bearing steel forming, heat treatment, grinding, assembly, lubrication, and inspection."
+  manufacturing_steps:
+    - "Forge or cut bearing steel blanks."
+    - "Turn rings."
+    - "Heat treat bearing components."
+    - "Grind raceways."
+    - "Manufacture balls."
+    - "Assemble cage and rolling elements."
+    - "Install shields."
+    - "Lubricate."
+    - "Inspect."
+  local_make_assessment: difficult
+  source_file: input/sources/brg608_bearing_note.txt
+evidence:
+  - claim: "The BOM identifies BRG-608 as a 608ZZ radial ball bearing with quantity 6 and row ID 6."
+    source_file: input/bom.csv
+  - claim: "The source lists one bearing at 0.012 kg."
+    source_file: input/sources/brg608_bearing_note.txt
+  - claim: "The source describes the function as supporting rotating shafts and idlers with low friction."
+    source_file: input/sources/brg608_bearing_note.txt
+  - claim: "The source lists likely materials including chrome steel rings and balls, steel shields, polymer or steel cage, and trace lubricant."
+    source_file: input/sources/brg608_bearing_note.txt
+  - claim: "The source describes manufacturing steps including blank forming, turning, heat treatment, grinding, ball manufacture, assembly, shield installation, lubrication, and inspection."
+    source_file: input/sources/brg608_bearing_note.txt
+confidence: medium
+uncertainty_notes:
+  - "Material composition is qualitative and not mass-fractioned."
+  - "The source is synthetic and explicitly says precision bearing manufacture should be reviewed before KB use."
+needs_human_review: true

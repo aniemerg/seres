@@ -1,0 +1,47 @@
+task_id: task_pul_20t
+part_name: GT2 20 tooth aluminum pulley
+source_bom_rows:
+  - "8"
+mass:
+  value: 0.01
+  unit: kg/unit
+  confidence: high
+  basis: "Fake catalog lists one pulley at 0.010 kg."
+function:
+  summary: "Pulley that couples a motor shaft or idler shaft to GT2 belt motion."
+  subsystem_role: "Motor and idler pulley element in the belt-drive motion subsystem."
+material_composition:
+  confidence: high
+  materials:
+    - material: "aluminum alloy"
+      role: "Primary pulley body material."
+      source_file: input/sources/pul20t_pulley_note.txt
+    - material: "steel"
+      role: "Small set screws."
+      source_file: input/sources/pul20t_pulley_note.txt
+how_to_make:
+  summary: "Machine an aluminum pulley from a blank by turning, cutting timing teeth, drilling and tapping set-screw holes, deburring, optional anodizing, and inspection."
+  manufacturing_steps:
+    - "Turn aluminum blank."
+    - "Hob or machine timing teeth."
+    - "Drill and tap set-screw holes."
+    - "Deburr."
+    - "Optionally anodize."
+    - "Inspect bore and pitch."
+  local_make_assessment: moderate
+  source_file: input/sources/pul20t_pulley_note.txt
+evidence:
+  - claim: "BOM row 8 identifies PUL-20T as four units of GT2 20 tooth aluminum pulley used as motor and idler pulleys."
+    source_file: input/bom.csv
+  - claim: "One pulley has mass 0.010 kg."
+    source_file: input/sources/pul20t_pulley_note.txt
+  - claim: "The pulley couples motor shaft or idler shaft to GT2 belt motion."
+    source_file: input/sources/pul20t_pulley_note.txt
+  - claim: "Likely materials are aluminum alloy body and small steel set screws."
+    source_file: input/sources/pul20t_pulley_note.txt
+  - claim: "Manufacturing route is turning an aluminum blank, machining timing teeth, drilling and tapping set-screw holes, deburring, optional anodizing, and bore and pitch inspection."
+    source_file: input/sources/pul20t_pulley_note.txt
+confidence: high
+uncertainty_notes:
+  - "The exact aluminum alloy and steel grade are not specified in the fake source."
+needs_human_review: false

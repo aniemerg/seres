@@ -1,0 +1,112 @@
+required:
+  - task_id
+  - part_name
+  - source_bom_rows
+  - mass
+  - function
+  - material_composition
+  - how_to_make
+  - evidence
+  - confidence
+  - needs_human_review
+
+fields:
+  task_id:
+    type: string
+  part_name:
+    type: string
+  source_bom_rows:
+    type: list
+  mass:
+    type: object
+    required:
+      - value
+      - unit
+      - confidence
+      - basis
+    fields:
+      value:
+        type: number
+      unit:
+        type: string
+      confidence:
+        type: string
+        allowed:
+          - high
+          - medium
+          - low
+      basis:
+        type: string
+  function:
+    type: object
+    required:
+      - summary
+      - subsystem_role
+  material_composition:
+    type: object
+    required:
+      - confidence
+      - materials
+    fields:
+      confidence:
+        type: string
+        allowed:
+          - high
+          - medium
+          - low
+      materials:
+        type: list
+        items:
+          type: object
+          required:
+            - material
+            - role
+            - source_file
+          fields:
+            material:
+              type: string
+            role:
+              type: string
+            source_file:
+              type: string
+  how_to_make:
+    type: object
+    required:
+      - summary
+      - manufacturing_steps
+      - local_make_assessment
+      - source_file
+    fields:
+      manufacturing_steps:
+        type: list
+      local_make_assessment:
+        type: string
+        allowed:
+          - easy
+          - moderate
+          - difficult
+          - impractical
+      source_file:
+        type: string
+  evidence:
+    type: list
+    items:
+      type: object
+      required:
+        - source_file
+        - claim
+      fields:
+        source_file:
+          type: string
+        claim:
+          type: string
+  confidence:
+    type: string
+    allowed:
+      - high
+      - medium
+      - low
+  uncertainty_notes:
+    type: list
+  needs_human_review:
+    type: boolean

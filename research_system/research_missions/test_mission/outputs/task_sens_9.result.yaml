@@ -1,0 +1,62 @@
+task_id: task_sens_9
+part_name: Optical endstop sensor board
+source_bom_rows:
+  - "5"
+mass:
+  value: 0.006
+  unit: kg
+  confidence: high
+  basis: "The synthetic vendor note for SENS-9 lists board mass as 0.006 kg."
+function:
+  summary: "Detects axis home position."
+  subsystem_role: "Axis home position sensor in the parent motion assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: FR-4 glass-epoxy
+      role: "PCB substrate."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: copper
+      role: "PCB traces."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: solder
+      role: "Electrical and mechanical joining."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: small ICs
+      role: "Sensor signal electronics."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: photointerrupter package
+      role: "Optical sensing element."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: connector
+      role: "Electrical interface."
+      source_file: input/sources/sens9_sensor_note.txt
+    - material: polymer
+      role: "Component bodies."
+      source_file: input/sources/sens9_sensor_note.txt
+how_to_make:
+  summary: "Industrially made as a small PCB assembly with optical and electrical testing."
+  manufacturing_steps:
+    - "Fabricate PCB."
+    - "Apply solder mask and finish."
+    - "Place SMT and THT components."
+    - "Perform reflow or wave soldering."
+    - "Run optical and electrical test."
+  local_make_assessment: difficult
+  source_file: input/sources/sens9_sensor_note.txt
+evidence:
+  - claim: "The BOM identifies SENS-9 as an optical endstop sensor board with quantity 3 and row ID 5."
+    source_file: input/bom.csv
+  - claim: "The source lists board mass as 0.006 kg."
+    source_file: input/sources/sens9_sensor_note.txt
+  - claim: "The source describes the function as detecting axis home position."
+    source_file: input/sources/sens9_sensor_note.txt
+  - claim: "The source lists likely materials including FR-4 glass-epoxy PCB, copper traces, solder, small ICs, photointerrupter package, connector, and polymer bodies."
+    source_file: input/sources/sens9_sensor_note.txt
+  - claim: "The source lists the manufacturing route as PCB fabrication, solder mask and finish, SMT/THT placement, reflow or wave soldering, and optical/electrical test."
+    source_file: input/sources/sens9_sensor_note.txt
+confidence: medium
+uncertainty_notes:
+  - "Material composition is qualitative and not mass-fractioned."
+  - "The source says electronics should normally remain import or needs_review unless the mission explicitly models electronics manufacturing."
+needs_human_review: true

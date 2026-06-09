@@ -1,0 +1,48 @@
+task_id: task_m3x12
+part_name: M3 stainless socket screw
+source_bom_rows:
+  - "1"
+  - "2"
+mass:
+  value: 0.0012
+  unit: kg
+  confidence: medium
+  basis: "The synthetic source estimates one M3 x 12 stainless socket screw at 0.0012 kg."
+function:
+  summary: "Reusable frame and bracket fastening."
+  subsystem_role: "Fastens frame joints and motor brackets in the parent assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: stainless steel
+      role: "Screw body."
+      source_file: input/sources/m3x12_fastener_note.txt
+    - material: surface finish
+      role: "Negligible finish mass."
+      source_file: input/sources/m3x12_fastener_note.txt
+how_to_make:
+  summary: "Industrially made by cold forming and thread rolling stainless fastener stock, followed by finishing and inspection."
+  manufacturing_steps:
+    - "Cold heading."
+    - "Thread rolling."
+    - "Socket forming."
+    - "Passivation."
+    - "Inspection."
+  local_make_assessment: moderate
+  source_file: input/sources/m3x12_fastener_note.txt
+evidence:
+  - claim: "The BOM identifies M3x12 as an M3 stainless socket screw with row IDs 1 and 2 and total quantity 20."
+    source_file: input/bom.csv
+  - claim: "The source estimates one M3 x 12 stainless socket screw at 0.0012 kg."
+    source_file: input/sources/m3x12_fastener_note.txt
+  - claim: "The source describes the function as reusable frame and bracket fastening."
+    source_file: input/sources/m3x12_fastener_note.txt
+  - claim: "The source lists likely material as a stainless steel body with negligible surface finish mass."
+    source_file: input/sources/m3x12_fastener_note.txt
+  - claim: "The source lists the manufacturing route as cold heading, thread rolling, socket forming, passivation, and inspection."
+    source_file: input/sources/m3x12_fastener_note.txt
+confidence: medium
+uncertainty_notes:
+  - "The mass is an estimate rather than a fake catalog measurement."
+  - "The source says a generic fastener family should usually be reused rather than creating a dedicated KB item for this exact length."
+needs_human_review: false

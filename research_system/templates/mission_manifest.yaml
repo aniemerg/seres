@@ -1,0 +1,36 @@
+# Template for a research mission.
+id: mission_example_001
+mission_type: bom_part_research
+objective: >
+  Describe the concrete research objective for this mission.
+
+input:
+  primary_file: input/bom.csv
+  source_catalog: input/source_catalog.csv
+
+task_generation:
+  strategy: unique_part_or_part_family
+  rules_file: instructions/task_generation_rules.md
+
+worker:
+  prompt_file: instructions/worker_prompt.md
+  output_schema: schemas/result.schema.yaml
+  max_attempts: 3
+
+execution:
+  max_workers: 20
+  lease_ttl_seconds: 1800
+
+completion_rule:
+  type: schema_valid_result
+  require_evidence: true
+
+aggregation:
+  policy_file: instructions/aggregation_policy.md
+  outputs:
+    - aggregate/master_table.csv
+    - aggregate/needs_review.csv
+    - aggregate/materials_table.csv
+    - aggregate/evidence_table.csv
+    - aggregate/manufacturing_steps_table.csv
+    - aggregate/summary.md

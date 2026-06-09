@@ -1,0 +1,22 @@
+# Minimal schema template. Mission-specific schemas should tighten this.
+required:
+  - task_id
+  - summary
+  - evidence
+  - confidence
+
+fields:
+  task_id:
+    type: string
+  summary:
+    type: string
+  evidence:
+    type: list
+  confidence:
+    type: string
+    allowed:
+      - high
+      - medium
+      - low
+  needs_human_review:
+    type: boolean

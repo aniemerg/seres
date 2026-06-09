@@ -1,0 +1,49 @@
+task_id: task_al_2040
+part_name: 2040 aluminum extrusion rail
+source_bom_rows:
+  - "4"
+mass:
+  value: 0.55
+  unit: kg/unit
+  confidence: high
+  basis: "Source note lists 0.55 kg per 1 m rail for AL-2040."
+function:
+  summary: "Structural frame rail for the machine frame."
+  subsystem_role: "Provides rigid linear frame members for the parent assembly."
+material_composition:
+  confidence: medium
+  materials:
+    - material: "6061 or 6063 aluminum alloy"
+      role: "Primary structural extrusion material."
+      source_file: input/sources/al2040_extrusion_note.txt
+    - material: "anodized aluminum oxide layer"
+      role: "Optional minor surface finish on the rail."
+      source_file: input/sources/al2040_extrusion_note.txt
+how_to_make:
+  summary: "Make from aluminum billet by hot extrusion through a 2040 profile die, followed by straightening, age hardening, cutting, and optional anodizing."
+  manufacturing_steps:
+    - "Cast aluminum billet."
+    - "Homogenize billet."
+    - "Hot extrude through profile die."
+    - "Stretch and straighten extrusion."
+    - "Age harden."
+    - "Cut to length."
+    - "Optionally anodize."
+  local_make_assessment: moderate
+  source_file: input/sources/al2040_extrusion_note.txt
+evidence:
+  - claim: "BOM row 4 identifies AL-2040 as four units of 2040 aluminum extrusion rail used as machine frame rail."
+    source_file: input/bom.csv
+  - claim: "Mass is 0.55 kg per 1 m rail."
+    source_file: input/sources/al2040_extrusion_note.txt
+  - claim: "Function is structural frame member."
+    source_file: input/sources/al2040_extrusion_note.txt
+  - claim: "Likely materials are 6061 or 6063 aluminum alloy with a minor anodized oxide layer."
+    source_file: input/sources/al2040_extrusion_note.txt
+  - claim: "Manufacturing route is billet casting, homogenizing, hot extrusion, straightening, age hardening, cutting, and optional anodizing."
+    source_file: input/sources/al2040_extrusion_note.txt
+confidence: high
+uncertainty_notes:
+  - "The source states 6061 or 6063, so the exact alloy is uncertain."
+  - "Mass is per 1 m rail; the BOM does not independently state each rail length."
+needs_human_review: false

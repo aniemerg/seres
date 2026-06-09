@@ -1,0 +1,40 @@
+id: test_mission
+mission_type: bom_part_research
+objective: >
+  Validate the research system with a small fake BOM. For each unique part or
+  part family, produce a structured result containing estimated mass, function,
+  material composition, manufacturing approach, evidence, and uncertainty.
+  Every material entry and manufacturing approach must carry its own source
+  file; if the source is unavailable, use "unknown". This mission is synthetic
+  and should not be promoted into the real KB.
+
+input:
+  primary_file: input/bom.csv
+  source_catalog: input/source_catalog.csv
+
+task_generation:
+  strategy: unique_part_or_part_family
+  rules_file: instructions/task_generation_rules.md
+
+worker:
+  prompt_file: instructions/worker_prompt.md
+  output_schema: schemas/result.schema.yaml
+  max_attempts: 3
+
+execution:
+  max_workers: 4
+  lease_ttl_seconds: 900
+
+completion_rule:
+  type: schema_valid_result
+  require_evidence: true
+
+aggregation:
+  policy_file: instructions/aggregation_policy.md
+  outputs:
+    - aggregate/master_table.csv
+    - aggregate/needs_review.csv
+    - aggregate/materials_table.csv
+    - aggregate/evidence_table.csv
+    - aggregate/manufacturing_steps_table.csv
+    - aggregate/summary.md
