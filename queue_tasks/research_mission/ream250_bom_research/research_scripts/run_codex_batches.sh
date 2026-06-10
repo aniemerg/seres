@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TASK_DIR="queue_tasks/ream250_bom_research"
+TASK_DIR="queue_tasks/research_mission/ream250_bom_research"
+TASK_INSTRUCTIONS="$TASK_DIR/research_instructions/agent.md"
+TASK_VALIDATOR="$TASK_DIR/research_scripts/validate_results.py"
 DEFAULT_REPO_ROOT="/home/eastrolinux/seres"
 
 repo_root="${REPO_ROOT:-$DEFAULT_REPO_ROOT}"
@@ -18,7 +20,7 @@ dry_run=0
 usage() {
   cat <<'EOF'
 Usage:
-  queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh [options]
+  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh [options]
 
 Runs short-lived Codex exec sessions for reAM250 BOM research queue items.
 Each session gets a fresh context window and processes at most --max-items.
@@ -38,13 +40,13 @@ Options:
 
 Examples:
   # Conservative single-worker run.
-  queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh
+  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh
 
   # Two workers, each Codex session handles at most 3 rows.
-  queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh --workers 2 --max-items 3
+  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 2 --max-items 3
 
   # Smoke test one fresh Codex session.
-  queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh --max-batches 1
+  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1
 EOF
 }
 
@@ -120,7 +122,8 @@ is_positive_int "$ttl" || die "--ttl must be a positive integer"
 
 repo_root="$(cd "$repo_root" && pwd)"
 [[ -d "$repo_root/.git" ]] || die "repo root does not contain .git: $repo_root"
-[[ -f "$repo_root/$TASK_DIR/instructions/agent.md" ]] || die "missing task instructions under $TASK_DIR"
+[[ -f "$repo_root/$TASK_INSTRUCTIONS" ]] || die "missing task instructions: $TASK_INSTRUCTIONS"
+[[ -f "$repo_root/$TASK_VALIDATOR" ]] || die "missing task validator: $TASK_VALIDATOR"
 [[ -x "$repo_root/.venv/bin/python" ]] || die "missing .venv/bin/python; run uv sync first"
 
 if [[ -z "$log_dir" ]]; then
@@ -193,7 +196,7 @@ Set a goal: Process only reAM250 BOM research queue items for this short batch.
 
 You are ${agent_name}.
 
-Read ${TASK_DIR}/instructions/agent.md and follow it.
+Read ${TASK_INSTRUCTIONS} and follow it.
 
 For this invocation, process at most ${item_limit} matching queue items, then stop successfully.
 Use this exact lease command for each item:
@@ -212,11 +215,11 @@ If any leased item does not match those rules, release it immediately and stop.
 
 After writing each result, validate it with:
 
-.venv/bin/python ${TASK_DIR}/scripts/validate_results.py --file <output_path>
+.venv/bin/python ${TASK_VALIDATOR} --file <output_path>
 
 Complete finished tasks without --verify:
 
-.venv/bin/python -m src.cli queue complete --id <leased-id> --agent ${agent_name}
+.venv/bin/python -m src.cli queue complete --id <leased-id> --agent ${agent_name} --require-output --validate-output
 
 Do not edit KB YAML, source code, docs, queue tasks, generated index files, or system files.
 Only create or update the requested result files under research/ream250_bom/.
@@ -307,7 +310,7 @@ fi
 if [[ "$validate_at_end" -eq 1 ]]; then
   (
     cd "$repo_root"
-    .venv/bin/python "$TASK_DIR/scripts/validate_results.py" --dir research/ream250_bom
+    .venv/bin/python "$TASK_VALIDATOR" --dir research/ream250_bom
   )
 fi
 

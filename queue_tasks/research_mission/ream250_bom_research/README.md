@@ -5,12 +5,14 @@ is not part of the generic research queue system.
 
 ## Files
 
-- `instructions/agent.md` - Prompt/instructions for a Codex agent processing
+- `research_instructions/agent.md` - Prompt/instructions for a Codex agent processing
   reAM250 BOM research queue items.
-- `schemas/research_result.schema.yaml` - Expected structured result shape.
-- `scripts/validate_results.py` - Local validator for result Markdown/YAML/JSON
+- `research_schemas/research_result.schema.yaml` - Expected structured result shape.
+- `research_scripts/generate_queue_tasks.py` - Build queue items from the gold
+  CSV/manifest package, optionally extracting STEP metadata with FreeCAD.
+- `research_scripts/validate_results.py` - Local validator for result Markdown/YAML/JSON
   files.
-- `scripts/run_codex_batches.sh` - Optional batch runner that repeatedly starts
+- `research_scripts/run_codex_batches.sh` - Optional batch runner that repeatedly starts
   fresh `codex exec` sessions.
 
 ## Queue Requirements
@@ -21,6 +23,21 @@ The queue should contain research tasks with:
 - `gap_type: research_task`
 - IDs starting with `research_task:ream250_bom_row_`
 - `context.output_path` under `research/ream250_bom/`
+- `context.output_validator` pointing to this task pack validator
+
+Generate or refresh the 401 queue items from the gold CSV/manifest:
+
+```bash
+.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/generate_queue_tasks.py \
+  --replace-queue-prefix
+```
+
+This replaces only existing queue entries whose IDs start with
+`research_task:ream250_bom_row_`.
+
+CAD geometry is intentionally read by the agent after it leases a specific row.
+Use `--extract-cad-metadata` only for offline diagnostics, not for the normal
+research queue run.
 
 Lease with hard filters:
 
@@ -45,7 +62,7 @@ codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
 Then tell the agent:
 
 ```text
-Read queue_tasks/ream250_bom_research/instructions/agent.md and follow it as ream250-bom-agent-01.
+Read queue_tasks/research_mission/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
 ```
 
 Use a different agent name in each terminal, such as `ream250-bom-agent-02`.
@@ -65,13 +82,13 @@ small batch, so context does not accumulate across the whole BOM.
 Conservative default:
 
 ```bash
-queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh
+queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh
 ```
 
 Two workers, three rows per fresh Codex session:
 
 ```bash
-queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh \
+queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --workers 2 \
   --max-items 3
 ```
@@ -79,14 +96,14 @@ queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh \
 Smoke test one Codex session:
 
 ```bash
-queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh \
+queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --max-batches 1
 ```
 
 Print the generated prompt without running Codex:
 
 ```bash
-queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh --dry-run
+queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
 ```
 
 Logs are written to `out/ream250_bom_runner_logs/` by default.
@@ -101,7 +118,7 @@ Logs are written to `out/ream250_bom_runner_logs/` by default.
 - Do not run `python -m src.cli index` while the runner is active. This workflow
   relies on the research queue as the state source.
 - The runner does not guarantee research quality. It only bounds context and
-  automates fresh Codex sessions; use `scripts/validate_results.py` to check
+  automates fresh Codex sessions; use `research_scripts/validate_results.py` to check
   required result structure and source fields.
 
 ## Validate Results
@@ -109,14 +126,14 @@ Logs are written to `out/ream250_bom_runner_logs/` by default.
 Validate one file:
 
 ```bash
-.venv/bin/python queue_tasks/ream250_bom_research/scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
   --file research/ream250_bom/ream250_bom_row_0001_11.md
 ```
 
 Validate a directory:
 
 ```bash
-.venv/bin/python queue_tasks/ream250_bom_research/scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
   --dir research/ream250_bom
 ```
 
@@ -132,7 +149,7 @@ each have their own source object containing:
 Complete research tasks without `--verify`:
 
 ```bash
-.venv/bin/python -m src.cli queue complete --id <leased-id> --agent <agent-name>
+.venv/bin/python -m src.cli queue complete --id <leased-id> --agent <agent-name> --require-output --validate-output
 ```
 
 Do not run `python -m src.cli index` during this one-off research workflow.

@@ -16,6 +16,8 @@ import yaml
 
 REQUIRED_SECTIONS = ("function", "mass", "material", "how_to_make")
 SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "confidence")
+REQUIRED_LISTS = ("assumptions", "uncertainty_notes", "kb_implications")
+CONFIDENCE_VALUES = {"low", "medium", "high", "unknown"}
 
 
 def load_result(path: Path) -> Dict[str, Any]:
@@ -66,10 +68,22 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
 
     if not function.get("summary"):
         issues.append("missing required field: function.summary")
+    if not mass.get("basis"):
+        issues.append("missing required field: mass.basis")
     if not material.get("primary_material"):
         issues.append("missing required field: material.primary_material")
     if not how_to_make.get("summary"):
         issues.append("missing required field: how_to_make.summary")
+    if "manufacturing_steps" not in how_to_make:
+        issues.append("missing required field: how_to_make.manufacturing_steps")
+    elif not isinstance(how_to_make.get("manufacturing_steps"), list):
+        issues.append("how_to_make.manufacturing_steps must be a list")
+
+    for field in REQUIRED_LISTS:
+        if field not in data:
+            issues.append(f"missing required field: {field}")
+        elif not isinstance(data.get(field), list):
+            issues.append(f"{field} must be a list")
 
     return issues
 
@@ -82,12 +96,22 @@ def validate_source(section: Dict[str, Any], path: str) -> List[str]:
     for field in SOURCE_FIELDS:
         if source.get(field) in (None, ""):
             issues.append(f"missing required field: {path}.source.{field}")
+    confidence = source.get("confidence")
+    if isinstance(confidence, str) and confidence.strip().lower() not in CONFIDENCE_VALUES:
+        issues.append(
+            f"{path}.source.confidence must be one of: "
+            f"{', '.join(sorted(CONFIDENCE_VALUES))}"
+        )
     return issues
 
 
 def iter_paths(files: Iterable[Path], directory: Path | None) -> List[Path]:
     paths = list(files)
     if directory:
+        if not directory.exists():
+            raise FileNotFoundError(f"result directory does not exist: {directory}")
+        if not directory.is_dir():
+            raise NotADirectoryError(f"result path is not a directory: {directory}")
         paths.extend(
             sorted(
                 path for path in directory.iterdir()

@@ -45,15 +45,29 @@ python -m src.cli index
 
 Use the leased item's `context` fields:
 
-- `source_pdf`
-- `source_txt`
+- `source_csv`
+- `manifest_csv`
 - `bom_row_number`
+- `source_row_number`
 - `quantity`
 - `cad_file`
+- `canonical_step_path`
+- `cad_export_status`
 - `description_or_product_id`
 - `manufacturer`
 - `third_party_link_url`
 - `output_path`
+
+After leasing a task, read the row's CAD file if `canonical_step_path` exists
+and `cad_export_status` is not `missing_in_cad`. Use the local FreeCAD wrapper:
+
+```bash
+.tools/freecad/freecadcmd -c "import Part; p='<canonical_step_path>'; s=Part.Shape(); s.read(p); bb=s.BoundBox; print(len(s.Solids), s.Volume, s.Area, bb.XLength, bb.YLength, bb.ZLength)"
+```
+
+Use that geometry as row-specific evidence for mass and shape/function
+inference. If `cad_export_status` is `assembly_only`, `ambiguous`, or
+`missing_in_cad`, explain the CAD evidence limitation in `uncertainty_notes`.
 
 Keep research concise. Use at most 4 external sources per result unless the row
 cannot be resolved without more.
@@ -110,7 +124,7 @@ have their own source object with:
 Run:
 
 ```bash
-.venv/bin/python queue_tasks/ream250_bom_research/scripts/validate_results.py --file <output_path>
+.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py --file <output_path>
 ```
 
 Do not complete the queue item if validation fails.
@@ -118,5 +132,5 @@ Do not complete the queue item if validation fails.
 Complete without `--verify`:
 
 ```bash
-.venv/bin/python -m src.cli queue complete --id <leased-id> --agent <agent-name>
+.venv/bin/python -m src.cli queue complete --id <leased-id> --agent <agent-name> --require-output --validate-output
 ```
