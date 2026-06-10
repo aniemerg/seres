@@ -8,6 +8,8 @@ queue 系統的一部分。
 - `instructions/agent.md` - 給 Codex agent 的 reAM250 BOM 研究指令。
 - `schemas/research_result.schema.yaml` - 結果檔應符合的結構。
 - `scripts/validate_results.py` - 檢查 Markdown/YAML/JSON 結果檔的本地驗證器。
+- `scripts/run_codex_batches.sh` - 選用的 batch runner，會反覆啟動新的
+  `codex exec` session。
 
 ## Queue 條件
 
@@ -50,6 +52,52 @@ Read queue_tasks/ream250_bom_research/instructions/agent.md and follow it as rea
 
 每個 agent session 最多處理 3 筆 queue item。做完 3 筆就停，下一輪重新開
 或 `/clear`。這可以降低 web research 把 context 撐爆的機率，也比較容易恢復。
+
+## 自動 Batch Runner
+
+如果要跑大量 rows，不要手動一直 `/clear` 或開新 terminal。可以使用這個
+task-local runner；它每一小批都會啟動新的 `codex exec`，所以 context 不會
+在整份 BOM 期間持續累積。
+
+保守預設：
+
+```bash
+queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh
+```
+
+兩個 worker，每個新的 Codex session 最多處理 3 rows：
+
+```bash
+queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh \
+  --workers 2 \
+  --max-items 3
+```
+
+先測一個 Codex session：
+
+```bash
+queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh \
+  --max-batches 1
+```
+
+只印出產生的 prompt，不實際執行 Codex：
+
+```bash
+queue_tasks/ream250_bom_research/scripts/run_codex_batches.sh --dry-run
+```
+
+log 預設會寫到 `out/ream250_bom_runner_logs/`。
+
+### Runner 風險
+
+- 如果 Codex session 在 lease 任務後中斷，該任務會維持 leased 到 TTL
+  過期。TTL 到期後可跑 `.venv/bin/python -m src.cli queue gc` 回收。
+- 平行 worker 會增加 web search/API 使用量，也更容易遇到外部 rate limit。
+  建議先從 `--workers 1` 或 `--workers 2` 開始。
+- runner 執行時不要跑 `python -m src.cli index`。這個流程把 research queue
+  當作狀態來源。
+- runner 不保證研究品質；它只負責限制 context 並自動啟動新的 Codex
+  session。結果格式與 source 欄位仍要用 `scripts/validate_results.py` 檢查。
 
 ## 驗證結果
 

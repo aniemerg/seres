@@ -20,10 +20,11 @@ If the command returns `queue empty`, stop.
 If a leased item does not have `kind: research` or its `id` does not start with
 `research_task:ream250_bom_row_`, release it immediately and stop.
 
-## Process At Most 3 Tasks
+## Process A Small Batch
 
-Process at most 3 queue items in one Codex session. Stop after 3 completed tasks
-even if more queue items remain.
+Process at most the item limit given by the current user or runner prompt. If no
+limit is provided, process at most 3 queue items in one Codex session. Stop when
+that limit is reached even if more queue items remain.
 
 ## Allowed Edits
 
