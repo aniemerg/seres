@@ -115,6 +115,7 @@ See **`docs/parts_and_labor_guidelines.md`** for detailed criteria and examples.
 - List counts: `python -m src.cli queue ls`
 - Do not edit `work_queue.jsonl` by hand; use the CLI.
 - Pruning: only removes items marked `resolved`/`superseded`; gaps persist until fixes land.
+- Research tasks: use `kind: research` with `gap_type: research_task`. They are instruction-driven queue items, not indexer gaps. Complete them according to their `context`/description and use `queue complete` without `--verify`.
 - Sources of queue items (indexer rebuilds on each run):
   - `referenced_only`: IDs referenced but not defined.
   - `unresolved_ref`: free-text refs.
@@ -163,6 +164,46 @@ File format (JSONL):
 {"gap_type": "needs_consolidation", "item_id": "bar_v0", "description": "Found duplicates: bar_v1, bar_alt"}
 ```
 
+### Research Tasks
+
+Use research tasks when the requested work is to investigate a question and write
+findings, rather than directly fixing an indexer-detected KB gap. Research tasks
+live in the normal queue and persist across indexer rebuilds.
+
+Queue research tasks with:
+- `kind: research`
+- `gap_type: research_task`
+- a stable `item_id` for the task
+- task-specific instructions in `description` and/or `context`
+
+Write research results under `research/` unless the task instructions say
+otherwise. The task itself defines what "done" means; citation requirements,
+allowed sources, required sections, and whether web research is allowed should be
+specified in the queued task when they matter.
+
+**Add one research task:**
+```bash
+python -m src.cli queue add \
+  --kind research \
+  --gap-type research_task \
+  --item-id thermocouple_local_manufacture \
+  --description "Research local manufacturability of thermocouple contact temperature sensors and write findings under research/." \
+  --context '{"done_criteria": "Report findings, sources, assumptions, and KB implications."}'
+```
+
+**Research task JSONL:**
+```json
+{"kind": "research", "gap_type": "research_task", "item_id": "thermocouple_local_manufacture", "description": "Research local manufacturability of thermocouple contact temperature sensors and write findings under research/.", "context": {"done_criteria": "Report findings, sources, assumptions, and KB implications.", "spreadsheet_row": 17}}
+```
+
+**Completing research tasks:**
+```bash
+python -m src.cli queue complete --id research_task:thermocouple_local_manufacture --agent <name>
+```
+
+Do not use `--verify` for research tasks. `--verify` is for indexer-generated KB
+gaps and checks that a gap disappeared from `out/work_queue.jsonl`.
+
 **Common gap types for manual addition:**
 - `quality_concern` - Incorrect data, unrealistic estimates, conflicts with papers
 - `needs_consolidation` - Multiple similar items should be merged
@@ -175,11 +216,15 @@ File format (JSONL):
 python -m src.cli queue gap-types
 ```
 
-**For agents:** Use the `queue_add_gap` tool to add discovered issues programmatically. See `queue_agents/kb_tools.py` for API documentation.
+**For agents:** Use `python -m src.cli queue add` for both discovered KB issues
+and research tasks. Do not edit `out/work_queue.jsonl` directly.
 
 ## Verification (how it works across gap types)
 
-**Canonical rule:** verification always means "run the indexer and ensure the gap id no longer appears in `out/work_queue.jsonl`." The queue is rebuilt from scratch each run, so absence is the definitive signal.
+**Canonical rule for KB gaps:** verification means "run the indexer and ensure the gap id no longer appears in `out/work_queue.jsonl`." The queue is rebuilt from scratch each run, so absence is the definitive signal for indexer-generated KB gaps.
+
+Research tasks are the exception: they are completed according to their task
+instructions and should be marked complete without `--verify`.
 
 Supporting reports by gap type (optional, for debugging):
 - `referenced_only`: only in `out/work_queue.jsonl` (no dedicated report)

@@ -228,6 +228,30 @@ python -m src.cli queue add --gap-type quality_concern --item-id steel_melting_v
 python -m src.cli queue add --file queue_tasks/discovered_issues.jsonl
 ```
 
+Use `--kind research --gap-type research_task` for instruction-driven research
+items that should persist across indexer runs and be completed according to their
+task instructions rather than by indexer verification.
+
+```bash
+python -m src.cli queue add \
+  --kind research \
+  --gap-type research_task \
+  --item-id thermocouple_local_manufacture \
+  --description "Research thermocouple contact sensor local manufacturability and write findings under research/."
+```
+
+For JSONL imports, include `kind` per row:
+
+```json
+{"kind": "research", "gap_type": "research_task", "item_id": "thermocouple_local_manufacture", "description": "Research thermocouple contact sensor local manufacturability and write findings under research/.", "context": {"done_criteria": "Include findings, sources, assumptions, and KB implications."}}
+```
+
+Complete research tasks without `--verify`:
+
+```bash
+python -m src.cli queue complete --id research_task:thermocouple_local_manufacture --agent <name>
+```
+
 ### queue gap-types
 
 List registered gap types.

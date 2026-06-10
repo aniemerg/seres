@@ -1346,10 +1346,15 @@ def _update_work_queue(
                     prev["status"] = "resolved"
                     merged.append(prev)
 
-        # Preserve manually-added items that aren't auto-detected by indexer
-        # Manual items (source="manual" or source="agent") persist until explicitly completed/released
+        # Preserve manually-added items and research tasks that aren't auto-detected by indexer.
+        # Research tasks may come from spreadsheets or other external task sources.
         for eid, prev in existing.items():
-            if eid not in merged_ids and prev.get("source") in ("manual", "agent"):
+            should_preserve = (
+                prev.get("source") in ("manual", "agent")
+                or prev.get("kind") == "research"
+                or prev.get("gap_type") == "research_task"
+            )
+            if eid not in merged_ids and should_preserve:
                 # Only preserve if not already done/superseded
                 if prev.get("status") not in ("done", "superseded"):
                     merged.append(prev)

@@ -204,6 +204,7 @@ def main():
     add_parser = queue_sub.add_parser('add', help='Add manual gap to queue')
     add_parser.add_argument('--gap-type', required=False, help='Gap type (existing or new)')
     add_parser.add_argument('--item-id', required=False, help='Item/recipe/process ID')
+    add_parser.add_argument('--kind', default='gap', help='Queue item kind (default: gap; use research for research tasks)')
     add_parser.add_argument('--description', help='Description of the issue')
     add_parser.add_argument('--context', help='JSON context string')
     add_parser.add_argument('--file', help='JSONL file with gap items to add (alternative to --gap-type)')
@@ -577,6 +578,7 @@ def run_queue_command(args):
             item_id=args.item_id,
             description=args.description,
             context=context,
+            kind=args.kind,
             source="manual"
         )
         print(f"Added gap to queue: {gap_id}")
