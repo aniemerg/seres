@@ -1,0 +1,47 @@
+# Minimal structured result schema for this reAM250 BOM research task pack.
+required:
+  - function
+  - mass
+  - material
+  - how_to_make
+
+sections:
+  function:
+    required:
+      - summary
+      - source
+    source_required:
+      - url_or_path
+      - cited_fact_or_basis
+      - confidence
+  mass:
+    required:
+      - value_kg
+      - basis
+      - source
+    source_required:
+      - url_or_path
+      - cited_fact_or_basis
+      - confidence
+  material:
+    required:
+      - primary_material
+      - source
+    source_required:
+      - url_or_path
+      - cited_fact_or_basis
+      - confidence
+  how_to_make:
+    required:
+      - summary
+      - manufacturing_steps
+      - source
+    source_required:
+      - url_or_path
+      - cited_fact_or_basis
+      - confidence
+
+recommended:
+  - assumptions
+  - uncertainty_notes
+  - kb_implications
