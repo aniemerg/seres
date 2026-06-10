@@ -48,6 +48,8 @@ Quick examples:
   - **IMPORTANT**: Work on queue items **one at a time**. Do not lease multiple items concurrently.
   - Lease next item: `python -m src.cli queue lease --agent <name> [--ttl 900]`
   - Complete/release: `python -m src.cli queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
+    - For `kind: research` / `gap_type: research_task`, complete according to the task instructions and do **not** use `--verify`.
+  - Add research task: `python -m src.cli queue add --kind research --gap-type research_task --item-id <task_id> --description "..."`
   - GC expired leases: `python -m src.cli queue gc`
   - Prune explicit resolved/superseded: `python -m src.cli queue prune`
   - List counts: `python -m src.cli queue ls`
@@ -148,7 +150,7 @@ The old `base_builder` CLI has been removed. Use `python -m src.cli sim` instead
 | `import_stubs.jsonl` | Recipes marked as imports (empty steps) |
 
 ## Work queue behavior
-The work queue is **rebuilt from scratch** on each indexer run, reflecting all current gaps:
+The work queue is **rebuilt from scratch** on each indexer run, reflecting all current gaps. Manually-added research tasks (`kind: research` or `gap_type: research_task`) persist across indexer runs until completed/superseded.
 - `no_recipe` — parts/materials without manufacturing recipes (will be imports)
 - `missing_field` — required fields not populated (energy_model, time_model, material_class)
 - `no_provider_machine` — resource_types with no machine capability

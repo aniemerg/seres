@@ -73,6 +73,14 @@ Each extraction yields:
 - A short assumptions list with provenance.
 - A gap list for follow-up queue items.
 
+If the next step is research rather than a concrete KB edit, enqueue a research
+task instead of a normal KB gap. Use `kind: research` and
+`gap_type: research_task`, put task-specific completion criteria in
+`description` or `context`, and write results under `research/` unless the task
+specifies another location. Research tasks persist in the normal queue across
+indexer rebuilds and are completed according to their instructions, not by
+indexer verification.
+
 ## References
 
 - `docs/kb_schema_reference.md`
