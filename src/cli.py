@@ -179,6 +179,9 @@ def main():
     lease_parser.add_argument('--agent', required=True)
     lease_parser.add_argument('--ttl', type=int, default=900)
     lease_parser.add_argument('--priority', help='Comma-separated reasons in priority order')
+    lease_parser.add_argument('--kind', help='Lease only items with this kind')
+    lease_parser.add_argument('--gap-type', help='Lease only items with this gap_type')
+    lease_parser.add_argument('--id-prefix', help='Lease only items whose id starts with this prefix')
     complete_parser = queue_sub.add_parser('complete', help='Mark leased item complete')
     complete_parser.add_argument('--id', required=True)
     complete_parser.add_argument('--agent', required=True)
@@ -507,7 +510,14 @@ def run_queue_command(args):
 
     if cmd == 'lease':
         priorities = args.priority.split(',') if args.priority else None
-        item = queue_manager.lease_next(args.agent, ttl=args.ttl, priorities=priorities)
+        item = queue_manager.lease_next(
+            args.agent,
+            ttl=args.ttl,
+            priorities=priorities,
+            kind=args.kind,
+            gap_type=args.gap_type,
+            id_prefix=args.id_prefix,
+        )
         if item:
             print(json_mod.dumps(item))
         else:

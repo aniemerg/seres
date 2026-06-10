@@ -187,6 +187,19 @@ Lease the next available queue item.
 python -m src.cli queue lease --agent <name> [--ttl 900] [--priority gap1,gap2]
 ```
 
+Use hard filters when an agent must not lease other queue item classes:
+
+```bash
+python -m src.cli queue lease \
+  --agent <name> \
+  --kind research \
+  --gap-type research_task \
+  --id-prefix research_task:ream250_bom_row_
+```
+
+`--priority` only changes ordering. `--kind`, `--gap-type`, and `--id-prefix`
+are hard filters.
+
 ### queue complete
 
 Mark a leased item complete (optional verify runs indexer first).

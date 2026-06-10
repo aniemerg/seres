@@ -121,7 +121,30 @@ def pop_queue() -> Optional[dict]:
         return head
 
 
-def lease_next(agent: str, ttl: int = 900, priorities: Optional[List[str]] = None) -> Optional[dict]:
+def _matches_lease_filters(
+    obj: dict,
+    kind: Optional[str] = None,
+    gap_type: Optional[str] = None,
+    id_prefix: Optional[str] = None,
+) -> bool:
+    """Return True if a queue item satisfies hard lease filters."""
+    if kind and obj.get("kind") != kind:
+        return False
+    if gap_type and (obj.get("gap_type") or obj.get("reason")) != gap_type:
+        return False
+    if id_prefix and not str(obj.get("id", "")).startswith(id_prefix):
+        return False
+    return True
+
+
+def lease_next(
+    agent: str,
+    ttl: int = 900,
+    priorities: Optional[List[str]] = None,
+    kind: Optional[str] = None,
+    gap_type: Optional[str] = None,
+    id_prefix: Optional[str] = None,
+) -> Optional[dict]:
     now = time.time()
     expires = now + ttl
     with _locked_queue():
@@ -137,7 +160,11 @@ def lease_next(agent: str, ttl: int = 900, priorities: Optional[List[str]] = Non
             prio_map = {p: i for i, p in enumerate(priorities)} if priorities else {}
             return (prio_map.get(obj.get("reason"), 9999),)
 
-        pending = [i for i in items if i.get("status") in (None, "pending")]
+        pending = [
+            i for i in items
+            if i.get("status") in (None, "pending")
+            and _matches_lease_filters(i, kind=kind, gap_type=gap_type, id_prefix=id_prefix)
+        ]
         if not pending:
             return None
 

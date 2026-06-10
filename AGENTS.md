@@ -47,6 +47,7 @@ Quick examples:
 - Queue helpers (src CLI):
   - **IMPORTANT**: Work on queue items **one at a time**. Do not lease multiple items concurrently.
   - Lease next item: `python -m src.cli queue lease --agent <name> [--ttl 900]`
+    - Use `--kind`, `--gap-type`, and `--id-prefix` as hard filters for research-only workers.
   - Complete/release: `python -m src.cli queue complete|release --id <gap_type:item_id> --agent <name> [--verify]`
     - For `kind: research` / `gap_type: research_task`, complete according to the task instructions and do **not** use `--verify`.
   - Add research task: `python -m src.cli queue add --kind research --gap-type research_task --item-id <task_id> --description "..."`
