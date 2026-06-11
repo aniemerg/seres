@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TASK_DIR="queue_tasks/research_mission/ream250_bom_research"
+TASK_DIR="queue_tasks/research_pack/ream250_bom_research"
 TASK_INSTRUCTIONS="$TASK_DIR/research_instructions/agent.md"
 TASK_VALIDATOR="$TASK_DIR/research_scripts/validate_results.py"
 DEFAULT_REPO_ROOT="/home/eastrolinux/seres"
@@ -16,11 +16,12 @@ log_dir=""
 codex_bin="${CODEX_BIN:-codex}"
 validate_at_end=0
 dry_run=0
+id_prefix="research_task:ream250_bom_row_"
 
 usage() {
   cat <<'EOF'
 Usage:
-  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh [options]
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh [options]
 
 Runs short-lived Codex exec sessions for reAM250 BOM research queue items.
 Each session gets a fresh context window and processes at most --max-items.
@@ -34,19 +35,25 @@ Options:
   --ttl SECONDS         Queue lease TTL passed to the agent prompt. Default: 7200
   --log-dir PATH        Log directory. Default: out/ream250_bom_runner_logs
   --codex-bin PATH      Codex executable. Default: codex or $CODEX_BIN
+  --id-prefix PREFIX    Queue id prefix for lease filtering.
+                       Default: research_task:ream250_bom_row_
   --validate-at-end     Validate research/ream250_bom after all workers exit
   --dry-run             Print the first prompt and command, then exit
   -h, --help            Show this help
 
 Examples:
   # Conservative single-worker run.
-  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
 
   # Two workers, each Codex session handles at most 3 rows.
-  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 2 --max-items 3
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 2 --max-items 3
 
   # Smoke test one fresh Codex session.
-  queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1
+
+  # Rerun exactly one completed row after releasing it back to pending.
+  .venv/bin/python -m src.cli queue release --id research_task:ream250_bom_row_0195_6Q --agent rerun
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --id-prefix research_task:ream250_bom_row_0195_6Q --max-items 1 --max-batches 1
 EOF
 }
 
@@ -97,6 +104,10 @@ while [[ $# -gt 0 ]]; do
       codex_bin="${2:-}"
       shift 2
       ;;
+    --id-prefix)
+      id_prefix="${2:-}"
+      shift 2
+      ;;
     --validate-at-end)
       validate_at_end=1
       shift
@@ -119,6 +130,7 @@ is_positive_int "$workers" || die "--workers must be a positive integer"
 is_positive_int "$max_items" || die "--max-items must be a positive integer"
 is_nonnegative_int "$max_batches" || die "--max-batches must be a nonnegative integer"
 is_positive_int "$ttl" || die "--ttl must be a positive integer"
+[[ -n "$id_prefix" ]] || die "--id-prefix must not be empty"
 
 repo_root="$(cd "$repo_root" && pwd)"
 [[ -d "$repo_root/.git" ]] || die "repo root does not contain .git: $repo_root"
@@ -143,12 +155,14 @@ queue_gc() {
 pending_count() {
   (
     cd "$repo_root"
-    .venv/bin/python - <<'PY'
+    ID_PREFIX="$id_prefix" .venv/bin/python - <<'PY'
 import fcntl
 import json
+import os
 import time
 from pathlib import Path
 
+id_prefix = os.environ["ID_PREFIX"]
 queue_path = Path("out/work_queue.jsonl")
 lock_path = Path("out/work_queue.lock")
 lock_path.parent.mkdir(parents=True, exist_ok=True)
@@ -172,7 +186,7 @@ with lock_path.open("w") as lockf:
                     continue
                 if (obj.get("gap_type") or obj.get("reason")) != "research_task":
                     continue
-                if not str(obj.get("id", "")).startswith("research_task:ream250_bom_row_"):
+                if not str(obj.get("id", "")).startswith(id_prefix):
                     continue
                 status = obj.get("status")
                 if status in (None, "pending"):
@@ -201,14 +215,14 @@ Read ${TASK_INSTRUCTIONS} and follow it.
 For this invocation, process at most ${item_limit} matching queue items, then stop successfully.
 Use this exact lease command for each item:
 
-.venv/bin/python -m src.cli queue lease --agent ${agent_name} --ttl ${ttl} --kind research --gap-type research_task --id-prefix research_task:ream250_bom_row_
+.venv/bin/python -m src.cli queue lease --agent ${agent_name} --ttl ${ttl} --kind research --gap-type research_task --id-prefix ${id_prefix}
 
 If the queue command returns queue empty, stop successfully.
 
 Only process leased items where:
 - kind is research
 - gap_type or reason is research_task
-- id starts with research_task:ream250_bom_row_
+- id starts with ${id_prefix}
 - context.output_path is under research/ream250_bom/
 
 If any leased item does not match those rules, release it immediately and stop.
@@ -216,6 +230,12 @@ If any leased item does not match those rules, release it immediately and stop.
 After writing each result, validate it with:
 
 .venv/bin/python ${TASK_VALIDATOR} --file <output_path>
+
+If <output_path> already exists, treat it as a stale prior draft. You may read
+it for comparison, but you must re-check the row's current BOM, CAD geometry,
+assembly material metadata, and web/vendor evidence as applicable, then
+overwrite the result file. Do not complete a leased task by validating an
+existing output file as-is.
 
 Complete finished tasks without --verify:
 
@@ -241,7 +261,7 @@ run_one_batch() {
   set +e
   build_prompt "$agent_name" "$max_items" | (
     cd "$repo_root" &&
-    "$codex_bin" exec --search -C "$repo_root" -s workspace-write -a on-request -
+    "$codex_bin" --search -a on-request exec -C "$repo_root" -s workspace-write -
   ) 2>&1 | tee "$log_file"
   status=${PIPESTATUS[1]}
   set -e
@@ -277,7 +297,7 @@ worker_loop() {
 
 if [[ "$dry_run" -eq 1 ]]; then
   echo "Repository: $repo_root"
-  echo "Command: $codex_bin exec --search -C $repo_root -s workspace-write -a on-request -"
+  echo "Command: $codex_bin --search -a on-request exec -C $repo_root -s workspace-write -"
   echo
   build_prompt "$(printf "%s-%02d" "$agent_prefix" 1)" "$max_items"
   exit 0

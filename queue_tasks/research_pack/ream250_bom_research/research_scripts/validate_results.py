@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
 
@@ -18,6 +19,10 @@ REQUIRED_SECTIONS = ("function", "mass", "material", "how_to_make")
 SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "confidence")
 REQUIRED_LISTS = ("assumptions", "uncertainty_notes", "kb_implications")
 CONFIDENCE_VALUES = {"low", "medium", "high", "unknown"}
+ASSUMED_MATERIAL_RE = re.compile(
+    r"\b(assumed|assumption|guess|guessed|likely|suggests?|conservative)\b",
+    re.IGNORECASE,
+)
 
 
 def load_result(path: Path) -> Dict[str, Any]:
@@ -72,6 +77,13 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
         issues.append("missing required field: mass.basis")
     if not material.get("primary_material"):
         issues.append("missing required field: material.primary_material")
+    else:
+        primary_material = str(material.get("primary_material"))
+        if ASSUMED_MATERIAL_RE.search(primary_material):
+            issues.append(
+                "material.primary_material must be sourced or broad/unknown; "
+                "do not encode assumed specific materials"
+            )
     if not how_to_make.get("summary"):
         issues.append("missing required field: how_to_make.summary")
     if "manufacturing_steps" not in how_to_make:

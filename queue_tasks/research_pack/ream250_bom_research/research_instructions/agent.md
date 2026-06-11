@@ -69,12 +69,46 @@ Use that geometry as row-specific evidence for mass and shape/function
 inference. If `cad_export_status` is `assembly_only`, `ambiguous`, or
 `missing_in_cad`, explain the CAD evidence limitation in `uncertainty_notes`.
 
+For material, use this evidence order:
+
+1. Check local CAD/STEP material metadata first. The per-part STEP often omits
+   material, but the full assembly may contain it. If
+   `design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step`
+   exists, run:
+
+   ```bash
+   .venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/extract_step_materials.py \
+     --step design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step \
+     --product-name "<cad_file>"
+   ```
+
+   Cite the material and density from this output when present.
+2. Check the BOM row fields, manufacturer, `description_or_product_id`, and
+   `third_party_link_url`.
+3. Use web search/product pages when a manufacturer, product ID, or vendor URL
+   is available and local CAD/BOM evidence does not state material or conflicts
+   with surrounding evidence.
+4. If none of those sources states the material, do not name a specific metal
+   or polymer from function alone. Use a broader value such as
+   `unknown metal/alloy` with low confidence, and record any mass estimate as a
+   scenario in `mass.basis`.
+
+Do not write values like `steel, assumed`, `aluminum, assumed`, or
+`stainless steel, assumed` in `material.primary_material`. A function-based
+guess is an uncertainty note, not a sourced material.
+
 Keep research concise. Use at most 4 external sources per result unless the row
 cannot be resolved without more.
 
 ## Result Format
 
 Write each result to `context.output_path`.
+
+If `context.output_path` already exists, treat it as a stale prior draft. You
+may read it for comparison, but you must re-check the leased row's current BOM,
+CAD geometry, assembly material metadata, and web/vendor evidence as applicable,
+then overwrite the result file. Do not complete a leased task by validating an
+existing output file as-is.
 
 Each Markdown result must start with YAML frontmatter:
 
@@ -124,7 +158,7 @@ have their own source object with:
 Run:
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py --file <output_path>
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py --file <output_path>
 ```
 
 Do not complete the queue item if validation fails.

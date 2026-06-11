@@ -28,7 +28,7 @@ The queue should contain research tasks with:
 Generate or refresh the 401 queue items from the gold CSV/manifest:
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/generate_queue_tasks.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/generate_queue_tasks.py \
   --replace-queue-prefix
 ```
 
@@ -62,7 +62,7 @@ codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
 Then tell the agent:
 
 ```text
-Read queue_tasks/research_mission/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
+Read queue_tasks/research_pack/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
 ```
 
 Use a different agent name in each terminal, such as `ream250-bom-agent-02`.
@@ -82,13 +82,13 @@ small batch, so context does not accumulate across the whole BOM.
 Conservative default:
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
 ```
 
 Two workers, three rows per fresh Codex session:
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --workers 2 \
   --max-items 3
 ```
@@ -96,17 +96,59 @@ queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_bat
 Smoke test one Codex session:
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --max-batches 1
 ```
 
 Print the generated prompt without running Codex:
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
 ```
 
 Logs are written to `out/ream250_bom_runner_logs/` by default.
+
+### Targeted Reruns
+
+The runner has an optional `--id-prefix` filter. If it is omitted, the runner
+uses the normal broad prefix:
+
+```text
+research_task:ream250_bom_row_
+```
+
+That default means "any reAM250 BOM research row". Normal runs do not need to
+pass `--id-prefix`.
+
+The option is named `--id-prefix` because the queue lease API filters with
+`startswith(...)`, not exact-id matching. Passing a complete queue id still works
+as an exact single-row filter because the complete id is also a valid prefix of
+itself.
+
+To rerun a completed row, first release it back to `pending`, then run one
+single-item batch with the complete queue id as the prefix:
+
+```bash
+.venv/bin/python -m src.cli queue release \
+  --id research_task:ream250_bom_row_0195_6Q \
+  --agent rerun-targeted
+
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --id-prefix research_task:ream250_bom_row_0195_6Q
+```
+
+The runner prompt requires the agent to overwrite an existing output file after
+re-checking evidence. If you are testing that behavior, verify the file mtime or
+inspect the log for an actual file write.
+
+Rerun the first three completed smoke-test rows in one shell loop:
+
+```bash
+for id in research_task:ream250_bom_row_0308_174 research_task:ream250_bom_row_0195_6Q research_task:ream250_bom_row_0380_4122; do .venv/bin/python -m src.cli queue release --id "$id" --agent rerun-targeted && queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 1 --max-items 1 --max-batches 1 --id-prefix "$id"; done
+```
 
 ### Runner Risks
 
@@ -126,14 +168,14 @@ Logs are written to `out/ream250_bom_runner_logs/` by default.
 Validate one file:
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --file research/ream250_bom/ream250_bom_row_0001_11.md
 ```
 
 Validate a directory:
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --dir research/ream250_bom
 ```
 

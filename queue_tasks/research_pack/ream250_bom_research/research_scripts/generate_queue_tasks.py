@@ -17,7 +17,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
-TASK_DIR = Path("queue_tasks/research_mission/ream250_bom_research")
+TASK_DIR = Path("queue_tasks/research_pack/ream250_bom_research")
 PACKAGE_ROOT = Path("design/real-mechanical/reAm250/reAM250_cad_gold_package")
 PACKAGE_ABS = REPO_ROOT / PACKAGE_ROOT
 DEFAULT_BOM = PACKAGE_ROOT / "reAm250_BOM_gold.csv"

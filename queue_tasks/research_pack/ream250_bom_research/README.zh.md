@@ -26,7 +26,7 @@ queue 裡的任務應該符合：
 從 gold CSV/manifest 產生或刷新 401 筆 queue items：
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/generate_queue_tasks.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/generate_queue_tasks.py \
   --replace-queue-prefix
 ```
 
@@ -58,7 +58,7 @@ codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
 進入 Codex 後貼：
 
 ```text
-Read queue_tasks/research_mission/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
+Read queue_tasks/research_pack/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
 ```
 
 不同 terminal 使用不同 agent 名稱，例如 `ream250-bom-agent-02`。
@@ -77,13 +77,13 @@ task-local runner；它每一小批都會啟動新的 `codex exec`，所以 cont
 保守預設：
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
 ```
 
 兩個 worker，每個新的 Codex session 最多處理 3 rows：
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --workers 2 \
   --max-items 3
 ```
@@ -91,17 +91,56 @@ queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_bat
 先測一個 Codex session：
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh \
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --max-batches 1
 ```
 
 只印出產生的 prompt，不實際執行 Codex：
 
 ```bash
-queue_tasks/research_mission/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
 ```
 
 log 預設會寫到 `out/ream250_bom_runner_logs/`。
+
+### 指定 Row 重跑
+
+runner 有選用的 `--id-prefix` filter。不加時會使用正常的寬 prefix：
+
+```text
+research_task:ream250_bom_row_
+```
+
+這個預設值代表「任何 reAM250 BOM research row」。正常批次執行不需要加
+`--id-prefix`。
+
+它叫 `--id-prefix` 是因為 queue lease API 用的是 `startswith(...)` 過濾，
+不是 exact-id matching。把完整 queue id 傳進去仍然等同於指定單一 row，
+因為完整 id 也是它自己的 prefix。
+
+如果要重跑已完成 row，先把該 queue item release 回 `pending`，再用完整
+queue id 當 prefix 跑一個單筆 batch：
+
+```bash
+.venv/bin/python -m src.cli queue release \
+  --id research_task:ream250_bom_row_0195_6Q \
+  --agent rerun-targeted
+
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --id-prefix research_task:ream250_bom_row_0195_6Q
+```
+
+runner prompt 會要求 agent 在重新檢查證據後覆寫既有 output file。若你是在測試
+是否真的重寫，請檢查檔案 mtime，或看 log 裡是否有實際寫檔動作。
+
+用一行 shell loop 重跑前三筆 smoke-test 結果：
+
+```bash
+for id in research_task:ream250_bom_row_0308_174 research_task:ream250_bom_row_0195_6Q research_task:ream250_bom_row_0380_4122; do .venv/bin/python -m src.cli queue release --id "$id" --agent rerun-targeted && queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 1 --max-items 1 --max-batches 1 --id-prefix "$id"; done
+```
 
 ### Runner 風險
 
@@ -119,14 +158,14 @@ log 預設會寫到 `out/ream250_bom_runner_logs/`。
 驗證單一檔案：
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --file research/ream250_bom/ream250_bom_row_0001_11.md
 ```
 
 驗證整個資料夾：
 
 ```bash
-.venv/bin/python queue_tasks/research_mission/ream250_bom_research/research_scripts/validate_results.py \
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --dir research/ream250_bom
 ```
 
