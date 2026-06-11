@@ -2,14 +2,16 @@
 
 ## Executive summary
 
-The machine-reality research found that most entries represent real physical things, but many are not cleanly "commercial machines" in the sense needed for an imported-machine list. The main issue is not fake machinery; it is modeling granularity.
+The machine-reality research found that most entries represent real physical things, but many are not cleanly standalone commercial equipment items in the sense needed for an imported-machine list. The main issue is not fake machinery; it is modeling granularity.
+
+In this repo, `machine`/`machine_id` is used broadly for reusable process resources. The recommendations below are not saying those entries are invalid process resources. They are saying the imported-machine list should distinguish reusable resource subtypes: standalone equipment, tooling, instruments, consumables, infrastructure, stations, subsystems, and placeholders.
 
 Out of 117 researched machine files, the triage pass found:
 
 | Bucket | Count | Interpretation |
 |---|---:|---|
 | Clear commercial/practical machine | 36 | Commercially recognizable machine class with relatively direct KB fit. |
-| Tooling/instrument/consumable, not machine | 38 | Real and often essential, but should usually be tooling, instrument, part, or consumable inventory. |
+| Tooling/instrument/consumable resource | 38 | Real and often essential reusable process resources, but not standalone equipment. |
 | Generic/ambiguous/duplicate needing cleanup | 27 | Real underlying capability, but the KB item is too broad, overloaded, deprecated, or should be split/consolidated. |
 | Subsystem/station/infrastructure, not single machine | 15 | Real equipment, but better modeled as infrastructure, a station, a skid, or a subsystem. |
 | Experimental or uncertain commercial maturity | 1 | Real research/prototype technology, not ordinary commodity equipment. |
@@ -18,7 +20,7 @@ The machine-by-machine triage table is in `research/machines_analysis/machine_re
 
 ## Main finding
 
-The imported-machine list is too machine-shaped. It currently includes:
+The imported-machine list is too uniform. It currently includes several different resource types under the same broad imported-resource shape:
 
 - actual machines, such as furnaces, presses, mills, pumps, grinders, feeders, and excavators;
 - tooling and consumables, such as dies, molds, crucibles, grinding wheels, electrodes, cutting tools, and welding consumables;
@@ -26,11 +28,11 @@ The imported-machine list is too machine-shaped. It currently includes:
 - infrastructure and stations, such as solar arrays, power buses, hydraulic power units, electrical test benches, PCB stations, and fixturing workbenches;
 - broad placeholders, such as generic chemical reactors, generic electrolysis cells, metal forming bundles, and generic furnaces.
 
-That means the list is useful as an import seed inventory, but it should not be interpreted as a list of only purchasable production machines.
+That means the list is useful as an import seed inventory, but it should not be interpreted as a list of only standalone purchasable production equipment.
 
 ## Highest-priority non-clear cases
 
-These items are the strongest candidates for cleanup because they are not clearly one commercial machine:
+These items are the strongest candidates for cleanup because they are not clearly one standalone commercial equipment item:
 
 | Item | Finding | Recommendation |
 |---|---|---|
@@ -39,24 +41,24 @@ These items are the strongest candidates for cleanup because they are not clearl
 | `metal_forming_basic_v0` | Bundle of press, roll, anvil, fixtures, and hydraulics, not a standard machine. | Treat as a forming cell or replace references with specific machines: hydraulic press, press brake, plate roll, forging press/power hammer. |
 | `blast_furnace_or_smelter` | Broad smelting placeholder. | Rename/scope to a small smelter if that is intended; otherwise split blast furnace, crucible furnace, reduction furnace, and casting furnace roles. |
 | `mre_reactor_v0` | Real molten regolith electrolysis research hardware, not mature commodity equipment. | Keep as advanced experimental ISRU equipment with explicit uncertainty and subsystem requirements. |
-| `temperature_sensing` | Instrumentation category, not a machine. | Remove from imported-machine list or replace with explicit sensor items already modeled elsewhere. |
-| `control_compute_module_imported` | Real imported boundary component, but broad electronics category. | Keep as an import boundary item, not a manufacturing machine; clarify scope and avoid hiding specialized controllers. |
+| `temperature_sensing` | Instrumentation resource category, not standalone equipment. | Remove from imported-machine list or replace with explicit sensor items already modeled elsewhere. |
+| `control_compute_module_imported` | Real imported boundary component, but broad electronics category. | Keep as an import boundary resource, not standalone process equipment; clarify scope and avoid hiding specialized controllers. |
 | `resource_3d_printer_cartesian_v0_machine` | Real machine concept with naming/duplicate problems. | Consolidate under one canonical basic Cartesian FDM/FFF printer item. |
 | `milling_machine_general_v0` | Real machine, but appears to be a deprecated duplicate of `cnc_mill` unless manual milling is intentionally separate. | Either finish consolidation into `cnc_mill` or rename as manual/vertical milling machine with adjusted BOM. |
 | `casting_furnace_v0`, `heating_furnace`, `drying_basic_v0` | Real equipment, but overlap with canonical furnace/drying items. | Resolve duplicate/deprecated status and keep process-specific furnaces only when requirements differ materially. |
 
 ## Recurring patterns
 
-### Tooling misclassified as machines
+### Tooling Modeled as Reusable Resources
 
-The largest non-clear group is real tooling or consumables listed under machines. Examples:
+The largest non-clear group is real tooling or consumables represented through reusable `machine_id` resource slots. That can be a valid simulator convention, but the imported-machine analysis should call them tooling/resources rather than standalone machines. Examples:
 
 - die and mold items: `dies`, `anvil_or_die_set`, `drawing_die_set_basic`, `wire_drawing_die_set`, `press_brake_die_set`, `press_ram_set`, `pressing_mold_set`, `casting_mold_set`, `sand_casting_flask_set`;
 - consumables and wear items: `grinding_wheels`, `welding_consumables`, `electrodes`, `crucible_graphite`, `crucible_refractory`;
 - general tool kits: `hand_tools_basic`, `hand_tools_mechanical`, `hand_tools_electrical`, `assembly_tools_basic`, `welding_tools_set`, `wire_crimping_tools`, `wire_stripper_set`, `refractory_installation_tools`;
 - metrology/instruments: `inspection_tools_basic`, `measurement_equipment`, `precision_levels`, `multimeter_set`, `oscilloscope_basic`, `power_supply_benchtop`, `tension_gauge`.
 
-Recommendation: keep these as required inventory, but reclassify them conceptually as tooling, instruments, consumables, parts, or subassemblies. They are often more important than their mass suggests, because calibration, wear, geometry, and material compatibility drive realism.
+Recommendation: keep these as required reusable inventory, but classify them conceptually as tooling, instruments, consumables, parts, or subassemblies. They are often more important than their mass suggests, because calibration, wear, geometry, and material compatibility drive realism.
 
 ### Generic categories hiding incompatible requirements
 
@@ -71,14 +73,14 @@ Recommendation: keep generic items only where the KB deliberately models a coars
 
 ### Stations, subsystems, and infrastructure
 
-Some entries are real but not single production machines:
+Some entries are real but not single standalone production equipment items:
 
 - electrical/power infrastructure: `power_distribution_bus`, `power_conditioning_equipment`, `solar_array_v0`, `solar_tracking_optional`;
 - process stations: `pcb_development_station`, `pcb_fab_equipment`, `test_bench_electrical`, `fixturing_workbench`;
 - subsystems: `hydraulic_power_unit_basic`, `tension_control_system`, `vapor_capture_system_v0`, `chemical_reactor_vessel_v0`;
 - large systems: `heliostat_array_system_v0`.
 
-Recommendation: keep these if they are needed for scheduling or capability, but label them as infrastructure, station, subsystem, or system rather than manufacturing machines. This avoids treating a complete installed solar array or power bus as equivalent to a lathe or furnace.
+Recommendation: keep these if they are needed for scheduling or capability, but label them as infrastructure, station, subsystem, or system rather than standalone manufacturing equipment. This avoids treating a complete installed solar array or power bus as equivalent to a lathe or furnace.
 
 ### Locally buildable, but calibration or consumables are the hard part
 
@@ -95,8 +97,8 @@ Recommendation: do not judge these only by mass or shape. If they are required f
 
 Use this decision policy when turning the research into KB edits:
 
-1. If an entry is a real commercial machine with a clear function, keep it and tighten notes only where needed.
-2. If it is tooling, instrument, consumable, or accessory inventory, keep the concept but move it out of the mental category of "machine."
+1. If an entry is a real standalone commercial equipment item with a clear function, keep it and tighten notes only where needed.
+2. If it is tooling, instrument, consumable, or accessory inventory, keep the concept but label the resource subtype clearly.
 3. If it is a station or subsystem, keep it only if scheduling/capability needs that abstraction; otherwise model it as BOM components of the actual process machine.
 4. If it is a generic placeholder, add an explicit envelope and split only when a process crosses a major compatibility boundary.
 5. If it duplicates another item, prefer the canonical item already supported by dedupe notes and route references there.
