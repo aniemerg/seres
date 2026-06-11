@@ -1,6 +1,9 @@
 import json
 import time
 
+import pytest
+
+from src.cli import _check_queue_output_artifact
 from src.indexer import indexer
 from src.kb_core import queue_manager
 
@@ -167,3 +170,67 @@ def test_index_rebuild_does_not_restore_done_research_task(monkeypatch, tmp_path
 
     assert read_queue(work_queue) == []
 
+
+def test_complete_output_guard_rejects_missing_result_file(monkeypatch, tmp_path):
+    work_queue = configure_queue_paths(monkeypatch, tmp_path)
+    missing_result = tmp_path / "research" / "missing.md"
+    validator = tmp_path / "validator.py"
+    validator.write_text("raise SystemExit(0)\n", encoding="utf-8")
+    write_queue(
+        work_queue,
+        [
+            {
+                "id": "research_task:ream250_bom_row_0002_1A1",
+                "kind": "research",
+                "gap_type": "research_task",
+                "reason": "research_task",
+                "item_id": "ream250_bom_row_0002_1A1",
+                "status": "leased",
+                "lease_id": "agent-1",
+                "context": {
+                    "output_path": str(missing_result),
+                    "output_validator": str(validator),
+                },
+            }
+        ],
+    )
+
+    with pytest.raises(SystemExit):
+        _check_queue_output_artifact(
+            queue_manager,
+            "research_task:ream250_bom_row_0002_1A1",
+            validate_output=True,
+        )
+
+
+def test_complete_output_guard_accepts_validated_result_file(monkeypatch, tmp_path):
+    work_queue = configure_queue_paths(monkeypatch, tmp_path)
+    result = tmp_path / "research" / "result.md"
+    result.parent.mkdir(parents=True)
+    result.write_text("---\nok: true\n---\n", encoding="utf-8")
+    validator = tmp_path / "validator.py"
+    validator.write_text("raise SystemExit(0)\n", encoding="utf-8")
+    write_queue(
+        work_queue,
+        [
+            {
+                "id": "research_task:ream250_bom_row_0002_1A1",
+                "kind": "research",
+                "gap_type": "research_task",
+                "reason": "research_task",
+                "item_id": "ream250_bom_row_0002_1A1",
+                "status": "leased",
+                "lease_id": "agent-1",
+                "context": {
+                    "output_path": str(result),
+                    "output_validator": str(validator),
+                },
+            }
+        ],
+    )
+
+    _check_queue_output_artifact(
+        queue_manager,
+        "research_task:ream250_bom_row_0002_1A1",
+        validate_output=True,
+    )

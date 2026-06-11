@@ -296,6 +296,16 @@ def gap_id_exists(id_value: str) -> bool:
     return False
 
 
+def get_by_id(id_value: str) -> Optional[dict]:
+    if not id_value:
+        return None
+    items = _load_queue()
+    for obj in items:
+        if obj.get("id") == id_value:
+            return obj
+    return None
+
+
 def _register_gap_type(gap_type: str, created_by: str = "unknown") -> None:
     """
     Auto-register new gap types in the registry.
