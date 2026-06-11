@@ -179,6 +179,9 @@ def main():
     lease_parser.add_argument('--agent', required=True)
     lease_parser.add_argument('--ttl', type=int, default=900)
     lease_parser.add_argument('--priority', help='Comma-separated reasons in priority order')
+    lease_parser.add_argument('--kind', help='Lease only items with this kind')
+    lease_parser.add_argument('--gap-type', help='Lease only items with this gap_type')
+    lease_parser.add_argument('--id-prefix', help='Lease only items whose id starts with this prefix')
     complete_parser = queue_sub.add_parser('complete', help='Mark leased item complete')
     complete_parser.add_argument('--id', required=True)
     complete_parser.add_argument('--agent', required=True)
@@ -191,6 +194,16 @@ def main():
         '--no-index',
         action='store_true',
         help='Skip indexer run when used with --verify',
+    )
+    complete_parser.add_argument(
+        '--require-output',
+        action='store_true',
+        help='Require context.output_path to exist before marking the queue item done',
+    )
+    complete_parser.add_argument(
+        '--validate-output',
+        action='store_true',
+        help='Run context.output_validator --file context.output_path before marking done',
     )
     verify_parser = queue_sub.add_parser('verify', help='Rebuild queue and verify gap resolution')
     verify_parser.add_argument('--id', action='append', dest='ids', required=True, help='Gap id to verify (repeatable)')
@@ -507,7 +520,14 @@ def run_queue_command(args):
 
     if cmd == 'lease':
         priorities = args.priority.split(',') if args.priority else None
-        item = queue_manager.lease_next(args.agent, ttl=args.ttl, priorities=priorities)
+        item = queue_manager.lease_next(
+            args.agent,
+            ttl=args.ttl,
+            priorities=priorities,
+            kind=args.kind,
+            gap_type=args.gap_type,
+            id_prefix=args.id_prefix,
+        )
         if item:
             print(json_mod.dumps(item))
         else:
@@ -515,6 +535,12 @@ def run_queue_command(args):
         return 0
 
     if cmd == 'complete':
+        if args.require_output or args.validate_output:
+            _check_queue_output_artifact(
+                queue_manager,
+                args.id,
+                validate_output=args.validate_output,
+            )
         if args.verify:
             if not args.no_index:
                 ok = _run_indexer()
@@ -607,6 +633,40 @@ def run_queue_command(args):
         return 0
 
     raise SystemExit("Unknown queue subcommand")
+
+
+def _check_queue_output_artifact(queue_manager, item_id: str, validate_output: bool = False) -> None:
+    import subprocess
+
+    item = queue_manager.get_by_id(item_id)
+    if not item:
+        raise SystemExit(f"Cannot check output artifact; queue item not found: {item_id}")
+    context = item.get("context") if isinstance(item.get("context"), dict) else {}
+    output_path_value = context.get("output_path")
+    if not output_path_value:
+        raise SystemExit(f"Cannot complete {item_id}; context.output_path is missing")
+
+    output_path = Path(output_path_value)
+    if not output_path.exists() or not output_path.is_file():
+        raise SystemExit(f"Cannot complete {item_id}; output file does not exist: {output_path}")
+
+    if not validate_output:
+        return
+
+    validator_value = context.get("output_validator") or context.get("result_validator")
+    if not validator_value:
+        raise SystemExit(f"Cannot validate output for {item_id}; context.output_validator is missing")
+    validator_path = Path(validator_value)
+    if not validator_path.exists() or not validator_path.is_file():
+        raise SystemExit(f"Cannot validate output for {item_id}; validator does not exist: {validator_path}")
+
+    proc = subprocess.run(
+        [sys.executable, str(validator_path), "--file", str(output_path)],
+        text=True,
+        check=False,
+    )
+    if proc.returncode != 0:
+        raise SystemExit(f"Cannot complete {item_id}; output validation failed")
 
 
 if __name__ == '__main__':

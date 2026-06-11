@@ -181,6 +181,17 @@ otherwise. The task itself defines what "done" means; citation requirements,
 allowed sources, required sections, and whether web research is allowed should be
 specified in the queued task when they matter.
 
+Use hard lease filters for research-only workers. `--priority` changes ordering
+but does not prevent other queue kinds from being leased.
+
+```bash
+python -m src.cli queue lease \
+  --agent <name> \
+  --kind research \
+  --gap-type research_task \
+  --id-prefix research_task:ream250_bom_row_
+```
+
 **Add one research task:**
 ```bash
 python -m src.cli queue add \

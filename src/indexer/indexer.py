@@ -1122,6 +1122,19 @@ def _update_work_queue(
     """
     gap_items: List[dict] = []
 
+    def is_external_queue_item(obj: dict) -> bool:
+        return (
+            obj.get("source") in ("manual", "agent")
+            or obj.get("kind") == "research"
+            or obj.get("gap_type") == "research_task"
+        )
+
+    def expire_stale_lease(obj: dict, now_ts: float) -> None:
+        if obj.get("status") == "leased" and obj.get("lease_expires_at", 0) < now_ts:
+            obj["status"] = "pending"
+            obj.pop("lease_id", None)
+            obj.pop("lease_expires_at", None)
+
     # Detect circular dependencies
     circular_dependencies = _detect_circular_dependencies(entries, kb_loader)
     gap_items.extend(circular_dependencies)
@@ -1339,25 +1352,28 @@ def _update_work_queue(
         # This allows agents to successfully complete items they fixed
         merged_ids = {obj["id"] for obj in merged}
         for eid, prev in existing.items():
-            if eid not in merged_ids and prev.get("status") == "leased":
+            if (
+                eid not in merged_ids
+                and prev.get("status") == "leased"
+                and not is_external_queue_item(prev)
+            ):
                 # Gap was resolved while leased - mark as resolved so agent can complete it
                 if prev.get("lease_expires_at", 0) >= now:
                     # Only preserve if lease is still valid
                     prev["status"] = "resolved"
                     merged.append(prev)
+                    merged_ids.add(eid)
 
         # Preserve manually-added items and research tasks that aren't auto-detected by indexer.
-        # Research tasks may come from spreadsheets or other external task sources.
+        # These are external queue tasks, not indexer gaps, so index rebuilds must not mark
+        # leased research/manual tasks resolved or resurrect completed tasks.
         for eid, prev in existing.items():
-            should_preserve = (
-                prev.get("source") in ("manual", "agent")
-                or prev.get("kind") == "research"
-                or prev.get("gap_type") == "research_task"
-            )
-            if eid not in merged_ids and should_preserve:
+            if eid not in merged_ids and is_external_queue_item(prev):
                 # Only preserve if not already done/superseded
                 if prev.get("status") not in ("done", "superseded"):
+                    expire_stale_lease(prev, now)
                     merged.append(prev)
+                    merged_ids.add(eid)
 
         WORK_QUEUE.parent.mkdir(parents=True, exist_ok=True)
         with WORK_QUEUE.open("w", encoding="utf-8") as wf:
