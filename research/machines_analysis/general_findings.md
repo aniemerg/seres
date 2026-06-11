@@ -18,6 +18,69 @@ Out of 117 researched machine files, the triage pass found:
 
 The machine-by-machine triage table is in `research/machines_analysis/machine_research_triage.csv`.
 
+## How the queue-driven research work was done
+
+The machine-reality research was driven by manually added queue items in
+`out/work_queue.jsonl`. Each task identified one imported machine-like KB entry,
+the KB file to inspect, the required output report path, the evidence standard,
+and the required report sections. Agents leased one task at a time, inspected the
+KB usage first, performed best-effort external research, wrote a report under
+`research/machines/`, and then marked the queue item complete. Research tasks did
+not modify KB files and were completed according to their task instructions,
+without queue verification.
+
+Example queue task:
+
+```json
+{
+  "id": "research_task:machine_reality_steel_forming_press",
+  "kind": "research",
+  "reason": "research_task",
+  "gap_type": "research_task",
+  "item_id": "machine_reality_steel_forming_press",
+  "source": "manual",
+  "context": {
+    "machine_id": "steel_forming_press",
+    "machine_name": "Steel forming press",
+    "kb_item_file": "kb/items/machines/steel_forming_press.yaml",
+    "source_list": "docs/self_reproduction_imported_machines.md",
+    "output_path": "research/machines/steel_forming_press.md",
+    "compare_existing_research_dir": "research/machines",
+    "evidence_standard": "Best effort, defined as two independent external sources when available; document uncertainty and search attempts if fewer are found.",
+    "done_criteria": "Inspect KB usage before web research. Determine whether the machine is a real practical machine, a generic category, a kit/station/tool bundle, or a placeholder. The goal is to make the imported machine list more realistic. Best-effort evidence standard: collect two independent external sources for reality/use/make-buy/build evidence when available; if fewer than two credible sources are found, document search attempts and uncertainty. Include usage interpretation, evidence links, commercially available alternates where useful, build/open-source instructions where useful, related researched machines if relevant, and recommendations such as keep, rename, split, replace, or mark uncertain. Do not modify KB and do not enqueue follow-up tasks.",
+    "required_report_sections": [
+      "Machine identity",
+      "KB usage and needed function",
+      "Reality classification",
+      "Evidence links",
+      "Commercial alternatives",
+      "Build or open-source references",
+      "Related machine research",
+      "Recommendation for KB realism",
+      "Confidence and open questions"
+    ],
+    "constraints": [
+      "Do not modify KB files",
+      "Do not enqueue follow-up tasks",
+      "Recommendations should focus on making the imported machine list more realistic"
+    ],
+    "description": "Research whether steel_forming_press represents a real practical machine; write findings to research/machines/steel_forming_press.md. Do not modify KB.",
+    "added_at": 1781118861.427862
+  },
+  "status": "done",
+  "lease_id": "codex-3",
+  "lease_expires_at": 1781120033.989666,
+  "completed_at": 1781119209.259326
+}
+```
+
+For this example, the agent inspected `kb/items/machines/steel_forming_press.yaml`,
+its BOM, recipe, and processes that require the machine, then wrote
+`research/machines/steel_forming_press.md`. The report classified the item as a
+real hydraulic metal-forming press category, recommended keeping it with clearer
+scope, and noted overlap with `hydraulic_press`, `press_brake`, and
+`stamping_press_basic`.
+
 ## Main finding
 
 The imported-machine list is too uniform. It currently includes several different resource types under the same broad imported-resource shape:
