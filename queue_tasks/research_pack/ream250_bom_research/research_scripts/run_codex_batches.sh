@@ -210,40 +210,17 @@ Set a goal: Process only reAM250 BOM research queue items for this short batch.
 
 You are ${agent_name}.
 
-Read ${TASK_INSTRUCTIONS} and follow it.
+Read ${TASK_INSTRUCTIONS} and follow it as the authoritative workflow.
 
-For this invocation, process at most ${item_limit} matching queue items, then stop successfully.
-Use this exact lease command for each item:
+Invocation parameters:
+- process at most ${item_limit} matching queue item(s), then stop successfully
+- use this exact lease command for each item:
 
 .venv/bin/python -m src.cli queue lease --agent ${agent_name} --ttl ${ttl} --kind research --gap-type research_task --id-prefix ${id_prefix}
 
-If the queue command returns queue empty, stop successfully.
-
-Only process leased items where:
-- kind is research
-- gap_type or reason is research_task
-- id starts with ${id_prefix}
-- context.output_path is under research/ream250_bom/
-
-If any leased item does not match those rules, release it immediately and stop.
-
-After writing each result, validate it with:
-
-.venv/bin/python ${TASK_VALIDATOR} --file <output_path>
-
-If <output_path> already exists, treat it as a stale prior draft. You may read
-it for comparison, but you must re-check the row's current BOM, CAD geometry,
-assembly material metadata, and web/vendor evidence as applicable, then
-overwrite the result file. Do not complete a leased task by validating an
-existing output file as-is.
-
-Complete finished tasks without --verify:
-
-.venv/bin/python -m src.cli queue complete --id <leased-id> --agent ${agent_name} --require-output --validate-output
-
-Do not edit KB YAML, source code, docs, queue tasks, generated index files, or system files.
-Only create or update the requested result files under research/ream250_bom/.
-Do not run python -m src.cli index.
+Only process leased items that match the kind, gap type, id prefix, output path,
+allowed-edit, validation, and completion rules in ${TASK_INSTRUCTIONS}. If a
+leased item does not match, release it immediately and stop.
 EOF
 }
 

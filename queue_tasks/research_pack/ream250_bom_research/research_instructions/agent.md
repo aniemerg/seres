@@ -4,7 +4,8 @@ You are processing one-off reAM250 BOM research tasks.
 
 ## Lease Only Matching Research Tasks
 
-Lease with hard filters:
+If the user or batch runner provides an exact lease command, use that exact
+command. Otherwise, use this default hard-filtered lease command:
 
 ```bash
 .venv/bin/python -m src.cli queue lease \
@@ -18,7 +19,7 @@ Lease with hard filters:
 If the command returns `queue empty`, stop.
 
 If a leased item does not have `kind: research` or its `id` does not start with
-`research_task:ream250_bom_row_`, release it immediately and stop.
+the lease command's `--id-prefix`, release it immediately and stop.
 
 ## Process A Small Batch
 
