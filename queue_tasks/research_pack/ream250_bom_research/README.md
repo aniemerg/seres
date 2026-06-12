@@ -5,9 +5,9 @@ is not part of the generic research queue system.
 
 ## Files
 
-- `research_instructions/agent.md` - Prompt/instructions for a Codex agent processing
+- `agent.md` - Prompt/instructions for a Codex agent processing
   reAM250 BOM research queue items.
-- `research_schemas/research_result.schema.yaml` - Expected structured result shape.
+- `research_result.schema.yaml` - Expected structured result shape.
 - `research_scripts/generate_queue_tasks.py` - Build queue items from the gold
   CSV/manifest package, optionally extracting STEP metadata with FreeCAD.
 - `research_scripts/validate_results.py` - Local validator for result Markdown/YAML/JSON
@@ -62,7 +62,7 @@ codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
 Then tell the agent:
 
 ```text
-Read queue_tasks/research_pack/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
+Read queue_tasks/research_pack/ream250_bom_research/agent.md and follow it as ream250-bom-agent-01.
 ```
 
 Use a different agent name in each terminal, such as `ream250-bom-agent-02`.

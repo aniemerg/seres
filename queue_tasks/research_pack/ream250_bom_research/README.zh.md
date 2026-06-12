@@ -5,8 +5,8 @@ queue 系統的一部分。
 
 ## 檔案
 
-- `research_instructions/agent.md` - 給 Codex agent 的 reAM250 BOM 研究指令。
-- `research_schemas/research_result.schema.yaml` - 結果檔應符合的結構。
+- `agent.md` - 給 Codex agent 的 reAM250 BOM 研究指令。
+- `research_result.schema.yaml` - 結果檔應符合的結構。
 - `research_scripts/generate_queue_tasks.py` - 從 gold CSV/manifest 產生 queue
   items，可選擇用 FreeCAD 抽 STEP metadata。
 - `research_scripts/validate_results.py` - 檢查 Markdown/YAML/JSON 結果檔的本地驗證器。
@@ -58,7 +58,7 @@ codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
 進入 Codex 後貼：
 
 ```text
-Read queue_tasks/research_pack/ream250_bom_research/research_instructions/agent.md and follow it as ream250-bom-agent-01.
+Read queue_tasks/research_pack/ream250_bom_research/agent.md and follow it as ream250-bom-agent-01.
 ```
 
 不同 terminal 使用不同 agent 名稱，例如 `ream250-bom-agent-02`。

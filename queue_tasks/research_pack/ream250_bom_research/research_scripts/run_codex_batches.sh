@@ -2,7 +2,7 @@
 set -euo pipefail
 
 TASK_DIR="queue_tasks/research_pack/ream250_bom_research"
-TASK_INSTRUCTIONS="$TASK_DIR/research_instructions/agent.md"
+TASK_INSTRUCTIONS="$TASK_DIR/agent.md"
 TASK_VALIDATOR="$TASK_DIR/research_scripts/validate_results.py"
 DEFAULT_REPO_ROOT="/home/eastrolinux/seres"
 

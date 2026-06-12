@@ -111,44 +111,14 @@ CAD geometry, assembly material metadata, and web/vendor evidence as applicable,
 then overwrite the result file. Do not complete a leased task by validating an
 existing output file as-is.
 
-Each Markdown result must start with YAML frontmatter:
+Each Markdown result must start with YAML frontmatter matching:
 
-```yaml
----
-function:
-  summary:
-  source:
-    url_or_path:
-    cited_fact_or_basis:
-    confidence:
-mass:
-  value_kg:
-  basis:
-  source:
-    url_or_path:
-    cited_fact_or_basis:
-    confidence:
-material:
-  primary_material:
-  source:
-    url_or_path:
-    cited_fact_or_basis:
-    confidence:
-how_to_make:
-  summary:
-  manufacturing_steps: []
-  source:
-    url_or_path:
-    cited_fact_or_basis:
-    confidence:
-assumptions: []
-uncertainty_notes: []
-kb_implications: []
----
+```text
+queue_tasks/research_pack/ream250_bom_research/research_result.schema.yaml
 ```
 
-Hard source rule: `function`, `mass`, `material`, and `how_to_make` must each
-have their own source object with:
+Hard source rule: the `function`, `mass`, `material`, and `how_to_make`
+sections must each have their own source object with:
 
 - `url_or_path`
 - `cited_fact_or_basis`
