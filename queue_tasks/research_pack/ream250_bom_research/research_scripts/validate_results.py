@@ -16,9 +16,18 @@ import yaml
 
 
 REQUIRED_SECTIONS = ("function", "mass", "material", "how_to_make")
-SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "confidence")
-REQUIRED_LISTS = ("assumptions", "uncertainty_notes", "kb_implications")
-CONFIDENCE_VALUES = {"low", "medium", "high", "unknown"}
+SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "evidence_basis")
+SECTION_LIST_FIELDS = ("assumptions", "uncertainty_notes")
+TOP_LEVEL_LIST_FIELDS = ("kb_implications",)
+EVIDENCE_BASIS_VALUES = (
+    "bom_row",
+    "vendor_spec",
+    "cad_or_local_metadata",
+    "standard_part_convention",
+    "engineering_hypothesis",
+    "unresolved",
+)
+EVIDENCE_BASIS_SET = set(EVIDENCE_BASIS_VALUES)
 ASSUMED_MATERIAL_RE = re.compile(
     r"\b(assumed|assumption|guess|guessed|likely|suggests?|conservative)\b",
     re.IGNORECASE,
@@ -59,6 +68,7 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
             issues.append(f"missing required object section: {section_name}")
             continue
         issues.extend(validate_source(section, section_name))
+        issues.extend(validate_section_lists(section, section_name))
 
     mass = data.get("mass") if isinstance(data.get("mass"), dict) else {}
     value_kg = mass.get("value_kg")
@@ -91,12 +101,22 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
     elif not isinstance(how_to_make.get("manufacturing_steps"), list):
         issues.append("how_to_make.manufacturing_steps must be a list")
 
-    for field in REQUIRED_LISTS:
+    for field in TOP_LEVEL_LIST_FIELDS:
         if field not in data:
             issues.append(f"missing required field: {field}")
         elif not isinstance(data.get(field), list):
             issues.append(f"{field} must be a list")
 
+    return issues
+
+
+def validate_section_lists(section: Dict[str, Any], path: str) -> List[str]:
+    issues = []
+    for field in SECTION_LIST_FIELDS:
+        if field not in section:
+            issues.append(f"missing required field: {path}.{field}")
+        elif not isinstance(section.get(field), list):
+            issues.append(f"{path}.{field} must be a list")
     return issues
 
 
@@ -108,11 +128,14 @@ def validate_source(section: Dict[str, Any], path: str) -> List[str]:
     for field in SOURCE_FIELDS:
         if source.get(field) in (None, ""):
             issues.append(f"missing required field: {path}.source.{field}")
-    confidence = source.get("confidence")
-    if isinstance(confidence, str) and confidence.strip().lower() not in CONFIDENCE_VALUES:
+    evidence_basis = source.get("evidence_basis")
+    if (
+        isinstance(evidence_basis, str)
+        and evidence_basis.strip().lower() not in EVIDENCE_BASIS_SET
+    ):
         issues.append(
-            f"{path}.source.confidence must be one of: "
-            f"{', '.join(sorted(CONFIDENCE_VALUES))}"
+            f"{path}.source.evidence_basis must be one of: "
+            f"{', '.join(EVIDENCE_BASIS_VALUES)}"
         )
     return issues
 

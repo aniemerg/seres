@@ -172,13 +172,17 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dpi", type=int, default=128)
     parser.add_argument("--figsize", type=float, default=4.0, help="Contact sheet size in inches")
     parser.add_argument("--individual-views", action="store_true")
+    parser.add_argument(
+        "--output-stem",
+        help="Base filename for generated PNGs. Defaults to the STEP file stem.",
+    )
     args = parser.parse_args(argv)
 
     step_path = args.step.resolve()
     if not step_path.exists():
         raise FileNotFoundError(step_path)
     output_dir = args.output_dir.resolve() if args.output_dir else default_output_dir(step_path)
-    stem = step_path.stem
+    stem = args.output_stem or step_path.stem
 
     points, faces = load_mesh(step_path, args.linear_deflection)
     contact_sheet = output_dir / f"{stem}__views_2x2.png"

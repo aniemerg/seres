@@ -44,11 +44,36 @@ sheet，用於視覺初篩：
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
-  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step"
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step" \
+  --output-dir research/ream250_bom \
+  --output-stem ream250_bom_row_<row>_<item>
 ```
 
-輸出會寫到 `gold_export/renders/<CAD file>__views_2x2.png`。先檢查這張 contact
-sheet；只有在細節不足時才加 `--individual-views` 產生單一視角圖。
+輸出會寫到
+`research/ream250_bom/ream250_bom_row_<row>_<item>__views_2x2.png`，和 Markdown
+結果放在同一個資料夾。先檢查這張 contact sheet；只有在細節不足時才加
+`--individual-views` 產生單一視角圖。
+
+## 研究證據規則
+
+判斷流程：
+
+- 先用 BOM + manifest 鎖定 row identity。Web/vendor 證據只能補這個 identity
+  的缺漏屬性，不應把 row 重新解讀成另一個產品。
+- 如果 BOM row 直接寫出該值，使用 `bom_row`，不要為了反查而上網質疑它。
+- 只有在 BOM/CAD/本地證據沒有直接解決該值，或本地證據是 placeholder/generic/
+  conflict 時，才用 vendor/web research 補資料。
+
+`evidence_basis` 標籤：
+
+允許的 `evidence_basis` 是證據來源類型，不是全域真實性排名：
+
+- BOM row 本身寫出該值 -> `bom_row`
+- vendor/catalog/drawing/product page 明確寫出 matched product 的該值 -> `vendor_spec`
+- FreeCAD geometry、STEP metadata、CAD preview、manifest 或本地抽取資料支持該值 -> `cad_or_local_metadata`
+- DIN/ISO/SKF/SMC 等 designation 或標準件類型支持該值 -> `standard_part_convention`
+- 根據功能、裝配脈絡、可見形狀或製造路徑推論 -> `engineering_hypothesis`
+- 已檢查的證據仍不支持可靠值 -> `unresolved`
 
 租任務時使用 hard filters：
 
@@ -189,7 +214,17 @@ source object，且包含：
 
 - `url_or_path`
 - `cited_fact_or_basis`
-- `confidence`
+- `evidence_basis`
+
+同樣四個 section 也都必須各自包含 section-local list：
+
+- `assumptions`
+- `uncertainty_notes`
+
+請把假設和不確定性放在影響到的 section 裡。例如材料查不到放在
+`material.uncertainty_notes`，CAD 密度造成的質量 caveat 放在
+`mass.uncertainty_notes`，製造路徑推論放在 `how_to_make.assumptions` 或
+`how_to_make.uncertainty_notes`。`kb_implications` 保持 top-level list。
 
 ## 完成任務
 

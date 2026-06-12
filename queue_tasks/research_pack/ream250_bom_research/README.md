@@ -48,12 +48,38 @@ Agents should also render the leased row's canonical STEP file to one compact
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
-  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step"
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step" \
+  --output-dir research/ream250_bom \
+  --output-stem ream250_bom_row_<row>_<item>
 ```
 
-This writes `gold_export/renders/<CAD file>__views_2x2.png`. Inspect the contact
-sheet first; generate `--individual-views` only when the compact preview is
-insufficient.
+This writes `research/ream250_bom/ream250_bom_row_<row>_<item>__views_2x2.png`
+next to the Markdown result. Inspect the contact sheet first; generate
+`--individual-views` only when the compact preview is insufficient.
+
+## Research Evidence Rules
+
+Evidence decision order:
+
+- First lock row identity from BOM + manifest. Web/vendor evidence may fill
+  missing attributes for that identity, but should not reinterpret the row as a
+  different product.
+- If BOM row directly states the value, use `bom_row` and do not web-search just
+  to second-guess it.
+- Use vendor/web research when BOM/CAD/local evidence does not directly resolve
+  the needed value, or when local evidence is placeholder/generic/conflicting.
+
+Evidence basis labels:
+
+Allowed `evidence_basis` values identify the source type; they are not a global
+truth ranking:
+
+- BOM row states the value -> `bom_row`
+- Vendor/catalog/drawing/product page states the value for the matched product -> `vendor_spec`
+- FreeCAD geometry, STEP metadata, CAD preview, manifest, or local extracted data supports it -> `cad_or_local_metadata`
+- DIN/ISO/SKF/SMC/etc. designation or standard part family supports it -> `standard_part_convention`
+- Function, assembly context, visible shape, or manufacturing route inference -> `engineering_hypothesis`
+- Checked evidence does not support a reliable value -> `unresolved`
 
 Lease with hard filters:
 
@@ -200,7 +226,16 @@ each have their own source object containing:
 
 - `url_or_path`
 - `cited_fact_or_basis`
-- `confidence`
+- `evidence_basis`
+
+Those same sections must also each contain section-local lists:
+
+- `assumptions`
+- `uncertainty_notes`
+
+Use section-local notes so material uncertainty stays under `material`, CAD mass
+caveats stay under `mass`, and fabrication-route assumptions stay under
+`how_to_make`. `kb_implications` remains a top-level list.
 
 ## Completion
 

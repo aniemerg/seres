@@ -9,8 +9,6 @@ required:
   - mass
   - material
   - how_to_make
-  - assumptions
-  - uncertainty_notes
   - kb_implications
 
 sections:
@@ -18,40 +16,51 @@ sections:
     required:
       - summary
       - source
+      - assumptions
+      - uncertainty_notes
     source_required:
       - url_or_path
       - cited_fact_or_basis
-      - confidence
+      - evidence_basis
   mass:
     required:
       - value_kg
       - basis
       - source
+      - assumptions
+      - uncertainty_notes
     source_required:
       - url_or_path
       - cited_fact_or_basis
-      - confidence
+      - evidence_basis
   material:
     required:
       - primary_material
       - source
+      - assumptions
+      - uncertainty_notes
     source_required:
       - url_or_path
       - cited_fact_or_basis
-      - confidence
+      - evidence_basis
   how_to_make:
     required:
       - summary
       - manufacturing_steps
       - source
+      - assumptions
+      - uncertainty_notes
     source_required:
       - url_or_path
       - cited_fact_or_basis
-      - confidence
+      - evidence_basis
 
 recommended:
-  confidence_values:
-    - low
-    - medium
-    - high
-    - unknown
+  evidence_basis_note: "Source type, not a global truth ranking. See README.md and agent.md for decision order."
+  evidence_basis_values:
+    - bom_row
+    - vendor_spec
+    - cad_or_local_metadata
+    - standard_part_convention
+    - engineering_hypothesis
+    - unresolved

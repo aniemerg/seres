@@ -216,8 +216,10 @@ def build_tasks(
             "done_criteria": (
                 "Write the result to output_path. Include YAML frontmatter with "
                 "function, mass, material, and how_to_make sections; each section "
-                "must include its own source object. Validate the result and complete "
-                "the queue task with --require-output --validate-output."
+                "must include its own source object with an evidence_basis plus "
+                "section-local assumptions and uncertainty_notes lists. Validate "
+                "the result and complete the queue task with --require-output "
+                "--validate-output."
             ),
         }
         if cad_metadata is not None:
