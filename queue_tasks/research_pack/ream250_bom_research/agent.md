@@ -2,6 +2,9 @@
 
 You are processing one-off reAM250 BOM research tasks.
 
+Each leased research task represents exactly one reAM250 BOM row. Process only
+that row, using the row-specific context fields from the leased queue item.
+
 ## Lease Only Matching Research Tasks
 
 If the user or batch runner provides an exact lease command, use that exact
