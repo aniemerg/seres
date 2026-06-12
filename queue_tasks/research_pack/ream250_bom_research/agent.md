@@ -70,8 +70,40 @@ and `cad_export_status` is not `missing_in_cad`. Use the local FreeCAD wrapper:
 ```
 
 Use that geometry as row-specific evidence for mass and shape/function
-inference. If `cad_export_status` is `assembly_only`, `ambiguous`, or
-`missing_in_cad`, explain the CAD evidence limitation in `uncertainty_notes`.
+inference.
+
+Also render a compact CAD preview contact sheet for visual triage:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "<canonical_step_path>"
+```
+
+The renderer writes a 2x2 PNG contact sheet with iso, front, top, and right
+views under the STEP export's `renders/` directory. Inspect that contact sheet
+before writing the result. Use it to identify visible shape features such as
+plates, brackets, flanges, holes, slots, shafts, pulleys, seals, and whether a
+machining, sheet cutting, or assembly route is plausible. Treat the preview as
+visual triage only; do not use it for exact measurement.
+
+If the contact sheet is too small or important details are not visible, rerun
+the renderer with individual views and inspect only the needed view(s):
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "<canonical_step_path>" \
+  --individual-views
+```
+
+When using an image-capable model/API for this inspection, send the 2x2 contact
+sheet with `detail: "low"` first. Escalate to higher detail or individual views
+only when the low-detail contact sheet is insufficient. Include the CAD filename
+in the prompt because the image itself does not carry source metadata.
+
+Use the CAD geometry and preview together as row-specific evidence for function,
+mass, and manufacturing inference. If `cad_export_status` is `assembly_only`,
+`ambiguous`, or `missing_in_cad`, or if rendering fails, explain the CAD evidence
+limitation in `uncertainty_notes`.
 
 For material, use this evidence order:
 

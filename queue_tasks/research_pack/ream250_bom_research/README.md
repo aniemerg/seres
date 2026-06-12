@@ -10,6 +10,10 @@ is not part of the generic research queue system.
 - `research_result.schema.yaml` - Expected structured result shape.
 - `research_scripts/generate_queue_tasks.py` - Build queue items from the gold
   CSV/manifest package, optionally extracting STEP metadata with FreeCAD.
+- `research_scripts/render_step_views.py` - Render a compact 2x2 PNG CAD preview
+  from a STEP file for low-token visual inspection.
+- `research_scripts/render_step_views.sh` - FreeCAD wrapper for the preview
+  renderer; use this script from agent prompts.
 - `research_scripts/validate_results.py` - Local validator for result Markdown/YAML/JSON
   files.
 - `research_scripts/run_codex_batches.sh` - Optional batch runner that repeatedly starts
@@ -38,6 +42,18 @@ This replaces only existing queue entries whose IDs start with
 CAD geometry is intentionally read by the agent after it leases a specific row.
 Use `--extract-cad-metadata` only for offline diagnostics, not for the normal
 research queue run.
+
+Agents should also render the leased row's canonical STEP file to one compact
+2x2 contact sheet for visual triage:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step"
+```
+
+This writes `gold_export/renders/<CAD file>__views_2x2.png`. Inspect the contact
+sheet first; generate `--individual-views` only when the compact preview is
+insufficient.
 
 Lease with hard filters:
 

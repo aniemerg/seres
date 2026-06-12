@@ -9,6 +9,10 @@ queue 系統的一部分。
 - `research_result.schema.yaml` - 結果檔應符合的結構。
 - `research_scripts/generate_queue_tasks.py` - 從 gold CSV/manifest 產生 queue
   items，可選擇用 FreeCAD 抽 STEP metadata。
+- `research_scripts/render_step_views.py` - 從 STEP 檔產生 compact 2x2 PNG CAD
+  preview，供低 image-token 視覺檢查。
+- `research_scripts/render_step_views.sh` - preview renderer 的 FreeCAD 包裝器；
+  agent prompt 應使用這支腳本。
 - `research_scripts/validate_results.py` - 檢查 Markdown/YAML/JSON 結果檔的本地驗證器。
 - `research_scripts/run_codex_batches.sh` - 選用的 batch runner，會反覆啟動新的
   `codex exec` session。
@@ -34,6 +38,17 @@ queue 裡的任務應該符合：
 
 CAD 幾何資料刻意由 agent 在 lease 到特定 row 後才讀取。`--extract-cad-metadata`
 只用於離線診斷，不作為正常 research queue run 的流程。
+
+Agent 也應該把 lease 到的 canonical STEP 檔 render 成一張 compact 2x2 contact
+sheet，用於視覺初篩：
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step"
+```
+
+輸出會寫到 `gold_export/renders/<CAD file>__views_2x2.png`。先檢查這張 contact
+sheet；只有在細節不足時才加 `--individual-views` 產生單一視角圖。
 
 租任務時使用 hard filters：
 
