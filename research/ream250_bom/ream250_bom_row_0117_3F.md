@@ -35,13 +35,13 @@ material:
 how_to_make:
   summary: "Fabricate as a small stainless ISO-KF clamp ring with a formed arcuate clamp profile and closure ears, then deburr and passivate for vacuum service."
   manufacturing_steps:
-    - "Cut or stamp stainless steel 304/1.4301 blank features for the curved clamp body and closure ears."
+    - "Cut or stamp stainless steel 304/1.4301 blank features for the curved clamp body, end ears, hinge/latch details, and fastener holes."
     - "Form the arcuate ISO-KF clamp profile to the DN 32-40 envelope."
-    - "Punch or machine the hinge, latch, and fastener features visible at the clamp ends."
+    - "Machine or coin the clamp-profile ribs and local bearing/contact features visible in the STEP preview."
     - "Deburr contact edges, clean, and passivate the stainless steel part before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3F_clamping_ring_ISO_KF_DN40_120BSR040.step; research/ream250_bom/ream250_bom_row_0117_3F__views_2x2.png; https://www.shop.buschgroup.com/global/en/products/120BSR040/"
-    cited_fact_or_basis: "BOM-provided product data gives the part family and material. Local CAD geometry and preview show a compact open semi-circular clamp ring with closure ears, holes, and a clamp/fastener end feature."
+    cited_fact_or_basis: "BOM-provided product data gives the part family and material. Local CAD geometry and preview show a compact open semi-circular clamp ring with closure ears, holes, ribbed clamp-profile faces, and hinge/latch or fastener end features."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Manufacturing route is inferred from stainless clamp geometry and common fabrication methods for small vacuum fastening hardware."

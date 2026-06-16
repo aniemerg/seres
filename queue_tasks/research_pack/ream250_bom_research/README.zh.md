@@ -89,14 +89,15 @@ BOM-provided CAD/STEP volume 和 BOM-provided material identity 計算得到，�
 `bom_provided`。當材料 grade/family 已由 BOM-side evidence 確認後，該材料的
 standard/common density 只是計算常數，不算另一種 evidence class；把 density
 值寫在 `mass.basis` 或 `mass.assumptions`，但不要只為了決定
-`evidence_basis` 而加入 generic density datasheet。若 BOM-provided
-multi-material part 的 CAD 是 single solid，只要 component materials 和 total
-CAD volume 都來自 BOM-side evidence，近似 effective density 或未解析的
-material volume split 是 mass-estimation assumption，不是另一種 evidence
-class。此時保持 `mass.source.evidence_basis: bom_provided`，並把 split /
-effective-density 限制寫進 `mass.assumptions` 和 `mass.uncertainty_notes`。
-只有在 mass 使用的 material identity、geometry、product identity，或其他物理
-輸入不是由 BOM-side evidence 解析時，才降到較低標籤。
+`evidence_basis` 而加入 generic density datasheet。對 multi-material part，
+要把 source facts 和 composition estimate 分開判斷。即使 component materials
+和 total CAD volume 都是 BOM-side facts，只要 material volume fractions 或
+effective density 是沒有 cited source 的猜測，
+`mass.source.evidence_basis` 就要設為 `engineering_hypothesis`。猜測的比例或
+effective-density 選擇寫進 `mass.assumptions`，剩下的後果寫進
+`mass.uncertainty_notes`。只有當 mass 本身、材料比例、split-volume CAD，或其他
+有來源的物理輸入已經足以解析 composition，使 mass 不再依賴無來源比例猜測時，
+multi-material mass 才保持 `bom_provided`。
 
 常見材料密度先查本地 `kb/materials/properties.yaml`，不要直接上網找。若
 BOM-side material 已解析且能對應到本地密度表，density 視為 calculation
@@ -373,7 +374,8 @@ Mass 範例：
   combined material-volume proxy because the CAD does not expose separate
   aluminum and NBR regions。」
 - 好的 `uncertainty_notes`：「The aluminum-to-NBR volume fraction is not
-  measured separately, so the mass remains an effective-density estimate。」
+  measured separately, so the mass remains an unsupported effective-density
+  estimate。」
 - 不好的 `assumptions`：「The STEP volume is millimeter-based。」這是 unit/fact
   basis，應放在 `mass.basis` 或 `source.cited_fact_or_basis`。
 - 不好的 `uncertainty_notes`：不會改變下游讀者如何 trust、specify 或 use 該

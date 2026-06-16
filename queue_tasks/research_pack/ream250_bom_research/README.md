@@ -94,14 +94,16 @@ still `bom_provided`. Once the material grade/family is resolved from BOM-side
 evidence, a standard/common density for that material is a calculation constant,
 not a separate evidence class; record the density value in `mass.basis` or
 `mass.assumptions`, but do not add a generic density datasheet solely to set
-`evidence_basis`. For a BOM-provided multi-material part with single-solid CAD,
-an approximate effective density or unresolved material volume split is a
-mass-estimation assumption, not a different evidence class, when the component
-materials and total CAD volume both come from BOM-side evidence. Keep
-`mass.source.evidence_basis: bom_provided` and put the split/effective-density
-limitation in `mass.assumptions` and `mass.uncertainty_notes`. Use a lower label
-only when the material identity, geometry, product identity, or other physical
-input used for the mass is not resolved by BOM-side evidence.
+`evidence_basis`. For a multi-material part, distinguish source facts from the
+composition estimate. If the component materials and total CAD volume are
+BOM-side facts but the material volume fractions or effective density are
+guessed without a cited source, set `mass.source.evidence_basis:
+engineering_hypothesis`. Put the guessed fraction/effective-density choice in
+`mass.assumptions`, and keep the residual consequence in
+`mass.uncertainty_notes`. Keep `mass.source.evidence_basis: bom_provided` for
+multi-material parts only when the mass itself, material fractions, split-volume
+CAD, or another sourced physical input resolves the composition closely enough
+that the mass no longer depends on an unsupported ratio guess.
 
 For common material densities, check `kb/materials/properties.yaml` before web
 search. If the resolved BOM-side material maps to that local table, treat the
@@ -395,7 +397,7 @@ Mass examples:
   material-volume proxy because the CAD does not expose separate aluminum and
   NBR regions."
 - Good `uncertainty_notes`: "The aluminum-to-NBR volume fraction is not measured
-  separately, so the mass remains an effective-density estimate."
+  separately, so the mass remains an unsupported effective-density estimate."
 - Bad `assumptions`: "The STEP volume is millimeter-based." That is a unit/fact
   basis, so put it in `mass.basis` or `source.cited_fact_or_basis`.
 - Bad `uncertainty_notes`: a non-contributing audit detail that does not change
