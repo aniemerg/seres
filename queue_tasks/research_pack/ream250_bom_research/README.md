@@ -68,13 +68,30 @@ Evidence decision order:
   missing attributes for that identity, but should not reinterpret the row as a
   different product.
 - Treat BOM row fields, manifest data, the supplied CAD/STEP package, local
-  metadata extracted from that package, rendered CAD previews, and vendor/product
-  URLs supplied in the BOM context as one evidence class: `bom_provided`.
+  metadata extracted from that package, rendered CAD previews, and the
+  BOM-provided vendor/product URL route as one evidence class: `bom_provided`.
+  That route includes the exact BOM `link_url`, redirects, official canonical
+  replacements, and first-party support/product pages reached by following links
+  or navigation from the BOM-provided product page for the same row.
 - Use independent vendor/web research when BOM-side evidence does not directly
   resolve the needed value, or when BOM-side evidence is placeholder/generic/
   conflicting.
+- If BOM-side evidence does not resolve the needed value, do at least one
+  targeted web/search sanity check before falling back to
+  `engineering_hypothesis`, even when the row has no manufacturer, product ID,
+  standard designation, or URL. Build low-cost queries from `cad_file`,
+  `description_or_product_id`, BOM item, parent assembly, sibling row names,
+  part-family nouns, and terms such as `material`, `datasheet`, `catalog`,
+  `drawing`, `technical data`, or `weight`. If no row-specific usable source is
+  found, keep the result conservative and make that absence visible in the
+  relevant section's uncertainty when it affects downstream trust.
 - A row-matched official canonical replacement derived from a BOM-provided URL
   is still BOM-side evidence. Do not downgrade it to independent research.
+- First-party support/product-family/technology/download pages reached from the
+  BOM-provided product page route are also BOM-side evidence for the same row.
+  Example: if a BOM-provided Karl Hipp product-family page leads to the vendor's
+  ballscrew page that states spindle material, that material is `bom_provided`,
+  not `independent_vendor_spec`.
 - If a section value depends on multiple evidence classes, use the least reliable
   evidence class needed for that conclusion.
 
@@ -91,10 +108,11 @@ Allowed `evidence_basis` values, in reliability order:
 For mass, arithmetic does not by itself lower the evidence class. A value
 computed from BOM-provided CAD/STEP volume and BOM-provided material identity is
 still `bom_provided`. Once the material grade/family is resolved from BOM-side
-evidence, a standard/common density for that material is a calculation constant,
-not a separate evidence class; record the density value in `mass.basis` or
-`mass.assumptions`, but do not add a generic density datasheet solely to set
-`evidence_basis`. For a multi-material part, distinguish source facts from the
+evidence, including the BOM-provided URL route, a standard/common density for
+that material is a calculation constant, not a separate evidence class; record
+the density value in `mass.basis` or `mass.assumptions`, but do not add a generic
+density datasheet solely to set `evidence_basis`. For a multi-material part,
+distinguish source facts from the
 composition estimate. If the component materials and total CAD volume are
 BOM-side facts but the material volume fractions or effective density are
 guessed without a cited source, set `mass.source.evidence_basis:
@@ -211,6 +229,31 @@ This runs at most `2 * 3 * 1 = 6` rows:
 The runner defaults to `--codex-sandbox danger-full-access` because web research
 rows need local DNS/network access. Override with
 `--codex-sandbox workspace-write` only for no-network/local-only runs.
+
+To test a specific Codex model, pass `--codex-model`. If omitted, the runner
+uses the Codex CLI configured default model. To control reasoning level for
+models that support it, pass `--codex-reasoning-effort low|medium|high|xhigh`.
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --codex-model gpt-5.3-spark \
+  --validate-at-end
+```
+
+Example with GPT-5.5 medium reasoning:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --codex-model gpt-5.5 \
+  --codex-reasoning-effort medium \
+  --validate-at-end
+```
 
 When writing the command across multiple lines, keep the trailing `\` on every
 continued line. If the `\` after `--max-items 3` is missing, the shell starts the
@@ -330,6 +373,18 @@ Validate a directory:
 .venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --dir research/ream250_bom
 ```
+
+Audit queue/output consistency:
+
+```bash
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/audit_queue_outputs.py
+```
+
+This audit validates current output files and checks done queue entries against
+their `context.output_path`. Historical done entries completed before the
+strict output-validation baseline may have missing artifacts; those are reported
+as `legacy_done_without_output_accepted` and do not fail the audit. Missing
+outputs for newer done items still fail.
 
 The validator checks that the first top-level frontmatter key is `row_identity`.
 This section must preserve only the minimal BOM table identity before

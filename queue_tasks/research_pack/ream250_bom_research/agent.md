@@ -124,16 +124,30 @@ Use this evidence decision order for each result section:
 2. Treat BOM-side supplied evidence as one evidence class:
    `bom_provided`. This includes BOM row fields, manifest mappings, the CAD/STEP
    package provided with the BOM, local metadata extracted from those CAD files,
-   rendered CAD previews, and vendor/product URLs that are present in the BOM
-   context and then opened directly.
+   rendered CAD previews, and the BOM-provided vendor/product URL route. That
+   route includes the exact BOM `link_url`, redirects, official canonical
+   replacements, and first-party support/product pages reached by following
+   links or navigation from the BOM-provided product page for the same row.
 3. If BOM-side supplied evidence directly states or measures the value needed
    for a section, use it with `evidence_basis: bom_provided`. Do not web-search
    just to second-guess directly provided BOM-side evidence.
 4. Use independent vendor/web research only to fill a value that BOM-side
    evidence did not directly resolve, or to resolve a placeholder/conflict. Use
    `evidence_basis: independent_vendor_spec` only when the vendor/catalog/drawing
-   fact came from agent-initiated web search rather than from a BOM-provided URL
-   or an official canonical replacement derived from a BOM-provided URL.
+   fact came from agent-initiated web search rather than from the BOM-provided
+   URL route. Facts obtained through the BOM-provided URL route remain
+   `bom_provided`.
+   If BOM-side evidence does not resolve the needed value, perform at least one
+   targeted web/search sanity check before falling back to
+   `engineering_hypothesis`, even when the row has no manufacturer, product ID,
+   standard designation, or URL. Build low-cost queries from the strongest
+   available row clues: `cad_file`, `description_or_product_id`, manufacturer,
+   product ID, BOM item, parent assembly, sibling row names, part-family nouns,
+   and terms such as `material`, `datasheet`, `catalog`, `drawing`, `technical
+   data`, or `weight`. If those searches produce no row-specific usable facts,
+   keep the value as `engineering_hypothesis` and make the absence of
+   row-specific web/vendor evidence visible in the relevant section's
+   `uncertainty_notes` when it affects downstream trust.
 5. Use `standard_part_convention` only after BOM-side evidence and row-matched
    independent vendor/web evidence do not resolve the value, but a standard
    designation or part family supports a generic conclusion.
@@ -158,10 +172,11 @@ that broad engineering hypothesis would be misleading.
 For mass, do not downgrade solely because arithmetic is involved. If the mass is
 computed from BOM-provided CAD/STEP volume and BOM-provided material identity,
 keep `evidence_basis: bom_provided`. Once the material grade/family is resolved
-from BOM-side evidence, using a standard/common density for that material is a
-calculation constant, not a separate evidence class; cite the density value in
-`mass.basis` or `mass.assumptions`, but do not add a generic density datasheet
-solely to determine `evidence_basis`. For a multi-material part, distinguish
+from BOM-side evidence, including the BOM-provided URL route, using a
+standard/common density for that material is a calculation constant, not a
+separate evidence class; cite the density value in `mass.basis` or
+`mass.assumptions`, but do not add a generic density datasheet solely to
+determine `evidence_basis`. For a multi-material part, distinguish
 source facts from the composition estimate. If the component materials and total
 CAD volume are BOM-side facts but the material volume fractions or effective
 density are guessed without a cited source, set
@@ -206,9 +221,14 @@ For material specifically:
    name as resolved material evidence.
 3. If BOM and local CAD/STEP material evidence are missing, placeholder/generic,
    or conflicting, continue to web/vendor research before assigning
-   `material.primary_material` whenever any of these row clues exist:
+   `material.primary_material`. Use row-matched vendor/product routes first when
    manufacturer, product ID, standard designation, DIN/ISO/SKF/SMC/etc. part
-   name, or `third_party_link_url`.
+   name, or `third_party_link_url` exists. If those stronger identifiers do not
+   exist, still do a low-cost targeted search using `cad_file`,
+   `description_or_product_id`, BOM item, parent assembly, sibling row names,
+   and part-family nouns. If no row-specific source is found, record a broad
+   material family as an `engineering_hypothesis` and keep the material
+   uncertainty explicit.
 4. Use the vendor/product URL first when present in the leased BOM context. Facts
    retrieved by opening that provided URL are still `bom_provided` because the
    BOM supplied the path to the matched product. If no provided URL resolves the
@@ -259,6 +279,12 @@ For vendor/product page parsing:
   material`, `material`, `aluminum`, `NBR`, `FKM`, `stainless`, the part-family
   nouns, and download links. If those snippets resolve the row material or
   function, cite the canonical page as `bom_provided`.
+- If the BOM-provided product page links or navigates to first-party
+  product-family, support, technology, or downloads pages from the same vendor
+  and those pages resolve the same row's value, cite those pages as
+  `bom_provided`. Example: if a BOM-provided Karl Hipp product-family page leads
+  to the vendor's ballscrew page that states spindle material, that material is
+  `bom_provided`, not `independent_vendor_spec`.
 - Do not replace a row-matched BOM-provided/canonical source with an independent
   search result only because the independent PDF or catalog is easier to parse.
   Independent search results may be supplemental, but the `evidence_basis` stays

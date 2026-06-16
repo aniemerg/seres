@@ -14,6 +14,8 @@ max_batches=0
 ttl=7200
 log_dir=""
 codex_bin="${CODEX_BIN:-codex}"
+codex_model="${CODEX_MODEL:-}"
+codex_reasoning_effort="${CODEX_REASONING_EFFORT:-}"
 codex_sandbox="${CODEX_SANDBOX:-danger-full-access}"
 validate_at_end=0
 dry_run=0
@@ -36,6 +38,10 @@ Options:
   --ttl SECONDS         Queue lease TTL passed to the agent prompt. Default: 7200
   --log-dir PATH        Log directory. Default: out/ream250_bom_runner_logs
   --codex-bin PATH      Codex executable. Default: codex or $CODEX_BIN
+  --codex-model MODEL   Codex model passed to -m/--model. Default: $CODEX_MODEL or config default
+  --codex-reasoning-effort EFFORT
+                       Reasoning effort passed as model_reasoning_effort.
+                       Values: low, medium, high, xhigh. Default: $CODEX_REASONING_EFFORT or config default
   --codex-sandbox MODE  Codex sandbox mode. Default: danger-full-access or $CODEX_SANDBOX
                        Use workspace-write only for no-network/local-only runs.
   --id-prefix PREFIX    Queue id prefix for lease filtering.
@@ -53,6 +59,12 @@ Examples:
 
   # Smoke test one fresh Codex session.
   queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1
+
+  # Smoke test one fresh Codex session with an explicit model.
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1 --codex-model gpt-5.3-spark
+
+  # Smoke test GPT-5.5 with medium reasoning.
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1 --codex-model gpt-5.5 --codex-reasoning-effort medium
 
   # Rerun exactly one completed row after releasing it back to pending.
   .venv/bin/python -m src.cli queue release --id research_task:ream250_bom_row_0195_6Q --agent rerun
@@ -107,6 +119,14 @@ while [[ $# -gt 0 ]]; do
       codex_bin="${2:-}"
       shift 2
       ;;
+    --codex-model)
+      codex_model="${2:-}"
+      shift 2
+      ;;
+    --codex-reasoning-effort)
+      codex_reasoning_effort="${2:-}"
+      shift 2
+      ;;
     --codex-sandbox)
       codex_sandbox="${2:-}"
       shift 2
@@ -138,6 +158,13 @@ is_positive_int "$max_items" || die "--max-items must be a positive integer"
 is_nonnegative_int "$max_batches" || die "--max-batches must be a nonnegative integer"
 is_positive_int "$ttl" || die "--ttl must be a positive integer"
 [[ -n "$id_prefix" ]] || die "--id-prefix must not be empty"
+case "$codex_reasoning_effort" in
+  ""|low|medium|high|xhigh)
+    ;;
+  *)
+    die "--codex-reasoning-effort must be one of: low, medium, high, xhigh"
+    ;;
+esac
 case "$codex_sandbox" in
   read-only|workspace-write|danger-full-access)
     ;;
@@ -244,15 +271,24 @@ run_one_batch() {
   local agent_name
   local log_file
   local status
+  local codex_cmd
 
   agent_name="$(printf "%s-%02d" "$agent_prefix" "$worker_id")"
   log_file="$log_dir/${agent_name}_batch_$(printf "%04d" "$batch_no")_$(date +%Y%m%d_%H%M%S).log"
 
   echo "[$agent_name] starting batch $batch_no; log: $log_file"
+  codex_cmd=("$codex_bin" --search)
+  if [[ -n "$codex_model" ]]; then
+    codex_cmd+=(-m "$codex_model")
+  fi
+  if [[ -n "$codex_reasoning_effort" ]]; then
+    codex_cmd+=(-c "model_reasoning_effort=\"$codex_reasoning_effort\"")
+  fi
+  codex_cmd+=(-a on-request exec -C "$repo_root" -s "$codex_sandbox" -)
   set +e
   build_prompt "$agent_name" "$max_items" | (
     cd "$repo_root" &&
-    "$codex_bin" --search -a on-request exec -C "$repo_root" -s "$codex_sandbox" -
+    "${codex_cmd[@]}"
   ) 2>&1 | tee "$log_file"
   status=${PIPESTATUS[1]}
   set -e
@@ -288,7 +324,15 @@ worker_loop() {
 
 if [[ "$dry_run" -eq 1 ]]; then
   echo "Repository: $repo_root"
-  echo "Command: $codex_bin --search -a on-request exec -C $repo_root -s $codex_sandbox -"
+  if [[ -n "$codex_model" ]]; then
+    command_preview="$codex_bin --search -m $codex_model"
+  else
+    command_preview="$codex_bin --search"
+  fi
+  if [[ -n "$codex_reasoning_effort" ]]; then
+    command_preview="$command_preview -c model_reasoning_effort=\\\"$codex_reasoning_effort\\\""
+  fi
+  echo "Command: $command_preview -a on-request exec -C $repo_root -s $codex_sandbox -"
   echo
   build_prompt "$(printf "%s-%02d" "$agent_prefix" 1)" "$max_items"
   exit 0
@@ -298,6 +342,16 @@ command -v "$codex_bin" >/dev/null 2>&1 || die "codex executable not found: $cod
 
 echo "repo_root=$repo_root"
 echo "workers=$workers max_items=$max_items max_batches=$max_batches ttl=$ttl"
+if [[ -n "$codex_model" ]]; then
+  echo "codex_model=$codex_model"
+else
+  echo "codex_model=(config default)"
+fi
+if [[ -n "$codex_reasoning_effort" ]]; then
+  echo "codex_reasoning_effort=$codex_reasoning_effort"
+else
+  echo "codex_reasoning_effort=(config default)"
+fi
 echo "codex_sandbox=$codex_sandbox"
 echo "log_dir=$log_dir"
 

@@ -64,13 +64,29 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 - 先用 BOM + manifest 鎖定 row identity。Web/vendor 證據只能補這個 identity
   的缺漏屬性，不應把 row 重新解讀成另一個產品。
 - 將 BOM row 欄位、manifest、隨 BOM 提供的 CAD/STEP package、從該 package
-  抽出的 local metadata、rendered CAD previews，以及 BOM context 中提供的
-  vendor/product URL 視為同一種證據類別：`bom_provided`。
+  抽出的 local metadata、rendered CAD previews，以及 BOM-provided
+  vendor/product URL route 視為同一種證據類別：`bom_provided`。這個 route
+  包含 BOM 原始 `link_url`、redirect、官方 canonical replacement，以及從
+  BOM-provided product page 跟連結或站內導覽到達、且用於同一 row 的
+  first-party support/product page。
 - 只有在 BOM-side evidence 沒有直接解決該值，或 BOM-side evidence 是
   placeholder/generic/conflicting 時，才使用 independent vendor/web research
   補資料。
+- 只要 BOM-side evidence 沒有解決需要的值，在退回
+  `engineering_hypothesis` 前至少做一次 targeted web/search sanity check。
+  即使 row 沒有 manufacturer、product ID、standard designation 或 URL 也一樣。
+  query 可用 `cad_file`、`description_or_product_id`、BOM item、parent assembly、
+  sibling row names、part-family nouns，並加上 `material`、`datasheet`、
+  `catalog`、`drawing`、`technical data`、`weight` 等詞。如果找不到 row-specific
+  usable source，結果保持保守，且當這會影響下游信任時，在相關 section 的
+  uncertainty 中明確保留這個限制。
 - 由 BOM-provided URL 推導出的 row-matched 官方 canonical replacement 仍屬於
   BOM-side evidence，不要降級成 independent research。
+- 從 BOM-provided product page route 到達的 first-party support、product
+  family、technology、download page，對同一 row 仍屬於 BOM-side evidence。
+  例：BOM-provided Karl Hipp product-family page 導到 vendor ballscrew page，
+  且該頁寫出 spindle material，這個 material 是 `bom_provided`，不是
+  `independent_vendor_spec`。
 - 如果一個 section 的值同時依賴多種證據類別，`evidence_basis` 使用該結論所需
   來源中可靠度最低的類別。
 
@@ -86,11 +102,12 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 
 對 mass 來說，有做算術不會自動降低 evidence class。如果 mass 是由
 BOM-provided CAD/STEP volume 和 BOM-provided material identity 計算得到，仍然是
-`bom_provided`。當材料 grade/family 已由 BOM-side evidence 確認後，該材料的
-standard/common density 只是計算常數，不算另一種 evidence class；把 density
-值寫在 `mass.basis` 或 `mass.assumptions`，但不要只為了決定
-`evidence_basis` 而加入 generic density datasheet。對 multi-material part，
-要把 source facts 和 composition estimate 分開判斷。即使 component materials
+`bom_provided`。當材料 grade/family 已由 BOM-side evidence 確認後，包括由
+BOM-provided URL route 確認，該材料的 standard/common density 只是計算常數，
+不算另一種 evidence class；把 density 值寫在 `mass.basis` 或
+`mass.assumptions`，但不要只為了決定 `evidence_basis` 而加入 generic density
+datasheet。對 multi-material part，要把 source facts 和 composition estimate
+分開判斷。即使 component materials
 和 total CAD volume 都是 BOM-side facts，只要 material volume fractions 或
 effective density 是沒有 cited source 的猜測，
 `mass.source.evidence_basis` 就要設為 `engineering_hypothesis`。猜測的比例或
@@ -200,6 +217,31 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batche
 runner 預設使用 `--codex-sandbox danger-full-access`，因為 web research rows
 需要 local DNS/network access。只有 no-network/local-only run 才用
 `--codex-sandbox workspace-write` 覆蓋。
+
+如果要測特定 Codex model，傳 `--codex-model`。沒指定時，runner 會使用 Codex
+CLI 目前設定的預設模型。若模型支援 reasoning level，可用
+`--codex-reasoning-effort low|medium|high|xhigh` 控制。
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --codex-model gpt-5.3-spark \
+  --validate-at-end
+```
+
+GPT-5.5 medium reasoning 範例：
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --codex-model gpt-5.5 \
+  --codex-reasoning-effort medium \
+  --validate-at-end
+```
 
 多行 shell command 每個續行都要保留結尾的 `\`。如果 `--max-items 3` 後面少了
 `\`，shell 會先用沒有 `--max-batches` 的參數啟動 runner，然後把
@@ -312,6 +354,17 @@ done
 .venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/validate_results.py \
   --dir research/ream250_bom
 ```
+
+檢查 queue/output 一致性：
+
+```bash
+.venv/bin/python queue_tasks/research_pack/ream250_bom_research/research_scripts/audit_queue_outputs.py
+```
+
+這個 audit 會驗證目前存在的 output files，並檢查 done queue entries 是否還有
+`context.output_path`。嚴格 output-validation baseline 之前完成的歷史 done entries
+可能沒有目前 artifact；這些會列為 `legacy_done_without_output_accepted`，不會讓
+audit 失敗。較新的 done items 若缺 output 仍會失敗。
 
 驗證器會檢查 frontmatter 第一個 top-level key 是否為 `row_identity`。這個
 section 只保留最小 BOM row identity，再進入任何解讀。這裡只能包含以下 keys：

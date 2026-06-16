@@ -12,6 +12,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List
+from urllib.parse import urlparse
 
 import yaml
 
@@ -50,6 +51,10 @@ ASSUMED_MATERIAL_RE = re.compile(
 UNRESOLVED_MATERIAL_RE = re.compile(r"\bunresolved\b", re.IGNORECASE)
 STANDARD_BASIS_RE = re.compile(
     r"\b(standard|designation|parameter|suffix|class|family|DIN|ISO|SKF|SMC|complete|incomplete)\b",
+    re.IGNORECASE,
+)
+INDEPENDENT_SEARCH_ROUTE_RE = re.compile(
+    r"\b(agent-initiated|independent (?:web )?search|searched|search result|found by web search)\b",
     re.IGNORECASE,
 )
 
@@ -109,7 +114,8 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
         if not isinstance(section, dict):
             issues.append(f"missing required object section: {section_name}")
             continue
-        issues.extend(validate_source(section, section_name))
+        source_row_identity = row_identity if isinstance(row_identity, dict) else {}
+        issues.extend(validate_source(section, section_name, source_row_identity))
         issues.extend(validate_section_lists(section, section_name))
         issues.extend(validate_no_duplicate_section_notes(section, section_name))
 
@@ -233,7 +239,7 @@ def validate_no_duplicate_section_notes(section: Dict[str, Any], path: str) -> L
     return issues
 
 
-def validate_source(section: Dict[str, Any], path: str) -> List[str]:
+def validate_source(section: Dict[str, Any], path: str, row_identity: Dict[str, Any] | None = None) -> List[str]:
     source = section.get("source")
     if not isinstance(source, dict):
         return [f"missing required object: {path}.source"]
@@ -260,7 +266,73 @@ def validate_source(section: Dict[str, Any], path: str) -> List[str]:
                 f"{path}.source.cited_fact_or_basis must explain standard/designation "
                 "parameter completeness when evidence_basis is standard_part_convention"
             )
+    if (
+        isinstance(evidence_basis, str)
+        and evidence_basis.strip().lower() == "independent_vendor_spec"
+        and row_identity
+    ):
+        issues.extend(validate_independent_source_route(source, path, row_identity))
     return issues
+
+
+def extract_urls(text: str) -> List[str]:
+    return re.findall(r"https?://[^\s;,\"')]+", text)
+
+
+def comparable_domain(url: str) -> str:
+    host = urlparse(url).hostname or ""
+    host = host.lower()
+    if host.startswith("www."):
+        host = host[4:]
+    parts = host.split(".")
+    if len(parts) >= 2:
+        return ".".join(parts[-2:])
+    return host
+
+
+def validate_independent_source_route(
+    source: Dict[str, Any],
+    path: str,
+    row_identity: Dict[str, Any],
+) -> List[str]:
+    link_url = str(row_identity.get("link_url") or "").strip()
+    if not link_url:
+        return []
+
+    bom_domain = comparable_domain(link_url)
+    if not bom_domain:
+        return []
+
+    source_text = " ".join(
+        str(source.get(field) or "") for field in ("url_or_path", "cited_fact_or_basis")
+    )
+    source_urls = extract_urls(source_text)
+    if not source_urls:
+        return []
+
+    same_domain_urls = [
+        url for url in source_urls
+        if comparable_domain(url) == bom_domain
+    ]
+    if not same_domain_urls:
+        return []
+
+    if INDEPENDENT_SEARCH_ROUTE_RE.search(source_text):
+        return []
+
+    if link_url in source_text:
+        return [
+            f"{path}.source.evidence_basis is independent_vendor_spec but cites the "
+            "BOM row link_url; use bom_provided for facts obtained through the "
+            "BOM-provided URL route"
+        ]
+
+    return [
+        f"{path}.source.evidence_basis is independent_vendor_spec but cites the same "
+        f"vendor domain as row_identity.link_url ({bom_domain}) without documenting "
+        "an agent-initiated independent search route; use bom_provided when the fact "
+        "came from the BOM-provided URL route"
+    ]
 
 
 def iter_paths(files: Iterable[Path], directory: Path | None) -> List[Path]:
