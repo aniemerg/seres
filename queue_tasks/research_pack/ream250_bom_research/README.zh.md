@@ -340,6 +340,25 @@ source object，且包含：
 `mass.uncertainty_notes`，製造路徑推論放在 `how_to_make.assumptions` 或
 `how_to_make.uncertainty_notes`。`kb_implications` 保持 top-level list。
 
+用 `kb_implications` 留下一條之後可機械化搜尋的 item granularity 訊號。不要新增
+top-level 欄位。請加入剛好一條以 `item_granularity: <value> - ...` 開頭的
+bullet，依目前證據選最適合的值：
+
+- `simple_part` - 一個主要實體零件，合理上可由 stock 或 bulk material 透過一個
+  主要製造路徑做出。
+- `assembly` - 多個實體零件組合而成，之後大概需要 sub-BOM 或 assembly recipe。
+- `purchased_module` - vendor functional module 或 calibrated subsystem，例如
+  laser module、sensor head、pump、controller；在 sub-BOM 和 calibration workflow
+  被建模前，應先視為 purchased/imported。
+- `consumable` - 可替換的操作或維護耗材，例如 seal、filter、lubricant、
+  adhesive、cable tie。
+- `raw_material_or_stock` - stock material、bulk material、fastener stock、sheet、
+  bar、tube、wire，或其他類似 feedstock 的 row。
+- `unknown` - row identity 太模糊，無法給出有用的 granularity。
+
+這只是 planning hint，不是 hard schema claim。如果一個 row 可能符合多個值，選最能
+預測之後 KB 應如何建模的那個，並在 dash 後面說明模糊點。
+
 欄位語意：
 
 - `source.cited_fact_or_basis`：只寫 source facts。包含引用 URL、檔案、CAD

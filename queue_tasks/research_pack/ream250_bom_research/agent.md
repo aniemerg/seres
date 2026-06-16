@@ -349,6 +349,28 @@ material limitations that still affect the final material value belong under
 `mass.uncertainty_notes`, and inferred fabrication routes belong under
 `how_to_make.assumptions` or `how_to_make.uncertainty_notes`.
 
+Use `kb_implications` to leave one machine-searchable item granularity signal for
+later KB modeling. Do not add a new top-level field. Include exactly one bullet
+starting with `item_granularity: <value> - ...`, choosing the best current value:
+
+- `simple_part` - one main physical part that can plausibly be made from stock
+  or bulk material by one dominant fabrication route.
+- `assembly` - multiple physical parts joined together, with an eventual sub-BOM
+  or assembly recipe likely needed.
+- `purchased_module` - vendor functional module or calibrated subsystem, such as
+  a laser module, sensor head, pump, controller, or other item that should be
+  treated as purchased/imported until a sub-BOM and calibration workflow are
+  modeled.
+- `consumable` - replaceable operating or maintenance item such as a seal,
+  filter, lubricant, adhesive, or cable tie.
+- `raw_material_or_stock` - stock material, bulk material, fastener stock, sheet,
+  bar, tube, wire, or other feedstock-like row.
+- `unknown` - the row identity is too ambiguous to assign a useful granularity.
+
+Keep this as a planning hint, not a hard schema claim. If the row could fit more
+than one value, choose the one that best predicts how the KB should model it
+next; explain the ambiguity after the dash.
+
 Field semantics:
 
 - `source.cited_fact_or_basis`: source facts only. Include what the cited URL,
