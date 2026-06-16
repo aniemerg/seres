@@ -192,12 +192,18 @@ def build_tasks(
             "quantity": (row.get("Qty") or "").strip(),
             "cad_file": cad_file,
             "description_or_product_id": (row.get("Description / Product ID") or "").strip(),
+            "bom_description_or_product_id": (row.get("Description / Product ID") or "").strip(),
             "manufacturer": (row.get("Manufacturer") or "").strip(),
+            "bom_manufacturer": (row.get("Manufacturer") or "").strip(),
             "third_party_link_url": (row.get("Link URL") or "").strip(),
+            "bom_link_url": (row.get("Link URL") or "").strip(),
             "subsystem_suggested": (row.get("Subsystem (suggested)") or "").strip(),
             "material_family_hint": (row.get("Material family") or "").strip(),
+            "bom_material_family": (row.get("Material family") or "").strip(),
             "specific_material_grade_hint": (row.get("Specific material / grade") or "").strip(),
+            "bom_specific_material_grade": (row.get("Specific material / grade") or "").strip(),
             "notes_from_gold_csv": (row.get("Notes") or "").strip(),
+            "bom_notes": (row.get("Notes") or "").strip(),
             "raw_row_text": (row.get("Raw row text") or "").strip(),
             "canonical_step_path": canonical_path,
             "alternate_step_paths": (manifest_row.get("alternate_step_paths") or "").strip(),
@@ -210,16 +216,19 @@ def build_tasks(
             "cad_sha256": cad_hash,
             "cad_evidence_limited": (manifest_row.get("export_status") or "").strip()
             not in {"matched_existing"},
-            "required_outputs": ["function", "mass", "material", "how_to_make"],
+            "required_outputs": ["row_identity", "function", "mass", "material", "how_to_make"],
             "output_path": str(output_path),
             "output_validator": str(VALIDATOR),
             "done_criteria": (
                 "Write the result to output_path. Include YAML frontmatter with "
-                "function, mass, material, and how_to_make sections; each section "
-                "must include its own source object with an evidence_basis plus "
-                "section-local assumptions and uncertainty_notes lists. Validate "
-                "the result and complete the queue task with --require-output "
-                "--validate-output."
+                "row_identity first. row_identity must contain item, cad_file, "
+                "source_row_number, source_csv, and link_url when the BOM row "
+                "has a Link URL. Then include "
+                "function, mass, material, and how_to_make sections; each "
+                "research section must include its own source object with an "
+                "evidence_basis plus section-local assumptions and "
+                "uncertainty_notes lists. Validate the result and complete the "
+                "queue task with --require-output --validate-output."
             ),
         }
         if cad_metadata is not None:

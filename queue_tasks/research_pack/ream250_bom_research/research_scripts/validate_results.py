@@ -7,6 +7,7 @@ system. It accepts JSON, YAML, or Markdown files with YAML frontmatter.
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import re
 from pathlib import Path
@@ -16,20 +17,39 @@ import yaml
 
 
 REQUIRED_SECTIONS = ("function", "mass", "material", "how_to_make")
+REQUIRED_ROW_IDENTITY_FIELDS = (
+    "item",
+    "cad_file",
+    "source_row_number",
+    "source_csv",
+)
+OPTIONAL_ROW_IDENTITY_FIELDS = ("link_url",)
+ROW_IDENTITY_ALLOWED_FIELDS = set(REQUIRED_ROW_IDENTITY_FIELDS) | set(OPTIONAL_ROW_IDENTITY_FIELDS)
+EXPECTED_SOURCE_CSV = "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
 SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "evidence_basis")
 SECTION_LIST_FIELDS = ("assumptions", "uncertainty_notes")
 TOP_LEVEL_LIST_FIELDS = ("kb_implications",)
 EVIDENCE_BASIS_VALUES = (
-    "bom_row",
-    "vendor_spec",
-    "cad_or_local_metadata",
+    "bom_provided",
+    "independent_vendor_spec",
     "standard_part_convention",
     "engineering_hypothesis",
     "unresolved",
 )
 EVIDENCE_BASIS_SET = set(EVIDENCE_BASIS_VALUES)
+RELIABILITY_ORDER = (
+    "bom_provided",
+    "independent_vendor_spec",
+    "standard_part_convention",
+    "engineering_hypothesis",
+)
 ASSUMED_MATERIAL_RE = re.compile(
     r"\b(assumed|assumption|guess|guessed|likely|suggests?|conservative)\b",
+    re.IGNORECASE,
+)
+UNRESOLVED_MATERIAL_RE = re.compile(r"\bunresolved\b", re.IGNORECASE)
+STANDARD_BASIS_RE = re.compile(
+    r"\b(standard|designation|parameter|suffix|class|family|DIN|ISO|SKF|SMC|complete|incomplete)\b",
     re.IGNORECASE,
 )
 
@@ -62,6 +82,28 @@ def load_markdown_frontmatter(text: str, path: Path) -> Dict[str, Any]:
 
 def validate_result(data: Dict[str, Any]) -> List[str]:
     issues: List[str] = []
+    first_key = next(iter(data), None)
+    if first_key != "row_identity":
+        issues.append("row_identity must be the first top-level frontmatter key")
+    row_identity = data.get("row_identity")
+    if not isinstance(row_identity, dict):
+        issues.append("missing required object section: row_identity")
+    else:
+        for field in REQUIRED_ROW_IDENTITY_FIELDS:
+            if row_identity.get(field) in (None, ""):
+                issues.append(f"missing required field: row_identity.{field}")
+        for field in row_identity:
+            if field not in ROW_IDENTITY_ALLOWED_FIELDS:
+                issues.append(f"unexpected field in row_identity: {field}")
+        if "link_url" in row_identity and row_identity.get("link_url") in (None, ""):
+            issues.append("row_identity.link_url must be non-empty when present")
+        if row_identity.get("source_csv") != EXPECTED_SOURCE_CSV:
+            issues.append(
+                "row_identity.source_csv must be "
+                f"{EXPECTED_SOURCE_CSV!r}"
+            )
+        issues.extend(validate_row_identity_link_url(row_identity))
+
     for section_name in REQUIRED_SECTIONS:
         section = data.get(section_name)
         if not isinstance(section, dict):
@@ -69,6 +111,7 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
             continue
         issues.extend(validate_source(section, section_name))
         issues.extend(validate_section_lists(section, section_name))
+        issues.extend(validate_no_duplicate_section_notes(section, section_name))
 
     mass = data.get("mass") if isinstance(data.get("mass"), dict) else {}
     value_kg = mass.get("value_kg")
@@ -94,6 +137,11 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
                 "material.primary_material must be sourced or broad/unknown; "
                 "do not encode assumed specific materials"
             )
+        if UNRESOLVED_MATERIAL_RE.search(primary_material):
+            issues.append(
+                "material.primary_material must not contain 'unresolved'; "
+                "use a defensible broad engineering_hypothesis or 'unknown material'"
+            )
     if not how_to_make.get("summary"):
         issues.append("missing required field: how_to_make.summary")
     if "manufacturing_steps" not in how_to_make:
@@ -110,6 +158,40 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
     return issues
 
 
+def validate_row_identity_link_url(row_identity: Dict[str, Any]) -> List[str]:
+    source_csv = row_identity.get("source_csv")
+    source_row_number = row_identity.get("source_row_number")
+    if source_csv != EXPECTED_SOURCE_CSV:
+        return []
+    try:
+        row_number = int(source_row_number)
+    except (TypeError, ValueError):
+        return []
+
+    csv_path = Path(source_csv)
+    if not csv_path.exists():
+        return []
+
+    try:
+        with csv_path.open(newline="", encoding="utf-8") as f:
+            for line_number, row in enumerate(csv.DictReader(f), start=2):
+                if line_number != row_number:
+                    continue
+                expected = (row.get("Link URL") or "").strip()
+                if not expected:
+                    return []
+                actual = row_identity.get("link_url")
+                if actual != expected:
+                    return [
+                        "row_identity.link_url must match BOM Link URL "
+                        f"{expected!r} when the BOM row has one"
+                    ]
+                return []
+    except OSError as exc:
+        return [f"could not read row_identity.source_csv for link_url check: {exc}"]
+    return []
+
+
 def validate_section_lists(section: Dict[str, Any], path: str) -> List[str]:
     issues = []
     for field in SECTION_LIST_FIELDS:
@@ -117,6 +199,37 @@ def validate_section_lists(section: Dict[str, Any], path: str) -> List[str]:
             issues.append(f"missing required field: {path}.{field}")
         elif not isinstance(section.get(field), list):
             issues.append(f"{path}.{field} must be a list")
+    return issues
+
+
+def normalize_note_text(value: Any) -> str:
+    return " ".join(str(value).strip().lower().split())
+
+
+def validate_no_duplicate_section_notes(section: Dict[str, Any], path: str) -> List[str]:
+    seen: Dict[str, str] = {}
+    issues: List[str] = []
+    source = section.get("source") if isinstance(section.get("source"), dict) else {}
+    cited = source.get("cited_fact_or_basis")
+    entries: List[tuple[str, Any]] = [("source.cited_fact_or_basis", cited)]
+    for field in SECTION_LIST_FIELDS:
+        values = section.get(field)
+        if isinstance(values, list):
+            entries.extend((f"{field}[]", value) for value in values)
+
+    for label, value in entries:
+        if value in (None, ""):
+            continue
+        normalized = normalize_note_text(value)
+        if not normalized:
+            continue
+        if normalized in seen:
+            issues.append(
+                f"{path}.{label} duplicates {path}.{seen[normalized]}; "
+                "do not repeat the same fact across source, assumptions, and uncertainty_notes"
+            )
+        else:
+            seen[normalized] = label
     return issues
 
 
@@ -137,6 +250,16 @@ def validate_source(section: Dict[str, Any], path: str) -> List[str]:
             f"{path}.source.evidence_basis must be one of: "
             f"{', '.join(EVIDENCE_BASIS_VALUES)}"
         )
+    if (
+        isinstance(evidence_basis, str)
+        and evidence_basis.strip().lower() == "standard_part_convention"
+    ):
+        cited = str(source.get("cited_fact_or_basis") or "")
+        if not STANDARD_BASIS_RE.search(cited):
+            issues.append(
+                f"{path}.source.cited_fact_or_basis must explain standard/designation "
+                "parameter completeness when evidence_basis is standard_part_convention"
+            )
     return issues
 
 

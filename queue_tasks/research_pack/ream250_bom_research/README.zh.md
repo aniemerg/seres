@@ -37,7 +37,10 @@ queue 裡的任務應該符合：
 這只會替換 ID 以 `research_task:ream250_bom_row_` 開頭的既有 queue entries。
 
 CAD 幾何資料刻意由 agent 在 lease 到特定 row 後才讀取。`--extract-cad-metadata`
-只用於離線診斷，不作為正常 research queue run 的流程。
+只用於離線診斷，不作為正常 research queue run 的流程。把 CAD-derived values
+寫進結果時，要先做合理 rounding：小零件 volume 約保留到 0.001 mm^3，
+bounding-box dimensions 約保留到 0.01 mm，mass 則依 row 尺度保留合理精度；
+除非會改變解讀，不要貼過長的 floating-point precision。
 
 Agent 也應該把 lease 到的 canonical STEP 檔 render 成一張 compact 2x2 contact
 sheet，用於視覺初篩：
@@ -60,20 +63,80 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 
 - 先用 BOM + manifest 鎖定 row identity。Web/vendor 證據只能補這個 identity
   的缺漏屬性，不應把 row 重新解讀成另一個產品。
-- 如果 BOM row 直接寫出該值，使用 `bom_row`，不要為了反查而上網質疑它。
-- 只有在 BOM/CAD/本地證據沒有直接解決該值，或本地證據是 placeholder/generic/
-  conflict 時，才用 vendor/web research 補資料。
+- 將 BOM row 欄位、manifest、隨 BOM 提供的 CAD/STEP package、從該 package
+  抽出的 local metadata、rendered CAD previews，以及 BOM context 中提供的
+  vendor/product URL 視為同一種證據類別：`bom_provided`。
+- 只有在 BOM-side evidence 沒有直接解決該值，或 BOM-side evidence 是
+  placeholder/generic/conflicting 時，才使用 independent vendor/web research
+  補資料。
+- 由 BOM-provided URL 推導出的 row-matched 官方 canonical replacement 仍屬於
+  BOM-side evidence，不要降級成 independent research。
+- 如果一個 section 的值同時依賴多種證據類別，`evidence_basis` 使用該結論所需
+  來源中可靠度最低的類別。
 
 `evidence_basis` 標籤：
 
-允許的 `evidence_basis` 是證據來源類型，不是全域真實性排名：
+允許的 `evidence_basis` 依可靠度由高到低排列：
 
-- BOM row 本身寫出該值 -> `bom_row`
-- vendor/catalog/drawing/product page 明確寫出 matched product 的該值 -> `vendor_spec`
-- FreeCAD geometry、STEP metadata、CAD preview、manifest 或本地抽取資料支持該值 -> `cad_or_local_metadata`
-- DIN/ISO/SKF/SMC 等 designation 或標準件類型支持該值 -> `standard_part_convention`
+- BOM-side supplied evidence 寫出或量測該值 -> `bom_provided`
+- Agent 自行上網搜尋取得 vendor/catalog/drawing/product-page fact -> `independent_vendor_spec`
+- DIN/ISO/SKF/SMC 等 designation 或標準件類型支持該 fact -> `standard_part_convention`
 - 根據功能、裝配脈絡、可見形狀或製造路徑推論 -> `engineering_hypothesis`
-- 已檢查的證據仍不支持可靠值 -> `unresolved`
+- 已檢查的證據連可防衛的 broad engineering hypothesis 都不支持 -> `unresolved`
+
+對 mass 來說，有做算術不會自動降低 evidence class。如果 mass 是由
+BOM-provided CAD/STEP volume 和 BOM-provided material identity 計算得到，仍然是
+`bom_provided`。當材料 grade/family 已由 BOM-side evidence 確認後，該材料的
+standard/common density 只是計算常數，不算另一種 evidence class；把 density
+值寫在 `mass.basis` 或 `mass.assumptions`，但不要只為了決定
+`evidence_basis` 而加入 generic density datasheet。若 BOM-provided
+multi-material part 的 CAD 是 single solid，只要 component materials 和 total
+CAD volume 都來自 BOM-side evidence，近似 effective density 或未解析的
+material volume split 是 mass-estimation assumption，不是另一種 evidence
+class。此時保持 `mass.source.evidence_basis: bom_provided`，並把 split /
+effective-density 限制寫進 `mass.assumptions` 和 `mass.uncertainty_notes`。
+只有在 mass 使用的 material identity、geometry、product identity，或其他物理
+輸入不是由 BOM-side evidence 解析時，才降到較低標籤。
+
+常見材料密度先查本地 `kb/materials/properties.yaml`，不要直接上網找。若
+BOM-side material 已解析且能對應到本地密度表，density 視為 calculation
+constant，mass 的 evidence class 由 BOM-side material 與 CAD/STEP evidence
+決定。不要為 stainless steel、aluminum、steel、copper、brass、NBR、FKM、
+silicone rubber 這類常見密度額外加入外部 datasheet。
+
+對 `standard_part_convention`，必須在 `cited_fact_or_basis` 說明參數完整度。
+只有標準件 family 通常只能支持 broad function 或 interface；除非 designation、
+suffix、class 或引用的 convention 編碼了材質，否則不能用它支持 material。
+
+只要 row identity、幾何、標準件 family 或功能能支持可防衛的 broad conclusion，
+就優先用保守的 `engineering_hypothesis`，不要用 `unresolved`。材料欄不要寫
+`unresolved ...`；改寫 broad hypothesized family，例如 `elastomer seal material`
+或 `unknown metal/alloy`，並設 `evidence_basis: engineering_hypothesis`。
+
+Vendor/product page 解析規則：
+
+- 要跟隨 redirect 並引用最後載入的 URL。只要原 URL 來自 BOM context，
+  redirect 後頁面取得的 fact 仍是 `bom_provided`。
+- Pfeiffer Vacuum 舊商品 URL，例如
+  `https://www.pfeiffer-vacuum.com/.../shop/products/<product_id>`，若回
+  HTTP 403/406 或 challenge page，不能直接判定 BOM-provided URL 失敗。
+  要先試官方 Busch Group canonical URL
+  `https://www.shop.buschgroup.com/global/en/products/<product_id>/`，再做
+  independent search。若該頁符合 BOM product ID 或 legacy number，引用該
+  final URL，且 `evidence_basis` 保持 `bom_provided`。
+- 如果官方 canonical page 很大或 minified，不要因為 broad scan 很慢就放棄。
+  應針對 product ID、legacy number、material 欄位、材料詞、part-family nouns
+  和 download links 抽 snippet。不要只因為 independent PDF/catalog 比較好 parse，
+  就用它取代 row-matched BOM-provided/canonical source。
+- 不要只找 `Material:` 這種表格欄位。宣稱 material 未解析前，必須掃過 page
+  title/H1、breadcrumbs、Product Information bullets、overview bullets、
+  collapsed accordions、downloads、snippets、technical tables。
+- 保留 component material wording，例如 `aluminum outer ring` 或 `NBR`；
+  不要把 assembly 強行壓成單一材質。
+- 如果 BOM-provided URL 沒解析出值，搜尋 query 要放寬，結合 manufacturer、
+  product ID、BOM/CAD row name、part-family nouns，以及 `material`、
+  `body material`、`seal material`、`datasheet`、`catalog`、`drawing`、
+  `technical data` 等詞。
 
 租任務時使用 hard filters：
 
@@ -92,8 +155,12 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 
 ```bash
 cd /home/eastrolinux/seres
-codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
+codex --search -C /home/eastrolinux/seres -s danger-full-access -a on-request
 ```
+
+這個任務需要 local DNS/network 來讀 vendor pages。在目前 Codex 環境中，
+`workspace-write` 可能讓 local `curl`/DNS 在連到商品頁前就失敗。
+只有做 local-only debugging 時才使用 `workspace-write`。
 
 進入 Codex 後貼：
 
@@ -114,19 +181,37 @@ Read queue_tasks/research_pack/ream250_bom_research/agent.md and follow it as re
 task-local runner；它每一小批都會啟動新的 `codex exec`，所以 context 不會
 在整份 BOM 期間持續累積。
 
-保守預設：
+標準 bounded run：
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 2 \
+  --max-items 3 \
+  --max-batches 1
+```
+
+這最多會跑 `2 * 3 * 1 = 6` rows：
+
+- `--workers 2` 啟動兩個平行 worker loop。
+- `--max-items 3` 讓每個新的 Codex session 最多處理 3 筆 leased rows。
+- `--max-batches 1` 讓每個 worker 最多啟動 1 個新的 Codex session。
+
+runner 預設使用 `--codex-sandbox danger-full-access`，因為 web research rows
+需要 local DNS/network access。只有 no-network/local-only run 才用
+`--codex-sandbox workspace-write` 覆蓋。
+
+多行 shell command 每個續行都要保留結尾的 `\`。如果 `--max-items 3` 後面少了
+`\`，shell 會先用沒有 `--max-batches` 的參數啟動 runner，然後把
+`--max-batches 1` 當成另一個命令。
+
+單 worker 跑到 queue 空：
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
 ```
 
-兩個 worker，每個新的 Codex session 最多處理 3 rows：
-
-```bash
-queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
-  --workers 2 \
-  --max-items 3
-```
+這會使用 script 預設值：一個 worker、每個新的 Codex session 最多 3 rows、沒有
+batch 數量限制。它會持續執行，直到沒有 matching pending queue items。
 
 先測一個 Codex session：
 
@@ -176,11 +261,29 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batche
 runner prompt 會要求 agent 在重新檢查證據後覆寫既有 output file。若你是在測試
 是否真的重寫，請檢查檔案 mtime，或看 log 裡是否有實際寫檔動作。
 
-用一行 shell loop 重跑前三筆 smoke-test 結果：
+`queue release --id` 一次只接受一個 id，runner 的 `--id-prefix` 一次也只接受
+一個 prefix。如果要重跑多個精確 row，請用完整 queue id 做 loop，每個 id 跑
+一次單筆 batch：
 
 ```bash
-for id in research_task:ream250_bom_row_0308_174 research_task:ream250_bom_row_0195_6Q research_task:ream250_bom_row_0380_4122; do .venv/bin/python -m src.cli queue release --id "$id" --agent rerun-targeted && queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 1 --max-items 1 --max-batches 1 --id-prefix "$id"; done
+for id in \
+  research_task:ream250_bom_row_0117_3F \
+  research_task:ream250_bom_row_0144_3R2
+do
+  .venv/bin/python -m src.cli queue release \
+    --id "$id" \
+    --agent rerun-targeted
+
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+    --workers 1 \
+    --max-items 1 \
+    --max-batches 1 \
+    --id-prefix "$id"
+done
 ```
+
+不要為了指定重跑使用太寬的共用 prefix，例如
+`research_task:ream250_bom_row_01`，因為它可能 lease 到不相關的 pending rows。
 
 ### Runner 風險
 
@@ -209,7 +312,17 @@ for id in research_task:ream250_bom_row_0308_174 research_task:ream250_bom_row_0
   --dir research/ream250_bom
 ```
 
-驗證器會檢查 `function`、`mass`、`material`、`how_to_make` 是否各自有
+驗證器會檢查 frontmatter 第一個 top-level key 是否為 `row_identity`。這個
+section 只保留最小 BOM row identity，再進入任何解讀。這裡只能包含以下 keys：
+
+- `item`
+- `cad_file`
+- `source_row_number`
+- `source_csv`: `design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv`
+- `link_url`：只有 BOM row 有 Link URL 時才放；這是 BOM 表格上的原始 Link
+  URL，不是 redirect/canonical 後的 final vendor URL。
+
+驗證器也會檢查 `function`、`mass`、`material`、`how_to_make` 是否各自有
 source object，且包含：
 
 - `url_or_path`
@@ -225,6 +338,46 @@ source object，且包含：
 `material.uncertainty_notes`，CAD 密度造成的質量 caveat 放在
 `mass.uncertainty_notes`，製造路徑推論放在 `how_to_make.assumptions` 或
 `how_to_make.uncertainty_notes`。`kb_implications` 保持 top-level list。
+
+欄位語意：
+
+- `source.cited_fact_or_basis`：只寫 source facts。包含引用 URL、檔案、CAD
+  measurement、local metadata extractor，或 standard table 直接寫出/量測到的
+  內容。不要寫解讀、猜測、caveat，或該事實為何不完整。
+- `assumptions`：只寫把 facts 轉成該 section value 時採用的額外 modeling
+  premises。這是模型選擇，不是 source fact。可用於單位解讀、代表性密度選擇、
+  effective-density 選擇、把 single-solid CAD volume 當 proxy，或推論製造路徑。
+  若除了 cited facts 外不需要額外前提，使用 `[]`。
+- `uncertainty_notes`：只寫套用 facts 和 assumptions 後仍剩下的限制或風險。
+  這不是記錄每個 failed lookup 的 audit log。只有在移除該 note 會讓下游讀者
+  over-trust、over-specify 或 misuse 這個 section value 時才寫。failed check、
+  missing field、rejected source、redirect/blocking detail 只有在仍對 final value
+  造成真實限制時才列。沒有明顯殘餘限制就用 `[]`。
+
+不要在這三個欄位用不同用字重複同一件事。fact 放在
+`cited_fact_or_basis`；使用該 fact 的 modeling premise 放在 `assumptions`；
+剩下的後果或風險放在 `uncertainty_notes`。
+
+section value 已經解析時，不要把 non-contributing source/audit details 列成
+uncertainty。通常應省略的例子包括：BOM material 欄位空白、被拒絕的
+Generic/density-1000 CAD metadata、row-matched canonical source 成功後原 URL
+HTTP 403，以及「No catalog mass was found」。只保留真的影響下游使用的後果，
+例如 multi-material mass estimate 裡的材料體積比例沒有被單獨量測。
+
+Mass 範例：
+
+- 好的 `cited_fact_or_basis`：「FreeCAD measured 5586.124 mm^3；BOM-provided
+  vendor page states aluminum and NBR；local density table lists aluminum and NBR
+  densities。」
+- 好的 `assumptions`：「The single-solid STEP volume is used as a coarse
+  combined material-volume proxy because the CAD does not expose separate
+  aluminum and NBR regions。」
+- 好的 `uncertainty_notes`：「The aluminum-to-NBR volume fraction is not
+  measured separately, so the mass remains an effective-density estimate。」
+- 不好的 `assumptions`：「The STEP volume is millimeter-based。」這是 unit/fact
+  basis，應放在 `mass.basis` 或 `source.cited_fact_or_basis`。
+- 不好的 `uncertainty_notes`：不會改變下游讀者如何 trust、specify 或 use 該
+  section value 的 non-contributing audit detail。
 
 ## 完成任務
 

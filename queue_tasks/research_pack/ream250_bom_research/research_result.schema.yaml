@@ -5,6 +5,7 @@ format:
   note: "Markdown result files must start with YAML frontmatter containing this structure."
 
 required:
+  - row_identity
   - function
   - mass
   - material
@@ -12,6 +13,16 @@ required:
   - kb_implications
 
 sections:
+  row_identity:
+    note: "Must be the first top-level key in the YAML frontmatter. Keep this minimal: Item, CAD file, source_row_number, source_csv, and link_url only when the BOM row has a Link URL."
+    required:
+      - item
+      - cad_file
+      - source_row_number
+      - source_csv
+    optional_when_present_in_bom:
+      - link_url
+    source_csv_value: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
   function:
     required:
       - summary
@@ -55,12 +66,15 @@ sections:
       - cited_fact_or_basis
       - evidence_basis
 
-recommended:
-  evidence_basis_note: "Source type, not a global truth ranking. See README.md and agent.md for decision order."
+semantics:
+  note: "This schema is the structural contract. Detailed writing and evidence-decision rules live in agent.md."
+  cited_fact_or_basis: "Source facts only: what the cited URL/file/CAD measurement/local extractor/standard table directly says or measures."
+  assumptions: "Modeling premises adopted to transform source facts into the section value; use [] when none are needed."
+  uncertainty_notes: "Residual limitations or risks that affect downstream trust, specification, or use of the section value; not an audit log; use [] when none remain."
+  evidence_basis: "Evidence class label for the section source; use one of evidence_basis_values. Decision rules live in agent.md."
   evidence_basis_values:
-    - bom_row
-    - vendor_spec
-    - cad_or_local_metadata
+    - bom_provided
+    - independent_vendor_spec
     - standard_part_convention
     - engineering_hypothesis
     - unresolved

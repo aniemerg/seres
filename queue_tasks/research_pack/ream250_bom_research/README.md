@@ -41,7 +41,10 @@ This replaces only existing queue entries whose IDs start with
 
 CAD geometry is intentionally read by the agent after it leases a specific row.
 Use `--extract-cad-metadata` only for offline diagnostics, not for the normal
-research queue run.
+research queue run. When writing CAD-derived values into the result, round volume
+to about 0.001 mm^3 for small parts, bounding-box dimensions to about 0.01 mm,
+and mass to a precision appropriate for the row scale; do not paste excessive
+floating-point precision unless it changes the interpretation.
 
 Agents should also render the leased row's canonical STEP file to one compact
 2x2 contact sheet for visual triage:
@@ -64,22 +67,85 @@ Evidence decision order:
 - First lock row identity from BOM + manifest. Web/vendor evidence may fill
   missing attributes for that identity, but should not reinterpret the row as a
   different product.
-- If BOM row directly states the value, use `bom_row` and do not web-search just
-  to second-guess it.
-- Use vendor/web research when BOM/CAD/local evidence does not directly resolve
-  the needed value, or when local evidence is placeholder/generic/conflicting.
+- Treat BOM row fields, manifest data, the supplied CAD/STEP package, local
+  metadata extracted from that package, rendered CAD previews, and vendor/product
+  URLs supplied in the BOM context as one evidence class: `bom_provided`.
+- Use independent vendor/web research when BOM-side evidence does not directly
+  resolve the needed value, or when BOM-side evidence is placeholder/generic/
+  conflicting.
+- A row-matched official canonical replacement derived from a BOM-provided URL
+  is still BOM-side evidence. Do not downgrade it to independent research.
+- If a section value depends on multiple evidence classes, use the least reliable
+  evidence class needed for that conclusion.
 
 Evidence basis labels:
 
-Allowed `evidence_basis` values identify the source type; they are not a global
-truth ranking:
+Allowed `evidence_basis` values, in reliability order:
 
-- BOM row states the value -> `bom_row`
-- Vendor/catalog/drawing/product page states the value for the matched product -> `vendor_spec`
-- FreeCAD geometry, STEP metadata, CAD preview, manifest, or local extracted data supports it -> `cad_or_local_metadata`
-- DIN/ISO/SKF/SMC/etc. designation or standard part family supports it -> `standard_part_convention`
+- BOM-side supplied evidence states or measures the value -> `bom_provided`
+- Agent-initiated web search finds a vendor/catalog/drawing/product-page fact -> `independent_vendor_spec`
+- DIN/ISO/SKF/SMC/etc. designation or standard part family supports the fact -> `standard_part_convention`
 - Function, assembly context, visible shape, or manufacturing route inference -> `engineering_hypothesis`
-- Checked evidence does not support a reliable value -> `unresolved`
+- Checked evidence does not support even a defensible broad engineering hypothesis -> `unresolved`
+
+For mass, arithmetic does not by itself lower the evidence class. A value
+computed from BOM-provided CAD/STEP volume and BOM-provided material identity is
+still `bom_provided`. Once the material grade/family is resolved from BOM-side
+evidence, a standard/common density for that material is a calculation constant,
+not a separate evidence class; record the density value in `mass.basis` or
+`mass.assumptions`, but do not add a generic density datasheet solely to set
+`evidence_basis`. For a BOM-provided multi-material part with single-solid CAD,
+an approximate effective density or unresolved material volume split is a
+mass-estimation assumption, not a different evidence class, when the component
+materials and total CAD volume both come from BOM-side evidence. Keep
+`mass.source.evidence_basis: bom_provided` and put the split/effective-density
+limitation in `mass.assumptions` and `mass.uncertainty_notes`. Use a lower label
+only when the material identity, geometry, product identity, or other physical
+input used for the mass is not resolved by BOM-side evidence.
+
+For common material densities, check `kb/materials/properties.yaml` before web
+search. If the resolved BOM-side material maps to that local table, treat the
+density as a calculation constant and keep the mass evidence class determined by
+the BOM-side material and CAD/STEP evidence. Do not add an external density
+datasheet solely for common stainless steel, aluminum, steel, copper, brass,
+NBR, FKM, or silicone rubber densities.
+
+For `standard_part_convention`, record parameter completeness in
+`cited_fact_or_basis`. Standard family alone may support broad function or
+interface, but should not support material unless the designation, suffix, class,
+or cited convention encodes material.
+
+Prefer a conservative `engineering_hypothesis` over `unresolved` whenever the
+row identity, geometry, standard family, or function supports a broad conclusion.
+For material, do not write `unresolved ...` as the primary material; use a broad
+hypothesized family such as `elastomer seal material` or `unknown metal/alloy`
+with `evidence_basis: engineering_hypothesis`.
+
+Vendor/product page parsing rules:
+
+- Follow redirects and cite the final loaded URL. If the original URL came from
+  the BOM context, redirected-page facts are still `bom_provided`.
+- For Pfeiffer Vacuum legacy product URLs like
+  `https://www.pfeiffer-vacuum.com/.../shop/products/<product_id>`, HTTP 403/406
+  or a challenge page is not enough to conclude the BOM-provided URL failed.
+  Try the official Busch Group canonical URL
+  `https://www.shop.buschgroup.com/global/en/products/<product_id>/` before
+  independent search. If it matches the BOM product ID or legacy number, cite
+  that final URL and keep `evidence_basis: bom_provided`.
+- If the official canonical page is large or minified, extract targeted snippets
+  for the product ID, legacy number, material fields, material words, part-family
+  nouns, and download links instead of abandoning the canonical source. Do not
+  replace a row-matched BOM-provided/canonical source with an independent PDF or
+  catalog only because that source is easier to parse.
+- Scan page title/H1, breadcrumbs, Product Information bullets, overview bullets,
+  collapsed accordions, downloads, snippets, and technical tables before saying
+  material was not resolved.
+- Preserve component material wording such as `aluminum outer ring` or `NBR`;
+  do not collapse assemblies to a single material.
+- If the provided URL does not resolve a value, broaden queries using
+  manufacturer, product ID, BOM/CAD row name, part-family nouns, and terms such
+  as `material`, `body material`, `seal material`, `datasheet`, `catalog`,
+  `drawing`, and `technical data`.
 
 Lease with hard filters:
 
@@ -98,8 +164,12 @@ Open Codex from the repo root:
 
 ```bash
 cd /home/eastrolinux/seres
-codex --search -C /home/eastrolinux/seres -s workspace-write -a on-request
+codex --search -C /home/eastrolinux/seres -s danger-full-access -a on-request
 ```
+
+This task needs local DNS/network access for vendor pages. In the current Codex
+environment, `workspace-write` can make local `curl`/DNS fail before the agent
+reaches the product page. Use `workspace-write` only for local-only debugging.
 
 Then tell the agent:
 
@@ -121,19 +191,39 @@ For larger runs, use the task-local runner instead of manually clearing Codex or
 opening new terminals. The runner starts a fresh `codex exec` session for each
 small batch, so context does not accumulate across the whole BOM.
 
-Conservative default:
+Standard bounded run:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 2 \
+  --max-items 3 \
+  --max-batches 1
+```
+
+This runs at most `2 * 3 * 1 = 6` rows:
+
+- `--workers 2` starts two parallel worker loops.
+- `--max-items 3` lets each fresh Codex session process at most three leased rows.
+- `--max-batches 1` lets each worker start at most one fresh Codex session.
+
+The runner defaults to `--codex-sandbox danger-full-access` because web research
+rows need local DNS/network access. Override with
+`--codex-sandbox workspace-write` only for no-network/local-only runs.
+
+When writing the command across multiple lines, keep the trailing `\` on every
+continued line. If the `\` after `--max-items 3` is missing, the shell starts the
+runner without `--max-batches`, and `--max-batches 1` is treated as a separate
+command.
+
+Single-worker full run until queue empty:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
 ```
 
-Two workers, three rows per fresh Codex session:
-
-```bash
-queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
-  --workers 2 \
-  --max-items 3
-```
+This uses the script defaults: one worker, at most three rows per fresh Codex
+session, and no batch limit. It keeps running until no matching pending queue
+items remain.
 
 Smoke test one Codex session:
 
@@ -186,11 +276,29 @@ The runner prompt requires the agent to overwrite an existing output file after
 re-checking evidence. If you are testing that behavior, verify the file mtime or
 inspect the log for an actual file write.
 
-Rerun the first three completed smoke-test rows in one shell loop:
+`queue release --id` accepts one id at a time, and runner `--id-prefix` accepts
+one prefix at a time. To rerun multiple exact rows, loop over complete queue ids
+and run one single-item batch per id:
 
 ```bash
-for id in research_task:ream250_bom_row_0308_174 research_task:ream250_bom_row_0195_6Q research_task:ream250_bom_row_0380_4122; do .venv/bin/python -m src.cli queue release --id "$id" --agent rerun-targeted && queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --workers 1 --max-items 1 --max-batches 1 --id-prefix "$id"; done
+for id in \
+  research_task:ream250_bom_row_0117_3F \
+  research_task:ream250_bom_row_0144_3R2
+do
+  .venv/bin/python -m src.cli queue release \
+    --id "$id" \
+    --agent rerun-targeted
+
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+    --workers 1 \
+    --max-items 1 \
+    --max-batches 1 \
+    --id-prefix "$id"
+done
 ```
+
+Avoid using a shared broad prefix such as `research_task:ream250_bom_row_01` for
+targeted reruns because it can lease unrelated pending rows.
 
 ### Runner Risks
 
@@ -221,7 +329,18 @@ Validate a directory:
   --dir research/ream250_bom
 ```
 
-The validator checks that `function`, `mass`, `material`, and `how_to_make`
+The validator checks that the first top-level frontmatter key is `row_identity`.
+This section must preserve only the minimal BOM table identity before
+interpretation. It must contain only these keys:
+
+- `item`
+- `cad_file`
+- `source_row_number`
+- `source_csv`: `design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv`
+- `link_url`: include only when the BOM row has a Link URL; this is the original
+  BOM table Link URL, not the redirected/canonical final vendor URL.
+
+The validator also checks that `function`, `mass`, `material`, and `how_to_make`
 each have their own source object containing:
 
 - `url_or_path`
@@ -236,6 +355,51 @@ Those same sections must also each contain section-local lists:
 Use section-local notes so material uncertainty stays under `material`, CAD mass
 caveats stay under `mass`, and fabrication-route assumptions stay under
 `how_to_make`. `kb_implications` remains a top-level list.
+
+Field semantics:
+
+- `source.cited_fact_or_basis`: source facts only. Include what the cited URL,
+  file, CAD measurement, local metadata extractor, or standard table directly
+  says/measures. Do not include interpretations, guesses, caveats, or why the
+  fact might be incomplete.
+- `assumptions`: premises adopted to transform facts into the section value.
+  These are chosen modeling choices, not source facts. Use this for unit
+  interpretation, representative density choices, effective-density choices,
+  using a single-solid CAD volume as a proxy, or an inferred manufacturing route.
+  Use `[]` when no extra premise was needed beyond the cited facts.
+- `uncertainty_notes`: residual limitations after applying the facts and
+  assumptions. This is not an audit log of every failed lookup. Write a note
+  only if removing it would make a downstream reader over-trust, over-specify,
+  or misuse the section value. Do not include a failed check, missing field,
+  rejected source, or redirect/blocking detail unless it still creates a real
+  limitation for the final value. Use `[]` when no meaningful residual
+  limitation remains.
+
+Avoid duplicated wording across these fields. A fact goes in
+`cited_fact_or_basis`; the modeling premise that uses that fact goes in
+`assumptions`; the remaining consequence or risk goes in `uncertainty_notes`.
+
+Do not list non-contributing source/audit details as uncertainties once the
+section value is already resolved. Examples that should usually be omitted:
+blank BOM material fields, rejected Generic/density-1000 CAD metadata, HTTP 403
+from the original URL after a row-matched canonical source succeeds, and "No
+catalog mass was found." Keep only the downstream consequence if it matters, such
+as an unresolved material-volume split in a multi-material mass estimate.
+
+Mass examples:
+
+- Good `cited_fact_or_basis`: "FreeCAD measured 5586.124 mm^3; the BOM-provided
+  vendor page states aluminum and NBR; the local density table lists aluminum
+  and NBR densities."
+- Good `assumptions`: "The single-solid STEP volume is used as a coarse combined
+  material-volume proxy because the CAD does not expose separate aluminum and
+  NBR regions."
+- Good `uncertainty_notes`: "The aluminum-to-NBR volume fraction is not measured
+  separately, so the mass remains an effective-density estimate."
+- Bad `assumptions`: "The STEP volume is millimeter-based." That is a unit/fact
+  basis, so put it in `mass.basis` or `source.cited_fact_or_basis`.
+- Bad `uncertainty_notes`: a non-contributing audit detail that does not change
+  how a downstream reader should trust, specify, or use the section value.
 
 ## Completion
 

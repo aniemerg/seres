@@ -14,6 +14,7 @@ max_batches=0
 ttl=7200
 log_dir=""
 codex_bin="${CODEX_BIN:-codex}"
+codex_sandbox="${CODEX_SANDBOX:-danger-full-access}"
 validate_at_end=0
 dry_run=0
 id_prefix="research_task:ream250_bom_row_"
@@ -35,6 +36,8 @@ Options:
   --ttl SECONDS         Queue lease TTL passed to the agent prompt. Default: 7200
   --log-dir PATH        Log directory. Default: out/ream250_bom_runner_logs
   --codex-bin PATH      Codex executable. Default: codex or $CODEX_BIN
+  --codex-sandbox MODE  Codex sandbox mode. Default: danger-full-access or $CODEX_SANDBOX
+                       Use workspace-write only for no-network/local-only runs.
   --id-prefix PREFIX    Queue id prefix for lease filtering.
                        Default: research_task:ream250_bom_row_
   --validate-at-end     Validate research/ream250_bom after all workers exit
@@ -104,6 +107,10 @@ while [[ $# -gt 0 ]]; do
       codex_bin="${2:-}"
       shift 2
       ;;
+    --codex-sandbox)
+      codex_sandbox="${2:-}"
+      shift 2
+      ;;
     --id-prefix)
       id_prefix="${2:-}"
       shift 2
@@ -131,6 +138,13 @@ is_positive_int "$max_items" || die "--max-items must be a positive integer"
 is_nonnegative_int "$max_batches" || die "--max-batches must be a nonnegative integer"
 is_positive_int "$ttl" || die "--ttl must be a positive integer"
 [[ -n "$id_prefix" ]] || die "--id-prefix must not be empty"
+case "$codex_sandbox" in
+  read-only|workspace-write|danger-full-access)
+    ;;
+  *)
+    die "--codex-sandbox must be one of: read-only, workspace-write, danger-full-access"
+    ;;
+esac
 
 repo_root="$(cd "$repo_root" && pwd)"
 [[ -d "$repo_root/.git" ]] || die "repo root does not contain .git: $repo_root"
@@ -238,7 +252,7 @@ run_one_batch() {
   set +e
   build_prompt "$agent_name" "$max_items" | (
     cd "$repo_root" &&
-    "$codex_bin" --search -a on-request exec -C "$repo_root" -s workspace-write -
+    "$codex_bin" --search -a on-request exec -C "$repo_root" -s "$codex_sandbox" -
   ) 2>&1 | tee "$log_file"
   status=${PIPESTATUS[1]}
   set -e
@@ -274,7 +288,7 @@ worker_loop() {
 
 if [[ "$dry_run" -eq 1 ]]; then
   echo "Repository: $repo_root"
-  echo "Command: $codex_bin --search -a on-request exec -C $repo_root -s workspace-write -"
+  echo "Command: $codex_bin --search -a on-request exec -C $repo_root -s $codex_sandbox -"
   echo
   build_prompt "$(printf "%s-%02d" "$agent_prefix" 1)" "$max_items"
   exit 0
@@ -284,6 +298,7 @@ command -v "$codex_bin" >/dev/null 2>&1 || die "codex executable not found: $cod
 
 echo "repo_root=$repo_root"
 echo "workers=$workers max_items=$max_items max_batches=$max_batches ttl=$ttl"
+echo "codex_sandbox=$codex_sandbox"
 echo "log_dir=$log_dir"
 
 if [[ "$workers" -eq 1 ]]; then
