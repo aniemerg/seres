@@ -4,6 +4,7 @@ set -euo pipefail
 TASK_DIR="queue_tasks/research_pack/ream250_bom_research"
 TASK_INSTRUCTIONS="$TASK_DIR/agent.md"
 TASK_VALIDATOR="$TASK_DIR/research_scripts/validate_results.py"
+TASK_OUTPUT_AUDIT="$TASK_DIR/research_scripts/audit_queue_outputs.py"
 DEFAULT_REPO_ROOT="/home/eastrolinux/seres"
 
 repo_root="${REPO_ROOT:-$DEFAULT_REPO_ROOT}"
@@ -17,9 +18,16 @@ codex_bin="${CODEX_BIN:-codex}"
 codex_model="${CODEX_MODEL:-}"
 codex_reasoning_effort="${CODEX_REASONING_EFFORT:-}"
 codex_sandbox="${CODEX_SANDBOX:-danger-full-access}"
+batch_timeout=0
 validate_at_end=0
 dry_run=0
 id_prefix="research_task:ream250_bom_row_"
+run_id="${REAM250_BOM_RUN_ID:-$(date +%Y%m%d_%H%M%S)_$$}"
+run_log=""
+run_events=""
+heartbeat_file=""
+status_dir=""
+heartbeat_pid=""
 
 usage() {
   cat <<'EOF'
@@ -44,9 +52,11 @@ Options:
                        Values: low, medium, high, xhigh. Default: $CODEX_REASONING_EFFORT or config default
   --codex-sandbox MODE  Codex sandbox mode. Default: danger-full-access or $CODEX_SANDBOX
                        Use workspace-write only for no-network/local-only runs.
+  --batch-timeout SECONDS
+                       Optional timeout per Codex exec batch. Default: 0, disabled
   --id-prefix PREFIX    Queue id prefix for lease filtering.
                        Default: research_task:ream250_bom_row_
-  --validate-at-end     Validate research/ream250_bom after all workers exit
+  --validate-at-end     Audit done queue outputs after all workers exit
   --dry-run             Print the first prompt and command, then exit
   -h, --help            Show this help
 
@@ -61,7 +71,7 @@ Examples:
   queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1
 
   # Smoke test one fresh Codex session with an explicit model.
-  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1 --codex-model gpt-5.3-spark
+  queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1 --codex-model gpt-5.3-codex-spark
 
   # Smoke test GPT-5.5 with medium reasoning.
   queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --max-batches 1 --codex-model gpt-5.5 --codex-reasoning-effort medium
@@ -131,6 +141,10 @@ while [[ $# -gt 0 ]]; do
       codex_sandbox="${2:-}"
       shift 2
       ;;
+    --batch-timeout)
+      batch_timeout="${2:-}"
+      shift 2
+      ;;
     --id-prefix)
       id_prefix="${2:-}"
       shift 2
@@ -157,6 +171,7 @@ is_positive_int "$workers" || die "--workers must be a positive integer"
 is_positive_int "$max_items" || die "--max-items must be a positive integer"
 is_nonnegative_int "$max_batches" || die "--max-batches must be a nonnegative integer"
 is_positive_int "$ttl" || die "--ttl must be a positive integer"
+is_nonnegative_int "$batch_timeout" || die "--batch-timeout must be a nonnegative integer"
 [[ -n "$id_prefix" ]] || die "--id-prefix must not be empty"
 case "$codex_reasoning_effort" in
   ""|low|medium|high|xhigh)
@@ -177,6 +192,7 @@ repo_root="$(cd "$repo_root" && pwd)"
 [[ -d "$repo_root/.git" ]] || die "repo root does not contain .git: $repo_root"
 [[ -f "$repo_root/$TASK_INSTRUCTIONS" ]] || die "missing task instructions: $TASK_INSTRUCTIONS"
 [[ -f "$repo_root/$TASK_VALIDATOR" ]] || die "missing task validator: $TASK_VALIDATOR"
+[[ -f "$repo_root/$TASK_OUTPUT_AUDIT" ]] || die "missing task output audit: $TASK_OUTPUT_AUDIT"
 [[ -x "$repo_root/.venv/bin/python" ]] || die "missing .venv/bin/python; run uv sync first"
 
 if [[ -z "$log_dir" ]]; then
@@ -185,6 +201,74 @@ elif [[ "$log_dir" != /* ]]; then
   log_dir="$repo_root/$log_dir"
 fi
 mkdir -p "$log_dir"
+run_log="$log_dir/run_${run_id}.log"
+run_events="$log_dir/run_${run_id}_events.tsv"
+heartbeat_file="$log_dir/run_${run_id}.heartbeat"
+status_dir="$log_dir/run_${run_id}_status"
+
+timestamp_utc() {
+  date -u +%Y-%m-%dT%H:%M:%SZ
+}
+
+log_event() {
+  local event="$1"
+  shift || true
+  {
+    printf "%s\t%s" "$(timestamp_utc)" "$event"
+    for field in "$@"; do
+      printf "\t%s" "$field"
+    done
+    printf "\n"
+  } >> "$run_events"
+}
+
+snapshot_queue() {
+  local label="$1"
+  (
+    cd "$repo_root"
+    .venv/bin/python -m src.cli queue ls > "$log_dir/run_${run_id}_queue_${label}.json"
+  ) || true
+}
+
+start_heartbeat() {
+  (
+    while true; do
+      printf "%s pid=%s ppid=%s\n" "$(timestamp_utc)" "$$" "$PPID" > "$heartbeat_file"
+      sleep 60
+    done
+  ) &
+  heartbeat_pid="$!"
+}
+
+stop_heartbeat() {
+  if [[ -n "${heartbeat_pid:-}" ]]; then
+    kill "$heartbeat_pid" >/dev/null 2>&1 || true
+    wait "$heartbeat_pid" >/dev/null 2>&1 || true
+    heartbeat_pid=""
+  fi
+}
+
+on_signal() {
+  local sig="$1"
+  trap - INT TERM HUP EXIT
+  log_event "signal" "signal=$sig" "pid=$$" "ppid=$PPID"
+  echo "runner received $sig; diagnostics are in $log_dir/run_${run_id}*"
+  snapshot_queue "signal_${sig}"
+  stop_heartbeat
+  case "$sig" in
+    INT) exit 130 ;;
+    TERM) exit 143 ;;
+    HUP) exit 129 ;;
+    *) exit 1 ;;
+  esac
+}
+
+on_exit() {
+  local status="$1"
+  log_event "runner_exit" "status=$status"
+  snapshot_queue "exit"
+  stop_heartbeat
+}
 
 queue_gc() {
   (
@@ -270,13 +354,19 @@ run_one_batch() {
   local batch_no="$2"
   local agent_name
   local log_file
+  local active_file
   local status
   local codex_cmd
+  local run_cmd
 
   agent_name="$(printf "%s-%02d" "$agent_prefix" "$worker_id")"
   log_file="$log_dir/${agent_name}_batch_$(printf "%04d" "$batch_no")_$(date +%Y%m%d_%H%M%S).log"
+  active_file="$status_dir/${agent_name}_batch_$(printf "%04d" "$batch_no").active"
 
   echo "[$agent_name] starting batch $batch_no; log: $log_file"
+  printf "started_at=%s\nagent=%s\nworker_id=%s\nbatch=%s\nlog_file=%s\n" \
+    "$(timestamp_utc)" "$agent_name" "$worker_id" "$batch_no" "$log_file" > "$active_file"
+  log_event "batch_start" "agent=$agent_name" "worker=$worker_id" "batch=$batch_no" "log_file=$log_file"
   codex_cmd=("$codex_bin" --search)
   if [[ -n "$codex_model" ]]; then
     codex_cmd+=(-m "$codex_model")
@@ -285,13 +375,19 @@ run_one_batch() {
     codex_cmd+=(-c "model_reasoning_effort=\"$codex_reasoning_effort\"")
   fi
   codex_cmd+=(-a on-request exec -C "$repo_root" -s "$codex_sandbox" -)
+  run_cmd=("${codex_cmd[@]}")
+  if [[ "$batch_timeout" -gt 0 ]]; then
+    run_cmd=(timeout --preserve-status "$batch_timeout" "${codex_cmd[@]}")
+  fi
   set +e
   build_prompt "$agent_name" "$max_items" | (
     cd "$repo_root" &&
-    "${codex_cmd[@]}"
+    "${run_cmd[@]}"
   ) 2>&1 | tee "$log_file"
   status=${PIPESTATUS[1]}
   set -e
+  log_event "batch_exit" "agent=$agent_name" "worker=$worker_id" "batch=$batch_no" "status=$status" "log_file=$log_file"
+  rm -f "$active_file"
 
   if [[ "$status" -ne 0 ]]; then
     echo "[$agent_name] codex exec failed with status $status; see $log_file" >&2
@@ -339,9 +435,24 @@ if [[ "$dry_run" -eq 1 ]]; then
 fi
 
 command -v "$codex_bin" >/dev/null 2>&1 || die "codex executable not found: $codex_bin"
+if [[ "$batch_timeout" -gt 0 ]]; then
+  command -v timeout >/dev/null 2>&1 || die "timeout executable not found; required by --batch-timeout"
+fi
+mkdir -p "$status_dir"
+exec > >(tee -a "$run_log") 2>&1
+trap 'on_signal INT' INT
+trap 'on_signal TERM' TERM
+trap 'on_signal HUP' HUP
+trap 'on_exit $?' EXIT
+start_heartbeat
 
 echo "repo_root=$repo_root"
 echo "workers=$workers max_items=$max_items max_batches=$max_batches ttl=$ttl"
+echo "run_id=$run_id"
+echo "run_log=$run_log"
+echo "run_events=$run_events"
+echo "heartbeat_file=$heartbeat_file"
+echo "status_dir=$status_dir"
 if [[ -n "$codex_model" ]]; then
   echo "codex_model=$codex_model"
 else
@@ -353,7 +464,10 @@ else
   echo "codex_reasoning_effort=(config default)"
 fi
 echo "codex_sandbox=$codex_sandbox"
+echo "batch_timeout=$batch_timeout"
 echo "log_dir=$log_dir"
+log_event "runner_start" "pid=$$" "ppid=$PPID" "repo_root=$repo_root" "workers=$workers" "max_items=$max_items" "max_batches=$max_batches" "ttl=$ttl" "id_prefix=$id_prefix" "codex_model=${codex_model:-config_default}" "codex_reasoning_effort=${codex_reasoning_effort:-config_default}" "codex_sandbox=$codex_sandbox" "batch_timeout=$batch_timeout"
+snapshot_queue "start"
 
 if [[ "$workers" -eq 1 ]]; then
   worker_loop 1
@@ -376,7 +490,7 @@ fi
 if [[ "$validate_at_end" -eq 1 ]]; then
   (
     cd "$repo_root"
-    .venv/bin/python "$TASK_VALIDATOR" --dir research/ream250_bom
+    .venv/bin/python "$TASK_OUTPUT_AUDIT"
   )
 fi
 

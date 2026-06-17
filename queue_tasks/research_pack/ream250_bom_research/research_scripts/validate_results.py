@@ -57,6 +57,12 @@ INDEPENDENT_SEARCH_ROUTE_RE = re.compile(
     r"\b(agent-initiated|independent (?:web )?search|searched|search result|found by web search)\b",
     re.IGNORECASE,
 )
+WEB_SEARCH_AUDIT_RE = re.compile(r"\btargeted_web_search\s*:", re.IGNORECASE)
+BOM_URL_ROUTE_AUDIT_RE = re.compile(r"\bbom_url_route_check\s*:", re.IGNORECASE)
+OFFICIAL_ALTERNATE_ROUTE_AUDIT_RE = re.compile(
+    r"\bofficial_alternate_route_check\s*:",
+    re.IGNORECASE,
+)
 
 
 def load_result(path: Path) -> Dict[str, Any]:
@@ -116,6 +122,7 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
             continue
         source_row_identity = row_identity if isinstance(row_identity, dict) else {}
         issues.extend(validate_source(section, section_name, source_row_identity))
+        issues.extend(validate_web_search_audit(section, section_name))
         issues.extend(validate_section_lists(section, section_name))
         issues.extend(validate_no_duplicate_section_notes(section, section_name))
 
@@ -268,11 +275,49 @@ def validate_source(section: Dict[str, Any], path: str, row_identity: Dict[str, 
             )
     if (
         isinstance(evidence_basis, str)
+        and evidence_basis.strip().lower() == "bom_provided"
+        and row_identity
+    ):
+        issues.extend(validate_bom_provided_source_route(section, path, row_identity))
+    if (
+        isinstance(evidence_basis, str)
         and evidence_basis.strip().lower() == "independent_vendor_spec"
         and row_identity
     ):
-        issues.extend(validate_independent_source_route(source, path, row_identity))
+        issues.extend(validate_independent_source_route(section, path, row_identity))
     return issues
+
+
+def section_evidence_text(section: Dict[str, Any]) -> str:
+    chunks: List[str] = []
+    source = section.get("source")
+    if isinstance(source, dict):
+        chunks.extend(str(source.get(field) or "") for field in SOURCE_FIELDS)
+    for field in SECTION_LIST_FIELDS:
+        values = section.get(field)
+        if isinstance(values, list):
+            chunks.extend(str(value) for value in values)
+    return " ".join(chunks)
+
+
+def validate_web_search_audit(section: Dict[str, Any], path: str) -> List[str]:
+    source = section.get("source")
+    if not isinstance(source, dict):
+        return []
+    evidence_basis = source.get("evidence_basis")
+    if not isinstance(evidence_basis, str):
+        return []
+    if evidence_basis.strip().lower() not in {"engineering_hypothesis", "unresolved"}:
+        return []
+
+    evidence_text = section_evidence_text(section)
+    if WEB_SEARCH_AUDIT_RE.search(evidence_text):
+        return []
+    return [
+        f"{path}.source.evidence_basis is {evidence_basis}; include a "
+        "`targeted_web_search:` note in this section listing the web queries "
+        "attempted and the result before using engineering_hypothesis or unresolved"
+    ]
 
 
 def extract_urls(text: str) -> List[str]:
@@ -291,10 +336,13 @@ def comparable_domain(url: str) -> str:
 
 
 def validate_independent_source_route(
-    source: Dict[str, Any],
+    section: Dict[str, Any],
     path: str,
     row_identity: Dict[str, Any],
 ) -> List[str]:
+    source = section.get("source")
+    if not isinstance(source, dict):
+        return []
     link_url = str(row_identity.get("link_url") or "").strip()
     if not link_url:
         return []
@@ -303,9 +351,7 @@ def validate_independent_source_route(
     if not bom_domain:
         return []
 
-    source_text = " ".join(
-        str(source.get(field) or "") for field in ("url_or_path", "cited_fact_or_basis")
-    )
+    source_text = section_evidence_text(section)
     source_urls = extract_urls(source_text)
     if not source_urls:
         return []
@@ -315,7 +361,15 @@ def validate_independent_source_route(
         if comparable_domain(url) == bom_domain
     ]
     if not same_domain_urls:
-        return []
+        if BOM_URL_ROUTE_AUDIT_RE.search(source_text):
+            return []
+        return [
+            f"{path}.source.evidence_basis is independent_vendor_spec and cites "
+            "a different domain than row_identity.link_url; include a "
+            "`bom_url_route_check:` note explaining the BOM-provided URL, "
+            "redirect/canonical, or first-party route checked and why it did not "
+            "resolve this section's value before relying on a third-party source"
+        ]
 
     if INDEPENDENT_SEARCH_ROUTE_RE.search(source_text):
         return []
@@ -332,6 +386,47 @@ def validate_independent_source_route(
         f"vendor domain as row_identity.link_url ({bom_domain}) without documenting "
         "an agent-initiated independent search route; use bom_provided when the fact "
         "came from the BOM-provided URL route"
+    ]
+
+
+def validate_bom_provided_source_route(
+    section: Dict[str, Any],
+    path: str,
+    row_identity: Dict[str, Any],
+) -> List[str]:
+    source = section.get("source")
+    if not isinstance(source, dict):
+        return []
+    link_url = str(row_identity.get("link_url") or "").strip()
+    if not link_url:
+        return []
+
+    bom_domain = comparable_domain(link_url)
+    if not bom_domain:
+        return []
+
+    source_text = section_evidence_text(section)
+    source_urls = extract_urls(source_text)
+    if not source_urls:
+        return []
+
+    different_domain_urls = [
+        url for url in source_urls
+        if comparable_domain(url) and comparable_domain(url) != bom_domain
+    ]
+    if not different_domain_urls:
+        return []
+
+    if OFFICIAL_ALTERNATE_ROUTE_AUDIT_RE.search(source_text):
+        return []
+
+    return [
+        f"{path}.source.evidence_basis is bom_provided but cites external URL(s) "
+        f"on a different domain than row_identity.link_url ({bom_domain}); include "
+        "an `official_alternate_route_check:` note explaining why the alternate "
+        "domain is still BOM-side evidence, such as same manufacturer or official "
+        "operator, official shop/canonical/domain evidence, and row-matched product "
+        "ID or same-row product-family route"
     ]
 
 

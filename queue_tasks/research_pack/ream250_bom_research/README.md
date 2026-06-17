@@ -73,6 +73,13 @@ Evidence decision order:
   That route includes the exact BOM `link_url`, redirects, official canonical
   replacements, and first-party support/product pages reached by following links
   or navigation from the BOM-provided product page for the same row.
+- If a section cites an external URL on a different domain from the BOM
+  `link_url` while claiming `evidence_basis: bom_provided`, include a grep-able
+  `official_alternate_route_check:` note in that section. State why the
+  alternate domain is still BOM-side evidence: same manufacturer or official
+  operator, official shop/canonical/domain evidence, and row-matched product ID
+  or same-row product-family route. This is a general official-route audit; do
+  not make it depend on one specific HTTP failure mode.
 - Use independent vendor/web research when BOM-side evidence does not directly
   resolve the needed value, or when BOM-side evidence is placeholder/generic/
   conflicting.
@@ -85,6 +92,11 @@ Evidence decision order:
   `drawing`, `technical data`, or `weight`. If no row-specific usable source is
   found, keep the result conservative and make that absence visible in the
   relevant section's uncertainty when it affects downstream trust.
+- Every section using `evidence_basis: engineering_hypothesis` or
+  `evidence_basis: unresolved` must include a grep-able `targeted_web_search:`
+  note in that same section, either in `source.cited_fact_or_basis` or
+  `uncertainty_notes`. List the attempted query terms and the result before
+  falling back to the hypothesis.
 - A row-matched official canonical replacement derived from a BOM-provided URL
   is still BOM-side evidence. Do not downgrade it to independent research.
 - First-party support/product-family/technology/download pages reached from the
@@ -92,6 +104,17 @@ Evidence decision order:
   Example: if a BOM-provided Karl Hipp product-family page leads to the vendor's
   ballscrew page that states spindle material, that material is `bom_provided`,
   not `independent_vendor_spec`.
+- If a section uses `evidence_basis: bom_provided` and cites an external URL on
+  a different domain from `row_identity.link_url`, include
+  `official_alternate_route_check:` in that section. State the original BOM URL,
+  the alternate URL/domain used, the official-route evidence for that alternate
+  domain, and the row-match evidence such as product ID, manufacturer, or
+  same-row product family.
+- If the BOM row has `link_url` and a section uses a different-domain
+  `independent_vendor_spec`, include a grep-able `bom_url_route_check:` note in
+  that section. State the BOM-provided URL, redirect/canonical, or first-party
+  route checked and why it did not resolve the section's value before relying on
+  the third-party source.
 - If a section value depends on multiple evidence classes, use the least reliable
   evidence class needed for that conclusion.
 
@@ -145,13 +168,14 @@ Vendor/product page parsing rules:
 
 - Follow redirects and cite the final loaded URL. If the original URL came from
   the BOM context, redirected-page facts are still `bom_provided`.
-- For Pfeiffer Vacuum legacy product URLs like
-  `https://www.pfeiffer-vacuum.com/.../shop/products/<product_id>`, HTTP 403/406
-  or a challenge page is not enough to conclude the BOM-provided URL failed.
-  Try the official Busch Group canonical URL
-  `https://www.shop.buschgroup.com/global/en/products/<product_id>/` before
-  independent search. If it matches the BOM product ID or legacy number, cite
-  that final URL and keep `evidence_basis: bom_provided`.
+- If the original BOM URL does not directly resolve the needed value, try
+  official canonical or official alternate routes for the same manufacturer and
+  product before treating the provided route as exhausted. This includes
+  official migrated product pages, official regional/shop domains, first-party
+  support or product-family pages, and official group-company product pages.
+  If the alternate page matches the BOM product ID, legacy number,
+  manufacturer, or same-row product family, cite the final URL and keep
+  `evidence_basis: bom_provided`.
 - If the official canonical page is large or minified, extract targeted snippets
   for the product ID, legacy number, material fields, material words, part-family
   nouns, and download links instead of abandoning the canonical source. Do not
@@ -211,39 +235,85 @@ For larger runs, use the task-local runner instead of manually clearing Codex or
 opening new terminals. The runner starts a fresh `codex exec` session for each
 small batch, so context does not accumulate across the whole BOM.
 
+### Runner Option Specification
+
+Use this section as the authoritative runner contract. Examples below are only
+common invocations of these options.
+
+| Option | Default | Meaning |
+|---|---:|---|
+| `--repo-root PATH` | `/home/eastrolinux/seres` | Repository root used as `codex exec -C`. |
+| `--agent-prefix NAME` | `ream250-bom-agent` | Prefix used to form worker agent names like `ream250-bom-agent-01`. |
+| `--workers N` | `1` | Number of parallel worker loops. |
+| `--max-items N` | `3` | Maximum queue items handled by each fresh Codex session. |
+| `--max-batches N` | `0` | Maximum Codex sessions per worker; `0` means run until no matching pending items remain. |
+| `--ttl SECONDS` | `7200` | Queue lease TTL passed to `queue lease`. |
+| `--id-prefix PREFIX` | `research_task:ream250_bom_row_` | Queue id prefix used by `queue lease --id-prefix`; a complete task id acts as an exact single-row filter. |
+| `--log-dir PATH` | `out/ream250_bom_runner_logs` | Directory for batch logs. Relative paths are resolved under the repo root. |
+| `--codex-bin PATH` | `codex` or `$CODEX_BIN` | Codex executable. |
+| `--codex-model MODEL` | `$CODEX_MODEL` or Codex config default | Model passed to `codex --model/-m`. Use `codex debug models` to list model ids available to the current account. |
+| `--codex-reasoning-effort EFFORT` | `$CODEX_REASONING_EFFORT` or Codex config default | Reasoning level passed as `model_reasoning_effort`; valid values are `low`, `medium`, `high`, `xhigh`. Only applies to models that support reasoning levels. |
+| `--codex-sandbox MODE` | `danger-full-access` or `$CODEX_SANDBOX` | Sandbox passed to Codex; valid values are `read-only`, `workspace-write`, `danger-full-access`. |
+| `--batch-timeout SECONDS` | `0` | Optional timeout for each `codex exec` batch; `0` disables the timeout. A timed-out batch exits nonzero and is recorded in the run events file. |
+| `--validate-at-end` | off | Runs queue/output audit after all workers exit. It validates only outputs for queue entries currently marked `done`; it does not validate every Markdown file in `research/ream250_bom`. |
+| `--dry-run` | off | Prints the generated prompt and Codex command without starting Codex. |
+
+Execution count is bounded by `workers * max-items * max-batches` when
+`--max-batches` is greater than zero. For example, `--workers 2 --max-items 3
+--max-batches 1` runs at most six rows. With `--max-batches 0`, each worker keeps
+starting fresh Codex sessions until no matching pending queue items remain.
+
+The default sandbox is `danger-full-access` because web research rows need local
+DNS/network access. Use `workspace-write` only for local-only debugging where
+web access is not needed.
+
+`--validate-at-end` is intentionally queue-aware. During partial reruns, pending
+older output files may fail the latest validator while waiting for rerun; the
+runner therefore audits only outputs currently marked `done`. Use full-directory
+validation only after all files in `research/ream250_bom` are expected to satisfy
+the current rules.
+
+Each real runner invocation writes run-level diagnostics under `--log-dir`.
+The default run id is `<YYYYmmdd_HHMMSS>_<runner-pid>` and can be overridden with
+`REAM250_BOM_RUN_ID`.
+
+| Diagnostic file | Meaning |
+|---|---|
+| `run_<run_id>.log` | Master stdout/stderr log for the runner itself, including worker launch messages and final audit output. |
+| `run_<run_id>_events.tsv` | Parseable event log with `runner_start`, `batch_start`, `batch_exit`, `signal`, and `runner_exit` records. |
+| `run_<run_id>.heartbeat` | Last heartbeat timestamp. If this becomes stale and no `runner_exit` event exists, the process was likely killed externally or the host/session stopped. |
+| `run_<run_id>_status/*.active` | Active batch marker files. Leftover files after an abrupt stop identify which worker/batch was running and which per-batch log to inspect. |
+| `run_<run_id>_queue_start.json`, `run_<run_id>_queue_exit.json` | Queue count snapshots at start and exit. Signal exits also write `run_<run_id>_queue_signal_<SIG>.json`. |
+
+If the runner receives `INT`, `TERM`, or `HUP`, it records a `signal` event,
+writes a queue snapshot, and exits with the conventional signal status. If the
+process is killed with `SIGKILL`, the machine powers off, or the WSL/session is
+terminated hard, no shell trap can run; diagnose that case by the stale
+heartbeat, missing `runner_exit`, and leftover active batch markers.
+
+When writing commands across multiple lines, keep the trailing `\` on every
+continued line. If a continuation is missing, the shell starts the runner early
+and treats the following option as a separate command.
+
+### Runner Examples
+
 Standard bounded run:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --workers 2 \
   --max-items 3 \
-  --max-batches 1
-```
-
-This runs at most `2 * 3 * 1 = 6` rows:
-
-- `--workers 2` starts two parallel worker loops.
-- `--max-items 3` lets each fresh Codex session process at most three leased rows.
-- `--max-batches 1` lets each worker start at most one fresh Codex session.
-
-The runner defaults to `--codex-sandbox danger-full-access` because web research
-rows need local DNS/network access. Override with
-`--codex-sandbox workspace-write` only for no-network/local-only runs.
-
-To test a specific Codex model, pass `--codex-model`. If omitted, the runner
-uses the Codex CLI configured default model. To control reasoning level for
-models that support it, pass `--codex-reasoning-effort low|medium|high|xhigh`.
-
-```bash
-queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
-  --workers 1 \
-  --max-items 1 \
   --max-batches 1 \
-  --codex-model gpt-5.3-spark \
   --validate-at-end
 ```
 
-Example with GPT-5.5 medium reasoning:
+Single-worker full run until queue empty:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
+```
+
+Smoke test one Codex session with GPT-5.5 medium reasoning:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
@@ -255,35 +325,25 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batche
   --validate-at-end
 ```
 
-When writing the command across multiple lines, keep the trailing `\` on every
-continued line. If the `\` after `--max-items 3` is missing, the shell starts the
-runner without `--max-batches`, and `--max-batches 1` is treated as a separate
-command.
-
-Single-worker full run until queue empty:
-
-```bash
-queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh
-```
-
-This uses the script defaults: one worker, at most three rows per fresh Codex
-session, and no batch limit. It keeps running until no matching pending queue
-items remain.
-
-Smoke test one Codex session:
+Smoke test one Codex session with GPT-5.3 Codex Spark:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
-  --max-batches 1
+  --workers 1 \
+  --max-items 1 \
+  --max-batches 1 \
+  --codex-model gpt-5.3-codex-spark \
+  --validate-at-end
 ```
 
-Print the generated prompt without running Codex:
+Print the generated prompt and Codex command without running:
 
 ```bash
-queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh --dry-run
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --codex-model gpt-5.5 \
+  --codex-reasoning-effort medium \
+  --dry-run
 ```
-
-Logs are written to `out/ream250_bom_runner_logs/` by default.
 
 ### Targeted Reruns
 
@@ -374,6 +434,10 @@ Validate a directory:
   --dir research/ream250_bom
 ```
 
+Use full-directory validation only after all files in the directory are expected
+to satisfy the current rules. During partial reruns, prefer the queue/output
+audit because pending older files may intentionally fail the latest validator.
+
 Audit queue/output consistency:
 
 ```bash
@@ -433,7 +497,11 @@ starting with `item_granularity: <value> - ...`, choosing the best current value
 
 Keep this as a planning hint, not a hard schema claim. If the row could fit more
 than one value, choose the one that best predicts how the KB should model it
-next; explain the ambiguity after the dash.
+next; explain the ambiguity after the dash. Prefer `consumable` over `assembly`
+for replaceable seals, centering rings, O-rings, filter elements, belts, and
+similar maintenance items even when the purchased item contains multiple
+materials or a simple carrier ring plus seal; multi-material construction alone
+does not imply `assembly`.
 
 Field semantics:
 
@@ -460,10 +528,11 @@ Avoid duplicated wording across these fields. A fact goes in
 
 Do not list non-contributing source/audit details as uncertainties once the
 section value is already resolved. Examples that should usually be omitted:
-blank BOM material fields, rejected Generic/density-1000 CAD metadata, HTTP 403
-from the original URL after a row-matched canonical source succeeds, and "No
-catalog mass was found." Keep only the downstream consequence if it matters, such
-as an unresolved material-volume split in a multi-material mass estimate.
+blank BOM material fields, rejected Generic/density-1000 CAD metadata, a blocked
+or unresolved original URL after a row-matched official alternate source
+succeeds, and "No catalog mass was found." Keep only the downstream consequence
+if it matters, such as an unresolved material-volume split in a multi-material
+mass estimate.
 
 Mass examples:
 

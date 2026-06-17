@@ -128,6 +128,13 @@ Use this evidence decision order for each result section:
    route includes the exact BOM `link_url`, redirects, official canonical
    replacements, and first-party support/product pages reached by following
    links or navigation from the BOM-provided product page for the same row.
+   If a section cites an external URL on a different domain from the BOM
+   `link_url` while using `evidence_basis: bom_provided`, include a grep-able
+   `official_alternate_route_check:` note in that section's
+   `source.cited_fact_or_basis` or `uncertainty_notes`. Explain why the
+   alternate domain is still BOM-side evidence: same manufacturer or official
+   operator, official shop/canonical/domain evidence, and row-matched product
+   ID or same-row product-family route.
 3. If BOM-side supplied evidence directly states or measures the value needed
    for a section, use it with `evidence_basis: bom_provided`. Do not web-search
    just to second-guess directly provided BOM-side evidence.
@@ -148,6 +155,14 @@ Use this evidence decision order for each result section:
    keep the value as `engineering_hypothesis` and make the absence of
    row-specific web/vendor evidence visible in the relevant section's
    `uncertainty_notes` when it affects downstream trust.
+   Any section with `evidence_basis: engineering_hypothesis` or
+   `evidence_basis: unresolved` must include a grep-able
+   `targeted_web_search:` note in that same section. Put it in
+   `source.cited_fact_or_basis` or `uncertainty_notes`. List the query terms
+   tried and the result, for example:
+   `targeted_web_search: searched "2AQ inductive sensor mount material" and
+   "reAM250 2AQ material"; found only duplicate BOM text and no row-specific
+   vendor/material source.`
 5. Use `standard_part_convention` only after BOM-side evidence and row-matched
    independent vendor/web evidence do not resolve the value, but a standard
    designation or part family supports a generic conclusion.
@@ -264,14 +279,14 @@ For vendor/product page parsing:
 - Follow redirects and cite the final loaded URL in `source.url_or_path` when it
   differs from the BOM URL. It is still `bom_provided` if the original URL came
   from the BOM context.
-- Pfeiffer Vacuum legacy URLs under
-  `https://www.pfeiffer-vacuum.com/.../shop/products/<product_id>` may return
-  HTTP 403/406 or an anti-bot/challenge page even when the official migrated
-  product page exists. Before treating that as an unresolved provided URL, try
-  the official Busch Group canonical URL
-  `https://www.shop.buschgroup.com/global/en/products/<product_id>/`. If that
-  page matches the BOM product ID or legacy number, cite it as the final loaded
-  URL and keep `evidence_basis: bom_provided`; do not downgrade it to
+- If the original BOM URL does not directly resolve the needed value, try
+  official canonical or official alternate routes for the same manufacturer and
+  product before treating the provided route as exhausted. This includes
+  official migrated product pages, official regional/shop domains, first-party
+  support or product-family pages, and official group-company product pages.
+  If the alternate page matches the BOM product ID, legacy number,
+  manufacturer, or same-row product family, cite the final URL and keep
+  `evidence_basis: bom_provided`; do not downgrade it to
   `independent_vendor_spec`.
 - If the official canonical page is large or minified, do not abandon it just
   because a broad scan is slow. Save the HTML and extract targeted snippets with
@@ -285,11 +300,25 @@ For vendor/product page parsing:
   `bom_provided`. Example: if a BOM-provided Karl Hipp product-family page leads
   to the vendor's ballscrew page that states spindle material, that material is
   `bom_provided`, not `independent_vendor_spec`.
+- If `source.url_or_path` cites an external URL on a different domain from
+  `row_identity.link_url` while keeping `evidence_basis: bom_provided`, include
+  `official_alternate_route_check:` in that section. State the original BOM
+  URL, the alternate URL/domain used, the official-route evidence for that
+  alternate domain, and the row-match evidence such as product ID, manufacturer,
+  or same-row product family. Do not make the note specific to one failure mode;
+  cover redirects, canonical replacements, official regional/shop domains, and
+  first-party support/product-family routes with the same rule.
 - Do not replace a row-matched BOM-provided/canonical source with an independent
   search result only because the independent PDF or catalog is easier to parse.
   Independent search results may be supplemental, but the `evidence_basis` stays
   `bom_provided` when the same fact was resolved from the BOM-provided URL or
   official canonical replacement.
+- If the BOM row has `link_url` and a section relies on a different-domain
+  `independent_vendor_spec`, that section must include a grep-able
+  `bom_url_route_check:` note in `source.cited_fact_or_basis` or
+  `uncertainty_notes`. State the BOM-provided URL/canonical/first-party route
+  checked and why it did not resolve that section's value before using the
+  third-party source.
 - Do not search only for explicit `Material:` table labels. Product pages often
   encode material in the page title, H1, breadcrumbs, Product Information
   bullets, overview bullets, collapsed accordions, downloads, or short snippets.
@@ -395,7 +424,11 @@ starting with `item_granularity: <value> - ...`, choosing the best current value
 
 Keep this as a planning hint, not a hard schema claim. If the row could fit more
 than one value, choose the one that best predicts how the KB should model it
-next; explain the ambiguity after the dash.
+next; explain the ambiguity after the dash. Prefer `consumable` over `assembly`
+for replaceable seals, centering rings, O-rings, filter elements, belts, and
+similar maintenance items even when the purchased item contains multiple
+materials or a simple carrier ring plus seal; multi-material construction alone
+does not imply `assembly`.
 
 Field semantics:
 
@@ -422,7 +455,7 @@ following are not uncertainty notes when the section value is already resolved:
 - "BOM material family and specific material grade fields are blank."
 - "Local assembly STEP material metadata found only Generic material with
   density 1000.0."
-- "The original BOM-provided URL returned HTTP 403."
+- "The original BOM-provided URL was blocked or did not directly resolve."
 - "No catalog mass was found."
 
 Only keep the downstream consequence if it matters. For example, for a
