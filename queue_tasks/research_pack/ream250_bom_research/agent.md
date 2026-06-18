@@ -51,8 +51,10 @@ For each leased row, research and write one Markdown result at
 `context.output_path`. The result must describe:
 
 - `function`: what the row item does in the machine.
-- `mass`: the best supported row-level mass estimate in kg, with calculation
-  basis.
+- `mass`: the best supported per-unit mass estimate in kg for one physical item
+  represented by the BOM row, with calculation basis. If `context.quantity` is
+  not 1, keep `mass.value_kg` per unit and mention the quantity and optional row
+  total in `mass.basis`.
 - `material`: the best supported material family, grade, or component material
   set.
 - `how_to_make`: a plausible manufacturing, assembly, or procurement route.

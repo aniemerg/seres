@@ -97,6 +97,9 @@ At a high level:
   kept as `bom_provided`.
 - Use `bom_url_route_check:` before relying on different-domain
   `independent_vendor_spec` when the BOM row had a Link URL.
+- Treat `mass.value_kg` as the per-unit mass for one physical item represented
+  by the BOM row. If BOM quantity is not 1, mention quantity and optional row
+  total in `mass.basis`.
 - Follow the acceptance rules for material precision, mass evidence,
   common-density handling, field semantics, and item granularity.
 

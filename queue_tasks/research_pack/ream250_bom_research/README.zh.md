@@ -92,6 +92,8 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
   `official_alternate_route_check:`。
 - BOM row 有 Link URL 但使用不同 domain 的 `independent_vendor_spec` 前，使用
   `bom_url_route_check:` 說明 BOM route 為何沒有解決該值。
+- `mass.value_kg` 是 BOM row 所代表的一個實體 item 的 per-unit mass。若 BOM
+  quantity 不是 1，在 `mass.basis` 說明 quantity，必要時附 row total。
 - material precision、mass evidence、common-density handling、field semantics、
   item granularity 等細節，以 `acceptance_criteria.md` 為準。
 

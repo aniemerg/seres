@@ -41,6 +41,14 @@ ITEM_GRANULARITY_VALUES = (
 ITEM_GRANULARITY_RE = re.compile(
     r"^item_granularity:\s*([a-z_]+)\s+-\s+.+"
 )
+REPLACEABLE_CONSUMABLE_CAD_RE = re.compile(
+    r"\b(o-?ring|gasket|filter|lubricant|adhesive|seal_iso|seal[_ -]?iso)\b",
+    re.IGNORECASE,
+)
+STANDARD_HARDWARE_NOT_MODULE_RE = re.compile(
+    r"\b(claw clamp|fastener|bolt|screw|nut|washer)\b",
+    re.IGNORECASE,
+)
 EVIDENCE_BASIS_VALUES = (
     "bom_provided",
     "independent_vendor_spec",
@@ -287,6 +295,29 @@ def validate_kb_implications(data: Dict[str, Any]) -> List[str]:
         return [
             "kb_implications item_granularity value must be one of: "
             f"{', '.join(ITEM_GRANULARITY_VALUES)}"
+        ]
+
+    row_identity = data.get("row_identity") if isinstance(data.get("row_identity"), dict) else {}
+    function = data.get("function") if isinstance(data.get("function"), dict) else {}
+    cad_file = str(row_identity.get("cad_file") or "")
+    cad_file_lower = cad_file.lower()
+    function_summary = str(function.get("summary") or "")
+    granularity_context = " ".join([entry, cad_file, function_summary])
+    is_belt_item = "belt" in cad_file_lower and "pulley" not in cad_file_lower
+    is_replaceable_consumable_item = bool(REPLACEABLE_CONSUMABLE_CAD_RE.search(cad_file))
+    if (is_belt_item or is_replaceable_consumable_item) and value != "consumable":
+        return [
+            "kb_implications item_granularity should be consumable for replaceable "
+            "belts, O-rings, gaskets, filter elements, lubricants, adhesives, and "
+            "similar maintenance items unless the row is clearly a larger calibrated "
+            "vendor subsystem"
+        ]
+    if value == "purchased_module" and STANDARD_HARDWARE_NOT_MODULE_RE.search(granularity_context):
+        return [
+            "kb_implications item_granularity should not be purchased_module for "
+            "simple standard hardware such as claw clamps, fasteners, bolts, screws, "
+            "nuts, or washers; use simple_part unless the row is a calibrated "
+            "functional module or a multi-part assembly"
         ]
     return []
 

@@ -267,6 +267,28 @@ Then `mass.source.evidence_basis` must be `engineering_hypothesis`
 And `mass.assumptions` must state the effective-density or fraction assumption
 And `mass.uncertainty_notes` must describe the remaining mass limitation.
 
+## AC-MASS-004: Mass Value Is Per Unit
+
+Type: Judgment-required
+
+Rule:
+`mass.value_kg` is the mass of one physical item represented by the BOM row, not
+the BOM row quantity multiplied by that mass. Use `mass.basis` to state the BOM
+quantity and optional row total when quantity is not 1.
+
+Given a BOM row has quantity greater than 1
+When the worker writes `mass.value_kg`
+Then `mass.value_kg` must remain the per-unit mass
+And `mass.basis` should state the quantity
+And `mass.basis` may state the row total as `quantity * mass.value_kg` for
+planning context.
+
+Given a row has quantity 4
+And one clamp has estimated mass 0.0323 kg
+When the worker writes the mass section
+Then `mass.value_kg` should be `0.0323`
+And `mass.basis` may say the row total is about `0.129 kg` if needed.
+
 ## AC-MAKE-001: Inferred Manufacturing Routes Lower `how_to_make`
 
 Type: Judgment-required
@@ -315,7 +337,8 @@ Do not repeat the same idea across these fields.
 Given FreeCAD measured a CAD volume
 When the worker writes the mass section
 Then the measured value belongs in `source.cited_fact_or_basis` or `mass.basis`
-And using the single-solid volume as a row-level proxy belongs in `assumptions`
+And using the single-solid volume as a per-unit item proxy belongs in
+`assumptions`
 And remaining volume-fidelity or material-split consequences belong in
 `uncertainty_notes`.
 
@@ -375,7 +398,32 @@ And explain any multi-material construction after the dash
 But do not classify it as `assembly` solely because more than one material is
 present.
 
-## AC-GRAN-003: Purchased Module Is A Current Modeling Hint
+Given the row is a replaceable timing belt, conveyor belt, O-ring, gasket, seal,
+filter element, lubricant, adhesive, or similar wear/replacement item
+When choosing item granularity
+Then prefer `item_granularity: consumable`
+Unless the row is clearly a larger calibrated vendor subsystem rather than the
+replaceable item itself.
+
+## AC-GRAN-003: Standard Hardware Is Not A Purchased Module
+
+Type: Judgment-required
+
+Rule:
+Standard hardware purchased from a vendor is not automatically a
+`purchased_module`. Use `simple_part` for one-piece or simple standard hardware
+such as clamps, brackets, bolts, screws, nuts, washers, simple pulleys, and
+similar fasteners unless the row is a calibrated functional module or a
+multi-part assembly that should be modeled as such.
+
+Given the row is a standard ISO-K claw clamp or similar vacuum fastener
+When the row is one simple hardware item without a sub-BOM or calibration
+workflow
+Then prefer `item_granularity: simple_part`
+And explain that it should later map to reusable standard hardware rather than a
+machine-specific custom part.
+
+## AC-GRAN-004: Purchased Module Is A Current Modeling Hint
 
 Type: Judgment-required
 
