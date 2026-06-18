@@ -6,6 +6,8 @@ TASK_INSTRUCTIONS="$TASK_DIR/agent.md"
 TASK_VALIDATOR="$TASK_DIR/research_scripts/validate_results.py"
 TASK_OUTPUT_AUDIT="$TASK_DIR/research_scripts/audit_queue_outputs.py"
 DEFAULT_REPO_ROOT="/home/eastrolinux/seres"
+SCRIPT_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+ORIGINAL_ARGS=("$@")
 
 repo_root="${REPO_ROOT:-$DEFAULT_REPO_ROOT}"
 agent_prefix="ream250-bom-agent"
@@ -22,6 +24,8 @@ batch_timeout=0
 validate_at_end=0
 dry_run=0
 id_prefix="research_task:ream250_bom_row_"
+detach=0
+no_terminal_stream=0
 run_id="${REAM250_BOM_RUN_ID:-$(date +%Y%m%d_%H%M%S)_$$}"
 run_log=""
 run_events=""
@@ -56,6 +60,10 @@ Options:
                        Optional timeout per Codex exec batch. Default: 0, disabled
   --id-prefix PREFIX    Queue id prefix for lease filtering.
                        Default: research_task:ream250_bom_row_
+  --detach             Relaunch in a background session and return immediately.
+                       Use this for overnight runs or unstable terminal windows.
+  --no-terminal-stream Write all runner output to the run log without streaming
+                       it back to the invoking terminal.
   --validate-at-end     Audit done queue outputs after all workers exit
   --dry-run             Print the first prompt and command, then exit
   -h, --help            Show this help
@@ -149,6 +157,14 @@ while [[ $# -gt 0 ]]; do
       id_prefix="${2:-}"
       shift 2
       ;;
+    --detach)
+      detach=1
+      shift
+      ;;
+    --no-terminal-stream)
+      no_terminal_stream=1
+      shift
+      ;;
     --validate-at-end)
       validate_at_end=1
       shift
@@ -205,6 +221,8 @@ run_log="$log_dir/run_${run_id}.log"
 run_events="$log_dir/run_${run_id}_events.tsv"
 heartbeat_file="$log_dir/run_${run_id}.heartbeat"
 status_dir="$log_dir/run_${run_id}_status"
+pid_file="$log_dir/run_${run_id}.pid"
+launcher_log="$log_dir/run_${run_id}_launcher.log"
 
 timestamp_utc() {
   date -u +%Y-%m-%dT%H:%M:%SZ
@@ -439,7 +457,59 @@ if [[ "$batch_timeout" -gt 0 ]]; then
   command -v timeout >/dev/null 2>&1 || die "timeout executable not found; required by --batch-timeout"
 fi
 mkdir -p "$status_dir"
-exec > >(tee -a "$run_log") 2>&1
+
+if [[ "$detach" -eq 1 ]]; then
+  detached_args=()
+  has_no_terminal_stream=0
+  for arg in "${ORIGINAL_ARGS[@]}"; do
+    case "$arg" in
+      --detach)
+        ;;
+      --no-terminal-stream)
+        has_no_terminal_stream=1
+        detached_args+=("$arg")
+        ;;
+      *)
+        detached_args+=("$arg")
+        ;;
+    esac
+  done
+  if [[ "$has_no_terminal_stream" -eq 0 ]]; then
+    detached_args+=("--no-terminal-stream")
+  fi
+
+  echo "starting detached reAM250 BOM runner"
+  echo "run_id=$run_id"
+  echo "run_log=$run_log"
+  echo "run_events=$run_events"
+  echo "heartbeat_file=$heartbeat_file"
+  echo "status_dir=$status_dir"
+  echo "launcher_log=$launcher_log"
+  if command -v setsid >/dev/null 2>&1; then
+    (
+      cd "$repo_root"
+      REAM250_BOM_RUN_ID="$run_id" nohup setsid "$SCRIPT_PATH" "${detached_args[@]}" \
+        > "$launcher_log" 2>&1 < /dev/null &
+      printf "%s\n" "$!" > "$pid_file"
+    )
+  else
+    (
+      cd "$repo_root"
+      REAM250_BOM_RUN_ID="$run_id" nohup "$SCRIPT_PATH" "${detached_args[@]}" \
+        > "$launcher_log" 2>&1 < /dev/null &
+      printf "%s\n" "$!" > "$pid_file"
+    )
+  fi
+  echo "pid_file=$pid_file"
+  echo "pid=$(cat "$pid_file")"
+  exit 0
+fi
+
+if [[ "$no_terminal_stream" -eq 1 ]]; then
+  exec >> "$run_log" 2>&1
+else
+  exec > >(tee -a "$run_log") 2>&1
+fi
 trap 'on_signal INT' INT
 trap 'on_signal TERM' TERM
 trap 'on_signal HUP' HUP

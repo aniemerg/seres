@@ -157,6 +157,8 @@ task-local runner；它每一小批都會啟動新的 `codex exec`，所以 cont
 | `--codex-reasoning-effort EFFORT` | `$CODEX_REASONING_EFFORT` 或 Codex config default | 以 `model_reasoning_effort` 傳給 Codex；允許值是 `low`、`medium`、`high`、`xhigh`。只對支援 reasoning level 的模型有效。 |
 | `--codex-sandbox MODE` | `danger-full-access` 或 `$CODEX_SANDBOX` | 傳給 Codex 的 sandbox；允許值是 `read-only`、`workspace-write`、`danger-full-access`。 |
 | `--batch-timeout SECONDS` | `0` | 每個 `codex exec` batch 的選用 timeout；`0` 表示停用。timeout 的 batch 會以非零狀態退出，並記錄到 run events 檔。 |
+| `--detach` | off | 重新以 background session 啟動 runner，寫出 `run_<id>.pid` 後立刻回到 shell。適合過夜跑或 terminal 不穩定時使用。 |
+| `--no-terminal-stream` | off | runner output 只寫到 run log，不把所有 worker output 串回目前 terminal。`--detach` 會自動加上這個行為。 |
 | `--validate-at-end` | off | worker 結束後跑 queue/output audit，只驗證目前 queue 狀態為 `done` 的 outputs；不掃描 `research/ream250_bom` 的全部 Markdown。 |
 | `--dry-run` | off | 只印出產生的 prompt 與 Codex command，不啟動 Codex。 |
 
@@ -190,6 +192,29 @@ full-directory validation。
 並用慣例 signal status 退出。如果是 `SIGKILL`、斷電、WSL/session 硬終止，shell
 trap 無法執行；這時用 stale heartbeat、缺少 `runner_exit`、以及殘留 active batch
 marker 判斷停在哪裡。
+
+過夜跑或 terminal 不穩定時，使用 `--detach`。父命令會印出 run id、PID file、
+heartbeat path 和 log paths，然後立刻退出；背景 runner 會透過 `nohup`/`setsid`
+繼續跑，進度寫在 `out/ream250_bom_runner_logs/`。
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 2 \
+  --max-items 1 \
+  --max-batches 5 \
+  --codex-model gpt-5.5 \
+  --codex-reasoning-effort medium \
+  --validate-at-end \
+  --detach
+```
+
+查看進度：
+
+```bash
+tail -f out/ream250_bom_runner_logs/run_<id>.log
+cat out/ream250_bom_runner_logs/run_<id>_events.tsv
+cat out/ream250_bom_runner_logs/run_<id>.heartbeat
+```
 
 多行 shell command 每個續行都要保留結尾的 `\`。如果少了續行符號，shell 會先啟動
 runner，後面的 option 會被當成另一個命令。

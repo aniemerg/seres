@@ -164,6 +164,8 @@ common invocations of these options.
 | `--codex-reasoning-effort EFFORT` | `$CODEX_REASONING_EFFORT` or Codex config default | Reasoning level passed as `model_reasoning_effort`; valid values are `low`, `medium`, `high`, `xhigh`. Only applies to models that support reasoning levels. |
 | `--codex-sandbox MODE` | `danger-full-access` or `$CODEX_SANDBOX` | Sandbox passed to Codex; valid values are `read-only`, `workspace-write`, `danger-full-access`. |
 | `--batch-timeout SECONDS` | `0` | Optional timeout for each `codex exec` batch; `0` disables the timeout. A timed-out batch exits nonzero and is recorded in the run events file. |
+| `--detach` | off | Relaunches the runner in a background session, writes `run_<id>.pid`, and returns immediately. Use this for overnight runs or unstable terminal windows. |
+| `--no-terminal-stream` | off | Writes runner output only to the run log instead of streaming all worker output back to the invoking terminal. `--detach` adds this automatically unless already present. |
 | `--validate-at-end` | off | Runs queue/output audit after all workers exit. It validates only outputs for queue entries currently marked `done`; it does not validate every Markdown file in `research/ream250_bom`. |
 | `--dry-run` | off | Prints the generated prompt and Codex command without starting Codex. |
 
@@ -199,6 +201,30 @@ writes a queue snapshot, and exits with the conventional signal status. If the
 process is killed with `SIGKILL`, the machine powers off, or the WSL/session is
 terminated hard, no shell trap can run; diagnose that case by the stale
 heartbeat, missing `runner_exit`, and leftover active batch markers.
+
+For overnight or unstable-terminal runs, use `--detach`. The parent command
+prints the run id, PID file, heartbeat path, and log paths, then exits. The
+background runner continues under `nohup`/`setsid` and records progress under
+`out/ream250_bom_runner_logs/`.
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
+  --workers 2 \
+  --max-items 1 \
+  --max-batches 5 \
+  --codex-model gpt-5.5 \
+  --codex-reasoning-effort medium \
+  --validate-at-end \
+  --detach
+```
+
+Check progress with:
+
+```bash
+tail -f out/ream250_bom_runner_logs/run_<id>.log
+cat out/ream250_bom_runner_logs/run_<id>_events.tsv
+cat out/ream250_bom_runner_logs/run_<id>.heartbeat
+```
 
 When writing commands across multiple lines, keep the trailing `\` on every
 continued line. If a continuation is missing, the shell starts the runner early
