@@ -127,11 +127,12 @@ def render_individual_views(
     stem: str,
     dpi: int,
     figsize: float,
+    view_names: Iterable[str],
 ) -> list[Path]:
     polygons = face_polygons(points, faces)
     paths: list[Path] = []
     output_dir.mkdir(parents=True, exist_ok=True)
-    for view_name in ("iso", "front", "top", "right"):
+    for view_name in view_names:
         output_path = output_dir / f"{stem}__{view_name}.png"
         fig = plt.figure(figsize=(figsize, figsize), dpi=dpi)
         ax = fig.add_subplot(1, 1, 1, projection="3d")
@@ -171,7 +172,20 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--linear-deflection", type=float, default=0.5)
     parser.add_argument("--dpi", type=int, default=128)
     parser.add_argument("--figsize", type=float, default=4.0, help="Contact sheet size in inches")
-    parser.add_argument("--individual-views", action="store_true")
+    parser.add_argument(
+        "--individual-views",
+        action="store_true",
+        help="Also render all individual views.",
+    )
+    parser.add_argument(
+        "--view",
+        action="append",
+        choices=tuple(VIEWS),
+        help=(
+            "Also render one selected individual view. May be repeated. "
+            "Use this before --individual-views when only one orientation is needed."
+        ),
+    )
     parser.add_argument(
         "--output-stem",
         help="Base filename for generated PNGs. Defaults to the STEP file stem.",
@@ -195,15 +209,21 @@ def main(argv: list[str] | None = None) -> int:
         args.figsize,
     )
     individual_paths = []
+    individual_view_names: list[str] = []
     if args.individual_views:
+        individual_view_names = list(VIEWS)
+    elif args.view:
+        individual_view_names = list(dict.fromkeys(args.view))
+    if individual_view_names:
         individual_paths = render_individual_views(
-            points, faces, output_dir, stem, args.dpi, args.figsize
+            points, faces, output_dir, stem, args.dpi, args.figsize, individual_view_names
         )
 
     result = {
         "step": str(step_path),
         "contact_sheet": str(contact_sheet),
         "individual_views": [str(path) for path in individual_paths],
+        "individual_view_names": individual_view_names,
         "views": ["iso", "front", "top", "right"],
         "intended_detail": "low",
         "metadata": mesh_metadata(points, faces),

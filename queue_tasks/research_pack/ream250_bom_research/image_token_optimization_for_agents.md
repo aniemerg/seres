@@ -4,6 +4,13 @@ This note is for agents using `gpt-5.5` to inspect reAM250 CAD preview images.
 It is a token-budget note; the authoritative task workflow remains
 `agent.md`.
 
+There are two separate surfaces:
+
+- OpenAI API image inputs can expose a `detail` setting such as `low`.
+- Codex CLI local image inspection tools may not expose `low`; for batch
+  workers, the practical token-control mechanism is the rendered image size and
+  the number of images inspected.
+
 ## What OpenAI Counts
 
 OpenAI image inputs are billed as tokens, and the conversion depends on the model and image detail setting. For `gpt-5.5`, the Images and Vision docs say:
@@ -41,14 +48,27 @@ For `gpt-5.5` patch-based image input, approximate image token use before any mo
 Rendering four separate roughly 900-1000px images per part can cost several
 thousand image tokens per part if all views are sent.
 
-The reAM250 task renderer produces one compact 2x2 contact sheet. A typical
-contact sheet near 512px square is approximately:
+The reAM250 task renderer produces one compact 2x2 contact sheet. Current
+default outputs are about 499 x 514 px:
 
 ```text
-ceil(512 / 32) * ceil(512 / 32) = 16 * 16 = 256 patches
+ceil(499 / 32) * ceil(514 / 32) = 16 * 17 = 272 patches
 ```
 
 That gives the agent iso/front/top/right context for roughly the same patch budget as one 512px image.
+
+When a long, thin, dense, or small-featured part is unclear in the contact
+sheet, a selected individual view is usually more efficient than raising the
+2x2 contact sheet resolution. A current default individual view is about
+496 x 510 px:
+
+```text
+ceil(496 / 32) * ceil(510 / 32) = 16 * 16 = 256 patches
+```
+
+Inspecting the contact sheet plus one selected view is about 528 patches and is
+often clearer than a higher-dpi 2x2 sheet. Do not raise the default contact
+sheet size to 768 px globally.
 
 ## Recommended Render Defaults
 
@@ -77,10 +97,23 @@ Current defaults:
 dpi = 128
 views = iso, front, top, right
 output = one compact 2x2 PNG contact sheet
-individual views = disabled unless --individual-views is passed
+individual views = disabled unless --view or --individual-views is passed
 ```
 
-Use separate images only when the contact sheet is insufficient:
+Use a separate image only when the contact sheet is insufficient. Prefer one
+selected view:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "<canonical_step_path>" \
+  --output-dir "$output_dir" \
+  --output-stem "$output_stem" \
+  --view front
+```
+
+Allowed selected views are `iso`, `front`, `top`, and `right`; repeat `--view`
+if two orientations are needed. Render all four individual views only when
+multiple orientations are genuinely needed:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
@@ -122,6 +155,13 @@ Escalate to `detail: "high"` or `detail: "original"` only when:
 
 Do not omit `detail` for `gpt-5.5` unless `original` is intentional.
 
+This recommendation applies to OpenAI API image inputs that support the
+`detail` field. Some local Codex inspection tools do not expose the same detail
+values. For example, the local `view_image` tool may support only `high` or
+`original`; in that case, omit `detail` or use the tool's supported default
+instead of passing `low`. Do not pass API-only `detail` values to local Codex
+tools that do not support them.
+
 ## Render Workflow For Agents
 
 1. Start with `context.canonical_step_path` from the leased queue item.
@@ -137,9 +177,23 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
   --output-stem "$output_stem"
 ```
 
-3. Send only the `__views_2x2.png` image to `gpt-5.5` with `detail: "low"`.
+3. Send only the `__views_2x2.png` image to `gpt-5.5` with `detail: "low"` when
+   the API/tool supports that detail value. If the active local inspection tool
+   does not support `low`, omit the detail parameter or use the supported
+   default.
 
-4. If the response says the part is too small or details are not visible, rerender individual views:
+4. If the response says the part is too small or details are not visible,
+   rerender only the needed individual view first:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "<canonical_step_path>" \
+  --output-dir "$output_dir" \
+  --output-stem "$output_stem" \
+  --view front
+```
+
+5. If more orientations are genuinely needed, render all individual views:
 
 ```bash
 queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
@@ -149,14 +203,15 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
   --individual-views
 ```
 
-5. Send only the specific view needed, not all views by default.
+6. Send only the specific view needed, not all views by default.
 
 ## Why This Is Better
 
 - One contact sheet keeps all standard views in one image.
 - The default output lands near 512px square, which keeps patch count low.
 - Explicit `detail: "low"` prevents accidental `gpt-5.5` `original` processing.
-- Individual high-detail views remain available when a part genuinely needs them.
+- Selected individual views recover clarity for long/thin or detailed parts
+  without raising the default image size for every row.
 
 ## Limitations
 

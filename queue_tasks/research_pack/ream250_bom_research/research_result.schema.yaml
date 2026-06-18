@@ -24,54 +24,82 @@ sections:
       - link_url
     source_csv_value: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
   function:
+    type: object
     required:
       - summary
       - source
       - assumptions
       - uncertainty_notes
-    source_required:
-      - url_or_path
-      - cited_fact_or_basis
-      - evidence_basis
+    properties:
+      source:
+        type: object
+        required:
+          - url_or_path
+          - cited_fact_or_basis
+          - evidence_basis
   mass:
+    type: object
     required:
       - value_kg
       - basis
       - source
       - assumptions
       - uncertainty_notes
-    source_required:
-      - url_or_path
-      - cited_fact_or_basis
-      - evidence_basis
+    properties:
+      source:
+        type: object
+        required:
+          - url_or_path
+          - cited_fact_or_basis
+          - evidence_basis
   material:
+    type: object
     required:
       - primary_material
       - source
       - assumptions
       - uncertainty_notes
-    source_required:
-      - url_or_path
-      - cited_fact_or_basis
-      - evidence_basis
+    properties:
+      source:
+        type: object
+        required:
+          - url_or_path
+          - cited_fact_or_basis
+          - evidence_basis
   how_to_make:
+    type: object
     required:
       - summary
       - manufacturing_steps
       - source
       - assumptions
       - uncertainty_notes
-    source_required:
-      - url_or_path
-      - cited_fact_or_basis
-      - evidence_basis
+    properties:
+      source:
+        type: object
+        required:
+          - url_or_path
+          - cited_fact_or_basis
+          - evidence_basis
+  kb_implications:
+    note: "Top-level list for later KB modeling hints. Must include exactly one machine-searchable item granularity signal."
+    type: list
+    required_item:
+      prefix: "item_granularity: <value> - "
+      allowed_values:
+        - simple_part
+        - assembly
+        - purchased_module
+        - consumable
+        - raw_material_or_stock
+        - unknown
 
 semantics:
-  note: "This schema is the structural contract. Detailed writing and evidence-decision rules live in agent.md."
+  note: "This schema is the structural contract. Detailed writing and evidence-decision rules live in acceptance_criteria.md."
   cited_fact_or_basis: "Source facts only: what the cited URL/file/CAD measurement/local extractor/standard table directly says or measures."
   assumptions: "Modeling premises adopted to transform source facts into the section value; use [] when none are needed."
   uncertainty_notes: "Residual limitations or risks that affect downstream trust, specification, or use of the section value; not an audit log; use [] when none remain."
-  evidence_basis: "Evidence class label for the section source; use one of evidence_basis_values. Decision rules live in agent.md."
+  evidence_basis: "Evidence class label for the section source; use one of evidence_basis_values. Decision rules live in acceptance_criteria.md."
   evidence_basis_values:
     - bom_provided
     - independent_vendor_spec

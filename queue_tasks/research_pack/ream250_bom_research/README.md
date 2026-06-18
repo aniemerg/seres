@@ -7,7 +7,12 @@ is not part of the generic research queue system.
 
 - `agent.md` - Prompt/instructions for a Codex agent processing
   reAM250 BOM research queue items.
+- `acceptance_criteria.md` - Result-quality acceptance rules for evidence
+  classification, web-search fallback, route audits, material/mass judgment,
+  field semantics, and item granularity.
 - `research_result.schema.yaml` - Expected structured result shape.
+- `image_token_optimization_for_agents.md` - Token-budget guidance for CAD
+  preview image inspection, including when API `detail: "low"` is appropriate.
 - `research_scripts/generate_queue_tasks.py` - Build queue items from the gold
   CSV/manifest package, optionally extracting STEP metadata with FreeCAD.
 - `research_scripts/render_step_views.py` - Render a compact 2x2 PNG CAD preview
@@ -58,138 +63,42 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 
 This writes `research/ream250_bom/ream250_bom_row_<row>_<item>__views_2x2.png`
 next to the Markdown result. Inspect the contact sheet first; generate
-`--individual-views` only when the compact preview is insufficient.
+a selected individual view only when the compact preview is insufficient:
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step" \
+  --output-dir research/ream250_bom \
+  --output-stem ream250_bom_row_<row>_<item> \
+  --view front
+```
+
+Allowed selected views are `iso`, `front`, `top`, and `right`. Use
+`--individual-views` only when all four individual orientations are needed.
 
 ## Research Evidence Rules
 
-Evidence decision order:
+The authoritative result-quality rules live in
+`acceptance_criteria.md`. `agent.md` is the worker SOP, this README is the human
+operation manual, `research_result.schema.yaml` is the structural contract, and
+`validate_results.py` enforces the mechanically checkable subset.
 
-- First lock row identity from BOM + manifest. Web/vendor evidence may fill
-  missing attributes for that identity, but should not reinterpret the row as a
-  different product.
-- Treat BOM row fields, manifest data, the supplied CAD/STEP package, local
-  metadata extracted from that package, rendered CAD previews, and the
-  BOM-provided vendor/product URL route as one evidence class: `bom_provided`.
-  That route includes the exact BOM `link_url`, redirects, official canonical
-  replacements, and first-party support/product pages reached by following links
-  or navigation from the BOM-provided product page for the same row.
-- If a section cites an external URL on a different domain from the BOM
-  `link_url` while claiming `evidence_basis: bom_provided`, include a grep-able
-  `official_alternate_route_check:` note in that section. State why the
-  alternate domain is still BOM-side evidence: same manufacturer or official
-  operator, official shop/canonical/domain evidence, and row-matched product ID
-  or same-row product-family route. This is a general official-route audit; do
-  not make it depend on one specific HTTP failure mode.
-- Use independent vendor/web research when BOM-side evidence does not directly
-  resolve the needed value, or when BOM-side evidence is placeholder/generic/
-  conflicting.
-- If BOM-side evidence does not resolve the needed value, do at least one
-  targeted web/search sanity check before falling back to
-  `engineering_hypothesis`, even when the row has no manufacturer, product ID,
-  standard designation, or URL. Build low-cost queries from `cad_file`,
-  `description_or_product_id`, BOM item, parent assembly, sibling row names,
-  part-family nouns, and terms such as `material`, `datasheet`, `catalog`,
-  `drawing`, `technical data`, or `weight`. If no row-specific usable source is
-  found, keep the result conservative and make that absence visible in the
-  relevant section's uncertainty when it affects downstream trust.
-- Every section using `evidence_basis: engineering_hypothesis` or
-  `evidence_basis: unresolved` must include a grep-able `targeted_web_search:`
-  note in that same section, either in `source.cited_fact_or_basis` or
-  `uncertainty_notes`. List the attempted query terms and the result before
-  falling back to the hypothesis.
-- A row-matched official canonical replacement derived from a BOM-provided URL
-  is still BOM-side evidence. Do not downgrade it to independent research.
-- First-party support/product-family/technology/download pages reached from the
-  BOM-provided product page route are also BOM-side evidence for the same row.
-  Example: if a BOM-provided Karl Hipp product-family page leads to the vendor's
-  ballscrew page that states spindle material, that material is `bom_provided`,
-  not `independent_vendor_spec`.
-- If a section uses `evidence_basis: bom_provided` and cites an external URL on
-  a different domain from `row_identity.link_url`, include
-  `official_alternate_route_check:` in that section. State the original BOM URL,
-  the alternate URL/domain used, the official-route evidence for that alternate
-  domain, and the row-match evidence such as product ID, manufacturer, or
-  same-row product family.
-- If the BOM row has `link_url` and a section uses a different-domain
-  `independent_vendor_spec`, include a grep-able `bom_url_route_check:` note in
-  that section. State the BOM-provided URL, redirect/canonical, or first-party
-  route checked and why it did not resolve the section's value before relying on
-  the third-party source.
-- If a section value depends on multiple evidence classes, use the least reliable
-  evidence class needed for that conclusion.
+At a high level:
 
-Evidence basis labels:
-
-Allowed `evidence_basis` values, in reliability order:
-
-- BOM-side supplied evidence states or measures the value -> `bom_provided`
-- Agent-initiated web search finds a vendor/catalog/drawing/product-page fact -> `independent_vendor_spec`
-- DIN/ISO/SKF/SMC/etc. designation or standard part family supports the fact -> `standard_part_convention`
-- Function, assembly context, visible shape, or manufacturing route inference -> `engineering_hypothesis`
-- Checked evidence does not support even a defensible broad engineering hypothesis -> `unresolved`
-
-For mass, arithmetic does not by itself lower the evidence class. A value
-computed from BOM-provided CAD/STEP volume and BOM-provided material identity is
-still `bom_provided`. Once the material grade/family is resolved from BOM-side
-evidence, including the BOM-provided URL route, a standard/common density for
-that material is a calculation constant, not a separate evidence class; record
-the density value in `mass.basis` or `mass.assumptions`, but do not add a generic
-density datasheet solely to set `evidence_basis`. For a multi-material part,
-distinguish source facts from the
-composition estimate. If the component materials and total CAD volume are
-BOM-side facts but the material volume fractions or effective density are
-guessed without a cited source, set `mass.source.evidence_basis:
-engineering_hypothesis`. Put the guessed fraction/effective-density choice in
-`mass.assumptions`, and keep the residual consequence in
-`mass.uncertainty_notes`. Keep `mass.source.evidence_basis: bom_provided` for
-multi-material parts only when the mass itself, material fractions, split-volume
-CAD, or another sourced physical input resolves the composition closely enough
-that the mass no longer depends on an unsupported ratio guess.
-
-For common material densities, check `kb/materials/properties.yaml` before web
-search. If the resolved BOM-side material maps to that local table, treat the
-density as a calculation constant and keep the mass evidence class determined by
-the BOM-side material and CAD/STEP evidence. Do not add an external density
-datasheet solely for common stainless steel, aluminum, steel, copper, brass,
-NBR, FKM, or silicone rubber densities.
-
-For `standard_part_convention`, record parameter completeness in
-`cited_fact_or_basis`. Standard family alone may support broad function or
-interface, but should not support material unless the designation, suffix, class,
-or cited convention encodes material.
-
-Prefer a conservative `engineering_hypothesis` over `unresolved` whenever the
-row identity, geometry, standard family, or function supports a broad conclusion.
-For material, do not write `unresolved ...` as the primary material; use a broad
-hypothesized family such as `elastomer seal material` or `unknown metal/alloy`
-with `evidence_basis: engineering_hypothesis`.
-
-Vendor/product page parsing rules:
-
-- Follow redirects and cite the final loaded URL. If the original URL came from
-  the BOM context, redirected-page facts are still `bom_provided`.
-- If the original BOM URL does not directly resolve the needed value, try
-  official canonical or official alternate routes for the same manufacturer and
-  product before treating the provided route as exhausted. This includes
-  official migrated product pages, official regional/shop domains, first-party
-  support or product-family pages, and official group-company product pages.
-  If the alternate page matches the BOM product ID, legacy number,
-  manufacturer, or same-row product family, cite the final URL and keep
-  `evidence_basis: bom_provided`.
-- If the official canonical page is large or minified, extract targeted snippets
-  for the product ID, legacy number, material fields, material words, part-family
-  nouns, and download links instead of abandoning the canonical source. Do not
-  replace a row-matched BOM-provided/canonical source with an independent PDF or
-  catalog only because that source is easier to parse.
-- Scan page title/H1, breadcrumbs, Product Information bullets, overview bullets,
-  collapsed accordions, downloads, snippets, and technical tables before saying
-  material was not resolved.
-- Preserve component material wording such as `aluminum outer ring` or `NBR`;
-  do not collapse assemblies to a single material.
-- If the provided URL does not resolve a value, broaden queries using
-  manufacturer, product ID, BOM/CAD row name, part-family nouns, and terms such
-  as `material`, `body material`, `seal material`, `datasheet`, `catalog`,
-  `drawing`, and `technical data`.
+- Lock row identity from BOM + manifest before using web/vendor evidence.
+- Treat BOM row fields, manifest data, supplied CAD/STEP files, local metadata,
+  rendered previews, and BOM-provided URL routes as `bom_provided`.
+- Use independent vendor/web research only when BOM-side evidence does not
+  directly resolve the value, or when BOM-side evidence is
+  placeholder/generic/conflicting.
+- Before writing `engineering_hypothesis` or `unresolved`, perform targeted
+  web/search checks and include `targeted_web_search:` in that same section.
+- Use `official_alternate_route_check:` for different-domain official routes
+  kept as `bom_provided`.
+- Use `bom_url_route_check:` before relying on different-domain
+  `independent_vendor_spec` when the BOM row had a Link URL.
+- Follow the acceptance rules for material precision, mass evidence,
+  common-density handling, field semantics, and item granularity.
 
 Lease with hard filters:
 
@@ -477,77 +386,12 @@ Use section-local notes so material uncertainty stays under `material`, CAD mass
 caveats stay under `mass`, and fabrication-route assumptions stay under
 `how_to_make`. `kb_implications` remains a top-level list.
 
-Use `kb_implications` to leave one machine-searchable item granularity signal for
-later KB modeling. Do not add a new top-level field. Include exactly one bullet
-starting with `item_granularity: <value> - ...`, choosing the best current value:
-
-- `simple_part` - one main physical part that can plausibly be made from stock
-  or bulk material by one dominant fabrication route.
-- `assembly` - multiple physical parts joined together, with an eventual sub-BOM
-  or assembly recipe likely needed.
-- `purchased_module` - vendor functional module or calibrated subsystem, such as
-  a laser module, sensor head, pump, controller, or other item that should be
-  treated as purchased/imported until a sub-BOM and calibration workflow are
-  modeled.
-- `consumable` - replaceable operating or maintenance item such as a seal,
-  filter, lubricant, adhesive, or cable tie.
-- `raw_material_or_stock` - stock material, bulk material, fastener stock, sheet,
-  bar, tube, wire, or other feedstock-like row.
-- `unknown` - the row identity is too ambiguous to assign a useful granularity.
-
-Keep this as a planning hint, not a hard schema claim. If the row could fit more
-than one value, choose the one that best predicts how the KB should model it
-next; explain the ambiguity after the dash. Prefer `consumable` over `assembly`
-for replaceable seals, centering rings, O-rings, filter elements, belts, and
-similar maintenance items even when the purchased item contains multiple
-materials or a simple carrier ring plus seal; multi-material construction alone
-does not imply `assembly`.
-
-Field semantics:
-
-- `source.cited_fact_or_basis`: source facts only. Include what the cited URL,
-  file, CAD measurement, local metadata extractor, or standard table directly
-  says/measures. Do not include interpretations, guesses, caveats, or why the
-  fact might be incomplete.
-- `assumptions`: premises adopted to transform facts into the section value.
-  These are chosen modeling choices, not source facts. Use this for unit
-  interpretation, representative density choices, effective-density choices,
-  using a single-solid CAD volume as a proxy, or an inferred manufacturing route.
-  Use `[]` when no extra premise was needed beyond the cited facts.
-- `uncertainty_notes`: residual limitations after applying the facts and
-  assumptions. This is not an audit log of every failed lookup. Write a note
-  only if removing it would make a downstream reader over-trust, over-specify,
-  or misuse the section value. Do not include a failed check, missing field,
-  rejected source, or redirect/blocking detail unless it still creates a real
-  limitation for the final value. Use `[]` when no meaningful residual
-  limitation remains.
-
-Avoid duplicated wording across these fields. A fact goes in
-`cited_fact_or_basis`; the modeling premise that uses that fact goes in
-`assumptions`; the remaining consequence or risk goes in `uncertainty_notes`.
-
-Do not list non-contributing source/audit details as uncertainties once the
-section value is already resolved. Examples that should usually be omitted:
-blank BOM material fields, rejected Generic/density-1000 CAD metadata, a blocked
-or unresolved original URL after a row-matched official alternate source
-succeeds, and "No catalog mass was found." Keep only the downstream consequence
-if it matters, such as an unresolved material-volume split in a multi-material
-mass estimate.
-
-Mass examples:
-
-- Good `cited_fact_or_basis`: "FreeCAD measured 5586.124 mm^3; the BOM-provided
-  vendor page states aluminum and NBR; the local density table lists aluminum
-  and NBR densities."
-- Good `assumptions`: "The single-solid STEP volume is used as a coarse combined
-  material-volume proxy because the CAD does not expose separate aluminum and
-  NBR regions."
-- Good `uncertainty_notes`: "The aluminum-to-NBR volume fraction is not measured
-  separately, so the mass remains an unsupported effective-density estimate."
-- Bad `assumptions`: "The STEP volume is millimeter-based." That is a unit/fact
-  basis, so put it in `mass.basis` or `source.cited_fact_or_basis`.
-- Bad `uncertainty_notes`: a non-contributing audit detail that does not change
-  how a downstream reader should trust, specify, or use the section value.
+The validator also checks selected acceptance markers such as
+`targeted_web_search:`, `official_alternate_route_check:`, and
+`bom_url_route_check:` when the corresponding evidence basis and URL conditions
+apply. It cannot check every judgment rule. Use `acceptance_criteria.md` for the
+authoritative field semantics, evidence-basis decisions, material/mass
+judgment, and item granularity rules.
 
 ## Completion
 

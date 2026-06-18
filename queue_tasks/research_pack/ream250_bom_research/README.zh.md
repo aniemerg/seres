@@ -6,7 +6,12 @@ queue 系統的一部分。
 ## 檔案
 
 - `agent.md` - 給 Codex agent 的 reAM250 BOM 研究指令。
+- `acceptance_criteria.md` - 結果品質驗收規則，涵蓋 evidence classification、
+  web-search fallback、route audit、material/mass 判斷、欄位語意與 item
+  granularity。
 - `research_result.schema.yaml` - 結果檔應符合的結構。
+- `image_token_optimization_for_agents.md` - CAD preview image inspection 的
+  token-budget 指引，包含何時適合使用 API `detail: "low"`。
 - `research_scripts/generate_queue_tasks.py` - 從 gold CSV/manifest 產生 queue
   items，可選擇用 FreeCAD 抽 STEP metadata。
 - `research_scripts/render_step_views.py` - 從 STEP 檔產生 compact 2x2 PNG CAD
@@ -54,126 +59,41 @@ queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_view
 
 輸出會寫到
 `research/ream250_bom/ream250_bom_row_<row>_<item>__views_2x2.png`，和 Markdown
-結果放在同一個資料夾。先檢查這張 contact sheet；只有在細節不足時才加
-`--individual-views` 產生單一視角圖。
+結果放在同一個資料夾。先檢查這張 contact sheet；只有在細節不足時才產生
+需要的單一視角圖：
+
+```bash
+queue_tasks/research_pack/ream250_bom_research/research_scripts/render_step_views.sh \
+  "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/<CAD file>.step" \
+  --output-dir research/ream250_bom \
+  --output-stem ream250_bom_row_<row>_<item> \
+  --view front
+```
+
+可選視角是 `iso`、`front`、`top`、`right`。只有在四個單視角都需要時才使用
+`--individual-views`。
 
 ## 研究證據規則
 
-判斷流程：
+結果品質規則的權威文件是 `acceptance_criteria.md`。`agent.md` 是 worker SOP，
+這份 README 是人類操作手冊，`research_result.schema.yaml` 是結構 contract，
+`validate_results.py` 只負責可機械檢查的 subset。
 
-- 先用 BOM + manifest 鎖定 row identity。Web/vendor 證據只能補這個 identity
-  的缺漏屬性，不應把 row 重新解讀成另一個產品。
-- 將 BOM row 欄位、manifest、隨 BOM 提供的 CAD/STEP package、從該 package
-  抽出的 local metadata、rendered CAD previews，以及 BOM-provided
-  vendor/product URL route 視為同一種證據類別：`bom_provided`。這個 route
-  包含 BOM 原始 `link_url`、redirect、官方 canonical replacement，以及從
-  BOM-provided product page 跟連結或站內導覽到達、且用於同一 row 的
-  first-party support/product page。
-- 如果某個 section 引用了和 BOM `link_url` 不同 domain 的外部 URL，卻仍使用
-  `evidence_basis: bom_provided`，該 section 必須加上一條可 grep 的
-  `official_alternate_route_check:` note。說明為什麼該 alternate domain 仍是
-  BOM-side evidence：同 manufacturer 或 official operator、官方
-  shop/canonical/domain 證據，以及 row-matched product ID 或同 row 的
-  product-family route。這是通用官方路徑審計，不要綁定單一 HTTP 失敗型態。
+高層原則：
+
+- 先用 BOM + manifest 鎖定 row identity，再用 web/vendor evidence 補該 row 的屬性。
+- BOM row、manifest、隨 BOM 提供的 CAD/STEP、local metadata、rendered preview、
+  BOM-provided URL route 都屬於 `bom_provided`。
 - 只有在 BOM-side evidence 沒有直接解決該值，或 BOM-side evidence 是
-  placeholder/generic/conflicting 時，才使用 independent vendor/web research
-  補資料。
-- 只要 BOM-side evidence 沒有解決需要的值，在退回
-  `engineering_hypothesis` 前至少做一次 targeted web/search sanity check。
-  即使 row 沒有 manufacturer、product ID、standard designation 或 URL 也一樣。
-  query 可用 `cad_file`、`description_or_product_id`、BOM item、parent assembly、
-  sibling row names、part-family nouns，並加上 `material`、`datasheet`、
-  `catalog`、`drawing`、`technical data`、`weight` 等詞。如果找不到 row-specific
-  usable source，結果保持保守，且當這會影響下游信任時，在相關 section 的
-  uncertainty 中明確保留這個限制。
-- 每個使用 `evidence_basis: engineering_hypothesis` 或
-  `evidence_basis: unresolved` 的 section，都必須在同一 section 的
-  `source.cited_fact_or_basis` 或 `uncertainty_notes` 加上一條可 grep 的
-  `targeted_web_search:` note。退回 hypothesis 前，要列出嘗試過的 query terms
-  和搜尋結果。
-- 由 BOM-provided URL 推導出的 row-matched 官方 canonical replacement 仍屬於
-  BOM-side evidence，不要降級成 independent research。
-- 從 BOM-provided product page route 到達的 first-party support、product
-  family、technology、download page，對同一 row 仍屬於 BOM-side evidence。
-  例：BOM-provided Karl Hipp product-family page 導到 vendor ballscrew page，
-  且該頁寫出 spindle material，這個 material 是 `bom_provided`，不是
-  `independent_vendor_spec`。
-- 如果某個 section 使用 `evidence_basis: bom_provided` 且引用和
-  `row_identity.link_url` 不同 domain 的外部 URL，該 section 必須加上
-  `official_alternate_route_check:`。說明原始 BOM URL、使用的 alternate
-  URL/domain、該 alternate domain 的 official-route 證據，以及 product ID、
-  manufacturer 或同 row product family 等 row-match 證據。
-- 如果 BOM row 有 `link_url`，但某個 section 使用不同 domain 的
-  `independent_vendor_spec`，該 section 必須加上一條可 grep 的
-  `bom_url_route_check:` note，說明已檢查的 BOM-provided URL、redirect/canonical
-  或 first-party route，以及為什麼它沒有解決該 section 的值，才能使用第三方來源。
-- 如果一個 section 的值同時依賴多種證據類別，`evidence_basis` 使用該結論所需
-  來源中可靠度最低的類別。
-
-`evidence_basis` 標籤：
-
-允許的 `evidence_basis` 依可靠度由高到低排列：
-
-- BOM-side supplied evidence 寫出或量測該值 -> `bom_provided`
-- Agent 自行上網搜尋取得 vendor/catalog/drawing/product-page fact -> `independent_vendor_spec`
-- DIN/ISO/SKF/SMC 等 designation 或標準件類型支持該 fact -> `standard_part_convention`
-- 根據功能、裝配脈絡、可見形狀或製造路徑推論 -> `engineering_hypothesis`
-- 已檢查的證據連可防衛的 broad engineering hypothesis 都不支持 -> `unresolved`
-
-對 mass 來說，有做算術不會自動降低 evidence class。如果 mass 是由
-BOM-provided CAD/STEP volume 和 BOM-provided material identity 計算得到，仍然是
-`bom_provided`。當材料 grade/family 已由 BOM-side evidence 確認後，包括由
-BOM-provided URL route 確認，該材料的 standard/common density 只是計算常數，
-不算另一種 evidence class；把 density 值寫在 `mass.basis` 或
-`mass.assumptions`，但不要只為了決定 `evidence_basis` 而加入 generic density
-datasheet。對 multi-material part，要把 source facts 和 composition estimate
-分開判斷。即使 component materials
-和 total CAD volume 都是 BOM-side facts，只要 material volume fractions 或
-effective density 是沒有 cited source 的猜測，
-`mass.source.evidence_basis` 就要設為 `engineering_hypothesis`。猜測的比例或
-effective-density 選擇寫進 `mass.assumptions`，剩下的後果寫進
-`mass.uncertainty_notes`。只有當 mass 本身、材料比例、split-volume CAD，或其他
-有來源的物理輸入已經足以解析 composition，使 mass 不再依賴無來源比例猜測時，
-multi-material mass 才保持 `bom_provided`。
-
-常見材料密度先查本地 `kb/materials/properties.yaml`，不要直接上網找。若
-BOM-side material 已解析且能對應到本地密度表，density 視為 calculation
-constant，mass 的 evidence class 由 BOM-side material 與 CAD/STEP evidence
-決定。不要為 stainless steel、aluminum、steel、copper、brass、NBR、FKM、
-silicone rubber 這類常見密度額外加入外部 datasheet。
-
-對 `standard_part_convention`，必須在 `cited_fact_or_basis` 說明參數完整度。
-只有標準件 family 通常只能支持 broad function 或 interface；除非 designation、
-suffix、class 或引用的 convention 編碼了材質，否則不能用它支持 material。
-
-只要 row identity、幾何、標準件 family 或功能能支持可防衛的 broad conclusion，
-就優先用保守的 `engineering_hypothesis`，不要用 `unresolved`。材料欄不要寫
-`unresolved ...`；改寫 broad hypothesized family，例如 `elastomer seal material`
-或 `unknown metal/alloy`，並設 `evidence_basis: engineering_hypothesis`。
-
-Vendor/product page 解析規則：
-
-- 要跟隨 redirect 並引用最後載入的 URL。只要原 URL 來自 BOM context，
-  redirect 後頁面取得的 fact 仍是 `bom_provided`。
-- 如果原始 BOM URL 沒有直接解析出需要的值，先嘗試同 manufacturer / 同產品的
-  official canonical 或 official alternate route，再判定 provided route 已用盡。
-  這包含官方 migrated product page、官方 regional/shop domain、first-party
-  support/product-family page，以及官方 group-company product page。若 alternate
-  page 符合 BOM product ID、legacy number、manufacturer 或同 row product
-  family，引用該 final URL，且 `evidence_basis` 保持 `bom_provided`。
-- 如果官方 canonical page 很大或 minified，不要因為 broad scan 很慢就放棄。
-  應針對 product ID、legacy number、material 欄位、材料詞、part-family nouns
-  和 download links 抽 snippet。不要只因為 independent PDF/catalog 比較好 parse，
-  就用它取代 row-matched BOM-provided/canonical source。
-- 不要只找 `Material:` 這種表格欄位。宣稱 material 未解析前，必須掃過 page
-  title/H1、breadcrumbs、Product Information bullets、overview bullets、
-  collapsed accordions、downloads、snippets、technical tables。
-- 保留 component material wording，例如 `aluminum outer ring` 或 `NBR`；
-  不要把 assembly 強行壓成單一材質。
-- 如果 BOM-provided URL 沒解析出值，搜尋 query 要放寬，結合 manufacturer、
-  product ID、BOM/CAD row name、part-family nouns，以及 `material`、
-  `body material`、`seal material`、`datasheet`、`catalog`、`drawing`、
-  `technical data` 等詞。
+  placeholder/generic/conflicting 時，才使用 independent vendor/web research。
+- 在寫 `engineering_hypothesis` 或 `unresolved` 前，必須做 targeted web/search，
+  並在同一 section 加上 `targeted_web_search:`。
+- 不同 domain 的官方 alternate route 若仍保持 `bom_provided`，使用
+  `official_alternate_route_check:`。
+- BOM row 有 Link URL 但使用不同 domain 的 `independent_vendor_spec` 前，使用
+  `bom_url_route_check:` 說明 BOM route 為何沒有解決該值。
+- material precision、mass evidence、common-density handling、field semantics、
+  item granularity 等細節，以 `acceptance_criteria.md` 為準。
 
 租任務時使用 hard filters：
 
@@ -450,68 +370,11 @@ source object，且包含：
 `mass.uncertainty_notes`，製造路徑推論放在 `how_to_make.assumptions` 或
 `how_to_make.uncertainty_notes`。`kb_implications` 保持 top-level list。
 
-用 `kb_implications` 留下一條之後可機械化搜尋的 item granularity 訊號。不要新增
-top-level 欄位。請加入剛好一條以 `item_granularity: <value> - ...` 開頭的
-bullet，依目前證據選最適合的值：
-
-- `simple_part` - 一個主要實體零件，合理上可由 stock 或 bulk material 透過一個
-  主要製造路徑做出。
-- `assembly` - 多個實體零件組合而成，之後大概需要 sub-BOM 或 assembly recipe。
-- `purchased_module` - vendor functional module 或 calibrated subsystem，例如
-  laser module、sensor head、pump、controller；在 sub-BOM 和 calibration workflow
-  被建模前，應先視為 purchased/imported。
-- `consumable` - 可替換的操作或維護耗材，例如 seal、filter、lubricant、
-  adhesive、cable tie。
-- `raw_material_or_stock` - stock material、bulk material、fastener stock、sheet、
-  bar、tube、wire，或其他類似 feedstock 的 row。
-- `unknown` - row identity 太模糊，無法給出有用的 granularity。
-
-這只是 planning hint，不是 hard schema claim。如果一個 row 可能符合多個值，選最能
-預測之後 KB 應如何建模的那個，並在 dash 後面說明模糊點。對可替換的 seal、
-centering ring、O-ring、filter element、belt 和類似 maintenance item，優先選
-`consumable` 而不是 `assembly`；即使 purchased item 含多種材料，或是簡單 carrier
-ring 加 seal，也不要只因為 multi-material construction 就判成 `assembly`。
-
-欄位語意：
-
-- `source.cited_fact_or_basis`：只寫 source facts。包含引用 URL、檔案、CAD
-  measurement、local metadata extractor，或 standard table 直接寫出/量測到的
-  內容。不要寫解讀、猜測、caveat，或該事實為何不完整。
-- `assumptions`：只寫把 facts 轉成該 section value 時採用的額外 modeling
-  premises。這是模型選擇，不是 source fact。可用於單位解讀、代表性密度選擇、
-  effective-density 選擇、把 single-solid CAD volume 當 proxy，或推論製造路徑。
-  若除了 cited facts 外不需要額外前提，使用 `[]`。
-- `uncertainty_notes`：只寫套用 facts 和 assumptions 後仍剩下的限制或風險。
-  這不是記錄每個 failed lookup 的 audit log。只有在移除該 note 會讓下游讀者
-  over-trust、over-specify 或 misuse 這個 section value 時才寫。failed check、
-  missing field、rejected source、redirect/blocking detail 只有在仍對 final value
-  造成真實限制時才列。沒有明顯殘餘限制就用 `[]`。
-
-不要在這三個欄位用不同用字重複同一件事。fact 放在
-`cited_fact_or_basis`；使用該 fact 的 modeling premise 放在 `assumptions`；
-剩下的後果或風險放在 `uncertainty_notes`。
-
-section value 已經解析時，不要把 non-contributing source/audit details 列成
-uncertainty。通常應省略的例子包括：BOM material 欄位空白、被拒絕的
-Generic/density-1000 CAD metadata、row-matched official alternate source 成功後
-原 URL blocked 或未直接解析，以及「No catalog mass was found」。只保留真的影響
-下游使用的後果，例如 multi-material mass estimate 裡的材料體積比例沒有被單獨量測。
-
-Mass 範例：
-
-- 好的 `cited_fact_or_basis`：「FreeCAD measured 5586.124 mm^3；BOM-provided
-  vendor page states aluminum and NBR；local density table lists aluminum and NBR
-  densities。」
-- 好的 `assumptions`：「The single-solid STEP volume is used as a coarse
-  combined material-volume proxy because the CAD does not expose separate
-  aluminum and NBR regions。」
-- 好的 `uncertainty_notes`：「The aluminum-to-NBR volume fraction is not
-  measured separately, so the mass remains an unsupported effective-density
-  estimate。」
-- 不好的 `assumptions`：「The STEP volume is millimeter-based。」這是 unit/fact
-  basis，應放在 `mass.basis` 或 `source.cited_fact_or_basis`。
-- 不好的 `uncertainty_notes`：不會改變下游讀者如何 trust、specify 或 use 該
-  section value 的 non-contributing audit detail。
+validator 也會在對應 evidence basis 和 URL 條件成立時，檢查部分 acceptance
+markers，例如 `targeted_web_search:`、`official_alternate_route_check:`、
+`bom_url_route_check:`。但它無法檢查所有 judgment rules。欄位語意、
+evidence-basis 判斷、material/mass 判斷與 item granularity 規則，以
+`acceptance_criteria.md` 和 `research_result.schema.yaml` 為準。
 
 ## 完成任務
 

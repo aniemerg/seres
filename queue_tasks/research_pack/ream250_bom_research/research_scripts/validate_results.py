@@ -30,6 +30,17 @@ EXPECTED_SOURCE_CSV = "design/real-mechanical/reAm250/reAM250_cad_gold_package/r
 SOURCE_FIELDS = ("url_or_path", "cited_fact_or_basis", "evidence_basis")
 SECTION_LIST_FIELDS = ("assumptions", "uncertainty_notes")
 TOP_LEVEL_LIST_FIELDS = ("kb_implications",)
+ITEM_GRANULARITY_VALUES = (
+    "simple_part",
+    "assembly",
+    "purchased_module",
+    "consumable",
+    "raw_material_or_stock",
+    "unknown",
+)
+ITEM_GRANULARITY_RE = re.compile(
+    r"^item_granularity:\s*([a-z_]+)\s+-\s+.+"
+)
 EVIDENCE_BASIS_VALUES = (
     "bom_provided",
     "independent_vendor_spec",
@@ -167,6 +178,7 @@ def validate_result(data: Dict[str, Any]) -> List[str]:
             issues.append(f"missing required field: {field}")
         elif not isinstance(data.get(field), list):
             issues.append(f"{field} must be a list")
+    issues.extend(validate_kb_implications(data))
 
     return issues
 
@@ -244,6 +256,39 @@ def validate_no_duplicate_section_notes(section: Dict[str, Any], path: str) -> L
         else:
             seen[normalized] = label
     return issues
+
+
+def validate_kb_implications(data: Dict[str, Any]) -> List[str]:
+    kb_implications = data.get("kb_implications")
+    if not isinstance(kb_implications, list):
+        return []
+
+    granularity_entries = [
+        str(value).strip()
+        for value in kb_implications
+        if str(value).strip().startswith("item_granularity:")
+    ]
+    if len(granularity_entries) != 1:
+        return [
+            "kb_implications must include exactly one entry starting with "
+            "'item_granularity: <value> - '"
+        ]
+
+    entry = granularity_entries[0]
+    match = ITEM_GRANULARITY_RE.match(entry)
+    if not match:
+        return [
+            "kb_implications item_granularity entry must match "
+            "'item_granularity: <value> - <explanation>'"
+        ]
+
+    value = match.group(1)
+    if value not in ITEM_GRANULARITY_VALUES:
+        return [
+            "kb_implications item_granularity value must be one of: "
+            f"{', '.join(ITEM_GRANULARITY_VALUES)}"
+        ]
+    return []
 
 
 def validate_source(section: Dict[str, Any], path: str, row_identity: Dict[str, Any] | None = None) -> List[str]:
