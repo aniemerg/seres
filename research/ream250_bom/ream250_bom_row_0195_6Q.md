@@ -1,48 +1,58 @@
 ---
+row_identity:
+  item: "6Q"
+  cad_file: "6Q_mount_belt_pulley_without_teeth"
+  source_row_number: 195
+  source_csv: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
 function:
-  summary: "Small stainless-steel belt pulley or pulley mount component for the reAM250 belt path; the source name identifies a belt pulley without teeth, and the matched CAD file is a compact single solid."
+  summary: "Small mount or axle support for the toothless belt pulley/idler in the reAM250 belt drive area."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv:195 and design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv:195"
-    cited_fact_or_basis: "BOM row 195 lists item 6Q, quantity 9, as '6Q_mount_belt_pulley_without_teeth'; manifest row 195 maps it to a matched part STEP export with one instance found."
-    confidence: medium
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; research/ream250_bom/ream250_bom_row_0195_6Q__views_2x2.png"
+    cited_fact_or_basis: "BOM row 195 names item 6Q as 6Q_mount_belt_pulley_without_teeth with quantity 9; the manifest maps it to gold_export/parts/6Q_mount_belt_pulley_without_teeth.step; the preview shows one small post-and-boss part."
+    evidence_basis: "bom_provided"
+  assumptions:
+    - "The CAD filename's 'mount_belt_pulley_without_teeth' wording is interpreted in the neighboring belt-pulley context of rows 6O, 6P, 6R, and 6S."
+  uncertainty_notes:
+    - "The row does not identify the mating pulley or fastener interface, so the exact load path and mounting orientation are inferred from local BOM context and shape."
 mass:
-  value_kg: 0.014259
-  basis: "Per unit mass from CAD volume and STEP material density: FreeCAD reports volume 1782.4339059137299 mm^3 for one solid. The assembly STEP material extractor reports Stainless Steel with density 8000.0 kg/m^3-like units, giving 0.014259 kg per part. BOM quantity 9 implies about 0.128335 kg total for the row."
+  value_kg: 0.0143
+  basis: "FreeCAD volume 1782.434 mm^3 converted to 1.782434e-6 m^3 and multiplied by the assembly STEP material metadata density of 8000 kg/m^3, yielding about 0.01426 kg per part."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6Q_mount_belt_pulley_without_teeth.step"
-    cited_fact_or_basis: "FreeCAD Part.Shape read of the STEP file: 1 solid, volume 1782.4339059137299 mm^3, area 1184.884312061741 mm^2, bounding box 13.684210526315127 x 20.0 x 30.800000000000228 mm."
-    confidence: high
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6Q_mount_belt_pulley_without_teeth.step; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step"
+    cited_fact_or_basis: "FreeCAD measured 1 solid, volume 1782.434 mm^3, area 1184.884 mm^2, and bounding box 13.68 x 20.00 x 30.80 mm; local assembly STEP material extraction matched Stainless Steel with density 8000.0 kg/m^3."
+    evidence_basis: "bom_provided"
+  assumptions:
+    - "The STEP solid is treated as the complete per-unit geometry for one BOM row 6Q part."
+    - "The STEP material metadata density is used directly as the stainless steel density constant for the CAD volume calculation."
+  uncertainty_notes:
+    - "The estimate excludes any separate bearing, screw, washer, or pulley hardware that may assemble with this mount elsewhere in the BOM."
 material:
-  primary_material: "Stainless Steel"
+  primary_material: "stainless steel"
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step"
-    cited_fact_or_basis: "extract_step_materials.py for product '6Q_mount_belt_pulley_without_teeth' found material 'Stainless Steel' and density 8000.0."
-    confidence: high
+    cited_fact_or_basis: "Local STEP material extraction for product 6Q_mount_belt_pulley_without_teeth reports material Stainless Steel and density 8000.0."
+    evidence_basis: "bom_provided"
+  assumptions: []
+  uncertainty_notes:
+    - "The extracted material gives a family, not a specific stainless grade."
 how_to_make:
-  summary: "Make as a small stainless machined pulley or pulley-mount part: cut a blank, turn or mill the belt-contact geometry from the CAD model, finish any bore or mounting features, then deburr and inspect."
+  summary: "Machine as a small one-piece stainless steel pulley mount/idler post from bar or rod stock, then deburr and inspect."
   manufacturing_steps:
-    - "Cut stainless stock or near-net blank sized for the 13.7 x 20.0 x 30.8 mm CAD envelope."
-    - "Turn or mill the circular belt-contact/pulley surfaces and any central mounting geometry from the STEP model."
-    - "Drill, ream, or finish attachment features shown in the CAD model."
-    - "Deburr, clean, and inspect dimensions and surface finish before installation in the belt path."
+    - "Cut stainless steel bar or rod stock to a blank slightly larger than the 13.68 x 20.00 x 30.80 mm CAD envelope."
+    - "Turn the cylindrical post features and shoulders on a lathe or mill-turn setup."
+    - "Mill the transverse boss/flange surfaces and any required flats or relief geometry."
+    - "Deburr edges, clean the part, and inspect the post diameter, boss width, and overall height against the STEP geometry."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6Q_mount_belt_pulley_without_teeth.step"
-    cited_fact_or_basis: "Manufacturing route inferred from the matched single-solid stainless CAD geometry and compact pulley-like part name; no vendor process sheet or third-party part link is present in the BOM row."
-    confidence: medium
-assumptions:
-  - "CAD units are interpreted as millimeters, consistent with the small 13.7 x 20.0 x 30.8 bounding box."
-  - "The mass value is per physical part, not the row total; multiply by BOM quantity 9 for row mass."
-  - "Because no manufacturer or third-party link is present, the manufacturing route is a practical process inference from CAD geometry and material metadata."
-uncertainty_notes:
-  - "The BOM row has no manufacturer, product ID, material family hint, or third-party URL."
-  - "The part name says belt pulley without teeth, but the STEP file was not semantically annotated beyond the product name and geometry."
-  - "No local or vendor evidence identifies a specific stainless grade, heat treatment, bearing interface, or surface finish requirement."
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6Q_mount_belt_pulley_without_teeth.step; research/ream250_bom/ream250_bom_row_0195_6Q__views_2x2.png"
+    cited_fact_or_basis: "The STEP is a single solid with a 13.68 x 20.00 x 30.80 mm bounding box; the preview shows a cylindrical post integrated with a transverse boss/flange. targeted_web_search: searched \"6Q_mount_belt_pulley_without_teeth material\", \"reAM250 6Q mount_belt_pulley_without_teeth\", and \"mount belt pulley without teeth stainless steel\"; found duplicate BOM listings and generic pulley/idler pages, but no row-specific manufacturing source."
+    evidence_basis: "engineering_hypothesis"
+  assumptions:
+    - "A subtractive route is chosen because the part is small, metallic, axis-featured, and appears to be a one-piece machined bracket/post rather than a sheet-metal or molded component."
+    - "No heat treatment or coating is specified because the BOM and STEP metadata only resolve stainless steel family and geometry."
+  uncertainty_notes:
+    - "The STEP preview does not expose tolerances or surface finish requirements, so lathe/milling operations are a plausible route rather than a process plan."
 kb_implications:
-  - "Model as a small discrete stainless pulley or pulley-mount part for belt guidance, with per-unit mass about 0.0143 kg."
-  - "Do not create a specific stainless alloy grade from this row alone; use generic stainless steel unless later evidence identifies a grade."
-  - "For a simplified KB BOM, this may fold into a belt pulley or motion-axis hardware group if fine pulley variants are below the needed modeling resolution."
+  - "item_granularity: simple_part - one small stainless steel pulley mount/idler support that can be modeled as a machined part from stainless stock; associated bearing or pulley hardware should remain separate BOM items."
 ---
 
-# reAM250 BOM Row 195 - Item 6Q
-
-The current row evidence supports a concise component entry: quantity 9 of a small stainless belt pulley or pulley-mount part. CAD geometry is available and matched, and the full assembly STEP provides explicit Stainless Steel material metadata, so the mass estimate is stronger than rows with only generic material tags.
+Research result for reAM250 BOM row 195.

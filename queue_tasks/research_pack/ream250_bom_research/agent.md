@@ -193,11 +193,17 @@ Use that file as the authority for result-quality decisions, especially:
 - targeted_web_search requirement before `engineering_hypothesis` or `unresolved`
 - BOM URL, official alternate route, and independent-source route audits
 - material precision and placeholder-material handling
+- row-specific non-placeholder STEP material counts as `bom_provided`, with
+  standards used only as cross-checks
 - mass evidence rules, common density handling, and multi-material estimates
 - manufacturing-route evidence for `how_to_make`
 - standard part convention parameter completeness
 - source / assumptions / uncertainty separation
 - item_granularity selection
+  - finished bolts, screws, nuts, washers, and similar fasteners should usually
+    be `simple_part`, not `raw_material_or_stock`
+  - reserve `raw_material_or_stock` for stock forms such as sheet, bar, tube,
+    extrusion, profile, wire, plate, rod, or cut-to-length stock
 
 Keep research concise. Use at most 4 external sources per result unless the row
 cannot be resolved without more. Follow BOM-provided URL routes first when they

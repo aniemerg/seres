@@ -49,6 +49,17 @@ STANDARD_HARDWARE_NOT_MODULE_RE = re.compile(
     r"\b(claw clamp|fastener|bolt|screw|nut|washer)\b",
     re.IGNORECASE,
 )
+STANDARD_HARDWARE_CAD_RE = re.compile(
+    r"(?:^|[^A-Za-z0-9])(bolt|screw|nut|washer|fastener)(?:$|[^A-Za-z0-9])",
+    re.IGNORECASE,
+)
+NON_PLACEHOLDER_STEP_MATERIAL_RE = re.compile(
+    r"\b(?:STEP material extractor|assembly STEP material extraction|local assembly STEP material extractor)"
+    r".{0,160}\b(?:returned|reports?|matched|found)\b"
+    r".{0,80}\bmaterial\s+['\"]?(?!Generic\b|Default\b|Material\b|None\b|Allgemein\b)"
+    r"[A-Za-z][A-Za-z0-9, /+_.-]+",
+    re.IGNORECASE | re.DOTALL,
+)
 EVIDENCE_BASIS_VALUES = (
     "bom_provided",
     "independent_vendor_spec",
@@ -319,6 +330,13 @@ def validate_kb_implications(data: Dict[str, Any]) -> List[str]:
             "nuts, or washers; use simple_part unless the row is a calibrated "
             "functional module or a multi-part assembly"
         ]
+    if value == "raw_material_or_stock" and STANDARD_HARDWARE_CAD_RE.search(cad_file):
+        return [
+            "kb_implications item_granularity should not be raw_material_or_stock "
+            "for finished standard fasteners such as bolts, screws, nuts, or "
+            "washers; use simple_part while noting that later KB work should map "
+            "them to reusable standard hardware or a fastener kit"
+        ]
     return []
 
 
@@ -348,6 +366,13 @@ def validate_source(section: Dict[str, Any], path: str, row_identity: Dict[str, 
             issues.append(
                 f"{path}.source.cited_fact_or_basis must explain standard/designation "
                 "parameter completeness when evidence_basis is standard_part_convention"
+            )
+        if NON_PLACEHOLDER_STEP_MATERIAL_RE.search(cited):
+            issues.append(
+                f"{path}.source.evidence_basis should be bom_provided when a "
+                "non-placeholder row-specific STEP material extraction directly "
+                "resolves the claimed material fact; use standard_part_convention "
+                "only as a cross-check for standard/designation-derived facts"
             )
     if (
         isinstance(evidence_basis, str)

@@ -6,51 +6,49 @@ row_identity:
   source_csv: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
   link_url: "https://www.pfeiffer-vacuum.com/global/de/shop/products/311ZRA063"
 function:
-  summary: "DN 63 ISO-K centering-ring seal with an outer ring and O-ring, used to center and seal an ISO-K vacuum flange joint."
+  summary: "DN 63 ISO-K vacuum centering ring and seal assembly; it centers the flange interface and provides the NBR elastomer sealing element."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3R2_seal_ISO_K_DN63_311ZRA063.step; research/ream250_bom/ream250_bom_row_0144_3R2__views_2x2.png; https://www.shop.buschgroup.com/global/en/products/311ZRA063/"
-    cited_fact_or_basis: "BOM row 144 lists item 3R2, quantity 1, CAD file 3R2_seal_ISO_K_DN63_311ZRA063, product ID 311ZRA063, manufacturer Pfeiffer Vacuum, and the provided product URL; the manifest maps row 144 to the matched STEP file; FreeCAD measured one annular solid with an 85.99 x 86.00 x 8.00 mm bounding box; the rendered contact sheet shows a thin ring-like component with stepped side features; the official Busch canonical page for legacy number 311ZRA063 identifies the product as a DN 63 ISO-K centering ring with outer ring made from aluminum and NBR."
+    url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/311ZRA063 -> https://www.vacuum-shop.com/shop/en_US/category/2073005/product/311zra063/centering-ring-with-outer-ring-aluminum.html; research/ream250_bom/ream250_bom_row_0144_3R2__views_2x2.png"
+    cited_fact_or_basis: "The BOM row identifies item 3R2 as Pfeiffer Vacuum product 311ZRA063. The row-matched product page identifies 311ZRA063 as a centering ring with outer ring for connection flange DN 63 ISO-K. The CAD contact sheet shows a thin annular ring form. official_alternate_route_check: the original BOM URL is on pfeiffer-vacuum.com; the alternate vacuum-shop.com page is an official Pfeiffer Vacuum Components & Solutions shop route for the same manufacturer and exact order number 311ZRA063."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "The BOM/CAD ISO_K_DN63 designation, annular geometry, and row-matched product page are interpreted as the flange-interface sealing and centering role for this row."
+  assumptions: []
   uncertainty_notes: []
 mass:
-  value_kg: 0.011
-  basis: "FreeCAD measured the row STEP as one solid with volume 5586.124 mm^3, surface area 6239.540 mm^2, and bounding box 85.99 x 86.00 x 8.00 mm. With local density constants of 2700 kg/m^3 for aluminum and 1100 kg/m^3 for NBR, the all-aluminum and all-NBR bounds are about 0.015 kg and 0.006 kg. A midpoint effective-density estimate gives about 0.011 kg."
+  value_kg: 0.013
+  basis: "FreeCAD measured one solid with volume 5586.124 mm^3, surface area 6239.540 mm^2, and bounding box 85.99 x 86.00 x 8.00 mm. The rendered preview reported an about 79.3 x 79.3 x 8.0 mm mesh bounding box for visual triage only. Estimated mass uses the CAD volume as a combined material-volume proxy and a coarse 75% aluminum / 25% NBR volume split. Local density constants from kb/materials/properties.yaml are aluminum 2700 kg/m^3 and NBR 1100 kg/m^3, giving effective density about 2300 kg/m^3 and mass about 0.01285 kg."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3R2_seal_ISO_K_DN63_311ZRA063.step; research/ream250_bom/ream250_bom_row_0144_3R2__views_2x2.png; kb/materials/properties.yaml; https://www.shop.buschgroup.com/global/en/products/311ZRA063/"
-    cited_fact_or_basis: "FreeCAD measured 5586.124 mm^3 for one solid; the rendered contact sheet shows a thin annular ring; the official Busch canonical page for legacy number 311ZRA063 identifies the product as aluminum and NBR; the local density table lists aluminum at 2700 kg/m^3 and NBR at 1100 kg/m^3."
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3R2_seal_ISO_K_DN63_311ZRA063.step; kb/materials/properties.yaml; https://www.pfeiffer-vacuum.com/global/de/shop/products/311ZRA063 -> https://www.vacuum-shop.com/shop/en_US/category/2073005/product/311zra063/centering-ring-with-outer-ring-aluminum.html"
+    cited_fact_or_basis: "FreeCAD measured 5586.124 mm^3 for the row STEP. The row-matched product page and datasheet state aluminum for media-contact material and NBR for the O-ring. The local density table lists aluminum at 2700 kg/m^3 and NBR at 1100 kg/m^3. official_alternate_route_check: the original BOM URL is on pfeiffer-vacuum.com; the alternate vacuum-shop.com page is an official Pfeiffer Vacuum Components & Solutions shop route for the same manufacturer and exact order number 311ZRA063."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The single-solid STEP volume is used as a coarse combined material-volume proxy because the CAD does not expose separate aluminum and NBR regions."
-    - "The midpoint between the all-aluminum and all-NBR mass bounds is used as the representative BOM mass estimate."
+    - "The single-solid STEP volume is used as a combined volume proxy for the aluminum ring and NBR O-ring because the CAD does not expose separate material volumes."
+    - "A 75% aluminum / 25% NBR volume split is used as a coarse estimate."
   uncertainty_notes:
-    - "The aluminum-to-NBR volume fraction is not measured separately, so the mass remains an effective-density estimate."
+    - "targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 mass weight\"; found row-matched material and dimensional facts but no catalog mass or material-volume split."
+    - "The aluminum-to-NBR volume fraction is not measured separately, so the mass should be treated as an order-of-magnitude estimate."
 material:
-  primary_material: "aluminum outer ring with NBR O-ring"
+  primary_material: "aluminum ring with NBR O-ring"
   source:
-    url_or_path: "https://www.shop.buschgroup.com/global/en/products/311ZRA063/"
-    cited_fact_or_basis: "The official Busch canonical page for legacy number 311ZRA063 identifies the product as a centering ring with outer ring, aluminum, NBR, DN 63 ISO-K; page data lists materials in contact with media as aluminum and O-ring material as NBR."
+    url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/311ZRA063 -> https://www.vacuum-shop.com/shop/en_US/category/2073005/product/311zra063/centering-ring-with-outer-ring-aluminum.html"
+    cited_fact_or_basis: "The row-matched product page and datasheet for 311ZRA063 state aluminum outer ring, materials in contact with media aluminum, and O-ring material NBR. official_alternate_route_check: the original BOM URL is on pfeiffer-vacuum.com; the alternate vacuum-shop.com page is an official Pfeiffer Vacuum Components & Solutions shop route for the same manufacturer and exact order number 311ZRA063."
     evidence_basis: "bom_provided"
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Model as a purchased standard DN 63 ISO-K centering-ring seal. A local manufacturing route would machine or form the aluminum centering/outer ring, make or source the NBR O-ring, assemble the seal, and inspect the flange-interface dimensions."
+  summary: "Manufacture as a small vacuum flange seal consumable: form the aluminum centering/outer ring, mold or procure the NBR O-ring, clean and deburr the ring, install the O-ring, and inspect fit and sealing surfaces."
   manufacturing_steps:
-    - "Turn, machine, or form the aluminum centering/outer ring to the DN 63 ISO-K geometry."
-    - "Mold or procure the matching NBR O-ring for the sealing interface."
-    - "Install the O-ring onto the aluminum ring without cuts, twist, or contamination."
-    - "Clean and inspect annular dimensions, O-ring seating, and sealing surfaces before vacuum use."
+    - "Machine, stamp, or otherwise form the aluminum centering/outer ring profile to DN 63 ISO-K geometry."
+    - "Mold, cut, or procure the NBR O-ring to the matching seal cross-section."
+    - "Deburr and clean the aluminum ring so flange-contact and seal-contact surfaces are smooth."
+    - "Install the NBR O-ring onto the aluminum ring and inspect fit, concentricity, and visible seal damage."
   source:
-    url_or_path: "research/ream250_bom/ream250_bom_row_0144_3R2__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3R2_seal_ISO_K_DN63_311ZRA063.step; https://www.shop.buschgroup.com/global/en/products/311ZRA063/"
-    cited_fact_or_basis: "The rendered CAD preview shows a thin annular ring with stepped side features; FreeCAD measured one ring-like solid about 86 mm across and 8 mm thick; the official Busch canonical page identifies the product as a DN 63 ISO-K centering ring with outer ring made from aluminum and NBR."
+    url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/311ZRA063 -> https://www.vacuum-shop.com/shop/en_US/category/2073005/product/311zra063/centering-ring-with-outer-ring-aluminum.html; research/ream250_bom/ream250_bom_row_0144_3R2__views_2x2.png"
+    cited_fact_or_basis: "The row-matched product page identifies an aluminum outer-ring centering ring with NBR O-ring for DN 63 ISO-K. The CAD contact sheet shows a thin annular ring/seal geometry. official_alternate_route_check: the original BOM URL is on pfeiffer-vacuum.com; the alternate vacuum-shop.com page is an official Pfeiffer Vacuum Components & Solutions shop route for the same manufacturer and exact order number 311ZRA063."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB purposes, this standard purchased seal can be represented as aluminum ring fabrication plus elastomer O-ring production and assembly."
+    - "The manufacturing route is inferred from the stated aluminum plus NBR construction and the visible thin annular profile, not from a vendor process specification."
   uncertainty_notes:
-    - "Exact groove geometry, sealing tolerances, and surface finish should come from the vendor drawing or applicable ISO-K seal specification before precision manufacturing."
+    - "targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\"; found product material and dimensional facts but no vendor manufacturing process description."
 kb_implications:
-  - "item_granularity: consumable - Treat as a reusable DN 63 ISO-K centering-ring seal/maintenance item rather than a reAM250-specific custom part; if decomposed later, model aluminum ring plus NBR O-ring with a coarse mass until catalog mass or split-volume CAD is available."
+  - "item_granularity: consumable - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased consumable unless vacuum-seal fabrication becomes in scope."
 ---
-
-Research result for reAM250 BOM row 144, item 3R2.

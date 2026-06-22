@@ -82,6 +82,34 @@ But also depends on an unsupported effective-density guess
 When that guess is required for the mass value
 Then `mass.source.evidence_basis` must be `engineering_hypothesis`.
 
+## AC-EVID-004: Row-Specific STEP Material Is BOM-Provided
+
+Type: Partially validator-enforced
+
+Rule:
+Non-placeholder material metadata extracted from the row's provided STEP/CAD
+package is BOM-side evidence. Use `evidence_basis: bom_provided` for the
+material fact, and for CAD-volume mass calculations that only need that material
+and a local density constant. Use `standard_part_convention` only when the
+claimed fact is resolved from a standard designation, suffix, class, or
+part-family convention rather than directly from row-specific BOM/CAD metadata.
+
+Given local assembly STEP material extraction returns a non-placeholder material
+such as `Steel, Mild`, `Aluminum`, `Steel`, `Stainless Steel`, or another real
+material name for the row product
+When the worker writes the material section using that fact
+Then `material.source.evidence_basis` should be `bom_provided`
+And any DIN/ISO/vendor standard cited for the same material should be described
+as a cross-check, not the reason to lower evidence to
+`standard_part_convention`.
+
+Given a mass value uses row CAD volume
+And the row-specific STEP material extraction gives a non-placeholder material
+density
+When no unsupported material split, effective-density guess, or independent
+vendor fact is required
+Then `mass.source.evidence_basis` should be `bom_provided`.
+
 ## AC-WEB-001: Hypothesis Requires Targeted Web Search
 
 Type: Partially validator-enforced
@@ -89,12 +117,12 @@ Type: Partially validator-enforced
 Rule:
 If a section uses `evidence_basis: engineering_hypothesis` or
 `evidence_basis: unresolved`, that same section must include a grep-able
-`targeted_web_search:` note in `source.cited_fact_or_basis` or
+lowercase `targeted_web_search:` note in `source.cited_fact_or_basis` or
 `uncertainty_notes`.
 
 Given BOM-side evidence does not resolve a section value
 When the worker writes that section with `engineering_hypothesis` or `unresolved`
-Then the same section must include `targeted_web_search:`
+Then the same section must include lowercase `targeted_web_search:`
 And the note must list query terms tried
 And the note must state the result, such as no row-specific usable vendor source
 or only duplicate/non-matching evidence.
@@ -411,10 +439,14 @@ Type: Judgment-required
 
 Rule:
 Standard hardware purchased from a vendor is not automatically a
-`purchased_module`. Use `simple_part` for one-piece or simple standard hardware
-such as clamps, brackets, bolts, screws, nuts, washers, simple pulleys, and
-similar fasteners unless the row is a calibrated functional module or a
-multi-part assembly that should be modeled as such.
+`purchased_module`, and finished standard fasteners are not raw stock. Use
+`simple_part` for one-piece or simple standard hardware such as clamps,
+brackets, bolts, screws, nuts, washers, simple pulleys, and similar fasteners
+unless the row is a calibrated functional module or a multi-part assembly that
+should be modeled as such. Reserve `raw_material_or_stock` for stock forms such
+as sheet, bar, tube, extrusion, profile, wire, plate, rod, hose/pipe stock, or
+cut-to-length stock where later KB work should model length/size variants rather
+than a finished hardware item.
 
 Given the row is a standard ISO-K claw clamp or similar vacuum fastener
 When the row is one simple hardware item without a sub-BOM or calibration
@@ -422,6 +454,14 @@ workflow
 Then prefer `item_granularity: simple_part`
 And explain that it should later map to reusable standard hardware rather than a
 machine-specific custom part.
+
+Given the row is a finished DIN/ISO bolt, screw, nut, washer, or similar
+fastener
+When the worker writes item granularity
+Then prefer `item_granularity: simple_part`
+And do not use `raw_material_or_stock`
+And explain that later KB work should reuse or create generic standard hardware
+or a fastener kit.
 
 ## AC-GRAN-004: Purchased Module Is A Current Modeling Hint
 

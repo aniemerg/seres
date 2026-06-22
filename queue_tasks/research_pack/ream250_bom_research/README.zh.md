@@ -203,7 +203,7 @@ heartbeat path 和 log paths，然後立刻退出；背景 runner 會透過 `noh
 queue_tasks/research_pack/ream250_bom_research/research_scripts/run_codex_batches.sh \
   --workers 2 \
   --max-items 1 \
-  --max-batches 5 \
+  --max-batches 30 \
   --codex-model gpt-5.5 \
   --codex-reasoning-effort medium \
   --validate-at-end \
