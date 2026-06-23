@@ -1,0 +1,246 @@
+Modul Klemme                           Bez.      Adresse                          Funktion                      Modul Klemme                       Name Address                      Function                    Module Terminal                     Name   Address                         Function
+
+
+                                                             - 112KF 11                                                                                           - 113KF 16                                                                                          - 114KF 24
+                                11     TC1+                                    Temperature 1                                                 11     DI 1                   Z-axis End position (-) Down                                         11   DO 1                             Door locking Unlocking
+ X20AT6402 (6x Thermoelement)
+
+
+
+
+                                12     TC1-                                         "                                                        21     DI 2                    Z-axis End position (+) Top                                         21   DO 2                                 Signal-Light red
+
+
+
+
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+                                                                                                                 X20DI6371 (6x Digital IN)
+                                21     TC2+                                    Temperature 2                                                 12     DI 3                    Axis Coater End position (-)                                        12   DO 3                               Signal-Light green
+                                22     TC2-                                         "                                                        22     DI 4                   Axis Coater End position (+)                                         22   DO 4                               Signal-Light yellow
+                                13     TC3+                                    Temperature 3                                                 13     DI 5                     Axis Coater Ref. (Home)                                            13   DO 5                          Signal to SP-ICE3 (not used)
+                                14     TC3-                                         "                                                        23     DI 6                      Axis Coater Ref. (Max.)                                           23   DO 6                              O²measuring range
+                                23     TC4+                                    Temperature 4                                                 14   +24V DC                                                                                       14   GND
+                                24     TC4-                                         "                                                        24   +24V DC                                                                                       24   GND
+                                15     TC5+                                    Temperature 5                                                 15   +24V DC                                                                                       15   GND
+                                16     TC5-                                         "                                                        25   +24V DC                                                                                       25   GND
+                                25     TC6+                                    Temperature 6                                                 16   +24V DC                                                                                       16   GND
+                                26     TC6-                                         "                                                        26   +24V DC                                                                                       26   GND
+
+
+                                                             - 112KF 12                                                                                           - 113KF 17                                                                                          - 114KF 25
+                                11    AO1 I+                                                                                                 11     DI 1                     Inert gas chamber OPEN                                             11   DO 1                              Inert gas chamber
+                                12    AO1 U+                    Circulation pump Gas flow setpoint 0-100%                                    21     DI 2                    Inert gas chamber CLOSED                                            21   DO 2                           Inert gas heat exchanger
+ X20AO4622 (4x Analog OUT)
+
+
+
+
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+                                                                                                                 X20DI6371 (6x Digital IN)
+                                13   AO1 I-/U-                                        "                                                      12     DI 3                  Inert gas heat exchanger OPEN                                         12   DO 3                             Inert gas Main valve
+                                21    AO2 I+                              Analog out 2 (0(4)-20mA)                                           22     DI 4                 Inert gas heat exchanger CLOSED                                        22   DO 4                            Vacuum valve Chamber
+                                22    AO2 U+                                Analog out 2 (0-10V)                                             13     DI 5                              Reserve                                                   13   DO 5                             Vacuum valve Z-axis
+                                23   AO2 I-/U-                                        "                                                      23     DI 6                                  "                                                     23   DO 6                           Reserve Gas flow Valve 6
+                                14    AO3 I+                                                                                                 14   +24V DC                                                                                       14   GND
+                                15    AO3 U+                                                                                                 24   +24V DC                                                                                       24   GND
+                                16   AO3 I-/U-                                                                                               15   +24V DC                                                                                       15   GND
+                                24    AO4 I+                                                                                                 25   +24V DC                                                                                       25   GND
+                                25    AO4 U+                                                                                                 16   +24V DC                                                                                       16   GND
+                                26   AO4 I-/U-                                                                                               26   +24V DC                                                                                       26   GND
+
+
+                                                             - 112KF 13                                                                                           - 113KF 18                                                                                          - 114KF 26
+                                11    AO1 I+                              Analog out 1 (0(4)-20mA)                                           11     DI 1                   Signal from SP-ICE3 (not used)                                       11   DO 1                           Reserve Gas flow Valve 7
+                                12    AO1 U+                                Analog out 1 (0-10V)                                             21     DI 2               Circulation pump Gas flow Operation                                      21   DO 2                           Reserve Gas flow Valve 8
+ X20AO4622 (4x Analog OUT)
+
+
+
+
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+                                                                                                                 X20DI6371 (6x Digital IN)
+
+
+
+
+                                13   AO1 I-/U-                                        "                                                      12     DI 3                  Circulation pump Gas flow Error                                       12   DO 3                           Reserve Gas flow Valve 9
+                                21    AO2 I+                              Analog out 2 (0(4)-20mA)                                           22     DI 4                      Vacuum pump Operation                                             22   DO 4                          Reserve Gas flow Valve 10
+                                22    AO2 U+                                Analog out 2 (0-10V)                                             13     DI 5                     Vacuum pump malfunction                                            13   DO 5                          Reserve Gas flow Valve 11
+                                23   AO2 I-/U-                                        "                                                      23     DI 6               Building platform Heating malfunction                                    23   DO 6                          Reserve Gas flow Valve 12
+                                14    AO3 I+                                                                                                 14   +24V DC                                                                                       14   GND
+                                15    AO3 U+                                                                                                 24   +24V DC                                                                                       24   GND
+                                16   AO3 I-/U-                                                                                               15   +24V DC                                                                                       15   GND
+                                24    AO4 I+                                                                                                 25   +24V DC                                                                                       25   GND
+                                25    AO4 U+                                                                                                 16   +24V DC                                                                                       16   GND
+                                26   AO4 I-/U-                                                                                               26   +24V DC                                                                                       26   GND
+
+
+
+                                                             - 112KF 14                                                                                           - 113KF 19                                                                                          - 114KF 27
+                                11    AI1 I+                              O² Sensor Filter (4-20mA)                                          11     DI 1                        Vacuum limit value                                              11   DO 1                          Reserve Gas flow Valve 13
+                                12    AI1 U+                                                                                                 21     DI 2                       Vacuum disturbance                                               21   DO 2                          Reserve Gas flow Valve 14
+
+
+
+
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+ X20AI4622 (4x Analog IN)
+
+
+
+
+                                                                                                                 X20DI6371 (6x Digital IN)
+
+
+
+
+                                13   AI1 I-/U-                                     "                                                         12     DI 3             Forced cooling fan Circulation pump Fault                                  12   DO 3                          Reserve Gas flow Valve 15
+                                21    AI2 I+                   Oxygen working space Actual value (4-20mA)                                    22     DI 4                              Reserve                                                   22   DO 4                          Reserve Gas flow Valve 16
+                                22    AI2 U+                                                                                                 13     DI 5                                 "                                                      13   DO 5                          Reserve Gas flow Valve 17
+                                23   AI2 I-/U-                                     "                                                         23     DI 6                                 "                                                      23   DO 6                          Reserve Gas flow Valve 18
+                                14    AI3 I+                    Pressure sensor Compressed air (4-20mA)                                      14   +24V DC                                                                                       14   GND
+                                15    AI3 U+                                                                                                 24   +24V DC                                                                                       24   GND
+                                16   AI3 I-/U-                                      "                                                        15   +24V DC                                                                                       15   GND
+                                24    AI4 I+                       Pressure sensor Inert gas (4-20mA)                                        25   +24V DC                                                                                       25   GND
+                                25    AI4 U+                                                                                                 16   +24V DC                                                                                       16   GND
+                                26   AI4 I-/U-                                       "                                                       26   +24V DC                                                                                       26   GND
+
+
+                                                             - 112KF 15                                                                                           - 113KF 20                                                                                          - 114KF 28
+                                11    AI1 I+                                                                                                 11     DI 1                          Door Unlocking                                                11   DO 1                          Circulation pump Gas flow
+                                12    AI1 U+                           Vacuum Actual value (0-10V)                                           21     DI 2                             Reserve                                                    21   DO 2                                Vacuum pump
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+ X20AI4622 (4x Analog IN)
+
+
+
+
+                                                                                                                 X20DI6371 (6x Digital IN)
+
+
+
+
+                                13   AI1 I-/U-                                     "                                                         12     DI 3                                "                                                       12   DO 3                          Building platform Heating
+                                21    AI2 I+                                                                                                 22     DI 4                                "                                                       22   DO 4                           Laser External (not used)
+                                22    AI2 U+                Temperature Building platform (0-200°C / 0 … 10V)                                13     DI 5                                "                                                       13   DO 5                            Laser System (not used)
+                                23   AI2 I-/U-                                      "                                                        23     DI 6                                "                                                       23   DO 6                                    Reserve
+                                14    AI3 I+                                                                                                 14   +24V DC                                                                                       14   GND
+                                15    AI3 U+                                                                                                 24   +24V DC                                                                                       24   GND
+                                16   AI3 I-/U-                                                                                               15   +24V DC                                                                                       15   GND
+                                24    AI4 I+                                                                                                 25   +24V DC                                                                                       25   GND
+                                25    AI4 U+                                                                                                 16   +24V DC                                                                                       16   GND
+                                26   AI4 I-/U-                                                                                               26   +24V DC                                                                                       26   GND
+
+
+                                                             - 115KF 51                                                                                           - 113KF 21                                                                                          - 114KF 29
+                                11    Pulse 1                                                                                                11     DI 1                   Vacuum valve chamber OPEN                                            11   DO 1                                    Reserve
+                                12     SI 1                               Emergency stop Channel 1                                           21     DI 2                 Vacuum valve chamber CLOSED                                            21   DO 2                                       "
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+                                                                                                                 X20DI6371 (6x Digital IN)
+ X20SI8110 (8x Safety IN)
+
+
+
+
+                                21    Pulse 2                                                                                                12     DI 3                    Vacuum valve Z-axis OPEN                                            12   DO 3                                       "
+                                22     SI 2                               Emergency stop Channel 2                                           22     DI 4                   Vacuum valve Z-axis CLOSED                                           22   DO 4                                       "
+                                13    Pulse 3                                                                                                13     DI 5                            Reserve                                                     13   DO 5                                       "
+                                14     SI 3                       Safety gate Process chamber channel 1                                      23     DI 6                                "                                                       23   DO 6                                       "
+                                23    Pulse 4                                                                                                14   +24V DC                                                                                       14   GND
+                                24     SI 4                      Safety gate Process chamber channel 2                                       24   +24V DC                                                                                       24   GND
+                                15     SI 5                        Feedback emergency stop contactor                                         15   +24V DC                                                                                       15   GND
+                                25     SI 6                      Feedback operator protection contactor                                      25   +24V DC                                                                                       25   GND
+                                16     SI 7                          Emergency stop from laser Ch1                                           16   +24V DC                                                                                       16   GND
+                                26     SI 8                          Emergency stop from laser Ch2                                           26   +24V DC                                                                                       26   GND
+
+
+
+                                                             - 115KF 52                                                                                           - 113KF 22                                                                                          - 114KF 30
+                                11     SO 1                            Emergency stop contactor                                              11     DI 1                             Reserve                                                    11   DO 1                                    Reserve
+                                21     SO 2                           Operator protection Contactor                                          21     DI 2                                "                                                       21   DO 2                                       "
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+ X20SO6300 (6x Safety OUT)
+
+
+
+
+                                                                                                                 X20DI6371 (6x Digital IN)
+
+
+
+
+                                12     SO 3                                 Enable Axis 1&2                                                  12     DI 3                                "                                                       12   DO 3                                       "
+                                22     SO 4                                 Enable Axis 3&4                                                  22     DI 4                                "                                                       22   DO 4                                       "
+                                13     SO 5                                     Reserve                                                      13     DI 5                                "                                                       13   DO 5                                       "
+                                23     SO 6                                     Reserve                                                      23     DI 6                                "                                                       23   DO 6                                       "
+                                14     GND                                                                                                   14   +24V DC                                                                                       14   GND
+                                24     GND                                                                                                   24   +24V DC                                                                                       24   GND
+                                15     GND                                                                                                   15   +24V DC                                                                                       15   GND
+                                25     GND                                                                                                   25   +24V DC                                                                                       25   GND
+                                16     GND                                                                                                   16   +24V DC                                                                                       16   GND
+                                26     GND                                                                                                   26   +24V DC                                                                                       26   GND
+
+
+                                                      - 115KF 53a (Kombimodul)                                                                                    - 113KF 23                                                                                          - 114KF 31
+                                11    Pulse 1                                                                                                11     DI 1                             Reserve                                                    11   DO 1                                    Reserve
+                                12     SI 1                            Oxygen working space Alarm                                            21     DI 2                                "                                                       21   DO 2                                       "
+                                                                                                                                                                                                                   X20DO6322 (6x Digital OUT)
+ X20SC0842 (8x Safety IN)
+
+
+
+
+                                                                                                                 X20DI6371 (6x Digital IN)
+
+
+
+
+                                21    Pulse 2                                                                                                12     DI 3                                "                                                       12   DO 3                                       "
+                                22     SI 2                                 Button Acknowledge                                               22     DI 4                                "                                                       22   DO 4                                       "
+                                13    Pulse 3                                                                                                13     DI 5                                "                                                       13   DO 5                                       "
+                                14     SI 3                          Protective door Cover Channel 1                                         23     DI 6                                "                                                       23   DO 6                                       "
+                                23    Pulse 4                                                                                                14   +24V DC                                                                                       14   GND
+                                24     SI 4                          Protective door Cover Channel 2                                         24   +24V DC                                                                                       24   GND
+                                15     SI 5                         Emergency stop from cell Channel 1                                       15   +24V DC                                                                                       15   GND
+                                25     SI 6                         Emergency stop from cell Channel 2                                       25   +24V DC                                                                                       25   GND
+                                16     SI 7                          Safety circle from cell Channel 1                                       16   +24V DC                                                                                       16   GND
+                                26     SI 8                          Safety circle from cell Channel 2                                       26   +24V DC                                                                                       26   GND
+                                                      - 115KF 53b (Kombimodul)
+                                11    SO 1+                                       Reserve
+                                12    SO 1-
+ X20SC0842 (6x Safety OUT)
+
+
+
+
+                                21    SO 2+                                       Reserve
+                                22    SO 2-
+                                13    SO 3+                                       Reserve
+                                14    SO 3-
+                                23    SO 4+                                       Reserve
+                                24    SO 4-
+                                15     SO 5                                       Reserve
+                                16     GND
+                                25     SO 6                                       Reserve
+                                26     GND
+
+
+                                                             - 116KF 61
+                                11    CA-01                                      Encoder A
+                                12    CB-01                                      Encoder B
+ X20DC1976 (Encodermodul)
+
+
+
+
+                                13    CR-01                                     Encoder dir
+                                14    DI-01                                       Reserve
+                                15    +24V                                        Reserve
+                                16     GND                                        Reserve
+                                21     n.c.                                         n.c.
+                                22     n.c.                                         n.c.
+                                23     n.c.                                         n.c.
+                                24    DI-02                                       Reserve
+                                25     +5V                                  Encoder +5V supply
+                                26     GND                                  Encoder GND supply
+
