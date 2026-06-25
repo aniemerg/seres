@@ -41,12 +41,15 @@ KB 的建議做法是：將原始製造方法保留在 evidence、recipe 或 pro
 
 - 材料多樣性
 - 製程多樣性 (需要的機器數量)
+- 製程靈活度
 
 材料多樣性重要，是因為 closure 分析會沿著材料需求往上游追。如果一個機器 BOM 需要鋁、鋼、銅、玻璃、陶瓷、橡膠、電子材料，每一種材料都可能需要不同的生產 recipe、來源、替代策略或 import 假設。材料種類越多，closure 圖需要解釋的供應鏈就越多。
 
 製程多樣性重要，是因為不同製程通常會對應到不同 provider machine。即使兩個零件材料相同，如果一個需要擠型、一個需要 CNC、一個需要雷射粉床列印，closure 分析就必須證明這些製程各自可以被執行。
 
-因此，合併策略不應只是「把長得像的東西合併」。更好的問題是：合併後是否減少 closure 分析需要追蹤的材料種類、製程種類或 provider machine 種類？如果答案是否，合併只是命名整理；如果答案是，合併才真的降低 closure 複雜度。
+製程靈活度重要，是因為同一種製程能覆蓋的零件範圍可能差很多。CNC、general additive manufacturing、manual assembly with general tools 這類製程通常可以覆蓋較多幾何變體；需要專用模具、專用夾具或專用成形工具的製程，可能每換一類零件就增加新的 dependency。closure 分析應偏好能覆蓋多種零件的製程。
+
+因此，合併策略不應只是「把長得像的東西合併」。更好的問題是：合併後是否減少 closure 分析需要追蹤的材料種類、製程種類、provider machine 種類，或提高可共用製程的比例？如果答案是否，合併只是命名整理；如果答案是，合併才真的降低 closure 複雜度。
 
 ## 4. BOM to KB 的建議流程
 
@@ -93,17 +96,21 @@ KB 的建議做法是：將原始製造方法保留在 evidence、recipe 或 pro
 - manual assembly with general tools
 - import only
 
+製程代換時要先確認替代製程能滿足該物品功能需要的 tolerance、surface finish、密封品質或對位精度。若替代製程無法達到這些條件，該物品應保留原製程族，或在原製程後加上必要的後加工步驟。
+
 製程代換本身還不做正式合併。它回答一個問題：原本使用不同製程的物品，是否可以在月球化 closure model 中改用同一類製程。
 
 ### Step 5: 合併已收斂的物品
 
-製程代換之後，再正式合併相同功能目的、相近質量或尺度，且材料、製程、型態都被判斷為可以統一的物品。
+製程代換之後，先找出相同功能目的、且質量或尺度落在 2x 範圍內的物品。接著判斷 material、process、geometry form 是否可以透過月球化設計調整到同一 closure item。最後檢查加工精度是否會阻止合併。
+
+加工精度是合併保護條件。若物品功能依賴明顯不同的 tolerance、surface finish、密封品質或對位精度，則應保留獨立 item 或在 notes 中標記風險。
 
 例子：
 
 - 原 BOM：鋁擠型、鋁條、簡單 CNC 支架。
 - 月球化策略：全部視為可由本地金屬成形與後加工製造。
-- KB closure item：`structural_member_aluminum` 或 `mounting_bracket_metal`。
+- KB closure item：`structural_profile_aluminum_medium` 或 `mounting_bracket_aluminum_small`。
 - 結論：可合併，但需要標記 geometry substitution assumed。
 
 ### Step 6: 決定 Import 或 Local Manufacture
@@ -135,13 +142,13 @@ import 決策應放在月球化策略與正式合併之後，因為需要先知�
 
 ### Structural Members
 
-鋁條、中空鋁條、鋁擠型可以在 closure 層抽象為 `structural_member_aluminum` 或 `structural_profile_metal`。這可以降低材料與製程多樣性。
+鋁條、中空鋁條、鋁擠型可以在 closure 層抽象為 `structural_profile_aluminum_medium`。這個 item 名稱保留 functional purpose、material、scale、geometry form。
 
 但如果該擠型承擔 T-slot module interface、精密導軌基準、密封框、抗扭截面或校準基準，就不應直接無條件合併。
 
 ### Brackets and Mounting Plates
 
-多種簡單支架與 mounting plate 通常適合合併為 `mounting_bracket_metal` 或 `mounting_plate_metal`。原本是 CNC、板金、鑄造或列印，不一定要形成不同 item，除非輸出規格不同。
+多種簡單支架與 mounting plate 通常適合合併為 `mounting_bracket_aluminum_small`、`mounting_bracket_steel_small` 或 `mounting_plate_aluminum_small`。原本是 CNC、板金、鑄造或列印，不一定要形成不同 item，除非輸出規格不同。
 
 ### Vacuum Components
 

@@ -41,12 +41,15 @@ From the perspective of the current KB closure analysis, the most direct drivers
 
 - Material diversity
 - Process diversity (Machine needed)
+- Process flexibility
 
 Material diversity matters because closure analysis follows material requirements upstream. If a machine BOM needs aluminum, steel, copper, glass, ceramics, rubber, and electronic materials, each material may require a different production recipe, source, substitution strategy, or import assumption. The more material types the model uses, the more supply chains the closure graph must explain.
 
 Process diversity matters because different processes usually correspond to different provider machines. Even if two parts use the same material, if one requires extrusion, one requires CNC machining, and one requires laser powder bed fusion, closure analysis must show that each process can be executed.
 
-Therefore, merging should not mean "combine things that look similar." The better question is: after merging, does closure analysis need to track fewer material types, process types, or provider machine types? If not, the merge is mostly naming cleanup. If yes, the merge genuinely reduces closure complexity.
+Process flexibility matters because a single process can cover very different ranges of parts. CNC, general additive manufacturing, and manual assembly with general tools can often cover many geometry variants. Processes that require a dedicated mold, die, fixture, or forming tool for each part family add hidden dependencies whenever the part set changes. Closure analysis should prefer processes that can cover many parts.
+
+Therefore, merging should not mean "combine things that look similar." The better question is: after merging, does closure analysis need to track fewer material types, process types, provider machine types, or a higher share of reusable processes? If not, the merge is mostly naming cleanup. If yes, the merge genuinely reduces closure complexity.
 
 ## 4. Proposed BOM to KB Workflow
 
@@ -95,17 +98,21 @@ Possible strategies include:
 - manual assembly with general tools
 - import only
 
+During process substitution, first check whether the substitute process can meet the tolerance, surface finish, sealing quality, or alignment accuracy required by the item function. If the substitute process cannot meet these conditions, keep the original process family or add the required post-processing steps after the original process.
+
 Process substitution does not perform formal merging yet. It answers one question: can items that originally used different processes use the same process family in the lunarized closure model?
 
 ### Step 5: Merge Items That Have Converged
 
-After process substitution, formally merge items with the same functional purpose, similar mass or scale, and material, process, and form all judged to be unifiable.
+After process substitution, first find items with the same functional purpose and mass or scale within a 2x range. Then judge whether material, process, and geometry form can be adjusted into the same closure item through lunarized design. Finally, check whether machining precision prevents the merge.
+
+Machining precision is a merge guardrail. If the item function depends on significantly different tolerance, surface finish, sealing quality, or alignment accuracy, keep a separate item or record the risk in notes.
 
 Example:
 
 - Original BOM: aluminum extrusion, aluminum bar, simple CNC bracket.
 - Lunarized strategy: local metal forming plus post-processing.
-- KB closure item: `structural_member_aluminum` or `mounting_bracket_metal`.
+- KB closure item: `structural_profile_aluminum_medium` or `mounting_bracket_aluminum_small`.
 - Conclusion: merge is acceptable, but mark geometry substitution assumed.
 
 ### Step 6: Decide Import vs Local Manufacture
@@ -137,13 +144,13 @@ Only then should we create or update KB items, recipes, processes, and BOM mappi
 
 ### Structural Members
 
-Aluminum bars, hollow aluminum bars, and aluminum extrusions can often be abstracted as `structural_member_aluminum` or `structural_profile_metal` at the closure layer. This reduces material and process diversity.
+Aluminum bars, hollow aluminum bars, and aluminum extrusions can often be abstracted as `structural_profile_aluminum_medium` at the closure layer. This item name preserves functional purpose, material, scale, and geometry form.
 
 However, if an extrusion provides a T-slot modular interface, precision rail reference, sealing frame, torsion-resistant section, or calibration reference, it should not be merged unconditionally.
 
 ### Brackets and Mounting Plates
 
-Many simple brackets and mounting plates can be merged into `mounting_bracket_metal` or `mounting_plate_metal`. Whether the original part was CNC-machined, sheet metal, cast, or printed does not necessarily require a distinct item unless the output specification differs.
+Many simple brackets and mounting plates can be merged into `mounting_bracket_aluminum_small`, `mounting_bracket_steel_small`, or `mounting_plate_aluminum_small`. Whether the original part was CNC-machined, sheet metal, cast, or printed does not necessarily require a distinct item unless the output specification differs.
 
 ### Vacuum Components
 
