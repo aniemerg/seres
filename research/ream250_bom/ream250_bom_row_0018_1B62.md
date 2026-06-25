@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "No row-specific non-placeholder STEP material metadata resolved this item; material is based on the row-matched official product family and full-assembly product identity."
 how_to_make:
-  summary: "Treat as a configured standard mechanical toggle clamp for row-level modeling: procure or fabricate the GN 820.2-230-MFC style clamp, then install and adjust it on the schlieren imaging door/cover interface."
+  summary: "Treat as a configured standard mechanical toggle clamp for row-level modeling: Fabricate the GN 820.2-230-MFC style clamp, then install and adjust it on the schlieren imaging door/cover interface"
   manufacturing_steps:
     - "Fabricate the clamp base, U-bar/linkage, lever, washers, and pins from steel stock by stamping, cutting, forming, machining, drilling, deburring, and heat treatment where required."
     - "Apply zinc plating and blue passivation to the steel clamp parts; lubricate moving joints with suitable grease."
@@ -49,7 +49,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Use standard metal clamp fabrication steps inferred from the vendor's component materials and finish because no first-party process plan was found."
-    - "For near-term KB modeling, procurement plus installation is the practical route; local manufacture would be a later sub-BOM decomposition."
+    - "Be a later sub-BOM decomposition"
   uncertainty_notes:
     - "A future local-manufacturing model should decompose the clamp internals, heat treatment, plating, rubber pad, plastic grip, lubrication, assembly, and inspection rather than treating all steps as one opaque operation."
 kb_implications:

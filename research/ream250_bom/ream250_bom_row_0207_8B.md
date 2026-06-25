@@ -46,7 +46,7 @@ how_to_make:
     - "Helium leak-test or pressure/vacuum test the finished elbow before assembly into the vacuum line."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/8B_angle_pipe_ISO_KF_DN40.step; research/ream250_bom/ream250_bom_row_0207_8B__views_2x2.png; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html; web_search"
-    cited_fact_or_basis: "The vendor route identifies a DN 40 ISO-KF 90 degree aluminum elbow. The STEP/contact sheet show a single right-angle elbow with integral KF-style flange lips and no separate subassemblies. targeted_web_search: queries tried \"Pfeiffer Vacuum 110RRB040-90 manufacturing\", \"110RRB040-90 drawing material weight\", and \"ISO-KF DN40 aluminum elbow manufacturing\"; results resolved product identity, material, and dimensions, but did not provide a row-specific manufacturing process plan."
+    cited_fact_or_basis: "The vendor route identifies a DN 40 ISO-KF 90 degree aluminum elbow. The STEP/contact sheet show a single right-angle elbow with integral KF-style flange lips and no separate subassemblies. targeted_web_search: queries tried \"Pfeiffer Vacuum 110RRB040-90 manufacturing\", \"110RRB040-90 drawing material weight\", and \"ISO-KF DN40 aluminum elbow manufacturing\" results resolved product identity, material, and dimensions, but did not provide a row-specific manufacturing process plan."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The route is a plausible local-manufacturing route inferred from the one-piece aluminum vacuum-fitting geometry; the cited vendor page does not specify the production process."

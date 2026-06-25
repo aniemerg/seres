@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "The specific aluminum alloy grade and surface finish are not stated in the BOM or local STEP metadata; a row-matched Bosch Rexroth 60 x 60 profile listing describes anodized aluminum, but the local row evidence only resolves aluminum."
 how_to_make:
-  summary: "Procure Bosch Rexroth-compatible 60 x 60 anodized aluminum strut profile stock and cut to 740 mm length; local reproduction would require aluminum extrusion of the profile cross-section followed by sawing, deburring, and anodizing."
+  summary: "Prepare Bosch Rexroth-compatible 60 x 60 anodized aluminum strut profile stock and cut to 740 mm length; local reproduction would require aluminum extrusion of the profile cross-section followed by sawing, deburring, and anodizing"
   manufacturing_steps:
-    - "Preferred route: buy Bosch Rexroth 60 x 60 strut profile or compatible profile stock from the modular framing system."
     - "Cut the profile to 740 mm length for this row, preserving square ends and the slot geometry."
     - "Deburr cut edges and clean the profile before assembly."
     - "For local manufacturing, extrude aluminum through a die matching the 60 x 60 slotted cross-section, stretch/straighten as required, age or heat treat if the alloy requires it, cut to length, and anodize or otherwise finish the surface."
@@ -49,8 +48,8 @@ how_to_make:
     cited_fact_or_basis: "BOM row 298 names Bosch Rexroth AG and strut profile. CAD and preview show a 740.00 x 60.00 x 60.00 mm slotted profile. The row-matched Bosch Rexroth 60 x 60 profile listing describes a variable-length cut-to-order anodized aluminum strut profile with 4 open slots and length range 50-6070 mm. bom_url_route_check: the BOM-provided Bosch Rexroth category route was checked first but did not resolve a specific 60 x 60 technical line in accessible text, so the independent row-matched listing was used for the cut-to-length procurement detail. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 aluminum profile 60x60\", \"95_profile_60x60_740 Bosch Rexroth\", and the BOM-provided Bosch Rexroth strut-profile URL; found row-family procurement and product-family facts, but no exact row-specific manufacturing process sheet for the 740 mm profile."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Cut-to-length procurement is the normal route because the BOM row is a vendor_component from Bosch Rexroth AG."
-    - "Extrusion plus cut/deburr/anodize is the plausible local manufacturing route inferred from the constant slotted aluminum profile geometry and common production of aluminum structural framing."
+    - "Local manufacturing follows aluminum extrusion, finishing, cut-to-length, deburring, and profile inspection for the Bosch-style slot profile"
+    - "Extrusion plus cut/deburr/anodize is the plausible Manufacturing route inferred from the constant slotted aluminum profile geometry and common production of aluminum structural framing."
   uncertainty_notes:
     - "The cited sources do not state the extrusion die, alloy temper, heat treatment, or surface-finish process parameters for this exact row; those would be separate manufacturing-detail research."
 kb_implications:

@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - No source distinguishes steel, stainless steel, tool steel, or aluminum for this row; avoid assigning a specific grade until a drawing, material list, or fabrication note is found.
 how_to_make:
-  summary: Make as a custom machined metal platform from thick plate or billet stock, with sawing or rough cutting, face milling/grinding of the broad build surface, machining of side relief and interface features, deburring, cleaning, and dimensional inspection; procure as a custom-fabricated machine plate if local precision machining is unavailable.
+  summary: "Make as a custom machined metal platform from thick plate or billet stock, with sawing or rough cutting, face milling/grinding of the broad build surface, machining of side relief and interface features, deburring, cleaning, and dimensional inspection"
   manufacturing_steps:
     - Cut a roughly 252 mm square, 50 mm thick blank from structural metal plate or billet stock.
     - Face mill or grind the top and bottom datum surfaces to the required flatness and parallelism.
@@ -44,7 +44,7 @@ how_to_make:
     - Deburr edges, clean the platform, and inspect dimensions against the surrounding pressing plate, seal, and guide parts.
   source:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2API_build_platform.step; research/ream250_bom/ream250_bom_row_0088_2API__views_2x2.png
-    cited_fact_or_basis: "CAD and rendered views show one large square block/platform with broad flat faces, 252.00 x 252.00 x 50.00 mm bounding box, and side relief/interface geometry. targeted_web_search: tried \"2API_build_platform manufacturing\", \"2API build platform reAM250\", \"reAM250 build platform material\", and \"reAM250 build platform drawing\"; results did not provide a row-specific manufacturing drawing, vendor route, or fabrication note."
+    cited_fact_or_basis: "CAD and rendered views show one large square block/platform with broad flat faces, 252.00 x 252.00 x 50.00 mm bounding box, and side relief/interface geometry. targeted_web_search: tried \"2API_build_platform manufacturing\", \"2API build platform reAM250\", \"reAM250 build platform material\", and \"reAM250 build platform drawing\" results did not provide a row-specific manufacturing drawing, vendor route, or fabrication note."
     evidence_basis: engineering_hypothesis
   assumptions:
     - Thick-plate or billet machining is selected as the simplest plausible route for the observed one-piece block/platform geometry.

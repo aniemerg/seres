@@ -46,7 +46,7 @@ how_to_make:
     - "Deburr edges, clean, apply corrosion protection or anodize/passivate as appropriate for the final alloy, and inspect the fit in the 17A0_hood assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17AI_hinge.step; research/ream250_bom/ream250_bom_row_0237_17AI__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step"
-    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a 20.00 x 26.00 x 26.00 mm bounding box and wedge/block-like faces; 00_assembly.step places two instances in 17A0_hood. targeted_web_search: searched \"17AI_hinge reAM250\", \"reAM250 17AI hinge\", \"17AI_hinge CAD\", and \"20 x 26 x 26 hinge block aluminum profile\"; found duplicate BOM listings but no row-specific manufacturing route."
+    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a 20.00 x 26.00 x 26.00 mm bounding box and wedge/block-like faces; 00_assembly.step places two instances in 17A0_hood. targeted_web_search: searched \"17AI_hinge reAM250\", \"reAM250 17AI hinge\", \"17AI_hinge CAD\", and \"20 x 26 x 26 hinge block aluminum profile\" found duplicate BOM listings but no row-specific manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The route is inferred from the simple solid geometry and small-machine hinge function, not from a vendor process sheet."

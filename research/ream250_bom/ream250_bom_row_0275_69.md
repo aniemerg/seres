@@ -46,10 +46,10 @@ how_to_make:
     - "Clean and inspect overall length, straightness, runout, and journal diameters against the CAD or downstream assembly fit."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/69_deflection_shaft.step; research/ream250_bom/ream250_bom_row_0275_69__views_2x2.png"
-    cited_fact_or_basis: "The STEP geometry is a single stainless solid with a 292.00 x 26.00 x 26.00 mm envelope, and the preview shows an axisymmetric long shaft with smaller end journals. targeted_web_search: searched \"69_deflection_shaft reAM250\", \"deflection shaft recoater stainless steel\", and \"convex crowned shaft deflection shaft recoater\"; results found duplicate reAM250 BOM text and general shaft-deflection references, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing source."
+    cited_fact_or_basis: "The STEP geometry is a single stainless solid with a 292.00 x 26.00 x 26.00 mm envelope, and the preview shows an axisymmetric long shaft with smaller end journals. targeted_web_search: searched \"69_deflection_shaft reAM250\", \"deflection shaft recoater stainless steel\", and \"convex crowned shaft deflection shaft recoater\" results found duplicate reAM250 BOM text and general shaft-deflection references, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The axisymmetric shaft geometry is best represented as a turned round-bar part rather than a casting, additive part, or purchased catalog module."
+    - "The axisymmetric shaft geometry is best represented as a turned round-bar part rather than a casting, additive part, or external catalog module"
     - "Bearing/contact cleanup and inspection steps are included because the local assembly includes nearby retaining rings and shaft-like recoater/conveyor components."
   uncertainty_notes:
     - "No row-specific drawing was found, so exact tolerances, surface finish, heat treatment, and whether the shaft requires hardening remain unresolved."

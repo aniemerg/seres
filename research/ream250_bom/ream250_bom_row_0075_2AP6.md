@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "The specific compound is unresolved; NBR, FKM, silicone, EPDM, felt, or another compliant gasket material may be required depending on temperature, powder exposure, vacuum/leak requirements, and compression set limits."
 how_to_make:
-  summary: "Procure as a replacement gasket/seal if the original Mercateo route can be recovered; otherwise fabricate locally as a custom cut elastomer frame from sheet stock after the mating groove and compression requirements are measured."
+  summary: "Prepare as a replacement gasket/seal if the original Mercateo route can be recovered; otherwise fabricate locally as a custom cut elastomer frame from sheet stock after the mating groove and compression requirements are measured"
   manufacturing_steps:
     - "Recover or measure the outer-seal groove/profile from the 2AP platform assembly because the row-specific CAD export is missing."
     - "Select an elastomer sheet or gasket material compatible with the platform temperature, powder exposure, and required compression set."
@@ -48,13 +48,12 @@ how_to_make:
     - "Install with controlled compression against the mating plate or guide and replace if permanent set, tearing, or leakage appears."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; research/ream250_bom/ream250_bom_row_0075_2AP6_sibling_inner_seal_context__views_2x2.png"
-    cited_fact_or_basis: "BOM row 75 identifies a Mercateo-sourced outer seal with quantity 1, but no product ID or link URL. The manifest records missing_in_cad for the outer seal. Sibling inner-seal visual context shows a flat square frame seal form. targeted_web_search: searched \"2AP6_outer_seal Mercateo\", \"2AP6 outer seal replacement\", \"2AP6_outer_seal drawing\", and \"2AP6 seal reAM250\"; no row-specific manufacturing drawing, catalog page, material callout, or process route was found."
+    cited_fact_or_basis: "BOM row 75 identifies a Mercateo-sourced outer seal with quantity 1, but no product ID or link URL. The manifest records missing_in_cad for the outer seal. Sibling inner-seal visual context shows a flat square frame seal form. targeted_web_search: searched \"2AP6_outer_seal Mercateo\", \"2AP6 outer seal replacement\", \"2AP6_outer_seal drawing\", and \"2AP6 seal reAM250\" no row-specific manufacturing drawing, catalog page, material callout, or process route was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Flat-sheet gasket cutting is assumed as the simplest plausible local route for a thin frame seal when no molded cross-section is evidenced."
-    - "Procurement remains plausible because the BOM lists Mercateo, but the missing product ID prevents identifying a specific catalog item."
+    - "Flat-sheet gasket cutting is assumed as the simplest plausible Manufacturing route for a thin frame seal when no molded cross-section is evidenced."
   uncertainty_notes:
-    - "If the original outer seal is molded, reinforced, adhesive-backed, or made from felt rather than elastomer sheet, the local manufacturing route and mass estimate would need revision."
+    - "If the original outer seal is molded, reinforced, adhesive-backed, or made from felt rather than elastomer sheet, The manufacturing route and mass estimate would need revision."
 kb_implications:
   - "item_granularity: simple_part - model as a replaceable perimeter seal/gasket for the 2AP platform stack, with exact material and dimensions deferred until the missing CAD, drawing, or supplier product ID is recovered."
 ---

@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "Exact stainless grade is not resolved by the row evidence; downstream KB modeling should use a stainless-steel family unless a Balluff drawing or order record identifies the specific nut grade."
 how_to_make:
-  summary: "Procure as Balluff-compatible M12x1 stainless sensor mounting hardware; a plausible local route is to machine or cold-form a thin stainless hex nut, cut/form the M12x1 internal thread, deburr/passivate, and inspect thread fit and wrench flats."
+  summary: "Machine or cold-form a thin stainless hex nut, cut/form the M12x1 internal thread, deburr/passivate, and inspect thread fit and wrench flats"
   manufacturing_steps:
     - "Use stainless hex bar/near-net nut blanks or cold-formed stainless nut blanks sized for an M12x1 thin hex nut."
     - "Drill and tap or thread-form the M12x1 internal thread."
@@ -50,7 +50,7 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a thin hex nut with a central threaded hole; FreeCAD measured a 4.00 mm thick one-solid nut. Balluff identifies the matching M12 sensor nut accessory class and stainless material, but does not state the nut manufacturing process. targeted_web_search: searched 'Balluff M12x1 fastening nut stainless steel BES sensor nut', 'Balluff BES M12x1 fastening nut material stainless steel', and 'M12x1 fastening nut Balluff stainless steel'; found Balluff product/material facts for M12 sensor nuts but no row-specific manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the one-piece stainless hex-nut geometry and standard nut fabrication practice."
+    - "The inferred from the one-piece stainless hex-nut geometry and standard nut fabrication practice."
     - "For low-volume KB planning, machining from stainless hex stock is acceptable even if commercial production may use cold forming."
   uncertainty_notes:
     - "The sources do not specify Balluff's factory process, tolerance class, surface finish, or exact stainless grade for this nut."

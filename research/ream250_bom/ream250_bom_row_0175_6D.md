@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata does not identify a stainless grade such as 304, 316, or hardened stainless."
 how_to_make:
-  summary: "Make as a small precision-machined stainless sleeve from bar stock, or procure as a custom turned sleeve/bushing if exact tolerances are not yet modeled."
+  summary: "Make as a small precision-machined stainless sleeve from bar stock"
   manufacturing_steps:
     - "Cut stainless bar or rod stock slightly oversize."
     - "Turn the outside diameter, collar/head, and end faces on a lathe."

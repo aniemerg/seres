@@ -38,18 +38,18 @@ material:
   uncertainty_notes:
     - "Exact probe alloy, PT100 element packaging, conductor gauge, insulation construction, and termination hardware remain unspecified."
 how_to_make:
-  summary: "Procure as a configured Sensorshop24 EF9 screw-in PT100 temperature sensor for current KB modeling; a local route would assemble a machined/threaded metal probe body, PT100 element, insulated conductors, cable jacket, strain relief, and final resistance/insulation test."
+  summary: "Assemble a machined/threaded metal probe body, PT100 element, insulated conductors, cable jacket, strain relief, and final resistance/insulation test"
   manufacturing_steps:
-    - "Procure route: buy the EF9 M6x1, 17 mm insertion-length PT100, two-wire, 5 m configuration from Sensorshop24 or equivalent sensor vendor."
-    - "Local route: machine or source the small M6x1 threaded metal probe/fitting and prepare the sensor cavity."
+    - "Use the EF9 M6x1, 17 mm insertion-length PT100, two-wire, 5 m configuration as the reference geometry and electrical specification for the local sensor build"
+    - "Manufacturing route: machine or source the small M6x1 threaded metal probe/fitting and prepare the sensor cavity."
     - "Install and pot or crimp a PT100 resistance element with two insulated copper leads into the probe tip."
     - "Attach the 5 m high-temperature cable, add strain relief or termination hardware as required, then perform resistance, insulation, and temperature calibration checks."
   source:
     url_or_path: "https://www.sensorshop24.de/temperaturfuehler-passiv/einschraubtemperaturfuehler-mit-m6-gewinde-und-17mm-einbaulaenge; research/ream250_bom/ream250_bom_row_0083_2APD__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2APD_temperature_sensor.step"
-    cited_fact_or_basis: "The Sensorshop24 page identifies the EF9 product as a configurable screw-in temperature sensor with M6x1 thread, 17 mm insertion length, PT100 option, wiring options, cable-material options, cable lengths, and made-to-order support. The CAD contact sheet shows a slim sensor/probe lead with a small threaded/hex feature. targeted_web_search: searched \"EF9-EF9G-PT100-2L-5.0 manufacturing\", \"Sensorshop24 EF9 PT100 screw-in temperature sensor datasheet\", and \"M6x1 PT100 screw-in temperature sensor construction\"; results resolved product configuration but not a row-specific manufacturing process."
+    cited_fact_or_basis: "The Sensorshop24 page identifies the EF9 product as a configurable screw-in temperature sensor with M6x1 thread, 17 mm insertion length, PT100 option, wiring options, cable-material options, cable lengths, and made-to-order support. The CAD contact sheet shows a slim sensor/probe lead with a small threaded/hex feature. targeted_web_search: searched \"EF9-EF9G-PT100-2L-5.0 manufacturing\", \"Sensorshop24 EF9 PT100 screw-in temperature sensor datasheet\", and \"M6x1 PT100 screw-in temperature sensor construction\" results resolved product configuration but not a row-specific manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The detailed local route is inferred from the sourced product type, PT100 configuration, and visible probe geometry."
+    - "The detailed Manufacturing route is inferred from the sourced product type, PT100 configuration, and visible probe geometry."
     - "Calibration and insulation testing are required for a usable replacement sensor even though the BOM row does not state test requirements."
   uncertainty_notes:
     - "Vendor evidence does not provide the exact internal construction, potting compound, cable gauge, or calibration class selected beyond the visible PT100/two-wire/5 m row code."

@@ -36,9 +36,8 @@ material:
   uncertainty_notes:
     - "Electrical and pneumatic actuator subcomponent materials are not itemized by the accessible product facts, so the material set is partial but adequate for coarse BOM modeling."
 how_to_make:
-  summary: "Treat as a purchased Pfeiffer Vacuum valve module for near-term KB closure; install it into the ISO-K vacuum line with compatible DN 63 hardware, clean sealing practice, compressed-air supply, and 24 V DC electrical connection."
+  summary: "Treat as a external Pfeiffer Vacuum valve module for near-term KB closure; install it into the ISO-K vacuum line with compatible DN 63 hardware, clean sealing practice, compressed-air supply, and 24 V DC electrical connection"
   manufacturing_steps:
-    - "Procure Pfeiffer 310VEP063-02 / EVB 063 PA DN 63 ISO-K electro-pneumatic angle valve as a complete tested valve module."
     - "Inspect product identity and sealing surfaces, keeping protective covers in place until installation."
     - "Mount to clean ISO-K counter flanges using suitable ISO-K connection components."
     - "Connect clean dry or slightly oiled compressed air in the specified pressure range and connect the 24 V DC pilot valve/position-indicator wiring."
@@ -46,8 +45,7 @@ how_to_make:
     url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/310VEP063_02; https://www.vacuum-shop.com/shop/en_US/category/2073371/product/310vep06302/%7B%7Bresult.url%7D%7D; https://vacuum-shop.com/2075819/downloads/manuals/vp0002ben.pdf"
     cited_fact_or_basis: "The Pfeiffer shop route identifies 310VEP063-02 as a purchasable EVB 063 PA angle valve with DN 63 ISO-K connection, electro-pneumatic actuator, 24 V DC input, and compressed-air requirement. The operating instructions state scope of delivery as one angle valve plus operating instructions and describe installation on a system with appropriate ISO-K flange components, clean sealing surfaces, compressed air, and electrical connection. official_alternate_route_check: the BOM-provided Pfeiffer URL identifies the 310VEP063_02 product route; the vacuum-shop.com page and manual are official Pfeiffer Vacuum routes for the same product family/order number."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "No local sub-BOM or calibration workflow is available, so procurement and installation is the appropriate route for this research row."
+  assumptions: []
   uncertainty_notes:
     - "A self-manufacturing route would require a separate decomposition of valve body machining, bellows/feedthrough manufacture, sealing surfaces, actuator, pilot valve, microswitch, leak testing, and qualification."
 kb_implications:

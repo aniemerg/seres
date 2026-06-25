@@ -53,15 +53,15 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6S1_support_1.step; https://www.xometry.com/sheet-metal-fabrication/custom-metal-bracket-fabrication/; https://www.approvedmachining.com/custom-machined-motor-mounts
     cited_fact_or_basis: >-
       The CAD preview shows a simple steel wedge/rib support without visible
-      purchased-module features. Xometry describes custom metal brackets as
-      manufacturable by CNC machining, sheet metal fabrication, or 3D printing;
+      Purchased-module features. Xometry describes custom metal brackets as
+      Manufacturable by CNC machining, sheet metal fabrication, or 3D printing;
       Approved Machining describes custom machined motor mounts made to
-      submitted 3D CAD data in aluminum or carbon steel. targeted_web_search:
-      queries tried were "motor mount triangular steel support bracket
-      manufacturing laser cut machined wedge bracket" and "steel motor mount
-      support bracket fabrication plate machined laser cut"; results supported
-      generic bracket/motor-mount fabrication routes but did not identify a
-      row-specific 6S1 vendor process.
+      Submitted 3D CAD data in aluminum or carbon steel. targeted_web_search:
+      Queries tried were "motor mount triangular steel support bracket
+      Manufacturing laser cut machined wedge bracket" and "steel motor mount
+      Support bracket fabrication plate machined laser cut" results supported
+      Generic bracket/motor-mount fabrication routes but did not identify a
+      Row-specific 6S1 vendor process.
     evidence_basis: engineering_hypothesis
   assumptions:
     - Because the local package gives geometry and steel material but not process history, the route is selected as a plausible low-complexity fabrication path for a small steel support.

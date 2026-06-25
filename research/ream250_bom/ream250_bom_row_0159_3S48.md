@@ -45,7 +45,7 @@ how_to_make:
     - "Inspect flatness, profile, and mating-edge fit before joining or fastening it with the neighboring gas outlet parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S48_part_8.step; research/ream250_bom/ream250_bom_row_0159_3S48__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 1.00 x 50.00 x 84.00 mm bounding box. The preview shows a thin panel with diagonal crease/stiffener-like features and no visible standard fitting, shaft, or calibrated module features. targeted_web_search: searched \"3S48_part_8 gas outlet reAM250 manufacturing\", \"3S48 gas outlet reAM250 drawing\", \"reAM250 gas outlet material\", and \"3S48_part_8\"; results did not provide a row-specific fabrication drawing or process note."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 1.00 x 50.00 x 84.00 mm bounding box. The preview shows a thin panel with diagonal crease/stiffener-like features and no visible standard fitting, shaft, or calibrated module features. targeted_web_search: searched \"3S48_part_8 gas outlet reAM250 manufacturing\", \"3S48 gas outlet reAM250 drawing\", \"reAM250 gas outlet material\", and \"3S48_part_8\" results did not provide a row-specific fabrication drawing or process note."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The visible 1 mm thin panel geometry is treated as sheet-metal cutting and forming rather than casting or billet machining."

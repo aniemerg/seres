@@ -38,20 +38,19 @@ material:
   uncertainty_notes:
     - "The source resolves the hub material family and surface state, but not the exact aluminum alloy or anodizing specification."
 how_to_make:
-  summary: "Current KB modeling should procure this as the configured Ganternorm GN 2240 coupling/hub component; a plausible local route for the 2AM2 hub body is precision machining an aluminum clamping hub from round stock or near-net blank, anodizing it, then assembling it with the coupling spider, mating hub, and clamp screw in the coupling."
+  summary: "A plausible Manufacturing route for the 2AM2 hub body is precision machining an aluminum clamping hub from round stock or near-net blank, anodizing it, then assembling it with the coupling spider, mating hub, and clamp screw in the coupling"
   manufacturing_steps:
-    - "Procure/catalog route: buy or source the configured GN 2240-30-B8-14-AL-WS coupling family part and use the 2AM2 hub side represented by this row."
     - "Local hub route: cut aluminum round stock or use a near-net aluminum blank sized for the roughly 22.50 x 30.00 x 29.99 mm hub envelope."
     - "CNC turn/mill the outside diameter, central shaft bore, jaw teeth, clamp slot, and transverse screw feature visible in the CAD preview."
     - "Deburr and natural-anodize the hub, then assemble with the TPU coupling spider, mating hub, and blackened steel socket cap screw."
     - "Inspect shaft bore fit, clamp action, jaw engagement, concentricity/runout, and installed coupling spacing."
   source:
     url_or_path: "https://www.ganternorm.com/de/produkte/3.6-Bewegen-Uebertragen-mit-Gelenken-Kupplungen-und-Getrieben/Wellenkupplungen/GN-2240-Elastomer-Klauenkupplungen-mit-Klemmnabe; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AM2_part_2.step; research/ream250_bom/ream250_bom_row_0066_2AM2__views_2x2.png"
-    cited_fact_or_basis: "The Ganter page identifies GN 2240 as an aluminum clamping-hub elastomer jaw coupling with TPU spider and blackened steel socket cap screws. FreeCAD measured a 22.50 x 30.00 x 29.99 mm envelope, and the rendered preview shows a one-piece hub body with bore, jaw teeth, clamp slot, and screw feature. The detailed local fabrication sequence is inferred from material and geometry rather than stated by the vendor. targeted_web_search: searched \"Ganternorm GN 2240 30-B8-14-AL-WS-1 manufacturing\", \"GN 2240 elastomer jaw coupling datasheet manufacturing\", and \"GN 2240 AL WS material weight\"; results resolved product construction and technical data but not the factory manufacturing process."
+    cited_fact_or_basis: "The Ganter page identifies GN 2240 as an aluminum clamping-hub elastomer jaw coupling with TPU spider and blackened steel socket cap screws. FreeCAD measured a 22.50 x 30.00 x 29.99 mm envelope, and the rendered preview shows a one-piece hub body with bore, jaw teeth, clamp slot, and screw feature. The detailed local fabrication sequence is inferred from material and geometry rather than stated by the vendor. targeted_web_search: searched \"Ganternorm GN 2240 30-B8-14-AL-WS-1 manufacturing\", \"GN 2240 elastomer jaw coupling datasheet manufacturing\", and \"GN 2240 AL WS material weight\" results resolved product construction and technical data but not the factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Subtractive machining is the planning route because the row body is a small precision aluminum shaft-coupling hub with bore, clamp, and jaw features."
-    - "Near-term KB use should prefer a purchased configured coupling or hub abstraction until precision coupling manufacture, anodizing, elastomer spider production, and inspection are modeled."
+    - "Near-term KB use should prefer a external configured coupling or hub abstraction until precision coupling manufacture, anodizing, elastomer spider production, and inspection are modeled"
   uncertainty_notes:
     - "Vendor/CAD evidence does not state the exact production process, tolerances, balance class, bore finishing method, screw grade, or anodizing standard."
 kb_implications:

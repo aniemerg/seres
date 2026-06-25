@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "The exact alloy, temper, and surface finish are not encoded in the row fields or local STEP material metadata."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth standard aluminum strut profile cut to 1020 mm, or locally make by aluminum extrusion of the 60 x 60 mm slotted cross-section, straightening/aging as required, cutting to length, deburring, and applying the required protective finish."
+  summary: "Prepare as a Bosch Rexroth standard aluminum strut profile cut to 1020 mm, or locally make by aluminum extrusion of the 60 x 60 mm slotted cross-section, straightening/aging as required, cutting to length, deburring, and applying the required protective finish"
   manufacturing_steps:
-    - "Produce or procure aluminum billet suitable for structural extrusion."
+    - "Produce"
     - "Extrude the 60 x 60 mm slotted profile through a matched die."
     - "Straighten and age or heat-treat according to the selected aluminum profile alloy."
     - "Cut the extrusion to 1020 mm length."
@@ -51,7 +51,7 @@ how_to_make:
     cited_fact_or_basis: "CAD geometry and preview show a constant-section 1020 mm long 60 x 60 mm slotted profile. Bosch Rexroth identifies the product family as aluminum profiles in a modular profile construction kit. targeted_web_search: queries tried were `Bosch Rexroth strut profile 60x60 aluminum weight kg m` and `site:boschrexroth.com Strebenprofil 60x60 Bosch Rexroth Aluminium weight`; results confirmed the aluminum-profile family but did not provide a row-specific manufacturing process for this exact cut length."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the constant cross-section CAD shape and common aluminum profile practice; the Bosch source supports product identity, not detailed process steps."
+    - "The inferred from the constant cross-section CAD shape and common aluminum profile practice; the Bosch source supports product identity, not detailed process steps."
   uncertainty_notes:
     - "A self-manufacturing KB entry would need a specific alloy, extrusion die design, temper, and finish specification before detailed process modeling."
 kb_implications:

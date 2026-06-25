@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "Do not encode aluminum or steel as sourced material for this row; the current evidence only supports a broad conductive-metal family."
 how_to_make:
-  summary: "Manufacture as a custom flat metal plate: procure conductive plate stock, CNC mill the pocketed/ribbed geometry and perimeter features from the CAD, deburr, flatten/finish contact faces, clean, and assemble into the 2AP platform stack with the adjacent fasteners, seals, sensor, and platform hardware."
+  summary: "Manufacture as a custom flat metal plate: prepare conductive plate stock, CNC mill the pocketed/ribbed geometry and perimeter features from the CAD, deburr, flatten/finish contact faces, clean, and assemble into the 2AP platform stack with the adjacent fasteners, seals, sensor, and platform hardware"
   manufacturing_steps:
     - "Cut a square blank from metal plate stock sized for the 250 mm square by 15 mm envelope."
     - "CNC mill the recessed/ribbed plate geometry and any edge or fastener-interface features indicated by the STEP model."
@@ -44,7 +44,7 @@ how_to_make:
     - "Clean and install with the neighboring 2AP fasteners, seals, pressing/build-platform parts, and temperature sensor."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AP3_heating_plate.step; research/ream250_bom/ream250_bom_row_0072_2AP3__views_2x2.png"
-    cited_fact_or_basis: "CAD geometry and preview show a single thin square machined plate-like part with a 250.00 x 15.00 x 250.00 mm envelope and pocketed/ribbed faces. targeted_web_search: queries tried: \"2AP3 heating_plate reAM250 manufacturing\", \"2AP3 heating plate reAM250 drawing\", and \"reAM250 2AP3 heating plate\"; result: no row-specific drawing, vendor process, or manufacturing note was found."
+    cited_fact_or_basis: "CAD geometry and preview show a single thin square machined plate-like part with a 250.00 x 15.00 x 250.00 mm envelope and pocketed/ribbed faces. targeted_web_search: queries tried: \"2AP3 heating_plate reAM250 manufacturing\", \"2AP3 heating plate reAM250 drawing\", and \"reAM250 2AP3 heating plate\" result: no row-specific drawing, vendor process, or manufacturing note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "CNC machining from plate stock is chosen as the plausible route for a one-off custom reAM250 mechanical plate with broad flat faces and machined recesses."

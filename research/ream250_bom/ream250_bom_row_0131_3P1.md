@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata resolves the material family but not a specific stainless grade such as 304, 316, or 316L."
 how_to_make:
-  summary: "Model as a welded stainless cyclone vessel: procure as a custom stainless cyclone separator, or locally fabricate from rolled/conical stainless sheet and tube with welded inlet, outlet, and discharge fittings, followed by cleaning and leak/fit inspection."
+  summary: "Model as a welded stainless cyclone vessel: prepare as a custom stainless cyclone separator, or locally fabricate from rolled/conical stainless sheet and tube with welded inlet, outlet, and discharge fittings, followed by cleaning and leak/fit inspection"
   manufacturing_steps:
     - "Cut stainless sheet blanks for the cylindrical upper body and tapered cone; cut tube or formed duct stock for the tangential inlet, top outlet, and lower discharge."
     - "Roll/form the cylindrical and conical shell sections to match the CAD envelope."
@@ -48,11 +48,11 @@ how_to_make:
     cited_fact_or_basis: "The rendered CAD contact sheet shows a tall conical cyclone shell with tangential inlet, vertical outlet, bottom discharge, and small mounting/connection features. FreeCAD measured a bounding box of 320.13 x 183.08 x 788.00 mm. US Systems states that it manufactures standard cyclone separators and custom-engineers cyclones from stainless steel, aluminum, or painted carbon steel."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the stainless material, cyclone shell geometry, and common welded vessel/sheet-metal practice."
+    - "The inferred from the stainless material, cyclone shell geometry, and common welded vessel/sheet-metal practice."
     - "Vacuum or powder handling service requires smooth cleaned internal surfaces and leak-tight welded joints."
   uncertainty_notes:
     - "The row evidence does not state the actual supplier's production process, weld procedure, wall thickness tolerance, pressure rating, or surface finish."
-    - "targeted_web_search: searched `cyclone separator stainless steel conical body tangential inlet manufacturing fabrication welding`; found general cyclone function/material/vendor manufacturing evidence but no row-specific 3P1 production specification."
+    - "Targeted_web_search: searched `cyclone separator stainless steel conical body tangential inlet manufacturing fabrication welding`; found general cyclone function/material/vendor manufacturing evidence but no row-specific 3P1 production specification."
 kb_implications:
   - "item_granularity: simple_part - one custom stainless cyclone vessel/body with welded fittings; later KB modeling should treat it as a fabricated stainless separator body rather than a calibrated purchased module unless a vendor subsystem spec is found."
 ---

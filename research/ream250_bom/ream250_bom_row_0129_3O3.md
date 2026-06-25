@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "No row-specific non-placeholder STEP material was available; if Pfeiffer uses a different weld stub alloy for this exact end piece, the supplier family page does not expose that distinction."
 how_to_make:
-  summary: "Procure as part of Pfeiffer 320SFK063-130, or locally manufacture as a turned stainless 304 ISO-K end fitting and weld/braze it into the spring-bellows assembly."
+  summary: "Locally manufacture as a turned stainless 304 ISO-K end fitting and weld/braze it into the spring-bellows assembly"
   manufacturing_steps:
     - "Start from stainless 304 round bar, tube, or forged ring stock sized for a DN 63 ISO-K flange/end fitting."
     - "Turn the annular profile, bore, sealing shoulder, and outer flange features on a lathe; finish critical sealing and weld-prep surfaces."

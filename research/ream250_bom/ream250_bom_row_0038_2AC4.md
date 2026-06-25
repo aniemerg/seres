@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "No row-specific non-placeholder STEP material or BOM vendor link resolves the exact grade; stainless or ceramic bearing balls are possible alternatives, but the BOM package gives no evidence for those variants."
 how_to_make:
-  summary: "Treat as a standard precision loose bearing ball: procure as a finished chrome-steel bearing ball where possible; a local manufacturing route would form a steel blank, harden it, then grind, lap, polish, and inspect to bearing-ball roundness and surface-finish requirements."
+  summary: "Treat as a standard precision loose bearing ball: a Manufacturing route would form a steel blank, harden it, then grind, lap, polish, and inspect to bearing-ball roundness and surface-finish requirements"
   manufacturing_steps:
     - "Start from bearing-steel wire or rod sized for a roughly 5.4 mm ball blank."
     - "Cold-head or cut and upset the blank into a near-spherical ball, then remove flash."
@@ -49,7 +49,7 @@ how_to_make:
   assumptions:
     - "Detailed forming, grinding, lapping, and inspection steps are inferred from common precision-ball manufacturing practice, because the BOM and supplier pages identify the item class but do not specify the actual production route for this row."
   uncertainty_notes:
-    - "Local manufacture would require precision finishing and metrology capability; procurement is the more realistic near-term route unless the KB later models precision bearing-ball production."
+    - "Manufacturing requires precision finishing and metrology capability"
 kb_implications:
   - "item_granularity: simple_part - Model later as a reusable loose precision bearing ball or small bearing-ball part, not as raw stock or a purchased functional module."
 ---

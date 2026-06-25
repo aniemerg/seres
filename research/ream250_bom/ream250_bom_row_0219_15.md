@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Lisema identifies the material family and hardness range, but not the exact EPDM compound, filler package, density, adhesive backing, or batch-specific datasheet."
 how_to_make:
-  summary: "Procure or locally fabricate as a cut-to-length EPDM sponge half-round profile formed into a rectangular frame seal, with corners joined by adhesive bonding or vulcanized joining and the finished loop fitted to the door perimeter."
+  summary: "Locally fabricate as a cut-to-length EPDM sponge half-round profile formed into a rectangular frame seal, with corners joined by adhesive bonding or vulcanized joining and the finished loop fitted to the door perimeter"
   manufacturing_steps:
     - "Select black EPDM sponge half-round or hollow-chamber profile stock matching the CAD cross section, approximately 20 mm profile thickness."
     - "Cut four profile lengths to the door perimeter dimensions with mitered or square ends as required by the corner-joint design."

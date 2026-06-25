@@ -46,7 +46,7 @@ how_to_make:
     - "Inspect overall height, squareness, mounting faces, and any rail/interface locations against the STEP model before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/25_frame_z_axis.step; research/ream250_bom/ream250_bom_row_0248_25__views_2x2.png"
-    cited_fact_or_basis: "CAD geometry and preview show one tall open square stainless frame about 400.00 x 400.00 x 962.00 mm. targeted_web_search: searched \"25_frame_z_axis\", \"reAM250 frame_z_axis\", \"Renishaw AM250 z axis frame material\", and \"Renishaw AM250 25_frame_z_axis\"; results found duplicate BOM listings and general AM250/Z-axis references, but no row-specific manufacturing drawing or fabrication procedure."
+    cited_fact_or_basis: "CAD geometry and preview show one tall open square stainless frame about 400.00 x 400.00 x 962.00 mm. targeted_web_search: searched \"25_frame_z_axis\", \"reAM250 frame_z_axis\", \"Renishaw AM250 z axis frame material\", and \"Renishaw AM250 25_frame_z_axis\" results found duplicate BOM listings and general AM250/Z-axis references, but no row-specific manufacturing drawing or fabrication procedure."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The open-frame geometry is better modeled as fabricated from cut structural members than as a single casting or additive-manufactured block."

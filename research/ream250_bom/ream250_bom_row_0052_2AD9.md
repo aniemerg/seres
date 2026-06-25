@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "No BOM field, vendor link, standard designation, or non-placeholder STEP material resolves the exact alloy or heat treatment."
 how_to_make:
-  summary: "Procure as small bearing-retention hardware if it matches a standard ring; otherwise manufacture locally by cutting or machining the annular profile from steel sheet/plate or flat stock, deburring, heat treating if spring action is required, and inspecting fit in the bearing stack."
+  summary: "Prepare as small bearing-retention hardware if it matches a standard ring; otherwise manufacture locally by cutting or machining the annular profile from steel sheet/plate or flat stock, deburring, heat treating if spring action is required, and inspecting fit in the bearing stack"
   manufacturing_steps:
     - "Start from steel sheet, plate, or flat wire stock near the required thickness."
     - "Blank, laser/waterjet cut, wire-EDM, or mill the outside diameter, central bore, and four relief/cutout features."
@@ -50,10 +50,10 @@ how_to_make:
     cited_fact_or_basis: "The local STEP/contact sheet shows a thin annular part with a central bore and radial reliefs. ISC describes retaining rings as stamped from sheet or coiled from wire and installed to create a shoulder that retains an assembly. Smalley describes retaining-ring families made from flat wire by edgewinding, with carbon and stainless steel material options. targeted_web_search: searched '2AD9_part_9 axis bearing top manufacturing', 'slotted bearing retaining ring manufacturing stamped sheet steel', and 'retaining ring bearing material spring steel stainless'; found generic retaining-ring manufacturing sources, but no row-specific production drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the CAD profile and common retaining-ring practice because the row has no vendor process or drawing notes."
+    - "The inferred from the CAD profile and common retaining-ring practice because the row has no vendor process or drawing notes."
     - "For KB planning, this should be modeled as simple precision metal hardware unless later evidence shows it is part of a calibrated bearing cartridge."
   uncertainty_notes:
-    - "Required tolerances, surface finish, spring properties, and whether the ring is a purchased standard or custom-machined part are not specified by the BOM or CAD export."
+    - "Required tolerances, surface finish, spring properties, and whether the ring is a external standard or custom-machined part are not specified by the BOM or CAD export"
 kb_implications:
   - "item_granularity: simple_part - model as reusable small bearing retaining/spacer ring hardware rather than a unique reAM250-only item; capture approximate 24 mm OD, 6.27 mm thickness, steel-family material, and top-axis bearing context in later KB notes."
 ---

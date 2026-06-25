@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "Exact grade, corrosion class, hardness grade, and whether the design used chrome steel such as AISI 52100/100Cr6, stainless steel, or ceramic balls are not specified by BOM-side evidence."
 how_to_make:
-  summary: "Prefer procurement as a standard approximately 5 mm precision bearing ball. A local route would start from bearing-steel wire or slugs, cold-head or form the blank, flash-remove/rough-grind, heat treat, finish-grind/lap/polish, and inspect roundness and surface finish."
+  summary: "Start from bearing-steel wire or slugs, cold-head or form the blank, flash-remove/rough-grind, heat treat, finish-grind/lap/polish, and inspect roundness and surface finish"
   manufacturing_steps:
-    - "Procure as a standard loose precision bearing ball when modeling the current reAM250 BOM."
     - "For local manufacturing, cut or cold-head bearing-steel blanks near 5 mm diameter."
     - "Remove flash and rough-grind to spherical form."
     - "Harden and temper for bearing wear resistance."
@@ -49,9 +48,9 @@ how_to_make:
     cited_fact_or_basis: "GlobalSpec describes bearing-ball manufacture as converting an unhardened steel slug to a hardened, ground, and polished round ball. Hartford Technologies describes lapping as a final process for high-precision or super-precision ball grades. The CAD preview shows this row item is a small sphere. targeted_web_search: queries tried: 'bearing balls manufacturing process forged ground lapped steel balls', 'how are bearing balls made', '5 mm bearing ball material chrome steel AISI 52100 stainless steel'; result: generic manufacturing sources support the route, but no row-specific manufacturing drawing was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from standard precision steel ball practice, not from a row-specific drawing."
+    - "The inferred from standard precision steel ball practice, not from a row-specific drawing."
   uncertainty_notes:
-    - "A fully local route would require precision grinding/lapping and metrology capabilities; without a required ball grade, the tolerance and inspection burden are unresolved."
+    - "A fully Manufacturing route would require precision grinding/lapping and metrology capabilities; without a required ball grade, the tolerance and inspection burden are unresolved."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable small precision bearing ball/rolling element, not as a purchased module or full bearing assembly."
 ---

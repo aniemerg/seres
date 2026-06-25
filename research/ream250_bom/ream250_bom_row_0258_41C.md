@@ -37,20 +37,19 @@ material:
   uncertainty_notes:
     - "The local assembly STEP material metadata was only Generic/1000.0 and therefore did not independently resolve material."
 how_to_make:
-  summary: "Treat as purchased Pfeiffer ISO-KF vacuum hardware for current KB modeling. A plausible local route is to fabricate stainless 304 clamp halves/ring geometry, add hinge and wingnut tightening features, deburr/passivate, and inspect DN 32-40 ISO-KF fit."
+  summary: "Treat as external Pfeiffer ISO-KF vacuum hardware for KB modeling. fabricate stainless 304 clamp halves/ring geometry, add hinge and wingnut tightening features, deburr/passivate, and inspect DN 32-40 ISO-KF fit"
   manufacturing_steps:
-    - "Procure as Pfeiffer Vacuum 120BSR040 or equivalent DN 32-40 ISO-KF stainless clamping ring where commercial vacuum hardware is allowed."
     - "For local fabrication, cut or stamp stainless 304/1.4301 strip or near-net blanks for the curved clamp band geometry."
     - "Form the clamp band into the KF profile and create hinge, lug, and tightening-feature geometry visible in the CAD preview."
     - "Machine or drill attachment features, fit screw/wingnut hardware, deburr and passivate or clean for vacuum service."
     - "Verify fit and tightening torque against DN 32-40 ISO-KF elastomer-seal flange hardware."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0258_41C__views_2x2.png; https://www.vacuum-shop.com/2075879/downloads/datasheets/Datasheet_120BSR040_en.pdf"
-    cited_fact_or_basis: "The CAD preview shows a curved clamp with hinge/lug/tightening features; the datasheet identifies 120BSR040 as a stainless 304/1.4301 clamping ring for elastomer seal, DN 32-40 ISO-KF, with 2 N m wingnut torque. targeted_web_search: searched \"120BSR040 weight mass\", \"120BSR040 clamping ring stainless steel 304 1.4301 manufacturing drawing\", and \"Pfeiffer 120BSR040 DN 40 clamping ring material\"; found product/spec and datasheet evidence but no row-specific manufacturing process sheet."
+    cited_fact_or_basis: "The CAD preview shows a curved clamp with hinge/lug/tightening features; the datasheet identifies 120BSR040 as a stainless 304/1.4301 clamping ring for elastomer seal, DN 32-40 ISO-KF, with 2 N m wingnut torque. targeted_web_search: searched \"120BSR040 weight mass\", \"120BSR040 clamping ring stainless steel 304 1.4301 manufacturing drawing\", and \"Pfeiffer 120BSR040 DN 40 clamping ring material\" found product/spec and datasheet evidence but no row-specific manufacturing process sheet."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Detailed local fabrication operations are inferred from clamp geometry and common stainless vacuum-clamp production practice because the cited sources identify the product but do not specify manufacturing process."
-    - "Purchased-module handling is preferred because this is standard commercial vacuum fastening hardware."
+    - "External-module handling is preferred because this is standard commercial vacuum fastening hardware"
   uncertainty_notes:
     - "Exact production process, fastener subpart material, surface finish, and inspection plan are not specified by the row evidence."
 kb_implications:

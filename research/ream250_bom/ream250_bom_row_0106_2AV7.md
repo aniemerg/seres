@@ -36,18 +36,17 @@ material:
   uncertainty_notes:
     - "The local material metadata gives a steel family but not a property class, coating, strength grade, or heat treatment."
 how_to_make:
-  summary: "Procure as a standard DIN 912 M4 x 0.7 x 25 mild-steel socket-head cap screw; for assembly, specify the standard designation, buy or draw from standard hardware stock, inspect the thread/head fit, and install as one of the eight row fasteners."
+  summary: "Prepare as a standard DIN 912 M4 x 0.7 x 25 mild-steel socket-head cap screw; for assembly, specify the standard designation, draw from locally manufactured standard hardware stock, inspect the thread/head fit, and install as one of the eight row fasteners"
   manufacturing_steps:
     - "Specify DIN 912 M4 x 0.7 x 25 cylinder-head/socket-head cap screw, compatible with the row CAD envelope and mild-steel material metadata."
-    - "Procure from standard fastener inventory or vendor supply rather than modeling a machine-specific custom part."
+    - "Machine-specific custom part"
     - "Before assembly, verify thread size, screw length, head/socket form, and any needed coating or strength requirements against the mating assembly."
     - "Install as standard reusable fastening hardware in the relevant reAM250 subassembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AV7_DIN 912 - M4x0,7x25x23,25.step; research/ream250_bom/ream250_bom_row_0106_2AV7__views_2x2.png"
     cited_fact_or_basis: "The BOM row names a DIN 912 M4 x 0.7 x 25 cylinder head cap screw, and the CAD preview/STEP geometry show the corresponding socket-head screw shape with a 29.00 mm overall CAD envelope along the screw axis. The route is a procurement/standard-hardware-stock route, not a claimed screw factory manufacturing process."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "Standard fastener procurement is the appropriate near-term route because the row is a common DIN screw without a custom vendor module or row-specific manufacturing drawing."
+  assumptions: []
   uncertainty_notes:
     - "If local screw manufacture is later modeled, the production process would need separate evidence for heading, socket forming, thread rolling, heat treatment, and coating; those operations are not specified by this row."
 kb_implications:

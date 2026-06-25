@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - Specific grade, heat treatment, surface finish, and whether the block is steel or aluminum remain unresolved.
 how_to_make:
-  summary: Plausible route is local fabrication from rectangular metal bar stock by sawing to length, milling the external profile and longitudinal grooves, drilling or machining any end features, deburring, and inspecting fit against the spring/platform stack; procurement as a custom machined part is also plausible.
+  summary: "Plausible route is local fabrication from rectangular metal bar stock by sawing to length, milling the external profile and longitudinal grooves, drilling or machining any end features, deburring, and inspecting fit against the spring/platform stack"
   manufacturing_steps:
     - Cut rectangular metal bar stock to a blank slightly longer than the approximately 205 mm finished length.
     - Mill the long faces, grooves, and side-specific front geometry to match the STEP model.
@@ -46,7 +46,7 @@ how_to_make:
     - Deburr, clean, and inspect dimensions and flatness before assembly into the spring block set.
   source:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AP9_spring_block_front.step; research/ream250_bom/ream250_bom_row_0079_2AP9__views_2x2.png
-    cited_fact_or_basis: "CAD measurement and preview show a single long, narrow, grooved solid with bbox about 22.00 x 205.00 x 15.00 mm. The BOM names it as a side-specific spring block rather than a purchased vendor component. targeted_web_search: queries tried: \"2AP9_spring_block_front\", \"reAM250 spring_block_front\", \"spring block front reAM250\", and \"2AP9 spring_block_front\"; no source stated a manufacturing process for this row."
+    cited_fact_or_basis: "CAD measurement and preview show a single long, narrow, grooved solid with bbox about 22.00 x 205.00 x 15.00 mm. The BOM names it as a side-specific spring block rather than a purchased vendor component. targeted_web_search: queries tried: \"2AP9_spring_block_front\", \"reAM250 spring_block_front\", \"spring block front reAM250\", and \"2AP9 spring_block_front\" no source stated a manufacturing process for this row."
     evidence_basis: engineering_hypothesis
   assumptions:
     - The block is treated as a simple machined metal part rather than a calibrated module or casting.

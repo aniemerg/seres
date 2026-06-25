@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The row STEP material extractor returned only Generic material metadata, so the material conclusion depends on the BOM product identity and official Liqui Moly route rather than embedded CAD material."
 how_to_make:
-  summary: "Procure Liqui Moly 6185 or an equivalent one-component black RTV silicone sealant, clean and degrease the mating surfaces, dispense an even rectangular perimeter bead matching the CAD seal path, immediately assemble the parts, and allow moisture cure into an elastic gasket."
+  summary: "Prepare Liqui Moly 6185 or an equivalent one-component black RTV silicone sealant, clean and degrease the mating surfaces, dispense an even rectangular perimeter bead matching the CAD seal path, immediately assemble the parts, and allow moisture cure into an elastic gasket"
   manufacturing_steps:
-    - "Procure or locally formulate a one-component black silicone sealing compound compatible with the target substrates."
+    - "Locally formulate a one-component black silicone sealing compound compatible with the target substrates"
     - "Clean the side interface surfaces so they are dry and free of oil and grease."
     - "Dispense a continuous perimeter bead following the rectangular side-seal geometry."
     - "Join the mating parts without flash-off time, then allow the sealant to vulcanize under ambient moisture."
@@ -50,7 +50,7 @@ how_to_make:
   assumptions:
     - "For KB planning, the row is best modeled as applied sealant consumed into a cured gasket rather than as a separately molded reusable part."
   uncertainty_notes:
-    - "Local self-manufacture of the silicone polymer and curing package is not decomposed here; this result only identifies the row-level application/procurement route."
+    - "Local self-manufacture of the silicone polymer and curing package is not decomposed here"
 kb_implications:
   - "item_granularity: simple_part - Model as a consumed silicone sealant/cured gasket row, likely reusable across the other reAM250 flat seal rows that reference Liqui Moly 6185 rather than as a unique machined part."
 ---

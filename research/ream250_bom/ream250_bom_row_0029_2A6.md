@@ -47,7 +47,7 @@ how_to_make:
     - "Deburr, inspect hole locations and flatness, then anodize or otherwise finish if the machine environment requires corrosion/wear protection."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A6_left_plate.step; research/ream250_bom/ream250_bom_row_0029_2A6__views_2x2.png; web_search"
-    cited_fact_or_basis: "The row-specific STEP/contact sheet shows one custom plate-like solid with a triangular outline, milled-looking ribs/pockets, edge features, and mounting holes. targeted_web_search: searched \"2A6_left_plate reAM250 material\", \"2A6 2A6_left_plate\", \"reAM250 left_plate 2A6\", and \"reAM250 2A6_left_plate manufacturing\"; no row-specific manufacturing drawing, vendor page, or process note was found."
+    cited_fact_or_basis: "The row-specific STEP/contact sheet shows one custom plate-like solid with a triangular outline, milled-looking ribs/pockets, edge features, and mounting holes. targeted_web_search: searched \"2A6_left_plate reAM250 material\", \"2A6 2A6_left_plate\", \"reAM250 left_plate 2A6\", and \"reAM250 2A6_left_plate manufacturing\" no row-specific manufacturing drawing, vendor page, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The ribbed geometry is treated as machined or plate-fabricated geometry, not a cast part, because the CAD shows planar pockets and regular hole features."

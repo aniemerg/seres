@@ -47,7 +47,7 @@ how_to_make:
     - "Deburr, clean, apply any required protective finish, and inspect hole spacing, face flatness, and motor/shaft clearance before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AN_motor_mount.step; research/ream250_bom/ream250_bom_row_0067_2AN__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "The STEP is one solid with a 27.00 x 67.00 x 86.00 mm bounding box. The rendered contact sheet shows a one-piece rectangular motor mount with a large central circular opening, four small holes, and planar/ribbed faces. targeted_web_search: searched \"2AN_motor_mount reAM250 manufacturing\", \"2AN motor mount drawing reAM250\", \"reAM250 2AN_motor_mount\", and \"2AN_motor_mount\"; results found duplicate BOM text but no row-specific fabrication drawing or process specification."
+    cited_fact_or_basis: "The STEP is one solid with a 27.00 x 67.00 x 86.00 mm bounding box. The rendered contact sheet shows a one-piece rectangular motor mount with a large central circular opening, four small holes, and planar/ribbed faces. targeted_web_search: searched \"2AN_motor_mount reAM250 manufacturing\", \"2AN motor mount drawing reAM250\", \"reAM250 2AN_motor_mount\", and \"2AN_motor_mount\" results found duplicate BOM text but no row-specific fabrication drawing or process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Subtractive machining is chosen because the row is a one-piece prismatic bracket with accurate-looking motor register/clearance and fastener features."

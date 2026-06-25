@@ -50,7 +50,7 @@ how_to_make:
     cited_fact_or_basis: "The STEP and rendered contact sheet show a one-piece cylindrical sleeve with a central through bore and a 13.00 x 9.00 x 13.00 mm envelope. targeted_web_search: tried '\"2APE\" \"spacer sleeve\"', '\"2APE_spacer_sleeve\"', and '\"reAM250\" \"2APE\"'; results found duplicate BOM text but no row-specific manufacturing drawing or process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Lathe turning and drilling/boring are the most plausible local manufacturing route for a small cylindrical through-bore spacer."
+    - "Lathe turning and drilling/boring are the most plausible Manufacturing route for a small cylindrical through-bore spacer."
     - "No heat treatment or coating is included because neither the BOM nor CAD evidence states a requirement."
   uncertainty_notes:
     - "The CAD preview is sufficient for route triage but does not provide tolerances, bore fit class, surface finish, coating, or exact stock material."

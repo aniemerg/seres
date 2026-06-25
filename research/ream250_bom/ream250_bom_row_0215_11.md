@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and passivate or otherwise finish stainless surfaces, then inspect overall envelope, squareness, and mounting alignment."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/11_rack_chamber.step; research/ream250_bom/ream250_bom_row_0215_11__views_2x2.png"
-    cited_fact_or_basis: "The STEP/contact sheet shows one large open rectangular stainless rack/frame with a 900.00 x 580.00 x 460.00 mm envelope and frame-like members. targeted_web_search: searched \"11_rack_chamber reAM250\", \"reAM250 rack chamber\", and \"11_rack_chamber stainless steel\"; results found duplicate reAM250 BOM text and project-level reAM250 pages, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing route."
+    cited_fact_or_basis: "The STEP/contact sheet shows one large open rectangular stainless rack/frame with a 900.00 x 580.00 x 460.00 mm envelope and frame-like members. targeted_web_search: searched \"11_rack_chamber reAM250\", \"reAM250 rack chamber\", and \"11_rack_chamber stainless steel\" results found duplicate reAM250 BOM text and project-level reAM250 pages, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the large open stainless frame geometry and chamber-support role, not from a row-specific process sheet."

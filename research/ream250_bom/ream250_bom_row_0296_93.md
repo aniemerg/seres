@@ -43,7 +43,7 @@ how_to_make:
     - "Apply the selected surface finish and inspect slot fit, straightness, and cut length before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/93_profile_60x60_710.step; research/ream250_bom/ream250_bom_row_0296_93__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 650.00 x 60.00 x 60.00 mm bounding box; the preview shows a constant slotted profile cross-section along its length. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 material aluminum extruded\" and \"Bosch Rexroth Strebenprofil 60x60 aluminum profile\"; found Bosch Rexroth aluminum profile system pages and distributor listings for 60x60 Bosch Rexroth aluminum extrusion, but no row-specific manufacturing drawing for item 93."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 650.00 x 60.00 x 60.00 mm bounding box; the preview shows a constant slotted profile cross-section along its length. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 material aluminum extruded\" and \"Bosch Rexroth Strebenprofil 60x60 aluminum profile\" found Bosch Rexroth aluminum profile system pages and distributor listings for 60x60 Bosch Rexroth aluminum extrusion, but no row-specific manufacturing drawing for item 93."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A constant-section aluminum strut profile is treated as an extrusion cut to length, which is the standard manufacturing route for this class of modular framing member."

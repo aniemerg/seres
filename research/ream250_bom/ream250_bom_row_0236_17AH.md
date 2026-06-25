@@ -37,10 +37,10 @@ material:
   uncertainty_notes:
     - "Exact alloy, temper, and anodize specification are unresolved; downstream KB modeling should use aluminum/anodized aluminum rather than a specific alloy grade unless a later source identifies the 17AH supplier."
 how_to_make:
-  summary: "Procure as a standard 60 x 60 mm anodized aluminum machine-frame profile cut to 350 mm, or locally make by aluminum extrusion, straightening/aging, anodizing, saw cutting, and deburring."
+  summary: "Prepare as a standard 60 x 60 mm anodized aluminum machine-frame profile cut to 350 mm, or locally make by aluminum extrusion, straightening/aging, anodizing, saw cutting, and deburring"
   manufacturing_steps:
-    - "Procurement route: buy 60 x 60 mm modular aluminum profile stock and cut two 350 mm lengths for the BOM row."
-    - "Local route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted cross-section."
+    - "Cut two 350 mm lengths for the BOM row"
+    - "Manufacturing route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted cross-section."
     - "Straighten and age or stress-relieve according to alloy/process practice, then anodize for the standard corrosion-resistant surface."
     - "Saw-cut to 350 mm, deburr the ends, and add any required end tapping or drilled features if later assembly evidence requires them."
   source:

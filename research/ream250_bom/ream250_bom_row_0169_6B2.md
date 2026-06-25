@@ -40,7 +40,7 @@ material:
     - "No ceramic grade, composition, surface finish, or procurement standard is provided."
     - "The conflicting stainless material metadata should be rechecked against the native CAD assembly before final KB modeling."
 how_to_make:
-  summary: "Plausible route: make or procure a small technical-ceramic square rod, cut it to the 274 mm length, grind or lap the sides/ends as needed, then bond or install it with the neighboring gliding-surface and glue components."
+  summary: "Plausible route: Make a small technical-ceramic square rod, cut it to the 274 mm length, grind or lap the sides/ends as needed, then bond or install it with the neighboring gliding-surface and glue components"
   manufacturing_steps:
     - "Select a dense technical ceramic rod or green ceramic preform sized near the 4 x 4 mm square section."
     - "If made locally, press, extrude, or machine a green ceramic blank from ceramic powder plus binder, then debind and sinter it."

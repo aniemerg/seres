@@ -34,18 +34,17 @@ material:
   uncertainty_notes:
     - "The source does not provide a full material breakdown for electrodes, connector contacts, PCB, potting, seals, or internal fasteners; treat those as unresolved submaterials inside the purchased transmitter module."
 how_to_make:
-  summary: "Procure as an Angst+Pfister FCX-TR0025 oxygen transmitter; a future local route would decompose it into precision stainless housing fabrication, zirconia sensor production, electronics assembly, connector installation, calibration, and functional testing."
+  summary: "A future Manufacturing route would decompose it into precision stainless housing fabrication, zirconia sensor production, electronics assembly, connector installation, calibration, and functional testing"
   manufacturing_steps:
-    - "Procurement route: buy the FCX-TR0025 oxygen transmitter or exact FCX-TR family equivalent matching the 0-25% O2 range, 4-20 mA output, 114 mm x Ø34.5 mm form factor, and process/electrical interfaces used by the reAM250 assembly."
     - "Integration route: screw-mount the transmitter by its G1/2 process connection, connect the M8 4-pole electrical interface or matching cable, supply 10-28 VDC, and verify output/calibration in dry air or calibration gas per the manual."
-    - "Local manufacturing route: machine or otherwise fabricate the stainless transmitter housing and process adapter, make or source the zirconium-oxide oxygen sensing element, assemble heater/control/amplifier electronics and connector hardware, install protection screw and seals as required, then calibrate and verify 4-20 mA output response."
+    - "Manufacturing route: machine or otherwise fabricate the stainless transmitter housing and process adapter, make or source the zirconium-oxide oxygen sensing element, assemble heater/control/amplifier electronics and connector hardware, install protection screw and seals as required, then calibrate and verify 4-20 mA output response."
   source:
     url_or_path: "https://sensorsandpower.angst-pfister.com/fileadmin/products/datasheets/272/FCX-TR_1620-21914-0029-E-0821.pdf; research/ream250_bom/ream250_bom_row_0163_3W__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3W_dummy_oxygen_sensor_FCX-TR.step"
     cited_fact_or_basis: "The FCX-TR manual establishes product identity, sensor range, stainless housing, zirconia sensor, 4-20 mA output, G1/2 process connection, M8 4-pole electrical connection, dimensions, weight, and factory calibration behavior. CAD geometry and preview confirm the compact threaded cylindrical transmitter form. targeted_web_search: queries tried included 'FCX-TR0025 amperometric oxygen O2 gas transmitter Angst Pfister datasheet weight material', 'FCX-TR0025 amperometric oxygen O2 gas transmitter Angst+Pfister', and 'FCX-TR oxygen gas transmitter datasheet FCX-TR0025'; results found official/product/manual data but no row-specific factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Near-term KB modeling should treat this as a calibrated purchased sensor/transmitter module, because zirconia oxygen sensor fabrication and calibration are specialized precision-electronics work."
-    - "The local manufacturing route is a planning decomposition inferred from the sourced product architecture and CAD shape, not a disclosed Angst+Pfister factory route."
+    - "Near-term KB modeling should treat this as a calibrated external sensor/transmitter module, because zirconia oxygen sensor fabrication and calibration are specialized precision-electronics work"
+    - "The a planning decomposition inferred from the sourced product architecture and CAD shape, not a disclosed Angst+Pfister factory route."
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need sensor ceramic/electrode details, heater design, PCB schematic, connector and seal specifications, calibration procedure limits, and acceptance-test requirements."
 kb_implications:

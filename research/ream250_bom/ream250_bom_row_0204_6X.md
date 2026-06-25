@@ -44,7 +44,7 @@ how_to_make:
     - "Deburr the ribs and edges, clean for machine assembly, and inspect bracket flatness, perpendicularity, hole positions, and linear-guide alignment interfaces."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6X_connection_linear_guide_top.step; research/ream250_bom/ream250_bom_row_0204_6X__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one austenitic-stainless solid with a 58.00 x 121.50 x 179.00 mm envelope, a top flange/mounting face, and ribbed bracket/web geometry. targeted_web_search: searched \"6X_connection_linear_guide_top\", \"reAM250 6X linear guide top\", and \"connection linear guide top stainless steel bracket\"; results were duplicate reAM250 BOM text or general linear-guide references, with no row-specific drawing, tolerance, or manufacturing-process source."
+    cited_fact_or_basis: "CAD and preview show one austenitic-stainless solid with a 58.00 x 121.50 x 179.00 mm envelope, a top flange/mounting face, and ribbed bracket/web geometry. targeted_web_search: searched \"6X_connection_linear_guide_top\", \"reAM250 6X linear guide top\", and \"connection linear guide top stainless steel bracket\" results were duplicate reAM250 BOM text or general linear-guide references, with no row-specific drawing, tolerance, or manufacturing-process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The part is treated as a custom simple part because the BOM row has no manufacturer, product ID, or link URL, and the manifest classifies it as a matched part rather than a vendor component."

@@ -37,10 +37,9 @@ material:
   uncertainty_notes:
     - "The vendor page gives only aluminum alloy; the more specific Aluminum 6061 grade comes from local STEP material metadata rather than the public product page."
 how_to_make:
-  summary: "Procure as a standard 3VBELT GT2 20-tooth, 6 mm belt-width, 6.35 mm bore timing pulley; a plausible local route is to machine an Aluminum 6061 pulley blank, cut the GT2 tooth profile and flanges/hub, drill/bore the 6.35 mm shaft hole and set-screw hole, then deburr and inspect belt/shaft fit."
+  summary: "Prepare as a standard 3VBELT GT2 20-tooth, 6 mm belt-width, 6.35 mm bore timing pulley; machine an Aluminum 6061 pulley blank, cut the GT2 tooth profile and flanges/hub, drill/bore the 6.35 mm shaft hole and set-screw hole, then deburr and inspect belt/shaft fit"
   manufacturing_steps:
-    - "Procurement route: buy the row-matched 3VBELT GT2-6mm-20T pulley variant with 6.35 mm bore."
-    - "Local route: start from aluminum alloy bar or a near-net pulley blank sized for about 15 mm outside diameter and 18 mm length."
+    - "Manufacturing route: start from aluminum alloy bar or a near-net pulley blank sized for about 15 mm outside diameter and 18 mm length."
     - "Turn the OD, hub, bore, and flanges; cut or hob the 20-tooth GT2 belt profile; drill and tap the radial set-screw hole visible in the CAD preview."
     - "Deburr/anodize or finish if required, then inspect tooth count, 6 mm belt-width interface, 6.35 mm bore fit, and pulley runout."
   source:
@@ -48,7 +47,6 @@ how_to_make:
     cited_fact_or_basis: "The 3VBELT product route establishes the standard purchased product identity, tooth count, belt width, material family, and bore variants. The rendered CAD contact sheet shows a flanged toothed pulley with central bore and side set-screw hole. targeted_web_search: queries tried included 'GT2 6mm timing belt pulley 20 teeth aluminum alloy 6.35mm bore manufacturing machined hobbing' and 'GT2 20 tooth timing pulley aluminum set screw hobbing machining'; results found matching aluminum GT2 pulley product/spec listings but no row-specific supplier manufacturing process, so detailed local operations are inferred from geometry and standard pulley fabrication practice."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For current KB planning, procurement as a commodity timing pulley is the preferred route unless local small-pulley machining becomes a modeled capability."
     - "The local manufacturing path assumes a one-piece aluminum pulley body with a set-screw hole, consistent with the CAD preview."
   uncertainty_notes:
     - "Exact factory process, surface treatment, tooth-profile tolerance, and whether a separate set screw is included are not specified by the row evidence."

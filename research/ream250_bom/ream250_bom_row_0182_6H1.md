@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, radius powder-contact edges, clean, and inspect the chute opening geometry and mating lips against the STEP model."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6H1_powder_chute.step; research/ream250_bom/ream250_bom_row_0182_6H1__views_2x2.png"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 352.00 x 85.75 x 202.00 mm bounding box; the contact-sheet preview shows a long tapered chute with thin-wall faces and flanged lips. targeted_web_search: searched \"6H1_powder_chute manufacturing\", \"6H1 powder chute reAM250 material\", \"reAM250 powder chute material\", and \"powder chute sheet metal fabrication\"; found duplicate BOM/public reAM250 context and generic fabrication context, but no row-specific manufacturing drawing or process source."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 352.00 x 85.75 x 202.00 mm bounding box; the contact-sheet preview shows a long tapered chute with thin-wall faces and flanged lips. targeted_web_search: searched \"6H1_powder_chute manufacturing\", \"6H1 powder chute reAM250 material\", \"reAM250 powder chute material\", and \"powder chute sheet metal fabrication\" found duplicate BOM/public reAM250 context and generic fabrication context, but no row-specific manufacturing drawing or process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Sheet cutting and forming are chosen because the visible shape is a thin-wall tapered chute rather than a solid machined block."

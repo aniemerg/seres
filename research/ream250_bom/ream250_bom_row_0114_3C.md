@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Assembly STEP material extraction returned only Generic with density 1000.0, so local STEP metadata does not independently confirm the grade."
 how_to_make:
-  summary: "Procure as Pfeiffer 320RTR063-040 for the current BOM; a plausible local route is welded and machined stainless vacuum tubing/flange fabrication followed by leak testing and surface finishing."
+  summary: "Welded and machined stainless vacuum tubing/flange fabrication followed by leak testing and surface finishing"
   manufacturing_steps:
     - "Cut or form 304/1.4301 stainless tube sections and flange blanks for the DN 63 ISO-K and DN 40 ISO-KF interfaces."
     - "Machine flange lips, sealing faces, bores, and weld-prep edges to ISO-K/ISO-KF geometry."
@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "Datasheet supports procurement identity, stainless material, ISO-K/ISO-KF interfaces, pressure range, and temperature range; CAD preview shows a flanged reducer/tube form. targeted_web_search: exact queries \"320RTR063-040 weight\", \"320RTR063-040 kg\", and \"Reducer tee 320RTR063-040 weight\" found row-matched datasheet/catalog pages but no directly stated manufacturing process or mass. bom_url_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/320RTR063_040 returned HTTP 403 to local curl/browser access."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route follows common stainless high-vacuum fitting practice inferred from geometry and material; the cited datasheet does not state the fabrication process."
+    - "The manufacturing route follows common stainless high-vacuum fitting practice inferred from geometry and material; the cited datasheet does not state the fabrication process."
   uncertainty_notes:
     - "Detailed weld sequence, wall thickness, and acceptance criteria should be sourced from a fabrication drawing or supplier manufacturing specification before modeling a production recipe."
 kb_implications:

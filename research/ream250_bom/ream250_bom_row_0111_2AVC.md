@@ -34,10 +34,9 @@ material:
   uncertainty_notes:
     - "No strength class, coating, or heat-treatment grade is provided by the BOM row or STEP material metadata."
 how_to_make:
-  summary: "Best treated as a standard DIN 912 M8 socket head cap screw for procurement; a plausible local route is steel wire/bar stock, cold heading or machining of the cylindrical head and shank, hex-socket forming, thread rolling or cutting, and inspection."
+  summary: "Steel wire/bar stock, cold heading or machining of the cylindrical head and shank, hex-socket forming, thread rolling or cutting, and inspection"
   manufacturing_steps:
-    - "Procurement route: source as a standard DIN 912 / ISO 4762 M8 socket head cap screw matching the row dimensions."
-    - "Local manufacturing route: start from mild-steel wire or bar stock, form the cylindrical head and shank, create the internal hex socket, roll or cut the M8 thread, deburr, and inspect fit."
+    - "Manufacturing route: start from mild-steel wire or bar stock, form the cylindrical head and shank, create the internal hex socket, roll or cut the M8 thread, deburr, and inspect fit."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; research/ream250_bom/ream250_bom_row_0111_2AVC__views_2x2.png; https://accu-components.com/us/metric-cap-head-screws/3903-SSCF-M10-30-A2; https://www.holo-krome.com/custom-fasteners.html"
     cited_fact_or_basis: "BOM and CAD identify a DIN 912 M8 socket head cap screw. Accu confirms this product family is manufactured to DIN 912 / ISO 4762 and available as socket cap screws. HOLO-KROME describes custom fasteners and cold-headed parts as part of socket fastener manufacturing capability. targeted_web_search: queries tried: 'DIN 912 M8 socket head cap screw cylinder head cap screw hex socket function' and 'socket head cap screw manufacturing cold heading thread rolling hex socket'; results supported standard DIN 912 procurement and cold-heading relevance but did not provide a row-specific manufacturing traveler."
@@ -45,7 +44,7 @@ how_to_make:
   assumptions:
     - "For KB planning, standard screw manufacture can be approximated from generic socket-cap-screw production practice."
   uncertainty_notes:
-    - "The local manufacturing route is process-plausible but not a row-specific vendor process specification."
+    - "The process-plausible but not a row-specific vendor process specification."
 kb_implications:
   - "item_granularity: simple_part - Finished standard DIN 912 socket head cap screw; later KB work should reuse or create generic standard fastener hardware rather than model this as raw stock or a purchased module."
 ---

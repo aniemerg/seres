@@ -37,10 +37,9 @@ material:
   uncertainty_notes:
     - "If the BOM Link URL was intended to indicate a stainless replacement despite the CAD filename, the material would shift toward AISI 304 stainless components; the current row identity evidence favors the non-NI steel SKU."
 how_to_make:
-  summary: "For KB planning, procure as a Ganter/Elesa+Ganter GN 820.2-230-MFC standard toggle clamp. A local manufacturing route would be a small mechanical assembly made from stamped or machined steel clamp links/base, bearing pins/rivets, a formed or molded plastic handle, and a threaded clamping spindle with rubber thrust pad."
+  summary: "Manufacturing route would be a small mechanical assembly made from stamped or machined steel clamp links/base, bearing pins/rivets, a formed or molded plastic handle, and a threaded clamping spindle with rubber thrust pad"
   manufacturing_steps:
-    - "Procurement route: buy the GN 820.2-230-MFC clamp as a standard Ganter/Elesa+Ganter toggle clamp module."
-    - "Local route: cut, form, or machine C10 steel sheet/plate pieces for the side mounting base, forked clamping arm, and linkage plates, then zinc plate or otherwise protect the steel surfaces."
+    - "Manufacturing route: cut, form, or machine C10 steel sheet/plate pieces for the side mounting base, forked clamping arm, and linkage plates, then zinc plate or otherwise protect the steel surfaces."
     - "Make or source pins/rivets, flanged washers, the GN 708.1-style threaded spindle, plastic handle, and rubber tip; lubricate moving joints."
     - "Assemble the linkage and spindle, then inspect clamp travel, over-center locking action, mounting-hole geometry, and approximate holding-capacity suitability."
   source:
@@ -48,8 +47,8 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a multi-link toggle clamp assembly with base, forked arm, pins, handle, and threaded clamping screw. FreeCAD measured a 196.59 x 121.00 x 43.00 mm envelope. The Ganter page identifies the GN 820.2 toggle-clamp function and MFC clamping screw; the JW Winco/Ganter sheet identifies steel, pins, plastic handle, lubrication, and spindle/rubber tip component materials. The detailed fabrication sequence is inferred from component geometry and material stack rather than stated by the cited sources. targeted_web_search: queries tried included 'GN 820.2-230-MFC manufacturing process', 'GN 820.2 toggle clamp material C10 pins handle', and 'GN 820.2-230-MFC weight material'; results resolved row-matched product, material, dimensions, and mass but did not provide a row-specific manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The clamp is best represented initially as a purchased standard module because it combines several small precision linkage, handle, spindle, and rubber-pad parts."
-    - "The local manufacturing route assumes conventional sheet/plate forming or machining plus pin/rivet assembly, consistent with standard toggle clamp construction."
+    - "The clamp is best represented initially as a external standard module because it combines several small precision linkage, handle, spindle, and rubber-pad parts"
+    - "The manufacturing route assumes conventional sheet/plate forming or machining plus pin/rivet assembly, consistent with standard toggle clamp construction."
   uncertainty_notes:
     - "No row-specific drawing was found for tolerances, pin fits, heat treatment depth, plating specification, lubrication type, or production tooling."
 kb_implications:

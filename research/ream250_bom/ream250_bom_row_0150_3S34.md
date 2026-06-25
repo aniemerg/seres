@@ -60,14 +60,14 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S34_part_4.step; research/ream250_bom/ream250_bom_row_0150_3S34__views_2x2.png
     cited_fact_or_basis: >-
       CAD measurement and rendered views show one hollow, square-section,
-      thin-wall pipe segment with a 60.00 x 60.00 x 270.00 mm bounding box and
-      angled transition geometry.
+      Thin-wall pipe segment with a 60.00 x 60.00 x 270.00 mm bounding box and
+      Angled transition geometry.
     evidence_basis: engineering_hypothesis
   assumptions:
-    - Fabrication from metal tube or sheet is more plausible for KB planning than treating this as a calibrated purchased module.
+    - "Fabrication from metal tube or sheet is more plausible for KB planning than treating this as a calibrated module"
     - Normal workshop cutting, forming, welding or brazing, deburring, and leak-check operations are sufficient at this level of model fidelity.
   uncertainty_notes:
-    - 'targeted_web_search: queries tried "reAM250 3S34 gas outlet pipe part 4 material", "reAM250 gas outlet pipe additive manufacturing machine material", "Renishaw AM250 gas outlet pipe material", and "Renishaw AM250 gas outlet pipe"; no row-specific manufacturing drawing or vendor process route was found.'
+    - 'targeted_web_search: queries tried "reAM250 3S34 gas outlet pipe part 4 material", "reAM250 gas outlet pipe additive manufacturing machine material", "Renishaw AM250 gas outlet pipe material", and "Renishaw AM250 gas outlet pipe" no row-specific manufacturing drawing or vendor process route was found.'
     - The exact joining method depends on the unresolved alloy and how this segment interfaces with adjacent gas outlet pipe parts.
 kb_implications:
   - 'item_granularity: simple_part - Model as a reusable fabricated duct or pipe segment, not as a purchased module or multi-part assembly, unless later source data shows an integrated subassembly.'

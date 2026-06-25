@@ -38,10 +38,10 @@ material:
   uncertainty_notes:
     - "Exact aluminum alloy temper is not stated in the available row-matched sources; downstream modeling should use aluminum/anodized aluminum rather than a specific alloy grade."
 how_to_make:
-  summary: "Procure as Bosch Rexroth 20x20 modular aluminum profile cut to length; a plausible local manufacturing route is aluminum-alloy extrusion through a 20x20 slot-6 die, stretch/straighten, anodize, saw-cut to 483.7 mm, deburr, and optionally drill/tap any end features if the assembly requires them."
+  summary: "Prepare as Bosch Rexroth 20x20 modular aluminum profile cut to length; a plausible aluminum-alloy extrusion through a 20x20 slot-6 die, stretch/straighten, anodize, saw-cut to 483.7 mm, deburr, and optionally drill/tap any end features if the assembly requires them"
   manufacturing_steps:
-    - "Procure/catalog route: order Bosch Rexroth 20x20, slot-6 anodized aluminum strut profile and cut it to the row length."
-    - "Local route: extrude aluminum alloy through a die that forms the 20 x 20 mm slotted profile cross-section."
+    - "Cut it to the row length"
+    - "Manufacturing route: extrude aluminum alloy through a die that forms the 20 x 20 mm slotted profile cross-section."
     - "Straighten, age or stress-relieve as appropriate for the alloy, and anodize the extrusion for the standard surface finish."
     - "Saw-cut the extrusion to about 483.7 mm, deburr cut edges, and add any required standard end finishing such as drilling or tapping."
   source:
@@ -49,7 +49,6 @@ how_to_make:
     cited_fact_or_basis: "CAD preview/STEP show a long 483.70 x 20.00 x 20.00 mm slotted extrusion. Bosch Rexroth data lists standard and customized profile finishes for the 20x20 profile family and ordering lengths in the 50-3000 mm range. The distributor page states the profile can be cut to required size and that cuts remove about 3 mm of available length. The detailed extrusion, anodizing, and finishing sequence is inferred from the standard aluminum-profile geometry and material, not directly specified as the supplier's production route. targeted_web_search: searched 'Bosch Rexroth strut profile 20x20 material mass kg m', 'Bosch Rexroth 3842992888 weight per metre anodized aluminum', and 'Bosch Rexroth 20x20 strut profile manufacturing extrusion anodized'; results resolved material, linear mass, cut-to-length procurement, and profile finishes but no row-specific factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB modeling, procurement or generic aluminum-extrusion manufacturing is more appropriate than treating this as a bespoke machined part."
     - "Any end machining is optional because the row CAD name does not encode M6, D8, or other finish variants."
   uncertainty_notes:
     - "The exact article number and end-finish option are unresolved; if later rows or drawings show tapped/drilled ends, model that as a finishing operation on the same base profile rather than a new material."

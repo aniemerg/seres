@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "Do not model this row as a single homogeneous material; later KB work needs a sub-BOM or vendor teardown before assigning material masses."
 how_to_make:
-  summary: "Treat as a purchased/calibrated laser module for current KB planning; local self-manufacture would require a separate subsystem model for pump diodes, doped fiber, beam-shaping fiber architecture, electronics, cooling, enclosure, firmware, and optical calibration."
+  summary: "Treat as a external/calibrated laser module for current KB planning; local self-manufacture would require a separate subsystem model for pump diodes, doped fiber, beam-shaping fiber architecture, electronics, cooling, enclosure, firmware, and optical calibration"
   manufacturing_steps:
-    - "Procure or import the nLIGHT AFX-1000 laser source as a qualified vendor subsystem."
     - "Mount the enclosed module in the reAM250 frame, connect AC power, cooling water, control interfaces, safety interlocks, and the QBH/process fiber path."
     - "Perform OEM integration, beam-profile control setup, water-cooling checks, and laser safety validation before process use."
     - "For future local manufacturing research, decompose into optical fiber/pump laser, power electronics, cooling, enclosure, control, and calibration work packages."
@@ -48,8 +47,7 @@ how_to_make:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://static1.squarespace.com/static/67bc98f2403e741e30757770/t/67c7851c2162180ca00deaac/1741128989380/nLIGHT%2BAFX%2BSeries%2BProduct%2BSheet.pdf"
     cited_fact_or_basis: "BOM row identifies a vendor nLight AFX-1000 item. The nLIGHT product sheet states the AFX fiber laser family, AFX-1000 model, 200-240 VAC supply, RS-232/Ethernet control, water cooling, optical fiber with QBH connector, and Class 4 laser product warning. targeted_web_search: queries tried: 'nLIGHT AFX-1000 manufacturing process', 'AFX-1000 fiber laser teardown', and 'nLIGHT AFX-1000 service manual'; no public sub-BOM or manufacturing route was found."
     evidence_basis: "engineering_hypothesis"
-  assumptions:
-    - "The immediate route is procurement/integration because the row is a calibrated commercial laser source and no public manufacturing recipe or sub-BOM was found."
+  assumptions: []
   uncertainty_notes:
     - "Detailed local manufacture is unresolved beyond high-level subsystem decomposition and would require protected vendor design information or dedicated reverse engineering."
 kb_implications:

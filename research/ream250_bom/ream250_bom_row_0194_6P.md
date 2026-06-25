@@ -36,9 +36,9 @@ material:
   uncertainty_notes:
     - "The local material metadata gives a stainless steel family but not a specific alloy grade."
 how_to_make:
-  summary: "Treat as a standard purchased GT2 pulley for current KB modeling; a local route would machine or hob a small stainless pulley blank, bore it to 8 mm, form flanges, finish/deburr, and verify belt fit."
+  summary: "Treat as a standard external GT2 pulley for KB modeling; machine or hob a small stainless pulley blank, bore it to 8 mm, form flanges, finish/deburr, and verify belt fit"
   manufacturing_steps:
-    - "Procure or make stainless cylindrical pulley stock/blank sized for an approximately 18 mm outer diameter and 14.2 mm overall length."
+    - "Make stainless cylindrical pulley stock/blank sized for an approximately 18 mm outer diameter and 14.2 mm overall length"
     - "Turn the pulley body and flanges on a lathe, then bore/ream the central 8 mm shaft hole."
     - "Cut or hob the GT2 belt tooth profile around the pulley circumference, keeping the belt-contact width compatible with a 7 mm belt."
     - "Deburr, clean, and inspect bore concentricity, flange edges, and belt engagement."
@@ -47,7 +47,6 @@ how_to_make:
     cited_fact_or_basis: "The BOM-provided vendor route identifies a GT2 20-tooth pulley with 8 mm bore, 7.5 mm gear width, 7 mm max belt width, and flanges on both edges. The STEP and preview show a single small flanged pulley body with central bore."
     evidence_basis: "bom_provided"
   assumptions:
-    - "Because the row is linked to a commercial GT2 pulley page, procurement of a standard pulley is the current preferred route; the machining route is included as a plausible later local-manufacturing route."
     - "The manufacturing route uses standard pulley-making operations inferred from the pulley geometry and GT2 belt interface."
   uncertainty_notes:
     - "The vendor page and CAD do not specify tooth manufacturing method, surface finish, or bore/set-screw details for a local replica."

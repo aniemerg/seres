@@ -47,11 +47,11 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or other finish only if later drawing evidence identifies a required material and surface treatment."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A7_right_plate.step; research/ream250_bom/ream250_bom_row_0030_2A7__views_2x2.png"
-    cited_fact_or_basis: "FreeCAD measured a one-solid 240.00 x 400.00 x 23.00 mm part. The rendered contact sheet shows a wedge-like side plate with ribbed/relieved faces and a row of mounting holes along one long edge. targeted_web_search: searched \"2A7_right_plate manufacturing\", \"reAM250 right plate drawing\", \"reAM250 2A7 right plate\", and \"Renishaw AM250 right plate material\"; results did not provide a row-specific manufacturing drawing, material callout, or process specification."
+    cited_fact_or_basis: "FreeCAD measured a one-solid 240.00 x 400.00 x 23.00 mm part. The rendered contact sheet shows a wedge-like side plate with ribbed/relieved faces and a row of mounting holes along one long edge. targeted_web_search: searched \"2A7_right_plate manufacturing\", \"reAM250 right plate drawing\", \"reAM250 2A7 right plate\", and \"Renishaw AM250 right plate material\" results did not provide a row-specific manufacturing drawing, material callout, or process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the monolithic machined-plate geometry rather than from a sourced process note."
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer, product ID, or link URL and the CAD name is assembly-specific."
+    - "The inferred from the monolithic machined-plate geometry rather than from a sourced process note."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer, product ID, or link URL and the CAD name is assembly-specific"
   uncertainty_notes:
     - "Exact tolerances, threaded-hole details, surface finish, heat treatment, coating, and inspection datums are not specified by the BOM or CAD preview."
 kb_implications:

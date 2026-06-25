@@ -66,9 +66,9 @@ material:
 how_to_make:
   summary: >
     Plausible route is sheet-metal fabrication: cut a flat blank from
-    corrosion-resistant metal sheet, form the lips/creases with a press brake or
-    simple forming fixture, deburr, clean, and inspect fit in the gas outlet
-    assembly. Procurement as a custom sheet-metal part is also plausible.
+    Corrosion-resistant metal sheet, form the lips/creases with a press brake or
+    Simple forming fixture, deburr, clean, and inspect fit in the gas outlet
+    Assembly.
   manufacturing_steps:
     - Cut the blank profile from thin corrosion-resistant sheet stock by laser, waterjet, shear, or CNC routing.
     - Form the long lip and angled crease features with a press brake or matched fixture.
@@ -78,16 +78,16 @@ how_to_make:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S47_part_7.step; research/ream250_bom/ream250_bom_row_0158_3S47__views_2x2.png; https://github.com/DavidWenzler/reAM250
     cited_fact_or_basis: >
       CAD and preview show a thin folded panel with simple planar faces and no
-      complex machined pockets. The reAM250 repository identifies the platform
-      as a metal laser powder-bed-fusion research machine. targeted_web_search:
-      queries tried "reAM250 gas outlet part 3S47 material", "Renishaw reAM250
-      gas outlet material", and "reAM250 additive manufacturing machine gas
-      outlet stainless steel"; no row-specific manufacturing drawing or vendor
-      process note was found.
+      Complex machined pockets. The reAM250 repository identifies the platform
+      As a metal laser powder-bed-fusion research machine. targeted_web_search:
+      Queries tried "reAM250 gas outlet part 3S47 material", "Renishaw reAM250
+      Gas outlet material", and "reAM250 additive manufacturing machine gas
+      Outlet stainless steel" no row-specific manufacturing drawing or vendor
+      Process note was found.
     evidence_basis: engineering_hypothesis
   assumptions:
     - The visible folds are intentional formed sheet features rather than a thick machined solid.
-    - Local manufacturing would prioritize common sheet-metal operations over machining from billet.
+    - Prioritize common sheet-metal operations over machining from billet.
   uncertainty_notes:
     - Without an assembly drawing, bend sequence, bend radii, and tolerances are unknown.
 kb_implications:

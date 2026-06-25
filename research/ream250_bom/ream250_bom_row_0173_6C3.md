@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata gives a material family but not a stainless alloy grade, hardness, or surface treatment."
 how_to_make:
-  summary: "Procure or fabricate as a simple machined or profile-cut stainless strip; local manufacture would start from thin stainless strip or plate stock, cut the long profile and angled end geometry, deburr, clean or passivate, and inspect length, flatness, and edge condition before assembly with the blade mount."
+  summary: "Fabricate as a simple machined or profile-cut stainless strip; start from thin stainless strip or plate stock, cut the long profile and angled end geometry, deburr, clean or passivate, and inspect length, flatness, and edge condition before assembly with the blade mount"
   manufacturing_steps:
     - "Cut stainless strip or thin plate stock slightly oversize to the roughly 265 mm length."
     - "Profile-cut or mill the long narrow outline and angled end features shown in the CAD preview."

@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The supplier page specifies material at the parent spring-bellows product level, not a separate standalone 3O4 end-piece line item."
 how_to_make:
-  summary: "Procure as part of the Pfeiffer 320SFK063-130 ISO-K spring bellows/flexible connector family; a plausible local route is to machine or form the 304 stainless ISO-K end ring/flange, finish the sealing/clamp surfaces, and weld or join it to the stainless bellows body during the larger bellows assembly."
+  summary: "Machine or form the 304 stainless ISO-K end ring/flange, finish the sealing/clamp surfaces, and weld or join it to the stainless bellows body during the larger bellows assembly"
   manufacturing_steps:
     - "Start from 304 stainless round bar, tube, or near-net ring stock sized for a DN 63 ISO-K end connector."
     - "Turn the bore, outside diameter, stepped faces, and sealing or clamp-interface features; deburr and clean for vacuum service."
@@ -49,9 +49,9 @@ how_to_make:
     cited_fact_or_basis: "Pfeiffer's product route identifies the parent item as a stainless DN 63 ISO-K spring bellows, material flange 304 and bellows 316L, with tightness 1e-11 Pa m3/s and axial stroke. CAD/rendered row evidence shows a one-piece annular end connector geometry. targeted_web_search: queries tried: '320SFK063 Pfeiffer end piece manufacturing', '320SWN063 end piece material', and 'ISO-K stainless bellows flange 304 welded end piece'; result: found row-matched product/material/interface facts but no supplier statement for the standalone end-piece manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacture would model this as a vacuum-clean machined or formed stainless end piece plus assembly joining to the bellows, because the standalone row is not exposed as a separately documented purchased part."
+    - "Model this as a vacuum-clean machined or formed stainless end piece plus assembly joining to the bellows, because the standalone row is not exposed as a separately documented part"
   uncertainty_notes:
-    - "The actual supplier process may use proprietary forming, spinning, or purchased subcomponents rather than the generic machining/forming route listed here."
+    - "The actual supplier process may use proprietary forming, spinning, or external subcomponents rather than the generic machining/forming route listed here"
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable stainless ISO-K bellows end/flange piece; keep the full spring bellows as an assembly or purchased module if later KB work models the complete 320SFK063 connector."
 ---

@@ -67,7 +67,7 @@ material:
 how_to_make:
   summary: >
     Manufacture as a small machined metal bracket, then install bearing or
-    encoder-interface hardware during the axis/glass-scale assembly.
+    Encoder-interface hardware during the axis/glass-scale assembly.
   manufacturing_steps:
     - Cut rectangular metal stock to a blank slightly larger than the CAD envelope.
     - CNC mill the outer profile, mounting feet, central bearing pocket/bore, and side reliefs.
@@ -77,10 +77,10 @@ how_to_make:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2ADC_part_C.step; research/ream250_bom/ream250_bom_row_0055_2ADC__views_2x2.png"
     cited_fact_or_basis: >
       CAD evidence shows one compact bracket-like solid with a large circular
-      bore, stepped body, and multiple mounting holes. targeted_web_search:
-      queries tried were "axis bearing top S5/0500 manufacturing", "2ADC_part_C
-      machining", and "K+C S5/0500 bearing bracket"; no source stated the
-      row-specific manufacturing route.
+      Bore, stepped body, and multiple mounting holes. targeted_web_search:
+      Queries tried were "axis bearing top S5/0500 manufacturing", "2ADC_part_C
+      Machining", and "K+C S5/0500 bearing bracket" no source stated the
+      Row-specific manufacturing route.
     evidence_basis: engineering_hypothesis
   assumptions:
     - Subtractive machining is the simplest route for the observed bore, flanges, and small-batch bracket geometry.

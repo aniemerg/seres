@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows a one-piece thin annular geometry; the row-matched datasheet identifies the product family as a DN 40 ISO-KF flexible stainless hose and gives stainless 1.4301/304 flange material. targeted_web_search: queries tried included '120SWG040-0250 manufacturing flange', 'Pfeiffer 120SWG040-0250 datasheet flange material', and 'ISO-KF stainless flange manufacturing machining'; no row-specific source stated the manufacturing process for this exported subpart, so the route is inferred from geometry and material."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "A machined stainless ring is the simplest local route for this exported end/flange subpart at the BOM-row level."
+    - "A machined stainless ring is the simplest Manufacturing route for this exported end/flange subpart at the BOM-row level."
     - "The eventual complete flexible pipe would need separate bellows forming and joining steps; those are outside this row's part-1 CAD scope."
   uncertainty_notes:
     - "Actual vendor production may use forming, stamping, or welded subfeatures not visible in the single exported STEP solid."

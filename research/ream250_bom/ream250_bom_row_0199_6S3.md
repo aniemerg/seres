@@ -45,7 +45,7 @@ how_to_make:
     - "Inspect the bend angle, central clearance opening, hole positions, and fit to the adjacent motor mount components."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6S3_bent_part.step; research/ream250_bom/ream250_bom_row_0199_6S3__views_2x2.png"
-    cited_fact_or_basis: "The STEP/contact sheet shows one steel L-shaped bent bracket with a vertical flange, horizontal plate, central circular opening, smaller holes, and a measured 69.03 x 65.45 x 68.41 mm bounding box. targeted_web_search: searched \"6S3_bent_part motor mount\", \"reAM250 6S3 motor mount\", \"reAM250 6S3_bent_part\", and \"sheet metal motor mount bracket bending steel mounting plate\"; results found duplicate reAM250 BOM text and general bent motor-bracket examples, but no row-specific fabrication drawing, tolerance callout, or manufacturing process source."
+    cited_fact_or_basis: "The STEP/contact sheet shows one steel L-shaped bent bracket with a vertical flange, horizontal plate, central circular opening, smaller holes, and a measured 69.03 x 65.45 x 68.41 mm bounding box. targeted_web_search: searched \"6S3_bent_part motor mount\", \"reAM250 6S3 motor mount\", \"reAM250 6S3_bent_part\", and \"sheet metal motor mount bracket bending steel mounting plate\" results found duplicate reAM250 BOM text and general bent motor-bracket examples, but no row-specific fabrication drawing, tolerance callout, or manufacturing process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the bent bracket geometry and steel material metadata rather than from a row-specific drawing."

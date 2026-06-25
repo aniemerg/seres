@@ -36,9 +36,8 @@ material:
   uncertainty_notes:
     - "Exact aluminum alloy and stainless grade are not resolved from the available row-matched evidence."
 how_to_make:
-  summary: "Best near-term route is procurement as a Pfeiffer Vacuum PF A58 204 / AVC 040 PA electropneumatic angle valve. A plausible local manufacturing route would machine or cast the aluminum angle-valve body, machine KF interfaces and valve seat, fabricate or procure the stainless bellows/feedthrough, fit FKM seals, assemble the pneumatic actuator, pilot valve, and position indicator, then leak-test and cycle-test the complete valve."
+  summary: "Manufacturing route would machine or cast the aluminum angle-valve body, machine KF interfaces and valve seat, Fabricate the stainless bellows/feedthrough, fit FKM seals, assemble the pneumatic actuator, pilot valve, and position indicator, then leak-test and cycle-test the complete valve"
   manufacturing_steps:
-    - "Procure the row-matched Pfeiffer PF A58 204 valve when modeling the reAM250 as-built BOM."
     - "For local manufacture, produce the aluminum valve body with right-angle flow path, DN 40 ISO-KF flange geometry, and valve-seat features."
     - "Install stainless bellows/feedthrough, valve plate or poppet, FKM seals, pneumatic actuator, pilot valve, and electrical position-indicator components."
     - "Perform vacuum leak testing, pressure/function checks, and cycle testing before installation."
@@ -47,9 +46,9 @@ how_to_make:
     cited_fact_or_basis: "DREEBIT identifies the row product as a Pfeiffer Vacuum AVC 040 PA electropneumatic angle valve with PI/PV, and the rendered CAD contact sheet shows an angle-valve body with KF flanges and actuator/indicator package. The detailed fabrication sequence is inferred from this valve architecture and material set."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacturing would use conventional precision machining/casting, elastomer sealing, bought or locally fabricated bellows, and vacuum component leak-testing practices."
+    - "Use conventional precision machining/casting, elastomer sealing, locally made or separately fabricated bellows, and vacuum component leak-testing practices"
   uncertainty_notes:
-    - "targeted_web_search: queries tried included 'PF A58 204 Pfeiffer Vacuum valve', 'AVC 040 PA 1.21 kg Aluminum FKM', and 'AVC 040 PA Bellows stainless steel 1.21 kg'; results resolved product identity/material/mass but did not provide a manufacturer-stated production process for this valve."
+    - "Targeted_web_search: queries tried included 'PF A58 204 Pfeiffer Vacuum valve', 'AVC 040 PA 1.21 kg Aluminum FKM', and 'AVC 040 PA Bellows stainless steel 1.21 kg'; results resolved product identity/material/mass but did not provide a manufacturer-stated production process for this valve."
 kb_implications:
   - "item_granularity: complex_module - Model as one complex electropneumatic DN40 KF vacuum angle-valve module for near-term KB use; split into aluminum body, stainless bellows, FKM seals, pilot valve, position indicator, and actuator hardware only if valve manufacturing becomes an explicit modeling target."
 ---

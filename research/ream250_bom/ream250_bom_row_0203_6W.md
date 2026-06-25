@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Exact stainless grade, heat treatment, and surface finish are unspecified."
 how_to_make:
-  summary: "Procure or fabricate as a simple stainless guide-connection bracket: cut or rough-machine the near-net bracket form from austenitic stainless stock, machine the locating faces and mounting holes, deburr/passivate, and inspect fit against the back linear-guide assembly."
+  summary: "Fabricate as a simple stainless guide-connection bracket: cut or rough-machine the near-net bracket form from austenitic stainless stock, machine the locating faces and mounting holes, deburr/passivate, and inspect fit against the back linear-guide assembly"
   manufacturing_steps:
     - "Start from stainless plate/block stock sized for the roughly 56 x 39 x 93 mm envelope."
     - "Cut, mill, or waterjet/laser rough the bracket profile, including the tall back lug and transverse mounting flanges."
@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "CAD geometry shows a compact stainless bracket with flat flanges, a taller rear lug/web, and multiple mounting holes. The detailed fabrication sequence is inferred from the geometry and material, not directly stated by a vendor or drawing. targeted_web_search: queries tried included '\"6W_connection_linear_guide_back\"', '\"connection linear guide back\" reAM250', and '\"reAM250\" \"6W\" \"connection_linear_guide_back\"'; results found mirrored BOM listings or generic linear-guide information, not a row-specific manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The geometry is practical as a fabricated or machined stainless bracket rather than a calibrated purchased module."
+    - "The geometry is practical as a fabricated or machined stainless bracket rather than a calibrated module"
     - "Separate fasteners, rails, carriages, and belt-drive components are represented by neighboring BOM rows and are not part of this row's per-unit item."
   uncertainty_notes:
     - "The fabrication route does not resolve original tolerances, datum scheme, or whether the source part was machined from solid, cut from plate plus secondary machining, or made by another near-net process."

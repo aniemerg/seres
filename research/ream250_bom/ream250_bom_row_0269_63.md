@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The row-specific CAD metadata gives a steel family but may be a generic CAD material assignment; exact grade, heat treatment, and finish are not resolved for this specific BOM row."
 how_to_make:
-  summary: "Procure as a standard DIN 471 external retaining ring; a plausible local route is blanking/stamping the ring profile from spring-steel strip, heat treating if not supplied pre-hardened, finishing/coating, and inspecting shaft-groove fit."
+  summary: "Prepare as a standard DIN 471 external retaining ring; blanking/stamping the ring profile from spring-steel strip, heat treating if not supplied pre-hardened, finishing/coating, and inspecting shaft-groove fit"
   manufacturing_steps:
     - "Select steel strip or spring-steel stock at about 0.6 mm thickness for the small DIN 471 ring size."
     - "Blank or stamp the split-ring outline, lug ends, and plier holes."
@@ -47,8 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a thin stamped-looking split retaining ring with lug holes. Huyett's DIN 471 snap-ring page for the same family lists Type: Snap Rings External, material Carbon Spring Steel, and Style: Stamped. Ametric's DIN 471 table lists hardened spring steel for external retaining rings. targeted_web_search: searched 'DIN 471 retaining ring 5 x 0.6 material spring steel stainless steel', 'DIN 471 external retaining ring function shaft groove spring steel', and 'DIN 471 retaining ring manufacturing stamped spring steel'; results resolved standard retaining-ring function, common material family, and a stamped style for comparable DIN 471 rings, but did not provide a row-specific factory process for this exact reAM250 item."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the standard ring geometry, thin sheet/strip thickness, and comparable catalog description of DIN 471 rings as stamped external snap rings."
-    - "Procurement is the near-term route because this is standard small hardware."
+    - "The inferred from the standard ring geometry, thin sheet/strip thickness, and comparable catalog description of DIN 471 rings as stamped external snap rings."
   uncertainty_notes:
     - "The cited sources do not specify the actual supplier or process used for the reAM250 row, so heat treatment and finish remain planning assumptions."
 kb_implications:

@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The row STEP and contact sheet show one steel 80.00 x 100.00 x 20.00 mm custom mount with sloped relief faces and a central circular feature. Steel Plate describes drilling as producing circular holes in solid materials and face milling as flattening/smoothing workpiece surfaces. targeted_web_search: searches tried '91G_mount_top reAM250', 'reAM250 91G mount_top', and 'custom steel mount plate CNC machining drilled hole'; results found duplicate reAM250 BOM listings and generic steel plate drilling/milling services, but no row-specific drawing or stated manufacturing process for 91G_mount_top."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The custom geometry is best modeled as subtractive machining from steel stock rather than as a purchased catalog module."
+    - "The custom geometry is best modeled as subtractive machining from steel stock rather than as a external catalog module"
     - "The sloped faces are manufacturable by CNC milling or equivalent fixture machining."
   uncertainty_notes:
     - "The exact production method, tolerances, hole specification, and finish are not stated by the BOM or CAD package."

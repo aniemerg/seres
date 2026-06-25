@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "The exact weld filler or surface finish is not specified in the accessible row evidence."
 how_to_make:
-  summary: "Near-term route is procurement as part of the Pfeiffer DN 40 ISO-KF corrugated hose family; a local route would fabricate a stainless ISO-KF end flange/end piece and weld it to the stainless bellows hose assembly."
+  summary: "Fabricate a stainless ISO-KF end flange/end piece and weld it to the stainless bellows hose assembly"
   manufacturing_steps:
-    - "Procure row-matched Pfeiffer 120SWG040 hose/end-piece component for the current BOM model."
     - "For local manufacture, cut/form or machine the 1.4301/304 stainless end-flange profile to the DN 40 ISO-KF interface geometry."
     - "Join the end piece to the 316L corrugated bellows by vacuum-compatible welding, then clean and leak-test the hose assembly."
   source:
@@ -48,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The Pfeiffer shop route identifies this as a DN 40 ISO-KF corrugated hose family with stainless flange/bellows materials and pressure/temperature service data; the CAD preview shows a one-piece annular flanged end piece. Pfeiffer's vacuum-components page describes high-quality vacuum components, flange and piping parts, flexible vacuum hoses, and leak-tested vacuum components. targeted_web_search: searched 'Pfeiffer Vacuum 120SWG040-0500 end piece flexible pipe material weight', '120SWG040-0500 Pfeiffer flexible pipe end piece', and 'Pfeiffer 120SWG040-0250 flexible pipe end piece'; results resolved the row-matched product family/materials but did not state a factory process for the separate end piece, so the detailed local fabrication steps are inferred."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local self-manufacture would use standard vacuum-hardware practice for stainless ISO-KF hose ends when vendor procurement is not allowed."
+    - "Self-manufacture would use standard vacuum-hardware practice for stainless ISO-KF hose ends"
   uncertainty_notes:
     - "The source evidence does not provide the exact Pfeiffer factory process, tooling, weld specification, or acceptance leak-rate for this specific end piece."
 kb_implications:

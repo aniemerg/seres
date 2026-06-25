@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "The sources identify the sealant chemistry family and current formulation type but not a full filler/additive composition or cured rubber compound recipe."
 how_to_make:
-  summary: "Procure Liqui Moly 6185 black silicone sealing compound, clean and degrease the mating surfaces, dispense a uniform rectangular perimeter bead matching the CAD path, then join the parts immediately and allow humidity cure."
+  summary: "Prepare Liqui Moly 6185 black silicone sealing compound, clean and degrease the mating surfaces, dispense a uniform rectangular perimeter bead matching the CAD path, then join the parts immediately and allow humidity cure"
   manufacturing_steps:
-    - "Procure or prepare a neutral-crosslinking black silicone sealing compound equivalent to Liqui Moly 6185."
+    - "Prepare or prepare a neutral-crosslinking black silicone sealing compound equivalent to Liqui Moly 6185"
     - "Clean the top/bottom mating surfaces so they are dry and free of oil and grease."
     - "Dispense the sealant as a continuous rectangular perimeter bead matching the 840 x 520 mm CAD envelope and about 3 mm bead height."
     - "Join the mating parts immediately without flash-off time, controlling squeeze-out so the bead remains continuous."
@@ -51,7 +51,6 @@ how_to_make:
     evidence_basis: "bom_provided"
   assumptions:
     - "The CAD bead is a target cured or installed bead shape, so dispensing controls should target a similar perimeter and approximate volume before compression."
-    - "For KB modeling, procurement plus local dispensing/curing is the appropriate route unless a later task models silicone sealant synthesis and cartridge/can packaging in detail."
   uncertainty_notes:
     - "Exact fixture pressure, cure time before machine operation, and inspection acceptance criteria are not specified by the row evidence."
 kb_implications:

@@ -37,17 +37,15 @@ material:
   uncertainty_notes:
     - "The local assembly STEP material extractor returned only placeholder Generic density 1000 for this product, so it does not confirm the exact vendor, cage variant, seal elastomer, or grease type used in the reAM250 assembly."
 how_to_make:
-  summary: "For current KB modeling, procure as a standard 6200-2RS sealed deep-groove ball bearing. A local production route would require bearing-grade steel ring turning/grinding, ball and raceway finishing, cage forming, rubber seal production, lubrication, assembly, and precision inspection."
+  summary: "Manufacture by bearing-grade steel ring turning/grinding, ball and raceway finishing, cage forming, rubber seal production, lubrication, assembly, and precision inspection"
   manufacturing_steps:
-    - "Procure/catalog route: buy a standard 6200-2RS sealed deep-groove ball bearing matching 10 mm bore, 30 mm outside diameter, and 9 mm width."
-    - "Local route: make inner and outer bearing rings from SAE 52100 or equivalent bearing steel, then harden, grind raceways, and finish bearing seats."
-    - "Produce or procure precision balls, form a pressed steel cage, mold or cut rubber contact seals, add suitable grease, assemble, and verify running clearance, noise, and dimensional tolerances."
+    - "Manufacturing route: make inner and outer bearing rings from SAE 52100 or equivalent bearing steel, then harden, grind raceways, and finish bearing seats."
+    - "Produce"
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0042_2AC8__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AC8_part_8.step; https://www.smbbearings.com/firebrick/ckeditor/plugins/upload/Uploads/Documents/bearingpdfs/6200-2RS-bearing-10x32x9mm.pdf; https://www.hiwin.de/en/Products/Bearings/Bearings-SFA-SLA/SLA/SLA10/p/18-000127"
-    cited_fact_or_basis: "The CAD preview shows a compact sealed-bearing ring, and HIWIN's SLA10 page identifies the matched bearing as 6200.2RS. The SMB datasheet identifies material stack and closures/lubrication for a 6200-2RS bearing. The detailed local manufacturing route is inferred from the standard bearing geometry and material stack rather than directly stated by those sources. targeted_web_search: searched '2AC8 axis bearing bottom reAM250', '2AC8_part_8', 'axis bearing bottom SLA10 bearing', '6200.2RS bearing dimensions 10 30 9 mass material', and '6200-2RS bearing weight 10x30x9 material bearing steel'; results resolved the row's standard bearing identity, material, dimensions, and mass but did not provide a row-specific manufacturing process for the reAM250 bearing."
+    cited_fact_or_basis: "The CAD preview shows a compact sealed-bearing ring, and HIWIN's SLA10 page identifies the matched bearing as 6200.2RS. The SMB datasheet identifies material stack and closures/lubrication for a 6200-2RS bearing. The detailed inferred from the standard bearing geometry and material stack rather than directly stated by those sources. targeted_web_search: searched '2AC8 axis bearing bottom reAM250', '2AC8_part_8', 'axis bearing bottom SLA10 bearing', '6200.2RS bearing dimensions 10 30 9 mass material', and '6200-2RS bearing weight 10x30x9 material bearing steel'; results resolved the row's standard bearing identity, material, dimensions, and mass but did not provide a row-specific manufacturing process for the reAM250 bearing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The near-term practical manufacturing route is procurement because precision bearing production has tighter metallurgy, heat-treatment, grinding, cleanliness, and inspection requirements than ordinary turned hardware."
     - "A self-manufacturing route would model this as a bearing subsystem only after the KB has processes for bearing steel heat treatment, precision race grinding, ball production, seal production, and clean assembly."
   uncertainty_notes:
     - "No row-specific drawing, fit tolerance, bearing clearance class, seal compound, grease specification, or original bearing manufacturer was found."

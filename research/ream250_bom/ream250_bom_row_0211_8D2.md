@@ -38,18 +38,18 @@ material:
   uncertainty_notes:
     - "The local assembly STEP material metadata for this product is only the placeholder 'Generic', so the specific subpart material assignment depends on matching the CAD geometry to the catalog's flange-vs-bellows material split."
 how_to_make:
-  summary: "Model later as a purchased flexible vacuum hose subcomponent; local manufacture would require forming a thin stainless ISO-KF annular/flange ring and integrating it with the corrugated hose assembly."
+  summary: "Model later as a external flexible vacuum hose subcomponent; Manufacturing requires forming a thin stainless ISO-KF annular/flange ring and integrating it with the corrugated hose assembly"
   manufacturing_steps:
     - "Start from stainless 304 sheet/tube or near-net annular blank sized for the DN 40 ISO-KF hose end."
     - "Cut or deep-draw/roll-form the annular profile, then trim and deburr the vacuum sealing/contact edges."
     - "Clean and inspect the part for vacuum compatibility before joining it into the flexible hose end assembly."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0211_8D2__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/8D2_flexible_pipe_part_2.step; https://vacuum-shop.com/shop/en_US/category/2072984/iso-kf-corrugated-hose-flexible-annealed.html"
-    cited_fact_or_basis: "The CAD preview shows a thin annular/corrugated ring-like part; FreeCAD measured a 5.319 x 56.284 x 56.284 mm bounding box; the Pfeiffer webshop page identifies the matched product as an ISO-KF flexible corrugated hose with stainless 1.4301/304 flanges and stainless 316L bellows. targeted_web_search: searched \"Pfeiffer Vacuum 120SWG040_0250 flexible pipe material\", \"120SWG040-0250 Pfeiffer flexible pipe\", and \"site:pfeiffer-vacuum.com 120SWG040_0250\"; found row-matched catalog material and dimensions but no row-specific manufacturing route for this extracted CAD subpart. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120SWG040_0250; alternate URL https://vacuum-shop.com/shop/en_US/category/2072984/iso-kf-corrugated-hose-flexible-annealed.html is a Pfeiffer Vacuum online shop page with Pfeiffer Vacuum Components & Solutions GmbH contact/copyright and the row-matched order number 120SWG040-0250."
+    cited_fact_or_basis: "The CAD preview shows a thin annular/corrugated ring-like part; FreeCAD measured a 5.319 x 56.284 x 56.284 mm bounding box; the Pfeiffer webshop page identifies the matched product as an ISO-KF flexible corrugated hose with stainless 1.4301/304 flanges and stainless 316L bellows. targeted_web_search: searched \"Pfeiffer Vacuum 120SWG040_0250 flexible pipe material\", \"120SWG040-0250 Pfeiffer flexible pipe\", and \"site:pfeiffer-vacuum.com 120SWG040_0250\" found row-matched catalog material and dimensions but no row-specific manufacturing route for this extracted CAD subpart. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120SWG040_0250; alternate URL https://vacuum-shop.com/shop/en_US/category/2072984/iso-kf-corrugated-hose-flexible-annealed.html is a Pfeiffer Vacuum online shop page with Pfeiffer Vacuum Components & Solutions GmbH contact/copyright and the row-matched order number 120SWG040-0250."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The visible annular subpart can be approximated as a formed or machined stainless ring/end feature for KB planning."
-    - "The complete Pfeiffer flexible hose should remain a purchased module unless the KB later models corrugated bellows forming, welding/brazing, and vacuum leak testing."
+    - "The complete Pfeiffer flexible hose should remain a module unless the KB later models corrugated bellows forming, welding/brazing, and vacuum leak testing"
   uncertainty_notes:
     - "The CAD row does not expose the production method, joining details, or tolerances needed for a reliable local manufacturing recipe."
 kb_implications:

@@ -34,7 +34,7 @@ material:
   uncertainty_notes:
     - "No surface finish or fastener property class is specified by the BOM row or local material metadata."
 how_to_make:
-  summary: "Treat as standard DIN 7991 M3x8 countersunk screw hardware: procure as a commodity fastener when available, or manufacture from mild-steel wire/rod by screw-heading, socket forming, thread rolling, and finishing."
+  summary: "Treat as standard DIN 7991 M3x8 countersunk screw hardware: prepare as a commodity fastener , or manufacture from mild-steel wire/rod by screw-heading, socket forming, thread rolling, and finishing"
   manufacturing_steps:
     - "Cut mild-steel wire or small rod blank to screw length allowance."
     - "Form the countersunk head and hex socket by cold heading or equivalent small-fastener forming."
@@ -47,7 +47,7 @@ how_to_make:
   assumptions:
     - "Fastener manufacturing route is inferred from standard screw production practice and the CAD geometry, not from a row-specific process plan."
   uncertainty_notes:
-    - "Final local route may vary between cold forming, thread rolling, and machining depending on available small-fastener tooling."
+    - "Final Manufacturing route may vary between cold forming, thread rolling, and machining depending on available small-fastener tooling."
 kb_implications:
   - "item_granularity: simple_part - Standard DIN 7991 screw hardware should map to a reusable fastener item rather than a machine-specific module."
 ---

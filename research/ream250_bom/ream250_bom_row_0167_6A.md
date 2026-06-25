@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The exact profile, polyurethane formulation, coating, and cord material are not specified in the BOM row or STEP metadata."
 how_to_make:
-  summary: "Procure as a catalog or custom PU conveyor/timing belt from a belt supplier; a local route would manufacture PU belt stock around tension cords, close or form it as an endless loop, cut it to final width, and verify fit on the matching pulleys or guides."
+  summary: "Prepare as a catalog or custom PU conveyor/timing belt from a belt supplier; manufacture PU belt stock around tension cords, close or form it as an endless loop, cut it to final width, and verify fit on the matching pulleys or guides"
   manufacturing_steps:
     - "Select belt width, loop length, profile, backing or transport surface, and tension-cord option to match the CAD loop and machine pulleys."
     - "For open or welded stock, extrude polyurethane around the tension cords, cool the belt, cut it to length, and weld or otherwise close the belt ends."

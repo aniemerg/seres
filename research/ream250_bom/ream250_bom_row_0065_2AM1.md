@@ -36,20 +36,19 @@ material:
   uncertainty_notes:
     - "The source resolves material families and surface state, but not the exact aluminum alloy, TPU formulation, or steel screw grade."
 how_to_make:
-  summary: "Procure as a Ganternorm GN 2240-30-B8-14-AL-WS-1 standard coupling for current KB modeling; a plausible local route is machined/anodized aluminum clamp hubs, molded or cut TPU jaw spider, blackened steel screw manufacture/procurement, and final coupling assembly and bore/runout inspection."
+  summary: "Machined/anodized aluminum clamp hubs, molded or cut TPU jaw spider, blackened steel screw manufacture, and final coupling assembly and bore/runout inspection"
   manufacturing_steps:
-    - "Procure/catalog route: buy the configured GN 2240 coupling with d1 30, B no-keyway clamping hub, 8 mm and 14 mm H8 bores, AL hubs, and WS 92 Shore A spider."
     - "Local-manufacturing route: machine two aluminum clamp hubs with jaws, clamp slots, shaft bores, and screw holes from round stock or near-net blanks."
-    - "Anodize the aluminum hubs and produce or procure blackened steel socket cap screws."
+    - "Produce"
     - "Mold or machine the TPU spider to the jaw profile at the required 92 Shore A hardness."
     - "Assemble the hubs and spider, install screws, then inspect bore fit, clamp function, jaw engagement, balance/runout, and torsional coupling fit."
   source:
     url_or_path: "https://www.ganternorm.com/de/produkte/3.6-Bewegen-Uebertragen-mit-Gelenken-Kupplungen-und-Getrieben/Wellenkupplungen/GN-2240-Elastomer-Klauenkupplungen-mit-Klemmnabe; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AM1_part_1.step; research/ream250_bom/ream250_bom_row_0065_2AM1__views_2x2.png"
-    cited_fact_or_basis: "The Ganter page identifies GN 2240 as an aluminum clamping-hub elastomer jaw coupling with TPU spider and blackened steel socket cap screws; FreeCAD measured a 24.00 x 30.00 x 29.99 mm envelope; the rendered preview shows cylindrical clamp hubs, jaw teeth, clamp slots, and screw features. The detailed local fabrication sequence is inferred from material and geometry rather than stated by the vendor. targeted_web_search: searched \"Ganternorm GN 2240 30-B8-14-AL-WS-1 elastomer jaw coupling manufacturing\", \"GN 2240 elastomer jaw coupling datasheet\", and \"GN 2240 AL WS material weight\"; results resolved product construction and technical data but not the factory manufacturing process."
+    cited_fact_or_basis: "The Ganter page identifies GN 2240 as an aluminum clamping-hub elastomer jaw coupling with TPU spider and blackened steel socket cap screws; FreeCAD measured a 24.00 x 30.00 x 29.99 mm envelope; the rendered preview shows cylindrical clamp hubs, jaw teeth, clamp slots, and screw features. The detailed local fabrication sequence is inferred from material and geometry rather than stated by the vendor. targeted_web_search: searched \"Ganternorm GN 2240 30-B8-14-AL-WS-1 elastomer jaw coupling manufacturing\", \"GN 2240 elastomer jaw coupling datasheet\", and \"GN 2240 AL WS material weight\" results resolved product construction and technical data but not the factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route treats this as a precision coupling assembly where shaft-bore fit and concentricity matter more than bulk material availability."
-    - "Near-term KB use should favor procurement or a purchased standard-coupling abstraction until precision coupling manufacture and elastomer spider production are modeled."
+    - "The manufacturing route treats this as a precision coupling assembly where shaft-bore fit and concentricity matter more than bulk material availability."
+    - "Manufacture and elastomer spider production are modeled"
   uncertainty_notes:
     - "The vendor/CAD evidence does not state manufacturing tolerances, balance class, exact bore process, anodizing specification, screw grade, or TPU molding details."
 kb_implications:

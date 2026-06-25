@@ -38,17 +38,17 @@ material:
 how_to_make:
   summary: "Fabricate as a custom machined Aluminum 6061 door plate from thick plate or billet stock, then finish the mounting/sealing and optical-door interface features."
   manufacturing_steps:
-    - "Procure Aluminum 6061 plate or billet large enough for the 880 mm by 460 mm door-plate envelope and the maximum local thickness or boss height."
+    - "Prepare Aluminum 6061 plate or billet large enough for the 880 mm by 460 mm door-plate envelope and the maximum local thickness or boss height"
     - "Rough CNC mill the plate faces, perimeter, ribs, pockets, reliefs, and local aperture or mounting features shown in the CAD."
     - "Drill, tap, countersink, or counterbore the mounting patterns needed for the handle, hinges, clamps, schlieren-imaging frame/window/seal stack, and cover hardware."
     - "Finish-machine sealing and mating faces, then deburr all edges and inspect flatness, hole positions, and interface alignment."
     - "Apply the required surface finish or cleaning route, such as anodizing or vacuum-compatible cleaning, only if later drawings or chamber requirements call for it."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1B1_door_plate.step; research/ream250_bom/ream250_bom_row_0009_1B1__views_2x2.png; web_search"
-    cited_fact_or_basis: "The row-specific CAD and preview show one large 880 mm by 460 mm plate-like solid with ribs/reliefs and localized interface geometry; assembly STEP metadata identifies Aluminum 6061. targeted_web_search: queries tried \"1B1_door_plate reAM250\", \"reAM250 1B1 door plate\", and \"reAM250_BOM_gold 1B1\"; results found duplicate BOM text and general reAM250 project pages, but no row-specific drawing, tolerance note, or manufacturing process route."
+    cited_fact_or_basis: "The row-specific CAD and preview show one large 880 mm by 460 mm plate-like solid with ribs/reliefs and localized interface geometry; assembly STEP metadata identifies Aluminum 6061. targeted_web_search: queries tried \"1B1_door_plate reAM250\", \"reAM250 1B1 door plate\", and \"reAM250_BOM_gold 1B1\" results found duplicate BOM text and general reAM250 project pages, but no row-specific drawing, tolerance note, or manufacturing process route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple machined structural plate rather than a purchased module because the BOM row has no manufacturer, product ID, or link URL and the CAD file is an assembly-specific door plate."
+    - "The part is treated as a custom simple machined structural plate because the BOM row has no manufacturer, product ID, or link URL and the CAD file is an assembly-specific door plate"
     - "CNC machining from Aluminum 6061 plate or billet is assumed from the large plate geometry, relieved/ribbed features, and expected need for accurate door, hinge, clamp, and optical-window interfaces."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, sealing flatness requirements, heat treatment, or whether the plate is machined from one thick stock piece versus assembled or welded from thinner stock."

@@ -35,7 +35,7 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Procure as standard ISO-KF vacuum clamp hardware, or locally fabricate as a stainless clamping ring if the KB later models vacuum fitting manufacture."
+  summary: "Locally fabricate as a stainless clamping ring if the KB later models vacuum fitting manufacture"
   manufacturing_steps:
     - "Start from stainless steel 304/1.4301 strip, sheet, or near-net blank sized for a DN 32-40 ISO-KF clamp."
     - "Form or machine the curved clamp profile and lug geometry visible in the row CAD preview."
@@ -43,11 +43,10 @@ how_to_make:
     - "Clean or passivate for vacuum-service compatibility, then inspect fit against DN 32-40 ISO-KF flanges with an elastomer seal."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0117_3F__views_2x2.png; https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040"
-    cited_fact_or_basis: "The CAD preview shows a curved clamp body with side lug/tightening features. The BOM-provided product route identifies the row item as a stainless steel 304/1.4301 DN 32-40 ISO-KF clamping ring for elastomer seals. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 redirected to https://www.shop.buschgroup.com/global/en/products/120BSR040/; the alternate route is an official Busch/Pfeiffer shop page and matches order number 120BSR040. targeted_web_search: searched \"120BSR040 clamping ring stainless steel 304 1.4301 manufacturing drawing\", \"Pfeiffer 120BSR040 clamping ring DN 40 material weight\", and \"ISO-KF DN40 clamping ring stainless steel manufacturing\"; found product/spec pages and generic ISO-KF clamp information but no row-specific manufacturing process."
+    cited_fact_or_basis: "The CAD preview shows a curved clamp body with side lug/tightening features. The BOM-provided product route identifies the row item as a stainless steel 304/1.4301 DN 32-40 ISO-KF clamping ring for elastomer seals. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/120BSR040 redirected to https://www.shop.buschgroup.com/global/en/products/120BSR040/; the alternate route is an official Busch/Pfeiffer shop page and matches order number 120BSR040. targeted_web_search: searched \"120BSR040 clamping ring stainless steel 304 1.4301 manufacturing drawing\", \"Pfeiffer 120BSR040 clamping ring DN 40 material weight\", and \"ISO-KF DN40 clamping ring stainless steel manufacturing\" found product/spec pages and generic ISO-KF clamp information but no row-specific manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The local fabrication route is inferred from the row CAD geometry, stainless material, and common small metal clamp fabrication practice."
-    - "Procurement is the preferred current route because the BOM row identifies a standard commercial Pfeiffer/Busch vacuum fitting."
   uncertainty_notes:
     - "The exact vendor production method, fastener subparts, surface finish, and inspection tolerances are not specified by the row evidence."
 kb_implications:

@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The vendor material statement is for the 320SFK063-130 spring-bellows product family; the row-level CAD subfeature does not carry non-placeholder material metadata."
 how_to_make:
-  summary: "Procure as part of the Pfeiffer 320SFK063-130 ISO-K spring bellows/flexible connector; a local route would form thin 316L stainless bellows corrugations, trim to the required annular geometry, weld or integrate with matching ISO-K end pieces, clean for vacuum service, and leak-test the completed connector."
+  summary: "Form thin 316L stainless bellows corrugations, trim to the required annular geometry, weld or integrate with matching ISO-K end pieces, clean for vacuum service, and leak-test the completed connector"
   manufacturing_steps:
     - "Start from thin 316L stainless tube or sheet stock sized for a DN 63 ISO-K bellows element."
     - "Form the corrugated bellows curvature visible in the CAD preview by bellows forming or hydroforming."
@@ -50,10 +50,9 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a thin corrugated annular feature; FreeCAD measured a thin single solid with about 10.06 mm depth and 88.44 x 87.18 mm outer span. The Pfeiffer Vacuum Online Shop page identifies the row-matched product family as ISO-K spring bellows and states stainless steel bellows/flange materials and pressure/temperature service. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/320SFK063_130 is a Pfeiffer product route; the used vacuum-shop.com page is branded as Pfeiffer Vacuum Online Shop and matches product 320SFK063-130. targeted_web_search: checked the BOM-provided Pfeiffer URL route and searched 'Pfeiffer Vacuum 320SFK063 130 flexible pipe ISO-K DN 63 material weight', '320SFK063 Pfeiffer Vacuum DN 63 flexible pipe datasheet', and 'site:pfeiffer-vacuum.com 320SFK063'; found row-matched product/material/service facts, but no row-specific manufacturing-process specification for the curvature subfeature."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the stainless corrugated bellows geometry and standard vacuum bellows construction practice, not from a Pfeiffer production-process disclosure."
+    - "The inferred from the stainless corrugated bellows geometry and standard vacuum bellows construction practice, not from a Pfeiffer production-process disclosure."
     - "Vacuum service requires clean, welded/integrated stainless joints and leak testing after assembly."
-  uncertainty_notes:
-    - "The evidence supports procurement and plausible local process planning, but not exact wall thickness, forming process parameters, weld schedule, or Pfeiffer acceptance-test limits for this subfeature."
+  uncertainty_notes: []
 kb_implications:
   - "item_granularity: simple_part - Treat this row as a one-piece stainless corrugated bellows curvature subfeature within a larger purchased spring-bellows connector, not as the complete connector module."
 ---

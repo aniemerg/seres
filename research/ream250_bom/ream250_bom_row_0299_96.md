@@ -41,9 +41,9 @@ material:
   uncertainty_notes:
     - "The row evidence resolves aluminum as the material family but does not prove a specific alloy temper or anodized finish for this cut piece."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth modular aluminum strut-profile cut piece where possible; a local route would extrude a 60 x 60 mm slotted aluminum profile, apply any required surface finish, cut to the row length, deburr, and inspect slot geometry and end squareness."
+  summary: "Prepare as a Bosch Rexroth modular aluminum strut-profile cut piece; extrude a 60 x 60 mm slotted aluminum profile, apply any required surface finish, cut to the row length, deburr, and inspect slot geometry and end squareness"
   manufacturing_steps:
-    - "Produce or procure aluminum extrusion stock with the 60 x 60 mm slotted profile cross-section."
+    - "Produce"
     - "Cut the extrusion stock to the required row length, noting that the supplied CAD measures 240 mm while the file name implies 300 mm."
     - "Deburr the cut ends and slots."
     - "Apply or preserve the required surface finish, such as anodizing if specified by the selected Rexroth profile variant."
@@ -53,8 +53,7 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a constant-section slotted extrusion profile; FreeCAD measured a 60 x 60 mm cross-section and 240 mm bounding-box length. Bosch Rexroth identifies this product family as aluminum profiles for modular structures. targeted_web_search: tried 'Bosch Rexroth Strebenprofil 60x60 material aluminum weight kg m', 'Bosch Rexroth strut profile 60x60 aluminum profile', and 'site:boschrexroth.com Strebenprofil 60x60 Bosch Rexroth aluminum strut profile'; results resolved the official aluminum-profile product family and similar product specs, but no row-specific Bosch page stated the manufacturing process for this exact cut piece."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Extrusion, finishing, cut-to-length, deburring, and inspection are the plausible local manufacturing route for a constant-section aluminum strut profile."
-    - "For KB planning, procurement or reuse of generic aluminum extrusion stock is preferable to modeling this as a bespoke reAM250-only part."
+    - "Extrusion, finishing, cut-to-length, deburring, and inspection are the plausible Manufacturing route for a constant-section aluminum strut profile."
   uncertainty_notes:
     - "The evidence does not state Bosch Rexroth's actual production process, exact alloy temper, finish, tolerances, or whether the row's installed part has post-cut machining."
     - "The length mismatch between file name and measured CAD geometry remains unresolved."

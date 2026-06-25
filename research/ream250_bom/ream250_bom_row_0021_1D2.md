@@ -46,11 +46,11 @@ how_to_make:
     - "Inspect hinge-pin fit, coaxiality, mounting/leaf geometry, and surface condition before assembly with the mating hinge pieces."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1D2_part_2.step; research/ream250_bom/ream250_bom_row_0021_1D2__views_2x2.png"
-    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a rectangular web, two coaxial cylindrical hinge-barrel features, through bores, and a measured 46.00 x 50.00 x 16.00 mm bounding box. targeted_web_search: searched \"Pfeiffer Vacuum door hinge material\", \"Pfeiffer Vacuum door hinge reAM250 1D2_part_2\", \"1D2_part_2 door hinge Pfeiffer Vacuum\", and \"reAM250 door hinge Pfeiffer Vacuum\"; found duplicate BOM text and general Pfeiffer vacuum-chamber stainless context, but no row-specific manufacturing process source."
+    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a rectangular web, two coaxial cylindrical hinge-barrel features, through bores, and a measured 46.00 x 50.00 x 16.00 mm bounding box. targeted_web_search: searched \"Pfeiffer Vacuum door hinge material\", \"Pfeiffer Vacuum door hinge reAM250 1D2_part_2\", \"1D2_part_2 door hinge Pfeiffer Vacuum\", and \"reAM250 door hinge Pfeiffer Vacuum\" found duplicate BOM text and general Pfeiffer vacuum-chamber stainless context, but no row-specific manufacturing process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the simple metal hinge geometry and need for aligned hinge-pin bores, not from a Pfeiffer factory process sheet."
-    - "For KB modeling, this can be represented as machining from stainless stock rather than a purchased proprietary hinge subassembly."
+    - "For KB modeling, this can be represented as machining from stainless stock rather than a proprietary hinge subassembly"
   uncertainty_notes:
     - "The CAD gives geometry but not tolerances, surface finish, heat treatment, or whether Pfeiffer used machining, casting, extrusion, or a vendor-specific hinge blank."
 kb_implications:

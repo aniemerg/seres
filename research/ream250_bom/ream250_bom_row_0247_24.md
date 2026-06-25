@@ -37,9 +37,9 @@ material:
     - "Assembly STEP material metadata returned only Generic with density 1000, so it was not used as material evidence."
     - "The public product page supports silicone-based sealant but does not expose a complete cured elastomer formulation or filler package."
 how_to_make:
-  summary: "Procure Liqui Moly 6185 black silicone sealing compound or an equivalent silicone gasket compound, clean and degrease the mating faces, dispense an even 3 mm-thick seal path matching the CAD strip, and join the mating parts immediately so the compound cures in place."
+  summary: "Prepare Liqui Moly 6185 black silicone sealing compound or an equivalent silicone gasket compound, clean and degrease the mating faces, dispense an even 3 mm-thick seal path matching the CAD strip, and join the mating parts immediately so the compound cures in place"
   manufacturing_steps:
-    - "Procure 200 ml Liqui Moly 6185 black silicone sealing compound or equivalent silicone gasket compound."
+    - "Prepare 200 ml Liqui Moly 6185 black silicone sealing compound or equivalent silicone gasket compound"
     - "Clean the sealing faces so they are dry and free of oil and grease."
     - "Apply a continuous bead/strip following the left or right side seal path represented by the CAD geometry."
     - "Assemble the mating parts immediately, without a waiting/flash-off period, and allow the sealant to cure in place."
@@ -47,8 +47,7 @@ how_to_make:
     url_or_path: "https://www.liqui-moly.com/de/de/silikondichtmasse-schwarz-p001435.html#6185; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/24_seal_left_right.step"
     cited_fact_or_basis: "The BOM-provided Liqui Moly page identifies article 6185 as a 200 ml black silicone sealing compound and states that surfaces should be clean, oil-free, grease-free, and dry; material is applied evenly and parts are joined immediately without flash-off time. The STEP file gives the long, flat seal geometry."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "For KB modeling, procurement plus application is the appropriate route for this row because the BOM identifies a commercial sealant rather than a machined or molded discrete part."
+  assumptions: []
   uncertainty_notes:
     - "The exact dispensing tool, cure time, and applied bead tolerance are not specified in the row evidence."
 kb_implications:

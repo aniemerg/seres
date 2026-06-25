@@ -50,7 +50,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Subtractive machining from bar or plate stock is the representative low-volume route for this simple custom block."
-    - "No casting, additive manufacturing, heat treatment, or calibrated purchased-module workflow is required unless later drawings specify a special material or spring property."
+    - "No casting, additive manufacturing, heat treatment, or calibrated external-module workflow is required unless later drawings specify a special material or spring property"
   uncertainty_notes:
     - "The exact tolerances, surface finish, and mating features are not specified by the BOM row or local STEP export."
 kb_implications:

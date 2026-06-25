@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The leased row does not include a Bosch material number, so the exact machining option or finish variant is not locked beyond the 60x60 aluminum strut-profile family."
 how_to_make:
-  summary: "Manufacture as a standard aluminum T-slot/strut extrusion: cast or procure aluminum billet, hot-extrude through a 60x60 profile die, quench/age to the profile temper, anodize, and cut to the 960 mm length; for near-term KB modeling, treat it as reusable aluminum structural-profile stock cut to length."
+  summary: "Manufacture as a standard aluminum T-slot/strut extrusion: cast; for near-term KB modeling, treat it as reusable aluminum structural-profile stock cut to length"
   manufacturing_steps:
     - "Prepare aluminum alloy billet compatible with EN AW-6060/AW-6063-series profile extrusion."
     - "Hot-extrude through a 60x60 strut-profile die to form the slotted hollow cross-section visible in the CAD preview."
@@ -45,7 +45,7 @@ how_to_make:
     - "Anodize the profile surface, then saw cut to the 960 mm BOM length and deburr the ends."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0213_9B__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/9B_profile_60x60_960.step; https://airlinemedia.airlinehyd.com/Literature/Manufacturer_Catalogs/Bosch%20Rexroth/AluminumFraming_Sec19_Tech_Data.pdf"
-    cited_fact_or_basis: "The rendered contact sheet shows a long constant-section slotted structural profile. FreeCAD measured a 960.00 x 60.00 x 60.00 mm bounding box. Bosch Rexroth technical data identifies the material family and anodizing information for strut profiles. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 aluminum material mass kg/m\", \"site:boschrexroth.com strut profile 60x60 960 aluminum Bosch Rexroth\", and \"Bosch Rexroth Strebenprofil 60x60 material gewicht kg/m\"; found row-family catalog material and mass data but no source stating the actual factory process for this specific cut row."
+    cited_fact_or_basis: "The rendered contact sheet shows a long constant-section slotted structural profile. FreeCAD measured a 960.00 x 60.00 x 60.00 mm bounding box. Bosch Rexroth technical data identifies the material family and anodizing information for strut profiles. targeted_web_search: searched \"Bosch Rexroth strut profile 60x60 aluminum material mass kg/m\", \"site:boschrexroth.com strut profile 60x60 960 aluminum Bosch Rexroth\", and \"Bosch Rexroth Strebenprofil 60x60 material gewicht kg/m\" found row-family catalog material and mass data but no source stating the actual factory process for this specific cut row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A constant 60x60 slotted aluminum profile is produced by extrusion rather than subtractive machining from solid stock."

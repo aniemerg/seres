@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Material family is intentionally broad; downstream KB modeling should not select steel, stainless, or aluminum grade-specific process routes without a drawing, supplier note, or direct design source."
 how_to_make:
-  summary: "Fabricate as a thin one-piece metal plate/frame from sheet or plate stock, or procure as a custom cut plate within the reAM250 build-platform-mount fabrication set."
+  summary: "Fabricate as a thin one-piece metal plate/frame from sheet or plate stock"
   manufacturing_steps:
     - "Cut a 2 mm metal sheet or plate blank to the 252 mm square outside profile and central square opening."
     - "Machine, laser-cut, waterjet-cut, or punch the four small corner holes and frame profile."
@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "FreeCAD measured a 252.00 x 252.00 x 2.00 mm one-solid plate/frame, and the contact sheet shows a flat square frame with central opening and corner holes. targeted_web_search: tried '2AP2_assembly_plate manufacturing reAM250', '2AP2 assembly plate reAM250 material', 'reAM250 build platform mount assembly plate', and 'reAM250 2AP2 assembly_plate'; no source stated the manufacturing route for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Sheet/plate cutting is the most plausible local route for a flat 2 mm one-piece frame with through features."
+    - "Sheet/plate cutting is the most plausible Manufacturing route for a flat 2 mm one-piece frame with through features."
     - "The CAD preview is used for route triage only; exact cutting tolerances and finish are not available."
   uncertainty_notes:
     - "The row evidence does not specify whether the actual part was laser cut, waterjet cut, machined from plate, stamped, or otherwise produced."

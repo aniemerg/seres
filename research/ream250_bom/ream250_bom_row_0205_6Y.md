@@ -46,7 +46,7 @@ how_to_make:
     - "Inspect overall length, width, thickness, and hole positions against the STEP geometry before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6Y_spacer_11_mm.step; research/ream250_bom/ream250_bom_row_0205_6Y__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "The STEP is one solid with a 44.00 x 23.00 x 11.00 mm bounding box; the contact-sheet preview shows a small rectangular block with three through holes. targeted_web_search: searched \"6Y_spacer_11_mm manufacturing\", \"reAM250 6Y_spacer_11_mm drawing\", and \"reAM250 spacer 11 mm CAD\"; found duplicate BOM listings and no row-specific manufacturing drawing or process source."
+    cited_fact_or_basis: "The STEP is one solid with a 44.00 x 23.00 x 11.00 mm bounding box; the contact-sheet preview shows a small rectangular block with three through holes. targeted_web_search: searched \"6Y_spacer_11_mm manufacturing\", \"reAM250 6Y_spacer_11_mm drawing\", and \"reAM250 spacer 11 mm CAD\" found duplicate BOM listings and no row-specific manufacturing drawing or process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A cut, drilled, and deburred stock route is selected because the geometry is a simple prismatic spacer with visible through holes and no apparent bends, threads, electronics, or multi-part features."

@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "No row-specific material metadata resolves the exact grade; downstream KB modeling should keep the material at stainless-steel family level unless another assembly drawing or procurement record identifies 1.4301, 1.4571, or a different alloy."
 how_to_make:
-  summary: "Fabricate as a welded or otherwise joined closed rectangular frame from DIN 59370 50x50x5 sharp-edged stainless L-angle stock, or procure as a custom cut-and-joined frame."
+  summary: "Fabricate as a welded or otherwise joined closed rectangular frame from DIN 59370 50x50x5 sharp-edged stainless L-angle stock"
   manufacturing_steps:
-    - "Procure or make stainless DIN 59370 50x50x5 sharp-edged L-angle stock."
+    - "Make stainless DIN 59370 50x50x5 sharp-edged L-angle stock"
     - "Cut four angle-stock segments to the frame lengths and miter or notch the corners to match the CAD geometry."
     - "Fixture the segments square to the roughly 900 x 1670 mm frame envelope."
     - "Weld, braze, or mechanically join the corners into the closed frame, then grind/deburr exposed edges."

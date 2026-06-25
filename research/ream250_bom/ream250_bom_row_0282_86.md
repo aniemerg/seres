@@ -45,7 +45,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row represents the tee fitting only; ISO-KF clamps, centering rings, and elastomer or metal seals are separate hardware rows."
-    - "A future local route can approximate the commercial fitting by fabricating a 316L stainless tee body and KF flange geometry, followed by vacuum-service cleaning and leak testing."
+    - "A future Manufacturing route can approximate the commercial fitting by fabricating a 316L stainless tee body and KF flange geometry, followed by vacuum-service cleaning and leak testing."
   uncertainty_notes:
     - "The precise commercial forming, welding, finishing, and inspection sequence for Pfeiffer article 170RTS040 is not specified by the BOM row or product page."
 kb_implications:

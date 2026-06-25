@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "No row-specific source resolves housing alloy, shaft alloy, magnet grade, winding mass, brake friction material, or encoder/electronics material splits, so downstream KB modeling should treat this as a purchased electromechanical module until a teardown or manufacturer material declaration is available."
 how_to_make:
-  summary: "Procure as a calibrated B&R stepper motor with encoder and brake; for KB planning, treat local production as a future sub-BOM problem covering motor laminations, windings, rotor/magnets, bearings, encoder, brake, housing, shaft, assembly, and electrical test."
+  summary: "Local production as a future sub-BOM problem covering motor laminations, windings, rotor/magnets, bearings, encoder, brake, housing, shaft, assembly, and electrical test"
   manufacturing_steps:
-    - "Procure B&R 80MPF5.500D114-01 or an equivalent 60 mm flange hybrid stepper motor with encoder and brake matching the row interface."
     - "Verify nameplate/specification match: 5 A parallel wiring, 3.5 Nm holding torque, 2.5 Nm stall torque, ABR 24 VDC encoder, and 24 VDC brake."
     - "Inspect the CAD/interface envelope against the reAM250 mounting location before installation."
     - "If later localized, decompose into a dedicated motor sub-BOM and process chain for laminated stator/rotor stack, copper winding, shaft and bearing assembly, permanent magnet rotor, brake, encoder, housing, calibration, and test."
@@ -47,10 +46,8 @@ how_to_make:
     url_or_path: "https://www.br-automation.com/en/products/80mpf5500d114-01/; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AL211_motor.step; research/ream250_bom/ream250_bom_row_0064_2AL211__views_2x2.png"
     cited_fact_or_basis: "The B&R page provides the row-matched product identity and specifications: 80MPF5.500D114-01, 2-phase hybrid stepper motor, 60 mm flange, incremental encoder and brake, 5 A parallel wiring, 3.5 Nm holding torque, 2.5 Nm stall torque, and brake electrical data. CAD preview and FreeCAD geometry confirm a complete motor module envelope rather than a simple one-piece bracket or stock material."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "Procurement is the appropriate near-term route because the row is a calibrated vendor electromechanical module, not a simple mechanical part."
-  uncertainty_notes:
-    - "The B&R page supports procurement and interface planning, but not a manufacturable internal sub-BOM, calibration procedure, or process route for self-manufacturing the motor."
+  assumptions: []
+  uncertainty_notes: []
 kb_implications:
   - "item_granularity: complex_module - model as a complex/calibrated stepper motor complex module for this pass; split into a motor sub-BOM only when local electromechanical manufacturing and calibration details are intentionally added."
 ---

@@ -35,9 +35,8 @@ material:
   uncertainty_notes:
     - "The PDF identifies material families and key optical/electronic components, but it does not provide a full sub-BOM, exact alloy grades, coatings beyond the mirror notation, or material fractions."
 how_to_make:
-  summary: "Near-term route is procurement of the finished Raylase AM-MODULE NEXT GEN, followed by machine integration with the laser fiber, power and RL3-100 data connection, water/air cooling services, and process-monitoring sensor paths. Local self-manufacture should be deferred until a detailed scanner/optics/electronics sub-BOM and calibration process are modeled."
+  summary: "Machine integration with the laser fiber, power and RL3-100 data connection, water/air cooling services, and process-monitoring sensor paths. Local self-manufacture should be deferred until a detailed scanner/optics/electronics sub-BOM and calibration process are modeled"
   manufacturing_steps:
-    - "Procure the Raylase AM-MODULE NEXT GEN base module matched by BOM row 266 and the supplied Raylase PDF route."
     - "Integrate the module mechanically using the CAD envelope and mounting/interface protrusions as layout constraints."
     - "Connect QBH laser fiber, +48 V power, RL3-100 data, water temperature control or air cooling as configured, and process-monitoring camera/pyrometer/photodiode paths."
     - "Commission the module through Raylase-style field setup, software adjustment, focus tracking, and process-monitoring calibration before production use."
@@ -45,8 +44,7 @@ how_to_make:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; research/ream250_bom/ream250_bom_row_0266_51__views_2x2.png; https://www.raylase.de/_Resources/Persistent/4/9/b/7/49b7182a146725d34457ce6b213a228d737e26a8/RAYLASE_AM-MODUL NEXT GEN_en.pdf"
     cited_fact_or_basis: "BOM row 266 identifies the row as a Raylase AM-Module Next Gen. The Raylase PDF states that Raylase develops, manufactures, and tests its products in-house, and it describes the relevant fiber, power/data, water/air cooling, process-monitoring, setup, and software-adjustment interfaces. The contact sheet shows a simplified module envelope suitable for integration planning, not a local manufacturing sub-BOM."
     evidence_basis: "bom_provided"
-  assumptions:
-    - "For current KB planning, procurement and integration is the appropriate route because the available evidence is a vendor module datasheet rather than a manufacturable sub-BOM."
+  assumptions: []
   uncertainty_notes:
     - "A future local-manufacturing model would need scanner motor, mirror, optical coating, electronics, cooling, alignment, and calibration details that are not exposed by the BOM row or PDF."
 kb_implications:

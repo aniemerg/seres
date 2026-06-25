@@ -36,9 +36,8 @@ material:
   uncertainty_notes:
     - "The BOM-side metadata does not state property class, coating, or heat-treatment condition; do not infer 8.8, 10.9, 12.9, zinc-plated, or black-oxide specifics from this row alone."
 how_to_make:
-  summary: "Best modeled as a purchased standard DIN 912 / ISO 4762 style steel socket-head cap screw. A local manufacturing route would use steel wire or rod, cold heading to form the cylindrical socket head, hex-socket forming, thread rolling for the M6 x 1 external thread, then heat treatment and optional surface finish."
+  summary: "Best modeled as a external standard DIN 912 / ISO 4762 style steel socket-head cap screw. A Manufacturing route would use steel wire or rod, cold heading to form the cylindrical socket head, hex-socket forming, thread rolling for the M6 x 1 external thread, then heat treatment and optional surface finish"
   manufacturing_steps:
-    - "Procurement route: source a DIN 912 / ISO 4762 M6 x 16 socket-head cap screw in steel, matching the row's CAD dimensions and material metadata."
     - "Manufacturing route: cut steel wire or rod blank to length."
     - "Cold-head the cap screw blank and form the cylindrical head and internal hex socket."
     - "Roll the M6 x 1 external thread rather than machining it when using standard high-volume fastener practice."

@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "The local STEP package lacks a real material assignment for this part; the material value depends on the row-matched official shop/catalog route."
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer Vacuum 320RZS063 or an equivalent DN 63 ISO-K stainless full nipple, followed by inspection and installation. A local manufacturing route would form or machine stainless 304 tube/flange geometry, clean/passivate it, and leak-test it for vacuum service."
+  summary: "Manufacturing route would form or machine stainless 304 tube/flange geometry, clean/passivate it, and leak-test it for vacuum service"
   manufacturing_steps:
-    - "Procure Pfeiffer Vacuum 320RZS063 or an equivalent DN 63 ISO-K stainless full nipple."
     - "Inspect the DN 63 ISO-K interfaces, 70 mm tube/body span, sealing lips, bore clearance, cleanliness, and surface condition before installation."
     - "For local manufacture, start from stainless 304 tube/flange stock, machine or form the two ISO-K flange profiles, join as needed by welding or one-piece machining, passivate/clean the part, and helium leak-test the finished vacuum component."
     - "Install between compatible ISO-K components using the appropriate centering ring/seal and clamp hardware."
@@ -48,10 +47,9 @@ how_to_make:
     cited_fact_or_basis: "BOM row 119 gives Pfeiffer Vacuum product 320RZS063; the CAD preview shows a one-piece straight flanged pipe, and the Pfeiffer Vacuum Online Shop identifies the row-matched DN 63 ISO-K stainless full-nipple product family and dimensions. The machining/forming/welding route is inferred from the CAD geometry and stainless vacuum fitting construction."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement should remain the default KB route until a local vacuum-fitting manufacturing and leak-test workflow is modeled."
     - "The local manufacturing steps are plausible operations for a stainless ISO-K full nipple but are not directly specified by the cited product page."
   uncertainty_notes:
-    - "targeted_web_search: searched '320RZS063 Pfeiffer Vacuum DN 63 pipe material weight', 'Pfeiffer 320RZS063 ISO-K DN 63 pipe stainless 1.4301', and '320RZS063 Pfeiffer Vacuum full nipple'; results resolved row-matched product identity, material, and dimensions but did not provide a row-specific manufacturing process or catalog weight."
+    - "Targeted_web_search: searched '320RZS063 Pfeiffer Vacuum DN 63 pipe material weight', 'Pfeiffer 320RZS063 ISO-K DN 63 pipe stainless 1.4301', and '320RZS063 Pfeiffer Vacuum full nipple'; results resolved row-matched product identity, material, and dimensions but did not provide a row-specific manufacturing process or catalog weight."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable standard stainless DN63 ISO-K straight pipe/full nipple rather than a reAM250-specific custom part or calibrated module."
 ---

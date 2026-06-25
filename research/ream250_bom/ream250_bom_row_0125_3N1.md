@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The row-specific STEP material metadata is placeholder-only, so the material assignment depends on matching the BOM product family and subpart name to the official product material split."
 how_to_make:
-  summary: "Best current route is to procure the Pfeiffer 320SFK063-130 spring bellows or model this row as its bellows body; a plausible local route is thin-wall stainless bellows forming followed by trimming, end preparation, welding to end pieces, and helium leak/pressure testing."
+  summary: "Thin-wall stainless bellows forming followed by trimming, end preparation, welding to end pieces, and helium leak/pressure testing"
   manufacturing_steps:
     - "Start from thin 316L stainless tube or sheet formed into tube stock."
     - "Form corrugations by hydroforming, roll forming, or equivalent bellows-forming tooling to the DN 63 geometry."

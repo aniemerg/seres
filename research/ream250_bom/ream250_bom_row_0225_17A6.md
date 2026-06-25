@@ -64,7 +64,7 @@ how_to_make:
   summary: >
     Model as cut-to-length aluminum extrusion stock: extrude a 20x20 slotted
     6061 aluminum profile, cut to the CAD length, deburr, and optionally anodize
-    or otherwise finish before assembly.
+    Or otherwise finish before assembly.
   manufacturing_steps:
     - Extrude Aluminum 6061 through a die matching the 20x20 slotted profile.
     - Cut the extrusion to the CAD-measured 131 mm length.
@@ -72,19 +72,19 @@ how_to_make:
     - Apply anodizing or comparable corrosion-resistant finish if required by the local assembly environment.
   source:
     url_or_path: >
-      design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17A6_strut_profile_20X20_D108.step;
-      https://store.boschrexroth.com/Montagetechnik/Mechanik-Grundelemente/Profile-und-Zubeh%C3%B6r/Strebenprofil?cclcl=de_DE
+      Design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17A6_strut_profile_20X20_D108.step;
+      Https://store.boschrexroth.com/Montagetechnik/Mechanik-Grundelemente/Profile-und-Zubeh%C3%B6r/Strebenprofil?cclcl=de_DE
     cited_fact_or_basis: >
       The BOM URL route and row identify a Bosch Rexroth strut profile, while
-      the CAD geometry shows a constant 20x20 slotted cross-section. targeted_web_search:
-      queries tried "Bosch Rexroth strut profile 20x20 manufacturing extrusion
-      anodized" and "Bosch Rexroth 20x20 strut profile aluminum catalog"; results
-      supported aluminum profile stock but did not provide a row-specific factory
-      process for this cut length.
+      The CAD geometry shows a constant 20x20 slotted cross-section. targeted_web_search:
+      Queries tried "Bosch Rexroth strut profile 20x20 manufacturing extrusion
+      Anodized" and "Bosch Rexroth 20x20 strut profile aluminum catalog" results
+      Supported aluminum profile stock but did not provide a row-specific factory
+      Process for this cut length.
     evidence_basis: engineering_hypothesis
   assumptions:
     - A constant-section aluminum strut profile is best represented as extruded stock cut to length.
-    - Local manufacturing would use a generic aluminum extrusion and finishing workflow rather than a machine-specific custom machining route.
+    - Use a generic aluminum extrusion and finishing workflow rather than a machine-specific custom machining route.
   uncertainty_notes:
     - The exact Bosch production process and finish for this row are not specified in the BOM or local STEP metadata.
 kb_implications:

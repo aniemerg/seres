@@ -36,10 +36,9 @@ material:
   uncertainty_notes:
     - "Exact stainless alloy, aluminum alloy, zirconia dopant, heater alloy, connector polymer, cable composition, and seal material are not specified in the extracted official manual text."
 how_to_make:
-  summary: "Treat as a standard purchased Angst+Pfister/Metrotec A19-N oxygen sensor head for current KB modeling. A plausible local route would fabricate the stainless threaded probe body and aluminum connection head, produce or source the stabilized-zirconia sensing cell with platinum electrodes and heater, assemble the plug/cable interface and seals, then calibrate and test the sensor with its converter electronics."
+  summary: "Treat as a standard external Angst+Pfister/Metrotec A19-N oxygen sensor head for KB modeling. fabricate the stainless threaded probe body and aluminum connection head, produce or source the stabilized-zirconia sensing cell with platinum electrodes and heater, assemble the plug/cable interface and seals, then calibrate and test the sensor with its converter electronics"
   manufacturing_steps:
-    - "Procurement route: buy the A19-N sensor head as the row-matched oxygen-sensor component for the PZA-MC25-N measurement system."
-    - "Local route: machine the stainless steel screw-in body and M27 x 2 mm mounting thread, then make the aluminum connection-head housing and plug interface."
+    - "Manufacturing route: machine the stainless steel screw-in body and M27 x 2 mm mounting thread, then make the aluminum connection-head housing and plug interface."
     - "Produce or source the stabilized zirconium oxide ceramic sensor element with conductive platinum contact layers and integrate the heater/temperature sensing elements required for high-temperature zirconia operation."
     - "Assemble internal wiring, connector, seals, and optional cable; leak-check the gas boundary and verify mechanical fit against the CAD/manual dimensions."
     - "Pair, calibrate, and function-test the sensor with the converter electronics over the relevant oxygen ranges before installation."

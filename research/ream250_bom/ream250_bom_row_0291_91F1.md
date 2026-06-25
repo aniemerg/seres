@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The exact EN steel grade, such as S235 or S355, is not specified by the BOM row, filename, or extracted STEP metadata."
 how_to_make:
-  summary: "Procure or produce EN 10219-2-compatible mild-steel square hollow section stock and cut it to the 150 mm finished length; local manufacture would form steel strip into a square tube, longitudinally weld it, size it to 80 x 80 x 5 mm, then saw/cut and deburr the short section."
+  summary: "Produce EN 10219-2-compatible mild-steel square hollow section stock and cut it to the 150 mm finished length; form steel strip into a square tube, longitudinally weld it, size it to 80 x 80 x 5 mm, then saw/cut and deburr the short section"
   manufacturing_steps:
     - "Start from mild-steel strip/coil or structural tube stock suitable for square hollow sections."
     - "For local tube production, cold-form the strip into an 80 x 80 mm square hollow profile and longitudinally weld the seam."
@@ -46,13 +46,13 @@ how_to_make:
     - "Deburr and inspect length, squareness, and open-end condition before assembly."
   source:
     url_or_path: "https://knowledge.bsigroup.com/products/cold-formed-welded-steel-structural-hollow-sections-tolerances-dimensions-and-sectional-properties; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/91F1_square_profile_DIN_EN_10219-2_80x80x5_150.step"
-    cited_fact_or_basis: "BSI identifies EN 10219-2 as a standard for cold-formed welded steel structural hollow sections and says it covers square sections and dimensions/tolerances; the row CAD measures an 80.00 x 80.00 x 150.00 mm open square tube. targeted_web_search: searched \"EN 10219-2 square hollow section cold formed welded structural steel tubes standard title\" and \"DIN EN 10219-2 square hollow section 80x80x5 steel tube\"; found standard/catalog evidence for the stock family but no row-specific factory routing for item 91F1."
+    cited_fact_or_basis: "BSI identifies EN 10219-2 as a standard for cold-formed welded steel structural hollow sections and says it covers square sections and dimensions/tolerances; the row CAD measures an 80.00 x 80.00 x 150.00 mm open square tube. targeted_web_search: searched \"EN 10219-2 square hollow section cold formed welded structural steel tubes standard title\" and \"DIN EN 10219-2 square hollow section 80x80x5 steel tube\" found standard/catalog evidence for the stock family but no row-specific factory routing for item 91F1."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Cutting from standard EN 10219-2 square hollow section stock is the most plausible route for this simple structural row."
-    - "The cold-forming and welding steps describe local tube-stock production; procurement of standard tube stock plus cutting is the likely near-term KB route."
+    - "The cold-forming and welding steps describe local tube-stock production"
   uncertainty_notes:
-    - "The source resolves the standard stock family, but it does not prove whether this particular reAM250 part was bought pre-cut, cut in-house, or fabricated from strip."
+    - "Cut, cut in-house, or fabricated from strip"
 kb_implications:
   - "item_granularity: simple_part - model as a reusable mild-steel square hollow structural section/cut tube length rather than a machine-specific assembly."
 ---

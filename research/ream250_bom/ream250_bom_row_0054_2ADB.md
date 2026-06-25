@@ -44,7 +44,7 @@ how_to_make:
     - Deburr, clean, and inspect critical diameters and thickness.
   source:
     url_or_path: design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2ADB_part_B.step; research/ream250_bom/ream250_bom_row_0054_2ADB__views_2x2.png
-    cited_fact_or_basis: "CAD geometry is a small annular stepped solid with relief/notch features and about 24 mm outside span by 6.27 mm thickness. targeted_web_search: queries tried: \"2ADB\" \"axis bearing top\", \"2ADB_part_B\", \"reAM250\" \"axis bearing top\", and \"axis bearing top\" \"reAM250\"; results did not provide a row-specific manufacturing route."
+    cited_fact_or_basis: "CAD geometry is a small annular stepped solid with relief/notch features and about 24 mm outside span by 6.27 mm thickness. targeted_web_search: queries tried: \"2ADB\" \"axis bearing top\", \"2ADB_part_B\", \"reAM250\" \"axis bearing top\", and \"axis bearing top\" \"reAM250\" results did not provide a row-specific manufacturing route."
     evidence_basis: engineering_hypothesis
   assumptions:
     - Low-volume local production favors conventional CNC turning/milling or mill-turn machining over casting or additive manufacture for this small bearing-stack part.

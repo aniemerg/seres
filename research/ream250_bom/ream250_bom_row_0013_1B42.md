@@ -36,20 +36,19 @@ material:
   uncertainty_notes:
     - "Exact compound, hardness, color, certification, and temperature rating are not in the BOM row, CAD metadata, or public row-specific search results."
 how_to_make:
-  summary: "Best handled as a procured custom LiSEMA flat gasket; a local route would cut the rectangular frame from selected gasket sheet or elastomer stock and inspect thickness, perimeter, and compression fit."
+  summary: "Cut the rectangular frame from selected gasket sheet or elastomer stock and inspect thickness, perimeter, and compression fit"
   manufacturing_steps:
     - "Select gasket sheet or elastomer stock matching the service temperature, atmosphere, compression set, and chemical compatibility requirements."
     - "Cut the outside rectangle and central window from 3 mm sheet using die cutting, waterjet/knife cutting, CNC routing, or laser where compatible with the selected material."
     - "Deburr or clean cut edges if needed, then inspect overall 210 x 297 x 3 mm geometry and trial-fit between mating faces."
-    - "Procure from LiSEMA or an equivalent gasket fabricator when exact compound and compression performance must be guaranteed."
+    - "Prepare from LiSEMA or an equivalent gasket fabricator when exact compound and compression performance must be guaranteed"
   source:
     url_or_path: "https://lisema.eu/Flachdichtungen; https://lisema.eu/Flachdichtungskonfigurator; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1B42_seal.step"
     cited_fact_or_basis: "LiSEMA pages support custom flat-gasket supply/configuration and multiple flat-gasket material choices; CAD supplies the 210 x 297 x 3 mm rectangular-frame geometry. targeted_web_search: queries tried: 'Lisema 1B42 seal', 'Lisema 1B42 Dichtung seal', 'site:lisema.eu 1B42 seal Lisema'; result: no row-specific manufacturing drawing or compound found, so local cutting steps are inferred from the flat sheet gasket geometry."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row can be modeled as a replaceable flat gasket cut from sheet stock rather than a molded multi-part seal."
-  uncertainty_notes:
-    - "Without the exact material and compression specification, the route identifies plausible fabrication/procurement options but not a qualified process recipe."
+  uncertainty_notes: []
 kb_implications:
   - "item_granularity: simple_part - Model as one replaceable custom flat gasket/seal replaceable or applied part; preserve dimensions, quantity 2, and unknown LiSEMA material family in notes rather than decomposing into subparts."
 ---

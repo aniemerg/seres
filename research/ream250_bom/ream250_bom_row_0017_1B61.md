@@ -40,7 +40,7 @@ material:
     - "STEP material extraction from the full assembly returned no matches for 1B61_seal."
     - "The exact grade, hardness, adhesive backing, and foam/open-cell versus solid construction remain unresolved."
 how_to_make:
-  summary: "Procure as a cut-to-size Lisema gasket/profile where practical; local fallback is to cut or join elastomer gasket/profile stock to the CAD outline and install it as a replaceable compression seal."
+  summary: "Prepare as a cut-to-size Lisema gasket/profile where practical; cut or join elastomer gasket/profile stock to the CAD outline and install it as a replaceable compression seal"
   manufacturing_steps:
     - "Select compatible elastomer gasket/profile stock from EPDM, NBR, CR, silicone, or FKM family based on temperature, chemical, and compression requirements."
     - "Cut the profile or sheet to the annular/door-seal outline, with scarfed or bonded joint if made from linear profile."
@@ -53,7 +53,7 @@ how_to_make:
   assumptions:
     - "Detailed cutting/joining steps are inferred from common gasket/profile manufacturing practice and the CAD shape, not directly stated for this BOM row."
   uncertainty_notes:
-    - "A production BOM should preserve this as a purchased or cut consumable unless later evidence identifies an exact Lisema catalog/profile number."
+    - "A production BOM should preserve this as a external or cut consumable unless later evidence identifies an exact Lisema catalog/profile number"
 kb_implications:
   - "item_granularity: simple_part - Model as a replaceable elastomer seal/gasket replaceable or applied part, not as a multi-part assembly or precision machine component."
 ---

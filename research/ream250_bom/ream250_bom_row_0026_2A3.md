@@ -36,22 +36,18 @@ material:
   uncertainty_notes:
     - "The exact steel grade, heat treatment, coating, seal polymer, and retainer/end-cap polymer are not identified by the available row-matched evidence."
 how_to_make:
-  summary: "Procure as a standard HIWIN HGL15CAZ0H linear-guide carriage, supplied as a precision bearing block with SS sealing configuration and a loose straight grease nipple; later local manufacturing would require a detailed bearing-block sub-BOM and precision raceway process model rather than treating it as a simple machined block."
+  summary: "Do not model a row-level manufacturing route for this pass. Treat the HGL15CAZ0H linear-guide carriage as a complex precision motion module that must be decomposed in later KB work before any local manufacturing process is claimed."
   manufacturing_steps:
-    - "Specify HIWIN HGL15CAZ0H: HG series, low square HGL15CA block, Z0 light preload, H precision, SS sealing system, no oil lubrication unit, no coating."
-    - "Procure the carriage as a finished vendor component and keep it matched to HGR15 rail geometry."
-    - "Install the supplied grease nipple or connect the lubrication route required by the axis design."
-    - "Mount the carriage from above using the specified M4 interface and align it to the paired HGR15 rail during axis assembly."
-    - "For future self-manufacture modeling, split into hardened/ground steel body and raceways, recirculating balls, seals, retainer/end caps, grease nipple, lubricant, heat treatment, grinding/lapping, cleaning, and preload/accuracy inspection steps."
+    - "Defer detailed manufacturing until a separate linear-guide-carriage sub-BOM is created."
+    - "Future decomposition should resolve at least the carriage body/raceways, recirculating balls, end caps, retainer, seals, grease nipple or lubrication interface, lubricant, heat treatment, precision grinding/lapping, cleaning, assembly, preload control, and accuracy inspection."
   source:
     url_or_path: "https://www.reiman.pt/pub/media/technical_data/hiwin/datasheets/hgl15caz0h.pdf; https://www.hiwin.de/en/Products/Linear-guideways/Blocks/Ball-guides/Series-HG-QH/HGL/HGL15CAZ0H/p/5-001374; https://www.lm76.com/HG-Series-Catalog_opt.pdf; research/ream250_bom/ream250_bom_row_0026_2A3__views_2x2.png"
-    cited_fact_or_basis: "The HIWIN datasheet identifies the order specification HGL15CAZ0H, block preserved, HGL15CAZ0H (1 pcs.), and grease nipple straight loose; it also gives M4 mounting and the configuration attributes. The HIWIN product route matches the same product family and model. The HG-series catalog describes the guideway construction as block, rail, end cap, retainer, bottom seal, ball, grease nipple, and related lubrication components. The rendered contact sheet confirms the row CAD is a compact carriage-like block, not raw stock. The local manufacturing sub-BOM/process split is a modeling implication inferred from bearing construction, not a source-stated route."
+    cited_fact_or_basis: "The HIWIN datasheet identifies the order specification HGL15CAZ0H, block preserved, HGL15CAZ0H (1 pcs.), and grease nipple straight loose; it also gives M4 mounting and the configuration attributes. The HIWIN product route matches the same product family and model. The HG-series catalog describes the guideway construction as block, rail, end cap, retainer, bottom seal, ball, grease nipple, and related lubrication components. The rendered contact sheet confirms the row CAD is a compact carriage-like module, not raw stock or a simple machined block. targeted_web_search: searched \"Hiwin HGL15CAZ0H datasheet\", \"HGL15CAZ0H material\", \"HGL15CAZ0H weight\", and \"HGL15CA chrome steel\" no row-matched source found a complete manufacturing process, heat treatment, tolerance stack, or component-level sub-BOM for local production."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Current KB modeling should procure the standard carriage as a purchased module because the BOM gives a HIWIN vendor product and no sub-BOM or raceway manufacturing drawing."
-    - "The final bullet is included only as a future self-manufacture decomposition path for closure work."
+    - "Because this is a precision recirculating linear-guide carriage, row-level manufacturing is intentionally not specified until the module is decomposed."
   uncertainty_notes:
-    - "targeted_web_search: searched \"Hiwin HGL15CAZ0H datasheet\", \"HGL15CAZ0H material\", \"HGL15CAZ0H weight\", and \"HGL15CA chrome steel\"; no row-matched source found a complete manufacturing process, heat treatment, tolerance stack, or component-level sub-BOM for local production."
+    - "The exact component sub-BOM, steel grades, heat treatment, grinding/lapping process, seal materials, lubrication details, tolerances, and inspection sequence are unresolved."
 kb_implications:
   - "item_granularity: complex_module - model as a reusable complex precision linear-guide carriage for this pass; only split into steel body, balls, seals, retainer/end caps, lubricant, and inspection processes if linear-guide imports become a priority."
 ---

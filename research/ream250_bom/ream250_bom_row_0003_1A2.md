@@ -46,10 +46,10 @@ how_to_make:
     - "Apply surface finish or coating only if later design evidence requires anodizing, passivation, blackening, or vacuum-compatible cleaning."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1A2_flange_schlieren_imaging.step; research/ream250_bom/ream250_bom_row_0003_1A2__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 80.00 x 10.00 x 160.00 mm solid with a thin rectangular frame/flange, corner fastener holes, and diagonal relief/stiffening geometry. targeted_web_search: searched \"1A2_flange_schlieren_imaging\", \"flange schlieren imaging material\", \"reAM250 flange_schlieren_imaging\", and \"schlieren imaging flange material additive manufacturing machine\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 80.00 x 10.00 x 160.00 mm solid with a thin rectangular frame/flange, corner fastener holes, and diagonal relief/stiffening geometry. targeted_web_search: searched \"1A2_flange_schlieren_imaging\", \"flange schlieren imaging material\", \"reAM250 flange_schlieren_imaging\", and \"schlieren imaging flange material additive manufacturing machine\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom machined simple part rather than a purchased module because the BOM row has no manufacturer/product ID and the CAD name is a custom assembly-specific flange."
+    - "The part is treated as a custom machined simple part because the BOM row has no manufacturer/product ID and the CAD name is a custom assembly-specific flange"
     - "Subtractive machining from plate stock is assumed from the thin rectangular flange geometry and expected need for accurate mounting-hole and optical-interface alignment."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, coating, or whether any sealing groove or optical aperture detail is hidden by the exported solid representation."

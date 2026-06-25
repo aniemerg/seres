@@ -45,11 +45,11 @@ how_to_make:
     - "Inspect overall dimensions, flatness, pocket depths, and mounting-feature positions against the CAD model before installing adjacent 2A guide, support, or bearing hardware."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A1_bottom.step; research/ream250_bom/ream250_bom_row_0024_2A1__views_2x2.png; web search results for row-specific and 6061 machining queries"
-    cited_fact_or_basis: "CAD and preview show one 398.00 x 398.00 x 35.00 mm square, shallow aluminum part with a perimeter frame, recessed/lightened center geometry, and mounting features. targeted_web_search: searched \"2A1_bottom reAM250\", \"reAM250 2A1 bottom aluminum\", and \"Aluminum 6061 CNC machined plate pockets\"; results found duplicate BOM text for the row and general 6061 CNC machining references, but no row-specific drawing or manufacturing-process specification."
+    cited_fact_or_basis: "CAD and preview show one 398.00 x 398.00 x 35.00 mm square, shallow aluminum part with a perimeter frame, recessed/lightened center geometry, and mounting features. targeted_web_search: searched \"2A1_bottom reAM250\", \"reAM250 2A1 bottom aluminum\", and \"Aluminum 6061 CNC machined plate pockets\" results found duplicate BOM text for the row and general 6061 CNC machining references, but no row-specific drawing or manufacturing-process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Subtractive CNC machining from 6061 plate or billet is inferred from the large flat-plate geometry, resolved aluminum alloy, pockets, and mounting features."
-    - "The part is treated as one custom simple part rather than a purchased module because the BOM row has no manufacturer, product ID, or supplier link."
+    - "The part is treated as one custom simple part because the BOM row has no manufacturer, product ID, or supplier link"
   uncertainty_notes:
     - "The sources do not specify actual production tooling, tolerances, flatness requirement, surface finish, anodizing, or whether any features are made in multiple setups."
 kb_implications:

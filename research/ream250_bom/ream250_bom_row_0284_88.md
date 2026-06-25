@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "Outer housing, PCB, connector, and sensor-package materials are not fully specified by the available row-matched evidence."
 how_to_make:
-  summary: "Treat as a purchased/calibrated vacuum gauge module. A plausible production route is precision fabrication of the DN 16 ISO-KF stainless vacuum interface, integration of Pirani and capacitive sensing elements, electronic assembly, sealing, cleaning, leak testing, and calibration."
+  summary: "Treat as a external/calibrated vacuum gauge module. A plausible production route is precision fabrication of the DN 16 ISO-KF stainless vacuum interface, integration of Pirani and capacitive sensing elements, electronic assembly, sealing, cleaning, leak testing, and calibration"
   manufacturing_steps:
-    - "Fabricate or procure the stainless DN 16 ISO-KF vacuum flange and metal-sealed gauge body interface."
+    - "Fabricate the stainless DN 16 ISO-KF vacuum flange and metal-sealed gauge body interface"
     - "Install the glass feedthrough, tungsten Pirani element, capacitive sensing element, and vacuum-compatible internal structure."
     - "Assemble signal-conditioning electronics and the FCC 68/RJ45 8-pin connector interface."
     - "Seal, clean, and leak-test the gauge head for vacuum service."
@@ -49,7 +49,6 @@ how_to_make:
     cited_fact_or_basis: "The official BOM URL route identifies PT T11 138 310 as a TTR 101 Pirani/capacitive gauge with DN 16 ISO-KF interface, metal sealing, bakeout rating, and FCC 68/RJ45 connector. The Pfeiffer datasheet adds measuring method, stainless flange, metal seal, glass feedthrough, tungsten filament, max power, and measuring range. targeted_web_search: searched 'PT T11 138 310 Pfeiffer Vacuum pressure gauge material weight', 'PT_T11_138_310 Pfeiffer Vacuum TTR 101 datasheet', and 'TTR 101 PT T11 138 310 datasheet manufacturing'; found row-matched product/catalog data but no vendor factory process route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Because this is a calibrated sensor/electronics module, later KB modeling should initially use procurement/import rather than local fabrication of subcomponents."
     - "The manufacturing steps are a functional decomposition inferred from the product type and specified materials, not a Pfeiffer factory traveler."
   uncertainty_notes:
     - "No row-matched source was found that describes the actual factory assembly or calibration workflow."

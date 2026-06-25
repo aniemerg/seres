@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata gives a material family but not a stainless alloy grade or heat treatment."
 how_to_make:
-  summary: "Procure or fabricate as a machined stainless blade-mount rail; local manufacture would start from stainless bar or plate stock, mill the long profile and grooves, drill or countersink the repeated mounting holes, deburr, passivate, and inspect straightness and blade-contact surfaces."
+  summary: "Fabricate as a machined stainless blade-mount rail; start from stainless bar or plate stock, mill the long profile and grooves, drill or countersink the repeated mounting holes, deburr, passivate, and inspect straightness and blade-contact surfaces"
   manufacturing_steps:
     - "Cut stainless bar or plate stock slightly oversize to the roughly 265 mm rail length."
     - "Mill the outer profile, stepped channel, and blade locating or clamping faces."

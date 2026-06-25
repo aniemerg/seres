@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The exact grade, heat treatment, and tolerance class are not proven for this row; stainless or ceramic bearing balls would change the material model, but no row-specific evidence supports those alternatives."
 how_to_make:
-  summary: "Procure as a standard precision bearing ball where possible; a local route would form bearing-steel wire into a ball blank, harden it, then grind and lap to final diameter and surface finish."
+  summary: "Prepare as a standard precision bearing ball; form bearing-steel wire into a ball blank, harden it, then grind and lap to final diameter and surface finish"
   manufacturing_steps:
     - "Start from bearing-steel wire or rod stock sized near the finished 4.95 mm ball diameter."
     - "Cold-head or otherwise form a near-spherical blank."
@@ -49,8 +49,7 @@ how_to_make:
     cited_fact_or_basis: "Hartford describes precision ball manufacturing steps including raw-material inspection, cold heading, flashing, heat treatment, grinding, lapping, cleaning, and visual inspection. The local STEP/preview identifies this row as a single small spherical bearing element. targeted_web_search: searched '2AD3_part_3 axis bearing top manufacturing', 'bearing balls manufacturing process cold heading flashing heat treatment grinding lapping', and '5 mm bearing ball manufacturing process'; found generic precision-ball manufacturing routes but no row-specific factory process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route follows common precision bearing-ball practice because no row-specific production drawing is available."
-    - "For KB planning, procurement/import of a standard bearing ball is more realistic than decomposing the full precision-ball production line for this tiny component unless bearing balls become a major dependency."
+    - "The manufacturing route follows common precision bearing-ball practice because no row-specific production drawing is available."
   uncertainty_notes:
     - "The BOM row gives no tolerance grade, hardness, surface finish, or inspection class, so this is a plausible route rather than a complete manufacturing specification."
 kb_implications:

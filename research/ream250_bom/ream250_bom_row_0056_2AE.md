@@ -38,15 +38,14 @@ material:
   uncertainty_notes:
     - "The exact aluminum alloy, bearing steel grade, spring grade, seal material, and whether the CAD row includes any read-head electronics are not specified."
 how_to_make:
-  summary: "Procure as the K+C S5 glass-scale reader-head slide within the linear measuring system for current modeling; a plausible local route would make the small carriage body by precision machining, add bearing/spring hardware, then assemble and calibrate it with the optical glass scale and read head."
+  summary: "Make the small carriage body by precision machining, add bearing/spring hardware, then assemble and calibrate it with the optical glass scale and read head"
   manufacturing_steps:
-    - "Procure or model as part of the K+C S5 linear glass-scale system matched to the S5/0500, 520 mm measuring-range row."
-    - "For a local approximation, machine or extrude the compact carriage/body profile to the 20 x 80 x 17 mm CAD envelope and finish the bearing/guide features."
+    - "Machine or extrude the compact carriage/body profile to the 20 x 80 x 17 mm CAD envelope and finish the bearing/guide features."
     - "Install precision ball-bearing and spring elements that let the reader head slide accommodate scale-to-machine-slide misalignment."
     - "Assemble with the optical read head, glass scale, seals, cable, and housing, then calibrate and verify the position signal."
   source:
     url_or_path: "https://www.kuc-maschinen.de/products/linear-glass-scales/?lang=en; research/ream250_bom/ream250_bom_row_0056_2AE__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AE_glass_scale_slide.step"
-    cited_fact_or_basis: "K+C identifies the S5 glass-scale product family, aluminium protected construction, and reader-head slide with five-fold ball bearing and spring; the rendered CAD contact sheet shows a compact grooved slide/carriage with two end holes and a 20.00 x 80.00 x 17.00 mm bounding box. The detailed local fabrication and calibration route is inferred from the product function and CAD geometry rather than stated by K+C. targeted_web_search: searched \"K+C S5/0500 glass scale slide material weight\", \"K+C Glasmaßstab S5 Lesekopf Schlitten 5-fach Kugellagerung Federaufhängung\", and \"K+C S5/0500 Glasmaßstab Gewicht Aluminiumgehäuse\"; found product-family features and dimensions but no factory manufacturing process for the slide."
+    cited_fact_or_basis: "K+C identifies the S5 glass-scale product family, aluminium protected construction, and reader-head slide with five-fold ball bearing and spring; the rendered CAD contact sheet shows a compact grooved slide/carriage with two end holes and a 20.00 x 80.00 x 17.00 mm bounding box. The detailed local fabrication and calibration route is inferred from the product function and CAD geometry rather than stated by K+C. targeted_web_search: searched \"K+C S5/0500 glass scale slide material weight\", \"K+C Glasmaßstab S5 Lesekopf Schlitten 5-fach Kugellagerung Federaufhängung\", and \"K+C S5/0500 Glasmaßstab Gewicht Aluminiumgehäuse\" found product-family features and dimensions but no factory manufacturing process for the slide."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row is best treated as part of a calibrated optical measuring subsystem, even though the CAD export for this row is one compact mechanical slide component."

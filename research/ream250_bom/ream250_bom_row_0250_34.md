@@ -34,9 +34,8 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Treat as a vendor vacuum spring-bellows connector for current KB planning; a local route would form or hydroform a thin 316L corrugated bellows tube, machine or form two 304/1.4301 ISO-KF flange ends, TIG weld/braze the bellows to the flanges, then clean and helium leak-test the assembly for vacuum service."
+  summary: "Treat as a vendor vacuum spring-bellows connector for current KB planning; form or hydroform a thin 316L corrugated bellows tube, machine or form two 304/1.4301 ISO-KF flange ends, TIG weld/braze the bellows to the flanges, then clean and helium leak-test the assembly for vacuum service."
   manufacturing_steps:
-    - "Procure as Pfeiffer Vacuum order number 170SFK050-060 when using vendor-supplied reAM250 BOM parts."
     - "For local fabrication, make two DN 50 ISO-KF stainless 304/1.4301 flange ends with the 15 mm connection length and sealing geometry."
     - "Form the thin 316L stainless bellows section to the 60 mm overall connector length and required axial compliance."
     - "Join bellows to flanges with vacuum-compatible welding or brazing, then deburr and clean all wetted stainless surfaces."
@@ -46,10 +45,10 @@ how_to_make:
     cited_fact_or_basis: "The row-matched vendor page and data sheet state product identity, length 60 mm, DN 50 ISO-KF connection, flange connection length 15 mm, material split between 304/1.4301 flanges and 316L bellows, pressure range, tightness, and service life. The CAD preview shows an annular ISO-KF end geometry. targeted_web_search: checked the BOM-provided Pfeiffer/vacuum-shop route plus '170SFK050-060 manufacturing', '170SFK050-060 weld bellows', and 'Pfeiffer 170SFK050-060 datasheet'; found product and material data but no source stating Pfeiffer's actual manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the vendor-stated materials, ISO-KF spring-bellows construction, and common vacuum bellows fabrication practice."
+    - "The inferred from the vendor-stated materials, ISO-KF spring-bellows construction, and common vacuum bellows fabrication practice."
     - "Vacuum service requires cleaned stainless parts and leak testing comparable to the vendor-stated tightness."
   uncertainty_notes:
-    - "The evidence resolves the purchased product and performance class, but not Pfeiffer's actual forming, welding, heat treatment, cleaning, or inspection process details."
+    - "The evidence resolves the external product and performance class, but not Pfeiffer's actual forming, welding, heat treatment, cleaning, or inspection process details"
 kb_implications:
   - "item_granularity: simple_part - Treat as a reusable DN50 ISO-KF stainless spring-bellows connector; capture bellows forming, flange joining, cleaning, and leak testing as manufacturing requirements."
 ---

@@ -46,10 +46,10 @@ how_to_make:
     - "Inspect thickness, hole locations, pocket depths, and critical mating faces against the STEP model or a downstream assembly drawing."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/66_plate_front.step; research/ream250_bom/ream250_bom_row_0272_66__views_2x2.png"
-    cited_fact_or_basis: "The STEP geometry is a single Aluminum 6061 solid with a 136.00 x 178.50 x 10.00 mm envelope, and the preview shows a thin non-axisymmetric plate with irregular perimeter, pockets, cutouts, and mounting-like holes. targeted_web_search: searched \"66_plate_front reAM250\", \"reAM250 66_plate_front\", and \"Renishaw AM250 front plate aluminum\"; results found duplicate/mirrored reAM250 BOM text and unrelated AM250/front-plate references, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing route."
+    cited_fact_or_basis: "The STEP geometry is a single Aluminum 6061 solid with a 136.00 x 178.50 x 10.00 mm envelope, and the preview shows a thin non-axisymmetric plate with irregular perimeter, pockets, cutouts, and mounting-like holes. targeted_web_search: searched \"66_plate_front reAM250\", \"reAM250 66_plate_front\", and \"Renishaw AM250 front plate aluminum\" results found duplicate/mirrored reAM250 BOM text and unrelated AM250/front-plate references, but no row-specific fabrication drawing, tolerance callout, or vendor manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The flat plate geometry and Aluminum 6061 material make subtractive machining from plate stock the most plausible local route."
+    - "The flat plate geometry and Aluminum 6061 material make subtractive machining from plate stock the most plausible Manufacturing route."
     - "Waterjet or saw roughing is optional; final interface geometry is assumed to need milling because the CAD includes pockets and localized features."
   uncertainty_notes:
     - "No row-specific drawing was found, so exact tolerances, datums, surface finish, and whether any post-machining coating or anodizing is required remain unresolved."

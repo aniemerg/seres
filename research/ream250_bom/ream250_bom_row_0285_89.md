@@ -35,9 +35,9 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Treat as standard purchased ISO-KF vacuum clamp hardware for current KB modeling. A plausible local route would form or machine the stainless clamp body geometry, add the wingnut/bolt tightening hardware, deburr/passivate, and inspect fit on DN 10-16 ISO-KF flanges."
+  summary: "Treat as standard external ISO-KF vacuum clamp hardware for KB modeling. form or machine the stainless clamp body geometry, add the wingnut/bolt tightening hardware, deburr/passivate, and inspect fit on DN 10-16 ISO-KF flanges"
   manufacturing_steps:
-    - "Procure or cut stainless 304/1.4301 blanks for the clamp body and tightening hardware."
+    - "Cut stainless 304/1.4301 blanks for the clamp body and tightening hardware"
     - "Form, stamp, or machine the curved clamp-body profile and hinge/lug features visible in the vendor/local CAD previews."
     - "Machine, drill, and thread the bolt or wingnut interface, then assemble the clamp body with the tightening hardware."
     - "Deburr, clean or passivate for vacuum service, and verify DN 10-16 ISO-KF fit and wingnut torque behavior."
@@ -47,7 +47,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The production route is inferred from standard stainless clamp geometry and common small vacuum-hardware fabrication practice because the supplier does not state its manufacturing process."
-    - "Purchased standard hardware is the preferred current model unless later KB work needs to decompose reusable ISO-KF clamp manufacture."
+    - "External standard hardware is the preferred current model unless later KB work needs to decompose reusable ISO-KF clamp manufacture"
   uncertainty_notes:
     - "Exact factory process, fastener subpart details, surface finish, and inspection tolerances are not specified by row evidence."
 kb_implications:

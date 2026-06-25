@@ -35,20 +35,20 @@ material:
   uncertainty_notes:
     - "The exact steel grade, heat treatment, coating, seal polymer, and lubricant are not specified by the row evidence."
 how_to_make:
-  summary: "Procure as a Hiwin HGL15CAZ0H precision linear-guide block where possible; a local route would require precision-machined and hardened steel raceway bodies, recirculating balls, end-return/seal components, lubrication hardware, grinding/lapping, assembly, preload control, and inspection."
+  summary: "Manufacturing requires precision-machined and hardened steel raceway bodies, recirculating balls, end-return/seal components, lubrication hardware, grinding/lapping, assembly, preload control, and inspection"
   manufacturing_steps:
     - "Start from bearing-quality carbon steel stock for the block body and rolling elements."
     - "Machine the low square guide-block body, mounting faces, M4 mounting holes, and internal recirculation/raceway features."
     - "Heat treat and precision grind or lap the raceways and datum faces to match HG15 rail geometry."
-    - "Manufacture or procure precision steel balls, end-return pieces, seals, grease nipple or lubrication interface parts, and retainers as needed."
+    - "Manufacture precision steel balls, end-return pieces, seals, grease nipple or lubrication interface parts, and retainers as needed"
     - "Assemble with lubricant, set the Z0 light preload class, and inspect smooth travel, dimensions, accuracy class H interfaces, and load-bearing surfaces."
   source:
     url_or_path: "https://www.hiwin.de/en/Products/Linear-guideways/Blocks/Ball-guides/Series-HG-QH/HGL/HGL15CAZ0H/p/5-001374; https://www.hiwin.com/wp-content/uploads/Linear_Guideway-E-1.pdf; research/ream250_bom/ream250_bom_row_0027_2A4__views_2x2.png"
     cited_fact_or_basis: "The Hiwin product page identifies the row as HGL15CAZ0H, gives block dimensions, load ratings, preload Z0, accuracy H, mass, and linear-guideway operating principle. The HG catalog/order-code convention identifies HGL as a low square block and the no-M material convention as carbon steel. The CAD preview shows a compact carriage/block with railway features. targeted_web_search: checked the BOM-provided Hiwin URL, searched 'site:hiwin.de HGL15CAZ0H 5-001374 Hiwin', 'HIWIN linear guideway HGL block material steel balls rail block material', 'HIWIN linear guideways catalogue HGL15CA material steel block', 'No symbol: Carbon Steel HGL HIWIN', and 'HGL15CAZ0H Carbon Steel'; found row-matched product, material-code, dimension, and mass evidence, but no source stating Hiwin's exact factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the product identity, precision linear-guide function, carbon-steel convention, CAD geometry, and common bearing/linear-guide construction."
-    - "For KB planning, this should remain a purchased precision motion component unless linear-guide production becomes a high-priority closure target."
+    - "The inferred from the product identity, precision linear-guide function, carbon-steel convention, CAD geometry, and common bearing/linear-guide construction."
+    - "For KB planning, this should remain a external precision motion component unless linear-guide production becomes a high-priority closure target"
   uncertainty_notes:
     - "The actual Hiwin process, alloy, heat treatment, grinding sequence, preload-setting method, and seal/lubricant specifications are not provided by the row evidence."
 kb_implications:

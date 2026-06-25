@@ -39,10 +39,9 @@ material:
   uncertainty_notes:
     - "The BOM text does not identify whether any EPDM volume is physically included in part 1 versus adjacent valve rows, so downstream modeling should avoid assigning an EPDM fraction to this row until the valve subassembly is split."
 how_to_make:
-  summary: "Procure as the AMproved ISO-KF DN40 disc-valve component for current modeling; a plausible local route is machined 316L stainless valve-body production, EPDM seal integration at valve assembly level, cleaning/passivation, and fit/leak inspection."
+  summary: "Machined 316L stainless valve-body production, EPDM seal integration at valve assembly level, cleaning/passivation, and fit/leak inspection"
   manufacturing_steps:
-    - "Procure route: buy the AMproved ISO-KF DN40 disc valve and treat 3X1 as one vendor-supplied valve component."
-    - "Local route: machine the roughly 38 x 45.5 x 38 mm stainless valve-body component from 316L/1.4404 bar or near-net blank, including the central bore and external lug features visible in CAD."
+    - "Manufacturing route: machine the roughly 38 x 45.5 x 38 mm stainless valve-body component from 316L/1.4404 bar or near-net blank, including the central bore and external lug features visible in CAD."
     - "Deburr, clean, and passivate the stainless surfaces for vacuum/powder-handling service."
     - "Assemble with the mating valve part and EPDM sealing element, then inspect manual positions, fit, closure, and leak/powder-tightness."
   source:
@@ -50,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "AMproved identifies the product as an ISO-KF DN40 disc valve with 3 detent positions for manual control/closure in AM-machine pipework. FreeCAD measured a 38.00 x 45.50 x 38.00 mm one-solid part, and the contact sheet shows a compact bored cylindrical valve-body component with lugs. The detailed machining, passivation, seal integration, and inspection route is inferred from material, geometry, and valve service rather than stated by the vendor. targeted_web_search: searched 'AMPROVED ISO-KF DN 40 Scheibenventil AISI 316L 1.4404 EPDM', 'AMproved ISO-KF DN40 Scheibenventil weight material', 'sv04_din_cc_dn40 316L EPDM valve', and 'ISO-KF DN40 disc valve 316L EPDM manufacturing'; results resolved row-matched product function/material wording but did not provide a row-specific manufacturing process or catalog mass."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The visible compact bored body and stainless material make subtractive machining from stainless stock a plausible local manufacturing route."
+    - "The visible compact bored body and stainless material make subtractive machining from stainless stock a plausible Manufacturing route."
     - "EPDM sealing is handled during valve-level assembly rather than during fabrication of the metal part-1 body."
   uncertainty_notes:
     - "The vendor page does not specify production method, tolerances, seal geometry, surface finish, or leak-test standard; those would matter for a self-manufactured replacement."

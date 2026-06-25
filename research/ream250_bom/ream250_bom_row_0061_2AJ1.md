@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The row does not include a complete Karl Hipp order code tolerance/material suffix, so stainless or special-order variants cannot be excluded from BOM-side evidence alone."
 how_to_make:
-  summary: "Procure as a Karl Hipp precision-ground 16 mm lead-4 ball screw spindle, or manufacture locally by preparing Cf53 steel bar, machining end features, heat treating the ball track, precision grinding the screw profile, and inspecting lead accuracy."
+  summary: "Prepare as a Karl Hipp precision-ground 16 mm lead-4 ball screw spindle, or manufacture locally by preparing Cf53 steel bar, machining end features, heat treating the ball track, precision grinding the screw profile, and inspecting lead accuracy"
   manufacturing_steps:
     - "Start from Cf53 steel round bar sized for a 16 mm nominal ball screw spindle and cut to the required overall length."
     - "Turn bearing journals, threaded or coupling ends, and shoulders to the required drawing dimensions."

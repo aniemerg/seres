@@ -38,19 +38,19 @@ material:
   uncertainty_notes:
     - "Exact compound, hardness, temperature rating, chemical compatibility, and compression-set behavior remain unresolved."
 how_to_make:
-  summary: "Best handled as a procured custom LiSEMA seal; a local route would cut or mold a 92 x 62 x 3 mm rectangular frame from the selected gasket/elastomer material and inspect fit and compression."
+  summary: "Cut or mold a 92 x 62 x 3 mm rectangular frame from the selected gasket/elastomer material and inspect fit and compression"
   manufacturing_steps:
     - "Select elastomeric gasket sheet, foam sheet, or molded seal compound according to the service temperature, atmosphere, compression, and chemical requirements."
     - "Cut the outer rectangle and central opening from 3 mm stock using die cutting, CNC knife cutting, waterjet cutting, or another material-compatible profile-cutting process."
     - "Form or finish rounded corner regions as required by the drawing, then clean edges and inspect the 92 x 62 x 3 mm profile."
-    - "Procure from LiSEMA or an equivalent gasket fabricator when certified compound, hardness, and compression performance are required."
+    - "Prepare from LiSEMA or an equivalent gasket fabricator when certified compound, hardness, and compression performance are required"
   source:
     url_or_path: "https://lisema.eu/; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1A51_seal.step; research/ream250_bom/ream250_bom_row_0007_1A51__views_2x2.png"
     cited_fact_or_basis: "LiSEMA's homepage supports custom gaskets, profiles, molded silicone parts, and seals as supplied product categories. CAD and preview show one thin 92.00 x 62.00 x 3.00 mm rectangular frame seal. targeted_web_search: queries tried: 'Lisema 1A51 seal', 'Lisema 1A51 Dichtung seal', 'site:lisema.eu 1A51 Lisema seal', and '1A51_seal material'; result: no row-specific manufacturing drawing, compound, or process note found, so local cutting/molding steps are inferred from the seal geometry and vendor category."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row is treated as a replaceable custom gasket/seal rather than a calibrated module or multi-part assembly."
-    - "Flat profile cutting is the preferred local route unless a later drawing shows molded cross-section features that require tooling."
+    - "Flat profile cutting is the preferred Manufacturing route unless a later drawing shows molded cross-section features that require tooling."
   uncertainty_notes:
     - "Without a row-specific drawing or material callout, the manufacturing route is suitable for planning but not enough to qualify the seal for vacuum, thermal, or chemical service."
 kb_implications:

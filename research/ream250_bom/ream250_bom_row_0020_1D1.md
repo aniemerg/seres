@@ -47,11 +47,11 @@ how_to_make:
     - "Clean for vacuum-adjacent service and inspect hinge-pin fit, mounting geometry, and surface condition before assembly with the mating hinge pieces."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1D1_part_1.step; research/ream250_bom/ream250_bom_row_0020_1D1__views_2x2.png; https://www.idealvac.com/en-us/Ideal-Vacuum-Cube-Hinge-Hardware-Kit-Converts-Any-Cube-Plate-Into-a-Door/pp/P106868"
-    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a tapered rectangular body, cylindrical hinge-barrel feature, mounting holes, and a measured 65.00 x 100.00 x 20.00 mm bounding box. A comparable vacuum-door hinge product page states that its hinges are machined from aluminum and use a stainless hinge pin, supporting machining as a plausible route for this geometry. targeted_web_search: searched \"Pfeiffer Vacuum door hinge material\", \"Pfeiffer Vacuum door hinge reAM250 1D1_part_1\", \"1D1_part_1 door hinge Pfeiffer Vacuum\", and \"reAM250 door hinge Pfeiffer Vacuum\"; found duplicate BOM text and general/comparable vacuum hinge evidence but no row-specific manufacturing process source."
+    cited_fact_or_basis: "The STEP/contact sheet shows one compact solid with a tapered rectangular body, cylindrical hinge-barrel feature, mounting holes, and a measured 65.00 x 100.00 x 20.00 mm bounding box. A comparable vacuum-door hinge product page states that its hinges are machined from aluminum and use a stainless hinge pin, supporting machining as a plausible route for this geometry. targeted_web_search: searched \"Pfeiffer Vacuum door hinge material\", \"Pfeiffer Vacuum door hinge reAM250 1D1_part_1\", \"1D1_part_1 door hinge Pfeiffer Vacuum\", and \"reAM250 door hinge Pfeiffer Vacuum\" found duplicate BOM text and general/comparable vacuum hinge evidence but no row-specific manufacturing process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the simple metal hinge geometry and need for aligned hinge-pin and mounting bores, not from a Pfeiffer factory process sheet."
-    - "For KB modeling, this can be represented as machining from metal stock rather than a purchased proprietary hinge subassembly."
+    - "For KB modeling, this can be represented as machining from metal stock rather than a proprietary hinge subassembly"
   uncertainty_notes:
     - "The CAD gives geometry but not tolerances, surface finish, heat treatment, hinge-pin material, or whether Pfeiffer used machining, casting, extrusion, or a vendor-specific hinge blank."
 kb_implications:

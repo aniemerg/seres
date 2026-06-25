@@ -46,10 +46,10 @@ how_to_make:
     - "Clean and passivate, anodize, or otherwise finish only after the final material and gas/vacuum compatibility requirements are resolved."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S1_flange.step; research/ream250_bom/ream250_bom_row_0145_3S1__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 130.00 x 8.00 x 130.00 mm solid with a thin flange/interface plate, central square aperture, radial webbing, and small perimeter mounting holes. targeted_web_search: searched \"3S1_flange\", \"reAM250 3S1 flange\", \"3S1 flange reAM250\", and \"reAM250 gas outlet flange material\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 130.00 x 8.00 x 130.00 mm solid with a thin flange/interface plate, central square aperture, radial webbing, and small perimeter mounting holes. targeted_web_search: searched \"3S1_flange\", \"reAM250 3S1 flange\", \"3S1 flange reAM250\", and \"reAM250 gas outlet flange material\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer/product ID and the CAD file is a custom-named flange."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer/product ID and the CAD file is a custom-named flange"
     - "Subtractive machining or plate profile-cutting is assumed from the thin plate geometry and need for controlled aperture, hole placement, and mating-face flatness."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, sealing features, or whether post-machining vacuum cleaning/passivation is required."

@@ -36,20 +36,19 @@ material:
   uncertainty_notes:
     - "The sourced material only resolves the standard filter insert. The housing/flange metal family, seal elastomer, clasp/fastener material, and any surface treatment remain unresolved for detailed local manufacturing."
 how_to_make:
-  summary: "Treat as a purchased Pfeiffer Vacuum SAS 40 DN 40 ISO-KF dust separator module for current KB planning; a local build would require a vacuum-tight DN 40 ISO-KF housing, cover/clasp and seals, and a replaceable polyester filter insert."
+  summary: "Treat as a external Pfeiffer Vacuum SAS 40 DN 40 ISO-KF dust separator module for current KB planning; a local build would require a vacuum-tight DN 40 ISO-KF housing, cover/clasp and seals, and a replaceable polyester filter insert"
   manufacturing_steps:
-    - "Procure one Pfeiffer Vacuum PK Z60 510 / SAS 40 dust separator, DN 40 ISO-KF, matching the BOM product route and CAD geometry."
     - "Verify DN 40 ISO-KF inlet and outlet interfaces, filter insert condition, and cover/seal/clasp integrity before installation."
     - "Install in the vacuum line or pump inlet path with compatible ISO-KF centering rings, seals, and clamps from neighboring BOM rows."
-    - "For a future local-manufacturing model, decompose into housing/flange fabrication, cover/clasp hardware, elastomer seals, and polyester filter insert production or procurement."
+    - "For a future local-manufacturing model, decompose into housing/flange fabrication, cover/clasp hardware, elastomer seals, and polyester filter insert production"
   source:
     url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/PK_Z60_510; https://www.ajvs.com/library/Pfeiffer%20SAS%2016-160%20Dust%20Separators%20Operation%20Manual.pdf; https://www.ajvs.com/library/Pfeiffer%20SAS%2040%20Dust%20Separator%20Data%20Sheet%20PKZ60510.pdf; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/85_filter_ISO_KF_DN40_CSL-357y2-KF.step; research/ream250_bom/ream250_bom_row_0281_85__views_2x2.png"
     cited_fact_or_basis: "The BOM supplies a Pfeiffer product route and product number PK Z60 510. The SAS documentation identifies PK Z60 510 as a SAS 40 dust separator with DN 40 ISO-KF interfaces and shows removable filter-insert maintenance steps, including removing the cover, removing/cleaning the insert, cleaning seals and sealing surfaces, and reinstalling the insert. The rendered CAD preview shows a complete canister-style filter module with ports and cover/clasp features. official_alternate_route_check: the original BOM URL is the Pfeiffer shop route for PK_Z60_510; because the official shop page returned only an anti-bot wrapper, the same manufacturer/order-number identity was checked against Pfeiffer-branded SAS 40 documentation mirrored externally."
     evidence_basis: "bom_provided"
   assumptions:
-    - "Current KB planning should model the row as a purchased functional vacuum accessory unless later work intentionally decomposes the dust separator into housing, filter media, seals, and fastening hardware."
+    - "Current KB planning should model the row as a external functional vacuum accessory unless later work intentionally decomposes the dust separator into housing, filter media, seals, and fastening hardware"
   uncertainty_notes:
-    - "The documentation supports procurement and maintenance/insert replacement, but not a detailed local manufacturing drawing, tolerances, seal profile, filter-media pleat construction, or housing alloy."
+    - "Local manufacturing drawing, tolerances, seal profile, filter-media pleat construction, or housing alloy"
 kb_implications:
   - "item_granularity: complex_module - row 85 is a standard Pfeiffer SAS 40 DN 40 ISO-KF dust separator/filter module; model as a complex vacuum accessory unless later work decomposes the housing, filter insert, seals, and cover/clasp hardware."
 ---

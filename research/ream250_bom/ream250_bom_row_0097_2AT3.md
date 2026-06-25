@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The vendor-accessible evidence resolves only the external housing and sensing face materials; internal coil, PCB, connector, and encapsulant materials are not specified."
 how_to_make:
-  summary: "Treat as a purchased/imported calibrated inductive proximity sensor module. A local production model would require a stainless M12 threaded housing, PBT sensing face, coil and oscillator/switching electronics, M12 4-pin connector, sealing/potting, electrical calibration, IP68 sealing validation, and functional test."
+  summary: "Treat as a external/imported calibrated inductive proximity sensor module. A local production model would require a stainless M12 threaded housing, PBT sensing face, coil and oscillator/switching electronics, M12 4-pin connector, sealing/potting, electrical calibration, IP68 sealing validation, and functional test"
   manufacturing_steps:
     - "Machine or source an M12x1 stainless cylindrical sensor housing with connector-end geometry."
     - "Mold or source the PBT sensing face and integrate it with the sensing end."
@@ -49,7 +49,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Manufacturing steps are inferred from the sourced sensor type, connectorized cylindrical form, material callouts, and normal inductive proximity sensor construction."
-    - "Because this is a calibrated electronic sensing module, KB modeling should initially import or purchase it rather than decompose it into a local sub-BOM."
+    - "Decompose it into a local sub-BOM"
   uncertainty_notes:
     - "The exact internal electronics, coil geometry, potting compound, connector contact plating, and factory calibration process are not disclosed by the row evidence."
 kb_implications:

@@ -44,7 +44,7 @@ how_to_make:
     - "Deburr, clean, and inspect dimensions before installation in the recoater assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6E2_plate_right.step; research/ream250_bom/ream250_bom_row_0177_6E2__views_2x2.png; web search sanity check"
-    cited_fact_or_basis: "CAD preview and bounding box show a simple narrow angled plate, and STEP metadata identifies stainless steel. targeted_web_search: tried \"6E2_plate_right reAM250\", \"6E2 reAM250 recoater plate\", and \"6E2_plate_right\"; results only mirrored the BOM row and did not provide a row-specific vendor drawing or manufacturing route."
+    cited_fact_or_basis: "CAD preview and bounding box show a simple narrow angled plate, and STEP metadata identifies stainless steel. targeted_web_search: tried \"6E2_plate_right reAM250\", \"6E2 reAM250 recoater plate\", and \"6E2_plate_right\" results only mirrored the BOM row and did not provide a row-specific vendor drawing or manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A cut-and-formed stainless plate route is the most plausible low-complexity route for this geometry and material."

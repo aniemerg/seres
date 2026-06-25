@@ -40,14 +40,14 @@ material:
 how_to_make:
   summary: "Fabricate as a custom sheet-metal cover: cut the flat U-shaped outline from 2 mm sheet stock, deburr edges, add any required edge finishing/coating, and install in the hood assembly."
   manufacturing_steps:
-    - "Procure 2 mm metal sheet stock sized for at least the 221.40 x 428.00 mm bounding envelope."
+    - "Prepare 2 mm metal sheet stock sized for at least the 221.40 x 428.00 mm bounding envelope"
     - "CNC laser, waterjet, plasma, or router-cut the outer profile and central opening from the flat sheet."
     - "Deburr and inspect the perimeter and cutout."
     - "Apply coating or surface finish if required by the final enclosure design."
     - "Fasten or bond into the hood/top cover assembly during enclosure assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17AN_cover_sheet_hood_top.step; research/ream250_bom/ream250_bom_row_0242_17AN__views_2x2.png"
-    cited_fact_or_basis: "The STEP/preview show one flat 2.00 mm thick sheet-like solid with a U-shaped planform and no visible multi-part, calibrated, or vendor-module features. targeted_web_search: searched \"17AN_cover_sheet_hood_top manufacturing\", \"reAM250 cover sheet hood top drawing\", and \"reAM250 sheet enclosure hood material\"; results did not provide row-specific fabrication instructions."
+    cited_fact_or_basis: "The STEP/preview show one flat 2.00 mm thick sheet-like solid with a U-shaped planform and no visible multi-part, calibrated, or vendor-module features. targeted_web_search: searched \"17AN_cover_sheet_hood_top manufacturing\", \"reAM250 cover sheet hood top drawing\", and \"reAM250 sheet enclosure hood material\" results did not provide row-specific fabrication instructions."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Flat-sheet cutting is sufficient because the CAD bounding box thickness is 2.00 mm and the preview shows no bends, formed flanges, or separate attached features."

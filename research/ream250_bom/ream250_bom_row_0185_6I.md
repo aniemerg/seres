@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata identifies the alloy family/grade but does not state temper, surface treatment, or whether any inserts or pads are installed separately from this plate row."
 how_to_make:
-  summary: "Make as a small CNC-machined or profile-cut 6061 aluminum clamping plate, or procure as a custom machined replacement matched to the reAM250 drawing."
+  summary: "Make as a small CNC-machined or profile-cut 6061 aluminum clamping plate"
   manufacturing_steps:
     - "Start from 6061 aluminum sheet or plate stock slightly thicker/larger than the 80 x 42 x 4 mm finished envelope."
     - "Waterjet, laser, router, or CNC mill the outer profile, large central rounded slot, and visible clearance/lightening cutouts."
@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows a one-piece 80.00 x 42.00 x 4.00 mm Aluminum 6061 plate with a large rounded slot and small mounting holes. targeted_web_search: queries tried '\"6I_clamping_plate_front\"', '\"reAM250\" \"clamping_plate_front\"', and '\"reAM250\" \"6I\" \"clamping plate\"'; results found mirrored reAM250 BOM listings but no row-specific vendor drawing, drawing note, or manufacturing process for 6I_clamping_plate_front."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The visible CAD geometry is a single custom flat aluminum plate rather than a casting, printed part, or purchased catalog clamp."
+    - "The visible CAD geometry is a single custom flat aluminum plate rather than a casting, printed part, or external catalog clamp"
     - "Low-volume KB planning favors cutting/machining from plate stock because the part is thin, flat, and contains 2D profile features plus drilled holes."
   uncertainty_notes:
     - "Exact tolerances, fastener hole callouts, surface finish, edge break, and surface-treatment requirements are not present in the row-level evidence."

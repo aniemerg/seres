@@ -35,19 +35,18 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer Vacuum standard order 120BSR050; a local fallback would fabricate the stainless clamp halves and screw/wingnut hardware as a simple vacuum fastener."
+  summary: "Fabricate the stainless clamp halves and screw/wingnut hardware as a simple vacuum fastener"
   manufacturing_steps:
-    - "Procure Pfeiffer Vacuum 120BSR050 or an equivalent DN 50 ISO-KF stainless-steel clamping ring for elastomer seals."
     - "For local fabrication, machine or precision-cast the two curved stainless clamp halves to the ISO-KF DN50 profile, including hinge/lug and screw-bearing features."
     - "Drill, deburr, and finish the hinge and tightening-lug interfaces; passivate or clean the stainless surfaces for vacuum service."
     - "Assemble the hinge pin, tightening screw, and wingnut or equivalent fastener, then verify fit on DN50 ISO-KF flanges with an elastomer seal at the specified 2 Nm wingnut torque."
   source:
     url_or_path: "https://www.vacuum-shop.com/shop/en_US/category/2072892/product/120bsr050/clamping-ring-for-elastomer-seals-stainless-steel-1-4301-304.html; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/35_clamping_ring_ISO_KF_DN50_120BSR050.step; research/ream250_bom/ream250_bom_row_0251_35__views_2x2.png"
-    cited_fact_or_basis: "The Pfeiffer online-shop route identifies 120BSR050 as a DN 50 ISO-KF stainless 1.4301/304 clamping ring for elastomer seals and states 2 Nm wingnut torque. CAD and preview show the curved clamp body and wingnut/screw feature. targeted_web_search: searched \"Pfeiffer Vacuum 120BSR050 clamping ring ISO-KF DN50 material weight\" and \"site:pfeiffer-vacuum.com 120BSR050 clamping ring\"; results resolved product identity, material, dimensions, and procurement route but did not provide a manufacturing process drawing."
+    cited_fact_or_basis: "The Pfeiffer online-shop route identifies 120BSR050 as a DN 50 ISO-KF stainless 1.4301/304 clamping ring for elastomer seals and states 2 Nm wingnut torque. CAD and preview show the curved clamp body and wingnut/screw feature. targeted_web_search: searched \"Pfeiffer Vacuum 120BSR050 clamping ring ISO-KF DN50 material weight\" and \"site:pfeiffer-vacuum.com 120BSR050 clamping ring\" results resolved product identity, material, dimensions, and procurement route but did not provide a manufacturing process drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the CAD geometry and standard clamp function; the vendor evidence supports procurement and interface facts, not the detailed fabrication process."
-    - "The screw/wingnut hardware is treated as part of the purchased clamp row because the CAD and vendor product identify one complete clamping ring item."
+    - "The inferred from the CAD geometry and standard clamp function"
+    - "The screw/wingnut hardware is treated as part of the external clamp row because the CAD and vendor product identify one complete clamping ring item"
   uncertainty_notes:
     - "No row-specific tolerance, heat-treatment, surface-finish, or hinge/screw subcomponent specification was found, so local manufacturing details remain approximate."
 kb_implications:

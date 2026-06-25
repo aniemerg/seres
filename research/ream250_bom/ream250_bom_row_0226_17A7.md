@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The local metadata resolves the alloy family for this CAD row, but it does not separately specify surface treatment such as anodizing."
 how_to_make:
-  summary: "Procure a Bosch Rexroth-compatible 20 x 20 mm aluminum strut profile segment, preferably cut to the 50 mm row length, then install it with the matching slot fasteners or brackets in the reAM250 assembly."
+  summary: "Prepare a Bosch Rexroth-compatible 20 x 20 mm aluminum strut profile segment, preferably cut to the 50 mm row length, then install it with the matching slot fasteners or brackets in the reAM250 assembly"
   manufacturing_steps:
-    - "Order or cut a Bosch Rexroth 20 x 20 mm strut profile to 50 mm length."
+    - "Cut a Bosch Rexroth 20 x 20 mm strut profile to 50 mm length"
     - "Deburr cut ends if cut from longer stock."
     - "Assemble through the four profile slots using compatible Bosch Rexroth profile connectors, sliding blocks, or brackets required by the surrounding assembly."
   source:
@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The BOM-provided Bosch Rexroth store route is for 'Strebenprofil' strut profiles, BOM row 226 names Bosch Rexroth AG and 'strut profile', and CAD fixes the row length and cross-section at 50.00 x 20.00 x 20.00 mm."
     evidence_basis: "bom_provided"
   assumptions:
-    - "For KB planning, procurement or cut-to-length stock preparation is the relevant route for this vendor extrusion row."
+    - "Cut-to-length stock preparation is the relevant route for this vendor extrusion row"
   uncertainty_notes:
     - "The exact connector set used with this short segment is outside this row and should be resolved from adjacent BOM rows or the parent assembly."
 kb_implications:

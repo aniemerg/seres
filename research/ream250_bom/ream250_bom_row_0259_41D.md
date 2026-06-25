@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "No source identified the exact aluminum alloy, surface treatment, or whether the supplied pulley includes any separate steel retaining hardware."
 how_to_make:
-  summary: "Procure or manufacture as a standard 21 AT5/18-2 aluminum timing pulley, then finish-bore or verify the 7 mm H7 bore for the reAM250 shaft interface."
+  summary: "Manufacture as a standard 21 AT5/18-2 aluminum timing pulley, then finish-bore or verify the 7 mm H7 bore for the reAM250 shaft interface"
   manufacturing_steps:
     - "Start from an aluminum AT5 pulley blank or standard 21 AT5/18-2 pulley body with two flanges."
     - "Generate or finish the AT5 tooth profile and flange geometry by pulley hobbing/form cutting or equivalent CNC turning and milling operations."
@@ -50,8 +50,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row 259 states the custom 7 mm H7 bore requirement. Lenze states that belt pulleys can be made according to drawing with special drilled holes, special tolerances, different surface treatments, different materials, and single-piece or large-series production. Optibelt gives the base 21 AT5 / 18-2 pulley geometry, aluminum material, maximum finished bore, and catalog mass. targeted_web_search: searched 'zahriemen24 21 AT5/18-2 toothed belt pulley 7 mm H7 575457', 'site:zahriemen24.de 575457', 'site:zahriemen24.de 21 AT5/18-2', and '21 AT5/18-2 7 mm H7'; found duplicate BOM text and standard pulley catalog matches, but no row-specific manufacturing drawing for the exact Zahriemen24 575457 modification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "A purchased standard pulley plus secondary bore finishing or vendor-supplied bore customization is the most plausible route because the BOM names a standard pulley designation plus a custom H7 bore."
-    - "If manufactured locally from stock instead of procured, the same operations can be modeled as aluminum blank turning, tooth/flange machining, bore finishing, deburring, and inspection."
+    - "A external standard pulley plus secondary bore finishing or row-matched bore customization is the most plausible route because the BOM names a standard pulley designation plus a custom H7 bore"
   uncertainty_notes:
     - "The exact surface finish, balance grade, tooth-tolerance class, and vendor modification drawing are not present in the BOM row or resolved catalog evidence."
 kb_implications:

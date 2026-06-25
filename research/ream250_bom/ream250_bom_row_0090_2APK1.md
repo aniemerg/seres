@@ -53,7 +53,7 @@ how_to_make:
   assumptions:
     - Conventional sheet/plate cutting plus drilling or light CNC machining is a plausible route for this geometry.
   uncertainty_notes:
-    - "targeted_web_search: queries tried were \"2APK1 2APK1_bottom material\", \"2APK1_bottom\", \"2APK1 bottom CAD\", and \"2APK1 plate bracket material\"; no row-specific process drawing or supplier page was found."
+    - "Targeted_web_search: queries tried were \"2APK1 2APK1_bottom material\", \"2APK1_bottom\", \"2APK1 bottom CAD\", and \"2APK1 plate bracket material\" no row-specific process drawing or supplier page was found."
     - The CAD preview is sufficient for route triage but not for deciding whether the triangular features are machined ribs, relief pockets, or export/tessellation artifacts.
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable thin metal cover plate, not a purchased module; material should remain broad until a drawing or native CAD material source resolves the alloy."

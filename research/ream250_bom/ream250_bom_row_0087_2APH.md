@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - The BOM/CAD name says "felt_seal" while the assembly STEP metadata says Rubber; the material family is therefore rubber, but fiber content, elastomer grade, hardness, and reinforcement are not resolved.
 how_to_make:
-  summary: Procure as a replaceable rubber/felt-style seal when available; a local approximation would cut the square frame from thin rubber sheet or compatible seal stock, then inspect fit and edge quality.
+  summary: "Prepare as a replaceable rubber/felt-style seal; a cut the square frame from thin rubber sheet or compatible seal stock, then inspect fit and edge quality"
   manufacturing_steps:
     - Select thin rubber sheet or compatible seal stock near 4 mm thickness.
     - Cut the outer square and inner opening by die cutting, knife cutting, laser/waterjet cutting, or a simple template-and-blade process.
@@ -47,9 +47,9 @@ how_to_make:
     evidence_basis: engineering_hypothesis
   assumptions:
     - The flat 260 x 260 x 4 mm frame geometry can be made from sheet stock rather than a molded 3D profile.
-    - For KB planning, procurement and local sheet-cut fabrication are both plausible routes until the exact OEM seal specification is recovered.
+    - "Cut fabrication are both plausible routes until the exact OEM seal specification is recovered"
   uncertainty_notes:
-    - "targeted_web_search: tried 'agrolager 2APH felt seal', 'site:agrolager.de 2APH', '2APH rubber seal 260', and '2APH felt agrolager'; results did not provide a row-specific vendor page, drawing, or OEM manufacturing route."
+    - "Targeted_web_search: tried 'agrolager 2APH felt seal', 'site:agrolager.de 2APH', '2APH rubber seal 260', and '2APH felt agrolager'; results did not provide a row-specific vendor page, drawing, or OEM manufacturing route."
     - Generic gasket/felt-seal fabrication sources support the route class, not this exact 2APH part specification.
 kb_implications:
   - "item_granularity: simple_part - Model as a replaceable seal/gasket replaceable or applied part with per-unit mass about 0.030 kg unless later research identifies a reusable standard seal family."

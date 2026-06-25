@@ -34,17 +34,15 @@ material:
   uncertainty_notes:
     - "No coating, property class, or heat-treatment grade is specified by the BOM-side evidence."
 how_to_make:
-  summary: "Treat as standard M4 DIN 912 socket-head cap screw hardware; procure as a standard fastener matching M4x0.7 thread and 20 mm nominal length, or model later as a generic steel socket-head screw if local fastener production is expanded."
+  summary: "Treat as standard M4 DIN 912 socket-head cap screw hardware.7 thread and 20 mm nominal length, or model later as a generic steel socket-head screw if local fastener production is expanded"
   manufacturing_steps:
-    - "Procure standard DIN 912 / ISO 4762-style M4x0.7x20 socket-head cap screws in mild steel-compatible steel."
     - "Verify thread, head diameter, socket drive, length, and quantity before installation."
     - "For later local manufacturing detail, split into steel wire/rod preparation, head forming, socket forming, thread rolling or cutting, finishing, and inspection."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; research/ream250_bom/ream250_bom_row_0109_2AVA__views_2x2.png"
     cited_fact_or_basis: "BOM and manifest identify a cylinder head cap screw with CAD filename parameters DIN 912, M4x0.7, and 20 mm length; the rendered preview confirms socket-head screw geometry."
     evidence_basis: bom_provided
-  assumptions:
-    - "For current KB planning, procurement or reuse of a standard fastener is the appropriate route; detailed local screw manufacturing can be modeled separately if fastener production becomes in scope."
+  assumptions: []
   uncertainty_notes:
     - "The BOM-side evidence does not specify a supplier part number, strength class, coating, or acceptance standard beyond the DIN 912-style designation in the CAD filename."
 kb_implications:

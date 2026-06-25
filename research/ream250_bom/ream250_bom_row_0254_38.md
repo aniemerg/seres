@@ -34,9 +34,8 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer 320RTS063 or an equivalent DN63 ISO-K stainless tee; local manufacture would form or cut a 304/1.4301 stainless tee body, attach three ISO-K flange ends, finish sealing faces, clean for vacuum service, and leak-test."
+  summary: "Form or cut a 304/1.4301 stainless tee body, attach three ISO-K flange ends, finish sealing faces, clean for vacuum service, and leak-test"
   manufacturing_steps:
-    - "Procure Pfeiffer 320RTS063 or equivalent DN63 ISO-K stainless tee for near-term modeling."
     - "For local manufacture, prepare 304/1.4301 stainless tube/tee stock and three compatible ISO-K DN63 flange ends."
     - "Join the perpendicular tee branch and flange ends with vacuum-compatible welding or formed pulled-port fabrication, then remove burrs and clean internal surfaces."
     - "Machine or finish seal-adjacent flange lips/faces, passivate or clean as required for vacuum plumbing, and leak-test the completed tee."
@@ -45,9 +44,9 @@ how_to_make:
     cited_fact_or_basis: "The Pfeiffer Vacuum Online Shop page identifies the row as a DN63 ISO-K stainless 1.4301/304 tee. Pfeiffer Vacuum+Fab Solutions states ISO-K/ISO-F tee fittings are made from 304 stainless steel pulled port tubing and ISO-K flanges, with full size tees offering three equal-size flanged connections. The CAD preview shows a three-port flanged tee. targeted_web_search: queries tried: '320RTS063 Pfeiffer T-piece DN63 ISO-K stainless steel 1.4301 weight', 'site:vacuum-shop.com 320RTS063 T-piece stainless steel 1.4301 304', and 'Pfeiffer ISO-K tee manufacturing 304 stainless pulled port tubing'; found row-matched product/material/dimension facts and a Pfeiffer family manufacturing description, but no product-specific factory traveler for 320RTS063."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Detailed welding, flange finishing, cleaning, and leak-test steps are inferred as a plausible local manufacturing route for a vacuum-rated stainless tee."
+    - "Detailed welding, flange finishing, cleaning, and leak-test steps are inferred as a plausible Manufacturing route for a vacuum-rated stainless tee."
   uncertainty_notes:
-    - "The exact Pfeiffer production sequence for order number 320RTS063 is not published in the sources checked."
+    - "The exact Pfeiffer production sequence for part number 320RTS063 is not published in the sources checked"
 kb_implications:
   - "item_granularity: simple_part - Model later as a reusable standard DN63 ISO-K stainless tee fitting rather than a reAM250-specific custom part or calibrated purchased module."
 ---

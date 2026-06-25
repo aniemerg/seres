@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "Do not treat the broad material set as a sourced Pfeiffer sub-BOM; local manufacturing would require a teardown, parts list, or manufacturer drawing."
 how_to_make:
-  summary: "Near-term KB route should procure the Pfeiffer Duo 35 / PK D45 602 E as a calibrated purchased vacuum pump module; a later self-manufacturing route would decompose it into precision rotary-vane pump internals, housing, motor, seals, valves, oil system, base hardware, assembly, and acceptance testing."
+  summary: "Decompose it into precision rotary-vane pump internals, housing, motor, seals, valves, oil system, base hardware, assembly, and acceptance testing"
   manufacturing_steps:
-    - "Procure the Pfeiffer Duo 35 pump as a finished vendor module for the reAM250 BOM."
     - "Install the pump on its base rails or machine mounting points, connect DN/KF vacuum plumbing and exhaust, fill/verify P3 operating oil, and wire the 3-phase motor according to the required supply."
     - "For future local manufacture, split the module into cast or machined pump housing, rotor, vanes, stator surfaces, bearings, motor, safety/gas-ballast valve parts, seals, base hardware, oil fill/drain hardware, final assembly, leak/performance testing, and electrical safety testing."
   source:
@@ -48,7 +47,6 @@ how_to_make:
     cited_fact_or_basis: "Ideal Vacuum identifies PN PK D45 602 as a Pfeiffer DUO35 two-stage rotary vane pump with 3-phase motor for low to medium vacuum. The operating manual gives Duo 35 order-number, motor, operating-fluid, performance, and weight data. The CAD contact sheet shows the row as one complete pump-and-motor module. targeted_web_search: 'PK D45 602 E manufacturing route', 'Pfeiffer Duo 35 pump manufacturing', and 'Pfeiffer Duo 35 material housing rotor vane' found product/manual data but no row-specific factory manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the correct near-term route because the row is a calibrated vendor vacuum pump module without a sub-BOM."
     - "The local-manufacture decomposition is a planning hypothesis based on the rotary-vane pump function, CAD shape, and common electromechanical pump architecture."
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need rotor/stator tolerances, vane material, bearing and seal specifications, motor design, valve details, oil compatibility, balancing, leak-rate, ultimate-pressure, and run-test requirements."

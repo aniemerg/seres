@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The row does not state property class, coating, or exact steel grade; downstream KB modeling should avoid assuming 8.8, 10.9, 12.9, black oxide, or zinc plating unless a purchase record or drawing confirms it."
 how_to_make:
-  summary: "Treat as standard finished steel socket-head cap screw hardware: procure as DIN 912 / ISO 4762 M8 x 50-like fastener, or locally manufacture from steel wire/rod by heading the cylindrical socket head, forming the hex socket, rolling the thread, heat treating or finishing as required, and inspecting thread and drive geometry."
+  summary: "Treat as standard finished steel socket-head cap screw hardware: prepare as DIN 912 / ISO 4762 M8 x 50-like fastener, or locally manufacture from steel wire/rod by heading the cylindrical socket head, forming the hex socket, rolling the thread, heat treating or finishing as required, and inspecting thread and drive geometry"
   manufacturing_steps:
     - "Start with steel wire or rod stock sized for an M8 socket-head screw blank."
     - "Cold-head or otherwise form the cylindrical cap head and shank blank."
@@ -47,8 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a one-piece socket-head screw with hex socket and shank. Rotaloc describes cold heading as commonly used for screw heads and thread rolling as forming helical threads by rolling rather than cutting. Metric & Multistandard identifies DIN 912 socket head cap screws as stocked standard threaded fasteners. targeted_web_search: tried 'DIN 912 socket head cap screw M8x50 material steel class 8.8 12.9' and 'socket head cap screw manufacturing cold heading thread rolling heat treatment'; results provided standard-part and generic fastener-manufacturing evidence, but no row-specific manufacturing process for item 2AV5."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the row's standard socket-head screw identity and visible one-piece screw geometry."
-    - "Procurement as standard fastener hardware remains the most practical near-term route unless later KB work specifically models fastener production."
+    - "The inferred from the row's standard socket-head screw identity and visible one-piece screw geometry."
   uncertainty_notes:
     - "The row evidence does not resolve property class, coating, actual heat treatment, or whether the production route used cold heading versus machining for this specific screw."
 kb_implications:

@@ -44,10 +44,10 @@ how_to_make:
     - Deburr, inspect critical dimensions, and optionally anodize or otherwise finish if aluminum is used.
   source:
     url_or_path: research/ream250_bom/ream250_bom_row_0059_2AH__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AH_connection_mount.step
-    cited_fact_or_basis: "Rendered CAD views show a single-piece block-like mount with planar faces, milled pockets, and a central circular bore, all compatible with subtractive machining from bar or plate stock. targeted_web_search: searched \"2AH_connection_mount manufacturing\", \"R16-05T3-DEB-401-490 connection mount\", and \"R16 ballscrew connection mount drawing\"; no row-specific manufacturing route was found."
+    cited_fact_or_basis: "Rendered CAD views show a single-piece block-like mount with planar faces, milled pockets, and a central circular bore, all compatible with subtractive machining from bar or plate stock. targeted_web_search: searched \"2AH_connection_mount manufacturing\", \"R16-05T3-DEB-401-490 connection mount\", and \"R16 ballscrew connection mount drawing\" no row-specific manufacturing route was found."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - The CAD represents a one-piece custom mount, not an off-the-shelf purchased module.
+    - "The CAD represents a one-piece custom mount, not an off-the-shelf module"
     - CNC machining is preferred over casting or additive manufacturing because the geometry is prismatic with machined pockets and likely interface tolerances.
   uncertainty_notes:
     - Without a drawing, tolerances, surface finish, heat treatment, and final coating remain unknown.

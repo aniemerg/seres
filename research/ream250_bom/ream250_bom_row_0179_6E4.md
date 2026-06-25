@@ -43,10 +43,10 @@ how_to_make:
     - "Clean, passivate, or otherwise finish the stainless surface if the installed location contacts metal powder or process atmosphere."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6E4_plate_back.step; research/ream250_bom/ream250_bom_row_0179_6E4__views_2x2.png"
-    cited_fact_or_basis: "The STEP geometry measures 1.00 mm thick with an irregular flat plate outline; the CAD preview shows a thin plate with no visible multi-part assembly features. targeted_web_search: searched \"6E4_plate_back reAM250 material manufacturing\", \"6E4 6E4_plate_back\", and \"reAM250 plate_back stainless steel\"; found duplicate BOM text but no row-specific fabrication drawing or vendor manufacturing source."
+    cited_fact_or_basis: "The STEP geometry measures 1.00 mm thick with an irregular flat plate outline; the CAD preview shows a thin plate with no visible multi-part assembly features. targeted_web_search: searched \"6E4_plate_back reAM250 material manufacturing\", \"6E4 6E4_plate_back\", and \"reAM250 plate_back stainless steel\" found duplicate BOM text but no row-specific fabrication drawing or vendor manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "A flat 1 mm stainless plate is best treated as a sheet-cut part rather than a machined block or purchased calibrated module."
+    - "A flat 1 mm stainless plate is best treated as a sheet-cut part rather than a machined block or external calibrated module"
     - "Deburring and cleaning are included because thin stainless powder-system plates commonly need edge cleanup and surface cleanliness."
   uncertainty_notes:
     - "No row-specific fabrication drawing was found, so cut method, edge tolerance, and finish requirements remain inferred from geometry."

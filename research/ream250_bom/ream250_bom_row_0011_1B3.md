@@ -37,14 +37,14 @@ material:
   uncertainty_notes:
     - "No sourced alloy family or grade was found; downstream modeling should keep this broad until original CAD material, drawing, or build documentation is available."
 how_to_make:
-  summary: Make as a simple machined plate/flange from metal stock, or procure as a custom-cut local machine part from the CAD drawing.
+  summary: "Make as a simple machined plate/flange from metal stock"
   manufacturing_steps:
     - "Cut rectangular blank from approximately 10 mm metal plate or bar stock."
     - "Mill the perimeter, aperture/frame reliefs, diagonal rib or groove features, and any counterbored or through-hole details visible in the CAD."
     - "Deburr and inspect flatness, hole positions, and sealing/mating faces before assembly with the glass, seals, and adjacent frame parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1B3_flange_schlieren_imaging.step; research/ream250_bom/ream250_bom_row_0011_1B3__views_2x2.png; web_search"
-    cited_fact_or_basis: "The row-specific STEP and preview show a single thin rectangular flanged part, 80.00 x 10.00 x 160.00 mm, with holes and machined-looking frame features. targeted_web_search: queries tried: \"1B3_flange_schlieren_imaging manufacturing\", \"reAM250 flange_schlieren_imaging drawing\", and \"reAM250 1B3 flange schlieren\"; no row-specific manufacturing route or drawing notes were found."
+    cited_fact_or_basis: "The row-specific STEP and preview show a single thin rectangular flanged part, 80.00 x 10.00 x 160.00 mm, with holes and machined-looking frame features. targeted_web_search: queries tried: \"1B3_flange_schlieren_imaging manufacturing\", \"reAM250 flange_schlieren_imaging drawing\", and \"reAM250 1B3 flange schlieren\" no row-specific manufacturing route or drawing notes were found."
     evidence_basis: engineering_hypothesis
   assumptions:
     - "Machining from plate is selected as the plausible route because the CAD shape is prismatic and hole/relief features are accessible with common milling and drilling operations."

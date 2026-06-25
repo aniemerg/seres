@@ -36,9 +36,8 @@ material:
   uncertainty_notes:
     - "The product page states the media-contact material; it does not separately specify weld filler, surface treatment, or non-media-contact marking/finish materials."
 how_to_make:
-  summary: "Near-term route is procurement as Pfeiffer Vacuum order number 320RRB063-90; a local-manufacturing route would make a vacuum-compatible stainless 304/1.4301 ISO-K 90-degree elbow by forming or fabricating the elbow body, adding ISO-K flange interfaces, cleaning, and leak testing."
+  summary: "Would make a vacuum-compatible stainless 304/1.4301 ISO-K 90-degree elbow by forming or fabricating the elbow body, adding ISO-K flange interfaces, cleaning, and leak testing"
   manufacturing_steps:
-    - "Procure Pfeiffer Vacuum 320RRB063-90 or a row-equivalent DN 63 ISO-K stainless 304/1.4301 90-degree radius elbow for the current BOM."
     - "For local manufacture, form or bend stainless 304/1.4301 tube to the DN 63 90-degree elbow geometry, or fabricate the elbow from curved tube sections where bending is impractical."
     - "Fabricate/machine the ISO-K flange lips and weld or otherwise join them to both elbow ends with vacuum-compatible stainless joining practice."
     - "Clean/passivate wetted stainless surfaces, inspect flange geometry, and helium leak-test or pressure-test the finished elbow before installation with separate centering ring, seal, and clamp hardware."
@@ -47,8 +46,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row 112 provides the Pfeiffer Vacuum product identity and URL. The official Pfeiffer Vacuum Shop route identifies 320RRB063-90 as a standard DN 63 ISO-K 90-degree stainless 1.4301/304 elbow with pressure and temperature service data. The CAD preview shows a single flanged elbow body. targeted_web_search: searched '320RRB063-90 Pfeiffer Vacuum elbow manufacturing stainless 1.4301', 'Pfeiffer ISO-K 90 elbow DN63 fabrication stainless 304', and 'ISO-K vacuum elbow stainless leak tested manufacturing'; results resolved product identity, material, and vacuum service data but did not expose Pfeiffer's factory process for this specific elbow, so the local fabrication route is inferred from the row geometry and standard vacuum-piping practice."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the appropriate near-term route for this vendor-component BOM row."
-    - "A later local route can reuse generic stainless vacuum tube forming, flange machining, stainless joining, cleaning, and leak-test processes rather than treating this as a calibrated subsystem."
+    - "A later Manufacturing route can reuse generic stainless vacuum tube forming, flange machining, stainless joining, cleaning, and leak-test processes rather than treating this as a calibrated subsystem."
   uncertainty_notes:
     - "The accessible evidence does not specify Pfeiffer's exact tube-forming method, weld design, tooling, surface finish, passivation, or acceptance leak-rate for 320RRB063-90."
 kb_implications:

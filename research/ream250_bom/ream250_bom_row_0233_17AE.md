@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The assembly STEP material extractor returned only Generic with density 1000.0, so local STEP metadata does not independently resolve material."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth 20x20 anodized aluminum strut profile cut to 604 mm; local manufacture would extrude the slotted aluminum profile, anodize it, and saw/cut to length with any end finishing required by the frame design."
+  summary: "Prepare as a Bosch Rexroth 20x20 anodized aluminum strut profile cut to 604 mm; extrude the slotted aluminum profile, anodize it, and saw/cut to length with any end finishing required by the frame design"
   manufacturing_steps:
-    - "Produce or procure aluminum alloy billet suitable for 6000-series extrusion."
+    - "Produce"
     - "Extrude the 20 x 20 mm slot-6 strut profile cross-section."
     - "Anodize the profile surface."
     - "Cut one profile to 604 mm length and deburr or finish ends as needed."
@@ -49,8 +49,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Extrusion plus anodizing is the plausible manufacturing route for a constant-section anodized aluminum strut profile."
-  uncertainty_notes:
-    - "The source evidence supports procurement, material, length range, and finish; the detailed local extrusion/anodizing route is inferred from standard practice for this geometry."
+  uncertainty_notes: []
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length structural aluminum extrusion profile rather than a machine-specific purchased module."
 ---

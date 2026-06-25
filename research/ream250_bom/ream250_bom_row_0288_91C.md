@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The export does not specify a more exact steel grade such as S235JR, so the material should remain mild steel unless later vendor or drawing evidence narrows it."
 how_to_make:
-  summary: "Procure or locally make as a DIN 59370-style bright square-edge equal steel angle, 50 x 50 x 5 mm nominal section, then cut to 200 mm length and deburr the cut ends."
+  summary: "Locally make as a DIN 59370-style bright square-edge equal steel angle, 50 x 50 x 5 mm nominal section, then cut to 200 mm length and deburr the cut ends"
   manufacturing_steps:
     - "Start from mild-steel flat/strip or commercial bright square-edge equal angle stock."
     - "Form the sharp-edged L profile by rolling, press-brake forming, or equivalent profile-forming operation suitable for 5 mm steel."
@@ -48,7 +48,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The 50x5_200 filename is interpreted as 50 x 50 x 5 mm equal angle cut to 200 mm, consistent with the CAD bounding box and measured volume."
-    - "The local manufacturing route is inferred from common steel angle/profile production and cut-to-length practice, not from a row-specific process drawing."
+    - "The inferred from common steel angle/profile production and cut-to-length practice, not from a row-specific process drawing."
   uncertainty_notes:
     - "The exact original supply route, surface finish, and forming process are not specified by the BOM row."
 kb_implications:

@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The assembly STEP metadata returned only Generic material with density 1000.0, so material is taken from the row-matched official shop route rather than local STEP metadata."
 how_to_make:
-  summary: "Procure as a standard Pfeiffer Vacuum DN 100 ISO-K stainless full nipple. A plausible local route is to make it from 1.4301/304 stainless tube and ISO-K flange geometry, then weld, clean, and helium leak test it for vacuum service."
+  summary: "Prepare as a standard Pfeiffer Vacuum DN 100 ISO-K stainless full nipple. make it from 1.4301/304 stainless tube and ISO-K flange geometry, then weld, clean, and helium leak test it for vacuum service"
   manufacturing_steps:
     - "Cut stainless steel 1.4301/304 tube or rolled tube stock to the required 108 mm nominal length."
     - "Form or machine DN 100 ISO-K flange lips/rings with the required sealing interface at both ends."
@@ -43,10 +43,10 @@ how_to_make:
     - "Inspect ISO-K interface dimensions and perform vacuum leak testing before installation."
   source:
     url_or_path: "https://vacuum-shop.com/shop/en_US/category/2073061/iso-k-full-nipple.html; https://www.pfeiffervacuum.com/global/en/products/components-accessories/vacuum-components/; research/ream250_bom/ream250_bom_row_0138_3Q1__views_2x2.png"
-    cited_fact_or_basis: "The row-matched official shop route identifies 320RZS100 as a DN 100 ISO-K full nipple in stainless steel 1.4301/304 with A 108 mm and B 102 mm dimensions. Pfeiffer's vacuum components page states piping components provide stable secure pathways for volume flows, flanges join and seal vacuum-system parts, and components undergo helium leak testing. The rendered CAD contact sheet shows a straight cylindrical nipple with flange lips at both ends. targeted_web_search: searched \"320RZS100 weight\", \"320RZS100 mass\", \"320RZS100 datasheet manufacturing\", and \"Pfeiffer 320RZS100 full nipple material weight\"; found row-matched function, material, and dimensions but no row-specific manufacturing-process statement or catalog weight."
+    cited_fact_or_basis: "The row-matched official shop route identifies 320RZS100 as a DN 100 ISO-K full nipple in stainless steel 1.4301/304 with A 108 mm and B 102 mm dimensions. Pfeiffer's vacuum components page states piping components provide stable secure pathways for volume flows, flanges join and seal vacuum-system parts, and components undergo helium leak testing. The rendered CAD contact sheet shows a straight cylindrical nipple with flange lips at both ends. targeted_web_search: searched \"320RZS100 weight\", \"320RZS100 mass\", \"320RZS100 datasheet manufacturing\", and \"Pfeiffer 320RZS100 full nipple material weight\" found row-matched function, material, and dimensions but no row-specific manufacturing-process statement or catalog weight."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the stainless ISO-K full-nipple geometry and common vacuum piping fabrication practice."
+    - "The inferred from the stainless ISO-K full-nipple geometry and common vacuum piping fabrication practice."
     - "Helium leak testing is included because the row is a vacuum component and Pfeiffer describes leak testing as a general vacuum-component quality practice."
   uncertainty_notes:
     - "The vendor/CAD evidence resolves product family, material, and interface geometry, but not the actual Pfeiffer fabrication sequence, weld details, surface finish, or acceptance limit for this specific part number."

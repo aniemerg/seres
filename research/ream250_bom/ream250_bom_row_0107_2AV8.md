@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The BOM row does not state a DIN/ISO property class, coating, or corrosion-resistant grade; mild steel should not be treated as a verified strength class for later structural calculations."
 how_to_make:
-  summary: "Use as a standard DIN 912 socket head cap screw; procure from standard fastener supply when allowed, or manufacture locally from steel wire/bar by heading the cylindrical socket head, forming the internal hex socket, rolling or cutting the M8 x 1 thread, finishing, and inspecting thread and drive geometry."
+  summary: "Use as a standard DIN 912 socket head cap screw"
   manufacturing_steps:
     - "Select mild steel or later-resolved cap-screw steel stock sized for an M8 socket head screw blank."
     - "Cold-head or machine the cylindrical head and shank blank."
@@ -46,11 +46,11 @@ how_to_make:
     - "Inspect thread fit, head diameter and height, socket drive size, overall length, and visual thread quality."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AV8_DIN 912 - M8x1x25x22,5.step; research/ream250_bom/ream250_bom_row_0107_2AV8__views_2x2.png; https://accu-components.com/us/metric-cap-head-screws/386837-SSCF-M8-25-12-9-Z; https://www.metricmcc.com/socket-head-cap-screws"
-    cited_fact_or_basis: "BOM/CAD identify the row as a DIN 912 M8 x 1 x 25 socket head cap screw and show the threaded shank plus hex socket. targeted_web_search: queries tried were \"DIN 912 socket head cap screw M8 material property class manufacturing thread rolling\" and \"DIN 912 cylinder head cap screw socket head cap screw standard material property class\"; results found standard fastener pages for DIN 912/socket head cap screws and material/property-class families, but no row-specific 2AV8 manufacturing drawing or process route."
+    cited_fact_or_basis: "BOM/CAD identify the row as a DIN 912 M8 x 1 x 25 socket head cap screw and show the threaded shank plus hex socket. targeted_web_search: queries tried were \"DIN 912 socket head cap screw M8 material property class manufacturing thread rolling\" and \"DIN 912 cylinder head cap screw socket head cap screw standard material property class\" results found standard fastener pages for DIN 912/socket head cap screws and material/property-class families, but no row-specific 2AV8 manufacturing drawing or process route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The row is treated as standard reusable fastener hardware rather than a custom machined reAM250 part."
-    - "The local manufacturing route is inferred from the screw geometry and common socket-head screw production practice; procurement remains the practical route until local fastener production is modeled."
+    - "The inferred from the screw geometry and common socket-head screw production practice"
   uncertainty_notes:
     - "Property class, heat treatment, surface finish, and coating are unresolved; those choices affect whether the manufacturing route needs high-strength alloy steel and controlled heat treatment rather than generic mild-steel screw production."
 kb_implications:

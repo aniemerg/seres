@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - Material grade is unresolved at the level needed for manufacturing; later KB work should split housing, bearing, circlip, and seal materials if a catalog drawing or teardown source is found.
 how_to_make:
-  summary: Best current route is procurement as a HIWIN SLA10-class supported bearing unit; a plausible local route would fabricate the support housing, procure or manufacture a 6200.2RS bearing, add the circlip/seals, and assemble/inspect the bearing block.
+  summary: "Fabricate the support housing, Manufacture a 6200.2RS bearing, add the circlip/seals, and assemble/inspect the bearing block"
   manufacturing_steps:
-    - Procure a HIWIN SLA10 or dimensionally equivalent 16 mm supported bearing unit for near-term modeling.
     - For local manufacture, machine or cast the bearing housing to the 86 mm x 24 mm x 58 mm envelope with mounting features and a bearing seat.
     - Install a 6200.2RS bearing and circlip, then check bore alignment, shaft fit, and radial support function in the bottom-axis assembly.
   source:
@@ -48,8 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The vendor page identifies a ready-made SLA10 supported bearing with dimensions and 6200.2RS bearing type. The preview shows a compact bearing block with central bore and mounting ears. The detailed machining/casting and assembly route is inferred from geometry and standard bearing-block construction rather than stated by a source. targeted_web_search: tried 'HIWIN SLA10 manufacturing housing material', 'HIWIN SLA10 datasheet material', and 'SLA10 bearing block material'; results did not provide a row-specific manufacturing process."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - Procurement is acceptable for current KB planning because no sub-BOM or process specification is available for this bearing unit.
-    - The inferred local route assumes conventional bearing-block construction: machined/cast housing plus installed rolling bearing and retainer hardware.
+    - The inferred Manufacturing route assumes conventional bearing-block construction: machined/cast housing plus installed rolling bearing and retainer hardware.
   uncertainty_notes:
     - Without a manufacturer drawing or teardown, local manufacturing details such as heat treatment, fits/tolerances, housing alloy, seal material, and bearing preload are not resolved.
 kb_implications:

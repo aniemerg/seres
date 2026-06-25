@@ -46,10 +46,10 @@ how_to_make:
     - "Deburr, clean, and inspect the plate against the Z-axis assembly interfaces before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AB_right_support_plate.step; research/ream250_bom/ream250_bom_row_0034_2AB__views_2x2.png"
-    cited_fact_or_basis: "FreeCAD measured a 135.00 x 218.60 x 23.00 mm one-solid part. The rendered contact sheet shows a wedge-like support plate/web and a row of through holes on one narrow face. targeted_web_search: searched \"2AB_right_support_plate manufacturing\", \"reAM250 right support plate drawing\", \"reAM250 2AB support plate\", and \"Renishaw AM250 support plate material\"; results did not provide a row-specific manufacturing drawing or process specification."
+    cited_fact_or_basis: "FreeCAD measured a 135.00 x 218.60 x 23.00 mm one-solid part. The rendered contact sheet shows a wedge-like support plate/web and a row of through holes on one narrow face. targeted_web_search: searched \"2AB_right_support_plate manufacturing\", \"reAM250 right support plate drawing\", \"reAM250 2AB support plate\", and \"Renishaw AM250 support plate material\" results did not provide a row-specific manufacturing drawing or process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the simple monolithic machined-plate geometry rather than from a sourced process note."
+    - "The inferred from the simple monolithic machined-plate geometry rather than from a sourced process note."
     - "The hole pattern is assumed to be a mechanical mounting interface requiring normal machined-part tolerances rather than precision bearing races."
   uncertainty_notes:
     - "Exact tolerances, surface finish, heat treatment, and whether any holes are threaded are not specified by the BOM or CAD preview."

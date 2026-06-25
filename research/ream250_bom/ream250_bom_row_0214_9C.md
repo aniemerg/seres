@@ -48,7 +48,7 @@ how_to_make:
     - "Deburr edges and verify flatness, thickness, and hole location before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/9C_top_spacer.step; research/ream250_bom/ream250_bom_row_0214_9C__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "The STEP is one solid with an 80.00 x 10.00 x 80.00 mm bounding box; the contact-sheet preview shows a square spacer-like plate with a central through-hole and X-shaped ribs or relief features. targeted_web_search: searched \"9C_top_spacer manufacturing\", \"reAM250 9C_top_spacer drawing\", and \"reAM250 top spacer CAD\"; found duplicate BOM/project pages and no row-specific manufacturing drawing or process source."
+    cited_fact_or_basis: "The STEP is one solid with an 80.00 x 10.00 x 80.00 mm bounding box; the contact-sheet preview shows a square spacer-like plate with a central through-hole and X-shaped ribs or relief features. targeted_web_search: searched \"9C_top_spacer manufacturing\", \"reAM250 9C_top_spacer drawing\", and \"reAM250 top spacer CAD\" found duplicate BOM/project pages and no row-specific manufacturing drawing or process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A subtractive plate or billet route is selected because the geometry is a compact prismatic spacer with simple external dimensions and one visible circular through-feature."

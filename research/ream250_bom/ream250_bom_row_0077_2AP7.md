@@ -44,10 +44,10 @@ how_to_make:
     - "Deburr, clean, and inspect platform flatness, thickness, and fit in the Z-axis/build-platform assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AP7_lifting_platform.step; research/ream250_bom/ream250_bom_row_0077_2AP7__views_2x2.png; web search"
-    cited_fact_or_basis: "CAD and preview show a thin 250 x 250 x 10 mm square plate-like part with a central square opening. targeted_web_search: searched \"2AP7_lifting_platform manufacturing\", \"reAM250 2AP7 lifting_platform\", and \"Hexagon head bolts Product grade C lifting platform\"; no row-specific manufacturing specification was found."
+    cited_fact_or_basis: "CAD and preview show a thin 250 x 250 x 10 mm square plate-like part with a central square opening. targeted_web_search: searched \"2AP7_lifting_platform manufacturing\", \"reAM250 2AP7 lifting_platform\", and \"Hexagon head bolts Product grade C lifting platform\" no row-specific manufacturing specification was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a low-complexity plate component rather than a purchased calibrated module."
+    - "The part is treated as a low-complexity plate component rather than a external calibrated module"
     - "CNC machining or abrasive/waterjet cutting plus finish machining is sufficient for a coarse KB manufacturing route."
   uncertainty_notes:
     - "Actual production could use a supplier-specific process or material/finish requirement not present in the BOM or STEP metadata."

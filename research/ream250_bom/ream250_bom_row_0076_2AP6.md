@@ -37,14 +37,14 @@ material:
   uncertainty_notes:
     - "Material family is broad; downstream modeling should not assume a specific grade such as NBR, EPDM, silicone, or FKM without further source evidence."
 how_to_make:
-  summary: "Procure as a custom flat gasket, or locally cut the square frame from 5 mm elastomer sheet using knife cutting, die cutting, waterjet cutting, or similar flat-gasket cutting."
+  summary: "Prepare as a custom flat gasket, or locally cut the square frame from 5 mm elastomer sheet using knife cutting, die cutting, waterjet cutting, or similar flat-gasket cutting"
   manufacturing_steps:
     - "Select an elastomer sheet compatible with the thermal, powder, and compression environment."
     - "Cut the outer square and inner opening to the CAD profile from approximately 5 mm sheet."
     - "Deburr/clean the cut edges and inspect fit against the mating 2AP plates or guides."
   source:
     url_or_path: "https://www.stockwell.com/custom-gaskets/; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AP6_inner_seal.step"
-    cited_fact_or_basis: "CAD shows a flat 250.00 mm x 250.00 mm x 5.00 mm square frame. Stockwell describes custom gasket manufacturing using molding, waterjet cutting, laminating, die cutting, and custom silicone gasket capability. targeted_web_search: queries tried: \"custom flat rubber gasket die cut sheet manufacturing\", \"square frame rubber gasket custom die cut sheet\"; result: generic custom flat-gasket suppliers support the route, but no 2AP6-specific manufacturing source was found."
+    cited_fact_or_basis: "CAD shows a flat 250.00 mm x 250.00 mm x 5.00 mm square frame. Stockwell describes custom gasket manufacturing using molding, waterjet cutting, laminating, die cutting, and custom silicone gasket capability. targeted_web_search: queries tried: \"custom flat rubber gasket die cut sheet manufacturing\", \"square frame rubber gasket custom die cut sheet\" result: generic custom flat-gasket suppliers support the route, but no 2AP6-specific manufacturing source was found."
     evidence_basis: engineering_hypothesis
   assumptions:
     - "Cut-from-sheet manufacturing is suitable because the row geometry is a simple flat frame without molded lips or integrated hardware."

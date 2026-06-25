@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The local row metadata resolves aluminum, but the exact Bosch material number for this 350 mm cut length is not present in the BOM row."
 how_to_make:
-  summary: "Procure as Bosch Rexroth modular aluminum profile cut to 350 mm, or locally manufacture by aluminum extrusion followed by cut-to-length finishing."
+  summary: "Prepare as Bosch Rexroth modular aluminum profile cut to 350 mm, or locally manufacture by aluminum extrusion followed by cut-to-length finishing"
   manufacturing_steps:
     - "Extrude aluminum alloy billet through a 60 x 60 T-slot profile die."
     - "Straighten, age/temper, and apply the profile surface finish or anodized finish appropriate for the Rexroth profile family."
@@ -49,7 +49,6 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A constant cross-section 60 x 60 T-slot member is most plausibly produced by extrusion and then cut to length."
-    - "Procurement is the near-term route because this is a standard Bosch Rexroth framing component."
   uncertainty_notes:
     - "The result does not resolve end machining, tapped holes, or special cut-face treatment; the rendered CAD preview shows no obvious extra end features beyond the cut profile."
 kb_implications:

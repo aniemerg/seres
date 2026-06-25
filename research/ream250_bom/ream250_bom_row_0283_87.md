@@ -36,10 +36,9 @@ material:
   uncertainty_notes:
     - "The source resolves the wetted fitting material; it does not separately specify any surface finish or passivation."
 how_to_make:
-  summary: "Best modeled as a procured ISO-KF reducer tee; plausible local manufacture would form or machine stainless 304 tube/flange features, join the reduced DN16 branch to the DN40 run, finish sealing faces, and inspect for vacuum leakage."
+  summary: "Form or machine stainless 304 tube/flange features, join the reduced DN16 branch to the DN40 run, finish sealing faces, and inspect for vacuum leakage"
   manufacturing_steps:
-    - "Procurement route: buy Pfeiffer Vacuum 120RTR040-016 or an equivalent DN 40 ISO-KF to DN 16 ISO-KF stainless 304 reducing tee."
-    - "Local route: cut stainless 304 tube blanks for the DN40 run and DN16 branch."
+    - "Manufacturing route: cut stainless 304 tube blanks for the DN40 run and DN16 branch."
     - "Form or machine ISO-KF lip/flange sealing interfaces to the row dimensions."
     - "Weld or braze the reduced branch into the main tube, then clean, passivate if required, and leak-test the fitting."
   source:
@@ -47,9 +46,9 @@ how_to_make:
     cited_fact_or_basis: "The Pfeiffer BOM URL identifies a commercially supplied stainless 1.4301/304 reducing tee with DN 40 ISO-KF to DN 16 ISO-KF interfaces. The supplied STEP/contact sheet shows a tee-shaped metal tube with KF flange lips; the detailed local fabrication sequence is inferred from that geometry."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from standard stainless vacuum fitting geometry rather than a Pfeiffer process disclosure."
+    - "The inferred from standard stainless vacuum fitting geometry rather than a Pfeiffer process disclosure."
   uncertainty_notes:
-    - "targeted_web_search: searched `Pfeiffer 120RTR040-016 manufacturing process stainless reducing tee`, `120RTR040-016 datasheet material dimensions`, and `ISO-KF stainless reducing tee fabrication`; row-matched results resolved procurement, dimensions, and material but did not provide a manufacturer process route."
+    - "Targeted_web_search: searched `Pfeiffer 120RTR040-016 manufacturing process stainless reducing tee`, `120RTR040-016 datasheet material dimensions`, and `ISO-KF stainless reducing tee fabrication`"
 kb_implications:
   - "item_granularity: simple_part - Treat as reusable standard ISO-KF stainless vacuum plumbing hardware rather than a reAM250-specific assembly or calibrated module."
 ---

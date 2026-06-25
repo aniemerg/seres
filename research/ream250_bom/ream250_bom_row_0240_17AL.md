@@ -40,14 +40,14 @@ material:
 how_to_make:
   summary: "Fabricate as a custom flat sheet-metal side panel: cut a 2 mm rectangular blank to the CAD envelope, deburr the edges, apply any required finish, and install as one of the chamber/enclosure side sheets."
   manufacturing_steps:
-    - "Procure 2 mm sheet-metal stock large enough for the 468.70 x 457.50 mm face."
+    - "Prepare 2 mm sheet-metal stock large enough for the 468.70 x 457.50 mm face"
     - "Cut the rectangular panel by shear, laser, waterjet, CNC router, or saw from sheet stock."
     - "Deburr and inspect edges for flatness and fit."
     - "Apply coating, brushing, passivation, or other finish if required by the final enclosure material."
     - "Install two panels in the chamber/enclosure assembly as indicated by the BOM quantity."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17AL_sheet_side.step; research/ream250_bom/ream250_bom_row_0240_17AL__views_2x2.png"
-    cited_fact_or_basis: "The STEP/preview show one flat 2.00 mm thick rectangular sheet solid with no visible bends, holes, slots, flanges, attached hardware, calibrated module features, or formed geometry. targeted_web_search: searched \"17AL_sheet_side manufacturing\", \"reAM250 sheet side drawing\", and \"reAM250 side sheet material\"; results did not provide row-specific fabrication instructions."
+    cited_fact_or_basis: "The STEP/preview show one flat 2.00 mm thick rectangular sheet solid with no visible bends, holes, slots, flanges, attached hardware, calibrated module features, or formed geometry. targeted_web_search: searched \"17AL_sheet_side manufacturing\", \"reAM250 sheet side drawing\", and \"reAM250 side sheet material\" results did not provide row-specific fabrication instructions."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Flat-sheet cutting is sufficient because the CAD bounding box thickness is 2.00 mm and the preview shows a plain rectangular panel."

@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "Material family is broad only; downstream KB modeling should not select a specific grade without checking the full gas-outlet assembly design intent."
 how_to_make:
-  summary: "Fabricate as a small formed sheet/plate gas-outlet panel, or procure as part of the reAM250 gas-outlet fabrication package."
+  summary: "Fabricate as a small formed sheet/plate gas-outlet panel"
   manufacturing_steps:
     - "Cut a thin metal blank to the CAD profile from sheet or plate stock."
     - "Form the bends/faceted faces shown in the STEP geometry."
@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD preview shows a thin bent/faceted panel without visible purchased-module features; FreeCAD reports one solid with small sheet-like volume. targeted_web_search: tried 'reAM250 3S43 gas outlet part 3 material', '\"3S43\" \"gas outlet\" \"reAM250\"', '\"gas outlet: part 3\" \"3S43\"', and '\"reAM250\" \"gas outlet\"'; no source stated the manufacturing route for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Sheet cutting and forming are the most plausible local route for a thin one-piece gas-outlet panel with the observed folded geometry."
+    - "Sheet cutting and forming are the most plausible Manufacturing route for a thin one-piece gas-outlet panel with the observed folded geometry."
   uncertainty_notes:
     - "The CAD preview is sufficient for route triage but not for bend radius, thickness, tolerance, or surface-finish requirements."
 kb_implications:

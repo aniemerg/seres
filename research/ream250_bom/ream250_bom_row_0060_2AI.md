@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "The catalog material resolves the ball-screw nut body, not detailed material splits for balls, return pieces, or wiper material."
 how_to_make:
-  summary: "Best near-term route is procurement as a Karl Hipp precision ball-screw flange-nut/connection-axis component matched to the KGT-F1-16-04 family. A plausible local route would start from bearing-steel bar or forging, rough turn the cylindrical and flange features, drill the bolt circle and central bore, grind the ball track/thread geometry, heat treat to about 60 HRC, finish grind/lap bearing surfaces, install balls/return/wiper elements if part of the delivered nut, and inspect lead, preload/axial play, and flange interfaces."
+  summary: "Start from bearing-steel bar or forging, rough turn the cylindrical and flange features, drill the bolt circle and central bore, grind the ball track/thread geometry, heat treat to about 60 HRC, finish grind/lap bearing surfaces, install balls/return/wiper elements if part of the delivered nut, and inspect lead, preload/axial play, and flange interfaces"
   manufacturing_steps:
-    - "Procure the row-matched Karl Hipp KGT-F1 16-04 family component or custom connection-axis variant for accurate preload, ball-track geometry, and inspection records."
     - "For local manufacture, rough-machine 100Cr6 bearing-steel stock to the flanged cylindrical CAD envelope."
     - "Drill and finish the six flange mounting holes and central bore visible in the row STEP."
     - "Generate and grind the ball-screw nut race/thread geometry, then harden and finish-grind to precision ball-screw tolerances."
@@ -50,8 +49,7 @@ how_to_make:
     cited_fact_or_basis: "The row-matched Karl Hipp page identifies a precision F1 flange-nut family and lists F1 16-04 ordering parameters and performance data. The Hipp catalog states ball tracks are ground after heat treatment and that nut material is 100Cr6 hardened to 60 +/-2 HRC. The CAD preview shows the flanged cylindrical mounting form. targeted_web_search: searched 'Karl Hipp KGT-F1 16-04 material', 'R16-05T3-DEB-401-490 Karl Hipp', and 'Karl Hipp 100Cr6 ballscrew nut manufacturing'; results resolved product-family material and precision ball-screw catalog context but no row-specific manufacturing drawing for the custom connection axis."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is preferred for KB planning because ball-screw nut race grinding, heat treatment, preload control, and inspection are specialized precision workflows."
-    - "The local route extrapolates common precision ball-screw-nut manufacturing steps from the sourced hardened, ground ball-track facts and visible flange geometry."
+    - "The manufacturing route extrapolates common precision ball-screw-nut manufacturing steps from the sourced hardened, ground ball-track facts and visible flange geometry."
   uncertainty_notes:
     - "The exact custom operations for the R16-05T3-DEB-401-490 connection-axis variant are not published in the sources checked."
 kb_implications:

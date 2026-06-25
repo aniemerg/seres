@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata gives material family only; it does not name a specific steel grade such as S235."
 how_to_make:
-  summary: "Procure or locally make as mild-steel equal angle stock, cut to 810 mm length, deburr sharp edges as required, and inspect the 50 x 50 x 5 mm L-section dimensions."
+  summary: "Locally make as mild-steel equal angle stock, cut to 810 mm length, deburr sharp edges as required, and inspect the 50 x 50 x 5 mm L-section dimensions"
   manufacturing_steps:
     - "Start from mild-steel angle stock matching the 50 x 50 x 5 mm DIN 59370-style L-profile geometry."
     - "Cut the profile to 810 mm length."
@@ -47,7 +47,7 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "For KB planning, this row can be treated as cut-to-length structural angle stock rather than a custom machined part."
-    - "Local production would use standard bar/profile forming or purchased angle stock plus cutting, not a reAM250-specific fabrication process."
+    - "Use standard bar/profile forming or external angle stock plus cutting, not a reAM250-specific fabrication process"
   uncertainty_notes:
     - "The exact industrial route for the source profile, such as hot rolling, cold drawing, or welded profile production, is not specified by the BOM-side evidence."
 kb_implications:

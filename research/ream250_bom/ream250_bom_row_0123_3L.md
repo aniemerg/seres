@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Local STEP material metadata is placeholder Generic, so it does not independently confirm the stainless grades."
 how_to_make:
-  summary: "Procure as Pfeiffer/Busch 320SWN063-0750, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K 304 flanges joined to a 316L bellows tube, followed by cleaning and leak testing."
+  summary: "Prepare as Pfeiffer/Busch 320SWN063-0750, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K 304 flanges joined to a 316L bellows tube, followed by cleaning and leak testing"
   manufacturing_steps:
     - "Form or source a thin-wall 316L stainless corrugated bellows tube to the 750 mm nominal hose length."
     - "Machine or form two stainless 1.4301/304 ISO-K DN 63 flange end pieces."
@@ -48,8 +48,8 @@ how_to_make:
     cited_fact_or_basis: "The official exact-product route and datasheet identify a DN 63 ISO-K stainless flexible corrugated hose with 750 mm length, and the STEP measurement confirms the 750 mm hose envelope. targeted_web_search: searched 'Pfeiffer 320SWN063-0750 manufacturing corrugated hose stainless bellows', '320SWN063-0750 datasheet material flange bellows', and 'ISO-K DN63 corrugated hose manufacturing stainless bellows welded flange'; found row-matched product and material facts but no Pfeiffer factory operation sheet for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
-    - "The preferred KB route is procurement as a standard vendor vacuum component unless the model later adds bellows forming, precision welding, cleaning, and leak-test capabilities."
+    - "The manufacturing route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
+    - "Model later adds bellows forming, precision welding, cleaning, and leak-test capabilities"
   uncertainty_notes:
     - "Exact factory details such as hydroforming versus mechanical convolution forming, weld process, post-weld cleaning, and acceptance leak-rate specification are unresolved."
 kb_implications:

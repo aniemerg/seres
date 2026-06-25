@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The exact Rexroth material number and any order-specific finish variant are not present in the BOM row, so the material is stated at profile-family precision rather than as a unique part-number grade."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth cut-to-length 20 x 20 aluminum strut profile, or locally reproduce by extruding the matching slotted aluminum profile, cutting to 110 mm, deburring the ends, and applying an anodized or equivalent protective finish."
+  summary: "Prepare as a Bosch Rexroth cut-to-length 20 x 20 aluminum strut profile, or locally reproduce by extruding the matching slotted aluminum profile, cutting to 110 mm, deburring the ends, and applying an anodized or equivalent protective finish"
   manufacturing_steps:
     - "Extrude an aluminum Al-Mg-Si structural profile through a die matching the 20 x 20 mm slotted cross-section."
     - "Cut the extrusion to the 110 mm row length shown by the STEP bounding box."
@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row evidence identifies a Bosch Rexroth strut profile, CAD preview shows a constant 20 x 20 mm slotted extrusion, and Bosch Rexroth technical data states the aluminum strut-profile material family and anodizing data. targeted_web_search: tried 'Bosch Rexroth strut profile 20x20 material aluminum mass kg m', 'site:boschrexroth.com strut profile 20x20 Bosch Rexroth material', and 'Bosch Rexroth Strebenprofil 20x20 Material'; results matched Bosch Rexroth profile-family and catalog/distributor pages, but did not provide a row-specific local manufacturing process for this cut segment."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Aluminum extrusion plus cut-to-length finishing is the plausible local manufacturing route for a constant-section slotted structural profile."
+    - "Aluminum extrusion plus cut-to-length finishing is the plausible Manufacturing route for a constant-section slotted structural profile."
   uncertainty_notes:
     - "The CAD and profile-family evidence do not specify die details, temper control, anodizing thickness, cut tolerance, or any end-machining requirements for this row."
 kb_implications:

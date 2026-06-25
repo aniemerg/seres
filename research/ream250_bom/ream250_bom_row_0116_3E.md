@@ -35,15 +35,14 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Best modeled as a purchased Pfeiffer ISO-KF seal/filter consumable. A plausible local route would form or machine the stainless centering ring, produce or buy the sintered bronze filter disk, mold or procure the FKM O-ring, clean for vacuum service, and assemble the ring/filter/O-ring stack."
+  summary: "Best modeled as a external Pfeiffer ISO-KF seal/filter consumable. form or machine the stainless centering ring, produce"
   manufacturing_steps:
     - "Machine or form the stainless 1.4301/304 centering ring to DN 40 ISO-KF dimensions."
-    - "Press and sinter bronze powder into the filter disk or procure a sintered bronze disk with about 0.02 mm average pore size."
-    - "Mold, cure, and inspect the FKM O-ring, or procure a standard compatible O-ring."
+    - "Mold, cure, and inspect the FKM O-ring"
     - "Clean parts for vacuum compatibility and assemble the filter disk and O-ring into the centering ring."
     - "Inspect fit, sealing surfaces, and filter integrity before installation."
   source:
-    url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/122ZRS040 ; https://vacuum-shop.com/shop/en_US/category/2072858/product/122zrs040/centering-ring-with-sintered-metal-filter-stainless-steel-1-4301-304.html ; research/ream250_bom/ream250_bom_row_0116_3E__views_2x2.png"
+    url_or_path: "https://www.pfeiffer-vacuum.com/global/de/shop/products/122ZRS040; https://vacuum-shop.com/shop/en_US/category/2072858/product/122zrs040/centering-ring-with-sintered-metal-filter-stainless-steel-1-4301-304.html; research/ream250_bom/ream250_bom_row_0116_3E__views_2x2.png"
     cited_fact_or_basis: "Vendor pages identify the row as a DN 40 ISO-KF centering ring with stainless ring, sintered bronze filter, and FKM O-ring; the rendered CAD preview shows a shallow annular ring/filter geometry. targeted_web_search: queries tried: '122ZRS040 Pfeiffer weight', '122ZRS040 datasheet centering ring sintered metal filter DN 40 ISO-KF weight', 'Pfeiffer 122ZRS040 PDF', and 'ISO-KF centering ring sintered bronze filter manufacturing'; results resolved product identity, materials, dimensions, and pore size but did not provide a row-specific manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:

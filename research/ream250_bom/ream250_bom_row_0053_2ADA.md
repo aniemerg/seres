@@ -54,7 +54,7 @@ how_to_make:
     - "The part is a bearing ball rather than a spacer or decorative spherical feature."
     - "A conventional precision bearing-ball manufacturing route is used because the CAD shape and BOM context imply a rolling contact component."
   uncertainty_notes:
-    - "targeted_web_search: searched \"2ADA_part_A axis bearing top material\", \"2ADA axis bearing top reAM250 material\", and \"reAM250 axis bearing top bearing ball material\"; found no row-specific manufacturing drawing or process specification."
+    - "Targeted_web_search: searched \"2ADA_part_A axis bearing top material\", \"2ADA axis bearing top reAM250 material\", and \"reAM250 axis bearing top bearing ball material\" found no row-specific manufacturing drawing or process specification."
     - "The required tolerance grade and surface-finish class are not specified by the BOM or CAD export."
 kb_implications:
   - "item_granularity: simple_part - model as one small rolling bearing element; later KB work can reuse a generic bearing_ball_5mm-style part rather than creating row-specific 2AD variants."

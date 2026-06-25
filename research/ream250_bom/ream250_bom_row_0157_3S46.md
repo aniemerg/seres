@@ -45,7 +45,7 @@ how_to_make:
     - "Attach or retain it in the larger gas outlet assembly by the assembly method used for the neighboring outlet parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S46_part_6.step; research/ream250_bom/ream250_bom_row_0157_3S46__views_2x2.png; web search"
-    cited_fact_or_basis: "CAD preview and dimensions show a thin bent panel/vane with sheet-like proportions and no visible complex machined bores or standard hardware features. targeted_web_search: queries tried: \"3S46\" \"gas outlet\" reAM250; \"3S46_part_6\"; \"Renishaw AM250\" \"gas outlet\" material; \"reAM250\" \"gas outlet\". Result: no row-specific manufacturing drawing or process note was found."
+    cited_fact_or_basis: "CAD preview and dimensions show a thin bent panel/vane with sheet-like proportions and no visible complex machined bores or standard hardware features. targeted_web_search: queries tried: \"3S46\" \"gas outlet\" reAM250; \"3S46_part_6\" \"Renishaw AM250\" \"gas outlet\" material; \"reAM250\" \"gas outlet\". Result: no row-specific manufacturing drawing or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Sheet cutting plus bending is selected because it matches the thin folded geometry more closely than billet machining or additive manufacture."

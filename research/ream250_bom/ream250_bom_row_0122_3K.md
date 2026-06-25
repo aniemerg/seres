@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "Assembly STEP material metadata for this CAD object is only 'Generic' at density 1000, so embedded CAD material is not usable."
 how_to_make:
-  summary: "Procure as Pfeiffer 320SWN063-0250, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K stainless flanges welded to a 316L bellows tube, followed by cleaning and leak testing."
+  summary: "Prepare as Pfeiffer 320SWN063-0250, or manufacture locally as a stainless corrugated vacuum hose with DN 63 ISO-K stainless flanges welded to a 316L bellows tube, followed by cleaning and leak testing"
   manufacturing_steps:
     - "Form or source a thin-wall 316L stainless corrugated bellows tube to the 250 mm nominal hose length."
     - "Machine or form stainless 1.4301/304 ISO-K DN 63 flange end pieces."
@@ -49,8 +49,7 @@ how_to_make:
     cited_fact_or_basis: "The official exact-product route identifies a DN 63 ISO-K stainless flexible corrugated hose with 250 mm length, and the STEP measurement confirms a 250 mm long, roughly DN 63 hose envelope. targeted_web_search: searched 'Pfeiffer 320SWN063-0250 manufacturing corrugated hose stainless bellows', '320SWN063-0250 datasheet material flange bellows', and 'ISO-K DN63 corrugated hose manufacturing stainless bellows welded flange'; found row-matched product/material facts but no Pfeiffer factory process sheet for this row."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published operation sheet."
-    - "The row is better procured as a standard vendor vacuum component unless local bellows forming, weld cleanliness, and leak-test capability are modeled."
+    - "The manufacturing route follows common stainless vacuum bellows hose fabrication practice inferred from the product geometry and material, not a Pfeiffer-published operation sheet."
   uncertainty_notes:
     - "Exact factory details such as hydroforming versus mechanical convolution forming, weld type, and post-weld cleaning specification are not resolved."
 kb_implications:

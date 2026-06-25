@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The Bosch strut-profile family is commonly sold as anodized aluminum, but the row-specific local metadata does not separately specify anodized surface finish or temper."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth modular aluminum strut profile cut to the CAD length, or locally make by extruding a 20 x 20 mm slotted aluminum profile, cutting to about 463.7 mm, deburring, and applying a protective/anodized finish if needed."
+  summary: "Prepare as a Bosch Rexroth modular aluminum strut profile cut to the CAD length, or locally make by extruding a 20 x 20 mm slotted aluminum profile, cutting to about 463.7 mm, deburring, and applying a protective/anodized finish if needed"
   manufacturing_steps:
     - "Extrude Aluminum 6061 billet through a die matching the 20 x 20 mm slotted profile cross-section."
     - "Cut the extrusion to the CAD length of about 463.7 mm."
@@ -50,7 +50,6 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A slotted constant-cross-section aluminum profile is best produced as an extrusion and then cut to length."
-    - "Procurement remains the preferred near-term route because this is standard modular framing hardware."
   uncertainty_notes:
     - "The detailed die design, alloy temper, and finish specification are not provided by the row evidence."
 kb_implications:

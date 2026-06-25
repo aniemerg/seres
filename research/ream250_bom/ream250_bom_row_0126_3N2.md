@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "No row-specific non-placeholder STEP material was present; if the CAD end piece includes any hidden weld collar or insert, the simple material assignment may miss a minor second alloy."
 how_to_make:
-  summary: "Procure as a Pfeiffer ISO-K DN 63 stainless end piece/flexible-connector component; a local substitute would be a machined stainless ISO-K end fitting joined to the corrugated hose or bellows assembly and leak-tested."
+  summary: "A machined stainless ISO-K end fitting joined to the corrugated hose or bellows assembly and leak-tested"
   manufacturing_steps:
-    - "Procurement route: buy the Pfeiffer 320SFK063/320SWN063 DN 63 ISO-K flexible connector or spare end-piece family component through the BOM-provided vendor route."
     - "Local fabrication route: cut stainless 304/1.4301 round stock or tubing blank, turn the stepped ISO-K flange/end geometry, bore the central opening, deburr and clean for vacuum service."
     - "Join to the stainless bellows or corrugated hose body by vacuum-compatible welding, then helium leak-test and inspect sealing faces."
   source:
@@ -47,7 +46,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row marks this as a Pfeiffer Vacuum vendor component linked to 320SFK063-130. The Pfeiffer route provides a purchasable DN 63 ISO-K stainless bellows/flexible connector with 3D STEP download; CAD preview of the row shows a turned annular end fitting. official_alternate_route_check: original BOM URL is the Pfeiffer Vacuum shop URL; vacuum-shop.com is a Pfeiffer Vacuum online shop route for the same order number and product family."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The local substitute route is secondary; later KB modeling can prefer procurement unless local stainless vacuum welding is in scope."
+    - "The Manufacturing route is secondary"
   uncertainty_notes:
     - "The source package does not state the exact factory process sequence for this individual end piece."
 kb_implications:

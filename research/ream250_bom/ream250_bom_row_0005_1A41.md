@@ -35,19 +35,18 @@ material:
   uncertainty_notes:
     - "The source does not state the aluminum alloy grade or anodize type/thickness."
 how_to_make:
-  summary: "Procure as Thorlabs SM2A53 for current modeling; a plausible local route is to machine an aluminum adapter ring, cut the external M52 x 0.75 and internal SM2 threads, knurl or texture the outside grip surface, anodize, and inspect thread fit and clear aperture."
+  summary: "Machine an aluminum adapter ring, cut the external M52 x 0.75 and internal SM2 threads, knurl or texture the outside grip surface, anodize, and inspect thread fit and clear aperture"
   manufacturing_steps:
     - "Start from aluminum round bar or tube stock large enough for the 55.9 mm outside diameter."
     - "Turn the ring faces and bore on a lathe, leaving the approximately 7.4 mm axial thickness shown by the CAD and drawing."
     - "Cut the M52 x 0.75 external thread and internal SM2 2.035-40 thread; add the visible knurled or textured outer grip surface."
     - "Deburr and clean the optical-thread interfaces, anodize the aluminum, and inspect thread engagement, clear aperture, and overall thickness."
-    - "Procurement route: buy the SM2A53 adapter as a standard Thorlabs optomechanical component when local precision thread production is not modeled."
   source:
     url_or_path: "https://www.thorlabs.com/item/SM2A53; https://www.oxxius.ru/upload/iblock/dbe/j38qr4oay7zb9p73yap8tcsa50z0acsq/24386_E0W.pdf; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1A41_SM2A53-Step.step; research/ream250_bom/ream250_bom_row_0005_1A41__views_2x2.png"
     cited_fact_or_basis: "The BOM-linked Thorlabs route identifies SM2A53 as the row product. The SM2A53 drawing and CAD/preview show a thin adapter ring with external M52 x 0.75 threads, internal SM2 threads, anodized aluminum material, 55.9 mm outside diameter, 48.3 mm clear aperture, and about 7.4 mm thickness. targeted_web_search: searched 'SM2A53 Thorlabs material weight', 'SM2A53 M52x0.75 internal SM2 threads material', and 'Thorlabs SM2A53 drawing anodized aluminum'; results found row-matched product/drawing facts but no row-specific manufacturing-process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route is inferred from the ring geometry, aluminum material, standard optical thread forms, and visible textured grip surface."
+    - "The inferred from the ring geometry, aluminum material, standard optical thread forms, and visible textured grip surface."
     - "Anodizing is included because the row-matched drawing states anodized aluminum."
   uncertainty_notes:
     - "The sources do not state Thorlabs' actual production route, tooling, alloy, anodize class, thread tolerances, or inspection procedure."

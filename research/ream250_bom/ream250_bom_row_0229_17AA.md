@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "No specific aluminum alloy temper was found in the BOM row, CAD metadata, or checked datasheet, so the material is kept at family/finish precision."
 how_to_make:
-  summary: "Procure or specify a Bosch Rexroth 20x20 anodized aluminum strut profile cut to the 271 mm CAD length; for local manufacture, extrude an aluminum 20x20 T-slot profile, anodize or otherwise protect the surface, cut to length, and deburr/inspect the ends."
+  summary: "Prepare or specify a Bosch Rexroth 20x20 anodized aluminum strut profile cut to the 271 mm CAD length; for local manufacture, extrude an aluminum 20x20 T-slot profile, anodize or otherwise protect the surface, cut to length, and deburr/inspect the ends"
   manufacturing_steps:
-    - "Procurement route: order the Bosch Rexroth 20x20 strut-profile family in a specified length or standard stock, then cut to 271 mm if supplied oversize."
+    - "Cut to 271 mm if supplied oversize"
     - "Local fabrication route: extrude an aluminum billet through a die for the 20x20 four-slot profile with central bore."
     - "Apply anodized or equivalent protective finish, then saw-cut to 271 mm and deburr open ends."
     - "Inspect length, straightness, slot geometry, and end condition before assembly with standard slot hardware."
@@ -49,9 +49,9 @@ how_to_make:
     cited_fact_or_basis: "The Bosch 20x20 datasheet lists specified-length order options from 50 to 3000 mm for the 20x20 strut profile; a distributor page for genuine Bosch Rexroth 20 x 20 mm aluminum strut profile states it can be cut to required size; the CAD preview confirms the row is a straight slotted extrusion. bom_url_route_check: original Bosch store URL was checked as the BOM route; because parseable manufacturing/procurement details were limited there, the route uses the Bosch-branded datasheet copy and a distributor page matching the same genuine Bosch Rexroth 20x20 strut-profile family."
     evidence_basis: "independent_vendor_spec"
   assumptions:
-    - "The local manufacturing route uses standard aluminum extrusion practice for T-slot framing; the cited sources support product identity and cut-to-length procurement, not every extrusion process parameter."
+    - "The manufacturing route uses standard aluminum extrusion practice for T-slot framing, not every extrusion process parameter"
   uncertainty_notes:
-    - "The exact Bosch alloy, anodizing specification, and end-finish option for this row are not stated; model as a simple structural aluminum profile unless later KB work requires the specific commercial order code."
+    - "The exact Bosch alloy, anodizing specification, and end-finish option for this row are not stated"
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length 20x20 aluminum T-slot profile/simple structural extrusion, not as a unique machine assembly."
 ---

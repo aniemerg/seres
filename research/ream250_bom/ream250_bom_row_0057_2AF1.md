@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "Exact aluminum grade, glass composition, seal elastomer, connector metal, and cable jacket material are not specified by the BOM-side evidence."
 how_to_make:
-  summary: "Best current route is procurement as a calibrated K+C M5/0500-style linear glass scale module; a plausible local route would fabricate the aluminum scale housing/profile, install the glass scale, read-head carriage, seals, cable, connector, and protective sleeve, then laser-measure/calibrate the assembly."
+  summary: "Fabricate the aluminum scale housing/profile, install the glass scale, read-head carriage, seals, cable, connector, and protective sleeve, then laser-measure/calibrate the assembly"
   manufacturing_steps:
-    - "Procure row-matched K+C M5 500 mm / 520 mm travel linear glass scale where available."
     - "For local manufacture, extrude or machine the long aluminum housing/profile and cut it to the required scale length."
     - "Install the optical glass scale, read-head carriage or interface hardware, sealing lips, cable, DIN-style connector, and protective sleeve."
     - "Perform precision alignment, laser measurement/calibration, sealing, electrical testing, and functional verification before installation."
@@ -48,10 +47,10 @@ how_to_make:
     cited_fact_or_basis: "K+C describes glass scale optical measurement, aluminum housing, sealing lips, laser measurement/calibration, read-head carriage, 3 m data cable, and connector. The row-matched distributor identifies MPN M5/0500, 500 mm nominal length, 520 mm travel, and a ready-wired scale. CAD preview shows a long narrow profiled rail/scale body. bom_url_route_check: the original BOM URL resolved product-family construction and calibration facts but not the exact MPN; the distributor page was used for the exact 520 mm product identity. targeted_web_search: tried 'K+C Glasmassstab M5 manufacturing aluminum housing glass scale' and found product/construction descriptions, not a detailed factory process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacturing would require precision metrology and calibration comparable to commercial linear encoder production."
+    - "Manufacturing requires precision metrology and calibration comparable to commercial linear encoder production."
     - "The CAD track profile can be produced by extrusion plus finish machining or by direct machining at low quantity."
   uncertainty_notes:
-    - "No source found gives K+C's detailed manufacturing process or calibration fixture design, so the local route is a high-level engineering plan rather than a sourced process recipe."
+    - "No source found gives K+C's detailed manufacturing process or calibration fixture design, so The manufacturing route is a high-level engineering plan rather than a sourced process recipe."
 kb_implications:
   - "item_granularity: complex_module - Treat as a calibrated functional linear encoder/scale complex module for this pass; later KB work should only decompose it after modeling optical scale fabrication, read-head electronics, sealing, cabling, and calibration."
 ---

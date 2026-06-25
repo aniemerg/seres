@@ -47,10 +47,10 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or other surface treatment only if later drawing evidence identifies a required finish."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A2_back_plate.step; research/ream250_bom/ream250_bom_row_0025_2A2__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 280.00 x 30.00 x 680.00 mm solid with a long back-plate form and relief or diagonal web geometry. targeted_web_search: searched \"2A2_back_plate material reAM250\", \"reAM250 2A2 back plate\", \"reAM250 2A2_back_plate\", and \"2A2 back plate reAM250\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 280.00 x 30.00 x 680.00 mm solid with a long back-plate form and relief or diagonal web geometry. targeted_web_search: searched \"2A2_back_plate material reAM250\", \"reAM250 2A2 back plate\", \"reAM250 2A2_back_plate\", and \"2A2 back plate reAM250\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer, product ID, or link URL and the CAD name is a custom assembly-specific back plate."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer, product ID, or link URL and the CAD name is a custom assembly-specific back plate"
     - "Subtractive machining from plate stock is assumed from the thick plate geometry, lightening/relief features, and expected need for accurate rail or structural mounting interfaces."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, flatness requirements, surface finish, heat treatment, coating, or whether the relief geometry is functional lightening, stiffness tuning, or clearance."

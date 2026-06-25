@@ -37,16 +37,15 @@ material:
   uncertainty_notes:
     - "The BOM-side material wording gives the family/grade set but does not assign exact material regions to the visible CAD subfeatures."
 how_to_make:
-  summary: "Best current route is procurement as the AMPROVED ISO-KF DN40 disc valve or matched spare valve component; a later local route would machine/passivate the 316L stainless valve body features and assemble the EPDM sealing element and detent/actuation hardware."
+  summary: "Manufacturing route would machine/passivate the 316L stainless valve body features and assemble the EPDM sealing element and detent/actuation hardware"
   manufacturing_steps:
-    - "Procure the AMPROVED ISO-KF DN40 Scheibenventil or row-matched spare component through the BOM-provided product route."
     - "For a local manufacturing study, machine the stainless valve body/disc geometry from 316L/1.4404 stainless stock, including KF flange faces, central bore, and fastener or detent features visible in CAD."
     - "Passivate and clean stainless wetted or powder-contact surfaces for vacuum/powder-service compatibility."
-    - "Mold, cut, or procure the EPDM seal element and assemble it to the stainless valve body with the manual detent/actuation components from the sibling valve rows."
+    - "Mold, cut"
     - "Inspect KF interface dimensions, valve motion, three-position detent behavior, and leak or powder-sealing performance."
   source:
     url_or_path: "https://www.amproved.com/iso-kf-dn-40-scheibenventil.html; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/42C3_valve_part_3.step; research/ream250_bom/ream250_bom_row_0265_42C3__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
-    cited_fact_or_basis: "The AMPROVED product page provides the procurement route for the ISO-KF DN40 disc valve and states it is supplied as a disc valve with 3 detent positions for manual control/closure in AM-machine powder/fluid paths. CAD preview shows machined valve-body/flange geometry. BOM row 265 states AISI 316L/1.4404 and EPDM material wording. targeted_web_search: searched \"AMPROVED ISO-KF DN 40 Scheibenventil drawing material\", \"AMPROVED DN40 Scheibenventil manufacturing\", and \"SV04 DIN CC DN40 316L EPDM\"; found the first-party product page and image-only 2D drawing route, but no source that states detailed manufacturing operations."
+    cited_fact_or_basis: "The AMPROVED product page provides the procurement route for the ISO-KF DN40 disc valve and states it is supplied as a disc valve with 3 detent positions for manual control/closure in AM-machine powder/fluid paths. CAD preview shows machined valve-body/flange geometry. BOM row 265 states AISI 316L/1.4404 and EPDM material wording. targeted_web_search: searched \"AMPROVED ISO-KF DN 40 Scheibenventil drawing material\", \"AMPROVED DN40 Scheibenventil manufacturing\", and \"SV04 DIN CC DN40 316L EPDM\" found the first-party product page and image-only 2D drawing route, but no source that states detailed manufacturing operations."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Detailed machining, passivation, EPDM forming, and assembly steps are inferred from the CAD geometry, material wording, and normal construction of a stainless/EPDM manual valve, not stated by the vendor page."

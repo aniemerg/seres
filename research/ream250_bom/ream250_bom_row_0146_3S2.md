@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and inspect the mounting faces and hole location before assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S2_mount.step; research/ream250_bom/ream250_bom_row_0146_3S2__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 20.00 x 30.00 x 15.00 mm bounding box. The rendered preview shows a compact bracket-like geometry with two perpendicular legs and a circular through feature. targeted_web_search: searched \"3S2_mount reAM250 manufacturing\", \"3S2 reAM250 mount drawing\", \"reAM250 3S2 mount\", and \"3S2_mount\"; found duplicate BOM text but no row-specific fabrication drawing or manufacturing source."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 20.00 x 30.00 x 15.00 mm bounding box. The rendered preview shows a compact bracket-like geometry with two perpendicular legs and a circular through feature. targeted_web_search: searched \"3S2_mount reAM250 manufacturing\", \"3S2 reAM250 mount drawing\", \"reAM250 3S2 mount\", and \"3S2_mount\" found duplicate BOM text but no row-specific fabrication drawing or manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the simple bracket geometry and likely low-volume machine-specific hardware role."

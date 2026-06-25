@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, finish, and inspect squareness, height, and fit against the build-platform guidance assembly."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0069_2AO2__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AO2_guidance.step"
-    cited_fact_or_basis: "CAD preview and measured bounding box show a simple open rectangular shell without visible precision bearing features. targeted_web_search: queries tried were \"2AO2_guidance manufacturing\", \"2AO0_build_platform_guidance\", and \"2AO2_guidance material\"; results did not provide a row-specific manufacturing route."
+    cited_fact_or_basis: "CAD preview and measured bounding box show a simple open rectangular shell without visible precision bearing features. targeted_web_search: queries tried were \"2AO2_guidance manufacturing\", \"2AO0_build_platform_guidance\", and \"2AO2_guidance material\" results did not provide a row-specific manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The shell can be represented as sheet/plate fabrication for KB planning rather than as a vendor module."

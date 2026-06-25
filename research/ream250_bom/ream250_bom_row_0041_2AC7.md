@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "No row-specific material metadata, drawing, or supplier line item confirms the alloy or whether this exact subpart is a cage, spacer, shield, or ring."
 how_to_make:
-  summary: "Near-term route is to procure the complete SLA10/6200-2RS bearing unit or the bearing subcomponent; a plausible local route is stamped or machined thin steel ring/cage fabrication followed by deburring, heat treatment or finishing if required, and assembly into the bearing."
+  summary: "Stamped or machined thin steel ring/cage fabrication followed by deburring, heat treatment or finishing if required, and assembly into the bearing"
   manufacturing_steps:
-    - "For current modeling, procure as part of a standard SLA10 supported bearing or 6200-2RS replacement bearing."
     - "For local manufacture, blank or turn the annular ring from steel-family stock to the measured outer diameter, bore, and width."
     - "Machine, punch, or broach the side openings/pockets, then deburr and finish contact edges."
     - "Clean, inspect concentricity and pocket geometry, then assemble with balls/races/seals and grease in the bottom-axis bearing."

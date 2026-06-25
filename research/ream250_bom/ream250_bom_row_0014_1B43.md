@@ -46,10 +46,10 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or cleaning only after the alloy and service environment are resolved."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1B43_frame.step; research/ream250_bom/ream250_bom_row_0014_1B43__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one thin 335.00 x 12.80 x 248.00 mm rectangular open-frame solid with perimeter holes and corner relief/chamfer features. targeted_web_search: searched \"1B43_frame manufacturing\", \"1B43 reAM250 frame drawing\", \"reAM250 1B43 SM2A53 Adapter External material\", and \"SM2A53 Adapter External frame drawing\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one thin 335.00 x 12.80 x 248.00 mm rectangular open-frame solid with perimeter holes and corner relief/chamfer features. targeted_web_search: searched \"1B43_frame manufacturing\", \"1B43 reAM250 frame drawing\", \"reAM250 1B43 SM2A53 Adapter External material\", and \"SM2A53 Adapter External frame drawing\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the row has no manufacturer or link URL and the CAD name is a machine-specific frame."
+    - "The part is treated as a custom simple part because the row has no manufacturer or link URL and the CAD name is a machine-specific frame"
     - "Subtractive machining or profile cutting from plate stock is assumed from the flat thin frame geometry and expected need for accurate mounting-hole locations."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, coating, or whether this adapter frame has optical alignment, vacuum, or thermal constraints."

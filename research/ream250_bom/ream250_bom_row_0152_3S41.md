@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and inspect the long edges and end interfaces before assembling with neighboring gas outlet parts."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/3S41_part_1.step; research/ream250_bom/ream250_bom_row_0152_3S41__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 50.00 x 460.00 x 44.00 mm bounding box. The preview shows a long thin rectangular/duct-like segment without visible standard fitting, shaft, or calibrated module features. targeted_web_search: searched \"3S41 gas outlet reAM250 manufacturing\", \"3S41_part_1 drawing\", \"reAM250 gas outlet material\", and \"3S41_part_1 gas outlet material\"; results were duplicate/public BOM listings only and did not provide a row-specific fabrication drawing or process note."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 50.00 x 460.00 x 44.00 mm bounding box. The preview shows a long thin rectangular/duct-like segment without visible standard fitting, shaft, or calibrated module features. targeted_web_search: searched \"3S41 gas outlet reAM250 manufacturing\", \"3S41_part_1 drawing\", \"reAM250 gas outlet material\", and \"3S41_part_1 gas outlet material\" results were duplicate/public BOM listings only and did not provide a row-specific fabrication drawing or process note."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The visible thin-wall geometry is treated as sheet-metal fabrication rather than casting or billet machining."

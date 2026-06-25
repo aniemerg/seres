@@ -35,10 +35,10 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Manufacture as a small vacuum flange seal consumable: form the aluminum centering/outer ring, mold or procure the NBR O-ring, clean and deburr the ring, install the O-ring, and inspect fit and sealing surfaces."
+  summary: "Manufacture as a small vacuum flange seal consumable: form the aluminum centering/outer ring, mold"
   manufacturing_steps:
     - "Machine, stamp, or otherwise form the aluminum centering/outer ring profile to DN 63 ISO-K geometry."
-    - "Mold, cut, or procure the NBR O-ring to the matching seal cross-section."
+    - "Mold, cut"
     - "Deburr and clean the aluminum ring so flange-contact and seal-contact surfaces are smooth."
     - "Install the NBR O-ring onto the aluminum ring and inspect fit, concentricity, and visible seal damage."
   source:
@@ -48,7 +48,7 @@ how_to_make:
   assumptions:
     - "The manufacturing route is inferred from the stated aluminum plus NBR construction and the visible thin annular profile, not from a vendor process specification."
   uncertainty_notes:
-    - "targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\"; found product material and dimensional facts but no vendor manufacturing process description."
+    - "Targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\" found product material and dimensional facts but no vendor manufacturing process description."
 kb_implications:
   - "item_granularity: simple_part - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased replaceable or applied part unless vacuum-seal fabrication becomes in scope."
 ---

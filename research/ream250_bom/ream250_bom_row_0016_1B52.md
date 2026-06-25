@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Specific alloy and grade remain unresolved; downstream KB work should avoid assigning aluminum, carbon steel, or stainless steel without better row evidence."
 how_to_make:
-  summary: "Procure or manufacture as a simple custom metal flange matched to the schlieren-imaging door interface."
+  summary: "Manufacture as a simple custom metal flange matched to the schlieren-imaging door interface"
   manufacturing_steps:
     - "Start from metal plate, tube, or near-net ring stock sized for the optical-door opening."
     - "Machine or cut the annular/oval profile and mating faces to fit the schlieren-imaging door."
@@ -49,7 +49,7 @@ how_to_make:
   assumptions:
     - "Machining or profile cutting from metal stock is the simplest plausible route for a one-piece custom flange with this CAD shape."
   uncertainty_notes:
-    - "No source states the actual fabrication method, tolerances, finish, or whether this row was purchased or made in-house."
+    - "No source states the actual fabrication method, tolerances, finish, or whether this row was external or made in-house"
 kb_implications:
   - "item_granularity: simple_part - Treat as a one-piece custom flange/ring unless later evidence shows it is a calibrated vendor module or a multi-part optical assembly."
 ---

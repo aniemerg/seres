@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "The local STEP package lacks a real material assignment for this part; the material value depends on the row-matched official shop/catalog route."
 how_to_make:
-  summary: "Best current route is procurement as Pfeiffer Vacuum 320SFK063-130 or an equivalent DN 63 ISO-K stainless spring bellows, followed by inspection and installation. A local manufacturing route would make thin-wall stainless bellows, stainless ISO-K end flanges, weld them into a vacuum-tight connector, clean/passivate, and leak-test the finished assembly."
+  summary: "Manufacturing route would make thin-wall stainless bellows, stainless ISO-K end flanges, weld them into a vacuum-tight connector, clean/passivate, and leak-test the finished assembly"
   manufacturing_steps:
-    - "Procure Pfeiffer Vacuum 320SFK063-130 or an equivalent DN 63 ISO-K stainless spring bellows."
     - "Inspect the DN 63 ISO-K interfaces, 130 mm installed length, bellows condition, sealing faces, cleanliness, and freedom of motion before installation."
     - "For local manufacture, form or hydroform thin-wall 316L stainless bellows convolutions, machine or form 304 stainless ISO-K end flanges, weld/braze the bellows to the flanges, passivate/clean the assembly, and helium leak-test it for vacuum service."
     - "Install between compatible ISO-K components using the appropriate centering ring/seal and clamp hardware while respecting the +/-16 mm axial stroke limit."
@@ -48,10 +47,9 @@ how_to_make:
     cited_fact_or_basis: "BOM row 118 gives Pfeiffer Vacuum product 320SFK063; the row-matched Pfeiffer Vacuum Online Shop page identifies a DN 63 ISO-K stainless spring bellows with 130 mm length, flange 304, bellows 316L, service life 10000 cycles, and +/-16 mm axial stroke. The bellows forming, flange fabrication, welding, passivation, and leak-test route is inferred from the product geometry and stainless vacuum bellows construction."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement should remain the default KB route until a local vacuum-bellows forming, welding, and leak-test workflow is modeled."
     - "The local manufacturing steps are plausible operations for a stainless ISO-K spring bellows but are not directly specified by the cited product page."
   uncertainty_notes:
-    - "targeted_web_search: searched 'Pfeiffer Vacuum 320SFK063 130 flexible pipe ISO-K DN 63 material weight', '320SFK063-130 weight kg', and '320SFK063-130 datasheet mass'; results resolved row-matched product identity, dimensions, material, stroke, and vacuum service data but did not provide a row-specific manufacturing process or catalog weight."
+    - "Targeted_web_search: searched 'Pfeiffer Vacuum 320SFK063 130 flexible pipe ISO-K DN 63 material weight', '320SFK063-130 weight kg', and '320SFK063-130 datasheet mass'; results resolved row-matched product identity, dimensions, material, stroke, and vacuum service data but did not provide a row-specific manufacturing process or catalog weight."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable DN63 ISO-K stainless spring-bellows connector/hose item; capture bellows forming, flange joining, cleaning, and leak testing in the manufacturing route rather than as a complex module."
 ---

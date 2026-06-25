@@ -37,22 +37,22 @@ material:
   uncertainty_notes:
     - "The exact steel grade, heat treatment, surface hardness, and whether this specific row used an optional coating are not specified by the row evidence."
 how_to_make:
-  summary: "Procure as a standard HIWIN HGR15R precision profile rail cut to the required length where possible; a local route would require making hardened, ground carbon-steel guide rail stock with accurately spaced counterbored mounting holes and raceway geometry matched to HGL/HG blocks."
+  summary: "Locally produce a 600 mm carbon-steel precision linear-guide rail with HGR15-class envelope, counterbored top-mounting holes, hardened/ground raceways, datum faces, corrosion/wear protection as needed, and inspection against the mating HGL/HG15 carriage geometry."
   manufacturing_steps:
-    - "Specify an HGR15R rail compatible with HG/QH 15-series blocks and cut or order the rail at the row-specific 600 mm installed length."
-    - "For local production, start from suitable carbon steel bar or near-net rail stock and machine the HGR15 profile, datum faces, and ball-raceway geometry."
-    - "Drill and counterbore top-mounting holes using the HGR15R pattern, including 60 mm pitch and the specified hole/counterbore dimensions."
-    - "Heat treat the rail and precision grind the raceways, mounting faces, and side datums to the required straightness, parallelism, and accuracy class."
-    - "Deburr or chamfer cut edges, apply any selected corrosion/wear coating, clean, protect, and inspect the rail with the matching HGL/HG carriage."
+    - "Prepare carbon-steel rail stock or a near-net rail blank long enough for the 600 mm finished part plus workholding allowance."
+    - "Machine the rectangular rail envelope, bottom datum, side datums, and HGR15-class raceway profile along the full length."
+    - "Drill and counterbore the top-mounting holes at the row-matched pitch and end offsets needed by the 600 mm CAD geometry."
+    - "Heat treat the rail for guideway service, then precision grind the raceways, mounting face, and side datums to the straightness, parallelism, surface finish, and accuracy required by the mating carriage."
+    - "Deburr or chamfer ends and hole edges, apply any selected corrosion/wear coating, clean and protect the rail, then inspect hole pattern, length, raceway geometry, hardness, straightness, and carriage fit."
   source:
     url_or_path: "https://www.hiwin.de/en/Products/Linear-guideways/Profile-rails/Ball-guides/Series-HGR/HGR-R/HGR15R4000H/p/5-001920; https://www.hiwin.com/wp-content/uploads/HG-Info.pdf; research/ream250_bom/ream250_bom_row_0028_2A51__views_2x2.png"
     cited_fact_or_basis: "The HIWIN product page identifies HGR15R4000H as an HGR-R profile rail, gives 15 mm rail width and height, top-mounting hole dimensions, 60 mm pitch, weight per meter, production length details, and notes mechanical or manual chamfering videos for linear guideways. The HG-series convention identifies the no-M material option as carbon steel. The rendered contact sheet shows a long straight rail profile. The detailed local fabrication route is inferred from the sourced geometry, material convention, and precision-rail function rather than stated as HIWIN's factory process. targeted_web_search: checked the BOM-provided HIWIN route and searched 'HGR15R4000H Hiwin mass material', 'HIWIN HGR15R rail material carbon steel M stainless steel', 'HIWIN HG rail manufacturing grinding heat treatment', and 'HIWIN linear guideway HGR15R dimensions pitch weight'; results found row-matched product, dimensions, mass, material-code convention, and generic chamfering information, but no row-specific manufacturing-process sheet."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Current KB modeling should treat the rail as a standard precision motion component rather than raw bar stock, because its functional value depends on hardened/ground raceways and guideway tolerances."
-    - "The local route describes a plausible closure path for future modeling, not a sourced HIWIN process specification."
+    - "This simple-part route models the rail as locally produced precision guideway hardware, using the vendor evidence only to constrain geometry, material family, hole pattern, and functional interface."
+    - "The manufacturing route describes a plausible closure path, not a sourced factory process specification."
   uncertainty_notes:
-    - "The actual HIWIN alloy, heat treatment cycle, raceway grinding sequence, coating choice, inspection tolerance stack, and cut-to-length order details are not provided by the row evidence."
+    - "The exact alloy grade, heat treatment cycle, raceway grinding sequence, coating choice, inspection tolerance stack, and end-offset tolerances are not provided by the row evidence."
 kb_implications:
   - "item_granularity: simple_part - Treat as a reusable single precision linear-guide rail compatible with HGL/HG15 carriages; capture heat treatment, grinding, hole machining, coating, and inspection in the manufacturing route rather than modeling it as a complex module."
 ---

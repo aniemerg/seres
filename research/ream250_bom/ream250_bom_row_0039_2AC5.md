@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The reAM250 CAD/STEP package does not provide a non-placeholder material for this row, so the material should be treated as inferred until a drawing, purchase record, or assembly note confirms it."
 how_to_make:
-  summary: "Procure as a precision bearing ball when possible; local manufacture would use bearing-steel wire or rod slugging, cold heading or forging, flashing removal, heat treatment, grinding/lapping, polishing, and inspection."
+  summary: "Prepare as a precision bearing ball when possible; use bearing-steel wire or rod slugging, cold heading or forging, flashing removal, heat treatment, grinding/lapping, polishing, and inspection"
   manufacturing_steps:
     - "Select bearing-quality chrome steel stock sized for a roughly 5.4 mm ball."
     - "Form near-spherical blanks by cold heading or similar ball-blank forming."
@@ -50,7 +50,7 @@ how_to_make:
   assumptions:
     - "The KB should initially model this as a finished precision rolling element rather than raw spherical stock."
   uncertainty_notes:
-    - "A true local manufacturing route would need tolerance, grade, heat-treatment, and surface-finish requirements that are not present in the BOM row."
+    - "A true Manufacturing route would need tolerance, grade, heat-treatment, and surface-finish requirements that are not present in the BOM row."
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable small precision bearing-ball item, likely shared with adjacent 2AC bottom-axis-bearing rows, rather than as a purchased module or raw stock."
 ---

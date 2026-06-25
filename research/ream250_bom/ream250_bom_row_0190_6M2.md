@@ -36,18 +36,17 @@ material:
   uncertainty_notes:
     - "No row-specific material metadata was present in the STEP package beyond placeholder Generic; exact alloy grade, rail steel grade, and seal polymer grade remain unspecified."
 how_to_make:
-  summary: "Procure as SMC LEFG32-S-600 support guide for current modeling; a plausible local route is aluminum extrusion or machined/anodized body production, precision steel guide/rail and bearing hardware procurement or grinding, seal-band installation, and final alignment/inspection as a linear-guide support module."
+  summary: "Aluminum extrusion or machined/anodized body production, precision steel guide/rail and bearing hardware production or grinding, seal-band installation, and final alignment/inspection as a linear-guide support module"
   manufacturing_steps:
-    - "Procure/catalog route: buy the LEFG32-S-600 support guide as an SMC vendor module matched to the top linear-guide axis."
     - "Local-manufacturing route: make or source the aluminum support-guide body/profile, machine mounting features, anodize the aluminum surfaces, fit precision steel guide/bearing hardware, install stainless or polymer seal-band components, then align and inspect against the mating LEF driven axis."
   source:
     url_or_path: "https://www.smcusa.com/products/electric-actuators/sliders/support-guide~137707; research/ream250_bom/ream250_bom_row_0190_6M2__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6M2_rail_LEFG32-S-600N.step"
     cited_fact_or_basis: "SMC describes the LEFG as a motorless support guide sharing LEFS/LEFB dimensions and using a seal band. CAD preview/STEP geometry show a long rail-like support body with mounting features. The detailed local fabrication sequence is inferred from the observed geometry and material family, not directly stated by the cited catalog. targeted_web_search: queries tried included 'SMC LEFG support guide material aluminum steel seal band', 'LEFG32-S-600 weight LEFG32-S 600 kg catalog', and 'SMC LEFG32-S-600 linear guide actuator specifications material weight'; results resolved product family, dimensions, mass, and broad material stack but did not provide a row-specific manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, this row is better represented initially as a purchased SMC linear-support module unless a detailed sub-BOM for guide rail, carriage, seals, bearings, and alignment operations is later introduced."
+    - "For KB planning, this row is better represented initially as a external SMC linear-support module unless a detailed sub-BOM for guide rail, carriage, seals, bearings, and alignment operations is later introduced"
   uncertainty_notes:
-    - "The local manufacturing route omits precision tolerances, preload/bearing details, and vendor quality-control steps that would matter for a self-manufactured replacement."
+    - "The manufacturing route omits precision tolerances, preload/bearing details, and vendor quality-control steps that would matter for a self-manufactured replacement."
 kb_implications:
   - "item_granularity: simple_part - Treat 6M2 as the rail/body portion of the SMC LEFG32-S-600 support-guide pair; keep the complete LEFG support guide as a later module only if rows 6M1, 6M2, seal-band parts, and guide hardware are explicitly recombined."
 ---

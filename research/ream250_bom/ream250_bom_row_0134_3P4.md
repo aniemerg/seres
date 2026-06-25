@@ -36,9 +36,9 @@ material:
   uncertainty_notes:
     - "The exact Pfeiffer-supplied variant may differ in coating details or filter media option, but the sourced facts resolve the main material families needed for KB planning."
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum PK Z60 511 A / SAS 63 for near-term modeling; a local route would fabricate a vacuum-tight steel filter housing with ISO-K interfaces and install a replaceable pleated filter cartridge and elastomer sealing hardware."
+  summary: "Fabricate a vacuum-tight steel filter housing with ISO-K interfaces and install a replaceable pleated filter cartridge and elastomer sealing hardware"
   manufacturing_steps:
-    - "Procure or fabricate the DN63 ISO-K vacuum filter housing from corrosion-resistant carbon steel shell parts with stainless ISO flange/interface hardware."
+    - "Fabricate the DN63 ISO-K vacuum filter housing from corrosion-resistant carbon steel shell parts with stainless ISO flange/interface hardware"
     - "Form or machine the inlet and outlet flange interfaces, sealing grooves, housing lid, and cartridge-retention features."
     - "Apply corrosion-protective powder-coat finish where compatible with the vacuum-side cleanliness requirements."
     - "Install Buna/NBR-style O-ring seals, stainless clips or retention hardware, and the polyester filter insert cartridge."
@@ -48,8 +48,7 @@ how_to_make:
     cited_fact_or_basis: "The Pfeiffer page identifies the purchased SAS 63 dust separator for DN 63 ISO-K. The A&J page gives row-matched performance and scope facts, including integrated filter insert, 5 um separable grain size, 99.7% separation degree, leak-rate data, and 5.9 kg weight. The CSL datasheet gives material and construction features for the matching CSL ISO filter family. FreeCAD measured a large single-solid filter body with bounding box about 280.34 x 316.22 x 243.48 mm. targeted_web_search: queries tried: 'PK Z60 511 A material weight', 'Pfeiffer SAS 63 dust separator material', 'CSL-357y2-K ISO K DN63 filter material', and 'CSL ISO vacuum filter manufacturing'; sources resolved procurement, materials, and filter construction but no row-specific factory process, so detailed fabrication and assembly steps are inferred from the sourced product geometry/materials."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, procurement as the vendor filter assembly is the preferred route unless a later sub-BOM is explicitly modeled."
-    - "The local manufacturing route treats the housing and replaceable filter cartridge as an assembly requiring vacuum leak testing, not as a single machined part."
+    - "The manufacturing route treats the housing and replaceable filter cartridge as an assembly requiring vacuum leak testing, not as a single machined part."
   uncertainty_notes:
     - "The exact Pfeiffer factory process, weld/forming sequence, coating specification, and cartridge supplier are not sourced."
 kb_implications:

@@ -38,10 +38,10 @@ material:
   uncertainty_notes:
     - "Exact article number, aluminum alloy, and surface treatment for 17AG are not directly stated by the row; use aluminum/anodized aluminum rather than a specific alloy grade."
 how_to_make:
-  summary: "Procure as a cut-to-length 60 x 60 mm modular aluminum strut profile; a plausible local route is aluminum extrusion through a slotted-profile die, anodizing, saw cutting, deburring, and any needed end finishing."
+  summary: "Prepare as a cut-to-length 60 x 60 mm modular aluminum strut profile; aluminum extrusion through a slotted-profile die, anodizing, saw cutting, deburring, and any needed end finishing"
   manufacturing_steps:
-    - "Procure/catalog route: order a 60 x 60 mm aluminum strut profile compatible with the Bosch Rexroth-style modular framing ecosystem and cut it to the required BOM length."
-    - "Local route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted square profile cross-section."
+    - "Cut it to the required BOM length"
+    - "Manufacturing route: extrude aluminum alloy through a die forming the 60 x 60 mm slotted square profile cross-section."
     - "Straighten and age or stress-relieve the extrusion as needed for the alloy and dimensional tolerance."
     - "Anodize or otherwise finish the extrusion for corrosion resistance and slot-wear durability."
     - "Saw-cut to the resolved length, deburr, and add any row-specific end drilling or tapping if later drawings require it."

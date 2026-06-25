@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The vendor page confirms the pulley configuration but does not state material; the material value relies on the supplied assembly STEP metadata."
 how_to_make:
-  summary: "Procure as a standard GT2 20-tooth, 8 mm bore flanged pulley, or locally make from Aluminum 6061 bar/blank by turning the bore and outside profile, cutting the GT2 tooth form, drilling/tapping the set-screw hole, and deburring/inspecting fit to the GT2 belt and 8 mm shaft."
+  summary: "Prepare as a standard GT2 20-tooth, 8 mm bore flanged pulley, or locally make from Aluminum 6061 bar/blank by turning the bore and outside profile, cutting the GT2 tooth form, drilling/tapping the set-screw hole, and deburring/inspecting fit to the GT2 belt and 8 mm shaft"
   manufacturing_steps:
     - "Cut Aluminum 6061 round stock or near-net pulley blank."
     - "Turn the central bore and flange/body outside diameters to the CAD envelope."
@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "BOM-provided vendor page identifies a standard GT2 20-tooth 8 mm bore pulley with two flanges; CAD preview shows a flanged toothed pulley and radial set-screw boss. targeted_web_search: not required for source-backed procurement route; detailed local machining route is inferred from geometry because the BOM route does not state manufacturing operations."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, pulley manufacture can be modeled as a small precision machined aluminum part if procurement is not used."
+    - "Manufacture can be modeled as a small precision machined aluminum part"
     - "The radial boss/hole is treated as a set-screw feature based on standard pulley geometry and the CAD preview."
   uncertainty_notes:
     - "The local manufacturing sequence is plausible but not vendor-sourced; exact tooth cutting method and tolerances are not specified by the BOM evidence."

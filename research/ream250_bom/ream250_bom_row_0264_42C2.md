@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The BOM material wording identifies the primary metal grade and seal family, but not the detailed breakdown of body, disc, shaft, handle, spring/fastener, and seal subcomponents."
 how_to_make:
-  summary: "Treat as a purchased AMPROVED ISO-KF DN40 manual disc valve module for current KB planning; local manufacture would require a stainless DN40 valve body/disc/shaft/lever assembly plus EPDM seals, but that sub-BOM is not resolved by this row."
+  summary: "Treat as a external AMPROVED ISO-KF DN40 manual disc valve module for current KB planning; Manufacturing requires a stainless DN40 valve body/disc/shaft/lever assembly plus EPDM seals, but that sub-BOM is not resolved by this row"
   manufacturing_steps:
-    - "Procure or specify one AMPROVED ISO-KF DN40 Scheibenventil matching the BOM URL and material wording AISI 316L / 1.4404 with EPDM sealing."
+    - "Prepare or specify one AMPROVED ISO-KF DN40 Scheibenventil matching the BOM URL and material wording AISI 316L / 1.4404 with EPDM sealing"
     - "On receipt, verify the DN40 ISO-KF interface, lever action, and three detent positions against the AMPROVED product description and drawing."
     - "Clean for powder/vacuum service and install with compatible DN40 centering/sealing and clamp hardware as required by the neighboring reAM250 assembly."
     - "For a future local-manufacturing model, decompose into stainless machined/turned valve body, disc, shaft, lever/knob, fasteners or detent hardware, and molded/cut EPDM seals before assigning fabrication recipes."
@@ -50,7 +50,7 @@ how_to_make:
   assumptions:
     - "Current KB planning should model the row as a vendor functional valve module until a sub-BOM and local valve manufacturing workflow are available."
   uncertainty_notes:
-    - "The AMPROVED page supports procurement and gross installation route, but not a detailed local manufacturing process, tolerances, seal profile, detent mechanism design, or internal valve subcomponent quantities."
+    - "Local manufacturing process, tolerances, seal profile, detent mechanism design, or internal valve subcomponent quantities"
 kb_implications:
   - "item_granularity: complex_module - row 42C2 is a functional DN40 manual valve assembly with stainless and EPDM materials; model as a complex functional module unless later work decomposes the valve body, seal, lever, shaft, and detent subassembly."
 ---

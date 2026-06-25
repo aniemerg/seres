@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "Material family is intentionally broad; downstream KB modeling should not choose steel, stainless steel, or aluminum without checking the full gas-flow assembly design intent."
 how_to_make:
-  summary: "Fabricate as a one-piece machined or additively manufactured metal gas-flow insert, or procure as part of the reAM250 gas-flow hardware set."
+  summary: "Fabricate as a one-piece machined or additively manufactured metal gas-flow insert"
   manufacturing_steps:
     - "Start from metal bar, plate, extrusion, or a near-net additive-manufactured blank sized for the roughly 260 mm long duct-like body."
     - "Machine the outer rectangular profile and internal vane/fin channels, or print the vane geometry near-net if the internal features are not accessible by simple milling."

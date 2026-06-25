@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "No adhesive chemistry, cure method, service temperature, vacuum compatibility, or bonding-substrate compatibility is provided."
 how_to_make:
-  summary: "Plausible route: procure a compatible structural or retaining adhesive, clean and mask the mating surfaces, dispense a controlled 274 mm bead matching the CAD volume, assemble the mating recoater parts, cure, and inspect squeeze-out and bond continuity."
+  summary: "Plausible route: prepare a compatible structural or retaining adhesive, clean and mask the mating surfaces, dispense a controlled 274 mm bead matching the CAD volume, assemble the mating recoater parts, cure, and inspect squeeze-out and bond continuity"
   manufacturing_steps:
     - "Select an adhesive compatible with the bonded substrates and the recoater operating environment."
     - "Clean and abrade or otherwise prepare the mating surfaces according to the adhesive process requirement."
@@ -51,7 +51,7 @@ how_to_make:
     cited_fact_or_basis: "BOM/CAD identify the item as glue, and CAD/preview show a simple long thin adhesive-like strip. targeted_web_search: queries tried 'reAM250 6B3 glue manufacturing', 'reAM250 glue ceramic pole', 'reAM250 6B3_glue adhesive', and 'adhesive bead ceramic pole gliding surface manufacturing'; results did not find a row-specific adhesive specification or process, so the route is inferred from the adhesive-bead geometry and BOM neighborhood."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The row is modeled as an applied cured adhesive volume, not a reusable mechanical part or purchased calibrated module."
+    - "The row is modeled as an applied cured adhesive volume, not a reusable mechanical part or external calibrated module"
     - "Surface preparation, controlled dispensing, fixturing, and cure are included because they are normally required to turn an adhesive into the installed bonded feature represented by the CAD bead."
   uncertainty_notes:
     - "The actual adhesive may require a specific primer, mix ratio, cure schedule, vacuum bake-out, or cleanroom handling not stated by the BOM/CAD row."

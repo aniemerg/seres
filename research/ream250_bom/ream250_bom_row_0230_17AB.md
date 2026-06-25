@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "No exact alloy grade was resolved for the BOM row. A separate Bosch Rexroth aluminum framing technical-data PDF identifies Rexroth strut-profile material families such as EN AW-6060 / AW-6063-T66, but this row result keeps the material at the sourced anodized-aluminum family level."
 how_to_make:
-  summary: "Model as a cut-to-length purchased aluminum T-slot/strut extrusion: extrude the aluminum profile, anodize, saw cut to the 472.5 mm CAD length, deburr, and inspect length and slot geometry."
+  summary: "Model as a cut-to-length external aluminum T-slot/strut extrusion: extrude the aluminum profile, anodize, saw cut to the 472.5 mm CAD length, deburr, and inspect length and slot geometry"
   manufacturing_steps:
     - "Extrude aluminum alloy through a 20 x 20 mm slot-6 strut-profile die."
     - "Straighten and age or temper the extrusion according to the profile supplier's standard process."
@@ -49,11 +49,11 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a long slotted 20x20 profile, and FreeCAD measured a 472.50 mm long part. Bosch Rexroth documentation identifies the item family as a 20x20 strut profile with 6 mm groove and anodized aluminum material. The distributor page says the Bosch Rexroth 20x20 aluminum profile can be cut to required size. bom_url_route_check: the BOM-provided Bosch Rexroth store URL was checked as a strut-profile product-family route but did not expose row-specific manufacturing details in the accessible page; the Bosch Rexroth PDF and distributor page were used for product identity and cut-to-size evidence."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route infers standard aluminum extrusion and saw-cut finishing from the sourced strut-profile geometry and material."
+    - "The manufacturing route infers standard aluminum extrusion and saw-cut finishing from the sourced strut-profile geometry and material."
     - "No precision machining beyond cutting/deburring is needed for this plain cut-length profile unless later assembly requires tapped or drilled ends."
   uncertainty_notes:
     - "The cited sources resolve product family, material, and cut-to-size availability but do not state the actual Bosch production route for this specific cut piece."
-    - "targeted_web_search: searched \"Bosch Rexroth strut profile 20x20 0.4 kg/m material\", \"site:boschrexroth.com strut profile 20x20 aluminum anodized mass kg/m\", and \"17AB_strut_profile_20X20_473 Bosch Rexroth\"; found row-family product specifications and cut-to-size evidence, but no row-specific manufacturing process sheet for 17AB."
+    - "Targeted_web_search: searched \"Bosch Rexroth strut profile 20x20 0.4 kg/m material\", \"site:boschrexroth.com strut profile 20x20 aluminum anodized mass kg/m\", and \"17AB_strut_profile_20X20_473 Bosch Rexroth\" found row-family product specifications and cut-to-size evidence, but no row-specific manufacturing process sheet for 17AB."
 kb_implications:
   - "item_granularity: simple_part - reusable cut length of standard 20x20 anodized aluminum strut/profile stock; later KB modeling should prefer one generic profile-stock item with length handled in BOM notes or quantity rather than a unique item for every cut length."
 ---

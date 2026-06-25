@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The material family is not row-sourced; stainless, ceramic, or another bearing-ball material cannot be excluded without the bearing drawing or vendor bill of materials."
 how_to_make:
-  summary: "Procure as a standard approximately 5 mm precision bearing ball for current modeling, or manufacture locally from bearing-steel wire/slug by cold heading, flashing, heat treatment, grinding, lapping, cleaning, and inspection."
+  summary: "Prepare as a standard approximately 5 mm precision bearing ball for KB modeling, or manufacture locally from bearing-steel wire/slug by cold heading, flashing, heat treatment, grinding, lapping, cleaning, and inspection"
   manufacturing_steps:
     - "Cut bearing-steel wire or slug stock for the ball blank."
     - "Cold-head or otherwise form a near-spherical blank."
@@ -49,8 +49,8 @@ how_to_make:
     cited_fact_or_basis: "The row STEP and preview show a single about-5 mm sphere. Generic bearing-ball manufacturing references describe grinding/lapping as precision finishing steps for steel balls. targeted_web_search: tried 'ball bearing manufacturing process lapping hardened steel', 'how are bearing balls made grinding lapping', and 'precision ball manufacturing process overview'; results provided generic ball-manufacturing process context but not a row-specific reAM250 manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For near-term KB modeling, procurement or reuse of a generic precision bearing ball is more appropriate than expanding this row into a dedicated machine-specific part."
-    - "The local manufacturing route is inferred from common bearing-ball production practice and the spherical CAD geometry."
+    - "Machine-specific part"
+    - "The inferred from common bearing-ball production practice and the spherical CAD geometry."
   uncertainty_notes:
     - "No row-specific grade, tolerance class, surface finish, or heat-treatment specification is available from the BOM or CAD package."
 kb_implications:

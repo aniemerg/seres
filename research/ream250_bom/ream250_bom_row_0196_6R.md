@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The local metadata gives only a broad Rubber material name, not a specific compound such as neoprene, polyurethane, nitrile rubber, silicone rubber, or a reinforcement material."
 how_to_make:
-  summary: "Model as a purchased or cut-to-length rubber belt stock item unless later KB work needs detailed belt manufacturing; a local route would form a reinforced rubber belt loop by extrusion or calendaring, curing, and joining/molding to final loop geometry."
+  summary: "Model as a external or cut-to-length rubber belt stock item unless later KB work needs detailed belt manufacturing; form a reinforced rubber belt loop by extrusion or calendaring, curing, and joining/molding to final loop geometry"
   manufacturing_steps:
     - "Select rubber belt stock or compound compatible with the pulley geometry and operating environment."
     - "Form a strip by extrusion, calendaring, or molding; include cord or fabric reinforcement if required by the drive load."
@@ -43,11 +43,11 @@ how_to_make:
     - "Trim and inspect loop width, thickness, length, and fit against the pulley set."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6R_belt.step; research/ream250_bom/ream250_bom_row_0196_6R__views_2x2.png"
-    cited_fact_or_basis: "The CAD part is a single thin closed-loop rubber belt with measured bounding box 77.00 x 130.43 x 10.00 mm. targeted_web_search: searched \"6R_belt reAM250\", \"6R_belt reAM250 rubber belt\", \"6R_belt CAD belt\", \"6R_belt GT2\", and \"reAM250 6R_belt GT2\"; results only duplicated BOM text or unrelated belt pages and did not provide a row-specific vendor or manufacturing specification."
+    cited_fact_or_basis: "The CAD part is a single thin closed-loop rubber belt with measured bounding box 77.00 x 130.43 x 10.00 mm. targeted_web_search: searched \"6R_belt reAM250\", \"6R_belt reAM250 rubber belt\", \"6R_belt CAD belt\", \"6R_belt GT2\", and \"reAM250 6R_belt GT2\" results only duplicated BOM text or unrelated belt pages and did not provide a row-specific vendor or manufacturing specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The route is inferred from the belt geometry and broad rubber material metadata, not from a row-specific vendor drawing."
-    - "For near-term KB modeling, this should be treated as a purchased belt or stock belt part because the exact profile and compound are unspecified."
+    - "For near-term KB modeling, this should be treated as a external belt or stock belt part because the exact profile and compound are unspecified"
   uncertainty_notes:
     - "Without a belt designation or vendor page, the manufacturing route cannot specify tooth pitch, reinforcement, compound, splice method, or curing parameters."
 kb_implications:

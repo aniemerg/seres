@@ -38,7 +38,7 @@ material:
   uncertainty_notes:
     - "The row lacks a product number such as 040ZR/BV, 040ZR/CN, or 040ZR/CV, so the specific elastomer and carrier combination is not resolved."
 how_to_make:
-  summary: "Model as purchased ISO-KF vacuum sealing hardware for now; a local manufacturing route would mold or source the elastomer O-ring/seal and, if modeling the complete centering ring, form or machine the metal carrier before cleaning and vacuum fit inspection."
+  summary: "Model as external ISO-KF vacuum sealing hardware for now; a Manufacturing route would mold or source the elastomer O-ring/seal and, if modeling the complete centering ring, form or machine the metal carrier before cleaning and vacuum fit inspection"
   manufacturing_steps:
     - "Select the resolved DN40 ISO-KF seal variant and material combination, such as FPM/FKM or NBR elastomer with stainless-steel or aluminum carrier if a centering-ring assembly is required."
     - "For the elastomer seal, compression-mold or transfer-mold the O-ring/seal geometry, then trim flash and inspect the 48.11 mm by 8.00 mm CAD envelope against the DN40 KF interface."
@@ -46,11 +46,11 @@ how_to_make:
     - "Clean for vacuum service and verify fit with the mating ISO-KF DN40 flanges and clamping ring."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0278_82__views_2x2.png; https://wissel-vakuum.de/pc/iso-kf-dichtungen/zentrierring/?wvn_language=en"
-    cited_fact_or_basis: "The CAD preview shows a circular seal-like ring; the BOM-provided Wissel page identifies the product family as ISO-KF centering rings with integrated O-rings and DN40 material variants including FPM and NBR. targeted_web_search: searched \"Wissel 040ZR/BV DN40 centering ring material\", \"82_seal_ISO_KF_DN40 material\", and \"ISO-KF DN40 centering ring FPM NBR manufacturing\"; found the row-matched Wissel product-family page and generic vacuum-hardware context, but no row-specific manufacturing drawing or production process."
+    cited_fact_or_basis: "The CAD preview shows a circular seal-like ring; the BOM-provided Wissel page identifies the product family as ISO-KF centering rings with integrated O-rings and DN40 material variants including FPM and NBR. targeted_web_search: searched \"Wissel 040ZR/BV DN40 centering ring material\", \"82_seal_ISO_KF_DN40 material\", and \"ISO-KF DN40 centering ring FPM NBR manufacturing\" found the row-matched Wissel product-family page and generic vacuum-hardware context, but no row-specific manufacturing drawing or production process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from elastomer seal geometry, ISO-KF centering-ring construction, and common vacuum seal production practice."
-    - "Purchased-hardware modeling is preferred until a later KB pass intentionally expands standard ISO-KF seal sub-BOMs."
+    - "External-hardware modeling is preferred until a later KB pass intentionally expands standard ISO-KF seal sub-BOMs"
   uncertainty_notes:
     - "The exact production method, elastomer compound, carrier-ring geometry, and cleaning specification are not stated by the BOM row or the vendor product-family page."
 kb_implications:

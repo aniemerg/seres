@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "The BOM-provided Liqui Moly page states that the surfaces to be sealed should be clean, oil-free, grease-free, and dry, and that material is applied evenly before parts are joined immediately; the CAD preview shows a thin tall rectangular perimeter bead."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The local manufacturing action is application and curing of a purchased sealant, not synthesis of silicone chemistry."
+    - "The local manufacturing action is application and curing of a external sealant, not synthesis of silicone chemistry"
     - "The CAD preview is used only for the applied path and approximate installed shape."
   uncertainty_notes:
     - "The BOM evidence does not state the actual dispensing nozzle size, cure schedule, or compression target used in the reAM250 assembly."

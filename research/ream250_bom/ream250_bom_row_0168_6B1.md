@@ -38,7 +38,7 @@ material:
 how_to_make:
   summary: "Plausible route: cut stainless bar or plate stock to length, machine the profiled ends and contact geometry, deburr, and finish or polish the sliding/contact face before inspection."
   manufacturing_steps:
-    - "Procure stainless steel rectangular bar or plate stock sized for the 50 x 10 x 274 mm envelope."
+    - "Prepare stainless steel rectangular bar or plate stock sized for the 50 x 10 x 274 mm envelope"
     - "Saw or abrasive-cut the blank to length."
     - "Mill the end profiles and any relieved rail features visible in the CAD preview."
     - "Deburr edges and polish or grind the gliding contact face to the required sliding finish."

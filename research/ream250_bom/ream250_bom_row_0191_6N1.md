@@ -38,10 +38,9 @@ material:
   uncertainty_notes:
     - "The source resolves the table material family but not a specific aluminum alloy grade or any hidden bearing/guide insert material."
 how_to_make:
-  summary: "Best modeled initially as a vendor linear-actuator carriage/table component; a plausible local route would machine the carriage from aluminum alloy stock, anodize it, and integrate precision guide/bearing interfaces during actuator assembly."
+  summary: "Best modeled initially as a vendor linear-actuator carriage/table component; machine the carriage from aluminum alloy stock, anodize it, and integrate precision guide/bearing interfaces during actuator assembly."
   manufacturing_steps:
-    - "Procure as the SMC LEFS32REA-600BK actuator carriage/table replacement or as part of the LEFS32REA actuator."
-    - "For local approximation, mill the carriage body from aluminum alloy bar or plate stock to the measured envelope and mounting features."
+    - "Mill the carriage body from aluminum alloy bar or plate stock to the measured envelope and mounting features."
     - "Anodize the aluminum body and fit or interface it with precision guide, ball screw nut, and bearing elements during actuator assembly."
     - "Inspect mounting surfaces, hole locations, and sliding alignment before installation."
   source:

@@ -45,10 +45,10 @@ how_to_make:
     - "Finish-machine optical or sealing mating faces, then deburr and inspect hole positions, flatness, and tube alignment."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/1A42_flange_schlieren_imaging.step; research/ream250_bom/ream250_bom_row_0006_1A42__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 80.00 x 114.40 x 160.00 mm solid with a rectangular bolted flange/frame, diagonal/lightened face members, and a protruding cylindrical/conical tube feature. targeted_web_search: searched \"1A42_flange_schlieren_imaging material\", \"1A42 flange schlieren imaging material\", \"reAM250 1A42 schlieren\", and \"ream250 flange_schlieren_imaging\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 80.00 x 114.40 x 160.00 mm solid with a rectangular bolted flange/frame, diagonal/lightened face members, and a protruding cylindrical/conical tube feature. targeted_web_search: searched \"1A42_flange_schlieren_imaging material\", \"1A42 flange schlieren imaging material\", \"reAM250 1A42 schlieren\", and \"ream250 flange_schlieren_imaging\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom machined simple part rather than a purchased module because the BOM row has no manufacturer/product ID and the CAD name is a custom assembly-specific flange."
+    - "The part is treated as a custom machined simple part because the BOM row has no manufacturer/product ID and the CAD name is a custom assembly-specific flange"
     - "Subtractive machining is assumed from the visible flange/tube geometry and expected need for accurate optical alignment or mating surfaces."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, coating/anodizing, or whether the tube feature is machined from one piece or joined from a separate tube."

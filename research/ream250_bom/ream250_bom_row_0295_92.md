@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The BOM row and local STEP metadata do not state the exact Rexroth material number or surface treatment for this cut length."
 how_to_make:
-  summary: "Procure a Bosch Rexroth aluminum strut profile or locally reproduce it by extruding the matching 60 x 60 mm profile from aluminum alloy, anodizing if required, cutting to 2120 mm, and deburring the cut ends."
+  summary: "Prepare a Bosch Rexroth aluminum strut profile or locally reproduce it by extruding the matching 60 x 60 mm profile from aluminum alloy, anodizing if required, cutting to 2120 mm, and deburring the cut ends"
   manufacturing_steps:
     - "Source or cast suitable aluminum extrusion billet."
     - "Extrude through a die matching the Bosch Rexroth 60 x 60 mm T-slot/profile cross-section."
@@ -47,8 +47,7 @@ how_to_make:
     cited_fact_or_basis: "BOM/CAD identify a 2120 mm long Bosch Rexroth strut profile; Bosch Rexroth describes the profile system as modular aluminum framing with catalog material numbers and dimensional drawings; Rexroth technical data states the profile alloy family and anodizing process data. targeted_web_search: searched 'Bosch Rexroth strut profile 60x60 material manufacturing extrusion anodized' and 'Bosch Rexroth 60x60 strut profile weight kg/m 8mm slot'; results supported aluminum strut-profile use and material data but did not provide a row-specific manufacturing route for this exact cut length."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacture would use standard aluminum profile extrusion practice because the part is a constant cross-section profile."
-    - "Commercial procurement remains the near-term route unless the KB later models extrusion dies and finishing capacity."
+    - "Use standard aluminum profile extrusion practice because the part is a constant cross-section profile."
   uncertainty_notes:
     - "The exact Rexroth cross-section variant and any end-machining operations are not specified in the BOM row."
 kb_implications:

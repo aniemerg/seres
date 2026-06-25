@@ -38,9 +38,9 @@ material:
   uncertainty_notes:
     - "The exact procurement grade is not fully locked because the local CAD tag says Aluminum 6061 while Bosch Rexroth catalog data for strut profiles points to EN AW 6060/6063-family material."
 how_to_make:
-  summary: "Procure as a Bosch Rexroth 20x20 slot-6 aluminum strut profile cut to about 492.5 mm, or locally reproduce by extruding a matching 20 mm T-slot aluminum profile, anodizing it, cutting to length, and deburring the ends."
+  summary: "Prepare as a Bosch Rexroth 20x20 slot-6 aluminum strut profile cut to about 492.5 mm, or locally reproduce by extruding a matching 20 mm T-slot aluminum profile, anodizing it, cutting to length, and deburring the ends"
   manufacturing_steps:
-    - "Start from 6xxx-series aluminum billet or purchased Rexroth-compatible 20x20 profile stock."
+    - "Start from 6xxx-series aluminum billet or external Rexroth-compatible 20x20 profile stock"
     - "Extrude the 20 x 20 mm four-slot cross section through a profile die if making locally."
     - "Age/temper and anodize the profile to match the corrosion-resistant structural profile family."
     - "Cut one piece to about 492.5 mm and deburr or lightly finish the cut ends."
@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "The row STEP shows a constant 20 x 20 mm slotted profile 492.5 mm long; the Bosch Rexroth 20x20 sheet lists selectable/cut lengths from 50 to 3000 mm and anodized aluminum material; Bosch Rexroth describes its aluminum profile products as aluminum extrusion. targeted_web_search: searched 'Bosch Rexroth strut profile extruded anodized aluminum manufacturing' and 'Bosch Rexroth aluminum structural framing strut profiles anodized aluminum extrusion'; results supported aluminum extrusion/product-family identity but did not provide a row-specific manufacturing process sheet for this exact cut piece."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local manufacturing route follows standard practice for T-slot aluminum framing profiles because the cited sources identify the product as an aluminum extrusion but do not document the full factory process for this row."
+    - "The manufacturing route follows standard practice for T-slot aluminum framing profiles because the cited sources identify the product as an aluminum extrusion but do not document the full factory process for this row."
   uncertainty_notes:
     - "End machining details such as tapped holes or special Quick & Easy finishes are not evident in the rendered preview or row text, so this route assumes a plain cut profile."
 kb_implications:

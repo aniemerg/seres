@@ -37,9 +37,8 @@ material:
   uncertainty_notes:
     - "Material families should not be treated as a sourced Becker bill of materials; a future local-manufacturing model needs a Becker parts list or teardown-level source."
 how_to_make:
-  summary: "Current KB route should procure the Becker SV 201/1/G050508 as a calibrated purchased pump module; a later local-manufacture route would decompose it into cast or machined blower housing/impeller parts, an electric motor, sealed bearings, silencers/filter hardware, seals, vibration mounts, final assembly, and pump performance testing."
+  summary: "Manufacture route would decompose it into cast or machined blower housing/impeller parts, an electric motor, sealed bearings, silencers/filter hardware, seals, vibration mounts, final assembly, and pump performance testing"
   manufacturing_steps:
-    - "Procure Becker SV 201/1/G050508 pump module as a finished vendor component for near-term modeling."
     - "Install the pump on its pedestal or vibration isolators and connect the suction/discharge ports into the reAM250 circulation or vacuum plumbing."
     - "For future local manufacture, model separate processes for blower housing and impeller fabrication, motor manufacture or import, bearing/seal/filter sourcing, mechanical assembly, electrical hookup, and performance/leak/sound testing."
   source:
@@ -47,7 +46,6 @@ how_to_make:
     cited_fact_or_basis: "The Becker page identifies the SV 201/1 as a motorized single-stage side-channel vacuum pump/blower with oil-free non-contact operation, sealed bearings, integrated silencers, pedestal/vibration-isolator mounting, and published performance specifications. FreeCAD confirms the row CAD is one large vendor-component solid. targeted_web_search: 'Becker SV 201/1 datasheet weight material G050508' and related material/manufacturing queries found product/datasheet pages but no row-specific factory manufacturing route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the appropriate near-term manufacturing/procurement route because the row is a vendor pump module without sub-BOM detail."
     - "The local-manufacture decomposition is a planning hypothesis based on the vendor function and common electromechanical blower architecture."
   uncertainty_notes:
     - "A self-manufacturing path would need subcomponent specifications, tolerances, balancing requirements, motor data, bearing sizes, and acceptance tests before this can become a concrete KB recipe."

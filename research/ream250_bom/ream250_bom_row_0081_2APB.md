@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The STEP file contains one solid with a long 22.00 x 205.00 x 15.00 mm bounding box; the rendered preview shows a simple elongated block with planar faces, small end features, and a lengthwise relieved or tapered feature. targeted_web_search: searched '2APB_spring_block_back material', '2APB spring_block_back reAM250', 'reAM250 spring_block_back', and '2APB_spring_block_back manufacturing'; no row-specific vendor or manufacturing route was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is custom fabricated rather than purchased as a catalog module because the BOM provides no vendor or standard designation and the CAD is a simple single-solid block."
+    - "The part is custom fabricated rather than external as a catalog module because the BOM provides no vendor or standard designation and the CAD is a simple single-solid block"
   uncertainty_notes:
     - "The exact tolerances, heat treatment, and surface finish are not available from the BOM-side evidence."
 kb_implications:

@@ -37,15 +37,15 @@ material:
   uncertainty_notes:
     - "The exact EN steel grade, such as S235, S275, or S355, is not specified by the BOM row or local material metadata."
 how_to_make:
-  summary: "Procure or produce DIN EN 10219-style mild-steel square hollow section stock, then cut to the 670 mm row length and deburr/finish the ends for assembly."
+  summary: "Produce DIN EN 10219-style mild-steel square hollow section stock, then cut to the 670 mm row length and deburr/finish the ends for assembly"
   manufacturing_steps:
-    - "Produce square hollow section stock from non-alloy structural steel by cold forming and longitudinal welding, or procure equivalent DIN EN 10219 square hollow section stock."
+    - "Produce square hollow section stock from non-alloy structural steel by cold forming and longitudinal welding"
     - "Select 80 x 80 x 5 mm stock and cut one piece to the 670 mm finished length shown by the CAD model."
     - "Deburr and square the cut ends; drill or weld attachment features only if required by the downstream frame assembly."
     - "Apply the final corrosion-protection or paint system after the downstream frame joining requirements are known."
   source:
     url_or_path: "https://webstore.ansi.org/standards/din/dinen102192006-1162594; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/91A_square_profile_DIN_EN_10219-2_80x80x5_670.step; research/ream250_bom/ream250_bom_row_0286_91A__views_2x2.png"
-    cited_fact_or_basis: "ANSI's DIN EN 10219-2 listing states that the standard covers cold formed welded circular, square, and rectangular structural hollow sections and gives dimensions and sectional properties for standard sizes. CAD and preview show one 80.00 x 80.00 x 670.00 mm straight square hollow section. targeted_web_search: searched \"DIN EN 10219-2 cold formed welded structural hollow sections\", \"80x80x5 square hollow section mass per metre steel\", and \"DIN EN 10219 square hollow section cold formed welded\"; found standard/product-family evidence for cold-formed welded steel hollow sections but no row-specific fabrication drawing beyond the supplied CAD."
+    cited_fact_or_basis: "ANSI's DIN EN 10219-2 listing states that the standard covers cold formed welded circular, square, and rectangular structural hollow sections and gives dimensions and sectional properties for standard sizes. CAD and preview show one 80.00 x 80.00 x 670.00 mm straight square hollow section. targeted_web_search: searched \"DIN EN 10219-2 cold formed welded structural hollow sections\", \"80x80x5 square hollow section mass per metre steel\", and \"DIN EN 10219 square hollow section cold formed welded\" found standard/product-family evidence for cold-formed welded steel hollow sections but no row-specific fabrication drawing beyond the supplied CAD."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Cut-to-length, deburring, and later coating are inferred from the CAD-defined 670 mm member length and normal use of structural tube stock."

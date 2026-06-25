@@ -35,21 +35,19 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 320RZS063-176 full nipple, or locally fabricate an equivalent DN 63 ISO-K stainless spool from 304-series tube and ISO-K flange geometry, then clean, inspect, and leak-test before installation."
+  summary: "Prepare as Pfeiffer Vacuum 320RZS063-176 full nipple, or locally fabricate an equivalent DN 63 ISO-K stainless spool from 304-series tube and ISO-K flange geometry, then clean, inspect, and leak-test before installation"
   manufacturing_steps:
-    - "Procurement route: order or inventory the row-matched Pfeiffer Vacuum 320RZS063-176 full nipple."
     - "Receiving route: verify DN 63 ISO-K interfaces, 176 mm length, clean sealing faces, bore clearance, and absence of flange or tube damage."
-    - "Local route: fabricate from stainless 304 tube and ISO-K flange profiles or preformed ISO flanges, welding or machining the straight spool geometry shown by the CAD."
+    - "Manufacturing route: fabricate from stainless 304 tube and ISO-K flange profiles or preformed ISO flanges, welding or machining the straight spool geometry shown by the CAD."
     - "Finish route: deburr, clean/passivate for vacuum service, inspect sealing faces and dimensions, and helium leak-test before installation with the separate centering ring/seal and clamp hardware."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; research/ream250_bom/ream250_bom_row_0120_3I__views_2x2.png; https://www.vacuum-shop.com/shop/en_US/category/2073062/product/320rzs063176/full-nipple-stainless-steel-1-4301-304.html; https://www.lesker.com/newweb/flanges/fittings_iso_nipples.cfm?pgid=full"
     cited_fact_or_basis: "BOM row 120 provides the Pfeiffer Vacuum product route and the CAD preview shows a one-piece straight flanged pipe. The Pfeiffer Vacuum Online Shop identifies the row-matched DN 63 ISO-K stainless full-nipple product and dimensions. A separate ISO nipple vendor describes ISO nipples/spools as fabricated from 304L stainless steel tubing and ISO flanges. bom_url_route_check: the BOM-provided Pfeiffer route and official shop route resolve product identity, dimensions, and material but do not state a local manufacturing process; the independent ISO-nipple source was used only to sanity-check the inferred tube-plus-flange fabrication route."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement should remain the simplest KB route until a local vacuum-fitting manufacturing and leak-test workflow is modeled."
     - "Cleaning/passivation, dimensional inspection, and leak testing are included as necessary vacuum-service controls but are not specified on the row-matched product page."
   uncertainty_notes:
-    - "targeted_web_search: searched 'ISO-K full nipple stainless steel manufacturing tube flange welding' and 'vacuum flange nipple stainless steel manufacturing welded tube flanges'; results found general ISO nipple fabrication evidence but no Pfeiffer row-specific manufacturing process."
+    - "Targeted_web_search: searched 'ISO-K full nipple stainless steel manufacturing tube flange welding' and 'vacuum flange nipple stainless steel manufacturing welded tube flanges'; results found general ISO nipple fabrication evidence but no Pfeiffer row-specific manufacturing process."
 kb_implications:
   - "item_granularity: simple_part - Treat as a reusable standard DN 63 ISO-K stainless vacuum nipple/spool; preserve the 176 mm length as a variant parameter or BOM note rather than creating a machine-specific custom assembly."
 ---

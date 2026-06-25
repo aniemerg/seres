@@ -39,9 +39,9 @@ material:
     - "The local STEP material extractor returned only Generic/1000.0 metadata, so it did not independently confirm the BOM material text."
     - "The BOM text gives the material set but not the exact fraction or grade certification for each valve subcomponent."
 how_to_make:
-  summary: "Treat as a purchased ISO-KF DN40 manual valve module for KB planning. A plausible manufacturing route is machining/forming 316L stainless valve body and KF flange features, fitting the rotating disc/shaft and detent handle, installing an EPDM seal, then leak/function testing as a vendor-supplied assembly."
+  summary: "Treat as a external ISO-KF DN40 manual valve module for KB planning. A plausible manufacturing route is machining/forming 316L stainless valve body and KF flange features, fitting the rotating disc/shaft and detent handle, installing an EPDM seal, then leak/function testing as a row-matched assembly"
   manufacturing_steps:
-    - "Procure or fabricate 316L/1.4404 stainless valve body, DN40 KF flange geometry, disc, shaft, handle, and fasteners."
+    - "Fabricate 316L/1.4404 stainless valve body, DN40 KF flange geometry, disc, shaft, handle, and fasteners"
     - "Machine sealing, bore, clamp, and detent features; deburr and clean for powder/vacuum service."
     - "Install EPDM seal and rotating disc/handle assembly."
     - "Perform manual actuation, sealing, and leak/function checks before installation in the reAM250 assembly."

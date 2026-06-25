@@ -41,18 +41,17 @@ material:
     - Exact housing alloy/grade, bearing steel grade, seal elastomer, lubricant, and heat treatment are not resolved for 2AC2.
     - The CAD metadata itself does not confirm material; it only provides placeholder Generic material.
 how_to_make:
-  summary: Procure as a HIWIN SLA10-class supported bearing unit for near-term modeling; a plausible local route is precision fabrication of the steel pillow-block housing, installation of a 6200.2RS bearing and DIN 471 circlip, then alignment and fit inspection.
+  summary: "Precision fabrication of the steel pillow-block housing, installation of a 6200.2RS bearing and DIN 471 circlip, then alignment and fit inspection"
   manufacturing_steps:
-    - Procure a HIWIN SLA10 or dimensionally equivalent supported bearing unit when modeling the current machine as assembled from purchased precision motion components.
-    - For local production, machine or cast the pillow-block housing to the 86 mm x 24 mm x 58 mm envelope with the bearing seat, mounting holes, and alignment stop features.
+    - "Machine as assembled from precision motion components"
+    - Machine or cast the pillow-block housing to the 86 mm x 24 mm x 58 mm envelope with the bearing seat, mounting holes, and alignment stop features.
     - Install or locally manufacture a 6200.2RS deep-groove bearing, fit the circlip/retainer, lubricate as required, and inspect bore alignment and radial support function in the bottom-axis assembly.
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0036_2AC2__views_2x2.png; https://www.hiwin.de/en/Products/Bearings/Bearings-SFA-SLA/SLA/SLA10/p/18-000127; https://po-center.ru/HIWIN/hiwin_compact.pdf"
     cited_fact_or_basis: "HIWIN identifies SLA10 as a ready supported bearing, and the compact catalog states the SLA supported-bearing stack as steel pillow block housing, deep-groove ball bearing 62...2RS, and DIN 471 circlip. The rendered CAD context shows a compact bearing block with a central bore, mounting feet, and through holes. The detailed machining/casting, bearing manufacture, assembly, and inspection route is inferred from the geometry and catalog component stack rather than directly stated as a manufacturing process. targeted_web_search: tried 'HIWIN SLA10 manufacturing housing material', 'SLA10 supported bearing manufacturing process', 'bearing pillow block manufacturing process', and '2AC2_part_2 manufacturing'; results did not provide a row-specific manufacturing route."
     evidence_basis: engineering_hypothesis
   assumptions:
-    - Procurement is the preferred near-term route because the row corresponds to a standard supported-bearing unit and no sub-BOM drawing is available.
-    - The local route assumes conventional bearing-block construction with a precision bearing seat, standard rolling bearing insertion, and retainer hardware.
+    - The manufacturing route assumes conventional bearing-block construction with a precision bearing seat, standard rolling bearing insertion, and retainer hardware.
   uncertainty_notes:
     - Local manufacturing details such as fits, tolerances, surface finish, heat treatment, seal specification, and quality checks require a manufacturer drawing or teardown before process modeling.
 kb_implications:

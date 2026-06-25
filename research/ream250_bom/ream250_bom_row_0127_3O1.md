@@ -38,10 +38,9 @@ material:
   uncertainty_notes:
     - "The row-specific STEP material metadata is placeholder only, and the CAD subpiece does not separately label flange versus bellows regions; material should be kept as stainless bellows/hose family unless later subpart metadata identifies a narrower grade."
 how_to_make:
-  summary: "Procure as part of a Pfeiffer DN 63 ISO-K flexible corrugated hose or spring-bellows connector for current KB modeling; a plausible local route would form thin-wall stainless bellows/corrugated tubing, weld or join it to stainless ISO-K end hardware, bend/fixture the connector to the required curvature, clean/passivate, and helium leak-test for vacuum service."
+  summary: "Form thin-wall stainless bellows/corrugated tubing, weld or join it to stainless ISO-K end hardware, bend/fixture the connector to the required curvature, clean/passivate, and helium leak-test for vacuum service"
   manufacturing_steps:
-    - "Procure route: buy the row-matched Pfeiffer DN 63 ISO-K flexible hose/spring-bellows connector and model this curvature as part of that vendor connector."
-    - "Local route: form or hydroform thin-wall stainless 316L bellows/corrugated tube stock to the required DN 63 profile."
+    - "Manufacturing route: form or hydroform thin-wall stainless 316L bellows/corrugated tube stock to the required DN 63 profile."
     - "Join stainless 304/1.4301 ISO-K end hardware to the bellows or hose section using vacuum-compatible welding or equivalent joining."
     - "Fixture the assembly to the required bend/curvature, then clean, passivate as needed, and helium leak-test for vacuum tightness."
   source:
@@ -49,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "FreeCAD measured a 181.43 x 122.34 x 102.95 mm curved-part envelope for the row STEP. Pfeiffer-branded product pages identify DN 63 ISO-K flexible hose/spring-bellows hardware, stainless 304 flange material, 316L bellows material, pressure/tightness service data, and bending-radius or axial-stroke service context. The detailed local fabrication sequence is inferred from the bellows/hose geometry and stainless vacuum-service requirements rather than directly stated by a manufacturing process sheet. targeted_web_search: searched 'Pfeiffer Vacuum 320SFK063 130 flexible pipe DN 63 material weight', '320SFK063 Pfeiffer Vacuum curvature 320SWN063 material', 'site:pfeiffer-vacuum.com 320SFK063 320SWN063', '320SWN063-0250 weight kg Pfeiffer', and '320SFK063-130 weight kg Pfeiffer spring bellows'; results resolved product family, dimensions, and material, but no row-specific manufacturing process or catalog weight."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local production would need vacuum-grade thin-wall stainless forming and joining capability; the BOM row itself is better modeled as a purchased connector component until that process chain is intentionally expanded."
+    - "Need vacuum-grade thin-wall stainless forming and joining capability; the BOM row itself is better modeled as a external connector component until that process chain is intentionally expanded"
   uncertainty_notes:
     - "The vendor/CAD evidence does not state the actual Pfeiffer factory process, weld details, corrugation process, bend fixture method, surface finish, or inspection protocol."
 kb_implications:

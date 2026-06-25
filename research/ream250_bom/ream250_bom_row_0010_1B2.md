@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "The row-specific assembly STEP material metadata was placeholder Generic, so material is taken from the BOM-provided manufacturer route rather than STEP material metadata."
 how_to_make:
-  summary: "Procure as the standard GanterNorm GN 328.5-140-B-GS stainless steel bow handle; if modeled locally later, treat it as a stainless precision-cast handle with finish machining of the mounting features and matte blasting."
+  summary: "Treat it as a stainless precision-cast handle with finish machining of the mounting features and matte blasting"
   manufacturing_steps:
-    - "Specify and procure GanterNorm GN 328.5-140-B-GS, matching l1 140, Form B, and GS matte blasted finish."
     - "Receive and inspect the handle against the CAD envelope and mounting-end geometry."
     - "For a local manufacturing approximation, investment-cast stainless steel 1.4408 to the U-handle shape, finish-machine or drill the mounting holes/counterbores for the Form B interface, deburr, and matte blast the surface."
     - "Install with the mating fasteners or mounting hardware required by the reAM250 panel or door assembly."
@@ -49,10 +48,9 @@ how_to_make:
     cited_fact_or_basis: "BOM row 10 gives product GN 328.5-140-B-GS and manufacturer GanterNorm. The Ganter BOM URL canonical route identifies GN 328.5 as stainless steel precision-cast bow handles, material 1.4408, finish GS matte blasted, and includes Form B in the product-family variants. The CAD preview shows a single U-shaped handle with two mounting ends."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is preferred for KB modeling because this is an identified catalog standard component with manufacturer and product number."
     - "The local manufacturing approximation is inferred from the sourced precision-cast material description and visible mounting geometry; the source does not provide a full process plan."
   uncertainty_notes:
-    - "targeted_web_search: BOM-provided Ganter URL and canonical Ganter page were checked first; no separate drawing or process plan was needed for the procurement route, and the detailed local casting/machining sequence remains an inferred approximation."
+    - "Targeted_web_search: BOM-provided Ganter URL and canonical Ganter page were checked first"
 kb_implications:
   - "item_granularity: simple_part - model later as one catalog stainless steel bow handle GN 328.5-140-B-GS; do not split into raw casting, finish, and mounting features unless this handle becomes a major import-mass contributor."
 ---

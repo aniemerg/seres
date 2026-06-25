@@ -47,10 +47,10 @@ how_to_make:
     - "Apply anodizing, passivation, blackening, or other surface treatment only if later drawing evidence identifies a required finish."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2A8_left_distance_piece.step; research/ream250_bom/ream250_bom_row_0031_2A8__views_2x2.png"
-    cited_fact_or_basis: "CAD and preview show one 40.00 x 140.00 x 30.00 mm solid with a rectangular distance-piece form, recessed/lightened faces, and small holes. targeted_web_search: searched \"2A8_left_distance_piece\", \"reAM250 left_distance_piece\", and \"reAM250 2A8 distance\"; no row-specific manufacturing drawing, material callout, or process note was found."
+    cited_fact_or_basis: "CAD and preview show one 40.00 x 140.00 x 30.00 mm solid with a rectangular distance-piece form, recessed/lightened faces, and small holes. targeted_web_search: searched \"2A8_left_distance_piece\", \"reAM250 left_distance_piece\", and \"reAM250 2A8 distance\" no row-specific manufacturing drawing, material callout, or process note was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The part is treated as a custom simple part rather than a purchased module because the BOM row has no manufacturer, product ID, or link URL and the CAD name is assembly-specific."
+    - "The part is treated as a custom simple part because the BOM row has no manufacturer, product ID, or link URL and the CAD name is assembly-specific"
     - "Subtractive machining from bar or plate stock is assumed from the block/spacer geometry, pockets, and expected need for accurate spacing/alignment faces."
   uncertainty_notes:
     - "The CAD/BOM evidence does not specify tolerances, surface finish, heat treatment, coating, or whether the pockets are for lightening, clearance, stiffness tuning, or access."

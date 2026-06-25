@@ -39,7 +39,7 @@ material:
   uncertainty_notes:
     - "No sourced alloy family, grade, hardness, or surface treatment is available for this row; later KB modeling should keep material broad unless better CAD metadata or drawings are found."
 how_to_make:
-  summary: "Fabricate as a small machined metal blade-extension block; local manufacture would cut a blank from thin metal bar or plate stock, mill the rectangular/chamfered profile and relieved faces, drill the two through holes, deburr, clean or passivate if stainless, and inspect hole spacing plus flatness before assembly."
+  summary: "Fabricate as a small machined metal blade-extension block; cut a blank from thin metal bar or plate stock, mill the rectangular/chamfered profile and relieved faces, drill the two through holes, deburr, clean or passivate if stainless, and inspect hole spacing plus flatness before assembly."
   manufacturing_steps:
     - "Cut a metal bar or plate blank slightly oversize for the roughly 22 x 14 x 4.5 mm envelope."
     - "Mill the outside profile and relieved or chamfered faces visible in the CAD preview."

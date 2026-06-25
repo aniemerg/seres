@@ -53,7 +53,7 @@ how_to_make:
     - "The visible thin folded geometry is treated as sheet-metal work rather than casting or billet machining."
     - "Final sealing/joining details are deferred to the surrounding gas outlet assembly because this row represents only part 2."
   uncertainty_notes:
-    - "targeted_web_search: searched \"3S42_part_2 gas outlet reAM250 material\", \"3S42 gas outlet reAM250\", and \"reAM250 gas outlet material\"; found no row-specific manufacturing drawing or process note."
+    - "Targeted_web_search: searched \"3S42_part_2 gas outlet reAM250 material\", \"3S42 gas outlet reAM250\", and \"reAM250 gas outlet material\" found no row-specific manufacturing drawing or process note."
     - "The CAD preview does not show the complete gas outlet assembly, so the final joining method remains unresolved."
 kb_implications:
   - "item_granularity: simple_part - Custom thin folded gas-outlet segment best modeled as one fabricated sheet-metal part, with assembly-level joining handled by the larger gas outlet."

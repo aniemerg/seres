@@ -49,7 +49,7 @@ how_to_make:
     cited_fact_or_basis: "The STEP geometry is one steel solid with a 265.00 x 6.00 x 20.00 mm envelope, and the rendered preview shows a long narrow blade/strip without purchased-module features. targeted_web_search: tried '\"6C1_blade\" reAM250 material', '\"6C1_blade\" \"scraper_blade\"', '\"6C0_scraper_blade\" reAM250', and 'RenAM 250 recoater blade scraper blade metal additive manufacturing powder bed recoater function'; results found duplicate reAM250 BOM listings and general recoater-blade context, but no row-specific fabrication drawing or manufacturing-process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Cutting and edge machining/grinding from steel stock is the most plausible local route for the observed one-piece blade geometry."
+    - "Cutting and edge machining/grinding from steel stock is the most plausible Manufacturing route for the observed one-piece blade geometry."
     - "Powder-bed recoater service requires a clean, straight, burr-free working edge."
   uncertainty_notes:
     - "No row-specific drawing was found, so exact edge angle, flatness, hardness, coating, and surface-finish requirements remain unresolved."

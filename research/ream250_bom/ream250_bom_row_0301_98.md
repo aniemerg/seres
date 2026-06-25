@@ -46,7 +46,7 @@ how_to_make:
     - "Deburr, clean, and apply any required surface finish or corrosion protection before frame assembly."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/98_plate.step; research/ream250_bom/ream250_bom_row_0301_98__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "FreeCAD measured one solid with a 900.00 x 10.00 x 960.00 mm bounding box. The rendered preview shows a plain flat rectangular plate with no visible holes, pockets, threads, or multi-part features. targeted_web_search: searched \"98_plate reAM250 material\", \"reAM250 98_plate material\", \"reAM250 900 960 10 plate\", and \"reAM250 98 4 98_plate\"; found duplicate BOM listings but no row-specific fabrication drawing or manufacturing instructions."
+    cited_fact_or_basis: "FreeCAD measured one solid with a 900.00 x 10.00 x 960.00 mm bounding box. The rendered preview shows a plain flat rectangular plate with no visible holes, pockets, threads, or multi-part features. targeted_web_search: searched \"98_plate reAM250 material\", \"reAM250 98_plate material\", \"reAM250 900 960 10 plate\", and \"reAM250 98 4 98_plate\" found duplicate BOM listings but no row-specific fabrication drawing or manufacturing instructions."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Plate cutting and edge finishing are selected as the plausible route because the CAD is a simple prismatic 10 mm plate."

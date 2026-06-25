@@ -38,9 +38,8 @@ material:
   uncertainty_notes:
     - "No row-specific material property was embedded in the STEP file; exact aluminum alloy grade is not identified."
 how_to_make:
-  summary: "Prefer procurement as the SMC LEFG32-S-600 support-guide product or service part; for local modeling, represent this row as a CNC-machined/anodized aluminum carriage/table component that is assembled with the rail, seal band, and guide hardware in the complete support-guide module."
+  summary: "Represent this row as a CNC-machined/anodized aluminum carriage/table component that is assembled with the rail, seal band, and guide hardware in the complete support-guide module"
   manufacturing_steps:
-    - "Procure the SMC LEFG32-S-600 support guide when using vendor supply."
     - "For local manufacture of the carriage only, machine the carriage/table from aluminum-alloy bar or plate/extrusion stock to the 60.00 x 15.20 x 122.00 mm CAD envelope with mounting holes, side reliefs, and guide interfaces."
     - "Deburr, clean, and anodize the aluminum carriage; inspect mounting-hole positions and guide contact/reference faces."
     - "Assemble the carriage with the companion rail/support-guide hardware, stainless seal-band parts, and any bushing or guide elements needed for the full LEFG support guide."
@@ -49,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "The SMC catalog identifies LEFG as a support guide, gives LEFG32-S-600 dimensions/weight, and lists aluminum-alloy anodized structural parts plus stainless steel seal-band components for the product family. CAD/preview show one machined carriage-like solid with mounting holes and relieved faces. The detailed machining, anodizing, inspection, and assembly sequence is inferred from geometry and catalog material stack rather than stated by SMC as a manufacturing process. targeted_web_search: searched 'SMC LEFG32-S-600 weight material', 'LEFG32-S-600 SMC linear guide datasheet mass', 'LEFG32-S-600 manufacturing process', and 'SMC LEFG support guide material table'; results found row-matched SMC catalog/distributor function, dimensions, weight, and material-family evidence but no row-specific manufacturing-process specification."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Local manufacturing would model the carriage as a machined aluminum part and the complete guide as a later assembly, not as a monolithic casting."
+    - "Model the carriage as a machined aluminum part and the complete guide as a later assembly, not as a monolithic casting."
   uncertainty_notes:
     - "Guide contact geometry, bearing interfaces, tolerances, surface treatment details, and any proprietary slider hardware are not fully specified by the accessible sources."
 kb_implications:

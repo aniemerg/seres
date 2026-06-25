@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows one long axisymmetric crowned shaft/roller with end journals. AELM Roller Company describes crowned roller services that grind and shape convex, concave, cylindrical, straight-taper, and other roller profiles. targeted_web_search: tried 'convex crowned shaft manufacturing turning grinding crowned shaft' and 'crowned roller shaft machining crowned shaft lathe grinding'; results supported crowning/grinding as a plausible roller profile route but did not provide a row-specific reAM250 manufacturing drawing."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Because the part is a one-piece stainless axisymmetric shaft, turning plus profile grinding/finishing is the most plausible local route."
+    - "Because the part is a one-piece stainless axisymmetric shaft, turning plus profile grinding/finishing is the most plausible Manufacturing route."
     - "The crowned surface is functionally important enough to require inspection rather than treating the part as plain cut round stock."
   uncertainty_notes:
     - "No row-specific drawing states tolerances, crown height, bearing fits, heat treatment, or required surface roughness."

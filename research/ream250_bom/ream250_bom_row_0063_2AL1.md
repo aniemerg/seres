@@ -37,10 +37,9 @@ material:
   uncertainty_notes:
     - "Exact housing material, shaft alloy, bearing materials, seals, lubricant, and heat-treatment grades remain unspecified."
 how_to_make:
-  summary: "Treat as a purchased precision gearbox module for current KB granularity; a local route would require machining housing and shafts, cutting/grinding hardened planetary gear components, bearing and seal installation, lubrication, right-angle gearbox assembly, and performance inspection."
+  summary: "Treat as a external precision gearbox module for current KB granularity; Manufacturing requires machining housing and shafts, cutting/grinding hardened planetary gear components, bearing and seal installation, lubrication, right-angle gearbox assembly, and performance inspection"
   manufacturing_steps:
-    - "Procure the B&R 8GA40-060 ratio-25 angular planetary gearbox as the current practical route."
-    - "For a future local route, machine the gearbox housing, output shaft, input adapter, and right-angle gear carrier interfaces from suitable metal stock."
+    - "For a future Manufacturing route, machine the gearbox housing, output shaft, input adapter, and right-angle gear carrier interfaces from suitable metal stock."
     - "Manufacture sun, planet, ring, and bevel/right-angle gear elements with heat treatment and finishing suitable for hardened gear teeth."
     - "Install bearings, seals, lubricant, and fasteners, then assemble the two-stage ratio-25 gearbox."
     - "Inspect backlash, torque capacity, shaft alignment, seal integrity, and running noise before integration."
@@ -50,7 +49,6 @@ how_to_make:
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The manufacturing route is inferred from the resolved product type, visible CAD geometry, and standard precision gearbox construction practice."
-    - "Because this is a calibrated mechanical power-transmission assembly, current KB modeling should prefer procurement/module treatment until a detailed sub-BOM and calibration workflow are available."
   uncertainty_notes:
     - "B&R's actual supplier, gear finishing method, bearing selection, lubricant, seal details, and quality-control specifications are not provided by the row evidence."
 kb_implications:

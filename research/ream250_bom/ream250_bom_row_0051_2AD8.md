@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - The row-specific local STEP material is a placeholder, and targeted_web_search: queries '2AD8 axis bearing top reAM250', 'axis bearing top 2AD8_part_8', and '4.95 mm bearing ball material steel' found the BOM text and generic bearing-ball material examples, but no row-specific vendor material record.
 how_to_make:
-  summary: Procure as a standard precision bearing ball; local production would follow bearing-ball forming, hardening, grinding, lapping, polishing, and inspection.
+  summary: "Follow bearing-ball forming, hardening, grinding, lapping, polishing, and inspection"
   manufacturing_steps:
     - Select a standard steel bearing-ball size matching the CAD diameter near 4.95 mm.
     - For local manufacture, cut steel wire slug stock and cold-head or forge it into a ball blank.
@@ -46,8 +46,7 @@ how_to_make:
     url_or_path: https://www.metal-ball.com/wp-content/uploads/2016/02/manufacturing-std.pdf; https://www.grw.de/files/grw/FINALE%20BILDDATEN/INFOTHEK/DOWNLOADS/BROSCHUEREN/EN/GRW_Bearing%20Materials_2023.pdf
     cited_fact_or_basis: "Standard bearing-ball documents define ISO/DIN ball classes and bearing material families; the row has enough standard parameters for procurement planning only at the family/diameter level, not a complete grade designation."
     evidence_basis: standard_part_convention
-  assumptions:
-    - Procurement is the preferred route for this small precision item unless later KB work explicitly models bearing-ball finishing capability.
+  assumptions: []
   uncertainty_notes:
     - The exact tolerance grade, hardness, and corrosion-resistance requirement are not present in the BOM or CAD evidence.
 kb_implications:

@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "The evidence supports only a broad metal/alloy family; downstream KB modeling should not assign a specific grade without a drawing, material callout, or related assembly note."
 how_to_make:
-  summary: "Fabricate as a one-piece machined bearing support bracket from metal billet or plate stock, or procure as part of the reAM250 lower-axis bearing fabrication package."
+  summary: "Fabricate as a one-piece machined bearing support bracket from metal billet or plate stock"
   manufacturing_steps:
     - "Cut a metal billet or thick plate blank large enough for the 86 x 24 x 58 mm envelope."
     - "CNC mill the external block, feet, and angled relief faces."

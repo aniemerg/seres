@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "DIN 912 socket head cap screws are commonly sold in several steel grades and finishes, but this row's local STEP metadata resolves only the broad mild-steel material family, not a property class or coating."
 how_to_make:
-  summary: "Procure as a standard DIN 912 M8x35 socket head cap screw; a local manufacturing route would form or machine a steel screw blank, create the cylindrical head and hex socket, roll or cut the M8 thread, apply heat treatment/coating if required, and inspect thread/head dimensions."
+  summary: "Prepare as a standard DIN 912 M8x35 socket head cap screw; a Manufacturing route would form or machine a steel screw blank, create the cylindrical head and hex socket, roll or cut the M8 thread, apply heat treatment/coating if required, and inspect thread/head dimensions"
   manufacturing_steps:
     - "Start from steel wire, rod, or screw blank stock sized for an M8 socket head cap screw."
     - "Cold-head or machine the cylindrical cap head and shank."
@@ -47,8 +47,7 @@ how_to_make:
     cited_fact_or_basis: "The CAD preview shows a socket-head threaded screw geometry. The Accu M8 x 35 mm DIN 912 page identifies this size family as full-thread socket head cap screws and lists M8, 35 mm length, DIN 912 / ISO 4762, steel material, and zinc-plated finish for one common variant. The item24 page lists a DIN 912 M8x35 bright-zinc-plated hexagon socket head cap screw with cylindrical head. targeted_web_search: tried 'DIN 912 M8 x 35 socket head cap screw dimensions material steel' and 'DIN 912 M8 x 35 socket head cap screw bright zinc plated steel M8x35'; found matching standard-part/vendor identity and material examples, but no row-specific reAM250 manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route is inferred from the row's standard screw geometry and common fastener production methods, not from a reAM250 production drawing."
-    - "Procurement of reusable standard M8 DIN 912 hardware is the default KB route unless local screw manufacturing is explicitly modeled."
+    - "The manufacturing route is inferred from the row's standard screw geometry and common fastener production methods, not from a reAM250 production drawing."
   uncertainty_notes:
     - "The row does not state property class, coating, or actual supplier process; those details matter for strength/corrosion modeling but not for coarse BOM mass closure."
 kb_implications:

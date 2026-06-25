@@ -44,7 +44,7 @@ how_to_make:
     - "Apply any required surface finish or protective coating before installation."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/17AJ_sheet_front.step; research/ream250_bom/ream250_bom_row_0238_17AJ__views_2x2.png"
-    cited_fact_or_basis: "CAD geometry is one simple solid with bounding box 2.00 x 32.00 x 634.40 mm. The contact sheet shows a plain long thin rectangular sheet with no visible holes, slots, bends, flanges, or attached subparts. targeted_web_search: searched \"17AJ_sheet_front material\", \"17AJ sheet_front reAM250 material\", \"reAM250 17AJ sheet_front\", and \"17AJ_sheet_front\"; found duplicate BOM text and no row-specific vendor/manufacturing source."
+    cited_fact_or_basis: "CAD geometry is one simple solid with bounding box 2.00 x 32.00 x 634.40 mm. The contact sheet shows a plain long thin rectangular sheet with no visible holes, slots, bends, flanges, or attached subparts. targeted_web_search: searched \"17AJ_sheet_front material\", \"17AJ sheet_front reAM250 material\", \"reAM250 17AJ sheet_front\", and \"17AJ_sheet_front\" found duplicate BOM text and no row-specific vendor/manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "Because no holes, bends, or complex features are visible, a simple sheet-cutting route is sufficient for KB-level modeling."

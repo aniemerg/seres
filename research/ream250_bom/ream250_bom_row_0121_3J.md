@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "Assembly STEP material metadata for this CAD object is only 'Generic' at density 1000, so the usable material evidence comes from the row-matched Pfeiffer product route rather than embedded CAD material metadata."
 how_to_make:
-  summary: "Procure as a standard Pfeiffer 320RZS063 ISO-K DN 63 full nipple, or manufacture locally as a stainless 304/1.4301 vacuum tube with two ISO-K flange ends, weld/braze or form the tube-flange geometry, then finish and leak-test for high-vacuum service."
+  summary: "Prepare as a standard Pfeiffer 320RZS063 ISO-K DN 63 full nipple, or manufacture locally as a stainless 304/1.4301 vacuum tube with two ISO-K flange ends, weld/braze or form the tube-flange geometry, then finish and leak-test for high-vacuum service"
   manufacturing_steps:
     - "Cut stainless 304/1.4301 tube stock to the 88 mm overall length envelope for DN 63 ISO-K geometry."
     - "Form or machine the ISO-K flange lips/end features and join them to the tube if made from separate flange rings."
@@ -46,7 +46,7 @@ how_to_make:
     cited_fact_or_basis: "Pfeiffer identifies the row product as a stainless 1.4301/304 full nipple with DN 63 ISO-K connection and 88 mm length; CAD preview shows a straight hollow cylindrical spool with flanged ends. targeted_web_search: searched 'Pfeiffer 320RZS063 manufacturing full nipple stainless steel 1.4301' and '320RZS063 datasheet manufacturing' and found row-matched product/datasheet facts but no row-specific manufacturing process description."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route follows common vacuum hardware fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
+    - "The manufacturing route follows common vacuum hardware fabrication practice inferred from the product geometry and material, not a Pfeiffer-published process sheet."
   uncertainty_notes:
     - "Exact factory process details such as deep drawing versus machined flange rings plus welded tube are not resolved."
 kb_implications:

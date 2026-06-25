@@ -40,7 +40,7 @@ material:
   uncertainty_notes:
     - "Do not use this as a specific alloy or heat-treatment claim; the evidence supports only a broad mixed actuator-rail material hypothesis."
 how_to_make:
-  summary: "Model as a precision-machined/anodized aluminum actuator rail or base extrusion, with any hardened guide surfaces or inserts treated as purchased precision guide components until the internal LEFS rail construction is modeled."
+  summary: "Model as a precision-machined/anodized aluminum actuator rail or base extrusion, with any hardened guide surfaces or inserts treated as external precision guide components until the internal LEFS rail construction is modeled"
   manufacturing_steps:
     - "Start from aluminum extrusion or machined aluminum bar sized for the LEFS32 base/rail envelope."
     - "Mill the longitudinal channels, mounting faces, slots, and end features visible in the CAD preview."

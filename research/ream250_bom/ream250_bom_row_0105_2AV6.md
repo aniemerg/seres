@@ -35,17 +35,15 @@ material:
   uncertainty_notes:
     - "The BOM and CAD name do not specify property class, coating, or surface finish, so downstream modeling should not infer strength grade or corrosion behavior from this result."
 how_to_make:
-  summary: "Treat as standard DIN 912 / ISO 4762-style M4x0.7 x 30 socket-head cap screw hardware; the practical route is to procure or model it as reusable standard steel fastener stock rather than a reAM250-specific custom part."
+  summary: "Treat as standard DIN 912 / ISO 4762-style M4x0.7 x 30 socket-head cap screw hardware"
   manufacturing_steps:
     - "Specify a DIN 912 socket-head cap screw with M4x0.7 thread and 30 mm nominal length, matching the row CAD/designation."
-    - "Procure from standard metric fastener inventory or represent by a generic steel M4 socket-head cap screw in later KB modeling."
     - "Inspect diameter, length, socket head, and thread fit before assembly use."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; research/ream250_bom/ream250_bom_row_0105_2AV6__views_2x2.png"
     cited_fact_or_basis: "The row designation includes standard DIN 912 and parameters M4x0.7x30x20; these parameters are complete enough for screw family, nominal metric thread, and length/interface, but incomplete for property class, coating, or exact supplier. The rendered preview confirms the socket-head cap screw shape."
     evidence_basis: "standard_part_convention"
-  assumptions:
-    - "For this research row, procurement or generic-standard-fastener reuse is the intended route; detailed local screw manufacturing is deferred."
+  assumptions: []
   uncertainty_notes:
     - "The standard designation and CAD resolve the hardware family and basic interface, but not the supplier, strength class, coating, or production process."
 kb_implications:

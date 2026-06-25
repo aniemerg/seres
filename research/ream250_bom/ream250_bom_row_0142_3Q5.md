@@ -35,7 +35,7 @@ material:
   uncertainty_notes:
     - "The assembly STEP metadata returned only Generic material with density 1000.0, so material is taken from the row-matched official shop route rather than local STEP metadata."
 how_to_make:
-  summary: "Model as a standard zinc-plated steel ISO-K vacuum fastening claw clamp. Plausible local production would machine or forge a small steel clamp blank, tap/thread the M8 interface, finish bearing faces, zinc plate, and inspect fit; near-term KB modeling should reuse a standard vacuum fastener part."
+  summary: "Model as a standard zinc-plated steel ISO-K vacuum fastening claw clamp. Plausible machine or forge a small steel clamp blank, tap/thread the M8 interface, finish bearing faces, zinc plate, and inspect fit; near-term KB modeling should reuse a standard vacuum fastener part."
   manufacturing_steps:
     - "Cut or forge a small steel blank for the claw clamp body."
     - "Machine the stepped claw faces and central threaded M8 feature indicated by the vendor dimensions and CAD preview."
@@ -50,7 +50,7 @@ how_to_make:
     - "Vacuum service requires clean, burr-free clamp bearing faces even though the exact vendor finishing process is not stated."
   uncertainty_notes:
     - "The vendor/CAD evidence resolves function, material, envelope, and interface dimensions but not the actual production process, plating thickness, or inspection standard."
-    - "targeted_web_search: searched \"350BPD100 Weight\", \"350BPD100 Mass\", \"Datasheet_350BPD100_en.pdf weight\", and \"350BPD100 Pfeiffer Vacuum ISO-K DN100 clamp weight material\"; found row-matched material, dimensions, and function facts but no row-specific manufacturing process or catalog weight."
+    - "Targeted_web_search: searched \"350BPD100 Weight\", \"350BPD100 Mass\", \"Datasheet_350BPD100_en.pdf weight\", and \"350BPD100 Pfeiffer Vacuum ISO-K DN100 clamp weight material\" found row-matched material, dimensions, and function facts but no row-specific manufacturing process or catalog weight."
 kb_implications:
   - "item_granularity: simple_part - standard ISO-K zinc-plated steel vacuum claw clamp/fastener; later KB work should prefer a reusable standard hardware item rather than a machine-specific 3Q5-only item."
 ---

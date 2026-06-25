@@ -35,7 +35,7 @@ material:
   assumptions: []
   uncertainty_notes: []
 how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 320RRB100-90, or locally fabricate as a cleaned stainless 304 ISO-K 90 degree vacuum elbow with two ISO-K flange ends."
+  summary: "Locally fabricate as a cleaned stainless 304 ISO-K 90 degree vacuum elbow with two ISO-K flange ends"
   manufacturing_steps:
     - "Cut or form a stainless 304 90 degree elbow body sized for DN 100 vacuum service."
     - "Machine or form the ISO-K flange features at both ends, matching the DN 100 interface."

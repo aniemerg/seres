@@ -47,7 +47,7 @@ how_to_make:
     - "Install and align the plate/flag in the top end-switch sensor assembly with the adjacent inductive sensor hardware."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AR_end_switch_sensor_top.step; research/ream250_bom/ream250_bom_row_0094_2AR__views_2x2.png"
-    cited_fact_or_basis: "The row STEP measures one 40.00 x 60.00 x 2.00 mm solid, and the rendered contact sheet shows a thin plate-like L-shaped part with two round holes. targeted_web_search: searched \"2AR_end_switch_sensor_top material\", \"2AR end switch sensor reAM250 material\", and \"end switch sensor top bracket material\"; found no row-specific manufacturing-process source."
+    cited_fact_or_basis: "The row STEP measures one 40.00 x 60.00 x 2.00 mm solid, and the rendered contact sheet shows a thin plate-like L-shaped part with two round holes. targeted_web_search: searched \"2AR_end_switch_sensor_top material\", \"2AR end switch sensor reAM250 material\", and \"end switch sensor top bracket material\" found no row-specific manufacturing-process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The dominant manufacturing route is inferred from the thin constant-thickness plate geometry and visible mounting holes."

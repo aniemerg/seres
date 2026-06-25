@@ -36,10 +36,9 @@ material:
   uncertainty_notes:
     - "There is a material naming mismatch between the CAD package metadata and the vendor wording; preserve both until a drawing or datasheet resolves the exact delivered alloy grade."
 how_to_make:
-  summary: "Use the AMPROVED Powder Container - 2L as the supported procurement route; a plausible local route is to form or fabricate the steel bottle body, add the ISO KF DN40 neck/interface, finish for powder compatibility, and verify sealing and cleanliness."
+  summary: "Form or fabricate the steel bottle body, add the ISO KF DN40 neck/interface, finish for powder compatibility, and verify sealing and cleanliness"
   manufacturing_steps:
-    - "Procure or quote the AMPROVED Powder Container - 2L through the BOM-linked AMPROVED product route when matching the original reAM250 BOM."
-    - "For a later local-manufacturing model, fabricate the bottle-like steel body from suitable steel or stainless steel by forming, spinning, drawing, or welded fabrication consistent with the CAD envelope."
+    - "Fabricate the bottle-like steel body from suitable steel or stainless steel by forming, spinning, drawing, or welded fabrication consistent with the CAD envelope."
     - "Machine or attach the ISO KF DN40 neck/interface, then finish, clean, and passivate or otherwise protect the powder-contacting surfaces."
     - "Inspect capacity, envelope, ISO KF DN40 fit, resealability, and powder-cleanliness behavior before assembly into the powder-handling system."
   source:
@@ -47,7 +46,7 @@ how_to_make:
     cited_fact_or_basis: "BOM row 136 identifies manufacturer AMPROVED and links to the Powder Container - 2L product route. The AMPROVED page identifies a purchasable 2 L powder container with ISO KF DN40 connection and downloadable CAD. The row CAD geometry and preview show a one-piece bottle-like container body with shoulder, neck, and top connection. targeted_web_search: queried 'AMPROVED Powder Container 2L manufacturing process material drawing' and 'AMPROVED powder container 2L datasheet stainless ISO KF DN40'; results resolved product function, material family, interface, and CAD downloads but did not state a detailed fabrication process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The local route is inferred from the bottle-like CAD geometry, steel material evidence, and ISO KF DN40 interface rather than from a vendor-stated process plan."
+    - "The manufacturing route is inferred from the bottle-like CAD geometry, steel material evidence, and ISO KF DN40 interface rather than from a vendor-stated process plan."
   uncertainty_notes:
     - "The actual vendor process, surface finish, cleanliness specification, and pressure or protective-atmosphere qualification are not stated by the available row evidence."
 kb_implications:

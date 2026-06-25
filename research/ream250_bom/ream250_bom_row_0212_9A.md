@@ -41,7 +41,7 @@ material:
     - "No row-specific grade such as S235, S275, S355, stainless, or aluminum alloy is provided."
     - "The exact coating, finish, and corrosion-protection state are unknown."
 how_to_make:
-  summary: "Procure as 180 x 80 x 5 mm structural steel rectangular hollow section stock and cut to the 900 mm CAD length; full local manufacture would use steel tube forming and seam welding followed by sizing, cut-off, deburring, and inspection."
+  summary: "Prepare as 180 x 80 x 5 mm structural steel rectangular hollow section stock and cut to the 900 mm CAD length; full use steel tube forming and seam welding followed by sizing, cut-off, deburring, and inspection"
   manufacturing_steps:
     - "Source structural steel rectangular hollow section stock close to the CAD-implied 180 x 80 x 5 mm profile."
     - "Cut one member to the 900 mm CAD length."
@@ -53,7 +53,7 @@ how_to_make:
     cited_fact_or_basis: "The row STEP and preview show a constant-section 900.00 x 80.00 x 180.00 mm hollow profile. targeted_web_search: searched '9A_top_square_profile reAM250 material', 'reAM250 top square profile material', and '180x80x5 rectangular hollow section steel'; results supported the common structural hollow-section stock route but did not provide a row-specific manufacturing drawing or supplier process for this exact reAM250 part."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "For KB planning, the normal route is procurement of stock hollow section and saw/abrasive cut-to-length rather than machining from solid."
+    - "Cut-to-length rather than machining from solid"
     - "No special machined holes, slots, pockets, or welded attachments are visible in the rendered contact sheet."
   uncertainty_notes:
     - "The row does not specify whether the production part is painted, plated, welded into a larger frame, or modified after cutting."

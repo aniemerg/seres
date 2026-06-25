@@ -45,7 +45,7 @@ how_to_make:
     - "Deburr, clean, and apply corrosion-control finish compatible with the selected alloy."
   source:
     url_or_path: "research/ream250_bom/ream250_bom_row_0058_2AG__views_2x2.png; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AG_cover_plate.step"
-    cited_fact_or_basis: "The CAD preview and STEP geometry show a shallow 210 x 200 x 15 mm cover-like solid with machined-looking ribs/flanges and multiple mounting holes. targeted_web_search: searched \"2AG_cover_plate manufacturing\", \"2AG cover plate reAM250 drawing\", and \"reAM250 2AG cover plate material\"; no row-specific manufacturing note or drawing was found."
+    cited_fact_or_basis: "The CAD preview and STEP geometry show a shallow 210 x 200 x 15 mm cover-like solid with machined-looking ribs/flanges and multiple mounting holes. targeted_web_search: searched \"2AG_cover_plate manufacturing\", \"2AG cover plate reAM250 drawing\", and \"reAM250 2AG cover plate material\" no row-specific manufacturing note or drawing was found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "CNC machining from plate stock is selected as the plausible route for a low-quantity custom machine cover with reliefs and holes."

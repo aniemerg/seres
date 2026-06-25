@@ -46,7 +46,7 @@ how_to_make:
     - "Apply finish appropriate to the selected sheet material, such as anodizing for aluminum or passivation/paint for steel."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/41E_cover_drivetrain.step; research/ream250_bom/ream250_bom_row_0260_41E__views_2x2.png"
-    cited_fact_or_basis: "CAD preview shows a thin open cover with straight folded walls and lips, not a complex machined block. targeted_web_search: queries tried: \"41E_cover_drivetrain\", \"reAM250 cover drivetrain material\", \"41E cover drivetrain reAM250\", and \"41E_cover_drivetrain 41E\"; no row-specific manufacturing drawing or vendor route found."
+    cited_fact_or_basis: "CAD preview shows a thin open cover with straight folded walls and lips, not a complex machined block. targeted_web_search: queries tried: \"41E_cover_drivetrain\", \"reAM250 cover drivetrain material\", \"41E cover drivetrain reAM250\", and \"41E_cover_drivetrain 41E\" no row-specific manufacturing drawing or vendor route found."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "The part is intended for conventional sheet-metal fabrication because its geometry is dominated by flat faces and bends."

@@ -38,17 +38,15 @@ material:
   uncertainty_notes:
     - "Exact winding mass, magnet type, bearing type, insulation class material, and body/shaft alloy grades are unresolved and would need a manufacturer drawing, teardown, or detailed datasheet."
 how_to_make:
-  summary: "Near-term KB modeling should procure NEMA23-05 as a finished stepper motor module; a later local route would split it into motor housing/shaft, laminated magnetic core parts, rotor magnets, copper winding, bearings, cable/insulation, assembly, and electrical/torque testing."
+  summary: "Manufacturing route would split it into motor housing/shaft, laminated magnetic core parts, rotor magnets, copper winding, bearings, cable/insulation, assembly, and electrical/torque testing"
   manufacturing_steps:
-    - "Procure the NEMA23-05 / NEMA 23 bipolar stepper motor as a finished catalog component for the reAM250 recoater drive."
     - "Install it at the recoater pulley location, mount the NEMA 23 face, fit the 6.35 mm bore GT2 pulley to the shaft flat, route the four motor leads, and connect it to the stepper driver."
-    - "For future local manufacture, make or procure the metal frame/end caps/shaft, laminated stator and rotor pole pieces, permanent magnet rotor, copper windings, bearings, cable and insulation parts, then assemble, align, and test step angle, winding resistance, insulation, holding torque, and runout."
+    - "For future local manufacture, Make the metal frame/end caps/shaft, laminated stator and rotor pole pieces, permanent magnet rotor, copper windings, bearings, cable and insulation parts, then assemble, align, and test step angle, winding resistance, insulation, holding torque, and runout"
   source:
     url_or_path: "https://www.reichelt.com/de/en/shop/product/stepper_motor_nema_23_1_8_1_0_a_6_5_v_-335326; https://joy-it.net/en/products/NEMA23-05; research/ream250_bom/ream250_bom_row_0200_6T__views_2x2.png"
     cited_fact_or_basis: "Reichelt identifies the row-matched product as a NEMA23-05 bipolar NEMA 23 stepper motor with 1.8 degree step angle, 132 Ncm holding torque, 6.35 mm shaft, and 1 A / 6.5 V rating. Joy-IT identifies NEMA23-05 as shipped as a stepper motor with 4 connecting cables and 6.35 x 20 mm shaft. The CAD contact sheet shows a finished motor body with protruding shaft and lead/cable feature. targeted_web_search: queries tried included 'NEMA23-05 manufacturing route', 'NEMA23-05 datasheet material winding shaft bearing', and 'hybrid stepper motor manufacturing laminated stator rotor winding'; results resolved product identity and generic motor construction but no row-specific factory process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Procurement is the correct near-term route because the row is a finished vendor electromechanical module and the KB does not yet have a motor sub-BOM or calibration workflow."
     - "The local-manufacture decomposition is a planning hypothesis based on the row-matched motor type, CAD shape, and common stepper motor architecture."
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need lamination geometry, magnet specification, winding turns and wire gauge, bearing and shaft tolerances, insulation system, balancing/runout requirements, torque test method, and driver compatibility tests."

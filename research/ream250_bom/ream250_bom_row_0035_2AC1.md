@@ -37,17 +37,17 @@ material:
   uncertainty_notes:
     - "No row-specific grade, heat treatment, bearing steel grade, seal material, or coating was resolved from the BOM-side STEP metadata."
 how_to_make:
-  summary: "Procure as a standard SLA10 supported bearing unit, or locally model as a precision steel pillow-block/bearing assembly."
+  summary: "Locally model as a precision steel pillow-block/bearing assembly"
   manufacturing_steps:
     - "Machine or grind the steel pillow-block housing to the SLA10 mounting envelope and bearing seat geometry."
-    - "Procure or manufacture a 6200.2RS deep-groove ball bearing and matching locknut/circlip hardware."
+    - "Manufacture a 6200.2RS deep-groove ball bearing and matching locknut/circlip hardware"
     - "Press the bearing into the pillow block, install the retaining hardware, and inspect shaft height/alignment against the ballscrew support axis."
   source:
     url_or_path: "https://www.hiwin.de/en/Products/Bearings/Bearings-SFA-SLA/SLA/SLA10/p/18-000127; https://www.multiproject.ro/download/Hiwin_Compact.pdf; research/ream250_bom/ream250_bom_row_0035_2AC1__views_2x2.png"
     cited_fact_or_basis: "HIWIN identifies SLA10 as a supported bearing with bearing type 6200.2RS and dimensions matching the CAD context. The HIWIN compact catalog states the SLA unit includes a steel pillow block, bearing, and locknut, and notes the pillow block can be fixed from top and bottom with a stop edge for alignment. The CAD preview shows a pillow-block-like bracket with central bearing bore and mounting holes. targeted_web_search: queries tried: 'SLA10 axis bearing', 'SLA10 bearing bottom', 'SLA10 linear bearing aluminum housing'; result: found row-matching SLA10 supported-bearing references but no source that directly states the manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "Detailed local manufacturing would follow common bearing-unit practice: precision machining/grinding for the housing, purchased or separately manufactured bearing elements, then press-fit assembly and inspection."
+    - "Detailed follow common bearing-unit practice: precision machining/grinding for the housing, separately manufactured bearing elements, then press-fit assembly and inspection"
   uncertainty_notes:
     - "The proposed manufacturing route is inferred from geometry and standard bearing-unit construction; the cited vendor sources support product identity and components, not the full manufacturing process."
 kb_implications:

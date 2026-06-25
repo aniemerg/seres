@@ -37,7 +37,7 @@ material:
   uncertainty_notes:
     - "Exact stainless grade, heat treatment, and surface finish are unspecified."
 how_to_make:
-  summary: "Procure or fabricate as a simple stainless-steel bracket/link: cut or laser/waterjet the bracket blank from stainless stock, machine or drill the mounting holes and locating faces, deburr, finish, and inspect against the motor-mount assembly."
+  summary: "Fabricate as a simple stainless-steel bracket/link: cut or laser/waterjet the bracket blank from stainless stock, machine or drill the mounting holes and locating faces, deburr, finish, and inspect against the motor-mount assembly"
   manufacturing_steps:
     - "Cut the angled bracket profile from stainless-steel plate or near-net stock sized for the roughly 59 x 40 x 55 mm envelope."
     - "Machine or drill mounting holes, slots, and mating faces to match the motor-mount and adjacent guide/belt hardware."
@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD geometry shows a compact stainless bracket/link with flat faces, angled web geometry, and mounting holes. The detailed fabrication sequence is inferred from the geometry and material, not directly stated by a vendor or drawing. targeted_web_search: queries tried included '\"6V_connection_motor_mount\"', '\"reAM250\" \"6V\" \"connection motor mount\"', and '\"connection motor mount\" stainless steel 59 40 55'; results found mirrored BOM listings or non-matching generic motor mounts, not a row-specific manufacturing source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The geometry is practical as a machined or cut stainless bracket rather than a calibrated purchased module."
+    - "The geometry is practical as a machined or cut stainless bracket rather than a calibrated module"
     - "Fasteners are handled elsewhere in the motor-mount assembly and are not part of this row's per-unit item."
   uncertainty_notes:
     - "The fabrication route does not resolve tolerances, exact stock form, or whether the original part was welded, bent, or machined from solid."

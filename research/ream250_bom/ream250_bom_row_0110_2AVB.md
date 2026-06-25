@@ -36,20 +36,18 @@ material:
   uncertainty_notes:
     - "The CAD package resolves the material family but not fastener property class, coating, surface finish, or heat-treatment state; DIN 912 screws are commonly sold in higher-strength steel variants, so the mild-steel tag may be a CAD-material simplification."
 how_to_make:
-  summary: "Best modeled as standard DIN 912 fastener procurement; a plausible local manufacturing route is steel wire or rod cut to blank length, cold headed to form the cylindrical socket head, socket-punched, thread rolled to M6 x 1, heat treated or stress relieved as required by the selected fastener grade, finished, and inspected."
+  summary: "Steel wire or rod cut to blank length, cold headed to form the cylindrical socket head, socket-punched, thread rolled to M6 x 1, heat treated or stress relieved as required by the selected fastener grade, finished, and inspected"
   manufacturing_steps:
-    - "Procurement route: buy as a standard DIN 912 / ISO 4762 M6 x 35 socket-head cap screw and track it as reusable standard hardware in the KB."
-    - "Local route: select steel wire or rod stock sized for an M6 socket-head screw blank."
+    - "Manufacturing route: select steel wire or rod stock sized for an M6 socket-head screw blank."
     - "Cut blanks, cold-head/upset the cylindrical cap head, and form the internal hex socket."
     - "Roll the M6 x 1 external thread over the required threaded length rather than machining every thread for high-volume production."
     - "Apply heat treatment, coating or passivation if the final property class and corrosion requirement demand it; then inspect thread, socket, head height, and overall length."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/2AVB_DIN 912 - M6x1x35x24.step; research/ream250_bom/ream250_bom_row_0110_2AVB__views_2x2.png; https://accu-components.com/us/metric-cap-head-screws/386814-SSC-M6-35-12-9-Z; https://www.mwcomponents.com/uploads/Resource-Center/Fasteners-Overview-Presentation-v020724.pdf?srsltid=AfmBOooZ0rkO_yX3gRVqKd2nZw0ssAg9SNCcoiOjdL1U2Mkei4yXxHAF"
-    cited_fact_or_basis: "CAD and preview show a one-piece socket-head screw with cylindrical head, internal hex socket, shank, and threaded end. Accu identifies the same standard/size family as a DIN 912 M6 x 35 cap-head screw. MW Components lists socket head cap screws among fastener products and lists production processes including cold heading/cold forming, thread rolling, trimming, heat treatment, hardening, and annealing. targeted_web_search: searched \"DIN 912 M6 x 35 socket head cap screw material steel dimensions\", \"DIN 912 M6x35 socket head cap screw weight steel\", \"DIN 912 cylinder head cap screw M6x35 material steel\", \"socket head cap screw manufacturing cold heading thread rolling heat treatment\", and \"how socket head cap screws are made cold heading thread rolling\"; found matching standard-product and general fastener-manufacturing evidence, but no row-specific reAM250 manufacturing drawing or process sheet."
+    cited_fact_or_basis: "CAD and preview show a one-piece socket-head screw with cylindrical head, internal hex socket, shank, and threaded end. Accu identifies the same standard/size family as a DIN 912 M6 x 35 cap-head screw. MW Components lists socket head cap screws among fastener products and lists production processes including cold heading/cold forming, thread rolling, trimming, heat treatment, hardening, and annealing. targeted_web_search: searched \"DIN 912 M6 x 35 socket head cap screw material steel dimensions\", \"DIN 912 M6x35 socket head cap screw weight steel\", \"DIN 912 cylinder head cap screw M6x35 material steel\", \"socket head cap screw manufacturing cold heading thread rolling heat treatment\", and \"how socket head cap screws are made cold heading thread rolling\" found matching standard-product and general fastener-manufacturing evidence, but no row-specific reAM250 manufacturing drawing or process sheet."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The procurement route is preferred for near-term KB modeling because this is a standard fastener, not a custom machined reAM250 part."
-    - "The local manufacturing route is generalized from standard screw geometry and fastener manufacturing practice; exact tooling, material grade, and heat treatment depend on the final property class."
+    - "The generalized from standard screw geometry and fastener manufacturing practice; exact tooling, material grade, and heat treatment depend on the final property class."
   uncertainty_notes:
     - "The row lacks a property class or coating callout, so the route cannot yet specify final heat-treatment target, plating/passivation, or acceptance tests beyond generic dimensional inspection."
 kb_implications:

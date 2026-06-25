@@ -44,7 +44,7 @@ how_to_make:
     - "Deburr, clean, and inspect overall length, thickness, and angled support face against the STEP geometry."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/6S2_support_2.step; research/ream250_bom/ream250_bom_row_0198_6S2__views_2x2.png; web targeted search"
-    cited_fact_or_basis: "The STEP is a single solid with a 26.33 x 3.17 x 16.67 mm bounding box; the contact-sheet preview shows a thin triangular/wedge-like support plate. targeted_web_search: searched \"6S2_support_2 motor mount material\", \"6S2 motor mount reAM250\", and \"6S2_support_2\"; found duplicate BOM text and no row-specific manufacturing drawing or process source."
+    cited_fact_or_basis: "The STEP is a single solid with a 26.33 x 3.17 x 16.67 mm bounding box; the contact-sheet preview shows a thin triangular/wedge-like support plate. targeted_web_search: searched \"6S2_support_2 motor mount material\", \"6S2 motor mount reAM250\", and \"6S2_support_2\" found duplicate BOM text and no row-specific manufacturing drawing or process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
     - "A cut or milled flat-stock route is chosen because the part is small, metallic, thin, and has a simple prismatic support profile without visible holes, bends, bosses, or multi-part features."

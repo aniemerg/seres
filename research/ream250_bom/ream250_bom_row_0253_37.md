@@ -35,10 +35,9 @@ material:
   uncertainty_notes:
     - "Vendor evidence resolves the adapter body material; separate clamps or seals needed to install this adapter are separate BOM rows, not part of this row's material value."
 how_to_make:
-  summary: "Best current route is to procure the standard Pfeiffer 320RRG063-050-40 adapter; a local manufacturing fallback would machine a short 304 stainless adapter body with ISO-K and ISO-KF flange features, then clean and leak-test it for vacuum service."
+  summary: "Local manufacturing fallback would machine a short 304 stainless adapter body with ISO-K and ISO-KF flange features, then clean and leak-test it for vacuum service"
   manufacturing_steps:
-    - "Procurement route: buy Pfeiffer Vacuum 320RRG063-050-40 as a standard straight ISO-K/KF adapter and inspect the received part against DN 63 ISO-K / DN 50 ISO-KF interfaces."
-    - "Local fallback: start from 304/1.4301 stainless round billet, tube stock, or near-net forging sized for the flanges."
+    - "Start from 304/1.4301 stainless round billet, tube stock, or near-net forging sized for the flanges."
     - "Turn the concentric bore, end faces, outside diameters, and flange shoulders; finish sealing/contact surfaces suitable for vacuum hardware."
     - "Deburr, clean for vacuum service, and helium leak-test or pressure/leak check before installation with separate seals and clamps."
   source:
@@ -46,7 +45,7 @@ how_to_make:
     cited_fact_or_basis: "Pfeiffer shop lists 320RRG063-050-40 as an ISO-K/KF straight adapter, stainless steel 1.4301/304, DN 63 ISO-K / DN 50 ISO-KF, A = 40 mm and B = 50.6 mm. CAD preview shows an axisymmetric short flanged reducer body. targeted_web_search: queries tried included 'Pfeiffer Vacuum 320RRG063-050-40 material reduction ISO-K DN 63 KF DN 50 mass', 'site:pfeiffer-vacuum.com 320RRG063_050_40 320RRG063-050-40', and '\"320RRG063-050-40\"'; results found official/product-route facts for identity and material but no row-specific source stating a manufacturing process."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The fallback local route is inferred from the axisymmetric stainless adapter geometry and common vacuum fitting fabrication practice, not from a Pfeiffer manufacturing disclosure."
+    - "The fallback Manufacturing route is inferred from the axisymmetric stainless adapter geometry and common vacuum fitting fabrication practice, not from a Pfeiffer manufacturing disclosure."
     - "Vacuum cleaning and leak checking are included because the part is used in vacuum plumbing."
   uncertainty_notes:
     - "Exact surface finish, flange tolerances, and any proprietary production details are not specified by the BOM-side evidence."

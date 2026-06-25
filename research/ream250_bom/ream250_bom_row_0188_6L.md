@@ -36,7 +36,7 @@ material:
   uncertainty_notes:
     - "The STEP metadata identifies the alloy family/grade but does not state temper, surface treatment, or whether any local insert or bushing is installed separately from this mount row."
 how_to_make:
-  summary: "Make as a small CNC-machined 6061 aluminum bearing-mount plate/block, or procure as a custom machined spare matched to the reAM250 drawing."
+  summary: "Make as a small CNC-machined 6061 aluminum bearing-mount plate/block"
   manufacturing_steps:
     - "Start from 6061 aluminum plate or bar stock slightly larger than the 52 x 24 x 8 mm finished envelope."
     - "CNC mill the outside profile, relieved/chamfered end features, and flat bearing-mount surfaces."
@@ -47,7 +47,7 @@ how_to_make:
     cited_fact_or_basis: "CAD evidence shows a one-piece 52.00 x 24.00 x 8.00 mm Aluminum 6061 mount with a large circular bearing feature and chamfered/relieved geometry. Cox Manufacturing describes Aluminum 6061 as commonly machined by CNC milling/turning/Swiss machining and notes good corrosion resistance, clean surface finish, welding/forming suitability, and anodizing suitability. targeted_web_search: query tried 'floating bearing mount aluminum 6061 machined plate bearing mount manufacturing'; results found general 6061 machining and bearing-housing examples but no row-specific vendor drawing or manufacturing process for 6L_floating_bearing_mount."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The visible CAD geometry is a single aluminum machined part rather than a casting or multi-part purchased bearing block."
+    - "The visible CAD geometry is a single aluminum machined part rather than a casting or multi-part external bearing block"
     - "Low-volume KB planning favors CNC machining from stock over casting because the part is small, flat, and has a precision bearing feature."
   uncertainty_notes:
     - "Exact tolerances, bearing fit class, surface finish, hole callouts, and heat-treatment/temper requirements are not present in the row-level evidence."

@@ -48,7 +48,7 @@ how_to_make:
     cited_fact_or_basis: "The STEP geometry is one thin Aluminum 6061 solid with a 37.75 x 118.50 x 3.00 mm envelope; the rendered contact sheet shows an asymmetric flat/faceted extension plate without purchased-module features. targeted_web_search: tried '\"6G_powder_container_extension_front\"', '\"reAM250\" \"powder container\" extension front aluminum 6061', and '\"6G_powder_container_extension_front\" material'; results only duplicated BOM row identity or generic Aluminum 6061 pages, with no row-specific fabrication drawing or manufacturing-process source."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "CNC cutting/milling from 3 mm Aluminum 6061 stock is the most plausible local route for the observed one-piece thin plate geometry."
+    - "CNC cutting/milling from 3 mm Aluminum 6061 stock is the most plausible Manufacturing route for the observed one-piece thin plate geometry."
     - "Powder-container service requires clean, deburred edges to reduce powder hangups and contamination."
   uncertainty_notes:
     - "No row-specific drawing was found, so bend radii, flatness, tolerances, fastener interfaces, and surface-finish requirements remain unresolved."

@@ -35,9 +35,8 @@ material:
   uncertainty_notes:
     - "The assembly STEP material extractor returned only Generic material at 1000 kg/m^3, so the vendor material is the useful row-specific material evidence."
 how_to_make:
-  summary: "Model as standard Pfeiffer ISO-K zinc-plated steel vacuum fastening hardware: procure the finished 350BPD100 claw clamp, or manufacture locally only if the reusable standard hardware path is later modeled."
+  summary: "Model as standard Pfeiffer ISO-K zinc-plated steel vacuum fastening hardware: prepare the finished 350BPD100 claw clamp, or manufacture locally only if the reusable standard hardware path is later modeled"
   manufacturing_steps:
-    - "Procure the finished Pfeiffer 350BPD100 claw clamp for base plates with sealing groove."
     - "If local substitution is needed later, make a small steel clamp blank matching the CAD claw geometry and M8 interface."
     - "Machine the bearing faces, central clearance/hole feature, side reliefs, and clamp shoulders visible in the CAD preview."
     - "Deburr, zinc plate, and inspect the DN 63-DN 100 ISO-K flange-contact geometry."
@@ -46,7 +45,6 @@ how_to_make:
     cited_fact_or_basis: "The rendered CAD contact sheet shows a compact claw clamp block with a central round clearance/hole feature, stepped side faces, and wedge-like clamp shoulders. FreeCAD measured bounding box 24.00 x 18.60 x 15.00 mm. The Pfeiffer Vacuum Online Shop page identifies 350BPD100 as a zinc-plated steel claw clamp, lists M8 and DN 63-DN 100 ISO-K dimensions, and offers the finished part and its STEP download. official_alternate_route_check: original BOM URL https://www.pfeiffer-vacuum.com/global/de/shop/products/350BPD100 led to the Pfeiffer-branded vacuum-shop.com product page; that page carries Pfeiffer Vacuum Online Shop branding, lists the same product ID 350BPD100, links a 350BPD100 data sheet and STEP file, and matches the row manufacturer/product."
     evidence_basis: "engineering_hypothesis"
   assumptions:
-    - "The preferred near-term route is procurement as standard vacuum fastening hardware; the local fabrication path is inferred from the steel material, M8 interface, and visible machined clamp geometry."
     - "Vacuum flange fastening requires clean, burr-free bearing faces and dimensionally consistent clamp shoulders."
   uncertainty_notes:
     - "The row evidence resolves product identity, geometry, material, and interface, but not Pfeiffer's actual production method, coating specification, or tolerances."

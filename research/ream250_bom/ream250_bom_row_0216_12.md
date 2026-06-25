@@ -37,9 +37,9 @@ material:
   uncertainty_notes:
     - "The product page resolves the material family but not the exact cured formulation, filler package, pigment composition, or durometer."
 how_to_make:
-  summary: "Procure Liqui Moly 6185 black silicone sealant, clean and dry the mating surfaces, dispense the sealant uniformly along the CAD-defined rear perimeter, then assemble the parts immediately so the bead cures as the back flat seal."
+  summary: "Prepare Liqui Moly 6185 black silicone sealant, clean and dry the mating surfaces, dispense the sealant uniformly along the CAD-defined rear perimeter, then assemble the parts immediately so the bead cures as the back flat seal"
   manufacturing_steps:
-    - "Procure Liqui Moly 6185 black silicone sealant or a functionally equivalent silicone sealing compound."
+    - "Prepare Liqui Moly 6185 black silicone sealant or a functionally equivalent silicone sealing compound"
     - "Clean the rear sealing surfaces so they are dry and free of oil and grease."
     - "Apply the sealant uniformly along the back perimeter matching the 12_flat_seal_back CAD path."
     - "Join the mating parts immediately after application and allow the sealant to cure in place."
@@ -51,7 +51,7 @@ how_to_make:
   assumptions:
     - "Inspection is modeled as a basic assembly-quality check because the cited product page gives application guidance but not reAM250-specific quality-control criteria."
   uncertainty_notes:
-    - "The product route and CAD path resolve procurement and application, but not the exact bead dispensing tolerance, cure time under the machine's assembly conditions, or acceptance test for leak tightness."
+    - "Machine's assembly conditions, or acceptance test for leak tightness"
 kb_implications:
   - "item_granularity: simple_part - Model as an applied silicone sealant/gasket replaceable or applied part tied to a CAD-defined bead path, not as a reusable machine part or purchased module."
 ---
