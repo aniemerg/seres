@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "No row-specific vendor drawing with tolerances, seal cross-section, internal mechanism details, or weighed mass was available from the searchable product route."
 kb_implications:
-  - "item_granularity: purchased_module - model the AMPROVED ISO-KF DN40 disc valve rows as a vendor valve module first, with later consolidation of sibling valve parts before attempting a detailed stainless-body, EPDM-seal, and actuator sub-BOM."
+  - "item_granularity: complex_module - model the AMPROVED ISO-KF DN40 disc valve rows as a functional valve module first, with later consolidation of sibling valve parts before attempting a detailed stainless-body, EPDM-seal, and actuator sub-BOM.; defer internal decomposition until a focused sub-BOM and manufacturing workflow are modeled."
 ---
 
 Research result for reAM250 BOM row 265.

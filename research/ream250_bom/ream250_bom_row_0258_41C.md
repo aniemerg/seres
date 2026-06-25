@@ -54,5 +54,5 @@ how_to_make:
   uncertainty_notes:
     - "Exact production process, fastener subpart material, surface finish, and inspection plan are not specified by the row evidence."
 kb_implications:
-  - "item_granularity: purchased_module - standard commercial ISO-KF vacuum clamping hardware; model as a reusable purchased/imported clamp unless later KB work intentionally decomposes KF clamp rings, hinges, and tightening hardware."
+  - "item_granularity: simple_part - standard commercial ISO-KF vacuum clamping hardware; model as a reusable manufacturable clamp unless later KB work intentionally decomposes KF clamp rings, hinges, and tightening hardware."
 ---

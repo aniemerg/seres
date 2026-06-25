@@ -55,7 +55,7 @@ how_to_make:
   uncertainty_notes:
     - "Exact fixture pressure, cure time before machine operation, and inspection acceptance criteria are not specified by the row evidence."
 kb_implications:
-  - "item_granularity: consumable - Model as a reusable silicone sealant/gasket consumable applied by dispensing and curing, not as a unique rigid custom part."
+  - "item_granularity: simple_part - Model as a reusable silicone sealant/gasket replaceable or applied part applied by dispensing and curing, not as a unique rigid custom part."
 ---
 
 Research result for reAM250 BOM row 218.

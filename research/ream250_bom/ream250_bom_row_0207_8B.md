@@ -6,50 +6,55 @@ row_identity:
   source_csv: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv"
   link_url: "https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90"
 function:
-  summary: "DN 40 ISO-KF 90-degree vacuum elbow used to turn a KF vacuum line through a right angle while preserving the clamp-flange interface."
+  summary: "DN 40 ISO-KF 90 degree vacuum elbow fitting that turns a vacuum line through a right angle while preserving ISO-KF clamp-flange interfaces at both ends."
   source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; research/ream250_bom/ream250_bom_row_0207_8B__views_2x2.png; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
-    cited_fact_or_basis: "BOM row 207 identifies item 8B, quantity 5, product 110RRB040-90 by Pfeiffer Vacuum; CAD preview shows a right-angle elbow with two KF-style flanged ends; vendor page names it 'Elbow fitting, 90°' with connection flange DN 40 ISO-KF. official_alternate_route_check: original BOM URL is https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; alternate route https://vacuum-shop.com is the Pfeiffer Vacuum Components & Solutions GmbH online shop, carries the same order number 110RRB040-90/global number 2000050096, and matches the same DN 40 ISO-KF 90-degree elbow row."
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/manifest.csv; design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/8B_angle_pipe_ISO_KF_DN40.step; research/ream250_bom/ream250_bom_row_0207_8B__views_2x2.png; https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
+    cited_fact_or_basis: "BOM row 207 identifies item 8B, quantity 5, CAD file 8B_angle_pipe_ISO_KF_DN40, product 110RRB040-90, and manufacturer Pfeiffer Vacuum. The manifest maps row 207 to gold_export/parts/8B_angle_pipe_ISO_KF_DN40.step as a matched vendor component. The vendor route identifies order number 110RRB040-90 as an elbow fitting, 90 degrees, with DN 40 ISO-KF connection flange. FreeCAD measured one solid with a 94.77 x 94.77 x 59.53 mm raw bounding box; the rendered contact sheet shows a right-angle tube with KF-style flanged ends. official_alternate_route_check: the BOM URL is on pfeiffer-vacuum.com for product 110RRB040_90; the vacuum-shop.com page is a Pfeiffer Vacuum Components & Solutions shop page for the same order number 110RRB040-90 and global number 2000050096, so it is treated as an official alternate route for the same row."
     evidence_basis: "bom_provided"
   assumptions:
-    - "The per-row CAD part represents one physical elbow; the BOM quantity of 5 means five identical elbows are used."
-  uncertainty_notes: []
+    - "The single exported STEP solid represents one physical elbow fitting in the BOM row."
+  uncertainty_notes:
+    - "Local evidence identifies the elbow's connection role, but not the exact mating hose, pipe, or chamber ports in the reAM250 assembly."
 mass:
   value_kg: 0.141
-  basis: "Per-unit mass estimate from FreeCAD volume 52,397.365 mm^3 = 0.000052397365 m^3 multiplied by local aluminum density 2700 kg/m^3 from kb/materials/properties.yaml, giving 0.141 kg per elbow. BOM quantity is 5, so the row total is about 0.707 kg."
+  basis: "FreeCAD volume 52,397.365 mm^3 equals 0.000052397365 m^3. Using aluminum density 2700 kg/m^3 from kb/materials/properties.yaml gives 0.000052397365 m^3 * 2700 kg/m^3 = 0.14147 kg per unit, rounded to 0.141 kg. BOM quantity is 5, so the row total is about 0.707 kg."
   source:
     url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/8B_angle_pipe_ISO_KF_DN40.step; kb/materials/properties.yaml; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
-    cited_fact_or_basis: "FreeCAD measured one solid with volume 52,397.364951 mm^3 and bounding box about 94.77 x 94.77 x 59.53 mm; vendor page gives material Aluminum 3.2315/EN AW-6082; local material table gives aluminum density 2700 kg/m^3. official_alternate_route_check: original BOM URL is https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; alternate route https://vacuum-shop.com is an official Pfeiffer Vacuum online shop page and matches order number 110RRB040-90 for the same DN 40 ISO-KF elbow."
+    cited_fact_or_basis: "FreeCAD measured 1 solid, volume 52,397.365 mm^3, area 36,746.774 mm^2, and raw bounding box 94.77 x 94.77 x 59.53 mm. The vendor route identifies the part material as aluminum 3.2315/EN AW-6082. kb/materials/properties.yaml lists aluminum density as 2700 kg/m^3. official_alternate_route_check: the BOM URL is on pfeiffer-vacuum.com for product 110RRB040_90; the vacuum-shop.com page is a Pfeiffer Vacuum Components & Solutions shop page for the same order number 110RRB040-90 and global number 2000050096, so it is treated as an official alternate route for the same row."
     evidence_basis: "bom_provided"
   assumptions:
-    - "CAD solid volume is used as the physical aluminum volume for one elbow."
-    - "The local generic aluminum density is close enough for EN AW-6082 at this planning precision."
+    - "The isolated CAD solid volume is used as the complete per-unit volume for one elbow fitting."
+    - "The local aluminum density is used as a calculation constant for EN AW-6082 because the local density table has aluminum but not that specific alloy."
   uncertainty_notes:
-    - "STEP assembly metadata for this row reports only Generic material at density 1000.0, so material identity comes from the row-matched vendor route rather than embedded STEP material metadata."
+    - "The estimate depends on CAD volume fidelity; the vendor page does not provide a catalog weight for cross-checking."
 material:
-  primary_material: "Aluminum 3.2315 / EN AW-6082"
+  primary_material: "aluminum 3.2315 / EN AW-6082"
   source:
-    url_or_path: "https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
-    cited_fact_or_basis: "Vendor page for order number 110RRB040-90 states material and media-contact material as Aluminum 3.2315/EN AW-6082. official_alternate_route_check: original BOM URL is https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; alternate route https://vacuum-shop.com is operated as Pfeiffer Vacuum Components & Solutions GmbH online shop and matches the same product ID, global number, and DN 40 ISO-KF 90-degree elbow."
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/assemblies/00_assembly.step; https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
+    cited_fact_or_basis: "Local assembly STEP material extraction for product 8B_angle_pipe_ISO_KF_DN40 returned material Generic with density 1000.0, which is placeholder metadata under the task criteria and does not resolve material. The vendor route states material and media-contact material as aluminum 3.2315/EN AW-6082 for order number 110RRB040-90. official_alternate_route_check: the BOM URL is on pfeiffer-vacuum.com for product 110RRB040_90; the vacuum-shop.com page is a Pfeiffer Vacuum Components & Solutions shop page for the same order number 110RRB040-90 and global number 2000050096, so it is treated as an official alternate route for the same row."
     evidence_basis: "bom_provided"
   assumptions: []
-  uncertainty_notes: []
-how_to_make:
-  summary: "Procure as Pfeiffer Vacuum 110RRB040-90, a standard DN 40 ISO-KF aluminum 90-degree elbow; later local modeling can treat it as a formed or machined aluminum vacuum fitting if procurement is replaced."
-  manufacturing_steps:
-    - "Buy or stock the row-matched Pfeiffer 110RRB040-90 elbow fitting."
-    - "Inspect DN 40 ISO-KF flange faces and sealing surfaces before assembly into the vacuum line."
-    - "Install with compatible ISO-KF centering rings and clamps supplied elsewhere in the BOM."
-  source:
-    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/reAm250_BOM_gold.csv; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html"
-    cited_fact_or_basis: "BOM row gives manufacturer Pfeiffer Vacuum and product ID 110RRB040-90; vendor page lists the same order number as an orderable DN 40 ISO-KF 90-degree aluminum elbow fitting. official_alternate_route_check: original BOM URL is https://www.pfeiffer-vacuum.com/global/de/shop/products/110RRB040_90; alternate route https://vacuum-shop.com is a Pfeiffer Vacuum online shop page with matching product identity and ordering data."
-    evidence_basis: "bom_provided"
-  assumptions:
-    - "The current KB route should prefer procurement/standard-part reuse over modeling this row as a bespoke machine-specific fabrication."
   uncertainty_notes:
-    - "Detailed local fabrication operations are not sourced here; this result only establishes a procurement route and part identity."
+    - "Surface treatment, cleaning specification, and exact temper are not stated by the row evidence."
+how_to_make:
+  summary: "Locally manufacture as a one-piece aluminum ISO-KF 90 degree elbow by forming or machining the elbow body and KF flange lips, then finish-machining and leak-checking the vacuum interfaces."
+  manufacturing_steps:
+    - "Start from EN AW-6082 or equivalent aluminum billet, tube stock, or near-net elbow blank sized for a DN 40 ISO-KF 90 degree fitting."
+    - "Create the right-angle flow passage by CNC machining from a near-net blank, or by bending/forming an aluminum tube followed by joining or integral-forming of the KF flange lips."
+    - "CNC turn or mill both ISO-KF flange faces, centering diameters, clamp lips, and sealing faces to the standard DN 40 interface geometry."
+    - "Deburr internal edges, clean for vacuum service, and inspect flange dimensions, face finish, and passage continuity."
+    - "Helium leak-test or pressure/vacuum test the finished elbow before assembly into the vacuum line."
+  source:
+    url_or_path: "design/real-mechanical/reAm250/reAM250_cad_gold_package/gold_export/parts/8B_angle_pipe_ISO_KF_DN40.step; research/ream250_bom/ream250_bom_row_0207_8B__views_2x2.png; https://vacuum-shop.com/shop/en_US/category/2072920/product/110rrb04090/elbow-fitting-90-aluminum-3-2315-en-aw-6082.html; web_search"
+    cited_fact_or_basis: "The vendor route identifies a DN 40 ISO-KF 90 degree aluminum elbow. The STEP/contact sheet show a single right-angle elbow with integral KF-style flange lips and no separate subassemblies. targeted_web_search: queries tried \"Pfeiffer Vacuum 110RRB040-90 manufacturing\", \"110RRB040-90 drawing material weight\", and \"ISO-KF DN40 aluminum elbow manufacturing\"; results resolved product identity, material, and dimensions, but did not provide a row-specific manufacturing process plan."
+    evidence_basis: "engineering_hypothesis"
+  assumptions:
+    - "The route is a plausible local-manufacturing route inferred from the one-piece aluminum vacuum-fitting geometry; the cited vendor page does not specify the production process."
+    - "Leak testing and vacuum cleaning are included because the component is a vacuum piping fitting."
+  uncertainty_notes:
+    - "The actual commercial process may use casting, forging, bent tube plus welded flanges, or another near-net route; the row evidence does not specify which."
 kb_implications:
-  - "item_granularity: simple_part - Model as reusable DN 40 ISO-KF aluminum 90-degree vacuum elbow hardware rather than a calibrated purchased module."
+  - "item_granularity: simple_part - model later as reusable DN 40 ISO-KF aluminum 90 degree elbow hardware; represent quantity, alloy, and interface standard in BOM notes or recipe parameters rather than decomposing into subparts."
 ---
 
 Research result for reAM250 BOM row 207.

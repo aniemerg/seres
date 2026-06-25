@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "The CAD row does not expose the production method, joining details, or tolerances needed for a reliable local manufacturing recipe."
 kb_implications:
-  - "item_granularity: purchased_module - this row is a vendor flexible vacuum hose subcomponent; model the whole hose as a purchased/imported vacuum component unless a later sub-BOM captures bellows, flanges, joining, and leak-test steps."
+  - "item_granularity: simple_part - Treat as the annular stainless end/flange subpart of a DN40 ISO-KF flexible hose; rerun if the row needs a concrete local fabrication route rather than only whole-hose procurement."
 ---

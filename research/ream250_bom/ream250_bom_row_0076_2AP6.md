@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact production route may differ if the original vendor part uses a proprietary molded elastomer, foam, adhesive-backed, or high-temperature compound."
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable gasket/seal consumable unless later evidence shows it is part of a larger vendor module."
+  - "item_granularity: simple_part - Model as a replaceable gasket/seal replaceable or applied part unless later evidence shows it is part of a larger vendor module."
 ---

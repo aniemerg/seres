@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "Without a row-specific drawing or material callout, the manufacturing route is suitable for planning but not enough to qualify the seal for vacuum, thermal, or chemical service."
 kb_implications:
-  - "item_granularity: consumable - Model as one replaceable custom gasket/seal consumable with dimensions and unknown LiSEMA elastomer material preserved in notes."
+  - "item_granularity: simple_part - Model as one replaceable custom gasket/seal replaceable or applied part with dimensions and unknown LiSEMA elastomer material preserved in notes."
 ---
 
 Research result for reAM250 BOM row 7.

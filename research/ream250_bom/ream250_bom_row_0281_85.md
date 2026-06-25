@@ -51,7 +51,7 @@ how_to_make:
   uncertainty_notes:
     - "The documentation supports procurement and maintenance/insert replacement, but not a detailed local manufacturing drawing, tolerances, seal profile, filter-media pleat construction, or housing alloy."
 kb_implications:
-  - "item_granularity: purchased_module - row 85 is a standard Pfeiffer SAS 40 DN 40 ISO-KF dust separator/filter module; model as a purchased vacuum accessory unless later work decomposes the housing, filter insert, seals, and cover/clasp hardware."
+  - "item_granularity: complex_module - row 85 is a standard Pfeiffer SAS 40 DN 40 ISO-KF dust separator/filter module; model as a complex vacuum accessory unless later work decomposes the housing, filter insert, seals, and cover/clasp hardware."
 ---
 
 Research result for reAM250 BOM row 281.

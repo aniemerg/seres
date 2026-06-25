@@ -50,6 +50,6 @@ how_to_make:
   uncertainty_notes:
     - "Local manufacture remains unresolved at subcomponent level because no source in this row provides a sensor-cell BOM, electronics design, heater calibration data, or pressure-housing manufacturing drawing."
 kb_implications:
-  - "item_granularity: purchased_module - Model 3V as a calibrated oxygen transmitter module for now; split into housing, zirconia cell, electronics, and calibration processes only if oxygen-sensor self-manufacture becomes a priority."
+  - "item_granularity: complex_module - Model 3V as a calibrated oxygen transmitter complex module for this pass; split into housing, zirconia cell, electronics, and calibration processes only if oxygen-sensor self-manufacture becomes a priority."
 ---
 

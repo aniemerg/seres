@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "No row-matched source was found that describes the actual factory assembly or calibration workflow."
 kb_implications:
-  - "item_granularity: purchased_module - calibrated commercial vacuum gauge with sensing elements and electronics; model as a purchased/imported module unless a future detailed sensor sub-BOM is intentionally added."
+  - "item_granularity: complex_module - calibrated commercial vacuum gauge with sensing elements and electronics; model as a complex module unless a future detailed sensor sub-BOM is intentionally added.; defer internal decomposition until a focused sub-BOM and manufacturing workflow are modeled."
 ---
 
 Research result for reAM250 BOM row 284.

@@ -58,7 +58,7 @@ how_to_make:
   uncertainty_notes:
     - "The row does not specify whether the production part is painted, plated, welded into a larger frame, or modified after cutting."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Model later as cut structural hollow steel profile stock, approximately 100 x 80 x 5 x 900 mm, with BOM quantity/length variants handled as profile-stock cuts rather than unique purchased modules."
+  - "item_granularity: simple_part - Model later as cut structural hollow steel profile stock, approximately 100 x 80 x 5 x 900 mm, with BOM quantity/length variants handled as profile-stock cuts rather than unique purchased modules."
 ---
 
 Research result for the leased reAM250 BOM row only.

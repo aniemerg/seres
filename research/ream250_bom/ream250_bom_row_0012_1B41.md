@@ -59,5 +59,5 @@ how_to_make:
   uncertainty_notes:
     - "The BOM row does not state the laser wavelength or OD rating, so the manufacturing route cannot specify the absorber composition or certification target."
 kb_implications:
-  - "item_granularity: purchased_module - Model 1B41 as one purchased/certified laser-safety glass window panel rather than generic glass stock, because safety certification and wavelength-specific optical density dominate substitutability."
+  - "item_granularity: simple_part - Model 1B41 as one laser-safety window panel cut from certified optical safety glass or laminated filter stock; keep wavelength/OD certification as material/specification requirements rather than treating the row as a complex module."
 ---

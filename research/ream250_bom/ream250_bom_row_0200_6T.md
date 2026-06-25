@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need lamination geometry, magnet specification, winding turns and wire gauge, bearing and shaft tolerances, insulation system, balancing/runout requirements, torque test method, and driver compatibility tests."
 kb_implications:
-  - "item_granularity: purchased_module - Model as one reusable NEMA 23 stepper motor module for now; split into frame/shaft, laminations, rotor magnet, windings, bearings, cable, insulation, and acceptance testing only if motor self-manufacture becomes a priority."
+  - "item_granularity: complex_module - Model as one reusable NEMA 23 stepper motor complex module for this pass; split into frame/shaft, laminations, rotor magnet, windings, bearings, cable, insulation, and acceptance testing only if motor self-manufacture becomes a priority."
 ---

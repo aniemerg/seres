@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "No row-specific drawing was found for tolerances, pin fits, heat treatment depth, plating specification, lubrication type, or production tooling."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a reusable standard toggle-clamp module for near-term KB modeling; split into steel links/base, pins, handle, spindle, washers, and rubber pad only if clamp manufacturing becomes a detailed target."
+  - "item_granularity: simple_part - Treat as a reusable standard toggle-clamp hardware item for near-term KB modeling; split into steel links/base, pins, handle, spindle, washers, and rubber pad only if clamp manufacturing becomes a detailed target."
 ---
 
 # reAM250 BOM Row 19 - 1C0

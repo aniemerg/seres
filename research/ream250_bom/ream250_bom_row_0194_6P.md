@@ -52,7 +52,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor page and CAD do not specify tooth manufacturing method, surface finish, or bore/set-screw details for a local replica."
 kb_implications:
-  - "item_granularity: purchased_module - standard GT2 timing-belt pulley hardware; reuse or create a generic pulley/shaft hardware item rather than a reAM250-specific custom part unless later modeling needs tooth-profile manufacturing detail."
+  - "item_granularity: simple_part - standard GT2 timing-belt pulley hardware; reuse or create a generic pulley/shaft hardware item rather than a reAM250-specific custom part unless later modeling needs tooth-profile manufacturing detail."
 ---
 
 Research result for reAM250 BOM row 194.

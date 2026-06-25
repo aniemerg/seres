@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "No source provides tolerances, bearing preload, spring force, optical read-head interface, or production process details for the slide."
 kb_implications:
-  - "item_granularity: purchased_module - Treat 2AE as the reader-head slide/carriage portion of a calibrated K+C glass-scale measuring subsystem for near-term KB modeling; split into simple body, bearings, spring, seals, and read-head electronics only if the linear encoder becomes a detailed manufacturing target."
+  - "item_granularity: complex_module - Treat 2AE as the reader-head slide/carriage portion of a calibrated K+C glass-scale measuring subsystem for near-term KB modeling; split into simple body, bearings, spring, seals, and read-head electronics only if the linear encoder becomes a detailed manufacturing target."
 ---
 
 # reAM250 BOM Row 56 - 2AE

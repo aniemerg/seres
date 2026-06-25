@@ -51,6 +51,6 @@ how_to_make:
   uncertainty_notes:
     - "Filter porosity control and vacuum-cleanliness requirements may dominate real manufacturing quality beyond the coarse KB route."
 kb_implications:
-  - "item_granularity: consumable - Treat as a replaceable ISO-KF DN40 seal/filter consumable with component material notes, not as a reAM250-specific machine subsystem."
+  - "item_granularity: simple_part - Treat as a replaceable ISO-KF DN40 seal/filter replaceable or applied part with component material notes, not as a reAM250-specific machine subsystem."
 ---
 

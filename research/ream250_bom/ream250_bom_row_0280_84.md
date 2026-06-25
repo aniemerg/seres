@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: queries tried included 'PF A58 204 Pfeiffer Vacuum valve', 'AVC 040 PA 1.21 kg Aluminum FKM', and 'AVC 040 PA Bellows stainless steel 1.21 kg'; results resolved product identity/material/mass but did not provide a manufacturer-stated production process for this valve."
 kb_implications:
-  - "item_granularity: purchased_module - Model as one purchased electropneumatic DN40 KF vacuum angle-valve module for near-term KB use; split into aluminum body, stainless bellows, FKM seals, pilot valve, position indicator, and actuator hardware only if valve manufacturing becomes an explicit modeling target."
+  - "item_granularity: complex_module - Model as one complex electropneumatic DN40 KF vacuum angle-valve module for near-term KB use; split into aluminum body, stainless bellows, FKM seals, pilot valve, position indicator, and actuator hardware only if valve manufacturing becomes an explicit modeling target."
 ---

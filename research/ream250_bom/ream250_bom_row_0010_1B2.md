@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: BOM-provided Ganter URL and canonical Ganter page were checked first; no separate drawing or process plan was needed for the procurement route, and the detailed local casting/machining sequence remains an inferred approximation."
 kb_implications:
-  - "item_granularity: purchased_module - model later as one catalog stainless steel bow handle GN 328.5-140-B-GS; do not split into raw casting, finish, and mounting features unless this handle becomes a major import-mass contributor."
+  - "item_granularity: simple_part - model later as one catalog stainless steel bow handle GN 328.5-140-B-GS; do not split into raw casting, finish, and mounting features unless this handle becomes a major import-mass contributor."
 ---
 
 Research result for reAM250 BOM row 10.

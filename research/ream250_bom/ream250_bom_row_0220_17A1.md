@@ -53,6 +53,6 @@ how_to_make:
   uncertainty_notes:
     - "End machining details such as tapped holes or special Quick & Easy finishes are not evident in the rendered preview or row text, so this route assumes a plain cut profile."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes, not as a unique reAM250-only assembly."
+  - "item_granularity: simple_part - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes, not as a unique reAM250-only assembly."
 ---
 

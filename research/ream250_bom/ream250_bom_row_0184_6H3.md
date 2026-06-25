@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - Exact profile selection, adhesive or retaining method, and bristle height should be checked against the machine drawing or Mink order configuration before replacing the component.
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable cut-to-length flexible brush seal, not as raw stock or a calibrated module; later KB work can reuse a generic brush-seal consumable with row-specific length."
+  - "item_granularity: simple_part - Model as a replaceable cut-to-length flexible brush seal, not as raw stock or a calibrated module; later KB work can reuse a generic brush-seal replaceable or applied part with row-specific length."
 ---

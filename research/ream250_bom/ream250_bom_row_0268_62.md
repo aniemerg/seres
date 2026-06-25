@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - "A self-manufacturing route would require additional modeling for hardened races, balls, cage, grinding/lapping, lubrication, cleaning, and bearing-grade inspection."
 kb_implications:
-  - "item_granularity: purchased_module - Treat row 62 as a standard SKF precision bearing component for now; later consolidation should map it to a reusable bearing item family rather than a reAM250-specific custom part."
+  - "item_granularity: simple_part - Treat SKF 61800 as reusable standard precision bearing hardware; model bearing-ring, ball, cage, seal/grease, and inspection details only if standard bearing manufacturing becomes a focused KB target."
 ---

@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact aluminum alloy, surface finish, and O-ring procurement/molding specification would need a later manufacturing drawing or standard-part specification."
 kb_implications:
-  - "item_granularity: consumable - Model later as a reusable ISO-K DN100 centering-ring seal consumable family rather than a reAM250-specific custom machine part; the row quantity represents two instances of the same replaceable flange seal."
+  - "item_granularity: simple_part - Model later as a reusable ISO-K DN100 centering-ring seal replaceable or applied part family rather than a reAM250-specific custom machine part; the row quantity represents two instances of the same replaceable flange seal."
 ---

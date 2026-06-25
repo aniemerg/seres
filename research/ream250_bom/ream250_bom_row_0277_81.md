@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need rotor/stator tolerances, vane material, bearing and seal specifications, motor design, valve details, oil compatibility, balancing, leak-rate, ultimate-pressure, and run-test requirements."
 kb_implications:
-  - "item_granularity: purchased_module - Model as one Pfeiffer Duo 35 vacuum pump module for now; split into pump body/internals, motor, seals, valves, oil system, base hardware, and calibration/testing workflow only if vacuum-pump manufacturing becomes a priority."
+  - "item_granularity: complex_module - Model as one Pfeiffer Duo 35 vacuum pump complex module for this pass; split into pump body/internals, motor, seals, valves, oil system, base hardware, and calibration/testing workflow only if vacuum-pump manufacturing becomes a priority."
 ---

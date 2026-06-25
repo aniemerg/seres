@@ -50,7 +50,7 @@ how_to_make:
   uncertainty_notes:
     - "A future local-manufacturing model would need scanner motor, mirror, optical coating, electronics, cooling, alignment, and calibration details that are not exposed by the BOM row or PDF."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a calibrated Raylase laser scan/monitoring subsystem for near-term KB modeling; split into galvo scanner, zoom/focus optics, mirrors, electronics, cooling hardware, and sensor paths only if a detailed optomechatronic scanner manufacturing workflow becomes a target."
+  - "item_granularity: complex_module - Treat as a calibrated Raylase laser scan/monitoring subsystem for near-term KB modeling; split into galvo scanner, zoom/focus optics, mirrors, electronics, cooling hardware, and sensor paths only if a detailed optomechatronic scanner manufacturing workflow becomes a target."
 ---
 
 # reAM250 BOM Row 266 - 51

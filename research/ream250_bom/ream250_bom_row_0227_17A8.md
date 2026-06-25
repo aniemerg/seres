@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "bom_url_route_check: The original BOM Link URL was checked directly and returned a file-not-found page, so it did not resolve manufacturing or cut-length details; the independent same-manufacturer product listing was used for route details."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Model as a cut length of reusable aluminum T-slot/strut profile stock rather than a bespoke machined part; BOM/recipe can carry the 70.4 mm cut length."
+  - "item_granularity: simple_part - Model as a cut length of reusable aluminum T-slot/strut profile stock rather than a bespoke machined part; BOM/recipe can carry the 70.4 mm cut length."
 ---

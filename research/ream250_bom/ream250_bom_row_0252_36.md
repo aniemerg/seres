@@ -50,5 +50,5 @@ how_to_make:
   uncertainty_notes:
     - "Actual commercial production may use molded PTFE, machined PTFE, or another supplier-specific process."
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable ISO-KF DN50 seal/centering-ring consumable rather than a unique machine subsystem."
+  - "item_granularity: simple_part - Model as a replaceable ISO-KF DN50 seal/centering-ring replaceable or applied part rather than a unique machine subsystem."
 ---

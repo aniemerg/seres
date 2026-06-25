@@ -53,6 +53,6 @@ how_to_make:
   uncertainty_notes:
     - Without a manufacturer drawing or teardown, local manufacturing details such as heat treatment, fits/tolerances, housing alloy, seal material, and bearing preload are not resolved.
 kb_implications:
-  - "item_granularity: purchased_module - Model this row as a vendor SLA10-class supported bearing block for now; split into housing, 6200.2RS bearing, circlip/seal, and assembly operations only when a sub-BOM or material drawing is available."
+  - "item_granularity: complex_module - Model this row as a functional SLA10-class supported bearing block for this pass; split into housing, 6200.2RS bearing, circlip/seal, and assembly operations only when a sub-BOM or material drawing is available."
 ---
 

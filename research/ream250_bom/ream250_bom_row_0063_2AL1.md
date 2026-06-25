@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "B&R's actual supplier, gear finishing method, bearing selection, lubricant, seal details, and quality-control specifications are not provided by the row evidence."
 kb_implications:
-  - "item_granularity: purchased_module - model as a vendor precision angular planetary gearbox module for now; decompose later only with a sub-BOM covering gears, bearings, seals, housing, lubricant, and inspection/calibration."
+  - "item_granularity: complex_module - model as a functional precision angular planetary gearbox complex module for this pass; decompose later only with a sub-BOM covering gears, bearings, seals, housing, lubricant, and inspection/calibration."
 ---
 
 Result generated for the leased reAM250 BOM row only.

@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "The exact member cross-sections, weld details, tolerances, and post-weld machining requirements are not available from the BOM row or STEP metadata."
 kb_implications:
-  - "item_granularity: assembly - Model this as a stainless Z-axis structural frame assembly made from repeated cut frame members, with later decomposition into tube/bar stock and welding steps if detailed local fabrication is needed."
+  - "item_granularity: complex_module - Model this as a stainless Z-axis structural frame assembly made from repeated cut frame members, with later decomposition into tube/bar stock and welding steps if detailed local fabrication is needed."
 ---
 
 Research result for reAM250 BOM row 248.

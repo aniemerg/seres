@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The exact internal electronics, coil geometry, potting compound, connector contact plating, and factory calibration process are not disclosed by the row evidence."
 kb_implications:
-  - "item_granularity: purchased_module - row is a complete calibrated Balluff inductive proximity sensor, best treated as an imported sensing module until a detailed sensor electronics sub-BOM and calibration workflow are modeled."
+  - "item_granularity: complex_module - row is a complete calibrated Balluff inductive proximity sensor, best treated as an imported sensing module until a detailed sensor electronics sub-BOM and calibration workflow are modeled.; defer internal decomposition until a focused sub-BOM and manufacturing workflow are modeled."
 ---
 
 CAD preview: `research/ream250_bom/ream250_bom_row_0099_2AU3__views_2x2.png`

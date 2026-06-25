@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "The sources support the profile and frame-seal route, but the row does not state whether Lisema supplied this exact seal as a bonded loop, a loose profile length cut during assembly, or a corner-vulcanized custom frame."
 kb_implications:
-  - "item_granularity: consumable - door gasket/seal should later map to a reusable elastomer seal/profile consumable rather than a machine-specific structural part; model size and material as variants of generic EPDM sponge seal stock where possible."
+  - "item_granularity: simple_part - door gasket/seal should later map to a reusable elastomer seal/profile replaceable or applied part rather than a machine-specific structural part; model size and material as variants of generic EPDM sponge seal stock where possible."
 ---
 
 Research result for reAM250 BOM row 219.

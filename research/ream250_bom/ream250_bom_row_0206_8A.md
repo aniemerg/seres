@@ -52,7 +52,7 @@ how_to_make:
     - "No row-specific source states the actual forming, machining, molding, cleaning, or inspection sequence used by the supplier."
     - "targeted_web_search: searched '112ZRG016 manufacturing process', 'Pfeiffer 112ZRG016 centering ring aluminum FKM manufacturing', and 'ISO-KF centering ring FKM O-ring manufacturing'; found row-matched product/material/dimension facts but no supplier manufacturing-process specification."
 kb_implications:
-  - "item_granularity: purchased_module - Model as a reusable standard DN16 ISO-KF centering-ring/seal component with aluminum ring and FKM O-ring, not as separate ring and O-ring items unless vacuum seal consumables become a high-priority dependency."
+  - "item_granularity: simple_part - Model as a reusable standard DN16 ISO-KF centering-ring/seal component with aluminum ring and FKM O-ring, not as separate ring and O-ring items unless vacuum seal consumables become a high-priority dependency."
 ---
 
 Research result for the leased reAM250 BOM row only.

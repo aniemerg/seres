@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "Without the exact material and compression specification, the route identifies plausible fabrication/procurement options but not a qualified process recipe."
 kb_implications:
-  - "item_granularity: consumable - Model as one replaceable custom flat gasket/seal consumable; preserve dimensions, quantity 2, and unknown LiSEMA material family in notes rather than decomposing into subparts."
+  - "item_granularity: simple_part - Model as one replaceable custom flat gasket/seal replaceable or applied part; preserve dimensions, quantity 2, and unknown LiSEMA material family in notes rather than decomposing into subparts."
 ---

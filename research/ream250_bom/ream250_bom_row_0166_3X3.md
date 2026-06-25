@@ -54,6 +54,6 @@ how_to_make:
   uncertainty_notes:
     - "The AMPROVED page provides product/function facts but not a full manufacturing process sheet; manufacturing steps are a plausible route for a 316L/EPDM manual valve."
 kb_implications:
-  - "item_granularity: purchased_module - Model 3X3 as one DN40 316L/EPDM manual disc valve module rather than separate flange, disc, handle, and seal parts unless valve manufacturing becomes a priority."
+  - "item_granularity: complex_module - Model 3X3 as one DN40 316L/EPDM manual disc valve module rather than separate flange, disc, handle, and seal parts unless valve manufacturing becomes a priority.; defer internal decomposition until a focused sub-BOM and manufacturing workflow are modeled."
 ---
 

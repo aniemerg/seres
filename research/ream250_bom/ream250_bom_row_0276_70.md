@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "Detailed local manufacture is unresolved beyond high-level subsystem decomposition and would require protected vendor design information or dedicated reverse engineering."
 kb_implications:
-  - "item_granularity: purchased_module - model this row as a vendor/calibrated laser subsystem for now; split into a sub-BOM only when laser-source replication becomes an explicit modeling target."
+  - "item_granularity: complex_module - model this row as a functional/calibrated laser subsystem for this pass; split into a sub-BOM only when laser-source replication becomes an explicit modeling target."
 ---

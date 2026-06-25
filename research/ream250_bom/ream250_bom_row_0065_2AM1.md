@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor/CAD evidence does not state manufacturing tolerances, balance class, exact bore process, anodizing specification, screw grade, or TPU molding details."
 kb_implications:
-  - "item_granularity: purchased_module - standard configured shaft-coupling assembly with multiple materials and performance selection parameters; model as a reusable purchased coupling module unless the drive-coupling subsystem is later decomposed into hubs, spider, screws, and inspection processes."
+  - "item_granularity: simple_part - Model as reusable standard jaw-coupling hardware with hubs, elastomer spider, and screws captured in the manufacturing notes; only create a detailed coupling sub-BOM if drive-coupling manufacture becomes a target."
 ---
 
 # reAM250 BOM Row 65 - 2AM1

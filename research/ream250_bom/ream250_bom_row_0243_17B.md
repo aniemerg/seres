@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - "Actual supplier production likely uses specialized ceramic processing, electrode deposition, heater integration, sealing, calibration, and quality-control steps not fully specified by the public manual."
 kb_implications:
-  - "item_granularity: assembly - Model as one oxygen sensor-head assembly for now; split into ceramic cell, metal body, heater, connector, cable, and calibration electronics only if gas-sensing hardware becomes a modeling bottleneck."
+  - "item_granularity: complex_module - Model as one oxygen sensor-head assembly for now; split into ceramic cell, metal body, heater, connector, cable, and calibration electronics only if gas-sensing hardware becomes a modeling bottleneck."
 ---

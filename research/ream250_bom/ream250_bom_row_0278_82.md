@@ -54,5 +54,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact production method, elastomer compound, carrier-ring geometry, and cleaning specification are not stated by the BOM row or the vendor product-family page."
 kb_implications:
-  - "item_granularity: consumable - replaceable ISO-KF DN40 vacuum sealing item; model as a purchased/imported seal or centering-ring seal unless the KB later adds a reusable standard vacuum-fitting family."
+  - "item_granularity: simple_part - replaceable ISO-KF DN40 vacuum sealing item; model as a purchased/imported seal or centering-ring seal unless the KB later adds a reusable standard vacuum-fitting family."
 ---

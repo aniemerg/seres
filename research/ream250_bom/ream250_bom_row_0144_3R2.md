@@ -50,5 +50,5 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: searched \"311ZRA063 Pfeiffer Vacuum material seal ISO-K DN63\", \"311ZRA063 Pfeiffer Vacuum seal ISO-K DN63 NBR aluminum\", and \"311ZRA063 manufacturing process centering ring\"; found product material and dimensional facts but no vendor manufacturing process description."
 kb_implications:
-  - "item_granularity: consumable - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased consumable unless vacuum-seal fabrication becomes in scope."
+  - "item_granularity: simple_part - replaceable ISO-K vacuum centering ring/seal assembly; later KB modeling can keep it as a purchased replaceable or applied part unless vacuum-seal fabrication becomes in scope."
 ---

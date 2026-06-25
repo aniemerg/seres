@@ -52,7 +52,7 @@ how_to_make:
   uncertainty_notes:
     - "The AMPROVED page supports procurement and gross installation route, but not a detailed local manufacturing process, tolerances, seal profile, detent mechanism design, or internal valve subcomponent quantities."
 kb_implications:
-  - "item_granularity: purchased_module - row 42C2 is a vendor DN40 manual valve assembly with stainless and EPDM materials; model as a purchased functional module unless later work decomposes the valve body, seal, lever, shaft, and detent subassembly."
+  - "item_granularity: complex_module - row 42C2 is a functional DN40 manual valve assembly with stainless and EPDM materials; model as a complex functional module unless later work decomposes the valve body, seal, lever, shaft, and detent subassembly."
 ---
 
 Research result for reAM250 BOM row 264.

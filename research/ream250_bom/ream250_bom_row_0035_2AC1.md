@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "The proposed manufacturing route is inferred from geometry and standard bearing-unit construction; the cited vendor sources support product identity and components, not the full manufacturing process."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a standard supported bearing unit for now; later KB work can split the pillow block, 6200.2RS bearing, locknut, and retaining hardware if row-isolated geometry or a sub-BOM is needed."
+  - "item_granularity: complex_module - Treat as a standard supported bearing unit for this pass; later KB work can split the pillow block, 6200.2RS bearing, locknut, and retaining hardware if row-isolated geometry or a sub-BOM is needed."
 ---

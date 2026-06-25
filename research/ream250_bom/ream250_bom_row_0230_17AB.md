@@ -55,7 +55,7 @@ how_to_make:
     - "The cited sources resolve product family, material, and cut-to-size availability but do not state the actual Bosch production route for this specific cut piece."
     - "targeted_web_search: searched \"Bosch Rexroth strut profile 20x20 0.4 kg/m material\", \"site:boschrexroth.com strut profile 20x20 aluminum anodized mass kg/m\", and \"17AB_strut_profile_20X20_473 Bosch Rexroth\"; found row-family product specifications and cut-to-size evidence, but no row-specific manufacturing process sheet for 17AB."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - reusable cut length of standard 20x20 anodized aluminum strut/profile stock; later KB modeling should prefer one generic profile-stock item with length handled in BOM notes or quantity rather than a unique item for every cut length."
+  - "item_granularity: simple_part - reusable cut length of standard 20x20 anodized aluminum strut/profile stock; later KB modeling should prefer one generic profile-stock item with length handled in BOM notes or quantity rather than a unique item for every cut length."
 ---
 
 # reAM250 BOM Row 230 - 17AB

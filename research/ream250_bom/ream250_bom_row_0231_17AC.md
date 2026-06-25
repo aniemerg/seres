@@ -54,5 +54,5 @@ how_to_make:
   uncertainty_notes:
     - "The local manufacturing route is plausible for an aluminum T-slot profile but is not sourced as Bosch Rexroth's exact factory process for this row."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes rather than as a unique reAM250-only assembly."
+  - "item_granularity: simple_part - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes rather than as a unique reAM250-only assembly."
 ---

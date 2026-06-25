@@ -53,6 +53,6 @@ how_to_make:
   uncertainty_notes:
     - "No source found gives K+C's detailed manufacturing process or calibration fixture design, so the local route is a high-level engineering plan rather than a sourced process recipe."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a calibrated vendor linear encoder/scale module for now; later KB work should only decompose it after modeling optical scale fabrication, read-head electronics, sealing, cabling, and calibration."
+  - "item_granularity: complex_module - Treat as a calibrated functional linear encoder/scale complex module for this pass; later KB work should only decompose it after modeling optical scale fabrication, read-head electronics, sealing, cabling, and calibration."
 ---
 

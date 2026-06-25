@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact dispensing tool, cure time, and applied bead tolerance are not specified in the row evidence."
 kb_implications:
-  - "item_granularity: consumable - Model as applied silicone sealant/seal material consumed during assembly rather than as a reusable machine part or purchased module."
+  - "item_granularity: simple_part - Model as applied silicone sealant/seal material consumed during assembly rather than as a reusable machine part or purchased module."
 ---

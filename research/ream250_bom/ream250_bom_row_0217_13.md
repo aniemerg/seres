@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - "Local self-manufacture of the silicone polymer and curing package is not decomposed here; this result only identifies the row-level application/procurement route."
 kb_implications:
-  - "item_granularity: consumable - Model as a consumed silicone sealant/cured gasket row, likely reusable across the other reAM250 flat seal rows that reference Liqui Moly 6185 rather than as a unique machined part."
+  - "item_granularity: simple_part - Model as a consumed silicone sealant/cured gasket row, likely reusable across the other reAM250 flat seal rows that reference Liqui Moly 6185 rather than as a unique machined part."
 ---

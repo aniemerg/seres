@@ -52,7 +52,7 @@ how_to_make:
   uncertainty_notes:
     - "No row-specific drawing, fit tolerance, bearing clearance class, seal compound, grease specification, or original bearing manufacturer was found."
 kb_implications:
-  - "item_granularity: consumable - Treat as a standard replaceable 6200-2RS sealed ball bearing wear item, not a machine-specific custom part; defer sub-BOM modeling until precision bearing manufacture is in scope."
+  - "item_granularity: simple_part - Treat as a standard replaceable 6200-2RS sealed ball bearing wear item, not a machine-specific custom part; defer sub-BOM modeling until precision bearing manufacture is in scope."
 ---
 
 # reAM250 BOM Row 42 - 2AC8

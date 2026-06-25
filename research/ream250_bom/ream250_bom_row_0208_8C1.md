@@ -55,5 +55,5 @@ how_to_make:
   uncertainty_notes:
     - Pfeiffer's own manufacturing process, wall thickness, weld details, and acceptance thresholds were not located for this exact order number.
 kb_implications:
-  - "item_granularity: purchased_module - Treat as one purchased hose assembly with material metadata and estimated mass; avoid splitting bellows and flanges unless a later manufacturing model specifically targets vacuum hose fabrication."
+  - "item_granularity: simple_part - Treat as a reusable DN40 ISO-KF corrugated vacuum hose item; capture thin-wall bellows forming, KF flange joining, cleaning, and leak testing in the manufacturing route."
 ---

@@ -51,7 +51,7 @@ how_to_make:
   uncertainty_notes:
     - "Without a belt designation or vendor page, the manufacturing route cannot specify tooth pitch, reinforcement, compound, splice method, or curing parameters."
 kb_implications:
-  - "item_granularity: consumable - This is a replaceable rubber belt-like motion component; model as a purchased/stock belt unless later work resolves the exact standard and compound."
+  - "item_granularity: simple_part - This is a replaceable rubber belt-like motion component; model as a purchased/stock belt unless later work resolves the exact standard and compound."
 ---
 
 Research result for reAM250 BOM row 196, item 6R.

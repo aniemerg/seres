@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: searched \"Hiwin HGL15CAZ0H datasheet\", \"HGL15CAZ0H material\", \"HGL15CAZ0H weight\", and \"HGL15CA chrome steel\"; no row-matched source found a complete manufacturing process, heat treatment, tolerance stack, or component-level sub-BOM for local production."
 kb_implications:
-  - "item_granularity: purchased_module - model as a reusable purchased precision linear-guide carriage for now; only split into steel body, balls, seals, retainer/end caps, lubricant, and inspection processes if linear-guide imports become a priority."
+  - "item_granularity: complex_module - model as a reusable complex precision linear-guide carriage for this pass; only split into steel body, balls, seals, retainer/end caps, lubricant, and inspection processes if linear-guide imports become a priority."
 ---
 
 Research result for reAM250 BOM row 26.

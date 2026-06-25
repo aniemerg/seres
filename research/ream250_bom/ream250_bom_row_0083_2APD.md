@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "Vendor evidence does not provide the exact internal construction, potting compound, cable gauge, or calibration class selected beyond the visible PT100/two-wire/5 m row code."
 kb_implications:
-  - "item_granularity: assembly - treat as a configured calibrated temperature-sensor assembly for near-term KB modeling; defer splitting into probe body, RTD element, cable, insulation, and calibration workflow until sensor manufacturing is modeled."
+  - "item_granularity: complex_module - treat as a configured calibrated temperature-sensor assembly for near-term KB modeling; defer splitting into probe body, RTD element, cable, insulation, and calibration workflow until sensor manufacturing is modeled."
 ---
 
 # reAM250 BOM Row 83 - 2APD

@@ -51,7 +51,7 @@ how_to_make:
   uncertainty_notes:
     - "A self-manufacturing route would require a separate decomposition of valve body machining, bellows/feedthrough manufacture, sealing surfaces, actuator, pilot valve, microswitch, leak testing, and qualification."
 kb_implications:
-  - "item_granularity: purchased_module - Model as a vendor valve module for now because it is a calibrated multi-material vacuum component with actuator, seals, feedthrough, and position-indicator hardware; later self-manufacturing would need a sub-BOM and leak-test workflow."
+  - "item_granularity: complex_module - Model as a functional valve complex module for this pass because it is a calibrated multi-material vacuum component with actuator, seals, feedthrough, and position-indicator hardware; later self-manufacturing would need a sub-BOM and leak-test workflow.; defer internal decomposition until a focused sub-BOM and manufacturing workflow are modeled."
 ---
 
 Research result for reAM250 BOM row 113.

@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The product route and CAD path resolve procurement and application, but not the exact bead dispensing tolerance, cure time under the machine's assembly conditions, or acceptance test for leak tightness."
 kb_implications:
-  - "item_granularity: consumable - Model as an applied silicone sealant/gasket consumable tied to a CAD-defined bead path, not as a reusable machine part or purchased module."
+  - "item_granularity: simple_part - Model as an applied silicone sealant/gasket replaceable or applied part tied to a CAD-defined bead path, not as a reusable machine part or purchased module."
 ---
 
 Research result for the leased reAM250 BOM row only.

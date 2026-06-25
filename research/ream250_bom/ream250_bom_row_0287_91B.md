@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The row does not specify end tolerances, cut angle, weld-joint preparation, coating, or whether later assembly operations add connection details."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable 80x80x5 mild-steel square hollow section stock with recipe/BOM variants for cut lengths rather than as a machine-specific purchased module."
+  - "item_granularity: simple_part - model as reusable 80x80x5 mild-steel square hollow section stock with recipe/BOM variants for cut lengths rather than as a machine-specific purchased module."
 ---
 
 Research result for reAM250 BOM row 287.

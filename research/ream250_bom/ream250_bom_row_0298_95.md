@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "The cited sources do not state the extrusion die, alloy temper, heat treatment, or surface-finish process parameters for this exact row; those would be separate manufacturing-detail research."
 kb_implications:
-  - "item_granularity: purchased_module - model as a reusable Bosch Rexroth 60 x 60 aluminum strut-profile stock/cut-length family rather than creating a unique item for every nearby length."
+  - "item_granularity: simple_part - model as a reusable Bosch Rexroth 60 x 60 aluminum strut-profile stock/cut-length family rather than creating a unique item for every nearby length."
 ---
 
 Research result for reAM250 BOM row 298.

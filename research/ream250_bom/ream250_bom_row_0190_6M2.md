@@ -28,8 +28,8 @@ mass:
 material:
   primary_material: "Aluminum-alloy actuator/support-guide body with steel guide/seal hardware and polymer or elastomer sealing components."
   source:
-    url_or_path: "https://www.smcworld.com/catalog/New-products-en/pdf/es100-87-lef.pdf; https://static.smc.eu/pdf/LEF-F_EU.pdf; https://www.smc.nu/drawings/2-D/6_Linj%C3%A4renheter/LEF/LEF-OM00201.pdf"
-    cited_fact_or_basis: "SMC LEF catalog search results for the LEFG family list body material as aluminum alloy, anodized, with rail guide/ball screw assembly as separate guide hardware. SMC LEF maintenance/manual material tables for related LEF slider construction list aluminum-alloy tables/covers, stainless-steel dust seal bands/band holders, synthetic-resin seal-band holders, and NBR rubber bushings. bom_url_route_check: the BOM URL names the exact LEFG32-S-600 but did not expose material data in the fetchable route; manufacturer catalog/manual routes for the same LEF/LEFG family were used for material-family evidence."
+    url_or_path: "https://www.smcworld.com/assets/manual/en-jp/files/LEF-OM002xx.pdf; https://content2.smcetech.com/pdf/11_LEFG.pdf"
+    cited_fact_or_basis: "SMC LEF series construction tables list the slider body and table as aluminum alloy/anodized, seal-band holders and slide bearings as synthetic resin, rubber bushing as NBR, and band stopper/dust seal band/roller shaft as stainless steel; rail guide and bearings are listed as separate guide hardware without a grade. The SMC 11-LEFG catalog identifies the support guide as the same LEF-family support guide with seal bands. bom_url_route_check: the BOM URL names the exact LEFG32-S-600 but did not expose material data in the fetchable route; manufacturer catalog/manual routes for the same LEF/LEFG family were used for material-family evidence."
     evidence_basis: "independent_vendor_spec"
   assumptions:
     - "The row's rail/support-guide body uses the LEF/LEFG family material stack rather than a row-specific custom material."
@@ -49,6 +49,5 @@ how_to_make:
   uncertainty_notes:
     - "The local manufacturing route omits precision tolerances, preload/bearing details, and vendor quality-control steps that would matter for a self-manufactured replacement."
 kb_implications:
-  - "item_granularity: purchased_module - Treat 6M2 as a vendor linear-support-guide module for near-term KB modeling; split into simple parts only if the reAM250 linear-motion subsystem becomes a detailed manufacturing target."
+  - "item_granularity: simple_part - Treat 6M2 as the rail/body portion of the SMC LEFG32-S-600 support-guide pair; keep the complete LEFG support guide as a later module only if rows 6M1, 6M2, seal-band parts, and guide hardware are explicitly recombined."
 ---
-

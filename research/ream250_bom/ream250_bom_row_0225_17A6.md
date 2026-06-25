@@ -88,7 +88,7 @@ how_to_make:
   uncertainty_notes:
     - The exact Bosch production process and finish for this row are not specified in the BOM or local STEP metadata.
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Treat as reusable aluminum profile stock or cut-to-length extrusion rather than a unique machine-specific part."
+  - "item_granularity: simple_part - Treat as reusable aluminum profile stock or cut-to-length extrusion rather than a unique machine-specific part."
 ---
 
 Research result for reAM250 BOM row 225.

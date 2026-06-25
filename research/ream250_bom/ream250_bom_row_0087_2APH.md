@@ -52,5 +52,5 @@ how_to_make:
     - "targeted_web_search: tried 'agrolager 2APH felt seal', 'site:agrolager.de 2APH', '2APH rubber seal 260', and '2APH felt agrolager'; results did not provide a row-specific vendor page, drawing, or OEM manufacturing route."
     - Generic gasket/felt-seal fabrication sources support the route class, not this exact 2APH part specification.
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable seal/gasket consumable with per-unit mass about 0.030 kg unless later research identifies a reusable standard seal family."
+  - "item_granularity: simple_part - Model as a replaceable seal/gasket replaceable or applied part with per-unit mass about 0.030 kg unless later research identifies a reusable standard seal family."
 ---

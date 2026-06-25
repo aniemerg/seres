@@ -56,5 +56,5 @@ how_to_make:
   uncertainty_notes:
     - "The actual adhesive may require a specific primer, mix ratio, cure schedule, vacuum bake-out, or cleanroom handling not stated by the BOM/CAD row."
 kb_implications:
-  - "item_granularity: consumable - Model as a consumable adhesive application or cured glue bead tied to an assembly step, not as a standalone reusable part or purchased module."
+  - "item_granularity: simple_part - Model as a replaceable or applied part adhesive application or cured glue bead tied to an assembly step, not as a standalone reusable part or purchased module."
 ---

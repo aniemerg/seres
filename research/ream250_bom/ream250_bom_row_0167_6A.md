@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "The BOM row does not specify whether this exact belt is closed manufactured, welded meterware, or flex-manufactured."
 kb_implications:
-  - "item_granularity: consumable - Model as one replaceable conveyor/timing belt wear component, with PU body and tension-cord construction captured in notes rather than separate subparts unless belt manufacture becomes a priority."
+  - "item_granularity: simple_part - Model as one replaceable conveyor/timing belt wear component, with PU body and tension-cord construction captured in notes rather than separate subparts unless belt manufacture becomes a priority."
 ---

@@ -49,5 +49,5 @@ how_to_make:
   uncertainty_notes:
     - "A concrete self-manufacturing recipe would need sensor ceramic/electrode details, heater design, PCB schematic, connector and seal specifications, calibration procedure limits, and acceptance-test requirements."
 kb_implications:
-  - "item_granularity: purchased_module - Model this row as one calibrated FCX-TR oxygen-transmitter module for now; split later only if oxygen-sensor/electronics manufacturing becomes a priority."
+  - "item_granularity: complex_module - Model this row as one calibrated FCX-TR oxygen-transmitter complex module for this pass; split later only if oxygen-sensor/electronics manufacturing becomes a priority."
 ---

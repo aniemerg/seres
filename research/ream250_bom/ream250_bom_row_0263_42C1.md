@@ -55,5 +55,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact production process, tolerance stack, and sealing-surface finish requirements are not specified by the BOM or vendor page."
 kb_implications:
-  - "item_granularity: purchased_module - Model the complete ISO-KF DN40 manual disc valve as a vendor functional module for now; this row is one CAD-split valve subpart and should not become a separate reusable KB item unless the valve is later decomposed into a sub-BOM."
+  - "item_granularity: complex_module - Model the complete ISO-KF DN40 manual disc valve as a functional functional complex module for this pass; this row is one CAD-split valve subpart and should not become a separate reusable KB item unless the valve is later decomposed into a sub-BOM."
 ---

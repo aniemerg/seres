@@ -52,7 +52,7 @@ how_to_make:
   uncertainty_notes:
     - "The B&R page supports procurement and interface planning, but not a manufacturable internal sub-BOM, calibration procedure, or process route for self-manufacturing the motor."
 kb_implications:
-  - "item_granularity: purchased_module - model as a purchased/calibrated stepper motor module for now; split into a motor sub-BOM only when local electromechanical manufacturing and calibration details are intentionally added."
+  - "item_granularity: complex_module - model as a complex/calibrated stepper motor complex module for this pass; split into a motor sub-BOM only when local electromechanical manufacturing and calibration details are intentionally added."
 ---
 
 Result generated for the leased reAM250 BOM row only.

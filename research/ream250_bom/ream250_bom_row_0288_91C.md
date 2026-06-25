@@ -52,6 +52,6 @@ how_to_make:
   uncertainty_notes:
     - "The exact original supply route, surface finish, and forming process are not specified by the BOM row."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Treat this as reusable cut-to-length steel angle stock/profile rather than a machine-specific assembly; later KB modeling can represent standard angle stock plus a cutting operation."
+  - "item_granularity: simple_part - Treat this as reusable cut-to-length steel angle stock/profile rather than a machine-specific assembly; later KB modeling can represent standard angle stock plus a cutting operation."
 ---
 

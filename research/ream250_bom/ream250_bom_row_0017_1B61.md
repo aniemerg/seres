@@ -55,5 +55,5 @@ how_to_make:
   uncertainty_notes:
     - "A production BOM should preserve this as a purchased or cut consumable unless later evidence identifies an exact Lisema catalog/profile number."
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable elastomer seal/gasket consumable, not as a multi-part assembly or precision machine component."
+  - "item_granularity: simple_part - Model as a replaceable elastomer seal/gasket replaceable or applied part, not as a multi-part assembly or precision machine component."
 ---

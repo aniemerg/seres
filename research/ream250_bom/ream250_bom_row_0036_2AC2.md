@@ -56,5 +56,5 @@ how_to_make:
   uncertainty_notes:
     - Local manufacturing details such as fits, tolerances, surface finish, heat treatment, seal specification, and quality checks require a manufacturer drawing or teardown before process modeling.
 kb_implications:
-  - "item_granularity: purchased_module - Model this row as a vendor SLA10-class supported bearing module for now; split into housing, 6200.2RS bearing, circlip/seal, lubricant, and assembly operations only if later KB work needs bearing-unit closure."
+  - "item_granularity: complex_module - Model this row as a functional SLA10-class supported bearing complex module for this pass; split into housing, 6200.2RS bearing, circlip/seal, lubricant, and assembly operations only if later KB work needs bearing-unit closure."
 ---

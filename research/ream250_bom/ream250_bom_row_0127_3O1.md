@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor/CAD evidence does not state the actual Pfeiffer factory process, weld details, corrugation process, bend fixture method, surface finish, or inspection protocol."
 kb_implications:
-  - "item_granularity: purchased_module - treat 3O1 as part of a vendor Pfeiffer DN 63 ISO-K flexible vacuum connector with sibling curvature/end-piece rows, rather than creating a separate standalone manufactured curvature item."
+  - "item_granularity: simple_part - Treat 3O1 as the curved bellows/corrugated-hose segment of a DN63 ISO-K flexible connector; model local closure with bellows forming, end joining, cleaning, and leak testing instead of a deferred complex module."
 ---
 
 Research result for reAM250 BOM row 127.

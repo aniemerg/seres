@@ -52,7 +52,7 @@ how_to_make:
   uncertainty_notes:
     - "The actual Hiwin process, alloy, heat treatment, grinding sequence, preload-setting method, and seal/lubricant specifications are not provided by the row evidence."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a standard purchased precision linear-guide block/carriage shared with similar HGL15 rows; decompose only if the KB later models precision guideway manufacturing."
+  - "item_granularity: complex_module - Treat as a standard complex precision linear-guide block/carriage shared with similar HGL15 rows; decompose only if the KB later models precision guideway manufacturing."
 ---
 
 Research result for the leased reAM250 BOM row only.

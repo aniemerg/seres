@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact Pfeiffer factory process, weld/forming sequence, coating specification, and cartridge supplier are not sourced."
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable vacuum filter/dust-separator assembly with wear media; later KB work can separate housing, O-rings, clips, and filter cartridge if filter maintenance dominates."
+  - "item_granularity: simple_part - Model as a replaceable vacuum filter/dust-separator assembly with wear media; later KB work can separate housing, O-rings, clips, and filter cartridge if filter maintenance dominates."
 ---

@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: searched 'Pfeiffer Vacuum 320SFK063 130 flexible pipe ISO-K DN 63 material weight', '320SFK063-130 weight kg', and '320SFK063-130 datasheet mass'; results resolved row-matched product identity, dimensions, material, stroke, and vacuum service data but did not provide a row-specific manufacturing process or catalog weight."
 kb_implications:
-  - "item_granularity: assembly - Model as a reusable standard DN63 ISO-K stainless spring-bellows connector with flange and bellows subcomponents, not as raw hose stock or a reAM250-specific custom part."
+  - "item_granularity: simple_part - Model as a reusable DN63 ISO-K stainless spring-bellows connector/hose item; capture bellows forming, flange joining, cleaning, and leak testing in the manufacturing route rather than as a complex module."
 ---

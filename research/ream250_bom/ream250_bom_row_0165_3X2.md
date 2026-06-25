@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor page does not state the actual production process, tolerances, surface finish, or seal installation details for this subpart."
 kb_implications:
-  - "item_granularity: assembly - model 3X2 as a valve subassembly or purchased valve subcomponent for now; split into stainless simple parts plus an EPDM seal only if the DN40 valve becomes a detailed local-manufacturing target."
+  - "item_granularity: complex_module - model 3X2 as a valve subassembly or purchased valve subcomponent for now; split into stainless simple parts plus an EPDM seal only if the DN40 valve becomes a detailed local-manufacturing target."
 ---
 
 # reAM250 BOM Row 165 - 3X2

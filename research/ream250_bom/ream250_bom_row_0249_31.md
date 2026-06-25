@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - "A self-manufacturing path would need subcomponent specifications, tolerances, balancing requirements, motor data, bearing sizes, and acceptance tests before this can become a concrete KB recipe."
 kb_implications:
-  - "item_granularity: purchased_module - Model this as one Becker circulation/vacuum pump module for now; split into motor, blower housing/impeller, bearings, seals, filters, and mounts only if pump manufacturing becomes a priority."
+  - "item_granularity: complex_module - Model this as one Becker circulation/vacuum pump complex module for this pass; split into motor, blower housing/impeller, bearings, seals, filters, and mounts only if pump manufacturing becomes a priority."
 ---

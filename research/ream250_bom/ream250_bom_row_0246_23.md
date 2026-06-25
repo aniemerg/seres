@@ -53,5 +53,5 @@ how_to_make:
   uncertainty_notes:
     - "The BOM evidence does not state the actual dispensing nozzle size, cure schedule, or compression target used in the reAM250 assembly."
 kb_implications:
-  - "item_granularity: consumable - installed black silicone sealant bead; model as a consumable/applied material rather than a reusable part or separate molded gasket."
+  - "item_granularity: simple_part - installed black silicone sealant bead; model as a replaceable or applied part/applied material rather than a reusable part or separate molded gasket."
 ---

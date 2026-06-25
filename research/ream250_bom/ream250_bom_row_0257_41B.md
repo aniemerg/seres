@@ -52,6 +52,6 @@ how_to_make:
   uncertainty_notes:
     - "targeted_web_search: searched 'site:zahriemen24.de \"10-AT5-340\"', '\"10-AT5-340\" \"zahriemen24\"', and '\"10 AT5 340\" \"zahriemen24\"'; no row-specific zahriemen24 product page was found, so the local manufacturing route remains a general timing-belt hypothesis."
 kb_implications:
-  - "item_granularity: consumable - Treat as a replaceable standard timing belt/wear item, not as a custom machine assembly; later KB work should reuse a generic AT5 timing belt family with length/width parameters where possible."
+  - "item_granularity: simple_part - Treat as a replaceable standard timing belt/wear item, not as a custom machine assembly; later KB work should reuse a generic AT5 timing belt family with length/width parameters where possible."
 ---
 

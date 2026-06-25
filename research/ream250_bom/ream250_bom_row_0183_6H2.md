@@ -52,5 +52,5 @@ how_to_make:
   uncertainty_notes:
     - Without Lisema's drawing, the exact durometer, surface finish, and acceptance criteria remain unspecified.
 kb_implications:
-  - "item_granularity: consumable - Model as a replaceable silicone seal/gasket rather than a machine-specific assembly; later KB work can reuse a generic flat silicone gasket process with row-specific dimensions."
+  - "item_granularity: simple_part - Model as a replaceable silicone seal/gasket rather than a machine-specific assembly; later KB work can reuse a generic flat silicone gasket process with row-specific dimensions."
 ---

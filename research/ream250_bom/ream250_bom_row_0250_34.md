@@ -51,7 +51,7 @@ how_to_make:
   uncertainty_notes:
     - "The evidence resolves the purchased product and performance class, but not Pfeiffer's actual forming, welding, heat treatment, cleaning, or inspection process details."
 kb_implications:
-  - "item_granularity: purchased_module - Model as a standard vendor DN 50 ISO-KF stainless spring-bellows connector for now; later local closure would need a dedicated bellows/flange fabrication and leak-test workflow."
+  - "item_granularity: simple_part - Treat as a reusable DN50 ISO-KF stainless spring-bellows connector; capture bellows forming, flange joining, cleaning, and leak testing as manufacturing requirements."
 ---
 
 # reAM250 BOM Row 250 - 34

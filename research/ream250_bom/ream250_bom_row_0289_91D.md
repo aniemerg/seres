@@ -51,5 +51,5 @@ how_to_make:
   uncertainty_notes:
     - "The exact industrial route for the source profile, such as hot rolling, cold drawing, or welded profile production, is not specified by the BOM-side evidence."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - Model later as reusable mild-steel angle/profile stock with cut length variants; the BOM row is a cut-to-length stock form rather than a finished module."
+  - "item_granularity: simple_part - Model later as reusable mild-steel angle/profile stock with cut length variants; the BOM row is a cut-to-length stock form rather than a finished module."
 ---

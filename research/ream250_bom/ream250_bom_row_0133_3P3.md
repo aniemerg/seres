@@ -53,7 +53,7 @@ how_to_make:
   uncertainty_notes:
     - "The vendor evidence resolves procurement identity and performance requirements, but not internal actuator sub-BOM, bellows forming method, seal geometry, or factory acceptance-test procedure."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a vendor electro-pneumatic vacuum valve subsystem for now; later KB work can split it only if valve body, bellows, actuator, seals, controls, and calibration/leak-test workflows are modeled."
+  - "item_granularity: complex_module - Treat as a functional electro-pneumatic vacuum valve subsystem for this pass; later KB work can split it only if valve body, bellows, actuator, seals, controls, and calibration/leak-test workflows are modeled."
 ---
 
 Result generated for the leased reAM250 BOM row only.

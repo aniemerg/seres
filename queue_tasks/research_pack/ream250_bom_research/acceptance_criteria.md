@@ -399,10 +399,7 @@ signal starting with `item_granularity: <value> - ...`.
 Allowed values:
 
 - `simple_part`
-- `assembly`
-- `purchased_module`
-- `consumable`
-- `raw_material_or_stock`
+- `complex_module`
 - `unknown`
 
 Given the result has `kb_implications`
@@ -410,43 +407,48 @@ When the worker writes item granularity
 Then exactly one bullet should start with `item_granularity: <value> - `
 And `<value>` must be one of the allowed values.
 
-## AC-GRAN-002: Multi-Material Does Not Imply Assembly
+## AC-GRAN-002: Multi-Material Does Not Imply Complex Module
 
 Type: Judgment-required
 
 Rule:
-Multi-material construction alone does not imply `assembly`. Choose the value
-that best predicts how the KB should model the row next.
+Multi-material construction alone does not imply `complex_module`. Choose the
+value that best predicts how the KB should manufacture or decompose the row
+next.
 
 Given a row item contains multiple materials
-When it is a replaceable seal, centering ring, O-ring, filter element, belt, or
-similar maintenance item
-Then prefer `item_granularity: consumable`
-And explain any multi-material construction after the dash
-But do not classify it as `assembly` solely because more than one material is
-present.
+When it is still a single manufactured or applied object such as a gasket,
+centering ring, O-ring, filter element, belt, adhesive bead, or seal
+Then prefer `item_granularity: simple_part`
+And explain any wear, replacement, stock, or multi-material behavior after the
+dash
+But do not classify it as `complex_module` solely because more than one material
+is present.
 
 Given the row is a replaceable timing belt, conveyor belt, O-ring, gasket, seal,
 filter element, lubricant, adhesive, or similar wear/replacement item
 When choosing item granularity
-Then prefer `item_granularity: consumable`
-Unless the row is clearly a larger calibrated vendor subsystem rather than the
-replaceable item itself.
+Then prefer `item_granularity: simple_part`
+And document the consumable/replacement behavior in the explanation rather than
+using a separate granularity label.
 
-## AC-GRAN-003: Standard Hardware Is Not A Purchased Module
+## AC-GRAN-003: Standard Hardware And Stock Forms Are Simple Parts
 
 Type: Judgment-required
 
 Rule:
-Standard hardware purchased from a vendor is not automatically a
-`purchased_module`, and finished standard fasteners are not raw stock. Use
+The reAM250 research is intended to support eventual local manufacturing, not to
+preserve procurement status as item granularity. Standard hardware purchased
+from a vendor is not automatically a complex module, finished standard
+fasteners are not raw stock, and cut stock/profile rows should still be modeled
+as manufacturable simple parts. Use
 `simple_part` for one-piece or simple standard hardware such as clamps,
 brackets, bolts, screws, nuts, washers, simple pulleys, and similar fasteners
-unless the row is a calibrated functional module or a multi-part assembly that
-should be modeled as such. Reserve `raw_material_or_stock` for stock forms such
-as sheet, bar, tube, extrusion, profile, wire, plate, rod, hose/pipe stock, or
-cut-to-length stock where later KB work should model length/size variants rather
-than a finished hardware item.
+unless the row is a calibrated functional module, complex mechanism, or
+multi-part assembly that should be deferred as `complex_module`.
+For stock forms such as sheet, bar, tube, extrusion, profile, wire, plate, rod,
+or cut-to-length stock, use `simple_part` and explain the stock form / cut length
+after the dash.
 
 Given the row is a standard ISO-K claw clamp or similar vacuum fastener
 When the row is one simple hardware item without a sub-BOM or calibration
@@ -459,22 +461,57 @@ Given the row is a finished DIN/ISO bolt, screw, nut, washer, or similar
 fastener
 When the worker writes item granularity
 Then prefer `item_granularity: simple_part`
-And do not use `raw_material_or_stock`
 And explain that later KB work should reuse or create generic standard hardware
 or a fastener kit.
 
-## AC-GRAN-004: Purchased Module Is A Current Modeling Hint
+Given the row is a cut-to-length tube, extrusion, strut profile, bar, shaft,
+plate, wire, hose, or similar stock form
+When the worker writes item granularity
+Then prefer `item_granularity: simple_part`
+And explain that the stock/profile form and length variant should be represented
+in manufacturing route, recipe parameters, BOM notes, or future consolidation,
+not as a separate granularity label.
+
+Given the row is a single precision rail, guide rail, shaft, or machined profile
+with no row-level sub-BOM
+When the worker writes item granularity
+Then prefer `item_granularity: simple_part`
+And capture hardening, grinding, coating, inspection, and mating-carriage
+compatibility in the explanation or manufacturing route.
+
+Given the row is a standard bearing, shaft seal, bellows hose, vacuum pipe,
+vacuum fitting, clamp, coupling, powder container, optical window panel, or
+other row-level hardware item whose local route can be described as one
+manufacturing or fabrication workflow
+When the worker writes item granularity
+Then prefer `item_granularity: simple_part`
+And capture precision, sealing, certification, cleaning, passivation, leak
+testing, or compatibility requirements in the explanation instead of using
+`complex_module` as a proxy for procurement or quality requirements.
+
+## AC-GRAN-004: Complex Module Is A Deferred Decomposition Hint
 
 Type: Judgment-required
 
 Rule:
-`purchased_module` means the row is best treated as a vendor functional module
-or calibrated subsystem until a sub-BOM and calibration/manufacturing workflow
-are modeled. It does not mean the item can never be self-manufactured later.
+`complex_module` means the row is a multi-part assembly, functional module,
+calibrated subsystem, or mechanically/electrically complex object that should
+not be decomposed in this research pass. It is a deferred local-manufacturing
+signal, not a procurement claim.
 
 Given the row is a sensor head, pump, controller, laser module, or calibrated
 vendor subsystem
 When no sub-BOM and calibration workflow are available
-Then `item_granularity: purchased_module` may be appropriate
-And the explanation should distinguish current KB modeling from long-term
-self-manufacturing goals.
+Then `item_granularity: complex_module` may be appropriate
+And the explanation should say that later KB work should split it into internal
+parts, materials, calibration, and manufacturing workflows when that subsystem
+becomes a priority.
+
+Given the row is a linear-guide carriage/block, bearing unit, or complete linear
+support guide with rolling elements, seals, preload/alignment details, or
+multiple hidden components
+When no row-level sub-BOM is available
+Then `item_granularity: complex_module` may be appropriate
+And the explanation should state that later KB work should split body, rolling
+elements, retainers, seals, lubricant, heat treatment, grinding, assembly, and
+inspection only when guideway manufacturing becomes a priority.

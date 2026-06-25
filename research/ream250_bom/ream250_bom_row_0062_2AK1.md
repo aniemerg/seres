@@ -55,5 +55,5 @@ how_to_make:
   uncertainty_notes:
     - "The actual Dold supplier process, heat-treatment specification, final hardness, and exact grinding/straightening controls are not published in the row evidence."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - model as reusable 16 mm hardened/ground precision shaft stock or cut-to-length rod; keep length variation in BOM/recipe quantities rather than creating a machine-specific custom part."
+  - "item_granularity: simple_part - model as reusable 16 mm hardened/ground precision shaft stock or cut-to-length rod; keep length variation in BOM/recipe quantities rather than creating a machine-specific custom part."
 ---

@@ -56,7 +56,7 @@ how_to_make:
   uncertainty_notes:
     - "If the original outer seal is molded, reinforced, adhesive-backed, or made from felt rather than elastomer sheet, the local manufacturing route and mass estimate would need revision."
 kb_implications:
-  - "item_granularity: consumable - model as a replaceable perimeter seal/gasket for the 2AP platform stack, with exact material and dimensions deferred until the missing CAD, drawing, or supplier product ID is recovered."
+  - "item_granularity: simple_part - model as a replaceable perimeter seal/gasket for the 2AP platform stack, with exact material and dimensions deferred until the missing CAD, drawing, or supplier product ID is recovered."
 ---
 
 Research result for reAM250 BOM row 75.

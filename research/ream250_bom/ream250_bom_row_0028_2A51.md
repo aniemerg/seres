@@ -54,7 +54,7 @@ how_to_make:
   uncertainty_notes:
     - "The actual HIWIN alloy, heat treatment cycle, raceway grinding sequence, coating choice, inspection tolerance stack, and cut-to-length order details are not provided by the row evidence."
 kb_implications:
-  - "item_granularity: purchased_module - Treat as a reusable purchased precision linear-guide rail compatible with HGL/HG15 carriages; decompose into rail stock, heat treatment, grinding, hole machining, coating, and inspection only if precision guideway production becomes a closure priority."
+  - "item_granularity: simple_part - Treat as a reusable single precision linear-guide rail compatible with HGL/HG15 carriages; capture heat treatment, grinding, hole machining, coating, and inspection in the manufacturing route rather than modeling it as a complex module."
 ---
 
 Research result for the leased reAM250 BOM row only.

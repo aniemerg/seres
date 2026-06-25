@@ -50,7 +50,7 @@ how_to_make:
   uncertainty_notes:
     - "The STEP preview does not specify alloy temper, anodizing, slot tolerance, or the final intended cut length discrepancy between the filename and measured CAD geometry."
 kb_implications:
-  - "item_granularity: raw_material_or_stock - standard cut-to-length structural aluminum profile stock; model as reusable framing stock or a simple profile part rather than a custom assembly."
+  - "item_granularity: simple_part - standard cut-to-length structural aluminum profile stock; model as reusable framing stock or a simple profile part rather than a custom assembly."
 ---
 
 Research result for reAM250 BOM row 296.
