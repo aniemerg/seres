@@ -17,6 +17,10 @@ resource_requirements:
 - machine_id: hydraulic_press
   qty: 1
   unit: count
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
+  notes: Mold/die tooling defines compact geometry and ejection surfaces.
 energy_model:
   type: per_unit
   value: 0.5
@@ -33,7 +37,8 @@ notes: 'Pressing and forming process for powder compaction.
 
   Used to form green compacts from ceramic or metal powders.
 
-  Hydraulic or mechanical press applies pressure to consolidate powder.
+  Hydraulic press applies pressure to consolidate powder; pressing_mold_set provides
+  the shape-specific die/mold and ejection surfaces.
 
   Applications: Ceramic parts, powder metallurgy, refractory shapes
 

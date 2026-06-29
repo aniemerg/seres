@@ -5,10 +5,18 @@ mass: 850.0
 unit: unit
 bom: bom_forging_press_v0
 capabilities:
-- forging
-- forming
-- pressing
-notes: Compact forging press unit to provide forging capability for metal shaping;
-  placeholder spec pending detailed design.
+- controlled_hot_press_forging
+- sustained_forging_press_force
+- open_die_press_forging
+- forging_die_guidance
+- compact_shop_forging
+notes: Compact dedicated forging press for controlled hot forging under sustained
+  ram force. Use where frame rigidity, ram/platen guidance, die retention, stroke
+  control, and hot-work duty matter. Conservative scope is a small shop/pilot press
+  around the 25-40 ton force class with a limited working envelope for bearing rings,
+  small billets, tooling blanks, and similar forgings; do not imply large industrial
+  closed-die forgings. The press does not heat stock and should be paired with a
+  forge/heat source plus reusable dies or anvil tooling. Use hydraulic_press for
+  general cold pressing and power_hammer_or_press for impact forging/drawing.
 recipe: recipe_forging_press_v0
 unit_kind: discrete

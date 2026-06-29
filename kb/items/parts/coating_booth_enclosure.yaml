@@ -5,6 +5,19 @@ mass: 60.0
 unit: unit
 material_class: steel
 bom: bom_coating_booth_enclosure_v0
-notes: Enclosure/booth with ventilation for coating overspray control.
+capabilities:
+- coating_booth_containment
+- overspray_capture_enclosure
+- coating_fume_containment
+- ventilation_filter_interface
+- sealed_panel_booth_structure
+- workpiece_coating_isolation
+notes: |
+  Enclosure/booth with ventilation interfaces for coating overspray and fume
+  control. Modeled as kind: machine so coating processes can reserve the booth
+  enclosure when needed, despite its current file path under parts. Provides
+  containment, seals, panel/frame structure, and duct/filter interfaces only.
+  Coating application, spray pumping, drying, and curing are supplied by
+  coating_station or by separate spray-gun, pump, oven, and ventilation resources.
 recipe: recipe_coating_booth_enclosure_v0
 unit_kind: discrete

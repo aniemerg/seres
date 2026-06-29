@@ -2,8 +2,35 @@ id: bom_rover_communication_system_v0_v0
 kind: bom
 owner_item_id: rover_communication_system_v0
 components:
+  - item_id: antenna_parabolic_dish_v0
+    qty: 1.0
+    notes: Directional high-gain rover/base link antenna.
+  - item_id: feed_horn_antenna_v0
+    qty: 1.0
+    notes: Dish feed antenna.
+  - item_id: radio_transmitter_vacuum_tube_v0
+    qty: 1.0
+    notes: RF transmitter electronics.
+  - item_id: radio_receiver_vacuum_tube_v0
+    qty: 1.0
+    notes: RF receiver front-end placeholder.
+  - item_id: antenna_matching_network_v0
+    qty: 1.0
+    notes: Impedance matching between radio and antenna feed.
+  - item_id: power_conditioning_module
+    qty: 1.0
+    notes: Local regulated power interface for radio electronics.
+  - item_id: mounting_bracket_azimuth_elevation
+    qty: 1.0
+    notes: Pointing mount for directional communications.
   - item_id: steel_frame_heavy
     qty: 1.0
+    notes: Structural support and mast/frame hardware.
   - item_id: bearing_set_heavy
     qty: 1.0
-notes: "Placeholder BOM for rover_communication_system_v0; placeholder components for initial closure."
+    notes: Azimuth/elevation bearing support.
+notes: |
+  BOM for rover_communication_system_v0, scoped as an integrated rover/base radio
+  communications subsystem. Uses existing dish/feed, vacuum-tube radio,
+  antenna-matching, power-conditioning, pointing, and structural components rather
+  than a generic electronics placeholder.

@@ -38,7 +38,7 @@ steps:
         unit: kg
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Fabricate and weld tracking frame structure and mounting points for solar panels or concentrators"
+    notes: "Fabricate and weld single-axis PV tracking frame structure and panel mounting points"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: tracking_drive_assembly
@@ -69,7 +69,7 @@ steps:
         unit: kg
     est_time_hr: 5.0
     labor_hours: 5.0
-    notes: "Assemble drive motors, gears, bearings, and pivot mechanisms for single or dual-axis tracking"
+    notes: "Assemble drive motor or actuator, gearing, bearings, and pivot mechanism for single-axis PV tracking"
   - process_id: wiring_and_electronics_integration_v0
     inputs:
       - item_id: tracking_control_unit
@@ -87,7 +87,7 @@ steps:
         unit: kg
     est_time_hr: 3.0
     labor_hours: 3.0
-    notes: "Install position sensors, wire motors to control system, integrate sun-tracking algorithm or timer"
+    notes: "Install position sensors, wire motor or actuator to control system, integrate sun-tracking and stow logic"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
@@ -102,7 +102,7 @@ steps:
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
-    notes: "Test tracking motion, verify position accuracy, calibrate sun-following algorithm"
+    notes: "Test single-axis tracking motion, verify position accuracy, calibrate sun-following and stow behavior"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
@@ -116,8 +116,11 @@ steps:
     est_time_hr: 1.0
     labor_hours: 1.0
     notes: "Verify smooth tracking motion and structural integrity under load"
-assumptions: "Optional solar tracking system for improved power generation. Can track sun's path for PV arrays or solar concentrators. Increases energy capture during lunar day."
+assumptions: "Optional small single-axis PV tracking system for improved power generation. Fixed-tilt PV remains valid when the tracker is omitted; concentrators and heliostats use separate dual-axis tracking resources."
 notes: |
   Assumptions:
   - Masses aligned to component sum (121.5 kg) for assembly balance.
-  Solar tracking system assembly. Provides single or dual-axis sun tracking to maximize solar energy collection. Can be used with PV arrays or solar concentrators for thermionic systems. Total assembly time ~20-21 hours.
+  Small single-axis PV tracker assembly. Provides optional sun tracking for a small
+  solar array with structural mount, pivot/bearing interfaces, actuator/drive,
+  controller, position sensors, stow behavior, and maintenance access. Total
+  assembly time ~20-21 hours.

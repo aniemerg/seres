@@ -5,19 +5,34 @@ mass: 80.0
 unit: unit
 material_class: steel
 bom: bom_vapor_capture_system_v0
-notes: "Vapor capture and condensation system for collecting water vapor from thermal\
-  \ extraction processes.\n\nUsed in polar water ice extraction and other volatile\
-  \ recovery operations.\n\nComponents:\n- Cold trap condenser: Chilled surface to\
-  \ condense water vapor\n- Collection manifold: Piping to gather vapor from heated\
-  \ regolith\n- Condensate reservoir: Tank for collected liquid water\n- Vacuum pump:\
-  \ Maintain low pressure to enhance vapor collection\n- Heat exchanger: Reject condensation\
-  \ heat\n\nOperating temperature: Condenser at ~0-10\xB0C, ambient pressure or slight\
-  \ vacuum\n\nCapacity: Designed for kg/hr scale water extraction\n\nApplications:\n\
-  - Polar ice extraction: Capture sublimed/evaporated water from heated regolith\n\
-  - Thermal water extraction: Condense desorbed water from minerals\n- Volatile recovery:\
-  \ Collect H2O, CO2, and other volatiles\n\nLunar context: Essential for water ISRU\
-  \ at polar permanently shadowed regions\n\nMass estimate: Based on similar thermal\
-  \ extraction equipment\nSource: ai_estimate, scaled from vapor_condenser_cold_trap\
-  \ part\n"
+capabilities:
+- water_vapor_transport
+- active_pressure_controlled_capture
+- cold_trap_condensation
+- condensate_or_ice_collection
+- heat_rejection_cooling_loop
+- volatile_recovery_monitoring
+notes: "Integrated water/volatile vapor capture and cold-trap condensation system\
+  \ for thermal regolith extraction. Primary scope is H2O capture from polar ice\
+  \ or hydrated/mineral volatile processing, not arbitrary acid gas, ammonia, or\
+  \ metal-vapor recovery.\n\nComponents:\n- Cold trap module: chilled surface/chamber\
+  \ to condense or freeze vapor\n- Collection manifold: piping to gather vapor from\
+  \ heated regolith or compatible volatile source\n- Condensate/ice reservoir: tank\
+  \ or removable cold surface for collected water\n- Vacuum pump: active pressure\
+  \ control and vapor transport support\n- Heat exchanger/coolant loop: rejects condensation\
+  \ and pump heat\n- Sensors and controls: temperature, pressure, and fill monitoring\n\
+  \nRelationship to nearby items:\n- cold_trap_module_v0 is the internal trap module\
+  \ used inside this integrated system.\n- vapor_condenser_cold_trap is a smaller\
+  \ condenser/cold-trap component for process-specific condensers.\n- cryogenic_chiller_v0\
+  \ supplies lower-temperature cooling where required, rather than being implied\
+  \ by this item.\n- gas_scrubbing_unit_v0 should be used for corrosive/reactive\
+  \ acid gas cleanup or absorption.\n\nOperating temperature: usually near 0-10°C\
+  \ for liquid water condensation, or below 0°C for ice capture when the process\
+  \ requires frozen collection.\n\nCapacity: Designed for kg/hr scale water extraction.\n\
+  \nApplications:\n- Polar ice extraction: capture sublimed/evaporated water from\
+  \ heated regolith\n- Thermal water extraction: condense desorbed water from minerals\n\
+  \nLunar context: Essential for water ISRU at polar permanently shadowed regions.\n\
+  \nMass estimate: Based on similar thermal extraction equipment.\nSource: ai_estimate,\
+  \ scaled from vapor_condenser_cold_trap part\n"
 recipe: recipe_vapor_capture_system_v0
 unit_kind: discrete

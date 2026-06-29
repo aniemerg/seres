@@ -19,9 +19,17 @@ resource_requirements:
 - machine_id: crucible_graphite
   qty: 1
   unit: count
-- machine_id: controlled_atmosphere_chamber
+- machine_id: inert_atmosphere_system
   qty: 1
   unit: count
+- machine_id: glassworking_station
+  qty: 1
+  unit: count
+  notes: Envelope/tube forming and hot-glass hand tooling downstream of melting.
+- machine_id: annealing_oven_small
+  qty: 1
+  unit: count
+  notes: Controlled cooling/annealing for formed fused-silica envelope.
 energy_model:
   type: per_unit
   value: 5.0
@@ -32,6 +40,11 @@ time_model:
   rate: 2.0
   rate_unit: kg/hr
   scaling_basis: fused_silica_glass
-notes: Bulb forming from fused silica; placeholder values based on related glass forming
-  operations.
+notes: Bulb forming from fused silica; glass_furnace_v0 supplies small-batch melt
+  or working heat, furnace_high_temp supplies the rated quartz/fused-silica hot
+  zone where needed, inert_atmosphere_system supplies purge/oxygen exclusion, glassworking_station
+  supplies envelope forming/tooling, and annealing_oven_small supplies controlled
+  cooling. Fused-silica/quartz work is high-temperature and requires compatible
+  refractory/heating-element ratings; a sealed chamber alone is not the furnace
+  resource.
 process_type: continuous

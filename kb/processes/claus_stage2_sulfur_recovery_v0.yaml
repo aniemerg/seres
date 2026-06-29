@@ -20,10 +20,7 @@ outputs:
   qty: 0.8
   unit: kg
 resource_requirements:
-- machine_id: generic_chemical_reactor_v0
-  qty: 1
-  unit: count
-- machine_id: chemical_reactor_basic
+- machine_id: catalytic_gas_bed_reactor_v0
   qty: 1
   unit: count
 - machine_id: labor_bot_general_v0
@@ -41,3 +38,6 @@ time_model:
 notes: |
   Explicit representation of reaction 13:
   SO2 + 2H2S -> 3S + 2H2O.
+  Uses catalytic_gas_bed_reactor_v0 for alumina/titania catalyst-bed sulfur
+  recovery service; the basic stirred/jacketed reactor is not assumed suitable for
+  this service.

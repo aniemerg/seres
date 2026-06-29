@@ -23,6 +23,11 @@ resource_requirements:
 - machine_id: power_distribution_bus
   qty: 1
   unit: count
+  notes: High-current busbar distribution to the electrolysis cell terminals.
+- machine_id: power_conditioning_equipment
+  qty: 1
+  unit: count
+  notes: Regulated DC conversion/control; the busbar cabinet only distributes the conditioned power.
 energy_model:
   type: fixed_per_batch
   value: 6.0
@@ -31,4 +36,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.6
-notes: "Chloralkali electrolysis converts NaCl + water into NaOH, Cl2, and H2."
+notes: "Chloralkali electrolysis converts NaCl + water into NaOH, Cl2, and H2. power_distribution_bus handles high-current routing; power_conditioning_equipment provides the active conversion/regulation rather than treating busbars as a power supply."

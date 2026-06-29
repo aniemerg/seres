@@ -4,8 +4,30 @@ name: Quench tank
 mass: 200.0
 mass_kg: 200.0
 unit: unit
+material_class: steel
 bom: bom_quench_tank
-notes: Tank for rapid cooling (quenching) of heat-treated parts. Contains water, oil,
-  or polymer quenchant with optional agitation.
+capabilities:
+- immersion_quenching
+- quenchant_agitation
+- quenchant_circulation
+- heat_treatment_part_handling
+- quench_temperature_monitoring
+- quench_lid_and_basket_handling
+- maintained_quenchant_inventory
+notes: |
+  Small controlled quench tank for rapid immersion cooling of heat-treated parts.
+  The modeled equipment includes a steel shell, agitation/circulation pump,
+  lid/basket handling, level/temperature sensing, power conditioning, controls,
+  and basic part-handling support.
+
+  Coarse KB scope: one generic quench tank covers water, oil, or polymer media.
+  Medium-specific behavior belongs at the process level. At this level the
+  quenchant bath is treated as maintained machine inventory rather than consumed
+  batch input. Add explicit water, oil, polymer, salt, contamination, disposal, or
+  replenishment materials only for process variants where medium accounting or
+  hazards materially affect the result.
+
+  Not a passive bucket and not a large integral quench furnace. Oil quench routes
+  should state fire/ventilation assumptions separately if they are modeled.
 recipe: recipe_machine_quench_tank_v0
 unit_kind: discrete

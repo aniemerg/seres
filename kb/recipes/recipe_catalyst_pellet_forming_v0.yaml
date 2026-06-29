@@ -18,7 +18,35 @@ steps:
       qty: 1.0
       unit: kg
   outputs:
+    - item_id: pressed_green_compact
+      qty: 1.0
+      unit: kg
+  notes: Pelletize catalyst powder into formed green pellets with controlled die
+    pressure, dwell time, and ejection. Recipe override uses the generic
+    pressed_green_compact intermediate so the final catalyst pellet is not
+    consumed by downstream curing/screening steps.
+- process_id: drying_basic_v0
+  inputs:
+    - item_id: pressed_green_compact
+      qty: 1.0
+      unit: kg
+  outputs:
+    - item_id: dried_material
+      qty: 1.0
+      unit: kg
+  notes: Dry or cure binder/moisture before reactor loading; replace with
+    catalyst-specific calcination or activation when known.
+- process_id: screening_basic_v0
+  inputs:
+    - item_id: dried_material
+      qty: 1.0
+      unit: kg
+  outputs:
     - item_id: catalyst_pellet_forming_v0
       qty: 1.0
       unit: kg
-  notes: "Pelletize catalyst powder into formed pellets."
+  notes: Screen formed pellets to remove cracked pellets, fines, or oversize pieces
+    before use in packed-bed or supported-catalyst workflows.
+notes: Catalyst pellet forming uses the lab/pilot pellet_press and
+  pellet_press_die_set path. Nominal pellet diameter, pressure, binder fraction,
+  dwell time, and activation/calcination conditions remain catalyst-specific.

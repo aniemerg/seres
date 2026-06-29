@@ -6,7 +6,17 @@ unit: unit
 material_class: steel
 bom: bom_welding_arc_welder_v0
 power_draw_kW: 5.0
-notes: Arc welding welder for joining metal components. Seed machine referenced in
-  seed document; conservative mass and capability defaults added for modeling.
+capabilities:
+- basic_arc_welding
+- smaw_stick_welding
+- steel_fabrication_welding
+- high_current_weld_output
+- electrode_holder_and_ground_clamp_support
+- shop_welding_repair
+notes: Basic arc welding package for joining metal components, suitable for coarse
+  SMAW/stick or similar general shop welding where detailed process choice is not
+  modeled. Distinct from welding_power_supply_v0 as a reusable power-source subassembly
+  and from welding_tig_unit_v0, which is a TIG/GTAW add-on requiring separate arc
+  power and process-specific consumables.
 recipe: recipe_welding_arc_welder_v0
 unit_kind: discrete

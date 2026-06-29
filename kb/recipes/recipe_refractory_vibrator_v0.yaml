@@ -1,0 +1,54 @@
+id: recipe_refractory_vibrator_v0
+kind: recipe
+target_item_id: refractory_vibrator
+variant_id: v0
+inputs:
+  - item_id: vibration_drive_module
+    qty: 1
+    unit: unit
+  - item_id: switch_set_industrial
+    qty: 0.3
+    unit: kg
+  - item_id: power_cable_heavy
+    qty: 5.0
+    unit: kg
+  - item_id: support_frame_small
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_small
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: refractory_vibrator
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: vibration_drive_module
+        qty: 1
+        unit: unit
+      - item_id: switch_set_industrial
+        qty: 0.3
+        unit: kg
+      - item_id: power_cable_heavy
+        qty: 5.0
+        unit: kg
+      - item_id: support_frame_small
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_small
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: refractory_vibrator
+        qty: 1
+        unit: unit
+    est_time_hr: 4.0
+    machine_hours: 1.5
+    labor_hours: 2.5
+    notes: Assemble vibration drive, frame, switch controls, cabling, and fasteners
+      into a compact vibrator for refractory castable consolidation.
+assumptions: Small reusable refractory vibrator for consolidation of castable
+  refractory in low-volume furnace and reactor lining work.
+notes: Fabrication recipe for refractory_vibrator.

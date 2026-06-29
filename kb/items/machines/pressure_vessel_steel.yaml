@@ -5,7 +5,17 @@ mass: 150.0
 mass_kg: 150.0
 unit: unit
 material_class: steel
-notes: Placeholder pressure vessel steel; used as component in chemical reactor BOMs.
+capabilities:
+- pressure_containment
+- hydrostatic_pressure_testing_compatible
+- hydrothermal_processing_vessel
+- reactor_pressure_shell
+notes: Pressure-rated steel vessel shell with fittings, gaskets, and code-style weld
+  and pressure-test assumptions. Used as a component in chemical reactor BOMs and as
+  a reservable vessel for simple pressurized hydrothermal or hydration processes.
+  It provides pressure containment only; heat, agitation, metering, gas control, and
+  chemistry-specific corrosion protection must come from paired equipment or process
+  assumptions.
 bom: bom_pressure_vessel_steel
 recipe: recipe_pressure_vessel_steel_v0
 unit_kind: discrete

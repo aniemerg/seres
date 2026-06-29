@@ -17,6 +17,9 @@ resource_requirements:
 - machine_id: pellet_press
   qty: 1
   unit: count
+- machine_id: pellet_press_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
@@ -27,5 +30,13 @@ time_model:
   rate: 40.0
   rate_unit: kg/hr
   scaling_basis: regolith_lunar_mare
-notes: Seeded to enable assessment of regolith pellet pressing for FFC cathodes; conservative estimate.
+notes: Pilot-scale die pressing of screened lunar regolith into cathode pellets for
+  FFC-style evaluation. Assumes fine regolith feed, optional binder/moisture
+  conditioning only if later recipes define it, roughly 10-25 mm pellet diameter,
+  controlled press force with short dwell, and ejection through pellet_press_die_set
+  tooling. The 40 kg/hr rate is pilot throughput for repetitive die pressing, not
+  roller-die bulk pellet-mill production; split to pellet_mill or briquetting_press
+  only if future high-throughput agglomeration is required. Downstream drying,
+  firing, sintering, or screening should be added in recipes that require stronger
+  fired pellets rather than green cathode compacts.
 process_type: continuous

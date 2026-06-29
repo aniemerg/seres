@@ -4,7 +4,18 @@ name: Power management system
 mass: 84.05
 unit: unit
 bom: bom_power_management_system
+capabilities:
+- battery_charge_control
+- load_balancing_control
+- power_distribution_supervision
+- storage_dispatch_management
+- voltage_regulation_coordination
+- electrical_protection_control
+- power_system_monitoring
 notes: Power management and control system with charge controllers, voltage regulation,
-  and distribution controls. Manages battery charging, load balancing, and power distribution.
+  distribution controls, monitoring, and protection logic. Manages battery charging,
+  storage dispatch, load balancing, and supervised distribution; busbar distribution,
+  DC-AC inversion, and high-current process supplies remain separate resources when
+  their electrical function matters.
 recipe: recipe_power_management_system_v0
 unit_kind: discrete

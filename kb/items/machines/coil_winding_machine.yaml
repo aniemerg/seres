@@ -4,14 +4,24 @@ name: Coil winding machine
 mass: 120.0
 unit: unit
 bom: bom_coil_winding_machine
-notes: Automated or semi-automated coil winding machine with motorized spindle, wire
-  tensioning, and turn counting for motors, transformers, and inductors.
+notes: Canonical generic semi-automatic electrical coil winder for motors, transformers,
+  inductors, solenoids, relays, resistors, and heating coils. Provides motorized
+  spindle rotation, tension control, turn counting, traverse/wire guiding, and winding-pattern
+  support for physical wire winding. Keep distinct from winding_machine/winding_drums
+  used for broader fiber, cable, or spool handling. Photolithographic or PCB-patterned
+  coils should use PCB/photolithography equipment, not this machine.
 processes_supported:
-- photolithographic_coil_winding_v0
+- coil_winding_basic_v0
+- coil_winding_motor_v0
+- transformer_winding_v0
 - wire_winding_precision_v0
+- wire_winding_process_v0
+- resistor_wire_winding_v0
 capabilities:
-- winding
+- electrical_coil_winding
 - tension_control
-- motor_driven
+- turn_counting
+- traverse_guiding
+- winding_pattern_control
 recipe: recipe_coil_winding_machine_v1
 unit_kind: discrete

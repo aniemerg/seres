@@ -4,9 +4,26 @@ name: Mineral processing unit
 mass: 800.0
 unit: unit
 material_class: steel
-processes_supported: []
-notes: Stub machine created during ADR 003 migration. Referenced by processes but
-  was not defined.
+capabilities:
+- integrated_mineral_processing
+- tailings_conditioning
+- regolith_feed_handling
+- particle_size_conditioning_support
+- density_separation_support
+- sensor_monitored_mineral_flow
+- enclosed_dust_managed_processing
+processes_supported:
+- tailings_to_processed_tailings_v0
+- extraction_raw_formation_control_material_v0_v0
+notes: |
+  Coarse integrated mineral processing unit for early KB modeling. Represents a
+  controlled skid or line-level support machine around feed handling, process
+  control, sensing, power conditioning, and dust-managed routing between crushers,
+  screens, and density-separation equipment. It is not a standalone universal
+  refinery: current process references still require specific rock_crusher_basic,
+  screening_equipment, gravity_separator, or dust_collection_system resources when
+  those operations are explicitly modeled. Use it for tailings conditioning and
+  line integration where finer submachine capacity is not yet resolved.
 bom: bom_mineral_processing_unit
 recipe: recipe_mineral_processing_unit_v0
 unit_kind: discrete

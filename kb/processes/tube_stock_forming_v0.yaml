@@ -16,9 +16,6 @@ resource_requirements:
 - machine_id: bending_machine_v0
   qty: 1.0
   unit: unit
-- machine_id: tube_bender
-  qty: 1
-  unit: count
 energy_model:
   type: per_unit
   value: 0.25
@@ -30,4 +27,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: steel_stock
 notes: Form metal stock into tubing stock form; easy placeholder for seed modeling.
+  This is tube stock production, not controlled-radius tube bending, so it does not
+  use tube_bender. Refine later with drawing, rolling/welding, or extrusion
+  resources when tube-stock manufacturing fidelity matters.
 process_type: continuous

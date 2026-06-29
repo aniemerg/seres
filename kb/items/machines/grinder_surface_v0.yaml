@@ -3,8 +3,19 @@ name: Surface Grinder
 kind: machine
 mass: 350.0
 unit: unit
+capabilities:
+- flat_surface_grinding
+- precision_surface_finishing
+- abrasive_wheel_material_removal
+- magnetic_chuck_workholding
+- coolant_assisted_grinding
+- machine_way_and_plate_finishing
 notes: Placeholder surface grinder for finishing flat surfaces. Mass and exact specs
   to be refined; seed provenance from paper_reviews_dec2024_comprehensive_v0.
+  Scope is precision flat grinding with abrasive wheel, table motion, magnetic
+  chuck/workholding, coolant, and aligned spindle. Use cylindrical, bearing, ball,
+  or internal grinders where round/internal geometry matters; use lapping or
+  polishing equipment where optical or mirror finishing exceeds grinding.
 bom: bom_grinder_surface_v0
 recipe: recipe_grinder_surface_v0
 unit_kind: discrete

@@ -5,10 +5,22 @@ mass: 120.0
 unit: unit
 bom: bom_drying_oven_v0
 material_class: steel
-notes: "Drying oven for removing moisture from materials and parts. Temperature range\
-  \ 50-300\xB0C with air circulation. Used for drying powders, ceramics, coatings,\
-  \ and heat-curing adhesives. Insulated chamber with heating elements and temperature\
-  \ control."
+capabilities:
+- low_temperature_forced_air_drying
+- moisture_removal_oven
+- coating_drying
+- adhesive_heat_curing
+- green_body_drying
+- powder_batch_drying
+- controlled_warm_air_hold
+notes: Canonical low-temperature forced-air drying and curing oven for removing
+  moisture from materials and parts. Temperature range is about 50-300 C with air
+  circulation, exhaust/venting, insulated chamber, heating elements, and temperature
+  control. Use for drying powders, green ceramics/refractories, coatings, and
+  heat-curing adhesives. Do not use for annealing or stress relief, kiln firing,
+  ceramic sintering, vacuum drying, or inert-atmosphere drying; those require
+  annealing_oven_small, kiln/furnace equipment, vacuum equipment, or atmosphere
+  control resources as appropriate.
 processes_supported:
 - drying_process_oven_v0
 recipe: recipe_drying_oven_v0

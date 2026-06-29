@@ -18,7 +18,7 @@ resource_requirements:
 - machine_id: rock_crusher_basic
   qty: 1
   unit: count
-- machine_id: vibrating_screen_v0
+- machine_id: screening_equipment
   qty: 1
   unit: count
 energy_model:
@@ -33,5 +33,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: anorthite_ore
   notes: Throughput including loading/screening (0.05 hr per kg = 20 kg/hr)
-notes: Size reduction and screening of anorthite/rock feedstocks to aggregate fractions.
+notes: Size reduction and screening of anorthite/rock feedstocks to aggregate
+  fractions. Uses screening_equipment as the canonical compact vibrating
+  screen/sieve classifier; deprecated vibrating_screen_v0 is not required.
 process_type: continuous

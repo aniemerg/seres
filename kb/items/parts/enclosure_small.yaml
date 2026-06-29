@@ -1,15 +1,21 @@
 id: enclosure_small
-kind: machine
-name: Enclosure (small)
+kind: part
+name: Electronics enclosure (small)
 mass: 5.0
 unit: unit
-material_class: steel
+material_class: mixed
 capabilities:
   - electronics_housing
   - environmental_enclosure
-notes: Small electrical or equipment enclosure. Sheet metal construction with removable
-  cover. Used for housing electronics, controls, small instruments, and components.
-  Provides environmental protection and safety shielding.
+notes: Small electrical/electronics equipment enclosure, also interpretable as electrical_enclosure_small.
+  This is a part/subassembly, not a capital machine or process resource. Used for
+  housing electronics, controls, small instruments, and components. Provides mounting,
+  touch protection, cable openings, grounding provisions when metal, and limited environmental
+  protection. The generic ID can be produced by either sheet-metal or polymer additive
+  routes; select the steel sheet-metal route where EMI shielding, fire rating, high-temperature
+  exposure, vacuum/outgassing limits, impact resistance, or grounding continuity matter.
+  The polymer additive route is for benign small electronics housings where those properties
+  are not required.
 preferred_variant: additive
 alternatives:
 - additive_manufacturing_polymer_v0

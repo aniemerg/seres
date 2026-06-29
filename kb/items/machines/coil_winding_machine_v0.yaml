@@ -3,12 +3,21 @@ kind: machine
 name: Coil winding machine v0
 mass: 120.0
 unit: unit
-bom: bom_coil_winding_machine_v0
-notes: Version 0 coil winding machine; compatible with v0 coil winding processes and
-  BOM.
+deprecated: true
+replaced_by: coil_winding_machine
+links:
+  canonical_item: coil_winding_machine
+  legacy_bom: bom_coil_winding_machine_v0
+  legacy_recipe: recipe_coil_winding_machine_v0
+notes: DEPRECATED duplicate electrical coil winder. Use coil_winding_machine as the
+  canonical generic semi-automatic coil winder for physical wire winding; this v0
+  item remains only for legacy recipe/BOM provenance. The legacy v0 BOM and recipe
+  are retargeted to coil_winding_machine rather than manufacturing this duplicate
+  as a separate active machine. Deprecated items are skipped by no-recipe queue
+  generation.
 capabilities:
-- winding
+- electrical_coil_winding
 - tension_control
-- motor_driven
+- turn_counting
 recipe: recipe_coil_winding_machine_v0
 unit_kind: discrete

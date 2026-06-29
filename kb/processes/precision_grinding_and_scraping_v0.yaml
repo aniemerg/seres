@@ -19,7 +19,10 @@ resource_requirements:
 - machine_id: surface_grinder
   qty: 1
   unit: count
-- machine_id: inspection_tools_basic
+- machine_id: measurement_equipment
+  qty: 1
+  unit: count
+- machine_id: alignment_tools
   qty: 1
   unit: count
 energy_model:
@@ -30,6 +33,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-  notes: Multiple grinding passes plus hand scraping/inspection.
+  notes: Multiple grinding passes plus hand scraping and metrology checks.
 notes: Finishes precision surfaces by grinding followed by hand scraping to achieve
-  high flatness and alignment.
+  high flatness and alignment. Requires calibrated dimensional metrology and alignment
+  tools rather than the low-end inspection_tools_basic kit.

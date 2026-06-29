@@ -1,0 +1,44 @@
+id: bom_thermionic_power_conditioning_unit_v0
+kind: bom
+owner_item_id: thermionic_power_conditioning_unit_v0
+components:
+  - item_id: power_conditioning_module
+    qty: 2
+    unit: unit
+    notes: "Reusable converter/regulator power electronics modules."
+  - item_id: transformer_power_medium
+    qty: 25
+    unit: kg
+    notes: "Magnetics for isolation or voltage conversion where topology requires it."
+  - item_id: capacitor_bank_power
+    qty: 10
+    unit: kg
+    notes: "DC bus smoothing and transient energy storage."
+  - item_id: voltage_regulator_module
+    qty: 5
+    unit: kg
+    notes: "Output voltage/current regulation."
+  - item_id: control_circuit_board_power
+    qty: 2
+    unit: kg
+    notes: "Control, monitoring, and protection electronics."
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+    notes: "Electrical enclosure and mounting rails."
+  - item_id: cooling_fan_and_ducting
+    qty: 1
+    unit: unit
+    notes: "Forced-air cooling for cabinet internals where atmosphere is available."
+  - item_id: steel_plate_or_sheet
+    qty: 1
+    unit: kg
+    notes: "Brackets, bus-bar supports, and shielding."
+  - item_id: fastener_kit_medium
+    qty: 3
+    unit: kg
+    notes: "Cabinet and module fasteners."
+notes: >
+  BOM for an 80 kg thermionic converter power-conditioning cabinet. Reuses
+  power_conditioning_module as the lower-level converter/regulator submodule and
+  excludes PV-specific inverter assumptions.

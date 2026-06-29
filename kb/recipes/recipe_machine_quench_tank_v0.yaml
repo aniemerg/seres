@@ -91,5 +91,13 @@ steps:
         unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
-assumptions: Assemble quench tank per BOM; imported compute/sensors.
-notes: Coarse route; add detailed plumbing/commissioning later.
+assumptions: |
+  Assemble quench tank per BOM; imported compute/sensors. The build recipe
+  produces the tank, pump, basket/lid, sensors, and controls. Initial bath media
+  is treated as maintained operational inventory rather than structural machine
+  mass at this coarse scale.
+notes: |
+  Coarse route; add detailed plumbing/commissioning later. Medium-specific water,
+  oil, polymer, or salt quenchant inventory should be modeled in the heat-treatment
+  process variant when replenishment, contamination, disposal, fire safety, or
+  cooling-rate behavior matters.

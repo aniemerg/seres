@@ -5,7 +5,21 @@ mass: 200.0
 unit: unit
 bom: bom_test_bench_electrical_v0
 material_class: steel
-notes: Electrical testing bench with power, instrumentation, and fixtures for circuit/system
-  checkout.
+capabilities:
+- electrical_testing
+- electronics_debugging
+- burn_in_testing
+- load_testing
+- calibration_support
+notes: Canonical full electrical/electronics test capability with bench infrastructure,
+  protected power distribution, core instruments, test leads, fixtures, and calibration
+  references for circuit/system checkout. Use this bench for process-level electronics
+  testing, waveform debugging, calibration, burn-in, commissioning, electronics assembly
+  checkout, and controls workflows. Standalone instruments such as multimeter_set,
+  power_supply_bench, and oscilloscope_basic remain BOM components and discrete
+  items, but should not be preferred as separate process resources when the full
+  bench is the modeled capability. Electronic load banks are not yet modeled as a
+  separate KB item and should be added only when a process needs explicit load
+  dissipation.
 recipe: recipe_test_bench_electrical_v0
 unit_kind: discrete

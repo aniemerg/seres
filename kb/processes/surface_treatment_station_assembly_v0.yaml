@@ -33,6 +33,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: lifting_equipment
+  qty: 1
+  unit: count
+  notes: 263 kg station assembly exceeds labor-bot payload and needs hoist-assisted positioning.
 energy_model:
   type: fixed_per_batch
   value: 5.0
@@ -43,4 +47,4 @@ time_model:
   hr_per_batch: 6.0
   notes: Assembly and testing cycle
 notes: Local fabrication path for surface_treatment_station_v0; consumes BOM components
-  to produce the machine.
+  to produce the machine with hoist-assisted handling of the assembled station.

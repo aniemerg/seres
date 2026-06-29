@@ -7,7 +7,7 @@ inputs:
   - item_id: regolith_metal_crude
     qty: 1.0
     unit: kg
-  - item_id: heating_plate_induction_heater
+  - item_id: heating_jacket_assembly
     qty: 1.0
     unit: unit
   - item_id: cryocooler_active_v0
@@ -65,7 +65,7 @@ steps:
       - item_id: machined_part_raw
         qty: 0.9
         unit: kg
-      - item_id: heating_plate_induction_heater
+      - item_id: heating_jacket_assembly
         qty: 1.0
         unit: unit
       - item_id: cryocooler_active_v0
@@ -111,5 +111,5 @@ steps:
       - item_id: reactor_heating_cooling_system_v0
         qty: 1.0
         unit: kg
-assumptions: "Assemble heating/cooling modules (heater, cryocooler, temp control) into reactor system; refer to BOM for subcomponents; temperature_control_system_v0 and cryocooler_active_v0 used as seed components."
+assumptions: "Assemble heating/cooling modules (reactor heating jacket, cryocooler, temp control) into reactor system; refer to BOM for subcomponents; temperature_control_system_v0 and cryocooler_active_v0 used as seed components."
 notes: "Top-level recipe to assemble reactor heating/cooling system from standard unit operations."

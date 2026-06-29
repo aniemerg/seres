@@ -4,7 +4,19 @@ name: Vacuum pump station
 mass: 40.0
 unit: unit
 bom: bom_vacuum_pump_station_v0
-notes: Placeholder vacuum pump station used to achieve evacuations in ISRU/molten
-  tube manufacturing steps.
+capabilities:
+- integrated_vacuum_pumping
+- chamber_evacuation_station
+- vacuum_gauge_and_valve_control
+- rough_to_medium_vacuum_support
+- vacuum_tube_evacuation_support
+- process_line_pumpdown
+notes: Integrated vacuum pumping station for evacuating small chambers, process
+  lines, tube assemblies, and sealed equipment. Bundles a small vacuum pump with
+  gauges, valves/seals, controls, housing, and supporting vacuum hardware for
+  rough-to-medium vacuum pumpdown and controlled evacuation workflows. Distinct
+  from vacuum_pump_small, which is the standalone pump component, and from
+  vacuum_chamber or controlled_atmosphere_chamber, which provide the sealed
+  processing volume.
 recipe: recipe_vacuum_pump_station_v0
 unit_kind: discrete

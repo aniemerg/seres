@@ -19,6 +19,9 @@ resource_requirements:
 - machine_id: surface_grinder
   qty: 1
   unit: count
+- machine_id: polishing_station
+  qty: 1
+  unit: count
 - machine_id: optical_metrology_tools
   qty: 1
   unit: count
@@ -33,7 +36,10 @@ time_model:
   notes: Progressive grinding and polishing to achieve optical surface finish and
     parabolic shape
 process_type: batch
-notes: 'Mirror polishing process for solar concentrator segments. Achieves 90% reflectivity
-  for nickel, 75% for steel. Parabolic shape formed through precision grinding and
-  optical metrology. Alternative to Fresnel lenses for solar concentration. Used in
-  thermionic power systems. See: design/solar_thermionics_report.md'
+notes: >
+  Mirror polishing process for solar concentrator segments. Uses surface_grinder
+  for figure generation and polishing_station for the polishing/compound stage
+  needed after grinding. Achieves 90% reflectivity for nickel, 75% for steel.
+  Parabolic shape is verified with optical metrology. Alternative to Fresnel lenses
+  for solar concentration. Used in thermionic power systems. See:
+  design/solar_thermionics_report.md

@@ -9,10 +9,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: milling_machine_general_v0
-  qty: 1
-  unit: count
-- machine_id: cutting_tools_general
+- machine_id: metal_cutting_bandsaw
   qty: 1
   unit: count
 energy_model:
@@ -24,7 +21,8 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: cutting bar stock, tubing, or plate to length with setup time
-notes: Basic metal cutting process for preparing stock material. Includes sawing,
-  shearing, or abrasive cutting to length.
+notes: Basic metal cutting process for preparing stock material by powered sawing
+  of bar, tubing, sections, or plate to length; manual hacksaw work uses
+  saw_or_cutting_tool, and straight sheet blanks use sheet_metal_shear.
 process_type: batch
 is_template: true

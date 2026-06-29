@@ -4,8 +4,16 @@ kind: machine
 mass: 60.0
 unit: unit
 bom: bom_robot_arm_6dof_v0_v0
+capabilities:
+- six_axis_manipulation
+- robotic_positioning
+- articulated_motion
+- payload_handling
+- end_effector_positioning
 notes: Seed entry derived from seed file paper_reviews_dec2024_comprehensive_v0; placeholder
   arm for lunar ISRU assembly. Mass and capabilities are conservative estimates; update
-  with BOM and exact specs later.
+  with BOM and exact specs later. Represents the articulated arm mechanism, not a
+  complete autonomous labor bot; use labor_bot_general_v0 for integrated robot tasks
+  requiring controls, sensing, end effector, and operational autonomy.
 recipe: recipe_robot_arm_6dof_v0
 unit_kind: discrete

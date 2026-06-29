@@ -4,7 +4,17 @@ name: Workbench (basic)
 mass: 60.0
 unit: unit
 material_class: wood
-notes: Basic workbench for general assembly tasks; wood/steel construction.
+capabilities:
+- general_assembly_surface
+- manual_stacking_support
+- light_clamping_support
+- workpiece_support
+- bench_setup_support
+notes: Basic workbench for general light assembly tasks, manual stacking, layout,
+  and low-force clamping; wood/steel construction. Distinct from assembly_workbench_v0
+  where a dedicated assembly station is needed and from fixturing_workbench where
+  welding, T-slot workholding, repeatable alignment, or heavy structural fixturing
+  matters.
 bom: bom_workbench_basic_v0
 recipe: recipe_workbench_basic_v0
 unit_kind: discrete

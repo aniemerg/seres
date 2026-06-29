@@ -4,7 +4,15 @@ name: Temperature controller module
 mass: 1.0
 unit: kg
 material_class: electronic
+capabilities:
+- pid_temperature_control
+- thermocouple_signal_input
+- rtd_signal_input
+- relay_ssr_heater_output
+- closed_loop_temperature_regulation
 notes: Electronic temperature controller with PID control, thermocouple input, and
-  relay/SSR output for heating control.
+  relay/SSR output for heating control. This is controller electronics, not the
+  temperature probe itself; pair it with thermocouple, RTD, or pyrometer sensor
+  assemblies according to process temperature and access requirements.
 recipe: recipe_temperature_controller_module_v0
 unit_kind: bulk

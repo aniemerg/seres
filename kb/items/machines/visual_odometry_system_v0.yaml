@@ -3,8 +3,18 @@ kind: machine
 name: Visual odometry system
 mass: 4.0
 unit: unit
+material_class: electronic
+capabilities:
+- visual_odometry
+- camera_pose_estimation
+- optic_flow_navigation
+- rover_dead_reckoning
+- sensor_fusion_input
 bom: bom_visual_odometry_system_v0_v0
 notes: Camera-based dead reckoning system used to estimate motion/pose from onboard
-  camera streams. Placeholder mass; refine with actual hardware data.
+  camera streams for rover or mobile robot navigation. Provides pose/velocity estimates
+  and sensor-fusion inputs; use machine_vision_processing_v0 for quality inspection
+  or general image-based feature detection. Placeholder mass; refine with actual hardware
+  data.
 recipe: recipe_visual_odometry_system_v0
 unit_kind: discrete

@@ -4,9 +4,24 @@ name: Vacuum pump (small)
 mass: 22.3
 unit: unit
 material_class: steel
+capabilities:
+- vacuum_pumping
+- chamber_evacuation
+- leak_test_vacuum_supply
+- rough_vacuum_generation
+- medium_vacuum_generation
+- vacuum_backing_pump
+- purge_and_pumpdown_support
 bom: bom_vacuum_pump_small_v0
-notes: Small vacuum pump for laboratory and industrial applications. Provides vacuum
-  for leak testing, material processing, and vacuum chambers. Rotary vane or diaphragm
-  type pump for moderate vacuum levels.
+notes: Small oil-sealed rotary-vane or equivalent diaphragm/roughing pump for laboratory
+  and light industrial applications. Canonical small pump for rough to medium vacuum
+  in leak testing, chamber pumpdown, controlled-atmosphere purge cycles, and as a
+  backing pump for higher-vacuum equipment. The Moon's near-vacuum ambient reduces
+  external atmosphere load for vented exterior hardware, but sealed chambers, process
+  lines, glove boxes, furnaces, tubes, and volatiles systems still need active pumping
+  to remove residual gas, control pressure, purge contaminants, and handle outgassing.
+  Do not assume clean high vacuum, ultra-high vacuum, high throughput, corrosive-vapor
+  compatibility, or oil-free operation unless a process adds the appropriate pump
+  station, traps, filters, gauges, valves, materials, or high-vacuum stage explicitly.
 recipe: recipe_machine_vacuum_pump_small_v0
 unit_kind: discrete

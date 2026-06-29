@@ -4,8 +4,23 @@ name: Generic chemical reactor
 mass: 250.0
 unit: unit
 bom: bom_generic_chemical_reactor_v0_v0
-notes: Placeholder generic chemical reactor to support KB closure. Mass and capabilities
-  are conservative estimates derived from typical ISRU chemical reactors. Used to
-  close references in processes; details to be refined in later iterations.
+capabilities:
+- chemical_reaction
+- batch_chemical_processing
+- reactor_agitation
+- gas_liquid_reaction
+- temperature_controlled_reaction
+notes: Legacy coarse reactor placeholder retained for compatibility with older queue
+  seeds and processes. For new or audited references, prefer chemical_reactor_basic
+  as the canonical small stirred/jacketed reactor for moderate liquid or gas-liquid
+  chemistry. The 250 kg scope here covers a steel vessel/shell, pressure-vessel
+  body, basic piping/fittings, control panel, wiring, instrumentation interfaces,
+  and integration testing; it does not fully model corrosion lining, qualified
+  high-pressure relief design, packed catalyst beds, high-temperature tube service,
+  hazardous carbonyl/offgas safety, or process-specific heat-transfer internals.
+  Do not use as a substitute for acid_reactor_v0, ffc_reactor_unit_v0,
+  haber_bosch_reactor_v0, sabatier_reactor_co2_reduction_v0, carbonyl safety/gas
+  handling resources, or other specialized reactors when those chemistry-specific
+  entries apply.
 recipe: recipe_generic_chemical_reactor_v0
 unit_kind: discrete

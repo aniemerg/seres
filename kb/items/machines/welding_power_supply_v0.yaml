@@ -4,12 +4,19 @@ name: Welding power supply v0
 mass: 99.0
 unit: unit
 bom: bom_welding_power_supply_v0
-notes: 'Assumptions:
-
+capabilities:
+- welding
+- arc_welding_power
+- cc_cv_power_source
+notes: |
+  Assumptions:
   - Mass aligned to current BOM component sum (99 kg).
 
-  Power unit for welding/brazing; coarse mass estimate.
-
-  '
+  Power unit for welding/brazing; coarse mass estimate. For local
+  manufacturability planning, a rugged transformer/rectifier implementation is
+  the more plausible low-dependency build path. High-performance inverter
+  welding supplies can be much lighter and more efficient, but depend more
+  heavily on imported or advanced power semiconductors, control electronics, and
+  high-frequency magnetic components.
 recipe: recipe_machine_welding_power_supply_v0
 unit_kind: discrete

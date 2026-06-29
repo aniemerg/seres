@@ -6,9 +6,23 @@ unit: unit
 bom: bom_neural_network_training_system_v0_v0
 power_draw_kW: 250.0
 availability: 0.9
-notes: Placeholder neural network training system (compute cluster) for seed factory
-  scenarios. Used as a capacity provider for ML tasks; mass estimate 500 kg; generic
-  performance placeholders until detailed modeling.
+capabilities:
+  - neural_network_training
+  - machine_learning_compute
+  - accelerator_cluster_operation
+  - model_weight_generation
+  - training_dataset_processing
+  - model_checkpoint_storage
+notes: |
+  Placeholder neural network training system (compute cluster) for seed factory
+  scenarios. Used as a capacity provider for ML training tasks; mass estimate
+  500 kg and performance are generic placeholders until detailed modeling.
+
+  Scope is offline or batch model training, experiment execution, checkpoint
+  storage, and deployment-weight generation for neural control or perception
+  hardware. Distinct from yn_mlp_network_hardware_v0, which is an embedded
+  inference/control accelerator, and from ordinary control_compute_module_imported
+  PLC/SBC-style controllers.
 uncertainty:
   value: 1.0
   source: hand_assumption

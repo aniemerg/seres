@@ -4,9 +4,19 @@ name: Controlled atmosphere chamber
 mass: 250.0
 unit: unit
 bom: bom_controlled_atmosphere_chamber_v0
+capabilities:
+- sealed_process_chamber
+- vacuum_purge_processing
+- inert_or_reactive_gas_containment
+- oxidation_prevention_enclosure
+- atmosphere_monitored_heat_treatment_support
+- contamination_controlled_material_processing
 notes: Sealed chamber for materials processing under controlled atmosphere (vacuum,
-  inert gas, or reactive gas). Used for heat treatment, sintering, and chemical processing
-  requiring specific atmospheric conditions. Essential for preventing oxidation in
-  high-temperature operations.
+  inert gas, or reactive gas). Represents the enclosure/load-lock/manifold boundary,
+  not a rated furnace hot zone. High-temperature sintering, melting, heat treatment,
+  graphitization, and oxygen-sensitive hot-zone work should require furnace_high_temp,
+  heat_treatment_furnace_v0, vacuum_furnace_v0, hot_press_v0, or another process-specific
+  furnace as appropriate. Gas supply, purification, and closed-loop control may require
+  inert_atmosphere_system or process-specific gas handling resources.
 recipe: recipe_machine_controlled_atmosphere_chamber_v0
 unit_kind: discrete

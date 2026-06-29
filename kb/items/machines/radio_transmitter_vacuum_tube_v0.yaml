@@ -6,6 +6,14 @@ unit: unit
 bom: bom_radio_transmitter_vacuum_tube_v0
 material_class: composite
 is_import: true
+capabilities:
+- vacuum_tube_rf_transmission
+- rf_oscillator_stage
+- rf_power_amplification
+- am_or_cw_modulation
+- telemetry_radio_transmit
+- base_rover_voice_link_transmission
+- radiation_tolerant_radio_electronics
 notes: 'Vacuum tube based radio transmitter for communications.
 
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0
@@ -33,6 +41,10 @@ notes: 'Vacuum tube based radio transmitter for communications.
   Range: 10-1000 km depending on power, frequency, and terrain
 
   Critical for: Base-to-rover communications, Earth communications relay
+
+  Scope: transmitter electronics only. Antennas, matching networks, receivers, power
+  conditioning, pointing/tracking, and rover-level communications integration are
+  separate resources.
 
   '
 unit_kind: discrete

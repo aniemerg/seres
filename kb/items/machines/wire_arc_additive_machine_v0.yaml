@@ -5,7 +5,15 @@ mass: 850.0
 unit: unit
 bom: bom_wire_arc_additive_machine_v0
 material_class: steel
+capabilities:
+  - wire_feed_metal_additive_deposition
+  - arc_or_energy_beam_wire_melting
+  - layer_by_layer_metal_build
+  - gantry_or_robotic_toolpath_motion
+  - near_net_shape_metal_deposition
+  - metal_wire_feedstock_processing
 is_import: true
 notes: Wire feed arc additive machine with robotic arm or gantry for depositing metal
-  feedstock; early placeholder for EBF3-style fabrication.
+  feedstock; early imported placeholder overlapping EBF3-style wire deposition.
+  Active WAAM processes use canonical wire_arc_additive_machine.
 unit_kind: discrete

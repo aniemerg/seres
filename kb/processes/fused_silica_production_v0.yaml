@@ -22,7 +22,7 @@ resource_requirements:
 - machine_id: crucible_graphite
   qty: 1
   unit: count
-- machine_id: controlled_atmosphere_chamber
+- machine_id: inert_atmosphere_system
   qty: 1
   unit: count
 energy_model:
@@ -38,6 +38,8 @@ time_model:
   scaling_basis: silica_purified
   notes: Heat-up, melting cycle, controlled cooling to prevent crystallization
 notes: Production of fused silica (quartz glass) by melting purified silica at very
-  high temperature (~1700°C) in controlled atmosphere. Results in amorphous glass
-  with excellent optical and thermal properties.
+  high temperature (~1700°C). furnace_high_temp supplies the hot zone, crucible_graphite
+  supplies the melt vessel, and inert_atmosphere_system supplies purge/oxygen exclusion
+  where controlled atmosphere is required. Results in amorphous glass with excellent
+  optical and thermal properties.
 process_type: continuous

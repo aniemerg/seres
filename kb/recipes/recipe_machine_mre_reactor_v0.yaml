@@ -93,5 +93,17 @@ steps:
         unit: unit
     est_time_hr: 3.0
     labor_hours: 3.0
-assumptions: Assemble per BOM; parts produced via part-level routes.
-notes: Coarse assembly route; output mass matches input parts.
+assumptions: |
+  Assemble per BOM; parts produced via part-level routes. Reactor mass includes
+  installed vessel, electrode set, startup/trim heating, insulation, offgas
+  manifold interface, cooling/heat transport, power bus, optical temperature
+  sensing, controls, sensors, compute, and fasteners. Feed handling, oxygen
+  storage/compression, crude-metal refining, and spare electrode inventory remain
+  outside this machine recipe.
+notes: |
+  Coarse assembly route for an advanced molten regolith electrolysis reactor.
+  Heating is modeled as integrated Joule/electrochemical process heat plus
+  installed high-temperature startup/trim heaters; do not add a generic
+  furnace_high_temp requirement unless a future MRE variant externalizes melt
+  heating. Add detailed feed loading, oxygen collection, metal tapping, and slag
+  cleanout steps when process fidelity increases.

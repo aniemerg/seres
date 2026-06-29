@@ -4,5 +4,18 @@ kind: machine
 mass: 50.0
 unit: unit
 bom: bom_electronic_assembly_v0
-notes: Placeholder electronic assembly station; to be refined with BOM and exact specs.
+capabilities:
+- low_volume_electronics_assembly
+- component_mounting_support
+- wiring_and_connector_assembly
+- enclosure_electronics_integration
+- electronics_rework_support
+- assembly_fixture_support
+notes: Low-volume electronic assembly support station for mounting components, wiring
+  connectors, integrating populated boards into enclosures, and holding small fixtures
+  during soldering, inspection, and test. Distinct from pcb_fab_equipment, which
+  covers board fabrication steps such as exposure, etching, drilling, and plating;
+  pair this station with soldering_station, electrical test equipment, and labor
+  where the process needs controlled soldering or functional verification. Placeholder
+  BOM and exact specs remain to be refined.
 unit_kind: discrete

@@ -5,7 +5,17 @@ mass: 60.0
 unit: unit
 bom: bom_power_supply_high_voltage_v0
 material_class: electronic
+capabilities:
+- adjustable_high_voltage_output
+- current_limited_hv_supply
+- dielectric_withstand_test_power
+- hv_bias_and_test_supply
+- interlocked_hv_output
+- controlled_discharge_support
 notes: High-voltage power supply for testing and specialized equipment; adjustable
-  output with current limiting and safety interlocks.
+  output with current limiting and safety interlocks. Use for bench or equipment
+  HV bias/test functions such as hipot or dielectric-withstand tests; electrostatic
+  separator plate supplies with integrated field geometry and interlocks are modeled
+  by hv_supply_module_30kv_v0 where required.
 recipe: recipe_power_supply_high_voltage_v0
 unit_kind: discrete

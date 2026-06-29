@@ -18,15 +18,25 @@ byproducts:
   qty: 0.2
   unit: kg
 resource_requirements:
+- machine_id: induction_forge_v0
+  qty: 1
+  unit: count
 - machine_id: forging_press_v0
+  qty: 1
+  unit: count
+- machine_id: anvil_or_die_set
   qty: 1
   unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.8
   unit: kWh
-  notes: Energy intensity for forging per kilogram of input material
+  notes: Induction heating plus compact forging press operation for a small batch
 time_model:
   type: batch
   hr_per_batch: 0.75
-notes: Forge bearing ring blanks from steel bar stock; slag produced as a byproduct.
+notes: Controlled hot press-forging of bearing ring blanks from steel bar stock.
+  Requires a separate induction forge or equivalent heat source to bring stock to
+  forging temperature, a dedicated compact forging press for sustained ram force,
+  and reusable anvil/die tooling for the geometry. Use power_hammer_or_press for
+  impact forging and hydraulic_press for general cold pressing.

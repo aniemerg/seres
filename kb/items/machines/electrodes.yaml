@@ -1,12 +1,27 @@
 id: electrodes
-kind: machine
-name: Electrodes
+kind: part
+name: Generic graphite electrode set
 mass: 15.0
 mass_kg: 15.0
 unit: unit
 material_class: carbon
-notes: Electrodes for molten regolith electrolysis. Graphite or carbon construction
-  for high temperature operation.
+capabilities:
+- high_temperature_current_conduction
+- molten_regolith_electrode_service
+- ffc_graphite_electrode_service
+- replaceable_graphite_electrode_set
+- electrolysis_current_interface
+- consumable_electrode_stock
+notes: Legacy ID retained for a generic graphite/carbon electrode set used in
+  high-temperature electrolysis, molten regolith electrolysis, and FFC-style
+  molten-salt reduction. This item represents replaceable electrode stock or an
+  installed electrode set, not the reusable reactor/cell that performs
+  electrolysis. Use mre_reactor_v0, ffc_reactor_unit_v0,
+  electrolysis_cell_unit_v0, water_electrolysis_system_v0, or a
+  process-specific cell/reactor as the capital machine resource where
+  applicable; use material-specific electrode items such as electrode_set_mre,
+  refractory_metal_electrodes, electrodes_nife_set, or welding_electrode_copper
+  where chemistry or function differs.
 bom: bom_electrodes
 recipe: recipe_electrodes_v0
 unit_kind: discrete

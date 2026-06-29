@@ -4,8 +4,18 @@ kind: machine
 mass: 60.0
 unit: unit
 bom: bom_scara_robot_v0.yaml
-notes: Seeded from seed file paper_reviews_dec2024_comprehensive_v0; placeholder mass/capabilities
-  to enable assembly workflows. Will update with exact reach, payload, and control
-  interfaces.
+capabilities:
+- light_planar_pick_and_place
+- scara_robotic_positioning
+- vertical_insertion_assembly
+- small_part_transfer
+- repetitive_benchtop_assembly
+- four_dof_robot_motion
+notes: Seeded from seed file paper_reviews_dec2024_comprehensive_v0. Represents
+  a light 4-DOF SCARA manipulator for planar pick/place, vertical insertion, and
+  repetitive small-part assembly. Does not substitute for a general 6-DOF labor
+  bot or articulated robot where arbitrary tool orientation, long reach, or heavy
+  payload is required. Exact reach, payload, and control interfaces remain to be
+  specified.
 recipe: recipe_scara_robot_v0
 unit_kind: discrete

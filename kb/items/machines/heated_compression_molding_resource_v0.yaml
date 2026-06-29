@@ -1,0 +1,28 @@
+id: heated_compression_molding_resource_v0
+kind: machine
+name: Heated compression molding resource v0
+mass: 430.0
+unit: unit
+material_class: steel
+bom: bom_heated_compression_molding_resource_v0
+capabilities:
+- heated_compression_molding
+- elastomer_vulcanization_pressing
+- silicone_cure_pressing
+- thermoset_compression_curing
+- composite_laminate_cure_pressing
+- controlled_platen_temperature_pressing
+- moderate_temperature_mold_clamping
+notes: Moderate-temperature hydraulic platen press with heated platens, temperature
+  sensing, insulation, and controls for rubber, silicone, thermoset, and composite
+  cure cycles. Scope is roughly elastomer and polymer/composite molding below the
+  high-temperature powder/ceramic consolidation range.
+
+  Use molding_press_basic for cold or modest-temperature compression molding where
+  the mold or material does not require controlled heated platens. Use hot_press_v0
+  for powder, ceramic, magnet, electrode, diffusion-bonding, or refractory hot
+  pressing at high temperature. Use controlled_heating_plate_v0 for standalone
+  surface heating or fixture preheating without press force. The heated_platen_set
+  remains a component, not a process-level machine by itself.
+recipe: recipe_heated_compression_molding_resource_v0
+unit_kind: discrete

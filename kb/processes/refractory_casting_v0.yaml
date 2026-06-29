@@ -18,18 +18,27 @@ resource_requirements:
 - machine_id: refractory_installation_tools
   qty: 1
   unit: count
+- machine_id: cement_mixer_small
+  qty: 1
+  unit: count
+- machine_id: refractory_vibrator
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
   unit: kWh/kg
   scaling_basis: refractory_castable
-  notes: mixing equipment, vibration for consolidation, and heating for initial cure
+  notes: cement_mixer_small for castable mixing, refractory_vibrator for consolidation,
+    and heating for initial cure
 time_model:
   type: linear_rate
   rate: 0.4
   rate_unit: kg/hr
   scaling_basis: refractory_castable
   notes: mixing refractory castable, forming, vibration, initial cure time
-notes: Casting refractory linings and shapes from castable refractory materials. For
-  furnace and reactor linings.
+notes: Hand casting refractory linings and shapes from castable refractory materials
+  using labor, refractory hand tools, a separate cement/refractory mixer, and a
+  compact vibrator for consolidation. This process does not cover sprayed gunning
+  or dry ramming methods.
 process_type: continuous

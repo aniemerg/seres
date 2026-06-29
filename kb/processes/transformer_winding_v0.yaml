@@ -10,6 +10,9 @@ inputs:
 - item_id: magnet_wire_copper
   qty: 2.0
   unit: kg
+- item_id: coil_insulation_material
+  qty: 0.1
+  unit: kg
 outputs:
 - item_id: wound_transformer
   qty: 1
@@ -32,4 +35,6 @@ time_model:
   notes: Wind primary and secondary coils, layer insulation, test
 process_type: batch
 notes: Transformer winding process. Wind copper wire coils onto laminated core with
-  precise turn counts and layer insulation for voltage transformation.
+  precise turn counts and layer insulation for voltage transformation. Downstream
+  recipes should include bobbins/forms, terminal leads, varnish or impregnation,
+  and curing when required for the transformer design.

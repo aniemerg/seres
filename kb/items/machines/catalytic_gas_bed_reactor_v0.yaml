@@ -1,0 +1,32 @@
+id: catalytic_gas_bed_reactor_v0
+kind: machine
+name: Catalytic gas-bed reactor v0
+mass: 237.1
+unit: unit
+material_class: steel
+bom: bom_catalytic_gas_bed_reactor_v0
+capabilities:
+- gas_solid_catalytic_reaction
+- fixed_bed_catalyst_reactor
+- packed_bed_gas_conversion
+- heated_catalyst_bed_operation
+- catalyst_bed_temperature_control
+- reactive_gas_distribution
+- offgas_containment_interface
+notes: |
+  Heated gas-solid catalytic reactor for fixed-bed, gauze-bed, packed-bed, or
+  coarse fluidized/contact-bed service. Provides a reactor shell, catalyst bed
+  support/retention, gas inlet and outlet distribution, heat input, temperature
+  sensing/control, pressure relief, and offgas interface.
+
+  Use for Ostwald ammonia oxidation, catalytic Claus sulfur recovery, CO oxidation
+  cleanup, and Rochow/Mueller gas-solid chloride contact service where process
+  notes call for a dedicated catalytic bed reactor.
+
+  Distinct from gas_handling_loop_v0, which moves/recirculates gas; furnace_basic,
+  which supplies generic heat; packed_bed_distillation_v0, which is vapor-liquid
+  separation/contacting; and chemical_reactor_basic or generic_chemical_reactor_v0,
+  which are stirred/jacketed reactor abstractions rather than gas-bed catalytic
+  reactors.
+recipe: recipe_machine_catalytic_gas_bed_reactor_v0
+unit_kind: discrete

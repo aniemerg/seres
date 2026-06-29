@@ -5,6 +5,10 @@ inputs:
 - item_id: steel_bar_stock
   qty: 8.0
   unit: unit
+- item_id: cutting_fluid
+  qty: 0.5
+  unit: kg
+  notes: Coolant/lubricant for thread cutting and grinding passes
 outputs:
 - item_id: ball_screw_assembly
   qty: 1.0
@@ -13,6 +17,17 @@ resource_requirements:
 - machine_id: precision_lathe
   qty: 1
   unit: count
+- machine_id: grinder_cylindrical_v0
+  qty: 1
+  unit: count
+  notes: Finish grinding/lapping proxy for screw thread accuracy and roundness
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
+- machine_id: measurement_equipment
+  qty: 1
+  unit: count
+  notes: Micrometers, indicators, gauge blocks, and setup metrology
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
@@ -24,5 +39,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: Fabrication of a ball screw assembly from steel bar stock; placeholder routing.
+notes: Fabrication of a ball screw assembly from steel bar stock. Precision_lathe
+  cuts the screw blank/thread form, grinder_cylindrical_v0 represents finishing
+  where thread accuracy or roundness exceeds lathe-only capability, and
+  measurement_equipment verifies pitch, runout, and fit.
 process_type: batch

@@ -4,12 +4,29 @@ name: Surface grinder
 mass: 950.0
 unit: unit
 bom: bom_surface_grinder_v0
-notes: "Mass updated 2026-01 from 1200 kg to 950 kg based on BOM component analysis.\n\
-  Component total: machine_base_large + grinding_spindle_assembly + table_drive_assembly\
-  \ +\nmagnetic_chuck_surface_grinder + coolant_system_basic + control_compute_module_imported\
-  \ +\nsensor_suite_general + power_conditioning_module + fastener_kit_large \u2248\
-  \ 950 kg.\n\nPrecision surface grinder for tight tolerances and fine surface finishes.\
-  \ Includes\ngrinding spindle, magnetic chuck, and coolant system.\n"
+capabilities:
+  - precision_flat_grinding
+  - surface_grinding
+  - magnetic_chuck_workholding
+  - abrasive_wheel_grinding
+  - flatness_control
+  - coolant_assisted_grinding
+notes: |
+  Precision flat-surface grinder for tight tolerances and fine surface finishes on
+  plates, dies, ways, platens, flat mating faces, and similar work. The machine
+  includes abrasive grinding spindle, table motion, magnetic chuck or equivalent
+  workholding, coolant, spindle alignment, and machine leveling.
+
+  Scope: use this as the default flat-surface precision grinder. Do not use it as
+  the default for shafts, rolls, bearing races, balls, internal/external diameters,
+  or mirror/optical polishing. Use grinder_cylindrical_v0, bearing_grinding_machine_v0,
+  or polishing_station where geometry or finish method requires those machines.
+
+  Mass updated 2026-01 from 1200 kg to 950 kg based on BOM component analysis:
+  machine_base_large + grinding_spindle_assembly + table_drive_assembly +
+  magnetic_chuck_surface_grinder + coolant_system_basic +
+  control_compute_module_imported + sensor_suite_general +
+  power_conditioning_module + fastener_kit_large ~= 950 kg.
 preferred_variant: simple
 processes_supported:
 - alnico_machining_grinding_v0

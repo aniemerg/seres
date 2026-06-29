@@ -20,7 +20,10 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: batch sintering/pressing cycle with cooling
-notes: Captures ceramic path; numbers and yields to follow.
+notes: Captures ceramic hot-pressing path at roughly 1000 C using furnace_basic for
+  heat and hot_press_v0 for pressure; numbers and yields to follow. Use furnace_high_temp
+  or atmosphere/vacuum resources if later recipes require higher temperature or
+  controlled hot-zone conditions.
 process_type: batch
 resource_requirements:
 - machine_id: labor_bot_general_v0
@@ -29,7 +32,7 @@ resource_requirements:
 - machine_id: hot_press_v0
   qty: 1
   unit: count
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_basic
   qty: 1
   unit: count
 - machine_id: dies

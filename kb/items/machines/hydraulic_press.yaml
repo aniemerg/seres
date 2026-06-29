@@ -5,7 +5,21 @@ mass: 600.0
 unit: unit
 bom: bom_hydraulic_press_v0
 material_class: steel
-notes: General-purpose hydraulic press for forming and compaction; higher tonnage
-  than small press.
+capabilities:
+- controlled_high_force_linear_pressing
+- general_shop_pressing
+- compaction_pressing
+- bearing_installation_pressing
+- straightening_and_fitup_pressing
+- platen_pressing_support
+notes: Canonical general-purpose hydraulic press for controlled high-force linear
+  pressing, compaction, bearing installation/removal, straightening, and low-to-medium
+  throughput shop operations. Treat the 600 kg item as a medium H-frame/C-frame
+  press in the approximate 20-50 ton class with adjustable daylight/table height,
+  moderate stroke, and a work envelope suitable for small-to-medium components,
+  not as a benchtop jack press or massive production press. Smaller generic press
+  aliases remain consolidated into this item. Shape-specific molds, dies, platens,
+  ram adapters, and fixture sets remain separate tooling resources where geometry,
+  pressure distribution, or part tolerance matters.
 recipe: recipe_hydraulic_press_v0
 unit_kind: discrete

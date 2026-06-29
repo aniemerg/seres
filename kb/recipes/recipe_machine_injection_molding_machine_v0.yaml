@@ -1,0 +1,100 @@
+id: recipe_machine_injection_molding_machine_v0
+kind: recipe
+target_item_id: injection_molding_machine_v0
+variant_id: v0
+inputs:
+  - item_id: steel_frame_welded
+    qty: 300.0
+    unit: kg
+  - item_id: mold_platen_assembly_v0
+    qty: 240.0
+    unit: kg
+  - item_id: hydraulic_power_unit_basic
+    qty: 150.0
+    unit: kg
+  - item_id: hopper_feed_system
+    qty: 15.0
+    unit: kg
+  - item_id: extruder_barrel_heater_set_v0
+    qty: 25.0
+    unit: kg
+  - item_id: extruder_head_basic
+    qty: 8.0
+    unit: kg
+  - item_id: drive_motor_medium
+    qty: 90.0
+    unit: kg
+  - item_id: gearbox_reducer_medium
+    qty: 50.0
+    unit: kg
+  - item_id: cooling_loop_basic
+    qty: 10.0
+    unit: kg
+  - item_id: temperature_control_system_v0
+    qty: 5.0
+    unit: kg
+  - item_id: molding_control_unit
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: injection_molding_machine_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_welded
+        qty: 300.0
+        unit: kg
+      - item_id: mold_platen_assembly_v0
+        qty: 240.0
+        unit: kg
+      - item_id: hydraulic_power_unit_basic
+        qty: 150.0
+        unit: kg
+      - item_id: hopper_feed_system
+        qty: 15.0
+        unit: kg
+      - item_id: extruder_barrel_heater_set_v0
+        qty: 25.0
+        unit: kg
+      - item_id: extruder_head_basic
+        qty: 8.0
+        unit: kg
+      - item_id: drive_motor_medium
+        qty: 90.0
+        unit: kg
+      - item_id: gearbox_reducer_medium
+        qty: 50.0
+        unit: kg
+      - item_id: cooling_loop_basic
+        qty: 10.0
+        unit: kg
+      - item_id: temperature_control_system_v0
+        qty: 5.0
+        unit: kg
+      - item_id: molding_control_unit
+        qty: 5.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: injection_molding_machine_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 12.0
+    labor_hours: 10.0
+    machine_hours: 4.0
+    notes: Assemble frame, platens/clamp, hydraulic unit, plasticizing barrel/nozzle, feed hopper, drives, cooling, controls, and guarding.
+assumptions: |
+  Small 900 kg thermoplastic injection molding machine assembled from existing KB
+  subassemblies. Detailed screw/check-ring/nozzle/ejector components are folded
+  into the coarse extruder head, platen, hydraulic, and control subassemblies.
+notes: |
+  Dedicated injection molding machine route for molded plastic housings and small
+  thermoplastic parts. Use plastic_extruder for continuous extrusion and
+  molding_press_basic for compression molding.

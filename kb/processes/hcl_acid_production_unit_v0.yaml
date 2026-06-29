@@ -17,7 +17,7 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: chemical_reactor_basic
+- machine_id: acid_reactor_v0
   qty: 1.0
   unit: unit
 energy_model:
@@ -27,4 +27,4 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Seed path to produce hcl_acid_production_v0; mirrors hydrochloric_acid_synthesis_v0."
+notes: "Seed path to produce hcl_acid_production_v0; mirrors hydrochloric_acid_synthesis_v0. Uses acid-resistant reactor service for H2/Cl2/HCl corrosion and gas evolution."

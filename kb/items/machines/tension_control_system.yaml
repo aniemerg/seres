@@ -1,12 +1,24 @@
 id: tension_control_system
 kind: machine
-name: Tension control system
+name: Tension control subsystem
 mass: 25.0
 unit: unit
 material_class: steel
-notes: Mechanical or electronic tension control system for wire, fiber, and cable
-  winding operations. Maintains consistent tension during spooling. Includes brake
-  mechanism and feedback control.
+capabilities:
+- closed_loop_tension_control
+- fiber_draw_tension_regulation
+- wire_and_cable_winding_tension
+- dancer_or_load_cell_feedback
+- brake_or_drive_actuator_control
+- tension_calibration_support
+notes: Generic compact tension_control_subsystem for wire, fiber, cable, and web
+  winding or drawing operations. Maintains consistent tension during spooling,
+  draw-off, or fiber drawing using sensing, controller, brake/drive actuator, and
+  dancer/idler mechanics. Includes calibration support for setting tension and
+  verifying feedback response. Distinct from tension_gauge, which is a portable
+  measurement/calibration tool rather than an active feedback controller; also
+  distinct from the full fiber_drawing_tower, which supplies the draw tower,
+  heater, rollers, and collection hardware.
 bom: bom_tension_control_system_v0
 recipe: recipe_tension_control_system_v0
 unit_kind: discrete

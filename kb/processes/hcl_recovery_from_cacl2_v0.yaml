@@ -23,12 +23,14 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: chemical_reactor_basic
+- machine_id: acid_reactor_v0
   qty: 1
   unit: count
-- machine_id: vapor_capture_system_v0
+- machine_id: gas_scrubbing_unit_v0
   qty: 1
   unit: count
+  notes: Corrosion-compatible HCl capture/cleanup or absorption resource; water-focused
+    vapor_capture_system_v0 is not appropriate for acid gas service.
 energy_model:
   type: fixed_per_batch
   value: 4.0

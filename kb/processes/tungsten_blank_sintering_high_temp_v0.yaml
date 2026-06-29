@@ -16,7 +16,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
 - machine_id: inert_atmosphere_system
@@ -30,4 +30,6 @@ time_model:
   type: batch
   hr_per_batch: 8.0
 process_type: batch
-notes: Sinter tungsten powder to form a tungsten cathode blank for CaO coating.
+notes: Sinter tungsten powder to form a tungsten cathode blank for CaO coating using
+  furnace_high_temp plus inert_atmosphere_system. Vacuum or cleaner hot-zone hardware
+  should be added separately if required.

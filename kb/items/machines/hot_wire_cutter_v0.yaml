@@ -4,6 +4,24 @@ name: Hot wire cutter v0
 mass: 40.0
 unit: unit
 bom: bom_hot_wire_cutter_v0
-notes: Hot wire cutter for foam/blocks; coarse mass estimate.
+capabilities:
+- hot_wire_thermal_cutting
+- foam_block_cutting
+- soft_insulation_cutting
+- refractory_insulation_trimming
+- controlled_resistance_wire_heating
+- template_guided_profile_cutting
+notes: |
+  Powered hot-wire cutter for cutting foam blocks, soft refractory insulation,
+  low-density polymer forms, and similar materials using a controlled heated
+  resistance wire. Includes cutter frame, hot-wire power supply, cutting wire,
+  controls, sensors, and fasteners.
+
+  Distinct from metal_cutting_bandsaw, saw_or_cutting_tool, cutting_station_basic_v0,
+  and cutting_tools_general; this item is for thermal wire cutting of soft/low-density
+  materials, not metal stock cutting, abrasive cutting, machining, or general hand
+  tools. Refractory_installation_tools may include small hot-wire cutting support
+  as a compact hand-tool kit, while this item represents the standalone powered
+  cutter.
 recipe: recipe_machine_hot_wire_cutter_v0
 unit_kind: discrete

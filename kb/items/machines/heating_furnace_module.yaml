@@ -4,11 +4,19 @@ name: Heating furnace module
 mass: 200.0
 unit: unit
 material_class: steel
+capabilities:
+- modular_process_heating
+- temperature_controlled_heating
+- resistive_furnace_hot_zone
+- getter_activation_heating
+- furnace_module_integration
 notes: Modular furnace heating unit with heating elements, insulation, and temperature
   control. Can be stacked or arranged for larger furnace capacity. Includes refractory
   lining, heating elements (resistance or induction), temperature sensors, and control
   interface. Used in heat treatment furnaces, melting furnaces, and process heating
-  applications.
+  applications. This is a heating module or hot-zone subassembly; use a complete
+  furnace, kiln, vacuum chamber, or atmosphere system when containment, gas handling,
+  or full process enclosure behavior is required.
 bom: bom_heating_furnace_module_v0
 recipe: recipe_heating_furnace_module_v0
 unit_kind: discrete

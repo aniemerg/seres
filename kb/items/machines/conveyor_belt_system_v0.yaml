@@ -4,7 +4,20 @@ kind: machine
 mass: 60.0
 unit: unit
 bom: bom_conveyor_belt_system_v0
-notes: Seed-conveyor component referenced in paper_reviews_dec2024_comprehensive_v0
-  seed; placeholder mass and capabilities for modeling
+capabilities:
+  - small_belt_conveying
+  - bulk_material_transfer
+  - continuous_material_feed
+  - in_line_material_transport
+  - conveyor_drive_and_idler_support
+notes: |
+  Seed-conveyor component referenced in paper_reviews_dec2024_comprehensive_v0
+  seed; placeholder mass and capabilities for modeling.
+
+  Canonical small powered belt conveyor subsystem for moving bulk solids or
+  parts between adjacent equipment. Distinct from the broader
+  material_handling_equipment item, which represents a larger integrated
+  handling station with cart interface, and from screw conveyors or mining-scale
+  conveyors that need different geometry and duty assumptions.
 recipe: recipe_conveyor_belt_system_v0
 unit_kind: discrete

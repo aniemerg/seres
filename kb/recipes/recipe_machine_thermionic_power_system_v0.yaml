@@ -17,7 +17,7 @@ inputs:
   - item_id: heat_pipes_set
     qty: 15.0
     unit: kg
-  - item_id: power_conditioning_equipment
+  - item_id: thermionic_power_conditioning_unit_v0
     qty: 1.0
     unit: unit
 outputs:
@@ -103,7 +103,7 @@ steps:
       - item_id: assembled_equipment
         qty: 293.0
         unit: kg
-      - item_id: power_conditioning_equipment
+      - item_id: thermionic_power_conditioning_unit_v0
         qty: 1.0
         unit: unit
     outputs:
@@ -112,7 +112,7 @@ steps:
         unit: kg
     est_time_hr: 4.0
     labor_hours: 4.0
-    notes: "Install power conditioning equipment and electrical connections from converter to output terminals"
+    notes: "Install thermionic power conditioning unit and electrical connections from converter to regulated output terminals"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: wired_electrical_system
@@ -137,5 +137,5 @@ steps:
     est_time_hr: 2.0
     labor_hours: 2.0
     notes: "Verify system alignment, thermal performance, and electrical safety"
-assumptions: "Complete solar thermionic power system integrating concentrator, converter, and thermal management. 10-30% solar-to-electric efficiency depending on optimization level. See: design/solar_thermionics_report.md"
-notes: "Full system assembly for solar thermionic power generation. Integrates Fresnel lens concentrator (2700°C), vacuum tube thermionic converter, heat rejection, and power conditioning. Total assembly time ~35-40 hours. Dual-use concentrator can also serve foundry operations. See: design/solar_thermionics_report.md for complete technical specifications."
+assumptions: "Complete solar thermionic power system integrating concentrator, converter, thermionic-specific power conditioning, and thermal management. 10-30% solar-to-electric efficiency depending on optimization level. See: design/solar_thermionics_report.md"
+notes: "Full system assembly for solar thermionic power generation. Integrates Fresnel lens concentrator (2700°C), vacuum tube thermionic converter, heat rejection, and thermionic power conditioning. Total assembly time ~35-40 hours. Dual-use concentrator can also serve foundry operations. See: design/solar_thermionics_report.md for complete technical specifications."

@@ -23,6 +23,12 @@ resource_requirements:
 - machine_id: reduction_furnace_v0
   qty: 1
   unit: count
+- machine_id: carbon_feeder_screw
+  qty: 1
+  unit: count
+- machine_id: offgas_handling
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 12.0
@@ -30,5 +36,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Placeholder magnesium oxide reduction path to produce magnesium metal; mass-balanced
-  with CO2 byproduct.
+notes: |
+  Placeholder batch carbothermal magnesium oxide reduction path to produce
+  magnesium metal; mass-balanced with CO2 byproduct. Uses reduction_furnace_v0
+  as the sealed reduction hot zone, with carbon_feeder_screw for reductant
+  addition and offgas_handling for CO2/CO-bearing exhaust.

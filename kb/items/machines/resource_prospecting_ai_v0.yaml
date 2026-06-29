@@ -3,6 +3,13 @@ kind: machine
 name: Resource prospecting AI module v0
 mass: 1.0
 unit: unit
+material_class: electronic
+capabilities:
+- rover_sensor_data_fusion
+- resource_target_classification
+- prospecting_site_scoring
+- terrain_context_analysis
+- prospecting_decision_support
 bom: bom_resource_prospecting_ai_v0_v0
 notes: 'AI module for identifying resource-rich areas from rover sensor data.
 
@@ -14,7 +21,9 @@ notes: 'AI module for identifying resource-rich areas from rover sensor data.
 
   - Seed requirement from paper_reviews_dec2024_comprehensive_v0
 
-  Placeholder mass and capabilities; refine when data available.
+  Embedded compute/software module for interpreting prospecting payload data; it
+  does not provide sensing, mobility, sampling, or excavation capability without
+  a rover and physical prospecting module.
 
   '
 recipe: recipe_resource_prospecting_ai_v0_v0

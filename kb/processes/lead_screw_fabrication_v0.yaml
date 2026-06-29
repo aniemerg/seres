@@ -6,6 +6,10 @@ inputs:
 - item_id: steel_bar_stock
   qty: 8.0
   unit: unit
+- item_id: cutting_fluid
+  qty: 0.5
+  unit: kg
+  notes: Coolant/lubricant for precision thread cutting and finishing
 outputs:
 - item_id: lead_screw_assembly
   qty: 1.0
@@ -14,6 +18,17 @@ resource_requirements:
 - machine_id: precision_lathe
   qty: 1
   unit: count
+- machine_id: grinder_cylindrical_v0
+  qty: 1
+  unit: count
+  notes: Finish grinding/lapping proxy if screw accuracy exceeds lathe-only cutting
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
+- machine_id: measurement_equipment
+  qty: 1
+  unit: count
+  notes: Micrometers, indicators, gauge blocks, and setup metrology
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
@@ -26,4 +41,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: Fabrication of a lead screw assembly from steel bar stock; placeholder routing.
+notes: Fabrication of a lead screw assembly from steel bar stock. Precision_lathe
+  handles turning/threading; grinder_cylindrical_v0 and measurement_equipment are
+  required when screw pitch, straightness, or runout needs higher accuracy than
+  lathe-only cutting.

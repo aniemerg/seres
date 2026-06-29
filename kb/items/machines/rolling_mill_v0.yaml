@@ -3,10 +3,20 @@ kind: machine
 name: Rolling mill v0
 mass: 1200.0
 unit: unit
-bom: bom_rolling_mill_v0
+deprecated: true
+replaced_by: plate_rolling_mill
 capabilities:
 - rolling
 - metal_forming
-notes: Rolling mill for hot and cold rolling to achieve electrical steel sheet gauge.
-recipe: recipe_rolling_mill_v0
+notes: |
+  Deprecated legacy rolling mill item. Consolidated into plate_rolling_mill, the
+  canonical flat rolling/reduction resource for ingots, billets, sheet, plate,
+  strip, and bar stock.
+
+  Historical scope was hot and cold rolling to achieve electrical steel sheet
+  gauge. Active process requirements should use plate_rolling_mill plus separate
+  heat-treatment, surface-preparation, coating, or metrology resources where the
+  process requires annealing, descaling/pickling, insulation coating, or tighter
+  gauge control. Build paths belong on plate_rolling_mill, not this deprecated
+  alias.
 unit_kind: discrete

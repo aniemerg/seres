@@ -5,13 +5,29 @@ mass: 1501.0
 unit: unit
 bom: bom_plate_rolling_mill_v0
 material_class: steel
-notes: Plate rolling mill for producing metal plate from ingots or billets. Heavy
-  rollers compress heated metal through multiple passes to achieve desired thickness.
-  Used for producing steel plate, sheet metal stock, and structural materials. Includes
-  drive motors, roll adjustment, and heating system.
+capabilities:
+- flat_rolling
+- metal_forming
+- plate_reduction_rolling
+- sheet_rolling
+- bar_stock_rolling
+notes: Plate rolling mill for flat rolling and reduction of metal ingots, billets,
+  slabs, plate, sheet, strip, and bar stock. Heavy work rolls compress stock through
+  multiple passes to achieve target thickness or section. Includes work rolls, rigid
+  frame, drive, roll-gap adjustment, alignment, guards, and controls; it is not a
+  plate roll-bending machine for curved shells. Treat the 1501 kg v0 item as a small
+  light-industrial mill with limited working width, nominally up to about 500 mm
+  sheet/plate width and modest bar or light plate sections, for steel and nonferrous
+  alloys within compatible roll loads. Hot rolling, reheating, annealing, and temper
+  control require separate furnace resources such as furnace_basic or annealing ovens;
+  the mill itself only provides the mechanical reduction and handling interface.
 preferred_variant: simple
 processes_supported:
+- electrical_steel_production_v0
+- rolling_basic_shop_v0
 - copper_strip_thin_production_v0
+- sheet_metal_fabrication_v0
+- steel_bar_stock_rolling_shop_v0
 - steel_bar_stock_rolling_v0
 - steel_strip_thin_production_v0
 recipe: recipe_machine_plate_rolling_mill_v0

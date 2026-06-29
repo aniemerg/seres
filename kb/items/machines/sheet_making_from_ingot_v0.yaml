@@ -4,6 +4,14 @@ name: Sheet making line (from ingot)
 unit: count
 mass: 800.0
 bom: bom_sheet_making_from_ingot_v0
+capabilities:
+- ingot_to_sheet_conversion
+- sheet_stock_forming
+- flat_stock_reduction
+- coarse_sheet_line_operation
+- metal_sheet_feedstock_preparation
 notes: Sheet forming line for ingots; placeholder machine for sheet_making_from_ingot_v0
-  process.
+  process. Represents a coarse sheet-from-ingot production line; use plate_rolling_mill
+  for explicit rolling/reduction operations where roll force, reheating, gauge control,
+  or pass schedule matters.
 unit_kind: discrete

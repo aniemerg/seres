@@ -3,19 +3,42 @@ kind: bom
 owner_item_id: 3d_printer_basic_v0
 components:
   - item_id: printer_frame_generic
-    qty: 1.0
-    unit: unit
+    qty: 40.0
+    unit: kg
+  - item_id: gantry_axes_set
+    qty: 15.0
+    unit: kg
   - item_id: extruder_head_basic
-    qty: 1.0
+    qty: 8.0
+    unit: kg
+  - item_id: stepper_motor_v0
+    qty: 3.0
     unit: unit
-  - item_id: power_electronics_module
+  - item_id: belt_and_pulley_set
+    qty: 2.0
+    unit: kg
+  - item_id: lead_screw_assembly
+    qty: 4.0
+    unit: kg
+  - item_id: printer_control_module
+    qty: 12.0
+    unit: kg
+  - item_id: control_circuit_stepper_driver
     qty: 1.0
-    unit: unit
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 6.0
+    unit: kg
   - item_id: power_supply_low_voltage
     qty: 1.0
     unit: unit
-  - item_id: power_supply_chassis_basic
+  - item_id: sensor_suite_general
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
     qty: 1.0
-    unit: unit
+    unit: kg
 scrap_rate: 0.05
-notes: "Concrete BOM for 3D printer basic v0; placeholders refined as subsystem details mature."
+notes: Canonical BOM for a 100 kg enclosed medium-format Cartesian FDM/FFF printer.
+  Replaces duplicate resource-printer BOMs that used generic drive motors, gearboxes,
+  and heavy bearings with printer-appropriate stepper motion components.

@@ -4,8 +4,18 @@ name: Sand casting flask set
 mass: 40.0
 unit: unit
 material_class: steel
-notes: Metal flasks (cope and drag frames) for sand casting. Various sizes for different
-  part geometries.
+capabilities:
+  - sand_casting_flask_tooling
+  - cope_drag_alignment
+  - reusable_foundry_tooling
+notes: |
+  Reusable cope/drag flask tooling for sand casting. Metal flask frames hold and
+  align packed molding sand around a pattern during mold preparation and pouring.
+
+  Scope: this is reusable foundry tooling, modeled as a machine-like resource so
+  sand casting processes can require it. It is not consumed by a casting pour and
+  should not be listed as a material input to casting recipes. Part-specific
+  patterns, cores, prepared sand, and expendable molds are modeled separately.
 bom: bom_sand_casting_flask_set_v0
 recipe: recipe_sand_casting_flask_set_v0
 unit_kind: discrete

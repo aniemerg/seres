@@ -12,21 +12,28 @@ inputs:
 - item_id: etching_chemicals
   qty: 0.2
   unit: kg
+- item_id: photoresist_solution_v0
+  qty: 0.02
+  unit: kg
+- item_id: water
+  qty: 0.5
+  unit: kg
+- item_id: drill_bit_carbide
+  qty: 0.01
+  unit: kg
 outputs:
 - item_id: bare_pcb
   qty: 1.0
   unit: unit
+byproducts:
+- item_id: etching_waste_solution
+  qty: 0.2
+  unit: kg
 resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
 - machine_id: pcb_fab_equipment
-  qty: 1
-  unit: count
-- machine_id: drill_press
-  qty: 1
-  unit: count
-- machine_id: chemical_bath_station
   qty: 1
   unit: count
 energy_model:
@@ -36,7 +43,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 3.0
-notes: Printed circuit board fabrication process. Includes photoresist application,
-  UV exposure, developing, etching, drilling, and through-hole plating. Produces bare
-  PCB ready for component assembly. Subtractive process removes unwanted copper to
-  create circuit traces. Multi-layer boards require lamination and additional processing.
+notes: Printed circuit board fabrication process using the aggregate
+  pcb_fab_equipment station. Includes photoresist application, UV exposure,
+  developing, copper etching, rinse, drilling/routing, and simple surface finish.
+  Produces a bare PCB ready for component assembly. Scope is simple single/double
+  sided boards with coarse traces; plated through holes are not treated as a
+  reliable production capability here, and soldermask, silkscreen, multilayer
+  boards, fine-pitch HDI, and automated electrical test require advanced PCB
+  fabrication resources or imports.

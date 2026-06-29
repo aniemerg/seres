@@ -22,16 +22,16 @@ steps:
         qty: 0.4
         unit: kg
     outputs:
-      - item_id: machined_steel_part_precision
+      - item_id: machined_part_raw
         qty: 3.0
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
     labor_hours: 2.0
-    notes: "Machine aluminum body to high flatness and precision (±0.01 mm tolerance)"
+    notes: "Machine aluminum body to high flatness and precision (±0.01 mm tolerance); generic machined_part_raw avoids incorrectly labeling aluminum as steel."
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: machined_steel_part_precision
+      - item_id: machined_part_raw
         qty: 3.0
         unit: kg
     outputs:
@@ -43,6 +43,9 @@ steps:
     notes: "Install spirit vials or electronic sensor modules in machined body, calibrate against reference surface to 0.02 mm/m accuracy, verify accuracy and repeatability. Total post-machining time: 4 hours (assembly + calibration + inspection)."
 assumptions: "Precision levels for machine tool alignment. Includes both spirit vials and optional electronic sensors. 0.02 mm/m accuracy requirement."
 notes: |
+  Recipe material mismatch fixed 2026-06:
+  - Aluminum stock now produces generic machined_part_raw before assembly, not machined_steel_part_precision.
+
   Recipe corrected 2026-01 to fix circular dependency:
   - Removed redundant calibration_basic_v0 and inspection_basic_v0 steps that created self-reference
   - Consolidated calibration and inspection into final assembly step

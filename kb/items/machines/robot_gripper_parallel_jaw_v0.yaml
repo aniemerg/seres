@@ -3,8 +3,17 @@ kind: machine
 name: Parallel Jaw Gripper (robot_gripper_parallel_jaw_v0)
 mass: 5.0
 unit: unit
-notes: End-effector gripper for robotic arm; placeholder mass and capabilities until
-  detailed spec is defined.
+notes: End-effector gripper for robotic arm; two-finger parallel-jaw unit for simple
+  part handling, fixture loading, and pick/place tasks. Distinct from
+  robot_gripper_multi_finger_v0, which represents broader adaptive multi-finger
+  manipulation.
+capabilities:
+- parallel_jaw_gripping
+- robotic_pick_and_place
+- part_handling
+- fixture_loading
+- end_effector_tooling
+- centered_grip_motion
 bom: bom_robot_gripper_parallel_jaw_v0_v0
 recipe: recipe_robot_gripper_parallel_jaw_v0
 unit_kind: discrete

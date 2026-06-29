@@ -4,9 +4,18 @@ name: Inspection tools (basic)
 mass: 8
 unit: unit
 material_class: steel
-notes: Basic inspection and quality control tools. Includes magnifying glasses, straightedges,
-  gauges, calipers, and visual inspection aids. Used for manual inspection and sorting
-  operations.
+capabilities:
+- manual_inspection
+- visual_sorting
+- basic_dimensional_checking
+- shop_inspection_aids
+notes: Basic reusable manual inspection aid kit, modeled as a machine resource so
+  processes can reserve it alongside labor. Covers magnifiers, rulers/straightedges,
+  simple go/no-go gauges, calipers, and visual aids for low-end manual inspection
+  and sorting. Does not include micrometers, gauge blocks, dial indicators, electrical
+  instruments, optical metrology, CMMs, or calibrated reference standards; use measurement_equipment,
+  alignment_tools, optical_metrology_tools, or specific metrology items for those
+  cases.
 bom: bom_inspection_tools_basic_v0
 recipe: recipe_inspection_tools_basic_v0
 unit_kind: discrete

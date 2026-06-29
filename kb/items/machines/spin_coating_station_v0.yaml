@@ -5,6 +5,17 @@ mass: 50.0
 unit: unit
 material_class: equipment
 bom: bom_spin_coating_station_v0
-notes: Station for applying photoresist via spin coating.
+capabilities:
+- spin_coating
+- photoresist_application
+- uniform_thin_film_coating
+- wafer_substrate_chuck_handling
+- controlled_spin_speed_coating
+- small_substrate_coating_process
+notes: Station for applying photoresist or similar low-viscosity thin films via
+  spin coating. Provides substrate chucking, dispense/spin controls, and containment
+  for small wafer or flat-substrate coating. Distinct from coating_station for spray,
+  dip, powder, paint, or bulk protective coatings; drying, baking, UV exposure, development,
+  etching, and cleanroom environment remain separate resources.
 recipe: recipe_spin_coating_station_v0
 unit_kind: discrete

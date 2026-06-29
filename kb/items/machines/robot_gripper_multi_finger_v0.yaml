@@ -3,8 +3,17 @@ kind: machine
 name: Multi-Finger Gripper (robot_gripper_multi_finger_v0)
 mass: 6.0
 unit: unit
-notes: End-effector gripper for robotic arm; placeholder mass and capabilities until
-  detailed spec is defined.
+capabilities:
+  - robotic_grasping
+  - multi_finger_manipulation
+  - end_effector_tooling
+  - part_handling
+  - adaptive_grip
+notes: >
+  Robotic end-effector gripper for part handling and general manipulation. Current
+  BOM approximates the multi-finger unit from an electric parallel gripper base,
+  so this is a coarse manipulation resource rather than a dexterous anthropomorphic
+  hand.
 bom: bom_robot_gripper_multi_finger_v0_v0
 recipe: recipe_robot_gripper_multi_finger_v0
 unit_kind: discrete

@@ -16,7 +16,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
 - machine_id: inert_atmosphere_system
@@ -31,7 +31,8 @@ time_model:
   hr_per_batch: 8.0
 process_type: batch
 notes: High-temperature sintering of tungsten powder at 2700-3000°C under inert atmosphere
-  (argon or vacuum). Produces dense, high-strength tungsten components. Critical for
-  thermionic cathode production. 5% mass loss typical due to densification and gas
-  evolution. Requires refractory-lined furnace capable of extreme temperatures. Slow
-  heating/cooling rates prevent cracking.
+  (argon or vacuum), using furnace_high_temp plus inert_atmosphere_system. Produces
+  dense, high-strength tungsten components. Critical for thermionic cathode production.
+  5% mass loss typical due to densification and gas evolution. Requires refractory-lined
+  furnace capability at extreme temperatures; add vacuum/clean-hot-zone resources
+  separately if needed. Slow heating/cooling rates prevent cracking.

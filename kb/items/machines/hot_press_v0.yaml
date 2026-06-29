@@ -4,6 +4,19 @@ name: Hot press v0
 mass: 950.0
 unit: unit
 bom: bom_hot_press_v0
-notes: Hot press for sintering/consolidation; coarse mass estimate.
+notes: Pilot-scale heated platen hot press for powder, ceramic, magnet, electrode,
+  and diffusion-bonded part consolidation where pressure is applied during heating.
+  Assumes roughly 10-50 ton class uniaxial pressing, high-temperature operation up
+  to about 1200-1600 C depending on tooling, and a small lab/pilot working envelope
+  rather than production-scale HIP or SPS equipment. Low-temperature polymer or
+  composite pressing should use a hydraulic press with heated platens instead.
+  Vacuum, inert, or reducing atmosphere support must be listed as a separate process
+  resource when processing oxidation-sensitive magnets, metals, graphite, tungsten,
+  or refractory materials.
+capabilities:
+- hot_pressing
+- heated_uniaxial_pressing
+- powder_consolidation
+- ceramic_densification
 recipe: recipe_machine_hot_press_v0
 unit_kind: discrete

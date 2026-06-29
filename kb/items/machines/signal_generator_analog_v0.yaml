@@ -5,6 +5,12 @@ mass: 15.0
 unit: unit
 bom: bom_signal_generator_analog_v0
 material_class: composite
+capabilities:
+- waveform_generation
+- analog_signal_stimulus
+- sensor_calibration_signal
+- electronics_test_stimulus
+- frequency_sweep_generation
 notes: 'Analog signal generator for testing and calibration.
 
   Source: docs/paper_reviews/paper_reviews_dec2024_comprehensive_v0 (seed file)
@@ -20,6 +26,10 @@ notes: 'Analog signal generator for testing and calibration.
   Technology: Vacuum tube oscillator circuits or discrete transistor design
 
   Critical for: Testing electronics, calibration procedures, quality control
+
+  Relationship: standalone discrete instrument and BOM component of
+  test_bench_electrical; use directly only where a process specifically requires
+  signal stimulus rather than the full electrical test bench.
 
   '
 recipe: recipe_signal_generator_analog_v0

@@ -28,9 +28,6 @@ resource_requirements:
 - machine_id: generic_chemical_reactor_v0
   qty: 1
   unit: count
-- machine_id: pellet_press
-  qty: 1
-  unit: count
 time_model:
   type: batch
   hr_per_batch: 4.0
@@ -44,7 +41,7 @@ energy_model:
 notes: "Steam reforming of methane to produce synthesis gas (syngas: CO + H2).\nSource:\
   \ Sustainable-ISRU-on-the-Moon.txt\nReaction: CH4 + H2O → CO + 3H2 (endothermic)\n\
   Temperature: 850°C\nPressure: 4 MPa (40 bar)\nCatalyst: Nickel (from Mond process,\
-  \ meteorite sources); modeled as pellet_press\nProcess: Catalytic\
+  \ meteorite sources); formed catalyst pellets are prepared upstream via recipe_catalyst_pellet_forming_v0\nProcess: Catalytic\
   \ steam reforming\nPurpose: First step in silicone plastic synthesis chain\nGenerate\
   \ syngas for methanol production\nChemical feedstock for various syntheses\nProcess\
   \ details:\n  1. Methane (from lunar volatiles or Sabatier process)\n  2. Superheated\

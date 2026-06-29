@@ -5,8 +5,22 @@ mass: 25.0
 unit: unit
 bom: bom_power_supply_bench_v0
 material_class: electronic
-notes: Bench power supply for testing, electronics work, and low-power applications.
-  Provides adjustable DC voltage and current limiting. Used in electronics assembly,
-  testing, and small-scale manufacturing operations.
+capabilities:
+- regulated_dc_power
+- bench_power_supply
+- adjustable_voltage_output
+- current_limited_power
+- constant_voltage_current_operation
+- electronics_bringup_power
+notes: |
+  Bench power supply for testing, electronics work, and low-power applications.
+  Provides adjustable DC voltage, current limiting, and constant-voltage or
+  constant-current operation for electronics assembly, circuit bring-up, and
+  small experimental rigs.
+
+  This is a standalone low-power bench instrument. Use test_bench_electrical for
+  integrated electronics test workflows, high_temperature_power_supply_v0 or
+  ffc_power_supply_controlled_v0 for industrial/process electrolysis power, and
+  power_distribution_bus for power routing infrastructure.
 recipe: recipe_power_supply_bench_v0
 unit_kind: discrete

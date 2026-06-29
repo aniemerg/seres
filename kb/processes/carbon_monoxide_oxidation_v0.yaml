@@ -19,10 +19,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: chemical_reactor_basic
+- machine_id: gas_handling_loop_v0
   qty: 1
   unit: count
-- machine_id: pellet_press
+- machine_id: catalytic_gas_bed_reactor_v0
   qty: 1
   unit: count
 energy_model:
@@ -53,7 +53,9 @@ notes: "Catalytic oxidation of carbon monoxide to carbon dioxide.\nSource: FFC-p
   Disadvantages: Requires oxygen input\nCatalyst needed for low temperature\nApplications:\n\
   \  - Preprocessing for Sabatier methanation\n  - CO removal from process gas streams\n\
   \  - CO2 generation for chemical synthesis\n  - Safety scrubbing of CO (toxic)\n\
-  Lunar ISRU: Enables flexible carbon cycle management\nConverts CO ↔ CO2 as needed\
+Equipment note: gas_handling_loop_v0 supplies flow and recirculation, while catalytic_gas_bed_reactor_v0\
+  \ supplies the low-temperature catalyst bed/contact reactor; chemical_reactor_basic\
+  \ is not assumed suitable for catalytic gas cleanup.\nLunar ISRU: Enables flexible carbon cycle management\nConverts CO ↔ CO2 as needed\
   \ for different processes\nSpinel catalysts manufacturable in-situ from Fe/Co/Ni\n\
   Alternative to direct CO use (e.g., carbonyl processes)\nTerrestrial use: Automotive\
   \ catalytic converters, industrial emissions\n"

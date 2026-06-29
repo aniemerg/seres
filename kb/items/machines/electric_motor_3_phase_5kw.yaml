@@ -1,11 +1,21 @@
 id: electric_motor_3_phase_5kw
 name: 3-phase electric motor 5 kW
 kind: machine
+deprecated: true
+replaced_by: motor_general_5kw
 mass: 25.0
 mass_kg: 25.0
 unit: unit
-bom: bom_electric_motor_3_phase_5kw
-notes: 3-phase AC induction motor rated at 5 kW, used as a drive motor for grinders
-  and other equipment. Mass is a conservative placeholder.
-recipe: recipe_electric_motor_3_phase_5kw_v0
+capabilities:
+- electric_motor_drive
+- rotary_mechanical_power
+- three_phase_ac_motor_drive
+- machine_tool_drive
+- pump_fan_drive
+- belt_or_coupled_drive
+notes: DEPRECATED - Consolidated into motor_general_5kw, the canonical 5 kW-class
+  motor entry for roughly 2-10 kW drive needs. Historical scope was a 3-phase AC
+  induction motor for grinders and other equipment; use motor_general_5kw unless
+  exact motor frame, duty cycle, voltage, or controls need a future specialized
+  item.
 unit_kind: discrete

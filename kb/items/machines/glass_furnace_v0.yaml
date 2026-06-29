@@ -4,6 +4,23 @@ name: Glass furnace v0
 mass: 1400.0
 unit: unit
 bom: bom_glass_furnace_v0
-notes: Batch/continuous glass melting furnace; coarse mass estimate.
+capabilities:
+- small_electric_glass_melting
+- refractory_lined_molten_glass_containment
+- high_current_resistance_heating
+- glass_batch_fining_and_holding
+- basalt_glass_melt_support
+- molten_glass_pouring_support
+notes: Small refractory-lined electric glass melting furnace, sized as a lab/studio
+  or pilot pot, crucible, or day-tank-style melter rather than an industrial
+  continuous tank furnace. Provides high-current resistance heating, temperature
+  sensing/control, refractory molten-glass containment, cooling where needed, and
+  short-batch holding/pouring support for compatible soda-lime/aluminosilicate,
+  basalt, and selected fused-silica/quartz work when refractory and element
+  temperature ratings are adequate. Does not by itself provide annealing schedules,
+  lampworking/envelope forming, forehearth conditioning, fiber drawing, sheet
+  forming, or precision glass-part tooling; require downstream resources such as
+  annealing_oven_small, glassworking_station, glass_casting_v0, or
+  fiber_drawing_tower where those functions are needed.
 recipe: recipe_machine_glass_furnace_v0
 unit_kind: discrete

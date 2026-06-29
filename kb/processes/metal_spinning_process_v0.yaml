@@ -18,7 +18,7 @@ byproducts:
   qty: 2.0
   unit: kg
 resource_requirements:
-- machine_id: spinning_machine_v0
+- machine_id: metal_spinning_lathe_v0
   qty: 1
   unit: count
 energy_model:
@@ -29,5 +29,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: Spin forming operation converting stainless steel sheet into a cylindrical
-  tank shell; scrap generated as byproduct.
+notes: Spin forming operation converting sheet metal into an axisymmetric tank shell
+  using a metal-spinning lathe, mandrel, tailstock or pressure support, and forming
+  rollers. Nominal 30 kg stainless shell is within the modeled scope. Larger recipe
+  overrides, such as 150 kg cryogenic tank shells, require explicit diameter/thickness
+  checks and may need a dedicated large CNC metal-spinning or flow-forming machine.

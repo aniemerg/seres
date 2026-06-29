@@ -4,8 +4,14 @@ kind: machine
 mass: 600.0
 unit: unit
 capabilities:
-- grinding
-- milling
+- cylindrical_grinding
+- shaft_journal_grinding
+- roll_grinding
+- internal_external_diameter_grinding
+notes: >
+  Cylindrical grinder for round workpieces such as shafts, journals, rollers,
+  bores, and outside diameters. Use surface_grinder for flat surfaces and
+  bearing_grinding_machine_v0 for bearing races or rolling elements.
 bom: bom_grinder_cylindrical_v0
 recipe: recipe_grinder_cylindrical_v0_v0
 unit_kind: discrete

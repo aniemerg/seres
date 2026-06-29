@@ -5,7 +5,20 @@ mass: 100.0
 unit: unit
 material_class: composite
 bom: bom_uv_exposure_unit
-processes_supported: []
-notes: Stub machine created during ADR 003 migration.
+capabilities:
+- pcb_photoresist_uv_exposure
+- mask_contact_exposure
+- timed_uv_illumination
+- photoresist_pattern_transfer
+- shielded_uv_operation
+processes_supported:
+- photolithography_process_simple_v0
+notes: Controlled UV lamp or LED exposure equipment for simple PCB/photoresist
+  photolithography. Provides an enclosed exposure area, timer/controller, UV source,
+  mask-contact surface, and shielding so photoresist-coated copper-clad or similar
+  substrates can be exposed through a mask before development and etching. It is a
+  PCB/photoresist process submodule; development, etching, drilling, plating, and
+  full PCB fabrication remain separate resources or are bundled by pcb_fab_equipment
+  where that broader abstraction is used.
 recipe: recipe_uv_exposure_unit_v0
 unit_kind: discrete

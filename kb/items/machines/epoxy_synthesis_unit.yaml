@@ -5,7 +5,20 @@ mass: 200.0
 unit: unit
 material_class: steel
 bom: bom_epoxy_synthesis_unit
-processes_supported: []
+capabilities:
+- resin_synthesis
+- stirred_reactor_operation
+- feed_metering
+- solvent_recovery
+- wash_separation
+- polymer_precursor_processing
+processes_supported:
+- epoxy_resin_base_synthesis_v0
 recipe: recipe_machine_epoxy_synthesis_unit_v0
-notes: Stub machine created during ADR 003 migration.
+notes: Small epoxy/resin synthesis reactor skid for producing epoxy resin base from
+  precursor chemistry. Includes a corrosion-compatible stirred reactor, metered feed
+  addition, heating/cooling, condenser or simple distillation/solvent-recovery module,
+  wash/separation support, gas/vent handling, temperature controls, pressure relief,
+  and waste/byproduct handling interfaces. Use for epoxy or related resin synthesis,
+  not as a generic chemical reactor for unrelated HCl, sulfide, or mineral chemistry.
 unit_kind: discrete

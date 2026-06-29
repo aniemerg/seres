@@ -5,8 +5,25 @@ mass: 300.0
 unit: unit
 bom: bom_molding_press_basic_v0
 material_class: steel
-notes: Basic molding press for ceramic and powder metallurgy applications. Provides
-  controlled pressure for forming green parts from powder mixtures. Used for producing
-  ceramic tubes, refractory bricks, and sintered metal components.
+capabilities:
+  - compression_molding
+  - plastic_compression_molding
+  - controlled_platen_pressing
+  - basic_mold_clamping
+  - modest_temperature_compression_molding
+notes: |
+  Basic hydraulic platen press for cold or modest-temperature compression molding
+  of simple polymer/plastic shapes and other low-detail molded pieces. Provides
+  controlled platen pressure, mold clamping, and basic controls, but does not by
+  itself provide melt injection, screw plasticization, high-temperature hot pressing,
+  or production powder-compaction die/ejector control.
+
+  Scope: use with pressing_mold_set or part-specific molds where shape matters.
+  This is not a generic shop hydraulic_press, not a stamping press, and not an
+  injection molding machine. Use powder_compactor_v0 for powder/ceramic/metal
+  green compaction and hot_press_v0 where simultaneous high-temperature pressing
+  is required. Rubber, silicone, thermoset, and composite molding that depends on
+  heated platens should be routed to a heated compression-molding resource when
+  that resource is modeled.
 recipe: recipe_molding_press_basic_v0
 unit_kind: discrete

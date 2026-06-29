@@ -19,6 +19,10 @@ resource_requirements:
 - machine_id: hydraulic_press
   qty: 1
   unit: count
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
+  notes: Flat panel mold/fixture to define panel geometry and pressure distribution.
 energy_model:
   type: fixed_per_batch
   value: 0.5
@@ -28,4 +32,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Forming and press cycle
-notes: Form ceramic fiber slurry into panel shape before drying and firing.
+notes: Form ceramic fiber slurry into panel shape before drying and firing using
+  hydraulic_press for force and pressing_mold_set for panel geometry.

@@ -25,7 +25,7 @@ resource_requirements:
 - machine_id: crucible_graphite
   qty: 1
   unit: count
-- machine_id: chemical_separation_equipment
+- machine_id: hydromet_leach_filter_skid_v0
   qty: 1
   unit: count
 energy_model:
@@ -42,6 +42,7 @@ time_model:
   notes: Melting, chemical separation, electrolytic refining (4.0 hr per kg = 0.25
     kg/hr)
 notes: Extraction of nickel from meteoritic iron-nickel alloy. Process involves melting,
-  chemical separation (Mond process or electrolytic), and refining to obtain pure
-  nickel and iron.
+  wet chemical separation/leaching or related hydrometallurgy, and refining to obtain
+  pure nickel and iron. Uses hydromet_leach_filter_skid_v0 rather than the legacy
+  generic chemical separation bundle.
 process_type: continuous

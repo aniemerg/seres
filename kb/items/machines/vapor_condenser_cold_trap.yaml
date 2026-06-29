@@ -4,8 +4,18 @@ kind: machine
 mass: 4.0
 unit: unit
 material_class: metal
-notes: Placeholder cold trap component for capturing condensates in vapor systems;
-  mass and design to be refined.
+capabilities:
+  - vapor_condensation
+  - cold_trap_condensate_capture
+  - volatile_recovery_support
+  - vacuum_vapor_trapping
+  - condenser_coil_cooling
+notes: >
+  Small vapor condenser/cold-trap component for capturing condensates in vapor or
+  vacuum systems. Use as a subsystem in water extraction, ammonia recovery, and
+  vapor transport equipment where vapors must contact a cooled surface and collect
+  as liquid or solid condensate. Larger integrated vapor handling systems should
+  use vapor_capture_system_v0 or cold_trap_module_v0 as appropriate.
 uncertainty:
   distribution: uniform
   min: 2.0

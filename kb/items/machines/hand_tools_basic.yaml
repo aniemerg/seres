@@ -4,8 +4,24 @@ name: Hand tools (basic set)
 mass: 4.1
 unit: unit
 material_class: steel
-notes: Basic hand tool kit (wrenches, screwdrivers, pliers, hammers, measuring tape).
-  Used across assembly and maintenance tasks. Mass updated to match recipe inputs (3.0 kg steel + 1.3 kg fasteners - losses).
+capabilities:
+- basic_manual_fastening
+- basic_manual_adjustment
+- low_precision_setup_support
+- labor_bot_hand_tool_support
+- simple_measurement_and_marking
+notes: Compact reusable manual tool kit for labor_bot_general_v0 support, modeled
+  as a machine resource for simulator scheduling convenience rather than as powered
+  process equipment. Includes ordinary wrenches, screwdrivers, pliers, hammers,
+  measuring tape, and similar low-precision manual tools. Use as a general fallback
+  for simple setup, fastening, marking, alignment, and maintenance support. Distinct
+  from hand_tools_mechanical for robust mechanic/toolroom work, hand_tools_electrical
+  for insulated electrical work, crimping_tool_set or wire_crimping_tools for validated
+  crimps, hydraulic_assembly_tools for hydraulic-service tools, and assembly_tools_basic
+  for a bench or workstation bundle with fixtures and station support. Not a substitute
+  for powered cutting, machining, welding, calibrated torque control, pressure/leak
+  test equipment, or precision metrology. Mass updated to match recipe inputs (3.0
+  kg steel + 1.3 kg fasteners - losses).
 bom: bom_hand_tools_basic_v0
 recipe: recipe_hand_tools_basic_v0
 unit_kind: discrete

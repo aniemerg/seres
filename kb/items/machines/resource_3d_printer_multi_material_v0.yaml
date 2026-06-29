@@ -4,8 +4,18 @@ name: Resource 3D printer multi-material v0
 mass: 180.0
 unit: unit
 bom: bom_resource_3d_printer_multi_material_v0
+capabilities:
+- multi_material_additive_manufacturing
+- modular_toolhead_deposition
+- material_switching_printing
+- embedded_wire_printing
+- powder_deposition_printing
+- binder_dispense_printing
+- polymer_composite_printing
 recipe: recipe_resource_3d_printer_multi_material_v0
 unit_kind: discrete
 notes: >
   Multi-material additive manufacturing platform with modular toolhead interface for
-  wire, powder, and binder deposition.
+  wire, powder, and binder deposition. Use this item where processes require embedded
+  conductors/SMA wires, multiple deposition toolheads, or material switching beyond
+  the canonical single-material FDM/FFF printer.

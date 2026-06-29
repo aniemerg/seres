@@ -5,8 +5,15 @@ mass: 80.0
 unit: unit
 bom: bom_powder_mixer_v0
 material_class: steel
-notes: Powder mixing equipment for blending metal or ceramic powders with binders.
-  Tumbler or ribbon mixer provides homogeneous mixing for powder metallurgy and ceramic
-  forming operations. Used in preparation of feedstock for sintering and pressing.
+capabilities:
+- dry_powder_blending
+- powder_binder_mixing
+- powder_feedstock_preparation
+notes: Small powder blender for metal or ceramic powders, binder/lubricant addition,
+  and powder-metallurgy or ceramic feedstock preparation. Kept distinct from mixer_or_blender
+  where dry powder uniformity, dust containment, contamination control, or cleanout
+  matters; use mixer_or_blender for low-detail generic mixing where material behavior
+  is not central. Tumbler or ribbon mixer provides homogeneous mixing for powder
+  metallurgy and ceramic forming operations.
 recipe: recipe_machine_powder_mixer_v0
 unit_kind: discrete

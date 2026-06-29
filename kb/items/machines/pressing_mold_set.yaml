@@ -4,9 +4,18 @@ name: Pressing mold set
 mass: 30
 unit: unit
 material_class: steel
-notes: Set of precision molds for ceramic and powder pressing operations. Includes
-  mold dies, punches, and ejector components. Used with hydraulic presses to form
-  green ceramics and powder metallurgy parts.
+capabilities:
+- cold_powder_press_tooling
+- green_body_pressing
+- punch_die_cavity_tooling
+- ejector_mold_tooling
+notes: Generic reusable cold powder pressing mold/die set for coarse or low-specificity
+  modeling. Includes mold dies, punches, cavity plates, and ejector components used
+  with hydraulic, pellet, or molding presses; it does not provide pressing force.
+  Use geometry-specific tooling where shape, clearance, ejection, or compaction pressure
+  matters, such as ferrite_toroid_pressing_die_set, brick_mold_steel_set, ceramic_press_or_mold_set,
+  pellet_press_die_set, or the hot-press-scoped dies item for elevated-temperature
+  pressing.
 bom: bom_pressing_mold_set_v0
 recipe: recipe_pressing_mold_set_v0
 unit_kind: discrete

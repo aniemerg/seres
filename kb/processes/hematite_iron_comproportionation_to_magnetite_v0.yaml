@@ -17,7 +17,7 @@ outputs:
   qty: 1.198
   unit: kg
 resource_requirements:
-- machine_id: furnace_high_temp
+- machine_id: furnace_basic
   qty: 1
   unit: count
 - machine_id: labor_bot_general_v0
@@ -33,5 +33,6 @@ time_model:
   hr_per_batch: 1.5
   notes: Thermal reaction hold and cooldown.
 notes: |
-  Explicit representation of reaction 6 in list_of_reactions.md:
+  Explicit representation of reaction 6 in list_of_reactions.md. Modeled as a
+  moderate solid-state conversion using furnace_basic rather than furnace_high_temp:
   4Fe2O3 + Fe -> 3Fe3O4.

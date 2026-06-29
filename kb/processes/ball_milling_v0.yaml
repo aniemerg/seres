@@ -31,5 +31,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 8.0
-notes: Ball milling process for grinding and mixing powders; milling uses a rotating
-  mill with media; ~0.02 kg dust_fines lost per kg input.
+notes: Ball milling process for particle-size reduction and powder homogenization;
+  milling uses ball_mill_v0 with a separate grinding media charge from the machine
+  BOM. Feed should already be coarse powder or pre-crushed material; use powder_mixer
+  instead for blending-only steps with no size reduction. About 0.02 kg dust_fines
+  is lost per kg input.

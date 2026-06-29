@@ -17,7 +17,7 @@ resource_requirements:
 - machine_id: pellet_press
   qty: 1
   unit: count
-- machine_id: pressing_mold_set
+- machine_id: pellet_press_die_set
   qty: 1
   unit: count
 energy_model:
@@ -30,6 +30,10 @@ time_model:
   rate: 15.0
   rate_unit: kg/hr
   scaling_basis: powder_feedstock
-notes: Powder pressing step using pellet_press with pressing mold set; forms green
-  parts. Placeholder values for modeling.
+notes: Powder pressing step using pellet_press with cylindrical pellet die tooling;
+  forms green parts from screened powder feedstock. Assumes die fill, compaction at
+  controlled pressure, short dwell, ejection/demolding, and small-batch throughput
+  rather than continuous roller-die pelletizing. Binder content, exact pellet or
+  part diameter, and downstream drying/sintering/screening are recipe-specific and
+  should be modeled in the recipe that consumes the green parts.
 process_type: continuous

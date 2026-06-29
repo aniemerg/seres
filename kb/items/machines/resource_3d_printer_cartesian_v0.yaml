@@ -3,7 +3,9 @@ kind: machine
 name: Cartesian 3D printer v0
 mass: 120.0
 unit: unit
-bom: bom_resource_3d_printer_cartesian_v0
-notes: Cartesian 3D printer for polymer/embedded SMA printing; coarse mass estimate. Mass in kg, unit_kind discrete per ADR-016/017.
-recipe: recipe_machine_resource_3d_printer_cartesian_v0
+deprecated: true
+replaced_by: 3d_printer_basic_v0
+notes: Deprecated duplicate Cartesian printer. Use 3d_printer_basic_v0 for standard
+  single-material polymer FDM/FFF printing and resource_3d_printer_multi_material_v0
+  for embedded SMA wire, multiple toolheads, or material switching.
 unit_kind: discrete

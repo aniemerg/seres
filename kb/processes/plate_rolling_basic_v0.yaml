@@ -22,18 +22,22 @@ resource_requirements:
 - machine_id: plate_rolling_mill
   qty: 1
   unit: count
+- machine_id: furnace_basic
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.8
   unit: kWh/kg
   scaling_basis: steel_billet_or_slab
-  notes: Rolling mill motor power for deformation and reduction
+  notes: Rolling mill motor power plus separate furnace energy for hot reduction.
 time_model:
   type: linear_rate
   rate: 100.0
   rate_unit: kg/hr
   scaling_basis: steel_billet_or_slab
-notes: Plate rolling process for reducing steel billets or slabs into flat plate or
-  sheet. Multiple passes through rolling mill with controlled reduction per pass.
+notes: Hot plate rolling process for reducing steel billets or slabs into flat plate
+  or sheet. Multiple passes through the plate_rolling_mill use controlled reduction
+  per pass; furnace_basic provides preheat or reheating rather than the mill itself.
 process_type: continuous
 is_template: true

@@ -28,9 +28,6 @@ resource_requirements:
 - machine_id: ball_mill_v0
   qty: 1
   unit: count
-- machine_id: gravity_separator
-  qty: 1
-  unit: count
 - machine_id: centrifugal_separator_v0
   qty: 1
   unit: count
@@ -45,7 +42,7 @@ time_model:
   notes: Grinding, density separation, and drying
 notes: "Extraction of tungsten microparticles from NiFe meteorite material via density\
   \ separation.\nSource: Sustainable-ISRU-on-the-Moon.txt, Lunar-Demandite.txt\nProcess:\
-  \ Grinding + hydrocyclone/centrifugal separation by density\nTungsten density: 19.3\
+  \ Grinding + wet hydrocyclone/centrifugal separation by density\nTungsten density: 19.3\
   \ g/cm³ (vs Fe: 7.87, Ni: 8.91 g/cm³)\nConcentration: 0.1-5 μg/g (0.01-0.5 ppm)\
   \ in NiFe meteorites\nPurpose: Extract critical tungsten for tool steel and thermionic\
   \ cathodes\nProcess details:\n  1. NiFe meteorite residue (after Mond process for\
@@ -71,7 +68,8 @@ notes: "Extraction of tungsten microparticles from NiFe meteorite material via d
   \ (W non-magnetic, separate from Fe/Ni)\n  - Flotation (surface chemistry differences)\n\
   \  - Acid leaching (dissolve Fe/Ni, W remains)\nAdvantages: Uses density difference\
   \ (19.3 vs 8 g/cm³)\n  Simple mechanical separation\n  No chemical reagents (water\
-  \ recycled)\n  Works in lunar gravity (1/6 Earth, but still functional)\nDisadvantages:\
+  \ recycled)\n  Uses centrifugal acceleration rather than relying on a dry gravity\
+  \ table, so it is less sensitive to lunar gravity\nDisadvantages:\
   \ Very low concentration (ppm level)\n  Large mass throughput for small W output\n\
   \  Multiple passes needed\n  Requires fine grinding (energy intensive)\nLunar context:\
   \ Tungsten absolutely critical but extremely scarce\n  No tungsten minerals on Moon\n\

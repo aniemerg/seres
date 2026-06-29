@@ -3,23 +3,19 @@ kind: machine
 name: HelioStat array system v0
 mass: 885.0
 unit: unit
-bom: bom_heliostat_array_system_v0_v0
+deprecated: true
+replaced_by: heliostat_unit_v0
 notes: 'Assumptions:
 
-  - Mass aligned to current BOM component sum (885 kg).
+  - Deprecated by custom queue instruction: solar collection and usage should be
+  modeled as individual solar collecting or using machines rather than array systems.
 
   Rationale:
 
-  - Avoids mass imbalance in recipe assembly step; placeholder until full field scaling.
+  - Use heliostat_unit_v0 with explicit quantity for polar illumination or sunlight
+  redirection.
 
-  Central heliostat array system placeholder entry referenced by seed file.
-
-  Represents a generic heliostat field configured to direct solar energy to a receiver.
-
-  Mass and capabilities are coarse estimates for modeling; detailed subcomponents
-
-  (mirrors, actuators, control systems) are modeled as separate items when defined.
+  Legacy heliostat array system placeholder entry referenced by seed file.
 
   '
-recipe: recipe_heliostat_array_system_v0_v0
 unit_kind: discrete

@@ -17,13 +17,13 @@ byproducts:
   qty: 130.0
   unit: kg
 resource_requirements:
-- machine_id: high_temp_furnace_v0
-  qty: 1
-  unit: count
 - machine_id: carbon_feeder_screw
   qty: 1
   unit: count
 - machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: offgas_handling
   qty: 1
   unit: count
 energy_model:
@@ -36,7 +36,11 @@ time_model:
   rate: 25.0
   rate_unit: kg/hr
   scaling_basis: silica_purified
-notes: Carbothermal synthesis of silicon carbide from purified silica and carbon feed;
-  outputs SiC and CO2-equivalent gas. Placeholder energy/model parameters; refine
+notes: |
+  Carbothermal synthesis of silicon carbide from purified silica and carbon feed;
+  outputs SiC and CO2-equivalent gas. Requires furnace_high_temp, carbon feed,
+  and offgas handling; removed deprecated high_temp_furnace_v0 duplicate
+  requirement. This is ceramic synthesis rather than metal-oxide reduction, so it
+  does not use reduction_furnace_v0. Placeholder energy/model parameters; refine
   with lab data.
 process_type: continuous

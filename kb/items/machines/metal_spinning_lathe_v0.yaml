@@ -1,0 +1,21 @@
+id: metal_spinning_lathe_v0
+kind: machine
+name: Metal spinning lathe v0
+mass: 1516.0
+unit: unit
+material_class: steel
+bom: bom_metal_spinning_lathe_v0
+capabilities:
+- metal_spinning
+- spin_forming
+- tank_shell_spin_forming
+- mandrel_supported_sheet_forming
+- roller_tool_sheet_forming
+notes: Configured metal-spinning lathe cell for forming axisymmetric sheet-metal
+  shells over mandrels. Reuses a precision lathe as the rotating base and adds
+  forming rollers, tailstock or pressure support, hydraulic assist, workholding,
+  guards, and controls. Suitable for modest stainless or aluminum tank shells in
+  current recipes; large cryogenic tank shells require explicit diameter/thickness
+  checks and may need a dedicated large CNC metal spinning or flow-forming machine.
+recipe: recipe_metal_spinning_lathe_v0
+unit_kind: discrete

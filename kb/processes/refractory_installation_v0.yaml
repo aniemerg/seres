@@ -12,16 +12,28 @@ resource_requirements:
 - machine_id: assembly_tools_basic
   qty: 1
   unit: count
+- machine_id: refractory_installation_tools
+  qty: 1
+  unit: count
+- machine_id: cement_mixer_small
+  qty: 1
+  unit: count
+- machine_id: refractory_vibrator
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
   unit: kWh
-  notes: Mixing, vibration/ramming tools, and cure heat.
+  notes: Castable mixing, vibration consolidation, hand-tool use, and initial cure
+    heat.
 time_model:
   type: batch
   hr_per_batch: 1.2
-  notes: Formwork setup, placing/ramming refractory, and initial cure.
+  notes: Formwork setup, castable mixing, hand placement, vibration consolidation,
+    and initial cure.
 process_type: batch
 notes: Install refractory linings/brick in furnaces or kilns; includes surface prep,
-  formwork, placement, and cure. Replace with specific lining system details when
-  available.
+  formwork, hand placement, vibration consolidation, and cure. Uses the separate
+  refractory hand-tool kit, cement_mixer_small, and refractory_vibrator; refractory
+  gunning or dry ramming should be modeled with dedicated equipment if needed.

@@ -5,8 +5,18 @@ mass: 150.0
 unit: unit
 bom: bom_stewart_platform_calibrator_v0
 material_class: steel
+capabilities:
+- six_axis_precision_positioning
+- hexapod_kinematic_calibration
+- optical_alignment_fixture
+- solar_concentrator_focal_alignment
+- receiver_pose_adjustment
+- repeatable_roll_pitch_yaw_control
+- position_feedback_calibration
 notes: Six-axis Stewart platform for precision alignment and calibration. Provides
   controlled positioning in all degrees of freedom for optical alignment tasks. Used
-  for solar concentrator alignment in thermionic systems.
+  for solar concentrator alignment in thermionic systems. Scoped as a calibration
+  and alignment fixture, not a general robot arm, load handler, or production
+  machine-tool stage.
 recipe: recipe_machine_stewart_platform_calibrator_v0
 unit_kind: discrete

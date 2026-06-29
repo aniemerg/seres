@@ -5,8 +5,24 @@ mass: 3.0
 unit: unit
 bom: bom_data_handler_unit_v0
 material_class: electronic
+capabilities:
+  - data_buffering
+  - data_pipeline_handling
+  - error_correction_coding_support
+  - telemetry_packet_processing
+  - sensor_data_interface
+  - storage_interface_management
 processes_supported: []
-notes: Seed data handler unit used in data processing pipelines (e.g., error correction
-  coding). Placeholder until full spec is defined.
+notes: |
+  Seed data handler unit used in data processing pipelines such as error
+  correction coding, buffering, packet formatting, and sensor/telemetry data
+  movement. Placeholder until full electronics and interface specifications are
+  defined.
+
+  Scope is data acquisition/handling support around control or communications
+  systems. Distinct from control_compute_module_imported, which provides general
+  PLC/SBC-style machine control, and from neural_network_training_system_v0 or
+  machine_vision_processing_v0, which model higher-performance ML or image
+  processing workloads.
 recipe: recipe_data_handler_unit_v0
 unit_kind: discrete

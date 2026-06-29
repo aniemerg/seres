@@ -12,18 +12,25 @@ inputs:
 - item_id: photoresist_coated_substrate_v0
   qty: 1.0
   unit: kg
+- item_id: etching_chemicals
+  qty: 0.1
+  unit: kg
+- item_id: water
+  qty: 0.3
+  unit: kg
 outputs:
 - item_id: copper_patterned_substrate_v0
   qty: 1.0
+  unit: kg
+byproducts:
+- item_id: etching_waste_solution
+  qty: 0.1
   unit: kg
 resource_requirements:
 - machine_id: pcb_fab_equipment
   qty: 1
   unit: count
 - machine_id: uv_exposure_unit
-  qty: 1
-  unit: count
-- machine_id: pcb_development_station
   qty: 1
   unit: count
 energy_model:
@@ -34,9 +41,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: 'Photolithography step: UV exposure of photoresist through a mask, followed
-  by development
-
-  to reveal copper traces. This simple process is a sub-step within PCB fabrication.
-
-  '
+notes: Simple PCB-scale photolithography step using UV exposure of photoresist
+  through a mask, development/rinse, and copper etching to reveal coarse copper
+  traces. This is suitable for PCB traces and photolithographic copper coils, not
+  semiconductor wafer or solar-cell cleanroom photolithography. Fine-pitch,
+  multilayer, soldermask, silkscreen, and automated electrical-test capabilities
+  are outside this station scope. pcb_fab_equipment bundles the develop/rinse
+  station for coarse capacity modeling; model pcb_development_station separately
+  only if wet-process capacity becomes a bottleneck.

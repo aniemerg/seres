@@ -6,11 +6,23 @@ unit: unit
 bom: bom_blast_furnace_or_smelter_v0
 material_class: steel
 capabilities:
-- melting
-- high_temperature_processing
-notes: High-temperature furnace for smelting metal from ore or melting scrap. Refractory-lined
-  vessel with forced air or oxygen injection for combustion. Can process iron ore
-  to pig iron, or smelt copper, aluminum, etc. Includes blower system, tapping mechanism,
-  and slag handling.
+- iron_ore_smelting_reduction
+- compact_shaft_smelter_operation
+- forced_air_carbothermal_reduction
+- slag_and_metal_tapping
+- tuyere_air_blast_support
+notes: |
+  Compact refractory-lined shaft/cupola-style smelting furnace for batch iron-ore
+  or ilmenite carbothermal reduction at pilot/foundry scale. Includes or depends
+  on forced-air blast, tuyeres, charging hardware, refractory lining, tapping
+  hardware, cooling, and exhaust/offgas handling.
+
+  Despite the historical ID, this is not a universal blast furnace, aluminum
+  smelter, copper smelter, steel refining furnace, induction remelting furnace, or
+  crucible furnace. Use Hall-Heroult cells for aluminum, refining_furnace_v0 for
+  steel/stainless refining, induction_furnace_v0 or furnace_basic for remelting,
+  and crucible resources for small specialty melts. The current active process
+  use is iron_smelting_reduction_v0; broader furnace-family splits should be done
+  by process family if new references appear.
 recipe: recipe_blast_furnace_or_smelter_v0
 unit_kind: discrete

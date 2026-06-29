@@ -1,11 +1,11 @@
 id: heliostat_array_assembly_v0
 kind: process
-name: HelioStat array assembly (placeholder)
+name: Heliostat unit assembly (legacy id)
 process_type: batch
 is_template: true
 inputs: []
 outputs:
-- item_id: heliostat_array_system_v0
+- item_id: heliostat_unit_v0
   qty: 1.0
   unit: unit
 resource_requirements:
@@ -22,4 +22,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Placeholder assembly process for heliostat array system.
+notes: Legacy process id retained for compatibility; assembles one heliostat_unit_v0.
+  Model fields or arrays as multiple heliostat units by quantity rather than a
+  separate array-system machine.

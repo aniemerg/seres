@@ -41,6 +41,18 @@ inputs:
   - item_id: control_components
     qty: 5.0
     unit: kg
+  - item_id: rover_dust_guard_set_v0
+    qty: 1.2
+    unit: kg
+  - item_id: prospecting_dust_thermal_protection_v0
+    qty: 1.1
+    unit: kg
+  - item_id: sensor_suite_general
+    qty: 5.0
+    unit: kg
+  - item_id: control_compute_module_imported
+    qty: 1.0
+    unit: unit
 outputs:
   - item_id: excavator_basic
     qty: 1.0
@@ -120,13 +132,19 @@ steps:
       - item_id: motor_electric_large
         qty: 300.0
         unit: kg
+      - item_id: sensor_suite_general
+        qty: 5.0
+        unit: kg
+      - item_id: control_compute_module_imported
+        qty: 1.0
+        unit: unit
     outputs:
       - item_id: wired_electrical_system
         qty: 1.0
         unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Wire drive motors, install control system, connect cabin controls"
+    notes: "Wire drive motors, install control system, connect cabin controls, sensors, and imported embedded compute for autonomous operation"
   - process_id: load_testing_and_commissioning_v0
     inputs:
       - item_id: assembled_equipment
@@ -135,12 +153,24 @@ steps:
       - item_id: wired_electrical_system
         qty: 1.0
         unit: unit
+      - item_id: rover_dust_guard_set_v0
+        qty: 1.2
+        unit: kg
+      - item_id: prospecting_dust_thermal_protection_v0
+        qty: 1.1
+        unit: kg
     outputs:
       - item_id: excavator_basic
         qty: 1.0
         unit: unit
     est_time_hr: 8.0
     labor_hours: 8.0
-    notes: "Test all hydraulic functions, verify boom reach and digging force, load test, operator training."
-assumptions: Heavy welded steel construction with electric-hydraulic drive system. Four hydraulic cylinders for boom/stick/bucket/swing. Parts list derived from existing KB components.
-notes: Excavator assembly using existing parts (tracks, boom, bucket, hydraulics, motors) and standard assembly/wiring processes.
+    notes: "Install dust/thermal protection, test all sealed hydraulic functions, verify boom reach and digging force, load test, and commission autonomous controls."
+assumptions: Heavy welded steel construction with electric-hydraulic drive system.
+  Four hydraulic cylinders for boom/stick/bucket/swing. Lunar-adapted variant uses
+  dust guards, thermal protection, sensors, imported embedded control compute, and
+  sealed hydraulic components rather than an unmodified terrestrial mini-excavator.
+notes: Excavator assembly using existing parts (tracks, boom, bucket, hydraulics,
+  motors) and standard assembly/wiring processes. Scope is low-throughput surface
+  regolith excavation; hard rock, polar ice, and subsurface sampling require specialized
+  drilling or excavation resources.

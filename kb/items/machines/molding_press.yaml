@@ -1,14 +1,22 @@
 id: molding_press
 name: Molding press
 kind: machine
+deprecated: true
+replaced_by: molding_press_basic
 mass: 285.0
 mass_kg: 285.0
 unit: unit
-bom: bom_molding_press
 material_class: steel
-notes: Generic molding press referenced by other KB entities; mass aligned to current
-  coarse fabrication recipe. Refine with variants (e.g., molding_press_basic) as needed.
-processes_supported:
-- graphite_molding_v0
-recipe: recipe_molding_press_v1
+capabilities:
+- compression_molding
+- powder_compaction
+- hydraulic_platen_pressing
+- green_body_pressing
+- mold_clamping
+notes: DEPRECATED - Consolidated into molding_press_basic for basic cold or modest-temperature
+  compression molding and green-body pressing. This unversioned alias no longer
+  has active process requirements or a local build route; use pressing_mold_set
+  or part-specific molds separately for geometry/tooling, hot_press_v0 for simultaneous
+  high-temperature pressing, and injection_molding_machine_v0 for melt injection
+  molding.
 unit_kind: discrete

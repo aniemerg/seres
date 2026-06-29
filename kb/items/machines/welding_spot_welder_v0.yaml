@@ -5,6 +5,14 @@ mass: 100.0
 unit: unit
 bom: bom_welding_spot_welder_v0
 material_class: steel
+capabilities:
+- resistance_spot_welding
+- sheet_metal_lap_joint_welding
+- high_current_low_voltage_welding
+- electrode_clamping_force_control
+- weld_nugget_formation
+- thin_sheet_panel_assembly
+- copper_electrode_wear_management
 notes: 'Resistance spot welding machine for joining thin metal sheets and parts.
 
   Source: Identified as missing from paper reviews (mechanical components and fasteners)
@@ -15,6 +23,9 @@ notes: 'Resistance spot welding machine for joining thin metal sheets and parts.
 
   Components: Transformer, electrodes (copper), pneumatic or mechanical actuator,
   frame.
+
+  Scope: complete resistance spot welding machine, distinct from welding_power_supply_v0,
+  welding_tig_unit_v0, arc welding, brazing, and generic welding hand tools.
 
   '
 recipe: recipe_welding_spot_welder_v0

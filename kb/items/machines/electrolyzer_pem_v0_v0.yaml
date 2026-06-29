@@ -1,10 +1,17 @@
 id: electrolyzer_pem_v0_v0
 name: PEM Electrolyzer (v0 v0)
 kind: machine
+deprecated: true
+replaced_by: electrolyzer_pem_v0
 mass: 100.0
 mass_kg: 100.0
 unit: unit
-bom: bom_electrolyzer_pem_v0_v0
+capabilities:
+- water_electrolysis
+- hydrogen_generation
+- oxygen_generation
+- pem_cell_stack_operation
+- gas_separation
 notes: 'PEM electrolyzer variant v0_v0; placeholder BOM to be refined from hardware
   data.
 
@@ -25,6 +32,8 @@ notes: 'PEM electrolyzer variant v0_v0; placeholder BOM to be refined from hardw
 
   Total: ~100 kg
 
+  DEPRECATED - Consolidated into electrolyzer_pem_v0 after transferring the corrected
+  100 kg mass basis and compact housing allowance to the canonical item.
+
   '
-recipe: recipe_electrolyzer_pem_v0_v0
 unit_kind: discrete

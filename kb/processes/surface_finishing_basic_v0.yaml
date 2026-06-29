@@ -19,6 +19,9 @@ resource_requirements:
 - machine_id: surface_grinder
   qty: 1
   unit: count
+- machine_id: polishing_station
+  qty: 1
+  unit: count
 - machine_id: hand_tools_basic
   qty: 1
   unit: count
@@ -30,8 +33,10 @@ time_model:
   type: batch
   hr_per_batch: 1.5
 process_type: batch
-notes: Basic surface finishing operations for functional parts. Includes grinding,
-  sanding, deburring, and light polishing. Achieves adequate surface quality for most
-  applications. Less precise than advanced surface finishing but faster and lower
-  cost.
+notes: >
+  Basic surface finishing operations for functional parts. Includes flat grinding,
+  sanding, deburring, and light polishing. Uses surface_grinder for flat grinding,
+  polishing_station for light polishing, and hand tools for deburring/setup.
+  Geometry-specific round grinding should use cylindrical_grinding_precision_v0 or
+  bearing_grinding_precision_v0.
 is_template: true

@@ -4,8 +4,22 @@ name: Power distribution system
 mass: 100.0
 unit: unit
 material_class: electronic
-notes: Power distribution system for mobile equipment and facilities. Includes breakers,
-  cables, and distribution panels.
+capabilities:
+- low_voltage_power_distribution
+- breaker_panel_distribution
+- cable_harness_power_routing
+- equipment_load_protection
+- branch_circuit_switching
+- mobile_facility_power_distribution
+notes: |
+  Power distribution system for mobile equipment and facilities. Includes breakers,
+  cables, distribution panels, branch-circuit protection, and load-side routing for
+  ordinary equipment and facility loads.
+
+  This item models general low-to-moderate current distribution. Use
+  power_distribution_bus for high-current busbar distribution to industrial loads,
+  and power_conditioning_equipment or specific supplies/inverters for conversion,
+  voltage regulation, or source/load matching.
 bom: bom_power_distribution_v0
 recipe: recipe_power_distribution_v0
 unit_kind: discrete

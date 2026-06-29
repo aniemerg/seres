@@ -1,10 +1,20 @@
 id: wire_crimping_tools
 kind: machine
-name: Wire crimping tools
+name: Wire crimping tool kit
 mass: 5.0
 unit: unit
 bom: bom_wire_crimping_tools_v0
-notes: Hand and pneumatic crimping tools for wire terminals, connectors, and cable
-  assemblies.
+capabilities:
+- low_volume_wire_crimping
+- hand_crimp_tooling
+- pneumatic_crimp_tooling
+- connector_terminal_crimping
+- interchangeable_crimp_die_tooling
+notes: Reusable hand/pneumatic wire crimping tool kit for low-volume wiring
+  integration, connector terminations, and cable assembly. Includes ratcheting or
+  pneumatic crimper frames, interchangeable connector-specific dies, locators, and
+  related hand tooling. This is not a standalone automatic cut-strip-crimp machine
+  or high-volume harness production line; use a separate crimp press or automatic
+  harness machine if throughput requires one.
 recipe: recipe_wire_crimping_tools_v0
 unit_kind: discrete

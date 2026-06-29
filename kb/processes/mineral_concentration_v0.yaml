@@ -21,6 +21,9 @@ resource_requirements:
 - machine_id: magnetic_separator_drum_v0
   qty: 1
   unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.2
@@ -33,6 +36,12 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: crushed_ore
   notes: Throughput including setup and cleanup (0.05 hr per kg = 20 kg/hr)
-notes: Basic mineral concentration using gravity and magnetic separation steps to
-  upgrade crushed ore.
+notes: >
+  Basic mineral concentration using pre-screened feed, dry air-table density
+  separation, and magnetic separation steps to upgrade crushed ore. Screening or
+  size classification must occur before this process if the incoming crushed_ore
+  has a broad particle-size distribution; the gravity separator stage is density
+  separation, not sieving. Lunar operation assumes an enclosed gas loop and dust
+  collection for the dry table, with reduced separation efficiency relative to
+  terrestrial open-air operation.
 process_type: continuous

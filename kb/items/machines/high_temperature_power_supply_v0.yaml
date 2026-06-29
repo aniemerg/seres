@@ -4,6 +4,21 @@ name: High-temperature power supply v0
 mass: 320.0
 unit: unit
 bom: bom_high_temperature_power_supply_v0
-notes: High-current supply for MRE/furnaces; coarse mass estimate.
+capabilities:
+- industrial_process_power
+- high_current_dc_rectification
+- furnace_power_control
+- electrolysis_power_supply
+- high_current_bus_power
+notes: Industrial high-current process power supply for high-temperature electrolysis,
+  resistive/electrode furnace service, refining, and similar process loads. Name is
+  historical; the supply itself is not a hot-zone component. The 320 kg mass includes
+  transformer/rectifier or SCR-converter hardware, power conditioning, bus bars,
+  cooling loop, controls, sensing, enclosure, grounding/insulation, and safety
+  interlocks. Do not use for ordinary electronics testing or bench power; use
+  power_supply_bench for those cases. Keep distinct from
+  ffc_power_supply_controlled_v0 where a process specifically needs tightly regulated
+  low-voltage FFC electrolysis, and from power_supply_dc_high_current for smaller
+  standalone electrolysis or equipment BOMs.
 recipe: recipe_machine_high_temperature_power_supply_v0
 unit_kind: discrete

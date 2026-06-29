@@ -3,11 +3,27 @@ kind: machine
 name: Packed-bed distillation column
 mass: 1200.0
 unit: unit
+material_class: steel
 bom: bom_packed_bed_distillation_v0.yaml
+capabilities:
+- packed_column_vapor_liquid_contact
+- fractional_distillation
+- high_surface_area_packing_separation
+- reflux_column_operation
+- solvent_and_acid_recovery
+- gas_absorption_column_service
+- stripping_and_scrubbing_contact
+- cryogenic_fractionation_support
 notes: 'Seed equipment for packed-bed distillation. This is a placeholder entry derived
   from
 
   seed documentation. Until more data is available, mass and capabilities are approximate.
+
+  Scoped as a packed column/contacting system for vapor-liquid separation,
+  absorption, stripping, reflux, and related distillation services. It is not a
+  catalytic gas-bed reactor by itself; processes requiring catalyst beds,
+  high-temperature gas-solid conversion, or reactive packed beds should use a
+  dedicated reactor resource.
 
   '
 recipe: recipe_packed_bed_distillation_v0

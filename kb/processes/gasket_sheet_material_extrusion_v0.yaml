@@ -15,6 +15,10 @@ resource_requirements:
 - machine_id: plastic_extruder
   qty: 1.0
   unit: unit
+- machine_id: extrusion_downstream_line_basic_v0
+  qty: 1
+  unit: count
+  notes: Sheet cooling/support, puller, cutting, and thickness checks for gasket stock.
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
@@ -29,4 +33,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: plastic_pellets
 notes: Basic extrusion path to form gasket_sheet_material_v0 from plastic pellets
+  using plastic_extruder plus downstream sheet cooling/support, cutting, and thickness
+  checks.
 process_type: continuous

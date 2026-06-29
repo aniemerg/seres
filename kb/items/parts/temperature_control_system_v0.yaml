@@ -4,7 +4,13 @@ kind: machine
 mass: 10.0
 unit: unit
 material_class: electronics
+capabilities:
+- temperature_control
+- thermal_process_control
+- pid_control
 bom: bom_temperature_control_system_v0
-notes: Temp control system for chemical reactor basic BOM bom_chemical_reactor_basic
+notes: Temperature control system for reactor and furnace support. Provides sensing,
+  controller logic, and actuator command integration; heat generation or cooling capacity
+  is supplied by the paired process equipment.
 recipe: recipe_temperature_control_system_v0
 unit_kind: discrete

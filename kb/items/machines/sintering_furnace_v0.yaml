@@ -4,7 +4,20 @@ name: Sintering furnace v0
 mass: 1067.0
 unit: unit
 bom: bom_sintering_furnace_v0
-notes: DEPRECATED - Consolidated into furnace_basic. Furnace for sintering operations;
-  mass aligned to recipe component sum.
+capabilities:
+- powder_sintering
+- ceramic_sintering
+- metal_powder_sintering
+- controlled_ramp_soak_cool
+- high_temperature_sintering
+notes: Legacy dedicated batch sintering furnace abstraction retained for provenance
+  and local manufacturing data. Current active process references have been migrated
+  to furnace_basic for moderate-temperature regolith/hot-pressing/MgO placeholder
+  duties and furnace_high_temp for ferrite, alumina, porcelain, spinel, NdFeB, tungsten,
+  and other high-temperature sintering. Vacuum, inert gas, reducing atmosphere, hot
+  pressing, or clean-hot-zone requirements should be modeled as additional process
+  resources where required. Do not add new process requirements to this item unless
+  a future task reintroduces a specific controlled-atmosphere or vacuum sintering
+  furnace.
 recipe: recipe_machine_sintering_furnace_v0
 unit_kind: discrete

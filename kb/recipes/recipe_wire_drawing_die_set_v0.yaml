@@ -1,32 +1,32 @@
 id: recipe_wire_drawing_die_set_v0
 kind: recipe
-target_item_id: wire_drawing_die_set
+target_item_id: drawing_die_set_basic
 variant_id: v0
 inputs:
   - item_id: tool_steel_high_carbon_v0
-    qty: 2.1
+    qty: 5.1
     unit: kg
   - item_id: metal_part_surface_treated
-    qty: 2.02
+    qty: 5.02
     unit: kg
     notes: "Intermediate for precision grinding"
   - item_id: finished_part_deburred
-    qty: 2.0
+    qty: 5.0
     unit: kg
     notes: "Intermediate for inspection"
 outputs:
-  - item_id: wire_drawing_die_set
+  - item_id: drawing_die_set_basic
     qty: 1
     unit: unit
 steps:
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: tool_steel_high_carbon_v0
-        qty: 2.1
+        qty: 5.1
         unit: kg
     outputs:
       - item_id: machined_part_raw
-        qty: 2.05
+        qty: 5.05
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
@@ -34,11 +34,11 @@ steps:
   - process_id: heat_treat_basic_v0
     inputs:
       - item_id: machined_part_raw
-        qty: 2.05
+        qty: 5.05
         unit: kg
     outputs:
       - item_id: metal_part_surface_treated
-        qty: 2.02
+        qty: 5.02
         unit: kg
     est_time_hr: 2.0
     machine_hours: 2.0
@@ -46,26 +46,26 @@ steps:
   - process_id: precision_grinding_basic_v0
     inputs:
       - item_id: metal_part_surface_treated
-        qty: 2.02
+        qty: 5.02
         unit: kg
     outputs:
       - item_id: finished_part_deburred
-        qty: 2.0
+        qty: 5.0
         unit: kg
     est_time_hr: 3.0
     machine_hours: 3.0
-    notes: "Grind die apertures to precise dimensions for wire reduction"
+    notes: "Grind, lap, and polish die apertures to precise bore geometry and smooth bearing surfaces for wire reduction"
   - process_id: inspection_basic_v0
     inputs:
       - item_id: finished_part_deburred
-        qty: 2.0
+        qty: 5.0
         unit: kg
     outputs:
-      - item_id: wire_drawing_die_set
+      - item_id: drawing_die_set_basic
         qty: 1
         unit: unit
     est_time_hr: 0.5
     labor_hours: 0.5
-    notes: "Verify die aperture dimensions and surface finish"
-assumptions: "Tool steel dies with precision-ground apertures. Multiple sizes for progressive wire reduction."
-notes: "Derives from drawing_die_set_basic_v0 pattern; tailored for wire drawing die set manufacturing."
+    notes: "Verify die aperture dimensions, entrance angle, bearing length, polish, and surface finish"
+assumptions: "Legacy duplicate path for drawing_die_set_basic. Tool steel dies with precision-ground and polished apertures; multiple sizes for progressive wire reduction. Reliable service requires suitable hardened die material, precise bore geometry, lubrication during drawing, and monitoring for wear. High-wear alloys, refractory metals, fine wire, or high-throughput drawing may require carbide, PCD, diamond, or refractory-compatible inserts."
+notes: "Deprecated wire_drawing_die_set manufacturing path retained for provenance and retargeted to drawing_die_set_basic. Active wire drawing processes should use drawing_die_set_basic unless distinct die material or size range is modeled."

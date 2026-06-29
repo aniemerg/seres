@@ -4,20 +4,41 @@ target_item_id: 3d_printer_basic_v0
 variant_id: v0
 inputs:
   - item_id: printer_frame_generic
-    qty: 1.0
-    unit: unit
+    qty: 40.0
+    unit: kg
+  - item_id: gantry_axes_set
+    qty: 15.0
+    unit: kg
   - item_id: extruder_head_basic
-    qty: 1.0
+    qty: 8.0
+    unit: kg
+  - item_id: stepper_motor_v0
+    qty: 3.0
     unit: unit
-  - item_id: power_electronics_module
+  - item_id: belt_and_pulley_set
+    qty: 2.0
+    unit: kg
+  - item_id: lead_screw_assembly
+    qty: 4.0
+    unit: kg
+  - item_id: printer_control_module
+    qty: 12.0
+    unit: kg
+  - item_id: control_circuit_stepper_driver
     qty: 1.0
-    unit: unit
+    unit: kg
+  - item_id: power_conditioning_module
+    qty: 6.0
+    unit: kg
   - item_id: power_supply_low_voltage
     qty: 1.0
     unit: unit
-  - item_id: power_supply_chassis_basic
+  - item_id: sensor_suite_general
+    qty: 5.0
+    unit: kg
+  - item_id: fastener_kit_medium
     qty: 1.0
-    unit: unit
+    unit: kg
 outputs:
   - item_id: 3d_printer_basic_v0
     qty: 1.0
@@ -26,26 +47,74 @@ steps:
   - process_id: assembly_basic_v0
     inputs:
       - item_id: printer_frame_generic
-        qty: 1.0
-        unit: unit
+        qty: 40.0
+        unit: kg
+      - item_id: gantry_axes_set
+        qty: 15.0
+        unit: kg
       - item_id: extruder_head_basic
-        qty: 1.0
+        qty: 8.0
+        unit: kg
+      - item_id: stepper_motor_v0
+        qty: 3.0
         unit: unit
-      - item_id: power_electronics_module
+      - item_id: belt_and_pulley_set
+        qty: 2.0
+        unit: kg
+      - item_id: lead_screw_assembly
+        qty: 4.0
+        unit: kg
+      - item_id: fastener_kit_medium
         qty: 1.0
-        unit: unit
+        unit: kg
+    outputs:
+      - item_id: assembled_equipment
+        qty: 75.0
+        unit: kg
+      - item_id: waste
+        qty: 1.0
+        unit: kg
+    est_time_hr: 20.0
+    labor_hours: 20.0
+    notes: "Assemble printer frame, Cartesian motion system, extruder, motors, belts, lead screw, and hardware."
+  - process_id: wiring_and_electronics_integration_v0
+    inputs:
+      - item_id: assembled_equipment
+        qty: 75.0
+        unit: kg
+      - item_id: printer_control_module
+        qty: 12.0
+        unit: kg
+      - item_id: control_circuit_stepper_driver
+        qty: 1.0
+        unit: kg
+      - item_id: power_conditioning_module
+        qty: 6.0
+        unit: kg
       - item_id: power_supply_low_voltage
         qty: 1.0
         unit: unit
-      - item_id: power_supply_chassis_basic
-        qty: 1.0
-        unit: unit
+      - item_id: sensor_suite_general
+        qty: 5.0
+        unit: kg
+    outputs:
+      - item_id: wired_electrical_system
+        qty: 100.0
+        unit: kg
+    est_time_hr: 8.0
+    labor_hours: 8.0
+    notes: "Install controller, stepper drivers, power system, sensors, limit/probe wiring, and safety wiring."
+  - process_id: calibration_and_test_basic_v0
+    inputs:
+      - item_id: wired_electrical_system
+        qty: 100.0
+        unit: kg
     outputs:
       - item_id: 3d_printer_basic_v0
         qty: 1.0
         unit: unit
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: "Assemble basic 3D printer from frame, extruder, and power components."
-notes: "Assembly-based production path for 3d_printer_basic_v0 using existing BOM components."
-assumptions: "Placeholder assembly route; refine with detailed subassemblies as design matures."
+    notes: "Calibrate axes, extruder, bed leveling/probe behavior, and print a test coupon."
+notes: "Canonical assembly route for the basic Cartesian FDM/FFF printer."
+assumptions: "100 kg enclosed medium-format printer with single-material extrusion. Multi-material or embedded-wire printing uses resource_3d_printer_multi_material_v0."

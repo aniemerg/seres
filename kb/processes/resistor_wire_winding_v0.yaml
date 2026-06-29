@@ -5,7 +5,7 @@ layer_tags:
 - layer_7
 - layer_8
 inputs:
-- item_id: copper_wire_magnet_v0
+- item_id: nichrome_wire
   qty: 0.08
   unit: kg
 - item_id: iron_core_laminated
@@ -16,7 +16,7 @@ outputs:
   qty: 0.1
   unit: kg
 resource_requirements:
-- machine_id: coil_winding_machine_v0
+- machine_id: coil_winding_machine
   qty: 1.0
   unit: unit
 - machine_id: labor_bot_general_v0
@@ -26,11 +26,13 @@ energy_model:
   type: per_unit
   value: 0.8
   unit: kWh/kg
-  scaling_basis: copper_wire_magnet_v0
+  scaling_basis: nichrome_wire
 time_model:
   type: linear_rate
   rate: 0.5
   rate_unit: kg/hr
-  scaling_basis: copper_wire_magnet_v0
-notes: Placeholder resistor winding using coil winding machinery; produces resistor_wire_wound_v0.
+  scaling_basis: nichrome_wire
+notes: Placeholder resistor winding using the canonical coil winding machine. Uses
+  resistance wire on a core/form; recipes should add insulation coating, terminations,
+  and curing or stabilization where required.
 process_type: continuous

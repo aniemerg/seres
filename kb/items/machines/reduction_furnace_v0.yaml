@@ -6,14 +6,27 @@ unit: unit
 material_class: refractory
 bom: bom_reduction_furnace_v0
 capabilities:
-- reduction_furnace
-- carbothermal_reduction
-- metal_oxide_reduction
-- high_temp_processing
-notes: "Assumptions:\n- Mass aligned to current recipe component sum (1019.5 kg).\n\
-  High-temperature reduction furnace for metal oxide reduction processes.\nOperating\
-  \ temperature: 1200-1600\xB0C\nApplications: Ilmenite reduction, silicon purification,\
-  \ stainless steel refining\nRefractory-lined chamber with electric or solar-thermal\
-  \ heating\n"
+- controlled_atmosphere_oxide_reduction
+- batch_reduction_furnace
+- hydrogen_reduction
+- carbon_monoxide_reduction
+- methane_reductant_processing
+- carbothermal_metal_oxide_reduction
+- reductant_gas_handling
+- offgas_manifold_collection
+- pilot_scale_metal_oxide_reduction
+notes: |
+  Assumptions:
+  - Mass aligned to current recipe component sum (1019.5 kg).
+  - Compact/pilot-scale controlled-atmosphere reduction furnace for metal-oxide
+    and silicate reduction processes at roughly 1200-1600 C.
+  - Includes refractory hot zone, high-temperature electric heating, reductant gas
+    handling, offgas manifold collection, cooling, and temperature control.
+  - Intended for batch H2/CO/methane and small carbothermal reduction routes such
+    as ilmenite, magnesium oxide, and silicon purification intermediates.
+  - Not a generic high-temperature furnace, steel refining/melting furnace,
+    DRI shaft furnace, rotary kiln, or solar carbothermal receiver. Use
+    furnace_high_temp, refining_furnace_v0, solar_concentrator_fresnel_v0, and
+    dedicated gas/offgas resources for those routes as appropriate.
 recipe: recipe_machine_reduction_furnace_v0
 unit_kind: discrete

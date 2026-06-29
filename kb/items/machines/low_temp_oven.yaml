@@ -6,7 +6,15 @@ mass_kg: 300.0
 unit: unit
 bom: bom_low_temp_oven_v0
 power_draw_kW: 5.0
+capabilities:
+  - low_temperature_heating
+  - battery_component_drying
+  - electrode_paste_curing
+  - controlled_warm_air_hold
+  - moisture_removal_oven
 notes: Low-temperature oven used for preliminary battery component processing (Ni-Fe
-  seed). Insulated enclosure, simple temperature control.
+  seed). Insulated enclosure, simple temperature control, and forced/warm air
+  drying or curing in the same low-temperature class as drying_oven. Not intended
+  for annealing, kiln firing, sintering, or high-temperature heat treatment.
 recipe: recipe_machine_low_temp_oven_v0
 unit_kind: discrete

@@ -5,9 +5,6 @@ inputs:
   - item_id: molten_material_or_preform
     qty: 30.0
     unit: kg
-  - item_id: sand_casting_flask_set
-    qty: 1.0
-    unit: unit
   - item_id: casting_mold_set
     qty: 1.0
     unit: unit
@@ -21,9 +18,6 @@ steps:
       - item_id: molten_material_or_preform
         qty: 30.0
         unit: kg
-      - item_id: sand_casting_flask_set
-        qty: 1.0
-        unit: unit
       - item_id: casting_mold_set
         qty: 1.0
         unit: unit
@@ -33,7 +27,7 @@ steps:
         unit: kg
     est_time_hr: 6.0
     machine_hours: 6.0
-    notes: "Cast copper or steel tuyere body and nozzle"
+    notes: "Cast copper or steel tuyere body and nozzle. sand_casting_flask_set is supplied as reusable process tooling by sand_casting_medium_v0, not consumed as recipe input."
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: sand_casting_medium_v0

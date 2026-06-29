@@ -1,11 +1,27 @@
 id: gravity_separator
 kind: machine
-name: Gravity separator
+name: Dry air-table gravity separator
 mass: 180.0
 unit: unit
 bom: bom_gravity_separator_v0
 material_class: steel
-notes: Gravity-based separator (shaking table or air table) for density-based separation
-  of particulates.
+capabilities:
+  - dry_density_separation
+  - air_table_separation
+  - vibratory_density_separation
+  - mineral_concentration
+notes: |
+  Dry air-table gravity separator for density-based separation of pre-sized
+  particulates. The unit uses vibration plus controlled gas flow through a deck to
+  stratify heavy and light fractions.
+
+  Scope: dry, coarse-to-medium particulate beneficiation where the feed has already
+  been crushed and screened. This is not screening equipment; particle-size
+  classification remains a separate upstream step. Wet slurry methods, jigs,
+  spirals, and hydrocyclone/centrifugal concentration should use more specific
+  equipment such as centrifugal_separator_v0.
+
+  Lunar constraint: operation needs an enclosed/pressurized gas loop and dust
+  collection because free air-table separation is not directly available in vacuum.
 recipe: recipe_gravity_separator_v0
 unit_kind: discrete

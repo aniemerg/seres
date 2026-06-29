@@ -32,6 +32,9 @@ resource_requirements:
   - machine_id: gravity_separator
     qty: 1
     unit: count
+  - machine_id: dust_collection_system
+    qty: 1
+    unit: count
 energy_model:
   type: fixed_per_batch
   value: 9.0
@@ -44,4 +47,7 @@ time_model:
 notes: >
   Post-reduction liquation-separation route for Fe/TiO2 phase split from reduced
   ilmenite residue using thermal conditioning and staged physical separation.
-
+  Magnetic and centrifugal separation perform the primary phase split; the dry
+  air-table gravity separator is a cleanup stage for pre-sized solid fractions,
+  distinct from screening/classification. Lunar use assumes enclosed dry handling
+  and dust collection around the table.

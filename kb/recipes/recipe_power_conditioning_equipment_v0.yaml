@@ -64,8 +64,11 @@ steps:
     est_time_hr: 9.0
     machine_hours: 2.0
     labor_hours: 7.0
-    notes: "Fabricate electrical enclosure, wire inverter module/voltage regulator/capacitor bank/transformer, mount components in enclosure, install cooling fans and cable entries, test power conditioning under load, verify voltage regulation and conversion"
-assumptions: Inverter module and control electronics imported. Transformer and enclosure fabricated locally.
+    notes: "Fabricate electrical enclosure, wire inverter module/voltage regulator/capacitor bank/transformer, mount components in enclosure, install cooling fans and cable entries, test power conditioning under load, verify voltage regulation and optional DC-AC conversion"
+assumptions: Inverter module and control electronics imported. Transformer and enclosure fabricated locally. Cabinet rating is roughly 5 kW continuous with short surge capacity; exact voltage range is process-specific.
 notes: |
-  Power conditioning equipment for solar power integration with imported electronics.
+  Power conditioning equipment for generic facility regulation and commissioning
+  with imported electronics. Use inverter_dc_to_ac_v0 for explicit PV DC-to-AC
+  conversion and thermionic_power_conditioning_unit_v0 for thermionic converter
+  source/load matching.
   Mass balance: fastener_kit_medium increased to 3 kg to match 80 kg output mass.

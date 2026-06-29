@@ -20,7 +20,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: induction_forge_v0
+- machine_id: induction_furnace_v0
   qty: 1
   unit: count
 - machine_id: casting_mold_set
@@ -34,4 +34,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: Cast small machine frame (10 kg) from ISRU iron. Used for robot base structure.
+notes: Cast small machine frame (10 kg) from ISRU iron using an induction furnace
+  for melt/alloy duty. Used for robot base structure. Requires a frame-specific
+  pattern, cores, and gating/risering design within the casting tooling set; generic
+  mold tooling alone is not sufficient.

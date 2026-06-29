@@ -23,13 +23,11 @@ resource_requirements:
 - machine_id: high_temperature_power_supply_v0
   qty: 1
   unit: count
-- machine_id: reduction_furnace_v0
+  notes: Furnace/electrode power-controller duty for refining heat, not DC bench supply.
+- machine_id: refining_furnace_v0
   qty: 1
   unit: count
-- machine_id: casting_furnace_v0
-  qty: 1
-  unit: count
-- machine_id: casting_mold_set
+- machine_id: ingot_mold_set
   qty: 1
   unit: count
 energy_model:
@@ -41,5 +39,8 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Melt, refine, and cast billet/slab; batch cycle includes heat-up and tap.
-notes: Refines stainless steel ingot into stainless billet or slab; adaptable to ISRU
-  feedstocks.
+notes: |
+  Refines stainless steel ingot into stainless billet or slab using simple stock
+  molds; adaptable to ISRU feedstocks. Uses refining_furnace_v0 for
+  melting/refining; reduction_furnace_v0 is intentionally not required for this
+  non-oxide-reduction route.

@@ -28,7 +28,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: high_temp_furnace_v0
+- machine_id: reduction_furnace_v0
   qty: 1
   unit: count
 - machine_id: gas_handling_loop_v0
@@ -79,6 +79,9 @@ notes: 'Carbothermal reduction of pyroxene minerals using methane as reductant.
   Performance: Significantly better than hydrogen reduction
 
   Suitable for bulk regolith processing in mare regions
+
+  Resource route: uses reduction_furnace_v0 as the controlled methane-reductant hot
+  zone, with gas_handling_loop_v0 for CO/H2/methane recycle and product separation.
 
   '
 process_type: batch

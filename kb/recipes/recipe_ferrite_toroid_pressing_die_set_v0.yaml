@@ -1,0 +1,62 @@
+id: recipe_ferrite_toroid_pressing_die_set_v0
+kind: recipe
+target_item_id: ferrite_toroid_pressing_die_set
+variant_id: v0
+inputs:
+  - item_id: tool_steel_high_carbon_v0
+    qty: 12.5
+    unit: kg
+outputs:
+  - item_id: ferrite_toroid_pressing_die_set
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: tool_steel_high_carbon_v0
+        qty: 12.5
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 12.2
+        unit: kg
+    est_time_hr: 5.0
+    machine_hours: 5.0
+    notes: Machine annular die body, center pin, punches, and ejector components.
+  - process_id: heat_treat_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 12.2
+        unit: kg
+    outputs:
+      - item_id: metal_part_surface_treated
+        qty: 12.1
+        unit: kg
+    est_time_hr: 2.0
+    machine_hours: 2.0
+    notes: Harden and temper die components for wear resistance.
+  - process_id: precision_grinding_basic_v0
+    inputs:
+      - item_id: metal_part_surface_treated
+        qty: 12.1
+        unit: kg
+    outputs:
+      - item_id: finished_part_deburred
+        qty: 12.0
+        unit: kg
+    est_time_hr: 3.0
+    machine_hours: 3.0
+    notes: Grind cavity, punch, and center-pin surfaces for toroid geometry and release.
+  - process_id: inspection_basic_v0
+    inputs:
+      - item_id: finished_part_deburred
+        qty: 12.0
+        unit: kg
+    outputs:
+      - item_id: ferrite_toroid_pressing_die_set
+        qty: 1.0
+        unit: unit
+    est_time_hr: 0.5
+    labor_hours: 0.5
+    notes: Verify annular dimensions, fit, and ejector motion.
+notes: Fabrication route for geometry-specific ferrite toroid press tooling.

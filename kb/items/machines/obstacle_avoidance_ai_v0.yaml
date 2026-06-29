@@ -4,11 +4,21 @@ name: Obstacle avoidance AI module v0
 mass: 1.0
 unit: unit
 bom: bom_obstacle_avoidance_ai_v0_v0
+capabilities:
+- rover_sensor_data_fusion
+- obstacle_detection
+- local_path_planning
+- collision_avoidance_decision_support
+- terrain_hazard_classification
+- real_time_navigation_control
 notes: 'Real-time obstacle avoidance AI module intended to run on the rover''s control
   stack.
 
-  Placeholder mass and capabilities; refined values can be added as more data becomes
-  available.
+  Embedded compute/software module for interpreting rover sensor data and issuing
+  local navigation or collision-avoidance decisions. It does not provide cameras,
+  lidar, mobility, braking, steering, or rover actuation capability without the
+  corresponding physical rover sensors and drive systems. Refined values can be
+  added as more data becomes available.
 
   '
 recipe: recipe_obstacle_avoidance_ai_v0_v0

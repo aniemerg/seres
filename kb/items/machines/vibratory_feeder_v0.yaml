@@ -3,7 +3,15 @@ kind: machine
 name: Vibratory feeder v0
 mass: 240.0
 unit: unit
+material_class: steel
 bom: bom_vibratory_feeder_v0
+capabilities:
+- bulk_granular_feed_metering
+- regolith_powder_feed_control
+- vibratory_trough_conveying
+- continuous_separator_feed
+- sinterer_feed_metering
+- variable_rate_material_delivery
 notes: 'Mass updated 2026-01 from 320 kg to 240 kg based on BOM component analysis.
 
   Component total: feeder_trough (60) + vibration_motor_set (40) + support_frame_welded
@@ -16,6 +24,10 @@ notes: 'Mass updated 2026-01 from 320 kg to 240 kg based on BOM component analys
 
 
   Vibratory feeder for metering material; coarse mass estimate.
+
+  Bulk-material trough/pan feeder for controlled metering of regolith powder or
+  other granular feedstock into separators, screens, or sintering equipment. This
+  item is not a small-parts bowl feeder and does not sort or orient discrete parts.
 
   '
 recipe: recipe_machine_vibratory_feeder_v0

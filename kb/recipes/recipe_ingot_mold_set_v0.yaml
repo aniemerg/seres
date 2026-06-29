@@ -1,0 +1,64 @@
+id: recipe_ingot_mold_set_v0
+kind: recipe
+target_item_id: ingot_mold_set
+variant_id: v0
+inputs:
+  - item_id: steel_plate_or_sheet
+    qty: 60.0
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  - item_id: bulk_material_or_parts
+    qty: 25.0
+    unit: kg
+outputs:
+  - item_id: ingot_mold_set
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: cutting_basic_v0
+    inputs:
+      - item_id: steel_plate_or_sheet
+        qty: 60.0
+        unit: kg
+    outputs:
+      - item_id: cut_parts
+        qty: 58.0
+        unit: kg
+    est_time_hr: 1.5
+    machine_hours: 1.5
+    notes: Cut mold plates, simple rod channels, and clamp pieces.
+  - process_id: machining_finish_basic_v0
+    inputs:
+      - item_id: cut_parts
+        qty: 58.0
+        unit: kg
+      - item_id: bulk_material_or_parts
+        qty: 25.0
+        unit: kg
+    outputs:
+      - item_id: machined_part_raw
+        qty: 79.0
+        unit: kg
+    est_time_hr: 4.0
+    machine_hours: 4.0
+    notes: Machine simple cavities, draft, vents, and mating surfaces.
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: machined_part_raw
+        qty: 79.0
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: ingot_mold_set
+        qty: 1.0
+        unit: unit
+    est_time_hr: 1.0
+    labor_hours: 1.0
+    notes: Assemble and inspect reusable ingot, billet, and rod molds.
+assumptions: Simple reusable mold tooling for stock shapes; not a substitute for
+  part-specific patterns or permanent molds.
+notes: Fabricates an ingot mold set for low-geometry metal stock casting.

@@ -20,7 +20,7 @@ outputs:
   qty: 0.45
   unit: kg
 resource_requirements:
-- machine_id: chemical_reactor_basic
+- machine_id: acid_reactor_v0
   qty: 1
   unit: count
 - machine_id: labor_bot_general_v0
@@ -38,4 +38,5 @@ time_model:
 notes: |
   Explicit representation of reaction 17 neutralization route:
   NaOH + HCl -> NaCl + H2O.
-
+  Uses acid-resistant reactor service because concentrated HCl handling and
+  neutralization heat are outside the ordinary basic stirred reactor envelope.

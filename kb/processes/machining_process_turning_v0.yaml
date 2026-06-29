@@ -9,6 +9,10 @@ inputs:
 - item_id: rough_part
   qty: 0.08
   unit: kg
+- item_id: cutting_fluid
+  qty: 0.01
+  unit: kg
+  notes: Coolant/lubricant for precision turning and tool life
 outputs:
 - item_id: machined_steel_part_precision
   qty: 0.075
@@ -21,6 +25,12 @@ resource_requirements:
 - machine_id: precision_lathe
   qty: 1
   unit: count
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
+- machine_id: measurement_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.02
@@ -29,5 +39,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Turning operation to convert rough part into precision machined part. Chips
-  produced as waste.
+notes: Turning operation to convert rough part into precision machined part. Uses
+  precision tooling, coolant, and shop metrology for setup and verification; route
+  tighter roundness or finish requirements to grinding/lapping. Chips are produced
+  as waste.

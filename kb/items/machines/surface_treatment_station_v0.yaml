@@ -5,16 +5,20 @@ mass: 263.0
 unit: unit
 capabilities:
 - surface_treatment
-- coating
-- inspection
+- wet_chemical_cleaning
+- etching
+- pickling
+- passivation
+- coating_prep
 bom: bom_surface_treatment_station_v0_v0
 notes: 'Assumptions:
 
   - Mass aligned to current BOM component sum (263 kg).
 
-  Seed surface treatment station to resolve no_recipe gap. Placeholder mass and
-
-  capabilities; refine BOM and specs later.
+  Seed compact wet-chemical surface-treatment station for cleaning, etching, pickling,
+  passivation, and coating preparation. Do not use this item for paint, epoxy, powder
+  coating, spray coating, curing/drying, or photoresist spin coating; use dedicated
+  coating, oven, or spin-coating resources for those steps.
 
   '
 recipe: recipe_surface_treatment_station_v0

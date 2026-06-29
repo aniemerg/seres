@@ -16,7 +16,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: furnace_high_temp
+- machine_id: drying_oven
   qty: 1
   unit: count
 energy_model:
@@ -28,5 +28,6 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: batch drying cycle for material conditioning
-notes: Generic drying/conditioning step; placeholder temperature/time.
+notes: Generic low-temperature drying/conditioning step; uses drying_oven rather
+  than furnace_high_temp because drying/curing is normally 50-300°C.
 is_template: true

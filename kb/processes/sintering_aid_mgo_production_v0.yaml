@@ -10,7 +10,7 @@ outputs:
   qty: 100.0
   unit: kg
 resource_requirements:
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_basic
   qty: 1
   unit: count
 energy_model:
@@ -21,5 +21,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: 'Placeholder production path: convert MgO to sintering_aid_mgo for modeling.'
+notes: 'Placeholder production path: convert MgO to sintering_aid_mgo for modeling.
+  Uses furnace_basic because no high-temperature, vacuum, or clean-hot-zone requirement
+  is specified.'
 process_type: batch

@@ -4,6 +4,22 @@ kind: machine
 mass: 25.0
 unit: unit
 bom: bom_power_electronics_module_v0
-notes: Power electronics module for analog neural bench circuit; handles regulation
-  and distribution
+capabilities:
+- low_medium_power_conversion
+- voltage_regulation
+- power_distribution_control
+- motor_or_actuator_drive_interface
+- heat_sunk_power_switching
+- embedded_power_management
+notes: |
+  Reusable low/medium-power electronics module for machine cabinets, test benches,
+  analog/neural hardware, motor-drive interfaces, and regulated power distribution.
+  Covers PCB-mounted switching/regulation electronics, heat sinks, protection, and
+  control interfaces.
+
+  This is a submodule/component-level resource despite the machine path used by
+  some legacy data. It is not a complete bench power supply, high-current
+  electrolysis supply, welding supply, high-temperature process-power cabinet, or
+  facility power-conditioning system; use the dedicated power-supply or
+  power-conditioning items for those roles.
 unit_kind: discrete

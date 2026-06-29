@@ -4,5 +4,16 @@ name: Thermionic Power Generator
 mass: 350.0
 unit: unit
 bom: bom_thermionic_generator_v0
-notes: Thermionic emission-based power generation system.
+material_class: composite
+capabilities:
+- thermionic_power_generation
+- thermal_to_electric_generation
+- dc_power_generation
+- heat_rejection_integration
+- power_conditioning_integration
+notes: Assembled thermionic power generator package using multiple thermionic converter
+  modules, heat rejection, wiring, and power conditioning. Distinct from thermionic_converter_v0,
+  which models the converter array/module itself, and from full solar thermionic power
+  systems that also include concentrators or external heat-source infrastructure.
+recipe: recipe_thermionic_generator_v0
 unit_kind: discrete

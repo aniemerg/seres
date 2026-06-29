@@ -8,9 +8,16 @@ material_class: steel
 capabilities:
 - hydraulic_power
 - fluid_power
-notes: Basic hydraulic power unit providing pressurized hydraulic fluid. Includes
-  hydraulic pump, reservoir, motor, filtration, pressure relief valve, and controls.
-  Supplies hydraulic power to actuators, presses, and mobile equipment. Various pressure
-  and flow ratings.
+- pressurized_hydraulic_flow
+- hydraulic_power_pack
+- valve_manifold_supply
+- pressure_relief_protection
+notes: Basic hydraulic power pack/subassembly that converts electric motor power into
+  pressurized hydraulic fluid flow. Includes reservoir, hydraulic pump, motor, valve
+  manifold, relief valve, filtration/ports through the manifold, power terminals,
+  fasteners, and basic controls. Supplies hydraulic power to cylinders, presses,
+  clamps, drilling equipment, mobile equipment, and configured tooling cells, but
+  is not itself a hydraulic press or actuator. Keep separate from hydraulic_press
+  and other hydraulic machines so multiple machine BOMs can reuse the same HPU model.
 recipe: recipe_hydraulic_power_unit_basic_v0
 unit_kind: discrete

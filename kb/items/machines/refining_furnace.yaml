@@ -6,6 +6,22 @@ unit: unit
 material_class: steel
 bom: bom_refining_furnace
 processes_supported: []
-notes: Stub machine created during ADR 003 migration.
+capabilities:
+- steel_scrap_refining
+- molten_metal_refining
+- electric_refining_heat
+- refractory_melt_holding
+- slag_separation_support
+- alloy_cleanup_and_homogenization
+notes: |
+  Refractory-lined electric refining furnace for remelting and refining steel scrap
+  or crude metal into cleaner casting/forming feedstock. Provides controlled high
+  heat, refractory containment, temperature control, melt holding, slag separation
+  support, and alloy cleanup/homogenization at coarse KB fidelity.
+
+  Distinct from reduction_furnace_v0 for ore/oxide reduction chemistry,
+  blast_furnace_or_smelter for carbothermal iron smelting, furnace_basic for
+  moderate generic heating, glass_furnace_v0 for glass melts, and induction_furnace_v0
+  for alloy remelting where induction-specific service is required.
 recipe: recipe_refining_furnace_v1
 unit_kind: discrete

@@ -1,11 +1,23 @@
 id: pyrolysis_chamber_v0
 kind: machine
-name: Pyrolysis chamber v0
+name: Methane pyrolysis reactor v0
 mass: 120.0
 unit: unit
 material_class: ceramic
 bom: bom_pyrolysis_chamber_v0
 recipe: recipe_pyrolysis_chamber_v0
-notes: "High-temperature reactor vessel (800-1200\xB0C) for thermal decomposition\
-  \ of methane into hydrogen and carbon. Assembled from BOM components."
+capabilities:
+- methane_thermal_pyrolysis
+- refractory_lined_gas_reactor
+- high_temperature_residence_time_control
+- carbon_deposition_tolerant_hot_zone
+- sealed_methane_feed_reactor
+notes: "Small experimental or pilot thermal methane pyrolysis reactor operating around\
+  \ 800-1200\xB0C for decomposition of methane into hydrogen and solid carbon. Includes\
+  \ a refractory-lined hot zone, electrical heating, temperature control, gas feed\
+  \ seals, product takeoff ports, and basic safety interlocks. The ID is retained\
+  \ for compatibility, but current scope is methane pyrolysis rather than a generic\
+  \ polymer, mineral, or waste pyrolysis chamber. Use separate gas handling, purge,\
+  \ carbon collection, filtering, hydrogen handling, and exhaust cleanup resources\
+  \ for complete process modeling."
 unit_kind: discrete

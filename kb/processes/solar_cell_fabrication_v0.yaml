@@ -28,13 +28,13 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: pcb_fab_equipment
-  qty: 1
-  unit: count
 - machine_id: chemical_bath_station
   qty: 1
   unit: count
 - machine_id: controlled_atmosphere_chamber
+  qty: 1
+  unit: count
+- machine_id: spin_coating_station_v0
   qty: 1
   unit: count
 energy_model:
@@ -51,6 +51,12 @@ notes: 'Placeholder solar cell fabrication from single-crystal silicon ingot.
   Includes wafer slicing, phosphorus doping, front/back metallization,
 
   anti-reflective coating (silicon nitride), and inspection.
+
+  PCB fab equipment is not used here: solar-cell wafer patterning and metallization
+  require cleaner wafer handling, spin coating/coating equipment, chemical baths,
+  and controlled-atmosphere thermal processing. Future refinement should split a
+  dedicated solar-cell or semiconductor photolithography/metallization station if
+  capacity, cleanliness, or yield needs to be modeled.
 
   '
 process_type: batch

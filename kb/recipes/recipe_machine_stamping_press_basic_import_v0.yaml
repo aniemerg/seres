@@ -43,7 +43,7 @@ steps:
     est_time_hr: 3.0
     machine_hours: 3.0
     labor_hours: 1.5
-    notes: "Cut steel plate for press frame, base, platen, and cylinder mounts"
+    notes: "Cut steel plate for press frame, base, guided platen, and cylinder mounts"
   - process_id: welded_fabrication_basic_v0
     inputs:
       - item_id: cut_parts
@@ -62,7 +62,7 @@ steps:
     est_time_hr: 6.0
     machine_hours: 4.0
     labor_hours: 4.0
-    notes: "Weld C-frame structure, base, platen supports, and hydraulic cylinder mounts"
+    notes: "Weld C-frame/gap-frame structure, base, platen supports, and hydraulic cylinder mounts"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
@@ -78,7 +78,7 @@ steps:
     est_time_hr: 4.0
     machine_hours: 3.0
     labor_hours: 2.0
-    notes: "Machine platen surfaces flat, drill mounting holes, machine guide surfaces"
+    notes: "Machine platen surfaces flat, drill die mounting holes, and machine guide surfaces for repeatable stroke alignment"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: machined_part_raw
@@ -109,10 +109,14 @@ steps:
     est_time_hr: 8.0
     labor_hours: 6.0
     machine_hours: 2.0
-    notes: "Mount hydraulic cylinder to frame, install hydraulic pump and power unit, connect piping and valves, wire control panel, fill and bleed hydraulic system, set relief valves, test press under load. Assembly scrap from hydraulic fluid, packaging, wire trimming, and commissioning waste."
+    notes: "Mount hydraulic cylinder to frame, install hydraulic pump and power unit, connect piping and valves, wire control panel, align ram/platen guides, fill and bleed hydraulic system, set relief valves, test repeatable die-guided stroke under load. Assembly scrap from hydraulic fluid, packaging, wire trimming, and commissioning waste."
 notes: |
   Assumptions:
   - Use machined_part_raw as generic machined frame output in lieu of a dedicated machined_press_frame item.
   Rationale:
   - Resolve referenced_only for machined_press_frame while keeping mass flow intact.
 assumptions: "Small/medium hydraulic stamping press with C-frame construction. Frame accounts for majority of mass (1020 kg). Hydraulic cylinder (120 kg), pump (25 kg), valves/piping (11 kg), control panel (15 kg). Total input 1176 kg yields 1000 kg press + 176 kg waste. Removed redundant steel_stock input and duplicate hydraulic assembly steps."
+scope_notes: >
+  Builds the basic press frame, hydraulic drive, guided platen, and controls.
+  Interchangeable dies, automated sheet feeders, stackers, and scrap conveyors are
+  outside this recipe and should be modeled separately when needed.

@@ -1,7 +1,7 @@
 id: recipe_heliostat_array_system_v0_v0
 kind: recipe
 name: Recipe for heliostat array system v0
-target_item_id: heliostat_array_system_v0
+target_item_id: heliostat_unit_v0
 variant_id: v0
 inputs:
   - item_id: heliostat_frame_v0
@@ -20,7 +20,7 @@ inputs:
     qty: 4.0
     unit: unit
 outputs:
-  - item_id: heliostat_array_system_v0
+  - item_id: heliostat_unit_v0
     qty: 1.0
     unit: unit
 steps:
@@ -42,7 +42,8 @@ steps:
         qty: 4.0
         unit: unit
     outputs:
-      - item_id: heliostat_array_system_v0
+      - item_id: heliostat_unit_v0
         qty: 1.0
         unit: unit
-notes: Placeholder recipe linking to assembly process for heliostat array system.
+notes: Legacy recipe id retained but retargeted to one heliostat_unit_v0. Processes
+  should model multiple units by quantity instead of using a heliostat array machine.

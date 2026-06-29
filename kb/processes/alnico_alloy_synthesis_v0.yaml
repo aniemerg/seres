@@ -23,12 +23,14 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: casting_furnace_v0
+- machine_id: induction_furnace_v0
   qty: 1
   unit: count
 - machine_id: crucible_refractory
   qty: 1
   unit: count
+  notes: Alloy-compatible ceramic/SiC crucible placeholder for Al-Ni-Co-Fe melt;
+    carbon pickup and oxide contamination should be checked in a detailed route.
 energy_model:
   type: fixed_per_batch
   value: 8.0

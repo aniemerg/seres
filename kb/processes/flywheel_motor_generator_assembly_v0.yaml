@@ -56,6 +56,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: lifting_equipment
+  qty: 1
+  unit: count
+  notes: 379.5 kg final assembly requires rated hoist support for safe positioning.
 energy_model:
   type: fixed_per_batch
   value: 15.0
@@ -65,4 +69,5 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Placeholder assembly time for flywheel_motor_generator_v0
-notes: Assemble flywheel_motor_generator_v0 from BOM components; placeholder timing/energy.
+notes: Assemble flywheel_motor_generator_v0 from BOM components with hoist-assisted
+  handling for the 379.5 kg final assembly; placeholder timing/energy.

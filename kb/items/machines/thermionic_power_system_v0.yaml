@@ -5,6 +5,13 @@ mass: 373.0
 unit: unit
 bom: bom_thermionic_power_system_v0
 material_class: steel
+capabilities:
+- integrated_solar_thermionic_power_generation
+- solar_concentrator_receiver_integration
+- thermionic_converter_array_integration
+- direct_thermal_to_electric_power_system
+- thermionic_power_conditioning_integration
+- high_temperature_receiver_thermal_management
 notes: 'Assumptions:
 
   - Mass aligned to current recipe component sum (373 kg).
@@ -12,6 +19,11 @@ notes: 'Assumptions:
   Complete solar thermionic power generation system. Integrates solar concentrator,
 
   thermionic converter, and thermal management for electricity generation.
+
+  Scope: complete assembled power system rather than the converter module alone.
+  Use thermionic_converter_v0 for the vacuum-tube converter array, solar_concentrator_fresnel_v0
+  for standalone optical concentration, and thermionic_power_conditioning_unit_v0
+  for electrical conditioning.
 
   '
 recipe: recipe_machine_thermionic_power_system_v0

@@ -4,7 +4,15 @@ kind: machine
 mass: 67.5
 unit: unit
 bom: bom_tensile_test_machine_v0
-notes: Placeholder tensile test machine to support material strength testing; authoring
-  item for BOM closure.
+capabilities:
+- tensile_strength_testing
+- material_strength_testing
+- force_displacement_measurement
+- elongation_measurement
+notes: Placeholder tensile test machine to support coupon-scale material strength
+  testing, including tensile load application, force/displacement measurement, and
+  elongation tracking. Use for basic tensile properties of locally produced metals,
+  polymers, and composites. Keep distinct from hardness_tester_v0, general dimensional
+  metrology, fatigue testers, and production presses.
 recipe: recipe_tensile_test_machine_v0
 unit_kind: discrete

@@ -16,7 +16,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
 - machine_id: pressing_mold_set
@@ -30,5 +30,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 3.0
-notes: Seed ferrite sintering step; placeholder to enable ferrite core production
-  path. Based on ferrite_toroid_sintering_v0 pattern.
+notes: Seed ferrite sintering step using furnace_high_temp for the generic high-temperature
+  firing duty; placeholder to enable ferrite core production path. Add atmosphere
+  or clean-hot-zone resources separately if a specific ferrite route requires them.
+  Based on ferrite_toroid_sintering_v0 pattern.

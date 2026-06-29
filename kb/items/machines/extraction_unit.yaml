@@ -5,13 +5,25 @@ mass: 200.0
 unit: unit
 material_class: steel
 bom: bom_extraction_unit_v0
+capabilities:
+- coarse_mineral_extraction
+- simple_ore_beneficiation
+- bulk_material_recovery
+- crushing_screening_separation_support
+- low_detail_resource_extraction
+- placeholder_extraction_skid
 notes: 'Generic mineral/material extraction equipment placeholder.
 
   Used for basic extraction processes before specific extraction machines are designed.
 
-  Represents basic excavation, crushing, and separation equipment.
+  Represents coarse excavation support, crushing, screening, washing or dry separation,
+  and basic product collection where the exact mining/beneficiation route is not
+  modeled.
 
-  Replace with specific extraction machines as designs mature.
+  Replace with specific machines as designs mature: excavator_basic for digging,
+  thermal_water_extractor_v0 and vapor_capture_system_v0 for volatile/water extraction,
+  solvent_extraction_mixer_settler_v0 for liquid-liquid solvent extraction, and
+  magnetic/gravity/electrostatic separators where separation physics matters.
 
   '
 recipe: recipe_extraction_unit_v0

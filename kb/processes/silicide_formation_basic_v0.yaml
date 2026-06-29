@@ -13,7 +13,10 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: reduction_furnace_v0
+- machine_id: furnace_high_temp
+  qty: 1
+  unit: count
+- machine_id: inert_atmosphere_system
   qty: 1
   unit: count
 energy_model:
@@ -26,6 +29,10 @@ time_model:
   rate: 0.5
   rate_unit: kg/hr
   scaling_basis: import_magnesium_powder
-notes: Placeholder synthesis of Mg2Si from Mg and Si powders. Stoichiometric, with
-  minimal waste.
+notes: |
+  Placeholder synthesis of Mg2Si from Mg and Si powders. Stoichiometric, with
+  minimal waste. This is silicide synthesis rather than oxide reduction, so it
+  uses furnace_high_temp plus inert purge/oxygen exclusion from inert_atmosphere_system
+  instead of reduction_furnace_v0. A generic sealed chamber is not the hot-zone
+  furnace resource.
 process_type: continuous

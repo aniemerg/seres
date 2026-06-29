@@ -10,7 +10,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: casting_furnace_v0
+- machine_id: furnace_basic
   qty: 1
   unit: count
 energy_model:
@@ -22,4 +22,6 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Skim/decant slag per heat
-notes: Basic slag removal/skim step during metal smelting and casting.
+notes: Basic slag removal/skim step during metal smelting and casting. furnace_basic
+  represents generic melt holding; specialized smelting recipes should require their
+  refining or reduction furnace explicitly.

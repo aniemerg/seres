@@ -25,9 +25,18 @@ resource_requirements:
 - machine_id: blast_furnace_or_smelter
   qty: 1
   unit: count
+  notes: Compact shaft/cupola-style furnace for carbothermal iron or ilmenite reduction,
+    not a generic remelting or aluminum/copper smelting resource. Its BOM includes
+    blower, tuyere, charging, tapping, cooling, and exhaust/offgas assemblies.
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
+  notes: Particulate capture for charging and furnace offgas cleanup.
 - machine_id: crucible_refractory
   qty: 1
   unit: count
+  notes: Slag/iron-compatible refractory containment or tap/pour vessel; material
+    compatibility is process-specific and not supplied by the blast furnace alone.
 energy_model:
   type: fixed_per_batch
   value: 8.0
@@ -35,8 +44,14 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 4.0
-notes: 'Iron smelting via carbothermic reduction. Reduces iron oxide (Fe2O3/FeO) or
-  ilmenite (FeTiO3) using carbon at 1200-1600°C. Produces molten iron and slag. Typical
-  reaction: Fe2O3 + 3C → 2Fe + 3CO. On Moon, can use ilmenite from regolith or iron
-  from meteorites. Recovery ~50% by mass.'
+notes: 'Iron smelting via carbothermic reduction in a compact shaft/cupola-style
+  smelter, not a full industrial blast furnace and not a generic metal remelting
+  route. Reduces iron oxide (Fe2O3/FeO) or ilmenite (FeTiO3) using carbon at
+  1200-1600°C, with forced blast air, tuyeres, charge handling, refractory lining,
+  tapping hardware, slag handling, and CO/CO2 offgas cleanup modeled explicitly as
+  resource requirements. Produces molten iron and slag. Typical reaction: Fe2O3 +
+  3C → 2Fe + 3CO. On Moon, can use ilmenite from regolith or iron from meteorites.
+  Recovery ~50% by mass. Flux chemistry is process-specific and should be added as
+  a concrete input once the chosen ironmaking route and available CaO/slag practice
+  are finalized.'
 process_type: batch

@@ -23,7 +23,8 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: glass_bulk
   notes: continuous fiber drawing ~5 kg/hr throughput
-notes: Captures fiber path for structural materials; rates TBD.
+notes: Captures fiber path for structural materials; winding_machine provides
+  driven take-up using winding drums as internal subcomponents. Rates TBD.
 process_type: continuous
 resource_requirements:
 - machine_id: labor_bot_general_v0
@@ -32,7 +33,7 @@ resource_requirements:
 - machine_id: fiber_spinneret_v0
   qty: 1
   unit: count
-- machine_id: winding_drums
+- machine_id: winding_machine
   qty: 1
   unit: count
 - machine_id: cooling_chamber_controlled

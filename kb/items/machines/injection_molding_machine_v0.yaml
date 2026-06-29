@@ -1,0 +1,26 @@
+id: injection_molding_machine_v0
+kind: machine
+name: Injection molding machine v0
+mass: 900.0
+unit: unit
+material_class: steel
+bom: bom_injection_molding_machine_v0
+capabilities:
+- thermoplastic_injection_molding
+- pellet_plasticizing_injection
+- closed_mold_clamping
+- molded_plastic_part_ejection
+- injection_mold_temperature_control
+- small_plastic_housing_production
+notes: |
+  Small thermoplastic injection molding machine for molded housings and small
+  plastic parts from pellets. Includes hopper/feed, heated screw/barrel/nozzle,
+  hydraulic or electric clamp/platens, mold mounting and ejection support, cooling
+  loop, temperature control, and basic safety/control electronics.
+
+  Distinct from molding_press_basic, which provides compression/platen pressing
+  without melt injection, and from plastic_extruder, which continuously pushes
+  polymer through a die for profiles, sheet, gasket stock, or filament-like output.
+  Part-specific injection molds remain separate tooling where geometry matters.
+recipe: recipe_machine_injection_molding_machine_v0
+unit_kind: discrete

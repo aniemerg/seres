@@ -12,6 +12,9 @@ resource_requirements:
 - machine_id: furnace_basic
   qty: 1
   unit: count
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
 - machine_id: casting_mold_set
   qty: 1
   unit: count
@@ -24,7 +27,8 @@ time_model:
   type: batch
   hr_per_batch: 0.5
   notes: Mold prep, melt, pour, and cool.
-notes: Basic metal casting operation using furnace and molds; placeholder parameters
-  pending specific alloy/process.
+notes: Basic moderate-temperature metal casting operation using furnace, crucible,
+  and molds; placeholder parameters pending specific alloy/process. Steel or other
+  high-temperature melts should use furnace_high_temp.
 process_type: batch
 is_template: true

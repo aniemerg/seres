@@ -13,13 +13,13 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: casting_furnace_v0
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
 - machine_id: crucible_refractory
   qty: 1
   unit: count
-- machine_id: casting_mold_set
+- machine_id: ingot_mold_set
   qty: 1
   unit: count
 energy_model:
@@ -30,4 +30,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Casting metal ingot from metal alloy bulk; placeholder mass balance.
+notes: Casting metal ingot from metal alloy bulk using simple reusable ingot molds;
+  placeholder mass balance.

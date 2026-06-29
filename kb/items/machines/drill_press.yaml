@@ -5,9 +5,19 @@ mass: 120
 unit: unit
 material_class: steel
 bom: bom_drill_press_v0
-notes: Bench or floor drill press for precision hole drilling. Includes column, table,
-  spindle, motor, and depth control. Used for drilling holes in metal, PCBs, and other
-  materials.
+capabilities:
+- shop_vertical_drilling
+- depth_controlled_hole_drilling
+- metalworking_drilling
+- pcb_stock_drilling_coarse
+- fixture_table_drilling
+notes: |
+  Bench or floor shop drill press for accurate vertical hole drilling in
+  workpieces held on a table. Includes column, table, spindle/chuck, motor,
+  and depth control. Used for shop drilling of metal, PCBs, sheet stock, and
+  fabricated parts. Distinct from drilling_equipment_v0, which is a field/mining
+  drill system for subsurface regolith, ice, or rock access; do not use drill_press
+  for excavation, coring, polar ice drilling, or mobile field drilling.
 processes_supported:
 - drilling_basic_v0
 - machining_process_drilling_v0

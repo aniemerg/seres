@@ -18,6 +18,10 @@ resource_requirements:
 - machine_id: plastic_extruder
   qty: 1
   unit: count
+- machine_id: extrusion_downstream_line_basic_v0
+  qty: 1
+  unit: count
+  notes: Cooling, haul-off/pulling, cutting, winding, and dimensional checks for simple profiles.
 energy_model:
   type: per_unit
   value: 0.8
@@ -30,6 +34,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: plastic_pellets
   notes: Throughput including changeover
-notes: Basic plastic extrusion of pellets into profiles/film; assumes simple die and
-  cooling section.
+notes: Basic plastic extrusion of pellets into profiles/film; uses plastic_extruder
+  plus a basic downstream cooling/haul-off/cutting line.
 process_type: continuous

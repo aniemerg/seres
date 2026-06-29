@@ -5,9 +5,18 @@ mass: 1800.0
 unit: unit
 material_class: steel
 bom: bom_ebm_machine_lunar_v0_v0
+capabilities:
+- powder_bed_electron_beam_melting
+- metal_powder_bed_fusion
+- vacuum_metal_additive_manufacturing
+- electron_beam_scan_melting
+- heated_build_platform_operation
+- metal_powder_handling
 notes: Electron Beam Melting (EBM) machine for metal additive manufacturing in vacuum.
   Includes electron gun, vacuum chamber, powder handling, and heated build platform.
-  Power draw approximated for modeling purposes.
+  Power draw approximated for modeling purposes. Powder-bed EBM machine; use
+  ebf3_wire_feed_machine_v0 for wire-feed electron beam additive manufacturing and
+  wire_arc_additive_machine for arc-based WAAM.
 power_draw_kW: 60.0
 energy_model:
   type: kWh_per_unit

@@ -3,7 +3,25 @@ name: Laboratory
 kind: machine
 mass: 60.0
 unit: unit
+material_class: steel
 bom: bom_lab_v0
-notes: Generic laboratory machine placeholder to support lab BOMs.
+capabilities:
+- laboratory_workspace
+- bench_scale_sample_handling
+- instrument_mounting_support
+- basic_lab_utility_distribution
+- electronics_and_control_support
+- microscopy_sample_prep_support
+- small_analysis_system_integration
+notes: |
+  Compact laboratory workspace/module used as support equipment in lab and
+  analysis-system BOMs. Represents bench frame/enclosure, basic utilities,
+  instrument mounting, small electronics/control support, and sample-handling
+  workspace.
+
+  Scope: support infrastructure for bench-scale analysis and setup work, not a
+  universal laboratory, chemical reactor, cleanroom, or process machine by itself.
+  Processes should require the specific instrument, reactor, furnace, wet station,
+  or test bench that performs the actual operation.
 recipe: recipe_lab_v1
 unit_kind: discrete

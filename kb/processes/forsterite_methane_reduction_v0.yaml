@@ -26,7 +26,7 @@ outputs:
   qty: 0.1
   unit: kg
 resource_requirements:
-- machine_id: high_temp_furnace_v0
+- machine_id: reduction_furnace_v0
   qty: 1
   unit: count
 - machine_id: gas_handling_loop_v0
@@ -48,3 +48,5 @@ notes: |
   Explicit reaction-29 chain representation:
   Mg2SiO4 + CH4 -> MgO + Si + CO/H2 stream.
 
+  Resource route: uses reduction_furnace_v0 as the controlled methane-reductant hot
+  zone, with gas_handling_loop_v0 for CO/H2/methane recycle and product separation.

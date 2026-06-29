@@ -4,9 +4,16 @@ name: Wheel load cell system v0
 mass: 4.888
 unit: unit
 bom: bom_wheel_load_cell_system_v0.yaml
+capabilities:
+- wheel_load_measurement
+- chassis_load_monitoring
+- load_cell_signal_conditioning
+- wheel_station_force_sensing
+- rover_weight_distribution_measurement
 notes: |
-  Six wheel-mounted load cells for measuring wheel loads in rover chassis. Placeholder
-  entry derived from seed; will be refined with detailed specs later.
+  Wheel-mounted load cell subsystem for measuring wheel loads and rover chassis
+  weight distribution. Placeholder entry derived from seed; will be refined with
+  detailed specs later.
   Assumptions:
   - Mass aligned with recipe inputs minus swarf (~4.888 kg).
 source_tags:

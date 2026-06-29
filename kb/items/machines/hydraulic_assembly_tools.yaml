@@ -4,7 +4,22 @@ name: Hydraulic assembly tools
 mass: 15.0
 unit: unit
 bom: bom_hydraulic_assembly_tools_v0
-notes: 'Specialized tools for hydraulic systems: torque wrenches, flare tools, hose
-  crimpers, pressure test equipment, bleeding kits.'
+capabilities:
+  - hydraulic_line_assembly
+  - hydraulic_fitting_installation
+  - hydraulic_hose_crimping_support
+  - hydraulic_system_bleeding
+  - hydraulic_leak_check_setup
+  - flare_and_torque_tooling
+notes: |
+  Specialized tool kit for assembling and servicing hydraulic systems: torque
+  wrenches, flare tools, hose crimping support tools, pressure test adapters,
+  bleeding kits, caps/plugs, and fitting installation aids.
+
+  This item supports hose/fitting assembly, leak-check setup, and commissioning
+  work. It does not generate pressurized hydraulic flow; use
+  hydraulic_power_unit_basic for hydraulic power. Use hose_crimper_manual when the
+  process specifically needs a dedicated manual crimper for ferrules and hose-end
+  fittings.
 recipe: recipe_hydraulic_assembly_tools_v0
 unit_kind: discrete

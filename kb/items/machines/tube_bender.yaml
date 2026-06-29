@@ -3,13 +3,24 @@ kind: machine
 name: Tube bending machine
 mass: 200.0
 unit: unit
+material_class: steel
 capabilities:
-- bending
 - tube_bending
-- metal_forming
+- pipe_bending
+- rotary_draw_or_hydraulic_tube_bending
+- controlled_radius_tube_bends
+- small_to_mid_size_tube_forming
+- repeatable_bend_angle_control
+- tube_bend_die_tooling_support
 bom: bom_tube_bender_v0
-notes: "Tube bending machine for metal tubing in ISRU fabrication lines. Suitable\
-  \ for small to mid-size tubing (6\u201350 mm dia) with various bend radii. Placeholder\
-  \ mass; refine with equipment specs."
+notes: Light-industrial tube/pipe bending machine for controlled bends in metal
+  tubing, distinct from sheet-metal press brakes and generic forming presses.
+  Default scope is small to mid-size tubing, roughly 6-50 mm outside diameter and
+  0.5-3 mm wall thickness, with bend quality limited by material, bend angle,
+  centerline radius, die/follower tooling, mandrel or wiper-die availability, and
+  setup repeatability. Suitable for piping assemblies, hydraulic or pneumatic
+  lines, heat-exchanger coils, and structural tube sections. Split hand, mandrel,
+  hydraulic, or CNC variants only when tighter radius, thin-wall tube, production
+  repeatability, or larger pipe scale needs to be modeled.
 recipe: recipe_machine_tube_bender_v0
 unit_kind: discrete

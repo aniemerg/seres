@@ -23,6 +23,9 @@ resource_requirements:
 - machine_id: press_brake
   qty: 1
   unit: count
+- machine_id: press_brake_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.5
@@ -31,4 +34,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.5
-notes: Basic metal forming using shop press and brake, without a dedicated plate mill.
+notes: Basic metal forming using a shop press and press brake with separate bend
+  tooling, without a dedicated plate mill.

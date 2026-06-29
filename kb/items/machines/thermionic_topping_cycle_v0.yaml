@@ -4,8 +4,18 @@ kind: machine
 mass: 120.0
 unit: unit
 bom: bom_thermionic_topping_cycle_v0
-notes: Placeholder module representing a combined thermionic topping cycle; intended
-  to recover additional energy from waste heat and integrated into thermionic power
-  systems. Seed entry to resolve referenced gap.
+capabilities:
+- thermionic_topping_cycle_integration
+- high_temperature_waste_heat_recovery
+- thermionic_power_conversion_support
+- heat_pipe_thermal_coupling
+- radiator_heat_rejection
+- thermionic_power_conditioning_interface
+notes: Integrated thermionic topping-cycle subsystem for recovering electrical energy
+  from high-temperature waste heat or thermal receiver output. Combines a thermionic
+  converter module, heat pipes, radiator, vacuum sealing, support frame, and thermionic-specific
+  power conditioning. This item models the integrated topping-cycle package around
+  a converter; use thermionic_converter_v0 where only the converter array/module is
+  required.
 recipe: recipe_thermionic_topping_cycle_v0
 unit_kind: discrete

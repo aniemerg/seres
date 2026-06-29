@@ -13,7 +13,7 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: steel_forming_press
+- machine_id: hydraulic_press
   qty: 1
   unit: unit
 energy_model:
@@ -24,4 +24,7 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: Form sheet into chassis stock; conservative forming operation.
+notes: Form sheet into chassis stock using the canonical hydraulic_press with
+  simple forming fixtures. Assumes low-volume 3 mm steel sheet work within a
+  medium 20-50 ton press envelope; use press_brake for explicit straight bends
+  or stamping_press_basic for repeated die stamping.

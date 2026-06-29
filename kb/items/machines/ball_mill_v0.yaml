@@ -8,7 +8,12 @@ bom: bom_ball_mill_v0
 capabilities:
 - ball_mill
 - powder_milling
-notes: Coarse mass estimate; aligned to sum of current BOM components (927.5 kg).
-  Medium-scale mill sized for regolith grinding, powder milling, and mixing operations.
+notes: Coarse dry-machine mass estimate for the shell, liners, drive, frame, and
+  supports (927.5 kg before operating media charge). Medium-scale rotary ball mill
+  sized for regolith grinding and powder milling after coarse crushing where needed.
+  Requires grinding media inventory to operate; use grinding_media_steel by default
+  and substitute grinding_media_alumina_v0 or other compatible media where iron
+  contamination is unacceptable. Use powder_mixer for blending-only operations
+  that do not require particle-size reduction.
 recipe: recipe_ball_mill_v0
 unit_kind: discrete

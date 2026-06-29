@@ -1,0 +1,46 @@
+id: metal_forming_basic_plate_v0
+kind: process
+name: Metal forming (basic plate and sheet)
+process_type: batch
+layer_tags:
+- layer_5
+- layer_6
+inputs:
+- item_id: metal_sheet_or_plate
+  qty: 1.0
+  unit: kg
+outputs:
+- item_id: formed_metal_part
+  qty: 0.95
+  unit: kg
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+- machine_id: hydraulic_press
+  qty: 1
+  unit: count
+- machine_id: press_brake
+  qty: 1
+  unit: count
+- machine_id: plate_rolling_mill
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 1.5
+  unit: kWh
+  notes: Forming and finishing energy
+time_model:
+  type: batch
+  hr_per_batch: 1.5
+notes: >-
+  Process template for basic plate and sheet metal forming operations including
+  bending, rolling, stamping, and pressing. Resource requirements use specific
+  machines: hydraulic_press for pressing, press_brake for straight bends, and
+  plate_rolling_mill for rolling. Transforms flat sheet metal or plate into
+  formed shapes such as brackets, channels, tubes, tanks, curved panels, and drum
+  shells. Typically performed at room temperature for mild steel, aluminum, and
+  copper. May require multiple forming steps for complex shapes. Assumes about
+  5% material loss due to trimming and edge finishing.
+is_template: true

@@ -1,9 +1,18 @@
 id: milling_machine_general_v0
 kind: machine
 name: Milling machine (general) v0
+deprecated: true
+replaced_by: cnc_mill
 mass: 370.0
 unit: unit
-bom: bom_milling_machine_general_v0
+material_class: steel
+capabilities:
+- legacy_general_milling
+- milling
+- drilling
+- boring
+- slotting
+- light_subtractive_machining
 notes: |
   Mass updated 2026-01 from 600 kg to 370 kg based on BOM component analysis:
   milling_table (57) + spindle_head_basic (60) + drive_motor_medium (90) +
@@ -11,6 +20,9 @@ notes: |
   fastener_kit_medium (1) + power_conditioning_module (12) + control_compute_module_imported (2) +
   sensor_suite_general (5) = 370 kg.
 
-  DEPRECATED - Consolidated into cnc_mill. General-purpose milling machine; coarse mass estimate.
-recipe: recipe_machine_milling_machine_general_v0
+  DEPRECATED - Consolidated into cnc_mill. No active process should require this
+  deprecated machine; use cnc_mill for general milling and gear_hobbing_machine_v0
+  for gear-cutting processes. General-purpose milling machine retained only as a
+  historical alias; the obsolete local build path was removed so new manufacturing
+  routes resolve through cnc_mill.
 unit_kind: discrete

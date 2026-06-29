@@ -70,6 +70,11 @@ steps:
         unit: kg
     est_time_hr: 4.0
     machine_hours: 4.0
-    notes: "Extract oxygen and produce metal byproduct via MRE"
-assumptions: Co-product metal alloy from MRE; refining not modeled.
-notes: Coarse route; add refining/separation later.
+    notes: "Extract oxygen and produce metal byproduct via MRE; oxygen offgas collection, metal tapping, and slag/residue cleanout are represented at coarse process level."
+assumptions: |
+  Co-product mixed metal alloy from molten regolith electrolysis in
+  mre_reactor_v0; refining not modeled.
+notes: |
+  Coarse MRE route; add refining/separation later. Crude metal is treated as a
+  tapped/removed reactor product, while detailed slag/regolith residue handling
+  and alloy separation are deferred to downstream process variants.

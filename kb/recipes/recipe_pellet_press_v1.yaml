@@ -5,13 +5,31 @@ produces_id: pellet_press
 produces_qty: 1.0
 produces_unit: unit
 inputs:
-  - item_id: regolith_metal_crude
-    qty: 850.0
-    unit: kg
-  - item_id: bearing_set_heavy
-    qty: 2.0
+  - item_id: press_frame_small
+    qty: 1.0
     unit: unit
-  - item_id: motor_general_5kw
+  - item_id: press_cylinder_small
+    qty: 1.0
+    unit: unit
+  - item_id: press_platen_set_small
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_power_unit_basic
+    qty: 1.0
+    unit: unit
+  - item_id: pressure_gauge_set
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: pellet_press_die_set
+    qty: 1.0
+    unit: unit
+  - item_id: hopper_feed_steel
+    qty: 1.0
+    unit: unit
+  - item_id: safety_guard_steel_mesh
     qty: 1.0
     unit: unit
   - item_id: fastener_kit_medium
@@ -24,31 +42,31 @@ outputs:
 steps:
   - process_id: assembly_basic_v0
     inputs:
-      - item_id: regolith_metal_crude
-        qty: 850.0
-        unit: kg
-    outputs:
-      - item_id: assembled_equipment
-        qty: 2.0
-        unit: kg
-  - process_id: machining_finish_basic_v0
-    inputs:
-      - item_id: assembled_equipment
-        qty: 2.0
-        unit: kg
-    outputs:
-      - item_id: machined_part_raw
-        qty: 2.0
-        unit: kg
-  - process_id: welding_brazing_basic_v0
-    inputs:
-      - item_id: machined_part_raw
-        qty: 2.0
-        unit: kg
-      - item_id: bearing_set_heavy
-        qty: 2.0
+      - item_id: press_frame_small
+        qty: 1.0
         unit: unit
-      - item_id: motor_general_5kw
+      - item_id: press_cylinder_small
+        qty: 1.0
+        unit: unit
+      - item_id: press_platen_set_small
+        qty: 1.0
+        unit: unit
+      - item_id: hydraulic_power_unit_basic
+        qty: 1.0
+        unit: unit
+      - item_id: pressure_gauge_set
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: pellet_press_die_set
+        qty: 1.0
+        unit: unit
+      - item_id: hopper_feed_steel
+        qty: 1.0
+        unit: unit
+      - item_id: safety_guard_steel_mesh
         qty: 1.0
         unit: unit
       - item_id: fastener_kit_medium
@@ -58,4 +76,14 @@ steps:
       - item_id: pellet_press
         qty: 1.0
         unit: unit
-notes: "Backwards-compatible recipe for pellet_press using target_item_id; mirrors v0 steps."
+    est_time_hr: 7.0
+    machine_hours: 2.0
+    labor_hours: 5.0
+    notes: Assemble press frame, actuator, platens, hydraulic power unit, pressure
+      indication, controls, die/ejector tooling, feed hopper, safety guarding, and
+      fasteners; align platen faces, cylinder mounts, and die-set locating surfaces;
+      verify pressure cycle and demolding motion.
+notes: Recipe for a laboratory/pilot die pellet press. The included
+  pellet_press_die_set is a reusable default cylindrical tooling set; add
+  material- or shape-specific die variants where pellet diameter, wear, pressure,
+  or contamination matters.

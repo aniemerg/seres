@@ -6,6 +6,15 @@ mass_kg: 600.0
 unit: unit
 bom: bom_pressure_test_rig_basic_v0
 notes: Seed variant for the pressure test rig; mass and BOM are placeholders for initial
-  modeling.
+  modeling. Basic hydraulic/pneumatic pressure test rig used to verify seals and
+  structural integrity of pressure-bound components with pump, gauges, valves,
+  hoses, containment, and pressurize-hold-inspect workflows. Use vacuum-specific
+  leak test equipment where vacuum leak rate or helium leak detection is required.
+capabilities:
+- hydrostatic_pressure_testing
+- pneumatic_pressure_testing
+- leak_tightness_verification
+- pressure_hold_testing
+- gauge_monitored_pressurization
 recipe: recipe_pressure_test_rig_basic_v0
 unit_kind: discrete

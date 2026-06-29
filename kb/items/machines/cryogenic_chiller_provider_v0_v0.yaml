@@ -4,6 +4,15 @@ kind: machine
 mass: 600.0
 unit: unit
 bom: bom_cryogenic_chiller_provider_v0_v0
-notes: Seed provider machine version v0_v0; aligns with BOM bom_cryogenic_chiller_provider_v0_v0.yaml.
 recipe: recipe_cryogenic_chiller_provider_v0_v0
 unit_kind: discrete
+capabilities:
+- cryogenic_cooling
+- cold_trap
+- cryogenic_distillation
+- cryogenic_refrigeration_provider
+- refrigerant_loop_monitoring
+notes: Seed provider machine wrapping cryogenic_chiller_v0 with controls, pressure
+  monitoring, frame, and insulation. Provides cryogenic cooling, cold-trap support,
+  and cryogenic distillation service; it is not a separate gas separation column
+  or cryogenic storage tank.

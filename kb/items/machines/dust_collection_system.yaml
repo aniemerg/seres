@@ -4,7 +4,15 @@ name: Dust collection system
 mass: 200.0
 unit: unit
 bom: bom_dust_collection_system_v0
-notes: Industrial dust collection system with cyclone separator, filters, and vacuum
-  pump for regolith processing operations.
 recipe: recipe_dust_collection_system_v0
 unit_kind: discrete
+capabilities:
+- dust_extraction
+- cyclone_particulate_separation
+- fine_dust_filtration
+- enclosed_regolith_dust_control
+- collection_hopper_dust_capture
+notes: Industrial dust collection system with cyclone separator, filter cartridges,
+  blower, ductwork, and collection hopper for enclosed regolith and shop dust control.
+  Captures particulate-laden gas streams; use gas_scrubbing_unit_v0 for corrosive
+  or toxic offgas polishing.

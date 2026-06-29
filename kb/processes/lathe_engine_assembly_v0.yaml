@@ -35,6 +35,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: lifting_equipment
+  qty: 1
+  unit: count
+  notes: 180 kg lathe assembly exceeds labor-bot payload and needs hoist-assisted positioning.
 energy_model:
   type: fixed_per_batch
   value: 25.0
@@ -43,5 +47,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 6.0
-notes: Placeholder lathe_engine_assembly process; refine BOM and step durations as
-  design evolves.
+notes: Placeholder lathe_engine_assembly process; uses 500 kg class workshop
+  lifting_equipment for hoist-assisted positioning of the 180 kg assembly. Refine
+  BOM and step durations as design evolves.

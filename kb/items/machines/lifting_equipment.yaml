@@ -6,7 +6,11 @@ unit: unit
 bom: bom_lifting_equipment
 recipe: recipe_lifting_equipment_v0
 capabilities:
-  - lifting
+  - rated_component_lifting
+  - workshop_gantry_hoist
+  - overhead_trolley_positioning
+  - heavy_component_assembly_support
+  - rigging_assisted_handling
   - material_handling
 description: 'Overhead hoist or small gantry crane for lifting heavy components during
   assembly.
@@ -37,6 +41,16 @@ description: 'Overhead hoist or small gantry crane for lifting heavy components 
   or imported as complete unit.
 
   '
+notes: Small rated workshop gantry crane or overhead hoist/trolley system for
+  components too heavy or awkward for the 20 kg payload labor_bot_general_v0.
+  Model as a 500 kg class shop lifting resource for assembly and maintenance
+  positioning, not as a forklift, mobile mining handler, or large construction
+  crane. Rigging accessories such as slings, shackles, hooks, trolley hardware,
+  chains, beam clamps, and rated fasteners are treated as bundled hoist/rigging
+  hardware in this coarse item. Assemblies above the 500 kg rating require a
+  higher-capacity crane/hoist variant rather than this resource; examples include
+  hip_press_unit_v0, bending_machine_v0, heliostat_unit_v0,
+  haber_bosch_reactor_v0, and coordinate_measuring_machine.
 tags:
 - lifting
 - assembly

@@ -3,10 +3,19 @@ kind: machine
 name: Reactor heating and cooling system v0
 mass: 800.0
 unit: unit
+material_class: steel
 bom: bom_reactor_heating_cooling_system_v0
+capabilities:
+- reactor_temperature_control
+- reactor_heating
+- reactor_cooling
+- jacketed_reactor_thermal_regulation
+- thermal_feedback_control
+- process_heat_rejection
 notes: Modular reactor heating/cooling system intended to regulate jacketed reactors
   in ISRU/chemical processing. Referenced in seed literature as a temperature-control
-  subsystem for reactors.
+  subsystem for reactors. Represents thermal regulation hardware around a reactor,
+  not the reactor vessel, chemistry, feed handling, or product handling itself.
 source_tags:
 - ellery_2023
 - nasa_isru

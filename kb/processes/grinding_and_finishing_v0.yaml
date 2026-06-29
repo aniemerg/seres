@@ -33,6 +33,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.5
-notes: Combined grinding and finishing operations for precision parts. Includes surface
-  grinding, cylindrical grinding, and final finishing. Achieves tight tolerances and
-  smooth surface finish. Used for precision components, tooling, and mating surfaces.
+notes: Combined flat grinding and final finishing operations for precision parts.
+  Uses surface_grinder for flat faces and generic vitrified alumina/glass
+  grinding_wheels where suitable. Round shafts, rollers, bores, bearing races, and
+  balls should use cylindrical_grinding_precision_v0 or
+  bearing_grinding_precision_v0. Specialized diamond, cBN, silicon-carbide, or
+  cutoff wheels require a separate explicit wheel variant.

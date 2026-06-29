@@ -17,9 +17,6 @@ outputs:
   qty: 1.53
   unit: kg
 resource_requirements:
-- machine_id: chemical_reactor_basic
-  qty: 1
-  unit: count
 - machine_id: gas_handling_loop_v0
   qty: 1
   unit: count
@@ -38,4 +35,5 @@ time_model:
 notes: |
   Explicit Ostwald intermediate stage:
   2NO + O2 -> 2NO2.
-
+  Gas-phase oxidation is represented with the gas-handling loop; the basic
+  stirred/jacketed reactor is not assumed suitable for the Ostwald gas train.

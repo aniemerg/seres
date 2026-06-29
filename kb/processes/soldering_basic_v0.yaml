@@ -9,6 +9,9 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: soldering_station
+  qty: 1
+  unit: count
 - machine_id: assembly_tools_basic
   qty: 1
   unit: count
@@ -24,7 +27,10 @@ time_model:
   type: batch
   hr_per_batch: 0.6
   notes: Component prep, soldering, and inspection.
-notes: Basic soldering and rework for electronics or wiring; includes tinning, joint
-  formation, and continuity checks. Placeholder pending detailed solder/material selection.
+notes: Basic low-volume hand soldering for electronics or wiring; includes tinning,
+  joint formation, and continuity checks. Uses a temperature-controlled hand
+  soldering station plus labor and basic tools. Does not cover SMT reflow, wave
+  soldering, pick-and-place, or hot-air/desoldering rework. Placeholder pending
+  detailed solder/material selection.
 process_type: batch
 is_template: true

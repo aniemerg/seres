@@ -4,10 +4,19 @@ kind: machine
 mass: 56.3
 unit: unit
 bom: bom_microstructure_analysis_system_v0_v0
+capabilities:
+- metallography_microstructure_analysis
+- grain_size_measurement
+- phase_fraction_assessment
+- prepared_sample_optical_microscopy
+- material_defect_inspection
+- heat_treatment_quality_control
 notes: |
   Seed instrument for grain size and phase analysis identified in seed paper_reviews_dec2024_comprehensive_v0.
   Assumptions:
   - Mass aligned with recipe input mass (assembled_equipment + electronics + sensors).
-  - Placeholder capabilities; refine with actual instrument data.
+  - Bench-scale optical/metallography analysis system for prepared samples; detailed
+    SEM, XRD, spectroscopy, and destructive mechanical testing remain separate
+    resources if later modeled.
 recipe: recipe_microstructure_analysis_system_v0_v1
 unit_kind: discrete

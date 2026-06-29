@@ -1,10 +1,23 @@
 id: metal_forming_basic_v0
 kind: machine
+name: Basic metal forming equipment set
 unit: count
 mass: 1102.0
 mass_kg: 1102.0
 bom: bom_metal_forming_basic_v0
 recipe: recipe_machine_metal_forming_basic_v0
-notes: Basic metal forming equipment set (press/roll/fixture); mass aligned to the
-  current BOM/component recipe after modeling anvil_block_basic as one 80 kg unit.
+notes: Coarse low-volume shop forming equipment bundle, not a single standard machine
+  and not the same entity as the metal_forming_basic_v0 process template. Retained
+  only for miscellaneous forming cases where the exact forming mode is intentionally
+  coarse. Prefer hydraulic_press for pressing/straightening/compaction, press_brake
+  for straight-line sheet bends, plate_rolling_mill for rolling, and power_hammer_or_press
+  for impact hot forging. Assumes light industrial capacity with limited sheet/plate
+  thickness, modest throughput, interchangeable fixtures/tooling, guards, rollers,
+  and press tooling; labor bots handle setup and positioning, not high-force forming.
+capabilities:
+- metal_forming
+- low_volume_forming_cell
+- press_forming
+- sheet_rolling
+- fixture_supported_forming
 unit_kind: discrete

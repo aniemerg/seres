@@ -4,7 +4,19 @@ name: Control compute module (imported)
 mass: 2.0
 unit: unit
 material_class: electronic
-notes: Imported compute/AI module; not built via ISRU in early phases.
+capabilities:
+- embedded_machine_control
+- plc_sbc_control
+- sensor_actuator_io
+- industrial_communications
+notes: Imported industrial control module for ordinary embedded machine control,
+  PLC/SBC-style logic, sensor/actuator I/O, and industrial communications in early
+  phases. This item is an import boundary for reliable controller electronics and
+  should not be treated as locally manufacturable merely because PCB assembly exists
+  elsewhere in the KB. Use `safety_controller_plc` or
+  `import_safety_controller_electronics` for safety-rated control, and use
+  `computer_core_imported`, `machine_vision_processing_v0`, or explicit AI modules
+  for high-performance compute, machine vision, or AI workloads.
 bom: bom_control_compute_module_imported_v0
 recipe: recipe_control_compute_module_v0
 unit_kind: discrete

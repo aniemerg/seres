@@ -26,7 +26,7 @@ steps:
   est_time_hr: 6.0
   machine_hours: 6.0
   labor_hours: 3.0
-  notes: Machine straightedges, gauge blocks, and caliper components
+  notes: Machine straightedges, simple gauges, and caliper components
 - process_id: precision_grinding_basic_v0
   inputs:
   - item_id: machined_part_raw
@@ -39,7 +39,7 @@ steps:
   est_time_hr: 4.0
   machine_hours: 4.0
   labor_hours: 2.0
-  notes: Grind reference surfaces to high flatness and precision
+  notes: Grind shop-grade reference edges and gauge surfaces for basic inspection aids
 - process_id: assembly_basic_v0
   inputs:
   - item_id: finished_part_deburred
@@ -66,7 +66,7 @@ steps:
     unit: kg
   est_time_hr: 2.0
   labor_hours: 2.0
-  notes: Calibrate measuring tools against reference standards
+  notes: Verify zero, scale markings, and smooth operation against available shop references; not a traceable gauge-block calibration
 - process_id: inspection_basic_v0
   inputs:
   - item_id: assembled_equipment
@@ -80,6 +80,8 @@ steps:
   labor_hours: 1.0
   notes: Verify tool accuracy and functionality
 assumptions: Basic inspection and QC tool set including magnifiers, straightedges,
-  gauges, and calipers. 8 kg tool set for manual inspection operations.
+  simple gauges, and calipers. 8 kg tool set for manual inspection operations; calibrated
+  gauge blocks, micrometers, dial indicators, and electrical instruments are modeled
+  elsewhere.
 notes: Manufacturing of basic inspection tools. Total fabrication time ~16 hours.
-  Essential for quality control and manual inspection.
+  Essential for low-end quality control and manual inspection.

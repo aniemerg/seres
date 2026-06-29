@@ -7,8 +7,16 @@ material_class: steel
 capabilities:
 - mixing
 - blending
+- low_detail_batch_mixing
+- small_batch_paste_blending
+- generic_lab_pilot_mixing
 bom: bom_mixer_or_blender
 notes: General-purpose mixer/blender for powders or pastes; small industrial scale
-  for lab/pilot batches.
+  for lab/pilot batches. Use as the low-detail fallback when material behavior is
+  not central; use powder_mixer for dry powder uniformity, dust containment, binder/lubricant
+  addition, or powder-metallurgy feedstock quality; use cement_mixer_small for concrete,
+  mortar, refractory castable, or abrasive aggregate mixes; use mixing_station or
+  chemical_mixer_tank where formulation workflow, liquid agitation, containers,
+  cleanup, heating, or reactive chemical handling matters.
 recipe: recipe_machine_mixer_or_blender_v0
 unit_kind: discrete

@@ -1,10 +1,26 @@
 id: chemical_reactor_vessel_v0
 kind: machine
-name: Chemical reactor vessel v0
+name: Chemical reactor vessel shell v0
 mass: 120.0
 unit: unit
 material_class: steel
-notes: Placeholder reactor vessel for chemical reactor unit BOM.
+notes: Pilot-scale steel reactor vessel shell/subassembly for use inside complete
+  reactor systems. Provides contained process volume, ports/fittings, seals, and
+  sensor penetrations, but does not by itself provide agitation, heating/cooling,
+  pressure relief, feed handling, gas handling, or process control. Complete reaction
+  capability should come from chemical_reactor_basic, generic_chemical_reactor_v0,
+  acid_reactor_v0, epoxy_synthesis_unit, or another service-specific reactor system.
+  Split or select a more specific vessel when pressure rating, corrosion resistance,
+  jacketed service, refractory/high-temperature service, or high-pressure gas service
+  materially changes requirements.
+capabilities:
+- chemical_reaction_containment
+- sealed_vessel_processing
+- liquid_phase_reaction_support
+- process_vessel_body
+- reactor_vessel_shell
+- ported_pressure_boundary
+- sensor_and_fitting_interface
 bom: bom_chemical_reactor_vessel_v0
 recipe: recipe_chemical_reactor_vessel_v0
 unit_kind: discrete

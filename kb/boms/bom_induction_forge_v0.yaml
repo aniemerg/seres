@@ -4,21 +4,71 @@ kind: bom
 target_item_id: induction_forge_v0
 variant_id: v0
 requires_ids:
-  - motor_assembly
-  - shaft_and_bearing_set
-  - bearing_set_heavy
-  - fastener_kit_medium
+- frame_and_supports_basic
+- induction_coil_or_heating_element
+- power_conditioning_module
+- capacitor_bank_power
+- cooling_loop_basic
+- temperature_controller_basic
+- enclosure_electrical_medium
+- control_compute_module_imported
+- ground_clamp_and_cables
+- interlock_switch_set
+- safety_guard_steel_mesh
+- thermal_insulation_basic
+- fastener_kit_medium
 components:
-  - item_id: motor_assembly
-    qty: 1.0
-    unit: count
-  - item_id: shaft_and_bearing_set
-    qty: 1.0
-    unit: count
-  - item_id: bearing_set_heavy
-    qty: 4.0
-    unit: kg
-  - item_id: fastener_kit_medium
-    qty: 1.0
-    unit: kg
-notes: Seed BOM for induction_forge_v0 to resolve referenced gap.
+- item_id: frame_and_supports_basic
+  qty: 50.0
+  unit: kg
+  notes: Compact welded support frame and workpiece stand.
+- item_id: induction_coil_or_heating_element
+  qty: 6.0
+  unit: kg
+  notes: Water-cooled copper induction coil set for small bars and billets.
+- item_id: power_conditioning_module
+  qty: 1.0
+  unit: unit
+  notes: High-current inverter or medium-frequency power stage.
+- item_id: capacitor_bank_power
+  qty: 10.0
+  unit: kg
+  notes: Resonant tank capacitor bank for induction heating.
+- item_id: cooling_loop_basic
+  qty: 20.0
+  unit: kg
+  notes: Closed cooling loop for coil and power electronics.
+- item_id: temperature_controller_basic
+  qty: 1.0
+  unit: unit
+  notes: Workpiece temperature measurement and power control interface.
+- item_id: enclosure_electrical_medium
+  qty: 1.0
+  unit: unit
+  notes: Electrical enclosure for inverter, capacitors, controls, and terminals.
+- item_id: control_compute_module_imported
+  qty: 1.0
+  unit: unit
+  notes: Control logic for power regulation and interlocks.
+- item_id: ground_clamp_and_cables
+  qty: 4.0
+  unit: kg
+  notes: Grounding, high-current leads, and workpiece cable set.
+- item_id: interlock_switch_set
+  qty: 0.5
+  unit: kg
+  notes: Guard and coolant-flow interlock switches.
+- item_id: safety_guard_steel_mesh
+  qty: 1.0
+  unit: kg
+  notes: Coil/workpiece guard and splash protection.
+- item_id: thermal_insulation_basic
+  qty: 2.0
+  unit: kg
+  notes: Local hot-work insulation and standoff pads.
+- item_id: fastener_kit_medium
+  qty: 1.5
+  unit: kg
+  notes: Mounting fasteners for frame, bus bars, guards, and enclosure.
+notes: Compact forge-shop induction heater BOM. Replaces the previous motor, shaft,
+  and bearing-centered seed BOM with the core induction heating subsystems.

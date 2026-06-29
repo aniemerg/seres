@@ -16,6 +16,21 @@ resource_requirements:
 - machine_id: pyrolysis_chamber_v0
   qty: 1
   unit: count
+- machine_id: gas_handling_loop_v0
+  qty: 1
+  unit: count
+- machine_id: inert_atmosphere_system
+  qty: 1
+  unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
+- machine_id: gas_scrubbing_unit_v0
+  qty: 1
+  unit: count
+- machine_id: carbon_safety_system_v0
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -24,4 +39,12 @@ time_model:
   type: batch
   hr_per_batch: 0.75
 process_type: batch
-notes: Pyrolysis of methane at ~1000–1200°C. ~75% carbon recovery; hydrogen byproduct.
+notes: Thermal methane pyrolysis at ~1000–1200°C in a small refractory-lined reactor.
+  Modeled as a thermal non-catalytic reactor until a more specific catalytic, plasma,
+  molten-metal, or fluidized-bed design is selected. Requires controlled methane
+  feed, inert purge before/after operation, hydrogen-rich offgas routing, carbon
+  particle/deposit collection and removal, particulate filtering, exhaust polishing,
+  and flammable-gas shutdown monitoring. Carbon output is generic methane-pyrolysis
+  solid carbon or carbon-black-like precursor suitable for later anode-material
+  processing; graphitization or high-purity graphite production is a separate step.
+  ~75% carbon recovery; hydrogen byproduct.

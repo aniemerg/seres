@@ -15,6 +15,10 @@ resource_requirements:
 - machine_id: plastic_extruder
   qty: 1
   unit: count
+- machine_id: extrusion_downstream_line_basic_v0
+  qty: 1
+  unit: count
+  notes: Sheet cooling/support, puller, cutting, and thickness checks for translucent sheet.
 energy_model:
   type: fixed_per_batch
   value: 0.8
@@ -23,5 +27,6 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: Extrusion of polymer pellets into translucent projection screen sheet; placeholder
-  parameters.
+notes: Extrusion of polymer pellets into translucent projection screen sheet; uses
+  downstream sheet cooling/support, cutting, and thickness checks beyond the bare
+  extruder. Placeholder parameters.

@@ -4,7 +4,13 @@ name: High-temperature furnace v0
 mass: 1500.0
 unit: unit
 bom: bom_high_temp_furnace_v0
+capabilities:
+- legacy_high_temperature_firing
+- legacy_carbothermal_reduction_heating
+- high_temperature_materials_processing
+- refractory_hot_zone_heating
 notes: DEPRECATED - Consolidated into furnace_high_temp. Generic high-temperature
-  furnace for carbothermal reduction; coarse mass estimate.
+  furnace for carbothermal reduction; coarse mass estimate. Prefer furnace_high_temp
+  for new process requirements and migration targets.
 recipe: recipe_machine_high_temp_furnace_v0
 unit_kind: discrete

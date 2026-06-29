@@ -30,7 +30,7 @@ steps:
       - item_id: metal_scrap
         qty: 10.0
         unit: kg
-    notes: "Fabricate reactor vessel and shell from steel plate (10 kg scrap)"
+    notes: "Fabricate coarse steel reactor vessel and shell from steel plate (10 kg scrap)"
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: welded_fabrications
@@ -43,7 +43,7 @@ steps:
       - item_id: welded_fabrications
         qty: 210.0
         unit: kg
-    notes: "Machine and install internal components, baffles, mounting points"
+    notes: "Machine and install generic internal supports, baffles, and mounting points"
   - process_id: assembly_basic_v0
     inputs:
       - item_id: welded_fabrications
@@ -56,7 +56,7 @@ steps:
       - item_id: assembled_equipment
         qty: 220.0
         unit: kg
-    notes: "Install piping, valves, and mechanical fittings"
+    notes: "Install basic piping, valves, and mechanical fittings; specialized relief, corrosion lining, catalyst beds, and offgas systems are out of scope"
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
@@ -72,7 +72,7 @@ steps:
       - item_id: assembled_equipment
         qty: 250.0
         unit: kg
-    notes: "Install control panel, wire sensors and controls (total: 250 kg)"
+    notes: "Install basic control panel, wire sensors and controls (total: 250 kg)"
   - process_id: integration_test_basic_v0
     inputs:
       - item_id: assembled_equipment
@@ -83,4 +83,4 @@ steps:
         qty: 1.0
         unit: unit
     notes: "Final testing and calibration"
-notes: "Standard machine-assembly chain to manufacture generic_chemical_reactor_v0 using existing unit operations."
+notes: "Legacy coarse machine-assembly chain for generic_chemical_reactor_v0. Prefer chemical_reactor_basic for audited stirred/jacketed reactor requirements and specialized reactors for pressure, corrosion, packed-bed, molten-salt, or hazardous gas chemistry."

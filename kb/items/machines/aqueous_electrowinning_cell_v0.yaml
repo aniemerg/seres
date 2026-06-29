@@ -1,0 +1,22 @@
+id: aqueous_electrowinning_cell_v0
+kind: machine
+name: Aqueous electrowinning cell v0
+mass: 220.0
+mass_kg: 220.0
+unit: unit
+unit_kind: discrete
+material_class: steel
+bom: bom_aqueous_electrowinning_cell_v0
+capabilities:
+- aqueous_electrowinning
+- electrochemical_metal_recovery
+- low_temperature_electrolysis
+recipe: recipe_machine_aqueous_electrowinning_cell_v0
+notes: |
+  Dedicated low-temperature aqueous electrowinning cell for sulfate or similar
+  metal-bearing solutions. Created from electrolysis_cell_unit_v0 split review:
+  the generic 25 kg cell is not a realistic shared resource for cobalt
+  electrowinning, chlor-alkali, Hall-Heroult, and molten-regolith electrolysis.
+  Coarse BOM includes tank shell, plate/grid electrodes, copper bus bars,
+  circulation plumbing, ventilation, gas collection, control panel, and DC
+  power-interface hardware.

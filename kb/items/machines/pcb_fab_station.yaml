@@ -8,8 +8,10 @@ bom: bom_pcb_fab_station
 capabilities:
 - pcb_fabrication
 - pcb_substrate_fabrication
-processes_supported:
-- pcb_fabrication_process_v0
-notes: Stub machine created during ADR 003 migration.
+processes_supported: []
+notes: Deprecated/generic PCB fabrication station stub from ADR 003 migration.
+  Use pcb_fab_equipment for the complete bench-scale PCB lab/tool bundle. Keep this
+  item only as a coarse alias or legacy placeholder until references are fully
+  consolidated; it is not a separate higher-capability industrial PCB factory.
 recipe: recipe_pcb_fab_station_v0
 unit_kind: discrete

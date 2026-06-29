@@ -1,0 +1,76 @@
+id: recipe_machine_aqueous_electrowinning_cell_v0
+kind: recipe
+target_item_id: aqueous_electrowinning_cell_v0
+variant_id: v0
+inputs:
+  - item_id: tank_shell_steel
+    qty: 150.0
+    unit: kg
+  - item_id: electrode_grid_set
+    qty: 5.0
+    unit: kg
+  - item_id: bus_bar_copper
+    qty: 6.0
+    unit: kg
+  - item_id: piping_and_valves_set
+    qty: 8.0
+    unit: kg
+  - item_id: gas_collection_system
+    qty: 30.0
+    unit: kg
+  - item_id: chemical_bath_ventilation
+    qty: 2.0
+    unit: kg
+  - item_id: power_supply_dc_controlled
+    qty: 2.0
+    unit: kg
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: aqueous_electrowinning_cell_v0
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: tank_shell_steel
+        qty: 150.0
+        unit: kg
+      - item_id: electrode_grid_set
+        qty: 5.0
+        unit: kg
+      - item_id: bus_bar_copper
+        qty: 6.0
+        unit: kg
+      - item_id: piping_and_valves_set
+        qty: 8.0
+        unit: kg
+      - item_id: gas_collection_system
+        qty: 30.0
+        unit: kg
+      - item_id: chemical_bath_ventilation
+        qty: 2.0
+        unit: kg
+      - item_id: power_supply_dc_controlled
+        qty: 2.0
+        unit: kg
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: aqueous_electrowinning_cell_v0
+        qty: 1.0
+        unit: unit
+    notes: Assemble tank, electrodes, bus bars, plumbing, ventilation, gas handling,
+      control panel, and DC interface into a coarse electrowinning cell.
+notes: |
+  Coarse assembly route for aqueous electrowinning cell. Mass aligns to BOM total
+  and supports cobalt_sulfate_extraction_v0 without using the generic 25 kg
+  electrolysis_cell_unit_v0.

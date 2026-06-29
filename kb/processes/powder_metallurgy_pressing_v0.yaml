@@ -20,6 +20,9 @@ resource_requirements:
 - machine_id: pellet_press
   qty: 1
   unit: count
+- machine_id: pellet_press_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: per_unit
   value: 0.5
@@ -30,6 +33,10 @@ time_model:
   rate: 10.0
   rate_unit: kg/hr
   scaling_basis: tungsten_powder
-notes: Placeholder powder metallurgy pressing step to form green compact from tungsten
-  powder.
+notes: Powder metallurgy die pressing step to form a small green compact from
+  screened tungsten powder. Assumes dedicated die tooling, controlled pressure,
+  short dwell, ejection/demolding, and optional binder from upstream powder
+  preparation. Output is an unsintered green compact; downstream sintering,
+  heat treatment, sizing, or screening belongs in the recipe for the finished
+  component.
 process_type: continuous

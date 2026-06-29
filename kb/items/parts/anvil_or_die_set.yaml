@@ -7,7 +7,17 @@ material_class: steel
 capabilities:
   - forging_support
   - die_set_forming
-notes: Anvil/die set for press/forging; coarse mass estimate.
+  - open_die_forging_tooling
+  - swage_and_fuller_tooling
+  - forging_press_die_support
+notes: Canonical reusable forging tooling set for general open-die forging under
+  a hammer, press, or hand-tool setup. Includes small interchangeable flat dies,
+  V-dies, swages, fullers, and anvil tooling surfaces; it does not provide heat
+  or forming force by itself. Preserve anvil_block_basic as the heavy fixed anvil
+  mass used in power-hammer assemblies. Dedicated closed/impression dies for a
+  specific part geometry should be modeled separately when geometry, wear, or
+  tolerance matters. The older anvil_and_die_set name is a duplicate of this
+  canonical tooling concept.
 bom: bom_anvil_or_die_set
 recipe: recipe_anvil_or_die_set_v0
 unit_kind: discrete

@@ -2,17 +2,25 @@ id: bom_plastic_extruder_v0
 kind: bom
 owner_item_id: plastic_extruder
 components:
+  - item_id: hopper_feed_system
+    qty: 1
   - item_id: extruder_head_basic
     qty: 1
-  - item_id: heating_plate_induction_heater
+  - item_id: extruder_barrel_heater_set_v0
+    qty: 1
+  - item_id: cooling_loop_basic
     qty: 1
   - item_id: drive_motor_medium
     qty: 1
   - item_id: gearbox_reducer_medium
+    qty: 1
+  - item_id: temperature_control_system_v0
+    qty: 1
+  - item_id: control_panel_basic
     qty: 1
   - item_id: steel_frame_welded
     qty: 1
   - item_id: fastener_kit_small
     qty: 1
 scrap_rate: 0.05
-notes: "Initial explicit BOM for plastic_extruder; refine with detailed sub-assemblies later."
+notes: "Initial explicit BOM for plastic_extruder; preserves hopper/feed, screw/barrel/head, resistive barrel heaters, cooling, motor/gearbox, controls, and frame. Barrel heaters are not induction bearing-heater tooling. Downstream line equipment is separate."

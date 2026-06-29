@@ -5,6 +5,15 @@ inputs:
 - item_id: copper_clad_laminate
   qty: 0.5
   unit: kg
+- item_id: photoresist_solution_v0
+  qty: 0.02
+  unit: kg
+- item_id: etching_chemicals
+  qty: 0.15
+  unit: kg
+- item_id: water
+  qty: 0.5
+  unit: kg
 outputs:
 - item_id: pcb_backprop_bare
   qty: 0.45
@@ -13,8 +22,11 @@ byproducts:
 - item_id: pcb_scrap
   qty: 0.05
   unit: kg
+- item_id: etching_waste_solution
+  qty: 0.15
+  unit: kg
 resource_requirements:
-- machine_id: pcb_fab_station
+- machine_id: pcb_fab_equipment
   qty: 1.0
   unit: unit
 energy_model:
@@ -27,5 +39,12 @@ time_model:
   rate: 2.0
   rate_unit: kg/hr
   scaling_basis: copper_clad_laminate
-notes: Generic PCB fabrication step used across PCB variants to yield bare backprop PCB per recipe.
+notes: Generic bench-scale PCB fabrication step used across PCB variants to yield
+  bare backprop PCB per recipe. Uses the aggregate pcb_fab_equipment station rather
+  than the deprecated pcb_fab_station stub. Assumes copper-clad laminate,
+  photoresist, developer/etchant chemistry, rinse water, drill/routing tooling from
+  the station, and collection of spent etchant as etching_waste_solution. Scope is
+  simple single/double-sided coarse-trace boards; multilayer stacks, reliable plated
+  vias, soldermask, silkscreen, and automated electrical test require future
+  advanced PCB resources or imports.
 process_type: continuous

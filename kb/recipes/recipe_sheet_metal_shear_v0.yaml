@@ -1,0 +1,56 @@
+id: recipe_sheet_metal_shear_v0
+kind: recipe
+target_item_id: sheet_metal_shear
+variant_id: v0
+inputs:
+  - item_id: shear_frame_and_bed
+    qty: 1
+    unit: unit
+  - item_id: shear_blade_or_saw_band
+    qty: 1
+    unit: unit
+  - item_id: feed_and_clamp_system
+    qty: 1
+    unit: unit
+  - item_id: shear_drive_motor
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: sheet_metal_shear
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: shear_frame_and_bed
+        qty: 1
+        unit: unit
+      - item_id: shear_blade_or_saw_band
+        qty: 1
+        unit: unit
+      - item_id: feed_and_clamp_system
+        qty: 1
+        unit: unit
+      - item_id: shear_drive_motor
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: sheet_metal_shear
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: Assemble shear frame, straight blade set, hold-down/feed hardware, drive, controls, and guards.
+notes: Coarse assembly route for the split sheet-shear variant of metal_shear_or_saw.

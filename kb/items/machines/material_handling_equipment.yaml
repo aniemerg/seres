@@ -5,6 +5,14 @@ mass: 404.0
 unit: unit
 bom: bom_material_handling_equipment_v0
 material_class: steel
+capabilities:
+- integrated_material_handling_station
+- bulk_material_and_part_transfer
+- conveyor_cart_interface
+- station_to_station_transport
+- loading_unloading_support
+- work_in_progress_positioning
+- powered_belt_transfer
 notes: |
   Mass updated 2026-01 from 400 kg to 404 kg based on recipe component analysis.
   Steel components: 420 kg raw → 410 kg cut → 405 kg welded → 402 kg machined → 404 kg assembled
@@ -12,6 +20,8 @@ notes: |
 
   Modular material handling unit (small conveyor + cart interface) for moving
   bulk materials/parts between stations. Includes powered belt, frame, idlers, drive,
-  and basic controls.
+  and basic controls. Represents an integrated shop-floor transfer and staging
+  station, distinct from the standalone conveyor_belt_system_v0 subsystem,
+  mining loaders/excavators, overhead cranes, and precision robot manipulators.
 recipe: recipe_machine_material_handling_equipment_v0
 unit_kind: discrete

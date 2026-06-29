@@ -32,6 +32,14 @@ time_model:
   type: batch
   hr_per_batch: 3.0
   notes: heat-up, soak time, quench, temper cycle; batch process
-notes: Heat treatment of metals for hardening, tempering, annealing, or stress relief.
+notes: |
+  Heat treatment of metals for hardening, tempering, annealing, or stress relief.
   Includes controlled heating, soaking, and cooling cycles.
+
+  Template-level quenching assumption: quench_tank represents a small controlled
+  tank with maintained water, oil, or polymer bath inventory. This generic
+  template does not consume quenchant per batch. Concrete hardening variants
+  should add explicit water/oil/polymer/salt inputs, contamination/waste outputs,
+  replenishment rates, and fire or ventilation assumptions when medium-specific
+  accounting matters.
 is_template: true

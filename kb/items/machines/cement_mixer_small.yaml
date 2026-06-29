@@ -1,13 +1,21 @@
 id: cement_mixer_small
-name: Cement mixer (small)
+name: Portable drum cement mixer (small)
 kind: machine
-mass: 309.5
-mass_kg: 309.5
+mass: 144.5
+mass_kg: 144.5
 unit: unit
 bom: bom_cement_mixer_small
-notes: Small cement mixer for binder preparation; coarse mass estimate.
+notes: |
+  Portable 100-150 L rotating drum mixer for cementitious binder and castable
+  refractory preparation. Scoped as a common small drum mixer rather than a
+  pan mixer, mortar mixer, or rugged stationary industrial unit. Mass is the
+  coarse BOM total after replacing the duplicate medium drive motor/gearbox
+  with one small mixer motor and a small gear reducer.
 capabilities:
-- mixing
-- bulk_material_handling
+- portable_drum_mixing
+- cementitious_batch_mixing
+- refractory_castable_mixing
+- aggregate_slurry_mixing
+- batch_material_tumbling
 recipe: recipe_machine_cement_mixer_small_v0
 unit_kind: discrete

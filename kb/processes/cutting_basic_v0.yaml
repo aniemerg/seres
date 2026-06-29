@@ -17,7 +17,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: saw_or_cutting_tool
+- machine_id: sheet_metal_shear
   qty: 1
   unit: count
 - machine_id: hand_tools_basic
@@ -30,8 +30,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Basic cutting operations to separate steel plate or sheet stock into smaller
-  pieces. Includes sawing, shearing, plasma cutting, or abrasive cutting. Produces
-  rough-cut parts for further machining or fabrication. Simple dimensional accuracy,
-  requires finishing for precision parts.
+notes: Basic shop cutting operations to separate steel plate or sheet stock into
+  smaller rough-cut pieces using a light sheet-metal shear resource. Produces rough-cut
+  parts for further machining or fabrication. Simple dimensional accuracy, requires
+  finishing for precision parts. Low-mass manual hacksaws are modeled separately as
+  saw_or_cutting_tool and should be reserved for small hand cuts.
 is_template: true

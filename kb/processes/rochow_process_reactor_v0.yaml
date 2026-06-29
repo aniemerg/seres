@@ -15,7 +15,10 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: chemical_reactor_basic
+- machine_id: gas_handling_loop_v0
+  qty: 1.0
+  unit: count
+- machine_id: catalytic_gas_bed_reactor_v0
   qty: 1.0
   unit: count
 energy_model:
@@ -26,5 +29,5 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: "Rochow process reactor: MeCl gas + Si -> MeSiCl3 (methyltrichlorosilane). Placeholder for early modeling."
+notes: "Rochow process reactor: MeCl gas + Si -> MeSiCl3 (methyltrichlorosilane). Placeholder for early modeling. Uses gas_handling_loop_v0 for methyl chloride gas handling and catalytic_gas_bed_reactor_v0 for heated gas-solid chloride contact service over a silicon/copper catalyst bed; the basic stirred/jacketed reactor is not assumed suitable."
 process_type: batch

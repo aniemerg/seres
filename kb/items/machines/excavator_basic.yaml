@@ -6,9 +6,20 @@ mass_kg: 2000.0
 unit: unit
 bom: bom_excavator_basic_v0
 material_class: steel
-notes: Basic excavator for digging, trenching, and material handling. Hydraulic boom
-  and bucket system for excavating regolith, ore, and soil. Essential for mining operations,
-  site preparation, and bulk material movement. Electric or diesel powered. Mass aligned
-  to current modeled BOM/recipe chain for mass-conservative simulation.
+capabilities:
+- regolith_excavation
+- trenching
+- boom_bucket_digging
+- small_scale_surface_mining
+notes: Lunar-adapted small regolith excavator for digging and trenching with a boom
+  and bucket. Keep the 2000 kg mass as a compact excavator scale, not a proxy for
+  large mine shovels, deep mining, intact hard-rock ripping, polar ice drilling,
+  or high-throughput continuous mining. Assumes electric-hydraulic drive, low-gravity
+  traction limits, abrasive dust protection, thermal/vacuum-compatible exposed hardware,
+  autonomy sensors, and sealed hydraulic components. Nominal bucket capacity is about
+  0.03-0.12 m3 with low-throughput regolith handling on the order of tens of kg/hr
+  unless a process gives a more specific rate. Use loader_small for scooping and
+  short-haul loading; use drilling_equipment_v0 or other specialized resources for
+  ice-cemented polar regolith, subsurface sampling, or hard-rock drilling.
 recipe: recipe_excavator_basic_v0
 unit_kind: discrete

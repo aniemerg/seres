@@ -4,6 +4,23 @@ name: Power storage bank v0
 mass: 320.0
 unit: unit
 bom: bom_power_storage_bank_v0
-notes: Battery/flywheel storage bank; coarse mass estimate.
+capabilities:
+  - electrical_energy_storage
+  - charge_discharge_buffering
+  - short_duration_backup_power
+  - load_leveling_support
+  - state_of_charge_management
+  - battery_or_flywheel_storage
+notes: |
+  Battery/flywheel storage bank for buffering generated electrical energy,
+  supporting charge/discharge cycles, short-duration backup power, and load
+  leveling. Coarse mass estimate.
+
+  Scope is energy storage capacity and storage management, not voltage conversion
+  or distribution. Use power_conditioning_equipment or inverter_dc_to_ac_v0 for
+  conversion/regulation, and power_distribution_bus for high-current routing to
+  loads. Specific battery chemistry or flywheel implementation should be modeled
+  with narrower items when the process depends on chemistry, cycle life, vacuum
+  housing, or safety constraints.
 recipe: recipe_machine_power_storage_bank_v0
 unit_kind: discrete

@@ -4,6 +4,20 @@ name: Radiator panels v0
 mass: 450.0
 unit: unit
 bom: bom_radiator_panels_v0
-notes: Radiator panel assembly for thermal management; coarse mass estimate.
+capabilities:
+- radiative_heat_rejection
+- radiator_panel_array_operation
+- coolant_loop_heat_rejection_interface
+- waste_heat_rejection
+- thermal_management_support
+- basic_thermal_control_sensing
+notes: |
+  Radiator panel assembly for generic thermal management; coarse mass estimate.
+  Includes radiator panel set, heat-pipe or loop interfaces, heat transport loop
+  assembly, sensors, controls, and mounting/fastening hardware. Used with
+  heat_transport_system and thermal_control_valves for continuous waste-heat
+  rejection. Distinct from heat_rejection_radiator, which is the thermionic/process
+  passive radiator assembly, and from heat_transport_system, which moves heat to
+  the radiator.
 recipe: recipe_machine_radiator_panels_v0
 unit_kind: discrete

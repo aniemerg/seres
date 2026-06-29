@@ -6,6 +6,10 @@ inputs:
 - item_id: valve_body_cast_rough
   qty: 4.5
   unit: kg
+- item_id: cutting_fluid
+  qty: 0.2
+  unit: kg
+  notes: Coolant/lubricant for boring and sealing-surface finishing
 outputs:
 - item_id: valve_body_machined
   qty: 4.0
@@ -18,6 +22,12 @@ resource_requirements:
 - machine_id: precision_lathe
   qty: 1
   unit: count
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
+- machine_id: measurement_equipment
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.35
@@ -25,5 +35,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Bore valve body cast rough to final bore and sealing surfaces; byproduct swarf
-  generated.
+notes: Bore valve body cast rough to final bore and sealing surfaces using precision
+  tooling, coolant, and metrology checks. Add grinding/lapping only for valve seats
+  or sealing surfaces whose finish exceeds precision turning/boring capability;
+  byproduct swarf generated.

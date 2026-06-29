@@ -1,0 +1,28 @@
+id: recipe_concentrated_thermal_energy_v0
+target_item_id: concentrated_thermal_energy
+variant_id: solar_concentration_v0
+inputs:
+  - item_id: solar_radiation
+    qty: 1.0
+    unit: kWh
+outputs:
+  - item_id: concentrated_thermal_energy
+    qty: 0.99
+    unit: kWh
+steps:
+  - process_id: solar_thermal_concentration_v0
+    inputs:
+      - item_id: solar_radiation
+        qty: 1.0
+        unit: kWh
+    outputs:
+      - item_id: concentrated_thermal_energy
+        qty: 0.99
+        unit: kWh
+    notes: Concentrate solar radiation into high-temperature thermal energy using
+      solar_concentrator_fresnel_v0.
+assumptions: Uses the existing solar_thermal_concentration_v0 process. Yield follows
+  the process ratio of 99 kWh concentrated thermal energy per 100 kWh solar radiation.
+notes: Production path for the generic concentrated_thermal_energy carrier via solar
+  thermal concentration. concentrated_solar_thermal remains the solar-specific
+  energy-carrier alias used by thermionic recipes.

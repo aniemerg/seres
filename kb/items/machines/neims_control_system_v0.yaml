@@ -3,8 +3,17 @@ kind: machine
 name: NEIMS control system v0
 mass: 2.0
 unit: unit
-notes: Central supervisory system for the Neuroendocrine Immune Manufacturing System
-  (NEIMS).
 bom: bom_neims_control_system_v0_v0
 recipe: recipe_neims_control_system_v0
 unit_kind: discrete
+capabilities:
+- supervisory_manufacturing_control
+- formation_control_coordination
+- embedded_control_execution
+- digital_signaling_coordination
+- control_firmware_hosting
+notes: Central supervisory controller for the Neuroendocrine Immune Manufacturing
+  System (NEIMS) seed concept. Built from formation-control hardware, electronics,
+  programmed microcontroller firmware, and wiring. Provides coordination and control
+  logic only; field sensors, actuators, process machines, and network infrastructure
+  should remain separate resources.

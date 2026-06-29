@@ -14,6 +14,12 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: pellet_press
+  qty: 1
+  unit: count
+- machine_id: pellet_press_die_set
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.15
@@ -21,4 +27,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Pelletizing catalyst powder into formed catalyst pellets.
+notes: Batch die pressing of catalyst powder into formed pellets using the
+  laboratory/pilot pellet_press and a reusable pellet_press_die_set. Assumes
+  pre-screened powder, optional low-percentage binder or moisture conditioning as
+  required by the catalyst formulation, 3-10 mm nominal pellets, controlled press
+  force with a short dwell, and ejection/demolding before handling. Output is a
+  formed catalyst pellet intermediate; catalyst workflows may add drying,
+  calcination, activation, or screening in the owning recipe when those operations
+  are required.

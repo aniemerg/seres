@@ -1,0 +1,42 @@
+id: cylindrical_grinding_precision_v0
+kind: process
+name: Cylindrical grinding (precision)
+is_template: true
+layer_tags:
+  - layer_6
+  - layer_7
+inputs:
+  - item_id: rough_part
+    qty: 1.0
+    unit: kg
+outputs:
+  - item_id: finished_part_deburred
+    qty: 1.0
+    unit: kg
+resource_requirements:
+  - machine_id: labor_bot_general_v0
+    qty: 1
+    unit: count
+  - machine_id: grinder_cylindrical_v0
+    qty: 1
+    unit: count
+  - machine_id: grinding_wheels
+    qty: 1
+    unit: count
+energy_model:
+  type: per_unit
+  value: 1.4
+  unit: kWh/kg
+  scaling_basis: rough_part
+  notes: Grinding spindle, workhead, coolant, and traverse power for round parts.
+time_model:
+  type: linear_rate
+  rate: 0.5
+  rate_unit: kg/hr
+  scaling_basis: rough_part
+  notes: Precision OD/ID or journal grinding with repeated finish passes.
+notes: >
+  Precision grinding for shafts, rollers, journals, bores, and other round or
+  cylindrical features. Use surface_grinding_precision_v0 or
+  precision_grinding_basic_v0 for flat ways, plates, dies, and mating faces.
+process_type: continuous

@@ -16,10 +16,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: metal_shear_or_saw
+- machine_id: sheet_metal_shear
   qty: 1
   unit: count
-- machine_id: rolling_mill_v0
+- machine_id: plate_rolling_mill
   qty: 1
   unit: count
 - machine_id: drill_press
@@ -38,5 +38,9 @@ time_model:
   scaling_basis: sheet_metal_or_structural_steel
   notes: Layout, cutting, bending, forming, deburring
 notes: Sheet metal cutting, bending, forming, and punching operations for creating
-  enclosures, panels, brackets, and housings.
+  enclosures, panels, brackets, and housings. plate_rolling_mill supplies flat
+  rolling/reduction where stock thickness adjustment is required; curved-shell
+  roll bending or press-brake bending should be modeled with separate forming
+  resources when the operation needs them. sheet_metal_shear supplies straight
+  panel and blank cutting.
 process_type: continuous

@@ -8,6 +8,9 @@ inputs:
 - item_id: sheet_metal_or_structural_steel
   qty: 10.0
   unit: kg
+- item_id: welding_rod_steel
+  qty: 0.2
+  unit: kg
 outputs:
 - item_id: welded_fabrications
   qty: 9.5
@@ -19,13 +22,16 @@ resource_requirements:
 - machine_id: welding_power_supply_v0
   qty: 1
   unit: count
-- machine_id: metal_shear_or_saw
+- machine_id: metal_cutting_bandsaw
+  qty: 1
+  unit: count
+- machine_id: sheet_metal_shear
   qty: 1
   unit: count
 - machine_id: press_brake
   qty: 1
   unit: count
-- machine_id: welding_consumables
+- machine_id: press_brake_die_set
   qty: 1
   unit: count
 - machine_id: fixturing_workbench
@@ -44,6 +50,10 @@ time_model:
   scaling_basis: sheet_metal_or_structural_steel
   notes: Includes cutting, bending, fitting, welding, and cleanup
 notes: Combined sheet metal fabrication and welding process for creating structural
-  assemblies, tanks, frames, and enclosures.
+  assemblies, tanks, frames, and enclosures, including straight press-brake bends
+  with separate bend tooling. metal_cutting_bandsaw handles tube/section cutoff
+  and sheet_metal_shear handles sheet/panel blanks. Steel welding rod is the
+  default consumable for steel fabrication; use recipe overrides for aluminum,
+  stainless, TIG, MIG, or brazing-specific filler.
 process_type: continuous
 is_template: true

@@ -4,12 +4,22 @@ kind: machine
 mass: 1209.0
 mass_kg: 1209.0
 unit: unit
+material_class: steel
 bom: bom_vacuum_furnace_v0
+capabilities:
+- vacuum_heat_treatment
+- vacuum_sintering
+- high_vacuum_hot_zone
+- getter_activation
+- oxygen_sensitive_high_temp_processing
+- controlled_cooldown_under_vacuum
 notes: 'Assumptions:
 
   - Mass aligned to current recipe component sum (1209 kg).
 
   High-vacuum furnace suitable for getter activation and high-temp metal processing.
+  Distinct from furnace_high_temp by providing a sealed evacuated hot zone with
+  pumpdown, seals, gauges, feedthroughs, and controlled heat rejection.
 
   '
 recipe: recipe_vacuum_furnace_v0_v0

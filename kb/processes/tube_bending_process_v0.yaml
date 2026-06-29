@@ -14,7 +14,7 @@ byproducts:
   qty: 0.2
   unit: kg
 resource_requirements:
-- machine_id: bending_machine_v0
+- machine_id: tube_bender
   qty: 1
   unit: count
 energy_model:
@@ -22,12 +22,15 @@ energy_model:
   value: 0.3
   unit: kWh/kg
   scaling_basis: aluminum_tube_stock
-  notes: Bending machine power per kg input
+  notes: Tube bender power per kg input
 time_model:
   type: linear_rate
   rate: 4.0
   rate_unit: kg/hr
   scaling_basis: aluminum_tube_stock
   notes: 'Bending rate: 4 kg/hr throughput'
-notes: Bend aluminum tube stock into required straight sections; 0.2 kg becomes scrap.
+notes: Bend aluminum tube stock into required bent pipe sections using tube_bender
+  with appropriate bend die/follower tooling. Assumes moderate bend radius and wall
+  thickness; tight-radius or thin-wall work may require mandrel/CNC variants.
+  0.2 kg becomes trimming/setup scrap.
 process_type: continuous

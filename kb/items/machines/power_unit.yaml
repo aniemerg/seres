@@ -4,9 +4,19 @@ kind: machine
 mass: 155.0
 unit: unit
 bom: bom_power_unit_v0_v0
-notes: Generic electrical power unit used to supply energy to other processes. Placeholder
-  for now.
 processes_supported:
 - power_generation_v0
 recipe: recipe_power_unit_v0
 unit_kind: discrete
+capabilities:
+- generic_electrical_power_supply
+- regulated_power_distribution
+- dc_power_conversion
+- load_power_output
+- electrical_protection_and_switching
+notes: Generic assembled electrical power unit used as a placeholder source and
+  distribution cabinet for process energy modeling. Includes supply electronics,
+  transformer, busbars, output terminals, control, distribution panel, and capacitor
+  bank. Use high_temperature_power_supply_v0, power_supply_dc_high_current,
+  power_supply_high_voltage, inverter_dc_to_ac_v0, or thermionic-specific power
+  conditioning where voltage/current/source constraints matter.

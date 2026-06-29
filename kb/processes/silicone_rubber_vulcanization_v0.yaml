@@ -20,7 +20,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: molding_press_basic
+- machine_id: heated_compression_molding_resource_v0
   qty: 1
   unit: count
 energy_model:
@@ -31,6 +31,7 @@ time_model:
   type: batch
   hr_per_batch: 1.0
 notes: Cross-linking of silicone polymer to form silicone rubber (elastomer) using
-  curing agent. Assumes vulcanization conditions via heated press.
+  curing agent. Uses heated platen compression molding because this vulcanization
+  route assumes simultaneous mold pressure and temperature-controlled cure.
 source_tags:
 - ellery_2018

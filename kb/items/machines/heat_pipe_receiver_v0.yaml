@@ -4,6 +4,17 @@ kind: machine
 mass: 60.0
 unit: unit
 bom: bom_heat_pipe_receiver_v0_v0
-notes: Placeholder heat pipe receiver unit to enable dependency closure for heat_pipe_receiver_v0.
+capabilities:
+- solar_thermal_receiver_interface
+- heat_pipe_coupled_heat_collection
+- concentrated_heat_absorption
+- high_temperature_heat_transfer
+- receiver_structural_mounting
+notes: Placeholder heat-pipe-coupled thermal receiver unit for collecting
+  concentrated solar or process heat and transferring it into attached heat pipes
+  or downstream thermal loads. Provides receiver structure, absorber/thermal
+  interface, and mounting/alignment function. It is not a complete solar
+  concentrator, heat-pipe loop, storage system, thermionic converter, or power
+  cycle by itself; those resources remain separate.
 recipe: recipe_heat_pipe_receiver_v0
 unit_kind: discrete

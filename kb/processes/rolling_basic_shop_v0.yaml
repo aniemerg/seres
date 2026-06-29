@@ -17,7 +17,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: rolling_mill_v0
+- machine_id: plate_rolling_mill
   qty: 1
   unit: count
 - machine_id: furnace_basic
@@ -35,4 +35,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: metal_ingot
   notes: Hot rolling with multiple passes on a shop mill
-notes: Basic rolling process using a smaller rolling mill instead of a full plate mill.
+notes: Basic shop-scale rolling process using plate_rolling_mill as the canonical
+  flat rolling/reduction resource. The low rate represents small/light-industrial
+  use rather than a separate legacy rolling_mill_v0 machine.

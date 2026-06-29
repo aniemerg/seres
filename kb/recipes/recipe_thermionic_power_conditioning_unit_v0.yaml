@@ -1,0 +1,81 @@
+id: recipe_thermionic_power_conditioning_unit_v0
+kind: recipe
+target_item_id: thermionic_power_conditioning_unit_v0
+variant_id: v0
+inputs:
+  - item_id: power_conditioning_module
+    qty: 2
+    unit: unit
+  - item_id: transformer_power_medium
+    qty: 25
+    unit: kg
+  - item_id: capacitor_bank_power
+    qty: 10
+    unit: kg
+  - item_id: voltage_regulator_module
+    qty: 5
+    unit: kg
+  - item_id: control_circuit_board_power
+    qty: 2
+    unit: kg
+  - item_id: enclosure_electrical_medium
+    qty: 1
+    unit: unit
+  - item_id: cooling_fan_and_ducting
+    qty: 1
+    unit: unit
+  - item_id: steel_plate_or_sheet
+    qty: 1
+    unit: kg
+  - item_id: fastener_kit_medium
+    qty: 3
+    unit: kg
+outputs:
+  - item_id: thermionic_power_conditioning_unit_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: power_conditioning_module
+        qty: 2
+        unit: unit
+      - item_id: transformer_power_medium
+        qty: 25
+        unit: kg
+      - item_id: capacitor_bank_power
+        qty: 10
+        unit: kg
+      - item_id: voltage_regulator_module
+        qty: 5
+        unit: kg
+      - item_id: control_circuit_board_power
+        qty: 2
+        unit: kg
+      - item_id: enclosure_electrical_medium
+        qty: 1
+        unit: unit
+      - item_id: cooling_fan_and_ducting
+        qty: 1
+        unit: unit
+      - item_id: steel_plate_or_sheet
+        qty: 1
+        unit: kg
+      - item_id: fastener_kit_medium
+        qty: 3
+        unit: kg
+    outputs:
+      - item_id: thermionic_power_conditioning_unit_v0
+        qty: 1
+        unit: unit
+    est_time_hr: 8.0
+    labor_hours: 6.0
+    machine_hours: 2.0
+    notes: "Assemble thermionic power-conditioning cabinet, wire converter/regulator modules, install bus filtering and protection, fit cooling and enclosure hardware, and test regulated output under thermionic-source load simulation."
+assumptions: >
+  80 kg active cabinet for thermionic converter source/load matching. Reuses
+  power_conditioning_module as a subcomponent; inverter-specific PV hardware is
+  not required at this abstraction layer.
+notes: >
+  Thermionic power conditioning unit for DC/DC conversion, voltage/current
+  regulation, filtering, protection, and monitoring of thermionic converter output.

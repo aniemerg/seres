@@ -5,6 +5,14 @@ mass: 1896.0
 unit: unit
 bom: bom_solar_thermal_storage_system_v0
 material_class: composite
+capabilities:
+- solar_thermal_energy_storage
+- sensible_heat_storage
+- latent_heat_storage_support
+- insulated_hot_media_containment
+- thermal_charge_discharge_buffering
+- high_temperature_heat_exchanger_interface
+- day_night_process_heat_buffering
 notes: 'Mass updated 2026-01 from 2000 kg to 1896 kg based on recipe analysis:
 
   Tank shell (450) + refractory lining (95) + insulation (280) + regolith media (950)
@@ -28,5 +36,10 @@ notes: 'Mass updated 2026-01 from 2000 kg to 1896 kg based on recipe analysis:
   Insulation: Regolith-based or vacuum gap insulation
 
   Critical for: Continuous FFC operation, 24/7 power generation'
+scope_notes: Stores and buffers heat from a concentrator or other heat source. Does
+  not provide optical concentration, active process heating by itself, power conversion,
+  pumping, or plant-level heat distribution; use solar_concentrator_fresnel_v0,
+  furnace/process heaters, thermionic systems, and heat_transport_system for those
+  functions.
 recipe: recipe_machine_solar_thermal_storage_system_v0
 unit_kind: discrete

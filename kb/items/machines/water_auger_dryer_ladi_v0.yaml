@@ -5,11 +5,24 @@ mass: 300.0
 unit: unit
 bom: bom_water_auger_dryer_ladi_v0
 material_class: steel
+capabilities:
+- lunar_auger_water_extraction
+- shallow_regolith_auger_drilling
+- heated_regolith_drying
+- water_vapor_desorption
+- volatile_vapor_transfer
+- polar_ice_regolith_processing
 notes: "Lunar Auger Drill and ISRU (LADI) system for water extraction from regolith.\n\
   Source: Identified from paper reviews (water and volatiles ISRU)\nMethod: Drill\
   \ into regolith, heat to release adsorbed water, capture vapor\nComponents: Auger\
   \ drill, heating system, vapor collection\nTypical depth: 0.5-2 meters to access\
   \ volatile-rich regolith\nOperating temperature: 100-300\xB0C to desorb water\n\
-  Applications: Water extraction from permanently shadowed craters\n"
+  Applications: Water extraction from permanently shadowed craters\nScope: Integrated\
+  \ auger/dryer module for exposing and heating icy or hydrated regolith and routing\
+  \ evolved water vapor to a capture/cold-trap subsystem. Distinct from generic\
+  \ drilling_equipment_v0, low-temperature drying_oven, thermal_water_extractor,\
+  \ and vapor_capture_system_v0; those may be used as separate resources where\
+  \ excavation, batch heating, condensation, pumping, or storage requirements are\
+  \ modeled independently.\n"
 recipe: recipe_water_auger_dryer_ladi_v0
 unit_kind: discrete

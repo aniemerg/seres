@@ -19,12 +19,16 @@ resource_requirements:
 - machine_id: furnace_high_temp
   qty: 1
   unit: count
-- machine_id: controlled_atmosphere_chamber
+- machine_id: inert_atmosphere_system
   qty: 1
   unit: count
 - machine_id: hydraulic_press
   qty: 1
   unit: count
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: count
+  notes: Press tooling for green compact shape before furnace sintering.
 energy_model:
   type: per_unit
   value: 4.0
@@ -39,6 +43,10 @@ time_model:
   scaling_basis: powder_metal_or_ceramic
   notes: Pressing, furnace heat-up, sintering hold time, controlled cooling
 notes: Sintering process for consolidating powder materials (metal, ceramic) into
-  solid parts by heating below melting point. Diffusion bonding creates strong structures.
+  solid parts by heating below melting point. Hydraulic_press provides green-compact
+  pressing force, pressing_mold_set provides geometry/tooling, and furnace_high_temp
+  performs the thermal sintering step. inert_atmosphere_system provides purge/oxygen
+  exclusion for atmosphere-sensitive variants; a generic sealed chamber is not the
+  sintering hot-zone resource.
 process_type: continuous
 is_template: true

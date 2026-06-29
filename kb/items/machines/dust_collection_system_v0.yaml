@@ -4,6 +4,15 @@ name: Dust collection system
 mass: 200.0
 unit: unit
 bom: bom_dust_collection_system_v0
-notes: Dust extraction and filtration system for maintaining clean work environment.
 recipe: recipe_dust_collection_system_v0
 unit_kind: discrete
+capabilities:
+- dust_extraction
+- cyclone_particulate_separation
+- fine_dust_filtration
+- enclosed_regolith_dust_control
+- collection_hopper_dust_capture
+notes: Dust extraction and filtration system with cyclone separation, filter
+  cartridges, blower, ductwork, and collection hopper for enclosed regolith and
+  shop dust control. Captures particulate-laden gas streams; use gas_scrubbing_unit_v0
+  for corrosive or toxic offgas polishing.

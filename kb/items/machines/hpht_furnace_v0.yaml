@@ -4,7 +4,18 @@ kind: machine
 mass: 1000.0
 unit: unit
 bom: bom_hpht_furnace_v0_v0
-notes: Placeholder HPHT furnace for high-temperature processing in ISRU/metallurgical
-  workflows; refine specs as more data becomes available.
+capabilities:
+- high_pressure_high_temperature_processing
+- hpht_diamond_synthesis
+- simultaneous_pressurized_heating
+- industrial_diamond_growth_cycle
+- refractory_high_load_hot_zone
+- pressure_cell_temperature_control
+notes: High-pressure high-temperature furnace/press system for HPHT industrial diamond
+  synthesis and similar specialized pressure-cell heating cycles. This is not a
+  general high-temperature furnace, hot press, or HIP unit; use furnace_high_temp,
+  hot_press_v0, or hip_press_unit_v0 where only high heat, uniaxial pressing, or
+  isostatic densification is needed. Placeholder mass and pressure/temperature
+  ratings should be refined when real HPHT cell geometry is modeled.
 recipe: recipe_hpht_furnace_v0
 unit_kind: discrete

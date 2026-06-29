@@ -3,7 +3,24 @@ kind: machine
 name: Precision Positioning Stage
 mass: 75.0
 unit: unit
+material_class: steel
 bom: bom_precision_stage_v0
-notes: Precision XYZ positioning stage for accurate part placement and measurement.
+capabilities:
+- xyz_linear_positioning
+- precision_part_placement
+- inspection_fixture_positioning
+- measurement_stage_motion
+- stepper_controlled_axis_motion
+- ball_screw_linear_motion
+- repeatability_calibration
+notes: |
+  Precision Cartesian XYZ positioning stage for accurate part placement,
+  measurement, and inspection. Built from linear rails, ball screws, precision
+  stepper axes, mounting plates, wiring, electronics, and calibration.
+
+  Scope: larger assembled positioning machine/stage for fixture and inspection
+  work. Distinct from linear_stage_xyz_precision, which is a smaller part-level
+  XYZ stage, and from stewart_platform_calibrator, which provides six-axis
+  roll/pitch/yaw pose alignment for optical concentrator calibration.
 recipe: recipe_precision_stage_v0
 unit_kind: discrete

@@ -29,6 +29,9 @@ resource_requirements:
 - machine_id: gravity_separator
   qty: 1
   unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 3.0
@@ -36,7 +39,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: Basic mineral processing to concentrate valuable minerals from ore or regolith.
-  Includes crushing, screening, gravity separation, and magnetic separation. Typical
-  recovery ~30-50% depending on ore grade. Produces concentrated mineral product and
-  tailings. Used for processing lunar minerals.
+notes: >
+  Basic mineral processing to concentrate valuable minerals from ore or regolith.
+  Includes crushing, screening, dry air-table density separation, and magnetic
+  separation. Screening controls particle size before the density stage; the
+  gravity separator is not a replacement for sieving/classification. Typical
+  recovery ~30-50% depending on ore grade, density contrast, and particle-size
+  distribution. Lunar operation assumes enclosed gas handling and dust collection
+  for dry-table separation in vacuum.

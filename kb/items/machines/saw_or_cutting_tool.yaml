@@ -1,12 +1,23 @@
 id: saw_or_cutting_tool
 kind: machine
-name: Saw or cutting tool
+name: Hand hacksaw
 mass: 1.0
 unit: unit
 material_class: steel
-notes: Handheld saw/cutting tool for general fabrication tasks (frame saw or hacksaw
-  equivalent). Steel frame with replaceable blades; used for cutting bars, tubing,
-  and plate stock during fixture prep and small-scale fabrication. Mass updated to match recipe inputs (1.0 kg steel + 0.2 kg fasteners - losses).
+capabilities:
+- manual_hacksaw_cutting
+- low_throughput_metal_cutting
+- small_bar_tube_and_rod_cutting
+- replaceable_blade_sawing
+- hand_fixture_stock_prep
+- manual_kerf_cutting
+notes: Manual metal-cutting hacksaw or frame saw with replaceable blades, grip, and
+  tensioning hardware. Use for low-throughput manual cuts in small bar, tube, rod,
+  or fixture-prep stock. Do not use as the default resource for thick plate, heavy
+  stock, production cutting, precision kerf control, shearing, plasma cutting, or
+  abrasive cutoff operations; use metal_shear_or_saw or a more specific cutting
+  machine for those cases. Mass updated to match recipe inputs (1.0 kg steel +
+  0.2 kg fasteners - losses).
 bom: bom_saw_or_cutting_tool_v0
 recipe: recipe_saw_or_cutting_tool_v0
 unit_kind: discrete

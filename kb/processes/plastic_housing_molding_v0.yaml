@@ -13,19 +13,23 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: molding_press_basic
+- machine_id: injection_molding_machine_v0
   qty: 1
   unit: count
 energy_model:
-  type: per_unit
-  value: 0.5
-  unit: kWh/kg
-  scaling_basis: plastic_pellets
+  type: fixed_per_batch
+  value: 0.025
+  unit: kWh
+  notes: Small housing injection cycle, preserving the previous 0.5 kWh/kg placeholder
+    scale for a 0.05 kg shot.
 time_model:
-  type: linear_rate
-  rate: 0.5
-  rate_unit: kg/hr
-  scaling_basis: plastic_pellets
-notes: Mold plastic pellets into plastic_housing_molded using basic molding press.
-  Placeholder parameters; mass balance 1:1.
-process_type: continuous
+  type: batch
+  hr_per_batch: 0.1
+  notes: Mold close, injection/pack, cooling, mold open, and ejection for one small
+    housing shot.
+notes: Injection mold plastic pellets into plastic_housing_molded using a dedicated
+  thermoplastic injection molding machine with pellet plasticizing, heated barrel/nozzle,
+  closed mold clamping, cooling, and ejection support. This is distinct from
+  molding_press_basic compression molding and from continuous plastic_extruder
+  profile/sheet extrusion. Placeholder parameters; mass balance 1:1.
+process_type: batch

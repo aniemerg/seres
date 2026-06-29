@@ -13,9 +13,9 @@ outputs:
   qty: 1.0
   unit: kg
 resource_requirements:
-- machine_id: steel_forming_press
+- machine_id: hydraulic_press
   qty: 1
-  unit: count
+  unit: unit
 energy_model:
   type: fixed_per_batch
   value: 0.6
@@ -24,5 +24,8 @@ time_model:
   type: batch
   hr_per_batch: 0.5
 process_type: batch
-notes: Form thick steel shell from 3mm sheet using sheet forming press; placeholder
-  values.
+notes: Form thick steel shell from 3mm sheet using the canonical hydraulic_press
+  with shell-forming fixtures/tooling. Assumes low-volume 3 mm steel sheet work
+  within a medium 20-50 ton press envelope; use press_brake, stamping_press_basic,
+  or a future deep-draw press if bend geometry, repeat stamping, or draw depth
+  becomes explicit.

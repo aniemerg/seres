@@ -28,9 +28,7 @@ resource_requirements:
 - machine_id: high_temperature_power_supply_v0
   qty: 1
   unit: count
-- machine_id: electrodes
-  qty: 1
-  unit: count
+  notes: Controlled high-current DC rectifier duty for molten regolith electrolysis.
 energy_model:
   type: fixed_per_batch
   value: 10.0
@@ -41,4 +39,18 @@ time_model:
   hr_per_batch: 3.0
   notes: batch MRE cycle with electrode maintenance
 process_type: batch
-notes: Anchor for oxygen + metal co-production; numbers to be added later.
+notes: |
+  Anchor for oxygen + metal co-production by molten regolith electrolysis. Uses
+  mre_reactor_v0 rather than electrolysis_cell_unit_v0 or a generic chemical
+  reactor; high_temperature_power_supply_v0 represents coarse industrial
+  controlled high-current DC electrolysis supply rather than ordinary bench power.
+
+  Heating/product assumptions: the reactor provides integrated molten-regolith
+  containment, startup/trim heating, insulation, offgas collection interface, and
+  electrode/feedthrough hardware; MRE-specific electrode assemblies are modeled
+  as reactor BOM components or maintenance replacements rather than a separate
+  machine requirement for this batch process. Oxygen evolves as bubbles and
+  exits through the offgas manifold interface. Crude reduced metal is treated as
+  a tapped/removed co-product, while slag/regolith residue cleanout and detailed
+  metal separation are deferred to downstream refining or future higher-fidelity
+  MRE variants.

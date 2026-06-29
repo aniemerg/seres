@@ -1,11 +1,19 @@
 id: electrolyzer_pem_v0
 name: PEM Electrolyzer
 kind: machine
-mass: 260.0
-mass_kg: 260.0
+mass: 100.0
+mass_kg: 100.0
 unit: unit
 bom: bom_electrolyzer_pem_v0
-notes: PEM-based water electrolysis unit. Placeholder mass and capabilities; BOM and
-  exact specs to be refined from hardware data.
+capabilities:
+- water_electrolysis
+- hydrogen_generation
+- oxygen_generation
+- pem_cell_stack_operation
+- gas_separation
+notes: PEM-based water electrolysis unit. Mass updated to 100 kg based on current
+  component estimate of cell stack, high-current DC supply, gas collection, membrane,
+  fasteners, and compact housing/structure. BOM and exact specs should still be
+  refined from hardware data.
 recipe: recipe_electrolyzer_pem_v0
 unit_kind: discrete

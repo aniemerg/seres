@@ -14,7 +14,7 @@ outputs:
   qty: 72.0
   unit: kg
 resource_requirements:
-- machine_id: epoxy_synthesis_unit
+- machine_id: acid_reactor_v0
   qty: 1
   unit: count
 energy_model:
@@ -24,4 +24,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.4
-notes: Direct synthesis of HCl from H2 and Cl2; yields aqueous HCl (30-37%).
+notes: Direct synthesis of HCl from H2 and Cl2; yields aqueous HCl (30-37%). Uses
+  acid-resistant reactor service for chlorine/HCl corrosion, gas evolution, and pressure
+  relief rather than the basic stirred/jacketed reactor.

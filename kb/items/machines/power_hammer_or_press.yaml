@@ -1,6 +1,6 @@
 id: power_hammer_or_press
 kind: machine
-name: Power hammer or press
+name: Forging power hammer (basic)
 mass: 545.0
 unit: unit
 bom: bom_power_hammer_or_press
@@ -10,8 +10,17 @@ notes: |
   Recipe casts 495 kg of frame/anvil/head structure, then adds 50 kg of drive motor and controls.
   Total: 495 + 50 = 545 kg.
 
-  Power hammer or mechanical press for hot forging and metal forming operations.
-  Provides repeated impact or sustained pressure to shape heated metal. Essential
-  for producing forged components with enhanced grain structure and mechanical properties.
+  Interpreted as the canonical basic forging power hammer because the BOM is hammer-like:
+  hammer frame, hammer head, drive motor, anvil block, controls, sensors, and power
+  conditioning. Provides repeated impact blows for low-volume hot forging after a
+  separate heat source such as induction_forge_v0 brings stock to forging temperature.
+  Pair with anvil_or_die_set for tooling. Use forging_press_v0 for sustained hot
+  press forging, and hydraulic_press for general shop pressing, compaction, bearing
+  installation, or straightening. Do not replace this active impact-forging machine
+  with labor bots or hand tools; labor covers setup, heating, and manipulation.
+capabilities:
+- impact_forging
+- hot_forging
+- powered_hammering
 recipe: recipe_power_hammer_or_press_v0
 unit_kind: discrete

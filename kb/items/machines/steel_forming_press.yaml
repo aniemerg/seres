@@ -4,8 +4,15 @@ name: Steel forming press
 mass: 670.0
 unit: unit
 material_class: steel
+deprecated: true
+replaced_by: hydraulic_press
 processes_supported: []
-notes: 'Mass updated 2026-01 from 2000 kg to 670 kg based on BOM component analysis.
+notes: 'DEPRECATED - consolidated into hydraulic_press for current coarse steel
+  sheet/shell forming operations. Current process requirements should use
+  hydraulic_press plus geometry-specific tooling such as press_brake, stamping
+  dies, or forming fixtures where the operation requires it.
+
+  Historical mass updated 2026-01 from 2000 kg to 670 kg based on BOM component analysis.
 
   Component total: press_frame_medium (300) + hydraulic_cylinder_press (90) +
 
@@ -21,6 +28,9 @@ notes: 'Mass updated 2026-01 from 2000 kg to 670 kg based on BOM component analy
   was not defined.
 
   '
-bom: bom_steel_forming_press
-recipe: recipe_steel_forming_press_v0
+capabilities:
+- legacy_hydraulic_sheet_forming
+- steel_sheet_press_forming
+- low_volume_shell_forming
+recipe: recipe_hydraulic_press_v0
 unit_kind: discrete

@@ -1,0 +1,27 @@
+id: recipe_machine_solvent_extraction_mixer_settler_v0
+kind: recipe
+target_item_id: solvent_extraction_mixer_settler_v0
+variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 350.0
+    unit: kg
+outputs:
+  - item_id: solvent_extraction_mixer_settler_v0
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 350.0
+        unit: kg
+    outputs:
+      - item_id: solvent_extraction_mixer_settler_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: Assemble mixer/settler tankage, agitator, pumps, level/interface sensing,
+      valves, controls, and skid frame.
+notes: Coarse scaffold recipe for a solvent-extraction mixer-settler module.

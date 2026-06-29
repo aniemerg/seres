@@ -40,11 +40,12 @@ steps:
         unit: unit
     est_time_hr: 1.0
     labor_hours: 1.0
-    notes: "Assemble cutting tools from BOM components"
+    notes: "Assemble manual cutting-tool kit from hand tools, saws, spare blades, and fasteners"
 notes: |
   Assumptions:
-  - Tool set mass balanced by increasing saw/blade quantities within kit.
+  - Manual cutting-tool kit mass balanced by saw/blade quantities within kit.
   Rationale:
-  - Matches cutting_tools_general mass (30 kg) without introducing new items.
+  - Keeps cutting_tools_general as a hand/basic cutting kit, while precision_tooling_set
+    covers machine-tool cutters and metal_shear_or_saw covers powered stock cutting.
   Uncertainty:
-  - Actual composition of cutting tool set needs refinement.
+  - Actual blade, file, snip, and deburring-tool composition needs refinement.

@@ -5,17 +5,35 @@ mass: 846.0
 unit: unit
 material_class: steel
 bom: bom_press_brake_v0
+capabilities:
+- straight_line_sheet_bending
+- press_brake_forming
+- punch_die_bending
+- enclosure_panel_bending
+- bracket_bend_forming
+- light_plate_bending
 notes: 'Assumptions:
 
   - Mass aligned to current recipe inputs (846 kg) for assembly conservation.
 
-  Machine for bending sheet and plate stock; used for enclosures, ducts, and
+  - Capacity represents a light industrial hydraulic press brake, roughly 20-40
+  ton class with about 1-2 m usable bend length, moderate daylight/stroke, and
+  compatibility with interchangeable punch/die tooling.
 
-  structural brackets. Mass is coarse placeholder for a light industrial unit.
+  Machine for straight-line bending of sheet and light plate stock; used for enclosures, ducts, and
+
+  structural brackets where matched punch-and-die bend fidelity matters. Use
+  hydraulic_press for generic pressing/straightening, stamping_press_basic for
+  blanking or repeated die stamping, and a plate roll/roll-bending machine for
+  curved shells.
+  Press_brake_die_set remains separate tooling for bend radius, material
+  thickness, and geometry-specific forming assumptions.
 
   '
 alternatives:
 - plate_rolling_mill
+- hydraulic_press
+- stamping_press_basic
 dedupe_candidate: true
 recipe: recipe_machine_press_brake_v0
 unit_kind: discrete

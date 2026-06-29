@@ -1,0 +1,60 @@
+id: recipe_metal_spinning_lathe_v0
+kind: recipe
+target_item_id: metal_spinning_lathe_v0
+variant_id: v0
+inputs:
+  - item_id: precision_lathe
+    qty: 1
+    unit: unit
+  - item_id: roller_set_forming
+    qty: 1
+    unit: unit
+  - item_id: tailstock_assembly
+    qty: 1
+    unit: unit
+  - item_id: hydraulic_power_unit_basic
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: kg
+outputs:
+  - item_id: metal_spinning_lathe_v0
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: precision_lathe
+        qty: 1
+        unit: unit
+      - item_id: roller_set_forming
+        qty: 1
+        unit: unit
+      - item_id: tailstock_assembly
+        qty: 1
+        unit: unit
+      - item_id: hydraulic_power_unit_basic
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: kg
+    outputs:
+      - item_id: metal_spinning_lathe_v0
+        qty: 1
+        unit: unit
+    notes: Install forming roller supports, tailstock pressure tooling, mandrel/workholding
+      interfaces, hydraulic assist, guards, controls, and setup hardware on the
+      precision-lathe base.
+assumptions: Configured resource for conventional metal spinning of modest tank
+  shells; very large or thick cryogenic shells should be routed to a dedicated large
+  metal spinning or flow-forming machine if dimensional checks exceed this cell.
+notes: Assembly route for a metal-spinning lathe cell using existing precision-lathe
+  capability plus forming-specific tooling.

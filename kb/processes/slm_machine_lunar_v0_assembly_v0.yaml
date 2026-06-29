@@ -23,6 +23,10 @@ resource_requirements:
 - machine_id: assembly_station
   qty: 1
   unit: count
+- machine_id: lifting_equipment
+  qty: 1
+  unit: count
+  notes: 500 kg machine assembly is at the shop hoist rating and needs rigging-assisted handling.
 energy_model:
   type: fixed_per_batch
   value: 6.0
@@ -31,4 +35,4 @@ time_model:
   type: batch
   hr_per_batch: 3.0
 notes: Assembles slm_machine_lunar_v0 from machine_frame_small and power_electronics_module
-  using assembly_station.
+  using assembly_station and 500 kg class lifting_equipment for final positioning.

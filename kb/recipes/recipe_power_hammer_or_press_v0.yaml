@@ -5,9 +5,6 @@ inputs:
   - item_id: molten_material_or_preform
     qty: 550.0
     unit: kg
-  - item_id: sand_casting_flask_set
-    qty: 1.0
-    unit: unit
   - item_id: casting_mold_set
     qty: 1.0
     unit: unit
@@ -36,9 +33,6 @@ steps:
       - item_id: molten_material_or_preform
         qty: 550.0
         unit: kg
-      - item_id: sand_casting_flask_set
-        qty: 1.0
-        unit: unit
       - item_id: casting_mold_set
         qty: 1.0
         unit: unit
@@ -48,7 +42,7 @@ steps:
         unit: kg
     est_time_hr: 30.0
     machine_hours: 30.0
-    notes: "Cast heavy frame, anvil, and hammer head components"
+    notes: "Cast heavy frame, anvil, and hammer head components. sand_casting_flask_set is supplied as reusable process tooling by sand_casting_large_v0, not consumed as recipe input."
   - process_id: machining_finish_basic_v0
     inputs:
       - item_id: sand_casting_large_v0
@@ -112,5 +106,9 @@ steps:
     est_time_hr: 34.0
     labor_hours: 34.0
     notes: "Assemble cast frame/anvil/head structure (495 kg from previous steps) with drive motor, controls, sensors, and power conditioning. Test hammer operation, impact force, and safety systems. Cast components provide the main structure (frame, hammer head, anvil); discrete components add drive and control systems (50 kg). Total assembly and testing time: ~34 hours."
-assumptions: Heavy forging equipment for hot metal forming. Requires massive frame and components for repeated impact loading. Critical for producing forged components with enhanced mechanical properties.
-notes: Power hammer provides repeated impact for hot forging operations. Essential for making tools, machine components, and structural parts with superior grain structure and strength compared to cast parts.
+assumptions: Heavy impact-forging equipment for hot metal forming. Requires massive
+  frame and components for repeated impact loading. Heating, dies/anvils, and work
+  handling are separate process resources.
+notes: Basic forging power hammer provides repeated impact for hot forging operations.
+  Use forging_press_v0 for sustained press forging and hydraulic_press for general
+  shop pressing or compaction.

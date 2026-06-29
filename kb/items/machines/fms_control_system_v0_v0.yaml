@@ -4,7 +4,16 @@ kind: machine
 mass: 25.0
 unit: unit
 bom: bom_fms_control_system_v0_v0
-notes: Seed machine variant for FMS controller v0_v0; placeholder to enable versioned
-  modeling.
+notes: |
+  Seed machine variant for FMS controller v0_v0; placeholder to enable versioned
+  modeling. Same coarse Flexible Manufacturing System controller scope as
+  fms_control_system_v0: supervisory coordination of machines, work orders, and
+  factory status rather than low-level motor or process control.
+capabilities:
+- supervisory_control
+- production_scheduling
+- machine_coordination
+- workflow_orchestration
+- factory_status_monitoring
 recipe: recipe_fms_control_system_v0_v0
 unit_kind: discrete

@@ -1,0 +1,56 @@
+id: recipe_metal_cutting_bandsaw_v0
+kind: recipe
+target_item_id: metal_cutting_bandsaw
+variant_id: v0
+inputs:
+  - item_id: shear_frame_and_bed
+    qty: 1
+    unit: unit
+  - item_id: shear_blade_or_saw_band
+    qty: 1
+    unit: unit
+  - item_id: feed_and_clamp_system
+    qty: 1
+    unit: unit
+  - item_id: shear_drive_motor
+    qty: 1
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1
+    unit: unit
+outputs:
+  - item_id: metal_cutting_bandsaw
+    qty: 1
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: shear_frame_and_bed
+        qty: 1
+        unit: unit
+      - item_id: shear_blade_or_saw_band
+        qty: 1
+        unit: unit
+      - item_id: feed_and_clamp_system
+        qty: 1
+        unit: unit
+      - item_id: shear_drive_motor
+        qty: 1
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1
+        unit: unit
+      - item_id: fastener_kit_medium
+        qty: 1
+        unit: unit
+    outputs:
+      - item_id: metal_cutting_bandsaw
+        qty: 1
+        unit: unit
+    est_time_hr: 3.0
+    labor_hours: 3.0
+    notes: Assemble frame, blade/band, feed and clamp system, drive, controls, and guards.
+notes: Coarse assembly route for the split bandsaw/cutoff-machine variant of metal_shear_or_saw.

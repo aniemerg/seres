@@ -4,6 +4,17 @@ name: Signal Generator
 mass: 25.0
 unit: unit
 bom: bom_signal_generator_v0
-notes: Electronic signal generator for test and measurement applications.
+capabilities:
+- signal_generation
+- function_waveform_output
+- frequency_sweep_source
+- amplitude_modulated_test_signal
+- electronics_calibration_stimulus
+- circuit_debug_signal_source
+notes: Electronic signal/function generator for test and measurement applications.
+  Provides adjustable waveform, frequency, and amplitude stimulus for circuit debugging,
+  calibration, and electronics bench checkout. Use signal_generator_analog_v0 where
+  an explicitly analog signal source is modeled as a separate dependency; use
+  test_bench_electrical when the full bench/instrument bundle is the process resource.
 recipe: recipe_signal_generator_v0
 unit_kind: discrete

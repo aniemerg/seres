@@ -7,6 +7,11 @@ inputs:
 - item_id: silicon_purified
   qty: 1.0
   unit: kg
+- item_id: crucible_ceramic_refractory
+  qty: 0.05
+  unit: kg
+  notes: Consumable high-purity ceramic/quartz crucible placeholder for molten silicon
+    contact; generic refractory crucible resource is insufficiently specific.
 outputs:
 - item_id: silicon_metal_v0
   qty: 1.0
@@ -18,7 +23,7 @@ resource_requirements:
 - machine_id: reduction_furnace_v0
   qty: 1
   unit: count
-- machine_id: crucible_refractory
+- machine_id: gas_handling_loop_v0
   qty: 1
   unit: count
 energy_model:
@@ -30,6 +35,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Reduction of purified silicon to silicon metal; placeholder for Rochow-compatible
-  path.
+notes: |
+  Reduction/final conditioning of purified silicon to silicon metal; placeholder
+  for a Rochow-compatible path. Modeled as a small batch controlled-atmosphere
+  furnace operation with consumed high-purity ceramic/quartz crucible containment
+  and gas-loop atmosphere control, not as generic high-temperature heating.
 process_type: batch

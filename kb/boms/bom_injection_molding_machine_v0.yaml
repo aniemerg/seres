@@ -1,0 +1,44 @@
+id: bom_injection_molding_machine_v0
+kind: bom
+owner_item_id: injection_molding_machine_v0
+components:
+  - item_id: steel_frame_welded
+    qty: 1
+    notes: Base frame and guarding support.
+  - item_id: mold_platen_assembly_v0
+    qty: 2
+    notes: Fixed and moving platens for mold clamping.
+  - item_id: hydraulic_power_unit_basic
+    qty: 1
+    notes: Clamp and injection actuation power pack.
+  - item_id: hopper_feed_system
+    qty: 1
+    notes: Pellet feed hopper and throat.
+  - item_id: extruder_barrel_heater_set_v0
+    qty: 1
+    notes: Barrel/nozzle heater bands for plasticizing.
+  - item_id: extruder_head_basic
+    qty: 1
+    notes: Reused as coarse nozzle/injection barrel head placeholder.
+  - item_id: drive_motor_medium
+    qty: 1
+    notes: Screw rotation or servo/hydraulic drive motor.
+  - item_id: gearbox_reducer_medium
+    qty: 1
+    notes: Screw drive reduction.
+  - item_id: cooling_loop_basic
+    qty: 1
+    notes: Mold and hydraulic cooling loop.
+  - item_id: temperature_control_system_v0
+    qty: 1
+    notes: Barrel and mold temperature control.
+  - item_id: molding_control_unit
+    qty: 1
+    notes: Cycle controls and interlocks.
+  - item_id: fastener_kit_medium
+    qty: 1
+notes: |
+  Coarse BOM for a small injection molding machine. Reuses existing extruder,
+  hydraulic, platen, cooling, and control subassemblies to model the machine
+  without introducing detailed screw/check-ring/nozzle/ejector part taxonomy.
+  Part-specific molds are separate tooling.

@@ -16,10 +16,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: sintering_furnace_v0
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
-- machine_id: pressing_mold_set
+- machine_id: ferrite_toroid_pressing_die_set
   qty: 1
   unit: count
 energy_model:
@@ -32,6 +32,8 @@ time_model:
   type: batch
   hr_per_batch: 3.0
   notes: Pressing, binder burn-out, and sintering soak.
-notes: Placeholder sintering step for ferrite toroids used in magnetic components;
-  uses generic powder feedstock and generic output until specific ferrite material
-  is modeled.
+notes: Placeholder pressing/sintering step for ferrite toroids used in magnetic components;
+  uses furnace_high_temp for generic high-temperature firing and geometry-specific
+  toroid die tooling because inner/outer diameter, clearance, and ejection matter.
+  Generic powder feedstock and generic output remain until specific ferrite material
+  is modeled; add controlled atmosphere separately if required.

@@ -5,11 +5,18 @@ mass: 12.0
 unit: unit
 is_import: true
 bom: bom_microscope_inspection_stereo_v0
+capabilities:
+- stereo_visual_inspection
+- low_magnification_quality_control
+- contact_surface_inspection
+- coating_application_inspection
+- assembly_defect_visual_check
 notes: 'Stereo microscope used for quality control inspections at the contact material
-  application station.
-
-  Placeholder mass and capabilities provided for modeling. Detailed optical specifications
-  may be refined later.
+  application station. Provides low-magnification binocular/stereo visual inspection
+  for contact faces, coatings, small assemblies, solder joints, and obvious surface
+  defects. Distinct from optical_microscope_v0, which covers higher-magnification
+  compound microscopy and metallography. Detailed optical specifications may be
+  refined later.
 
   '
 unit_kind: discrete

@@ -1,14 +1,22 @@
 id: power_supply_benchtop
 name: Bench-top power supply
 kind: machine
+deprecated: true
+replaced_by: power_supply_bench
 mass: 2.0
 unit: unit
 material_class: electronic
 capabilities:
   - regulated_dc_power
   - bench_power_supply
-notes: Bench-top DC power supply used to power experimental rigs during KB modeling.
-  Placeholder mass; refine with actual specifications.
-bom: bom_power_supply_benchtop
-recipe: recipe_power_supply_benchtop_v0
+notes: |
+  DEPRECATED - Consolidated into power_supply_bench, the canonical reusable
+  low-power adjustable DC bench supply for electronics testing, circuit bring-up,
+  calibration support, and small experimental rigs.
+
+  This historical alias remains under kb/items/parts despite kind: machine because
+  active references have been migrated to power_supply_bench. Do not use it for new
+  processes or BOMs. Use high_temperature_power_supply_v0, power_supply_dc_high_current,
+  welding_power_supply_v0, or other process-specific supplies for electrolysis,
+  furnace, hot-wire, welding, and other high-current process loads.
 unit_kind: discrete

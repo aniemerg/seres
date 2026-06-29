@@ -4,7 +4,16 @@ name: Magnetization station v0
 mass: 60.0
 unit: unit
 bom: bom_magnetization_station_v0_v0
-notes: Prototype magnetization station used by magnetization process. Placeholder
-  mass and capabilities for modeling; real specs to be refined.
+capabilities:
+- permanent_magnet_magnetization
+- magnetization_pulse_generation
+- electromagnet_yoke_field_application
+- magnet_workpiece_fixturing
+- alnico_applied_field_heat_treatment_support
+notes: Prototype electromagnet/yoke magnetization station used by permanent-magnet
+  magnetization processes and as the applied-field fixture for anisotropic AlNiCo
+  heat treatment. Provides high-current field generation, magnetic yoke/pole
+  geometry, workpiece fixturing, and pulse/control support. It does not provide
+  the thermal cycle itself; heat_treatment_furnace_v0 remains the furnace resource.
 recipe: recipe_magnetization_station_v0
 unit_kind: discrete

@@ -5,7 +5,25 @@ mass: 1000.0
 unit: unit
 material_class: steel
 bom: bom_stamping_press_basic_v0
-notes: Basic stamping press for sheet metal forming/punching; coarse placeholder mass
-  for small industrial unit.
+capabilities:
+  - sheet_metal_stamping
+  - blanking
+  - punching
+  - die_guided_forming
+  - repeatable_press_stroke
+notes: |
+  Generic low-end stamping press for repetitive sheet-metal blanking, punching,
+  and shallow forming with matched dies. The current build path is consistent with
+  a small hydraulic or mechanical C-frame/gap-frame press at coarse KB fidelity.
+
+  Scope: suitable for low-throughput sheet parts and basic lamination stamping
+  when a die set, guided platens, guards, and repeatable stroke control are
+  assumed. It is not a complete high-speed motor lamination line; feeder,
+  stacker, progressive die, and scrap-conveyor automation must be modeled
+  separately if production lamination throughput is required.
+
+  Keep distinct from hydraulic_press: a generic shop hydraulic press can provide
+  force for pressing, straightening, and compaction, but stamping needs die
+  alignment, ram guidance, guarding, and repeatable stroke behavior.
 recipe: recipe_machine_stamping_press_basic_import_v0
 unit_kind: discrete

@@ -1,9 +1,25 @@
 id: power_distribution_bus
 kind: machine
-name: Power Distribution Bus
+name: Power distribution busbar cabinet
 mass: 200.0
 unit: unit
 bom: bom_power_distribution_bus_v0
 recipe: recipe_machine_power_distribution_bus_v0
-notes: Electrical bus bar system for distributing power to multiple loads.
+capabilities:
+- high_current_power_distribution
+- busbar_power_routing
+- multiple_load_terminal_distribution
+- electrical_insulation_support
+- guarded_power_enclosure
+- industrial_process_power_bus
+notes: |
+  Electrical busbar distribution cabinet for routing power from sources or
+  conditioning equipment to multiple loads. Provides low-resistance copper or
+  aluminum conductors, insulated supports, mounting brackets, output terminals,
+  and guarded enclosure structure for safe high-current distribution to
+  industrial equipment such as electrolysis cells.
+
+  Distinct from power_conditioning_equipment, inverters, rectifiers, and
+  high-current process power supplies: busbars distribute already supplied or
+  conditioned power, but do not convert, regulate, rectify, or control it.
 unit_kind: discrete

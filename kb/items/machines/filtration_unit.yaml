@@ -6,9 +6,22 @@ unit: unit
 material_class: steel
 bom: bom_filtration_unit
 recipe: recipe_filtration_unit_v0
-processes_supported: []
+capabilities:
+- liquid_particulate_filtration
+- cutting_fluid_filtration
+- cartridge_filtration
+- pumped_fluid_circulation
+- coarse_solid_liquid_separation
+processes_supported:
+- filtration_basic_v0
+- cutting_fluid_formulation_v0
 notes: |
-  Stub machine created during ADR 003 migration.
+  Basic liquid/process filtration unit for removing particulates from cutting fluids
+  or similar low-hazard process liquids. Includes support frame, plumbing, pump,
+  filter housing/media, and fasteners. This is not a dust collection system and does
+  not cover full hydrometallurgy leach/filtration trains; use hydromet_leach_filter_skid_v0
+  for acid leaching, precipitation, washing, and solution-transfer operations.
+
   Rationale:
   - Mass aligned to current BOM component sum (approx. 166 kg).
 unit_kind: discrete

@@ -1,9 +1,44 @@
 id: mre_reactor_v0
 kind: machine
-name: MRE reactor v0
+name: Molten regolith electrolysis reactor
 mass: 1254.5
 unit: unit
+material_class: refractory
+capabilities:
+- molten_regolith_electrolysis
+- high_temperature_oxide_electrolysis
+- regolith_oxygen_extraction
+- crude_metal_recovery
+- high_current_electrochemical_processing
+- oxygen_offgas_collection_interface
 bom: bom_mre_reactor_v0
-notes: Molten regolith electrolysis reactor; mass aligned to current BOM/assembly recipe.
+notes: |
+  Advanced experimental ISRU reactor for molten regolith electrolysis (MRE), not
+  a mature commodity electrolyzer. Operates on molten lunar/regolith oxide feed
+  near 1600-1700 C to evolve oxygen and produce crude mixed metal byproduct.
+
+  Scope and risk: plausible research/pilot technology, but high technical risk
+  remains around refractory containment, electrode lifetime, current feedthroughs,
+  oxygen collection, metal tapping, slag/residue handling, and thermal control.
+  Treat as imported or late-stage local manufacturing unless those subsystem
+  capabilities are explicitly proven in the scenario.
+
+  Distinct from electrolysis_cell_unit_v0, generic chemical reactors, FFC molten
+  CaCl2 reactors, and ordinary high-temperature furnaces. Use this item for
+  molten-regolith oxygen/metal co-production rather than generic electrolysis
+  cells.
+
+  Heating architecture: modeled as an integrated reactor using high-current
+  electrochemical/Joule heating plus installed high-temperature heating elements
+  for startup/trim heat, insulation, optical temperature sensing, cooling, and
+  heat transport. It does not require a separate furnace_high_temp resource unless
+  a future process variant deliberately externalizes the melt furnace.
+
+  Mass boundary: 1254.5 kg is aligned to the current BOM/assembly recipe and
+  includes the refractory vessel, MRE electrode set, startup/trim heating,
+  insulation, offgas manifold interface, cooling/heat transport, high-current bus,
+  sensors, controls, compute, and fasteners. It does not include bulk feedstock
+  storage, downstream oxygen compression/storage, full metal refining, or
+  long-term replacement electrode inventory.
 recipe: recipe_machine_mre_reactor_v0
 unit_kind: discrete

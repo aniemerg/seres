@@ -15,7 +15,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: molding_press_basic
+- machine_id: heated_compression_molding_resource_v0
   qty: 1
   unit: count
 energy_model:
@@ -25,8 +25,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-  notes: Mold rubber or plastic into intermediate shapes. Uses a basic molding press.
-notes: Molding operation producing an intermediate rubber/plastic piece.
+  notes: Mold rubber or plastic into intermediate shapes with heated compression
+    molding when cure temperature is required.
+notes: Molding operation producing an intermediate rubber/plastic piece. Current
+  route uses heated compression molding for rubber, silicone, or thermoset cure
+  cycles. Use molding_press_basic for cold compression molding variants.
 source_tags:
 - ellery_2018
 process_type: batch

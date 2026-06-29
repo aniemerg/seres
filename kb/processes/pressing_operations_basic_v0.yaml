@@ -31,8 +31,10 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.0
-notes: Basic pressing operations using hydraulic press. Includes hot pressing, cold
-  pressing, powder compaction, and forming operations. Pressure range typically 50-500
-  tons depending on press capacity. Used for powder metallurgy compaction, metal forming,
-  and composite pressing.
+notes: Basic pressing operations using the canonical medium hydraulic_press plus
+  separate press_ram_set tooling. Covers cold pressing, simple compaction, bearing
+  work, and shop forming within the press envelope; hot pressing, high-volume
+  stamping, press-brake bends, and part-specific mold/die geometry require their
+  own process/tooling resources. Approximate press class is 20-50 tons, not a
+  massive production press.
 is_template: true

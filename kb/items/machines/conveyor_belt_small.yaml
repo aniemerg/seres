@@ -5,6 +5,21 @@ mass: 120.0
 unit: unit
 bom: bom_conveyor_belt_small_v0
 material_class: steel
-notes: Small conveyor belt for material handling and in-line processing.
+capabilities:
+  - small_belt_conveying
+  - light_bulk_material_transport
+  - part_transfer_between_stations
+  - in_line_material_transport
+  - powered_belt_feed
+  - conveyor_frame_belt_drive_support
+notes: |
+  Small powered conveyor belt for light material handling, in-line processing,
+  and part or bulk-solid transfer between nearby stations. Includes frame, belt
+  loop, drive unit, and idlers.
+
+  Use this as the assembled conveyor module in BOMs such as magnetic_separator
+  or conveyor_belt_system_v0. Distinct from material_handling_equipment, which is
+  a broader conveyor/cart material handling station, and from screw conveyors or
+  mining-scale conveyors that need different feed geometry and duty assumptions.
 recipe: recipe_conveyor_belt_small_v0
 unit_kind: discrete

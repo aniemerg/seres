@@ -22,13 +22,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: chemical_reactor_basic
+- machine_id: gas_handling_loop_v0
   qty: 1
   unit: count
 - machine_id: packed_bed_distillation_v0
-  qty: 1
-  unit: count
-- machine_id: pellet_press
   qty: 1
   unit: count
 energy_model:
@@ -47,7 +44,10 @@ notes: "Ostwald process for producing nitric acid from ammonia via catalytic oxi
   Stage 3 - Absorption: 3NO2 + H2O → 2HNO3 + NO (NO recycled)\nOverall: NH3 + 2O2\
   \ → HNO3 + H2O\nTemperature: 600-800°C for stage 1 (catalytic oxidation)\nPressure:\
   \ 400-1000 kPa (4-10 bar)\nCatalyst: Platinum on nickel (terrestrial) or tungsten\
-  \ carbide on nickel (lunar)\nProcess sequence:\n  1. Ammonia vaporized and mixed\
+  \ carbide on nickel (lunar)\nEquipment note: gas_handling_loop_v0 plus the existing\
+  \ packed-bed column placeholder stand in for the high-temperature catalytic gas\
+  \ train until a dedicated catalytic bed reactor is modeled; chemical_reactor_basic\
+  \ is not assumed suitable.\nProcess sequence:\n  1. Ammonia vaporized and mixed\
   \ with air/oxygen\n  2. Catalytic oxidation to nitric oxide (NO) and water vapor\n\
   \  3. Further oxidation of NO to nitrogen dioxide (NO2)\n  4. Absorption of NO2\
   \ in water to form HNO3\n  5. Unreacted NO recycled back to oxidation stage\nCatalyst\

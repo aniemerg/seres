@@ -16,7 +16,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: molding_press_basic
+- machine_id: heated_compression_molding_resource_v0
   qty: 1
   unit: count
 energy_model:
@@ -26,8 +26,10 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Casting tactile silicone sensor element from silicone rubber; uses a molding
-  press.
+notes: Casting tactile silicone sensor element from silicone rubber using a heated
+  compression-molding resource for controlled platen cure. Precision open casting,
+  vacuum degassing, or dispensing variants should use a separate casting setup if
+  modeled.
 source_tags:
 - ellery_2018
 - ai_estimate

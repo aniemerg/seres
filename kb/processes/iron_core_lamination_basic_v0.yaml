@@ -27,10 +27,12 @@ time_model:
   rate: 0.1
   rate_unit: kg/hr
   scaling_basis: steel_sheet_1mm
-notes: Basic lamination of steel sheet into laminated iron core piece; placeholder
-  parameters for modeling.
-assumptions: 'Uses stamping press basic and labor to form a laminated iron core from
-  a small sheet.
+notes: >
+  Basic die-guided lamination stamping of steel sheet into a laminated iron core
+  piece; placeholder parameters for modeling.
+assumptions: 'Uses stamping_press_basic and labor to form a laminated iron core from
+  a small sheet. This requires die alignment and repeatable stroke behavior, so it
+  is intentionally not routed to generic hydraulic_press.
 
   Mass is conserved (0.01 kg steel_sheet_1mm -> 0.01 kg iron_core_laminated).
 

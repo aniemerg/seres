@@ -4,6 +4,15 @@ kind: machine
 mass: 60.0
 unit: unit
 bom: bom_lab_v0_v0
+capabilities:
+- laboratory_workstation
+- basic_analysis_support
+- sample_preparation
+- inspection_and_testing_support
+- bench_scale_lab_utility_support
 notes: Produced lab_v0_v0 to satisfy the BOM dependency gap for bom_lab_v0_v0.yaml.
+  Provides bench-scale workspace, simple utilities, sample handling, and instrument
+  mounting support. Processes still need the specific instrument, reactor, wet station,
+  furnace, or test bench that performs the actual operation.
 recipe: recipe_lab_v0_v0
 unit_kind: discrete

@@ -4,6 +4,15 @@ name: Water Electrolysis System
 mass: 180.0
 unit: unit
 bom: bom_water_electrolyzer_v0
-notes: Water electrolysis system for producing hydrogen and oxygen from water.
 recipe: recipe_water_electrolyzer_v0
 unit_kind: discrete
+capabilities:
+- water_electrolysis
+- hydrogen_gas_generation
+- oxygen_gas_generation
+- gas_separation_electrolysis
+- controlled_dc_electrochemical_conversion
+notes: Water electrolysis system for producing hydrogen and oxygen from water using
+  a cell stack, DC power supply, separator, and gas collection system. Scoped to
+  low-temperature water electrolysis; do not use for molten-regolith, FFC, chlor-alkali,
+  Hall-Heroult, or generic electrowinning service.

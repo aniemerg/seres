@@ -3,6 +3,16 @@ kind: machine
 unit: count
 mass: 600.0
 bom: bom_annealing_basic_v0
+material_class: steel
+capabilities:
+- annealing
+- stress_relief_heat_treatment
+- controlled_heating_cycle
+- controlled_cooling_cycle
+- glass_annealing
+- metal_annealing
 notes: Basic annealing oven/furnace for glass or metal stress relief; placeholder
-  machine.
+  machine. Deprecated duplicate-shaped capability item; use heat_treatment_furnace_v0
+  for controlled metallurgical cycles and annealing_oven_small for small glass/ceramic/metal
+  annealing where that lower-capacity oven is sufficient.
 unit_kind: discrete

@@ -1,13 +1,21 @@
 id: rock_crusher_basic
 kind: machine
-name: Rock crusher (basic)
+name: Rock crusher (basic jaw crusher)
 mass: 500.0
 mass_kg: 500.0
 unit: unit
 bom: bom_rock_crusher_basic_v0
 material_class: steel
-notes: Basic rock crusher for primary size reduction of regolith, ore, and rock. Jaw
-  or cone crusher design reduces large rocks to smaller aggregate sizes for further
-  processing. Essential for mineral extraction and regolith processing operations.
+notes: Canonical compact/light jaw crusher for primary size reduction of regolith,
+  ore, and rock. Represents a jaw-crusher-shaped machine with frame, fixed and moving
+  jaw plates, shaft/flywheel or eccentric drive, bearings, motor/drive, hopper, and
+  guards. Treat 500 kg as a small field or pilot-scale crusher capacity, not a
+  high-throughput quarry machine. Use ball_mill_v0 or other mills for downstream
+  grinding/fine powder production after primary crushing.
+capabilities:
+- primary_crushing
+- jaw_crushing
+- coarse_size_reduction
+- regolith_ore_crushing
 recipe: recipe_rock_crusher_basic_v0
 unit_kind: discrete

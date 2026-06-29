@@ -4,10 +4,22 @@ name: Mechanical hand tools
 mass: 15.0
 unit: unit
 material_class: steel
-notes: Comprehensive set of mechanical hand tools. Includes wrenches (open-end, box-end,
-  adjustable), socket set, screwdrivers (flat and Phillips), pliers (slip-joint, needle-nose,
-  locking), hammers, Allen keys, punches, and files. Hardened steel construction for
-  durability. Essential for mechanical assembly, maintenance, and repair work.
+capabilities:
+- mechanical_fastening
+- mechanical_adjustment
+- maintenance_hand_tooling
+- manual_deburring_support
+- belt_tensioning_support
+notes: Reusable mechanical maintenance and assembly tool inventory, modeled as a
+  machine resource for simulator scheduling convenience rather than as powered process
+  equipment. Includes wrenches (open-end, box-end, adjustable), socket set, screwdrivers
+  (flat and Phillips), pliers (slip-joint, needle-nose, locking), hammers, Allen keys,
+  punches, files, and related manually operated mechanical tools. Hardened steel
+  construction for durability. Use for fastener work, adjustment, maintenance, setup,
+  belt tensioning support, and light manual finishing. Do not use this kit as a
+  substitute for powered cutting, machining, grinding, pressing, welding, calibrated
+  torque control, or precision metrology; those processes should require the appropriate
+  powered equipment, inspection tools, or specialized fixtures.
 bom: bom_hand_tools_mechanical_v0
 recipe: recipe_hand_tools_mechanical_v0
 unit_kind: discrete

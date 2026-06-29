@@ -3,7 +3,24 @@ kind: machine
 name: Vibrating screen v0
 mass: 180.0
 unit: unit
-bom: bom_vibrating_screen_v0
-notes: Vibrating screen for regolith separation; coarse mass estimate.
-recipe: recipe_machine_vibrating_screen_v0
+deprecated: true
+replaced_by: screening_equipment
+capabilities:
+- particle_size_screening
+- vibrating_deck_classification
+- regolith_sieving
+- aggregate_fraction_separation
+- oversize_removal
+- bulk_granular_screening
+notes: |
+  Deprecated legacy vibrating-deck screen item. Consolidated into
+  screening_equipment, which is the canonical compact vibratory screen/sieve
+  classifier for regolith, aggregate, and powder particle-size separation.
+
+  Historical scope: separated feed into size fractions using screen mesh/deck
+  motion; not a crusher, grinder, or density separator. Subtype details such as
+  screen deck, vibration drive, springs/frame, hoppers, controls, and sensors are
+  preserved in screening_equipment and bom_screening_equipment_v0. This deprecated
+  alias intentionally has no BOM or recipe; use screening_equipment for construction
+  and process requirements.
 unit_kind: discrete

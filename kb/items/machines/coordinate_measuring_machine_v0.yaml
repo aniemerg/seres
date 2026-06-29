@@ -8,7 +8,22 @@ bom: bom_coordinate_measuring_machine_v0
 material_class: steel
 power_draw_kW: 1.5
 availability: 0.95
-notes: Variant v0 of the coordinate measuring machine used for dimensional inspection.
+capabilities:
+- coordinate_measurement
+- dimensional_inspection
+- tolerance_verification
+- probe_metrology
+- precision_part_qa
+- cmm_calibration_checking
+notes: |
+  Variant v0 of the coordinate measuring machine used for dimensional inspection.
   Linked to the v0 BOM; placeholder mass/spec for seed material.
+
+  Provides probe-based 3D coordinate measurement for machined parts, tooling,
+  bearings, molds, and aligned assemblies where tolerance verification exceeds
+  manual calipers or gauge checks. Distinct from inspection_tools_basic and
+  measurement_equipment; those cover lower-end or portable metrology, while this
+  item represents a dedicated CMM with precision stages, touch probe, control
+  software, and reference calibration workflow.
 recipe: recipe_coordinate_measuring_machine_v0
 unit_kind: discrete

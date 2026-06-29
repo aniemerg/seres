@@ -4,10 +4,30 @@ name: Heat treatment furnace v0
 mass: 537.0
 unit: unit
 bom: bom_heat_treatment_furnace_v0
-notes: Version 0 heat treatment furnace for self-replication modeling; mass aligned
-  to BOM component sum (~537 kg).
+capabilities:
+- programmable_heat_treatment
+- hardening_tempering
+- annealing
+- stress_relief
+- controlled_ramp_soak_cool
+notes: Programmable chamber heat-treatment furnace for controlled metallurgical
+  cycles including hardening, tempering, annealing, and stress relief. Provides
+  repeatable ramp, soak, and controlled-cooling profiles with part racks/baskets,
+  temperature feedback, and furnace uniformity suitable for batch metal heat
+  treatment. Distinct from furnace_basic or furnace_high_temp generic heating,
+  reduction_furnace_v0 chemical reduction, and sintering_furnace_v0 powder
+  densification. The furnace does not implicitly include vacuum, inert/protective
+  gas, carburizing/nitriding atmosphere, magnetic-field fixtures, or quench media;
+  processes needing those functions should require separate atmosphere, field, or
+  quench resources. Mass aligned to BOM component sum (~537 kg).
 processes_supported:
+- annealing_basic_v0
 - alnico_heat_treatment_v0
+- bearing_set_heavy_production_v0
+- heat_treat_basic_v0
+- heat_treatment_basic_v0
+- heat_treatment_cycle_basic_v0
 - heat_treatment_hardening_v0
+- stress_relief_basic_v0
 recipe: recipe_heat_treatment_furnace_v0_target_v0
 unit_kind: discrete

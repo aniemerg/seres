@@ -5,7 +5,17 @@ mass: 250.0
 unit: unit
 material_class: steel
 bom: bom_plastic_extruder_v0
-notes: Small plastic extruder for filament or profile production; includes heated
-  barrel, screw, drive motor, and die.
+capabilities:
+- single_screw_plastic_extrusion
+- polymer_melting_and_conveying
+- profile_extrusion
+- sheet_or_gasket_stock_extrusion
+- coarse_filament_extrusion
+notes: Small single-screw plastic extruder for shop/lab production of profiles, simple
+  sheet or gasket stock, and coarse filament-like output. Includes feed hopper, heated
+  barrel, screw, motor/gearbox drive, die/head, barrel heaters/cooling, controls,
+  sensors, and basic instrumentation. Downstream cooling, haul-off, cutting, winding,
+  and sheet thickness control are modeled separately by extrusion_downstream_line_basic_v0
+  where process geometry requires them.
 recipe: recipe_machine_plastic_extruder_v0
 unit_kind: discrete

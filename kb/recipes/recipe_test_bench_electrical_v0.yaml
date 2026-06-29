@@ -17,6 +17,27 @@ inputs:
   - item_id: cooling_fan_and_ducting
     qty: 1
     unit: unit
+  - item_id: multimeter_set
+    qty: 1
+    unit: unit
+  - item_id: power_supply_bench
+    qty: 1
+    unit: unit
+  - item_id: oscilloscope_basic
+    qty: 1
+    unit: unit
+  - item_id: signal_generator_analog_v0
+    qty: 1
+    unit: unit
+  - item_id: test_lead_set
+    qty: 1
+    unit: kg
+  - item_id: workpiece_fixture_set
+    qty: 1
+    unit: kg
+  - item_id: calibration_artifacts
+    qty: 1
+    unit: kit
   - item_id: fastener_kit_medium
     qty: 1
     unit: unit
@@ -45,6 +66,27 @@ steps:
       - item_id: cooling_fan_and_ducting
         qty: 1
         unit: unit
+      - item_id: multimeter_set
+        qty: 1
+        unit: unit
+      - item_id: power_supply_bench
+        qty: 1
+        unit: unit
+      - item_id: oscilloscope_basic
+        qty: 1
+        unit: unit
+      - item_id: signal_generator_analog_v0
+        qty: 1
+        unit: unit
+      - item_id: test_lead_set
+        qty: 1
+        unit: kg
+      - item_id: workpiece_fixture_set
+        qty: 1
+        unit: kg
+      - item_id: calibration_artifacts
+        qty: 1
+        unit: kit
       - item_id: fastener_kit_medium
         qty: 1
         unit: unit
@@ -58,6 +100,9 @@ steps:
     est_time_hr: 3.5
     machine_hours: 1.5
     labor_hours: 3.0
-    notes: "Fabricate bench frame and mounts, install power strip/protection, output terminals, and wiring, verify power delivery, grounding, and safety checks"
-assumptions: Bench integrates existing instruments; provides power and mounting only.
-notes: Electrical test bench for instrumentation and circuit testing.
+    notes: "Fabricate bench frame and mounts, install power strip/protection, output terminals, core instruments, test leads, fixtures, calibration artifacts, and wiring, verify power delivery, grounding, safety checks, and instrument readiness"
+assumptions: Bench integrates existing instruments into a canonical full electrical/electronics
+  test capability. Simple processes may still require multimeter_set, power_supply_bench,
+  or oscilloscope_basic directly without requiring the full bench.
+notes: Electrical test bench for instrumentation, circuit testing, burn-in, commissioning,
+  and electronics checkout.

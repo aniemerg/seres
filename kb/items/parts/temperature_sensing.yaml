@@ -1,5 +1,5 @@
 id: temperature_sensing
-kind: machine
+kind: part
 name: Temperature sensing equipment
 mass: 2.0
 unit: unit
@@ -7,7 +7,7 @@ material_class: electronic
 capabilities:
   - temperature_measurement
   - thermal_sensing
-is_import: true
+is_import: false
 deprecated: true
 replaced_by:
   default:
@@ -19,7 +19,15 @@ replaced_by:
   high_temperature_non_contact:
     - optical_pyrometer_temperature_sensor_v0
     - temperature_controller_module
-notes: Set of temperature sensors including thermocouples, RTDs, pyrometers, and associated
-  signal conditioning electronics for high-temperature processes. Deprecated generic
-  bundle; replace with a specific sensor assembly plus the shared temperature_controller_module.
+notes: |
+  Deprecated migration alias for the old generic temperature-sensing bundle. Do
+  not use as an active or imported machine resource.
+
+  Select a specific sensor assembly instead: thermocouple_contact_temperature_sensor_v0
+  for ordinary high-temperature contact feedback, rtd_contact_temperature_sensor_v0
+  for low/medium-temperature precision contact monitoring, or
+  optical_pyrometer_temperature_sensor_v0 for molten, inaccessible, or very
+  high-temperature targets. Pair closed-loop control applications with the
+  separate temperature_controller_module rather than treating controller
+  electronics as part of the probe.
 unit_kind: discrete

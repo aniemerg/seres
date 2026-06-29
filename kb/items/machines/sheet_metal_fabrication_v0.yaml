@@ -4,5 +4,15 @@ name: Sheet metal fabrication cell
 unit: count
 mass: 900.0
 bom: bom_sheet_metal_fabrication_v0
-notes: Sheet metal fabrication cell (cutting, bending, forming); placeholder machine.
 unit_kind: discrete
+capabilities:
+- sheet_metal_cutting
+- sheet_metal_bending
+- sheet_metal_forming
+- sheet_metal_punching
+- enclosure_panel_fabrication
+- bracket_and_housing_fabrication
+notes: Coarse sheet metal fabrication cell for cutting, bending, forming, and
+  punching enclosure panels, brackets, and housings. Use dedicated equipment such
+  as press_brake, stamping_press_basic, plate_rolling_mill, or metal_shear_or_saw
+  where the specific forming mode matters.

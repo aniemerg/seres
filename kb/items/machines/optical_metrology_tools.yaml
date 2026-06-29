@@ -5,6 +5,16 @@ mass: 21.3
 unit: unit
 bom: bom_optical_metrology_tools_v0
 material_class: composite
+capabilities:
+- autocollimator_angular_alignment
+- laser_axis_alignment
+- interferometric_displacement_measurement
+- optical_flatness_reference
+- optical_square_perpendicularity_check
+- solar_concentrator_focus_verification
+- mirror_surface_figure_verification
+- precision_stage_position_verification
+- high_precision_optical_metrology
 notes: |
   Optical measurement tools for precision alignment and metrology. Includes autocollimators,
   laser alignment tools, optical flats, and interferometers. Used for solar concentrator
@@ -12,5 +22,7 @@ notes: |
   for thermionic concentrator focus optimization.
   Assumptions:
   - Mass aligned with current recipe input mass (~21.3 kg total).
+  - Specialized optical metrology resource distinct from basic inspection tools,
+    general measurement_equipment, and ordinary alignment_tools.
 recipe: recipe_optical_metrology_tools_v0
 unit_kind: discrete

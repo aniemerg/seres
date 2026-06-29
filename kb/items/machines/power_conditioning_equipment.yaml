@@ -3,8 +3,29 @@ kind: machine
 name: Power conditioning equipment
 mass: 80.0
 unit: unit
+capabilities:
+- power_conditioning
+- dc_ac_conversion
+- voltage_regulation
+- load_commissioning_support
 bom: bom_power_conditioning_equipment_v0
-notes: Power conditioning equipment including inverters, voltage regulators, and DC-AC
-  converters for solar power integration.
+notes: |
+  Integrated 80 kg power-conditioning cabinet for generic facility power regulation,
+  load commissioning, and coarse solar/PV integration when the exact topology is
+  not modeled. Assumed rating is roughly 5 kW continuous, 10 kW short-duration
+  surge, with DC input from a solar array or DC bus, regulated DC output, optional
+  AC output through an inverter, protection, filtering, controls, and forced-air
+  cooling inside an electrical enclosure.
+
+  Scope: assembled cabinet/rack using lower-level reusable modules such as
+  power_conditioning_module, inverter modules, voltage regulation, magnetics,
+  capacitor banks, controls, and enclosure hardware. Use more specific items where
+  behavior matters: inverter_dc_to_ac_v0 for explicit DC-to-AC conversion,
+  power_supply_dc_high_current for electrolysis/process-current supply, and
+  thermionic_power_conditioning_unit_v0 for thermionic converter source/load
+  matching.
+
+  This is active electrical equipment. Labor bots and tools can install, wire, and
+  commission it, but they do not replace the conversion/regulation hardware.
 recipe: recipe_power_conditioning_equipment_v0
 unit_kind: discrete

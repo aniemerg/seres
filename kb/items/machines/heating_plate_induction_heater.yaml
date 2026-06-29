@@ -1,10 +1,20 @@
 id: heating_plate_induction_heater
 kind: machine
-name: Heating plate induction heater
+name: Induction bearing heater
 mass: 25.0
 unit: unit
+material_class: mixed
 bom: bom_heating_plate_induction_heater_v0
-notes: Induction heating plate for thermal fitting and heat treatment. Used for expanding
-  bearing housings or shrinking shafts for interference fits.
+capabilities:
+- induction_bearing_heating
+- shrink_fit_heating
+- thermal_fit_assembly_heating
+- localized_conductive_part_heating
+- bearing_demagnetization_required
+notes: Small induction bearing and shrink-fit heater for localized thermal fitting.
+  Used for expanding bearings, rings, housings, or toolholders before assembly. This
+  is not a general heat-treatment furnace and should not be used for bulk annealing,
+  hardening, or long soak cycles. Use controlled_heating_plate_v0 for resistive surface
+  heating and heating_jacket_assembly for reactor or vessel thermal-control jackets.
 recipe: recipe_heating_plate_induction_heater_v0
 unit_kind: discrete

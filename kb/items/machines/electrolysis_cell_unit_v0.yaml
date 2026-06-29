@@ -5,11 +5,14 @@ unit: unit
 mass: 25.0
 mass_kg: 25.0
 bom: bom_electrolysis_cell_unit_v0
-notes: 'Modular electrolysis cell unit providing a single electrolysis cell for chlor-alkali
-  systems.
-
-  Placeholder mass and capabilities; will be refined with hardware data.
-
-  '
+capabilities:
+- generic_electrolysis_placeholder
+notes: |
+  Legacy generic electrolysis cell placeholder originally described as a
+  chlor-alkali cell. Machine-review split routes current concrete uses to
+  chemistry-specific resources: aqueous_electrowinning_cell_v0 for cobalt
+  sulfate electrowinning and hall_heroult_reduction_cell_v0 for aluminum
+  smelting. Do not use this as a universal replacement for chlor-alkali,
+  electrowinning, Hall-Heroult, FFC, or molten-regolith electrolysis.
 recipe: recipe_electrolysis_cell_unit_v0
 unit_kind: discrete

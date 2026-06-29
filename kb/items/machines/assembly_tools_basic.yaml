@@ -6,11 +6,28 @@ unit: unit
 material_class: steel
 processes_supported: []
 capabilities:
-- assembly
-- mechanical_assembly
-- electrical_assembly
-notes: Stub machine created during ADR 003 migration. Referenced by processes but
-  was not defined.
+- assembly_workstation_support
+- mechanical_assembly_support
+- electrical_assembly_support
+- fixture_and_clamp_support
+- powered_driver_support
+- esd_assembly_support
+- guided_assembly_sensing
+notes: |
+  Basic assembly workstation and tool bundle, modeled as a machine resource because
+  many processes reserve a repeatable assembly station rather than a portable hand
+  kit. Includes a station frame or bench, the general tool/fixture bundle, clamps
+  and holders, power distribution/conditioning for small powered drivers or test
+  aids, simple sensors, imported control/compute support for guided assembly, bins,
+  and ESD/electrical assembly provisions where relevant.
+
+  This item is intentionally distinct from hand_tools_basic, hand_tools_mechanical,
+  and hand_tools_electrical. Those are portable manual tool kits for labor-bot or
+  maintenance work; assembly_tools_basic is the bench/station resource used for
+  repeatable mechanical/electrical assembly workflows. It does not replace
+  connector-specific crimping tools, soldering stations, precision metrology,
+  welding tools, hydraulic-service tooling, powered machining/cutting equipment,
+  or process-specific fixtures.
 bom: bom_assembly_tools_basic_v0
 recipe: recipe_assembly_tools_basic_v0
 unit_kind: discrete

@@ -4,7 +4,15 @@ kind: machine
 mass: 6.0
 unit: unit
 bom: bom_visual_odometry_system_v0_v0
-notes: Variant v0_v0 of Visual Odometry System; placeholder mass; aligns with seed
-  BOM usage.
 recipe: recipe_visual_odometry_system_v0_v0
 unit_kind: discrete
+capabilities:
+- visual_odometry
+- camera_pose_estimation
+- optic_flow_navigation
+- rover_dead_reckoning
+- sensor_fusion_input
+notes: Variant v0_v0 of the camera-based visual odometry system. Estimates motion
+  and pose from onboard camera streams for rover or mobile robot navigation, providing
+  pose/velocity estimates and sensor-fusion inputs. This is not a general machine-vision
+  inspection station or a complete autonomy stack.

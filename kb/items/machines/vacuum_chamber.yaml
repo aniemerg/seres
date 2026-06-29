@@ -4,13 +4,23 @@ name: Vacuum chamber
 mass: 150.0
 unit: unit
 bom: bom_vacuum_chamber
+capabilities:
+- sealed_vacuum_processing_volume
+- vacuum_tube_process_chamber
+- rough_to_high_vacuum_containment
+- feedthrough_and_access_port_support
+- material_degas_and_test_chamber
+- thin_film_or_getter_process_enclosure
 notes: Vacuum chamber for processing materials and components under vacuum conditions.
   Sealed stainless steel or aluminum vessel with vacuum pumps, pressure gauges, and
   access ports. Achieves vacuum levels from rough vacuum (1-100 mbar) to high vacuum
   (10^-6 mbar) depending on pump configuration. Includes feedthroughs for electrical
   connections, gas inlet, and material handling. Used for vacuum tube assembly, thin
   film deposition, degassing, freeze drying, and materials testing. Chamber volume
-  typically 10-100 liters. Critical for thermionic vacuum tube manufacturing.
+  typically 10-100 liters. Pumpdown and gauge performance depend on attached vacuum
+  pumping equipment such as vacuum_pump_small or vacuum_pump_station; high-temperature
+  vacuum hot-zone work belongs to vacuum_furnace_v0. Critical for thermionic vacuum
+  tube manufacturing.
 processes_supported:
 - cesium_vaporization_basic_v0
 recipe: recipe_machine_vacuum_chamber_v0

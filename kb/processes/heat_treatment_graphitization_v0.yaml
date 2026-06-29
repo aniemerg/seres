@@ -7,7 +7,7 @@ layer_tags:
 inputs: []
 outputs: []
 resource_requirements:
-- machine_id: furnace_high_temp
+- machine_id: vacuum_furnace_v0
   qty: 1
   unit: count
 energy_model:
@@ -19,4 +19,7 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Heat-up, soak, and controlled cool-down
-notes: Graphitization heat treatment for carbon/graphite components; placeholder parameters.
+notes: Graphitization heat treatment for carbon/graphite components; placeholder
+  parameters. Uses vacuum_furnace_v0 because graphitization and oxygen-sensitive
+  high-temperature carbon work require an oxygen-free hot zone rather than a generic
+  high-temperature furnace alone.

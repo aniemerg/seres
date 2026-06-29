@@ -26,9 +26,16 @@ resource_requirements:
 - machine_id: high_temp_furnace_v0
   qty: 1
   unit: count
-- machine_id: vapor_capture_system_v0
+- machine_id: vacuum_pump_small
   qty: 1
   unit: count
+  notes: Active low-pressure support for the sealed retort; lunar ambient vacuum
+    does not remove residual process gas or control retort pressure by itself.
+- machine_id: vapor_condenser_cold_trap
+  qty: 1
+  unit: count
+  notes: Placeholder for magnesium-vapor condenser/cold surface. This is not the
+    water-focused vapor_capture_system_v0.
 energy_model:
   type: fixed_per_batch
   value: 16.0

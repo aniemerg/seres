@@ -4,7 +4,17 @@ kind: machine
 mass: 96.0
 unit: unit
 bom: bom_electrolyzer_alkaline_v0_v0
+capabilities:
+- alkaline_water_electrolysis
+- hydrogen_gas_generation
+- oxygen_gas_generation
+- gas_separation_electrolysis
+- controlled_dc_electrochemical_conversion
+- alkaline_cell_stack_operation
 notes: Placeholder for alkaline-water electrolysis; produces O2 and H2. Mass estimate
-  conservative, aligned with other ISRU equipment.
+  conservative, aligned with other ISRU equipment. Scoped to low-temperature alkaline
+  water electrolysis with an aqueous KOH/NaOH electrolyte, separator, gas collection,
+  and DC power supply. Distinct from PEM electrolyzers, solid-oxide electrolysis,
+  molten-regolith electrolysis, chlor-alkali cells, and generic electrowinning cells.
 recipe: recipe_electrolyzer_alkaline_v0
 unit_kind: discrete

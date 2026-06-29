@@ -1,14 +1,22 @@
 id: heating_furnace
 kind: machine
-name: Heating furnace (general purpose)
+name: Heating furnace (deprecated duplicate)
 mass: 512.0
 unit: unit
 bom: bom_heating_furnace_v0
 material_class: refractory
-notes: "General-purpose heating furnace for preheating materials before processing.\n\
-  Applications: Hot rolling preparation, getter activation, material heat treatment\n\
-  Operating temperature: 600-1200\xB0C typical\nFuel source: Electric resistance or\
-  \ solar-thermal\nComponents: Insulated chamber, heating elements, temperature control\n\
-  Mass aligned to assembled input sum (~512 kg).\n"
+capabilities:
+  - general_chamber_heating
+  - moderate_temperature_heating
+  - preheating
+  - hot_forming_preheat
+  - legacy_furnace_capacity
+notes: "DEPRECATED - consolidated into furnace_basic for general 600-1200 C heating,\
+  \ preheating, ordinary heat treatment, and hot-forming preparation. The 512 kg\
+  \ historical mass represented a larger insulated chamber furnace with heating\
+  \ elements, temperature control, power conditioning, and coarse material handling\
+  \ allowance; no distinct active process duty remains separate from furnace_basic.\
+  \ Use heat_treatment_furnace_v0 for controlled metallurgical cycles and furnace_high_temp\
+  \ for higher-temperature service."
 recipe: recipe_heating_furnace_v0
 unit_kind: discrete

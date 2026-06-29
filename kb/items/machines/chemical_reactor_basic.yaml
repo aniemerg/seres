@@ -7,10 +7,17 @@ material_class: steel
 processes_supported: []
 bom: bom_chemical_reactor_basic
 notes: Basic steel chemical reactor with heated jacket, agitator, and gas handling
-  for molten salt electrolysis, gas extraction, and high-temperature processing.
+  for small stirred batch or semi-batch liquid reactions. Assumes ordinary steel or
+  stainless compatibility, moderate temperature service, agitation, gas inlet/outlet
+  ports, pressure relief, and temperature control. Do not use for molten-salt
+  electrolysis, high-temperature gas-solid reactions, packed-bed catalysis, strong
+  acid/chloride service, refractory service, or high-pressure autoclave chemistry;
+  use more specific reactor resources where those constraints matter.
 recipe: recipe_chemical_reactor_basic_v0
 capabilities:
-- molten_salt_electrolysis
-- high_temperature_processing
-- gas_extraction
+- stirred_batch_reaction
+- jacketed_reactor_temperature_control
+- reactor_agitation
+- moderate_chemical_synthesis
+- gas_liquid_reaction_support
 unit_kind: discrete

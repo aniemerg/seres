@@ -4,9 +4,19 @@ name: Welding tools set
 mass: 15.0
 unit: unit
 material_class: steel
+capabilities:
+- welding_ppe
+- welding_accessory_tooling
+- electrode_holding
+- ground_clamping
+- weld_cleaning
+- weld_gauging
 notes: Set of welding tools and accessories. Includes welding helmet, gloves, electrode
   holders, ground clamps, chipping hammers, wire brushes, and welding gauges. Essential
-  tools for arc welding, MIG/TIG welding operations.
+  support tools for arc welding, MIG/TIG welding operations. Does not provide welding
+  current or welding process capability by itself; pair with welding_power_supply_v0,
+  welding_tig_unit_v0, welding_spot_welder_v0, or another process-appropriate welding
+  machine.
 bom: bom_welding_tools_set_v0
 recipe: recipe_welding_tools_set_v0
 unit_kind: discrete

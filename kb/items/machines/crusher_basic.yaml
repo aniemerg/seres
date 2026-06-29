@@ -5,8 +5,14 @@ mass: 600.0
 unit: unit
 material_class: steel
 bom: bom_crusher_basic_v0
-notes: DEPRECATED - Consolidated into rock_crusher_basic. Basic jaw or impact crusher
-  for primary size reduction of regolith/ore. Coarse placeholder mass for small industrial
-  unit.
 recipe: recipe_machine_crusher_basic_v0
 unit_kind: discrete
+capabilities:
+- primary_crushing
+- coarse_size_reduction
+- regolith_ore_crushing
+- legacy_crusher_placeholder
+notes: DEPRECATED - Consolidated into rock_crusher_basic. Legacy basic jaw or impact
+  crusher placeholder for primary size reduction of regolith or ore. Use rock_crusher_basic
+  for active process requirements; use ball_mill_v0 or other mills for downstream
+  grinding and fine powder production.

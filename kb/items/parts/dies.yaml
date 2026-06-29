@@ -1,11 +1,21 @@
 id: dies
 kind: machine
-name: Dies and tooling
+name: Hot press die set (basic)
 mass: 40.0
 unit: unit
 material_class: steel
-notes: Dies and tooling sets for pressing and sintering operations. Hardened steel
-  construction for shape forming.
+capabilities:
+- hot_press_tooling
+- sintering_die_set
+- pressure_forming_tooling
+notes: Basic reusable/finite-life die set for hot pressing and sintering with hot_press_v0
+  and related furnace/press resources. Kept under the legacy id `dies` for existing
+  references, but scoped as hot-press tooling rather than a generic die family. Use
+  specific items such as press_brake_die_set, drawing_die_set_basic, punch_die_set,
+  crimping_die_set, anvil_or_die_set, or pressing_mold_set for other die/tooling
+  uses. Hardened steel is a placeholder route for modest-temperature service; graphite,
+  ceramic, carbide, or refractory tooling may be needed for higher-temperature/material-specific
+  hot pressing.
 bom: bom_dies_v0
 recipe: recipe_dies_v0
 unit_kind: discrete

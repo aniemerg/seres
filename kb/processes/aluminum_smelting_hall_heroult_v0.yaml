@@ -25,7 +25,7 @@ outputs:
   qty: 0.135
   unit: kg
 resource_requirements:
-- machine_id: electrolysis_cell_unit_v0
+- machine_id: hall_heroult_reduction_cell_v0
   qty: 1
   unit: count
 - machine_id: labor_bot_general_v0
@@ -44,4 +44,6 @@ time_model:
   scaling_basis: aluminum_alloy_ingot
 notes: Hall-Héroult electrolysis at ~960°C. Very energy-intensive. Cryolite flux enables
   lower melting point. This is the standard industrial process for aluminum production.
+  Uses hall_heroult_reduction_cell_v0 rather than the generic 25 kg electrolysis
+  placeholder so the high-temperature molten-salt cell is scoped separately.
 process_type: continuous

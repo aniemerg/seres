@@ -4,9 +4,19 @@ name: PCB development station
 mass: 200.0
 unit: unit
 material_class: composite
+capabilities:
+- photoresist_development
+- pcb_develop_rinse
+- wet_process_handling
+- developer_solution_circulation
+- pcb_lab_submodule
 processes_supported: []
-notes: Stub machine created during ADR 003 migration. Referenced by processes but
-  was not defined.
+notes: PCB photoresist development and rinse station for exposed copper-clad boards
+  or patterned substrates. Current 200 kg mass assumes an enclosed pumped wet bench
+  with reservoir, spray/circulation plumbing, controls, sensors, service frame,
+  and secondary containment rather than minimal manual trays. Treat as a wet-process
+  submodule of pcb_fab_equipment, not a standalone full PCB factory; etching, drilling,
+  tinning/plating, and inspection are modeled by other PCB fabrication resources.
 bom: bom_pcb_development_station
 recipe: recipe_pcb_development_station_v0
 unit_kind: discrete

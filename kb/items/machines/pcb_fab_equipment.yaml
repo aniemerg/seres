@@ -4,13 +4,28 @@ name: PCB fabrication equipment
 mass: 435.3
 unit: unit
 bom: bom_pcb_fab_equipment_v0
-notes: 'Equipment for printed circuit board (PCB) fabrication. Includes photolithography
-  exposure unit (UV light source), chemical etching tanks (ferric chloride or ammonium
-  persulfate), development trays, drilling station (CNC or manual), and tinning/plating
-  bath. Produces single and double-sided PCBs from copper-clad laminate. Subtractive
-  process: UV exposure of photoresist, development, etching, drilling, and surface
-  finishing. Typical board size up to 300x400 mm. Resolution 0.2-0.5 mm traces.'
+capabilities:
+- simple_pcb_fabrication
+- pcb_photolithography
+- pcb_development_and_etching
+- pcb_drilling_and_routing
+- pcb_surface_finish
+- single_double_sided_pcb_prototyping
+- coarse_trace_masked_pcb_work
+notes: Aggregated small PCB prototyping/fabrication station for coarse KB modeling.
+  Includes UV exposure, photoresist develop/rinse, chemical copper etch, PCB drilling
+  or routing, simple tinning/plating or surface finish, chemical bath ventilation,
+  and basic controls. Produces simple single- and double-sided boards from
+  copper-clad laminate with approximately 0.2-0.5 mm traces. This station does not
+  represent industrial multilayer PCB fabrication, fine-pitch HDI, reliable plated
+  through-hole production, soldermask, silkscreen, automated electrical test, or
+  semiconductor/solar-cell cleanroom photolithography. Use pcb_fab_station only as
+  a deprecated/generic alias; use pcb_fab_equipment when the complete bench-scale
+  PCB lab capability is intended.
 processes_supported:
 - photolithography_process_simple_v0
+- pcb_fabrication_v0
+- pcb_fabrication_process_v0
+- photolithographic_coil_winding_v0
 recipe: recipe_pcb_fab_equipment_v0
 unit_kind: discrete

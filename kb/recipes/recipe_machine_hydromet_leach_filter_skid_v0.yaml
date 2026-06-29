@@ -1,0 +1,28 @@
+id: recipe_machine_hydromet_leach_filter_skid_v0
+kind: recipe
+target_item_id: hydromet_leach_filter_skid_v0
+variant_id: v0
+inputs:
+  - item_id: bulk_material_or_parts
+    qty: 402.0
+    unit: kg
+outputs:
+  - item_id: hydromet_leach_filter_skid_v0
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: bulk_material_or_parts
+        qty: 402.0
+        unit: kg
+    outputs:
+      - item_id: hydromet_leach_filter_skid_v0
+        qty: 1.0
+        unit: unit
+    est_time_hr: 4.0
+    labor_hours: 4.0
+    notes: Assemble tankage, pump/agitation, filtration/clarification hardware,
+      heaters, piping, controls, and frame into a compact hydrometallurgy skid.
+notes: Coarse scaffold recipe split from chemical_separation_equipment. Replace
+  with componentized assembly once hydrometallurgy skid subsystem masses are modeled.

@@ -4,7 +4,11 @@ kind: machine
 mass: 2.0
 unit: unit
 material_class: steel
-bom: bom_wire_drawing_die_set
-notes: Die set for wire drawing; seed placeholder for manufacturing tooling.
-recipe: recipe_wire_drawing_die_set_v0
+capabilities:
+- wire_drawing_tooling
+deprecated: true
+replaced_by: drawing_die_set_basic
+notes: DEPRECATED - duplicate seed placeholder for wire drawing tooling. Use drawing_die_set_basic
+  as the canonical reusable drawing die set unless a future process needs a distinct
+  material grade, die size range, or high-throughput die package.
 unit_kind: discrete

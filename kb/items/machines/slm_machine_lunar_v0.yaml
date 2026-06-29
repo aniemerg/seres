@@ -5,8 +5,19 @@ mass: 500.0
 unit: unit
 material_class: metal
 bom: bom_slm_machine_lunar_v0
-notes: Seed item introduced to satisfy the Referenced-Only gap; detailed spec to be
-  refined via iteration.
+capabilities:
+- powder_bed_laser_melting
+- metal_powder_bed_fusion
+- laser_scan_melting
+- layerwise_metal_additive_manufacturing
+- fine_metal_powder_recoating
+- inert_atmosphere_build_operation
+- near_net_metal_part_fabrication
+notes: Selective laser melting / laser powder-bed fusion machine for lunar metal
+  additive manufacturing. Distinct from ebm_machine_lunar_v0, which uses electron-beam
+  melting in vacuum, and wire_arc_additive_machine, which uses wire-fed arc deposition.
+  Pair with explicit powder preparation, sieving, atmosphere control, and post-processing
+  resources where a process requires those capabilities.
 sources:
 - paper_reviews_dec2024_comprehensive_v0
 recipe: recipe_slm_machine_lunar_v0_v0

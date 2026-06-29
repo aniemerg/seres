@@ -1,7 +1,7 @@
 id: recipe_coil_winding_machine_v0
 kind: recipe
 name: Recipe for coil winding machine v0
-target_item_id: coil_winding_machine_v0
+target_item_id: coil_winding_machine
 variant_id: v0
 inputs:
   - item_id: machine_frame_small
@@ -29,7 +29,7 @@ inputs:
     qty: 32.0
     unit: kg
 outputs:
-  - item_id: coil_winding_machine_v0
+  - item_id: coil_winding_machine
     qty: 1
     unit: unit
 steps:
@@ -60,7 +60,7 @@ steps:
         qty: 32.0
         unit: kg
     outputs:
-      - item_id: coil_winding_machine_v0
+      - item_id: coil_winding_machine
         qty: 1
         unit: unit
     est_time_hr: 8.5
@@ -68,4 +68,5 @@ steps:
     labor_hours: 4.0
     notes: "Assemble frame, spindle drive motor, wire tensioning mechanism, install motor controller and turn counter"
 assumptions: Motor controller and turn counter electronics fabricated or imported.
-notes: Coil winding machine variant v0 build sequence.
+notes: Legacy coil winding machine variant v0 build sequence retained for provenance
+  and retargeted to canonical coil_winding_machine.

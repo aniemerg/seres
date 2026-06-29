@@ -15,6 +15,9 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
+- machine_id: stamping_press_basic
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 0.04
@@ -22,5 +25,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.25
-notes: Simple stamping operation converting steel sheet 1mm into breaker housing with minor loss.
+notes: >
+  Simple die-guided stamping operation converting steel sheet 1mm into breaker
+  housing with minor loss. Requires stamping_press_basic for blanking/punching
+  alignment and repeatable stroke; this is distinct from generic hydraulic_press
+  pressing.
 process_type: batch

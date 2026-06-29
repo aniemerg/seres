@@ -14,11 +14,8 @@ inputs:
   - item_id: mixer_control_basic
     qty: 5.0
     unit: kg
-  - item_id: drive_motor_medium
-    qty: 90.0
-    unit: kg
-  - item_id: gearbox_reducer_medium
-    qty: 110.0
+  - item_id: gearbox_reducer_small
+    qty: 35.0
     unit: kg
   - item_id: bearing_set_heavy
     qty: 4.0
@@ -46,12 +43,9 @@ steps:
       - item_id: mixer_control_basic
         qty: 1.0
         unit: unit
-      - item_id: drive_motor_medium
-        qty: 1.0
-        unit: unit
-      - item_id: gearbox_reducer_medium
-        qty: 1.0
-        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 35.0
+        unit: kg
       - item_id: bearing_set_heavy
         qty: 1.0
         unit: unit
@@ -71,12 +65,9 @@ steps:
       - item_id: mixer_control_basic
         qty: 1.0
         unit: unit
-      - item_id: drive_motor_medium
-        qty: 1.0
-        unit: unit
-      - item_id: gearbox_reducer_medium
-        qty: 1.0
-        unit: unit
+      - item_id: gearbox_reducer_small
+        qty: 35.0
+        unit: kg
       - item_id: bearing_set_heavy
         qty: 1.0
         unit: unit
@@ -99,11 +90,8 @@ steps:
       - item_id: mixer_control_basic
         qty: 5.0
         unit: kg
-      - item_id: drive_motor_medium
-        qty: 90.0
-        unit: kg
-      - item_id: gearbox_reducer_medium
-        qty: 110.0
+      - item_id: gearbox_reducer_small
+        qty: 35.0
         unit: kg
       - item_id: bearing_set_heavy
         qty: 4.0
@@ -113,7 +101,7 @@ steps:
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 309.5
+        qty: 144.5
         unit: kg
     est_time_hr: 2.0
     labor_hours: 2.0
@@ -121,7 +109,7 @@ steps:
   - process_id: inspection_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 309.5
+        qty: 144.5
         unit: kg
     outputs:
       - item_id: cement_mixer_small
@@ -130,5 +118,8 @@ steps:
 
     est_time_hr: 0.5
     labor_hours: 0.5
-assumptions: Assemble mixer per BOM; imported compute not included.
-notes: Coarse route; refine with alignment/testing later.
+assumptions: Assemble portable 100-150 L drum mixer per BOM; imported compute not included.
+notes: |
+  Coarse route for a portable drum mixer. Uses one small mixer motor with a
+  small gear reducer; medium industrial drive components were removed as a
+  duplicate drive train for this scope. Refine with alignment/testing later.

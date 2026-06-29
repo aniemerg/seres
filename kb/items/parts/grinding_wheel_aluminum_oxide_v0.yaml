@@ -5,10 +5,12 @@ mass: 6.0
 unit: kg
 material_class: ceramic
 is_import: true
-notes: 'Aluminum oxide (Al2O3) abrasive grinding wheel for cylindrical grinding operations.
-
-
-  Imported for same reasons as generic grinding_wheels (see that item for details).
+notes: 'Explicit aluminum oxide (Al2O3) abrasive grinding wheel variant for cylindrical
+  grinding operations. The generic `grinding_wheels` item is the canonical local
+  ISRU vitrified alumina/glass wheel set; prefer that item for ordinary grinding
+  resource requirements. Keep this part as an imported/spec-specific variant where
+  a recipe or process needs a particular wheel chemistry, grit, form, or quality
+  class that the generic set does not guarantee.
 
 
   Specifications:
@@ -37,7 +39,8 @@ notes: 'Aluminum oxide (Al2O3) abrasive grinding wheel for cylindrical grinding 
   - White Al2O3: Friable (self-sharpening), cooler grinding
 
 
-  For early bootstrapping, import high-quality aluminum oxide grinding wheels.
+  For early bootstrapping or high-certainty dimensional grinding, import high-quality
+  aluminum oxide grinding wheels until a process explicitly validates a local variant.
 
   '
 unit_kind: bulk

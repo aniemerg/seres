@@ -23,7 +23,14 @@ time_model:
   rate_unit: kWh/hr
   scaling_basis: solar_irradiance
   notes: Daily generation window; placeholder for lunar day cycle
-notes: Treats PV as imported initially; introduces power accounting node.
+notes: >
+  Treats PV as imported initially; introduces power accounting node. Uses
+  inverter_dc_to_ac_v0 for explicit DC-to-AC conversion from the solar array.
+  Broader power_conditioning_equipment remains available for generic facility
+  regulation and commissioning where the exact topology is not modeled.
+  solar_tracking_optional is an optional small single-axis PV tracker for yield
+  improvement; fixed-tilt array variants should omit that resource rather than
+  treating tracking as mandatory hardware.
 process_type: continuous
 resource_requirements:
 - machine_id: labor_bot_general_v0
@@ -32,7 +39,10 @@ resource_requirements:
 - machine_id: solar_array_v0
   qty: 1
   unit: count
-- machine_id: power_conditioning_equipment
+- machine_id: inverter_dc_to_ac_v0
+  qty: 1
+  unit: count
+- machine_id: power_distribution_bus
   qty: 1
   unit: count
 - machine_id: solar_tracking_optional

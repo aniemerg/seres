@@ -5,7 +5,15 @@ mass: 200.0
 unit: unit
 material_class: steel
 bom: bom_powder_mill_and_mixer_v0
+capabilities:
+- small_batch_powder_milling
+- electrode_powder_blending
+- dry_powder_homogenization
+- powder_binder_mixing
+- battery_electrode_feedstock_preparation
 notes: Combined small-scale powder mill and mixer (per battery design seed). Placeholder
-  mass; used for electrode powder prep.
+  mass; used for electrode powder prep. Distinct from ball_mill_v0 for larger grinding
+  duty, powder_mixer for dedicated dry blending, and metal_powder_sieving_system_v0
+  for particle-size classification.
 recipe: recipe_machine_powder_mill_and_mixer_v0
 unit_kind: discrete

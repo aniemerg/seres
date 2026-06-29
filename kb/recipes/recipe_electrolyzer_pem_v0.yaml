@@ -20,7 +20,7 @@ inputs:
     qty: 1.0
     unit: kg
   - item_id: steel_plate_or_sheet
-    qty: 164.0
+    qty: 4.0
     unit: kg
 outputs:
   - item_id: electrolyzer_pem_v0
@@ -45,11 +45,11 @@ steps:
         qty: 1.0
         unit: kg
       - item_id: steel_plate_or_sheet
-        qty: 164.0
+        qty: 4.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     est_time_hr: 4.0
     machine_hours: 3.0
@@ -58,11 +58,11 @@ steps:
   - process_id: electrical_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     est_time_hr: 2.0
     labor_hours: 1.5
@@ -70,11 +70,11 @@ steps:
   - process_id: enclosure_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     outputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     est_time_hr: 1.0
     machine_hours: 0.5
@@ -83,7 +83,7 @@ steps:
   - process_id: sealing_and_assembly_basic_v0
     inputs:
       - item_id: assembled_equipment
-        qty: 260.0
+        qty: 100.0
         unit: kg
     outputs:
       - item_id: electrolyzer_pem_v0
@@ -92,4 +92,6 @@ steps:
     est_time_hr: 0.8
     labor_hours: 0.8
     notes: "Seal and finalize housing"
-notes: Placeholder recipe to manufacture PEM electrolyzer v0; uses basic assembly and enclosure steps.
+notes: Placeholder recipe to manufacture PEM electrolyzer v0; mass basis corrected
+  from duplicate electrolyzer_pem_v0_v0 route to 100 kg total using a compact 4
+  kg housing/structure allowance.

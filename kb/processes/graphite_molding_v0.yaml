@@ -10,9 +10,12 @@ outputs:
   qty: 0.01
   unit: kg
 resource_requirements:
-- machine_id: molding_press
+- machine_id: molding_press_basic
   qty: 1
-  unit: count
+  unit: unit
+- machine_id: pressing_mold_set
+  qty: 1
+  unit: unit
 energy_model:
   type: per_unit
   value: 0.5
@@ -23,5 +26,8 @@ time_model:
   rate: 1.0
   rate_unit: kg/hr
   scaling_basis: graphite_powder
-notes: Mold graphite powder into a green graphite/ceramic body under pressure; recipes bind final shape.
+notes: Mold graphite powder into a green graphite/ceramic body under pressure.
+  molding_press_basic supplies the compression force; pressing_mold_set supplies
+  the part geometry/tooling. Use hot_press_v0 instead if a future graphite recipe
+  requires simultaneous high-temperature pressing.
 process_type: continuous

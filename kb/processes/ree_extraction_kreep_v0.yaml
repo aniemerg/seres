@@ -35,10 +35,10 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: chemical_separation_equipment
+- machine_id: hydromet_leach_filter_skid_v0
   qty: 1
   unit: count
-- machine_id: chemical_separation_equipment
+- machine_id: solvent_extraction_mixer_settler_v0
   qty: 1
   unit: count
 - machine_id: furnace_basic
@@ -58,6 +58,9 @@ time_model:
   notes: Multi-stage leaching, extraction, and purification
 notes: "KREEP basalt modeled as basalt_aggregate until a dedicated KREEP feedstock\
   \ exists.\nREE oxide concentrate modeled as reduced_metal_oxides for now.\nRare\
+  \ earth resource requirements are split: hydromet_leach_filter_skid_v0 covers acid\
+  \ leaching/filtration/precipitation, while solvent_extraction_mixer_settler_v0 covers\
+  \ the staged solvent extraction train.\nRare\
   \ earth element (REE) extraction from KREEP basalts (advanced process).\nSource:\
   \ Sustainable-ISRU-on-the-Moon.txt\nPurpose: Extract REE for permanent magnets (NdFeB),\
   \ superconductors (NbTi), catalysts\nKREEP: Potassium (K), Rare Earth Elements (REE),\

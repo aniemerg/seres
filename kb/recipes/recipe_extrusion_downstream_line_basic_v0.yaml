@@ -1,0 +1,64 @@
+id: recipe_extrusion_downstream_line_basic_v0
+kind: recipe
+name: Assemble basic extrusion downstream line
+target_item_id: extrusion_downstream_line_basic_v0
+variant_id: v0
+inputs:
+  - item_id: steel_frame_welded
+    qty: 1.0
+    unit: unit
+  - item_id: cooling_loop_basic
+    qty: 1.0
+    unit: unit
+  - item_id: drive_motor_small
+    qty: 20.0
+    unit: kg
+  - item_id: winding_drums
+    qty: 1.0
+    unit: unit
+  - item_id: cutting_station_basic_v0
+    qty: 1.0
+    unit: unit
+  - item_id: measurement_equipment
+    qty: 1.0
+    unit: unit
+  - item_id: control_panel_basic
+    qty: 1.0
+    unit: unit
+outputs:
+  - item_id: extrusion_downstream_line_basic_v0
+    qty: 1.0
+    unit: unit
+steps:
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: steel_frame_welded
+        qty: 1.0
+        unit: unit
+      - item_id: cooling_loop_basic
+        qty: 1.0
+        unit: unit
+      - item_id: drive_motor_small
+        qty: 20.0
+        unit: kg
+      - item_id: winding_drums
+        qty: 1.0
+        unit: unit
+      - item_id: cutting_station_basic_v0
+        qty: 1.0
+        unit: unit
+      - item_id: measurement_equipment
+        qty: 1.0
+        unit: unit
+      - item_id: control_panel_basic
+        qty: 1.0
+        unit: unit
+    outputs:
+      - item_id: extrusion_downstream_line_basic_v0
+        qty: 1.0
+        unit: unit
+    notes: Assemble cooling table/bath, haul-off drive, take-up drums, cutter, controls,
+      and dimensional checking fixtures into a basic downstream line.
+assumptions: Coarse configurable line; product-specific dies, calender rolls, and
+  tight-tolerance gauges can be split later if needed.
+notes: Downstream line for basic plastic extrusion processes.

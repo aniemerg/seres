@@ -1,14 +1,21 @@
 id: induction_forge_v0
 name: Induction forge
 kind: machine
-mass: 1800.0
+mass: 125.0
 unit: unit
 capabilities:
 - forging
 - induction_heating
+- billet_bar_heating
+- localized_heat_treatment
 material_class: metal
-notes: Induction forge for heating stock prior to forging and heat treatment. Used
-  for rapid, controllable heating of metal billets and bars.
+notes: Small forge-shop induction heater for rapid, controllable heating of conductive
+  metal bars, billets, bar ends, and small forgings before hammer or press work.
+  Distinct from induction_furnace_v0, which handles melt/alloy/casting duties, and
+  from heating_plate_induction_heater, which handles bearing thermal fits and shrink-fit
+  operations. Core subsystems are a high-current induction power stage, resonant
+  capacitor bank, water-cooled copper coil, cooling loop, temperature control, shielding,
+  grounding, and safety interlocks.
 bom: bom_induction_forge_v0
 recipe: recipe_induction_forge_v0
 unit_kind: discrete

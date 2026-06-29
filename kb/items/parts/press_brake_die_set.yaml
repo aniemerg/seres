@@ -1,15 +1,29 @@
 id: press_brake_die_set
 kind: machine
-name: Press brake die set
+name: Press brake tooling set
 mass: 40.0
 unit: unit
 material_class: steel
 capabilities:
-  - sheet_metal_bending
+  - press_brake_tooling
+  - punch_die_bending_tooling
+  - straight_bend_tooling
+  - sheet_metal_bend_radius_control
   - press_brake_forming
-notes: Hardened steel dies for press brake metal bending operations. Includes punches
-  and die blocks in various angles and sizes for sheet metal forming. Heat-treated
-  for wear resistance.
+notes: |
+  Hardened steel tooling set for press brake metal bending operations. Includes
+  upper punches, V-dies/die blocks, mounting hardware, and general-purpose bend
+  angles/sizes for straight-line sheet and light-plate forming.
+
+  Modeled separately from press_brake because the machine cannot make controlled
+  bends without matched punch/die tooling. Current process uses only require
+  general straight bends for brackets, enclosures, frames, motor housings, and
+  ventilation hoods; no separate tight-radius, hemming, offset, box-forming, or
+  surface-sensitive tooling variant is created in this pass.
+
+  Manufacturing should preserve tool steel stock, machining, heat treatment,
+  precision grinding, and dimensional inspection assumptions; do not reduce this
+  item to welded fabrication or ordinary mild-steel stock.
 bom: bom_press_brake_die_set
 recipe: recipe_press_brake_die_set_v0
 unit_kind: discrete

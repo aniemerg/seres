@@ -9,12 +9,22 @@ inputs:
 - item_id: lathe_headstock_blank
   qty: 60.0
   unit: kg
+- item_id: cutting_fluid
+  qty: 1.0
+  unit: kg
+  notes: Coolant/lubricant for headstock bore and register turning
 outputs:
 - item_id: lathe_headstock_simple
   qty: 60.0
   unit: kg
 resource_requirements:
 - machine_id: precision_lathe
+  qty: 1
+  unit: count
+- machine_id: precision_tooling_set
+  qty: 1
+  unit: count
+- machine_id: measurement_equipment
   qty: 1
   unit: count
 energy_model:
@@ -25,5 +35,7 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: Turning operation to machine lathe_blank into lathe_headstock_simple; chips
-  modeled elsewhere.
+notes: Turning operation to machine lathe_headstock_blank into lathe_headstock_simple.
+  Requires precision tooling and metrology for spindle bore/register alignment;
+  use grinding or scraping steps elsewhere if headstock accuracy exceeds lathe-only
+  turning. Chips modeled elsewhere.

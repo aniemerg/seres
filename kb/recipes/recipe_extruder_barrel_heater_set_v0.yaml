@@ -1,0 +1,57 @@
+id: recipe_extruder_barrel_heater_set_v0
+kind: recipe
+name: Assemble extruder barrel heater set
+target_item_id: extruder_barrel_heater_set_v0
+variant_id: v0
+inputs:
+  - item_id: induction_coil_or_heating_element
+    qty: 10.0
+    unit: kg
+  - item_id: thermal_insulation_basic
+    qty: 5.0
+    unit: kg
+  - item_id: steel_sheet_3mm
+    qty: 8.0
+    unit: kg
+  - item_id: electrical_wire_and_connectors
+    qty: 2.0
+    unit: kg
+outputs:
+  - item_id: extruder_barrel_heater_set_v0
+    qty: 25.0
+    unit: kg
+steps:
+  - process_id: sheet_metal_forming_v0
+    inputs:
+      - item_id: steel_sheet_3mm
+        qty: 8.0
+        unit: kg
+    outputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 8.0
+        unit: kg
+    notes: Form clamp bands, heater shells, and mounting tabs for barrel heaters.
+  - process_id: assembly_basic_v0
+    inputs:
+      - item_id: formed_sheet_metal_parts
+        qty: 8.0
+        unit: kg
+      - item_id: induction_coil_or_heating_element
+        qty: 10.0
+        unit: kg
+      - item_id: thermal_insulation_basic
+        qty: 5.0
+        unit: kg
+      - item_id: electrical_wire_and_connectors
+        qty: 2.0
+        unit: kg
+    outputs:
+      - item_id: extruder_barrel_heater_set_v0
+        qty: 25.0
+        unit: kg
+    notes: Assemble resistive heater bands or jacket segments with insulation, wiring,
+      terminals, and sensor mounting points.
+assumptions: Heating element material and temperature-control electronics are available
+  from existing KB parts. Detailed thermocouple/controller integration is handled
+  in the extruder assembly recipe.
+notes: Barrel heater set for plastic extruder temperature control.

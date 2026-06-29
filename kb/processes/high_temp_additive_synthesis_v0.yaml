@@ -14,7 +14,7 @@ outputs:
   unit: kg
 byproducts: []
 resource_requirements:
-- machine_id: chemical_reactor_basic
+- machine_id: furnace_basic
   qty: 1
   unit: count
 energy_model:
@@ -29,4 +29,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: mos2_solid_lubricant_v0
 notes: Placeholder synthesis for high_temp_additive_v0 from generic chemical inputs.
+  Uses furnace heat rather than the basic stirred/jacketed reactor until the chemistry
+  is specified.
 process_type: continuous

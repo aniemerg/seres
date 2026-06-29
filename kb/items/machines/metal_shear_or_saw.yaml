@@ -6,10 +6,21 @@ mass_kg: 78.0
 unit: unit
 bom: bom_metal_shear_or_saw
 material_class: steel
+capabilities:
+- metal_stock_cutting
+- plate_and_sheet_cutting
+- bar_and_section_cutting
+- powered_sawing
+- light_shearing
+- fabrication_stock_prep
 notes: |
-  Mechanical or bandsaw/shear for cutting plate and structural sections; generic
-  capability for stock prep.
+  Light shop metal stock-prep station: mechanical shear, bandsaw, or equivalent
+  powered cutter for plate, sheet, bar, tube, and structural sections at coarse KB
+  resolution. Prefer sheet_metal_shear for straight sheet/plate cuts and
+  metal_cutting_bandsaw for bar, tube, billet, pipe, and structural sections when
+  process geometry matters. Use saw_or_cutting_tool for small manual cuts.
   Assumptions:
-  - Mass aligned with recipe inputs (~78 kg).
+  - Mass aligned with recipe inputs (~78 kg), consistent with a light bandsaw or
+    compact shop cutting station, not an industrial hydraulic plate shear.
 recipe: recipe_metal_shear_or_saw_v0
 unit_kind: discrete

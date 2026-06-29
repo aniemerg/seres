@@ -15,13 +15,13 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: cutting_tools_general
+- machine_id: metal_cutting_bandsaw
   qty: 1
   unit: count
 - machine_id: plate_rolling_mill
   qty: 1
   unit: count
-- machine_id: heating_furnace
+- machine_id: furnace_basic
   qty: 1
   unit: count
 energy_model:
@@ -38,5 +38,6 @@ time_model:
   scaling_basis: steel_stock
   notes: Multiple rolling passes plus handling for cutting to length.
 notes: Hot rolls steel billets/slabs into generic steel stock (bar, plate, rod) and
-  cuts to length. Assumes modest scale losses; scrap trimming not modeled separately.
+  cuts to length with metal_cutting_bandsaw. Assumes modest scale losses; scrap
+  trimming not modeled separately.
 process_type: continuous

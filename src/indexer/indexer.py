@@ -506,6 +506,7 @@ def build_index() -> Dict[str, dict]:
             # Check if item is marked as import by reading the file
             is_import = False
             is_scrap = False
+            is_deprecated = False
             if entry.get("defined_in"):
                 try:
                     file_path = Path(entry["defined_in"])
@@ -514,11 +515,16 @@ def build_index() -> Dict[str, dict]:
                             item_data = yaml.safe_load(f) or {}
                             is_import = item_data.get("is_import", False)
                             is_scrap = item_data.get("is_scrap", False)
+                            is_deprecated = bool(
+                                item_data.get("deprecated")
+                                or item_data.get("is_deprecated")
+                                or str(item_data.get("status", "")).lower() in ("deprecated", "superseded")
+                            )
                 except Exception:
                     pass
 
-            # Skip import or scrap items
-            if is_import or is_scrap:
+            # Skip import, scrap, or deprecated/superseded items.
+            if is_import or is_scrap or is_deprecated:
                 continue
 
             items_without_recipes.append({

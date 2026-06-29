@@ -26,6 +26,12 @@ inputs:
   - item_id: fixture_mounting_plate_set
     qty: 1
     unit: unit
+  - item_id: press_brake_die_set
+    qty: 1
+    unit: unit
+  - item_id: press_ram_set
+    qty: 1
+    unit: unit
   - item_id: control_panel_basic
     qty: 1
     unit: unit
@@ -63,6 +69,12 @@ steps:
       - item_id: fixture_mounting_plate_set
         qty: 1
         unit: unit
+      - item_id: press_brake_die_set
+        qty: 1
+        unit: unit
+      - item_id: press_ram_set
+        qty: 1
+        unit: unit
       - item_id: control_panel_basic
         qty: 1
         unit: unit
@@ -75,6 +87,8 @@ steps:
         unit: count
     est_time_hr: 6.0
     labor_hours: 6.0
-    notes: Assemble press, rollers, hydraulics, fixtures, and controls per BOM.
+    notes: Assemble press, rollers, hydraulics, dies/rams, fixtures, guards, and controls per BOM.
 assumptions: Assembly-only; subcomponents sourced via their own recipes or imports.
-notes: Basic metal forming equipment assembly from BOM components.
+notes: Coarse forming-cell assembly from BOM components. Use specific machines such
+  as hydraulic_press, press_brake, plate_rolling_mill, or power_hammer_or_press in
+  process requirements when the operation is known.

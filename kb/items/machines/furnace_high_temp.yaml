@@ -3,10 +3,22 @@ kind: machine
 name: High temperature furnace
 mass: 800.0
 unit: unit
+material_class: steel
 bom: bom_furnace_high_temp_v0
-notes: "High-temperature furnace capable of 1600-3000\xB0C operation for carbothermal\
-  \ reduction, sintering, and materials processing. Refractory-lined chamber with\
-  \ resistance heating or solar concentration. Used for tungsten sintering, CaO extraction\
-  \ from anorthite, and other high-temperature chemical processes."
+capabilities:
+- high_temperature_firing
+- refractory_sintering
+- carbothermal_reduction_heating
+- glass_and_silica_melting
+- ultra_high_temperature_materials_processing
+- controlled_atmosphere_high_temp_heating
+notes: "Coarse high-temperature furnace family for roughly 1600-3000\xB0C materials\
+  \ processing, including carbothermal reduction, refractory ceramic firing, glass/silica\
+  \ melting, and high-temperature sintering. Distinct from furnace_basic for 200-1200\xB0C\
+  \ general heating, drying_oven for 50-300\xB0C drying/curing, and heat_treatment_furnace_v0\
+  \ for controlled metallurgical heat-treatment cycles. Solar concentration is treated\
+  \ as a separate heat-source/receiver resource, not as part of this furnace item.\
+  \ Use vacuum_furnace_v0 or an explicit atmosphere system where oxygen-sensitive,\
+  \ vacuum, hydrogen, or graphitization work is required."
 recipe: recipe_furnace_high_temp_v0
 unit_kind: discrete

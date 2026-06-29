@@ -3,7 +3,17 @@ name: LiDAR Time-of-Flight Sensor (Simple)
 kind: machine
 mass: 2.0
 unit: unit
+material_class: electronic
+capabilities:
+- lidar_rangefinding
+- time_of_flight_distance_measurement
+- obstacle_detection
+- local_3d_mapping
+- navigation_sensor_input
 bom: bom_lidar_time_of_flight_simple_v0
-notes: Seed LiDAR sensor for 3D mapping; placeholder spec to enable modeling.
+notes: Seed simple LiDAR time-of-flight sensor for distance measurement, obstacle
+  detection, and local 3D mapping inputs. Provides range data to navigation or mapping
+  systems; it is not a full autonomy stack or general machine-vision inspection system.
+  Placeholder spec to enable modeling.
 recipe: recipe_lidar_time_of_flight_simple_v0
 unit_kind: discrete

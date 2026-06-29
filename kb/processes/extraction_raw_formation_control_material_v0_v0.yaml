@@ -33,6 +33,9 @@ resource_requirements:
 - machine_id: gravity_separator
   qty: 1
   unit: count
+- machine_id: dust_collection_system
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 20.0
@@ -42,5 +45,9 @@ time_model:
   type: batch
   hr_per_batch: 2.0
   notes: Extraction time (prototype)
-notes: Prototype extraction path to produce raw_formation_control_material_v0 from
-  regolith_excavated; byproduct slag.
+notes: >
+  Prototype extraction path to produce raw_formation_control_material_v0 from
+  regolith_lunar_mare; byproduct slag. Crushing and screening prepare a controlled
+  particle-size distribution before dry air-table density separation. The density
+  separation stage is distinct from screening and assumes enclosed gas handling plus
+  dust collection for lunar vacuum operation.

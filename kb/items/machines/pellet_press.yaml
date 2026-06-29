@@ -1,16 +1,29 @@
 id: pellet_press
 kind: machine
 name: Pellet press
-mass: 22.0
+mass: 180.0
 unit: unit
 material_class: steel
 bom: bom_pellet_press
-processes_supported: []
-notes: "Stub machine created during ADR 003 migration.\n\nMass updated 2026-01 from\
-  \ 800 kg to 22 kg to match current incomplete BOM (24 kg steel inputs \u2192 ~22\
-  \ kg after machining scrap).\n\nWARNING: This BOM is incomplete! Current BOM only\
-  \ includes basic steel frame/plates. A functional pellet press requires:\n- Hydraulic\
-  \ or pneumatic press mechanism\n- Motor/actuator\n- Control system\n- Die/mold set\n\
-  - Feed hopper\nComplete machine would likely be 100-800 kg depending on capacity.\n"
+processes_supported:
+- pelletize_catalyst_powder_v0
+- regolith_pellet_pressing_process_v0
+- powder_pressing_process_v0
+- powder_metallurgy_pressing_v0
+capabilities:
+- lab_pilot_powder_pellet_pressing
+- catalyst_pellet_die_pressing
+- regolith_cathode_pellet_pressing
+- green_powder_compact_pressing
+- controlled_pressure_dwell_pressing
+- pellet_ejection_and_demolding
+notes: Laboratory/pilot powder pellet press for die pressing catalyst powders,
+  regolith cathode pellets, ceramic powders, and small powder-metallurgy green
+  compacts. Includes a small hydraulic press frame, press cylinder/power unit,
+  pressure/load indication, control panel, reusable pellet_press_die_set tooling,
+  feed hopper, ejector/demolding tooling, and safety guarding. Current KB uses are
+  low-throughput die pressing; no current reference requires a separate roller-die
+  pellet_mill or briquetting_press. Use pelletizer_v0 only for polymer pelletizing
+  and split future bulk pellet or briquette production to a dedicated machine.
 recipe: recipe_pellet_press_v1
 unit_kind: discrete

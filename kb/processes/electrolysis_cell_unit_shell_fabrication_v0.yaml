@@ -10,9 +10,9 @@ outputs:
   qty: 25.0
   unit: kg
 resource_requirements:
-- machine_id: steel_forming_press
+- machine_id: hydraulic_press
   qty: 1
-  unit: count
+  unit: unit
 energy_model:
   type: per_unit
   value: 0.8
@@ -24,5 +24,8 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: steel_sheet_3mm
 notes: Fabricate a 25 kg electrolysis_cell_unit_shell_v0 from 25 kg steel_sheet_3mm
-  using a forming press.
+  using the canonical hydraulic_press with shell-forming fixtures. Assumes
+  low-volume 3 mm sheet/shell work within a medium 20-50 ton press envelope; use
+  more specific forming resources if bend, stamping, or deep-draw geometry is
+  modeled later.
 process_type: continuous

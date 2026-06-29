@@ -5,9 +5,21 @@ mass: 9.6
 unit: unit
 bom: bom_test_equipment_electronics
 material_class: electronic
-notes: DEPRECATED - Consolidated into test_bench_electrical. Electronics test and
-  measurement equipment. Includes multimeters, oscilloscopes, signal generators, power
-  supplies, and function generators. Used for circuit testing, troubleshooting, and
-  validation. Essential for electronics development and quality control.
+capabilities:
+  - electronics_test
+  - circuit_debugging
+  - waveform_measurement
+  - signal_generation
+  - bench_power_supply
+  - calibration_support
+notes: |
+  DEPRECATED - consolidated into test_bench_electrical as the canonical full
+  electronics test bench. Legacy electronics test and measurement equipment bundle
+  including multimeters, oscilloscopes, signal generators, power supplies, and
+  function generators.
+
+  Use test_bench_electrical for new process-level electronics testing,
+  troubleshooting, commissioning, and validation requirements. Keep this item only
+  for legacy recipe closure and historical references.
 recipe: recipe_machine_test_equipment_electronics_v0
 unit_kind: discrete

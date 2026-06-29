@@ -1,0 +1,85 @@
+id: recipe_heated_compression_molding_resource_v0
+kind: recipe
+name: Assemble heated compression molding resource
+target_item_id: heated_compression_molding_resource_v0
+variant_id: v0
+inputs:
+- item_id: molding_press_frame
+  qty: 180.0
+  unit: kg
+- item_id: molding_press_cylinder
+  qty: 1.0
+  unit: unit
+- item_id: hydraulic_power_unit_basic
+  qty: 1.0
+  unit: unit
+- item_id: heated_platen_set
+  qty: 1.0
+  unit: unit
+- item_id: temperature_controller_basic
+  qty: 1.0
+  unit: unit
+- item_id: thermocouple_contact_temperature_sensor_v0
+  qty: 1.0
+  unit: unit
+- item_id: insulation_pack_high_temp
+  qty: 1.0
+  unit: unit
+- item_id: molding_control_unit
+  qty: 1.0
+  unit: unit
+- item_id: power_conditioning_module
+  qty: 1.0
+  unit: unit
+- item_id: fastener_kit_medium
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: heated_compression_molding_resource_v0
+  qty: 1.0
+  unit: unit
+steps:
+- process_id: assembly_basic_v0
+  inputs:
+  - item_id: molding_press_frame
+    qty: 180.0
+    unit: kg
+  - item_id: molding_press_cylinder
+    qty: 1.0
+    unit: unit
+  - item_id: hydraulic_power_unit_basic
+    qty: 1.0
+    unit: unit
+  - item_id: heated_platen_set
+    qty: 1.0
+    unit: unit
+  - item_id: temperature_controller_basic
+    qty: 1.0
+    unit: unit
+  - item_id: thermocouple_contact_temperature_sensor_v0
+    qty: 1.0
+    unit: unit
+  - item_id: insulation_pack_high_temp
+    qty: 1.0
+    unit: unit
+  - item_id: molding_control_unit
+    qty: 1.0
+    unit: unit
+  - item_id: power_conditioning_module
+    qty: 1.0
+    unit: unit
+  - item_id: fastener_kit_medium
+    qty: 1.0
+    unit: unit
+  outputs:
+  - item_id: heated_compression_molding_resource_v0
+    qty: 1.0
+    unit: unit
+  est_time_hr: 4.0
+  labor_hours: 3.0
+  notes: Install hydraulic actuation, heated platens, sensors, insulation, power
+    conditioning, and temperature/press controls into the press frame.
+assumptions: Reuses locally modeled press, hydraulic, and heated-platen subassemblies;
+  part-specific mold tooling remains a separate resource or process input.
+notes: Heated compression molding resource for elastomer, silicone, thermoset,
+  and composite cure cycles.

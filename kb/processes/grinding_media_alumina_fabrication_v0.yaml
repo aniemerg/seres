@@ -17,7 +17,7 @@ resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 1
     unit: count
-  - machine_id: sintering_furnace_v0
+  - machine_id: furnace_high_temp
     qty: 1
     unit: count
 energy_model:
@@ -28,5 +28,6 @@ time_model:
   type: batch
   hr_per_batch: 2.0
 notes: >
-  Batch forming and sintering of alumina grinding media stock.
-
+  Batch forming and high-temperature firing/sintering of alumina grinding media stock
+  using furnace_high_temp; no dedicated sintering furnace is required at this abstraction
+  level unless atmosphere, contamination, or cycle-control constraints are added.

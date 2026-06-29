@@ -21,6 +21,10 @@ resource_requirements:
 - machine_id: plastic_extruder
   qty: 1
   unit: count
+- machine_id: extrusion_downstream_line_basic_v0
+  qty: 1
+  unit: count
+  notes: Cooling, puller, diameter checks, and spool winding for composite filament.
 energy_model:
   type: per_unit
   value: 1.0
@@ -32,5 +36,6 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: iron_powder_or_sheet
 notes: Composite extrusion of 50% iron powder into PLA feedstock to produce iron-impregnated
-  PLA filament.
+  PLA filament. Requires downstream cooling, diameter checks, puller, and take-up
+  winding beyond the bare extruder.
 process_type: continuous

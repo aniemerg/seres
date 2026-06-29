@@ -15,6 +15,14 @@ resource_requirements:
 - machine_id: glass_furnace_v0
   qty: 1
   unit: count
+- machine_id: glassworking_station
+  qty: 1
+  unit: count
+  notes: Quartz envelope forming/tooling downstream of melting or reheating.
+- machine_id: annealing_oven_small
+  qty: 1
+  unit: count
+  notes: Controlled cooling/annealing of the formed quartz envelope.
 energy_model:
   type: fixed_per_batch
   value: 2.0
@@ -22,5 +30,8 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: Fabrication of vacuum envelope quartz from fused silica glass; placeholder
-  values for energy and time.
+notes: Fabrication of vacuum envelope quartz from fused silica glass; uses
+  glass_furnace_v0 only as the small-batch melt/reheat resource, with
+  glassworking_station for envelope forming and annealing_oven_small for controlled
+  cooling. Fused-silica/quartz compatibility depends on refractory and element
+  temperature ratings.

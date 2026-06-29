@@ -16,7 +16,7 @@ outputs:
   qty: 0.05
   unit: kg
 resource_requirements:
-- machine_id: coil_winding_machine_v0
+- machine_id: coil_winding_machine
   qty: 1.0
   unit: unit
 - machine_id: labor_bot_general_v0
@@ -30,9 +30,11 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.8
-notes: General wire winding operation used for relays and motors; tailored for different
-  coil types.
-assumptions: 'Copper wire for coil winding and laminated iron core base.
+notes: General wire winding operation used for relays, solenoids, and small motors;
+  tailored for different coil types. Recipes should supply the required magnet wire,
+  core/bobbin/form, layer insulation, terminations, and any varnish or impregnation
+  step needed by the final part.
+assumptions: 'Copper magnet wire for coil winding and laminated iron core base.
 
   '
 process_type: batch

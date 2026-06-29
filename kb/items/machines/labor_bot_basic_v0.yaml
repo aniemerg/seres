@@ -4,6 +4,18 @@ name: Basic labor bot v0
 mass: 120.0
 unit: unit
 bom: bom_labor_bot_basic_v0
-notes: Basic humanoid labor bot for simple tasks; serves as a lightweight worker.
+capabilities:
+- basic_material_handling
+- simple_part_transfer
+- basic_assembly_support
+- tool_holding_support
+- repetitive_task_support
+- light_machine_tending
+notes: Basic labor-bot abstraction for simple indoor handling, tool-holding, and
+  repetitive support tasks. Prefer labor_bot_general_v0 as the canonical default
+  6-DOF labor resource for assembly, inspection, material handling, and machine
+  tending unless a recipe intentionally needs this reduced-capability legacy worker.
+  Not EVA-rated and not a substitute for specialized process machines, heavy lifting,
+  precision metrology, or high-temperature/vacuum/dusty field robotics.
 recipe: recipe_labor_bot_basic_v0
 unit_kind: discrete

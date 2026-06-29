@@ -16,10 +16,15 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: furnace_basic
+- machine_id: furnace_high_temp
   qty: 1
   unit: count
-- machine_id: casting_mold_set
+- machine_id: crucible_refractory
+  qty: 1
+  unit: count
+  notes: Placeholder for steel-compatible ceramic/SiC crucible ware; graphite or
+    low-grade fireclay compatibility is not assumed.
+- machine_id: ingot_mold_set
   qty: 1
   unit: count
 energy_model:
@@ -31,5 +36,5 @@ time_model:
   type: batch
   hr_per_batch: 1.0
   notes: Casting cycle for tool steel billet into final tool steel shape
-notes: Casting billet/slab into tool steel high-carbon v0; placeholder alloy composition
-  determined by billet feed.
+notes: Casting billet/slab into tool steel high-carbon stock using simple reusable
+  stock molds; placeholder alloy composition determined by billet feed.

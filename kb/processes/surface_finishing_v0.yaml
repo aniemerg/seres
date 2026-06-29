@@ -14,6 +14,9 @@ resource_requirements:
 - machine_id: surface_grinder
   qty: 1
   unit: count
+- machine_id: polishing_station
+  qty: 1
+  unit: count
 energy_model:
   type: fixed_per_batch
   value: 1.0
@@ -21,7 +24,10 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 2.0
-notes: Surface finishing operations to achieve desired surface quality, roughness,
-  and appearance. Includes grinding, polishing, buffing, honing, and lapping. Removes
-  machining marks, improves surface roughness, and achieves dimensional tolerances.
-  Critical for precision mating surfaces, optical components, and aesthetic finishes.
+notes: >
+  Surface finishing operations to achieve desired surface quality, roughness, and
+  appearance. Uses surface_grinder for flat grinding and polishing_station for
+  polishing/buffing/lapping-style finishing. Removes machining marks, improves
+  surface roughness, and achieves dimensional tolerances. Geometry-specific round
+  grinding should use cylindrical_grinding_precision_v0 or
+  bearing_grinding_precision_v0.

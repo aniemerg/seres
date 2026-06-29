@@ -1,6 +1,6 @@
 id: solar_tracking_optional
 kind: machine
-name: Solar tracking system (optional)
+name: Small single-axis PV tracker (optional)
 mass: 121.5
 unit: unit
 bom: bom_solar_tracking_optional_v0
@@ -9,10 +9,22 @@ notes: 'Assumptions:
 
   - Mass aligned to recipe component sum (121.5 kg).
 
-  Optional solar array tracking mechanism for improved power generation. Provides
+  Optional small single-axis PV tracker or mount upgrade for improved power generation.
+  Includes tracking structure, pivot/bearing interfaces, actuator or drive assembly,
+  controller, position sensors, wiring terminals, stow behavior, and maintenance
+  access. Fixed-tilt arrays remain a lower-complexity path. Dual-axis concentrator
+  or heliostat tracking should use dedicated concentrator/heliostat tracking resources,
+  not this PV tracker.
 
-  single or dual-axis tracking to follow the sun''s path.
 
   '
+capabilities:
+- solar_panel_tracking
+- sun_position_following
+- pv_mount_actuation
+- optional_solar_yield_improvement
+- single_axis_pv_tracking
+- tracker_stow_positioning
+- tracker_drive_control
 recipe: recipe_machine_solar_tracking_optional_v0
 unit_kind: discrete

@@ -6,6 +6,10 @@ inputs:
   - item_id: magnesium_silicide
     qty: 100.0
     unit: kg
+  - item_id: crucible_ceramic_refractory
+    qty: 5.0
+    unit: kg
+    notes: Consumable crucible required by silicon_purification_mgsi_v0.
 outputs:
   - item_id: magnesium_oxide
     qty: 50.0
@@ -15,6 +19,13 @@ outputs:
     unit: kg
 steps:
   - process_id: silicon_purification_mgsi_v0
+    inputs:
+      - item_id: magnesium_silicide
+        qty: 100.0
+        unit: kg
+      - item_id: crucible_ceramic_refractory
+        qty: 5.0
+        unit: kg
     outputs:
       - item_id: magnesium_oxide
         qty: 50.0

@@ -1,9 +1,19 @@
 id: welding_tig_unit_v0
 kind: machine
 name: TIG welding unit v0
-mass: 169.9
+mass: 26.0
 unit: unit
 bom: bom_welding_tig_unit_v0_v0
-notes: TIG welding unit used for pipe/tube assembly; placeholder spec for early modeling.
+material_class: steel
+capabilities:
+- tig_torch_control
+- gtaw_precision_welding_addon
+- vacuum_welding_torch_support
+notes: TIG/GTAW add-on package for near-vacuum welding. Represents reusable torch,
+  leads, local controls, and electronics layered on a separate welding_power_supply_v0;
+  it does not include a welding power supply. Near-vacuum operation does not require
+  oxygen-atmosphere shielding hardware, and air or water cooling is not assumed available.
+  Recipes/processes requiring TIG welding should require both this add-on package
+  and welding_power_supply_v0.
 recipe: recipe_welding_tig_unit_v0
 unit_kind: discrete

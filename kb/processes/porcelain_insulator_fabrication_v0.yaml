@@ -17,7 +17,7 @@ resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 1
     unit: count
-  - machine_id: sintering_furnace_v0
+  - machine_id: furnace_high_temp
     qty: 1
     unit: count
 energy_model:
@@ -27,4 +27,6 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 1.4
-notes: Forming/firing route for porcelain-style rigid ceramic insulator hardware.
+notes: Forming/firing route for porcelain-style rigid ceramic insulator hardware
+  using furnace_high_temp for ceramic firing; no dedicated sintering furnace is
+  required unless a later route adds controlled-atmosphere or clean-hot-zone needs.
