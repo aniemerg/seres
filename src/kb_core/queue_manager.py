@@ -23,6 +23,7 @@ import fcntl
 
 WORK_QUEUE = Path("out/work_queue.jsonl")
 INDEX_PATH = Path("out/index.json")
+GAP_TYPE_REGISTRY = Path("config/queue_gap_type_registry.json")
 
 LOCK_PATH = Path("out/work_queue.lock")
 
@@ -273,14 +274,11 @@ def _register_gap_type(gap_type: str, created_by: str = "unknown") -> None:
     """
     Auto-register new gap types in the registry.
 
-    Creates queue/gap_type_registry.json if it doesn't exist.
+    Creates config/queue_gap_type_registry.json if it doesn't exist.
     Updates usage_count if gap_type already registered.
     """
-    import json
-    from pathlib import Path
-
-    registry_path = Path("queue/gap_type_registry.json")
-    registry_path.parent.mkdir(exist_ok=True)
+    registry_path = GAP_TYPE_REGISTRY
+    registry_path.parent.mkdir(parents=True, exist_ok=True)
 
     # Load existing registry
     if registry_path.exists():
@@ -313,10 +311,7 @@ def list_gap_types() -> Dict[str, dict]:
     Returns:
         Dict mapping gap_type -> metadata dict
     """
-    import json
-    from pathlib import Path
-
-    registry_path = Path("queue/gap_type_registry.json")
+    registry_path = GAP_TYPE_REGISTRY
     if not registry_path.exists():
         return {}
 

@@ -50,7 +50,7 @@ Manual items persist until explicitly completed/released, surviving indexer rebu
 
 **Solution:** Create a **gap type registry** that agents can read and extend:
 
-**File:** `queue/gap_type_registry.json`
+**File:** `config/queue_gap_type_registry.json`
 
 **Structure:**
 ```json
@@ -78,11 +78,11 @@ Manual items persist until explicitly completed/released, surviving indexer rebu
 
 **List gap types:** `python -m src.cli queue gap-types` shows all registered types (both indexer-defined and agent-created).
 
-**Why `queue/` directory:**
+**Why `config/` directory:**
 - Not ephemeral output (`out/` is for generated files cleared on rebuild)
 - Not KB data (`kb/` is for domain knowledge)
-- Queue-related persistent metadata deserves its own directory
-- Future queue config/metadata can live here
+- Queue-related persistent metadata is operational configuration
+- Keeping it under `config/` avoids a top-level `queue/` directory with a single file
 
 ### 3. Freeform Context
 
@@ -249,7 +249,7 @@ def _register_gap_type(gap_type: str, created_by: str = "unknown"):
     from pathlib import Path
     import time
 
-    registry_path = Path("queue/gap_type_registry.json")
+    registry_path = Path("config/queue_gap_type_registry.json")
     registry_path.parent.mkdir(exist_ok=True)
 
     # Load existing
@@ -277,7 +277,7 @@ def list_gap_types() -> dict:
     import json
     from pathlib import Path
 
-    registry_path = Path("queue/gap_type_registry.json")
+    registry_path = Path("config/queue_gap_type_registry.json")
     if not registry_path.exists():
         return {}
 
@@ -459,7 +459,7 @@ elif args.qcmd == "gap-types":
 ### Migration
 
 No breaking changes - this is purely additive:
-1. Create `queue/` directory
+1. Create `config/queue_gap_type_registry.json`
 2. Add gap type registry file
 3. Add functions to `queue_tool.py`
 4. Add CLI commands to `__main__.py`
@@ -470,7 +470,7 @@ Existing queue items get `source: "indexer"` by default (missing field = indexer
 
 ## Implementation Checklist
 
-- [ ] Create `queue/` directory
+- [ ] Create `config/queue_gap_type_registry.json`
 - [ ] Implement `add_gap()` in `queue_tool.py`
 - [ ] Implement `_register_gap_type()` in `queue_tool.py`
 - [ ] Implement `list_gap_types()` in `queue_tool.py`
