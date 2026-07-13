@@ -16,13 +16,11 @@ The demo is successful when:
 
 ## Scale snapshot
 
-This demo shows a **self‑reproduction chain** at scale: the simulation
-**produced 135 machines**, executed **2,787 processes**, and accumulated
-**~908,136 machine‑hours** of simulated work, consuming
-**~3.53 million kWh** of energy. These metrics reflect the depth and
-complexity of the modeled production system, while keeping the focus on
-what the demo actually proves—machine self‑reproduction under the current
-model assumptions.
+The current canonical target list contains **136 machines**. The last archived
+full-scale snapshot produced **135 machines**, executed **2,787 processes**, and
+accumulated **~908,136 machine‑hours** of simulated work, consuming
+**~3.53 million kWh** of energy. Rerun the demo to refresh these production
+metrics after changes to the canonical target list.
 
 ## One‑command run
 
@@ -46,7 +44,7 @@ out/self_repro_demo/
 
 ## Produced‑machine ISRU (mass‑weighted)
 
-From the current self‑reproduction demo run:
+From the archived full-scale self-reproduction snapshot:
 
 - Produced machines with provenance: 135
 - In‑situ mass: 25,318.14 kg
@@ -73,7 +71,8 @@ The demo uses:
 docs/self_reproducing_set.txt
 ```
 
-This is the current canonical target list for the self‑reproduction demo.
+This is the current canonical target list for the self‑reproduction demo. It
+currently contains **136 machine ids**.
 
 ## How to validate
 

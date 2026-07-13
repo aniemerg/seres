@@ -1,140 +1,44 @@
 # Minimal Self-Reproducing Machine Set (Current)
 
-This list is the current **converged imported-machine set** after iterative SimPlan optimization and provenance-based import extraction. It represents the **minimal machine set** that remains imported (or required) for the current KB to self-reproduce its machine dependency graph.
+This document describes the current **converged imported-machine set** after
+iterative SimPlan optimization and provenance-based import extraction. It
+represents the machine set that remains imported or required for the current KB
+to self-reproduce its machine dependency graph.
 
 **Canonical list:** `docs/self_reproducing_set.txt`
 
-For the self‑reproduction demo and validation steps, see:
-- `docs/self_reproduction_demo.md`
+**Current canonical count:** 136 machine ids.
 
-## Machines
-alignment_tools
-anvil_or_die_set
-assembly_station
-assembly_tools_basic
-balancing_machine
-ball_mill_v0
-basic_fabrication_station
-bending_machine_v0
-blast_furnace_or_smelter
-casting_furnace_v0
-casting_mold_set
-chemical_bath_station
-chemical_reactor_basic
-chemical_reactor_vessel_v0
-chemical_separation_equipment
-cnc_mill
-coil_winding_machine
-controlled_atmosphere_chamber
-coordinate_measuring_machine
-crucible_graphite
-crucible_refractory
-cutting_tools_general
-dies
-drawing_die_set_basic
-drill_press
-drilling_equipment_v0
-drying_basic_v0
-drying_oven
-dust_collection_system
-electrodes
-electrolysis_cell_unit_v0
-enclosure_small
-epoxy_processing_unit
-epoxy_synthesis_unit
-excavator_basic
-fiber_drawing_tower
-filtration_unit
-fixturing_workbench
-forging_press_v0
-furnace_basic
-furnace_high_temp
-generic_chemical_reactor_v0
-glass_furnace_v0
-gravity_separator
-grinder_cylindrical_v0
-grinding_wheels
-hand_tools_basic
-hand_tools_electrical
-hand_tools_mechanical
-heat_treatment_furnace_v0
-heating_furnace
-heating_plate_induction_heater
-heliostat_array_system_v0
-high_temperature_power_supply_v0
-hot_press_v0
-hydraulic_assembly_tools
-hydraulic_press
-induction_forge_v0
-inspection_tools_basic
-kiln_ceramic
-lab_v0
-labor_bot_general_v0
-lathe_engine_v0
-leak_test_equipment
-lifting_equipment
-magnetic_separator_drum_v0
-measurement_equipment
-metal_forming_basic_v0
-metal_shear_or_saw
-milling_machine_general_v0
-mixer_or_blender
-mixing_tank_medium
-molding_press
-molding_press_basic
-mre_reactor_v0
-multimeter_set
-oscilloscope_basic
-pcb_fab_equipment
-pellet_press
-pelletizer_v0
-plastic_extruder
-plate_rolling_mill
-powder_mixer
-power_conditioning_equipment
-power_distribution_bus
-power_hammer_or_press
-power_supply_benchtop
-precision_lathe
-precision_levels
-precision_tooling_set
-press_brake
-press_brake_die_set
-press_ram_set
-pressing_mold_set
-pyrolysis_chamber_v0
-quench_tank
-reduction_furnace_v0
-refractory_installation_tools
-resource_3d_printer_cartesian_v0_machine
-rock_crusher_basic
-rolling_mill_v0
-sand_casting_flask_set
-saw_or_cutting_tool
-screening_equipment
-sintering_furnace_v0
-solar_array_v0
-solar_tracking_optional
-soldering_station
-spinning_machine_v0
-stamping_press_basic
-steel_forming_press
-surface_grinder
-surface_treatment_station
-tension_control_system
-tension_gauge
-test_bench_electrical
-test_equipment_basic
-tube_bender
-vapor_capture_system_v0
-vibrating_screen_v0
-vibratory_feeder_v0
-welding_consumables
-welding_power_supply_v0
-welding_tig_unit_v0
-welding_tools_set
-winding_drums
-wire_crimping_tools
-wire_drawing_die_set
-wire_stripper_set
-work_rest_adjustable
+The canonical list is intentionally kept in one plain-text file so scripts,
+documentation, and review diffs all use the same source of truth. Do not
+duplicate the full list here; update `docs/self_reproducing_set.txt` and then
+refresh any demo/report metrics that depend on it.
+
+## Scope
+
+This target list is **not** the full KB machine catalog. It is the current
+self-reproduction target set: the machines the demo asks the simulator to
+produce and compare against. The KB may contain many more machine entries,
+including alternatives, versioned variants, research placeholders, deprecated
+items, and machines that are not on the current self-reproduction path.
+
+Use `docs/self_reproducing_set.txt` for the demo target count. Use the KB item
+index or `kind: machine` queries when you need the full machine catalog count.
+
+To verify the current count:
+
+```bash
+python - <<'PY'
+from pathlib import Path
+
+machines = [
+    line.strip()
+    for line in Path("docs/self_reproducing_set.txt").read_text().splitlines()
+    if line.strip() and not line.strip().startswith("#")
+]
+print(len(machines))
+PY
+```
+
+For the self-reproduction demo and validation steps, see:
+- `docs/self_reproduction_demo.md`
