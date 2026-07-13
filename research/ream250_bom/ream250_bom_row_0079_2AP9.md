@@ -58,3 +58,90 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 79.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0079_2AP9.md
+source_research_sha256: "d29846d5a7d1221a918c0be45af7c42021e77606abdbecb4ac49fe95005fded9"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed front spring-block function in the build-platform stack, long grooved CAD form, conservative steel-scenario mass, unresolved metal material evidence, bar-stock machining route, and simple-part KB implication."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one monolithic side-specific grooved block. The grooves, end features, contact faces, and side-specific geometry are integral machined features."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_metal_bar_block
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers milling a prismatic metal bar block, while groove geometry and contact faces need more specific feature control."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to spring reaction faces, platform-stack fit, and groove dimensions."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to preparing the rectangular bar blank before finish machining."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Relevant if the CAD end features include attachment holes."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers flatness, length, groove, and side-specific fit checks before assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred route is bar stock preparation followed by milling, feature machining, deburring, and inspection, which directly fits the general subtractive machining bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: side-specific spring reaction and support member for the build-platform stack
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.422
+    bom_quantity: 1
+    row_total_mass_kg: 0.422
+    scale_class: small
+  geometry_form: long_narrow_grooved_bar_block_front_member
+merge_pool:
+  eligible: true
+  functional_purpose_key: spring_reaction_support
+  precision_guardrails:
+    - contact_face_flatness
+    - groove_geometry
+    - platform_stack_fit
+    - material_family_unresolved
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material uncertainty changes mass and may affect thermal, wear, and spring preload behavior."
+    - "Build-platform stack fit may require tighter face and groove inspection than a generic spacer block."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this front spring block with the matching side and back spring-block family."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely part of a reusable machined spring-block support family with side-specific geometry notes."
+assumptions:
+  - "Generic steel mass is kept as a conservative planning value until the true alloy is resolved."
+  - "The block is a custom machined simple part rather than a purchased module."
+unresolved:
+  - "Specific alloy, heat treatment, surface finish, thermal behavior, wear requirements, and detailed mating interfaces remain unresolved."
+```

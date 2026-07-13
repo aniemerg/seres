@@ -59,3 +59,87 @@ kb_implications:
 ---
 
 CAD preview: `research/ream250_bom/ream250_bom_row_0094_2AR__views_2x2.png`
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0094_2AR.md
+source_research_sha256: "d8004d5ee2832d43017fa58fae12beaffb5a8774adce347d013d3cd988d58af4"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the end-switch flag function, CAD-volume mass estimate, uncertain metal-sheet material evidence, sheet cutting route, KB implication, and CAD preview showing a thin L-shaped plate with two holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single thin plate/flag associated with sensor triggering and has no subassembly dependencies."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: thin_sheet_metal_cutting_drilling
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Matches cutting a small constant-thickness sheet profile."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the two mounting holes visible in the CAD preview."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Alternative coarse cutting anchor for a small metal plate."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers hole spacing, outline, and fit checks before sensor alignment."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred manufacturing route is already simple sheet cutting and drilling, matching the canonical sheet and plate bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: end-switch trigger flag and local sensor mounting feature
+  material: unknown_metal_sheet
+  scale_or_capacity:
+    mass_kg: 0.028
+    bom_quantity: 1
+    row_total_mass_kg: 0.028
+    scale_class: tiny
+  geometry_form: small_l_shaped_two_mm_sheet_plate_with_two_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: sensor_triggering
+  precision_guardrails:
+    - hole_pattern
+    - target_position
+    - inductive_detectability
+    - plate_thickness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material family is unresolved; inductive sensor target behavior may require ferrous steel rather than aluminum."
+    - "Alignment to the sensor group may impose tighter positional tolerance than the CAD preview indicates."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares other small sensor flags and brackets."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; may merge with other small sheet-metal sensor flags if material and alignment guardrails match."
+assumptions:
+  - "Generic steel density was used for mass planning because the exact material is unresolved and inductive target service likely needs metal."
+  - "The top label is positional context and should not force a unique closure item."
+unresolved:
+  - "Exact alloy, magnetic response, coating, hole dimensions, bend/chamfer details, and end-switch assembly alignment tolerance remain unresolved."
+```

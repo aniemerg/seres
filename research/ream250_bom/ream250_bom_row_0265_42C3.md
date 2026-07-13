@@ -57,3 +57,97 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 265.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0265_42C3.md
+source_research_sha256: "8966067f0a439ccd37b34ae6ecacb9c721082ff98468058b9e48ede7ae8f2374"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed AMPROVED DN40 disc-valve function, stainless-dominated mass estimate, AISI 316L plus EPDM material evidence, inferred machining/assembly route, and CAD preview with KF flanges and valve-body features."
+decomposition:
+  decision: complex_module
+  rationale: "The row is a vendor valve component/subassembly from a multi-row valve set with sealing, motion, detent, and interface requirements that should be consolidated before KB itemization."
+  proposed_subparts:
+    - stainless_valve_body_and_disc_features
+    - epdm_sealing_element
+    - manual_detent_actuation_hardware
+process_abstraction:
+  original_process_family: precision_stainless_valve_machining_and_seal_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - precision_machining
+    - surface_finishing
+    - elastomer_forming
+    - assembly
+    - leak_testing
+    - dimensional_inspection
+    - import_assumption
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Captures the gas/fluid path role but lacks the DN40 valve body, detent, and seal details."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to stainless KF faces, central bore, and moving valve features if localized later."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to EPDM seal production if the valve is decomposed for local manufacture."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Needed for valve closure and KF interface sealing checks."
+    - process_id: assembly_basic_v0
+      fit: supporting
+      reason: "Covers final integration of body, seal, and detent hardware after decomposition."
+  abstraction_decision: needs_human
+  rationale: "The source route implies precision valve machining and seal assembly, but sibling valve rows must be reviewed together before choosing a local closure path."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: manual shutoff and flow control at a DN40 process port
+  material: stainless_steel_and_epdm
+  scale_or_capacity:
+    mass_kg: 1.22
+    bom_quantity: 1
+    row_total_mass_kg: 1.22
+    scale_class: medium
+  geometry_form: kf_dn40_disc_valve_component_with_flanged_body_features
+merge_pool:
+  eligible: false
+  functional_purpose_key: manual_flow_control
+  precision_guardrails:
+    - sealing_quality
+    - valve_motion
+    - detent_positions
+    - kf_interface_dimensions
+    - sibling_valve_row_consolidation
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Commercial valve has precision stainless interfaces, EPDM sealing, manual detents, and leak-performance requirements."
+    - "Sibling valve CAD rows need group review before choosing one module boundary versus a decomposed sub-BOM."
+  post_merge_decision_notes: "Final import/local decision is deferred until valve sibling rows are consolidated and a focused valve decomposition review is complete."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not stage a row-specific item yet; review all AMPROVED DN40 valve rows as one functional valve module."
+assumptions:
+  - "The stainless body dominates the mass estimate even though EPDM seal material is also present."
+  - "The DN40 valve should remain grouped with sibling valve CAD rows until merge review can identify the complete module boundary."
+unresolved:
+  - "Which exact internal component this vendor part 3 represents is not resolved."
+  - "Seal geometry, detent mechanism details, leak-rate requirement, tolerances, and vendor drawing data are unavailable."
+```

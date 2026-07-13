@@ -54,3 +54,85 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - one plain sheet/strip part, likely modeled as a cut sheet-metal component rather than a purchased module or assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0238_17AJ.md
+source_research_sha256: "e0b9fd1b431b1d74b4f784a014214a2f3220b2acf55e5d20cdf23d5fbb82ac54"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed front sheet function, measured sheet-strip dimensions, conservative steel mass basis, unresolved material evidence, simple cutting route, and CAD preview showing a plain long thin rectangular strip."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single plain sheet strip with no visible attached hardware, mechanism, electronics, nor hidden module structure."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_metal_cutting
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Covers cutting sheet stock into panels and blanks matching the simple rectangular strip geometry."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers generic stock cutting when the final sheet process is staged with broader metal-cutting equipment."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Relevant for edge cleanup after cutting the long strip."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers flatness and dimensional checks before installation."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already simple sheet cutting; coating and edge cleanup are supporting steps rather than a distinct primary process family."
+  process_guardrails:
+    tolerance: low
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: front cover strip for hood frame area
+  material: metal_sheet_material_unresolved
+  scale_or_capacity:
+    mass_kg: 0.319
+    bom_quantity: 1
+    row_total_mass_kg: 0.319
+    scale_class: small
+  geometry_form: long_plain_rectangular_2mm_sheet_strip
+merge_pool:
+  eligible: true
+  functional_purpose_key: enclosure_barrier
+  precision_guardrails:
+    - flatness
+    - cut_length
+    - edge_finish
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Actual sheet material and coating are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; compare with other hood, cover, and barrier strips before assigning a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic cut machine cover strip if material and thickness can be unified."
+assumptions:
+  - "The conservative steel mass basis is retained for scale, while material remains unresolved for merge review."
+  - "The row function is treated as enclosure and hood coverage, not structural load bearing."
+  - "No hidden holes, bends, fasteners, nor sealing features are modeled because the row evidence shows a plain strip."
+unresolved:
+  - "Actual material family, alloy, and finish are not identified."
+  - "Surrounding assembly requirements may add coating, mounting, drilling, and forming needs not visible in this per-part STEP."
+```

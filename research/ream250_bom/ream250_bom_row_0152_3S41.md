@@ -57,3 +57,91 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 152.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0152_3S41.md
+source_research_sha256: "a07d70d7f9ba2835a85a44f826eb796c5ae9db8825663ecac20db6b12317e686"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the gas-outlet part 1 identity, long thin-wall duct-like CAD form, generic steel mass estimate with material uncertainty, sheet-metal fabrication route, and simple-part KB implication."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one fabricated segment of a larger gas outlet group. It should remain a simple part during row conversion, with larger outlet joining and leak checks handled at assembly staging."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_metal_gas_outlet_segment_fabrication
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - cutting
+    - forming
+    - joining
+    - deburring
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_fabrication_v0
+      fit: partial
+      reason: "Covers cutting, bending, forming, and deburring the thin-wall outlet segment from sheet stock."
+    - process_id: sheet_metal_bending_and_forming_v0
+      fit: supporting
+      reason: "Relevant to forming the long rectangular duct-like segment after blank cutting."
+    - process_id: plumbing_and_pneumatics_v0
+      fit: supporting
+      reason: "Relevant to later assembly of the outlet group into a gas-handling path."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant once this segment is joined into the larger outlet assembly and gas-tightness is required."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and fit checks at the long edges and end interfaces."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is sheet-metal fabrication, but the closure-relevant role is a gas outlet path segment. Plumbing connector fabrication with sheet forming support better preserves the gas-handling function and downstream leak-test guardrails."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: gas outlet path segment for guiding process gas flow through the outlet assembly
+  material: unknown_metal_alloy_sheet
+  scale_or_capacity:
+    mass_kg: 0.507
+    bom_quantity: 1
+    row_total_mass_kg: 0.507
+    scale_class: small
+  geometry_form: long_thin_wall_rectangular_duct_like_sheet_segment
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_path
+  precision_guardrails:
+    - gas_path_fit
+    - seam_joining_quality
+    - leak_tightness_after_assembly
+    - material_family_unresolved
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Material family is unresolved, with aluminum, steel, and stainless scenarios changing mass and joining details."
+    - "Gas-tightness class is unknown and may require assembly-level joining plus leak testing beyond simple sheet forming."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares the 3S gas outlet segments and decides whether they stage as separate formed sheet parts behind one outlet assembly."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review across the 3S41-3S48 gas outlet group before assigning final closure item IDs."
+assumptions:
+  - "The row belongs to a multi-part gas outlet group, so sealing and joining should be assessed at the larger outlet assembly level."
+  - "Generic steel mass is a conservative planning estimate until the sheet alloy is resolved."
+unresolved:
+  - "Exact material family, wall thickness callouts, bend allowances, seam details, tolerance, surface finish, and gas-tightness requirement remain unresolved."
+```

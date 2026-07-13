@@ -56,3 +56,96 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0027_2A4.md
+source_research_sha256: "c6b71a878bc44c9629a0850e49154839736cc7659bf6b1cc6e2c5a4f3ec3e647"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, catalog mass, material convention evidence, precision guideway manufacturing route, kb implications, and preview showing a compact guide block/carriage."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a complex precision linear guide carriage containing a hardened body, raceways, recirculating balls, end-return parts, seals, lubricant, and preload/accuracy controls. Those internal dependencies matter before local closure."
+  proposed_subparts:
+    - hardened_carriage_body
+    - precision_steel_balls
+    - recirculation_end_return_parts
+    - seal_and_lubrication_parts
+    - preload_and_inspection_requirements
+process_abstraction:
+  original_process_family: precision_linear_guide_block_manufacturing_and_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - precision_machining
+    - heat_treatment
+    - grinding_lapping
+    - assembly
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: precision_grinding_and_scraping_v0
+      fit: supporting
+      reason: "Relevant to finishing guide surfaces and datum faces, though recirculating raceway geometry is more specialized."
+    - process_id: bearing_manufacturing_small_v0
+      fit: partial
+      reason: "Closest anchor for precision races, balls, grease, and tight tolerances, but it models bearings rather than linear guide carriages."
+    - process_id: ball_bearing_machining_v0
+      fit: supporting
+      reason: "Weak anchor for rolling-element finishing only."
+    - process_id: heat_treatment_basic_v0
+      fit: supporting
+      reason: "Relevant to hardening and tempering the steel raceway body."
+  abstraction_decision: needs_human
+  rationale: "The source item is a catalog precision motion component with preload class and accuracy class. Row conversion should keep it in precision import/decompose-later until the KB explicitly models linear guideway production."
+  process_guardrails:
+    tolerance: high_precision_review
+    surface_finish: raceway_grinding_review
+    sealing_quality: seal_and_lubrication_review
+    alignment_accuracy: high_precision_review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: precision low-friction carriage for linear axis motion
+  material: carbon_steel_with_rolling_elements_seals_and_lubricant
+  scale_or_capacity:
+    mass_kg: 0.14
+    bom_quantity: 3
+    row_total_mass_kg: 0.42
+    scale_class: small
+  geometry_form: compact_hgl15_linear_guide_carriage
+merge_pool:
+  eligible: false
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - preload_class_z0
+    - accuracy_class_h
+    - raceway_surface_finish
+    - ball_recirculation
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Precision raceway grinding, heat treatment, ball manufacture, preload setting, seals, lubricant, and inspection are unresolved."
+    - "Catalog guideway block is likely an import candidate until precision linear guidance becomes a modeled manufacturing target."
+  post_merge_decision_notes: "Final import/local decision is deferred until decomposition separates carriage body, rolling elements, seals, lubricant, and inspection requirements."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item ID during row conversion; review with other HGL15 linear guidance rows first."
+assumptions:
+  - "BOM quantity is 3, so row total mass is about 0.42 kg from the 0.14 kg catalog mass."
+  - "Carbon steel material family follows the Hiwin order-code convention; exact alloy and heat treatment remain unresolved."
+  - "Small seals, end-return parts, and lubricant are retained as decomposition notes rather than separate row-conversion items."
+unresolved:
+  - "Exact steel grade, heat treatment, raceway grinding sequence, and preload-setting method."
+  - "Seal polymer, lubricant, end-return material, and inspection acceptance criteria."
+  - "Whether later KB staging imports a generic linear guide block set instead of modeling individual carriage components."
+```

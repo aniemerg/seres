@@ -58,3 +58,93 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 272.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0272_66.md
+source_research_sha256: "99852a93d01c95891162871e9de46bd34451593ee8fe40d2888cee8c2cd6cb4b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the row function, Aluminum 6061 material evidence, CAD-derived per-unit and row-total mass basis, CNC plate route, and preview evidence showing a thin irregular plate with pockets, cutouts, and mounting features."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a monolithic custom front support plate with three identical BOM instances; no module decomposition is needed."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_aluminum_plate
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers generic machining from stock, but final staging must account for pockets, slots, and bearing/shaft support interfaces."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if shaft, bearing, belt, and guide interfaces need controlled hole location and pocket depth."
+    - process_id: sheet_metal_cutting_v0
+      fit: supporting
+      reason: "Useful for rough blank/profile cutting from plate stock before final machining."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Matches mounting-hole creation, with fit-critical holes handled by the precision machining guardrail."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Covers chip and surface contamination removal before assembly into the recoater/conveyor mechanism."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of thickness, hole locations, pocket depths, and mating faces."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is already a custom machined aluminum plate; general subtractive machining is the simplest compatible closure bucket for the irregular profile and localized pockets."
+  process_guardrails:
+    tolerance: review
+    surface_finish: standard
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural end support for recoater/conveyor-side shafts, belt, and guide hardware
+  material: aluminum_6061
+  scale_or_capacity:
+    mass_kg: 0.327
+    bom_quantity: 3
+    row_total_mass_kg: 0.982
+    scale_class: small
+  geometry_form: thin_irregular_machined_plate_with_pockets_cutouts_and_mounting_features
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - hole_position_accuracy
+    - shaft_bearing_interface_alignment
+    - pocket_depth
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Bearing, shaft, belt, and guide interfaces may require tighter tolerances than ordinary support plates."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this front plate with the related back plate and other recoater/conveyor support members."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final item identity open for merge review; quantity three should remain a BOM quantity rather than distinct item definitions."
+assumptions:
+  - "The three BOM instances are identical Aluminum 6061 plates at about 0.327 kg each."
+  - "Subtractive machining is retained as the closure route because pockets and local interface features are visible in the CAD preview."
+unresolved:
+  - "Exact temper, coating, datum scheme, and tolerances are not available."
+  - "Which holes and pockets are precision interfaces versus clearance features needs assembly-level review."
+```

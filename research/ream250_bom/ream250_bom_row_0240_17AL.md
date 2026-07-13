@@ -56,3 +56,94 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one custom cut sheet-metal side panel; use a generic sheet cutting/deburring process and account for quantity 2 in the BOM rather than creating a purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0240_17AL.md
+source_research_sha256: "78a1cb5d839d5e20e372ff3e63c681d07c4113e7311e3830aa09132fe1e1cb1f"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the chamber/enclosure side sheet function, 3.367 kg per-unit steel-planning mass with BOM quantity 2 and 6.73 kg row total, unresolved sheet-metal material evidence, flat sheet cutting/deburring route, KB implication, and CAD preview showing a plain 2 mm rectangular panel."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one flat sheet-metal panel with no internal assemblies, bends, holes, slots, hardware, and process-active features visible in the CAD preview."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: flat_sheet_metal_panel_cutting
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - deburring
+    - surface_finishing
+    - coating
+    - dimensional_inspection
+    - assembly
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Directly covers cutting flat sheet stock into panel blanks."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Generic fallback for shearing, sawing, waterjet, laser, and router cutting."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup after cutting."
+    - process_id: surface_treatment_basic_v0
+      fit: supporting
+      reason: "Relevant if the side panel receives coating, passivation, brushing, and similar finish steps."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers panel dimensions, flatness, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The original inferred route is flat sheet cutting with edge finishing, matching the sheet/plate cutting bucket. No machining-heavy process is needed for a plain rectangular panel."
+  process_guardrails:
+    tolerance: low_to_moderate
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "side panel skin for machine chamber enclosure"
+  material: unresolved_sheet_metal
+  scale_or_capacity:
+    mass_kg: 3.367
+    bom_quantity: 2
+    row_total_mass_kg: 6.73
+    scale_class: medium
+  geometry_form: plain_flat_rectangular_2mm_sheet_panel
+merge_pool:
+  eligible: true
+  functional_purpose_key: enclosure_barrier
+  precision_guardrails:
+    - sheet_thickness
+    - panel_flatness
+    - material_unresolved
+    - finish_requirement
+    - sealing_interface_unknown
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material family is unresolved; steel planning mass is about 3.367 kg per panel, while aluminum would be about 1.158 kg per panel."
+    - "Mounting and sealing details are not present in the isolated sheet STEP."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other enclosure side panels, covers, and sheet barriers."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic flat sheet-metal enclosure panel if material and thickness guardrails converge."
+assumptions:
+  - "BOM quantity is 2, mass is 3.367 kg per panel under the steel planning assumption, and row total mass is 6.73 kg."
+  - "The part is modeled as rigid sheet metal because the CAD is a 2 mm panel in a metal AM machine enclosure."
+  - "No holes, bends, flanges, and formed features are modeled because the preview shows a plain sheet."
+unresolved:
+  - "Exact material, coating, fastener method, sealing role, left/right orientation, and enclosure load path are unknown."
+  - "Whether this merges with other enclosure panels depends on material, thickness, finish, and mounting requirements."
+```

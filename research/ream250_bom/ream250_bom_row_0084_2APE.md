@@ -59,3 +59,92 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 84.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0084_2APE.md
+source_research_sha256: "623af010a9d389004cb9fef7a4ee33291633eb18bf8f090b12214f32bbc696fb"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed build-platform hardware context, quantity 4, per-unit and row-total mass basis, unknown metal evidence, turned-sleeve manufacturing route, and CAD preview geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is four identical one-piece spacer sleeves, not a purchased module and not an assembly with hidden internal dependencies."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: lathe_turned_metal_sleeve
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_process_turning_v0
+      fit: direct
+      reason: "Covers lathe turning for a small cylindrical sleeve with faced ends."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers producing the through bore when solid bar stock is used."
+    - process_id: machining_process_boring_v0
+      fit: partial
+      reason: "Covers bore finishing as a concept, though the existing process is scaled for larger frame features."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers inner and outer edge deburring after turning and drilling."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, bore, outside diameter, and squareness checks before installation."
+  abstraction_decision: keep_original_family
+  rationale: "The source manufacturing route is already a small subtractive turning and boring job, so the canonical closure handle should remain general subtractive machining."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: mechanical spacing and location in bolted build-platform hardware stack
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.0067
+    bom_quantity: 4
+    row_total_mass_kg: 0.0266
+    scale_class: tiny
+  geometry_form: short_cylindrical_through_bore_sleeve
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_spacing
+  precision_guardrails:
+    - bore_diameter_fit
+    - spacer_length_tolerance
+    - end_face_squareness
+    - material_strength_review
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material family is unresolved; steel-like mass is only a planning estimate."
+    - "Bore fit class, length tolerance, and finish are not sourced."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; local turning is plausible if material and tolerance guardrails remain ordinary machine-hardware requirements."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other sleeves, bushings, standoffs, and spacer hardware before assigning a closure item ID."
+assumptions:
+  - "Treat the per-unit mass as 0.0067 kg and the four-unit row total as 0.0266 kg."
+  - "Treat the part as metallic based on rigid sleeve geometry and build-platform bolted hardware context."
+  - "Treat the bore as a fastener clearance and locating feature, not as a bearing surface unless later evidence shows otherwise."
+unresolved:
+  - "Actual material family and finish are not sourced."
+  - "Bore diameter tolerance, length tolerance, and squareness requirements are not sourced."
+```

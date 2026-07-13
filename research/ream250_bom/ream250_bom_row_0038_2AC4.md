@@ -53,3 +53,107 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model later as a reusable loose precision bearing ball or small bearing-ball part, not as raw stock or a purchased functional module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0038_2AC4.md
+source_research_sha256: e3dce70f34f62088c587cb908ba8166bf1672bbe74678b7dd65056036c62cc63
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the source function, 5.4 mm spherical CAD/image evidence, steel mass estimate, bearing-steel material inference,
+    precision-ball manufacturing route, and KB implication before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The item is one loose spherical rolling element with no separable subparts and module-level internal dependencies.
+    Its closure difficulty comes from precision bearing-ball manufacture, not part decomposition.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_forming_heat_treating_grinding_lapping_polishing_inspection
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+  - decomposition_required
+  - import_assumption
+  - precision_machining
+  - grinding_lapping
+  - heat_treatment
+  - dimensional_inspection
+  - calibration
+  candidate_existing_processes:
+  - process_id: assembly_basic_v0
+    fit: poor_fit
+    reason: Only covers generic assembly; internal precision manufacturing needs decomposition.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers basic checks while detailed metrology remains unresolved.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Covers generic calibration and test after decomposition defines the item.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  abstraction_decision: substitute_process_family
+  rationale: The original route requires bearing-steel forming, through-hardening, precision grinding/lapping, polishing,
+    cleaning, and grade sorting. Ordinary additive, sheet, profile, and general subtractive buckets do not preserve the required
+    roundness, hardness, and surface finish, so this row should enter the precision component bucket until a local precision-ball
+    process is explicitly modeled.
+  process_guardrails:
+    tolerance: required
+    surface_finish: required
+    sealing_quality: not_applicable
+    alignment_accuracy: required
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: Provide low-friction point rolling contact between bearing races and seats in a rotating axis bearing
+    stack.
+  material: chrome_bearing_steel
+  scale_or_capacity:
+    mass_kg: 0.000647
+    bom_quantity: 1
+    row_total_mass_kg: 0.000647
+    nominal_diameter_mm: 5.4
+    scale_class: tiny
+  geometry_form: precision_sphere
+merge_pool:
+  eligible: true
+  functional_purpose_key: rolling_contact
+  precision_guardrails:
+  - roundness
+  - diameter_tolerance
+  - surface_finish
+  - hardness
+  - wear_resistance
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - precision_component_import_decompose_later
+  import_risk_factors:
+  - Bearing-grade roundness, surface finish, hardness, and metrology requirements are likely outside generic lunar metalworking
+    buckets.
+  - Exact material grade is inferred from bearing-ball practice rather than row-specific material metadata.
+  - Multiple neighboring axis-bearing rows may need consolidation before deciding the condition that to model loose balls
+    and an assembled bearing set.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review groups this with other rolling elements
+    and bearing-stack rows.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review; likely merge candidate with other small loose bearing balls and a reusable precision rolling-element
+    class.
+assumptions:
+- The row represents one loose bearing ball rather than a complete bearing assembly.
+- Chrome bearing steel is the best closure material assumption from geometry and bearing-ball practice despite absent row-specific
+  material metadata.
+- The 5.4 mm diameter is scale evidence for merge review, not part of the functional merge key.
+unresolved:
+- Determine the condition that neighboring 2AC rows are identical rolling elements that should merge into one bearing-ball
+  closure item with aggregated quantity.
+- Decide later the condition that the KB should model loose bearing balls separately and abstract them into a bearing set
+  for this axis stack.
+- Confirm the condition that local precision-ball manufacture is in scope and this remains an import during KB staging.
+```

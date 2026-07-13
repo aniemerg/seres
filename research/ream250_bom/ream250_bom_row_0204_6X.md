@@ -56,3 +56,94 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 204.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0204_6X.md
+source_research_sha256: "35cd032e1f2d2095659cb72d779a8dd8446ca65d56cc3bce47d408e63fca380b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the upper linear-guide connection function, CAD-derived stainless mass, material metadata, inferred fabrication route, and ribbed bracket geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one custom stainless connector body; guide rail, bearing block, fasteners, and surrounding frame members are separate BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_bracket_machining_with_weldment_alternative
+  primary_process_bucket: general_metal_additive_with_finish_machining
+  supporting_processes:
+    - additive_build
+    - support_removal
+    - precision_machining
+    - drilling
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: wire_arc_additive_manufacturing_v0
+      fit: partial
+      reason: "Provides a metal additive anchor for near-net stainless bracket geometry, though smaller features and interfaces need finish machining."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for mounting faces, hole patterns, perpendicularity, and linear-guide alignment interfaces."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers non-critical cleanup and stock-removal operations after near-net fabrication."
+    - process_id: welding_structural_v0
+      fit: poor_fit
+      reason: "A weldment is a plausible source-route alternative, but it adds fixturing and distortion risks for the selected closure path."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers baseline dimensional checks before stronger metrology is selected."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is uncertain across monolithic machining and weldment fabrication; a shared metal additive route with finish machining is a better closure abstraction for the ribbed custom stainless geometry."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: upper connector support for linear guide assembly
+  material: stainless_steel_austenitic
+  scale_or_capacity:
+    mass_kg: 1.4
+    bom_quantity: 1
+    row_total_mass_kg: 1.4
+    scale_class: medium
+  geometry_form: tall_ribbed_connector_bracket_with_mounting_faces
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - mounting_face_flatness
+    - perpendicularity
+    - hole_position
+    - guide_alignment
+    - stiffness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_metal_additive_with_finish_machining
+  import_risk_factors:
+    - "Linear-guide alignment can require precision machining and metrology beyond ordinary bracket fabrication."
+    - "Austenitic stainless near-net fabrication may need distortion control and finish machining."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with other linear-guide supports before choosing a shared closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other guide support and carriage connection rows before assigning a closure item ID."
+assumptions:
+  - "The part is a custom connector body rather than a purchased guide module."
+  - "Near-net additive fabrication plus finish machining can represent the lunar closure route for this geometry."
+  - "Guide rail and bearing components remain separate closure items."
+unresolved:
+  - "Exact stainless grade, surface finish, and passivation state are not specified."
+  - "The mating fastener pattern, load case, and alignment tolerance need review with adjacent guide hardware."
+```

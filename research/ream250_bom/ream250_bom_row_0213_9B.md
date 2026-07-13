@@ -59,3 +59,88 @@ kb_implications:
 # reAM250 BOM Row 213 - 9B
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0213_9B.md
+source_research_sha256: "09e331ba732a084676b354ff35055ad1271473c4571a898570ca653ad05998d9"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the structural-frame function, CAD and catalog mass cross-check, aluminum extrusion material evidence, manufacturing route, and constant-section CAD geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one cut length of aluminum strut profile; connectors, end fasteners, panels, and attached frame hardware belong to other BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - extrusion
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Provides an aluminum extrusion anchor, though its current template is heat-sink oriented and would need binding to structural strut profile output."
+    - process_id: metal_cutting_basic_v0
+      fit: direct
+      reason: "Covers sawing stock to the 960 mm row length and preparing cut ends."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Covers anodized aluminum surface treatment when the closure item preserves catalog-like profile finish."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, straightness, end squareness, and profile damage checks."
+  abstraction_decision: keep_original_family
+  rationale: "The original evidence already indicates an aluminum structural extrusion cut to length, which matches the selected structural profile stock fabrication and cutting bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: modular structural frame member for machine structure
+  material: aluminum_alloy
+  scale_or_capacity:
+    mass_kg: 3.747
+    bom_quantity: 1
+    row_total_mass_kg: 3.747
+    scale_class: medium
+  geometry_form: slotted_square_structural_profile_60x60_cut_to_960mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - length
+    - straightness
+    - end_squareness
+    - slot_interface_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Exact Bosch Rexroth slot geometry and anodized finish may matter if reused with catalog connector hardware."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; this row is a strong candidate for merging into a generic aluminum structural profile closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other 60 mm class aluminum frame profiles and cut lengths before assigning a closure item ID."
+assumptions:
+  - "The 60 x 60 x 960 mm filename and CAD envelope identify the profile size and cut length."
+  - "The profile can be treated as reusable structural stock rather than a machine-specific part."
+  - "Cut ends do not contain row-specific drilled, tapped, keyed, nor precision-milled features unless later assembly evidence shows them."
+unresolved:
+  - "Exact Rexroth material number and finish variant are not available in the leased row."
+  - "Any connector-specific slot compatibility requirements need group-level review with related frame hardware rows."
+```

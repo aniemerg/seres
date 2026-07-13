@@ -56,3 +56,90 @@ kb_implications:
 # reAM250 BOM Row 250 - 34
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0250_34.md
+source_research_sha256: "3f7ea10bab57161e8ce7b445458f8b6d6490bfd34ecddbea6dcaa3247711b51c"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, quantity, mass basis, stainless material split, inferred bellows/flange manufacturing route, KB implication, and CAD preview showing an annular ISO-KF end geometry."
+decomposition:
+  decision: simple_part
+  rationale: "Although fabricated from flanges and a corrugated bellows, the closure role is a reusable DN50 flexible vacuum plumbing connector; subpart expansion can be deferred unless bellows forming becomes a bottleneck."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: vacuum_bellows_fabrication
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - precision_machining
+    - joining
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers installation and pressure/leak testing of plumbing assemblies, but not fabrication of a welded stainless bellows connector."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to forming the thin corrugated bellows section, though the row may need specialized bellows tooling beyond basic forming."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Applies to ISO-KF flange sealing and mating geometry where dimensional control matters."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Covers precision stainless welding for leak-tight bellows-to-flange joints."
+    - process_id: leak_test_v0
+      fit: supporting
+      reason: "Directly supports the vacuum tightness check required by the vendor performance class."
+  abstraction_decision: substitute_process_family
+  rationale: "The vendor route is generalized into a reusable plumbing connector fabrication and test bucket because the closure concern is stainless fluid/vacuum connection capability, not the exact Pfeiffer supply chain."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: flexible short plumbing connector for DN50 gas and vacuum line compliance
+  material: stainless_steel_304_and_316l
+  scale_or_capacity:
+    mass_kg: 0.3
+    bom_quantity: 2
+    row_total_mass_kg: 0.6
+    scale_class: small
+  geometry_form: short_corrugated_bellows_with_iso_kf_dn50_flange_ends
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - leak_tightness
+    - flange_sealing_geometry
+    - axial_compliance
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Thin corrugated stainless bellows forming and vacuum-grade welded joints may require specialized tooling and inspection."
+    - "Vendor tightness target is much stricter than ordinary pressure plumbing and must remain a staging guardrail."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review compares other DN50 plumbing connectors and leak-tight flexible sections."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic stainless DN50 flexible plumbing connector rather than a Pfeiffer-specific item."
+assumptions:
+  - "The STEP preview appears to show one simplified flange/end feature, so the conversion uses the source research mass estimate rather than CAD volume alone."
+  - "Vacuum service is recorded as sealing and leak-test guardrails, not as a separate merge key."
+unresolved:
+  - "No exact catalog mass was found for the row order number."
+  - "Actual bellows forming, weld qualification, cleaning, and helium leak-test procedure remain unspecified."
+```

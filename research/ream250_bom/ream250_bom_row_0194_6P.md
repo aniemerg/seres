@@ -55,3 +55,86 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 194.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0194_6P.md
+source_research_sha256: "674b79b2576ec4b40dbae5f9d42b7336e58258692014610817462555adcb5d21"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed GT2 belt pulley function, per-unit and row-total mass basis, stainless material evidence, standard pulley machining route, vendor interface details, and CAD preview showing a small flanged pulley with central bore."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single metal timing pulley repeated six times, not a motorized module nor hidden assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_pulley_machining_and_tooth_cutting
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - precision_machining
+    - gear_tooth_machining
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_precision_v0
+      fit: partial
+      reason: "Covers turning, boring, and concentricity control for the small pulley body and 8 mm bore."
+    - process_id: gear_cutting_basic_v0
+      fit: supporting
+      reason: "Provides a tooth-cutting process anchor for the GT2 belt tooth profile, though timing-pulley tooth geometry needs later detail."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Relevant for cleanup of tooth edges, bore edges, and flanges."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers basic dimensional and belt-fit checks before use in the motion system."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already a small machined pulley with tooth-forming; the canonical subtractive bucket keeps closure tractable while recording tooth geometry as supporting work."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: timing belt pulley for rotary motion transmission
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.0142
+    bom_quantity: 6
+    row_total_mass_kg: 0.0851
+    scale_class: small
+  geometry_form: small_flanged_gt2_timing_pulley_8mm_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: rotary_motion_transmission
+  precision_guardrails:
+    - bore_concentricity
+    - tooth_profile
+    - flange_geometry
+    - belt_width_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "GT2 tooth profile tooling and bore concentricity may require precision setup beyond basic turning."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; compare with other small belt pulleys and motion-transmission hardware before assigning a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable small timing pulley family if bore and tooth profile guardrails match other rows."
+assumptions:
+  - "Stainless steel family from STEP metadata is adequate for row conversion despite unknown alloy grade."
+  - "The six BOM units can share one closure item because the row evidence identifies identical pulleys."
+  - "Set-screw details are not modeled because the row research did not confirm them."
+unresolved:
+  - "Specific stainless alloy, tooth manufacturing method, surface finish, and bore retention details remain unknown."
+```

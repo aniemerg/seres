@@ -52,3 +52,89 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - model as reusable standard ISO-KF vacuum clamp hardware rather than a machine-specific custom assembly; use a separate subpart model only if later KB work expands vacuum fitting manufacture."
 ---
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0117_3F.md
+source_research_sha256: "c1a89764908565c3742d2510d36515188fc1780b78707e14b1fb693c45430df5"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed DN32-40 ISO-KF clamp function, CAD-derived mass with quantity 3, official 304/1.4301 material evidence, inferred forming/machining route, and preview showing curved clamp and tightening features."
+decomposition:
+  decision: simple_part
+  rationale: "The row is reusable standard clamp hardware; screw/wingnut details can stay within the clamp item unless a later fitting-manufacture pass decomposes it."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_iso_kf_clamp_forming_and_fit_inspection
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - precision_machining
+    - drilling
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Captures reusable line-connection hardware but lacks ISO-KF clamp geometry detail."
+    - process_id: sheet_metal_forming_v0
+      fit: partial
+      reason: "Covers curved clamp body forming from stainless stock."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers lug and fastening-feature finishing."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers tightening fastener holes if needed after forming."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers fit checks against DN32-40 ISO-KF flanges and elastomer seal stack."
+  abstraction_decision: keep_original_family
+  rationale: "The source row is already standard stainless plumbing connector hardware, fitting the plumbing connector fabrication/testing bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamp an elastomer-sealed flange joint closed
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.0933
+    bom_quantity: 3
+    row_total_mass_kg: 0.280
+    scale_class: small
+  geometry_form: iso_kf_dn32_40_clamping_ring_with_tightening_lugs
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_clamping
+  precision_guardrails:
+    - flange_size_range
+    - clamp_fit
+    - tightening_feature_geometry
+    - sealing_stack_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Standard clamp geometry and stainless finish must match the flange/seal stack."
+    - "Small purchased clamps may remain import kit candidates until fitting hardware volume justifies local production."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups ISO-KF clamp hardware and checks local connector-fabrication capability."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as generic ISO-KF stainless clamp hardware."
+assumptions:
+  - "Official 304/1.4301 material evidence is normalized to stainless steel 304."
+  - "The CAD solid represents one clamp item and row quantity 3 represents identical instances."
+unresolved:
+  - "Exact fastener subparts, surface finish, vendor production method, and tolerances are not specified."
+```

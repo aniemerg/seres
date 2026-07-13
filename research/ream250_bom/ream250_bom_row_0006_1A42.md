@@ -57,3 +57,107 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 6.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0006_1A42.md
+source_research_sha256: 1e2d56174dbaaa5dfdefd64f5f9ff8248d511fe14a4f22eff270269b5a95b567
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the schlieren-imaging flange function, CAD-volume mass estimate, unresolved structural-metal material
+    evidence, inferred CNC machining route, KB implication, and CAD preview showing a bolted rectangular optical interface
+    with a protruding tube feature.
+decomposition:
+  decision: simple_part
+  rationale: The row is a single custom mechanical flange and optical interface bracket with no internal vendor module,
+    electronics package, optics package, and fastener set to expose during row conversion.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_milling_boring
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - precision_machining
+  - drilling
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers general stock removal for a custom metal bracket, but the optical tube and mating features need more
+      specific finish and alignment guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant where flange flatness, bore geometry, tube alignment, and optical-interface surfaces require tighter
+      machining than basic bracket work.
+  - process_id: machining_process_boring_v0
+    fit: supporting
+    reason: Relevant to the cylindrical/conical tube feature and any controlled optical bore.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers the bolted rectangular flange hole pattern.
+  - process_id: surface_finishing_v0
+    fit: supporting
+    reason: Covers deburring and finish work on mating, optical, and possible sealing surfaces.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before later staging selects a final recipe.
+  abstraction_decision: keep_original_family
+  rationale: The original route is already a CNC milling and boring route for a non-sheet custom flange/tube geometry, so
+    the shared subtractive machining bucket is the simplest compatible closure handle.
+  process_guardrails:
+    tolerance: review flange flatness, bolt pattern, bore geometry, and tube alignment against the schlieren optical path
+    surface_finish: review mating, optical-interface, and possible sealing faces; deburr all machined edges
+    sealing_quality: review because the exact mating adapter and chamber interface are not identified
+    alignment_accuracy: optical tube axis and flange face alignment may be function-critical
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: mount and interface the schlieren imaging path to the machine through a bolted optical flange
+  material: unknown_structural_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.39
+    bom_quantity: 1
+    row_total_mass_kg: 0.39
+    scale_class: small
+  geometry_form: machined_rectangular_flange_with_protruding_optical_tube
+merge_pool:
+  eligible: true
+  functional_purpose_key: optical_interface_mount
+  precision_guardrails:
+  - optical_axis_alignment
+  - flange_flatness
+  - bolt_hole_pattern
+  - bore_geometry
+  - possible_sealing_surface
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - Exact alloy is unresolved, so aluminum, steel, and stainless assumptions change mass and thermal behavior.
+  - The optical alignment and possible sealing requirements are not specified by the row evidence.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other optical
+    mounts, interface flanges, and chamber adapter brackets.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; this may converge with other machined optical interface mounts if
+    material and alignment guardrails are compatible.
+assumptions:
+- The STEP solid represents the complete per-unit row item and excludes separate optics, seals, and fasteners.
+- Aluminum alloy is plausible for mass planning, but the conversion keeps the material broad because the evidence does
+  not resolve alloy grade.
+- Subtractive machining remains the primary closure abstraction because the geometry is not a simple flat plate plus stock
+  profile.
+unresolved:
+- Exact material grade, surface treatment, tolerances, and surface finish are unknown.
+- The mating optic, adapter, seal, and chamber interface served by the tube/flange feature are not identified.
+- It is unclear whether the protruding tube is truly one-piece with the flange rather than a joined feature in production.
+```

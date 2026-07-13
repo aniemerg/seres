@@ -53,3 +53,104 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 113.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0113_3B.md
+source_research_sha256: "309096dfc88d516e031e70bc7a292a6e1b47e6708727b51bcd1f95219cde8ad2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: false
+  notes: "Reviewed the Pfeiffer EVB 063 PA electro-pneumatic vacuum valve function, 3.9 kg catalog mass with BOM quantity 1, aluminum/stainless/FKM partial material evidence, external-module installation route, and KB implication. CAD proxy was inspected but not used for identity because it is not dimensionally representative."
+decomposition:
+  decision: complex_module
+  rationale: "The row is a calibrated multi-material vacuum valve with body, actuator, bellows feedthrough, seals, position indicator, pilot/control hardware, wiring, and leak qualification dependencies."
+  proposed_subparts:
+    - valve_body
+    - electro_pneumatic_actuator
+    - bellows_feedthrough
+    - fkm_seal_set
+    - position_indicator_microswitch
+    - pilot_valve_and_wiring
+process_abstraction:
+  original_process_family: vendor_electro_pneumatic_vacuum_valve_module
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - assembly
+    - leak_testing
+    - pressure_testing
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers installation of vacuum/pneumatic line hardware but not fabrication of the calibrated valve module."
+    - process_id: valve_set_gas_handling_assembly_v0
+      fit: partial
+      reason: "Relevant to assembling gas-handling valve sets, but this row is a catalog electro-pneumatic angle valve."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Critical for validating vacuum isolation performance after installation and after any future local fabrication."
+    - process_id: pressure_test_basic_v0
+      fit: supporting
+      reason: "Relevant to pneumatic actuator and line integrity checks."
+    - process_id: electrical_assembly_basic_v0
+      fit: supporting
+      reason: "Relevant to pilot valve and position indicator wiring if decomposed."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Basic QA anchor; later staging needs valve actuation, leak rate, and position indication checks."
+  abstraction_decision: needs_human
+  rationale: "Near-term closure should treat this as a precision vendor module. Local manufacture would need decomposition across vacuum valve body fabrication, bellows/feedthrough, seals, actuator, electrical controls, assembly, and qualification."
+  process_guardrails:
+    tolerance: high
+    surface_finish: sealing_face_review
+    sealing_quality: high
+    alignment_accuracy: moderate
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: "electro pneumatic vacuum shutoff isolation valve for DN63 vacuum line"
+  material: aluminum_stainless_fkm_mixed_valve_module
+  scale_or_capacity:
+    mass_kg: 3.9
+    bom_quantity: 1
+    row_total_mass_kg: 3.9
+    scale_class: medium
+  geometry_form: dn63_iso_k_angle_valve_module_with_actuator
+merge_pool:
+  eligible: false
+  functional_purpose_key: flow_control
+  precision_guardrails:
+    - vacuum_leak_tightness
+    - actuator_function
+    - position_indication
+    - fkm_seal_material
+    - cad_proxy_not_physical
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Valve body, bellows feedthrough, FKM sealing, electro-pneumatic actuation, position indication, leak testing, and qualification create a high closure burden."
+    - "CAD geometry is a tiny proxy and cannot support local manufacturing geometry."
+  post_merge_decision_notes: "Final import/local decision is deferred; review with other vacuum valves and gas-handling modules before deciding module import versus decomposition."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a simple closure item ID at row conversion; keep as a complex vacuum valve module pending merge/decomposition review."
+assumptions:
+  - "BOM quantity is 1 and row total mass is the vendor catalog mass of 3.9 kg."
+  - "Material identity is partial but sufficient for module-level staging: aluminum housing, stainless feedthrough, FKM seal, plus unresolved actuator materials."
+  - "The CAD preview is recorded only as proxy evidence and not used for scale."
+unresolved:
+  - "Internal sub-BOM, valve body geometry, bellows/feedthrough details, actuator materials, electrical details, leak specification, and qualification workflow remain unresolved."
+  - "Whether this valve remains an import module and how it groups with other vacuum flow-control rows are deferred."
+```

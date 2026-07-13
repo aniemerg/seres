@@ -91,3 +91,111 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 55.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0055_2ADC.md
+source_research_sha256: ff4297304065b1f814cab8fb049a9f1668d0120718fa50727c6bf64bd9fde96a
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed function, CAD volume mass estimate, BOM quantity, unresolved metal material evidence, machining route, KB
+    implications, and CAD preview showing the bearing bore, mounting feet, and bolt-hole flanges.
+decomposition:
+  decision: simple_part
+  rationale: The row is one compact bearing-support/encoder-interface bracket body. It is not the glass scale, bearing, and
+    encoder module itself, so it should remain a simple structural/locating part for merge review.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machining
+  primary_process_bucket: general_metal_additive_with_finish_machining
+  supporting_processes:
+  - additive_build
+  - support_removal
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - thread_forming
+  - grinding_lapping
+  - calibration
+  candidate_existing_processes:
+  - process_id: wire_arc_additive_manufacturing_v0
+    fit: partial
+    reason: Covers local metal additive buildup for compatible metal parts; final geometry and tolerance still need finish
+      machining.
+  - process_id: electron_beam_additive_manufacturing_v0
+    fit: partial
+    reason: Covers metal additive manufacturing in vacuum-compatible lunar context; material feedstock and resolution need
+      later review.
+  - process_id: machining_finish_basic_v0
+    fit: supporting
+    reason: Covers finish machining after additive buildup.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Relevant when calibration affects functional acceptance.
+  abstraction_decision: add_post_processing
+  rationale: The compact custom bracket can converge to the shared metal additive bucket, then use finish machining for the
+    bearing bore, datum faces, and mounting-hole positions. Direct as-built use is not assumed.
+  process_guardrails:
+    tolerance: Bearing bore diameter, bore position, and mounting-hole spacing need precision machining and reaming after
+      rough fabrication.
+    surface_finish: Bore and mounting faces likely require machined finish; non-critical exterior surfaces can remain rougher.
+    sealing_quality: not_applicable
+    alignment_accuracy: Axis/glass-scale location depends on the bore and bolted feet maintaining alignment to the axis reference.
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: locate and support bearing and encoder hardware at the top of a linear measurement axis
+  material: unknown_metal_alloy_planning_as_aluminum_family
+  scale_or_capacity:
+    mass_kg: 0.173
+    bom_quantity: 1
+    row_total_mass_kg: 0.173
+    scale_class: small
+  geometry_form: compact_bored_mounting_body_with_bolted_feet
+merge_pool:
+  eligible: true
+  functional_purpose_key: axis_bearing_positioning
+  precision_guardrails:
+  - bearing_bore_tolerance
+  - bore_to_mounting_hole_position
+  - mounting_face_flatness
+  - axis_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_metal_additive_with_finish_machining
+  import_risk_factors:
+  - Exact material is unresolved; steel would materially change mass and possibly stiffness assumptions.
+  - Axis metrology performance may require tighter alignment than generic structural brackets.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other bearing-location
+    and measurement-axis support parts.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave item ID open because this may merge into a reusable bearing-location support item after material and precision
+    guardrails are reviewed.
+assumptions:
+- The CAD solid represents one physical bracket and BOM quantity is one.
+- Aluminum-family density is kept as the planning mass basis while material remains unresolved.
+- A lunarized additive route would still machine the bore, mounting faces, and critical holes.
+unresolved:
+- Exact metal and alloy is unknown; source evidence did not resolve aluminum versus steel.
+- Required bore tolerance, datum scheme, and surface finish are not stated.
+- Merge review must decide the condition that this can share a closure item with other axis bearing supports and requires
+  a metrology-specific support item.
+```

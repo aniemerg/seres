@@ -57,3 +57,104 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0216_12.md
+source_research_sha256: 2382409166eb2f9c1203e9fdfd1f6a2229096c2554ab0b94b878b2a3bd2a6c1c
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the function, CAD-derived mass basis, silicone sealant material evidence, in-place dispensing and cure route,
+    KB implications, and CAD preview showing a thin rectangular rear perimeter bead before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row represents one applied silicone sealant bead/gasket with no hidden subassembly, electronics, mechanism,
+    and no vendor module requiring decomposition.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sealant_surface_preparation_dispensing_cure
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+  - elastomer_forming
+  - curing
+  - cleaning
+  - assembly
+  - dimensional_inspection
+  - leak_testing
+  candidate_existing_processes:
+  - process_id: elastomer_molding_basic_v0
+    fit: partial
+    reason: Covers basic elastomer forming when the row becomes a local seal element.
+  - process_id: potting_and_sealing_v0
+    fit: partial
+    reason: Covers dispensed sealing material and encapsulation style work.
+  - process_id: drying_and_curing_v0
+    fit: supporting
+    reason: Covers curing after polymer and elastomer placement.
+  - process_id: seal_installation_v0
+    fit: supporting
+    reason: Covers installation when the row is treated as a seal in an assembly.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared polymer dispensing bucket: clean mating surfaces, dispense a
+    continuous bead, assemble, cure, and inspect.'
+  process_guardrails:
+    tolerance: review bead path, bead volume, and compression gap
+    surface_finish: review cleanliness and mating-face condition
+    sealing_quality: review
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: elastic perimeter seal between rear mating machine panels and housings
+  material: black_silicone_elastomer_sealant
+  scale_or_capacity:
+    mass_kg: 0.0869
+    bom_quantity: 1
+    row_total_mass_kg: 0.0869
+    scale_class: small
+  geometry_form: thin_rectangular_dispensed_perimeter_bead_840x400x3mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: perimeter_panel_barrier
+  precision_guardrails:
+  - bead_continuity
+  - compression_set
+  - mating_surface_cleanliness
+  - leak_contamination_limit
+  - thermal_and_powder_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+  - exact cured silicone formulation, additives, pigment, and durometer are unresolved
+  - local silicone polymer and sealant-compounding supply chain may be outside near-term closure scope
+  - service temperature, powder exposure, outgassing, and leak-tightness requirements are not specified
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until merge review compares similar perimeter
+    seals and later staging resolves local chemistry, import treatment, and generic elastomer gasket substitution.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning a closure item ID; likely compare with other applied silicone perimeter seals
+    such as the top/bottom flat seal row.
+assumptions:
+- The CAD solid is treated as the installed and cured sealant bead volume for one rear seal.
+- A generic black silicone elastomer sealant is an acceptable closure abstraction for Liqui Moly 6185 unless service evidence
+  requires a specific commercial formulation.
+- A general labor bot and simple dispensing tool can apply and inspect the bead if surface cleanliness and bead continuity
+  requirements are met.
+unresolved:
+- Exact cured formulation, filler package, pigment, hardness, and compression-set behavior are not identified.
+- The row does not specify sealed medium, pressure level, leak criterion, thermal exposure, powder contamination exposure,
+  and cure acceptance test.
+- Whether later lunarized design should retain dispensed sealant, substitute a cut/molded elastomer gasket, and adjust mating
+  geometry remains a merge and staging decision.
+```

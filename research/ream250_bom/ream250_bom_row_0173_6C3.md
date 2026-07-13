@@ -54,3 +54,92 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one simple stainless blade-mount strip or spacer in the recoater blade mount family, not as a purchased module or multi-part assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0173_6C3.md
+source_research_sha256: "173428fef7adfdb87b62b129357e808a9c080df6c0e754799938bc5387b96e58"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the blade-mount function, CAD-derived stainless mass basis, STEP material evidence, simple strip fabrication route, and preview showing a long thin profiled strip with angled end features."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a one-piece stainless blade-mount strip with no internal components; screws, blade, and adjacent mount rails are separate rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: profile_cut_stainless_strip
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - cutting
+    - precision_machining
+    - deburring
+    - cleaning
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Matches cutting a thin stainless strip blank/profile from sheet/plate stock."
+    - process_id: cutting_basic_v0
+      fit: partial
+      reason: "Covers generic stock cutting, with final edge geometry and flatness controlled by follow-on finishing."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to cutting the long strip to length during stock preparation."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Useful if the angled ends and blade-contact faces need light milling after profile cutting."
+    - process_id: surface_treatment_basic_v0
+      fit: supporting
+      reason: "Covers passivation, degreasing, and simple protective surface treatment for stainless hardware."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, straightness, flatness, and edge-condition checks before blade-mount assembly."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the source route allows light machining, the geometry is a shallow strip from thin stock; sheet/plate cutting with local finishing is the coarser closure handle."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamp spacer backing strip for recoater blade mounting
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.133
+    bom_quantity: 1
+    row_total_mass_kg: 0.133
+    scale_class: small
+  geometry_form: long_thin_profiled_strip_with_angled_end_features
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_clamping
+  precision_guardrails:
+    - blade_contact_flatness
+    - straightness
+    - edge_condition
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Blade-contact faces may require better flatness and burr control than ordinary cut strips."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with related blade mount strips and clamps."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review across blade-mount clamp, spacer, and backing-strip rows before assigning an item ID."
+assumptions:
+  - "The row is a mount strip rather than the blade edge itself, based on the row name and neighboring blade hardware."
+  - "Profile cutting plus light finishing can preserve the angled end features and functional contact faces."
+unresolved:
+  - "Exact stainless grade, hardness, passivation requirement, and blade-contact tolerance remain unknown."
+  - "The precise clamp/spacer/backing role needs assembly-level review with adjacent blade-mount rows."
+```

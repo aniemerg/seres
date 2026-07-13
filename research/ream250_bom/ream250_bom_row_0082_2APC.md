@@ -56,3 +56,90 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Treat as a custom machined metal block; consolidate with the other spring-block rows if later KB modeling can represent orientation variants with one reusable spring_block part."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0082_2APC.md
+source_research_sha256: "edf05d1d0b99399ef495341d1a13e88105ae2c4d80e9b5d6b985dcf6b10f42da"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the spring-block function, steel-density mass assumption, unknown metal evidence, machined-stock route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a one-piece elongated support/preload block. Orientation-specific naming should be handled during merge review rather than as a unique closure item."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: machined_rectangular_bar_support_block
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: partial
+      reason: "Covers cutting rectangular stock to the long block blank."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers milling the tapered face, end details, and reference faces."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if spring preload contact faces require tight flatness and alignment."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers cleanup of the long block edges and end features."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, width, thickness, flatness, and fit checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is simple machining from bar/plate stock, but the closure handle should be reusable structural/profile stock fabrication and cutting with secondary machining for the tapered detail."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: support and preload a build-platform spring interface
+  material: unknown_metal
+  scale_or_capacity:
+    mass_kg: 0.40
+    bom_quantity: 1
+    row_total_mass_kg: 0.40
+    scale_class: small
+  geometry_form: long_narrow_rectangular_block_with_tapered_relief_face
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_support
+  precision_guardrails:
+    - length
+    - contact_face_flatness
+    - preload_interface
+    - orientation_variant
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Material is unresolved and the steel-density mass is a conservative planning assumption."
+    - "Heated build-platform service may impose material, flatness, and thermal expansion requirements not captured by the row."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row with front, right, and back spring-block rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely a reusable spring support block with orientation noted outside item identity."
+assumptions:
+  - "The steel-like mass estimate is retained for conservative scale grouping."
+  - "The part is one machined metal block, not an assembled module."
+  - "Left-side orientation is treated as a merge guardrail rather than a separate functional key."
+unresolved:
+  - "Exact alloy, preload contact requirements, flatness tolerance, surface finish, and thermal service limits are not resolved by row evidence."
+```

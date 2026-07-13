@@ -55,3 +55,94 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 196, item 6R.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0196_6R.md
+source_research_sha256: "5cdc63b3271fc6f9b3c6368df5ceaa90213dd519adfcd7568dbdc4e76b2146c2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the small closed-loop belt function, 0.00402 kg per-belt mass with BOM quantity 3 and 0.01206 kg row total, rubber material metadata, inferred belt-forming route, KB implication, and CAD preview showing a thin closed loop near pulley rows."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a replaceable belt-like motion component with no module internals modeled at this stage; reinforcement and tooth form are unresolved material/process guardrails."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: rubber_belt_loop_forming
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+    - elastomer_forming
+    - extrusion
+    - forming
+    - curing
+    - joining
+    - cutting
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: conveyor_belt_loop_fabrication_v0
+      fit: partial
+      reason: "Captures rubber belt loop fabrication at a coarse level, though this row is a small motion belt with unresolved tooth profile."
+    - process_id: elastomer_molding_basic_v0
+      fit: partial
+      reason: "Relevant to forming rubber components but not sufficient for reinforced timing-belt details."
+    - process_id: silicone_rubber_vulcanization_v0
+      fit: poor_fit
+      reason: "Anchors elastomer curing concepts, but the row material is broad rubber and not specifically silicone."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to trimming belt stock to width and length before loop joining."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers fit checks for loop length, width, thickness, and pulley compatibility."
+  abstraction_decision: substitute_process_family
+  rationale: "The exact vendor belt standard is unknown, so closure should use a generic elastomer belt-loop forming path with reinforcement, pitch, and pulley fit left as guardrails."
+  process_guardrails:
+    tolerance: review
+    surface_finish: belt_tooth_surface_review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "closed-loop belt for transmitting motion between pulleys"
+  material: rubber_with_unresolved_reinforcement
+  scale_or_capacity:
+    mass_kg: 0.00402
+    bom_quantity: 3
+    row_total_mass_kg: 0.01206
+    scale_class: small
+  geometry_form: small_closed_loop_belt_profile
+merge_pool:
+  eligible: true
+  functional_purpose_key: motion_transmission
+  precision_guardrails:
+    - belt_pitch
+    - tooth_profile
+    - reinforcement_material
+    - loop_length
+    - pulley_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+    - "Exact belt standard, compound, reinforcement, pitch, tooth profile, and splice method are unresolved."
+    - "Small drive belts may remain simpler as imported stock if local elastomer belt production is not already in scope."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other belts and pulley-drive components."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small rubber motion belt only if pitch and reinforcement guardrails converge."
+assumptions:
+  - "BOM quantity is 3, mass is 0.00402 kg per belt, and row total mass is 0.01206 kg."
+  - "Rubber metadata is accepted as broad material evidence, while reinforcement is left unresolved."
+  - "Adjacent pulley rows support interpreting the closed loop as a drive belt rather than a static gasket."
+unresolved:
+  - "Belt pitch, tooth geometry, compound, reinforcement material, splice method, vendor standard, and load rating are unknown."
+  - "Whether this should merge with generic timing belts versus remain a stock import depends on pulley compatibility."
+```

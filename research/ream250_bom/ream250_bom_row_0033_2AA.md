@@ -60,3 +60,94 @@ kb_implications:
 # reAM250 BOM Row 33 - 2AA
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0033_2AA.md
+source_research_sha256: "048c7f02a79f54516e2c243606924505cd693c96fd7d0600fd021464776328e4"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the Z-axis support function, CAD-derived aluminum-scenario mass basis, unresolved structural-metal material evidence, inferred machined-plate route, and preview showing a wedge-like support web with a row of mounting holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one monolithic handed support plate; no subparts are visible in the evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_structural_plate
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers general stock removal for the wedge/web body and mounting faces."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if Z-axis guide, bearing, and side-plate interfaces require controlled alignment."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Matches the visible mounting-hole row before any reaming, countersinking, and inspection."
+    - process_id: metal_cutting_basic_v0
+      fit: supporting
+      reason: "Covers rough cutting of plate/billet stock before milling."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Covers chip and surface contamination removal before assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of hole locations, mounting faces, flatness, and Z-axis interface dimensions."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred source route is CNC machining from thick plate/billet stock, and the Z-axis support function makes general subtractive machining the primary closure handle."
+  process_guardrails:
+    tolerance: review
+    surface_finish: standard
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: handed structural support and locator for Z-axis guide/bearing hardware
+  material: metal_alloy_unresolved
+  scale_or_capacity:
+    mass_kg: 1.13
+    bom_quantity: 1
+    row_total_mass_kg: 1.13
+    scale_class: medium
+  geometry_form: wedge_like_machined_support_plate_with_mounting_hole_row
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - hole_position_accuracy
+    - mounting_face_flatness
+    - z_axis_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material is unresolved; aluminum versus steel selection changes mass and machining effort."
+    - "Z-axis guide and bearing interfaces may require tighter alignment than ordinary frame plates."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with right-hand and related Z-axis support plates."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with mirrored/support-plate rows before assigning a final item ID."
+assumptions:
+  - "The nominal mass uses the aluminum scenario from the source research while keeping material unresolved."
+  - "The mounting-hole row is treated as a normal mechanical interface unless later drawings show precision bearing-seat requirements."
+unresolved:
+  - "Exact alloy, grade, surface treatment, threaded-hole details, and tolerances are unknown."
+  - "Handed geometry and relationship to row 34 need merge-stage review before consolidation."
+```

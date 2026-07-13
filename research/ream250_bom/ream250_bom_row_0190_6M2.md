@@ -50,3 +50,101 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Treat 6M2 as the rail/body portion of the SMC LEFG32-S-600 support-guide pair; keep the complete LEFG support guide as a later module only if rows 6M1, 6M2, seal-band parts, and guide hardware are explicitly recombined."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0190_6M2.md
+source_research_sha256: "9d4853c46b5b3dfa8eb1b81001bfe9476cd145a9882cd68efafff48e661ed5c1"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the SMC support-guide function, catalog mass, aluminum/steel/polymer material stack, inferred module production route, and long rail-body CAD geometry before conversion."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row represents the rail/body portion of a vendor linear support guide whose closure dependencies include aluminum body/profile, steel guide hardware, bearing surfaces, seal-band parts, alignment, and inspection."
+  proposed_subparts:
+    - aluminum_support_guide_body
+    - precision_steel_guide_hardware
+    - slide_bearing_hardware
+    - seal_band_components
+    - alignment_and_inspection_operations
+process_abstraction:
+  original_process_family: vendor_linear_support_guide_module
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - extrusion
+    - precision_machining
+    - grinding_lapping
+    - surface_finishing
+    - assembly
+    - dimensional_inspection
+    - import_assumption
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Relevant to the long aluminum guide body/profile, but not sufficient for precision guide function."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to mounting surfaces, guide alignment, and precision interfaces."
+    - process_id: precision_grinding_basic_v0
+      fit: supporting
+      reason: "Relevant to steel guide and bearing-contact surface finishing."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant to anodized aluminum LEF-family body surfaces."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers baseline dimensional checks; true linear-guide alignment inspection would need stronger metrology."
+  abstraction_decision: substitute_process_family
+  rationale: "The source item is a vendor linear support-guide component with precision alignment and mixed-material internals, so Phase 1 should defer detailed manufacture until merge review and decomposition."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: review
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: passive support guide for linear motion axis
+  material: aluminum_alloy_steel_polymer_elastomer
+  scale_or_capacity:
+    mass_kg: 2.88
+    bom_quantity: 1
+    row_total_mass_kg: 2.88
+    scale_class: medium
+  geometry_form: long_linear_support_guide_body_750mm_overall_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - stroke_length
+    - guide_size
+    - rail_straightness
+    - bearing_interface
+    - seal_band_compatibility
+    - alignment_accuracy
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Vendor linear support guide combines precision guide surfaces, seal-band hardware, bearing features, and alignment quality."
+    - "Mass is moderate but process complexity is high relative to ordinary structural profiles."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with related LEFG rows and other linear guide components before choosing a closure abstraction."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with related SMC guide rows before assigning a closure item ID."
+assumptions:
+  - "The row is the rail/body portion of the support guide rather than the entire driven actuator."
+  - "Catalog mass is preferred over CAD-density mass because the CAD material metadata is placeholder."
+  - "Detailed local manufacture should not be expanded until linear guidance is reviewed as a group."
+unresolved:
+  - "Exact internal guide, bearing, preload, seal-band, and alignment details are not modeled in the row evidence."
+  - "Whether rows 6M1, 6M2, and related seal hardware should be recombined into one closure module remains a merge-review question."
+```

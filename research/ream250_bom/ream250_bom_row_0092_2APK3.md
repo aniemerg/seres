@@ -58,3 +58,89 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0092_2APK3.md
+source_research_sha256: "4e767039b421cf0d1f88c857fa68b278d4595ecce1792c370a4d2223e873b9af"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed build-platform side-plate function, conservative steel-density mass basis with quantity 2, unresolved metal material evidence, sheet/plate cutting route, and preview showing a thin holed plate."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a one-piece side plate used twice; bottom, front/back, seal-guide, and build-platform neighbors remain separate rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_plate_cutting_with_hole_finishing
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting the small side-plate outline from 4 mm metal sheet stock."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers producing the four fastener holes if not cut in the same operation."
+    - process_id: machining_finish_basic_v0
+      fit: supporting
+      reason: "Relevant for local relieved faces and hole finishing after rough cutting."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers hole location, thickness, and fit checks against the build-platform mount stack."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already small sheet/plate fabrication with holes and local finishing, matching the canonical sheet/plate bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: side retention and location support in a build-platform mount subassembly
+  material: unresolved_metal
+  scale_or_capacity:
+    mass_kg: 0.106
+    bom_quantity: 2
+    row_total_mass_kg: 0.212
+    scale_class: small
+  geometry_form: thin_rectangular_side_plate_with_four_corner_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: subassembly_retention
+  precision_guardrails:
+    - hole_pattern
+    - mating_fit
+    - side_alignment
+    - sealing_interface_if_applicable
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material is unresolved; steel and aluminum alternatives materially change mass and local supply path."
+    - "Fit against nearby seal-guide and platform parts may impose tighter hole-location tolerances."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups similar side retainers and resolves metal family."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; candidate for a reusable small side-retainer plate closure item if function and hole-pattern guardrails converge."
+assumptions:
+  - "The left/right name is treated as two instances of the same physical closure item."
+  - "Steel-density mass is retained as a conservative planning value, while material identity remains unresolved metal."
+unresolved:
+  - "Exact material, alloy, surface finish, hole tolerance, and mating constraints are not specified."
+  - "The functional importance of the relieved faces is unknown."
+```

@@ -1,0 +1,212 @@
+stage_id: ream250_kb_stage_0021_mounting_interface
+stage_status: ready_for_review
+source_merge_review: research/ream250_bom/kb_conversion/merge_reviews/ream250_kb_merge_0021_mounting_interface.md
+source_phase2_decision: split
+purpose: Stage Phase 2 split mounting-interface candidates for later KB promotion without editing kb/.
+
+evidence_inputs:
+  merge_review_read: true
+  original_rows_read:
+    - research/ream250_bom/ream250_bom_row_0370_1764.md
+    - research/ream250_bom/ream250_bom_row_0309_179.md
+  existing_kb_checked:
+    items:
+      - kb/items/parts/instrument_mounts_basic.yaml
+      - kb/items/parts/precision_mounts_and_fixtures.yaml
+      - kb/items/parts/fixture_mounting_plate_set.yaml
+      - kb/items/parts/modular_machine_interface_v0.yaml
+      - kb/items/parts/mounting_bracket_steel.yaml
+      - kb/items/parts/mounting_bracket_steel_v0.yaml
+      - kb/items/parts/metal_sheet_or_plate.yaml
+      - kb/items/parts/rover_payload_hardpoint_set_v0.yaml
+    processes:
+      - kb/processes/cutting_basic_v0.yaml
+      - kb/processes/metal_cutting_basic_v0.yaml
+      - kb/processes/machining_basic_v0.yaml
+      - kb/processes/machining_precision_v0.yaml
+      - kb/processes/drilling_basic_v0.yaml
+      - kb/processes/inspection_basic_v0.yaml
+      - kb/processes/surface_treatment_anodizing_v0.yaml
+    search_terms:
+      - mounting
+      - mount
+      - fixture
+      - plate
+      - flange
+      - scanner
+      - adapter
+      - optical
+      - camera
+      - interface
+  notes: Existing KB has generic mount kits, fixture plate sets, and bulk interface placeholders, but no close one-piece equivalent for the camera plate or annular scanner adapter flange.
+
+proposed_items:
+  - action: create_new
+    proposed_item_id: ream250_camera_mounting_plate_v0
+    phase2_item_id: ream250_camera_mounting_plate_v0
+    reason_for_action: No reusable KB item preserves the long narrow one-piece camera-area mounting plate geometry, row-specific 0.363 kg aluminum-scenario mass, and internal cutout alignment guardrails.
+    kb_like_item:
+      id: ream250_camera_mounting_plate_v0
+      name: reAM250 camera mounting plate
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: metal
+      mass_kg: 0.363
+      notes: "Staged one-piece long narrow structural mounting plate from reAM250 row 370. CAD envelope is 8 x 60 x 285 mm with internal cutout features. Mass is the aluminum-scenario estimate from row research; steel construction would be about 1.055 kg. Preserve material, coating, mating faces, fastener details, flatness, and camera alignment requirements as promotion guardrails."
+      source_tags:
+        - ream250_bom_phase3
+    closure_identity:
+      functional_purpose: mounting and spacing interface for camera support hardware
+      material: unknown_structural_metal_alloy
+      scale_or_capacity:
+        per_unit_mass_kg: 0.363
+        bom_quantity: 1
+        row_total_mass_kg: 0.363
+        envelope_mm: 8 x 60 x 285
+        scale_class: medium
+      geometry_form: long_narrow_plate_with_internal_cutouts
+    process_assumptions:
+      primary_process_bucket: sheet_plate_cutting_drilling
+      local_path_summary: Cut from flat metal plate stock, machine local cutout and interface features as needed, deburr, finish, and inspect flatness and alignment-critical dimensions.
+      candidate_existing_processes:
+        - process_id: cutting_basic_v0
+          fit: direct
+          reason: Covers cutting the plate blank and internal profile from flat stock.
+        - process_id: machining_basic_v0
+          fit: supporting
+          reason: Covers cleanup of contour features and mounting faces when profile cutting is insufficient.
+        - process_id: machining_precision_v0
+          fit: supporting
+          reason: Relevant if camera support alignment requires controlled flatness and interface location.
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: Covers envelope, cutout, flatness, and fit checks before assembly.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_recipe_gap
+      is_import: false
+      rationale: "This is a simple structural metal plate, not advanced optics, electronics, a precision reducer, a high-grade sensor, or a specialty material. Existing KB process anchors cover cutting, machining, and inspection, but a row-specific recipe and material binding are not yet staged."
+      local_path_summary: Cut and finish a metal plate using existing cutting and machining process anchors, then inspect fit and alignment.
+      existing_kb_pattern_used:
+        - kb/processes/cutting_basic_v0.yaml
+        - kb/processes/machining_basic_v0.yaml
+        - kb/processes/inspection_basic_v0.yaml
+      import_risk_factors:
+        - Material remains unresolved; aluminum and steel scenarios change mass and stock assumptions.
+        - Camera support alignment could require tighter flatness and feature-location inspection than ordinary sheet cutting.
+      local_manufacture_blockers:
+        - Need promotion-time decision on planning material_class and mass basis.
+        - Need recipe binding for plate stock input, cutout scrap, optional finish, and inspection.
+        - Need decide whether reAM250-specific naming should remain after wider mounting-plate consolidation.
+    promotion_blockers:
+      - Exact material, coating, mating faces, fastener details, flatness, and camera alignment tolerance remain unresolved.
+      - Need decide whether this remains a reAM250-specific item or later merges with other camera support plates.
+      - Need recipe-level stock input, scrap allowance, post-cut machining, finishing, and inspection assumptions.
+
+  - action: create_new
+    proposed_item_id: ream250_scanner_adapter_flange_v0
+    phase2_item_id: ream250_scanner_adapter_flange_v0
+    reason_for_action: No reusable KB item preserves the one-piece annular scanner flange geometry, central aperture, repeated mounting features, and optical-alignment precision guardrails.
+    kb_like_item:
+      id: ream250_scanner_adapter_flange_v0
+      name: reAM250 scanner adapter flange
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: metal
+      mass_kg: 0.487
+      notes: "Staged one-piece scanner-interface flange from reAM250 row 309. CAD envelope is 140 x 140 x 25 mm with central aperture and repeated annular mounting features. Mass is the aluminum-scenario estimate from row research; steel or stainless construction would be about 1.4 kg. Preserve scanner interface standard, hole pattern, concentricity, sealing surface, cleanliness, flatness, and optical alignment as promotion guardrails."
+      source_tags:
+        - ream250_bom_phase3
+    closure_identity:
+      functional_purpose: scanner mounting and alignment interface
+      material: unknown_structural_metal_alloy
+      scale_or_capacity:
+        per_unit_mass_kg: 0.487
+        bom_quantity: 1
+        row_total_mass_kg: 0.487
+        envelope_mm: 140 x 140 x 25
+        scale_class: small
+      geometry_form: annular_scanner_flange_with_central_aperture_and_holes
+    process_assumptions:
+      primary_process_bucket: general_subtractive_machining
+      local_path_summary: Machine from metal plate or billet stock, cut the outer profile and central aperture, drill and finish mounting features, clean, and inspect hole pattern, flatness, aperture, and concentricity.
+      candidate_existing_processes:
+        - process_id: machining_basic_v0
+          fit: partial
+          reason: Covers general stock removal for the annular body but not all scanner-interface tolerance controls.
+        - process_id: machining_precision_v0
+          fit: supporting
+          reason: Relevant for flat faces, concentricity, hole pattern, and scanner alignment guardrails.
+        - process_id: drilling_basic_v0
+          fit: supporting
+          reason: Covers repeated mounting holes before final precision checks.
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: Covers aperture size, hole pattern, thickness, flatness, and interface checks.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: "The flange is a machined structural interface rather than an optical element, electronics package, high-grade sensor, or precision reducer. It should remain a local-manufacture candidate, but scanner alignment, concentricity, sealing, and cleanliness guardrails must be retained before promotion."
+      local_path_summary: Machine and inspect a metal scanner flange using existing basic and precision machining process anchors.
+      existing_kb_pattern_used:
+        - kb/processes/machining_basic_v0.yaml
+        - kb/processes/machining_precision_v0.yaml
+        - kb/processes/drilling_basic_v0.yaml
+        - kb/processes/inspection_basic_v0.yaml
+      import_risk_factors:
+        - Material remains unresolved; aluminum, steel, and stainless scenarios change mass and machining assumptions.
+        - Scanner interface, hole pattern, concentricity, sealing face, and cleanliness requirements may exceed ordinary machining assumptions.
+        - EOS M270 vendor context may indicate undocumented interface requirements not present in the row evidence.
+      local_manufacture_blockers:
+        - Need material and mass-basis decision before KB promotion.
+        - Need recipe binding for stock, rough machining, precision finish machining, drilling, cleaning, and inspection.
+        - Need decide how to represent optical-alignment and possible sealing guardrails in item notes, BOM mapping, and recipe inspection requirements.
+    promotion_blockers:
+      - Exact material, interface standard, bolt specification, sealing role, cleanliness requirement, flatness, and optical alignment tolerance remain unresolved.
+      - Need decide whether this remains reAM250-specific or later merges with other annular scanner and optical-interface flanges.
+      - Need recipe-level stock input, scrap allowance, precision machining, drilling, cleaning, and inspection assumptions.
+
+proposed_bom_mappings:
+  - source_row: 370
+    source_item: "1764"
+    closure_item_id: ream250_camera_mounting_plate_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.363
+    envelope_mm: 8 x 60 x 285
+    geometry_form: long_narrow_plate_with_internal_cutouts
+    preserved_guardrails:
+      - flatness
+      - interface_alignment
+      - cutout_profile
+    notes: Preserve the one-piece camera-area plate as a distinct staged closure item after Phase 2 split.
+  - source_row: 309
+    source_item: "179"
+    closure_item_id: ream250_scanner_adapter_flange_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.487
+    envelope_mm: 140 x 140 x 25
+    geometry_form: annular_scanner_flange_with_central_aperture_and_holes
+    preserved_guardrails:
+      - hole_pattern
+      - flatness
+      - concentricity
+      - optical_alignment
+      - sealing_surface
+    notes: Preserve the scanner-interface flange as a distinct staged closure item after Phase 2 split.
+
+stage_findings:
+  - Phase 2 split is appropriate because the camera mounting plate and scanner adapter flange differ in function, geometry, process bucket, and precision guardrails.
+  - Existing KB mount and fixture entries are too generic, too heavy, kit-like, bulk-modeled, or steel-specific to reuse without losing row evidence.
+  - Both proposed items should remain local-manufacture candidates because they are structural machined metal parts with existing process anchors.
+  - The camera mounting plate mainly needs recipe and material decisions; the scanner adapter flange additionally needs explicit precision and cleanliness guardrails.
+  - Row-specific BOM mappings are necessary because the two staged items share only a broad mounting-interface search key.
+
+unresolved:
+  - Exact material and alloy grade remain unknown for both rows; current masses are aluminum-scenario estimates.
+  - Need decide whether future promoted IDs should retain the reAM250 prefix or become more generic closure items.
+  - Need determine recipe stock inputs, scrap, finishing, and inspection requirements for both staged items.
+  - Need scanner flange interface details: bolt specification, sealing role, cleanliness requirement, flatness, concentricity, and optical alignment tolerance.
+  - Need camera plate interface details: mating faces, fastener features, coating, flatness, and alignment tolerance.

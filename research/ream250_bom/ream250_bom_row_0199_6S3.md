@@ -57,3 +57,87 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 199.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0199_6S3.md
+source_research_sha256: "d2f90101de514cabc839def81f618a4fcbea800ad97d57b42295c9b585ada651"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the motor-mount function, mass basis, steel material metadata, cut-and-bend fabrication route, KB implications, and CAD preview showing an L-shaped bracket with a large clearance opening and smaller holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one bent steel bracket with cut holes and no internal subassembly evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_plate_cutting_bending
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - forming
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: direct
+      reason: "Covers blank profile cutting and the central clearance opening from steel sheet/plate stock."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers smaller fastener holes if not produced during profile cutting."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Covers press-brake bending of the vertical support flange."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers bend angle, hole positions, clearance opening, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is cut, hole-made, bent steel sheet/plate fabrication. The primary closure bucket should stay sheet and plate cutting with forming as a supporting process."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "support and mounting interface for a motor"
+  material: generic_steel
+  scale_or_capacity:
+    mass_kg: 0.171
+    bom_quantity: 1
+    row_total_mass_kg: 0.171
+    scale_class: small
+  geometry_form: bent_l_bracket_with_motor_clearance_and_fastener_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: motor_mounting
+  precision_guardrails:
+    - bend_angle
+    - hole_position
+    - motor_clearance
+    - bracket_stiffness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Stock thickness, bend radius, coating, and motor-face tolerances are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares motor-mount brackets and similar support interfaces."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other motor mounting brackets before assigning a closure item."
+assumptions:
+  - "Steel STEP metadata is accepted as row-level material evidence."
+  - "The large circular opening is treated as motor boss and shaft clearance that affects merge guardrails."
+unresolved:
+  - "Exact steel grade, coating, stock thickness, bend radius, motor interface, and hole tolerances are not specified."
+```

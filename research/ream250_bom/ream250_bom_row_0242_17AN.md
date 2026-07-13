@@ -56,3 +56,90 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one custom cut sheet-metal hood cover panel; reuse a generic sheet-cutting/fabrication process rather than creating a purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0242_17AN.md
+source_research_sha256: "aa71e913f98c8d1d737f4b6f4d8d4b3a4be270fbc6f2d717e05c6a23b2404903"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the hood-panel function, steel-density mass assumption, unresolved sheet-metal evidence, sheet-cutting route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one flat U-shaped sheet panel with no visible subassembly. It should remain a simple sheet-metal cover part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: flat_sheet_metal_profile_cutting
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - deburring
+    - surface_finishing
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Covers cutting a flat sheet profile and central opening from sheet stock."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Generic fallback for profile cutting when the exact cutting machine is not selected."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup after cutting the thin sheet panel."
+    - process_id: enclosure_assembly_basic_v0
+      fit: supporting
+      reason: "Relevant when installing the cover sheet into the hood assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers outline, cutout, thickness, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred source route is flat sheet cutting, directly matching the sheet/plate cutting and drilling bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: cover and shield the upper hood area of the enclosure
+  material: unknown_sheet_metal
+  scale_or_capacity:
+    mass_kg: 0.706
+    bom_quantity: 1
+    row_total_mass_kg: 0.706
+    scale_class: small
+  geometry_form: flat_u_shaped_sheet_panel_with_large_central_cutout
+merge_pool:
+  eligible: true
+  functional_purpose_key: enclosure_barrier
+  precision_guardrails:
+    - sheet_thickness
+    - outline_fit
+    - cutout_geometry
+    - coating_requirement
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material, coating, and fire/laser-safety requirements remain unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this panel with other hood cover and enclosure barrier rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable sheet-metal enclosure cover panel with material and coating variants."
+assumptions:
+  - "Steel-density mass is retained as a conservative planning value."
+  - "The 2 mm flat STEP geometry is sufficient for sheet-cutting abstraction."
+  - "No bends, attached inserts, plus calibrated features are visible in this row."
+unresolved:
+  - "Exact alloy, coating, mounting method, fire/laser-safety requirement, and service-cover role are not resolved by row evidence."
+```

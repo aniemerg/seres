@@ -56,3 +56,98 @@ kb_implications:
 # reAM250 BOM Row 42 - 2AC8
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0042_2AC8.md
+source_research_sha256: "977e9e0251805ddc958e9afb1809bb17b9032f48a8e4fa1658491a5b13b159b2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the SLA10 lower axis bearing context, 6200-2RS identity, vendor mass proxy, bearing steel and rubber seal material stack, CAD bearing-ring preview, and KB implication to treat it as a standard replaceable precision bearing."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a standard replaceable sealed ball bearing at BOM granularity, but local manufacture would require precision rings, balls, heat treatment, race grinding, seals, grease, and clean assembly. That internal chain should be decomposed when precision bearing manufacture is in scope."
+  proposed_subparts:
+    - inner_and_outer_bearing_rings
+    - precision_bearing_balls
+    - pressed_steel_cage
+    - rubber_contact_seals
+    - bearing_grease
+process_abstraction:
+  original_process_family: precision_sealed_ball_bearing_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - import_assumption
+    - decomposition_required
+    - precision_machining
+    - grinding_lapping
+    - heat_treatment
+    - elastomer_forming
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_set_fabrication_v0
+      fit: partial
+      reason: "Closest bearing fabrication anchor, but this row needs a sealed 6200-2RS bearing with race grinding, seals, grease, and precision quality control."
+    - process_id: bearing_ball_precision_fabrication_v0
+      fit: supporting
+      reason: "Relevant to the precision ball subpart if the bearing is decomposed later."
+    - process_id: grinding_process_precision_v0
+      fit: supporting
+      reason: "Relevant to raceway and bearing-seat finishing requirements."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to rubber contact seals after decomposition."
+    - process_id: assembly_process_bearing_v0
+      fit: supporting
+      reason: "Relevant to clean bearing assembly after rings, balls, cage, seals, and grease are available."
+  abstraction_decision: substitute_process_family
+  rationale: "The source row resolves to a commercial sealed bearing. A direct local recipe would overstate current closure maturity, so Phase 1 should stage it as a precision component pending bearing-specific decomposition."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: sealed radial ball bearing for supporting a 10 mm shaft in an axis bearing pocket
+  material: bearing_steel_with_pressed_steel_cage_rubber_seals_and_grease
+  scale_or_capacity:
+    mass_kg: 0.0318
+    bom_quantity: 1
+    row_total_mass_kg: 0.0318
+    scale_class: small
+  geometry_form: sealed_deep_groove_ball_bearing_10mm_bore_30mm_outer_diameter_9mm_width
+merge_pool:
+  eligible: true
+  functional_purpose_key: rotary_bearing
+  precision_guardrails:
+    - bearing_clearance_class
+    - raceway_surface_finish
+    - seal_material
+    - lubrication_specification
+    - shaft_and_pocket_dimensions
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Precision race grinding, bearing steel heat treatment, ball production, rubber seals, grease, and clean assembly are unresolved closure dependencies."
+    - "Bearing clearance class, seal compound, grease type, and original manufacturer are unknown."
+  post_merge_decision_notes: "Final import/local decision is deferred until bearing merge review groups similar rotary bearings and decides whether sealed bearing manufacture is in scope."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a reusable small sealed radial bearing closure item rather than a row-specific axis-bearing part."
+assumptions:
+  - "Standard 6200-2RS vendor material and mass data are acceptable proxies because the row identity resolves to that bearing type."
+  - "The CAD ring is a simplified representation and not a full material-volume basis for balls, cage, seals, grease, and voids."
+unresolved:
+  - "Original bearing manufacturer, clearance class, seal elastomer, grease specification, and reAM250 fit tolerance remain unresolved."
+```

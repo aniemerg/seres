@@ -56,3 +56,97 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one custom cover plate with reusable plate-cutting/machining operations; keep material broad until a row-specific drawing or alloy source is recovered."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0008_1A52.md
+source_research_sha256: "fe875d0a31ef9fa8464e43dd819f22fe68d8a387ec32e9ee49ccfcc9413fd85a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed chamber/back assembly context, adjacent seal/interface evidence, mass basis, unknown metal material evidence, machined cover route, and CAD preview geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one shallow cover plate with mounting holes and lip features, not an optical element and not an active module."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_plate_cover
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+    - leak_testing
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers the primary plate-stock cutting route for a shallow cover plate."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the four mounting holes and counterbore features."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers local recess, lip, and shallow face features after the plate blank is cut."
+    - process_id: surface_finishing_basic_v0
+      fit: supporting
+      reason: "Covers finish preparation for the mating cover surface after machining."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers hole position, flatness, and fit checks before installation."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant if the adjacent seal/interface makes this cover part of a pressure-boundary closure."
+  abstraction_decision: add_post_processing
+  rationale: "The row is a plate-like cover, so the closure handle should be sheet/plate cutting and drilling. Local machining remains a supporting post-process for the raised perimeter, recess, shallow face features, finish, inspection, and possible leak-test support."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: protective closure cover for chamber imaging interface
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.114
+    bom_quantity: 1
+    row_total_mass_kg: 0.114
+    scale_class: small
+  geometry_form: shallow_rectangular_machined_cover_with_corner_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: enclosure_barrier
+  precision_guardrails:
+    - sealing_surface_flatness
+    - corner_hole_pattern_alignment
+    - material_substitution_review
+    - chamber_cleanliness_finish
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material family is unresolved; aluminum planning mass may differ from final alloy mass."
+    - "Adjacent seal/interface may require flatness, finish, and leak-check requirements not visible in the source row."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; local machining is plausible if sealing and chamber-interface guardrails are met."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other cover plates and enclosure-barrier parts before assigning a closure item ID."
+assumptions:
+  - "Treat BOM quantity as 1 and row total mass as 0.114 kg."
+  - "Treat the item as metallic based on rigid plate geometry and mounting features, while exact alloy remains unknown."
+  - "Treat the adjacent seal as a guardrail for flatness and finish, not as proof that this is a dedicated vacuum component."
+unresolved:
+  - "Actual alloy, coating, and finish are not sourced."
+  - "Mating seal compression, flatness, and leak-rate requirements are not sourced."
+```

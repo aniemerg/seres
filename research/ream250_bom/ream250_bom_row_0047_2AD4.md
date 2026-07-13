@@ -54,3 +54,90 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable small precision bearing ball/rolling element, not as a purchased module or full bearing assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0047_2AD4.md
+source_research_sha256: "12228aaedee3f94809726f3851e2f762fcba11abeb273285a33bbdac04f8f8f2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the rolling/contact element function, CAD-derived mass basis, hardened bearing-steel material hypothesis, standard bearing-ball manufacturing route, and preview showing a near-spherical small part."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small spherical rolling element with no subparts; larger bearing-unit relationships belong to adjacent axis-bearing rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - forming
+    - heat_treatment
+    - grinding_lapping
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_set_heavy_production_v0
+      fit: partial
+      reason: "Contains bearing ball production, heat treatment, grinding, and inspection concepts, but is scaled for much larger bearing sets."
+    - process_id: grinding_process_precision_v0
+      fit: supporting
+      reason: "Relevant to final spherical finishing and surface-quality control."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant to hardening bearing steel for rolling contact wear resistance."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Loose anchor for forming blanks before grinding, with specialized ball-heading details missing."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks, though bearing balls require finer roundness and finish metrology."
+  abstraction_decision: substitute_process_family
+  rationale: "A bearing ball is a simple item but not ordinary shop machining; precision grinding/lapping and hardness control make it a precision component to defer until bearing closure is scoped."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: not_applicable
+    alignment_accuracy: not_applicable
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: spherical rolling element for bearing contact
+  material: hardened_bearing_steel_family
+  scale_or_capacity:
+    mass_kg: 0.0005
+    bom_quantity: 1
+    row_total_mass_kg: 0.0005
+    scale_class: small
+  geometry_form: small_precision_sphere_about_5mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: rolling_element
+  precision_guardrails:
+    - roundness
+    - diameter_tolerance
+    - surface_finish
+    - hardness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Very small mass and high precision make import likely unless bearing manufacture is modeled as a shared capability."
+    - "Required ball grade, hardness, and metrology class are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares bearing-ball and rolling-element rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review across small bearing balls; do not assign a unique item ID solely from this row."
+assumptions:
+  - "The part is treated as a hardened steel bearing ball based on geometry and bearing context."
+  - "The CAD volume is accepted for the 0.0005 kg planning mass."
+unresolved:
+  - "Exact alloy, grade, hardness, roundness class, and surface-finish requirement are unknown."
+  - "Isolated ball row versus larger bearing-cartridge element status needs group review."
+```

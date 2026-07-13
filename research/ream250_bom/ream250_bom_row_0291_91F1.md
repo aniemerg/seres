@@ -58,3 +58,90 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 291.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0291_91F1.md
+source_research_sha256: "d9dc183e500c9aefb4a35df35c5f401c82cafd924dd48f79fe82f380b34ed2f1"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the row research, CAD preview, CAD-derived mass basis, mild steel material metadata, EN 10219-2 stock evidence, and cut square-tube manufacturing route before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "This is a single short square hollow section with no added holes, brackets, electronics, moving elements, sealing interfaces, and calibration features. Treat it as reusable structural stock cut to length."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cold_formed_welded_structural_tube_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - forming
+    - joining
+    - cutting
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: direct
+      reason: "Covers sawing/cutting stock into the required 150 mm length, followed by rough edge cleanup."
+    - process_id: metal_forming_basic_shop_v0
+      fit: partial
+      reason: "Represents local forming of metal stock when tube stock must be produced from strip; lacks the dedicated welded tube sizing details."
+    - process_id: welding_and_fabrication_v0
+      fit: partial
+      reason: "Covers combined structural steel cutting, forming, seam welding, fitting, and cleanup for locally made tube stock."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, squareness, wall condition, open-end condition, and basic dimensional checks before use in the frame."
+  abstraction_decision: keep_original_family
+  rationale: "The source route already belongs to structural hollow profile production followed by cut-to-length finishing. The lunarized closure handle should keep that profile-stock family without expanding this simple row into a machine-specific frame item."
+  process_guardrails:
+    tolerance: basic
+    surface_finish: basic
+    sealing_quality: not_applicable
+    alignment_accuracy: basic
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: compact structural frame and spacer member
+  material: mild_steel
+  scale_or_capacity:
+    mass_kg: 1.69
+    bom_quantity: 1
+    row_total_mass_kg: 1.69
+    scale_class: small
+  geometry_form: square_hollow_structural_tube_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_spacer
+  precision_guardrails:
+    - length
+    - squareness
+    - wall_thickness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+    - cutting_basic_v0
+    - welding_and_fabrication_v0
+  import_risk_factors:
+    - "Exact EN steel grade is unresolved; closure can likely use generic mild steel unless later load review requires a named grade."
+    - "If local tube-stock production is selected, seam welding and sizing capability must be represented upstream."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until merge review compares this with other small structural spacers and profile-stock members."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic mild-steel square hollow structural spacer/profile item."
+assumptions:
+  - "BOM quantity is 1 and CAD-derived row mass is 1.690 kg."
+  - "Mild steel is adequate for closure identity because the exact EN grade was not present in the source evidence."
+  - "Cutting from structural tube stock is the Phase 1 abstraction; full welded tube production can be modeled upstream only when needed."
+unresolved:
+  - "Exact parent assembly, load path, and named EN steel grade remain unknown."
+  - "Merge review must decide whether 80 x 80 x 5 mm geometry stays distinct from other small structural profile spacers."
+```

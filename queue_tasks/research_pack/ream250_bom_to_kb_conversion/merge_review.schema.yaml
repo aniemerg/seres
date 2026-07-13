@@ -1,0 +1,70 @@
+format:
+  file_type: markdown
+  data_location: yaml_frontmatter
+
+required:
+  - group_id
+  - candidate_rows
+  - evidence_reviewed
+  - rough_match_basis
+  - merge_decision
+  - material_review
+  - process_review
+  - geometry_review
+  - precision_review
+  - assumptions
+  - unresolved
+
+enums:
+  merge_decision.decision:
+    - merge
+    - split
+    - partial_merge
+    - needs_human
+
+sections:
+  evidence_reviewed:
+    required:
+      - original_research_files_read
+      - conversion_sections_read
+      - notes
+  candidate_rows:
+    required_item_fields:
+      - source_row_number
+      - item
+      - path
+      - conversion_section_present
+  rough_match_basis:
+    required:
+      - functional_purpose_key
+      - mass_window_kg
+  merge_decision:
+    required:
+      - decision
+      - rationale
+      - proposed_closure_items
+  proposed_closure_items:
+    required_item_fields:
+      - item_id
+      - member_rows
+      - functional_purpose
+      - material
+      - scale_or_capacity
+      - geometry_form
+      - process_family
+  material_review:
+    required:
+      - can_unify
+      - rationale
+  process_review:
+    required:
+      - can_unify
+      - rationale
+  geometry_review:
+    required:
+      - can_unify
+      - rationale
+  precision_review:
+    required:
+      - blocks_merge
+      - rationale

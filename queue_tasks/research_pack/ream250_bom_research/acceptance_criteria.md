@@ -337,6 +337,49 @@ Then the section may cite the vendor page and CAD as source facts
 But `how_to_make.source.evidence_basis` must be `engineering_hypothesis` unless
 the cited source directly states the relevant manufacturing route.
 
+## AC-MAKE-002: Do Not Use Procurement As The Manufacturing Route
+
+Type: Judgment-required
+
+Rule:
+The research target is local lunar closure, so `how_to_make` must describe how
+to make, fabricate, assemble, form, machine, finish, test, or decompose the part
+for later local manufacture. Do not write procurement, buying, ordering,
+inventory, quote, vendor replacement, or commercial supply as a manufacturing
+route.
+
+Given a BOM row identifies a vendor catalog item or purchased standard part
+When the worker writes `how_to_make.summary` and `manufacturing_steps`
+Then the worker should use the vendor identity only as evidence for geometry,
+interfaces, material, or function
+And should write the route as local manufacture or, for true modules, deferred
+sub-BOM decomposition
+And should not include procurement-first wording such as "Procure as ...",
+"Buy ...", "Order ...", or "near-term procurement route ...".
+
+If exact factory process evidence is unavailable, keep the local route and lower
+`how_to_make.source.evidence_basis` according to AC-MAKE-001 instead of falling
+back to procurement wording.
+
+For `item_granularity: complex_module`, do not invent a detailed local
+manufacturing process when the module has not been decomposed. In that case,
+`how_to_make` should explicitly state that row-level manufacturing is deferred
+until a later sub-BOM/decomposition task, and should list only the minimum
+subsystems or process questions that must be resolved later.
+
+For `item_granularity: simple_part`, write the route as local production of the
+part itself. Do not use vendor designations, "specify this catalog item",
+"prepare as a standard X", "obtain", or "cut/order this standard part" as the
+route. Vendor or standard-part evidence may constrain geometry, material family,
+interfaces, hole pattern, mass, or tolerance targets, but the manufacturing
+steps should start from local feedstock or a local blank and proceed through the
+needed forming, machining, heat treatment, finishing, and inspection operations.
+
+Because local production is the default framing for this research, avoid
+fallback-style wording such as "a plausible local route is", "a local route
+would", "local fallback", "local substitute", or "local approximation" in
+`how_to_make`. State the manufacturing/decomposition action directly.
+
 ## AC-STD-001: Standard Part Conventions Need Complete Parameters
 
 Type: Partially validator-enforced

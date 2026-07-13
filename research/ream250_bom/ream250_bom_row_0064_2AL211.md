@@ -53,3 +53,100 @@ kb_implications:
 ---
 
 Result generated for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0064_2AL211.md
+source_research_sha256: "a10146664251143f93b5146e887dd17331c6e81d7eb317ed613e7c64d9f1bfee"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the motor function, vendor weight, multi-material module evidence, decomposition-oriented manufacturing notes, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a complete hybrid stepper motor module with encoder and holding brake. It contains magnetic, copper, bearing, housing, brake, encoder, and calibration dependencies that should be exposed before any local-manufacture decision."
+  proposed_subparts:
+    - laminated_stator_and_rotor_stack
+    - copper_windings
+    - permanent_magnet_rotor
+    - shaft_and_bearing_set
+    - motor_housing_and_flange
+    - holding_brake_module
+    - incremental_encoder_module
+    - wiring_and_connector_set
+process_abstraction:
+  original_process_family: vendor_electromechanical_stepper_motor_module
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - assembly
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: motor_assembly_standard_fabrication_v0
+      fit: partial
+      reason: "Relevant to a future simplified motor assembly route, but it does not cover the encoder, brake, magnet, winding, and calibration detail in this row."
+    - process_id: motor_final_assembly_v0
+      fit: supporting
+      reason: "Anchors final motor assembly work if the module is decomposed into local subparts later."
+    - process_id: electronic_assembly_v0
+      fit: supporting
+      reason: "Relevant to encoder and connector electronics, but not the magnetic and mechanical motor body."
+    - process_id: calibration_basic_v0
+      fit: supporting
+      reason: "Covers functional calibration and verification after assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers interface envelope, flange, shaft, and mounting inspection."
+  abstraction_decision: needs_human
+  rationale: "The row is outside a simple fabrication bucket because it is a calibrated multi-material motor with brake and encoder. Phase 1 should preserve it as a decomposition target and likely import-risk item."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: provide controlled rotary motion actuation with position feedback and holding brake
+  material: mixed_electromechanical
+  scale_or_capacity:
+    mass_kg: 1.8
+    bom_quantity: 1
+    row_total_mass_kg: 1.8
+    scale_class: small
+  geometry_form: rectangular_stepper_motor_with_60mm_flange_shaft_encoder_and_brake
+merge_pool:
+  eligible: true
+  functional_purpose_key: motion_actuation
+  precision_guardrails:
+    - holding_torque
+    - stall_torque
+    - flange_size
+    - shaft_interface
+    - encoder_feedback
+    - brake_voltage
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Hybrid stepper motor requires laminated magnetic stack, copper windings, magnet materials, bearings, brake, encoder, wiring, calibration, and electrical test."
+    - "Vendor specs include torque, encoder, and brake behavior that may be hard to reproduce within the current local closure scope."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups comparable motion actuators and a later decomposition pass defines a motor sub-BOM."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review and decomposition; do not create a row-specific B&R SKU item unless no reusable actuator abstraction fits."
+assumptions:
+  - "Vendor listed 1.8 kg weight represents the complete motor module."
+  - "The trailing coupling text in the BOM description is treated as conflicting metadata; the product URL, CAD file, and geometry support the motor identity."
+  - "The encoder and brake are part of the module for closure purposes."
+unresolved:
+  - "Housing alloy, shaft alloy, magnet grade, winding mass, brake material, encoder construction, connector details, and calibration requirements are not resolved by row evidence."
+```

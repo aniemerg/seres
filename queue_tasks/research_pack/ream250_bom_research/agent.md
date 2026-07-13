@@ -57,7 +57,13 @@ For each leased row, research and write one Markdown result at
   total in `mass.basis`.
 - `material`: the best supported material family, grade, or component material
   set.
-- `how_to_make`: a plausible manufacturing, assembly, or procurement route.
+- `how_to_make`: a plausible local manufacturing, assembly, inspection, or
+  deferred sub-BOM decomposition route. Do not use procurement, buying, ordering,
+  quote, inventory, or vendor replacement as the route.
+  Because local production is the default, do not write fallback-style wording
+  such as "a plausible local route is", "a local route would", "local fallback",
+  "local substitute", or "local approximation"; state the manufacturing or
+  decomposition action directly.
 - `kb_implications`: exactly one item granularity planning signal for later KB
   modeling.
 

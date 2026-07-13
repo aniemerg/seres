@@ -16,7 +16,7 @@ For this BOM to KB pass, the goals are:
 - Preserve the reAM250 BOM as an evidence layer.
 - Map BOM rows to lunarized closure abstraction layer.
 - Keep as much useful detail as possible without breaking closure analysis.
-- Explicitly mark design substitution, item merging, process substitution, and import assumptions.
+- Explicitly mark design substitution, item merging, process abstraction, and import assumptions.
 
 This strategy is valid if SERES is currently testing whether a lunar industrial chain can close under explicit assumptions, not trying to reproduce the exact original reAM250 supply chain.
 
@@ -55,56 +55,48 @@ Therefore, merging should not mean "combine things that look similar." The bette
 
 The required operations include:
 
-- Remove or temporarily exclude parts that are unnecessary in the lunar environment.
+- Preserve environment-control source roles.
 - Decompose items and decide which ones remain imports.
-- Substitute processes.
+- Abstract processes into shared lunar closure buckets.
 - Merge items.
 
-All of these operations matter, but formal merging does not need a separate candidate-group step, and it does not need a separate coarse functional-classification layer. The simpler approach is to use the precise function descriptions in the BOM research to prune vacuum-related parts, decompose complex items, apply lunarized process substitution, and then merge items that have actually converged.
+All of these operations matter, but formal merging does not need a separate candidate-group step, and it does not need a separate coarse functional-classification layer. The simpler approach is to use the precise function descriptions in the BOM research to preserve environment-control roles, decompose complex items, apply lunarized process abstraction, and then merge items that have actually converged.
 
 ### Step 1: Preserve Original BOM Evidence
 
 Do not directly rewrite each BOM row into a lunar design. Keep the original function, mass, material, how_to_make, and uncertainty. This layer preserves traceability to reality.
 
-### (Pending) Step 2: Prune Vacuum-Related Components Using Original Function
+### Step 2: Decompose Complex Items
 
-For this pass, use a simplifying assumption: if a BOM row's main function is vacuum generation, vacuum fitting, vacuum flange, vacuum clamp, vacuum seal, or vacuum valve, do not import it as a required item in the lunarized closure KB.
+Before process abstraction and merging, handle complex modules, vendor assemblies, electronics/control modules, motor/gearbox assemblies, laser/optics subassemblies, powder handling modules, and similar complex items.
 
-The decision should use the function and purpose descriptions already written in the BOM research. A separate coarse classification layer is unnecessary. The reason is practical. With the current BOM research granularity, it is difficult to reliably classify each vacuum component as purely unnecessary, replaced by protective atmosphere control, or still required as generic gas/fluid handling. A consistent pruning rule is less fragile than making many unstable row-level decisions.
+The goal is to expose internal closure dependencies so later process abstraction, merging, and import/local decisions can act on them. Decomposition should stop at the level useful for closure analysis and avoid expanding back into full vendor BOM or CAD part granularity.
 
-This does not claim that lunar metal powder laser processing never needs atmosphere control, sealing, or contamination control. More precisely, this is a model-pruning assumption for discussion:
-- Preserve the original BOM evidence.
-- Do not import vacuum-specific commercial components into the lunarized closure KB for this pass.
+### Step 3: Apply Lunarized Process Abstraction
 
-This point should be presented as an optional discussion item.
+Read the function, material, and how_to_make fields from the BOM research directly, then place each item into the simplest compatible lunarized process bucket. The key question is whether the closure model can cover these items with fewer process types and provider machines. The original BOM process is supporting evidence.
 
-### Step 3: Decompose Complex Items
+Use these shared process buckets:
 
-Before process substitution and merging, handle complex modules, vendor assemblies, electronics/control modules, motor/gearbox assemblies, laser/optics subassemblies, powder handling modules, and similar complex items.
+- `general_metal_additive_with_finish_machining`
+- `general_subtractive_machining`
+- `sheet_plate_cutting_drilling`
+- `structural_profile_stock_fabrication_cutting`
+- `polymer_elastomer_forming_dispensing`
+- `manual_assembly_with_general_tools`
+- `fastener_forming_thread_rolling`
+- `plumbing_connector_fabrication_testing`
+- `precision_component_import_decompose_later`
 
-The goal is to expose internal closure dependencies so later process substitution, merging, and import/local decisions can act on them. Decomposition should stop at the level useful for closure analysis and avoid expanding back into full vendor BOM or CAD part granularity.
+During process abstraction, first check whether the selected bucket can meet the tolerance, surface finish, sealing quality, and alignment accuracy required by the item function. The primary bucket is only the main closure handle. Record supporting processes such as cutting, drilling, finishing, leak testing, calibration, and inspection when the row needs them.
 
-### Step 4: Apply Lunarized Process Substitution
+Process abstraction should also reference existing KB processes when they are relevant. These references are candidates for later staging, not final recipes.
 
-Read the function, material, and how_to_make fields from the BOM research directly, then decide which items can be made by the same lunarized process family. The key question is whether the closure model can cover these items with fewer process types and provider machines. The original BOM process is supporting evidence.
+Process abstraction does not perform formal merging yet. It answers one question: can items that originally used different processes use the same shared process bucket in the lunarized closure model?
 
-Possible strategies include:
+### Step 4: Merge Items That Have Converged
 
-- additive manufacturing
-- machining
-- casting plus machining
-- sheet or plate fabrication
-- wire or cable fabrication
-- manual assembly with general tools
-- import only
-
-During process substitution, first check whether the substitute process can meet the tolerance, surface finish, sealing quality, or alignment accuracy required by the item function. If the substitute process cannot meet these conditions, keep the original process family or add the required post-processing steps after the original process.
-
-Process substitution does not perform formal merging yet. It answers one question: can items that originally used different processes use the same process family in the lunarized closure model?
-
-### Step 5: Merge Items That Have Converged
-
-After process substitution, first find items with the same functional purpose and mass or scale within a 2x range. Then judge whether material, process, and geometry form can be adjusted into the same closure item through lunarized design. Finally, check whether machining precision prevents the merge.
+After process abstraction, first find items with the same functional purpose and mass or scale within a 2x range. Then judge whether material, process, and geometry form can be adjusted into the same closure item through lunarized design. Finally, check whether machining precision prevents the merge.
 
 Machining precision is a merge guardrail. If the item function depends on significantly different tolerance, surface finish, sealing quality, or alignment accuracy, keep a separate item or record the risk in notes.
 
@@ -115,7 +107,7 @@ Example:
 - KB closure item: `structural_profile_aluminum_medium` or `mounting_bracket_aluminum_small`.
 - Conclusion: merge is acceptable, but mark geometry substitution assumed.
 
-### Step 6: Decide Import vs Local Manufacture
+### Step 5: Decide Import vs Local Manufacture
 
 Import decisions should come after the lunarized strategy and formal merging, because we first need to understand whether a local manufacturing path is plausible and which items have already been merged into the same closure item.
 
@@ -130,7 +122,7 @@ Early import candidates include:
 
 This recommendation is valid if the current KB pass focuses on the main lunar industrial chain. Full semiconductor, optics, or laser manufacturing closure can be handled in a later scope.
 
-### Step 7: Write KB Entries and Preserve Assumptions
+### Step 6: Write KB Entries and Preserve Assumptions
 
 Only then should we create or update KB items, recipes, processes, and BOM mappings. Important merges or substitutions should include notes recording:
 
@@ -152,9 +144,9 @@ However, if an extrusion provides a T-slot modular interface, precision rail ref
 
 Many simple brackets and mounting plates can be merged into `mounting_bracket_aluminum_small`, `mounting_bracket_steel_small`, or `mounting_plate_aluminum_small`. Whether the original part was CNC-machined, sheet metal, cast, or printed does not necessarily require a distinct item unless the output specification differs.
 
-### Vacuum Components
+### Vacuum, Gas Handling, and Environment-Control Components
 
-For this pass, vacuum-specific components are excluded from the lunarized closure KB, while the original BOM evidence is preserved. This should be treated as a discussion assumption, not a permanent conclusion.
+For this pass, vacuum-specific components are not automatically excluded from the lunarized closure KB. Treat them as ordinary environment-control, gas/fluid handling, sealing, and contamination-control evidence until later review decides the abstraction.
 
 ### Electronics
 

@@ -55,3 +55,87 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 101.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0101_2AV2.md
+source_research_sha256: "3e24751043d90894a35208f8eb68fa1272a7edab52a819de47c176bf1c2b5f5d"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the fastener function, CAD/material mass basis, mild steel evidence, standard screw manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a batch of standard DIN 912 M8 socket-head cap screws. It should merge into reusable metric fastener hardware rather than become a machine-specific item."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cold_heading_socket_forming_thread_rolling
+  primary_process_bucket: fastener_forming_thread_rolling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - thread_forming
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: fastener_kit_medium_production_v0
+      fit: direct
+      reason: "Covers medium fastener-family operations for M6-M12 hardware, including forging, threading, heat treatment, sorting, and kitting."
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: partial
+      reason: "Covers small fastener fabrication but is less size-aligned than the medium kit anchor."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to forming the cylindrical socket head from steel stock."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers screw length, head geometry, socket fit, and thread checks."
+  abstraction_decision: keep_original_family
+  rationale: "The row is a standard formed and threaded fastener, directly matching the fastener forming/thread rolling closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide threaded mechanical fastening with a socket head
+  material: mild_steel
+  scale_or_capacity:
+    mass_kg: 0.0209
+    bom_quantity: 10
+    row_total_mass_kg: 0.209
+    scale_class: tiny
+  geometry_form: m8x35_socket_head_cap_screw
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_fastening
+  precision_guardrails:
+    - thread_size
+    - screw_length
+    - socket_head_geometry
+    - property_class
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - fastener_forming_thread_rolling
+  import_risk_factors:
+    - "Property class, coating, heat treatment, and supplier-specific quality level are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups standard fasteners and decides fastener kit granularity."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely belongs in a reusable medium steel fastener family rather than a row-specific item."
+assumptions:
+  - "The CAD and material metadata represent one mild steel screw, with BOM quantity ten."
+  - "DIN 912 M8 x 35 identity is sufficient for merge grouping by standard fastener dimensions."
+unresolved:
+  - "Fastener property class, coating, exact heat treatment, supplier, and clamped joint are not resolved by row evidence."
+```

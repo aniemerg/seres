@@ -54,3 +54,91 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 51.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0051_2AD8.md
+source_research_sha256: "12c69eea5e8dc9f6d0c80a4e9a5ec611fa68ed43334edf6b91c5fe0be5c1f2b2"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the top-axis rolling element function, CAD-derived steel mass, bearing-steel material convention, bearing-ball manufacturing route, and spherical CAD geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one solid spherical rolling element with no subparts; precision comes from material, heat treatment, roundness, and surface finish rather than assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - stock_preparation
+    - forming
+    - heat_treatment
+    - grinding_lapping
+    - surface_finishing
+    - dimensional_inspection
+    - import_assumption
+  candidate_existing_processes:
+    - process_id: ball_bearing_machining_v0
+      fit: partial
+      reason: "Anchors current KB bearing-ball coverage, but it is a simplified placeholder for real precision ball production."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant to hardening bearing steel before final finishing."
+    - process_id: precision_grinding_basic_v0
+      fit: supporting
+      reason: "Relevant to roundness, diameter, and surface finish control."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers basic dimensional checks; true ball grading would need tighter metrology later."
+  abstraction_decision: substitute_process_family
+  rationale: "Although the physical part is simple, bearing-ball closure is precision-intensive and should remain grouped with precision components until the bearing-manufacturing scope is reviewed."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: rolling element for bearing load transfer
+  material: bearing_steel
+  scale_or_capacity:
+    mass_kg: 0.000499
+    bom_quantity: 1
+    row_total_mass_kg: 0.000499
+    scale_class: small
+  geometry_form: spherical_bearing_ball_about_4_95mm_diameter
+merge_pool:
+  eligible: true
+  functional_purpose_key: rolling_element
+  precision_guardrails:
+    - diameter
+    - roundness
+    - hardness
+    - surface_finish
+    - ball_grade
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Very low mass and high precision make local manufacture unattractive unless bearing production becomes a focused closure target."
+    - "Tolerance grade and hardness are unknown but likely critical to bearing performance."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; this row should merge with neighboring top-axis bearing balls if diameter and material match."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with adjacent bearing-ball rows before assigning a closure item ID."
+assumptions:
+  - "The sphere is a steel bearing ball used in the top-axis bearing group."
+  - "Neighboring 2AD rows likely represent repeated instances of the same rolling element."
+  - "CAD diameter is sufficient for Phase 1 scale matching but not for tolerance grade selection."
+unresolved:
+  - "Bearing assembly type, cage/race context, ball grade, and hardness requirement are not identified."
+  - "Material grade remains broad bearing steel rather than a row-specific alloy."
+```

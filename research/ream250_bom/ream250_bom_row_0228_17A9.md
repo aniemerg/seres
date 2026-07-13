@@ -54,3 +54,94 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut length of 20x20 anodized aluminum strut profile rather than a machine-specific assembly or purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0228_17A9.md
+source_research_sha256: "aac8775b0968b9537922066e71eca26027a0998bc678f86156a40c586e2c6d75"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the 20 x 20 mm four-slot profile geometry, 358 mm cut length, CAD-volume and catalog lineal-mass estimates, Rexroth aluminum strut-profile material evidence, and extrusion/cut-to-length manufacturing route."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one cut length of modular slotted structural profile. It is not a purchased electronics module, actuator, fastener kit, nor a hidden assembly requiring internal decomposition."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length_anodized
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - extrusion
+    - heat_treatment
+    - cutting
+    - deburring
+    - coating
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers aluminum extrusion energy and stock conversion, but its current output is heat-sink fin extrusion rather than a 20 x 20 slotted structural profile."
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: partial
+      reason: "Covers aluminum alloy extrusion from ingot into reusable stock; tube geometry differs from the slot-6 profile needed here."
+    - process_id: metal_cutting_basic_v0
+      fit: direct
+      reason: "Covers sawing/cutting stock material to length, matching the row-specific cut from longer strut stock to 358 mm."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant to the anodized aluminum finish called out by Rexroth profile-family evidence, though the existing process is written around heat-sink parts."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks for cut length, section size, slot geometry, and fit before frame assembly."
+  abstraction_decision: keep_original_family
+  rationale: "The source route already describes aluminum profile extrusion, temper/straightening, cutting to length, deburring, and anodizing, which is exactly the structural profile stock fabrication/cutting closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: light structural frame member rail support fixture element
+  material: anodized_aluminum_6060_6063_family
+  scale_or_capacity:
+    mass_kg: 0.161
+    bom_quantity: 1
+    row_total_mass_kg: 0.161
+    scale_class: small
+  geometry_form: straight_20x20_four_slot_extrusion_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - cut_length
+    - slot_geometry
+    - straightness
+    - frame_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Local manufacture needs an extrusion die/tooling strategy for the 20 x 20 slot geometry."
+    - "Anodized finish may need a surface-treatment route if corrosion, wear, electrical isolation, and assembly sliding behavior matter."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until structural-profile rows are merge-reviewed and a shared profile-stock strategy is selected."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other cut lengths of 20 x 20 slotted structural profile before assigning a closure item ID."
+assumptions:
+  - "Quantity 1 and row total mass 0.161 kg use the CAD-volume aluminum estimate from the original research."
+  - "The Rexroth family material is normalized to an anodized aluminum 6060/6063-family structural extrusion for later staging."
+  - "Different cut lengths of the same 20 x 20 slot profile are likely merge candidates if length differences are closure-insignificant."
+unresolved:
+  - "Exact Bosch Rexroth ordering number for this cut piece is not present in the row evidence."
+  - "Exact alloy temper, anodizing specification, and cut-length tolerance remain inferred from profile-family data."
+  - "Merge review should decide whether all 20 x 20 slot-6 strut lengths can share one closure item with length handled as a BOM quantity/note."
+```

@@ -54,3 +54,101 @@ kb_implications:
   - "item_granularity: complex_module - Model this row as a functional SLA10-class supported bearing block for this pass; split into housing, 6200.2RS bearing, circlip/seal, and assembly operations only when a sub-BOM or material drawing is available."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0037_2AC3.md
+source_research_sha256: "a92c58e398e627566614631f98e66a31ef0b2d16df86fa2f81f605d04d0a2d43"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the bottom-axis supported-bearing-block function, 0.53 kg context-derived mass estimate, unresolved metal bearing-support material evidence, inferred housing plus bearing assembly route, KB implication, and CAD preview showing a pillow-block-like supported bearing unit."
+decomposition:
+  decision: complex_module
+  rationale: "The row-level geometry is a supported bearing block containing at least a housing, rolling bearing, retainer hardware, seals, fits, and alignment requirements; these are closure-relevant if local manufacture is pursued."
+  proposed_subparts:
+    - bearing_block_housing
+    - rolling_bearing_6200_2rs
+    - retainer_clip
+    - seal_elements
+    - mounting_fasteners_context
+process_abstraction:
+  original_process_family: vendor_supported_bearing_block_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - heat_treatment
+    - grinding_lapping
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_set_heavy_production_v0
+      fit: partial
+      reason: "Anchors rolling bearing manufacture, but does not cover the specific 6200.2RS bearing and housing integration."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to bearing seat, mounting faces, and shaft alignment in the housing."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant to bearing races and rolling elements if local bearing manufacture is attempted."
+    - process_id: precision_grinding_basic_v0
+      fit: supporting
+      reason: "Relevant to bearing race and seat surface finish requirements."
+    - process_id: seal_installation_v0
+      fit: supporting
+      reason: "Relevant to 2RS sealing elements and protected bearing assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Basic QA anchor; later staging needs bore alignment, shaft fit, and runout checks."
+  abstraction_decision: needs_human
+  rationale: "The row should not be represented as only a machined block because the supported bearing assembly depends on precision rolling elements, seals, and alignment. Decompose before any local manufacturing recipe."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: review
+    alignment_accuracy: high
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: "supported bearing block for radial support of a machine axis shaft"
+  material: unresolved_metal_bearing_support_with_bearing_and_seals
+  scale_or_capacity:
+    mass_kg: 0.53
+    bom_quantity: 1
+    row_total_mass_kg: 0.53
+    scale_class: small
+  geometry_form: compact_pillow_block_bearing_support_with_mounting_ears
+merge_pool:
+  eligible: false
+  functional_purpose_key: bearing_support
+  precision_guardrails:
+    - bearing_type_6200_2rs
+    - shaft_bore_alignment
+    - bearing_seat_tolerance
+    - seal_materials
+    - context_geometry_proxy
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Specific isolated row geometry is unavailable because the named part imported with zero solids and context geometry was used."
+    - "Rolling bearing manufacture, housing fit, seals, and alignment inspection create a high closure burden."
+  post_merge_decision_notes: "Final import/local decision is deferred until supported bearing blocks are reviewed together and decomposed into housing, bearing, seal, and retainer items if needed."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a simple closure item ID at row conversion; merge/decomposition review should decide the SLA10-class bearing support abstraction."
+assumptions:
+  - "BOM quantity is 1 and row total mass is treated as 0.53 kg from the assembly-context estimate."
+  - "The available SLA10 context is used because the specific 2AC3 label imported with zero solids."
+  - "The item is treated as a functional supported bearing block rather than only the housing."
+unresolved:
+  - "Exact isolated geometry, housing material, bearing material, seal material, fits, preload, and inspection sequence remain unresolved."
+  - "Whether this row should be an imported bearing-block module, a decomposed local assembly, and a merge candidate with other supported bearings is deferred."
+```

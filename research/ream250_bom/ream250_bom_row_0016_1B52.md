@@ -53,3 +53,97 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Treat as a one-piece custom flange/ring unless later evidence shows it is a calibrated vendor module or a multi-part optical assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0016_1B52.md
+source_research_sha256: a61e5870e1e61ad07192597720799480eb151c331fa3f133a34a8a9bfb3e7358
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read function, proxy mass basis, unknown-metal material evidence, machining/cutting route, KB implication, and CAD
+    preview showing a small annular/oval flange before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row is best treated as a one-piece flange and retaining ring for the schlieren-imaging door interface; no
+    internal closure-relevant subassemblies are evidenced.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: custom_metal_profile_cutting_machining
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - leak_testing
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers basic stock removal; row-specific precision features remain guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant when bore, sliding, concentricity, and finish control matter.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  abstraction_decision: keep_original_family
+  rationale: The source route already points to machining and cutting a simple metal flange from stock. General subtractive
+    machining best preserves the optical-door mating faces and ring profile without introducing a special flange process.
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: mounting spacing and retaining flange for an optical imaging door opening
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.0202
+    bom_quantity: 1
+    row_total_mass_kg: 0.0202
+    scale_class: small
+  geometry_form: annular_oval_flange_ring
+merge_pool:
+  eligible: true
+  functional_purpose_key: optical_port_mounting_retention
+  precision_guardrails:
+  - optical_port_alignment
+  - mating_face_flatness
+  - seal_interface_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - Specific alloy and grade are unresolved.
+  - The isolated 1B52 geometry was not found; the mass and shape use the best available assembly-only proxy.
+  - Optical-door alignment, surface finish, and any sealing requirement may impose tighter tolerances than a generic flange.
+  post_merge_decision_notes: Final import/local decision is deferred until after merge review; compare with other optical-port
+    flanges and small interface rings before assigning an item ID.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review because this may merge with other small optical-port and interface-retaining flanges if material
+    and precision guardrails are compatible.
+assumptions:
+- The row is a metallic mechanical flange rather than an optical element and calibrated vendor module.
+- The BOM quantity is one and the row total mass equals the proxy per-unit mass.
+- General subtractive machining can satisfy the required profile and mating faces if tolerances are reviewed later.
+unresolved:
+- Exact alloy, grade, finish, coating, and sealing role are unknown.
+- The true standalone 1B52 geometry may differ from the assembly-only proxy used in the research row.
+- Merge review must decide the condition that optical-port guardrails require this flange to stay separate from generic interface
+  flanges.
+```

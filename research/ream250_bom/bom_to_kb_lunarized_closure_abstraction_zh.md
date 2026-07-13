@@ -16,7 +16,7 @@
 - 保留 reAM250 BOM 作為 evidence layer。
 - 將 BOM row 映射到月球抽象化 closure role。
 - 在不破壞 closure 可分析性的前提下保留最多有用細節。
-- 明確標記設計替換、物品合併、製程代換與 import 假設。
+- 明確標記設計替換、物品合併、製程抽象與 import 假設。
 
 這個策略成立的前提是：SERES 目前要測試「月球工業鏈在明確假設下是否能 closure」。精確復刻 reAM250 原始供應鏈不屬於本輪目標。
 
@@ -55,54 +55,48 @@ KB 的建議做法是：將原始製造方法保留在 evidence、recipe 或 pro
 
 目前需要處理的操作包括：
 
-- 移除或暫時排除月球環境不需要的零件。
-- 製程代換。
+- 保留 environment-control source roles。
+- 將製程抽象到 shared lunar closure buckets。
 - 合併物品。
 - 拆解物品並決定哪些需要 import。
 
-這些操作都重要，但正式合併不需要另外建立候選群步驟，也不需要先做一層粗略功能分類。比較簡潔的做法是：先用 BOM research 裡的精確用途裁剪真空相關零件，接著拆解複雜物品，再做月球化製程代換，最後合併已經收斂的物品。
+這些操作都重要，但正式合併不需要另外建立候選群步驟，也不需要先做一層粗略功能分類。比較簡潔的做法是：先用 BOM research 裡的精確用途保留 environment-control 角色，接著拆解複雜物品，再做月球化製程抽象，最後合併已經收斂的物品。
 
 ### Step 1: 保留原始 BOM Evidence
 
 先不要直接把 BOM row 改寫成月球版設計。每一個 row 應保留原始 function、mass、material、how_to_make、source uncertainty。這一層是追溯真實性的基礎。
 
-### (Pending) Step 2: 用原始用途裁剪真空相關零件
+### Step 2: 拆解複雜物品
 
-本輪建議採用一個簡化假設：只要 BOM row 的主要功能是 vacuum generation、vacuum fitting、vacuum flange、vacuum clamp、vacuum seal 或 vacuum valve，就先不作為月球化 closure KB 的必要項目導入。
+在製程抽象與合併之前，先處理 complex module、vendor assembly、electronics/control module、motor/gearbox assembly、laser/optics subassembly、powder handling module 等複雜物品。
 
-判斷依據應直接使用 BOM research 中每個零件的 function 與用途描述，不需要另外建立一層粗略分類。理由是：目前 BOM research 的粒度很難可靠判斷每個真空件在月球版中到底是單純不需要、要被 protective atmosphere control 取代，還是要保留為 generic gas/fluid handling。與其逐項做不穩定判斷，不如先採用一致規則，降低模型分歧。
+拆解的目標是讓後續製程抽象、合併、import/local 判斷能處理到內部 closure dependencies。拆解粒度應停在 closure 有用的層級，避免回到完整 vendor BOM 或 CAD 零件層級。
 
-這是一個待討論的模型裁剪假設。它不宣稱月球版金屬粉末雷射加工一定不需要任何氣氛控制、密封或污染控制。
-- 原始 BOM evidence 保留。
-- 月球化 closure KB 先不導入 vacuum-specific commercial components。
+### Step 3: 月球化製程抽象
 
-### Step 3: 拆解複雜物品
+直接讀取 BOM research 裡的 function、material 與 how_to_make，將每個物品放進最簡單且相容的月球化製程 bucket。重點是 closure model 能否用較少的製程種類和 provider machine 覆蓋這些物品；原始 BOM 是否使用同一製程只作為參考。
 
-在製程代換與合併之前，先處理 complex module、vendor assembly、electronics/control module、motor/gearbox assembly、laser/optics subassembly、powder handling module 等複雜物品。
+使用以下 shared process buckets：
 
-拆解的目標是讓後續製程代換、合併、import/local 判斷能處理到內部 closure dependencies。拆解粒度應停在 closure 有用的層級，避免回到完整 vendor BOM 或 CAD 零件層級。
+- `general_metal_additive_with_finish_machining`
+- `general_subtractive_machining`
+- `sheet_plate_cutting_drilling`
+- `structural_profile_stock_fabrication_cutting`
+- `polymer_elastomer_forming_dispensing`
+- `manual_assembly_with_general_tools`
+- `fastener_forming_thread_rolling`
+- `plumbing_connector_fabrication_testing`
+- `precision_component_import_decompose_later`
 
-### Step 4: 月球化製程代換
+製程抽象時要先確認 selected bucket 能滿足該物品功能需要的 tolerance、surface finish、密封品質與對位精度。Primary bucket 只是主要 closure handle。若 row 需要 cutting、drilling、finishing、leak testing、calibration、inspection 等輔助工作，應記錄為 supporting processes。
 
-直接讀取 BOM research 裡的 function、material 與 how_to_make，判斷哪些物品可以用同一類月球化製程來製造。重點是 closure model 能否用較少的製程種類和 provider machine 覆蓋這些物品；原始 BOM 是否使用同一製程只作為參考。
+製程抽象也應在相關時引用 existing KB processes。這些引用是後續 staging 的 candidates，不是 final recipes。
 
-可能的策略包括：
+製程抽象本身還不做正式合併。它回答一個問題：原本使用不同製程的物品，是否可以在月球化 closure model 中改用同一個 shared process bucket。
 
-- additive manufacturing
-- machining
-- casting plus machining
-- sheet or plate fabrication
-- wire or cable fabrication
-- manual assembly with general tools
-- import only
+### Step 4: 合併已收斂的物品
 
-製程代換時要先確認替代製程能滿足該物品功能需要的 tolerance、surface finish、密封品質或對位精度。若替代製程無法達到這些條件，該物品應保留原製程族，或在原製程後加上必要的後加工步驟。
-
-製程代換本身還不做正式合併。它回答一個問題：原本使用不同製程的物品，是否可以在月球化 closure model 中改用同一類製程。
-
-### Step 5: 合併已收斂的物品
-
-製程代換之後，先找出相同功能目的、且質量或尺度落在 2x 範圍內的物品。接著判斷 material、process、geometry form 是否可以透過月球化設計調整到同一 closure item。最後檢查加工精度是否會阻止合併。
+製程抽象之後，先找出相同功能目的、且質量或尺度落在 2x 範圍內的物品。接著判斷 material、process、geometry form 是否可以透過月球化設計調整到同一 closure item。最後檢查加工精度是否會阻止合併。
 
 加工精度是合併保護條件。若物品功能依賴明顯不同的 tolerance、surface finish、密封品質或對位精度，則應保留獨立 item 或在 notes 中標記風險。
 
@@ -113,7 +107,7 @@ KB 的建議做法是：將原始製造方法保留在 evidence、recipe 或 pro
 - KB closure item：`structural_profile_aluminum_medium` 或 `mounting_bracket_aluminum_small`。
 - 結論：可合併，但需要標記 geometry substitution assumed。
 
-### Step 6: 決定 Import 或 Local Manufacture
+### Step 5: 決定 Import 或 Local Manufacture
 
 import 決策應放在月球化策略與正式合併之後，因為需要先知道本地製造是否有合理路徑，以及哪些物品已經被合併成同一 closure item。
 
@@ -128,7 +122,7 @@ import 決策應放在月球化策略與正式合併之後，因為需要先知�
 
 這個建議成立的前提是：目前 KB 主要想分析月球工業鏈的 closure 主幹。完整 semiconductor、optics 或 laser manufacturing closure 不屬於本輪主幹。
 
-### Step 7: 寫入 KB 並保留假設
+### Step 6: 寫入 KB 並保留假設
 
 最後才建立或更新 KB item、recipe、process、BOM mapping。每個重要合併或代換都應該有 notes 記錄：
 
@@ -150,9 +144,9 @@ import 決策應放在月球化策略與正式合併之後，因為需要先知�
 
 多種簡單支架與 mounting plate 通常適合合併為 `mounting_bracket_aluminum_small`、`mounting_bracket_steel_small` 或 `mounting_plate_aluminum_small`。原本是 CNC、板金、鑄造或列印，不一定要形成不同 item，除非輸出規格不同。
 
-### Vacuum Components
+### Vacuum、Gas Handling 與 Environment-Control Components
 
-本輪策略是先從月球化 closure KB 排除 vacuum-specific components，並保留原始 BOM evidence。這應被視為報告中的討論假設，後續可依同事討論結果調整。
+本輪中，vacuum-specific components 不自動從月球化 closure KB 中排除。先把它們當作一般 environment-control、gas/fluid handling、sealing 與 contamination-control evidence，等後續 review 再決定 abstraction。
 
 ### Electronics
 

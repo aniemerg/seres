@@ -59,3 +59,92 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - model as one small rolling bearing element; later KB work can reuse a generic bearing_ball_5mm-style part rather than creating row-specific 2AD variants."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0053_2ADA.md
+source_research_sha256: "041cd617421ec745e1a50b0e15e307155756305cd7d18bf0d78434c8492a05d5"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read axis-bearing function, CAD-volume mass basis, inferred bearing-steel material, precision ball manufacturing route, KB implication, and preview showing a near-spherical 5 mm rolling element."
+decomposition:
+  decision: simple_part
+  rationale: "The row represents one rolling element, not a complete bearing cartridge; no subparts are useful at this granularity."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_bearing_ball_forming_grinding_lapping
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - forming
+    - heat_treatment
+    - grinding_lapping
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: bearing_manufacturing_small_v0
+      fit: direct
+      reason: "Explicitly covers precision machining and grinding of bearing races and balls with tight tolerances."
+    - process_id: grinding_and_finishing_v0
+      fit: supporting
+      reason: "Covers final grinding and finishing needed for smooth rolling-contact surfaces."
+    - process_id: precision_grinding_and_scraping_v0
+      fit: supporting
+      reason: "Useful evidence anchor for high-precision finishing, though scraping is not part of a bearing ball route."
+    - process_id: heat_treatment_basic_v0
+      fit: supporting
+      reason: "Covers hardening/tempering steps expected for bearing steel before final lapping."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and visual QA; later staging may need a tighter metrology process."
+  abstraction_decision: substitute_process_family
+  rationale: "The row is a simple part, but the closure risk is precision bearing manufacture rather than ordinary stock shaping; keep it in the precision-component bucket until merge review groups the 2AD rolling elements."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: rolling element for a top axis bearing group
+  material: hardened_bearing_steel_family
+  scale_or_capacity:
+    mass_kg: 0.00050
+    bom_quantity: 1
+    row_total_mass_kg: 0.00050
+    scale_class: tiny
+  geometry_form: near_spherical_bearing_ball_about_5_mm_diameter
+merge_pool:
+  eligible: true
+  functional_purpose_key: bearing_rolling_element
+  precision_guardrails:
+    - diameter_tolerance
+    - roundness
+    - surface_finish
+    - hardness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Bearing-grade roundness and surface finish may exceed coarse local fabrication capability."
+    - "Exact material grade and heat treatment requirements are unresolved."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review; first merge with similar 2AD bearing rolling elements."
+kb_staging:
+  proposed_item_id: null
+  notes: "Likely merge candidate for a generic small bearing ball closure item after adjacent axis-bearing rows are reviewed."
+assumptions:
+  - "Treat the 4.95 mm spherical CAD solid as a bearing ball based on the axis-bearing context."
+  - "Use hardened bearing steel family as the material class until a grade is sourced."
+  - "Use 0.00050 kg per unit from the steel-density CAD-volume estimate."
+unresolved:
+  - "Exact bearing type and tolerance grade."
+  - "Specific alloy, hardness, and surface finish class."
+  - "Whether a lunarized design would replace individual loose balls with a reusable bearing_set_small abstraction."
+```

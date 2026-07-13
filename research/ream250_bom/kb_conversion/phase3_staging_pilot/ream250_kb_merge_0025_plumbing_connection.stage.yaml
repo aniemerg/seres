@@ -1,0 +1,381 @@
+stage_id: phase3_pilot_ream250_kb_merge_0025_plumbing_connection
+stage_status: pilot_only
+source_merge_review: research/ream250_bom/kb_conversion/merge_reviews/ream250_kb_merge_0025_plumbing_connection.md
+source_phase2_decision: partial_merge
+purpose: Test Phase 3 staging for standard-interface vacuum plumbing connectors with sealing and leak-test guardrails.
+
+evidence_inputs:
+  merge_review_read: true
+  original_rows_read:
+    - research/ream250_bom/ream250_bom_row_0129_3O3.md
+    - research/ream250_bom/ream250_bom_row_0130_3O4.md
+    - research/ream250_bom/ream250_bom_row_0145_3S1.md
+    - research/ream250_bom/ream250_bom_row_0253_37.md
+    - research/ream250_bom/ream250_bom_row_0335_422.md
+    - research/ream250_bom/ream250_bom_row_0119_3H.md
+  existing_kb_checked:
+    items:
+      - kb/items/parts/piping_and_fittings_set.yaml
+      - kb/items/parts/pipe_and_fittings_set.yaml
+      - kb/items/parts/fittings_and_valves.yaml
+      - kb/items/parts/metal_fittings_raw.yaml
+    processes:
+      - kb/processes/plumbing_and_pneumatics_v0.yaml
+      - kb/processes/machining_process_turning_v0.yaml
+      - kb/processes/machining_basic_v0.yaml
+      - kb/processes/machining_precision_v0.yaml
+      - kb/processes/leak_testing_v0.yaml
+      - kb/processes/vacuum_testing_v0.yaml
+      - kb/processes/sheet_metal_fabrication_v0.yaml
+  notes: Existing KB fitting sets are useful coarse context but too broad to preserve ISO-K/KF nominal interfaces, vacuum cleanliness, sealing face, and leak-test guardrails.
+
+proposed_items:
+  - action: create_new
+    proposed_item_id: dn63_iso_k_bellows_end_fitting_v0
+    phase2_item_id: ream250_dn63_iso_k_bellows_end_fitting_v0
+    reason_for_action: Rows 129 and 130 are duplicate/near-duplicate DN63 ISO-K stainless bellows end fittings; existing fitting kits are too broad for this standard-interface closure item.
+    kb_like_item:
+      id: dn63_iso_k_bellows_end_fitting_v0
+      name: DN63 ISO-K bellows end fitting
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      mass_kg: 0.412
+      material_class: stainless_steel
+      notes: Pilot staging item for a stainless DN63 ISO-K flanged bellows end fitting. Rows 129 and 130 map here.
+      source_tags:
+        - ream250_bom_phase3_pilot
+    closure_identity:
+      functional_purpose: rigid flanged end connection for a DN63 flexible bellows assembly
+      material: stainless_steel_304
+      scale_or_capacity:
+        per_unit_mass_kg: 0.412
+        nominal_interface: DN63_ISO-K
+        scale_class: small
+      geometry_form: annular_dn63_iso_k_bellows_end_fitting_with_stepped_bore
+    process_assumptions:
+      primary_process_bucket: plumbing_connector_fabrication_testing
+      candidate_existing_processes:
+        - process_id: machining_process_turning_v0
+          fit: supporting
+          reason: Relevant for annular stainless turning.
+        - process_id: leak_testing_v0
+          fit: supporting
+          reason: Relevant for connector leak checks.
+        - process_id: vacuum_testing_v0
+          fit: supporting
+          reason: Relevant if vacuum-level leak acceptance is required.
+        - process_id: cleaning_basic_v0
+          fit: supporting
+          reason: Relevant for vacuum-service cleanliness after machining.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: The item is a machined stainless connector with plausible local machining, cleaning, and leak-test anchors. It is not in the same import class as electronics, optics, or harmonic reducers, but promotion must preserve vacuum guardrails.
+      local_path_summary: Machine stainless end fitting, clean, inspect DN63 ISO-K interface, and leak/vacuum test before bellows assembly use.
+      existing_kb_pattern_used:
+        - "kb/items/parts/fittings_and_valves.yaml: generic fittings are local-modeled, but too broad for ISO-K fidelity."
+        - "kb/processes/leak_testing_v0: existing process anchor for leak checks."
+        - "kb/items/parts/mirror_optical_flat.yaml: example import caused by optics precision; this connector has precision needs but simpler manufacturing."
+      import_risk_factors:
+        - Vacuum-clean surface finish and leak-rate acceptance are unresolved.
+        - Parent flexible bellows assembly may still be imported even if the end fitting is local.
+      local_manufacture_blockers:
+        - Need ISO-K surface finish and dimensional acceptance values.
+        - Need decide whether helium leak testing is mandatory for promotion.
+    promotion_blockers:
+      - Need recipe binding for stainless stock, turning, cleaning, and leak/vacuum testing.
+      - Need decide whether this item belongs under a broader ISO vacuum fittings kit.
+      - Need final material and acceptance test details.
+
+  - action: create_new
+    proposed_item_id: dn63_iso_k_full_nipple_v0
+    phase2_item_id: ream250_dn63_iso_k_full_nipple_v0
+    reason_for_action: The DN63 ISO-K full nipple has distinct straight tube/flanged geometry and should not collapse into a generic fitting set for this pilot.
+    kb_like_item:
+      id: dn63_iso_k_full_nipple_v0
+      name: DN63 ISO-K full nipple
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      mass_kg: 0.814
+      material_class: stainless_steel
+      notes: Pilot staging item for a straight stainless DN63 ISO-K full nipple.
+      source_tags:
+        - ream250_bom_phase3_pilot
+    closure_identity:
+      functional_purpose: rigid straight flanged connection section between DN63 ISO-K components
+      material: stainless_steel_304
+      scale_or_capacity:
+        per_unit_mass_kg: 0.814
+        nominal_interface: DN63_ISO-K
+        scale_class: small
+      geometry_form: straight_cylindrical_tube_with_iso_k_flange_lips
+    process_assumptions:
+      primary_process_bucket: plumbing_connector_fabrication_testing
+      candidate_existing_processes:
+        - process_id: plumbing_and_pneumatics_v0
+          fit: partial
+          reason: Covers system-level fitting and pressure/leak test context.
+        - process_id: machining_basic_v0
+          fit: supporting
+          reason: Relevant for flange lips and bore features.
+        - process_id: leak_testing_v0
+          fit: direct
+          reason: Existing leak-check anchor.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: Straight stainless full nipple fabrication is plausible with machining, cleaning, and leak-test capabilities. Import remains a risk if ISO-K interchangeability or vacuum cleanliness cannot be met.
+      local_path_summary: Form or machine stainless tube/flange geometry, clean/passivate, inspect, and leak test.
+      existing_kb_pattern_used:
+        - "kb/items/parts/fittings_and_valves.yaml: ordinary fittings are local-modeled."
+        - "kb/processes/plumbing_and_pneumatics_v0: existing plumbing system process anchor."
+      import_risk_factors:
+        - ISO-K standard compatibility and leak-tightness may require vendor-level tolerances.
+        - Cleanliness/passivation requirements are unresolved.
+      local_manufacture_blockers:
+        - Need flange tolerance and sealing surface specification.
+        - Need recipe path for stainless tube/flange stock.
+    promotion_blockers:
+      - Need decide whether DN63 full nipples are individual items or members of an ISO vacuum fittings kit.
+      - Need catalog mass or accepted CAD-volume mass policy.
+
+  - action: create_new
+    proposed_item_id: dn63_to_dn50_vacuum_reducer_adapter_v0
+    phase2_item_id: ream250_dn63_to_dn50_vacuum_reducer_adapter_v0
+    reason_for_action: The DN63 ISO-K to DN50 ISO-KF reducer has two nominal interfaces and must preserve adapter-specific geometry.
+    kb_like_item:
+      id: dn63_to_dn50_vacuum_reducer_adapter_v0
+      name: DN63 ISO-K to DN50 ISO-KF vacuum reducer adapter
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      mass_kg: 0.605
+      material_class: stainless_steel
+      notes: Pilot staging item for a stainless reducer adapter between DN63 ISO-K and DN50 ISO-KF interfaces.
+      source_tags:
+        - ream250_bom_phase3_pilot
+    closure_identity:
+      functional_purpose: vacuum plumbing adapter reducing DN63 ISO-K to DN50 ISO-KF
+      material: stainless_steel_304
+      scale_or_capacity:
+        per_unit_mass_kg: 0.605
+        nominal_interfaces:
+          - DN63_ISO-K
+          - DN50_ISO-KF
+        scale_class: small
+      geometry_form: short_axisymmetric_flanged_reducer_adapter
+    process_assumptions:
+      primary_process_bucket: plumbing_connector_fabrication_testing
+      candidate_existing_processes:
+        - process_id: machining_precision_v0
+          fit: supporting
+          reason: Relevant for bore concentricity and flange shoulders.
+        - process_id: leak_testing_v0
+          fit: supporting
+          reason: Relevant to sealed adapter acceptance.
+        - process_id: vacuum_testing_v0
+          fit: supporting
+          reason: Relevant for vacuum-level acceptance.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: Adapter geometry is locally plausible through stainless turning and inspection, but standard-interface fidelity and sealing requirements must block promotion until specified.
+      local_path_summary: Turn stainless adapter body, finish sealing/contact faces, clean, inspect, and leak/vacuum test.
+      existing_kb_pattern_used:
+        - "kb/processes/machining_precision_v0: local precision machining anchor."
+        - "kb/processes/vacuum_testing_v0: vacuum testing anchor for high-integrity parts."
+      import_risk_factors:
+        - Dual ISO-K/KF interface compatibility may be harder than generic fittings.
+        - Surface finish and leak-rate thresholds are unresolved.
+      local_manufacture_blockers:
+        - Need interface tolerance and roughness requirements.
+        - Need decide whether reducer adapters are imported standard hardware during early bootstrap.
+    promotion_blockers:
+      - Need recipe-level material input and scrap assumptions.
+      - Need final decision on adapter-specific item versus ISO fitting kit membership.
+
+  - action: create_new
+    proposed_item_id: dn100_iso_k_weld_flange_v0
+    phase2_item_id: ream250_dn100_iso_k_weld_flange_v0
+    reason_for_action: DN100 weld flange size and weld-interface role differ from the DN63 fittings and should remain a separate staged item.
+    kb_like_item:
+      id: dn100_iso_k_weld_flange_v0
+      name: DN100 ISO-K weld flange
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      mass_kg: 0.637
+      material_class: stainless_steel
+      notes: Pilot staging item for a stainless DN100 ISO-K weld flange ring.
+      source_tags:
+        - ream250_bom_phase3_pilot
+    closure_identity:
+      functional_purpose: clamp and seal interface welded to a DN100 vacuum line or chamber port
+      material: stainless_steel
+      scale_or_capacity:
+        per_unit_mass_kg: 0.637
+        nominal_interface: DN100_ISO-K
+        scale_class: medium
+      geometry_form: iso_k_dn100_weld_flange_ring
+    process_assumptions:
+      primary_process_bucket: plumbing_connector_fabrication_testing
+      candidate_existing_processes:
+        - process_id: machining_process_turning_v0
+          fit: direct
+          reason: Relevant for flange ring turning.
+        - process_id: welding_tig_basic_v0
+          fit: supporting
+          reason: Relevant when welding to tube or chamber hardware.
+        - process_id: leak_testing_v0
+          fit: supporting
+          reason: Required after weld integration.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: A stainless weld flange is a standard machined connector and should be local candidate if turning, welding, cleaning, and leak testing are available.
+      local_path_summary: Turn stainless flange ring, prepare weld interface, clean, weld into assembly, and leak test.
+      existing_kb_pattern_used:
+        - "kb/processes/welding_tig_basic_v0: local welding support."
+        - "kb/processes/leak_testing_v0: leak-check anchor after welding."
+      import_risk_factors:
+        - Weld procedure and leak-test threshold unresolved.
+        - Standard ISO-K sealing face quality may require tighter inspection.
+      local_manufacture_blockers:
+        - Need weld procedure and inspection requirements.
+        - Need decide if DN100 weld flanges are kept as standard hardware imports during pilot bootstrap.
+    promotion_blockers:
+      - Need final alloy grade and weld process assumptions.
+      - Need decide item granularity relative to broader ISO vacuum fittings kit.
+
+  - action: create_new
+    proposed_item_id: gas_outlet_flange_plate_v0
+    phase2_item_id: ream250_gas_outlet_flange_plate_v0
+    reason_for_action: The custom gas-outlet flange plate is not a standard ISO fitting and has unresolved material and geometry-specific guardrails.
+    kb_like_item:
+      id: gas_outlet_flange_plate_v0
+      name: Gas outlet flange plate
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      mass_kg: 0.48
+      material_class: metal
+      notes: Pilot staging item for a custom gas-outlet flange/interface plate. Material is unresolved; 0.48 kg is stainless/steel scenario.
+      source_tags:
+        - ream250_bom_phase3_pilot
+    closure_identity:
+      functional_purpose: custom gas-outlet flange/interface plate joining local outlet hardware
+      material: unknown_structural_metal_alloy
+      scale_or_capacity:
+        per_unit_mass_kg: 0.48
+        envelope_mm: 130 x 8 x 130
+        scale_class: small
+      geometry_form: shallow_round_square_flange_plate_with_central_square_aperture_radial_webs_and_mounting_holes
+    process_assumptions:
+      primary_process_bucket: sheet_plate_cutting_drilling
+      candidate_existing_processes:
+        - process_id: sheet_metal_fabrication_v0
+          fit: partial
+          reason: Covers plate cutting and hole operations.
+        - process_id: machining_basic_v0
+          fit: supporting
+          reason: Relevant for aperture, webs, and face finishing.
+        - process_id: machining_precision_v0
+          fit: supporting
+          reason: Relevant if sealing flatness and hole pattern are tight.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_recipe_gap
+      is_import: false
+      rationale: Custom metal plate geometry is locally plausible through sheet/plate cutting and finish machining. It should not be imported by default, but material and sealing requirements must be resolved.
+      local_path_summary: Cut plate profile and aperture, drill holes, finish mating faces, clean, and inspect.
+      existing_kb_pattern_used:
+        - "kb/processes/sheet_metal_fabrication_v0: local sheet/plate fabrication anchor."
+        - "docs/knowledge_acquisition_protocol.md: keep top contributor or easily manufacturable structural parts local when plausible."
+      import_risk_factors:
+        - Material and gas/vacuum compatibility are unresolved.
+        - Sealing face and cleanliness requirements may exceed basic sheet fabrication.
+      local_manufacture_blockers:
+        - Need material resolution.
+        - Need mating seal type and flatness requirements.
+    promotion_blockers:
+      - Need decide whether radial web geometry is function-critical.
+      - Need recipe path for selected material and surface finish.
+
+proposed_bom_mappings:
+  - source_row: 129
+    source_item: "3O3"
+    closure_item_id: dn63_iso_k_bellows_end_fitting_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.412
+    variant_guardrails:
+      nominal_interface: DN63_ISO-K
+      parent_product_family: Pfeiffer_320SFK063
+    notes: One of two near-duplicate bellows end pieces.
+  - source_row: 130
+    source_item: "3O4"
+    closure_item_id: dn63_iso_k_bellows_end_fitting_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.412
+    variant_guardrails:
+      nominal_interface: DN63_ISO-K
+      parent_product_family: Pfeiffer_320SFK063
+    notes: Second near-duplicate bellows end piece.
+  - source_row: 119
+    source_item: "3H"
+    closure_item_id: dn63_iso_k_full_nipple_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.814
+    variant_guardrails:
+      nominal_interface: DN63_ISO-K
+      geometry: straight_full_nipple
+    notes: Preserve straight full-nipple geometry.
+  - source_row: 253
+    source_item: "37"
+    closure_item_id: dn63_to_dn50_vacuum_reducer_adapter_v0
+    quantity: 2
+    unit: unit
+    row_total_mass_kg: 1.21
+    variant_guardrails:
+      nominal_interfaces:
+        - DN63_ISO-K
+        - DN50_ISO-KF
+      geometry: reducer_adapter
+    notes: Preserve quantity two and dual-interface standard.
+  - source_row: 335
+    source_item: "422"
+    closure_item_id: dn100_iso_k_weld_flange_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.637
+    variant_guardrails:
+      nominal_interface: DN100_ISO-K
+      weld_interface: true
+    notes: Preserve DN100 size and weld-flange role.
+  - source_row: 145
+    source_item: "3S1"
+    closure_item_id: gas_outlet_flange_plate_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.48
+    variant_guardrails:
+      envelope_mm: 130 x 8 x 130
+      material_unresolved: true
+      sealing_flatness_review: true
+    notes: Custom flange plate, not a standard ISO fitting.
+
+stage_findings:
+  - "Existing broad fitting kits are too coarse for Phase 3 when nominal interface and leak-tightness are closure-relevant."
+  - "Phase 3 needs to distinguish local-manufacture candidate from import; vacuum hardware is not automatically import if machining and leak-test anchors exist."
+  - "Standard-interface fields such as DN63_ISO-K and DN50_ISO-KF belong in BOM mappings and closure identity, not functional_purpose_key."
+  - "Vacuum-specific evidence should influence precision and import risk, but not become a Phase 1 functional key axis."
+  - "A future Phase 3 schema may need `standard_interface` as a structured field rather than free-form guardrails."
+
+unresolved:
+  - "Whether a broader ISO vacuum fittings kit can replace individual standard-interface items without losing closure fidelity."
+  - "Whether helium leak testing is required for each item or only for assembled plumbing systems."
+  - "Whether early bootstrap should import all certified vacuum fittings despite local manufacturability in principle."
+  - "Exact alloy, surface finish, cleaning, passivation, and leak-rate acceptance values for promotion."

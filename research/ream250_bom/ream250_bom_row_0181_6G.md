@@ -57,3 +57,90 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0181_6G.md
+source_research_sha256: "a79e80eaa5939900a8d28617aeaa896fbdf090ada97ef8259c550e3290156d8e"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the powder-container extension function, CAD-derived mass basis, Aluminum 6061 material metadata, thin-plate machining route, KB implication, and CAD preview showing a small asymmetric faceted plate."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one thin aluminum extension plate in the powder-container assembly and has no internal module dependencies."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_sheet_plate_profile_cutting
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers the thin profile cutting, though this aluminum plate has local asymmetric relief geometry."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Relevant to faceted edges and shallow features after profile cutting."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Useful if powder-container fit, flatness, and edge geometry need tighter control."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Supports powder-contact cleanliness after cutting and deburring."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers thickness, outline, and fit inspection."
+  abstraction_decision: keep_original_family
+  rationale: "The inferred source route is already sheet/plate cutting with local machining; the canonical plate bucket is appropriate for this shallow powder-container part."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: powder-container edge extension and local containment surface
+  material: aluminum_6061
+  scale_or_capacity:
+    mass_kg: 0.0287
+    bom_quantity: 1
+    row_total_mass_kg: 0.0287
+    scale_class: tiny
+  geometry_form: small_asymmetric_three_mm_aluminum_plate_with_faceted_edge_relief
+merge_pool:
+  eligible: true
+  functional_purpose_key: powder_containment
+  precision_guardrails:
+    - powder_contact_surface_finish
+    - edge_relief_geometry
+    - front_container_fit
+    - flatness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Powder-contact finish and fit against neighboring seals and clamp plates are unresolved."
+    - "Small geometry is locally manufacturable, but exact tolerance and surface treatment are unknown."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares powder-container extension, chute, and clamping plate rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small aluminum powder-containment plate if surface and fit guardrails align."
+assumptions:
+  - "The front placement label is assembly context and should not by itself create a unique closure item."
+  - "Aluminum 6061 metadata from the assembly STEP is accepted for row-level staging."
+unresolved:
+  - "Exact mating interfaces, flatness, surface finish, coating, fastener method, and powder-cleanliness requirement remain unresolved."
+```

@@ -53,3 +53,95 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable standard stainless DN63 ISO-K straight pipe/full nipple rather than a reAM250-specific custom part or calibrated module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0119_3H.md
+source_research_sha256: "4536b865c67370015c9dd88134aae12d2d9181c88a69da606c68f6245e2bf26b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the row-matched Pfeiffer product evidence, DN 63 ISO-K function, stainless 304 material evidence, CAD volume mass estimate, straight flanged tube geometry, and local manufacturing assumptions."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one reusable straight flanged pipe/full-nipple component. It should stay separate from clamps, centering rings, seals, and adjacent plumbing assemblies rather than decomposing into hidden vendor details."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_iso_k_plumbing_connector_fabrication_and_leak_test
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - joining
+    - surface_finishing
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers fitting and connecting tubes plus leak checks at system level; it is broader than a single DN 63 full-nipple fabrication step."
+    - process_id: tube_bending_and_cutting_v0
+      fit: partial
+      reason: "Covers metal tube stock cutting and setup, but this row is straight and mainly needs ISO-K flange profiling."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Relevant for machining the flange lips, bore clearance, and mating faces from stainless stock."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant for post-machining cleanliness before this connector enters controlled gas-handling service."
+    - process_id: leak_testing_v0
+      fit: direct
+      reason: "Directly covers leak-tight verification for sealed joints and components using pressure/vacuum methods."
+  abstraction_decision: keep_original_family
+  rationale: "The source route already describes stainless tube/flange fabrication followed by cleaning/passivation and leak testing, which maps directly to the plumbing connector fabrication/testing closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: critical
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: rigid straight flanged connection section between ISO-K components
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.814
+    bom_quantity: 1
+    row_total_mass_kg: 0.814
+    scale_class: small
+  geometry_form: straight_cylindrical_tube_with_iso_k_flange_lips
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - iso_k_interface_dimensions
+    - sealing_surface_finish
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+    - general_subtractive_machining
+  import_risk_factors:
+    - "ISO-K sealing surfaces require controlled dimensions, surface condition, cleanliness, and leak-test acceptance."
+    - "Commercial standardization may matter for interchangeability with clamps, centering rings, and adjacent DN 63 components."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until ISO-K connector rows are merge-reviewed and sealing/interface requirements are staged."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other DN 63 ISO-K straight, elbow, clamp, seal, and adapter rows before assigning a closure item ID."
+assumptions:
+  - "Quantity 1 and row total mass 0.814 kg use the stainless 304 CAD-volume estimate from the original research."
+  - "The vendor material 1.4301/304 is normalized to stainless_steel_304 for later KB staging."
+  - "Leak testing and cleanliness are process guardrails, while clamps and centering seals remain separate closure items."
+unresolved:
+  - "Actual catalog mass was not found; the conversion relies on CAD volume times stainless 304 density."
+  - "Detailed ISO-K tolerances, surface roughness, and helium leak-rate acceptance are not specified in the row evidence."
+  - "Merge review should decide whether DN 63 straight full nipples of nearby lengths can share one closure item."
+```

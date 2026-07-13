@@ -55,3 +55,92 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as reusable ISO-K DN 63 stainless corrugated hose hardware with length variants, not as a reAM250-specific assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0123_3L.md
+source_research_sha256: "990371d4633f4e3da0b422e3e552a1ebef08690466dbdead505874d72f843c06"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: false
+  notes: "Reviewed function, CAD dimensions, product identity, stainless flange and bellows material evidence, CAD-derived mass, hose fabrication route, and reusable corrugated hose KB implication. Rendered preview was unavailable in the row evidence, so geometry use is limited to STEP measurements and product identity."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one reusable flexible hose item at BOM granularity. Bellows tube, welded flanges, and seal interfaces are manufacturing features of a standard hose assembly rather than separate row-level closure items."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_corrugated_hose_with_welded_flanges
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - precision_machining
+    - joining
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: hose_segment_fabrication_v0
+      fit: partial
+      reason: "Closest hose fabrication anchor, though this row needs stainless corrugated bellows and welded ISO-K flanges rather than a generic flexible hose."
+    - process_id: tube_forming_process_v0
+      fit: supporting
+      reason: "Relevant to forming the thin-wall stainless bellows tube."
+    - process_id: hose_end_fittings_fabrication_v0
+      fit: supporting
+      reason: "Relevant to the flange end pieces and hose-end interface preparation."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Relevant to joining stainless flange ends to the bellows tube."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to acceptance testing after welding and cleaning."
+  abstraction_decision: substitute_process_family
+  rationale: "The source row is a purchased corrugated hose, but the closure-relevant route is plumbing connector fabrication and testing with bellows forming, flange fabrication, welding, cleaning, and leak validation."
+  process_guardrails:
+    tolerance: review
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: flexible gas plumbing connection that tolerates routing offset and vibration
+  material: stainless_steel_304_flanges_with_316l_bellows
+  scale_or_capacity:
+    mass_kg: 1.697
+    bom_quantity: 1
+    row_total_mass_kg: 1.697
+    scale_class: medium
+  geometry_form: corrugated_flexible_hose_750mm_length_with_dn63_iso_k_flanges
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - flange_interface_size
+    - hose_length
+    - bellows_flexibility
+    - weld_quality
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Thin-wall stainless bellows forming and welded flange leak testing may require specialized tooling and inspection."
+    - "Exact factory forming method, weld process, cleaning, and leak-rate acceptance specification are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this flexible hose with other gas plumbing connection rows and length variants."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a stainless flexible plumbing connection with DN size and length guardrails."
+assumptions:
+  - "The exact-product datasheet is accepted for flange and bellows material facts."
+  - "The STEP solid volume is an adequate planning mass proxy for the hose item."
+unresolved:
+  - "Catalog net weight, bellows wall thickness, forming method, weld process, cleaning process, and leak-rate acceptance criteria remain unresolved."
+```

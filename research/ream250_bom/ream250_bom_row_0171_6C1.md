@@ -58,3 +58,88 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0171_6C1.md
+source_research_sha256: "63c50bd151c7c4f2418a9e6f39948699f79d710145245746409469999bc48a4a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed recoater scraper-blade role, CAD-derived steel mass, material metadata, stock-cutting plus edge-finishing route, and preview evidence showing a long narrow blade."
+decomposition:
+  decision: simple_part
+  rationale: "The blade is a single steel working-edge member; mounts, extensions, wear strips, and fasteners are separate BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stock_cut_steel_blade_with_edge_finishing
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - grinding_lapping
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers blanking the long narrow blade from steel plate stock before edge finishing."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers rough stock preparation when sheet-metal-specific cutting is not selected later."
+    - process_id: surface_grinding_precision_v0
+      fit: supporting
+      reason: "Relevant for creating a straight, clean working edge for powder spreading."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers straightness, thickness, edge condition, and fit checks against the blade mount."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is custom cut and edge-finished steel stock; closure can group it with sheet/plate cutting while preserving edge-quality guardrails."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: straight working edge for spreading powder across the recoater path
+  material: steel
+  scale_or_capacity:
+    mass_kg: 0.202
+    bom_quantity: 1
+    row_total_mass_kg: 0.202
+    scale_class: small
+  geometry_form: long_narrow_blade_strip_with_finished_working_edge
+merge_pool:
+  eligible: true
+  functional_purpose_key: powder_spreading
+  precision_guardrails:
+    - edge_straightness
+    - edge_surface_finish
+    - powder_cleanliness
+    - mount_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Recoater edge straightness, burr control, cleanliness, and wear behavior may require precision finishing."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares scraper blades, recoater contact parts, and wear-edge requirements."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic recoater scraper blade closure item if edge and material requirements converge."
+assumptions:
+  - "The blade is modeled separately from 6C2, 6C3, 6C5, and adjacent fasteners as indicated by the row research."
+  - "Steel grade and hardness are unresolved, so edge wear behavior remains a guardrail rather than a fixed material specification."
+unresolved:
+  - "Exact edge angle, flatness, hardness, coating, and surface finish are not specified."
+  - "Contact preload and powder-bed clearance requirements are unknown."
+```

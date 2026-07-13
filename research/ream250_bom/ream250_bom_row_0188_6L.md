@@ -54,3 +54,90 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model 6L as a reusable small machined Aluminum 6061 bearing-mount part; keep bearing, shaft, and fasteners as separate BOM rows or later generic hardware items."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0188_6L.md
+source_research_sha256: "8fdafc7acb0b4aa350d3280b22325de92b3b9748cabb08807b49b84dc95a7efc"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the floating-bearing support function, CAD-derived mass, Aluminum 6061 evidence, CNC-machining route, and bearing-pocket geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small machined aluminum mount body; bearing, shaft, fasteners, and neighboring fixed mount are separate BOM rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_aluminum_bearing_mount
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - drilling
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers stock-to-machined metal part conversion, but the bearing feature needs tighter bore and position control."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for bearing bore diameter, position, flatness, and mating-surface control."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers smaller mounting holes when recipe bindings expose them."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks before later staging decides whether stronger metrology is needed."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is CNC machining from aluminum stock, and the functional bearing pocket makes subtractive machining the clearest closure handle."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: floating bearing support mount for shaft axis hardware
+  material: aluminum_alloy_6061
+  scale_or_capacity:
+    mass_kg: 0.0192
+    bom_quantity: 1
+    row_total_mass_kg: 0.0192
+    scale_class: small
+  geometry_form: compact_rectangular_bearing_mount_with_precision_circular_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: bearing_mount
+  precision_guardrails:
+    - bore_diameter
+    - bore_position
+    - bearing_fit
+    - flatness
+    - alignment_accuracy
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Bearing fit tolerance and alignment may require precision machining plus inspection."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with fixed bearing mount and other small aluminum bearing supports."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before deciding whether this can share a generic small aluminum bearing mount closure item."
+assumptions:
+  - "The circular feature is a bearing pocket through feature that controls shaft support alignment."
+  - "No separate bushing, insert, nor seal is part of this row."
+  - "Optional anodizing is treated as finishing and not as identity-defining in this pass."
+unresolved:
+  - "Exact bearing fit class, bore diameter tolerance, flatness, and fastener hole callouts are not available."
+  - "The relation to the adjacent fixed bearing mount should be checked during merge review."
+```

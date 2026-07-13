@@ -1,0 +1,139 @@
+format:
+  file_type: markdown
+  data_location: fenced_yaml_under_heading
+  heading: "## KB Conversion"
+
+required:
+  - conversion_status
+  - source_research_file
+  - source_research_sha256
+  - evidence_reviewed
+  - decomposition
+  - process_abstraction
+  - identity_for_merge
+  - merge_pool
+  - downstream_decision_inputs
+  - kb_staging
+  - assumptions
+  - unresolved
+
+enums:
+  conversion_status:
+    - row_reviewed
+    - not_applicable
+    - needs_human
+  decomposition.decision:
+    - simple_part
+    - complex_module
+    - decompose_into_parts
+    - import_candidate
+    - needs_human
+  process_abstraction.abstraction_decision:
+    - keep_original_family
+    - substitute_process_family
+    - add_post_processing
+    - not_applicable
+    - needs_human
+  process_abstraction.primary_process_bucket:
+    - general_metal_additive_with_finish_machining
+    - general_subtractive_machining
+    - sheet_plate_cutting_drilling
+    - structural_profile_stock_fabrication_cutting
+    - polymer_elastomer_forming_dispensing
+    - manual_assembly_with_general_tools
+    - fastener_forming_thread_rolling
+    - plumbing_connector_fabrication_testing
+    - precision_component_import_decompose_later
+    - not_applicable
+    - needs_human
+  process_abstraction.supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - deburring
+    - precision_machining
+    - thread_forming
+    - gear_tooth_machining
+    - surface_finishing
+    - grinding_lapping
+    - heat_treatment
+    - forming
+    - extrusion
+    - additive_build
+    - support_removal
+    - joining
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+    - calibration
+    - coating
+    - curing
+    - elastomer_forming
+    - assembly
+    - ceramic_forming
+    - ceramic_sintering
+    - decomposition_required
+    - import_assumption
+  process_abstraction.candidate_existing_processes.fit:
+    - direct
+    - partial
+    - supporting
+    - poor_fit
+sections:
+  evidence_reviewed:
+    required:
+      - original_research_sections
+      - geometry_evidence_used
+      - notes
+  decomposition:
+    required:
+      - decision
+      - rationale
+      - proposed_subparts
+  process_abstraction:
+    required:
+      - original_process_family
+      - primary_process_bucket
+      - supporting_processes
+      - candidate_existing_processes
+      - abstraction_decision
+      - rationale
+      - process_guardrails
+  process_abstraction.candidate_existing_processes:
+    required:
+      - process_id
+      - fit
+      - reason
+  process_abstraction.process_guardrails:
+    required:
+      - tolerance
+      - surface_finish
+      - sealing_quality
+      - alignment_accuracy
+      - blocked_by_precision
+  identity_for_merge:
+    required:
+      - functional_purpose
+      - material
+      - scale_or_capacity
+      - geometry_form
+  identity_for_merge.scale_or_capacity:
+    required:
+      - mass_kg
+      - bom_quantity
+      - scale_class
+  merge_pool:
+    required:
+      - eligible
+      - functional_purpose_key
+      - precision_guardrails
+  downstream_decision_inputs:
+    required:
+      - local_manufacturing_paths_considered
+      - import_risk_factors
+      - post_merge_decision_notes
+  kb_staging:
+    required:
+      - proposed_item_id
+      - notes

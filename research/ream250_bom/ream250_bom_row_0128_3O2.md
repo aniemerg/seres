@@ -60,3 +60,94 @@ kb_implications:
 # reAM250 BOM Row 128 - 3O2
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0128_3O2.md
+source_research_sha256: "0a66500b99871a7c85cb4ae3b2a249f738701268cbbca2bc5d44c43954a6fdec"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the corrugated bellows function, CAD-derived row mass, Pfeiffer stainless bellows material evidence, inferred forming and connector-integration route, and preview showing a thin annular corrugated feature."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one bellows curvature subfeature from a larger spring-bellows connector; the row itself has no internal subparts, while connector-level assembly belongs to related rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_bellows_forming_and_leak_test
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - cutting
+    - joining
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_forming_basic_v0
+      fit: partial
+      reason: "Covers general forming of metal stock, but not the specialized thin-wall bellows corrugation operation."
+    - process_id: tube_forming_process_v0
+      fit: partial
+      reason: "Relevant to tube-based starting stock for the bellows element, with corrugation details missing."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Relevant to joining the stainless bellows element to adjacent end pieces in the connector."
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers fitting and gas-handling context, but not bellows manufacture."
+    - process_id: leak_testing_v0
+      fit: direct
+      reason: "Matches the vacuum connector leak-test requirement after bellows integration."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Supports vacuum-service cleaning of formed stainless bellows surfaces."
+  abstraction_decision: substitute_process_family
+  rationale: "The source row is a vendor bellows subfeature; closure analysis should group it under plumbing connector fabrication/testing with specialized forming as a guardrail."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: standard
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: compliant corrugated bellows element for flexible vacuum/gas connector
+  material: stainless_steel_316l
+  scale_or_capacity:
+    mass_kg: 0.013
+    bom_quantity: 1
+    row_total_mass_kg: 0.013
+    scale_class: small
+  geometry_form: thin_corrugated_annular_bellows_curvature
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - corrugation_flexibility
+    - leak_tightness
+    - weld_integration
+    - vacuum_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Thin-wall stainless bellows corrugation requires specialized forming control."
+    - "Vacuum leak-tight welded integration may be harder than ordinary pipe fabrication."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares bellows, flexible connector, and plumbing rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; this row may merge into a flexible plumbing connector abstraction rather than remain a separate closure item."
+assumptions:
+  - "The row represents the DN 63 316L bellows curvature rather than the complete connector assembly."
+  - "Local closure would form and test the bellows as part of a connector fabrication route."
+unresolved:
+  - "Exact corrugation forming process, wall thickness, cycle-life requirement, and leak-rate requirement are not specified."
+  - "Connector-level relationship to adjacent Pfeiffer spring-bellows rows needs group review."
+```

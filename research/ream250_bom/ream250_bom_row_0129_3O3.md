@@ -56,3 +56,92 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model this as a reusable stainless ISO-K DN63 end fitting/flange component of a purchased or assembled spring-bellows module, not as raw stock or the complete bellows assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0129_3O3.md
+source_research_sha256: "0e30d913dd8dbc98b274f3c9c57041290877d0a300d101b5efb6171281014bc9"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, mass basis, supplier material evidence, manufacturing route, kb implications, and CAD preview showing a short annular flanged end fitting."
+decomposition:
+  decision: simple_part
+  rationale: "The row represents one rigid end fitting of a spring-bellows assembly. The bellows tube, mating hardware, seal, and final welded assembly belong to neighboring rows and later assembly modeling."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: turned_stainless_flange_fitting_with_welded_bellows_joining
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - precision_machining
+    - deburring
+    - cleaning
+    - joining
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers rough turning and boring from stainless stock, but DN63 ISO-K seal faces and weld-prep surfaces need tighter guardrails."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Relevant for joining the machined end fitting to the bellows tube in the completed vacuum bellows assembly."
+    - process_id: pressure_test_basic_v0
+      fit: supporting
+      reason: "Provides a basic pressure integrity test anchor; later staging may need helium leak testing for vacuum service."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant for removing machining residue before vacuum-service assembly."
+  abstraction_decision: substitute_process_family
+  rationale: "The source evidence points to a vendor bellows end piece, but the closure-relevant abstraction is a reusable stainless plumbing/vacuum connector fitting made by machining, cleaning, joining, and leak testing."
+  process_guardrails:
+    tolerance: review
+    surface_finish: sealing_surface_review
+    sealing_quality: leak_tight_review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: rigid flanged connection end for a flexible bellows assembly
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.412
+    bom_quantity: 1
+    row_total_mass_kg: 0.412
+    scale_class: small
+  geometry_form: annular_dn63_iso_k_flanged_end_fitting
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - sealing_surface_finish
+    - dn63_interface_geometry
+    - weld_preparation
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Vacuum-clean surface finish, weld qualification, and leak-test acceptance level are unresolved."
+    - "The parent spring-bellows assembly may remain an import candidate even when this flange fitting is locally machinable."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares DN63 connector fittings and the complete bellows assembly strategy."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a small stainless plumbing connector fitting."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the per-unit 0.412 kg estimate."
+  - "The CAD geometry and supplier family material statement are sufficient to treat this as a stainless 304 flange/end fitting."
+  - "Bellows joining and leak testing are captured as supporting process guardrails rather than making this row a complex module."
+unresolved:
+  - "Exact vendor fabrication sequence and cleaning specification."
+  - "Whether final acceptance requires helium leak testing beyond basic pressure testing."
+  - "Precise seal-face tolerance and surface finish requirements for the DN63 ISO-K interface."
+```

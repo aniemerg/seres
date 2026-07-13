@@ -59,3 +59,96 @@ kb_implications:
 ---
 
 CAD preview: `research/ream250_bom/ream250_bom_row_0095_2AS__views_2x2.png`
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0095_2AS.md
+source_research_sha256: f174b5aad7a8be2989d3419aacb88f4bca09e6ade24326e2fcaa06aa3a4fa4e2
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the row function, material uncertainty, CAD-derived mass basis, sheet-cutting manufacturing hypothesis, KB implications,
+    and CAD preview showing a thin L-shaped plate with one round hole.
+decomposition:
+  decision: simple_part
+  rationale: The row evidence describes one small constant-thickness metal plate and flag associated with an inductive end-switch
+    sensor; no internal components and sub-BOM are implied.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_metal_cutting_drilling
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - drilling
+  - deburring
+  - dimensional_inspection
+  - calibration
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers sheet and plate cutting for flat parts.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers hole creation when the row needs bolt, locating, and passage features.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Relevant when calibration affects functional acceptance.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared sheet/plate cutting bucket: cut the profile, make the hole, deburr,
+    and finish. Metal additive manufacturing adds process burden without closure benefit for this flat plate.'
+  process_guardrails:
+    tolerance: review
+    surface_finish: low_to_moderate
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: end-switch sensor plate and switching flag
+  material: unknown_metal_sheet_likely_ferrous
+  scale_or_capacity:
+    mass_kg: 0.029
+    bom_quantity: 1
+    row_total_mass_kg: 0.029
+    scale_class: small
+  geometry_form: thin_l_shaped_plate_with_round_hole
+merge_pool:
+  eligible: true
+  functional_purpose_key: end_switch_sensor_flag
+  precision_guardrails:
+  - inductive_sensor_detectability
+  - hole_position
+  - alignment_accuracy
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Exact alloy and magnetic response are unresolved; an inductive sensor target may require ferrous and sensor-detectable
+    metal.
+  - Downstream assembly may require hole and edge location accuracy for reliable switch triggering.
+  post_merge_decision_notes: Final import/local manufacture and material substitution should be decided after merge review
+    compares similar sensor flags and small mounting plates.
+kb_staging:
+  proposed_item_id: null
+  notes: Do not assign a closure item ID during row conversion; likely merge candidate with other small end-switch plates
+    and sensor flags.
+assumptions:
+- The item is treated as a passive sheet-metal flag and target rather than the purchased Balluff sensor.
+- The 0.029 kg mass uses the CAD volume with generic steel density; aluminum would be substantially lighter.
+- A simple sheet and plate fabrication route can meet the needed geometry if later alignment checks do not reveal tighter
+  requirements.
+unresolved:
+- Specific alloy, magnetic response, and finish are not identified by the BOM, STEP metadata, and targeted search.
+- The exact role among sensed target, protective flag, and small mounting plate remains ambiguous, though all imply similar
+  KB granularity.
+```

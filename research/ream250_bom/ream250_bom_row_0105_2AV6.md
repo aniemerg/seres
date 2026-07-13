@@ -53,3 +53,90 @@ kb_implications:
 # reAM250 BOM Row 105 - 2AV6
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0105_2AV6.md
+source_research_sha256: "32bd16addbfb72d6948f7a0484718638e80bbb7ce0aa48b947ffbedda28fd45d"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed DIN 912 M4 screw function, CAD-derived per-screw and row mass, mild-steel material metadata, standard screw hardware route, and preview showing socket-head geometry."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a standard one-piece fastener used ten times, not a custom machine-specific part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: standard_metric_socket_head_screw_hardware
+  primary_process_bucket: fastener_forming_thread_rolling
+  supporting_processes:
+    - stock_preparation
+    - forming
+    - thread_forming
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: direct
+      reason: "Closest existing process anchor for small reusable screw hardware."
+    - process_id: fastener_kit_medium_production_v0
+      fit: partial
+      reason: "Also covers generic fastener production concepts but is larger than this M4 screw."
+    - process_id: machining_process_turning_v0
+      fit: supporting
+      reason: "Relevant for fallback screw-making from bar stock when thread rolling is unavailable."
+    - process_id: heat_treatment_basic_v0
+      fit: supporting
+      reason: "Relevant if strength class is specified later."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers thread, length, socket, and head geometry checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source row is already standard screw hardware, matching the fastener forming and thread rolling closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: threaded fastening for small mechanical joints
+  material: mild_steel
+  scale_or_capacity:
+    mass_kg: 0.00401
+    bom_quantity: 10
+    row_total_mass_kg: 0.0401
+    scale_class: tiny
+  geometry_form: din_912_m4_socket_head_cap_screw_30_mm_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: fastening
+  precision_guardrails:
+    - thread_size
+    - screw_length
+    - head_socket_geometry
+    - strength_class_if_specified
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - fastener_forming_thread_rolling
+  import_risk_factors:
+    - "Strength class, coating, and corrosion behavior are unspecified."
+    - "Standard fasteners may be imported as kits until local thread-forming capacity is justified by volume."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups standard metric fasteners and evaluates kit-level closure."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a generic M4 steel socket-head screw within a small fastener kit entry."
+assumptions:
+  - "The CAD part represents one screw and BOM quantity 10 represents identical instances."
+  - "Mild steel material metadata is accepted, while strength class and coating remain guardrails."
+unresolved:
+  - "Property class, coating, exact supplier, and production route are not specified."
+```

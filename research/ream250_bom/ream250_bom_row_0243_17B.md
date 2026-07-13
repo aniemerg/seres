@@ -53,3 +53,100 @@ how_to_make:
 kb_implications:
   - "item_granularity: complex_module - Model as one oxygen sensor-head assembly for now; split into ceramic cell, metal body, heater, connector, cable, and calibration electronics only if gas-sensing hardware becomes a modeling bottleneck."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0243_17B.md
+source_research_sha256: "6cac9fd3f70fab383a5a9a3703f78224518f5c1f517c48896b28b4925984bc4b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the sensor function, vendor mass, mixed material stack, inferred sensor-head manufacturing route, KB implications, and CAD preview showing a threaded cylindrical sensor head."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a multi-material sensing module with ceramic cell, platinum contacts, heater, machined metal body, connector, wiring, seals, and calibration dependencies that matter for closure."
+  proposed_subparts:
+    - machined_stainless_threaded_sensor_body
+    - aluminum_connection_head
+    - stabilized_zirconia_sensing_cell
+    - platinum_electrode_layers
+    - heater_temperature_element
+    - connector_wiring_and_seals
+process_abstraction:
+  original_process_family: vendor_precision_gas_sensor_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - precision_machining
+    - ceramic_forming
+    - ceramic_sintering
+    - coating
+    - assembly
+    - leak_testing
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for the threaded stainless body, mounting features, and connection-head interfaces after decomposition."
+    - process_id: ceramic_forming_v0
+      fit: supporting
+      reason: "Relevant to forming the stabilized zirconia sensing element if modeled locally."
+    - process_id: ceramic_sintering_process_v0
+      fit: supporting
+      reason: "Relevant to densifying the zirconia ceramic cell."
+    - process_id: electrical_assembly_basic_v0
+      fit: partial
+      reason: "Covers basic wiring and connector assembly but misses heater integration, platinum electrode quality, and sensor-specific packaging."
+    - process_id: calibration_and_test_basic_v0
+      fit: supporting
+      reason: "Covers calibration and functional testing with converter electronics."
+  abstraction_decision: substitute_process_family
+  rationale: "The original item is a vendor precision sensor head, not a simple part. Row conversion should preserve it as a precision component needing later decomposition into ceramic, metal, electrical, sealing, and calibration workflows."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: "oxygen partial-pressure sensing in process gas"
+  material: mixed_stainless_aluminum_zirconia_platinum_electrical_seals
+  scale_or_capacity:
+    mass_kg: 1.0
+    bom_quantity: 1
+    row_total_mass_kg: 1.0
+    scale_class: medium
+  geometry_form: threaded_cylindrical_sensor_head_m27
+merge_pool:
+  eligible: false
+  functional_purpose_key: gas_sensing
+  precision_guardrails:
+    - sensor_calibration
+    - zirconia_ceramic_cell
+    - platinum_electrodes
+    - heater_integration
+    - gas_boundary_seal
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Specialized zirconia ceramic processing, platinum electrode deposition, heater integration, sealing, and calibration are required."
+    - "Exact grades, cable materials, seal materials, and calibration procedure are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until sensor modules are decomposed and reviewed against available ceramic, electronics, and calibration capabilities."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item before decomposition; this is a sensor module rather than a generic mechanical fitting."
+assumptions:
+  - "The official A19-N/P manual applies to the row because the CAD name and geometry identify the A19-N sensor head."
+  - "The 1 kg vendor weight is used instead of CAD-density mass because the STEP is a merged multi-material solid."
+unresolved:
+  - "Exact stainless alloy, aluminum alloy, zirconia dopant, heater alloy, connector polymer, cable composition, seal material, and calibration method are not fully specified."
+```

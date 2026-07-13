@@ -58,3 +58,84 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 205.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0205_6Y.md
+source_research_sha256: "60ee25772dc8fb46b749ce53fae017dda53d2bbb5d174a6a1f499560c66c8b51"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, mass estimate and basis, unresolved material evidence, cut and drilled stock route, KB implications, and CAD preview showing a rectangular spacer with three through holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one compact spacer block with drilled holes and no internal subassembly evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_drilled_machined_stock
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: cutting_basic_v0
+      fit: direct
+      reason: "Covers cutting a small rectangular metal blank from stock before hole making."
+    - process_id: drilling_basic_v0
+      fit: direct
+      reason: "Covers the three through holes shown in the CAD preview."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "May be used to finish thickness and faces if spacer flatness needs more control than basic cutting."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of length, width, thickness, and hole spacing."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is already a stock-cutting and through-drilling route for a shallow rectangular spacer; local face cleanup can stay a supporting process instead of making subtractive machining the primary bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: not_applicable
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "spacing and alignment of a fastened machine interface"
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.0812
+    bom_quantity: 1
+    row_total_mass_kg: 0.0812
+    scale_class: small
+  geometry_form: rectangular_spacer_block_with_three_through_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: spacing_alignment
+  precision_guardrails:
+    - thickness
+    - hole_position
+    - flatness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material is unresolved; steel and aluminum variants would have different mass and closure inputs."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review with other spacer and standoff rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small metal spacer if material and precision assumptions converge."
+assumptions:
+  - "Steel-density mass is kept as the planning value from the row research, while material identity remains unresolved."
+  - "The three-hole layout is relevant to alignment but does not by itself require a unique closure item before merge review."
+unresolved:
+  - "Exact alloy, coating, fastener size, flatness requirement, installed interface, and load path are not specified by the row evidence."
+```

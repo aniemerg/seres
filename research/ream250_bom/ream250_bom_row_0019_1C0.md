@@ -58,3 +58,104 @@ kb_implications:
 # reAM250 BOM Row 19 - 1C0
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0019_1C0.md
+source_research_sha256: "be5b16b94a677c0fd1f6b630985f1f2af850c2a9c3d4c94ad89b3e92e0aba9ed"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, mass basis, material stack, inferred manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: complex_module
+  rationale: "The row is a reusable toggle-clamp hardware assembly with steel links and base, pins, spindle, washers, plastic grip, rubber tip, lubrication, and surface treatment. Phase 1 can stage it as one clamping module, while later closure may split the material families if clamp manufacture becomes important."
+  proposed_subparts:
+    - steel_toggle_links_and_base
+    - bearing_pins_and_rivets
+    - threaded_clamping_spindle_and_washers
+    - plastic_hand_grip
+    - rubber_thrust_tip
+process_abstraction:
+  original_process_family: stamped_formed_machined_steel_toggle_clamp_assembly
+  primary_process_bucket: manual_assembly_with_general_tools
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - drilling
+    - thread_forming
+    - heat_treatment
+    - coating
+    - assembly
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: assembly_basic_v0
+      fit: partial
+      reason: "Covers assembling the clamp linkage, spindle, washers, grip, and pad into one hardware module; detailed over-center adjustment remains a guardrail."
+    - process_id: sheet_metal_forming_v0
+      fit: supporting
+      reason: "Relevant to forming the steel base, forked arm, and linkage plates from sheet and plate stock."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers drilled holes, spindle interfaces, and local cleanup on the clamp body and linkage features."
+    - process_id: fastener_kit_medium_production_v0
+      fit: supporting
+      reason: "Anchors threaded spindle, washers, pins, and small steel hardware fabrication as a reusable fastener-family process."
+    - process_id: additive_manufacturing_polymer_v0
+      fit: poor_fit
+      reason: "Only relevant for a substitute plastic grip; it does not cover the main steel clamp assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers travel, mounting-hole, clamping action, and fit checks before staging selects final recipe details."
+  abstraction_decision: substitute_process_family
+  rationale: "The source is a vendor toggle clamp with mixed component manufacture. For closure analysis, the row maps best to a general manual assembly module, with steel forming, machining, fastener production, coating, and inspection carried as support tags."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide over-center clamping force for access, fixture, and closure interfaces
+  material: mixed_steel_polymer_elastomer
+  scale_or_capacity:
+    mass_kg: 0.42
+    bom_quantity: 2
+    row_total_mass_kg: 0.84
+    scale_class: small
+  geometry_form: horizontal_toggle_clamp_with_side_mount_base_forked_arm_spindle_and_grip
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_clamping
+  precision_guardrails:
+    - holding_capacity
+    - over_center_locking_action
+    - mounting_hole_pattern
+    - spindle_adjustment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - manual_assembly_with_general_tools
+  import_risk_factors:
+    - "Commercial toggle clamp has multiple small materials, plated steel, heat-treated pins, lubrication, adjusted linkage action, and rubber contact pad."
+    - "If later review needs exact 1700 N holding capacity with catalog repeatability, this may stay an import candidate."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this row against other clamping hardware and decides whether a generic local toggle clamp is acceptable."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable mechanical clamping hardware rather than a row-specific Ganter SKU."
+assumptions:
+  - "The non-NI steel GN 820.2-230-MFC identity is retained because the CAD filename and matched product evidence support it."
+  - "The 0.42 kg unit mass and BOM quantity 2 are sufficient for Phase 2 scale grouping."
+  - "A generic toggle-clamp closure item may substitute for the exact commercial part if holding capacity and mounting pattern remain guardrails."
+unresolved:
+  - "Exact pin fits, heat treatment depth, plating specification, lubrication, and rubber tip composition are not available from the row evidence."
+  - "Need merge review to decide whether this stays one closure item, becomes a decomposed small assembly, versus remains a commercial import."
+```

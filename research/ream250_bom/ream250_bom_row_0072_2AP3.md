@@ -53,4 +53,87 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one custom machined conductive plate rather than a purchased module; keep heater electronics or sensors as separate rows/items."
 ---
+## KB Conversion
 
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0072_2AP3.md
+source_research_sha256: "4ddc84f4cfa43544970b6ac28dd110e9d013187a9e7a8cec975c34010a163d45"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed function in the 2AP build-platform stack, aluminum-density planning mass, unresolved conductive-metal material evidence, CNC plate manufacturing route, and CAD preview showing a square pocketed plate."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one custom conductive plate; heater electronics, seals, sensor, and fasteners are separate neighboring rows rather than subparts of this plate."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_conductive_plate
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_process_milling_v0
+      fit: partial
+      reason: "Covers milling pockets, ribs, perimeter features, and interface faces from conductive plate stock."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant if platform flatness, sensor contact, and stack alignment require tighter datum control."
+    - process_id: surface_finishing_basic_v0
+      fit: supporting
+      reason: "Covers face finishing needed for stable thermal contact and clean assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of plate thickness, flatness, pocket geometry, and fastener interfaces."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is already a custom machined plate from stock; the lunar closure abstraction can reuse a general subtractive machining bucket while preserving thermal-contact guardrails."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: heated distribution interface in the build-platform stack
+  material: thermally_conductive_metal
+  scale_or_capacity:
+    mass_kg: 1.63
+    bom_quantity: 1
+    row_total_mass_kg: 1.63
+    scale_class: medium
+  geometry_form: square_machined_plate_with_pockets_and_broad_contact_faces
+merge_pool:
+  eligible: true
+  functional_purpose_key: heat_distribution
+  precision_guardrails:
+    - flatness
+    - thermal_contact_surface_finish
+    - stack_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material is unresolved; conductive metal choice affects thermal performance and final mass."
+    - "Broad contact face flatness may require precision machining and inspection beyond rough plate cutting."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups thermal plates and resolves material plus precision requirements."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; candidate for a reusable thermal distribution plate closure item if material and face-quality requirements converge."
+assumptions:
+  - "Aluminum-density mass is retained as a planning estimate, while identity material remains broad conductive metal due missing source grade."
+  - "The plate does not include embedded heaters; adjacent heating, sensing, sealing, and fastening rows remain separate closure items."
+unresolved:
+  - "Exact alloy, coating, heat treatment, and working temperature are not specified."
+  - "Flatness, surface finish, and datum tolerances for thermal contact in the 2AP stack remain unknown."
+```

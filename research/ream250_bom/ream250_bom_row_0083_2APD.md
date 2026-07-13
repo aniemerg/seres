@@ -60,3 +60,98 @@ kb_implications:
 # reAM250 BOM Row 83 - 2APD
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0083_2APD.md
+source_research_sha256: "f0313f1b9b3a931c01d3eedeb9b95a940d7023e54e7d445e0a99cd016d49e472"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed screw-in PT100 temperature-sensor function, planning mass including 5 m lead, mixed material evidence, inferred probe/cable/calibration route, and CAD preview showing a slim threaded probe form."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a calibrated sensor assembly with probe body, RTD element, long cable, insulation, strain relief, and test dependencies that matter for closure."
+  proposed_subparts:
+    - threaded_metal_probe_body
+    - pt100_resistance_temperature_element
+    - insulated_copper_sensor_lead
+    - cable_insulation_and_strain_relief
+    - termination_hardware
+process_abstraction:
+  original_process_family: configured_rtd_temperature_sensor_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - assembly
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: import_receiving_basic_v0
+      fit: direct
+      reason: "Appropriate near-term closure handle if the configured calibrated sensor remains imported."
+    - process_id: electrical_wiring_assembly_v0
+      fit: partial
+      reason: "Covers wired sensor assembly patterns, but lacks PT100 element construction, probe potting, and calibration class controls."
+    - process_id: insulated_wire_formation_v0
+      fit: supporting
+      reason: "Relevant for the long insulated copper lead if decomposed for local manufacture."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for making the small M6 threaded metal probe body."
+    - process_id: calibration_and_test_basic_v0
+      fit: partial
+      reason: "Covers basic calibration and functional testing, but row-specific temperature accuracy and insulation checks need explicit procedures."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is a configured sensor build, not a single low-risk fabricated part; the closure model should defer local manufacture until the probe, RTD element, lead, and calibration steps are separated."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: low
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: screw-in temperature measurement for heated machine surfaces
+  material: mixed_metal_pt100_copper_high_temperature_insulation
+  scale_or_capacity:
+    mass_kg: 0.11
+    bom_quantity: 1
+    row_total_mass_kg: 0.11
+    scale_class: small
+  geometry_form: m6_threaded_probe_with_5m_sensor_lead
+merge_pool:
+  eligible: false
+  functional_purpose_key: temperature_measurement
+  precision_guardrails:
+    - calibration_accuracy
+    - insulation_resistance
+    - cable_temperature_rating
+    - probe_thread_interface
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "PT100 element construction, potting, cable material, and calibration class are unresolved."
+    - "The 5 m high-temperature lead dominates mass and depends on insulation materials not specified by the row."
+    - "Usable replacement requires resistance, insulation, and temperature calibration checks."
+  post_merge_decision_notes: "Final import/local decision is deferred; perform decomposition review before merging with generic sensor items."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item during row conversion; stage as a precision sensor assembly pending decomposition."
+assumptions:
+  - "Planning mass of 0.11 kg is retained because visible CAD excludes most of the 5 m cable."
+  - "The product code is interpreted as PT100, two-wire, 5 m configuration."
+  - "The sensor can remain a functional module in this pass while subparts are listed for later closure analysis."
+unresolved:
+  - "Probe alloy, RTD element package, conductor gauge, insulation construction, termination hardware, and calibration class are not fully specified."
+  - "Exact installation target and environmental rating selected from the product options remain unclear."
+```

@@ -58,3 +58,103 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 14.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0014_1B43.md
+source_research_sha256: f997639bbb7aa241368f98a7969210d5220686f72233ecffa8f63527cbc4c0e7
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, material evidence, manufacturing route, KB implications, and CAD preview
+    showing a thin open rectangular frame with perimeter holes before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row describes one custom solid adapter/support frame with no vendor subassembly, electronics, moving elements,
+    and no internal closure dependencies requiring decomposition.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: plate_profile_cutting_cnc_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - drilling
+  - deburring
+  - dimensional_inspection
+  - thread_forming
+  - coating
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers sheet and plate cutting for flat parts.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers hole creation when the row needs bolt, locating, and passage features.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: add_post_processing
+  rationale: The source route is plate cutting with drilled mounting features and local finish machining. The closure model
+    should use the shared sheet/plate cutting bucket, with post-processing for flatness, hole position, and interface finish.
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: external adapter and support frame for an optical and flow-rectifier interface
+  material: unknown_structural_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.725
+    bom_quantity: 1
+    row_total_mass_kg: 0.725
+    scale_class: small
+  geometry_form: thin_rectangular_open_center_plate_frame
+merge_pool:
+  eligible: false
+  functional_purpose_key: adapter_support_frame
+  exclusion_reason: Material identity is unresolved enough to change mass by roughly 3x and may change merge compatibility.
+    Reconsider after material family is resolved during later review.
+  precision_guardrails:
+  - flatness
+  - hole_position
+  - optical_flow_interface_alignment
+  - surface_finish_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - unresolved alloy and coating requirement
+  - possible optical alignment and flow-interface flatness requirement
+  - possible thermal and cleanliness requirement from adjacent hardware
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until later review resolves material, interface
+    precision, and shared adapter/support frame compatibility.
+kb_staging:
+  proposed_item_id: null
+  notes: Do not assign a closure item ID at row conversion. Compare against other small adapter/support frames before staging
+    a KB item.
+assumptions:
+- The aluminum-scenario mass from the source row is used for scale classification, while material remains unresolved.
+- The frame can use a shared plate cutting and finish-machining route unless later evidence shows tighter optical, sealing,
+  thermal, and cleanliness requirements.
+- Geometry differences from neighboring adapter frames may be mergeable if function, material family, and precision guardrails
+  converge during merge review.
+unresolved:
+- Specific alloy, coating, and surface treatment are not identified.
+- Mating fastener pattern purpose, required flatness, and hole-position tolerance are not specified.
+```

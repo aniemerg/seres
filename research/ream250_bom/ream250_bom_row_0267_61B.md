@@ -51,3 +51,87 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - finished commodity M5 x 30 DIN 7991 steel countersunk screw; later KB modeling should reuse or create generic standard fastener hardware rather than raw stock or a reAM250-specific part."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0267_61B.md
+source_research_sha256: "ac5b44c7f0fe083c030c9b90b640a63970f7c0aa7696ee0e70086f9fd7e70ab6"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the fastener function, CAD/material mass basis, mild steel evidence, standard fastener manufacturing route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one commodity DIN 7991 M5 x 30 countersunk socket screw. It should merge with standard fastener hardware rather than become a reAM250-specific part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cold_heading_socket_forming_thread_rolling
+  primary_process_bucket: fastener_forming_thread_rolling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - thread_forming
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: direct
+      reason: "Covers small fastener fabrication and is the closest existing anchor for an M5 screw."
+    - process_id: fastener_kit_medium_production_v0
+      fit: partial
+      reason: "Covers forging, machining, stamping, heat treatment, sorting, and kitting for reusable fastener families."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to cold heading the countersunk screw head from steel stock."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, head geometry, socket fit, and thread fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is standard fastener production and directly matches the fastener forming/thread rolling closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide flush-head threaded mechanical fastening
+  material: mild_steel
+  scale_or_capacity:
+    mass_kg: 0.00521
+    bom_quantity: 1
+    row_total_mass_kg: 0.00521
+    scale_class: tiny
+  geometry_form: m5x30_countersunk_socket_head_screw
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_fastening
+  precision_guardrails:
+    - thread_size
+    - screw_length
+    - countersunk_head_geometry
+    - socket_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - fastener_forming_thread_rolling
+  import_risk_factors:
+    - "Property class, coating, heat treatment, and supplier-specific quality level are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups standard fasteners and decides the granularity of fastener kit abstractions."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely belongs in a reusable small steel fastener family rather than a row-specific item."
+assumptions:
+  - "The CAD and material metadata represent one mild steel screw."
+  - "DIN 7991 M5 x 30 identity is sufficient for merge grouping by standard fastener dimensions."
+unresolved:
+  - "Fastener property class, coating, exact heat treatment, and supplier quality level are not resolved by row evidence."
+```

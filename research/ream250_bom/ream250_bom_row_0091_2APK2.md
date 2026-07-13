@@ -58,3 +58,105 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0091_2APK2.md
+source_research_sha256: 10f05f322f90922eb969da02b616b71a4339ec5be9a40c508d9213f3ceb04505
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed function, mass basis, unknown-metal material evidence, fabrication route, CAD preview geometry, and KB implications
+    before conversion.
+decomposition:
+  decision: simple_part
+  rationale: One-piece thin front/back cover and retaining plate used twice in the heating-plate-cover group; no internal
+    module structure and purchased assembly behavior is indicated.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_plate_cutting_with_light_forming_and_finish_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - drilling
+  - deburring
+  - dimensional_inspection
+  - thread_forming
+  - leak_testing
+  - calibration
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers sheet and plate cutting for flat parts.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers hole creation when the row needs bolt, locating, and passage features.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Relevant when calibration affects functional acceptance.
+  abstraction_decision: add_post_processing
+  rationale: The source route is a small custom metal sheet/plate part cut from stock with edge reliefs, possible formed and
+    machined tab features, deburring, and fit inspection. A shared sheet/plate cutting bucket is simpler than metal additive
+    manufacturing for a thin plate, with post-processing retained for tabs, edge reliefs, deburring, and fit.
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: front and rear cover and retainer for heating plate cover area
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.145
+    bom_quantity: 2
+    row_total_mass_kg: 0.29
+    scale_class: small
+  geometry_form: thin_rectangular_folded_beveled_cover_plate
+merge_pool:
+  eligible: true
+  functional_purpose_key: cover_retention
+  precision_guardrails:
+  - mating_edge_fit
+  - tab_feature_tolerance
+  - surface_finish
+  - sealing_quality_if_part_of_inner_seal_guide
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Material family is unresolved between steel-like and aluminum-like metal.
+  - CAD evidence does not resolve bend radius, exact tab function, surface finish, and mating tolerances.
+  - Possible heating-plate and inner-seal-guide role may impose thermal and sealing constraints.
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review; likely local if
+    material and fit tolerances remain ordinary sheet-metal constraints.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review with sibling cover and retainer plates before assigning a closure item ID.
+assumptions:
+- The 0.145 kg mass is a per-unit planning estimate using steel density; row total mass is 2 units times 0.145 kg.
+- The front/back suffix means the same part is used in two positions.
+- Unknown metal/alloy is sufficient for row conversion; specific alloy selection belongs to merge and staging review.
+unresolved:
+- Exact material and alloy grade.
+- Whether the apparent folded and beveled edges are functional formed features and CAD/export artifacts.
+- Mating fastener pattern, bend radius, surface finish, and tolerance requirements.
+- Whether heating and seal-guide proximity requires elevated-temperature material and sealing-quality controls.
+```

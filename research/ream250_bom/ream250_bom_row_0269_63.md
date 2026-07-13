@@ -55,3 +55,96 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 269.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0269_63.md
+source_research_sha256: "a0a36a5f09685ce7a03b6e66f1cc2eba9db3b9d7a110353ab4dca36640db7de7"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the DIN 471 external retaining-ring function, 0.0000971 kg mass with BOM quantity 1, steel-family material evidence, stamped spring retaining-ring route, KB implication, and CAD preview showing a small split circlip with lug holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one standard small retaining ring with no internal assemblies; it should merge into generic retaining hardware rather than become a row-specific part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stamped_spring_steel_retaining_ring
+  primary_process_bucket: fastener_forming_thread_rolling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - deburring
+    - heat_treatment
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: partial
+      reason: "Closest existing small hardware fabrication anchor, though retaining rings need stamped spring behavior rather than threaded fastener production."
+    - process_id: sheet_metal_cutting_v0
+      fit: supporting
+      reason: "Relevant to blanking the thin ring profile from strip stock."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to stamping and forming the split ring geometry."
+    - process_id: heat_treatment_hardening_v0
+      fit: supporting
+      reason: "Relevant if spring-steel retention behavior is locally produced."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup before finishing and fit checks."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers ring thickness, lug hole, free shape, and groove-fit checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The item is standard fastener-like retention hardware. The canonical fastener bucket is close enough for Phase 1, with stamping and heat treatment captured as supporting operations."
+  process_guardrails:
+    tolerance: moderate
+    surface_finish: low_to_moderate
+    sealing_quality: not_applicable
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "removable axial retention shoulder for a small shaft groove"
+  material: steel_retaining_ring_family
+  scale_or_capacity:
+    mass_kg: 0.0000971
+    bom_quantity: 1
+    row_total_mass_kg: 0.0000971
+    scale_class: small
+  geometry_form: small_split_external_circlip_with_lug_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_retention
+  precision_guardrails:
+    - din_471_standard
+    - shaft_size_5mm
+    - spring_temper
+    - ring_thickness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - fastener_forming_thread_rolling
+  import_risk_factors:
+    - "Very small standardized spring hardware may be more practical as imported stock unless fastener production already includes retaining rings."
+    - "Exact heat treatment and finish for this row are not specified."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups small retaining rings and other mechanical retention hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a generic small DIN 471 steel retaining ring."
+assumptions:
+  - "BOM quantity is 1 and row total mass is 0.0000971 kg."
+  - "Steel-family material is accepted from local STEP metadata, while spring grade is inferred from DIN 471 hardware practice."
+  - "The fastener bucket is used as the closest canonical hardware process bucket despite stamping-specific details."
+unresolved:
+  - "Exact supplier, spring steel grade, heat treatment, finish, and groove-fit tolerance are unknown."
+  - "Whether to represent DIN 471 rings parametrically across sizes is deferred to merge review."
+```

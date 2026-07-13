@@ -62,3 +62,106 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0212_9A.md
+source_research_sha256: 9b414651c57c1623db90434036865ed750e471adcb0f1f0f5607f02af5f4fcf6
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the upper-frame function, CAD-derived steel mass basis, structural steel profile material inference, cut-to-length
+    manufacturing route, KB implications, and CAD preview.
+decomposition:
+  decision: simple_part
+  rationale: The row is one plain hollow structural member with no visible attached hardware, electronics, and internal module
+    dependencies.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: structural_hollow_section_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+  - stock_preparation
+  - extrusion
+  - cutting
+  - deburring
+  - dimensional_inspection
+  - leak_testing
+  - joining
+  - coating
+  candidate_existing_processes:
+  - process_id: metal_extrusion_process_v0
+    fit: partial
+    reason: Covers profile stock creation when extrusion is the selected local route.
+  - process_id: extrusion_basic_v0
+    fit: partial
+    reason: Covers generic extrusion abstraction for profile stock.
+  - process_id: cutting_basic_v0
+    fit: supporting
+    reason: Covers cutting profile stock to length.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared structural profile bucket: produce rectangular hollow stock,
+    cut to length, deburr, and inspect. Modeling it as a row-specific machined part would add process diversity.'
+  process_guardrails:
+    tolerance: length, squareness, straightness, and profile envelope should be controlled for frame fit-up
+    surface_finish: cut ends should be deburred; coating and paint is unresolved
+    sealing_quality: not_applicable
+    alignment_accuracy: frame alignment depends on straightness and cut squareness
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: upper structural support member for a machine frame
+  material: structural_steel
+  scale_or_capacity:
+    mass_kg: 17.66
+    bom_quantity: 1
+    row_total_mass_kg: 17.66
+    scale_class: medium
+  geometry_form: rectangular_hollow_section
+merge_pool:
+  eligible: true
+  functional_purpose_key: upper_frame_support
+  precision_guardrails:
+  - member_length
+  - cut_squareness
+  - straightness
+  - frame_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+  - Exact steel grade and finish are unresolved.
+  - Local manufacture of hollow profile stock may require forming, seam welding, sizing, and straightening capability.
+  - Coating and corrosion-protection requirements are unknown.
+  post_merge_decision_notes: Final import/local decision is deferred; merge review should compare with other frame support
+    members and preserve profile size and alignment guardrails.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; likely candidate for a shared structural hollow section and frame
+    support abstraction.
+assumptions:
+- The STEP volume represents a 180 x 80 x 5 mm rectangular hollow section cut to 900 mm length.
+- Structural steel is the best planning material based on geometry, mass basis, and neighboring steel profile context.
+- No hidden holes, slots, and welded attachments are present in this row item.
+unresolved:
+- Exact steel grade, coating, and finish are unknown.
+- Installed interface and fastening and welding method are not identified in the row evidence.
+```

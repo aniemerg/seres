@@ -54,3 +54,108 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model 6K as a reusable small machined Aluminum 6061 fixed bearing-mount part; keep bearing, shaft, and fasteners as separate BOM rows or later generic hardware items."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0187_6K.md
+source_research_sha256: 1ddf14df67f23d367e03b58d40df0ab3d99b7ce775090fa460728f71ac9dfd72
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, Aluminum 6061 material evidence, inferred CNC machining route, KB implications,
+    and CAD preview showing a compact plate/block with a circular bearing feature.
+decomposition:
+  decision: simple_part
+  rationale: The row is a single small aluminum bearing mount body; the bearing, shaft, fasteners, and neighboring floating
+    mount remain separate rows and later generic hardware.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machining_from_aluminum_stock
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - precision_machining
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  - thread_forming
+  - grinding_lapping
+  - joining
+  - coating
+  candidate_existing_processes:
+  - process_id: machining_basic_v0
+    fit: partial
+    reason: Covers basic stock removal; row-specific precision features remain guardrails.
+  - process_id: machining_precision_v0
+    fit: supporting
+    reason: Relevant when bore, sliding, concentricity, and finish control matter.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: keep_original_family
+  rationale: The source route already belongs to the shared subtractive machining bucket. Accurate bearing pocket, reference
+    faces, and hole positions are better handled by machining than by additive manufacturing.
+  process_guardrails:
+    tolerance: review bearing bore diameter, bore position, and mounting-hole locations
+    surface_finish: bearing pocket and reference faces need machined finish
+    sealing_quality: not_applicable
+    alignment_accuracy: important for fixed-side bearing support and pairing with the adjacent floating mount
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: fixed-side support that locates a bearing for an axis and subassembly
+  material: aluminum_6061
+  scale_or_capacity:
+    mass_kg: 0.0194
+    bom_quantity: 1
+    row_total_mass_kg: 0.0194
+    scale_class: small
+  geometry_form: compact_bearing_mount_plate_with_bored_pocket
+merge_pool:
+  eligible: true
+  functional_purpose_key: bearing_support
+  precision_guardrails:
+  - bearing_bore_fit
+  - bore_position_accuracy
+  - fixed_reference_face_flatness
+  - mounting_hole_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - general_subtractive_machining
+  import_risk_factors:
+  - bearing fit and alignment tolerances are unresolved
+  - Aluminum 6061 temper and surface treatment requirements are not specified
+  post_merge_decision_notes: Final import/local manufacture decision is deferred until after merge review compares this with
+    other bearing mounts and small aluminum support parts.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; likely candidate for a generic small aluminum bearing support
+    if fixed/floating roles and precision guardrails can be represented by notes and recipe variants.
+assumptions:
+- The STEP-derived mass of 0.0194 kg is accepted as both per-unit and row-total mass because BOM quantity is 1.
+- Aluminum 6061 from STEP material metadata is preserved as aluminum_6061 for merge review.
+- General machining can provide the required bearing pocket and fixed reference surfaces if tolerances are later specified.
+unresolved:
+- Exact bearing size, fit class, bore tolerance, and mounting-hole callouts were not present in row evidence.
+- Whether fixed and floating bearing mounts should merge into one bearing-support closure item and stay separate is deferred
+  to merge review.
+```

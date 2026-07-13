@@ -53,3 +53,90 @@ kb_implications:
   - "item_granularity: simple_part - Treat as a replaceable ISO-KF DN40 seal/filter replaceable or applied part with component material notes, not as a reAM250-specific machine subsystem."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0116_3E.md
+source_research_sha256: "3157dd86cab4bc8a9eb1a67862460bae87fe3e1cbc80447b33c30c7f5ba3661b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, effective-density mass basis, stainless/bronze/FKM material evidence, inferred manufacture route, kb implications, and preview showing a shallow DN40 seal/filter disk."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a replaceable joint component combining centering ring, filter disk, and O-ring. Its material stack should be preserved, but row conversion can treat it as one standard seal/filter part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: vendor_iso_kf_centering_ring_with_sintered_filter_and_o_ring
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - precision_machining
+    - forming
+    - elastomer_forming
+    - assembly
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: powder_metallurgy_pressing_v0
+      fit: partial
+      reason: "Coarse anchor for forming porous sintered metal filter media, though bronze powder and pore-size control are unstaged."
+    - process_id: elastomer_molding_basic_v0
+      fit: supporting
+      reason: "Relevant to the FKM O-ring subcomponent at coarse closure level."
+    - process_id: sealing_and_assembly_basic_v0
+      fit: supporting
+      reason: "Covers installing sealing elements into a joint assembly."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Relevant for DN40 fit, filter integrity, and sealing surface checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The source item is vendor vacuum sealing/filter hardware. For closure, model the selected path as plumbing connector fabrication/testing with supporting powder-metal filter and elastomer processes."
+  process_guardrails:
+    tolerance: dn40_interface_review
+    surface_finish: sealing_surface_review
+    sealing_quality: vacuum_leak_tight_review
+    alignment_accuracy: centering_ring_fit_review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: centering and sealing a flange joint while filtering particulates
+  material: stainless_304_sintered_bronze_fkm
+  scale_or_capacity:
+    mass_kg: 0.041
+    bom_quantity: 2
+    row_total_mass_kg: 0.082
+    scale_class: small
+  geometry_form: dn40_iso_kf_centering_ring_with_integrated_filter
+merge_pool:
+  eligible: true
+  functional_purpose_key: sealing_element
+  precision_guardrails:
+    - dn40_interface_geometry
+    - integrated_filter_media
+    - fkm_o_ring
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Sintered filter pore-size control, FKM compound, and vacuum cleanliness are unresolved."
+    - "Effective-density mass estimate lacks subcomponent volume split."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares DN40 sealing/filter elements and decides whether integrated filter media should block merging with plain seals."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a DN40 sealing element with filter guardrail."
+assumptions:
+  - "BOM quantity is 2, so row total mass is about 0.082 kg from the 0.041 kg per-unit estimate."
+  - "The material stack from vendor evidence is sufficient for row conversion."
+  - "Integrated filter media is a merge guardrail that may distinguish this from plain DN40 seals."
+unresolved:
+  - "Filter pore size acceptance, porosity control, and bronze powder source."
+  - "FKM compound details and cleaning requirements."
+  - "Whether later staging splits the O-ring and filter disk from the stainless centering ring."
+```

@@ -1,0 +1,234 @@
+stage_id: ream250_kb_stage_0002_enclosure_barrier
+stage_status: ready_for_review
+source_merge_review: research/ream250_bom/kb_conversion/merge_reviews/ream250_kb_merge_0002_enclosure_barrier.md
+source_phase2_decision: split
+purpose: Stage Phase 2 split enclosure-barrier candidates for later KB promotion without editing kb/.
+
+evidence_inputs:
+  merge_review_read: true
+  original_rows_read:
+    - research/ream250_bom/ream250_bom_row_0346_524.md
+    - research/ream250_bom/ream250_bom_row_0008_1A52.md
+  existing_kb_checked:
+    items:
+      - kb/items/parts/protective_cover_set.yaml
+      - kb/items/parts/panel_or_door_assembly.yaml
+      - kb/items/parts/metal_sheet_or_plate.yaml
+      - kb/items/parts/enclosure_small.yaml
+      - kb/items/parts/transparent_panel_set.yaml
+      - kb/items/parts/glazed_panel_or_door.yaml
+      - kb/items/parts/safety_light_curtain.yaml
+      - kb/items/parts/prospecting_dust_thermal_protection_v0.yaml
+      - kb/items/parts/rover_dust_guard_set_v0.yaml
+    imports:
+      - kb/imports/optical_film_or_tape.yaml
+    processes:
+      - kb/processes/sheet_metal_cutting_v0.yaml
+      - kb/processes/cutting_basic_v0.yaml
+      - kb/processes/drilling_basic_v0.yaml
+      - kb/processes/machining_basic_v0.yaml
+      - kb/processes/machining_precision_v0.yaml
+      - kb/processes/finishing_deburring_v0.yaml
+      - kb/processes/surface_finishing_basic_v0.yaml
+      - kb/processes/inspection_basic_v0.yaml
+      - kb/processes/leak_testing_v0.yaml
+    search_terms:
+      - cover
+      - barrier
+      - enclosure
+      - panel
+      - plate
+      - scanner
+      - chamber
+      - laser
+      - schlieren
+      - seal
+  notes: Existing KB cover and panel entries are set-level, bulk-modeled, transparent or glazed, much heavier, electronics-oriented, dust-guard oriented, or assembly-level. None preserves the row-specific laser-safety barrier guardrails for row 346 or the chamber imaging seal/interface guardrails for row 8.
+
+proposed_items:
+  - action: create_new
+    proposed_item_id: ream250_scanner_laser_barrier_cover_v0
+    phase2_item_id: ream250_scanner_laser_barrier_cover_v0
+    reason_for_action: No reusable KB item preserves the small one-piece scanner-area opaque barrier role, 85 x 5 x 85 mm geometry, 0.097 kg aluminum-scenario mass, and laser-safety material guardrails.
+    kb_like_item:
+      id: ream250_scanner_laser_barrier_cover_v0
+      name: reAM250 scanner laser barrier cover
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: composite
+      mass_kg: 0.097
+      notes: "Staged one-piece opaque scanner laser-safety cover from reAM250 row 346. CAD envelope is 85 x 5 x 85 mm. Mass is the aluminum-scenario estimate from row research; steel-like construction would be about 0.281 kg. Material is unresolved and may become metal, certified polymer barrier, coated composite, or another opaque laser-rated barrier stock. Preserve optical opacity, laser wavelength rating, certification basis, scanner-cover fit, mounting details, and edge finish as promotion guardrails."
+      source_tags:
+        - ream250_bom_phase3
+    closure_identity:
+      functional_purpose: opaque safety barrier cover for scanner enclosure
+      material: unknown_laser_barrier_material
+      scale_or_capacity:
+        per_unit_mass_kg: 0.097
+        bom_quantity: 1
+        row_total_mass_kg: 0.097
+        envelope_mm: 85 x 5 x 85
+        scale_class: small
+      geometry_form: flat_square_cover_plate
+    process_assumptions:
+      primary_process_bucket: sheet_plate_cutting_drilling
+      local_path_summary: Cut a flat opaque barrier sheet or plate to the square profile, deburr and finish edges, clean, inspect fit, and verify laser-safety suitability before service.
+      candidate_existing_processes:
+        - process_id: sheet_metal_cutting_v0
+          fit: partial
+          reason: Covers cutting sheet and thin plate blanks when the resolved barrier stock is metallic.
+        - process_id: cutting_basic_v0
+          fit: partial
+          reason: Provides a generic cut-to-shape anchor for simple barrier stock.
+        - process_id: finishing_deburring_v0
+          fit: supporting
+          reason: Covers edge cleanup after cutting so the cover seats safely in the scanner enclosure.
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: Covers dimensional checks and fit verification, but not optical density certification.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: "The row evidence supports a simple opaque cover plate, and ordinary opaque metal or barrier sheet can plausibly be cut and finished locally. The item is not electronics, an optical sensor, a precision reducer, or an active laser module. Promotion must still retain laser wavelength, optical opacity, certification, and material-substitution guardrails."
+      local_path_summary: Cut and finish laser-barrier sheet or plate using existing cutting, deburring, and inspection anchors; separately verify optical blocking suitability for the machine wavelength.
+      existing_kb_pattern_used:
+        - kb/processes/sheet_metal_cutting_v0.yaml
+        - kb/processes/cutting_basic_v0.yaml
+        - kb/processes/finishing_deburring_v0.yaml
+        - kb/processes/inspection_basic_v0.yaml
+      import_risk_factors:
+        - Material family and certified laser rating remain unresolved.
+        - Certified laser-rated polymer, composite, coating, label, or verification method may need imported stock or imported test capability.
+        - If later evidence shows this is a transparent filtering element rather than an opaque plate, the import decision should be revisited.
+      local_manufacture_blockers:
+        - Need promotion-time material_class decision after resolving whether the barrier is metal, polymer, composite, coating, or another rated stock.
+        - Need recipe binding for sheet or plate stock input, edge finish, inspection, and any scrap allowance.
+        - Need a laser-safety verification note or test requirement outside ordinary dimensional inspection.
+    promotion_blockers:
+      - Actual material family, optical density, wavelength rating, certification basis, mounting details, and edge finish are not sourced.
+      - Need decide whether `composite` is the best temporary material_class if no material source is found before KB promotion.
+      - Need decide whether the promoted ID should remain reAM250-specific or merge with future scanner laser-barrier covers.
+      - Need recipe-level stock input, scrap, deburring, cleaning, dimensional inspection, and laser-safety verification assumptions.
+
+  - action: create_new
+    proposed_item_id: ream250_chamber_imaging_cover_plate_v0
+    phase2_item_id: ream250_chamber_imaging_cover_plate_v0
+    reason_for_action: No reusable KB item preserves the shallow one-piece chamber imaging cover geometry, four corner mounting holes, possible seal-interface role, 0.114 kg aluminum-scenario mass, and flatness or cleanliness guardrails.
+    kb_like_item:
+      id: ream250_chamber_imaging_cover_plate_v0
+      name: reAM250 chamber imaging cover plate
+      kind: part
+      unit: unit
+      unit_kind: discrete
+      material_class: metal
+      mass_kg: 0.114
+      notes: "Staged one-piece protective cover plate from reAM250 row 8 for the inside schlieren-imaging area near an adjacent seal/interface. CAD envelope is 99 x 69 x 7 mm with shallow rectangular cover geometry, raised perimeter or recess features, and four corner holes. Mass is the aluminum-scenario estimate from row research; steel-like construction would be about 0.332 kg. Preserve alloy, finish, coating, seal compression role, flatness, leak-rate, cleanliness, and hole-pattern alignment as promotion guardrails."
+      source_tags:
+        - ream250_bom_phase3
+    closure_identity:
+      functional_purpose: protective closure cover for chamber imaging interface
+      material: unknown_metal_alloy
+      scale_or_capacity:
+        per_unit_mass_kg: 0.114
+        bom_quantity: 1
+        row_total_mass_kg: 0.114
+        envelope_mm: 99 x 69 x 7
+        scale_class: small
+      geometry_form: shallow_rectangular_machined_cover_with_corner_holes
+    process_assumptions:
+      primary_process_bucket: sheet_plate_cutting_drilling
+      local_path_summary: Cut a metal plate blank, drill the four mounting holes, machine the local lip or recess features, deburr, finish and clean the cover, inspect hole pattern and flatness, and leak-test only if the adjacent seal makes it part of a pressure boundary.
+      candidate_existing_processes:
+        - process_id: sheet_metal_cutting_v0
+          fit: partial
+          reason: Covers the primary sheet or plate blank cutting route for a shallow cover plate.
+        - process_id: drilling_basic_v0
+          fit: supporting
+          reason: Covers the four corner mounting holes and related counterbore features.
+        - process_id: machining_basic_v0
+          fit: supporting
+          reason: Covers the local recess, perimeter lip, and shallow face features after blank cutting.
+        - process_id: machining_precision_v0
+          fit: supporting
+          reason: Relevant if sealing surface flatness or hole-position control exceeds ordinary machining.
+        - process_id: surface_finishing_basic_v0
+          fit: supporting
+          reason: Covers finish preparation and light surface control after machining.
+        - process_id: inspection_basic_v0
+          fit: supporting
+          reason: Covers hole position, flatness, envelope, and fit checks before installation.
+        - process_id: leak_testing_v0
+          fit: supporting
+          reason: Relevant only if the adjacent seal/interface makes the cover part of a pressure or chamber boundary.
+    import_local_decision:
+      decision: local_manufacture_candidate_with_precision_guardrails
+      is_import: false
+      rationale: "This is a small machined metal cover plate, not advanced optics, electronics, a high-grade sensor, a precision reducer, or specialty optical material. Existing KB process anchors cover cutting, drilling, machining, finishing, inspection, and leak testing, but promotion must retain flatness, cleanliness, sealing, and hole-alignment guardrails."
+      local_path_summary: Cut, drill, machine, finish, clean, inspect, and optionally leak-test a metal cover plate using existing process anchors.
+      existing_kb_pattern_used:
+        - kb/processes/sheet_metal_cutting_v0.yaml
+        - kb/processes/drilling_basic_v0.yaml
+        - kb/processes/machining_basic_v0.yaml
+        - kb/processes/machining_precision_v0.yaml
+        - kb/processes/surface_finishing_basic_v0.yaml
+        - kb/processes/inspection_basic_v0.yaml
+        - kb/processes/leak_testing_v0.yaml
+      import_risk_factors:
+        - Alloy, coating, and chamber-compatible finish remain unresolved.
+        - Adjacent seal/interface may require flatness, cleanliness, and leak-check requirements not visible in the source row.
+        - If later evidence shows the cover includes an optical window or integrated seal, the staged item may need decomposition or import treatment.
+      local_manufacture_blockers:
+        - Need material and mass-basis decision before KB promotion.
+        - Need recipe binding for plate stock, cut/drill operations, local machining, surface finish, cleaning, inspection, and optional leak testing.
+        - Need decide whether flatness and leak-check requirements belong in item notes, BOM mapping notes, or recipe inspection requirements.
+    promotion_blockers:
+      - Exact alloy, coating, finish, seal compression role, flatness, leak-rate requirement, and chamber cleanliness requirement are not sourced.
+      - Need decide whether this remains a reAM250-specific item or later merges with other small chamber-interface cover plates.
+      - Need recipe-level stock input, scrap allowance, drilling, post-cut machining, cleaning, finishing, inspection, and optional leak-test assumptions.
+
+proposed_bom_mappings:
+  - source_row: 346
+    source_item: "524"
+    closure_item_id: ream250_scanner_laser_barrier_cover_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.097
+    envelope_mm: 85 x 5 x 85
+    geometry_form: flat_square_cover_plate
+    preserved_guardrails:
+      - laser_safety_rating
+      - optical_opacity
+      - fit_to_scanner_cover_set
+      - material_substitution_review
+    notes: Preserve the row as a distinct scanner laser-barrier cover after Phase 2 split; do not collapse into generic protective cover sets without resolving laser-safety material requirements.
+  - source_row: 8
+    source_item: "1A52"
+    closure_item_id: ream250_chamber_imaging_cover_plate_v0
+    quantity: 1
+    unit: unit
+    row_total_mass_kg: 0.114
+    envelope_mm: 99 x 69 x 7
+    geometry_form: shallow_rectangular_machined_cover_with_corner_holes
+    preserved_guardrails:
+      - sealing_surface_flatness
+      - corner_hole_pattern_alignment
+      - chamber_cleanliness_finish
+      - material_substitution_review
+      - optional_leak_test_if_pressure_boundary
+    notes: Preserve the row as a distinct chamber imaging-interface cover plate after Phase 2 split; adjacent seal evidence is a guardrail, not proof that this is a full sealed chamber component.
+
+stage_findings:
+  - Phase 2 split is appropriate because the scanner laser-barrier cover and chamber imaging-interface cover differ in function, material uncertainty, geometry, and failure modes.
+  - Existing KB cover, enclosure, panel, and guard items are too generic, too massive, bulk-modeled, transparent, electronics-oriented, dust-guard oriented, or assembly-level to reuse without losing row evidence.
+  - Both proposed items should remain local-manufacture candidates because their base geometry is simple sheet or plate work with existing KB process anchors.
+  - The scanner cover carries certification and optical-opacity risk that may force imported rated stock or imported verification even if cutting is local.
+  - The chamber cover carries metal alloy, finish, cleanliness, flatness, hole-alignment, and possible leak-test guardrails before promotion.
+  - Row-specific BOM mappings are necessary because the two items share only a broad enclosure-barrier discovery key.
+
+unresolved:
+  - Row 346 actual material family, optical density, wavelength rating, certification basis, mounting details, and edge finish remain unknown.
+  - Row 8 exact alloy, coating, finish, seal compression role, flatness, leak-rate requirement, and chamber cleanliness requirement remain unknown.
+  - Need decide whether the staged scanner barrier material_class should stay composite, switch to metal, or become an import material dependency after material evidence improves.
+  - Need decide whether future promoted IDs should retain the reAM250 prefix or merge into broader generic cover-plate families.
+  - Need recipe-level stock inputs, scrap allowances, cutting, drilling, machining, finishing, cleaning, inspection, and verification requirements for both staged items.

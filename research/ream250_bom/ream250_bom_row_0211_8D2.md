@@ -55,3 +55,108 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Treat as the annular stainless end/flange subpart of a DN40 ISO-KF flexible hose; rerun if the row needs a concrete local fabrication route rather than only whole-hose procurement."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0211_8D2.md
+source_research_sha256: 3fb33ace95af103c18bdbf987b1a8904db086fe7eaf79c8b88f05f75fa6bb498
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the catalog-linked function, CAD-derived mass, stainless 304 material evidence, inferred forming/machining route,
+    KB implications, and preview image showing a thin annular hose-end ring before conversion.
+decomposition:
+  decision: simple_part
+  rationale: This row is one annular stainless end/flange subpart extracted from a larger flexible service hose assembly.
+    The row itself has no internal subparts, but later closure work should still consider the complete hose as a module with
+    bellows, end fittings, joining, cleaning, and leak testing.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_ring_forming_finishing
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+  - stock_preparation
+  - forming
+  - precision_machining
+  - joining
+  - cleaning
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: fitting_assembly_basic_v0
+    fit: partial
+    reason: Covers generic fitting and connector assembly work.
+  - process_id: plumbing_and_pneumatics_v0
+    fit: partial
+    reason: Covers fluid and gas handling connector work at the system level.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Covers leak checks when sealing function matters.
+  - process_id: cleaning_basic_v0
+    fit: supporting
+    reason: Covers cleaning before connector assembly and test.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: substitute_process_family
+  rationale: The thin annular hose end is a plumbing connection interface. Use the shared plumbing connector bucket with forming,
+    light machining, cleaning, and integration checks.
+  process_guardrails:
+    tolerance: required - DN 40 ISO-KF fit and mating geometry must be controlled
+    surface_finish: required - contact edges must be clean, deburred, and compatible with plumbing hardware
+    sealing_quality: required - the complete hose end participates in a plumbing line connection
+    alignment_accuracy: review - ring concentricity and integration with bellows/end assembly may matter
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide a plumbing line connection interface at the end of a flexible hose
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.00249
+    bom_quantity: 1
+    row_total_mass_kg: 0.00249
+    scale_class: tiny
+  geometry_form: thin_annular_hose_end_ring
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+  - mating_fit
+  - leak_tightness
+  - surface_cleanliness
+  - concentricity
+  - hose_integration_method
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - plumbing_connector_fabrication_testing
+  import_risk_factors:
+  - complete flexible service hose manufacturing may require corrugated bellows forming and qualified joining
+  - service leak testing and cleanliness requirements are not specified at row level
+  - local route depends on the condition that the hose is modeled as a purchased module and decomposed assembly
+  post_merge_decision_notes: Final import/local decision is deferred until merge review and later hose-level staging decide
+    the condition that this ring is merged with other plumbing connection interfaces and remains part of a decomposed flexible
+    hose module.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID; likely candidate for a generalized plumbing line connection interface
+    only if material, nominal size, and sealing guardrails align.
+assumptions:
+- The row CAD solid represents the physical annular subpart for BOM quantity 1.
+- The stainless 304 catalog flange material applies to this ring rather than the bellows material.
+- A general forming plus machining route is adequate at closure level if cleaning and inspection are included.
+unresolved:
+- The exact hose-end subcomponent role, joining process, tolerance stack, and leak-test requirements are not exposed by the
+  row CAD.
+- The row may understate physical mass if the CAD export is only a surface/detail rather than the complete metal subpart.
+- Later staging must decide the condition that to model the complete flexible hose as an import, decompose it, and replace
+  it with another plumbing line abstraction.
+```

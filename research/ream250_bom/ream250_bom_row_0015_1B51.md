@@ -57,3 +57,91 @@ kb_implications:
 # reAM250 BOM Row 15 - 1B51
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0015_1B51.md
+source_research_sha256: "9ac466695dbee34dc292d268a5b6fb04008ce77625621f1641c6ff1affe4289a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read optical thread-adapter function, catalog/drawing mass basis, anodized aluminum material evidence, machining/threading route, KB implication, and preview of the thin ring geometry."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one passive optomechanical adapter ring with no electronic, optical glass, actuator, and sealed subassembly content."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: turned_threaded_anodized_aluminum_ring
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - precision_machining
+    - thread_forming
+    - deburring
+    - surface_finishing
+    - coating
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers turning the ring faces, bore, and outside diameter from aluminum stock."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for optical-thread fit, concentricity, and clear-aperture control."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Covers anodized aluminum finishing after machining."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers basic dimensional checks; thread gauges may be needed during later staging."
+  abstraction_decision: keep_original_family
+  rationale: "The source manufacturing route is a machined aluminum ring with cut threads and anodizing, which maps directly to subtractive machining with thread and coating support."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: optomechanical thread adapter joining two optical mounting thread standards
+  material: anodized_aluminum
+  scale_or_capacity:
+    mass_kg: 0.02
+    bom_quantity: 1
+    row_total_mass_kg: 0.02
+    scale_class: tiny
+  geometry_form: thin_circular_threaded_adapter_ring_with_internal_and_external_threads
+merge_pool:
+  eligible: true
+  functional_purpose_key: optical_mounting_adapter
+  precision_guardrails:
+    - thread_standard_fit
+    - concentricity
+    - clear_aperture
+    - anodized_surface_condition
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Optical-thread standards may require gauges and tighter inspection than generic threaded hardware."
+    - "Exact alloy, anodize class, and thread tolerance are unresolved."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other optomechanical adapter rings."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open for merge review across small optical mounting adapters."
+assumptions:
+  - "Use the drawing value of 0.02 kg as the planning mass despite the lower simplified CAD-volume estimate."
+  - "Treat anodized aluminum as the resolved material family."
+  - "Treat thread cutting/gauging as the main precision burden."
+unresolved:
+  - "Specific aluminum alloy and anodize specification."
+  - "Internal SM2 and external M52 thread tolerance class."
+  - "Whether lunarized staging can merge this with other optical adapter rings by function and scale."
+```

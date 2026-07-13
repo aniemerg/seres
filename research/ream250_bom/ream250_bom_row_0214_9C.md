@@ -58,3 +58,90 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - model as one reusable custom metal spacer/standoff plate with unresolved alloy, not as a purchased module or multi-part assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0214_9C.md
+source_research_sha256: "b0a3de70a9a6d29e96fe2490206abe567ed140a819683c10e7bfa77e3ac2cf7c"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the top-frame spacing function, CAD-derived mass, unresolved structural metal evidence, subtractive spacer route, and square plate geometry with central hole before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one compact metal spacer plate with no separate inserts, fasteners, electronics, seals, nor module evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: metal_spacer_plate_cutting_and_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting metal plate stock into square spacer blanks."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers the central through-hole operation."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers relief pockets, X-rib surfaces, and thickness cleanup if those features are functional."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers thickness, flatness, hole location, and envelope checks."
+  abstraction_decision: substitute_process_family
+  rationale: "The row can be represented as a plate-derived spacer: cutting and drilling provide the main closure handle, while local milled relief features stay as supporting process detail."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: fixed spacing and clearance between top frame members
+  material: structural_metal_unknown_aluminum_assumed_for_mass
+  scale_or_capacity:
+    mass_kg: 0.169
+    bom_quantity: 1
+    row_total_mass_kg: 0.169
+    scale_class: small
+  geometry_form: square_spacer_plate_80x80x10mm_with_central_hole_and_relief_ribs
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_spacing
+  precision_guardrails:
+    - material_family
+    - thickness
+    - flatness
+    - hole_position
+    - mating_face_parallelism
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material uncertainty changes mass and process requirements if steel replaces the aluminum planning assumption."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with other spacers and frame interface plates before choosing a closure item."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning a generic structural spacer item ID."
+assumptions:
+  - "The 10 mm dimension is the functional spacer thickness."
+  - "The central hole is a clearance and fastening feature rather than a precision bearing feature."
+  - "The X-shaped relief geometry can be handled by secondary machining if it matters."
+unresolved:
+  - "Material family remains unresolved; aluminum is only the planning-density assumption."
+  - "The exact mating frame faces and central-hole purpose are not identified by the row evidence."
+```

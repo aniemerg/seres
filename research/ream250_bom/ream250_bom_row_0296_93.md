@@ -54,3 +54,97 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 296.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0296_93.md
+source_research_sha256: f34a3fdf1cad1c07c437a509417b16dc9bcf9024eb4bae058ac25f6e7e71069c
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original function, mass basis, material evidence, manufacturing route, KB implications, and CAD preview
+    showing a constant-section 60 x 60 mm slotted profile before conversion.
+decomposition:
+  decision: simple_part
+  rationale: This is a single cut length of modular aluminum strut/profile stock, not a vendor module and assembly with hidden
+    internal closure dependencies.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+  - stock_preparation
+  - extrusion
+  - cutting
+  - deburring
+  - dimensional_inspection
+  - coating
+  candidate_existing_processes:
+  - process_id: metal_extrusion_process_v0
+    fit: partial
+    reason: Covers profile stock creation when extrusion is the selected local route.
+  - process_id: extrusion_basic_v0
+    fit: partial
+    reason: Covers generic extrusion abstraction for profile stock.
+  - process_id: cutting_basic_v0
+    fit: supporting
+    reason: Covers cutting profile stock to length.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: surface_treatment_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs protective surface treatment.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared structural profile bucket: make compatible aluminum profile stock,
+    cut to length, deburr, finish, and inspect. Additive manufacturing is less suitable for long straight slot geometry.'
+  process_guardrails:
+    tolerance: review slot fit, profile straightness, and cut length
+    surface_finish: review anodized and equivalent protective finish if connector sliding/contact surfaces require it
+    sealing_quality: not_applicable
+    alignment_accuracy: review end squareness and frame connector alignment
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: modular structural support member for the machine frame
+  material: aluminum_alloy_strut_profile
+  scale_or_capacity:
+    mass_kg: 2.537
+    bom_quantity: 1
+    row_total_mass_kg: 2.537
+    scale_class: medium
+  geometry_form: square_slotted_t_slot_extrusion_60x60_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: modular_machine_frame_member
+  precision_guardrails:
+  - slot_geometry
+  - profile_straightness
+  - cut_length
+  - end_squareness
+  - connector_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - structural_profile_stock_fabrication_cutting
+  import_risk_factors: []
+  post_merge_decision_notes: Final import/local decision is deferred until after merge review. This row provides evidence
+    for a possible local extrusion workflow.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review. Existing KB has generic aluminum struts/frames but no confirmed 60 x 60 T-slot closure item;
+    consider consolidating this row with other reAM250 60 x 60 profile lengths.
+assumptions:
+- The aluminum material can be generalized to a locally available structural aluminum alloy compatible with extrusion.
+- The Bosch Rexroth slot geometry is preserved only to the level needed for modular frame connector compatibility.
+- The measured 650 mm STEP length is used for mass and scale, while the filename length discrepancy is carried as unresolved
+  evidence.
+unresolved:
+- Exact intended installed length is unclear because the filename includes 710 but the STEP bounding box is 650 mm.
+- Exact alloy temper, anodizing and finish specification, slot tolerance, and any post-cut end machining are not resolved.
+```

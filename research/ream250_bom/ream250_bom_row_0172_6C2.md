@@ -53,3 +53,87 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable machined stainless rail or bracket component for the recoater blade mount rather than as a purchased module or multi-part assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0172_6C2.md
+source_research_sha256: "cddf8ebb2e2f7730dc5a66bf72e22d2c0ab87945b1dbe2c60d6263d3fca09529"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the function, mass basis, stainless material metadata, machining route, KB implications, and CAD preview showing a long grooved rail with repeated mounting holes."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single stainless blade-mount rail with machined grooves and holes; no internal subassembly is indicated."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_milled_stainless_rail
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - drilling
+    - deburring
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers milling stainless stock into the rail shape, while blade-contact geometry and long straightness need additional guardrails."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for blade-contact faces, straightness, hole positions, and clamping alignment."
+    - process_id: drilling_basic_v0
+      fit: supporting
+      reason: "Covers repeated mounting holes visible along the rail."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers straightness, hole spacing, profile geometry, and blade-contact face checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already stainless stock machining with drilling and inspection. Grooves, blade-contact faces, and alignment needs make general subtractive machining the right primary closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "rigid clamping and locating body for a recoater blade span"
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.922
+    bom_quantity: 1
+    row_total_mass_kg: 0.922
+    scale_class: medium
+  geometry_form: long_grooved_blade_mount_rail_with_repeated_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: blade_clamping
+  precision_guardrails:
+    - straightness
+    - hole_position
+    - blade_contact_surface
+    - clamping_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Unknown straightness, blade-contact surface finish, and hole-position tolerances could require precision machining."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares blade mount rails and related recoater clamping rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other blade mount and clamping rail rows before assigning a closure item."
+assumptions:
+  - "Stainless steel STEP metadata is accepted as row-level material evidence."
+  - "The rail is treated as blade clamping and locating hardware, not as the scraper blade edge itself."
+unresolved:
+  - "Stainless grade, passivation need, exact clamp interface, straightness tolerance, surface finish, and hole tolerances are not specified."
+```

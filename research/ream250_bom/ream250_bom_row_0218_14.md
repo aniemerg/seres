@@ -58,3 +58,91 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 218.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0218_14.md
+source_research_sha256: "7e07028e6c40691ca1bbd6bb703d5e454a4bb358ffde685eb1aed27c06d3ee89"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed Liqui Moly 6185 silicone sealant identity, rectangular perimeter bead CAD geometry, per-unit and row-total mass basis, neutral-crosslinked silicone material evidence, dispensing/cure route, and simple applied-part KB implication."
+decomposition:
+  decision: simple_part
+  rationale: "The row is an applied elastomer seal bead. It is closure-relevant as sealant material plus dispensing and curing process, not as a rigid multi-part assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: dispensed_silicone_sealant_application
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+    - elastomer_forming
+    - cleaning
+    - curing
+    - assembly
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: potting_and_sealing_v0
+      fit: partial
+      reason: "Closest generic process for applying sealing compound, though this row is a perimeter bead rather than electronics potting."
+    - process_id: seal_installation_v0
+      fit: supporting
+      reason: "Relevant to placing the seal at the top/bottom interface and joining mating parts."
+    - process_id: silicone_rubber_vulcanization_v0
+      fit: supporting
+      reason: "Relevant to silicone cure behavior after bead application."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant to preparing dry, oil-free mating surfaces before dispensing."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant if the sealed interface must be validated after cure."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is explicitly cleaning, dispensing a silicone bead, immediate joining, curing, and inspection, directly matching polymer/elastomer forming and dispensing."
+  process_guardrails:
+    tolerance: low
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: elastic seal bead for closing a panel and housing joint
+  material: black_neutral_crosslinked_silicone_sealant
+  scale_or_capacity:
+    mass_kg: 0.0956
+    bom_quantity: 2
+    row_total_mass_kg: 0.191
+    scale_class: small
+  geometry_form: thin_rectangular_perimeter_bead_840x520mm_by_3mm
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_sealing
+  precision_guardrails:
+    - bead_continuity
+    - bead_height
+    - surface_cleanliness
+    - cure_state
+    - silicone_chemistry
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+    - "Local production of neutral-crosslinking black silicone chemistry may be outside near-term closure, even when dispensing is simple."
+    - "Installed mass depends on bead compression, trimming, squeeze-out, and cure shrinkage."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this applied silicone seal with other gasket and sealant rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a dispensed silicone joint seal with row-specific bead path and mass notes."
+assumptions:
+  - "The CAD volume represents the installed cured bead volume for one seal application."
+  - "The two BOM units are two applications of the same perimeter seal geometry."
+unresolved:
+  - "Full sealant formulation, fixture pressure, cure duration before service, sealed environment, and leak-test acceptance criteria remain unresolved."
+```

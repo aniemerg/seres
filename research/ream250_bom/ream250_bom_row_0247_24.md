@@ -53,3 +53,86 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as applied silicone sealant/seal material consumed during assembly rather than as a reusable machine part or purchased module."
 ---
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0247_24.md
+source_research_sha256: "91e0f10efe602fa1059b0432d4fa945603d5017be0523a63a626feb51a46d321"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed silicone side-seal function, per-strip and row-total mass basis, Liqui Moly black silicone evidence, dispense-and-cure route, and CAD envelope for the long thin strip."
+decomposition:
+  decision: simple_part
+  rationale: "The row is an applied/cured sealant geometry consumed in assembly, not a reusable module with internal subparts."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: silicone_sealant_dispensing_and_curing
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+    - elastomer_forming
+    - cleaning
+    - curing
+    - assembly
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: elastomer_molding_basic_v0
+      fit: partial
+      reason: "Covers basic elastomer shaping, though this row is dispensed in place rather than molded as a standalone gasket."
+    - process_id: silicone_polymerization_v0
+      fit: supporting
+      reason: "Relevant upstream if local closure produces silicone elastomer material instead of importing compound."
+    - process_id: sealing_and_assembly_basic_v0
+      fit: supporting
+      reason: "Covers applying sealing material and joining mating parts during assembly."
+    - process_id: drying_and_curing_v0
+      fit: supporting
+      reason: "Covers cure time after the silicone compound is applied."
+  abstraction_decision: keep_original_family
+  rationale: "The source process is already elastomer compound dispensing and curing, matching the polymer/elastomer forming and dispensing closure bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: compliant joint leakage prevention between mating covers and panels
+  material: silicone_elastomer
+  scale_or_capacity:
+    mass_kg: 0.0891
+    bom_quantity: 2
+    row_total_mass_kg: 0.178
+    scale_class: small
+  geometry_form: long_thin_applied_side_strip_3_mm_thick
+merge_pool:
+  eligible: true
+  functional_purpose_key: leakage_prevention
+  precision_guardrails:
+    - continuous_bead
+    - surface_cleanliness
+    - cured_elasticity
+    - compression_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+    - "Silicone chemistry and filler package may stay imported if local polymer production is outside the current closure scope."
+    - "Seal performance depends on surface preparation, cure state, and chemical compatibility."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups applied sealing compounds and checks elastomer supply assumptions."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as applied silicone sealant material with geometry and quantity captured at BOM level."
+assumptions:
+  - "The CAD solid is treated as cured applied sealant, not the original 200 ml product container."
+  - "Representative silicone rubber density remains adequate for closure-scale mass accounting."
+unresolved:
+  - "Exact cured formulation, filler package, cure time, and dispensing tolerance are not specified."
+  - "The specific sealed interface and compression state are unknown."
+```

@@ -56,3 +56,88 @@ kb_implications:
   - "item_granularity: simple_part - model as reusable Bosch/Rexroth-compatible 20x20 aluminum strut profile stock with length captured in BOM or recipe notes, not as a unique reAM250-only assembly."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0220_17A1.md
+source_research_sha256: "1bd7ef1fd79a48e83974d2f28beae0324a1f6e0af53e827d270cbd4048fd8224"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the profile function, CAD-derived per-unit and row-total mass, aluminum strut-profile material evidence, extrusion and cut-to-length route, KB implications, and preview showing a 20 x 20 mm slotted profile."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single cut aluminum structural profile, with connectors and fasteners represented separately."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: extrusion_basic_v0
+      fit: partial
+      reason: "Generic extrusion process can cover profile forming at coarse closure level but lacks the exact 20 x 20 slot die."
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Represents aluminum extrusion family behavior, though it is not specialized to structural framing profiles."
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: supporting
+      reason: "Useful aluminum stock extrusion precedent, but tube stock differs from slotted profile geometry."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting extruded profile stock to the row length."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, end squareness, slot integrity, and straightness checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is standard aluminum profile extrusion followed by cut-to-length preparation. The structural profile bucket captures this without creating a unique item for every length."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "light modular machine-frame structural support member"
+  material: anodized_aluminum_profile_alloy
+  scale_or_capacity:
+    mass_kg: 0.22
+    bom_quantity: 2
+    row_total_mass_kg: 0.44
+    scale_class: small
+  geometry_form: slotted_square_structural_profile_20x20_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - cut_length
+    - end_squareness
+    - slot_geometry
+    - profile_straightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Local manufacture requires a matching extrusion die and process control for the small slotted profile section."
+    - "Exact alloy, temper, anodizing, and end machining are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups structural profile lengths and decides whether a generic aluminum profile stock item is sufficient."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely belongs to an aluminum structural profile stock family with size and length as guardrails."
+assumptions:
+  - "The 492.5 mm length is a cut-length variant of a reusable 20 x 20 mm profile family."
+  - "Aluminum 6061 CAD metadata and Bosch profile-family evidence are sufficient for row-level classification as aluminum extrusion stock."
+unresolved:
+  - "Exact procurement alloy, temper, anodized finish, extrusion die details, load path, connector interfaces, and end machining are not specified."
+```

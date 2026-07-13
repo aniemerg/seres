@@ -55,3 +55,95 @@ kb_implications:
   - "item_granularity: simple_part - Model row 6M1 as the reusable aluminum carriage/table part of an SMC LEFG support-guide assembly; keep the full LEFG32-S-600 as a separate purchased or assembled module if later rows combine carriage, rail, seal band, and guide hardware."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0189_6M1.md
+source_research_sha256: "271913aafd6e6e02b8713febc43c6941c985e398cfe4f38604830e78f7fff10f"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the original function, CAD-split carriage assumption, CAD-derived mass, aluminum-alloy material evidence, machining/anodizing route, and previewed mounting-hole plus guide-face geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "This row is the isolated carriage/table solid from a larger support-guide assembly. Treat the carriage as one precision part now, while leaving rail, seal band, bushings, and guide hardware to related rows and later assembly staging."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_machined_anodized_aluminum_carriage
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - drilling
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+    - assembly
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers aluminum stock removal to a carriage-like body, but does not capture guide-face tolerance and mounting-hole location control."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for guide reference faces, mounting-hole positions, and precision mechanism mating surfaces."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Anchors the anodized aluminum finish called out by the LEF-family material evidence."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of hole pattern, guide interfaces, envelope size, and visible relieved faces."
+    - process_id: assembly_basic_v0
+      fit: supporting
+      reason: "Relevant when this carriage is later combined with rail, seal band, bushings, and guide hardware into the complete support-guide module."
+  abstraction_decision: keep_original_family
+  rationale: "The source route already maps to machined and anodized aluminum carriage production. Keep the subtractive-machining family, with precision and assembly guardrails preserved for later guide-module staging."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: support and align a moving table on a passive linear guide axis
+  material: anodized_aluminum_alloy
+  scale_or_capacity:
+    mass_kg: 0.243
+    bom_quantity: 1
+    row_total_mass_kg: 0.243
+    scale_class: small
+  geometry_form: machined_carriage_table_with_mounting_holes_and_guide_faces
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - guide_face_tolerance
+    - mounting_hole_position
+    - alignment_accuracy
+    - anodized_surface_condition
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+    - machining_precision_v0
+    - surface_treatment_anodizing_v0
+  import_risk_factors:
+    - "Complete LEFG support-guide performance depends on rail, seal band, bushing elements, and vendor-specific guide hardware outside this CAD-split row."
+    - "Guide contact geometry, tolerance class, and anodized surface specification are not fully specified by accessible evidence."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until merge review compares this with related linear guidance carriage and table parts."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic small anodized aluminum linear-guide carriage if precision guardrails converge."
+assumptions:
+  - "BOM quantity is 1 and CAD-derived mass is 0.243 kg for the carriage/table solid."
+  - "The row solid maps to the aluminum-alloy carriage/table class from the SMC catalog, not to the rail and seal-band hardware."
+  - "Subtractive machining plus anodizing is sufficient as the Phase 1 closure abstraction unless later guide accuracy review blocks local manufacture."
+unresolved:
+  - "Exact aluminum alloy grade, guide-face tolerance, surface treatment specification, and bearing interface details remain unavailable."
+  - "Merge review must decide whether this carriage can share a closure item with other small linear-guidance carriage/table parts."
+```

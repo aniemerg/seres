@@ -55,3 +55,86 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 179.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0179_6E4.md
+source_research_sha256: "59697cc7694688a12785a9ab0a7caa47cdeef5964204a137cb1a31956ec325d0"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed powder-handling back-plate function, 1 mm stainless sheet geometry, CAD-derived mass, material metadata, sheet-cutting route, and simple-part KB implication."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single thin stainless sheet plate. Its closure-relevant features are outline cutting, edge cleanup, cleanliness, and fit in the 6E powder-handling area."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_sheet_cutting_deburring_cleaning
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - cutting
+    - deburring
+    - surface_finishing
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: direct
+      reason: "Directly covers cutting a thin stainless sheet profile to the irregular CAD outline."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Relevant to edge cleanup on the 1 mm stainless profile before installation near powder-handling hardware."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant to cleanliness for a stainless plate installed near powder-contact mechanisms."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers outline, thickness, and fit checks against neighboring 6E-series parts."
+  abstraction_decision: keep_original_family
+  rationale: "The source manufacturing route is already thin stainless sheet cutting, deburring, cleaning, and inspection, matching the sheet/plate cutting bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: low
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: rear boundary and support plate for powder-handling area hardware
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.0264
+    bom_quantity: 1
+    row_total_mass_kg: 0.0264
+    scale_class: small
+  geometry_form: thin_irregular_flat_sheet_plate
+merge_pool:
+  eligible: true
+  functional_purpose_key: powder_containment
+  precision_guardrails:
+    - powder_area_cleanliness
+    - edge_burr_control
+    - outline_fit
+    - stainless_material_family
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Powder-contact cleanliness and burr control may need stricter finishing than ordinary sheet covers."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this powder-handling back plate with nearby stainless powder containment and guide plates."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a small stainless powder-containment sheet plate with row-specific outline notes."
+assumptions:
+  - "The assembly STEP stainless steel material assignment is reliable enough for row conversion."
+  - "The 6E powder-handling context makes powder containment a better merge key than generic enclosure barrier."
+unresolved:
+  - "Specific stainless grade, edge tolerance, and surface passivation requirements are not resolved."
+  - "Exact mating interfaces and fastener pattern are not specified by the row evidence."
+```

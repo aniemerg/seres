@@ -53,3 +53,92 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - model as reusable standard GT2 aluminum timing pulley hardware with bore/tooth/belt-width parameters, not as a reAM250-specific purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0201_6U.md
+source_research_sha256: "2553e5affbc6be32e4479b61ce4314872c0860295017b28cec90041c8657d334"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, quantity, CAD-derived mass, Aluminum 6061 material evidence, timing pulley manufacturing route, kb implications, and preview showing a flanged toothed pulley with bore and set-screw hole."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one machined pulley body with integral teeth, flanges, bore, and set-screw feature. Any separate set screw is not represented in the row CAD evidence."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_timing_pulley_turning_tooth_cutting_and_bore_machining
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - gear_tooth_machining
+    - drilling
+    - thread_forming
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers turning, boring, and drilled set-screw features at coarse closure level."
+    - process_id: gear_cutting_basic_v0
+      fit: supporting
+      reason: "Closest anchor for cutting the GT2 tooth profile, although pulley teeth differ from ordinary gears."
+    - process_id: surface_treatment_anodizing_v0
+      fit: supporting
+      reason: "Relevant if the aluminum pulley receives an anodized/protective finish."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Relevant for bore fit, tooth count/profile, belt width, and runout checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is standard subtractive machining of a small aluminum power-transmission part with specialized tooth cutting and bore inspection."
+  process_guardrails:
+    tolerance: bore_and_tooth_profile_review
+    surface_finish: belt_contact_surface_review
+    sealing_quality: not_applicable
+    alignment_accuracy: pulley_runout_review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: synchronous belt torque transmission between motor shaft and belt
+  material: aluminum_6061
+  scale_or_capacity:
+    mass_kg: 0.00426
+    bom_quantity: 1
+    row_total_mass_kg: 0.00426
+    scale_class: small
+  geometry_form: gt2_20_tooth_6mm_belt_pulley_6_35mm_bore
+merge_pool:
+  eligible: true
+  functional_purpose_key: power_transmission
+  precision_guardrails:
+    - gt2_tooth_profile
+    - bore_6_35mm
+    - belt_width_6mm
+    - pulley_runout
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Tooth-profile tolerance, surface treatment, runout requirement, and separate set-screw inclusion are unresolved."
+    - "Very small pulley hardware may be cheaper to import unless standardized with other belt-drive components."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups timing pulleys by belt interface, bore, material, and size."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a small aluminum timing pulley."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the 0.00426 kg per-unit estimate."
+  - "The Aluminum 6061 STEP metadata is accepted as material evidence for row conversion."
+  - "Bore, belt width, and tooth profile are the critical merge guardrails."
+unresolved:
+  - "Exact tooth-profile tolerance, finish/anodizing, pulley runout, and set-screw inclusion."
+  - "Whether timing pulleys should merge into one parameterized power-transmission hardware family."
+```

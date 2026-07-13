@@ -60,3 +60,93 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 153.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0153_3S42.md
+source_research_sha256: "be4e9a4d556fe9ea42aeae4bbb96d9baa094f7212bd5c42b24b3e50a6fa34425"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed gas-outlet segment role, stainless-density planning mass, unresolved sheet-metal material evidence, cut-and-bend manufacturing route, and CAD preview showing a thin folded duct-like part."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one folded outlet segment; neighboring 3S41 through 3S48 rows should define the larger gas outlet assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sheet_metal_cutting_bending_and_outlet_assembly
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - deburring
+    - cleaning
+    - joining
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting the thin blank from sheet stock."
+    - process_id: sheet_metal_bending_and_forming_v0
+      fit: supporting
+      reason: "Covers the fold geometry visible in the CAD preview."
+    - process_id: welding_brazing_basic_v0
+      fit: supporting
+      reason: "Relevant if the gas outlet segments are joined into a sealed assembly."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to gas-path integrity after assembly-level joining."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers bend angle, edge condition, and fit checks against adjacent outlet parts."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is folded sheet-metal fabrication, which fits the sheet/plate cutting bucket with forming and assembly-level sealing support."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: route gas flow as one segment of a larger outlet assembly
+  material: unresolved_metal
+  scale_or_capacity:
+    mass_kg: 0.041
+    bom_quantity: 1
+    row_total_mass_kg: 0.041
+    scale_class: small
+  geometry_form: thin_folded_sheet_duct_segment
+merge_pool:
+  eligible: true
+  functional_purpose_key: gas_flow_routing
+  precision_guardrails:
+    - bend_angle
+    - mating_edge_fit
+    - assembly_sealing
+    - gas_path_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Material is unresolved; stainless and aluminum alternatives change mass, joining method, and gas compatibility."
+    - "Sealing performance depends on the complete gas outlet assembly, not this row alone."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups gas outlet segments and resolves assembly joining."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic folded gas-routing segment if adjacent outlet rows converge."
+assumptions:
+  - "The stainless-density mass is a conservative planning estimate while material identity remains unresolved metal."
+  - "Joining and leak testing are treated as assembly-level support processes for the larger gas outlet."
+unresolved:
+  - "Exact material, thickness tolerance, bend radius, and joining method are not specified."
+  - "The complete gas outlet assembly geometry and sealing requirement remain unresolved."
+```

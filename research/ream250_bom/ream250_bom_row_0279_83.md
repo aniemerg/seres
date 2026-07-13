@@ -55,3 +55,96 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as reusable standard ISO-KF stainless vacuum fastening hardware; keep DN size, stainless grade, hinge/wingnut tightening, cleaning, and torque requirements as parameters or notes rather than decomposing it into a complex module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0279_83.md
+source_research_sha256: "8dcf7e9d43c86f906b4a9438b847a86a641de4fa2b285243396937f97315c3d8"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read ISO-KF clamping-ring function, official complete-STEP mass basis, stainless 304 material evidence, local fabrication route, KB implication, and partial local CAD preview of the tightening/hinge feature."
+decomposition:
+  decision: simple_part
+  rationale: "Although the commercial clamp includes hinge and tightening details, it functions as one standard vacuum fastening hardware item at current closure granularity."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: formed_stainless_vacuum_clamping_ring_with_tightening_hardware
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - cutting
+    - forming
+    - drilling
+    - thread_forming
+    - precision_machining
+    - assembly
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: vacuum_seal_assembly_fabrication_v0
+      fit: supporting
+      reason: "Covers aligning vacuum seal hardware, torqueing fasteners, and verifying seal fit, though it models a broader seal assembly."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Covers forming stainless clamp body features from strip/sheet stock."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers machined hinge, lug, and tightening details after forming."
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: supporting
+      reason: "Relevant for the small threaded tightening hardware if staged separately."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers checks of clamp closure, flange fit, and tightening geometry."
+  abstraction_decision: keep_original_family
+  rationale: "The product is vacuum flange clamping hardware; the selected bucket preserves flange-fit, cleaning, tightening, and seal-interface requirements better than generic fastener production alone."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamp hardware closing small-flange vacuum fittings around an elastomer seal
+  material: stainless_steel_304_hardware_family
+  scale_or_capacity:
+    mass_kg: 0.247
+    bom_quantity: 12
+    row_total_mass_kg: 2.96
+    scale_class: small
+  geometry_form: iso_kf_dn32_dn40_clamping_ring_with_hinge_and_wingnut_tightening
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_clamping
+  precision_guardrails:
+    - flange_standard_fit
+    - clamp_closure_geometry
+    - tightening_torque
+    - elastomer_seal_compatibility
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "The local row STEP is partial; complete geometry and mass depend on the official product STEP."
+    - "Hinge, screw, and wingnut details may need separate fastener assumptions during staging."
+    - "Clamp fit and 2 Nm tightening behavior are functional acceptance guardrails."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other vacuum clamp and interface-clamping rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open; likely merge with other ISO-KF clamp hardware by function and scale."
+assumptions:
+  - "Use official complete STEP geometry for mass because the local row STEP is a partial subfeature."
+  - "Treat stainless 304/1.4301 as the resolved material family."
+  - "Treat the clamp as a single closure item unless later staging needs hinge and tightening hardware split out."
+unresolved:
+  - "Exact hinge pin, screw, and wingnut submaterials."
+  - "Detailed production route for the curved clamp body."
+  - "Acceptance dimensions for DN32-DN40 flange fit and torque behavior."
+```

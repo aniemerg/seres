@@ -54,3 +54,93 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a custom stainless plate reused within a recoater plate family rather than as a purchased module or assembly."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0177_6E2.md
+source_research_sha256: "7c0c897a88b56a313135b7c0869e7b2664eac404902c4fcc6285ec33ff1e3153"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed recoater-assembly context, mass basis, stainless material evidence, cut-and-formed manufacturing route, KB implication, and CAD preview geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one stainless side plate in a recoater plate family, not a purchased module and not an internal assembly."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_and_formed_stainless_sheet_plate
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_cutting_v0
+      fit: partial
+      reason: "Covers cutting stainless sheet and thin plate blanks for enclosure and panel-like parts."
+    - process_id: sheet_metal_bending_and_forming_v0
+      fit: supporting
+      reason: "Covers the angled profile visible in the CAD preview when the geometry is bend-compatible."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Provides a broader forming anchor if staging treats the part as formed plate instead of simple sheet bending."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers edge cleanup and basic finish after cutting and forming."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks against the recoater plate set before installation."
+  abstraction_decision: add_post_processing
+  rationale: "The source route is primarily sheet/thin-plate cutting, but closure needs an explicit forming step for the angled side-plate geometry plus finishing and inspection."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: side containment and structural plate for recoater powder-handling area
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.272
+    bom_quantity: 1
+    row_total_mass_kg: 0.272
+    scale_class: small
+  geometry_form: angled_cut_and_formed_side_plate
+merge_pool:
+  eligible: true
+  functional_purpose_key: powder_containment
+  precision_guardrails:
+    - fit_to_recoater_plate_set
+    - powder_contact_surface_finish
+    - bend_angle_accuracy
+    - stainless_grade_review
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Stainless grade is not sourced, so corrosion and powder-contact suitability need staging review."
+    - "If the angled profile is not bend-compatible, the part may need machining from stainless plate stock."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review; local sheet cutting and forming is plausible if recoater fit and surface requirements are satisfied."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with adjacent recoater plates and other powder-containment parts before assigning a closure item ID."
+assumptions:
+  - "Treat BOM quantity as 1 and row total mass as 0.272 kg."
+  - "Treat stainless steel material family as sourced, while grade and finish remain unknown."
+  - "Treat the part as a side barrier and plate member in the recoater assembly, not a separate powder module."
+unresolved:
+  - "Exact stainless grade and finish are not sourced."
+  - "The source does not confirm whether the angled profile is brake-formed, machined, stamped, made by another route."
+  - "Powder-contact tolerance and cleaning requirements are not sourced."
+```

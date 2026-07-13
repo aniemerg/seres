@@ -54,3 +54,99 @@ kb_implications:
   - "item_granularity: simple_part - Model as a reusable cut-to-length structural aluminum extrusion profile rather than a machine-specific purchased module."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0233_17AE.md
+source_research_sha256: 7c1c14c49e28346857e3c0c4bc7ed2a1336c778f2d4838b99ef4fb442218eb92
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the structural support function, catalog mass-per-meter basis, anodized aluminum alloy evidence, extrusion
+    plus cut-to-length route, KB implication, and preview showing a long constant-section slotted profile.
+decomposition:
+  decision: simple_part
+  rationale: The row is one cut length of standard aluminum structural profile. Slot geometry and cut-end finish matter, but
+    it has no internal module dependencies to decompose.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+  - extrusion
+  - cutting
+  - deburring
+  - surface_finishing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: extrusion_basic_v0
+    fit: direct
+    reason: Covers producing constant-section stock from feed material.
+  - process_id: metal_extrusion_process_v0
+    fit: partial
+    reason: Covers aluminum extrusion at a coarse level, though its current example output is not a 20x20 slotted profile.
+  - process_id: metal_cutting_basic_v0
+    fit: supporting
+    reason: Covers cutting the profile stock to the 604 mm row length.
+  - process_id: surface_treatment_anodizing_v0
+    fit: supporting
+    reason: Relevant because vendor evidence identifies anodized aluminum profile material.
+  - process_id: finishing_deburring_v0
+    fit: supporting
+    reason: Covers cut-end cleanup after sawing.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers length and profile checks before assembly.
+  abstraction_decision: keep_original_family
+  rationale: The original route is extruded aluminum profile stock, anodized finish, and cut-to-length preparation. The structural
+    profile stock bucket directly matches that closure role.
+  process_guardrails:
+    tolerance: review length, slot geometry, straightness, and end squareness
+    surface_finish: anodized surface and deburred cut ends should be preserved
+    sealing_quality: not_applicable
+    alignment_accuracy: straightness and cut-end squareness affect frame assembly
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: provide a light structural support member in a machine frame
+  material: anodized_aluminum_alloy_6060_6063_family
+  scale_or_capacity:
+    mass_kg: 0.2416
+    bom_quantity: 2
+    row_total_mass_kg: 0.4832
+    scale_class: small
+    length_mm: 604
+    profile_size_mm: 20x20
+  geometry_form: slotted_structural_profile_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+  - length
+  - slot_geometry
+  - straightness
+  - cut_end_squareness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+  - Slotted extrusion die geometry and anodizing capability may be required for faithful local substitution.
+  - Exact Rexroth ordering variant and end-machining options are not resolved.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other structural
+    frame members by function, material, profile scale, and slot/interface guardrails.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; likely converges with other small aluminum structural profile members.
+assumptions:
+- The 604 mm cut length and 20x20 profile size are sufficient identity evidence for row conversion.
+- Catalog mass per meter applies to this CAD profile family.
+- Vendor-specific Rexroth branding is not part of the closure item identity.
+unresolved:
+- Exact ordering number and end machining are not known.
+- Later staging must decide whether slot geometry is preserved explicitly in a reusable profile item.
+```

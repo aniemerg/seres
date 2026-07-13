@@ -60,3 +60,93 @@ kb_implications:
 # reAM250 BOM Row 131 - 3P1
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0131_3P1.md
+source_research_sha256: "4c9e364a03fd67a70c7aed944d1ccebd7c4f0e7c3b032dba1362d0f01574a052"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, mass basis, stainless material evidence, welded fabrication route, kb implications, and CAD preview showing a conical cyclone body with side inlet, top outlet, and lower discharge."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one fabricated cyclone separator body with welded fittings. It may later assemble with seals and ducting, but row evidence does not show a vendor control module, motor, sensor package, and internal mechanism requiring decomposition."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: welded_stainless_sheet_and_tube_vessel_fabrication
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - joining
+    - deburring
+    - surface_finishing
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sheet_metal_fabrication_v0
+      fit: partial
+      reason: "Covers cutting and forming sheet stock into vessel sections, though the conical cyclone body also needs tube fittings and weld sequencing."
+    - process_id: welded_fabrication_basic_v0
+      fit: supporting
+      reason: "Covers fit-up and welding of stainless sections and fittings into a single separator body."
+    - process_id: pressure_testing_v0
+      fit: supporting
+      reason: "Relevant for leak and pressure checks before installation in a gas/powder flow path."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Relevant for removing fabrication residue before powder-contact service."
+  abstraction_decision: substitute_process_family
+  rationale: "The evidence describes a welded stainless cyclone vessel. For closure, the dominant path is sheet and tube fabrication with forming, welding, cleaning, and leak inspection rather than a unique separator-specific machine."
+  process_guardrails:
+    tolerance: review
+    surface_finish: internal_flow_surface_review
+    sealing_quality: leak_tight_review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: cyclone separation of particulate from a gas process stream
+  material: stainless_steel_unspecified_grade
+  scale_or_capacity:
+    mass_kg: 12.6
+    bom_quantity: 1
+    row_total_mass_kg: 12.6
+    scale_class: medium
+  geometry_form: welded_conical_cyclone_vessel_with_tangential_inlet
+merge_pool:
+  eligible: true
+  functional_purpose_key: particulate_separator
+  precision_guardrails:
+    - cyclone_geometry
+    - internal_surface_finish
+    - leak_tightness
+    - connection_dimensions
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - sheet_plate_cutting_drilling
+  import_risk_factors:
+    - "Capture efficiency, particle size range, wall thickness, pressure rating, and weld acceptance criteria are unresolved."
+    - "If separation performance is calibrated tightly, later review may need vendor design data."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares separator bodies and decides whether a generic fabricated cyclone vessel is acceptable."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review before assigning an item ID; likely candidate family is a medium stainless particulate separator vessel."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the 12.6 kg per-unit estimate."
+  - "The STEP density and preview justify treating the item as a stainless welded body rather than an electronics module."
+  - "Powder-contact and gas-flow service require cleaned internal surfaces and leak checks."
+unresolved:
+  - "Specific stainless grade and wall thickness."
+  - "Particle size range, pressure drop, and separation efficiency."
+  - "Whether pressure/vacuum service requires stricter leak testing than basic pressure checks."
+```

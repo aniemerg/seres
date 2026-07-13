@@ -58,3 +58,94 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as one reusable thin metal cover plate, not a purchased module; material should remain broad until a drawing or native CAD material source resolves the alloy."
 ---
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0090_2APK1.md
+source_research_sha256: 3ccf553c9b74b0c6f1f46ffbee29f3ae359a6e4ec2d463a1f2d90874f19d1fc3
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the heater-cover function, aluminum-basis mass estimate, unresolved metal/alloy evidence, plate cutting
+    plus machining route, KB implications, and CAD preview.
+decomposition:
+  decision: simple_part
+  rationale: The row is one small cover plate in a larger heating-plate-cover group and has no internal module dependencies
+    to expose during row conversion.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: plate_cutting_cnc_machining
+  primary_process_bucket: sheet_plate_cutting_drilling
+  supporting_processes:
+  - stock_preparation
+  - cutting
+  - drilling
+  - deburring
+  - dimensional_inspection
+  - thread_forming
+  candidate_existing_processes:
+  - process_id: sheet_metal_cutting_v0
+    fit: direct
+    reason: Covers sheet and plate cutting for flat parts.
+  - process_id: drilling_basic_v0
+    fit: supporting
+    reason: Covers hole creation when the row needs bolt, locating, and passage features.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers dimensional checks before staging selects the final recipe.
+  - process_id: fastener_kit_small_fabrication_v0
+    fit: supporting
+    reason: Relevant when the row depends on thread geometry.
+  abstraction_decision: add_post_processing
+  rationale: The cover is primarily a thin plate with cutouts and holes. Use the shared sheet/plate cutting bucket, then add
+    light machining for rib, pocket, and fit features when required.
+  process_guardrails:
+    tolerance: review hole pattern, central clearances, and parent-cover fit
+    surface_finish: deburr cut edges and holes; heater-adjacent cleanliness may matter
+    sealing_quality: not_applicable
+    alignment_accuracy: perimeter fastener positions should align with sibling cover plates
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: close the underside of a small heating-plate-area cover while providing fastener points and central
+    clearances
+  material: unknown_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.058
+    bom_quantity: 1
+    row_total_mass_kg: 0.058
+    scale_class: small
+  geometry_form: thin_square_cover_plate_with_holes_and_ribs
+merge_pool:
+  eligible: true
+  functional_purpose_key: heater_area_cover_closure
+  precision_guardrails:
+  - fastener_hole_pattern
+  - central_clearance_geometry
+  - heater_area_fit
+  - rib_pocket_geometry
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - sheet_plate_cutting_drilling
+  import_risk_factors:
+  - Exact metal and alloy is unresolved; aluminum is only the planning-density assumption.
+  - Heater-adjacent location may impose thermal, flatness, and cleanliness constraints not visible in the row evidence.
+  post_merge_decision_notes: Final import/local decision is deferred; compare against other small cover plates after merge
+    review and preserve the hole-pattern guardrails if merged.
+kb_staging:
+  proposed_item_id: null
+  notes: Wait for merge review before assigning an item ID because this may converge with other small heater-cover and machine
+    cover plates.
+assumptions:
+- The CAD solid is the complete per-unit row item with no hidden inserts and fasteners.
+- The triangular rib and pocket features are functional enough to preserve as machining/post-processing guardrails.
+- A broad metal/alloy identity is preferable until a source drawing resolves the material.
+unresolved:
+- Exact alloy and grade is unknown.
+- The two central circular clearances and shallow rib/pocket features are not explained by available source text.
+```

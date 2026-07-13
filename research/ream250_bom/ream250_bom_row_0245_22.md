@@ -55,3 +55,102 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - installed black silicone sealant bead; model as a replaceable or applied part/applied material rather than a reusable part or separate molded gasket."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0245_22.md
+source_research_sha256: 26546a33058566570da002c980336dcc0008bff9ab2e1f75d50d554887906afc
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the bottom perimeter sealing function, CAD-derived cured bead mass, Liqui Moly silicone sealant evidence,
+    dispensing and curing route, KB implication, and preview showing a thin square perimeter seal.
+decomposition:
+  decision: simple_part
+  rationale: The row is one installed sealant bead at an interface. It has no internal assembly dependencies, although the
+    source consumable chemistry can stay an upstream material concern for later staging.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: sealant_dispensing_and_curing
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+  - cleaning
+  - elastomer_forming
+  - curing
+  - assembly
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: seal_installation_v0
+    fit: partial
+    reason: Covers installing seals and gaskets with general tools, but this row is a dispensed bead instead of a preformed
+      seal.
+  - process_id: potting_and_sealing_v0
+    fit: partial
+    reason: Covers compound application and curing for sealing work, though its default scope is electronics potting.
+  - process_id: drying_and_curing_v0
+    fit: supporting
+    reason: Covers the curing portion after the silicone bead is applied and compressed.
+  - process_id: cleaning_basic_v0
+    fit: supporting
+    reason: Surface cleaning is required before applying the silicone sealant.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when the sealed interface must be checked for continuity and leakage.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers visual and dimensional checks of bead continuity, compression, and excess squeeze-out.
+  abstraction_decision: keep_original_family
+  rationale: The original route is already sealant dispensing, mating-surface assembly, and curing, so the polymer/elastomer
+    forming and dispensing bucket is the direct closure handle.
+  process_guardrails:
+    tolerance: bead path and compressed thickness should match the roughly square interface geometry
+    surface_finish: mating surfaces need cleaning; cut-edge finish is not_applicable
+    sealing_quality: continuity, adhesion, cure state, and compression are function-critical
+    alignment_accuracy: perimeter path alignment matters, but precision machine alignment is not indicated
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: seal a square bottom machine interface with an applied cured silicone bead
+  material: silicone_sealant_cured_silicone_rubber
+  scale_or_capacity:
+    mass_kg: 0.049
+    bom_quantity: 1
+    row_total_mass_kg: 0.049
+    scale_class: small
+  geometry_form: thin_square_perimeter_sealant_bead
+merge_pool:
+  eligible: true
+  functional_purpose_key: interface_sealing
+  precision_guardrails:
+  - seal_path_geometry
+  - compressed_bead_thickness
+  - adhesion
+  - cure_state
+  - leak_integrity
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+  - Exact silicone formulation, fillers, and cure schedule are not specified by the row evidence.
+  - Local closure may need a silicone precursor path plus dispensing and curing capability.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other applied
+    sealant beads and gasket-like interface seals.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave final item ID open for merge review; this may merge with other applied silicone interface seals if service
+    conditions and bead scale are compatible.
+assumptions:
+- The CAD body represents the installed cured bead after compression, not the full purchased tube of sealant.
+- Silicone rubber density is an acceptable planning constant for the cured bead mass.
+- The source product is represented as broad silicone sealant chemistry rather than a vendor-specific SKU.
+unresolved:
+- Exact compound formulation, cure time, compression target, and service temperature limits are unknown.
+- The sealed interface pressure, leakage requirement, and replacement interval are not stated.
+```

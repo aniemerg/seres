@@ -58,3 +58,102 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a replaceable or applied part adhesive application or cured glue bead tied to an assembly step, not as a standalone reusable part or purchased module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0170_6B3.md
+source_research_sha256: f732177eae2853ce5177d1527f385ba1d6bd915f41764b8fa40d115e75e5ae30
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read the original row evidence, CAD-derived mass and bounding box, material uncertainty, inferred adhesive application
+    route, row-6 neighborhood, and preview image showing a long thin bead before conversion.
+decomposition:
+  decision: simple_part
+  rationale: The row represents a tiny applied cured adhesive bead and glue strip with no internal subparts. For closure it
+    should be treated as an applied material/assembly feature, not a reusable mechanical part and vendor module.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: adhesive_application_curing
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+  - elastomer_forming
+  - curing
+  - cleaning
+  - assembly
+  - dimensional_inspection
+  - joining
+  candidate_existing_processes:
+  - process_id: elastomer_molding_basic_v0
+    fit: partial
+    reason: Covers basic elastomer forming when the row becomes a local seal element.
+  - process_id: potting_and_sealing_v0
+    fit: partial
+    reason: Covers dispensed sealing material and encapsulation style work.
+  - process_id: drying_and_curing_v0
+    fit: supporting
+    reason: Covers curing after polymer and elastomer placement.
+  - process_id: seal_installation_v0
+    fit: supporting
+    reason: Covers installation when the row is treated as a seal in an assembly.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: keep_original_family
+  rationale: 'The source route already belongs to the shared polymer dispensing bucket: surface preparation, bead dispensing,
+    fixturing, cure, and inspection.'
+  process_guardrails:
+    tolerance: review - bead placement and thickness affect retention but no machined tolerance is stated
+    surface_finish: required - substrate cleaning, abrasion, masking, and primer may be needed
+    sealing_quality: not_primary_seal - no evidence that this bead is a pressure and sealed boundary seal
+    alignment_accuracy: required - adjacent recoater components must be held in position during cure
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: bond and retain adjacent recoater gliding-surface, ceramic-pole, and blade-area elements
+  material: unspecified_adhesive_polymer
+  scale_or_capacity:
+    mass_kg: 0.000282
+    bom_quantity: 1
+    row_total_mass_kg: 0.000282
+    scale_class: tiny
+  geometry_form: long_narrow_dispensed_bead
+merge_pool:
+  eligible: true
+  functional_purpose_key: bonded_component_retention
+  precision_guardrails:
+  - substrate_compatibility
+  - bond_strength
+  - cure_schedule
+  - cleanliness_outgassing
+  - alignment_during_cure
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+  - adhesive chemistry is unspecified
+  - service compatibility, outgassing, service temperature, primer, and cure schedule are unknown
+  - local polymer and adhesive synthesis may be outside near-term closure scope
+  post_merge_decision_notes: Final import/local decision is deferred until adhesive rows are merged and the closure model
+    decides the condition that adhesive chemistry is locally produced, imported, and replaced by a mechanical retention feature.
+kb_staging:
+  proposed_item_id: null
+  notes: Defer item ID until merge review; likely converges with other applied adhesive and bond-retention rows rather than
+    becoming a unique 6B3 item.
+assumptions:
+- The STEP solid represents one cured adhesive bead for BOM quantity 1.
+- The representative cured adhesive density and tiny mass are adequate for closure-scale accounting despite unknown chemistry.
+- General adhesive application equipment plus labor/fixturing can reproduce the installed feature if the adhesive itself is
+  available.
+unresolved:
+- Actual adhesive family, substrate pair, primer, cure method, service temperature, and outgassing requirements are not identified.
+- The exact bonded interfaces in the recoater subassembly are not visible from the isolated row export.
+- Later staging must decide the condition that the lunar abstraction keeps adhesive bonding, substitutes mechanical retention,
+  and treats adhesive as an import.
+```

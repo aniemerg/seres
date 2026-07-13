@@ -55,3 +55,89 @@ kb_implications:
   - "item_granularity: simple_part - Model later as a reusable small stainless machined sleeve/bushing rather than a machine-specific assembly or purchased module."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0175_6D.md
+source_research_sha256: "99f48c436a123681df06a5461bc9cad5b00c52ca2440905f06757b8c66d05951"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed rod-sleeve function, small cylindrical CAD geometry with collar, stainless material metadata, CAD-derived mass, turning-based manufacturing route, and reusable sleeve/bushing KB implication."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one small stainless sleeve/bushing. Collar, bore, flats, chamfers, and end faces are integral machined features."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: precision_turned_stainless_sleeve
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - precision_machining
+    - deburring
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_process_turning_v0
+      fit: direct
+      reason: "Directly covers turning the small cylindrical sleeve, collar, and end faces from bar stock."
+    - process_id: machining_process_boring_v0
+      fit: supporting
+      reason: "Relevant if the sleeve has an internal rod passage with controlled bore size."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant to bore fit, outside diameter, and wear-contact surfaces."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Relevant to cutting stainless rod stock before turning."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers diameter, length, bore, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is a lathe-turned stainless sleeve from bar stock with secondary feature cleanup, directly matching general subtractive machining."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: rod guidance and spacing sleeve for a machine mechanism
+  material: stainless_steel
+  scale_or_capacity:
+    mass_kg: 0.00652
+    bom_quantity: 1
+    row_total_mass_kg: 0.00652
+    scale_class: small
+  geometry_form: short_turned_cylindrical_sleeve_with_collar
+merge_pool:
+  eligible: true
+  functional_purpose_key: linear_guidance
+  precision_guardrails:
+    - bore_diameter
+    - outside_diameter
+    - wear_surface_finish
+    - stainless_grade
+    - rod_interface_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Stainless grade, bore tolerance, and wear surface finish are unresolved."
+    - "If the sleeve is a precision bearing surface, it may need stricter machining than an ordinary spacer."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this sleeve with other small rod guides, bushings, and spacers."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable as a small stainless machined sleeve/bushing closure item."
+assumptions:
+  - "The CAD name and geometry are sufficient to treat the row as a rod sleeve/bushing."
+  - "Uniform stainless density from STEP metadata is acceptable for mass planning."
+unresolved:
+  - "Exact stainless grade, bore specification, load case, wear requirement, surface finish, heat treatment, and parent assembly interface remain unresolved."
+```

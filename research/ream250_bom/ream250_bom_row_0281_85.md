@@ -54,3 +54,94 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 281.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0281_85.md
+source_research_sha256: "9e12581e32d10e43d55548a57e92410916e26f7bf7f3c420a4886e2256425139"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, catalog mass, material notes for polyester insert plus unresolved housing/seals, module-level route, kb implications, and preview showing a canister filter with DN40 ports and cover/clasp features."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a complete dust separator/filter module with housing, ports, cover/clasp hardware, seals, and replaceable filter media. Those closure dependencies need decomposition before item merging."
+  proposed_subparts:
+    - vacuum_tight_filter_housing_with_dn40_ports
+    - polyester_filter_insert
+    - seal_set
+    - cover_clasp_and_fastener_hardware
+process_abstraction:
+  original_process_family: vendor_vacuum_dust_separator_module_with_replaceable_filter_insert
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - assembly
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: filtration_basic_v0
+      fit: supporting
+      reason: "Anchors the functional filtration operation, but does not manufacture the SAS 40 hardware module."
+    - process_id: sealing_and_assembly_basic_v0
+      fit: supporting
+      reason: "Relevant to installing seals, cover, and filter insert during module assembly."
+    - process_id: pressure_test_basic_v0
+      fit: supporting
+      reason: "Relevant to checking housing and port integrity; vacuum leak testing may be stricter."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Relevant for port dimensions, cover fit, and filter insert inspection."
+  abstraction_decision: needs_human
+  rationale: "The source item is a catalog vacuum accessory with filter media, housing, seals, and serviceable cover hardware. Row conversion should not collapse it into a single simple fabrication process."
+  process_guardrails:
+    tolerance: review
+    surface_finish: sealing_surface_review
+    sealing_quality: vacuum_leak_tight_review
+    alignment_accuracy: port_alignment_review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: particulate separation from a gas line to protect downstream equipment
+  material: mixed_polyester_filter_media_metal_housing_and_seals
+  scale_or_capacity:
+    mass_kg: 2.1
+    bom_quantity: 1
+    row_total_mass_kg: 2.1
+    scale_class: small
+  geometry_form: dn40_canister_dust_separator_filter_module
+merge_pool:
+  eligible: false
+  functional_purpose_key: particulate_separator
+  precision_guardrails:
+    - dn40_interface_geometry
+    - filter_media_grade
+    - leak_tightness
+    - serviceable_cover_hardware
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Housing alloy, seal elastomer, filter-media pleat construction, leak acceptance, and cover/clasp details are unresolved."
+    - "Catalog module may remain imported until filter media and vacuum housing fabrication are explicitly modeled."
+  post_merge_decision_notes: "Final import/local decision is deferred until decomposition separates housing, ports, filter insert, seals, and cover hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item ID during row conversion; review with other particulate separator and vacuum filter rows first."
+assumptions:
+  - "BOM quantity is 1, so row total mass equals the 2.1 kg catalog mass."
+  - "The row represents the full SAS 40 module rather than only the polyester insert."
+  - "DN40 ISO-KF interface and serviceable filter insert should be preserved in later decomposition."
+unresolved:
+  - "Housing/flange material, seal elastomer, filter insert construction, and clasp hardware material."
+  - "Leak-rate, pressure rating, filter replacement interval, and cleaning specification."
+  - "Whether the later KB should stage a generic DN40 dust separator module as an import boundary."
+```

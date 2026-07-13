@@ -50,3 +50,98 @@ how_to_make:
 kb_implications:
   - "item_granularity: complex_module - Model this row as one calibrated FCX-TR oxygen-transmitter complex module for this pass; split later only if oxygen-sensor/electronics manufacturing becomes a priority."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0163_3W.md
+source_research_sha256: "7b243156d780162ef9ef47dc6cbb14c6cb9d269d8c2550d6af9a1d73987e1a39"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed oxygen transmitter function, vendor mass and dimensions, mixed stainless/zirconia/electronics material evidence, integration and manufacturing route notes, and CAD preview showing a compact threaded cylindrical transmitter."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a calibrated sensor transmitter module with housing, zirconia sensing element, electronics, connector, seals, and calibration dependencies that matter for closure."
+  proposed_subparts:
+    - stainless_threaded_transmitter_housing
+    - zirconia_oxygen_sensing_element
+    - control_amplifier_electronics
+    - m8_electrical_connector
+    - seals_and_protection_hardware
+process_abstraction:
+  original_process_family: calibrated_zirconia_sensor_transmitter_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - ceramic_sintering
+    - assembly
+    - calibration
+  candidate_existing_processes:
+    - process_id: import_receiving_basic_v0
+      fit: direct
+      reason: "Appropriate near-term closure handle if the calibrated transmitter remains an imported precision module."
+    - process_id: electronic_assembly_v0
+      fit: partial
+      reason: "Covers PCB/enclosure assembly patterns, but lacks the zirconia sensing element, heater controls, connector details, and calibration gas response."
+    - process_id: calibration_and_test_basic_v0
+      fit: partial
+      reason: "Covers basic calibration and functional testing, but row-specific oxygen range and 4-20 mA verification need explicit procedures."
+    - process_id: ceramic_sintering_high_temp_v0
+      fit: poor_fit
+      reason: "Only a coarse ceramic process anchor for the zirconia element; sensor electrodes, heater structure, and gas-response behavior are missing."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for the stainless threaded transmitter housing and process adapter if decomposed for local manufacture."
+  abstraction_decision: substitute_process_family
+  rationale: "The source item is not a simple machined housing; the closure abstraction should defer local manufacture until the sensor, electronics, connector, and calibration dependencies are separated."
+  process_guardrails:
+    tolerance: high
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: oxygen concentration transmitter with industrial current output
+  material: mixed_stainless_steel_zirconia_electronics_polymer
+  scale_or_capacity:
+    mass_kg: 0.25
+    bom_quantity: 1
+    row_total_mass_kg: 0.25
+    scale_class: small
+  geometry_form: threaded_cylindrical_sensor_transmitter_module
+merge_pool:
+  eligible: false
+  functional_purpose_key: oxygen_concentration_measurement
+  precision_guardrails:
+    - sensing_element_materials
+    - calibration_accuracy
+    - electronics_functionality
+    - connector_interface
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Zirconia oxygen sensing element fabrication is specialized."
+    - "Integrated heater, amplifier electronics, connector hardware, and factory calibration are unresolved."
+    - "Acceptance testing requires controlled oxygen calibration gas and 4-20 mA verification."
+  post_merge_decision_notes: "Final import/local decision is deferred; perform decomposition review before merging with generic sensor suites."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item in row conversion; stage as a precision sensor module pending decomposition."
+assumptions:
+  - "Vendor weight of 0.25 kg is the authoritative planning mass for the assembled transmitter."
+  - "The row should remain one functional sensor module in this pass, while subparts are listed for later closure analysis."
+  - "The stray BOM wording mentioning a valve is treated as row metadata noise because the CAD, URL, manufacturer, and manual all identify the oxygen transmitter."
+unresolved:
+  - "Full material breakdown for electrodes, PCB, connector contacts, seals, potting, and internal fasteners is unavailable."
+  - "Sensor fabrication route, heater design, calibration procedure limits, and acceptance-test thresholds need future research."
+```

@@ -57,3 +57,99 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 284.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0284_88.md
+source_research_sha256: "eb50039a4c587c0979a65e3fa325818878d3e6f2f10393d4b8cbd59126615a79"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed Pfeiffer/Busch TTR 101 pressure-gauge identity, vendor mass, multi-material sensor and interface materials, compact gauge CAD preview, inferred production workflow, and complex-module KB implication."
+decomposition:
+  decision: decompose_into_parts
+  rationale: "The row is a calibrated pressure-sensing instrument with vacuum interface, feedthrough, sensing elements, electronics, sealing, and calibration dependencies. Local closure would need a focused sensor sub-BOM rather than a single-part recipe."
+  proposed_subparts:
+    - stainless_dn16_kf_gauge_interface
+    - glass_feedthrough_and_metal_seal
+    - tungsten_pirani_sensing_element
+    - capacitive_pressure_sensing_element
+    - signal_conditioning_electronics_and_connector
+    - calibration_and_acceptance_workflow
+process_abstraction:
+  original_process_family: calibrated_vacuum_pressure_gauge_manufacture
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+    - decomposition_required
+    - import_assumption
+    - precision_machining
+    - assembly
+    - cleaning
+    - leak_testing
+    - calibration
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: sensor_calibration_v0
+      fit: supporting
+      reason: "Relevant to pressure-sensor calibration after a future gauge sub-BOM exists."
+    - process_id: calibration_basic_v0
+      fit: supporting
+      reason: "Generic calibration anchor for instrument acceptance, but this gauge needs pressure-range-specific references."
+    - process_id: electronic_assembly_v0
+      fit: supporting
+      reason: "Relevant to signal-conditioning electronics and connector integration."
+    - process_id: electrical_feedthrough_vacuum_fabrication_v0
+      fit: supporting
+      reason: "Relevant to the glass feedthrough and sealed electrical interface in the gauge head."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to validating the sealed gauge head and interface after assembly."
+  abstraction_decision: substitute_process_family
+  rationale: "The source evidence is a purchased calibrated instrument. Phase 1 should retain it as a precision component pending decomposition, because assigning ordinary machining would hide sensing, electronics, sealing, and calibration dependencies."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: calibrated pressure sensing instrument for machine pressure monitoring
+  material: multi_material_pressure_gauge_assembly
+  scale_or_capacity:
+    mass_kg: 0.12
+    bom_quantity: 1
+    row_total_mass_kg: 0.12
+    scale_class: small
+  geometry_form: compact_gauge_body_with_dn16_kf_interface_and_electrical_connector
+merge_pool:
+  eligible: false
+  functional_purpose_key: pressure_sensing
+  precision_guardrails:
+    - pressure_measurement_range
+    - sensor_calibration
+    - sealed_feedthrough
+    - electronics_integration
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - precision_component_import_decompose_later
+  import_risk_factors:
+    - "Tungsten sensing element, capacitive sensor, glass feedthrough, sealed interface, electronics, and calibration workflow are unresolved closure dependencies."
+    - "CAD geometry is simplified and not suitable for material-volume allocation."
+  post_merge_decision_notes: "Final import/local decision is deferred. A sensor decomposition review should decide whether pressure gauges remain imported modules during near-term staging."
+kb_staging:
+  proposed_item_id: null
+  notes: "Do not assign a final closure item ID during row conversion; decompose the calibrated gauge module before merge with other sensing instruments."
+assumptions:
+  - "The datasheet weight applies to the one physical gauge represented by the row."
+  - "Vacuum-interface material details are source-backed, while housing and electronics materials remain incomplete."
+unresolved:
+  - "Full sub-BOM, housing materials, PCB materials, connector materials, factory assembly workflow, calibration references, and acceptance criteria remain unresolved."
+```

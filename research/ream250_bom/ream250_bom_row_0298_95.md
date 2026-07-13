@@ -57,3 +57,89 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 298.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0298_95.md
+source_research_sha256: "50a84188da522f302aab5510d323e8c8a165acbe19f6c5c88f8f64316d07c59a"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the structural profile function, aluminum mass basis, material metadata, extrusion and cut-to-length route, KB implications, and CAD preview showing a 60 x 60 mm slotted profile at 740 mm length."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single aluminum structural profile cut length, with connectors and end hardware represented by other rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - cutting
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: extrusion_basic_v0
+      fit: partial
+      reason: "Generic extrusion process can represent profile forming at a coarse level but lacks the exact 60 x 60 slot die."
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers aluminum extrusion family behavior, though currently framed around fin extrusion rather than structural framing profiles."
+    - process_id: aluminum_tube_stock_extrusion_v0
+      fit: supporting
+      reason: "Relevant aluminum stock extrusion precedent, but tube stock is not the same profile geometry."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cutting extruded profile stock to the 740 mm row length."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers cut length, squareness, slot integrity, and profile fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is aluminum profile extrusion followed by cut-to-length preparation. The canonical structural profile stock bucket preserves that closure handle without creating a unique item for each nearby length."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "modular machine-frame structural support member"
+  material: aluminum
+  scale_or_capacity:
+    mass_kg: 2.889
+    bom_quantity: 2
+    row_total_mass_kg: 5.78
+    scale_class: large
+  geometry_form: slotted_square_structural_profile_60x60_cut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - cut_length
+    - end_squareness
+    - slot_geometry
+    - profile_straightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Local manufacture requires an extrusion die and aluminum profile process control for the slotted 60 x 60 mm section."
+    - "Exact alloy, temper, anodizing, and profile tolerance are unresolved."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups structural profile lengths and decides whether a generic aluminum profile stock item is sufficient."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely belongs to a reusable aluminum structural profile family with length as a quantity/detail."
+assumptions:
+  - "The 740 mm length is a cut-length variant of a reusable 60 x 60 mm profile family."
+  - "Aluminum STEP metadata and CAD volume are accepted for row-level mass and material classification."
+unresolved:
+  - "Specific aluminum alloy, temper, anodized finish, extrusion die details, load path, and connector interfaces are not specified."
+```

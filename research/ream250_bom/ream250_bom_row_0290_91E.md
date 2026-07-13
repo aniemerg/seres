@@ -59,3 +59,92 @@ kb_implications:
 ---
 
 Research result for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0290_91E.md
+source_research_sha256: "e22247d6edfc05332ee7ba7fafdf6650095c96ea51d6f368e8a7f73fdf49c82d"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the structural perimeter frame function, 18.9 kg mass estimate, stainless DIN 59370 angle-stock evidence, cut-and-join frame fabrication route, KB implication, and CAD preview showing a large closed rectangular angle frame."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one fabricated structural frame made from repeated profile stock segments; it can remain one closure item while the stock and joining route are handled in process modeling."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cut_joined_structural_angle_stock_frame
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - joining
+    - deburring
+    - grinding_lapping
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_cutting_basic_v0
+      fit: partial
+      reason: "Covers cutting profile stock to length before frame joining."
+    - process_id: welding_and_fabrication_v0
+      fit: partial
+      reason: "Covers fitting, joining, cleanup, and general frame fabrication from stock."
+    - process_id: welding_structural_v0
+      fit: supporting
+      reason: "Relevant if the closed frame uses welded corners and needs structural joint control."
+    - process_id: finishing_deburring_v0
+      fit: supporting
+      reason: "Covers deburring and grinding exposed cut and joined edges."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers frame squareness, flatness, and mounting-interface checks."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already profile stock cut to frame lengths and joined into a rectangular structure, matching the structural profile stock fabrication bucket."
+  process_guardrails:
+    tolerance: moderate
+    surface_finish: low_to_moderate
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: "stiff structural perimeter frame and mounting support"
+  material: stainless_steel_angle_stock_family
+  scale_or_capacity:
+    mass_kg: 18.9
+    bom_quantity: 1
+    row_total_mass_kg: 18.9
+    scale_class: large
+  geometry_form: closed_rectangular_l_angle_profile_frame
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_member
+  precision_guardrails:
+    - frame_squareness
+    - flatness
+    - profile_cross_section
+    - stainless_material_family
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "DIN 59370 sharp-edged profile stock availability and stainless grade remain unresolved at row-specific level."
+    - "Large frame squareness and flatness may require welding fixtures and post-join inspection."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other structural frames and profile-stock members."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for a generic large stainless structural frame made from angle profile stock."
+assumptions:
+  - "BOM quantity is 1 and row total mass is treated as 18.9 kg from the stainless angle-stock estimate."
+  - "The frame is modeled as cut and joined profile stock rather than a monolithic machined plate."
+  - "DIN 59370 50x50x5 profile geometry is important to merge identity because it drives stock form and mass."
+unresolved:
+  - "Exact stainless grade, corner joint type, weld detail, fixture requirements, and final flatness tolerance are unknown."
+  - "The parent subsystem and precise load path are not resolved from the row evidence."
+```

@@ -58,3 +58,95 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 207.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0207_8B.md
+source_research_sha256: "6fb9bd3542839aa56edde1b74b659bf3ffe5f44ca4fbad17b960a5bd0e446af5"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the DN40 ISO-KF elbow function, CAD-derived per-unit and row-total mass basis, Pfeiffer aluminum EN AW-6082 material evidence, inferred vacuum fitting manufacturing route, and preview showing a right-angle tube with KF-style flanged ends."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one-piece elbow fitting hardware; BOM quantity five represents repeated fittings rather than subparts."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_vacuum_elbow_fabrication
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - precision_machining
+    - deburring
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers gas/vacuum fitting context and leak checks, but is oriented toward system installation."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for KF flange lips, centering diameters, sealing faces, and clamp interfaces."
+    - process_id: tube_bending_process_v0
+      fit: supporting
+      reason: "Relevant if the elbow body starts from bent tube stock."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to near-net forming of the elbow body before finish machining."
+    - process_id: leak_testing_v0
+      fit: direct
+      reason: "Matches vacuum leak testing for the finished elbow fitting."
+    - process_id: pressure_testing_v0
+      fit: supporting
+      reason: "Provides an alternate pressure/vacuum integrity check when helium testing is not modeled in detail."
+  abstraction_decision: substitute_process_family
+  rationale: "The source item is a vendor vacuum elbow; for closure analysis it belongs with reusable plumbing connector fabrication/testing rather than a product-specific route."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: standard
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: right-angle vacuum line connection preserving ISO-KF clamp interfaces
+  material: aluminum_6082
+  scale_or_capacity:
+    mass_kg: 0.141
+    bom_quantity: 5
+    row_total_mass_kg: 0.707
+    scale_class: small
+  geometry_form: ninety_degree_elbow_with_integral_dn40_iso_kf_flanges
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - kf_flange_geometry
+    - sealing_face_finish
+    - leak_tightness
+    - internal_passage_continuity
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "ISO-KF interface precision and vacuum cleanliness may require tighter controls than ordinary pipe elbows."
+    - "Commercial route could use a near-net blank not represented in current KB processes."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this with other KF/ISO plumbing connector rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other DN40 and similar vacuum elbow/connector rows; preserve quantity five as BOM usage."
+assumptions:
+  - "The CAD solid is treated as the complete per-unit elbow at 0.141 kg."
+  - "EN AW-6082 aluminum is retained from the Pfeiffer product evidence."
+unresolved:
+  - "Exact commercial manufacturing route, surface treatment, cleaning specification, and leak-rate criterion are not specified."
+  - "Whether lunar staging should distinguish DN40 elbow geometry from other plumbing connector sizes is deferred to merge review."
+```

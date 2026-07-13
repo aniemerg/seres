@@ -53,3 +53,93 @@ kb_implications:
   - "item_granularity: simple_part - Model as a reusable stainless ISO-K DN 63 straight full nipple / pipe spool rather than a reAM250-specific assembly."
 ---
 
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0121_3J.md
+source_research_sha256: "e0a6961cc6b74ddbbd0fb6d8ed742e6689bac4409177cac39ed5ee21dac5b1f8"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the row function, CAD-derived mass basis, stainless 1.4301/AISI 304 material evidence, inferred tube/flange fabrication route, and CAD geometry showing a straight hollow ISO-K DN 63 flanged spool."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one repeated vacuum pipe spool/full nipple with no internal subassembly exposed by the evidence; BOM quantity 2 represents duplicate simple parts."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: tube_flange_fabrication_and_leak_testing
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - cutting
+    - forming
+    - joining
+    - precision_machining
+    - deburring
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers pipe/tube fitting work and pressure/leak checks, but is written for system installation rather than fabrication of a standalone ISO-K nipple."
+    - process_id: tube_stock_forming_v0
+      fit: supporting
+      reason: "Relevant to producing/preparing tube stock before flange-end fabrication."
+    - process_id: welding_brazing_basic_v0
+      fit: supporting
+      reason: "Supports the inferred route where separate stainless flange rings are joined to a tube spool."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Covers finish machining of flange lips, sealing faces, and interface dimensions if formed parts need final tolerance control."
+    - process_id: leak_testing_v0
+      fit: direct
+      reason: "Directly covers leak testing and sealed-joint checks needed for vacuum plumbing service."
+    - process_id: cleaning_basic_v0
+      fit: supporting
+      reason: "Vacuum-facing stainless bore and sealing surfaces require cleaning after fabrication."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is a commercial Pfeiffer vacuum nipple; for closure analysis it is better handled as a reusable stainless plumbing connector made from tube/flange features and verified by dimensional inspection and leak testing."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: straight pipe spool connecting two ISO-K DN 63 vacuum plumbing interfaces
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.914
+    bom_quantity: 2
+    row_total_mass_kg: 1.828
+    scale_class: small
+  geometry_form: straight_hollow_cylindrical_tube_with_iso_k_flanged_ends
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - sealing_face_finish
+    - iso_k_interface_dimensions
+    - leak_tightness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "High-vacuum sealing quality and cleanliness requirements may force tighter process control than ordinary pipe fabrication."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review compares this ISO-K spool with other plumbing connector rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave item identity open for merge review with other vacuum/gas plumbing connectors; preserve DN 63 ISO-K and stainless evidence as guardrails."
+assumptions:
+  - "BOM quantity 2 is represented as two identical simple parts at 0.914 kg each."
+  - "The local closure route may use welded/formed flange ends plus finish machining even though the Pfeiffer factory process is not published."
+unresolved:
+  - "Exact manufacturing route for the commercial nipple, including whether flange lips are formed, one-piece machined, welded from separate rings, is unresolved."
+  - "Required leak-rate class and sealing-face finish are not specified in the row evidence and need review before final KB staging."
+```

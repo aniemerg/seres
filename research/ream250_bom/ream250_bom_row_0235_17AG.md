@@ -61,3 +61,90 @@ kb_implications:
 # reAM250 BOM Row 235 - 17AG
 
 Research result for the leased reAM250 BOM row.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0235_17AG.md
+source_research_sha256: "e8bb0026cda1fe8fc1f22491e0f0520fcafe4c817c0efcf1f572a38187a2a364"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read function, mass basis, material evidence, manufacturing route, CAD proxy, image preview, and KB implications before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "Single cut length of slotted structural stock with no internal closure dependencies; length ambiguity belongs in later BOM notes."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: aluminum_profile_extrusion_cut_to_length
+  primary_process_bucket: structural_profile_stock_fabrication_cutting
+  supporting_processes:
+    - extrusion
+    - heat_treatment
+    - surface_finishing
+    - cutting
+    - deburring
+    - drilling
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: metal_extrusion_process_v0
+      fit: partial
+      reason: "Covers extrusion of metal stock, while the slotted die details and anodized finish remain staging guardrails."
+    - process_id: cutting_basic_v0
+      fit: supporting
+      reason: "Covers cut-to-length work after stock fabrication."
+    - process_id: surface_finishing_v0
+      fit: supporting
+      reason: "Covers finish control after extrusion and cutting when slot wear resistance matters."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks for length, square section, slot condition, and frame fit."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already stock extrusion with finishing and cut-to-length work; the bucket preserves that closure handle without creating row-specific profile items."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural support member for machine framing
+  material: anodized_aluminum_strut_stock
+  scale_or_capacity:
+    mass_kg: 0.9369
+    bom_quantity: 2
+    row_total_mass_kg: 1.8738
+    scale_class: sub_1kg_each
+  geometry_form: slotted_square_strut_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_frame_support_member
+  precision_guardrails:
+    - length_accuracy
+    - slot_geometry
+    - squareness
+    - frame_alignment
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - structural_profile_stock_fabrication_cutting
+  import_risk_factors:
+    - "Complex slotted die and anodized finish may be deferred if local profile stock capability is absent."
+    - "Exact length and row identity use a proxy STEP file, so staging should preserve uncertainty."
+  post_merge_decision_notes: "Final import and local manufacture decision is deferred until merge review compares matching frame support rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely candidate for shared structural strut stock with row-specific length captured in BOM notes."
+assumptions:
+  - "The row uses the same aluminum strut family as the matched proxy profile."
+  - "Profile length variation can be represented through BOM quantity and notes rather than a unique closure item."
+  - "End drilling and tapping are optional secondary steps pending later drawing evidence."
+unresolved:
+  - "Canonical 17AG STEP geometry is missing; current geometry comes from a similar proxy export."
+  - "Filename length and proxy measured length disagree, so final staging must carry length uncertainty."
+```

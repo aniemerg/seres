@@ -53,3 +53,95 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model as a reusable DN63 ISO-K stainless spring-bellows connector/hose item; capture bellows forming, flange joining, cleaning, and leak testing in the manufacturing route rather than as a complex module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0118_3G.md
+source_research_sha256: "aa68fa8880f83bc74af8020fc0ac6a5074baffe41ec3264b63a7f678a4c0e11b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Reviewed the flexible connector function, CAD-derived stainless mass, Pfeiffer material evidence, bellows/flange manufacturing route, and DN63 connector geometry before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is best treated as one reusable flexible connector item, while bellows, flanges, welds, seals, and clamps remain process details plus adjacent hardware rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_bellows_flange_joining_and_leak_testing
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - forming
+    - precision_machining
+    - joining
+    - cleaning
+    - leak_testing
+    - pressure_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Anchors generic fluid and gas connector work but lacks thin-wall bellows specificity."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Relevant to forming thin stainless bellows convolutions at a coarse level."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Relevant to ISO-K flange faces and connector end preparation."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Relevant to stainless bellows-to-flange joining."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Required to validate connector tightness after fabrication and cleaning."
+  abstraction_decision: keep_original_family
+  rationale: "The source route is already a plumbing connector with formed bellows, joined flanges, cleaning, and leak testing, matching the selected connector-fabrication bucket."
+  process_guardrails:
+    tolerance: high
+    surface_finish: high
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: flexible plumbing connection allowing axial motion and alignment compliance
+  material: stainless_steel_304_and_316l
+  scale_or_capacity:
+    mass_kg: 0.929
+    bom_quantity: 1
+    row_total_mass_kg: 0.929
+    scale_class: medium
+  geometry_form: dn63_iso_k_stainless_spring_bellows_connector_130mm_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - nominal_diameter
+    - installed_length
+    - axial_stroke
+    - leak_tightness
+    - flange_interface
+    - cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Thin-wall stainless bellows forming and welded leak-tight joints are process-intensive."
+    - "Specified tightness and cleanliness are stricter than ordinary plumbing fabrication."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review; compare with other flexible connector and flange rows before deciding whether a generic connector closure item is sufficient."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review with other plumbing connection rows before assigning a closure item ID."
+assumptions:
+  - "The connector is modeled as one reusable item despite multiple manufactured features."
+  - "304 flange and 316L bellows materials can be represented by a stainless connector material stack."
+  - "Centering rings, clamps, and seals are separate closure items."
+unresolved:
+  - "Catalog mass was not found; mass uses CAD volume and stainless density."
+  - "Detailed bellows wall thickness, weld procedure, cleanliness level, and leak-test method are not specified."
+```

@@ -58,3 +58,87 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 7.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0007_1A51.md
+source_research_sha256: "e2f906195e696a1c90e58d984a6ed6a9569f43234f14a291485f8c7f9f04facf"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the gasket function, CAD-derived mass basis, unresolved elastomer evidence, cut/molded seal route, KB implications, and CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one replaceable rectangular frame gasket. It should stay a simple seal item while compound, hardness, and compression requirements remain guardrails."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: elastomer_gasket_profile_cutting
+  primary_process_bucket: polymer_elastomer_forming_dispensing
+  supporting_processes:
+    - cutting
+    - elastomer_forming
+    - cleaning
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: gasket_sheet_cut_to_part_v0
+      fit: direct
+      reason: "Covers cutting gasket sheet into a profile part matching this flat frame geometry."
+    - process_id: seal_installation_v0
+      fit: supporting
+      reason: "Relevant when the gasket is installed into the mating interface."
+    - process_id: sealing_and_assembly_basic_v0
+      fit: supporting
+      reason: "Covers sealed assembly handling and cleanliness checks."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers profile, thickness, continuity, and fit checks."
+  abstraction_decision: keep_original_family
+  rationale: "The row evidence points to a custom elastomer gasket made by profile cutting with possible molding; this matches the polymer/elastomer forming and dispensing bucket."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: seal a small flat mating interface with a replaceable frame gasket
+  material: unknown_elastomer
+  scale_or_capacity:
+    mass_kg: 0.0042
+    bom_quantity: 1
+    row_total_mass_kg: 0.0042
+    scale_class: tiny
+  geometry_form: thin_rectangular_frame_gasket
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_sealing
+  precision_guardrails:
+    - gasket_thickness
+    - compression_set
+    - chemical_compatibility
+    - temperature_rating
+    - profile_fit
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - polymer_elastomer_forming_dispensing
+  import_risk_factors:
+    - "Exact elastomer compound, hardness, compression-set behavior, temperature rating, and chemical compatibility are unresolved."
+    - "Certified gasket performance may require imported compound sheet if local elastomer formulation is outside current scope."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review groups this with other gasket and seal rows."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable custom frame gasket family with material-specific variants."
+assumptions:
+  - "The CAD solid represents one physical gasket with applied planning mass 0.0042 kg."
+  - "Silicone-rubber density is a planning proxy only; final material remains unresolved."
+  - "A cut gasket route is acceptable unless later drawings show molded cross-section features."
+unresolved:
+  - "Exact elastomer compound, hardness, compression requirement, sealed medium, service temperature, and chemical exposure are not resolved by row evidence."
+```

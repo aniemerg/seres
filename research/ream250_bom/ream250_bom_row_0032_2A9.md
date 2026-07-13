@@ -59,3 +59,91 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 32.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0032_2A9.md
+source_research_sha256: "2d6215a1837e5a254f5bd758bd73ede364342cc8a8d3f119eee96322384a145d"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read spacer/alignment function, CAD-volume mass basis, unresolved structural metal evidence, CNC milling route, KB implication, and preview of the pocketed rectangular distance block."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single custom spacer block with no visible internal components; closure can treat it as one machined structural spacing part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: cnc_milled_structural_spacer_block
+  primary_process_bucket: general_subtractive_machining
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - drilling
+    - precision_machining
+    - deburring
+    - surface_finishing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: machining_basic_v0
+      fit: partial
+      reason: "Covers milling the rectangular stock, pockets, and basic mounting features."
+    - process_id: machining_precision_v0
+      fit: supporting
+      reason: "Relevant for datum faces, spacer thickness, parallelism, and hole-location control."
+    - process_id: grinding_and_finishing_v0
+      fit: supporting
+      reason: "May be needed if mating faces require finish beyond ordinary milling."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of spacing faces and mounting hole layout."
+  abstraction_decision: keep_original_family
+  rationale: "The original route is custom CNC milling from bar/plate stock, and the block-like pocketed geometry fits the subtractive machining bucket directly."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: high
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: structural distance spacer setting separation and alignment within an axis subassembly
+  material: unknown_structural_metal_alloy
+  scale_or_capacity:
+    mass_kg: 0.36
+    bom_quantity: 1
+    row_total_mass_kg: 0.36
+    scale_class: small
+  geometry_form: pocketed_rectangular_machined_spacer_block_with_mounting_holes
+merge_pool:
+  eligible: true
+  functional_purpose_key: structural_spacing
+  precision_guardrails:
+    - datum_face_parallelism
+    - spacer_thickness
+    - mounting_hole_position
+    - material_stiffness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - general_subtractive_machining
+  import_risk_factors:
+    - "Material is unresolved; aluminum scenario mass differs materially from steel scenario mass."
+    - "Axis alignment may require tighter datum-face control than coarse structural blocks."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with left/right distance pieces and related axis spacers."
+kb_staging:
+  proposed_item_id: null
+  notes: "Leave final closure item ID open for merge review with similar structural spacing blocks."
+assumptions:
+  - "Use aluminum-scenario mass of 0.36 kg until material is resolved."
+  - "Treat pockets as lightening/clearance features that remain within the same machined spacer abstraction."
+  - "Assume datum faces and hole layout are the closure-relevant precision features."
+unresolved:
+  - "Specific alloy and finish."
+  - "Required parallelism, flatness, and hole-position tolerance."
+  - "Whether this right-side part can merge with mirrored left-side distance pieces under a shared closure item."
+```

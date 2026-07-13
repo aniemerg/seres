@@ -56,3 +56,108 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - Model row 8D1 as a simple stainless annular end/flange part of a standard flexible vacuum pipe assembly; represent hose length and complete bellows assembly behavior in related rows or later BOM notes rather than as a separate granularity label for this row."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0210_8D1.md
+source_research_sha256: ae6582dc6f632a06529874a8bd27333f444fb49d292d5ac721a4163cb26b1088
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Reviewed the original function, CAD-derived mass and BOM quantity, stainless flange material evidence, inferred turning
+    route, KB implication, and CAD preview showing a thin annular end/interface component rather than the full flexible hose.
+decomposition:
+  decision: simple_part
+  rationale: The row represents one exported annular end/flange subpart of a flexible service pipe assembly. It should not
+    be decomposed further at row level; the complete hose/bellows assembly dependencies belong in related rows and later assembly
+    modeling.
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: lathe_machining
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+  - stock_preparation
+  - forming
+  - precision_machining
+  - joining
+  - cleaning
+  - leak_testing
+  - dimensional_inspection
+  candidate_existing_processes:
+  - process_id: fitting_assembly_basic_v0
+    fit: partial
+    reason: Covers generic fitting and connector assembly work.
+  - process_id: plumbing_and_pneumatics_v0
+    fit: partial
+    reason: Covers fluid and gas handling connector work at the system level.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Covers leak checks when sealing function matters.
+  - process_id: cleaning_basic_v0
+    fit: supporting
+    reason: Covers cleaning before connector assembly and test.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: welding_basic_v0
+    fit: supporting
+    reason: Relevant when the row needs permanent joining.
+  abstraction_decision: substitute_process_family
+  rationale: The thin annular end ring is a plumbing connection interface. Use the shared plumbing connector bucket with turning,
+    deburring, cleaning, and inspection rather than a service-specific process label.
+  process_guardrails:
+    tolerance: Outer diameter, inner bore, and DN 40 ISO-KF interface dimensions need inspection against plumbing hardware
+      fit.
+    surface_finish: Sealing/interface faces must be deburred and clean enough for sealed service.
+    sealing_quality: The part contributes to a plumbing connection interface, so profile quality and cleanliness matter even
+      if the seal element is modeled elsewhere.
+    alignment_accuracy: Concentricity and face parallelism should be controlled enough for later joining to the hose and bellows
+      body.
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: circular plumbing connection interface for a flexible pipe and hose assembly
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.00249
+    bom_quantity: 1
+    row_total_mass_kg: 0.00249
+    scale_class: small
+  geometry_form: thin_annular_end_ring
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+  - service_interface_profile
+  - sealing_face_finish
+  - concentricity
+  - joining_surface_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - plumbing_connector_fabrication_testing
+  import_risk_factors:
+  - The complete flexible pipe also requires stainless bellows and hose fabrication and joining, which are outside this row's
+    simple end-part scope.
+  - Service cleanliness and sealing profile requirements may be more stringent than ordinary stainless ring hardware.
+  post_merge_decision_notes: Final import/local decision is deferred until merge review compares this with other plumbing
+    connection interface parts and later flexible-pipe assembly rows.
+kb_staging:
+  proposed_item_id: null
+  notes: Leave item ID open for merge review; likely a reusable stainless plumbing connection interface and end-ring candidate
+    if similar rows converge.
+assumptions:
+- The CAD solid is treated as one annular end part, not the full 120SWG040-0250 flexible pipe.
+- The row uses stainless 304/1.4301 flange material from the matched product family.
+- Hose length, bellows material, and joining steps will be handled in related rows and later assembly abstraction.
+unresolved:
+- Actual vendor production route may include forming and welded details not visible in the exported STEP solid.
+- Exact interface tolerances and cleaning/passivation requirements are not specified.
+- Merge review must decide the condition that this can share one closure item with other DN-sized plumbing connection end
+  parts.
+```

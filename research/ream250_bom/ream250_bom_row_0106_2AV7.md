@@ -54,3 +54,87 @@ kb_implications:
 ---
 
 Research result for reAM250 BOM row 106.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0106_2AV7.md
+source_research_sha256: "e082b255dd9f9ce6885e40626866a4d353d225302492964aa27689842334a8f8"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the DIN 912 screw function, BOM quantity, CAD-derived mild-steel mass, material metadata, standard-hardware route, KB implication, and CAD preview showing a socket-head cap screw."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a single standard screw; subpart decomposition would not improve closure analysis."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: standard_steel_socket_head_screw
+  primary_process_bucket: fastener_forming_thread_rolling
+  supporting_processes:
+    - stock_preparation
+    - forming
+    - thread_forming
+    - precision_machining
+    - heat_treatment
+    - coating
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: fastener_kit_small_fabrication_v0
+      fit: partial
+      reason: "Anchors small fastener production, though this row needs DIN 912 socket-head geometry and M4 thread details."
+    - process_id: machining_process_turning_v0
+      fit: supporting
+      reason: "Relevant to screw shank and head finishing if not fully cold-headed."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers socket recess and local head features at coarse closure level."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers length, thread, head, and socket fit inspection."
+  abstraction_decision: substitute_process_family
+  rationale: "The row evidence uses a standard-stock procurement route; for lunar closure the appropriate abstraction is local fastener forming and thread production."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: not_applicable
+    alignment_accuracy: not_applicable
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: removable mechanical fastening with a socket-head cap screw
+  material: mild_steel
+  scale_or_capacity:
+    mass_kg: 0.00351
+    bom_quantity: 8
+    row_total_mass_kg: 0.0281
+    scale_class: tiny
+  geometry_form: m4_socket_head_cap_screw_twenty_five_mm_length
+merge_pool:
+  eligible: true
+  functional_purpose_key: mechanical_fastening
+  precision_guardrails:
+    - thread_size
+    - screw_length
+    - head_socket_form
+    - strength_grade
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - fastener_forming_thread_rolling
+  import_risk_factors:
+    - "Strength grade, coating, heat treatment, and socket-forming requirements are not resolved from the row."
+  post_merge_decision_notes: "Final import/local decision is deferred until merge review consolidates standard screws across nearby sizes and materials."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely merge with other small steel socket-head cap screws within size guardrails."
+assumptions:
+  - "The mild-steel STEP material metadata is adequate for row-level closure planning."
+  - "DIN 912 standard geometry should be generalized rather than staged as a reAM250-specific item."
+unresolved:
+  - "Property class, coating, heat treatment, exact screw standard tolerance, and mating assembly location remain unresolved."
+```

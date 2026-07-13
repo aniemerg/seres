@@ -56,3 +56,125 @@ kb_implications:
 ---
 
 Result generated for the leased reAM250 BOM row only.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0063_2AL1.md
+source_research_sha256: 4a6220e03e6d01c93eab23e41c7fb9511186b5b37d7c2367df66471163e882a1
+evidence_reviewed:
+  original_research_sections:
+  - function
+  - mass
+  - material
+  - how_to_make
+  - kb_implications
+  geometry_evidence_used: true
+  notes: Read function, catalog mass, unknown multi-material gearbox material evidence, inferred precision gearbox manufacturing
+    route, KB implication, and CAD preview showing the right-angle gearbox before conversion.
+decomposition:
+  decision: decompose_into_parts
+  rationale: This is a precision angular planetary gearbox module, not a simple part. Internal gears, shafts, bearings, seals,
+    lubricant, housing, fasteners, and inspection/calibration requirements are closure-relevant and should be exposed before
+    merge and KB staging.
+  proposed_subparts:
+  - gearbox_housing
+  - sun_planet_ring_and_right_angle_gears
+  - input_and_output_shafts
+  - bearing_set
+  - seal_set
+  - lubricant_charge
+  - gearbox_fasteners
+process_abstraction:
+  original_process_family: vendor_precision_angular_planetary_gearbox_assembly
+  primary_process_bucket: precision_component_import_decompose_later
+  supporting_processes:
+  - decomposition_required
+  - import_assumption
+  - precision_machining
+  - grinding_lapping
+  - heat_treatment
+  - dimensional_inspection
+  - calibration
+  - gear_tooth_machining
+  - leak_testing
+  candidate_existing_processes:
+  - process_id: assembly_basic_v0
+    fit: poor_fit
+    reason: Only covers generic assembly; internal precision manufacturing needs decomposition.
+  - process_id: inspection_basic_v0
+    fit: supporting
+    reason: Covers basic checks while detailed metrology remains unresolved.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Covers generic calibration and test after decomposition defines the item.
+  - process_id: gear_cutting_basic_v0
+    fit: supporting
+    reason: Relevant when tooth geometry controls motion transfer.
+  - process_id: precision_grinding_basic_v0
+    fit: supporting
+    reason: Relevant when rolling, sliding, and raceway surfaces need precision finishing.
+  - process_id: leak_testing_v0
+    fit: supporting
+    reason: Relevant when sealing and fluid integrity matter.
+  - process_id: calibration_and_test_basic_v0
+    fit: supporting
+    reason: Relevant when calibration affects functional acceptance.
+  abstraction_decision: substitute_process_family
+  rationale: The row evidence indicates a vendor precision gearbox with hardened honed gear toothing, two-stage ratio-25 gearing,
+    IP54 sealing, bearings, lubrication, backlash and torque requirements. Generic additive, sheet, and basic machining buckets
+    are not enough without decomposition and precision gear finishing/inspection.
+  process_guardrails:
+    tolerance: blocked_until_decomposed
+    surface_finish: blocked_until_decomposed
+    sealing_quality: review
+    alignment_accuracy: blocked_until_decomposed
+    blocked_by_precision: true
+identity_for_merge:
+  functional_purpose: right-angle speed reduction and torque transmission for a machine drive axis
+  material: unknown_metal_alloy_gearbox_assembly
+  scale_or_capacity:
+    mass_kg: 1.9
+    bom_quantity: 1
+    row_total_mass_kg: 1.9
+    scale_class: medium
+    nominal_output_torque_Nm: 40
+    max_output_torque_Nm: 64
+    gear_ratio: 25
+  geometry_form: right_angle_planetary_gearbox_module
+merge_pool:
+  eligible: false
+  functional_purpose_key: right_angle_speed_reduction_torque_transmission
+  precision_guardrails:
+  - backlash
+  - gear_tooth_hardness_and_finish
+  - shaft_alignment
+  - bearing_fit
+  - seal_integrity
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+  - precision_component_import_decompose_later
+  import_risk_factors:
+  - Exact housing, shaft, bearing, seal, lubricant, and gear material grades are unresolved.
+  - Hardened honed gear toothing, backlash control, torque capacity, IP54 sealing, and right-angle alignment are precision
+    blockers for a generic one-piece local process.
+  - The BOM link points to a different B&R product, although the row product ID, CAD geometry, and alternate B&R product page
+    support the gearbox identity.
+  post_merge_decision_notes: Final import/local decision is deferred. Decompose this module before merge review; after decomposition,
+    housing and shaft elements may use local machining while gears, bearings, seals, lubricant, and precision inspection may
+    remain separate import/local decisions.
+kb_staging:
+  proposed_item_id: null
+  notes: Do not assign a final closure item ID at row conversion. Stage as a precision gearbox decomposition candidate rather
+    than merging the whole vendor module.
+assumptions:
+- The B&R catalog mass applies to one gearbox and the BOM quantity is one.
+- The row product ID and CAD geometry are more reliable identity evidence than the mismatched BOM link URL.
+- The gearbox should be represented at module level only until a decomposition pass creates closure-relevant subparts.
+unresolved:
+- Exact B&R supplier route, material grades, bearing specifications, seals, lubricant, gear finishing process, and inspection
+  tolerances are unknown.
+- Future decomposition must decide which subparts are local-manufacture candidates and which remain import candidates.
+- Merge review should not merge this whole module with simple brackets, housings, shafts, and generic motors before decomposition.
+```

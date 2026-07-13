@@ -53,3 +53,97 @@ how_to_make:
 kb_implications:
   - "item_granularity: simple_part - standard ISO-KF stainless vacuum clamp hardware; later KB work should map it to a reusable standard clamp/fastener item rather than a machine-specific module."
 ---
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0285_89.md
+source_research_sha256: "716b773a0795c0bf2dfc776885f468953fd1e52a2ee4f463d064f59df51c991b"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read the row function, vendor-derived mass basis, stainless 304 material evidence, inferred clamp fabrication route, KB implications, and local CAD preview before conversion."
+decomposition:
+  decision: simple_part
+  rationale: "The row is a standard DN 10-16 ISO-KF stainless clamping ring with integrated tightening hardware, not a machine-specific module. The wingnut and bolt details should be retained as guardrails plus later subpart evidence, but Phase 1 closure can treat the purchased unit as one reusable clamp part."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: formed_and_machined_stainless_vacuum_clamp_hardware
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - drilling
+    - thread_forming
+    - deburring
+    - surface_finishing
+    - assembly
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: plumbing_and_pneumatics_v0
+      fit: partial
+      reason: "Covers fitting, connecting, and pressure/leak-test context for gas and vacuum plumbing hardware, but does not itself fabricate the stainless clamp body."
+    - process_id: metal_forming_basic_v0
+      fit: supporting
+      reason: "Represents forming and stamping of the curved stainless clamp body before machining, threading, and assembly details are added."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers local machining, drilling, lug cleanup, and fastener-interface cleanup for clamp features after forming from stock."
+    - process_id: assembly_basic_v0
+      fit: supporting
+      reason: "Covers assembling the clamp body with bolt and wingnut tightening hardware."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Relevant to verifying the clamp as part of an elastomer-sealed small-flange joint, though the clamp itself is not a sealed volume."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional and fit inspection for DN 10-16 ISO-KF compatibility."
+  abstraction_decision: substitute_process_family
+  rationale: "The source route is inferred as standard stainless clamp manufacture, while the closure model only needs a reusable gas/plumbing connector hardware bucket plus secondary forming, threading, assembly, finish, and inspection tags."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: review
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: clamp an elastomer-sealed small-flange gas/vacuum joint
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.163
+    bom_quantity: 1
+    row_total_mass_kg: 0.163
+    scale_class: small
+  geometry_form: split_annular_kf_clamp_with_wingnut_hardware
+merge_pool:
+  eligible: true
+  functional_purpose_key: joint_clamping
+  precision_guardrails:
+    - flange_fit
+    - clamping_force
+    - thread_interface
+    - sealing_quality
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Small commercial vacuum hardware may remain an import if later review treats standardized ISO-KF reliability, passivation, plus surface finish as outside the current local-manufacture scope."
+  post_merge_decision_notes: "Final import/local decision is deferred until after merge review compares this clamp against other joint-clamping and plumbing-connection hardware."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review; likely reusable standard ISO-KF clamp and joint-clamping hardware rather than a row-specific item."
+assumptions:
+  - "The vendor STEP mass represents the complete clamp unit despite the local preview being normalized to a simplified 10 mm scale."
+  - "Stainless steel 1.4301/304 maps to the closure material identity stainless_steel_304."
+  - "Vacuum service is preserved as a sealing-quality guardrail rather than encoded into the merge functional key."
+unresolved:
+  - "Exact factory route, subpart split, passivation requirement, and ISO-KF tolerance class are not specified by the source evidence."
+```

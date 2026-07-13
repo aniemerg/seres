@@ -54,3 +54,99 @@ kb_implications:
 ---
 
 Structured research result for reAM250 BOM row 112.
+
+## KB Conversion
+
+```yaml
+conversion_status: row_reviewed
+source_research_file: research/ream250_bom/ream250_bom_row_0112_3A.md
+source_research_sha256: "951a4b67a783b2e1e4d735e6f51f77f221eb3e87924577fa44bf020d830ab3fb"
+evidence_reviewed:
+  original_research_sections:
+    - function
+    - mass
+    - material
+    - how_to_make
+    - kb_implications
+  geometry_evidence_used: true
+  notes: "Read DN63 vacuum elbow function, CAD-volume stainless mass basis, Pfeiffer stainless 304 evidence, inferred tube/flange fabrication route, KB implication, and preview of the flanged curved pipe fitting."
+decomposition:
+  decision: simple_part
+  rationale: "The row is one standard vacuum elbow body with two flange interfaces; seals, centering rings, and clamps are separate hardware rows."
+  proposed_subparts: []
+process_abstraction:
+  original_process_family: stainless_vacuum_elbow_forming_welding_machining_testing
+  primary_process_bucket: plumbing_connector_fabrication_testing
+  supporting_processes:
+    - stock_preparation
+    - cutting
+    - forming
+    - joining
+    - precision_machining
+    - cleaning
+    - leak_testing
+    - dimensional_inspection
+  candidate_existing_processes:
+    - process_id: tube_stock_forming_v0
+      fit: partial
+      reason: "Covers metal tube forming; the DN63 elbow still needs ISO-K flange work, cleaning, and leak checks."
+    - process_id: welding_tig_basic_v0
+      fit: supporting
+      reason: "Relevant for leak-tight stainless joining between elbow body and flange ends."
+    - process_id: machining_basic_v0
+      fit: supporting
+      reason: "Covers flange face and interface feature finishing after forming and joining."
+    - process_id: leak_testing_v0
+      fit: supporting
+      reason: "Covers pressure/vacuum leak checks for completed piping components."
+    - process_id: vacuum_testing_v0
+      fit: supporting
+      reason: "Relevant if acceptance requires vacuum-level hold and cleanliness checks."
+    - process_id: inspection_basic_v0
+      fit: supporting
+      reason: "Covers dimensional checks of flange interfaces and elbow geometry."
+  abstraction_decision: keep_original_family
+  rationale: "The source route and local fallback are both stainless vacuum plumbing fabrication; the canonical bucket preserves forming, flange machining, cleaning, and leak-test needs."
+  process_guardrails:
+    tolerance: review
+    surface_finish: review
+    sealing_quality: high
+    alignment_accuracy: review
+    blocked_by_precision: false
+identity_for_merge:
+  functional_purpose: flanged elbow redirecting a vacuum plumbing line
+  material: stainless_steel_304
+  scale_or_capacity:
+    mass_kg: 0.999
+    bom_quantity: 15
+    row_total_mass_kg: 14.98
+    scale_class: medium
+  geometry_form: dn63_iso_k_ninety_degree_flanged_pipe_elbow
+merge_pool:
+  eligible: true
+  functional_purpose_key: plumbing_connection
+  precision_guardrails:
+    - flange_standard_compatibility
+    - sealing_surface_finish
+    - weld_leak_tightness
+    - vacuum_cleanliness
+downstream_decision_inputs:
+  local_manufacturing_paths_considered:
+    - plumbing_connector_fabrication_testing
+  import_risk_factors:
+    - "Quantity 15 makes local fabrication impact material and process closure more than a one-off fitting."
+    - "ISO-K flange compatibility and leak-tight stainless joining may require specialized fixtures and inspection."
+    - "Cleanliness and acceptance leak rate are not quantified by the row evidence."
+  post_merge_decision_notes: "Final import/local manufacture decision is deferred until after merge review with other stainless vacuum elbows and plumbing adapters."
+kb_staging:
+  proposed_item_id: null
+  notes: "Wait for merge review across vacuum plumbing elbows before assigning a closure item ID."
+assumptions:
+  - "Use stainless 304/1.4301 as resolved material from Pfeiffer evidence."
+  - "Treat clamps, centering rings, and seals as separate rows."
+  - "Use 0.999 kg per unit and 14.98 kg row total for merge and closure prioritization."
+unresolved:
+  - "Exact tube-forming and weld procedure."
+  - "Surface finish, passivation, cleanliness standard, and acceptance leak rate."
+  - "Whether DN63 and DN100 elbows can share one closure item family with diameter captured as scale/capacity."
+```
