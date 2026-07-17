@@ -91,27 +91,12 @@ requires_ids:
   # METAL ADDITIVE MANUFACTURING (ellery-2022-metalysis, Self-Assembling)
   # ════════════════════════════════════════════════════════════════════════════
 
-  # EBM (Electron Beam Melting) - preferred over laser for energy efficiency
-  - id: ebm_machine_lunar_v0
-    info: |
-      Electron Beam Melting machine for metal additive manufacturing.
-      Source: design/papers/Self-Replicating-Machines-on-the-Moon.txt, Section 4.3, Table 2
-      Review: docs/paper_reviews/Self-Replicating-Machines-Moon_missing_tech.md
-      Priority: ESSENTIAL - preferred AM technology for lunar application
-      Energy efficiency: 10-20% (vs laser 2-5%)
-      Dependencies: electron_gun_assembly_v0, ebm_vacuum_chamber_v0, ebm_powder_handling_system_v0
-      Notes: Higher efficiency comes from direct electron heating vs optical absorption.
-      Operating envelope: Vacuum, heated build platform 600-1000°C
-
   - electron_gun_assembly_v0                   # Electron beam source
   - ebm_vacuum_chamber_v0                      # Vacuum chamber for EBM
-  - ebm_powder_handling_system_v0              # Powder delivery and recycling
   - ebm_build_platform_heated_v0               # Heated build platform 600-1000°C
 
   # Laser-based AM (for comparison/alternatives)
-  - slm_machine_lunar_v0                       # Selective Laser Melting
-  - ebf3_wire_feed_machine_v0                  # Electron Beam Freeform Fabrication
-  - lens_machine_lunar_v0                      # Laser Engineered Net Shaping
+  - ebf3_3d_printer                  # Electron Beam Freeform Fabrication
   - wire_arc_additive_manufacturing_v0         # WAAM for large structures
 
   # AM process parameters and controls
@@ -119,13 +104,10 @@ requires_ids:
   - scanning_speed_control_system_v0           # 200-1200 mm/s scanning control
   - layer_thickness_control_v0                 # 20-50 μm layer control
   - hatch_spacing_optimization_v0              # Overlap control for density
-  - build_atmosphere_control_v0                # Inert gas or vacuum control
 
   # AM feedstock production
   - metal_powder_atomization_v0                # Gas atomization for spherical powder
-  - metal_powder_sieving_system_v0             # Particle size distribution control
   - metal_wire_drawing_process_v0              # Wire feedstock for WAAM/EBF3
-  - powder_quality_analysis_v0                 # Particle size, morphology, composition
 
   # Microstructure control
   - heat_treatment_stress_relief_v0            # Post-process stress relief annealing
@@ -600,7 +582,7 @@ requires_ids:
 
   # Machine tools
   - lathe_engine_v0                            # Engine lathe for turning
-  - milling_machine_v0                         # Milling machine
+  - cnc_mill                                   # CNC milling machine
   - drill_press                                # Drill press
   - grinder_surface_v0                         # Surface grinder
   - grinder_cylindrical_v0                     # Cylindrical grinder

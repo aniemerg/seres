@@ -14,7 +14,7 @@ outputs:
   unit: unit
 requires_ids: []
 resource_requirements:
-- machine_id: resource_3d_printer_basic_v0
+- machine_id: fdm_3d_printer
   qty: 1
   unit: count
 energy_model:
@@ -24,5 +24,9 @@ energy_model:
 time_model:
   type: batch
   hr_per_batch: 0.5
-notes: 3D printing operation to produce motor-bearing unit. Assumes basic printer;
-  no post-processing modeled.
+notes: >
+  FDM/FFF printing operation to produce motor-bearing unit. The 3-D-Printed-motors
+  paper reports most printing on an Anet A8/Prusa i3-style Cartesian FDM printer,
+  so this is modeled on the canonical FDM 3D printer. Equivalent Cartesian/FDM
+  printers may be substituted manually where the scheduler supports reassignment.
+  No post-processing modeled.

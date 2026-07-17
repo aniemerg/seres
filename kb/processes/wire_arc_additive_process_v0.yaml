@@ -20,7 +20,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: wire_arc_additive_machine
+- machine_id: ebf3_3d_printer
   qty: 1
   unit: count
 energy_model:
@@ -32,16 +32,9 @@ time_model:
   type: batch
   hr_per_batch: 4.0
   notes: Layer-by-layer deposition time
-notes: 'Wire Arc Additive Manufacturing (WAAM) for large metal structures.
-
-  Source: papers_gap_seed_v0, metal additive manufacturing technologies
-
-  Method: Electric arc melts wire feedstock, deposits layer-by-layer
-
-  Advantages: High deposition rate, large parts, lower cost than powder-bed
-
-  Applications: Structural components, tanks, large brackets
-
-  Deposition rate: 1-10 kg/hr typical
-
-  '
+notes: >
+  Wire-feed metal additive manufacturing for large metal structures. This legacy
+  WAAM placeholder is consolidated under the canonical EBF3 3D printer because
+  the lunar self-replication literature selects Electron Beam Freeform
+  Fabrication (EBF3) over laser-based metal printing and treats EBF3/EBAM as the
+  primary metal additive route.

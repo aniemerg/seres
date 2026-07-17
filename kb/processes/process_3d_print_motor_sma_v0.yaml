@@ -18,7 +18,7 @@ resource_requirements:
 - machine_id: labor_bot_general_v0
   qty: 1
   unit: count
-- machine_id: resource_3d_printer_cartesian_v0_machine
+- machine_id: fdm_3d_printer
   qty: 1
   unit: count
 energy_model:
@@ -33,6 +33,7 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: polymer_printing_feedstock
   notes: slow deposition rate ~1 kg/hr for polymer/SMA composite
-notes: Placeholder for printing SMA-actuated motor structures; includes polymer body
-  and embedded SMA wires.
+notes: Placeholder for FDM printing SMA-actuated motor structures; includes
+  polymer body and embedded SMA wires. Consolidated from the Cartesian printer
+  alias onto the canonical FDM 3D printer.
 process_type: continuous

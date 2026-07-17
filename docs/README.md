@@ -243,7 +243,7 @@ Supporting reports by gap type (optional, for debugging):
 - Add tasks: `.venv/bin/python -m kbtool dedupe add --file <json_or_jsonl>` (entries need `id` and optional `kind`, `reason`, `candidate_ids`, `notes`, `hints`, `refs`, `category`).
 - Suggested staging for add files: drop JSON/JSONL under `dedupe_tasks/` and add via the CLI for auditability.
 - Seeding: manual/agent review (e.g., `out/reports/inventory.md`); no auto-population yet.
-- Decisions and precedents: log in `docs/dedupe_decisions.md`; annotate items with `alternatives`/`dedupe_candidate` (to be adopted as schema fields).
+- Decisions, precedents, and deleted YAML payloads: log in `docs/kb_cleanup_log.md`; annotate items with `alternatives`/`dedupe_candidate` where retained (to be adopted as schema fields).
 
 ## Seed Files (System-Level Roadmaps)
 

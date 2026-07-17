@@ -498,7 +498,8 @@ def _collect_kb_entities(repo_root: Path) -> tuple[Dict[str, dict], List[str]]:
             if kind == "machine" and not category:
                 missing_categories.append(str(entity_id))
 
-            entities[str(entity_id)] = {
+            entity_key = str(entity_id)
+            entity = {
                 "id": str(entity_id),
                 "kind": kind,
                 "category": category,
@@ -506,8 +507,170 @@ def _collect_kb_entities(repo_root: Path) -> tuple[Dict[str, dict], List[str]]:
                 "name": payload.get("name") or str(entity_id),
                 "raw": payload,
             }
+            existing = entities.get(entity_key)
+            if existing and existing.get("kind") != kind:
+                if existing.get("kind") == "machine":
+                    continue
+                if kind != "machine":
+                    continue
+            entities[entity_key] = entity
 
     return entities, sorted(set(missing_categories))
+
+
+def _load_machine_sets(repo_root: Path) -> List[dict]:
+    sets: List[dict] = []
+    target_path = repo_root / "docs" / "self_reproducing_set.txt"
+    if target_path.exists():
+        ids = [
+            line.strip()
+            for line in target_path.read_text(encoding="utf-8").splitlines()
+            if line.strip() and not line.strip().startswith("#")
+        ]
+        sets.append(
+            {
+                "id": "self_reproducing_target",
+                "name": "Self-reproducing target set",
+                "ids": ids,
+            }
+        )
+    return sets
+
+
+def _collect_entity_ref_ids(node: Any, out: set[str]) -> None:
+    if isinstance(node, list):
+        for entry in node:
+            _collect_entity_ref_ids(entry, out)
+        return
+    if not isinstance(node, dict):
+        return
+
+    for key, value in node.items():
+        if key in {"item_id", "machine_id", "process_id", "recipe_id", "target_item_id"}:
+            if isinstance(value, str) and value.strip():
+                out.add(value.strip())
+            continue
+        if key in {"requires_id", "requires_ids"} and isinstance(value, list):
+            for entry in value:
+                if isinstance(entry, str) and entry.strip():
+                    out.add(entry.strip())
+            continue
+        _collect_entity_ref_ids(value, out)
+
+
+def _build_machine_usage_index(kb_entities: Dict[str, dict], articles: List[dict], machine_sets: List[dict]) -> dict:
+    machine_ids = {eid for eid, entity in kb_entities.items() if entity.get("kind") == "machine"}
+    target_ids = set()
+    for machine_set in machine_sets:
+        if machine_set.get("id") == "self_reproducing_target":
+            target_ids.update(str(item_id) for item_id in machine_set.get("ids", []))
+
+    referenced_by: Dict[str, List[dict]] = defaultdict(list)
+    for entity_id, entity in kb_entities.items():
+        refs: set[str] = set()
+        _collect_entity_ref_ids(entity.get("raw"), refs)
+        refs.discard(entity_id)
+        for target_id in refs:
+            if target_id not in machine_ids:
+                continue
+            referenced_by[target_id].append(
+                {
+                    "id": entity_id,
+                    "name": entity.get("name") or entity_id,
+                    "kind": entity.get("kind"),
+                    "path": entity.get("path"),
+                }
+            )
+
+    for article in articles:
+        for target_id in article.get("wiki_links", []) or []:
+            if target_id not in machine_ids:
+                continue
+            referenced_by[target_id].append(
+                {
+                    "id": article.get("id"),
+                    "name": article.get("title") or article.get("id"),
+                    "kind": "article",
+                    "path": article.get("path"),
+                }
+            )
+
+    machines: Dict[str, dict] = {}
+    for machine_id in sorted(machine_ids):
+        entity = kb_entities[machine_id]
+        raw = entity.get("raw") if isinstance(entity.get("raw"), dict) else {}
+        listed_process_ids = {
+            str(process_id).strip()
+            for process_id in raw.get("processes_supported", []) or []
+            if isinstance(process_id, str) and process_id.strip()
+        }
+
+        supported_processes: List[dict] = []
+        for candidate_id, candidate in kb_entities.items():
+            if candidate.get("kind") != "process":
+                continue
+            process_raw = candidate.get("raw") if isinstance(candidate.get("raw"), dict) else {}
+            required_by_process = False
+            for req in process_raw.get("resource_requirements", []) or []:
+                if isinstance(req, dict) and req.get("machine_id") == machine_id:
+                    required_by_process = True
+                    break
+            listed_by_machine = candidate_id in listed_process_ids
+            if not required_by_process and not listed_by_machine:
+                continue
+            relation = ", ".join(
+                part
+                for part in [
+                    "resource requirement" if required_by_process else "",
+                    "listed on machine" if listed_by_machine else "",
+                ]
+                if part
+            )
+            supported_processes.append(
+                {
+                    "id": candidate_id,
+                    "name": candidate.get("name") or candidate_id,
+                    "relation": relation,
+                    "path": candidate.get("path"),
+                }
+            )
+
+        for process_id in listed_process_ids:
+            if any(row["id"] == process_id for row in supported_processes):
+                continue
+            supported_processes.append(
+                {
+                    "id": process_id,
+                    "name": kb_entities.get(process_id, {}).get("name", process_id),
+                    "relation": "listed on machine",
+                    "path": kb_entities.get(process_id, {}).get("path"),
+                }
+            )
+
+        supported_ids = {row["id"] for row in supported_processes}
+        other_refs = [
+            ref
+            for ref in referenced_by.get(machine_id, [])
+            if ref.get("id") not in supported_ids
+        ]
+
+        supported_processes.sort(key=lambda row: (row.get("name") or "", row.get("id") or ""))
+        other_refs.sort(key=lambda row: (row.get("kind") or "", row.get("id") or ""))
+        machines[machine_id] = {
+            "id": machine_id,
+            "name": entity.get("name") or machine_id,
+            "path": entity.get("path"),
+            "target": machine_id in target_ids,
+            "supported_process_count": len(supported_processes),
+            "reference_count_other": len(other_refs),
+            "supported_processes": supported_processes,
+            "referenced_by_other": other_refs,
+        }
+
+    return {
+        "version": "machine_usage_index.v0",
+        "machines": machines,
+    }
 
 
 def _summarize_simulation(snapshot: dict, process_runs: List[ProcessRunRecord], completed_count: int) -> dict:
@@ -798,9 +961,11 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
 
     kb_entities, missing_categories = _collect_kb_entities(repo_root)
     _augment_kb_entities_with_stats(kb_entities, process_runs)
+    machine_sets = _load_machine_sets(repo_root)
 
     article_files = discover_article_files(repo_root, config.article_paths)
     articles, article_backlinks = parse_articles(repo_root, article_files)
+    machine_usage_index = _build_machine_usage_index(kb_entities, articles, machine_sets)
 
     article_ids = {a["id"] for a in articles}
     unresolved_links: List[dict] = []
@@ -854,6 +1019,8 @@ def export_simviewer(repo_root: Path, config: SimviewerConfig, out_dir: Path) ->
     (data_dir / "articles.json").write_text(json.dumps({"articles": articles}, indent=2), encoding="utf-8")
     (data_dir / "warnings.json").write_text(json.dumps(warnings.to_dict(), indent=2), encoding="utf-8")
     (data_dir / "simquery.json").write_text(json.dumps(simquery, indent=2), encoding="utf-8")
+    (data_dir / "machine_sets.json").write_text(json.dumps({"sets": machine_sets}, indent=2), encoding="utf-8")
+    (data_dir / "machine_usage_index.json").write_text(json.dumps(machine_usage_index, indent=2), encoding="utf-8")
     def _rel(path: Path) -> str:
         try:
             return str(path.relative_to(repo_root))

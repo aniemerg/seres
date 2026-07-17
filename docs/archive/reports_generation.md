@@ -99,6 +99,6 @@ Save to `dedupe_tasks/furnaces_high_temp.json` and add:
 3. Review for duplicates (grep patterns or manual scan)
 4. Create dedupe tasks for consolidation opportunities
 5. Work dedupe queue: `.venv/bin/python -m kbtool dedupe lease --agent <name>`
-6. Document decisions in `docs/dedupe_decisions.md`
+6. Document decisions in `docs/kb_cleanup_log.md`
 
 This keeps the knowledge base clean and prevents proliferation of near-duplicate items.

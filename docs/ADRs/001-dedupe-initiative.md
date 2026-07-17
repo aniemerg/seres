@@ -36,10 +36,13 @@
 - Prefer **flexible tools**: 3D printing for small/medium parts; use material-appropriate printers. Avoid very large items by default; simple items are fine if additive is still reasonable.
 - Prefer **labor/manual** for long-tail/low-volume items; specialized tools only when items are common/high-volume or labor is unreasonable.
 - Candidate triggers: overlapping capabilities, low usage frequency, availability of a more general substitute, or explicit similarity.
-- Never delete items; instead, retarget recipes/BOMs to preferred tools and mark alternatives on the deprecated ones.
+- Original guidance preferred not deleting items; current cleanup practice allows
+  deletion after references are migrated and the full removed YAML is preserved in
+  `docs/kb_cleanup_log.md`.
 
 ## Documentation / Logging
-- Create `docs/dedupe_decisions.md` to log decisions (item(s), decision, rationale, date/agent).
+- Create `docs/kb_cleanup_log.md` to log decisions (item(s), decision, rationale,
+  date/agent) and deleted YAML payloads.
 - Update README/docs to describe the dedupe queue and annotations once implemented.
 
 ## Implementation Plan (phased)
@@ -47,7 +50,7 @@
 2) **Queue Infrastructure**: add `dedupe` CLI mirroring the work-queue commands; persist to `out/dedupe_queue.jsonl`; no auto-seeding.
 3) **Schema/Model Updates**: add support for `alternatives`, `dedupe_candidate`, `preferred_variant`; document recipe variant conventions.
 4) **Reporting Support**: (optional) extend `report inventory` to include overlap signals to aid manual seeding.
-5) **Seeding & Execution**: agents scan `out/reports/inventory.md`, add dedupe tasks, process them, retarget recipes/BOMs to preferred tools, and record decisions in `docs/dedupe_decisions.md` and item notes/alternatives.
+5) **Seeding & Execution**: agents scan `out/reports/inventory.md`, add dedupe tasks, process them, retarget recipes/BOMs to preferred tools, and record decisions in `docs/kb_cleanup_log.md` and item notes/alternatives.
 
 ## Out of Scope (for now)
 - Automatic selection of minimal graph.

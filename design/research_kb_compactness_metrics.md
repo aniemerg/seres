@@ -168,7 +168,7 @@ For each dedupe task:
 
 4. **`out/dedupe_queue.jsonl`**: Dedupe tasks and status
 
-5. **`out/dedupe_decisions.md`**: Historical record of consolidations
+5. **`docs/kb_cleanup_log.md`**: Historical record of consolidations and deleted YAML payloads
 
 ### Metrics We Can Compute
 
@@ -538,6 +538,6 @@ Please focus on Phase 1 (research and recommendations) in your response.
 
 - `design/meta-memo.md` - Project philosophy and goals
 - `design/memo_a.md` - KB schema and data model
-- `docs/dedupe_decisions.md` - Historical consolidation decisions
+- `docs/kb_cleanup_log.md` - Historical consolidation decisions and deleted YAML payloads
 - `out/index.json` - Current KB index
 - `kbtool/indexer.py` - How KB is validated and indexed

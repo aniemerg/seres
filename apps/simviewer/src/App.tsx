@@ -7,6 +7,7 @@ import type {
   KBEntitiesPayload,
   KBEntity,
   MachineAssignment,
+  MachineSetsPayload,
   ProcessRun,
   QuantityMap,
   SimQueryData,
@@ -18,6 +19,7 @@ type Route =
   | { view: 'home' }
   | { view: 'gantt' }
   | { view: 'recipes' }
+  | { view: 'machines' }
   | { view: 'wiki'; id?: string }
   | { view: 'kbsearch' }
 
@@ -25,12 +27,61 @@ const BAR_MIN_PX = 3
 const ROW_HEIGHT = 28
 const WIKI_HOME_ID = 'about_seres'
 type ColorMode = 'status' | 'process' | 'recipe' | 'goal'
+type MachineCatalogFilter = 'all' | 'target' | 'used' | 'seeded' | 'produced' | 'unused'
+type MachineCatalogSort = 'usage' | 'name'
+
+type MachineCatalogRow = {
+  id: string
+  label: string
+  path: string
+  family: string
+  capabilities: string[]
+  recipeId: string | null
+  bomId: string | null
+  massLabel: string
+  runCount: number
+  busyHours: number
+  utilizationPercent: number
+  totalEnergyKwh: number
+  reservedCount: number
+  supportedProcessCount: number
+  isTarget: boolean
+  isUsed: boolean
+  isSeeded: boolean
+  isProduced: boolean
+  covered: boolean
+  importedQuantity: number
+  producedQuantity: number
+}
+
+type SupportedProcessRow = { id: string; name: string; relation: string }
+
+const MACHINE_CATALOG_ALIASES = new Set([
+  'resource_3d_printer_cartesian_v0_machine',
+  'wire_arc_additive_machine',
+])
+
+const MACHINE_FAMILY_ORDER = [
+  'Metal making / high-temp',
+  'Additive manufacturing',
+  'Metal forming / machining',
+  'Mining / material prep',
+  'Chemical / electrochemical',
+  'Vacuum / gas / safety',
+  'Assembly / robotics',
+  'Power / energy',
+  'Electronics / compute',
+  'Metrology / lab',
+  'Coating / fiber',
+  'Support / other',
+]
 
 function parseRoute(hash: string): Route {
   const clean = hash.replace(/^#\/?/, '')
   const parts = clean.split('/').filter(Boolean)
   if (parts[0] === 'gantt') return { view: 'gantt' }
   if (parts[0] === 'recipes') return { view: 'recipes' }
+  if (parts[0] === 'machines') return { view: 'machines' }
   if (parts[0] === 'wiki') return { view: 'wiki', id: parts[1] }
   if (parts[0] === 'kb-search') return { view: 'kbsearch' }
   if (parts[0] === 'home') return { view: 'home' }
@@ -40,6 +91,7 @@ function parseRoute(hash: string): Route {
 function hashTo(route: Route): string {
   if (route.view === 'gantt') return '#/gantt'
   if (route.view === 'recipes') return '#/recipes'
+  if (route.view === 'machines') return '#/machines'
   if (route.view === 'wiki') return route.id ? `#/wiki/${route.id}` : `#/wiki/${WIKI_HOME_ID}`
   if (route.view === 'kbsearch') return '#/kb-search'
   return '#/home'
@@ -417,7 +469,7 @@ function MarkdownArticle({
     <article className="article">
       {blocks.map((b, idx) => {
         if (b.type === 'heading') {
-          const tag = `h${Math.min(6, Math.max(1, b.level))}` as keyof JSX.IntrinsicElements
+          const tag = `h${Math.min(6, Math.max(1, b.level))}` as 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
           return tag === 'h1' ? (
             <h1 key={idx}>{renderInlineMarkdown(b.text, onJump, validTargets, simQuery)}</h1>
           ) : tag === 'h2' ? (
@@ -549,6 +601,120 @@ function isMachineEntity(entity: KBEntity): boolean {
   return entity.kind === 'machine'
 }
 
+function stringField(obj: Record<string, unknown> | undefined, key: string): string | null {
+  const value = obj?.[key]
+  if (typeof value === 'string' && value.trim()) return value.trim()
+  return null
+}
+
+function numberField(obj: Record<string, unknown> | undefined, key: string): number {
+  const value = obj?.[key]
+  return typeof value === 'number' && Number.isFinite(value) ? value : 0
+}
+
+function stringArrayField(obj: Record<string, unknown> | undefined, key: string): string[] {
+  const value = obj?.[key]
+  if (!Array.isArray(value)) return []
+  return value
+    .map((entry) => (typeof entry === 'string' ? entry.trim() : ''))
+    .filter(Boolean)
+}
+
+function textField(obj: Record<string, unknown> | undefined, key: string): string {
+  const value = obj?.[key]
+  return typeof value === 'string' ? value.trim() : ''
+}
+
+function stringListFromField(obj: Record<string, unknown> | undefined, key: string): string[] {
+  const value = obj?.[key]
+  if (Array.isArray(value)) {
+    return value
+      .map((entry) => {
+        if (typeof entry === 'string') return entry.trim()
+        if (entry && typeof entry === 'object') return JSON.stringify(entry)
+        return ''
+      })
+      .filter(Boolean)
+  }
+  if (typeof value === 'string' && value.trim()) return [value.trim()]
+  return []
+}
+
+function tableById(rows: Array<Record<string, unknown>> | undefined): Map<string, Record<string, unknown>> {
+  const out = new Map<string, Record<string, unknown>>()
+  for (const row of rows ?? []) {
+    const id = stringField(row, 'id')
+    if (id) out.set(id, row)
+  }
+  return out
+}
+
+function inferMachineFamily(entity: KBEntity): string {
+  const raw = entity.raw
+  const text = [
+    entity.id,
+    entity.name,
+    ...(stringArrayField(raw, 'capabilities')),
+  ].join(' ').toLowerCase().replace(/[-_]/g, ' ')
+
+  const rules: Array<[string, string[]]> = [
+    ['Additive manufacturing', ['ebf3', 'ebam', 'electron beam freeform', 'electron beam additive', 'wire feed metal deposition', 'selective solar sinter', 'fresnel solar sinter', 'solar thermal melting', 'regolith sinter', 'fdm', 'fff', 'fused deposition', '3d printer', '3d print', 'polymer printing', 'silicone plastic printing', 'ceramic glass precursor', 'additive']],
+    ['Metal making / high-temp', ['furnace', 'kiln', 'oven', 'anneal', 'sinter', 'smelt', 'casting', 'crucible', 'quench', 'pyrolysis', 'reduction', 'heating', 'forge']],
+    ['Metal forming / machining', ['fabrication', 'machin', 'mill', 'lathe', 'grind', 'cutting', 'saw', 'press', 'forming', 'bending', 'rolling', 'welding', 'welder', 'molding', 'extruder', 'die set']],
+    ['Mining / material prep', ['crusher', 'screen', 'feeder', 'conveyor', 'loader', 'hauler', 'drill', 'separator', 'beneficiation', 'regolith', 'ball mill', 'powder']],
+    ['Assembly / robotics', ['assembly', 'assembler', 'robot', 'gantry', 'scara', 'delta', 'gripper', 'constructor', 'labor bot', 'workbench', 'fixtur']],
+    ['Chemical / electrochemical', ['chemical', 'reactor', 'acid', 'electroly', 'distillation', 'leaching', 'bath', 'mixer', 'filtration', 'ammonia', 'carbonyl', 'co2']],
+    ['Vacuum / gas / safety', ['vacuum', 'gas', 'atmosphere', 'inert', 'chiller', 'cryo', 'cold trap', 'condenser', 'compressor', 'safety', 'scrubbing']],
+    ['Power / energy', ['solar', 'power', 'battery', 'thermionic', 'heat pipe', 'heat transport', 'storage', 'generator', 'converter', 'inverter']],
+    ['Electronics / compute', ['pcb', 'circuit', 'solder', 'electronic', 'compute', 'computer', 'memory', 'neural', 'signal generator', 'oscilloscope', 'antenna', 'communication']],
+    ['Metrology / lab', ['measurement', 'metrology', 'calibration', 'inspection', 'test', 'spectrometer', 'microscope', 'sensor', 'temperature', 'load cell', 'lab', 'analysis', 'quality', 'alignment']],
+    ['Coating / fiber', ['coating', 'surface treatment', 'encapsulation', 'spin coating', 'fiber', 'spinning', 'winding', 'tension', 'cleaning']],
+  ]
+
+  for (const [family, keywords] of rules) {
+    if (keywords.some((keyword) => text.includes(keyword))) return family
+  }
+  return 'Support / other'
+}
+
+function formatMachineMass(raw: Record<string, unknown> | undefined): string {
+  const mass = numberField(raw, 'mass_kg') || numberField(raw, 'mass')
+  if (!mass) return 'n/a'
+  if (mass >= 1000) return `${(mass / 1000).toFixed(1)} t`
+  if (mass >= 10) return `${mass.toFixed(0)} kg`
+  return `${mass.toFixed(2)} kg`
+}
+
+function getMachineSupportedProcessRows(entity: KBEntity, allEntities: KBEntity[]): SupportedProcessRow[] {
+  if (!isMachineEntity(entity)) return []
+  const machineRaw = asObject(entity.raw) ?? undefined
+  const listedProcessIds = new Set(stringListFromField(machineRaw, 'processes_supported'))
+  const rows: SupportedProcessRow[] = []
+
+  for (const candidate of allEntities) {
+    if (!isProcessEntity(candidate)) continue
+    const processRaw = asObject(candidate.raw)
+    const requiredByProcess = asArray(processRaw?.resource_requirements).some((req) => {
+      const obj = asObject(req)
+      return obj?.machine_id === entity.id
+    })
+    const listedByMachine = listedProcessIds.has(candidate.id)
+    if (!requiredByProcess && !listedByMachine) continue
+    const relation = [
+      requiredByProcess ? 'resource requirement' : '',
+      listedByMachine ? 'listed on machine' : '',
+    ].filter(Boolean).join(', ')
+    rows.push({ id: candidate.id, name: candidate.name || candidate.id, relation })
+  }
+
+  for (const processId of listedProcessIds) {
+    if (rows.some((row) => row.id === processId)) continue
+    rows.push({ id: processId, name: processId, relation: 'listed on machine' })
+  }
+
+  return rows.sort((a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id))
+}
+
 function collectRefIds(node: unknown, out: Set<string>): void {
   if (Array.isArray(node)) {
     for (const entry of node) collectRefIds(entry, out)
@@ -574,6 +740,7 @@ export function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [simData, setSimData] = useState<SimData | null>(null)
   const [simQuery, setSimQuery] = useState<SimQueryData | null>(null)
+  const [machineSets, setMachineSets] = useState<MachineSetsPayload>({ sets: [] })
   const [entities, setEntities] = useState<KBEntity[]>([])
   const [articles, setArticles] = useState<Article[]>([])
   const [warnings, setWarnings] = useState<Warnings | null>(null)
@@ -597,13 +764,15 @@ export function App() {
       fetch('./data/articles.json').then((r) => r.json() as Promise<ArticlesPayload>),
       fetch('./data/warnings.json').then((r) => r.json() as Promise<Warnings>),
       fetch('./data/simquery.json').then((r) => r.json() as Promise<SimQueryData>).catch(() => null),
+      fetch('./data/machine_sets.json').then((r) => r.json() as Promise<MachineSetsPayload>).catch(() => ({ sets: [] })),
     ])
-      .then(([sim, kb, art, warn, query]) => {
+      .then(([sim, kb, art, warn, query, sets]) => {
         setSimData(sim)
         setEntities(kb.entities)
         setArticles(art.articles)
         setWarnings(warn)
         setSimQuery(query)
+        setMachineSets(sets)
       })
       .catch((err) => {
         console.error(err)
@@ -904,6 +1073,64 @@ export function App() {
       }))
   }, [simData, entitiesById])
 
+  const machineCatalogRows = useMemo<MachineCatalogRow[]>(() => {
+    const utilizationById = tableById(simQuery?.tables['sim.machines.utilization'])
+    const seededById = tableById(simQuery?.tables['sim.machines.seeded'])
+    const producedById = tableById(simQuery?.tables['sim.machines.produced'])
+    const coverageById = tableById(simQuery?.tables['sim.machines.coverage'])
+    const targetSet = new Set(machineSets.sets.find((set) => set.id === 'self_reproducing_target')?.ids ?? [])
+    const runCounts = new Map<string, number>()
+    const reservedCounts = new Map<string, number>()
+
+    for (const run of simData?.process_runs ?? []) {
+      if (run.machine_type) runCounts.set(run.machine_type, (runCounts.get(run.machine_type) ?? 0) + 1)
+      for (const reserved of run.reserved_machines ?? []) {
+        reservedCounts.set(reserved.machine_id, (reservedCounts.get(reserved.machine_id) ?? 0) + 1)
+      }
+    }
+
+    return entities
+      .filter(isMachineEntity)
+      .filter((entity) => !MACHINE_CATALOG_ALIASES.has(entity.id))
+      .map((entity) => {
+        const raw = entity.raw
+        const util = utilizationById.get(entity.id)
+        const seeded = seededById.get(entity.id)
+        const produced = producedById.get(entity.id)
+        const coverage = coverageById.get(entity.id)
+        const reservedCount = reservedCounts.get(entity.id) ?? 0
+        const runCount = numberField(util, 'run_count') || runCounts.get(entity.id) || reservedCount
+        const busyHours = numberField(util, 'busy_hours')
+        const producedQuantity = numberField(produced, 'produced_quantity') || numberField(coverage, 'produced_quantity')
+        const importedQuantity = numberField(seeded, 'imported_quantity') || numberField(coverage, 'imported_quantity')
+
+        return {
+          id: entity.id,
+          label: entity.name || entity.id,
+          path: entity.path,
+          family: entity.category || inferMachineFamily(entity),
+          capabilities: stringArrayField(raw, 'capabilities'),
+          recipeId: stringField(raw, 'recipe'),
+          bomId: stringField(raw, 'bom'),
+          massLabel: formatMachineMass(raw),
+          runCount,
+          busyHours,
+          utilizationPercent: numberField(util, 'utilization_percent'),
+          totalEnergyKwh: numberField(util, 'total_energy_kwh'),
+          reservedCount,
+          supportedProcessCount: getMachineSupportedProcessRows(entity, entities).length,
+          isTarget: targetSet.has(entity.id),
+          isUsed: runCount > 0 || reservedCount > 0 || busyHours > 0,
+          isSeeded: Boolean(seeded || importedQuantity > 0),
+          isProduced: Boolean(produced || producedQuantity > 0),
+          covered: Boolean(coverage?.covered),
+          importedQuantity,
+          producedQuantity,
+        }
+      })
+      .sort((a, b) => b.runCount - a.runCount || a.family.localeCompare(b.family) || a.label.localeCompare(b.label))
+  }, [entities, simData, simQuery, machineSets])
+
   return (
     <div className={`app ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       <aside className="sidebar">
@@ -921,6 +1148,9 @@ export function App() {
         </button>
         <button className={route.view === 'recipes' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'recipes' })}>
           {sidebarCollapsed ? '🧪' : '🧪 Recipes'}
+        </button>
+        <button className={route.view === 'machines' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'machines' })}>
+          {sidebarCollapsed ? '⚙' : '⚙ Machines'}
         </button>
         <button className={route.view === 'wiki' ? 'nav active' : 'nav'} onClick={() => navigate({ view: 'wiki', id: WIKI_HOME_ID })}>
           {sidebarCollapsed ? '📚' : '📚 Wiki'}
@@ -991,6 +1221,13 @@ export function App() {
             zoom={zoom}
             onZoom={setZoom}
             onOpenKB={openWiki}
+          />
+        )}
+
+        {route.view === 'machines' && (
+          <MachineCatalogView
+            rows={machineCatalogRows}
+            onSelect={(id) => navigate({ view: 'wiki', id })}
           />
         )}
 
@@ -1566,6 +1803,18 @@ function WikiView({
         : [],
     [allEntities, entity],
   )
+  const machineSupportedProcesses = useMemo(() => {
+    if (!entity || !isMachineEntity(entity)) return []
+    return getMachineSupportedProcessRows(entity, allEntities)
+  }, [allEntities, entity])
+  const machineSupportedProcessIds = useMemo(
+    () => new Set(machineSupportedProcesses.map((row) => row.id)),
+    [machineSupportedProcesses],
+  )
+  const nonSupportReferences = useMemo(
+    () => references.filter((ref) => !machineSupportedProcessIds.has(ref.id)),
+    [references, machineSupportedProcessIds],
+  )
 
   return (
     <div className="wiki-page">
@@ -1663,9 +1912,45 @@ function WikiView({
             )}
             {isMachineEntity(entity) && raw && (
               <div className="kb-block">
-                <h3>Machine Entry</h3>
-                <p><strong>Capabilities:</strong> {JSON.stringify(raw.capabilities ?? raw.resource_types ?? [])}</p>
-                <p><strong>Requires IDs:</strong> {JSON.stringify(raw.requires_ids ?? [])}</p>
+                <h3>What This Machine Does</h3>
+                {textField(raw, 'notes') ? (
+                  <div className="notes-box">
+                    {textField(raw, 'notes').split('\n').map((line, i) => (
+                      <p key={`note-${i}`}>{line.trim() || '\u00a0'}</p>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="muted-text">No notes field is defined for this machine.</p>
+                )}
+                <div className="machine-summary-grid">
+                  <div>
+                    <label>Capabilities</label>
+                    <div className="chip-list">
+                      {stringListFromField(raw, 'capabilities').concat(stringListFromField(raw, 'resource_types')).length > 0
+                        ? stringListFromField(raw, 'capabilities').concat(stringListFromField(raw, 'resource_types')).map((cap) => <span key={cap}>{cap}</span>)
+                        : <em>none listed</em>}
+                    </div>
+                  </div>
+                  <div>
+                    <label>Build Data</label>
+                    <p>
+                      <strong>Recipe:</strong>{' '}
+                      {raw.recipe ? <button className="wiki-link" onClick={() => onWikiJump(String(raw.recipe))}>{String(raw.recipe)}</button> : 'none'}
+                    </p>
+                    <p>
+                      <strong>BOM:</strong>{' '}
+                      {raw.bom ? <button className="wiki-link" onClick={() => onWikiJump(String(raw.bom))}>{String(raw.bom)}</button> : 'none'}
+                    </p>
+                  </div>
+                  <div>
+                    <label>Requirements</label>
+                    <div className="chip-list">
+                      {stringListFromField(raw, 'requires_ids').length > 0
+                        ? stringListFromField(raw, 'requires_ids').map((id) => <button key={id} className="chip-link" onClick={() => onWikiJump(id)}>{id}</button>)
+                        : <em>none listed</em>}
+                    </div>
+                  </div>
+                </div>
                 {machineUsage.length > 0 && (
                   <>
                     <h4>Processes Run On This Machine (Simulation)</h4>
@@ -1691,6 +1976,42 @@ function WikiView({
                     </div>
                   </>
                 )}
+              </div>
+            )}
+            {isMachineEntity(entity) && (machineSupportedProcesses.length > 0 || nonSupportReferences.length > 0) && (
+              <div className="kb-block">
+                <h3>Machine References</h3>
+                <div className="machine-reference-grid">
+                  <div>
+                    <h4>Supported Process Steps</h4>
+                    {machineSupportedProcesses.length > 0 ? (
+                      <ul>
+                        {machineSupportedProcesses.slice(0, 120).map((row) => (
+                          <li key={row.id}>
+                            <button className="wiki-link" onClick={() => onWikiJump(row.id)}>{row.name}</button>
+                            <small> ({row.relation})</small>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="muted-text">No process steps explicitly require this machine in exported KB data.</p>
+                    )}
+                  </div>
+                  <div>
+                    <h4>Other Referenced By</h4>
+                    {nonSupportReferences.length > 0 ? (
+                      <ul>
+                        {nonSupportReferences.slice(0, 120).map((ref, i) => (
+                          <li key={`${ref.kind}:${ref.id}:${i}`}>
+                            <button className="wiki-link" onClick={() => onWikiJump(ref.id)}>{ref.name}</button> <small>({ref.kind})</small>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p className="muted-text">No other references found.</p>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
             {isRecipeEntity(entity) && raw && (
@@ -1796,7 +2117,7 @@ function WikiView({
                 </ul>
               </div>
             )}
-            {deferRefs && references.length > 0 && (
+            {deferRefs && !isMachineEntity(entity) && references.length > 0 && (
               <div className="kb-block">
                 <h3>Referenced By (KB + Articles)</h3>
                 <ul>
@@ -1830,6 +2151,174 @@ function WikiView({
         )}
       </section>
     </div>
+  )
+}
+
+function MachineCatalogView({
+  rows,
+  onSelect,
+}: {
+  rows: MachineCatalogRow[]
+  onSelect: (id: string) => void
+}) {
+  const [query, setQuery] = useState('')
+  const [filter, setFilter] = useState<MachineCatalogFilter>('all')
+  const [family, setFamily] = useState('all')
+  const [sort, setSort] = useState<MachineCatalogSort>('usage')
+
+  const families = useMemo(() => {
+    const counts = new Map<string, number>()
+    for (const row of rows) counts.set(row.family, (counts.get(row.family) ?? 0) + 1)
+    return Array.from(counts.entries()).sort((a, b) => a[0].localeCompare(b[0]))
+  }, [rows])
+
+  const stats = useMemo(() => ({
+    all: rows.length,
+    target: rows.filter((row) => row.isTarget).length,
+    used: rows.filter((row) => row.isUsed).length,
+    seeded: rows.filter((row) => row.isSeeded).length,
+    produced: rows.filter((row) => row.isProduced).length,
+    unused: rows.filter((row) => !row.isUsed).length,
+  }), [rows])
+
+  const visibleRows = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    const filtered = rows.filter((row) => {
+      if (filter === 'target' && !row.isTarget) return false
+      if (filter === 'used' && !row.isUsed) return false
+      if (filter === 'seeded' && !row.isSeeded) return false
+      if (filter === 'produced' && !row.isProduced) return false
+      if (filter === 'unused' && row.isUsed) return false
+      if (family !== 'all' && row.family !== family) return false
+      if (!q) return true
+      return [
+        row.id,
+        row.label,
+        row.family,
+        row.path,
+        row.recipeId ?? '',
+        row.bomId ?? '',
+        ...row.capabilities,
+      ].some((value) => value.toLowerCase().includes(q))
+    })
+
+    return [...filtered].sort((a, b) => {
+      if (sort === 'name') return a.label.localeCompare(b.label) || a.id.localeCompare(b.id)
+      return Number(b.isUsed) - Number(a.isUsed)
+        || b.runCount - a.runCount
+        || b.busyHours - a.busyHours
+        || a.label.localeCompare(b.label)
+    })
+  }, [rows, query, filter, family, sort])
+
+  const groupedRows = useMemo(() => {
+    const groups = new Map<string, MachineCatalogRow[]>()
+    for (const row of visibleRows) {
+      const bucket = groups.get(row.family) ?? []
+      bucket.push(row)
+      groups.set(row.family, bucket)
+    }
+    return Array.from(groups.entries()).sort((a, b) => {
+      if (family !== 'all') return 0
+      const ai = MACHINE_FAMILY_ORDER.indexOf(a[0])
+      const bi = MACHINE_FAMILY_ORDER.indexOf(b[0])
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi) || a[0].localeCompare(b[0])
+    })
+  }, [visibleRows, family])
+
+  const filters: Array<{ key: MachineCatalogFilter; label: string; count: number }> = [
+    { key: 'all', label: 'All', count: stats.all },
+    { key: 'target', label: 'Target', count: stats.target },
+    { key: 'used', label: 'Used', count: stats.used },
+    { key: 'seeded', label: 'Seeded', count: stats.seeded },
+    { key: 'produced', label: 'Produced', count: stats.produced },
+    { key: 'unused', label: 'Unused', count: stats.unused },
+  ]
+
+  return (
+    <section className="machine-page">
+      <div className="machine-head">
+        <div>
+          <h1>Machines</h1>
+          <p>{visibleRows.length.toLocaleString()} shown from {rows.length.toLocaleString()} KB machine entries</p>
+        </div>
+        <div className="machine-stat-grid">
+          <div><label>Total</label><strong>{stats.all.toLocaleString()}</strong></div>
+          <div><label>Target set</label><strong>{stats.target.toLocaleString()}</strong></div>
+          <div><label>Used in current run</label><strong>{stats.used.toLocaleString()}</strong></div>
+          <div><label>Seeded</label><strong>{stats.seeded.toLocaleString()}</strong></div>
+        </div>
+      </div>
+
+      <div className="machine-controls">
+        <div className="segmented">
+          {filters.map((item) => (
+            <button
+              key={item.key}
+              className={filter === item.key ? 'active' : ''}
+              onClick={() => setFilter(item.key)}
+            >
+              {item.label} <span>{item.count}</span>
+            </button>
+          ))}
+        </div>
+        <input
+          className="machine-search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search machine id, name, capability, recipe, or BOM"
+        />
+        <select value={family} onChange={(e) => setFamily(e.target.value)}>
+          <option value="all">All families</option>
+          {families.map(([name, count]) => (
+            <option key={name} value={name}>{name} ({count})</option>
+          ))}
+        </select>
+        <select value={sort} onChange={(e) => setSort(e.target.value as MachineCatalogSort)}>
+          <option value="usage">Sort by usage</option>
+          <option value="name">Sort by name</option>
+        </select>
+      </div>
+
+      <div className="machine-legend">
+        <span><span className="machine-mini-badge target">T</span> Target</span>
+        <span><span className="machine-mini-badge used">U</span> Used in current run</span>
+        <span><span className="machine-mini-badge seeded">S</span> Seeded</span>
+        <span><span className="machine-mini-badge produced">P</span> Produced</span>
+      </div>
+
+      <div className="machine-matrix-wrap">
+        {groupedRows.map(([groupName, groupRows]) => (
+          <section key={groupName} className="machine-group">
+            <header>
+              <h2>{groupName} <span>({groupRows.length.toLocaleString()} machines)</span></h2>
+            </header>
+            <div className="machine-cell-grid">
+              {groupRows.map((row) => (
+                <button
+                  key={row.id}
+                  className={`machine-cell ${row.isTarget ? 'is-target' : ''} ${row.isUsed ? 'is-used' : ''}`}
+                  onClick={() => onSelect(row.id)}
+                  title={`${row.label}\n${row.id}\n${row.family}\n${row.capabilities.slice(0, 6).join(', ') || 'no capabilities'}`}
+                >
+                  <span className="machine-cell-name">{row.label}</span>
+                  <span className="machine-cell-id">{row.id}</span>
+                  <span className="machine-cell-meta">
+                    {row.isTarget && <span className="machine-mini-badge target">T</span>}
+                    {row.isUsed && <span className="machine-mini-badge used">U</span>}
+                    {row.isSeeded && <span className="machine-mini-badge seeded">S</span>}
+                    {row.isProduced && <span className="machine-mini-badge produced">P</span>}
+                    <span className="machine-cell-runs">{row.runCount ? `${row.runCount} runs` : row.massLabel}</span>
+                    <span className="machine-cell-steps">{row.supportedProcessCount} steps</span>
+                  </span>
+                </button>
+              ))}
+            </div>
+          </section>
+        ))}
+        {visibleRows.length === 0 && <div className="empty-table">No machines match the current filters.</div>}
+      </div>
+    </section>
   )
 }
 

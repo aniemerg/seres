@@ -92,6 +92,14 @@ export type KBEntity = {
 
 export type KBEntitiesPayload = { entities: KBEntity[] }
 
+export type MachineSetsPayload = {
+  sets: Array<{
+    id: string
+    name: string
+    ids: string[]
+  }>
+}
+
 export type Article = {
   id: string
   title: string

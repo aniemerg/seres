@@ -1,0 +1,34 @@
+id: machine_assembly_fdm_3d_printer
+kind: process
+process_type: batch
+name: FDM 3D printer assembly (frame + electronics)
+layer_tags:
+- layer_7
+- layer_8
+inputs:
+- item_id: machine_frame_small
+  qty: 1.0
+  unit: unit
+- item_id: power_electronics_module
+  qty: 1.0
+  unit: unit
+outputs:
+- item_id: fdm_3d_printer
+  qty: 1.0
+  unit: unit
+resource_requirements:
+- machine_id: labor_bot_general_v0
+  qty: 1
+  unit: count
+- machine_id: assembly_station
+  qty: 1
+  unit: count
+energy_model:
+  type: fixed_per_batch
+  value: 2.0
+  unit: kWh
+time_model:
+  type: batch
+  hr_per_batch: 1.0
+notes: FDM 3D printer assembly from frame_small and power_electronics_module using
+  assembly_station; placeholder until BOM refined.

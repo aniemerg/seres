@@ -1,0 +1,25 @@
+id: fdm_3d_printer
+name: FDM 3D printer
+kind: machine
+mass: 40.0
+unit: unit
+bom: bom_fdm_3d_printer
+capabilities:
+- additive_manufacturing
+- fused_deposition_modeling
+- fdm_printing
+- polymer_printing
+- silicone_plastic_printing
+- ceramic_glass_precursor_printing
+processes_supported:
+- polymer_printed_motor_ironpla_v0
+- process_3d_print_motor_ironpla_v0
+- rotor_3d_printed_basic_v0
+notes: >
+  FDM/FFF printer modeled as the RepRap-derivative branch of the lunar
+  3D-printing suite. Literature role: fused deposition modelling for
+  silicone plastic and ceramic/glass precursors, not metal deposition. Metal
+  additive manufacturing should use EBF3/EBAM machines such as
+  ebf3_3d_printer.
+recipe: recipe_fdm_3d_printer
+unit_kind: discrete

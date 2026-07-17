@@ -20,7 +20,10 @@ resource_requirements:
   - machine_id: labor_bot_general_v0
     qty: 1
     unit: count
-  - machine_id: resource_3d_printer_multi_material_v0
+  - machine_id: fdm_3d_printer
+    qty: 1
+    unit: count
+  - machine_id: ebf3_3d_printer
     qty: 1
     unit: count
 energy_model:
@@ -34,6 +37,10 @@ time_model:
   rate_unit: kg/hr
   scaling_basis: metal_wire_feed
 notes: >
-  Modular multi-material additive process combining wire and regolith-derived
-  deposition paths.
-
+  Modular multi-material additive process represented as coordinated use of the
+  two primary lunar 3D-printing suite machines: FDM for polymer/precursor
+  deposition and EBF3 for metal wire deposition. Fresnel solar sintering remains
+  available as a solar-concentrator-supported materials process, but is not
+  modeled as a separate primary additive machine. The former multi-material
+  machine entry is treated as an integration alias rather than a fourth primary
+  additive machine.
