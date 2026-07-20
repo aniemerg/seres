@@ -1,15 +1,29 @@
 id: bom_ebf3_3d_printer
 owner_item_id: ebf3_3d_printer
 components:
-  - item_id: vacuum_chamber
-    qty: 1
-  - item_id: electron_gun_assembly
-    qty: 1
-  - item_id: wire_feed_system_basic
-    qty: 1
-  - item_id: control_panel_basic
-    qty: 1
-  - item_id: power_output_terminals
-    qty: 1
-  - item_id: fastener_kit_medium
-    qty: 1
+  - item_id: ebf3_controls
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_power_supplies
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_high_voltage_tank
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_fixed_electron_beam_gun
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_wire_feeder
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_four_axis_positioning_system
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_manufacture_cabin
+    qty: 1.0
+    unit: unit
+notes: >
+  Top-level EBF3 BOM refined into seven subsystem boundaries. Each subsystem is
+  intentionally represented as a named assembly so source-reviewed BOM details
+  can be added without keeping coarse generic components at the printer top
+  level.

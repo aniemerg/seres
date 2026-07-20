@@ -1,0 +1,197 @@
+             Controls item table
+                                                       Single-material                                                                   Need Rationale
+               No.     Type           Item             Part /          Function          Composition           Materials                 Source / Page /
+                                                       Assembly                                                                          Verbatim Quote
+                                                                       Execute                                                           NASA EBF³
+                                                                       operator                                                          patent describing
+                                                                                         Industrial PC, CPU
+                                                                       commands,                               FR-4 PCB, copper          the
+                                                                                         board, storage,
+                       Control        Control                          coordinate                              traces, aluminum/steel    instrumentation
+               CTL-1                                   Assembly                          I/O cards,
+                       Computer       computer                         subsystems,                             enclosure, copper         subsystem. Page
+                                                                                         enclosure, power
+                                                                       and manage                              wiring.                   p.11. Quote:
+                                                                                         input.
+                                                                       the fabrication                                                   “computer
+                                                                       process.                                                          system.”
+                                                                       Run
+                                                                       deterministic                                                     60kV 15kW High
+                                                                       control loops     Real-time                                       voltage tank-
+                                                                                                               FR-4 PCB, copper
+                                      Real-time                        for high-         controller board,                               BINP Novosibirsk
+                       Control                                                                                 traces, silicon ICs,
+               CTL-2                  control          Assembly        voltage,          FPGA/DSP/MCU,                                   describes DSP
+                       Hardware                                                                                aluminum heat
+                                      processor                        motion, wire      memory, clock,                                  and PLM control.
+                                                                                                               spreader.
+                                                                       feed, and         isolated I/O.                                   Page p.2. Quote:
+                                                                       interlock                                                         “DSP and PLM.”
+                                                                       timing.
+                                                                                                                                         NASA EBF³
+                                                                       Command
+                                                                                         Path execution                                  patent describes
+                                                                       deposition,
+                                                                                         module,                                         control software
+                                                                       coordinate
+                                                                                         subsystem       Not a material part;            making
+                       Control        Control                          beam power,
+               CTL-3                                   Software                          command module, stored on controller            commands to
+                       Software       software                         wire feed,
+                                                                                         safety state    storage.                        subsystems.
+                                                                       motion, data
+                                                                                         machine, recipe                                 Page p.11. Quote:
+                                                                       logging, and
+                                                                                         manager.                                        “control
+                                                                       interlocks.
+                                                                                                                                         software.”
+                                                                       Connect high-
+                                                                                                                                         60keV 30kW
+                                                                       voltage source,
+                                                                                                                                         electron beam-
+                                                                       magnetic          CAN interface
+                                                                                                               FR-4 PCB, copper          BINP Novosibirsk
+                                     CAN-bus                           system,           card, transceiver,
+                                                                                                               traces, silicon           describes CAN-
+               CTL-4   Communication communication     Assembly        modulator         isolation,
+                                                                                                               transceivers, shielded    bus control. Page
+                                     interface                         controller,       connectors, shield
+                                                                                                               twisted cable.            p.3. Quote:
+                                                                       alarm system,     termination.
+                                                                                                                                         “CAN-bus
+                                                                       and control
+                                                                                                                                         interface.”
+                                                                       computer.
+                                                                       Measure                                                           60kV 15kW High
+                                                                       voltages,                                                         voltage tank-
+                                                                       currents,         Analog input          FR-4 PCB, copper          BINP Novosibirsk
+                                      Analog input
+                       Data                                            temperatures,     board, ADC, input     traces, silicon ADC,      lists measured
+               CTL-5                  and ADC          Assembly
+                       Acquisition                                     and feedback      buffers, isolation,   opto/digital isolation,   channels. Page
+                                      module
+                                                                       signals for       terminal block.       tin-plated terminals.     p.3. Quote:
+                                                                       control and                                                       “Measured
+                                                                       protection.                                                       channels.”
+                                                                       Interface
+                                                                       thermocouples,
+                                                                       pressure
+                                                                                         Signal
+                                                                       sensors,                                                          NASA EBF³
+                                                                                         conditioning          FR-4 PCB, copper
+                                                                       voltage                                                           patent lists
+                                      Sensor                                             circuits, terminal    wiring, tin-plated
+                       Sensor                                          sensors,                                                          instrumentation
+               CTL-6                  interface        Assembly                          blocks, isolation,    terminals,
+                       Interface                                       current                                                           sensors. Page
+                                      module                                             shield grounding,     aluminum/steel
+                                                                       sensors,                                                          p.11. Quote: “at
+                                                                                         calibration           enclosure.
+                                                                       position                                                          least one sensor.”
+                                                                                         interface.
+                                                                       sensors, and
+                                                                       wire-feed
+                                                                       sensors.
+                                                                       Record process
+                                                                                                                                         NASA EBF³
+                                                                       data on a         Storage device,
+                                                                                                                                         patent describes
+                                      Data logging                     common time       timing clock, data    SSD/flash storage, FR-4
+                                                                                                                                         recording
+               CTL-7   Data Logging   and timebase     Assembly        base for later    logger software,      PCB, copper traces,
+                                                                                                                                         process data.
+                                      module                           analysis and      synchronization       aluminum enclosure.
+                                                                                                                                         Page p.11. Quote:
+                                                                       process           interface.
+                                                                                                                                         “recording data.”
+                                                                       verification.
+               CTL-8   Process        Visible camera   Assembly        Visually          Camera, lens,         Aluminum camera           NASA EBF³
+                       Monitoring     monitoring                       monitor the       camera mount,         housing, glass/fused-     patent describes
+
+
+
+Controls item table                                                                                                                                           1
+                                                           Single-material                                                                     Need Rationale
+               No.      Type              Item             Part /          Function           Composition           Materials                  Source / Page /
+                                                           Assembly                                                                            Verbatim Quote
+                                          system                           active process     lighting interface,   silica optics, copper      cameras for
+                                                                           zone and           image cable,          cable, polymer             visual recording.
+                                                                           chamber            external              insulation outside         Page p.11. Quote:
+                                                                           interior.          recorder/interface.   hot/vacuum zone.           “video cameras.”
+                                                                                                                                        NASA EBF³
+                                                                                                                                        presentation
+                                                                           Monitor melt-     Thermal camera,
+                                                                                                                Aluminum housing,       shows thermal
+                                          Thermal                          pool              lens/window
+                                                                                                                germanium/ZnSe/fused- imaging for
+                        Process           imaging                          temperature or interface, camera
+               CTL-9                                       Assembly                                             silica optics depending closed-loop
+                        Monitoring        monitoring                       thermal field for mount, data cable,
+                                                                                                                on wavelength, copper control. Page
+                                          system                           process           calibration target
+                                                                                                                cable.                  p.29. Quote:
+                                                                           control.          optional.
+                                                                                                                                        “Thermal
+                                                                                                                                        Imaging.”
+                                                                                                                                               NASA EBF³
+                                                                           Send                                                                patent states
+                                                                                              Motion I/O card,
+                                                                           commands to                                                         positioning
+                                                                                              encoder input,        FR-4 PCB, copper
+                                                                           positioning                                                         control is
+                                          Motion-control                                      step/direction or     traces, silicon ICs,
+               CTL-10   Motion Control                     Assembly        drives and                                                          accomplished by
+                                          interface                                           servo command         shielded cable
+                                                                           receive                                                             instrumentation.
+                                                                                              output, limit-        connectors.
+                                                                           position/status                                                     Page p.10. Quote:
+                                                                                              switch input.
+                                                                           feedback.                                                           “control of each
+                                                                                                                                               axis.”
+                                                                                                                                               NASA EBF³
+                                                                           Command wire       Motor command                                    patent describes
+                                                                           feed rate,         output, feed-rate                                wire feeder
+                                          Wire-feed                                                                 FR-4 PCB, copper
+                        Wire Feed                                          start/stop feed,   sensor input,                                    control
+               CTL-11                     control          Assembly                                                 traces, shielded cable,
+                        Control                                            and receive        encoder input,                                   parameters. Page
+                                          interface                                                                 tin-plated terminals.
+                                                                           wire-feed          interlock input,                                 p.11. Quote: “wire
+                                                                           sensor data.       connector.                                       feeder control
+                                                                                                                                               parameters.”
+                                                                                                                                             60keV 30kW
+                                                                           Manage                                                            electron beam-
+                                                                                              Safety relay or
+                                                                           interlocks,                                                       BINP Novosibirsk
+                                                                                              safety PLC,           FR-4 PCB, relay
+                                          Alarm and                        alarm states,                                                     connects
+                                                                                              interlock inputs,     contacts, copper wiring,
+               CTL-12   Safety Logic      blocking logic   Assembly        emergency                                                         alarm/blocking to
+                                                                                              relay outputs,        steel/aluminum
+                                          module                           stop logic, and                                                   control computer.
+                                                                                              status indicators,    enclosure.
+                                                                           shutdown                                                          Page p.3. Quote:
+                                                                                              wiring terminals.
+                                                                           commands.                                                         “alarm and
+                                                                                                                                             blocking system.”
+                                                                           House the
+                                                                           control                                                             NASA EBF³
+                                                                                                                    Powder-coated steel,
+                                                                           computer, I/O      Cabinet body,                                    patent describes
+                                                                                                                    304/316 stainless steel,
+                                                                           modules,           back panel, DIN                                  internal/external
+                                          Controls                                                                  5052 aluminum, copper
+               CTL-13   Control Cabinet                    Assembly        communication      rails, cable ducts,                              instrumentation
+                                          cabinet                                                                   grounding bar,
+                                                                           hardware,          grounding bar,                                   and control. Page
+                                                                                                                    polyamide terminal
+                                                                           power              terminal blocks.                                 p.11. Quote:
+                                                                                                                    blocks.
+                                                                           terminals, and                                                      “instrumentation.”
+                                                                           safety logic.
+
+
+
+
+Controls item table                                                                                                                                                 2
+

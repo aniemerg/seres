@@ -1,0 +1,175 @@
+                                  Proceedings of RuPAC 2006, Novosibirsk, Russia
+
+
+     HIGH-VOLTAGE SOURCE WITH OUTPUT VOLTAGE UP TO 60 KV
+                   WITH POWER UP TO 15 KW
+  D.V. Senkov, I.A. Gusev, A.S. Medvedko, A. Yu. Protopopov, D.N. Pureskin , Yu. F. Tokarev,
+                            V.D. Yudin BINP Novosibirsk Russia
+Abstract                                                          transistors (IGBT) as switches (part A) and high-voltage
+   The presented report contains the description of a high-       sectioned transformer with the rectifier (part B). The
+voltage source with output voltage up to 60 kV with               design of power converter consists of 3-phase rectifier
+power up to 15 kW. The source consist of the converter            D1-D6, electromagnetic (EMI) filter F1, rectifiers filter
+with IGBT switches, working with a principle of pulse-            L1 C1-C4, 20 kHz inverter with IGBT switches Q1-Q4,
+width modulation on 20 kHz frequency, and high voltage            impedance matching design L2, L3, C5, and isolation
+sectioned transformer with the rectifier. The schematic           transformer T1.
+configuration and the optimal matching of the rectifier to
+the load has allowed minimising the energy stored at the          Input Rectifier
+reactive components of the high-voltage stage at the level          EMI filter is used to eliminate high-frequency noise to
+less than 15 J for 60 kV operation. The design of the high-       the power line from the source. 3-phase rectifier and filter
+voltage transformer provides preservation of working              C1-C4 is used to rectifier input AC 3-phase voltage 380V
+capacity at voltage up to 100 kV. A nominal output                50Hz to DC 550-600V voltage. Voltage ripple level on
+voltage of the source is 60 kV. The efficiency of system is       capacitors C1-C4 amount less then 1-% with output
+more than 85% at the nominally output power. The                  power 15 kW.
+controller of the source is developed with DSP and PLM,           Inverter
+which allows optimising operations of the source. For
+control of the source serial CAN-interface is used. The              Full-bridge inverter Q1-Q4 converts DC 550V voltage
+description of the source and the test results are presented.     to AC voltage with 20 kHz frequency. Inverter working
+                                                                  with principle of pulse-width modulation (PWM) with 2
+                                                                  circles: freewheeling when switches Q2, Q4 are switched
+                     DESCRIPTION                                  on (ON) and energy addition when Q1, Q4 or Q2, Q3 are
+   The presented source was designed for some different           ON. With this conditions the IGBT switches is been in
+Budker institute of nuclear physics internal applications.        soft switching mode, and the switching transient process
+That was reason for some specific terms like: fast time for       and the switching energy loss are minimised.
+rise voltage to 60 kV after high-voltage breakdown,
+strong reliability to high-voltage breakdown, breakdown           Matching Circuit
+energy less than 15 J for 60 kV operation, low voltage               The power source must work with wide range of loads,
+ripple for maximal power operation. The basic                     from zero current to full load. The technical conditions
+characteristics of high-voltage source are shown in table1.       for this high-voltage source are: transient process time
+                                                                  must be less then 5 ms with transient voltage jump less
+    Table 1 : Basic parameters of high-voltage source.            than 6kV for 60 kV operations for load switching between
+ Parameter                 Unit                                   20mA and 250mA (full load). The matching circuit
+                                                                  consists of C5, L2, L3 is used for minimising transient
+                                      Min    Nom      Max         process and for improving efficiently of design. The
+                                                                  frequency characteristic of high-voltage transformer with
+ Output voltage            kV         30     60       90          matching circuit is characteristic of two coupled circuits:
+ Output current            mA         0.1    250      300         series circuit of matching design C5, L2, L3 and leakage
+                                                                  inductance of high-voltage transformer, and parallel
+ Output power              kW                15                   circuit, which being obtained from magnetising
+                                                                  inductance (for about 100 μHn) and parasitic capacitance
+ Voltage ripple            %                          0.5
+                                                                  (for about 1,5 μF leading to primary winding) of high-
+ Voltage stability         %                          0.5         voltage transformer. The shape of frequency characteristic
+                                                                  is presented in figure 2. As seen, the working area - 20
+ Current Modulation        From 1 mA to 250 mA
+                                                                  kHz is located between two peaks and the transfer
+ Transient time            ms                4                    constant in this frequency don’t depend on load. It’s
+                                                                  matter that in ideal conditions on 20 kHz frequency this
+ Inverter frequency        kHz               20                   design is a voltage source and the output voltage is
+                                                                  constant with wide range of loads. This is the first reason
+Overview                                                          to use matching circuit – minimising effects of big
+  The design of power part high-voltage source is shown           parasitic capacitance and leakage inductance.
+in figure 1. The high-voltage source consists of the 20
+kHz power converter with insulated gate bipolar
+
+                                                            301
+                                                Proceedings of RuPAC 2006, Novosibirsk, Russia
+
+
+                                 L1
+
+                                                                                                                             T2
+                                                                                                                          High-voltage transformer
+                                                                     Q1            Q3
+               VD1   VD3     VD5                         C3
+       F1                                       C1                                                                                                           60kV
+                                                                                          C5    L2
+  A                                                                                                                                                      C
+                                                                                                         T1
+
+  B
+
+                                                                                                L3
+  C                                                                                                                                                      C
+                                                                     Q2                                  TRA NSFORMER
+               VD2   VD4     VD6                                                   Q4
+                                               C2        C4
+
+
+                                                                                                                                                         C
+
+
+
+
+                      P AR T A        2 0 KH Z P OW ER                                                                  P AR T B    H IG H- VO L TA GE
+                                      C ON VE RT E R                                                                                V OL UM E
+
+
+
+                                                              Figure 1: The design of high-voltage source.
+
+
+
+
+               Figure 2: The gain frequency characteristic of matching circuit with the high-voltage transformer.
+
+   The second reason to use this circuit is improving
+efficiency of power design. Magnetising inductance,                                     Design
+parallel parasitic capacitance and the matching circuit                                  The converter is made in tree Schroff 6U cases in the
+organise low-pass filter for all high harmonics of inverters                          rack. There are distilled water is used to cool IGBT
+rectangular alternating voltage. That way, sinusoidal                                 switches and other elements.
+voltage is feed in the high-voltage transformer, because                                 There are EMI-filter, input switch and rectifier
+all high harmonics are filtered. In other case, the presence                          constructed in the first crate. There is filter capacitors,
+of high harmonics causes power dissipation in the leads                               inverter and control circuit located in the second crate.
+because of scin-effect. Also this harmonics can induce the                            And at last, there are capacitor and inductors of matching
+singing in the winding of high-voltage transformer.                                   circuit located in the third crate.
+
+  High-voltage Transformer                                                              Control Circuit
+  Sectioned high-voltage transformer consists of two                                  The control circuit is realised in digital signal processor
+parallel branches with tree section each. Each section is                             (DSP), programming logic matrix array (PLM), and
+complete design and it includes winding, half-bridge                                  analogy input buffers. The control and analogue grounds
+rectifier and output filter capacitors. Output voltage for                            are isolated from external signals and grounds and, that
+section is 20 kV for 60 kV operations. Output filter                                  way, in control circuit has obtained low noise level. Its
+capacity is selected for output voltage 40 kHz ripples less                           allow operate with better then 0.1% measures precision.
+than 0,5% for full load operation. The transformer is                                 All the IGBT switches are protected from short circuit
+designed in oil-filled tank (diameter 600mm, high                                     and overcurrent. The controller measured 7 analogue
+800mm). The silicon oil [1] is used.                                                  channels with 12bits precision. These channels are shown
+
+                                                                                302
+                                 Proceedings of RuPAC 2006, Novosibirsk, Russia
+
+in table 2. The controller has CAN-bus interface which is                            RESULTS
+used to link with a controlling system. The used data rates
+is 125, 250 and 500 Kbits in second. The protocol of            The high-voltage source was made and has being test with
+CAN-bus interface is compatible with devises produced           the electron beam gun for year. The tests are shown high
+in the Budker institute of nuclear physics [2].                 reliability, efficiency better than 85% for full load
+                                                                operations. The long time stability of output voltage was
+Protections and Interlocks                                      better than 0,5%. Voltage ripple was better than 0,5%.
+                                                                Continues work in full load operations is 8 hours and
+Breakdown protection controls output current. If this
+                                                                longer.
+current up to 350 mA or higher the converter switches off
+(OFF). Switching off time is less then 50 microseconds.
+For that reason, the breakdown energy less than 15J for                           REFERENCES
+60 kV operations with connected 10 meters of high-              [1] http://www.sofex.ru/pdf/SOFEXIL-TCJ.pdf.
+voltage cable. The converter trays to switch on after 5             Transformer fluid technical manual.
+milliseconds.                                                   [2] V. R. Kozak, M. M. Romakch “The devices vith
+  High-voltage transformer protection measures the                  CANBUS interface for automatic control systems of
+temperature of transformer and input current. If the input          physical complexes” pre-print BINP 2004-68, 2004
+current of transformer rise up to 100A that matter the
+short circuit in transformer. In this case the converter is
+OFF.
+
+              Table2. Measured channels
+   Channel                  period         diapason
+   Output voltage           50μsec         0-60.00kV
+   Output current           50μsec         0-300.0mA
+   Input current high-
+                            50μsec         0-100A
+   voltage transformer
+   Feedback signal          50μsec         0-3000mV
+   Input         3-phase
+                            1msec          0-600V
+   voltage (r.m.s.)
+   Input current (r.m.s.)   1msec          0-100A
+   Temperature         of
+                            0,5sec         0-90°C
+   IGBT switches
+   Temperature         of
+   high-voltage             0,5sec         0-100°C
+   transformer
+
+
+
+
+                                                          303
+

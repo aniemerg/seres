@@ -1,0 +1,212 @@
+                                            Proceedings of EPAC08, Genoa, Italy                                           TUPP161
+
+
+   60 KEV 30 KW ELECTRON BEAM FACILITY FOR ELECTRON BEAM
+                        TECHNOLOGY
+     Yu.I.Semenov, V.E.Akimov, M.A.Batazova, B.A.Dovzhenko, V.V.Ershov, A.R.Frolov,
+  Ye.A.Gusev, I.A.Gusev, V.M.Konstantinov, E.A.Kuper, G.I.Kuznetsov, N.Kh.Kot, V.R.Kozak,
+  P.V.Logatchev, V.R.Mamkin, A.N.Selivanov, A.S.Medvedko, I.V.Nikolaev, A.Yu.Protopopov,
+            D.N.Pureskin, V.V.Repkov, D.V.Senkov, A.S.Tsyganov, A.A.Zharikov,
+                            BINP, 630090, Novosibirsk, Russia
+
+Abstract                                                             Then the beam passes through static and dynamic
+   At the Budker Institute of Nuclear Physics,                     electromagnetic lens gaining required size. At the very
+Novosibirsk, the 60 keV 30 kW electron beam facility for           exit there is a system of scanning coils enabling one to
+electron beam technology has been developed. The                   deflect a beam on a work piece according given
+electron gun provides continuous or modulated beam                 parameters. At the device exit there is a protection system
+within the current range from 1 mA up to 500 mA. The               that confines electron beam deviation, while systems of
+optical system allows both static and dynamic focusing of          video surveillance and the one registering reflected from
+the electron beam within the 50÷500 mm range of                    the work piece electrons to enable to watch closely the
+distance from the gun outlet, the beam scanning and its            welding process.
+parallel displacement from the optical axis. The electron
+gun facility is controlled by the computer via the CAN                       Table 1: Basic parameters of the facility
+interface. This paper presents the general description of
+the facility, its block diagram and main parameters.                Parameters                  Unit              Value
+
+                                                                    Maximum beam power          kW                30
+                  INTRODUCTION
+  Since 2003 at the Budker Institute of Nuclear Physics             Energy of electrons         kV                30÷60
+the 60 keV 30 kW electron beam facilities for electron-             Energy stability            %                 0.5
+beam technology developed and produced. The aim of
+efforts was to satisfy up-to-date constantly growing                Beam current                mA                1÷500
+requirements of aerospace and other branches of industry.           Beam current ripple         %                 ±2
+In order to provide the procedures of welding, cutting,
+surface treatment, drilling of holes and melting, the               Filament current            A                 70÷90
+electron beam facility has following operations:                    Filament current ripple     %                 ±1
+  • Continuous regime of the electron beam.
+  • Modulated electron beam.                                        Power consumption           kW                36
+  • Static focusing of the electron beam.
+  • Dynamic focusing of the electron beam.
+  • The beam scanning.
+  • Parallel displacement of the electron beam from the
+     optical axis.
+  Main parameters are presented in Table 1.
+
+         SCHEME OF THE FACILITY
+  There are three main parts of the installation:
+  • Electron-optical system of the beam.
+  • High voltage unit.
+  • Block of electron beam control.
+A photo of the facility is shown in Fig. 1.
+A block diagram of the facility is presented in Fig. 2.
+Electron-Optical System of the Beam
+   The electron gun consists of direct heated cathode with
+boundary electrode, control electrode, which allows one
+to set beam current value, screen electrode and the anode.
+(See Fig. 3). Next to anode where an electron beam has a                           Figure 1: Photo of the facility.
+minimal diameter, a system of beam axe correction is
+placed.
+
+08 Applications of Accelerators, Technology Transfer and Relations with Industry                           U04 Other Applications
+                                                                                                                             1887
+TUPP161                                     Proceedings of EPAC08, Genoa, Italy
+
+                                                                   voltage breakdown, breakdown energy less than 15 J for
+                                                                   60 kV operation, low voltage ripple for maximal power
+                                                                   operation [1]. The design of power part high-voltage
+                                                                   source is shown at Fig. 4.
+                                                                      The high-voltage source consists of the 20 kHz power
+                                                                   converter with IGBT as switches (part A) and high-
+                                                                   voltage sectioned step-up transformer with the rectifier
+                                                                   (part B). The design of power converter consists of 3-
+                                                                   phase rectifier D1-D6, electromagnetic filter F1, ripple
+                                                                   damping filter L1 C1-C4, 20 kHz inverter with IGBT
+                                                                   switches Q1-Q4, impedance matching design L2, L3, C5,
+                                                                   and isolation transformer T1.Full-bridge inverter Q1-Q4
+                                                                   converts DC 550V voltage to AC voltage with 20 kHz
+Figure 2: Block-diagram of the facility.                           frequency. Inverter working with principle of pulse-width
+                                                                   modulation (PWM) with 2 circles: freewheeling when
+                                                                   switches Q2, Q4 are switched on (ON) and energy
+                                                                   increase when Q1, Q4 or Q2, Q3 are ON. With this
+                                                                   conditions the IGBT switches is been in soft switching
+                                                                   mode, and the switching transient process and the
+                                                                   switching energy loss are minimised.
+                                                                      The power source must work with wide range of loads,
+                                                                   from zero current to full load. The matching circuit
+                                                                   consists of C5, L2, L3 is used for minimising transient
+                                                                   process and for improving efficiently of design. The
+                                                                   transient process time is less then 5 ms with transient
+                                                                   voltage jump less than 6 kV for 60 kV operations for load
+                                                                   switching between 20 mA and 250 mA (full load). The
+                                                                   frequency characteristic of high-voltage transformer with
+                                                                   matching circuit is characteristic of two coupled resonant
+                                                                   circuits: series circuit of matching design C5, L2, L3 and
+                                                                   leakage inductance of high-voltage transformer, and
+Figure 3: The sketch of electron-optical system of the             parallel circuit, which being obtained from magnetising
+beam. Legend: 1-oil tank, 2-high voltage insulator, 3-             inductance (for about 100 μH) and parasitic capacitance
+insulator control electrode, 4-control electrode, 5-               (for about 1,5 μF recalculated to primary winding) of
+cathode, 6-screen electrode, 7-anode, 8-pumping, 9-                high-voltage transformer. 20 kHz is located between two
+dynamic magnetic lens, 10-main magnetic lens, 11-two               peaks on the frequency characteristic and the transfer
+coordinates deflected coils, 12-pick-up of beam                    coefficient at this frequency doesn’t depend on load. It’s
+boundary, 13-pick-up of secondary electrons, 14-high               matter that in ideal conditions on 20 kHz frequency this
+voltage input, 15-trajectory corrector.                            design is a voltage source and the output voltage is
+                                                                   constant with wide range of loads. This is the first reason
+   The cathode made from tantalum foil 0.1÷0.2 mm of               to use matching circuit – minimising effects of big
+thickness mounted in precisely manufactured and                    parasitic capacitance and leakage inductance.
+preliminary adjusted cartridge, which simplifies the                  The second reason to use this circuit is improving
+replacement of the gun and excludes necessity of further           efficiency of power design. Magnetising inductance,
+beam axe alignment. The life-time of the cathode is about          parallel parasitic capacitance and the matching circuit
+100 hrs at high parameters but one can prolong it by               organise low-pass filter for all higher harmonics of
+keeping the gun in stand-by regime (70% of maximal)                inverters rectangular alternating voltage. That way,
+between welding.                                                   sinusoidal voltage is feed in the high-voltage transformer,
+The cathode-anode area is pumped by the turbomolecular             because all high harmonics are filtered. In other case, the
+pump.                                                              presence of high harmonics causes power dissipation in
+                                                                   the leads because of skin-effect. Also this harmonics can
+High Voltage Unit
+                                                                   induce the oscillations in the secondary winding of high-
+   High voltage unit consists of two parts:                        voltage transformer. Sectioned high-voltage transformer
+   • High-voltage source.                                          consists of four step-up high voltage sections. Each
+   • Modulator with cathode heater source.                         section is complete design and it includes winding, half-
+The high-voltage source was designed for some different            bridge rectifier and output filter capacitors. Output
+BINP internal applications. That was reason for some               voltage for section is 15 kV for 60 kV operations. Output
+specific terms like: fast time for rise voltage to 60 kV           filter includes the filters in sections and addition high
+after high-voltage breakdown, strong reliability to high-          voltage output capacitor. Output filter capacity is chosen
+08 Applications of Accelerators, Technology Transfer and Relations with Industry                        U04 Other Applications
+1888
+                                                             Proceedings of EPAC08, Genoa, Italy                                                           TUPP161
+
+                                      L1                                                                               T2       High-voltage transformer
+
+                                                                                                                                                            AC 150V
+
+                                                                      Q1      Q3
+                    VD1   VD3     VD5                        C3                                                                                                 -60kV
+           F1                                        C1
+                                                                                                                                                      C     C
+                                                                                        C5    L2
+      A
+                                                                                                          T1
+
+      B
+                                                                                                                                                      C     C
+                                                                                              L3
+      C
+                                                                      Q2
+                    VD2   VD4     VD6                                         Q4                   TRA NSFORMER
+                                                    C2       C4                                                                                       C     C
+
+
+
+
+                                                                                                                                                      C     C
+
+
+
+
+                           P AR T A        2 0 KHZ P OW ER                                                           P AR T B     H IG H- VO LTAGE
+                                           C ON VERTE R                                                                           V OL UM E
+
+
+                                                             Figure 4: High-voltage source design.
+
+
+                                                                                     • Cathode heater with stabilized current in the rang of
+for output voltage 40 kHz ripples less than 0,5% for full                              0 to 100 A electron beam.
+load operation. The transformer is designed in oil-filled
+tank. The silicon oil [2] is used.                                                 Block of Electron Beam Control
+   The control circuit is with using the digital signal                               High-voltage source, magnetic system, modulator
+processor (DSP), programming logic matrix array (PLM),                             controller, alarm and blocking system are connected to
+and analogue input buffers. The control and analogue                               control computer through CAN-bus interface at 250 kbits
+grounds are isolated from external signals and grounds                             per second rate [3]. Control computer can control and
+and, that way, in control circuit low noise level has                              monitor output voltage, beam current, cathode heat
+obtained. It allows operation at better than 0.1%                                  current, magnetic lens and correctors currents, blocking
+measuring precision. All the IGBT switches are protected                           state and other output and input parameters.
+from short circuit and overcurrent. The controller
+measured 7 analogue channels with 12 bits precision and                                                           RESULTS
+50 μsec time period of measuring for all channels. The
+                                                                                             The four facilities have been produced and tested
+controller has CAN-bus interface which is used to link
+                                                                                   with success in BINP. The tests have shown that facilities
+with a controlling system. The used data rates are 125,
+                                                                                   provide their necessary parameters. At present they have
+250 and 500 Kbits/sec. The feedback system includes
+                                                                                   been installed in Scientific Research Technological
+three loops: main analog feedback loop, connected to the
+                                                                                   Institute “Progress”, Izevsk, Russia and are under field
+ADC channel of DSP, Digital 300 Hz correction and low-
+                                                                                   tests.
+frequency correction loop, increasing of DC frequency
+gain. Digital corrections are realized in DSP. Breakdown
+protection controls output current. If this current jumps up                                              REFERENCES
+to 300 mA or higher the converter switches off (OFF).                              [1] I.A. Gusev, A.S. Medvedko, A. Yu. Protopopov,
+Switching off time is less then 50 microseconds. For that                              D.N. Pureskin, D.V. Senkov, Yu. F. Tokarev, V.D.
+reason, the breakdown energy less than 15J for 60 kV                                   Yudin, “High-voltage source with output voltage up
+operations with connected of 10 meters high-voltage                                    to 60 kV with power up to 15 kW”, Proceedings of
+cable. The converter tries to switch on after 5                                        RuPAC 2006, Novosibirsk, Russia, 2006, p. 82.
+milliseconds.                                                                      [2] Transformer       fluid      technical     manual;
+   High-voltage transformer protection measures the                                    http://www.sofex.ru/pdf/SOFEXIL-TCJ.pdf.
+temperature of oil in the top part of tank and input                               [3] V. R. Kozak, M. M. Romakch, “The devices with
+current. If the transformer input current rises to 100A, a                             CANBUS interface for automatic control systems of
+short circuit in the transformer would result. In this case                            physical complexes” pre-print BINP 2004-68, 2004.
+the converter is OFF. The actuation of protections is
+shown on front panel indicator.
+  Modulator with cathode heater source is supplied by the
+20 kHz power converter and provides:
+   • Control electrode of electron gun with high voltage
+     in the range of 0 to 600 V with ripple 0.5% for
+     decreasing of energy spectrum and stabilization of
+     electron beam current.
+   • Mode of electron beam modulation.
+08 Applications of Accelerators, Technology Transfer and Relations with Industry                                                      U04 Other Applications
+                                                                                                                                                                  1889
+
