@@ -5,7 +5,7 @@ It preserves candidate item IDs and high-level modeling intent, but it is not a
 decomposition planning file and cannot by itself justify child BOM creation,
 material selection, recipe closure, or local manufacturability.
 
-High voltage tank leaf items mapped from V2_high_voltage_tank_item_table; no leaf recipes yet to preserve fidelity.
+High voltage tank leaf items mapped from the high-voltage tank source table; no leaf recipes yet to preserve fidelity.
 
 | Source ID | KB item ID | Modeling decision |
 | --- | --- | --- |
@@ -27,9 +27,11 @@ High voltage tank leaf items mapped from V2_high_voltage_tank_item_table; no lea
 | HV-13 split | `ebf3_hv_tank_oil_level_indicator` | Oil level indicator or sight interface for tank maintenance. |
 | HV-14 | `ebf3_hv_tank_temperature_sensor` | Oil or HV transformer temperature sensing hardware for protection and control. |
 | HV-15 partial | `ebf3_hv_tank_grounding_terminal` | Grounding terminal and bonding interface for HV tank enclosure; shielding/interlock details remain unresolved. |
-| derived | `ebf3_hv_tank_mounting_frame` | Mounting frame or bracket set inferred for HV tank installation; not a direct visible HV table row. |
 
 Mapping corrected during
 `research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md`.
+The previous inferred HV tank mounting-frame row was removed from the active
+mapping because no source row or external source confirms it as a separate
+modeled assembly.
 Masses are first-pass allocations constrained to the current subsystem mass.
 Leaf items intentionally have no local recipes yet.

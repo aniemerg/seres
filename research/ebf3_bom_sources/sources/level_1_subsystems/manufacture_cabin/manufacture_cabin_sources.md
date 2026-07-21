@@ -4,7 +4,7 @@ Purpose: source locations for the EBF3 manufacture cabin subsystem.
 
 ## LOCAL-EBF3-MANUFACTURE-CABIN-TABLE
 
-- Title: V1 manufacture cabin item table
+- Title: Manufacture cabin item table
 - Local PDF: `research/ebf3_bom_sources/organized/V1_manufacture cabin item table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V1_manufacture cabin item table.txt`
 - Authority: user_derived candidate table; candidate-only

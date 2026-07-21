@@ -1,7 +1,7 @@
 # High Voltage Tank Level-2 Audit
 
-Status: scaffold audit and source-tag cleanup completed for current Level-2
-items.
+Status: scaffold audit, source-tag cleanup, and first mechanical/interface
+child splits completed for current high-voltage tank items.
 
 Purpose:
 
@@ -52,7 +52,7 @@ Related review:
 | `ebf3_hv_tank_temperature_sensor` | HV-14 | corrected | Visible table row HV-12 is output/return current monitor; temperature sensing appears under HV-14. |
 | `ebf3_hv_tank_pressure_relief` | HV-13 | partial split | Pressure relief appears within HV-13 oil service/level/pressure-relief hardware, but current KB split separates pressure relief from fill/drain/level. |
 | `ebf3_hv_tank_oil_level_indicator` | HV-13 split | corrected | Visible table row HV-14 is temperature sensing; oil level indicator appears within HV-13. |
-| `ebf3_hv_tank_mounting_frame` | derived | source weak | Visible table row HV-15 is tank grounding/shielding/service interlock. Mounting frame may be derived from enclosure/support needs, not a visible HV-15 row. |
+| HV tank mounting frame | derived candidate | deferred / not in KB | Visible table row HV-15 is tank grounding/shielding/service interlock. No source row or external source currently confirms a separate HV tank mounting-frame assembly for this model. |
 
 ## Missing Or Misrepresented Candidate Rows
 
@@ -70,12 +70,42 @@ The current KB scaffold does not separately represent these visible
 
 ## Current KB Action
 
-- Do not create child BOMs for HV tank internals yet.
+- Added child BOMs for clear tank mechanical/service/interface assemblies:
+  enclosure, internal HV leads and terminals, transformer insulation spacers,
+  tank-side HV output bushing, fill/drain ports, grounding terminal, pressure
+  relief, and oil-level indicator.
 - Source-tag cleanup has added the missing HV-10/HV-11/HV-12 scaffold items and
   corrected notes for existing HV-13/HV-14/HV-15-derived items.
 - Use `hv_tank_interface_review.md` for HV tank/gun interface ownership.
-- Next HV tank work should be a cleanup pass, not transformer/rectifier
-  decomposition.
+- Keep resistor chains, voltage-divider sensing, current monitor, temperature
+  sensing, shielding, service interlock, and transformer/rectifier internals
+  unresolved until their electrical topology is selected.
+
+## Applied Child Splits
+
+| HV tank parent | Child BOM | Current split |
+| --- | --- | --- |
+| `ebf3_hv_tank_enclosure` | `bom_ebf3_hv_tank_enclosure` | shell, lid, lid seal |
+| `ebf3_internal_hv_leads_terminals` | `bom_ebf3_internal_hv_leads_terminals` | HV lead conductors, rounded terminals, local standoffs |
+| `ebf3_transformer_insulation_spacers` | `bom_ebf3_transformer_insulation_spacers` | insulation barriers and spacer posts |
+| `ebf3_tank_side_hv_output_bushing` | `bom_ebf3_tank_side_hv_output_bushing` | conductor, insulator body, mounting flange, cable socket interface, and local field-grading shield marker |
+| `ebf3_hv_tank_fill_drain_ports` | `bom_ebf3_hv_tank_fill_drain_ports` | fill port, drain valve, service plugs |
+| `ebf3_hv_tank_grounding_terminal` | `bom_ebf3_hv_tank_grounding_terminal` | tank ground lug and bonding anchor |
+| `ebf3_hv_tank_pressure_relief` | `bom_ebf3_hv_tank_pressure_relief` | relief valve body and seal |
+| `ebf3_hv_tank_oil_level_indicator` | `bom_ebf3_hv_tank_oil_level_indicator` | sight window, indicator body, indicator seal |
+
+## Batch Child Split Review
+
+| Parent scope | Current status | Rationale |
+| --- | --- | --- |
+| Tank enclosure | adopt / detail deferred | Oil-filled tank evidence supports a physical enclosure. Shell, lid, and lid seal are retained as package children; internal supports, wall thickness, welding, oil compatibility, and test procedure remain unresolved. |
+| Internal HV leads and terminals | adopt / detail deferred | BINP supports oil-side HV source internals; rounded terminals and support standoffs preserve HV-clearance/corona concerns without selecting geometry. |
+| Transformer insulation spacers | adopt / detail deferred | BINP supports sectioned transformer architecture and insulation spacing. Barrier and spacer-post children are retained, but dielectric material and field-stress design remain unresolved. |
+| Tank-side HV output bushing | adopt / detail deferred | Bushing/feedthrough sources support conductor, insulation, mounted barrier, and field-grading concerns. The child BOM now includes a field-grading marker, while exact cable socket/termination geometry and field-control shape remain unresolved. |
+| Fill/drain, pressure relief, oil-level indicator | adopt / detail deferred | Transformer service sources support fluid level, temperature, and pressure/service hardware classes. Exact valve, gauge, seal, and service procedure remain unresolved. |
+| Grounding terminal | adopt / split-boundary guarded | Tank protective bonding is real and distinct from beam-current return or HV return. Full return topology and service interlock remain outside this child BOM. |
+| Resistor, voltage-divider, current-monitor, temperature-sensor packages | adopt package split / electrical detail deferred | These are real HV sensing/protection functions from the table and comparable sources. Component values, isolation, controls acquisition, and return-leg placement remain unresolved. |
+| Transformer insulating fluid | keep leaf | Fluid is a material/consumable item, not an assembly to split at this stage. |
 
 ## Next Work
 
@@ -89,4 +119,5 @@ The current KB scaffold does not separately represent these visible
    it adopts the concise `ebf3_hv_section_module_set` model.
 4. HV tank interface hardware review for HV-8/HV-9 is recorded in
    `research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md`.
-5. Keep `ebf3_hv_tank_mounting_frame` as derived unless a source row is found.
+5. Keep HV tank mounting frame deferred unless a source row, installation layout,
+   or external source confirms it as a separate modeled assembly.

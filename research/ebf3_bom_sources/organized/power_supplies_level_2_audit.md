@@ -1,6 +1,7 @@
 # Power Supplies Level-2 Audit
 
-Status: review completed; source-table aligned BOM correction applied.
+Status: review completed; source-table aligned BOM correction and package-level
+child splits applied.
 
 Purpose:
 
@@ -17,6 +18,7 @@ Source registry:
 Related boundary reviews:
 
 - `research/ebf3_bom_sources/derived/ebf3_subsystem_boundaries.md`
+- `research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md`
 - `research/ebf3_bom_sources/organized/hv_grounding_return_review.md`
 - `research/ebf3_bom_sources/organized/coil_level_decomposition_plan.md`
 
@@ -125,9 +127,9 @@ Level-2 BOM presentation but does not create child BOMs yet.
 | PS-13 low-voltage distribution panel | `ebf3_low_voltage_distribution_panel` | corrected | NASA patent supports apportioning/distributing power. |
 | PS-14 multi-channel driver module | `ebf3_multi_channel_driver_module` | corrected | Represents driver outputs for magnetic, deflection, feeder, and positioning loads while the loads remain in their owning subsystems. |
 | PS-15 thermal management hardware | `ebf3_power_electronics_thermal_management` | corrected | BINP source supports cooling IGBT switches; busbar/cabinet details remain deferred. |
-| Power-supply internal control board | `ebf3_power_supply_control_board` | keep but unnumbered/derived | BINP source supports DSP/PLM/control circuit, but it is not a visible PS-14 row. |
-| Snubber network | `ebf3_snubber_network` | defer or derived-only | Plausible power-electronics detail, but not a visible source-table row and not needed at this level. |
-| Accelerating HV DC supply | `ebf3_accelerating_voltage_dc_supply` | architecture decision needed | As a function it is real, but the present Level-2 table splits HV source across power converter and HV tank. Keeping it as a separate leaf may duplicate the sectioned HV source model. |
+| Power-supply internal control board | `ebf3_power_supply_control_board` | deferred / not in top-level BOM | BINP source supports DSP/PLM/control circuit, but it is not a visible PS-14 row. |
+| Snubber network | `ebf3_snubber_network` | deferred / not in top-level BOM | Plausible power-electronics detail, but not a visible source-table row and not needed at this level. |
+| Accelerating HV DC supply | `ebf3_accelerating_voltage_dc_supply` | deferred / architecture decision needed | As a function it is real, but the present Level-2 table splits HV source across power converter and HV tank. Keeping it as a separate leaf may duplicate the sectioned HV source model. |
 
 ## Recommended BOM Correction
 
@@ -149,9 +151,9 @@ Applied concise target shape:
    split into supply modules by load family.
 9. Keep PS-15 as thermal management, but do not hide all cabinet wiring/busbars
    there unless a cabinet integration item is intentionally added.
-10. Keep `ebf3_power_supply_control_board`, `ebf3_snubber_network`, and
-    `ebf3_accelerating_voltage_dc_supply` as deferred/derived candidates unless
-    the user chooses to keep them as explicit Level-2 rows.
+10. Leave `ebf3_power_supply_control_board`, `ebf3_snubber_network`, and
+    `ebf3_accelerating_voltage_dc_supply` out of the top-level BOM as deferred
+    candidates unless a later power-electronics decomposition justifies them.
 
 ## Presentation Decision
 
@@ -159,10 +161,48 @@ The source-table aligned model is now the active Level-2 presentation:
 
 - The power-supply BOM matches source-table rows PS-1 through PS-15.
 - Extra functional leaves such as accelerating HV output, snubber network, and
-  power-supply internal control board are kept as deferred/derived candidates.
+  power-supply internal control board are kept out of the top-level BOM as
+  deferred candidates.
 - Those deferred candidates may be reintroduced later inside a
   power-electronics child decomposition if source evidence and boundaries justify
   them.
+
+## Load/Driver Follow-Up
+
+Target: decide whether PS-14 should be split now by load family, such as lens
+current drivers, corrector drivers, deflection drivers, wire-feed motor drivers,
+and positioning motor drivers.
+
+Decision: do not split yet.
+
+Reasoning:
+
+- The current boundary model assigns loads to their owning subsystems and
+  driver/current-source hardware to power supplies.
+- BINP supports magnetic lens and corrector currents, and NASA supports power
+  distribution to motors, but the present sources do not define separate driver
+  boards, channel counts, connectors, current ratings, or cabinet packaging.
+- Splitting PS-14 now would duplicate existing load items or imply a driver
+  topology that has not been selected.
+
+Current action:
+
+- Keep `ebf3_multi_channel_driver_module` as the concise Level-2 driver-output
+  item, now with a package-level child BOM.
+- Keep `ebf3_lens_corrector_current_supplies` as a deferred functional
+  candidate, not a top-level BOM child.
+- Revisit only after a load/channel architecture is selected.
+
+## Batch Child Split Review
+
+| Parent scope | Current status | Rationale |
+| --- | --- | --- |
+| AC input, disconnect, EMI filter, rectifier, DC link | adopt package split / detail deferred | BINP supports the power-chain functions. Infineon power-converter references support package children such as EMI filters, driver/power stages, DC-link capacitors, busbars, and heatsinks. Ratings and component values remain unresolved. |
+| Inductors, matching network, isolation transformer | adopt package split / detail deferred | BINP supports L/C matching and isolation-transformer functions. Child BOMs preserve winding/core/insulation/mount boundaries without selecting magnetic design. |
+| Inverter and driver modules | adopt package split / detail deferred | Infineon references support power modules, gate-driver boards, DC link, and cooling hardware as package-level structures. Semiconductor type, gate-drive topology, snubbers, and isolation ratings remain unresolved. |
+| Bias, heater, auxiliary DC, distribution panel | adopt package split / detail deferred | BINP and NASA sources support gun supply and machine power-distribution functions. Converter board, terminal, filter, enclosure, and heatsink children are retained without claiming local manufacturability. |
+| Thermal management | adopt package split / detail deferred | BINP explicitly supports cooling IGBT switches. Heat sinks, cooling plates, fan/pump module, thermal interfaces, and ducts/lines are package children; coolant type and lunar manufacturability remain unresolved. |
+| Load-family split under PS-14 | defer | Separate lens/corrector/deflection/motion/feed driver outputs need channel architecture before modeling as separate top-level or child supply modules. |
 
 ## Manufacturing Readiness
 

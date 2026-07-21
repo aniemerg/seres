@@ -7,7 +7,15 @@ unit_kind: discrete
 material_class: ceramic
 notes: >
   FG-13. High-voltage ceramic insulator that electrically isolates the electron
-  gun high-voltage region from grounded support structures. Keep separate from
-  `ebf3_gun_hv_input` until source evidence decides whether this is a standalone
-  structural insulator or part of a ceramic-to-metal feedthrough assembly. See
-  research/ebf3_bom_sources/organized/hv_tank_interface_review.md.
+  gun high-voltage region from grounded support structures. Current model keeps
+  this as a standalone gun-side insulator package, separate from
+  `ebf3_gun_hv_input`, because the source scaffold names HV input and HV
+  insulator separately. This assembly is split by
+  `bom_ebf3_gun_hv_insulator` into ceramic body, metallized end-interface,
+  mounting collar, and local field-grading markers. Feedthrough integration,
+  dielectric rating, creepage/clearance, and local manufacturing remain
+  unresolved. See
+  research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md
+  and research/ebf3_bom_sources/organized/hv_tank_interface_review.md. Current
+  interface architecture is summarized in
+  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.

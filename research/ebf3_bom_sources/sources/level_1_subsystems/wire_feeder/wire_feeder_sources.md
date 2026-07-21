@@ -4,7 +4,7 @@ Purpose: source locations for the EBF3 wire feeder subsystem.
 
 ## LOCAL-EBF3-WIRE-FEEDER-TABLE
 
-- Title: V2 wire feeder item table
+- Title: Wire feeder item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_wire_feeder_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_wire_feeder_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
@@ -25,11 +25,18 @@ Purpose: source locations for the EBF3 wire feeder subsystem.
 
 ## External Sources Cited By The Source Table
 
-- Miller S-74S/S-74D owner's manual and parts list: cited by
-  `LOCAL-EBF3-WIRE-FEEDER-TABLE`; raw source not yet archived here.
-- Hobart Brothers drive-roll technical article: cited by
-  `LOCAL-EBF3-WIRE-FEEDER-TABLE`; raw source not yet archived here.
-- ESAB drive-roll guidance: cited by `LOCAL-EBF3-WIRE-FEEDER-TABLE`; raw source
-  not yet archived here.
-- Bernard/Tregaskiss liner guide: cited by `LOCAL-EBF3-WIRE-FEEDER-TABLE`; raw
-  source not yet archived here.
+- Miller S-74S/S-74D owner's manual
+  URL: https://www.millerwelds.com/files/owners-manuals/o1500_10f_mil.pdf
+- Hobart Brothers drive-roll technical article
+  URL: https://www.hobartbrothers.com/resources/technical-articles/choosing-the-right-drive-roll-is-key-for-smooth-wire-feeding/
+- ESAB drive-roll guidance
+  URL: https://esab.com/us/nam_en/esab-university/blogs/what-is-the-ideal-drive-roll-design-for-welding/
+- Bernard/Tregaskiss liner guide
+  URL: https://www.bernardtregaskiss.com/understanding-mig-gun-liners/
+
+## WEB-SUMITOMO-GEARMOTORS
+
+- Title: Find The Perfect Sumitomo Gearmotor
+- Publisher/site: Sumitomo Drive Technologies
+- URL: https://us.sumitomodrive.com/en-us/gearmotors
+- Authority: external commercial source; gearmotor package/function reference

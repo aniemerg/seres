@@ -21,7 +21,7 @@ decisions belong in organized planning files.
 
 ## LOCAL-EBF3-FG-TABLE
 
-- Title: V2 fixed electron beam gun item table
+- Title: Fixed electron beam gun item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
@@ -34,7 +34,7 @@ decisions belong in organized planning files.
 
 ## LOCAL-EBF3-WF-TABLE
 
-- Title: V2 wire feeder item table
+- Title: Wire feeder item table
 - Local text: `research/ebf3_bom_sources/organized/V2_wire_feeder_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
 

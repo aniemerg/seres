@@ -1,6 +1,7 @@
 # HV Tank Interface Hardware Plan
 
-Status: combined Level-2 interface-hardware planning completed.
+Status: combined Level-2 interface-hardware planning with tank-side bushing,
+main HV cable, and gun-side HV-input package splits completed.
 
 Purpose:
 
@@ -90,21 +91,28 @@ Use:
 
 | Candidate/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| Tank-side bushing body/feedthrough | keep leaf | HV-8 | `ebf3_tank_side_hv_output_bushing` | Function supported, geometry unresolved. |
-| Bushing conductor | defer | HV-8 | None | Generic feedthrough/bushing feature; no EBF3 geometry. |
-| Bushing ceramic/OIP insulation | defer | HV-8 | None | Source supports insulation class, not specific part split. |
-| Field grading/corona shield | defer | HV-8 / FG-12 / FG-13 | None | Real concern, but tank-side/gun-side ownership unknown. |
-| Cable body | keep leaf | HV-9 | `ebf3_hv_cable_to_gun` | Cable is main inter-subsystem transmission item. |
-| Cable conductor/dielectric/shield/jacket children | defer | HV-9 | None | Hivolt supports classes, but cable selection and dimensions are unknown. |
-| Tank-side cable termination | defer | HV-8 / HV-9 | None | Needs connector/socket geometry. |
-| Gun-side cable termination | split_boundary / defer | HV-9 / FG-12 | `ebf3_gun_hv_input` remains receiving assembly | Gun owns receiving input; termination split needs source geometry. |
+| Tank-side bushing body/feedthrough | parent assembly | HV-8 | `ebf3_tank_side_hv_output_bushing` | Function supported, with child package markers for the minimum tank-side interface structure. |
+| Bushing conductor | adopted / detail deferred | HV-8 | `ebf3_tank_side_bushing_central_conductor` | Feedthrough/bushing sources require a conductor path across an insulated tank boundary. Material, diameter, and termination remain unresolved. |
+| Bushing insulation body | adopted / detail deferred | HV-8 | `ebf3_tank_side_bushing_insulator_body` | Feedthrough/bushing sources support an insulating barrier. Ceramic/OIP choice, creepage, and field-stress design remain unresolved. |
+| Bushing mounting flange/housing | adopted / detail deferred | HV-8 | `ebf3_tank_side_bushing_mounting_flange` | A tank-wall bushing needs a mechanical mounting/sealing interface. Exact flange, gasket, and fastener geometry remain unresolved. |
+| Tank-side cable socket/interface | adopted / detail deferred | HV-8 / HV-9 | `ebf3_tank_side_bushing_cable_socket_interface` | Needed to keep the tank-side cable interface visible without placing it in the main cable body. Connector family and stress-control transition remain unresolved. |
+| Field grading/corona shield | modeled / detail deferred | HV-8 / FG-12 / FG-13 | `ebf3_tank_side_bushing_field_grading_shield`; gun-side marker under FG-13 | Real HV concern. Current BOM uses interface-local markers on the tank-side bushing and gun-side HV insulator; final geometry and potential connection remain unresolved. |
+| Cable body | parent assembly | HV-9 | `ebf3_hv_cable_to_gun` | Cable is main inter-subsystem transmission item owned by the HV tank. |
+| Cable conductor/dielectric/shield/jacket children | adopted / detail deferred | HV-9 | `ebf3_hv_cable_central_conductor`, `ebf3_hv_cable_dielectric_insulation`, `ebf3_hv_cable_semiconductive_stress_control_layer`, `ebf3_hv_cable_braided_shield`, `ebf3_hv_cable_outer_jacket` | Hivolt supports e-beam/x-ray HV cable construction classes. Material ratings, dimensions, and termination treatments remain deferred. |
+| Tank-side cable termination | modeled / detail deferred | HV-8 / HV-9 | `ebf3_tank_side_bushing_cable_socket_interface` | The tank-side receiving interface is represented under HV-8; exact connector/socket geometry remains unresolved. |
+| Gun-side cable termination | modeled / detail deferred | HV-9 / FG-12 | `ebf3_gun_hv_input_receiving_terminal` | The gun-side receiving interface is represented under FG-12; exact connector/socket geometry remains unresolved. |
 
 ## KB Action
 
-- Do not create child BOMs for HV-8 or HV-9 in this pass.
-- Keep HV-8 and HV-9 as unresolved interface leaves.
-- Update notes to point to this plan and make termination/field-grading defers
-  explicit.
+- Create `bom_ebf3_hv_cable_to_gun` for cable layers only.
+- Create `bom_ebf3_tank_side_hv_output_bushing` for the minimum tank-side
+  package split: conductor, insulator body, mounting flange, and cable socket
+  interface.
+- Keep tank-side and gun-side cable terminations out of the cable BOM. The
+  gun-side receiving terminal is under FG-12; tank-side connector/socket remains
+  represented only as an unresolved socket/interface marker under HV-8.
+- Keep final field-grading/corona-shield geometry and potential connections
+  deferred.
 
 ## Manufacturing Readiness
 

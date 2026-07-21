@@ -21,7 +21,7 @@ in organized planning files.
 
 ## LOCAL-EBF3-FG-TABLE
 
-- Title: V2 fixed electron beam gun item table
+- Title: Fixed electron beam gun item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
@@ -60,3 +60,87 @@ in organized planning files.
 - Publisher/site: NASA NTRS
 - URL: https://ntrs.nasa.gov/api/citations/20050192365/downloads/20050192365.pdf
 - Authority: external technical source; generic modular cathode/electron-gun assembly reference
+
+## WEB-JEOL-SEM-THERMIONIC-GUN
+
+- Title: thermionic-emission gun
+- Publisher/site: JEOL glossary
+- URL: https://www.jeol.com/words/semterms/20121024.071558.php
+- Authority: external technical source; electron-microscope thermionic gun reference
+
+## WEB-JEOL-HAIRPIN-FILAMENT
+
+- Title: hairpin filament
+- Publisher/site: JEOL glossary
+- URL: https://www.jeol.com/words/emterms/20121023.094557.php
+- Authority: external technical source; tungsten hairpin thermionic source reference
+
+## WEB-JEOL-SEM-ATOZ
+
+- Title: Scanning Electron Microscope A To Z
+- Publisher/site: JEOL
+- URL: https://www.jeol.com/applications/pdf/sm/sem_atoz_all.pdf
+- Authority: external technical source; electron-gun construction reference
+
+## WEB-KIMBALL-ELECTRON-GUN-SYSTEMS
+
+- Title: Electron Gun (Beam) Systems
+- Publisher/site: Kimball Physics
+- URL: https://www.kimballphysics.com/learning_center/electron-gun-beam-systems/
+- Authority: external technical source; electron-gun anatomy and support-system reference
+
+## WEB-KIMBALL-CATHODES-EMITTERS
+
+- Title: Cathodes / Electron Emitters
+- Publisher/site: Kimball Physics
+- URL: https://www.kimballphysics.com/learning_center/cathodes-electron-emitters/
+- Authority: external technical source; cathode construction and mounted emitter reference
+
+## WEB-3M-CATHODES-ELECTRON-GUNS
+
+- Title: 3M Cathodes and Electron Guns
+- Publisher/site: 3M Technical Ceramics
+- URL: https://multimedia.3m.com.cn/mws/media/1208591O/3m-cathodes-and-electron-guns-brochure.pdf
+- Authority: external technical source; custom cathode/electron-gun assembly and support-structure reference
+
+## DOC-LUNAR-MATERIAL-AVAILABILITY
+
+- Title: Lunar Material Availability Guide
+- Local file: `docs/lunar_material_availability_guide.md`
+- Authority: project material-availability guide; design aid, not a recipe or schema extension
+
+## RAW-ELLERY-SELF-REPLICATING-2015
+
+- Title: Are self-replicating machines feasible?
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/2015 - Are self-replicating machines feasible -- file-2.txt`
+- Authority: external ISRU/lunar-materials source
+
+## RAW-ELLERY-LUNAR-DEMANDITE-2023
+
+- Title: Lunar Demandite: You Gotta Make This Using Nothing but That
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/2023 - Lunar DemanditeYou Gotta Make This Using Nothing but That.txt`
+- Authority: external ISRU/lunar-materials source
+
+## RAW-ELLERY-NEURAL-ELECTRONICS-2022
+
+- Title: Bootstrapping Neural Electronics from Lunar Resources for In-Situ Artificial Intelligence Applications
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/2022 - Bootstrapping Neural Electronics from Lunar Resources for In-Situ Artificial Intelligence Applications.txt`
+- Authority: external lunar-electronics material-chain source
+
+## RAW-ELLERY-SUSTAINABLE-ISRU-2020
+
+- Title: Sustainable in-situ resource utilization on the moon
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/2020 - Sustainable in-situ resource utilization on the moon.txt`
+- Authority: external ISRU/lunar-materials source
+
+## RAW-ELLERY-VERTICAL-CLOSURE-2025
+
+- Title: Vertical Closure Constraint for Self-replicating Machines
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/2025 - Vertical Closure Constraint for Self-replicating Machines.txt`
+- Authority: external lunar closure/materials source
+
+## RAW-ELLERY-PRINTED-MOTORS
+
+- Title: 3-D-Printed-motors-2
+- Local text: `/home/eastrolinux/papers/ISRU/Alex-Ellery-papers/3-D-Printed-motors-2.txt`
+- Authority: external lunar machine-design source; used only for tantalum-availability caution

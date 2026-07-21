@@ -1,15 +1,21 @@
 id: ebf3_wire_feeder_feedthrough_connector
 kind: part
-name: EBF3 wire feeder feedthrough connector
+name: EBF3 wire feeder electrical feedthrough
 mass: 0.5
 unit: unit
 unit_kind: discrete
 material_class: composite
 notes: >
-  Deferred feedthrough-interface candidate. The feedthrough is real, but it
-  needs a later split between chamber-side port, wire-feeder-specific insert,
-  motor power, signal pins, controls acquisition, and any external connector
-  before it returns to a BOM. See
+  Wire-feeder-specific electrical feedthrough insert/interface for motor power
+  and feedback signals across the chamber boundary. The cabin owns only the
+  passive chamber port or shared plate, controls own acquisition, and power
+  supplies own driver outputs. This assembly is split by
+  `bom_ebf3_wire_feeder_feedthrough_connector` into motor-power pins, signal
+  pins, insulator body, flange, vacuum-side connector, air-side connector, and
+  shield-termination interface markers. Exact pinout, connector family, ratings,
+  sealing geometry, and local manufacturing route remain unresolved. See
   research/ebf3_bom_sources/organized/feedthrough_interface_review.md and
   research/ebf3_bom_sources/organized/wire_feeder_level_2_audit.md. No local
   recipe is attached yet.
+  Current interface architecture is summarized in
+  research/ebf3_bom_sources/organized/ebf3_interface_architecture.md.

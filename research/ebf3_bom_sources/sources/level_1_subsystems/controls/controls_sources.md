@@ -34,3 +34,17 @@ Purpose: source locations for the EBF3 controls subsystem.
 - Title: Electron Beam Freeform Fabrication in the Space
 - Local text: `research/ebf3_bom_sources/sources/level_0_machine/ebf3/raw/Electron Beam Freeform Fabrication in the Space.txt`
 - Authority: primary machine-level source for flight-weight EBF3 operation and control software
+
+## WEB-ANALOG-PLC-SIGNAL-PROCESSING
+
+- Title: Precision Signal-Processing and Data-Conversion ICs for PLCs and Distributed Control Systems
+- Publisher/site: Analog Devices
+- URL: https://www.analog.com/en/resources/analog-dialogue/articles/precision-plc-signal-processing-data-conversion.html
+- Authority: external technical source; industrial controller ADC, signal-conditioning, isolation, and I/O reference
+
+## WEB-ANALOG-CN0376
+
+- Title: CN-0376 Circuit Note
+- Publisher/site: Analog Devices
+- URL: https://www.analog.com/media/en/reference-design-documentation/reference-designs/cn0376.pdf
+- Authority: external technical source; isolated thermocouple/RTD input module reference

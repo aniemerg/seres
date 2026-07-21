@@ -1,6 +1,6 @@
 # Gun Column Decomposition Plan
 
-Status: Level-3 planning file with boundary review completed.
+Status: Level-3 planning file with minimal gun-column mechanical split completed.
 
 Parent item:
 
@@ -19,9 +19,12 @@ Source registry:
 
 Target KB BOMs:
 
-- None yet. This pass records boundary decisions but does not create a child BOM
-  because current evidence supports gun/chamber/feeder interfaces, not detailed
-  gun-column internal geometry.
+- `bom_ebf3_gun_column`
+
+This pass creates only the minimal gun-owned mechanical children: body shell,
+internal support frame, optical-axis datum set, and gun-side mating flange.
+Chamber-side port, gasket, fasteners, feeder bracket, return path, signal
+feedthrough mounts, and cooling hardware remain deferred or owned elsewhere.
 
 Workflow and decision-status definitions:
 
@@ -177,13 +180,13 @@ Use:
 
 | Candidate component/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| Gun column/body shell | reject as child for this pass | FG-17 | Existing `ebf3_gun_column` remains parent | Splitting a column body child under a gun-column parent duplicates the parent unless FG-17 is redefined as a larger mechanical assembly. |
-| Gun-side mating flange or datum | split_boundary / defer | FG-17 / MC-5 | None | Primary sources support insertion/protrusion and flange-style mounting, but not enough to separate gun-side flange from cabin-side port/flange. |
+| Gun column/body shell | adopted / detail deferred | FG-17 | `ebf3_gun_column_body_shell` | FG-17 is treated as a mechanical assembly; primary sources support a gun package crossing the chamber boundary. Exact shell geometry remains deferred. |
+| Gun-side mating flange or datum | adopted / detail deferred | FG-17 / MC-5 | `ebf3_gun_column_gun_side_mating_flange` | Primary sources support insertion/protrusion and flange-style mounting. Cabin still owns chamber-side port/flange. Gasket and bolts remain deferred. |
 | Chamber-side gun mounting port/flange | split_boundary | MC-5 | Existing `ebf3_cabin_gun_mounting_port` | Boundary policy assigns chamber opening and structural flange to cabin. Do not add this under gun column. |
 | Vacuum gasket or seal at gun/chamber interface | split_boundary / defer | MC-5 / FG-17 | None | Seals are real, but source does not define whether the seal is part of chamber port hardware, gun service hardware, or a consumable interface kit. |
 | Bolt pattern / interface fasteners | split_boundary / defer | MC-5 / FG-17 | None | Patent supports bolted flange concept; ownership and replaceability are unresolved. |
-| Internal electrode/lens support brackets | defer | FG-17 / electrode/lens items | None | User-derived candidate only. Could duplicate electrode, lens, or coil mounting if created too early. |
-| Optical-axis locating datum | defer | FG-17 | None | Plausible and important, but not source-defined enough for a child item. |
+| Internal electrode/lens support brackets | adopted / detail deferred | FG-17 / electrode/lens items | `ebf3_gun_column_internal_support_frame` | Minimal support frame keeps gun-internal mounting visible without assigning individual electrode/lens brackets. |
+| Optical-axis locating datum | adopted / detail deferred | FG-17 | `ebf3_gun_column_optical_axis_datum_set` | Alignment is essential to a fixed electron gun. Exact datum features and tolerances remain deferred. |
 | Grounding structure or return path | split_boundary / defer | FG-17 / HV tank / power supplies / positioning | None | Candidate-only and electrically cross-subsystem. Do not hide return-path ownership inside the gun column. |
 | Gun-side wire-feeder mounting datum | split_boundary / defer | FG-17 / WF-26 | None | EBF source supports feeder attached to gun. Current boundary keeps removable bracket with wire feeder and defers any integral gun-side datum. |
 | Wire-feeder removable bracket | split_boundary | WF-26 | Existing `ebf3_wire_feeder_mount_to_gun_bracket` | Keep in wire feeder unless later source shows the bracket is integral to the gun column. |
@@ -193,7 +196,7 @@ Use:
 
 ## Current KB Action
 
-- Do not create child BOMs for FG-17 in this pass.
+- Create `bom_ebf3_gun_column` with only gun-owned mechanical children.
 - Keep `ebf3_gun_column` as a mechanical boundary assembly, not as a generic
   low-resolution substitute for internal electrodes, lenses, diagnostics, HV
   input, or wiring.
@@ -202,8 +205,9 @@ Use:
   - the cabin owns the chamber-side port/opening/flange;
   - the wire feeder owns the removable feeder bracket unless source evidence
     shows it is integral to the gun column.
-- Revisit FG-17 only after a source provides an actual gun-column section view,
-  mounting drawing, or serviceable hardware breakdown.
+- Revisit FG-17 after a source provides an actual gun-column section view,
+  mounting drawing, cooling layout, return-path topology, or serviceable
+  hardware breakdown.
 
 ## Manufacturing Readiness
 

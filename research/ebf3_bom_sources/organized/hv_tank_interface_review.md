@@ -3,6 +3,9 @@
 Status: boundary review completed for the current fixed-gun and high-voltage
 tank scaffold.
 
+Current interface entry point:
+`research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`.
+
 Purpose:
 
 - Define the interface between `ebf3_high_voltage_tank` and
@@ -197,7 +200,10 @@ Use:
 
 - Tighten HV-8, HV-9, FG-12, FG-13, FG-18, HV-2, HV-6, and tank-grounding notes
   to point to this review and preserve the tank/gun split.
-- Do not create child BOMs or recipes in this pass.
+- FG-12 now has a minimal gun-side input child BOM in
+  `research/ebf3_bom_sources/organized/hv_gun_side_insulation_decomposition_plan.md`.
+  This does not change HV tank ownership of the main cable or tank-side bushing.
+- Do not create child BOMs or recipes for HV-8/HV-9 in this pass.
 - Do not rename IDs in this pass.
 
 ## Resolved / Still Unresolved Rows
@@ -205,14 +211,14 @@ Use:
 Updates for
 `research/ebf3_bom_sources/organized/fixed_electron_beam_gun_unresolved_items.md`:
 
-- FG-D-052 remains `defer`: central conductor still needs gun-side HV input
-  construction source.
+- FG-D-052 is now `modeled / detail deferred`: central conductor is modeled
+  under FG-12, while material, clearance, and joint details remain unresolved.
 - FG-D-053 remains `split_boundary / defer`: FG-12 versus FG-13 ceramic
   ownership still unresolved.
-- FG-D-054 remains `defer`: HV input flange/housing may overlap gun column or
-  chamber interface.
-- FG-D-055 remains `split_boundary`: main HV cable stays in HV tank; gun-side
-  receiving termination stays deferred under FG-12.
+- FG-D-054 is now `modeled / detail deferred`: local FG-12 flange/housing is
+  modeled, while chamber/gun-column flange overlap remains unresolved.
+- FG-D-055 is now split: main HV cable stays in HV tank; gun-side receiving
+  terminal is modeled under FG-12; tank-side termination remains deferred.
 - FG-D-056 remains `defer`: field grading/corona shield needs geometry.
 - FG-D-057 remains `defer`: standalone HV insulator geometry unresolved.
 - FG-D-058 remains `defer`: metallized ends/collars remain generic practice.

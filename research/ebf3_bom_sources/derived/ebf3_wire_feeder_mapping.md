@@ -5,7 +5,7 @@ It preserves candidate item IDs and high-level modeling intent, but it is not a
 decomposition planning file and cannot by itself justify child BOM creation,
 material selection, recipe closure, or local manufacturability.
 
-Wire feeder leaf items mapped from V2_wire_feeder_item_table; no leaf recipes yet to preserve fidelity.
+Wire feeder leaf items mapped from the wire feeder source table; no leaf recipes yet to preserve fidelity.
 
 | Source ID | Item ID | Modeling decision |
 | --- | --- | --- |

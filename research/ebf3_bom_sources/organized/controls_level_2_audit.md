@@ -128,6 +128,17 @@ they should not replace the source-table top-level rows.
   CTL-13.
 - Kept lighting and cabinet harness as deferred candidates, not deleted.
 
+## Batch Child Split Review
+
+| Parent scope | Current status | Rationale |
+| --- | --- | --- |
+| Control computer and real-time processor | adopt package split / detail deferred | NASA and BINP support computer/control-processor functions. Board, storage, connector, and enclosure children are package markers; processor architecture and software deployment remain unresolved. |
+| CAN, ADC, sensor interface, data logger | adopt package split / detail deferred | BINP supports CAN bus, analog channels, and monitored currents/voltages. Analog Devices PLC references support ADC, signal-conditioning, isolation, and I/O module concepts. Circuit design and calibration remain unresolved. |
+| Visible and thermal monitoring | adopt package split / detail deferred | NASA supports video/thermal monitoring. Sensor module, lens, housing, cable/processing board children are retained; camera model, optics, viewport relation, and lighting ownership remain unresolved. |
+| Motion and wire-feed control modules | adopt package split / split-boundary guarded | Controls owns command/acquisition interfaces. Power stages and mechanism hardware remain in power supplies, positioning, and wire feeder. |
+| Safety logic and controls cabinet | adopt package split / detail deferred | BINP supports alarm/blocking; cabinet child split is a package representation only. Harness routing, interlock locations, grounding, and certification remain unresolved. |
+| Control software | keep leaf | Software is not a physical assembly; later work should split functions or artifacts only if software modeling becomes a project goal. |
+
 ## Manufacturing Readiness
 
 No controls item is local-ready. Industrial controllers, ADC modules, isolated

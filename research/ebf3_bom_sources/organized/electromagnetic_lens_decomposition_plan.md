@@ -153,7 +153,7 @@ Use:
 | Deflection coils | split_boundary | FG-6, FG-7 | Existing `ebf3_gun_two_axis_deflection_coils` | EBF3 FG table already separates FG-8. |
 | Trajectory correction coils/plates | split_boundary | FG-6, FG-7 | Existing `ebf3_gun_trajectory_corrector` | EBF3 FG table already separates FG-11. |
 | Stigmator | defer | FG-6, FG-7 | None | Generic source candidate only; no current EBF3-specific support. |
-| Aperture | defer / split_boundary | FG-6, FG-7 | Existing gun electrode/aperture functions | Generic lens-column candidate; current gun BOM already models aperture-like electrode functions elsewhere. |
+| Aperture | split_boundary / defer | FG-6, FG-7 | Existing gun electrode/aperture functions | Generic lens-column candidate; current gun BOM already models aperture-like electrode functions elsewhere. |
 | Cooling jacket, heat-transfer sheath, or heat sink | defer | FG-6, FG-7 | None; future coil/yoke-package candidate | Current evidence supports possible heat-transfer features but not an EBF3 FG-6/FG-7 lens-level child. |
 
 ## Adopted Child BOM Structure

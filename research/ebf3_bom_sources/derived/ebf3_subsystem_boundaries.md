@@ -121,18 +121,18 @@ machine controls, or generic chamber ports if they are part of the cabin wall.
 | Item | Current owner | Boundary risk | Decision | Follow-up |
 | --- | --- | --- | --- | --- |
 | `ebf3_hv_cable_to_gun` | High voltage tank | Cable terminates at gun, but main function is HV transmission from tank. | Keep in high voltage tank. | Later split into tank-side termination, cable body, and gun-side termination if detailed cable BOM is needed. |
-| `ebf3_gun_side_oil_tank` | Fixed electron beam gun | Could be confused with the main high-voltage tank. | Keep in electron gun only if it is the local gun-side insulating oil volume. | Add item note distinguishing it from `ebf3_high_voltage_tank`; move if source shows it is the main tank. |
+| `ebf3_gun_side_oil_tank` | Fixed electron beam gun | Could be confused with the main high-voltage tank or a second confirmed oil inventory. | Keep only as an unresolved gun-side insulation marker; main confirmed fluid inventory belongs to `ebf3_hv_transformer_insulating_fluid`. | Do not split into shell/lid/oil/seals until EBF3-specific gun-side oil-package evidence is found. |
 | `ebf3_gun_hv_input` | Fixed electron beam gun | Interface between HV tank/cable and gun. | Keep in electron gun as gun-side receiving/feedthrough hardware. | If decomposed, split into central conductor, ceramic insulator, flange, and cable-side termination. |
 | `ebf3_control_electrode_bias_supply` | Power supplies | Electrically tied to gun control electrode. | Keep in power supplies; gun owns the electrode load. | Cross-reference gun control electrode in notes instead of nesting it into gun BOM. |
 | `ebf3_cathode_heater_supply` | Power supplies | Cathode heater is in gun; supply is separate. | Keep in power supplies. | Decompose heater leads in gun separately from regulated heater supply. |
 | `ebf3_multi_channel_driver_module` | Power supplies | Supplies drive gun magnetic, deflection, feeder, and positioning loads. | Keep in power supplies; loads remain in their owning subsystems. | Add explicit load references later if schema supports electrical interfaces. |
-| `ebf3_power_supply_control_board` | Power supplies | Could be mistaken for central controls. | Keep as a deferred/derived power-supply internal controller, not a source-table top-level row. | Reintroduce only inside a later power-electronics child decomposition. |
+| `ebf3_power_supply_control_board` | Power supplies | Could be mistaken for central controls. | Keep out of the top-level BOM as a deferred power-supply internal controller candidate. | Reintroduce only inside a later power-electronics child decomposition. |
 | `ebf3_visible_camera` | Controls | Camera sees inside cabin but is an instrumentation/control device. | Keep in controls. | Cabin owns viewport/window or camera port, not camera electronics. |
 | `ebf3_thermal_imaging_monitoring_system` | Controls | Thermal camera sees inside cabin but is an instrumentation/control device. | Keep in controls. | Cabin owns viewport/window or camera port, not camera electronics. |
 | `ebf3_process_monitor_lighting` | Controls / cabin | Lighting is plausible monitoring support but is not the source-table CTL-9 top-level item. | Keep deferred until monitoring/cabin interface review. | If adopted later, controls owns powered lighting/electronics and cabin owns passive mounts/ports. |
 | `ebf3_cabin_lighting_mount_and_port` | Manufacture cabin | Lighting crosses cabin/controls if modeled as a powered fixture. | Keep in cabin only as passive mount, optical access, shield, or chamber-side penetration. | Powered light source, wiring control, and monitoring logic remain deferred. |
-| `ebf3_cabin_feedthroughs_and_wiring_ports` | Manufacture cabin | Can duplicate feeder, positioning, gun, or sensor feedthroughs. | Keep deferred; if reintroduced, cabin owns chamber-side passive openings, flanges, or shared port plates only. | Use `organized/feedthrough_interface_review.md` before adding child items. |
-| `ebf3_wire_feeder_feedthrough_connector` | Wire feeder | Penetrates chamber boundary and overlaps controls/power wiring. | Keep deferred until feeder feedthrough child decomposition. | Later split chamber-side port, feeder insert, motor power, signal pins, and acquisition. |
+| `ebf3_cabin_feedthroughs_and_wiring_ports` | Manufacture cabin | Can duplicate feeder, positioning, gun, or sensor feedthroughs. | Keep deferred; if reintroduced, cabin owns chamber-side passive openings, flanges, or shared port plates only. | Use `organized/ebf3_interface_architecture.md` before adding child items. |
+| `ebf3_wire_feeder_feedthrough_connector` | Wire feeder | Penetrates chamber boundary and overlaps controls/power wiring. | Keep as feeder-specific feedthrough insert/interface marker. | Cabin owns passive port; controls own acquisition; power supplies own driver outputs. Final pinout, connector family, ratings, and service boundary remain deferred. |
 | `ebf3_positioning_electrical_feedthrough` | Four-axis positioning system | Penetrates chamber boundary. | Keep positioning-specific feedthrough insert in positioning system. | Cabin owns generic port/flange; split if physical BOM shows shared multi-pin feedthrough. |
 | `ebf3_vacuum_compatible_motor_cabling` | Four-axis positioning system | Could be counted as controls harness. | Keep if cabling is inside/attached to motion package. | Controls owns external command/signal cabinet harness. |
 | `ebf3_signal_cabling` | Four-axis positioning system | Generic name overlaps with controls. | Keep only if it is positioner sensor/motor signal cabling. | Rename or note as positioning signal cabling in a later cleanup. |
@@ -155,6 +155,11 @@ For the report, keep all seven subsystems in place and describe them as a
 fidelity scaffold. The next cleanup should be limited to clarifying ambiguous
 interface item names and notes, not collapsing the BOM back into lower-resolution
 parts.
+
+Current interface ownership is summarized in
+`research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`. Use the
+older focused boundary reviews as evidence/detail files, not as separate current
+entry points.
 
 ## Next Work Items
 

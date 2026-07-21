@@ -4,7 +4,7 @@ Purpose: source locations for the EBF3 high-voltage tank subsystem.
 
 ## LOCAL-EBF3-HV-TANK-TABLE
 
-- Title: V2 high voltage tank item table
+- Title: High voltage tank item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_high_voltage_tank_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_high_voltage_tank_item_table.txt`
 - Authority: user_derived candidate table; candidate-only

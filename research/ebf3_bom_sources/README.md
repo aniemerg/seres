@@ -48,6 +48,8 @@ Target state for the whole EBF3 machine:
 
 Current whole-machine Level-2 status is summarized in
 `organized/ebf3_machine_level_2_status.md`.
+Current cross-subsystem interface ownership is summarized in
+`organized/ebf3_interface_architecture.md`.
 
 ## Standard Work Packet
 
@@ -72,8 +74,8 @@ Preferred order for completing the EBF3 machine scaffold:
 
 1. Keep `organized/ebf3_machine_level_2_status.md` current as the concise
    whole-machine status index.
-2. Use `organized/feedthrough_interface_review.md` as the current
-   feedthrough/interface ownership rule across cabin, gun, wire feeder,
+2. Use `organized/ebf3_interface_architecture.md` as the current
+   cross-subsystem interface entry point across cabin, gun, wire feeder,
    positioning, controls, power supplies, and high-voltage tank.
 3. Return to electron-gun Level-3 items only where a selected source or design
    decision unlocks them.

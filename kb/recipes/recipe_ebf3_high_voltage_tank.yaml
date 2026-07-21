@@ -47,9 +47,6 @@ inputs:
   - item_id: ebf3_hv_tank_oil_level_indicator
     qty: 1.0
     unit: unit
-  - item_id: ebf3_hv_tank_mounting_frame
-    qty: 1.0
-    unit: unit
 outputs:
   - item_id: ebf3_high_voltage_tank
     qty: 1.0
@@ -102,15 +99,12 @@ steps:
       - item_id: ebf3_hv_tank_oil_level_indicator
         qty: 1.0
         unit: unit
-      - item_id: ebf3_hv_tank_mounting_frame
-        qty: 1.0
-        unit: unit
     outputs:
       - item_id: ebf3_high_voltage_tank
         qty: 1.0
         unit: unit
     notes: Assemble ebf3_high_voltage_tank from source-table leaf items using the concise HV section-module-set model.
 notes: >
-  High voltage tank leaf items mapped from V2_high_voltage_tank_item_table and
-  source-tag cleanup. Core internals use the concise HV section-module-set model;
-  no leaf recipes yet to preserve fidelity.
+  High voltage tank leaf items mapped from the high-voltage tank source table
+  and source-tag cleanup. Core internals use the concise HV section-module-set
+  model; no leaf recipes yet to preserve fidelity.

@@ -41,3 +41,17 @@ Purpose: source locations for the EBF3 power supplies subsystem.
 - Title: HV grounding and return review
 - Local file: `research/ebf3_bom_sources/organized/hv_grounding_return_review.md`
 - Authority: derived boundary review
+
+## WEB-INFINEON-PFC-INVERTER-APPNOTE
+
+- Title: 11 kW high-efficiency high-density bidirectional three-/single-phase AC-DC PFC/inverter
+- Publisher/site: Infineon Technologies
+- URL: https://www.infineon.com/assets/row/public/documents/24/42/infineon-ac-dc-pfc-11-kw-high-efficiency-high-density-bidirectional-three-single-phase-inverter-applicationnotes-en.pdf
+- Authority: external technical source; power-converter package, driver, power-stage, EMI-filter, and heatsink reference
+
+## WEB-INFINEON-SIC-MODULES
+
+- Title: Silicon Carbide MOSFET Modules
+- Publisher/site: Infineon Technologies
+- URL: https://www.infineon.com/products/power/mosfet/silicon-carbide/modules
+- Authority: external commercial/technical source; power module, gate driver, DC-link, and cooler reference

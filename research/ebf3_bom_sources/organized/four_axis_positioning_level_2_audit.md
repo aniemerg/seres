@@ -1,6 +1,7 @@
 # Four-Axis Positioning Level-2 Audit
 
-Status: review completed; source-table aligned BOM correction applied.
+Status: review completed; source-table aligned BOM correction and first
+mechanical child splits applied.
 
 Purpose:
 
@@ -19,6 +20,8 @@ Source registry:
 Related boundary reviews:
 
 - `research/ebf3_bom_sources/derived/ebf3_subsystem_boundaries.md`
+- `research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md`
+- `research/ebf3_bom_sources/organized/feedthrough_interface_review.md`
 - `research/ebf3_bom_sources/organized/manufacture_cabin_level_2_audit.md`
 - `research/ebf3_bom_sources/organized/hv_grounding_return_review.md`
 
@@ -69,6 +72,51 @@ Use:
   hardware references for materials and detailed motion components.
 - Candidate-only until cited external sources are archived or independently
   checked.
+
+### WEB-PI-VACUUM-POSITIONING
+
+Evidence:
+
+- "cables, motors, scaling systems, connectors or limit switches"
+- "Vacuum cable insulation is made of PTFE or FEP"
+- "polyimide (Kapton) or PEEK"
+
+Use:
+
+- Supports vacuum-specific treatment of positioning motors, sensors, connectors,
+  and cables.
+- Does not select a specific EBF3 cable bundle, connector family, feedthrough
+  pinout, or motor technology.
+
+### WEB-LESKER-KAPTON-WIRE
+
+Evidence:
+
+- "high & ultra-high vacuum applications"
+- "low outgassing rates"
+- "Max. Current depends strongly on use"
+
+Use:
+
+- Supports Kapton/polyimide wire as a plausible in-vacuum cabling material
+  class.
+- Reinforces that current, heating, and continuous-use ratings must be selected
+  before splitting motor-power cable children.
+
+### WEB-VACOM-ELECTRICAL-FEEDTHROUGHS
+
+Evidence:
+
+- "transmission of electric power into or out of a vacuum chamber"
+- "Multipin feedthroughs"
+- "measurement & control applications"
+- "High Voltage and Power Feedthroughs"
+
+Use:
+
+- Supports separate signal/multipin and power-feedthrough choices.
+- Does not prove whether EBF3 FS-30 is a single mixed feedthrough, separate
+  motor/sensor inserts, or part of a shared chamber feedthrough plate.
 
 ## Main Finding
 
@@ -134,6 +182,94 @@ source-table rotary-drive split.
   not deleted.
 - Kept first-pass component mass allocation for current recipe mass balance;
   this audit does not claim sourced masses for corrected positioning leaves.
+
+## Mechanical Child Splits
+
+Child BOMs were added for positioning assemblies whose physical boundaries are
+useful for review. The splits are package-level only; precision geometry,
+ratings, materials, and local manufacturing routes remain unresolved:
+
+| Parent | Child BOM | Current boundary |
+| --- | --- | --- |
+| `ebf3_positioning_base_frame` | `bom_ebf3_positioning_base_frame` | Rail set, crossmember set, and mounting feet. |
+| `ebf3_linear_guide_carriages` | `bom_ebf3_linear_guide_carriages` | Carriage block, rolling elements, and retainers. |
+| `ebf3_fixed_side_screw_bearing_blocks` | `bom_ebf3_fixed_side_screw_bearing_blocks` | Fixed-side block bodies, angular-contact bearing set, and retainers. |
+| `ebf3_floating_side_screw_bearing_blocks` | `bom_ebf3_floating_side_screw_bearing_blocks` | Floating-side block bodies, radial bearing set, and retainers. |
+| `ebf3_rotary_axis_table` | `bom_ebf3_rotary_axis_table` | Table plate, hub, and mounting pattern. |
+| `ebf3_moveable_build_platform` | `bom_ebf3_moveable_build_platform` | Platform plate, clamp slots, and local return contact pad. |
+| `ebf3_substrate_clamp` | `bom_ebf3_substrate_clamp` | Clamp jaws, screws, and local insulating pads. |
+| `ebf3_ball_screw_shafts` | `bom_ebf3_ball_screw_shafts` | X/Y/Z shaft set marker; screw profile and grinding/rolling process remain unresolved. |
+| `ebf3_ball_nuts` | `bom_ebf3_ball_nuts` | Nut body, rolling balls, recirculation insert, and wiper/seal set. |
+| `ebf3_axis_motors` | `bom_ebf3_axis_motors` | Motor body set, housings, leads, and mounting features; motor internals remain deferred. |
+| `ebf3_motor_couplings` | `bom_ebf3_motor_couplings` | Hubs, flexible element, and clamp screws. |
+| `ebf3_motor_mount_brackets` | `bom_ebf3_motor_mount_brackets` | Bracket plates, spacers, and fastener interfaces. |
+| `ebf3_linear_encoder_scales` | `bom_ebf3_linear_encoder_scales` | Scale strips, read heads, and mounting brackets. |
+| `ebf3_axis_home_sensors` | `bom_ebf3_axis_home_sensors` | Sensor bodies, targets, and leads. |
+| `ebf3_axis_travel_limit_switches` | `bom_ebf3_axis_travel_limit_switches` | Switch bodies, actuators, and leads. |
+| `ebf3_z_axis_brake` | `bom_ebf3_z_axis_brake` | Brake body, friction disc, and mount. |
+| `ebf3_z_axis_counterbalance` | `bom_ebf3_z_axis_counterbalance` | Force element, anchors, and guide/link. |
+| `ebf3_rotary_axis_bearing` | `bom_ebf3_rotary_axis_bearing` | Bearing rings, rolling elements, and retainer. |
+| `ebf3_rotary_encoder` | `bom_ebf3_rotary_encoder` | Read head, scale ring, and signal lead. |
+| `ebf3_beam_current_return_strap` | `bom_ebf3_beam_current_return_strap` | Flexible conductor, lugs, and fastener interfaces. |
+| `ebf3_thermal_isolation_standoffs` | `bom_ebf3_thermal_isolation_standoffs` | Insulating standoffs/washers and local fastener interfaces. |
+| `ebf3_positioning_bellows_cover` | `bom_ebf3_positioning_bellows_cover` | Folded cover, end retainers, and mounting tabs. |
+| `ebf3_spatter_shielding` | `bom_ebf3_spatter_shielding` | Shield panels, retainers, and mounting tabs. |
+| `ebf3_vacuum_compatible_motor_cabling` | `bom_ebf3_vacuum_compatible_motor_cabling` | Conductors, insulation, shield, and terminations. |
+| `ebf3_vacuum_compatible_signal_cabling` | `bom_ebf3_vacuum_compatible_signal_cabling` | Conductors, insulation, shield, and terminations. |
+| `ebf3_positioning_electrical_feedthrough` | `bom_ebf3_positioning_electrical_feedthrough` | Motor-power pins, signal pins, ceramic body, flange, vacuum-side connector, air-side connector, and shield termination interface. |
+
+Still deferred:
+
+- Motor electromagnetic internals, encoder technology, limit/home sensor type,
+  pinout, shielding scheme, and feedthrough connector family remain deferred
+  because they cross controls, power, and cabin interface boundaries.
+- Precision rail/ball-screw race geometry, preload, lubrication/dry-film
+  strategy, and calibration remain material/process readiness issues.
+
+## Cabling / Feedthrough Follow-Up
+
+Target: decide whether FS-28, FS-29, and FS-30 should be split now into motor
+power pins, signal pins, ceramic body, flange, internal connector, external
+connector, shield termination, and cable material children.
+
+Decision: split package layers only; keep topology and ownership-sensitive
+details deferred.
+
+Reasoning:
+
+- The source table and EBF patent support motor/sensor wiring and electrical
+  feedthroughs as real positioning interfaces.
+- External vacuum-motion and feedthrough sources support vacuum-compatible
+  cables, connectors, and power/signal feedthrough classes.
+- No source currently fixes the EBF3 pinout, connector family, motor current,
+  sensor signal type, shielding scheme, or whether FS-30 is one mixed
+  feedthrough or several inserts.
+- Package-level children are acceptable because they preserve the difference
+  between cable conductor, insulation, shield, termination, motor-power pins,
+  signal pins, ceramic body, flange, vacuum-side connector, air-side connector,
+  and shield termination without selecting final topology.
+
+Current action:
+
+- Keep FS-28 and FS-29 as positioning-owned local/in-chamber cabling assemblies
+  with child BOMs for cable layers.
+- Keep FS-30 as the positioning-specific feedthrough interface assembly with a
+  package-level child BOM. The previous generic pin and connector-side markers
+  have been replaced by motor-power pins, signal pins, vacuum-side connector,
+  air-side connector, and shield-termination markers.
+- Keep CTL-10 as controls-side motion command/control hardware, not a duplicate
+  of positioning motors or power driver outputs.
+- Revisit only after a physical cable/feedthrough topology is selected.
+
+## Batch Child Split Review
+
+| Parent scope | Current status | Rationale |
+| --- | --- | --- |
+| Ball screws and nuts | adopt / detail deferred | Thomson and Steinmeyer support ball screw/nut assemblies and ball-return/wiper concepts. Screw profile, preload, material, and manufacturing route remain unresolved. |
+| Motors, brakes, encoders, sensors | adopt / package only | The EBF source supports motorized positioning and controls feedback; child BOMs stop at body/lead/target/read-head package boundaries. Electromagnetic internals and signal architecture remain deferred. |
+| Bearings, couplings, brackets, shields | adopt / detail deferred | These are physically coherent motion-system assemblies. Bearing class, preload, lubrication, coupling style, and shield geometry remain unresolved. |
+| Cabling/feedthrough | adopt package split / split-boundary guarded | Positioning owns in-chamber cable packages and positioning-specific insert; cabin owns passive port/flange, controls own acquisition, and power supplies own drive outputs. |
+| Worm wheel/shaft and base plate | keep leaf | Current names can represent single-piece precision metal parts; split only after worm-drive geometry or process source is selected. |
 
 ## Manufacturing Readiness
 

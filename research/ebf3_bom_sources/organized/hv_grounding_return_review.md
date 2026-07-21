@@ -1,7 +1,10 @@
 # HV Grounding And Return Review
 
-Status: boundary review completed for current Level-2 EBF3 grounding and return
-model. Physical topology remains deferred.
+Status: boundary review completed with minimal grounding/return package markers
+modeled. Global physical return topology remains deferred.
+
+Current interface entry point:
+`research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`.
 
 Purpose:
 
@@ -154,13 +157,13 @@ Use:
 
 | Function/candidate | Decision | Owning item/subsystem | Rationale |
 | --- | --- | --- | --- |
-| HV tank protective grounding terminal | Keep leaf | `ebf3_hv_tank_grounding_terminal` / HV tank | Physical bonding point on tank enclosure belongs to the tank package. |
+| HV tank protective grounding terminal | Modeled / detail deferred | `ebf3_hv_tank_grounding_terminal` / HV tank | Physical bonding point on tank enclosure belongs to the tank package. Minimal child BOM has ground lug and bonding anchor; shielding straps and service details remain unresolved. |
 | HV tank shielding/bonding straps beyond terminal | Defer | HV tank / cabin / power supplies | Source supports grounding need, not exact shield or strap layout. |
 | Accelerating HV regulated source and reference electronics | Defer as power-supply/HV-source function | `ebf3_accelerating_voltage_dc_supply` | Power supplies own regulated source/reference functions, but this is not a source-table Level-2 row after the power-supplies audit. |
 | External HV return conductor or cabinet return bus | Defer / split boundary | power supplies / HV tank / positioning / gun | Real function, but no source fixes whether it is cable, cabinet bus, chamber bond, platform strap, or combined topology. |
-| Platform/substrate beam-current continuity strap | Keep in positioning | `ebf3_beam_current_return_strap` | NASA source supports platform continuity; current item is attached to the moving substrate/platform region. |
-| Beam-current measurement primary sensor | Keep current HV leaf, type unresolved | `ebf3_hv_output_return_current_monitor` | HV-side monitor remains visible, but shunt/CT/Hall/return-leg placement is unresolved. |
-| Beam diagnostic collector signal return/shield | Defer / split boundary | fixed gun / controls | Gun owns pickup hardware and local wiring; controls owns DAQ and conditioning. Shield termination policy is not source-fixed. |
+| Platform/substrate beam-current continuity strap | Modeled / detail deferred in positioning | `ebf3_beam_current_return_strap` | NASA source supports platform continuity; minimal child BOM has flexible conductor, lugs, and local fastener interface. It is not the global HV return bus. |
+| Beam-current measurement primary sensor | Modeled / detail deferred in HV tank | `ebf3_hv_output_return_current_monitor` | HV-side monitor remains visible with sensing element, insulating mount, and signal lead. Shunt/CT/Hall choice and return-leg placement remain unresolved. |
+| Beam diagnostic collector signal return/shield | Modeled / detail deferred in fixed gun | `ebf3_gun_signal_shield_termination_interface` | Gun owns pickup hardware, local wiring, and gun-side shield interface marker; controls owns DAQ and conditioning. Final shield termination policy is not source-fixed. |
 | Voltage divider high-voltage chain | Keep in HV tank | `ebf3_hv_output_voltage_divider_sensing` | HV-side scaled voltage hardware belongs near HV tank/output. |
 | Low-voltage ADC/signal conditioning | Keep in controls | `ebf3_analog_input_adc_module`, `ebf3_sensor_interface_module` | Controls own acquisition and isolated signal conditioning. |
 | Blocking/interlock decision logic | Keep in controls | `ebf3_safety_blocking_logic` | Controls own decision logic; physical switches remain with their hardware package if sourced. |
@@ -170,11 +173,11 @@ Use:
 
 - Do not create a global return-bus item in this pass.
 - Do not move `ebf3_beam_current_return_strap` out of four-axis positioning.
-- Tighten notes on HV tank grounding, HV current monitor, beam-current return
-  strap, accelerating HV supply, and controls acquisition/logic items to point
-  to this review.
-- Keep system-level return topology as an unresolved architecture decision until
-  a source or explicit design selection defines the physical path.
+- Keep existing package markers for HV tank protective bonding, HV-side current
+  monitor, platform/substrate beam-current strap, and gun-side diagnostic shield
+  interface.
+- Keep system-level return topology unresolved until a source or explicit design
+  selection defines the physical path.
 
 ## Manufacturing Readiness
 
@@ -190,4 +193,5 @@ vacuum/feedthrough routing, service discharge procedure, and safety validation.
 2. Use this review when auditing controls Level-2 items, especially CTL-5,
    CTL-6, and CTL-12.
 3. Keep HV-D-023 unresolved until the system return topology is source-selected
-   or explicitly chosen as a design architecture.
+   or explicitly chosen as a physical conductor/bus/chamber/platform routing
+   architecture.

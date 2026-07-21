@@ -1,6 +1,7 @@
 # Manufacture Cabin Level-2 Audit
 
-Status: review completed; source-table aligned BOM correction applied.
+Status: review completed; source-table aligned BOM correction and first passive
+mechanical child splits applied.
 
 Purpose:
 
@@ -20,6 +21,7 @@ Related boundary reviews:
 
 - `research/ebf3_bom_sources/derived/ebf3_subsystem_boundaries.md`
 - `research/ebf3_bom_sources/organized/controls_level_2_audit.md`
+- `research/ebf3_bom_sources/organized/feedthrough_interface_review.md`
 - `research/ebf3_bom_sources/organized/gun_column_decomposition_plan.md`
 
 ## Source Use
@@ -115,6 +117,63 @@ Level-2 BOM presentation and left uncertain boundary details open.
   deleted.
 - Kept first-pass component mass allocation for current recipe mass balance;
   this audit does not claim sourced masses for the corrected cabin leaves.
+
+## Passive Interface Follow-Up
+
+Target: decide whether MC-5, MC-6, MC-8, and MC-9 should be split now into
+flanges, bolt patterns, seals, brackets, powered lighting, camera ports,
+feedthrough plates, and subsystem-side inserts.
+
+Decision: split passive package boundaries only; defer geometry, seals,
+feedthrough inserts, powered lighting, camera hardware, and subsystem-side
+brackets.
+
+Reasoning:
+
+- The EBF sources support a chamber, walls, door, window, gun insertion,
+  positioning floor attachment, wire-feeder mounting, feedthroughs, protective
+  shielding, and lighting.
+- The sources do not define chamber flange geometry, bolt patterns, service
+  seals, feedthrough plate layout, camera/light port design, or whether each
+  interface is a dedicated port or part of a shared chamber plate.
+- Cabin should own only passive chamber openings, ports, flanges, mounts,
+  viewports, shielding, and access structures at this level.
+- Fixed gun owns gun column and gun-side HV input. Wire feeder owns removable
+  feeder-side bracket and mechanism. Positioning owns axes, platform, local
+  cabling, and positioning-specific feedthrough insert. Controls own cameras,
+  powered lighting/electronics, acquisition, and logic.
+
+Current action:
+
+- Split clear passive cabin assemblies into child BOMs.
+- Keep `ebf3_cabin_feedthroughs_and_wiring_ports` deferred unless a source or
+  design decision shows a shared chamber-side port plate.
+- Keep `ebf3_process_monitor_lighting` deferred until powered lighting versus
+  passive lighting-port ownership is selected.
+- Revisit only after a chamber interface drawing, port layout, or explicit
+  lighting/feedthrough architecture is selected.
+
+## Passive Mechanical Child Splits
+
+| Cabin parent | Child BOM | Current split |
+| --- | --- | --- |
+| `ebf3_cabin_frame` | `bom_ebf3_cabin_frame` | frame members, corner gussets, mounting feet |
+| `ebf3_cabin_wall_panels` | `bom_ebf3_cabin_wall_panels` | wall panels, stiffeners, seam set |
+| `ebf3_cabin_access_door` | `bom_ebf3_cabin_access_door` | door panel, hinges, latches, door seal |
+| `ebf3_cabin_viewport` | `bom_ebf3_cabin_viewport` | window pane, frame, viewport seal |
+| `ebf3_cabin_sacrificial_liner` | `bom_ebf3_cabin_sacrificial_liner` | liner panels, liner retainers |
+| `ebf3_cabin_gun_mounting_port` | `bom_ebf3_cabin_gun_mounting_port` | chamber-side gun flange ring and reinforcement |
+| `ebf3_cabin_wire_feeder_mounting_port` | `bom_ebf3_cabin_wire_feeder_mounting_port` | chamber-side wire-feeder flange ring and reinforcement |
+| `ebf3_cabin_positioning_mount_interface` | `bom_ebf3_cabin_positioning_mount_interface` | floor mount plate and leveling pads |
+| `ebf3_cabin_lighting_mount_and_port` | `bom_ebf3_cabin_lighting_mount_and_port` | passive lighting port frame and shield mount |
+
+Still deferred:
+
+- Powered light source, lighting driver, camera hardware, and controls logic.
+- Shared feedthrough plates and subsystem-specific connector inserts.
+- Port seal profiles, fasteners, bolt patterns, leak-test procedure, and vacuum
+  material selection.
+- Subsystem-side gun, feeder, and positioning brackets.
 
 ## Manufacturing Readiness
 

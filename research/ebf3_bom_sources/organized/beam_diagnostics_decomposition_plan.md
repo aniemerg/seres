@@ -1,6 +1,6 @@
 # Beam Diagnostics Decomposition Plan
 
-Status: Level-3 planning file with targeted follow-up source review completed.
+Status: Level-3 planning file with minimal pickup/signal split completed.
 
 Parent items:
 
@@ -14,9 +14,15 @@ Source registry:
 
 Target KB BOMs:
 
-- None yet. This pass records decomposition and boundary decisions but does not
-  create child BOMs because current evidence does not safely define EBF3 pickup
-  geometry or the gun/controls/cabin feedthrough split.
+- `bom_ebf3_gun_beam_boundary_pickup`
+- `bom_ebf3_gun_secondary_electron_pickup`
+- `bom_ebf3_gun_signal_wiring`
+
+This pass creates minimal gun-side diagnostic children: collector/isolation for
+FG-9/FG-10, local diagnostic signal leads, a gun-diagnostic feedthrough
+insert/interface marker, and a local shield-termination interface marker for
+FG-19. Chamber passive ports, DAQ, controls processing, final pinout, and bias
+supplies remain deferred across subsystem boundaries.
 
 Workflow and decision-status definitions:
 
@@ -35,7 +41,8 @@ Workflow and decision-status definitions:
    pickup concepts in electron-beam welding, including a ring collector and
    biased collector path. They do not define EBF3 fixed-gun hardware.
 4. Signal-feedthrough sources support the need for vacuum-compatible signal
-   passage, but chamber ports and central DAQ remain subsystem-boundary items.
+   passage, shielding, and feedthrough selection, but chamber ports and central
+   DAQ remain subsystem-boundary items.
 5. `LOCAL-EBF3-FG-TABLE` is user-derived and candidate-only.
 
 ## Source Evidence And Use
@@ -166,31 +173,91 @@ Use:
 - Does not define whether the insert belongs under FG-19, the cabin
   feedthroughs, or a shared controls harness.
 
+### WEB-ALLECTRA-COAXIAL-FEEDTHROUGHS
+
+Evidence:
+
+- "shielding sensitive direct current signals"
+- "50 Ohm"
+- "vacuum side"
+
+Use:
+
+- Supports coaxial feedthroughs as a plausible signal-path class for shielded
+  diagnostic pickup signals.
+- Does not justify adopting coax as the EBF3 signal-feedthrough topology before
+  the pickup signal bandwidth, grounding, and chamber port layout are selected.
+
+### WEB-PFEIFFER-FEEDTHROUGHS-KNOWHOW
+
+Evidence:
+
+- "current capacity and voltage"
+- "vacuum-tightness and temperature resistance"
+- "ceramic insulation"
+- "gas discharges and flashovers"
+
+Use:
+
+- Supports treating the feedthrough as a rated vacuum/electrical interface, not
+  just a wire.
+- Reinforces that feedthrough insert, shield, insulation, and clearance choices
+  need a physical topology and ratings before child BOM creation.
+
 ## Candidate Decision Matrix
 
 | Candidate component/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| Beam-boundary collector / intercept surface | defer | FG-9 | None | BINP names the pickup, and Faraday-cup sources support collectors, but no source defines the EBF3 boundary-pickup geometry or whether it is destructive, partially intercepting, or edge-only. |
+| Beam-boundary collector / intercept surface | adopted / detail deferred | FG-9 | `ebf3_gun_beam_boundary_collector_electrode` | BINP names the pickup, and charged-particle diagnostic sources support collector electrodes. Exact edge/intercept geometry and heat load remain deferred. |
 | Beam dump / heat sink body | defer | FG-9 | None | Faraday-cup references support beam stops/dumps in some diagnostics, but adopting one would over-model FG-9 without EBF3-specific heat-load and geometry evidence. |
 | Ground shield / guard cylinder | defer | FG-9 | None | Kimball supports a grounded shield in Faraday cups. EBF3 pickup placement and shield form are unknown. |
 | Suppression or bias electrode | defer | FG-9/FG-10 | None | JACOW and Kimball support suppression/bias in diagnostic cups; J-STAGE supports a biased collector for secondary current. Bias supply ownership crosses into power supplies/controls. |
-| Ceramic or high-resistance insulator | defer | FG-9/FG-10/FG-19 | None | OSTI/JACOW support electrical isolation. Specific EBF3 insulator form and ownership versus feedthrough insert are unresolved. |
-| Secondary-electron ring collector | defer | FG-10 | None | J-STAGE supports a ring electrode collector for EBW secondary-current pickup, but BINP only names secondary-electron pickup without geometry. |
+| Ceramic or high-resistance insulator | adopted / detail deferred | FG-9/FG-10 | `ebf3_gun_beam_boundary_pickup_insulator`, `ebf3_gun_secondary_pickup_insulator` | OSTI/JACOW support electrical isolation for diagnostic collectors. Feedthrough insert and exact ceramic shape remain deferred. |
+| Secondary-electron ring collector | adopted / detail deferred | FG-10 | `ebf3_gun_secondary_electron_ring_collector` | J-STAGE supports a ring electrode collector for EBW secondary-current pickup. Treat as preferred geometry until a better EBF3-specific shape appears. |
 | Secondary-electron plate collector | defer | FG-10 | None | User-derived candidate only for this EBF3 model; current web sources found a ring collector, not a plate collector. |
-| Local signal lead from pickup to gun-side interface | defer | FG-9/FG-10/FG-19 | None | Signal leads are plausible and source-supported at function level, but should not be split until feedthrough and DAQ ownership is fixed. |
-| Vacuum signal feedthrough insert | split_boundary / defer | FG-19 / cabin / controls | None | Feedthroughs are real, but cabin owns generic chamber port/flange, gun owns local pickup-side wiring, and controls owns external acquisition. |
+| Local signal lead from pickup to gun-side interface | adopted / detail deferred | FG-9/FG-10/FG-19 | `ebf3_gun_local_diagnostic_signal_lead_set` | Signal leads are required to carry pickup signals toward the gun-side interface. Feedthrough topology, shield grounding, and controls-side acquisition remain deferred. |
+| Vacuum signal feedthrough insert | adopted / detail deferred | FG-19 / cabin / controls | `ebf3_gun_diagnostic_signal_feedthrough_insert` | Feedthroughs are real, and current interface architecture assigns the gun-diagnostic insert/interface marker to FG-19 while cabin keeps passive ports and controls keep acquisition. Coax/multipin/power-feedthrough choice is not selected. |
 | External ammeter, digitizer, DAQ, or computer processing | split_boundary | Controls | None under gun | Multiple sources describe external measurement electronics. Keep these in controls, not in fixed-gun child BOMs. |
-| Grounding/shield termination | defer | FG-19 / controls | None | Real signal-integrity function, but boundary with controls cabinet harness and chamber ground is not resolved. |
+| Grounding/shield termination | adopted / detail deferred | FG-19 / controls | `ebf3_gun_signal_shield_termination_interface` | A shield termination interface is needed to keep signal shielding distinct from protective ground, HV return, beam-current return, and controls DAQ. Exact grounding policy and connector geometry remain unresolved. |
 
 ## Current KB Action
 
-- Do not create child BOMs for FG-9, FG-10, or FG-19 in this pass.
-- Keep FG-9 and FG-10 as fixed-gun diagnostic pickup assemblies because the
-  BINP source names both functions.
-- Keep FG-19 as local gun-side signal wiring only. External measurement,
-  acquisition, processing, and interlock decisions belong to controls.
-- Tighten FG-9 and FG-10 notes so their child structures are explicitly
-  candidates, not adopted BOM children.
+- Create minimal child BOMs for FG-9, FG-10, and FG-19.
+- Keep FG-9 and FG-10 as fixed-gun diagnostic pickup assemblies with only
+  collector and local isolation children.
+- Keep FG-19 as gun-side signal wiring and interface hardware only. External
+  measurement, acquisition, processing, interlocks, cabinet harnessing, and
+  chamber ports remain outside this BOM.
+- Do not create bias/suppression, controls DAQ, connector-family, pinout, or
+  final shield-grounding child items yet.
+
+## Signal-Path Follow-Up
+
+Target: decide whether FG-19 can be split into local pickup leads, signal
+feedthrough insert, shield termination, and controls-side acquisition.
+
+Decision: split local gun-side diagnostic leads, a gun-diagnostic feedthrough
+insert/interface marker, and a local shield-termination interface marker.
+
+Reasoning:
+
+- Existing sources support a physical path from collector to feedthrough to
+  external measurement, and current interface architecture assigns the
+  gun-diagnostic insert/interface marker to FG-19 while keeping cabin passive
+  ports and controls acquisition separate.
+- The local in-gun lead set and feedthrough/shield interface markers are now
+  modeled because they do not decide connector family, pinout, controls-side
+  acquisition, or final shield-grounding policy.
+- Coaxial feedthroughs are plausible for shielded diagnostic signals, but a
+  multipin signal feedthrough or dedicated diagnostic flange is also plausible.
+- Creating connector-family, pinout, DAQ, or cabinet-harness children now would
+  still risk duplicating cabin passive ports or controls acquisition hardware.
+
+Next unblock condition:
+
+- Select or source the remaining physical signal path: pickup location,
+  in-vacuum cable class, coax/multipin/shared-plate topology, shield/ground
+  policy, and controls-side acquisition boundary.
 
 ## Manufacturing Readiness
 

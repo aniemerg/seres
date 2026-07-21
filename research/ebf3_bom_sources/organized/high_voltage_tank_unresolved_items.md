@@ -7,6 +7,8 @@ Purpose:
 - Keep unresolved HV tank candidates visible without blocking progress.
 - Avoid reintroducing source-tag mismatches or duplicate gun/HV tank boundary
   items.
+- Track only open issues that still need source, geometry, ownership, or
+  material/process decisions.
 
 Source plans:
 
@@ -17,6 +19,16 @@ Source plans:
 - `research/ebf3_bom_sources/organized/hv_tank_service_protection_review.md`
 - `research/ebf3_bom_sources/organized/hv_tank_core_decomposition_plan.md`
 - `research/ebf3_bom_sources/organized/hv_tank_interface_hardware_plan.md`
+- `research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`
+
+## Status Use
+
+- `defer`: keep visible, but do not create a KB item until the unblock condition
+  is satisfied.
+- `split_boundary / defer`: real candidate, but both ownership and geometry are
+  unresolved.
+- `modeled / detail deferred`: a KB marker exists, but material, geometry,
+  ratings, or process choices remain unresolved.
 
 ## Register
 
@@ -36,19 +48,20 @@ Source plans:
 | HV-D-012 | Oil level gauge child | defer | HV-13 | Gauge class real, type unknown. | Source tank level indicator design. | HV service/protection |
 | HV-D-013 | Temperature sensor RTD/thermistor child | defer | HV-14 | Primary sensor exists, type/feedthrough unresolved. | Source sensor construction. | HV service/protection |
 | HV-D-014 | Enclosure shielding/bonding hardware | defer | HV-15 | Overlaps grounding terminal/enclosure. | Source shielding/bonding layout. | HV service/protection |
-| HV-D-015 | Physical service interlock switch | defer / split_boundary | HV-15 / controls | Interlock concept real, physical switch location unknown. | Source switch location or cabinet layout. | HV service/protection |
+| HV-D-015 | Physical service interlock switch | split_boundary / defer | HV-15 / controls | Current interface architecture assigns interlock decisions/logging to controls, while a physical switch may belong with the HV tank or cabinet hardware. Switch location remains unknown. | Source switch location or cabinet layout. | HV service/protection; interface architecture |
 | HV-D-016 | Manual discharge point | defer | HV-15 / HV-10 | May duplicate bleeder/discharge chain. | Source service procedure. | HV service/protection |
-| HV-D-017 | Bushing conductor/insulation children | defer | HV-8 | Bushing function real, geometry unknown. | Source selected bushing/feedthrough design. | HV interface hardware |
-| HV-D-018 | Field grading/corona shield | defer | HV-8 / FG-12 / FG-13 | Tank-side versus gun-side assignment unknown. | Source interface geometry. | HV interface hardware |
+| HV-D-017 | Bushing conductor/insulation children | modeled / detail deferred | HV-8 | Modeled through `bom_ebf3_tank_side_hv_output_bushing`: central conductor, insulator body, mounting flange, and cable socket/interface. Geometry, material choice, creepage, sealing, and ratings remain unresolved. | Source selected bushing/feedthrough design before material/process closure or further child split. | HV interface hardware |
+| HV-D-018 | Field grading/corona shield | modeled / detail deferred | HV-8 / FG-12 / FG-13 | Current BOM has local field-grading markers under HV-8 and FG-13. Final shield/ring geometry, potential connection, and whether cable-side stress control needs separate parts remain unresolved. | Source interface geometry before material/process closure or further split. | HV interface hardware; interface architecture |
 | HV-D-019 | Cable conductor/dielectric/shield/jacket children | defer | HV-9 | Cable material classes known, selected cable unknown. | Source cable specification. | HV interface hardware |
-| HV-D-020 | Tank-side and gun-side cable terminations | defer / split_boundary | HV-8 / HV-9 / FG-12 | Connector/socket geometry unknown. | Source termination design. | HV interface hardware |
+| HV-D-020 | Tank-side and gun-side cable terminations | modeled / detail deferred | HV-8 / HV-9 / FG-12 | Tank-side receiving interface is represented by `ebf3_tank_side_bushing_cable_socket_interface`; gun-side receiving interface is represented by `ebf3_gun_hv_input_receiving_terminal`. Exact connector/socket geometry, stress-control transition, and service boundary remain unknown. | Source termination design before material/process closure or connector-family split. | HV interface hardware; interface architecture |
 | HV-D-021 | HV output voltage divider internals | defer | HV-11 | Divider function kept as leaf; ratios/ratings unknown. | Electrical design review. | HV electrical interface |
-| HV-D-022 | HV current monitor sensor type | defer | HV-12 | Shunt/CT/Hall/return-leg placement remains unresolved after boundary review. | Source or select current-monitor topology and ratings. | HV electrical interface; HV grounding return |
-| HV-D-023 | Global grounding/current-return architecture | split_boundary / defer | HV tank / power supplies / gun / positioning / controls | Boundary model is documented, but physical return topology is not source-fixed. | Source/select external return conductor, cabinet return bus, and platform connection topology. | HV grounding return |
+| HV-D-022 | HV current monitor sensor type | modeled / detail deferred | HV-12 | Current interface architecture keeps the primary HV current-monitor package in the HV tank and acquisition in controls. Minimal child BOM has sensing element, insulating mount, and signal lead. Sensor type and exact return-leg placement remain unresolved. | Source or select current-monitor topology and ratings before material/process closure or further sensor split. | HV electrical interface; HV grounding return; interface architecture |
+| HV-D-023 | Global grounding/current-return architecture | split_boundary / defer | HV tank / power supplies / gun / positioning / controls | Current interface architecture separates protective bonding, HV source return/reference, beam-current continuity, and low-voltage sensing. Physical return topology is not source-fixed. | Source/select external return conductor, cabinet return bus, and platform connection topology. | HV grounding return; interface architecture |
 
 ## Next Work
 
-1. Use `hv_grounding_return_review` before changing current-monitor,
-   beam-return, power-supply return, or controls acquisition items.
+1. Use `ebf3_interface_architecture` as the current ownership baseline before
+   changing current-monitor, beam-return, power-supply return, feedthrough, or
+   controls acquisition items.
 2. Defer material/process readiness for valves, gauges, bushings, cable, spacers,
    transformer windings, rectifier stacks, and capacitor internals.

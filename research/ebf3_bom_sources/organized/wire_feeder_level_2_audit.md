@@ -1,6 +1,7 @@
 # Wire Feeder Level-2 Audit
 
-Status: review completed; source-table aligned BOM correction applied.
+Status: review completed; source-table aligned mechanism rows, package-level
+mechanism child splits, and feeder-specific feedthrough insert applied.
 
 Purpose:
 
@@ -20,6 +21,8 @@ Related boundary reviews:
 - `research/ebf3_bom_sources/derived/ebf3_subsystem_boundaries.md`
 - `research/ebf3_bom_sources/organized/manufacture_cabin_level_2_audit.md`
 - `research/ebf3_bom_sources/organized/controls_level_2_audit.md`
+- `research/ebf3_bom_sources/organized/feedthrough_interface_review.md`
+- `research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`
 
 ## Source Use
 
@@ -62,6 +65,64 @@ Use:
   vendor guidance for many detailed parts.
 - Candidate-only until cited external sources are archived or independently
   checked.
+
+### WEB-MILLER-S74-MANUAL
+
+Evidence:
+
+- "drive roll pressure"
+- "correct size drive roll"
+- "wire guides"
+- "contact tip or liner"
+
+Use:
+
+- Supports drive-roll pressure, drive-roll size, wire guide, contact-tip, and
+  liner concerns as real feeder-maintenance/design features.
+- Does not make the S-74 mechanism an EBF3 vacuum feeder drawing.
+
+### WEB-HOBART-DRIVE-ROLLS
+
+Evidence:
+
+- "V-knurled"
+- "V-groove"
+- "U-groove"
+- "depends upon what type of wire"
+
+Use:
+
+- Supports drive-roll profile as a real design variable tied to wire type.
+- Does not select an EBF3 drive-roll profile, surface finish, or material.
+
+### WEB-ESAB-DRIVE-ROLL-DESIGN
+
+Evidence:
+
+- "proper drive roll design"
+- "prevent shavings"
+- "smooth wire feeding"
+
+Use:
+
+- Supports preserving drive-roll geometry and wire-shaving risk as unresolved
+  fidelity concerns.
+- Does not justify child BOMs without EBF3 wire material, diameter, roll
+  pressure, and vacuum wear design.
+
+### WEB-BERNARD-TREGASKISS-LINERS
+
+Evidence:
+
+- "guide the welding wire"
+- "from the wire feeder"
+- "up to the contact tip"
+
+Use:
+
+- Supports liner/guide function as real wire-feed hardware.
+- Does not select a vacuum-compatible liner material or EBF3 final guide/nozzle
+  geometry.
 
 ## Main Finding
 
@@ -109,28 +170,79 @@ belong in later child BOMs.
 
 | Candidate item | Why not in top-level wire-feeder BOM now | Next unblock condition |
 | --- | --- | --- |
-| `ebf3_wire_feed_pressure_roll` | Not a source-table top-level row; may belong under drive-roll/pressure-arm child decomposition. | Reintroduce during drive-roll mechanism decomposition. |
-| `ebf3_wire_feed_roll_bearing_set` | Plausible child detail but not a source-table top-level row. | Reintroduce during drive-roll carrier decomposition if source-supported. |
+| `ebf3_wire_feed_pressure_roll` | Not a source-table top-level row; now reintroduced under `ebf3_wire_feed_pressure_arm`. | Keep as Level-3 child; profile/material remain deferred. |
+| `ebf3_wire_feed_roll_bearing_set` | Plausible child detail; now reintroduced under `ebf3_drive_roll_carrier`. | Keep as Level-3 child; bearing type/vacuum readiness remain deferred. |
 | `ebf3_wire_feed_drive_gear_set` | Gear details may be inside gearmotor or drive mechanism; top-level source row is gearmotor. | Reintroduce only after gearmotor/drive transmission review. |
 | `ebf3_wire_feed_spacer` | Replaced by the source-table aligned drive-roll carrier spacer. | Reintroduce only if a later child assembly needs a broader spacer. |
-| `ebf3_wire_feed_idler_arm` | Older placeholder overlaps with pressure arm. | Use only if child decomposition separates idler arm from pressure arm. |
+| `ebf3_wire_feed_idler_arm` | Older placeholder overlaps with pressure arm at Level-2; now reintroduced under `ebf3_wire_feed_pressure_arm`. | Keep as Level-3 child; pivot/stiffness details remain deferred. |
 | `ebf3_wire_feed_spring_tensioner` | Older placeholder overlaps with pressure spring and pressure adjustment knob. | Reintroduce only if tensioner assembly is source-confirmed. |
 | `ebf3_wire_straightener_guides` | Not in the current source-table top-level list. | Reintroduce only if a source confirms a separate straightener in this feeder. |
 | `ebf3_wire_feed_nozzle` | Overlaps with EBF wire guide tip and gun/feeder adapter. | Reintroduce only after the downstream guide/nozzle boundary is source-fixed. |
 | `ebf3_wire_feeder_body` | Source row is base; body/housing may be a later base child. | Reintroduce under feeder base decomposition. |
 | `ebf3_wire_feeder_cover` | Source row is drive-roll cover; general cover may be a later child. | Reintroduce under drive-roll cover/body decomposition if needed. |
 | `ebf3_wire_feeder_vacuum_motor_wiring` | Wiring is real but crosses feedthrough/power/control boundaries. | Reintroduce after feedthrough and motor-power interface review. |
-| `ebf3_wire_feeder_feedthrough_connector` | Feedthrough is real but must be split from chamber-side port and controls/power wiring. | Reintroduce after feedthrough-interface review. |
+| `ebf3_wire_feeder_feedthrough_connector` | Reintroduced as a wire-feeder-specific feedthrough insert/interface after interface architecture review. | Keep child BOM limited to feeder motor/signal pins, insulator, local flange, connectors, and shield interface; cabin passive ports, controls acquisition, and power drivers remain outside. |
 | `ebf3_wire_feeder_fasteners_small` | Generic fasteners are likely child details, not source-table top-level rows. | Reintroduce under specific assemblies when fastener fidelity is needed. |
 
 ## Applied BOM Correction
 
 - Rebuilt the top-level wire-feeder BOM so its 27 components map directly to
   WF-1 through WF-27.
+- Added `ebf3_wire_feeder_feedthrough_connector` as one extra
+  feeder-specific interface item after the 27 source-table mechanism rows.
 - Added missing source-row items and retagged existing kept items.
 - Kept shifted older placeholders as deferred candidates, not deleted.
 - Kept first-pass component mass allocation for current recipe mass balance;
   this audit does not claim sourced masses for corrected wire-feeder leaves.
+
+## Mechanism Split Follow-Up
+
+Target: decide whether WF-12 through WF-22 should be split now into drive-roll
+profile, pressure roll/idler, bearing set, spring/tensioner subparts, guide
+liner material, final guide tip/nozzle, and gun-feeder adapter details.
+
+Decision: split obvious mechanism/package assemblies, but keep small hardware
+and final material/process choices unresolved.
+
+Reasoning:
+
+- EBF sources support the wire feeder, drive roll, guide means, wire-rate
+  sensing, and attachment to the electron beam gun.
+- External welding-feeder sources support drive-roll profile, pressure, guides,
+  liners, and contact-tip/nozzle concerns as real mechanism details.
+- None of the current sources select the EBF3 wire material/diameter, vacuum
+  liner material, drive-roll profile, roll pressure, final guide geometry, or
+  gun-feeder adapter layout.
+- Splits are acceptable where they preserve a clear physical package boundary:
+  spool, gearmotor, pressure arm, drive-roll carrier, drive roll, guide/liner
+  packages, encoder sensor, cover, base, and gun adapter/bracket.
+- `WEB-SUMITOMO-GEARMOTORS` supports gearmotor as an integrated motor/reducer
+  package, so motor body, gearbox, leads, and housing can remain as package
+  children without claiming EBF3-specific internals.
+- Wider splitting into gear teeth, motor rotor/stator, vacuum bearing details,
+  feedthrough pinout, or exact guide material would import assumptions into a
+  vacuum EBF3 mechanism and may duplicate controls/power/cabin boundaries.
+
+Current action:
+
+- Keep package-level child BOMs for assembly-like feeder rows.
+- Keep gear set, straightener, nozzle, generic feeder body/cover, guide liner
+  material, vacuum motor internals, final guide geometry, and final feedthrough
+  pinout/connector topology as deferred candidates.
+- Revisit only after source or design selection fixes the wire size/material,
+  vacuum guide path, drive-roll profile, and gun/feeder geometry.
+
+## Batch Child Split Review
+
+| Parent scope | Current status | Rationale |
+| --- | --- | --- |
+| Spool and brake package | adopt / detail deferred | Spool, hub, shaft, ring, washer, and tension adjustment are coherent feeder mechanics; brake-adjuster child split is kept, while small single-material hub/shaft/ring/washer remain leaves. |
+| Gearmotor | adopt / package only | External gearmotor source supports integrated motor/reducer packages. Motor electromagnetic internals, gearbox gear geometry, bearing/lubrication, and vacuum readiness remain deferred. |
+| Drive roll and pressure mechanism | adopt / detail deferred | Patent and feeder sources support drive roll and pressure control. Roll groove/profile is modeled as a fidelity marker, but exact profile/material is deferred. |
+| Wire guide path | adopt / detail deferred | Feeder and liner sources support inlet/intermediate/outlet/liner/tip functions. Final guide/nozzle geometry and material remain unresolved. |
+| Encoder sensor | adopt / package only | Patent supports wire feed-rate sensing. Sensor body, target, and signal lead are package children; sensing principle and controls acquisition remain deferred. |
+| Base, cover, gun bracket | adopt / detail deferred | Feeder housing/base and gun attachment are source-supported. Cabin-side port and permanent gun-column datum remain outside this BOM. |
+| Feedthrough connector | adopt package split / split-boundary guarded | Interface architecture assigns the feeder-specific insert to the wire feeder while cabin owns passive ports, controls own acquisition, and power supplies own driver outputs. Child BOM separates motor-power pins, signal pins, insulator body, flange, vacuum-side connector, air-side connector, and shield termination interface. Final pinout and connector family remain deferred. |
 
 ## Manufacturing Readiness
 

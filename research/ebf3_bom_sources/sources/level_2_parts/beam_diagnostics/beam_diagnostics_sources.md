@@ -14,7 +14,7 @@ decisions belong in organized planning files.
 
 ## LOCAL-EBF3-FG-TABLE
 
-- Title: V2 fixed electron beam gun item table
+- Title: Fixed electron beam gun item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
@@ -60,3 +60,17 @@ decisions belong in organized planning files.
 - Publisher/site: Design Realized
 - URL: https://design-realized.com/pages/feed-through
 - Authority: external commercial source; vacuum signal feedthrough reference
+
+## WEB-ALLECTRA-COAXIAL-FEEDTHROUGHS
+
+- Title: Understanding Coaxial feedthroughs
+- Publisher/site: Allectra
+- URL: https://www.allectra.com/allectra-understanding-coaxial-feedthroughs-2/
+- Authority: external technical/vendor source; coaxial signal feedthrough and shielding reference
+
+## WEB-PFEIFFER-FEEDTHROUGHS-KNOWHOW
+
+- Title: Mechanical Components + Feedthroughs - Know-How
+- Publisher/site: Pfeiffer Vacuum
+- URL: https://www.pfeiffervacuum.com/us/en/knowledge/vacuum-technology/knowledge-book/3-mechanical-components-in-vacuum/3_5_components_and_feedthroughts/
+- Authority: external technical/vendor source; vacuum feedthrough construction and selection reference

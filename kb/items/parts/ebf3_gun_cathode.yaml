@@ -4,9 +4,16 @@ name: EBF3 gun cathode
 mass: 0.02
 unit: unit
 unit_kind: discrete
-material_class: refractory_metal
+material_class: scarce_trace_refractory_metal
 notes: >
   FG-1. Thermionic electron emitter for the EBF3 fixed electron beam gun.
-  Baseline material modeled as refractory metal cathode; source table notes BINP
-  tantalum foil and NASA LaB6 as a long-life option. Refine material variant
-  after source mapping is converted into KB recipes.
+  Active package direction is a direct-heated tungsten hairpin/filament for
+  lunar closure. Intentional Level-2 leaf: in this package direction, the
+  emitter and heater are the same hot tungsten conductor, while base, contacts,
+  leads, and cartridge support are modeled by neighboring cathode package items.
+  EBF3 source LaB6 is retained as original-machine reference evidence, and
+  comparable BINP tantalum foil is not the local-closure baseline. Do not attach
+  a local recipe or reuse lower-resolution tungsten cathode items until
+  filament geometry, material form, and fabrication route are sourced or
+  selected. See
+  research/ebf3_bom_sources/organized/cathode_variant_review.md.

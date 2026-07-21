@@ -27,14 +27,14 @@ Evidence and modeling decisions belong in organized planning files.
 
 ## LOCAL-EBF3-HV-TANK-TABLE
 
-- Title: V2 high voltage tank item table
+- Title: High voltage tank item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_high_voltage_tank_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_high_voltage_tank_item_table.txt`
 - Authority: user_derived candidate table; candidate-only
 
 ## LOCAL-EBF3-FG-TABLE
 
-- Title: V2 fixed electron beam gun item table
+- Title: Fixed electron beam gun item table
 - Local PDF: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.pdf`
 - Local text: `research/ebf3_bom_sources/organized/V2_fixed_electron_beam_gun_item_table.txt`
 - Authority: user_derived candidate table; candidate-only

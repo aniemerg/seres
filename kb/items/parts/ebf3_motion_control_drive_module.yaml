@@ -6,6 +6,10 @@ unit: unit
 unit_kind: discrete
 material_class: electronic
 notes: >
-  CTL-10. Motion drive/control module for commanded positioning subsystem motion. First-pass leaf item from EBF3 organized BOM table. No local
-  recipe is attached yet; leave manufacturing closure open until lower-level
-  materials and fabrication routes are source-supported.
+  CTL-10. Controls-side motion command/control module for the positioning
+  subsystem. Positioning owns motors, local motor cabling, sensor cabling, and
+  feedthrough interface hardware; power supplies own driver outputs. No local
+  recipe is attached yet. See
+  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md
+  and research/ebf3_bom_sources/organized/electrical_signal_boundary_review.md.
+  This assembly is split by `bom_ebf3_motion_control_drive_module`. Child items are package-level placeholders for decomposition fidelity only; no local recipe is attached yet.

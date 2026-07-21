@@ -15,9 +15,16 @@ Source registry:
 
 Target KB BOMs:
 
-- None yet. This pass records decomposition decisions but does not create child
-  BOMs because current evidence does not pass the adoption gate for independent
-  Level-3 children.
+- `bom_ebf3_gun_cathode_cartridge`
+- `bom_ebf3_gun_cathode_heater_leads`
+
+This pass creates only the minimal Level-3 children supported by the selected
+direct-heated tungsten hairpin/filament package. It does not create a local
+recipe, dimensions, or detailed fabrication process.
+
+Related selected-material review:
+
+- `research/ebf3_bom_sources/organized/cathode_variant_review.md`
 
 Workflow and decision-status definitions:
 
@@ -39,6 +46,10 @@ Workflow and decision-status definitions:
 6. `WEB-NASA-MODULAR-CATHODE-GUN` is generic modular cathode/electron-gun
    evidence. It supports modular subassembly patterns but not the EBF3 fixed-gun
    cathode details.
+7. `cathode_variant_review.md` selects a direct-heated tungsten
+   hairpin/filament package as the active cathode package direction. LaB6
+   remains the original EBF3 source reference, and BINP tantalum remains
+   comparable-gun evidence only.
 
 ## Source Evidence And Use
 
@@ -166,30 +177,36 @@ Use:
 
 | Candidate component/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| Tantalum foil cathode variant | defer | FG-1 | None; material variant candidate | BINP supports tantalum foil for a comparable gun, and Kimball supports tantalum cathode heater/base features in a different architecture. EBF3 also has a LaB6 variant, so do not split FG-1 into one material path yet. |
-| LaB6 cathode variant | defer | FG-1 | None; material variant candidate | EBF-space supports LaB6 for EBF3; Kimball/Ted Pella/BARC sources show LaB6 cathode mounting/heater architectures vary. Defer until variant policy is explicit. |
-| Cathode emitter as standalone child | reject for this pass | FG-1/FG-15 | Existing `ebf3_gun_cathode` parent remains the emitter item | Splitting an emitter child below `ebf3_gun_cathode` would duplicate the parent unless FG-1 is redefined as a cathode assembly. |
-| Heater contact / hot-side contact | defer | FG-1/FG-14/FG-15 | None | New sources support contacts/heater paths as real cathode features, but architecture differs between tantalum disc, LaB6 carbon-rod, and BARC coil-filament designs. Do not adopt a generic contact child yet. |
-| Heater leads / hot-side conductor | defer | FG-14 | None | Kimball supports heater wire and heavy leads; BARC supports filament-to-rod construction. These sources justify FG-14 as a real assembly but not a specific EBF3 child structure. |
-| Ceramic beads/sleeves for heater leads | defer | FG-14 | None | BARC supports ceramic sleeves in one LaB6 cathode assembly. Defer because EBF3 heater-lead insulation geometry is not confirmed. |
-| Cartridge body / holder | defer | FG-15 | None | BINP supports a preliminary adjusted cartridge; Kimball/Ted Pella support base/ferrule/mounting structures. Evidence is enough to keep FG-15 as an assembly, not enough to split exact children. |
-| Clamp or locating seat | defer | FG-15 | None | Candidate remains plausible, but sources do not converge on an EBF3-specific clamp/seat architecture. |
-| Cartridge electrical contact | defer | FG-15 | None | Boundary-sensitive with FG-14 heater leads and FG-1 emitter. Defer until a cartridge architecture source is added. |
-| Cathode radiation shield sheet set | defer | FG-16 | None | BARC supports tantalum/rhenium heat shields for one LaB6 electron-gun cathode assembly. Defer because EBF3/BINP FG-16 is still inference-heavy. |
-| Radiation shield spacers/clips | defer | FG-16 | None | BARC supports heat-shield support strips in one architecture, but not enough to create EBF3 shield spacer/clip children. |
+| Tungsten hairpin/filament cathode package | selected package direction / defer detailed geometry | FG-1 / FG-14 / FG-15 | Existing Level-2 leaves stay in place | Lunar ISRU review selects W as the material direction, and JEOL/Kimball support directly heated tungsten filament electron-gun sources. Exact base, contacts, cartridge, and insulation geometry still need source/design selection. |
+| Tantalum foil cathode variant | not active / defer | FG-1 | None; preserve as reference variant | BINP supports tantalum foil for a comparable gun, and Kimball supports tantalum cathode heater/base features in a different architecture. Lunar material review de-prioritizes Ta for early local closure. |
+| LaB6 cathode variant | source reference / defer | FG-1 | None; preserve as original EBF3 reference | EBF-space supports LaB6 for EBF3, but no lunar LaB6 route is modeled. Use only if the modeling goal returns to exact source-machine reconstruction or explicit alternative variants. |
+| Cathode emitter as standalone child | reject for this pass | FG-1/FG-15 | Existing `ebf3_gun_cathode` parent remains the filament emitter item | Under the selected direct-heated package, emitter and heater filament are the same hot tungsten conductor. A child emitter would duplicate FG-1. |
+| Heater contact / hot-side contact | adopted / detail deferred | FG-1/FG-14/FG-15 | `ebf3_gun_cathode_hot_contact_pair` | Contacts are required by the selected direct-heated package. Exact material, weld/clamp method, and service geometry remain deferred. |
+| Heater leads / hot-side conductor | adopted / detail deferred | FG-14 | `ebf3_gun_cathode_current_lead_pair`, `ebf3_gun_cathode_lead_termination_set` | FG-14 remains the lead/contact assembly feeding current into the directly heated filament. Conductor alloy, gauge, thermal transition, and termination details remain deferred. |
+| Ceramic beads/sleeves or standoffs | adopted / detail deferred | FG-14 / FG-15 | `ebf3_gun_cathode_ceramic_standoff_set` | 3M/Kimball support ceramic standoffs and vacuum-compatible support constraints. Exact insulation geometry remains deferred. |
+| Cartridge body / holder | adopted / detail deferred | FG-15 | `ebf3_gun_cathode_cartridge_base` | BINP supports a preliminary adjusted cartridge; electron-gun package sources support mounted cathode assemblies. Datum and base geometry remain deferred. |
+| Clamp or locating seat | adopted / detail deferred | FG-15 | `ebf3_gun_cathode_locating_clamp` | Cartridge replacement and mounted cathode assemblies need retention. Exact locating seat and fastener geometry remain deferred. |
+| Cartridge electrical contact | adopted / detail deferred | FG-15 | `ebf3_gun_cathode_hot_contact_pair` | Contact ownership is assigned to the cartridge so heater leads can terminate into it without duplicating the filament emitter. |
+| Cathode radiation shield sheet set | defer | FG-16 | None | BARC supports heat shields for one LaB6 assembly, but current tungsten hairpin sources do not justify an EBF3 shield child. |
+| Radiation shield spacers/clips | defer | FG-16 | None | No selected tungsten package source confirms separate shield support hardware. |
 
 ## Current KB Action
 
-- Do not create child BOMs for FG-1, FG-14, FG-15, or FG-16 in this pass.
-- Keep cathode material choices unresolved in KB rather than forcing either
-  tantalum foil or LaB6 as the single local model.
+- Keep FG-1 as the tungsten hairpin/filament emitter leaf; do not create an
+  emitter child below it.
+- Create child BOMs for FG-14 and FG-15 only:
+  `bom_ebf3_gun_cathode_heater_leads` and
+  `bom_ebf3_gun_cathode_cartridge`.
+- Keep FG-16 as a deferred shield candidate because current tungsten hairpin
+  sources do not justify independent shield children.
 - Tighten FG-16 wording so it is clearly an inferred shielding candidate, not a
   source-confirmed refractory-metal sheet set.
-- Revisit this cluster only after adding cartridge/heater/cathode construction
-  sources that match the selected EBF3 cathode architecture.
+- Revisit this cluster after selecting dimensions, contact/joint method,
+  ceramic geometry, and whether a shield is present.
 
 ## Manufacturing Readiness
 
-No item in this cluster is local-ready. Tantalum foil, LaB6 cathodes, hot-side
-heater leads, ceramic insulation, precision cartridge alignment, and
-high-temperature vacuum compatibility all need separate material/process review.
+No item in this cluster is local-ready. Tungsten filament stock, hot-side current
+leads, ceramic insulation, precision cartridge alignment, high-temperature
+contacts, and high-vacuum compatibility all need separate material/process
+review.

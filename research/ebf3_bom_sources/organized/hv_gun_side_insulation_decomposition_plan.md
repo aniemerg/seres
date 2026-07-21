@@ -1,6 +1,7 @@
 # HV Gun-Side Insulation Decomposition Plan
 
-Status: Level-3 planning file with targeted follow-up source review completed.
+Status: Level-3 planning file with gun-side HV input and standalone HV
+insulator package splits completed.
 
 Parent items:
 
@@ -14,9 +15,13 @@ Source registry:
 
 Target KB BOMs:
 
-- None yet. This pass records boundary and decomposition decisions but does not
-  create child BOMs because current evidence does not safely assign independent
-  Level-3 children across the gun/HV-tank boundary.
+- `bom_ebf3_gun_hv_input`
+- `bom_ebf3_gun_hv_insulator`
+
+This pass creates the minimal FG-12 children that clearly remain on the gun side
+of the HV interface and a standalone FG-13 package split. FG-18 stays as an
+unresolved marker because splitting it now would risk duplicating the main
+oil-filled HV tank.
 
 Workflow and decision-status definitions:
 
@@ -154,30 +159,34 @@ Use:
 
 | Candidate component/function | Status | Applies to | KB representation | Decision basis |
 | --- | --- | --- | --- | --- |
-| HV input central conductor | defer | FG-12 | None | Generic feedthrough sources support conductors, but EBF3 geometry/current path and boundary with HV cable termination are unresolved. |
-| HV input ceramic feedthrough body | split_boundary / defer | FG-12/FG-13 | Existing `ebf3_gun_hv_insulator` remains separate | Generic sources support ceramic-to-metal feedthroughs, but adopting this under FG-12 would duplicate FG-13 unless the parent boundaries are redefined. |
-| HV input metal flange/housing | defer | FG-12 | None | Plausible feedthrough feature; needs EBF3/source geometry to avoid duplicating gun column flange or chamber/gun interface. |
-| HV cable-side termination | split_boundary | FG-12 / HV tank | None | The main HV cable is owned by `ebf3_high_voltage_tank`; gun-side receiving termination may belong to FG-12, but source detail is not enough to split. |
-| Corona shield / field-grading shield | defer | FG-12/FG-13 | None | Generic HV design concern; no current EBF3/BINP child detail. |
-| Standalone HV ceramic insulator body | defer | FG-13 | None | Source supports high-voltage insulator existence and generic alumina use, but not specific single-material geometry or metallization. |
-| Metallized ends / collars | defer | FG-13 | None | Candidate-only plus generic ceramic-to-metal practice. Needs source confirmation before child BOM. |
-| Gun-side oil volume | defer | FG-18 | None | BINP supports oil tank and silicone oil, but gun-side vs main tank ownership remains source-ambiguous. Keep FG-18 as a boundary marker, not a decomposed oil subsystem. |
-| Oil tank shell/lid | defer | FG-18 | None | Candidate-only for gun-side package. Main HV tank shell belongs to high-voltage tank subsystem. |
-| Silicone oil as child material | split_boundary / defer | FG-18 / HV tank | Existing HV tank insulating-fluid item owns main tank fluid | BINP supports silicone oil; do not add a second oil item under FG-18 unless source confirms a separate gun-side oil volume. |
-| Oil-compatible seals/supports | defer | FG-18 | None | Plausible but not source-specific and boundary-sensitive. |
+| HV input central conductor | adopted / detail deferred | FG-12 | `ebf3_gun_hv_input_central_conductor` | Generic feedthrough/input sources require a conductor path. Keep it under FG-12 as gun-side conductor only; material, diameter, clearance, and joint details remain deferred. |
+| HV input ceramic feedthrough body | modeled / detail deferred | FG-12/FG-13 | `bom_ebf3_gun_hv_insulator` owns the standalone insulator package | Generic sources support ceramic-to-metal feedthroughs, and the current interface architecture keeps the ceramic HV insulator under FG-13 rather than duplicating it inside FG-12. Final feedthrough integration remains unresolved. |
+| HV input metal flange/housing | adopted / detail deferred | FG-12 | `ebf3_gun_hv_input_flange_housing` | Plausible local mounting envelope for the gun-side HV input. Keep separate from chamber-side gun port, tank-side bushing, and gun-column structural flange. |
+| Gun-side receiving terminal | adopted / detail deferred | FG-12 / HV tank | `ebf3_gun_hv_input_receiving_terminal` | The main HV cable is owned by `ebf3_high_voltage_tank`; the receiving terminal belongs to the gun-side input. Connector and shield-termination geometry remain deferred. |
+| Tank-side cable termination | split_boundary / defer | HV-8 / HV-9 | None | Owned by HV tank interface, not the fixed gun. Needs connector/socket geometry. |
+| Corona shield / field-grading shield | modeled / detail deferred | FG-12/FG-13/HV-8 | `ebf3_gun_hv_insulator_field_grading_electrode_set`; tank-side marker in HV-8 | Generic HV design sources support flashover/corona/electric-field concerns. Current BOM uses interface-local markers only; final geometry and potential connection remain unresolved. |
+| Standalone HV ceramic insulator body | adopted / detail deferred | FG-13 | `ebf3_gun_hv_insulator_ceramic_body` | Source supports high-voltage insulator existence and generic alumina use. Current modeling keeps it in FG-13; exact shape, grade, and dielectric rating remain unresolved. |
+| Metallized ends / collars | adopted / detail deferred | FG-13 | `ebf3_gun_hv_insulator_metallized_end_interface_set`, `ebf3_gun_hv_insulator_mounting_collar_set` | Generic ceramic-to-metal practice supports the interface class. Metallization stack, collar geometry, and joining process remain unresolved. |
+| Gun-side oil volume | defer | FG-18 | None | BINP supports oil tank and silicone oil; PTR/JEOL support HV tank/oil practice; BNL supports high-dielectric fluid in a gun HV connector; US3133227A supports an electron-gun assembly submerged in an oil tank. These support the package class, but gun-side vs main tank ownership remains source-ambiguous. |
+| Oil tank shell/lid | defer | FG-18 | None | Oil-tank package class is supported, but not EBF3-specific separate gun-side shell/lid geometry. Main HV tank shell belongs to high-voltage tank subsystem. |
+| Silicone oil as child material | split_boundary / defer | FG-18 / HV tank | Existing HV tank insulating-fluid item owns main tank fluid | BINP/PTR support insulating oil and BNL/US3133227A support gun-side high-dielectric fluid/oil-tank practice; do not create a gun-side oil child unless source confirms a separate gun-side oil volume. |
+| Oil-compatible seals/supports | defer | FG-18 | None | Oil-tank package class is supported, but seal material and geometry remain unresolved. |
 | Grounding interface | defer | FG-18 / gun column | None | Candidate-only; may belong to gun column or main HV tank grounding depending on physical package. |
 
 ## Current KB Action
 
-- Do not create child BOMs for FG-12, FG-13, or FG-18 in this pass.
-- Keep FG-12 as gun-side HV receiving/input assembly.
-- Keep FG-13 as the separate high-voltage insulator marker until source evidence
-  decides whether it is part of the feedthrough or a separate structural
-  insulator.
-- Keep FG-18 as a boundary marker for a possible local gun-side oil volume, not
-  as a decomposed duplicate of the main high-voltage tank.
-- Do not add a second silicone-oil child item under FG-18 without source
-  confirmation of a separate oil volume.
+- Create `bom_ebf3_gun_hv_input` with only gun-side receiving/input children:
+  central conductor, receiving terminal, and local flange/housing.
+- Create `bom_ebf3_gun_hv_insulator` as the current standalone insulator package
+  with ceramic body, metallized end-interface, mounting collar, and local
+  field-grading markers.
+- Keep any final FG-12/FG-13 feedthrough integration deferred until source or
+  design geometry is selected.
+- Keep FG-18 as an unresolved boundary marker for a possible local gun-side oil
+  package. Do not create shell/lid/oil/seal child items until EBF3-specific
+  evidence confirms a separate gun-side oil package.
+- Do not add local recipes for FG-12 children; creepage, dielectric clearance,
+  vacuum/oil sealing, and HV test details are unresolved.
 
 ## Manufacturing Readiness
 

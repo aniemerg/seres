@@ -2,6 +2,9 @@
 
 Status: boundary review completed for current Level-2 scaffold.
 
+Current interface entry point:
+`research/ebf3_bom_sources/organized/ebf3_interface_architecture.md`.
+
 Purpose:
 
 - Decide current ownership for chamber ports, feedthrough inserts, HV cable
@@ -102,8 +105,8 @@ Use:
 | --- | --- | --- |
 | `ebf3_cabin_feedthroughs_and_wiring_ports` | Keep deferred; do not place in top-level cabin BOM now. | Real feedthroughs exist, but the generic item would duplicate feeder, positioning, gun, controls, and power/HV interfaces. |
 | `ebf3_positioning_electrical_feedthrough` | Keep in positioning as FS-30 subsystem-specific feedthrough interface. | Source table has a positioning feedthrough row; cabin owns only the chamber-side opening/flange and controls own acquisition. |
-| `ebf3_wire_feeder_feedthrough_connector` | Keep deferred from top-level wire feeder. | Feeder feedthrough is real, but source table row alignment now represents feeder mechanism; feedthrough should return only after child-level split. |
-| `ebf3_gun_signal_wiring` | Keep in fixed gun as local pickups/internal wiring only. | Gun diagnostics and local signal leads belong with the gun; DAQ, logic, and external harnessing belong to controls. |
+| `ebf3_wire_feeder_feedthrough_connector` | Keep in wire feeder as feeder-specific feedthrough insert/interface marker. | Interface architecture now separates this insert from cabin passive ports, controls acquisition, and power-supply driver outputs. |
+| `ebf3_gun_signal_wiring` | Keep in fixed gun as local pickups, internal wiring, and gun-diagnostic feedthrough/shield interface markers. | Gun diagnostics and local signal boundary hardware belong with the gun; DAQ, logic, cabinet harnessing, and chamber passive ports belong elsewhere. |
 | `ebf3_gun_hv_input` | Keep in fixed gun as gun-side HV receiving/input hardware. | It is not the tank-side bushing, not the main cable body, and not a generic cabin port. |
 | `ebf3_tank_side_hv_output_bushing` | Keep in HV tank. | Tank wall/oil-side HV output interface belongs with the HV tank. |
 | `ebf3_hv_cable_to_gun` | Keep in HV tank. | Main HV transmission cable is owned by the HV source package until terminations are decomposed. |
@@ -116,8 +119,8 @@ Use:
 
 - Do not create a general `cabin feedthrough assembly` at top level.
 - Do not add recipes or local closure.
-- Keep the current top-level BOMs concise; detailed feedthrough parts should be
-  introduced only inside a later focused child decomposition.
+- Keep the current top-level BOMs concise; feedthrough details should be
+  introduced only inside the owning subsystem child decomposition.
 - Update item notes so reviewers can see the boundary decision from Simviewer.
 
 ## Next Unblock Conditions
@@ -125,10 +128,10 @@ Use:
 | Deferred item | What would unblock it |
 | --- | --- |
 | `ebf3_cabin_feedthroughs_and_wiring_ports` | A source or design decision showing a specific chamber-side port set or shared feedthrough plate. |
-| `ebf3_wire_feeder_feedthrough_connector` | A feeder child decomposition separating feeder insert, chamber port, motor power, and signal pins. |
-| `ebf3_gun_signal_wiring` children | A diagnostics/signals plan separating local pickup leads, vacuum signal feedthrough insert, shield termination, and controls acquisition. |
-| `ebf3_gun_hv_input` children | A gun/HV input plan separating receiving terminal, ceramic feedthrough/insulator, flange/housing, field grading, and cable-side termination. |
-| `ebf3_positioning_electrical_feedthrough` children | A positioning child decomposition separating motor power pins, signal pins, ceramic body, flange, internal connector, and external connector. |
+| `ebf3_wire_feeder_feedthrough_connector` final details | Source or design selection for exact pinout, connector family, current/signal ratings, shield policy, ceramic-to-metal construction, and service boundary. |
+| `ebf3_gun_signal_wiring` final details | Source or design selection for coax/multipin/shared-plate topology, pinout, shield-ground policy, and controls-side acquisition boundary. |
+| `ebf3_gun_hv_input` / `ebf3_gun_hv_insulator` final details | Source or design selection for exact connector geometry, final ceramic feedthrough integration, field-grading shape/potential, HV ratings, and service boundary. |
+| `ebf3_positioning_electrical_feedthrough` final details | Source or design selection for exact pinout, connector family, current/voltage ratings, shield policy, ceramic-to-metal construction, and service boundary. |
 
 ## Manufacturing Readiness
 

@@ -155,9 +155,9 @@ Use:
 | Current amplifier / driver | split_boundary | Power supplies / controls | None under gun | Ribton emphasizes amplifier matching; drivers belong outside the gun hardware BOM. |
 | Deflection mount or bracket | defer | FG-8 / gun column | None | Could belong to FG-8 or FG-17 depending on physical integration. |
 | Cooling or thermal features | defer | FG-8 | None | Not adopted without source-specific heat-load evidence. |
-| Trajectory-corrector magnetic coil set | defer | FG-11 | None | BINP supports corrector currents and Kimball/PTR support alignment coils, but no source defines the FG-11 coil geometry or whether it is separate from FG-8/lens hardware. |
+| Trajectory-corrector magnetic coil set | modeled / architecture deferred | FG-11 | `ebf3_gun_trajectory_corrector_coil_set` | BINP supports corrector currents and Kimball/PTR support alignment coils; the package child preserves this function, but exact coil geometry and separation from FG-8/lens hardware remain unresolved. |
 | Trajectory-corrector electrostatic plates | reject for this pass | FG-11 | None | Current targeted sources support magnetic deflection/correction more strongly; electrostatic plates remain a possible future variant only if direct source evidence appears. |
-| Corrector yoke / pole structure | defer | FG-11 | None | Do not duplicate FG-8 yoke or lens yoke without source geometry. |
+| Corrector yoke / pole structure | modeled / detail deferred | FG-11 | `ebf3_gun_trajectory_corrector_pole_piece_set` | Package split keeps a magnetic pole structure marker but does not claim a separate yoke geometry. Do not duplicate FG-8 or lens yokes without source geometry. |
 | Corrector power/signal leads | split_boundary / defer | FG-11 / power supplies / controls | None | Loads may be in the gun, but regulated supplies and commands belong outside the fixed-gun BOM. |
 
 ## Current KB Action
@@ -168,8 +168,10 @@ Use:
   `ebf3_gun_deflection_magnetic_yoke`.
 - Do not split FG-8 coil pairs into conductor, insulation, former, leads, or
   cooling until a later coil-level plan.
-- Do not create a child BOM for FG-11 in this pass.
-- Tighten FG-11 wording so the current KB does not overclaim a specific magnetic
+- Keep the later `bom_ebf3_gun_trajectory_corrector` package split, but treat it
+  as architecture-deferred. It should not be read as confirmed EBF3 corrector
+  geometry or as rejection of a later electrostatic variant.
+- Tighten FG-11 wording so the current KB does not overclaim a specific
   corrector construction.
 
 ## Manufacturing Readiness
