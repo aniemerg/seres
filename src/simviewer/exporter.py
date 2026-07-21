@@ -481,7 +481,7 @@ def _collect_kb_entities(repo_root: Path) -> tuple[Dict[str, dict], List[str]]:
     missing_categories: List[str] = []
 
     kb_root = repo_root / "kb"
-    for section in ("items", "recipes", "processes"):
+    for section in ("items", "recipes", "processes", "boms"):
         root = kb_root / section
         if not root.exists():
             continue
@@ -546,7 +546,7 @@ def _collect_entity_ref_ids(node: Any, out: set[str]) -> None:
         return
 
     for key, value in node.items():
-        if key in {"item_id", "machine_id", "process_id", "recipe_id", "target_item_id"}:
+        if key in {"item_id", "machine_id", "process_id", "recipe_id", "target_item_id", "owner_item_id"}:
             if isinstance(value, str) and value.strip():
                 out.add(value.strip())
             continue

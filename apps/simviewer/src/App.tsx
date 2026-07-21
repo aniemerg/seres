@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import type {
   Article,
   ArticlesPayload,
@@ -55,6 +55,34 @@ type MachineCatalogRow = {
 }
 
 type SupportedProcessRow = { id: string; name: string; relation: string }
+type BomTreeNode = {
+  itemId: string
+  name: string
+  kind: string | null
+  qty: number | null
+  unit: string | null
+  depth: number
+  bomId: string | null
+  childCount: number
+  missingEntity: boolean
+  cycle: boolean
+  children: BomTreeNode[]
+}
+type BomTreeSummary = {
+  uniqueItems: number
+  bomCount: number
+  leafOccurrences: number
+  totalOccurrences: number
+  missingEntities: number
+  cycles: number
+  maxDepth: number
+}
+type BomTreeBuildResult = {
+  root: BomTreeNode
+  summary: BomTreeSummary
+}
+
+const EBF3_BOM_TREE_ROOT_ID = 'ebf3_3d_printer'
 
 const MACHINE_CATALOG_ALIASES = new Set([
   'resource_3d_printer_cartesian_v0_machine',
@@ -593,6 +621,10 @@ function isRecipeEntity(entity: KBEntity): boolean {
   return entity.kind === 'recipe' || entity.id.startsWith('recipe_')
 }
 
+function isBomEntity(entity: KBEntity): boolean {
+  return entity.kind === 'bom' || entity.id.startsWith('bom_')
+}
+
 function isProcessEntity(entity: KBEntity): boolean {
   return entity.kind === 'process'
 }
@@ -715,6 +747,141 @@ function getMachineSupportedProcessRows(entity: KBEntity, allEntities: KBEntity[
   return rows.sort((a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id))
 }
 
+function getBomOwnerItemId(entity: KBEntity): string | null {
+  if (!isBomEntity(entity)) return null
+  const raw = asObject(entity.raw)
+  return stringField(raw ?? undefined, 'owner_item_id')
+    ?? stringField(raw ?? undefined, 'target_item_id')
+    ?? (entity.id.startsWith('bom_') ? entity.id.slice(4) : null)
+}
+
+function buildBomOwnerIndex(allEntities: KBEntity[]): Map<string, KBEntity> {
+  const out = new Map<string, KBEntity>()
+  for (const candidate of allEntities) {
+    if (!isBomEntity(candidate)) continue
+    const ownerItemId = getBomOwnerItemId(candidate)
+    if (!ownerItemId || out.has(ownerItemId)) continue
+    out.set(ownerItemId, candidate)
+  }
+  return out
+}
+
+function getBomTreeRootItemId(entity: KBEntity | undefined): string | null {
+  if (!entity) return null
+  const itemId = isBomEntity(entity) ? getBomOwnerItemId(entity) : entity.id
+  if (!itemId) return null
+  if (itemId === EBF3_BOM_TREE_ROOT_ID || itemId.startsWith('ebf3_') || entity.id.startsWith('bom_ebf3_')) {
+    return EBF3_BOM_TREE_ROOT_ID
+  }
+  return itemId
+}
+
+function getBomTreeSelectedItemId(entity: KBEntity | undefined): string | null {
+  if (!entity) return null
+  if (isBomEntity(entity)) return getBomOwnerItemId(entity)
+  return entity.id
+}
+
+function formatBomTreeQty(qty: number | null): string {
+  if (qty === null) return 'root'
+  if (!Number.isFinite(qty)) return 'n/a'
+  if (Number.isInteger(qty)) return String(qty)
+  return String(Number(qty.toFixed(4)))
+}
+
+function buildBomTree(rootItemId: string, allEntities: KBEntity[], entitiesById: Record<string, KBEntity>): BomTreeBuildResult | null {
+  const bomByOwner = buildBomOwnerIndex(allEntities)
+  if (!bomByOwner.has(rootItemId)) return null
+
+  const uniqueItems = new Set<string>()
+  const bomIds = new Set<string>()
+  const summary: BomTreeSummary = {
+    uniqueItems: 0,
+    bomCount: 0,
+    leafOccurrences: 0,
+    totalOccurrences: 0,
+    missingEntities: 0,
+    cycles: 0,
+    maxDepth: 0,
+  }
+
+  const visit = (
+    itemId: string,
+    qty: number | null,
+    unit: string | null,
+    depth: number,
+    ancestors: string[],
+  ): BomTreeNode => {
+    const entity = entitiesById[itemId]
+    const isCycle = ancestors.includes(itemId)
+    const bom = bomByOwner.get(itemId)
+    const bomRaw = asObject(bom?.raw)
+
+    uniqueItems.add(itemId)
+    summary.totalOccurrences += 1
+    summary.maxDepth = Math.max(summary.maxDepth, depth)
+    if (!entity) summary.missingEntities += 1
+    if (isCycle) summary.cycles += 1
+    if (bom) bomIds.add(bom.id)
+
+    const components = !isCycle ? asArray(bomRaw?.components) : []
+    const children = components
+      .map((component) => {
+        const obj = asObject(component)
+        const childItemId = typeof obj?.item_id === 'string' ? obj.item_id.trim() : ''
+        if (!childItemId) return null
+        const childQtyRaw = obj?.qty ?? obj?.quantity ?? obj?.amount
+        const childQty = typeof childQtyRaw === 'number' && Number.isFinite(childQtyRaw) ? childQtyRaw : 0
+        const childUnit = typeof obj?.unit === 'string' && obj.unit.trim() ? obj.unit.trim() : 'unit'
+        return visit(childItemId, childQty, childUnit, depth + 1, [...ancestors, itemId])
+      })
+      .filter((node): node is BomTreeNode => Boolean(node))
+
+    if (children.length === 0) summary.leafOccurrences += 1
+
+    return {
+      itemId,
+      name: entity?.name || itemId,
+      kind: entity?.kind ?? null,
+      qty,
+      unit,
+      depth,
+      bomId: bom?.id ?? null,
+      childCount: children.length,
+      missingEntity: !entity,
+      cycle: isCycle,
+      children,
+    }
+  }
+
+  const root = visit(rootItemId, null, null, 0, [])
+  summary.uniqueItems = uniqueItems.size
+  summary.bomCount = bomIds.size
+  return { root, summary }
+}
+
+function countBomTreeDescendants(node: BomTreeNode): number {
+  return node.children.reduce((total, child) => total + 1 + countBomTreeDescendants(child), 0)
+}
+
+function formatBomVisualLabel(itemId: string): string {
+  return itemId
+    .replace(/^ebf3_/, '')
+    .replace(/^gun_/, '')
+    .replace(/_/g, ' ')
+}
+
+function bomTreeContainsItem(node: BomTreeNode, itemId: string | null): boolean {
+  if (!itemId) return false
+  if (node.itemId === itemId) return true
+  return node.children.some((child) => bomTreeContainsItem(child, itemId))
+}
+
+function findBomTreeL1ForItem(root: BomTreeNode, itemId: string | null): string | null {
+  if (!itemId || root.itemId === itemId) return null
+  return root.children.find((child) => bomTreeContainsItem(child, itemId))?.itemId ?? null
+}
+
 function collectRefIds(node: unknown, out: Set<string>): void {
   if (Array.isArray(node)) {
     for (const entry of node) collectRefIds(entry, out)
@@ -723,7 +890,7 @@ function collectRefIds(node: unknown, out: Set<string>): void {
   if (!node || typeof node !== 'object') return
   const obj = node as Record<string, unknown>
   for (const [key, value] of Object.entries(obj)) {
-    if (key === 'item_id' || key === 'machine_id' || key === 'process_id' || key === 'recipe_id' || key === 'target_item_id') {
+    if (key === 'item_id' || key === 'machine_id' || key === 'process_id' || key === 'recipe_id' || key === 'target_item_id' || key === 'owner_item_id') {
       if (typeof value === 'string' && value.trim()) out.add(value.trim())
       continue
     }
@@ -1748,6 +1915,177 @@ function RecipeTimelineView({
   )
 }
 
+function BomTreeSection({
+  result,
+  selectedItemId,
+  onWikiJump,
+}: {
+  result: BomTreeBuildResult
+  selectedItemId: string | null
+  onWikiJump: (id: string) => void
+}) {
+  const summary = result.summary
+  const [visualZoom, setVisualZoom] = useState(1)
+  const [visualBranchId, setVisualBranchId] = useState<string>('auto')
+  const l1Branches = result.root.children
+  const selectedL1BranchId = findBomTreeL1ForItem(result.root, selectedItemId) ?? l1Branches[0]?.itemId ?? '__all__'
+  const activeBranchId = visualBranchId === 'auto' ? selectedL1BranchId : visualBranchId
+  const activeBranch = l1Branches.find((branch) => branch.itemId === activeBranchId) ?? null
+  const visualRoot = activeBranchId === '__all__' || !activeBranch
+    ? result.root
+    : { ...result.root, children: [activeBranch] }
+  const visualScaleStyle = { zoom: visualZoom } as CSSProperties
+  return (
+    <div className="kb-block bom-tree-block">
+      <div className="bom-tree-head">
+        <div>
+          <h3>Recursive BOM Tree</h3>
+          <p className="muted-text">
+            Root: <button className="wiki-link" onClick={() => onWikiJump(result.root.itemId)}>{result.root.itemId}</button>
+            {' '}expanded through every nested BOM component.
+          </p>
+        </div>
+        <div className="bom-tree-stats">
+          <div><label>Unique items</label><strong>{summary.uniqueItems}</strong></div>
+          <div><label>BOMs</label><strong>{summary.bomCount}</strong></div>
+          <div><label>Leaves</label><strong>{summary.leafOccurrences}</strong></div>
+          <div><label>Depth</label><strong>{summary.maxDepth}</strong></div>
+        </div>
+      </div>
+      <div className="bom-visual-toolbar">
+        <span>L1 branch</span>
+        <select
+          value={visualBranchId}
+          onChange={(event) => setVisualBranchId(event.target.value)}
+          aria-label="BOM visual tree L1 branch"
+        >
+          <option value="auto">Auto selected L1</option>
+          <option value="__all__">All L1 branches</option>
+          {l1Branches.map((branch) => (
+            <option key={branch.itemId} value={branch.itemId}>
+              {branch.itemId} ({countBomTreeDescendants(branch)} descendants)
+            </option>
+          ))}
+        </select>
+        <span>Visual zoom</span>
+        <button type="button" onClick={() => setVisualZoom((z) => Math.max(0.25, Number((z - 0.1).toFixed(2))))} title="Zoom out">−</button>
+        <input
+          type="range"
+          min="0.25"
+          max="1.2"
+          step="0.05"
+          value={visualZoom}
+          onChange={(event) => setVisualZoom(Number(event.target.value))}
+          aria-label="BOM visual tree zoom"
+        />
+        <button type="button" onClick={() => setVisualZoom((z) => Math.min(1.2, Number((z + 0.1).toFixed(2))))} title="Zoom in">+</button>
+        <button type="button" onClick={() => setVisualZoom(1)} title="Reset zoom">Reset</button>
+        <strong>{Math.round(visualZoom * 100)}%</strong>
+      </div>
+      {(summary.missingEntities > 0 || summary.cycles > 0) && (
+        <p className="bom-tree-alert">
+          {summary.missingEntities > 0 ? `${summary.missingEntities} missing item definitions. ` : ''}
+          {summary.cycles > 0 ? `${summary.cycles} cyclic references stopped.` : ''}
+        </p>
+      )}
+      <div className="bom-visual-wrap" aria-label="BOM visual hierarchy">
+        <div className="bom-visual-scale" style={visualScaleStyle}>
+          <ul className="bom-visual-tree">
+            <BomVisualTreeNode node={visualRoot} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+          </ul>
+        </div>
+      </div>
+      <h4 className="bom-audit-title">Audit List</h4>
+      <div className="bom-tree">
+        <BomTreeNodeView node={result.root} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+      </div>
+    </div>
+  )
+}
+
+function BomVisualTreeNode({
+  node,
+  selectedItemId,
+  onWikiJump,
+}: {
+  node: BomTreeNode
+  selectedItemId: string | null
+  onWikiJump: (id: string) => void
+}) {
+  return (
+    <li>
+      <button
+        className={[
+          'bom-visual-node',
+          node.childCount > 0 ? 'has-children' : 'is-leaf',
+          selectedItemId === node.itemId ? 'is-selected' : '',
+          node.missingEntity ? 'is-missing' : '',
+          node.cycle ? 'is-cycle' : '',
+        ].filter(Boolean).join(' ')}
+        onClick={() => onWikiJump(node.itemId)}
+        title={`${node.itemId}${node.childCount > 0 ? `, ${node.childCount} components` : ''}`}
+      >
+        <span>{formatBomVisualLabel(node.itemId)}</span>
+        <small>{node.qty === null ? 'root' : `${formatBomTreeQty(node.qty)} ${node.unit ?? 'unit'}`}</small>
+      </button>
+      {node.children.length > 0 && (
+        <ul>
+          {node.children.map((child, i) => (
+            <BomVisualTreeNode key={`${child.itemId}:${child.depth}:${i}`} node={child} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+          ))}
+        </ul>
+      )}
+    </li>
+  )
+}
+
+function BomTreeNodeView({
+  node,
+  selectedItemId,
+  onWikiJump,
+}: {
+  node: BomTreeNode
+  selectedItemId: string | null
+  onWikiJump: (id: string) => void
+}) {
+  const style = { '--depth': node.depth } as CSSProperties
+  const qtyLabel = node.qty === null ? 'root' : `${formatBomTreeQty(node.qty)} ${node.unit ?? 'unit'}`
+
+  return (
+    <div className="bom-tree-node">
+      <div
+        className={[
+          'bom-tree-row',
+          node.childCount > 0 ? 'has-children' : 'is-leaf',
+          node.missingEntity ? 'is-missing' : '',
+          node.cycle ? 'is-cycle' : '',
+          selectedItemId === node.itemId ? 'is-selected' : '',
+        ].filter(Boolean).join(' ')}
+        style={style}
+      >
+        <span className="bom-tree-depth">L{node.depth}</span>
+        <span className="bom-tree-qty">{qtyLabel}</span>
+        <button className="wiki-link bom-tree-item" onClick={() => onWikiJump(node.itemId)}>{node.itemId}</button>
+        {node.name !== node.itemId && <span className="bom-tree-name">{node.name}</span>}
+        {node.kind && <span className="bom-tree-kind">{node.kind}</span>}
+        {node.bomId && (
+          <button className="wiki-link bom-tree-bom" onClick={() => onWikiJump(node.bomId!)}>{node.bomId}</button>
+        )}
+        {node.childCount > 0 && <span className="bom-tree-count">{node.childCount} components</span>}
+        {node.missingEntity && <span className="bom-tree-warning">missing entity</span>}
+        {node.cycle && <span className="bom-tree-warning">cycle stopped</span>}
+      </div>
+      {node.children.length > 0 && (
+        <div className="bom-tree-children">
+          {node.children.map((child, i) => (
+            <BomTreeNodeView key={`${child.itemId}:${child.depth}:${i}`} node={child} selectedItemId={selectedItemId} onWikiJump={onWikiJump} />
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
 function WikiView({
   selectedId,
   entitiesById,
@@ -1803,6 +2141,17 @@ function WikiView({
         : [],
     [allEntities, entity],
   )
+  const bomsTargetingEntity = useMemo(
+    () =>
+      entity
+        ? allEntities.filter((e) => {
+            if (!isBomEntity(e)) return false
+            const bomRaw = asObject(e.raw)
+            return bomRaw?.owner_item_id === entity.id || bomRaw?.target_item_id === entity.id
+          })
+        : [],
+    [allEntities, entity],
+  )
   const machineSupportedProcesses = useMemo(() => {
     if (!entity || !isMachineEntity(entity)) return []
     return getMachineSupportedProcessRows(entity, allEntities)
@@ -1814,6 +2163,12 @@ function WikiView({
   const nonSupportReferences = useMemo(
     () => references.filter((ref) => !machineSupportedProcessIds.has(ref.id)),
     [references, machineSupportedProcessIds],
+  )
+  const bomTreeRootItemId = useMemo(() => getBomTreeRootItemId(entity), [entity])
+  const bomTreeSelectedItemId = useMemo(() => getBomTreeSelectedItemId(entity), [entity])
+  const bomTree = useMemo(
+    () => (bomTreeRootItemId ? buildBomTree(bomTreeRootItemId, allEntities, entitiesById) : null),
+    [allEntities, bomTreeRootItemId, entitiesById],
   )
 
   return (
@@ -1838,12 +2193,24 @@ function WikiView({
                 ))}
               </p>
             )}
+            {bomsTargetingEntity.length > 0 && (
+              <p>
+                <strong>BOMs targeting this item:</strong>{' '}
+                {bomsTargetingEntity.map((b, i) => (
+                  <span key={b.id}>
+                    {i > 0 ? ', ' : ''}
+                    <button className="wiki-link" onClick={() => onWikiJump(b.id)}>{b.id}</button>
+                  </span>
+                ))}
+              </p>
+            )}
             {entity.sim_stats && (
               <div className="stats-grid compact">
                 {entity.sim_stats.process_run_count !== undefined && <div><label>Process Runs</label><strong>{entity.sim_stats.process_run_count}</strong></div>}
                 {entity.sim_stats.produced_quantity_total !== undefined && <div><label>Produced</label><strong>{entity.sim_stats.produced_quantity_total.toFixed(2)}</strong></div>}
               </div>
             )}
+            {bomTree && <BomTreeSection result={bomTree} selectedItemId={bomTreeSelectedItemId} onWikiJump={onWikiJump} />}
             {!deferRefs && references.length > 0 && (
               <div className="kb-block">
                 <h3>Referenced By (KB + Articles)</h3>
@@ -2069,6 +2436,57 @@ function WikiView({
                 </ol>
               </div>
             )}
+            {isBomEntity(entity) && raw && (
+              <div className="kb-block">
+                <h3>BOM</h3>
+                {Boolean(raw.owner_item_id) && (
+                  <p>
+                    <strong>Owner:</strong>{' '}
+                    <button className="wiki-link" onClick={() => onWikiJump(String(raw.owner_item_id))}>{String(raw.owner_item_id)}</button>
+                  </p>
+                )}
+                {Boolean(raw.target_item_id) && (
+                  <p>
+                    <strong>Target:</strong>{' '}
+                    <button className="wiki-link" onClick={() => onWikiJump(String(raw.target_item_id))}>{String(raw.target_item_id)}</button>
+                  </p>
+                )}
+                {textField(raw, 'notes') && (
+                  <>
+                    <h4>Notes</h4>
+                    <div className="notes-box">
+                      {textField(raw, 'notes').split('\n').map((line, i) => (
+                        <p key={`bom-note-${i}`}>{line.trim() || '\u00a0'}</p>
+                      ))}
+                    </div>
+                  </>
+                )}
+                <h4>Components</h4>
+                {asArray(raw.components).length > 0 ? (
+                  <ul>
+                    {asArray(raw.components).map((component, i) => {
+                      const obj = asObject(component)
+                      if (!obj) return null
+                      const itemId = String(obj.item_id ?? '')
+                      const qty = Number(obj.qty ?? obj.quantity ?? obj.amount ?? 0)
+                      const unit = String(obj.unit ?? 'unit')
+                      return (
+                        <li key={`bom-component-${i}`}>
+                          {itemId ? (
+                            <button className="wiki-link" onClick={() => onWikiJump(itemId)}>{itemId}</button>
+                          ) : (
+                            <span>unknown item</span>
+                          )}
+                          : {qty} {unit}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                ) : (
+                  <p className="muted-text">No components listed.</p>
+                )}
+              </div>
+            )}
             {isProcessEntity(entity) && raw && (
               <div className="kb-block">
                 <h3>Process</h3>
@@ -2129,7 +2547,7 @@ function WikiView({
                 </ul>
               </div>
             )}
-            {raw && (
+            {raw && !isBomEntity(entity) && (
               <details className="kb-block">
                 <summary>Raw Entry (JSON)</summary>
                 <pre>{JSON.stringify(raw, null, 2)}</pre>
