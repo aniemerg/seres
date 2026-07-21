@@ -12,8 +12,11 @@ decisions for the EBF3 3D printer BOM refinement.
     `raw/` files.
   - `sources/level_2_parts/<part_family>/`: part-family source registry plus optional
     `raw/` files.
+  - `sources/level_3_parts/<child_part_family>/`: child-part or child-assembly
+    source registry plus optional `raw/` files.
 - `organized/`: extracted claims, comparison tables, candidate components,
-  adopted/deferred/rejected decisions, and reviewer reasoning.
+  adopted/deferred/rejected decisions, unresolved-candidate registers, and
+  reviewer reasoning.
 - `derived/`: final boundary documents, KB mapping summaries, and other
   Codex-generated modeling artifacts.
 
@@ -22,6 +25,73 @@ registries limited to source IDs, titles, URLs, local file paths, and basic
 location metadata. If multiple registries use one raw source, keep one physical
 copy in its primary level folder and link to that path from the other
 registries.
+
+## EBF3 Modeling Goal
+
+This directory supports high-fidelity EBF3 BOM refinement, not a local-closure
+push. The goal is to make the machine structure clearer while preserving known
+unknowns.
+
+Target state for the whole EBF3 machine:
+
+- Level-0 machine BOM exists for `ebf3_3d_printer`.
+- Seven Level-1 subsystem BOMs exist: controls, power supplies, high-voltage
+  tank, fixed electron beam gun, wire feeder, four-axis positioning system, and
+  manufacture cabin.
+- Each subsystem has a Level-2 audit or decomposition plan before deeper child
+  BOMs are created.
+- Cross-subsystem interfaces have one owner and visible unresolved rows when the
+  physical boundary is not source-fixed.
+- Simviewer shows a concise structure, while research files preserve the deeper
+  evidence trail.
+- Closure gaps are allowed. Validation errors are not.
+
+Current whole-machine Level-2 status is summarized in
+`organized/ebf3_machine_level_2_status.md`.
+
+## Standard Work Packet
+
+Use this short sequence for each EBF3 modeling pass:
+
+1. Pick one blocking boundary, subsystem, or parent assembly.
+2. Read existing source registry, organized plans, mappings, and unresolved
+   registers for that scope.
+3. Add or update the source registry only with source locations.
+4. Write or update the organized review with evidence, use, decisions, and
+   unresolved blockers.
+5. Decide ownership before creating or moving KB items.
+6. Create KB items/BOMs only for `adopt` decisions.
+7. Add concise item/BOM notes pointing back to the organized review.
+8. Update affected unresolved registers.
+9. Validate affected items and run full index.
+10. Export Simviewer data when the user needs to inspect the result visually.
+
+## Recommended Work Order
+
+Preferred order for completing the EBF3 machine scaffold:
+
+1. Keep `organized/ebf3_machine_level_2_status.md` current as the concise
+   whole-machine status index.
+2. Use `organized/feedthrough_interface_review.md` as the current
+   feedthrough/interface ownership rule across cabin, gun, wire feeder,
+   positioning, controls, power supplies, and high-voltage tank.
+3. Return to electron-gun Level-3 items only where a selected source or design
+   decision unlocks them.
+4. Material/process readiness reviews for selected leaves.
+5. Local recipes only for leaves that pass readiness review.
+
+## When To Resolve Unresolved Rows
+
+Do not try to clear every unresolved row before moving to the next subsystem.
+Resolve an unresolved row only when it:
+
+- blocks the next BOM level,
+- would cause duplicate ownership across subsystems,
+- would make Simviewer misleading,
+- or is unlocked by a new source or explicit design decision.
+
+Otherwise, keep it in the relevant unresolved register with a blocker and next
+unblock condition.
 
 ## Decomposition Workflow
 
@@ -59,13 +129,23 @@ Each organized decomposition planning file should include:
 - Parent item(s) and target KB BOM(s).
 - Source registry path.
 - Source hierarchy and authority assessment.
-- Extracted source claims grouped by source ID.
+- Source evidence and use grouped by source ID. Evidence should be short
+  verbatim snippets when possible; interpretation belongs in `Use`.
 - Candidate decision matrix.
-- Adopted child BOM shape.
+- Adopted child BOM structure.
 - Explicit defer/reject/split-boundary rationale for candidates that could
   otherwise be mistaken as omissions.
 - Manufacturing readiness statement. The default is not-local-ready unless a
   separate material/process review says otherwise.
+
+## Unresolved-Candidate Registers
+
+When several decomposition plans have accumulated `defer` and `split_boundary`
+rows, create an organized register that consolidates the unresolved candidates.
+The register should point back to the source planning files, group candidates by
+the work that can unblock them, and state the next review that owns each row.
+Registers are tracking artifacts only; they do not justify creating KB child
+items or recipes.
 
 ## Decision Status Glossary
 
@@ -156,6 +236,20 @@ If any answer is unclear, use `defer`, `split_boundary`, or
   unless it can be reused by future subsystem and part-family decompositions.
 - If an existing plan conflicts with the shared workflow, update the shared
   workflow first, then revise the plan to match it.
+- In human-facing review text, avoid internal prefixes such as "KB" or source
+  filename versions such as "V2" unless they are part of an actual file path,
+  source ID, or item ID. Prefer "current BOM", "source table", and
+  "recommended item".
+
+## Level Naming
+
+- Use Level-0/Level-1/Level-2/Level-3 labels in research folders, planning
+  files, and review notes.
+- Do not put level numbers in KB item IDs or item names. KB structure should be
+  expressed by BOM parent/child relationships, not by permanent level labels in
+  identifiers.
+- If level context is useful, add it to research notes or concise item notes,
+  for example "created during the EBF3 fixed-gun Level-2 decomposition review."
 
 ## Review Standard
 

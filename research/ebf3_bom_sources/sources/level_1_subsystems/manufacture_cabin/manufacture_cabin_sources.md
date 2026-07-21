@@ -15,3 +15,10 @@ Purpose: source locations for the EBF3 manufacture cabin subsystem.
 - Local PDF: `research/ebf3_bom_sources/sources/level_0_machine/ebf3/raw/Electron Beam Freeform Fabrication in the Space.pdf`
 - Local text: `research/ebf3_bom_sources/sources/level_0_machine/ebf3/raw/Electron Beam Freeform Fabrication in the Space.txt`
 - Authority: primary machine-level source
+
+## RAW-NASA-EBF-PATENT
+
+- Title: Electron Beam Freeform Fabrication patent
+- Local PDF: `research/ebf3_bom_sources/sources/level_0_machine/ebf3/raw/EBF_United States Patent.pdf`
+- Local text: `research/ebf3_bom_sources/sources/level_0_machine/ebf3/raw/EBF_United States Patent.txt`
+- Authority: primary machine-level source

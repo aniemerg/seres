@@ -6,6 +6,9 @@ unit: unit
 unit_kind: discrete
 material_class: composite
 notes: >
-  FS-20. Rotary axis motor assembly. First-pass leaf item from EBF3 organized BOM table. No local
-  recipe is attached yet; leave manufacturing closure open until lower-level
-  materials and fabrication routes are source-supported.
+  Deferred rotary-drive motor candidate. The top-level source table uses FS-9
+  `ebf3_axis_motors` for positioning motors and FS-20
+  `ebf3_rotary_worm_shaft` for the worm shaft; this separate rotary motor should
+  return only inside a later axis-motor or rotary-drive decomposition. See
+  research/ebf3_bom_sources/organized/four_axis_positioning_level_2_audit.md. No
+  local recipe is attached yet.

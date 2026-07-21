@@ -7,13 +7,7 @@ components:
   - item_id: ebf3_hv_transformer_insulating_fluid
     qty: 1.0
     unit: unit
-  - item_id: ebf3_sectioned_hv_step_up_transformer
-    qty: 1.0
-    unit: unit
-  - item_id: ebf3_hv_rectifier_stack_tank_side
-    qty: 1.0
-    unit: unit
-  - item_id: ebf3_hv_output_filter_capacitor
+  - item_id: ebf3_hv_section_module_set
     qty: 1.0
     unit: unit
   - item_id: ebf3_internal_hv_leads_terminals
@@ -26,6 +20,15 @@ components:
     qty: 1.0
     unit: unit
   - item_id: ebf3_hv_cable_to_gun
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_hv_discharge_bleeder_resistor_chain
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_hv_output_voltage_divider_sensing
+    qty: 1.0
+    unit: unit
+  - item_id: ebf3_hv_output_return_current_monitor
     qty: 1.0
     unit: unit
   - item_id: ebf3_hv_tank_fill_drain_ports
@@ -47,4 +50,9 @@ components:
     qty: 1.0
     unit: unit
 notes: >
-  High voltage tank leaf items mapped from V2_high_voltage_tank_item_table; no leaf recipes yet to preserve fidelity.
+  High voltage tank leaf items mapped from V2_high_voltage_tank_item_table and
+  source-tag cleanup in
+  research/ebf3_bom_sources/organized/high_voltage_tank_level_2_audit.md.
+  Core internals use the concise section-module-set model from
+  research/ebf3_bom_sources/organized/hv_tank_core_decomposition_plan.md; no
+  leaf recipes yet to preserve fidelity.
